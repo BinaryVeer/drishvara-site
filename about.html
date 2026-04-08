@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About · Drishvara</title>
+  <meta name="description" content="About Drishvara." />
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(201, 162, 74, 0.06), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding: 8px 0 34px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .logo {
+      width: 84px;
+      display: block;
+      margin: 0 auto 12px;
+      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.16));
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--text-soft);
+      font-size: 1.08rem;
+      line-height: 1.9;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      backdrop-filter: blur(6px);
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: var(--text-main);
+    }
+
+    .panel p {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text-muted);
+      line-height: 1.9;
+    }
+
+    .list li {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      margin-top: 54px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 850px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 20px 16px 44px;
+      }
+
+      .nav {
+        gap: 18px;
+      }
+
+      .intro,
+      .panel p,
+      .list {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <section class="hero">
+      <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
+      <h1>About Drishvara</h1>
+      <div class="intro">
+        Drishvara is conceived as a founder-led insight platform: a space for reflection, observation, and disciplined interpretation across spirituality, sport, world affairs, media, and public life.
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="panel">
+        <h2>What Drishvara stands for</h2>
+        <p>
+          The name suggests vision joined with contemplation. The platform is not designed to chase noise. It is designed to notice patterns, interpret meaning, and write with a slower, more deliberate intelligence.
+        </p>
+        <p>
+          Drishvara aims to bring together multiple worlds that are often kept separate: the spiritual and the strategic, the public and the personal, the immediate and the civilizational.
+        </p>
+        <p>
+          In practical terms, it will function as a writing-led platform with curated articles, thematic series, commentary, and eventually AI-assisted workflows that help surface relevant topics while preserving editorial intention.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h2>Core orientation</h2>
+        <ul class="list">
+          <li>Clarity over noise</li>
+          <li>Depth over speed</li>
+          <li>Reflection over reaction</li>
+          <li>Signal over spectacle</li>
+          <li>Meaning over mere information</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content" style="margin-top:22px;">
+      <div class="panel">
+        <h2>Editorial domains</h2>
+        <p>
+          Drishvara will gradually develop recurring streams around five broad areas: spirituality, sports, world affairs, media and films, and public programmes of the Union and States.
+        </p>
+        <p>
+          Each area will be approached not just as a topic category, but as a lens into human intention, systems, and the stories that shape collective attention.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h2>Current stage</h2>
+        <p>
+          The site is presently in its foundation phase. Brand, layout, structure, and editorial direction are being established now so that future growth remains coherent.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      Drishvara © 2026 · About page
+    </footer>
+  </div>
+</body>
+</html>
