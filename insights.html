@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights · Drishvara</title>
+  <meta name="description" content="Insights from Drishvara." />
+
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(201, 162, 74, 0.06), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    /* NAV */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding-bottom: 30px;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 1rem;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      width: 80px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .intro {
+      color: var(--text-soft);
+      font-size: 1.1rem;
+      line-height: 1.9;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--gold);
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- NAV -->
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="insights.html" class="active">Insights</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <img src="assets/logo/logo.png" class="logo" />
+      <h1>Insights</h1>
+      <div class="intro">
+        A developing collection of structured thought across domains — where observation meets reflection.
+      </div>
+    </section>
+
+    <!-- CONTENT GRID -->
+    <section class="grid">
+
+      <div class="card">
+        <h2>Spiritual Thought</h2>
+        <p>
+          Interpretations of classical ideas, lived philosophy, and internal reflection rooted in Indic thought.
+        </p>
+        <div class="status">Coming soon</div>
+      </div>
+
+      <div class="card">
+        <h2>Public Systems</h2>
+        <p>
+          Analysis of governance, policy implementation, infrastructure, and systemic challenges.
+        </p>
+        <div class="status">Coming soon</div>
+      </div>
+
+      <div class="card">
+        <h2>Sports & Performance</h2>
+        <p>
+          Understanding mindset, discipline, and performance from sport and real-life parallels.
+        </p>
+        <div class="status">Coming soon</div>
+      </div>
+
+      <div class="card">
+        <h2>Media & Society</h2>
+        <p>
+          Observations on narratives, communication, influence, and the evolving information ecosystem.
+        </p>
+        <div class="status">Coming soon</div>
+      </div>
+
+    </section>
+
+    <footer>
+      Drishvara © 2026 · Insights section
+    </footer>
+
+  </div>
+</body>
+</html>
