@@ -33,18 +33,18 @@
         radial-gradient(circle at 50% 22%, rgba(201, 162, 74, 0.08), transparent 18%),
         radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
-
       display: flex;
       justify-content: center;
-      align-items: flex-start;   /* 🔥 key change */
-      padding-top: 80px;         /* 🔥 pushes content downward */
+      align-items: flex-start;
+      padding-top: 72px;
       text-align: center;
+      overflow-x: hidden;
     }
 
     .box {
       width: 100%;
       max-width: 920px;
-      padding: 20px 24px 60px;
+      padding: 18px 24px 60px;
     }
 
     .logo-wrap {
@@ -52,14 +52,14 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2px;
+      margin-bottom: -6px;
     }
 
     .logo-wrap::before {
       content: "";
       position: absolute;
-      width: 180px;
-      height: 180px;
+      width: 150px;
+      height: 150px;
       background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
       filter: blur(10px);
       border-radius: 50%;
@@ -69,7 +69,7 @@
     .logo {
       position: relative;
       z-index: 1;
-      width: 104px;
+      width: 145px;
       height: auto;
       display: block;
       filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.18));
@@ -81,6 +81,7 @@
       font-weight: 600;
       letter-spacing: 0.2px;
       line-height: 0.98;
+      color: var(--text-main);
     }
 
     .tagline {
@@ -115,6 +116,7 @@
       line-height: 1.8;
       margin-bottom: 8px;
       font-family: "Noto Serif Devanagari", "Nirmala UI", "Mangal", serif;
+      color: var(--text-main);
     }
 
     .translit {
@@ -131,16 +133,29 @@
 
     @media (max-width: 768px) {
       body {
-        padding-top: 60px;
+        padding-top: 56px;
+      }
+
+      .box {
+        padding: 14px 18px 44px;
       }
 
       .logo {
-        width: 88px;
+        width: 112px;
+      }
+
+      .logo-wrap {
+        margin-bottom: -4px;
       }
 
       .logo-wrap::before {
-        width: 150px;
-        height: 150px;
+        width: 130px;
+        height: 130px;
+      }
+
+      .sub {
+        font-size: 1rem;
+        line-height: 1.8;
       }
     }
   </style>
