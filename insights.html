@@ -5,50 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Insights · Drishvara</title>
   <meta name="description" content="Insights from Drishvara." />
-
   <style>
     :root {
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.05);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
       --text-muted: #9aa8bc;
       --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
       font-family: "Georgia", "Times New Roman", serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 50% 16%, rgba(201, 162, 74, 0.06), transparent 18%),
+        radial-gradient(circle at 50% 14%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
     }
 
     .page {
-      max-width: 1000px;
+      width: 100%;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 30px 20px 60px;
+      padding: 28px 20px 64px;
     }
 
-    /* NAV */
     .nav {
       display: flex;
       justify-content: center;
       gap: 28px;
-      padding-bottom: 30px;
+      padding: 8px 0 34px;
+      flex-wrap: wrap;
     }
 
     .nav a {
       color: var(--text-soft);
       text-decoration: none;
       font-size: 1rem;
+      transition: color 0.2s ease;
     }
 
     .nav a:hover,
@@ -56,87 +66,184 @@
       color: var(--gold);
     }
 
-    /* HERO */
     .hero {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 38px;
+    }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
+      filter: blur(10px);
+      border-radius: 50%;
+      z-index: 0;
     }
 
     .logo {
-      width: 80px;
-      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+      width: 78px;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.16));
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      margin: 0 0 10px;
+      font-size: clamp(2.8rem, 5.4vw, 4.4rem);
+      line-height: 1.02;
+      font-weight: 600;
+    }
+
+    .hero-tagline {
+      color: var(--gold);
+      font-size: 1.02rem;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
     }
 
     .intro {
+      max-width: 780px;
+      margin: 0 auto;
       color: var(--text-soft);
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       line-height: 1.9;
-      max-width: 700px;
-      margin: auto;
     }
 
-    /* GRID */
+    .divider {
+      width: 86px;
+      height: 1px;
+      margin: 28px auto 0;
+      background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.95), transparent);
+    }
+
+    .section {
+      margin-top: 34px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin: 0 0 10px;
+      color: var(--text-main);
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin: 0 auto 24px;
+      text-align: center;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 22px;
-      margin-top: 40px;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-      transition: 0.25s ease;
+      border-radius: 22px;
+      padding: 26px;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
     .card:hover {
-      border-color: var(--gold);
       transform: translateY(-3px);
+      border-color: rgba(201, 162, 74, 0.35);
+      background: var(--surface-strong);
     }
 
     .card h2 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+      line-height: 1.15;
     }
 
     .card p {
+      margin: 0 0 14px;
       color: var(--text-muted);
-      font-size: 0.98rem;
-      line-height: 1.8;
+      font-size: 1rem;
+      line-height: 1.85;
     }
 
     .status {
-      margin-top: 12px;
-      font-size: 0.85rem;
+      display: inline-block;
+      margin-top: 4px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(201, 162, 74, 0.08);
+      border: 1px solid rgba(201, 162, 74, 0.18);
       color: var(--gold);
+      font-size: 0.88rem;
+    }
+
+    .note-strip {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      border-radius: 18px;
+      background: rgba(201, 162, 74, 0.04);
+      color: var(--text-soft);
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.8;
     }
 
     footer {
-      margin-top: 50px;
-      text-align: center;
+      margin-top: 56px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--text-muted);
-      font-size: 0.9rem;
+      text-align: center;
+      font-size: 0.95rem;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .grid {
         grid-template-columns: 1fr;
       }
     }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 20px 16px 46px;
+      }
+
+      .nav {
+        gap: 18px;
+        padding-bottom: 26px;
+      }
+
+      .intro,
+      .section-intro,
+      .card p {
+        font-size: 1rem;
+      }
+
+      .card {
+        padding: 24px;
+      }
+    }
   </style>
 </head>
-
 <body>
   <div class="page">
-
-    <!-- NAV -->
     <nav class="nav">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
@@ -144,56 +251,66 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <!-- HERO -->
     <section class="hero">
-      <img src="assets/logo/logo.png" class="logo" />
+      <div class="logo-wrap">
+        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
+      </div>
       <h1>Insights</h1>
+      <div class="hero-tagline">Observation shaped into thought.</div>
       <div class="intro">
-        A developing collection of structured thought across domains — where observation meets reflection.
+        A developing collection of structured writing across domains — where reflection is not decorative, but the method itself.
+      </div>
+      <div class="divider"></div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Editorial streams</h2>
+      <div class="section-intro">
+        These are the primary domains through which Drishvara will gradually publish recurring writing, commentary, and thematic notes.
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h2>Spiritual Thought</h2>
+          <p>
+            Interpretations of classical ideas, lived philosophy, contemplative discipline, and the inner life — approached with seriousness rather than sentimentality.
+          </p>
+          <div class="status">Coming soon</div>
+        </div>
+
+        <div class="card">
+          <h2>Public Systems</h2>
+          <p>
+            Governance, policy execution, infrastructure realities, institutional gaps, and the lived friction between design and implementation.
+          </p>
+          <div class="status">Coming soon</div>
+        </div>
+
+        <div class="card">
+          <h2>Sports & Performance</h2>
+          <p>
+            Sport read as a field of momentum, discipline, temperament, and decision-making — not only as result, but as method and mind.
+          </p>
+          <div class="status">Coming soon</div>
+        </div>
+
+        <div class="card">
+          <h2>Media & Society</h2>
+          <p>
+            Narratives, images, films, communication cycles, and the broader information ecosystem that shapes collective attention.
+          </p>
+          <div class="status">Coming soon</div>
+        </div>
       </div>
     </section>
 
-    <!-- CONTENT GRID -->
-    <section class="grid">
-
-      <div class="card">
-        <h2>Spiritual Thought</h2>
-        <p>
-          Interpretations of classical ideas, lived philosophy, and internal reflection rooted in Indic thought.
-        </p>
-        <div class="status">Coming soon</div>
-      </div>
-
-      <div class="card">
-        <h2>Public Systems</h2>
-        <p>
-          Analysis of governance, policy implementation, infrastructure, and systemic challenges.
-        </p>
-        <div class="status">Coming soon</div>
-      </div>
-
-      <div class="card">
-        <h2>Sports & Performance</h2>
-        <p>
-          Understanding mindset, discipline, and performance from sport and real-life parallels.
-        </p>
-        <div class="status">Coming soon</div>
-      </div>
-
-      <div class="card">
-        <h2>Media & Society</h2>
-        <p>
-          Observations on narratives, communication, influence, and the evolving information ecosystem.
-        </p>
-        <div class="status">Coming soon</div>
-      </div>
-
-    </section>
+    <div class="note-strip">
+      This section is presently a structured placeholder. As publishing begins, these streams will evolve into article archives and thematic series.
+    </div>
 
     <footer>
-      Drishvara © 2026 · Insights section
+      Drishvara © 2026 · Insights page
     </footer>
-
   </div>
 </body>
 </html>
