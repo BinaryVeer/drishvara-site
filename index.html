@@ -33,17 +33,18 @@
         radial-gradient(circle at 50% 22%, rgba(201, 162, 74, 0.08), transparent 18%),
         radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
+
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: flex-start;   /* 🔥 key change */
+      padding-top: 80px;         /* 🔥 pushes content downward */
       text-align: center;
-      overflow-x: hidden;
     }
 
     .box {
       width: 100%;
       max-width: 920px;
-      padding: 34px 24px 56px;
+      padding: 20px 24px 60px;
     }
 
     .logo-wrap {
@@ -80,7 +81,6 @@
       font-weight: 600;
       letter-spacing: 0.2px;
       line-height: 0.98;
-      color: var(--text-main);
     }
 
     .tagline {
@@ -88,7 +88,6 @@
       font-size: clamp(1.2rem, 2.1vw, 1.55rem);
       color: var(--text-soft);
       font-weight: 500;
-      letter-spacing: 0.1px;
     }
 
     .sub {
@@ -111,35 +110,28 @@
       );
     }
 
-    .verse-block {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
     .verse {
       font-size: clamp(1.6rem, 2.7vw, 2rem);
-      color: var(--text-main);
-      line-height: 1.75;
+      line-height: 1.8;
       margin-bottom: 8px;
+      font-family: "Noto Serif Devanagari", "Nirmala UI", "Mangal", serif;
     }
 
     .translit {
       font-size: 1.06rem;
       color: var(--text-soft);
       font-style: italic;
-      line-height: 1.75;
       margin-bottom: 8px;
     }
 
     .meaning {
       font-size: 1rem;
       color: var(--text-muted);
-      line-height: 1.7;
     }
 
     @media (max-width: 768px) {
-      .box {
-        padding: 28px 18px 44px;
+      body {
+        padding-top: 60px;
       }
 
       .logo {
@@ -149,11 +141,6 @@
       .logo-wrap::before {
         width: 150px;
         height: 150px;
-      }
-
-      .sub {
-        font-size: 1rem;
-        line-height: 1.8;
       }
     }
   </style>
@@ -175,11 +162,9 @@
 
     <div class="divider"></div>
 
-    <div class="verse-block">
-      <div class="verse">दृष्टिर्विस्तीर्णा, मननं गम्भीरम्।</div>
-      <div class="translit">dṛṣṭiḥ vistīrṇā, mananaṃ gambhīram.</div>
-      <div class="meaning">Vision broad, reflection deep.</div>
-    </div>
+    <div class="verse">दृष्टिर्विस्तीर्णा, मननं गम्भीरम्।</div>
+    <div class="translit">dṛṣṭiḥ vistīrṇā, mananaṃ gambhīram.</div>
+    <div class="meaning">Vision broad, reflection deep.</div>
   </div>
 </body>
 </html>
