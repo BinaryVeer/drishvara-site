@@ -7,13 +7,13 @@
   <meta name="description" content="Drishvara — a founder-led insight platform." />
   <style>
     :root {
-      --bg-1: #0b1530;
-      --bg-2: #162447;
+      --bg-1: #08142d;
+      --bg-2: #12254a;
       --text-main: #f5f1e8;
-      --text-soft: #cfd7e6;
-      --text-muted: #95a3b8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
       --gold: #c9a24a;
-      --gold-soft: rgba(201, 162, 74, 0.18);
+      --gold-soft: rgba(201, 162, 74, 0.16);
     }
 
     * {
@@ -30,8 +30,8 @@
       font-family: "Georgia", "Times New Roman", serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 50% 38%, rgba(201, 162, 74, 0.08), transparent 22%),
-        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.05), transparent 18%),
+        radial-gradient(circle at 50% 22%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
       display: flex;
       align-items: center;
@@ -43,8 +43,7 @@
     .box {
       width: 100%;
       max-width: 920px;
-      padding: 56px 24px 64px;
-      position: relative;
+      padding: 34px 24px 56px;
     }
 
     .logo-wrap {
@@ -52,15 +51,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 8px;
+      margin-bottom: 2px;
     }
 
     .logo-wrap::before {
       content: "";
       position: absolute;
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.06) 35%, transparent 72%);
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
       filter: blur(10px);
       border-radius: 50%;
       z-index: 0;
@@ -69,41 +68,41 @@
     .logo {
       position: relative;
       z-index: 1;
-      width: 160px;
+      width: 104px;
       height: auto;
       display: block;
-      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.12));
+      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.18));
     }
 
     h1 {
-      margin: 6px 0 12px;
-      font-size: clamp(3rem, 6vw, 4.4rem);
+      margin: 0 0 10px;
+      font-size: clamp(3.4rem, 6.2vw, 5rem);
       font-weight: 600;
-      letter-spacing: 0.4px;
-      line-height: 1.05;
+      letter-spacing: 0.2px;
+      line-height: 0.98;
       color: var(--text-main);
     }
 
     .tagline {
-      margin-bottom: 22px;
-      font-size: clamp(1.18rem, 2.2vw, 1.5rem);
+      margin-bottom: 18px;
+      font-size: clamp(1.2rem, 2.1vw, 1.55rem);
       color: var(--text-soft);
       font-weight: 500;
-      letter-spacing: 0.2px;
+      letter-spacing: 0.1px;
     }
 
     .sub {
-      max-width: 760px;
-      margin: 0 auto 36px;
-      font-size: 1.08rem;
+      max-width: 780px;
+      margin: 0 auto 28px;
+      font-size: 1.06rem;
       color: var(--text-muted);
-      line-height: 1.9;
+      line-height: 1.85;
     }
 
     .divider {
-      width: 84px;
+      width: 82px;
       height: 1px;
-      margin: 0 auto 28px;
+      margin: 0 auto 26px;
       background: linear-gradient(
         to right,
         transparent,
@@ -118,42 +117,43 @@
     }
 
     .verse {
-      font-size: clamp(1.55rem, 2.6vw, 2rem);
+      font-size: clamp(1.6rem, 2.7vw, 2rem);
       color: var(--text-main);
-      line-height: 1.8;
-      margin-bottom: 10px;
+      line-height: 1.75;
+      margin-bottom: 8px;
     }
 
     .translit {
-      font-size: 1.08rem;
+      font-size: 1.06rem;
       color: var(--text-soft);
       font-style: italic;
-      line-height: 1.8;
-      margin-bottom: 10px;
+      line-height: 1.75;
+      margin-bottom: 8px;
     }
 
     .meaning {
       font-size: 1rem;
       color: var(--text-muted);
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
     @media (max-width: 768px) {
       .box {
-        padding: 44px 20px 52px;
+        padding: 28px 18px 44px;
       }
 
       .logo {
-        width: 132px;
+        width: 88px;
+      }
+
+      .logo-wrap::before {
+        width: 150px;
+        height: 150px;
       }
 
       .sub {
         font-size: 1rem;
         line-height: 1.8;
-      }
-
-      .verse {
-        line-height: 1.7;
       }
     }
   </style>
@@ -177,7 +177,7 @@
 
     <div class="verse-block">
       <div class="verse">दृष्टिर्विस्तीर्णा, मननं गम्भीरम्।</div>
-      <div class="translit">dṛṣṭir vistīrṇā, mananaṃ gambhīram.</div>
+      <div class="translit">dṛṣṭiḥ vistīrṇā, mananaṃ gambhīram.</div>
       <div class="meaning">Vision broad, reflection deep.</div>
     </div>
   </div>
