@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About · Drishvara</title>
-  <meta name="description" content="About Drishvara." />
+  <meta name="description" content="About Drishvara — a founder-led insight platform." />
   <style>
     :root {
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.05);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
@@ -32,16 +33,17 @@
       font-family: "Georgia", "Times New Roman", serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 50% 16%, rgba(201, 162, 74, 0.06), transparent 18%),
+        radial-gradient(circle at 50% 14%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
       overflow-x: hidden;
     }
 
     .page {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 28px 20px 60px;
+      padding: 28px 20px 64px;
     }
 
     .nav {
@@ -66,28 +68,69 @@
 
     .hero {
       text-align: center;
-      margin-bottom: 42px;
+      margin-bottom: 40px;
+    }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
+      filter: blur(10px);
+      border-radius: 50%;
+      z-index: 0;
     }
 
     .logo {
-      width: 84px;
+      position: relative;
+      z-index: 1;
+      width: 78px;
       display: block;
-      margin: 0 auto 12px;
       filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.16));
     }
 
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2.6rem, 5vw, 4rem);
+      margin: 0 0 10px;
+      font-size: clamp(2.8rem, 5.4vw, 4.6rem);
       line-height: 1.02;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .hero-tagline {
+      color: var(--gold);
+      font-size: 1.02rem;
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
     }
 
     .intro {
-      max-width: 760px;
+      max-width: 820px;
       margin: 0 auto;
       color: var(--text-soft);
-      font-size: 1.08rem;
-      line-height: 1.9;
+      font-size: 1.1rem;
+      line-height: 1.95;
+    }
+
+    .divider {
+      width: 86px;
+      height: 1px;
+      margin: 28px auto 0;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(201, 162, 74, 0.95),
+        transparent
+      );
     }
 
     .content {
@@ -100,22 +143,28 @@
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 26px;
+      border-radius: 22px;
+      padding: 28px;
       backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .panel.highlight {
+      background: var(--surface-strong);
     }
 
     .panel h2 {
-      margin: 0 0 14px;
-      font-size: 1.5rem;
+      margin: 0 0 16px;
+      font-size: 1.7rem;
       color: var(--text-main);
+      line-height: 1.15;
     }
 
     .panel p {
-      margin: 0 0 14px;
+      margin: 0 0 16px;
       color: var(--text-muted);
-      line-height: 1.85;
-      font-size: 1rem;
+      line-height: 1.9;
+      font-size: 1.02rem;
     }
 
     .panel p:last-child {
@@ -124,17 +173,30 @@
 
     .list {
       margin: 0;
-      padding-left: 18px;
+      padding-left: 20px;
       color: var(--text-muted);
-      line-height: 1.9;
+      line-height: 1.95;
+      font-size: 1rem;
     }
 
     .list li {
       margin-bottom: 10px;
     }
 
+    .quote-strip {
+      margin-top: 24px;
+      padding: 18px 20px;
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      border-radius: 18px;
+      background: rgba(201, 162, 74, 0.04);
+      color: var(--text-soft);
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
     footer {
-      margin-top: 54px;
+      margin-top: 56px;
       padding-top: 22px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-muted);
@@ -142,7 +204,7 @@
       font-size: 0.95rem;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .content {
         grid-template-columns: 1fr;
       }
@@ -150,17 +212,22 @@
 
     @media (max-width: 768px) {
       .page {
-        padding: 20px 16px 44px;
+        padding: 20px 16px 46px;
       }
 
       .nav {
         gap: 18px;
+        padding-bottom: 26px;
       }
 
       .intro,
       .panel p,
       .list {
         font-size: 1rem;
+      }
+
+      .panel {
+        padding: 24px;
       }
     }
   </style>
@@ -175,24 +242,28 @@
     </nav>
 
     <section class="hero">
-      <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
-      <h1>About Drishvara</h1>
-      <div class="intro">
-        Drishvara is conceived as a founder-led insight platform: a space for reflection, observation, and disciplined interpretation across spirituality, sport, world affairs, media, and public life.
+      <div class="logo-wrap">
+        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
       </div>
+      <h1>About Drishvara</h1>
+      <div class="hero-tagline">A lens, not just a platform.</div>
+      <div class="intro">
+        Drishvara is a founder-led insight platform — built as a space for deliberate thought, where observation is slowed down, patterns are examined, and meaning is pursued beyond surface narratives.
+      </div>
+      <div class="divider"></div>
     </section>
 
     <section class="content">
-      <div class="panel">
+      <div class="panel highlight">
         <h2>What Drishvara stands for</h2>
         <p>
-          The name suggests vision joined with contemplation. The platform is not designed to chase noise. It is designed to notice patterns, interpret meaning, and write with a slower, more deliberate intelligence.
+          The name brings together <em>drishti</em> (vision) and <em>vara</em> (choice or elevation). It reflects a way of seeing — one that is intentional, layered, and resistant to noise.
         </p>
         <p>
-          Drishvara aims to bring together multiple worlds that are often kept separate: the spiritual and the strategic, the public and the personal, the immediate and the civilizational.
+          Drishvara is not designed for immediacy. It is designed for clarity over time. The emphasis is on understanding before expression, and reflection before conclusion.
         </p>
         <p>
-          In practical terms, it will function as a writing-led platform with curated articles, thematic series, commentary, and eventually AI-assisted workflows that help surface relevant topics while preserving editorial intention.
+          The platform attempts to bridge domains that are often treated separately — spirituality and systems, sport and discipline, governance and lived experience — bringing them into a single, coherent lens.
         </p>
       </div>
 
@@ -203,29 +274,36 @@
           <li>Depth over speed</li>
           <li>Reflection over reaction</li>
           <li>Signal over spectacle</li>
-          <li>Meaning over mere information</li>
+          <li>Meaning over information</li>
         </ul>
       </div>
     </section>
 
-    <section class="content" style="margin-top:22px;">
+    <section class="content" style="margin-top: 22px;">
       <div class="panel">
         <h2>Editorial domains</h2>
         <p>
-          Drishvara will gradually develop recurring streams around five broad areas: spirituality, sports, world affairs, media and films, and public programmes of the Union and States.
+          Drishvara will gradually develop structured streams across key domains: spirituality, sport, public systems, media, and societal narratives.
         </p>
         <p>
-          Each area will be approached not just as a topic category, but as a lens into human intention, systems, and the stories that shape collective attention.
+          These are not treated as isolated categories, but as interconnected lenses through which human behaviour, institutional patterns, and cultural direction can be understood.
         </p>
       </div>
 
       <div class="panel">
         <h2>Current stage</h2>
         <p>
-          The site is presently in its foundation phase. Brand, layout, structure, and editorial direction are being established now so that future growth remains coherent.
+          The platform is presently in its foundation phase.
+        </p>
+        <p>
+          The focus at this stage is on shaping its voice, structure, and editorial discipline — ensuring that what emerges later is not reactive, but considered, coherent, and enduring.
         </p>
       </div>
     </section>
+
+    <div class="quote-strip">
+      Drishvara is being built not to speak the loudest, but to see more clearly.
+    </div>
 
     <footer>
       Drishvara © 2026 · About page
