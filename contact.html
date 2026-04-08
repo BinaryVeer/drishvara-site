@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact · Drishvara</title>
+  <meta name="description" content="Contact Drishvara." />
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 16%, rgba(201, 162, 74, 0.06), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding: 8px 0 34px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .logo {
+      width: 84px;
+      display: block;
+      margin: 0 auto 12px;
+      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.16));
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.02;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--text-soft);
+      font-size: 1.08rem;
+      line-height: 1.9;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      backdrop-filter: blur(6px);
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 1.45rem;
+      color: var(--text-main);
+    }
+
+    .panel p {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-link {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 1.02rem;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 54px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 20px 16px 44px;
+      }
+
+      .nav {
+        gap: 18px;
+      }
+
+      .intro,
+      .panel p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+
+    <section class="hero">
+      <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
+      <h1>Contact</h1>
+      <div class="intro">
+        For editorial communication, collaborations, or thoughtful correspondence, reach out through the address below.
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Primary Contact</h2>
+        <p>
+          Drishvara currently receives communication through its routed domain email address.
+        </p>
+        <a class="contact-link" href="mailto:contact@drishvara.com">contact@drishvara.com</a>
+        <div class="note">
+          Replies may take a little time while the platform is in its early build phase.
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>What to write about</h2>
+        <p>
+          You may write regarding article responses, collaboration ideas, corrections, strategic conversations, public programme references, or media-related outreach.
+        </p>
+        <p>
+          As the platform matures, dedicated channels for editorial submissions and partnerships may be added.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      Drishvara © 2026 · Contact page
+    </footer>
+  </div>
+</body>
+</html>
