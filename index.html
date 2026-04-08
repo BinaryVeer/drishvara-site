@@ -6,73 +6,180 @@
   <title>Drishvara</title>
   <meta name="description" content="Drishvara — a founder-led insight platform." />
   <style>
-    body {
+    :root {
+      --bg-1: #0b1530;
+      --bg-2: #162447;
+      --text-main: #f5f1e8;
+      --text-soft: #cfd7e6;
+      --text-muted: #95a3b8;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      font-family: 'Georgia', 'Times New Roman', serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #ffffff;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 38%, rgba(201, 162, 74, 0.08), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.05), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
       text-align: center;
+      overflow-x: hidden;
     }
+
     .box {
-      max-width: 860px;
-      padding: 40px 20px;
+      width: 100%;
+      max-width: 920px;
+      padding: 56px 24px 64px;
+      position: relative;
     }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.06) 35%, transparent 72%);
+      filter: blur(10px);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
     .logo {
-    width: 140px;
-    margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      width: 160px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.12));
     }
+
     h1 {
-      font-size: 3.2rem;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
+      margin: 10px 0 12px;
+      font-size: clamp(3rem, 6vw, 4.4rem);
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      line-height: 1.05;
+      color: var(--text-main);
     }
+
     .tagline {
-      font-size: 1.25rem;
-      color: #cbd5e1;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
+      font-size: clamp(1.18rem, 2.2vw, 1.5rem);
+      color: var(--text-soft);
+      font-weight: 500;
+      letter-spacing: 0.2px;
     }
+
     .sub {
-      font-size: 1rem;
-      color: #94a3b8;
-      line-height: 1.8;
-      margin-bottom: 28px;
+      max-width: 760px;
+      margin: 0 auto 36px;
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      line-height: 1.9;
     }
+
+    .divider {
+      width: 84px;
+      height: 1px;
+      margin: 0 auto 28px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(201, 162, 74, 0.95),
+        transparent
+      );
+    }
+
+    .verse-block {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
     .verse {
-      font-size: 1.35rem;
-      color: #f8fafc;
-      margin-bottom: 10px;
+      font-size: clamp(1.55rem, 2.6vw, 2rem);
+      color: var(--text-main);
       line-height: 1.8;
-    }
-    .translit {
-      font-size: 1rem;
-      color: #cbd5e1;
-      font-style: italic;
       margin-bottom: 10px;
     }
+
+    .translit {
+      font-size: 1.08rem;
+      color: var(--text-soft);
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+
     .meaning {
-      font-size: 0.98rem;
-      color: #94a3b8;
-      line-height: 1.7;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    @media (max-width: 768px) {
+      .box {
+        padding: 44px 20px 52px;
+      }
+
+      .logo {
+        width: 132px;
+      }
+
+      .sub {
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      .verse {
+        line-height: 1.7;
+      }
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo">
+    <div class="logo-wrap">
+      <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
+    </div>
+
     <h1>Drishvara</h1>
+
     <div class="tagline">Vision. Reflection. Insight.</div>
+
     <div class="sub">
       A founder-led insight platform taking shape.<br />
       Spirituality, sports, world affairs, media, and public programmes — viewed with depth and clarity.
     </div>
 
-    <div class="verse">दृष्टिर्विस्तीर्णा, मननं गम्भीरम्।</div>
-    <div class="translit">dṛṣṭir vistīrṇā, mananaṃ gambhīram.</div>
-    <div class="meaning">Vision broad, reflection deep.</div>
+    <div class="divider"></div>
+
+    <div class="verse-block">
+      <div class="verse">दृष्टिर्विस्तीर्णा, मननं गम्भीरम्।</div>
+      <div class="translit">dṛṣṭir vistīrṇā, mananaṃ gambhīram.</div>
+      <div class="meaning">Vision broad, reflection deep.</div>
+    </div>
   </div>
 </body>
 </html>
