@@ -1,0 +1,49 @@
+{
+  "schema_name": "signal_rail_schema",
+  "description": "Defines the data shown in the Daily Signal Rail.",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "Selected",
+              "Developing",
+              "Watching",
+              "Archived"
+            ]
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "title",
+          "summary",
+          "status"
+        ]
+      }
+    }
+  },
+  "required": [
+    "date",
+    "items"
+  ]
+}
