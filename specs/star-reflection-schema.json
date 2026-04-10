@@ -1,0 +1,46 @@
+{
+  "schema_name": "star_reflection_schema",
+  "description": "Defines the user-facing daily star reflection response.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "string",
+      "description": "Date of birth in DD/MM/YYYY format"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "hi"
+      ]
+    },
+    "theme": {
+      "type": "string"
+    },
+    "focus": {
+      "type": "string"
+    },
+    "caution": {
+      "type": "string"
+    },
+    "opportunity": {
+      "type": "string"
+    },
+    "reflection": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "dob",
+    "language",
+    "theme",
+    "focus",
+    "caution",
+    "opportunity",
+    "reflection"
+  ]
+}
