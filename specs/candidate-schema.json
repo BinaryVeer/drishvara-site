@@ -1,0 +1,58 @@
+{
+  "schema_name": "candidate_schema",
+  "description": "Defines the topic candidate object used by the Drishvara Topic Scout Agent.",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": [
+        "spirituality",
+        "sports",
+        "world_affairs",
+        "media_society",
+        "public_programmes"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "description": "Date in YYYY-MM-DD format"
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "angle_hint": {
+            "type": "string"
+          },
+          "source_hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "candidate_id",
+          "title",
+          "summary",
+          "angle_hint"
+        ]
+      }
+    }
+  },
+  "required": [
+    "category",
+    "date",
+    "candidates"
+  ]
+}
