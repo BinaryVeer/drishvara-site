@@ -626,7 +626,7 @@
       </div>
 
       <div class="nav-right">
-        <div class="live-score-chip">
+        <div class="live-score-chip" id="live-score-chip">
           <span class="live-dot"></span>
           <span class="live-text"><strong>LIVE · IPL</strong> MI 148/4 (16.2)</span>
         </div>
@@ -731,23 +731,23 @@
       </main>
 
       <aside class="right-col stack">
-        <div class="card">
+        <div class="card" id="word-card">
           <div class="label">Word of the Day</div>
           <h2>Word of the Day</h2>
-          <p><strong>English:</strong> Reflection</p>
-          <p><strong>Hindi:</strong> मनन</p>
-          <p><strong>Sanskrit:</strong> मननम्</p>
-          <p><strong>Meaning:</strong> sustained inward consideration</p>
+          <p><strong>English:</strong> <span id="word-english">Reflection</span></p>
+          <p><strong>Hindi:</strong> <span id="word-hindi">मनन</span></p>
+          <p><strong>Sanskrit:</strong> <span id="word-sanskrit">मननम्</span></p>
+          <p><strong>Meaning:</strong> <span id="word-meaning">sustained inward consideration</span></p>
         </div>
 
-        <div class="card">
+        <div class="card" id="vedic-card">
           <div class="label">Today’s Vedic Guidance</div>
-          <h2>आज का वैदिक संकेत</h2>
-          <p><strong>वार:</strong> शुक्रवार</p>
-          <p><strong>अनुशंसित रंग:</strong> हल्का पीला / स्वर्णाभ</p>
-          <p><strong>भोजन संकेत:</strong> सात्त्विक, हल्का और संयमित</p>
-          <div class="mantra-box">ॐ श्रीं महालक्ष्म्यै नमः</div>
-          <p><strong>Today:</strong> A day oriented toward steadiness, grace, and thoughtful expression.</p>
+          <h2 id="vedic-title-hi">आज का वैदिक संकेत</h2>
+          <p><strong>वार:</strong> <span id="vedic-weekday-hi">शुक्रवार</span></p>
+          <p><strong>अनुशंसित रंग:</strong> <span id="vedic-colour-hi">हल्का पीला / स्वर्णाभ</span></p>
+          <p><strong>भोजन संकेत:</strong> <span id="vedic-food-hi">सात्त्विक, हल्का और संयमित</span></p>
+          <div class="mantra-box" id="vedic-mantra-hi">ॐ श्रीं महालक्ष्म्यै नमः</div>
+          <p><strong>Today:</strong> <span id="vedic-note-en">A day oriented toward steadiness, grace, and thoughtful expression.</span></p>
           <div class="utility-note">This module should later become rule-based, factual, location-aware, bilingual, and grounded in curated Hindu literature logic.</div>
         </div>
 
@@ -766,13 +766,13 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="panchang-card">
           <div class="label">Panchang & Festival View</div>
           <h2>Location-based Panchang</h2>
           <p>Select a place so the app can later show sunrise, sunset, moonrise, moonset, panchang, and upcoming festivals in both Hindi and English.</p>
 
           <div class="form-grid">
-            <select>
+            <select id="panchang-place-select">
               <option>Itanagar</option>
               <option>Delhi</option>
               <option>Mumbai</option>
@@ -782,27 +782,21 @@
           </div>
 
           <div class="mini-table">
-            <div class="mini-row"><strong>Sunrise</strong><span>06:13 AM</span></div>
-            <div class="mini-row"><strong>Sunset</strong><span>06:54 PM</span></div>
-            <div class="mini-row"><strong>Moonrise</strong><span>02:19 AM</span></div>
-            <div class="mini-row"><strong>Moonset</strong><span>11:49 AM</span></div>
-            <div class="mini-row"><strong>Tithi</strong><span>Ashtami → Navami</span></div>
-            <div class="mini-row"><strong>Nakshatra</strong><span>Purva Ashadha → Uttara Ashadha</span></div>
-            <div class="mini-row"><strong>Yoga</strong><span>Shiva → Siddha</span></div>
-            <div class="mini-row"><strong>Paksha</strong><span>Krishna Paksha</span></div>
+            <div class="mini-row"><strong>Sunrise</strong><span id="panchang-sunrise">06:13 AM</span></div>
+            <div class="mini-row"><strong>Sunset</strong><span id="panchang-sunset">06:54 PM</span></div>
+            <div class="mini-row"><strong>Moonrise</strong><span id="panchang-moonrise">02:19 AM</span></div>
+            <div class="mini-row"><strong>Moonset</strong><span id="panchang-moonset">11:49 AM</span></div>
+            <div class="mini-row"><strong>Tithi</strong><span id="panchang-tithi">Ashtami → Navami</span></div>
+            <div class="mini-row"><strong>Nakshatra</strong><span id="panchang-nakshatra">Purva Ashadha → Uttara Ashadha</span></div>
+            <div class="mini-row"><strong>Yoga</strong><span id="panchang-yoga">Shiva → Siddha</span></div>
+            <div class="mini-row"><strong>Paksha</strong><span id="panchang-paksha">Krishna Paksha</span></div>
           </div>
 
-          <div class="festival-list">
+          <div class="festival-list" id="festival-list">
             <div class="festival-item">
               <div class="sub">Upcoming Observance</div>
               <div class="title">Kalashtami (Today)</div>
               <div class="meta">Example festival listing block with future bilingual support.</div>
-            </div>
-
-            <div class="festival-item">
-              <div class="sub">Upcoming Observance</div>
-              <div class="title">Varuthini Ekadashi</div>
-              <div class="meta">Festival sequence and date should later come from the panchang layer.</div>
             </div>
           </div>
         </div>
@@ -981,6 +975,112 @@
       }
     }
 
+    async function loadHomepageContext() {
+      const today = new Date().toISOString().slice(0, 10);
+      const contextPath = `generated/homepage/${today}-homepage-context.json`;
+
+      try {
+        const response = await fetch(contextPath, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error(`Homepage context not found for ${today}`);
+        }
+
+        const data = await response.json();
+
+        applyLiveScore(data.live_score);
+        applyWordOfTheDay(data.word_of_the_day);
+        applyVedicGuidance(data.vedic_guidance);
+        applyPanchang(data.panchang);
+        applyFestivals(data.festivals);
+      } catch (error) {
+        console.log("Homepage context unavailable:", error.message);
+      }
+    }
+
+    function applyLiveScore(liveScore) {
+      const chip = document.getElementById("live-score-chip");
+      if (!chip || !liveScore) return;
+
+      if (!liveScore.show) {
+        chip.style.display = "none";
+        return;
+      }
+
+      chip.innerHTML = `
+        <span class="live-dot"></span>
+        <span class="live-text">
+          <strong>${escapeHtml(liveScore.status || "LIVE")} · ${escapeHtml(liveScore.tournament || "")}</strong>
+          ${escapeHtml(liveScore.score || liveScore.match || "")}
+        </span>
+      `;
+    }
+
+    function applyWordOfTheDay(word) {
+      if (!word) return;
+
+      setText("word-english", word.english);
+      setText("word-hindi", word.hindi);
+      setText("word-sanskrit", word.sanskrit);
+      setText("word-meaning", word.meaning);
+    }
+
+    function applyVedicGuidance(vedic) {
+      if (!vedic) return;
+
+      setText("vedic-title-hi", vedic.hindi_title);
+      setText("vedic-weekday-hi", vedic.weekday_hindi);
+      setText("vedic-colour-hi", vedic.suggested_colour_hindi);
+      setText("vedic-food-hi", vedic.food_hindi);
+      setText("vedic-mantra-hi", vedic.mantra_hindi);
+      setText("vedic-note-en", vedic.short_note_english);
+    }
+
+    function applyPanchang(panchang) {
+      if (!panchang) return;
+
+      setSelectValue("panchang-place-select", panchang.place);
+      setText("panchang-sunrise", panchang.sunrise);
+      setText("panchang-sunset", panchang.sunset);
+      setText("panchang-moonrise", panchang.moonrise);
+      setText("panchang-moonset", panchang.moonset);
+      setText("panchang-tithi", panchang.tithi);
+      setText("panchang-nakshatra", panchang.nakshatra);
+      setText("panchang-yoga", panchang.yoga);
+      setText("panchang-paksha", panchang.paksha);
+    }
+
+    function applyFestivals(festivals) {
+      const list = document.getElementById("festival-list");
+      if (!list || !Array.isArray(festivals) || !festivals.length) return;
+
+      list.innerHTML = festivals.map(item => `
+        <div class="festival-item">
+          <div class="sub">${escapeHtml(item.subtitle || "Upcoming Observance")}</div>
+          <div class="title">${escapeHtml(item.title || "")}</div>
+          <div class="meta">${escapeHtml(item.note || "")}</div>
+        </div>
+      `).join("");
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el && typeof value === "string") {
+        el.textContent = value;
+      }
+    }
+
+    function setSelectValue(id, value) {
+      const el = document.getElementById(id);
+      if (el && typeof value === "string") {
+        const options = Array.from(el.options || []);
+        const match = options.find(opt => opt.value === value || opt.text === value);
+        if (match) {
+          el.value = match.value;
+        }
+      }
+    }
+
     function sanitizeSlug(slug) {
       return String(slug || "")
         .trim()
@@ -1001,6 +1101,7 @@
 
     loadSignalRail();
     loadFeaturedReads();
+    loadHomepageContext();
   </script>
 </body>
 </html>
