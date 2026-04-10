@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Drishvara</title>
-  <meta name="description" content="Drishvara — a founder-led insight platform." />
+  <meta name="description" content="Drishvara — Vision. Reflection. Insight." />
   <link rel="icon" type="image/png" href="assets/logo/logo.png" />
   <style>
     :root {
@@ -18,7 +18,11 @@
       --text-muted: #9aa8bc;
       --gold: #c9a24a;
       --gold-soft: rgba(201, 162, 74, 0.16);
-      --danger-soft: rgba(255, 210, 210, 0.08);
+      --rail-bg: rgba(201, 162, 74, 0.05);
+      --sports-bg: rgba(109, 138, 255, 0.08);
+      --ad-bg: rgba(255, 255, 255, 0.03);
+      --live-red: #ff6b6b;
+      --live-red-soft: rgba(255, 107, 107, 0.12);
     }
 
     * {
@@ -35,7 +39,7 @@
       font-family: "Georgia", "Times New Roman", serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 50% 12%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.08), transparent 18%),
         radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
       overflow-x: hidden;
@@ -48,34 +52,34 @@
 
     .page {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1380px;
       margin: 0 auto;
-      padding: 24px 20px 64px;
+      padding: 24px 20px 72px;
     }
 
     .nav {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       gap: 16px;
-      padding: 8px 0 28px;
-      flex-wrap: wrap;
+      padding: 8px 0 24px;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
       gap: 12px;
+      justify-self: start;
     }
 
     .nav-logo {
-      width: 42px;
+      width: 40px;
       height: auto;
       display: block;
     }
 
     .nav-brand {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       color: var(--text-main);
       letter-spacing: 0.2px;
     }
@@ -83,7 +87,7 @@
     .nav-links {
       display: flex;
       justify-content: center;
-      gap: 24px;
+      gap: 26px;
       flex-wrap: wrap;
     }
 
@@ -96,6 +100,43 @@
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--gold);
+    }
+
+    .nav-right {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .live-score-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--live-red-soft);
+      border: 1px solid rgba(255, 107, 107, 0.22);
+      color: var(--text-soft);
+      font-size: 0.85rem;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--live-red);
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.12);
+    }
+
+    .live-text strong {
+      color: #ffd9d9;
+      font-weight: 600;
     }
 
     .lang-toggle {
@@ -112,7 +153,7 @@
 
     .hero {
       text-align: center;
-      padding: 18px 0 28px;
+      padding: 14px 0 30px;
     }
 
     .logo-wrap {
@@ -126,8 +167,8 @@
     .logo-wrap::before {
       content: "";
       position: absolute;
-      width: 155px;
-      height: 155px;
+      width: 150px;
+      height: 150px;
       background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
       filter: blur(10px);
       border-radius: 50%;
@@ -137,7 +178,7 @@
     .hero-logo {
       position: relative;
       z-index: 1;
-      width: 145px;
+      width: 132px;
       height: auto;
       display: block;
       filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.18));
@@ -147,35 +188,27 @@
       margin: 0 0 10px;
       font-size: clamp(3.2rem, 6vw, 5rem);
       font-weight: 600;
-      letter-spacing: 0.2px;
       line-height: 0.98;
       color: var(--text-main);
+      letter-spacing: 0.2px;
     }
 
     .tagline {
-      margin-bottom: 16px;
-      font-size: clamp(1.18rem, 2vw, 1.45rem);
+      margin-bottom: 18px;
+      font-size: clamp(1.16rem, 2vw, 1.45rem);
       color: var(--text-soft);
       font-weight: 500;
     }
 
-    .hero-sub {
-      max-width: 780px;
-      margin: 0 auto 24px;
-      font-size: 1.04rem;
-      color: var(--text-muted);
-      line-height: 1.85;
-    }
-
     .divider {
-      width: 82px;
+      width: 84px;
       height: 1px;
-      margin: 0 auto 26px;
+      margin: 0 auto 22px;
       background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.95), transparent);
     }
 
     .verse {
-      font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+      font-size: clamp(1.45rem, 2.5vw, 1.9rem);
       line-height: 1.8;
       margin-bottom: 8px;
       font-family: "Noto Serif Devanagari", "Nirmala UI", "Mangal", serif;
@@ -194,19 +227,27 @@
       color: var(--text-muted);
     }
 
-    .utility-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 34px;
-      margin-bottom: 46px;
+    .entry-note {
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
     }
 
-    .utility-card,
-    .panel,
-    .feature-card,
-    .notebook-card,
-    .archive-card {
+    .main-layout {
+      display: grid;
+      grid-template-columns: 275px minmax(0, 1.55fr) 360px;
+      gap: 20px;
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 20px;
@@ -215,82 +256,203 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
     }
 
-    .utility-card h2,
-    .panel h2,
-    .feature-card h3,
-    .notebook-card h2,
-    .archive-card h2 {
+    .card h2,
+    .card h3 {
       margin: 0 0 12px;
       color: var(--text-main);
       line-height: 1.15;
     }
 
-    .utility-label {
-      color: var(--gold);
-      font-size: 0.88rem;
-      margin-bottom: 8px;
-      letter-spacing: 0.2px;
-    }
-
-    .utility-card p,
-    .panel p,
-    .feature-card p,
-    .notebook-card p,
-    .archive-card p {
+    .card p {
       margin: 0 0 12px;
       color: var(--text-muted);
-      line-height: 1.8;
-      font-size: 0.98rem;
+      line-height: 1.78;
+      font-size: 0.97rem;
     }
 
-    .utility-card p:last-child,
-    .panel p:last-child,
-    .feature-card p:last-child,
-    .notebook-card p:last-child,
-    .archive-card p:last-child {
+    .card p:last-child {
       margin-bottom: 0;
     }
 
-    .word-stack {
+    .label {
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      letter-spacing: 0.2px;
+    }
+
+    .sports-card {
+      background: var(--sports-bg);
+    }
+
+    .signal-card {
+      background: var(--rail-bg);
+    }
+
+    .ad-card {
+      background: var(--ad-bg);
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .sports-list,
+    .signal-list,
+    .festival-list {
       display: grid;
-      gap: 8px;
+      gap: 12px;
+      margin-top: 12px;
     }
 
-    .word-line strong {
-      color: var(--text-soft);
-      font-weight: 600;
-    }
-
-    .mantra-box {
+    .sports-item,
+    .signal-item,
+    .festival-item {
       padding: 12px 14px;
       border-radius: 14px;
-      background: rgba(201, 162, 74, 0.06);
-      border: 1px solid rgba(201, 162, 74, 0.14);
-      color: var(--text-soft);
-      line-height: 1.75;
-      font-size: 0.95rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
     }
 
-    .star-form {
+    .sports-item .sub,
+    .signal-item .sub,
+    .festival-item .sub {
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+
+    .sports-item .title,
+    .signal-item .title,
+    .festival-item .title {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .sports-item .meta,
+    .signal-item .meta,
+    .festival-item .meta {
+      color: var(--text-muted);
+      font-size: 0.83rem;
+      line-height: 1.55;
+    }
+
+    .status-badge {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(201, 162, 74, 0.08);
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      color: var(--gold);
+      font-size: 0.78rem;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      color: var(--text-main);
+    }
+
+    .section-intro {
+      margin: 0 0 22px;
+      color: var(--text-muted);
+      line-height: 1.82;
+      font-size: 1rem;
+    }
+
+    .feature-grid {
       display: grid;
-      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .feature-image {
+      height: 170px;
+      background: linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      text-align: center;
+      padding: 18px;
+    }
+
+    .feature-body {
+      padding: 20px;
+    }
+
+    .feature-body h3 {
+      font-size: 1.16rem;
+    }
+
+    .feature-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      font-size: 0.9rem;
+    }
+
+    .feature-links a,
+    .read-link {
+      color: var(--gold);
+    }
+
+    .feature-links a:hover,
+    .read-link:hover {
+      text-decoration: underline;
+    }
+
+    .center-lower {
+      display: grid;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .founder-card {
       margin-top: 8px;
     }
 
-    .star-form input,
-    .star-form select,
-    .archive-form input {
+    .form-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    input,
+    select,
+    button {
+      font-family: inherit;
+    }
+
+    input,
+    select {
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.1);
       background: rgba(255,255,255,0.04);
       color: var(--text-main);
-      font-family: inherit;
-      font-size: 0.96rem;
+      font-size: 0.95rem;
     }
 
-    .star-form input::placeholder {
+    input::placeholder {
       color: #b8c2d3;
     }
 
@@ -299,10 +461,9 @@
       padding: 11px 16px;
       border-radius: 999px;
       border: none;
-      font-family: inherit;
-      font-size: 0.95rem;
       cursor: pointer;
       transition: transform 0.2s ease, opacity 0.2s ease;
+      font-size: 0.94rem;
     }
 
     .btn-primary {
@@ -322,196 +483,113 @@
       opacity: 0.96;
     }
 
-    .content-row {
+    .mini-table {
       display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(280px, 0.95fr);
-      gap: 22px;
-      align-items: start;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .section-title {
-      margin: 0 0 10px;
-      font-size: 2rem;
-      color: var(--text-main);
-    }
-
-    .section-intro {
-      margin: 0 0 22px;
-      color: var(--text-muted);
-      line-height: 1.85;
-      font-size: 1rem;
-    }
-
-    .feature-grid {
+    .mini-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.92rem;
     }
 
-    .feature-card .label {
-      color: var(--gold);
-      font-size: 0.86rem;
-      margin-bottom: 10px;
+    .mini-row strong {
+      color: var(--text-soft);
     }
 
-    .feature-card h3 {
-      font-size: 1.18rem;
-    }
-
-    .read-link {
-      color: var(--gold);
-      display: inline-block;
-      margin-top: 4px;
-      font-size: 0.95rem;
-    }
-
-    .read-link:hover {
-      text-decoration: underline;
-    }
-
-    .sidebar {
-      display: grid;
-      gap: 18px;
-    }
-
-    .rail-list,
-    .sports-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 12px;
-    }
-
-    .rail-item,
-    .sports-item {
+    .mantra-box {
       padding: 12px 14px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .rail-item .label,
-    .sports-item .label {
-      color: var(--gold);
-      font-size: 0.82rem;
-      margin-bottom: 6px;
-    }
-
-    .rail-item .title,
-    .sports-item .title {
+      background: rgba(201, 162, 74, 0.06);
+      border: 1px solid rgba(201, 162, 74, 0.14);
       color: var(--text-soft);
+      line-height: 1.75;
       font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 4px;
+      margin-top: 10px;
     }
 
-    .rail-item .meta,
-    .sports-item .meta {
+    .utility-note {
       color: var(--text-muted);
-      font-size: 0.84rem;
-      line-height: 1.5;
-    }
-
-    .status-badge {
-      display: inline-block;
+      font-size: 0.88rem;
+      line-height: 1.65;
       margin-top: 8px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(201, 162, 74, 0.08);
-      border: 1px solid rgba(201, 162, 74, 0.18);
-      color: var(--gold);
-      font-size: 0.78rem;
-    }
-
-    .lower-sections {
-      display: grid;
-      gap: 18px;
-      margin-top: 36px;
-    }
-
-    .notebook-card .label {
-      color: var(--gold);
-      font-size: 0.86rem;
-      margin-bottom: 8px;
-    }
-
-    .archive-form {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 12px;
-      margin-top: 14px;
-      align-items: center;
     }
 
     footer {
-      margin-top: 56px;
+      margin-top: 60px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--text-muted);
       font-size: 0.95rem;
       text-align: center;
     }
 
-    .overlay-note {
-      margin-top: 10px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 980px) {
-      .utility-strip,
-      .feature-grid,
-      .content-row {
+    @media (max-width: 1180px) {
+      .main-layout {
         grid-template-columns: 1fr;
       }
 
-      .archive-form {
+      .feature-grid {
         grid-template-columns: 1fr;
+      }
+
+      .left-col,
+      .right-col {
+        order: 2;
+      }
+
+      .center-col {
+        order: 1;
       }
     }
 
     @media (max-width: 768px) {
       .page {
-        padding: 20px 16px 46px;
+        padding: 20px 16px 48px;
       }
 
       .nav {
-        justify-content: center;
+        grid-template-columns: 1fr;
+        justify-items: center;
       }
 
       .nav-left,
-      .nav-links,
-      .lang-toggle {
-        width: 100%;
-        justify-content: center;
+      .nav-right,
+      .nav-links {
+        justify-self: center;
+      }
+
+      .nav-links {
+        gap: 18px;
       }
 
       .hero-logo {
-        width: 118px;
+        width: 112px;
       }
 
       .logo-wrap::before {
-        width: 132px;
-        height: 132px;
+        width: 128px;
+        height: 128px;
       }
 
-      .utility-card,
-      .panel,
-      .feature-card,
-      .notebook-card,
-      .archive-card {
-        padding: 20px;
+      .feature-image {
+        height: 140px;
       }
 
-      .hero-sub,
-      .section-intro,
-      .utility-card p,
-      .panel p,
-      .feature-card p,
-      .notebook-card p,
-      .archive-card p {
-        font-size: 1rem;
-        line-height: 1.8;
+      .mini-row {
+        grid-template-columns: 1fr;
+      }
+
+      .live-score-chip {
+        white-space: normal;
+        justify-content: center;
       }
     }
   </style>
@@ -532,7 +610,13 @@
         <a href="contact.html">Contact</a>
       </div>
 
-      <div class="lang-toggle">EN | हिन्दी</div>
+      <div class="nav-right">
+        <div class="live-score-chip">
+          <span class="live-dot"></span>
+          <span class="live-text"><strong>LIVE · IPL</strong> MI 148/4 (16.2)</span>
+        </div>
+        <div class="lang-toggle">EN | हिन्दी</div>
+      </div>
     </nav>
 
     <section class="hero">
@@ -541,12 +625,7 @@
       </div>
 
       <h1>Drishvara</h1>
-
       <div class="tagline">Vision. Reflection. Insight.</div>
-
-      <div class="hero-sub">
-        A founder-led platform for signal, meaning, and daily observation across spirituality, world affairs, media, public systems, and the overlooked textures of life.
-      </div>
 
       <div class="divider"></div>
 
@@ -554,163 +633,238 @@
       <div class="translit">dṛṣṭiḥ vistīrṇā, mananaṃ gambhīram.</div>
       <div class="meaning">Vision broad, reflection deep.</div>
 
-      <div class="overlay-note">
+      <div class="entry-note">
         Upcoming entry layer: <strong>First Light — 24h across India</strong>
       </div>
     </section>
 
-    <section class="utility-strip">
-      <div class="utility-card">
-        <div class="utility-label">Word of the Day</div>
-        <h2>Word of the Day</h2>
-        <div class="word-stack">
-          <div class="word-line"><strong>English:</strong> Reflection</div>
-          <div class="word-line"><strong>Hindi:</strong> मनन</div>
-          <div class="word-line"><strong>Sanskrit:</strong> मननम्</div>
-          <div class="word-line"><strong>Meaning:</strong> sustained inward consideration</div>
-        </div>
-      </div>
+    <section class="main-layout">
 
-      <div class="utility-card">
-        <div class="utility-label">Today’s Vedic Guidance</div>
-        <h2>आज का वैदिक संकेत</h2>
-        <p><strong>वार:</strong> शुक्रवार</p>
-        <p><strong>अनुशंसित रंग:</strong> हल्का पीला / स्वर्णाभ</p>
-        <p><strong>भोजन संकेत:</strong> सात्त्विक, हल्का और संयमित</p>
-        <div class="mantra-box">ॐ श्रीं महालक्ष्म्यै नमः</div>
-        <p><strong>Today:</strong> A day oriented toward steadiness, grace, and thoughtful expression.</p>
-      </div>
+      <aside class="left-col stack">
+        <div class="card sports-card">
+          <div class="label">Sports Desk</div>
+          <h2>Sports Desk</h2>
+          <p>Major world and Indian tournament highlights, key results, standings, and selected performance signals.</p>
 
-      <div class="utility-card">
-        <div class="utility-label">Star Reflection</div>
-        <h2>What the stars say about you</h2>
-        <p>Enter your name and date of birth for a daily reflective reading.</p>
-        <div class="star-form">
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Date of Birth (DD/MM/YYYY)" />
-          <select>
-            <option>English</option>
-            <option>Hindi</option>
-          </select>
-          <button class="btn btn-primary">See Today’s Reflection</button>
-        </div>
-      </div>
-    </section>
+          <div class="sports-list">
+            <div class="sports-item">
+              <div class="sub">Cricket</div>
+              <div class="title">Tournament and result feed placeholder</div>
+              <div class="meta">Point-table movement, next fixture, and India watch will appear here.</div>
+            </div>
 
-    <section class="content-row">
-      <div class="main-column">
-        <h2 class="section-title">Featured Reads</h2>
-        <p class="section-intro">
-          The day’s primary readings across the main editorial streams of Drishvara.
-        </p>
+            <div class="sports-item">
+              <div class="sub">Football</div>
+              <div class="title">League movement and key result placeholder</div>
+              <div class="meta">Daily football summary with global and Indian emphasis.</div>
+            </div>
 
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="label">Spirituality</div>
-            <h3><a href="articles/spiritual/how-attention-becomes-worship.html">How attention becomes a form of worship</a></h3>
-            <p>A reflection on attention, stillness, and inward discipline as the beginning of a deeper spiritual life.</p>
-            <a class="read-link" href="articles/spiritual/how-attention-becomes-worship.html">Read article →</a>
-          </div>
-
-          <div class="feature-card">
-            <div class="label">World Affairs</div>
-            <h3><a href="articles/world/reading-confrontation-beyond-headlines.html">Reading confrontation beyond headlines</a></h3>
-            <p>A slower reading of conflict, signalling, and the strategic structures hidden beneath visible escalation.</p>
-            <a class="read-link" href="articles/world/reading-confrontation-beyond-headlines.html">Read article →</a>
-          </div>
-
-          <div class="feature-card">
-            <div class="label">Media & Society</div>
-            <h3><a href="articles/media/what-narratives-make-visible.html">What narratives make visible</a></h3>
-            <p>A reading of cinema and perception, using Dhurandhar as a reference for how stories direct attention.</p>
-            <a class="read-link" href="articles/media/what-narratives-make-visible.html">Read article →</a>
-          </div>
-
-          <div class="feature-card">
-            <div class="label">Public Programmes</div>
-            <h3><a href="articles/policy/scaling-community-healthcare-outreach.html">Scaling community healthcare outreach</a></h3>
-            <p>An implementation-grounded look at how public service delivery begins to reveal its real structure in execution.</p>
-            <a class="read-link" href="articles/policy/scaling-community-healthcare-outreach.html">Read article →</a>
+            <div class="sports-item">
+              <div class="sub">Other Sports</div>
+              <div class="title">Tennis, hockey, badminton, chess, basketball, Olympics</div>
+              <div class="meta">Selected one-line results and significance notes.</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <aside class="sidebar">
-        <div class="panel">
-          <div class="utility-label">Daily Signal Rail</div>
+        <div class="card ad-card">
+          Reserved space for future ads / sponsored insight / partner slot
+        </div>
+      </aside>
+
+      <main class="center-col stack">
+        <div class="card signal-card">
+          <div class="label">Daily Signal Rail</div>
           <h2>Today’s Signals</h2>
-          <p>Shortlisted lines of movement and attention from the day’s editorial engine.</p>
+          <p>Shortlisted lines of movement and attention from the editorial engine. This is one of Drishvara’s core live reading surfaces.</p>
 
-          <div class="rail-list">
-            <div class="rail-item">
-              <div class="label">World Affairs</div>
+          <div class="signal-list">
+            <div class="signal-item">
+              <div class="sub">World Affairs</div>
               <div class="title">Strategic signalling is being mistaken for immediate escalation.</div>
-              <div class="meta">Watching the deeper structure beneath visible confrontation.</div>
+              <div class="meta">A slower reading suggests posture, message, and threshold management matter more than headline heat.</div>
               <div class="status-badge">Selected</div>
             </div>
 
-            <div class="rail-item">
-              <div class="label">Media & Society</div>
+            <div class="signal-item">
+              <div class="sub">Media & Society</div>
               <div class="title">Narrative framing is often more influential than overt opinion.</div>
-              <div class="meta">Dhurandhar as a lens into what cinema chooses to foreground.</div>
+              <div class="meta">The real power of storytelling lies in what becomes visible and what quietly disappears.</div>
               <div class="status-badge">Selected</div>
             </div>
 
-            <div class="rail-item">
-              <div class="label">Public Systems</div>
+            <div class="signal-item">
+              <div class="sub">Public Systems</div>
               <div class="title">Delivery architecture reveals more than launch language.</div>
-              <div class="meta">Implementation remains the real test of public systems.</div>
+              <div class="meta">Implementation remains the real test of administrative seriousness.</div>
               <div class="status-badge">Developing</div>
             </div>
           </div>
         </div>
 
-        <div class="panel">
-          <div class="utility-label">Sports Desk</div>
-          <h2>Sports Desk</h2>
-          <p>Major tournaments, results, standings, and Indian/global highlights across key sports.</p>
+        <div>
+          <h2 class="section-title">Featured Reads</h2>
+          <p class="section-intro">
+            The main reading surface of Drishvara. Each article should eventually carry one related image, concise depth, and two factual external references.
+          </p>
 
-          <div class="sports-list">
-            <div class="sports-item">
-              <div class="label">Cricket</div>
-              <div class="title">Tournament watch and key match outcome placeholder</div>
-              <div class="meta">Results, next fixtures, and points-table movement will appear here.</div>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-image">Article image placeholder</div>
+              <div class="feature-body">
+                <div class="label">Spirituality</div>
+                <h3><a href="articles/spiritual/how-attention-becomes-worship.html">How attention becomes a form of worship</a></h3>
+                <p>A reflection on attention, stillness, and inward discipline as the beginning of a deeper spiritual life.</p>
+                <a class="read-link" href="articles/spiritual/how-attention-becomes-worship.html">Read article →</a>
+                <div class="feature-links">
+                  <a href="#">Reference 1</a>
+                  <a href="#">Reference 2</a>
+                </div>
+              </div>
             </div>
 
-            <div class="sports-item">
-              <div class="label">Football</div>
-              <div class="title">Daily league and tournament summary placeholder</div>
-              <div class="meta">Major global and Indian football notes will surface here.</div>
+            <div class="feature-card">
+              <div class="feature-image">Article image placeholder</div>
+              <div class="feature-body">
+                <div class="label">World Affairs</div>
+                <h3><a href="articles/world/reading-confrontation-beyond-headlines.html">Reading confrontation beyond headlines</a></h3>
+                <p>A slower reading of conflict, signalling, and the strategic structures hidden beneath visible escalation.</p>
+                <a class="read-link" href="articles/world/reading-confrontation-beyond-headlines.html">Read article →</a>
+                <div class="feature-links">
+                  <a href="#">Reference 1</a>
+                  <a href="#">Reference 2</a>
+                </div>
+              </div>
             </div>
 
-            <div class="sports-item">
-              <div class="label">Other Sports</div>
-              <div class="title">Tennis, hockey, badminton, chess, basketball, Olympics</div>
-              <div class="meta">Selected highlights and one-line significance notes.</div>
+            <div class="feature-card">
+              <div class="feature-image">Article image placeholder</div>
+              <div class="feature-body">
+                <div class="label">Media & Society</div>
+                <h3><a href="articles/media/what-narratives-make-visible.html">What narratives make visible</a></h3>
+                <p>A reading of cinema and perception, using Dhurandhar as a reference for how stories direct attention.</p>
+                <a class="read-link" href="articles/media/what-narratives-make-visible.html">Read article →</a>
+                <div class="feature-links">
+                  <a href="#">Reference 1</a>
+                  <a href="#">Reference 2</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-image">Article image placeholder</div>
+              <div class="feature-body">
+                <div class="label">Public Programmes</div>
+                <h3><a href="articles/policy/scaling-community-healthcare-outreach.html">Scaling community healthcare outreach</a></h3>
+                <p>An implementation-grounded look at how public service delivery begins to reveal its real structure in execution.</p>
+                <a class="read-link" href="articles/policy/scaling-community-healthcare-outreach.html">Read article →</a>
+                <div class="feature-links">
+                  <a href="#">Reference 1</a>
+                  <a href="#">Reference 2</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="center-lower">
+            <div class="card founder-card">
+              <div class="label">Founder Notebook</div>
+              <h2>Founder Notebook</h2>
+              <p>A weekly reflective note built from the past 5–6 days of work, mood, thought, and recurring patterns. If there is no meaningful signal, this section should remain blank.</p>
+              <p><strong>Current status:</strong> No notebook entry this week yet.</p>
             </div>
           </div>
         </div>
-      </aside>
-    </section>
+      </main>
 
-    <section class="lower-sections">
-      <div class="notebook-card">
-        <div class="label">Founder Notebook</div>
-        <h2>Founder Notebook</h2>
-        <p>A weekly reflective note drawn from the past 5–6 days of work, observation, mood, and recurring patterns.</p>
-        <p><strong>Current status:</strong> No notebook entry this week yet.</p>
-      </div>
-
-      <div class="archive-card">
-        <div class="label">Browse by Date</div>
-        <h2>Open a Day in Drishvara</h2>
-        <p>Select a date to view that day’s saved articles, signals, and daily modules as the archive layer becomes active.</p>
-
-        <div class="archive-form">
-          <input type="date" />
-          <button class="btn btn-secondary">Open that Day</button>
+      <aside class="right-col stack">
+        <div class="card">
+          <div class="label">Word of the Day</div>
+          <h2>Word of the Day</h2>
+          <p><strong>English:</strong> Reflection</p>
+          <p><strong>Hindi:</strong> मनन</p>
+          <p><strong>Sanskrit:</strong> मननम्</p>
+          <p><strong>Meaning:</strong> sustained inward consideration</p>
         </div>
-      </div>
+
+        <div class="card">
+          <div class="label">Today’s Vedic Guidance</div>
+          <h2>आज का वैदिक संकेत</h2>
+          <p><strong>वार:</strong> शुक्रवार</p>
+          <p><strong>अनुशंसित रंग:</strong> हल्का पीला / स्वर्णाभ</p>
+          <p><strong>भोजन संकेत:</strong> सात्त्विक, हल्का और संयमित</p>
+          <div class="mantra-box">ॐ श्रीं महालक्ष्म्यै नमः</div>
+          <p><strong>Today:</strong> A day oriented toward steadiness, grace, and thoughtful expression.</p>
+          <div class="utility-note">This module should later become rule-based, factual, location-aware, bilingual, and grounded in curated Hindu literature logic.</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Star Reflection</div>
+          <h2>What the stars say about you</h2>
+          <p>Enter your name and date of birth for a daily reflective reading.</p>
+          <div class="form-grid">
+            <input type="text" placeholder="Name" />
+            <input type="text" placeholder="Date of Birth (DD/MM/YYYY)" />
+            <select>
+              <option>English</option>
+              <option>Hindi</option>
+            </select>
+            <button class="btn btn-primary">See Today’s Reflection</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Panchang & Festival View</div>
+          <h2>Location-based Panchang</h2>
+          <p>Select a place so the app can later show sunrise, sunset, moonrise, moonset, panchang, and upcoming festivals in both Hindi and English.</p>
+
+          <div class="form-grid">
+            <select>
+              <option>Itanagar</option>
+              <option>Delhi</option>
+              <option>Mumbai</option>
+              <option>Kolkata</option>
+              <option>Guwahati</option>
+            </select>
+          </div>
+
+          <div class="mini-table">
+            <div class="mini-row"><strong>Sunrise</strong><span>06:13 AM</span></div>
+            <div class="mini-row"><strong>Sunset</strong><span>06:54 PM</span></div>
+            <div class="mini-row"><strong>Moonrise</strong><span>02:19 AM</span></div>
+            <div class="mini-row"><strong>Moonset</strong><span>11:49 AM</span></div>
+            <div class="mini-row"><strong>Tithi</strong><span>Ashtami → Navami</span></div>
+            <div class="mini-row"><strong>Nakshatra</strong><span>Purva Ashadha → Uttara Ashadha</span></div>
+            <div class="mini-row"><strong>Yoga</strong><span>Shiva → Siddha</span></div>
+            <div class="mini-row"><strong>Paksha</strong><span>Krishna Paksha</span></div>
+          </div>
+
+          <div class="festival-list">
+            <div class="festival-item">
+              <div class="sub">Upcoming Observance</div>
+              <div class="title">Kalashtami (Today)</div>
+              <div class="meta">Example festival listing block with future bilingual support.</div>
+            </div>
+
+            <div class="festival-item">
+              <div class="sub">Upcoming Observance</div>
+              <div class="title">Varuthini Ekadashi</div>
+              <div class="meta">Festival sequence and date should later come from the panchang layer.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Browse by Date</div>
+          <h2>Open a Day in Drishvara</h2>
+          <p>Select a date to view that day’s saved outputs — articles, signals, and daily modules.</p>
+          <div class="form-grid">
+            <input type="date" />
+            <button class="btn btn-secondary">Open that Day</button>
+          </div>
+        </div>
+      </aside>
+
     </section>
 
     <footer>
