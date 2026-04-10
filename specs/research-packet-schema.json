@@ -1,0 +1,62 @@
+{
+  "schema_name": "research_packet_schema",
+  "description": "Defines the structured research packet used before article writing.",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "angle": {
+      "type": "string"
+    },
+    "why_now": {
+      "type": "string"
+    },
+    "core_question": {
+      "type": "string"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "primary_reference_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "secondary_reference_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "counterview": {
+      "type": "string"
+    },
+    "image_note": {
+      "type": "string"
+    },
+    "risk_note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "category",
+    "title",
+    "angle",
+    "why_now",
+    "core_question"
+  ]
+}
