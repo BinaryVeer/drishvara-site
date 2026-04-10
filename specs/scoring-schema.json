@@ -1,0 +1,65 @@
+{
+  "schema_name": "scoring_schema",
+  "description": "Defines how Drishvara topic candidates are scored and ranked.",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string"
+    },
+    "ranked_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "candidate_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "buzz_score": {
+            "type": "number"
+          },
+          "intent_score": {
+            "type": "number"
+          },
+          "relevance_score": {
+            "type": "number"
+          },
+          "fit_score": {
+            "type": "number"
+          },
+          "depth_score": {
+            "type": "number"
+          },
+          "final_score": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "selected",
+              "developing",
+              "watching",
+              "archived"
+            ]
+          }
+        },
+        "required": [
+          "candidate_id",
+          "title",
+          "summary",
+          "final_score",
+          "status"
+        ]
+      }
+    }
+  },
+  "required": [
+    "category",
+    "ranked_candidates"
+  ]
+}
