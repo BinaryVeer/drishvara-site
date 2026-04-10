@@ -676,28 +676,13 @@
         <div class="card signal-card">
           <div class="label">Daily Signal Rail</div>
           <h2>Today’s Signals</h2>
-          <p>Shortlisted lines of movement and attention from the editorial engine. This is one of Drishvara’s core live reading surfaces.</p>
+          <p id="signal-rail-intro">Shortlisted lines of movement and attention from the editorial engine. This is one of Drishvara’s core live reading surfaces.</p>
 
-          <div class="signal-list">
+          <div class="signal-list" id="signal-rail-list">
             <div class="signal-item">
-              <div class="sub">World Affairs</div>
-              <div class="title">Strategic signalling is being mistaken for immediate escalation.</div>
-              <div class="meta">A slower reading suggests posture, message, and threshold management matter more than headline heat.</div>
-              <div class="status-badge">Selected</div>
-            </div>
-
-            <div class="signal-item">
-              <div class="sub">Media & Society</div>
-              <div class="title">Narrative framing is often more influential than overt opinion.</div>
-              <div class="meta">The real power of storytelling lies in what becomes visible and what quietly disappears.</div>
-              <div class="status-badge">Selected</div>
-            </div>
-
-            <div class="signal-item">
-              <div class="sub">Public Systems</div>
-              <div class="title">Delivery architecture reveals more than launch language.</div>
-              <div class="meta">Implementation remains the real test of administrative seriousness.</div>
-              <div class="status-badge">Developing</div>
+              <div class="sub">Loading</div>
+              <div class="title">Fetching today’s signals...</div>
+              <div class="meta">Please wait a moment.</div>
             </div>
           </div>
         </div>
@@ -871,5 +856,68 @@
       Drishvara © 2026 · A founder-led insight platform
     </footer>
   </div>
+
+  <script>
+    async function loadSignalRail() {
+      const railList = document.getElementById("signal-rail-list");
+      const railIntro = document.getElementById("signal-rail-intro");
+
+      if (!railList) return;
+
+      const today = new Date().toISOString().slice(0, 10);
+      const signalPath = `generated/signals/${today}-signal-rail.json`;
+
+      try {
+        const response = await fetch(signalPath, { cache: "no-store" });
+
+        if (!response.ok) {
+          throw new Error(`Signal file not found for ${today}`);
+        }
+
+        const data = await response.json();
+
+        if (!data.items || !Array.isArray(data.items) || data.items.length === 0) {
+          railList.innerHTML = `
+            <div class="signal-item">
+              <div class="sub">No signals yet</div>
+              <div class="title">Today’s shortlist is not available yet.</div>
+              <div class="meta">Please check back later.</div>
+            </div>
+          `;
+          return;
+        }
+
+        railIntro.textContent = `Shortlisted lines of movement and attention for ${today}.`;
+
+        railList.innerHTML = data.items.slice(0, 6).map(item => `
+          <div class="signal-item">
+            <div class="sub">${escapeHtml(item.category || "Signal")}</div>
+            <div class="title">${escapeHtml(item.title || "")}</div>
+            <div class="meta">${escapeHtml(item.summary || "")}</div>
+            ${item.status ? `<div class="status-badge">${escapeHtml(item.status)}</div>` : ""}
+          </div>
+        `).join("");
+      } catch (error) {
+        railList.innerHTML = `
+          <div class="signal-item">
+            <div class="sub">Signal Rail</div>
+            <div class="title">Today’s live signals are not available yet.</div>
+            <div class="meta">The system may still be generating or publishing today’s feed.</div>
+          </div>
+        `;
+      }
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    loadSignalRail();
+  </script>
 </body>
 </html>
