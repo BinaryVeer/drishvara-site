@@ -11,12 +11,14 @@
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
       --text-muted: #9aa8bc;
       --gold: #c9a24a;
       --gold-soft: rgba(201, 162, 74, 0.16);
+      --danger-soft: rgba(255, 210, 210, 0.08);
     }
 
     * {
@@ -33,42 +35,84 @@
       font-family: "Georgia", "Times New Roman", serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 50% 18%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 50% 12%, rgba(201, 162, 74, 0.08), transparent 18%),
         radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
-      text-align: center;
       overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
     .page {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 28px 20px 60px;
+      padding: 24px 20px 64px;
     }
 
     .nav {
       display: flex;
-      justify-content: center;
-      gap: 28px;
-      padding: 8px 0 30px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 8px 0 28px;
       flex-wrap: wrap;
     }
 
-    .nav a {
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo {
+      width: 42px;
+      height: auto;
+      display: block;
+    }
+
+    .nav-brand {
+      font-size: 1.2rem;
+      color: var(--text-main);
+      letter-spacing: 0.2px;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
       color: var(--text-soft);
-      text-decoration: none;
       font-size: 1rem;
       transition: color 0.2s ease;
     }
 
-    .nav a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--gold);
     }
 
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text-soft);
+      font-size: 0.92rem;
+    }
+
     .hero {
-      padding-top: 18px;
-      padding-bottom: 28px;
+      text-align: center;
+      padding: 18px 0 28px;
     }
 
     .logo-wrap {
@@ -82,15 +126,15 @@
     .logo-wrap::before {
       content: "";
       position: absolute;
-      width: 150px;
-      height: 150px;
+      width: 155px;
+      height: 155px;
       background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
       filter: blur(10px);
       border-radius: 50%;
       z-index: 0;
     }
 
-    .logo {
+    .hero-logo {
       position: relative;
       z-index: 1;
       width: 145px;
@@ -101,7 +145,7 @@
 
     h1 {
       margin: 0 0 10px;
-      font-size: clamp(3.4rem, 6.2vw, 5rem);
+      font-size: clamp(3.2rem, 6vw, 5rem);
       font-weight: 600;
       letter-spacing: 0.2px;
       line-height: 0.98;
@@ -109,16 +153,16 @@
     }
 
     .tagline {
-      margin-bottom: 18px;
-      font-size: clamp(1.2rem, 2.1vw, 1.55rem);
+      margin-bottom: 16px;
+      font-size: clamp(1.18rem, 2vw, 1.45rem);
       color: var(--text-soft);
       font-weight: 500;
     }
 
-    .sub {
+    .hero-sub {
       max-width: 780px;
-      margin: 0 auto 28px;
-      font-size: 1.06rem;
+      margin: 0 auto 24px;
+      font-size: 1.04rem;
       color: var(--text-muted);
       line-height: 1.85;
     }
@@ -131,7 +175,7 @@
     }
 
     .verse {
-      font-size: clamp(1.6rem, 2.7vw, 2rem);
+      font-size: clamp(1.45rem, 2.4vw, 1.85rem);
       line-height: 1.8;
       margin-bottom: 8px;
       font-family: "Noto Serif Devanagari", "Nirmala UI", "Mangal", serif;
@@ -139,78 +183,125 @@
     }
 
     .translit {
-      font-size: 1.06rem;
+      font-size: 1.02rem;
       color: var(--text-soft);
       font-style: italic;
       margin-bottom: 8px;
     }
 
     .meaning {
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
     }
 
-    .section {
-      margin-top: 60px;
-    }
-
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      color: var(--text-main);
-    }
-
-    .section-intro {
-      max-width: 760px;
-      margin: 0 auto 28px;
-      color: var(--text-muted);
-      line-height: 1.8;
-      font-size: 1rem;
-    }
-
-    .pillars {
+    .utility-strip {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      margin-top: 18px;
+      margin-top: 34px;
+      margin-bottom: 46px;
     }
 
-    .card {
+    .utility-card,
+    .panel,
+    .feature-card,
+    .notebook-card,
+    .archive-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 22px;
-      text-align: left;
       backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
     }
 
-    .card h3 {
-      margin: 0 0 10px;
+    .utility-card h2,
+    .panel h2,
+    .feature-card h3,
+    .notebook-card h2,
+    .archive-card h2 {
+      margin: 0 0 12px;
       color: var(--text-main);
-      font-size: 1.2rem;
+      line-height: 1.15;
     }
 
-    .card p {
-      margin: 0;
+    .utility-label {
+      color: var(--gold);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+    }
+
+    .utility-card p,
+    .panel p,
+    .feature-card p,
+    .notebook-card p,
+    .archive-card p {
+      margin: 0 0 12px;
       color: var(--text-muted);
-      line-height: 1.75;
+      line-height: 1.8;
       font-size: 0.98rem;
     }
 
-    .cta-row {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+    .utility-card p:last-child,
+    .panel p:last-child,
+    .feature-card p:last-child,
+    .notebook-card p:last-child,
+    .archive-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .word-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .word-line strong {
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .mantra-box {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(201, 162, 74, 0.06);
+      border: 1px solid rgba(201, 162, 74, 0.14);
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .star-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .star-form input,
+    .star-form select,
+    .archive-form input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 0.96rem;
+    }
+
+    .star-form input::placeholder {
+      color: #b8c2d3;
     }
 
     .btn {
       display: inline-block;
-      padding: 12px 20px;
+      padding: 11px 16px;
       border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.98rem;
+      border: none;
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
@@ -221,7 +312,8 @@
     }
 
     .btn-secondary {
-      border: 1px solid rgba(201, 162, 74, 0.45);
+      background: transparent;
+      border: 1px solid rgba(201, 162, 74, 0.35);
       color: var(--text-main);
     }
 
@@ -230,80 +322,194 @@
       opacity: 0.96;
     }
 
-    .sample-grid {
+    .content-row {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 2.1fr) minmax(280px, 0.95fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      color: var(--text-main);
+    }
+
+    .section-intro {
+      margin: 0 0 22px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-      margin-top: 20px;
     }
 
-    .sample {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 22px;
-      text-align: left;
-    }
-
-    .sample .label {
+    .feature-card .label {
       color: var(--gold);
       font-size: 0.86rem;
       margin-bottom: 10px;
     }
 
-    .sample h3 {
-      margin: 0 0 10px;
-      font-size: 1.1rem;
+    .feature-card h3 {
+      font-size: 1.18rem;
     }
 
-    .sample p {
-      margin: 0;
+    .read-link {
+      color: var(--gold);
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.95rem;
+    }
+
+    .read-link:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 18px;
+    }
+
+    .rail-list,
+    .sports-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .rail-item,
+    .sports-item {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .rail-item .label,
+    .sports-item .label {
+      color: var(--gold);
+      font-size: 0.82rem;
+      margin-bottom: 6px;
+    }
+
+    .rail-item .title,
+    .sports-item .title {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .rail-item .meta,
+    .sports-item .meta {
       color: var(--text-muted);
-      line-height: 1.7;
-      font-size: 0.96rem;
+      font-size: 0.84rem;
+      line-height: 1.5;
     }
 
-    .sample a {
-      color: inherit;
-      text-decoration: none;
+    .status-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(201, 162, 74, 0.08);
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      color: var(--gold);
+      font-size: 0.78rem;
+    }
+
+    .lower-sections {
+      display: grid;
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .notebook-card .label {
+      color: var(--gold);
+      font-size: 0.86rem;
+      margin-bottom: 8px;
+    }
+
+    .archive-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      margin-top: 14px;
+      align-items: center;
     }
 
     footer {
-      margin-top: 70px;
+      margin-top: 56px;
       padding-top: 24px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-muted);
       font-size: 0.95rem;
+      text-align: center;
     }
 
-    @media (max-width: 900px) {
-      .pillars,
-      .sample-grid {
+    .overlay-note {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .utility-strip,
+      .feature-grid,
+      .content-row {
+        grid-template-columns: 1fr;
+      }
+
+      .archive-form {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 768px) {
       .page {
-        padding: 20px 16px 44px;
-      }
-
-      .logo {
-        width: 112px;
-      }
-
-      .logo-wrap::before {
-        width: 130px;
-        height: 130px;
+        padding: 20px 16px 46px;
       }
 
       .nav {
-        gap: 18px;
-        padding-bottom: 24px;
+        justify-content: center;
       }
 
-      .sub,
-      .section-intro {
+      .nav-left,
+      .nav-links,
+      .lang-toggle {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero-logo {
+        width: 118px;
+      }
+
+      .logo-wrap::before {
+        width: 132px;
+        height: 132px;
+      }
+
+      .utility-card,
+      .panel,
+      .feature-card,
+      .notebook-card,
+      .archive-card {
+        padding: 20px;
+      }
+
+      .hero-sub,
+      .section-intro,
+      .utility-card p,
+      .panel p,
+      .feature-card p,
+      .notebook-card p,
+      .archive-card p {
         font-size: 1rem;
         line-height: 1.8;
       }
@@ -312,25 +518,34 @@
 </head>
 <body>
   <div class="page">
+
     <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="insights.html">Insights</a>
-      <a href="contact.html">Contact</a>
+      <div class="nav-left">
+        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="nav-logo" />
+        <div class="nav-brand">Drishvara</div>
+      </div>
+
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="insights.html">Insights</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <div class="lang-toggle">EN | हिन्दी</div>
     </nav>
 
     <section class="hero">
       <div class="logo-wrap">
-        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
+        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="hero-logo" />
       </div>
 
       <h1>Drishvara</h1>
 
       <div class="tagline">Vision. Reflection. Insight.</div>
 
-      <div class="sub">
-        A founder-led insight platform taking shape.<br />
-        Spirituality, sports, world affairs, media, and public programmes — viewed with depth and clarity.
+      <div class="hero-sub">
+        A founder-led platform for signal, meaning, and daily observation across spirituality, world affairs, media, public systems, and the overlooked textures of life.
       </div>
 
       <div class="divider"></div>
@@ -339,67 +554,161 @@
       <div class="translit">dṛṣṭiḥ vistīrṇā, mananaṃ gambhīram.</div>
       <div class="meaning">Vision broad, reflection deep.</div>
 
-      <div class="cta-row">
-        <a class="btn btn-primary" href="insights.html">Explore Insights</a>
-        <a class="btn btn-secondary" href="about.html">About Drishvara</a>
+      <div class="overlay-note">
+        Upcoming entry layer: <strong>First Light — 24h across India</strong>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Five Pillars</h2>
-      <div class="section-intro">
-        Drishvara is being shaped around five recurring domains of thought and observation.
+    <section class="utility-strip">
+      <div class="utility-card">
+        <div class="utility-label">Word of the Day</div>
+        <h2>Word of the Day</h2>
+        <div class="word-stack">
+          <div class="word-line"><strong>English:</strong> Reflection</div>
+          <div class="word-line"><strong>Hindi:</strong> मनन</div>
+          <div class="word-line"><strong>Sanskrit:</strong> मननम्</div>
+          <div class="word-line"><strong>Meaning:</strong> sustained inward consideration</div>
+        </div>
       </div>
 
-      <div class="pillars">
-        <div class="card">
-          <h3>Spirituality</h3>
-          <p>Reflective writing, philosophical inquiry, symbolism, and inner life framed with seriousness and clarity.</p>
-        </div>
-        <div class="card">
-          <h3>Sports</h3>
-          <p>Stories of competition, momentum, discipline, and turning points — beyond just scores and headlines.</p>
-        </div>
-        <div class="card">
-          <h3>World Affairs</h3>
-          <p>International relations, conflicts, power shifts, and long-form observation of the global order.</p>
-        </div>
-        <div class="card">
-          <h3>Media & Culture</h3>
-          <p>Film, image, narrative, and influence — read not just as entertainment, but as signals of the age.</p>
-        </div>
-        <div class="card">
-          <h3>Public Programmes</h3>
-          <p>Insight-led coverage of Indian Union and State schemes, institutions, execution realities, and public meaning.</p>
-        </div>
-        <div class="card">
-          <h3>Founder's Notebook</h3>
-          <p>A personal but disciplined line of thought — synthesis, commentary, frameworks, and slower reflections.</p>
+      <div class="utility-card">
+        <div class="utility-label">Today’s Vedic Guidance</div>
+        <h2>आज का वैदिक संकेत</h2>
+        <p><strong>वार:</strong> शुक्रवार</p>
+        <p><strong>अनुशंसित रंग:</strong> हल्का पीला / स्वर्णाभ</p>
+        <p><strong>भोजन संकेत:</strong> सात्त्विक, हल्का और संयमित</p>
+        <div class="mantra-box">ॐ श्रीं महालक्ष्म्यै नमः</div>
+        <p><strong>Today:</strong> A day oriented toward steadiness, grace, and thoughtful expression.</p>
+      </div>
+
+      <div class="utility-card">
+        <div class="utility-label">Star Reflection</div>
+        <h2>What the stars say about you</h2>
+        <p>Enter your name and date of birth for a daily reflective reading.</p>
+        <div class="star-form">
+          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Date of Birth (DD/MM/YYYY)" />
+          <select>
+            <option>English</option>
+            <option>Hindi</option>
+          </select>
+          <button class="btn btn-primary">See Today’s Reflection</button>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Sample Reading Space</h2>
-      <div class="section-intro">
-        These are placeholder entries for the structure we’ll expand next.
+    <section class="content-row">
+      <div class="main-column">
+        <h2 class="section-title">Featured Reads</h2>
+        <p class="section-intro">
+          The day’s primary readings across the main editorial streams of Drishvara.
+        </p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="label">Spirituality</div>
+            <h3><a href="articles/spiritual/how-attention-becomes-worship.html">How attention becomes a form of worship</a></h3>
+            <p>A reflection on attention, stillness, and inward discipline as the beginning of a deeper spiritual life.</p>
+            <a class="read-link" href="articles/spiritual/how-attention-becomes-worship.html">Read article →</a>
+          </div>
+
+          <div class="feature-card">
+            <div class="label">World Affairs</div>
+            <h3><a href="articles/world/reading-confrontation-beyond-headlines.html">Reading confrontation beyond headlines</a></h3>
+            <p>A slower reading of conflict, signalling, and the strategic structures hidden beneath visible escalation.</p>
+            <a class="read-link" href="articles/world/reading-confrontation-beyond-headlines.html">Read article →</a>
+          </div>
+
+          <div class="feature-card">
+            <div class="label">Media & Society</div>
+            <h3><a href="articles/media/what-narratives-make-visible.html">What narratives make visible</a></h3>
+            <p>A reading of cinema and perception, using Dhurandhar as a reference for how stories direct attention.</p>
+            <a class="read-link" href="articles/media/what-narratives-make-visible.html">Read article →</a>
+          </div>
+
+          <div class="feature-card">
+            <div class="label">Public Programmes</div>
+            <h3><a href="articles/policy/scaling-community-healthcare-outreach.html">Scaling community healthcare outreach</a></h3>
+            <p>An implementation-grounded look at how public service delivery begins to reveal its real structure in execution.</p>
+            <a class="read-link" href="articles/policy/scaling-community-healthcare-outreach.html">Read article →</a>
+          </div>
+        </div>
       </div>
 
-      <div class="sample-grid">
-        <div class="sample">
-          <div class="label">Spirituality</div>
-          <h3><a href="articles/spiritual/how-attention-becomes-worship.html">How attention becomes a form of worship</a></h3>
-          <p>A sample long-form reflection on observation, stillness, and meaning.</p>
+      <aside class="sidebar">
+        <div class="panel">
+          <div class="utility-label">Daily Signal Rail</div>
+          <h2>Today’s Signals</h2>
+          <p>Shortlisted lines of movement and attention from the day’s editorial engine.</p>
+
+          <div class="rail-list">
+            <div class="rail-item">
+              <div class="label">World Affairs</div>
+              <div class="title">Strategic signalling is being mistaken for immediate escalation.</div>
+              <div class="meta">Watching the deeper structure beneath visible confrontation.</div>
+              <div class="status-badge">Selected</div>
+            </div>
+
+            <div class="rail-item">
+              <div class="label">Media & Society</div>
+              <div class="title">Narrative framing is often more influential than overt opinion.</div>
+              <div class="meta">Dhurandhar as a lens into what cinema chooses to foreground.</div>
+              <div class="status-badge">Selected</div>
+            </div>
+
+            <div class="rail-item">
+              <div class="label">Public Systems</div>
+              <div class="title">Delivery architecture reveals more than launch language.</div>
+              <div class="meta">Implementation remains the real test of public systems.</div>
+              <div class="status-badge">Developing</div>
+            </div>
+          </div>
         </div>
-        <div class="sample">
-          <div class="label">World Affairs</div>
-          <h3><a href="articles/world/reading-confrontation-beyond-headlines.html">Reading confrontation beyond headlines</a></h3>
-          <p>A sample strategic note on how narratives shape perception in international conflict.</p>
+
+        <div class="panel">
+          <div class="utility-label">Sports Desk</div>
+          <h2>Sports Desk</h2>
+          <p>Major tournaments, results, standings, and Indian/global highlights across key sports.</p>
+
+          <div class="sports-list">
+            <div class="sports-item">
+              <div class="label">Cricket</div>
+              <div class="title">Tournament watch and key match outcome placeholder</div>
+              <div class="meta">Results, next fixtures, and points-table movement will appear here.</div>
+            </div>
+
+            <div class="sports-item">
+              <div class="label">Football</div>
+              <div class="title">Daily league and tournament summary placeholder</div>
+              <div class="meta">Major global and Indian football notes will surface here.</div>
+            </div>
+
+            <div class="sports-item">
+              <div class="label">Other Sports</div>
+              <div class="title">Tennis, hockey, badminton, chess, basketball, Olympics</div>
+              <div class="meta">Selected highlights and one-line significance notes.</div>
+            </div>
+          </div>
         </div>
-        <div class="sample">
-          <div class="label">Public Programmes</div>
-          <h3><a href="articles/policy/when-implementation-tells-the-real-story.html">When implementation tells the real story</a></h3>
-          <p>A sample field-grounded view of how policy lives differently on paper and in practice.</p>
+      </aside>
+    </section>
+
+    <section class="lower-sections">
+      <div class="notebook-card">
+        <div class="label">Founder Notebook</div>
+        <h2>Founder Notebook</h2>
+        <p>A weekly reflective note drawn from the past 5–6 days of work, observation, mood, and recurring patterns.</p>
+        <p><strong>Current status:</strong> No notebook entry this week yet.</p>
+      </div>
+
+      <div class="archive-card">
+        <div class="label">Browse by Date</div>
+        <h2>Open a Day in Drishvara</h2>
+        <p>Select a date to view that day’s saved articles, signals, and daily modules as the archive layer becomes active.</p>
+
+        <div class="archive-form">
+          <input type="date" />
+          <button class="btn btn-secondary">Open that Day</button>
         </div>
       </div>
     </section>
