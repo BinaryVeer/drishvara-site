@@ -319,8 +319,8 @@
     .festival-item {
       padding: 12px 14px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
       font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -386,13 +386,13 @@
       border-radius: 20px;
       overflow: hidden;
       backdrop-filter: blur(6px);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
     }
 
     .feature-image {
       height: 170px;
-      background: linear-gradient(135deg, rgba(201, 162, 74, 0.18), rgba(255, 255, 255, 0.05));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05));
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -458,8 +458,8 @@
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
       color: var(--text-main);
       font-size: 0.95rem;
     }
@@ -507,8 +507,8 @@
       gap: 10px;
       padding: 10px 12px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
       font-size: 0.92rem;
       font-family: Arial, Helvetica, sans-serif;
     }
@@ -539,7 +539,7 @@
     footer {
       margin-top: 60px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255,255,255,0.08);
       color: var(--text-muted);
       font-size: 0.95rem;
       text-align: center;
@@ -708,60 +708,13 @@
             The main reading surface of Drishvara. Each article should eventually carry one related image, concise depth, and two factual external references.
           </p>
 
-          <div class="feature-grid">
+          <div class="feature-grid" id="featured-reads-grid">
             <div class="feature-card">
-              <div class="feature-image">Article image placeholder</div>
+              <div class="feature-image">Loading article...</div>
               <div class="feature-body">
-                <div class="label">Spirituality</div>
-                <h3><a href="articles/spiritual/how-attention-becomes-worship.html">How attention becomes a form of worship</a></h3>
-                <p>A reflection on attention, stillness, and inward discipline as the beginning of a deeper spiritual life.</p>
-                <a class="read-link" href="articles/spiritual/how-attention-becomes-worship.html">Read article →</a>
-                <div class="feature-links">
-                  <a href="#">Reference 1</a>
-                  <a href="#">Reference 2</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-image">Article image placeholder</div>
-              <div class="feature-body">
-                <div class="label">World Affairs</div>
-                <h3><a href="articles/world/reading-confrontation-beyond-headlines.html">Reading confrontation beyond headlines</a></h3>
-                <p>A slower reading of conflict, signalling, and the strategic structures hidden beneath visible escalation.</p>
-                <a class="read-link" href="articles/world/reading-confrontation-beyond-headlines.html">Read article →</a>
-                <div class="feature-links">
-                  <a href="#">Reference 1</a>
-                  <a href="#">Reference 2</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-image">Article image placeholder</div>
-              <div class="feature-body">
-                <div class="label">Media & Society</div>
-                <h3><a href="articles/media/what-narratives-make-visible.html">What narratives make visible</a></h3>
-                <p>A reading of cinema and perception, using Dhurandhar as a reference for how stories direct attention.</p>
-                <a class="read-link" href="articles/media/what-narratives-make-visible.html">Read article →</a>
-                <div class="feature-links">
-                  <a href="#">Reference 1</a>
-                  <a href="#">Reference 2</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-image">Article image placeholder</div>
-              <div class="feature-body">
-                <div class="label">Public Programmes</div>
-                <h3><a href="articles/policy/scaling-community-healthcare-outreach.html">Scaling community healthcare outreach</a></h3>
-                <p>An implementation-grounded look at how public service delivery begins to reveal its real structure in execution.</p>
-                <a class="read-link" href="articles/policy/scaling-community-healthcare-outreach.html">Read article →</a>
-                <div class="feature-links">
-                  <a href="#">Reference 1</a>
-                  <a href="#">Reference 2</a>
-                </div>
+                <div class="label">Loading</div>
+                <h3>Fetching featured reads...</h3>
+                <p>Please wait a moment.</p>
               </div>
             </div>
           </div>
@@ -923,6 +876,120 @@
       }
     }
 
+    async function loadFeaturedReads() {
+      const grid = document.getElementById("featured-reads-grid");
+      if (!grid) return;
+
+      const today = new Date().toISOString().slice(0, 10);
+
+      const categories = [
+        {
+          key: "spirituality",
+          folder: "spiritual",
+          label: "Spirituality"
+        },
+        {
+          key: "world_affairs",
+          folder: "world",
+          label: "World Affairs"
+        },
+        {
+          key: "media_society",
+          folder: "media",
+          label: "Media & Society"
+        },
+        {
+          key: "public_programmes",
+          folder: "policy",
+          label: "Public Programmes"
+        }
+      ];
+
+      try {
+        const results = await Promise.all(
+          categories.map(async (category) => {
+            const draftPath = `generated/drafts/${today}-${category.key}.json`;
+            const response = await fetch(draftPath, { cache: "no-store" });
+
+            if (!response.ok) {
+              return null;
+            }
+
+            const data = await response.json();
+            const packet = data && data.draft_packet ? data.draft_packet : null;
+
+            if (!packet || !packet.title || !packet.slug) {
+              return null;
+            }
+
+            return {
+              label: packet.meta_label || category.label,
+              title: packet.title,
+              subtitle: packet.subtitle || "",
+              slug: sanitizeSlug(packet.slug),
+              folder: category.folder
+            };
+          })
+        );
+
+        const validResults = results.filter(Boolean);
+
+        if (!validResults.length) {
+          grid.innerHTML = `
+            <div class="feature-card">
+              <div class="feature-image">No featured reads yet</div>
+              <div class="feature-body">
+                <div class="label">Featured Reads</div>
+                <h3>Today’s featured articles are not available yet.</h3>
+                <p>The publishing system may still be generating or publishing today’s content.</p>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = validResults.map(item => `
+          <div class="feature-card">
+            <div class="feature-image">Article image placeholder</div>
+            <div class="feature-body">
+              <div class="label">${escapeHtml(item.label)}</div>
+              <h3>
+                <a href="articles/${escapeHtml(item.folder)}/${escapeHtml(item.slug)}.html">
+                  ${escapeHtml(item.title)}
+                </a>
+              </h3>
+              <p>${escapeHtml(item.subtitle || "Daily editorial selection from Drishvara.")}</p>
+              <a class="read-link" href="articles/${escapeHtml(item.folder)}/${escapeHtml(item.slug)}.html">Read article →</a>
+              <div class="feature-links">
+                <a href="#">Reference 1</a>
+                <a href="#">Reference 2</a>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      } catch (error) {
+        grid.innerHTML = `
+          <div class="feature-card">
+            <div class="feature-image">Featured reads unavailable</div>
+            <div class="feature-body">
+              <div class="label">Featured Reads</div>
+              <h3>Could not load today’s featured reads.</h3>
+              <p>Please check again shortly.</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function sanitizeSlug(slug) {
+      return String(slug || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9-]+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
     function escapeHtml(value) {
       return String(value || "")
         .replace(/&/g, "&amp;")
@@ -933,6 +1000,7 @@
     }
 
     loadSignalRail();
+    loadFeaturedReads();
   </script>
 </body>
 </html>
