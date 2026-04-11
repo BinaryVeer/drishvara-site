@@ -1,5 +1,3 @@
-import OpenAI from "openai";
-
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -67,20 +65,14 @@ export default async function handler(req, res) {
   const model = OPENAI_MODEL || "gpt-5";
   const today = new Date().toISOString().slice(0, 10);
 
-  let client;
   try {
-    client = new OpenAI({ apiKey: OPENAI_API_KEY });
-  } catch (error) {
-    return res.status(500).json({
-      ok: false,
-      error: `OpenAI client init failed: ${error.message || "Unknown error"}`
+    const candidateBundle = await generateCandidateBundle({
+      apiKey: OPENAI_API_KEY,
+      model,
+      today
     });
-  }
 
-  try {
-    const candidateBundle = await generateCandidateBundle(client, model, today);
     const signalRail = buildSignalRail(today, candidateBundle);
-
     const filesWritten = [];
 
     const candidatesPath = `generated/daily/${today}-candidates.json`;
@@ -111,7 +103,9 @@ export default async function handler(req, res) {
       const categoryMeta = CATEGORY_META[categoryKey];
       const selectedCandidate = pickCandidateForCategory(candidateBundle, categoryKey);
 
-      const generated = await generateArticleDraft(client, model, {
+      const generated = await generateArticleDraft({
+        apiKey: OPENAI_API_KEY,
+        model,
         today,
         categoryKey,
         categoryMeta,
@@ -127,7 +121,6 @@ export default async function handler(req, res) {
       });
 
       const draftPath = `generated/drafts/${today}-${categoryKey}.json`;
-
       await upsertGitHubFile({
         token: GITHUB_TOKEN,
         owner: GITHUB_OWNER,
@@ -141,7 +134,6 @@ export default async function handler(req, res) {
           draft_packet: draftPacket
         }
       });
-
       filesWritten.push(draftPath);
     }
 
@@ -159,7 +151,7 @@ export default async function handler(req, res) {
   }
 }
 
-async function generateCandidateBundle(client, model, today) {
+async function generateCandidateBundle({ apiKey, model, today }) {
   const prompt = `
 You are preparing Drishvara's daily editorial shortlist for ${today}.
 
@@ -195,7 +187,7 @@ Return JSON in this shape:
 }
 `;
 
-  const parsed = await callModelForJson(client, model, prompt);
+  const parsed = await callOpenAIForJson({ apiKey, model, prompt });
 
   const rawCandidates = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
   const normalized = rawCandidates
@@ -208,6 +200,156 @@ Return JSON in this shape:
     date: today,
     generated_at: new Date().toISOString(),
     candidates: ensured
+  };
+}
+
+async function generateArticleDraft({
+  apiKey,
+  model,
+  today,
+  categoryKey,
+  categoryMeta,
+  candidate
+}) {
+  const prompt = `
+Write one polished Drishvara article for the category "${categoryMeta.label}".
+
+Date: ${today}
+Category key: ${categoryKey}
+Selected topic title: ${candidate.title}
+Selected angle: ${candidate.angle || ""}
+Selected summary: ${candidate.summary}
+
+Requirements:
+- Tone: thoughtful, grounded, reflective, readable, non-hyperbolic
+- Length: target 400 to 550 words
+- Output must be valid JSON only
+- Provide:
+  1. title
+  2. slug
+  3. subtitle
+  4. summary
+  5. image
+  6. reference_links
+  7. official_link
+  8. supporting_link
+  9. article_html
+
+Rules:
+- article_html must contain clean HTML paragraphs only
+- no markdown
+- no bullet lists
+- no tables
+- no fabricated sources
+- use concise, strong subtext rather than exaggerated claims
+- subtitle should be short and publication-ready
+- summary should work as a card description
+- slug must be URL-safe
+- reference_links should contain up to 2 factual external links if truly relevant, otherwise use empty strings
+- official_link should only be used if there is a clear official page
+- supporting_link should only be used if there is a useful secondary factual source
+
+Return JSON in this exact shape:
+{
+  "title": "",
+  "slug": "",
+  "subtitle": "",
+  "summary": "",
+  "image": "",
+  "reference_links": ["", ""],
+  "official_link": "",
+  "supporting_link": "",
+  "article_html": "<p>...</p><p>...</p>"
+}
+`;
+
+  return callOpenAIForJson({ apiKey, model, prompt });
+}
+
+async function callOpenAIForJson({ apiKey, model, prompt }) {
+  const response = await fetch("https://api.openai.com/v1/responses", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model,
+      input: prompt
+    })
+  });
+
+  const rawText = await response.text();
+
+  if (!response.ok) {
+    throw new Error(`OpenAI request failed: ${response.status} ${rawText}`);
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(rawText);
+  } catch {
+    throw new Error(`OpenAI returned non-JSON API response: ${rawText}`);
+  }
+
+  const outputText = safeText(payload?.output_text);
+  if (!outputText) {
+    throw new Error(`OpenAI response missing output_text: ${rawText}`);
+  }
+
+  const direct = tryParseJson(outputText);
+  if (direct) return direct;
+
+  const extracted = extractJsonBlock(outputText);
+  const reparsed = extracted ? tryParseJson(extracted) : null;
+  if (reparsed) return reparsed;
+
+  throw new Error(`Model output was not valid JSON: ${outputText}`);
+}
+
+function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generated }) {
+  return {
+    date: today,
+    meta_label: categoryMeta.label,
+    title: safeText(generated?.title, candidate.title || `${categoryMeta.label} Insight`),
+    slug: sanitizeSlug(
+      generated?.slug ||
+      generated?.title ||
+      candidate.title ||
+      `${categoryKey}-insight-${today}`
+    ),
+    subtitle: safeText(
+      generated?.subtitle,
+      candidate.summary || "A daily editorial selection from Drishvara."
+    ),
+    summary: safeText(
+      generated?.summary,
+      candidate.summary || "A daily editorial selection from Drishvara."
+    ),
+    image: safeText(generated?.image, getDefaultImageForCategory(categoryKey)),
+    reference_links: normalizeReferenceLinks(generated?.reference_links),
+    official_link: safeText(generated?.official_link),
+    supporting_link: safeText(generated?.supporting_link),
+    word_count_target: "400-550",
+    article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta)
+  };
+}
+
+function buildSignalRail(today, candidateBundle) {
+  const items = GENERATION_CATEGORIES.map((categoryKey) => {
+    const candidate = pickCandidateForCategory(candidateBundle, categoryKey);
+    return {
+      category: CATEGORY_META[categoryKey].label,
+      title: candidate.title,
+      summary: candidate.summary,
+      status: "Selected"
+    };
+  });
+
+  return {
+    date: today,
+    generated_at: new Date().toISOString(),
+    items
   };
 }
 
@@ -243,7 +385,6 @@ function ensureCategoryCoverage(today, candidates) {
   for (const categoryKey of GENERATION_CATEGORIES) {
     const categoryItems = output.filter((x) => x.category === categoryKey);
     const alreadySelected = categoryItems.find((x) => x.selected);
-
     if (!alreadySelected && categoryItems.length) {
       categoryItems[0].selected = true;
     }
@@ -304,153 +445,6 @@ function pickCandidateForCategory(candidateBundle, categoryKey) {
   );
 }
 
-function buildSignalRail(today, candidateBundle) {
-  const items = GENERATION_CATEGORIES.map((categoryKey) => {
-    const candidate = pickCandidateForCategory(candidateBundle, categoryKey);
-    return {
-      category: CATEGORY_META[categoryKey].label,
-      title: candidate.title,
-      summary: candidate.summary,
-      status: "Selected"
-    };
-  });
-
-  return {
-    date: today,
-    generated_at: new Date().toISOString(),
-    items
-  };
-}
-
-async function generateArticleDraft(client, model, { today, categoryKey, categoryMeta, candidate }) {
-  const contentInstruction = `
-Write one polished Drishvara article for the category "${categoryMeta.label}".
-
-Date: ${today}
-Category key: ${categoryKey}
-Selected topic title: ${candidate.title}
-Selected angle: ${candidate.angle || ""}
-Selected summary: ${candidate.summary}
-
-Requirements:
-- Tone: thoughtful, grounded, reflective, readable, non-hyperbolic
-- Length: target 400 to 550 words
-- Output must be valid JSON only
-- Provide:
-  1. title
-  2. slug
-  3. subtitle
-  4. summary
-  5. image
-  6. reference_links
-  7. official_link
-  8. supporting_link
-  9. article_html
-
-Rules:
-- article_html must contain clean HTML paragraphs only
-- no markdown
-- no bullet lists
-- no tables
-- no fabricated sources
-- use concise, strong subtext rather than exaggerated claims
-- subtitle should be short and publication-ready
-- summary should work as a card description
-- slug must be URL-safe
-- reference_links should contain up to 2 factual external links if truly relevant, otherwise use empty strings
-- official_link should only be used if there is a clear official page
-- supporting_link should only be used if there is a useful secondary factual source
-
-Return JSON in this exact shape:
-{
-  "title": "",
-  "slug": "",
-  "subtitle": "",
-  "summary": "",
-  "image": "",
-  "reference_links": ["", ""],
-  "official_link": "",
-  "supporting_link": "",
-  "article_html": "<p>...</p><p>...</p>"
-}
-`;
-
-  return callModelForJson(client, model, contentInstruction);
-}
-
-function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generated }) {
-  return {
-    date: today,
-    meta_label: categoryMeta.label,
-    title: safeText(generated?.title, candidate.title || `${categoryMeta.label} Insight`),
-    slug: sanitizeSlug(
-      generated?.slug ||
-      generated?.title ||
-      candidate.title ||
-      `${categoryKey}-insight-${today}`
-    ),
-    subtitle: safeText(
-      generated?.subtitle,
-      candidate.summary || "A daily editorial selection from Drishvara."
-    ),
-    summary: safeText(
-      generated?.summary,
-      candidate.summary || "A daily editorial selection from Drishvara."
-    ),
-    image: safeText(generated?.image, getDefaultImageForCategory(categoryKey)),
-    reference_links: normalizeReferenceLinks(generated?.reference_links),
-    official_link: safeText(generated?.official_link),
-    supporting_link: safeText(generated?.supporting_link),
-    word_count_target: "400-550",
-    article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta)
-  };
-}
-
-async function callModelForJson(client, model, prompt) {
-  let response;
-
-  try {
-    response = await client.responses.create({
-      model,
-      input: prompt
-    });
-  } catch (error) {
-    throw new Error(`OpenAI request failed: ${error.message || "Unknown error"}`);
-  }
-
-  const text = safeText(response?.output_text);
-  if (!text) {
-    throw new Error("Model returned empty output");
-  }
-
-  const parsed = tryParseJson(text);
-  if (parsed) return parsed;
-
-  const extracted = extractJsonBlock(text);
-  const reparsed = extracted ? tryParseJson(extracted) : null;
-  if (reparsed) return reparsed;
-
-  throw new Error("Model output was not valid JSON");
-}
-
-function tryParseJson(text) {
-  try {
-    return JSON.parse(text);
-  } catch {
-    return null;
-  }
-}
-
-function extractJsonBlock(text) {
-  const trimmed = String(text || "").trim();
-  const firstBrace = trimmed.indexOf("{");
-  const lastBrace = trimmed.lastIndexOf("}");
-  if (firstBrace === -1 || lastBrace === -1 || lastBrace <= firstBrace) {
-    return null;
-  }
-  return trimmed.slice(firstBrace, lastBrace + 1);
-}
-
 function normalizeReferenceLinks(input) {
   if (!Array.isArray(input)) return [];
   return input
@@ -499,6 +493,24 @@ function sanitizeSlug(value) {
     .replace(/[^a-z0-9-]+/g, "-")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function tryParseJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+function extractJsonBlock(text) {
+  const trimmed = String(text || "").trim();
+  const firstBrace = trimmed.indexOf("{");
+  const lastBrace = trimmed.lastIndexOf("}");
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace <= firstBrace) {
+    return null;
+  }
+  return trimmed.slice(firstBrace, lastBrace + 1);
 }
 
 function escapeHtml(value) {
