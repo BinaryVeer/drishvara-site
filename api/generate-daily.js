@@ -1,9 +1,5 @@
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -47,6 +43,7 @@ export default async function handler(req, res) {
 
   const {
     OPENAI_API_KEY,
+    OPENAI_MODEL,
     GITHUB_TOKEN,
     GITHUB_OWNER,
     GITHUB_REPO,
@@ -67,10 +64,21 @@ export default async function handler(req, res) {
     });
   }
 
+  const model = OPENAI_MODEL || "gpt-5";
   const today = new Date().toISOString().slice(0, 10);
 
+  let client;
   try {
-    const candidateBundle = await generateCandidateBundle(today);
+    client = new OpenAI({ apiKey: OPENAI_API_KEY });
+  } catch (error) {
+    return res.status(500).json({
+      ok: false,
+      error: `OpenAI client init failed: ${error.message || "Unknown error"}`
+    });
+  }
+
+  try {
+    const candidateBundle = await generateCandidateBundle(client, model, today);
     const signalRail = buildSignalRail(today, candidateBundle);
 
     const filesWritten = [];
@@ -103,7 +111,7 @@ export default async function handler(req, res) {
       const categoryMeta = CATEGORY_META[categoryKey];
       const selectedCandidate = pickCandidateForCategory(candidateBundle, categoryKey);
 
-      const generated = await generateArticleDraft({
+      const generated = await generateArticleDraft(client, model, {
         today,
         categoryKey,
         categoryMeta,
@@ -151,7 +159,7 @@ export default async function handler(req, res) {
   }
 }
 
-async function generateCandidateBundle(today) {
+async function generateCandidateBundle(client, model, today) {
   const prompt = `
 You are preparing Drishvara's daily editorial shortlist for ${today}.
 
@@ -187,7 +195,7 @@ Return JSON in this shape:
 }
 `;
 
-  const parsed = await callModelForJson(prompt);
+  const parsed = await callModelForJson(client, model, prompt);
 
   const rawCandidates = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
   const normalized = rawCandidates
@@ -232,17 +240,12 @@ function ensureCategoryCoverage(today, candidates) {
     }
   }
 
-  const selectedSeen = new Set();
   for (const categoryKey of GENERATION_CATEGORIES) {
     const categoryItems = output.filter((x) => x.category === categoryKey);
     const alreadySelected = categoryItems.find((x) => x.selected);
 
     if (!alreadySelected && categoryItems.length) {
       categoryItems[0].selected = true;
-    }
-
-    if (!selectedSeen.has(categoryKey)) {
-      selectedSeen.add(categoryKey);
     }
   }
 
@@ -294,7 +297,11 @@ function pickCandidateForCategory(candidateBundle, categoryKey) {
     ? candidateBundle.candidates.filter((x) => x.category === categoryKey)
     : [];
 
-  return candidates.find((x) => x.selected) || candidates[0] || getFallbackCandidate(candidateBundle?.date || "", categoryKey);
+  return (
+    candidates.find((x) => x.selected) ||
+    candidates[0] ||
+    getFallbackCandidate(candidateBundle?.date || "", categoryKey)
+  );
 }
 
 function buildSignalRail(today, candidateBundle) {
@@ -315,11 +322,12 @@ function buildSignalRail(today, candidateBundle) {
   };
 }
 
-async function generateArticleDraft({ today, categoryKey, categoryMeta, candidate }) {
+async function generateArticleDraft(client, model, { today, categoryKey, categoryMeta, candidate }) {
   const contentInstruction = `
 Write one polished Drishvara article for the category "${categoryMeta.label}".
 
 Date: ${today}
+Category key: ${categoryKey}
 Selected topic title: ${candidate.title}
 Selected angle: ${candidate.angle || ""}
 Selected summary: ${candidate.summary}
@@ -367,7 +375,7 @@ Return JSON in this exact shape:
 }
 `;
 
-  return callModelForJson(contentInstruction);
+  return callModelForJson(client, model, contentInstruction);
 }
 
 function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generated }) {
@@ -398,11 +406,17 @@ function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generat
   };
 }
 
-async function callModelForJson(prompt) {
-  const response = await client.responses.create({
-    model: "gpt-5.4",
-    input: prompt
-  });
+async function callModelForJson(client, model, prompt) {
+  let response;
+
+  try {
+    response = await client.responses.create({
+      model,
+      input: prompt
+    });
+  } catch (error) {
+    throw new Error(`OpenAI request failed: ${error.message || "Unknown error"}`);
+  }
 
   const text = safeText(response?.output_text);
   if (!text) {
