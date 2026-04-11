@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Evolution of Athlete Mental Health Programs in Professional Sports | Drishvara</title>
+  <meta name="description" content="This article explores the growing recognition of mental health in sports, the development of comprehensive support systems, and their impact on athlete performance and career longevity." />
+  <link rel="icon" type="image/png" href="/assets/logo/logo.png" />
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.08), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-main);
+    }
+
+    .brand img {
+      width: 38px;
+      height: auto;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 1.12rem;
+      letter-spacing: 0.2px;
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-nav a {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .topbar-nav a:hover {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .article-shell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 26px;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .category-pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--text-soft);
+    }
+
+    .summary-box {
+      margin: 0 0 22px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 280px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+      background:
+        linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05)),
+        url('assets/featured/fallback/sports-default.jpg');
+      background-size: cover;
+      background-position: center;
+      display: block;
+    }
+
+    .article-body {
+      color: var(--text-main);
+      font-size: 1.02rem;
+      line-height: 1.95;
+    }
+
+    .article-body p {
+      margin: 0 0 18px;
+    }
+
+    .resource-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .resource-section h2 {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      color: var(--text-main);
+    }
+
+    .resource-links {
+      display: grid;
+      gap: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .resource-links a {
+      color: var(--gold);
+      word-break: break-word;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 20px 16px 48px;
+      }
+
+      .article-shell {
+        padding: 22px 18px;
+      }
+
+      .hero-image {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">
+        <img src="/assets/logo/logo.png" alt="Drishvara logo" />
+        <div class="brand-name">Drishvara</div>
+      </div>
+
+      <div class="topbar-nav">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+
+    <article class="article-shell">
+      <div class="meta-row">
+        <span class="category-pill">Sports</span>
+        <span>11 April 2026</span>
+      </div>
+
+      <h1>The Evolution of Athlete Mental Health Programs in Professional Sports</h1>
+      <div class="subtitle">Redefining athlete care through integrated psychological support</div>
+      <div class="summary-box">This article explores the growing recognition of mental health in sports, the development of comprehensive support systems, and their impact on athlete performance and career longevity.</div>
+      <div class="hero-image" aria-label="Article image"></div>
+
+      <div class="article-body">
+        <p>In recent years, professional sports organizations have increasingly recognized the critical role mental health plays in athlete performance and overall well-being. This shift marks a significant departure from earlier eras when psychological challenges were often stigmatized or overlooked entirely. Today, mental health programs are becoming an integral part of athlete care, reflecting a more holistic approach to training and competition.</p><p>Historically, the emphasis in professional sports was predominantly on physical conditioning and skill development. Psychological support was considered secondary, if addressed at all. However, mounting evidence has demonstrated that mental health directly influences an athlete’s ability to perform under pressure, recover from injury, and maintain longevity in their careers. This understanding has prompted leagues, teams, and governing bodies to establish structured mental health resources tailored to the unique demands of professional sports.</p><p>Modern athlete mental health programs often include access to sports psychologists, counselors, and wellness coaches who work alongside traditional trainers and medical staff. These professionals help athletes develop coping strategies for stress, anxiety, and the intense scrutiny that accompanies high-level competition. Importantly, these services are increasingly embedded within regular training schedules rather than being offered as optional or reactive interventions.</p><p>The integration of mental health resources has also fostered a cultural shift within sports organizations. Open conversations about psychological challenges are becoming more normalized, reducing stigma and encouraging athletes to seek help without fear of judgment or repercussions. This cultural change is supported by leadership at all levels, from team executives to coaching staff, who recognize that mental well-being is essential for sustaining peak performance.</p><p>Moreover, comprehensive mental health programs contribute to career longevity by addressing issues before they escalate into crises. Early intervention and ongoing support help athletes manage the pressures of competition, media attention, and personal life balance. This proactive approach not only benefits individual athletes but also enhances team cohesion and overall organizational success.</p><p>While progress has been notable, challenges remain. Access to mental health resources can vary widely depending on the sport, league, and geographic location. Additionally, continued education and research are necessary to refine these programs and ensure they meet the evolving needs of athletes. Nonetheless, the growing commitment to mental health in professional sports represents a meaningful advancement in athlete care.</p><p>In summary, the evolution of mental health programs in professional sports reflects a broader understanding that athlete well-being encompasses more than physical fitness alone. By integrating psychological support into training and competition routines, sports organizations are fostering healthier, more resilient athletes capable of sustaining high performance throughout their careers.</p>
+      </div>
+
+      <section class="resource-section">
+              <h2>References & Further Reading</h2>
+              <div class="resource-links">
+                
+                  <a href="https://www.ncaa.org/sports/2023/1/mental-health.aspx" target="_blank" rel="noopener noreferrer">
+                    Reference 1
+                  </a>
+                
+                  <a href="https://www.apa.org/topics/sport-psychology" target="_blank" rel="noopener noreferrer">
+                    Reference 2
+                  </a>
+                
+                
+                  <a href="https://www.nfl.com/mental-health" target="_blank" rel="noopener noreferrer">
+                    Official Page
+                  </a>
+                
+                
+                  <a href="https://www.espn.com/espn/story/_/id/31056850/mental-health-athletes-changing-sports-culture" target="_blank" rel="noopener noreferrer">
+                    Supporting Source
+                  </a>
+                
+              </div>
+            </section>
+
+      <div class="footer-note">
+        Published as part of Drishvara’s daily editorial cycle.
+      </div>
+    </article>
+  </div>
+</body>
+</html>
