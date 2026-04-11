@@ -150,8 +150,10 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
   const imageMode = safeText(draftPacket.image_mode);
   const articleHtml = safeText(draftPacket.article_html);
   const referenceLinks = normalizeReferenceLinks(draftPacket.reference_links);
-  const officialLink = safeText(draftPacket.official_link);
-  const supportingLink = safeText(draftPacket.supporting_link);
+  const officialLinkRaw = safeText(draftPacket.official_link);
+  const supportingLinkRaw = safeText(draftPacket.supporting_link);
+  const officialLink = isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : "";
+  const supportingLink = isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : "";
   const categoryLabel = safeText(draftPacket.meta_label, categoryMeta.label);
   const publishedDate = formatDisplayDate(today);
 
@@ -541,10 +543,37 @@ function formatDisplayDate(dateText) {
 
 function normalizeReferenceLinks(input) {
   if (!Array.isArray(input)) return [];
+  const seen = new Set();
+
   return input
     .map((x) => String(x || "").trim())
     .filter(Boolean)
+    .filter(isLikelyValidUrl)
+    .filter((url) => {
+      const key = url.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
     .slice(0, 2);
+}
+function isLikelyValidUrl(value) {
+  const url = String(value || "").trim();
+  if (!url) return false;
+  if (!(url.startsWith("http://") || url.startsWith("https://"))) return false;
+
+  try {
+    const parsed = new URL(url);
+
+    if (!parsed.hostname || !parsed.hostname.includes(".")) return false;
+
+    const badHosts = ["example.com", "example.org", "example.net", "localhost"];
+    if (badHosts.includes(parsed.hostname.toLowerCase())) return false;
+
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function safeText(value, fallback = "") {
