@@ -11,6 +11,7 @@
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
@@ -155,18 +156,61 @@
       font-size: 0.98rem;
     }
 
+    .hero-media-wrap {
+      margin-bottom: 24px;
+    }
+
     .hero-image {
       width: 100%;
       height: 280px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 24px;
       background:
-        linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05)),
-        url('assets/featured/fallback/spirituality-default.jpg');
+        linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03)),
+        url('/assets/featured/fallback/spirituality-default.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       display: block;
+    }
+
+    .hero-image-fallback {
+      width: 100%;
+      height: 220px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      color: var(--text-soft);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .media-credit {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .media-credit a {
+      color: var(--gold);
+    }
+
+    .media-credit .mode {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-soft);
+      font-size: 0.76rem;
     }
 
     .article-body {
@@ -220,7 +264,8 @@
         padding: 22px 18px;
       }
 
-      .hero-image {
+      .hero-image,
+      .hero-image-fallback {
         height: 200px;
       }
     }
@@ -251,7 +296,17 @@
       <h1>The Resurgence of Mindfulness in Modern Spiritual Practice</h1>
       <div class="subtitle">Ancient Techniques Meet Contemporary Needs</div>
       <div class="summary-box">This article examines the integration of traditional mindfulness practices into modern spiritual frameworks, highlighting their role in enhancing mental well-being and fostering community resilience amid rapid technological and social change.</div>
-      <div class="hero-image" aria-label="Article image"></div>
+
+      <div class="hero-media-wrap">
+        <div class="hero-image" role="img" aria-label="Spirituality visual for The Resurgence of Mindfulness in Modern Spiritual Practice"></div>
+
+        <div class="media-credit">
+                Image credit: Drishvara Fallback
+                
+                 · Spirituality visual for The Resurgence of Mindfulness in Modern Spiritual Practice
+                <span class="mode">category_fallback</span>
+              </div>
+      </div>
 
       <div class="article-body">
         <p>In recent years, mindfulness has experienced a notable revival within various spiritual communities, reflecting a broader cultural shift toward practices that address mental health and social disconnection. Rooted in ancient contemplative traditions, mindfulness—defined broadly as present-moment awareness without judgment—has been adapted to meet the needs of contemporary life, offering a grounded approach to navigating the complexities of the modern world.</p><p>Historically, mindfulness originates from Buddhist meditation techniques, but its essence transcends any single tradition. Today, spiritual groups across diverse backgrounds are integrating these practices into their frameworks, recognizing mindfulness not only as a tool for personal insight but also as a means to foster collective resilience. This resurgence is particularly significant in an era marked by rapid technological change, where digital connectivity often paradoxically amplifies feelings of isolation.</p><p>Modern spiritual practitioners emphasize mindfulness as a way to cultivate mental clarity and emotional balance. By encouraging individuals to observe their thoughts and feelings with openness, mindfulness helps reduce stress and anxiety, conditions that have become increasingly prevalent. This shift aligns with growing scientific evidence supporting mindfulness-based interventions for mental health, bridging the gap between ancient wisdom and contemporary psychology.</p><p>Moreover, mindfulness practices are being adapted to create inclusive community spaces where participants can share experiences and support one another. These gatherings often blend traditional meditation with discussions on compassion, ethical living, and social responsibility, reinforcing the interconnectedness that many feel is lacking in today’s fragmented society.</p><p>The adaptation process involves simplifying language and techniques to be accessible without losing the depth of the original teachings. This approach allows mindfulness to resonate with a broader audience, including those who may not identify with formal religious traditions but seek meaningful spiritual engagement.</p><p>Ultimately, the resurgence of mindfulness in modern spiritual practice reflects a collective yearning for presence and connection amid the distractions of contemporary life. By drawing on time-honored methods, these communities offer pathways to mental well-being and social cohesion that are both relevant and restorative.</p>
