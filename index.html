@@ -101,6 +101,7 @@
       color: var(--text-soft);
       font-size: 1rem;
       transition: color 0.2s ease;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .nav-links a:hover,
@@ -162,7 +163,7 @@
 
     .hero {
       text-align: center;
-      padding: 14px 0 30px;
+      padding: 14px 0 26px;
     }
 
     .logo-wrap {
@@ -248,7 +249,7 @@
       grid-template-columns: 305px minmax(0, 1.55fr) 360px;
       gap: 20px;
       align-items: start;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .stack {
@@ -311,21 +312,21 @@
     }
 
     .sports-list,
-    .signal-list,
     .festival-list,
     .tournament-list,
-    .major-updates-list {
+    .major-updates-list,
+    .reading-guide-list {
       display: grid;
       gap: 12px;
       margin-top: 12px;
     }
 
     .sports-item,
-    .signal-item,
     .festival-item,
     .tournament-card,
     .major-update-card,
-    .featured-sports-article-card {
+    .featured-sports-article-card,
+    .reading-guide-item {
       padding: 12px 14px;
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.03);
@@ -334,22 +335,22 @@
     }
 
     .sports-item .sub,
-    .signal-item .sub,
     .festival-item .sub,
     .tournament-card .sub,
     .major-update-card .sub,
-    .featured-sports-article-card .sub {
+    .featured-sports-article-card .sub,
+    .reading-guide-item .sub {
       color: var(--gold);
       font-size: 0.8rem;
       margin-bottom: 6px;
     }
 
     .sports-item .title,
-    .signal-item .title,
     .festival-item .title,
     .tournament-card .title,
     .major-update-card .title,
-    .featured-sports-article-card .title {
+    .featured-sports-article-card .title,
+    .reading-guide-item .title {
       color: var(--text-soft);
       font-size: 0.94rem;
       line-height: 1.5;
@@ -357,11 +358,11 @@
     }
 
     .sports-item .meta,
-    .signal-item .meta,
     .festival-item .meta,
     .tournament-card .meta,
     .major-update-card .meta,
-    .featured-sports-article-card .meta {
+    .featured-sports-article-card .meta,
+    .reading-guide-item .meta {
       color: var(--text-muted);
       font-size: 0.83rem;
       line-height: 1.55;
@@ -369,7 +370,7 @@
 
     .status-badge {
       display: inline-block;
-      margin-top: 7px;
+      margin-top: 8px;
       padding: 5px 9px;
       border-radius: 999px;
       background: rgba(201, 162, 74, 0.08);
@@ -391,7 +392,8 @@
 
     .sports-links,
     .feature-links,
-    .update-links {
+    .update-links,
+    .reading-guide-links {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
@@ -403,6 +405,7 @@
     .sports-links a,
     .feature-links a,
     .update-links a,
+    .reading-guide-links a,
     .read-link {
       color: var(--gold);
     }
@@ -410,6 +413,7 @@
     .sports-links a:hover,
     .feature-links a:hover,
     .update-links a:hover,
+    .reading-guide-links a:hover,
     .read-link:hover {
       text-decoration: underline;
     }
@@ -594,6 +598,12 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    .reading-guide-card .section-title-sm {
+      margin: 0 0 8px;
+      font-size: 1.55rem;
+      color: var(--text-main);
+    }
+
     footer {
       margin-top: 60px;
       padding-top: 24px;
@@ -669,7 +679,6 @@
 </head>
 <body>
   <div class="page">
-
     <nav class="nav font-ui">
       <div class="nav-left">
         <img src="assets/logo/logo.png" alt="Drishvara Logo" class="nav-logo" />
@@ -686,7 +695,7 @@
       <div class="nav-right">
         <div class="live-score-chip" id="live-score-chip" title="Go to Sports Desk">
           <span class="live-dot"></span>
-          <span class="live-text"><strong>LIVE · IPL</strong> MI 148/4 (16.2)</span>
+          <span class="live-text"><strong>LIVE · Sports</strong> Event update</span>
         </div>
         <div class="lang-toggle">EN | हिन्दी</div>
       </div>
@@ -712,7 +721,6 @@
     </section>
 
     <section class="main-layout">
-
       <aside class="left-col stack">
         <div class="card sports-card" id="sports-desk">
           <div class="label">Sports Desk</div>
@@ -762,24 +770,10 @@
       </aside>
 
       <main class="center-col stack">
-        <div class="card signal-card">
-          <div class="label">Daily Signal Rail</div>
-          <h2>Today’s Signals</h2>
-          <p id="signal-rail-intro">Shortlisted lines of movement and attention from the editorial engine. This is one of Drishvara’s core live reading surfaces.</p>
-
-          <div class="signal-list" id="signal-rail-list">
-            <div class="signal-item">
-              <div class="sub">Loading</div>
-              <div class="title">Fetching today’s signals...</div>
-              <div class="meta">Please wait a moment.</div>
-            </div>
-          </div>
-        </div>
-
-        <div>
+        <section>
           <h2 class="section-title">Featured Reads</h2>
           <p class="section-intro">
-            The main reading surface of Drishvara. Each article should eventually carry one related image, concise depth, and two factual external references.
+            The main reading surface of Drishvara. These are the most important stories to read today.
           </p>
 
           <div class="feature-grid" id="featured-reads-grid">
@@ -792,14 +786,30 @@
               </div>
             </div>
           </div>
+        </section>
 
-          <div class="center-lower">
-            <div class="card founder-card">
-              <div class="label">Founder Notebook</div>
-              <h2>Founder Notebook</h2>
-              <p>A weekly reflective note built from the past 5–6 days of work, mood, thought, and recurring patterns. If there is no meaningful signal, this section should remain blank.</p>
-              <p><strong>Current status:</strong> No notebook entry this week yet.</p>
+        <section class="card signal-card reading-guide-card">
+          <div class="label">Today’s Reading Guide</div>
+          <h2 class="section-title-sm">Start Here Today</h2>
+          <p id="reading-guide-intro">
+            A compact guide to the stories worth reading today. Use this as a quick route into the full articles.
+          </p>
+
+          <div class="reading-guide-list" id="reading-guide-list">
+            <div class="reading-guide-item">
+              <div class="sub">Loading</div>
+              <div class="title">Fetching reading guide...</div>
+              <div class="meta">Please wait a moment.</div>
             </div>
+          </div>
+        </section>
+
+        <div class="center-lower">
+          <div class="card founder-card">
+            <div class="label">Founder Notebook</div>
+            <h2>Founder Notebook</h2>
+            <p>A weekly reflective note built from the past 5–6 days of work, mood, thought, and recurring patterns. If there is no meaningful signal, this section should remain blank.</p>
+            <p><strong>Current status:</strong> No notebook entry this week yet.</p>
           </div>
         </div>
       </main>
@@ -817,11 +827,11 @@
         <div class="card">
           <div class="label">Today’s Vedic Guidance</div>
           <h2 id="vedic-title-hi">आज का वैदिक संकेत</h2>
-          <p><strong>वार:</strong> <span id="vedic-weekday-hi">शुक्रवार</span></p>
-          <p><strong>अनुशंसित रंग:</strong> <span id="vedic-colour-hi">हल्का पीला / स्वर्णाभ</span></p>
-          <p><strong>भोजन संकेत:</strong> <span id="vedic-food-hi">सात्त्विक, हल्का और संयमित</span></p>
-          <div class="mantra-box" id="vedic-mantra-hi">ॐ श्रीं महालक्ष्म्यै नमः</div>
-          <p><strong>Today:</strong> <span id="vedic-note-en">A day oriented toward steadiness, grace, and thoughtful expression.</span></p>
+          <p><strong>वार:</strong> <span id="vedic-weekday-hi">शनिवार</span></p>
+          <p><strong>अनुशंसित रंग:</strong> <span id="vedic-colour-hi">नीला / श्याम</span></p>
+          <p><strong>भोजन संकेत:</strong> <span id="vedic-food-hi">सरल, स्थिर और मिताहार</span></p>
+          <div class="mantra-box" id="vedic-mantra-hi">ॐ शनैश्चराय नमः</div>
+          <p><strong>Today:</strong> <span id="vedic-note-en">A day for patience, steadiness, and responsible movement.</span></p>
           <div class="utility-note">This module should later become rule-based, factual, location-aware, bilingual, and grounded in curated Hindu literature logic.</div>
         </div>
 
@@ -885,7 +895,6 @@
           </div>
         </div>
       </aside>
-
     </section>
 
     <footer>
@@ -894,50 +903,56 @@
   </div>
 
   <script>
-    async function loadSignalRail() {
-      const railList = document.getElementById("signal-rail-list");
-      const railIntro = document.getElementById("signal-rail-intro");
-      if (!railList) return;
+    function categoryFolderMap() {
+      return {
+        spirituality: "spiritual",
+        sports: "sports",
+        world_affairs: "world",
+        media_society: "media",
+        public_programmes: "policy"
+      };
+    }
 
-      const today = new Date().toISOString().slice(0, 10);
-      const signalPath = `generated/signals/${today}-signal-rail.json`;
+    function categoryLabelMap() {
+      return {
+        spirituality: "Spirituality",
+        sports: "Sports",
+        world_affairs: "World Affairs",
+        media_society: "Media & Society",
+        public_programmes: "Public Programmes"
+      };
+    }
 
-      try {
-        const response = await fetch(signalPath, { cache: "no-store" });
-        if (!response.ok) throw new Error(`Signal file not found for ${today}`);
+    async function fetchDraftForCategory(today, categoryKey) {
+      const draftPath = `generated/drafts/${today}-${categoryKey}.json`;
+      const response = await fetch(draftPath, { cache: "no-store" });
+      if (!response.ok) return null;
 
-        const data = await response.json();
+      const data = await response.json();
+      const packet = data && data.draft_packet ? data.draft_packet : null;
+      if (!packet || !packet.title || !packet.slug) return null;
 
-        if (!Array.isArray(data.items) || !data.items.length) {
-          railList.innerHTML = `
-            <div class="signal-item">
-              <div class="sub">No signals yet</div>
-              <div class="title">Today’s shortlist is not available yet.</div>
-              <div class="meta">Please check back later.</div>
-            </div>
-          `;
-          return;
-        }
+      return packet;
+    }
 
-        railIntro.textContent = `Shortlisted lines of movement and attention for ${today}.`;
+    function buildArticleHref(categoryKey, slug) {
+      const folders = categoryFolderMap();
+      return `articles/${folders[categoryKey]}/${sanitizeSlug(slug)}.html`;
+    }
 
-        railList.innerHTML = data.items.slice(0, 6).map(item => `
-          <div class="signal-item">
-            <div class="sub">${escapeHtml(item.category || "Signal")}</div>
-            <div class="title">${escapeHtml(item.title || "")}</div>
-            <div class="meta">${escapeHtml(item.summary || "")}</div>
-            ${item.status ? `<div class="status-badge">${escapeHtml(item.status)}</div>` : ""}
-          </div>
-        `).join("");
-      } catch (error) {
-        railList.innerHTML = `
-          <div class="signal-item">
-            <div class="sub">Signal Rail</div>
-            <div class="title">Today’s live signals are not available yet.</div>
-            <div class="meta">The system may still be generating or publishing today’s feed.</div>
-          </div>
-        `;
-      }
+    function buildImageStyle(imagePath) {
+      const path = String(imagePath || "").trim();
+      if (!path) return "";
+      return `style="background-image: linear-gradient(135deg, rgba(201, 162, 74, 0.12), rgba(255, 255, 255, 0.03)), url('${escapeAttribute(path)}');"`;
+    }
+
+    function buildConditionalLinks(links) {
+      const safeLinks = (Array.isArray(links) ? links : []).filter(link => link && link.href);
+      if (!safeLinks.length) return "";
+
+      return safeLinks.map(link => `
+        <a href="${escapeAttribute(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label || "Open")}</a>
+      `).join("");
     }
 
     async function loadFeaturedReads() {
@@ -945,40 +960,20 @@
       if (!grid) return;
 
       const today = new Date().toISOString().slice(0, 10);
-
-      const categories = [
-        { key: "spirituality", folder: "spiritual", label: "Spirituality" },
-        { key: "world_affairs", folder: "world", label: "World Affairs" },
-        { key: "media_society", folder: "media", label: "Media & Society" },
-        { key: "public_programmes", folder: "policy", label: "Public Programmes" }
+      const categoryKeys = [
+        "spirituality",
+        "world_affairs",
+        "media_society",
+        "public_programmes"
       ];
 
       try {
-        const results = await Promise.all(
-          categories.map(async (category) => {
-            const draftPath = `generated/drafts/${today}-${category.key}.json`;
-            const response = await fetch(draftPath, { cache: "no-store" });
-            if (!response.ok) return null;
+        const packets = await Promise.all(categoryKeys.map(key => fetchDraftForCategory(today, key)));
+        const valid = packets
+          .map((packet, idx) => ({ packet, categoryKey: categoryKeys[idx] }))
+          .filter(x => x.packet);
 
-            const data = await response.json();
-            const packet = data && data.draft_packet ? data.draft_packet : null;
-            if (!packet || !packet.title || !packet.slug) return null;
-
-            return {
-              label: packet.meta_label || category.label,
-              title: packet.title,
-              subtitle: packet.subtitle || "",
-              slug: sanitizeSlug(packet.slug),
-              folder: category.folder,
-              image: packet.image || "",
-              reference_links: Array.isArray(packet.reference_links) ? packet.reference_links : []
-            };
-          })
-        );
-
-        const validResults = results.filter(Boolean);
-
-        if (!validResults.length) {
+        if (!valid.length) {
           grid.innerHTML = `
             <div class="feature-card">
               <div class="feature-image">No featured reads yet</div>
@@ -992,24 +987,24 @@
           return;
         }
 
-        grid.innerHTML = validResults.map(item => `
+        grid.innerHTML = valid.map(({ packet, categoryKey }) => `
           <div class="feature-card">
-            <div class="feature-image" ${buildBackgroundImage(item.image)}>
-              ${item.image ? "" : "Article image placeholder"}
+            <div class="feature-image" ${buildImageStyle(packet.image_path || packet.image)}>
+              ${(packet.image_path || packet.image) ? "" : "Article image"}
             </div>
             <div class="feature-body">
-              <div class="label">${escapeHtml(item.label)}</div>
+              <div class="label">${escapeHtml(packet.meta_label || categoryLabelMap()[categoryKey])}</div>
               <h3>
-                <a href="articles/${escapeHtml(item.folder)}/${escapeHtml(item.slug)}.html">
-                  ${escapeHtml(item.title)}
+                <a href="${buildArticleHref(categoryKey, packet.slug)}">
+                  ${escapeHtml(packet.title)}
                 </a>
               </h3>
-              <p>${escapeHtml(item.subtitle || "Daily editorial selection from Drishvara.")}</p>
-              <a class="read-link" href="articles/${escapeHtml(item.folder)}/${escapeHtml(item.slug)}.html">Read article →</a>
+              <p>${escapeHtml(packet.subtitle || packet.summary || "Daily editorial selection from Drishvara.")}</p>
+              <a class="read-link" href="${buildArticleHref(categoryKey, packet.slug)}">Read article →</a>
               <div class="feature-links">
                 ${buildConditionalLinks([
-                  { label: "Reference 1", href: item.reference_links[0] || "" },
-                  { label: "Reference 2", href: item.reference_links[1] || "" }
+                  { label: "Reference 1", href: Array.isArray(packet.reference_links) ? (packet.reference_links[0] || "") : "" },
+                  { label: "Reference 2", href: Array.isArray(packet.reference_links) ? (packet.reference_links[1] || "") : "" }
                 ])}
               </div>
             </div>
@@ -1024,6 +1019,87 @@
               <h3>Could not load today’s featured reads.</h3>
               <p>Please check again shortly.</p>
             </div>
+          </div>
+        `;
+      }
+    }
+
+    async function loadReadingGuide() {
+      const guideList = document.getElementById("reading-guide-list");
+      const guideIntro = document.getElementById("reading-guide-intro");
+      if (!guideList) return;
+
+      const today = new Date().toISOString().slice(0, 10);
+      const signalPath = `generated/signals/${today}-signal-rail.json`;
+
+      try {
+        const signalResponse = await fetch(signalPath, { cache: "no-store" });
+        if (!signalResponse.ok) {
+          throw new Error(`Signal file not found for ${today}`);
+        }
+
+        const signalData = await signalResponse.json();
+        const signalItems = Array.isArray(signalData.items) ? signalData.items : [];
+
+        const categoryLookup = {
+          "Spirituality": "spirituality",
+          "Sports": "sports",
+          "World Affairs": "world_affairs",
+          "Media & Society": "media_society",
+          "Public Programmes": "public_programmes"
+        };
+
+        const packetResults = await Promise.all(
+          signalItems.map(async item => {
+            const categoryKey = categoryLookup[item.category] || null;
+            if (!categoryKey) return null;
+
+            const packet = await fetchDraftForCategory(today, categoryKey);
+            if (!packet) return null;
+
+            return {
+              categoryKey,
+              categoryLabel: item.category,
+              title: packet.title,
+              summary: item.summary || packet.summary || "",
+              subtitle: packet.subtitle || "",
+              slug: packet.slug
+            };
+          })
+        );
+
+        const valid = packetResults.filter(Boolean);
+
+        if (!valid.length) {
+          guideList.innerHTML = `
+            <div class="reading-guide-item">
+              <div class="sub">Reading Guide</div>
+              <div class="title">Today’s reading guide is not available yet.</div>
+              <div class="meta">Please check back shortly.</div>
+            </div>
+          `;
+          return;
+        }
+
+        guideIntro.textContent = `A compact guide to the most useful stories for ${today}. Open any item below to read the full article.`;
+
+        guideList.innerHTML = valid.map(item => `
+          <div class="reading-guide-item">
+            <div class="sub">${escapeHtml(item.categoryLabel)}</div>
+            <div class="title">${escapeHtml(item.title)}</div>
+            <div class="meta">${escapeHtml(item.subtitle || item.summary)}</div>
+            <div class="reading-guide-links">
+              <a href="${buildArticleHref(item.categoryKey, item.slug)}">Read article</a>
+            </div>
+            <div class="status-badge">Selected Today</div>
+          </div>
+        `).join("");
+      } catch (error) {
+        guideList.innerHTML = `
+          <div class="reading-guide-item">
+            <div class="sub">Reading Guide</div>
+            <div class="title">Today’s reading guide is not available yet.</div>
+            <div class="meta">The system may still be generating or publishing today’s feed.</div>
           </div>
         `;
       }
@@ -1137,7 +1213,7 @@
 
       list.innerHTML = items.map(item => `
         <div class="tournament-card">
-          <div class="tournament-image" ${buildBackgroundImage(item.image)}>
+          <div class="tournament-image" ${buildImageStyle(item.image)}>
             ${item.image ? "" : "Tournament image"}
           </div>
           <div class="sub">${escapeHtml(item.status || "Tournament")}</div>
@@ -1174,7 +1250,7 @@
 
       list.innerHTML = items.map(item => `
         <div class="major-update-card">
-          <div class="major-update-image" ${buildBackgroundImage(item.image)}>
+          <div class="major-update-image" ${buildImageStyle(item.image)}>
             ${item.image ? "" : "Sports update image"}
           </div>
           <div class="sub">Major Update</div>
@@ -1208,7 +1284,7 @@
 
       wrap.innerHTML = `
         <div class="featured-sports-article-card">
-          <div class="featured-sports-article-image" ${buildBackgroundImage(item.image)}>
+          <div class="featured-sports-article-image" ${buildImageStyle(item.image)}>
             ${item.image ? "" : "Featured sports article image"}
           </div>
           <div class="sub">Featured Sports Article</div>
@@ -1298,20 +1374,6 @@
       }
     }
 
-    function buildConditionalLinks(links) {
-      const safeLinks = (Array.isArray(links) ? links : []).filter(link => link && link.href);
-      if (!safeLinks.length) return "";
-
-      return safeLinks.map(link => `
-        <a href="${escapeAttribute(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label || "Open")}</a>
-      `).join("");
-    }
-
-    function buildBackgroundImage(image) {
-      if (!image) return "";
-      return `style="background-image: linear-gradient(135deg, rgba(201, 162, 74, 0.12), rgba(255, 255, 255, 0.03)), url('${escapeAttribute(image)}');"`;
-    }
-
     function sanitizeSlug(slug) {
       return String(slug || "")
         .trim()
@@ -1337,8 +1399,8 @@
         .replace(/'/g, "&#39;");
     }
 
-    loadSignalRail();
     loadFeaturedReads();
+    loadReadingGuide();
     loadDailyContext();
     loadSportsContext();
   </script>
