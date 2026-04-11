@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Role of Public Media in Upholding Democratic Values in the Digital Age | Drishvara</title>
+  <meta name="description" content="This piece analyzes strategies employed by public media to adapt to digital platforms while safeguarding journalistic integrity and fostering informed citizenry." />
+  <link rel="icon" type="image/png" href="/assets/logo/logo.png" />
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.08), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-main);
+    }
+
+    .brand img {
+      width: 38px;
+      height: auto;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 1.12rem;
+      letter-spacing: 0.2px;
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-nav a {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .topbar-nav a:hover {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .article-shell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 26px;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .category-pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--text-soft);
+    }
+
+    .summary-box {
+      margin: 0 0 22px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 280px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+      background:
+        linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05)),
+        url('assets/featured/fallback/media-default.jpg');
+      background-size: cover;
+      background-position: center;
+      display: block;
+    }
+
+    .article-body {
+      color: var(--text-main);
+      font-size: 1.02rem;
+      line-height: 1.95;
+    }
+
+    .article-body p {
+      margin: 0 0 18px;
+    }
+
+    .resource-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .resource-section h2 {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      color: var(--text-main);
+    }
+
+    .resource-links {
+      display: grid;
+      gap: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .resource-links a {
+      color: var(--gold);
+      word-break: break-word;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 20px 16px 48px;
+      }
+
+      .article-shell {
+        padding: 22px 18px;
+      }
+
+      .hero-image {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">
+        <img src="/assets/logo/logo.png" alt="Drishvara logo" />
+        <div class="brand-name">Drishvara</div>
+      </div>
+
+      <div class="topbar-nav">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+
+    <article class="article-shell">
+      <div class="meta-row">
+        <span class="category-pill">Media &amp; Society</span>
+        <span>11 April 2026</span>
+      </div>
+
+      <h1>The Role of Public Media in Upholding Democratic Values in the Digital Age</h1>
+      <div class="subtitle">Challenges and opportunities for public broadcasters amid digital disruption</div>
+      <div class="summary-box">This piece analyzes strategies employed by public media to adapt to digital platforms while safeguarding journalistic integrity and fostering informed citizenry.</div>
+      <div class="hero-image" aria-label="Article image"></div>
+
+      <div class="article-body">
+        <p>In an era marked by rapid digital transformation and the proliferation of misinformation, public media faces a critical test in its mission to uphold democratic values. The digital age has reshaped how information is produced, distributed, and consumed, presenting both significant challenges and unique opportunities for public broadcasters striving to maintain credibility, independence, and public trust.</p><p>Public media institutions have long been pillars of democratic societies, offering impartial news and fostering informed citizenry. However, the rise of social media platforms and algorithm-driven content delivery has fragmented audiences and intensified competition for attention. This environment often favors sensationalism and speed over accuracy and context, posing a threat to the journalistic standards that public media uphold.</p><p>To navigate these challenges, public broadcasters are increasingly embracing digital platforms while reaffirming their commitment to editorial independence and transparency. Many have invested in digital-first content strategies, leveraging multimedia storytelling and interactive formats to engage younger and more diverse audiences. By doing so, they not only expand their reach but also create spaces where nuanced, fact-based discourse can thrive amid the noise.</p><p>Maintaining public trust requires more than adapting to new technologies; it demands a steadfast dedication to accountability and ethical journalism. Public media organizations are enhancing fact-checking initiatives and promoting media literacy to empower audiences to critically evaluate information. These efforts are vital in countering misinformation and reinforcing the role of public media as a reliable source of truth.</p><p>Moreover, the independence of public broadcasters remains paramount. Shielded from commercial pressures and political influence, they provide a counterbalance to polarized and partisan media landscapes. Ensuring sustainable funding models that protect this independence is an ongoing concern, especially as digital advertising revenues shift and governmental support faces scrutiny.</p><p>Ultimately, the role of public media in the digital age is not only to inform but to foster democratic engagement. By embracing innovation without compromising core values, public broadcasters can continue to serve as trusted institutions that support open dialogue, accountability, and an informed public—foundations essential to healthy democracies.</p>
+      </div>
+
+      <section class="resource-section">
+              <h2>References & Further Reading</h2>
+              <div class="resource-links">
+                
+                  <a href="https://www.bbc.co.uk/academy/en/articles/art20210413152608836" target="_blank" rel="noopener noreferrer">
+                    Reference 1
+                  </a>
+                
+                  <a href="https://www.oxfordhandbooks.com/view/10.1093/oxfordhb/9780198828970.001.0001/oxfordhb-9780198828970-e-41" target="_blank" rel="noopener noreferrer">
+                    Reference 2
+                  </a>
+                
+                
+                  <a href="https://www.ebu.ch/publicmedia" target="_blank" rel="noopener noreferrer">
+                    Official Page
+                  </a>
+                
+                
+                  <a href="https://www.cjr.org/tow_center_reports/public-media-digital-age.php" target="_blank" rel="noopener noreferrer">
+                    Supporting Source
+                  </a>
+                
+              </div>
+            </section>
+
+      <div class="footer-note">
+        Published as part of Drishvara’s daily editorial cycle.
+      </div>
+    </article>
+  </div>
+</body>
+</html>
