@@ -34,6 +34,12 @@ const GENERATION_CATEGORIES = [
   "public_programmes"
 ];
 
+const COMMON_STOPWORDS = new Set([
+  "the", "and", "with", "from", "into", "that", "this", "their", "through",
+  "about", "modern", "public", "role", "impact", "lessons", "digital", "new",
+  "today", "guide", "story", "stories", "article", "practice", "values"
+]);
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
@@ -362,7 +368,6 @@ function tryRepairCommonJsonIssue(text) {
   if (!text) return null;
 
   let repaired = String(text);
-
   repaired = repaired.replace(/:\s*true\\?"/g, ": true");
   repaired = repaired.replace(/:\s*false\\?"/g, ": false");
   repaired = repaired.replace(/,\s*([}\]])/g, "$1");
@@ -388,18 +393,7 @@ async function buildDraftPacket({
     `${categoryKey}-insight-${today}`
   );
 
-  const imageInfo = await resolveArticleImage({
-    token,
-    owner,
-    repo,
-    branch,
-    today,
-    categoryKey,
-    slug,
-    generated
-  });
-
-  return {
+  const baseDraftPacket = {
     date: today,
     meta_label: categoryMeta.label,
     title: safeText(generated?.title, candidate.title || `${categoryMeta.label} Insight`),
@@ -412,20 +406,198 @@ async function buildDraftPacket({
       generated?.summary,
       candidate.summary || "A daily editorial selection from Drishvara."
     ),
-    image: imageInfo.image_path,
-    image_mode: imageInfo.image_mode,
-    image_path: imageInfo.image_path,
-    image_credit: imageInfo.image_credit,
-    image_source_url: imageInfo.image_source_url,
-    image_alt: imageInfo.image_alt,
-    image_prompt: imageInfo.image_prompt,
-    watermark_required: imageInfo.watermark_required,
     reference_links: normalizeReferenceLinks(generated?.reference_links),
     official_link: safeText(generated?.official_link),
     supporting_link: safeText(generated?.supporting_link),
     word_count_target: "400-550",
     article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta)
   };
+
+  const imageInfo = await resolveArticleImage({
+    token,
+    owner,
+    repo,
+    branch,
+    draftPacket: baseDraftPacket,
+    categoryKey,
+    today
+  });
+
+  return {
+    ...baseDraftPacket,
+    image: imageInfo.image_path,
+    image_mode: imageInfo.image_mode,
+    image_path: imageInfo.image_path,
+    image_credit: imageInfo.image_credit,
+    image_source_url: imageInfo.image_source_url,
+    image_alt: imageInfo.image_alt,
+    image_prompt: imageInfo.image_prompt || "",
+    watermark_required: imageInfo.watermark_required
+  };
+}
+
+async function findSourcedImageFromCommons({
+  title,
+  subtitle,
+  summary,
+  categoryKey
+}) {
+  const searchQuery = buildCommonsSearchQuery({
+    title,
+    subtitle,
+    summary,
+    categoryKey
+  });
+
+  if (!searchQuery) return null;
+
+  const apiUrl = new URL("https://commons.wikimedia.org/w/api.php");
+  apiUrl.search = new URLSearchParams({
+    action: "query",
+    format: "json",
+    origin: "*",
+    generator: "search",
+    gsrsearch: searchQuery,
+    gsrlimit: "6",
+    gsrnamespace: "6",
+    prop: "imageinfo|info",
+    iiprop: "url|extmetadata|mime|size",
+    iiurlwidth: "1600"
+  }).toString();
+
+  let payload;
+  try {
+    const response = await fetch(apiUrl.toString(), {
+      method: "GET",
+      headers: { Accept: "application/json" }
+    });
+
+    if (!response.ok) return null;
+    payload = await response.json();
+  } catch {
+    return null;
+  }
+
+  const pages = Object.values(payload?.query?.pages || {});
+  if (!pages.length) return null;
+
+  const candidates = pages
+    .map((page) => normalizeCommonsCandidate(page, { title, subtitle, summary, categoryKey }))
+    .filter(Boolean)
+    .sort((a, b) => b.score - a.score);
+
+  return candidates[0] || null;
+}
+
+function buildCommonsSearchQuery({ title, subtitle, summary, categoryKey }) {
+  const categoryHints = {
+    spirituality: "meditation OR mindfulness OR temple OR prayer OR spiritual",
+    sports: "sports OR athlete OR stadium OR match OR tournament",
+    world_affairs: "diplomacy OR world map OR international relations OR geopolitics",
+    media_society: "journalism OR media OR newsroom OR digital communication",
+    public_programmes: "public health OR school OR governance OR infrastructure OR community"
+  };
+
+  const titleWords = extractSearchTerms(title, 4);
+  const subtitleWords = extractSearchTerms(subtitle, 2);
+  const summaryWords = extractSearchTerms(summary, 2);
+  const hint = categoryHints[categoryKey] || "";
+
+  const parts = [
+    ...titleWords,
+    ...subtitleWords,
+    ...summaryWords,
+    hint
+  ].filter(Boolean);
+
+  return parts.join(" ");
+}
+
+function extractSearchTerms(text, limit = 4) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter((word) => word.length > 3)
+    .filter((word) => !COMMON_STOPWORDS.has(word))
+    .slice(0, limit);
+}
+
+function normalizeCommonsCandidate(page, context) {
+  const imageInfo = Array.isArray(page?.imageinfo) ? page.imageinfo[0] : null;
+  if (!imageInfo) return null;
+
+  const imageUrl = imageInfo.thumburl || imageInfo.url || "";
+  if (!imageUrl) return null;
+
+  const mime = String(imageInfo.mime || "").toLowerCase();
+  if (!mime.startsWith("image/")) return null;
+
+  const width = Number(imageInfo.thumbwidth || imageInfo.width || 0);
+  if (width < 600) return null;
+
+  const titleText = String(page?.title || "");
+  const ext = imageInfo.extmetadata || {};
+
+  const credit =
+    stripHtml(safeText(ext?.Artist?.value)) ||
+    stripHtml(safeText(ext?.Credit?.value)) ||
+    "Wikimedia Commons";
+
+  const score = scoreCommonsCandidate({
+    pageTitle: titleText,
+    context
+  });
+
+  if (score < 2) return null;
+
+  return {
+    image_mode: "source_curated",
+    image_path: imageUrl,
+    image_credit: credit,
+    image_source_url: buildCommonsFilePageUrl(titleText),
+    image_alt: buildCommonsAltText(context, titleText),
+    image_prompt: "",
+    watermark_required: false,
+    score
+  };
+}
+
+function scoreCommonsCandidate({ pageTitle, context }) {
+  const haystack = `${pageTitle} ${context.title || ""} ${context.subtitle || ""} ${context.summary || ""}`.toLowerCase();
+
+  let score = 0;
+  for (const token of extractSearchTerms(context.title, 5)) {
+    if (haystack.includes(token)) score += 2;
+  }
+  for (const token of extractSearchTerms(context.subtitle, 3)) {
+    if (haystack.includes(token)) score += 1;
+  }
+  for (const token of extractSearchTerms(context.summary, 3)) {
+    if (haystack.includes(token)) score += 1;
+  }
+
+  return score;
+}
+
+function buildCommonsFilePageUrl(fileTitle) {
+  if (!fileTitle) return "";
+  return `https://commons.wikimedia.org/wiki/${encodeURIComponent(String(fileTitle).replace(/ /g, "_"))}`;
+}
+
+function buildCommonsAltText(context, fileTitle) {
+  const label = CATEGORY_META[context.categoryKey]?.label || "Drishvara";
+  const title = safeText(context.title, label);
+  return `${label} image related to ${title}${fileTitle ? ` (${stripFilePrefix(fileTitle)})` : ""}`;
+}
+
+function stripFilePrefix(value) {
+  return String(value || "").replace(/^File:/i, "");
+}
+
+function stripHtml(value) {
+  return String(value || "").replace(/<[^>]*>/g, "").trim();
 }
 
 async function resolveArticleImage({
@@ -433,11 +605,12 @@ async function resolveArticleImage({
   owner,
   repo,
   branch,
-  today,
+  draftPacket,
   categoryKey,
-  slug,
-  generated
+  today
 }) {
+  const slug = sanitizeSlug(draftPacket.slug || draftPacket.title || "");
+
   const exactManualPath = `assets/featured/${today}/${categoryKey}/${slug}-lead-1.jpg`;
   const categoryDayPath = `assets/featured/${today}/${categoryKey}/lead-1.jpg`;
   const fallbackPath = getDefaultImageForCategory(categoryKey);
@@ -456,7 +629,7 @@ async function resolveArticleImage({
       image_path: exactManualPath,
       image_credit: "Drishvara Library",
       image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
       image_prompt: "",
       watermark_required: true
     };
@@ -476,15 +649,26 @@ async function resolveArticleImage({
       image_path: categoryDayPath,
       image_credit: "Drishvara Library",
       image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
       image_prompt: "",
       watermark_required: true
     };
   }
 
-  const curatedImage = safeText(generated?.image);
-  const curatedImageCredit = safeText(generated?.image_credit);
-  const curatedImageSourceUrl = safeText(generated?.image_source_url);
+  const commonsImage = await findSourcedImageFromCommons({
+    title: draftPacket.title,
+    subtitle: draftPacket.subtitle,
+    summary: draftPacket.summary,
+    categoryKey
+  });
+
+  if (commonsImage) {
+    return commonsImage;
+  }
+
+  const curatedImage = safeText(generatedSafe(draftPacket, "image"));
+  const curatedImageCredit = safeText(generatedSafe(draftPacket, "image_credit"));
+  const curatedImageSourceUrl = safeText(generatedSafe(draftPacket, "image_source_url"));
 
   if (
     curatedImage &&
@@ -498,14 +682,14 @@ async function resolveArticleImage({
       image_path: curatedImage,
       image_credit: curatedImageCredit || "Source Provided",
       image_source_url: curatedImageSourceUrl,
-      image_alt: safeText(generated?.image_alt, buildDefaultAlt(categoryKey, generated?.title)),
+      image_alt: safeText(generatedSafe(draftPacket, "image_alt"), buildDefaultAlt(categoryKey, draftPacket.title)),
       image_prompt: "",
       watermark_required: false
     };
   }
 
-  const generatedImagePath = safeText(generated?.generated_image_path);
-  const generatedImagePrompt = safeText(generated?.image_prompt);
+  const generatedImagePath = safeText(generatedSafe(draftPacket, "generated_image_path"));
+  const generatedImagePrompt = safeText(generatedSafe(draftPacket, "image_prompt"));
 
   if (generatedImagePath) {
     return {
@@ -513,7 +697,7 @@ async function resolveArticleImage({
       image_path: generatedImagePath,
       image_credit: "AI-assisted visual",
       image_source_url: "",
-      image_alt: safeText(generated?.image_alt, buildDefaultAlt(categoryKey, generated?.title)),
+      image_alt: safeText(generatedSafe(draftPacket, "image_alt"), buildDefaultAlt(categoryKey, draftPacket.title)),
       image_prompt: generatedImagePrompt,
       watermark_required: true
     };
@@ -533,7 +717,7 @@ async function resolveArticleImage({
       image_path: fallbackPath,
       image_credit: "Drishvara Fallback",
       image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
       image_prompt: "",
       watermark_required: false
     };
@@ -544,42 +728,16 @@ async function resolveArticleImage({
     image_path: "",
     image_credit: "",
     image_source_url: "",
-    image_alt: buildDefaultAlt(categoryKey, generated?.title),
+    image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
     image_prompt: "",
     watermark_required: false
   };
 }
 
-  const fallbackExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: fallbackPath
-  });
-
-  if (fallbackExists) {
-    return {
-      image_mode: "category_fallback",
-      image_path: fallbackPath,
-      image_credit: "Drishvara Fallback",
-      image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, generated?.title),
-      image_prompt: "",
-      watermark_required: false
-    };
-  }
-
-  return {
-    image_mode: "no_image",
-    image_path: "",
-    image_credit: "",
-    image_source_url: "",
-    image_alt: buildDefaultAlt(categoryKey, generated?.title),
-    image_prompt: "",
-    watermark_required: false
-  };
+function generatedSafe(_draftPacket, _field) {
+  return "";
 }
+
 async function githubFileExists({ token, owner, repo, branch, path }) {
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}?ref=${encodeURIComponent(branch)}`;
 
@@ -723,7 +881,9 @@ function pickCandidateForCategory(candidateBundle, categoryKey) {
 
 function normalizeReferenceLinks(input) {
   if (!Array.isArray(input)) return [];
+
   const seen = new Set();
+
   return input
     .map((x) => String(x || "").trim())
     .filter(Boolean)
@@ -744,11 +904,8 @@ function isLikelyValidUrl(value) {
 
   try {
     const parsed = new URL(url);
-
-    // Basic hostname check
     if (!parsed.hostname || !parsed.hostname.includes(".")) return false;
 
-    // Reject obviously placeholder / fake examples
     const badHosts = ["example.com", "example.org", "example.net", "localhost"];
     if (badHosts.includes(parsed.hostname.toLowerCase())) return false;
 
@@ -757,6 +914,7 @@ function isLikelyValidUrl(value) {
     return false;
   }
 }
+
 function normalizeArticleHtml(articleHtml, candidate, categoryMeta) {
   const html = safeText(articleHtml);
   if (html && html.includes("<p>")) {
@@ -817,187 +975,6 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
-
-async function findSourcedImageFromCommons({
-  title,
-  subtitle,
-  summary,
-  categoryKey
-}) {
-  const searchQuery = buildCommonsSearchQuery({
-    title,
-    subtitle,
-    summary,
-    categoryKey
-  });
-
-  if (!searchQuery) return null;
-
-  const apiUrl = new URL("https://commons.wikimedia.org/w/api.php");
-  apiUrl.search = new URLSearchParams({
-    action: "query",
-    format: "json",
-    origin: "*",
-    generator: "search",
-    gsrsearch: searchQuery,
-    gsrlimit: "6",
-    gsrnamespace: "6", // File namespace
-    prop: "imageinfo|info",
-    iiprop: "url|extmetadata|mime|size",
-    iiurlwidth: "1600"
-  }).toString();
-
-  let payload;
-  try {
-    const response = await fetch(apiUrl.toString(), {
-      method: "GET",
-      headers: {
-        "Accept": "application/json"
-      }
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    payload = await response.json();
-  } catch {
-    return null;
-  }
-
-  const pages = Object.values(payload?.query?.pages || {});
-  if (!pages.length) return null;
-
-  const candidates = pages
-    .map((page) => normalizeCommonsCandidate(page, { title, subtitle, summary, categoryKey }))
-    .filter(Boolean)
-    .sort((a, b) => b.score - a.score);
-
-  return candidates[0] || null;
-}
-
-function buildCommonsSearchQuery({ title, subtitle, summary, categoryKey }) {
-  const categoryHints = {
-    spirituality: "meditation OR mindfulness OR temple OR prayer OR spiritual",
-    sports: "sports OR athlete OR stadium OR match OR tournament",
-    world_affairs: "diplomacy OR world map OR international relations OR geopolitics",
-    media_society: "journalism OR media OR newsroom OR digital communication",
-    public_programmes: "public health OR school OR governance OR infrastructure OR community"
-  };
-
-  const titleWords = extractSearchTerms(title, 4);
-  const subtitleWords = extractSearchTerms(subtitle, 2);
-  const summaryWords = extractSearchTerms(summary, 2);
-  const hint = categoryHints[categoryKey] || "";
-
-  const parts = [
-    ...titleWords,
-    ...subtitleWords,
-    ...summaryWords,
-    hint
-  ].filter(Boolean);
-
-  return parts.join(" ");
-}
-
-function extractSearchTerms(text, limit = 4) {
-  return String(text || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, " ")
-    .split(/\s+/)
-    .filter(Boolean)
-    .filter((word) => word.length > 3)
-    .filter((word) => !COMMON_STOPWORDS.has(word))
-    .slice(0, limit);
-}
-
-function normalizeCommonsCandidate(page, context) {
-  const imageInfo = Array.isArray(page?.imageinfo) ? page.imageinfo[0] : null;
-  if (!imageInfo) return null;
-
-  const imageUrl = imageInfo.thumburl || imageInfo.url || "";
-  if (!imageUrl) return null;
-
-  const mime = String(imageInfo.mime || "").toLowerCase();
-  if (!mime.startsWith("image/")) return null;
-
-  const width = Number(imageInfo.thumbwidth || imageInfo.width || 0);
-  if (width < 600) return null;
-
-  const titleText = String(page?.title || "");
-  const ext = imageInfo.extmetadata || {};
-
-  const sourceUrl =
-    safeText(ext?.LicenseUrl?.value) ||
-    safeText(ext?.Credit?.value) ||
-    buildCommonsFilePageUrl(titleText);
-
-  const credit =
-    stripHtml(safeText(ext?.Artist?.value)) ||
-    stripHtml(safeText(ext?.Credit?.value)) ||
-    "Wikimedia Commons";
-
-  const alt = buildCommonsAltText(context, titleText);
-
-  const score = scoreCommonsCandidate({
-    pageTitle: titleText,
-    context
-  });
-
-  if (score < 2) return null;
-
-  return {
-    image_mode: "source_curated",
-    image_path: imageUrl,
-    image_credit: credit,
-    image_source_url: buildCommonsFilePageUrl(titleText),
-    image_alt: alt,
-    image_prompt: "",
-    watermark_required: false,
-    score
-  };
-}
-
-function scoreCommonsCandidate({ pageTitle, context }) {
-  const haystack = `${pageTitle} ${context.title || ""} ${context.subtitle || ""} ${context.summary || ""}`.toLowerCase();
-
-  let score = 0;
-  for (const token of extractSearchTerms(context.title, 5)) {
-    if (haystack.includes(token)) score += 2;
-  }
-  for (const token of extractSearchTerms(context.subtitle, 3)) {
-    if (haystack.includes(token)) score += 1;
-  }
-  for (const token of extractSearchTerms(context.summary, 3)) {
-    if (haystack.includes(token)) score += 1;
-  }
-
-  return score;
-}
-
-function buildCommonsFilePageUrl(fileTitle) {
-  if (!fileTitle) return "";
-  return `https://commons.wikimedia.org/wiki/${encodeURIComponent(String(fileTitle).replace(/ /g, "_"))}`;
-}
-
-function buildCommonsAltText(context, fileTitle) {
-  const label = CATEGORY_META[context.categoryKey]?.label || "Drishvara";
-  const title = safeText(context.title, label);
-  return `${label} image related to ${title}${fileTitle ? ` (${stripFilePrefix(fileTitle)})` : ""}`;
-}
-
-function stripFilePrefix(value) {
-  return String(value || "").replace(/^File:/i, "");
-}
-
-function stripHtml(value) {
-  return String(value || "").replace(/<[^>]*>/g, "").trim();
-}
-
-const COMMON_STOPWORDS = new Set([
-  "the", "and", "with", "from", "into", "that", "this", "their", "through",
-  "about", "modern", "public", "role", "impact", "lessons", "digital", "new"
-]);
 
 async function upsertGitHubFile({
   token,
