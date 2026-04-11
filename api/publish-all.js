@@ -79,7 +79,7 @@ export default async function handler(req, res) {
         }
 
         const articlePath = buildArticlePath(categoryKey, draftPacket.slug);
-        const articleHtml = buildArticlePage({
+        const articleHtml = await buildArticlePage({
           draftPacket,
           categoryMeta,
           today
@@ -135,7 +135,7 @@ function buildArticlePath(categoryKey, slug) {
   return `articles/${folder}/${safeSlug}.html`;
 }
 
-function buildArticlePage({ draftPacket, categoryMeta, today }) {
+async function buildArticlePage({ draftPacket, categoryMeta, today }) {
   const title = safeText(draftPacket.title, `${categoryMeta.label} Insight`);
   const subtitle = safeText(draftPacket.subtitle);
   const summary = safeText(
@@ -149,11 +149,18 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
   const imageAlt = safeText(draftPacket.image_alt, title);
   const imageMode = safeText(draftPacket.image_mode);
   const articleHtml = safeText(draftPacket.article_html);
-  const referenceLinks = normalizeReferenceLinks(draftPacket.reference_links);
+  const referenceLinksRaw = normalizeReferenceLinks(draftPacket.reference_links);
   const officialLinkRaw = safeText(draftPacket.official_link);
   const supportingLinkRaw = safeText(draftPacket.supporting_link);
-  const officialLink = isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : "";
-  const supportingLink = isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : "";
+
+  const referenceLinks = await filterReachableUrls(referenceLinksRaw);
+  const officialLink = await resolveReachableUrl(
+  isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : ""
+  );
+  const supportingLink = await resolveReachableUrl(
+  isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : ""
+  );
+  
   const categoryLabel = safeText(draftPacket.meta_label, categoryMeta.label);
   const publishedDate = formatDisplayDate(today);
 
@@ -571,6 +578,48 @@ function isLikelyValidUrl(value) {
     if (badHosts.includes(parsed.hostname.toLowerCase())) return false;
 
     return true;
+  } catch {
+    return false;
+  }
+}
+
+async function filterReachableUrls(urls) {
+  if (!Array.isArray(urls) || !urls.length) return [];
+
+  const checks = await Promise.all(
+    urls.map(async (url) => {
+      const reachable = await isReachableUrl(url);
+      return reachable ? url : null;
+    })
+  );
+
+  return checks.filter(Boolean).slice(0, 2);
+}
+
+async function resolveReachableUrl(url) {
+  if (!url) return "";
+  const reachable = await isReachableUrl(url);
+  return reachable ? url : "";
+}
+
+async function isReachableUrl(url) {
+  if (!isLikelyValidUrl(url)) return false;
+
+  try {
+    const headResponse = await fetch(url, {
+      method: "HEAD",
+      redirect: "follow"
+    });
+
+    if (headResponse.ok) return true;
+
+    // Some servers reject HEAD but allow GET
+    const getResponse = await fetch(url, {
+      method: "GET",
+      redirect: "follow"
+    });
+
+    return getResponse.ok;
   } catch {
     return false;
   }
