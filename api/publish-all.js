@@ -142,13 +142,22 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
     draftPacket.summary,
     "A daily editorial selection from Drishvara."
   );
-  const image = safeText(draftPacket.image);
+
+  const image = safeText(draftPacket.image_path || draftPacket.image);
+  const imageCredit = safeText(draftPacket.image_credit);
+  const imageSourceUrl = safeText(draftPacket.image_source_url);
+  const imageAlt = safeText(draftPacket.image_alt, title);
+  const imageMode = safeText(draftPacket.image_mode);
   const articleHtml = safeText(draftPacket.article_html);
   const referenceLinks = normalizeReferenceLinks(draftPacket.reference_links);
   const officialLink = safeText(draftPacket.official_link);
   const supportingLink = safeText(draftPacket.supporting_link);
   const categoryLabel = safeText(draftPacket.meta_label, categoryMeta.label);
   const publishedDate = formatDisplayDate(today);
+
+  const hasImage = Boolean(image);
+  const isExternalImage = image.startsWith("http://") || image.startsWith("https://");
+  const imageUrl = hasImage ? buildImageUrl(image) : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -163,6 +172,7 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
@@ -307,18 +317,61 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
       font-size: 0.98rem;
     }
 
+    .hero-media-wrap {
+      margin-bottom: 24px;
+    }
+
     .hero-image {
       width: 100%;
       height: 280px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 24px;
       background:
-        linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05)),
-        url('${escapeAttribute(image)}');
+        linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03)),
+        url('${escapeAttribute(imageUrl)}');
       background-size: cover;
       background-position: center;
-      display: ${image ? "block" : "none"};
+      background-repeat: no-repeat;
+      display: block;
+    }
+
+    .hero-image-fallback {
+      width: 100%;
+      height: 220px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      color: var(--text-soft);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .media-credit {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .media-credit a {
+      color: var(--gold);
+    }
+
+    .media-credit .mode {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-soft);
+      font-size: 0.76rem;
     }
 
     .article-body {
@@ -372,7 +425,8 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
         padding: 22px 18px;
       }
 
-      .hero-image {
+      .hero-image,
+      .hero-image-fallback {
         height: 200px;
       }
     }
@@ -403,7 +457,25 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
       <h1>${escapeHtml(title)}</h1>
       ${subtitle ? `<div class="subtitle">${escapeHtml(subtitle)}</div>` : ""}
       ${summary ? `<div class="summary-box">${escapeHtml(summary)}</div>` : ""}
-      ${image ? `<div class="hero-image" aria-label="Article image"></div>` : ""}
+
+      <div class="hero-media-wrap">
+        ${
+          hasImage
+            ? `<div class="hero-image" role="img" aria-label="${escapeAttribute(imageAlt)}"></div>`
+            : `<div class="hero-image-fallback">${escapeHtml(imageAlt || "No lead image available for this article yet.")}</div>`
+        }
+
+        ${
+          hasImage || imageCredit || imageSourceUrl || imageMode
+            ? `<div class="media-credit">
+                ${imageCredit ? `Image credit: ${escapeHtml(imageCredit)}` : `Image`}
+                ${imageSourceUrl ? ` · <a href="${escapeAttribute(imageSourceUrl)}" target="_blank" rel="noopener noreferrer">Source</a>` : ""}
+                ${hasImage && !isExternalImage ? ` · ${escapeHtml(imageAlt)}` : ""}
+                ${imageMode ? `<span class="mode">${escapeHtml(imageMode)}</span>` : ""}
+              </div>`
+            : ""
+        }
+      </div>
 
       <div class="article-body">
         ${articleHtml}
@@ -441,6 +513,17 @@ function buildArticlePage({ draftPacket, categoryMeta, today }) {
   </div>
 </body>
 </html>`;
+}
+
+function buildImageUrl(imagePath) {
+  const raw = safeText(imagePath);
+  if (!raw) return "";
+
+  if (raw.startsWith("http://") || raw.startsWith("https://")) {
+    return raw;
+  }
+
+  return raw.startsWith("/") ? raw : `/${raw}`;
 }
 
 function formatDisplayDate(dateText) {
