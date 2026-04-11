@@ -34,6 +34,7 @@
       margin: 0;
       padding: 0;
       min-height: 100%;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -129,6 +130,7 @@
       line-height: 1.2;
       white-space: nowrap;
       font-family: Arial, Helvetica, sans-serif;
+      cursor: pointer;
     }
 
     .live-dot {
@@ -243,7 +245,7 @@
 
     .main-layout {
       display: grid;
-      grid-template-columns: 275px minmax(0, 1.55fr) 360px;
+      grid-template-columns: 305px minmax(0, 1.55fr) 360px;
       gap: 20px;
       align-items: start;
       margin-top: 16px;
@@ -310,7 +312,9 @@
 
     .sports-list,
     .signal-list,
-    .festival-list {
+    .festival-list,
+    .tournament-list,
+    .major-updates-list {
       display: grid;
       gap: 12px;
       margin-top: 12px;
@@ -318,17 +322,23 @@
 
     .sports-item,
     .signal-item,
-    .festival-item {
+    .festival-item,
+    .tournament-card,
+    .major-update-card,
+    .featured-sports-article-card {
       padding: 12px 14px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       font-family: Arial, Helvetica, sans-serif;
     }
 
     .sports-item .sub,
     .signal-item .sub,
-    .festival-item .sub {
+    .festival-item .sub,
+    .tournament-card .sub,
+    .major-update-card .sub,
+    .featured-sports-article-card .sub {
       color: var(--gold);
       font-size: 0.8rem;
       margin-bottom: 6px;
@@ -336,7 +346,10 @@
 
     .sports-item .title,
     .signal-item .title,
-    .festival-item .title {
+    .festival-item .title,
+    .tournament-card .title,
+    .major-update-card .title,
+    .featured-sports-article-card .title {
       color: var(--text-soft);
       font-size: 0.94rem;
       line-height: 1.5;
@@ -345,7 +358,10 @@
 
     .sports-item .meta,
     .signal-item .meta,
-    .festival-item .meta {
+    .festival-item .meta,
+    .tournament-card .meta,
+    .major-update-card .meta,
+    .featured-sports-article-card .meta {
       color: var(--text-muted);
       font-size: 0.83rem;
       line-height: 1.55;
@@ -360,6 +376,71 @@
       border: 1px solid rgba(201, 162, 74, 0.18);
       color: var(--gold);
       font-size: 0.78rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .sports-section-heading {
+      margin-top: 18px;
+      margin-bottom: 8px;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .sports-links,
+    .feature-links,
+    .update-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      font-size: 0.86rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .sports-links a,
+    .feature-links a,
+    .update-links a,
+    .read-link {
+      color: var(--gold);
+    }
+
+    .sports-links a:hover,
+    .feature-links a:hover,
+    .update-links a:hover,
+    .read-link:hover {
+      text-decoration: underline;
+    }
+
+    .tournament-image,
+    .major-update-image,
+    .featured-sports-article-image,
+    .feature-image {
+      height: 120px;
+      background: linear-gradient(135deg, rgba(201, 162, 74, 0.18), rgba(255, 255, 255, 0.05));
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-soft);
+      font-size: 0.88rem;
+      text-align: center;
+      padding: 14px;
+      margin-bottom: 12px;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    .tournament-standings {
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
       font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -388,21 +469,15 @@
       border-radius: 20px;
       overflow: hidden;
       backdrop-filter: blur(6px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
 
     .feature-image {
       height: 170px;
-      background: linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05));
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-soft);
-      font-size: 0.95rem;
-      text-align: center;
-      padding: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       font-family: Arial, Helvetica, sans-serif;
+      margin-bottom: 0;
+      border-radius: 0;
     }
 
     .feature-body {
@@ -411,25 +486,6 @@
 
     .feature-body h3 {
       font-size: 1.16rem;
-    }
-
-    .feature-links {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-      font-size: 0.9rem;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .feature-links a,
-    .read-link {
-      color: var(--gold);
-    }
-
-    .feature-links a:hover,
-    .read-link:hover {
-      text-decoration: underline;
     }
 
     .center-lower {
@@ -460,8 +516,8 @@
       width: 100%;
       padding: 12px 14px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       font-size: 0.95rem;
     }
@@ -509,8 +565,8 @@
       gap: 10px;
       padding: 10px 12px;
       border-radius: 12px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 0.92rem;
       font-family: Arial, Helvetica, sans-serif;
     }
@@ -541,7 +597,7 @@
     footer {
       margin-top: 60px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-muted);
       font-size: 0.95rem;
       text-align: center;
@@ -628,7 +684,7 @@
       </div>
 
       <div class="nav-right">
-        <div class="live-score-chip" id="live-score-chip">
+        <div class="live-score-chip" id="live-score-chip" title="Go to Sports Desk">
           <span class="live-dot"></span>
           <span class="live-text"><strong>LIVE · IPL</strong> MI 148/4 (16.2)</span>
         </div>
@@ -658,15 +714,43 @@
     <section class="main-layout">
 
       <aside class="left-col stack">
-        <div class="card sports-card">
+        <div class="card sports-card" id="sports-desk">
           <div class="label">Sports Desk</div>
           <h2>Sports Desk</h2>
-          <p>Major world and Indian tournament highlights, key results, standings, and selected performance signals.</p>
+          <p>Major world and Indian tournament highlights, live events, standings snapshots, and selected sports intelligence.</p>
 
-          <div class="sports-list" id="sports-desk-list">
+          <div class="sports-section-heading">Live Events</div>
+          <div class="sports-list" id="sports-live-events-list">
             <div class="sports-item">
               <div class="sub">Loading</div>
-              <div class="title">Fetching sports desk...</div>
+              <div class="title">Fetching live events...</div>
+              <div class="meta">Please wait a moment.</div>
+            </div>
+          </div>
+
+          <div class="sports-section-heading">Tournament Watch</div>
+          <div class="tournament-list" id="sports-tournaments-list">
+            <div class="tournament-card">
+              <div class="sub">Loading</div>
+              <div class="title">Fetching tournament cards...</div>
+              <div class="meta">Please wait a moment.</div>
+            </div>
+          </div>
+
+          <div class="sports-section-heading">Major Updates</div>
+          <div class="major-updates-list" id="sports-major-updates-list">
+            <div class="major-update-card">
+              <div class="sub">Loading</div>
+              <div class="title">Fetching major updates...</div>
+              <div class="meta">Please wait a moment.</div>
+            </div>
+          </div>
+
+          <div class="sports-section-heading">Featured Sports Article</div>
+          <div id="featured-sports-article-wrap">
+            <div class="featured-sports-article-card">
+              <div class="sub">Loading</div>
+              <div class="title">Fetching featured sports article...</div>
               <div class="meta">Please wait a moment.</div>
             </div>
           </div>
@@ -813,7 +897,6 @@
     async function loadSignalRail() {
       const railList = document.getElementById("signal-rail-list");
       const railIntro = document.getElementById("signal-rail-intro");
-
       if (!railList) return;
 
       const today = new Date().toISOString().slice(0, 10);
@@ -821,14 +904,11 @@
 
       try {
         const response = await fetch(signalPath, { cache: "no-store" });
-
-        if (!response.ok) {
-          throw new Error(`Signal file not found for ${today}`);
-        }
+        if (!response.ok) throw new Error(`Signal file not found for ${today}`);
 
         const data = await response.json();
 
-        if (!data.items || !Array.isArray(data.items) || data.items.length === 0) {
+        if (!Array.isArray(data.items) || !data.items.length) {
           railList.innerHTML = `
             <div class="signal-item">
               <div class="sub">No signals yet</div>
@@ -878,12 +958,10 @@
           categories.map(async (category) => {
             const draftPath = `generated/drafts/${today}-${category.key}.json`;
             const response = await fetch(draftPath, { cache: "no-store" });
-
             if (!response.ok) return null;
 
             const data = await response.json();
             const packet = data && data.draft_packet ? data.draft_packet : null;
-
             if (!packet || !packet.title || !packet.slug) return null;
 
             return {
@@ -891,7 +969,9 @@
               title: packet.title,
               subtitle: packet.subtitle || "",
               slug: sanitizeSlug(packet.slug),
-              folder: category.folder
+              folder: category.folder,
+              image: packet.image || "",
+              reference_links: Array.isArray(packet.reference_links) ? packet.reference_links : []
             };
           })
         );
@@ -914,7 +994,9 @@
 
         grid.innerHTML = validResults.map(item => `
           <div class="feature-card">
-            <div class="feature-image">Article image placeholder</div>
+            <div class="feature-image" ${buildBackgroundImage(item.image)}>
+              ${item.image ? "" : "Article image placeholder"}
+            </div>
             <div class="feature-body">
               <div class="label">${escapeHtml(item.label)}</div>
               <h3>
@@ -925,8 +1007,10 @@
               <p>${escapeHtml(item.subtitle || "Daily editorial selection from Drishvara.")}</p>
               <a class="read-link" href="articles/${escapeHtml(item.folder)}/${escapeHtml(item.slug)}.html">Read article →</a>
               <div class="feature-links">
-                <a href="#">Reference 1</a>
-                <a href="#">Reference 2</a>
+                ${buildConditionalLinks([
+                  { label: "Reference 1", href: item.reference_links[0] || "" },
+                  { label: "Reference 2", href: item.reference_links[1] || "" }
+                ])}
               </div>
             </div>
           </div>
@@ -954,7 +1038,6 @@
         if (!response.ok) throw new Error("Daily context unavailable");
 
         const data = await response.json();
-
         applyWordOfTheDay(data.word_of_the_day);
         applyVedicGuidance(data.vedic_guidance);
         applyPanchang(data.panchang);
@@ -973,9 +1056,11 @@
         if (!response.ok) throw new Error("Sports context unavailable");
 
         const data = await response.json();
-
-        applyLiveScore(data.live_score);
-        applySportsDesk(data.sports_desk);
+        applyLiveScore(data.header_live_score);
+        applyLiveEvents(data.live_events);
+        applyTournamentCards(data.tournaments);
+        applyMajorUpdates(data.major_updates);
+        applyFeaturedSportsArticle(data.featured_sports_article);
       } catch (error) {
         console.log("Sports context unavailable:", error.message);
       }
@@ -998,19 +1083,146 @@
           ${escapeHtml(liveScore.score || liveScore.match || "")}
         </span>
       `;
+
+      chip.onclick = () => {
+        const sportsDesk = document.getElementById("sports-desk");
+        if (sportsDesk) sportsDesk.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
     }
 
-    function applySportsDesk(items) {
-      const list = document.getElementById("sports-desk-list");
-      if (!list || !Array.isArray(items) || !items.length) return;
+    function applyLiveEvents(items) {
+      const list = document.getElementById("sports-live-events-list");
+      if (!list) return;
+
+      if (!Array.isArray(items) || !items.length) {
+        list.innerHTML = `
+          <div class="sports-item">
+            <div class="sub">No live events</div>
+            <div class="title">No marquee live sports event is active right now.</div>
+            <div class="meta">The chip in the header will remain hidden when no suitable live event exists.</div>
+          </div>
+        `;
+        return;
+      }
 
       list.innerHTML = items.map(item => `
         <div class="sports-item">
-          <div class="sub">${escapeHtml(item.category || "Sports")}</div>
-          <div class="title">${escapeHtml(item.title || "")}</div>
-          <div class="meta">${escapeHtml(item.meta || "")}</div>
+          <div class="sub">${escapeHtml(item.sport || "Sports")} · ${escapeHtml(item.tournament || "")}</div>
+          <div class="title">${escapeHtml(item.match || "")}</div>
+          <div class="meta">${escapeHtml(item.score || "")}</div>
+          <div class="sports-links">
+            ${buildConditionalLinks([
+              { label: "Official Page", href: item.official_link || "" },
+              { label: "More Info", href: item.supporting_link || "" }
+            ])}
+          </div>
         </div>
       `).join("");
+    }
+
+    function applyTournamentCards(items) {
+      const list = document.getElementById("sports-tournaments-list");
+      if (!list) return;
+
+      if (!Array.isArray(items) || !items.length) {
+        list.innerHTML = `
+          <div class="tournament-card">
+            <div class="sub">Tournament Watch</div>
+            <div class="title">Tournament cards are not available yet.</div>
+            <div class="meta">Please check again shortly.</div>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = items.map(item => `
+        <div class="tournament-card">
+          <div class="tournament-image" ${buildBackgroundImage(item.image)}>
+            ${item.image ? "" : "Tournament image"}
+          </div>
+          <div class="sub">${escapeHtml(item.status || "Tournament")}</div>
+          <div class="title">${escapeHtml(item.title || "")}</div>
+          <div class="meta">${escapeHtml(item.key_note || "")}</div>
+          <div class="tournament-standings">
+            ${(Array.isArray(item.standings_snapshot) ? item.standings_snapshot : []).map(row => `<div>${escapeHtml(row)}</div>`).join("")}
+          </div>
+          <div class="sports-links">
+            ${buildConditionalLinks([
+              { label: "Read Article", href: item.internal_article_link || "" },
+              { label: "Official Page", href: item.official_link || "" },
+              { label: "More Info", href: item.supporting_link || "" }
+            ])}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function applyMajorUpdates(items) {
+      const list = document.getElementById("sports-major-updates-list");
+      if (!list) return;
+
+      if (!Array.isArray(items) || !items.length) {
+        list.innerHTML = `
+          <div class="major-update-card">
+            <div class="sub">Major Updates</div>
+            <div class="title">No major sports updates are available yet.</div>
+            <div class="meta">Please check again shortly.</div>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = items.map(item => `
+        <div class="major-update-card">
+          <div class="major-update-image" ${buildBackgroundImage(item.image)}>
+            ${item.image ? "" : "Sports update image"}
+          </div>
+          <div class="sub">Major Update</div>
+          <div class="title">${escapeHtml(item.headline || "")}</div>
+          <div class="meta">${escapeHtml(item.summary || "")}</div>
+          <div class="update-links">
+            ${buildConditionalLinks([
+              { label: "Read Article", href: item.internal_article_link || "" },
+              { label: "Official Page", href: item.official_link || "" },
+              { label: "More Info", href: item.supporting_link || "" }
+            ])}
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function applyFeaturedSportsArticle(item) {
+      const wrap = document.getElementById("featured-sports-article-wrap");
+      if (!wrap) return;
+
+      if (!item || !item.show) {
+        wrap.innerHTML = `
+          <div class="featured-sports-article-card">
+            <div class="sub">Featured Sports Article</div>
+            <div class="title">No featured sports article today.</div>
+            <div class="meta">When a sports article is generated, it will appear here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      wrap.innerHTML = `
+        <div class="featured-sports-article-card">
+          <div class="featured-sports-article-image" ${buildBackgroundImage(item.image)}>
+            ${item.image ? "" : "Featured sports article image"}
+          </div>
+          <div class="sub">Featured Sports Article</div>
+          <div class="title">${escapeHtml(item.title || "")}</div>
+          <div class="meta">${escapeHtml(item.summary || "")}</div>
+          <div class="sports-links">
+            ${buildConditionalLinks([
+              { label: "Read Article", href: item.internal_article_link || "" },
+              { label: "Official Page", href: item.official_link || "" },
+              { label: "More Info", href: item.supporting_link || "" }
+            ])}
+          </div>
+        </div>
+      `;
     }
 
     function applyWordOfTheDay(word) {
@@ -1046,7 +1258,18 @@
 
     function applyFestivals(festivals) {
       const list = document.getElementById("festival-list");
-      if (!list || !Array.isArray(festivals) || !festivals.length) return;
+      if (!list) return;
+
+      if (!Array.isArray(festivals) || !festivals.length) {
+        list.innerHTML = `
+          <div class="festival-item">
+            <div class="sub">Upcoming Observance</div>
+            <div class="title">No festival information available.</div>
+            <div class="meta">Please check again later.</div>
+          </div>
+        `;
+        return;
+      }
 
       list.innerHTML = festivals.map(item => `
         <div class="festival-item">
@@ -1075,6 +1298,20 @@
       }
     }
 
+    function buildConditionalLinks(links) {
+      const safeLinks = (Array.isArray(links) ? links : []).filter(link => link && link.href);
+      if (!safeLinks.length) return "";
+
+      return safeLinks.map(link => `
+        <a href="${escapeAttribute(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label || "Open")}</a>
+      `).join("");
+    }
+
+    function buildBackgroundImage(image) {
+      if (!image) return "";
+      return `style="background-image: linear-gradient(135deg, rgba(201, 162, 74, 0.12), rgba(255, 255, 255, 0.03)), url('${escapeAttribute(image)}');"`;
+    }
+
     function sanitizeSlug(slug) {
       return String(slug || "")
         .trim()
@@ -1089,6 +1326,13 @@
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function escapeAttribute(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#39;");
     }
