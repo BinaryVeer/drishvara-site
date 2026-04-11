@@ -438,20 +438,42 @@ async function resolveArticleImage({
   slug,
   generated
 }) {
-  const manualLeadPath = `assets/featured/${today}/${categoryKey}/${slug}-lead-1.jpg`;
+  const exactManualPath = `assets/featured/${today}/${categoryKey}/${slug}-lead-1.jpg`;
+  const categoryDayPath = `assets/featured/${today}/${categoryKey}/lead-1.jpg`;
+  const fallbackPath = getDefaultImageForCategory(categoryKey);
 
-  const manualExists = await githubFileExists({
+  const exactManualExists = await githubFileExists({
     token,
     owner,
     repo,
     branch,
-    path: manualLeadPath
+    path: exactManualPath
   });
 
-  if (manualExists) {
+  if (exactManualExists) {
     return {
-      image_mode: "manual_asset",
-      image_path: manualLeadPath,
+      image_mode: "manual_asset_exact",
+      image_path: exactManualPath,
+      image_credit: "Drishvara Library",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_prompt: "",
+      watermark_required: true
+    };
+  }
+
+  const categoryDayExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: categoryDayPath
+  });
+
+  if (categoryDayExists) {
+    return {
+      image_mode: "manual_asset_category",
+      image_path: categoryDayPath,
       image_credit: "Drishvara Library",
       image_source_url: "",
       image_alt: buildDefaultAlt(categoryKey, generated?.title),
@@ -468,7 +490,8 @@ async function resolveArticleImage({
     curatedImage &&
     (curatedImage.startsWith("http://") ||
       curatedImage.startsWith("https://") ||
-      curatedImage.startsWith("assets/"))
+      curatedImage.startsWith("assets/") ||
+      curatedImage.startsWith("/assets/"))
   ) {
     return {
       image_mode: "source_curated",
@@ -496,17 +519,36 @@ async function resolveArticleImage({
     };
   }
 
+  const fallbackExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: fallbackPath
+  });
+
+  if (fallbackExists) {
+    return {
+      image_mode: "category_fallback",
+      image_path: fallbackPath,
+      image_credit: "Drishvara Fallback",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_prompt: "",
+      watermark_required: false
+    };
+  }
+
   return {
-    image_mode: "category_fallback",
-    image_path: getDefaultImageForCategory(categoryKey),
-    image_credit: "Drishvara Fallback",
+    image_mode: "no_image",
+    image_path: "",
+    image_credit: "",
     image_source_url: "",
     image_alt: buildDefaultAlt(categoryKey, generated?.title),
     image_prompt: "",
     watermark_required: false
   };
 }
-
 async function githubFileExists({ token, owner, repo, branch, path }) {
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}?ref=${encodeURIComponent(branch)}`;
 
