@@ -2,27 +2,27 @@ const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
     folder: "spiritual",
-    image: "assets/featured/spirituality-default.jpg"
+    fallback_image: "assets/featured/fallback/spirituality-default.jpg"
   },
   sports: {
     label: "Sports",
     folder: "sports",
-    image: "assets/featured/sports-default.jpg"
+    fallback_image: "assets/featured/fallback/sports-default.jpg"
   },
   world_affairs: {
     label: "World Affairs",
     folder: "world",
-    image: "assets/featured/world-default.jpg"
+    fallback_image: "assets/featured/fallback/world-default.jpg"
   },
   media_society: {
     label: "Media & Society",
     folder: "media",
-    image: "assets/featured/media-default.jpg"
+    fallback_image: "assets/featured/fallback/media-default.jpg"
   },
   public_programmes: {
     label: "Public Programmes",
     folder: "policy",
-    image: "assets/featured/policy-default.jpg"
+    fallback_image: "assets/featured/fallback/policy-default.jpg"
   }
 };
 
@@ -62,7 +62,6 @@ export default async function handler(req, res) {
     });
   }
 
-  // Safer default while stabilizing. You can override in Vercel.
   const model = OPENAI_MODEL || "gpt-4.1-mini";
   const today = new Date().toISOString().slice(0, 10);
 
@@ -113,7 +112,11 @@ export default async function handler(req, res) {
         candidate: selectedCandidate
       });
 
-      const draftPacket = buildDraftPacket({
+      const draftPacket = await buildDraftPacket({
+        token: GITHUB_TOKEN,
+        owner: GITHUB_OWNER,
+        repo: GITHUB_REPO,
+        branch: GITHUB_BRANCH,
         today,
         categoryKey,
         categoryMeta,
@@ -122,6 +125,7 @@ export default async function handler(req, res) {
       });
 
       const draftPath = `generated/drafts/${today}-${categoryKey}.json`;
+
       await upsertGitHubFile({
         token: GITHUB_TOKEN,
         owner: GITHUB_OWNER,
@@ -167,11 +171,11 @@ Create 8 to 12 candidate topics across these categories:
 - public_programmes
 
 Rules:
-- Each candidate must be publication-worthy, serious, and reflective.
-- Avoid gossip, trivia, celebrity fluff, and hype.
-- Sports may include performance, tournament psychology, analytics, recovery, structure, or major event significance.
-- Public Programmes should focus on governance, delivery, public systems, digital systems, literacy, health, education, implementation, or civic design.
-- Topics should be broad enough to write a 400-550 word article on.
+- Each candidate must be publication-worthy, serious, reflective, and suitable for a premium insight platform.
+- Avoid gossip, celebrity fluff, listicles, and shallow trend commentary.
+- Sports may include performance, tournament design, analytics, recovery, psychology, governance, fandom, or major event significance.
+- Public Programmes should focus on governance, delivery systems, public infrastructure, literacy, health, education, welfare design, implementation, or civic design.
+- Topics should be broad enough for a 400-550 word article.
 - Include at least one selected candidate per required category.
 
 Return JSON in this shape:
@@ -236,10 +240,15 @@ Requirements:
   3. subtitle
   4. summary
   5. image
-  6. reference_links
-  7. official_link
-  8. supporting_link
-  9. article_html
+  6. image_credit
+  7. image_source_url
+  8. image_alt
+  9. image_prompt
+  10. generated_image_path
+  11. reference_links
+  12. official_link
+  13. supporting_link
+  14. article_html
 
 Rules:
 - article_html must contain clean HTML paragraphs only
@@ -254,6 +263,8 @@ Rules:
 - reference_links should contain up to 2 factual external links if truly relevant, otherwise return empty strings
 - official_link should only be used if there is a clear official page
 - supporting_link should only be used if there is a useful secondary factual source
+- image may be empty if no curated image path is available
+- generated_image_path may be empty if no generated image exists
 
 Return JSON in this exact shape:
 {
@@ -262,6 +273,11 @@ Return JSON in this exact shape:
   "subtitle": "",
   "summary": "",
   "image": "",
+  "image_credit": "",
+  "image_source_url": "",
+  "image_alt": "",
+  "image_prompt": "",
+  "generated_image_path": "",
   "reference_links": ["", ""],
   "official_link": "",
   "supporting_link": "",
@@ -347,27 +363,47 @@ function tryRepairCommonJsonIssue(text) {
 
   let repaired = String(text);
 
-  // Fix common accidental pattern: true" or false"
-  repaired = repaired.replace(/:\s*true\\?"/g, ': true');
-  repaired = repaired.replace(/:\s*false\\?"/g, ': false');
-
-  // Remove stray trailing commas before } or ]
+  repaired = repaired.replace(/:\s*true\\?"/g, ": true");
+  repaired = repaired.replace(/:\s*false\\?"/g, ": false");
   repaired = repaired.replace(/,\s*([}\]])/g, "$1");
 
   return tryParseJson(repaired);
 }
 
-function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generated }) {
+async function buildDraftPacket({
+  token,
+  owner,
+  repo,
+  branch,
+  today,
+  categoryKey,
+  categoryMeta,
+  candidate,
+  generated
+}) {
+  const slug = sanitizeSlug(
+    generated?.slug ||
+    generated?.title ||
+    candidate.title ||
+    `${categoryKey}-insight-${today}`
+  );
+
+  const imageInfo = await resolveArticleImage({
+    token,
+    owner,
+    repo,
+    branch,
+    today,
+    categoryKey,
+    slug,
+    generated
+  });
+
   return {
     date: today,
     meta_label: categoryMeta.label,
     title: safeText(generated?.title, candidate.title || `${categoryMeta.label} Insight`),
-    slug: sanitizeSlug(
-      generated?.slug ||
-      generated?.title ||
-      candidate.title ||
-      `${categoryKey}-insight-${today}`
-    ),
+    slug,
     subtitle: safeText(
       generated?.subtitle,
       candidate.summary || "A daily editorial selection from Drishvara."
@@ -376,13 +412,129 @@ function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generat
       generated?.summary,
       candidate.summary || "A daily editorial selection from Drishvara."
     ),
-    image: safeText(generated?.image, getDefaultImageForCategory(categoryKey)),
+    image: imageInfo.image_path,
+    image_mode: imageInfo.image_mode,
+    image_path: imageInfo.image_path,
+    image_credit: imageInfo.image_credit,
+    image_source_url: imageInfo.image_source_url,
+    image_alt: imageInfo.image_alt,
+    image_prompt: imageInfo.image_prompt,
+    watermark_required: imageInfo.watermark_required,
     reference_links: normalizeReferenceLinks(generated?.reference_links),
     official_link: safeText(generated?.official_link),
     supporting_link: safeText(generated?.supporting_link),
     word_count_target: "400-550",
     article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta)
   };
+}
+
+async function resolveArticleImage({
+  token,
+  owner,
+  repo,
+  branch,
+  today,
+  categoryKey,
+  slug,
+  generated
+}) {
+  const manualLeadPath = `assets/featured/${today}/${categoryKey}/${slug}-lead-1.jpg`;
+
+  const manualExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: manualLeadPath
+  });
+
+  if (manualExists) {
+    return {
+      image_mode: "manual_asset",
+      image_path: manualLeadPath,
+      image_credit: "Drishvara Library",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_prompt: "",
+      watermark_required: true
+    };
+  }
+
+  const curatedImage = safeText(generated?.image);
+  const curatedImageCredit = safeText(generated?.image_credit);
+  const curatedImageSourceUrl = safeText(generated?.image_source_url);
+
+  if (
+    curatedImage &&
+    (curatedImage.startsWith("http://") ||
+      curatedImage.startsWith("https://") ||
+      curatedImage.startsWith("assets/"))
+  ) {
+    return {
+      image_mode: "source_curated",
+      image_path: curatedImage,
+      image_credit: curatedImageCredit || "Source Provided",
+      image_source_url: curatedImageSourceUrl,
+      image_alt: safeText(generated?.image_alt, buildDefaultAlt(categoryKey, generated?.title)),
+      image_prompt: "",
+      watermark_required: false
+    };
+  }
+
+  const generatedImagePath = safeText(generated?.generated_image_path);
+  const generatedImagePrompt = safeText(generated?.image_prompt);
+
+  if (generatedImagePath) {
+    return {
+      image_mode: "generated_thematic",
+      image_path: generatedImagePath,
+      image_credit: "AI-assisted visual",
+      image_source_url: "",
+      image_alt: safeText(generated?.image_alt, buildDefaultAlt(categoryKey, generated?.title)),
+      image_prompt: generatedImagePrompt,
+      watermark_required: true
+    };
+  }
+
+  return {
+    image_mode: "category_fallback",
+    image_path: getDefaultImageForCategory(categoryKey),
+    image_credit: "Drishvara Fallback",
+    image_source_url: "",
+    image_alt: buildDefaultAlt(categoryKey, generated?.title),
+    image_prompt: "",
+    watermark_required: false
+  };
+}
+
+async function githubFileExists({ token, owner, repo, branch, path }) {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}?ref=${encodeURIComponent(branch)}`;
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${token}`,
+      "X-GitHub-Api-Version": "2022-11-28"
+    }
+  });
+
+  if (response.status === 404) {
+    return false;
+  }
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`GitHub existence check failed for ${path}: ${response.status} ${errText}`);
+  }
+
+  return true;
+}
+
+function buildDefaultAlt(categoryKey, title) {
+  const label = CATEGORY_META[categoryKey]?.label || "Drishvara";
+  const cleanTitle = safeText(title, `${label} article`);
+  return `${label} visual for ${cleanTitle}`;
 }
 
 function buildSignalRail(today, candidateBundle) {
@@ -521,15 +673,7 @@ function normalizeArticleHtml(articleHtml, candidate, categoryMeta) {
 }
 
 function getDefaultImageForCategory(categoryKey) {
-  const map = {
-    spirituality: "assets/featured/spirituality-default.jpg",
-    sports: "assets/featured/sports-default.jpg",
-    world_affairs: "assets/featured/world-default.jpg",
-    media_society: "assets/featured/media-default.jpg",
-    public_programmes: "assets/featured/policy-default.jpg"
-  };
-
-  return map[categoryKey] || "assets/featured/default.jpg";
+  return CATEGORY_META[categoryKey]?.fallback_image || "assets/featured/fallback/default.jpg";
 }
 
 function safeText(value, fallback = "") {
