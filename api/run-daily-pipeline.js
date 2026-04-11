@@ -9,7 +9,8 @@ export default async function handler(req, res) {
     { name: "generate_daily", path: "/api/generate-daily" },
     { name: "publish_all", path: "/api/publish-all" },
     { name: "update_insights", path: "/api/update-insights" },
-    { name: "generate_homepage_context", path: "/api/generate-homepage-context" }
+    { name: "generate_daily_context", path: "/api/generate-daily-context" },
+    { name: "generate_sports_context", path: "/api/generate-sports-context" }
   ];
 
   const results = [];
