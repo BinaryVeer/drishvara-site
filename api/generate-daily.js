@@ -1,3 +1,45 @@
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+const CATEGORY_META = {
+  spirituality: {
+    label: "Spirituality",
+    folder: "spiritual",
+    image: "assets/featured/spirituality-default.jpg"
+  },
+  sports: {
+    label: "Sports",
+    folder: "sports",
+    image: "assets/featured/sports-default.jpg"
+  },
+  world_affairs: {
+    label: "World Affairs",
+    folder: "world",
+    image: "assets/featured/world-default.jpg"
+  },
+  media_society: {
+    label: "Media & Society",
+    folder: "media",
+    image: "assets/featured/media-default.jpg"
+  },
+  public_programmes: {
+    label: "Public Programmes",
+    folder: "policy",
+    image: "assets/featured/policy-default.jpg"
+  }
+};
+
+const GENERATION_CATEGORIES = [
+  "spirituality",
+  "sports",
+  "world_affairs",
+  "media_society",
+  "public_programmes"
+];
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
@@ -8,118 +50,97 @@ export default async function handler(req, res) {
     GITHUB_TOKEN,
     GITHUB_OWNER,
     GITHUB_REPO,
-    GITHUB_BRANCH,
-    OPENAI_MODEL
+    GITHUB_BRANCH
   } = process.env;
 
-  if (
-    !OPENAI_API_KEY ||
-    !GITHUB_TOKEN ||
-    !GITHUB_OWNER ||
-    !GITHUB_REPO ||
-    !GITHUB_BRANCH
-  ) {
+  if (!OPENAI_API_KEY) {
     return res.status(500).json({
       ok: false,
-      error: "Missing required environment variables"
+      error: "Missing OPENAI_API_KEY"
+    });
+  }
+
+  if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO || !GITHUB_BRANCH) {
+    return res.status(500).json({
+      ok: false,
+      error: "Missing required GitHub environment variables"
     });
   }
 
   const today = new Date().toISOString().slice(0, 10);
 
-  const categories = [
-    {
-      key: "spirituality",
-      label: "Spirituality"
-    },
-    {
-      key: "sports",
-      label: "Sports"
-    },
-    {
-      key: "world_affairs",
-      label: "World Affairs"
-    },
-    {
-      key: "media_society",
-      label: "Media & Society"
-    },
-    {
-      key: "public_programmes",
-      label: "Public Programmes"
-    }
-  ];
-
   try {
-    const allOutputs = [];
+    const candidateBundle = await generateCandidateBundle(today);
+    const signalRail = buildSignalRail(today, candidateBundle);
 
-    for (const category of categories) {
-      const result = await generateCategoryBundle({
-        apiKey: OPENAI_API_KEY,
-        model: OPENAI_MODEL || "gpt-4.1-mini",
+    const filesWritten = [];
+
+    const candidatesPath = `generated/daily/${today}-candidates.json`;
+    await upsertGitHubFile({
+      token: GITHUB_TOKEN,
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      branch: GITHUB_BRANCH,
+      path: candidatesPath,
+      message: `Generate candidates for ${today}`,
+      contentObject: candidateBundle
+    });
+    filesWritten.push(candidatesPath);
+
+    const signalsPath = `generated/signals/${today}-signal-rail.json`;
+    await upsertGitHubFile({
+      token: GITHUB_TOKEN,
+      owner: GITHUB_OWNER,
+      repo: GITHUB_REPO,
+      branch: GITHUB_BRANCH,
+      path: signalsPath,
+      message: `Generate signal rail for ${today}`,
+      contentObject: signalRail
+    });
+    filesWritten.push(signalsPath);
+
+    for (const categoryKey of GENERATION_CATEGORIES) {
+      const categoryMeta = CATEGORY_META[categoryKey];
+      const selectedCandidate = pickCandidateForCategory(candidateBundle, categoryKey);
+
+      const generated = await generateArticleDraft({
         today,
-        category
+        categoryKey,
+        categoryMeta,
+        candidate: selectedCandidate
       });
 
-      allOutputs.push(result);
-    }
+      const draftPacket = buildDraftPacket({
+        today,
+        categoryKey,
+        categoryMeta,
+        candidate: selectedCandidate,
+        generated
+      });
 
-    const candidateAggregate = {
-      date: today,
-      generated_at: new Date().toISOString(),
-      categories: allOutputs.map((item) => ({
-        category: item.category,
-        display_label: item.display_label,
-        candidates: item.candidates
-      }))
-    };
+      const draftPath = `generated/drafts/${today}-${categoryKey}.json`;
 
-    const signalRail = buildSignalRail(today, allOutputs);
-
-    const writtenFiles = [];
-
-    writtenFiles.push(
       await upsertGitHubFile({
         token: GITHUB_TOKEN,
         owner: GITHUB_OWNER,
         repo: GITHUB_REPO,
         branch: GITHUB_BRANCH,
-        path: `generated/daily/${today}-candidates.json`,
-        message: `Generate daily candidates for ${today}`,
-        contentObject: candidateAggregate
-      })
-    );
+        path: draftPath,
+        message: `Generate ${categoryKey} draft for ${today}`,
+        contentObject: {
+          date: today,
+          category: categoryKey,
+          draft_packet: draftPacket
+        }
+      });
 
-    writtenFiles.push(
-      await upsertGitHubFile({
-        token: GITHUB_TOKEN,
-        owner: GITHUB_OWNER,
-        repo: GITHUB_REPO,
-        branch: GITHUB_BRANCH,
-        path: `generated/signals/${today}-signal-rail.json`,
-        message: `Generate signal rail for ${today}`,
-        contentObject: signalRail
-      })
-    );
-
-    for (const item of allOutputs) {
-      writtenFiles.push(
-        await upsertGitHubFile({
-          token: GITHUB_TOKEN,
-          owner: GITHUB_OWNER,
-          repo: GITHUB_REPO,
-          branch: GITHUB_BRANCH,
-          path: `generated/drafts/${today}-${item.category}.json`,
-          message: `Generate draft bundle for ${item.category} on ${today}`,
-          contentObject: item
-        })
-      );
+      filesWritten.push(draftPath);
     }
 
     return res.status(200).json({
       ok: true,
       date: today,
-      files_written: writtenFiles.map((f) => f.path)
+      files_written: filesWritten
     });
   } catch (error) {
     console.error("generate-daily failed:", error);
@@ -130,210 +151,349 @@ export default async function handler(req, res) {
   }
 }
 
-async function generateCategoryBundle({ apiKey, model, today, category }) {
+async function generateCandidateBundle(today) {
   const prompt = `
-You are generating a Drishvara editorial planning bundle.
+You are preparing Drishvara's daily editorial shortlist for ${today}.
 
-Category:
-${category.label}
+Return valid JSON only.
 
-Date:
-${today}
+Create 8 to 12 candidate topics across these categories:
+- spirituality
+- sports
+- world_affairs
+- media_society
+- public_programmes
 
-Return ONLY valid JSON. No markdown. No explanation.
+Rules:
+- Each candidate must be publication-worthy, serious, and reflective.
+- Avoid gossip, trivia, celebrity fluff, and hype.
+- Sports may include performance, tournament psychology, analytics, recovery, structure, or major event significance.
+- Public Programmes should focus on governance, delivery, public systems, digital systems, literacy, health, education, implementation, or civic design.
+- Topics should be broad enough to write a 400-550 word article on.
+- Include exactly one selected candidate per required category if possible.
 
-Output JSON format:
+Return JSON in this shape:
 {
-  "category": "${category.key}",
-  "display_label": "${category.label}",
   "date": "${today}",
   "candidates": [
     {
-      "candidate_id": "string",
-      "title": "string",
-      "summary": "string",
-      "angle_hint": "string",
-      "buzz_score": 0,
-      "intent_score": 0,
-      "relevance_score": 0,
-      "fit_score": 0,
-      "depth_score": 0,
-      "final_score": 0,
-      "status": "selected | developing | watching | archived"
+      "category": "spirituality",
+      "title": "",
+      "angle": "",
+      "summary": "",
+      "selected": true
     }
-  ],
-  "selected_topic": {
-    "candidate_id": "string",
-    "title": "string",
-    "summary": "string",
-    "why_selected": "string"
-  },
-  "draft_packet": {
-    "title": "string",
-    "subtitle": "string",
-    "meta_label": "${category.label}",
-    "slug": "string",
-    "angle": "string",
-    "why_now": "string",
-    "core_question": "string",
-    "outline": [
-      "string",
-      "string",
-      "string"
-    ],
-    "opening_paragraph": "string",
-    "closing_line": "string"
-  }
+  ]
 }
-
-Rules:
-1. Generate between 8 and 10 candidates.
-2. Scores must be realistic and varied.
-3. Exactly one candidate must have status "selected".
-4. Keep the style serious, reflective, non-clickbait, and aligned with Drishvara.
-5. Do not invent fake breaking facts. Topics can be framed as editorial candidates rather than hard claims.
-6. Make summaries concise.
-7. The draft_packet should be strong enough to become a future article.
-8. For media category, reference narrative/perception style thinking where relevant.
-9. For public_programmes category, emphasize implementation and delivery.
-10. For spirituality category, emphasize contemplative depth.
 `;
 
-  const responseJson = await callOpenAI({
-    apiKey,
-    model,
-    instructions:
-      "You generate structured editorial planning JSON for a serious publishing platform. Output only strict JSON.",
-    input: prompt
-  });
+  const parsed = await callModelForJson(prompt);
 
-  const text = extractResponseText(responseJson);
-  let parsed;
+  const rawCandidates = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
+  const normalized = rawCandidates
+    .map(normalizeCandidate)
+    .filter(Boolean);
 
-  try {
-    parsed = JSON.parse(text);
-  } catch (err) {
-    throw new Error(
-      `Failed to parse OpenAI JSON for ${category.key}. Raw output: ${text?.slice(0, 1000)}`
-    );
-  }
+  const ensured = ensureCategoryCoverage(today, normalized);
 
-  validateBundle(parsed, category);
-
-  return parsed;
+  return {
+    date: today,
+    generated_at: new Date().toISOString(),
+    candidates: ensured
+  };
 }
 
-async function callOpenAI({ apiKey, model, instructions, input }) {
-  const response = await fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${apiKey}`
+function normalizeCandidate(item) {
+  const category = safeText(item?.category).toLowerCase();
+  if (!CATEGORY_META[category]) return null;
+
+  const title = safeText(item?.title);
+  const angle = safeText(item?.angle);
+  const summary = safeText(item?.summary);
+
+  if (!title || !summary) return null;
+
+  return {
+    category,
+    title,
+    angle,
+    summary,
+    selected: Boolean(item?.selected)
+  };
+}
+
+function ensureCategoryCoverage(today, candidates) {
+  const output = [...candidates];
+
+  for (const categoryKey of GENERATION_CATEGORIES) {
+    const exists = output.some((x) => x.category === categoryKey);
+    if (!exists) {
+      output.push(getFallbackCandidate(today, categoryKey));
+    }
+  }
+
+  const selectedSeen = new Set();
+  for (const categoryKey of GENERATION_CATEGORIES) {
+    const categoryItems = output.filter((x) => x.category === categoryKey);
+    const alreadySelected = categoryItems.find((x) => x.selected);
+
+    if (!alreadySelected && categoryItems.length) {
+      categoryItems[0].selected = true;
+    }
+
+    if (!selectedSeen.has(categoryKey)) {
+      selectedSeen.add(categoryKey);
+    }
+  }
+
+  return output.slice(0, 12);
+}
+
+function getFallbackCandidate(today, categoryKey) {
+  const fallbackMap = {
+    spirituality: {
+      title: "Contemplative Silence in a Distracted Age",
+      angle: "inner clarity through deliberate quiet",
+      summary: "A reflective reading of silence as a discipline rather than an absence."
     },
-    body: JSON.stringify({
-      model,
-      instructions,
-      input,
-      max_output_tokens: 4000,
-      temperature: 0.7
-    })
-  });
+    sports: {
+      title: "How Analytics Reshape Athletic Performance",
+      angle: "measurement, recovery, and decision quality in modern sport",
+      summary: "A grounded sports essay on performance intelligence and competitive preparation."
+    },
+    world_affairs: {
+      title: "Reading Power Competition Beyond Headlines",
+      angle: "signal, posture, and restraint in global politics",
+      summary: "A slower geopolitical reading of escalation, leverage, and strategic signalling."
+    },
+    media_society: {
+      title: "How Algorithms Shape Public Attention",
+      angle: "content visibility, bias, and mediated perception",
+      summary: "A reading of how content systems quietly structure what societies notice."
+    },
+    public_programmes: {
+      title: "Why Delivery Architecture Matters in Public Systems",
+      angle: "implementation design over announcement language",
+      summary: "A public systems article on how execution reveals state capacity more than launch rhetoric."
+    }
+  };
 
-  if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(`OpenAI API error: ${response.status} ${errText}`);
-  }
-
-  return response.json();
+  return {
+    category: categoryKey,
+    title: fallbackMap[categoryKey].title,
+    angle: fallbackMap[categoryKey].angle,
+    summary: fallbackMap[categoryKey].summary,
+    selected: true,
+    fallback: true,
+    date_hint: today
+  };
 }
 
-function extractResponseText(payload) {
-  if (!payload || !Array.isArray(payload.output)) {
-    throw new Error("OpenAI response missing output array");
-  }
+function pickCandidateForCategory(candidateBundle, categoryKey) {
+  const candidates = Array.isArray(candidateBundle?.candidates)
+    ? candidateBundle.candidates.filter((x) => x.category === categoryKey)
+    : [];
 
-  let collected = "";
-
-  for (const item of payload.output) {
-    if (!item || item.type !== "message" || !Array.isArray(item.content)) {
-      continue;
-    }
-
-    for (const contentItem of item.content) {
-      if (contentItem?.type === "output_text" && typeof contentItem.text === "string") {
-        collected += contentItem.text;
-      }
-    }
-  }
-
-  if (!collected.trim()) {
-    throw new Error("No text content found in OpenAI response");
-  }
-
-  return collected.trim();
+  return candidates.find((x) => x.selected) || candidates[0] || getFallbackCandidate(candidateBundle?.date || "", categoryKey);
 }
 
-function validateBundle(bundle, category) {
-  if (!bundle || typeof bundle !== "object") {
-    throw new Error(`Bundle for ${category.key} is not an object`);
-  }
-
-  if (bundle.category !== category.key) {
-    throw new Error(`Bundle category mismatch for ${category.key}`);
-  }
-
-  if (!Array.isArray(bundle.candidates) || bundle.candidates.length < 8) {
-    throw new Error(`Bundle for ${category.key} has insufficient candidates`);
-  }
-
-  const selectedCount = bundle.candidates.filter((c) => c.status === "selected").length;
-  if (selectedCount !== 1) {
-    throw new Error(`Bundle for ${category.key} must have exactly one selected candidate`);
-  }
-
-  if (!bundle.selected_topic || !bundle.selected_topic.title) {
-    throw new Error(`Bundle for ${category.key} missing selected_topic`);
-  }
-
-  if (!bundle.draft_packet || !bundle.draft_packet.slug) {
-    throw new Error(`Bundle for ${category.key} missing draft_packet`);
-  }
-}
-
-function buildSignalRail(today, outputs) {
-  const items = [];
-
-  for (const output of outputs) {
-    for (const candidate of output.candidates) {
-      if (["selected", "developing", "watching"].includes(candidate.status)) {
-        items.push({
-          category: output.display_label,
-          title: candidate.title,
-          summary: candidate.summary,
-          status: capitalize(candidate.status),
-          url:
-            candidate.status === "selected"
-              ? `/generated/drafts/${today}-${output.category}.json`
-              : ""
-        });
-      }
-    }
-  }
-
-  items.sort((a, b) => {
-    const rank = { Selected: 3, Developing: 2, Watching: 1 };
-    return (rank[b.status] || 0) - (rank[a.status] || 0);
+function buildSignalRail(today, candidateBundle) {
+  const items = GENERATION_CATEGORIES.map((categoryKey) => {
+    const candidate = pickCandidateForCategory(candidateBundle, categoryKey);
+    return {
+      category: CATEGORY_META[categoryKey].label,
+      title: candidate.title,
+      summary: candidate.summary,
+      status: "Selected"
+    };
   });
 
   return {
     date: today,
     generated_at: new Date().toISOString(),
-    items: items.slice(0, 15)
+    items
   };
 }
 
-function capitalize(value) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
+async function generateArticleDraft({ today, categoryKey, categoryMeta, candidate }) {
+  const contentInstruction = `
+Write one polished Drishvara article for the category "${categoryMeta.label}".
+
+Date: ${today}
+Selected topic title: ${candidate.title}
+Selected angle: ${candidate.angle || ""}
+Selected summary: ${candidate.summary}
+
+Requirements:
+- Tone: thoughtful, grounded, reflective, readable, non-hyperbolic
+- Length: target 400 to 550 words
+- Output must be valid JSON only
+- Provide:
+  1. title
+  2. slug
+  3. subtitle
+  4. summary
+  5. image
+  6. reference_links
+  7. official_link
+  8. supporting_link
+  9. article_html
+
+Rules:
+- article_html must contain clean HTML paragraphs only
+- no markdown
+- no bullet lists
+- no tables
+- no fabricated sources
+- use concise, strong subtext rather than exaggerated claims
+- subtitle should be short and publication-ready
+- summary should work as a card description
+- slug must be URL-safe
+- reference_links should contain up to 2 factual external links if truly relevant, otherwise use empty strings
+- official_link should only be used if there is a clear official page
+- supporting_link should only be used if there is a useful secondary factual source
+
+Return JSON in this exact shape:
+{
+  "title": "",
+  "slug": "",
+  "subtitle": "",
+  "summary": "",
+  "image": "",
+  "reference_links": ["", ""],
+  "official_link": "",
+  "supporting_link": "",
+  "article_html": "<p>...</p><p>...</p>"
+}
+`;
+
+  return callModelForJson(contentInstruction);
+}
+
+function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generated }) {
+  return {
+    date: today,
+    meta_label: categoryMeta.label,
+    title: safeText(generated?.title, candidate.title || `${categoryMeta.label} Insight`),
+    slug: sanitizeSlug(
+      generated?.slug ||
+      generated?.title ||
+      candidate.title ||
+      `${categoryKey}-insight-${today}`
+    ),
+    subtitle: safeText(
+      generated?.subtitle,
+      candidate.summary || "A daily editorial selection from Drishvara."
+    ),
+    summary: safeText(
+      generated?.summary,
+      candidate.summary || "A daily editorial selection from Drishvara."
+    ),
+    image: safeText(generated?.image, getDefaultImageForCategory(categoryKey)),
+    reference_links: normalizeReferenceLinks(generated?.reference_links),
+    official_link: safeText(generated?.official_link),
+    supporting_link: safeText(generated?.supporting_link),
+    word_count_target: "400-550",
+    article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta)
+  };
+}
+
+async function callModelForJson(prompt) {
+  const response = await client.responses.create({
+    model: "gpt-5.4",
+    input: prompt
+  });
+
+  const text = safeText(response?.output_text);
+  if (!text) {
+    throw new Error("Model returned empty output");
+  }
+
+  const parsed = tryParseJson(text);
+  if (parsed) return parsed;
+
+  const extracted = extractJsonBlock(text);
+  const reparsed = extracted ? tryParseJson(extracted) : null;
+  if (reparsed) return reparsed;
+
+  throw new Error("Model output was not valid JSON");
+}
+
+function tryParseJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+function extractJsonBlock(text) {
+  const trimmed = String(text || "").trim();
+  const firstBrace = trimmed.indexOf("{");
+  const lastBrace = trimmed.lastIndexOf("}");
+  if (firstBrace === -1 || lastBrace === -1 || lastBrace <= firstBrace) {
+    return null;
+  }
+  return trimmed.slice(firstBrace, lastBrace + 1);
+}
+
+function normalizeReferenceLinks(input) {
+  if (!Array.isArray(input)) return [];
+  return input
+    .map((x) => String(x || "").trim())
+    .filter(Boolean)
+    .slice(0, 2);
+}
+
+function normalizeArticleHtml(articleHtml, candidate, categoryMeta) {
+  const html = safeText(articleHtml);
+  if (html && html.includes("<p>")) {
+    return html;
+  }
+
+  const fallbackParagraphs = [
+    `<p>${escapeHtml(candidate.title)} is a useful entry point into the broader concerns that shape ${escapeHtml(categoryMeta.label.toLowerCase())} in contemporary life.</p>`,
+    `<p>${escapeHtml(candidate.summary || "The issue invites slower reflection, careful reading, and attention to what lies beneath the first visible layer.")}</p>`,
+    `<p>Drishvara's editorial approach favors signal over noise, depth over immediacy, and interpretation over spectacle. That makes this topic suitable not merely as information, but as a lens through which larger patterns can be seen.</p>`,
+    `<p>In that spirit, the real value lies not only in the topic itself, but in the habits of reading it encourages: patience, context, proportion, and the refusal to mistake movement for meaning.</p>`
+  ];
+
+  return fallbackParagraphs.join("");
+}
+
+function getDefaultImageForCategory(categoryKey) {
+  const map = {
+    spirituality: "assets/featured/spirituality-default.jpg",
+    sports: "assets/featured/sports-default.jpg",
+    world_affairs: "assets/featured/world-default.jpg",
+    media_society: "assets/featured/media-default.jpg",
+    public_programmes: "assets/featured/policy-default.jpg"
+  };
+
+  return map[categoryKey] || "assets/featured/default.jpg";
+}
+
+function safeText(value, fallback = "") {
+  const text = String(value || "").trim();
+  return text || fallback;
+}
+
+function sanitizeSlug(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 async function upsertGitHubFile({
@@ -368,9 +528,7 @@ async function upsertGitHubFile({
     body.sha = existing.sha;
   }
 
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(
-    path
-  )}`;
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}`;
 
   const response = await fetch(url, {
     method: "PUT",
@@ -388,13 +546,11 @@ async function upsertGitHubFile({
     throw new Error(`GitHub upsert failed for ${path}: ${response.status} ${errText}`);
   }
 
-  return { path };
+  return response.json();
 }
 
 async function getGitHubFile({ token, owner, repo, path, branch }) {
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(
-    path
-  )}?ref=${encodeURIComponent(branch)}`;
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}?ref=${encodeURIComponent(branch)}`;
 
   const response = await fetch(url, {
     method: "GET",
