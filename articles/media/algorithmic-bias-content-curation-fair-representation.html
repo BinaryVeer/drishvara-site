@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Algorithmic Bias in Content Curation: Addressing the Challenges to Fair Representation · Drishvara</title>
+  <meta name="description" content="Understanding the impact of automated content selection on media diversity and public discourse" />
+  <link rel="icon" type="image/png" href="../../assets/logo/logo.png" />
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 14%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.04), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding: 8px 0 34px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--gold);
+    }
+
+    .article-shell {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
+      filter: blur(10px);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .logo {
+      position: relative;
+      z-index: 1;
+      width: 64px;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.16));
+    }
+
+    .meta {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.95rem;
+      margin: 4px 0 14px;
+      letter-spacing: 0.2px;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0 0 16px;
+      font-size: clamp(2.3rem, 4.8vw, 4rem);
+      line-height: 1.08;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 28px;
+      color: var(--text-soft);
+      font-size: 1.08rem;
+      line-height: 1.9;
+    }
+
+    .divider {
+      width: 86px;
+      height: 1px;
+      margin: 0 auto 30px;
+      background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.95), transparent);
+    }
+
+    .article-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 32px;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .article-body p {
+      margin: 0 0 18px;
+      color: var(--text-muted);
+      line-height: 1.95;
+      font-size: 1.05rem;
+    }
+
+    .article-body h2 {
+      margin: 28px 0 14px;
+      font-size: 1.55rem;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+
+    .article-body blockquote {
+      margin: 24px 0;
+      padding: 16px 18px;
+      border-left: 3px solid rgba(201, 162, 74, 0.65);
+      background: rgba(201, 162, 74, 0.04);
+      color: var(--text-soft);
+      font-style: italic;
+      line-height: 1.85;
+      border-radius: 8px;
+    }
+
+    .back-row {
+      text-align: center;
+      margin-top: 26px;
+    }
+
+    .back-link {
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.98rem;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 20px 16px 46px;
+      }
+
+      .nav {
+        gap: 18px;
+        padding-bottom: 26px;
+      }
+
+      .subtitle,
+      .article-body p {
+        font-size: 1rem;
+      }
+
+      .article-body {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../insights.html">Insights</a>
+      <a href="../../contact.html">Contact</a>
+    </nav>
+
+    <div class="article-shell">
+      <div style="text-align:center;">
+        <div class="logo-wrap">
+          <img src="../../assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
+        </div>
+      </div>
+
+      <div class="meta">Media &amp; Society</div>
+
+      <h1>Algorithmic Bias in Content Curation: Addressing the Challenges to Fair Representation</h1>
+
+      <div class="subtitle">
+        Understanding the impact of automated content selection on media diversity and public discourse
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="article-body">
+        <p>In an era dominated by digital media consumption, algorithmic content curation has become a powerful force shaping the information we encounter daily. While these systems offer personalized experiences, they also carry inherent risks of bias that can skew representation and influence public perception in subtle yet profound ways. This article seeks to critically examine the nature of these biases, their societal impact, and pathways toward fostering a more equitable media landscape.</p>
+        <h2>What this piece is really asking</h2><p>A critical examination of algorithmic influence on media narratives, exploring the mechanisms of bias and their implications for equitable representation.</p>
+        <h2>Why it matters now</h2><p>As media consumption increasingly relies on algorithm-driven platforms, it is imperative to analyze how these systems shape societal narratives and potentially entrench prejudices.</p>
+        <blockquote>How do algorithmic biases in content curation affect the diversity and fairness of media representation, and what measures can mitigate these effects?</blockquote>
+        
+        <h2>Lines of inquiry</h2>
+        <p>Introduction to algorithmic content curation and its prevalence in modern media platforms</p>
+<p>Analysis of common types and sources of algorithmic bias in media recommendation systems</p>
+<p>Implications of biased content curation on public perception and democratic discourse</p>
+<p>Case studies illustrating impact on various demographic and ideological groups</p>
+<p>Current approaches and challenges in mitigating algorithmic bias</p>
+<p>Recommendations for media platforms, regulators, and consumers to promote fair representation</p>
+      
+        <p>Addressing algorithmic bias is not merely a technological challenge but a societal imperative—ensuring that the digital narratives we engage with reflect the diversity and fairness essential for a healthy democratic discourse.</p>
+      </div>
+
+      <div class="back-row">
+        <a href="../../insights.html" class="back-link">← Back to Insights</a>
+      </div>
+    </div>
+
+    <footer>
+      Drishvara © 2026 · Media &amp; Society article
+    </footer>
+  </div>
+</body>
+</html>
