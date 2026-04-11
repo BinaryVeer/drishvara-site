@@ -128,6 +128,7 @@
       font-size: 0.85rem;
       line-height: 1.2;
       white-space: nowrap;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .live-dot {
@@ -154,6 +155,7 @@
       background: var(--surface);
       color: var(--text-soft);
       font-size: 0.92rem;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .hero {
@@ -661,23 +663,11 @@
           <h2>Sports Desk</h2>
           <p>Major world and Indian tournament highlights, key results, standings, and selected performance signals.</p>
 
-          <div class="sports-list">
+          <div class="sports-list" id="sports-desk-list">
             <div class="sports-item">
-              <div class="sub">Cricket</div>
-              <div class="title">Tournament and result feed placeholder</div>
-              <div class="meta">Point-table movement, next fixture, and India watch will appear here.</div>
-            </div>
-
-            <div class="sports-item">
-              <div class="sub">Football</div>
-              <div class="title">League movement and key result placeholder</div>
-              <div class="meta">Daily football summary with global and Indian emphasis.</div>
-            </div>
-
-            <div class="sports-item">
-              <div class="sub">Other Sports</div>
-              <div class="title">Tennis, hockey, badminton, chess, basketball, Olympics</div>
-              <div class="meta">Selected one-line results and significance notes.</div>
+              <div class="sub">Loading</div>
+              <div class="title">Fetching sports desk...</div>
+              <div class="meta">Please wait a moment.</div>
             </div>
           </div>
         </div>
@@ -731,7 +721,7 @@
       </main>
 
       <aside class="right-col stack">
-        <div class="card" id="word-card">
+        <div class="card">
           <div class="label">Word of the Day</div>
           <h2>Word of the Day</h2>
           <p><strong>English:</strong> <span id="word-english">Reflection</span></p>
@@ -740,7 +730,7 @@
           <p><strong>Meaning:</strong> <span id="word-meaning">sustained inward consideration</span></p>
         </div>
 
-        <div class="card" id="vedic-card">
+        <div class="card">
           <div class="label">Today’s Vedic Guidance</div>
           <h2 id="vedic-title-hi">आज का वैदिक संकेत</h2>
           <p><strong>वार:</strong> <span id="vedic-weekday-hi">शुक्रवार</span></p>
@@ -766,7 +756,7 @@
           </div>
         </div>
 
-        <div class="card" id="panchang-card">
+        <div class="card">
           <div class="label">Panchang & Festival View</div>
           <h2>Location-based Panchang</h2>
           <p>Select a place so the app can later show sunrise, sunset, moonrise, moonset, panchang, and upcoming festivals in both Hindi and English.</p>
@@ -795,8 +785,8 @@
           <div class="festival-list" id="festival-list">
             <div class="festival-item">
               <div class="sub">Upcoming Observance</div>
-              <div class="title">Kalashtami (Today)</div>
-              <div class="meta">Example festival listing block with future bilingual support.</div>
+              <div class="title">Loading festivals...</div>
+              <div class="meta">Please wait a moment.</div>
             </div>
           </div>
         </div>
@@ -877,26 +867,10 @@
       const today = new Date().toISOString().slice(0, 10);
 
       const categories = [
-        {
-          key: "spirituality",
-          folder: "spiritual",
-          label: "Spirituality"
-        },
-        {
-          key: "world_affairs",
-          folder: "world",
-          label: "World Affairs"
-        },
-        {
-          key: "media_society",
-          folder: "media",
-          label: "Media & Society"
-        },
-        {
-          key: "public_programmes",
-          folder: "policy",
-          label: "Public Programmes"
-        }
+        { key: "spirituality", folder: "spiritual", label: "Spirituality" },
+        { key: "world_affairs", folder: "world", label: "World Affairs" },
+        { key: "media_society", folder: "media", label: "Media & Society" },
+        { key: "public_programmes", folder: "policy", label: "Public Programmes" }
       ];
 
       try {
@@ -905,16 +879,12 @@
             const draftPath = `generated/drafts/${today}-${category.key}.json`;
             const response = await fetch(draftPath, { cache: "no-store" });
 
-            if (!response.ok) {
-              return null;
-            }
+            if (!response.ok) return null;
 
             const data = await response.json();
             const packet = data && data.draft_packet ? data.draft_packet : null;
 
-            if (!packet || !packet.title || !packet.slug) {
-              return null;
-            }
+            if (!packet || !packet.title || !packet.slug) return null;
 
             return {
               label: packet.meta_label || category.label,
@@ -975,26 +945,39 @@
       }
     }
 
-    async function loadHomepageContext() {
+    async function loadDailyContext() {
       const today = new Date().toISOString().slice(0, 10);
-      const contextPath = `generated/homepage/${today}-homepage-context.json`;
+      const path = `generated/daily-context/${today}-daily-context.json`;
 
       try {
-        const response = await fetch(contextPath, { cache: "no-store" });
-
-        if (!response.ok) {
-          throw new Error(`Homepage context not found for ${today}`);
-        }
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error("Daily context unavailable");
 
         const data = await response.json();
 
-        applyLiveScore(data.live_score);
         applyWordOfTheDay(data.word_of_the_day);
         applyVedicGuidance(data.vedic_guidance);
         applyPanchang(data.panchang);
         applyFestivals(data.festivals);
       } catch (error) {
-        console.log("Homepage context unavailable:", error.message);
+        console.log("Daily context unavailable:", error.message);
+      }
+    }
+
+    async function loadSportsContext() {
+      const today = new Date().toISOString().slice(0, 10);
+      const path = `generated/sports-context/${today}-sports-context.json`;
+
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error("Sports context unavailable");
+
+        const data = await response.json();
+
+        applyLiveScore(data.live_score);
+        applySportsDesk(data.sports_desk);
+      } catch (error) {
+        console.log("Sports context unavailable:", error.message);
       }
     }
 
@@ -1007,6 +990,7 @@
         return;
       }
 
+      chip.style.display = "inline-flex";
       chip.innerHTML = `
         <span class="live-dot"></span>
         <span class="live-text">
@@ -1016,9 +1000,21 @@
       `;
     }
 
+    function applySportsDesk(items) {
+      const list = document.getElementById("sports-desk-list");
+      if (!list || !Array.isArray(items) || !items.length) return;
+
+      list.innerHTML = items.map(item => `
+        <div class="sports-item">
+          <div class="sub">${escapeHtml(item.category || "Sports")}</div>
+          <div class="title">${escapeHtml(item.title || "")}</div>
+          <div class="meta">${escapeHtml(item.meta || "")}</div>
+        </div>
+      `).join("");
+    }
+
     function applyWordOfTheDay(word) {
       if (!word) return;
-
       setText("word-english", word.english);
       setText("word-hindi", word.hindi);
       setText("word-sanskrit", word.sanskrit);
@@ -1027,7 +1023,6 @@
 
     function applyVedicGuidance(vedic) {
       if (!vedic) return;
-
       setText("vedic-title-hi", vedic.hindi_title);
       setText("vedic-weekday-hi", vedic.weekday_hindi);
       setText("vedic-colour-hi", vedic.suggested_colour_hindi);
@@ -1038,7 +1033,6 @@
 
     function applyPanchang(panchang) {
       if (!panchang) return;
-
       setSelectValue("panchang-place-select", panchang.place);
       setText("panchang-sunrise", panchang.sunrise);
       setText("panchang-sunset", panchang.sunset);
@@ -1101,7 +1095,8 @@
 
     loadSignalRail();
     loadFeaturedReads();
-    loadHomepageContext();
+    loadDailyContext();
+    loadSportsContext();
   </script>
 </body>
 </html>
