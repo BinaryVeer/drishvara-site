@@ -11,6 +11,7 @@
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
@@ -155,18 +156,61 @@
       font-size: 0.98rem;
     }
 
+    .hero-media-wrap {
+      margin-bottom: 24px;
+    }
+
     .hero-image {
       width: 100%;
       height: 280px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 24px;
       background:
-        linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05)),
-        url('assets/featured/fallback/media-default.jpg');
+        linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03)),
+        url('/assets/featured/fallback/media-default.jpg');
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
       display: block;
+    }
+
+    .hero-image-fallback {
+      width: 100%;
+      height: 220px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 24px;
+      color: var(--text-soft);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.96rem;
+    }
+
+    .media-credit {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .media-credit a {
+      color: var(--gold);
+    }
+
+    .media-credit .mode {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-soft);
+      font-size: 0.76rem;
     }
 
     .article-body {
@@ -220,7 +264,8 @@
         padding: 22px 18px;
       }
 
-      .hero-image {
+      .hero-image,
+      .hero-image-fallback {
         height: 200px;
       }
     }
@@ -251,7 +296,17 @@
       <h1>The Role of Public Media in Upholding Democratic Values in the Digital Age</h1>
       <div class="subtitle">Challenges and opportunities for public broadcasters amid digital disruption</div>
       <div class="summary-box">This piece analyzes strategies employed by public media to adapt to digital platforms while safeguarding journalistic integrity and fostering informed citizenry.</div>
-      <div class="hero-image" aria-label="Article image"></div>
+
+      <div class="hero-media-wrap">
+        <div class="hero-image" role="img" aria-label="Media &amp; Society visual for The Role of Public Media in Upholding Democratic Values in the Digital Age"></div>
+
+        <div class="media-credit">
+                Image credit: Drishvara Fallback
+                
+                 · Media &amp; Society visual for The Role of Public Media in Upholding Democratic Values in the Digital Age
+                <span class="mode">category_fallback</span>
+              </div>
+      </div>
 
       <div class="article-body">
         <p>In an era marked by rapid digital transformation and the proliferation of misinformation, public media faces a critical test in its mission to uphold democratic values. The digital age has reshaped how information is produced, distributed, and consumed, presenting both significant challenges and unique opportunities for public broadcasters striving to maintain credibility, independence, and public trust.</p><p>Public media institutions have long been pillars of democratic societies, offering impartial news and fostering informed citizenry. However, the rise of social media platforms and algorithm-driven content delivery has fragmented audiences and intensified competition for attention. This environment often favors sensationalism and speed over accuracy and context, posing a threat to the journalistic standards that public media uphold.</p><p>To navigate these challenges, public broadcasters are increasingly embracing digital platforms while reaffirming their commitment to editorial independence and transparency. Many have invested in digital-first content strategies, leveraging multimedia storytelling and interactive formats to engage younger and more diverse audiences. By doing so, they not only expand their reach but also create spaces where nuanced, fact-based discourse can thrive amid the noise.</p><p>Maintaining public trust requires more than adapting to new technologies; it demands a steadfast dedication to accountability and ethical journalism. Public media organizations are enhancing fact-checking initiatives and promoting media literacy to empower audiences to critically evaluate information. These efforts are vital in countering misinformation and reinforcing the role of public media as a reliable source of truth.</p><p>Moreover, the independence of public broadcasters remains paramount. Shielded from commercial pressures and political influence, they provide a counterbalance to polarized and partisan media landscapes. Ensuring sustainable funding models that protect this independence is an ongoing concern, especially as digital advertising revenues shift and governmental support faces scrutiny.</p><p>Ultimately, the role of public media in the digital age is not only to inform but to foster democratic engagement. By embracing innovation without compromising core values, public broadcasters can continue to serve as trusted institutions that support open dialogue, accountability, and an informed public—foundations essential to healthy democracies.</p>
