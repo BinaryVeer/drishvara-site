@@ -549,6 +549,37 @@ async function resolveArticleImage({
     watermark_required: false
   };
 }
+
+  const fallbackExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: fallbackPath
+  });
+
+  if (fallbackExists) {
+    return {
+      image_mode: "category_fallback",
+      image_path: fallbackPath,
+      image_credit: "Drishvara Fallback",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, generated?.title),
+      image_prompt: "",
+      watermark_required: false
+    };
+  }
+
+  return {
+    image_mode: "no_image",
+    image_path: "",
+    image_credit: "",
+    image_source_url: "",
+    image_alt: buildDefaultAlt(categoryKey, generated?.title),
+    image_prompt: "",
+    watermark_required: false
+  };
+}
 async function githubFileExists({ token, owner, repo, branch, path }) {
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}?ref=${encodeURIComponent(branch)}`;
 
