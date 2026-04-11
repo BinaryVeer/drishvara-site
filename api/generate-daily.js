@@ -818,6 +818,187 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+async function findSourcedImageFromCommons({
+  title,
+  subtitle,
+  summary,
+  categoryKey
+}) {
+  const searchQuery = buildCommonsSearchQuery({
+    title,
+    subtitle,
+    summary,
+    categoryKey
+  });
+
+  if (!searchQuery) return null;
+
+  const apiUrl = new URL("https://commons.wikimedia.org/w/api.php");
+  apiUrl.search = new URLSearchParams({
+    action: "query",
+    format: "json",
+    origin: "*",
+    generator: "search",
+    gsrsearch: searchQuery,
+    gsrlimit: "6",
+    gsrnamespace: "6", // File namespace
+    prop: "imageinfo|info",
+    iiprop: "url|extmetadata|mime|size",
+    iiurlwidth: "1600"
+  }).toString();
+
+  let payload;
+  try {
+    const response = await fetch(apiUrl.toString(), {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    payload = await response.json();
+  } catch {
+    return null;
+  }
+
+  const pages = Object.values(payload?.query?.pages || {});
+  if (!pages.length) return null;
+
+  const candidates = pages
+    .map((page) => normalizeCommonsCandidate(page, { title, subtitle, summary, categoryKey }))
+    .filter(Boolean)
+    .sort((a, b) => b.score - a.score);
+
+  return candidates[0] || null;
+}
+
+function buildCommonsSearchQuery({ title, subtitle, summary, categoryKey }) {
+  const categoryHints = {
+    spirituality: "meditation OR mindfulness OR temple OR prayer OR spiritual",
+    sports: "sports OR athlete OR stadium OR match OR tournament",
+    world_affairs: "diplomacy OR world map OR international relations OR geopolitics",
+    media_society: "journalism OR media OR newsroom OR digital communication",
+    public_programmes: "public health OR school OR governance OR infrastructure OR community"
+  };
+
+  const titleWords = extractSearchTerms(title, 4);
+  const subtitleWords = extractSearchTerms(subtitle, 2);
+  const summaryWords = extractSearchTerms(summary, 2);
+  const hint = categoryHints[categoryKey] || "";
+
+  const parts = [
+    ...titleWords,
+    ...subtitleWords,
+    ...summaryWords,
+    hint
+  ].filter(Boolean);
+
+  return parts.join(" ");
+}
+
+function extractSearchTerms(text, limit = 4) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter((word) => word.length > 3)
+    .filter((word) => !COMMON_STOPWORDS.has(word))
+    .slice(0, limit);
+}
+
+function normalizeCommonsCandidate(page, context) {
+  const imageInfo = Array.isArray(page?.imageinfo) ? page.imageinfo[0] : null;
+  if (!imageInfo) return null;
+
+  const imageUrl = imageInfo.thumburl || imageInfo.url || "";
+  if (!imageUrl) return null;
+
+  const mime = String(imageInfo.mime || "").toLowerCase();
+  if (!mime.startsWith("image/")) return null;
+
+  const width = Number(imageInfo.thumbwidth || imageInfo.width || 0);
+  if (width < 600) return null;
+
+  const titleText = String(page?.title || "");
+  const ext = imageInfo.extmetadata || {};
+
+  const sourceUrl =
+    safeText(ext?.LicenseUrl?.value) ||
+    safeText(ext?.Credit?.value) ||
+    buildCommonsFilePageUrl(titleText);
+
+  const credit =
+    stripHtml(safeText(ext?.Artist?.value)) ||
+    stripHtml(safeText(ext?.Credit?.value)) ||
+    "Wikimedia Commons";
+
+  const alt = buildCommonsAltText(context, titleText);
+
+  const score = scoreCommonsCandidate({
+    pageTitle: titleText,
+    context
+  });
+
+  if (score < 2) return null;
+
+  return {
+    image_mode: "source_curated",
+    image_path: imageUrl,
+    image_credit: credit,
+    image_source_url: buildCommonsFilePageUrl(titleText),
+    image_alt: alt,
+    image_prompt: "",
+    watermark_required: false,
+    score
+  };
+}
+
+function scoreCommonsCandidate({ pageTitle, context }) {
+  const haystack = `${pageTitle} ${context.title || ""} ${context.subtitle || ""} ${context.summary || ""}`.toLowerCase();
+
+  let score = 0;
+  for (const token of extractSearchTerms(context.title, 5)) {
+    if (haystack.includes(token)) score += 2;
+  }
+  for (const token of extractSearchTerms(context.subtitle, 3)) {
+    if (haystack.includes(token)) score += 1;
+  }
+  for (const token of extractSearchTerms(context.summary, 3)) {
+    if (haystack.includes(token)) score += 1;
+  }
+
+  return score;
+}
+
+function buildCommonsFilePageUrl(fileTitle) {
+  if (!fileTitle) return "";
+  return `https://commons.wikimedia.org/wiki/${encodeURIComponent(String(fileTitle).replace(/ /g, "_"))}`;
+}
+
+function buildCommonsAltText(context, fileTitle) {
+  const label = CATEGORY_META[context.categoryKey]?.label || "Drishvara";
+  const title = safeText(context.title, label);
+  return `${label} image related to ${title}${fileTitle ? ` (${stripFilePrefix(fileTitle)})` : ""}`;
+}
+
+function stripFilePrefix(value) {
+  return String(value || "").replace(/^File:/i, "");
+}
+
+function stripHtml(value) {
+  return String(value || "").replace(/<[^>]*>/g, "").trim();
+}
+
+const COMMON_STOPWORDS = new Set([
+  "the", "and", "with", "from", "into", "that", "this", "their", "through",
+  "about", "modern", "public", "role", "impact", "lessons", "digital", "new"
+]);
+
 async function upsertGitHubFile({
   token,
   owner,
