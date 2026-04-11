@@ -62,7 +62,8 @@ export default async function handler(req, res) {
     });
   }
 
-  const model = OPENAI_MODEL || "gpt-5";
+  // Safer default while stabilizing. You can override in Vercel.
+  const model = OPENAI_MODEL || "gpt-4.1-mini";
   const today = new Date().toISOString().slice(0, 10);
 
   try {
@@ -134,6 +135,7 @@ export default async function handler(req, res) {
           draft_packet: draftPacket
         }
       });
+
       filesWritten.push(draftPath);
     }
 
@@ -170,7 +172,7 @@ Rules:
 - Sports may include performance, tournament psychology, analytics, recovery, structure, or major event significance.
 - Public Programmes should focus on governance, delivery, public systems, digital systems, literacy, health, education, implementation, or civic design.
 - Topics should be broad enough to write a 400-550 word article on.
-- Include exactly one selected candidate per required category if possible.
+- Include at least one selected candidate per required category.
 
 Return JSON in this shape:
 {
@@ -187,7 +189,11 @@ Return JSON in this shape:
 }
 `;
 
-  const parsed = await callOpenAIForJson({ apiKey, model, prompt });
+  const parsed = await callOpenAIForJson({
+    apiKey,
+    model,
+    prompt
+  });
 
   const rawCandidates = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
   const normalized = rawCandidates
@@ -245,7 +251,7 @@ Rules:
 - subtitle should be short and publication-ready
 - summary should work as a card description
 - slug must be URL-safe
-- reference_links should contain up to 2 factual external links if truly relevant, otherwise use empty strings
+- reference_links should contain up to 2 factual external links if truly relevant, otherwise return empty strings
 - official_link should only be used if there is a clear official page
 - supporting_link should only be used if there is a useful secondary factual source
 
@@ -263,7 +269,11 @@ Return JSON in this exact shape:
 }
 `;
 
-  return callOpenAIForJson({ apiKey, model, prompt });
+  return callOpenAIForJson({
+    apiKey,
+    model,
+    prompt
+  });
 }
 
 async function callOpenAIForJson({ apiKey, model, prompt }) {
@@ -275,7 +285,13 @@ async function callOpenAIForJson({ apiKey, model, prompt }) {
     },
     body: JSON.stringify({
       model,
-      input: prompt
+      input: prompt,
+      temperature: 0.4,
+      text: {
+        format: {
+          type: "json_object"
+        }
+      }
     })
   });
 
@@ -292,19 +308,53 @@ async function callOpenAIForJson({ apiKey, model, prompt }) {
     throw new Error(`OpenAI returned non-JSON API response: ${rawText}`);
   }
 
-  const outputText = safeText(payload?.output_text);
+  const outputText = extractResponseText(payload);
   if (!outputText) {
-    throw new Error(`OpenAI response missing output_text: ${rawText}`);
+    throw new Error(`OpenAI response text not found in payload: ${rawText}`);
   }
 
-  const direct = tryParseJson(outputText);
-  if (direct) return direct;
+  const parsed = tryParseJson(outputText);
+  if (parsed) return parsed;
+
+  const repaired = tryRepairCommonJsonIssue(outputText);
+  if (repaired) return repaired;
 
   const extracted = extractJsonBlock(outputText);
   const reparsed = extracted ? tryParseJson(extracted) : null;
   if (reparsed) return reparsed;
 
   throw new Error(`Model output was not valid JSON: ${outputText}`);
+}
+
+function extractResponseText(payload) {
+  if (!payload || !Array.isArray(payload.output)) return "";
+
+  for (const item of payload.output) {
+    if (item?.type !== "message" || !Array.isArray(item.content)) continue;
+
+    for (const contentItem of item.content) {
+      if (contentItem?.type === "output_text" && typeof contentItem.text === "string") {
+        return contentItem.text.trim();
+      }
+    }
+  }
+
+  return "";
+}
+
+function tryRepairCommonJsonIssue(text) {
+  if (!text) return null;
+
+  let repaired = String(text);
+
+  // Fix common accidental pattern: true" or false"
+  repaired = repaired.replace(/:\s*true\\?"/g, ': true');
+  repaired = repaired.replace(/:\s*false\\?"/g, ': false');
+
+  // Remove stray trailing commas before } or ]
+  repaired = repaired.replace(/,\s*([}\]])/g, "$1");
+
+  return tryParseJson(repaired);
 }
 
 function buildDraftPacket({ today, categoryKey, categoryMeta, candidate, generated }) {
@@ -385,6 +435,7 @@ function ensureCategoryCoverage(today, candidates) {
   for (const categoryKey of GENERATION_CATEGORIES) {
     const categoryItems = output.filter((x) => x.category === categoryKey);
     const alreadySelected = categoryItems.find((x) => x.selected);
+
     if (!alreadySelected && categoryItems.length) {
       categoryItems[0].selected = true;
     }
