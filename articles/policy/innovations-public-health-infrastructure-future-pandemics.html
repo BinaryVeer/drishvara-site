@@ -24,8 +24,7 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       min-height: 100%;
@@ -93,6 +92,7 @@
     .topbar-nav a {
       color: var(--text-soft);
       font-size: 0.96rem;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .topbar-nav a:hover {
@@ -160,34 +160,18 @@
       margin-bottom: 24px;
     }
 
-    .hero-image {
+    .hero-image-tag {
       width: 100%;
       height: 280px;
+      object-fit: cover;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.06);
-      background:
-        linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03)),
-        url('/assets/generated/2026-04-12/public_programmes/innovations-public-health-infrastructure-future-pandemics-ai-lead-1.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       display: block;
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
     }
 
-    .hero-image-fallback {
-      width: 100%;
-      height: 220px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.06);
+    .hero-image-tag.used-fallback {
       background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      color: var(--text-soft);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 0.96rem;
     }
 
     .media-credit {
@@ -264,8 +248,7 @@
         padding: 22px 18px;
       }
 
-      .hero-image,
-      .hero-image-fallback {
+      .hero-image-tag {
         height: 200px;
       }
     }
@@ -298,12 +281,18 @@
       <div class="summary-box">This article reviews new models of health infrastructure, including digital surveillance, rapid response units, and community engagement strategies to mitigate future health crises.</div>
 
       <div class="hero-media-wrap">
-        <div class="hero-image" role="img" aria-label="Public Programmes visual for Innovations in Public Health Infrastructure: Preparing for Future Pandemics"></div>
+        <img
+                 class="hero-image-tag"
+                 src="/assets/generated/2026-04-12/public_programmes/innovations-public-health-infrastructure-future-pandemics-ai-lead-1.png"
+                 alt="Public Programmes visual for Innovations in Public Health Infrastructure: Preparing for Future Pandemics"
+                 loading="eager"
+                 referrerpolicy="no-referrer"
+                 onerror="this.onerror=null; this.src='/assets/featured/fallback/policy-default.jpg'; this.classList.add('used-fallback');"
+               />
 
         <div class="media-credit">
                 Image credit: Drishvara AI
                 
-                 · Public Programmes visual for Innovations in Public Health Infrastructure: Preparing for Future Pandemics
                 <span class="mode">generated_thematic</span>
               </div>
       </div>
