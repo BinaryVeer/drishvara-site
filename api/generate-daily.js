@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -52,7 +53,10 @@ export default async function handler(req, res) {
     GITHUB_TOKEN,
     GITHUB_OWNER,
     GITHUB_REPO,
-    GITHUB_BRANCH
+    GITHUB_BRANCH,
+    SUPABASE_URL,
+    SUPABASE_SECRET_KEY,
+    SUPABASE_SERVICE_ROLE_KEY
   } = process.env;
 
   if (!OPENAI_API_KEY) {
@@ -69,10 +73,40 @@ export default async function handler(req, res) {
     });
   }
 
+    const supabaseKey = SUPABASE_SECRET_KEY || SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!SUPABASE_URL || !supabaseKey) {
+    return res.status(500).json({
+      ok: false,
+      error: "Missing required Supabase environment variables"
+    });
+  }
+
   const model = OPENAI_MODEL || "gpt-4.1-mini";
   const imageModel = OPENAI_IMAGE_MODEL || "gpt-image-1";
   const today = new Date().toISOString().slice(0, 10);
+  const supabase = createClient(SUPABASE_URL, supabaseKey);
+  let publicationRunId = null;
 
+  const { data: runRow, error: runError } = await supabase
+    .from("publication_runs")
+    .insert({
+      run_date: today,
+      run_type: "generate_daily",
+      status: "started",
+      inputs_json: {}
+    })
+    .select("id")
+    .single();
+
+  if (runError) {
+    return res.status(500).json({
+      ok: false,
+      error: `Failed to create publication run: ${runError.message}`
+    });
+  }
+
+  publicationRunId = runRow.id;
   try {
     const candidateBundle = await generateCandidateBundle({
       apiKey: OPENAI_API_KEY,
@@ -167,13 +201,36 @@ export default async function handler(req, res) {
 
       filesWritten.push(draftPath);
     }
+  
+    await supabase
+    .from("publication_runs")
+    .update({
+      status: "completed",
+      finished_at: new Date().toISOString(),
+      outputs_json: {
+        files_written: filesWritten
+      }
+    })
+    .eq("id", publicationRunId);
 
     return res.status(200).json({
       ok: true,
       date: today,
       files_written: filesWritten
     });
+
+
   } catch (error) {
+     if (publicationRunId) {
+     await supabase
+       .from("publication_runs")
+       .update({
+         status: "failed",
+         finished_at: new Date().toISOString(),
+         error_text: error.message || "Unknown error"
+       })
+       .eq("id", publicationRunId);
+   }  
     console.error("generate-daily failed:", error);
     return res.status(500).json({
       ok: false,
