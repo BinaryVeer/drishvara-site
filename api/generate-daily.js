@@ -48,6 +48,7 @@ export default async function handler(req, res) {
   const {
     OPENAI_API_KEY,
     OPENAI_MODEL,
+    OPENAI_IMAGE_MODEL,
     GITHUB_TOKEN,
     GITHUB_OWNER,
     GITHUB_REPO,
@@ -69,6 +70,7 @@ export default async function handler(req, res) {
   }
 
   const model = OPENAI_MODEL || "gpt-4.1-mini";
+  const imageModel = OPENAI_IMAGE_MODEL || "gpt-image-1";
   const today = new Date().toISOString().slice(0, 10);
 
   try {
@@ -82,7 +84,7 @@ export default async function handler(req, res) {
     const filesWritten = [];
 
     const candidatesPath = `generated/daily/${today}-candidates.json`;
-    await upsertGitHubFile({
+    await upsertGitHubJsonFile({
       token: GITHUB_TOKEN,
       owner: GITHUB_OWNER,
       repo: GITHUB_REPO,
@@ -94,7 +96,7 @@ export default async function handler(req, res) {
     filesWritten.push(candidatesPath);
 
     const signalsPath = `generated/signals/${today}-signal-rail.json`;
-    await upsertGitHubFile({
+    await upsertGitHubJsonFile({
       token: GITHUB_TOKEN,
       owner: GITHUB_OWNER,
       repo: GITHUB_REPO,
@@ -118,7 +120,7 @@ export default async function handler(req, res) {
         candidate: selectedCandidate
       });
 
-      const draftPacket = await buildDraftPacket({
+      let draftPacket = await buildDraftPacket({
         token: GITHUB_TOKEN,
         owner: GITHUB_OWNER,
         repo: GITHUB_REPO,
@@ -130,9 +132,26 @@ export default async function handler(req, res) {
         generated
       });
 
+      if (
+        draftPacket.image_mode === "generated_thematic_pending" &&
+        draftPacket.image_prompt
+      ) {
+        draftPacket = await finalizePendingAiImage({
+          apiKey: OPENAI_API_KEY,
+          imageModel,
+          token: GITHUB_TOKEN,
+          owner: GITHUB_OWNER,
+          repo: GITHUB_REPO,
+          branch: GITHUB_BRANCH,
+          today,
+          categoryKey,
+          draftPacket
+        });
+      }
+
       const draftPath = `generated/drafts/${today}-${categoryKey}.json`;
 
-      await upsertGitHubFile({
+      await upsertGitHubJsonFile({
         token: GITHUB_TOKEN,
         owner: GITHUB_OWNER,
         repo: GITHUB_REPO,
@@ -206,10 +225,7 @@ Return JSON in this shape:
   });
 
   const rawCandidates = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
-  const normalized = rawCandidates
-    .map(normalizeCandidate)
-    .filter(Boolean);
-
+  const normalized = rawCandidates.map(normalizeCandidate).filter(Boolean);
   const ensured = ensureCategoryCoverage(today, normalized);
 
   return {
@@ -271,6 +287,7 @@ Rules:
 - supporting_link should only be used if there is a useful secondary factual source
 - image may be empty if no curated image path is available
 - generated_image_path may be empty if no generated image exists
+- image_prompt should describe a tasteful, editorial, non-cartoon, story-aligned visual that can be generated later if manual and sourced images are unavailable
 
 Return JSON in this exact shape:
 {
@@ -410,7 +427,13 @@ async function buildDraftPacket({
     official_link: safeText(generated?.official_link),
     supporting_link: safeText(generated?.supporting_link),
     word_count_target: "400-550",
-    article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta)
+    article_html: normalizeArticleHtml(generated?.article_html, candidate, categoryMeta),
+    generated_image_path: safeText(generated?.generated_image_path),
+    generated_image_alt: safeText(generated?.image_alt),
+    generated_image_credit: safeText(generated?.image_credit),
+    generated_image_source_url: safeText(generated?.image_source_url),
+    generated_image_prompt: safeText(generated?.image_prompt),
+    generated_image_direct: safeText(generated?.image)
   };
 
   const imageInfo = await resolveArticleImage({
@@ -434,6 +457,384 @@ async function buildDraftPacket({
     image_prompt: imageInfo.image_prompt || "",
     watermark_required: imageInfo.watermark_required
   };
+}
+
+async function resolveArticleImage({
+  token,
+  owner,
+  repo,
+  branch,
+  draftPacket,
+  categoryKey,
+  today
+}) {
+  const slug = sanitizeSlug(draftPacket.slug || draftPacket.title || "");
+
+  const exactManualPath = `assets/featured/${today}/${categoryKey}/${slug}-lead-1.jpg`;
+  const categoryDayPath = `assets/featured/${today}/${categoryKey}/lead-1.jpg`;
+  const fallbackPath = getDefaultImageForCategory(categoryKey);
+
+  const exactManualExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: exactManualPath
+  });
+
+  if (exactManualExists) {
+    return {
+      image_mode: "manual_asset_exact",
+      image_path: exactManualPath,
+      image_credit: "Drishvara Library",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
+      image_prompt: "",
+      watermark_required: true
+    };
+  }
+
+  const categoryDayExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: categoryDayPath
+  });
+
+  if (categoryDayExists) {
+    return {
+      image_mode: "manual_asset_category",
+      image_path: categoryDayPath,
+      image_credit: "Drishvara Library",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
+      image_prompt: "",
+      watermark_required: true
+    };
+  }
+
+  const commonsImage = await findSourcedImageFromCommons({
+    title: draftPacket.title,
+    subtitle: draftPacket.subtitle,
+    summary: draftPacket.summary,
+    categoryKey
+  });
+
+  if (commonsImage) {
+    return commonsImage;
+  }
+
+  const directCuratedImage = safeText(draftPacket.generated_image_direct);
+  if (
+    directCuratedImage &&
+    (directCuratedImage.startsWith("http://") ||
+      directCuratedImage.startsWith("https://") ||
+      directCuratedImage.startsWith("assets/") ||
+      directCuratedImage.startsWith("/assets/"))
+  ) {
+    return {
+      image_mode: "source_curated",
+      image_path: directCuratedImage,
+      image_credit: safeText(draftPacket.generated_image_credit, "Source Provided"),
+      image_source_url: safeText(draftPacket.generated_image_source_url),
+      image_alt: safeText(
+        draftPacket.generated_image_alt,
+        buildDefaultAlt(categoryKey, draftPacket.title)
+      ),
+      image_prompt: "",
+      watermark_required: false
+    };
+  }
+
+  const generatedImagePath = safeText(draftPacket.generated_image_path);
+  if (generatedImagePath) {
+    return {
+      image_mode: "generated_thematic",
+      image_path: generatedImagePath,
+      image_credit: safeText(draftPacket.generated_image_credit, "Drishvara AI"),
+      image_source_url: "",
+      image_alt: safeText(
+        draftPacket.generated_image_alt,
+        buildDefaultAlt(categoryKey, draftPacket.title)
+      ),
+      image_prompt: safeText(draftPacket.generated_image_prompt),
+      watermark_required: true
+    };
+  }
+
+  const aiImage = buildAIImagePlaceholder({
+    draftPacket,
+    categoryKey
+  });
+
+  if (aiImage) {
+    return aiImage;
+  }
+
+  const fallbackExists = await githubFileExists({
+    token,
+    owner,
+    repo,
+    branch,
+    path: fallbackPath
+  });
+
+  if (fallbackExists) {
+    return {
+      image_mode: "category_fallback",
+      image_path: fallbackPath,
+      image_credit: "Drishvara Fallback",
+      image_source_url: "",
+      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
+      image_prompt: "",
+      watermark_required: false
+    };
+  }
+
+  return {
+    image_mode: "no_image",
+    image_path: "",
+    image_credit: "",
+    image_source_url: "",
+    image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
+    image_prompt: "",
+    watermark_required: false
+  };
+}
+
+function buildAIImagePlaceholder({ draftPacket, categoryKey }) {
+  const prompt = buildGeneratedImagePrompt({
+    title: draftPacket.title,
+    subtitle: draftPacket.subtitle,
+    summary: draftPacket.summary,
+    categoryKey
+  });
+
+  if (!prompt) return null;
+
+  return {
+    image_mode: "generated_thematic_pending",
+    image_path: "",
+    image_credit: "AI image pending generation",
+    image_source_url: "",
+    image_alt: `${CATEGORY_META[categoryKey]?.label || "Drishvara"} visual for ${draftPacket.title}`,
+    image_prompt: prompt,
+    watermark_required: true
+  };
+}
+
+function buildGeneratedImagePrompt({ title, subtitle, summary, categoryKey }) {
+  const styleHintMap = {
+    spirituality: "calm contemplative editorial image, soft light, sacred stillness, non-denominational, elegant, realistic, premium magazine style",
+    sports: "dynamic editorial sports image, disciplined athletic energy, premium sports magazine style, realistic, cinematic but not exaggerated",
+    world_affairs: "serious geopolitical editorial image, maps, diplomacy, strategic atmosphere, realistic, premium global affairs magazine style",
+    media_society: "thoughtful media and society editorial image, digital information atmosphere, public discourse, realistic, premium editorial style",
+    public_programmes: "public systems editorial image, governance, community infrastructure, civic service, realistic, premium policy magazine style"
+  };
+
+  const styleHint = styleHintMap[categoryKey] || "premium editorial image, realistic, thoughtful, publication-ready";
+
+  const safeTitle = safeText(title);
+  const safeSubtitle = safeText(subtitle);
+  const safeSummary = safeText(summary);
+
+  if (!safeTitle && !safeSummary) return "";
+
+  return [
+    "Create a single high-quality horizontal editorial lead image for a serious digital publication.",
+    `Story title: ${safeTitle}.`,
+    safeSubtitle ? `Subtitle: ${safeSubtitle}.` : "",
+    safeSummary ? `Story summary: ${safeSummary}.` : "",
+    `Visual style: ${styleHint}.`,
+    "No text overlay, no watermark inside the image, no collage, no cartoon style, no low-quality stock-photo look.",
+    "Image should feel intelligent, restrained, story-aligned, and visually suitable for a premium homepage feature card and article hero image."
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+async function finalizePendingAiImage({
+  apiKey,
+  imageModel,
+  token,
+  owner,
+  repo,
+  branch,
+  today,
+  categoryKey,
+  draftPacket
+}) {
+  try {
+    const result = await generateAiImageFromPrompt({
+      apiKey,
+      imageModel,
+      prompt: draftPacket.image_prompt
+    });
+
+    const generatedPath = buildGeneratedImagePath({
+      today,
+      categoryKey,
+      slug: draftPacket.slug
+    });
+
+    await saveGeneratedImageToGitHub({
+      token,
+      owner,
+      repo,
+      branch,
+      path: generatedPath,
+      base64Data: result.base64_data,
+      message: `Save AI generated image for ${categoryKey} on ${today}`
+    });
+
+    return {
+      ...draftPacket,
+      image_mode: "generated_thematic",
+      image: generatedPath,
+      image_path: generatedPath,
+      image_credit: "Drishvara AI",
+      image_source_url: "",
+      image_alt: draftPacket.image_alt || buildDefaultAlt(categoryKey, draftPacket.title),
+      watermark_required: true
+    };
+  } catch (error) {
+    console.error("AI image generation failed:", error);
+
+    const fallbackPath = getDefaultImageForCategory(categoryKey);
+    const fallbackExists = await githubFileExists({
+      token,
+      owner,
+      repo,
+      branch,
+      path: fallbackPath
+    });
+
+    if (fallbackExists) {
+      return {
+        ...draftPacket,
+        image_mode: "category_fallback",
+        image: fallbackPath,
+        image_path: fallbackPath,
+        image_credit: "Drishvara Fallback",
+        image_source_url: "",
+        watermark_required: false
+      };
+    }
+
+    return {
+      ...draftPacket,
+      image_mode: "no_image",
+      image: "",
+      image_path: "",
+      image_credit: "",
+      image_source_url: "",
+      watermark_required: false
+    };
+  }
+}
+
+async function generateAiImageFromPrompt({
+  apiKey,
+  imageModel,
+  prompt
+}) {
+  const response = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: imageModel || "gpt-image-1",
+      prompt,
+      size: "1536x1024",
+      output_format: "png"
+    })
+  });
+
+  const rawText = await response.text();
+
+  if (!response.ok) {
+    throw new Error(`OpenAI image request failed: ${response.status} ${rawText}`);
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(rawText);
+  } catch {
+    throw new Error(`OpenAI image API returned non-JSON response: ${rawText}`);
+  }
+
+  const first = Array.isArray(payload?.data) ? payload.data[0] : null;
+  const base64Data =
+    safeText(first?.b64_json) ||
+    safeText(first?.base64_data);
+
+  if (!base64Data) {
+    throw new Error(`OpenAI image response missing base64 image data: ${rawText}`);
+  }
+
+  return {
+    mime_type: "image/png",
+    base64_data: base64Data
+  };
+}
+
+function buildGeneratedImagePath({
+  today,
+  categoryKey,
+  slug
+}) {
+  return `assets/generated/${today}/${categoryKey}/${sanitizeSlug(slug)}-ai-lead-1.png`;
+}
+
+async function saveGeneratedImageToGitHub({
+  token,
+  owner,
+  repo,
+  branch,
+  path,
+  base64Data,
+  message
+}) {
+  const existing = await getGitHubFile({
+    token,
+    owner,
+    repo,
+    path,
+    branch
+  });
+
+  const body = {
+    message,
+    content: base64Data,
+    branch
+  };
+
+  if (existing?.sha) {
+    body.sha = existing.sha;
+  }
+
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponentPath(path)}`;
+
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Accept: "application/vnd.github+json",
+      Authorization: `Bearer ${token}`,
+      "X-GitHub-Api-Version": "2022-11-28",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`GitHub image save failed for ${path}: ${response.status} ${errText}`);
+  }
+
+  return response.json();
 }
 
 async function findSourcedImageFromCommons({
@@ -598,144 +999,6 @@ function stripFilePrefix(value) {
 
 function stripHtml(value) {
   return String(value || "").replace(/<[^>]*>/g, "").trim();
-}
-
-async function resolveArticleImage({
-  token,
-  owner,
-  repo,
-  branch,
-  draftPacket,
-  categoryKey,
-  today
-}) {
-  const slug = sanitizeSlug(draftPacket.slug || draftPacket.title || "");
-
-  const exactManualPath = `assets/featured/${today}/${categoryKey}/${slug}-lead-1.jpg`;
-  const categoryDayPath = `assets/featured/${today}/${categoryKey}/lead-1.jpg`;
-  const fallbackPath = getDefaultImageForCategory(categoryKey);
-
-  const exactManualExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: exactManualPath
-  });
-
-  if (exactManualExists) {
-    return {
-      image_mode: "manual_asset_exact",
-      image_path: exactManualPath,
-      image_credit: "Drishvara Library",
-      image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
-      image_prompt: "",
-      watermark_required: true
-    };
-  }
-
-  const categoryDayExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: categoryDayPath
-  });
-
-  if (categoryDayExists) {
-    return {
-      image_mode: "manual_asset_category",
-      image_path: categoryDayPath,
-      image_credit: "Drishvara Library",
-      image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
-      image_prompt: "",
-      watermark_required: true
-    };
-  }
-
-  const commonsImage = await findSourcedImageFromCommons({
-    title: draftPacket.title,
-    subtitle: draftPacket.subtitle,
-    summary: draftPacket.summary,
-    categoryKey
-  });
-
-  if (commonsImage) {
-    return commonsImage;
-  }
-
-  const curatedImage = safeText(generatedSafe(draftPacket, "image"));
-  const curatedImageCredit = safeText(generatedSafe(draftPacket, "image_credit"));
-  const curatedImageSourceUrl = safeText(generatedSafe(draftPacket, "image_source_url"));
-
-  if (
-    curatedImage &&
-    (curatedImage.startsWith("http://") ||
-      curatedImage.startsWith("https://") ||
-      curatedImage.startsWith("assets/") ||
-      curatedImage.startsWith("/assets/"))
-  ) {
-    return {
-      image_mode: "source_curated",
-      image_path: curatedImage,
-      image_credit: curatedImageCredit || "Source Provided",
-      image_source_url: curatedImageSourceUrl,
-      image_alt: safeText(generatedSafe(draftPacket, "image_alt"), buildDefaultAlt(categoryKey, draftPacket.title)),
-      image_prompt: "",
-      watermark_required: false
-    };
-  }
-
-  const generatedImagePath = safeText(generatedSafe(draftPacket, "generated_image_path"));
-  const generatedImagePrompt = safeText(generatedSafe(draftPacket, "image_prompt"));
-
-  if (generatedImagePath) {
-    return {
-      image_mode: "generated_thematic",
-      image_path: generatedImagePath,
-      image_credit: "AI-assisted visual",
-      image_source_url: "",
-      image_alt: safeText(generatedSafe(draftPacket, "image_alt"), buildDefaultAlt(categoryKey, draftPacket.title)),
-      image_prompt: generatedImagePrompt,
-      watermark_required: true
-    };
-  }
-
-  const fallbackExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: fallbackPath
-  });
-
-  if (fallbackExists) {
-    return {
-      image_mode: "category_fallback",
-      image_path: fallbackPath,
-      image_credit: "Drishvara Fallback",
-      image_source_url: "",
-      image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
-      image_prompt: "",
-      watermark_required: false
-    };
-  }
-
-  return {
-    image_mode: "no_image",
-    image_path: "",
-    image_credit: "",
-    image_source_url: "",
-    image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
-    image_prompt: "",
-    watermark_required: false
-  };
-}
-
-function generatedSafe(_draftPacket, _field) {
-  return "";
 }
 
 async function githubFileExists({ token, owner, repo, branch, path }) {
@@ -976,7 +1239,7 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-async function upsertGitHubFile({
+async function upsertGitHubJsonFile({
   token,
   owner,
   repo,
