@@ -1,3 +1,4 @@
+import { createClient } from "@supabase/supabase-js";
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -43,7 +44,10 @@ export default async function handler(req, res) {
     GITHUB_TOKEN,
     GITHUB_OWNER,
     GITHUB_REPO,
-    GITHUB_BRANCH
+    GITHUB_BRANCH,
+    SUPABASE_URL,
+    SUPABASE_SECRET_KEY,
+    SUPABASE_SERVICE_ROLE_KEY
   } = process.env;
 
   if (!GITHUB_TOKEN || !GITHUB_OWNER || !GITHUB_REPO || !GITHUB_BRANCH) {
@@ -55,6 +59,28 @@ export default async function handler(req, res) {
 
   const today = new Date().toISOString().slice(0, 10);
   const results = [];
+
+  let publicationRunId = null;
+
+  const { data: runRow, error: runError } = await supabase
+    .from("publication_runs")
+    .insert({
+      run_date: today,
+      run_type: "publish_all",
+      status: "started",
+      inputs_json: {}
+    })
+    .select("id")
+    .single();
+
+  if (runError) {
+    return res.status(500).json({
+      ok: false,
+      error: `Failed to create publication run: ${runError.message}`
+    });
+  }
+
+  publicationRunId = runRow.id;
 
   try {
     for (const categoryKey of PUBLISH_CATEGORIES) {
@@ -118,6 +144,18 @@ export default async function handler(req, res) {
 
     const successCount = results.filter((x) => x.ok).length;
 
+    await supabase
+      .from("publication_runs")
+      .update({
+        status: "completed",
+        finished_at: new Date().toISOString(),
+        outputs_json: {
+          results,
+          success_count: successCount
+        }
+      })
+      .eq("id", publicationRunId);
+
     return res.status(200).json({
       ok: true,
       date: today,
@@ -125,7 +163,18 @@ export default async function handler(req, res) {
       total_categories: PUBLISH_CATEGORIES.length,
       results
     });
+
   } catch (error) {
+    if (publicationRunId) {
+      await supabase
+        .from("publication_runs")
+        .update({
+          status: "failed",
+          finished_at: new Date().toISOString(),
+          error_text: error.message || "Unknown error"
+        })
+        .eq("id", publicationRunId);
+    }
     return res.status(500).json({
       ok: false,
       error: error.message || "Unknown error",
