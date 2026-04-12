@@ -38,7 +38,7 @@
     }
 
     body {
-      font-family: "Georgia", "Times New Roman", serif;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
       color: var(--text-main);
       background:
         radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.08), transparent 18%),
@@ -88,6 +88,7 @@
       font-size: 1.18rem;
       color: var(--text-main);
       letter-spacing: 0.2px;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
     }
 
     .nav-links {
@@ -95,13 +96,13 @@
       justify-content: center;
       gap: 26px;
       flex-wrap: wrap;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .nav-links a {
       color: var(--text-soft);
       font-size: 1rem;
       transition: color 0.2s ease;
-      font-family: Arial, Helvetica, sans-serif;
     }
 
     .nav-links a:hover,
@@ -116,6 +117,7 @@
       gap: 12px;
       flex-wrap: wrap;
       justify-content: flex-end;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .live-score-chip {
@@ -130,7 +132,6 @@
       font-size: 0.85rem;
       line-height: 1.2;
       white-space: nowrap;
-      font-family: Arial, Helvetica, sans-serif;
       cursor: pointer;
     }
 
@@ -158,7 +159,6 @@
       background: var(--surface);
       color: var(--text-soft);
       font-size: 0.92rem;
-      font-family: Arial, Helvetica, sans-serif;
     }
 
     .hero {
@@ -201,6 +201,7 @@
       line-height: 0.98;
       color: var(--text-main);
       letter-spacing: 0.2px;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
     }
 
     .tagline {
@@ -221,7 +222,6 @@
       font-size: clamp(1.45rem, 2.5vw, 1.9rem);
       line-height: 1.8;
       margin-bottom: 8px;
-      font-family: "Georgia", "Noto Serif Devanagari", "Nirmala UI", serif;
       color: var(--text-main);
     }
 
@@ -242,6 +242,7 @@
       color: var(--text-muted);
       font-size: 0.9rem;
       line-height: 1.7;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .main-layout {
@@ -271,6 +272,7 @@
       margin: 0 0 12px;
       color: var(--text-main);
       line-height: 1.15;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
     }
 
     .card p {
@@ -418,40 +420,11 @@
       text-decoration: underline;
     }
 
-    .tournament-image,
-    .major-update-image,
-    .featured-sports-article-image,
-    .feature-image {
-      height: 120px;
-      background: linear-gradient(135deg, rgba(201, 162, 74, 0.18), rgba(255, 255, 255, 0.05));
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-soft);
-      font-size: 0.88rem;
-      text-align: center;
-      padding: 14px;
-      margin-bottom: 12px;
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
-    }
-
-    .tournament-standings {
-      margin-top: 10px;
-      display: grid;
-      gap: 6px;
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
     .section-title {
       margin: 0 0 10px;
       font-size: 2rem;
       color: var(--text-main);
+      font-family: Cambria, Georgia, "Times New Roman", serif;
     }
 
     .section-intro {
@@ -476,12 +449,54 @@
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
     }
 
-    .feature-image {
-      height: 170px;
+    .feature-image-wrap,
+    .major-update-image-wrap,
+    .featured-sports-article-image-wrap,
+    .tournament-image-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(201, 162, 74, 0.18), rgba(255, 255, 255, 0.05));
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .feature-image-wrap {
+      height: 170px;
+    }
+
+    .major-update-image-wrap,
+    .featured-sports-article-image-wrap,
+    .tournament-image-wrap {
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 12px;
+      border-bottom: none;
+    }
+
+    .feature-image-tag,
+    .major-update-image-tag,
+    .featured-sports-article-image-tag,
+    .tournament-image-tag {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(135deg, rgba(201, 162, 74, 0.18), rgba(255, 255, 255, 0.05));
+    }
+
+    .image-fallback-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px;
+      color: var(--text-soft);
+      font-size: 0.86rem;
       font-family: Arial, Helvetica, sans-serif;
-      margin-bottom: 0;
-      border-radius: 0;
+      line-height: 1.45;
     }
 
     .feature-body {
@@ -490,16 +505,22 @@
 
     .feature-body h3 {
       font-size: 1.16rem;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
+    }
+
+    .tournament-standings {
+      margin-top: 10px;
+      display: grid;
+      gap: 6px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .center-lower {
       display: grid;
       gap: 18px;
       margin-top: 22px;
-    }
-
-    .founder-card {
-      margin-top: 8px;
     }
 
     .form-grid {
@@ -602,6 +623,7 @@
       margin: 0 0 8px;
       font-size: 1.55rem;
       color: var(--text-main);
+      font-family: Cambria, Georgia, "Times New Roman", serif;
     }
 
     footer {
@@ -662,7 +684,7 @@
         height: 128px;
       }
 
-      .feature-image {
+      .feature-image-wrap {
         height: 140px;
       }
 
@@ -679,7 +701,7 @@
 </head>
 <body>
   <div class="page">
-    <nav class="nav font-ui">
+    <nav class="nav">
       <div class="nav-left">
         <img src="assets/logo/logo.png" alt="Drishvara Logo" class="nav-logo" />
         <div class="nav-brand">Drishvara</div>
@@ -778,7 +800,9 @@
 
           <div class="feature-grid" id="featured-reads-grid">
             <div class="feature-card">
-              <div class="feature-image">Loading article...</div>
+              <div class="feature-image-wrap">
+                <div class="image-fallback-text">Loading article...</div>
+              </div>
               <div class="feature-body">
                 <div class="label">Loading</div>
                 <h3>Fetching featured reads...</h3>
@@ -923,6 +947,16 @@
       };
     }
 
+    function categoryFallbackImageMap() {
+      return {
+        spirituality: "assets/featured/fallback/spirituality-default.jpg",
+        sports: "assets/featured/fallback/sports-default.jpg",
+        world_affairs: "assets/featured/fallback/world-default.jpg",
+        media_society: "assets/featured/fallback/media-default.jpg",
+        public_programmes: "assets/featured/fallback/policy-default.jpg"
+      };
+    }
+
     async function fetchDraftForCategory(today, categoryKey) {
       const draftPath = `generated/drafts/${today}-${categoryKey}.json`;
       const response = await fetch(draftPath, { cache: "no-store" });
@@ -940,10 +974,15 @@
       return `articles/${folders[categoryKey]}/${sanitizeSlug(slug)}.html`;
     }
 
-    function buildImageStyle(imagePath) {
-      const path = String(imagePath || "").trim();
-      if (!path) return "";
-      return `style="background-image: linear-gradient(135deg, rgba(201, 162, 74, 0.12), rgba(255, 255, 255, 0.03)), url('${escapeAttribute(path)}');"`;
+    function buildPublicImageUrl(imagePath) {
+      const raw = String(imagePath || "").trim();
+      if (!raw) return "";
+
+      if (raw.startsWith("http://") || raw.startsWith("https://")) {
+        return raw;
+      }
+
+      return raw.startsWith("/") ? raw : `/${raw}`;
     }
 
     function buildConditionalLinks(links) {
@@ -955,11 +994,51 @@
       `).join("");
     }
 
+    function buildImageBlock({
+      imagePath,
+      fallbackPath,
+      altText,
+      wrapClass,
+      imageClass,
+      fallbackText
+    }) {
+      const src = buildPublicImageUrl(imagePath);
+      const fallback = buildPublicImageUrl(fallbackPath);
+      const alt = escapeAttribute(altText || "Drishvara image");
+
+      if (!src) {
+        return `
+          <div class="${wrapClass}">
+            ${fallback
+              ? `<img class="${imageClass}" src="${escapeAttribute(fallback)}" alt="${alt}" loading="lazy" />`
+              : `<div class="image-fallback-text">${escapeHtml(fallbackText || "Lead image unavailable")}</div>`}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="${wrapClass}">
+          <img
+            class="${imageClass}"
+            src="${escapeAttribute(src)}"
+            alt="${alt}"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            onerror="this.onerror=null; ${fallback
+              ? `this.src='${escapeAttribute(fallback)}';`
+              : `this.style.display='none'; if(this.nextElementSibling){ this.nextElementSibling.style.display='flex'; }`}"
+          />
+          <div class="image-fallback-text" style="display:none;">${escapeHtml(fallbackText || "Lead image unavailable")}</div>
+        </div>
+      `;
+    }
+
     async function loadFeaturedReads() {
       const grid = document.getElementById("featured-reads-grid");
       if (!grid) return;
 
       const today = new Date().toISOString().slice(0, 10);
+      const fallbackMap = categoryFallbackImageMap();
       const categoryKeys = [
         "spirituality",
         "world_affairs",
@@ -976,7 +1055,9 @@
         if (!valid.length) {
           grid.innerHTML = `
             <div class="feature-card">
-              <div class="feature-image">No featured reads yet</div>
+              <div class="feature-image-wrap">
+                <div class="image-fallback-text">No featured reads yet</div>
+              </div>
               <div class="feature-body">
                 <div class="label">Featured Reads</div>
                 <h3>Today’s featured articles are not available yet.</h3>
@@ -989,9 +1070,14 @@
 
         grid.innerHTML = valid.map(({ packet, categoryKey }) => `
           <div class="feature-card">
-            <div class="feature-image" ${buildImageStyle(packet.image_path || packet.image)}>
-              ${(packet.image_path || packet.image) ? "" : "Article image"}
-            </div>
+            ${buildImageBlock({
+              imagePath: packet.image_path || packet.image,
+              fallbackPath: fallbackMap[categoryKey],
+              altText: packet.image_alt || packet.title,
+              wrapClass: "feature-image-wrap",
+              imageClass: "feature-image-tag",
+              fallbackText: "Lead image unavailable"
+            })}
             <div class="feature-body">
               <div class="label">${escapeHtml(packet.meta_label || categoryLabelMap()[categoryKey])}</div>
               <h3>
@@ -1013,7 +1099,9 @@
       } catch (error) {
         grid.innerHTML = `
           <div class="feature-card">
-            <div class="feature-image">Featured reads unavailable</div>
+            <div class="feature-image-wrap">
+              <div class="image-fallback-text">Featured reads unavailable</div>
+            </div>
             <div class="feature-body">
               <div class="label">Featured Reads</div>
               <h3>Could not load today’s featured reads.</h3>
@@ -1034,9 +1122,7 @@
 
       try {
         const signalResponse = await fetch(signalPath, { cache: "no-store" });
-        if (!signalResponse.ok) {
-          throw new Error(`Signal file not found for ${today}`);
-        }
+        if (!signalResponse.ok) throw new Error(`Signal file not found for ${today}`);
 
         const signalData = await signalResponse.json();
         const signalItems = Array.isArray(signalData.items) ? signalData.items : [];
@@ -1126,6 +1212,7 @@
     async function loadSportsContext() {
       const today = new Date().toISOString().slice(0, 10);
       const path = `generated/sports-context/${today}-sports-context.json`;
+      const fallbackMap = categoryFallbackImageMap();
 
       try {
         const response = await fetch(path, { cache: "no-store" });
@@ -1134,9 +1221,9 @@
         const data = await response.json();
         applyLiveScore(data.header_live_score);
         applyLiveEvents(data.live_events);
-        applyTournamentCards(data.tournaments);
-        applyMajorUpdates(data.major_updates);
-        applyFeaturedSportsArticle(data.featured_sports_article);
+        applyTournamentCards(data.tournaments, fallbackMap.sports);
+        applyMajorUpdates(data.major_updates, fallbackMap.sports);
+        applyFeaturedSportsArticle(data.featured_sports_article, fallbackMap.sports);
       } catch (error) {
         console.log("Sports context unavailable:", error.message);
       }
@@ -1196,7 +1283,7 @@
       `).join("");
     }
 
-    function applyTournamentCards(items) {
+    function applyTournamentCards(items, fallbackImage) {
       const list = document.getElementById("sports-tournaments-list");
       if (!list) return;
 
@@ -1213,9 +1300,14 @@
 
       list.innerHTML = items.map(item => `
         <div class="tournament-card">
-          <div class="tournament-image" ${buildImageStyle(item.image)}>
-            ${item.image ? "" : "Tournament image"}
-          </div>
+          ${buildImageBlock({
+            imagePath: item.image,
+            fallbackPath: fallbackImage,
+            altText: item.title || "Tournament image",
+            wrapClass: "tournament-image-wrap",
+            imageClass: "tournament-image-tag",
+            fallbackText: "No tournament image yet"
+          })}
           <div class="sub">${escapeHtml(item.status || "Tournament")}</div>
           <div class="title">${escapeHtml(item.title || "")}</div>
           <div class="meta">${escapeHtml(item.key_note || "")}</div>
@@ -1233,7 +1325,7 @@
       `).join("");
     }
 
-    function applyMajorUpdates(items) {
+    function applyMajorUpdates(items, fallbackImage) {
       const list = document.getElementById("sports-major-updates-list");
       if (!list) return;
 
@@ -1250,9 +1342,14 @@
 
       list.innerHTML = items.map(item => `
         <div class="major-update-card">
-          <div class="major-update-image" ${buildImageStyle(item.image)}>
-            ${item.image ? "" : "Sports update image"}
-          </div>
+          ${buildImageBlock({
+            imagePath: item.image,
+            fallbackPath: fallbackImage,
+            altText: item.headline || "Sports update image",
+            wrapClass: "major-update-image-wrap",
+            imageClass: "major-update-image-tag",
+            fallbackText: "No update image yet"
+          })}
           <div class="sub">Major Update</div>
           <div class="title">${escapeHtml(item.headline || "")}</div>
           <div class="meta">${escapeHtml(item.summary || "")}</div>
@@ -1267,7 +1364,7 @@
       `).join("");
     }
 
-    function applyFeaturedSportsArticle(item) {
+    function applyFeaturedSportsArticle(item, fallbackImage) {
       const wrap = document.getElementById("featured-sports-article-wrap");
       if (!wrap) return;
 
@@ -1284,9 +1381,14 @@
 
       wrap.innerHTML = `
         <div class="featured-sports-article-card">
-          <div class="featured-sports-article-image" ${buildImageStyle(item.image)}>
-            ${item.image ? "" : "Featured sports article image"}
-          </div>
+          ${buildImageBlock({
+            imagePath: item.image,
+            fallbackPath: fallbackImage,
+            altText: item.title || "Featured sports article image",
+            wrapClass: "featured-sports-article-image-wrap",
+            imageClass: "featured-sports-article-image-tag",
+            fallbackText: "No sports article image yet"
+          })}
           <div class="sub">Featured Sports Article</div>
           <div class="title">${escapeHtml(item.title || "")}</div>
           <div class="meta">${escapeHtml(item.summary || "")}</div>
