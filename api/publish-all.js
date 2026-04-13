@@ -234,7 +234,7 @@ export default async function handler(req, res) {
           referenceRows.push({
             article_id: articleId,
             reference_role: "reference_link",
-            source_tier: "tier_3_pending"
+            source_tier: "tier_3_pending",
             source_locator: url,
             is_reachable: true,
             notes: `reference_link_${idx + 1}`,
@@ -249,7 +249,7 @@ export default async function handler(req, res) {
           referenceRows.push({
             article_id: articleId,
             reference_role: "official_link",
-            source_tier: "tier_1_candidate"
+            source_tier: "tier_1_candidate",
             source_locator: officialLink,
             is_reachable: true,
             notes: "official_link",
@@ -261,7 +261,7 @@ export default async function handler(req, res) {
           referenceRows.push({
             article_id: articleId,
             reference_role: "supporting_link",
-            source_tier: "tier_2_or_3_pending"
+            source_tier: "tier_2_or_3_pending",
             source_locator: supportingLink,
             is_reachable: true,
             notes: "supporting_link",
