@@ -119,6 +119,17 @@ export default async function handler(req, res) {
 
         const draftJson = JSON.parse(draftText);
         const draftPacket = draftJson?.draft_packet;
+        const referenceLinksRaw = normalizeReferenceLinks(draftPacket.reference_links);
+        const officialLinkRaw = safeText(draftPacket.official_link);
+        const supportingLinkRaw = safeText(draftPacket.supporting_link);
+
+        const referenceLinks = await filterReachableUrls(referenceLinksRaw);
+        const officialLink = await resolveReachableUrl(
+          isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : ""
+        );
+        const supportingLink = await resolveReachableUrl(
+          isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : ""
+        );
 
         if (!draftPacket) {
           results.push({
@@ -163,37 +174,99 @@ export default async function handler(req, res) {
           .eq("category_key", categoryKey)
           .maybeSingle();
 
-        const publishPayload = {
-          latest_publication_run_id: publicationRunId,
-          title: articleTitle,
-          slug: articleSlug,
-          status: "published",
-          published_at: new Date().toISOString(),
-          public_article_path: articlePath,
-          article_html: articleHtml || null,
-          metadata: {
-            last_publish_source: draftPath || null
+        let articleId = existingArticle?.id || null;
+
+        if (existingArticle?.id) {
+          const { error: updateArticleError } = await supabase
+            .from("articles")
+            .update(publishPayload)
+            .eq("id", existingArticle.id);
+
+          if (updateArticleError) {
+            throw new Error(`Article update failed: ${updateArticleError.message}`);
           }
-        };
+        } else {
+          const { data: insertedArticle, error: insertArticleError } = await supabase
+            .from("articles")
+            .insert({
+              article_date: today,
+              category_key: categoryKey,
+              stream_key: categoryKey,
+              access_tier: "free",
+              source_policy_version: "v1",
+              ...publishPayload
+            })
+            .select("id")
+            .single();
 
+          if (insertArticleError) {
+            throw new Error(`Article insert failed: ${insertArticleError.message}`);
+          }
 
+          articleId = insertedArticle.id;
+        }
 
-      if (existingArticle?.id) {
-        await supabase
-          .from("articles")
-          .update(publishPayload)
-          .eq("id", existingArticle.id);
-      } else {
-        await supabase
-          .from("articles")
-          .insert({
-            article_date: today,
-            category_key: categoryKey,
-            stream_key: categoryKey,
-            access_tier: "free",
-            source_policy_version: "v1",
-            ...publishPayload
+        const { error: deleteRefsError } = await supabase
+          .from("article_references")
+          .delete()
+          .eq("article_id", articleId);
+
+        if (deleteRefsError) {
+          throw new Error(`Reference cleanup failed: ${deleteRefsError.message}`);
+        }
+
+        const referenceRows = [];
+
+        referenceLinks.forEach((url, idx) => {
+          referenceRows.push({
+            article_id: articleId,
+            source_locator: url,
+            is_reachable: true,
+            notes: `reference_link_${idx + 1}`,
+            metadata: {
+              reference_role: "reference_link",
+              source_tier: "tier_3_pending"
+            }
           });
+        });
+
+        if (officialLink) {
+          referenceRows.push({
+            article_id: articleId,
+            source_locator: officialLink,
+            is_reachable: true,
+            notes: "official_link",
+            metadata: {
+              reference_role: "official_link",
+              source_tier: "tier_1_candidate"
+            }
+          });
+        }
+
+        if (supportingLink) {
+          referenceRows.push({
+            article_id: articleId,
+            source_locator: supportingLink,
+            is_reachable: true,
+            notes: "supporting_link",
+            metadata: {
+              reference_role: "supporting_link",
+              source_tier: "tier_2_or_3_pending"
+            }
+          });
+        }
+
+        if (referenceRows.length) {
+          const { error: insertRefsError } = await supabase
+            .from("article_references")
+            .insert(referenceRows);
+
+          if (insertRefsError) {
+            throw new Error(`Reference insert failed: ${insertRefsError.message}`);
+          }
+        }
+
+
       }
         
         results.push({
