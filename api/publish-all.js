@@ -79,7 +79,6 @@ export default async function handler(req, res) {
   }
 
   const supabase = createClient(SUPABASE_URL, supabaseKey);
- 
 
   let publicationRunId = null;
 
@@ -119,17 +118,6 @@ export default async function handler(req, res) {
 
         const draftJson = JSON.parse(draftText);
         const draftPacket = draftJson?.draft_packet;
-        const referenceLinksRaw = normalizeReferenceLinks(draftPacket.reference_links);
-        const officialLinkRaw = safeText(draftPacket.official_link);
-        const supportingLinkRaw = safeText(draftPacket.supporting_link);
-
-        const referenceLinks = await filterReachableUrls(referenceLinksRaw);
-        const officialLink = await resolveReachableUrl(
-          isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : ""
-        );
-        const supportingLink = await resolveReachableUrl(
-          isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : ""
-        );
 
         if (!draftPacket) {
           results.push({
@@ -158,7 +146,6 @@ export default async function handler(req, res) {
           contentString: articleHtml
         });
 
-
         const articleTitle =
           draftPacket?.title ||
           `${CATEGORY_META[categoryKey]?.label || categoryKey} - ${today}`;
@@ -166,6 +153,19 @@ export default async function handler(req, res) {
         const articleSlug =
           draftPacket?.slug ||
           toSlug(articleTitle);
+
+        const publishPayload = {
+          latest_publication_run_id: publicationRunId,
+          title: articleTitle,
+          slug: articleSlug,
+          status: "published",
+          published_at: new Date().toISOString(),
+          public_article_path: articlePath,
+          article_html: articleHtml || null,
+          metadata: {
+            last_publish_source: draftPath || null
+          }
+        };
 
         const { data: existingArticle } = await supabase
           .from("articles")
@@ -205,6 +205,18 @@ export default async function handler(req, res) {
 
           articleId = insertedArticle.id;
         }
+
+        const referenceLinksRaw = normalizeReferenceLinks(draftPacket.reference_links);
+        const officialLinkRaw = safeText(draftPacket.official_link);
+        const supportingLinkRaw = safeText(draftPacket.supporting_link);
+
+        const referenceLinks = await filterReachableUrls(referenceLinksRaw);
+        const officialLink = await resolveReachableUrl(
+          isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : ""
+        );
+        const supportingLink = await resolveReachableUrl(
+          isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : ""
+        );
 
         const { error: deleteRefsError } = await supabase
           .from("article_references")
@@ -266,9 +278,6 @@ export default async function handler(req, res) {
           }
         }
 
-
-      }
-        
         results.push({
           category: categoryKey,
           ok: true,
@@ -306,7 +315,6 @@ export default async function handler(req, res) {
       total_categories: PUBLISH_CATEGORIES.length,
       results
     });
-
   } catch (error) {
     if (publicationRunId) {
       await supabase
@@ -318,6 +326,7 @@ export default async function handler(req, res) {
         })
         .eq("id", publicationRunId);
     }
+
     return res.status(500).json({
       ok: false,
       error: error.message || "Unknown error",
