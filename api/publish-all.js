@@ -71,17 +71,6 @@ export default async function handler(req, res) {
 
   const supabase = createClient(SUPABASE_URL, supabaseKey);
  
-  const supabaseKey = SUPABASE_SECRET_KEY || SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!SUPABASE_URL || !supabaseKey) {
-    return res.status(500).json({
-      ok: false,
-      error: "Missing required Supabase environment variables"
-    });
-  }
-
-  const supabase = createClient(SUPABASE_URL, supabaseKey);
-
 
   let publicationRunId = null;
 
