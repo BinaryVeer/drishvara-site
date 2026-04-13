@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Ethics of AI-Generated Content in Journalism | Drishvara</title>
-  <meta name="description" content="This piece explores ethical considerations, potential biases, transparency issues, and the impact of AI on journalistic integrity and public trust as AI tools increasingly contribute to news production and dissemination." />
+  <meta name="description" content="This piece critically examines how AI tools are being integrated into newsrooms, the challenges they pose to fact-checking and accountability, and potential regulatory frameworks." />
   <link rel="icon" type="image/png" href="/assets/logo/logo.png" />
   <style>
     :root {
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.06);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
@@ -23,8 +24,7 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       min-height: 100%;
@@ -92,6 +92,7 @@
     .topbar-nav a {
       color: var(--text-soft);
       font-size: 0.96rem;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .topbar-nav a:hover {
@@ -155,18 +156,45 @@
       font-size: 0.98rem;
     }
 
-    .hero-image {
+    .hero-media-wrap {
+      margin-bottom: 24px;
+    }
+
+    .hero-image-tag {
       width: 100%;
       height: 280px;
+      object-fit: cover;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.06);
-      margin-bottom: 24px;
-      background:
-        linear-gradient(135deg, rgba(201,162,74,0.18), rgba(255,255,255,0.05)),
-        url('assets/featured/fallback/media-default.jpg');
-      background-size: cover;
-      background-position: center;
       display: block;
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+    }
+
+    .hero-image-tag.used-fallback {
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+    }
+
+    .media-credit {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .media-credit a {
+      color: var(--gold);
+    }
+
+    .media-credit .mode {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-soft);
+      font-size: 0.76rem;
     }
 
     .article-body {
@@ -220,7 +248,7 @@
         padding: 22px 18px;
       }
 
-      .hero-image {
+      .hero-image-tag {
         height: 200px;
       }
     }
@@ -245,38 +273,35 @@
     <article class="article-shell">
       <div class="meta-row">
         <span class="category-pill">Media &amp; Society</span>
-        <span>11 April 2026</span>
+        <span>13 April 2026</span>
       </div>
 
       <h1>The Ethics of AI-Generated Content in Journalism</h1>
-      <div class="subtitle">Navigating responsibility and trust in AI-driven newsrooms</div>
-      <div class="summary-box">This piece explores ethical considerations, potential biases, transparency issues, and the impact of AI on journalistic integrity and public trust as AI tools increasingly contribute to news production and dissemination.</div>
-      <div class="hero-image" aria-label="Article image"></div>
+      <div class="subtitle">Balancing innovation with integrity in newsrooms</div>
+      <div class="summary-box">This piece critically examines how AI tools are being integrated into newsrooms, the challenges they pose to fact-checking and accountability, and potential regulatory frameworks.</div>
 
-      <div class="article-body">
-        <p>As artificial intelligence increasingly integrates into newsrooms, media organizations face complex ethical challenges that call for careful reflection on the responsibilities inherent in journalism. AI-generated content, from automated reporting to algorithmically curated stories, promises efficiency and scale but also raises questions about transparency, bias, and the preservation of journalistic integrity.</p><p>One of the foremost concerns is the potential for AI to perpetuate or even amplify biases embedded in training data. Since AI systems learn from vast datasets that reflect existing societal inequalities and prejudices, their outputs can inadvertently reinforce stereotypes or skew coverage toward particular perspectives. This risk necessitates vigilant oversight and continuous evaluation by human editors to ensure balanced and fair reporting.</p><p>Transparency is another critical issue. Audiences have a right to know when content is generated or significantly influenced by AI. Clear disclosure helps maintain trust and allows readers to critically assess the information presented. Without such openness, the line between human and machine authorship blurs, potentially undermining the credibility of news organizations.</p><p>Moreover, the use of AI in journalism challenges traditional notions of accountability. When errors or misinformation arise from AI-generated content, assigning responsibility can become complicated. Media outlets must establish robust editorial standards and accountability frameworks that address these new dynamics, ensuring that AI tools augment rather than replace critical human judgment.</p><p>Despite these challenges, AI also offers opportunities to enhance journalism. It can assist in data analysis, uncovering patterns that might elude human reporters, and help tailor content to diverse audiences. The ethical imperative lies in integrating AI thoughtfully, with a commitment to upholding the core values of accuracy, fairness, and independence.</p><p>Ultimately, the evolving relationship between AI and journalism demands ongoing dialogue among technologists, journalists, and the public. By confronting ethical dilemmas head-on and fostering transparency, media organizations can harness AI's potential while safeguarding the trust that forms the foundation of democratic societies.</p>
+      <div class="hero-media-wrap">
+        <img
+                 class="hero-image-tag"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Al_Jazeera_English_Newsroom.jpg/1920px-Al_Jazeera_English_Newsroom.jpg"
+                 alt="Media &amp; Society image related to The Ethics of AI-Generated Content in Journalism (Al Jazeera English Newsroom.jpg)"
+                 loading="eager"
+                 referrerpolicy="no-referrer"
+                 onerror="this.onerror=null; this.src='/assets/featured/fallback/media-default.jpg'; this.classList.add('used-fallback');"
+               />
+
+        <div class="media-credit">
+                Image credit: Wittylama
+                 · <a href="https://commons.wikimedia.org/wiki/File%3AAl_Jazeera_English_Newsroom.jpg" target="_blank" rel="noopener noreferrer">Source</a>
+                <span class="mode">source_curated</span>
+              </div>
       </div>
 
-      <section class="resource-section">
-              <h2>References & Further Reading</h2>
-              <div class="resource-links">
-                
-                  <a href="https://www.cjr.org/tow_center_reports/artificial-intelligence-journalism-ethics.php" target="_blank" rel="noopener noreferrer">
-                    Reference 1
-                  </a>
-                
-                  <a href="https://www.poynter.org/ethics-trust/2025/ai-and-journalism-ethics/" target="_blank" rel="noopener noreferrer">
-                    Reference 2
-                  </a>
-                
-                
-                
-                  <a href="https://www.niemanlab.org/2025/11/what-journalism-can-learn-from-ai-ethics-discussions/" target="_blank" rel="noopener noreferrer">
-                    Supporting Source
-                  </a>
-                
-              </div>
-            </section>
+      <div class="article-body">
+        <p>Artificial intelligence is increasingly becoming a fixture in newsrooms worldwide, offering tools that can generate content, assist in data analysis, and streamline editorial workflows. While these advances promise efficiency and new storytelling possibilities, they also prompt critical questions about journalistic integrity, editorial standards, and the public’s trust in the media.</p><p>The integration of AI-generated content challenges traditional notions of authorship and accountability. When algorithms produce news stories or summaries, it becomes less clear who is responsible for the accuracy and fairness of the information presented. This ambiguity can complicate fact-checking processes and blur the lines of editorial oversight, potentially allowing errors or biases embedded in the AI models to go unchecked.</p><p>Moreover, the speed and scale at which AI can produce content may pressure news organizations to prioritize quantity over quality. This dynamic risks diluting the rigorous verification standards that have long underpinned credible journalism. The potential for AI to inadvertently propagate misinformation or reinforce existing biases further underscores the need for careful human supervision.</p><p>To address these challenges, some newsrooms are developing hybrid approaches that combine AI capabilities with human editorial judgment. This model emphasizes transparency about AI’s role in content creation and maintains clear accountability channels. Additionally, ongoing training for journalists on AI literacy is becoming essential to navigate the ethical considerations involved.</p><p>Regulatory frameworks are also emerging as a necessary component to safeguard journalistic standards in the AI era. These may include guidelines on disclosure when AI is used, standards for algorithmic transparency, and mechanisms to ensure redress in cases of misinformation. However, regulation must be balanced to avoid stifling innovation while protecting the public interest.</p><p>Ultimately, the ethical integration of AI in journalism demands a reflective and deliberate approach. News organizations must uphold their commitment to truth and fairness by embedding human values into AI applications and fostering a culture of accountability. As AI reshapes the media landscape, preserving public trust hinges on maintaining these foundational principles.</p>
+      </div>
+
+      
 
       <div class="footer-note">
         Published as part of Drishvara’s daily editorial cycle.
