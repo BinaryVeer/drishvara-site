@@ -205,6 +205,56 @@ export default async function handler(req, res) {
 
           articleId = insertedArticle.id;
         }
+        const imagePath = draftPacket?.image_path || draftPacket?.image || "";
+        const imageSourceUrl = draftPacket?.image_source_url || "";
+        const imageCredit = draftPacket?.image_credit || "";
+        const imageAlt = draftPacket?.image_alt || articleTitle;
+
+        const { error: deleteMediaError } = await supabase
+          .from("media_assets")
+          .delete()
+          .eq("article_id", articleId);
+
+        if (deleteMediaError) {
+          throw new Error(`Media cleanup failed: ${deleteMediaError.message}`);
+        }
+
+        if (imagePath || imageSourceUrl) {
+          const mediaPayload = {
+            article_id: articleId,
+            asset_kind: "image",
+            storage_mode: imagePath
+              ? (imagePath.startsWith("http://") || imagePath.startsWith("https://")
+                  ? "external_url"
+                  : "repo_asset")
+              : "external_url",
+            role: "primary",
+            repo_path:
+              imagePath && !(imagePath.startsWith("http://") || imagePath.startsWith("https://"))
+                ? imagePath
+                : null,
+            external_url:
+              imagePath && (imagePath.startsWith("http://") || imagePath.startsWith("https://"))
+                ? imagePath
+                : (imageSourceUrl || null),
+            alt_text: imageAlt,
+            credit: imageCredit || null,
+            source_url: imageSourceUrl || null,
+            watermark_required: Boolean(draftPacket?.watermark_required),
+            metadata: {
+              image_mode: draftPacket?.image_mode || null
+            }
+          };
+
+          const { error: insertMediaError } = await supabase
+            .from("media_assets")
+            .insert(mediaPayload);
+
+          if (insertMediaError) {
+            throw new Error(`Media insert failed: ${insertMediaError.message}`);
+         }
+        }        
+
 
         const referenceLinksRaw = normalizeReferenceLinks(draftPacket.reference_links);
         const officialLinkRaw = safeText(draftPacket.official_link);
@@ -276,6 +326,53 @@ export default async function handler(req, res) {
 
           if (insertRefsError) {
             throw new Error(`Reference insert failed: ${insertRefsError.message}`);
+          }
+        }
+        const rawDataPoints = Array.isArray(draftPacket?.data_points)
+          ? draftPacket.data_points
+          : [];
+
+        const { error: deleteDataPointsError } = await supabase
+          .from("article_data_points")
+          .delete()
+          .eq("article_id", articleId);
+
+        if (deleteDataPointsError) {
+          throw new Error(`Data point cleanup failed: ${deleteDataPointsError.message}`);
+        }
+
+        const dataPointRows = rawDataPoints
+          .map((point, idx) => {
+            if (!point || typeof point !== "object") return null;
+
+            const label = safeText(point.label || point.metric || point.name);
+            const valueText = safeText(point.value || point.value_text || point.stat);
+            const unit = safeText(point.unit);
+            const sourceLocator = safeText(point.source || point.source_url || point.source_locator);
+            const note = safeText(point.note || point.context || point.description);
+
+            if (!label && !valueText) return null;
+
+            return {
+              article_id: articleId,
+              display_order: idx + 1,
+              label: label || `data_point_${idx + 1}`,
+              value_text: valueText || null,
+              unit: unit || null,
+              source_locator: sourceLocator || null,
+              note: note || null,
+              metadata: point
+            };
+          })
+          .filter(Boolean);
+
+        if (dataPointRows.length) {
+          const { error: insertDataPointsError } = await supabase
+            .from("article_data_points")
+            .insert(dataPointRows);
+
+          if (insertDataPointsError) {
+            throw new Error(`Data point insert failed: ${insertDataPointsError.message}`);
           }
         }
 
