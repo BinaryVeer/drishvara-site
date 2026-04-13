@@ -1,4 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
+function toSlug(value) {
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 180);
+}
+
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -138,6 +147,55 @@ export default async function handler(req, res) {
           contentString: articleHtml
         });
 
+
+        const articleTitle =
+          draftPacket?.title ||
+          `${CATEGORY_META[categoryKey]?.label || categoryKey} - ${today}`;
+
+        const articleSlug =
+          draftPacket?.slug ||
+          toSlug(articleTitle);
+
+        const { data: existingArticle } = await supabase
+          .from("articles")
+          .select("id")
+          .eq("article_date", today)
+          .eq("category_key", categoryKey)
+          .maybeSingle();
+
+        const publishPayload = {
+          latest_publication_run_id: publicationRunId,
+          title: articleTitle,
+          slug: articleSlug,
+          status: "published",
+          published_at: new Date().toISOString(),
+          public_article_path: articlePath,
+          article_html: articleHtml || null,
+          metadata: {
+            last_publish_source: draftPath || null
+          }
+        };
+
+
+
+      if (existingArticle?.id) {
+        await supabase
+          .from("articles")
+          .update(publishPayload)
+          .eq("id", existingArticle.id);
+      } else {
+        await supabase
+          .from("articles")
+          .insert({
+            article_date: today,
+            category_key: categoryKey,
+            stream_key: categoryKey,
+            access_tier: "free",
+            source_policy_version: "v1",
+            ...publishPayload
+          });
+      }
+        
         results.push({
           category: categoryKey,
           ok: true,

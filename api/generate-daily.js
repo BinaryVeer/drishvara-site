@@ -1,4 +1,13 @@
 import { createClient } from "@supabase/supabase-js";
+function toSlug(value) {
+  return String(value || "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 180);
+}
+
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -200,6 +209,60 @@ export default async function handler(req, res) {
       });
 
       filesWritten.push(draftPath);
+      const draftTitle =
+        draftPacket?.title ||
+        candidate?.title ||
+        `${CATEGORY_META[categoryKey]?.label || categoryKey} - ${today}`;
+
+      const draftSlug =
+        draftPacket?.slug ||
+        toSlug(draftTitle);
+
+      const draftSummary =
+        draftPacket?.summary ||
+        draftPacket?.excerpt ||
+        draftPacket?.dek ||
+        candidate?.summary ||
+        null;
+
+      const { data: existingArticle } = await supabase
+        .from("articles")
+        .select("id")
+        .eq("article_date", today)
+        .eq("category_key", categoryKey)
+        .maybeSingle();
+
+      const articlePayload = {
+        article_date: today,
+        category_key: categoryKey,
+        stream_key: categoryKey,
+        latest_publication_run_id: publicationRunId,
+        title: draftTitle,
+        slug: draftSlug,
+        subtitle: draftPacket?.subtitle || null,
+        summary: draftSummary,
+        status: "draft",
+        access_tier: "free",
+        source_policy_version: "v1",
+        public_draft_json_path: draftPath,
+        raw_draft_packet: draftPacket,
+        metadata: {
+          image_mode: draftPacket?.image_mode || null,
+          source_file: draftPath
+        }
+      };
+
+      if (existingArticle?.id) {
+        await supabase
+          .from("articles")
+          .update(articlePayload)
+          .eq("id", existingArticle.id);
+      } else {
+        await supabase
+          .from("articles")
+          .insert(articlePayload);
+      }
+
     }
   
     await supabase
