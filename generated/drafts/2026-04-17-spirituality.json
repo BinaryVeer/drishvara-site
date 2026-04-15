@@ -23,40 +23,129 @@
   },
   "guard_result": {
     "ok": true,
-    "decision": "allow",
-    "score": 86,
-    "errors": [],
-    "warnings": [
-      "Closing does not feel open-ended",
-      "Special edition draft lacks evidence signal"
+    "decision": "allow_with_warnings",
+    "overall_score": 89.44,
+    "content_class": "special_edition",
+    "critical_errors": [],
+    "major_warnings": [
+      "Draft is below target minimum word count (700)",
+      "Draft lacks evidence signal",
+      "special_edition requires at least 2 visual assets",
+      "Draft lacks enough interpretive voice"
     ],
+    "minor_warnings": [],
+    "windows": {
+      "structural": {
+        "score": 80,
+        "critical_errors": [],
+        "major_warnings": [
+          "Draft is below target minimum word count (700)"
+        ],
+        "minor_warnings": [],
+        "notes": []
+      },
+      "evidence": {
+        "score": 88,
+        "critical_errors": [],
+        "major_warnings": [
+          "Draft lacks evidence signal"
+        ],
+        "minor_warnings": [],
+        "notes": []
+      },
+      "visual_package": {
+        "score": 84,
+        "critical_errors": [],
+        "major_warnings": [
+          "special_edition requires at least 2 visual assets"
+        ],
+        "minor_warnings": [],
+        "notes": []
+      },
+      "planner_alignment": {
+        "score": 100,
+        "critical_errors": [],
+        "major_warnings": [],
+        "minor_warnings": [],
+        "notes": []
+      },
+      "brand_value": {
+        "score": 90,
+        "critical_errors": [],
+        "major_warnings": [
+          "Draft lacks enough interpretive voice"
+        ],
+        "minor_warnings": [],
+        "notes": []
+      },
+      "financial_value": {
+        "score": 100,
+        "critical_errors": [],
+        "major_warnings": [],
+        "minor_warnings": [],
+        "notes": []
+      }
+    },
+    "source_assessment": {
+      "urls": [
+        {
+          "url": "https://www.britannica.com/topic/Bhagavad-Gita",
+          "role": "reference_link",
+          "tier": "tier_c",
+          "status": "valid"
+        },
+        {
+          "url": "https://plato.stanford.edu/entries/moral-conflict/",
+          "role": "reference_link",
+          "tier": "tier_a",
+          "status": "valid"
+        },
+        {
+          "url": "https://www.history.com/topics/religion/bhagavad-gita",
+          "role": "supporting_link",
+          "tier": "tier_c",
+          "status": "valid"
+        }
+      ],
+      "tier_counts": {
+        "tier_a": 1,
+        "tier_b": 0,
+        "tier_c": 2,
+        "tier_d": 0
+      }
+    },
     "metrics": {
-      "word_count": 427,
+      "word_count": 399,
       "paragraph_count": 6,
+      "asset_count": 1,
+      "asset_types": [
+        "image"
+      ],
       "reference_count": 3,
-      "special_edition": true
+      "special_edition": true,
+      "weekly_editorial": false
     }
   },
   "draft_packet": {
     "date": "2026-04-17",
     "meta_label": "Spirituality",
-    "title": "Sacred Mirrors: Navigating Inner Conflict Through Spiritual Analogies",
-    "slug": "sacred-mirrors-navigating-inner-conflict-spiritual-analogies",
-    "subtitle": "Ancient symbols illuminate modern moral tensions within the soul",
-    "summary": "This piece delves into the use of sacred analogies as a lens to understand the inner conflicts that arise in contemporary spiritual practice, emphasizing the ongoing moral tension and inviting readers into an open, reflective dialogue about personal growth and meaning.",
+    "title": "The Inner Battlefield: Sacred Analogies of Conflict and Moral Choice",
+    "slug": "inner-battlefield-sacred-analogies-conflict-moral-choice",
+    "subtitle": "Ancient wisdom on the struggle between duty and desire",
+    "summary": "This piece delves into sacred analogies from various traditions to reflect on the universal experience of inner conflict, offering a deep, reflective narrative that encourages readers to consider their own moral tensions and the path to resolution.",
     "reference_links": [
-      "https://plato.stanford.edu/entries/spirituality/",
-      "https://www.britannica.com/topic/spirituality"
+      "https://www.britannica.com/topic/Bhagavad-Gita",
+      "https://plato.stanford.edu/entries/moral-conflict/"
     ],
     "official_link": "",
-    "supporting_link": "https://www.jstor.org/stable/10.2307/1390297",
+    "supporting_link": "https://www.history.com/topics/religion/bhagavad-gita",
     "word_count_target": "400-550",
-    "article_html": "<p>In the quiet spaces of spiritual practice, where the mind turns inward, we often encounter a profound tension—an inner conflict that resists easy resolution. This moral tension, a hallmark of the spiritual journey, can be illuminated through the lens of sacred analogies, which have long served as mirrors reflecting the complexities of the human soul.</p><p>Consider the ancient symbol of the mirror itself, found in diverse traditions from the reflective pools of Zen Buddhism to the polished bronze mirrors of Daoist alchemy. The mirror is not merely a tool for seeing the external self but a sacred analogy for self-awareness and moral scrutiny. It reveals the duality within—our aspirations toward purity and the shadows of our imperfections. Just as a mirror reflects without judgment, spiritual analogies invite us to observe our inner conflicts with clarity and compassion.</p><p>Modern spiritual struggles often revolve around reconciling competing values: the desire for individual freedom versus communal responsibility, the pursuit of personal enlightenment alongside ethical action, or the tension between doubt and faith. These dilemmas echo the moral tensions ancient sages sought to express through metaphor and symbol. For example, the Hindu concept of the <em>Atman</em> (the inner self) as a flame flickering within the vast darkness of <em>Maya</em> (illusion) captures the fragile balance between knowledge and uncertainty that defines much of contemporary spiritual experience.</p><p>Engaging with these sacred analogies offers more than historical curiosity; it provides a framework for deeper self-awareness. They act as reflective surfaces where inner conflict is not suppressed but acknowledged as an integral part of growth. This process mirrors the alchemical transformation described by medieval mystics—where base elements of the psyche are transmuted through conscious reflection into spiritual gold.</p><p>Yet, the moral tension inherent in this journey is not a problem to be solved but a dynamic space to inhabit. It calls for ongoing dialogue between the parts of ourselves that pull in different directions, fostering a mature spirituality that embraces complexity rather than seeking simplistic answers. In this way, sacred analogies serve as guides, not prescriptions, inviting us into a contemplative relationship with our own contradictions.</p><p>As we stand before these sacred mirrors, we are reminded that inner conflict is not a sign of failure but a vital sign of spiritual vitality. The reflections they offer are invitations to explore, question, and deepen our understanding of what it means to live a meaningful life. In this open-ended journey, the tension itself becomes a teacher, urging us to hold space for uncertainty and to find peace not in resolution, but in the ongoing dance of self-discovery.</p>",
+    "article_html": "<p>Throughout human history, the experience of inner conflict has been a defining aspect of spiritual growth. Ancient traditions have long used sacred analogies to illuminate this struggle, offering timeless reflections on the tension between duty and desire. These analogies serve not only as moral guidance but also as mirrors reflecting the complexity of our own inner worlds.</p><p>One of the most profound examples is found in the Bhagavad Gita, where the warrior Arjuna faces a battlefield not just of flesh and blood but of conscience and duty. Standing on the precipice of war, Arjuna is torn between his warrior duty (dharma) and his personal attachments and desires. This sacred narrative encapsulates the universal moral tension many face: the pull between what is expected and what is yearned for. The battlefield becomes an enduring metaphor for the inner struggle, where choices are not merely external actions but reflections of deeper ethical and spiritual commitments.</p><p>Similarly, in Christian spirituality, the Apostle Paul's writings often depict the internal conflict between the 'flesh' and the 'spirit.' This metaphorical battlefield highlights the tension between base desires and higher moral aspirations. Such imagery resonates across cultures, underscoring an intrinsic human condition—the coexistence of competing impulses within the self.</p><p>These sacred analogies do more than dramatize inner conflict; they invite a reflective engagement with the moral tensions that shape personal growth. The struggle between duty and desire is not simply a problem to be solved but a dynamic process that fosters self-awareness and ethical discernment. It challenges individuals to interrogate their motivations, to weigh consequences, and ultimately to cultivate a coherent sense of self aligned with their deepest values.</p><p>In our modern context, where choices are often fragmented and distractions abound, these ancient metaphors remain strikingly relevant. They remind us that inner conflict is not a sign of weakness but a sacred space where transformation occurs. The battlefield within is where courage is tested, where the complexity of human nature is acknowledged, and where the possibility of integration emerges.</p><p>As we navigate our own inner battles, these sacred analogies encourage us to hold space for moral tension without rushing to resolution. They suggest that growth often arises not from eliminating conflict but from engaging it with mindful presence and honest reflection. In this ongoing journey, the question remains open: How do we honor both our duties and desires in a way that fosters wholeness and meaning?</p>",
     "generated_image_path": "",
-    "generated_image_alt": "A reflective surface with faint ancient symbols overlaying a contemplative human silhouette",
+    "generated_image_alt": "A serene landscape with a path diverging into two, symbolizing inner conflict and choice",
     "generated_image_credit": "",
     "generated_image_source_url": "",
-    "generated_image_prompt": "A tasteful editorial image showing a reflective mirror surface with faint ancient sacred symbols superimposed, blending into the silhouette of a contemplative person, evoking themes of inner conflict and spiritual reflection in a calm, muted color palette",
+    "generated_image_prompt": "A contemplative, serene landscape showing a forked path in a quiet forest at dawn, symbolizing inner conflict and moral choice, with soft natural light and a reflective atmosphere",
     "generated_image_direct": "",
     "edition_type": "special_friday",
     "edition_name": "Culture, Mind & Meaning Edition",
@@ -85,7 +174,7 @@
     "image_path": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Temple_of_the_Emerald_Buddha.jpg/1920px-Temple_of_the_Emerald_Buddha.jpg",
     "image_credit": "Nawit science",
     "image_source_url": "https://commons.wikimedia.org/wiki/File%3ATemple_of_the_Emerald_Buddha.jpg",
-    "image_alt": "Spirituality image related to Sacred Mirrors: Navigating Inner Conflict Through Spiritual Analogies (Temple of the Emerald Buddha.jpg)",
+    "image_alt": "Spirituality image related to The Inner Battlefield: Sacred Analogies of Conflict and Moral Choice (Temple of the Emerald Buddha.jpg)",
     "image_prompt": "",
     "watermark_required": false
   }
