@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { buildEditorialPlan, buildPlannerPromptBlock } from "./editorial-planner.js";
 
 const CATEGORY_META = {
   spirituality: {
@@ -73,13 +74,22 @@ export async function runGenerateDaily({
   const supabase = createClient(supabaseUrl, supabaseKey);
   let publicationRunId = null;
 
+  const editorialPlan = buildEditorialPlan({
+    date: today,
+    horizonMonths: 12
+  });
+
   const { data: runRow, error: runError } = await supabase
     .from("publication_runs")
     .insert({
       run_date: today,
       run_type: "generate_daily",
       status: "started",
-      inputs_json: { source: "container_core" }
+      inputs_json: {
+        source: "container_core",
+        edition_type: editorialPlan.edition_type,
+        edition_name: editorialPlan.edition_name
+      }
     })
     .select("id")
     .single();
@@ -91,14 +101,28 @@ export async function runGenerateDaily({
   publicationRunId = runRow.id;
 
   try {
+    const filesWritten = [];
+
+    const planPath = `generated/plans/${today}-editorial-plan.json`;
+    await upsertGitHubJsonFile({
+      token: githubToken,
+      owner: githubOwner,
+      repo: githubRepo,
+      branch: githubBranch,
+      path: planPath,
+      message: `Generate editorial plan for ${today}`,
+      contentObject: editorialPlan
+    });
+    filesWritten.push(planPath);
+
     const candidateBundle = await generateCandidateBundle({
       apiKey: openaiApiKey,
       model,
-      today
+      today,
+      editorialPlan
     });
 
-    const signalRail = buildSignalRail(today, candidateBundle);
-    const filesWritten = [];
+    const signalRail = buildSignalRail(today, candidateBundle, editorialPlan);
 
     const candidatesPath = `generated/daily/${today}-candidates.json`;
     await upsertGitHubJsonFile({
@@ -134,7 +158,8 @@ export async function runGenerateDaily({
         today,
         categoryKey,
         categoryMeta,
-        candidate: selectedCandidate
+        candidate: selectedCandidate,
+        editorialPlan
       });
 
       let draftPacket = await buildDraftPacket({
@@ -146,7 +171,8 @@ export async function runGenerateDaily({
         categoryKey,
         categoryMeta,
         candidate: selectedCandidate,
-        generated
+        generated,
+        editorialPlan
       });
 
       if (
@@ -178,6 +204,7 @@ export async function runGenerateDaily({
         contentObject: {
           date: today,
           category: categoryKey,
+          editorial_plan: editorialPlan.stream_plans[categoryKey] || null,
           draft_packet: draftPacket
         }
       });
@@ -223,7 +250,10 @@ export async function runGenerateDaily({
         raw_draft_packet: draftPacket,
         metadata: {
           image_mode: draftPacket?.image_mode || null,
-          source_file: draftPath
+          source_file: draftPath,
+          edition_type: editorialPlan.edition_type,
+          edition_name: editorialPlan.edition_name,
+          stream_plan: editorialPlan.stream_plans[categoryKey] || null
         }
       };
 
@@ -253,7 +283,9 @@ export async function runGenerateDaily({
         status: "completed",
         finished_at: new Date().toISOString(),
         outputs_json: {
-          files_written: filesWritten
+          files_written: filesWritten,
+          edition_type: editorialPlan.edition_type,
+          edition_name: editorialPlan.edition_name
         }
       })
       .eq("id", publicationRunId);
@@ -261,6 +293,8 @@ export async function runGenerateDaily({
     return {
       ok: true,
       date: today,
+      edition_type: editorialPlan.edition_type,
+      edition_name: editorialPlan.edition_name,
       files_written: filesWritten
     };
   } catch (error) {
@@ -279,11 +313,29 @@ export async function runGenerateDaily({
   }
 }
 
-async function generateCandidateBundle({ apiKey, model, today }) {
+async function generateCandidateBundle({ apiKey, model, today, editorialPlan }) {
+  const streamPlannerSummary = GENERATION_CATEGORIES.map((categoryKey) => {
+    const plannerBlock = buildPlannerPromptBlock(editorialPlan, categoryKey);
+    return `\n[${categoryKey}]\n${plannerBlock}`;
+  }).join("\n");
+
   const prompt = `
 You are preparing Drishvara's daily editorial shortlist for ${today}.
 
 Return valid JSON only.
+
+First follow the editorial planning instructions below very carefully.
+These rules are not optional.
+
+GLOBAL EDITORIAL PLAN
+Date: ${editorialPlan.date}
+Day: ${editorialPlan.day_name}
+Edition type: ${editorialPlan.edition_type}
+Edition name: ${editorialPlan.edition_name}
+Objective: ${editorialPlan.objective}
+
+STREAM PLANS
+${streamPlannerSummary}
 
 Create 8 to 12 candidate topics across these categories:
 - spirituality
@@ -295,14 +347,18 @@ Create 8 to 12 candidate topics across these categories:
 Rules:
 - Each candidate must be publication-worthy, serious, reflective, and suitable for a premium insight platform.
 - Avoid gossip, celebrity fluff, listicles, and shallow trend commentary.
-- Sports may include performance, tournament design, analytics, recovery, psychology, governance, fandom, or major event significance.
-- Public Programmes should focus on governance, delivery systems, public infrastructure, literacy, health, education, welfare design, implementation, or civic design.
-- Topics should be broad enough for a 400-550 word article.
+- Respect the topic width, depth, theme family, traffic goal, and topic shape for each stream.
+- On special edition days, prefer stronger long-tail quality traffic, explanatory depth, historical framing, and more distinctive editorial value.
 - Include at least one selected candidate per required category.
+- Candidate titles should feel specific, publishable, and non-generic.
+- Summaries should clearly signal why the topic matters.
+- Do not generate cheap clickbait topics.
 
 Return JSON in this shape:
 {
   "date": "${today}",
+  "edition_type": "${editorialPlan.edition_type}",
+  "edition_name": "${editorialPlan.edition_name}",
   "candidates": [
     {
       "category": "spirituality",
@@ -327,6 +383,8 @@ Return JSON in this shape:
 
   return {
     date: today,
+    edition_type: editorialPlan.edition_type,
+    edition_name: editorialPlan.edition_name,
     generated_at: new Date().toISOString(),
     candidates: ensured
   };
@@ -425,19 +483,23 @@ function pickCandidateForCategory(candidateBundle, categoryKey) {
   );
 }
 
-function buildSignalRail(today, candidateBundle) {
+function buildSignalRail(today, candidateBundle, editorialPlan) {
   const items = GENERATION_CATEGORIES.map((categoryKey) => {
     const candidate = pickCandidateForCategory(candidateBundle, categoryKey);
     return {
       category: CATEGORY_META[categoryKey].label,
       title: candidate.title,
       summary: candidate.summary,
+      edition_type: editorialPlan.edition_type,
+      theme_family: editorialPlan?.stream_plans?.[categoryKey]?.theme_family || null,
       status: "Selected"
     };
   });
 
   return {
     date: today,
+    edition_type: editorialPlan.edition_type,
+    edition_name: editorialPlan.edition_name,
     generated_at: new Date().toISOString(),
     items
   };
@@ -485,10 +547,16 @@ async function generateArticleDraft({
   today,
   categoryKey,
   categoryMeta,
-  candidate
+  candidate,
+  editorialPlan
 }) {
+  const plannerBlock = buildPlannerPromptBlock(editorialPlan, categoryKey);
+
   const prompt = `
 Write one polished Drishvara article for the category "${categoryMeta.label}".
+
+EDITORIAL PLANNER DIRECTIVE
+${plannerBlock}
 
 Date: ${today}
 Category key: ${categoryKey}
@@ -500,6 +568,10 @@ Requirements:
 - Tone: thoughtful, grounded, reflective, readable, non-hyperbolic
 - Length: target 400 to 550 words
 - Output must be valid JSON only
+- Respect the planner's width, depth, traffic goal, topic shape, theme family, writing mode, and closing style
+- On special edition days, the article should be distinctly stronger than a normal daily article
+- Where suitable, use analogy, historical fact, evidence, or institutional framing in line with the planner
+- Close in the planner-directed style, especially open reflective or open analytical when specified
 - Provide:
   1. title
   2. slug
@@ -645,7 +717,8 @@ async function buildDraftPacket({
   categoryKey,
   categoryMeta,
   candidate,
-  generated
+  generated,
+  editorialPlan
 }) {
   const slug = sanitizeSlug(
     generated?.slug ||
@@ -653,6 +726,8 @@ async function buildDraftPacket({
     candidate.title ||
     `${categoryKey}-insight-${today}`
   );
+
+  const streamPlan = editorialPlan?.stream_plans?.[categoryKey] || null;
 
   const baseDraftPacket = {
     date: today,
@@ -677,7 +752,10 @@ async function buildDraftPacket({
     generated_image_credit: safeText(generated?.image_credit),
     generated_image_source_url: safeText(generated?.image_source_url),
     generated_image_prompt: safeText(generated?.image_prompt),
-    generated_image_direct: safeText(generated?.image)
+    generated_image_direct: safeText(generated?.image),
+    edition_type: editorialPlan?.edition_type || "regular",
+    edition_name: editorialPlan?.edition_name || "Standard Daily Edition",
+    stream_plan: streamPlan
   };
 
   const imageInfo = await resolveArticleImage({
