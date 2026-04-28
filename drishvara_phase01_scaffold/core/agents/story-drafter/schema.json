@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": ["headline", "angle", "sections"],
+  "properties": {
+    "headline": { "type": "string" },
+    "angle": { "type": "string" },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "bullets"],
+        "properties": {
+          "title": { "type": "string" },
+          "bullets": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

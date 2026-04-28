@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "required": ["topic", "audience", "contentType", "objective", "tone", "factualAnchors"],
+  "properties": {
+    "topic": { "type": "string" },
+    "audience": { "type": "string" },
+    "contentType": { "type": "string" },
+    "objective": { "type": "string" },
+    "tone": { "type": "string" },
+    "factualAnchors": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

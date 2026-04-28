@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "required": ["assets"],
+  "properties": {
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "placement", "purpose", "prompt"],
+        "properties": {
+          "type": { "type": "string" },
+          "placement": { "type": "string" },
+          "purpose": { "type": "string" },
+          "prompt": { "type": "string" }
+        }
+      }
+    }
+  }
+}

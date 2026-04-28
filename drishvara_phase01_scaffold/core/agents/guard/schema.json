@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "required": ["status", "severity", "returnToStage", "issues", "correctivePrompt", "revisionActions"],
+  "properties": {
+    "status": { "type": "string" },
+    "severity": { "type": "string" },
+    "returnToStage": { "type": "string" },
+    "issues": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "correctivePrompt": { "type": "string" },
+    "revisionActions": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}
