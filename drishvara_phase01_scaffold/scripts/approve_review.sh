@@ -25,6 +25,7 @@ cp "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json" "$PUBLISHED/$TOPIC_FOLDER/met
 
 cd "$ROOT"
 python scripts/update_manifest.py
+python scripts/update_review_manifest.py
 
 cd "$REPO_ROOT"
 git add \

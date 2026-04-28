@@ -71,6 +71,9 @@ def main():
 
     metadata_json.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
+    from subprocess import run
+    run(["python", "scripts/update_review_manifest.py"], cwd=ROOT, check=True)
+
     print("Review candidate written to:")
     print(f"  {candidate_md}")
     if html_src.exists():
