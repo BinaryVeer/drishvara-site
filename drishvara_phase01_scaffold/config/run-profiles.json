@@ -1,0 +1,26 @@
+{
+  "cheap-smoke": {
+    "runMode": "cheap",
+    "providerStages": [],
+    "debugMode": false,
+    "inputPath": "core/tests/sample-inputs/evidence-pack/normal-01-asset-management.json"
+  },
+  "mixed-core": {
+    "runMode": "mixed",
+    "providerStages": ["story-drafter", "integrator", "guard"],
+    "debugMode": false,
+    "inputPath": "core/tests/sample-inputs/evidence-pack/normal-02-grievance-redressal.json"
+  },
+  "full-production": {
+    "runMode": "full",
+    "providerStages": [],
+    "debugMode": false,
+    "inputPath": "core/tests/sample-inputs/evidence-pack/normal-02-grievance-redressal.json"
+  },
+  "cheap-debug-story": {
+    "runMode": "cheap",
+    "providerStages": [],
+    "debugMode": true,
+    "inputPath": "core/tests/sample-inputs/evidence-pack/normal-01-asset-management.json"
+  }
+}
