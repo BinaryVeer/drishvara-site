@@ -16,5 +16,9 @@ echo "===== PREPARE REVIEW CANDIDATE ====="
 python scripts/review_latest.py
 
 echo
+echo "===== UPDATE OPS STATUS ====="
+python scripts/update_ops_status.py
+
+echo
 echo "===== DONE ====="
 echo "Queue item processed and sent to review."

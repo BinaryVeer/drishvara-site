@@ -30,6 +30,7 @@ rm -f "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json"
 
 cd "$ROOT"
 python scripts/update_review_manifest.py
+python scripts/update_ops_status.py
 
 cd "$REPO_ROOT"
 git add   drishvara_phase01_scaffold/review   drishvara_phase01_scaffold/core/learning/lessons/candidate-lessons.jsonl   drishvara_phase01_scaffold/core/learning/lessons/validated-lessons.jsonl   drishvara_phase01_scaffold/core/learning/playbooks/topic-playbooks.json   drishvara_phase01_scaffold/core/learning/policies/prompt-policies.json   drishvara_phase01_scaffold/core/learning/run-ledger/runs.jsonl

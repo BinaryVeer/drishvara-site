@@ -36,6 +36,7 @@ rm -f "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json"
 cd "$ROOT"
 python scripts/update_manifest.py
 python scripts/update_review_manifest.py
+python scripts/update_ops_status.py
 
 cd "$REPO_ROOT"
 git add \
