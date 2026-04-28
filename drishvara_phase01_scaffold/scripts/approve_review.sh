@@ -23,6 +23,9 @@ fi
 
 cp "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json" "$PUBLISHED/$TOPIC_FOLDER/metadata.json"
 
+cd "$ROOT"
+python scripts/update_manifest.py
+
 cd "$REPO_ROOT"
 git add \
   drishvara_phase01_scaffold/published \
