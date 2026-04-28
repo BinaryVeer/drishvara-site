@@ -12,9 +12,9 @@ echo "===== RUN NEXT TOPIC ====="
 ./scripts/run_next_topic.sh
 
 echo
-echo "===== SAVE RUN ====="
-./scripts/save_run.sh
+echo "===== PREPARE REVIEW CANDIDATE ====="
+python scripts/review_latest.py
 
 echo
 echo "===== DONE ====="
-echo "Queue item processed and saved."
+echo "Queue item processed and sent to review."
