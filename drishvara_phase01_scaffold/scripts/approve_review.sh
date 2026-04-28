@@ -14,14 +14,24 @@ if [ ! -f "$REVIEW/$TOPIC_FOLDER/candidate.md" ]; then
 fi
 
 mkdir -p "$PUBLISHED/$TOPIC_FOLDER"
+mkdir -p "$REVIEW/archive/$TOPIC_FOLDER"
+
+STAMP=$(date -u +"%Y%m%dT%H%M%SZ")
 
 cp "$REVIEW/$TOPIC_FOLDER/candidate.md" "$PUBLISHED/$TOPIC_FOLDER/latest.md"
+cp "$REVIEW/$TOPIC_FOLDER/candidate.md" "$REVIEW/archive/$TOPIC_FOLDER/${STAMP}_candidate.md"
 
 if [ -f "$REVIEW/$TOPIC_FOLDER/candidate.html" ]; then
   cp "$REVIEW/$TOPIC_FOLDER/candidate.html" "$PUBLISHED/$TOPIC_FOLDER/latest.html"
+  cp "$REVIEW/$TOPIC_FOLDER/candidate.html" "$REVIEW/archive/$TOPIC_FOLDER/${STAMP}_candidate.html"
 fi
 
 cp "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json" "$PUBLISHED/$TOPIC_FOLDER/metadata.json"
+cp "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json" "$REVIEW/archive/$TOPIC_FOLDER/${STAMP}_candidate_metadata.json"
+
+rm -f "$REVIEW/$TOPIC_FOLDER/candidate.md"
+rm -f "$REVIEW/$TOPIC_FOLDER/candidate.html"
+rm -f "$REVIEW/$TOPIC_FOLDER/candidate_metadata.json"
 
 cd "$ROOT"
 python scripts/update_manifest.py
