@@ -19,6 +19,7 @@ echo
 echo "===== UPDATE OPS STATUS ====="
 python scripts/update_ops_status.py
 python scripts/render_ops_report.py
+python scripts/update_notifications.py
 
 echo
 echo "===== DONE ====="
