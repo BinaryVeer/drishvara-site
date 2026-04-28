@@ -37,6 +37,7 @@ cd "$ROOT"
 python scripts/update_manifest.py
 python scripts/update_review_manifest.py
 python scripts/update_ops_status.py
+python scripts/render_ops_report.py
 
 cd "$REPO_ROOT"
 git add \

@@ -18,6 +18,7 @@ python scripts/review_latest.py
 echo
 echo "===== UPDATE OPS STATUS ====="
 python scripts/update_ops_status.py
+python scripts/render_ops_report.py
 
 echo
 echo "===== DONE ====="
