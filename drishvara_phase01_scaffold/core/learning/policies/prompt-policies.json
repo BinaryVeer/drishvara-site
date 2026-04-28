@@ -1,12 +1,39 @@
 {
-  "generatedAt": "2026-04-28T09:29:56.273Z",
+  "generatedAt": "2026-04-28T10:19:24.397Z",
   "validationThreshold": 2,
   "policyThreshold": 3,
   "policyTopicDiversityThreshold": 2,
-  "totalCandidates": 108,
+  "totalCandidates": 116,
   "totalValidated": 9,
-  "totalPolicyCandidates": 6,
+  "totalPolicyCandidates": 7,
   "items": [
+    {
+      "stage": "pipeline",
+      "lessonType": "success_pattern",
+      "patternCode": "pipeline.publish_success",
+      "patternLabel": "Pipeline publish success",
+      "pattern": "Pipeline publish success",
+      "recommendedAction": "Reuse this pipeline path and compare future successful runs for stable patterns.",
+      "observationCount": 28,
+      "uniqueRunCount": 28,
+      "uniqueTopicCount": 7,
+      "sourceStatusCounts": {
+        "pass": 28
+      },
+      "profileKey": "contentType:article||audience:government and implementation stakeholders",
+      "tags": [
+        "topic:how drishvara should explain rural water service performance monitoring with visual clarity",
+        "contentType:article",
+        "audience:government and implementation stakeholders",
+        "profile:contentType:article||audience:government and implementation stakeholders",
+        "topic:how drishvara should explain village-level ownership in rural water service sustainability",
+        "topic:how drishvara should explain tariff setting and cost recovery in rural water services",
+        "topic:how drishvara should explain rural water asset management for long-term service delivery",
+        "topic:how drishvara should explain grievance redressal in rural water service delivery",
+        "topic:how drishvara should explain rural water asset lifecycle planning",
+        "topic:how drishvara should explain preventive maintenance planning for rural water assets"
+      ]
+    },
     {
       "stage": "pipeline",
       "lessonType": "success_pattern",
@@ -34,28 +61,50 @@
       ]
     },
     {
-      "stage": "pipeline",
-      "lessonType": "success_pattern",
-      "patternCode": "pipeline.publish_success",
-      "patternLabel": "Pipeline publish success",
-      "pattern": "Pipeline publish success",
-      "recommendedAction": "Reuse this pipeline path and compare future successful runs for stable patterns.",
-      "observationCount": 26,
-      "uniqueRunCount": 26,
-      "uniqueTopicCount": 5,
+      "stage": "visual-intelligence",
+      "lessonType": "fix_pattern",
+      "patternCode": "visual-intelligence.figure_brief_standardization",
+      "patternLabel": "Visual intelligence should standardize figure briefs",
+      "pattern": "Visual intelligence should standardize figure briefs",
+      "recommendedAction": "No correction required. The integrated draft is structurally complete, written in audience-facing prose, includes clear section hierarchy, contains multiple explicit labeled visual support elements with placement and description, and closes with a synthesized conclusion aligned to the stated objective for government and implementation stakeholders.",
+      "observationCount": 14,
+      "uniqueRunCount": 14,
+      "uniqueTopicCount": 4,
       "sourceStatusCounts": {
-        "pass": 26
+        "pass": 15
       },
       "profileKey": "contentType:article||audience:government and implementation stakeholders",
       "tags": [
-        "topic:how drishvara should explain rural water service performance monitoring with visual clarity",
+        "topic:how drishvara should explain rural water asset management for long-term service delivery",
         "contentType:article",
         "audience:government and implementation stakeholders",
         "profile:contentType:article||audience:government and implementation stakeholders",
-        "topic:how drishvara should explain village-level ownership in rural water service sustainability",
-        "topic:how drishvara should explain tariff setting and cost recovery in rural water services",
+        "topic:how drishvara should explain grievance redressal in rural water service delivery",
+        "topic:how drishvara should explain rural water asset lifecycle planning",
+        "topic:how drishvara should explain preventive maintenance planning for rural water assets"
+      ]
+    },
+    {
+      "stage": "publisher",
+      "lessonType": "fix_pattern",
+      "patternCode": "publisher.fix_pattern",
+      "patternLabel": "General publisher pattern",
+      "pattern": "General publisher pattern",
+      "recommendedAction": "No correction required in cheap mode.",
+      "observationCount": 11,
+      "uniqueRunCount": 11,
+      "uniqueTopicCount": 3,
+      "sourceStatusCounts": {
+        "pass": 13
+      },
+      "profileKey": "contentType:article||audience:government and implementation stakeholders",
+      "tags": [
         "topic:how drishvara should explain rural water asset management for long-term service delivery",
-        "topic:how drishvara should explain grievance redressal in rural water service delivery"
+        "contentType:article",
+        "audience:government and implementation stakeholders",
+        "profile:contentType:article||audience:government and implementation stakeholders",
+        "topic:how drishvara should explain rural water asset lifecycle planning",
+        "topic:how drishvara should explain preventive maintenance planning for rural water assets"
       ]
     },
     {
@@ -113,28 +162,6 @@
       "recommendedAction": "No correction required. Proceed to publishing.",
       "observationCount": 13,
       "uniqueRunCount": 13,
-      "uniqueTopicCount": 2,
-      "sourceStatusCounts": {
-        "pass": 13
-      },
-      "profileKey": "contentType:article||audience:government and implementation stakeholders",
-      "tags": [
-        "topic:how drishvara should explain rural water asset management for long-term service delivery",
-        "contentType:article",
-        "audience:government and implementation stakeholders",
-        "profile:contentType:article||audience:government and implementation stakeholders",
-        "topic:how drishvara should explain grievance redressal in rural water service delivery"
-      ]
-    },
-    {
-      "stage": "visual-intelligence",
-      "lessonType": "fix_pattern",
-      "patternCode": "visual-intelligence.figure_brief_standardization",
-      "patternLabel": "Visual intelligence should standardize figure briefs",
-      "pattern": "Visual intelligence should standardize figure briefs",
-      "recommendedAction": "No correction required. The integrated draft is structurally complete, written in audience-facing prose, includes clear section hierarchy, contains multiple explicit labeled visual support elements with placement and description, and closes with a synthesized conclusion aligned to the stated objective for government and implementation stakeholders.",
-      "observationCount": 12,
-      "uniqueRunCount": 12,
       "uniqueTopicCount": 2,
       "sourceStatusCounts": {
         "pass": 13
