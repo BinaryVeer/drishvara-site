@@ -1133,6 +1133,25 @@
           </div>
         </section>
 
+        <section class="card signal-card reading-guide-card article-index-card" id="article-index-card">
+          <div class="label">Indexed Reads</div>
+          <h2 class="section-title-sm" id="article-index-title">Latest from Drishvara</h2>
+          <p id="article-index-intro">
+            Recently generated and published reads from the Drishvara content pipeline.
+          </p>
+          <div class="reading-guide-list" id="article-index-list">
+            <div class="reading-guide-item">
+              <div class="sub">Article Index</div>
+              <div class="title">Fetching indexed reads...</div>
+              <div class="meta">Generated article index will appear here.</div>
+            </div>
+          </div>
+          <div class="reading-guide-links">
+            <a href="insights.html">Open insights</a>
+            <a href="article.html">Open article reader</a>
+          </div>
+        </section>
+
         <div class="center-lower">
           <div class="card founder-card" id="founder-notebook-card">
             <div class="label" id="founder-notebook-status">Weekly Signal</div>
@@ -1402,6 +1421,61 @@
           </div>
         </div>
       `;
+    }
+
+    async function loadArticleIndex() {
+      const list = document.getElementById("article-index-list");
+      const intro = document.getElementById("article-index-intro");
+      if (!list) return;
+
+      try {
+        const response = await fetch("data/article-index.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("article-index.json unavailable");
+
+        const indexData = await response.json();
+        const items = Array.isArray(indexData.latest)
+          ? indexData.latest
+          : Array.isArray(indexData.items)
+            ? indexData.items.slice(0, 6)
+            : [];
+
+        if (intro && typeof indexData.total === "number") {
+          intro.textContent = `Recently generated and published reads from the Drishvara content pipeline. Indexed reads available: ${indexData.total}.`;
+        }
+
+        if (!items.length) {
+          list.innerHTML = `
+            <div class="reading-guide-item">
+              <div class="sub">Article Index</div>
+              <div class="title">No indexed reads found yet.</div>
+              <div class="meta">Run npm run build:article-index after generating or publishing articles.</div>
+            </div>
+          `;
+          return;
+        }
+
+        list.innerHTML = items.slice(0, 5).map((item) => {
+          const href = item.url || (item.folder ? `article.html?folder=${encodeURIComponent(item.folder)}` : "article.html");
+          return `
+            <div class="reading-guide-item">
+              <div class="sub">${escapeHtml(item.tag || item.source || "Drishvara")} · ${escapeHtml(item.date || "")}</div>
+              <div class="title">${escapeHtml(item.title || "Untitled Drishvara read")}</div>
+              <div class="meta">${escapeHtml(item.summary || "A Drishvara read prepared for the daily surface.")}</div>
+              <div class="reading-guide-links">
+                <a href="${escapeHtml(href)}">Open read</a>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } catch (error) {
+        list.innerHTML = `
+          <div class="reading-guide-item">
+            <div class="sub">Article Index</div>
+            <div class="title">Article index has not been generated yet.</div>
+            <div class="meta">Run npm run build:article-index to create data/article-index.json.</div>
+          </div>
+        `;
+      }
     }
 
     async function loadReadingGuide() {
@@ -1902,6 +1976,7 @@
     }
 
     loadFeaturedReads();
+    loadArticleIndex();
     loadReadingGuide();
     loadDailyContext();
     loadSportsContext();
