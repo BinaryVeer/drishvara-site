@@ -909,14 +909,29 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="open-day-card">
           <div class="label">Browse by Date</div>
           <h2>Open a Day in Drishvara</h2>
-          <p>Select a date to view that day’s saved outputs — articles, signals, and daily modules.</p>
+          <p id="open-day-subtitle">Explore archived reads by date and theme.</p>
           <div class="form-grid">
-            <input type="date" />
-            <button class="btn btn-secondary">Open that Day</button>
+            <input type="date" id="open-day-date" />
+            <select id="open-day-theme">
+              <option value="">All Themes</option>
+              <option value="grievance-redressal">Grievance Redressal</option>
+              <option value="asset-management">Asset Management</option>
+              <option value="shared">Shared / General</option>
+            </select>
+            <button class="btn btn-secondary" id="open-day-button">Open that Day</button>
           </div>
+          <div class="utility-note" id="open-day-note">Archive browsing shell is ready. Live date-wise retrieval will be connected next.</div>
+        </div>
+
+        <div class="card" id="psychometric-card">
+          <div class="label">Psychometric Assessment</div>
+          <h2>Psychometric Assessment</h2>
+          <p id="psychometric-subtitle">A reflective module for personality, decision style, work energy, and growth signals.</p>
+          <div class="status-badge">Coming Soon</div>
+          <div class="utility-note">This space is reserved for guided self-discovery, profile snapshots, and insight-led recommendations.</div>
         </div>
       </aside>
     </section>
@@ -1037,158 +1052,42 @@
       const grid = document.getElementById("featured-reads-grid");
       if (!grid) return;
 
-      const today = new Date().toISOString().slice(0, 10);
-      const fallbackMap = categoryFallbackImageMap();
-      const categoryKeys = [
-        "spirituality",
-        "world_affairs",
-        "media_society",
-        "public_programmes"
-      ];
-
-      try {
-        const packets = await Promise.all(categoryKeys.map(key => fetchDraftForCategory(today, key)));
-        const valid = packets
-          .map((packet, idx) => ({ packet, categoryKey: categoryKeys[idx] }))
-          .filter(x => x.packet);
-
-        if (!valid.length) {
-          grid.innerHTML = `
-            <div class="feature-card">
-              <div class="feature-image-wrap">
-                <div class="image-fallback-text">No featured reads yet</div>
-              </div>
-              <div class="feature-body">
-                <div class="label">Featured Reads</div>
-                <h3>Today’s featured articles are not available yet.</h3>
-                <p>The publishing system may still be generating or publishing today’s content.</p>
-              </div>
-            </div>
-          `;
-          return;
-        }
-
-        grid.innerHTML = valid.map(({ packet, categoryKey }) => `
-          <div class="feature-card">
-            ${buildImageBlock({
-              imagePath: packet.image_path || packet.image,
-              fallbackPath: fallbackMap[categoryKey],
-              altText: packet.image_alt || packet.title,
-              wrapClass: "feature-image-wrap",
-              imageClass: "feature-image-tag",
-              fallbackText: "Lead image unavailable"
-            })}
-            <div class="feature-body">
-              <div class="label">${escapeHtml(packet.meta_label || categoryLabelMap()[categoryKey])}</div>
-              <h3>
-                <a href="${buildArticleHref(categoryKey, packet.slug)}">
-                  ${escapeHtml(packet.title)}
-                </a>
-              </h3>
-              <p>${escapeHtml(packet.subtitle || packet.summary || "Daily editorial selection from Drishvara.")}</p>
-              <a class="read-link" href="${buildArticleHref(categoryKey, packet.slug)}">Read article →</a>
-              <div class="feature-links">
-                ${buildConditionalLinks([
-                  { label: "Reference 1", href: Array.isArray(packet.reference_links) ? (packet.reference_links[0] || "") : "" },
-                  { label: "Reference 2", href: Array.isArray(packet.reference_links) ? (packet.reference_links[1] || "") : "" }
-                ])}
-              </div>
-            </div>
-          </div>
-        `).join("");
-      } catch (error) {
-        grid.innerHTML = `
-          <div class="feature-card">
-            <div class="feature-image-wrap">
-              <div class="image-fallback-text">Featured reads unavailable</div>
-            </div>
-            <div class="feature-body">
-              <div class="label">Featured Reads</div>
-              <h3>Could not load today’s featured reads.</h3>
-              <p>Please check again shortly.</p>
-            </div>
-          </div>
-        `;
+      const homepageData = await fetchHomepageUIData();
+      if (homepageData && renderHomepageFeaturedReads(homepageData.featuredReads)) {
+        return;
       }
+
+      grid.innerHTML = `
+        <div class="feature-card">
+          <div class="feature-image-wrap">
+            <div class="image-fallback-text">No featured reads yet</div>
+          </div>
+          <div class="feature-body">
+            <div class="label">Featured Reads</div>
+            <h3>Today’s featured articles are not available yet.</h3>
+            <p>The homepage UI data source is not available yet.</p>
+          </div>
+        </div>
+      `;
     }
 
     async function loadReadingGuide() {
       const guideList = document.getElementById("reading-guide-list");
-      const guideIntro = document.getElementById("reading-guide-intro");
       if (!guideList) return;
 
-      const today = new Date().toISOString().slice(0, 10);
-      const signalPath = `generated/signals/${today}-signal-rail.json`;
-
-      try {
-        const signalResponse = await fetch(signalPath, { cache: "no-store" });
-        if (!signalResponse.ok) throw new Error(`Signal file not found for ${today}`);
-
-        const signalData = await signalResponse.json();
-        const signalItems = Array.isArray(signalData.items) ? signalData.items : [];
-
-        const categoryLookup = {
-          "Spirituality": "spirituality",
-          "Sports": "sports",
-          "World Affairs": "world_affairs",
-          "Media & Society": "media_society",
-          "Public Programmes": "public_programmes"
-        };
-
-        const packetResults = await Promise.all(
-          signalItems.map(async item => {
-            const categoryKey = categoryLookup[item.category] || null;
-            if (!categoryKey) return null;
-
-            const packet = await fetchDraftForCategory(today, categoryKey);
-            if (!packet) return null;
-
-            return {
-              categoryKey,
-              categoryLabel: item.category,
-              title: packet.title,
-              summary: item.summary || packet.summary || "",
-              subtitle: packet.subtitle || "",
-              slug: packet.slug
-            };
-          })
-        );
-
-        const valid = packetResults.filter(Boolean);
-
-        if (!valid.length) {
-          guideList.innerHTML = `
-            <div class="reading-guide-item">
-              <div class="sub">Reading Guide</div>
-              <div class="title">Today’s reading guide is not available yet.</div>
-              <div class="meta">Please check back shortly.</div>
-            </div>
-          `;
-          return;
-        }
-
-        guideIntro.textContent = `A compact guide to the most useful stories for ${today}. Open any item below to read the full article.`;
-
-        guideList.innerHTML = valid.map(item => `
-          <div class="reading-guide-item">
-            <div class="sub">${escapeHtml(item.categoryLabel)}</div>
-            <div class="title">${escapeHtml(item.title)}</div>
-            <div class="meta">${escapeHtml(item.subtitle || item.summary)}</div>
-            <div class="reading-guide-links">
-              <a href="${buildArticleHref(item.categoryKey, item.slug)}">Read article</a>
-            </div>
-            <div class="status-badge">Selected Today</div>
-          </div>
-        `).join("");
-      } catch (error) {
-        guideList.innerHTML = `
-          <div class="reading-guide-item">
-            <div class="sub">Reading Guide</div>
-            <div class="title">Today’s reading guide is not available yet.</div>
-            <div class="meta">The system may still be generating or publishing today’s feed.</div>
-          </div>
-        `;
+      const homepageData = await fetchHomepageUIData();
+      if (homepageData && renderHomepageReadingGuide(homepageData.readingGuide)) {
+        applyHomepageUtilityShell(homepageData);
+        return;
       }
+
+      guideList.innerHTML = `
+        <div class="reading-guide-item">
+          <div class="sub">Reading Guide</div>
+          <div class="title">Today’s reading guide is not available yet.</div>
+          <div class="meta">The homepage UI data source is not available yet.</div>
+        </div>
+      `;
     }
 
     async function loadDailyContext() {
@@ -1456,6 +1355,74 @@
           <div class="meta">${escapeHtml(item.note || "")}</div>
         </div>
       `).join("");
+    }
+
+    async function fetchHomepageUIData() {
+      try {
+        const response = await fetch("data/homepage-ui.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("homepage-ui.json unavailable");
+        return await response.json();
+      } catch (error) {
+        console.log("Homepage UI data unavailable:", error.message);
+        return null;
+      }
+    }
+
+    function renderHomepageFeaturedReads(items) {
+      const grid = document.getElementById("featured-reads-grid");
+      if (!grid || !Array.isArray(items) || !items.length) return false;
+
+      grid.innerHTML = items.map(item => `
+        <div class="feature-card">
+          <div class="feature-image-wrap">
+            <div class="image-fallback-text">${escapeHtml(item.tag || "Featured Read")}</div>
+          </div>
+          <div class="feature-body">
+            <div class="label">${escapeHtml(item.tag || "Featured Read")}</div>
+            <h3><a href="#open-day-card">${escapeHtml(item.title || "")}</a></h3>
+            <p>${escapeHtml(item.summary || "")}</p>
+            <a class="read-link" href="#open-day-card">Read now →</a>
+          </div>
+        </div>
+      `).join("");
+      return true;
+    }
+
+    function renderHomepageReadingGuide(guide) {
+      const guideList = document.getElementById("reading-guide-list");
+      const guideIntro = document.getElementById("reading-guide-intro");
+      if (!guideList || !guide) return false;
+
+      if (guideIntro && guide.intro) {
+        guideIntro.textContent = guide.intro;
+      }
+
+      const items = Array.isArray(guide.items) ? guide.items : [];
+      guideList.innerHTML = items.map((item, idx) => `
+        <div class="reading-guide-item">
+          <div class="sub">Step ${idx + 1}</div>
+          <div class="title">${escapeHtml(item)}</div>
+          <div class="meta">Daily route into Drishvara’s reading surface.</div>
+          <div class="status-badge">Guide</div>
+        </div>
+      `).join("") || `
+        <div class="reading-guide-item">
+          <div class="sub">Reading Guide</div>
+          <div class="title">Today’s guide is being prepared.</div>
+          <div class="meta">Please check back shortly.</div>
+        </div>
+      `;
+      return true;
+    }
+
+    function applyHomepageUtilityShell(data) {
+      if (!data) return;
+      if (data.openDay) {
+        setText("open-day-subtitle", data.openDay.subtitle);
+      }
+      if (data.psychometric) {
+        setText("psychometric-subtitle", data.psychometric.subtitle);
+      }
     }
 
     function setText(id, value) {
