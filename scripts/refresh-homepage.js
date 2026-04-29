@@ -57,14 +57,17 @@ const failures = [];
 const indexHtmlPath = path.join(root, "index.html");
 const homepageUiPath = path.join(root, "data", "homepage-ui.json");
 const articleIndexPath = path.join(root, "data", "article-index.json");
+const insightsPath = path.join(root, "insights.html");
 const packagePath = path.join(root, "package.json");
 
 check(exists(indexHtmlPath), "index.html exists", failures);
 check(exists(homepageUiPath), "data/homepage-ui.json exists", failures);
 check(exists(articleIndexPath), "data/article-index.json exists", failures);
+check(exists(insightsPath), "insights.html exists", failures);
 check(exists(packagePath), "package.json exists", failures);
 
 let indexHtml = "";
+let insightsHtml = "";
 let homepageUi = {};
 let articleIndex = {};
 let pkg = {};
@@ -73,6 +76,12 @@ try {
   indexHtml = readText(indexHtmlPath);
 } catch {
   failures.push("Unable to read index.html");
+}
+
+try {
+  insightsHtml = readText(insightsPath);
+} catch {
+  failures.push("Unable to read insights.html");
 }
 
 try {
@@ -94,6 +103,10 @@ try {
 }
 
 check(indexHtml.includes("article-index-card"), "Homepage has Indexed Reads card", failures);
+check(insightsHtml.includes("data/article-index.json"), "Insights page consumes article-index.json", failures);
+check(insightsHtml.includes("search-input"), "Insights page has search input", failures);
+check(insightsHtml.includes("topic-filters"), "Insights page has topic filters", failures);
+check(insightsHtml.includes("archive-list"), "Insights page has archive list", failures);
 check(indexHtml.includes("loadArticleIndex();"), "Homepage calls loadArticleIndex()", failures);
 check(indexHtml.includes("batch03-integrated-flow"), "Homepage has Batch 03 integrated flow", failures);
 check(indexHtml.includes("first-light-card"), "Homepage has First Light card", failures);

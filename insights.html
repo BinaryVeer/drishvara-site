@@ -4,47 +4,59 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Insights · Drishvara</title>
-  <meta name="description" content="Insights from Drishvara." />
+  <meta name="description" content="Explore Drishvara insights by latest reads, themes, and archive dates." />
   <link rel="icon" type="image/png" href="assets/logo/logo.png" />
   <style>
     :root {
       --bg-1: #08142d;
       --bg-2: #12254a;
       --surface: rgba(255, 255, 255, 0.04);
-      --surface-strong: rgba(255, 255, 255, 0.05);
+      --surface-strong: rgba(255, 255, 255, 0.065);
       --border: rgba(255, 255, 255, 0.08);
       --text-main: #f5f1e8;
       --text-soft: #d7deea;
       --text-muted: #9aa8bc;
       --gold: #c9a24a;
       --gold-soft: rgba(201, 162, 74, 0.16);
+      --danger-soft: rgba(255, 107, 107, 0.10);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       min-height: 100%;
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: "Georgia", "Times New Roman", serif;
+      font-family: Cambria, Georgia, "Times New Roman", serif;
       color: var(--text-main);
       background:
-        radial-gradient(circle at 50% 14%, rgba(201, 162, 74, 0.08), transparent 18%),
-        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.04), transparent 18%),
+        radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.08), transparent 18%),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.04), transparent 18%),
         linear-gradient(135deg, var(--bg-1), var(--bg-2));
       overflow-x: hidden;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .font-ui {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     .page {
       width: 100%;
-      max-width: 1080px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 28px 20px 64px;
+      padding: 26px 20px 70px;
     }
 
     .nav {
@@ -53,11 +65,11 @@
       gap: 28px;
       padding: 8px 0 34px;
       flex-wrap: wrap;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .nav a {
       color: var(--text-soft);
-      text-decoration: none;
       font-size: 1rem;
       transition: color 0.2s ease;
     }
@@ -69,7 +81,7 @@
 
     .hero {
       text-align: center;
-      margin-bottom: 38px;
+      margin-bottom: 28px;
     }
 
     .logo-wrap {
@@ -77,7 +89,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .logo-wrap::before {
@@ -94,125 +106,276 @@
     .logo {
       position: relative;
       z-index: 1;
-      width: 78px;
+      width: 76px;
       display: block;
       filter: drop-shadow(0 0 8px rgba(201, 162, 74, 0.16));
     }
 
     h1 {
       margin: 0 0 10px;
-      font-size: clamp(2.8rem, 5.4vw, 4.4rem);
+      font-size: clamp(2.7rem, 5vw, 4.4rem);
       line-height: 1.02;
       font-weight: 600;
-    }
-
-    .hero-tagline {
-      color: var(--gold);
-      font-size: 1.02rem;
-      letter-spacing: 0.3px;
-      margin-bottom: 14px;
-    }
-
-    .intro {
-      max-width: 780px;
-      margin: 0 auto;
-      color: var(--text-soft);
-      font-size: 1.08rem;
-      line-height: 1.9;
-    }
-
-    .divider {
-      width: 86px;
-      height: 1px;
-      margin: 28px auto 0;
-      background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.95), transparent);
-    }
-
-    .section {
-      margin-top: 34px;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      margin: 0 0 10px;
       color: var(--text-main);
     }
 
-    .section-intro {
-      max-width: 760px;
-      margin: 0 auto 24px;
-      text-align: center;
-      color: var(--text-muted);
-      line-height: 1.85;
-      font-size: 1rem;
+    .subtitle {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--text-soft);
+      line-height: 1.8;
+      font-size: 1.05rem;
     }
 
-    .grid {
+    .divider {
+      width: 84px;
+      height: 1px;
+      margin: 22px auto 0;
+      background: linear-gradient(to right, transparent, rgba(201, 162, 74, 0.95), transparent);
+    }
+
+    .toolbar {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin: 24px 0 18px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
     }
 
-    .card {
-      background: var(--surface);
+    .search-box {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 12px 15px;
+      font-size: 0.96rem;
+      outline: none;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .search-box::placeholder {
+      color: var(--text-muted);
+    }
+
+    .source-toggle {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text-soft);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.86rem;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: var(--gold);
+      border-color: rgba(201, 162, 74, 0.32);
+      background: rgba(201, 162, 74, 0.08);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card,
+    .panel,
+    .read-card,
+    .archive-card {
       border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 26px;
+      background: var(--surface);
+      border-radius: 20px;
       backdrop-filter: blur(6px);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(201, 162, 74, 0.35);
-      background: var(--surface-strong);
+    .stat-card {
+      padding: 16px;
     }
 
-    .card h2 {
-      margin: 0 0 12px;
-      font-size: 1.5rem;
+    .stat-label {
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .stat-value {
+      color: var(--text-main);
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) 360px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      padding: 22px;
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .label {
+      color: var(--gold);
+      font-size: 0.82rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .panel h2 {
+      margin: 0;
+      color: var(--text-main);
+      font-size: 1.7rem;
       line-height: 1.15;
     }
 
-    .card p {
-      margin: 0 0 14px;
+    .panel-note {
       color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.85;
+      line-height: 1.7;
+      margin: 8px 0 0;
+      font-size: 0.94rem;
     }
 
-    .card a {
+    .reads-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .read-card {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 220px;
+    }
+
+    .read-meta {
       color: var(--gold);
-      text-decoration: none;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    .card a:hover {
+    .read-title {
+      color: var(--text-main);
+      font-size: 1.15rem;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .read-summary {
+      color: var(--text-muted);
+      line-height: 1.65;
+      font-size: 0.92rem;
+      margin: 0;
+      flex: 1;
+    }
+
+    .read-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.86rem;
+    }
+
+    .read-actions a {
+      color: var(--gold);
+    }
+
+    .read-actions a:hover {
       text-decoration: underline;
     }
 
-    .status {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: rgba(201, 162, 74, 0.08);
-      border: 1px solid rgba(201, 162, 74, 0.18);
-      color: var(--gold);
-      font-size: 0.88rem;
+    .side-stack {
+      display: grid;
+      gap: 20px;
     }
 
-    .note-strip {
-      margin-top: 28px;
-      padding: 18px 20px;
-      border: 1px solid rgba(201, 162, 74, 0.18);
-      border-radius: 18px;
-      background: rgba(201, 162, 74, 0.04);
+    .archive-list,
+    .topic-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .archive-card {
+      padding: 13px 14px;
+    }
+
+    .archive-date,
+    .topic-name {
       color: var(--text-soft);
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.8;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      margin-bottom: 5px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .archive-items,
+    .topic-count {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.55;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .archive-card a {
+      display: block;
+      color: var(--gold);
+      margin-top: 7px;
+      font-size: 0.82rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .empty-state {
+      border-radius: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255, 107, 107, 0.18);
+      background: var(--danger-soft);
+      color: var(--text-muted);
+      line-height: 1.75;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     footer {
@@ -222,32 +385,36 @@
       color: var(--text-muted);
       text-align: center;
       font-size: 0.95rem;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    @media (max-width: 900px) {
-      .grid {
+    @media (max-width: 980px) {
+      .toolbar,
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .source-toggle {
+        justify-content: flex-start;
+      }
+
+      .stats-grid,
+      .reads-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
       .page {
-        padding: 20px 16px 46px;
+        padding: 20px 16px 48px;
       }
 
-      .nav {
-        gap: 18px;
-        padding-bottom: 26px;
+      .panel {
+        padding: 18px;
       }
 
-      .intro,
-      .section-intro,
-      .card p {
-        font-size: 1rem;
-      }
-
-      .card {
-        padding: 24px;
+      .panel-head {
+        flex-direction: column;
       }
     }
   </style>
@@ -261,70 +428,317 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <section class="hero">
+    <header class="hero">
       <div class="logo-wrap">
         <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
       </div>
       <h1>Insights</h1>
-      <div class="hero-tagline">Observation shaped into thought.</div>
-      <div class="intro">
-        A developing collection of structured writing across domains — where reflection is not decorative, but the method itself.
-      </div>
+      <p class="subtitle">
+        Explore Drishvara’s published reads, generated pipeline items, themes, and archive dates from one discovery surface.
+      </p>
       <div class="divider"></div>
-    </section>
+    </header>
 
-    <section class="section">
-      <h2 class="section-title">Editorial streams</h2>
-      <div class="section-intro">
-        These are the primary domains through which Drishvara will gradually publish recurring writing, commentary, and thematic notes.
+    <section class="stats-grid" aria-label="Insights statistics">
+      <div class="stat-card">
+        <div class="stat-label">Indexed Reads</div>
+        <div class="stat-value" id="stat-total">—</div>
       </div>
-
-      <div class="grid">
-        <div class="card">
-          <h2>Spiritual Thought</h2>
-          <p>
-            Interpretations of classical ideas, lived philosophy, contemplative discipline, and the inner life — approached with seriousness rather than sentimentality.
-          </p>
-          <p><a href="articles/spiritual/role-of-mindfulness-in-modern-spiritual-practices.html">Read first article →</a></p>
-          <div class="status">First article live</div>
-        </div>
-
-        <div class="card">
-          <h2>Public Systems</h2>
-          <p>
-            Governance, policy execution, infrastructure realities, institutional gaps, and the lived friction between design and implementation.
-          </p>
-          <p><a href="articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html">Read first article →</a></p>
-          <div class="status">First article live</div>
-        </div>
-
-        <div class="card">
-          <h2>World Affairs</h2>
-          <p>
-            International confrontation, strategic signalling, power shifts, diplomatic tension, and the deeper logic beneath headline events.
-          </p>
-          <p><a href="articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html">Read first article →</a></p>
-          <div class="status">First article live</div>
-        </div>
-
-        <div class="card">
-          <h2>Media & Society</h2>
-          <p>
-            Narratives, images, films, and the deeper structures that shape perception and attention.
-          </p>
-          <p><a href="articles/media/impact-ai-generated-content-news-credibility-public-trust.html">Read first article →</a></p>
-          <div class="status">First article live</div>
-        </div>
+      <div class="stat-card">
+        <div class="stat-label">Published HTML</div>
+        <div class="stat-value" id="stat-published">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Themes</div>
+        <div class="stat-value" id="stat-topics">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Archive Dates</div>
+        <div class="stat-value" id="stat-dates">—</div>
       </div>
     </section>
 
-    <div class="note-strip">
-      This section is presently a structured placeholder. As publishing begins, these streams will evolve into article archives and thematic series.
-    </div>
+    <section class="toolbar" aria-label="Search and source controls">
+      <input class="search-box" id="search-input" type="search" placeholder="Search reads by title, summary, theme, date, or path..." />
+      <div class="source-toggle">
+        <button class="filter-btn active" data-source="all">All</button>
+        <button class="filter-btn" data-source="articles">Published</button>
+        <button class="filter-btn" data-source="generated">Pipeline</button>
+      </div>
+    </section>
+
+    <section class="filter-row" id="topic-filters" aria-label="Theme filters">
+      <button class="filter-btn active" data-topic="all">All themes</button>
+    </section>
+
+    <main class="layout">
+      <section class="panel" aria-label="Latest reads">
+        <div class="panel-head">
+          <div>
+            <div class="label">Latest Reads</div>
+            <h2 id="results-title">Latest indexed reads</h2>
+            <p class="panel-note" id="results-note">Loading Drishvara index...</p>
+          </div>
+          <div class="read-actions">
+            <a href="index.html">Home</a>
+            <a href="article.html">Article reader</a>
+          </div>
+        </div>
+
+        <div class="reads-grid" id="reads-grid">
+          <div class="empty-state">Loading indexed reads...</div>
+        </div>
+      </section>
+
+      <aside class="side-stack">
+        <section class="panel" aria-label="Topic distribution">
+          <div class="label">Themes</div>
+          <h2>Topic Map</h2>
+          <p class="panel-note">A quick count of indexed reads by theme.</p>
+          <div class="topic-list" id="topic-list"></div>
+        </section>
+
+        <section class="panel" aria-label="Date archive">
+          <div class="label">Archive</div>
+          <h2>Open a Day</h2>
+          <p class="panel-note">Browse the most recent archive dates in Drishvara.</p>
+          <div class="archive-list" id="archive-list"></div>
+        </section>
+      </aside>
+    </main>
 
     <footer>
-      Drishvara © 2026 · Insights page
+      Drishvara © 2026 · Insights and archive discovery
     </footer>
   </div>
+
+  <script>
+    const state = {
+      index: null,
+      items: [],
+      source: "all",
+      topic: "all",
+      query: ""
+    };
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function itemHref(item) {
+      return item.url || (item.path ? `article.html?path=${encodeURIComponent(item.path)}` : "article.html");
+    }
+
+    function normalize(value) {
+      return String(value || "").toLowerCase();
+    }
+
+    function uniqueSorted(values) {
+      return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    }
+
+    function filteredItems() {
+      const q = normalize(state.query);
+
+      return state.items.filter((item) => {
+        if (state.source !== "all" && item.source !== state.source) return false;
+        if (state.topic !== "all" && item.tag !== state.topic) return false;
+
+        if (!q) return true;
+
+        const haystack = normalize([
+          item.title,
+          item.summary,
+          item.tag,
+          item.date,
+          item.source,
+          item.sourcePath,
+          item.path
+        ].join(" "));
+
+        return haystack.includes(q);
+      });
+    }
+
+    function renderStats() {
+      const items = state.items;
+      const published = items.filter((item) => item.source === "articles").length;
+      const topics = uniqueSorted(items.map((item) => item.tag)).length;
+      const dates = uniqueSorted(items.map((item) => item.date)).length;
+
+      setText("stat-total", items.length);
+      setText("stat-published", published);
+      setText("stat-topics", topics);
+      setText("stat-dates", dates);
+    }
+
+    function renderTopicFilters() {
+      const wrap = document.getElementById("topic-filters");
+      const topics = uniqueSorted(state.items.map((item) => item.tag));
+
+      wrap.innerHTML = [
+        `<button class="filter-btn ${state.topic === "all" ? "active" : ""}" data-topic="all">All themes</button>`,
+        ...topics.map((topic) => {
+          const count = state.items.filter((item) => item.tag === topic).length;
+          return `<button class="filter-btn ${state.topic === topic ? "active" : ""}" data-topic="${escapeHtml(topic)}">${escapeHtml(topic)} · ${count}</button>`;
+        })
+      ].join("");
+
+      wrap.querySelectorAll("[data-topic]").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.topic = button.dataset.topic || "all";
+          renderAll();
+        });
+      });
+    }
+
+    function renderReads() {
+      const grid = document.getElementById("reads-grid");
+      const items = filteredItems();
+
+      setText("results-title", state.topic === "all" ? "Latest indexed reads" : state.topic);
+      setText("results-note", `${items.length} read${items.length === 1 ? "" : "s"} visible from ${state.items.length} indexed items.`);
+
+      if (!items.length) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            No reads matched the current filters. Try clearing search, selecting all themes, or running npm run refresh:homepage.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = items.slice(0, 24).map((item) => `
+        <article class="read-card">
+          <div class="read-meta">${escapeHtml(item.tag || "Drishvara")} · ${escapeHtml(item.date || "Undated")} · ${escapeHtml(item.source || "index")}</div>
+          <h3 class="read-title">${escapeHtml(item.title || "Untitled read")}</h3>
+          <p class="read-summary">${escapeHtml(item.summary || "A Drishvara read prepared for the archive.")}</p>
+          <div class="read-actions">
+            <a href="${escapeHtml(itemHref(item))}">Open read</a>
+            ${item.directUrl ? `<a href="${escapeHtml(item.directUrl)}">Direct file</a>` : ""}
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderTopicList() {
+      const wrap = document.getElementById("topic-list");
+      const topicCounts = {};
+
+      for (const item of state.items) {
+        const key = item.tag || "Drishvara";
+        topicCounts[key] = (topicCounts[key] || 0) + 1;
+      }
+
+      const entries = Object.entries(topicCounts).sort((a, b) => b[1] - a[1]);
+
+      if (!entries.length) {
+        wrap.innerHTML = `<div class="empty-state">No topic data available.</div>`;
+        return;
+      }
+
+      wrap.innerHTML = entries.map(([topic, count]) => `
+        <div class="archive-card">
+          <div class="topic-name">${escapeHtml(topic)}</div>
+          <div class="topic-count">${count} indexed read${count === 1 ? "" : "s"}</div>
+          <a href="#" data-topic-jump="${escapeHtml(topic)}">View theme</a>
+        </div>
+      `).join("");
+
+      wrap.querySelectorAll("[data-topic-jump]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          state.topic = link.dataset.topicJump || "all";
+          renderAll();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      });
+    }
+
+    function renderArchiveList() {
+      const wrap = document.getElementById("archive-list");
+      const byDate = state.index?.byDate || {};
+      const dates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
+
+      if (!dates.length) {
+        wrap.innerHTML = `<div class="empty-state">No archive dates available.</div>`;
+        return;
+      }
+
+      wrap.innerHTML = dates.slice(0, 12).map((date) => {
+        const items = byDate[date] || [];
+        const first = items[0] || {};
+        return `
+          <div class="archive-card">
+            <div class="archive-date">${escapeHtml(date)}</div>
+            <div class="archive-items">${items.length} indexed read${items.length === 1 ? "" : "s"}</div>
+            <a href="${escapeHtml(first.url || "article.html")}">Open first read</a>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderSourceButtons() {
+      document.querySelectorAll("[data-source]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.source === state.source);
+      });
+    }
+
+    function renderAll() {
+      renderStats();
+      renderSourceButtons();
+      renderTopicFilters();
+      renderReads();
+      renderTopicList();
+      renderArchiveList();
+    }
+
+    async function loadIndex() {
+      try {
+        const response = await fetch("data/article-index.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("data/article-index.json unavailable");
+
+        const index = await response.json();
+        const items = Array.isArray(index.items) ? index.items : [];
+
+        state.index = index;
+        state.items = items;
+
+        renderAll();
+      } catch (error) {
+        setText("results-title", "Article index unavailable");
+        setText("results-note", "Run npm run refresh:homepage to rebuild the article index.");
+        document.getElementById("reads-grid").innerHTML = `
+          <div class="empty-state">
+            Unable to load data/article-index.json. ${escapeHtml(error.message || String(error))}
+          </div>
+        `;
+      }
+    }
+
+    document.querySelectorAll("[data-source]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.source = button.dataset.source || "all";
+        renderAll();
+      });
+    });
+
+    document.getElementById("search-input").addEventListener("input", (event) => {
+      state.query = event.target.value || "";
+      renderReads();
+    });
+
+    loadIndex();
+  </script>
 </body>
 </html>
