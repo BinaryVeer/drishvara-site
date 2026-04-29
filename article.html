@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Article · Drishvara</title>
-  <meta name="description" content="A sample article page for Drishvara." />
+  <meta name="description" content="A Drishvara article reader." />
   <link rel="icon" type="image/png" href="assets/logo/logo.png" />
   <style>
     :root {
@@ -17,6 +17,7 @@
       --text-muted: #9aa8bc;
       --gold: #c9a24a;
       --gold-soft: rgba(201, 162, 74, 0.16);
+      --danger-soft: rgba(255, 107, 107, 0.10);
     }
 
     * { box-sizing: border-box; }
@@ -37,6 +38,10 @@
       overflow-x: hidden;
     }
 
+    a {
+      color: inherit;
+    }
+
     .page {
       width: 100%;
       max-width: 1080px;
@@ -50,6 +55,7 @@
       gap: 28px;
       padding: 8px 0 34px;
       flex-wrap: wrap;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .nav a {
@@ -103,6 +109,7 @@
       font-size: 0.95rem;
       margin: 4px 0 14px;
       letter-spacing: 0.2px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     h1 {
@@ -138,11 +145,21 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
     }
 
-    .article-body p {
-      margin: 0 0 18px;
+    .article-body p,
+    .article-body li {
       color: var(--text-muted);
       line-height: 1.95;
       font-size: 1.05rem;
+    }
+
+    .article-body p {
+      margin: 0 0 18px;
+    }
+
+    .article-body ul,
+    .article-body ol {
+      margin: 0 0 20px 22px;
+      padding: 0;
     }
 
     .article-body h2 {
@@ -150,6 +167,13 @@
       font-size: 1.55rem;
       color: var(--text-main);
       line-height: 1.2;
+    }
+
+    .article-body h3 {
+      margin: 24px 0 12px;
+      font-size: 1.25rem;
+      color: var(--text-main);
+      line-height: 1.25;
     }
 
     .article-body blockquote {
@@ -163,9 +187,32 @@
       border-radius: 8px;
     }
 
+    .article-body a {
+      color: var(--gold);
+    }
+
+    .reader-status {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .reader-status.error {
+      background: var(--danger-soft);
+      border-color: rgba(255, 107, 107, 0.22);
+    }
+
     .back-row {
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
       margin-top: 26px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     .back-link {
@@ -185,6 +232,7 @@
       color: var(--text-muted);
       text-align: center;
       font-size: 0.95rem;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     @media (max-width: 768px) {
@@ -198,7 +246,8 @@
       }
 
       .subtitle,
-      .article-body p {
+      .article-body p,
+      .article-body li {
         font-size: 1rem;
       }
 
@@ -217,65 +266,259 @@
       <a href="contact.html">Contact</a>
     </nav>
 
-    <div class="article-shell">
+    <main class="article-shell">
       <div style="text-align:center;">
         <div class="logo-wrap">
           <img src="assets/logo/logo.png" alt="Drishvara Logo" class="logo" />
         </div>
       </div>
 
-      <div class="meta">Sample Article · Spiritual Thought</div>
+      <div class="meta" id="article-meta">Drishvara Article</div>
 
-      <h1>How attention becomes a form of worship</h1>
+      <h1 id="article-title">Loading article...</h1>
 
-      <div class="subtitle">
-        A sample reading page for Drishvara — intended to establish visual rhythm, tone, and long-form structure for future publishing.
+      <div class="subtitle" id="article-subtitle">
+        Please wait while Drishvara opens this read.
       </div>
 
       <div class="divider"></div>
 
-      <div class="article-body">
-        <p>
-          Most forms of worship are assumed to begin with ritual. But in a more interior sense, they begin earlier — with the quality of attention one brings to the world. What is noticed, how it is noticed, and whether it is held with restlessness or reverence may determine the spiritual character of an ordinary day.
-        </p>
-
-        <p>
-          Attention is rarely neutral. In practice, it becomes allegiance. A mind scattered across noise becomes answerable to noise. A mind trained toward stillness develops the capacity to remain with meaning longer than impulse would naturally allow.
-        </p>
-
-        <blockquote>
-          What we attend to repeatedly does not merely occupy the mind; it gradually instructs it.
-        </blockquote>
-
-        <h2>Beyond reaction</h2>
-
-        <p>
-          Modern life often rewards reaction — fast response, quick framing, immediate opinion. But the contemplative traditions of the world tend to value a slower virtue: the refusal to mistake first contact for full understanding.
-        </p>
-
-        <p>
-          In that sense, attention becomes a discipline before it becomes a devotion. One learns not simply to look, but to remain with what is seen. This staying power — inwardly quiet, outwardly alert — is the beginning of perception with depth.
-        </p>
-
-        <h2>Why this matters to Drishvara</h2>
-
-        <p>
-          Drishvara is being built around this kind of seeing. Not only to publish content, but to cultivate a mode of reading and writing that does not surrender too quickly to noise, spectacle, or premature closure.
-        </p>
-
-        <p>
-          The platform’s work across spirituality, media, public systems, and world affairs will differ in subject, but ideally not in method: attention first, interpretation next, expression after that.
-        </p>
-      </div>
+      <article class="article-body" id="article-body">
+        <div class="reader-status">Loading article content...</div>
+      </article>
 
       <div class="back-row">
-        <a href="insights.html" class="back-link">← Back to Insights</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+        <a href="insights.html" class="back-link">Open Insights</a>
       </div>
-    </div>
+    </main>
 
     <footer>
-      Drishvara © 2026 · Sample article page
+      Drishvara © 2026 · Article reader
     </footer>
   </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function stripHtml(value) {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = value || "";
+      return (tmp.textContent || tmp.innerText || "").replace(/\s+/g, " ").trim();
+    }
+
+    function slugToTitle(value) {
+      return String(value || "Drishvara Article")
+        .replace(/\.html$/i, "")
+        .replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, (m) => m.toUpperCase());
+    }
+
+    function normalizeTag(value) {
+      const map = {
+        media: "Media & Society",
+        policy: "Public Programmes",
+        spiritual: "Spirituality",
+        sports: "Sports",
+        world: "World Affairs",
+        daily: "Daily Candidate",
+        drafts: "Draft",
+        "daily-context": "Daily Context"
+      };
+      return map[value] || slugToTitle(value || "Drishvara");
+    }
+
+    function safePath(raw) {
+      const value = decodeURIComponent(String(raw || "")).trim();
+
+      if (!value) return "";
+      if (value.includes("..")) return "";
+      if (value.startsWith("/") || value.startsWith("http://") || value.startsWith("https://")) return "";
+      if (!value.startsWith("articles/") && !value.startsWith("generated/")) return "";
+
+      return value;
+    }
+
+    function setReader(title, subtitle, meta, bodyHtml) {
+      document.getElementById("article-title").textContent = title || "Drishvara Article";
+      document.getElementById("article-subtitle").textContent = subtitle || "A Drishvara read.";
+      document.getElementById("article-meta").textContent = meta || "Drishvara Article";
+      document.getElementById("article-body").innerHTML = bodyHtml || '<div class="reader-status">No article body available.</div>';
+      document.title = `${title || "Article"} · Drishvara`;
+    }
+
+    function showError(message, detail = "") {
+      setReader(
+        "Article not available",
+        "The requested Drishvara read could not be opened.",
+        "Reader Notice",
+        `<div class="reader-status error">
+          <strong>${escapeHtml(message)}</strong>
+          ${detail ? `<br>${escapeHtml(detail)}` : ""}
+          <br><br>
+          Return to the homepage or insights page and open another read.
+        </div>`
+      );
+    }
+
+    function extractHtmlArticle(html, fallbackPath) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+
+      const title =
+        doc.querySelector("h1")?.textContent?.trim() ||
+        doc.querySelector("title")?.textContent?.trim() ||
+        slugToTitle(fallbackPath.split("/").pop());
+
+      const desc =
+        doc.querySelector('meta[name="description"]')?.getAttribute("content") ||
+        doc.querySelector(".subtitle")?.textContent?.trim() ||
+        doc.querySelector("p")?.textContent?.trim() ||
+        "A Drishvara read from the published article archive.";
+
+      const parts = fallbackPath.split("/");
+      const section = parts.length >= 2 ? parts[1] : "articles";
+      const meta = `${normalizeTag(section)} · Published Read`;
+
+      const bodyCandidate =
+        doc.querySelector("article") ||
+        doc.querySelector(".article-body") ||
+        doc.querySelector("main") ||
+        doc.body;
+
+      let bodyHtml = bodyCandidate ? bodyCandidate.innerHTML : "";
+
+      bodyHtml = bodyHtml
+        .replace(/<script[\s\S]*?<\/script>/gi, "")
+        .replace(/<style[\s\S]*?<\/style>/gi, "");
+
+      if (!stripHtml(bodyHtml)) {
+        bodyHtml = `<p>${escapeHtml(desc)}</p>`;
+      }
+
+      return { title, desc, meta, bodyHtml };
+    }
+
+    function extractJsonArticle(json, fallbackPath) {
+      const title =
+        json.title ||
+        json.headline ||
+        json.articleTitle ||
+        json.name ||
+        slugToTitle(fallbackPath.split("/").pop());
+
+      const desc =
+        json.summary ||
+        json.description ||
+        json.dek ||
+        json.excerpt ||
+        json.intro ||
+        "A generated Drishvara draft or candidate.";
+
+      const body =
+        json.body ||
+        json.content ||
+        json.article ||
+        json.text ||
+        json.markdown ||
+        "";
+
+      const date =
+        json.date ||
+        json.publishedAt ||
+        json.createdAt ||
+        fallbackPath.match(/\d{4}-\d{2}-\d{2}/)?.[0] ||
+        "";
+
+      const section = fallbackPath.split("/")[1] || "generated";
+      const meta = `${normalizeTag(section)}${date ? ` · ${date}` : ""}`;
+
+      let bodyHtml = "";
+
+      if (Array.isArray(body)) {
+        bodyHtml = body.map((p) => `<p>${escapeHtml(p)}</p>`).join("");
+      } else if (typeof body === "string" && body.trim()) {
+        if (body.includes("<p") || body.includes("<h2") || body.includes("<article")) {
+          bodyHtml = body;
+        } else {
+          bodyHtml = body
+            .split(/\n{2,}/)
+            .filter(Boolean)
+            .map((p) => `<p>${escapeHtml(p.trim())}</p>`)
+            .join("");
+        }
+      }
+
+      if (!bodyHtml) {
+        bodyHtml = `<p>${escapeHtml(desc)}</p><blockquote>This item is available as indexed pipeline metadata. Full body content will depend on the publishing stage used for this file.</blockquote>`;
+      }
+
+      return { title, desc, meta, bodyHtml };
+    }
+
+    async function resolvePathFromIndex() {
+      const requestedPath = safePath(params.get("path"));
+      if (requestedPath) return requestedPath;
+
+      const folder = params.get("folder");
+      const source = params.get("source");
+
+      if (!folder) return "";
+
+      try {
+        const response = await fetch("data/article-index.json", { cache: "no-store" });
+        if (!response.ok) return "";
+
+        const indexData = await response.json();
+        const items = Array.isArray(indexData.items) ? indexData.items : [];
+        const match = items.find((item) => {
+          if (source && item.source !== source) return false;
+          return item.folder === folder || item.sourcePath?.endsWith(`/${folder}.html`) || item.sourcePath?.includes(folder);
+        });
+
+        return safePath(match?.path || match?.sourcePath || "");
+      } catch {
+        return "";
+      }
+    }
+
+    async function loadArticle() {
+      const path = await resolvePathFromIndex();
+
+      if (!path) {
+        showError("No valid article path was supplied.", "Use article.html?path=articles/spiritual/how-attention-becomes-worship.html");
+        return;
+      }
+
+      try {
+        const response = await fetch(path, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Unable to fetch ${path}`);
+
+        if (path.endsWith(".json")) {
+          const json = await response.json();
+          const article = extractJsonArticle(json, path);
+          setReader(article.title, article.desc, article.meta, article.bodyHtml);
+          return;
+        }
+
+        const html = await response.text();
+        const article = extractHtmlArticle(html, path);
+        setReader(article.title, article.desc, article.meta, article.bodyHtml);
+      } catch (error) {
+        showError("Article file could not be loaded.", error.message || String(error));
+      }
+    }
+
+    loadArticle();
+  </script>
 </body>
 </html>
