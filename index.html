@@ -792,6 +792,19 @@
       </aside>
 
       <main class="center-col stack">
+        <section class="card signal-card" id="first-light-card">
+          <div class="label">First Light — 24 Hrs across India</div>
+          <h2 class="section-title-sm" id="first-light-title">First Light — 24 Hrs across India</h2>
+          <p id="first-light-intro">A curated snapshot of signals, shifts, and moments worth noticing across the country.</p>
+          <div class="reading-guide-list" id="first-light-list">
+            <div class="reading-guide-item">
+              <div class="sub">Loading</div>
+              <div class="title">Fetching first-light signals...</div>
+              <div class="meta">Please wait a moment.</div>
+            </div>
+          </div>
+        </section>
+
         <section>
           <h2 class="section-title">Featured Reads</h2>
           <p class="section-intro">
@@ -829,11 +842,11 @@
         </section>
 
         <div class="center-lower">
-          <div class="card founder-card">
-            <div class="label">Founder Notebook</div>
-            <h2>Founder Notebook</h2>
-            <p>A weekly reflective note built from the past 5–6 days of work, mood, thought, and recurring patterns. If there is no meaningful signal, this section should remain blank.</p>
-            <p><strong>Current status:</strong> No notebook entry this week yet.</p>
+          <div class="card founder-card" id="founder-notebook-card">
+            <div class="label" id="founder-notebook-status">Weekly Signal</div>
+            <h2 id="founder-notebook-title">Founder Notebook</h2>
+            <p id="founder-notebook-summary">A reflective note built from recent work, recurring ideas, and the signals that deserve deeper attention.</p>
+            <p id="founder-notebook-entry">This week’s notebook is being prepared.</p>
           </div>
         </div>
       </main>
@@ -902,9 +915,9 @@
 
           <div class="festival-list" id="festival-list">
             <div class="festival-item">
-              <div class="sub">Upcoming Observance</div>
-              <div class="title">Loading festivals...</div>
-              <div class="meta">Please wait a moment.</div>
+              <div class="sub" id="upcoming-observance-title">Upcoming Observance</div>
+              <div class="title" id="upcoming-observance-name">Loading festivals...</div>
+              <div class="meta" id="upcoming-observance-note">Please wait a moment.</div>
             </div>
           </div>
         </div>
@@ -1423,6 +1436,48 @@
       if (data.psychometric) {
         setText("psychometric-subtitle", data.psychometric.subtitle);
       }
+      renderFounderNotebook(data);
+      renderFirstLight(data);
+      renderUpcomingObservance(data);
+    }
+
+    function renderFounderNotebook(data) {
+      if (!data || !data.founderNotebook) return;
+      setText("founder-notebook-title", data.founderNotebook.title);
+      setText("founder-notebook-status", data.founderNotebook.status);
+      setText("founder-notebook-summary", data.founderNotebook.summary);
+      setText("founder-notebook-entry", data.founderNotebook.entry);
+    }
+
+    function renderFirstLight(data) {
+      if (!data || !data.firstLight) return;
+      setText("first-light-title", data.firstLight.title);
+      setText("first-light-intro", data.firstLight.intro);
+
+      const list = document.getElementById("first-light-list");
+      if (!list) return;
+
+      const items = Array.isArray(data.firstLight.items) ? data.firstLight.items : [];
+      list.innerHTML = items.map(item => `
+        <div class="reading-guide-item">
+          <div class="sub">${escapeHtml(item.place || "India")}</div>
+          <div class="title">${escapeHtml(item.signal || "")}</div>
+          <div class="meta">${escapeHtml(item.note || "")}</div>
+        </div>
+      `).join("") || `
+        <div class="reading-guide-item">
+          <div class="sub">First Light</div>
+          <div class="title">Signals are being prepared.</div>
+          <div class="meta>Please check back shortly.</div>
+        </div>
+      `;
+    }
+
+    function renderUpcomingObservance(data) {
+      if (!data || !data.upcomingObservance) return;
+      setText("upcoming-observance-title", data.upcomingObservance.title);
+      setText("upcoming-observance-name", `${data.upcomingObservance.name} · ${data.upcomingObservance.dateText}`);
+      setText("upcoming-observance-note", data.upcomingObservance.note);
     }
 
     function setText(id, value) {
