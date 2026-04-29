@@ -697,6 +697,236 @@
         justify-content: center;
       }
     }
+
+    /* UI Batch 03 — Integrated daily homepage flow */
+    .batch03-integrated-flow {
+      margin: 6px 0 20px;
+    }
+
+    .batch03-flow-shell {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 18px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(201, 162, 74, 0.16);
+      background:
+        linear-gradient(135deg, rgba(201, 162, 74, 0.12), rgba(255, 255, 255, 0.035)),
+        rgba(255, 255, 255, 0.025);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 18px 45px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    .batch03-flow-kicker,
+    .batch03-route-eyebrow,
+    .batch03-continuity-kicker {
+      color: var(--gold);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-bottom: 9px;
+    }
+
+    .batch03-flow-title {
+      margin: 0 0 10px;
+      font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+      line-height: 1.12;
+      color: var(--text-main);
+      font-family: Cambria, Georgia, "Times New Roman", serif;
+    }
+
+    .batch03-flow-summary {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.78;
+      font-size: 0.98rem;
+    }
+
+    .batch03-flow-steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .batch03-flow-step {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 11px 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .batch03-flow-step-number {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(201, 162, 74, 0.12);
+      border: 1px solid rgba(201, 162, 74, 0.25);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .batch03-flow-step-title {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      margin-bottom: 3px;
+    }
+
+    .batch03-flow-step-meta {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+
+    .batch03-route-card {
+      border-color: rgba(201, 162, 74, 0.14);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(201, 162, 74, 0.10), transparent 26%),
+        rgba(255, 255, 255, 0.04);
+    }
+
+    .batch03-route-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .batch03-route-head h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .batch03-route-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 162, 74, 0.2);
+      background: rgba(201, 162, 74, 0.08);
+      color: var(--gold);
+      font-size: 0.78rem;
+      white-space: nowrap;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .batch03-route-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .batch03-route-item {
+      padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.035);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .batch03-route-item strong {
+      display: block;
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .batch03-route-item span {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    .batch03-continuity-strip {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: 0.9fr 1.6fr;
+      gap: 18px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.045), rgba(201, 162, 74, 0.06)),
+        rgba(255, 255, 255, 0.025);
+    }
+
+    .batch03-continuity-title {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
+      line-height: 1.16;
+    }
+
+    .batch03-continuity-copy {
+      margin: 0;
+      color: var(--text-muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .batch03-continuity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .batch03-continuity-item {
+      padding: 13px 14px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .batch03-continuity-item .sub {
+      color: var(--gold);
+      font-size: 0.76rem;
+      margin-bottom: 6px;
+    }
+
+    .batch03-continuity-item .title {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 5px;
+    }
+
+    .batch03-continuity-item .meta {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 980px) {
+      .batch03-flow-shell,
+      .batch03-continuity-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .batch03-route-list,
+      .batch03-continuity-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .batch03-route-head {
+        flex-direction: column;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -739,6 +969,41 @@
 
       <div class="entry-note">
         Upcoming entry layer: <strong>First Light — 24h across India</strong>
+      </div>
+    </section>
+
+    <section class="batch03-integrated-flow" aria-label="Drishvara integrated daily flow">
+      <div class="batch03-flow-shell">
+        <div>
+          <div class="batch03-flow-kicker" id="batch03-flow-kicker">UI Step 3 Integration</div>
+          <h2 class="batch03-flow-title" id="batch03-flow-title">From signal to reading to reflection</h2>
+          <p class="batch03-flow-summary" id="batch03-flow-summary">
+            Drishvara now moves as one daily surface: first notice the signals, then enter the main reads, then close with reflection, observance, and personal meaning.
+          </p>
+        </div>
+        <div class="batch03-flow-steps" id="batch03-flow-steps">
+          <div class="batch03-flow-step">
+            <div class="batch03-flow-step-number">01</div>
+            <div>
+              <div class="batch03-flow-step-title">First Light</div>
+              <div class="batch03-flow-step-meta">A quick scan of national and regional signals.</div>
+            </div>
+          </div>
+          <div class="batch03-flow-step">
+            <div class="batch03-flow-step-number">02</div>
+            <div>
+              <div class="batch03-flow-step-title">Reading Surface</div>
+              <div class="batch03-flow-step-meta">The main stories and guided reading route.</div>
+            </div>
+          </div>
+          <div class="batch03-flow-step">
+            <div class="batch03-flow-step-number">03</div>
+            <div>
+              <div class="batch03-flow-step-title">Reflection Layer</div>
+              <div class="batch03-flow-step-meta">Founder notebook, observance, and personal insight modules.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -792,6 +1057,33 @@
       </aside>
 
       <main class="center-col stack">
+        <section class="card batch03-route-card" aria-label="Today in Drishvara">
+          <div class="batch03-route-head">
+            <div>
+              <div class="batch03-route-eyebrow" id="batch03-route-eyebrow">Today’s Drishvara Route</div>
+              <h2 id="batch03-route-title">One homepage, three movements</h2>
+            </div>
+            <div class="batch03-route-pill" id="batch03-route-pill">Integrated UI Step 3</div>
+          </div>
+          <p id="batch03-route-copy">
+            This layer binds the homepage into a daily ritual: discover what changed, read what matters, and preserve what deserves return.
+          </p>
+          <div class="batch03-route-list" id="batch03-route-list">
+            <div class="batch03-route-item">
+              <strong>Discover</strong>
+              <span>First Light and daily signal cards surface what is worth noticing.</span>
+            </div>
+            <div class="batch03-route-item">
+              <strong>Read</strong>
+              <span>Featured reads and the reading guide give the visitor a clear path.</span>
+            </div>
+            <div class="batch03-route-item">
+              <strong>Reflect</strong>
+              <span>Founder notebook, observance, and psychometric layer create return value.</span>
+            </div>
+          </div>
+        </section>
+
         <section class="card signal-card" id="first-light-card">
           <div class="label">First Light — 24 Hrs across India</div>
           <h2 class="section-title-sm" id="first-light-title">First Light — 24 Hrs across India</h2>
@@ -948,6 +1240,34 @@
         </div>
       </aside>
     </section>
+
+    <section class="batch03-continuity-strip" aria-label="Drishvara continuity layer">
+      <div>
+        <div class="batch03-continuity-kicker" id="batch03-continuity-kicker">Continuity Layer</div>
+        <h2 class="batch03-continuity-title" id="batch03-continuity-title">Built for daily return</h2>
+        <p class="batch03-continuity-copy" id="batch03-continuity-copy">
+          Batch 03 connects the homepage into a repeatable rhythm so future generated articles, archive dates, sports updates, observances, and personal reflections can enter without redesigning the page.
+        </p>
+      </div>
+      <div class="batch03-continuity-grid" id="batch03-continuity-grid">
+        <div class="batch03-continuity-item">
+          <div class="sub">Archive</div>
+          <div class="title">Open a Day in Drishvara</div>
+          <div class="meta">Date-wise reading memory for future expansion.</div>
+        </div>
+        <div class="batch03-continuity-item">
+          <div class="sub">Editorial</div>
+          <div class="title">Founder-led signal synthesis</div>
+          <div class="meta">A weekly layer that gives the platform its voice.</div>
+        </div>
+        <div class="batch03-continuity-item">
+          <div class="sub">Personal</div>
+          <div class="title">Reflection and assessment modules</div>
+          <div class="meta">A return hook for star reflection and psychometric surfaces.</div>
+        </div>
+      </div>
+    </section>
+
 
     <footer>
       Drishvara © 2026 · A founder-led insight platform
@@ -1436,9 +1756,67 @@
       if (data.psychometric) {
         setText("psychometric-subtitle", data.psychometric.subtitle);
       }
+      renderBatch03DailyFlow(data);
+      renderBatch03Continuity(data);
       renderFounderNotebook(data);
       renderFirstLight(data);
       renderUpcomingObservance(data);
+    }
+
+    function renderBatch03DailyFlow(data) {
+      if (!data || !data.dailyFlow) return;
+
+      const flow = data.dailyFlow;
+      setText("batch03-flow-kicker", flow.kicker);
+      setText("batch03-flow-title", flow.title);
+      setText("batch03-flow-summary", flow.summary);
+      setText("batch03-route-eyebrow", flow.routeEyebrow);
+      setText("batch03-route-title", flow.routeTitle);
+      setText("batch03-route-pill", flow.routePill);
+      setText("batch03-route-copy", flow.routeCopy);
+
+      const stepsEl = document.getElementById("batch03-flow-steps");
+      if (stepsEl && Array.isArray(flow.steps) && flow.steps.length) {
+        stepsEl.innerHTML = flow.steps.map((step, index) => `
+          <div class="batch03-flow-step">
+            <div class="batch03-flow-step-number">${String(index + 1).padStart(2, "0")}</div>
+            <div>
+              <div class="batch03-flow-step-title">${escapeHtml(step.title || "")}</div>
+              <div class="batch03-flow-step-meta">${escapeHtml(step.meta || "")}</div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      const routeEl = document.getElementById("batch03-route-list");
+      if (routeEl && Array.isArray(flow.routeItems) && flow.routeItems.length) {
+        routeEl.innerHTML = flow.routeItems.map((item) => `
+          <div class="batch03-route-item">
+            <strong>${escapeHtml(item.title || "")}</strong>
+            <span>${escapeHtml(item.meta || "")}</span>
+          </div>
+        `).join("");
+      }
+    }
+
+    function renderBatch03Continuity(data) {
+      if (!data || !data.continuityStrip) return;
+
+      const strip = data.continuityStrip;
+      setText("batch03-continuity-kicker", strip.kicker);
+      setText("batch03-continuity-title", strip.title);
+      setText("batch03-continuity-copy", strip.copy);
+
+      const gridEl = document.getElementById("batch03-continuity-grid");
+      if (gridEl && Array.isArray(strip.items) && strip.items.length) {
+        gridEl.innerHTML = strip.items.map((item) => `
+          <div class="batch03-continuity-item">
+            <div class="sub">${escapeHtml(item.label || "")}</div>
+            <div class="title">${escapeHtml(item.title || "")}</div>
+            <div class="meta">${escapeHtml(item.meta || "")}</div>
+          </div>
+        `).join("");
+      }
     }
 
     function renderFounderNotebook(data) {
