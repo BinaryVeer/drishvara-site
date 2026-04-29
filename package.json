@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:article-index": "node scripts/build-homepage-index.js"
+    "build:article-index": "node scripts/build-homepage-index.js",
+    "refresh:homepage": "node scripts/refresh-homepage.js",
+    "check:homepage": "node scripts/refresh-homepage.js"
   },
   "repository": {
     "type": "git",
