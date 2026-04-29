@@ -233,8 +233,13 @@ function buildIndex() {
       return a.title.localeCompare(b.title);
     });
 
+  const publishedItems = sorted.filter((item) => item.source === "articles");
+  const publicLatest = publishedItems.slice(0, 8);
+
   const byDate = {};
+  const publicByDate = {};
   const topics = {};
+  const publicTopics = {};
 
   for (const item of sorted) {
     byDate[item.date] ||= [];
@@ -243,20 +248,41 @@ function buildIndex() {
       tag: item.tag,
       folder: item.folder,
       url: item.url,
-      path: item.path
+      path: item.path,
+      source: item.source
     });
 
     topics[item.tag] ||= 0;
     topics[item.tag] += 1;
   }
 
+  for (const item of publishedItems) {
+    publicByDate[item.date] ||= [];
+    publicByDate[item.date].push({
+      title: item.title,
+      tag: item.tag,
+      folder: item.folder,
+      url: item.url,
+      path: item.path,
+      source: item.source
+    });
+
+    publicTopics[item.tag] ||= 0;
+    publicTopics[item.tag] += 1;
+  }
+
   return {
     generatedAt: new Date().toISOString(),
     total: sorted.length,
+    publicTotal: publishedItems.length,
     latest: sorted.slice(0, 8),
+    publicLatest,
     items: sorted,
+    publishedItems,
     byDate,
-    topics
+    publicByDate,
+    topics,
+    publicTopics
   };
 }
 
@@ -265,8 +291,9 @@ function updateHomepageUi(indexData) {
 
   const ui = readJsonSafe(homepageUiPath) || {};
   const latest = indexData.latest || [];
-  const published = latest.filter((item) => item.source === "articles");
-  const source = published.length ? published : latest;
+  const publicLatest = indexData.publicLatest || [];
+  const publishedItems = indexData.publishedItems || [];
+  const source = publicLatest.length ? publicLatest : publishedItems.length ? publishedItems.slice(0, 4) : latest;
 
   if (source.length) {
     ui.featuredReads = source.slice(0, 4).map((item) => ({

@@ -1429,14 +1429,19 @@
         if (!response.ok) throw new Error("article-index.json unavailable");
 
         const indexData = await response.json();
-        const items = Array.isArray(indexData.latest)
-          ? indexData.latest
-          : Array.isArray(indexData.items)
-            ? indexData.items.slice(0, 6)
-            : [];
+        const items = Array.isArray(indexData.publicLatest) && indexData.publicLatest.length
+          ? indexData.publicLatest
+          : Array.isArray(indexData.publishedItems) && indexData.publishedItems.length
+            ? indexData.publishedItems.slice(0, 6)
+            : Array.isArray(indexData.latest)
+              ? indexData.latest
+              : Array.isArray(indexData.items)
+                ? indexData.items.slice(0, 6)
+                : [];
 
         if (intro && typeof indexData.total === "number") {
-          intro.textContent = `Recently generated and published reads from the Drishvara content pipeline. Indexed reads available: ${indexData.total}.`;
+          const publicTotal = typeof indexData.publicTotal === "number" ? indexData.publicTotal : items.length;
+          intro.textContent = `Published Drishvara reads prepared for public discovery. Published reads: ${publicTotal}. Full indexed pipeline items: ${indexData.total}.`;
         }
 
         if (!items.length) {

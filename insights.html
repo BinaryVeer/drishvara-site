@@ -434,7 +434,7 @@
       </div>
       <h1>Insights</h1>
       <p class="subtitle">
-        Explore Drishvara’s published reads, generated pipeline items, themes, and archive dates from one discovery surface.
+        Explore Drishvara’s published reads first, with pipeline items available through filters for review and diagnostics.
       </p>
       <div class="divider"></div>
     </header>
@@ -461,8 +461,8 @@
     <section class="toolbar" aria-label="Search and source controls">
       <input class="search-box" id="search-input" type="search" placeholder="Search reads by title, summary, theme, date, or path..." />
       <div class="source-toggle">
-        <button class="filter-btn active" data-source="all">All</button>
-        <button class="filter-btn" data-source="articles">Published</button>
+        <button class="filter-btn" data-source="all">All</button>
+        <button class="filter-btn active" data-source="articles">Published</button>
         <button class="filter-btn" data-source="generated">Pipeline</button>
       </div>
     </section>
@@ -516,7 +516,7 @@
     const state = {
       index: null,
       items: [],
-      source: "all",
+      source: "articles",
       topic: "all",
       query: ""
     };
@@ -667,7 +667,7 @@
 
     function renderArchiveList() {
       const wrap = document.getElementById("archive-list");
-      const byDate = state.index?.byDate || {};
+      const byDate = state.source === "articles" && state.index?.publicByDate ? state.index.publicByDate : state.index?.byDate || {};
       const dates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
 
       if (!dates.length) {
@@ -713,6 +713,10 @@
 
         state.index = index;
         state.items = items;
+
+        if (!items.some((item) => item.source === "articles")) {
+          state.source = "all";
+        }
 
         renderAll();
       } catch (error) {

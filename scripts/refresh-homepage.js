@@ -120,8 +120,22 @@ check(Boolean(homepageUi.readingGuide), "homepage-ui has readingGuide", failures
 
 check(typeof articleIndex.total === "number", "article-index has total count", failures);
 check(Array.isArray(articleIndex.latest), "article-index has latest array", failures);
+check(Array.isArray(articleIndex.publicLatest), "article-index has publicLatest array", failures);
 check(Array.isArray(articleIndex.items), "article-index has items array", failures);
+check(Array.isArray(articleIndex.publishedItems), "article-index has publishedItems array", failures);
 check(Boolean(articleIndex.byDate), "article-index has byDate archive map", failures);
+check(Boolean(articleIndex.publicByDate), "article-index has publicByDate archive map", failures);
+check((articleIndex.publicTotal || 0) > 0, "article-index has public published reads", failures);
+check(
+  Array.isArray(articleIndex.publicLatest) && articleIndex.publicLatest.every((item) => item.source === "articles"),
+  "publicLatest contains only published articles",
+  failures
+);
+check(
+  Array.isArray(homepageUi.featuredReads) && homepageUi.featuredReads.every((item) => !["Draft", "Plans", "Signals", "Daily Candidate"].includes(item.tag)),
+  "homepage featuredReads do not lead with pipeline-only tags",
+  failures
+);
 
 check(Boolean(pkg.scripts?.["build:article-index"]), "package.json has build:article-index script", failures);
 check(Boolean(pkg.scripts?.["refresh:homepage"]), "package.json has refresh:homepage script", failures);
@@ -129,7 +143,9 @@ check(Boolean(pkg.scripts?.["refresh:homepage"]), "package.json has refresh:home
 console.log("");
 console.log("Homepage readiness summary:");
 console.log(`- Article index: ${articleIndex.total ?? 0} reads`);
+console.log(`- Public published reads: ${articleIndex.publicTotal ?? 0}`);
 console.log(`- Latest reads shown: ${Array.isArray(articleIndex.latest) ? articleIndex.latest.length : 0}`);
+console.log(`- Public latest reads shown: ${Array.isArray(articleIndex.publicLatest) ? articleIndex.publicLatest.length : 0}`);
 console.log(`- Homepage UI featured reads: ${Array.isArray(homepageUi.featuredReads) ? homepageUi.featuredReads.length : 0}`);
 console.log(`- Article index file: ${rel(articleIndexPath)}`);
 
