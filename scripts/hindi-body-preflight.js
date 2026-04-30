@@ -31,6 +31,10 @@ console.log("Drishvara Hindi article body preflight");
 console.log("");
 
 check(fs.existsSync(sidecarPath), "Hindi article body sidecar exists", failures);
+check(fs.existsSync(path.join(root, "generated", "hindi-drafts")), "Hindi drafts folder exists", failures);
+check(fs.existsSync(path.join(root, "scripts", "create-hindi-body-draft.js")), "Hindi body draft creation script exists", failures);
+check(fs.existsSync(path.join(root, "scripts", "review-hindi-body.js")), "Hindi body review script exists", failures);
+check(fs.existsSync(path.join(root, "scripts", "publish-approved-hindi-bodies.js")), "Approved Hindi body publisher script exists", failures);
 check(fs.existsSync(articleReaderPath), "Article reader exists", failures);
 
 const sidecar = readJson(sidecarPath);
