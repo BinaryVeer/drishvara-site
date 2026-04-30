@@ -1,0 +1,54 @@
+{
+  "version": "2026.04.30-activation-02c",
+  "module": "activation.session_guard_dashboard_gate_scaffold",
+  "status": "scaffold_only",
+  "live_auth_enabled": false,
+  "session_guard_enabled": false,
+  "dashboard_data_unlock_enabled": false,
+  "subscription_gate_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_gate_enabled": false,
+  "purpose": "Adds disabled session guard and dashboard gate scaffold without enabling live Supabase Auth/session checks.",
+  "frontend_files": [
+    "assets/js/session-guard.js",
+    "dashboard.html"
+  ],
+  "depends_on": [
+    "data/backend/activation/supabase-auth-stage-02a.json",
+    "data/backend/activation/supabase-auth-stage-02b.json"
+  ],
+  "dashboard_states": {
+    "anonymous_scaffold": {
+      "dashboard_shell": true,
+      "dashboard_data": false,
+      "premium_guidance": false
+    },
+    "free_registered_future": {
+      "dashboard_shell": true,
+      "dashboard_data": "limited_future",
+      "premium_guidance": false
+    },
+    "active_subscriber_future": {
+      "dashboard_shell": true,
+      "dashboard_data": "future_only_after_auth_subscription_consent",
+      "premium_guidance": "blocked_until_approved_rules"
+    }
+  },
+  "blocked_in_this_stage": [
+    "supabase_create_client",
+    "get_live_session",
+    "read_profile_data",
+    "read_subscription_data",
+    "unlock_dashboard_data",
+    "unlock_premium_guidance",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "Do not instantiate Supabase client in this stage.",
+    "Do not call live session APIs.",
+    "Do not unlock dashboard data.",
+    "Do not unlock premium guidance.",
+    "Do not infer admin access from email.",
+    "Do not enable payment or palm image upload."
+  ]
+}
