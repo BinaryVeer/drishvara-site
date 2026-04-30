@@ -1035,6 +1035,7 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
       </div>
     </article>
   </div>
+  <script src="/assets/js/site-language.js" defer></script>
 </body>
 </html>`;
 }
