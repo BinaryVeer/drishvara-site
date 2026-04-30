@@ -3,6 +3,34 @@ import path from "node:path";
 
 const root = process.cwd();
 
+
+function todayInTimezone(timezone = "Asia/Kolkata") {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: timezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(new Date());
+
+  const out = {};
+  for (const part of parts) out[part.type] = part.value;
+  return `${out.year}-${out.month}-${out.day}`;
+}
+
+function nowLabelInTimezone(timezone = "Asia/Kolkata") {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: timezone,
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZoneName: "short"
+  }).format(new Date());
+}
+
 function arg(name, fallback = "") {
   const found = process.argv.find((item) => item.startsWith(`--${name}=`));
   return found ? found.split("=").slice(1).join("=") : fallback;
@@ -18,7 +46,8 @@ function isValidDate(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(new Date(`${value}T12:00:00Z`).getTime());
 }
 
-const date = arg("date", new Date().toISOString().slice(0, 10));
+const timezone = arg("timezone", "Asia/Kolkata");
+const date = arg("date", todayInTimezone(timezone));
 
 if (!isValidDate(date)) {
   throw new Error("Invalid --date. Use YYYY-MM-DD.");
@@ -62,6 +91,13 @@ const context = {
   version: "2026.04.30-b18e",
   module: "daily_context",
   date,
+  timezone_basis: {
+    timezone,
+    default_timezone: "Asia/Kolkata",
+    default_alias: "IST",
+    default_offset: "GMT+5:30",
+    current_label: nowLabelInTimezone(timezone)
+  },
   public_output_enabled: true,
   word_of_the_day: word,
   first_light: {

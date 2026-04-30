@@ -1,0 +1,54 @@
+{
+  "version": "2026.04.30-b23a",
+  "module": "system.timezone_config",
+  "default_timezone": "Asia/Kolkata",
+  "default_label": "India Standard Time",
+  "default_alias": "IST",
+  "default_offset": "GMT+5:30",
+  "default_country_context": "India",
+  "purpose": "Defines default date/time basis for Drishvara daily context, Panchang scaffold, festival view scaffold, sports context and subscriber guidance scaffolds.",
+  "supported_timezones": [
+    {
+      "timezone": "Asia/Kolkata",
+      "label": "India Standard Time",
+      "alias": "IST",
+      "offset": "GMT+5:30"
+    },
+    {
+      "timezone": "Asia/Kathmandu",
+      "label": "Nepal Time",
+      "alias": "NPT",
+      "offset": "GMT+5:45"
+    },
+    {
+      "timezone": "Asia/Dubai",
+      "label": "Gulf Standard Time",
+      "alias": "GST",
+      "offset": "GMT+4"
+    },
+    {
+      "timezone": "Asia/Singapore",
+      "label": "Singapore Time",
+      "alias": "SGT",
+      "offset": "GMT+8"
+    },
+    {
+      "timezone": "Europe/London",
+      "label": "London Time",
+      "alias": "UK",
+      "offset": "local"
+    },
+    {
+      "timezone": "America/New_York",
+      "label": "New York Time",
+      "alias": "NY",
+      "offset": "local"
+    }
+  ],
+  "guardrails": [
+    "Default date for Indian users must be calculated using Asia/Kolkata, not UTC.",
+    "Panchang, Vedic guidance, festival view and subscriber guidance must preserve timezone basis.",
+    "Users may later select a different timezone, but IST remains the default.",
+    "Do not treat UTC date as Drishvara daily date unless explicitly selected."
+  ]
+}

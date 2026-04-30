@@ -72,7 +72,8 @@ const requiredFiles = [
   "data/knowledge/subscribers/daily-guidance-schema.json",
   "supabase/migrations/20260430_b20a_subscriber_backend_schema.sql",
   "robots.txt",
-  "sitemap.xml"
+  "sitemap.xml",
+  "data/system/timezone-config.json"
 ];
 
 for (const file of requiredDocs) {
@@ -151,6 +152,7 @@ runNpm("dashboard:preflight", failures);
 runNpm("payment:preflight", failures);
 runNpm("admin-review:preflight", failures);
 runNpm("seo:preflight", failures);
+runNpm("timezone:preflight", failures);
 
 console.log("");
 console.log("Pre-activation summary:");
