@@ -1,0 +1,37 @@
+{
+  "version": "2026.04.30-activation-02b",
+  "module": "activation.supabase_auth_client_scaffold",
+  "status": "scaffold_only",
+  "live_auth_enabled": false,
+  "supabase_client_enabled": false,
+  "session_detection_enabled": false,
+  "dashboard_gate_enabled": false,
+  "purpose": "Adds login page and disabled auth-client scaffold without enabling live Supabase Auth.",
+  "frontend_files": [
+    "login.html",
+    "assets/js/auth-client.js"
+  ],
+  "depends_on": [
+    "data/backend/activation/supabase-auth-stage-02a.json",
+    "docs/activation/supabase-auth-login-runbook.md"
+  ],
+  "blocked_in_this_stage": [
+    "supabase_create_client",
+    "live_magic_link",
+    "live_otp",
+    "session_detection",
+    "dashboard_data_gate",
+    "profile_storage",
+    "subscription_gate",
+    "subscriber_guidance_display",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "Do not instantiate Supabase client in this stage.",
+    "Do not enable live Auth.",
+    "Do not read or write profile data.",
+    "Do not enable dashboard premium output.",
+    "Do not expose service role key.",
+    "Do not enable payment or admin actions."
+  ]
+}

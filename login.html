@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login · Drishvara</title>
+  <meta name="description" content="Drishvara login scaffold. Authentication integration is planned but not yet live." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+  <link rel="canonical" href="https://www.drishvara.com/login.html" />
+  <link rel="stylesheet" href="/assets/css/public-preview-polish.css" />
+
+  <meta property="og:site_name" content="Drishvara" />
+  <meta property="og:title" content="Login · Drishvara" />
+  <meta property="og:description" content="Drishvara login scaffold. Authentication integration is planned but not yet live." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.drishvara.com/login.html" />
+  <meta property="og:image" content="https://www.drishvara.com/assets/logo/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255,255,255,0.06);
+      --surface-2: rgba(255,255,255,0.09);
+      --border: rgba(255,255,255,0.11);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #aeb9cb;
+      --gold: #c9a24a;
+      --danger: #ffb4a8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text-main);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 8%, rgba(201,162,74,0.12), transparent 22%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      padding: 8px 0 34px;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    .login-shell {
+      display: grid;
+      grid-template-columns: 1fr 0.82fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero,
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 26px;
+      padding: 24px;
+    }
+
+    .logo {
+      width: 66px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
+
+    p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin: 0 0 14px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      color: var(--danger);
+      background: rgba(255,180,168,0.09);
+      border: 1px solid rgba(255,180,168,0.22);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.86rem;
+      margin-top: 8px;
+    }
+
+    label {
+      display: block;
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: var(--text-main);
+      border-radius: 14px;
+      padding: 12px 13px;
+      font-size: 0.96rem;
+      margin-bottom: 12px;
+    }
+
+    input:disabled {
+      color: var(--text-muted);
+      opacity: 0.72;
+      cursor: not-allowed;
+    }
+
+    button {
+      width: 100%;
+      border: 1px solid rgba(201,162,74,0.4);
+      background: rgba(201,162,74,0.13);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      cursor: not-allowed;
+      opacity: 0.72;
+    }
+
+    .note {
+      border-left: 3px solid var(--gold);
+      padding: 12px 14px;
+      background: rgba(201,162,74,0.08);
+      color: var(--text-soft);
+      border-radius: 14px;
+      line-height: 1.65;
+      margin-top: 16px;
+      font-size: 0.92rem;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 0;
+      color: var(--text-soft);
+    }
+
+    .row span:last-child {
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 42px;
+      padding-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .login-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="index.html" data-auth-nav-home>Home</a>
+      <a href="insights.html" data-auth-nav-insights>Insights</a>
+      <a href="dashboard.html" data-auth-nav-dashboard>Dashboard</a>
+      <a href="submissions.html" data-auth-nav-submissions>Submissions</a>
+      <a href="login.html" class="active" data-auth-nav-login>Login</a>
+    </nav>
+
+    <main class="login-shell" data-auth-login-scaffold>
+      <section class="hero">
+        <img src="assets/logo/logo.png" class="logo" alt="Drishvara Logo" />
+        <h1 data-auth-title>Drishvara Login</h1>
+        <p data-auth-intro>Future login space for subscribers and reviewers. This page is prepared for Supabase Auth planning, but live authentication is not enabled yet.</p>
+        <div class="status-pill" data-auth-status>Auth integration pending</div>
+
+        <div class="note" data-auth-note>
+          Login will be enabled only after Supabase project confirmation, redirect URL review, database validation, and safe session-gate testing.
+        </div>
+      </section>
+
+      <section class="panel">
+        <label for="email" data-auth-email-label>Email login</label>
+        <input id="email" type="email" placeholder="Email login not active yet" disabled />
+        <button type="button" disabled data-auth-submit>Send magic link / OTP</button>
+
+        <div class="list">
+          <div class="row"><strong data-auth-live-auth-label>Live Auth</strong><span data-auth-disabled>Disabled</span></div>
+          <div class="row"><strong data-auth-session-label>Session Detection</strong><span data-auth-disabled>Disabled</span></div>
+          <div class="row"><strong data-auth-dashboard-label>Dashboard Gate</strong><span data-auth-planned>Planned</span></div>
+          <div class="row"><strong data-auth-premium-label>Premium Guidance</strong><span data-auth-blocked>Blocked</span></div>
+          <div class="row"><strong data-auth-payment-label>Payment Gate</strong><span data-auth-disabled>Disabled</span></div>
+          <div class="row"><strong data-auth-admin-label>Admin Actions</strong><span data-auth-disabled>Disabled</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer data-auth-footer>Drishvara © 2026 · Auth scaffold</footer>
+  </div>
+
+  <script src="/assets/js/auth-client.js" defer></script>
+  <script src="/assets/js/seo-runtime.js" defer></script>
+  <script src="/assets/js/site-language.js" defer></script>
+</body>
+</html>
