@@ -22,19 +22,22 @@
     const style = document.createElement("style");
     style.id = "drishvaraSportsContextStyle";
     style.textContent = `
+      .sports-live-inline-slot {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto 22px;
+      }
+
       .drishvara-sports-live-pill {
-        position: fixed;
-        top: 82px;
-        right: 18px;
-        z-index: 30;
-        width: min(280px, calc(100vw - 36px));
+        position: static;
+        width: 100%;
+        max-width: 100%;
         border: 1px solid rgba(201, 162, 74, 0.32);
-        background: rgba(8, 20, 45, 0.86);
+        background: rgba(8, 20, 45, 0.78);
         color: #f5f1e8;
         border-radius: 18px;
         padding: 13px 14px;
-        box-shadow: 0 14px 40px rgba(0,0,0,0.28);
-        backdrop-filter: blur(10px);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+        backdrop-filter: blur(8px);
         font-family: Arial, Helvetica, sans-serif;
       }
 
@@ -70,39 +73,78 @@
         text-decoration: underline;
       }
 
-      @media (max-width: 900px) {
-        .drishvara-sports-live-pill {
-          position: static;
-          width: auto;
-          margin: 0 16px 18px;
+      @media (max-width: 760px) {
+        .sports-live-inline-slot {
+          width: min(100% - 24px, 1120px);
+          margin-bottom: 18px;
         }
       }
     `;
     document.head.appendChild(style);
   }
 
+  function createInlineSlot() {
+    const slot = document.createElement("aside");
+    slot.className = "sports-live-inline-slot";
+    slot.setAttribute("data-sports-live-update", "true");
+
+    const featuredReads =
+      Array.from(document.querySelectorAll("h2, h3"))
+        .find((el) => /Featured Reads/i.test(el.textContent || ""));
+
+    const featuredSection = featuredReads?.closest("section, div, main");
+
+    if (featuredSection && featuredSection.parentElement) {
+      featuredSection.parentElement.insertBefore(slot, featuredSection);
+      return slot;
+    }
+
+    const main = document.querySelector("main");
+    if (main) {
+      main.prepend(slot);
+      return slot;
+    }
+
+    const firstSection = document.querySelector("section");
+    if (firstSection && firstSection.parentElement) {
+      firstSection.parentElement.insertBefore(slot, firstSection);
+      return slot;
+    }
+
+    return null;
+  }
+
   function findOrCreateLivePill() {
-    let pill =
+    let slot =
       document.querySelector("[data-sports-live-update]") ||
       document.querySelector("#sports-live-update") ||
       document.querySelector(".sports-live-update") ||
-      document.querySelector(".drishvara-sports-live-pill");
+      document.querySelector(".sports-live-inline-slot");
 
-    if (pill) {
-      pill.classList.add("drishvara-sports-live-pill");
-      return pill;
+    if (!slot) {
+      slot = createInlineSlot();
     }
 
-    pill = document.createElement("aside");
-    pill.className = "drishvara-sports-live-pill";
-    pill.setAttribute("data-sports-live-update", "true");
-    document.body.appendChild(pill);
+    if (!slot) return null;
+
+    slot.classList.add("sports-live-inline-slot");
+
+    let pill = slot.querySelector(".drishvara-sports-live-pill");
+
+    if (!pill) {
+      pill = document.createElement("div");
+      pill.className = "drishvara-sports-live-pill";
+      slot.appendChild(pill);
+    }
+
     return pill;
   }
 
   function renderLivePill(data) {
     const live = data.right_top_live_update || data.topRightLiveUpdate || {};
     const pill = findOrCreateLivePill();
+
+    if (!pill) return;
 
     const label = pick(live, "label", "Live Sports");
     const title = pick(live, "title", "Sports Desk update");

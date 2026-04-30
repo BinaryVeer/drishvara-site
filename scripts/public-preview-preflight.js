@@ -120,6 +120,9 @@ check(sportsContext.public_output_enabled === true, "Sports context is public sa
 check(sportsContext.live_api_enabled === false, "Live sports API remains disabled", failures);
 check(Boolean(sportsContext.right_top_live_update || sportsContext.topRightLiveUpdate), "Sports right-top update object exists", failures);
 check(sportsJs.includes("drishvara-sports-live-pill"), "Sports right-top live object renderer exists", failures);
+check(sportsJs.includes("sports-live-inline-slot"), "Sports live object uses inline page slot", failures);
+check(!sportsJs.includes("position: fixed"), "Sports live object is not fixed/floating", failures);
+check(!sportsJs.includes("document.body.appendChild"), "Sports live object is not appended to body as floating card", failures);
 
 check(submissions.includes("Backend intake: disabled"), "Submissions page shows backend disabled status", failures);
 check(submissions.includes("type=\"file\"") && submissions.includes("disabled"), "Palm image file input remains disabled", failures);

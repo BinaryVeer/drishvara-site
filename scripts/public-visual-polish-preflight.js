@@ -67,6 +67,10 @@ check(css.includes("@media (max-width: 900px)"), "Polish CSS includes mobile han
 check(css.includes("position: static !important"), "Sports object becomes page-flow on smaller screens", failures);
 
 check(sportsJs.includes("drishvara-sports-live-pill"), "Sports object renderer remains available", failures);
+check(sportsJs.includes("sports-live-inline-slot"), "Sports live object uses inline slot", failures);
+check(!sportsJs.includes("position: fixed"), "Sports context does not use fixed positioning", failures);
+check(!sportsJs.includes("document.body.appendChild"), "Sports context does not append floating body card", failures);
+check(css.includes("Sports Live card must stay in page flow"), "Polish CSS documents sports page-flow rule", failures);
 check(read("submissions.html").includes("Backend intake: disabled"), "Submissions disabled status remains visible", failures);
 check(read("dashboard.html").includes("Login/subscription integration pending"), "Dashboard scaffold status remains visible", failures);
 check(read("admin.html").includes("Admin auth/actions disabled"), "Admin disabled status remains visible", failures);

@@ -36,22 +36,6 @@
   max-width: max-content;
 }
 
-/* Right-top sports object: keep visible but less intrusive */
-.drishvara-sports-live-pill {
-  top: 96px !important;
-  right: 18px !important;
-  width: min(270px, calc(100vw - 36px)) !important;
-  padding: 12px 13px !important;
-}
-
-.drishvara-sports-live-pill .sports-title {
-  font-size: 0.9rem !important;
-}
-
-.drishvara-sports-live-pill .sports-summary {
-  font-size: 0.76rem !important;
-}
-
 /* Public reading surfaces */
 .feature-body p,
 .article-body p,
@@ -104,4 +88,29 @@
   h1 {
     text-wrap: balance;
   }
+}
+
+
+/* Keep public scaffold modules honest until true Panchang/Vedic engine is approved */
+.vedic-guidance-card,
+.panchang-card,
+[data-vedic-guidance],
+[data-panchang-view],
+[data-festival-view] {
+  overflow-wrap: anywhere;
+}
+
+
+/* Sports Live card must stay in page flow, never fixed/sticky. */
+.sports-live-inline-slot {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto 22px;
+}
+
+.sports-live-inline-slot .drishvara-sports-live-pill {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
 }
