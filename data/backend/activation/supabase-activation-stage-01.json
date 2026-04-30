@@ -1,0 +1,40 @@
+{
+  "version": "2026.04.30-activation-01a",
+  "module": "activation.supabase_migration_stage_01",
+  "status": "runbook_only",
+  "live_apply_enabled": false,
+  "migration_file": "supabase/migrations/20260430_b20a_subscriber_backend_schema.sql",
+  "runbook": "docs/activation/supabase-migration-activation-runbook.md",
+  "review_checklist": "docs/activation/supabase-migration-review-checklist.md",
+  "tables_to_create": [
+    "subscriber_profiles",
+    "subscriptions",
+    "subscriber_daily_guidance",
+    "user_submissions",
+    "feedback_submissions",
+    "palmistry_requests",
+    "knowledge_update_reviews"
+  ],
+  "must_pass_before_apply": [
+    "content:preflight",
+    "preactivation:preflight",
+    "supabase:schema:preflight",
+    "activation:supabase:preflight"
+  ],
+  "blocked_in_this_stage": [
+    "live_auth_enablement",
+    "live_payment_enablement",
+    "palm_image_storage_enablement",
+    "subscriber_guidance_display",
+    "admin_backend_actions",
+    "frontend_supabase_insert"
+  ],
+  "guardrails": [
+    "Do not apply migration automatically from frontend code.",
+    "Do not expose service role key.",
+    "Do not enable anonymous backend writes.",
+    "Do not enable palm image upload.",
+    "Do not enable subscriber guidance display.",
+    "Do not enable payment webhooks in this stage."
+  ]
+}
