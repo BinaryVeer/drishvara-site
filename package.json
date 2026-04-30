@@ -16,7 +16,7 @@
     "drafts:review": "node scripts/review-drafts.js",
     "drafts:review:latest": "node scripts/review-drafts.js --latest",
     "bilingual:preflight": "node scripts/bilingual-preflight.js",
-    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight && npm run sports-context:preflight && npm run seo:preflight && npm run supabase:schema:preflight && npm run auth-access:preflight && npm run dashboard:preflight && npm run submission-intake:preflight && npm run payment:preflight && npm run admin-review:preflight && npm run preactivation:preflight && npm run timezone:preflight && npm run public-preview:preflight",
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight && npm run sports-context:preflight && npm run seo:preflight && npm run supabase:schema:preflight && npm run auth-access:preflight && npm run dashboard:preflight && npm run submission-intake:preflight && npm run payment:preflight && npm run admin-review:preflight && npm run preactivation:preflight && npm run timezone:preflight && npm run public-preview:preflight && npm run daily-basis:preflight",
     "hindi-body:preflight": "node scripts/hindi-body-preflight.js",
     "hindi-draft:create": "node scripts/create-hindi-body-draft.js",
     "hindi-draft:review": "node scripts/review-hindi-body.js",
@@ -42,7 +42,8 @@
     "admin-review:preflight": "node scripts/admin-review-preflight.js",
     "preactivation:preflight": "node scripts/preactivation-preflight.js",
     "timezone:preflight": "node scripts/timezone-preflight.js",
-    "public-preview:preflight": "node scripts/public-preview-preflight.js"
+    "public-preview:preflight": "node scripts/public-preview-preflight.js",
+    "daily-basis:preflight": "node scripts/daily-basis-guard-preflight.js"
   },
   "repository": {
     "type": "git",
