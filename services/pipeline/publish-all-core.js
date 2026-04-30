@@ -1437,7 +1437,7 @@ export async function runPublishAll({
       require_approved: Boolean(requireApproved),
       date: today,
       success_count: successCount,
-      total_categories: PUBLISH_CATEGORIES.length,
+      total_categories: PUBLISH_CATEGORIES.length,      public_discovery_refresh: publicDiscoveryRefresh,
       results
     };
   } catch (error) {
