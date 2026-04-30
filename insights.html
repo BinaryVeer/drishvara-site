@@ -417,9 +417,80 @@
         flex-direction: column;
       }
     }
+  
+    /* Site language control */
+    .site-language-control {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 162, 74, 0.28);
+      background: rgba(8, 20, 45, 0.92);
+      color: #f5f1e8;
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(10px);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .site-language-control label {
+      color: #c9a24a;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .site-language-control select {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.06);
+      color: #f5f1e8;
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 0.82rem;
+      outline: none;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .site-language-control option {
+      color: #08142d;
+      background: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+      .site-language-control {
+        right: 12px;
+        bottom: 12px;
+        padding: 8px 9px;
+      }
+
+      .site-language-control label {
+        display: none;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <div class="site-language-control" aria-label="Translate this page">
+    <label for="site-language-select">Translate</label>
+    <select id="site-language-select">
+      <option value="">English</option>
+      <option value="hi">Hindi</option>
+      <option value="bn">Bengali</option>
+      <option value="as">Assamese</option>
+      <option value="ne">Nepali</option>
+      <option value="ta">Tamil</option>
+      <option value="te">Telugu</option>
+      <option value="mr">Marathi</option>
+      <option value="gu">Gujarati</option>
+      <option value="pa">Punjabi</option>
+      <option value="ur">Urdu</option>
+    </select>
+  </div>
+
   <div class="page">
     <nav class="nav">
       <a href="index.html">Home</a>
@@ -798,5 +869,34 @@
 
     loadIndex();
   </script>
+
+  <script>
+    (function setupSiteLanguageControl() {
+      const select = document.getElementById("site-language-select");
+      if (!select) return;
+
+      const params = new URLSearchParams(window.location.search);
+      const currentLang = params.get("tl") || "";
+      if (currentLang) select.value = currentLang;
+
+      select.addEventListener("change", function () {
+        const lang = select.value;
+
+        if (!lang) {
+          window.location.href = window.location.origin + window.location.pathname + window.location.search.replace(/[?&]tl=[^&]+/, "").replace(/[?&]translated=1/, "");
+          return;
+        }
+
+        const currentUrl = window.location.href;
+        const translateUrl = "https://translate.google.com/translate?sl=en&tl=" +
+          encodeURIComponent(lang) +
+          "&u=" +
+          encodeURIComponent(currentUrl);
+
+        window.location.href = translateUrl;
+      });
+    })();
+  </script>
+
 </body>
 </html>
