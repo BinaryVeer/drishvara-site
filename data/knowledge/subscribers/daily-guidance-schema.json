@@ -1,0 +1,73 @@
+{
+  "version": "2026.04.30",
+  "module": "subscribers.daily_personal_guidance_schema",
+  "public_output_enabled": false,
+  "login_required": true,
+  "subscription_required": true,
+  "purpose": "Schema for future authenticated subscriber daily guidance including lucky number, lucky color, mantra, and recommended do/don't actions.",
+  "important_rule": "Subscriber guidance must be generated only from approved Knowledge Vault rules, Panchang calculation context, and user profile inputs with consent. It must not be presented as deterministic fate or guaranteed outcome.",
+  "required_user_context": {
+    "subscriber_id": "system_generated",
+    "preferred_language": "en | hi",
+    "date_of_birth": "required_for_personalized_guidance",
+    "birth_time": "optional_but_required_for_advanced_planetary_guidance",
+    "birth_place": "optional_but_required_for_advanced_planetary_guidance",
+    "current_location": "required_for_location_specific_panchang",
+    "consent_to_generate_personal_guidance": "required_boolean"
+  },
+  "daily_output_fields": {
+    "guidance_date": "YYYY-MM-DD",
+    "timezone": "Asia/Kolkata or user timezone",
+    "location_basis": "place/lat-long used for Panchang",
+    "lucky_number": {
+      "value": "number",
+      "basis": "numerology_rule_id | panchang_rule_id | combined_rule_id",
+      "source_ids": []
+    },
+    "lucky_color": {
+      "value": "color name",
+      "basis": "planetary_rule_id | weekday_rule_id | panchang_rule_id",
+      "source_ids": []
+    },
+    "mantra": {
+      "text_devanagari": "required_when_mantra_is_shown",
+      "text_transliteration": "optional",
+      "deity_or_context": "required",
+      "chant_count": "optional",
+      "basis": "approved_mantra_rule_id",
+      "source_ids": [],
+      "review_status": "approved_required"
+    },
+    "what_to_do": [
+      {
+        "text": "subscriber-facing recommendation",
+        "basis": "approved_guidance_rule_id",
+        "source_ids": []
+      }
+    ],
+    "what_not_to_do": [
+      {
+        "text": "subscriber-facing caution",
+        "basis": "approved_guidance_rule_id",
+        "source_ids": []
+      }
+    ],
+    "reflection_note": "short reflective note",
+    "method_version": "knowledge database version",
+    "generated_at": "timestamp",
+    "review_status": "approved | system_approved | pending_review"
+  },
+  "guardrails": [
+    "Do not claim guaranteed success, wealth, health outcome, marriage outcome, job outcome, or lifespan outcome.",
+    "Do not generate medical, legal, or financial instructions.",
+    "Do not show mantra unless exact text, context, and review status are available.",
+    "Do not show personalized planetary guidance unless required birth/location inputs are present.",
+    "Do not expose subscriber personal data publicly.",
+    "Do not use generic AI-generated spiritual advice without Knowledge Vault rule basis."
+  ],
+  "future_storage_model": {
+    "phase_1": "JSON schema only",
+    "phase_2": "Supabase authenticated subscriber table",
+    "phase_3": "subscriber dashboard with generated daily guidance cache"
+  }
+}

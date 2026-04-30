@@ -15,6 +15,8 @@ const requiredFiles = [
   "data/knowledge/submissions/user-submission-schema.json",
   "data/knowledge/submissions/feedback-schema.json",
   "data/knowledge/palmistry/palm-image-policy.json",
+  "data/knowledge/subscribers/daily-guidance-schema.json",
+  "data/knowledge/sanatan/mantra-policy.json",
 ];
 
 function readJson(file) {
@@ -52,6 +54,9 @@ const monthlySchedule = readJson("data/knowledge/updates/monthly-update-schedule
 const userSubmissionSchema = readJson("data/knowledge/submissions/user-submission-schema.json");
 const feedbackSchema = readJson("data/knowledge/submissions/feedback-schema.json");
 const palmImagePolicy = readJson("data/knowledge/palmistry/palm-image-policy.json");
+const subscriberGuidance = readJson("data/knowledge/subscribers/daily-guidance-schema.json");
+const mantraPolicy = readJson("data/knowledge/sanatan/mantra-policy.json");
+
 
 
 check(sourceRegistry.database_name === "Drishvara Sanatan Knowledge Vault", "Source registry has database name", failures);
@@ -102,6 +107,21 @@ check(palmImagePolicy.public_upload_enabled === false, "Palm image upload is dis
 check(palmImagePolicy.required_before_enabling_upload?.includes("private storage bucket"), "Palm image policy requires private storage bucket", failures);
 check(palmImagePolicy.required_before_enabling_upload?.includes("explicit image consent checkbox"), "Palm image policy requires explicit consent", failures);
 check(palmImagePolicy.interpretation_limits?.some((item) => item.includes("No medical diagnosis")), "Palm image policy blocks medical diagnosis", failures);
+
+check(subscriberGuidance.login_required === true, "Subscriber daily guidance requires login", failures);
+check(subscriberGuidance.subscription_required === true, "Subscriber daily guidance requires subscription", failures);
+check(subscriberGuidance.public_output_enabled === false, "Subscriber guidance is not public homepage output", failures);
+check(Boolean(subscriberGuidance.daily_output_fields?.lucky_number), "Subscriber guidance includes lucky number schema", failures);
+check(Boolean(subscriberGuidance.daily_output_fields?.lucky_color), "Subscriber guidance includes lucky color schema", failures);
+check(Boolean(subscriberGuidance.daily_output_fields?.mantra), "Subscriber guidance includes mantra schema", failures);
+check(Boolean(subscriberGuidance.daily_output_fields?.what_to_do), "Subscriber guidance includes what-to-do schema", failures);
+check(Boolean(subscriberGuidance.daily_output_fields?.what_not_to_do), "Subscriber guidance includes what-not-to-do schema", failures);
+check(subscriberGuidance.guardrails?.some((item) => item.includes("guaranteed success")), "Subscriber guidance blocks guaranteed outcome claims", failures);
+
+check(mantraPolicy.public_output_enabled === false, "Mantra output is disabled until reviewed", failures);
+check(mantraPolicy.required_before_showing_mantra?.includes("exact Devanagari text"), "Mantra policy requires exact Devanagari text", failures);
+check(mantraPolicy.guardrails?.some((item) => item.includes("Do not invent mantra text")), "Mantra policy blocks invented mantra text", failures);
+
 
 
 const anyPublicEnabled = [

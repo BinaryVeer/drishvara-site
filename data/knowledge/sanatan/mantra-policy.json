@@ -1,0 +1,31 @@
+{
+  "version": "2026.04.30",
+  "module": "sanatan.mantra_policy",
+  "public_output_enabled": false,
+  "subscriber_output_enabled": false,
+  "purpose": "Policy scaffold for future mantra display in subscriber daily guidance.",
+  "required_before_showing_mantra": [
+    "exact Devanagari text",
+    "context or deity mapping",
+    "approved source/method record",
+    "review status approved",
+    "usage context: daily reflection / observance / festival / planetary",
+    "clear non-coercive presentation"
+  ],
+  "display_fields": [
+    "text_devanagari",
+    "text_transliteration",
+    "meaning_short",
+    "deity_or_context",
+    "suggested_count",
+    "source_ids",
+    "review_status"
+  ],
+  "guardrails": [
+    "Do not invent mantra text.",
+    "Do not alter Sanskrit text casually.",
+    "Do not show mantra from unreviewed source.",
+    "Do not claim guaranteed result from chanting.",
+    "Do not prescribe as cure or remedy for medical/financial/legal issues."
+  ]
+}
