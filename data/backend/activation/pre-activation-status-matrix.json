@@ -1,0 +1,110 @@
+{
+  "version": "2026.04.30-b23",
+  "module": "activation.pre_activation_status_matrix",
+  "status": "freeze_point",
+  "purpose": "Defines what is live, scaffolded, and blocked before production activation.",
+  "live_now": [
+    {
+      "area": "public_site",
+      "items": [
+        "homepage",
+        "insights archive",
+        "article reader",
+        "public articles",
+        "featured reads",
+        "SEO files",
+        "submissions scaffold page",
+        "subscriber dashboard scaffold page",
+        "admin review scaffold page"
+      ]
+    },
+    {
+      "area": "content_pipeline",
+      "items": [
+        "article index",
+        "homepage refresh",
+        "publish dry-run guard",
+        "approval metadata",
+        "Hindi metadata rendering",
+        "selected Hindi body rendering"
+      ]
+    }
+  ],
+  "scaffolded_not_live": [
+    {
+      "area": "knowledge_vault",
+      "items": [
+        "Panchang method registry",
+        "Panchang engine scaffold",
+        "Vedic guidance taxonomy",
+        "festival rules",
+        "numerology rules",
+        "palmistry rules",
+        "mantra policy",
+        "subscriber guidance rules"
+      ]
+    },
+    {
+      "area": "backend",
+      "items": [
+        "Supabase schema migration",
+        "Auth/access model",
+        "submission intake mapping",
+        "payment/subscription planning",
+        "admin review queues"
+      ]
+    },
+    {
+      "area": "experience",
+      "items": [
+        "sports context scaffold",
+        "right-top sports update scaffold",
+        "Word of the Day",
+        "First Light"
+      ]
+    }
+  ],
+  "blocked_until_final_activation": [
+    {
+      "item": "Supabase database migration",
+      "reason": "Review and apply only after final activation approval."
+    },
+    {
+      "item": "Supabase Auth",
+      "reason": "Redirect URLs, RLS, and user flow must be tested first."
+    },
+    {
+      "item": "Payment provider",
+      "reason": "Provider, pricing, refund policy, webhook verification, and compliance must be finalized."
+    },
+    {
+      "item": "Palm image upload",
+      "reason": "Requires private storage, explicit image consent, deletion policy, MIME/size validation, and admin review."
+    },
+    {
+      "item": "Public Panchang/Vedic guidance",
+      "reason": "Requires reviewed calculation method, source registry approval, and output guardrails."
+    },
+    {
+      "item": "Subscriber daily guidance display",
+      "reason": "Requires login, active subscription, user consent, approved Knowledge Vault rules, and reviewed calculation method."
+    },
+    {
+      "item": "Admin backend actions",
+      "reason": "Requires protected admin auth, role enforcement, service-role route, and audit logging."
+    },
+    {
+      "item": "Live sports API",
+      "reason": "Requires provider selection, rate limits, source reliability check, and clear live/curated labeling."
+    }
+  ],
+  "non_negotiable_guards": [
+    "Do not expose Supabase service role key in frontend.",
+    "Do not enable anonymous backend writes.",
+    "Do not store card details in Drishvara database.",
+    "Do not display unreviewed mantra text.",
+    "Do not claim guaranteed health, wealth, marriage, job, success, or lifespan outcomes.",
+    "Do not publish user submissions without explicit permission.",
+    "Do not enable palm image upload without private storage and explicit consent."
+  ]
+}
