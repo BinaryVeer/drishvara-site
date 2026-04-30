@@ -1803,9 +1803,9 @@
           </div>
           <div class="feature-body">
             <div class="label">${escapeHtml(item.tag || "Featured Read")}</div>
-            <h3><a href="#open-day-card">${escapeHtml(localizedTitle(item, ""))}</a></h3>
+            <h3><a href="${escapeHtml(articleUrl(item))}">${escapeHtml(localizedTitle(item, ""))}</a></h3>
             <p>${escapeHtml(localizedSummary(item, ""))}</p>
-            <a class="read-link" href="#open-day-card">Read now →</a>
+            <a class="read-link" href="${escapeHtml(articleUrl(item))}">Read now →</a>
           </div>
         </div>
       `).join("");
@@ -1998,6 +1998,18 @@
 
     function localizedSummary(item, fallback = "A Drishvara read prepared for the daily surface.") {
       return localizedField(item, "summary", fallback);
+    }
+
+
+    function articleUrl(item) {
+      if (!item || typeof item !== "object") return "insights.html";
+
+      if (item.url) return item.url;
+
+      const path = item.path || item.sourcePath || item.directUrl || "";
+      if (path) return `article.html?path=${encodeURIComponent(path)}`;
+
+      return "insights.html";
     }
 
     function escapeHtml(value) {
