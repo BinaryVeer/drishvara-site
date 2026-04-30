@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Review · Drishvara</title>
+  <meta name="description" content="Admin review scaffold for Drishvara review queues. Not active for public use." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+  <link rel="canonical" href="https://www.drishvara.com/admin.html" />
+
+  <meta property="og:site_name" content="Drishvara" />
+  <meta property="og:title" content="Admin Review · Drishvara" />
+  <meta property="og:description" content="Admin review scaffold for Drishvara review queues." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.drishvara.com/admin.html" />
+  <meta property="og:image" content="https://www.drishvara.com/assets/logo/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255,255,255,0.06);
+      --surface-2: rgba(255,255,255,0.09);
+      --border: rgba(255,255,255,0.11);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #aeb9cb;
+      --gold: #c9a24a;
+      --danger: #ffb4a8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text-main);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 8%, rgba(201,162,74,0.12), transparent 22%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      padding: 8px 0 34px;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.045);
+      border-radius: 26px;
+    }
+
+    .logo {
+      width: 62px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      color: var(--danger);
+      background: rgba(255,180,168,0.09);
+      border: 1px solid rgba(255,180,168,0.22);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 22px;
+      padding: 20px;
+      min-height: 190px;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+    }
+
+    .card p {
+      color: var(--text-soft);
+      line-height: 1.62;
+      margin: 0 0 14px;
+    }
+
+    .queue-meta {
+      display: grid;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .blocked {
+      color: var(--danger);
+      background: rgba(255,180,168,0.08);
+      border: 1px solid rgba(255,180,168,0.18);
+      padding: 9px 11px;
+      border-radius: 14px;
+      margin-top: 12px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .notice {
+      border-left: 3px solid var(--gold);
+      padding: 13px 15px;
+      background: rgba(201,162,74,0.08);
+      color: var(--text-soft);
+      border-radius: 14px;
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 42px;
+      padding-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-pill {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="insights.html">Insights</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="submissions.html">Submissions</a>
+      <a href="admin.html" class="active">Admin</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <img src="assets/logo/logo.png" class="logo" alt="Drishvara Logo" />
+        <h1>Admin Review Panel</h1>
+        <p>Future review space for submissions, feedback, palmistry requests, Hindi drafts, Knowledge Vault updates, subscriber guidance, and subscription issues.</p>
+      </div>
+      <div class="status-pill">Admin auth/actions disabled</div>
+    </header>
+
+    <div class="notice">
+      This page is a scaffold only. It does not perform backend reads, approvals, deletions, payments, or Knowledge Vault activation. Future admin access must require authentication, reviewer role enforcement, RLS testing, and auditable server-side actions.
+    </div>
+
+    <main class="grid" data-admin-review-panel>
+      <section class="card">
+        <h2>User Submissions</h2>
+        <p>Questions, stories, Vedic guidance questions, Panchang questions, festival questions, numerology questions, and knowledge corrections.</p>
+        <div class="queue-meta">
+          <span>Future source: user_submissions</span>
+          <span>Current mode: scaffold</span>
+          <span>Default review status: pending</span>
+        </div>
+        <div class="blocked">Review actions disabled until admin authentication is implemented.</div>
+      </section>
+
+      <section class="card">
+        <h2>Feedback</h2>
+        <p>Article feedback, translation feedback, bug reports, feature requests, and knowledge correction feedback.</p>
+        <div class="queue-meta">
+          <span>Future source: feedback_submissions</span>
+          <span>Current mode: scaffold</span>
+          <span>Monthly review: 10th</span>
+        </div>
+        <div class="blocked">Accept/reject/archive actions disabled.</div>
+      </section>
+
+      <section class="card">
+        <h2>Palmistry Requests</h2>
+        <p>Palmistry questions and future palm image requests, subject to private storage, explicit consent, and deletion policy.</p>
+        <div class="queue-meta">
+          <span>Future source: palmistry_requests</span>
+          <span>Palm image upload: disabled</span>
+          <span>Public image URLs: blocked</span>
+        </div>
+        <div class="blocked">Palm image review disabled until storage and consent are implemented.</div>
+      </section>
+
+      <section class="card">
+        <h2>Hindi Article Drafts</h2>
+        <p>Hindi body drafts generated for published articles, with future approve / hold / needs revision / reject controls.</p>
+        <div class="queue-meta">
+          <span>Current source: generated/hindi-drafts</span>
+          <span>Future action: publish approved Hindi bodies</span>
+          <span>Current mode: script-based workflow</span>
+        </div>
+        <div class="blocked">UI approval actions disabled. Use script workflow for now.</div>
+      </section>
+
+      <section class="card">
+        <h2>Knowledge Vault Monthly Updates</h2>
+        <p>Review source registry, Panchang methods, festival rules, Vedic guidance taxonomy, numerology, and palmistry rules.</p>
+        <div class="queue-meta">
+          <span>Scheduled day: 10th of every month</span>
+          <span>Future source: knowledge_update_reviews</span>
+          <span>Public output: disabled unless approved</span>
+        </div>
+        <div class="blocked">Knowledge activation disabled until source/method review is complete.</div>
+      </section>
+
+      <section class="card">
+        <h2>Subscriber Guidance Review</h2>
+        <p>Future review of daily lucky number, lucky color, mantra, what to do, what not to do, and reflection outputs.</p>
+        <div class="queue-meta">
+          <span>Future source: subscriber_daily_guidance</span>
+          <span>Requires active subscription</span>
+          <span>Requires approved Knowledge Vault rules</span>
+        </div>
+        <div class="blocked">Guidance approval disabled until rule engine is approved.</div>
+      </section>
+
+      <section class="card">
+        <h2>Subscription Review</h2>
+        <p>Future support for subscription status issues, provider sync, failed payment states, and manual review.</p>
+        <div class="queue-meta">
+          <span>Future source: subscriptions</span>
+          <span>Payment provider: not selected</span>
+          <span>Webhook: disabled</span>
+        </div>
+        <div class="blocked">Payment/admin actions disabled until provider integration.</div>
+      </section>
+    </main>
+
+    <footer>Drishvara © 2026 · Admin review scaffold</footer>
+  </div>
+
+  <script src="/assets/js/seo-runtime.js" defer></script>
+  <script src="/assets/js/site-language.js" defer></script>
+</body>
+</html>

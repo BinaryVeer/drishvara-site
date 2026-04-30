@@ -1,0 +1,85 @@
+{
+  "version": "2026.04.30-b22",
+  "module": "backend.admin_review_schema",
+  "status": "scaffold",
+  "live_admin_enabled": false,
+  "admin_backend_write_enabled": false,
+  "admin_role_required": true,
+  "purpose": "Defines the future Drishvara admin review panel for submissions, feedback, palmistry requests, Hindi drafts, Knowledge Vault updates, subscriber guidance, and subscription reviews.",
+  "review_queues": [
+    {
+      "id": "user_submissions",
+      "label": "User Submissions",
+      "source_table_future": "user_submissions",
+      "source_file_now": "data/knowledge/submissions/user-submission-schema.json",
+      "allowed_future_actions": ["review", "mark_needs_more_info", "archive", "reject"],
+      "enabled_now": false
+    },
+    {
+      "id": "feedback_submissions",
+      "label": "Feedback",
+      "source_table_future": "feedback_submissions",
+      "source_file_now": "data/knowledge/submissions/feedback-schema.json",
+      "allowed_future_actions": ["review", "accept", "reject", "archive"],
+      "enabled_now": false
+    },
+    {
+      "id": "palmistry_requests",
+      "label": "Palmistry Requests",
+      "source_table_future": "palmistry_requests",
+      "source_file_now": "data/knowledge/palmistry/palm-image-policy.json",
+      "allowed_future_actions": ["review", "request_more_info", "archive", "reject"],
+      "enabled_now": false
+    },
+    {
+      "id": "hindi_body_drafts",
+      "label": "Hindi Article Body Drafts",
+      "source_folder_now": "generated/hindi-drafts",
+      "allowed_future_actions": ["approve", "hold", "needs_revision", "reject"],
+      "enabled_now": false
+    },
+    {
+      "id": "knowledge_updates",
+      "label": "Knowledge Vault Monthly Updates",
+      "source_table_future": "knowledge_update_reviews",
+      "source_file_now": "data/knowledge/updates/monthly-update-schedule.json",
+      "allowed_future_actions": ["review", "approve", "reject", "archive"],
+      "enabled_now": false,
+      "monthly_review_day": 10
+    },
+    {
+      "id": "subscriber_guidance",
+      "label": "Subscriber Daily Guidance Review",
+      "source_table_future": "subscriber_daily_guidance",
+      "source_file_now": "data/knowledge/subscribers/daily-guidance-schema.json",
+      "allowed_future_actions": ["review", "system_approve", "reject", "block"],
+      "enabled_now": false
+    },
+    {
+      "id": "subscriptions",
+      "label": "Subscription Review",
+      "source_table_future": "subscriptions",
+      "source_file_now": "data/backend/payments/subscription-lifecycle.json",
+      "allowed_future_actions": ["view", "manual_review", "sync_provider_status"],
+      "enabled_now": false
+    }
+  ],
+  "guardrails": [
+    "Do not enable admin review actions until authentication and admin role enforcement are implemented.",
+    "Do not expose service role keys in frontend code.",
+    "Do not allow anonymous users to access backend review actions.",
+    "Do not approve Knowledge Vault, mantra, Panchang, numerology, or palmistry outputs without source/method review.",
+    "Do not display or process palm images until private storage and explicit consent are implemented.",
+    "Do not publish user submissions or stories without explicit permission.",
+    "All review actions must be auditable in future backend implementation."
+  ],
+  "future_backend_requirements": [
+    "Supabase Auth enabled",
+    "admin role or reviewer claims implemented",
+    "RLS/admin policy tested",
+    "audit log table added",
+    "server-side service role route implemented",
+    "admin UI protected behind login",
+    "review actions mapped to Supabase tables"
+  ]
+}
