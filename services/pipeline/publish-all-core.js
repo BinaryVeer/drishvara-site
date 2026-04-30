@@ -593,6 +593,48 @@ async function refreshPublicDiscoveryData({
 }
 
 
+function getDraftApprovalState(draftJson) {
+  const candidates = [
+    draftJson?.review_status,
+    draftJson?.approval_status,
+    draftJson?.status,
+    draftJson?.operator_review?.status,
+    draftJson?.review?.status,
+    draftJson?.draft_packet?.review_status,
+    draftJson?.draft_packet?.approval_status,
+    draftJson?.draft_packet?.status
+  ]
+    .map((value) => String(value || "").trim().toLowerCase())
+    .filter(Boolean);
+
+  const approvedValues = new Set([
+    "approved",
+    "accepted",
+    "ready",
+    "ready_to_publish",
+    "publish_ready",
+    "approved_for_publish",
+    "published"
+  ]);
+
+  const rejectedValues = new Set([
+    "rejected",
+    "declined",
+    "blocked",
+    "do_not_publish"
+  ]);
+
+  const matchedApproved = candidates.find((value) => approvedValues.has(value));
+  const matchedRejected = candidates.find((value) => rejectedValues.has(value));
+
+  return {
+    approved: Boolean(matchedApproved),
+    rejected: Boolean(matchedRejected),
+    status: matchedApproved || matchedRejected || candidates[0] || "unknown",
+    raw: candidates
+  };
+}
+
 async function buildArticlePage({ draftPacket, categoryMeta, today }) {
   const title = safeText(draftPacket.title, `${categoryMeta.label} Insight`);
   const subtitle = safeText(draftPacket.subtitle);
@@ -959,7 +1001,9 @@ export async function runPublishAll({
   githubBranch,
   supabaseUrl,
   supabaseKey,
-  todayOverride
+  todayOverride,
+  dryRun = false,
+  requireApproved = false
 }) {
   const today = todayOverride || new Date().toISOString().slice(0, 10);
   const results = [];
@@ -974,30 +1018,35 @@ export async function runPublishAll({
     throw new Error("Missing required GitHub environment variables");
   }
 
-  if (!supabaseUrl || !supabaseKey) {
+  if (!dryRun && (!supabaseUrl || !supabaseKey)) {
     throw new Error("Missing required Supabase environment variables");
   }
 
-  const supabase = createClient(supabaseUrl, supabaseKey);
+  const supabase = dryRun ? null : createClient(supabaseUrl, supabaseKey);
 
   let publicationRunId = null;
 
-  const { data: runRow, error: runError } = await supabase
-    .from("publication_runs")
-    .insert({
-      run_date: today,
-      run_type: "publish_all",
-      status: "started",
-      inputs_json: { source: "container_core" }
-    })
-    .select("id")
-    .single();
+  if (!dryRun) {
+    const { data: runRow, error: runError } = await supabase
+      .from("publication_runs")
+      .insert({
+        run_date: today,
+        run_type: "publish_all",
+        status: "started",
+        inputs_json: {
+          source: "container_core",
+          require_approved: Boolean(requireApproved)
+        }
+      })
+      .select("id")
+      .single();
 
-  if (runError) {
-    throw new Error(`Failed to create publication run: ${runError.message}`);
+    if (runError) {
+      throw new Error(`Failed to create publication run: ${runError.message}`);
+    }
+
+    publicationRunId = runRow.id;
   }
-
-  publicationRunId = runRow.id;
 
   try {
     for (const categoryKey of PUBLISH_CATEGORIES) {
@@ -1026,12 +1075,52 @@ export async function runPublishAll({
           continue;
         }
 
+        const approvalState = getDraftApprovalState(draftJson);
+
+        if (approvalState.rejected) {
+          results.push({
+            category: categoryKey,
+            ok: false,
+            skipped: true,
+            source: draftPath,
+            approval_state: approvalState,
+            error: "Draft is marked rejected/blocked"
+          });
+          continue;
+        }
+
+        if (requireApproved && !approvalState.approved) {
+          results.push({
+            category: categoryKey,
+            ok: false,
+            skipped: true,
+            source: draftPath,
+            approval_state: approvalState,
+            error: "Draft is not approved for publishing"
+          });
+          continue;
+        }
+
         const articlePath = buildArticlePath(categoryKey, draftPacket.slug);
         const articleHtml = await buildArticlePage({
           draftPacket,
           categoryMeta,
           today
         });
+
+        if (dryRun) {
+          results.push({
+            category: categoryKey,
+            ok: true,
+            dry_run: true,
+            source: draftPath,
+            draft_title: draftPacket?.title || null,
+            draft_slug: draftPacket?.slug || null,
+            approval_state: approvalState,
+            would_publish_to: articlePath
+          });
+          continue;
+        }
 
         await upsertGitHubFile({
           token: githubToken,
@@ -1298,7 +1387,14 @@ export async function runPublishAll({
 
     const successCount = results.filter((x) => x.ok).length;
 
-    if (successCount > 0 && publishedItems.length) {
+    if (dryRun) {
+      publicDiscoveryRefresh = {
+        ok: true,
+        dry_run: true,
+        skipped: true,
+        reason: "Dry run only; public discovery files were not modified"
+      };
+    } else if (successCount > 0 && publishedItems.length) {
       publicDiscoveryRefresh = await refreshPublicDiscoveryData({
         token: githubToken,
         owner: githubOwner,
@@ -1315,28 +1411,32 @@ export async function runPublishAll({
       };
     }
 
-    await supabase
-      .from("publication_runs")
-      .update({
-        status: "completed",
-        finished_at: new Date().toISOString(),
-        outputs_json: {
-          results,
-          success_count: successCount,
-          public_discovery_refresh: publicDiscoveryRefresh
-        }
-      })
-      .eq("id", publicationRunId);
+    if (!dryRun && publicationRunId) {
+      await supabase
+        .from("publication_runs")
+        .update({
+          status: "completed",
+          finished_at: new Date().toISOString(),
+          outputs_json: {
+            results,
+            success_count: successCount,
+            public_discovery_refresh: publicDiscoveryRefresh
+          }
+        })
+        .eq("id", publicationRunId);
+    }
 
     return {
       ok: true,
+      dry_run: Boolean(dryRun),
+      require_approved: Boolean(requireApproved),
       date: today,
       success_count: successCount,
       total_categories: PUBLISH_CATEGORIES.length,
       results
     };
   } catch (error) {
-    if (publicationRunId) {
+    if (!dryRun && publicationRunId) {
       await supabase
         .from("publication_runs")
         .update({

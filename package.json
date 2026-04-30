@@ -10,7 +10,9 @@
     "refresh:homepage": "node scripts/refresh-homepage.js",
     "check:homepage": "node scripts/refresh-homepage.js",
     "publish:local-check": "npm run refresh:homepage && node scripts/publish-local-check.js",
-    "pipeline:preflight": "npm run publish:local-check"
+    "pipeline:preflight": "npm run publish:local-check",
+    "pipeline:live-preflight": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts",
+    "pipeline:live-preflight:approved": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts --require-approved"
   },
   "repository": {
     "type": "git",
