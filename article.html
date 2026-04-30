@@ -399,6 +399,20 @@
     }
 
   </style>
+
+  <link rel="canonical" href="https://www.drishvara.com/article.html" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:site_name" content="Drishvara" />
+  <meta property="og:title" content="Article · Drishvara" />
+  <meta property="og:description" content="Read a Drishvara article with bilingual title and summary support and selected Hindi article bodies." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.drishvara.com/article.html" />
+  <meta property="og:image" content="https://www.drishvara.com/assets/logo/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Article · Drishvara" />
+  <meta name="twitter:description" content="Read a Drishvara article with bilingual title and summary support and selected Hindi article bodies." />
+  <meta name="twitter:image" content="https://www.drishvara.com/assets/logo/logo.png" />
+
 </head>
 <body>
   <div class="page">
@@ -506,6 +520,25 @@
       const lang = currentContentLanguage();
       const localizedKey = lang === "hi" ? `${key}_hi` : key;
       return item[localizedKey] || item[key] || fallback;
+    }
+
+
+    function updateArticleSeo(title, subtitle, path, image) {
+      const url = path
+        ? `https://www.drishvara.com/article.html?path=${encodeURIComponent(path)}`
+        : window.location.href;
+
+      const imageUrl = image || "https://www.drishvara.com/assets/logo/logo.png";
+
+      if (window.DrishvaraSEO) {
+        window.DrishvaraSEO.setPageMeta({
+          title: `${title || "Article"} · Drishvara`,
+          description: subtitle || "A Drishvara article.",
+          url,
+          image: imageUrl,
+          type: "article"
+        });
+      }
     }
 
     function setReader(title, subtitle, meta, bodyHtml) {
@@ -811,12 +844,16 @@
           const displayTitle = hindiBody?.title_hi || localizedField(indexItem, "title", article.title);
           const displayBody = hindiBody?.article_html_hi || applyReaderHeroImage(article.bodyHtml, indexItem?.image, displayTitle);
 
+          const displaySubtitle = hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc);
+
           setReader(
             displayTitle,
-            hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc),
+            displaySubtitle,
             hindiBody?.meta_hi || article.meta,
             displayBody
           );
+
+          updateArticleSeo(displayTitle, displaySubtitle, path, indexItem?.image);
           return;
         }
 
@@ -828,12 +865,16 @@
         const displayTitle = hindiBody?.title_hi || localizedField(indexItem, "title", article.title);
         const displayBody = hindiBody?.article_html_hi || applyReaderHeroImage(article.bodyHtml, indexItem?.image, displayTitle);
 
+        const displaySubtitle = hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc);
+
         setReader(
           displayTitle,
-          hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc),
+          displaySubtitle,
           hindiBody?.meta_hi || article.meta,
           displayBody
         );
+
+        updateArticleSeo(displayTitle, displaySubtitle, path, indexItem?.image);
       } catch (error) {
         showError("Article file could not be loaded.", error.message || String(error));
       }
@@ -841,6 +882,7 @@
 
     loadArticle();
   </script>
+  <script src="/assets/js/seo-runtime.js" defer></script>
   <script src="/assets/js/site-language.js" defer></script>
 </body>
 </html>
