@@ -1,0 +1,80 @@
+{
+  "version": "2026.04.30-b20d",
+  "module": "backend.submission_supabase_map",
+  "status": "scaffold",
+  "live_insert_enabled": false,
+  "purpose": "Maps frontend submission packet fields to future Supabase tables.",
+  "routes": {
+    "user_submissions": {
+      "table": "user_submissions",
+      "frontend_types": [
+        "general_question",
+        "personal_story",
+        "vedic_guidance_question",
+        "panchang_question",
+        "festival_question",
+        "numerology_question",
+        "knowledge_correction",
+        "other"
+      ],
+      "field_map": {
+        "submission_type": "submission_type",
+        "name": "name",
+        "email": "email",
+        "location": "location",
+        "preferred_language": "preferred_language",
+        "message": "question_or_story",
+        "context_details": "context_details",
+        "consent_to_process": "consent_to_process",
+        "consent_to_contact": "consent_to_contact"
+      },
+      "default_values": {
+        "review_status": "pending"
+      }
+    },
+    "feedback_submissions": {
+      "table": "feedback_submissions",
+      "frontend_types": [
+        "feedback"
+      ],
+      "field_map": {
+        "submission_type": "feedback_type",
+        "message": "message",
+        "name": "name",
+        "email": "email",
+        "page_url": "page_url",
+        "rating": "rating",
+        "consent_to_contact": "consent_to_contact"
+      },
+      "default_values": {
+        "feedback_type": "general_feedback",
+        "review_status": "pending"
+      }
+    },
+    "palmistry_requests": {
+      "table": "palmistry_requests",
+      "frontend_types": [
+        "palmistry_question"
+      ],
+      "field_map": {
+        "message": "question",
+        "context_details": "context_details",
+        "consent_to_process": "consent_to_process_request"
+      },
+      "blocked_fields_until_later": [
+        "image_storage_path",
+        "image_mime_type",
+        "image_upload_enabled"
+      ],
+      "default_values": {
+        "image_upload_enabled": false,
+        "review_status": "pending"
+      }
+    }
+  },
+  "guardrails": [
+    "This mapping is not a live insert function.",
+    "Future inserts must require authenticated user context.",
+    "Palm image fields remain blocked until private storage is implemented."
+  ]
+}

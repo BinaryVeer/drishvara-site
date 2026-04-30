@@ -248,6 +248,9 @@
       <div class="notice">
         This is a controlled intake scaffold. Submissions are not stored in a database yet. Palm image upload is intentionally disabled until private storage, explicit consent, and deletion policy are implemented.
       </div>
+      <div class="notice" id="submissionBackendStatus" data-submission-backend-status>
+        Backend intake: disabled · Local preparation only
+      </div>
     </header>
 
     <main class="grid">
@@ -382,6 +385,7 @@
     updatePreview();
   </script>
   <script src="/assets/js/seo-runtime.js" defer></script>
+  <script src="/assets/js/submission-client.js" defer></script>
   <script src="/assets/js/site-language.js" defer></script>
 </body>
 </html>

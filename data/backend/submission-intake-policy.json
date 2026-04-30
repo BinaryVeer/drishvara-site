@@ -1,0 +1,52 @@
+{
+  "version": "2026.04.30-b20d",
+  "module": "backend.submission_intake_policy",
+  "status": "scaffold",
+  "live_backend_write_enabled": false,
+  "anonymous_backend_write_enabled": false,
+  "supabase_insert_enabled": false,
+  "storage_mode": "local_prepare_only",
+  "purpose": "Defines safe intake policy for Drishvara user submissions, feedback, and palmistry requests before live Supabase write is enabled.",
+  "allowed_current_actions": [
+    "prepare_submission_packet",
+    "copy_submission_packet",
+    "email_submission_packet",
+    "local_browser_preview"
+  ],
+  "blocked_current_actions": [
+    "direct_supabase_insert",
+    "anonymous_backend_write",
+    "palm_image_upload",
+    "public_file_storage",
+    "auto_publish_submission",
+    "auto_use_submission_in_knowledge_vault"
+  ],
+  "future_backend_tables": {
+    "general_question": "user_submissions",
+    "personal_story": "user_submissions",
+    "vedic_guidance_question": "user_submissions",
+    "panchang_question": "user_submissions",
+    "festival_question": "user_submissions",
+    "numerology_question": "user_submissions",
+    "palmistry_question": "palmistry_requests",
+    "knowledge_correction": "user_submissions",
+    "feedback": "feedback_submissions"
+  },
+  "required_before_live_enablement": [
+    "Supabase migration applied",
+    "Supabase Auth enabled",
+    "RLS tested with authenticated test user",
+    "abuse prevention / rate limiting plan",
+    "consent checkbox enforced",
+    "service role not exposed client-side",
+    "palm image private storage policy ready before file upload"
+  ],
+  "guardrails": [
+    "Do not write submissions to Supabase from public client until auth and RLS are tested.",
+    "Do not enable anonymous public inserts.",
+    "Do not upload palm images until private storage and explicit consent are implemented.",
+    "Do not publish or use submitted personal stories without explicit permission.",
+    "Do not expose email, phone, location, or personal identifiers publicly.",
+    "All backend submissions must default to pending review."
+  ]
+}
