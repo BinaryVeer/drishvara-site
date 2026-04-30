@@ -1,0 +1,35 @@
+{
+  "version": "2026.04.30",
+  "module": "sanatan.festival.rules",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "rule_requirements": [
+    "festival_id",
+    "festival_name",
+    "region",
+    "rule_basis",
+    "panchang_dependency",
+    "source_ids",
+    "review_status",
+    "public_use"
+  ],
+  "festival_rules": [
+    {
+      "festival_id": "festival_seed_template",
+      "festival_name": "Festival rule template",
+      "region": "to_be_defined",
+      "rule_basis": "to_be_defined",
+      "panchang_dependency": [
+        "tithi",
+        "paksha",
+        "masa"
+      ],
+      "source_ids": [
+        "src_festival_regional_rules_seed"
+      ],
+      "review_status": "under_review",
+      "public_use": false,
+      "notes": "Template only. Add real festival rules only after source/method review."
+    }
+  ]
+}

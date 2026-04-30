@@ -1,0 +1,60 @@
+{
+  "version": "2026.04.30",
+  "module": "palmistry.rules",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "privacy_rule": "Do not enable palm image reading until explicit consent, image-handling policy, deletion policy, and interpretation guardrails are implemented.",
+  "knowledge_categories": {
+    "major_lines": [
+      "life_line",
+      "head_line",
+      "heart_line",
+      "fate_line",
+      "sun_line",
+      "mercury_line"
+    ],
+    "mounts": [
+      "jupiter",
+      "saturn",
+      "sun",
+      "mercury",
+      "venus",
+      "mars",
+      "moon"
+    ],
+    "hand_features": [
+      "palm_shape",
+      "finger_shape",
+      "thumb_flexibility",
+      "line_clarity",
+      "line_breaks",
+      "crosses",
+      "stars",
+      "islands",
+      "chains"
+    ]
+  },
+  "rule_requirements": [
+    "feature_id",
+    "feature_type",
+    "traditional_meaning",
+    "interpretation_limits",
+    "source_ids",
+    "review_status",
+    "public_use"
+  ],
+  "rules": [
+    {
+      "id": "palmistry_seed_template",
+      "feature_id": "life_line",
+      "feature_type": "major_line",
+      "traditional_meaning": "Seed placeholder only.",
+      "interpretation_limits": "No deterministic health/lifespan claims.",
+      "source_ids": [
+        "src_palmistry_rules_seed"
+      ],
+      "review_status": "under_review",
+      "public_use": false
+    }
+  ]
+}

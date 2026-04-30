@@ -1,0 +1,55 @@
+{
+  "version": "2026.04.30",
+  "module": "sanatan.panchang.methods",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "required_context": {
+    "location": [
+      "latitude",
+      "longitude",
+      "timezone",
+      "place_name"
+    ],
+    "date_time": [
+      "local_date",
+      "local_time",
+      "calculation_timestamp"
+    ],
+    "astronomical_basis": [
+      "sunrise",
+      "sunset",
+      "moonrise",
+      "moonset",
+      "ayanamsha_method",
+      "sidereal_reference"
+    ]
+  },
+  "calculation_fields": [
+    "vara",
+    "tithi",
+    "paksha",
+    "masa",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "sun_rashi",
+    "moon_rashi",
+    "sunrise",
+    "sunset",
+    "moonrise",
+    "moonset",
+    "calculation_method_version"
+  ],
+  "method_records": [
+    {
+      "id": "panchang_method_seed_v1",
+      "name": "Panchang method scaffold",
+      "status": "under_review",
+      "source_ids": [
+        "src_panchang_classical_methods_seed"
+      ],
+      "public_use": false,
+      "notes": "No public Panchang output should be generated from this scaffold until calculation formulae and review status are approved."
+    }
+  ]
+}

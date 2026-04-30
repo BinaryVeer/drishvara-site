@@ -1,0 +1,42 @@
+{
+  "version": "2026.04.30",
+  "module": "palmistry.palm_image_policy",
+  "public_upload_enabled": false,
+  "purpose": "Policy scaffold for future palm image upload and palmistry question submission.",
+  "upload_status": "disabled_until_storage_and_consent_are_implemented",
+  "required_before_enabling_upload": [
+    "private storage bucket",
+    "explicit image consent checkbox",
+    "purpose limitation notice",
+    "deletion request mechanism",
+    "file size limit",
+    "allowed mime types",
+    "manual review workflow",
+    "no public image exposure",
+    "no deterministic health or lifespan claims"
+  ],
+  "allowed_future_file_types": [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ],
+  "recommended_file_size_limit_mb": 8,
+  "future_submission_fields": {
+    "dominant_hand": "optional",
+    "left_or_right_palm": "required_if_image_uploaded",
+    "age_range": "optional",
+    "gender": "optional",
+    "question": "required",
+    "context": "optional",
+    "consent_to_process_image": "required_boolean",
+    "consent_to_delete_after_review": "optional_boolean"
+  },
+  "interpretation_limits": [
+    "Palmistry output must be reflective and traditional-reference based.",
+    "No medical diagnosis.",
+    "No lifespan prediction.",
+    "No guaranteed fate or financial outcome.",
+    "No public display of uploaded palm images.",
+    "Image-based reading requires explicit consent and private handling."
+  ]
+}

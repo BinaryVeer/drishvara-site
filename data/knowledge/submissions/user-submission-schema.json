@@ -1,0 +1,39 @@
+{
+  "version": "2026.04.30",
+  "module": "knowledge.submissions.user_submission_schema",
+  "public_collection_enabled": false,
+  "purpose": "Schema for future user submissions related to questions, personal stories, information requests, and knowledge-correction suggestions.",
+  "submission_types": [
+    "general_question",
+    "personal_story",
+    "vedic_guidance_question",
+    "panchang_question",
+    "festival_question",
+    "numerology_question",
+    "palmistry_question",
+    "knowledge_correction",
+    "other"
+  ],
+  "fields": {
+    "submission_id": "system_generated",
+    "submission_type": "required",
+    "name": "optional",
+    "email": "optional",
+    "phone": "optional",
+    "location": "optional",
+    "preferred_language": "optional: en | hi",
+    "question_or_story": "required",
+    "context_details": "optional",
+    "consent_to_process": "required_boolean",
+    "consent_to_contact": "optional_boolean",
+    "created_at": "system_generated",
+    "review_status": "pending | reviewed | needs_more_info | rejected | archived",
+    "review_note": "internal_only"
+  },
+  "privacy_rules": [
+    "Do not publish personal submissions without explicit permission.",
+    "Do not expose email, phone, location, or personal identifiers publicly.",
+    "Do not provide deterministic health, finance, fate, lifespan, or guaranteed-outcome claims.",
+    "Personalized spiritual or numerology guidance must remain reflective and non-coercive."
+  ]
+}

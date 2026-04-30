@@ -1,0 +1,34 @@
+{
+  "version": "2026.04.30",
+  "module": "numerology.rules",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "supported_future_calculations": [
+    "birth_number",
+    "life_path_number",
+    "name_number",
+    "compound_number",
+    "personal_day_number"
+  ],
+  "rule_requirements": [
+    "number",
+    "calculation_method",
+    "interpretation",
+    "source_ids",
+    "review_status",
+    "public_use"
+  ],
+  "rules": [
+    {
+      "id": "numerology_seed_template",
+      "number": 1,
+      "calculation_method": "to_be_defined",
+      "interpretation": "Seed placeholder only.",
+      "source_ids": [
+        "src_numerology_rules_seed"
+      ],
+      "review_status": "under_review",
+      "public_use": false
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "version": "2026.04.30",
+  "database_name": "Drishvara Sanatan Knowledge Vault",
+  "purpose": "Internal reviewed source registry for Panchang, Vedic guidance, festival rules, numerology, and palmistry modules.",
+  "public_output_rule": "No Panchang, Vedic guidance, festival, numerology, palmistry, or planetary interpretation should be publicly displayed unless it is backed by an approved source/method record and passes knowledge preflight.",
+  "source_status_values": [
+    "seed",
+    "under_review",
+    "approved",
+    "deprecated",
+    "rejected"
+  ],
+  "source_classes": [
+    {
+      "id": "class_traditional_text",
+      "label": "Traditional Text / Shastra",
+      "description": "Classical or traditional textual source requiring careful review and method mapping before public use."
+    },
+    {
+      "id": "class_calculation_method",
+      "label": "Calculation Method",
+      "description": "Mathematical or astronomical calculation rule used for Panchang and planetary positions."
+    },
+    {
+      "id": "class_regional_practice",
+      "label": "Regional Practice",
+      "description": "Region-specific festival, vrata, or observance rule."
+    },
+    {
+      "id": "class_reviewed_interpretation",
+      "label": "Reviewed Interpretation",
+      "description": "Curated Drishvara interpretation based on reviewed traditional rules."
+    }
+  ],
+  "sources": [
+    {
+      "id": "src_panchang_classical_methods_seed",
+      "source_class": "class_calculation_method",
+      "title": "Classical Panchang calculation methods",
+      "domain": "panchang",
+      "status": "seed",
+      "review_status": "under_review",
+      "use_publicly": false,
+      "notes": "Placeholder source family. Must be expanded with reviewed method notes before calculation outputs are shown publicly."
+    },
+    {
+      "id": "src_festival_regional_rules_seed",
+      "source_class": "class_regional_practice",
+      "title": "Regional festival and vrata rule registry",
+      "domain": "festival",
+      "status": "seed",
+      "review_status": "under_review",
+      "use_publicly": false,
+      "notes": "Placeholder registry for festival rules. Regional applicability and observance basis must be documented before public use."
+    },
+    {
+      "id": "src_numerology_rules_seed",
+      "source_class": "class_reviewed_interpretation",
+      "title": "Drishvara numerology interpretation rule seed",
+      "domain": "numerology",
+      "status": "seed",
+      "review_status": "under_review",
+      "use_publicly": false,
+      "notes": "Initial structure only. Interpretive outputs require review before public display."
+    },
+    {
+      "id": "src_palmistry_rules_seed",
+      "source_class": "class_reviewed_interpretation",
+      "title": "Drishvara palmistry interpretation rule seed",
+      "domain": "palmistry",
+      "status": "seed",
+      "review_status": "under_review",
+      "use_publicly": false,
+      "notes": "Knowledge reference only. Image-based palm reading is not enabled at this stage."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "version": "2026.04.30",
+  "module": "knowledge.monthly_update_schedule",
+  "schedule_rule": {
+    "frequency": "monthly",
+    "day_of_month": 10,
+    "preferred_time_local": "10:00",
+    "timezone": "Asia/Kolkata",
+    "label": "Monthly Drishvara Knowledge Database Update"
+  },
+  "purpose": "Monthly review, correction, expansion, and approval of Drishvara Knowledge Vault records.",
+  "review_scope": [
+    "source registry corrections",
+    "Panchang method updates",
+    "festival rule additions/corrections",
+    "Vedic guidance taxonomy refinement",
+    "numerology rule additions/corrections",
+    "palmistry rule additions/corrections",
+    "user-submitted questions and feedback review",
+    "privacy and consent review for palm image submissions"
+  ],
+  "required_monthly_actions": [
+    "Review pending user submissions",
+    "Review pending feedback items",
+    "Review external correction notes",
+    "Add or update source records",
+    "Update database version if records changed",
+    "Run knowledge:preflight",
+    "Mark reviewer and review date"
+  ],
+  "next_scheduled_review": "2026-05-10",
+  "public_output_rule": "Monthly updates must not automatically enable public output. Public use still requires source/method review and preflight approval."
+}

@@ -1,0 +1,33 @@
+{
+  "version": "2026.04.30",
+  "module": "knowledge.submissions.feedback_schema",
+  "public_collection_enabled": false,
+  "purpose": "Schema for future user feedback on Drishvara articles, Panchang outputs, Vedic guidance, numerology, palmistry, and site experience.",
+  "feedback_types": [
+    "article_feedback",
+    "translation_feedback",
+    "knowledge_correction",
+    "panchang_feedback",
+    "festival_feedback",
+    "numerology_feedback",
+    "palmistry_feedback",
+    "bug_report",
+    "feature_request",
+    "general_feedback"
+  ],
+  "fields": {
+    "feedback_id": "system_generated",
+    "feedback_type": "required",
+    "page_url": "optional",
+    "article_path": "optional",
+    "message": "required",
+    "name": "optional",
+    "email": "optional",
+    "rating": "optional",
+    "consent_to_contact": "optional_boolean",
+    "created_at": "system_generated",
+    "review_status": "pending | reviewed | accepted | rejected | archived",
+    "review_note": "internal_only"
+  },
+  "monthly_review_day": 10
+}

@@ -1,0 +1,35 @@
+{
+  "version": "2026.04.30",
+  "module": "sanatan.vedic_guidance.taxonomy",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "guidance_categories": [
+    {
+      "id": "daily_observance",
+      "label": "Daily Observance",
+      "description": "Suggested reflective observance derived from approved Panchang and guidance rules."
+    },
+    {
+      "id": "food_discipline",
+      "label": "Food Discipline",
+      "description": "Satvik food-oriented guidance only after source review."
+    },
+    {
+      "id": "mantra_reference",
+      "label": "Mantra Reference",
+      "description": "Mantra display requires exact script, deity/context, source/method note, and review approval."
+    },
+    {
+      "id": "reflection",
+      "label": "Reflection",
+      "description": "Non-deterministic reflective guidance based on approved rule context."
+    }
+  ],
+  "output_guardrails": [
+    "Do not present generic AI-generated guidance as Sanatan guidance.",
+    "Do not publish muhurta or Panchang claims without calculation context.",
+    "Do not publish mantra text without review.",
+    "Do not make deterministic claims about fate, health, finance, or guaranteed outcomes.",
+    "Attach method/source reference to every premium guidance output."
+  ]
+}
