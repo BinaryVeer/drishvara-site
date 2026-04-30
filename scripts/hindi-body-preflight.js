@@ -47,9 +47,16 @@ const approvedItems = sidecar.items.filter((item) => item.status === "approved" 
 check(
   approvedItems.length > 0,
   "At least one approved Hindi article body is available",
-  failures,
-  true
+  failures
 );
+
+for (const item of approvedItems) {
+  check(Boolean(item.path || item.sourcePath || item.article_path), "Approved Hindi body has article path", failures);
+  check(Boolean(item.title_hi), "Approved Hindi body has Hindi title", failures);
+  check(Boolean(item.summary_hi), "Approved Hindi body has Hindi summary", failures);
+  check(Boolean(item.article_html_hi), "Approved Hindi body has Hindi article HTML", failures);
+  check(String(item.article_html_hi || "").includes("<p>"), "Approved Hindi body contains paragraph HTML", failures);
+}
 
 console.log("");
 console.log("Hindi body readiness:");
