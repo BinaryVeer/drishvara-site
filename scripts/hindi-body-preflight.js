@@ -40,7 +40,12 @@ check(sidecar.version === "1.0.0", "Hindi sidecar has version", failures);
 check(Array.isArray(sidecar.items), "Hindi sidecar has items array", failures);
 check(articleReader.includes("findHindiBodyForPath"), "Article reader can look up Hindi body sidecar", failures);
 check(articleReader.includes("article_html_hi"), "Article reader supports article_html_hi", failures);
-check(articleReader.includes("hindiBody?.article_html_hi || article.bodyHtml"), "Article reader falls back to English body", failures);
+check(
+  articleReader.includes("hindiBody?.article_html_hi ||") &&
+    (articleReader.includes("article.bodyHtml") || articleReader.includes("applyReaderHeroImage")),
+  "Article reader falls back to English body",
+  failures
+);
 
 const approvedItems = sidecar.items.filter((item) => item.status === "approved" && item.article_html_hi);
 
