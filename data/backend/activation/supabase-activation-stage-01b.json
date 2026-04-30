@@ -1,0 +1,38 @@
+{
+  "version": "2026.04.30-activation-01b",
+  "module": "activation.supabase_validation_sql_pack",
+  "status": "validation_pack_only",
+  "live_apply_enabled": false,
+  "purpose": "Provides SQL validation files and manual test guidance for checking the Supabase schema after migration apply.",
+  "validation_files": [
+    "supabase/validation/01_post_migration_validation.sql",
+    "supabase/validation/02_rls_manual_smoke_tests.sql",
+    "supabase/validation/99_emergency_test_rollback.sql"
+  ],
+  "guide": "docs/activation/supabase-post-apply-validation-guide.md",
+  "blocked_in_this_stage": [
+    "automatic_migration_apply",
+    "live_auth_enablement",
+    "live_payment_enablement",
+    "palm_image_storage_enablement",
+    "subscriber_guidance_display",
+    "admin_backend_actions",
+    "frontend_supabase_insert"
+  ],
+  "expected_post_apply_checks": [
+    "7 public tables exist",
+    "RLS enabled on all 7 tables",
+    "owner-scoped policies exist",
+    "updated_at triggers exist",
+    "subscriber guidance public display defaults false",
+    "subscriber guidance subscriber display defaults false",
+    "palm image upload defaults false",
+    "knowledge update review day is 10"
+  ],
+  "guardrails": [
+    "Validation SQL pack does not apply migration.",
+    "Rollback SQL is for test environment only.",
+    "RLS client behavior must be tested with authenticated client context later.",
+    "Do not enable Auth, payment, palm upload, or premium output in this stage."
+  ]
+}
