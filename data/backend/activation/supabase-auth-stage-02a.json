@@ -1,0 +1,69 @@
+{
+  "version": "2026.04.30-activation-02a",
+  "module": "activation.supabase_auth_login_runbook",
+  "status": "runbook_only",
+  "live_auth_enabled": false,
+  "live_session_detection_enabled": false,
+  "live_dashboard_gate_enabled": false,
+  "purpose": "Defines Supabase Auth/login/session planning before enabling live authentication.",
+  "runbook": "docs/activation/supabase-auth-login-runbook.md",
+  "checklist": "docs/activation/supabase-auth-login-checklist.md",
+  "recommended_initial_auth_method": "email_otp_or_magic_link",
+  "future_frontend_files": [
+    "login.html",
+    "assets/js/auth-client.js",
+    "assets/js/session-guard.js"
+  ],
+  "required_redirect_urls": {
+    "local": [
+      "http://localhost:5173/login.html",
+      "http://localhost:5173/dashboard.html"
+    ],
+    "production": [
+      "https://www.drishvara.com/login.html",
+      "https://www.drishvara.com/dashboard.html"
+    ]
+  },
+  "access_rules": {
+    "anonymous": {
+      "dashboard_data": false,
+      "premium_guidance": false,
+      "profile_storage": false,
+      "admin_actions": false
+    },
+    "free_registered": {
+      "dashboard_shell": true,
+      "premium_guidance": false,
+      "palm_image_upload": false,
+      "admin_actions": false
+    },
+    "active_subscriber": {
+      "dashboard_shell": true,
+      "premium_guidance": "blocked_until_consent_and_approved_rules",
+      "palm_image_upload": false,
+      "admin_actions": false
+    },
+    "admin_reviewer": {
+      "admin_shell": "future_only",
+      "admin_actions": false
+    }
+  },
+  "blocked_in_this_stage": [
+    "live_auth_enablement",
+    "live_signup_enablement",
+    "live_dashboard_data",
+    "live_subscription_gate",
+    "subscriber_guidance_display",
+    "palm_image_upload",
+    "admin_backend_actions",
+    "payment_provider"
+  ],
+  "guardrails": [
+    "This stage does not enable live Auth.",
+    "Do not expose Supabase service role key.",
+    "Do not enable premium guidance merely because a user is logged in.",
+    "Do not enable palm image upload.",
+    "Do not enable payment provider.",
+    "Do not enable admin backend actions."
+  ]
+}

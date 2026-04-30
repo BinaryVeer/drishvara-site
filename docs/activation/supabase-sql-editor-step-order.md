@@ -66,7 +66,7 @@ Do not proceed if:
 - defaults are unsafe.
 - palm image public URL guard is missing.
 
-## Step 5 — Do Not Enable Auth Yet
+## Step 5 — Do not enable Auth yet
 
 After migration validation, stop.
 
