@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Subscriber Dashboard · Drishvara</title>
+  <meta name="description" content="Subscriber dashboard scaffold for Drishvara premium daily guidance, profile context, and future subscription features." />
+  <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+
+  <link rel="canonical" href="https://www.drishvara.com/dashboard.html" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:site_name" content="Drishvara" />
+  <meta property="og:title" content="Subscriber Dashboard · Drishvara" />
+  <meta property="og:description" content="Subscriber dashboard scaffold for future Drishvara premium users." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.drishvara.com/dashboard.html" />
+  <meta property="og:image" content="https://www.drishvara.com/assets/logo/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255,255,255,0.06);
+      --surface-2: rgba(255,255,255,0.09);
+      --border: rgba(255,255,255,0.11);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #aeb9cb;
+      --gold: #c9a24a;
+      --danger: #ffb4a8;
+      --ok: #bce3c5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text-main);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(201,162,74,0.12), transparent 22%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 24px 20px 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      padding: 8px 0 34px;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 26px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.045);
+      border-radius: 26px;
+    }
+
+    .logo {
+      width: 62px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--text-soft);
+      line-height: 1.7;
+      max-width: 760px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--danger);
+      background: rgba(255,180,168,0.09);
+      border: 1px solid rgba(255,180,168,0.22);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 0.86rem;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 1.18rem;
+    }
+
+    .card p {
+      color: var(--text-soft);
+      line-height: 1.65;
+      margin: 0 0 14px;
+    }
+
+    .guidance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .mini {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 15px;
+      min-height: 110px;
+    }
+
+    .mini .label {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+      margin-bottom: 8px;
+    }
+
+    .mini .value {
+      color: var(--text-main);
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .blocked {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .note {
+      border-left: 3px solid var(--gold);
+      padding: 12px 14px;
+      background: rgba(201,162,74,0.08);
+      color: var(--text-soft);
+      border-radius: 14px;
+      line-height: 1.65;
+      margin-top: 12px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 0;
+      color: var(--text-soft);
+    }
+
+    .row span:last-child {
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 12px;
+      border: 1px solid rgba(201,162,74,0.5);
+      background: rgba(201,162,74,0.14);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 0.92rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 42px;
+      padding-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .guidance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-pill {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="insights.html">Insights</a>
+      <a href="submissions.html">Submissions</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <img src="assets/logo/logo.png" class="logo" alt="Drishvara Logo" />
+        <h1>Subscriber Dashboard</h1>
+        <p>Future premium space for daily personal guidance, profile context, saved submissions, and subscriber-only reflective tools.</p>
+      </div>
+      <div class="status-pill">Login/subscription integration pending</div>
+    </header>
+
+    <main class="grid">
+      <section class="card" data-subscriber-dashboard>
+        <h2>Daily Personal Guidance</h2>
+        <p>This section will unlock only after authentication, active subscription, consent, approved Knowledge Vault rules, and reviewed calculation methods are in place.</p>
+
+        <div class="guidance-grid">
+          <div class="mini">
+            <div class="label">Lucky Number</div>
+            <div class="value">Blocked</div>
+            <div class="blocked">Awaiting approved numerology/Panchang rule basis.</div>
+          </div>
+
+          <div class="mini">
+            <div class="label">Lucky Color</div>
+            <div class="value">Blocked</div>
+            <div class="blocked">Awaiting approved weekday, color, or planetary rule basis.</div>
+          </div>
+
+          <div class="mini">
+            <div class="label">Mantra</div>
+            <div class="value">Blocked</div>
+            <div class="blocked">No mantra will be shown until exact Devanagari text and source review are approved.</div>
+          </div>
+
+          <div class="mini">
+            <div class="label">Reflection</div>
+            <div class="value">Blocked</div>
+            <div class="blocked">Subscriber guidance remains scaffold-only at this stage.</div>
+          </div>
+        </div>
+
+        <div class="note">
+          Premium outputs will remain non-deterministic, reflective, and guarded. Drishvara will not claim guaranteed success, wealth, health, marriage, job, or lifespan outcomes.
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Access Status</h2>
+        <div class="list">
+          <div class="row"><strong>Authentication</strong><span>Not enabled</span></div>
+          <div class="row"><strong>Subscription Gate</strong><span>Not enabled</span></div>
+          <div class="row"><strong>Profile Storage</strong><span>Pending consent flow</span></div>
+          <div class="row"><strong>Daily Guidance</strong><span>Blocked</span></div>
+          <div class="row"><strong>Palm Image Upload</strong><span>Disabled</span></div>
+          <div class="row"><strong>Backend Submissions</strong><span>Pending</span></div>
+        </div>
+
+        <a href="submissions.html" class="cta">Prepare a submission →</a>
+      </aside>
+
+      <section class="card">
+        <h2>Profile Context</h2>
+        <p>Future subscriber profile fields will include date of birth, birth time, birth place, current location, preferred language, and consent flags.</p>
+        <div class="note">
+          No personal profile details are stored from this dashboard page yet.
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Subscriber Tools Roadmap</h2>
+        <div class="list">
+          <div class="row"><strong>Daily lucky number</strong><span>Future premium</span></div>
+          <div class="row"><strong>Daily lucky color</strong><span>Future premium</span></div>
+          <div class="row"><strong>Mantra</strong><span>Reviewed source only</span></div>
+          <div class="row"><strong>What to do / avoid</strong><span>Approved rules only</span></div>
+          <div class="row"><strong>Palmistry request</strong><span>Consent + private storage later</span></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Drishvara © 2026 · Subscriber dashboard scaffold</footer>
+  </div>
+
+  <script src="/assets/js/seo-runtime.js" defer></script>
+  <script src="/assets/js/site-language.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "version": "2026.04.30-b20c",
+  "module": "backend.subscriber_dashboard_schema",
+  "status": "scaffold",
+  "live_auth_enabled": false,
+  "live_subscription_gate_enabled": false,
+  "subscriber_dashboard_enabled": false,
+  "purpose": "Defines the future subscriber dashboard structure for Drishvara premium users before live authentication and subscription activation.",
+  "sections": [
+    {
+      "id": "access_status",
+      "label": "Access Status",
+      "status": "blocked_until_auth"
+    },
+    {
+      "id": "daily_guidance",
+      "label": "Daily Personal Guidance",
+      "status": "blocked_until_subscription_and_approved_rules",
+      "fields": [
+        "lucky_number",
+        "lucky_color",
+        "mantra",
+        "what_to_do",
+        "what_not_to_do",
+        "reflection_note"
+      ]
+    },
+    {
+      "id": "profile_context",
+      "label": "Profile Context",
+      "status": "blocked_until_auth_and_consent",
+      "fields": [
+        "date_of_birth",
+        "birth_time",
+        "birth_place",
+        "current_location",
+        "preferred_language"
+      ]
+    },
+    {
+      "id": "subscription_status",
+      "label": "Subscription Status",
+      "status": "blocked_until_payment_provider"
+    },
+    {
+      "id": "submission_history",
+      "label": "Submission History",
+      "status": "blocked_until_backend_intake"
+    },
+    {
+      "id": "palmistry_requests",
+      "label": "Palmistry Requests",
+      "status": "blocked_until_private_storage_and_consent"
+    }
+  ],
+  "guardrails": [
+    "Do not show premium daily guidance without login.",
+    "Do not show premium daily guidance without active subscription.",
+    "Do not show lucky number, lucky color, mantra, or do/don't guidance until approved Knowledge Vault rules are available.",
+    "Do not collect or display palm images until private storage and explicit consent are implemented.",
+    "Do not expose subscriber profile details publicly.",
+    "Do not connect payment or Supabase Auth in this scaffold batch."
+  ]
+}
