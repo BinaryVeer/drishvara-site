@@ -45,8 +45,8 @@ check(articleReader.includes("hindiBody?.article_html_hi || article.bodyHtml"), 
 const approvedItems = sidecar.items.filter((item) => item.status === "approved" && item.article_html_hi);
 
 check(
-  approvedItems.length > 0,
-  "At least one approved Hindi article body is available",
+  approvedItems.length >= 4,
+  "At least four approved Hindi article bodies are available",
   failures
 );
 
@@ -56,6 +56,31 @@ for (const item of approvedItems) {
   check(Boolean(item.summary_hi), "Approved Hindi body has Hindi summary", failures);
   check(Boolean(item.article_html_hi), "Approved Hindi body has Hindi article HTML", failures);
   check(String(item.article_html_hi || "").includes("<p>"), "Approved Hindi body contains paragraph HTML", failures);
+}
+
+
+const requiredFeaturedPaths = [
+  "articles/policy/advancing-digital-literacy-public-education-2026.html",
+  "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+  "articles/world/ai-future-warfare-2026.html",
+  "articles/spiritual/contemplating-impermanence-path-spiritual-liberation.html"
+];
+
+const approvedPathSet = new Set(
+  approvedItems.map((item) => item.path || item.sourcePath || item.article_path)
+);
+
+const missingFeatured = requiredFeaturedPaths.filter((path) => !approvedPathSet.has(path));
+
+check(
+  missingFeatured.length === 0,
+  "Featured Hindi body paths are covered",
+  failures
+);
+
+if (missingFeatured.length) {
+  console.log("Missing featured Hindi bodies:");
+  for (const path of missingFeatured) console.log(`- ${path}`);
 }
 
 console.log("");
