@@ -1,0 +1,32 @@
+{
+  "version": "2026.04.30-activation-01c",
+  "module": "activation.supabase_apply_decision",
+  "status": "decision_pack_only",
+  "live_apply_enabled": false,
+  "purpose": "Provides final Go/No-Go decision sheet and SQL Editor step order before Supabase migration apply.",
+  "decision_sheet": "docs/activation/supabase-apply-decision-sheet.md",
+  "sql_editor_step_order": "docs/activation/supabase-sql-editor-step-order.md",
+  "migration_file": "supabase/migrations/20260430_b20a_subscriber_backend_schema.sql",
+  "validation_sql": "supabase/validation/01_post_migration_validation.sql",
+  "must_pass_before_apply": [
+    "activation:supabase:preflight",
+    "activation:supabase:validation:preflight",
+    "supabase:schema:preflight",
+    "preactivation:preflight",
+    "content:preflight"
+  ],
+  "explicit_stop_after_apply": [
+    "do_not_enable_auth_yet",
+    "do_not_enable_payment_yet",
+    "do_not_enable_palm_upload_yet",
+    "do_not_enable_admin_backend_actions_yet",
+    "do_not_enable_subscriber_guidance_yet"
+  ],
+  "guardrails": [
+    "This stage does not apply the migration.",
+    "Migration apply must be a manual explicit decision.",
+    "Run validation SQL immediately after migration apply.",
+    "Stop after database validation; Auth/payment/premium features remain later stages.",
+    "Never place Supabase service role key in frontend code."
+  ]
+}
