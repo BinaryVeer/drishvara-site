@@ -16,7 +16,7 @@
     "drafts:review": "node scripts/review-drafts.js",
     "drafts:review:latest": "node scripts/review-drafts.js --latest",
     "bilingual:preflight": "node scripts/bilingual-preflight.js",
-    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight",
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight",
     "hindi-body:preflight": "node scripts/hindi-body-preflight.js",
     "hindi-draft:create": "node scripts/create-hindi-body-draft.js",
     "hindi-draft:review": "node scripts/review-hindi-body.js",
@@ -24,7 +24,9 @@
     "hindi-draft:publish-approved:dry-run": "node scripts/publish-approved-hindi-bodies.js --dryRun=true",
     "knowledge:preflight": "node scripts/knowledge-preflight.js",
     "panchang:engine": "node scripts/panchang-engine.js",
-    "panchang:preflight": "node scripts/panchang-preflight.js"
+    "panchang:preflight": "node scripts/panchang-preflight.js",
+    "subscriber-guidance:engine": "node scripts/subscriber-guidance-engine.js",
+    "subscriber-guidance:preflight": "node scripts/subscriber-guidance-preflight.js"
   },
   "repository": {
     "type": "git",

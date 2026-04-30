@@ -17,6 +17,8 @@ const requiredFiles = [
   "data/knowledge/submissions/feedback-schema.json",
   "data/knowledge/palmistry/palm-image-policy.json",
   "data/knowledge/subscribers/daily-guidance-schema.json",
+  "data/knowledge/subscribers/daily-guidance-methods.json",
+  "data/knowledge/subscribers/sample-subscriber-context.json",
   "data/knowledge/sanatan/mantra-policy.json",
 ];
 
@@ -57,6 +59,9 @@ const userSubmissionSchema = readJson("data/knowledge/submissions/user-submissio
 const feedbackSchema = readJson("data/knowledge/submissions/feedback-schema.json");
 const palmImagePolicy = readJson("data/knowledge/palmistry/palm-image-policy.json");
 const subscriberGuidance = readJson("data/knowledge/subscribers/daily-guidance-schema.json");
+const subscriberGuidanceMethods = readJson("data/knowledge/subscribers/daily-guidance-methods.json");
+const sampleSubscriberContext = readJson("data/knowledge/subscribers/sample-subscriber-context.json");
+
 const mantraPolicy = readJson("data/knowledge/sanatan/mantra-policy.json");
 
 
@@ -124,6 +129,16 @@ check(Boolean(subscriberGuidance.daily_output_fields?.mantra), "Subscriber guida
 check(Boolean(subscriberGuidance.daily_output_fields?.what_to_do), "Subscriber guidance includes what-to-do schema", failures);
 check(Boolean(subscriberGuidance.daily_output_fields?.what_not_to_do), "Subscriber guidance includes what-not-to-do schema", failures);
 check(subscriberGuidance.guardrails?.some((item) => item.includes("guaranteed success")), "Subscriber guidance blocks guaranteed outcome claims", failures);
+
+check(subscriberGuidanceMethods.public_output_enabled === false, "Subscriber guidance methods block public output", failures);
+check(subscriberGuidanceMethods.subscriber_output_enabled === false, "Subscriber guidance methods disabled at scaffold stage", failures);
+check(subscriberGuidanceMethods.guidance_components?.some((item) => item.id === "lucky_number"), "Subscriber guidance methods include lucky number", failures);
+check(subscriberGuidanceMethods.guidance_components?.some((item) => item.id === "lucky_color"), "Subscriber guidance methods include lucky color", failures);
+check(subscriberGuidanceMethods.guidance_components?.some((item) => item.id === "mantra"), "Subscriber guidance methods include mantra", failures);
+check(subscriberGuidanceMethods.guidance_components?.some((item) => item.id === "what_to_do"), "Subscriber guidance methods include what-to-do", failures);
+check(subscriberGuidanceMethods.guidance_components?.some((item) => item.id === "what_not_to_do"), "Subscriber guidance methods include what-not-to-do", failures);
+check(sampleSubscriberContext.consent_to_generate_personal_guidance === true, "Sample subscriber context has consent", failures);
+
 
 check(mantraPolicy.public_output_enabled === false, "Mantra output is disabled until reviewed", failures);
 check(mantraPolicy.required_before_showing_mantra?.includes("exact Devanagari text"), "Mantra policy requires exact Devanagari text", failures);

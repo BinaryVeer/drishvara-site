@@ -1,0 +1,114 @@
+{
+  "version": "2026.04.30-b18c",
+  "module": "subscribers.daily_guidance_methods",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "subscriber_output_enabled": false,
+  "login_required": true,
+  "subscription_required": true,
+  "purpose": "Defines the controlled method registry for future subscriber daily guidance: lucky number, lucky color, mantra, what to do, what not to do, and reflection note.",
+  "activation_rule": "No subscriber guidance should be shown until subscriber authentication, subscription validation, user consent, approved Panchang calculation, approved numerology rules, approved mantra policy, and reviewed guidance rules are in place.",
+  "guidance_components": [
+    {
+      "id": "lucky_number",
+      "label": "Lucky Number",
+      "status": "blocked_until_rule_approval",
+      "required_basis": [
+        "approved_numerology_rule",
+        "approved_date_rule_or_panchang_context"
+      ],
+      "public_use": false,
+      "subscriber_use": false
+    },
+    {
+      "id": "lucky_color",
+      "label": "Lucky Color",
+      "status": "blocked_until_rule_approval",
+      "required_basis": [
+        "approved_color_rule",
+        "approved_weekday_or_planetary_context"
+      ],
+      "public_use": false,
+      "subscriber_use": false
+    },
+    {
+      "id": "mantra",
+      "label": "Mantra",
+      "status": "blocked_until_reviewed_mantra_source",
+      "required_basis": [
+        "exact_devanagari_text",
+        "deity_or_context",
+        "approved_source_id",
+        "review_status_approved"
+      ],
+      "public_use": false,
+      "subscriber_use": false
+    },
+    {
+      "id": "what_to_do",
+      "label": "What to do",
+      "status": "blocked_until_guidance_rule_approval",
+      "required_basis": [
+        "approved_guidance_rule",
+        "safe_reflective_language"
+      ],
+      "public_use": false,
+      "subscriber_use": false
+    },
+    {
+      "id": "what_not_to_do",
+      "label": "What not to do",
+      "status": "blocked_until_guidance_rule_approval",
+      "required_basis": [
+        "approved_guidance_rule",
+        "safe_reflective_language"
+      ],
+      "public_use": false,
+      "subscriber_use": false
+    },
+    {
+      "id": "reflection_note",
+      "label": "Reflection Note",
+      "status": "blocked_until_guidance_rule_approval",
+      "required_basis": [
+        "approved_guidance_rule",
+        "non_deterministic_tone"
+      ],
+      "public_use": false,
+      "subscriber_use": false
+    }
+  ],
+  "input_requirements": {
+    "minimum": [
+      "subscriber_id",
+      "guidance_date",
+      "preferred_language",
+      "consent_to_generate_personal_guidance"
+    ],
+    "personalized_basic": [
+      "date_of_birth"
+    ],
+    "personalized_advanced": [
+      "birth_time",
+      "birth_place",
+      "current_location"
+    ],
+    "panchang_context": [
+      "date",
+      "place_name",
+      "latitude",
+      "longitude",
+      "timezone"
+    ]
+  },
+  "guardrails": [
+    "Do not generate subscriber guidance for non-authenticated users.",
+    "Do not generate subscriber guidance without active subscription status.",
+    "Do not generate subscriber guidance without consent.",
+    "Do not invent mantra text.",
+    "Do not claim guaranteed success, wealth, health, marriage, job, or lifespan outcomes.",
+    "Do not provide medical, legal, or financial instructions.",
+    "Do not expose subscriber data publicly.",
+    "Do not use unreviewed Panchang, numerology, mantra, or guidance rules."
+  ]
+}
