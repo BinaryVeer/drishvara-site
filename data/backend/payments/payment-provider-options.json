@@ -1,0 +1,62 @@
+{
+  "version": "2026.04.30-b21",
+  "module": "payments.provider_options",
+  "status": "planning",
+  "live_provider_selected": false,
+  "purpose": "Compares possible future payment provider categories without enabling live payment integration.",
+  "provider_categories": [
+    {
+      "id": "india_payment_gateway",
+      "label": "India-focused payment gateway",
+      "fit": "Best for INR subscriptions, UPI/cards/netbanking, and India-first launch.",
+      "examples_to_evaluate_later": [
+        "Razorpay",
+        "Cashfree",
+        "PhonePe PG"
+      ],
+      "status": "to_be_evaluated"
+    },
+    {
+      "id": "global_subscription_provider",
+      "label": "Global subscription provider",
+      "fit": "Useful if Drishvara later targets international subscribers.",
+      "examples_to_evaluate_later": [
+        "Stripe",
+        "Paddle"
+      ],
+      "status": "to_be_evaluated"
+    },
+    {
+      "id": "manual_subscription",
+      "label": "Manual / invite-only subscription",
+      "fit": "Useful for early controlled pilots with known subscribers before automated payments.",
+      "examples_to_evaluate_later": [
+        "manual invoice",
+        "admin-created subscription"
+      ],
+      "status": "safe_for_initial_private_testing"
+    }
+  ],
+  "selection_criteria": [
+    "INR support",
+    "recurring subscription support",
+    "UPI support",
+    "webhook reliability",
+    "refund management",
+    "invoice / tax document support",
+    "developer experience",
+    "pricing",
+    "data protection and compliance fit"
+  ],
+  "current_recommendation": {
+    "phase_1": "manual_subscription_for_private_testing",
+    "phase_2": "india_payment_gateway_for_public_india_launch",
+    "phase_3": "global_subscription_provider_if_international_expansion_is_required"
+  },
+  "guardrails": [
+    "Do not store card details in Drishvara database.",
+    "Use provider-hosted checkout or secure payment flow.",
+    "Webhook verification is mandatory before updating subscription status.",
+    "Never expose provider secret keys in frontend code."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "version": "2026.04.30-b21",
+  "module": "payments.subscription_plans",
+  "status": "planning",
+  "live_payment_enabled": false,
+  "currency_primary": "INR",
+  "purpose": "Defines future Drishvara subscription tiers before live payment provider integration.",
+  "plans": [
+    {
+      "plan_code": "free",
+      "label": "Free Reader",
+      "billing_cycle": "none",
+      "price_inr": 0,
+      "status": "active_for_public_site",
+      "features": [
+        "public homepage",
+        "public articles",
+        "insights archive",
+        "submission preparation scaffold"
+      ],
+      "blocked_features": [
+        "subscriber dashboard active data",
+        "daily lucky number",
+        "daily lucky color",
+        "mantra",
+        "what to do / what not to do",
+        "premium personal guidance",
+        "palmistry request processing"
+      ]
+    },
+    {
+      "plan_code": "premium_monthly",
+      "label": "Drishvara Premium Monthly",
+      "billing_cycle": "monthly",
+      "price_inr": null,
+      "status": "price_to_be_finalized",
+      "features": [
+        "subscriber dashboard",
+        "daily personal guidance after rule approval",
+        "lucky number after rule approval",
+        "lucky color after rule approval",
+        "mantra after reviewed source approval",
+        "what to do / what not to do after rule approval",
+        "future submission history"
+      ],
+      "blocked_until_later": [
+        "palm image upload",
+        "live premium Panchang",
+        "advanced planetary guidance"
+      ]
+    },
+    {
+      "plan_code": "premium_yearly",
+      "label": "Drishvara Premium Yearly",
+      "billing_cycle": "yearly",
+      "price_inr": null,
+      "status": "price_to_be_finalized",
+      "features": [
+        "all premium monthly features",
+        "future yearly continuity archive",
+        "future monthly personal guidance summary"
+      ],
+      "blocked_until_later": [
+        "palm image upload",
+        "live premium Panchang",
+        "advanced planetary guidance"
+      ]
+    },
+    {
+      "plan_code": "founder_circle",
+      "label": "Founder Circle",
+      "billing_cycle": "manual_invite",
+      "price_inr": null,
+      "status": "future_manual_plan",
+      "features": [
+        "premium access",
+        "future early feature access",
+        "future priority feedback review"
+      ],
+      "blocked_until_later": [
+        "any deterministic personal prediction",
+        "medical / legal / financial advice"
+      ]
+    }
+  ],
+  "guardrails": [
+    "Do not activate paid plans until payment provider, webhook, refund policy, and terms are finalized.",
+    "Do not sell premium guidance as guaranteed prediction.",
+    "Do not promise health, wealth, marriage, job, or lifespan outcomes.",
+    "Subscriber guidance must still require approved Knowledge Vault rules and user consent.",
+    "Plan prices are intentionally null until business decision and compliance review."
+  ]
+}

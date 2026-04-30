@@ -1,0 +1,78 @@
+{
+  "version": "2026.04.30-b21",
+  "module": "payments.subscription_lifecycle",
+  "status": "planning",
+  "live_webhook_enabled": false,
+  "subscription_statuses": [
+    "free",
+    "trial",
+    "active",
+    "past_due",
+    "cancelled",
+    "expired"
+  ],
+  "status_access_rules": {
+    "free": {
+      "subscriber_dashboard": false,
+      "premium_guidance": false
+    },
+    "trial": {
+      "subscriber_dashboard": true,
+      "premium_guidance": "only_if_rules_approved"
+    },
+    "active": {
+      "subscriber_dashboard": true,
+      "premium_guidance": "only_if_rules_approved"
+    },
+    "past_due": {
+      "subscriber_dashboard": true,
+      "premium_guidance": false
+    },
+    "cancelled": {
+      "subscriber_dashboard": false,
+      "premium_guidance": false
+    },
+    "expired": {
+      "subscriber_dashboard": false,
+      "premium_guidance": false
+    }
+  },
+  "webhook_event_map": {
+    "checkout_completed": {
+      "target_table": "subscriptions",
+      "set_status": "active",
+      "notes": "Only after signature verification."
+    },
+    "subscription_activated": {
+      "target_table": "subscriptions",
+      "set_status": "active",
+      "notes": "Set current_period_start and current_period_end."
+    },
+    "payment_failed": {
+      "target_table": "subscriptions",
+      "set_status": "past_due",
+      "notes": "Do not delete user access history."
+    },
+    "subscription_cancelled": {
+      "target_table": "subscriptions",
+      "set_status": "cancelled",
+      "notes": "Access should end based on provider period rules."
+    },
+    "subscription_expired": {
+      "target_table": "subscriptions",
+      "set_status": "expired",
+      "notes": "Block premium guidance."
+    },
+    "refund_processed": {
+      "target_table": "subscriptions",
+      "set_status": "cancelled",
+      "notes": "Manual review may be required."
+    }
+  },
+  "guardrails": [
+    "Webhook signature verification is mandatory.",
+    "Payment provider secret must remain server-side only.",
+    "Subscription table must be updated only from verified server-side webhook or admin process.",
+    "Subscriber guidance remains blocked if Knowledge Vault rules are not approved, even if payment is active."
+  ]
+}
