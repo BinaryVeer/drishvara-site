@@ -6,6 +6,7 @@ const root = process.cwd();
 const requiredFiles = [
   "data/knowledge/sources/source-registry.json",
   "data/knowledge/sanatan/panchang-methods.json",
+  "data/knowledge/sanatan/panchang-engine-schema.json",
   "data/knowledge/sanatan/festival-rules.json",
   "data/knowledge/sanatan/vedic-guidance-taxonomy.json",
   "data/knowledge/numerology/numerology-rules.json",
@@ -45,6 +46,7 @@ for (const file of requiredFiles) {
 
 const sourceRegistry = readJson("data/knowledge/sources/source-registry.json");
 const panchangMethods = readJson("data/knowledge/sanatan/panchang-methods.json");
+const panchangEngineSchema = readJson("data/knowledge/sanatan/panchang-engine-schema.json");
 const festivalRules = readJson("data/knowledge/sanatan/festival-rules.json");
 const guidanceTaxonomy = readJson("data/knowledge/sanatan/vedic-guidance-taxonomy.json");
 const numerologyRules = readJson("data/knowledge/numerology/numerology-rules.json");
@@ -65,6 +67,11 @@ check(sourceRegistry.sources.length >= 4, "Source registry has seed source recor
 check(sourceRegistry.public_output_rule?.includes("No Panchang"), "Source registry has public output rule", failures);
 
 check(panchangMethods.public_output_enabled === false, "Panchang public output is disabled at scaffold stage", failures);
+
+check(panchangEngineSchema.public_output_enabled === false, "Panchang engine schema public output is disabled", failures);
+check(panchangEngineSchema.restricted_until_method_review?.includes("tithi"), "Panchang engine schema restricts tithi until review", failures);
+check(panchangEngineSchema.restricted_until_method_review?.includes("nakshatra"), "Panchang engine schema restricts nakshatra until review", failures);
+
 check(Array.isArray(panchangMethods.calculation_fields), "Panchang methods define calculation fields", failures);
 check(panchangMethods.required_context?.location?.includes("latitude"), "Panchang requires location latitude", failures);
 check(panchangMethods.required_context?.astronomical_basis?.includes("sunrise"), "Panchang requires sunrise basis", failures);

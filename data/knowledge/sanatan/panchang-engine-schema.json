@@ -1,0 +1,50 @@
+{
+  "version": "2026.04.30-b18b",
+  "module": "sanatan.panchang.engine_schema",
+  "status": "scaffold",
+  "public_output_enabled": false,
+  "purpose": "Defines the controlled local Panchang calculation engine input/output schema. This scaffold does not publish public Panchang claims.",
+  "required_input": {
+    "date": "YYYY-MM-DD",
+    "place_name": "string",
+    "latitude": "number between -90 and 90",
+    "longitude": "number between -180 and 180",
+    "timezone": "IANA timezone, e.g. Asia/Kolkata"
+  },
+  "safe_scaffold_outputs": [
+    "vara/calendar weekday"
+  ],
+  "restricted_until_method_review": [
+    "tithi",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "paksha",
+    "masa",
+    "sunrise",
+    "sunset",
+    "moonrise",
+    "moonset",
+    "sun_rashi",
+    "moon_rashi",
+    "ayanamsha-based planetary positions"
+  ],
+  "output_shape": {
+    "version": "string",
+    "module": "sanatan.panchang.engine_output",
+    "public_output_enabled": false,
+    "calculation_status": "scaffold_only | calculated_under_review | approved",
+    "review_status": "under_review | approved | rejected",
+    "input": {},
+    "method": {},
+    "audit": {},
+    "safe_calendar_fields": {},
+    "panchang_fields": {}
+  },
+  "guardrails": [
+    "Do not display Panchang output publicly until method is reviewed.",
+    "Do not display tithi, nakshatra, yoga, karana, sunrise, moonrise, or planetary position from placeholder logic.",
+    "Every output must preserve location, timezone, method version, and review status.",
+    "Homepage integration is blocked until approved calculation method is available."
+  ]
+}
