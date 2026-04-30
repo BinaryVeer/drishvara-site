@@ -1,0 +1,121 @@
+{
+  "version": "2026.04.30-b20b",
+  "module": "backend.auth_access_model",
+  "status": "scaffold",
+  "live_auth_enabled": false,
+  "live_subscription_gate_enabled": false,
+  "purpose": "Defines Drishvara authentication, subscription access, and premium module visibility model before live implementation.",
+  "roles": {
+    "anonymous": {
+      "description": "Visitor without login.",
+      "allowed": [
+        "view_homepage",
+        "view_public_articles",
+        "view_insights",
+        "view_about",
+        "view_contact",
+        "prepare_submission_local_scaffold"
+      ],
+      "blocked": [
+        "subscriber_dashboard",
+        "daily_personal_guidance",
+        "palm_image_upload",
+        "backend_submission_storage",
+        "profile_storage"
+      ]
+    },
+    "free_registered": {
+      "description": "Logged-in user without active subscription.",
+      "allowed": [
+        "view_public_articles",
+        "manage_basic_profile_future",
+        "submit_feedback_future"
+      ],
+      "blocked": [
+        "daily_personal_guidance",
+        "lucky_number",
+        "lucky_color",
+        "mantra",
+        "what_to_do",
+        "what_not_to_do",
+        "premium_panchang_guidance",
+        "palm_image_reading"
+      ]
+    },
+    "subscriber": {
+      "description": "Logged-in user with active subscription.",
+      "allowed": [
+        "subscriber_dashboard",
+        "daily_personal_guidance_when_rules_approved",
+        "profile_based_guidance_when_consent_given",
+        "future_private_submission_history"
+      ],
+      "blocked_until_later_batches": [
+        "palm_image_upload",
+        "live_premium_panchang",
+        "payment_self_service"
+      ]
+    },
+    "admin_reviewer": {
+      "description": "Future internal reviewer role.",
+      "allowed": [
+        "review_submissions",
+        "review_feedback",
+        "review_hindi_drafts",
+        "review_knowledge_updates",
+        "review_palmistry_requests"
+      ],
+      "blocked_until_later_batches": [
+        "production_admin_panel"
+      ]
+    }
+  },
+  "subscription_statuses": [
+    "free",
+    "trial",
+    "active",
+    "past_due",
+    "cancelled",
+    "expired"
+  ],
+  "premium_modules": {
+    "daily_guidance": {
+      "requires_login": true,
+      "requires_active_subscription": true,
+      "requires_user_consent": true,
+      "requires_approved_rules": true,
+      "public_output_allowed": false,
+      "fields": [
+        "lucky_number",
+        "lucky_color",
+        "mantra",
+        "what_to_do",
+        "what_not_to_do",
+        "reflection_note"
+      ]
+    },
+    "palmistry": {
+      "requires_login": true,
+      "requires_active_subscription": true,
+      "requires_private_storage": true,
+      "requires_explicit_image_consent": true,
+      "public_output_allowed": false,
+      "live_upload_enabled": false
+    },
+    "panchang_guidance": {
+      "requires_reviewed_calculation_method": true,
+      "requires_location_context": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false
+    }
+  },
+  "live_activation_blockers": [
+    "Supabase migration must be reviewed and applied",
+    "Auth provider must be configured",
+    "Subscription/payment provider must be selected",
+    "Vercel environment variables must be configured",
+    "RLS policies must be tested",
+    "Private storage bucket must be created before palm images",
+    "Admin/reviewer access model must be finalized"
+  ]
+}
