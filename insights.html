@@ -433,6 +433,7 @@
   <meta name="twitter:description" content="Explore Drishvara's public archive of featured reads across spirituality, sports, world affairs, media and public programmes." />
   <meta name="twitter:image" content="https://www.drishvara.com/assets/logo/logo.png" />
 
+  <link rel="stylesheet" href="/assets/css/public-preview-polish.css" />
 </head>
 <body>
   <div class="page">
@@ -728,7 +729,7 @@
         <div class="archive-card">
           <div class="topic-name">${escapeHtml(topic)}</div>
           <div class="topic-count">${count} indexed read${count === 1 ? "" : "s"}</div>
-          <a href="#" data-topic-jump="${escapeHtml(topic)}">View theme</a>
+          <span data-placeholder-disabled="true"  aria-disabled="true" tabindex="-1" data-topic-jump="${escapeHtml(topic)}">View theme</span>
         </div>
       `).join("");
 
