@@ -16,7 +16,8 @@
     "drafts:review": "node scripts/review-drafts.js",
     "drafts:review:latest": "node scripts/review-drafts.js --latest",
     "bilingual:preflight": "node scripts/bilingual-preflight.js",
-    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight"
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight",
+    "hindi-body:preflight": "node scripts/hindi-body-preflight.js"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,68 @@
+import fs from "node:fs";
+import path from "node:path";
+
+const root = process.cwd();
+
+const sidecarPath = path.join(root, "data", "i18n", "article-body-hi.json");
+const articleReaderPath = path.join(root, "article.html");
+
+function read(file) {
+  return fs.readFileSync(file, "utf8");
+}
+
+function readJson(file) {
+  return JSON.parse(read(file));
+}
+
+function check(condition, label, failures, warning = false) {
+  if (condition) {
+    console.log(`✅ ${label}`);
+  } else if (warning) {
+    console.log(`⚠️ ${label}`);
+  } else {
+    console.log(`❌ ${label}`);
+    failures.push(label);
+  }
+}
+
+const failures = [];
+
+console.log("Drishvara Hindi article body preflight");
+console.log("");
+
+check(fs.existsSync(sidecarPath), "Hindi article body sidecar exists", failures);
+check(fs.existsSync(articleReaderPath), "Article reader exists", failures);
+
+const sidecar = readJson(sidecarPath);
+const articleReader = read(articleReaderPath);
+
+check(sidecar.version === "1.0.0", "Hindi sidecar has version", failures);
+check(Array.isArray(sidecar.items), "Hindi sidecar has items array", failures);
+check(articleReader.includes("findHindiBodyForPath"), "Article reader can look up Hindi body sidecar", failures);
+check(articleReader.includes("article_html_hi"), "Article reader supports article_html_hi", failures);
+check(articleReader.includes("hindiBody?.article_html_hi || article.bodyHtml"), "Article reader falls back to English body", failures);
+
+const approvedItems = sidecar.items.filter((item) => item.status === "approved" && item.article_html_hi);
+
+check(
+  approvedItems.length > 0,
+  "At least one approved Hindi article body is available",
+  failures,
+  true
+);
+
+console.log("");
+console.log("Hindi body readiness:");
+console.log(`- Sidecar items: ${sidecar.items.length}`);
+console.log(`- Approved Hindi bodies: ${approvedItems.length}`);
+console.log("- Empty sidecar is acceptable at B16A scaffold stage.");
+
+if (failures.length) {
+  console.log("");
+  console.log("Hindi body preflight failed:");
+  for (const failure of failures) console.log(`- ${failure}`);
+  process.exit(1);
+}
+
+console.log("");
+console.log("Hindi article body preflight passed.");

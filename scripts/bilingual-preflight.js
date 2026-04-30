@@ -34,6 +34,8 @@ console.log("");
 check(exists("docs/native-bilingual-content-plan.md"), "Native bilingual content plan exists", failures);
 check(exists("data/i18n/content-schema.json"), "Bilingual content schema exists", failures);
 check(exists("data/i18n/hindi-metadata-overrides.json"), "Hindi metadata override file exists", failures);
+check(exists("data/i18n/article-body-hi.json"), "Hindi article body sidecar exists", failures);
+check(exists("scripts/hindi-body-preflight.js"), "Hindi body preflight script exists", failures);
 check(exists("scripts/apply-bilingual-metadata.js"), "Bilingual metadata apply script exists", failures);
 check(exists("assets/js/site-language.js"), "Native site language controller exists", failures);
 check(exists("article.html"), "Article reader exists", failures);
@@ -61,6 +63,8 @@ check(insightsHtml.includes("localizedTitle("), "Insights supports bilingual tit
 check(insightsHtml.includes("localizedSummary("), "Insights supports bilingual summary rendering", failures);
 check(articleHtml.includes("findIndexItemForPath"), "Article reader can resolve bilingual index metadata", failures);
 check(articleHtml.includes("localizedField(indexItem"), "Article reader uses bilingual index title/summary fallback", failures);
+check(articleHtml.includes("findHindiBodyForPath"), "Article reader supports Hindi body sidecar lookup", failures);
+check(articleHtml.includes("article_html_hi"), "Article reader supports Hindi article body field", failures);
 
 const overrides = readJson("data/i18n/hindi-metadata-overrides.json");
 check(Array.isArray(overrides.items), "Hindi metadata overrides has items array", failures);

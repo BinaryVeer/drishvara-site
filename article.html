@@ -705,6 +705,35 @@
     }
 
 
+
+    async function findHindiBodyForPath(path) {
+      if (currentContentLanguage() !== "hi") return null;
+
+      try {
+        const response = await fetch("data/i18n/article-body-hi.json", { cache: "no-store" });
+        if (!response.ok) return null;
+
+        const data = await response.json();
+        const items = Array.isArray(data.items) ? data.items : [];
+
+        const match = items.find((item) => {
+          if (!item || item.status !== "approved") return false;
+          return item.path === path || item.sourcePath === path || item.article_path === path;
+        });
+
+        if (!match || !match.article_html_hi) return null;
+
+        return {
+          title_hi: match.title_hi || "",
+          summary_hi: match.summary_hi || "",
+          article_html_hi: match.article_html_hi,
+          meta_hi: match.meta_hi || "दृश्वर लेख"
+        };
+      } catch {
+        return null;
+      }
+    }
+
     async function findIndexItemForPath(path) {
       try {
         const response = await fetch("data/article-index.json", { cache: "no-store" });
@@ -737,11 +766,13 @@
           const json = await response.json();
           const article = extractJsonArticle(json, path);
           const indexItem = await findIndexItemForPath(path);
+          const hindiBody = await findHindiBodyForPath(path);
+
           setReader(
-            localizedField(indexItem, "title", article.title),
-            localizedField(indexItem, "summary", article.desc),
-            article.meta,
-            article.bodyHtml
+            hindiBody?.title_hi || localizedField(indexItem, "title", article.title),
+            hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc),
+            hindiBody?.meta_hi || article.meta,
+            hindiBody?.article_html_hi || article.bodyHtml
           );
           return;
         }
@@ -749,11 +780,13 @@
         const html = await response.text();
         const article = extractHtmlArticle(html, path);
         const indexItem = await findIndexItemForPath(path);
+        const hindiBody = await findHindiBodyForPath(path);
+
         setReader(
-          localizedField(indexItem, "title", article.title),
-          localizedField(indexItem, "summary", article.desc),
-          article.meta,
-          article.bodyHtml
+          hindiBody?.title_hi || localizedField(indexItem, "title", article.title),
+          hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc),
+          hindiBody?.meta_hi || article.meta,
+          hindiBody?.article_html_hi || article.bodyHtml
         );
       } catch (error) {
         showError("Article file could not be loaded.", error.message || String(error));
