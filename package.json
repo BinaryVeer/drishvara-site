@@ -8,7 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:article-index": "node scripts/build-homepage-index.js",
     "refresh:homepage": "node scripts/refresh-homepage.js",
-    "check:homepage": "node scripts/refresh-homepage.js"
+    "check:homepage": "node scripts/refresh-homepage.js",
+    "publish:local-check": "npm run refresh:homepage && node scripts/publish-local-check.js",
+    "pipeline:preflight": "npm run publish:local-check"
   },
   "repository": {
     "type": "git",

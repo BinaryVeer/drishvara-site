@@ -36,6 +36,19 @@ const PUBLISH_CATEGORIES = [
   "public_programmes"
 ];
 
+const ARTICLE_INDEX_PATH = "data/article-index.json";
+const HOMEPAGE_UI_PATH = "data/homepage-ui.json";
+
+const PIPELINE_ONLY_TAGS = new Set([
+  "Draft",
+  "Plans",
+  "Signals",
+  "Daily Candidate",
+  "Daily Context",
+  "Sports Context",
+  "Homepage"
+]);
+
 function toSlug(value) {
   return String(value || "")
     .toLowerCase()
@@ -293,6 +306,292 @@ function encodeURIComponentPath(path) {
     .map((part) => encodeURIComponent(part))
     .join("/");
 }
+
+function getFileNameFromPath(pathValue) {
+  return String(pathValue || "").split("/").pop() || "";
+}
+
+function getFolderFromArticlePath(pathValue) {
+  return getFileNameFromPath(pathValue).replace(/\.html$/i, "");
+}
+
+function normalizeDateForIndex(value, fallbackDate) {
+  const raw = safeText(value);
+  const parsed = raw ? new Date(raw) : new Date(`${fallbackDate}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime())) return fallbackDate;
+  return parsed.toISOString().slice(0, 10);
+}
+
+function makePublishedIndexItem({
+  categoryKey,
+  categoryMeta,
+  draftPacket,
+  articlePath,
+  articleTitle,
+  articleSlug,
+  today
+}) {
+  const title = safeText(articleTitle, `${categoryMeta.label} Insight`);
+  const summary = safeText(
+    draftPacket?.summary || draftPacket?.subtitle,
+    "A published Drishvara read from the daily editorial cycle."
+  );
+
+  return {
+    title,
+    tag: safeText(categoryMeta?.label, categoryKey),
+    summary,
+    folder: sanitizeSlug(articleSlug || getFolderFromArticlePath(articlePath) || title),
+    source: "articles",
+    sourcePath: articlePath,
+    path: articlePath,
+    url: `article.html?path=${encodeURIComponent(articlePath)}`,
+    directUrl: articlePath,
+    date: normalizeDateForIndex(draftPacket?.published_at || draftPacket?.date, today),
+    image: safeText(draftPacket?.image_path || draftPacket?.image)
+  };
+}
+
+function normalizeIndexItem(item) {
+  if (!item || typeof item !== "object") return null;
+
+  const pathValue = safeText(item.path || item.sourcePath || item.directUrl);
+  const title = safeText(item.title);
+
+  if (!pathValue || !title) return null;
+
+  const source = safeText(item.source, pathValue.startsWith("articles/") ? "articles" : "generated");
+  const tag = safeText(item.tag || item.category || item.section, source === "articles" ? "Drishvara" : "Pipeline");
+
+  return {
+    title,
+    tag,
+    summary: safeText(item.summary, "A Drishvara indexed read."),
+    folder: safeText(item.folder, getFolderFromArticlePath(pathValue)),
+    source,
+    sourcePath: pathValue,
+    path: pathValue,
+    url: safeText(item.url, `article.html?path=${encodeURIComponent(pathValue)}`),
+    directUrl: safeText(item.directUrl, pathValue),
+    date: normalizeDateForIndex(item.date || item.publishedAt || item.createdAt, new Date().toISOString().slice(0, 10)),
+    image: safeText(item.image)
+  };
+}
+
+function buildArchiveMap(items) {
+  const byDate = {};
+
+  for (const item of items) {
+    byDate[item.date] ||= [];
+    byDate[item.date].push({
+      title: item.title,
+      tag: item.tag,
+      folder: item.folder,
+      url: item.url,
+      path: item.path,
+      source: item.source
+    });
+  }
+
+  return byDate;
+}
+
+function buildTopicMap(items) {
+  const topics = {};
+
+  for (const item of items) {
+    topics[item.tag] ||= 0;
+    topics[item.tag] += 1;
+  }
+
+  return topics;
+}
+
+function rebuildArticleIndex(existingIndex, newPublishedItems) {
+  const map = new Map();
+  const existingItems = Array.isArray(existingIndex?.items)
+    ? existingIndex.items
+    : Array.isArray(existingIndex?.publishedItems)
+      ? existingIndex.publishedItems
+      : [];
+
+  for (const rawItem of existingItems) {
+    const item = normalizeIndexItem(rawItem);
+    if (!item) continue;
+    map.set(item.path, item);
+  }
+
+  for (const rawItem of newPublishedItems) {
+    const item = normalizeIndexItem(rawItem);
+    if (!item) continue;
+    map.set(item.path, item);
+  }
+
+  const sorted = [...map.values()].sort((a, b) => {
+    if (a.date !== b.date) return b.date.localeCompare(a.date);
+    if (a.source !== b.source) return a.source.localeCompare(b.source);
+    return a.title.localeCompare(b.title);
+  });
+
+  const publishedItems = sorted.filter((item) => item.source === "articles");
+  const publicLatest = publishedItems.slice(0, 8);
+
+  return {
+    ...(existingIndex && typeof existingIndex === "object" ? existingIndex : {}),
+    generatedAt: new Date().toISOString(),
+    total: sorted.length,
+    publicTotal: publishedItems.length,
+    latest: sorted.slice(0, 8),
+    publicLatest,
+    items: sorted,
+    publishedItems,
+    byDate: buildArchiveMap(sorted),
+    publicByDate: buildArchiveMap(publishedItems),
+    topics: buildTopicMap(sorted),
+    publicTopics: buildTopicMap(publishedItems)
+  };
+}
+
+function updateHomepageUiFromPublicIndex(homepageUi, indexData) {
+  const ui = homepageUi && typeof homepageUi === "object" ? homepageUi : {};
+  const source = Array.isArray(indexData.publicLatest) && indexData.publicLatest.length
+    ? indexData.publicLatest
+    : Array.isArray(indexData.publishedItems)
+      ? indexData.publishedItems.slice(0, 4)
+      : [];
+
+  if (!source.length) return ui;
+
+  ui.featuredReads = source.slice(0, 4).map((item) => ({
+    title: item.title,
+    tag: item.tag,
+    summary: item.summary,
+    folder: item.folder,
+    url: item.url,
+    sourcePath: item.sourcePath,
+    date: item.date
+  }));
+
+  ui.readingGuide = {
+    ...(ui.readingGuide || {}),
+    title: "Today’s Reading Guide",
+    intro: "A short guided path through the latest published Drishvara reads.",
+    items: source.slice(0, 3).map((item, index) => {
+      const lead = ["Start with", "Then move to", "End with"][index] || "Read";
+      return `${lead} “${item.title}”.`;
+    })
+  };
+
+  ui.openDay = {
+    ...(ui.openDay || {}),
+    title: "Open a Day in Drishvara",
+    subtitle: `Explore ${indexData.publicTotal || source.length} published reads by date and theme.`
+  };
+
+  return ui;
+}
+
+async function readGitHubJsonOrDefault({ token, owner, repo, branch, path, fallback }) {
+  try {
+    const text = await getGitHubFileContent({
+      token,
+      owner,
+      repo,
+      path,
+      branch
+    });
+    return JSON.parse(text);
+  } catch (error) {
+    const message = error?.message || "";
+    if (message.includes("404") || message.includes("missing")) {
+      return fallback;
+    }
+    throw error;
+  }
+}
+
+function assertPublicIndexSafe(indexData, homepageUi) {
+  const publicLatest = Array.isArray(indexData.publicLatest) ? indexData.publicLatest : [];
+  const featuredReads = Array.isArray(homepageUi.featuredReads) ? homepageUi.featuredReads : [];
+
+  if (!publicLatest.length) {
+    throw new Error("Public discovery refresh failed: publicLatest is empty");
+  }
+
+  const nonPublicLatest = publicLatest.filter((item) => item.source !== "articles");
+  if (nonPublicLatest.length) {
+    throw new Error("Public discovery refresh failed: publicLatest contains non-article items");
+  }
+
+  const pipelineFeatured = featuredReads.filter((item) => PIPELINE_ONLY_TAGS.has(item.tag));
+  if (pipelineFeatured.length) {
+    throw new Error("Public discovery refresh failed: homepage featuredReads contains pipeline-only tags");
+  }
+}
+
+async function refreshPublicDiscoveryData({
+  token,
+  owner,
+  repo,
+  branch,
+  today,
+  publishedItems
+}) {
+  const existingIndex = await readGitHubJsonOrDefault({
+    token,
+    owner,
+    repo,
+    branch,
+    path: ARTICLE_INDEX_PATH,
+    fallback: {}
+  });
+
+  const indexData = rebuildArticleIndex(existingIndex, publishedItems);
+
+  const existingHomepageUi = await readGitHubJsonOrDefault({
+    token,
+    owner,
+    repo,
+    branch,
+    path: HOMEPAGE_UI_PATH,
+    fallback: {}
+  });
+
+  const homepageUi = updateHomepageUiFromPublicIndex(existingHomepageUi, indexData);
+
+  assertPublicIndexSafe(indexData, homepageUi);
+
+  await upsertGitHubFile({
+    token,
+    owner,
+    repo,
+    branch,
+    path: ARTICLE_INDEX_PATH,
+    message: `Refresh public article index after publish for ${today}`,
+    contentString: `${JSON.stringify(indexData, null, 2)}\n`
+  });
+
+  await upsertGitHubFile({
+    token,
+    owner,
+    repo,
+    branch,
+    path: HOMEPAGE_UI_PATH,
+    message: `Refresh homepage public reads after publish for ${today}`,
+    contentString: `${JSON.stringify(homepageUi, null, 2)}\n`
+  });
+
+  return {
+    ok: true,
+    article_index_path: ARTICLE_INDEX_PATH,
+    homepage_ui_path: HOMEPAGE_UI_PATH,
+    total: indexData.total,
+    public_total: indexData.publicTotal,
+    public_latest_count: indexData.publicLatest.length,
+    featured_reads_count: Array.isArray(homepageUi.featuredReads) ? homepageUi.featuredReads.length : 0
+  };
+}
+
 
 async function buildArticlePage({ draftPacket, categoryMeta, today }) {
   const title = safeText(draftPacket.title, `${categoryMeta.label} Insight`);
@@ -664,6 +963,12 @@ export async function runPublishAll({
 }) {
   const today = todayOverride || new Date().toISOString().slice(0, 10);
   const results = [];
+  const publishedItems = [];
+  let publicDiscoveryRefresh = {
+    ok: false,
+    skipped: true,
+    reason: "No successful publications yet"
+  };
 
   if (!githubToken || !githubOwner || !githubRepo || !githubBranch) {
     throw new Error("Missing required GitHub environment variables");
@@ -965,6 +1270,16 @@ export async function runPublishAll({
           }
         }
 
+        publishedItems.push(makePublishedIndexItem({
+          categoryKey,
+          categoryMeta,
+          draftPacket,
+          articlePath,
+          articleTitle,
+          articleSlug,
+          today
+        }));
+
         results.push({
           category: categoryKey,
           ok: true,
@@ -983,6 +1298,23 @@ export async function runPublishAll({
 
     const successCount = results.filter((x) => x.ok).length;
 
+    if (successCount > 0 && publishedItems.length) {
+      publicDiscoveryRefresh = await refreshPublicDiscoveryData({
+        token: githubToken,
+        owner: githubOwner,
+        repo: githubRepo,
+        branch: githubBranch,
+        today,
+        publishedItems
+      });
+    } else {
+      publicDiscoveryRefresh = {
+        ok: false,
+        skipped: true,
+        reason: "No articles were successfully published"
+      };
+    }
+
     await supabase
       .from("publication_runs")
       .update({
@@ -990,7 +1322,8 @@ export async function runPublishAll({
         finished_at: new Date().toISOString(),
         outputs_json: {
           results,
-          success_count: successCount
+          success_count: successCount,
+          public_discovery_refresh: publicDiscoveryRefresh
         }
       })
       .eq("id", publicationRunId);
