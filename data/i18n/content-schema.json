@@ -1,0 +1,59 @@
+{
+  "version": "1.0.0",
+  "purpose": "Native bilingual content schema for Drishvara English-Hindi content pipeline",
+  "languages": {
+    "en": {
+      "label": "English",
+      "direction": "ltr",
+      "required": true
+    },
+    "hi": {
+      "label": "हिन्दी",
+      "direction": "ltr",
+      "required": false
+    }
+  },
+  "draft_packet_fields": {
+    "title": {
+      "language": "en",
+      "required": true
+    },
+    "title_hi": {
+      "language": "hi",
+      "required": false
+    },
+    "summary": {
+      "language": "en",
+      "required": true
+    },
+    "summary_hi": {
+      "language": "hi",
+      "required": false
+    },
+    "article_html": {
+      "language": "en",
+      "required": true
+    },
+    "article_html_hi": {
+      "language": "hi",
+      "required": false
+    },
+    "language_status": {
+      "required": false,
+      "shape": {
+        "en": "approved | pending | hold | needs_revision | rejected",
+        "hi": "approved | pending | hold | needs_revision | rejected"
+      }
+    }
+  },
+  "fallback_rules": {
+    "title": "Use title_hi when selected language is hi and title_hi exists; otherwise title.",
+    "summary": "Use summary_hi when selected language is hi and summary_hi exists; otherwise summary.",
+    "article_body": "Use article_html_hi when selected language is hi and article_html_hi exists; otherwise article_html.",
+    "ui": "Use site-language.js dictionary for static UI labels."
+  },
+  "recommended_publish_modes": {
+    "phase_02": "single_path_embedded_i18n",
+    "phase_04": "separate_hindi_paths_for_seo"
+  }
+}

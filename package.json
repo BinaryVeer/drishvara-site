@@ -14,7 +14,9 @@
     "pipeline:live-preflight": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts",
     "pipeline:live-preflight:approved": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts --require-approved",
     "drafts:review": "node scripts/review-drafts.js",
-    "drafts:review:latest": "node scripts/review-drafts.js --latest"
+    "drafts:review:latest": "node scripts/review-drafts.js --latest",
+    "bilingual:preflight": "node scripts/bilingual-preflight.js",
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight"
   },
   "repository": {
     "type": "git",
