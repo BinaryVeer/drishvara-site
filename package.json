@@ -16,7 +16,7 @@
     "drafts:review": "node scripts/review-drafts.js",
     "drafts:review:latest": "node scripts/review-drafts.js --latest",
     "bilingual:preflight": "node scripts/bilingual-preflight.js",
-    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight && npm run sports-context:preflight && npm run seo:preflight && npm run supabase:schema:preflight && npm run auth-access:preflight && npm run dashboard:preflight && npm run submission-intake:preflight && npm run payment:preflight && npm run admin-review:preflight && npm run preactivation:preflight && npm run timezone:preflight && npm run public-preview:preflight && npm run daily-basis:preflight && npm run placeholder:audit && npm run public-visual:preflight && npm run activation:supabase:preflight && npm run activation:supabase:validation:preflight && npm run activation:supabase:apply-decision:preflight && npm run activation:auth:preflight && npm run activation:auth-client:preflight && npm run activation:session-guard:preflight",
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight && npm run sports-context:preflight && npm run seo:preflight && npm run supabase:schema:preflight && npm run auth-access:preflight && npm run dashboard:preflight && npm run submission-intake:preflight && npm run payment:preflight && npm run admin-review:preflight && npm run preactivation:preflight && npm run timezone:preflight && npm run public-preview:preflight && npm run daily-basis:preflight && npm run placeholder:audit && npm run public-visual:preflight && npm run activation:supabase:preflight && npm run activation:supabase:validation:preflight && npm run activation:supabase:apply-decision:preflight && npm run activation:auth:preflight && npm run activation:auth-client:preflight && npm run activation:session-guard:preflight && npm run activation:auth-env:preflight",
     "hindi-body:preflight": "node scripts/hindi-body-preflight.js",
     "hindi-draft:create": "node scripts/create-hindi-body-draft.js",
     "hindi-draft:review": "node scripts/review-hindi-body.js",
@@ -51,7 +51,8 @@
     "activation:supabase:apply-decision:preflight": "node scripts/supabase-apply-decision-preflight.js",
     "activation:auth:preflight": "node scripts/supabase-auth-runbook-preflight.js",
     "activation:auth-client:preflight": "node scripts/auth-client-preflight.js",
-    "activation:session-guard:preflight": "node scripts/session-guard-preflight.js"
+    "activation:session-guard:preflight": "node scripts/session-guard-preflight.js",
+    "activation:auth-env:preflight": "node scripts/auth-env-redirect-preflight.js"
   },
   "repository": {
     "type": "git",

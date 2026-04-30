@@ -1,0 +1,33 @@
+{
+  "version": "2026.04.30-activation-02d",
+  "module": "activation.auth_environment_redirect_config",
+  "status": "checklist_only",
+  "live_auth_enabled": false,
+  "environment_variables_added": false,
+  "redirect_urls_configured_live": false,
+  "purpose": "Prepares Supabase Auth environment variable and redirect URL checklist before live Auth activation.",
+  "checklist": "docs/activation/auth-environment-redirect-checklist.md",
+  "env_variable_map": "data/backend/activation/auth-env-variable-map.json",
+  "depends_on": [
+    "data/backend/activation/supabase-auth-stage-02a.json",
+    "data/backend/activation/supabase-auth-stage-02b.json",
+    "data/backend/activation/supabase-auth-stage-02c.json"
+  ],
+  "blocked_in_this_stage": [
+    "live_auth_enablement",
+    "adding_real_keys_to_repo",
+    "frontend_supabase_create_client",
+    "live_session_detection",
+    "dashboard_data_unlock",
+    "premium_guidance_unlock",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "This stage does not enable live Auth.",
+    "This stage does not add real keys.",
+    "Service role key must never be exposed to frontend.",
+    "Anon key may be used later only after Auth activation decision.",
+    "Redirect URLs must be configured manually in Supabase dashboard later.",
+    "Dashboard and premium guidance remain blocked."
+  ]
+}
