@@ -750,6 +750,45 @@
       }
     }
 
+
+    function isUsableReaderImage(src) {
+      const low = String(src || "").toLowerCase();
+      if (!low) return false;
+      if (low.includes("logo")) return false;
+      if (low.includes("favicon")) return false;
+      if (low.includes("/icon")) return false;
+      if (low.includes("data:image")) return false;
+      return true;
+    }
+
+    function applyReaderHeroImage(bodyHtml, image, title) {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = bodyHtml || "";
+
+      wrapper.querySelectorAll("img").forEach((img) => {
+        const src = img.getAttribute("src") || "";
+        if (!isUsableReaderImage(src)) {
+          const figure = img.closest("figure");
+          if (figure) figure.remove();
+          else img.remove();
+        }
+      });
+
+      const hasUsableImage = Array.from(wrapper.querySelectorAll("img"))
+        .some((img) => isUsableReaderImage(img.getAttribute("src")));
+
+      if (!hasUsableImage && isUsableReaderImage(image)) {
+        const figure = document.createElement("figure");
+        figure.className = "reader-featured-image";
+        figure.innerHTML = `
+          <img src="${escapeHtml(image)}" alt="${escapeHtml(title || "Drishvara read")}" loading="lazy" />
+        `;
+        wrapper.prepend(figure);
+      }
+
+      return wrapper.innerHTML;
+    }
+
     async function loadArticle() {
       const path = await resolvePathFromIndex();
 
@@ -768,11 +807,14 @@
           const indexItem = await findIndexItemForPath(path);
           const hindiBody = await findHindiBodyForPath(path);
 
+          const displayTitle = hindiBody?.title_hi || localizedField(indexItem, "title", article.title);
+          const displayBody = hindiBody?.article_html_hi || applyReaderHeroImage(article.bodyHtml, indexItem?.image, displayTitle);
+
           setReader(
-            hindiBody?.title_hi || localizedField(indexItem, "title", article.title),
+            displayTitle,
             hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc),
             hindiBody?.meta_hi || article.meta,
-            hindiBody?.article_html_hi || article.bodyHtml
+            displayBody
           );
           return;
         }
@@ -782,11 +824,14 @@
         const indexItem = await findIndexItemForPath(path);
         const hindiBody = await findHindiBodyForPath(path);
 
+        const displayTitle = hindiBody?.title_hi || localizedField(indexItem, "title", article.title);
+        const displayBody = hindiBody?.article_html_hi || applyReaderHeroImage(article.bodyHtml, indexItem?.image, displayTitle);
+
         setReader(
-          hindiBody?.title_hi || localizedField(indexItem, "title", article.title),
+          displayTitle,
           hindiBody?.summary_hi || localizedField(indexItem, "summary", article.desc),
           hindiBody?.meta_hi || article.meta,
-          hindiBody?.article_html_hi || article.bodyHtml
+          displayBody
         );
       } catch (error) {
         showError("Article file could not be loaded.", error.message || String(error));
