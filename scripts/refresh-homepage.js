@@ -107,6 +107,9 @@ check(insightsHtml.includes("data/article-index.json"), "Insights page consumes 
 check(insightsHtml.includes("search-input"), "Insights page has search input", failures);
 check(insightsHtml.includes("topic-filters"), "Insights page has topic filters", failures);
 check(insightsHtml.includes("archive-list"), "Insights page has archive list", failures);
+check(insightsHtml.includes("function sourceItems()"), "Insights page has source-aware item filtering", failures);
+check(insightsHtml.includes("Published themes"), "Insights page labels published theme filters", failures);
+check(insightsHtml.includes("state.topic = \"all\";"), "Insights page resets topic when source filter changes", failures);
 check(indexHtml.includes("loadArticleIndex();"), "Homepage calls loadArticleIndex()", failures);
 check(indexHtml.includes("batch03-integrated-flow"), "Homepage has Batch 03 integrated flow", failures);
 check(indexHtml.includes("first-light-card"), "Homepage has First Light card", failures);

@@ -547,11 +547,23 @@
       return [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
     }
 
+    function sourceItems() {
+      if (state.source === "articles" && Array.isArray(state.index?.publishedItems)) {
+        return state.index.publishedItems;
+      }
+
+      if (state.source === "generated") {
+        return state.items.filter((item) => item.source === "generated");
+      }
+
+      return state.items;
+    }
+
     function filteredItems() {
       const q = normalize(state.query);
+      const baseItems = sourceItems();
 
-      return state.items.filter((item) => {
-        if (state.source !== "all" && item.source !== state.source) return false;
+      return baseItems.filter((item) => {
         if (state.topic !== "all" && item.tag !== state.topic) return false;
 
         if (!q) return true;
@@ -572,9 +584,12 @@
 
     function renderStats() {
       const items = state.items;
-      const published = items.filter((item) => item.source === "articles").length;
-      const topics = uniqueSorted(items.map((item) => item.tag)).length;
-      const dates = uniqueSorted(items.map((item) => item.date)).length;
+      const published = Array.isArray(state.index?.publishedItems)
+        ? state.index.publishedItems.length
+        : items.filter((item) => item.source === "articles").length;
+      const activeItems = sourceItems();
+      const topics = uniqueSorted(activeItems.map((item) => item.tag)).length;
+      const dates = uniqueSorted(activeItems.map((item) => item.date)).length;
 
       setText("stat-total", items.length);
       setText("stat-published", published);
@@ -584,12 +599,23 @@
 
     function renderTopicFilters() {
       const wrap = document.getElementById("topic-filters");
-      const topics = uniqueSorted(state.items.map((item) => item.tag));
+      const baseItems = sourceItems();
+      const topics = uniqueSorted(baseItems.map((item) => item.tag));
+
+      if (state.topic !== "all" && !topics.includes(state.topic)) {
+        state.topic = "all";
+      }
+
+      const sourceLabel = state.source === "articles"
+        ? "Published themes"
+        : state.source === "generated"
+          ? "Pipeline themes"
+          : "All themes";
 
       wrap.innerHTML = [
-        `<button class="filter-btn ${state.topic === "all" ? "active" : ""}" data-topic="all">All themes</button>`,
+        `<button class="filter-btn ${state.topic === "all" ? "active" : ""}" data-topic="all">${sourceLabel}</button>`,
         ...topics.map((topic) => {
-          const count = state.items.filter((item) => item.tag === topic).length;
+          const count = baseItems.filter((item) => item.tag === topic).length;
           return `<button class="filter-btn ${state.topic === topic ? "active" : ""}" data-topic="${escapeHtml(topic)}">${escapeHtml(topic)} · ${count}</button>`;
         })
       ].join("");
@@ -606,8 +632,15 @@
       const grid = document.getElementById("reads-grid");
       const items = filteredItems();
 
-      setText("results-title", state.topic === "all" ? "Latest indexed reads" : state.topic);
-      setText("results-note", `${items.length} read${items.length === 1 ? "" : "s"} visible from ${state.items.length} indexed items.`);
+      const sourceLabel = state.source === "articles"
+        ? "published reads"
+        : state.source === "generated"
+          ? "pipeline items"
+          : "indexed reads";
+      const baseCount = sourceItems().length;
+
+      setText("results-title", state.topic === "all" ? `Latest ${sourceLabel}` : state.topic);
+      setText("results-note", `${items.length} read${items.length === 1 ? "" : "s"} visible from ${baseCount} ${sourceLabel}.`);
 
       if (!items.length) {
         grid.innerHTML = `
@@ -634,8 +667,9 @@
     function renderTopicList() {
       const wrap = document.getElementById("topic-list");
       const topicCounts = {};
+      const baseItems = sourceItems();
 
-      for (const item of state.items) {
+      for (const item of baseItems) {
         const key = item.tag || "Drishvara";
         topicCounts[key] = (topicCounts[key] || 0) + 1;
       }
@@ -667,7 +701,26 @@
 
     function renderArchiveList() {
       const wrap = document.getElementById("archive-list");
-      const byDate = state.source === "articles" && state.index?.publicByDate ? state.index.publicByDate : state.index?.byDate || {};
+
+      let byDate = {};
+      if (state.source === "articles" && state.index?.publicByDate) {
+        byDate = state.index.publicByDate;
+      } else if (state.source === "all" && state.index?.byDate) {
+        byDate = state.index.byDate;
+      } else {
+        for (const item of sourceItems()) {
+          byDate[item.date] ||= [];
+          byDate[item.date].push({
+            title: item.title,
+            tag: item.tag,
+            folder: item.folder,
+            url: item.url,
+            path: item.path,
+            source: item.source
+          });
+        }
+      }
+
       const dates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
 
       if (!dates.length) {
@@ -733,6 +786,7 @@
     document.querySelectorAll("[data-source]").forEach((button) => {
       button.addEventListener("click", () => {
         state.source = button.dataset.source || "all";
+        state.topic = "all";
         renderAll();
       });
     });
