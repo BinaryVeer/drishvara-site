@@ -16,7 +16,7 @@
     "drafts:review": "node scripts/review-drafts.js",
     "drafts:review:latest": "node scripts/review-drafts.js --latest",
     "bilingual:preflight": "node scripts/bilingual-preflight.js",
-    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight && npm run sports-context:preflight && npm run seo:preflight",
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight && npm run sports-context:preflight && npm run seo:preflight && npm run supabase:schema:preflight",
     "hindi-body:preflight": "node scripts/hindi-body-preflight.js",
     "hindi-draft:create": "node scripts/create-hindi-body-draft.js",
     "hindi-draft:review": "node scripts/review-hindi-body.js",
@@ -33,7 +33,8 @@
     "sports-context:build": "node scripts/build-sports-context.js",
     "sports-context:preflight": "node scripts/sports-context-preflight.js",
     "seo:build": "node scripts/build-seo.js",
-    "seo:preflight": "node scripts/seo-preflight.js"
+    "seo:preflight": "node scripts/seo-preflight.js",
+    "supabase:schema:preflight": "node scripts/supabase-schema-preflight.js"
   },
   "repository": {
     "type": "git",
