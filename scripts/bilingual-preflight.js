@@ -33,6 +33,8 @@ console.log("");
 
 check(exists("docs/native-bilingual-content-plan.md"), "Native bilingual content plan exists", failures);
 check(exists("data/i18n/content-schema.json"), "Bilingual content schema exists", failures);
+check(exists("data/i18n/hindi-metadata-overrides.json"), "Hindi metadata override file exists", failures);
+check(exists("scripts/apply-bilingual-metadata.js"), "Bilingual metadata apply script exists", failures);
 check(exists("assets/js/site-language.js"), "Native site language controller exists", failures);
 check(exists("article.html"), "Article reader exists", failures);
 check(exists("data/article-index.json"), "Article index exists", failures);
@@ -57,6 +59,10 @@ check(insightsHtml.includes("localizedSummary("), "Insights supports bilingual s
 check(articleHtml.includes("findIndexItemForPath"), "Article reader can resolve bilingual index metadata", failures);
 check(articleHtml.includes("localizedField(indexItem"), "Article reader uses bilingual index title/summary fallback", failures);
 
+const overrides = readJson("data/i18n/hindi-metadata-overrides.json");
+check(Array.isArray(overrides.items), "Hindi metadata overrides has items array", failures);
+check((overrides.items || []).length >= 4, "Hindi metadata overrides has enough seed entries", failures);
+
 const schema = readJson("data/i18n/content-schema.json");
 check(Boolean(schema.languages?.en), "Schema defines English", failures);
 check(Boolean(schema.languages?.hi), "Schema defines Hindi", failures);
@@ -76,9 +82,8 @@ const hasAnyHindiMetadata = samplePublished.some((item) => item.title_hi || item
 
 check(
   hasAnyHindiMetadata,
-  "No publicLatest items have Hindi title/summary metadata yet",
-  failures,
-  true
+  "PublicLatest has Hindi title/summary metadata",
+  failures
 );
 
 console.log("");
