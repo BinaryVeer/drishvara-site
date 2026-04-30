@@ -95,7 +95,12 @@ function getDraftApprovalState(draftJson) {
     "rejected",
     "declined",
     "blocked",
-    "do_not_publish"
+    "do_not_publish",
+    "hold",
+    "held",
+    "on_hold",
+    "needs_revision",
+    "revise"
   ]);
 
   return {

@@ -12,7 +12,9 @@
     "publish:local-check": "npm run refresh:homepage && node scripts/publish-local-check.js",
     "pipeline:preflight": "npm run publish:local-check",
     "pipeline:live-preflight": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts",
-    "pipeline:live-preflight:approved": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts --require-approved"
+    "pipeline:live-preflight:approved": "npm run refresh:homepage && npm run publish:local-check && node scripts/pipeline-live-preflight.js --latest-drafts --require-approved",
+    "drafts:review": "node scripts/review-drafts.js",
+    "drafts:review:latest": "node scripts/review-drafts.js --latest"
   },
   "repository": {
     "type": "git",
