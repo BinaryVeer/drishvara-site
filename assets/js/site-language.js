@@ -54,9 +54,22 @@
   }
 
   function setLanguage(lang) {
-    localStorage.setItem(STORAGE_KEY, lang || "en");
-    applyLanguage(lang || "en");
-    renderTopControl(lang || "en");
+    const nextLang = lang || "en";
+    const previousLang = currentLanguage();
+
+    localStorage.setItem(STORAGE_KEY, nextLang);
+    applyLanguage(nextLang);
+    renderTopControl(nextLang);
+
+    window.dispatchEvent(new CustomEvent("drishvara:languagechange", {
+      detail: { language: nextLang, previousLanguage: previousLang }
+    }));
+
+    if (nextLang !== previousLang) {
+      window.setTimeout(function () {
+        window.location.reload();
+      }, 80);
+    }
   }
 
   function shouldSkipNode(node) {
@@ -238,6 +251,18 @@
       });
     });
   }
+
+  window.DrishvaraLanguage = {
+    storageKey: STORAGE_KEY,
+    currentLanguage,
+    setLanguage,
+    select(record, key, fallback = "") {
+      if (!record || typeof record !== "object") return fallback;
+      const lang = currentLanguage();
+      const localizedKey = lang === "hi" ? `${key}_hi` : key;
+      return record[localizedKey] || record[key] || fallback;
+    }
+  };
 
   function boot() {
     const lang = currentLanguage();

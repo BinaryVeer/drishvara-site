@@ -1476,8 +1476,8 @@
           return `
             <div class="reading-guide-item">
               <div class="sub">${escapeHtml(item.tag || item.source || "Drishvara")} · ${escapeHtml(item.date || "")}</div>
-              <div class="title">${escapeHtml(item.title || "Untitled Drishvara read")}</div>
-              <div class="meta">${escapeHtml(item.summary || "A Drishvara read prepared for the daily surface.")}</div>
+              <div class="title">${escapeHtml(localizedTitle(item, "Untitled Drishvara read"))}</div>
+              <div class="meta">${escapeHtml(localizedSummary(item, "A Drishvara read prepared for the daily surface."))}</div>
               <div class="reading-guide-links">
                 <a href="${escapeHtml(href)}">Open read</a>
               </div>
@@ -1626,13 +1626,13 @@
           ${buildImageBlock({
             imagePath: item.image,
             fallbackPath: fallbackImage,
-            altText: item.title || "Tournament image",
+            altText: localizedTitle(item, "Tournament image"),
             wrapClass: "tournament-image-wrap",
             imageClass: "tournament-image-tag",
             fallbackText: "No tournament image yet"
           })}
           <div class="sub">${escapeHtml(item.status || "Tournament")}</div>
-          <div class="title">${escapeHtml(item.title || "")}</div>
+          <div class="title">${escapeHtml(localizedTitle(item, ""))}</div>
           <div class="meta">${escapeHtml(item.key_note || "")}</div>
           <div class="tournament-standings">
             ${(Array.isArray(item.standings_snapshot) ? item.standings_snapshot : []).map(row => `<div>${escapeHtml(row)}</div>`).join("")}
@@ -1675,7 +1675,7 @@
           })}
           <div class="sub">Major Update</div>
           <div class="title">${escapeHtml(item.headline || "")}</div>
-          <div class="meta">${escapeHtml(item.summary || "")}</div>
+          <div class="meta">${escapeHtml(localizedSummary(item, ""))}</div>
           <div class="update-links">
             ${buildConditionalLinks([
               { label: "Read Article", href: item.internal_article_link || "" },
@@ -1707,14 +1707,14 @@
           ${buildImageBlock({
             imagePath: item.image,
             fallbackPath: fallbackImage,
-            altText: item.title || "Featured sports article image",
+            altText: localizedTitle(item, "Featured sports article image"),
             wrapClass: "featured-sports-article-image-wrap",
             imageClass: "featured-sports-article-image-tag",
             fallbackText: "No sports article image yet"
           })}
           <div class="sub">Featured Sports Article</div>
-          <div class="title">${escapeHtml(item.title || "")}</div>
-          <div class="meta">${escapeHtml(item.summary || "")}</div>
+          <div class="title">${escapeHtml(localizedTitle(item, ""))}</div>
+          <div class="meta">${escapeHtml(localizedSummary(item, ""))}</div>
           <div class="sports-links">
             ${buildConditionalLinks([
               { label: "Read Article", href: item.internal_article_link || "" },
@@ -1775,7 +1775,7 @@
       list.innerHTML = festivals.map(item => `
         <div class="festival-item">
           <div class="sub">${escapeHtml(item.subtitle || "Upcoming Observance")}</div>
-          <div class="title">${escapeHtml(item.title || "")}</div>
+          <div class="title">${escapeHtml(localizedTitle(item, ""))}</div>
           <div class="meta">${escapeHtml(item.note || "")}</div>
         </div>
       `).join("");
@@ -1803,8 +1803,8 @@
           </div>
           <div class="feature-body">
             <div class="label">${escapeHtml(item.tag || "Featured Read")}</div>
-            <h3><a href="#open-day-card">${escapeHtml(item.title || "")}</a></h3>
-            <p>${escapeHtml(item.summary || "")}</p>
+            <h3><a href="#open-day-card">${escapeHtml(localizedTitle(item, ""))}</a></h3>
+            <p>${escapeHtml(localizedSummary(item, ""))}</p>
             <a class="read-link" href="#open-day-card">Read now →</a>
           </div>
         </div>
@@ -1883,7 +1883,7 @@
       if (routeEl && Array.isArray(flow.routeItems) && flow.routeItems.length) {
         routeEl.innerHTML = flow.routeItems.map((item) => `
           <div class="batch03-route-item">
-            <strong>${escapeHtml(item.title || "")}</strong>
+            <strong>${escapeHtml(localizedTitle(item, ""))}</strong>
             <span>${escapeHtml(item.meta || "")}</span>
           </div>
         `).join("");
@@ -1903,7 +1903,7 @@
         gridEl.innerHTML = strip.items.map((item) => `
           <div class="batch03-continuity-item">
             <div class="sub">${escapeHtml(item.label || "")}</div>
-            <div class="title">${escapeHtml(item.title || "")}</div>
+            <div class="title">${escapeHtml(localizedTitle(item, ""))}</div>
             <div class="meta">${escapeHtml(item.meta || "")}</div>
           </div>
         `).join("");
@@ -1976,6 +1976,30 @@
         .replace(/^-|-$/g, "");
     }
 
+
+    function currentContentLanguage() {
+      try {
+        return localStorage.getItem("drishvara_site_language") || "en";
+      } catch {
+        return "en";
+      }
+    }
+
+    function localizedField(item, key, fallback = "") {
+      if (!item || typeof item !== "object") return fallback;
+      const lang = currentContentLanguage();
+      const localizedKey = lang === "hi" ? `${key}_hi` : key;
+      return item[localizedKey] || item[key] || fallback;
+    }
+
+    function localizedTitle(item, fallback = "Untitled Drishvara read") {
+      return localizedField(item, "title", fallback);
+    }
+
+    function localizedSummary(item, fallback = "A Drishvara read prepared for the daily surface.") {
+      return localizedField(item, "summary", fallback);
+    }
+
     function escapeHtml(value) {
       return String(value || "")
         .replace(/&/g, "&amp;")
@@ -2040,7 +2064,7 @@
 
             used.add(wrap);
             wrap.classList.add("has-image");
-            wrap.innerHTML = `<img src="${escapeAttr(item.image)}" alt="${escapeAttr(item.title || item.tag || "Drishvara read")}" loading="lazy" />`;
+            wrap.innerHTML = `<img src="${escapeAttr(item.image)}" alt="${escapeAttr(localizedTitle(item, item.tag || "Drishvara read"))}" loading="lazy" />`;
           }
         } catch (error) {
           console.warn("Featured read image hydration skipped:", error);

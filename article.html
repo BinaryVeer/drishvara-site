@@ -491,6 +491,22 @@
       return value;
     }
 
+
+    function currentContentLanguage() {
+      try {
+        return localStorage.getItem("drishvara_site_language") || "en";
+      } catch {
+        return "en";
+      }
+    }
+
+    function localizedField(item, key, fallback = "") {
+      if (!item || typeof item !== "object") return fallback;
+      const lang = currentContentLanguage();
+      const localizedKey = lang === "hi" ? `${key}_hi` : key;
+      return item[localizedKey] || item[key] || fallback;
+    }
+
     function setReader(title, subtitle, meta, bodyHtml) {
       document.getElementById("article-title").textContent = title || "Drishvara Article";
       document.getElementById("article-subtitle").textContent = subtitle || "A Drishvara read.";
@@ -608,20 +624,18 @@
     }
 
     function extractJsonArticle(json, fallbackPath) {
-      const title =
-        json.title ||
+      const title = localizedField(json, "title",
         json.headline ||
         json.articleTitle ||
         json.name ||
-        slugToTitle(fallbackPath.split("/").pop());
+        slugToTitle(fallbackPath.split("/").pop()));
 
-      const desc =
-        json.summary ||
+      const desc = localizedField(json, "summary",
         json.description ||
         json.dek ||
         json.excerpt ||
         json.intro ||
-        "A generated Drishvara draft or candidate.";
+        "A generated Drishvara draft or candidate.");
 
       const body =
         json.body ||
@@ -690,6 +704,23 @@
       }
     }
 
+
+    async function findIndexItemForPath(path) {
+      try {
+        const response = await fetch("data/article-index.json", { cache: "no-store" });
+        if (!response.ok) return null;
+
+        const indexData = await response.json();
+        const items = Array.isArray(indexData.items) ? indexData.items : [];
+
+        return items.find((item) => {
+          return item.path === path || item.sourcePath === path || item.directUrl === path;
+        }) || null;
+      } catch {
+        return null;
+      }
+    }
+
     async function loadArticle() {
       const path = await resolvePathFromIndex();
 
@@ -705,13 +736,25 @@
         if (path.endsWith(".json")) {
           const json = await response.json();
           const article = extractJsonArticle(json, path);
-          setReader(article.title, article.desc, article.meta, article.bodyHtml);
+          const indexItem = await findIndexItemForPath(path);
+          setReader(
+            localizedField(indexItem, "title", article.title),
+            localizedField(indexItem, "summary", article.desc),
+            article.meta,
+            article.bodyHtml
+          );
           return;
         }
 
         const html = await response.text();
         const article = extractHtmlArticle(html, path);
-        setReader(article.title, article.desc, article.meta, article.bodyHtml);
+        const indexItem = await findIndexItemForPath(path);
+        setReader(
+          localizedField(indexItem, "title", article.title),
+          localizedField(indexItem, "summary", article.desc),
+          article.meta,
+          article.bodyHtml
+        );
       } catch (error) {
         showError("Article file could not be loaded.", error.message || String(error));
       }

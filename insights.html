@@ -560,6 +560,30 @@
       return state.items;
     }
 
+
+    function currentContentLanguage() {
+      try {
+        return localStorage.getItem("drishvara_site_language") || "en";
+      } catch {
+        return "en";
+      }
+    }
+
+    function localizedField(item, key, fallback = "") {
+      if (!item || typeof item !== "object") return fallback;
+      const lang = currentContentLanguage();
+      const localizedKey = lang === "hi" ? `${key}_hi` : key;
+      return item[localizedKey] || item[key] || fallback;
+    }
+
+    function localizedTitle(item, fallback = "Untitled read") {
+      return localizedField(item, "title", fallback);
+    }
+
+    function localizedSummary(item, fallback = "A Drishvara read prepared for the archive.") {
+      return localizedField(item, "summary", fallback);
+    }
+
     function filteredItems() {
       const q = normalize(state.query);
       const baseItems = sourceItems();
@@ -571,7 +595,9 @@
 
         const haystack = normalize([
           item.title,
+          item.title_hi,
           item.summary,
+          item.summary_hi,
           item.tag,
           item.date,
           item.source,
@@ -655,8 +681,8 @@
       grid.innerHTML = items.slice(0, 24).map((item) => `
         <article class="read-card">
           <div class="read-meta">${escapeHtml(item.tag || "Drishvara")} · ${escapeHtml(item.date || "Undated")} · ${escapeHtml(item.source || "index")}</div>
-          <h3 class="read-title">${escapeHtml(item.title || "Untitled read")}</h3>
-          <p class="read-summary">${escapeHtml(item.summary || "A Drishvara read prepared for the archive.")}</p>
+          <h3 class="read-title">${escapeHtml(localizedTitle(item, "Untitled read"))}</h3>
+          <p class="read-summary">${escapeHtml(localizedSummary(item, "A Drishvara read prepared for the archive."))}</p>
           <div class="read-actions">
             <a href="${escapeHtml(itemHref(item))}">Open read</a>
             ${item.directUrl ? `<a href="${escapeHtml(item.directUrl)}">Direct file</a>` : ""}
@@ -712,7 +738,7 @@
         for (const item of sourceItems()) {
           byDate[item.date] ||= [];
           byDate[item.date].push({
-            title: item.title,
+            title: localizedTitle(item, item.title),
             tag: item.tag,
             folder: item.folder,
             url: item.url,

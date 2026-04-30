@@ -464,8 +464,10 @@ function updateHomepageUiFromPublicIndex(homepageUi, indexData) {
 
   ui.featuredReads = source.slice(0, 4).map((item) => ({
     title: item.title,
+    title_hi: item.title_hi || "",
     tag: item.tag,
     summary: item.summary,
+    summary_hi: item.summary_hi || "",
     folder: item.folder,
     url: item.url,
     sourcePath: item.sourcePath,

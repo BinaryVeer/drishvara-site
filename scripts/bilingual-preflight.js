@@ -42,6 +42,20 @@ const languageJs = read("assets/js/site-language.js");
 check(languageJs.includes("drishvara_site_language"), "Language controller persists selected language", failures);
 check(languageJs.includes("हिन्दी") || languageJs.includes("हिंदी"), "Language controller supports Hindi label", failures);
 check(!languageJs.includes("translate.google.com"), "Language controller avoids Google Translate redirect", failures);
+check(languageJs.includes("CustomEvent"), "Language controller emits language change event", failures);
+check(languageJs.includes("window.DrishvaraLanguage"), "Language controller exposes bilingual helper API", failures);
+
+
+const indexHtml = read("index.html");
+const insightsHtml = read("insights.html");
+const articleHtml = read("article.html");
+
+check(indexHtml.includes("localizedTitle("), "Homepage supports bilingual title rendering", failures);
+check(indexHtml.includes("localizedSummary("), "Homepage supports bilingual summary rendering", failures);
+check(insightsHtml.includes("localizedTitle("), "Insights supports bilingual title rendering", failures);
+check(insightsHtml.includes("localizedSummary("), "Insights supports bilingual summary rendering", failures);
+check(articleHtml.includes("findIndexItemForPath"), "Article reader can resolve bilingual index metadata", failures);
+check(articleHtml.includes("localizedField(indexItem"), "Article reader uses bilingual index title/summary fallback", failures);
 
 const schema = readJson("data/i18n/content-schema.json");
 check(Boolean(schema.languages?.en), "Schema defines English", failures);
