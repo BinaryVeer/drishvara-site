@@ -14,6 +14,7 @@ const requiredFiles = [
   "data/knowledge/updates/update-log.json",
   "data/knowledge/updates/monthly-update-schedule.json",
   "data/knowledge/submissions/user-submission-schema.json",
+  "data/knowledge/submissions/intake-routing.json",
   "data/knowledge/submissions/feedback-schema.json",
   "data/knowledge/palmistry/palm-image-policy.json",
   "data/knowledge/subscribers/daily-guidance-schema.json",
@@ -56,6 +57,7 @@ const palmistryRules = readJson("data/knowledge/palmistry/palmistry-rules.json")
 const updateLog = readJson("data/knowledge/updates/update-log.json");
 const monthlySchedule = readJson("data/knowledge/updates/monthly-update-schedule.json");
 const userSubmissionSchema = readJson("data/knowledge/submissions/user-submission-schema.json");
+const intakeRouting = readJson("data/knowledge/submissions/intake-routing.json");
 const feedbackSchema = readJson("data/knowledge/submissions/feedback-schema.json");
 const palmImagePolicy = readJson("data/knowledge/palmistry/palm-image-policy.json");
 const subscriberGuidance = readJson("data/knowledge/subscribers/daily-guidance-schema.json");
@@ -108,6 +110,11 @@ check(monthlySchedule.schedule_rule?.timezone === "Asia/Kolkata", "Monthly updat
 check(monthlySchedule.required_monthly_actions?.includes("Review pending user submissions"), "Monthly update includes user submission review", failures);
 
 check(userSubmissionSchema.public_collection_enabled === false, "User submissions are disabled until backend intake is implemented", failures);
+
+check(intakeRouting.backend_storage_enabled === false, "Submission intake routing keeps backend storage disabled", failures);
+check(intakeRouting.routes?.palm_image?.target === "disabled_until_private_storage_and_consent", "Palm image intake remains disabled", failures);
+check(intakeRouting.routes?.feedback?.monthly_review_day === 10, "Feedback intake aligns with monthly review day", failures);
+
 check(userSubmissionSchema.submission_types?.includes("palmistry_question"), "User submission schema includes palmistry questions", failures);
 check(userSubmissionSchema.fields?.consent_to_process === "required_boolean", "User submission requires consent to process", failures);
 

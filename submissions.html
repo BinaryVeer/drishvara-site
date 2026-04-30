@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submissions · Drishvara</title>
+  <meta name="description" content="Submit a question, story, correction, feedback, or palmistry request to Drishvara." />
+  <link rel="icon" type="image/png" href="assets/logo/logo.png" />
+  <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.055);
+      --border: rgba(255, 255, 255, 0.10);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #aeb9cb;
+      --gold: #c9a24a;
+      --danger: #ffb4a8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text-main);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.09), transparent 20%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 26px 20px 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 8px 0 34px;
+    }
+
+    .nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.96rem;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold);
+    }
+
+    .hero {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 30px;
+    }
+
+    .logo {
+      width: 58px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.1;
+    }
+
+    .hero p {
+      color: var(--text-soft);
+      line-height: 1.75;
+      font-size: 1.02rem;
+    }
+
+    .notice {
+      border: 1px solid rgba(201, 162, 74, 0.25);
+      background: rgba(201, 162, 74, 0.08);
+      color: var(--text-soft);
+      padding: 16px 18px;
+      border-radius: 18px;
+      line-height: 1.7;
+      margin: 22px auto 0;
+      max-width: 860px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+
+    label {
+      display: block;
+      color: var(--text-soft);
+      margin: 14px 0 7px;
+      font-size: 0.92rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.07);
+      color: var(--text-main);
+      border-radius: 14px;
+      padding: 12px 13px;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .consent-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .consent-row input {
+      width: auto;
+      margin-top: 4px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button,
+    .mailto {
+      border: 1px solid rgba(201, 162, 74, 0.5);
+      background: rgba(201, 162, 74, 0.15);
+      color: var(--text-main);
+      border-radius: 999px;
+      padding: 11px 16px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 0.94rem;
+    }
+
+    button:hover,
+    .mailto:hover {
+      background: rgba(201, 162, 74, 0.23);
+    }
+
+    .small {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .warning {
+      color: var(--danger);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: var(--text-soft);
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 14px;
+      min-height: 180px;
+      line-height: 1.5;
+      font-size: 0.86rem;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 42px;
+      padding-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 820px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="insights.html">Insights</a>
+      <a href="submissions.html" class="active">Submissions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <header class="hero">
+      <img src="assets/logo/logo.png" class="logo" alt="Drishvara Logo" />
+      <h1>Submit to Drishvara</h1>
+      <p>Share a question, personal story, knowledge correction, feedback, or palmistry-related request for future reviewed intake.</p>
+      <div class="notice">
+        This is a controlled intake scaffold. Submissions are not stored in a database yet. Palm image upload is intentionally disabled until private storage, explicit consent, and deletion policy are implemented.
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Submission Form</h2>
+        <p class="small">Prepare a submission package that can be reviewed later under the monthly Knowledge Vault update cycle, scheduled on the 10th of every month.</p>
+
+        <label for="submissionType">Submission Type</label>
+        <select id="submissionType">
+          <option value="general_question">General Question</option>
+          <option value="personal_story">Personal Story</option>
+          <option value="vedic_guidance_question">Vedic Guidance Question</option>
+          <option value="panchang_question">Panchang Question</option>
+          <option value="festival_question">Festival Question</option>
+          <option value="numerology_question">Numerology Question</option>
+          <option value="palmistry_question">Palmistry Question</option>
+          <option value="knowledge_correction">Knowledge Correction</option>
+          <option value="feedback">Feedback</option>
+        </select>
+
+        <label for="name">Name</label>
+        <input id="name" placeholder="Optional" />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="Optional" />
+
+        <label for="language">Preferred Language</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+        </select>
+
+        <label for="location">Location / Region</label>
+        <input id="location" placeholder="Optional, useful for Panchang/festival questions" />
+
+        <label for="message">Question / Story / Feedback</label>
+        <textarea id="message" placeholder="Write your question, story, correction, or feedback here."></textarea>
+
+        <label for="palmImage">Palm Image Upload</label>
+        <input id="palmImage" type="file" accept="image/png,image/jpeg,image/webp" disabled />
+        <div class="warning">Palm image upload is disabled until private storage, explicit consent, and deletion policy are implemented.</div>
+
+        <label class="consent-row">
+          <input id="consent" type="checkbox" />
+          <span>I understand that this is a preparation form and that my personal details should not be published without explicit permission.</span>
+        </label>
+
+        <div class="actions">
+          <button id="prepareBtn" type="button">Prepare Submission</button>
+          <button id="copyBtn" type="button">Copy Prepared Text</button>
+          <a id="mailtoLink" class="mailto" href="mailto:contact@drishvara.com?subject=Drishvara%20Submission">Email Submission</a>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h2>Prepared Review Packet</h2>
+        <p class="small">This preview is generated locally in your browser. Backend submission storage will be added later.</p>
+        <pre id="preview">{}</pre>
+      </aside>
+    </main>
+
+    <footer>Drishvara © 2026 · Submission scaffold</footer>
+  </div>
+
+  <script>
+    function value(id) {
+      return document.getElementById(id)?.value?.trim() || "";
+    }
+
+    function checked(id) {
+      return Boolean(document.getElementById(id)?.checked);
+    }
+
+    function buildPacket() {
+      return {
+        version: "2026.04.30-b18d",
+        source: "drishvara_submission_scaffold",
+        storage_status: "not_stored_backend_not_enabled",
+        submission_type: value("submissionType"),
+        name: value("name"),
+        email: value("email"),
+        preferred_language: value("language"),
+        location: value("location"),
+        message: value("message"),
+        palm_image_upload_enabled: false,
+        consent_to_process: checked("consent"),
+        monthly_review_day: 10,
+        review_status: "pending_future_backend",
+        created_at_local: new Date().toISOString()
+      };
+    }
+
+    function updatePreview() {
+      const packet = buildPacket();
+      document.getElementById("preview").textContent = JSON.stringify(packet, null, 2);
+
+      const body = encodeURIComponent([
+        "Drishvara Submission",
+        "",
+        JSON.stringify(packet, null, 2)
+      ].join("\n"));
+
+      document.getElementById("mailtoLink").href =
+        "mailto:contact@drishvara.com?subject=Drishvara%20Submission&body=" + body;
+    }
+
+    document.getElementById("prepareBtn").addEventListener("click", function () {
+      if (!checked("consent")) {
+        alert("Please tick the consent acknowledgement before preparing the submission.");
+        return;
+      }
+
+      if (!value("message")) {
+        alert("Please enter your question, story, correction, or feedback.");
+        return;
+      }
+
+      updatePreview();
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", async function () {
+      updatePreview();
+      await navigator.clipboard.writeText(document.getElementById("preview").textContent);
+      alert("Prepared submission copied.");
+    });
+
+    ["submissionType", "name", "email", "language", "location", "message", "consent"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", updatePreview);
+      document.getElementById(id).addEventListener("change", updatePreview);
+    });
+
+    updatePreview();
+  </script>
+  <script src="/assets/js/site-language.js" defer></script>
+</body>
+</html>

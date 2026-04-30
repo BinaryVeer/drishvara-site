@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:article-index": "node scripts/build-homepage-index.js",
-    "refresh:homepage": "node scripts/refresh-homepage.js && node scripts/fix-featured-images.js && node scripts/apply-bilingual-metadata.js",
+    "refresh:homepage": "node scripts/build-daily-context.js && node scripts/refresh-homepage.js && node scripts/fix-featured-images.js && node scripts/apply-bilingual-metadata.js",
     "check:homepage": "node scripts/refresh-homepage.js",
     "publish:local-check": "npm run refresh:homepage && node scripts/publish-local-check.js",
     "pipeline:preflight": "npm run publish:local-check",
@@ -16,7 +16,7 @@
     "drafts:review": "node scripts/review-drafts.js",
     "drafts:review:latest": "node scripts/review-drafts.js --latest",
     "bilingual:preflight": "node scripts/bilingual-preflight.js",
-    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight",
+    "content:preflight": "npm run publish:local-check && npm run bilingual:preflight && npm run hindi-body:preflight && npm run knowledge:preflight && npm run panchang:preflight && npm run subscriber-guidance:preflight && npm run submission:preflight && npm run daily-context:preflight",
     "hindi-body:preflight": "node scripts/hindi-body-preflight.js",
     "hindi-draft:create": "node scripts/create-hindi-body-draft.js",
     "hindi-draft:review": "node scripts/review-hindi-body.js",
@@ -26,7 +26,10 @@
     "panchang:engine": "node scripts/panchang-engine.js",
     "panchang:preflight": "node scripts/panchang-preflight.js",
     "subscriber-guidance:engine": "node scripts/subscriber-guidance-engine.js",
-    "subscriber-guidance:preflight": "node scripts/subscriber-guidance-preflight.js"
+    "subscriber-guidance:preflight": "node scripts/subscriber-guidance-preflight.js",
+    "submission:preflight": "node scripts/submission-preflight.js",
+    "daily-context:build": "node scripts/build-daily-context.js",
+    "daily-context:preflight": "node scripts/daily-context-preflight.js"
   },
   "repository": {
     "type": "git",

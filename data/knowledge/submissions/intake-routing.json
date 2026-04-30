@@ -1,0 +1,41 @@
+{
+  "version": "2026.04.30-b18d",
+  "module": "knowledge.submissions.intake_routing",
+  "public_collection_enabled": false,
+  "backend_storage_enabled": false,
+  "purpose": "Defines future routing for user questions, stories, corrections, feedback, palmistry questions, and palm image submissions.",
+  "current_mode": "frontend_scaffold_only",
+  "routes": {
+    "general_question": {
+      "target": "review_queue_general",
+      "monthly_review_day": 10
+    },
+    "personal_story": {
+      "target": "review_queue_stories",
+      "monthly_review_day": 10
+    },
+    "knowledge_correction": {
+      "target": "review_queue_knowledge_updates",
+      "monthly_review_day": 10
+    },
+    "feedback": {
+      "target": "review_queue_feedback",
+      "monthly_review_day": 10
+    },
+    "palmistry_question": {
+      "target": "review_queue_palmistry",
+      "monthly_review_day": 10
+    },
+    "palm_image": {
+      "target": "disabled_until_private_storage_and_consent",
+      "monthly_review_day": 10
+    }
+  },
+  "guardrails": [
+    "Do not collect palm image files until private storage and explicit consent are implemented.",
+    "Do not publish user stories or submissions without explicit permission.",
+    "Do not expose personal identifiers publicly.",
+    "Do not provide deterministic health, lifespan, finance, marriage, or guaranteed-outcome claims.",
+    "All submissions must enter review before being used in Knowledge Vault updates."
+  ]
+}
