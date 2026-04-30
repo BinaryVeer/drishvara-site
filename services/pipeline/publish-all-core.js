@@ -946,23 +946,6 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
   </style>
 </head>
 <body>
-  <div class="site-language-control" aria-label="Translate this page">
-    <label for="site-language-select">Translate</label>
-    <select id="site-language-select">
-      <option value="">English</option>
-      <option value="hi">Hindi</option>
-      <option value="bn">Bengali</option>
-      <option value="as">Assamese</option>
-      <option value="ne">Nepali</option>
-      <option value="ta">Tamil</option>
-      <option value="te">Telugu</option>
-      <option value="mr">Marathi</option>
-      <option value="gu">Gujarati</option>
-      <option value="pa">Punjabi</option>
-      <option value="ur">Urdu</option>
-    </select>
-  </div>
-
   <div class="page">
     <div class="topbar">
       <div class="brand">
@@ -1052,29 +1035,6 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
       </div>
     </article>
   </div>
-  <script>
-    (function setupSiteLanguageControl() {
-      const select = document.getElementById("site-language-select");
-      if (!select) return;
-
-      select.addEventListener("change", function () {
-        const lang = select.value;
-
-        if (!lang) {
-          window.location.href = window.location.origin + window.location.pathname + window.location.search;
-          return;
-        }
-
-        const currentUrl = window.location.href;
-        const translateUrl = "https://translate.google.com/translate?sl=en&tl=" +
-          encodeURIComponent(lang) +
-          "&u=" +
-          encodeURIComponent(currentUrl);
-
-        window.location.href = translateUrl;
-      });
-    })();
-  </script>
 </body>
 </html>`;
 }
