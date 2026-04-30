@@ -295,6 +295,109 @@
         border-radius: 14px;
       }
     }
+  
+    /* Batch 12E: Article typography final pass */
+    .article-shell {
+      max-width: 1120px;
+    }
+
+    h1#article-title {
+      max-width: 980px;
+      font-size: clamp(1.78rem, 2.75vw, 2.55rem);
+      line-height: 1.14;
+      font-weight: 650;
+      letter-spacing: -0.018em;
+      margin-bottom: 14px;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      font-size: 1rem;
+      line-height: 1.68;
+      margin-bottom: 22px;
+    }
+
+    .article-body {
+      max-width: 1040px;
+      padding: clamp(28px, 4vw, 48px);
+      border-radius: 20px;
+    }
+
+    .article-body p,
+    .article-body li {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: clamp(1rem, 1.08vw, 1.065rem);
+      line-height: 1.86;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    .article-body h1,
+    .article-body h2,
+    .article-body h3,
+    .article-body blockquote,
+    .article-body ul,
+    .article-body ol {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .article-body h2 {
+      font-size: clamp(1.28rem, 2vw, 1.58rem);
+      line-height: 1.28;
+      margin-top: 30px;
+    }
+
+    .article-body h3 {
+      font-size: clamp(1.12rem, 1.6vw, 1.28rem);
+      line-height: 1.32;
+    }
+
+    .article-body .reader-featured-image,
+    .article-body figure {
+      max-width: 980px;
+      margin: 22px auto 30px;
+    }
+
+    .article-body img {
+      max-height: 340px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .article-body figcaption,
+    .article-body .image-credit {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 768px) {
+      h1#article-title {
+        font-size: clamp(1.62rem, 7vw, 2.15rem);
+        line-height: 1.16;
+      }
+
+      .article-body {
+        padding: 22px;
+      }
+
+      .article-body p,
+      .article-body li {
+        text-align: left;
+        line-height: 1.78;
+      }
+
+      .article-body img {
+        max-height: 280px;
+      }
+    }
+
   </style>
 </head>
 <body>
