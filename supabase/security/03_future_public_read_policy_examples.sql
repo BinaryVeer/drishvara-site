@@ -1,0 +1,13 @@
+-- Future public read policy examples only.
+-- Do not run this file directly.
+-- These are deliberately commented until table-level review is complete.
+
+-- Example only:
+-- create policy "Public can read published articles"
+-- on public.articles
+-- for select
+-- to anon, authenticated
+-- using (
+--   status = 'published'
+--   and public_visible = true
+-- );

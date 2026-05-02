@@ -1,0 +1,32 @@
+{
+  "version": "2026.05.02-security-01f",
+  "module": "security.supabase_rls_lockdown_record",
+  "status": "recorded",
+  "supabase_alert_type": "rls_disabled_in_public_schema",
+  "database_action_completed": true,
+  "expected_post_lockdown_result": "0 public tables with rowsecurity=false",
+  "broad_public_policies_created": false,
+  "anonymous_insert_enabled": false,
+  "frontend_supabase_enabled": false,
+  "live_auth_enabled": false,
+  "live_payment_enabled": false,
+  "dashboard_data_unlocked": false,
+  "palm_image_upload_enabled": false,
+  "admin_backend_actions_enabled": false,
+  "subscriber_guidance_enabled": false,
+  "record": "docs/security/supabase-rls-lockdown-record-2026-05-02.md",
+  "policy_plan": "docs/security/supabase-public-table-policy-plan.md",
+  "sql_helpers": [
+    "supabase/security/01_list_public_tables_without_rls.sql",
+    "supabase/security/02_enable_rls_for_all_public_tables.sql",
+    "supabase/security/03_future_public_read_policy_examples.sql"
+  ],
+  "guardrails": [
+    "Keep RLS enabled on public schema tables.",
+    "Do not create broad allow-all policies.",
+    "Do not enable anonymous insert.",
+    "Do not expose service role key.",
+    "Do not enable live Auth or payment in this stage.",
+    "Add future public read policies only after table-level review."
+  ]
+}
