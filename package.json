@@ -42,7 +42,7 @@
     "admin-review:preflight": "node scripts/admin-review-preflight.js",
     "preactivation:preflight": "node scripts/preactivation-preflight.js && npm run activation:auth-manual-enable:preflight",
     "timezone:preflight": "node scripts/timezone-preflight.js",
-    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:homepage-language-runtime:preflight && npm run ui:homepage-language-brand:preflight",
+    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:homepage-language-runtime:preflight && npm run ui:homepage-language-brand:preflight && npm run ui:cross-page-language-guard:preflight",
     "daily-basis:preflight": "node scripts/daily-basis-guard-preflight.js",
     "placeholder:audit": "node scripts/placeholder-audit-preflight.js",
     "public-visual:preflight": "node scripts/public-visual-polish-preflight.js",
@@ -67,7 +67,8 @@
     "content:governance-status:preflight": "node scripts/content-governance-status-preflight.js",
     "activation:auth-manual-enable:preflight": "node scripts/limited-auth-manual-enablement-preflight.js",
     "ui:homepage-language-runtime:preflight": "node scripts/homepage-language-runtime-preflight.js",
-    "ui:homepage-language-brand:preflight": "node scripts/homepage-language-brand-preflight.js"
+    "ui:homepage-language-brand:preflight": "node scripts/homepage-language-brand-preflight.js",
+    "ui:cross-page-language-guard:preflight": "node scripts/homepage-cross-page-language-guard-preflight.js"
   },
   "repository": {
     "type": "git",
