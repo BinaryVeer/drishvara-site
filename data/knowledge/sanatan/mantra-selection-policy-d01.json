@@ -1,0 +1,23 @@
+{
+  "version": "2026.05.02-d01",
+  "module": "knowledge.mantra_selection_policy",
+  "status": "policy_scaffold",
+  "public_dynamic_mantra_enabled": false,
+  "rules": [
+    "Mantra text must be stored exactly in Devanagari where applicable.",
+    "Transliteration may be added later but must not replace Devanagari.",
+    "Deity/day association must be reviewed before use.",
+    "Do not generate new mantras automatically.",
+    "Do not present mantra as guaranteed remedy or prediction."
+  ],
+  "future_record_fields": [
+    "id",
+    "deity_or_theme",
+    "sanskrit_text",
+    "transliteration",
+    "meaning",
+    "usage_context",
+    "source_basis",
+    "review_status"
+  ]
+}

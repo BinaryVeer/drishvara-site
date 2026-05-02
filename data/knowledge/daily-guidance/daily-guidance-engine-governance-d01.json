@@ -1,0 +1,53 @@
+{
+  "version": "2026.05.02-d01",
+  "module": "knowledge.daily_guidance_panchang_engine_governance",
+  "status": "governance_only",
+  "purpose": "Define safe governance for future dynamic Daily Guidance, Panchang, Festival, Mantra, Word of the Day, and reflective guidance modules.",
+  "public_dynamic_output_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "article_body_translation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "modules": {
+    "word_of_the_day": {
+      "status": "static_public_scaffold",
+      "future_engine": "curated_word_bank_with_date_rotation",
+      "requires_review": true
+    },
+    "vedic_guidance": {
+      "status": "static_public_scaffold",
+      "future_engine": "rule_based_day_tithi_nakshatra_context_engine",
+      "requires_review": true
+    },
+    "panchang_festival": {
+      "status": "blocked_public_dynamic_output",
+      "future_engine": "location_aware_panchang_and_festival_engine",
+      "requires_location": true,
+      "requires_source_validation": true
+    },
+    "mantra": {
+      "status": "static_or_blocked_until_review",
+      "future_engine": "source_grounded_mantra_selection",
+      "requires_sanskrit_review": true
+    },
+    "lucky_colour_number": {
+      "status": "dashboard_scaffold_only",
+      "future_engine": "non-deterministic_reflective_personalization_after_auth",
+      "requires_auth": true,
+      "premium_blocked": true
+    }
+  },
+  "guardrails": [
+    "Do not claim Panchang, Tithi, Nakshatra, Sunrise, Sunset, Festival, or Mantra values are dynamic until a validated engine exists.",
+    "Do not fetch external astrology or Panchang APIs in this stage.",
+    "Do not activate subscriber/premium guidance.",
+    "Do not change language runtime.",
+    "Do not mutate generated article files.",
+    "Do not expose spiritual guidance as deterministic prediction.",
+    "All Sanskrit, mantra, deity, vrata, tithi, nakshatra and festival logic must be manually reviewed before public dynamic use."
+  ]
+}

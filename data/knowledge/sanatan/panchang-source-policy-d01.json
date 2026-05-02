@@ -1,0 +1,37 @@
+{
+  "version": "2026.05.02-d01",
+  "module": "knowledge.panchang_source_policy",
+  "status": "source_policy_scaffold",
+  "approved_source_categories": [
+    "curated internal rules",
+    "verified Panchang calculation library after review",
+    "official/recognized festival calendar references after review",
+    "manual editorial verification"
+  ],
+  "blocked_source_categories": [
+    "unreviewed scraping",
+    "unverified social media astrology claims",
+    "runtime DOM translation of spiritual content",
+    "unvalidated AI-generated Panchang values"
+  ],
+  "required_fields_for_future_daily_record": [
+    "date",
+    "timezone",
+    "location_basis",
+    "sunrise",
+    "sunset",
+    "tithi",
+    "nakshatra",
+    "festival_or_observance",
+    "guidance_text",
+    "mantra_text",
+    "source_basis",
+    "review_status"
+  ],
+  "review_status_values": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ]
+}
