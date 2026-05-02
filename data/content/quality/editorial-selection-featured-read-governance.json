@@ -1,0 +1,66 @@
+{
+  "version": "2026.05.02-content-c02",
+  "module": "content.editorial_selection_featured_read_governance",
+  "status": "preflight_only",
+  "purpose": "Defines governance checks for homepage featured read selection, category balance, duplicate prevention, image uniqueness, and public-safe article selection.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "scripts/public-read-integrity-preflight.js",
+    "data/article-index.json",
+    "data/homepage-ui.json"
+  ],
+  "manual_override": {
+    "enabled": false,
+    "future_file": "data/content/editorial/featured-read-overrides.json",
+    "required_future_fields": [
+      "article_path",
+      "reason",
+      "editor",
+      "approved_at",
+      "rollback_note"
+    ]
+  },
+  "minimum_homepage_featured_reads": 4,
+  "minimum_category_diversity": 2,
+  "require_unique_featured_links": true,
+  "prefer_unique_featured_images": true,
+  "require_hindi_metadata_sample": true,
+  "blocked_featured_tags": [
+    "daily context",
+    "sports context",
+    "hindi drafts",
+    "generated",
+    "pipeline",
+    "scaffold",
+    "internal",
+    "placeholder"
+  ],
+  "selection_scoring_future": {
+    "editorial_priority": 30,
+    "freshness": 15,
+    "category_diversity": 15,
+    "image_available": 10,
+    "hindi_metadata_available": 10,
+    "evergreen_value": 10,
+    "duplicate_topic_penalty": -10
+  },
+  "blocked_in_this_stage": [
+    "external_api_fetch",
+    "live_image_fetch",
+    "live_supabase_article_read",
+    "manual_override_activation",
+    "article_publication_mutation",
+    "auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "Do not mutate article records during governance preflight.",
+    "Do not fetch external APIs.",
+    "Do not activate manual override yet.",
+    "Do not allow pipeline-only categories as homepage featured reads.",
+    "Do not allow duplicate featured article links.",
+    "Do not expose service role key."
+  ]
+}
