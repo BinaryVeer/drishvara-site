@@ -118,6 +118,18 @@
     }
   }, true);
 
+
+  // language-toggle-keyboard
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    const target = findLanguageToggleTarget(event.target);
+    if (!target) return;
+
+    event.preventDefault();
+    target.click();
+  }, true);
+
   window.DrishvaraSiteLanguage = {
     version: VERSION,
     setLanguage,

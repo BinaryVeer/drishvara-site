@@ -1,0 +1,171 @@
+{
+  "version": "2026.05.02-h06",
+  "module": "content.bilingual_static_page_copy_registry",
+  "status": "content_registry_only",
+  "purpose": "Controlled Hindi copy registry for public static pages. This stage expands bilingual content without changing the language toggle/runtime mechanics.",
+  "runtime_logic_change_enabled": false,
+  "external_api_fetch_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "pages": {
+    "about": {
+      "path": "about.html",
+      "copy_status": "expanded_seed",
+      "items": [
+        {
+          "key": "about.hero.title",
+          "en": "About Drishvara",
+          "hi": "द्रिश्वारा के बारे में"
+        },
+        {
+          "key": "about.hero.subtitle",
+          "en": "A lens, not just a platform.",
+          "hi": "यह केवल एक मंच नहीं, बल्कि देखने और समझने की एक दृष्टि है।"
+        },
+        {
+          "key": "about.stands_for.title",
+          "en": "What Drishvara stands for",
+          "hi": "द्रिश्वारा किस विचार के साथ खड़ा है"
+        },
+        {
+          "key": "about.orientation.title",
+          "en": "Core orientation",
+          "hi": "मूल अभिमुखता"
+        },
+        {
+          "key": "about.orientation.clarity",
+          "en": "Clarity over noise",
+          "hi": "शोर से अधिक स्पष्टता"
+        },
+        {
+          "key": "about.orientation.depth",
+          "en": "Depth over speed",
+          "hi": "गति से अधिक गहराई"
+        },
+        {
+          "key": "about.orientation.reflection",
+          "en": "Reflection over reaction",
+          "hi": "प्रतिक्रिया से अधिक चिंतन"
+        },
+        {
+          "key": "about.orientation.meaning",
+          "en": "Meaning over information",
+          "hi": "सूचना से अधिक अर्थ"
+        }
+      ]
+    },
+    "contact": {
+      "path": "contact.html",
+      "copy_status": "expanded_seed",
+      "items": [
+        {
+          "key": "contact.hero.title",
+          "en": "Write with purpose.",
+          "hi": "उद्देश्य के साथ लिखें।"
+        },
+        {
+          "key": "contact.primary.title",
+          "en": "Primary contact",
+          "hi": "मुख्य संपर्क"
+        },
+        {
+          "key": "contact.topic.title",
+          "en": "What to write about",
+          "hi": "किस विषय पर लिखें"
+        },
+        {
+          "key": "contact.note",
+          "en": "Drishvara is being built carefully. Thoughtful mail is always welcome.",
+          "hi": "द्रिश्वारा को सावधानीपूर्वक विकसित किया जा रहा है। विचारपूर्ण संदेशों का सदैव स्वागत है।"
+        }
+      ]
+    },
+    "submissions": {
+      "path": "submissions.html",
+      "copy_status": "expanded_seed",
+      "items": [
+        {
+          "key": "submissions.hero.title",
+          "en": "Submit to Drishvara",
+          "hi": "द्रिश्वारा को भेजें"
+        },
+        {
+          "key": "submissions.form.title",
+          "en": "Submission Form",
+          "hi": "सबमिशन फॉर्म"
+        },
+        {
+          "key": "submissions.packet.title",
+          "en": "Prepared Review Packet",
+          "hi": "तैयार समीक्षा पैकेट"
+        },
+        {
+          "key": "submissions.backend.disabled",
+          "en": "Backend intake: disabled · Local preparation only",
+          "hi": "बैकएंड इनटेक: बंद · अभी केवल स्थानीय तैयारी"
+        },
+        {
+          "key": "submissions.controlled_scaffold",
+          "en": "This is a controlled intake scaffold.",
+          "hi": "यह नियंत्रित इनटेक स्कैफोल्ड है।"
+        }
+      ]
+    },
+    "dashboard": {
+      "path": "dashboard.html",
+      "copy_status": "expanded_seed",
+      "items": [
+        {
+          "key": "dashboard.title",
+          "en": "Subscriber Dashboard",
+          "hi": "सब्सक्राइबर डैशबोर्ड"
+        },
+        {
+          "key": "dashboard.pending",
+          "en": "Dashboard is being prepared",
+          "hi": "डैशबोर्ड तैयार किया जा रहा है"
+        },
+        {
+          "key": "dashboard.lucky_number",
+          "en": "Lucky Number",
+          "hi": "शुभ अंक"
+        },
+        {
+          "key": "dashboard.lucky_color",
+          "en": "Lucky Color",
+          "hi": "शुभ रंग"
+        },
+        {
+          "key": "dashboard.mantra",
+          "en": "Mantra",
+          "hi": "मंत्र"
+        }
+      ]
+    },
+    "article_reader": {
+      "path": "article.html",
+      "copy_status": "sidecar_scaffold_only",
+      "items": [
+        {
+          "key": "article.body_policy",
+          "en": "Hindi article bodies are shown only when approved Hindi body content exists.",
+          "hi": "हिन्दी लेख-शरीर केवल तभी दिखाया जाएगा जब स्वीकृत हिन्दी लेख-शरीर उपलब्ध हो।"
+        }
+      ]
+    }
+  },
+  "guardrails": [
+    "Do not auto-translate article bodies.",
+    "Do not mutate generated article files.",
+    "Do not alter language toggle runtime logic.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "Use approved Hindi copy only."
+  ]
+}
