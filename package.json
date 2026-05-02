@@ -22,7 +22,7 @@
     "hindi-draft:review": "node scripts/review-hindi-body.js",
     "hindi-draft:publish-approved": "node scripts/publish-approved-hindi-bodies.js",
     "hindi-draft:publish-approved:dry-run": "node scripts/publish-approved-hindi-bodies.js --dryRun=true",
-    "knowledge:preflight": "node scripts/knowledge-preflight.js && npm run knowledge:daily-guidance:preflight",
+    "knowledge:preflight": "node scripts/knowledge-preflight.js && npm run knowledge:daily-guidance:preflight && npm run knowledge:word-of-day:preflight",
     "panchang:engine": "node scripts/panchang-engine.js",
     "panchang:preflight": "node scripts/panchang-preflight.js",
     "subscriber-guidance:engine": "node scripts/subscriber-guidance-engine.js",
@@ -42,7 +42,7 @@
     "admin-review:preflight": "node scripts/admin-review-preflight.js",
     "preactivation:preflight": "node scripts/preactivation-preflight.js && npm run activation:auth-manual-enable:preflight",
     "timezone:preflight": "node scripts/timezone-preflight.js",
-    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:language-runtime:preflight && npm run ui:language-runtime-neutralization:preflight && npm run ui:language-toggle-click:preflight && npm run i18n:content-expansion:preflight && npm run i18n:static-copy-apply:preflight && npm run i18n:hindi-body-sidecar:preflight && npm run knowledge:daily-guidance:preflight",
+    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:language-runtime:preflight && npm run ui:language-runtime-neutralization:preflight && npm run ui:language-toggle-click:preflight && npm run i18n:content-expansion:preflight && npm run i18n:static-copy-apply:preflight && npm run i18n:hindi-body-sidecar:preflight && npm run knowledge:daily-guidance:preflight && npm run knowledge:word-of-day:preflight",
     "daily-basis:preflight": "node scripts/daily-basis-guard-preflight.js",
     "placeholder:audit": "node scripts/placeholder-audit-preflight.js",
     "public-visual:preflight": "node scripts/public-visual-polish-preflight.js",
@@ -72,7 +72,8 @@
     "i18n:content-expansion:preflight": "node scripts/bilingual-content-expansion-preflight.js",
     "i18n:static-copy-apply:preflight": "node scripts/bilingual-static-copy-application-preflight.js",
     "i18n:hindi-body-sidecar:preflight": "node scripts/hindi-article-body-sidecar-governance-preflight.js",
-    "knowledge:daily-guidance:preflight": "node scripts/daily-guidance-engine-governance-preflight.js"
+    "knowledge:daily-guidance:preflight": "node scripts/daily-guidance-engine-governance-preflight.js",
+    "knowledge:word-of-day:preflight": "node scripts/word-of-day-bank-preflight.js"
   },
   "repository": {
     "type": "git",

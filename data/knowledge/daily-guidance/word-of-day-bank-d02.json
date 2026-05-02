@@ -1,0 +1,163 @@
+{
+  "version": "2026.05.02-d02",
+  "module": "knowledge.word_of_the_day_curated_rotation_bank",
+  "status": "curated_bank_scaffold",
+  "purpose": "Reviewed word bank for future Word of the Day rotation. Public dynamic rotation is not enabled in this stage.",
+  "public_dynamic_output_enabled": false,
+  "runtime_language_change_enabled": false,
+  "external_api_fetch_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "entry_schema": {
+    "id": "stable slug",
+    "word_en": "English word",
+    "word_hi": "Hindi word",
+    "word_sanskrit": "Sanskrit/Indic term where applicable",
+    "meaning_en": "Short English meaning",
+    "meaning_hi": "Short Hindi meaning",
+    "theme": "reflection / clarity / discipline / awareness / devotion / conduct",
+    "usage_context": "How it may be used in Drishvara daily guidance",
+    "review_status": "draft / needs_review / approved / rejected"
+  },
+  "items": [
+    {
+      "id": "reflection",
+      "word_en": "Reflection",
+      "word_hi": "मनन",
+      "word_sanskrit": "मननम्",
+      "meaning_en": "Sustained inward consideration before response.",
+      "meaning_hi": "प्रतिक्रिया से पहले किया गया स्थिर आंतरिक विचार।",
+      "theme": "reflection",
+      "usage_context": "Daily reminder for thoughtful action.",
+      "review_status": "approved"
+    },
+    {
+      "id": "clarity",
+      "word_en": "Clarity",
+      "word_hi": "स्पष्टता",
+      "word_sanskrit": "स्पष्टता",
+      "meaning_en": "The ability to see what matters without noise.",
+      "meaning_hi": "शोर से अलग होकर आवश्यक बात को देखने की क्षमता।",
+      "theme": "clarity",
+      "usage_context": "Editorial and personal decision-making.",
+      "review_status": "approved"
+    },
+    {
+      "id": "steadiness",
+      "word_en": "Steadiness",
+      "word_hi": "स्थिरता",
+      "word_sanskrit": "स्थैर्यम्",
+      "meaning_en": "A calm continuity of effort and attention.",
+      "meaning_hi": "प्रयास और ध्यान की शांत निरंतरता।",
+      "theme": "discipline",
+      "usage_context": "Useful for daily discipline and long-term work.",
+      "review_status": "approved"
+    },
+    {
+      "id": "discernment",
+      "word_en": "Discernment",
+      "word_hi": "विवेक",
+      "word_sanskrit": "विवेकः",
+      "meaning_en": "The capacity to distinguish signal from distraction.",
+      "meaning_hi": "संकेत और विचलन के बीच अंतर समझने की क्षमता।",
+      "theme": "clarity",
+      "usage_context": "Used for insight, reading, and judgment.",
+      "review_status": "approved"
+    },
+    {
+      "id": "patience",
+      "word_en": "Patience",
+      "word_hi": "धैर्य",
+      "word_sanskrit": "धैर्यम्",
+      "meaning_en": "Strength that remains composed while time unfolds.",
+      "meaning_hi": "समय के खुलने तक संयमित रहने की शक्ति।",
+      "theme": "discipline",
+      "usage_context": "Useful for slow, careful progress.",
+      "review_status": "approved"
+    },
+    {
+      "id": "devotion",
+      "word_en": "Devotion",
+      "word_hi": "भक्ति",
+      "word_sanskrit": "भक्तिः",
+      "meaning_en": "Loyal attention offered with sincerity.",
+      "meaning_hi": "सच्चाई के साथ अर्पित निष्ठापूर्ण ध्यान।",
+      "theme": "devotion",
+      "usage_context": "For spiritual and value-led reflection.",
+      "review_status": "needs_review"
+    },
+    {
+      "id": "awareness",
+      "word_en": "Awareness",
+      "word_hi": "जागरूकता",
+      "word_sanskrit": "बोधः",
+      "meaning_en": "Wakeful attention to self, context, and consequence.",
+      "meaning_hi": "स्वयं, परिस्थिति और परिणाम के प्रति सजग ध्यान।",
+      "theme": "awareness",
+      "usage_context": "Used for daily observational guidance.",
+      "review_status": "approved"
+    },
+    {
+      "id": "discipline",
+      "word_en": "Discipline",
+      "word_hi": "अनुशासन",
+      "word_sanskrit": "अनुशासनम्",
+      "meaning_en": "A chosen structure that protects meaningful work.",
+      "meaning_hi": "सार्थक कार्य की रक्षा करने वाली चुनी हुई संरचना।",
+      "theme": "discipline",
+      "usage_context": "Useful for routines and self-management.",
+      "review_status": "approved"
+    },
+    {
+      "id": "restraint",
+      "word_en": "Restraint",
+      "word_hi": "संयम",
+      "word_sanskrit": "संयमः",
+      "meaning_en": "The strength to pause before excess.",
+      "meaning_hi": "अति से पहले रुकने की शक्ति।",
+      "theme": "conduct",
+      "usage_context": "Useful for speech, emotion, consumption, and action.",
+      "review_status": "approved"
+    },
+    {
+      "id": "gratitude",
+      "word_en": "Gratitude",
+      "word_hi": "कृतज्ञता",
+      "word_sanskrit": "कृतज्ञता",
+      "meaning_en": "Remembering what has supported us.",
+      "meaning_hi": "जिसने हमें सहारा दिया है, उसे स्मरण रखना।",
+      "theme": "conduct",
+      "usage_context": "Good for reflective closure and humility.",
+      "review_status": "approved"
+    },
+    {
+      "id": "resolve",
+      "word_en": "Resolve",
+      "word_hi": "संकल्प",
+      "word_sanskrit": "संकल्पः",
+      "meaning_en": "A clear inner commitment toward action.",
+      "meaning_hi": "कर्म की ओर स्पष्ट आंतरिक प्रतिबद्धता।",
+      "theme": "discipline",
+      "usage_context": "Useful for daily intention-setting.",
+      "review_status": "approved"
+    },
+    {
+      "id": "balance",
+      "word_en": "Balance",
+      "word_hi": "संतुलन",
+      "word_sanskrit": "संतुलनम्",
+      "meaning_en": "Holding different needs without losing center.",
+      "meaning_hi": "केंद्र खोए बिना अलग-अलग आवश्यकताओं को साधना।",
+      "theme": "awareness",
+      "usage_context": "Useful for work-life and inner regulation.",
+      "review_status": "approved"
+    }
+  ]
+}

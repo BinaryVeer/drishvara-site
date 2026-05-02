@@ -1,0 +1,38 @@
+{
+  "version": "2026.05.02-d02",
+  "module": "knowledge.word_of_day_rotation_policy",
+  "status": "policy_scaffold",
+  "public_rotation_enabled": false,
+  "purpose": "Define safe future rotation rules for Word of the Day without enabling dynamic public output.",
+  "rotation_basis_future": [
+    "calendar date",
+    "theme balance",
+    "avoid recent repetition",
+    "manual editorial override after review"
+  ],
+  "blocked_behaviour": [
+    "unreviewed AI word generation",
+    "external API word fetch",
+    "runtime DOM generation of new words",
+    "prediction-style claims"
+  ],
+  "future_daily_record_fields": [
+    "date",
+    "timezone",
+    "word_id",
+    "word_en",
+    "word_hi",
+    "word_sanskrit",
+    "meaning_en",
+    "meaning_hi",
+    "theme",
+    "source_basis",
+    "review_status"
+  ],
+  "review_status_values": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ]
+}
