@@ -1,0 +1,48 @@
+{
+  "version": "2026.05.02-content-c01",
+  "module": "content.public_read_link_image_integrity",
+  "status": "preflight_only",
+  "purpose": "Validates public article selection, read links, featured images, Hindi metadata, and article discovery outputs.",
+  "covers_earlier_main_work": true,
+  "covers_scaffold_safety_layer": true,
+  "validated_surfaces": [
+    "index.html",
+    "insights.html",
+    "article.html",
+    "data/article-index.json",
+    "data/homepage-ui.json",
+    "sitemap.xml",
+    "data/seo/site-metadata.json"
+  ],
+  "required_checks": [
+    "publicLatest exists",
+    "publishedItems exists",
+    "homepage featuredReads exists",
+    "featured read title exists",
+    "featured read summary exists",
+    "featured read image exists",
+    "featured read link resolves to article reader or approved URL",
+    "old dummy read links are absent",
+    "Hindi metadata exists for public latest sample",
+    "article reader supports Hindi body",
+    "article reader supports image handling",
+    "sitemap contains article URLs"
+  ],
+  "blocked_in_this_stage": [
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "live_auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock",
+    "palm_image_upload",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "Do not fetch external APIs during integrity check.",
+    "Do not mutate article content.",
+    "Do not enable backend reads.",
+    "Do not reintroduce #open-day-card links.",
+    "Do not use javascript:void links.",
+    "Do not expose service role key."
+  ]
+}
