@@ -1,0 +1,45 @@
+{
+  "version": "2026.05.02-content-c08",
+  "module": "content.article_quality_report_preview",
+  "status": "preflight_only",
+  "purpose": "Generates and validates a read-only article quality report preview from existing article index and homepage UI data.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "data/content/quality/editorial-selection-featured-read-governance.json",
+    "data/content/quality/featured-read-override-selection-memory.json",
+    "data/content/quality/featured-read-scoring-rotation-preview.json",
+    "data/content/quality/image-registry-source-governance.json",
+    "data/content/quality/article-url-slug-sitemap-governance.json",
+    "data/content/quality/article-quality-metadata-review.json"
+  ],
+  "report_file": "data/content/reports/article-quality-report-preview.json",
+  "report_generation_enabled": true,
+  "report_is_read_only": true,
+  "article_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "review_queue_write_enabled": false,
+  "admin_review_enabled": false,
+  "external_api_fetch_enabled": false,
+  "live_supabase_read_enabled": false,
+  "blocked_in_this_stage": [
+    "article_content_mutation",
+    "article_publication_mutation",
+    "homepage_mutation",
+    "review_queue_write",
+    "admin_review_activation",
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "live_supabase_article_write",
+    "payment_provider",
+    "premium_guidance_unlock"
+  ],
+  "guardrails": [
+    "Generate read-only report only.",
+    "Do not mutate article index.",
+    "Do not mutate homepage UI.",
+    "Do not write review queue items.",
+    "Do not activate admin review.",
+    "Do not fetch external APIs.",
+    "Do not expose service role key."
+  ]
+}
