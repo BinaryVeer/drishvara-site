@@ -189,30 +189,37 @@ create table if not exists public.knowledge_update_reviews (
 create index if not exists knowledge_update_reviews_month_idx
 on public.knowledge_update_reviews (update_month desc, status);
 
+drop trigger if exists set_subscriber_profiles_updated_at on public.subscriber_profiles;
 create trigger set_subscriber_profiles_updated_at
 before update on public.subscriber_profiles
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_subscriptions_updated_at on public.subscriptions;
 create trigger set_subscriptions_updated_at
 before update on public.subscriptions
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_subscriber_daily_guidance_updated_at on public.subscriber_daily_guidance;
 create trigger set_subscriber_daily_guidance_updated_at
 before update on public.subscriber_daily_guidance
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_user_submissions_updated_at on public.user_submissions;
 create trigger set_user_submissions_updated_at
 before update on public.user_submissions
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_feedback_submissions_updated_at on public.feedback_submissions;
 create trigger set_feedback_submissions_updated_at
 before update on public.feedback_submissions
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_palmistry_requests_updated_at on public.palmistry_requests;
 create trigger set_palmistry_requests_updated_at
 before update on public.palmistry_requests
 for each row execute function public.set_updated_at();
 
+drop trigger if exists set_knowledge_update_reviews_updated_at on public.knowledge_update_reviews;
 create trigger set_knowledge_update_reviews_updated_at
 before update on public.knowledge_update_reviews
 for each row execute function public.set_updated_at();
