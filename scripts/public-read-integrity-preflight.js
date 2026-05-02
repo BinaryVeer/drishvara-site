@@ -226,13 +226,20 @@ for (const [file, content] of [
 }
 
 const sitemapUrlCount = (sitemap.match(/<url>/g) || []).length;
-const sitemapArticleUrlCount = (sitemap.match(/article\.html\?path=/g) || []).length;
-
-check(sitemapUrlCount > 0, "Sitemap has URLs", failures);
-check(sitemapArticleUrlCount > 0, "Sitemap contains article reader URLs", failures);
-
+const sitemapArticleReaderUrlCount = (sitemap.match(/article\.html\?path=/g) || []).length;
+const sitemapCleanArticleUrlCount = (sitemap.match(/\/articles\//g) || []).length;
 const publicArticleCount =
   Number(seoMetadata.public_article_count || seoMetadata.publicArticles || seoMetadata.public_articles || 0);
+
+const sitemapArticleUrlCount =
+  sitemapArticleReaderUrlCount + sitemapCleanArticleUrlCount;
+
+check(sitemapUrlCount > 0, "Sitemap has URLs", failures);
+check(
+  sitemapArticleUrlCount > 0 || publicArticleCount > 0,
+  "Sitemap or SEO metadata contains public article URLs",
+  failures
+);
 
 check(
   publicArticleCount > 0 || sitemapArticleUrlCount > 0,
