@@ -1,0 +1,84 @@
+{
+  "version": "2026.05.02-d03",
+  "module": "knowledge.daily_guidance_rule_schema",
+  "status": "schema_only",
+  "purpose": "Define the future rule structure for Daily Guidance without enabling dynamic public output.",
+  "public_dynamic_output_enabled": false,
+  "subscriber_guidance_enabled": false,
+  "premium_guidance_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "rule_schema": {
+    "rule_id": "stable slug",
+    "rule_type": "day | tithi | nakshatra | season | festival | word_theme | observance | fallback",
+    "input_conditions": {
+      "weekday": "optional weekday",
+      "tithi": "optional tithi",
+      "nakshatra": "optional nakshatra",
+      "season": "optional season",
+      "festival_or_observance": "optional observance",
+      "word_theme": "optional word theme"
+    },
+    "output_fields": {
+      "guidance_title_en": "English title",
+      "guidance_title_hi": "Hindi title",
+      "guidance_text_en": "English guidance text",
+      "guidance_text_hi": "Hindi guidance text",
+      "recommended_action_en": "English action",
+      "recommended_action_hi": "Hindi action",
+      "avoidance_note_en": "English caution",
+      "avoidance_note_hi": "Hindi caution",
+      "tone": "reflective | devotional | disciplined | calming | cautionary",
+      "source_basis": "source or editorial basis",
+      "review_status": "draft | needs_review | approved | rejected"
+    }
+  },
+  "allowed_rule_types": [
+    "day",
+    "tithi",
+    "nakshatra",
+    "season",
+    "festival",
+    "word_theme",
+    "observance",
+    "fallback"
+  ],
+  "allowed_tones": [
+    "reflective",
+    "devotional",
+    "disciplined",
+    "calming",
+    "cautionary"
+  ],
+  "review_status_values": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ],
+  "display_policy": {
+    "public_current": "Static/scaffold daily guidance remains active.",
+    "future_public_dynamic": "May display only approved, source-grounded, non-predictive guidance rules.",
+    "future_subscriber": "Subscriber/premium personalization remains blocked until Auth/subscription activation.",
+    "fallback": "If no approved rule matches, use approved neutral fallback guidance."
+  },
+  "guardrails": [
+    "Do not present daily guidance as deterministic prediction.",
+    "Do not claim astrological certainty.",
+    "Do not generate unreviewed mantras, remedies, deity guidance, or Panchang claims.",
+    "Do not enable public dynamic guidance in this stage.",
+    "Do not enable subscriber guidance in this stage.",
+    "Do not fetch external APIs.",
+    "Do not change language runtime.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "All guidance rules must be reviewed before public use."
+  ]
+}
