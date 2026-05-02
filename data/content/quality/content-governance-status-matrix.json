@@ -1,0 +1,53 @@
+{
+  "version": "2026.05.02-content-c09",
+  "module": "content.governance_status_matrix",
+  "status": "preflight_only",
+  "purpose": "Consolidates content governance stages C01-C08 into one status matrix and validates that all mutation/live paths remain blocked.",
+  "consolidated_only": true,
+  "live_mutation_enabled": false,
+  "external_api_fetch_enabled": false,
+  "live_supabase_article_read_enabled": false,
+  "admin_review_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "covered_stages": [
+    "C01_public_read_link_image_integrity",
+    "C02_editorial_selection_governance",
+    "C03_featured_read_override_selection_memory",
+    "C04_featured_read_scoring_rotation_preview",
+    "C05_image_registry_source_governance",
+    "C06_article_url_slug_sitemap_governance",
+    "C07_article_quality_metadata_review",
+    "C08_article_quality_report_preview"
+  ],
+  "matrix_report": "data/content/reports/content-governance-status-matrix.json",
+  "blocked_in_this_stage": [
+    "article_content_mutation",
+    "article_publication_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "image_registry_write",
+    "image_fallback_application",
+    "manual_override_activation",
+    "selection_memory_write",
+    "article_quality_metadata_write",
+    "review_queue_write",
+    "admin_review_activation",
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "live_supabase_article_write",
+    "auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock"
+  ],
+  "guardrails": [
+    "C09 is consolidation only.",
+    "Do not mutate content.",
+    "Do not mutate homepage.",
+    "Do not mutate sitemap.",
+    "Do not write review queues.",
+    "Do not enable Supabase article reads/writes.",
+    "Do not fetch external APIs.",
+    "Do not expose service role key."
+  ]
+}

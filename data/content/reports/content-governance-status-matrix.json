@@ -1,0 +1,92 @@
+{
+  "version": "2026.05.02-content-c09",
+  "module": "content.governance_status_matrix_report",
+  "status": "generated_static",
+  "read_only": true,
+  "stage_count": 8,
+  "summary": {
+    "content_governance_stack": "C01-C08 complete",
+    "public_article_system": "protected_static_preview",
+    "article_mutation_enabled": false,
+    "homepage_mutation_enabled": false,
+    "sitemap_mutation_enabled": false,
+    "external_api_fetch_enabled": false,
+    "live_supabase_article_read_enabled": false,
+    "admin_review_enabled": false
+  },
+  "stages": [
+    {
+      "stage": "C01",
+      "name": "Public read link and image integrity checker",
+      "registry": "data/content/quality/public-read-link-image-integrity.json",
+      "preflight": "content:public-read-integrity:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C02",
+      "name": "Editorial selection governance",
+      "registry": "data/content/quality/editorial-selection-featured-read-governance.json",
+      "preflight": "content:editorial-selection:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C03",
+      "name": "Featured read override and selection memory scaffold",
+      "registry": "data/content/quality/featured-read-override-selection-memory.json",
+      "preflight": "content:featured-override-memory:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C04",
+      "name": "Featured read scoring and rotation preview",
+      "registry": "data/content/quality/featured-read-scoring-rotation-preview.json",
+      "preflight": "content:featured-scoring-rotation:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C05",
+      "name": "Image registry and source governance scaffold",
+      "registry": "data/content/quality/image-registry-source-governance.json",
+      "preflight": "content:image-governance:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C06",
+      "name": "Article URL/slug/sitemap governance scaffold",
+      "registry": "data/content/quality/article-url-slug-sitemap-governance.json",
+      "preflight": "content:url-sitemap-governance:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C07",
+      "name": "Article quality metadata and review scaffold",
+      "registry": "data/content/quality/article-quality-metadata-review.json",
+      "preflight": "content:article-quality:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    },
+    {
+      "stage": "C08",
+      "name": "Read-only article quality report preview",
+      "registry": "data/content/quality/article-quality-report-preview.json",
+      "preflight": "content:article-quality-report:preflight",
+      "status": "preflight_only",
+      "mutation_enabled": false
+    }
+  ],
+  "guardrails": {
+    "article_content_mutation": false,
+    "homepage_mutation": false,
+    "sitemap_mutation": false,
+    "review_queue_write": false,
+    "external_api_fetch": false,
+    "live_supabase_read": false,
+    "admin_review": false
+  }
+}
