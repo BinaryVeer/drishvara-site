@@ -1,0 +1,58 @@
+{
+  "version": "2026.05.02-activation-02f",
+  "module": "activation.limited_auth_manual_enablement_runbook",
+  "status": "runbook_only",
+  "purpose": "Records controlled manual Supabase Auth configuration without enabling frontend Auth in code.",
+  "live_auth_enabled_from_repo": false,
+  "frontend_supabase_client_enabled": false,
+  "session_detection_enabled": false,
+  "dashboard_data_unlock_enabled": false,
+  "subscription_gate_enabled": false,
+  "premium_guidance_enabled": false,
+  "payment_provider_enabled": false,
+  "palm_image_upload_enabled": false,
+  "admin_backend_actions_enabled": false,
+  "recommended_auth_method": "email_otp_or_magic_link",
+  "recommended_signup_policy": "controlled_or_invite_only_initially",
+  "runbook": "docs/activation/limited-auth-manual-enablement-runbook.md",
+  "test_record_template": "docs/activation/limited-auth-test-record-template.md",
+  "required_redirect_urls": {
+    "local": [
+      "http://localhost:5173",
+      "http://localhost:5173/login.html",
+      "http://localhost:5173/dashboard.html"
+    ],
+    "production": [
+      "https://www.drishvara.com",
+      "https://www.drishvara.com/login.html",
+      "https://www.drishvara.com/dashboard.html"
+    ]
+  },
+  "blocked_in_this_stage": [
+    "frontend_supabase_create_client",
+    "live_session_detection",
+    "dashboard_data_unlock",
+    "subscription_gate_unlock",
+    "premium_guidance_unlock",
+    "payment_provider",
+    "palm_image_upload",
+    "admin_backend_actions",
+    "service_role_frontend_exposure"
+  ],
+  "known_parallel_ui_hotfix_needed": [
+    "homepage_language_toggle_runtime",
+    "vedic_guidance_static_scaffold",
+    "word_of_day_language_runtime",
+    "panchang_festival_language_date_basis"
+  ],
+  "guardrails": [
+    "This stage does not enable frontend Auth.",
+    "Do not instantiate Supabase client in frontend.",
+    "Do not expose service role key.",
+    "Do not unlock dashboard data.",
+    "Do not unlock premium guidance.",
+    "Do not enable payment.",
+    "Do not enable palm image upload.",
+    "Do not infer admin access from email alone."
+  ]
+}

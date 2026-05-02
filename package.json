@@ -40,7 +40,7 @@
     "submission-intake:preflight": "node scripts/submission-intake-preflight.js",
     "payment:preflight": "node scripts/payment-preflight.js",
     "admin-review:preflight": "node scripts/admin-review-preflight.js",
-    "preactivation:preflight": "node scripts/preactivation-preflight.js",
+    "preactivation:preflight": "node scripts/preactivation-preflight.js && npm run activation:auth-manual-enable:preflight",
     "timezone:preflight": "node scripts/timezone-preflight.js",
     "public-preview:preflight": "node scripts/public-preview-preflight.js",
     "daily-basis:preflight": "node scripts/daily-basis-guard-preflight.js",
@@ -64,7 +64,8 @@
     "content:article-quality:preflight": "node scripts/article-quality-review-preflight.js",
     "content:article-quality-report:build": "node scripts/build-article-quality-report-preview.js",
     "content:article-quality-report:preflight": "node scripts/article-quality-report-preview-preflight.js",
-    "content:governance-status:preflight": "node scripts/content-governance-status-preflight.js"
+    "content:governance-status:preflight": "node scripts/content-governance-status-preflight.js",
+    "activation:auth-manual-enable:preflight": "node scripts/limited-auth-manual-enablement-preflight.js"
   },
   "repository": {
     "type": "git",
