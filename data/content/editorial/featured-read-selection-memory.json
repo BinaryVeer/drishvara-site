@@ -1,0 +1,27 @@
+{
+  "version": "2026.05.02-content-c03",
+  "module": "content.featured_read_selection_memory",
+  "enabled": false,
+  "status": "scaffold_only",
+  "purpose": "Future memory layer to avoid repeated featured read selections and track editorial choices.",
+  "selection_memory_enabled": false,
+  "write_enabled": false,
+  "entries": [],
+  "future_entry_fields": [
+    "selected_date",
+    "slot",
+    "article_path",
+    "title",
+    "category",
+    "image_url",
+    "selection_source",
+    "has_hindi_metadata",
+    "reason"
+  ],
+  "guardrails": [
+    "Selection memory write is disabled in this stage.",
+    "Do not auto-edit homepage featured reads.",
+    "Do not track subscriber/private data.",
+    "Do not fetch external APIs."
+  ]
+}

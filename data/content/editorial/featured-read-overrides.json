@@ -1,0 +1,27 @@
+{
+  "version": "2026.05.02-content-c03",
+  "module": "content.featured_read_manual_override",
+  "enabled": false,
+  "status": "scaffold_only",
+  "purpose": "Future manual override file for homepage featured reads. Disabled in C03.",
+  "override_mode": "disabled",
+  "manual_lock_enabled": false,
+  "max_slots": 4,
+  "required_future_fields": [
+    "slot",
+    "article_path",
+    "reason",
+    "editor",
+    "approved_at",
+    "rollback_note",
+    "expires_at"
+  ],
+  "overrides": [],
+  "guardrails": [
+    "Manual override is disabled in this stage.",
+    "Do not mutate homepage featured reads from this file yet.",
+    "Do not use pipeline-only categories as featured reads.",
+    "Do not use unapproved draft articles.",
+    "Do not fetch external APIs."
+  ]
+}

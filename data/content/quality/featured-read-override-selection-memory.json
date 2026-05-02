@@ -1,0 +1,36 @@
+{
+  "version": "2026.05.02-content-c03",
+  "module": "content.featured_read_override_selection_memory_scaffold",
+  "status": "preflight_only",
+  "purpose": "Validates that featured read manual override and selection memory scaffolds exist but remain disabled.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "data/content/quality/editorial-selection-featured-read-governance.json",
+    "data/content/editorial/featured-read-overrides.json",
+    "data/content/editorial/featured-read-selection-memory.json"
+  ],
+  "validated_files": [
+    "data/homepage-ui.json",
+    "data/article-index.json",
+    "data/content/editorial/featured-read-overrides.json",
+    "data/content/editorial/featured-read-selection-memory.json"
+  ],
+  "manual_override_enabled": false,
+  "selection_memory_write_enabled": false,
+  "blocked_in_this_stage": [
+    "manual_override_activation",
+    "homepage_featured_read_mutation",
+    "selection_memory_write",
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock"
+  ],
+  "guardrails": [
+    "Manual featured read override remains disabled.",
+    "Selection memory write remains disabled.",
+    "Current homepage featured reads must still pass C01/C02 checks.",
+    "No service role key exposure."
+  ]
+}
