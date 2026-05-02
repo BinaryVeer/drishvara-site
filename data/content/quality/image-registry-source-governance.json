@@ -1,0 +1,36 @@
+{
+  "version": "2026.05.02-content-c05",
+  "module": "content.image_registry_source_governance",
+  "status": "preflight_only",
+  "purpose": "Validates image registry and fallback scaffolds while confirming current featured reads still have unique, usable images.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "data/content/quality/editorial-selection-featured-read-governance.json",
+    "data/content/quality/featured-read-override-selection-memory.json",
+    "data/content/quality/featured-read-scoring-rotation-preview.json",
+    "data/content/editorial/image-registry.json",
+    "data/content/editorial/category-image-fallbacks.json"
+  ],
+  "image_registry_enabled": false,
+  "image_registry_write_enabled": false,
+  "category_fallback_application_enabled": false,
+  "homepage_image_mutation_enabled": false,
+  "external_image_fetch_enabled": false,
+  "blocked_in_this_stage": [
+    "external_image_fetch",
+    "homepage_image_mutation",
+    "image_registry_write",
+    "category_fallback_application",
+    "live_supabase_image_read",
+    "supabase_storage_activation",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "Do not fetch external image APIs.",
+    "Do not mutate homepage images.",
+    "Do not apply fallback images.",
+    "Do not enable Supabase storage.",
+    "Current featured images must remain present and unique.",
+    "Do not expose service role key."
+  ]
+}

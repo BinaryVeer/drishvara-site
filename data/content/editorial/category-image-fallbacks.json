@@ -1,0 +1,71 @@
+{
+  "version": "2026.05.02-content-c05",
+  "module": "content.category_image_fallbacks",
+  "status": "scaffold_only",
+  "enabled": false,
+  "fallback_application_enabled": false,
+  "external_image_fetch_enabled": false,
+  "purpose": "Future category fallback image governance. Disabled in C05.",
+  "categories": [
+    {
+      "category": "Public Programmes",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Media & Society",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "World Affairs",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Spirituality",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Governance",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Technology",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Health",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Environment",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    },
+    {
+      "category": "Sports",
+      "fallback_allowed_future": true,
+      "review_required": true,
+      "alt_text_required": true
+    }
+  ],
+  "guardrails": [
+    "Fallback images are not applied in this stage.",
+    "Fallback images require future review.",
+    "Alt text is required before future use.",
+    "Do not fetch external image APIs."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "version": "2026.05.02-content-c05",
+  "module": "content.image_registry",
+  "status": "scaffold_only",
+  "enabled": false,
+  "write_enabled": false,
+  "homepage_mutation_enabled": false,
+  "external_image_fetch_enabled": false,
+  "purpose": "Future registry for image source tracking, credit, license, alt text, category, and approval metadata.",
+  "entries": [],
+  "required_future_fields": [
+    "article_path",
+    "image_url",
+    "image_provider",
+    "source_url",
+    "license_status",
+    "credit_line",
+    "alt_text",
+    "category",
+    "usage_context",
+    "approval_status",
+    "approved_by",
+    "approved_at"
+  ],
+  "guardrails": [
+    "Image registry is not live in this stage.",
+    "Do not fetch external images.",
+    "Do not mutate homepage featured reads.",
+    "Do not store private or user-submitted images here.",
+    "Do not use images without source/license review."
+  ]
+}
