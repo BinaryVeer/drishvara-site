@@ -1,19 +1,21 @@
 (() => {
-  const VERSION = "2026.05.02-h04";
+  const VERSION = "2026.05.02-h05";
   const LANG_KEY = "drishvara_language";
+
   const BRAND_EN = "Drishvara";
   const BRAND_HI = "द्रिश्वारा";
-  const BAD_BRANDS = ["दृशर", "द्रिश्वर", "द्रिष्वरा", "दुषर"];
+  const BAD_BRANDS = ["दृशर", "द्रिश्वर", "द्रिष्वरा", "दुषर", "दृशारा"];
 
-  const PUBLIC_PAGES = [
-    "/", "/index.html", "/about.html", "/submissions.html",
-    "/dashboard.html", "/contact.html", "/insights.html",
-    "/login.html", "/article.html"
+  const ALIAS_KEYS = [
+    "drishvara-language",
+    "drishvara.lang",
+    "siteLanguage",
+    "selectedLanguage",
+    "language",
+    "lang",
+    "drishvaraLang",
+    "drishvara_language_choice"
   ];
-
-  const currentPath = window.location.pathname || "/";
-  const isPublicPage = PUBLIC_PAGES.some((p) => currentPath === p || currentPath.endsWith(p));
-  if (!isPublicPage) return;
 
   const dictionary = {
     "Drishvara": "द्रिश्वारा",
@@ -24,6 +26,19 @@
     "Dashboard": "डैशबोर्ड",
     "Contact": "संपर्क",
     "Login": "लॉगिन",
+    "Subscriber Dashboard": "सब्सक्राइबर डैशबोर्ड",
+    "Your Dashboard": "आपका डैशबोर्ड",
+    "Dashboard is being prepared": "डैशबोर्ड तैयार किया जा रहा है",
+    "Lucky Number": "शुभ अंक",
+    "Lucky number": "शुभ अंक",
+    "Lucky Color": "शुभ रंग",
+    "Lucky color": "शुभ रंग",
+    "Mantra": "मंत्र",
+    "Daily Mantra": "दैनिक मंत्र",
+    "Profile": "प्रोफाइल",
+    "Profile storage": "प्रोफाइल स्टोरेज",
+    "No profile storage yet": "अभी प्रोफाइल स्टोरेज नहीं है",
+
 
     "Vision. Reflection. Insight.": "दृष्टि। चिंतन। अंतर्दृष्टि।",
     "Vision broad, reflection deep.": "दृष्टि व्यापक, चिंतन गहरा।",
@@ -151,13 +166,27 @@
     return "en";
   }
 
+  function readCookieLanguage() {
+    const match = document.cookie.match(/(?:^|;\s*)drishvara_language=([^;]+)/);
+    return match ? normalizeLanguage(decodeURIComponent(match[1])) : null;
+  }
+
   function getLanguage() {
-    return normalizeLanguage(localStorage.getItem(LANG_KEY) || document.documentElement.dataset.drishvaraLanguage || document.documentElement.lang || "en");
+    const canonical = localStorage.getItem(LANG_KEY);
+    if (canonical) return normalizeLanguage(canonical);
+
+    for (const key of ALIAS_KEYS) {
+      const value = localStorage.getItem(key);
+      if (value) return normalizeLanguage(value);
+    }
+
+    return readCookieLanguage() || normalizeLanguage(document.documentElement.dataset.drishvaraLanguage || document.documentElement.lang || "en");
   }
 
   function setLanguage(lang) {
     const safe = normalizeLanguage(lang);
     localStorage.setItem(LANG_KEY, safe);
+    for (const key of ALIAS_KEYS) localStorage.setItem(key, safe);
     document.cookie = `${LANG_KEY}=${safe}; path=/; max-age=31536000; SameSite=Lax`;
     document.documentElement.lang = safe;
     document.documentElement.dataset.drishvaraLanguage = safe;
@@ -174,24 +203,34 @@
     return `${pre}${replacement}${post}`;
   }
 
-  function cleanBaseText(text) {
+  function replaceBadBrands(text, target) {
+    let next = text;
+    for (const bad of BAD_BRANDS) next = next.split(bad).join(target);
+    return next;
+  }
+
+  function baseText(text) {
     const trimmed = text.trim();
     if (!trimmed) return trimmed;
-    if (BAD_BRANDS.includes(trimmed)) return BRAND_EN;
-    if (trimmed === BRAND_HI) return BRAND_EN;
+    if (trimmed === BRAND_HI || BAD_BRANDS.includes(trimmed)) return BRAND_EN;
     return reverseDictionary[trimmed] || trimmed;
   }
 
   function translateText(text, lang) {
-    const base = cleanBaseText(text);
-    if (!base) return text;
+    let raw = text;
 
     if (lang === "hi") {
-      if (base === BRAND_EN) return preserve(text, BRAND_HI);
-      return preserve(text, dictionary[base] || base);
+      raw = replaceBadBrands(raw, BRAND_HI);
+      const base = baseText(raw);
+      if (!base) return raw;
+      if (base === BRAND_EN) return preserve(raw, BRAND_HI);
+      return preserve(raw, dictionary[base] || raw.trim());
     }
 
-    return preserve(text, base);
+    raw = replaceBadBrands(raw, BRAND_EN);
+    const base = baseText(raw);
+    if (!base) return raw;
+    return preserve(raw, base);
   }
 
   function shouldSkipElement(el) {
@@ -214,28 +253,26 @@
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
 
-    for (const node of nodes) {
-      node.nodeValue = translateText(node.nodeValue, lang);
-    }
+    for (const node of nodes) node.nodeValue = translateText(node.nodeValue, lang);
   }
 
   function applyAttributes(lang) {
-    const attrMap = {
+    const attrs = {
       "Name": "नाम",
       "Date of Birth (DD/MM/YYYY)": "जन्मतिथि (DD/MM/YYYY)",
       "Optional": "वैकल्पिक",
       "Search titles, summaries, themes, date or path...": "शीर्षक, सार, विषय, तिथि या पथ खोजें..."
     };
 
-    const reverseAttrMap = {};
-    for (const [en, hi] of Object.entries(attrMap)) reverseAttrMap[hi] = en;
+    const reverseAttrs = {};
+    for (const [en, hi] of Object.entries(attrs)) reverseAttrs[hi] = en;
 
     for (const el of document.querySelectorAll("input, textarea")) {
       for (const attr of ["placeholder", "aria-label", "title"]) {
         const value = el.getAttribute(attr);
         if (!value) continue;
-        const base = reverseAttrMap[value] || value;
-        el.setAttribute(attr, lang === "hi" ? (attrMap[base] || base) : base);
+        const base = reverseAttrs[value] || value;
+        el.setAttribute(attr, lang === "hi" ? (attrs[base] || base) : base);
       }
     }
 
@@ -246,7 +283,7 @@
 
   function lockBrand(lang) {
     const expected = lang === "hi" ? BRAND_HI : BRAND_EN;
-    const search = lang === "hi" ? [BRAND_EN, ...BAD_BRANDS] : [BRAND_HI, ...BAD_BRANDS];
+    const wrong = lang === "hi" ? [BRAND_EN, ...BAD_BRANDS] : [BRAND_HI, ...BAD_BRANDS];
 
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
@@ -260,8 +297,9 @@
     while (walker.nextNode()) nodes.push(walker.currentNode);
 
     for (const node of nodes) {
-      const trimmed = node.nodeValue.trim();
-      if (search.includes(trimmed)) node.nodeValue = preserve(node.nodeValue, expected);
+      let value = node.nodeValue;
+      for (const item of wrong) value = value.split(item).join(expected);
+      node.nodeValue = value;
     }
   }
 
@@ -308,10 +346,12 @@
     const desired = desiredFromClick(target);
     if (!desired) return;
 
-    setLanguage(desired);
+    event.preventDefault();
+    event.stopImmediatePropagation();
 
+    setLanguage(desired);
     window.dispatchEvent(new CustomEvent("drishvara:language-change", {
-      detail: { language: desired, source: "unified-runtime" }
+      detail: { language: desired, source: "drishvara-language-runtime" }
     }));
 
     setTimeout(() => applyLanguage(desired), 20);
@@ -320,7 +360,7 @@
   }, true);
 
   window.addEventListener("storage", (event) => {
-    if (event.key === LANG_KEY) applyLanguage(event.newValue);
+    if (event.key === LANG_KEY || ALIAS_KEYS.includes(event.key)) applyLanguage(event.newValue);
   });
 
   window.addEventListener("drishvara:language-change", (event) => {
@@ -332,6 +372,11 @@
     window.__drishvaraUnifiedI18nTimer = setTimeout(() => applyLanguage(getLanguage()), 90);
   });
 
+  window.addEventListener("pageshow", () => applyLanguage(getLanguage()));
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) applyLanguage(getLanguage());
+  });
+
   window.addEventListener("DOMContentLoaded", () => {
     applyLanguage(getLanguage());
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
@@ -341,6 +386,7 @@
     version: VERSION,
     setLanguage: applyLanguage,
     getLanguage,
-    brand: { en: BRAND_EN, hi: BRAND_HI }
+    brand: { en: BRAND_EN, hi: BRAND_HI },
+    badBrandForms: BAD_BRANDS
   };
 })();

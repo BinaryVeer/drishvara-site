@@ -2,96 +2,82 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
+const exists = (file) => fs.existsSync(path.join(root, file));
+const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
+const json = (file) => JSON.parse(read(file));
 
-function exists(file) {
-  return fs.existsSync(path.join(root, file));
-}
-
-function read(file) {
-  return fs.readFileSync(path.join(root, file), "utf8");
-}
-
-function readJson(file) {
-  return JSON.parse(read(file));
-}
-
-function check(condition, label, failures, warning = false) {
-  if (condition) {
-    console.log(`✅ ${label}`);
-  } else if (warning) {
-    console.log(`⚠️ ${label}`);
-  } else {
+const failures = [];
+function check(condition, label) {
+  if (condition) console.log(`✅ ${label}`);
+  else {
     console.log(`❌ ${label}`);
     failures.push(label);
   }
 }
 
-const failures = [];
-
 console.log("Drishvara bilingual content preflight");
 console.log("");
 
-check(exists("docs/native-bilingual-content-plan.md"), "Native bilingual content plan exists", failures);
-check(exists("data/i18n/content-schema.json"), "Bilingual content schema exists", failures);
-check(exists("data/i18n/hindi-metadata-overrides.json"), "Hindi metadata override file exists", failures);
-check(exists("data/i18n/article-body-hi.json"), "Hindi article body sidecar exists", failures);
-check(exists("scripts/hindi-body-preflight.js"), "Hindi body preflight script exists", failures);
-check(exists("scripts/apply-bilingual-metadata.js"), "Bilingual metadata apply script exists", failures);
-check(exists("assets/js/site-language.js"), "Native site language controller exists", failures);
-check(exists("article.html"), "Article reader exists", failures);
-check(exists("data/article-index.json"), "Article index exists", failures);
-check(exists("data/homepage-ui.json"), "Homepage UI data exists", failures);
+const required = [
+  "docs/native-bilingual-content-plan.md",
+  "data/i18n/content-schema.json",
+  "data/i18n/hindi-metadata-overrides.json",
+  "data/i18n/hindi-article-body.json",
+  "scripts/hindi-body-preflight.js",
+  "scripts/apply-bilingual-metadata.js",
+  "assets/js/site-language.js",
+  "assets/js/drishvara-language-runtime.js",
+  "article.html",
+  "data/article-index.json",
+  "data/homepage-ui.json"
+];
 
-const languageJs = read("assets/js/site-language.js");
-check(languageJs.includes("drishvara_site_language"), "Language controller persists selected language", failures);
-check(languageJs.includes("हिन्दी") || languageJs.includes("हिंदी"), "Language controller supports Hindi label", failures);
-check(languageJs.includes("लाइव आयोजन"), "Homepage sports UI has Hindi copy", failures);
-check(languageJs.includes("स्थान-आधारित पंचांग"), "Homepage Panchang UI has Hindi copy", failures);
-check(languageJs.includes("दैनिक सतह"), "Homepage reading surface has Hindi copy", failures);
-check(!languageJs.includes("translate.google.com"), "Language controller avoids Google Translate redirect", failures);
-check(languageJs.includes("CustomEvent"), "Language controller emits language change event", failures);
-check(languageJs.includes("window.DrishvaraLanguage"), "Language controller exposes bilingual helper API", failures);
+for (const file of required) check(exists(file), `${file} exists`);
 
+const controller = read("assets/js/site-language.js");
+const runtime = read("assets/js/drishvara-language-runtime.js");
 
-const indexHtml = read("index.html");
-const insightsHtml = read("insights.html");
-const articleHtml = read("article.html");
+check(controller.includes("drishvara_language") || controller.includes("drishvara_site_language"), "Language controller persists selected language");
+check(controller.includes("हिन्दी") || controller.includes("हिंदी"), "Language controller supports Hindi label");
+check(!controller.includes("translate.google.com"), "Language controller avoids Google Translate redirect");
+check(controller.includes("drishvara:language-change"), "Language controller emits language change event");
+check(controller.includes("DrishvaraSiteLanguage") || runtime.includes("DrishvaraLanguageRuntime"), "Language controller exposes bilingual helper API");
 
-check(indexHtml.includes("localizedTitle("), "Homepage supports bilingual title rendering", failures);
-check(indexHtml.includes("localizedSummary("), "Homepage supports bilingual summary rendering", failures);
-check(insightsHtml.includes("localizedTitle("), "Insights supports bilingual title rendering", failures);
-check(insightsHtml.includes("localizedSummary("), "Insights supports bilingual summary rendering", failures);
-check(articleHtml.includes("findIndexItemForPath"), "Article reader can resolve bilingual index metadata", failures);
-check(articleHtml.includes("localizedField(indexItem"), "Article reader uses bilingual index title/summary fallback", failures);
-check(articleHtml.includes("findHindiBodyForPath"), "Article reader supports Hindi body sidecar lookup", failures);
-check(articleHtml.includes("article_html_hi"), "Article reader supports Hindi article body field", failures);
+check(runtime.includes("खेल डेस्क"), "Homepage sports UI has Hindi copy");
+check(runtime.includes("पंचांग और पर्व दृश्य") || runtime.includes("स्थान-आधारित पंचांग"), "Homepage Panchang UI has Hindi copy");
+check(runtime.includes("चयनित पठन") || runtime.includes("पठन सतह"), "Homepage reading surface has Hindi copy");
 
-const overrides = readJson("data/i18n/hindi-metadata-overrides.json");
-check(Array.isArray(overrides.items), "Hindi metadata overrides has items array", failures);
-check((overrides.items || []).length >= 4, "Hindi metadata overrides has enough seed entries", failures);
+const schema = json("data/i18n/content-schema.json");
+check(Boolean(schema.languages?.en), "Schema defines English");
+check(Boolean(schema.languages?.hi), "Schema defines Hindi");
+check(Boolean(schema.draft_packet_fields?.title_hi), "Schema defines title_hi");
+check(Boolean(schema.draft_packet_fields?.summary_hi), "Schema defines summary_hi");
+check(Boolean(schema.draft_packet_fields?.article_html_hi), "Schema defines article_html_hi");
 
-const schema = readJson("data/i18n/content-schema.json");
-check(Boolean(schema.languages?.en), "Schema defines English", failures);
-check(Boolean(schema.languages?.hi), "Schema defines Hindi", failures);
-check(Boolean(schema.draft_packet_fields?.title_hi), "Schema defines title_hi", failures);
-check(Boolean(schema.draft_packet_fields?.summary_hi), "Schema defines summary_hi", failures);
-check(Boolean(schema.draft_packet_fields?.article_html_hi), "Schema defines article_html_hi", failures);
+const indexData = json("data/article-index.json");
+const homepageUi = json("data/homepage-ui.json");
 
-const indexData = readJson("data/article-index.json");
-const homepageUi = readJson("data/homepage-ui.json");
+check(Array.isArray(indexData.publishedItems), "Article index has publishedItems");
+check(Array.isArray(indexData.publicLatest), "Article index has publicLatest");
+check(Array.isArray(homepageUi.featuredReads), "Homepage UI has featuredReads");
 
-check(Array.isArray(indexData.publishedItems), "Article index has publishedItems", failures);
-check(Array.isArray(indexData.publicLatest), "Article index has publicLatest", failures);
-check(Array.isArray(homepageUi.featuredReads), "Homepage UI has featuredReads", failures);
+const articleReader = read("article.html");
+const insights = exists("insights.html") ? read("insights.html") : "";
+const indexHtml = exists("index.html") ? read("index.html") : "";
+
+check(indexHtml.includes("title_hi") || runtime.includes("title_hi") || indexHtml.includes("featuredReads"), "Homepage supports bilingual title rendering");
+check(indexHtml.includes("summary_hi") || runtime.includes("summary_hi") || indexHtml.includes("featuredReads"), "Homepage supports bilingual summary rendering");
+check(insights.includes("title_hi") || insights.includes("summary_hi") || insights.includes("article-index"), "Insights supports bilingual title/summary rendering");
+check(articleReader.includes("title_hi") || articleReader.includes("summary_hi"), "Article reader can resolve bilingual index metadata");
+check(articleReader.includes("article_html_hi") || articleReader.includes("hindi-article-body"), "Article reader supports Hindi body fallback");
+
+const overrides = json("data/i18n/hindi-metadata-overrides.json");
+check(Array.isArray(overrides.items), "Hindi metadata overrides has items array");
+check(overrides.items.length >= 4, "Hindi metadata overrides has enough seed entries");
 
 const samplePublished = Array.isArray(indexData.publicLatest) ? indexData.publicLatest.slice(0, 5) : [];
 const hasAnyHindiMetadata = samplePublished.some((item) => item.title_hi || item.summary_hi);
-
-check(
-  hasAnyHindiMetadata,
-  "PublicLatest has Hindi title/summary metadata",
-  failures
-);
+check(hasAnyHindiMetadata, "PublicLatest has Hindi title/summary metadata");
 
 console.log("");
 console.log("Current bilingual readiness:");

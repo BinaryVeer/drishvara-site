@@ -1,370 +1,87 @@
-(function () {
-  const STORAGE_KEY = "drishvara_site_language";
+(() => {
+  // H05 compatibility shim only. Real translation is handled by drishvara-language-runtime.js.
+  const VERSION = "2026.05.02-h05-shim";
+  const CANONICAL_KEY = "drishvara_language";
+  const ALIAS_KEYS = [
+    "drishvara-language",
+    "drishvara.lang",
+    "siteLanguage",
+    "selectedLanguage",
+    "language",
+    "lang",
+    "drishvaraLang",
+    "drishvara_language_choice"
+  ];
 
-  const dictionary = {
-    hi: {
-      "Dashboard": "डैशबोर्ड",
-      "Subscriber Dashboard": "सब्सक्राइबर डैशबोर्ड",
-      "Future premium space for daily personal guidance, profile context, saved submissions, and subscriber-only reflective tools.": "दैनिक व्यक्तिगत मार्गदर्शन, प्रोफ़ाइल संदर्भ, सुरक्षित सबमिशन और सब्सक्राइबर-केवल चिंतनशील टूल के लिए भविष्य का प्रीमियम स्थान।",
-      "Login/subscription integration pending": "लॉगिन/सब्सक्रिप्शन एकीकरण प्रतीक्षारत",
-      "Daily Personal Guidance": "दैनिक व्यक्तिगत मार्गदर्शन",
-      "This section will unlock only after authentication, active subscription, consent, approved Knowledge Vault rules, and reviewed calculation methods are in place.": "यह अनुभाग केवल प्रमाणीकरण, सक्रिय सब्सक्रिप्शन, सहमति, स्वीकृत नॉलेज वॉल्ट नियम और समीक्षित गणना विधियाँ उपलब्ध होने के बाद खुलेगा।",
-      "Lucky Number": "शुभ अंक",
-      "Lucky Color": "शुभ रंग",
-      "Blocked": "अवरुद्ध",
-      "Awaiting approved numerology/Panchang rule basis.": "स्वीकृत अंकशास्त्र/पंचांग नियम-आधार प्रतीक्षारत।",
-      "Awaiting approved weekday, color, or planetary rule basis.": "स्वीकृत वार, रंग या ग्रह-आधारित नियम प्रतीक्षारत।",
-      "No mantra will be shown until exact Devanagari text and source review are approved.": "जब तक सटीक देवनागरी पाठ और स्रोत समीक्षा स्वीकृत नहीं होती, कोई मंत्र नहीं दिखाया जाएगा।",
-      "Reflection": "चिंतन",
-      "Subscriber guidance remains scaffold-only at this stage.": "इस चरण में सब्सक्राइबर मार्गदर्शन केवल स्कैफोल्ड रूप में है।",
-      "Premium outputs will remain non-deterministic, reflective, and guarded. Drishvara will not claim guaranteed success, wealth, health, marriage, job, or lifespan outcomes.": "प्रीमियम आउटपुट गैर-नियतात्मक, चिंतनशील और संरक्षित रहेंगे। दृश्वर सफलता, धन, स्वास्थ्य, विवाह, नौकरी या आयु से जुड़े किसी सुनिश्चित परिणाम का दावा नहीं करेगा।",
-      "Access Status": "एक्सेस स्थिति",
-      "Authentication": "प्रमाणीकरण",
-      "Not enabled": "सक्षम नहीं",
-      "Subscription Gate": "सब्सक्रिप्शन गेट",
-      "Profile Storage": "प्रोफ़ाइल संग्रहण",
-      "Pending consent flow": "सहमति प्रवाह प्रतीक्षारत",
-      "Daily Guidance": "दैनिक मार्गदर्शन",
-      "Palm Image Upload": "हथेली छवि अपलोड",
-      "Disabled": "अक्षम",
-      "Backend Submissions": "बैकएंड सबमिशन",
-      "Pending": "प्रतीक्षारत",
-      "Prepare a submission →": "सबमिशन तैयार करें →",
-      "Profile Context": "प्रोफ़ाइल संदर्भ",
-      "Future subscriber profile fields will include date of birth, birth time, birth place, current location, preferred language, and consent flags.": "भविष्य के सब्सक्राइबर प्रोफ़ाइल फ़ील्ड में जन्मतिथि, जन्म समय, जन्म स्थान, वर्तमान स्थान, पसंदीदा भाषा और सहमति संकेत शामिल होंगे।",
-      "No personal profile details are stored from this dashboard page yet.": "इस डैशबोर्ड पेज से अभी कोई व्यक्तिगत प्रोफ़ाइल विवरण संग्रहित नहीं किया जाता।",
-      "Subscriber Tools Roadmap": "सब्सक्राइबर टूल रोडमैप",
-      "Daily lucky number": "दैनिक शुभ अंक",
-      "Daily lucky color": "दैनिक शुभ रंग",
-      "Future premium": "भविष्य का प्रीमियम",
-      "Mantra": "मंत्र",
-      "Reviewed source only": "केवल समीक्षित स्रोत",
-      "What to do / avoid": "क्या करें / क्या न करें",
-      "Approved rules only": "केवल स्वीकृत नियम",
-      "Palmistry request": "हस्तरेखा अनुरोध",
-      "Consent + private storage later": "सहमति + निजी संग्रहण बाद में",
-      "Drishvara © 2026 · Subscriber dashboard scaffold": "दृश्वर © 2026 · सब्सक्राइबर डैशबोर्ड स्कैफोल्ड",
-      "UI Step 3 Integration": "यूआई चरण 3 एकीकरण",
-      "Integrated UI Step 3": "एकीकृत यूआई चरण 3",
-      "Drishvara now moves as one daily surface: first notice the signals, then enter the main reads, then close with reflection, observance, and personal meaning.": "दृश्वर अब एक दैनिक सतह के रूप में आगे बढ़ता है: पहले संकेतों को देखें, फिर मुख्य पाठों में प्रवेश करें, और अंत में चिंतन, अवलोकन और व्यक्तिगत अर्थ के साथ समापन करें।",
-      "A quick scan of national and regional signals.": "राष्ट्रीय और क्षेत्रीय संकेतों का त्वरित अवलोकन।",
-      "Featured reads and the daily guide create the main editorial path.": "विशेष लेख और दैनिक मार्गदर्शिका मुख्य संपादकीय मार्ग बनाते हैं।",
-      "Founder notebook, observance, and psychometric modules create return value.": "संस्थापक नोटबुक, अवलोकन और मनोमितीय मॉड्यूल वापसी-मूल्य तैयार करते हैं।",
-      "Major world and Indian tournament highlights, live events, standings snapshots, and selected sports intelligence.": "विश्व और भारतीय टूर्नामेंटों की प्रमुख झलकियाँ, लाइव आयोजन, स्थिति-सार और चयनित खेल विश्लेषण।",
-      "Live Events": "लाइव आयोजन",
-      "Tournament Watch": "टूर्नामेंट निगरानी",
-      "Major Updates": "प्रमुख अपडेट",
-      "Featured Sports Article": "विशेष खेल लेख",
-      "Loading": "लोड हो रहा है",
-      "Fetching live events...": "लाइव आयोजनों की जानकारी ली जा रही है...",
-      "Fetching tournament cards...": "टूर्नामेंट कार्ड लाए जा रहे हैं...",
-      "Fetching major updates...": "प्रमुख अपडेट लाए जा रहे हैं...",
-      "Fetching featured sports article...": "विशेष खेल लेख लाया जा रहा है...",
-      "Please wait a moment.": "कृपया कुछ क्षण प्रतीक्षा करें।",
-      "This layer binds the homepage into a daily ritual: discover what changed, read what matters, and preserve what deserves return.": "यह परत होमपेज को एक दैनिक अभ्यास में बदलती है: क्या बदला है उसे खोजें, जो महत्वपूर्ण है उसे पढ़ें, और जो लौटकर देखने योग्य है उसे संजोएँ।",
-      "First Light and daily signal cards surface what is worth noticing.": "पहली रोशनी और दैनिक संकेत कार्ड ध्यान देने योग्य बातों को सामने लाते हैं।",
-      "Featured reads and the reading guide give the visitor a clear path.": "विशेष लेख और पठन मार्गदर्शिका पाठक को स्पष्ट दिशा देते हैं।",
-      "Founder notebook, observance, and psychometric layer create return value.": "संस्थापक नोटबुक, अवलोकन और मनोमितीय परत वापसी-मूल्य तैयार करते हैं।",
-      "English:": "अंग्रेज़ी:",
-      "Hindi:": "हिन्दी:",
-      "Sanskrit:": "संस्कृत:",
-      "Meaning:": "अर्थ:",
-      "Today:": "आज:",
-      "Location-based Panchang": "स्थान-आधारित पंचांग",
-      "Panchang & Festival View": "पंचांग और पर्व दृश्य",
-      "Select a place so the app can later show sunrise, sunset, moonrise, moonset, panchang, and upcoming festivals in both Hindi and English.": "स्थान चुनें ताकि आगे ऐप सूर्योदय, सूर्यास्त, चंद्रोदय, चंद्रास्त, पंचांग और आगामी पर्वों को हिन्दी और अंग्रेज़ी दोनों में दिखा सके।",
-      "Sunrise": "सूर्योदय",
-      "Sunset": "सूर्यास्त",
-      "Moonrise": "चंद्रोदय",
-      "Moonset": "चंद्रास्त",
-      "Tithi": "तिथि",
-      "Nakshatra": "नक्षत्र",
-      "Yoga": "योग",
-      "Paksha": "पक्ष",
-      "What the stars say about you": "आपके बारे में सितारे क्या कहते हैं",
-      "Enter your name and date of birth for a daily reflective reading.": "दैनिक चिंतन-पाठ के लिए अपना नाम और जन्मतिथि दर्ज करें।",
-      "Name": "नाम",
-      "Date of Birth (DD/MM/YYYY)": "जन्मतिथि (DD/MM/YYYY)",
-      "See Today’s Reflection": "आज का चिंतन देखें",
-      "The main reading surface of Drishvara. These are the most important stories to read today.": "दृश्वर की मुख्य पठन-सतह। ये आज पढ़ने योग्य सबसे महत्वपूर्ण लेख हैं।",
-      "Reserved space for future ads / sponsored insight / partner slot": "भविष्य के विज्ञापन / प्रायोजित अंतर्दृष्टि / साझेदार स्थान के लिए सुरक्षित स्थान",
-      "These should remain visible near the top of the homepage.": "इन्हें होमपेज के ऊपरी भाग के पास दिखाई देना चाहिए।",
-      "Drishvara’s strongest surfaces right now are governance, maintenance, and accountability narratives.": "दृश्वर की सबसे मजबूत सतहें अभी शासन, रखरखाव और उत्तरदायित्व से जुड़ी कथाएँ हैं।",
-      "A Drishvara read prepared for the daily surface.": "दैनिक सतह के लिए तैयार किया गया दृश्वर लेख।",
-      "A Drishvara read prepared for the archive.": "संग्रह के लिए तैयार किया गया दृश्वर लेख।",
-      "Untitled Drishvara read": "शीर्षकहीन दृश्वर लेख",
-      "Untitled read": "शीर्षकहीन लेख",
-      "Drishvara read": "दृश्वर लेख",
-      "Home": "घर",
-      "About": "परिचय",
-      "Insights": "इनसाइट्स",
-      "Contact": "संपर्क",
-      "Drishvara": "दृश्वर",
-      "Vision. Reflection. Insight.": "दृष्टि। चिंतन। अंतर्दृष्टि।",
-      "Vision broad, reflection deep.": "दृष्टि व्यापक, चिंतन गहरा।",
-      "Sports Desk": "खेल डेस्क",
-      "Word of the Day": "आज का शब्द",
-      "Today’s Vedic Guidance": "आज का वैदिक संकेत",
-      "Today’s Drishvara Route": "आज का दृश्वर मार्ग",
-      "One homepage, three movements": "एक होमपेज, तीन चरण",
-      "From signal to reading to reflection": "संकेत से पढ़न तक और फिर चिंतन तक",
-      "First Light": "पहली रोशनी",
-      "Reading Surface": "पठन सतह",
-      "Reflection Layer": "चिंतन परत",
-      "Discover": "खोजें",
-      "Read": "पढ़ें",
-      "Reflect": "चिंतन करें",
-      "Latest Reads": "नवीनतम लेख",
-      "Latest published reads": "नवीनतम प्रकाशित लेख",
-      "Indexed Reads": "अनुक्रमित लेख",
-      "Published HTML": "प्रकाशित HTML",
-      "Themes": "विषय",
-      "Archive Dates": "संग्रह तिथियाँ",
-      "Topic Map": "विषय मानचित्र",
-      "Open a Day": "एक दिन खोलें",
-      "Open read": "लेख खोलें",
-      "Direct file": "प्रत्यक्ष फ़ाइल",
-      "Article reader": "लेख पाठक",
-      "Published themes": "प्रकाशित विषय",
-      "All": "सभी",
-      "Published": "प्रकाशित",
-      "Pipeline": "पाइपलाइन",
-      "Search reads by title, summary, theme, date, or path...": "शीर्षक, सार, विषय, तिथि या पथ से खोजें...",
-      "Public Programmes": "लोक कार्यक्रम",
-      "Spirituality": "आध्यात्मिकता",
-      "World Affairs": "विश्व विषय",
-      "Media & Society": "मीडिया और समाज",
-      "Sports": "खेल",
-      "Read now →": "अभी पढ़ें →",
-      "Back to Home": "घर वापस जाएँ",
-      "Open Insights": "इनसाइट्स खोलें"
-    }
-  };
-
-  function currentLanguage() {
-    return localStorage.getItem(STORAGE_KEY) || "en";
+  function normalizeLanguage(value) {
+    const v = String(value || "").toLowerCase();
+    if (v === "hi" || v.startsWith("hi") || v.includes("hindi") || v.includes("हिन्दी") || v.includes("हिंदी")) return "hi";
+    return "en";
   }
 
-  function setLanguage(lang) {
-    const nextLang = lang || "en";
-    const previousLang = currentLanguage();
+  function setLanguage(value, source = "site-language-shim") {
+    const lang = normalizeLanguage(value);
+    localStorage.setItem(CANONICAL_KEY, lang);
+    for (const key of ALIAS_KEYS) localStorage.setItem(key, lang);
+    document.cookie = `${CANONICAL_KEY}=${lang}; path=/; max-age=31536000; SameSite=Lax`;
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.drishvaraLanguage = lang;
+    if (document.body) {
+      document.body.dataset.drishvaraLanguage = lang;
+      document.body.dataset.siteLanguageShim = VERSION;
+    }
 
-    localStorage.setItem(STORAGE_KEY, nextLang);
-    applyLanguage(nextLang);
-    renderTopControl(nextLang);
-
-    window.dispatchEvent(new CustomEvent("drishvara:languagechange", {
-      detail: { language: nextLang, previousLanguage: previousLang }
+    window.dispatchEvent(new CustomEvent("drishvara:language-change", {
+      detail: { language: lang, source }
     }));
 
-    if (nextLang !== previousLang) {
-      window.setTimeout(function () {
-        window.location.reload();
-      }, 80);
-    }
+    return lang;
   }
 
-  function shouldSkipNode(node) {
-    const parent = node.parentElement;
-    if (!parent) return true;
-
-    const tag = parent.tagName;
-    return ["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "SELECT", "OPTION", "CODE", "PRE", "BUTTON"].includes(tag);
+  function getLanguage() {
+    return normalizeLanguage(localStorage.getItem(CANONICAL_KEY) || document.documentElement.lang || "en");
   }
 
-  function translateTextNode(node, lang) {
-    if (shouldSkipNode(node)) return;
+  function desiredFromClick(target) {
+    if (!target) return null;
 
-    const original = node.__drishvaraOriginalText || node.nodeValue;
-    node.__drishvaraOriginalText = original;
+    const explicit = target.dataset?.lang || target.dataset?.language;
+    if (explicit) return normalizeLanguage(explicit);
 
-    if (lang === "en") {
-      node.nodeValue = original;
-      return;
+    const text = (target.textContent || "").trim();
+    const current = getLanguage();
+
+    if (text.includes("EN") && (text.includes("हिन्दी") || text.includes("हिंदी"))) {
+      return current === "hi" ? "en" : "hi";
     }
 
-    const trimmed = original.trim();
-    if (!trimmed) return;
+    if (text === "EN" || text.toLowerCase() === "english") return "en";
+    if (text.includes("हिन्दी") || text.includes("हिंदी") || text.toLowerCase().includes("hindi")) return "hi";
 
-    const translated = dictionary[lang]?.[trimmed];
-    if (!translated) return;
-
-    node.nodeValue = original.replace(trimmed, translated);
+    return null;
   }
 
-  function translatePlaceholders(lang) {
-    document.querySelectorAll("input[placeholder], textarea[placeholder]").forEach((el) => {
-      const original = el.dataset.drishvaraOriginalPlaceholder || el.getAttribute("placeholder") || "";
-      el.dataset.drishvaraOriginalPlaceholder = original;
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest("[data-lang], [data-language], button, a, span");
+    const desired = desiredFromClick(target);
+    if (!desired) return;
 
-      if (lang === "en") {
-        el.setAttribute("placeholder", original);
-        return;
-      }
+    event.preventDefault();
+    event.stopImmediatePropagation();
 
-      const translated = dictionary[lang]?.[original];
-      if (translated) el.setAttribute("placeholder", translated);
-    });
-  }
+    setLanguage(desired, "site-language-shim-click");
 
-  function applyLanguage(lang) {
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode(node) {
-          return shouldSkipNode(node)
-            ? NodeFilter.FILTER_REJECT
-            : NodeFilter.FILTER_ACCEPT;
-        }
-      }
-    );
-
-    const nodes = [];
-    while (walker.nextNode()) nodes.push(walker.currentNode);
-
-    nodes.forEach((node) => translateTextNode(node, lang));
-    translatePlaceholders(lang);
-
-    document.documentElement.setAttribute("lang", lang === "hi" ? "hi" : "en");
-  }
-
-  function findLanguageHost() {
-    const selectors = [
-      "[data-site-language-control]",
-      "[data-language-control]",
-      ".language-pill",
-      ".lang-pill",
-      ".language-toggle",
-      ".lang-toggle",
-      ".language-switch",
-      ".top-language",
-      ".nav-language"
-    ];
-
-    for (const selector of selectors) {
-      const el = document.querySelector(selector);
-      if (el) return el;
+    if (window.DrishvaraLanguageRuntime?.setLanguage) {
+      window.DrishvaraLanguageRuntime.setLanguage(desired);
     }
+  }, true);
 
-    const candidates = Array.from(document.querySelectorAll("a, button, div, span, li"));
-    return candidates.find((el) => {
-      const text = (el.textContent || "").replace(/\s+/g, " ").trim();
-      return /EN\s*[|/]\s*(हिंदी|हिन्दी|Hindi)/i.test(text);
-    });
-  }
-
-  function createFallbackHost() {
-    let host = document.querySelector("[data-site-language-control]");
-    if (host) return host;
-
-    host = document.createElement("div");
-    host.setAttribute("data-site-language-control", "true");
-    document.body.appendChild(host);
-    return host;
-  }
-
-  function ensureStyle() {
-    if (document.getElementById("drishvara-native-language-style")) return;
-
-    const style = document.createElement("style");
-    style.id = "drishvara-native-language-style";
-    style.textContent = `
-      .drishvara-lang-control {
-        display: inline-flex !important;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(255,255,255,0.10);
-        background: rgba(255,255,255,0.045);
-        color: #d7deea;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.92rem;
-        white-space: nowrap;
-        cursor: pointer;
-        user-select: none;
-      }
-
-      body > .drishvara-lang-control {
-        position: fixed;
-        top: 16px;
-        right: 18px;
-        z-index: 9999;
-        background: rgba(8, 20, 45, 0.92);
-        backdrop-filter: blur(10px);
-      }
-
-      .drishvara-lang-control button {
-        appearance: none;
-        border: 0;
-        background: transparent;
-        color: inherit;
-        cursor: pointer !important;
-        padding: 0;
-        font: inherit;
-      }
-
-      .drishvara-lang-control button:hover {
-        color: #c9a24a;
-      }
-
-      .drishvara-lang-control button.active {
-        color: #c9a24a;
-        font-weight: 700;
-      }
-
-      .drishvara-lang-control .sep {
-        color: rgba(215,222,234,0.55);
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function renderTopControl(lang) {
-    ensureStyle();
-
-    const host = findLanguageHost() || createFallbackHost();
-    if (!host) return;
-
-    host.classList.add("drishvara-lang-control");
-    host.setAttribute("data-site-language-control", "true");
-    host.innerHTML = `
-      <button type="button" data-drishvara-lang="en" class="${lang === "en" ? "active" : ""}">EN</button>
-      <span class="sep">|</span>
-      <button type="button" data-drishvara-lang="hi" class="${lang === "hi" ? "active" : ""}">हिन्दी</button>
-    `;
-
-    host.querySelectorAll("[data-drishvara-lang]").forEach((button) => {
-      button.addEventListener("click", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        setLanguage(button.dataset.drishvaraLang || "en");
-      });
-    });
-  }
-
-  window.DrishvaraLanguage = {
-    storageKey: STORAGE_KEY,
-    currentLanguage,
+  window.DrishvaraSiteLanguage = {
+    version: VERSION,
     setLanguage,
-    select(record, key, fallback = "") {
-      if (!record || typeof record !== "object") return fallback;
-      const lang = currentLanguage();
-      const localizedKey = lang === "hi" ? `${key}_hi` : key;
-      return record[localizedKey] || record[key] || fallback;
-    }
+    getLanguage
   };
 
-  function boot() {
-    const lang = currentLanguage();
-    renderTopControl(lang);
-    applyLanguage(lang);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
-  }
+  window.setDrishvaraLanguage = setLanguage;
+  window.getDrishvaraLanguage = getLanguage;
 })();
