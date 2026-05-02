@@ -1,0 +1,85 @@
+{
+  "version": "2026.05.03-d05",
+  "module": "knowledge.panchang_festival_source_registry",
+  "status": "source_registry_only",
+  "purpose": "Define approved source categories and validation requirements for future Panchang and Festival features without enabling live calculation or API fetch.",
+  "public_dynamic_output_enabled": false,
+  "panchang_calculation_enabled": false,
+  "festival_date_calculation_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "approved_source_categories": [
+    {
+      "id": "recognized-panchang-reference",
+      "label": "Recognized Panchang reference",
+      "use_case": "Manual validation of tithi, nakshatra, sunrise/sunset, festival and observance metadata.",
+      "requires_manual_review": true
+    },
+    {
+      "id": "reviewed-calculation-library",
+      "label": "Reviewed Panchang calculation library",
+      "use_case": "Future technical calculation after comparison with recognized Panchang references.",
+      "requires_manual_review": true
+    },
+    {
+      "id": "editorial-verification",
+      "label": "Manual editorial verification",
+      "use_case": "Final review before public dynamic output.",
+      "requires_manual_review": true
+    },
+    {
+      "id": "official-calendar-reference",
+      "label": "Official or recognized festival calendar reference",
+      "use_case": "Festival and observance cross-checking before display.",
+      "requires_manual_review": true
+    }
+  ],
+  "blocked_source_categories": [
+    "unreviewed scraping",
+    "unvalidated AI-generated Panchang values",
+    "unverified social media astrology posts",
+    "runtime DOM generation of Panchang values",
+    "client-side external API fetch without review",
+    "single-source festival date assertion without cross-check"
+  ],
+  "required_future_record_fields": [
+    "record_id",
+    "date",
+    "timezone",
+    "location_basis",
+    "sunrise",
+    "sunset",
+    "tithi",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "festival_or_observance",
+    "source_basis",
+    "calculation_basis",
+    "review_status"
+  ],
+  "review_status_values": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ],
+  "guardrails": [
+    "Do not enable public dynamic Panchang output.",
+    "Do not fetch external Panchang APIs in this stage.",
+    "Do not calculate live tithi, nakshatra, sunrise, sunset, yoga, karana or festival dates in this stage.",
+    "Do not write into data/daily-context.json.",
+    "Do not change language runtime.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "Do not present unreviewed observances as authoritative."
+  ]
+}
