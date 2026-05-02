@@ -22,7 +22,7 @@
     "hindi-draft:review": "node scripts/review-hindi-body.js",
     "hindi-draft:publish-approved": "node scripts/publish-approved-hindi-bodies.js",
     "hindi-draft:publish-approved:dry-run": "node scripts/publish-approved-hindi-bodies.js --dryRun=true",
-    "knowledge:preflight": "node scripts/knowledge-preflight.js && npm run knowledge:daily-guidance:preflight && npm run knowledge:word-of-day:preflight && npm run knowledge:daily-guidance-rules:preflight && npm run knowledge:daily-guidance-selection:preflight && npm run knowledge:panchang-festival:preflight",
+    "knowledge:preflight": "node scripts/knowledge-preflight.js && npm run knowledge:daily-guidance:preflight && npm run knowledge:word-of-day:preflight && npm run knowledge:daily-guidance-rules:preflight && npm run knowledge:daily-guidance-selection:preflight && npm run knowledge:panchang-festival:preflight && npm run knowledge:mantra-review:preflight",
     "panchang:engine": "node scripts/panchang-engine.js",
     "panchang:preflight": "node scripts/panchang-preflight.js",
     "subscriber-guidance:engine": "node scripts/subscriber-guidance-engine.js",
@@ -42,7 +42,7 @@
     "admin-review:preflight": "node scripts/admin-review-preflight.js",
     "preactivation:preflight": "node scripts/preactivation-preflight.js && npm run activation:auth-manual-enable:preflight",
     "timezone:preflight": "node scripts/timezone-preflight.js",
-    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:language-runtime:preflight && npm run ui:language-runtime-neutralization:preflight && npm run ui:language-toggle-click:preflight && npm run i18n:content-expansion:preflight && npm run i18n:static-copy-apply:preflight && npm run i18n:hindi-body-sidecar:preflight && npm run knowledge:daily-guidance:preflight && npm run knowledge:word-of-day:preflight && npm run knowledge:daily-guidance-rules:preflight && npm run knowledge:daily-guidance-selection:preflight && npm run knowledge:panchang-festival:preflight",
+    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:language-runtime:preflight && npm run ui:language-runtime-neutralization:preflight && npm run ui:language-toggle-click:preflight && npm run i18n:content-expansion:preflight && npm run i18n:static-copy-apply:preflight && npm run i18n:hindi-body-sidecar:preflight && npm run knowledge:daily-guidance:preflight && npm run knowledge:word-of-day:preflight && npm run knowledge:daily-guidance-rules:preflight && npm run knowledge:daily-guidance-selection:preflight && npm run knowledge:panchang-festival:preflight && npm run knowledge:mantra-review:preflight",
     "daily-basis:preflight": "node scripts/daily-basis-guard-preflight.js",
     "placeholder:audit": "node scripts/placeholder-audit-preflight.js",
     "public-visual:preflight": "node scripts/public-visual-polish-preflight.js",
@@ -78,7 +78,9 @@
     "knowledge:daily-guidance-selection:preflight": "node scripts/daily-guidance-selection-preview-preflight.js",
     "knowledge:daily-guidance-selection:build": "node scripts/build-daily-guidance-selection-preview-d04.js",
     "knowledge:panchang-festival:build": "node scripts/build-panchang-festival-validation-preview-d05.js",
-    "knowledge:panchang-festival:preflight": "node scripts/panchang-festival-source-validation-preflight.js"
+    "knowledge:panchang-festival:preflight": "node scripts/panchang-festival-source-validation-preflight.js",
+    "knowledge:mantra-review:build": "node scripts/build-mantra-review-preview-d06.js",
+    "knowledge:mantra-review:preflight": "node scripts/mantra-source-review-preflight.js"
   },
   "repository": {
     "type": "git",

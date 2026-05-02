@@ -1,0 +1,85 @@
+{
+  "version": "2026.05.03-d06",
+  "module": "knowledge.mantra_source_registry",
+  "status": "source_registry_only",
+  "purpose": "Define safe source and review requirements for future mantra selection without enabling public dynamic mantra output.",
+  "public_dynamic_mantra_enabled": false,
+  "mantra_generation_enabled": false,
+  "mantra_selection_live_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "approved_source_categories": [
+    {
+      "id": "reviewed-sanskrit-reference",
+      "label": "Reviewed Sanskrit reference",
+      "use_case": "Manual verification of mantra text, spelling, deity association and usage context.",
+      "requires_manual_review": true
+    },
+    {
+      "id": "recognized-devotional-compilation",
+      "label": "Recognized devotional compilation",
+      "use_case": "Cross-checking commonly used mantras before display.",
+      "requires_manual_review": true
+    },
+    {
+      "id": "editorial-sanskrit-review",
+      "label": "Editorial Sanskrit review",
+      "use_case": "Final review of Devanagari, transliteration and meaning before public use.",
+      "requires_manual_review": true
+    },
+    {
+      "id": "tradition-context-note",
+      "label": "Tradition context note",
+      "use_case": "Contextual explanation where a mantra is associated with a deity, day, practice, or observance.",
+      "requires_manual_review": true
+    }
+  ],
+  "blocked_source_categories": [
+    "AI-generated new mantras",
+    "unverified social media mantra claims",
+    "unreviewed transliteration",
+    "runtime DOM generation of mantra text",
+    "client-side external API mantra fetch",
+    "guaranteed remedy or prediction claim",
+    "fear-based spiritual instruction"
+  ],
+  "required_future_record_fields": [
+    "mantra_id",
+    "deity_or_theme",
+    "sanskrit_text",
+    "transliteration",
+    "meaning_en",
+    "meaning_hi",
+    "usage_context",
+    "day_or_observance_context",
+    "source_basis",
+    "review_status",
+    "reviewed_by",
+    "reviewed_at"
+  ],
+  "review_status_values": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ],
+  "guardrails": [
+    "Do not generate new mantras automatically.",
+    "Do not enable public dynamic mantra output.",
+    "Do not present mantra as guaranteed remedy.",
+    "Do not fetch external mantra APIs in this stage.",
+    "Do not write into data/daily-context.json.",
+    "Do not change language runtime.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "All Sanskrit text, transliteration, deity association and meaning must be reviewed before public use."
+  ]
+}
