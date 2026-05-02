@@ -1,0 +1,48 @@
+{
+  "version": "2026.05.02-h08",
+  "module": "content.hindi_article_body_sidecar_governance",
+  "status": "governance_and_preflight_only",
+  "purpose": "Define safe rules for future Hindi article-body expansion without uncontrolled translation.",
+  "article_body_auto_translation_enabled": false,
+  "runtime_dom_body_translation_enabled": false,
+  "approved_sidecar_display_only": true,
+  "external_api_fetch_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "required_item_fields": [
+    "path",
+    "title_hi",
+    "summary_hi",
+    "article_html_hi",
+    "review_status",
+    "approved_by",
+    "approved_at",
+    "source_basis"
+  ],
+  "allowed_review_status": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ],
+  "display_rule": {
+    "english_body": "Always available from generated article file.",
+    "hindi_body": "Display only when sidecar item for article path exists and review_status is approved.",
+    "fallback": "If approved Hindi body does not exist, show English body with Hindi metadata where available."
+  },
+  "guardrails": [
+    "Do not auto-translate article bodies.",
+    "Do not translate article body through DOM replacement.",
+    "Do not mutate generated article files.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "Hindi article body must be reviewed and approved before display.",
+    "Sanskrit, mantra, shloka, and named entities must be reviewed manually."
+  ]
+}
