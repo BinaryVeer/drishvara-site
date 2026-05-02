@@ -1,0 +1,58 @@
+{
+  "version": "2026.05.02-content-c04",
+  "module": "content.featured_read_scoring_rotation_preview",
+  "status": "preflight_only",
+  "scoring_active": false,
+  "homepage_mutation_enabled": false,
+  "manual_override_enabled": false,
+  "selection_memory_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "purpose": "Defines dry-run scoring rules for future featured read selection without mutating homepage content.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "data/content/quality/editorial-selection-featured-read-governance.json",
+    "data/content/quality/featured-read-override-selection-memory.json"
+  ],
+  "score_weights": {
+    "title_present": 10,
+    "summary_present": 10,
+    "image_present": 15,
+    "usable_url": 20,
+    "hindi_metadata": 15,
+    "safe_category": 15,
+    "category_diversity_bonus": 10,
+    "duplicate_url_penalty": -50,
+    "duplicate_image_penalty": -20,
+    "pipeline_category_penalty": -100
+  },
+  "minimum_recommended_score": 70,
+  "blocked_categories": [
+    "daily context",
+    "sports context",
+    "hindi drafts",
+    "generated",
+    "pipeline",
+    "scaffold",
+    "internal",
+    "placeholder"
+  ],
+  "blocked_in_this_stage": [
+    "homepage_featured_read_mutation",
+    "manual_override_activation",
+    "selection_memory_write",
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock",
+    "admin_backend_actions"
+  ],
+  "guardrails": [
+    "Scoring is preview-only.",
+    "Do not mutate homepage-ui.json.",
+    "Do not write selection memory.",
+    "Do not activate manual override.",
+    "Do not fetch external APIs.",
+    "Do not expose service role key."
+  ]
+}
