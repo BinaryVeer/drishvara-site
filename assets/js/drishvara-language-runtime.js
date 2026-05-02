@@ -116,9 +116,9 @@
     "Latest from Drishvara": "द्रिश्वारा से नवीनतम",
 
     "About Drishvara": "द्रिश्वारा के बारे में",
-    "A lens, not just a platform.": "एक दृष्टि, केवल मंच नहीं।",
-    "What Drishvara stands for": "द्रिश्वारा क्या दर्शाता है",
-    "Core orientation": "मुख्य अभिमुखता",
+    "A lens, not just a platform.": "यह केवल एक मंच नहीं, बल्कि देखने और समझने की एक दृष्टि है।",
+    "What Drishvara stands for": "द्रिश्वारा किस विचार के साथ खड़ा है",
+    "Core orientation": "मूल अभिमुखता",
     "Editorial domains": "संपादकीय क्षेत्र",
     "Current stage": "वर्तमान चरण",
     "Clarity over noise": "शोर से अधिक स्पष्टता",
@@ -135,13 +135,11 @@
     "Optional": "वैकल्पिक",
     "Email": "ईमेल",
     "Preferred Language": "पसंदीदा भाषा",
-    "Backend intake: disabled · Local preparation only": "बैकएंड इनटेक: बंद · केवल स्थानीय तैयारी",
-
+    "Backend intake: disabled · Local preparation only": "बैकएंड इनटेक: बंद · अभी केवल स्थानीय तैयारी",
     "Write with purpose.": "उद्देश्य के साथ लिखें।",
     "Primary contact": "मुख्य संपर्क",
-    "What to write about": "किस बारे में लिखें",
-    "Drishvara is being built carefully. Thoughtful mail is always welcome.": "द्रिश्वारा सावधानी से बनाया जा रहा है। विचारपूर्ण संदेश सदैव स्वागत योग्य हैं।",
-
+    "What to write about": "किस विषय पर लिखें",
+    "Drishvara is being built carefully. Thoughtful mail is always welcome.": "द्रिश्वारा को सावधानीपूर्वक विकसित किया जा रहा है। विचारपूर्ण संदेशों का सदैव स्वागत है।",
     "All Themes": "सभी विषय",
     "Published": "प्रकाशित",
     "Pipeline": "पाइपलाइन",
@@ -153,7 +151,11 @@
 
     "Name": "नाम",
     "Date of Birth (DD/MM/YYYY)": "जन्मतिथि (DD/MM/YYYY)",
-    "English": "अंग्रेज़ी"
+    "English": "अंग्रेज़ी",
+
+    // H07 approved static-page bilingual copy
+    "This is a controlled intake scaffold.": "यह नियंत्रित इनटेक स्कैफोल्ड है।",
+    "Hindi article bodies are shown only when approved Hindi body content exists.": "हिन्दी लेख-शरीर केवल तभी दिखाया जाएगा जब स्वीकृत हिन्दी लेख-शरीर उपलब्ध हो।",
   };
 
   const reverseDictionary = {};

@@ -1,0 +1,27 @@
+{
+  "version": "2026.05.02-h07",
+  "module": "content.apply_bilingual_static_page_copy",
+  "status": "applied_to_unified_runtime_dictionary",
+  "source_registry": "data/i18n/static-page-copy-h06.json",
+  "runtime": "assets/js/drishvara-language-runtime.js",
+  "runtime_logic_change_enabled": false,
+  "dictionary_expansion_enabled": true,
+  "external_api_fetch_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "premium_guidance_enabled": false,
+  "admin_actions_enabled": false,
+  "article_body_auto_translation_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "guardrails": [
+    "Do not change language toggle logic.",
+    "Only approved H06 copy may be inserted into the runtime dictionary.",
+    "Do not auto-translate article bodies.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "Keep H05/H05B runtime baseline stable."
+  ]
+}
