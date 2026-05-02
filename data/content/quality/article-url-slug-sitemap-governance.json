@@ -1,0 +1,45 @@
+{
+  "version": "2026.05.02-content-c06",
+  "module": "content.article_url_slug_sitemap_governance",
+  "status": "preflight_only",
+  "purpose": "Validates article URL discovery, sitemap public article coverage, safe link formats, and canonical governance scaffolds without mutating content.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "data/content/quality/editorial-selection-featured-read-governance.json",
+    "data/content/quality/featured-read-override-selection-memory.json",
+    "data/content/quality/featured-read-scoring-rotation-preview.json",
+    "data/content/quality/image-registry-source-governance.json",
+    "data/content/editorial/article-url-slug-policy.json"
+  ],
+  "preflight_only": true,
+  "url_rewrite_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "homepage_link_mutation_enabled": false,
+  "external_api_fetch_enabled": false,
+  "accepted_article_url_signals": [
+    "article.html?path=",
+    "/articles/",
+    "seo_metadata_public_article_count",
+    "article_index_public_total",
+    "publishedItems_count"
+  ],
+  "blocked_in_this_stage": [
+    "url_rewrite_activation",
+    "sitemap_mutation",
+    "homepage_link_mutation",
+    "slug_registry_activation",
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock"
+  ],
+  "guardrails": [
+    "Do not rewrite URLs.",
+    "Do not mutate sitemap.",
+    "Do not mutate homepage links.",
+    "Do not require only one article URL format.",
+    "Accept current sitemap/article-index article URL evidence.",
+    "Do not expose service role key."
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "version": "2026.05.02-content-c06",
+  "module": "content.article_url_slug_policy",
+  "status": "scaffold_only",
+  "enabled": false,
+  "rewrite_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "homepage_link_mutation_enabled": false,
+  "purpose": "Future article URL and slug policy for clean canonical routes and reader compatibility.",
+  "supported_current_formats": [
+    "article.html?path=<encoded article path>",
+    "/articles/<slug>",
+    "https://www.drishvara.com/articles/<slug>"
+  ],
+  "preferred_future_canonical_format": "/articles/<slug>",
+  "legacy_reader_format_supported": true,
+  "slug_rules": [
+    "lowercase",
+    "hyphen-separated",
+    "stable-after-publication",
+    "no-empty-slug",
+    "no-javascript-url",
+    "no-placeholder-anchor",
+    "no-internal-directory-leakage-in-future-clean-route"
+  ],
+  "blocked_url_patterns": [
+    "#",
+    "#open-day-card",
+    "javascript:",
+    "javascript:void"
+  ],
+  "required_future_fields_for_slug_registry": [
+    "article_path",
+    "slug",
+    "canonical_url",
+    "legacy_reader_url",
+    "status",
+    "created_at",
+    "approved_by"
+  ],
+  "guardrails": [
+    "URL policy is scaffold-only in C06.",
+    "Do not rewrite article URLs in this stage.",
+    "Do not mutate sitemap in this stage.",
+    "Do not mutate homepage links in this stage.",
+    "Do not fetch external APIs."
+  ]
+}
