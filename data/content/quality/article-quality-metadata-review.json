@@ -1,0 +1,43 @@
+{
+  "version": "2026.05.02-content-c07",
+  "module": "content.article_quality_metadata_review_scaffold",
+  "status": "preflight_only",
+  "purpose": "Validates article quality metadata and review queue scaffolds while confirming current public reads remain safe.",
+  "depends_on": [
+    "data/content/quality/public-read-link-image-integrity.json",
+    "data/content/quality/editorial-selection-featured-read-governance.json",
+    "data/content/quality/featured-read-override-selection-memory.json",
+    "data/content/quality/featured-read-scoring-rotation-preview.json",
+    "data/content/quality/image-registry-source-governance.json",
+    "data/content/quality/article-url-slug-sitemap-governance.json",
+    "data/content/editorial/article-quality-metadata-schema.json",
+    "data/content/editorial/article-quality-review-queue.json"
+  ],
+  "metadata_write_enabled": false,
+  "review_queue_write_enabled": false,
+  "admin_review_enabled": false,
+  "article_content_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "external_api_fetch_enabled": false,
+  "blocked_in_this_stage": [
+    "metadata_write",
+    "review_queue_write",
+    "admin_review_activation",
+    "article_publication_mutation",
+    "article_content_mutation",
+    "homepage_mutation",
+    "external_api_fetch",
+    "live_supabase_article_read",
+    "auth_enablement",
+    "payment_provider",
+    "premium_guidance_unlock"
+  ],
+  "guardrails": [
+    "Do not mutate article content.",
+    "Do not mutate article index.",
+    "Do not mutate homepage featured reads.",
+    "Do not activate admin review.",
+    "Do not fetch external APIs.",
+    "Do not expose service role key."
+  ]
+}

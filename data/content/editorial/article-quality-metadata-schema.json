@@ -1,0 +1,66 @@
+{
+  "version": "2026.05.02-content-c07",
+  "module": "content.article_quality_metadata_schema",
+  "status": "scaffold_only",
+  "enabled": false,
+  "metadata_write_enabled": false,
+  "article_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "purpose": "Future schema for article-level editorial quality metadata and review classification.",
+  "required_future_fields": [
+    "article_path",
+    "title",
+    "category",
+    "source_type",
+    "author_or_generator",
+    "review_status",
+    "language_readiness",
+    "hindi_readiness",
+    "image_approval_status",
+    "source_reference_status",
+    "evergreen_or_current",
+    "quality_score",
+    "reviewer",
+    "approved_at",
+    "rollback_note"
+  ],
+  "review_status_values": [
+    "draft",
+    "generated",
+    "under_review",
+    "approved_public",
+    "published",
+    "needs_revision",
+    "archived",
+    "rejected"
+  ],
+  "language_readiness_values": [
+    "english_ready",
+    "hindi_metadata_ready",
+    "hindi_body_ready",
+    "bilingual_ready",
+    "translation_pending",
+    "translation_needs_review"
+  ],
+  "source_reference_status_values": [
+    "source_not_required",
+    "source_pending",
+    "source_verified",
+    "source_needs_review",
+    "source_rejected"
+  ],
+  "evergreen_or_current_values": [
+    "evergreen",
+    "current",
+    "seasonal",
+    "time_sensitive",
+    "unknown"
+  ],
+  "guardrails": [
+    "Metadata schema is not live in this stage.",
+    "Do not write article quality metadata yet.",
+    "Do not mutate article content.",
+    "Do not promote generated or scaffold records to public status.",
+    "Do not enable admin backend actions."
+  ]
+}

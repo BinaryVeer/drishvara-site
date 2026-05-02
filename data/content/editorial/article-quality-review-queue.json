@@ -1,0 +1,27 @@
+{
+  "version": "2026.05.02-content-c07",
+  "module": "content.article_quality_review_queue",
+  "status": "scaffold_only",
+  "enabled": false,
+  "queue_write_enabled": false,
+  "admin_review_enabled": false,
+  "purpose": "Future queue for editorial review of article quality metadata. Disabled in C07.",
+  "items": [],
+  "required_future_fields": [
+    "article_path",
+    "review_reason",
+    "current_status",
+    "requested_status",
+    "reviewer",
+    "decision",
+    "decision_at",
+    "notes"
+  ],
+  "guardrails": [
+    "Review queue is not live in this stage.",
+    "Admin review remains disabled.",
+    "Do not write queue items automatically.",
+    "Do not mutate article publication state.",
+    "Do not fetch external APIs."
+  ]
+}
