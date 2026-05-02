@@ -42,7 +42,7 @@
     "admin-review:preflight": "node scripts/admin-review-preflight.js",
     "preactivation:preflight": "node scripts/preactivation-preflight.js && npm run activation:auth-manual-enable:preflight",
     "timezone:preflight": "node scripts/timezone-preflight.js",
-    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:language-runtime:preflight && npm run ui:language-runtime-neutralization:preflight",
+    "public-preview:preflight": "node scripts/public-preview-preflight.js && npm run ui:language-runtime:preflight && npm run ui:language-runtime-neutralization:preflight && npm run ui:language-toggle-click:preflight",
     "daily-basis:preflight": "node scripts/daily-basis-guard-preflight.js",
     "placeholder:audit": "node scripts/placeholder-audit-preflight.js",
     "public-visual:preflight": "node scripts/public-visual-polish-preflight.js",
@@ -67,7 +67,8 @@
     "content:governance-status:preflight": "node scripts/content-governance-status-preflight.js",
     "activation:auth-manual-enable:preflight": "node scripts/limited-auth-manual-enablement-preflight.js",
     "ui:language-runtime:preflight": "node scripts/unified-language-runtime-preflight.js",
-    "ui:language-runtime-neutralization:preflight": "node scripts/legacy-language-runtime-neutralization-preflight.js"
+    "ui:language-runtime-neutralization:preflight": "node scripts/legacy-language-runtime-neutralization-preflight.js",
+    "ui:language-toggle-click:preflight": "node scripts/language-toggle-click-target-preflight.js"
   },
   "repository": {
     "type": "git",

@@ -322,6 +322,48 @@
     }, 120);
   }
 
+
+  function findLanguageToggleTarget(start) {
+    let el = start;
+    let depth = 0;
+
+    while (el && depth < 8 && el !== document.body) {
+      if (
+        el.matches?.("[data-lang], [data-language], [data-language-toggle], .language-toggle, .lang-toggle, .lang-switch, .site-language-toggle, .language-pill, .language-selector, .i18n-toggle")
+      ) {
+        return el;
+      }
+
+      const text = (el.textContent || "").trim();
+      const hasEnglish = /\bEN\b|English/i.test(text);
+      const hasHindi = /हिन्दी|हिंदी|Hindi/i.test(text);
+
+      if (hasEnglish && hasHindi && text.length <= 40) {
+        return el;
+      }
+
+      el = el.parentElement;
+      depth += 1;
+    }
+
+    return null;
+  }
+
+  function markLanguageToggleCandidates() {
+    for (const el of document.querySelectorAll("button, a, span, div, nav li")) {
+      const text = (el.textContent || "").trim();
+      const hasEnglish = /\bEN\b|English/i.test(text);
+      const hasHindi = /हिन्दी|हिंदी|Hindi/i.test(text);
+
+      if (hasEnglish && hasHindi && text.length <= 40) {
+        el.dataset.languageToggle = "true";
+        el.setAttribute("role", "button");
+        el.setAttribute("tabindex", "0");
+        el.style.cursor = "pointer";
+      }
+    }
+  }
+
   function desiredFromClick(target) {
     if (!target) return null;
 
@@ -342,7 +384,7 @@
   }
 
   document.addEventListener("click", (event) => {
-    const target = event.target.closest("[data-lang], [data-language], button, a, span");
+    const target = findLanguageToggleTarget(event.target) || event.target.closest("[data-lang], [data-language], button, a, span, div");
     const desired = desiredFromClick(target);
     if (!desired) return;
 
@@ -359,6 +401,17 @@
     setTimeout(() => applyLanguage(desired), 420);
   }, true);
 
+
+  // language-toggle-keyboard
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const target = findLanguageToggleTarget(event.target);
+    if (!target) return;
+
+    event.preventDefault();
+    target.click();
+  }, true);
+
   window.addEventListener("storage", (event) => {
     if (event.key === LANG_KEY || ALIAS_KEYS.includes(event.key)) applyLanguage(event.newValue);
   });
@@ -372,12 +425,16 @@
     window.__drishvaraUnifiedI18nTimer = setTimeout(() => applyLanguage(getLanguage()), 90);
   });
 
-  window.addEventListener("pageshow", () => applyLanguage(getLanguage()));
+  window.addEventListener("pageshow", () => {
+    markLanguageToggleCandidates();
+    applyLanguage(getLanguage());
+  });
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) applyLanguage(getLanguage());
   });
 
   window.addEventListener("DOMContentLoaded", () => {
+    markLanguageToggleCandidates();
     applyLanguage(getLanguage());
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
   });
