@@ -1,0 +1,60 @@
+{
+  "version": "2026.05.03-d04",
+  "module": "knowledge.daily_guidance_rule_validation_policy",
+  "status": "validation_policy_only",
+  "purpose": "Validate future Daily Guidance rule candidates and produce preview-only selections without enabling live dynamic guidance.",
+  "public_dynamic_output_enabled": false,
+  "selection_preview_enabled": true,
+  "selection_preview_live_enabled": false,
+  "subscriber_guidance_enabled": false,
+  "premium_guidance_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "validation_rules": [
+    {
+      "id": "rule-type-must-be-allowed",
+      "description": "Each guidance rule must use an allowed D03 rule_type."
+    },
+    {
+      "id": "tone-must-be-allowed",
+      "description": "Each guidance rule must use an allowed D03 tone."
+    },
+    {
+      "id": "review-status-required",
+      "description": "Each rule must carry draft, needs_review, approved, or rejected status."
+    },
+    {
+      "id": "source-basis-required",
+      "description": "Each rule must include a source_basis explaining why the rule exists."
+    },
+    {
+      "id": "hindi-english-pair-required",
+      "description": "Each public-facing text must have English and Hindi copy."
+    },
+    {
+      "id": "no-live-selection",
+      "description": "Preview selection must not update public daily-context output."
+    }
+  ],
+  "selection_priority": [
+    "exact weekday match",
+    "word_theme match",
+    "fallback neutral guidance"
+  ],
+  "guardrails": [
+    "Do not make public Daily Guidance dynamic in this stage.",
+    "Do not write into data/daily-context.json.",
+    "Do not fetch external APIs.",
+    "Do not change language runtime.",
+    "Do not enable Supabase/Auth/payment/premium/admin.",
+    "Do not present guidance as deterministic prediction."
+  ]
+}

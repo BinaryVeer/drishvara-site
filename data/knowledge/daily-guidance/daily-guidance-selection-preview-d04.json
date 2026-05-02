@@ -1,0 +1,138 @@
+{
+  "version": "2026.05.03-d04",
+  "module": "knowledge.daily_guidance_selection_preview",
+  "status": "preview_not_live",
+  "public_dynamic_output_enabled": false,
+  "selection_preview_live_enabled": false,
+  "generated_from": [
+    "data/knowledge/daily-guidance/daily-guidance-rule-schema-d03.json",
+    "data/knowledge/daily-guidance/daily-guidance-rule-examples-d03.json",
+    "data/knowledge/daily-guidance/word-of-day-bank-d02.json"
+  ],
+  "validation_basis": {
+    "allowed_rule_types": [
+      "day",
+      "tithi",
+      "nakshatra",
+      "season",
+      "festival",
+      "word_theme",
+      "observance",
+      "fallback"
+    ],
+    "allowed_tones": [
+      "reflective",
+      "devotional",
+      "disciplined",
+      "calming",
+      "cautionary"
+    ],
+    "review_status_values": [
+      "draft",
+      "needs_review",
+      "approved",
+      "rejected"
+    ]
+  },
+  "items": [
+    {
+      "preview_id": "preview-saturday-reflection",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "input_context": {
+        "weekday": "Saturday",
+        "word_id": "reflection",
+        "word_theme": "reflection"
+      },
+      "selected_rule_id": "weekday-saturday-steadiness",
+      "selection_reason": "exact weekday match",
+      "selected_word": {
+        "id": "reflection",
+        "word_en": "Reflection",
+        "word_hi": "मनन",
+        "word_sanskrit": "मननम्",
+        "theme": "reflection",
+        "review_status": "approved"
+      },
+      "guidance_preview": {
+        "title_en": "Steadiness before movement",
+        "title_hi": "गति से पहले स्थिरता",
+        "text_en": "Use the day for patient work, measured speech, and responsible closure of pending tasks.",
+        "text_hi": "दिन का उपयोग धैर्यपूर्ण कार्य, मापा हुआ वचन और लंबित कार्यों के जिम्मेदार समापन के लिए करें।",
+        "recommended_action_en": "Review one pending responsibility and close it carefully.",
+        "recommended_action_hi": "एक लंबित जिम्मेदारी की समीक्षा करें और उसे सावधानी से पूरा करें।",
+        "avoidance_note_en": "Avoid hurried decisions and unnecessary confrontation.",
+        "avoidance_note_hi": "जल्दबाजी वाले निर्णय और अनावश्यक टकराव से बचें।",
+        "tone": "disciplined",
+        "review_status": "needs_review",
+        "source_basis": "Editorial placeholder aligned with weekday-reflection model; not dynamic Panchang output."
+      }
+    },
+    {
+      "preview_id": "preview-word-theme-reflection",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "input_context": {
+        "weekday": "Tuesday",
+        "word_id": "reflection",
+        "word_theme": "reflection"
+      },
+      "selected_rule_id": "word-theme-reflection",
+      "selection_reason": "word_theme match",
+      "selected_word": {
+        "id": "reflection",
+        "word_en": "Reflection",
+        "word_hi": "मनन",
+        "word_sanskrit": "मननम्",
+        "theme": "reflection",
+        "review_status": "approved"
+      },
+      "guidance_preview": {
+        "title_en": "Respond after reflection",
+        "title_hi": "मनन के बाद प्रतिक्रिया दें",
+        "text_en": "Pause long enough to separate immediate emotion from considered understanding.",
+        "text_hi": "तत्काल भावना और विचारपूर्ण समझ के बीच अंतर करने के लिए पर्याप्त विराम लें।",
+        "recommended_action_en": "Write down one thought before acting on it.",
+        "recommended_action_hi": "किसी विचार पर कार्य करने से पहले उसे लिख लें।",
+        "avoidance_note_en": "Avoid reacting only because the moment feels urgent.",
+        "avoidance_note_hi": "केवल क्षण की तीव्रता के कारण प्रतिक्रिया देने से बचें।",
+        "tone": "reflective",
+        "review_status": "needs_review",
+        "source_basis": "Derived from approved Word of the Day theme bank."
+      }
+    },
+    {
+      "preview_id": "preview-fallback-balance",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "input_context": {
+        "weekday": "Thursday",
+        "word_id": "balance",
+        "word_theme": "awareness"
+      },
+      "selected_rule_id": "fallback-neutral-daily-guidance",
+      "selection_reason": "fallback neutral guidance",
+      "selected_word": {
+        "id": "balance",
+        "word_en": "Balance",
+        "word_hi": "संतुलन",
+        "word_sanskrit": "संतुलनम्",
+        "theme": "awareness",
+        "review_status": "approved"
+      },
+      "guidance_preview": {
+        "title_en": "A clear and steady day",
+        "title_hi": "स्पष्ट और स्थिर दिन",
+        "text_en": "Keep the day simple: observe, decide slowly, and act with steadiness.",
+        "text_hi": "दिन को सरल रखें: देखें, धीरे निर्णय लें और स्थिरता से कार्य करें।",
+        "recommended_action_en": "Choose one meaningful task and complete it without distraction.",
+        "recommended_action_hi": "एक सार्थक कार्य चुनें और उसे बिना विचलन पूरा करें।",
+        "avoidance_note_en": "Avoid scattering attention across too many concerns.",
+        "avoidance_note_hi": "ध्यान को बहुत अधिक चिंताओं में बिखेरने से बचें।",
+        "tone": "calming",
+        "review_status": "needs_review",
+        "source_basis": "Neutral editorial fallback; not astrological prediction."
+      }
+    }
+  ]
+}
