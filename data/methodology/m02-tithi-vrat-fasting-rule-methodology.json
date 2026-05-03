@@ -1,0 +1,409 @@
+{
+  "module_id": "M02",
+  "module_title": "Tithi / Vrat / Fasting-Day Rule Engine",
+  "phase": "M-Methodology",
+  "status": "methodology_rule_framework_only",
+  "depends_on": [
+    "M00",
+    "M01"
+  ],
+  "runtime_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_panchang_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "rule_engine_runtime_enabled": false,
+  "festival_date_publication_enabled": false,
+  "doctrine_version": "0.1.0",
+  "scope": {
+    "included": [
+      "all_tithi_rule_targets",
+      "vrat_rule_family_methodology",
+      "fasting_day_rule_methodology",
+      "sunrise_dependency_methodology",
+      "sunset_pradosh_dependency_methodology",
+      "moonrise_dependency_methodology",
+      "parana_dependency_methodology",
+      "regional_variant_support",
+      "sampradaya_variant_support",
+      "conflict_and_ambiguity_doctrine"
+    ],
+    "excluded": [
+      "live_panchang_runtime",
+      "public_panchang_calendar",
+      "subscriber_output",
+      "personalized_daily_guidance",
+      "auth",
+      "supabase",
+      "payment",
+      "subscription_entitlement",
+      "external_api_fetch",
+      "festival_date_publication",
+      "automatic_religious_recommendation",
+      "mantra_selection",
+      "lucky_number_colour_selection",
+      "dob_based_prediction",
+      "fear_based_guidance"
+    ]
+  },
+  "all_tithi_targets": [
+    {
+      "paksha": "shukla",
+      "number": 1,
+      "name": "Pratipada",
+      "display": "Shukla Pratipada"
+    },
+    {
+      "paksha": "shukla",
+      "number": 2,
+      "name": "Dwitiya",
+      "display": "Shukla Dwitiya"
+    },
+    {
+      "paksha": "shukla",
+      "number": 3,
+      "name": "Tritiya",
+      "display": "Shukla Tritiya"
+    },
+    {
+      "paksha": "shukla",
+      "number": 4,
+      "name": "Chaturthi",
+      "display": "Shukla Chaturthi"
+    },
+    {
+      "paksha": "shukla",
+      "number": 5,
+      "name": "Panchami",
+      "display": "Shukla Panchami"
+    },
+    {
+      "paksha": "shukla",
+      "number": 6,
+      "name": "Shashthi",
+      "display": "Shukla Shashthi"
+    },
+    {
+      "paksha": "shukla",
+      "number": 7,
+      "name": "Saptami",
+      "display": "Shukla Saptami"
+    },
+    {
+      "paksha": "shukla",
+      "number": 8,
+      "name": "Ashtami",
+      "display": "Shukla Ashtami"
+    },
+    {
+      "paksha": "shukla",
+      "number": 9,
+      "name": "Navami",
+      "display": "Shukla Navami"
+    },
+    {
+      "paksha": "shukla",
+      "number": 10,
+      "name": "Dashami",
+      "display": "Shukla Dashami"
+    },
+    {
+      "paksha": "shukla",
+      "number": 11,
+      "name": "Ekadashi",
+      "display": "Shukla Ekadashi"
+    },
+    {
+      "paksha": "shukla",
+      "number": 12,
+      "name": "Dwadashi",
+      "display": "Shukla Dwadashi"
+    },
+    {
+      "paksha": "shukla",
+      "number": 13,
+      "name": "Trayodashi",
+      "display": "Shukla Trayodashi"
+    },
+    {
+      "paksha": "shukla",
+      "number": 14,
+      "name": "Chaturdashi",
+      "display": "Shukla Chaturdashi"
+    },
+    {
+      "paksha": "shukla",
+      "number": 15,
+      "name": "Purnima",
+      "display": "Purnima"
+    },
+    {
+      "paksha": "krishna",
+      "number": 1,
+      "name": "Pratipada",
+      "display": "Krishna Pratipada"
+    },
+    {
+      "paksha": "krishna",
+      "number": 2,
+      "name": "Dwitiya",
+      "display": "Krishna Dwitiya"
+    },
+    {
+      "paksha": "krishna",
+      "number": 3,
+      "name": "Tritiya",
+      "display": "Krishna Tritiya"
+    },
+    {
+      "paksha": "krishna",
+      "number": 4,
+      "name": "Chaturthi",
+      "display": "Krishna Chaturthi"
+    },
+    {
+      "paksha": "krishna",
+      "number": 5,
+      "name": "Panchami",
+      "display": "Krishna Panchami"
+    },
+    {
+      "paksha": "krishna",
+      "number": 6,
+      "name": "Shashthi",
+      "display": "Krishna Shashthi"
+    },
+    {
+      "paksha": "krishna",
+      "number": 7,
+      "name": "Saptami",
+      "display": "Krishna Saptami"
+    },
+    {
+      "paksha": "krishna",
+      "number": 8,
+      "name": "Ashtami",
+      "display": "Krishna Ashtami"
+    },
+    {
+      "paksha": "krishna",
+      "number": 9,
+      "name": "Navami",
+      "display": "Krishna Navami"
+    },
+    {
+      "paksha": "krishna",
+      "number": 10,
+      "name": "Dashami",
+      "display": "Krishna Dashami"
+    },
+    {
+      "paksha": "krishna",
+      "number": 11,
+      "name": "Ekadashi",
+      "display": "Krishna Ekadashi"
+    },
+    {
+      "paksha": "krishna",
+      "number": 12,
+      "name": "Dwadashi",
+      "display": "Krishna Dwadashi"
+    },
+    {
+      "paksha": "krishna",
+      "number": 13,
+      "name": "Trayodashi",
+      "display": "Krishna Trayodashi"
+    },
+    {
+      "paksha": "krishna",
+      "number": 14,
+      "name": "Chaturdashi",
+      "display": "Krishna Chaturdashi"
+    },
+    {
+      "paksha": "krishna",
+      "number": 15,
+      "name": "Amavasya",
+      "display": "Amavasya"
+    }
+  ],
+  "rule_families": [
+    {
+      "key": "tithi_only",
+      "description": "M02 methodology-only rule family for tithi only.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "tithi_paksha",
+      "description": "M02 methodology-only rule family for tithi paksha.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "lunar_month_tithi",
+      "description": "M02 methodology-only rule family for lunar month tithi.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "weekday_tithi",
+      "description": "M02 methodology-only rule family for weekday tithi.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "sunrise_touching",
+      "description": "M02 methodology-only rule family for sunrise touching.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "sunset_pradosh_overlap",
+      "description": "M02 methodology-only rule family for sunset pradosh overlap.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "moonrise_overlap",
+      "description": "M02 methodology-only rule family for moonrise overlap.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "parana_fast_breaking",
+      "description": "M02 methodology-only rule family for parana fast breaking.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "nakshatra_linked",
+      "description": "M02 methodology-only rule family for nakshatra linked.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "yoga_karana_linked",
+      "description": "M02 methodology-only rule family for yoga karana linked.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "solar_transition_sankranti",
+      "description": "M02 methodology-only rule family for solar transition sankranti.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "regional_calendar_variant",
+      "description": "M02 methodology-only rule family for regional calendar variant.",
+      "runtime_enabled": false
+    },
+    {
+      "key": "sampradaya_variant",
+      "description": "M02 methodology-only rule family for sampradaya variant.",
+      "runtime_enabled": false
+    }
+  ],
+  "required_rule_inputs": [
+    "local_date",
+    "location",
+    "timezone",
+    "sunrise_time",
+    "sunset_time_if_required",
+    "moonrise_time_if_required",
+    "tithi_interval",
+    "paksha",
+    "lunar_month",
+    "weekday",
+    "nakshatra_interval_if_required",
+    "yoga_interval_if_required",
+    "karana_interval_if_required",
+    "solar_ingress_timestamp_if_required",
+    "tithi_at_sunrise",
+    "tithi_at_sunset_if_required",
+    "tithi_at_moonrise_if_required",
+    "skipped_repeated_tithi_flags",
+    "calculation_basis",
+    "ayanamsha_basis",
+    "source_registry_reference",
+    "rule_family",
+    "review_status"
+  ],
+  "future_rule_output_contract_required_sections": [
+    "public_output_allowed",
+    "observance_candidate",
+    "calculation_inputs",
+    "rule_decision",
+    "trace"
+  ],
+  "conflict_flags": [
+    "skipped_tithi",
+    "repeated_tithi",
+    "tithi_beginning_after_sunrise",
+    "tithi_ending_before_sunrise",
+    "tithi_spanning_two_sunrise_points",
+    "tithi_overlapping_sunset_window",
+    "tithi_overlapping_moonrise_window",
+    "regional_date_conflict",
+    "sampradaya_conflict",
+    "panchang_source_conflict",
+    "modern_vs_classical_reference_difference",
+    "insufficient_source_evidence"
+  ],
+  "source_registry_required_fields": [
+    "traditional_name",
+    "english_display_name",
+    "tithi_target",
+    "paksha_target",
+    "lunar_month_target_if_applicable",
+    "weekday_target_if_applicable",
+    "nakshatra_target_if_applicable",
+    "event_window_basis",
+    "source_level",
+    "source_reference",
+    "commentary_note_if_applicable",
+    "regional_variant",
+    "sampradaya_variant",
+    "sanskrit_review_status",
+    "calculation_review_status",
+    "observance_review_status",
+    "public_activation_status"
+  ],
+  "regional_variant_support": [
+    "north_indian",
+    "south_indian",
+    "tamil",
+    "telugu",
+    "bengali",
+    "odia",
+    "assamese",
+    "nepali",
+    "maharashtra_gujarati",
+    "local_custom",
+    "other_reviewed"
+  ],
+  "sampradaya_variant_support": [
+    "smarta",
+    "vaishnava",
+    "shaiva",
+    "shakta",
+    "ganapatya",
+    "temple_specific",
+    "family_tradition_note",
+    "other_reviewed"
+  ],
+  "approved_output_labels": [
+    "methodology_only",
+    "rule_framework_only",
+    "not_public_output",
+    "human_review_required",
+    "regional_variant_possible",
+    "sampradaya_variant_possible",
+    "source_conflict_possible",
+    "not_for_fear_based_guidance"
+  ],
+  "review_gates": [
+    "source_review",
+    "sanskrit_review",
+    "calculation_review",
+    "observance_rule_review",
+    "regional_variant_review",
+    "sampradaya_variant_review",
+    "sunrise_sunset_moonrise_basis_review",
+    "parana_rule_review",
+    "output_safety_review"
+  ]
+}
