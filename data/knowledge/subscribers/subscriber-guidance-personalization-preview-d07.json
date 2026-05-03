@@ -1,0 +1,74 @@
+{
+  "version": "2026.05.03-d07",
+  "module": "knowledge.subscriber_guidance_personalization_preview",
+  "status": "preview_not_live",
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "personalized_output_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "generated_from": [
+    "data/knowledge/subscribers/subscriber-guidance-personalization-schema-d07.json",
+    "data/knowledge/daily-guidance/daily-guidance-rule-examples-d03.json",
+    "data/knowledge/daily-guidance/word-of-day-bank-d02.json",
+    "data/knowledge/sanatan/mantra-review-preview-d06.json"
+  ],
+  "schema_sections": [
+    "daily_reflection",
+    "what_to_do",
+    "what_not_to_do",
+    "lucky_number",
+    "lucky_color",
+    "mantra",
+    "word_of_the_day",
+    "panchang_context",
+    "festival_or_observance_context"
+  ],
+  "items": [
+    {
+      "preview_id": "subscriber-guidance-preview-synthetic-01",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "premium_guidance_enabled": false,
+      "auth_required_but_not_enabled": true,
+      "subscription_gate_required_but_not_enabled": true,
+      "input_context": {
+        "synthetic_profile": true,
+        "subscriber_id": "synthetic-preview-only",
+        "timezone": "Asia/Kolkata",
+        "preferred_language": "en",
+        "birth_context_used": false,
+        "profile_storage_used": false
+      },
+      "output_preview": {
+        "daily_reflection_en": "Keep the day simple: observe, decide slowly, and act with steadiness.",
+        "daily_reflection_hi": "दिन को सरल रखें: देखें, धीरे निर्णय लें और स्थिरता से कार्य करें।",
+        "what_to_do_en": "Choose one meaningful task and complete it without distraction.",
+        "what_to_do_hi": "एक सार्थक कार्य चुनें और उसे बिना विचलन पूरा करें।",
+        "what_not_to_do_en": "Avoid scattering attention across too many concerns.",
+        "what_not_to_do_hi": "ध्यान को बहुत अधिक चिंताओं में बिखेरने से बचें।",
+        "word_of_day": {
+          "id": "reflection",
+          "word_en": "Reflection",
+          "word_hi": "मनन",
+          "word_sanskrit": "मननम्",
+          "review_status": "approved"
+        },
+        "mantra": {
+          "mantra_id": "om-namah-shivaya",
+          "sanskrit_text": "ॐ नमः शिवाय",
+          "review_status": "needs_review",
+          "live_output_enabled": false
+        }
+      },
+      "blocked_unlocks": [
+        "premium guidance",
+        "birth chart processing",
+        "subscriber profile read",
+        "Supabase query",
+        "payment entitlement"
+      ]
+    }
+  ]
+}

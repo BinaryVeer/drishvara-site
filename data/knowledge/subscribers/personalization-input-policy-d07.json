@@ -1,0 +1,35 @@
+{
+  "version": "2026.05.03-d07",
+  "module": "knowledge.subscriber_guidance_personalization_input_policy",
+  "status": "policy_scaffold_only",
+  "purpose": "Define future input validation and privacy policy for subscriber daily guidance personalization.",
+  "collection_enabled_now": false,
+  "subscriber_profile_storage_enabled": false,
+  "birth_context_processing_enabled": false,
+  "sensitive_data_public_exposure_allowed": false,
+  "required_future_controls": [
+    "explicit consent",
+    "privacy notice",
+    "secure storage",
+    "right to edit profile",
+    "right to delete profile",
+    "subscription entitlement check",
+    "audit trail for guidance generation"
+  ],
+  "blocked_now": [
+    "collecting date/time/place of birth",
+    "processing birth chart",
+    "unlocking personalized guidance",
+    "displaying premium guidance",
+    "storing subscriber profile through frontend",
+    "using service role key in frontend",
+    "email-only admin inference",
+    "login-only premium unlock"
+  ],
+  "review_status_values": [
+    "draft",
+    "needs_review",
+    "approved",
+    "rejected"
+  ]
+}

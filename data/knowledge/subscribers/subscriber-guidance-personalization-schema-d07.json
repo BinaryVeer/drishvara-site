@@ -1,0 +1,100 @@
+{
+  "version": "2026.05.03-d07",
+  "module": "knowledge.subscriber_daily_guidance_personalization_schema",
+  "status": "schema_scaffold_only",
+  "purpose": "Define a safe future personalization schema for subscriber daily guidance without enabling Auth, subscription, Supabase reads/writes, premium output, or live personalized guidance.",
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "personalized_output_enabled": false,
+  "public_personalized_output_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "subscription_gate_enabled": false,
+  "payment_enabled": false,
+  "admin_actions_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "personalization_input_groups": {
+    "identity_context": {
+      "enabled_now": false,
+      "future_fields": [
+        "subscriber_id",
+        "display_name",
+        "timezone",
+        "preferred_language",
+        "consent_version"
+      ],
+      "notes": "Only after Auth/subscription activation and explicit consent."
+    },
+    "birth_context": {
+      "enabled_now": false,
+      "future_fields": [
+        "date_of_birth",
+        "time_of_birth",
+        "place_of_birth",
+        "latitude",
+        "longitude",
+        "birth_timezone"
+      ],
+      "notes": "Sensitive context. Must not be collected or processed before consent, privacy policy, and secure storage."
+    },
+    "daily_context": {
+      "enabled_now": false,
+      "future_fields": [
+        "date",
+        "timezone",
+        "location_basis",
+        "word_of_day_id",
+        "guidance_rule_id",
+        "panchang_record_id",
+        "mantra_id"
+      ],
+      "notes": "May be derived from reviewed D01-D06 engines after future activation."
+    },
+    "preference_context": {
+      "enabled_now": false,
+      "future_fields": [
+        "guidance_tone_preference",
+        "spiritual_orientation",
+        "notification_preference",
+        "avoid_sensitive_topics",
+        "content_depth"
+      ],
+      "notes": "Must be user-controlled and editable."
+    }
+  },
+  "future_output_sections": [
+    "daily_reflection",
+    "what_to_do",
+    "what_not_to_do",
+    "lucky_number",
+    "lucky_color",
+    "mantra",
+    "word_of_the_day",
+    "panchang_context",
+    "festival_or_observance_context"
+  ],
+  "strict_output_rules": [
+    "Do not present guidance as deterministic prediction.",
+    "Do not claim guaranteed outcomes.",
+    "Do not provide medical, legal, financial or crisis advice as spiritual guidance.",
+    "Do not generate unreviewed mantra text.",
+    "Do not expose birth details or subscriber profile publicly.",
+    "Do not unlock premium guidance only on login; subscription/entitlement must be checked in a later activation stage."
+  ],
+  "guardrails": [
+    "Do not enable subscriber guidance in this stage.",
+    "Do not enable premium guidance in this stage.",
+    "Do not enable Auth in frontend code.",
+    "Do not instantiate Supabase client.",
+    "Do not query subscriber tables.",
+    "Do not collect birth details.",
+    "Do not write to data/daily-context.json.",
+    "Do not change language runtime.",
+    "Do not fetch external APIs."
+  ]
+}
