@@ -1,0 +1,52 @@
+{
+  "version": "2026.05.03-d10",
+  "module": "knowledge.governance_consolidated_status_policy",
+  "status": "consolidated_status_policy_only",
+  "purpose": "Freeze and summarize the D01-D09 knowledge governance stack before any live runtime or activation work.",
+  "public_dynamic_output_enabled": false,
+  "daily_guidance_live_enabled": false,
+  "panchang_live_enabled": false,
+  "festival_live_enabled": false,
+  "mantra_live_enabled": false,
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "dashboard_live_data_enabled": false,
+  "auth_enabled": false,
+  "supabase_enabled": false,
+  "payment_enabled": false,
+  "subscription_gate_live_enabled": false,
+  "entitlement_check_live_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "covered_stages": [
+    "D01 Daily Guidance & Panchang engine governance",
+    "D02 Word of the Day curated rotation bank",
+    "D03 Daily Guidance rule schema",
+    "D04 Daily Guidance rule validation and selection preview",
+    "D05 Panchang/Festival source registry and validation preview",
+    "D06 Mantra source registry and review preview",
+    "D07 Subscriber guidance personalization schema",
+    "D08 Subscriber entitlement and privacy gate preview",
+    "D09 Subscriber dashboard readiness matrix"
+  ],
+  "guardrails": [
+    "Do not enable live public dynamic output.",
+    "Do not enable subscriber or premium guidance.",
+    "Do not instantiate Supabase client.",
+    "Do not enable Auth or session detection.",
+    "Do not enable payment or entitlement checks.",
+    "Do not fetch external APIs.",
+    "Do not change language runtime.",
+    "Do not write into data/daily-context.json.",
+    "Do not expose birth/profile/premium guidance data."
+  ],
+  "next_stage_gate": {
+    "runtime_activation_allowed": false,
+    "reason": "D10 is a consolidation/reporting stage only. Runtime activation requires a separate explicit activation stage."
+  }
+}
