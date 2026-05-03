@@ -1,0 +1,188 @@
+{
+  "version": "2026.05.03-d08",
+  "module": "knowledge.subscriber_entitlement_privacy_gate_preview",
+  "status": "preview_not_live",
+  "auth_enabled": false,
+  "supabase_enabled": false,
+  "payment_enabled": false,
+  "subscription_gate_live_enabled": false,
+  "entitlement_check_live_enabled": false,
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "generated_from": [
+    "data/knowledge/subscribers/subscriber-entitlement-privacy-gate-d08.json"
+  ],
+  "items": [
+    {
+      "scenario_id": "anonymous-user",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "auth_enabled": false,
+      "supabase_enabled": false,
+      "payment_enabled": false,
+      "premium_guidance_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "gate_result": "blocked",
+      "first_blocking_gate": "authenticated_session",
+      "failure_state": "show_login_required_message",
+      "gates": [
+        {
+          "gate": "authenticated_session",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_login_required_message"
+        },
+        {
+          "gate": "subscriber_profile_exists",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_profile_setup_pending_message"
+        },
+        {
+          "gate": "explicit_consent_active",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_consent_required_message"
+        },
+        {
+          "gate": "subscription_entitlement_active",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_subscription_required_message"
+        },
+        {
+          "gate": "privacy_safe_inputs_available",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_safe_input_required_message"
+        },
+        {
+          "gate": "approved_guidance_rules_available",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_guidance_pending_review_message"
+        }
+      ]
+    },
+    {
+      "scenario_id": "logged-in-no-subscription",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "auth_enabled": false,
+      "supabase_enabled": false,
+      "payment_enabled": false,
+      "premium_guidance_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "gate_result": "blocked",
+      "first_blocking_gate": "subscription_entitlement_active",
+      "failure_state": "show_subscription_required_message",
+      "gates": [
+        {
+          "gate": "authenticated_session",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "subscriber_profile_exists",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "explicit_consent_active",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "subscription_entitlement_active",
+          "required": true,
+          "enabled_now": false,
+          "passed": false,
+          "failure_state": "show_subscription_required_message"
+        },
+        {
+          "gate": "privacy_safe_inputs_available",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "approved_guidance_rules_available",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        }
+      ]
+    },
+    {
+      "scenario_id": "future-valid-subscriber-preview",
+      "preview_only": true,
+      "live_output_enabled": false,
+      "auth_enabled": false,
+      "supabase_enabled": false,
+      "payment_enabled": false,
+      "premium_guidance_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "gate_result": "would_pass_in_future_after_activation",
+      "first_blocking_gate": null,
+      "failure_state": null,
+      "gates": [
+        {
+          "gate": "authenticated_session",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "subscriber_profile_exists",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "explicit_consent_active",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "subscription_entitlement_active",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "privacy_safe_inputs_available",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        },
+        {
+          "gate": "approved_guidance_rules_available",
+          "required": true,
+          "enabled_now": false,
+          "passed": true,
+          "failure_state": null
+        }
+      ]
+    }
+  ]
+}

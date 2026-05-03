@@ -1,0 +1,97 @@
+{
+  "version": "2026.05.03-d08",
+  "module": "knowledge.subscriber_guidance_entitlement_privacy_gate",
+  "status": "gate_schema_preview_only",
+  "purpose": "Define future entitlement and privacy gates for subscriber daily guidance without enabling Auth, Supabase, payment, subscription gate, or premium guidance.",
+  "auth_enabled": false,
+  "supabase_enabled": false,
+  "payment_enabled": false,
+  "subscription_gate_live_enabled": false,
+  "entitlement_check_live_enabled": false,
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "personalized_output_enabled": false,
+  "public_personalized_output_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "future_gate_sequence": [
+    {
+      "step": 1,
+      "gate": "authenticated_session",
+      "required": true,
+      "enabled_now": false,
+      "failure_state": "show_login_required_message"
+    },
+    {
+      "step": 2,
+      "gate": "subscriber_profile_exists",
+      "required": true,
+      "enabled_now": false,
+      "failure_state": "show_profile_setup_pending_message"
+    },
+    {
+      "step": 3,
+      "gate": "explicit_consent_active",
+      "required": true,
+      "enabled_now": false,
+      "failure_state": "show_consent_required_message"
+    },
+    {
+      "step": 4,
+      "gate": "subscription_entitlement_active",
+      "required": true,
+      "enabled_now": false,
+      "failure_state": "show_subscription_required_message"
+    },
+    {
+      "step": 5,
+      "gate": "privacy_safe_inputs_available",
+      "required": true,
+      "enabled_now": false,
+      "failure_state": "show_safe_input_required_message"
+    },
+    {
+      "step": 6,
+      "gate": "approved_guidance_rules_available",
+      "required": true,
+      "enabled_now": false,
+      "failure_state": "show_guidance_pending_review_message"
+    }
+  ],
+  "privacy_controls_required_future": [
+    "explicit consent before profile personalization",
+    "clear privacy notice",
+    "secure subscriber profile storage",
+    "birth detail minimization",
+    "right to edit profile",
+    "right to delete profile",
+    "audit trail for guidance generation",
+    "no public exposure of subscriber inputs"
+  ],
+  "blocked_now": [
+    "live Auth based unlock",
+    "email-only admin inference",
+    "login-only premium unlock",
+    "frontend Supabase profile read",
+    "frontend Supabase subscription read",
+    "birth detail collection",
+    "personalized daily guidance display",
+    "premium mantra/lucky number/lucky color unlock",
+    "payment entitlement activation"
+  ],
+  "guardrails": [
+    "Do not enable Auth in frontend code.",
+    "Do not instantiate Supabase client.",
+    "Do not query subscriber profile or subscription tables.",
+    "Do not unlock premium guidance.",
+    "Do not collect or process birth details.",
+    "Do not change language runtime.",
+    "Do not fetch external APIs.",
+    "Do not write into data/daily-context.json."
+  ]
+}
