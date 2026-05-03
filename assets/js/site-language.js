@@ -1,3 +1,4 @@
+
 (() => {
   // H05 compatibility shim only. Real translation is handled by drishvara-language-runtime.js.
   const VERSION = "2026.05.02-h05-shim";
@@ -49,7 +50,7 @@
 
     while (el && depth < 8 && el !== document.body) {
       if (
-        el.matches?.("[data-lang], [data-language], [data-language-toggle], .language-toggle, .lang-toggle, .lang-switch, .site-language-toggle, .language-pill, .language-selector, .i18n-toggle")
+        el.matches?.(".lang-toggle, [data-drishvara-lang-toggle='true']")
       ) {
         return el;
       }

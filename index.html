@@ -177,12 +177,16 @@
     .logo-wrap::before {
       content: "";
       position: absolute;
-      width: 150px;
-      height: 150px;
-      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(201, 162, 74, 0.04) 42%, transparent 72%);
-      filter: blur(10px);
+      left: 50%;
+      top: 60%;
+      width: 44px;
+      height: 44px;
+      transform: translate(-50%, -50%);
       border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,242,192,0.34) 0%, rgba(201,162,74,0.20) 34%, rgba(201,162,74,0.025) 70%, transparent 88%);
+      filter: blur(7px);
       z-index: 0;
+      pointer-events: none;
     }
 
     .hero-logo {
@@ -942,6 +946,1618 @@
       justify-content: stretch;
       padding: 0;
     }
+/* DRISHVARA_FRESH_DIMENSIONAL_BALANCE_START
+       Fresh dimensional composition:
+       1) Crown/logo plane
+       2) Orbit plane
+       3) Wordmark plane (recessed / back in depth)
+       4) Mantra plane outside the orbit field
+    */
+
+    .hero {
+      --drish-logo-y: 4px;
+      --drish-title-y: 26px;
+      --drish-title-scale: 0.94;
+      --drish-tagline-y: 56px;
+      --drish-divider-y: 66px;
+      --drish-mantra-y: 132px;
+      --drish-translit-y: 136px;
+      --drish-meaning-y: 138px;
+      padding-top: 14px;
+      padding-bottom: 110px;
+    }
+
+    /* keep logo as crown plane */
+    .hero .logo-wrap {
+      transform: translateY(var(--drish-logo-y));
+      transform-style: preserve-3d;
+      z-index: 6;
+    }
+
+    /* wordmark slightly pushed back in depth */
+    .hero h1 {
+      transform:
+        perspective(1400px)
+        translateY(var(--drish-title-y))
+        translateZ(-80px)
+        scale(var(--drish-title-scale));
+      transform-origin: center center;
+      margin-top: 4px;
+      margin-bottom: 0;
+      font-size: clamp(4.9rem, 7vw, 6.8rem);
+      letter-spacing: -0.03em;
+      text-shadow:
+        0 6px 28px rgba(7, 18, 40, 0.48),
+        0 0 1px rgba(255,255,255,0.04);
+      filter: saturate(0.98);
+    }
+
+    /* subtitle comes lower so sun sits just below it */
+    .hero .tagline {
+      transform:
+        perspective(1400px)
+        translateY(var(--drish-tagline-y))
+        translateZ(-34px)
+        scale(0.985);
+      transform-origin: center center;
+      margin-top: 4px;
+      margin-bottom: 14px;
+      font-size: clamp(1.45rem, 2vw, 2.15rem);
+      opacity: 0.96;
+    }
+
+    /* divider stays near the sun */
+    .hero .divider {
+      transform: translateY(var(--drish-divider-y));
+      margin-top: 2px;
+      margin-bottom: 10px;
+      opacity: 0.72;
+    }
+
+    /* mantra block must sit OUTSIDE the orbit field */
+    .hero .verse {
+      transform: translateY(var(--drish-mantra-y));
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: clamp(2rem, 2.35vw, 2.85rem);
+    }
+
+    .hero .translit {
+      transform: translateY(var(--drish-translit-y));
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+    }
+
+    .hero .meaning {
+      transform: translateY(var(--drish-meaning-y));
+      margin-top: 0;
+      font-size: clamp(1rem, 1.28vw, 1.34rem);
+      opacity: 0.88;
+    }
+
+    /* keep overall orbit calm so text-depth reads well */
+    .drishvara-orbit-svg {
+      opacity: 0.82;
+    }
+
+    .drishvara-orbit-base {
+      opacity: 0.065;
+    }
+
+    .orbit-core-pulse {
+      opacity: 0.46;
+    }
+
+    /* slightly softer rings so title feels more central */
+    .orbit-line-outer {
+      opacity: 0.86;
+    }
+
+    .orbit-line-middle {
+      opacity: 0.92;
+    }
+
+    .orbit-line-inner {
+      opacity: 0.94;
+    }
+
+    /* Responsive tuning */
+    @media (max-width: 900px) {
+      .hero {
+        --drish-logo-y: 2px;
+        --drish-title-y: 18px;
+        --drish-title-scale: 0.955;
+        --drish-tagline-y: 38px;
+        --drish-divider-y: 48px;
+        --drish-mantra-y: 96px;
+        --drish-translit-y: 100px;
+        --drish-meaning-y: 102px;
+        padding-bottom: 84px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.9rem, 7vw, 5.8rem);
+      }
+
+      .hero .tagline {
+        font-size: clamp(1.18rem, 1.7vw, 1.7rem);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        --drish-logo-y: 0px;
+        --drish-title-y: 12px;
+        --drish-title-scale: 0.97;
+        --drish-tagline-y: 22px;
+        --drish-divider-y: 28px;
+        --drish-mantra-y: 64px;
+        --drish-translit-y: 68px;
+        --drish-meaning-y: 70px;
+        padding-bottom: 62px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.1rem, 11vw, 4.6rem);
+      }
+
+      .hero .tagline {
+        font-size: clamp(1rem, 4.2vw, 1.35rem);
+      }
+
+      .hero .verse {
+        font-size: clamp(1.45rem, 5vw, 2rem);
+      }
+    }
+    /* DRISHVARA_FRESH_DIMENSIONAL_BALANCE_END */
+
+    /* DRISHVARA_OPTIONB_HYBRID_HALO_START
+       Option B: Hybrid Hero Halo
+       - logo remains crown node
+       - title + subtitle sit inside a soft orbit halo
+       - Sanskrit block stays below the orbit field
+    */
+
+    /* hard reset of old transforms/shifts */
+    .hero .logo-wrap,
+    .hero h1,
+    .hero .tagline,
+    .hero .divider,
+    .hero .verse,
+    .hero .translit,
+    .hero .meaning {
+      transform: none !important;
+      top: auto !important;
+    }
+
+    .drishvara-hero-orbit,
+    .drishvara-orbit-base,
+    .drishvara-orbit-mask,
+    .drishvara-orbit-svg,
+    .drishvara-crown-orbit {
+      display: none !important;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      text-align: center;
+      padding: 18px 0 34px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% 14%, rgba(255,241,205,0.035), transparent 12%),
+        radial-gradient(circle at 50% 28%, rgba(255,241,205,0.02), transparent 24%),
+        radial-gradient(circle at 50% 46%, rgba(255,241,205,0.012), transparent 36%);
+      z-index: 0;
+    }
+
+    .hero > :not(.drishvara-halo-field) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .drishvara-halo-field {
+      position: absolute;
+      left: 50%;
+      top: 18px;
+      width: min(94vw, 1080px);
+      height: 300px;
+      transform: translateX(-50%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.92;
+    }
+
+    .drishvara-halo-field::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: min(72vw, 760px);
+      height: 150px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(255,244,220,0.07) 0%,
+          rgba(255,244,220,0.03) 30%,
+          rgba(255,244,220,0.01) 55%,
+          transparent 78%);
+      filter: blur(18px);
+    }
+
+    .logo-wrap {
+      position: relative;
+      width: 132px;
+      height: 108px;
+      margin: 4px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    .logo-wrap::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      width: 44px;
+      height: 44px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,242,192,0.30) 0%, rgba(201,162,74,0.16) 38%, transparent 78%);
+      filter: blur(8px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 82px;
+      width: 52px;
+      height: 94px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at top, rgba(255,242,205,0.16) 0%, rgba(201,162,74,0.07) 38%, transparent 76%);
+      filter: blur(18px);
+      opacity: 0.60;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-logo {
+      position: relative;
+      z-index: 2;
+      width: 84px;
+      height: auto;
+      display: block;
+      filter:
+        drop-shadow(0 0 5px rgba(255,237,186,0.28))
+        drop-shadow(0 0 14px rgba(201,162,74,0.22));
+    }
+
+    .hero h1 {
+      margin: 8px auto 6px;
+      font-size: clamp(3.9rem, 6vw, 5.35rem);
+      line-height: 0.95;
+      max-width: 880px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 2px 14px rgba(7, 18, 40, 0.36);
+    }
+
+    .tagline {
+      margin: 0 auto 14px;
+      font-size: clamp(1.16rem, 1.78vw, 1.66rem);
+      line-height: 1.08;
+      text-shadow: 0 2px 10px rgba(7, 18, 40, 0.28);
+    }
+
+    .divider {
+      width: 76px;
+      margin: 0 auto 18px;
+      opacity: 0.78;
+    }
+
+    /* mantra block stays below orbit field */
+    .verse {
+      margin: 0 auto 5px;
+      font-size: clamp(1.58rem, 2.15vw, 2rem);
+      line-height: 1.08;
+      text-shadow: 0 2px 11px rgba(7, 18, 40, 0.30);
+    }
+
+    .translit {
+      margin: 0 auto 3px;
+      font-size: clamp(0.98rem, 1.18vw, 1.14rem);
+      line-height: 1.08;
+      text-shadow: 0 2px 9px rgba(7, 18, 40, 0.24);
+    }
+
+    .meaning {
+      margin: 0 auto;
+      font-size: clamp(0.94rem, 1.08vw, 1.05rem);
+      line-height: 1.06;
+      opacity: 0.90;
+      text-shadow: 0 2px 9px rgba(7, 18, 40, 0.22);
+    }
+
+    /* halo animations */
+    .halo-core-pulse {
+      animation: haloCorePulse 8s ease-in-out infinite;
+      transform-origin: 540px 166px;
+    }
+
+    .halo-ring-outer {
+      stroke-dasharray: 4 15;
+      animation: haloDashOuter 40s linear infinite;
+    }
+
+    .halo-ring-mid {
+      stroke-dasharray: 5 13;
+      animation: haloDashMid 30s linear infinite;
+    }
+
+    .halo-ring-inner {
+      stroke-dasharray: 6 11;
+      animation: haloDashInner 22s linear infinite;
+    }
+
+    .halo-ring-whisper {
+      stroke-dasharray: 3 12;
+      animation: haloDashWhisper 48s linear infinite;
+    }
+
+    @keyframes haloCorePulse {
+      0%, 100% { opacity: 0.42; transform: scale(1); }
+      50% { opacity: 0.74; transform: scale(1.04); }
+    }
+
+    @keyframes haloDashOuter {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -180; }
+    }
+
+    @keyframes haloDashMid {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -140; }
+    }
+
+    @keyframes haloDashInner {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -110; }
+    }
+
+    @keyframes haloDashWhisper {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -210; }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        padding: 16px 0 28px;
+      }
+
+      .drishvara-halo-field {
+        width: min(116vw, 980px);
+        top: 14px;
+        height: 270px;
+      }
+
+      .logo-wrap {
+        width: 118px;
+        height: 98px;
+      }
+
+      .logo-wrap::after {
+        top: 74px;
+        height: 84px;
+      }
+
+      .hero-logo {
+        width: 76px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 4.6rem);
+        margin-top: 6px;
+      }
+
+      .tagline {
+        font-size: clamp(1.06rem, 3vw, 1.36rem);
+        margin-bottom: 12px;
+      }
+
+      .divider {
+        margin-bottom: 16px;
+      }
+
+      .verse {
+        font-size: clamp(1.34rem, 3.8vw, 1.76rem);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .drishvara-halo-field {
+        width: 138vw;
+        top: 8px;
+        height: 230px;
+      }
+
+      .logo-wrap {
+        width: 104px;
+        height: 88px;
+      }
+
+      .logo-wrap::after {
+        top: 66px;
+        height: 72px;
+      }
+
+      .hero-logo {
+        width: 68px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 10vw, 3.7rem);
+      }
+
+      .tagline {
+        font-size: clamp(1rem, 4vw, 1.22rem);
+      }
+
+      .verse {
+        font-size: clamp(1.18rem, 4.8vw, 1.56rem);
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.86rem, 3.2vw, 0.98rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .halo-core-pulse,
+      .halo-ring-outer,
+      .halo-ring-mid,
+      .halo-ring-inner,
+      .halo-ring-whisper {
+        animation: none !important;
+      }
+    }
+    /* DRISHVARA_OPTIONB_HYBRID_HALO_END */
+
+
+    /* DRISHVARA_OPTIONB_REFINEMENT_SAFEZONE_START
+       Refines Option B:
+       - removes static dots
+       - creates a protected central title zone
+       - lowers title competition with orbit lines
+       - keeps mantra block outside the halo field
+    */
+
+    .hero {
+      padding: 18px 0 36px;
+    }
+
+    .drishvara-halo-field {
+      top: 28px;
+      width: min(96vw, 1120px);
+      height: 320px;
+      opacity: 0.88;
+    }
+
+    .drishvara-halo-field::before {
+      left: 50%;
+      top: 58%;
+      width: min(76vw, 820px);
+      height: 176px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(5, 13, 28, 0.54) 0%,
+          rgba(5, 13, 28, 0.34) 34%,
+          rgba(5, 13, 28, 0.14) 56%,
+          transparent 78%),
+        radial-gradient(ellipse at center,
+          rgba(255,244,220,0.04) 0%,
+          rgba(255,244,220,0.018) 34%,
+          transparent 76%);
+      filter: blur(16px);
+    }
+
+    .logo-wrap {
+      margin: 6px auto 0;
+    }
+
+    .hero-copy-core {
+      position: relative;
+      z-index: 3;
+      width: min(92vw, 760px);
+      margin: 0 auto;
+      padding: 10px 18px 8px;
+    }
+
+    .hero-copy-core::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: min(92vw, 720px);
+      height: 160px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(8, 18, 40, 0.42) 0%,
+          rgba(8, 18, 40, 0.24) 38%,
+          rgba(8, 18, 40, 0.08) 60%,
+          transparent 80%);
+      filter: blur(10px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      margin: 10px auto 4px;
+      font-size: clamp(3.5rem, 5.6vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.018em;
+    }
+
+    .tagline {
+      margin: 0 auto 10px;
+      font-size: clamp(1.08rem, 1.55vw, 1.42rem);
+      line-height: 1.08;
+    }
+
+    .divider {
+      width: 64px;
+      margin: 0 auto;
+      opacity: 0.70;
+    }
+
+    .hero-copy-mantra {
+      position: relative;
+      z-index: 2;
+      width: min(92vw, 760px);
+      margin: 22px auto 0;
+      text-align: center;
+    }
+
+    .verse {
+      margin: 0 auto 4px;
+      font-size: clamp(1.48rem, 1.95vw, 1.82rem);
+      line-height: 1.08;
+    }
+
+    .translit {
+      margin: 0 auto 2px;
+      font-size: clamp(0.96rem, 1.1vw, 1.06rem);
+      line-height: 1.08;
+    }
+
+    .meaning {
+      margin: 0 auto;
+      font-size: clamp(0.92rem, 1.02vw, 1rem);
+      line-height: 1.06;
+      opacity: 0.88;
+    }
+
+    @media (max-width: 900px) {
+      .drishvara-halo-field {
+        top: 22px;
+        width: min(118vw, 1000px);
+        height: 285px;
+      }
+
+      .hero-copy-core::before {
+        height: 138px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 4.3rem);
+      }
+
+      .tagline {
+        font-size: clamp(1.02rem, 3vw, 1.28rem);
+      }
+
+      .hero-copy-mantra {
+        margin-top: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .drishvara-halo-field {
+        top: 16px;
+        width: 142vw;
+        height: 245px;
+      }
+
+      .hero-copy-core::before {
+        height: 120px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.45rem, 10vw, 3.55rem);
+      }
+
+      .tagline {
+        font-size: clamp(0.98rem, 4vw, 1.16rem);
+      }
+
+      .verse {
+        font-size: clamp(1.12rem, 4.8vw, 1.44rem);
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.84rem, 3.2vw, 0.94rem);
+      }
+    }
+    /* DRISHVARA_OPTIONB_REFINEMENT_SAFEZONE_END */
+
+    /* DRISHVARA_TITLE_TAGLINE_TUNE_START
+       Slightly reduce title size and refine tagline spacing/alignment.
+    */
+    .hero h1 {
+      font-size: clamp(3.15rem, 5.05vw, 4.35rem) !important;
+      margin: 8px auto 2px !important;
+      line-height: 0.96 !important;
+      letter-spacing: -0.014em !important;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 1.34vw, 1.22rem) !important;
+      margin: 0 auto 8px !important;
+      line-height: 1.06 !important;
+      letter-spacing: -0.01em !important;
+      opacity: 0.94 !important;
+    }
+
+    .divider {
+      width: 58px !important;
+      margin: 0 auto !important;
+      opacity: 0.66 !important;
+    }
+
+    .hero-copy-core {
+      padding: 8px 18px 6px !important;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: clamp(2.8rem, 7vw, 3.95rem) !important;
+      }
+
+      .tagline {
+        font-size: clamp(0.96rem, 2.5vw, 1.12rem) !important;
+        margin-bottom: 7px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: clamp(2.25rem, 9vw, 3.2rem) !important;
+      }
+
+      .tagline {
+        font-size: clamp(0.9rem, 3.7vw, 1.02rem) !important;
+        margin-bottom: 6px !important;
+      }
+    }
+    /* DRISHVARA_TITLE_TAGLINE_TUNE_END */
+
+
+    /* DRISHVARA_FINAL_LOGO_MANTRA_TUNE_START
+       Final small tune:
+       - keep logo size like approved screenshot
+       - shift logo upward by ~5mm
+       - reduce mantra block size slightly
+    */
+
+    .logo-wrap {
+      transform: translateY(-16px) !important;
+      width: 142px !important;
+      height: 112px !important;
+      margin: 0 auto -8px !important;
+    }
+
+    .hero-logo {
+      width: 92px !important;
+      height: auto !important;
+    }
+
+    .logo-wrap::before {
+      width: 48px !important;
+      height: 48px !important;
+      top: 52% !important;
+    }
+
+    .logo-wrap::after {
+      top: 72px !important;
+      height: 96px !important;
+      opacity: 0.54 !important;
+    }
+
+    .hero-copy-mantra {
+      margin: 18px auto 0 !important;
+    }
+
+    .verse {
+      font-size: clamp(1.34rem, 1.72vw, 1.62rem) !important;
+      line-height: 1.06 !important;
+      margin: 0 auto 3px !important;
+    }
+
+    .translit {
+      font-size: clamp(0.90rem, 1.00vw, 0.98rem) !important;
+      line-height: 1.05 !important;
+      margin: 0 auto 2px !important;
+    }
+
+    .meaning {
+      font-size: clamp(0.88rem, 0.95vw, 0.94rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 auto !important;
+      opacity: 0.88 !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-12px) !important;
+        width: 128px !important;
+        height: 102px !important;
+        margin: 0 auto -6px !important;
+      }
+
+      .hero-logo {
+        width: 82px !important;
+      }
+
+      .logo-wrap::after {
+        top: 66px !important;
+        height: 84px !important;
+      }
+
+      .verse {
+        font-size: clamp(1.20rem, 3.2vw, 1.42rem) !important;
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.84rem, 2.4vw, 0.92rem) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-9px) !important;
+        width: 114px !important;
+        height: 92px !important;
+        margin: 0 auto -4px !important;
+      }
+
+      .hero-logo {
+        width: 74px !important;
+      }
+
+      .logo-wrap::after {
+        top: 60px !important;
+        height: 72px !important;
+      }
+
+      .verse {
+        font-size: clamp(1.08rem, 4.4vw, 1.28rem) !important;
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.80rem, 3vw, 0.88rem) !important;
+      }
+    }
+    /* DRISHVARA_FINAL_LOGO_MANTRA_TUNE_END */
+
+    /* DRISHVARA_EXISTING_ORBIT_LOGO_CORRECTION_START
+       Corrective patch:
+       - remove extra orbit system
+       - use existing halo/orbit only
+       - enlarge hero logo
+       - keep logo above orbit
+       - keep mantra slightly smaller and slightly lower
+    */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 18px 0 34px;
+    }
+
+    /* ensure the existing halo remains the only orbit system */
+    .drishvara-halo-field {
+      top: 34px !important;
+      width: min(96vw, 1120px) !important;
+      height: 320px !important;
+      opacity: 0.88 !important;
+      z-index: 1 !important;
+      display: block !important;
+    }
+
+    /* logo above the orbit system */
+    .logo-wrap {
+      position: relative !important;
+      z-index: 4 !important;
+      transform: translateY(-18px) !important;
+      width: 170px !important;
+      height: 128px !important;
+      margin: 0 auto -4px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .hero-logo {
+      width: 112px !important;
+      height: auto !important;
+      position: relative !important;
+      z-index: 5 !important;
+      filter:
+        drop-shadow(0 0 6px rgba(255,237,186,0.30))
+        drop-shadow(0 0 18px rgba(201,162,74,0.22)) !important;
+    }
+
+    .logo-wrap::before {
+      width: 62px !important;
+      height: 62px !important;
+      top: 48% !important;
+      z-index: 0 !important;
+    }
+
+    .logo-wrap::after {
+      top: 78px !important;
+      height: 106px !important;
+      opacity: 0.50 !important;
+      z-index: 0 !important;
+    }
+
+    /* title block above the orbit field */
+    .hero-copy-core,
+    .hero h1,
+    .tagline,
+    .divider {
+      position: relative;
+      z-index: 3 !important;
+    }
+
+    .hero h1 {
+      margin-top: 6px !important;
+    }
+
+    /* mantra block slightly smaller and slightly lower */
+    .hero-copy-mantra {
+      position: relative;
+      z-index: 3 !important;
+      margin: 28px auto 0 !important;
+    }
+
+    .verse {
+      font-size: clamp(1.26rem, 1.56vw, 1.48rem) !important;
+      line-height: 1.06 !important;
+      margin: 0 auto 3px !important;
+    }
+
+    .translit {
+      font-size: clamp(0.87rem, 0.95vw, 0.93rem) !important;
+      line-height: 1.05 !important;
+      margin: 0 auto 2px !important;
+    }
+
+    .meaning {
+      font-size: clamp(0.85rem, 0.90vw, 0.89rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 auto !important;
+      opacity: 0.86 !important;
+    }
+
+    /* responsive */
+    @media (max-width: 900px) {
+      .drishvara-halo-field {
+        top: 28px !important;
+        width: min(116vw, 1000px) !important;
+        height: 286px !important;
+      }
+
+      .logo-wrap {
+        transform: translateY(-14px) !important;
+        width: 150px !important;
+        height: 116px !important;
+        margin: 0 auto -4px !important;
+      }
+
+      .hero-logo {
+        width: 98px !important;
+      }
+
+      .logo-wrap::after {
+        top: 70px !important;
+        height: 90px !important;
+      }
+
+      .hero-copy-mantra {
+        margin-top: 22px !important;
+      }
+
+      .verse {
+        font-size: clamp(1.14rem, 3vw, 1.32rem) !important;
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.82rem, 2.3vw, 0.89rem) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .drishvara-halo-field {
+        top: 22px !important;
+        width: 142vw !important;
+        height: 244px !important;
+      }
+
+      .logo-wrap {
+        transform: translateY(-10px) !important;
+        width: 126px !important;
+        height: 100px !important;
+        margin: 0 auto -2px !important;
+      }
+
+      .hero-logo {
+        width: 84px !important;
+      }
+
+      .logo-wrap::after {
+        top: 62px !important;
+        height: 74px !important;
+      }
+
+      .hero-copy-mantra {
+        margin-top: 18px !important;
+      }
+
+      .verse {
+        font-size: clamp(1.02rem, 4.2vw, 1.18rem) !important;
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.78rem, 3vw, 0.85rem) !important;
+      }
+    }
+    /* DRISHVARA_EXISTING_ORBIT_LOGO_CORRECTION_END */
+
+
+    /* DRISHVARA_INNER_ORBIT_TITLE_TUNE_START
+       Align title/tagline inside inner orbit; keep mantra below orbit.
+    */
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 18px 0 38px !important;
+    }
+
+    /* Existing halo only */
+    .drishvara-halo-field {
+      display: block !important;
+      top: 28px !important;
+      width: min(96vw, 1120px) !important;
+      height: 320px !important;
+      opacity: 0.88 !important;
+      z-index: 1 !important;
+    }
+
+    /* Slightly darken the title-safe centre so the text sits inside the orbit */
+    .hero-copy-core {
+      position: relative !important;
+      z-index: 3 !important;
+      width: min(92vw, 720px) !important;
+      margin: -4px auto 0 !important;
+      padding: 4px 14px 2px !important;
+    }
+
+    .hero-copy-core::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: min(82vw, 650px);
+      height: 132px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center,
+          rgba(6, 15, 34, 0.40) 0%,
+          rgba(6, 15, 34, 0.24) 38%,
+          rgba(6, 15, 34, 0.08) 64%,
+          transparent 82%);
+      filter: blur(10px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Logo: bigger and above the orbit */
+    .logo-wrap {
+      position: relative !important;
+      z-index: 4 !important;
+      transform: translateY(-18px) !important;
+      width: 174px !important;
+      height: 128px !important;
+      margin: 0 auto -14px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .hero-logo {
+      width: 116px !important;
+      height: auto !important;
+      position: relative !important;
+      z-index: 5 !important;
+      filter:
+        drop-shadow(0 0 6px rgba(255,237,186,0.30))
+        drop-shadow(0 0 18px rgba(201,162,74,0.24)) !important;
+    }
+
+    .logo-wrap::before {
+      width: 64px !important;
+      height: 64px !important;
+      top: 48% !important;
+      opacity: 0.95 !important;
+    }
+
+    .logo-wrap::after {
+      top: 76px !important;
+      height: 104px !important;
+      opacity: 0.45 !important;
+    }
+
+    /* Title + tagline: smaller, tighter, inside the inner orbit */
+    .hero h1 {
+      font-size: clamp(2.90rem, 4.55vw, 3.95rem) !important;
+      line-height: 0.94 !important;
+      letter-spacing: -0.014em !important;
+      margin: 0 auto 1px !important;
+      max-width: 720px !important;
+      text-shadow: 0 2px 13px rgba(7, 18, 40, 0.42) !important;
+    }
+
+    .tagline {
+      font-size: clamp(0.92rem, 1.12vw, 1.08rem) !important;
+      line-height: 1.04 !important;
+      letter-spacing: -0.006em !important;
+      margin: 0 auto 6px !important;
+      opacity: 0.94 !important;
+      text-shadow: 0 2px 10px rgba(7, 18, 40, 0.36) !important;
+    }
+
+    .divider {
+      width: 54px !important;
+      margin: 0 auto !important;
+      opacity: 0.60 !important;
+    }
+
+    /* Mantra: smaller, cleaner, slightly downward from the third orbit */
+    .hero-copy-mantra {
+      position: relative !important;
+      z-index: 3 !important;
+      width: min(92vw, 720px) !important;
+      margin: 34px auto 0 !important;
+      text-align: center !important;
+    }
+
+    .verse {
+      font-size: clamp(1.18rem, 1.42vw, 1.34rem) !important;
+      line-height: 1.05 !important;
+      margin: 0 auto 3px !important;
+      opacity: 0.96 !important;
+    }
+
+    .translit {
+      font-size: clamp(0.82rem, 0.90vw, 0.88rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 auto 2px !important;
+      opacity: 0.92 !important;
+    }
+
+    .meaning {
+      font-size: clamp(0.80rem, 0.86vw, 0.84rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 auto !important;
+      opacity: 0.82 !important;
+    }
+
+    @media (max-width: 900px) {
+      .drishvara-halo-field {
+        top: 24px !important;
+        width: min(116vw, 1000px) !important;
+        height: 286px !important;
+      }
+
+      .logo-wrap {
+        transform: translateY(-14px) !important;
+        width: 150px !important;
+        height: 116px !important;
+        margin: 0 auto -12px !important;
+      }
+
+      .hero-logo {
+        width: 100px !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.55rem, 6.6vw, 3.55rem) !important;
+      }
+
+      .tagline {
+        font-size: clamp(0.88rem, 2.4vw, 1.02rem) !important;
+      }
+
+      .hero-copy-mantra {
+        margin-top: 28px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .drishvara-halo-field {
+        top: 18px !important;
+        width: 142vw !important;
+        height: 244px !important;
+      }
+
+      .logo-wrap {
+        transform: translateY(-10px) !important;
+        width: 130px !important;
+        height: 104px !important;
+        margin: 0 auto -8px !important;
+      }
+
+      .hero-logo {
+        width: 86px !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.15rem, 8.5vw, 3rem) !important;
+      }
+
+      .tagline {
+        font-size: clamp(0.82rem, 3.4vw, 0.94rem) !important;
+      }
+
+      .hero-copy-mantra {
+        margin-top: 22px !important;
+      }
+
+      .verse {
+        font-size: clamp(0.98rem, 4.0vw, 1.14rem) !important;
+      }
+
+      .translit,
+      .meaning {
+        font-size: clamp(0.74rem, 3vw, 0.82rem) !important;
+      }
+    }
+    /* DRISHVARA_INNER_ORBIT_TITLE_TUNE_END */
+
+
+    /* DRISHVARA_LOGO_FINAL_LIFT_START
+       Final logo scale + upward lift:
+       larger logo, slightly higher, just above outer orbit.
+    */
+    .logo-wrap {
+      position: relative !important;
+      z-index: 5 !important;
+      transform: translateY(-22px) !important;
+      width: 186px !important;
+      height: 138px !important;
+      margin: 0 auto -16px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .hero-logo {
+      width: 126px !important;
+      height: auto !important;
+      position: relative !important;
+      z-index: 6 !important;
+      filter:
+        drop-shadow(0 0 8px rgba(255,237,186,0.30))
+        drop-shadow(0 0 18px rgba(201,162,74,0.24)) !important;
+    }
+
+    .logo-wrap::before {
+      width: 170px !important;
+      height: 170px !important;
+      top: 48% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      opacity: 1 !important;
+      z-index: 0 !important;
+    }
+
+    .logo-wrap::after {
+      top: 82px !important;
+      height: 112px !important;
+      opacity: 0.44 !important;
+      z-index: 0 !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-18px) !important;
+        width: 162px !important;
+        height: 124px !important;
+        margin: 0 auto -14px !important;
+      }
+
+      .hero-logo {
+        width: 110px !important;
+      }
+
+      .logo-wrap::before {
+        width: 148px !important;
+        height: 148px !important;
+      }
+
+      .logo-wrap::after {
+        top: 74px !important;
+        height: 96px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-12px) !important;
+        width: 136px !important;
+        height: 106px !important;
+        margin: 0 auto -10px !important;
+      }
+
+      .hero-logo {
+        width: 92px !important;
+      }
+
+      .logo-wrap::before {
+        width: 126px !important;
+        height: 126px !important;
+      }
+
+      .logo-wrap::after {
+        top: 64px !important;
+        height: 78px !important;
+      }
+    }
+    /* DRISHVARA_LOGO_FINAL_LIFT_END */
+
+
+    /* DRISHVARA_LOGO_UPSIZE_LANG_LOCK_START
+       - Bigger hero logo
+       - Slightly more upward
+       - Intended to sit just above outer orbit
+    */
+    .logo-wrap {
+      position: relative !important;
+      z-index: 6 !important;
+      transform: translateY(-28px) !important;
+      width: 196px !important;
+      height: 146px !important;
+      margin: 0 auto -22px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    .hero-logo {
+      width: 138px !important;
+      height: auto !important;
+      position: relative !important;
+      z-index: 7 !important;
+      filter:
+        drop-shadow(0 0 8px rgba(255,237,186,0.32))
+        drop-shadow(0 0 20px rgba(201,162,74,0.26)) !important;
+    }
+
+    .logo-wrap::before {
+      width: 178px !important;
+      height: 178px !important;
+      left: 50% !important;
+      top: 48% !important;
+      transform: translate(-50%, -50%) !important;
+      opacity: 1 !important;
+      z-index: 0 !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-22px) !important;
+        width: 170px !important;
+        height: 130px !important;
+        margin: 0 auto -18px !important;
+      }
+
+      .hero-logo {
+        width: 118px !important;
+      }
+
+      .logo-wrap::before {
+        width: 154px !important;
+        height: 154px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-14px) !important;
+        width: 142px !important;
+        height: 110px !important;
+        margin: 0 auto -12px !important;
+      }
+
+      .hero-logo {
+        width: 96px !important;
+      }
+
+      .logo-wrap::before {
+        width: 130px !important;
+        height: 130px !important;
+      }
+    }
+    /* DRISHVARA_LOGO_UPSIZE_LANG_LOCK_END */
+
+
+    /* DRISHVARA_LOGO_LANG_LOGIC_FIX_START
+       - Increase hero logo size
+       - Lift it just above the outer orbit
+       - Keep mantra meaning smaller/clean
+       - Remove confusing blue focus ring on language pill
+    */
+
+    .logo-wrap {
+      position: relative !important;
+      z-index: 8 !important;
+      transform: translateY(-36px) !important;
+      width: 224px !important;
+      height: 164px !important;
+      margin: 0 auto -32px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: visible !important;
+    }
+
+    .hero-logo {
+      width: 164px !important;
+      height: auto !important;
+      position: relative !important;
+      z-index: 9 !important;
+      filter:
+        drop-shadow(0 0 8px rgba(255,237,186,0.34))
+        drop-shadow(0 0 22px rgba(201,162,74,0.28)) !important;
+    }
+
+    .logo-wrap::before {
+      width: 210px !important;
+      height: 210px !important;
+      left: 50% !important;
+      top: 48% !important;
+      transform: translate(-50%, -50%) !important;
+      opacity: 1 !important;
+      z-index: 0 !important;
+    }
+
+    .logo-wrap::after {
+      top: 94px !important;
+      height: 114px !important;
+      opacity: 0.40 !important;
+      z-index: 0 !important;
+    }
+
+    .hero-copy-mantra {
+      margin-top: 36px !important;
+    }
+
+    .verse {
+      font-size: clamp(1.16rem, 1.38vw, 1.30rem) !important;
+      line-height: 1.05 !important;
+      margin: 0 auto 3px !important;
+    }
+
+    .translit {
+      font-size: clamp(0.80rem, 0.88vw, 0.86rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 auto 2px !important;
+    }
+
+    .meaning {
+      font-size: clamp(0.78rem, 0.84vw, 0.82rem) !important;
+      line-height: 1.04 !important;
+      margin: 0 auto !important;
+      opacity: 0.82 !important;
+    }
+
+    .lang-toggle,
+    .lang-toggle:focus,
+    .lang-toggle:focus-visible,
+    .lang-toggle:active {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .lang-toggle {
+      cursor: pointer !important;
+      user-select: none !important;
+      width: auto !important;
+      max-width: max-content !important;
+      white-space: nowrap !important;
+      flex: 0 0 auto !important;
+      pointer-events: auto !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-28px) !important;
+        width: 188px !important;
+        height: 142px !important;
+        margin: 0 auto -26px !important;
+      }
+
+      .hero-logo {
+        width: 136px !important;
+      }
+
+      .logo-wrap::before {
+        width: 178px !important;
+        height: 178px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-18px) !important;
+        width: 152px !important;
+        height: 118px !important;
+        margin: 0 auto -16px !important;
+      }
+
+      .hero-logo {
+        width: 106px !important;
+      }
+
+      .logo-wrap::before {
+        width: 142px !important;
+        height: 142px !important;
+      }
+    }
+    /* DRISHVARA_LOGO_LANG_LOGIC_FIX_END */
+
+
+    /* DRISHVARA_LOGO_ONLY_FINAL_POSITION_START
+       Logo-only adjustment:
+       - increase logo size
+       - move logo upward only
+       - do not disturb title/tagline/mantra positions
+    */
+    .logo-wrap {
+      position: relative !important;
+      z-index: 9 !important;
+      transform: translateY(-56px) !important;
+      width: 250px !important;
+      height: 164px !important;
+      margin: 0 auto -32px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: visible !important;
+    }
+
+    .hero-logo {
+      width: 188px !important;
+      height: auto !important;
+      position: relative !important;
+      z-index: 10 !important;
+      filter:
+        drop-shadow(0 0 8px rgba(255,237,186,0.34))
+        drop-shadow(0 0 24px rgba(201,162,74,0.30)) !important;
+    }
+
+    .logo-wrap::before {
+      width: 230px !important;
+      height: 230px !important;
+      left: 50% !important;
+      top: 48% !important;
+      transform: translate(-50%, -50%) !important;
+      opacity: 0.95 !important;
+      z-index: 0 !important;
+    }
+
+    .logo-wrap::after {
+      top: 100px !important;
+      height: 110px !important;
+      opacity: 0.36 !important;
+      z-index: 0 !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-42px) !important;
+        width: 206px !important;
+        height: 142px !important;
+        margin: 0 auto -28px !important;
+      }
+
+      .hero-logo {
+        width: 152px !important;
+      }
+
+      .logo-wrap::before {
+        width: 190px !important;
+        height: 190px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-26px) !important;
+        width: 160px !important;
+        height: 116px !important;
+        margin: 0 auto -18px !important;
+      }
+
+      .hero-logo {
+        width: 112px !important;
+      }
+
+      .logo-wrap::before {
+        width: 148px !important;
+        height: 148px !important;
+      }
+    }
+    /* DRISHVARA_LOGO_ONLY_FINAL_POSITION_END */
+
+
+    /* DRISHVARA_LOGO_MORE_UP_START
+       Logo-only upward correction. No title/mantra movement.
+    */
+    .logo-wrap {
+      transform: translateY(-76px) !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-56px) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-36px) !important;
+      }
+    }
+    /* DRISHVARA_LOGO_MORE_UP_END */
+
 </style>
 
   <link rel="canonical" href="https://www.drishvara.com/" />
@@ -982,23 +2598,108 @@
           <span class="live-dot"></span>
           <span class="live-text"><strong>LIVE · Sports</strong> Event update</span>
         </div>
-        <div class="lang-toggle">EN | हिन्दी</div>
+        <div class="lang-toggle" data-drishvara-lang-toggle="true">EN | हिन्दी</div>
       </div>
     </nav>
 
     <section class="hero">
-      <div class="logo-wrap">
-        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="hero-logo" />
+<!-- DRISHVARA_OPTIONB_HYBRID_HALO_HTML_START -->
+      <div class="drishvara-halo-field" aria-hidden="true">
+        <svg viewBox="0 0 1080 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="hybridHaloCore" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff3c7" stop-opacity="0.95" />
+              <stop offset="28%" stop-color="#f4d68b" stop-opacity="0.20" />
+              <stop offset="100%" stop-color="#08142d" stop-opacity="0" />
+            </radialGradient>
+
+            <radialGradient id="hybridSafeZone" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff8df" stop-opacity="0.08" />
+              <stop offset="40%" stop-color="#fff8df" stop-opacity="0.025" />
+              <stop offset="100%" stop-color="#08142d" stop-opacity="0" />
+            </radialGradient>
+
+            <filter id="hybridGlow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <path id="haloOrbitOuter" d="M 92 166 A 448 108 0 1 1 988 166 A 448 108 0 1 1 92 166" />
+            <path id="haloOrbitMidA" d="M 168 166 A 372 86 0 1 1 912 166 A 372 86 0 1 1 168 166" />
+            <path id="haloOrbitMidB" d="M 240 166 A 300 64 0 1 1 840 166 A 300 64 0 1 1 240 166" />
+            <path id="haloOrbitInner" d="M 320 166 A 220 42 0 1 1 760 166 A 220 42 0 1 1 320 166" />
+          </defs>
+
+          <!-- central atmospheric field -->
+          <ellipse cx="540" cy="166" rx="210" ry="66" fill="url(#hybridHaloCore)" class="halo-core-pulse" />
+          <ellipse cx="540" cy="166" rx="265" ry="84" fill="url(#hybridSafeZone)" />
+
+          <!-- subtle crown connection hint -->
+          <ellipse cx="540" cy="78" rx="22" ry="22" fill="url(#hybridHaloCore)" opacity="0.26" />
+          <rect x="528" y="88" width="24" height="62" rx="12" fill="url(#hybridHaloCore)" opacity="0.12" filter="url(#hybridGlow)" />
+
+          <!-- four-orbit hybrid field -->
+          <use href="#haloOrbitOuter" fill="none" stroke="rgba(201,162,74,0.12)" stroke-width="1.2" class="halo-ring-whisper" />
+          <use href="#haloOrbitOuter" fill="none" stroke="rgba(201,162,74,0.04)" stroke-width="6" filter="url(#hybridGlow)" />
+
+          <use href="#haloOrbitMidA" fill="none" stroke="rgba(201,162,74,0.17)" stroke-width="1.35" class="halo-ring-outer" />
+          <use href="#haloOrbitMidA" fill="none" stroke="rgba(201,162,74,0.05)" stroke-width="5" filter="url(#hybridGlow)" />
+
+          <use href="#haloOrbitMidB" fill="none" stroke="rgba(201,162,74,0.21)" stroke-width="1.45" class="halo-ring-mid" />
+          <use href="#haloOrbitMidB" fill="none" stroke="rgba(201,162,74,0.06)" stroke-width="4.5" filter="url(#hybridGlow)" />
+
+          <use href="#haloOrbitInner" fill="none" stroke="rgba(201,162,74,0.25)" stroke-width="1.55" class="halo-ring-inner" />
+          <use href="#haloOrbitInner" fill="none" stroke="rgba(201,162,74,0.07)" stroke-width="4" filter="url(#hybridGlow)" />
+
+          <!-- only five moving nodes -->
+          <circle r="4.2" fill="#f4d68b" filter="url(#hybridGlow)">
+            <animateMotion dur="38s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#haloOrbitOuter" />
+            </animateMotion>
+          </circle>
+
+          <circle r="4.0" fill="#f5ddb0" filter="url(#hybridGlow)">
+            <animateMotion dur="30s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#haloOrbitMidA" />
+            </animateMotion>
+          </circle>
+
+          <circle r="3.8" fill="#f1cf7a" filter="url(#hybridGlow)">
+            <animateMotion dur="24s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#haloOrbitMidB" />
+            </animateMotion>
+          </circle>
+
+          <circle r="3.5" fill="#fff0c8" filter="url(#hybridGlow)">
+            <animateMotion dur="18s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#haloOrbitInner" />
+            </animateMotion>
+          </circle>
+
+          <circle r="3.3" fill="#f4d68b" filter="url(#hybridGlow)">
+            <animateMotion dur="26s" begin="-9s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#haloOrbitMidB" />
+            </animateMotion>
+          </circle>
+</svg>
+      </div>
+      <!-- DRISHVARA_OPTIONB_HYBRID_HALO_HTML_END -->
+
+<div class="logo-wrap">
+<img src="assets/logo/logo.png" alt="Drishvara Logo" class="hero-logo" />
       </div>
 
-      <h1>Drishvara</h1>
+      <div class="hero-copy-core"><h1>Drishvara</h1>
       <div class="tagline">Vision. Reflection. Insight.</div>
 
-      <div class="divider"></div>
+      <div class="divider"></div></div><div class="hero-copy-mantra">
 
       <div class="verse">दृष्टिर्विस्तीर्णा, मननं गम्भीरम्।</div>
       <div class="translit">dṛṣṭiḥ vistīrṇā, mananaṃ gambhīram.</div>
-      <div class="meaning">Vision broad, reflection deep.</div>
+      <div class="meaning">Vision broad, reflection deep.</div></div>
 </section>
 
     <section class="batch03-integrated-flow" aria-label="Drishvara integrated daily flow">
@@ -1953,7 +3654,7 @@
         <div class="reading-guide-item">
           <div class="sub">First Light</div>
           <div class="title">Signals are being prepared.</div>
-          <div class="meta>Please check back shortly.</div>
+          <div class="meta">Please check back shortly.</div>
         </div>
       `;
     }
@@ -2054,7 +3755,7 @@
   <script src="/assets/js/daily-basis-guard.js" defer></script>
   <script src="/assets/js/sports-context.js" defer></script>
   <script src="/assets/js/seo-runtime.js" defer></script>
-  <script src="/assets/js/site-language.js" defer></script>
+<script src="/assets/js/site-language.js" defer></script>
 
   <script id="drishvaraFeaturedReadImageHydrator">
     (function hydrateFeaturedReadImages() {
@@ -2112,5 +3813,67 @@
   </script>
 
   <script src="assets/js/drishvara-language-runtime.js" defer></script>
+
+  <script id="drishvaraHeroMeaningStabilizer">
+    (function () {
+      const LANG_KEY = "drishvara_site_language";
+
+      function getLang() {
+        try {
+          return localStorage.getItem(LANG_KEY) === "hi" ? "hi" : "en";
+        } catch (error) {
+          return document.documentElement.lang === "hi" ? "hi" : "en";
+        }
+      }
+
+      function fixHeroMeaning() {
+        const meaning = document.querySelector(".hero .meaning, .meaning");
+        if (!meaning) return;
+
+        const expected = getLang() === "hi"
+          ? "दृष्टि व्यापक, चिंतन गहरा।"
+          : "Vision broad, reflection deep.";
+
+        if ((meaning.textContent || "").trim() !== expected) {
+          meaning.textContent = expected;
+        }
+      }
+
+      function installObserver() {
+        const meaning = document.querySelector(".hero .meaning, .meaning");
+        if (!meaning || meaning.__drishvaraMeaningObserverInstalled) return;
+
+        meaning.__drishvaraMeaningObserverInstalled = true;
+
+        const observer = new MutationObserver(function () {
+          requestAnimationFrame(fixHeroMeaning);
+        });
+
+        observer.observe(meaning, {
+          childList: true,
+          characterData: true,
+          subtree: true
+        });
+      }
+
+      function runFixSeries() {
+        fixHeroMeaning();
+        installObserver();
+        setTimeout(fixHeroMeaning, 50);
+        setTimeout(fixHeroMeaning, 250);
+        setTimeout(fixHeroMeaning, 800);
+      }
+
+      document.addEventListener("click", function () {
+        setTimeout(runFixSeries, 0);
+      }, true);
+
+      document.addEventListener("DOMContentLoaded", runFixSeries);
+      window.addEventListener("load", runFixSeries);
+      setTimeout(runFixSeries, 1000);
+      setTimeout(runFixSeries, 2000);
+    })();
+  </script>
+
 </body>
 </html>
