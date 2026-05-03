@@ -1,0 +1,1123 @@
+{
+  "module_id": "M03",
+  "module_title": "Festival Rule Registry",
+  "phase": "M-Methodology",
+  "status": "named_observance_registry_methodology_only",
+  "depends_on": [
+    "M00",
+    "M01",
+    "M02"
+  ],
+  "runtime_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_panchang_enabled": false,
+  "public_festival_dates_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "festival_registry_runtime_enabled": false,
+  "doctrine_version": "0.1.0",
+  "scope": {
+    "included": [
+      "named_observance_registry_schema",
+      "monthly_vrat_category",
+      "annual_festival_category",
+      "sankranti_category",
+      "parana_linked_category",
+      "regional_variant_category",
+      "sampradaya_variant_category",
+      "activation_status_doctrine",
+      "conflict_handling_doctrine"
+    ],
+    "excluded": [
+      "live_festival_calendar",
+      "public_festival_date_output",
+      "subscriber_festival_guidance",
+      "personalized_observance_recommendation",
+      "auth",
+      "supabase",
+      "payment",
+      "subscription_entitlement",
+      "external_api_fetch",
+      "automatic_festival_calculation",
+      "automatic_religious_recommendation",
+      "mantra_generation",
+      "lucky_number_colour_selection",
+      "dob_based_prediction",
+      "fear_based_fasting_instruction"
+    ]
+  },
+  "registry_schema_required_fields": [
+    "observance_id",
+    "display_name",
+    "traditional_name",
+    "category",
+    "rule_family_refs",
+    "tithi_target",
+    "paksha_target",
+    "lunar_month_target",
+    "weekday_target",
+    "nakshatra_target",
+    "event_window_basis",
+    "regional_variants",
+    "sampradaya_variants",
+    "source_level",
+    "source_reference",
+    "sanskrit_review_status",
+    "calculation_review_status",
+    "observance_rule_review_status",
+    "public_activation_status",
+    "activation_status"
+  ],
+  "registry_categories": [
+    "monthly_vrat",
+    "monthly_puja",
+    "monthly_observance",
+    "annual_festival",
+    "annual_vrat",
+    "annual_observance",
+    "sankranti",
+    "parana_linked",
+    "regional_variant",
+    "sampradaya_variant"
+  ],
+  "activation_statuses": [
+    "draft",
+    "source_review_pending",
+    "sanskrit_review_pending",
+    "calculation_review_pending",
+    "regional_review_pending",
+    "sampradaya_review_pending",
+    "internal_preview_only",
+    "public_ready",
+    "disabled"
+  ],
+  "conflict_flags_supported": [
+    "skipped_tithi_conflict",
+    "repeated_tithi_conflict",
+    "sunrise_boundary_conflict",
+    "sunset_pradosh_window_conflict",
+    "moonrise_window_conflict",
+    "parana_window_conflict",
+    "regional_conflict",
+    "sampradaya_conflict",
+    "source_conflict",
+    "modern_vs_classical_reference_conflict",
+    "insufficient_source_evidence"
+  ],
+  "sample_registry_entries_not_activated": [
+    {
+      "observance_id": "ekadashi_generic",
+      "display_name": "Ekadashi",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_paksha",
+        "parana_fast_breaking"
+      ],
+      "tithi_target": "Ekadashi",
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "dwadashi_parana",
+      "display_name": "Dwadashi Parana",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "parana_linked",
+      "rule_family_refs": [
+        "parana_fast_breaking"
+      ],
+      "tithi_target": "Dwadashi",
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "pradosh_vrat",
+      "display_name": "Pradosh Vrat",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "sunset_pradosh_overlap"
+      ],
+      "tithi_target": "Trayodashi",
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "sankashti_chaturthi",
+      "display_name": "Sankashti Chaturthi",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "moonrise_overlap"
+      ],
+      "tithi_target": "Chaturthi",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "vinayaka_chaturthi",
+      "display_name": "Vinayaka Chaturthi",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_paksha"
+      ],
+      "tithi_target": "Chaturthi",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "masik_shivaratri",
+      "display_name": "Masik Shivaratri",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_paksha"
+      ],
+      "tithi_target": "Chaturdashi",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "masik_durgashtami",
+      "display_name": "Masik Durgashtami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_paksha"
+      ],
+      "tithi_target": "Ashtami",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "kalashtami",
+      "display_name": "Kalashtami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_paksha"
+      ],
+      "tithi_target": "Ashtami",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "skanda_sashti",
+      "display_name": "Skanda Sashti",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_paksha"
+      ],
+      "tithi_target": "Shashthi",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "purnima_vrat",
+      "display_name": "Purnima Vrat",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_only"
+      ],
+      "tithi_target": "Purnima",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "amavasya_observance",
+      "display_name": "Amavasya Observance",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_vrat",
+      "rule_family_refs": [
+        "tithi_only"
+      ],
+      "tithi_target": "Amavasya",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "satyanarayana_puja",
+      "display_name": "Satyanarayana Puja",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_puja",
+      "rule_family_refs": [
+        "tithi_only"
+      ],
+      "tithi_target": "Purnima",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "chandra_darshan",
+      "display_name": "Chandra Darshan",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "monthly_observance",
+      "rule_family_refs": [
+        "moonrise_overlap"
+      ],
+      "tithi_target": "Pratipada",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "rama_navami",
+      "display_name": "Rama Navami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Navami",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "krishna_janmashtami",
+      "display_name": "Krishna Janmashtami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Ashtami",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "ganesha_chaturthi",
+      "display_name": "Ganesha Chaturthi",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Chaturthi",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "durga_ashtami",
+      "display_name": "Durga Ashtami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Ashtami",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "maha_shivaratri",
+      "display_name": "Maha Shivaratri",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Chaturdashi",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "holika_dahan",
+      "display_name": "Holika Dahan",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi",
+        "sunset_pradosh_overlap"
+      ],
+      "tithi_target": "Purnima",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "diwali_deepavali",
+      "display_name": "Diwali / Deepavali",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi",
+        "regional_calendar_variant"
+      ],
+      "tithi_target": "Amavasya",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "guru_purnima",
+      "display_name": "Guru Purnima",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Purnima",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "raksha_bandhan",
+      "display_name": "Raksha Bandhan",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Purnima",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "nag_panchami",
+      "display_name": "Nag Panchami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Panchami",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "ratha_saptami",
+      "display_name": "Ratha Saptami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Saptami",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "akshaya_tritiya",
+      "display_name": "Akshaya Tritiya",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Tritiya",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "ananta_chaturdashi",
+      "display_name": "Ananta Chaturdashi",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_festival",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Chaturdashi",
+      "paksha_target": "Shukla",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "karwa_chauth",
+      "display_name": "Karwa Chauth",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_vrat",
+      "rule_family_refs": [
+        "lunar_month_tithi",
+        "moonrise_overlap"
+      ],
+      "tithi_target": "Chaturthi",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "ahoi_ashtami",
+      "display_name": "Ahoi Ashtami",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_vrat",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Ashtami",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "vat_savitri",
+      "display_name": "Vat Savitri",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_vrat",
+      "rule_family_refs": [
+        "lunar_month_tithi",
+        "regional_calendar_variant"
+      ],
+      "tithi_target": "Amavasya",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "mahalaya_amavasya",
+      "display_name": "Mahalaya Amavasya",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "annual_observance",
+      "rule_family_refs": [
+        "lunar_month_tithi"
+      ],
+      "tithi_target": "Amavasya",
+      "paksha_target": "Krishna",
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "mesha_sankranti",
+      "display_name": "Mesha Sankranti",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "sankranti",
+      "rule_family_refs": [
+        "solar_transition_sankranti"
+      ],
+      "tithi_target": null,
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "makara_sankranti",
+      "display_name": "Makara Sankranti",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "sankranti",
+      "rule_family_refs": [
+        "solar_transition_sankranti"
+      ],
+      "tithi_target": null,
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "smarta_ekadashi_variant",
+      "display_name": "Smarta Ekadashi Variant",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "sampradaya_variant",
+      "rule_family_refs": [
+        "sampradaya_variant",
+        "tithi_paksha",
+        "parana_fast_breaking"
+      ],
+      "tithi_target": "Ekadashi",
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "vaishnava_ekadashi_variant",
+      "display_name": "Vaishnava Ekadashi Variant",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "sampradaya_variant",
+      "rule_family_refs": [
+        "sampradaya_variant",
+        "tithi_paksha",
+        "parana_fast_breaking"
+      ],
+      "tithi_target": "Ekadashi",
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    },
+    {
+      "observance_id": "regional_festival_variant_placeholder",
+      "display_name": "Regional Festival Variant Placeholder",
+      "traditional_name": "PENDING_SANSKRIT_REVIEW",
+      "category": "regional_variant",
+      "rule_family_refs": [
+        "regional_calendar_variant"
+      ],
+      "tithi_target": null,
+      "paksha_target": null,
+      "lunar_month_target": "PENDING_SOURCE_REVIEW",
+      "weekday_target": null,
+      "nakshatra_target": null,
+      "event_window_basis": "PENDING_RULE_REVIEW",
+      "regional_variants": [
+        "PENDING_REVIEW"
+      ],
+      "sampradaya_variants": [
+        "PENDING_REVIEW"
+      ],
+      "source_level": "PENDING_M00_SOURCE_LEVEL",
+      "source_reference": "PENDING_SOURCE_REVIEW",
+      "sanskrit_review_status": false,
+      "calculation_review_status": false,
+      "observance_rule_review_status": false,
+      "public_activation_status": false,
+      "activation_status": "draft"
+    }
+  ],
+  "approved_output_labels": [
+    "methodology_only",
+    "named_registry_only",
+    "not_public_output",
+    "draft_registry_entry",
+    "source_review_pending",
+    "sanskrit_review_pending",
+    "calculation_review_pending",
+    "regional_variant_possible",
+    "sampradaya_variant_possible",
+    "conflict_possible",
+    "human_review_required"
+  ],
+  "review_gates": [
+    "source_review",
+    "sanskrit_review",
+    "calculation_review",
+    "observance_rule_review",
+    "regional_variant_review",
+    "sampradaya_variant_review",
+    "activation_status_review",
+    "output_safety_review"
+  ]
+}

@@ -91,8 +91,9 @@
     "knowledge:governance-report:preflight": "node scripts/knowledge-governance-status-report-preflight.js",
     "validate:m00": "node scripts/validate-m00-source-doctrine.mjs",
     "validate:m01": "node scripts/validate-m01-panchang-methodology.mjs",
-    "validate:methodology": "npm run validate:m00 && npm run validate:m01 && npm run validate:m02",
-    "validate:m02": "node scripts/validate-m02-tithi-vrat-rules.mjs"
+    "validate:methodology": "npm run validate:m00 && npm run validate:m01 && npm run validate:m02 && npm run validate:m03",
+    "validate:m02": "node scripts/validate-m02-tithi-vrat-rules.mjs",
+    "validate:m03": "node scripts/validate-m03-festival-registry.mjs"
   },
   "repository": {
     "type": "git",
