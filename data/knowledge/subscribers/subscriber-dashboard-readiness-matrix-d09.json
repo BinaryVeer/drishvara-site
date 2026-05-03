@@ -1,0 +1,180 @@
+{
+  "version": "2026.05.03-d09",
+  "module": "knowledge.subscriber_guidance_dashboard_readiness_matrix",
+  "status": "readiness_matrix_only",
+  "purpose": "Define future subscriber guidance dashboard cards, readiness dependencies, and gate states without enabling live dashboard data, Auth, Supabase, payment, subscription gate, or premium guidance.",
+  "dashboard_live_data_enabled": false,
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "personalized_output_enabled": false,
+  "auth_enabled": false,
+  "supabase_enabled": false,
+  "payment_enabled": false,
+  "subscription_gate_live_enabled": false,
+  "entitlement_check_live_enabled": false,
+  "external_api_fetch_enabled": false,
+  "runtime_language_change_enabled": false,
+  "admin_actions_enabled": false,
+  "brand": {
+    "en": "Drishvara",
+    "hi": "द्रिश्वारा"
+  },
+  "dashboard_cards": [
+    {
+      "card_id": "login_status",
+      "title": "Login Status",
+      "future_source": "Supabase Auth session",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "authenticated_session"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "subscription_status",
+      "title": "Subscription Status",
+      "future_source": "subscription entitlement table/payment lifecycle",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "privacy_consent",
+      "title": "Privacy & Consent",
+      "future_source": "subscriber profile consent record",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "subscriber_profile_exists",
+        "explicit_consent_active"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "profile_readiness",
+      "title": "Profile Readiness",
+      "future_source": "subscriber profile completeness",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "subscriber_profile_exists",
+        "privacy_safe_inputs_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "daily_reflection",
+      "title": "Daily Reflection",
+      "future_source": "approved daily guidance rule selection",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active",
+        "approved_guidance_rules_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "what_to_do",
+      "title": "What To Do",
+      "future_source": "approved daily guidance rule output",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active",
+        "approved_guidance_rules_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "what_not_to_do",
+      "title": "What Not To Do",
+      "future_source": "approved daily guidance rule output",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active",
+        "approved_guidance_rules_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "lucky_number",
+      "title": "Lucky Number",
+      "future_source": "subscriber guidance method after entitlement and review",
+      "current_state": "blocked_card_visible",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active",
+        "privacy_safe_inputs_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "lucky_color",
+      "title": "Lucky Color",
+      "future_source": "subscriber guidance method after entitlement and review",
+      "current_state": "blocked_card_visible",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active",
+        "privacy_safe_inputs_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "mantra",
+      "title": "Mantra",
+      "future_source": "approved mantra review registry",
+      "current_state": "blocked_card_visible",
+      "required_gates": [
+        "authenticated_session",
+        "subscription_entitlement_active",
+        "approved_guidance_rules_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "word_of_the_day",
+      "title": "Word of the Day",
+      "future_source": "curated Word of the Day bank",
+      "current_state": "scaffold_preview_only",
+      "required_gates": [
+        "approved_guidance_rules_available"
+      ],
+      "enabled_now": false
+    },
+    {
+      "card_id": "panchang_context",
+      "title": "Panchang Context",
+      "future_source": "approved Panchang/Festival source registry",
+      "current_state": "scaffold_blocked",
+      "required_gates": [
+        "privacy_safe_inputs_available",
+        "approved_guidance_rules_available"
+      ],
+      "enabled_now": false
+    }
+  ],
+  "readiness_levels": [
+    "not_started",
+    "schema_ready",
+    "preview_ready",
+    "blocked_until_auth",
+    "blocked_until_subscription",
+    "blocked_until_review",
+    "ready_for_future_activation"
+  ],
+  "guardrails": [
+    "Do not enable live dashboard data in this stage.",
+    "Do not instantiate Supabase client.",
+    "Do not query subscriber profile or subscription tables.",
+    "Do not unlock premium guidance.",
+    "Do not collect birth details.",
+    "Do not change language runtime.",
+    "Do not fetch external APIs.",
+    "Do not write into data/daily-context.json.",
+    "Dashboard cards may remain visible only as blocked/scaffold states."
+  ]
+}

@@ -1,0 +1,629 @@
+{
+  "version": "2026.05.03-d09",
+  "module": "knowledge.subscriber_dashboard_readiness_preview",
+  "status": "preview_not_live",
+  "dashboard_live_data_enabled": false,
+  "subscriber_guidance_live_enabled": false,
+  "premium_guidance_enabled": false,
+  "auth_enabled": false,
+  "supabase_enabled": false,
+  "payment_enabled": false,
+  "generated_from": [
+    "data/knowledge/subscribers/subscriber-dashboard-readiness-matrix-d09.json",
+    "data/knowledge/subscribers/subscriber-entitlement-privacy-gate-preview-d08.json"
+  ],
+  "items": [
+    {
+      "scenario_id": "anonymous-user",
+      "preview_only": true,
+      "dashboard_live_data_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "premium_guidance_enabled": false,
+      "auth_enabled": false,
+      "supabase_enabled": false,
+      "payment_enabled": false,
+      "source_gate_result": "blocked",
+      "first_blocking_gate": "authenticated_session",
+      "cards": [
+        {
+          "card_id": "login_status",
+          "title": "Login Status",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "Supabase Auth session",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session"
+          ],
+          "missing_gates": [
+            "authenticated_session"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "subscription_status",
+          "title": "Subscription Status",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscription entitlement table/payment lifecycle",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "privacy_consent",
+          "title": "Privacy & Consent",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber profile consent record",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "subscriber_profile_exists",
+            "explicit_consent_active"
+          ],
+          "missing_gates": [
+            "subscriber_profile_exists",
+            "explicit_consent_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "profile_readiness",
+          "title": "Profile Readiness",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber profile completeness",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "subscriber_profile_exists",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [
+            "subscriber_profile_exists",
+            "privacy_safe_inputs_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "daily_reflection",
+          "title": "Daily Reflection",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule selection",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "what_to_do",
+          "title": "What To Do",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule output",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "what_not_to_do",
+          "title": "What Not To Do",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule output",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "lucky_number",
+          "title": "Lucky Number",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber guidance method after entitlement and review",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "lucky_color",
+          "title": "Lucky Color",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber guidance method after entitlement and review",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "mantra",
+          "title": "Mantra",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved mantra review registry",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "word_of_the_day",
+          "title": "Word of the Day",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "curated Word of the Day bank",
+          "current_state": "scaffold_preview_only",
+          "required_gates": [
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "approved_guidance_rules_available"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "panchang_context",
+          "title": "Panchang Context",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved Panchang/Festival source registry",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "privacy_safe_inputs_available",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "privacy_safe_inputs_available",
+            "approved_guidance_rules_available"
+          ],
+          "readiness": "blocked_by_gate"
+        }
+      ]
+    },
+    {
+      "scenario_id": "logged-in-no-subscription",
+      "preview_only": true,
+      "dashboard_live_data_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "premium_guidance_enabled": false,
+      "auth_enabled": false,
+      "supabase_enabled": false,
+      "payment_enabled": false,
+      "source_gate_result": "blocked",
+      "first_blocking_gate": "subscription_entitlement_active",
+      "cards": [
+        {
+          "card_id": "login_status",
+          "title": "Login Status",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "Supabase Auth session",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "subscription_status",
+          "title": "Subscription Status",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscription entitlement table/payment lifecycle",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "privacy_consent",
+          "title": "Privacy & Consent",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber profile consent record",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "subscriber_profile_exists",
+            "explicit_consent_active"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "profile_readiness",
+          "title": "Profile Readiness",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber profile completeness",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "subscriber_profile_exists",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "daily_reflection",
+          "title": "Daily Reflection",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule selection",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "what_to_do",
+          "title": "What To Do",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule output",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "what_not_to_do",
+          "title": "What Not To Do",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule output",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "lucky_number",
+          "title": "Lucky Number",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber guidance method after entitlement and review",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "lucky_color",
+          "title": "Lucky Color",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber guidance method after entitlement and review",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "mantra",
+          "title": "Mantra",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved mantra review registry",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [
+            "subscription_entitlement_active"
+          ],
+          "readiness": "blocked_by_gate"
+        },
+        {
+          "card_id": "word_of_the_day",
+          "title": "Word of the Day",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "curated Word of the Day bank",
+          "current_state": "scaffold_preview_only",
+          "required_gates": [
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "panchang_context",
+          "title": "Panchang Context",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved Panchang/Festival source registry",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "privacy_safe_inputs_available",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        }
+      ]
+    },
+    {
+      "scenario_id": "future-valid-subscriber-preview",
+      "preview_only": true,
+      "dashboard_live_data_enabled": false,
+      "subscriber_guidance_live_enabled": false,
+      "premium_guidance_enabled": false,
+      "auth_enabled": false,
+      "supabase_enabled": false,
+      "payment_enabled": false,
+      "source_gate_result": "would_pass_in_future_after_activation",
+      "first_blocking_gate": null,
+      "cards": [
+        {
+          "card_id": "login_status",
+          "title": "Login Status",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "Supabase Auth session",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "subscription_status",
+          "title": "Subscription Status",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscription entitlement table/payment lifecycle",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "privacy_consent",
+          "title": "Privacy & Consent",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber profile consent record",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "subscriber_profile_exists",
+            "explicit_consent_active"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "profile_readiness",
+          "title": "Profile Readiness",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber profile completeness",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "subscriber_profile_exists",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "daily_reflection",
+          "title": "Daily Reflection",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule selection",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "what_to_do",
+          "title": "What To Do",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule output",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "what_not_to_do",
+          "title": "What Not To Do",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved daily guidance rule output",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "lucky_number",
+          "title": "Lucky Number",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber guidance method after entitlement and review",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "lucky_color",
+          "title": "Lucky Color",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "subscriber guidance method after entitlement and review",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "privacy_safe_inputs_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "mantra",
+          "title": "Mantra",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved mantra review registry",
+          "current_state": "blocked_card_visible",
+          "required_gates": [
+            "authenticated_session",
+            "subscription_entitlement_active",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "word_of_the_day",
+          "title": "Word of the Day",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "curated Word of the Day bank",
+          "current_state": "scaffold_preview_only",
+          "required_gates": [
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        },
+        {
+          "card_id": "panchang_context",
+          "title": "Panchang Context",
+          "enabled_now": false,
+          "live_data_enabled": false,
+          "future_source": "approved Panchang/Festival source registry",
+          "current_state": "scaffold_blocked",
+          "required_gates": [
+            "privacy_safe_inputs_available",
+            "approved_guidance_rules_available"
+          ],
+          "missing_gates": [],
+          "readiness": "preview_ready_future_activation_only"
+        }
+      ]
+    }
+  ]
+}
