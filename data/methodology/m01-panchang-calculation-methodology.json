@@ -1,0 +1,302 @@
+{
+  "module_id": "M01",
+  "module_title": "Panchang Calculation Methodology Specification",
+  "phase": "M-Methodology",
+  "status": "methodology_specification_only",
+  "depends_on": ["M00"],
+  "runtime_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_panchang_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "calculation_engine_enabled": false,
+  "doctrine_version": "0.1.0",
+  "scope": {
+    "included": [
+      "calculation_methodology",
+      "input_requirements",
+      "panchang_element_definitions",
+      "interval_boundary_handling",
+      "skipped_repeated_element_doctrine",
+      "future_internal_output_contract",
+      "accuracy_validation_doctrine",
+      "classical_calculation_tradition_anchors"
+    ],
+    "excluded": [
+      "live_panchang_calculation",
+      "public_panchang_page",
+      "subscriber_panchang_output",
+      "festival_recommendation",
+      "vrat_recommendation",
+      "fasting_day_decision",
+      "ashtami_rule_runtime",
+      "ekadashi_rule_runtime",
+      "trayodashi_pradosh_rule_runtime",
+      "dob_based_guidance",
+      "lucky_number_colour_mantra_selection",
+      "auth",
+      "supabase",
+      "subscription",
+      "payment",
+      "external_api_fetch",
+      "server_endpoint",
+      "frontend_dashboard_card"
+    ]
+  },
+  "panchang_elements": [
+    {
+      "key": "tithi",
+      "basis": "angular_separation_between_moon_and_sun",
+      "conceptual_formula": "floor(((moon_longitude - sun_longitude) mod 360) / 12) + 1",
+      "total_units": 30,
+      "requires_interval": true,
+      "requires_sunrise_evaluation": true,
+      "runtime_implemented": false
+    },
+    {
+      "key": "vara",
+      "basis": "weekday_with_panchang_day_boundary_to_be_declared",
+      "conceptual_formula": "civil_weekday plus sunrise-boundary association",
+      "requires_interval": false,
+      "requires_sunrise_evaluation": true,
+      "runtime_implemented": false
+    },
+    {
+      "key": "nakshatra",
+      "basis": "sidereal_moon_longitude",
+      "conceptual_formula": "floor((sidereal_moon_longitude mod 360) / 13deg20min) + 1",
+      "total_units": 27,
+      "requires_interval": true,
+      "requires_ayanamsha": true,
+      "requires_sunrise_evaluation": true,
+      "runtime_implemented": false
+    },
+    {
+      "key": "yoga",
+      "basis": "sum_of_sidereal_sun_and_moon_longitudes",
+      "conceptual_formula": "floor(((sidereal_sun_longitude + sidereal_moon_longitude) mod 360) / 13deg20min) + 1",
+      "total_units": 27,
+      "requires_interval": true,
+      "requires_ayanamsha": true,
+      "requires_sunrise_evaluation": true,
+      "runtime_implemented": false
+    },
+    {
+      "key": "karana",
+      "basis": "half_tithi_segment_plus_traditional_sequence_rule",
+      "conceptual_formula": "floor(((moon_longitude - sun_longitude) mod 360) / 6) + 1, then apply reviewed karana naming sequence",
+      "requires_interval": true,
+      "requires_sequence_rule": true,
+      "requires_sunrise_evaluation": true,
+      "runtime_implemented": false
+    }
+  ],
+  "calculation_traditions": [
+    {
+      "key": "drik_ganitham_thirukanitha",
+      "display_names": ["Drik Ganitham", "Drig Ganita", "Thirukanitha", "Thiru Ganita"],
+      "role_in_m01": "methodological_anchor_only",
+      "description": "Observation/computation-oriented Panchang calculation approach using declared astronomical positions rather than unexamined fixed tables.",
+      "runtime_enabled": false,
+      "future_use_requires": [
+        "source_review",
+        "calculation_review",
+        "accuracy_validation_review",
+        "sunrise_basis_review",
+        "ayanamsha_review",
+        "licensing_review_if_external_backend_used"
+      ],
+      "non_marketing_rule": "The label must not be used unless the calculation basis and astronomical assumptions are explicitly declared."
+    },
+    {
+      "key": "siddhanta_jyotisha",
+      "display_names": ["Siddhanta Jyotisha", "Siddhantic Mathematical Astronomy"],
+      "role_in_m01": "classical_mathematical_astronomy_foundation",
+      "description": "Classical mathematical astronomy foundation relevant to Panchang elements, solar/lunar motion, time reckoning, and source-aware calculation discipline.",
+      "runtime_enabled": false,
+      "future_use_requires": [
+        "source_review",
+        "sanskrit_review",
+        "calculation_review",
+        "commentary_review_where_applicable"
+      ],
+      "separation_rule": "Mathematical astronomy must remain separate from devotional observance rules and subscriber prediction/guidance layers."
+    },
+    {
+      "key": "surya_siddhanta",
+      "display_names": ["Sūrya Siddhānta", "Surya Siddhanta"],
+      "role_in_m01": "named_classical_reference_not_backend",
+      "description": "Classical Sanskrit astronomical reference to be used as a source-tradition anchor and possible future comparison basis after review.",
+      "runtime_enabled": false,
+      "direct_algorithm_use_enabled": false,
+      "future_use_requires": [
+        "source_review",
+        "sanskrit_review",
+        "calculation_review",
+        "translation_review",
+        "commentary_review",
+        "accuracy_comparison_with_modern_ephemeris",
+        "public_claim_review"
+      ],
+      "non_mixing_rule": "Do not compute with modern ephemeris while claiming pure Surya Siddhanta basis, and do not silently merge Siddhantic and modern values."
+    }
+  ],
+  "required_inputs": [
+    "gregorian_date",
+    "location_name",
+    "latitude",
+    "longitude",
+    "timezone",
+    "calculation_date_range",
+    "sunrise_basis",
+    "ephemeris_basis",
+    "ayanamsha_basis_if_sidereal"
+  ],
+  "time_location_doctrine": {
+    "store_utc_timestamp": true,
+    "store_local_timestamp": true,
+    "iana_timezone_preferred": true,
+    "location_required": true,
+    "sunrise_aware": true,
+    "sunrise_finalization_deferred_to": "M04"
+  },
+  "ayanamsha_doctrine": {
+    "must_be_declared_if_sidereal": true,
+    "default": "PENDING_REVIEW",
+    "version_required": true,
+    "source_required": true,
+    "silent_ayanamsha_use_allowed": false
+  },
+  "ephemeris_doctrine": {
+    "selected_backend": "PENDING_REVIEW",
+    "candidate_backends": [
+      {
+        "name": "Swiss Ephemeris",
+        "status": "candidate_only",
+        "requires_license_review": true,
+        "runtime_enabled": false
+      },
+      {
+        "name": "JPL ephemerides",
+        "status": "candidate_only",
+        "requires_adapter_review": true,
+        "runtime_enabled": false
+      },
+      {
+        "name": "Internally validated astronomical routines",
+        "status": "candidate_only",
+        "requires_accuracy_review": true,
+        "runtime_enabled": false
+      }
+    ]
+  },
+  "calculation_basis_disclosure_rules": {
+    "must_declare_calculation_mode": true,
+    "allowed_future_modes_not_enabled_in_m01": [
+      "drik_thirukanitha_mode",
+      "siddhantic_reference_mode",
+      "surya_siddhanta_reference_mode",
+      "modern_ephemeris_mode"
+    ],
+    "mixed_basis_allowed_without_disclosure": false,
+    "public_claims_allowed_in_m01": false,
+    "required_basis_fields_for_future_output": [
+      "calculation_mode",
+      "source_tradition",
+      "ephemeris_or_textual_basis",
+      "ayanamsha_basis",
+      "sunrise_basis",
+      "regional_rule_family",
+      "review_status"
+    ]
+  },
+  "interval_boundary_handling": {
+    "elements_as_intervals": true,
+    "required_interval_fields": [
+      "active_at_sunrise",
+      "start_timestamp",
+      "end_timestamp",
+      "previous_element",
+      "next_element",
+      "transition_timestamp",
+      "transition_uncertainty",
+      "is_skipped",
+      "is_repeated"
+    ]
+  },
+  "future_internal_output_contract_required_sections": [
+    "date",
+    "location",
+    "sunrise",
+    "panchang_elements",
+    "calculation_basis",
+    "review_status",
+    "public_output_allowed"
+  ],
+  "trace_requirements": [
+    "input_date",
+    "input_location",
+    "timezone",
+    "sunrise_basis",
+    "ephemeris_source",
+    "ayanamsha_source",
+    "solar_longitude",
+    "lunar_longitude",
+    "sidereal_conversion_basis",
+    "interpolation_or_root_finding_method",
+    "element_transition_times",
+    "skipped_repeated_flags",
+    "source_registry_reference",
+    "software_library_version",
+    "calculation_timestamp",
+    "reviewer_status"
+  ],
+  "validation_doctrine": {
+    "must_validate_against_established_panchang_source": true,
+    "must_validate_against_independent_computational_reference": true,
+    "must_include_manual_sanity_checks": true,
+    "must_include_boundary_cases_near_sunrise": true,
+    "must_include_skipped_repeated_cases": true,
+    "must_include_multiple_locations": true,
+    "public_activation_allowed_before_validation": false
+  },
+  "regional_variation_support": {
+    "m01_does_not_decide_regional_rules": true,
+    "future_rule_family_field_required": true,
+    "examples": [
+      "amanta_purnimanta",
+      "smarta_vaishnava_ekadashi",
+      "pradosh_evening_window",
+      "ashtami_observance_variants",
+      "regional_festival_calendar"
+    ]
+  },
+  "approved_output_labels": [
+    "calculation_estimate",
+    "methodology_only",
+    "internal_review_required",
+    "sunrise_basis_pending_M04",
+    "ephemeris_pending_review",
+    "ayanamsha_pending_review",
+    "not_public_output",
+    "drik_thirukanitha_methodology_anchor",
+    "siddhanta_jyotisha_reference",
+    "surya_siddhanta_reference",
+    "calculation_basis_disclosed"
+  ],
+  "review_gates": [
+    "source_review",
+    "calculation_review",
+    "sunrise_basis_review",
+    "ayanamsha_review",
+    "ephemeris_license_review",
+    "accuracy_validation_review",
+    "output_safety_review",
+    "classical_source_review",
+    "siddhanta_jyotisha_review",
+    "surya_siddhanta_reference_review",
+    "calculation_basis_disclosure_review"
+  ]
+}

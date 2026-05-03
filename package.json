@@ -89,7 +89,9 @@
     "knowledge:subscriber-dashboard:preflight": "node scripts/subscriber-dashboard-readiness-preflight.js",
     "knowledge:governance-report:build": "node scripts/build-knowledge-governance-status-report-d10.js",
     "knowledge:governance-report:preflight": "node scripts/knowledge-governance-status-report-preflight.js",
-    "validate:m00": "node scripts/validate-m00-source-doctrine.mjs"
+    "validate:m00": "node scripts/validate-m00-source-doctrine.mjs",
+    "validate:m01": "node scripts/validate-m01-panchang-methodology.mjs",
+    "validate:methodology": "npm run validate:m00 && npm run validate:m01"
   },
   "repository": {
     "type": "git",
