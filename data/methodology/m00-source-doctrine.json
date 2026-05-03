@@ -1,0 +1,172 @@
+{
+  "module_id": "M00",
+  "module_title": "Drishvara Source Doctrine & Sanskrit Integrity Framework",
+  "phase": "M-Methodology",
+  "status": "governance_methodology_only",
+  "runtime_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_panchang_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "doctrine_version": "0.1.0",
+  "core_principles": [
+    "source_first",
+    "sanskrit_integrity",
+    "no_pseudo_sanskrit",
+    "no_invented_mantras",
+    "panchang_five_element_awareness",
+    "calculation_and_observance_separation",
+    "regional_variation_awareness",
+    "subscriber_consent_first",
+    "privacy_by_design",
+    "premium_gating_without_public_leakage",
+    "non_deterministic_guidance"
+  ],
+  "panchang_foundation": {
+    "five_elements": [
+      "tithi",
+      "vara",
+      "nakshatra",
+      "yoga",
+      "karana"
+    ],
+    "method_notes": [
+      "Tithi-based observances must be treated as interval-based and sunrise-sensitive where applicable.",
+      "Festival and vrat decisions must be separated from raw astronomical calculation.",
+      "Regional variation and contested observance dates must be represented explicitly.",
+      "Future calculation modules must declare location, timezone, sunrise basis, and rule family."
+    ],
+    "reference_background": [
+      {
+        "title": "Development of Pancanga from vedic times upto the present",
+        "author": "Shakti Dhara Sharma",
+        "usage": "Historical and methodological background for Panchang evolution, astronomical observation, Siddhanta-period development, lunar/solar corrections, and tithi/festival controversies.",
+        "review_status": "background_reference_to_be_reviewed"
+      }
+    ]
+  },
+  "source_hierarchy": [
+    {
+      "level": 1,
+      "name": "primary_textual_or_astronomical_source",
+      "description": "Original Sanskrit source, established Jyotisha/Panchang calculation text, recognized astronomical basis, or canonical mantra source."
+    },
+    {
+      "level": 2,
+      "name": "commentary_or_traditional_interpretive_source",
+      "description": "Traditional commentary, regional Panchang authority, sampradaya-specific rule, or temple/tradition-specific practice note."
+    },
+    {
+      "level": 3,
+      "name": "modern_scholarly_or_technical_source",
+      "description": "Academic paper, astronomy/calendrical history paper, technical calculation note, or institutionally credible reference."
+    },
+    {
+      "level": 4,
+      "name": "editorial_curation",
+      "description": "Drishvara explanation, simplified public-facing note, subscriber-friendly interpretation, or non-authoritative reflection note."
+    }
+  ],
+  "sanskrit_integrity": {
+    "required_fields_for_sanskrit_item": [
+      "devanagari",
+      "iast",
+      "plain_english_meaning",
+      "source_reference",
+      "usage_context",
+      "review_status"
+    ],
+    "rules": [
+      "Do not generate new mantras.",
+      "Do not present pseudo-Sanskrit as Sanskrit.",
+      "Do not mix translation and Sanskrit as if both are source text.",
+      "Do not use unverifiable bija-mantra combinations.",
+      "Do not claim Vedic, Puranic, or Tantric source without reference.",
+      "Preserve Devanagari and IAST separately wherever Sanskrit text is used."
+    ]
+  },
+  "subscriber_guidance_guardrails": {
+    "allowed_guidance_types": [
+      "devotional_suggestion",
+      "reflective_daily_note",
+      "verified_mantra_suggestion",
+      "symbolic_lucky_colour",
+      "symbolic_lucky_number",
+      "mindful_do_and_dont",
+      "general_time_period_reflection"
+    ],
+    "prohibited_guidance_types": [
+      "guaranteed_future_prediction",
+      "medical_certainty",
+      "legal_certainty",
+      "financial_certainty",
+      "fear_based_warning",
+      "curse_or_harm_claim",
+      "invented_remedy",
+      "invented_mantra",
+      "non_consented_personalization"
+    ],
+    "required_output_label": "symbolic_guidance_not_deterministic_prediction"
+  },
+  "privacy_and_entitlement": {
+    "consent_required_for": [
+      "date_of_birth_processing",
+      "birth_location_processing",
+      "spiritual_preference_processing",
+      "subscriber_profile_personalization"
+    ],
+    "must_not_publicly_expose": [
+      "full_date_of_birth",
+      "exact_birth_location",
+      "private_spiritual_preferences",
+      "subscription_status",
+      "inferred_sensitive_traits"
+    ],
+    "entitlement_principle": "Premium gating must be handled at service layer and must not leak private subscriber data."
+  },
+  "review_gates": [
+    "source_review",
+    "sanskrit_review",
+    "calculation_review",
+    "observance_rule_review",
+    "privacy_review",
+    "entitlement_review",
+    "output_safety_review"
+  ],
+  "approved_output_labels": [
+    "calculation_estimate",
+    "source_based_observance",
+    "regional_rule_variant",
+    "editorial_guidance",
+    "symbolic_guidance",
+    "subscriber_personalized",
+    "premium_gated",
+    "human_review_required",
+    "not_for_medical_legal_financial_reliance"
+  ],
+  "explicit_scope_exclusions": [
+    "live_panchang_calculation",
+    "subscriber_login",
+    "subscription_payment",
+    "supabase_integration",
+    "external_panchang_api",
+    "external_festival_api",
+    "personalized_subscriber_output",
+    "public_dynamic_panchang_page",
+    "mantra_generation",
+    "fortune_prediction_engine",
+    "dob_based_live_interpretation",
+    "dashboard_runtime_cards"
+  ],
+  "inspiration_disclaimer": {
+    "permitted": "Drishvara follows a source-first and Sanskrit-integrity approach inspired by public scholarly discipline around correct Sanskrit, textual awareness, and responsible interpretation.",
+    "not_permitted": [
+      "approved_by_without_permission",
+      "endorsed_by_without_permission",
+      "official_association_without_permission",
+      "certified_by_without_permission"
+    ]
+  }
+}
