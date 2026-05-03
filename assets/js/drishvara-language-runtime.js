@@ -387,6 +387,9 @@
   }
 
   document.addEventListener("click", (event) => {
+    /* DRISHVARA_CLICK_SCOPE_GUARD */
+    if (!event.target || !event.target.closest || !event.target.closest(".lang-toggle, [data-drishvara-lang-toggle='true']")) return;
+
     const target = findLanguageToggleTarget(event.target) || event.target.closest("[data-lang], [data-language], button, a, span, div");
     const desired = desiredFromClick(target);
     if (!desired) return;
@@ -450,3 +453,43 @@
     badBrandForms: BAD_BRANDS
   };
 })();
+
+
+/* DRISHVARA_HERO_MEANING_FIX_JS_START */
+(function () {
+  const LANG_KEY = "drishvara_site_language";
+
+  function currentLang() {
+    try {
+      return localStorage.getItem(LANG_KEY) === "hi" ? "hi" : "en";
+    } catch (error) {
+      return document.documentElement.lang === "hi" ? "hi" : "en";
+    }
+  }
+
+  function fixHeroMeaning() {
+    const meaning = document.querySelector(".hero .meaning");
+    if (!meaning) return;
+
+    meaning.textContent = currentLang() === "hi"
+      ? "दृष्टि व्यापक, चिंतन गहरा।"
+      : "Vision broad, reflection deep.";
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    fixHeroMeaning();
+    setTimeout(fixHeroMeaning, 100);
+    setTimeout(fixHeroMeaning, 500);
+  });
+
+  window.addEventListener("load", function () {
+    fixHeroMeaning();
+    setTimeout(fixHeroMeaning, 500);
+  });
+
+  document.addEventListener("click", function () {
+    setTimeout(fixHeroMeaning, 100);
+    setTimeout(fixHeroMeaning, 500);
+  }, true);
+})();
+/* DRISHVARA_HERO_MEANING_FIX_JS_END */

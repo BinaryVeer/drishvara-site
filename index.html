@@ -2558,6 +2558,80 @@
     }
     /* DRISHVARA_LOGO_MORE_UP_END */
 
+
+    /* DRISHVARA_LOGO_ONLY_MORE_UP_START
+       Logo-only correction: move logo further above the outer orbit.
+       Text stack remains unchanged.
+    */
+    .logo-wrap {
+      transform: translateY(-96px) !important;
+    }
+
+    @media (max-width: 900px) {
+      .logo-wrap {
+        transform: translateY(-70px) !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .logo-wrap {
+        transform: translateY(-44px) !important;
+      }
+    }
+    /* DRISHVARA_LOGO_ONLY_MORE_UP_END */
+
+
+    /* DRISHVARA_LANGUAGE_SELECTOR_FIX_START
+       Language pill is now selector-based:
+       EN always sets English; हिन्दी always sets Hindi.
+    */
+    .lang-toggle {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      width: auto !important;
+      max-width: max-content !important;
+      white-space: nowrap !important;
+      user-select: none !important;
+      cursor: default !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    .lang-choice {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      line-height: 1;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .lang-choice:hover {
+      color: var(--gold);
+    }
+
+    .lang-choice.is-active {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .lang-separator {
+      opacity: 0.62;
+    }
+
+    .lang-toggle:focus,
+    .lang-toggle:focus-visible,
+    .lang-choice:focus,
+    .lang-choice:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    /* DRISHVARA_LANGUAGE_SELECTOR_FIX_END */
+
 </style>
 
   <link rel="canonical" href="https://www.drishvara.com/" />
@@ -2598,7 +2672,11 @@
           <span class="live-dot"></span>
           <span class="live-text"><strong>LIVE · Sports</strong> Event update</span>
         </div>
-        <div class="lang-toggle" data-drishvara-lang-toggle="true">EN | हिन्दी</div>
+        <div class="lang-toggle" data-drishvara-lang-toggle="true" aria-label="Language selector">
+          <button type="button" class="lang-choice" data-lang-choice="en" aria-label="Show English">EN</button>
+          <span class="lang-separator" aria-hidden="true">|</span>
+          <button type="button" class="lang-choice" data-lang-choice="hi" aria-label="Show Hindi">हिन्दी</button>
+        </div>
       </div>
     </nav>
 
@@ -3755,7 +3833,7 @@
   <script src="/assets/js/daily-basis-guard.js" defer></script>
   <script src="/assets/js/sports-context.js" defer></script>
   <script src="/assets/js/seo-runtime.js" defer></script>
-<script src="/assets/js/site-language.js" defer></script>
+<script src="/assets/js/site-language.js?v=langselect-20260504b" defer></script>
 
   <script id="drishvaraFeaturedReadImageHydrator">
     (function hydrateFeaturedReadImages() {
@@ -3812,34 +3890,116 @@
     })();
   </script>
 
-  <script src="assets/js/drishvara-language-runtime.js" defer></script>
+  <script src="assets/js/drishvara-language-runtime.js?v=langselect-20260504b" defer></script>
 
-  <script id="drishvaraHeroMeaningStabilizer">
+  <script id="drishvaraLanguageSelectorFix">
     (function () {
-      const LANG_KEY = "drishvara_site_language";
+      const CANONICAL_KEY = "drishvara_site_language";
+      const KEYS = [
+        "drishvara_site_language",
+        "drishvara_language",
+        "site_language",
+        "language",
+        "lang"
+      ];
 
-      function getLang() {
+      const HERO_MEANING = {
+        en: "Vision broad, reflection deep.",
+        hi: "दृष्टि व्यापक, चिंतन गहरा।"
+      };
+
+      function safeGetLang() {
         try {
-          return localStorage.getItem(LANG_KEY) === "hi" ? "hi" : "en";
+          return localStorage.getItem(CANONICAL_KEY) === "hi" ? "hi" : "en";
         } catch (error) {
           return document.documentElement.lang === "hi" ? "hi" : "en";
         }
+      }
+
+      function safeSetLang(lang) {
+        const safe = lang === "hi" ? "hi" : "en";
+
+        try {
+          for (const key of KEYS) {
+            localStorage.setItem(key, safe);
+          }
+        } catch (error) {}
+
+        document.documentElement.lang = safe;
+        document.documentElement.setAttribute("data-language", safe);
+      }
+
+      function updateActiveState() {
+        const lang = safeGetLang();
+        document.querySelectorAll("[data-lang-choice]").forEach((button) => {
+          const active = button.getAttribute("data-lang-choice") === lang;
+          button.classList.toggle("is-active", active);
+          button.setAttribute("aria-pressed", active ? "true" : "false");
+        });
       }
 
       function fixHeroMeaning() {
         const meaning = document.querySelector(".hero .meaning, .meaning");
         if (!meaning) return;
 
-        const expected = getLang() === "hi"
-          ? "दृष्टि व्यापक, चिंतन गहरा।"
-          : "Vision broad, reflection deep.";
+        const lang = safeGetLang();
+        const expected = HERO_MEANING[lang] || HERO_MEANING.en;
 
         if ((meaning.textContent || "").trim() !== expected) {
           meaning.textContent = expected;
         }
       }
 
-      function installObserver() {
+      function applyLanguage(lang, shouldReload) {
+        const current = safeGetLang();
+        const safe = lang === "hi" ? "hi" : "en";
+
+        safeSetLang(safe);
+        updateActiveState();
+        fixHeroMeaning();
+
+        // Existing runtime scripts read language from storage on load.
+        // Reload only when language is actually changed.
+        if (shouldReload && current !== safe) {
+          window.location.reload();
+        }
+      }
+
+      function installSelector() {
+        const toggle = document.querySelector(".lang-toggle[data-drishvara-lang-toggle='true'], .lang-toggle");
+        if (!toggle) return;
+
+        toggle.setAttribute("role", "group");
+        toggle.setAttribute("aria-label", "Language selector");
+
+        toggle.addEventListener("click", function (event) {
+          const choice = event.target.closest("[data-lang-choice]");
+          if (!choice) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+
+          const lang = choice.getAttribute("data-lang-choice") === "hi" ? "hi" : "en";
+          applyLanguage(lang, true);
+        }, true);
+
+        toggle.addEventListener("keydown", function (event) {
+          const choice = event.target.closest("[data-lang-choice]");
+          if (!choice) return;
+
+          if (event.key !== "Enter" && event.key !== " ") return;
+
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+
+          const lang = choice.getAttribute("data-lang-choice") === "hi" ? "hi" : "en";
+          applyLanguage(lang, true);
+        }, true);
+      }
+
+      function installMeaningObserver() {
         const meaning = document.querySelector(".hero .meaning, .meaning");
         if (!meaning || meaning.__drishvaraMeaningObserverInstalled) return;
 
@@ -3856,22 +4016,30 @@
         });
       }
 
-      function runFixSeries() {
+      function boot() {
+        installSelector();
+        updateActiveState();
         fixHeroMeaning();
-        installObserver();
-        setTimeout(fixHeroMeaning, 50);
-        setTimeout(fixHeroMeaning, 250);
-        setTimeout(fixHeroMeaning, 800);
+        installMeaningObserver();
+
+        setTimeout(fixHeroMeaning, 100);
+        setTimeout(fixHeroMeaning, 500);
+        setTimeout(fixHeroMeaning, 1200);
       }
 
-      document.addEventListener("click", function () {
-        setTimeout(runFixSeries, 0);
-      }, true);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", boot);
+      } else {
+        boot();
+      }
 
-      document.addEventListener("DOMContentLoaded", runFixSeries);
-      window.addEventListener("load", runFixSeries);
-      setTimeout(runFixSeries, 1000);
-      setTimeout(runFixSeries, 2000);
+      window.addEventListener("load", boot);
+
+      // Keep the meaning correct after runtime translations or late hydration.
+      document.addEventListener("click", function () {
+        setTimeout(fixHeroMeaning, 100);
+        setTimeout(updateActiveState, 100);
+      }, true);
     })();
   </script>
 
