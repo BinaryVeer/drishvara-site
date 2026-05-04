@@ -1,0 +1,950 @@
+{
+  "preview_id": "ID00_BACKEND_DETAILED_DESIGN_PREVIEW",
+  "module_id": "ID00",
+  "status": "preview_only_backend_detailed_design_no_activation",
+  "preview_only": true,
+  "backend_layers": [
+    "request_boundary_layer",
+    "consent_entitlement_gate_layer",
+    "source_methodology_gate_layer",
+    "calculation_service_layer",
+    "personalization_service_layer",
+    "content_governance_service_layer",
+    "review_queue_service_layer",
+    "audit_service_layer",
+    "storage_adapter_layer",
+    "external_provider_adapter_layer",
+    "response_shaping_layer",
+    "safety_redaction_layer"
+  ],
+  "future_services": [
+    {
+      "service_key": "request_boundary_service",
+      "service_family": "backend_boundary",
+      "purpose": "Future request normalization and boundary checks.",
+      "allowed_inputs": [
+        "structured_request_envelope"
+      ],
+      "prohibited_inputs": [
+        "raw_secret",
+        "service_role_key",
+        "unvalidated_payload"
+      ],
+      "allowed_outputs": [
+        "validated_request_context"
+      ],
+      "prohibited_outputs": [
+        "public_output",
+        "subscriber_output"
+      ],
+      "data_dependency": "M08 request envelope doctrine",
+      "privacy_class": "internal_preview_data",
+      "activation_blockers": [
+        "needs_api_design",
+        "needs_validation_tests",
+        "needs_auth_policy"
+      ],
+      "fallback_behavior": "reject_invalid_request",
+      "audit_requirement": "future_request_trace",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "consent_entitlement_gate_service",
+      "service_family": "subscriber_gate",
+      "purpose": "Future consent and entitlement check before subscriber guidance.",
+      "allowed_inputs": [
+        "subscriber_id",
+        "consent_status",
+        "entitlement_status"
+      ],
+      "prohibited_inputs": [
+        "unconsented_profile_data",
+        "payment_secret"
+      ],
+      "allowed_outputs": [
+        "gate_decision"
+      ],
+      "prohibited_outputs": [
+        "guidance_card_without_consent"
+      ],
+      "data_dependency": "M05-M08 and I03 subscriber entities",
+      "privacy_class": "subscriber_private_data",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_consent_records",
+        "needs_entitlement_records",
+        "needs_rls"
+      ],
+      "fallback_behavior": "deny_guidance_until_gate_passes",
+      "audit_requirement": "future_consent_entitlement_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "source_methodology_gate_service",
+      "service_family": "source_governance",
+      "purpose": "Future source and methodology readiness check.",
+      "allowed_inputs": [
+        "source_id",
+        "methodology_module_status",
+        "review_status"
+      ],
+      "prohibited_inputs": [
+        "unreviewed_mantra",
+        "invented_sanskrit"
+      ],
+      "allowed_outputs": [
+        "source_gate_decision"
+      ],
+      "prohibited_outputs": [
+        "approved_claim_without_review"
+      ],
+      "data_dependency": "M00-M10 and R00-R03",
+      "privacy_class": "internal_governance_data",
+      "activation_blockers": [
+        "needs_source_records",
+        "needs_review_workflow",
+        "needs_admin_boundary"
+      ],
+      "fallback_behavior": "block_output_until_source_review",
+      "audit_requirement": "future_source_gate_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "panchang_calculation_service",
+      "service_family": "calculation",
+      "purpose": "Future server-side Panchang calculation orchestration.",
+      "allowed_inputs": [
+        "date",
+        "location_basis",
+        "calculation_mode"
+      ],
+      "prohibited_inputs": [
+        "precise_location_without_consent"
+      ],
+      "allowed_outputs": [
+        "internal_calculation_trace"
+      ],
+      "prohibited_outputs": [
+        "public_panchang_without_gate"
+      ],
+      "data_dependency": "M01-M04A methodology",
+      "privacy_class": "internal_preview_data",
+      "activation_blockers": [
+        "needs_calculation_engine_design",
+        "needs_validation_cycle",
+        "needs_public_output_gate"
+      ],
+      "fallback_behavior": "return_internal_blocked_status",
+      "audit_requirement": "future_panchang_calculation_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "observance_rule_service",
+      "service_family": "calculation",
+      "purpose": "Future observance/vrat/festival rule evaluation.",
+      "allowed_inputs": [
+        "tithi_interval",
+        "sunrise_basis",
+        "regional_rule_family"
+      ],
+      "prohibited_inputs": [
+        "unreviewed_rule_as_authoritative"
+      ],
+      "allowed_outputs": [
+        "internal_observance_candidate"
+      ],
+      "prohibited_outputs": [
+        "public_festival_claim_without_review"
+      ],
+      "data_dependency": "M02-M03 methodology",
+      "privacy_class": "internal_governance_data",
+      "activation_blockers": [
+        "needs_rule_registry_storage",
+        "needs_source_review",
+        "needs_conflict_resolution_policy"
+      ],
+      "fallback_behavior": "mark_observance_needs_review",
+      "audit_requirement": "future_observance_rule_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "personalization_service",
+      "service_family": "subscriber_guidance",
+      "purpose": "Future profile-based guidance personalization.",
+      "allowed_inputs": [
+        "profile_completeness",
+        "consent_scope",
+        "symbolic_score_inputs"
+      ],
+      "prohibited_inputs": [
+        "private_profile_without_consent",
+        "unsupported_sensitive_inference"
+      ],
+      "allowed_outputs": [
+        "internal_personalization_trace"
+      ],
+      "prohibited_outputs": [
+        "subscriber_guidance_without_entitlement"
+      ],
+      "data_dependency": "M05-M07 and M06A",
+      "privacy_class": "subscriber_private_data",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_consent_gate",
+        "needs_privacy_review",
+        "needs_subscriber_output_gate"
+      ],
+      "fallback_behavior": "use_non_personalized_safe_placeholder",
+      "audit_requirement": "future_personalization_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "content_registry_service",
+      "service_family": "content_governance",
+      "purpose": "Future controlled content asset registry operations.",
+      "allowed_inputs": [
+        "reviewed_content_asset_candidate"
+      ],
+      "prohibited_inputs": [
+        "unreviewed_asset_write",
+        "rights_unknown_asset"
+      ],
+      "allowed_outputs": [
+        "internal_registry_candidate_status"
+      ],
+      "prohibited_outputs": [
+        "live_registry_write_without_approval"
+      ],
+      "data_dependency": "C10-C16 content governance",
+      "privacy_class": "internal_governance_data",
+      "activation_blockers": [
+        "needs_admin_boundary",
+        "needs_storage_decision",
+        "needs_approval_workflow",
+        "needs_rollback_plan"
+      ],
+      "fallback_behavior": "keep_asset_preview_only",
+      "audit_requirement": "future_content_registry_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "review_queue_service",
+      "service_family": "admin_review",
+      "purpose": "Future review queue read/write orchestration.",
+      "allowed_inputs": [
+        "queue_candidate",
+        "reviewer_role",
+        "review_decision"
+      ],
+      "prohibited_inputs": [
+        "anonymous_review_write",
+        "untracked_decision"
+      ],
+      "allowed_outputs": [
+        "review_status_update"
+      ],
+      "prohibited_outputs": [
+        "approval_without_audit"
+      ],
+      "data_dependency": "C13-C14 and I03 review workflow entities",
+      "privacy_class": "restricted_admin_data",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_rls",
+        "needs_admin_ui_plan",
+        "needs_audit_log_store"
+      ],
+      "fallback_behavior": "block_review_write",
+      "audit_requirement": "future_review_queue_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "audit_trace_service",
+      "service_family": "audit",
+      "purpose": "Future audit trace creation and lookup.",
+      "allowed_inputs": [
+        "action",
+        "actor_role",
+        "entity_ref",
+        "decision_reason"
+      ],
+      "prohibited_inputs": [
+        "secret_value",
+        "unredacted_private_data_in_public_log"
+      ],
+      "allowed_outputs": [
+        "audit_trace_id"
+      ],
+      "prohibited_outputs": [
+        "public_audit_log"
+      ],
+      "data_dependency": "I03 admin/audit entities",
+      "privacy_class": "restricted_admin_data",
+      "activation_blockers": [
+        "needs_audit_schema",
+        "needs_retention_policy",
+        "needs_access_policy"
+      ],
+      "fallback_behavior": "block_write_if_audit_required_and_unavailable",
+      "audit_requirement": "self_auditing_required",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "storage_adapter_service",
+      "service_family": "storage",
+      "purpose": "Future abstraction over static JSON, database, Supabase, object storage, and audit log store.",
+      "allowed_inputs": [
+        "storage_operation_request"
+      ],
+      "prohibited_inputs": [
+        "client_service_role_key",
+        "unapproved_write_request"
+      ],
+      "allowed_outputs": [
+        "storage_operation_result"
+      ],
+      "prohibited_outputs": [
+        "write_without_feature_flag"
+      ],
+      "data_dependency": "I01-I03",
+      "privacy_class": "internal_governance_data",
+      "activation_blockers": [
+        "needs_storage_decision",
+        "needs_feature_flags",
+        "needs_security_review"
+      ],
+      "fallback_behavior": "read_only_mode",
+      "audit_requirement": "future_storage_operation_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    },
+    {
+      "service_key": "response_shaping_service",
+      "service_family": "output_safety",
+      "purpose": "Future response shaping, redaction, and output safety.",
+      "allowed_inputs": [
+        "internal_service_result",
+        "output_context"
+      ],
+      "prohibited_inputs": [
+        "secret_value",
+        "unredacted_subscriber_private_data"
+      ],
+      "allowed_outputs": [
+        "safe_internal_preview_response"
+      ],
+      "prohibited_outputs": [
+        "public_output_without_gate",
+        "subscriber_output_without_gate"
+      ],
+      "data_dependency": "M08, I04",
+      "privacy_class": "internal_preview_data",
+      "activation_blockers": [
+        "needs_redaction_rules",
+        "needs_output_gate",
+        "needs_validation_tests"
+      ],
+      "fallback_behavior": "return_blocked_status",
+      "audit_requirement": "future_output_safety_audit",
+      "implemented": false,
+      "runtime_enabled": false,
+      "route_created": false,
+      "database_write_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_design_only"
+    }
+  ],
+  "future_api_families": [
+    {
+      "api_family": "internal_preview_api",
+      "purpose": "Future internal preview reads.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_role_mapping",
+        "needs_redaction_rules",
+        "needs_audit_trace"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "panchang_calculation_api",
+      "purpose": "Future server-side Panchang calculation requests.",
+      "route_creation_enabled": false,
+      "auth_required_future": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_calculation_engine",
+        "needs_validation_cycle",
+        "needs_output_gate"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "observance_festival_api",
+      "purpose": "Future observance/festival candidate calculation requests.",
+      "route_creation_enabled": false,
+      "auth_required_future": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_rule_storage",
+        "needs_source_review",
+        "needs_public_output_gate"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "subscriber_profile_api",
+      "purpose": "Future subscriber profile read/update.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_consent_model",
+        "needs_rls",
+        "needs_privacy_review"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "subscriber_guidance_api",
+      "purpose": "Future subscriber guidance generation/retrieval.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_entitlement_gate",
+        "needs_privacy_gate",
+        "needs_guidance_safety_review"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "content_review_api",
+      "purpose": "Future content asset review operations.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_admin_role",
+        "needs_review_queue_storage",
+        "needs_audit_trace",
+        "needs_rls"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "admin_review_api",
+      "purpose": "Future admin/reviewer decision operations.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_admin_auth",
+        "needs_rbac",
+        "needs_audit_store",
+        "needs_rollback_model"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "entitlement_api",
+      "purpose": "Future subscription entitlement status checks.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_payment_provider",
+        "needs_webhook_security",
+        "needs_entitlement_storage"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "audit_api",
+      "purpose": "Future restricted audit lookup.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_admin_role",
+        "needs_audit_store",
+        "needs_retention_policy"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    },
+    {
+      "api_family": "health_readiness_api",
+      "purpose": "Future internal readiness and health status.",
+      "route_creation_enabled": false,
+      "auth_required_future": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "activation_blockers": [
+        "needs_internal_access_policy",
+        "needs_no_secret_exposure_policy"
+      ],
+      "route_created": false,
+      "runtime_enabled": false,
+      "next_action": "design_contract_later_without_route_creation"
+    }
+  ],
+  "supabase_table_candidates_not_created": [
+    {
+      "table_name": "content_assets",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "image_assets",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "verified_links",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "review_queue_items",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "review_decisions",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "review_audit_traces",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "source_records",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "mantra_source_records",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "observance_rules",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "festival_rules",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "panchang_calculation_records",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "validation_cycles",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "learning_register_items",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "subscriber_profiles",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "profile_input_records",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "consent_records",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "subscriber_entitlements",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "payment_events",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "guidance_cards",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "personalization_score_records",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "feature_flags",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    },
+    {
+      "table_name": "admin_action_audits",
+      "table_created": false,
+      "migration_created": false,
+      "rls_policy_created": false,
+      "database_write_enabled": false,
+      "next_action": "schema_design_later_without_migration"
+    }
+  ],
+  "future_auth_roles": [
+    "anonymous_public",
+    "subscriber",
+    "reviewer",
+    "admin_owner",
+    "service_role_server_only"
+  ],
+  "future_rls_design_principles": [
+    "deny_by_default",
+    "service_role_never_client_side",
+    "subscriber_rows_owned_by_subscriber",
+    "reviewer_access_limited_by_role",
+    "admin_access_audited",
+    "public_read_explicit_only",
+    "no_cross_subscriber_reads",
+    "audit_tables_restricted"
+  ],
+  "content_governance_gates": [
+    "source_review_gate",
+    "rights_review_gate",
+    "public_safe_gate",
+    "image_review_gate",
+    "duplicate_review_gate",
+    "quality_review_gate",
+    "ml_eligibility_gate",
+    "embedding_eligibility_gate",
+    "registry_write_gate"
+  ],
+  "panchang_guidance_gates": [
+    "source_first_gate",
+    "sanskrit_integrity_gate",
+    "no_invented_mantra_gate",
+    "calculation_basis_disclosure_gate",
+    "location_timezone_sunrise_gate",
+    "observance_rule_review_gate",
+    "validation_learning_gate",
+    "consent_privacy_gate",
+    "subscriber_entitlement_gate",
+    "internal_preview_gate",
+    "public_subscriber_output_gate"
+  ],
+  "subscriber_sensitive_data_classes": [
+    "name",
+    "date_of_birth",
+    "birth_time",
+    "location",
+    "consent",
+    "profile_preferences",
+    "entitlement",
+    "guidance_history",
+    "audit_trace"
+  ],
+  "audit_trace_families": [
+    "content_review_audit",
+    "admin_action_audit",
+    "subscriber_consent_audit",
+    "guidance_generation_audit",
+    "panchang_calculation_audit",
+    "entitlement_audit",
+    "feature_flag_audit",
+    "deployment_audit",
+    "rollback_audit"
+  ],
+  "fallback_principles": [
+    "fail_closed",
+    "no_public_output_on_failure",
+    "no_subscriber_output_on_failure",
+    "no_mutation_on_failure",
+    "no_partial_approval_on_failure",
+    "no_ml_ingestion_on_failure",
+    "no_secret_exposure_on_failure",
+    "clear_internal_error_category",
+    "audit_trace_where_backend_exists"
+  ],
+  "deployment_design_requirements": [
+    "local_design_mode",
+    "staging_dry_run_mode",
+    "production_activation_gate",
+    "environment_separation",
+    "backup_before_migration",
+    "rollback_plan",
+    "emergency_disable_switch",
+    "monitoring_plan",
+    "incident_response_plan"
+  ],
+  "security_risks_to_prevent": [
+    "client_exposure_of_service_role_key",
+    "client_exposure_of_private_api_keys",
+    "accidental_public_api_route_creation",
+    "accidental_seo_indexing_of_previews",
+    "subscriber_data_leakage",
+    "public_output_bypass",
+    "entitlement_bypass",
+    "review_approval_bypass",
+    "silent_mutation",
+    "unreviewed_ml_embedding_use"
+  ],
+  "summary": {
+    "backend_layer_count": 12,
+    "future_service_count": 11,
+    "future_service_family_counts": {
+      "backend_boundary": 1,
+      "subscriber_gate": 1,
+      "source_governance": 1,
+      "calculation": 2,
+      "subscriber_guidance": 1,
+      "content_governance": 1,
+      "admin_review": 1,
+      "audit": 1,
+      "storage": 1,
+      "output_safety": 1
+    },
+    "future_api_family_count": 10,
+    "supabase_table_candidate_count": 22,
+    "implemented_service_count": 0,
+    "route_created_count": 0,
+    "table_created_count": 0,
+    "migration_created_count": 0,
+    "rls_policy_created_count": 0,
+    "database_write_enabled_count": 0,
+    "public_output_allowed_count": 0,
+    "subscriber_output_allowed_count": 0,
+    "backend_activated": false,
+    "supabase_activated": false,
+    "auth_activated": false,
+    "payment_activated": false,
+    "ml_activated": false,
+    "embedding_activated": false
+  },
+  "blocked_capabilities": [
+    "backend_code_creation",
+    "runtime_activation",
+    "backend_activation",
+    "api_route",
+    "route_handler_creation",
+    "server_endpoint",
+    "supabase_connection",
+    "supabase_project_creation",
+    "supabase_table_creation",
+    "service_role_operation",
+    "rls",
+    "rls_policy_creation",
+    "auth",
+    "auth_flow_creation",
+    "payment",
+    "payment_flow_creation",
+    "database_activation",
+    "database_client",
+    "database_migration",
+    "sql_file_creation",
+    "orm_model_creation",
+    "repository_layer",
+    "seed_script",
+    "admin_ui",
+    "admin_route",
+    "live_review_queue",
+    "reviewer_assignment",
+    "approval_workflow",
+    "public_output",
+    "subscriber_output",
+    "content_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "final_registry_write",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "env_file_creation",
+    "secret_creation",
+    "secret_reading",
+    "backend_deployment"
+  ],
+  "next_recommended_stage": {
+    "module_id": "ID01",
+    "title": "Supabase Logical Schema and RLS Design without Migration",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "database_activation_allowed": false,
+    "migration_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
