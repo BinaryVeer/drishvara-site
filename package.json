@@ -111,7 +111,9 @@
     "validate:implementation": "npm run validate:i00",
     "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
-    "validate:content": "npm run validate:c10"
+    "validate:content": "npm run validate:c10 && npm run validate:c11",
+    "generate:c11": "node scripts/generate-c11-content-asset-inventory-preview.mjs",
+    "validate:c11": "node scripts/validate-c11-content-asset-inventory-preview.mjs"
   },
   "repository": {
     "type": "git",
