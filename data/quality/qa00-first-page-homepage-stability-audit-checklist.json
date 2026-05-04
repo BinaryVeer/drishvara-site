@@ -1,0 +1,303 @@
+{
+  "module_id": "QA00",
+  "module_title": "First Page / Homepage Stability Audit Checklist",
+  "phase": "QA-Quality Assurance",
+  "status": "homepage_stability_audit_checklist_only",
+  "depends_on": [
+    "ID02",
+    "ID01",
+    "ID00",
+    "IR00"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "homepage_mutation_enabled": false,
+  "asset_mutation_enabled": false,
+  "seo_metadata_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "language_runtime_mutation_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "gitignore_modification_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "backend_deployment_enabled": false,
+  "audit_areas": [
+    "static_scan",
+    "language_toggle",
+    "hero_visual",
+    "asset_loading",
+    "links_navigation",
+    "seo_metadata",
+    "responsive",
+    "console_runtime",
+    "live_deployment"
+  ],
+  "allowed_audit_statuses": [
+    "not_checked",
+    "pass",
+    "warning",
+    "fail",
+    "blocked",
+    "not_applicable"
+  ],
+  "homepage_files_in_scope": [
+    "index.html"
+  ],
+  "static_scan_allowed": true,
+  "static_scan_mutation_allowed": false,
+  "audit_items": [
+    {
+      "item_key": "homepage_file_present",
+      "area": "static_scan",
+      "check": "index.html exists at repository root.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "title_tag_present",
+      "area": "seo_metadata",
+      "check": "Homepage has a title tag.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "meta_description_present",
+      "area": "seo_metadata",
+      "check": "Homepage has meta description.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "viewport_meta_present",
+      "area": "seo_metadata",
+      "check": "Homepage has viewport meta tag.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "og_title_present",
+      "area": "seo_metadata",
+      "check": "Homepage has Open Graph title if intended.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "og_image_present",
+      "area": "seo_metadata",
+      "check": "Homepage has Open Graph image if intended.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "local_stylesheets_resolve",
+      "area": "asset_loading",
+      "check": "Local stylesheet references resolve.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "local_scripts_resolve",
+      "area": "asset_loading",
+      "check": "Local script references resolve.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "local_images_resolve",
+      "area": "asset_loading",
+      "check": "Local image references resolve.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "language_english_click_sticky",
+      "area": "language_toggle",
+      "check": "Clicking English keeps English, even repeatedly.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "language_hindi_click_sticky",
+      "area": "language_toggle",
+      "check": "Clicking Hindi keeps Hindi, even repeatedly.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "homepage_click_does_not_toggle_language",
+      "area": "language_toggle",
+      "check": "Normal homepage clicks do not change language.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "hindi_to_english_no_transliteration_fallback",
+      "area": "language_toggle",
+      "check": "Returning from Hindi to English does not show drstih vistirna style fallback.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "hero_logo_position",
+      "area": "hero_visual",
+      "check": "Logo position is visually balanced above/within orbit composition.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "hero_orbit_alignment",
+      "area": "hero_visual",
+      "check": "Orbit alignment is stable and not overlapping key text.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "hero_text_readability",
+      "area": "hero_visual",
+      "check": "Hero title, tagline, and meaning line are readable.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "desktop_layout_check",
+      "area": "responsive",
+      "check": "Homepage works on desktop width.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "tablet_layout_check",
+      "area": "responsive",
+      "check": "Homepage works on tablet width.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "mobile_layout_check",
+      "area": "responsive",
+      "check": "Homepage works on mobile width.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "small_mobile_layout_check",
+      "area": "responsive",
+      "check": "Homepage works on small mobile width.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "primary_navigation_links",
+      "area": "links_navigation",
+      "check": "Primary navigation links behave correctly.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "cta_links",
+      "area": "links_navigation",
+      "check": "CTA links point to intended sections/pages.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "browser_console_clean",
+      "area": "console_runtime",
+      "check": "Browser console has no critical JavaScript errors.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "live_homepage_loads",
+      "area": "live_deployment",
+      "check": "Live homepage loads after GitHub/Vercel deployment.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "live_language_toggle_works",
+      "area": "live_deployment",
+      "check": "Language toggle works on live page after deployment.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "live_assets_load",
+      "area": "live_deployment",
+      "check": "Live assets load without missing critical files.",
+      "status": "not_checked"
+    }
+  ],
+  "language_toggle_expected_behavior": [
+    "english_click_keeps_english",
+    "repeated_english_click_keeps_english",
+    "hindi_click_keeps_hindi",
+    "repeated_hindi_click_keeps_hindi",
+    "normal_homepage_click_does_not_change_language",
+    "hindi_to_english_does_not_show_transliteration_fallback"
+  ],
+  "hero_visual_expected_checks": [
+    "logo_position",
+    "orbit_alignment",
+    "text_readability",
+    "button_visibility",
+    "tagline_readability",
+    "mobile_hero_fit",
+    "desktop_hero_balance",
+    "no_duplicate_text",
+    "no_language_flicker"
+  ],
+  "responsive_widths_to_check": [
+    "desktop_1440",
+    "desktop_1280",
+    "tablet_768",
+    "mobile_390",
+    "small_mobile_360"
+  ],
+  "preview_output": "data/quality/qa00-homepage-stability-audit-preview.json",
+  "preview_required_fields": [
+    "preview_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "static_scan",
+    "audit_items",
+    "summary",
+    "blocked_capabilities",
+    "next_recommended_stage"
+  ],
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "backend_deployment"
+  ],
+  "recommended_next_stage": {
+    "module_id": "QA01",
+    "title": "Build, Asset, SEO, and Link Smoke Test Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false
+  },
+  "approved_qa_labels": [
+    "homepage_stability_audit",
+    "checklist_only",
+    "static_scan_preview",
+    "no_homepage_mutation",
+    "no_asset_mutation",
+    "no_backend_activation",
+    "safe_to_commit"
+  ]
+}

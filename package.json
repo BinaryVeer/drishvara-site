@@ -109,7 +109,7 @@
     "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs",
     "validate:i00": "node scripts/validate-i00-implementation-planning.mjs",
     "validate:implementation": "npm run validate:i00 && npm run validate:i01 && npm run validate:i02 && npm run validate:i03 && npm run validate:i04 && npm run validate:i05 && npm run validate:ir00 && npm run validate:id00 && npm run validate:id01 && npm run validate:id02",
-    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content",
+    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
     "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14 && npm run validate:c15 && npm run validate:c16",
     "generate:c11": "node scripts/generate-c11-content-asset-inventory-preview.mjs",
@@ -139,7 +139,10 @@
     "generate:id01": "node scripts/generate-id01-supabase-schema-rls-design-preview.mjs",
     "validate:id01": "node scripts/validate-id01-supabase-schema-rls-design.mjs",
     "generate:id02": "node scripts/generate-id02-api-route-contract-design-preview.mjs",
-    "validate:id02": "node scripts/validate-id02-api-route-contract-design.mjs"
+    "validate:id02": "node scripts/validate-id02-api-route-contract-design.mjs",
+    "generate:qa00": "node scripts/generate-qa00-homepage-stability-audit-preview.mjs",
+    "validate:qa00": "node scripts/validate-qa00-homepage-stability-audit.mjs",
+    "validate:qa": "npm run validate:qa00"
   },
   "repository": {
     "type": "git",
