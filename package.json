@@ -91,7 +91,7 @@
     "knowledge:governance-report:preflight": "node scripts/knowledge-governance-status-report-preflight.js",
     "validate:m00": "node scripts/validate-m00-source-doctrine.mjs",
     "validate:m01": "node scripts/validate-m01-panchang-methodology.mjs",
-    "validate:methodology": "npm run validate:m00 && npm run validate:m01 && npm run validate:m02 && npm run validate:m03 && npm run validate:m04 && npm run validate:m04a && npm run validate:m05 && npm run validate:m06 && npm run validate:m06a && npm run validate:m07 && npm run validate:m08",
+    "validate:methodology": "npm run validate:m00 && npm run validate:m01 && npm run validate:m02 && npm run validate:m03 && npm run validate:m04 && npm run validate:m04a && npm run validate:m05 && npm run validate:m06 && npm run validate:m06a && npm run validate:m07 && npm run validate:m08 && npm run validate:m09",
     "validate:m02": "node scripts/validate-m02-tithi-vrat-rules.mjs",
     "validate:m03": "node scripts/validate-m03-festival-registry.mjs",
     "validate:m04": "node scripts/validate-m04-location-timezone-sunrise.mjs",
@@ -100,7 +100,8 @@
     "validate:m06": "node scripts/validate-m06-lucky-number-colour-mantra.mjs",
     "validate:m06a": "node scripts/validate-m06a-symbolic-scoring.mjs",
     "validate:m07": "node scripts/validate-m07-subscriber-personalization.mjs",
-    "validate:m08": "node scripts/validate-m08-server-api-contract.mjs"
+    "validate:m08": "node scripts/validate-m08-server-api-contract.mjs",
+    "validate:m09": "node scripts/validate-m09-internal-calculation-preview.mjs"
   },
   "repository": {
     "type": "git",
