@@ -1,0 +1,570 @@
+{
+  "module_id": "M10",
+  "module_title": "Methodology Activation Readiness Report",
+  "phase": "M-Methodology",
+  "status": "activation_readiness_report_methodology_only",
+  "depends_on": [
+    "M00",
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M04A",
+    "M05",
+    "M06",
+    "M06A",
+    "M07",
+    "M08",
+    "M09"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_output_enabled": false,
+  "public_guidance_enabled": false,
+  "public_panchang_enabled": false,
+  "public_festival_dates_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "dashboard_card_runtime_enabled": false,
+  "internal_preview_runtime_enabled": false,
+  "premium_guidance_enabled": false,
+  "automatic_activation_enabled": false,
+  "automatic_database_mutation_enabled": false,
+  "doctrine_version": "0.1.0",
+  "scope": {
+    "included": [
+      "readiness_level_doctrine",
+      "activation_stage_doctrine",
+      "go_no_go_gate_doctrine",
+      "critical_blocker_doctrine",
+      "evidence_pack_doctrine",
+      "module_readiness_matrix_doctrine",
+      "reviewer_signoff_doctrine",
+      "validation_threshold_doctrine",
+      "internal_preview_readiness_doctrine",
+      "limited_pilot_readiness_doctrine",
+      "public_activation_readiness_doctrine",
+      "subscriber_guidance_readiness_doctrine",
+      "premium_guidance_readiness_doctrine",
+      "rollback_disable_doctrine",
+      "operational_readiness_doctrine",
+      "risk_register_doctrine",
+      "readiness_report_contract",
+      "m04a_learning_connection",
+      "m09_internal_preview_connection",
+      "safety_doctrine",
+      "methodology_closure_doctrine"
+    ],
+    "excluded": [
+      "live_calculation",
+      "public_output",
+      "subscriber_output",
+      "auth",
+      "supabase",
+      "payment",
+      "subscription_entitlement",
+      "external_api_fetch",
+      "api_routes",
+      "internal_preview_runtime",
+      "dashboard_cards",
+      "premium_guidance",
+      "lucky_number_output",
+      "lucky_colour_output",
+      "mantra_output",
+      "personalization_runtime",
+      "database_mutation",
+      "geocoding",
+      "background_jobs",
+      "public_launch_approval",
+      "paid_launch_approval"
+    ]
+  },
+  "readiness_levels": [
+    "methodology_complete",
+    "evidence_missing",
+    "source_review_pending",
+    "sanskrit_review_pending",
+    "calculation_review_pending",
+    "validation_pending",
+    "privacy_review_pending",
+    "safety_review_pending",
+    "internal_preview_candidate",
+    "limited_pilot_candidate",
+    "public_activation_candidate",
+    "activation_blocked",
+    "disabled"
+  ],
+  "activation_stages": [
+    "methodology_only",
+    "internal_data_review",
+    "internal_calculation_preview",
+    "internal_guidance_preview",
+    "limited_staff_pilot",
+    "limited_subscriber_pilot",
+    "public_generic_output",
+    "public_personalized_output",
+    "premium_output",
+    "disabled"
+  ],
+  "required_go_no_go_gates": [
+    "source_gate",
+    "sanskrit_gate",
+    "calculation_gate",
+    "location_timezone_gate",
+    "event_window_gate",
+    "observance_rule_gate",
+    "validation_learning_gate",
+    "privacy_gate",
+    "consent_gate",
+    "entitlement_gate",
+    "safety_gate",
+    "api_contract_gate",
+    "internal_preview_gate",
+    "audit_trace_gate",
+    "operational_gate"
+  ],
+  "critical_blockers": [
+    "invented_mantra_risk",
+    "unsupported_sanskrit_claim",
+    "unreviewed_source",
+    "calculation_basis_unknown",
+    "ayanamsha_basis_unknown",
+    "ephemeris_basis_unknown",
+    "sunrise_basis_unresolved",
+    "location_timezone_ambiguity",
+    "skipped_repeated_tithi_unresolved",
+    "festival_source_conflict_unresolved",
+    "regional_sampradaya_conflict_hidden",
+    "consent_missing",
+    "privacy_redaction_missing",
+    "safety_gate_failed",
+    "deterministic_or_fear_based_wording",
+    "public_output_allowed_without_review",
+    "subscriber_output_allowed_without_entitlement_and_consent",
+    "external_api_or_payment_activated_before_review"
+  ],
+  "evidence_pack_required_sections": [
+    "module_ids_included",
+    "source_references",
+    "sanskrit_review_notes",
+    "calculation_basis",
+    "location_time_basis",
+    "rule_family_basis",
+    "validation_records",
+    "discrepancy_records",
+    "learning_register_references",
+    "privacy_review",
+    "safety_review",
+    "api_contract_review",
+    "audit_trace_sample",
+    "reviewer_signoffs",
+    "unresolved_risks",
+    "go_no_go_recommendation"
+  ],
+  "module_readiness_matrix": [
+    {
+      "module_id": "M00",
+      "module_title": "Source Doctrine & Sanskrit Integrity Framework",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M01",
+      "module_title": "Panchang Calculation Methodology Specification",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M02",
+      "module_title": "Tithi / Vrat / Fasting-Day Rule Engine",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M03",
+      "module_title": "Festival Rule Registry",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M04",
+      "module_title": "Location / Timezone / Sunrise Basis",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M04A",
+      "module_title": "Periodic Validation, Calibration & Learning Register",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M05",
+      "module_title": "Name / DOB / Location Methodology",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M06",
+      "module_title": "Lucky Number / Colour / Mantra Selection Methodology",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M06A",
+      "module_title": "Symbolic Scoring Formula & Mapping Doctrine",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M07",
+      "module_title": "Subscriber Personalization Scoring Logic",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M08",
+      "module_title": "Server-side API Contract",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    },
+    {
+      "module_id": "M09",
+      "module_title": "Internal Calculation Preview",
+      "methodology_status": "methodology_complete_pending_readiness_review",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled",
+      "required_next_review": [
+        "source_review",
+        "privacy_review",
+        "safety_review",
+        "activation_readiness_review"
+      ],
+      "primary_blockers": [
+        "runtime_not_implemented",
+        "activation_not_approved",
+        "evidence_pack_required"
+      ],
+      "allowed_next_stage": "internal_review_candidate_only",
+      "activation_allowed": false
+    }
+  ],
+  "reviewer_signoff_roles": [
+    "methodology_owner",
+    "source_reviewer",
+    "sanskrit_reviewer",
+    "calculation_reviewer",
+    "observance_rule_reviewer",
+    "privacy_reviewer",
+    "safety_reviewer",
+    "api_contract_reviewer",
+    "operational_reviewer",
+    "final_approver"
+  ],
+  "validation_threshold_areas": [
+    "panchang_calculation_sample_coverage",
+    "tithi_boundary_cases_reviewed",
+    "skipped_repeated_tithi_cases_reviewed",
+    "sunrise_sunset_moonrise_comparisons_reviewed",
+    "pradosh_parana_cases_reviewed",
+    "named_observance_registry_sample_reviewed",
+    "mantra_source_records_reviewed",
+    "privacy_redaction_tests_passed",
+    "api_contract_tests_passed",
+    "safety_wording_tests_passed"
+  ],
+  "internal_preview_readiness_requirements": [
+    "relevant_source_gates_pass",
+    "required_calculations_traceable",
+    "conflict_flags_preserved",
+    "privacy_redaction_defined",
+    "audit_trace_available",
+    "reviewer_role_defined",
+    "public_output_false",
+    "m04a_learning_path_available"
+  ],
+  "limited_pilot_readiness_requirements": [
+    "consent_flow_defined",
+    "entitlement_flow_defined_if_applicable",
+    "privacy_retention_defined",
+    "error_messages_reviewed",
+    "support_correction_process_defined",
+    "rollback_plan_defined",
+    "learning_register_active",
+    "safety_escalation_path_defined",
+    "public_claims_reviewed"
+  ],
+  "public_activation_blockers": [
+    "source_status_pending",
+    "sanskrit_status_pending_for_mantra",
+    "calculation_basis_pending",
+    "privacy_redaction_incomplete",
+    "safety_wording_unreviewed",
+    "public_output_allowed_false",
+    "conflicts_unresolved",
+    "validation_evidence_insufficient"
+  ],
+  "subscriber_guidance_readiness_requirements": [
+    "consent_gate",
+    "privacy_gate",
+    "entitlement_gate_if_premium",
+    "personalization_safety_gate",
+    "profile_uncertainty_handling",
+    "fallback_path",
+    "audit_trace",
+    "redaction_path",
+    "learning_register_path"
+  ],
+  "premium_guidance_readiness_requirements": [
+    "entitlement_definition",
+    "subscription_status_handling",
+    "billing_separation",
+    "premium_lock_transparency",
+    "no_hidden_source_degradation",
+    "no_fear_based_upsell",
+    "no_safety_bypass",
+    "no_private_data_exposure"
+  ],
+  "rollback_requirements": [
+    "feature_disable_flag",
+    "module_disable_flag",
+    "public_output_disable_flag",
+    "subscriber_output_disable_flag",
+    "emergency_safety_block",
+    "audit_log_preservation",
+    "reviewer_note",
+    "user_safe_message"
+  ],
+  "operational_responsibility_areas": [
+    "source_maintenance",
+    "sanskrit_review_maintenance",
+    "calculation_validation",
+    "database_tuning",
+    "privacy_requests",
+    "support_tickets",
+    "incident_review",
+    "release_review",
+    "reviewer_assignment",
+    "learning_register_maintenance"
+  ],
+  "risk_register_areas": [
+    "source_risk",
+    "sanskrit_risk",
+    "calculation_risk",
+    "location_timezone_risk",
+    "observance_rule_risk",
+    "privacy_risk",
+    "consent_risk",
+    "entitlement_risk",
+    "safety_risk",
+    "api_risk",
+    "operational_risk",
+    "reputation_risk"
+  ],
+  "readiness_report_contract_required_sections": [
+    "report_id",
+    "report_date",
+    "module_scope",
+    "readiness_matrix",
+    "gate_results",
+    "blocker_summary",
+    "risk_register",
+    "evidence_pack_refs",
+    "validation_summary",
+    "privacy_summary",
+    "safety_summary",
+    "reviewer_signoffs",
+    "go_no_go_recommendation",
+    "allowed_next_stage",
+    "activation_allowed"
+  ],
+  "prohibited_readiness_claims": [
+    "fully_guaranteed_correctness",
+    "universally_final_festival_dates",
+    "guaranteed_divine_result",
+    "subscriber_destiny_prediction",
+    "medical_legal_financial_replacement",
+    "public_launch_claim_without_gate_evidence"
+  ],
+  "approved_readiness_labels": [
+    "methodology_complete",
+    "document_complete",
+    "internal_review_candidate",
+    "validation_pending",
+    "activation_blocked",
+    "human_review_required",
+    "public_output_not_allowed",
+    "runtime_not_enabled"
+  ],
+  "review_gates": [
+    "readiness_report_review",
+    "module_matrix_review",
+    "evidence_pack_review",
+    "go_no_go_review",
+    "critical_blocker_review",
+    "reviewer_signoff_review",
+    "validation_threshold_review",
+    "privacy_review",
+    "safety_review",
+    "operational_review",
+    "m04a_learning_register_review",
+    "m09_preview_evidence_review"
+  ]
+}
