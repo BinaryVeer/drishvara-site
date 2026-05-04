@@ -1,0 +1,459 @@
+{
+  "preview_id": "I02_FEATURE_FLAG_ENVIRONMENT_BOUNDARY_PREVIEW",
+  "module_id": "I02",
+  "status": "preview_only_no_runtime_flags_or_env_files",
+  "preview_only": true,
+  "feature_flags": [
+    {
+      "flag_key": "public_content_dynamic_enabled",
+      "family": "public_content",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "public_output_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "content_registry_write_enabled",
+      "family": "content_registry",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "registry_write_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "review_queue_write_enabled",
+      "family": "review_queue",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "review_queue_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "admin_review_enabled",
+      "family": "admin_review",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "admin_auth_rls_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "admin_ui_enabled",
+      "family": "admin_review",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "admin_ui_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "public_panchang_enabled",
+      "family": "panchang_calculation",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "panchang_public_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "public_festival_enabled",
+      "family": "festival_vrat_calculation",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "festival_public_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "subscriber_guidance_enabled",
+      "family": "subscriber_guidance",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "subscriber_consent_entitlement_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "personalization_enabled",
+      "family": "personalization",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "privacy_consent_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "auth_enabled",
+      "family": "auth",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "auth_security_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "supabase_enabled",
+      "family": "supabase",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "supabase_rls_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "payment_enabled",
+      "family": "payment",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "payment_security_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "api_routes_enabled",
+      "family": "api_routes",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "api_security_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "internal_preview_enabled",
+      "family": "internal_preview",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "internal_preview_access_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "ml_ingestion_enabled",
+      "family": "ml_embeddings",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "ml_eligibility_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "embedding_generation_enabled",
+      "family": "ml_embeddings",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "embedding_eligibility_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "external_api_fetch_enabled",
+      "family": "external_api_fetch",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "external_api_source_cost_privacy_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    },
+    {
+      "flag_key": "analytics_enabled",
+      "family": "analytics",
+      "default_value": false,
+      "current_i02_value": false,
+      "allowed_values": [
+        false,
+        true
+      ],
+      "runtime_exposure": "blocked_in_i02",
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "approval_gate": "analytics_privacy_gate",
+      "rollback_behavior": "force_false",
+      "audit_note": "Planning-only flag; no runtime evaluator exists in I02."
+    }
+  ],
+  "environment_variable_categories": [
+    "public_build_variable",
+    "server_only_variable",
+    "secret",
+    "service_role_secret",
+    "payment_secret",
+    "api_provider_secret",
+    "analytics_key",
+    "feature_flag_override",
+    "non_secret_configuration"
+  ],
+  "environment_boundary_rules": [
+    "no_env_files_created_in_i02",
+    "no_secrets_created_in_i02",
+    "no_secrets_read_in_i02",
+    "server_only_values_must_not_be_bundled_to_client",
+    "service_role_keys_must_remain_server_only",
+    "payment_secrets_must_remain_server_only",
+    "private_api_keys_must_remain_server_only",
+    "public_variables_must_not_contain_secrets",
+    "future_env_usage_requires_documented_category",
+    "future_env_usage_requires_validation"
+  ],
+  "protected_environment_file_names": [
+    ".env",
+    ".env.local",
+    ".env.production",
+    ".env.development",
+    "service-account.json",
+    "service_role_key.json"
+  ],
+  "future_keys_not_created": {
+    "supabase": [
+      "SUPABASE_URL",
+      "SUPABASE_ANON_KEY",
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "SUPABASE_DATABASE_URL",
+      "SUPABASE_STORAGE_BUCKET"
+    ],
+    "auth": [
+      "AUTH_PROVIDER",
+      "AUTH_SECRET",
+      "AUTH_REDIRECT_URL",
+      "AUTH_CALLBACK_URL",
+      "SESSION_SECRET"
+    ],
+    "payment": [
+      "PAYMENT_PROVIDER",
+      "PAYMENT_PUBLIC_KEY",
+      "PAYMENT_SECRET_KEY",
+      "PAYMENT_WEBHOOK_SECRET",
+      "PAYMENT_PLAN_IDS"
+    ],
+    "api": [
+      "EXTERNAL_API_PROVIDER",
+      "EXTERNAL_API_KEY",
+      "EXTERNAL_API_RATE_LIMIT",
+      "EXTERNAL_API_CACHE_TTL"
+    ]
+  },
+  "future_flag_evaluation_inputs": [
+    "default_value",
+    "environment_value",
+    "safe_mode",
+    "deployment_mode",
+    "user_role_if_applicable",
+    "entitlement_if_applicable",
+    "emergency_disable_state"
+  ],
+  "future_safe_mode_forces_off": [
+    "public_panchang_enabled",
+    "public_festival_enabled",
+    "subscriber_guidance_enabled",
+    "personalization_enabled",
+    "admin_review_enabled",
+    "review_queue_write_enabled",
+    "supabase_enabled",
+    "payment_enabled",
+    "external_api_fetch_enabled",
+    "ml_ingestion_enabled",
+    "embedding_generation_enabled",
+    "public_content_dynamic_enabled"
+  ],
+  "summary": {
+    "feature_flag_count": 18,
+    "family_counts": {
+      "public_content": 1,
+      "content_registry": 1,
+      "review_queue": 1,
+      "admin_review": 2,
+      "panchang_calculation": 1,
+      "festival_vrat_calculation": 1,
+      "subscriber_guidance": 1,
+      "personalization": 1,
+      "auth": 1,
+      "supabase": 1,
+      "payment": 1,
+      "api_routes": 1,
+      "internal_preview": 1,
+      "ml_embeddings": 2,
+      "external_api_fetch": 1,
+      "analytics": 1
+    },
+    "flags_true_count": 0,
+    "flags_false_count": 18,
+    "env_files_created_count": 0,
+    "secrets_created_count": 0,
+    "secrets_read_count": 0,
+    "runtime_evaluator_created": false,
+    "public_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "payment_enabled": false,
+    "ml_enabled": false,
+    "embedding_enabled": false,
+    "external_api_fetch_enabled": false
+  },
+  "blocked_capabilities": [
+    "runtime_feature_toggles",
+    "feature_flag_evaluator",
+    "runtime_override",
+    "env_file_creation",
+    "secret_creation",
+    "secret_reading",
+    "api_route",
+    "server_endpoint",
+    "supabase",
+    "auth",
+    "payment",
+    "rls",
+    "admin_ui",
+    "admin_route",
+    "live_review_queue",
+    "approval_workflow",
+    "content_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "seo_metadata_mutation",
+    "final_registry_write",
+    "database_migration",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "public_output",
+    "subscriber_output",
+    "gitignore_modification"
+  ],
+  "next_recommended_stage": {
+    "module_id": "I03",
+    "title": "Data Model Planning without Database Activation",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "database_activation_allowed": false
+  }
+}
