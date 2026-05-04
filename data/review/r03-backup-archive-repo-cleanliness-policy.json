@@ -1,0 +1,166 @@
+{
+  "module_id": "R03",
+  "module_title": "Backup / Archive / Repo Cleanliness Policy",
+  "phase": "R-Review",
+  "status": "repo_cleanliness_policy_only",
+  "depends_on": [
+    "M00",
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M04A",
+    "M05",
+    "M06",
+    "M06A",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "R00",
+    "R01",
+    "R02"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_output_enabled": false,
+  "public_guidance_enabled": false,
+  "public_panchang_enabled": false,
+  "public_festival_dates_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "dashboard_card_runtime_enabled": false,
+  "internal_preview_runtime_enabled": false,
+  "automatic_activation_enabled": false,
+  "automatic_database_mutation_enabled": false,
+  "cleanup_execution_enabled": false,
+  "file_deletion_enabled": false,
+  "file_movement_enabled": false,
+  "gitignore_modification_enabled": false,
+  "artifact_classes": [
+    "html_backup_file",
+    "js_backup_file",
+    "index_backup_file",
+    "image_generation_artifact",
+    "archive_folder",
+    "hero_asset_folder",
+    "temporary_patch_file",
+    "generated_review_artifact",
+    "methodology_artifact",
+    "production_runtime_file",
+    "unknown_untracked_file"
+  ],
+  "backup_patterns_recorded": [
+    "index.backup-*.html",
+    "index.html.backup-*",
+    "*.backup-*",
+    "assets/js/*.backup-*",
+    "data/ChatGPT Image*.png"
+  ],
+  "folder_patterns_recorded": [
+    "archive/",
+    "assets/hero/"
+  ],
+  "possible_future_gitignore_patterns_not_applied": [
+    "index.backup-*.html",
+    "index.html.backup-*",
+    "*.backup-*",
+    "assets/js/*.backup-*",
+    "data/ChatGPT Image*.png",
+    "archive/"
+  ],
+  "protected_production_files": [
+    "index.html",
+    "active_css_files",
+    "active_javascript_files",
+    "active_assets_used_by_live_site",
+    "package.json",
+    "package-lock.json_if_present",
+    "methodology_review_documents_and_registries",
+    "validation_scripts"
+  ],
+  "protected_methodology_paths": [
+    "docs/methodology/",
+    "data/methodology/",
+    "docs/review/",
+    "data/review/",
+    "scripts/validate-*.mjs",
+    "package.json"
+  ],
+  "cleanup_decision_statuses": [
+    "unreviewed",
+    "retain",
+    "archive_inside_repo",
+    "archive_outside_repo",
+    "add_to_gitignore",
+    "delete_after_approval",
+    "convert_to_reference_asset",
+    "production_file_do_not_touch",
+    "methodology_artifact_do_not_touch",
+    "needs_human_review"
+  ],
+  "cleanup_register_required_fields": [
+    "item_id",
+    "path",
+    "artifact_class",
+    "current_git_status",
+    "size_if_known",
+    "last_modified_if_known",
+    "suspected_origin",
+    "risk_level",
+    "proposed_action",
+    "approval_required",
+    "reviewer_note",
+    "final_status"
+  ],
+  "risk_levels": [
+    "low",
+    "medium",
+    "high",
+    "critical",
+    "unknown"
+  ],
+  "r03_policy_decisions": [
+    "do_not_delete_files_in_r03",
+    "do_not_move_files_in_r03",
+    "do_not_modify_gitignore_in_r03",
+    "do_not_commit_backup_files_in_r03",
+    "record_policy_only",
+    "allow_i00_to_proceed_with_clean_boundary",
+    "create_c00_only_if_cleanup_execution_is_required"
+  ],
+  "i00_boundary_notes": [
+    "do_not_touch_existing_backup_files",
+    "do_not_rely_on_backup_files_as_production_source",
+    "do_not_commit_new_backup_files",
+    "use_controlled_cleanup_later_if_needed"
+  ],
+  "future_optional_cleanup_step": {
+    "module_id": "C00",
+    "title": "Repository Cleanup Execution Plan",
+    "required_only_if": "actual movement, ignore rules, or deletion is required",
+    "deletion_requires_explicit_approval": true
+  },
+  "approved_review_labels": [
+    "repo_cleanliness_policy",
+    "backup_policy_recorded",
+    "archive_policy_recorded",
+    "cleanup_not_executed",
+    "runtime_not_enabled",
+    "public_output_not_enabled",
+    "safe_to_commit"
+  ],
+  "review_gates": [
+    "backup_policy_review",
+    "archive_policy_review",
+    "asset_policy_review",
+    "gitignore_policy_review",
+    "production_file_protection_review",
+    "methodology_artifact_protection_review",
+    "cleanup_execution_block_review",
+    "safety_posture_review"
+  ]
+}
