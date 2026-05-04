@@ -109,7 +109,7 @@
     "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs",
     "validate:i00": "node scripts/validate-i00-implementation-planning.mjs",
     "validate:implementation": "npm run validate:i00 && npm run validate:i01 && npm run validate:i02 && npm run validate:i03 && npm run validate:i04 && npm run validate:i05 && npm run validate:ir00 && npm run validate:id00 && npm run validate:id01 && npm run validate:id02",
-    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa && npm run validate:live",
+    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa && npm run validate:live && npm run validate:findings",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
     "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14 && npm run validate:c15 && npm run validate:c16",
     "generate:c11": "node scripts/generate-c11-content-asset-inventory-preview.mjs",
@@ -147,7 +147,10 @@
     "validate:qa01": "node scripts/validate-qa01-build-asset-seo-link-smoke.mjs",
     "generate:lr00": "node scripts/generate-lr00-live-readiness-review-preview.mjs",
     "validate:lr00": "node scripts/validate-lr00-live-readiness-review.mjs",
-    "validate:live": "npm run validate:lr00"
+    "validate:live": "npm run validate:lr00",
+    "generate:lf00": "node scripts/generate-lf00-homepage-asset-link-findings-preview.mjs",
+    "validate:lf00": "node scripts/validate-lf00-homepage-asset-link-findings.mjs",
+    "validate:findings": "npm run validate:lf00"
   },
   "repository": {
     "type": "git",
