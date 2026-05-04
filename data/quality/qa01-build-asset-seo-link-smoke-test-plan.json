@@ -1,0 +1,327 @@
+{
+  "module_id": "QA01",
+  "module_title": "Build, Asset, SEO, and Link Smoke Test Plan",
+  "phase": "QA-Quality Assurance",
+  "status": "build_asset_seo_link_smoke_test_plan_only",
+  "depends_on": [
+    "QA00",
+    "ID02",
+    "IR00"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "homepage_mutation_enabled": false,
+  "asset_mutation_enabled": false,
+  "seo_metadata_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "language_runtime_mutation_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "gitignore_modification_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "smoke_areas": [
+    "build",
+    "asset",
+    "seo",
+    "link",
+    "language",
+    "console",
+    "deployment"
+  ],
+  "allowed_smoke_statuses": [
+    "pass",
+    "warning",
+    "fail",
+    "blocked",
+    "not_checked",
+    "not_applicable"
+  ],
+  "static_scan_allowed": true,
+  "static_scan_mutation_allowed": false,
+  "smoke_items": [
+    {
+      "item_key": "package_json_present",
+      "area": "build",
+      "check": "package.json exists.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "validate_project_script_present",
+      "area": "build",
+      "check": "validate:project script exists.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "validate_qa_script_present",
+      "area": "build",
+      "check": "validate:qa script exists.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "build_script_reviewed",
+      "area": "build",
+      "check": "Build script is present or static-site no-build posture is documented.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "no_env_required_for_homepage_static",
+      "area": "build",
+      "check": "Homepage static smoke test does not require secrets or .env files.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "index_html_present",
+      "area": "asset",
+      "check": "index.html exists.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "stylesheet_refs_resolve",
+      "area": "asset",
+      "check": "Local stylesheet references resolve.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "script_refs_resolve",
+      "area": "asset",
+      "check": "Local JavaScript references resolve.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "image_refs_reviewed",
+      "area": "asset",
+      "check": "Local image references are reviewed.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "critical_asset_missing_reviewed",
+      "area": "asset",
+      "check": "Missing critical assets are reviewed.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "backup_refs_not_used_as_live_assets",
+      "area": "asset",
+      "check": "Homepage does not reference backup files as live assets.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "title_present",
+      "area": "seo",
+      "check": "Title tag is present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "meta_description_present",
+      "area": "seo",
+      "check": "Meta description is present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "viewport_present",
+      "area": "seo",
+      "check": "Viewport meta tag is present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "og_title_present",
+      "area": "seo",
+      "check": "Open Graph title is present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "og_description_present",
+      "area": "seo",
+      "check": "Open Graph description is present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "og_image_present",
+      "area": "seo",
+      "check": "Open Graph image is present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "favicon_reviewed",
+      "area": "seo",
+      "check": "Favicon reference is reviewed.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "anchor_links_reviewed",
+      "area": "link",
+      "check": "Anchor links are reviewed.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "local_page_links_reviewed",
+      "area": "link",
+      "check": "Local page links are reviewed.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "external_links_reviewed",
+      "area": "link",
+      "check": "External links are reviewed if present.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "cta_links_reviewed",
+      "area": "link",
+      "check": "CTA links are reviewed.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "language_scripts_resolve",
+      "area": "language",
+      "check": "Language-related script references resolve.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "language_sticky_behavior_manual_check",
+      "area": "language",
+      "check": "Manual language sticky behavior check remains pending.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "no_transliteration_fallback_manual_check",
+      "area": "language",
+      "check": "Manual check confirms no drstih vistirna fallback.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "browser_console_manual_check",
+      "area": "console",
+      "check": "Manual browser console check remains pending.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "live_homepage_manual_check",
+      "area": "deployment",
+      "check": "Manual live homepage check remains pending.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "live_mobile_manual_check",
+      "area": "deployment",
+      "check": "Manual live mobile check remains pending.",
+      "status": "not_checked"
+    }
+  ],
+  "build_smoke_requirements": [
+    "package_json_present",
+    "validate_project_script_present",
+    "validate_qa_script_present",
+    "build_script_reviewed",
+    "no_env_required_for_homepage_static"
+  ],
+  "asset_smoke_requirements": [
+    "stylesheet_refs_resolve",
+    "script_refs_resolve",
+    "image_refs_reviewed",
+    "critical_asset_missing_reviewed",
+    "backup_refs_not_used_as_live_assets"
+  ],
+  "seo_smoke_requirements": [
+    "title_present",
+    "meta_description_present",
+    "viewport_present",
+    "og_title_present",
+    "og_description_present",
+    "og_image_present",
+    "favicon_reviewed"
+  ],
+  "link_smoke_requirements": [
+    "anchor_links_reviewed",
+    "local_page_links_reviewed",
+    "external_links_reviewed",
+    "cta_links_reviewed"
+  ],
+  "language_smoke_requirements": [
+    "language_scripts_resolve",
+    "language_sticky_behavior_manual_check",
+    "no_transliteration_fallback_manual_check"
+  ],
+  "missing_asset_treatment": {
+    "record_as_finding": true,
+    "auto_fix_allowed": false,
+    "auto_delete_allowed": false,
+    "blocker_if_critical": true,
+    "requires_separate_fix_patch": true
+  },
+  "preview_output": "data/quality/qa01-build-asset-seo-link-smoke-preview.json",
+  "preview_required_fields": [
+    "preview_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "static_smoke_scan",
+    "smoke_items",
+    "summary",
+    "blocked_capabilities",
+    "next_recommended_stage"
+  ],
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment"
+  ],
+  "recommended_next_stage": {
+    "module_id": "LR00",
+    "title": "Live Readiness Review before any actual runtime/backend activation",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  },
+  "approved_qa_labels": [
+    "build_asset_seo_link_smoke_test",
+    "plan_only",
+    "static_smoke_preview",
+    "no_homepage_mutation",
+    "no_asset_mutation",
+    "no_deployment",
+    "safe_to_commit"
+  ]
+}

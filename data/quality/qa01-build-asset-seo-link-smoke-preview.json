@@ -1,0 +1,590 @@
+{
+  "preview_id": "QA01_BUILD_ASSET_SEO_LINK_SMOKE_PREVIEW",
+  "module_id": "QA01",
+  "status": "preview_only_build_asset_seo_link_smoke_no_mutation",
+  "preview_only": true,
+  "static_smoke_scan": {
+    "package_json_present": true,
+    "package_scripts_present": [
+      "activation:auth-client:preflight",
+      "activation:auth-enable-checklist:preflight",
+      "activation:auth-env:preflight",
+      "activation:auth-manual-enable:preflight",
+      "activation:auth:preflight",
+      "activation:session-guard:preflight",
+      "activation:supabase:apply-decision:preflight",
+      "activation:supabase:preflight",
+      "activation:supabase:validation:preflight",
+      "admin-review:preflight",
+      "auth-access:preflight",
+      "bilingual:preflight",
+      "build:article-index",
+      "check:homepage",
+      "content:article-quality-report:build",
+      "content:article-quality-report:preflight",
+      "content:article-quality:preflight",
+      "content:editorial-selection:preflight",
+      "content:featured-override-memory:preflight",
+      "content:featured-scoring-rotation:preflight",
+      "content:governance-status:preflight",
+      "content:image-governance:preflight",
+      "content:preflight",
+      "content:public-read-integrity:preflight",
+      "content:url-sitemap-governance:preflight",
+      "daily-basis:preflight",
+      "daily-context:build",
+      "daily-context:preflight",
+      "dashboard:preflight",
+      "drafts:review",
+      "drafts:review:latest",
+      "generate:c11",
+      "generate:c12",
+      "generate:c14",
+      "generate:c15",
+      "generate:i01",
+      "generate:i02",
+      "generate:i03",
+      "generate:i04",
+      "generate:i05",
+      "generate:id00",
+      "generate:id01",
+      "generate:id02",
+      "generate:ir00",
+      "generate:qa00",
+      "generate:qa01",
+      "hindi-body:preflight",
+      "hindi-draft:create",
+      "hindi-draft:publish-approved",
+      "hindi-draft:publish-approved:dry-run",
+      "hindi-draft:review",
+      "i18n:content-expansion:preflight",
+      "i18n:hindi-body-sidecar:preflight",
+      "i18n:static-copy-apply:preflight",
+      "knowledge:daily-guidance-rules:preflight",
+      "knowledge:daily-guidance-selection:build",
+      "knowledge:daily-guidance-selection:preflight",
+      "knowledge:daily-guidance:preflight",
+      "knowledge:governance-report:build",
+      "knowledge:governance-report:preflight",
+      "knowledge:mantra-review:build",
+      "knowledge:mantra-review:preflight",
+      "knowledge:panchang-festival:build",
+      "knowledge:panchang-festival:preflight",
+      "knowledge:preflight",
+      "knowledge:subscriber-dashboard:build",
+      "knowledge:subscriber-dashboard:preflight",
+      "knowledge:subscriber-gate:build",
+      "knowledge:subscriber-gate:preflight",
+      "knowledge:subscriber-personalization:build",
+      "knowledge:subscriber-personalization:preflight",
+      "knowledge:word-of-day:preflight",
+      "panchang:engine",
+      "panchang:preflight",
+      "payment:preflight",
+      "pipeline:live-preflight",
+      "pipeline:live-preflight:approved",
+      "pipeline:preflight",
+      "placeholder:audit",
+      "preactivation:preflight",
+      "public-preview:preflight",
+      "public-visual:preflight",
+      "publish:local-check",
+      "refresh:homepage",
+      "security:rls-lockdown:preflight",
+      "seo:build",
+      "seo:preflight",
+      "sports-context:build",
+      "sports-context:preflight",
+      "submission-intake:preflight",
+      "submission:preflight",
+      "subscriber-guidance:engine",
+      "subscriber-guidance:preflight",
+      "supabase:schema:preflight",
+      "test",
+      "timezone:preflight",
+      "ui:language-runtime-neutralization:preflight",
+      "ui:language-runtime:preflight",
+      "ui:language-toggle-click:preflight",
+      "validate:c10",
+      "validate:c11",
+      "validate:c12",
+      "validate:c13",
+      "validate:c14",
+      "validate:c15",
+      "validate:c16",
+      "validate:content",
+      "validate:i00",
+      "validate:i01",
+      "validate:i02",
+      "validate:i03",
+      "validate:i04",
+      "validate:i05",
+      "validate:id00",
+      "validate:id01",
+      "validate:id02",
+      "validate:implementation",
+      "validate:ir00",
+      "validate:m00",
+      "validate:m01",
+      "validate:m02",
+      "validate:m03",
+      "validate:m04",
+      "validate:m04a",
+      "validate:m05",
+      "validate:m06",
+      "validate:m06a",
+      "validate:m07",
+      "validate:m08",
+      "validate:m09",
+      "validate:m10",
+      "validate:methodology",
+      "validate:project",
+      "validate:qa",
+      "validate:qa00",
+      "validate:qa01",
+      "validate:r00",
+      "validate:r01",
+      "validate:r02",
+      "validate:r03"
+    ],
+    "build_script_present": false,
+    "validate_project_script_present": true,
+    "validate_qa_script_present": true,
+    "index_exists": true,
+    "title_present": true,
+    "meta_description_present": true,
+    "viewport_present": true,
+    "og_title_present": true,
+    "og_description_present": true,
+    "og_image_present": true,
+    "favicon_refs": [],
+    "stylesheet_refs": [
+      {
+        "ref": "/assets/css/public-preview-polish.css",
+        "status": "present"
+      }
+    ],
+    "script_refs": [
+      {
+        "ref": "/assets/js/timezone-context.js",
+        "status": "present"
+      },
+      {
+        "ref": "/assets/js/daily-basis-guard.js",
+        "status": "present"
+      },
+      {
+        "ref": "/assets/js/sports-context.js",
+        "status": "present"
+      },
+      {
+        "ref": "/assets/js/seo-runtime.js",
+        "status": "present"
+      },
+      {
+        "ref": "/assets/js/site-language.js?v=langselect-20260504b",
+        "status": "present"
+      },
+      {
+        "ref": "assets/js/drishvara-language-runtime.js?v=langselect-20260504b",
+        "status": "present"
+      }
+    ],
+    "image_refs": [
+      {
+        "ref": "assets/logo/logo.png",
+        "status": "present"
+      },
+      {
+        "ref": "assets/logo/logo.png",
+        "status": "present"
+      },
+      {
+        "ref": "${escapeAttribute(fallback)}",
+        "status": "missing"
+      },
+      {
+        "ref": "${escapeAttribute(src)}",
+        "status": "missing"
+      },
+      {
+        "ref": "${escapeAttr(item.image)}",
+        "status": "missing"
+      },
+      {
+        "ref": "imagePath",
+        "status": "missing"
+      },
+      {
+        "ref": "imagePath",
+        "status": "missing"
+      },
+      {
+        "ref": "fallbackPath",
+        "status": "missing"
+      },
+      {
+        "ref": "item",
+        "status": "missing"
+      },
+      {
+        "ref": "item",
+        "status": "missing"
+      },
+      {
+        "ref": "item",
+        "status": "missing"
+      }
+    ],
+    "local_page_links": [
+      {
+        "ref": "index.html",
+        "status": "present"
+      },
+      {
+        "ref": "about.html",
+        "status": "present"
+      },
+      {
+        "ref": "insights.html",
+        "status": "present"
+      },
+      {
+        "ref": "submissions.html",
+        "status": "present"
+      },
+      {
+        "ref": "dashboard.html",
+        "status": "present"
+      },
+      {
+        "ref": "contact.html",
+        "status": "present"
+      },
+      {
+        "ref": "insights.html",
+        "status": "present"
+      },
+      {
+        "ref": "article.html",
+        "status": "present"
+      },
+      {
+        "ref": "${escapeAttribute(link.href)}",
+        "status": "missing"
+      },
+      {
+        "ref": "${escapeHtml(href)}",
+        "status": "missing"
+      },
+      {
+        "ref": "${escapeHtml(articleUrl(item))}",
+        "status": "missing"
+      },
+      {
+        "ref": "${escapeHtml(articleUrl(item))}",
+        "status": "missing"
+      }
+    ],
+    "anchor_links": [],
+    "external_links": [],
+    "backup_refs": [],
+    "missing_local_asset_count": 9,
+    "missing_stylesheet_refs": [],
+    "missing_script_refs": [],
+    "missing_image_refs": [
+      "${escapeAttribute(fallback)}",
+      "${escapeAttribute(src)}",
+      "${escapeAttr(item.image)}",
+      "imagePath",
+      "imagePath",
+      "fallbackPath",
+      "item",
+      "item",
+      "item"
+    ],
+    "missing_local_link_count": 4,
+    "missing_local_links": [
+      "${escapeAttribute(link.href)}",
+      "${escapeHtml(href)}",
+      "${escapeHtml(articleUrl(item))}",
+      "${escapeHtml(articleUrl(item))}"
+    ],
+    "qa00_missing_local_asset_count": 9
+  },
+  "smoke_items": [
+    {
+      "item_key": "package_json_present",
+      "area": "build",
+      "check": "package.json exists.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "validate_project_script_present",
+      "area": "build",
+      "check": "validate:project script exists.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "validate_qa_script_present",
+      "area": "build",
+      "check": "validate:qa script exists.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "build_script_reviewed",
+      "area": "build",
+      "check": "Build script is present or static-site no-build posture is documented.",
+      "status": "warning",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "no_env_required_for_homepage_static",
+      "area": "build",
+      "check": "Homepage static smoke test does not require secrets or .env files.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "index_html_present",
+      "area": "asset",
+      "check": "index.html exists.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "stylesheet_refs_resolve",
+      "area": "asset",
+      "check": "Local stylesheet references resolve.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "script_refs_resolve",
+      "area": "asset",
+      "check": "Local JavaScript references resolve.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "image_refs_reviewed",
+      "area": "asset",
+      "check": "Local image references are reviewed.",
+      "status": "warning",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "critical_asset_missing_reviewed",
+      "area": "asset",
+      "check": "Missing critical assets are reviewed.",
+      "status": "warning",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "backup_refs_not_used_as_live_assets",
+      "area": "asset",
+      "check": "Homepage does not reference backup files as live assets.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "title_present",
+      "area": "seo",
+      "check": "Title tag is present.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "meta_description_present",
+      "area": "seo",
+      "check": "Meta description is present.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "viewport_present",
+      "area": "seo",
+      "check": "Viewport meta tag is present.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "og_title_present",
+      "area": "seo",
+      "check": "Open Graph title is present.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "og_description_present",
+      "area": "seo",
+      "check": "Open Graph description is present.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "og_image_present",
+      "area": "seo",
+      "check": "Open Graph image is present.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "favicon_reviewed",
+      "area": "seo",
+      "check": "Favicon reference is reviewed.",
+      "status": "warning",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "anchor_links_reviewed",
+      "area": "link",
+      "check": "Anchor links are reviewed.",
+      "status": "not_applicable",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "local_page_links_reviewed",
+      "area": "link",
+      "check": "Local page links are reviewed.",
+      "status": "warning",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "external_links_reviewed",
+      "area": "link",
+      "check": "External links are reviewed if present.",
+      "status": "not_applicable",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "cta_links_reviewed",
+      "area": "link",
+      "check": "CTA links are reviewed.",
+      "status": "not_checked",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "language_scripts_resolve",
+      "area": "language",
+      "check": "Language-related script references resolve.",
+      "status": "pass",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "language_sticky_behavior_manual_check",
+      "area": "language",
+      "check": "Manual language sticky behavior check remains pending.",
+      "status": "not_checked",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "no_transliteration_fallback_manual_check",
+      "area": "language",
+      "check": "Manual check confirms no drstih vistirna fallback.",
+      "status": "not_checked",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "browser_console_manual_check",
+      "area": "console",
+      "check": "Manual browser console check remains pending.",
+      "status": "not_checked",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "live_homepage_manual_check",
+      "area": "deployment",
+      "check": "Manual live homepage check remains pending.",
+      "status": "not_checked",
+      "mutation_performed": false
+    },
+    {
+      "item_key": "live_mobile_manual_check",
+      "area": "deployment",
+      "check": "Manual live mobile check remains pending.",
+      "status": "not_checked",
+      "mutation_performed": false
+    }
+  ],
+  "summary": {
+    "smoke_item_count": 28,
+    "status_counts": {
+      "pass": 15,
+      "warning": 5,
+      "not_applicable": 2,
+      "not_checked": 6
+    },
+    "area_counts": {
+      "build": 5,
+      "asset": 6,
+      "seo": 7,
+      "link": 4,
+      "language": 3,
+      "console": 1,
+      "deployment": 2
+    },
+    "mutation_performed_count": 0,
+    "missing_local_asset_count": 9,
+    "missing_local_link_count": 4,
+    "manual_check_remaining_count": 6,
+    "warning_count": 5,
+    "fail_count": 0,
+    "pass_count": 15,
+    "homepage_mutation_enabled": false,
+    "asset_mutation_enabled": false,
+    "seo_metadata_mutation_enabled": false,
+    "language_runtime_mutation_enabled": false,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment"
+  ],
+  "next_recommended_stage": {
+    "module_id": "LR00",
+    "title": "Live Readiness Review before any actual runtime/backend activation",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}

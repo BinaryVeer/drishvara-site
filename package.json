@@ -142,7 +142,9 @@
     "validate:id02": "node scripts/validate-id02-api-route-contract-design.mjs",
     "generate:qa00": "node scripts/generate-qa00-homepage-stability-audit-preview.mjs",
     "validate:qa00": "node scripts/validate-qa00-homepage-stability-audit.mjs",
-    "validate:qa": "npm run validate:qa00"
+    "validate:qa": "npm run validate:qa00 && npm run validate:qa01",
+    "generate:qa01": "node scripts/generate-qa01-build-asset-seo-link-smoke-preview.mjs",
+    "validate:qa01": "node scripts/validate-qa01-build-asset-seo-link-smoke.mjs"
   },
   "repository": {
     "type": "git",
