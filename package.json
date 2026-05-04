@@ -108,7 +108,7 @@
     "validate:r02": "node scripts/validate-r02-consolidated-status.mjs",
     "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs",
     "validate:i00": "node scripts/validate-i00-implementation-planning.mjs",
-    "validate:implementation": "npm run validate:i00 && npm run validate:i01 && npm run validate:i02",
+    "validate:implementation": "npm run validate:i00 && npm run validate:i01 && npm run validate:i02 && npm run validate:i03",
     "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
     "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14 && npm run validate:c15 && npm run validate:c16",
@@ -125,7 +125,9 @@
     "generate:i01": "node scripts/generate-i01-static-registry-manifest-preview.mjs",
     "validate:i01": "node scripts/validate-i01-safe-folder-static-registry.mjs",
     "generate:i02": "node scripts/generate-i02-feature-flag-environment-preview.mjs",
-    "validate:i02": "node scripts/validate-i02-feature-flag-environment-boundary.mjs"
+    "validate:i02": "node scripts/validate-i02-feature-flag-environment-boundary.mjs",
+    "generate:i03": "node scripts/generate-i03-data-model-planning-preview.mjs",
+    "validate:i03": "node scripts/validate-i03-data-model-planning.mjs"
   },
   "repository": {
     "type": "git",
