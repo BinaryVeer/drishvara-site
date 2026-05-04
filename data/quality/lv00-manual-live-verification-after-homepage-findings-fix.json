@@ -1,0 +1,247 @@
+{
+  "module_id": "LV00",
+  "module_title": "Manual Live Verification after Homepage Findings Fix",
+  "phase": "LV-Live Verification",
+  "status": "manual_live_verification_gate_only_no_activation",
+  "depends_on": [
+    "LF01",
+    "LF00",
+    "LR00",
+    "QA01",
+    "QA00"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "homepage_mutation_enabled": false,
+  "asset_mutation_enabled": false,
+  "seo_metadata_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "language_runtime_mutation_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "gitignore_modification_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "activation_decision_enabled": false,
+  "verification_areas": [
+    "live_load",
+    "deployment_observation",
+    "visual",
+    "language",
+    "responsive",
+    "console",
+    "navigation",
+    "seo",
+    "activation_boundary"
+  ],
+  "allowed_verification_statuses": [
+    "pass",
+    "warning",
+    "fail",
+    "manual_check_required",
+    "blocked",
+    "not_applicable"
+  ],
+  "allowed_decisions": [
+    "manual_live_verification_pending",
+    "clean_static_ready_for_manual_live_check",
+    "live_observation_passed_manual",
+    "live_observation_warning_manual",
+    "no_go_until_manual_issue_fixed"
+  ],
+  "verification_items": [
+    {
+      "item_key": "live_homepage_opens",
+      "area": "live_load",
+      "check": "Open live homepage URL and confirm page loads.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "latest_commit_visible",
+      "area": "deployment_observation",
+      "check": "Confirm latest pushed version appears live, if Vercel/GitHub deployment is configured.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "hero_logo_visible",
+      "area": "visual",
+      "check": "Logo is visible and positioned as intended.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "hero_orbit_alignment",
+      "area": "visual",
+      "check": "Orbit composition is aligned and not overlapping critical text.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "hero_text_readable",
+      "area": "visual",
+      "check": "Hero title, tagline, and meaning line are readable.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "english_click_sticky",
+      "area": "language",
+      "check": "Click English repeatedly and confirm it remains English.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "hindi_click_sticky",
+      "area": "language",
+      "check": "Click Hindi repeatedly and confirm it remains Hindi.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "normal_click_no_language_change",
+      "area": "language",
+      "check": "Click normal homepage areas and confirm language does not change.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "no_transliteration_fallback",
+      "area": "language",
+      "check": "Switch Hindi to English and confirm no drstih vistirna fallback appears.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "desktop_layout_ok",
+      "area": "responsive",
+      "check": "Check desktop rendering.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "mobile_layout_ok",
+      "area": "responsive",
+      "check": "Check mobile rendering.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "console_no_critical_errors",
+      "area": "console",
+      "check": "Open browser console and confirm no critical JS/CSS/image errors.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "primary_navigation_ok",
+      "area": "navigation",
+      "check": "Primary navigation works as intended.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "cta_links_ok",
+      "area": "navigation",
+      "check": "CTA links work as intended.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "seo_preview_sanity",
+      "area": "seo",
+      "check": "Basic title/meta/social preview appears sane where visible.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "backend_not_expected",
+      "area": "activation_boundary",
+      "check": "No backend/API/Supabase behavior is expected or claimed live.",
+      "status": "pass"
+    }
+  ],
+  "manual_browser_check_sequence": [
+    "open_live_homepage_url",
+    "hard_refresh_or_clear_cache_if_needed",
+    "check_desktop_hero_and_navigation",
+    "check_language_toggle_english_repeated",
+    "check_language_toggle_hindi_repeated",
+    "click_normal_homepage_area",
+    "switch_hindi_to_english_and_check_no_fallback",
+    "open_mobile_view_or_phone",
+    "check_browser_console",
+    "record_pass_warning_fail_results"
+  ],
+  "static_evidence_expectations": {
+    "qa00_missing_assets_expected": 0,
+    "qa01_missing_assets_expected": 0,
+    "qa01_missing_links_expected": 0,
+    "lf00_asset_findings_expected": 0,
+    "lf00_link_findings_expected": 0,
+    "lf01_applied_fixes_expected": 0,
+    "lf01_modified_files_expected": 0
+  },
+  "preview_output": "data/quality/lv00-manual-live-verification-preview.json",
+  "preview_required_fields": [
+    "preview_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "static_evidence",
+    "verification_items",
+    "summary",
+    "decision",
+    "manual_browser_check_sequence",
+    "blocked_capabilities",
+    "next_recommended_stage"
+  ],
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "recommended_next_stage": {
+    "module_id": "LV01",
+    "title": "Manual Live Verification Result Record",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  },
+  "approved_live_verification_labels": [
+    "manual_live_verification",
+    "no_activation",
+    "no_deployment",
+    "static_evidence_clean",
+    "browser_check_required",
+    "safe_to_commit"
+  ]
+}

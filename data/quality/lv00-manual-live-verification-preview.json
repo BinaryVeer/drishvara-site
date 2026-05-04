@@ -1,0 +1,244 @@
+{
+  "preview_id": "LV00_MANUAL_LIVE_VERIFICATION_PREVIEW",
+  "module_id": "LV00",
+  "status": "preview_only_manual_live_verification_no_activation",
+  "preview_only": true,
+  "static_evidence": {
+    "qa00_missing_local_asset_count": 0,
+    "qa01_missing_local_asset_count": 0,
+    "qa01_missing_local_link_count": 0,
+    "lr00_decision": "conditional_go_for_manual_live_review",
+    "lf00_asset_finding_count": 0,
+    "lf00_link_finding_count": 0,
+    "lf01_applied_fix_count": 0,
+    "lf01_modified_file_count": 0,
+    "static_evidence_clean": true
+  },
+  "verification_items": [
+    {
+      "item_key": "live_homepage_opens",
+      "area": "live_load",
+      "check": "Open live homepage URL and confirm page loads.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "latest_commit_visible",
+      "area": "deployment_observation",
+      "check": "Confirm latest pushed version appears live, if Vercel/GitHub deployment is configured.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "hero_logo_visible",
+      "area": "visual",
+      "check": "Logo is visible and positioned as intended.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "hero_orbit_alignment",
+      "area": "visual",
+      "check": "Orbit composition is aligned and not overlapping critical text.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "hero_text_readable",
+      "area": "visual",
+      "check": "Hero title, tagline, and meaning line are readable.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "english_click_sticky",
+      "area": "language",
+      "check": "Click English repeatedly and confirm it remains English.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "hindi_click_sticky",
+      "area": "language",
+      "check": "Click Hindi repeatedly and confirm it remains Hindi.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "normal_click_no_language_change",
+      "area": "language",
+      "check": "Click normal homepage areas and confirm language does not change.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "no_transliteration_fallback",
+      "area": "language",
+      "check": "Switch Hindi to English and confirm no drstih vistirna fallback appears.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "desktop_layout_ok",
+      "area": "responsive",
+      "check": "Check desktop rendering.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "mobile_layout_ok",
+      "area": "responsive",
+      "check": "Check mobile rendering.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "console_no_critical_errors",
+      "area": "console",
+      "check": "Open browser console and confirm no critical JS/CSS/image errors.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "primary_navigation_ok",
+      "area": "navigation",
+      "check": "Primary navigation works as intended.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "cta_links_ok",
+      "area": "navigation",
+      "check": "CTA links work as intended.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "seo_preview_sanity",
+      "area": "seo",
+      "check": "Basic title/meta/social preview appears sane where visible.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "backend_not_expected",
+      "area": "activation_boundary",
+      "check": "No backend/API/Supabase behavior is expected or claimed live.",
+      "status": "pass",
+      "mutation_performed": false,
+      "activation_performed": false
+    }
+  ],
+  "summary": {
+    "verification_item_count": 16,
+    "status_counts": {
+      "manual_check_required": 15,
+      "pass": 1
+    },
+    "area_counts": {
+      "live_load": 1,
+      "deployment_observation": 1,
+      "visual": 3,
+      "language": 4,
+      "responsive": 2,
+      "console": 1,
+      "navigation": 2,
+      "seo": 1,
+      "activation_boundary": 1
+    },
+    "manual_check_required_count": 15,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "homepage_mutation_enabled": false,
+    "asset_mutation_enabled": false,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "decision": {
+    "live_verification_decision": "clean_static_ready_for_manual_live_check",
+    "manual_live_browser_check_required": true,
+    "clean_static_ready": true,
+    "activation_allowed": false,
+    "runtime_activation": "no_go_for_activation",
+    "backend_activation": "no_go_for_activation",
+    "supabase_activation": "no_go_for_activation",
+    "auth_activation": "no_go_for_activation",
+    "api_activation": "no_go_for_activation",
+    "public_dynamic_output_activation": "no_go_for_activation",
+    "subscriber_output_activation": "no_go_for_activation"
+  },
+  "manual_browser_check_sequence": [
+    "open_live_homepage_url",
+    "hard_refresh_or_clear_cache_if_needed",
+    "check_desktop_hero_and_navigation",
+    "check_language_toggle_english_repeated",
+    "check_language_toggle_hindi_repeated",
+    "click_normal_homepage_area",
+    "switch_hindi_to_english_and_check_no_fallback",
+    "open_mobile_view_or_phone",
+    "check_browser_console",
+    "record_pass_warning_fail_results"
+  ],
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "LV01",
+    "title": "Manual Live Verification Result Record",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
