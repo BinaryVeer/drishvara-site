@@ -1,0 +1,189 @@
+{
+  "preview_id": "LV01_MANUAL_LIVE_VERIFICATION_RESULT_PREVIEW",
+  "module_id": "LV01",
+  "status": "preview_only_manual_live_result_record_no_activation",
+  "preview_only": true,
+  "lv00_evidence": {
+    "lv00_preview_present": true,
+    "lv00_decision": "clean_static_ready_for_manual_live_check",
+    "lv00_static_evidence_clean": true,
+    "lv00_activation_allowed": false
+  },
+  "manual_result": {
+    "overall_status": "warning_partial_fail",
+    "static_validation_status": "pass",
+    "manual_live_confidence": "not_clean_yet",
+    "backend_activation": "no_go",
+    "supabase_activation": "no_go",
+    "auth_activation": "no_go",
+    "api_activation": "no_go",
+    "deployment_activation": "no_go"
+  },
+  "manual_findings": [
+    {
+      "finding_id": "LV01-FINDING-001",
+      "area": "navigation",
+      "severity": "warning",
+      "finding": "Navigation menu is inconsistent across public pages.",
+      "observed_detail": "Contact page shows fewer menu items; Submissions is missing.",
+      "required_correction": "Create and apply one common static navigation structure across pages.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV01-FINDING-002",
+      "area": "dropdown_interaction",
+      "severity": "fail",
+      "finding": "Dropdown selection freezes or blocks interaction.",
+      "observed_detail": "Dropdown cannot be selected smoothly; page unfreezes only after switching app/browser focus.",
+      "required_correction": "Investigate overlay, z-index, focus, pointer-events, global click handlers, and language handler interference.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV01-FINDING-003",
+      "area": "auth_placeholder",
+      "severity": "warning",
+      "finding": "Signup/Login entry is not present.",
+      "observed_detail": "Login/signup has not been included yet.",
+      "required_correction": "Add safe static Sign in / Join placeholder only; no Auth activation.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV01-FINDING-004",
+      "area": "article_references",
+      "severity": "warning",
+      "finding": "Featured reads/articles do not show two verified reference links.",
+      "observed_detail": "Previously planned Link 1 / Link 2 reference display is missing.",
+      "required_correction": "Add article reference block with two verified links or controlled under-verification placeholder.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV01-FINDING-005",
+      "area": "image_credits",
+      "severity": "warning",
+      "finding": "Image credits are missing.",
+      "observed_detail": "Featured/article images do not visibly show attribution.",
+      "required_correction": "Add image credit block or under-review placeholder.",
+      "mutation_performed": false,
+      "activation_performed": false
+    }
+  ],
+  "verified_reference_link_rules": [
+    "must_open_successfully",
+    "must_not_be_404_403_500",
+    "must_not_be_error_page",
+    "must_not_be_blank_page",
+    "must_not_be_parked_or_spam",
+    "must_not_redirect_endlessly",
+    "must_be_responsive_enough_to_load",
+    "must_contain_legitimate_information",
+    "must_be_relevant_to_article",
+    "must_support_factual_basis",
+    "prefer_official_institutional_research_government_or_credible_media_source",
+    "avoid_duplicate_or_weak_pairing",
+    "show_under_editorial_verification_if_not_verified"
+  ],
+  "image_credit_rules": [
+    "article_image_should_have_credit",
+    "card_image_should_have_credit_or_page_level_credit",
+    "credit_should_include_source_or_platform_or_photographer_where_available",
+    "use_under_review_placeholder_if_not_verified",
+    "final_publication_should_not_permanently_keep_under_review_credit"
+  ],
+  "common_navigation_required": {
+    "english": [
+      "Home",
+      "About",
+      "Insights",
+      "Submissions",
+      "Dashboard",
+      "Contact"
+    ],
+    "hindi": [
+      "घर",
+      "परिचय",
+      "इनसाइट्स",
+      "सबमिशन",
+      "डैशबोर्ड",
+      "संपर्क"
+    ]
+  },
+  "dropdown_debug_focus": [
+    "native_select_focus",
+    "z_index_layering",
+    "pointer_events",
+    "global_click_handlers",
+    "language_toggle_handlers",
+    "scroll_lock",
+    "fixed_overlay_layers",
+    "browser_focus_blur_recovery"
+  ],
+  "summary": {
+    "finding_count": 5,
+    "severity_counts": {
+      "warning": 4,
+      "fail": 1
+    },
+    "area_counts": {
+      "navigation": 1,
+      "dropdown_interaction": 1,
+      "auth_placeholder": 1,
+      "article_references": 1,
+      "image_credits": 1
+    },
+    "verified_reference_rule_count": 13,
+    "image_credit_rule_count": 5,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "clean_live_confidence": false,
+    "backend_activation_allowed": false,
+    "supabase_activation_allowed": false,
+    "auth_activation_allowed": false,
+    "api_activation_allowed": false,
+    "deployment_allowed": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "HF00",
+    "title": "Homepage/Page Navigation, Dropdown, Reference Link and Image Credit Fix Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}

@@ -147,7 +147,7 @@
     "validate:qa01": "node scripts/validate-qa01-build-asset-seo-link-smoke.mjs",
     "generate:lr00": "node scripts/generate-lr00-live-readiness-review-preview.mjs",
     "validate:lr00": "node scripts/validate-lr00-live-readiness-review.mjs",
-    "validate:live": "npm run validate:lr00 && npm run validate:lv00",
+    "validate:live": "npm run validate:lr00 && npm run validate:lv00 && npm run validate:lv01",
     "generate:lf00": "node scripts/generate-lf00-homepage-asset-link-findings-preview.mjs",
     "validate:lf00": "node scripts/validate-lf00-homepage-asset-link-findings.mjs",
     "validate:findings": "npm run validate:lf00 && npm run validate:lf01",
@@ -155,7 +155,9 @@
     "apply:lf01": "node scripts/apply-lf01-targeted-homepage-fix.mjs",
     "validate:lf01": "node scripts/validate-lf01-targeted-homepage-fix.mjs",
     "generate:lv00": "node scripts/generate-lv00-manual-live-verification-preview.mjs",
-    "validate:lv00": "node scripts/validate-lv00-manual-live-verification.mjs"
+    "validate:lv00": "node scripts/validate-lv00-manual-live-verification.mjs",
+    "generate:lv01": "node scripts/generate-lv01-manual-live-verification-result.mjs",
+    "validate:lv01": "node scripts/validate-lv01-manual-live-verification-result.mjs"
   },
   "repository": {
     "type": "git",
