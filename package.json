@@ -106,7 +106,10 @@
     "validate:r00": "node scripts/validate-r00-methodology-review.mjs",
     "validate:r01": "node scripts/validate-r01-naming-index.mjs",
     "validate:r02": "node scripts/validate-r02-consolidated-status.mjs",
-    "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs"
+    "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs",
+    "validate:i00": "node scripts/validate-i00-implementation-planning.mjs",
+    "validate:implementation": "npm run validate:i00",
+    "validate:project": "npm run validate:methodology && npm run validate:implementation"
   },
   "repository": {
     "type": "git",
