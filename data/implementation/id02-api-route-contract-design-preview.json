@@ -1,0 +1,851 @@
+{
+  "preview_id": "ID02_API_ROUTE_CONTRACT_DESIGN_PREVIEW",
+  "module_id": "ID02",
+  "status": "preview_only_api_contract_design_no_route_creation",
+  "preview_only": true,
+  "route_families": [
+    "internal_preview",
+    "panchang_calculation",
+    "observance_festival",
+    "subscriber_profile",
+    "subscriber_guidance",
+    "content_review",
+    "admin_review",
+    "entitlement_payment",
+    "audit",
+    "health_readiness"
+  ],
+  "access_tiers": [
+    "public_static_read",
+    "internal_preview_read",
+    "subscriber_private",
+    "reviewer_restricted",
+    "admin_restricted",
+    "server_only"
+  ],
+  "error_taxonomy": [
+    "validation_error",
+    "auth_required",
+    "consent_required",
+    "entitlement_required",
+    "privacy_blocked",
+    "source_review_required",
+    "rights_review_required",
+    "output_gate_blocked",
+    "rate_limited",
+    "safe_mode_blocked",
+    "internal_preview_only",
+    "not_implemented",
+    "activation_blocked"
+  ],
+  "future_api_contracts": [
+    {
+      "route_key": "internal_preview_status",
+      "route_family": "internal_preview",
+      "method": "GET",
+      "path_pattern": "/api/internal/preview/status",
+      "purpose": "Future internal preview status lookup.",
+      "access_tier": "internal_preview_read",
+      "request_contract": {
+        "required_fields": [
+          "preview_family"
+        ],
+        "optional_fields": [
+          "source_ref"
+        ],
+        "prohibited_fields": [
+          "service_role_key",
+          "secret",
+          "subscriber_private_payload"
+        ],
+        "validation_notes": [
+          "preview_family must be from approved preview families"
+        ],
+        "privacy_notes": [
+          "must not expose subscriber-private data"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "status",
+          "preview_only",
+          "source_refs",
+          "blocked_capabilities",
+          "trace_id"
+        ],
+        "blocked_fields": [
+          "secret",
+          "service_role_key",
+          "unredacted_private_data"
+        ],
+        "source_disclosure_required": true,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "validation_error",
+        "auth_required",
+        "internal_preview_only",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": true,
+      "rate_limit_policy": "future_internal_rate_limit",
+      "cache_policy": "no_public_cache",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_role_mapping",
+        "needs_redaction_rules",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "panchang_calculation_preview",
+      "route_family": "panchang_calculation",
+      "method": "POST",
+      "path_pattern": "/api/panchang/calculate",
+      "purpose": "Future server-side Panchang calculation request.",
+      "access_tier": "server_only",
+      "request_contract": {
+        "required_fields": [
+          "date",
+          "location_basis",
+          "calculation_mode"
+        ],
+        "optional_fields": [
+          "timezone",
+          "ayanamsha_basis",
+          "sunrise_basis"
+        ],
+        "prohibited_fields": [
+          "precise_location_without_consent",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "date/location/timezone must pass M04 boundary"
+        ],
+        "privacy_notes": [
+          "precise location requires privacy review"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "calculation_status",
+          "calculation_basis",
+          "internal_trace_id"
+        ],
+        "blocked_fields": [
+          "public_panchang_output",
+          "subscriber_guidance_output"
+        ],
+        "source_disclosure_required": true,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "validation_error",
+        "privacy_blocked",
+        "source_review_required",
+        "output_gate_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": false,
+      "consent_gate_required": true,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": true,
+      "rate_limit_policy": "future_calculation_rate_limit",
+      "cache_policy": "no_public_cache_until_public_gate",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_calculation_engine",
+        "needs_validation_cycle",
+        "needs_output_gate",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "observance_festival_rules",
+      "route_family": "observance_festival",
+      "method": "POST",
+      "path_pattern": "/api/observance/resolve",
+      "purpose": "Future observance/vrat/festival rule resolution.",
+      "access_tier": "server_only",
+      "request_contract": {
+        "required_fields": [
+          "date",
+          "location_basis",
+          "rule_family"
+        ],
+        "optional_fields": [
+          "sampradaya",
+          "regional_basis"
+        ],
+        "prohibited_fields": [
+          "unreviewed_rule_override",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "rule_family must map to reviewed M02/M03 categories"
+        ],
+        "privacy_notes": [
+          "location precision must follow M04"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "observance_candidates",
+          "conflict_status",
+          "source_refs",
+          "trace_id"
+        ],
+        "blocked_fields": [
+          "public_festival_output_without_gate"
+        ],
+        "source_disclosure_required": true,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "validation_error",
+        "source_review_required",
+        "output_gate_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": false,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": true,
+      "rate_limit_policy": "future_observance_rate_limit",
+      "cache_policy": "no_public_cache_until_public_gate",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_rule_storage",
+        "needs_source_review",
+        "needs_public_output_gate",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "subscriber_profile_read",
+      "route_family": "subscriber_profile",
+      "method": "GET",
+      "path_pattern": "/api/subscriber/profile",
+      "purpose": "Future subscriber profile read.",
+      "access_tier": "subscriber_private",
+      "request_contract": {
+        "required_fields": [
+          "subscriber_session"
+        ],
+        "optional_fields": [
+          "profile_section"
+        ],
+        "prohibited_fields": [
+          "other_subscriber_id",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "subscriber must read only own profile"
+        ],
+        "privacy_notes": [
+          "requires Auth and RLS"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "profile_status",
+          "profile_completeness",
+          "privacy_preferences",
+          "trace_id"
+        ],
+        "blocked_fields": [
+          "other_subscriber_profile",
+          "raw_birth_data_if_not_needed"
+        ],
+        "source_disclosure_required": false,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "privacy_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": true,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": false,
+      "rate_limit_policy": "future_subscriber_rate_limit",
+      "cache_policy": "no_public_cache_private_data",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_rls",
+        "needs_consent_model",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "subscriber_guidance_daily",
+      "route_family": "subscriber_guidance",
+      "method": "POST",
+      "path_pattern": "/api/subscriber/guidance/daily",
+      "purpose": "Future daily subscriber guidance generation.",
+      "access_tier": "subscriber_private",
+      "request_contract": {
+        "required_fields": [
+          "subscriber_session",
+          "guidance_date"
+        ],
+        "optional_fields": [
+          "guidance_depth",
+          "language"
+        ],
+        "prohibited_fields": [
+          "unconsented_profile_data",
+          "payment_secret",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "requires consent, entitlement, privacy, source, and output gates"
+        ],
+        "privacy_notes": [
+          "subscriber-sensitive guidance must be redacted and audited"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "guidance_status",
+          "guidance_card",
+          "source_basis",
+          "audit_trace_id"
+        ],
+        "blocked_fields": [
+          "unreviewed_mantra",
+          "invented_sanskrit",
+          "other_subscriber_data"
+        ],
+        "source_disclosure_required": true,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "consent_required",
+        "entitlement_required",
+        "privacy_blocked",
+        "source_review_required",
+        "output_gate_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": true,
+      "entitlement_gate_required": true,
+      "privacy_gate_required": true,
+      "source_gate_required": true,
+      "rate_limit_policy": "future_guidance_rate_limit",
+      "cache_policy": "no_public_cache_private_guidance",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_entitlement_gate",
+        "needs_source_gate",
+        "needs_subscriber_output_gate",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "content_review_queue_read",
+      "route_family": "content_review",
+      "method": "GET",
+      "path_pattern": "/api/admin/content/review-queue",
+      "purpose": "Future restricted content review queue read.",
+      "access_tier": "reviewer_restricted",
+      "request_contract": {
+        "required_fields": [
+          "reviewer_session"
+        ],
+        "optional_fields": [
+          "status",
+          "priority",
+          "assigned_role"
+        ],
+        "prohibited_fields": [
+          "anonymous_access",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "reviewer role scope must be enforced"
+        ],
+        "privacy_notes": [
+          "internal governance data only"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "queue_items",
+          "blocked_capabilities",
+          "audit_trace_id"
+        ],
+        "blocked_fields": [
+          "public_output",
+          "unredacted_secret"
+        ],
+        "source_disclosure_required": false,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "activation_blocked",
+        "safe_mode_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": false,
+      "rate_limit_policy": "future_admin_read_rate_limit",
+      "cache_policy": "no_public_cache_admin",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_reviewer_roles",
+        "needs_rls",
+        "needs_admin_boundary",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "admin_review_decision_write",
+      "route_family": "admin_review",
+      "method": "POST",
+      "path_pattern": "/api/admin/review/decision",
+      "purpose": "Future restricted reviewer/admin decision write.",
+      "access_tier": "admin_restricted",
+      "request_contract": {
+        "required_fields": [
+          "admin_session",
+          "queue_item_id",
+          "decision",
+          "decision_reason"
+        ],
+        "optional_fields": [
+          "next_status",
+          "reviewer_note"
+        ],
+        "prohibited_fields": [
+          "anonymous_decision",
+          "approval_without_audit",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "decision must be audited and rollback-aware"
+        ],
+        "privacy_notes": [
+          "restricted admin action"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "decision_status",
+          "audit_trace_id",
+          "rollback_available"
+        ],
+        "blocked_fields": [
+          "public_approval_without_gate",
+          "ml_approval_without_gate"
+        ],
+        "source_disclosure_required": false,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "privacy_blocked",
+        "safe_mode_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": true,
+      "rate_limit_policy": "future_admin_write_rate_limit",
+      "cache_policy": "no_cache_write_route",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_admin_boundary",
+        "needs_audit_store",
+        "needs_rollback_policy",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "entitlement_status_check",
+      "route_family": "entitlement_payment",
+      "method": "GET",
+      "path_pattern": "/api/subscriber/entitlement",
+      "purpose": "Future subscriber entitlement status check.",
+      "access_tier": "subscriber_private",
+      "request_contract": {
+        "required_fields": [
+          "subscriber_session"
+        ],
+        "optional_fields": [
+          "plan_key"
+        ],
+        "prohibited_fields": [
+          "payment_secret",
+          "webhook_secret",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "subscriber may read only own entitlement summary"
+        ],
+        "privacy_notes": [
+          "payment details must be minimized"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "entitlement_status",
+          "plan_key",
+          "validity_summary",
+          "audit_trace_id"
+        ],
+        "blocked_fields": [
+          "raw_payment_event",
+          "provider_secret"
+        ],
+        "source_disclosure_required": false,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "entitlement_required",
+        "privacy_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": false,
+      "rate_limit_policy": "future_entitlement_rate_limit",
+      "cache_policy": "no_public_cache_private_entitlement",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_payment_provider",
+        "needs_rls",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "audit_trace_lookup",
+      "route_family": "audit",
+      "method": "GET",
+      "path_pattern": "/api/admin/audit/trace",
+      "purpose": "Future restricted audit trace lookup.",
+      "access_tier": "admin_restricted",
+      "request_contract": {
+        "required_fields": [
+          "admin_session",
+          "trace_id"
+        ],
+        "optional_fields": [
+          "entity_ref"
+        ],
+        "prohibited_fields": [
+          "anonymous_access",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "admin-only audit lookup"
+        ],
+        "privacy_notes": [
+          "must not expose subscriber-private data without strict policy"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "trace_status",
+          "action_summary",
+          "redaction_status"
+        ],
+        "blocked_fields": [
+          "secret_values",
+          "unredacted_private_payload"
+        ],
+        "source_disclosure_required": false,
+        "audit_trace_required": true
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "privacy_blocked",
+        "safe_mode_blocked",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": false,
+      "rate_limit_policy": "future_audit_rate_limit",
+      "cache_policy": "no_cache_audit",
+      "audit_trace_required": true,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_auth",
+        "needs_admin_role",
+        "needs_audit_store",
+        "needs_retention_policy",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    },
+    {
+      "route_key": "health_readiness_status",
+      "route_family": "health_readiness",
+      "method": "GET",
+      "path_pattern": "/api/internal/health/readiness",
+      "purpose": "Future internal readiness status.",
+      "access_tier": "internal_preview_read",
+      "request_contract": {
+        "required_fields": [
+          "internal_session"
+        ],
+        "optional_fields": [
+          "module_family"
+        ],
+        "prohibited_fields": [
+          "secret",
+          "service_role_key"
+        ],
+        "validation_notes": [
+          "must not expose secrets or private state"
+        ],
+        "privacy_notes": [
+          "internal readiness only"
+        ]
+      },
+      "response_contract": {
+        "success_fields": [
+          "readiness_status",
+          "blocked_capabilities",
+          "validation_status"
+        ],
+        "blocked_fields": [
+          "secret_values",
+          "environment_values"
+        ],
+        "source_disclosure_required": false,
+        "audit_trace_required": false
+      },
+      "error_taxonomy": [
+        "auth_required",
+        "internal_preview_only",
+        "activation_blocked"
+      ],
+      "auth_required_future": true,
+      "consent_gate_required": false,
+      "entitlement_gate_required": false,
+      "privacy_gate_required": true,
+      "source_gate_required": false,
+      "rate_limit_policy": "future_internal_rate_limit",
+      "cache_policy": "no_public_cache",
+      "audit_trace_required": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "route_creation_enabled": false,
+      "activation_blockers": [
+        "needs_internal_access_policy",
+        "needs_no_secret_exposure_policy",
+        "needs_route_creation_approval"
+      ],
+      "route_created": false,
+      "route_file_created": false,
+      "route_handler_created": false,
+      "server_endpoint_created": false,
+      "runtime_enabled": false,
+      "next_action": "keep_contract_design_only"
+    }
+  ],
+  "default_contract_rules": [
+    "route_creation_disabled",
+    "public_output_disabled",
+    "subscriber_output_disabled",
+    "service_role_key_prohibited_in_request",
+    "secrets_prohibited_in_response",
+    "audit_required_for_decision_or_private_data",
+    "fail_closed_on_gate_failure",
+    "no_public_cache_for_private_or_internal_routes"
+  ],
+  "summary": {
+    "future_api_contract_count": 10,
+    "route_family_counts": {
+      "internal_preview": 1,
+      "panchang_calculation": 1,
+      "observance_festival": 1,
+      "subscriber_profile": 1,
+      "subscriber_guidance": 1,
+      "content_review": 1,
+      "admin_review": 1,
+      "entitlement_payment": 1,
+      "audit": 1,
+      "health_readiness": 1
+    },
+    "access_tier_counts": {
+      "internal_preview_read": 2,
+      "server_only": 2,
+      "subscriber_private": 3,
+      "reviewer_restricted": 1,
+      "admin_restricted": 2
+    },
+    "route_created_count": 0,
+    "route_file_created_count": 0,
+    "route_handler_created_count": 0,
+    "server_endpoint_created_count": 0,
+    "runtime_enabled_count": 0,
+    "public_output_allowed_count": 0,
+    "subscriber_output_allowed_count": 0,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "backend_enabled": false,
+    "payment_enabled": false,
+    "ml_enabled": false
+  },
+  "blocked_capabilities": [
+    "runtime_activation",
+    "backend_activation",
+    "api_route_creation",
+    "route_file_creation",
+    "route_handler_creation",
+    "server_endpoint",
+    "backend_code_creation",
+    "supabase_connection",
+    "service_role_operation",
+    "rls",
+    "auth",
+    "auth_flow_creation",
+    "payment",
+    "payment_flow_creation",
+    "database_activation",
+    "database_client",
+    "database_migration",
+    "admin_ui",
+    "admin_route",
+    "live_review_queue",
+    "review_queue_write",
+    "approval_workflow",
+    "public_output",
+    "subscriber_output",
+    "content_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "final_registry_write",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "env_file_creation",
+    "secret_creation",
+    "secret_reading",
+    "backend_deployment"
+  ],
+  "next_recommended_stage": {
+    "module_id": "QA00",
+    "title": "First Page / Homepage Stability Audit Checklist",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "api_route_creation_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
