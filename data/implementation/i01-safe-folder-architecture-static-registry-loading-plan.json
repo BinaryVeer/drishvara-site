@@ -1,0 +1,234 @@
+{
+  "module_id": "I01",
+  "module_title": "Safe Folder Architecture & Static Registry Loading Plan",
+  "phase": "I-Implementation Planning",
+  "status": "safe_folder_static_registry_loading_plan_only",
+  "depends_on": [
+    "I00",
+    "C16"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "runtime_loader_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_output_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "rls_enabled": false,
+  "admin_review_enabled": false,
+  "admin_ui_enabled": false,
+  "admin_route_enabled": false,
+  "review_queue_write_enabled": false,
+  "live_review_queue_enabled": false,
+  "approval_enabled": false,
+  "article_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "seo_metadata_mutation_enabled": false,
+  "final_registry_write_enabled": false,
+  "database_migration_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "link_crawling_enabled": false,
+  "image_download_enabled": false,
+  "folder_restructure_enabled": false,
+  "file_deletion_enabled": false,
+  "gitignore_modification_enabled": false,
+  "active_repo": "drishvara-site",
+  "reference_scaffold": "drishvara_phase01_scaffold",
+  "reference_scaffold_blind_merge_allowed": false,
+  "folder_roles": [
+    {
+      "folder": "docs/methodology",
+      "role": "methodology_documents",
+      "runtime_status": "static_governance"
+    },
+    {
+      "folder": "data/methodology",
+      "role": "methodology_registries",
+      "runtime_status": "read_only_planning_data"
+    },
+    {
+      "folder": "docs/review",
+      "role": "review_control_documents",
+      "runtime_status": "static_governance"
+    },
+    {
+      "folder": "data/review",
+      "role": "review_control_registries",
+      "runtime_status": "read_only_planning_data"
+    },
+    {
+      "folder": "docs/content",
+      "role": "content_governance_documents",
+      "runtime_status": "static_governance"
+    },
+    {
+      "folder": "data/content",
+      "role": "content_governance_registries_previews",
+      "runtime_status": "read_only_planning_data"
+    },
+    {
+      "folder": "docs/implementation",
+      "role": "implementation_planning_documents",
+      "runtime_status": "static_governance"
+    },
+    {
+      "folder": "data/implementation",
+      "role": "implementation_planning_registries_previews",
+      "runtime_status": "read_only_planning_data"
+    },
+    {
+      "folder": "scripts",
+      "role": "validators_generators_preflight_scripts",
+      "runtime_status": "controlled_cli_only"
+    },
+    {
+      "folder": "articles",
+      "role": "static_article_content",
+      "runtime_status": "public_static_content"
+    },
+    {
+      "folder": "assets",
+      "role": "public_static_assets",
+      "runtime_status": "public_static_assets"
+    },
+    {
+      "folder": "data/seo",
+      "role": "seo_metadata",
+      "runtime_status": "static_site_data"
+    },
+    {
+      "folder": "data/i18n",
+      "role": "language_translation_data",
+      "runtime_status": "static_site_data"
+    },
+    {
+      "folder": "data/knowledge",
+      "role": "knowledge_governance_or_source_data",
+      "runtime_status": "static_governance_planning_data"
+    },
+    {
+      "folder": "data/backend",
+      "role": "backend_planning_preflight_data_if_present",
+      "runtime_status": "disabled_planning_data"
+    }
+  ],
+  "static_registry_candidate_families": [
+    "methodology_registries",
+    "review_registries",
+    "content_governance_registries",
+    "content_preview_outputs",
+    "implementation_planning_registries",
+    "knowledge_governance_registries",
+    "backend_planning_registries",
+    "seo_metadata",
+    "i18n_data"
+  ],
+  "manifest_output": "data/implementation/i01-static-registry-loading-manifest-preview.json",
+  "manifest_required_fields": [
+    "manifest_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "source_roots_scanned",
+    "summary",
+    "registry_candidates",
+    "blocked_capabilities",
+    "next_recommended_stage"
+  ],
+  "registry_candidate_required_fields": [
+    "relative_path",
+    "family",
+    "size_bytes",
+    "sha256",
+    "load_policy",
+    "mutation_allowed",
+    "runtime_load_enabled",
+    "public_output_allowed",
+    "sensitivity_note",
+    "future_use_note"
+  ],
+  "read_only_static_loading_rules": [
+    "read_only_by_default",
+    "mutation_disabled",
+    "runtime_loader_disabled",
+    "public_output_disabled",
+    "subscriber_output_disabled",
+    "admin_disabled",
+    "supabase_disabled",
+    "auth_disabled",
+    "ml_disabled",
+    "embedding_disabled"
+  ],
+  "blocked_feature_families": [
+    "public_panchang_enabled",
+    "public_festival_enabled",
+    "subscriber_guidance_enabled",
+    "admin_review_enabled",
+    "content_registry_write_enabled",
+    "review_queue_write_enabled",
+    "supabase_enabled",
+    "auth_enabled",
+    "payment_enabled",
+    "ml_ingestion_enabled",
+    "embedding_generation_enabled",
+    "external_api_fetch_enabled"
+  ],
+  "blocked_capabilities": [
+    "runtime_loader",
+    "api_route",
+    "server_endpoint",
+    "supabase",
+    "auth",
+    "payment",
+    "rls",
+    "admin_ui",
+    "admin_route",
+    "live_review_queue",
+    "approval_workflow",
+    "content_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "seo_metadata_mutation",
+    "final_registry_write",
+    "database_migration",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "public_output",
+    "subscriber_output",
+    "folder_restructure",
+    "file_deletion",
+    "gitignore_modification"
+  ],
+  "recommended_next_stage": {
+    "module_id": "I02",
+    "title": "Feature Flag and Environment Boundary Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false
+  },
+  "approved_planning_labels": [
+    "safe_folder_architecture_plan",
+    "static_registry_loading_plan",
+    "manifest_preview_only",
+    "read_only_static_plan",
+    "runtime_loader_disabled",
+    "mutation_disabled",
+    "public_output_not_enabled",
+    "safe_to_commit"
+  ]
+}
