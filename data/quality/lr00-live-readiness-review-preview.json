@@ -1,0 +1,261 @@
+{
+  "preview_id": "LR00_LIVE_READINESS_REVIEW_PREVIEW",
+  "module_id": "LR00",
+  "status": "preview_only_live_readiness_review_no_activation",
+  "preview_only": true,
+  "qa_evidence": {
+    "qa00_preview_present": true,
+    "qa01_preview_present": true,
+    "qa00_audit_item_count": 26,
+    "qa01_smoke_item_count": 28,
+    "qa01_missing_local_asset_count": 9,
+    "qa01_missing_local_link_count": 4,
+    "qa01_warning_count": 5,
+    "qa01_fail_count": 0,
+    "qa01_manual_check_remaining_count": 6
+  },
+  "review_items": [
+    {
+      "item_key": "validate_project_passed",
+      "area": "validation",
+      "check": "validate:project passed after QA01.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "github_main_pushed",
+      "area": "repo",
+      "check": "Latest QA01 commit is pushed to GitHub main.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "qa01_missing_assets_reviewed",
+      "area": "asset",
+      "check": "QA01 missing local asset references reviewed.",
+      "status": "warning",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "qa01_missing_links_reviewed",
+      "area": "link",
+      "check": "QA01 missing local page links reviewed.",
+      "status": "warning",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "critical_hero_assets_reviewed",
+      "area": "asset",
+      "check": "Hero/logo/orbit critical assets reviewed.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "seo_core_present_reviewed",
+      "area": "seo",
+      "check": "Title, description, viewport, OG metadata reviewed.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "language_toggle_live_review",
+      "area": "language",
+      "check": "English/Hindi sticky behavior checked on live page.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "transliteration_fallback_live_review",
+      "area": "language",
+      "check": "No drstih vistirna fallback appears on Hindi-to-English return.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "desktop_live_review",
+      "area": "responsive",
+      "check": "Desktop live rendering checked.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "mobile_live_review",
+      "area": "responsive",
+      "check": "Mobile live rendering checked.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "browser_console_live_review",
+      "area": "console",
+      "check": "Live browser console checked for critical errors.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "primary_navigation_live_review",
+      "area": "link",
+      "check": "Primary navigation checked live.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "cta_links_live_review",
+      "area": "link",
+      "check": "CTA links checked live.",
+      "status": "manual_check_required",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "backend_activation_boundary_confirmed",
+      "area": "activation_boundary",
+      "check": "Backend activation remains no-go.",
+      "status": "pass",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "supabase_auth_api_boundary_confirmed",
+      "area": "activation_boundary",
+      "check": "Supabase/Auth/API activation remains no-go.",
+      "status": "pass",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "item_key": "frontend_deployment_not_triggered_by_lr00",
+      "area": "deployment",
+      "check": "LR00 does not deploy frontend.",
+      "status": "pass",
+      "mutation_performed": false,
+      "activation_performed": false
+    }
+  ],
+  "summary": {
+    "review_item_count": 16,
+    "status_counts": {
+      "manual_check_required": 11,
+      "warning": 2,
+      "pass": 3
+    },
+    "area_counts": {
+      "validation": 1,
+      "repo": 1,
+      "asset": 2,
+      "link": 3,
+      "seo": 1,
+      "language": 2,
+      "responsive": 2,
+      "console": 1,
+      "activation_boundary": 2,
+      "deployment": 1
+    },
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "missing_asset_count": 9,
+    "missing_link_count": 4,
+    "manual_check_remaining_count": 6,
+    "homepage_mutation_enabled": false,
+    "asset_mutation_enabled": false,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "decision": {
+    "live_readiness_decision": "no_go_until_findings_reviewed",
+    "live_readiness_summary": "Missing asset/link findings must be reviewed before clean live confidence.",
+    "runtime_activation": "no_go_for_activation",
+    "backend_activation": "no_go_for_activation",
+    "supabase_activation": "no_go_for_activation",
+    "auth_activation": "no_go_for_activation",
+    "api_activation": "no_go_for_activation",
+    "public_dynamic_output_activation": "no_go_for_activation",
+    "subscriber_output_activation": "no_go_for_activation",
+    "manual_live_review_allowed": false,
+    "fix_or_findings_review_recommended": true
+  },
+  "manual_live_review_checklist": [
+    "homepage_opens_on_live_url",
+    "latest_github_commit_deployed",
+    "hero_logo_orbit_visible",
+    "no_broken_critical_hero_image",
+    "english_hindi_toggle_sticky",
+    "normal_homepage_click_does_not_change_language",
+    "no_transliteration_fallback_on_return_to_english",
+    "desktop_layout_acceptable",
+    "mobile_layout_acceptable",
+    "console_has_no_critical_error",
+    "primary_navigation_works",
+    "cta_links_work",
+    "page_loads_without_obvious_broken_assets"
+  ],
+  "finding_treatment": {
+    "missing_assets_are_warning_by_default": true,
+    "missing_links_are_warning_by_default": true,
+    "critical_asset_missing_becomes_blocker": true,
+    "critical_link_missing_becomes_blocker": true,
+    "auto_fix_allowed": false,
+    "auto_delete_allowed": false,
+    "requires_separate_fix_patch": true
+  },
+  "blocked_capabilities": [
+    "runtime_activation",
+    "backend_activation",
+    "api_route",
+    "server_endpoint",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "LF00",
+    "title": "Homepage Asset and Link Findings Review/Fix Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": "requires_explicit_separate_approval",
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}

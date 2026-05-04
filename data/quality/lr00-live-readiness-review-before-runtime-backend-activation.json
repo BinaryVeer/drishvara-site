@@ -1,0 +1,265 @@
+{
+  "module_id": "LR00",
+  "module_title": "Live Readiness Review before any actual runtime/backend activation",
+  "phase": "LR-Live Readiness",
+  "status": "live_readiness_review_only_no_activation",
+  "depends_on": [
+    "QA01",
+    "QA00",
+    "ID02",
+    "IR00"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "homepage_mutation_enabled": false,
+  "asset_mutation_enabled": false,
+  "seo_metadata_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "language_runtime_mutation_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "gitignore_modification_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "activation_decision_enabled": false,
+  "review_areas": [
+    "validation",
+    "repo",
+    "asset",
+    "link",
+    "seo",
+    "language",
+    "hero_visual",
+    "responsive",
+    "console",
+    "deployment",
+    "activation_boundary"
+  ],
+  "allowed_review_statuses": [
+    "pass",
+    "warning",
+    "blocker",
+    "manual_check_required",
+    "acceptable_for_now",
+    "not_checked",
+    "not_applicable"
+  ],
+  "allowed_decisions": [
+    "no_go_for_activation",
+    "conditional_go_for_manual_live_review",
+    "go_for_static_live_observation_only",
+    "no_go_until_findings_reviewed",
+    "go_for_fix_patch_only"
+  ],
+  "default_activation_decision": {
+    "runtime_activation": "no_go_for_activation",
+    "backend_activation": "no_go_for_activation",
+    "supabase_activation": "no_go_for_activation",
+    "auth_activation": "no_go_for_activation",
+    "api_activation": "no_go_for_activation",
+    "payment_activation": "no_go_for_activation",
+    "admin_activation": "no_go_for_activation",
+    "public_dynamic_output_activation": "no_go_for_activation",
+    "subscriber_output_activation": "no_go_for_activation",
+    "ml_embedding_activation": "no_go_for_activation"
+  },
+  "review_items": [
+    {
+      "item_key": "validate_project_passed",
+      "area": "validation",
+      "check": "validate:project passed after QA01.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "github_main_pushed",
+      "area": "repo",
+      "check": "Latest QA01 commit is pushed to GitHub main.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "qa01_missing_assets_reviewed",
+      "area": "asset",
+      "check": "QA01 missing local asset references reviewed.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "qa01_missing_links_reviewed",
+      "area": "link",
+      "check": "QA01 missing local page links reviewed.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "critical_hero_assets_reviewed",
+      "area": "asset",
+      "check": "Hero/logo/orbit critical assets reviewed.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "seo_core_present_reviewed",
+      "area": "seo",
+      "check": "Title, description, viewport, OG metadata reviewed.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "language_toggle_live_review",
+      "area": "language",
+      "check": "English/Hindi sticky behavior checked on live page.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "transliteration_fallback_live_review",
+      "area": "language",
+      "check": "No drstih vistirna fallback appears on Hindi-to-English return.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "desktop_live_review",
+      "area": "responsive",
+      "check": "Desktop live rendering checked.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "mobile_live_review",
+      "area": "responsive",
+      "check": "Mobile live rendering checked.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "browser_console_live_review",
+      "area": "console",
+      "check": "Live browser console checked for critical errors.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "primary_navigation_live_review",
+      "area": "link",
+      "check": "Primary navigation checked live.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "cta_links_live_review",
+      "area": "link",
+      "check": "CTA links checked live.",
+      "status": "manual_check_required"
+    },
+    {
+      "item_key": "backend_activation_boundary_confirmed",
+      "area": "activation_boundary",
+      "check": "Backend activation remains no-go.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "supabase_auth_api_boundary_confirmed",
+      "area": "activation_boundary",
+      "check": "Supabase/Auth/API activation remains no-go.",
+      "status": "not_checked"
+    },
+    {
+      "item_key": "frontend_deployment_not_triggered_by_lr00",
+      "area": "deployment",
+      "check": "LR00 does not deploy frontend.",
+      "status": "not_checked"
+    }
+  ],
+  "manual_live_review_checklist": [
+    "homepage_opens_on_live_url",
+    "latest_github_commit_deployed",
+    "hero_logo_orbit_visible",
+    "no_broken_critical_hero_image",
+    "english_hindi_toggle_sticky",
+    "normal_homepage_click_does_not_change_language",
+    "no_transliteration_fallback_on_return_to_english",
+    "desktop_layout_acceptable",
+    "mobile_layout_acceptable",
+    "console_has_no_critical_error",
+    "primary_navigation_works",
+    "cta_links_work",
+    "page_loads_without_obvious_broken_assets"
+  ],
+  "finding_treatment": {
+    "missing_assets_are_warning_by_default": true,
+    "missing_links_are_warning_by_default": true,
+    "critical_asset_missing_becomes_blocker": true,
+    "critical_link_missing_becomes_blocker": true,
+    "auto_fix_allowed": false,
+    "auto_delete_allowed": false,
+    "requires_separate_fix_patch": true
+  },
+  "preview_output": "data/quality/lr00-live-readiness-review-preview.json",
+  "preview_required_fields": [
+    "preview_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "qa_evidence",
+    "review_items",
+    "summary",
+    "decision",
+    "manual_live_review_checklist",
+    "blocked_capabilities",
+    "next_recommended_stage"
+  ],
+  "blocked_capabilities": [
+    "runtime_activation",
+    "backend_activation",
+    "api_route",
+    "server_endpoint",
+    "supabase",
+    "auth",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "homepage_mutation",
+    "asset_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "gitignore_modification",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "recommended_next_stage": {
+    "module_id": "LF00",
+    "title": "Homepage Asset and Link Findings Review/Fix Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": "requires_explicit_separate_approval",
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  },
+  "approved_live_readiness_labels": [
+    "live_readiness_review",
+    "no_activation",
+    "manual_live_review_required",
+    "qa_findings_recorded",
+    "backend_activation_no_go",
+    "safe_to_commit"
+  ]
+}
