@@ -1,0 +1,664 @@
+{
+  "preview_id": "I05_BACKEND_SUPABASE_READINESS_PREVIEW",
+  "module_id": "I05",
+  "status": "preview_only_backend_supabase_readiness_no_activation",
+  "preview_only": true,
+  "readiness_areas": [
+    {
+      "area_key": "backend_architecture",
+      "title": "Backend Architecture",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "I00",
+        "I01",
+        "I02",
+        "I03",
+        "I04",
+        "IR00"
+      ],
+      "activation_blockers": [
+        "needs_detailed_design",
+        "needs_validation_plan",
+        "needs_rollback_plan"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "supabase_project",
+      "title": "Supabase Project",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "project_selection",
+        "environment_separation",
+        "key_boundary",
+        "rls_design"
+      ],
+      "activation_blockers": [
+        "needs_supabase_decision",
+        "needs_env_policy",
+        "needs_service_role_boundary",
+        "needs_rls_policy"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "environment_and_secret_policy",
+      "title": "Environment and Secret Policy",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "I02",
+        "secret_handling_policy",
+        "key_rotation_policy",
+        "emergency_revoke_policy"
+      ],
+      "activation_blockers": [
+        "needs_secret_storage_decision",
+        "needs_gitignore_review_if_required",
+        "needs_validation_script"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "auth_model",
+      "title": "Auth Model",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "provider_decision",
+        "role_model",
+        "session_policy",
+        "privacy_review"
+      ],
+      "activation_blockers": [
+        "needs_auth_provider",
+        "needs_role_mapping",
+        "needs_callback_policy",
+        "needs_validation_tests"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "rls_policy",
+      "title": "RLS Policy",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "role_definitions",
+        "table_access_matrix",
+        "deny_by_default",
+        "validation_tests"
+      ],
+      "activation_blockers": [
+        "needs_table_schema",
+        "needs_auth_model",
+        "needs_policy_tests"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "database_schema",
+      "title": "Database Schema",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "I03",
+        "entity_review",
+        "sensitivity_review",
+        "storage_review"
+      ],
+      "activation_blockers": [
+        "needs_schema_design",
+        "needs_migration_plan",
+        "needs_backup_strategy"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "migration_strategy",
+      "title": "Migration Strategy",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "migration_order",
+        "rollback_migration",
+        "dry_run_environment",
+        "backup_before_migration"
+      ],
+      "activation_blockers": [
+        "needs_database_schema",
+        "needs_staging_environment",
+        "needs_validation_script"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "api_routes",
+      "title": "API Routes",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "route_inventory",
+        "request_response_contract",
+        "auth_gate",
+        "privacy_gate",
+        "audit_trace"
+      ],
+      "activation_blockers": [
+        "needs_m08_alignment",
+        "needs_auth_model",
+        "needs_feature_flags",
+        "needs_validation_tests"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "admin_review",
+      "title": "Admin Review",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "admin_role_model",
+        "reviewer_roles",
+        "review_queue_schema",
+        "audit_trace",
+        "rollback_model"
+      ],
+      "activation_blockers": [
+        "needs_auth",
+        "needs_rls",
+        "needs_admin_ui_plan",
+        "needs_review_queue_storage"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "subscriber_profile",
+      "title": "Subscriber Profile",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "auth",
+        "consent_records",
+        "privacy_preferences",
+        "data_minimization",
+        "redaction_policy"
+      ],
+      "activation_blockers": [
+        "needs_auth",
+        "needs_privacy_review",
+        "needs_rls",
+        "needs_consent_model"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "entitlement_payment",
+      "title": "Entitlement and Payment",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "payment_provider",
+        "plan_model",
+        "webhook_security",
+        "entitlement_sync",
+        "audit"
+      ],
+      "activation_blockers": [
+        "needs_payment_provider",
+        "needs_webhook_policy",
+        "needs_refund_flow",
+        "needs_validation_tests"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "content_registry",
+      "title": "Content Registry",
+      "readiness_status": "ready_for_detailed_design",
+      "required_before_activation": [
+        "C10_C16_handoff",
+        "admin_review_design",
+        "storage_design",
+        "approval_model"
+      ],
+      "activation_blockers": [
+        "needs_admin_boundary",
+        "needs_storage_decision",
+        "needs_publication_gate",
+        "needs_rollback_plan"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "prepare_detailed_design_in_future_module"
+    },
+    {
+      "area_key": "panchang_guidance_backend",
+      "title": "Panchang and Guidance Backend",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "M00_M10",
+        "source_review",
+        "internal_preview",
+        "public_or_subscriber_gate",
+        "audit_trace"
+      ],
+      "activation_blockers": [
+        "needs_calculation_engine_design",
+        "needs_source_validation",
+        "needs_privacy_review",
+        "needs_output_gate"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "internal_preview",
+      "title": "Internal Preview",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "I04",
+        "auth_gate",
+        "redaction_rules",
+        "audit_trace",
+        "safe_mode"
+      ],
+      "activation_blockers": [
+        "needs_auth",
+        "needs_route_boundary",
+        "needs_redaction_policy",
+        "needs_validation_tests"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "audit_logging",
+      "title": "Audit Logging",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "audit_schema",
+        "retention_policy",
+        "access_policy",
+        "rollback_linkage"
+      ],
+      "activation_blockers": [
+        "needs_storage_decision",
+        "needs_admin_boundary",
+        "needs_privacy_review"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "deployment_rollback",
+      "title": "Deployment and Rollback",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "staging_validation",
+        "backup_strategy",
+        "rollback_plan",
+        "safe_mode",
+        "monitoring"
+      ],
+      "activation_blockers": [
+        "needs_hosting_decision",
+        "needs_staging_environment",
+        "needs_incident_response"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "ml_embedding_backend",
+      "title": "ML and Embedding Backend",
+      "readiness_status": "blocked",
+      "required_before_activation": [
+        "asset_eligibility",
+        "rights_review",
+        "privacy_review",
+        "vector_boundary",
+        "delete_policy"
+      ],
+      "activation_blockers": [
+        "needs_ml_eligibility_gate",
+        "needs_embedding_eligibility_gate",
+        "needs_vector_store_decision",
+        "needs_delete_policy"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    },
+    {
+      "area_key": "monitoring_incident_response",
+      "title": "Monitoring and Incident Response",
+      "readiness_status": "planned_only",
+      "required_before_activation": [
+        "logging",
+        "alerts",
+        "disable_switches",
+        "incident_roles",
+        "post_deployment_validation"
+      ],
+      "activation_blockers": [
+        "needs_monitoring_plan",
+        "needs_emergency_disable_policy",
+        "needs_owner_mapping"
+      ],
+      "activated": false,
+      "backend_enabled": false,
+      "supabase_enabled": false,
+      "auth_enabled": false,
+      "rls_enabled": false,
+      "database_enabled": false,
+      "api_enabled": false,
+      "public_output_allowed": false,
+      "subscriber_output_allowed": false,
+      "next_action": "keep_blocked_until_prerequisites_are_met"
+    }
+  ],
+  "summary": {
+    "readiness_area_count": 18,
+    "readiness_status_counts": {
+      "planned_only": 8,
+      "blocked": 9,
+      "ready_for_detailed_design": 1
+    },
+    "activated_count": 0,
+    "backend_enabled_count": 0,
+    "supabase_enabled_count": 0,
+    "auth_enabled_count": 0,
+    "rls_enabled_count": 0,
+    "database_enabled_count": 0,
+    "api_enabled_count": 0,
+    "public_output_allowed_count": 0,
+    "subscriber_output_allowed_count": 0,
+    "activation_ready_count": 0
+  },
+  "supabase_readiness_requirements": [
+    "project_selection",
+    "environment_separation",
+    "anon_key_boundary",
+    "service_role_key_boundary",
+    "rls_policy_design",
+    "table_schema_design",
+    "migration_strategy",
+    "seed_import_strategy",
+    "backup_strategy",
+    "rollback_strategy",
+    "local_preview_fallback",
+    "admin_access_model",
+    "validation_plan"
+  ],
+  "auth_readiness_requirements": [
+    "auth_provider_decision",
+    "login_method",
+    "redirect_urls",
+    "callback_urls",
+    "session_policy",
+    "token_lifetime",
+    "role_mapping",
+    "admin_role_boundary",
+    "subscriber_role_boundary",
+    "logout_behavior",
+    "account_recovery_behavior",
+    "privacy_policy_alignment",
+    "validation_plan"
+  ],
+  "rls_readiness_requirements": [
+    "role_definitions",
+    "table_access_matrix",
+    "row_ownership_model",
+    "admin_read_write_rules",
+    "subscriber_read_write_rules",
+    "service_role_usage_rule",
+    "public_read_rule",
+    "audit_access_rule",
+    "deny_by_default_policy",
+    "validation_tests"
+  ],
+  "migration_readiness_requirements": [
+    "schema_review",
+    "migration_file_naming",
+    "migration_order",
+    "rollback_migration",
+    "seed_policy",
+    "dry_run_environment",
+    "backup_before_migration",
+    "validation_after_migration",
+    "production_promotion_gate"
+  ],
+  "environment_secret_requirements": [
+    "no_secrets_committed",
+    "server_only_secrets_remain_server_only",
+    "service_role_key_never_client_exposed",
+    "payment_secret_never_client_exposed",
+    "api_provider_secret_never_client_exposed",
+    "env_files_protected",
+    "environment_variable_categories_documented",
+    "key_rotation_process_defined",
+    "emergency_revoke_process_defined"
+  ],
+  "api_readiness_requirements": [
+    "route_inventory",
+    "route_purpose",
+    "request_envelope",
+    "response_envelope",
+    "error_taxonomy",
+    "auth_requirement",
+    "consent_requirement",
+    "entitlement_requirement",
+    "privacy_requirement",
+    "source_requirement",
+    "rate_limit_policy",
+    "cache_policy",
+    "audit_trace",
+    "rollback_path",
+    "validation_script"
+  ],
+  "deployment_rollback_requirements": [
+    "environment_separation",
+    "staging_validation",
+    "production_gate",
+    "database_backup",
+    "migration_rollback",
+    "feature_disable_switches",
+    "emergency_safe_mode",
+    "monitoring",
+    "incident_response",
+    "post_deployment_validation"
+  ],
+  "blocked_capabilities": [
+    "backend_activation",
+    "supabase_connection",
+    "supabase_project_creation",
+    "supabase_table_creation",
+    "service_role_operation",
+    "rls",
+    "rls_policy_creation",
+    "auth",
+    "auth_flow_creation",
+    "payment",
+    "payment_flow_creation",
+    "database_activation",
+    "database_client",
+    "database_migration",
+    "sql_file_creation",
+    "orm_model_creation",
+    "repository_layer",
+    "seed_script",
+    "api_route",
+    "server_endpoint",
+    "admin_ui",
+    "admin_route",
+    "live_review_queue",
+    "reviewer_assignment",
+    "approval_workflow",
+    "public_output",
+    "subscriber_output",
+    "content_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "final_registry_write",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "env_file_creation",
+    "secret_creation",
+    "secret_reading",
+    "backend_deployment"
+  ],
+  "next_recommended_stage": {
+    "module_id": "IR00",
+    "title": "Implementation Readiness Review and Go/No-Go Gate",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "database_activation_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
