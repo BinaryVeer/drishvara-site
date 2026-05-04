@@ -1,0 +1,1170 @@
+{
+  "module_id": "ID01",
+  "module_title": "Supabase Logical Schema and RLS Design without Migration",
+  "phase": "ID-Implementation Design",
+  "status": "supabase_logical_schema_rls_design_only_no_migration",
+  "depends_on": [
+    "ID00",
+    "IR00",
+    "I00",
+    "I01",
+    "I02",
+    "I03",
+    "I04",
+    "I05",
+    "C16"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_code_creation_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "supabase_connection_enabled": false,
+  "supabase_project_creation_enabled": false,
+  "supabase_table_creation_enabled": false,
+  "service_role_operation_enabled": false,
+  "rls_enabled": false,
+  "rls_policy_creation_enabled": false,
+  "auth_enabled": false,
+  "auth_flow_creation_enabled": false,
+  "payment_enabled": false,
+  "payment_flow_creation_enabled": false,
+  "database_activation_enabled": false,
+  "database_client_enabled": false,
+  "database_migration_enabled": false,
+  "sql_file_creation_enabled": false,
+  "orm_model_creation_enabled": false,
+  "repository_layer_enabled": false,
+  "seed_script_enabled": false,
+  "admin_review_enabled": false,
+  "admin_ui_enabled": false,
+  "admin_route_enabled": false,
+  "review_queue_write_enabled": false,
+  "live_review_queue_enabled": false,
+  "reviewer_assignment_enabled": false,
+  "approval_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_output_enabled": false,
+  "article_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "final_registry_write_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "env_file_creation_enabled": false,
+  "secret_creation_enabled": false,
+  "secret_reading_enabled": false,
+  "backend_deployment_enabled": false,
+  "schema_families": [
+    "content_governance",
+    "review_workflow",
+    "methodology_source_governance",
+    "panchang_observance",
+    "validation_learning",
+    "subscriber_profile_consent",
+    "entitlement_payment",
+    "guidance_personalization",
+    "feature_flag_safety",
+    "admin_audit",
+    "ml_embedding_eligibility"
+  ],
+  "future_role_families": [
+    "anonymous_public",
+    "subscriber",
+    "reviewer",
+    "admin_owner",
+    "service_role_server_only"
+  ],
+  "rls_policy_types": [
+    "deny_public",
+    "subscriber_self_read",
+    "subscriber_self_update_limited",
+    "subscriber_insert_consent",
+    "reviewer_read_limited",
+    "reviewer_role_scoped_access",
+    "reviewer_role_scoped_update",
+    "admin_full_access",
+    "admin_audited_read",
+    "server_only_insert",
+    "server_only_write",
+    "append_only_server_write"
+  ],
+  "logical_table_candidates": [
+    {
+      "table_name": "content_assets",
+      "schema_family": "content_governance",
+      "purpose": "Canonical future content asset registry after approval gates.",
+      "columns": [
+        "asset_id",
+        "asset_type",
+        "title",
+        "slug",
+        "article_path",
+        "category",
+        "public_safe_status",
+        "approval_status",
+        "created_at",
+        "updated_at"
+      ],
+      "primary_key": "asset_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [
+        "slug",
+        "article_path"
+      ],
+      "index_candidates": [
+        "category",
+        "public_safe_status",
+        "approval_status"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "none",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "content_asset_audit_required",
+      "activation_blockers": [
+        "needs_admin_boundary",
+        "needs_rls_policy",
+        "needs_migration_plan",
+        "needs_registry_write_gate"
+      ]
+    },
+    {
+      "table_name": "image_assets",
+      "schema_family": "content_governance",
+      "purpose": "Future image asset rights and usage registry.",
+      "columns": [
+        "image_asset_id",
+        "source_url",
+        "local_path",
+        "license_status",
+        "credit_line",
+        "alt_text",
+        "approval_status",
+        "created_at"
+      ],
+      "primary_key": "image_asset_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [
+        "source_url"
+      ],
+      "index_candidates": [
+        "license_status",
+        "approval_status"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "none",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "image_rights_audit_required",
+      "activation_blockers": [
+        "needs_rights_review",
+        "needs_image_review_gate",
+        "needs_migration_plan"
+      ]
+    },
+    {
+      "table_name": "verified_links",
+      "schema_family": "content_governance",
+      "purpose": "Future reviewed links/source references.",
+      "columns": [
+        "link_id",
+        "url",
+        "source_name",
+        "source_type",
+        "verification_status",
+        "last_checked_at",
+        "created_at"
+      ],
+      "primary_key": "link_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [
+        "url"
+      ],
+      "index_candidates": [
+        "source_type",
+        "verification_status"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "none",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "source_verification_audit_required",
+      "activation_blockers": [
+        "needs_source_review",
+        "needs_external_api_policy_if_checked",
+        "needs_migration_plan"
+      ]
+    },
+    {
+      "table_name": "review_queue_items",
+      "schema_family": "review_workflow",
+      "purpose": "Future admin-gated review queue.",
+      "columns": [
+        "queue_item_id",
+        "asset_id",
+        "current_review_status",
+        "priority",
+        "required_reviews",
+        "assigned_role",
+        "approval_status",
+        "created_at",
+        "updated_at"
+      ],
+      "primary_key": "queue_item_id",
+      "foreign_key_candidates": [
+        "asset_id -> content_assets.asset_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "asset_id",
+        "current_review_status",
+        "priority",
+        "assigned_role"
+      ],
+      "sensitivity_level": "restricted_admin",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_or_reviewer_scope",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": true,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_role_scoped_access",
+        "deny_public"
+      ],
+      "audit_requirement": "review_queue_audit_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_reviewer_roles",
+        "needs_rls_policy",
+        "needs_admin_boundary"
+      ]
+    },
+    {
+      "table_name": "review_audit_traces",
+      "schema_family": "review_workflow",
+      "purpose": "Future immutable audit trail for review actions.",
+      "columns": [
+        "audit_trace_id",
+        "queue_item_id",
+        "action",
+        "previous_status",
+        "new_status",
+        "actor_role",
+        "actor_label",
+        "decision_reason",
+        "created_at"
+      ],
+      "primary_key": "audit_trace_id",
+      "foreign_key_candidates": [
+        "queue_item_id -> review_queue_items.queue_item_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "queue_item_id",
+        "actor_role",
+        "created_at"
+      ],
+      "sensitivity_level": "restricted_admin",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_audit_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_own_scope",
+        "append_only_server_write",
+        "deny_public"
+      ],
+      "audit_requirement": "self_auditing_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_audit_policy",
+        "needs_rls_policy",
+        "needs_retention_policy"
+      ]
+    },
+    {
+      "table_name": "source_records",
+      "schema_family": "methodology_source_governance",
+      "purpose": "Future source-first reference record.",
+      "columns": [
+        "source_id",
+        "source_type",
+        "title",
+        "language",
+        "source_status",
+        "review_status",
+        "usage_scope",
+        "created_at"
+      ],
+      "primary_key": "source_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "source_type",
+        "source_status",
+        "review_status"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "none",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "source_record_audit_required",
+      "activation_blockers": [
+        "needs_source_review_workflow",
+        "needs_admin_boundary",
+        "needs_migration_plan"
+      ]
+    },
+    {
+      "table_name": "observance_rule_records",
+      "schema_family": "panchang_observance",
+      "purpose": "Future reviewed observance, vrat, and festival rules.",
+      "columns": [
+        "rule_id",
+        "observance_key",
+        "rule_family",
+        "source_id",
+        "activation_status",
+        "conflict_status",
+        "created_at",
+        "updated_at"
+      ],
+      "primary_key": "rule_id",
+      "foreign_key_candidates": [
+        "source_id -> source_records.source_id"
+      ],
+      "unique_key_candidates": [
+        "observance_key"
+      ],
+      "index_candidates": [
+        "rule_family",
+        "activation_status",
+        "conflict_status"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "none",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "observance_rule_audit_required",
+      "activation_blockers": [
+        "needs_rule_review",
+        "needs_source_review",
+        "needs_public_output_gate",
+        "needs_migration_plan"
+      ]
+    },
+    {
+      "table_name": "panchang_calculation_records",
+      "schema_family": "panchang_observance",
+      "purpose": "Future internal calculation trace for Panchang.",
+      "columns": [
+        "calculation_id",
+        "date",
+        "location_basis",
+        "timezone_basis",
+        "sunrise_basis",
+        "ayanamsha_basis",
+        "calculation_status",
+        "created_at"
+      ],
+      "primary_key": "calculation_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "date",
+        "calculation_status"
+      ],
+      "sensitivity_level": "internal_preview",
+      "pii_category": "location",
+      "row_ownership_model": "server_generated",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_read",
+        "reviewer_read_limited",
+        "server_insert_only",
+        "deny_public"
+      ],
+      "audit_requirement": "panchang_calculation_audit_required",
+      "activation_blockers": [
+        "needs_calculation_engine",
+        "needs_privacy_review",
+        "needs_output_gate",
+        "needs_migration_plan"
+      ]
+    },
+    {
+      "table_name": "validation_cycles",
+      "schema_family": "validation_learning",
+      "purpose": "Future periodic validation cycle record.",
+      "columns": [
+        "cycle_id",
+        "cycle_type",
+        "period_start",
+        "period_end",
+        "status",
+        "variance_count",
+        "created_at"
+      ],
+      "primary_key": "cycle_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "cycle_type",
+        "status",
+        "period_start",
+        "period_end"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "validation_cycle_audit_required",
+      "activation_blockers": [
+        "needs_validation_workflow",
+        "needs_admin_boundary",
+        "needs_migration_plan"
+      ]
+    },
+    {
+      "table_name": "learning_register_items",
+      "schema_family": "validation_learning",
+      "purpose": "Future controlled learning/correction register.",
+      "columns": [
+        "learning_id",
+        "cycle_id",
+        "source_module",
+        "issue_type",
+        "severity",
+        "status",
+        "reviewer_decision",
+        "created_at"
+      ],
+      "primary_key": "learning_id",
+      "foreign_key_candidates": [
+        "cycle_id -> validation_cycles.cycle_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "cycle_id",
+        "source_module",
+        "severity",
+        "status"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": true,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_role_scoped_update",
+        "deny_public"
+      ],
+      "audit_requirement": "learning_register_audit_required",
+      "activation_blockers": [
+        "needs_admin_boundary",
+        "needs_review_workflow",
+        "needs_rollback_policy"
+      ]
+    },
+    {
+      "table_name": "subscriber_profiles",
+      "schema_family": "subscriber_profile_consent",
+      "purpose": "Future subscriber profile record.",
+      "columns": [
+        "subscriber_id",
+        "profile_status",
+        "language_preference",
+        "profile_completeness",
+        "created_at",
+        "updated_at"
+      ],
+      "primary_key": "subscriber_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "profile_status"
+      ],
+      "sensitivity_level": "subscriber_private",
+      "pii_category": "profile",
+      "row_ownership_model": "subscriber_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": true,
+      "subscriber_write_allowed": true,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "subscriber_self_read",
+        "subscriber_self_update_limited",
+        "admin_audited_read",
+        "deny_public"
+      ],
+      "audit_requirement": "subscriber_profile_audit_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_consent_model",
+        "needs_privacy_review",
+        "needs_rls_policy"
+      ]
+    },
+    {
+      "table_name": "profile_input_records",
+      "schema_family": "subscriber_profile_consent",
+      "purpose": "Future detailed subscriber input record.",
+      "columns": [
+        "input_id",
+        "subscriber_id",
+        "input_type",
+        "input_value_ref",
+        "precision_status",
+        "created_at"
+      ],
+      "primary_key": "input_id",
+      "foreign_key_candidates": [
+        "subscriber_id -> subscriber_profiles.subscriber_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "subscriber_id",
+        "input_type"
+      ],
+      "sensitivity_level": "subscriber_private",
+      "pii_category": "birth_data",
+      "row_ownership_model": "subscriber_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": true,
+      "subscriber_write_allowed": true,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": false,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "subscriber_self_read",
+        "subscriber_self_update_limited",
+        "deny_public",
+        "deny_reviewer"
+      ],
+      "audit_requirement": "sensitive_profile_input_audit_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_consent_gate",
+        "needs_privacy_review",
+        "needs_rls_policy"
+      ]
+    },
+    {
+      "table_name": "consent_records",
+      "schema_family": "subscriber_profile_consent",
+      "purpose": "Future subscriber consent history.",
+      "columns": [
+        "consent_id",
+        "subscriber_id",
+        "consent_type",
+        "status",
+        "scope",
+        "version",
+        "created_at",
+        "withdrawn_at"
+      ],
+      "primary_key": "consent_id",
+      "foreign_key_candidates": [
+        "subscriber_id -> subscriber_profiles.subscriber_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "subscriber_id",
+        "consent_type",
+        "status"
+      ],
+      "sensitivity_level": "subscriber_private",
+      "pii_category": "authentication",
+      "row_ownership_model": "subscriber_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": true,
+      "subscriber_write_allowed": true,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "subscriber_self_read",
+        "subscriber_insert_consent",
+        "admin_audited_read",
+        "deny_public"
+      ],
+      "audit_requirement": "consent_audit_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_privacy_policy",
+        "needs_rls_policy",
+        "needs_audit_store"
+      ]
+    },
+    {
+      "table_name": "subscriber_entitlements",
+      "schema_family": "entitlement_payment",
+      "purpose": "Future subscriber entitlement status.",
+      "columns": [
+        "entitlement_id",
+        "subscriber_id",
+        "plan_key",
+        "status",
+        "valid_from",
+        "valid_until",
+        "payment_provider_ref",
+        "created_at"
+      ],
+      "primary_key": "entitlement_id",
+      "foreign_key_candidates": [
+        "subscriber_id -> subscriber_profiles.subscriber_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "subscriber_id",
+        "plan_key",
+        "status"
+      ],
+      "sensitivity_level": "subscriber_private",
+      "pii_category": "payment",
+      "row_ownership_model": "subscriber_owned_server_managed",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": true,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "subscriber_self_read",
+        "server_only_write",
+        "admin_audited_read",
+        "deny_public"
+      ],
+      "audit_requirement": "entitlement_audit_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_payment_provider",
+        "needs_webhook_security",
+        "needs_rls_policy"
+      ]
+    },
+    {
+      "table_name": "payment_events",
+      "schema_family": "entitlement_payment",
+      "purpose": "Future payment provider event audit.",
+      "columns": [
+        "payment_event_id",
+        "subscriber_id",
+        "provider",
+        "event_type",
+        "status",
+        "provider_event_ref",
+        "created_at"
+      ],
+      "primary_key": "payment_event_id",
+      "foreign_key_candidates": [
+        "subscriber_id -> subscriber_profiles.subscriber_id"
+      ],
+      "unique_key_candidates": [
+        "provider_event_ref"
+      ],
+      "index_candidates": [
+        "subscriber_id",
+        "provider",
+        "event_type",
+        "status"
+      ],
+      "sensitivity_level": "restricted_admin",
+      "pii_category": "payment",
+      "row_ownership_model": "server_managed",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "server_only_insert",
+        "admin_audited_read",
+        "deny_public",
+        "deny_subscriber_write"
+      ],
+      "audit_requirement": "payment_event_audit_required",
+      "activation_blockers": [
+        "needs_payment_provider",
+        "needs_webhook_security",
+        "needs_secret_policy",
+        "needs_rls_policy"
+      ]
+    },
+    {
+      "table_name": "guidance_cards",
+      "schema_family": "guidance_personalization",
+      "purpose": "Future subscriber guidance card record.",
+      "columns": [
+        "guidance_id",
+        "subscriber_id",
+        "guidance_date",
+        "guidance_type",
+        "source_trace_id",
+        "safety_status",
+        "created_at"
+      ],
+      "primary_key": "guidance_id",
+      "foreign_key_candidates": [
+        "subscriber_id -> subscriber_profiles.subscriber_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "subscriber_id",
+        "guidance_date",
+        "guidance_type"
+      ],
+      "sensitivity_level": "subscriber_private",
+      "pii_category": "sensitive_preference",
+      "row_ownership_model": "subscriber_owned_server_generated",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": true,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": false,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "subscriber_self_read",
+        "server_only_insert",
+        "deny_public",
+        "deny_reviewer"
+      ],
+      "audit_requirement": "guidance_generation_audit_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_consent_gate",
+        "needs_entitlement_gate",
+        "needs_subscriber_output_gate"
+      ]
+    },
+    {
+      "table_name": "feature_flags",
+      "schema_family": "feature_flag_safety",
+      "purpose": "Future feature flag definitions or state if not static JSON.",
+      "columns": [
+        "flag_key",
+        "family",
+        "default_value",
+        "current_value",
+        "approval_gate",
+        "updated_at"
+      ],
+      "primary_key": "flag_key",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [
+        "flag_key"
+      ],
+      "index_candidates": [
+        "family",
+        "current_value"
+      ],
+      "sensitivity_level": "internal_governance",
+      "pii_category": "none",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "feature_flag_audit_required",
+      "activation_blockers": [
+        "needs_flag_evaluator_plan",
+        "needs_admin_boundary",
+        "needs_rollback_plan"
+      ]
+    },
+    {
+      "table_name": "admin_action_audits",
+      "schema_family": "admin_audit",
+      "purpose": "Future restricted admin action audit.",
+      "columns": [
+        "admin_action_id",
+        "actor_id_or_label",
+        "actor_role",
+        "action",
+        "affected_entity",
+        "decision_reason",
+        "created_at"
+      ],
+      "primary_key": "admin_action_id",
+      "foreign_key_candidates": [],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "actor_role",
+        "action",
+        "affected_entity",
+        "created_at"
+      ],
+      "sensitivity_level": "restricted_admin",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_audit_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": false,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": false,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_audited_read",
+        "server_only_insert",
+        "deny_public"
+      ],
+      "audit_requirement": "self_auditing_required",
+      "activation_blockers": [
+        "needs_auth",
+        "needs_admin_boundary",
+        "needs_retention_policy",
+        "needs_rls_policy"
+      ]
+    },
+    {
+      "table_name": "ml_eligibility_records",
+      "schema_family": "ml_embedding_eligibility",
+      "purpose": "Future ML-training eligibility review record.",
+      "columns": [
+        "eligibility_id",
+        "asset_id",
+        "source_review_status",
+        "rights_review_status",
+        "privacy_review_status",
+        "ml_training_eligible",
+        "created_at"
+      ],
+      "primary_key": "eligibility_id",
+      "foreign_key_candidates": [
+        "asset_id -> content_assets.asset_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "asset_id",
+        "ml_training_eligible"
+      ],
+      "sensitivity_level": "restricted_admin",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "ml_eligibility_audit_required",
+      "activation_blockers": [
+        "needs_source_review",
+        "needs_rights_review",
+        "needs_privacy_review",
+        "needs_ml_gate"
+      ]
+    },
+    {
+      "table_name": "embedding_eligibility_records",
+      "schema_family": "ml_embedding_eligibility",
+      "purpose": "Future embedding eligibility review record.",
+      "columns": [
+        "eligibility_id",
+        "asset_id",
+        "source_review_status",
+        "rights_review_status",
+        "privacy_review_status",
+        "embedding_eligible",
+        "created_at"
+      ],
+      "primary_key": "eligibility_id",
+      "foreign_key_candidates": [
+        "asset_id -> content_assets.asset_id"
+      ],
+      "unique_key_candidates": [],
+      "index_candidates": [
+        "asset_id",
+        "embedding_eligible"
+      ],
+      "sensitivity_level": "restricted_admin",
+      "pii_category": "operational_audit",
+      "row_ownership_model": "admin_owned",
+      "public_read_allowed": false,
+      "subscriber_read_allowed": false,
+      "subscriber_write_allowed": false,
+      "reviewer_read_allowed": true,
+      "reviewer_write_allowed": false,
+      "admin_read_allowed": true,
+      "admin_write_allowed": true,
+      "service_role_use_allowed": "server_only_future",
+      "rls_policy_candidates": [
+        "admin_full_access",
+        "reviewer_read_limited",
+        "deny_public"
+      ],
+      "audit_requirement": "embedding_eligibility_audit_required",
+      "activation_blockers": [
+        "needs_source_review",
+        "needs_rights_review",
+        "needs_privacy_review",
+        "needs_embedding_gate"
+      ]
+    }
+  ],
+  "migration_boundary": {
+    "sql_file_creation_allowed": false,
+    "migration_creation_allowed": false,
+    "table_creation_allowed": false,
+    "rls_policy_creation_allowed": false,
+    "database_connection_allowed": false,
+    "seed_creation_allowed": false,
+    "future_requirements": [
+      "sql_migration_naming",
+      "migration_order",
+      "rollback_migration",
+      "seed_import_plan",
+      "staging_dry_run",
+      "backup_before_migration",
+      "validation_after_migration",
+      "production_promotion_gate"
+    ]
+  },
+  "preview_output": "data/implementation/id01-supabase-logical-schema-rls-design-preview.json",
+  "preview_required_fields": [
+    "preview_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "schema_families",
+    "future_role_families",
+    "rls_policy_types",
+    "logical_table_candidates",
+    "summary",
+    "migration_boundary",
+    "blocked_capabilities",
+    "next_recommended_stage"
+  ],
+  "table_required_fields": [
+    "table_name",
+    "schema_family",
+    "purpose",
+    "columns",
+    "primary_key",
+    "foreign_key_candidates",
+    "unique_key_candidates",
+    "index_candidates",
+    "sensitivity_level",
+    "pii_category",
+    "row_ownership_model",
+    "public_read_allowed",
+    "subscriber_read_allowed",
+    "subscriber_write_allowed",
+    "reviewer_read_allowed",
+    "reviewer_write_allowed",
+    "admin_read_allowed",
+    "admin_write_allowed",
+    "service_role_use_allowed",
+    "rls_policy_candidates",
+    "audit_requirement",
+    "activation_blockers"
+  ],
+  "blocked_capabilities": [
+    "backend_code_creation",
+    "runtime_activation",
+    "backend_activation",
+    "api_route",
+    "server_endpoint",
+    "supabase_connection",
+    "supabase_project_creation",
+    "supabase_table_creation",
+    "service_role_operation",
+    "rls",
+    "rls_policy_creation",
+    "auth",
+    "auth_flow_creation",
+    "payment",
+    "payment_flow_creation",
+    "database_activation",
+    "database_client",
+    "database_migration",
+    "sql_file_creation",
+    "orm_model_creation",
+    "repository_layer",
+    "seed_script",
+    "admin_ui",
+    "admin_route",
+    "live_review_queue",
+    "reviewer_assignment",
+    "approval_workflow",
+    "public_output",
+    "subscriber_output",
+    "content_mutation",
+    "homepage_mutation",
+    "sitemap_mutation",
+    "final_registry_write",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "env_file_creation",
+    "secret_creation",
+    "secret_reading",
+    "backend_deployment"
+  ],
+  "recommended_next_stage": {
+    "module_id": "ID02",
+    "title": "API Route Contract Design without Route Creation",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "ml_allowed": false,
+    "database_activation_allowed": false,
+    "migration_allowed": false,
+    "api_route_creation_allowed": false,
+    "activation_decision_allowed": false
+  },
+  "approved_design_labels": [
+    "supabase_logical_schema_design",
+    "rls_design_only",
+    "no_migration",
+    "no_sql_files",
+    "no_supabase_connection",
+    "no_table_creation",
+    "no_rls_policy_creation",
+    "no_public_output",
+    "safe_to_commit"
+  ]
+}
