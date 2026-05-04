@@ -1,0 +1,244 @@
+{
+  "module_id": "M04",
+  "module_title": "Location / Timezone / Sunrise Basis",
+  "phase": "M-Methodology",
+  "status": "location_timezone_event_window_methodology_only",
+  "depends_on": [
+    "M00",
+    "M01",
+    "M02",
+    "M03"
+  ],
+  "runtime_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_panchang_enabled": false,
+  "public_festival_dates_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "geocoding_runtime_enabled": false,
+  "sunrise_runtime_enabled": false,
+  "sunset_runtime_enabled": false,
+  "moonrise_runtime_enabled": false,
+  "event_window_runtime_enabled": false,
+  "doctrine_version": "0.1.0",
+  "scope": {
+    "included": [
+      "location_basis_doctrine",
+      "coordinate_precision_doctrine",
+      "timezone_doctrine",
+      "utc_local_time_preservation",
+      "sunrise_basis_doctrine",
+      "sunset_basis_doctrine",
+      "moonrise_basis_doctrine",
+      "pradosh_window_basis_doctrine",
+      "parana_window_basis_doctrine",
+      "event_window_basis_doctrine",
+      "polar_extreme_latitude_doctrine",
+      "elevation_horizon_doctrine",
+      "geocoding_privacy_doctrine",
+      "validation_doctrine"
+    ],
+    "excluded": [
+      "live_sunrise_calculation",
+      "live_sunset_calculation",
+      "live_moonrise_calculation",
+      "public_panchang_calendar",
+      "public_festival_date_output",
+      "subscriber_output",
+      "personalized_guidance",
+      "auth",
+      "supabase",
+      "payment",
+      "subscription_entitlement",
+      "external_api_fetch",
+      "geocoding_api",
+      "map_api",
+      "gps_tracking",
+      "runtime_dashboard_card"
+    ]
+  },
+  "location_record_required_fields": [
+    "location_id",
+    "location_name",
+    "country",
+    "region",
+    "district_or_city",
+    "latitude",
+    "longitude",
+    "coordinate_precision",
+    "coordinate_source",
+    "timezone_id",
+    "timezone_source",
+    "timezone_version",
+    "review_status",
+    "public_safe_label"
+  ],
+  "coordinate_precision_labels": [
+    "exact_user_confirmed",
+    "city_centroid",
+    "district_centroid",
+    "state_centroid",
+    "country_centroid",
+    "approximate_manual",
+    "pending_review"
+  ],
+  "timezone_requirements": {
+    "iana_timezone_required": true,
+    "fixed_utc_offset_only_allowed": false,
+    "store_utc_offset_at_instant": true,
+    "store_dst_status_where_applicable": true,
+    "store_timezone_database_version_where_available": true,
+    "store_utc_and_local_time": true
+  },
+  "sunrise_basis": {
+    "runtime_enabled": false,
+    "basis_status": "methodology_only_pending_review",
+    "supported_future_basis": [
+      "apparent_upper_limb_level_horizon",
+      "geometric_center",
+      "reviewed_custom_basis"
+    ],
+    "required_disclosures": [
+      "geometric_or_apparent_basis",
+      "solar_disk_limb_convention",
+      "atmospheric_refraction_assumption",
+      "elevation_handling",
+      "horizon_handling",
+      "coordinate_basis",
+      "algorithm_or_ephemeris_source",
+      "validation_source",
+      "review_status"
+    ],
+    "default_public_output_allowed": false
+  },
+  "sunset_basis": {
+    "runtime_enabled": false,
+    "must_mirror_sunrise_convention": true,
+    "required_disclosures": [
+      "local_sunset_time",
+      "utc_sunset_time",
+      "geometric_or_apparent_basis",
+      "solar_limb_convention",
+      "refraction_assumption",
+      "elevation_assumption",
+      "horizon_assumption",
+      "review_status"
+    ]
+  },
+  "moonrise_basis": {
+    "runtime_enabled": false,
+    "required_disclosures": [
+      "local_moonrise_time",
+      "utc_moonrise_time",
+      "calculation_basis",
+      "lunar_parallax_handling",
+      "lunar_disk_convention",
+      "horizon_assumption",
+      "visibility_limitation_note",
+      "review_status"
+    ]
+  },
+  "event_window_labels": [
+    "sunrise",
+    "sunset",
+    "moonrise",
+    "pradosh_kala",
+    "parana_window",
+    "solar_ingress",
+    "midnight",
+    "nishita_kala",
+    "aparahna_kala",
+    "madhyahna_kala",
+    "custom_reviewed_window"
+  ],
+  "pradosh_window_requirements": [
+    "local_sunset_time",
+    "pradosh_window_start",
+    "pradosh_window_end",
+    "window_definition_source",
+    "trayodashi_overlap",
+    "minimum_overlap_rule_if_applicable",
+    "regional_or_sampradaya_variant",
+    "review_status"
+  ],
+  "parana_window_requirements": [
+    "fasting_observance_date",
+    "parana_date",
+    "sunrise_on_parana_date",
+    "parana_start",
+    "parana_end",
+    "restricted_period_if_applicable_after_source_review",
+    "sampradaya_variant",
+    "review_status"
+  ],
+  "edge_case_flags": [
+    "no_sunrise",
+    "no_sunset",
+    "polar_day",
+    "polar_night",
+    "no_moonrise",
+    "no_moonset",
+    "ambiguous_event_window",
+    "human_review_required"
+  ],
+  "privacy_rules": [
+    "do_not_store_precise_user_coordinates_without_consent",
+    "do_not_publicly_expose_exact_birth_location",
+    "allow_city_level_approximation_for_non_critical_guidance",
+    "store_minimum_location_precision_required",
+    "separate_calculation_location_from_displayed_location"
+  ],
+  "future_event_window_contract_required_sections": [
+    "date",
+    "location_id",
+    "timezone_id",
+    "sunrise",
+    "sunset",
+    "moonrise",
+    "pradosh_window",
+    "parana_window",
+    "solar_ingress_window",
+    "basis_disclosure",
+    "approximation_flags",
+    "conflict_flags",
+    "review_status"
+  ],
+  "validation_requirements": [
+    "established_astronomical_reference",
+    "independent_computational_implementation",
+    "multiple_indian_locations",
+    "non_india_timezone_locations",
+    "dst_locations",
+    "high_latitude_edge_cases",
+    "dates_near_solstices",
+    "moonrise_dependent_observance_cases",
+    "sunset_pradosh_dependent_cases",
+    "parana_dependent_cases"
+  ],
+  "approved_output_labels": [
+    "methodology_only",
+    "location_basis_pending_review",
+    "timezone_basis_declared",
+    "sunrise_basis_pending_review",
+    "sunset_basis_pending_review",
+    "moonrise_basis_pending_review",
+    "event_window_pending_review",
+    "not_public_output",
+    "human_review_required"
+  ],
+  "review_gates": [
+    "location_source_review",
+    "timezone_review",
+    "sunrise_basis_review",
+    "sunset_basis_review",
+    "moonrise_basis_review",
+    "pradosh_window_review",
+    "parana_window_review",
+    "privacy_review",
+    "edge_case_review",
+    "validation_review",
+    "output_safety_review"
+  ]
+}
