@@ -29,8 +29,30 @@ function extractMetaContent(html, attrName, attrValue) {
   return match ? (match[1] || match[2] || "") : "";
 }
 
+function isDynamicOrPlaceholderRef(ref) {
+  const value = String(ref || "").trim();
+
+  if (!value) return true;
+
+  // Ignore JS/template placeholders and runtime variables captured by simple HTML regex scans.
+  if (value.includes("${") || value.includes("}") || value.includes("(") || value.includes(")")) return true;
+
+  // Ignore bare JS variable names such as imagePath, fallbackPath, item, href, src.
+  // Real local paths normally contain / or . or start with ./ or ../.
+  if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(value)) return true;
+
+  return false;
+}
+
 function isLocalRef(ref) {
-  return ref && !ref.startsWith("http://") && !ref.startsWith("https://") && !ref.startsWith("//") && !ref.startsWith("#") && !ref.startsWith("mailto:") && !ref.startsWith("tel:");
+  return ref &&
+    !isDynamicOrPlaceholderRef(ref) &&
+    !ref.startsWith("http://") &&
+    !ref.startsWith("https://") &&
+    !ref.startsWith("//") &&
+    !ref.startsWith("#") &&
+    !ref.startsWith("mailto:") &&
+    !ref.startsWith("tel:");
 }
 
 function cleanRef(ref) {

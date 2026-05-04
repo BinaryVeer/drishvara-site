@@ -50,42 +50,6 @@
       {
         "ref": "assets/logo/logo.png",
         "status": "present"
-      },
-      {
-        "ref": "${escapeAttribute(fallback)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeAttribute(src)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeAttr(item.image)}",
-        "status": "missing"
-      },
-      {
-        "ref": "imagePath",
-        "status": "missing"
-      },
-      {
-        "ref": "imagePath",
-        "status": "missing"
-      },
-      {
-        "ref": "fallbackPath",
-        "status": "missing"
-      },
-      {
-        "ref": "item",
-        "status": "missing"
-      },
-      {
-        "ref": "item",
-        "status": "missing"
-      },
-      {
-        "ref": "item",
-        "status": "missing"
       }
     ],
     "anchor_refs": [
@@ -120,36 +84,10 @@
       {
         "ref": "article.html",
         "status": "present"
-      },
-      {
-        "ref": "${escapeAttribute(link.href)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeHtml(href)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeHtml(articleUrl(item))}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeHtml(articleUrl(item))}",
-        "status": "missing"
       }
     ],
-    "missing_local_asset_count": 9,
-    "missing_local_assets": [
-      "${escapeAttribute(fallback)}",
-      "${escapeAttribute(src)}",
-      "${escapeAttr(item.image)}",
-      "imagePath",
-      "imagePath",
-      "fallbackPath",
-      "item",
-      "item",
-      "item"
-    ]
+    "missing_local_asset_count": 0,
+    "missing_local_assets": []
   },
   "audit_items": [
     {
@@ -212,7 +150,7 @@
       "item_key": "local_images_resolve",
       "area": "asset_loading",
       "check": "Local image references resolve.",
-      "status": "warning",
+      "status": "pass",
       "mutation_performed": false
     },
     {
@@ -338,8 +276,7 @@
   "summary": {
     "audit_item_count": 26,
     "status_counts": {
-      "pass": 8,
-      "warning": 1,
+      "pass": 9,
       "not_checked": 17
     },
     "area_counts": {
@@ -354,8 +291,8 @@
       "live_deployment": 3
     },
     "mutation_performed_count": 0,
-    "inferred_static_pass_count": 8,
-    "inferred_static_warning_count": 1,
+    "inferred_static_pass_count": 9,
+    "inferred_static_warning_count": 0,
     "inferred_static_fail_count": 0,
     "manual_check_remaining_count": 17,
     "homepage_mutation_enabled": false,

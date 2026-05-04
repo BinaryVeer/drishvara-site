@@ -16,6 +16,7 @@
       "activation:supabase:preflight",
       "activation:supabase:validation:preflight",
       "admin-review:preflight",
+      "apply:lf01",
       "auth-access:preflight",
       "bilingual:preflight",
       "build:article-index",
@@ -50,6 +51,9 @@
       "generate:id01",
       "generate:id02",
       "generate:ir00",
+      "generate:lf00",
+      "generate:lf01",
+      "generate:lr00",
       "generate:qa00",
       "generate:qa01",
       "hindi-body:preflight",
@@ -113,6 +117,7 @@
       "validate:c15",
       "validate:c16",
       "validate:content",
+      "validate:findings",
       "validate:i00",
       "validate:i01",
       "validate:i02",
@@ -124,6 +129,10 @@
       "validate:id02",
       "validate:implementation",
       "validate:ir00",
+      "validate:lf00",
+      "validate:lf01",
+      "validate:live",
+      "validate:lr00",
       "validate:m00",
       "validate:m01",
       "validate:m02",
@@ -198,42 +207,6 @@
       {
         "ref": "assets/logo/logo.png",
         "status": "present"
-      },
-      {
-        "ref": "${escapeAttribute(fallback)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeAttribute(src)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeAttr(item.image)}",
-        "status": "missing"
-      },
-      {
-        "ref": "imagePath",
-        "status": "missing"
-      },
-      {
-        "ref": "imagePath",
-        "status": "missing"
-      },
-      {
-        "ref": "fallbackPath",
-        "status": "missing"
-      },
-      {
-        "ref": "item",
-        "status": "missing"
-      },
-      {
-        "ref": "item",
-        "status": "missing"
-      },
-      {
-        "ref": "item",
-        "status": "missing"
       }
     ],
     "local_page_links": [
@@ -268,49 +241,18 @@
       {
         "ref": "article.html",
         "status": "present"
-      },
-      {
-        "ref": "${escapeAttribute(link.href)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeHtml(href)}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeHtml(articleUrl(item))}",
-        "status": "missing"
-      },
-      {
-        "ref": "${escapeHtml(articleUrl(item))}",
-        "status": "missing"
       }
     ],
     "anchor_links": [],
     "external_links": [],
     "backup_refs": [],
-    "missing_local_asset_count": 9,
+    "missing_local_asset_count": 0,
     "missing_stylesheet_refs": [],
     "missing_script_refs": [],
-    "missing_image_refs": [
-      "${escapeAttribute(fallback)}",
-      "${escapeAttribute(src)}",
-      "${escapeAttr(item.image)}",
-      "imagePath",
-      "imagePath",
-      "fallbackPath",
-      "item",
-      "item",
-      "item"
-    ],
-    "missing_local_link_count": 4,
-    "missing_local_links": [
-      "${escapeAttribute(link.href)}",
-      "${escapeHtml(href)}",
-      "${escapeHtml(articleUrl(item))}",
-      "${escapeHtml(articleUrl(item))}"
-    ],
-    "qa00_missing_local_asset_count": 9
+    "missing_image_refs": [],
+    "missing_local_link_count": 0,
+    "missing_local_links": [],
+    "qa00_missing_local_asset_count": 0
   },
   "smoke_items": [
     {
@@ -373,14 +315,14 @@
       "item_key": "image_refs_reviewed",
       "area": "asset",
       "check": "Local image references are reviewed.",
-      "status": "warning",
+      "status": "pass",
       "mutation_performed": false
     },
     {
       "item_key": "critical_asset_missing_reviewed",
       "area": "asset",
       "check": "Missing critical assets are reviewed.",
-      "status": "warning",
+      "status": "pass",
       "mutation_performed": false
     },
     {
@@ -450,7 +392,7 @@
       "item_key": "local_page_links_reviewed",
       "area": "link",
       "check": "Local page links are reviewed.",
-      "status": "warning",
+      "status": "pass",
       "mutation_performed": false
     },
     {
@@ -513,8 +455,8 @@
   "summary": {
     "smoke_item_count": 28,
     "status_counts": {
-      "pass": 15,
-      "warning": 5,
+      "pass": 18,
+      "warning": 2,
       "not_applicable": 2,
       "not_checked": 6
     },
@@ -528,12 +470,12 @@
       "deployment": 2
     },
     "mutation_performed_count": 0,
-    "missing_local_asset_count": 9,
-    "missing_local_link_count": 4,
+    "missing_local_asset_count": 0,
+    "missing_local_link_count": 0,
     "manual_check_remaining_count": 6,
-    "warning_count": 5,
+    "warning_count": 2,
     "fail_count": 0,
-    "pass_count": 15,
+    "pass_count": 18,
     "homepage_mutation_enabled": false,
     "asset_mutation_enabled": false,
     "seo_metadata_mutation_enabled": false,

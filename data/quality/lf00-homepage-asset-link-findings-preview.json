@@ -6,177 +6,19 @@
   "qa_evidence": {
     "qa01_preview_present": true,
     "lr00_preview_present": true,
-    "qa01_missing_local_asset_count": 9,
-    "qa01_missing_local_link_count": 4,
-    "lr00_decision": "no_go_until_findings_reviewed"
+    "qa01_missing_local_asset_count": 0,
+    "qa01_missing_local_link_count": 0,
+    "lr00_decision": "conditional_go_for_manual_live_review"
   },
-  "asset_findings": [
-    {
-      "finding_id": "LF00-ASSET-001",
-      "reference": "${escapeAttribute(fallback)}",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-002",
-      "reference": "${escapeAttribute(src)}",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-003",
-      "reference": "${escapeAttr(item.image)}",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-004",
-      "reference": "imagePath",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-005",
-      "reference": "imagePath",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-006",
-      "reference": "fallbackPath",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-007",
-      "reference": "item",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-008",
-      "reference": "item",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-ASSET-009",
-      "reference": "item",
-      "reference_type": "image",
-      "finding_class": "unknown_asset_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect SEO/visual polish if actually used by homepage.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    }
-  ],
-  "link_findings": [
-    {
-      "finding_id": "LF00-LINK-001",
-      "reference": "${escapeAttribute(link.href)}",
-      "reference_type": "local_page",
-      "finding_class": "unknown_link_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect deeper navigation if visible.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-LINK-002",
-      "reference": "${escapeHtml(href)}",
-      "reference_type": "local_page",
-      "finding_class": "unknown_link_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect deeper navigation if visible.",
-      "recommended_action": "verify_reference",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-LINK-003",
-      "reference": "${escapeHtml(articleUrl(item))}",
-      "reference_type": "local_page",
-      "finding_class": "article_link_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect deeper navigation if visible.",
-      "recommended_action": "create_target_page_later",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    },
-    {
-      "finding_id": "LF00-LINK-004",
-      "reference": "${escapeHtml(articleUrl(item))}",
-      "reference_type": "local_page",
-      "finding_class": "article_link_candidate",
-      "severity": "warning",
-      "likely_user_visible_impact": "May affect deeper navigation if visible.",
-      "recommended_action": "create_target_page_later",
-      "manual_review_required": true,
-      "auto_fix_performed": false,
-      "mutation_performed": false
-    }
-  ],
+  "asset_findings": [],
+  "link_findings": [],
   "summary": {
-    "asset_finding_count": 9,
-    "link_finding_count": 4,
-    "total_finding_count": 13,
+    "asset_finding_count": 0,
+    "link_finding_count": 0,
+    "total_finding_count": 0,
     "blocker_candidate_count": 0,
-    "warning_count": 13,
-    "manual_review_required_count": 13,
+    "warning_count": 0,
+    "manual_review_required_count": 0,
     "auto_fix_performed_count": 0,
     "mutation_performed_count": 0,
     "homepage_mutation_enabled": false,
@@ -191,10 +33,10 @@
     "backend_deployment_enabled": false
   },
   "decision": {
-    "findings_review_decision": "go_for_manual_review_first",
-    "findings_review_summary": "Manual review is required before clean live confidence.",
-    "clean_live_confidence": "not_yet",
-    "targeted_fix_patch_recommended": true,
+    "findings_review_decision": "acceptable_for_live_observation_with_warnings",
+    "findings_review_summary": "No missing asset/link findings were found by QA01.",
+    "clean_live_confidence": "possible_after_manual_live_review",
+    "targeted_fix_patch_recommended": false,
     "activation_allowed": false
   },
   "manual_review_checklist": [

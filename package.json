@@ -150,7 +150,10 @@
     "validate:live": "npm run validate:lr00",
     "generate:lf00": "node scripts/generate-lf00-homepage-asset-link-findings-preview.mjs",
     "validate:lf00": "node scripts/validate-lf00-homepage-asset-link-findings.mjs",
-    "validate:findings": "npm run validate:lf00"
+    "validate:findings": "npm run validate:lf00 && npm run validate:lf01",
+    "generate:lf01": "node scripts/generate-lf01-targeted-homepage-fix-plan.mjs",
+    "apply:lf01": "node scripts/apply-lf01-targeted-homepage-fix.mjs",
+    "validate:lf01": "node scripts/validate-lf01-targeted-homepage-fix.mjs"
   },
   "repository": {
     "type": "git",
