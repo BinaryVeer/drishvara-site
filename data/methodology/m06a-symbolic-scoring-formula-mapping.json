@@ -1,0 +1,269 @@
+{
+  "module_id": "M06A",
+  "module_title": "Symbolic Scoring Formula & Mapping Doctrine",
+  "phase": "M-Methodology",
+  "status": "symbolic_scoring_mapping_methodology_only",
+  "depends_on": [
+    "M00",
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M04A",
+    "M05",
+    "M06"
+  ],
+  "runtime_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_guidance_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "live_scoring_enabled": false,
+  "lucky_number_output_enabled": false,
+  "lucky_colour_output_enabled": false,
+  "mantra_output_enabled": false,
+  "automatic_remedy_enabled": false,
+  "personalization_runtime_enabled": false,
+  "doctrine_version": "0.1.0",
+  "scope": {
+    "included": [
+      "symbolic_scoring_doctrine",
+      "core_scoring_formula",
+      "default_weight_doctrine",
+      "number_mapping_doctrine",
+      "colour_mapping_doctrine",
+      "mantra_interaction_doctrine",
+      "candidate_generation_doctrine",
+      "score_explanation_doctrine",
+      "non_randomness_doctrine",
+      "repetition_control_doctrine",
+      "uncertainty_fallback_doctrine",
+      "safety_privacy_doctrine",
+      "source_confidence_doctrine",
+      "audit_trace_doctrine",
+      "calibration_learning_doctrine"
+    ],
+    "excluded": [
+      "live_scoring",
+      "subscriber_personalization_runtime",
+      "lucky_number_runtime",
+      "lucky_colour_runtime",
+      "mantra_runtime",
+      "mantra_generation",
+      "automatic_remedy",
+      "premium_guidance",
+      "dashboard_cards",
+      "auth",
+      "supabase",
+      "payment",
+      "subscription_entitlement",
+      "external_api_fetch",
+      "dob_prediction",
+      "kundli_generation",
+      "horoscope_generation",
+      "public_guidance"
+    ]
+  },
+  "conceptual_formula_terms": [
+    "base_rotation_weight",
+    "weekday_weight",
+    "tithi_weight",
+    "observance_context_weight",
+    "deity_theme_weight",
+    "consented_preference_weight",
+    "editorial_context_weight",
+    "source_confidence_weight",
+    "repetition_penalty",
+    "uncertainty_penalty",
+    "privacy_safety_penalty"
+  ],
+  "default_weight_placeholders_not_activated": {
+    "base_rotation_weight": 10,
+    "weekday_weight": 15,
+    "tithi_weight": 15,
+    "observance_context_weight": 20,
+    "deity_theme_weight": 15,
+    "consented_preference_weight": 10,
+    "editorial_context_weight": 5,
+    "source_confidence_weight": 10,
+    "repetition_penalty_range": [
+      0,
+      20
+    ],
+    "uncertainty_penalty_range": [
+      0,
+      20
+    ],
+    "privacy_safety_penalty_range": [
+      0,
+      100
+    ]
+  },
+  "allowed_number_mapping_families": [
+    "base_daily_rotation_mapping",
+    "weekday_symbolic_mapping",
+    "tithi_symbolic_mapping",
+    "festival_vrat_symbolic_mapping",
+    "deity_theme_symbolic_mapping",
+    "reviewed_traditional_association",
+    "editorial_curation",
+    "user_preference_with_consent"
+  ],
+  "allowed_colour_mapping_families": [
+    "base_daily_rotation_mapping",
+    "weekday_symbolic_mapping",
+    "tithi_symbolic_mapping",
+    "festival_vrat_symbolic_mapping",
+    "deity_theme_symbolic_mapping",
+    "seasonal_editorial_mapping",
+    "reviewed_traditional_association",
+    "user_preference_with_consent",
+    "ui_safe_colour_palette_mapping"
+  ],
+  "candidate_required_fields": [
+    "candidate_id",
+    "candidate_type",
+    "value",
+    "mapping_family",
+    "source_basis",
+    "eligible_contexts",
+    "review_status",
+    "public_safe_status"
+  ],
+  "allowed_explanation_labels": [
+    "selected_from_daily_symbolic_rotation",
+    "selected_from_weekday_association",
+    "selected_from_tithi_association",
+    "selected_from_reviewed_observance_context",
+    "selected_from_user_preference_with_consent",
+    "selected_from_deity_theme_association",
+    "selected_from_editorial_curation",
+    "selected_as_generic_non_personalized_fallback"
+  ],
+  "allowed_non_random_methods": [
+    "date_indexed_rotation",
+    "weekday_indexed_rotation",
+    "tithi_indexed_rotation",
+    "reviewed_observance_indexed_mapping",
+    "consented_preference_matching",
+    "curated_editorial_schedule"
+  ],
+  "prohibited_selection_methods": [
+    "hidden_random_selection",
+    "engagement_optimized_manipulation",
+    "paid_tier_bias_without_disclosure",
+    "fear_based_selection",
+    "private_data_inference_without_consent"
+  ],
+  "repetition_penalty_triggers": [
+    "same_number_repeats_too_frequently",
+    "same_colour_repeats_too_frequently",
+    "same_theme_repeats_too_frequently",
+    "output_monotony",
+    "fallback_too_frequent"
+  ],
+  "uncertainty_conditions": [
+    "unknown_tithi",
+    "approximate_location",
+    "missing_consent",
+    "source_conflict",
+    "festival_conflict",
+    "profile_uncertainty",
+    "language_ambiguity"
+  ],
+  "fallback_types": [
+    "generic_symbolic_number",
+    "generic_symbolic_colour",
+    "reflection_only_guidance",
+    "no_personalized_symbolic_guidance_today",
+    "human_review_required"
+  ],
+  "prohibited_input_categories": [
+    "inferred_caste",
+    "inferred_religion",
+    "inferred_ethnicity",
+    "inferred_health_status",
+    "inferred_political_belief",
+    "inferred_sexuality",
+    "inferred_financial_status",
+    "hidden_behavioural_targeting",
+    "private_data_without_consent"
+  ],
+  "source_confidence_labels": [
+    "reviewed_source",
+    "editorial_curated",
+    "traditional_association_pending_review",
+    "weak_source",
+    "source_conflict",
+    "not_allowed"
+  ],
+  "audit_trace_required_fields": [
+    "scoring_id",
+    "module_id",
+    "timestamp",
+    "candidate_set_id",
+    "scoring_formula_version",
+    "mapping_version",
+    "input_refs",
+    "consent_refs",
+    "weight_breakdown",
+    "penalties_applied",
+    "selected_candidate_id",
+    "fallback_used",
+    "explanation_label",
+    "review_status",
+    "public_output_allowed"
+  ],
+  "m04a_calibration_targets": [
+    "stale_repetition",
+    "excessive_fallback",
+    "unclear_explanations",
+    "user_confusion",
+    "privacy_concerns",
+    "weak_source_mappings",
+    "overuse_of_number_or_colour",
+    "context_output_mismatch",
+    "safety_or_overclaiming_risk"
+  ],
+  "future_scoring_contract_required_sections": [
+    "scoring_id",
+    "guidance_type",
+    "candidate_set",
+    "input_context",
+    "consent_basis",
+    "formula_version",
+    "mapping_version",
+    "weight_breakdown",
+    "penalties",
+    "selected_candidate",
+    "explanation_label",
+    "safety_label",
+    "audit_trace_id",
+    "review_status",
+    "public_output_allowed"
+  ],
+  "approved_output_labels": [
+    "methodology_only",
+    "method_based_symbolic_guidance",
+    "non_random",
+    "non_deterministic",
+    "not_public_output",
+    "consent_required",
+    "source_review_required",
+    "human_review_required"
+  ],
+  "review_gates": [
+    "safety_gate",
+    "consent_gate",
+    "source_gate",
+    "mapping_review_gate",
+    "formula_review_gate",
+    "repetition_review_gate",
+    "uncertainty_review_gate",
+    "privacy_review_gate",
+    "audit_trace_review_gate",
+    "m04a_calibration_review_gate"
+  ]
+}
