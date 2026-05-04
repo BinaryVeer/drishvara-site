@@ -1,0 +1,68 @@
+{
+  "module_id": "R01",
+  "module_title": "Naming Consistency & Consolidated Methodology Index",
+  "phase": "R-Review",
+  "status": "naming_index_review_only",
+  "depends_on": [
+    "M00",
+    "M01",
+    "M02",
+    "M03",
+    "M04",
+    "M04A",
+    "M05",
+    "M06",
+    "M06A",
+    "M07",
+    "M08",
+    "M09",
+    "M10",
+    "R00"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_output_enabled": false,
+  "public_guidance_enabled": false,
+  "public_panchang_enabled": false,
+  "public_festival_dates_enabled": false,
+  "external_api_fetch_enabled": false,
+  "auth_enabled": false,
+  "payment_enabled": false,
+  "supabase_enabled": false,
+  "dashboard_card_runtime_enabled": false,
+  "internal_preview_runtime_enabled": false,
+  "automatic_activation_enabled": false,
+  "automatic_database_mutation_enabled": false,
+  "naming_corrections": [
+    {
+      "module_id": "M10",
+      "old_path": "docs/methodology/M10_METHODLOGY_ACTIVATION_READINESS_REPORT.md",
+      "new_path": "docs/methodology/M10_METHODOLOGY_ACTIVATION_READINESS_REPORT.md",
+      "status": "completed"
+    }
+  ],
+  "index_outputs": [
+    "docs/methodology/METHODOLOGY_INDEX.md",
+    "data/methodology/methodology-index.json"
+  ],
+  "updated_references": [
+    "scripts/validate-m10-methodology-readiness.mjs",
+    "data/review/r00-methodology-review-refactoring-pass.json",
+    "docs/review/R00_METHODOLOGY_REVIEW_REFACTORING_PASS.md"
+  ],
+  "required_validations": [
+    "validate:m10",
+    "validate:r00",
+    "validate:r01",
+    "validate:methodology"
+  ],
+  "approved_review_labels": [
+    "controlled_rename",
+    "consolidated_index",
+    "review_only",
+    "runtime_not_enabled",
+    "public_output_not_enabled",
+    "safe_to_commit"
+  ]
+}

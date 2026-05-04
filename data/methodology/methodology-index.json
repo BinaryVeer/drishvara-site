@@ -1,23 +1,8 @@
 {
-  "module_id": "R00",
-  "module_title": "Methodology Review & Refactoring Pass",
+  "index_id": "METHODOLOGY_INDEX",
   "phase": "R-Review",
-  "status": "review_refactoring_control_only",
-  "depends_on": [
-    "M00",
-    "M01",
-    "M02",
-    "M03",
-    "M04",
-    "M04A",
-    "M05",
-    "M06",
-    "M06A",
-    "M07",
-    "M08",
-    "M09",
-    "M10"
-  ],
+  "generated_by": "R01",
+  "status": "consolidated_index_only",
   "runtime_enabled": false,
   "server_endpoint_enabled": false,
   "subscriber_output_enabled": false,
@@ -33,15 +18,17 @@
   "internal_preview_runtime_enabled": false,
   "automatic_activation_enabled": false,
   "automatic_database_mutation_enabled": false,
-  "doctrine_version": "0.1.0",
-  "reviewed_modules": [
+  "modules": [
     {
       "module_id": "M00",
       "title": "Source Doctrine & Sanskrit Integrity Framework",
       "document_path": "docs/methodology/M00_SOURCE_DOCTRINE_AND_SANSKRIT_INTEGRITY.md",
       "registry_path": "data/methodology/m00-source-doctrine.json",
       "validator_path": "scripts/validate-m00-source-doctrine.mjs",
-      "npm_script": "validate:m00"
+      "npm_script": "validate:m00",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M01",
@@ -49,7 +36,10 @@
       "document_path": "docs/methodology/M01_PANCHANG_CALCULATION_METHODOLOGY_SPECIFICATION.md",
       "registry_path": "data/methodology/m01-panchang-calculation-methodology.json",
       "validator_path": "scripts/validate-m01-panchang-methodology.mjs",
-      "npm_script": "validate:m01"
+      "npm_script": "validate:m01",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M02",
@@ -57,7 +47,10 @@
       "document_path": "docs/methodology/M02_TITHI_VRAT_FASTING_DAY_RULE_ENGINE.md",
       "registry_path": "data/methodology/m02-tithi-vrat-fasting-rule-methodology.json",
       "validator_path": "scripts/validate-m02-tithi-vrat-rules.mjs",
-      "npm_script": "validate:m02"
+      "npm_script": "validate:m02",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M03",
@@ -65,7 +58,10 @@
       "document_path": "docs/methodology/M03_FESTIVAL_RULE_REGISTRY.md",
       "registry_path": "data/methodology/m03-festival-rule-registry.json",
       "validator_path": "scripts/validate-m03-festival-registry.mjs",
-      "npm_script": "validate:m03"
+      "npm_script": "validate:m03",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M04",
@@ -73,7 +69,10 @@
       "document_path": "docs/methodology/M04_LOCATION_TIMEZONE_SUNRISE_BASIS.md",
       "registry_path": "data/methodology/m04-location-timezone-sunrise-basis.json",
       "validator_path": "scripts/validate-m04-location-timezone-sunrise.mjs",
-      "npm_script": "validate:m04"
+      "npm_script": "validate:m04",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M04A",
@@ -81,7 +80,10 @@
       "document_path": "docs/methodology/M04A_PERIODIC_VALIDATION_LEARNING_REGISTER.md",
       "registry_path": "data/methodology/m04a-periodic-validation-learning-register.json",
       "validator_path": "scripts/validate-m04a-periodic-validation-learning.mjs",
-      "npm_script": "validate:m04a"
+      "npm_script": "validate:m04a",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M05",
@@ -89,7 +91,10 @@
       "document_path": "docs/methodology/M05_NAME_DOB_LOCATION_METHODOLOGY.md",
       "registry_path": "data/methodology/m05-name-dob-location-methodology.json",
       "validator_path": "scripts/validate-m05-name-dob-location.mjs",
-      "npm_script": "validate:m05"
+      "npm_script": "validate:m05",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M06",
@@ -97,7 +102,10 @@
       "document_path": "docs/methodology/M06_LUCKY_NUMBER_COLOUR_MANTRA_SELECTION.md",
       "registry_path": "data/methodology/m06-lucky-number-colour-mantra-selection.json",
       "validator_path": "scripts/validate-m06-lucky-number-colour-mantra.mjs",
-      "npm_script": "validate:m06"
+      "npm_script": "validate:m06",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M06A",
@@ -105,7 +113,10 @@
       "document_path": "docs/methodology/M06A_SYMBOLIC_SCORING_FORMULA_MAPPING.md",
       "registry_path": "data/methodology/m06a-symbolic-scoring-formula-mapping.json",
       "validator_path": "scripts/validate-m06a-symbolic-scoring.mjs",
-      "npm_script": "validate:m06a"
+      "npm_script": "validate:m06a",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M07",
@@ -113,7 +124,10 @@
       "document_path": "docs/methodology/M07_SUBSCRIBER_PERSONALIZATION_SCORING.md",
       "registry_path": "data/methodology/m07-subscriber-personalization-scoring.json",
       "validator_path": "scripts/validate-m07-subscriber-personalization.mjs",
-      "npm_script": "validate:m07"
+      "npm_script": "validate:m07",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M08",
@@ -121,7 +135,10 @@
       "document_path": "docs/methodology/M08_SERVER_SIDE_API_CONTRACT.md",
       "registry_path": "data/methodology/m08-server-side-api-contract.json",
       "validator_path": "scripts/validate-m08-server-api-contract.mjs",
-      "npm_script": "validate:m08"
+      "npm_script": "validate:m08",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M09",
@@ -129,7 +146,10 @@
       "document_path": "docs/methodology/M09_INTERNAL_CALCULATION_PREVIEW.md",
       "registry_path": "data/methodology/m09-internal-calculation-preview.json",
       "validator_path": "scripts/validate-m09-internal-calculation-preview.mjs",
-      "npm_script": "validate:m09"
+      "npm_script": "validate:m09",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     },
     {
       "module_id": "M10",
@@ -137,94 +157,19 @@
       "document_path": "docs/methodology/M10_METHODOLOGY_ACTIVATION_READINESS_REPORT.md",
       "registry_path": "data/methodology/m10-methodology-activation-readiness-report.json",
       "validator_path": "scripts/validate-m10-methodology-readiness.mjs",
-      "npm_script": "validate:m10"
+      "npm_script": "validate:m10",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
     }
   ],
-  "known_naming_issues": [
+  "naming_corrections": [
     {
-      "issue_id": "R00-KNI-001",
       "module_id": "M10",
-      "issue": "M10 document filename uses METHODLOGY instead of METHODOLOGY.",
-      "current_path": "docs/methodology/M10_METHODOLOGY_ACTIVATION_READINESS_REPORT.md",
-      "recommendation": "Consider controlled rename in a future R01 patch after updating validators and references.",
-      "severity": "low",
-      "action_in_r00": "recorded_in_r00_resolved_by_r01",
-      "resolution": "Corrected METHODLOGY to METHODOLOGY through controlled R01 patch.",
-      "resolved_in": "R01"
+      "old_filename": "M10_METHODLOGY_ACTIVATION_READINESS_REPORT.md",
+      "new_filename": "M10_METHODOLOGY_ACTIVATION_READINESS_REPORT.md",
+      "status": "resolved_by_r01"
     }
   ],
-  "review_objectives": [
-    "document_presence",
-    "registry_presence",
-    "validator_presence",
-    "package_script_alignment",
-    "dependency_chain_consistency",
-    "runtime_disabled_posture",
-    "public_output_disabled_posture",
-    "known_naming_issue_record",
-    "future_refactoring_candidate_record"
-  ],
-  "future_refactoring_candidates": [
-    "correct_m10_methodology_filename_typo",
-    "create_shared_validator_helpers",
-    "create_consolidated_methodology_index",
-    "create_consolidated_status_report",
-    "standardize_validator_naming_style",
-    "review_duplicate_doctrine_wording",
-    "decide_backup_file_cleanup_policy",
-    "organize_package_scripts"
-  ],
-  "forbidden_enabled_flag_names": [
-    "runtime_enabled",
-    "server_endpoint_enabled",
-    "subscriber_output_enabled",
-    "public_output_enabled",
-    "public_guidance_enabled",
-    "public_panchang_enabled",
-    "public_festival_dates_enabled",
-    "external_api_fetch_enabled",
-    "auth_enabled",
-    "payment_enabled",
-    "supabase_enabled",
-    "dashboard_card_runtime_enabled",
-    "internal_preview_runtime_enabled",
-    "preview_runtime_enabled",
-    "live_calculation_enabled",
-    "automatic_activation_enabled",
-    "automatic_database_mutation_enabled"
-  ],
-  "required_package_scripts": [
-    "validate:m00",
-    "validate:m01",
-    "validate:m02",
-    "validate:m03",
-    "validate:m04",
-    "validate:m04a",
-    "validate:m05",
-    "validate:m06",
-    "validate:m06a",
-    "validate:m07",
-    "validate:m08",
-    "validate:m09",
-    "validate:m10",
-    "validate:r00",
-    "validate:methodology"
-  ],
-  "approved_review_labels": [
-    "review_only",
-    "refactoring_control_only",
-    "methodology_stack_document_complete",
-    "runtime_not_enabled",
-    "public_output_not_enabled",
-    "known_issue_recorded",
-    "safe_to_commit"
-  ],
-  "review_gates": [
-    "artifact_presence_review",
-    "script_alignment_review",
-    "disabled_flag_review",
-    "known_issue_review",
-    "future_refactoring_review",
-    "safety_posture_review"
-  ]
+  "next_recommended_step": "R02 — Consolidated Status Report & Implementation Planning Gate"
 }

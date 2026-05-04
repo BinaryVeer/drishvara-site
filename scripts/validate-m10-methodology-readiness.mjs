@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const registryPath = path.join(process.cwd(), "data", "methodology", "m10-methodology-activation-readiness-report.json");
-const docPath = path.join(process.cwd(), "docs", "methodology", "M10_METHODLOGY_ACTIVATION_READINESS_REPORT.md");
+const docPath = path.join(process.cwd(), "docs", "methodology", "M10_METHODOLOGY_ACTIVATION_READINESS_REPORT.md");
 
 function fail(message) {
   console.error(`❌ M10 validation failed: ${message}`);

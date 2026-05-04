@@ -119,9 +119,9 @@ R00 records known naming issues without silently changing them.
 
 Known issue:
 
-- M10 document path currently uses METHODLOGY instead of METHODOLOGY in the filename.
+- M10 document path was recorded in R00 as using METHODLOGY instead of METHODOLOGY in the filename; R01 later corrects this through a controlled rename.
 
-This should be corrected later only through a controlled R01 patch if desired, because renaming a file can affect validators, git history references, and existing scripts.
+This is corrected through the controlled R01 patch, with validators and registry references updated together.
 
 ## 9. Backup File Doctrine
 
