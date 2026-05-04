@@ -111,14 +111,16 @@
     "validate:implementation": "npm run validate:i00",
     "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
-    "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14",
+    "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14 && npm run validate:c15",
     "generate:c11": "node scripts/generate-c11-content-asset-inventory-preview.mjs",
     "validate:c11": "node scripts/validate-c11-content-asset-inventory-preview.mjs",
     "generate:c12": "node scripts/generate-c12-content-asset-verification-preview.mjs",
     "validate:c12": "node scripts/validate-c12-content-asset-verification-preview.mjs",
     "validate:c13": "node scripts/validate-c13-review-queue-admin-boundary.mjs",
     "generate:c14": "node scripts/generate-c14-review-queue-import-dry-run.mjs",
-    "validate:c14": "node scripts/validate-c14-review-queue-import-dry-run.mjs"
+    "validate:c14": "node scripts/validate-c14-review-queue-import-dry-run.mjs",
+    "generate:c15": "node scripts/generate-c15-content-asset-readiness-matrix.mjs",
+    "validate:c15": "node scripts/validate-c15-content-asset-readiness-matrix.mjs"
   },
   "repository": {
     "type": "git",
