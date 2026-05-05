@@ -1,0 +1,248 @@
+{
+  "preview_id": "HF02_HOMEPAGE_HEADER_LAYOUT_INTERACTION_STABILIZATION_PLAN_PREVIEW",
+  "module_id": "HF02",
+  "status": "preview_only_homepage_header_interaction_plan_no_mutation",
+  "preview_only": true,
+  "lv02_evidence": {
+    "lv02_preview_present": true,
+    "lv02_manual_result": "warning_partial_fail",
+    "lv02_clean_live_confidence": false,
+    "lv02_finding_count": 5,
+    "lv02_area_counts": {
+      "homepage_interaction": 1,
+      "homepage_header": 1,
+      "timezone_control": 1,
+      "navigation_layout": 1,
+      "correction_boundary": 1
+    }
+  },
+  "hq00_evidence": {
+    "hq00_preview_present": true,
+    "all_pages_have_submissions": true,
+    "all_pages_have_dropdown_guard": true,
+    "all_article_pages_have_reference_placeholder": true,
+    "all_article_pages_have_image_credit_placeholder": true
+  },
+  "static_scan": {
+    "index_exists": true,
+    "index_nav_count": 1,
+    "index_select_count": 3,
+    "dropdown_guard_marker_count": 2,
+    "auth_placeholder_marker_count": 2,
+    "language_related_marker_count": 46,
+    "has_required_nav_labels": true
+  },
+  "correction_plan": {
+    "correction_areas": [
+      {
+        "correction_area": "homepage_header_layout",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-002"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "navigation_alignment",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-002",
+          "LV02-FINDING-004"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "timezone_dropdown_placement",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-003"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "language_toggle_protection",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-001"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "homepage_interaction_sticking",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-001"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "overlay_z_index_pointer_events",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-001",
+          "LV02-FINDING-002"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "hero_header_separation",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [
+          "LV02-FINDING-001",
+          "LV02-FINDING-002"
+        ],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "responsive_header_behavior",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [],
+        "hf03_required": true
+      },
+      {
+        "correction_area": "post_fix_manual_recheck",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "related_finding_ids": [],
+        "hf03_required": true
+      }
+    ],
+    "planned_header_zones": [
+      "brand_zone",
+      "timezone_control_zone",
+      "primary_navigation_zone",
+      "language_toggle_zone",
+      "account_placeholder_zone",
+      "mobile_responsive_zone"
+    ],
+    "interaction_debug_focus": [
+      "global_click_handlers",
+      "select_dropdown_event_guards",
+      "language_toggle_handlers",
+      "pointer_events",
+      "fixed_overlays",
+      "z_index_layers",
+      "hero_orbit_animation_layers",
+      "scroll_lock_behavior",
+      "event_propagation",
+      "focus_blur_behavior"
+    ],
+    "language_toggle_protection_rules": [
+      "english_click_keeps_english",
+      "repeated_english_click_keeps_english",
+      "hindi_click_keeps_hindi",
+      "repeated_hindi_click_keeps_hindi",
+      "normal_homepage_click_does_not_change_language",
+      "hindi_to_english_does_not_show_transliteration_fallback"
+    ],
+    "potential_next_patch_allowed_targets": [
+      "index.html",
+      "homepage_css_if_separate",
+      "homepage_js_if_separate",
+      "shared_frontend_js_only_if_required_for_homepage_interaction_fix"
+    ],
+    "next_patch_prohibited_targets": [
+      "backend_files",
+      "api_routes",
+      "supabase_config",
+      "auth_config",
+      "payment_files",
+      "deployment_config",
+      "archive_files",
+      "backup_files",
+      "unrelated_article_content"
+    ],
+    "post_fix_validation_sequence": [
+      "generate:qa00",
+      "generate:qa01",
+      "generate:lr00",
+      "generate:lf00",
+      "generate:lf01",
+      "generate:lv00",
+      "generate:lv01",
+      "generate:hf00",
+      "generate:hf01",
+      "generate:hq00",
+      "generate:lv02",
+      "generate:hf02",
+      "validate:project",
+      "manual_live_recheck"
+    ]
+  },
+  "summary": {
+    "correction_area_count": 9,
+    "planned_header_zone_count": 6,
+    "interaction_debug_focus_count": 10,
+    "language_toggle_protection_rule_count": 6,
+    "hf03_required": true,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "asset_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "archive_cleanup",
+    "backup_cleanup",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "HF03",
+    "title": "Targeted Homepage Header and Interaction Stabilization Patch",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": "limited_homepage_static_frontend_correction_only",
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
