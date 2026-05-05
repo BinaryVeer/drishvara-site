@@ -1,0 +1,117 @@
+{
+  "preview_id": "HF03_HOMEPAGE_HEADER_INTERACTION_STABILIZATION_PREVIEW",
+  "module_id": "HF03",
+  "status": "preview_after_limited_index_html_homepage_stabilization",
+  "preview_only": true,
+  "apply_evidence": {
+    "apply_result_present": true,
+    "modified_file_count": 1,
+    "modified_files": [
+      "index.html"
+    ],
+    "changes": [
+      "inserted_hf03_header_stabilizer_style",
+      "inserted_hf03_interaction_stabilizer_script"
+    ]
+  },
+  "static_scan": {
+    "index_exists": true,
+    "nav_count": 1,
+    "select_count": 3,
+    "hf03_style_marker_present": true,
+    "hf03_script_marker_present": true,
+    "hf01_dropdown_guard_present": true,
+    "auth_placeholder_present": true,
+    "required_nav_labels_present": true,
+    "required_nav_label_status": [
+      {
+        "label": "Home",
+        "present": true
+      },
+      {
+        "label": "About",
+        "present": true
+      },
+      {
+        "label": "Insights",
+        "present": true
+      },
+      {
+        "label": "Submissions",
+        "present": true
+      },
+      {
+        "label": "Dashboard",
+        "present": true
+      },
+      {
+        "label": "Contact",
+        "present": true
+      },
+      {
+        "label": "Sign in / Join",
+        "present": true
+      }
+    ],
+    "has_homepage_stabilized_class_reference": true,
+    "has_decorative_pointer_safety": true,
+    "has_select_stabilization": true,
+    "has_auth_placeholder_guard": true
+  },
+  "summary": {
+    "index_only_patch": true,
+    "style_marker_present": true,
+    "script_marker_present": true,
+    "required_nav_labels_present": true,
+    "dropdown_guard_preserved": true,
+    "auth_placeholder_preserved": true,
+    "homepage_stabilization_present": true,
+    "backend_activation_performed": false,
+    "api_route_created": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "frontend_deployment_performed": false
+  },
+  "blocked_capabilities": [
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "file_deletion",
+    "file_move",
+    "archive_cleanup",
+    "backup_cleanup",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "HQ01",
+    "title": "Post-HF03 Static QA Refresh",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
