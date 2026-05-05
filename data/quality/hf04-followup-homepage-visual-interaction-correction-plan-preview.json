@@ -1,0 +1,221 @@
+{
+  "preview_id": "HF04_FOLLOWUP_HOMEPAGE_VISUAL_INTERACTION_CORRECTION_PLAN_PREVIEW",
+  "module_id": "HF04",
+  "status": "preview_only_followup_homepage_visual_interaction_plan_no_mutation",
+  "preview_only": true,
+  "lv03_result_evidence": {
+    "lv03_result_preview_present": true,
+    "overall": "fail",
+    "clean_live_confidence": false,
+    "severity_counts": {
+      "pass": 1,
+      "fail": 4
+    },
+    "failed_areas": [
+      "header_menu_alignment",
+      "timezone_dropdown",
+      "dropdown_freeze",
+      "language_toggle"
+    ]
+  },
+  "hq01_static_evidence": {
+    "hq01_preview_present": true,
+    "hf03_markers_present": true,
+    "required_nav_labels_present": true,
+    "dropdown_guard_preserved": true,
+    "qa_static_missing_assets_zero": true,
+    "qa_static_missing_links_zero": true
+  },
+  "static_scan": {
+    "index_exists": true,
+    "nav_count": 1,
+    "select_count": 3,
+    "hf03_header_stabilizer_count": 1,
+    "hf03_interaction_stabilizer_count": 1,
+    "language_toggle_related_count": 40,
+    "stop_propagation_count": 6,
+    "prevent_default_count": 4
+  },
+  "correction_plan": {
+    "correction_areas": [
+      {
+        "correction_area": "homepage_header_reconstruction",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "timezone_dropdown_selectability",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "shared_dropdown_freeze_resolution",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "language_toggle_visibility_restoration",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "unsafe_event_guard_review",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "global_click_handler_review",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "overlay_z_index_pointer_events",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "hero_decorative_layer_boundary",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "responsive_header_behavior",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      },
+      {
+        "correction_area": "post_fix_manual_recheck",
+        "planned_only": true,
+        "mutation_enabled": false,
+        "hf05_required": true
+      }
+    ],
+    "header_target_structure": [
+      "single_header_container",
+      "single_navigation_row",
+      "stable_control_zone",
+      "visible_timezone_selector",
+      "visible_language_toggle",
+      "static_signin_join_placeholder",
+      "no_orphan_floating_links",
+      "responsive_mobile_layout"
+    ],
+    "dropdown_debug_targets": [
+      "select_event_listeners",
+      "global_click_listeners",
+      "pointerdown_handlers",
+      "mousedown_handlers",
+      "stopPropagation_usage",
+      "preventDefault_usage",
+      "overlay_elements",
+      "pointer_events_css",
+      "z_index_layers",
+      "focus_blur_behavior",
+      "scroll_lock_or_interaction_lock"
+    ],
+    "language_toggle_required_behavior": [
+      "visible_en_hindi_control",
+      "english_click_keeps_english",
+      "repeated_english_click_keeps_english",
+      "hindi_click_keeps_hindi",
+      "repeated_hindi_click_keeps_hindi",
+      "normal_homepage_click_does_not_change_language",
+      "hindi_to_english_does_not_show_transliteration_fallback"
+    ],
+    "potential_next_patch_allowed_targets": [
+      "index.html",
+      "shared_css_only_if_required",
+      "shared_js_only_if_dropdown_freeze_is_shared",
+      "language_toggle_js_only_if_required_for_visibility_or_handler_restoration"
+    ],
+    "next_patch_prohibited_targets": [
+      "backend_files",
+      "api_files",
+      "supabase_files",
+      "auth_files",
+      "payment_files",
+      "deployment_files",
+      "archive_files",
+      "backup_files",
+      "article_content",
+      "verified_reference_logic",
+      "image_credit_logic"
+    ]
+  },
+  "summary": {
+    "overall_live_result_basis": "fail",
+    "live_failed_area_count": 4,
+    "correction_area_count": 10,
+    "header_target_structure_count": 8,
+    "dropdown_debug_target_count": 11,
+    "language_toggle_rule_count": 7,
+    "hf05_required": true,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "asset_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "archive_cleanup",
+    "backup_cleanup",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "HF05",
+    "title": "Targeted Header and Dropdown Behavior Correction Patch",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": "limited_static_frontend_correction_only",
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
