@@ -1,0 +1,152 @@
+{
+  "preview_id": "LV03_POST_HF03_MANUAL_LIVE_RECHECK_PREVIEW",
+  "module_id": "LV03",
+  "status": "preview_only_manual_live_recheck_checklist_pending_observation",
+  "preview_only": true,
+  "hq01_evidence": {
+    "hq01_preview_present": true,
+    "hf03_markers_present": true,
+    "required_nav_labels_present": true,
+    "dropdown_guard_preserved": true,
+    "qa_static_missing_assets_zero": true,
+    "qa_static_missing_links_zero": true,
+    "backend_activation_enabled": false,
+    "auth_enabled": false
+  },
+  "manual_live_recheck_items": [
+    {
+      "check_id": "LV03-CHECK-001",
+      "area": "homepage_load",
+      "check": "Live homepage opens after hard refresh without blank screen.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-002",
+      "area": "header_menu_alignment",
+      "check": "Header/menu alignment is clean and not split, floating, hidden, or overlapping.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-003",
+      "area": "timezone_dropdown",
+      "check": "Timezone dropdown is placed logically and remains clickable/selectable.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-004",
+      "area": "homepage_sticking_freezing",
+      "check": "Homepage does not freeze or stick after normal clicks, dropdown selection, or language toggle.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-005",
+      "area": "language_toggle",
+      "check": "Language toggle remains stable for repeated English/Hindi clicks and normal homepage clicks.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-006",
+      "area": "mobile_header_layout",
+      "check": "Mobile header fits screen, has no horizontal scroll, and controls remain usable.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-007",
+      "area": "console_errors",
+      "check": "Browser console has no red JavaScript errors affecting homepage, navigation, dropdown, or language toggle.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-008",
+      "area": "signin_join_placeholder",
+      "check": "Sign in / Join behaves as a static placeholder only and does not activate Auth.",
+      "result_status": "pending_manual_observation"
+    }
+  ],
+  "result_reporting_format": [
+    "Live homepage opens: Pass/Fail",
+    "Header/menu alignment: Pass/Fail + issue if any",
+    "Timezone dropdown: Pass/Fail + issue if any",
+    "Homepage sticking/freezing: Pass/Fail + issue if any",
+    "Language toggle: Pass/Fail + issue if any",
+    "Mobile header: Pass/Fail + issue if any",
+    "Console errors: None / mention error",
+    "Overall: Pass / Warning / Fail"
+  ],
+  "summary": {
+    "check_count": 8,
+    "pending_manual_observation_count": 8,
+    "area_counts": {
+      "homepage_load": 1,
+      "header_menu_alignment": 1,
+      "timezone_dropdown": 1,
+      "homepage_sticking_freezing": 1,
+      "language_toggle": 1,
+      "mobile_header_layout": 1,
+      "console_errors": 1,
+      "signin_join_placeholder": 1
+    },
+    "live_result_recorded": false,
+    "clean_live_confidence": null,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "asset_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "archive_cleanup",
+    "backup_cleanup",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "conditional_next_stages": {
+    "if_pass": {
+      "module_id": "LS00",
+      "title": "Live Stabilization Closure Record",
+      "allowed_if": "manual_live_recheck_passes"
+    },
+    "if_warning_or_fail": {
+      "module_id": "HF04",
+      "title": "Follow-up Homepage Visual/Interaction Correction Plan",
+      "allowed_if": "manual_live_recheck_finds_remaining_issues"
+    }
+  }
+}

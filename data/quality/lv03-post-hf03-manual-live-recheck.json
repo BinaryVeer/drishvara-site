@@ -1,0 +1,164 @@
+{
+  "module_id": "LV03",
+  "module_title": "Post-HF03 Manual Live Recheck",
+  "phase": "LV-Live Verification",
+  "status": "manual_live_recheck_checklist_pending_observation",
+  "depends_on": [
+    "HQ01",
+    "HF03",
+    "HF02",
+    "LV02",
+    "HQ00"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "homepage_mutation_enabled": false,
+  "page_mutation_enabled": false,
+  "asset_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "seo_metadata_mutation_enabled": false,
+  "sitemap_mutation_enabled": false,
+  "language_runtime_mutation_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "archive_cleanup_enabled": false,
+  "backup_cleanup_enabled": false,
+  "gitignore_modification_enabled": false,
+  "ml_ingestion_enabled": false,
+  "embedding_generation_enabled": false,
+  "model_training_enabled": false,
+  "vector_database_write_enabled": false,
+  "external_api_fetch_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "activation_decision_enabled": false,
+  "manual_live_recheck_items": [
+    {
+      "check_id": "LV03-CHECK-001",
+      "area": "homepage_load",
+      "check": "Live homepage opens after hard refresh without blank screen.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-002",
+      "area": "header_menu_alignment",
+      "check": "Header/menu alignment is clean and not split, floating, hidden, or overlapping.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-003",
+      "area": "timezone_dropdown",
+      "check": "Timezone dropdown is placed logically and remains clickable/selectable.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-004",
+      "area": "homepage_sticking_freezing",
+      "check": "Homepage does not freeze or stick after normal clicks, dropdown selection, or language toggle.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-005",
+      "area": "language_toggle",
+      "check": "Language toggle remains stable for repeated English/Hindi clicks and normal homepage clicks.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-006",
+      "area": "mobile_header_layout",
+      "check": "Mobile header fits screen, has no horizontal scroll, and controls remain usable.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-007",
+      "area": "console_errors",
+      "check": "Browser console has no red JavaScript errors affecting homepage, navigation, dropdown, or language toggle.",
+      "result_status": "pending_manual_observation"
+    },
+    {
+      "check_id": "LV03-CHECK-008",
+      "area": "signin_join_placeholder",
+      "check": "Sign in / Join behaves as a static placeholder only and does not activate Auth.",
+      "result_status": "pending_manual_observation"
+    }
+  ],
+  "result_reporting_format": [
+    "Live homepage opens: Pass/Fail",
+    "Header/menu alignment: Pass/Fail + issue if any",
+    "Timezone dropdown: Pass/Fail + issue if any",
+    "Homepage sticking/freezing: Pass/Fail + issue if any",
+    "Language toggle: Pass/Fail + issue if any",
+    "Mobile header: Pass/Fail + issue if any",
+    "Console errors: None / mention error",
+    "Overall: Pass / Warning / Fail"
+  ],
+  "pass_next_stage": {
+    "module_id": "LS00",
+    "title": "Live Stabilization Closure Record",
+    "allowed_if": "manual_live_recheck_passes"
+  },
+  "fail_next_stage": {
+    "module_id": "HF04",
+    "title": "Follow-up Homepage Visual/Interaction Correction Plan",
+    "allowed_if": "manual_live_recheck_finds_remaining_issues"
+  },
+  "preview_output": "data/quality/lv03-post-hf03-manual-live-recheck-preview.json",
+  "preview_required_fields": [
+    "preview_id",
+    "module_id",
+    "status",
+    "preview_only",
+    "hq01_evidence",
+    "manual_live_recheck_items",
+    "summary",
+    "blocked_capabilities",
+    "conditional_next_stages"
+  ],
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "asset_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "archive_cleanup",
+    "backup_cleanup",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ]
+}
