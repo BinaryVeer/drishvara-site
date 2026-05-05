@@ -241,16 +241,28 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/css/public-preview-polish.css" />
+
+<style data-drishvara-hf01-dropdown-guard="true">
+  select,
+  option,
+  .submission-form select,
+  [data-drishvara-form-control="select"] {
+    position: relative !important;
+    z-index: 10050 !important;
+    pointer-events: auto !important;
+  }
+</style>
 </head>
 <body>
   <div class="page">
     <nav class="nav">
       <a href="index.html">Home</a>
+      <a href="about.html">About</a>
       <a href="insights.html">Insights</a>
       <a href="submissions.html">Submissions</a>
       <a href="dashboard.html" class="active">Dashboard</a>
-      <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="#" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
     </nav>
 
     <header class="hero">
@@ -342,5 +354,33 @@
   <script src="/assets/js/site-language.js" defer></script>
   <script src="/assets/js/session-guard.js" defer></script>
   <script src="assets/js/drishvara-language-runtime.js" defer></script>
+
+<script data-drishvara-hf01-dropdown-guard="true">
+(function () {
+  function guardSelectControls() {
+    document.querySelectorAll("select").forEach(function (select) {
+      select.setAttribute("data-drishvara-form-control", "select");
+      ["click", "mousedown", "pointerdown", "touchstart"].forEach(function (eventName) {
+        select.addEventListener(eventName, function (event) {
+          event.stopPropagation();
+        }, false);
+      });
+    });
+
+    document.querySelectorAll("[data-drishvara-auth-placeholder='true']").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", guardSelectControls);
+  } else {
+    guardSelectControls();
+  }
+})();
+</script>
 </body>
 </html>

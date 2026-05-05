@@ -330,14 +330,28 @@
     }
   </style>
 
+
+<style data-drishvara-hf01-dropdown-guard="true">
+  select,
+  option,
+  .submission-form select,
+  [data-drishvara-form-control="select"] {
+    position: relative !important;
+    z-index: 10050 !important;
+    pointer-events: auto !important;
+  }
+</style>
 </head>
 <body>
   <div class="page">
     <nav class="nav">
       <a href="../../index.html">Home</a>
       <a href="../../about.html">About</a>
-      <a href="../../insights.html">Insights</a>
+      <a href="../../insights.html" class="active">Insights</a>
+      <a href="../../submissions.html">Submissions</a>
+      <a href="../../dashboard.html">Dashboard</a>
       <a href="../../contact.html">Contact</a>
+      <a href="#" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
     </nav>
 
     <div class="article-shell">
@@ -375,5 +389,40 @@
       Drishvara © 2026 · Sports article
     </footer>
   </div>
+
+<script data-drishvara-hf01-dropdown-guard="true">
+(function () {
+  function guardSelectControls() {
+    document.querySelectorAll("select").forEach(function (select) {
+      select.setAttribute("data-drishvara-form-control", "select");
+      ["click", "mousedown", "pointerdown", "touchstart"].forEach(function (eventName) {
+        select.addEventListener(eventName, function (event) {
+          event.stopPropagation();
+        }, false);
+      });
+    });
+
+    document.querySelectorAll("[data-drishvara-auth-placeholder='true']").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", guardSelectControls);
+  } else {
+    guardSelectControls();
+  }
+})();
+</script>
+
+<section class="article-trust-block" data-drishvara-hf01-trust-block="true" style="margin: 2rem 0; padding: 1.25rem; border: 1px solid rgba(148, 163, 184, 0.35); border-radius: 18px; background: rgba(255,255,255,0.68);">
+  <h2 style="margin-top: 0;">References</h2>
+  <p>References are under editorial verification.</p>
+  <h2>Image credit</h2>
+  <p>Image credit: under review.</p>
+</section>
 </body>
 </html>

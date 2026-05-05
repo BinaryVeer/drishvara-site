@@ -2648,36 +2648,28 @@
   <meta name="twitter:image" content="https://www.drishvara.com/assets/logo/logo.png" />
 
   <link rel="stylesheet" href="/assets/css/public-preview-polish.css" />
+
+<style data-drishvara-hf01-dropdown-guard="true">
+  select,
+  option,
+  .submission-form select,
+  [data-drishvara-form-control="select"] {
+    position: relative !important;
+    z-index: 10050 !important;
+    pointer-events: auto !important;
+  }
+</style>
 </head>
 <body>
   <div class="page">
     <nav class="nav">
-      <div class="nav-left">
-        <img src="assets/logo/logo.png" alt="Drishvara Logo" class="nav-logo" />
-        <div class="nav-brand">Drishvara</div>
-      </div>
-
-      <div class="nav-links">
-        <span class="nav-timezone-slot" data-drishvara-timezone-control></span>
       <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="insights.html">Insights</a>
-        <a href="submissions.html">Submissions</a>
+      <a href="about.html">About</a>
+      <a href="insights.html">Insights</a>
+      <a href="submissions.html">Submissions</a>
       <a href="dashboard.html">Dashboard</a>
       <a href="contact.html">Contact</a>
-      </div>
-
-      <div class="nav-right">
-        <div class="live-score-chip" id="live-score-chip" title="Go to Sports Desk">
-          <span class="live-dot"></span>
-          <span class="live-text"><strong>LIVE · Sports</strong> Event update</span>
-        </div>
-        <div class="lang-toggle" data-drishvara-lang-toggle="true" aria-label="Language selector">
-          <button type="button" class="lang-choice" data-lang-choice="en" aria-label="Show English">EN</button>
-          <span class="lang-separator" aria-hidden="true">|</span>
-          <button type="button" class="lang-choice" data-lang-choice="hi" aria-label="Show Hindi">हिन्दी</button>
-        </div>
-      </div>
+      <a href="#" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
     </nav>
 
     <section class="hero">
@@ -4043,5 +4035,33 @@
     })();
   </script>
 
+
+<script data-drishvara-hf01-dropdown-guard="true">
+(function () {
+  function guardSelectControls() {
+    document.querySelectorAll("select").forEach(function (select) {
+      select.setAttribute("data-drishvara-form-control", "select");
+      ["click", "mousedown", "pointerdown", "touchstart"].forEach(function (eventName) {
+        select.addEventListener(eventName, function (event) {
+          event.stopPropagation();
+        }, false);
+      });
+    });
+
+    document.querySelectorAll("[data-drishvara-auth-placeholder='true']").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", guardSelectControls);
+  } else {
+    guardSelectControls();
+  }
+})();
+</script>
 </body>
 </html>

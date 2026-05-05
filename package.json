@@ -160,7 +160,10 @@
     "validate:lv01": "node scripts/validate-lv01-manual-live-verification-result.mjs",
     "generate:hf00": "node scripts/generate-hf00-homepage-correction-plan-preview.mjs",
     "validate:hf00": "node scripts/validate-hf00-homepage-correction-plan.mjs",
-    "validate:homepage": "npm run validate:hf00"
+    "validate:homepage": "npm run validate:hf00 && npm run validate:hf01",
+    "apply:hf01": "node scripts/apply-hf01-targeted-static-frontend-correction.mjs",
+    "generate:hf01": "node scripts/generate-hf01-targeted-static-frontend-correction-preview.mjs",
+    "validate:hf01": "node scripts/validate-hf01-targeted-static-frontend-correction.mjs"
   },
   "repository": {
     "type": "git",
