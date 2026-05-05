@@ -147,7 +147,7 @@
     "validate:qa01": "node scripts/validate-qa01-build-asset-seo-link-smoke.mjs",
     "generate:lr00": "node scripts/generate-lr00-live-readiness-review-preview.mjs",
     "validate:lr00": "node scripts/validate-lr00-live-readiness-review.mjs",
-    "validate:live": "npm run validate:lr00 && npm run validate:lv00 && npm run validate:lv01 && npm run validate:lv02 && npm run validate:lv03",
+    "validate:live": "npm run validate:lr00 && npm run validate:lv00 && npm run validate:lv01 && npm run validate:lv02 && npm run validate:lv03 && npm run validate:lv03-result",
     "generate:lf00": "node scripts/generate-lf00-homepage-asset-link-findings-preview.mjs",
     "validate:lf00": "node scripts/validate-lf00-homepage-asset-link-findings.mjs",
     "validate:findings": "npm run validate:lf00 && npm run validate:lf01",
@@ -176,7 +176,9 @@
     "generate:hq01": "node scripts/generate-hq01-post-hf03-static-qa-refresh.mjs",
     "validate:hq01": "node scripts/validate-hq01-post-hf03-static-qa-refresh.mjs",
     "generate:lv03": "node scripts/generate-lv03-post-hf03-manual-live-recheck.mjs",
-    "validate:lv03": "node scripts/validate-lv03-post-hf03-manual-live-recheck.mjs"
+    "validate:lv03": "node scripts/validate-lv03-post-hf03-manual-live-recheck.mjs",
+    "generate:lv03-result": "node scripts/generate-lv03-post-hf03-manual-live-recheck-result.mjs",
+    "validate:lv03-result": "node scripts/validate-lv03-post-hf03-manual-live-recheck-result.mjs"
   },
   "repository": {
     "type": "git",

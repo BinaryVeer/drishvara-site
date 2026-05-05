@@ -1,0 +1,157 @@
+{
+  "preview_id": "LV03_POST_HF03_MANUAL_LIVE_RECHECK_RESULT_PREVIEW",
+  "module_id": "LV03_RESULT",
+  "status": "preview_only_manual_live_recheck_failed_no_mutation",
+  "preview_only": true,
+  "hq01_evidence": {
+    "hq01_preview_present": true,
+    "hf03_markers_present": true,
+    "required_nav_labels_present": true,
+    "dropdown_guard_preserved": true,
+    "qa_static_missing_assets_zero": true,
+    "qa_static_missing_links_zero": true,
+    "backend_activation_enabled": false,
+    "auth_enabled": false
+  },
+  "manual_result": {
+    "overall": "fail",
+    "live_homepage_opens": "pass",
+    "header_menu_alignment": "fail",
+    "timezone_dropdown": "fail",
+    "homepage_sticking_freezing": "fail",
+    "language_toggle": "fail",
+    "clean_live_confidence": false
+  },
+  "manual_findings": [
+    {
+      "finding_id": "LV03-FINDING-001",
+      "area": "homepage_load",
+      "severity": "pass",
+      "finding": "Live homepage opens after HF03.",
+      "required_next_action": "No correction needed for basic page opening.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV03-FINDING-002",
+      "area": "header_menu_alignment",
+      "severity": "fail",
+      "finding": "Homepage header/menu alignment remains disturbed; menu items are split and not in a clean header layout.",
+      "required_next_action": "HF04 should plan a stronger homepage header reconstruction.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV03-FINDING-003",
+      "area": "timezone_dropdown",
+      "severity": "fail",
+      "finding": "Timezone dropdown is visible but does not allow selecting a different timezone.",
+      "required_next_action": "HF04 should inspect dropdown/select event handling and remove unsafe blockers.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV03-FINDING-004",
+      "area": "dropdown_freeze",
+      "severity": "fail",
+      "finding": "Dropdown option on any page can freeze/stick the page.",
+      "required_next_action": "HF04 should treat this as a shared dropdown/event handling issue, not only a homepage issue.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV03-FINDING-005",
+      "area": "language_toggle",
+      "severity": "fail",
+      "finding": "Language toggle is not found/visible.",
+      "required_next_action": "HF04 should restore visible EN/Hindi language toggle without reintroducing previous language bugs.",
+      "mutation_performed": false,
+      "activation_performed": false
+    }
+  ],
+  "static_context_from_hq01": [
+    "hf03_markers_present",
+    "required_nav_labels_present",
+    "dropdown_guard_preserved",
+    "qa_static_missing_assets_zero",
+    "qa_static_missing_links_zero",
+    "backend_activation_disabled",
+    "auth_disabled"
+  ],
+  "next_fix_focus": [
+    "rebuild_homepage_header_layout",
+    "restore_language_toggle_visibility",
+    "stabilize_timezone_dropdown",
+    "remove_or_adjust_unsafe_dropdown_event_guards",
+    "check_shared_dropdown_behavior_across_pages",
+    "preserve_signin_join_placeholder_only",
+    "preserve_article_reference_and_image_credit_blocks",
+    "keep_backend_supabase_auth_api_disabled"
+  ],
+  "summary": {
+    "overall": "fail",
+    "finding_count": 5,
+    "severity_counts": {
+      "pass": 1,
+      "fail": 4
+    },
+    "area_counts": {
+      "homepage_load": 1,
+      "header_menu_alignment": 1,
+      "timezone_dropdown": 1,
+      "dropdown_freeze": 1,
+      "language_toggle": 1
+    },
+    "clean_live_confidence": false,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "asset_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "file_deletion",
+    "file_move",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "HF04",
+    "title": "Follow-up Homepage Visual/Interaction Correction Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
