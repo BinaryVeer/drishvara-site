@@ -1,0 +1,152 @@
+{
+  "preview_id": "LV02_POST_HF01_MANUAL_LIVE_RECHECK_PREVIEW",
+  "module_id": "LV02",
+  "status": "preview_only_manual_live_recheck_result_no_mutation",
+  "preview_only": true,
+  "hq00_evidence": {
+    "hq00_preview_present": true,
+    "all_pages_have_submissions": true,
+    "all_pages_have_dropdown_guard": true,
+    "all_article_pages_have_reference_placeholder": true,
+    "all_article_pages_have_image_credit_placeholder": true
+  },
+  "manual_result": {
+    "overall_status": "warning_partial_fail",
+    "static_hq00_status": "pass",
+    "live_homepage_status": "needs_fix",
+    "clean_live_confidence": false,
+    "backend_activation": "no_go",
+    "supabase_activation": "no_go",
+    "auth_activation": "no_go",
+    "api_activation": "no_go"
+  },
+  "manual_findings": [
+    {
+      "finding_id": "LV02-FINDING-001",
+      "area": "homepage_interaction",
+      "severity": "fail",
+      "finding": "Homepage still shows sticking or interaction-freeze behavior.",
+      "required_correction": "Investigate homepage click/focus/overlay handlers and stabilize interaction.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV02-FINDING-002",
+      "area": "homepage_header",
+      "severity": "fail",
+      "finding": "Homepage header/navigation layout is disturbed.",
+      "required_correction": "Restore clean single-header alignment without splitting menu items.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV02-FINDING-003",
+      "area": "timezone_control",
+      "severity": "warning",
+      "finding": "Timezone dropdown appears displaced from intended header flow.",
+      "required_correction": "Reposition timezone control within stable header/control layout.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV02-FINDING-004",
+      "area": "navigation_layout",
+      "severity": "warning",
+      "finding": "Top navigation items are split/stacked rather than cleanly aligned.",
+      "required_correction": "Create responsive header layout with consistent desktop/mobile behavior.",
+      "mutation_performed": false,
+      "activation_performed": false
+    },
+    {
+      "finding_id": "LV02-FINDING-005",
+      "area": "correction_boundary",
+      "severity": "info",
+      "finding": "Issue should be fixed after LV02 through HF02 planning and then targeted correction.",
+      "required_correction": "Do not perform correction inside LV02.",
+      "mutation_performed": false,
+      "activation_performed": false
+    }
+  ],
+  "static_pass_items_from_hq00": [
+    "submissions_navigation_present",
+    "dashboard_navigation_present",
+    "signin_join_placeholder_present",
+    "dropdown_guard_present",
+    "article_reference_placeholder_present",
+    "image_credit_placeholder_present",
+    "backend_activation_no_go",
+    "auth_activation_no_go"
+  ],
+  "next_fix_focus": [
+    "homepage_header_layout",
+    "navigation_alignment",
+    "timezone_dropdown_placement",
+    "language_toggle_placement_if_affected",
+    "homepage_interaction_sticking",
+    "overlay_z_index_pointer_events",
+    "dropdown_usability_preservation",
+    "language_toggle_stability_preservation"
+  ],
+  "summary": {
+    "finding_count": 5,
+    "severity_counts": {
+      "fail": 2,
+      "warning": 2,
+      "info": 1
+    },
+    "area_counts": {
+      "homepage_interaction": 1,
+      "homepage_header": 1,
+      "timezone_control": 1,
+      "navigation_layout": 1,
+      "correction_boundary": 1
+    },
+    "clean_live_confidence": false,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "frontend_deployment_enabled": false
+  },
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "file_deletion",
+    "file_move",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "HF02",
+    "title": "Homepage Header Layout and Interaction Stabilization Fix Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}

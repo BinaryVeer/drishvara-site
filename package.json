@@ -147,7 +147,7 @@
     "validate:qa01": "node scripts/validate-qa01-build-asset-seo-link-smoke.mjs",
     "generate:lr00": "node scripts/generate-lr00-live-readiness-review-preview.mjs",
     "validate:lr00": "node scripts/validate-lr00-live-readiness-review.mjs",
-    "validate:live": "npm run validate:lr00 && npm run validate:lv00 && npm run validate:lv01",
+    "validate:live": "npm run validate:lr00 && npm run validate:lv00 && npm run validate:lv01 && npm run validate:lv02",
     "generate:lf00": "node scripts/generate-lf00-homepage-asset-link-findings-preview.mjs",
     "validate:lf00": "node scripts/validate-lf00-homepage-asset-link-findings.mjs",
     "validate:findings": "npm run validate:lf00 && npm run validate:lf01",
@@ -165,7 +165,9 @@
     "generate:hf01": "node scripts/generate-hf01-targeted-static-frontend-correction-preview.mjs",
     "validate:hf01": "node scripts/validate-hf01-targeted-static-frontend-correction.mjs",
     "generate:hq00": "node scripts/generate-hq00-post-hf01-static-qa-refresh.mjs",
-    "validate:hq00": "node scripts/validate-hq00-post-hf01-static-qa-refresh.mjs"
+    "validate:hq00": "node scripts/validate-hq00-post-hf01-static-qa-refresh.mjs",
+    "generate:lv02": "node scripts/generate-lv02-post-hf01-manual-live-recheck.mjs",
+    "validate:lv02": "node scripts/validate-lv02-post-hf01-manual-live-recheck.mjs"
   },
   "repository": {
     "type": "git",

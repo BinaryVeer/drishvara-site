@@ -1,0 +1,139 @@
+{
+  "module_id": "LV02",
+  "module_title": "Post-HF01 Manual Live Recheck",
+  "phase": "LV-Live Verification",
+  "status": "manual_live_recheck_result_no_mutation",
+  "depends_on": [
+    "HQ00",
+    "HF01",
+    "HF00",
+    "LV01"
+  ],
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "homepage_mutation_enabled": false,
+  "page_mutation_enabled": false,
+  "asset_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "activation_decision_enabled": false,
+  "manual_result": {
+    "overall_status": "warning_partial_fail",
+    "static_hq00_status": "pass",
+    "live_homepage_status": "needs_fix",
+    "clean_live_confidence": false,
+    "backend_activation": "no_go",
+    "supabase_activation": "no_go",
+    "auth_activation": "no_go",
+    "api_activation": "no_go"
+  },
+  "manual_findings": [
+    {
+      "finding_id": "LV02-FINDING-001",
+      "area": "homepage_interaction",
+      "severity": "fail",
+      "finding": "Homepage still shows sticking or interaction-freeze behavior.",
+      "required_correction": "Investigate homepage click/focus/overlay handlers and stabilize interaction."
+    },
+    {
+      "finding_id": "LV02-FINDING-002",
+      "area": "homepage_header",
+      "severity": "fail",
+      "finding": "Homepage header/navigation layout is disturbed.",
+      "required_correction": "Restore clean single-header alignment without splitting menu items."
+    },
+    {
+      "finding_id": "LV02-FINDING-003",
+      "area": "timezone_control",
+      "severity": "warning",
+      "finding": "Timezone dropdown appears displaced from intended header flow.",
+      "required_correction": "Reposition timezone control within stable header/control layout."
+    },
+    {
+      "finding_id": "LV02-FINDING-004",
+      "area": "navigation_layout",
+      "severity": "warning",
+      "finding": "Top navigation items are split/stacked rather than cleanly aligned.",
+      "required_correction": "Create responsive header layout with consistent desktop/mobile behavior."
+    },
+    {
+      "finding_id": "LV02-FINDING-005",
+      "area": "correction_boundary",
+      "severity": "info",
+      "finding": "Issue should be fixed after LV02 through HF02 planning and then targeted correction.",
+      "required_correction": "Do not perform correction inside LV02."
+    }
+  ],
+  "static_pass_items_from_hq00": [
+    "submissions_navigation_present",
+    "dashboard_navigation_present",
+    "signin_join_placeholder_present",
+    "dropdown_guard_present",
+    "article_reference_placeholder_present",
+    "image_credit_placeholder_present",
+    "backend_activation_no_go",
+    "auth_activation_no_go"
+  ],
+  "next_fix_focus": [
+    "homepage_header_layout",
+    "navigation_alignment",
+    "timezone_dropdown_placement",
+    "language_toggle_placement_if_affected",
+    "homepage_interaction_sticking",
+    "overlay_z_index_pointer_events",
+    "dropdown_usability_preservation",
+    "language_toggle_stability_preservation"
+  ],
+  "preview_output": "data/quality/lv02-post-hf01-manual-live-recheck-preview.json",
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "file_deletion",
+    "file_move",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "recommended_next_stage": {
+    "module_id": "HF02",
+    "title": "Homepage Header Layout and Interaction Stabilization Fix Plan",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
