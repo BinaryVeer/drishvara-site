@@ -395,14 +395,26 @@
   </style>
 
 
-<style data-drishvara-hf01-dropdown-guard="true">
+
+
+<style data-drishvara-hf01-dropdown-guard="passive" data-drishvara-hf05-native-dropdown-safety="true">
+  /*
+    HF05 passive native-dropdown safety.
+    Important: no JavaScript event blocking is attached to native select controls.
+  */
   select,
   option,
-  .submission-form select,
-  [data-drishvara-form-control="select"] {
-    position: relative !important;
-    z-index: 10050 !important;
+  [data-drishvara-form-control="select"],
+  [data-drishvara-hf05-timezone] {
     pointer-events: auto !important;
+    user-select: auto !important;
+    touch-action: manipulation !important;
+    position: relative;
+    z-index: 1000;
+  }
+
+  [data-drishvara-auth-placeholder="true"] {
+    cursor: default;
   }
 </style>
 </head>
@@ -494,32 +506,6 @@
 </article>
   </div>
 
-<script data-drishvara-hf01-dropdown-guard="true">
-(function () {
-  function guardSelectControls() {
-    document.querySelectorAll("select").forEach(function (select) {
-      select.setAttribute("data-drishvara-form-control", "select");
-      ["click", "mousedown", "pointerdown", "touchstart"].forEach(function (eventName) {
-        select.addEventListener(eventName, function (event) {
-          event.stopPropagation();
-        }, false);
-      });
-    });
 
-    document.querySelectorAll("[data-drishvara-auth-placeholder='true']").forEach(function (link) {
-      link.addEventListener("click", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-      });
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", guardSelectControls);
-  } else {
-    guardSelectControls();
-  }
-})();
-</script>
 </body>
 </html>

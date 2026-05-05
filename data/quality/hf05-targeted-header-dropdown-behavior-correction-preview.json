@@ -1,26 +1,25 @@
 {
-  "preview_id": "HF03_HOMEPAGE_HEADER_INTERACTION_STABILIZATION_PREVIEW",
-  "module_id": "HF03",
-  "status": "preview_after_limited_index_html_homepage_stabilization",
+  "preview_id": "HF05_TARGETED_HEADER_DROPDOWN_BEHAVIOR_CORRECTION_PREVIEW",
+  "module_id": "HF05",
+  "status": "preview_after_limited_static_frontend_header_dropdown_correction",
   "preview_only": true,
   "apply_evidence": {
     "apply_result_present": true,
-    "modified_file_count": 1,
-    "modified_files": [
-      "index.html"
-    ],
-    "changes": [
-      "inserted_hf03_header_stabilizer_style",
-      "inserted_hf03_interaction_stabilizer_script"
-    ]
+    "modified_file_count": 85,
+    "index_modified": true,
+    "homepage_header_rebuilt": true,
+    "language_toggle_restored": true,
+    "timezone_select_restored": true
   },
   "static_scan": {
     "index_exists": true,
-    "nav_count": 2,
-    "select_count": 4,
-    "hf03_style_marker_present": true,
-    "hf03_script_marker_present": true,
-    "hf01_dropdown_guard_present": true,
+    "hf05_header_present": true,
+    "hf05_nav_present": true,
+    "hf05_timezone_present": true,
+    "hf05_language_toggle_present": true,
+    "hf05_native_dropdown_safety_present": true,
+    "hf05_script_present": true,
+    "hf01_passive_dropdown_marker_present": true,
     "auth_placeholder_present": true,
     "required_nav_labels_present": true,
     "required_nav_label_status": [
@@ -53,19 +52,22 @@
         "present": true
       }
     ],
-    "has_homepage_stabilized_class_reference": true,
-    "has_decorative_pointer_safety": true,
-    "has_select_stabilization": true,
-    "has_auth_placeholder_guard": true
+    "unsafe_hf01_dropdown_guard_script_count_in_index": 0,
+    "stop_propagation_count_in_index": 2,
+    "prevent_default_count_in_index": 3,
+    "en_button_present": true,
+    "hindi_button_present": true
   },
   "summary": {
-    "index_only_patch": true,
-    "style_marker_present": true,
-    "script_marker_present": true,
+    "index_exists": true,
+    "hf05_header_complete": true,
+    "hf05_script_present": true,
+    "native_dropdown_safety_present": true,
+    "unsafe_hf01_dropdown_guard_script_removed_from_index": true,
     "required_nav_labels_present": true,
-    "dropdown_guard_preserved": true,
+    "language_toggle_visible_markers_present": true,
+    "timezone_select_present": true,
     "auth_placeholder_preserved": true,
-    "homepage_stabilization_present": true,
     "backend_activation_performed": false,
     "api_route_created": false,
     "supabase_enabled": false,
@@ -102,8 +104,8 @@
     "activation_decision"
   ],
   "next_recommended_stage": {
-    "module_id": "HQ01",
-    "title": "Post-HF03 Static QA Refresh",
+    "module_id": "HQ02",
+    "title": "Post-HF05 Static QA Refresh",
     "allowed": true,
     "runtime_allowed": false,
     "mutation_allowed": false,

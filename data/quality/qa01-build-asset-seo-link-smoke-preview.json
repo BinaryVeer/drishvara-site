@@ -18,6 +18,7 @@
       "admin-review:preflight",
       "apply:hf01",
       "apply:hf03",
+      "apply:hf05",
       "apply:lf01",
       "auth-access:preflight",
       "bilingual:preflight",
@@ -48,6 +49,8 @@
       "generate:hf01",
       "generate:hf02",
       "generate:hf03",
+      "generate:hf04",
+      "generate:hf05",
       "generate:hq00",
       "generate:hq01",
       "generate:i01",
@@ -65,6 +68,8 @@
       "generate:lv00",
       "generate:lv01",
       "generate:lv02",
+      "generate:lv03",
+      "generate:lv03-result",
       "generate:qa00",
       "generate:qa01",
       "hindi-body:preflight",
@@ -133,6 +138,8 @@
       "validate:hf01",
       "validate:hf02",
       "validate:hf03",
+      "validate:hf04",
+      "validate:hf05",
       "validate:homepage",
       "validate:hq00",
       "validate:hq01",
@@ -154,6 +161,8 @@
       "validate:lv00",
       "validate:lv01",
       "validate:lv02",
+      "validate:lv03",
+      "validate:lv03-result",
       "validate:m00",
       "validate:m01",
       "validate:m02",
@@ -232,6 +241,34 @@
         "status": "present"
       },
       {
+        "ref": "index.html",
+        "status": "present"
+      },
+      {
+        "ref": "about.html",
+        "status": "present"
+      },
+      {
+        "ref": "insights.html",
+        "status": "present"
+      },
+      {
+        "ref": "submissions.html",
+        "status": "present"
+      },
+      {
+        "ref": "dashboard.html",
+        "status": "present"
+      },
+      {
+        "ref": "contact.html",
+        "status": "present"
+      },
+      {
+        "ref": "index.html",
+        "status": "present"
+      },
+      {
         "ref": "about.html",
         "status": "present"
       },
@@ -261,6 +298,10 @@
       }
     ],
     "anchor_links": [
+      {
+        "ref": "#",
+        "status": "manual_anchor_check"
+      },
       {
         "ref": "#",
         "status": "manual_anchor_check"
