@@ -160,7 +160,7 @@
     "validate:lv01": "node scripts/validate-lv01-manual-live-verification-result.mjs",
     "generate:hf00": "node scripts/generate-hf00-homepage-correction-plan-preview.mjs",
     "validate:hf00": "node scripts/validate-hf00-homepage-correction-plan.mjs",
-    "validate:homepage": "npm run validate:hf00 && npm run validate:hf01 && npm run validate:hq00 && npm run validate:hf02 && npm run validate:hf03",
+    "validate:homepage": "npm run validate:hf00 && npm run validate:hf01 && npm run validate:hq00 && npm run validate:hf02 && npm run validate:hf03 && npm run validate:hq01",
     "apply:hf01": "node scripts/apply-hf01-targeted-static-frontend-correction.mjs",
     "generate:hf01": "node scripts/generate-hf01-targeted-static-frontend-correction-preview.mjs",
     "validate:hf01": "node scripts/validate-hf01-targeted-static-frontend-correction.mjs",
@@ -172,7 +172,9 @@
     "validate:hf02": "node scripts/validate-hf02-homepage-header-layout-interaction-plan.mjs",
     "apply:hf03": "node scripts/apply-hf03-homepage-header-interaction-stabilization.mjs",
     "generate:hf03": "node scripts/generate-hf03-homepage-header-interaction-stabilization-preview.mjs",
-    "validate:hf03": "node scripts/validate-hf03-homepage-header-interaction-stabilization.mjs"
+    "validate:hf03": "node scripts/validate-hf03-homepage-header-interaction-stabilization.mjs",
+    "generate:hq01": "node scripts/generate-hq01-post-hf03-static-qa-refresh.mjs",
+    "validate:hq01": "node scripts/validate-hq01-post-hf03-static-qa-refresh.mjs"
   },
   "repository": {
     "type": "git",

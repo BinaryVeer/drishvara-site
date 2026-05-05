@@ -1,0 +1,189 @@
+{
+  "preview_id": "HQ01_POST_HF03_STATIC_QA_REFRESH_PREVIEW",
+  "module_id": "HQ01",
+  "status": "preview_only_post_hf03_static_qa_refresh_no_mutation",
+  "preview_only": true,
+  "git_evidence": {
+    "head_short": "a4e0dc0",
+    "status_entry_count": 42,
+    "untracked_entry_count": 40,
+    "status_entries_preview": [
+      "M data/quality/qa01-build-asset-seo-link-smoke-preview.json",
+      " M package.json",
+      "?? archive/",
+      "?? assets/hero/",
+      "?? assets/js/drishvara-language-runtime.js.backup-20260503-235518",
+      "?? assets/js/drishvara-language-runtime.js.backup-20260504-000422",
+      "?? assets/js/drishvara-language-runtime.js.backup-20260504-001819",
+      "?? assets/js/drishvara-language-runtime.js.backup-20260504-002820",
+      "?? assets/js/site-language.js.backup-20260503-235518",
+      "?? assets/js/site-language.js.backup-20260504-000422",
+      "?? assets/js/site-language.js.backup-20260504-001819",
+      "?? assets/js/site-language.js.backup-20260504-002820",
+      "?? \"data/ChatGPT Image May 3, 2026, 01_45_54 PM.png\"",
+      "?? data/quality/hq01-post-hf03-static-qa-refresh.json",
+      "?? docs/quality/HQ01_POST_HF03_STATIC_QA_REFRESH.md",
+      "?? index.backup-cosmic-planets-logo-mantra-20260503-231807.html",
+      "?? index.backup-fresh-dimensional-balance-20260503-151343.html",
+      "?? index.backup-galaxy-orbit-20260503-143521.html",
+      "?? index.backup-hero-content-shift-20260503-145457.html",
+      "?? index.backup-inner-orbit-lang-fix-20260503-232935.html",
+      "?? index.backup-logo-final-lift-20260503-233636.html",
+      "?? index.backup-logo-lang-logic-fix-20260503-235518.html",
+      "?? index.backup-logo-more-up-20260504-000729.html",
+      "?? index.backup-logo-up-mantra-small-20260503-230205.html",
+      "?? index.backup-logo-upsize-lang-lock-20260503-234638.html",
+      "?? index.backup-ndim-hero-balance-20260503-145639.html",
+      "?? index.backup-option1-crown-reset-20260503-191414.html",
+      "?? index.backup-option1b-compact-seal-20260503-193235.html",
+      "?? index.backup-optionB-hybrid-halo-20260503-195800.html",
+      "?? index.backup-optionB-refine-safezone-20260503-200531.html"
+    ]
+  },
+  "hf03_evidence": {
+    "hf03_preview_present": true,
+    "hf03_apply_result_present": true,
+    "hf03_modified_file_count": 1,
+    "hf03_modified_files": [
+      "index.html"
+    ],
+    "hf03_index_only_patch": true,
+    "hf03_style_marker_present": true,
+    "hf03_script_marker_present": true,
+    "hf03_required_nav_labels_present": true,
+    "hf03_dropdown_guard_preserved": true,
+    "hf03_auth_placeholder_preserved": true
+  },
+  "qa_evidence": {
+    "qa00_missing_local_asset_count": 0,
+    "qa01_missing_local_asset_count": 0,
+    "qa01_missing_local_link_count": 0
+  },
+  "static_scan": {
+    "index_exists": true,
+    "nav_count": 1,
+    "select_count": 3,
+    "hf03_style_marker_present": true,
+    "hf03_script_marker_present": true,
+    "hf03_homepage_class_reference_present": true,
+    "hf01_dropdown_guard_present": true,
+    "auth_placeholder_marker_present": true,
+    "hf03_select_marker_reference_present": true,
+    "hf03_auth_placeholder_guard_reference_present": true,
+    "decorative_pointer_safety_present": true,
+    "required_nav_label_status": [
+      {
+        "label": "Home",
+        "present": true
+      },
+      {
+        "label": "About",
+        "present": true
+      },
+      {
+        "label": "Insights",
+        "present": true
+      },
+      {
+        "label": "Submissions",
+        "present": true
+      },
+      {
+        "label": "Dashboard",
+        "present": true
+      },
+      {
+        "label": "Contact",
+        "present": true
+      },
+      {
+        "label": "Sign in / Join",
+        "present": true
+      }
+    ]
+  },
+  "summary": {
+    "index_exists": true,
+    "hf03_markers_present": true,
+    "required_nav_labels_present": true,
+    "submissions_present": true,
+    "dashboard_present": true,
+    "signin_join_placeholder_present": true,
+    "dropdown_guard_preserved": true,
+    "select_controls_present": true,
+    "homepage_stabilization_reference_present": true,
+    "decorative_pointer_safety_present": true,
+    "qa_static_missing_assets_zero": true,
+    "qa_static_missing_links_zero": true,
+    "mutation_performed_count": 0,
+    "activation_performed_count": 0,
+    "backend_activation_enabled": false,
+    "api_route_enabled": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "public_dynamic_output_enabled": false,
+    "subscriber_output_enabled": false,
+    "frontend_deployment_enabled": false,
+    "backend_deployment_enabled": false
+  },
+  "manual_live_recheck_requirements": [
+    "homepage_header_layout",
+    "timezone_dropdown_placement",
+    "navigation_alignment",
+    "sticking_freezing_behavior",
+    "language_toggle_stability",
+    "mobile_header_layout",
+    "browser_console_errors"
+  ],
+  "blocked_capabilities": [
+    "homepage_mutation",
+    "page_mutation",
+    "asset_mutation",
+    "css_mutation",
+    "javascript_mutation",
+    "seo_metadata_mutation",
+    "sitemap_mutation",
+    "language_runtime_mutation",
+    "file_deletion",
+    "file_move",
+    "archive_cleanup",
+    "backup_cleanup",
+    "gitignore_modification",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "ml_ingestion",
+    "embedding_generation",
+    "model_training",
+    "vector_database_write",
+    "external_api_fetch",
+    "frontend_deployment",
+    "backend_deployment",
+    "activation_decision"
+  ],
+  "next_recommended_stage": {
+    "module_id": "LV03",
+    "title": "Post-HF03 Manual Live Recheck",
+    "allowed": true,
+    "runtime_allowed": false,
+    "mutation_allowed": false,
+    "public_output_allowed": false,
+    "subscriber_output_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false,
+    "activation_decision_allowed": false
+  }
+}
