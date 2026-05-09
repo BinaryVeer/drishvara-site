@@ -1,0 +1,30 @@
+{
+  "result_id": "AR02E_SAMPLE_REFERENCE_LIVE_REVIEW_RESULT",
+  "module_id": "AR02E",
+  "status": "conditional_fail_cleanup_required",
+  "sample_article_count": 5,
+  "overall_result": "conditional_fail_cleanup_required",
+  "ready_for_scale_up": false,
+  "observations": {
+    "accepted_reference_block_visible": true,
+    "two_reference_links_visible_in_accepted_block": true,
+    "image_credit_visible": true,
+    "legacy_duplicate_reference_block_observed": true,
+    "legacy_duplicate_image_credit_observed": true
+  },
+  "finding": "Sample article reference insertion is functionally present, but legacy/static reference and image-credit blocks should be removed before scaling to all articles.",
+  "decision": "Do not scale to remaining articles yet.",
+  "recommended_next_stage": "AR02F",
+  "article_html_mutation_performed": false,
+  "external_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false
+}
