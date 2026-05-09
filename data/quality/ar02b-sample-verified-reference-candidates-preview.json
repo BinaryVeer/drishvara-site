@@ -1,0 +1,111 @@
+{
+  "preview_id": "AR02B_SAMPLE_VERIFIED_REFERENCE_CANDIDATES_PREVIEW",
+  "module_id": "AR02B",
+  "status": "preview_after_sample_candidate_population",
+  "preview_only": true,
+  "sample_article_count": 5,
+  "populated_candidate_url_count": 10,
+  "accepted_reference_count": 10,
+  "sample_entries": [
+    {
+      "article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "category": "media",
+      "accepted_reference_count": 2,
+      "urls_present": true,
+      "decisions": [
+        "accepted",
+        "accepted"
+      ]
+    },
+    {
+      "article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "category": "policy",
+      "accepted_reference_count": 2,
+      "urls_present": true,
+      "decisions": [
+        "accepted",
+        "accepted"
+      ]
+    },
+    {
+      "article_path": "articles/spiritual/contemplative-practices-modern-mental-health.html",
+      "category": "spiritual",
+      "accepted_reference_count": 2,
+      "urls_present": true,
+      "decisions": [
+        "accepted",
+        "accepted"
+      ]
+    },
+    {
+      "article_path": "articles/sports/mental-health-awareness-professional-athletics-2026.html",
+      "category": "sports",
+      "accepted_reference_count": 2,
+      "urls_present": true,
+      "decisions": [
+        "accepted",
+        "accepted"
+      ]
+    },
+    {
+      "article_path": "articles/world/ai-future-warfare-2026.html",
+      "category": "world",
+      "accepted_reference_count": 2,
+      "urls_present": true,
+      "decisions": [
+        "accepted",
+        "accepted"
+      ]
+    }
+  ],
+  "summary": {
+    "exactly_five_articles_populated": true,
+    "exactly_ten_candidate_urls_populated": true,
+    "all_sample_articles_have_two_accepted_references": true,
+    "all_sample_urls_https": true,
+    "article_html_mutation_performed": false,
+    "automated_external_fetch_performed": false,
+    "backend_activation_performed": false,
+    "api_route_created": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "frontend_deployment_performed": false,
+    "file_deletion_performed": false,
+    "file_move_performed": false
+  },
+  "blocked_capabilities": [
+    "external_fetch",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "article_html_mutation",
+    "article_page_reference_replacement",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AR02C",
+    "title": "Sample Article Reference Insertion Patch",
+    "allowed": true,
+    "article_html_mutation_allowed": true,
+    "scope": "five_sample_articles_only",
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
