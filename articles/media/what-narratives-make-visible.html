@@ -32,6 +32,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style data-drishvara-hf11-top-paint-refinement="true">
+/*
+  HF11: top paint-band refinement.
+  Keeps the settled design but reduces the perceived top color band.
+*/
+html,
+body {
+  background-color: #071329 !important;
+}
+
+body {
+  background:
+    linear-gradient(180deg, #071329 0%, #071329 22%, #0b1833 100%) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 132px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(180deg, #071329 0%, rgba(7, 19, 41, 0.96) 100%);
+}
+
+[data-drishvara-hf07-unified-header] {
+  margin-top: 16px !important;
+  position: relative !important;
+  z-index: 90000 !important;
+}
+
+@media (max-width: 700px) {
+  body::before {
+    height: 96px;
+  }
+
+  [data-drishvara-hf07-unified-header] {
+    margin-top: 10px !important;
+  }
+}
+</style>
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" data-drishvara-hf11-root-favicon="true">
+<link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" data-drishvara-hf11-root-favicon="true">
+<link rel="alternate icon" type="image/svg+xml" href="/assets/drishvara-favicon.svg" data-drishvara-hf11-root-favicon="true">
 <script data-drishvara-hf10-paint-ready="true">
 (function () {
   function markReady() {
