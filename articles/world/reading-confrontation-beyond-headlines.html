@@ -32,6 +32,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style data-drishvara-hf13-top-band-neutralised="true">
+/*
+  HF13: neutralise visible top band while preserving settled design.
+*/
+html,
+body {
+  background-color: #071329 !important;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(211, 169, 72, 0.07), transparent 34rem),
+    linear-gradient(180deg, #071329 0%, #071329 38%, #0b1833 100%) !important;
+}
+
+body::before {
+  background: transparent !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+[data-drishvara-hf07-unified-header] {
+  margin-top: 18px !important;
+  background: linear-gradient(135deg, rgba(8, 20, 44, 0.96), rgba(12, 27, 56, 0.94)) !important;
+}
+</style>
+
+<link rel="icon" href="/favicon.ico?v=hf13" sizes="any" data-drishvara-hf13-smooth-favicon="true">
+<link rel="shortcut icon" href="/favicon.ico?v=hf13" data-drishvara-hf13-smooth-favicon="true">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=hf13" data-drishvara-hf13-smooth-favicon="true">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=hf13" data-drishvara-hf13-smooth-favicon="true">
 <script data-drishvara-hf12-safe-select-system="true">
 (function () {
   function closeAllExcept(except) {
