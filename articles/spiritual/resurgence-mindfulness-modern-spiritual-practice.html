@@ -9,7 +9,7 @@
     <a class="drishvara-hf07-link" href="../../submissions.html">Submissions</a>
     <a class="drishvara-hf07-link" href="../../dashboard.html">Dashboard</a>
     <a class="drishvara-hf07-link" href="../../contact.html">Contact</a>
-    <a class="drishvara-hf07-link" href="#" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
+    <a class="drishvara-hf07-link" href="../../login.html" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
   </nav>
 
   <div class="drishvara-hf07-controls" data-drishvara-hf07-controls="true">
@@ -771,6 +771,38 @@
     }
   }
 </style>
+
+<link rel="icon" type="image/svg+xml" href="../../assets/drishvara-favicon.svg" data-drishvara-hf09-favicon="true">
+<link rel="shortcut icon" type="image/svg+xml" href="../../assets/drishvara-favicon.svg" data-drishvara-hf09-favicon="true">
+
+<style data-drishvara-hf09-flicker-guard="true">
+  /*
+    HF09 early paint guard.
+    Prevents legacy nav/header fragments and accidental text artifacts from flashing during navigation.
+  */
+  nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
+  .drishvara-hf05-header,
+  [data-drishvara-hf06-duplicate-nav="true"],
+  [data-drishvara-hf07-duplicate-nav="true"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  [data-drishvara-hf07-unified-header] {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  [data-drishvara-hf07-nav] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+</style>
 </head>
 <body>
 <nav class="site-nav" data-drishvara-hf01-common-nav="true">
@@ -780,7 +812,7 @@
       <a href="../../submissions.html">Submissions</a>
       <a href="../../dashboard.html">Dashboard</a>
       <a href="../../contact.html">Contact</a>
-      <a href="#" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
+      <a href="../../login.html" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
     </nav>
   <div class="page">
     <div class="topbar">
@@ -903,9 +935,7 @@
 
     document.querySelectorAll("[data-drishvara-auth-placeholder='true']").forEach(function (link) {
       link.setAttribute("aria-disabled", "true");
-      link.addEventListener("click", function (event) {
-        event.preventDefault();
-      });
+      
     });
 
     document.querySelectorAll("[data-drishvara-hf07-timezone]").forEach(function (timezone) {
