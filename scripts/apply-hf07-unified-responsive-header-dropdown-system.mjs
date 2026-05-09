@@ -1,20 +1,73 @@
+import fs from "node:fs";
+import path from "node:path";
 
+const root = process.cwd();
+const registryPath = path.join(root, "data", "quality", "hf07-unified-responsive-header-dropdown-system-patch.json");
+const outPath = path.join(root, "data", "quality", "hf07-unified-responsive-header-dropdown-system-apply-result.json");
+
+function readJson(filePath) {
+  if (!fs.existsSync(filePath)) throw new Error(`Missing file: ${path.relative(root, filePath)}`);
+  return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function isExcluded(relPath) {
+  const p = relPath.replaceAll(path.sep, "/").toLowerCase();
+  if (p.startsWith("archive/")) return true;
+  if (p.startsWith("node_modules/")) return true;
+  if (p.startsWith("drishvara_phase01_scaffold/")) return true;
+  if (p.includes("backup")) return true;
+  if (p === "admin.html") return true;
+  return false;
+}
+
+function walkHtml(dir, files = []) {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    const rel = path.relative(root, full).replaceAll(path.sep, "/");
+    if (isExcluded(rel)) continue;
+    if (entry.isDirectory()) {
+      walkHtml(full, files);
+    } else if (entry.isFile() && rel.endsWith(".html")) {
+      files.push(rel);
+    }
+  }
+  return files.sort();
+}
+
+function prefixFor(rel) {
+  const depth = rel.split("/").length - 1;
+  return "../".repeat(depth);
+}
+
+function activeFor(rel, page) {
+  if (page === "index" && rel === "index.html") return " active";
+  if (page === "about" && rel === "about.html") return " active";
+  if (page === "insights" && (rel === "insights.html" || rel.startsWith("articles/"))) return " active";
+  if (page === "submissions" && rel === "submissions.html") return " active";
+  if (page === "dashboard" && rel === "dashboard.html") return " active";
+  if (page === "contact" && rel === "contact.html") return " active";
+  return "";
+}
+
+function headerHtml(rel) {
+  const pre = prefixFor(rel);
+  return `
 <header class="drishvara-hf07-header" data-drishvara-hf07-unified-header="true">
-  <a class="drishvara-hf07-brand" href="../../index.html" aria-label="Drishvara Home">Drishvara</a>
+  <a class="drishvara-hf07-brand" href="${pre}index.html" aria-label="Drishvara Home">Drishvara</a>
 
   <nav class="drishvara-hf07-nav" data-drishvara-hf07-nav="true" aria-label="Primary navigation">
-    <a class="drishvara-hf07-link" href="../../index.html">Home</a>
-    <a class="drishvara-hf07-link" href="../../about.html">About</a>
-    <a class="drishvara-hf07-link active" href="../../insights.html">Insights</a>
-    <a class="drishvara-hf07-link" href="../../submissions.html">Submissions</a>
-    <a class="drishvara-hf07-link" href="../../dashboard.html">Dashboard</a>
-    <a class="drishvara-hf07-link" href="../../contact.html">Contact</a>
+    <a class="drishvara-hf07-link${activeFor(rel, "index")}" href="${pre}index.html">Home</a>
+    <a class="drishvara-hf07-link${activeFor(rel, "about")}" href="${pre}about.html">About</a>
+    <a class="drishvara-hf07-link${activeFor(rel, "insights")}" href="${pre}insights.html">Insights</a>
+    <a class="drishvara-hf07-link${activeFor(rel, "submissions")}" href="${pre}submissions.html">Submissions</a>
+    <a class="drishvara-hf07-link${activeFor(rel, "dashboard")}" href="${pre}dashboard.html">Dashboard</a>
+    <a class="drishvara-hf07-link${activeFor(rel, "contact")}" href="${pre}contact.html">Contact</a>
     <a class="drishvara-hf07-link" href="#" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
   </nav>
 
   <div class="drishvara-hf07-controls" data-drishvara-hf07-controls="true">
-    <label class="drishvara-hf07-timezone-label" for="drishvara-hf07-timezone-articles-spiritual-how-attention-becomes-worship-html">Time zone</label>
-    <select id="drishvara-hf07-timezone-articles-spiritual-how-attention-becomes-worship-html" data-drishvara-hf07-timezone="true" aria-label="Select timezone">
+    <label class="drishvara-hf07-timezone-label" for="drishvara-hf07-timezone-${rel.replace(/[^a-zA-Z0-9]/g, "-")}">Time zone</label>
+    <select id="drishvara-hf07-timezone-${rel.replace(/[^a-zA-Z0-9]/g, "-")}" data-drishvara-hf07-timezone="true" aria-label="Select timezone">
       <option value="Asia/Kolkata">India — IST</option>
       <option value="UTC">UTC</option>
       <option value="Asia/Dubai">Dubai — GST</option>
@@ -28,246 +81,11 @@
       <button type="button" data-drishvara-hf07-lang-choice="hi" aria-pressed="false">हिंदी</button>
     </div>
   </div>
-</header>\n<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How attention becomes a form of worship · Drishvara</title>
-  <meta name="description" content="A reflection on attention, stillness, and meaning." />
-  <link rel="icon" type="image/png" href="../../assets/logo/logo.png" />
+</header>`;
+}
 
-  <style>
-    :root {
-      --bg-1: #08142d;
-      --bg-2: #12254a;
-      --surface: rgba(255, 255, 255, 0.04);
-      --border: rgba(255, 255, 255, 0.08);
-      --text-main: #f5f1e8;
-      --text-soft: #d7deea;
-      --text-muted: #9aa8bc;
-      --gold: #c9a24a;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Georgia", serif;
-      color: var(--text-main);
-      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
-    }
-
-    .page {
-      max-width: 800px;
-      margin: auto;
-      padding: 30px 20px 60px;
-    }
-
-    .nav {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .nav a {
-      color: var(--text-soft);
-      margin: 0 12px;
-      text-decoration: none;
-    }
-
-    .nav a:hover {
-      color: var(--gold);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2.6rem;
-      margin-bottom: 14px;
-    }
-
-    .meta {
-      text-align: center;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .content {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 26px;
-    }
-
-    .content p {
-      color: var(--text-muted);
-      line-height: 1.9;
-      margin-bottom: 16px;
-    }
-
-    blockquote {
-      border-left: 3px solid var(--gold);
-      padding-left: 12px;
-      margin: 20px 0;
-      color: var(--text-soft);
-      font-style: italic;
-    }
-
-    .back {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .back a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-  </style>
-
-  <style id="drishvara-reading-overrides">
-    body {
-      overflow-x: hidden;
-    }
-
-    h1 {
-      font-size: clamp(1.9rem, 3.4vw, 2.9rem) !important;
-      line-height: 1.1 !important;
-      letter-spacing: -0.025em !important;
-      max-width: 980px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    article,
-    .article-body,
-    main article {
-      max-width: 980px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    p,
-    li {
-      font-size: clamp(1rem, 1.22vw, 1.08rem) !important;
-      line-height: 1.86 !important;
-      text-align: justify !important;
-      text-justify: inter-word !important;
-    }
-
-    img {
-      width: 100% !important;
-      max-height: 360px !important;
-      object-fit: cover !important;
-      border-radius: 18px !important;
-      display: block !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-  </style>
-
-
-  <style id="drishvara-typography-final-pass">
-    body {
-      overflow-x: hidden;
-    }
-
-    h1 {
-      max-width: 1000px !important;
-      font-size: clamp(1.9rem, 3vw, 2.75rem) !important;
-      line-height: 1.12 !important;
-      letter-spacing: -0.02em !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    article,
-    .article-body,
-    main article {
-      max-width: 1040px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    p,
-    li {
-      max-width: 900px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      font-size: clamp(1rem, 1.08vw, 1.065rem) !important;
-      line-height: 1.86 !important;
-      text-align: justify !important;
-      text-justify: inter-word !important;
-      hyphens: auto !important;
-    }
-
-    h2,
-    h3,
-    blockquote,
-    ul,
-    ol {
-      max-width: 900px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    img {
-      width: 100% !important;
-      max-height: 340px !important;
-      object-fit: cover !important;
-      border-radius: 16px !important;
-      display: block !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-    }
-
-    figcaption,
-    .image-credit {
-      max-width: 900px !important;
-      margin-left: auto !important;
-      margin-right: auto !important;
-      font-family: Arial, Helvetica, sans-serif !important;
-      font-size: 0.82rem !important;
-      line-height: 1.5 !important;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: clamp(1.62rem, 7vw, 2.15rem) !important;
-      }
-
-      p,
-      li {
-        text-align: left !important;
-        line-height: 1.78 !important;
-      }
-
-      img {
-        max-height: 280px !important;
-      }
-    }
-  </style>
-
-
-
-
-<style data-drishvara-hf01-dropdown-guard="passive" data-drishvara-hf05-native-dropdown-safety="true">
-  /*
-    HF05 passive native-dropdown safety.
-    Important: no JavaScript event blocking is attached to native select controls.
-  */
-  select,
-  option,
-  [data-drishvara-form-control="select"],
-  [data-drishvara-hf05-timezone] {
-    pointer-events: auto !important;
-    user-select: auto !important;
-    touch-action: manipulation !important;
-    position: relative;
-    z-index: 1000;
-  }
-
-  [data-drishvara-auth-placeholder="true"] {
-    cursor: default;
-  }
-</style>
-
+function styleBlock() {
+  return `
 <style data-drishvara-hf07-responsive-dropdowns="true">
   /*
     HF07 unified public UI system.
@@ -485,66 +303,11 @@
       width: min(260px, 92vw);
     }
   }
-</style>\n</head>
+</style>`;
+}
 
-<body>
-<nav class="site-nav" data-drishvara-hf01-common-nav="true">
-      <a href="../../index.html">Home</a>
-      <a href="../../about.html">About</a>
-      <a href="../../insights.html" class="active">Insights</a>
-      <a href="../../submissions.html">Submissions</a>
-      <a href="../../dashboard.html">Dashboard</a>
-      <a href="../../contact.html">Contact</a>
-      <a href="#" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
-    </nav>
-  <div class="page">
-
-    <div class="nav">
-      <a href="../../index.html">Home</a>
-      <a href="../../insights.html">Insights</a>
-    </div>
-
-    <div class="meta">Spiritual Thought</div>
-
-    <h1>How attention becomes a form of worship</h1>
-
-    <div class="content">
-      <p>
-        Most forms of worship are assumed to begin with ritual. But in a deeper sense, they begin earlier — with attention.
-      </p>
-
-      <p>
-        What we notice, how we stay with it, and whether we engage with it casually or consciously — these shape the quality of our inner life.
-      </p>
-
-      <blockquote>
-        What we repeatedly attend to slowly begins to define us.
-      </blockquote>
-
-      <p>
-        A distracted mind fragments experience. A deliberate mind gathers it.
-      </p>
-
-      <p>
-        In that gathering, something changes — attention becomes discipline, and discipline becomes a quiet form of devotion.
-      </p>
-    </div>
-
-    <div class="back">
-      <a href="../../insights.html">← Back to Insights</a>
-    </div>
-
-  </div>
-
-
-
-<section class="article-trust-block" data-drishvara-hf01-trust-block="true" style="margin: 2rem 0; padding: 1.25rem; border: 1px solid rgba(148, 163, 184, 0.35); border-radius: 18px; background: rgba(255,255,255,0.68);">
-  <h2 style="margin-top: 0;">References</h2>
-  <p>References are under editorial verification.</p>
-  <h2>Image credit</h2>
-  <p>Image credit: under review.</p>
-</section>
-
+function scriptBlock() {
+  return `
 <script data-drishvara-hf07-ui-system="true">
 (function () {
   function setLanguageButtonState(lang) {
@@ -626,7 +389,7 @@
     var hf07Nav = document.querySelector("[data-drishvara-hf07-nav]");
     Array.prototype.slice.call(document.querySelectorAll("nav")).forEach(function (nav) {
       if (nav === hf07Nav) return;
-      var text = (nav.textContent || "").replace(/\s+/g, " ").trim();
+      var text = (nav.textContent || "").replace(/\\s+/g, " ").trim();
       if (text.includes("Home") && text.includes("Submissions") && text.includes("Dashboard")) {
         nav.setAttribute("data-drishvara-hf07-duplicate-nav", "true");
         nav.setAttribute("aria-hidden", "true");
@@ -640,5 +403,96 @@
     activateUI07();
   }
 })();
-</script>\n</body>
-</html>
+</script>`;
+}
+
+function stripHF07(html) {
+  html = html.replace(/<header\\b[^>]*data-drishvara-hf07-unified-header[^>]*>[\\s\\S]*?<\/header>/gi, "");
+  html = html.replace(/<style\\b[^>]*data-drishvara-hf07-responsive-dropdowns[^>]*>[\\s\\S]*?<\/style>/gi, "");
+  html = html.replace(/<script\\b[^>]*data-drishvara-hf07-ui-system[^>]*>[\\s\\S]*?<\/script>/gi, "");
+  return html;
+}
+
+function insertAfterBody(html, insert) {
+  if (/<body\\b[^>]*>/i.test(html)) {
+    return html.replace(/<body([^>]*)>/i, `<body$1>\\n${insert}`);
+  }
+  return `${insert}\\n${html}`;
+}
+
+function insertBeforeHeadClose(html, insert) {
+  if (html.includes("</head>")) return html.replace("</head>", `${insert}\\n</head>`);
+  return `${insert}\\n${html}`;
+}
+
+function insertBeforeBodyClose(html, insert) {
+  if (html.includes("</body>")) return html.replace("</body>", `${insert}\\n</body>`);
+  return `${html}\\n${insert}`;
+}
+
+const registry = readJson(registryPath);
+const htmlFiles = walkHtml(root);
+const modifiedFiles = [];
+const fileResults = [];
+
+for (const rel of htmlFiles) {
+  const full = path.join(root, rel);
+  const before = fs.readFileSync(full, "utf8");
+  let html = stripHF07(before);
+  const changes = [];
+
+  html = insertBeforeHeadClose(html, styleBlock());
+  changes.push("inserted_hf07_responsive_dropdown_style");
+
+  html = insertAfterBody(html, headerHtml(rel));
+  changes.push("inserted_hf07_unified_header");
+
+  html = insertBeforeBodyClose(html, scriptBlock());
+  changes.push("inserted_hf07_ui_system_script");
+
+  if (html !== before) {
+    fs.writeFileSync(full, html);
+    modifiedFiles.push(rel);
+  }
+
+  fileResults.push({ file: rel, changes });
+}
+
+const output = {
+  apply_id: "HF07_UNIFIED_RESPONSIVE_HEADER_DROPDOWN_SYSTEM_APPLY_RESULT",
+  module_id: "HF07",
+  status: "unified_static_frontend_header_dropdown_system_applied",
+  applied: true,
+  scanned_html_file_count: htmlFiles.length,
+  modified_files: modifiedFiles,
+  file_results: fileResults,
+  summary: {
+    modified_file_count: modifiedFiles.length,
+    index_modified: modifiedFiles.includes("index.html"),
+    root_page_count: htmlFiles.filter((f) => !f.includes("/")).length,
+    article_page_count: htmlFiles.filter((f) => f.startsWith("articles/")).length,
+    unified_header_applied_file_count: fileResults.length,
+    responsive_dropdown_style_file_count: fileResults.length,
+    ui_system_script_file_count: fileResults.length,
+    backend_activation_performed: false,
+    api_route_created: false,
+    supabase_enabled: false,
+    auth_enabled: false,
+    real_login_enabled: false,
+    real_signup_enabled: false,
+    user_account_collection_enabled: false,
+    frontend_deployment_performed: false,
+    file_deletion_performed: false,
+    file_move_performed: false
+  },
+  blocked_capabilities: registry.blocked_capabilities
+};
+
+fs.mkdirSync(path.dirname(outPath), { recursive: true });
+fs.writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n");
+
+console.log(`Created ${path.relative(root, outPath)}.`);
+console.log(`Scanned HTML files: ${htmlFiles.length}`);
+console.log(`Modified files: ${modifiedFiles.length}`);
+console.log(`Unified header applied: ${output.summary.unified_header_applied_file_count}`);
+console.log(`Responsive dropdown style applied: ${output.summary.responsive_dropdown_style_file_count}`);
