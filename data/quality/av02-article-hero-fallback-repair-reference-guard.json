@@ -1,0 +1,42 @@
+{
+  "module_id": "AV02",
+  "module_title": "Article Hero Fallback Repair, Brand-Mark Restoration and Reference/Credit Guard",
+  "depends_on": [
+    "AV01",
+    "AR02F",
+    "AR02C",
+    "AR01"
+  ],
+  "article_text_mutation_enabled": false,
+  "article_word_count_reduction_enabled": false,
+  "reference_url_change_enabled": false,
+  "new_reference_insertion_enabled": false,
+  "external_fetch_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "category_fallback_assets": {
+    "media": "assets/article-defaults/media.svg",
+    "policy": "assets/article-defaults/policy.svg",
+    "spiritual": "assets/article-defaults/spiritual.svg",
+    "sports": "assets/article-defaults/sports.svg",
+    "world": "assets/article-defaults/world.svg"
+  },
+  "required_markers": {
+    "av02_style_marker": "data-drishvara-av02-article-visual-repair",
+    "av02_router_guard_marker": "data-drishvara-av02-router-reference-guard-script",
+    "av02_brand_restore_marker": "data-drishvara-av02-restored-brand-mark",
+    "av02_reference_guard_marker": "data-drishvara-av02-router-reference-guard",
+    "ar02c_reference_link_marker": "data-drishvara-ar02c-reference-link",
+    "ar02c_block_marker": "data-drishvara-ar02c-sample-reference-block",
+    "ar02c_image_credit_marker": "data-drishvara-ar02c-image-credit"
+  },
+  "apply_result_output": "data/quality/av02-article-hero-fallback-repair-reference-guard-apply-result.json",
+  "recommended_next_stage": {
+    "module_id": "AV03",
+    "title": "Manual Article UI Live Recheck",
+    "allowed": true
+  }
+}
