@@ -109,7 +109,7 @@
     "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs",
     "validate:i00": "node scripts/validate-i00-implementation-planning.mjs",
     "validate:implementation": "npm run validate:i00 && npm run validate:i01 && npm run validate:i02 && npm run validate:i03 && npm run validate:i04 && npm run validate:i05 && npm run validate:ir00 && npm run validate:id00 && npm run validate:id01 && npm run validate:id02",
-    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa && npm run validate:live && npm run validate:findings && npm run validate:homepage && npm run validate:ar01 && npm run validate:ar02a && npm run validate:ar02b && npm run validate:ar02c && npm run validate:ar02d && npm run validate:ar02e && npm run validate:ar02f",
+    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa && npm run validate:live && npm run validate:findings && npm run validate:homepage && npm run validate:ar01 && npm run validate:ar02a && npm run validate:ar02b && npm run validate:ar02c && npm run validate:ar02d && npm run validate:ar02e && npm run validate:ar02f && npm run validate:av01",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
     "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14 && npm run validate:c15 && npm run validate:c16",
     "generate:c11": "node scripts/generate-c11-content-asset-inventory-preview.mjs",
@@ -223,7 +223,10 @@
     "validate:ar02e": "node scripts/validate-ar02e-sample-reference-live-review-result.mjs",
     "apply:ar02f": "node scripts/apply-ar02f-sample-duplicate-reference-block-cleanup.mjs",
     "generate:ar02f": "node scripts/generate-ar02f-sample-duplicate-reference-block-cleanup-preview.mjs",
-    "validate:ar02f": "node scripts/validate-ar02f-sample-duplicate-reference-block-cleanup.mjs"
+    "validate:ar02f": "node scripts/validate-ar02f-sample-duplicate-reference-block-cleanup.mjs",
+    "apply:av01": "node scripts/apply-av01-article-visual-reading-width-standardisation.mjs",
+    "generate:av01": "node scripts/generate-av01-article-visual-reading-width-preview.mjs",
+    "validate:av01": "node scripts/validate-av01-article-visual-reading-width-standardisation.mjs"
   },
   "repository": {
     "type": "git",

@@ -1242,6 +1242,109 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     line-height: 1.55;
   }
 </style>
+<style data-drishvara-av01-article-reading-width="true">
+/*
+  AV01: broad long-form article reading surface.
+  Intended for 1200+ word Drishvara articles.
+*/
+:root {
+  --drishvara-article-outer-max: 1240px;
+  --drishvara-article-body-max: 1120px;
+  --drishvara-article-text-max: 1080px;
+}
+
+main,
+.article-page main,
+.article-shell,
+.article-wrap,
+.article-container,
+.article-content,
+.published-article,
+article {
+  max-width: var(--drishvara-article-outer-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.article-card,
+.article-body,
+.article-reading-panel,
+.article-panel,
+article > section,
+main > section {
+  max-width: var(--drishvara-article-body-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+article p,
+.article-body p,
+.article-content p,
+.article-card p,
+.article-reading-panel p,
+.published-article p,
+main p {
+  max-width: var(--drishvara-article-text-max) !important;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify !important;
+  text-justify: inter-word;
+  line-height: 1.82;
+  hyphens: auto;
+}
+
+article h1,
+.article-content h1,
+.article-title,
+main h1 {
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+article img,
+.article-content img,
+.article-card img,
+.published-article img,
+main img {
+  max-width: 100%;
+}
+
+img[data-drishvara-av01-category-fallback-visual="true"] {
+  width: min(100%, 1120px) !important;
+  max-height: 520px !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 auto 2rem !important;
+  border-radius: 18px;
+}
+
+.drishvara-av01-category-fallback-frame {
+  max-width: 1120px !important;
+  margin: 0 auto 2rem !important;
+}
+
+@media (max-width: 780px) {
+  :root {
+    --drishvara-article-outer-max: calc(100vw - 24px);
+    --drishvara-article-body-max: calc(100vw - 28px);
+    --drishvara-article-text-max: calc(100vw - 38px);
+  }
+
+  article p,
+  .article-body p,
+  .article-content p,
+  .article-card p,
+  .article-reading-panel p,
+  .published-article p,
+  main p {
+    text-align: left !important;
+    hyphens: none;
+    line-height: 1.74;
+  }
+}
+</style>
+<meta data-drishvara-av01-checked="true" content="article-visual-reading-width-standardised">
 </head>
 <body>
 <nav class="site-nav" data-drishvara-hf01-common-nav="true">
@@ -1256,7 +1359,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
   <div class="page">
     <div class="topbar">
       <div class="brand">
-        <img src="/assets/logo/logo.png" alt="Drishvara logo" />
+        <img data-drishvara-av01-category-fallback-visual="true" src="/assets/article-defaults/world.svg" alt="Drishvara category visual" />
         <div class="brand-name">Drishvara</div>
       </div>
 
