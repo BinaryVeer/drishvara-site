@@ -1,0 +1,109 @@
+{
+  "preview_id": "AR02F_SAMPLE_DUPLICATE_REFERENCE_BLOCK_CLEANUP_PREVIEW",
+  "module_id": "AR02F",
+  "status": "preview_after_sample_duplicate_cleanup",
+  "preview_only": true,
+  "apply_evidence": {
+    "apply_result_present": true,
+    "modified_file_count": 5,
+    "total_legacy_blocks_removed": 0
+  },
+  "sample_status": [
+    {
+      "article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "cleanup_marker_present": true,
+      "ar02c_block_count": 1,
+      "ar02c_reference_link_count": 2,
+      "ar02c_image_credit_present": true,
+      "expected_urls_present": true
+    },
+    {
+      "article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "cleanup_marker_present": true,
+      "ar02c_block_count": 1,
+      "ar02c_reference_link_count": 2,
+      "ar02c_image_credit_present": true,
+      "expected_urls_present": true
+    },
+    {
+      "article_path": "articles/spiritual/contemplative-practices-modern-mental-health.html",
+      "cleanup_marker_present": true,
+      "ar02c_block_count": 1,
+      "ar02c_reference_link_count": 2,
+      "ar02c_image_credit_present": true,
+      "expected_urls_present": true
+    },
+    {
+      "article_path": "articles/sports/mental-health-awareness-professional-athletics-2026.html",
+      "cleanup_marker_present": true,
+      "ar02c_block_count": 1,
+      "ar02c_reference_link_count": 2,
+      "ar02c_image_credit_present": true,
+      "expected_urls_present": true
+    },
+    {
+      "article_path": "articles/world/ai-future-warfare-2026.html",
+      "cleanup_marker_present": true,
+      "ar02c_block_count": 1,
+      "ar02c_reference_link_count": 2,
+      "ar02c_image_credit_present": true,
+      "expected_urls_present": true
+    }
+  ],
+  "summary": {
+    "scanned_sample_article_count": 5,
+    "cleanup_marker_present_on_all_samples": true,
+    "every_sample_has_one_ar02c_block": true,
+    "every_sample_has_two_ar02c_links": true,
+    "every_sample_has_image_credit": true,
+    "every_sample_preserves_expected_urls": true,
+    "no_legacy_phrases_outside_ar02c": true,
+    "non_sample_article_mutation_performed": false,
+    "external_fetch_performed": false,
+    "new_reference_generation_performed": false,
+    "reference_url_change_performed": false,
+    "backend_activation_performed": false,
+    "api_route_created": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "frontend_deployment_performed": false,
+    "file_deletion_performed": false,
+    "file_move_performed": false
+  },
+  "blocked_capabilities": [
+    "external_fetch",
+    "new_reference_generation",
+    "reference_url_change",
+    "non_sample_article_mutation",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AR02G",
+    "title": "Post-Cleanup Sample Reference Manual Live Recheck",
+    "allowed": true,
+    "article_html_mutation_allowed": false,
+    "scope": "review five sample article pages after AR02F",
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
