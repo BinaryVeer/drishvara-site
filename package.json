@@ -160,7 +160,7 @@
     "validate:lv01": "node scripts/validate-lv01-manual-live-verification-result.mjs",
     "generate:hf00": "node scripts/generate-hf00-homepage-correction-plan-preview.mjs",
     "validate:hf00": "node scripts/validate-hf00-homepage-correction-plan.mjs",
-    "validate:homepage": "npm run validate:hf00 && npm run validate:hf01 && npm run validate:hq00 && npm run validate:hf02 && npm run validate:hf03 && npm run validate:hq01 && npm run validate:hf04 && npm run validate:hf05 && npm run validate:hf06 && npm run validate:hf07",
+    "validate:homepage": "npm run validate:hf00 && npm run validate:hf01 && npm run validate:hq00 && npm run validate:hf02 && npm run validate:hf03 && npm run validate:hq01 && npm run validate:hf04 && npm run validate:hf05 && npm run validate:hf06 && npm run validate:hf07 && npm run validate:hf08",
     "apply:hf01": "node scripts/apply-hf01-targeted-static-frontend-correction.mjs",
     "generate:hf01": "node scripts/generate-hf01-targeted-static-frontend-correction-preview.mjs",
     "validate:hf01": "node scripts/validate-hf01-targeted-static-frontend-correction.mjs",
@@ -189,7 +189,10 @@
     "validate:hf06": "node scripts/validate-hf06-homepage-header-visual-cleanup.mjs",
     "apply:hf07": "node scripts/apply-hf07-unified-responsive-header-dropdown-system.mjs",
     "generate:hf07": "node scripts/generate-hf07-unified-responsive-header-dropdown-system-preview.mjs",
-    "validate:hf07": "node scripts/validate-hf07-unified-responsive-header-dropdown-system.mjs"
+    "validate:hf07": "node scripts/validate-hf07-unified-responsive-header-dropdown-system.mjs",
+    "apply:hf08": "node scripts/apply-hf08-visible-nav-literal-newline-cleanup.mjs",
+    "generate:hf08": "node scripts/generate-hf08-visible-nav-literal-newline-cleanup-preview.mjs",
+    "validate:hf08": "node scripts/validate-hf08-visible-nav-literal-newline-cleanup.mjs"
   },
   "repository": {
     "type": "git",

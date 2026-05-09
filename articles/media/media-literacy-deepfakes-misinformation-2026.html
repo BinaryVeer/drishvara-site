@@ -28,7 +28,8 @@
       <button type="button" data-drishvara-hf07-lang-choice="hi" aria-pressed="false">हिंदी</button>
     </div>
   </div>
-</header>\n<!DOCTYPE html>
+</header>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -601,7 +602,112 @@
       width: min(260px, 92vw);
     }
   }
-</style>\n</head>
+</style>
+
+<style data-drishvara-hf08-visible-nav-cleanup="true">
+  /*
+    HF08: visible navigation and literal newline cleanup.
+    Static frontend only. No backend, Auth, API, Supabase, or deployment activation.
+  */
+
+  body.drishvara-hf08-active [data-drishvara-hf07-unified-header] {
+    display: grid !important;
+    grid-template-columns: auto minmax(520px, 1fr) auto !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.58rem 0.92rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: auto !important;
+    position: static !important;
+    z-index: 90020 !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] a,
+  body.drishvara-hf08-active .drishvara-hf07-link {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #f8f1df !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+    font-size: 0.96rem !important;
+    pointer-events: auto !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] a.active,
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] a:hover {
+    color: #d7ad45 !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-controls],
+  body.drishvara-hf08-active .drishvara-hf07-controls {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.5rem !important;
+    flex-wrap: nowrap !important;
+    pointer-events: auto !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-timezone] {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-language-toggle] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  @media (max-width: 1100px) {
+    body.drishvara-hf08-active [data-drishvara-hf07-unified-header] {
+      grid-template-columns: 1fr !important;
+      justify-items: center !important;
+      text-align: center !important;
+    }
+
+    body.drishvara-hf08-active [data-drishvara-hf07-nav] {
+      max-width: 100% !important;
+    }
+
+    body.drishvara-hf08-active [data-drishvara-hf07-controls] {
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+    }
+  }
+
+  @media (max-width: 560px) {
+    body.drishvara-hf08-active [data-drishvara-hf07-nav] {
+      gap: 0.45rem 0.72rem !important;
+    }
+
+    body.drishvara-hf08-active [data-drishvara-hf07-nav] a {
+      font-size: 0.9rem !important;
+    }
+  }
+</style>
+</head>
 <body>
   <div class="page">
     <nav class="nav">
@@ -761,5 +867,31 @@
     activateUI07();
   }
 })();
-</script>\n</body>
+</script>
+
+<script data-drishvara-hf08-literal-newline-cleanup="true">
+(function () {
+  function activateHF08() {
+    document.body.classList.add("drishvara-hf08-active");
+
+    // Runtime cleanup only for text nodes containing accidental literal backslash-n.
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(function (node) {
+      if (node.nodeValue && node.nodeValue.indexOf("\\n") !== -1) {
+        node.nodeValue = node.nodeValue.replace(/\\n/g, "");
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", activateHF08);
+  } else {
+    activateHF08();
+  }
+})();
+</script>
+</body>
 </html>
