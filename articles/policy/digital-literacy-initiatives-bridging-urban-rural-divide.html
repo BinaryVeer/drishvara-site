@@ -32,6 +32,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script data-drishvara-hf12-safe-select-system="true">
+(function () {
+  function closeAllExcept(except) {
+    document.querySelectorAll("[data-drishvara-hf12-select]").forEach(function (wrap) {
+      if (wrap !== except) wrap.setAttribute("data-open", "false");
+    });
+  }
+
+  function selectedText(select) {
+    var option = select.options[select.selectedIndex];
+    return option ? option.textContent.trim() : "Select";
+  }
+
+  function buildSafeSelect(select) {
+    if (!select || select.dataset.drishvaraHf12Converted === "true") return;
+
+    var inHeader = !!select.closest("[data-drishvara-hf07-unified-header]");
+    var isCurrentHeaderTimezone = select.hasAttribute("data-drishvara-hf07-timezone");
+
+    if (inHeader && !isCurrentHeaderTimezone) {
+      select.classList.add("drishvara-hf12-native-select-hidden");
+      select.dataset.drishvaraHf12Converted = "true";
+      return;
+    }
+
+    var wrap = document.createElement("div");
+    wrap.className = "drishvara-hf12-select";
+    wrap.setAttribute("data-drishvara-hf12-select", "true");
+    wrap.setAttribute("data-open", "false");
+
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "drishvara-hf12-select-button";
+    button.setAttribute("aria-haspopup", "listbox");
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = selectedText(select);
+
+    var menu = document.createElement("div");
+    menu.className = "drishvara-hf12-select-menu";
+    menu.setAttribute("role", "listbox");
+
+    Array.prototype.slice.call(select.options).forEach(function (option) {
+      var item = document.createElement("button");
+      item.type = "button";
+      item.className = "drishvara-hf12-select-option";
+      item.setAttribute("role", "option");
+      item.dataset.value = option.value;
+      item.textContent = option.textContent;
+      item.setAttribute("aria-selected", option.selected ? "true" : "false");
+
+      item.addEventListener("click", function () {
+        select.value = option.value;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+
+        button.textContent = selectedText(select);
+        menu.querySelectorAll(".drishvara-hf12-select-option").forEach(function (x) {
+          x.setAttribute("aria-selected", x === item ? "true" : "false");
+        });
+
+        wrap.setAttribute("data-open", "false");
+        button.setAttribute("aria-expanded", "false");
+      });
+
+      menu.appendChild(item);
+    });
+
+    button.addEventListener("click", function () {
+      var willOpen = wrap.getAttribute("data-open") !== "true";
+      closeAllExcept(wrap);
+      wrap.setAttribute("data-open", willOpen ? "true" : "false");
+      button.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+
+    select.addEventListener("change", function () {
+      button.textContent = selectedText(select);
+      menu.querySelectorAll(".drishvara-hf12-select-option").forEach(function (item) {
+        item.setAttribute("aria-selected", item.dataset.value === select.value ? "true" : "false");
+      });
+    });
+
+    wrap.appendChild(button);
+    wrap.appendChild(menu);
+
+    select.classList.add("drishvara-hf12-native-select-hidden");
+    select.dataset.drishvaraHf12Converted = "true";
+    select.insertAdjacentElement("afterend", wrap);
+  }
+
+  function activateSafeSelects() {
+    document.querySelectorAll("select").forEach(buildSafeSelect);
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest("[data-drishvara-hf12-select]")) closeAllExcept(null);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeAllExcept(null);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", activateSafeSelects, { once: true });
+  } else {
+    activateSafeSelects();
+  }
+})();
+</script>
+<style data-drishvara-hf12-select-freeze-elimination="true">
+/*
+  HF12: eliminate native select freeze by replacing user-facing select interaction
+  with safe button-based controls while keeping original select values synced.
+*/
+.drishvara-hf12-native-select-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+[data-drishvara-hf07-unified-header] select:not([data-drishvara-hf07-timezone]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.drishvara-hf12-select {
+  position: relative;
+  display: inline-block;
+  min-width: min(220px, 100%);
+  max-width: 100%;
+  z-index: 95000;
+  font-family: inherit;
+}
+
+.drishvara-hf12-select-button {
+  width: 100%;
+  min-height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(211, 169, 72, 0.38);
+  background: rgba(5, 16, 37, 0.96);
+  color: #f8f1df;
+  padding: 8px 38px 8px 14px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.2;
+  position: relative;
+}
+
+.drishvara-hf12-select-button::after {
+  content: "⌄";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-53%);
+  opacity: 0.86;
+}
+
+.drishvara-hf12-select-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  width: max(100%, 220px);
+  max-width: min(360px, 90vw);
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid rgba(211, 169, 72, 0.36);
+  border-radius: 16px;
+  background: #071329;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+  padding: 6px;
+  z-index: 99999;
+}
+
+.drishvara-hf12-select[data-open="true"] .drishvara-hf12-select-menu {
+  display: grid;
+  gap: 4px;
+}
+
+.drishvara-hf12-select-option {
+  border: 0;
+  width: 100%;
+  border-radius: 12px;
+  background: transparent;
+  color: #f8f1df;
+  padding: 9px 10px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.drishvara-hf12-select-option:hover,
+.drishvara-hf12-select-option[aria-selected="true"] {
+  background: rgba(211, 169, 72, 0.18);
+  color: #ffe38a;
+}
+
+[data-drishvara-hf07-unified-header] .drishvara-hf12-select {
+  min-width: 170px;
+}
+
+[data-drishvara-hf07-unified-header] .drishvara-hf12-select-button {
+  height: 38px;
+}
+
+@media (max-width: 700px) {
+  .drishvara-hf12-select {
+    width: min(260px, 92vw);
+  }
+
+  .drishvara-hf12-select-menu {
+    width: min(320px, 92vw);
+  }
+}
+</style>
+
+<link rel="icon" href="/favicon.ico?v=hf12" sizes="any" data-drishvara-hf12-favicon-ico="true">
+<link rel="shortcut icon" href="/favicon.ico?v=hf12" data-drishvara-hf12-favicon-ico="true">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=hf12" data-drishvara-hf12-favicon-ico="true">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=hf12" data-drishvara-hf12-favicon-ico="true">
 <style data-drishvara-hf11-top-paint-refinement="true">
 /*
   HF11: top paint-band refinement.
