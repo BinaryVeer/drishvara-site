@@ -1,0 +1,118 @@
+{
+  "preview_id": "AR02C_SAMPLE_ARTICLE_REFERENCE_INSERTION_PREVIEW",
+  "module_id": "AR02C",
+  "status": "preview_after_sample_article_reference_insertion",
+  "preview_only": true,
+  "apply_evidence": {
+    "apply_result_present": true,
+    "modified_file_count": 5,
+    "total_reference_links_inserted": 10
+  },
+  "sample_status": [
+    {
+      "article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "ar02c_block_present": true,
+      "ar02c_reference_status_present": true,
+      "ar02c_reference_link_count": 2,
+      "ar01_reference_slot_count": 2,
+      "image_credit_present": true,
+      "all_expected_urls_present": true
+    },
+    {
+      "article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "ar02c_block_present": true,
+      "ar02c_reference_status_present": true,
+      "ar02c_reference_link_count": 2,
+      "ar01_reference_slot_count": 2,
+      "image_credit_present": true,
+      "all_expected_urls_present": true
+    },
+    {
+      "article_path": "articles/spiritual/contemplative-practices-modern-mental-health.html",
+      "ar02c_block_present": true,
+      "ar02c_reference_status_present": true,
+      "ar02c_reference_link_count": 2,
+      "ar01_reference_slot_count": 2,
+      "image_credit_present": true,
+      "all_expected_urls_present": true
+    },
+    {
+      "article_path": "articles/sports/mental-health-awareness-professional-athletics-2026.html",
+      "ar02c_block_present": true,
+      "ar02c_reference_status_present": true,
+      "ar02c_reference_link_count": 2,
+      "ar01_reference_slot_count": 2,
+      "image_credit_present": true,
+      "all_expected_urls_present": true
+    },
+    {
+      "article_path": "articles/world/ai-future-warfare-2026.html",
+      "ar02c_block_present": true,
+      "ar02c_reference_status_present": true,
+      "ar02c_reference_link_count": 2,
+      "ar01_reference_slot_count": 2,
+      "image_credit_present": true,
+      "all_expected_urls_present": true
+    }
+  ],
+  "non_sample_with_ar02c_marker": [],
+  "summary": {
+    "sample_article_count": 5,
+    "exactly_five_sample_articles_modified": true,
+    "total_reference_links_inserted": 10,
+    "every_sample_has_ar02c_block": true,
+    "every_sample_has_reference_status": true,
+    "every_sample_has_two_reference_links": true,
+    "every_sample_preserves_two_ar01_slots": true,
+    "every_sample_has_image_credit": true,
+    "every_sample_has_expected_urls": true,
+    "non_sample_article_mutation_performed": false,
+    "non_sample_ar02c_marker_count": 0,
+    "external_fetch_performed": false,
+    "new_reference_generation_performed": false,
+    "random_reference_insertion_performed": false,
+    "backend_activation_performed": false,
+    "api_route_created": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "frontend_deployment_performed": false,
+    "file_deletion_performed": false,
+    "file_move_performed": false
+  },
+  "blocked_capabilities": [
+    "external_fetch",
+    "new_reference_generation",
+    "random_reference_insertion",
+    "non_sample_article_mutation",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AR02D",
+    "title": "Manual Live Review of Sample Reference Links",
+    "allowed": true,
+    "article_html_mutation_allowed": false,
+    "scope": "review five sample articles only",
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
