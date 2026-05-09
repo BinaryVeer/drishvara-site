@@ -1409,6 +1409,31 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
   }
 }
 </style>
+<style data-drishvara-ag02-image-credit-repair-style="true">
+/* AG02: source-of-truth category hero fallback for AG01 image gaps */
+figure[data-drishvara-ag02-hero-visual="true"] {
+  width: min(100%, 1120px);
+  margin: 0 auto 2rem;
+}
+
+figure[data-drishvara-ag02-hero-visual="true"] img {
+  width: 100% !important;
+  max-height: 560px !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 18px;
+  border: 1px solid rgba(215, 173, 69, 0.18);
+  background: rgba(7, 19, 41, 0.55);
+}
+
+figcaption[data-drishvara-ag02-image-credit="true"] {
+  margin-top: 0.6rem;
+  color: rgba(248, 241, 223, 0.62);
+  font-size: 0.9rem;
+  text-align: center;
+}
+</style>
+<meta data-drishvara-ag02-checked="true" content="image-credit-source-of-truth-repaired">
 </head>
 <body>
   <div class="page">
@@ -1440,7 +1465,11 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
       <div class="divider"></div>
 
       <div class="article-body">
-        <p>In recent years, the spotlight on mental health within professional sports has intensified, revealing a complex landscape where physical prowess and psychological resilience intersect. As athletes face unprecedented pressures both on and off the field, understanding how sports institutions respond to mental health needs is critical for sustaining the integrity and humanity of competitive athletics.</p>
+        <figure class="drishvara-ag02-hero-visual" data-drishvara-ag02-hero-visual="true" data-drishvara-ag02-category="sports">
+  <img src="/assets/article-defaults/sports.svg" alt="Sports article visual for Drishvara" loading="lazy" decoding="async">
+  <figcaption data-drishvara-ag02-image-credit="true">Image credit / attribution: Drishvara category fallback visual. Article-specific image sourcing and final attribution remain under editorial verification.</figcaption>
+</figure>
+<p>In recent years, the spotlight on mental health within professional sports has intensified, revealing a complex landscape where physical prowess and psychological resilience intersect. As athletes face unprecedented pressures both on and off the field, understanding how sports institutions respond to mental health needs is critical for sustaining the integrity and humanity of competitive athletics.</p>
         <h2>What this piece is really asking</h2><p>A thorough examination of mental health initiatives, stigma reduction, and institutional roles in professional sports.</p>
         <h2>Why it matters now</h2><p>Growing public discourse and recent athlete testimonies highlight mental health as a vital aspect of sports performance and sustainability, warranting a comprehensive exploration.</p>
         <blockquote>How are professional sports organizations addressing mental health challenges among athletes, and what more can be done?</blockquote>
@@ -1611,9 +1640,7 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
   </ol>
   
 
-  <div class="drishvara-ar01-image-credit" data-drishvara-ar01-image-credit="true" data-drishvara-ar02c-image-credit="true">
-    Image credit / attribution: Drishvara editorial visual. Final source attribution for article imagery, where applicable, remains under editorial verification.
-  </div>
+  <div class="drishvara-ar01-image-credit" data-drishvara-ar01-image-credit="true" data-drishvara-ar02c-image-credit="true" data-drishvara-ag02-image-credit="true">Image credit / attribution: Drishvara category fallback visual. Article-specific image sourcing and final attribution remain under editorial verification.</div>
 </section>
 </body>
 </html>
