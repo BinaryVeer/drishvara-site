@@ -109,7 +109,7 @@
     "validate:r03": "node scripts/validate-r03-repo-cleanliness-policy.mjs",
     "validate:i00": "node scripts/validate-i00-implementation-planning.mjs",
     "validate:implementation": "npm run validate:i00 && npm run validate:i01 && npm run validate:i02 && npm run validate:i03 && npm run validate:i04 && npm run validate:i05 && npm run validate:ir00 && npm run validate:id00 && npm run validate:id01 && npm run validate:id02",
-    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa && npm run validate:live && npm run validate:findings && npm run validate:homepage && npm run validate:ar01 && npm run validate:ar02a && npm run validate:ar02b && npm run validate:ar02c && npm run validate:ar02d && npm run validate:ar02e && npm run validate:ar02f && npm run validate:av01 && npm run validate:av02 && npm run validate:ag01 && npm run validate:ag02 && npm run validate:ag01r1 && npm run validate:ag02r1",
+    "validate:project": "npm run validate:methodology && npm run validate:implementation && npm run validate:content && npm run validate:qa && npm run validate:live && npm run validate:findings && npm run validate:homepage && npm run validate:ar01 && npm run validate:ar02a && npm run validate:ar02b && npm run validate:ar02c && npm run validate:ar02d && npm run validate:ar02e && npm run validate:ar02f && npm run validate:av01 && npm run validate:av02 && npm run validate:ag01 && npm run validate:ag02 && npm run validate:ag01r1 && npm run validate:ag02r1 && npm run validate:ag02r2",
     "validate:c10": "node scripts/validate-c10-content-asset-registry.mjs",
     "validate:content": "npm run validate:c10 && npm run validate:c11 && npm run validate:c12 && npm run validate:c13 && npm run validate:c14 && npm run validate:c15 && npm run validate:c16",
     "generate:c11": "node scripts/generate-c11-content-asset-inventory-preview.mjs",
@@ -236,7 +236,9 @@
     "generate:ag01r1": "node scripts/generate-ag01r1-post-ag02-article-governance-refresh-audit.mjs",
     "validate:ag01r1": "node scripts/validate-ag01r1-post-ag02-article-governance-refresh-audit.mjs",
     "apply:ag02r1": "node scripts/apply-ag02r1-existing-homepage-article-visual-source-integration.mjs",
-    "validate:ag02r1": "node scripts/validate-ag02r1-existing-homepage-article-visual-source-integration.mjs"
+    "validate:ag02r1": "node scripts/validate-ag02r1-existing-homepage-article-visual-source-integration.mjs",
+    "generate:ag02r2": "node scripts/generate-ag02r2-curated-article-visual-source-registry.mjs",
+    "validate:ag02r2": "node scripts/validate-ag02r2-curated-article-visual-source-registry.mjs"
   },
   "repository": {
     "type": "git",
