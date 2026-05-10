@@ -1,0 +1,62 @@
+# AG03B-R1 — Batch 1 Reference Candidate Review and Approval Record
+
+Status: Review/approval record only  
+Phase: Article Governance / Verified References  
+Depends on: AG03B, AG03A, AR02A, AR02B, AR02C, AR02F  
+Mutation impact: Approval registry only  
+Article HTML impact: None  
+Backend impact: None  
+Supabase impact: None  
+Auth impact: None  
+API impact: None  
+Deployment impact: None  
+
+## Purpose
+
+AG03B-R1 records review approval for AG03B Batch 1 verified reference candidates.
+
+AG03B populated two verified reference candidates for each of the 12 Batch 1 articles but deliberately kept all candidates pending article insertion. AG03B-R1 records that the candidates may be used by the next insertion stage.
+
+## Scope
+
+AG03B-R1 will:
+
+1. read AG03B Batch 1 candidate registry;
+2. create an approval record for the 12 Batch 1 articles;
+3. approve exactly two references per article for later insertion;
+4. keep article HTML untouched;
+5. keep reference insertion disabled;
+6. preserve runtime/backend/Supabase/Auth/API no-go status.
+
+## Explicit Exclusions
+
+AG03B-R1 does not:
+
+- insert reference links into article pages;
+- modify article HTML;
+- modify article text;
+- modify images or image credits;
+- fetch external URLs;
+- activate backend;
+- activate Supabase;
+- activate Auth;
+- deploy;
+- delete files;
+- move files.
+
+## Acceptance Criteria
+
+AG03B-R1 is complete when:
+
+1. AG03B-R1 document exists.
+2. AG03B-R1 registry exists.
+3. AG03B-R1 generator exists.
+4. AG03B-R1 validator exists.
+5. Approval record exists.
+6. Preview output exists.
+7. Exactly 12 articles are approved.
+8. Exactly 24 references are approved.
+9. Each article has exactly two approved references.
+10. No article HTML mutation is performed.
+11. Reference insertion remains false.
+12. Runtime/backend/Supabase/Auth/API activation remains no-go.
