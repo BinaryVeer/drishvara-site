@@ -1,0 +1,158 @@
+{
+  "preview_id": "AG03D_POST_AG03C_BATCH_01_REFERENCE_INSERTION_PREVIEW",
+  "module_id": "AG03D",
+  "status": "preview_post_ag03c_batch_01_audit",
+  "preview_only": true,
+  "summary": {
+    "audited_batch_1_article_count": 12,
+    "expected_batch_1_article_count": 12,
+    "confirmed_ag03c_reference_link_count": 24,
+    "expected_batch_1_reference_count": 24,
+    "entries_with_two_ag03c_links": 12,
+    "entries_with_one_ag03c_block": 12,
+    "entries_with_all_approved_urls": 12,
+    "entries_with_ag03c_checked_marker": 12,
+    "ag03c_apply_and_live_scan_reconcile": true,
+    "remaining_reference_queue_count": 60,
+    "expected_remaining_reference_queue_count": 60,
+    "next_batch_id": "AG03B_BATCH_02",
+    "next_batch_found": true,
+    "next_batch_article_count": 12,
+    "ready_for_ag03b_batch_2": true
+  },
+  "completed_batch_1_articles": [
+    {
+      "article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/role-public-media-combating-misinformation-digital-age.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-disinformation-digital-age.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-misinformation.html",
+      "ag03c_reference_link_count": 2,
+      "approved_urls_match_live_article": true,
+      "ag03c_checked_present": true
+    }
+  ],
+  "next_batch": {
+    "batch_id": "AG03B_BATCH_02",
+    "article_count": 12,
+    "status": "queued_for_later",
+    "article_paths": [
+      "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "articles/media/social-media-political-polarization-2026.html",
+      "articles/media/what-narratives-make-visible.html",
+      "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+      "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+      "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+      "articles/policy/innovations-public-health-infrastructure-post-pandemic-recovery.html",
+      "articles/policy/innovations-public-health-infrastructure-preparing-future-pandemics.html",
+      "articles/policy/reimagining-public-healthcare-delivery-through-digital-infrastructure.html"
+    ]
+  },
+  "mutation_performed": false,
+  "blocked_capabilities": [
+    "article_html_mutation",
+    "article_text_mutation",
+    "article_image_mutation",
+    "image_credit_mutation",
+    "reference_url_change",
+    "new_reference_insertion",
+    "reference_candidate_population",
+    "reference_approval",
+    "external_fetch_by_script",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AG03B-B2",
+    "title": "Verified Reference Candidate Population — Batch 2",
+    "allowed": true,
+    "only_after_ag03d_validation": true,
+    "scope": "populate candidate reference URLs for AG03A Batch 2 only",
+    "article_html_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "external_research_allowed": true,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}

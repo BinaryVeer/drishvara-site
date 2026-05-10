@@ -1,0 +1,886 @@
+{
+  "audit_id": "AG03D_POST_AG03C_BATCH_01_REFERENCE_INSERTION_AUDIT",
+  "module_id": "AG03D",
+  "status": "post_ag03c_batch_01_reference_insertion_audit_completed",
+  "generated_at": "2026-05-10T01:38:13.358Z",
+  "mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "article_text_mutation_performed": false,
+  "article_image_mutation_performed": false,
+  "image_credit_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "new_reference_insertion_performed": false,
+  "reference_candidate_population_performed": false,
+  "reference_approval_performed": false,
+  "external_fetch_performed_by_script": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "source_context": {
+    "ag03a_queue_entry_count": 72,
+    "ag03a_batch_count": 6,
+    "ag03c_apply_modified_article_count": 0,
+    "ag03c_apply_processed_article_count": 12,
+    "ag03c_apply_inserted_reference_count": 24,
+    "ag01r1_missing_reference_articles_before_ag03c": 72
+  },
+  "summary": {
+    "audited_batch_1_article_count": 12,
+    "expected_batch_1_article_count": 12,
+    "confirmed_ag03c_reference_link_count": 24,
+    "expected_batch_1_reference_count": 24,
+    "entries_with_two_ag03c_links": 12,
+    "entries_with_one_ag03c_block": 12,
+    "entries_with_all_approved_urls": 12,
+    "entries_with_ag03c_checked_marker": 12,
+    "ag03c_apply_and_live_scan_reconcile": true,
+    "remaining_reference_queue_count": 60,
+    "expected_remaining_reference_queue_count": 60,
+    "next_batch_id": "AG03B_BATCH_02",
+    "next_batch_found": true,
+    "next_batch_article_count": 12,
+    "ready_for_ag03b_batch_2": true
+  },
+  "completed_batch_1_articles": [
+    {
+      "article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "title": "Algorithmic Bias in Content Curation: Addressing the Challenges to Fair Representation",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act",
+        "https://algorithmic-transparency.ec.europa.eu/index_en"
+      ],
+      "found_approved_urls": [
+        "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act",
+        "https://algorithmic-transparency.ec.europa.eu/index_en"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act",
+        "https://algorithmic-transparency.ec.europa.eu/index_en"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "title": "The Ethics of AI-Generated Content in Journalism and Public Discourse",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news"
+      ],
+      "found_approved_urls": [
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "title": "The Ethics of AI-Generated Content in Journalism and Its Societal Implications",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "https://www.nist.gov/itl/ai-risk-management-framework"
+      ],
+      "found_approved_urls": [
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "https://www.nist.gov/itl/ai-risk-management-framework"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+        "https://www.nist.gov/itl/ai-risk-management-framework"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": false,
+      "ag02_credit_present_after_ag03c": false,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism.html",
+      "title": "The Ethics of AI-Generated Content in Journalism",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news",
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics"
+      ],
+      "found_approved_urls": [
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news",
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news",
+        "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": false,
+      "ag02_credit_present_after_ag03c": false,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "title": "The Ethics of AI-Generated News: Balancing Speed and Accuracy",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news",
+        "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025"
+      ],
+      "found_approved_urls": [
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news",
+        "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://reutersinstitute.politics.ox.ac.uk/ai-journalism-future-news",
+        "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": false,
+      "ag02_credit_present_after_ag03c": false,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+      "title": "The Impact of AI-Generated Content on News Credibility and Public Trust",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025",
+        "https://www.nist.gov/itl/ai-risk-management-framework"
+      ],
+      "found_approved_urls": [
+        "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025",
+        "https://www.nist.gov/itl/ai-risk-management-framework"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2025",
+        "https://www.nist.gov/itl/ai-risk-management-framework"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+      "title": "The Impact of Algorithmic Content Curation on Public Discourse and Democracy",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.unesco.org/en/internet-trust/guidelines",
+        "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act"
+      ],
+      "found_approved_urls": [
+        "https://www.unesco.org/en/internet-trust/guidelines",
+        "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.unesco.org/en/internet-trust/guidelines",
+        "https://digital-strategy.ec.europa.eu/en/policies/digital-services-act"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+      "title": "The Impact of Algorithmic Curation on Public Discourse and Democracy",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://algorithmic-transparency.ec.europa.eu/index_en",
+        "https://www.unesco.org/en/internet-trust/guidelines"
+      ],
+      "found_approved_urls": [
+        "https://algorithmic-transparency.ec.europa.eu/index_en",
+        "https://www.unesco.org/en/internet-trust/guidelines"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://algorithmic-transparency.ec.europa.eu/index_en",
+        "https://www.unesco.org/en/internet-trust/guidelines"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+      "title": "The Media’s Role in Shaping Democracy: Historical Frames and Institutional Consequences in the Digital Age",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.coe.int/en/web/freedom-expression/public-service-media",
+        "https://www.coe.int/en/web/freedom-expression/digest-council-of-europe-standards-on-public-service-media"
+      ],
+      "found_approved_urls": [
+        "https://www.coe.int/en/web/freedom-expression/public-service-media",
+        "https://www.coe.int/en/web/freedom-expression/digest-council-of-europe-standards-on-public-service-media"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.coe.int/en/web/freedom-expression/public-service-media",
+        "https://www.coe.int/en/web/freedom-expression/digest-council-of-europe-standards-on-public-service-media"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": false,
+      "ag02_credit_present_after_ag03c": false,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/role-public-media-combating-misinformation-digital-age.html",
+      "title": "The Role of Public Media in Combating Misinformation in the Digital Age",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.ebu.ch/topics/news-journalism-and-trust",
+        "https://www.unesco.org/en/internet-trust/guidelines"
+      ],
+      "found_approved_urls": [
+        "https://www.ebu.ch/topics/news-journalism-and-trust",
+        "https://www.unesco.org/en/internet-trust/guidelines"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.ebu.ch/topics/news-journalism-and-trust",
+        "https://www.unesco.org/en/internet-trust/guidelines"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-disinformation-digital-age.html",
+      "title": "The Role of Public Media in Countering Disinformation in the Digital Age",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.ebu.ch/publications/trust-in-media",
+        "https://www.coe.int/en/web/freedom-expression/public-service-media"
+      ],
+      "found_approved_urls": [
+        "https://www.ebu.ch/publications/trust-in-media",
+        "https://www.coe.int/en/web/freedom-expression/public-service-media"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.ebu.ch/publications/trust-in-media",
+        "https://www.coe.int/en/web/freedom-expression/public-service-media"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": true,
+      "ag02_credit_present_after_ag03c": true,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-misinformation.html",
+      "title": "The Role of Public Media in Countering Misinformation: Societal Challenges and Responsibilities",
+      "category": "media",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.ebu.ch/topics/news-journalism-and-trust",
+        "https://www.pewresearch.org/journalism/fact-sheet/social-media-and-news-fact-sheet/"
+      ],
+      "found_approved_urls": [
+        "https://www.ebu.ch/topics/news-journalism-and-trust",
+        "https://www.pewresearch.org/journalism/fact-sheet/social-media-and-news-fact-sheet/"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_reference_block_count": 1,
+      "ag03c_reference_link_count": 2,
+      "ag03c_checked_present": true,
+      "ag03c_hrefs": [
+        "https://www.ebu.ch/topics/news-journalism-and-trust",
+        "https://www.pewresearch.org/journalism/fact-sheet/social-media-and-news-fact-sheet/"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_links": true,
+      "live_article_has_one_ag03c_block": true,
+      "ag02_hero_present_after_ag03c": false,
+      "ag02_credit_present_after_ag03c": false,
+      "ar02c_reference_link_count": 0,
+      "audit_status": "passed"
+    }
+  ],
+  "remaining_reference_queue_after_batch_1": [
+    {
+      "queue_id": "AG03A_REF_QUEUE_013",
+      "article_path": "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "category": "media",
+      "title": "The Role of Public Media in Upholding Democratic Values in the Digital Age",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_014",
+      "article_path": "articles/media/social-media-political-polarization-2026.html",
+      "category": "media",
+      "title": "Social Media and the Deepening Divide: Understanding Political Polarization",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_015",
+      "article_path": "articles/media/what-narratives-make-visible.html",
+      "category": "media",
+      "title": "What narratives make visible",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_016",
+      "article_path": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "category": "policy",
+      "title": "Advancing Digital Literacy through Public Education Programs",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_017",
+      "article_path": "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "category": "policy",
+      "title": "Digital Literacy Initiatives: Bridging the Urban-Rural Divide in Access to Technology",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_018",
+      "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "category": "policy",
+      "title": "Enhancing Public Healthcare Delivery through Digital Innovation: Policy and Practical Outcomes",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_019",
+      "article_path": "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+      "category": "policy",
+      "title": "Innovations in Public Health Infrastructure: Preparing for Future Pandemics",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_020",
+      "article_path": "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+      "category": "policy",
+      "title": "Innovations in Public Health Infrastructure: Lessons from Pandemic Recovery",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_021",
+      "article_path": "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+      "category": "policy",
+      "title": "Innovations in Public Health Infrastructure: Lessons from Pandemic Response",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_022",
+      "article_path": "articles/policy/innovations-public-health-infrastructure-post-pandemic-recovery.html",
+      "category": "policy",
+      "title": "Innovations in Public Health Infrastructure: Lessons from Post-Pandemic Recovery",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_023",
+      "article_path": "articles/policy/innovations-public-health-infrastructure-preparing-future-pandemics.html",
+      "category": "policy",
+      "title": "Innovations in Public Health Infrastructure: Preparing for Future Pandemics",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_024",
+      "article_path": "articles/policy/reimagining-public-healthcare-delivery-through-digital-infrastructure.html",
+      "category": "policy",
+      "title": "Reimagining Public Healthcare Delivery through Digital Infrastructure",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_025",
+      "article_path": "articles/policy/reimagining-urban-public-transport-sustainability-accessibility-challenges.html",
+      "category": "policy",
+      "title": "Reimagining Urban Public Transport: Sustainability and Accessibility Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_026",
+      "article_path": "articles/policy/reimagining-urban-public-transport-sustainable-models.html",
+      "category": "policy",
+      "title": "Reimagining Urban Public Transport: Sustainable Models for Growing Cities",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_027",
+      "article_path": "articles/policy/scaling-community-healthcare-outreach.html",
+      "category": "policy",
+      "title": "Scaling Community Healthcare Outreach: Strategies for Sustainable Impact",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_028",
+      "article_path": "articles/policy/welfare-state-evolution-historical-lessons-institutional-comparisons.html",
+      "category": "policy",
+      "title": "Welfare State Evolution: Historical Lessons and Institutional Comparisons in Shaping Public Programmes",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_029",
+      "article_path": "articles/policy/when-implementation-tells-the-real-story.html",
+      "category": "policy",
+      "title": "When implementation tells the real story",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_030",
+      "article_path": "articles/spiritual/contemplating-impermanence-path-spiritual-liberation.html",
+      "category": "spiritual",
+      "title": "Contemplating Impermanence: A Path to Spiritual Liberation",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_031",
+      "article_path": "articles/spiritual/contemplative-silence-rediscovering-inner-clarity.html",
+      "category": "spiritual",
+      "title": "Contemplative Silence: Rediscovering Inner Clarity in a Noisy World",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_032",
+      "article_path": "articles/spiritual/how-attention-becomes-worship.html",
+      "category": "spiritual",
+      "title": "How attention becomes a form of worship",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_033",
+      "article_path": "articles/spiritual/integrating-mindfulness-daily-routines-spiritual-growth.html",
+      "category": "spiritual",
+      "title": "Integrating Mindfulness into Daily Routines: Practical Steps for Sustained Spiritual Growth",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_034",
+      "article_path": "articles/spiritual/resurgence-ancient-meditation-modern-mental-health.html",
+      "category": "spiritual",
+      "title": "The Resurgence of Ancient Meditation Practices in Modern Mental Health",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_035",
+      "article_path": "articles/spiritual/resurgence-contemplative-practices-modern-urban-life.html",
+      "category": "spiritual",
+      "title": "The Resurgence of Contemplative Practices in Modern Urban Life",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_036",
+      "article_path": "articles/spiritual/resurgence-mindfulness-modern-spiritual-practice.html",
+      "category": "spiritual",
+      "title": "The Resurgence of Mindfulness in Modern Spiritual Practice",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_037",
+      "article_path": "articles/spiritual/revival-ancient-meditation-modern-urban-life.html",
+      "category": "spiritual",
+      "title": "The Revival of Ancient Meditation Practices in Modern Urban Life",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_038",
+      "article_path": "articles/spiritual/role-of-contemplative-practices-in-modern-mental-health-care.html",
+      "category": "spiritual",
+      "title": "The Role of Contemplative Practices in Modern Mental Health Care",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_039",
+      "article_path": "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practice.html",
+      "category": "spiritual",
+      "title": "The Role of Mindfulness in Modern Spiritual Practice",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_040",
+      "article_path": "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practices.html",
+      "category": "spiritual",
+      "title": "The Role of Mindfulness in Modern Spiritual Practices",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_041",
+      "article_path": "articles/spiritual/spiritual-ecology-nurturing-nature-soul-connection.html",
+      "category": "spiritual",
+      "title": "Spiritual Ecology: Nurturing the Sacred Connection Between Nature and Soul",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_042",
+      "article_path": "articles/spiritual/tracing-evolution-civilizational-wisdom-spirituality.html",
+      "category": "spiritual",
+      "title": "Tracing the Evolution of Civilizational Wisdom: Spirituality from Ancient Traditions to Modern Reflections",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_043",
+      "article_path": "articles/sports/data-analytics-athlete-performance.html",
+      "category": "sports",
+      "title": "The Rise of Data Analytics in Enhancing Athlete Performance",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_044",
+      "article_path": "articles/sports/evolution-athlete-mental-health-programs-professional-sports.html",
+      "category": "sports",
+      "title": "The Evolution of Athlete Mental Health Programs in Professional Sports",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_045",
+      "article_path": "articles/sports/evolution-athlete-recovery-innovations-peak-performance.html",
+      "category": "sports",
+      "title": "The Evolution of Athlete Recovery: Innovations Shaping Peak Performance",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_046",
+      "article_path": "articles/sports/evolution-athlete-recovery-science-innovation.html",
+      "category": "sports",
+      "title": "The Evolution of Athlete Recovery: Science and Innovation",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_047",
+      "article_path": "articles/sports/evolution-athlete-recovery-science-technology-policy.html",
+      "category": "sports",
+      "title": "The Evolution of Athlete Recovery: Science, Technology, and Policy",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_048",
+      "article_path": "articles/sports/evolution-of-sports-analytics-beyond-the-numbers.html",
+      "category": "sports",
+      "title": "The Evolution of Sports Analytics: Beyond the Numbers",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_049",
+      "article_path": "articles/sports/evolution-sports-analytics-athlete-performance-strategy.html",
+      "category": "sports",
+      "title": "The Evolution of Sports Analytics: Transforming Athlete Performance and Strategy",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_050",
+      "article_path": "articles/sports/evolution-sports-analytics-player-psychology.html",
+      "category": "sports",
+      "title": "The Evolution of Sports Analytics: Beyond Numbers to Player Psychology",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_051",
+      "article_path": "articles/sports/evolution-sports-analytics-transforming-strategies-performance.html",
+      "category": "sports",
+      "title": "The Evolution of Sports Analytics: Transforming Team Strategies and Player Performance",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_052",
+      "article_path": "articles/sports/evolution-tactical-analytics-football-performance-fan-engagement.html",
+      "category": "sports",
+      "title": "The Evolution of Tactical Analytics in Football: Implications for Team Performance and Fan Engagement",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_053",
+      "article_path": "articles/sports/legacy-transformation-historical-arc-global-sports-future.html",
+      "category": "sports",
+      "title": "Legacy and Transformation: The Historical Arc of Global Sports and Its Future Trajectories",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_054",
+      "article_path": "articles/sports/mental-health-initiatives-professional-sports-2026.html",
+      "category": "sports",
+      "title": "Mental Health Initiatives Taking Root in Professional Sports",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_055",
+      "article_path": "articles/sports/revolutionizing-athlete-recovery-ai-wearable-tech.html",
+      "category": "sports",
+      "title": "Revolutionizing Athlete Recovery: The Role of AI and Wearable Tech",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_056",
+      "article_path": "articles/sports/role-of-data-analytics-in-next-generation-athlete-performance.html",
+      "category": "sports",
+      "title": "The Role of Data Analytics in Shaping Next-Generation Athlete Performance",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_057",
+      "article_path": "articles/world/from-multipolarity-to-new-world-orders.html",
+      "category": "world",
+      "title": "From Multipolarity to New World Orders: Historical Comparisons and Strategic Implications for 21st Century Geopolitics",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_058",
+      "article_path": "articles/world/future-russia-west-relations-2026.html",
+      "category": "world",
+      "title": "The Future of Russia-West Relations: Beyond Sanctions and Retaliation",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_059",
+      "article_path": "articles/world/geopolitical-impact-china-belt-road-initiative-2026.html",
+      "category": "world",
+      "title": "The Geopolitical Impact of China’s Belt and Road Initiative Expansion",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_060",
+      "article_path": "articles/world/geopolitical-implications-emerging-green-energy-alliances.html",
+      "category": "world",
+      "title": "Geopolitical Implications of the Emerging Green Energy Alliances",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_061",
+      "article_path": "articles/world/geopolitical-implications-emerging-indo-pacific-security-architecture.html",
+      "category": "world",
+      "title": "Geopolitical Implications of the Emerging Indo-Pacific Security Architecture",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_062",
+      "article_path": "articles/world/geopolitical-implications-emerging-renewable-energy-alliances.html",
+      "category": "world",
+      "title": "Geopolitical Implications of Emerging Renewable Energy Alliances",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_063",
+      "article_path": "articles/world/geopolitical-implications-new-arctic-trade-routes.html",
+      "category": "world",
+      "title": "Geopolitical Implications of the New Arctic Trade Routes",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_064",
+      "article_path": "articles/world/geopolitical-implications-renewable-energy-transitions.html",
+      "category": "world",
+      "title": "The Geopolitical Implications of Renewable Energy Transitions",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_065",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-balancing-power-diplomacy.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Balancing Power and Diplomacy",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_066",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Emerging Alliances and Strategic Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_067",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alignments-challenges.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Strategic Alignments and Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_068",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alliances-emerging-challenges.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Strategic Alliances and Emerging Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_069",
+      "article_path": "articles/world/geopolitics-renewable-energy-global-south.html",
+      "category": "world",
+      "title": "The Geopolitics of Renewable Energy Transitions in the Global South",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_070",
+      "article_path": "articles/world/navigating-multipolarity-new-dynamics-global-power-2026.html",
+      "category": "world",
+      "title": "Navigating Multipolarity: The New Dynamics of Global Power in 2026",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_071",
+      "article_path": "articles/world/reading-confrontation-beyond-headlines.html",
+      "category": "world",
+      "title": "Reading confrontation beyond headlines",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_072",
+      "article_path": "articles/world/strategic-realignments-indo-pacific-diplomatic-developments.html",
+      "category": "world",
+      "title": "Strategic Realignments in the Indo-Pacific: Assessing the Latest Diplomatic Developments",
+      "queue_status": "pending_ag03b_candidate_population"
+    }
+  ],
+  "next_batch": {
+    "batch_id": "AG03B_BATCH_02",
+    "batch_number": 2,
+    "status": "queued_for_later",
+    "article_count": 12,
+    "article_paths": [
+      "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "articles/media/social-media-political-polarization-2026.html",
+      "articles/media/what-narratives-make-visible.html",
+      "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+      "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+      "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+      "articles/policy/innovations-public-health-infrastructure-post-pandemic-recovery.html",
+      "articles/policy/innovations-public-health-infrastructure-preparing-future-pandemics.html",
+      "articles/policy/reimagining-public-healthcare-delivery-through-digital-infrastructure.html"
+    ],
+    "candidate_population_status": "pending",
+    "reference_insertion_status": "not_allowed_in_ag03a"
+  },
+  "blocked_capabilities": [
+    "article_html_mutation",
+    "article_text_mutation",
+    "article_image_mutation",
+    "image_credit_mutation",
+    "reference_url_change",
+    "new_reference_insertion",
+    "reference_candidate_population",
+    "reference_approval",
+    "external_fetch_by_script",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AG03B-B2",
+    "title": "Verified Reference Candidate Population — Batch 2",
+    "allowed": true,
+    "only_after_ag03d_validation": true,
+    "scope": "populate candidate reference URLs for AG03A Batch 2 only",
+    "article_html_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "external_research_allowed": true,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
