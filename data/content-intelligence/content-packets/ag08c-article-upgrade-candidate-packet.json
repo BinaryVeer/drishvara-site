@@ -1,0 +1,241 @@
+{
+  "module_id": "AG08C",
+  "title": "Article Upgrade Candidate Packet",
+  "status": "candidate_packet_created_not_mutated",
+  "generated_from": {
+    "ag08bReview": "data/content-intelligence/quality-reviews/ag08b-pipeline-test-article-selection.json",
+    "ag08bSelection": "data/content-intelligence/selection-registry/ag08b-selected-pipeline-test-article.json",
+    "ag08bScorecard": "data/content-intelligence/selection-registry/ag08b-pipeline-test-candidate-scorecard.json",
+    "ag08bSchema": "data/content-intelligence/schema/pipeline-test-article-selection.schema.json",
+    "ag08bLearning": "data/content-intelligence/learning/ag08b-pipeline-test-article-selection-learning.json",
+    "ag08aRoadmap": "data/content-intelligence/run-registry/ag08a-repeatable-article-upgrade-roadmap.json",
+    "ag06eStandard": "data/quality/ag06e-long-form-article-standard.json",
+    "ag06iVisualStandard": "data/quality/ag06i-visual-data-infographic-requirement-schema-closure.json",
+    "ag06jReferenceStandard": "data/quality/ag06j-reference-source-credibility-schema-closure.json"
+  },
+  "selected_article": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "title": "Enhancing Public Healthcare Delivery through Digital Innovation: Policy and Practical Outcomes",
+    "category": "policy",
+    "sha256_before_ag08c": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "selected_by_ag08b": true,
+    "selection_score": 99
+  },
+  "current_article_analysis": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "title_detected": "Enhancing Public Healthcare Delivery through Digital Innovation: Policy and Practical Outcomes",
+    "category_detected": "policy",
+    "sha256_before_ag08c": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "word_count_estimate": 608,
+    "reading_time_minutes_estimate": 3,
+    "paragraph_count": 11,
+    "heading_count": 6,
+    "link_count": 24,
+    "image_count": 2,
+    "meta_description_present": true,
+    "meta_description_preview": "This article clarifies the intersection of policy frameworks and technological adoption, assessing how digital innovation can improve accessibility and efficiency in public healthcare.",
+    "visible_reference_signal_present": true,
+    "image_credit_signal_present": true,
+    "ag07p_pilot_marker_present": false,
+    "article_file_size_bytes": 51120,
+    "long_form_gap": {
+      "target_min_words": 1500,
+      "target_max_words": 2200,
+      "current_words": 608,
+      "estimated_gap_to_min_words": 892,
+      "current_status": "upgrade_required"
+    }
+  },
+  "upgrade_hypothesis": {
+    "core_upgrade_goal": "Convert the selected article into a stronger Drishvara long-form policy insight piece without changing the article file in AG08C.",
+    "reader_value_goal": "Help readers understand how digital innovation can improve public healthcare delivery beyond technology adoption, focusing on governance, service reliability, data use, accountability and citizen experience.",
+    "proposed_reader_promise": "A clearer, practical explanation of why digital health systems succeed only when technology, workflow, field capacity and accountability move together.",
+    "proposed_angle": "Digital health innovation as a governance and delivery-strengthening instrument, not merely a software or dashboard exercise.",
+    "expected_upgrade_type": "existing_article_long_form_upgrade",
+    "expected_upgrade_mode_after_approval": "one_article_controlled_static_apply"
+  },
+  "proposed_structure": [
+    {
+      "section_id": "AG08C-SEC-001",
+      "heading": "Why digital innovation matters in public healthcare delivery",
+      "purpose": "Set up the governance and service-delivery context.",
+      "estimated_words": 220,
+      "prose_generation_status": "not_generated"
+    },
+    {
+      "section_id": "AG08C-SEC-002",
+      "heading": "From technology adoption to service improvement",
+      "purpose": "Distinguish tools from outcomes and explain why implementation quality matters.",
+      "estimated_words": 260,
+      "prose_generation_status": "not_generated"
+    },
+    {
+      "section_id": "AG08C-SEC-003",
+      "heading": "Data systems, accountability and frontline workflows",
+      "purpose": "Explain how dashboards, records and alerts become useful only when tied to field workflows.",
+      "estimated_words": 320,
+      "prose_generation_status": "not_generated"
+    },
+    {
+      "section_id": "AG08C-SEC-004",
+      "heading": "Digital inclusion and patient trust",
+      "purpose": "Cover citizen experience, access, language, grievance channels and last-mile usability.",
+      "estimated_words": 260,
+      "prose_generation_status": "not_generated"
+    },
+    {
+      "section_id": "AG08C-SEC-005",
+      "heading": "Risks: fragmentation, data quality and over-centralisation",
+      "purpose": "Record balanced risks and implementation safeguards.",
+      "estimated_words": 280,
+      "prose_generation_status": "not_generated"
+    },
+    {
+      "section_id": "AG08C-SEC-006",
+      "heading": "What a mature digital-health delivery model should track",
+      "purpose": "Introduce useful indicators and practical monitoring dimensions.",
+      "estimated_words": 300,
+      "prose_generation_status": "not_generated"
+    },
+    {
+      "section_id": "AG08C-SEC-007",
+      "heading": "Reader’s lens",
+      "purpose": "End with a practical interpretation for policy readers and administrators.",
+      "estimated_words": 180,
+      "prose_generation_status": "not_generated"
+    }
+  ],
+  "reference_need_plan": {
+    "reference_population_status": "not_populated_in_ag08c",
+    "reference_insertion_status": "not_inserted_in_ag08c",
+    "required_reference_count_range": {
+      "min": 2,
+      "max": 5
+    },
+    "candidate_reference_themes": [
+      "Digital health mission / national digital health architecture",
+      "Public health system strengthening and service delivery",
+      "Health information systems and data quality",
+      "Telemedicine or digital access in public healthcare",
+      "Governance/accountability frameworks for health service delivery"
+    ],
+    "url_population_allowed_in_ag08c": false,
+    "live_url_fetch_allowed_in_ag08c": false,
+    "reference_insertion_allowed_in_ag08c": false
+  },
+  "visual_data_need_plan": {
+    "visual_generation_status": "not_generated_in_ag08c",
+    "image_insertion_status": "not_inserted_in_ag08c",
+    "recommended_visual_type": "simple explanatory flow diagram",
+    "recommended_visual_concept": "Patient need → digital record/triage → facility workflow → referral/medicine/service → feedback/accountability loop",
+    "recommended_data_unit": {
+      "type": "indicator_checklist",
+      "title": "Digital health delivery indicators",
+      "candidate_metrics": [
+        "service request logged",
+        "case/facility assignment",
+        "turnaround time",
+        "stock/referral status",
+        "grievance closure",
+        "patient feedback"
+      ],
+      "data_values_generated_in_ag08c": false
+    },
+    "caption_alt_credit_population_allowed_in_ag08c": false,
+    "visual_generation_allowed_in_ag08c": false,
+    "image_insertion_allowed_in_ag08c": false
+  },
+  "quality_targets": {
+    "target_word_count_range": {
+      "min": 1500,
+      "max": 2200
+    },
+    "target_reference_count_range": {
+      "min": 2,
+      "max": 5
+    },
+    "target_reader_value": [
+      "clear public-policy insight",
+      "implementation-focused explanation",
+      "balanced risks and safeguards",
+      "practical governance indicators",
+      "readable long-form structure"
+    ],
+    "scoring_status": "not_scored_in_ag08c"
+  },
+  "blocked_until_later_stages": {
+    "article_prose_generation": "blocked_until_explicit_generation_or_apply_stage",
+    "article_file_mutation": "blocked_until_explicit_controlled_apply_stage",
+    "reference_url_population": "blocked_until_reference_readiness_or discovery stage",
+    "reference_insertion": "blocked_until_approved_insertion_stage",
+    "visual_generation": "blocked_until_visual_generation_stage",
+    "jsonl_database_supabase_write": "blocked",
+    "backend_auth_supabase_activation": "blocked",
+    "publishing": "blocked"
+  },
+  "ag08d_handoff": {
+    "next_stage_id": "AG08D",
+    "next_stage_title": "Inference, Reference and Visual Readiness Review",
+    "explicit_approval_required": true,
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "allowed_scope": "review candidate packet, create inference/readiness review and identify gaps",
+    "blocked_scope": "article mutation, final prose generation, reference URL population, reference insertion, visual generation, image insertion, JSONL/database/Supabase/backend/Auth/publishing activation"
+  },
+  "candidate_packet_only": true,
+  "selected_article_read_performed": true,
+  "selected_article_hash_recorded": true,
+  "current_article_analysis_created": true,
+  "upgrade_candidate_packet_created": true,
+  "readiness_record_created": true,
+  "selected_article_mutated": false,
+  "article_mutation_performed": false,
+  "new_article_generation_performed": false,
+  "new_article_file_created": false,
+  "article_file_created": false,
+  "article_prose_generated": false,
+  "final_article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_packet_created": false,
+  "article_inference_generated": false,
+  "score_calculation_performed": false,
+  "dry_run_score_calculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}

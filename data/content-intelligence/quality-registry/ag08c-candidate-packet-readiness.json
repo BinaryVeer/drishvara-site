@@ -1,0 +1,140 @@
+{
+  "module_id": "AG08C",
+  "title": "Candidate Packet Readiness Record",
+  "status": "candidate_packet_ready_for_ag08d_review",
+  "generated_from": {
+    "ag08bReview": "data/content-intelligence/quality-reviews/ag08b-pipeline-test-article-selection.json",
+    "ag08bSelection": "data/content-intelligence/selection-registry/ag08b-selected-pipeline-test-article.json",
+    "ag08bScorecard": "data/content-intelligence/selection-registry/ag08b-pipeline-test-candidate-scorecard.json",
+    "ag08bSchema": "data/content-intelligence/schema/pipeline-test-article-selection.schema.json",
+    "ag08bLearning": "data/content-intelligence/learning/ag08b-pipeline-test-article-selection-learning.json",
+    "ag08aRoadmap": "data/content-intelligence/run-registry/ag08a-repeatable-article-upgrade-roadmap.json",
+    "ag06eStandard": "data/quality/ag06e-long-form-article-standard.json",
+    "ag06iVisualStandard": "data/quality/ag06i-visual-data-infographic-requirement-schema-closure.json",
+    "ag06jReferenceStandard": "data/quality/ag06j-reference-source-credibility-schema-closure.json"
+  },
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "selected_article_sha256_before_ag08c": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+  "readiness_gates": [
+    {
+      "gate_id": "AG08C-GATE-001",
+      "name": "selected_article_exists",
+      "status": "passed",
+      "evidence": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html"
+    },
+    {
+      "gate_id": "AG08C-GATE-002",
+      "name": "selected_article_hash_matches_ag08b",
+      "status": "passed",
+      "evidence": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4"
+    },
+    {
+      "gate_id": "AG08C-GATE-003",
+      "name": "candidate_packet_created_without_article_mutation",
+      "status": "passed",
+      "evidence": "AG08C writes only governance/candidate artifacts."
+    },
+    {
+      "gate_id": "AG08C-GATE-004",
+      "name": "long_form_upgrade_gap_identified",
+      "status": "passed",
+      "evidence": {
+        "target_min_words": 1500,
+        "target_max_words": 2200,
+        "current_words": 608,
+        "estimated_gap_to_min_words": 892,
+        "current_status": "upgrade_required"
+      }
+    },
+    {
+      "gate_id": "AG08C-GATE-005",
+      "name": "reference_need_plan_created_without_url_population",
+      "status": "passed",
+      "evidence": [
+        "Digital health mission / national digital health architecture",
+        "Public health system strengthening and service delivery",
+        "Health information systems and data quality",
+        "Telemedicine or digital access in public healthcare",
+        "Governance/accountability frameworks for health service delivery"
+      ]
+    },
+    {
+      "gate_id": "AG08C-GATE-006",
+      "name": "visual_data_need_plan_created_without_generation",
+      "status": "passed",
+      "evidence": "simple explanatory flow diagram"
+    },
+    {
+      "gate_id": "AG08C-GATE-007",
+      "name": "ag08d_handoff_ready",
+      "status": "passed",
+      "evidence": "AG08D should perform inference, reference and visual readiness review only with explicit approval."
+    }
+  ],
+  "all_readiness_gates_passed_or_watch": true,
+  "ag08d_handoff": {
+    "next_stage_id": "AG08D",
+    "next_stage_title": "Inference, Reference and Visual Readiness Review",
+    "explicit_approval_required": true,
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "allowed_scope": "review candidate packet, create inference/readiness review and identify gaps",
+    "blocked_scope": "article mutation, final prose generation, reference URL population, reference insertion, visual generation, image insertion, JSONL/database/Supabase/backend/Auth/publishing activation"
+  },
+  "candidate_packet_only": true,
+  "selected_article_read_performed": true,
+  "selected_article_hash_recorded": true,
+  "current_article_analysis_created": true,
+  "upgrade_candidate_packet_created": true,
+  "readiness_record_created": true,
+  "selected_article_mutated": false,
+  "article_mutation_performed": false,
+  "new_article_generation_performed": false,
+  "new_article_file_created": false,
+  "article_file_created": false,
+  "article_prose_generated": false,
+  "final_article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_packet_created": false,
+  "article_inference_generated": false,
+  "score_calculation_performed": false,
+  "dry_run_score_calculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}
