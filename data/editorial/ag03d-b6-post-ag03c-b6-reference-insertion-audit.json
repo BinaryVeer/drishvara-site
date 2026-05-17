@@ -1,0 +1,480 @@
+{
+  "audit_id": "AG03D_B6_POST_AG03C_B6_REFERENCE_INSERTION_AUDIT",
+  "module_id": "AG03D-B6",
+  "status": "post_ag03c_b6_final_reference_insertion_audit_completed",
+  "generated_at": "2026-05-17T03:37:54.804Z",
+  "mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "article_text_mutation_performed": false,
+  "article_image_mutation_performed": false,
+  "image_credit_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "new_reference_insertion_performed": false,
+  "reference_candidate_population_performed": false,
+  "reference_approval_performed": false,
+  "external_fetch_performed_by_script": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "source_context": {
+    "ag03a_queue_entry_count": 72,
+    "ag03a_batch_count": 6,
+    "completed_article_count_before_batch_6": 60,
+    "ag03c_b6_apply_processed_article_count": 12,
+    "ag03c_b6_apply_inserted_reference_count": 24
+  },
+  "summary": {
+    "audited_batch_6_article_count": 12,
+    "expected_batch_6_article_count": 12,
+    "confirmed_ag03c_b6_reference_link_count": 24,
+    "expected_batch_6_reference_count": 24,
+    "entries_with_two_ag03c_b6_links": 12,
+    "entries_with_one_ag03c_b6_block": 12,
+    "entries_with_all_approved_urls": 12,
+    "entries_with_ag03c_b6_checked_marker": 12,
+    "ag03c_b6_apply_and_live_scan_reconcile": true,
+    "completed_total_article_count_after_batch_6": 72,
+    "completed_total_reference_count_after_batch_6": 144,
+    "remaining_reference_queue_count": 0,
+    "expected_remaining_reference_queue_count": 0,
+    "ag03_reference_scaling_closed": true,
+    "next_stage_id": "AG03Z",
+    "ready_for_final_ag03_closure_audit": true
+  },
+  "completed_batch_6_articles": [
+    {
+      "article_path": "articles/world/geopolitical-implications-emerging-indo-pacific-security-architecture.html",
+      "title": "Geopolitical Implications of the Emerging Indo-Pacific Security Architecture",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-emerging-renewable-energy-alliances.html",
+      "title": "Geopolitical Implications of Emerging Renewable Energy Alliances",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-new-arctic-trade-routes.html",
+      "title": "Geopolitical Implications of the New Arctic Trade Routes",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.wto.org/english/res_e/reser_e/wtr_e.htm",
+        "https://www.worldbank.org/en/topic/trade"
+      ],
+      "found_approved_urls": [
+        "https://www.wto.org/english/res_e/reser_e/wtr_e.htm",
+        "https://www.worldbank.org/en/topic/trade"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.wto.org/english/res_e/reser_e/wtr_e.htm",
+        "https://www.worldbank.org/en/topic/trade"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-renewable-energy-transitions.html",
+      "title": "The Geopolitical Implications of Renewable Energy Transitions",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-balancing-power-diplomacy.html",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Balancing Power and Diplomacy",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Emerging Alliances and Strategic Challenges",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alignments-challenges.html",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Strategic Alignments and Challenges",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alliances-emerging-challenges.html",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Strategic Alliances and Emerging Challenges",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitics-renewable-energy-global-south.html",
+      "title": "The Geopolitics of Renewable Energy Transitions in the Global South",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/navigating-multipolarity-new-dynamics-global-power-2026.html",
+      "title": "Navigating Multipolarity: The New Dynamics of Global Power in 2026",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/reading-confrontation-beyond-headlines.html",
+      "title": "Reading confrontation beyond headlines",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/strategic-realignments-indo-pacific-diplomatic-developments.html",
+      "title": "Strategic Realignments in the Indo-Pacific: Assessing the Latest Diplomatic Developments",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_urls": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b6_reference_block_count": 1,
+      "ag03c_b6_reference_link_count": 2,
+      "ag03c_b6_checked_present": true,
+      "ag03c_b6_hrefs": [
+        "https://www.cfr.org/global-conflict-tracker",
+        "https://www.rand.org/topics/international-affairs.html"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b6_links": true,
+      "live_article_has_one_ag03c_b6_block": true,
+      "audit_status": "passed"
+    }
+  ],
+  "completed_reference_scaling_articles_after_batch_6": [
+    "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+    "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+    "articles/media/ethics-ai-generated-content-journalism-society.html",
+    "articles/media/ethics-ai-generated-content-journalism.html",
+    "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+    "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+    "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+    "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+    "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+    "articles/media/role-public-media-combating-misinformation-digital-age.html",
+    "articles/media/role-public-media-countering-disinformation-digital-age.html",
+    "articles/media/role-public-media-countering-misinformation.html",
+    "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+    "articles/media/social-media-political-polarization-2026.html",
+    "articles/media/what-narratives-make-visible.html",
+    "articles/policy/advancing-digital-literacy-public-education-2026.html",
+    "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+    "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+    "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+    "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+    "articles/policy/innovations-public-health-infrastructure-post-pandemic-recovery.html",
+    "articles/policy/innovations-public-health-infrastructure-preparing-future-pandemics.html",
+    "articles/policy/reimagining-public-healthcare-delivery-through-digital-infrastructure.html",
+    "articles/policy/reimagining-urban-public-transport-sustainability-accessibility-challenges.html",
+    "articles/policy/reimagining-urban-public-transport-sustainable-models.html",
+    "articles/policy/scaling-community-healthcare-outreach.html",
+    "articles/policy/welfare-state-evolution-historical-lessons-institutional-comparisons.html",
+    "articles/policy/when-implementation-tells-the-real-story.html",
+    "articles/spiritual/contemplating-impermanence-path-spiritual-liberation.html",
+    "articles/spiritual/contemplative-silence-rediscovering-inner-clarity.html",
+    "articles/spiritual/how-attention-becomes-worship.html",
+    "articles/spiritual/integrating-mindfulness-daily-routines-spiritual-growth.html",
+    "articles/spiritual/resurgence-ancient-meditation-modern-mental-health.html",
+    "articles/spiritual/resurgence-contemplative-practices-modern-urban-life.html",
+    "articles/spiritual/resurgence-mindfulness-modern-spiritual-practice.html",
+    "articles/spiritual/revival-ancient-meditation-modern-urban-life.html",
+    "articles/spiritual/role-of-contemplative-practices-in-modern-mental-health-care.html",
+    "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practice.html",
+    "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practices.html",
+    "articles/spiritual/spiritual-ecology-nurturing-nature-soul-connection.html",
+    "articles/spiritual/tracing-evolution-civilizational-wisdom-spirituality.html",
+    "articles/sports/data-analytics-athlete-performance.html",
+    "articles/sports/evolution-athlete-mental-health-programs-professional-sports.html",
+    "articles/sports/evolution-athlete-recovery-innovations-peak-performance.html",
+    "articles/sports/evolution-athlete-recovery-science-innovation.html",
+    "articles/sports/evolution-athlete-recovery-science-technology-policy.html",
+    "articles/sports/evolution-of-sports-analytics-beyond-the-numbers.html",
+    "articles/sports/evolution-sports-analytics-athlete-performance-strategy.html",
+    "articles/sports/evolution-sports-analytics-player-psychology.html",
+    "articles/sports/evolution-sports-analytics-transforming-strategies-performance.html",
+    "articles/sports/evolution-tactical-analytics-football-performance-fan-engagement.html",
+    "articles/sports/legacy-transformation-historical-arc-global-sports-future.html",
+    "articles/sports/mental-health-initiatives-professional-sports-2026.html",
+    "articles/sports/revolutionizing-athlete-recovery-ai-wearable-tech.html",
+    "articles/sports/role-of-data-analytics-in-next-generation-athlete-performance.html",
+    "articles/world/from-multipolarity-to-new-world-orders.html",
+    "articles/world/future-russia-west-relations-2026.html",
+    "articles/world/geopolitical-impact-china-belt-road-initiative-2026.html",
+    "articles/world/geopolitical-implications-emerging-green-energy-alliances.html",
+    "articles/world/geopolitical-implications-emerging-indo-pacific-security-architecture.html",
+    "articles/world/geopolitical-implications-emerging-renewable-energy-alliances.html",
+    "articles/world/geopolitical-implications-new-arctic-trade-routes.html",
+    "articles/world/geopolitical-implications-renewable-energy-transitions.html",
+    "articles/world/geopolitical-shifts-indo-pacific-balancing-power-diplomacy.html",
+    "articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html",
+    "articles/world/geopolitical-shifts-indo-pacific-strategic-alignments-challenges.html",
+    "articles/world/geopolitical-shifts-indo-pacific-strategic-alliances-emerging-challenges.html",
+    "articles/world/geopolitics-renewable-energy-global-south.html",
+    "articles/world/navigating-multipolarity-new-dynamics-global-power-2026.html",
+    "articles/world/reading-confrontation-beyond-headlines.html",
+    "articles/world/strategic-realignments-indo-pacific-diplomatic-developments.html"
+  ],
+  "remaining_reference_queue_after_batch_6": [],
+  "blocked_capabilities": [
+    "article_html_mutation",
+    "article_text_mutation",
+    "article_image_mutation",
+    "image_credit_mutation",
+    "reference_url_change",
+    "new_reference_insertion",
+    "reference_candidate_population",
+    "reference_approval",
+    "external_fetch_by_script",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AG03Z",
+    "title": "Final Consolidated Verified Reference Closure Audit",
+    "allowed": true,
+    "only_after_ag03d_b6_validation": true,
+    "scope": "confirm all AG03 batches are complete, all 72 queued articles contain verified references, and the missing-reference queue is closed",
+    "article_html_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
