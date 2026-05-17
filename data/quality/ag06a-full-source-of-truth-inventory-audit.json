@@ -1,0 +1,75 @@
+{
+  "module_id": "AG06A",
+  "module_title": "Full Source-of-Truth Inventory Audit",
+  "phase": "Content Intelligence Foundation",
+  "status": "audit_only",
+  "depends_on": [
+    "SOURCE_TREE_ACTIVE_REGISTER",
+    "AG05Z",
+    "AG04Z",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "source_tree_active_register": "data/quality/source-tree-active-register.json",
+    "ag05z_closure": "data/editorial/ag05z-public-page-live-readiness-smoke-governance-closure.json",
+    "ag04z_closure": "data/editorial/ag04z-article-visual-credit-width-governance-closure.json",
+    "ag03z_closure": "data/editorial/ag03z-final-verified-reference-closure-audit.json"
+  },
+  "scan_roots": {
+    "public_articles": "articles",
+    "production_intelligence_scaffold": "drishvara_phase01_scaffold",
+    "generated": "generated",
+    "data": "data",
+    "docs": "docs",
+    "scripts": "scripts",
+    "api": "api",
+    "services": "services",
+    "supabase": "supabase",
+    "specs": "specs"
+  },
+  "outputs": {
+    "audit": "data/editorial/ag06a-full-source-of-truth-inventory-audit.json",
+    "preview": "data/quality/ag06a-full-source-of-truth-inventory-preview.json"
+  },
+  "expected": {
+    "minimum_public_article_count": 72,
+    "minimum_governed_article_count": 72
+  },
+  "recommended_next_stage": {
+    "module_id": "AG06B",
+    "title": "Content Intelligence Schema",
+    "allowed": true,
+    "only_after_ag06a_validation": true,
+    "scope": "define durable content packet schema, run registry, reference registry, visual registry, quality review and publish queue structure",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}

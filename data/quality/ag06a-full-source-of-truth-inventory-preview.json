@@ -1,0 +1,119 @@
+{
+  "preview_id": "AG06A_FULL_SOURCE_OF_TRUTH_INVENTORY_PREVIEW",
+  "module_id": "AG06A",
+  "preview_only": true,
+  "status": "preview_full_source_of_truth_inventory_audit",
+  "summary": {
+    "public_article_count": 77,
+    "governed_public_article_count": 72,
+    "unguided_public_article_count": 5,
+    "public_category_counts": {
+      "media": 16,
+      "policy": 15,
+      "spiritual": 14,
+      "sports": 15,
+      "world": 17
+    },
+    "public_average_word_count_estimate": 550,
+    "public_median_word_count_estimate": 575,
+    "public_articles_above_1500_words": 0,
+    "public_articles_above_1200_words": 0,
+    "public_articles_with_table_signal": 0,
+    "public_articles_with_chart_graph_infographic_text_signal": 0,
+    "scaffold_run_directory_count": 66,
+    "scaffold_final_markdown_count": 60,
+    "scaffold_final_html_count": 60,
+    "scaffold_visual_plan_count": 63,
+    "scaffold_learning_snapshot_count": 60,
+    "scaffold_average_final_markdown_word_count_estimate": 1704,
+    "scaffold_median_final_markdown_word_count_estimate": 1886,
+    "generated_file_count": 90,
+    "script_file_count": 302,
+    "api_file_count": 8,
+    "service_file_count": 4,
+    "supabase_file_count": 7,
+    "specs_file_count": 7,
+    "c10_c16_governance_file_count": 14,
+    "content_intelligence_store_exists": false,
+    "content_intelligence_file_count": 0,
+    "inventory_gap_count": 4,
+    "audit_only_no_mutation": true,
+    "next_stage_id": "AG06B"
+  },
+  "unguided_public_articles": [
+    {
+      "article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "visible_ar01_placeholder_count": 1,
+      "word_count_estimate": 390
+    },
+    {
+      "article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "visible_ar01_placeholder_count": 1,
+      "word_count_estimate": 388
+    },
+    {
+      "article_path": "articles/spiritual/contemplative-practices-modern-mental-health.html",
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "visible_ar01_placeholder_count": 1,
+      "word_count_estimate": 475
+    },
+    {
+      "article_path": "articles/sports/mental-health-awareness-professional-athletics-2026.html",
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "visible_ar01_placeholder_count": 1,
+      "word_count_estimate": 405
+    },
+    {
+      "article_path": "articles/world/ai-future-warfare-2026.html",
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "visible_ar01_placeholder_count": 1,
+      "word_count_estimate": 382
+    }
+  ],
+  "inventory_gaps": [
+    {
+      "gap_id": "AG06A_GAP_PUBLIC_UNGOVERNED_ARTICLES",
+      "severity": "medium",
+      "description": "Some public articles do not yet have complete AG03/AG05 visible-reference governance.",
+      "affected_count": 5
+    },
+    {
+      "gap_id": "AG06A_GAP_PUBLIC_LONG_FORM_QUALITY",
+      "severity": "high",
+      "description": "No current public article reaches the intended 1500+ word long-form Drishvara standard.",
+      "affected_count": 77
+    },
+    {
+      "gap_id": "AG06A_GAP_PUBLIC_VISUAL_INTELLIGENCE",
+      "severity": "high",
+      "description": "Public article layer has no meaningful table/chart/graph/infographic signal.",
+      "affected_count": 77
+    },
+    {
+      "gap_id": "AG06A_GAP_CONTENT_INTELLIGENCE_STORE",
+      "severity": "high",
+      "description": "Durable data/content-intelligence store is not yet operational.",
+      "affected_count": 1
+    }
+  ],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG06B",
+    "title": "Content Intelligence Schema",
+    "allowed": true,
+    "only_after_ag06a_validation": true,
+    "scope": "define durable content packet schema, run registry, reference registry, visual registry, quality review and publish queue structure",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
