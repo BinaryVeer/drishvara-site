@@ -1,0 +1,48 @@
+{
+  "module_id": "AG04A-R2",
+  "module_title": "Manual Visual Review Result Record",
+  "phase": "Article Visual / Image Credit / Reading Surface Governance",
+  "status": "review_result_record_only",
+  "depends_on": [
+    "AG04A-R1",
+    "AG04A",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "article_text_mutation_enabled": false,
+  "article_image_mutation_enabled": false,
+  "image_credit_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "css_mutation_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag04a_r1_register": "data/editorial/ag04a-r1-article-visual-evidence-register.json"
+  },
+  "expected": {
+    "article_count": 72,
+    "ag03_reference_link_count": 144,
+    "references_per_article": 2
+  },
+  "outputs": {
+    "review_result": "data/editorial/ag04a-r2-manual-visual-review-result-record.json",
+    "preview": "data/quality/ag04a-r2-manual-visual-review-result-preview.json"
+  }
+}
