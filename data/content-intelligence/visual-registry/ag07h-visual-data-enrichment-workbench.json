@@ -1,0 +1,413 @@
+{
+  "module_id": "AG07H",
+  "title": "Visual and Data Enrichment Boundary Workbench",
+  "status": "visual_data_enrichment_boundary_defined",
+  "visual_data_enrichment_boundary_only": true,
+  "generated_from": {
+    "ag07gReview": "data/content-intelligence/quality-reviews/ag07g-reference-discovery-boundary-workbench.json",
+    "ag07gWorkbench": "data/content-intelligence/reference-registry/ag07g-reference-discovery-workbench.json",
+    "ag07gSchema": "data/content-intelligence/schema/reference-discovery-workbench.schema.json",
+    "ag07gLearning": "data/content-intelligence/learning/ag07g-reference-discovery-boundary-learning.json",
+    "ag07fReview": "data/content-intelligence/quality-reviews/ag07f-preview-packet-schema-revision-boundary.json",
+    "ag07fBoundaryPlan": "data/content-intelligence/run-registry/ag07f-preview-packet-contract-boundary-plan.json",
+    "ag07fRevisedSchema": "data/content-intelligence/schema/preview-packet-revised-contract.schema.json",
+    "ag07cPacket": "data/content-intelligence/content-packets/ag07c-preview-only-dry-run-content-packet.json",
+    "ag06iVisualStandard": "data/content-intelligence/visual-registry/visual-data-infographic-requirement-standard.json",
+    "ag06eLongFormStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06kStoreManifest": "data/content-intelligence/run-registry/jsonl-first-content-intelligence-store-manifest.json",
+    "ag06lApprovalRegister": "data/content-intelligence/publish-queue/publish-queue-approval-state-register.json"
+  },
+  "summary": {
+    "ag07g_boundary_consumed": true,
+    "ag07f_boundary_consumed": true,
+    "ag07c_packet_present": true,
+    "ag07c_packet_unchanged": true,
+    "visual_contract_section_present": true,
+    "visual_standard_consumed": true,
+    "visual_type_count": 10,
+    "visual_need_slot_count": 3,
+    "data_unit_slot_count": 3,
+    "accessibility_field_count": 4,
+    "mobile_safe_rule_count": 4,
+    "review_workflow_step_count": 5,
+    "visual_generation_performed": false,
+    "visual_asset_generation_performed": false,
+    "image_insertion_performed": false,
+    "image_credit_population_performed": false,
+    "alt_text_population_performed": false,
+    "caption_population_performed": false,
+    "data_unit_generation_performed": false,
+    "produced_visual_asset_count": 0,
+    "inserted_image_count": 0,
+    "generated_data_unit_count": 0,
+    "production_readiness_after_ag07h": "not_ready",
+    "publish_readiness_after_ag07h": "blocked",
+    "public_article_mutation_allowed": false,
+    "article_prose_generated": false,
+    "reference_insertion_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07I"
+  },
+  "source_packet_snapshot": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "packet_modified_in_ag07h": false
+  },
+  "visual_standard_snapshot": {
+    "visual_type_count": 10,
+    "visual_types": [
+      {
+        "type_id": "hero_visual",
+        "label": "Primary Hero Visual",
+        "required": true,
+        "minimum_per_article": 1,
+        "maximum_per_article": 1,
+        "purpose": "Give the article a clear first visual identity and topic signal.",
+        "required_fields": [
+          "visual_intent",
+          "placement",
+          "source_or_generation_basis",
+          "rights_or_credit_status",
+          "alt_text_plan",
+          "mobile_safe_expectation"
+        ]
+      },
+      {
+        "type_id": "data_box",
+        "label": "Structured Data Box",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Summarise facts, figures, definitions, frameworks or comparison points in a reader-friendly box."
+      },
+      {
+        "type_id": "comparison_table",
+        "label": "Comparison Table",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Compare concepts, options, timelines, stakeholder roles or before/after states."
+      },
+      {
+        "type_id": "timeline",
+        "label": "Timeline",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Show sequence, evolution, milestones or process stages."
+      },
+      {
+        "type_id": "concept_diagram",
+        "label": "Concept Diagram",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Explain relationships, systems, workflows or layered ideas visually."
+      },
+      {
+        "type_id": "flowchart",
+        "label": "Flowchart",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Represent decisions, review gates, service journeys or procedural logic."
+      },
+      {
+        "type_id": "chart_or_graph",
+        "label": "Chart or Graph",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Represent quantitative relationships where credible data is available."
+      },
+      {
+        "type_id": "map_or_spatial_view",
+        "label": "Map or Spatial View",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Represent geography, regional variation, route, location or distribution when relevant."
+      },
+      {
+        "type_id": "infographic",
+        "label": "Infographic",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Combine key ideas, numbers and visual hierarchy into a compact reader-value unit."
+      },
+      {
+        "type_id": "structured_key_takeaways_box",
+        "label": "Structured Key Takeaways Box",
+        "required": false,
+        "counts_as_structured_enrichment": true,
+        "purpose": "Provide high-retention reader takeaways when a richer chart or diagram is not appropriate."
+      }
+    ],
+    "visual_quality_scoring_weights": {},
+    "primary_hero_visual_required": true,
+    "structured_visual_or_data_unit_required": true,
+    "image_credit_required": true,
+    "alt_text_required": true,
+    "caption_context_required": true,
+    "mobile_safe_layout_required": true
+  },
+  "reference_boundary_snapshot": {
+    "ag07g_candidate_reference_slot_count": 5,
+    "ag07g_reference_url_population_performed": false,
+    "ag07g_reference_insertion_performed": false
+  },
+  "visual_need_slots": [
+    {
+      "slot_id": "AG07H-VISUAL-001",
+      "visual_need_type": "primary_hero_visual",
+      "purpose": "Represent the central article idea through a safe, relevant and credited hero visual.",
+      "required_before_publish": true,
+      "visual_generation_allowed_in_ag07h": false,
+      "image_insertion_allowed_in_ag07h": false,
+      "asset_path": "",
+      "asset_url": "",
+      "caption": "",
+      "alt_text": "",
+      "image_credit": "",
+      "review_status": "boundary_slot_empty"
+    },
+    {
+      "slot_id": "AG07H-VISUAL-002",
+      "visual_need_type": "structured_visual_or_infographic",
+      "purpose": "Plan a simple infographic, flow, table, diagram or structured visual support where useful.",
+      "required_before_publish": true,
+      "visual_generation_allowed_in_ag07h": false,
+      "image_insertion_allowed_in_ag07h": false,
+      "asset_path": "",
+      "asset_url": "",
+      "caption": "",
+      "alt_text": "",
+      "image_credit": "",
+      "review_status": "boundary_slot_empty"
+    },
+    {
+      "slot_id": "AG07H-VISUAL-003",
+      "visual_need_type": "supporting_context_visual",
+      "purpose": "Optional supporting visual, map, timeline, quote-card or data callout where editorially justified.",
+      "required_before_publish": false,
+      "visual_generation_allowed_in_ag07h": false,
+      "image_insertion_allowed_in_ag07h": false,
+      "asset_path": "",
+      "asset_url": "",
+      "caption": "",
+      "alt_text": "",
+      "image_credit": "",
+      "review_status": "boundary_slot_empty"
+    }
+  ],
+  "data_unit_slots": [
+    {
+      "slot_id": "AG07H-DATA-001",
+      "data_unit_type": "key_fact_box",
+      "purpose": "Future structured key fact box based on verified content and references.",
+      "required_before_publish": false,
+      "data_generation_allowed_in_ag07h": false,
+      "data_values": [],
+      "source_dependency": "future_reference_or_editorial_review_required",
+      "review_status": "boundary_slot_empty"
+    },
+    {
+      "slot_id": "AG07H-DATA-002",
+      "data_unit_type": "timeline_or_sequence",
+      "purpose": "Future timeline or process sequence where the article benefits from ordered explanation.",
+      "required_before_publish": false,
+      "data_generation_allowed_in_ag07h": false,
+      "data_values": [],
+      "source_dependency": "future_reference_or_editorial_review_required",
+      "review_status": "boundary_slot_empty"
+    },
+    {
+      "slot_id": "AG07H-DATA-003",
+      "data_unit_type": "comparison_or_matrix",
+      "purpose": "Future comparison table or matrix for reader clarity, where supported by credible sources.",
+      "required_before_publish": false,
+      "data_generation_allowed_in_ag07h": false,
+      "data_values": [],
+      "source_dependency": "future_reference_or_editorial_review_required",
+      "review_status": "boundary_slot_empty"
+    }
+  ],
+  "accessibility_and_attribution_fields": [
+    {
+      "field_id": "caption_context",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value": "",
+      "purpose": "Explain why the visual/data unit is relevant to the article."
+    },
+    {
+      "field_id": "alt_text",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value": "",
+      "purpose": "Provide accessible text for screen readers and low-bandwidth contexts."
+    },
+    {
+      "field_id": "image_credit",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value": "",
+      "purpose": "Record source, creator, license or editorial attribution status."
+    },
+    {
+      "field_id": "mobile_safe_layout_note",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value": "",
+      "purpose": "Ensure visual/data unit does not break mobile reading surface."
+    }
+  ],
+  "mobile_safe_layout_rules": [
+    {
+      "rule_id": "AG07H-MOBILE-001",
+      "rule": "Visual/data units must be readable on narrow mobile screens.",
+      "evaluated_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "rule_id": "AG07H-MOBILE-002",
+      "rule": "Captions and credits must remain visible and non-overlapping.",
+      "evaluated_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "rule_id": "AG07H-MOBILE-003",
+      "rule": "Images must not displace verified references, article footer or navigation.",
+      "evaluated_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "rule_id": "AG07H-MOBILE-004",
+      "rule": "Infographics must have a text-equivalent or summary fallback.",
+      "evaluated_in_ag07h": false,
+      "future_approval_required": true
+    }
+  ],
+  "review_workflow": [
+    {
+      "step_id": "AG07H-WF-001",
+      "step_name": "visual_need_review",
+      "description": "Future editorial review of whether a visual/data unit is needed.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-002",
+      "step_name": "visual_asset_selection_or_generation",
+      "description": "Future selection or generation of a visual asset.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-003",
+      "step_name": "caption_alt_credit_review",
+      "description": "Future caption, alt-text and credit review before insertion.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-004",
+      "step_name": "mobile_layout_review",
+      "description": "Future mobile-safe layout review.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-005",
+      "step_name": "article_visual_insertion",
+      "description": "Future public article image/visual insertion step; explicitly blocked in AG07H.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    }
+  ],
+  "future_stage_handoff": [
+    {
+      "stage_id": "AG07I",
+      "title": "Quality and Visitor-Value Scoring Boundary",
+      "receives_from_ag07h": [
+        "visual_need_slots",
+        "data_unit_slots",
+        "accessibility_and_attribution_fields"
+      ],
+      "allowed_scope": "quality/visitor-value scoring boundary only with explicit approval",
+      "blocked_actions": [
+        "publish_ready_set",
+        "approval_state_change",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07J",
+      "title": "Preview Packet Contract Revision Dry Run",
+      "receives_from_ag07h": [
+        "visual_data_plan_boundary",
+        "reference_boundary",
+        "schema_contract_boundary"
+      ],
+      "allowed_scope": "create a revised preview-only packet skeleton only with explicit approval",
+      "blocked_actions": [
+        "article_prose_generation",
+        "public_mutation",
+        "jsonl_append",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    },
+    {
+      "stage_id": "AG07K",
+      "title": "Visual Candidate Population Dry Run",
+      "receives_from_ag07h": [
+        "visual_need_slots",
+        "data_unit_slots",
+        "review_workflow"
+      ],
+      "allowed_scope": "populate candidate visual/data planning fields only if explicitly approved later",
+      "blocked_actions": [
+        "public_image_insertion",
+        "article_mutation",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    }
+  ],
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "data_unit_generation_performed": false,
+  "image_insertion_performed": false,
+  "hero_image_insertion_performed": false,
+  "article_image_mutation_performed": false,
+  "image_credit_population_performed": false,
+  "alt_text_population_performed": false,
+  "caption_population_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "web_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}

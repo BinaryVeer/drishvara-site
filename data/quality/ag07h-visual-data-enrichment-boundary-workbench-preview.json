@@ -1,0 +1,255 @@
+{
+  "module_id": "AG07H",
+  "preview_only": true,
+  "visual_data_enrichment_boundary_only": true,
+  "summary": {
+    "ag07g_boundary_consumed": true,
+    "ag07f_boundary_consumed": true,
+    "ag07c_packet_present": true,
+    "ag07c_packet_unchanged": true,
+    "visual_contract_section_present": true,
+    "visual_standard_consumed": true,
+    "visual_type_count": 10,
+    "visual_need_slot_count": 3,
+    "data_unit_slot_count": 3,
+    "accessibility_field_count": 4,
+    "mobile_safe_rule_count": 4,
+    "review_workflow_step_count": 5,
+    "visual_generation_performed": false,
+    "visual_asset_generation_performed": false,
+    "image_insertion_performed": false,
+    "image_credit_population_performed": false,
+    "alt_text_population_performed": false,
+    "caption_population_performed": false,
+    "data_unit_generation_performed": false,
+    "produced_visual_asset_count": 0,
+    "inserted_image_count": 0,
+    "generated_data_unit_count": 0,
+    "production_readiness_after_ag07h": "not_ready",
+    "publish_readiness_after_ag07h": "blocked",
+    "public_article_mutation_allowed": false,
+    "article_prose_generated": false,
+    "reference_insertion_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07I"
+  },
+  "source_packet_snapshot": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "packet_modified_in_ag07h": false
+  },
+  "visual_need_slots": [
+    {
+      "slot_id": "AG07H-VISUAL-001",
+      "visual_need_type": "primary_hero_visual",
+      "required_before_publish": true,
+      "asset_path_empty": true,
+      "asset_url_empty": true,
+      "caption_empty": true,
+      "alt_text_empty": true,
+      "image_credit_empty": true,
+      "visual_generation_allowed_in_ag07h": false,
+      "image_insertion_allowed_in_ag07h": false
+    },
+    {
+      "slot_id": "AG07H-VISUAL-002",
+      "visual_need_type": "structured_visual_or_infographic",
+      "required_before_publish": true,
+      "asset_path_empty": true,
+      "asset_url_empty": true,
+      "caption_empty": true,
+      "alt_text_empty": true,
+      "image_credit_empty": true,
+      "visual_generation_allowed_in_ag07h": false,
+      "image_insertion_allowed_in_ag07h": false
+    },
+    {
+      "slot_id": "AG07H-VISUAL-003",
+      "visual_need_type": "supporting_context_visual",
+      "required_before_publish": false,
+      "asset_path_empty": true,
+      "asset_url_empty": true,
+      "caption_empty": true,
+      "alt_text_empty": true,
+      "image_credit_empty": true,
+      "visual_generation_allowed_in_ag07h": false,
+      "image_insertion_allowed_in_ag07h": false
+    }
+  ],
+  "data_unit_slots": [
+    {
+      "slot_id": "AG07H-DATA-001",
+      "data_unit_type": "key_fact_box",
+      "data_values_count": 0,
+      "data_generation_allowed_in_ag07h": false
+    },
+    {
+      "slot_id": "AG07H-DATA-002",
+      "data_unit_type": "timeline_or_sequence",
+      "data_values_count": 0,
+      "data_generation_allowed_in_ag07h": false
+    },
+    {
+      "slot_id": "AG07H-DATA-003",
+      "data_unit_type": "comparison_or_matrix",
+      "data_values_count": 0,
+      "data_generation_allowed_in_ag07h": false
+    }
+  ],
+  "accessibility_and_attribution_fields": [
+    {
+      "field_id": "caption_context",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value_empty": true
+    },
+    {
+      "field_id": "alt_text",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value_empty": true
+    },
+    {
+      "field_id": "image_credit",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value_empty": true
+    },
+    {
+      "field_id": "mobile_safe_layout_note",
+      "required_before_publish": true,
+      "populated_in_ag07h": false,
+      "value_empty": true
+    }
+  ],
+  "review_workflow": [
+    {
+      "step_id": "AG07H-WF-001",
+      "step_name": "visual_need_review",
+      "description": "Future editorial review of whether a visual/data unit is needed.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-002",
+      "step_name": "visual_asset_selection_or_generation",
+      "description": "Future selection or generation of a visual asset.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-003",
+      "step_name": "caption_alt_credit_review",
+      "description": "Future caption, alt-text and credit review before insertion.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-004",
+      "step_name": "mobile_layout_review",
+      "description": "Future mobile-safe layout review.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07H-WF-005",
+      "step_name": "article_visual_insertion",
+      "description": "Future public article image/visual insertion step; explicitly blocked in AG07H.",
+      "allowed_in_ag07h": false,
+      "future_approval_required": true
+    }
+  ],
+  "future_stage_handoff": [
+    {
+      "stage_id": "AG07I",
+      "title": "Quality and Visitor-Value Scoring Boundary",
+      "receives_from_ag07h": [
+        "visual_need_slots",
+        "data_unit_slots",
+        "accessibility_and_attribution_fields"
+      ],
+      "allowed_scope": "quality/visitor-value scoring boundary only with explicit approval",
+      "blocked_actions": [
+        "publish_ready_set",
+        "approval_state_change",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07J",
+      "title": "Preview Packet Contract Revision Dry Run",
+      "receives_from_ag07h": [
+        "visual_data_plan_boundary",
+        "reference_boundary",
+        "schema_contract_boundary"
+      ],
+      "allowed_scope": "create a revised preview-only packet skeleton only with explicit approval",
+      "blocked_actions": [
+        "article_prose_generation",
+        "public_mutation",
+        "jsonl_append",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    },
+    {
+      "stage_id": "AG07K",
+      "title": "Visual Candidate Population Dry Run",
+      "receives_from_ag07h": [
+        "visual_need_slots",
+        "data_unit_slots",
+        "review_workflow"
+      ],
+      "allowed_scope": "populate candidate visual/data planning fields only if explicitly approved later",
+      "blocked_actions": [
+        "public_image_insertion",
+        "article_mutation",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    }
+  ],
+  "next_stage_id": "AG07I",
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "data_unit_generation_performed": false,
+  "image_insertion_performed": false,
+  "hero_image_insertion_performed": false,
+  "article_image_mutation_performed": false,
+  "image_credit_population_performed": false,
+  "alt_text_population_performed": false,
+  "caption_population_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "web_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
