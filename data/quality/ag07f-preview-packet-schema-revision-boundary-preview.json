@@ -1,0 +1,268 @@
+{
+  "module_id": "AG07F",
+  "preview_only": true,
+  "schema_contract_revision_boundary_only": true,
+  "summary": {
+    "ag07e_revision_plan_consumed": true,
+    "ag07d_gap_audit_consumed": true,
+    "ag07c_packet_present": true,
+    "ag07c_packet_unchanged": true,
+    "ag07c_packet_preview_only": true,
+    "ag07c_packet_production_packet": false,
+    "ag07c_packet_publish_ready": false,
+    "source_revision_item_count": 7,
+    "proposed_contract_section_count": 10,
+    "contract_rule_count": 6,
+    "proposed_schema_delta_count": 7,
+    "future_stage_handoff_count": 4,
+    "schema_contract_revision_boundary_defined": true,
+    "schema_contract_revision_executed": false,
+    "packet_revision_execution_performed": false,
+    "revised_packet_created": false,
+    "production_readiness_after_ag07f": "not_ready",
+    "publish_readiness_after_ag07f": "blocked",
+    "article_prose_generated": false,
+    "public_article_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07G"
+  },
+  "current_packet_snapshot": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "section_count": 14,
+    "current_packet_modified_in_ag07f": false
+  },
+  "proposed_contract_sections": [
+    {
+      "section_id": "identity",
+      "required_field_count": 8,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "source_context",
+      "required_field_count": 5,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "reader_value",
+      "required_field_count": 5,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "long_form_structure",
+      "required_field_count": 6,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "reference_plan",
+      "required_field_count": 8,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "visual_data_plan",
+      "required_field_count": 6,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "quality_value_gates",
+      "required_field_count": 6,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "publish_approval_gate",
+      "required_field_count": 6,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "persistence_mapping",
+      "required_field_count": 6,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "audit_trace",
+      "required_field_count": 5,
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    }
+  ],
+  "proposed_schema_delta": [
+    {
+      "delta_id": "AG07F-DELTA-001",
+      "target": "packet_sections",
+      "proposed_change": "Replace generic placeholder sections with typed section contracts containing required fields and status guards.",
+      "source_revision_id": "AG07E-REV-001",
+      "applied_in_ag07f": false
+    },
+    {
+      "delta_id": "AG07F-DELTA-002",
+      "target": "long_form_structure",
+      "proposed_change": "Add explicit prose_generation_allowed=false guard inside the long-form structure contract.",
+      "source_revision_id": "AG07E-REV-002",
+      "applied_in_ag07f": false
+    },
+    {
+      "delta_id": "AG07F-DELTA-003",
+      "target": "reference_plan",
+      "proposed_change": "Add reference needs, credibility targets and URL arrays that must remain empty until later workbench approval.",
+      "source_revision_id": "AG07E-REV-003",
+      "applied_in_ag07f": false
+    },
+    {
+      "delta_id": "AG07F-DELTA-004",
+      "target": "visual_data_plan",
+      "proposed_change": "Add hero visual, structured visual/data unit, caption, alt-text and credit readiness fields.",
+      "source_revision_id": "AG07E-REV-004",
+      "applied_in_ag07f": false
+    },
+    {
+      "delta_id": "AG07F-DELTA-005",
+      "target": "quality_value_gates",
+      "proposed_change": "Add quality score and visitor-value gate statuses without calculating scores.",
+      "source_revision_id": "AG07E-REV-005",
+      "applied_in_ag07f": false
+    },
+    {
+      "delta_id": "AG07F-DELTA-006",
+      "target": "publish_approval_gate",
+      "proposed_change": "Add explicit approval-state and publish-readiness guards.",
+      "source_revision_id": "AG07E-REV-006",
+      "applied_in_ag07f": false
+    },
+    {
+      "delta_id": "AG07F-DELTA-007",
+      "target": "persistence_mapping",
+      "proposed_change": "Add future JSONL/database/Supabase mapping fields while keeping writes blocked.",
+      "source_revision_id": "AG07E-REV-007",
+      "applied_in_ag07f": false
+    }
+  ],
+  "contract_rules": [
+    {
+      "rule_id": "AG07F-RULE-001",
+      "rule": "A preview packet may contain schema/contract placeholders, but must not be treated as production content.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-002",
+      "rule": "Article prose fields must remain blocked unless a later approved drafting stage explicitly enables them.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-003",
+      "rule": "Reference fields may define needs and source criteria, but candidate_urls and approved_urls must remain empty until a later reference workbench.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-004",
+      "rule": "Visual fields may define needs and layout requirements, but visual generation remains blocked.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-005",
+      "rule": "Publish readiness must remain blocked until approval state, reference, visual, quality and editorial gates are separately closed.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-006",
+      "rule": "Schema-to-database mapping may be defined, but no JSONL append, database write or Supabase activation is allowed.",
+      "enforcement_status": "boundary_defined_not_executed"
+    }
+  ],
+  "future_stage_handoff": [
+    {
+      "stage_id": "AG07G",
+      "title": "Reference Discovery Boundary / Workbench",
+      "receives_from_ag07f": [
+        "reference_plan"
+      ],
+      "allowed_scope": "reference discovery planning/review only with explicit approval",
+      "blocked_in_handoff": [
+        "reference_insertion",
+        "public_article_mutation",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07H",
+      "title": "Visual and Data Enrichment Boundary / Workbench",
+      "receives_from_ag07f": [
+        "visual_data_plan"
+      ],
+      "allowed_scope": "visual/data planning/review only with explicit approval",
+      "blocked_in_handoff": [
+        "public_visual_generation",
+        "public_article_mutation",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07I",
+      "title": "Quality and Visitor-Value Scoring Boundary",
+      "receives_from_ag07f": [
+        "quality_value_gates"
+      ],
+      "allowed_scope": "scoring boundary/design only with explicit approval",
+      "blocked_in_handoff": [
+        "publish_ready_set",
+        "approval_state_change",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07J",
+      "title": "Preview Packet Contract Revision Dry Run",
+      "receives_from_ag07f": [
+        "proposed_contract_sections",
+        "contract_rules",
+        "proposed_schema_delta"
+      ],
+      "allowed_scope": "create a new preview-only revised packet skeleton only with explicit approval",
+      "blocked_in_handoff": [
+        "article_prose_generation",
+        "public_mutation",
+        "jsonl_append",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    }
+  ],
+  "next_stage_id": "AG07G",
+  "packet_revision_execution_performed": false,
+  "preview_packet_modified": false,
+  "current_ag07c_packet_modified": false,
+  "revised_packet_created": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "reference_url_change_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}

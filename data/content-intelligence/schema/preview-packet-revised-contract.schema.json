@@ -1,0 +1,289 @@
+{
+  "schema_id": "drishvara/ag07f/preview-packet-revised-contract.schema.json",
+  "module_id": "AG07F",
+  "title": "Preview Packet Revised Contract Schema",
+  "status": "schema_contract_boundary_only",
+  "description": "Proposed strengthened contract for future preview packet revisions. AG07F defines the contract but does not apply it to the AG07C packet.",
+  "applies_to_current_ag07c_packet_in_ag07f": false,
+  "future_application_requires_explicit_approval": true,
+  "required_top_level_fields_for_future_revised_preview_packet": [
+    "identity",
+    "source_context",
+    "reader_value",
+    "long_form_structure",
+    "reference_plan",
+    "visual_data_plan",
+    "quality_value_gates",
+    "publish_approval_gate",
+    "persistence_mapping",
+    "audit_trace",
+    "mutation_controls"
+  ],
+  "proposed_contract_sections": [
+    {
+      "section_id": "identity",
+      "purpose": "Identify the packet, source article, category, source queue id and preview/production status.",
+      "required_fields": [
+        "content_packet_id",
+        "source_article_path",
+        "source_queue_id",
+        "category",
+        "detected_title",
+        "preview_only",
+        "production_packet",
+        "publish_ready"
+      ],
+      "revision_source": [
+        "AG07E-REV-001"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "source_context",
+      "purpose": "Record source article context, existing limitations, intended upgrade reason and reader context.",
+      "required_fields": [
+        "source_summary_placeholder",
+        "existing_article_limitations",
+        "upgrade_reason",
+        "target_reader_context",
+        "source_context_confidence"
+      ],
+      "revision_source": [
+        "AG07E-REV-001"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "reader_value",
+      "purpose": "Define the user value proposition before drafting begins.",
+      "required_fields": [
+        "reader_problem",
+        "reader_takeaway",
+        "practical_value",
+        "trust_value",
+        "revisit_value"
+      ],
+      "revision_source": [
+        "AG07E-REV-001",
+        "AG07E-REV-005"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "long_form_structure",
+      "purpose": "Define the planned long-form structure without generating article prose.",
+      "required_fields": [
+        "planned_intro_role",
+        "planned_section_sequence",
+        "depth_targets",
+        "evidence_needs",
+        "transition_notes",
+        "prose_generation_allowed"
+      ],
+      "revision_source": [
+        "AG07E-REV-001",
+        "AG07E-REV-002"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "reference_plan",
+      "purpose": "Define reference needs, credibility filters and future review handoff without URL population.",
+      "required_fields": [
+        "required_reference_count_min",
+        "required_reference_count_max",
+        "source_type_targets",
+        "credibility_tier_targets",
+        "reference_discovery_status",
+        "candidate_urls",
+        "approved_urls",
+        "insertion_allowed"
+      ],
+      "revision_source": [
+        "AG07E-REV-003"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "visual_data_plan",
+      "purpose": "Define visual/data needs, mobile-safe layout and attribution requirements without generating visuals.",
+      "required_fields": [
+        "primary_hero_visual_need",
+        "structured_visual_or_data_unit_need",
+        "caption_context_need",
+        "alt_text_need",
+        "image_credit_need",
+        "visual_generation_allowed"
+      ],
+      "revision_source": [
+        "AG07E-REV-004"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "quality_value_gates",
+      "purpose": "Define future quality and visitor-value gates before production readiness.",
+      "required_fields": [
+        "quality_score_required",
+        "visitor_value_score_required",
+        "quality_score_status",
+        "visitor_value_score_status",
+        "minimum_quality_threshold",
+        "minimum_visitor_value_threshold"
+      ],
+      "revision_source": [
+        "AG07E-REV-005"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "publish_approval_gate",
+      "purpose": "Keep approval and publish-readiness states explicit and blocked until later approval.",
+      "required_fields": [
+        "approval_state",
+        "publication_allowed",
+        "publish_ready",
+        "approval_state_changed",
+        "publish_ready_set",
+        "publication_approval_granted"
+      ],
+      "revision_source": [
+        "AG07E-REV-006"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "persistence_mapping",
+      "purpose": "Preserve schema-to-JSONL/database/Supabase mapping readiness without enabling persistence.",
+      "required_fields": [
+        "jsonl_record_family",
+        "future_table_candidate",
+        "database_write_allowed",
+        "jsonl_append_allowed",
+        "supabase_enabled",
+        "schema_mapping_status"
+      ],
+      "revision_source": [
+        "AG07E-REV-007"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    },
+    {
+      "section_id": "audit_trace",
+      "purpose": "Record consumed governance stages, blocked actions and future approval dependencies.",
+      "required_fields": [
+        "created_by_stage",
+        "consumed_foundation_stages",
+        "blocked_actions",
+        "next_stage_requires_explicit_approval",
+        "reviewer_notes_placeholder"
+      ],
+      "revision_source": [
+        "AG07E-REV-001",
+        "AG07E-REV-006",
+        "AG07E-REV-007"
+      ],
+      "applies_to_current_ag07c_packet_in_ag07f": false
+    }
+  ],
+  "contract_rules": [
+    {
+      "rule_id": "AG07F-RULE-001",
+      "rule": "A preview packet may contain schema/contract placeholders, but must not be treated as production content.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-002",
+      "rule": "Article prose fields must remain blocked unless a later approved drafting stage explicitly enables them.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-003",
+      "rule": "Reference fields may define needs and source criteria, but candidate_urls and approved_urls must remain empty until a later reference workbench.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-004",
+      "rule": "Visual fields may define needs and layout requirements, but visual generation remains blocked.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-005",
+      "rule": "Publish readiness must remain blocked until approval state, reference, visual, quality and editorial gates are separately closed.",
+      "enforcement_status": "boundary_defined_not_executed"
+    },
+    {
+      "rule_id": "AG07F-RULE-006",
+      "rule": "Schema-to-database mapping may be defined, but no JSONL append, database write or Supabase activation is allowed.",
+      "enforcement_status": "boundary_defined_not_executed"
+    }
+  ],
+  "required_global_guards": {
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "article_prose_generation_allowed": false,
+    "public_article_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "backend_auth_supabase_allowed": false
+  },
+  "reference_contract_from_ag06j": {
+    "verified_reference_min": 2,
+    "verified_reference_max": 5,
+    "source_taxonomy_available": true,
+    "candidate_urls_must_remain_empty_until_reference_workbench": true,
+    "approved_urls_must_remain_empty_until_reference_approval": true
+  },
+  "visual_contract_from_ag06i": {
+    "visual_type_count": 10,
+    "primary_hero_visual_required": true,
+    "structured_visual_or_data_unit_required": true,
+    "visual_generation_blocked_in_ag07f": true
+  },
+  "persistence_contract_from_ag06k": {
+    "jsonl_store_count": 10,
+    "jsonl_append_blocked_in_ag07f": true,
+    "database_write_blocked_in_ag07f": true,
+    "supabase_activation_blocked_in_ag07f": true
+  },
+  "approval_contract_from_ag06l": {
+    "approval_register_count": 77,
+    "approval_state_change_blocked_in_ag07f": true,
+    "publish_ready_set_blocked_in_ag07f": true
+  },
+  "schema_contract_revision_boundary_only": true,
+  "packet_revision_execution_performed": false,
+  "preview_packet_modified": false,
+  "current_ag07c_packet_modified": false,
+  "revised_packet_created": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "reference_url_change_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
