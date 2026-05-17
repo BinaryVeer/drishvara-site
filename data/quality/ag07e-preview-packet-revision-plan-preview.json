@@ -1,0 +1,186 @@
+{
+  "module_id": "AG07E",
+  "preview_only": true,
+  "revision_planning_only": true,
+  "summary": {
+    "ag07d_gap_audit_consumed": true,
+    "ag07c_preview_packet_present": true,
+    "packet_preview_only": true,
+    "packet_production_packet": false,
+    "packet_publish_ready": false,
+    "packet_publication_allowed": false,
+    "source_gap_count": 8,
+    "revision_item_count": 7,
+    "mapped_gap_count": 8,
+    "future_revision_stage_count": 4,
+    "revision_gate_count": 8,
+    "revision_plan_defined": true,
+    "revision_execution_performed": false,
+    "packet_revision_execution_allowed": false,
+    "production_readiness_after_ag07e": "not_ready",
+    "publish_readiness_after_ag07e": "blocked",
+    "article_prose_generated": false,
+    "public_article_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07F"
+  },
+  "revision_items_preview": [
+    {
+      "revision_id": "AG07E-REV-001",
+      "revision_area": "section_depth_model",
+      "source_gap_ids": [
+        "AG07D-GAP-001"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    },
+    {
+      "revision_id": "AG07E-REV-002",
+      "revision_area": "article_prose_boundary",
+      "source_gap_ids": [
+        "AG07D-GAP-002"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    },
+    {
+      "revision_id": "AG07E-REV-003",
+      "revision_area": "reference_workbench_handoff",
+      "source_gap_ids": [
+        "AG07D-GAP-003"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    },
+    {
+      "revision_id": "AG07E-REV-004",
+      "revision_area": "visual_data_handoff",
+      "source_gap_ids": [
+        "AG07D-GAP-004"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    },
+    {
+      "revision_id": "AG07E-REV-005",
+      "revision_area": "quality_visitor_value_scoring",
+      "source_gap_ids": [
+        "AG07D-GAP-005"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    },
+    {
+      "revision_id": "AG07E-REV-006",
+      "revision_area": "publish_approval_gate",
+      "source_gap_ids": [
+        "AG07D-GAP-006",
+        "AG07D-GAP-007"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    },
+    {
+      "revision_id": "AG07E-REV-007",
+      "revision_area": "database_persistence_mapping",
+      "source_gap_ids": [
+        "AG07D-GAP-008"
+      ],
+      "execution_status_in_ag07e": "planned_not_executed",
+      "packet_revision_execution_allowed_in_ag07e": false
+    }
+  ],
+  "future_revision_stages": [
+    {
+      "stage_id": "AG07F",
+      "title": "Preview Packet Schema Revision Boundary",
+      "purpose": "Revise the preview packet contract/schema only, if explicitly approved.",
+      "allowed_after_ag07e": "only_with_explicit_approval",
+      "blocked_actions": [
+        "article_prose_generation",
+        "public_mutation",
+        "reference_insertion",
+        "visual_generation",
+        "jsonl_append",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    },
+    {
+      "stage_id": "AG07G",
+      "title": "Reference Discovery Boundary / Workbench",
+      "purpose": "Plan reference discovery and source review without article insertion.",
+      "allowed_after_ag07e": "only_with_explicit_approval",
+      "blocked_actions": [
+        "public_article_mutation",
+        "reference_insertion_into_html",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07H",
+      "title": "Visual and Data Enrichment Boundary / Workbench",
+      "purpose": "Plan visual/data enrichment without generating public visual assets.",
+      "allowed_after_ag07e": "only_with_explicit_approval",
+      "blocked_actions": [
+        "public_visual_generation",
+        "article_mutation",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07I",
+      "title": "Quality and Visitor-Value Scoring Boundary",
+      "purpose": "Define scoring review logic before production packet readiness.",
+      "allowed_after_ag07e": "only_with_explicit_approval",
+      "blocked_actions": [
+        "publish_ready_set",
+        "approval_state_change",
+        "publishing"
+      ]
+    }
+  ],
+  "packet_snapshot_preserved": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "section_count": 14
+  },
+  "next_stage_id": "AG07F",
+  "packet_revision_execution_performed": false,
+  "preview_packet_modified": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "reference_url_change_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
