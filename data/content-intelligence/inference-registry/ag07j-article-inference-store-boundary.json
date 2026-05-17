@@ -1,0 +1,537 @@
+{
+  "module_id": "AG07J",
+  "title": "Article Inference Store Boundary",
+  "status": "article_inference_store_boundary_defined",
+  "article_inference_store_boundary_only": true,
+  "generated_from": {
+    "ag07iReview": "data/content-intelligence/quality-reviews/ag07i-quality-visitor-value-scoring-boundary.json",
+    "ag07iScoringModel": "data/content-intelligence/quality-registry/ag07i-quality-visitor-value-scoring-model.json",
+    "ag07iSchema": "data/content-intelligence/schema/quality-visitor-value-scoring-boundary.schema.json",
+    "ag07iLearning": "data/content-intelligence/learning/ag07i-quality-visitor-value-scoring-boundary-learning.json",
+    "ag07hReview": "data/content-intelligence/quality-reviews/ag07h-visual-data-enrichment-boundary-workbench.json",
+    "ag07hWorkbench": "data/content-intelligence/visual-registry/ag07h-visual-data-enrichment-workbench.json",
+    "ag07gReview": "data/content-intelligence/quality-reviews/ag07g-reference-discovery-boundary-workbench.json",
+    "ag07gWorkbench": "data/content-intelligence/reference-registry/ag07g-reference-discovery-workbench.json",
+    "ag07cPacket": "data/content-intelligence/content-packets/ag07c-preview-only-dry-run-content-packet.json",
+    "ag06eLongFormStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06kStoreManifest": "data/content-intelligence/run-registry/jsonl-first-content-intelligence-store-manifest.json",
+    "ag06lApprovalRegister": "data/content-intelligence/publish-queue/publish-queue-approval-state-register.json"
+  },
+  "summary": {
+    "ag07i_boundary_consumed": true,
+    "ag07h_boundary_consumed": true,
+    "ag07g_boundary_consumed": true,
+    "ag07c_packet_present": true,
+    "ag07c_packet_unchanged": true,
+    "inference_field_group_count": 12,
+    "inference_record_contract_defined": true,
+    "inference_record_template_defined": true,
+    "actual_article_inference_record_created": false,
+    "article_inference_generated": false,
+    "article_inference_stored": false,
+    "article_inference_persisted": false,
+    "inference_value_population_performed": false,
+    "production_jsonl_append_performed": false,
+    "database_write_performed": false,
+    "supabase_write_performed": false,
+    "actual_score_calculation_performed": false,
+    "quality_score_calculated": false,
+    "visitor_value_score_calculated": false,
+    "combined_score_calculated": false,
+    "calculated_quality_score": null,
+    "calculated_visitor_value_score": null,
+    "calculated_combined_score": null,
+    "publish_ready_approval_performed": false,
+    "approval_state_changed": false,
+    "publish_ready_set": false,
+    "production_readiness_after_ag07j": "not_ready",
+    "publish_readiness_after_ag07j": "blocked",
+    "next_stage_id": "AG07K",
+    "next_stage_title": "Article Inference Preview Record Dry Run",
+    "public_article_mutation_allowed": false,
+    "article_prose_generated": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false
+  },
+  "source_packet_snapshot": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "packet_modified_in_ag07j": false
+  },
+  "upstream_scoring_boundary_snapshot": {
+    "ag07i_actual_score_calculation_performed": false,
+    "ag07i_quality_score_calculated": false,
+    "ag07i_visitor_value_score_calculated": false,
+    "ag07i_article_inference_required_before_actual_scoring": true,
+    "ag07i_next_stage_id": "AG07J"
+  },
+  "upstream_reference_visual_context": {
+    "ag07g_candidate_reference_slot_count": 5,
+    "ag07g_reference_url_population_performed": false,
+    "ag07h_visual_need_slot_count": 3,
+    "ag07h_data_unit_slot_count": 3,
+    "ag07h_visual_generation_performed": false
+  },
+  "long_form_standard_snapshot": {
+    "word_count_min": 1500,
+    "word_count_max": 2200,
+    "verified_reference_min": 2,
+    "verified_reference_max": 5
+  },
+  "record_contract": {
+    "record_family": "article_inference",
+    "boundary_stage": "AG07J",
+    "production_store": false,
+    "template_only_in_ag07j": true,
+    "actual_record_created_in_ag07j": false,
+    "future_record_id_pattern": "article-inference:<content_packet_id>:<version>",
+    "future_storage_candidates": [
+      "jsonl_first_content_intelligence_store",
+      "future_supabase_article_inference_table"
+    ],
+    "storage_allowed_in_ag07j": false,
+    "production_jsonl_append_allowed_in_ag07j": false,
+    "database_write_allowed_in_ag07j": false,
+    "supabase_write_allowed_in_ag07j": false,
+    "required_field_groups": [
+      "article_theme",
+      "reader_intent",
+      "target_audience",
+      "knowledge_depth",
+      "evidence_requirement",
+      "reference_need",
+      "visual_data_need",
+      "seo_search_intent_signals",
+      "originality_improvement_inference",
+      "gap_summary",
+      "recommended_upgrade_direction",
+      "future_scoring_dependency"
+    ]
+  },
+  "inference_field_groups": [
+    {
+      "group_id": "AG07J-INF-001",
+      "group_name": "article_theme",
+      "purpose": "Future inference of the central article theme, angle and topical frame.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "theme_label",
+        "topic_category",
+        "core_question",
+        "content_angle"
+      ],
+      "template_values": {
+        "theme_label": "",
+        "topic_category": "",
+        "core_question": "",
+        "content_angle": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-002",
+      "group_name": "reader_intent",
+      "purpose": "Future inference of why a reader would open the article and what answer they expect.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "primary_reader_intent",
+        "secondary_reader_intent",
+        "intent_depth",
+        "reader_problem"
+      ],
+      "template_values": {
+        "primary_reader_intent": "",
+        "secondary_reader_intent": "",
+        "intent_depth": "",
+        "reader_problem": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-003",
+      "group_name": "target_audience",
+      "purpose": "Future inference of intended audience, prior knowledge and reading context.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "audience_segment",
+        "assumed_prior_knowledge",
+        "reading_context",
+        "language_sensitivity"
+      ],
+      "template_values": {
+        "audience_segment": "",
+        "assumed_prior_knowledge": "",
+        "reading_context": "",
+        "language_sensitivity": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-004",
+      "group_name": "knowledge_depth",
+      "purpose": "Future inference of required explanatory depth and long-form treatment.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "required_depth_level",
+        "conceptual_layers_needed",
+        "background_needed",
+        "expertise_level"
+      ],
+      "template_values": {
+        "required_depth_level": "",
+        "conceptual_layers_needed": [],
+        "background_needed": "",
+        "expertise_level": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-005",
+      "group_name": "evidence_requirement",
+      "purpose": "Future inference of factual claims, evidence burden and source needs.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "claim_density",
+        "evidence_burden",
+        "source_sensitivity",
+        "verification_risk"
+      ],
+      "template_values": {
+        "claim_density": "",
+        "evidence_burden": "",
+        "source_sensitivity": "",
+        "verification_risk": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-006",
+      "group_name": "reference_need",
+      "purpose": "Future inference of reference count, source type and link-health need.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "minimum_reference_need",
+        "preferred_source_types",
+        "primary_source_need",
+        "reference_gap_notes"
+      ],
+      "template_values": {
+        "minimum_reference_need": null,
+        "preferred_source_types": [],
+        "primary_source_need": "",
+        "reference_gap_notes": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-007",
+      "group_name": "visual_data_need",
+      "purpose": "Future inference of hero visual, infographic, data unit and accessibility needs.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "hero_visual_need",
+        "structured_visual_need",
+        "data_unit_need",
+        "accessibility_need"
+      ],
+      "template_values": {
+        "hero_visual_need": "",
+        "structured_visual_need": "",
+        "data_unit_need": "",
+        "accessibility_need": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-008",
+      "group_name": "seo_search_intent_signals",
+      "purpose": "Future inference of search intent, discoverability and metadata direction.",
+      "required_before_actual_scoring": false,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "search_intent_type",
+        "primary_query_family",
+        "secondary_query_family",
+        "metadata_direction"
+      ],
+      "template_values": {
+        "search_intent_type": "",
+        "primary_query_family": "",
+        "secondary_query_family": "",
+        "metadata_direction": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-009",
+      "group_name": "originality_improvement_inference",
+      "purpose": "Future inference of what makes the article distinct and what must improve.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "originality_gap",
+        "synthesis_opportunity",
+        "generic_content_risk",
+        "improvement_priority"
+      ],
+      "template_values": {
+        "originality_gap": "",
+        "synthesis_opportunity": "",
+        "generic_content_risk": "",
+        "improvement_priority": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-010",
+      "group_name": "gap_summary",
+      "purpose": "Future inference of missing sections, weak evidence, weak visuals and reader-value gaps.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "content_gap_summary",
+        "evidence_gap_summary",
+        "visual_gap_summary",
+        "reader_value_gap_summary"
+      ],
+      "template_values": {
+        "content_gap_summary": "",
+        "evidence_gap_summary": "",
+        "visual_gap_summary": "",
+        "reader_value_gap_summary": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-011",
+      "group_name": "recommended_upgrade_direction",
+      "purpose": "Future inference of upgrade direction before revised packet generation and scoring.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "upgrade_strategy",
+        "section_improvement_direction",
+        "reference_strategy",
+        "visual_data_strategy"
+      ],
+      "template_values": {
+        "upgrade_strategy": "",
+        "section_improvement_direction": "",
+        "reference_strategy": "",
+        "visual_data_strategy": ""
+      }
+    },
+    {
+      "group_id": "AG07J-INF-012",
+      "group_name": "future_scoring_dependency",
+      "purpose": "Declare which inference fields must exist before actual AG07 scoring execution.",
+      "required_before_actual_scoring": true,
+      "value_population_allowed_in_ag07j": false,
+      "fields": [
+        "required_for_quality_score",
+        "required_for_visitor_value_score",
+        "required_for_combined_score",
+        "score_execution_allowed_after"
+      ],
+      "template_values": {
+        "required_for_quality_score": [],
+        "required_for_visitor_value_score": [],
+        "required_for_combined_score": [],
+        "score_execution_allowed_after": ""
+      }
+    }
+  ],
+  "inference_record_template": {
+    "template_only": true,
+    "actual_inference_record": false,
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "source_packet_status": "preview_only_dry_run",
+    "inference_status": "not_created_boundary_only",
+    "inference_values_populated": false,
+    "field_groups": {
+      "article_theme": {
+        "theme_label": "",
+        "topic_category": "",
+        "core_question": "",
+        "content_angle": ""
+      },
+      "reader_intent": {
+        "primary_reader_intent": "",
+        "secondary_reader_intent": "",
+        "intent_depth": "",
+        "reader_problem": ""
+      },
+      "target_audience": {
+        "audience_segment": "",
+        "assumed_prior_knowledge": "",
+        "reading_context": "",
+        "language_sensitivity": ""
+      },
+      "knowledge_depth": {
+        "required_depth_level": "",
+        "conceptual_layers_needed": [],
+        "background_needed": "",
+        "expertise_level": ""
+      },
+      "evidence_requirement": {
+        "claim_density": "",
+        "evidence_burden": "",
+        "source_sensitivity": "",
+        "verification_risk": ""
+      },
+      "reference_need": {
+        "minimum_reference_need": null,
+        "preferred_source_types": [],
+        "primary_source_need": "",
+        "reference_gap_notes": ""
+      },
+      "visual_data_need": {
+        "hero_visual_need": "",
+        "structured_visual_need": "",
+        "data_unit_need": "",
+        "accessibility_need": ""
+      },
+      "seo_search_intent_signals": {
+        "search_intent_type": "",
+        "primary_query_family": "",
+        "secondary_query_family": "",
+        "metadata_direction": ""
+      },
+      "originality_improvement_inference": {
+        "originality_gap": "",
+        "synthesis_opportunity": "",
+        "generic_content_risk": "",
+        "improvement_priority": ""
+      },
+      "gap_summary": {
+        "content_gap_summary": "",
+        "evidence_gap_summary": "",
+        "visual_gap_summary": "",
+        "reader_value_gap_summary": ""
+      },
+      "recommended_upgrade_direction": {
+        "upgrade_strategy": "",
+        "section_improvement_direction": "",
+        "reference_strategy": "",
+        "visual_data_strategy": ""
+      },
+      "future_scoring_dependency": {
+        "required_for_quality_score": [],
+        "required_for_visitor_value_score": [],
+        "required_for_combined_score": [],
+        "score_execution_allowed_after": ""
+      }
+    },
+    "quality_score_dependency": {
+      "score_calculation_allowed": false,
+      "scoring_stage": "future_stage_after_ag07j_and_revised_packet",
+      "ag07i_actual_scores_remain_null": true
+    }
+  },
+  "inference_workflow": [
+    {
+      "step_id": "AG07J-WF-001",
+      "step_name": "define_inference_store_contract",
+      "description": "Define article inference record family, field groups and storage boundary.",
+      "performed_in_ag07j": true,
+      "creates_actual_inference": false
+    },
+    {
+      "step_id": "AG07J-WF-002",
+      "step_name": "define_inference_record_template",
+      "description": "Define empty template only; do not create a live inference record.",
+      "performed_in_ag07j": true,
+      "creates_actual_inference": false
+    },
+    {
+      "step_id": "AG07J-WF-003",
+      "step_name": "create_preview_inference_record",
+      "description": "Future dry-run stage to create one preview-only inference record.",
+      "performed_in_ag07j": false,
+      "future_approval_required": true,
+      "creates_actual_inference": true
+    },
+    {
+      "step_id": "AG07J-WF-004",
+      "step_name": "append_inference_to_jsonl",
+      "description": "Future production persistence stage; explicitly blocked in AG07J.",
+      "performed_in_ag07j": false,
+      "future_approval_required": true,
+      "creates_actual_inference": true
+    },
+    {
+      "step_id": "AG07J-WF-005",
+      "step_name": "use_inference_for_actual_scoring",
+      "description": "Future scoring execution after inference and revised preview packet exist.",
+      "performed_in_ag07j": false,
+      "future_approval_required": true,
+      "creates_actual_inference": false
+    }
+  ],
+  "future_stage_handoff": [
+    {
+      "stage_id": "AG07K",
+      "title": "Article Inference Preview Record Dry Run",
+      "receives_from_ag07j": [
+        "record_contract",
+        "inference_field_groups",
+        "inference_record_template",
+        "inference_workflow"
+      ],
+      "allowed_scope": "create one preview-only inference record only with explicit approval",
+      "blocked_actions": [
+        "actual_score_calculation",
+        "production_jsonl_append",
+        "database_supabase_write",
+        "public_article_mutation",
+        "reference_insertion",
+        "visual_generation",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    }
+  ],
+  "actual_article_inference_record_created": false,
+  "article_inference_generated": false,
+  "article_inference_stored": false,
+  "article_inference_persisted": false,
+  "inference_value_population_performed": false,
+  "actual_score_calculation_performed": false,
+  "quality_score_calculated": false,
+  "visitor_value_score_calculated": false,
+  "combined_score_calculated": false,
+  "scoring_execution_performed": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "production_jsonl_append_performed": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
