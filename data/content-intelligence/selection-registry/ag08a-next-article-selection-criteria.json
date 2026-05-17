@@ -1,0 +1,121 @@
+{
+  "module_id": "AG08A",
+  "title": "Next Article Selection Criteria",
+  "status": "selection_criteria_created_not_applied",
+  "selection_not_performed_in_ag08a": true,
+  "recommended_selection_mode": "single_article_only",
+  "batch_mode_recommendation": "defer_batch_until_at_least_two_more_single_article_cycles_pass",
+  "target_count_for_next_cycle": 1,
+  "eligible_article_principles": [
+    "Existing static public article only.",
+    "Article should be within the AG06F long-form upgrade queue or current governed public article inventory.",
+    "Article should be safe to back up and mutate as one static file.",
+    "Article should not require backend, Auth, Supabase, API or database activation.",
+    "Article should benefit from reader-value improvement, clearer structure, stronger inference or long-form upgrade."
+  ],
+  "priority_dimensions": [
+    {
+      "dimension_id": "SEL-001",
+      "name": "visitor_value_potential",
+      "weight": 25,
+      "description": "Potential to help readers with practical insight, clarity or evergreen relevance."
+    },
+    {
+      "dimension_id": "SEL-002",
+      "name": "current_quality_gap",
+      "weight": 20,
+      "description": "Article has shortness, vague structure, weak explanatory value or lack of depth."
+    },
+    {
+      "dimension_id": "SEL-003",
+      "name": "category_importance",
+      "weight": 15,
+      "description": "Article belongs to a strategically important Drishvara theme."
+    },
+    {
+      "dimension_id": "SEL-004",
+      "name": "static_apply_safety",
+      "weight": 20,
+      "description": "Article file structure is suitable for controlled static apply and rollback."
+    },
+    {
+      "dimension_id": "SEL-005",
+      "name": "reference_visual_readiness",
+      "weight": 10,
+      "description": "Article can later support verified references and credited visual/data enrichment."
+    },
+    {
+      "dimension_id": "SEL-006",
+      "name": "repeatability_learning_value",
+      "weight": 10,
+      "description": "Article can test whether AG07 doctrine generalizes beyond the pilot article."
+    }
+  ],
+  "exclusion_rules": [
+    "Do not select more than one article in AG08B unless a separate batch boundary is approved.",
+    "Do not select an article requiring dynamic backend, Auth, Supabase, admin, subscriber or payment activation.",
+    "Do not select an article only because it is easy; select based on quality and visitor-value priority.",
+    "Do not select an article for reference insertion unless reference verification is separately approved.",
+    "Do not select an article for visual insertion unless image credit, alt text and caption gates are separately approved."
+  ],
+  "required_selection_output_for_ag08b": {
+    "one_target_article_path": true,
+    "selection_scorecard": true,
+    "reason_for_selection": true,
+    "blocked_actions_restated": true,
+    "ag08c_handoff_created": true
+  },
+  "planning_governance_only": true,
+  "repeatable_cycle_planning_created": true,
+  "roadmap_created": true,
+  "selection_criteria_created": true,
+  "next_stage_handoff_created": true,
+  "future_stage_map_created": true,
+  "batch_decision_recorded": true,
+  "evidence_consumed_only": true,
+  "next_cycle_started": false,
+  "next_article_selected": false,
+  "candidate_packet_created": false,
+  "production_packet_created": false,
+  "article_inference_generated": false,
+  "score_calculation_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "new_article_mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}

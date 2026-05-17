@@ -1,0 +1,246 @@
+{
+  "module_id": "AG08A",
+  "title": "Repeatable Article Upgrade Roadmap",
+  "status": "roadmap_created_not_started",
+  "generated_from": {
+    "ag07zReview": "data/content-intelligence/quality-reviews/ag07z-repeatable-production-readiness-closure.json",
+    "ag07zClosure": "data/content-intelligence/closure-registry/ag07z-controlled-chain-closure.json",
+    "ag07zNextCycle": "data/content-intelligence/run-registry/ag07z-next-cycle-recommendations.json",
+    "ag07zSchema": "data/content-intelligence/schema/repeatable-production-readiness-closure.schema.json",
+    "ag07zLearning": "data/content-intelligence/learning/ag07z-repeatable-production-readiness-learning.json",
+    "ag06fQueue": "data/quality/ag06f-long-form-production-queue.json",
+    "ag06eStandard": "data/quality/ag06e-long-form-article-standard.json"
+  },
+  "ag07z_closure_consumed": true,
+  "operating_model": {
+    "name": "single_article_repeatable_upgrade_cycle",
+    "default_mode": "one_article_at_a_time",
+    "batch_mode_status": "deferred",
+    "reason_for_single_article_mode": "AG07 proved one controlled apply; repeatability should be tested on two to three more single articles before batch controls are introduced."
+  },
+  "stage_map": [
+    {
+      "stage_id": "AG08A",
+      "title": "Repeatable Article Upgrade Cycle Planning",
+      "purpose": "Convert AG07 pilot closure into a repeatable operating model.",
+      "allowed": [
+        "roadmap",
+        "selection criteria",
+        "future stage map",
+        "blocked action doctrine"
+      ],
+      "blocked": [
+        "article mutation",
+        "reference insertion",
+        "visual generation",
+        "JSONL/database/Supabase/backend/publishing activation"
+      ],
+      "status_after_ag08a": "created_in_this_stage"
+    },
+    {
+      "stage_id": "AG08B",
+      "title": "Next Article Selection",
+      "purpose": "Select exactly one next article using AG08A criteria.",
+      "allowed": [
+        "read-only article inventory review",
+        "single target recommendation",
+        "selection evidence"
+      ],
+      "blocked": [
+        "article mutation",
+        "reference insertion",
+        "visual generation",
+        "publishing"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    },
+    {
+      "stage_id": "AG08C",
+      "title": "Article Upgrade Candidate Packet",
+      "purpose": "Create one candidate upgrade packet for the selected article.",
+      "allowed": [
+        "candidate packet",
+        "section plan",
+        "reference/visual need flags"
+      ],
+      "blocked": [
+        "public article mutation",
+        "production JSONL append",
+        "database write"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    },
+    {
+      "stage_id": "AG08D",
+      "title": "Inference, Reference and Visual Readiness Review",
+      "purpose": "Review article inference, reference needs, visual/data needs and quality risks before scoring/apply.",
+      "allowed": [
+        "readiness review",
+        "gap matrix",
+        "inference preview if separately approved"
+      ],
+      "blocked": [
+        "URL insertion",
+        "image insertion",
+        "article mutation"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    },
+    {
+      "stage_id": "AG08E",
+      "title": "Dry-Run Scoring and Improvement Plan",
+      "purpose": "Calculate dry-run quality/visitor-value scores and plan improvements.",
+      "allowed": [
+        "dry-run scoring",
+        "improvement plan"
+      ],
+      "blocked": [
+        "publish-ready approval",
+        "article mutation",
+        "production packet write"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    },
+    {
+      "stage_id": "AG08F",
+      "title": "Approval and Controlled Apply Plan",
+      "purpose": "Create the approval, backup, rollback and one-article apply checklist.",
+      "allowed": [
+        "approval checklist",
+        "backup plan",
+        "rollback plan"
+      ],
+      "blocked": [
+        "actual apply",
+        "publishing",
+        "runtime activation"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    },
+    {
+      "stage_id": "AG08G",
+      "title": "One-Article Controlled Apply",
+      "purpose": "Apply the approved upgrade to one static article only.",
+      "allowed": [
+        "one target article mutation",
+        "pre-apply backup"
+      ],
+      "blocked": [
+        "multi-article mutation",
+        "database/Supabase/backend/Auth activation"
+      ],
+      "status_after_ag08a": "planned_not_started_requires_explicit_approval"
+    },
+    {
+      "stage_id": "AG08H",
+      "title": "Post-Apply Audit",
+      "purpose": "Audit marker scope, backup integrity, rollback readiness and forbidden-system guards.",
+      "allowed": [
+        "audit",
+        "hash/marker checks",
+        "rollback readiness record"
+      ],
+      "blocked": [
+        "new mutation",
+        "publishing",
+        "runtime activation"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    },
+    {
+      "stage_id": "AG08Z",
+      "title": "Cycle Closure",
+      "purpose": "Close the AG08 article-upgrade cycle and record learnings.",
+      "allowed": [
+        "closure",
+        "learning",
+        "next-cycle recommendation"
+      ],
+      "blocked": [
+        "new mutation",
+        "publishing",
+        "runtime activation"
+      ],
+      "status_after_ag08a": "planned_not_started"
+    }
+  ],
+  "compulsory_gates": [
+    "Explicit approval before every stage that creates artifacts.",
+    "Exact target article path before any apply stage.",
+    "Backup before mutation.",
+    "One article only unless batch mode is separately approved.",
+    "Post-apply audit before closure.",
+    "Reference insertion requires verified URL approval.",
+    "Visual insertion requires credit, alt text and caption approval.",
+    "Static file change is not publishing approval.",
+    "Backend/Auth/Supabase/API/database/JSONL activation requires separate explicit approval."
+  ],
+  "evidence_to_reuse_from_ag07": [
+    "AG07Z repeatable doctrine",
+    "AG07Q audit model",
+    "AG07P backup-first apply model",
+    "AG07O controlled mutation plan",
+    "AG07N production-packet candidate pattern",
+    "AG07I scoring boundary and AG07K inference preview concept"
+  ],
+  "next_stage_handoff": {
+    "next_stage_id": "AG08B",
+    "next_stage_title": "Next Article Selection",
+    "explicit_approval_required": true,
+    "allowed_scope": "select one next article using AG08A selection criteria only",
+    "blocked_scope": "article mutation, reference insertion, visual generation, JSONL/database/Supabase/backend/Auth/publishing activation"
+  },
+  "planning_governance_only": true,
+  "repeatable_cycle_planning_created": true,
+  "roadmap_created": true,
+  "selection_criteria_created": true,
+  "next_stage_handoff_created": true,
+  "future_stage_map_created": true,
+  "batch_decision_recorded": true,
+  "evidence_consumed_only": true,
+  "next_cycle_started": false,
+  "next_article_selected": false,
+  "candidate_packet_created": false,
+  "production_packet_created": false,
+  "article_inference_generated": false,
+  "score_calculation_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "new_article_mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}
