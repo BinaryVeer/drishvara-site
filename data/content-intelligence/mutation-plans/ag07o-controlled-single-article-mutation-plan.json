@@ -1,0 +1,281 @@
+{
+  "module_id": "AG07O",
+  "plan_id": "ag07o-controlled-mutation-plan:ag07n-production-candidate:ag07m-improved-preview:ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "title": "Controlled Single-Article Mutation Plan",
+  "status": "controlled_single_article_mutation_plan_created",
+  "plan_only": true,
+  "candidate_id": "ag07n-production-candidate:ag07m-improved-preview:ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "generated_from": {
+    "ag07nReview": "data/content-intelligence/quality-reviews/ag07n-production-packet-candidate.json",
+    "ag07nCandidate": "data/content-intelligence/content-packets/ag07n-production-packet-candidate.json",
+    "ag07nReadiness": "data/content-intelligence/quality-registry/ag07n-production-packet-candidate-readiness.json",
+    "ag07nSchema": "data/content-intelligence/schema/production-packet-candidate.schema.json",
+    "ag07nLearning": "data/content-intelligence/learning/ag07n-production-packet-candidate-learning.json",
+    "ag07mImprovedPacket": "data/content-intelligence/content-packets/ag07m-improved-preview-packet.json",
+    "ag07lScoring": "data/content-intelligence/quality-registry/ag07l-dry-run-scoring-result.json",
+    "ag07kInferenceRecord": "data/content-intelligence/inference-records/ag07k-preview-only-article-inference-record.json",
+    "ag06jReferenceStandard": "data/content-intelligence/reference-registry/reference-source-credibility-standard.json",
+    "ag06kStoreManifest": "data/content-intelligence/run-registry/jsonl-first-content-intelligence-store-manifest.json",
+    "ag06lApprovalRegister": "data/content-intelligence/publish-queue/publish-queue-approval-state-register.json"
+  },
+  "source_candidate_snapshot": {
+    "candidate_id": "ag07n-production-candidate:ag07m-improved-preview:ag07l-revised-preview:ag07c_preview_only_packet_001",
+    "status": "production_packet_candidate_created",
+    "candidate_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false
+  },
+  "target_article_requirements": {
+    "one_article_only": true,
+    "multiple_article_apply_allowed": false,
+    "target_article_path": "",
+    "target_category": "",
+    "target_article_selection_status": "pending_required_before_ag07p",
+    "target_article_path_required_before_ag07p": true,
+    "target_article_must_exist_before_apply": true,
+    "target_article_backup_required_before_apply": true,
+    "target_article_path_population_allowed_in_ag07o": false,
+    "target_article_file_read_performed": false,
+    "target_article_file_write_performed": false,
+    "file_edit_performed": false
+  },
+  "reference_insertion_plan": {
+    "plan_only": true,
+    "reference_standard_source": "AG06J",
+    "minimum_reference_required": 2,
+    "candidate_reference_slots_available": 5,
+    "source_quality_standard_present": true,
+    "approved_reference_urls": [],
+    "candidate_reference_urls": [],
+    "rejected_reference_urls": [],
+    "reference_url_population_allowed_in_ag07o": false,
+    "reference_url_population_performed": false,
+    "approved_reference_url_population_performed": false,
+    "reference_insertion_allowed_in_ag07o": false,
+    "reference_insertion_performed": false,
+    "required_before_ag07p": [
+      "two_approved_reference_urls",
+      "source_credibility_status",
+      "link_health_status",
+      "reference_block_insertion_point",
+      "rollback_safe_reference_block"
+    ],
+    "insertion_plan_status": "defined_pending_reference_population_and_approval"
+  },
+  "visual_image_credit_plan": {
+    "plan_only": true,
+    "hero_visual_required": true,
+    "structured_visual_or_data_unit_recommended": true,
+    "image_credit_block_required": true,
+    "alt_text_required": true,
+    "caption_required": true,
+    "candidate_visual_asset_path": "",
+    "candidate_visual_asset_url": "",
+    "candidate_image_credit": "",
+    "candidate_alt_text": "",
+    "candidate_caption": "",
+    "visual_generation_allowed_in_ag07o": false,
+    "visual_generation_performed": false,
+    "visual_asset_generation_performed": false,
+    "image_insertion_allowed_in_ag07o": false,
+    "image_insertion_performed": false,
+    "data_unit_generation_performed": false,
+    "caption_alt_credit_population_performed": false,
+    "required_before_ag07p": [
+      "approved_visual_or_confirmed_no_new_visual",
+      "alt_text",
+      "caption",
+      "image_credit_or_attribution",
+      "mobile_safe_visual_layout"
+    ],
+    "visual_plan_status": "defined_pending_asset_selection_and_credit_population"
+  },
+  "backup_rollback_plan": {
+    "plan_only": true,
+    "backup_required_before_apply": true,
+    "backup_file_path_pattern": "archive/ag07p-backups/<article-slug>-before-ag07p.html",
+    "backup_file_created_in_ag07o": false,
+    "rollback_plan_required": true,
+    "rollback_method": "restore_article_from_pre_apply_backup",
+    "rollback_trigger_conditions": [
+      "article_layout_break",
+      "reference_block_invalid",
+      "visual_or_credit_invalid",
+      "mobile_rendering_failure",
+      "post_apply_validation_failure"
+    ],
+    "rollback_test_performed": false,
+    "file_copy_performed": false,
+    "file_move_performed": false,
+    "file_delete_performed": false,
+    "file_write_performed": false,
+    "rollback_plan_status": "defined_pending_backup_creation_in_ag07p"
+  },
+  "static_live_mutation_checklist": [
+    {
+      "item_id": "AG07O-MUT-001",
+      "item_name": "confirm_target_article_path",
+      "required_before_ag07p": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    },
+    {
+      "item_id": "AG07O-MUT-002",
+      "item_name": "create_pre_apply_backup",
+      "required_before_ag07p": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    },
+    {
+      "item_id": "AG07O-MUT-003",
+      "item_name": "replace_or_insert_article_body_from_approved_packet",
+      "required_before_ag07p": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    },
+    {
+      "item_id": "AG07O-MUT-004",
+      "item_name": "insert_approved_reference_block",
+      "required_before_ag07p": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    },
+    {
+      "item_id": "AG07O-MUT-005",
+      "item_name": "insert_or_confirm_visual_image_credit_block",
+      "required_before_ag07p": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    },
+    {
+      "item_id": "AG07O-MUT-006",
+      "item_name": "update_metadata_if_approved",
+      "required_before_ag07p": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    },
+    {
+      "item_id": "AG07O-MUT-007",
+      "item_name": "run_post_apply_validation",
+      "required_before_ag07q": true,
+      "passed_in_ag07o": false,
+      "apply_performed_in_ag07o": false
+    }
+  ],
+  "post_apply_audit_checklist": [
+    {
+      "audit_id": "AG07O-AUD-001",
+      "audit_name": "article_file_exists_and_loads",
+      "required_after_ag07p": true,
+      "completed_in_ag07o": false
+    },
+    {
+      "audit_id": "AG07O-AUD-002",
+      "audit_name": "reference_block_has_two_approved_links",
+      "required_after_ag07p": true,
+      "completed_in_ag07o": false
+    },
+    {
+      "audit_id": "AG07O-AUD-003",
+      "audit_name": "image_credit_alt_caption_present",
+      "required_after_ag07p": true,
+      "completed_in_ag07o": false
+    },
+    {
+      "audit_id": "AG07O-AUD-004",
+      "audit_name": "mobile_layout_safe",
+      "required_after_ag07p": true,
+      "completed_in_ag07o": false
+    },
+    {
+      "audit_id": "AG07O-AUD-005",
+      "audit_name": "no_unapproved_backend_auth_supabase_activation",
+      "required_after_ag07p": true,
+      "completed_in_ag07o": false
+    },
+    {
+      "audit_id": "AG07O-AUD-006",
+      "audit_name": "rollback_possible_from_backup",
+      "required_after_ag07p": true,
+      "completed_in_ag07o": false
+    }
+  ],
+  "ag07p_handoff": {
+    "next_stage_id": "AG07P",
+    "next_stage_title": "One-Article Controlled Apply",
+    "explicit_approval_required": true,
+    "ag07p_allowed_scope_if_approved_later": "apply one approved candidate to one selected static article only",
+    "ag07p_preconditions": [
+      "target_article_path_populated",
+      "human_apply_approval_recorded",
+      "pre_apply_backup_created",
+      "two_approved_references_available",
+      "visual_or_no-new-visual_decision_available",
+      "image_credit_alt_caption_ready",
+      "rollback_plan_ready",
+      "post_apply_audit_checklist_ready"
+    ],
+    "ag07p_still_blocked_without_explicit_approval": true
+  },
+  "mutation_plan_readiness": {
+    "plan_created": true,
+    "ready_for_ag07p_apply": false,
+    "reason": "Plan is defined, but target article path, human apply approval, reference URLs, visual/credit fields and backup creation remain pending."
+  },
+  "approval_controlled_single_article_mutation_plan_only": true,
+  "approval_plan_created": true,
+  "mutation_plan_created": true,
+  "target_article_requirements_created": true,
+  "reference_insertion_plan_created": true,
+  "visual_image_credit_plan_created": true,
+  "backup_rollback_plan_created": true,
+  "static_live_mutation_checklist_created": true,
+  "post_apply_audit_checklist_created": true,
+  "ag07p_handoff_created": true,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "human_apply_approval_performed": false,
+  "actual_public_mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_packet_created": false,
+  "actual_production_packet_created": false,
+  "production_content_generated": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "dry_run_score_recalculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "production_score_record_created": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
