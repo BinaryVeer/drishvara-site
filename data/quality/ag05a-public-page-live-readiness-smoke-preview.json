@@ -1,0 +1,62 @@
+{
+  "preview_id": "AG05A_PUBLIC_PAGE_LIVE_READINESS_SMOKE_PREVIEW",
+  "module_id": "AG05A",
+  "preview_only": true,
+  "status": "preview_public_page_live_readiness_smoke_audit",
+  "summary": {
+    "scanned_html_file_count": 86,
+    "homepage_detected": true,
+    "homepage_count": 1,
+    "article_page_count_from_static_scan": 77,
+    "article_count_from_ag03z": 72,
+    "article_count_from_ag04z": 72,
+    "ag03_reference_link_count_from_ag03z": 144,
+    "ag04_visual_credit_width_closed": true,
+    "ag03_reference_scaling_closed": true,
+    "homepage_favicon_signal_present": true,
+    "homepage_logo_signal_present": true,
+    "homepage_navigation_signal_present": true,
+    "signin_join_candidate_count": 85,
+    "signin_join_candidates_with_navigation": 85,
+    "signin_join_candidates_with_home_return": 85,
+    "article_pages_with_ag03_reference_links": 72,
+    "article_pages_with_primary_image_signal": 77,
+    "article_pages_with_image_credit_signal": 77,
+    "article_pages_with_reading_width_signal": 77,
+    "backend_or_auth_signal_file_count": 0,
+    "issue_queue_count": 1,
+    "issue_type_counts": {
+      "homepage_missing": 0,
+      "favicon_signal_missing": 0,
+      "navigation_signal_missing": 0,
+      "signin_join_navigation_needs_manual_review": 0,
+      "article_count_below_expected": 0,
+      "backend_or_auth_activation_signal_found": 0,
+      "ag03_or_ag04_closure_drift": 0,
+      "manual_live_review_required": 1
+    },
+    "audit_only_no_mutation": true,
+    "ready_for_ag05b_manual_live_review_record": true
+  },
+  "issue_queue": [
+    {
+      "issue_type": "manual_live_review_required",
+      "severity": "normal",
+      "note": "AG05A is a static audit. Manual/live review is still required for visual rendering, clickability, favicon display, and sign-in/join navigation behaviour."
+    }
+  ],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG05B",
+    "title": "Manual Live Page Smoke Review Result Record",
+    "allowed": true,
+    "only_after_ag05a_validation": true,
+    "scope": "record manual/live checks for homepage, article pages, favicon, navigation, sign-in/join page and public behaviour",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}

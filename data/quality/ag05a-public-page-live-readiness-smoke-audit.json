@@ -1,0 +1,77 @@
+{
+  "module_id": "AG05A",
+  "module_title": "Public Page and Live-Readiness Smoke Audit",
+  "phase": "Public Page / Live-Readiness / Navigation Smoke Governance",
+  "status": "audit_only",
+  "depends_on": [
+    "AG04Z",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "favicon_mutation_enabled": false,
+  "navigation_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag03z_closure": "data/editorial/ag03z-final-verified-reference-closure-audit.json",
+    "ag04z_closure": "data/editorial/ag04z-article-visual-credit-width-governance-closure.json"
+  },
+  "expected": {
+    "ag03_article_count": 72,
+    "ag03_reference_link_count": 144,
+    "ag04_article_count": 72,
+    "homepage_candidates": [
+      "index.html"
+    ],
+    "minimum_article_pages": 72
+  },
+  "outputs": {
+    "audit": "data/editorial/ag05a-public-page-live-readiness-smoke-audit.json",
+    "preview": "data/quality/ag05a-public-page-live-readiness-smoke-preview.json"
+  },
+  "issue_types": [
+    "homepage_missing",
+    "favicon_signal_missing",
+    "navigation_signal_missing",
+    "signin_join_navigation_needs_manual_review",
+    "article_count_below_expected",
+    "backend_or_auth_activation_signal_found",
+    "ag03_or_ag04_closure_drift",
+    "manual_live_review_required"
+  ],
+  "recommended_next_stage": {
+    "module_id": "AG05B",
+    "title": "Manual Live Page Smoke Review Result Record",
+    "allowed": true,
+    "only_after_ag05a_validation": true,
+    "scope": "record manual/live checks for homepage, article pages, favicon, navigation, sign-in/join page and public behaviour",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
