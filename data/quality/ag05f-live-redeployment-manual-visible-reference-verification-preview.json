@@ -1,0 +1,72 @@
+{
+  "preview_id": "AG05F_LIVE_REDEPLOYMENT_MANUAL_VISIBLE_REFERENCE_VERIFICATION_PREVIEW",
+  "module_id": "AG05F",
+  "preview_only": true,
+  "status": "live_visible_reference_verification_passed",
+  "summary": {
+    "manual_live_verification_completed": true,
+    "observed_commit": "20a3b37",
+    "sample_article_path": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+    "ag05d_visible_block_count": 1,
+    "ag03_reference_link_count": 2,
+    "ag05d_r1_neutralized_count": 4,
+    "visible_ar01_placeholder_count": 0,
+    "live_verification_passed": true,
+    "correction_required": false,
+    "backend_auth_supabase_no_activation_passed": true,
+    "audit_only_no_mutation": true,
+    "next_stage_id": "AG05Z"
+  },
+  "observations": [
+    {
+      "observation_id": "AG05F_OBS_001",
+      "review_area": "deployment",
+      "status": "passed_manual_live_verification",
+      "observation": "Live site is serving the latest verified governance state at commit 20a3b37.",
+      "correction_required": false
+    },
+    {
+      "observation_id": "AG05F_OBS_002",
+      "review_area": "visible_verified_references",
+      "status": "passed_manual_live_verification",
+      "observation": "Live sample article contains one AG05D visible reference block and two AG03 verified reference links.",
+      "evidence": {
+        "ag05d_visible_block_count": 1,
+        "ag03_reference_link_count": 2
+      },
+      "correction_required": false
+    },
+    {
+      "observation_id": "AG05F_OBS_003",
+      "review_area": "placeholder_neutralization",
+      "status": "passed_manual_live_verification",
+      "observation": "Old AR01 placeholder references are neutralized/hidden and no visible AR01 placeholder remains.",
+      "evidence": {
+        "ag05d_r1_neutralized_count": 4,
+        "visible_ar01_placeholder_count": 0
+      },
+      "correction_required": false
+    },
+    {
+      "observation_id": "AG05F_OBS_004",
+      "review_area": "backend_auth_supabase_no_activation",
+      "status": "passed_manual_live_verification",
+      "observation": "No backend/Auth/Supabase activation is introduced by AG05D-R1/AG05E-R1/AG05F.",
+      "correction_required": false
+    }
+  ],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG05Z",
+    "title": "Public Page and Live-Readiness Smoke Governance Closure",
+    "allowed": true,
+    "only_after_ag05f_validation": true,
+    "scope": "close AG05 public page/live-readiness smoke governance",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_action_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
