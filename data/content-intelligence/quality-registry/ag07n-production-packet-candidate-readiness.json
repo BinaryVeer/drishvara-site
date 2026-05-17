@@ -1,0 +1,116 @@
+{
+  "module_id": "AG07N",
+  "title": "Production Packet Candidate Readiness Record",
+  "status": "candidate_readiness_record_created",
+  "preview_only": true,
+  "production_record": false,
+  "candidate_id": "ag07n-production-candidate:ag07m-improved-preview:ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "baseline_scores": {
+    "source": "AG07L",
+    "quality_score": 62.4,
+    "visitor_value_score": 69.8,
+    "combined_score": 66.1,
+    "publish_ready_recommended": false,
+    "threshold_reason": "Dry-run scores are below threshold and reference/visual readiness remains incomplete."
+  },
+  "improvement_actions_carried_forward": [
+    {
+      "action_id": "AG07M-ACTION-001",
+      "action_name": "reference_readiness_improvement",
+      "priority": "critical",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-002",
+      "action_name": "evidence_alignment_improvement",
+      "priority": "critical",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-003",
+      "action_name": "section_depth_improvement",
+      "priority": "high",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-004",
+      "action_name": "visual_data_accessibility_improvement",
+      "priority": "high",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-005",
+      "action_name": "visitor_value_improvement",
+      "priority": "high",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-006",
+      "action_name": "static_live_readiness_forward_compatibility",
+      "priority": "medium",
+      "production_execution_performed": false
+    }
+  ],
+  "readiness_gates": {
+    "reference_candidate_plan_ready": true,
+    "visual_candidate_plan_ready": true,
+    "static_live_plan_fields_present": true,
+    "approval_checklist_present": true,
+    "production_packet_created": false,
+    "publish_ready_approved": false,
+    "public_mutation_allowed": false
+  },
+  "blocking_items_before_ag07p_apply": [
+    "target_article_path_not_selected",
+    "reference_urls_not_populated",
+    "reference_credibility_not_approved",
+    "visual_assets_not_populated",
+    "caption_alt_credit_not_populated",
+    "publish_ready_not_approved",
+    "rollback_plan_not_finalized"
+  ],
+  "next_stage_recommendation": {
+    "module_id": "AG07O",
+    "title": "Approval + Controlled Single-Article Mutation Plan",
+    "allowed_scope": "approval and mutation plan only; no apply unless separately approved"
+  },
+  "production_packet_candidate_only": true,
+  "production_packet_candidate_record_created": true,
+  "actual_production_packet_created": false,
+  "production_packet_created": false,
+  "production_content_generated": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "dry_run_score_recalculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "production_score_record_created": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "static_live_mutation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
