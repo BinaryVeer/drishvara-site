@@ -1,0 +1,197 @@
+{
+  "schema_id": "drishvara/ag06l/publish-queue-approval-state.schema.json",
+  "module_id": "AG06L",
+  "title": "Publish Queue and Approval State Schema",
+  "status": "schema_only",
+  "description": "Schema for future publish queue state, approval checkpoints, role labels, transition rules and publish-readiness gates. This schema does not authorize publishing or public mutation.",
+  "required_top_level_fields": [
+    "approval_queue_id",
+    "source_queue_id",
+    "source_article_path",
+    "current_state",
+    "approval_state",
+    "publish_ready",
+    "required_approval_checkpoints",
+    "required_gate_groups",
+    "mutation_controls"
+  ],
+  "allowed_states": [
+    "queued_for_upgrade_review",
+    "content_packet_planning_only",
+    "content_packet_generation_awaiting_explicit_approval",
+    "content_packet_drafted_in_future_stage",
+    "reference_review_pending",
+    "visual_review_pending",
+    "quality_review_pending",
+    "visitor_value_review_pending",
+    "editorial_review_pending",
+    "approval_required",
+    "approved_for_publish_readiness_review",
+    "publish_ready_locked_in_future_stage",
+    "published_in_later_approved_stage",
+    "revision_required",
+    "rejected",
+    "paused",
+    "archived_by_explicit_approval_only"
+  ],
+  "allowed_approval_states": [
+    "not_approved",
+    "pending_review",
+    "revision_required",
+    "approved_for_next_stage",
+    "approved_for_publish_readiness_review",
+    "publish_ready_locked_in_future_stage",
+    "rejected",
+    "paused"
+  ],
+  "approval_checkpoints": [
+    "content_packet_generation_permission",
+    "reference_approval",
+    "visual_data_approval",
+    "quality_score_approval",
+    "visitor_value_score_approval",
+    "editorial_approval",
+    "final_publish_approval"
+  ],
+  "approval_role_ids": [
+    "content_operator",
+    "reference_reviewer",
+    "visual_reviewer",
+    "quality_reviewer",
+    "editorial_reviewer",
+    "founder_or_authorized_publisher"
+  ],
+  "publish_readiness_gate_groups": [
+    "long_form_content_standard",
+    "reference_source_credibility",
+    "visual_data_infographic",
+    "jsonl_store_auditability",
+    "public_mutation_and_publish_control"
+  ],
+  "transition_rules": [
+    {
+      "from_state": "queued_for_upgrade_review",
+      "to_state": "content_packet_planning_only",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "AG06H planning already records planning-only status"
+    },
+    {
+      "from_state": "content_packet_planning_only",
+      "to_state": "content_packet_generation_awaiting_explicit_approval",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "AG07 or separately approved content packet generation stage"
+    },
+    {
+      "from_state": "content_packet_generation_awaiting_explicit_approval",
+      "to_state": "content_packet_drafted_in_future_stage",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "explicit user approval plus generator safeguards"
+    },
+    {
+      "from_state": "content_packet_drafted_in_future_stage",
+      "to_state": "reference_review_pending",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "reference candidate records and review workflow"
+    },
+    {
+      "from_state": "reference_review_pending",
+      "to_state": "visual_review_pending",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "approved reference minimum and rejected-source trail"
+    },
+    {
+      "from_state": "visual_review_pending",
+      "to_state": "quality_review_pending",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "visual/data requirements and rights-credit readiness"
+    },
+    {
+      "from_state": "quality_review_pending",
+      "to_state": "visitor_value_review_pending",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "quality score threshold"
+    },
+    {
+      "from_state": "visitor_value_review_pending",
+      "to_state": "editorial_review_pending",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "visitor-value score threshold"
+    },
+    {
+      "from_state": "editorial_review_pending",
+      "to_state": "approved_for_publish_readiness_review",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "editorial approval"
+    },
+    {
+      "from_state": "approved_for_publish_readiness_review",
+      "to_state": "publish_ready_locked_in_future_stage",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "all publish-readiness gates pass"
+    },
+    {
+      "from_state": "publish_ready_locked_in_future_stage",
+      "to_state": "published_in_later_approved_stage",
+      "allowed_in_ag06l": false,
+      "future_gate_required": "separate approved public upgrade/publish patch"
+    }
+  ],
+  "future_activation_rules": [
+    "No queue item can become publish_ready without all required gate groups passing.",
+    "No queue item can be published without a later explicit public upgrade/publish patch.",
+    "No current public article HTML can be mutated through AG06L.",
+    "No reference URL insertion can occur through AG06L.",
+    "No JSONL append can occur through AG06L.",
+    "No backend/Auth/Supabase activation can occur through AG06L."
+  ],
+  "publish_queue_transition_allowed_in_ag06l": false,
+  "publication_allowed_in_ag06l": false,
+  "public_mutation_allowed_in_ag06l": false,
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "verified_reference_population_performed": false,
+  "candidate_reference_population_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "scaffold_import_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false,
+  "jsonl_file_created": false,
+  "jsonl_production_record_created": false,
+  "jsonl_append_performed": false,
+  "jsonl_import_performed": false,
+  "database_write_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "publish_queue_transition_performed": false,
+  "publication_approval_granted": false
+}

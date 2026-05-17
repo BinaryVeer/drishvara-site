@@ -1,0 +1,199 @@
+{
+  "module_id": "AG06L",
+  "preview_only": true,
+  "summary": {
+    "source_queue_entry_count_from_ag06f": 77,
+    "approval_queue_entry_count": 77,
+    "state_count": 17,
+    "approval_checkpoint_count": 7,
+    "approval_role_count": 6,
+    "transition_rule_count": 11,
+    "publish_readiness_gate_group_count": 5,
+    "queue_approval_schema_only": true,
+    "approval_state_changed": false,
+    "publish_ready_set": false,
+    "publication_approval_granted": false,
+    "public_article_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "content_packet_generation_allowed": false,
+    "jsonl_append_allowed": false,
+    "database_write_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "public_publishing_allowed": false,
+    "next_stage_id": "AG06Z"
+  },
+  "state_model_preview": [
+    {
+      "state_id": "queued_for_upgrade_review",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "content_packet_planning_only",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "content_packet_generation_awaiting_explicit_approval",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "content_packet_drafted_in_future_stage",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "reference_review_pending",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "visual_review_pending",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "quality_review_pending",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "visitor_value_review_pending",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "editorial_review_pending",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "approval_required",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "approved_for_publish_readiness_review",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "publish_ready_locked_in_future_stage",
+      "publish_ready": true,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "published_in_later_approved_stage",
+      "publish_ready": true,
+      "public_mutation_allowed": "separate_public_upgrade_patch_required"
+    },
+    {
+      "state_id": "revision_required",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "rejected",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "paused",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "state_id": "archived_by_explicit_approval_only",
+      "publish_ready": false,
+      "public_mutation_allowed": false
+    }
+  ],
+  "approval_checkpoints_preview": [
+    {
+      "checkpoint_id": "content_packet_generation_permission",
+      "current_status": "blocked_pending_explicit_approval"
+    },
+    {
+      "checkpoint_id": "reference_approval",
+      "current_status": "pending_future_review"
+    },
+    {
+      "checkpoint_id": "visual_data_approval",
+      "current_status": "pending_future_review"
+    },
+    {
+      "checkpoint_id": "quality_score_approval",
+      "current_status": "pending_future_review"
+    },
+    {
+      "checkpoint_id": "visitor_value_score_approval",
+      "current_status": "pending_future_review"
+    },
+    {
+      "checkpoint_id": "editorial_approval",
+      "current_status": "pending_future_review"
+    },
+    {
+      "checkpoint_id": "final_publish_approval",
+      "current_status": "blocked_pending_explicit_approval"
+    }
+  ],
+  "first_approval_queue_entries": [
+    {
+      "approval_queue_id": "ag06l_publish_approval_001",
+      "source_article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "current_state": "queued_for_upgrade_review",
+      "approval_state": "not_approved",
+      "publish_ready": false,
+      "publication_allowed": false
+    },
+    {
+      "approval_queue_id": "ag06l_publish_approval_002",
+      "source_article_path": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "current_state": "queued_for_upgrade_review",
+      "approval_state": "not_approved",
+      "publish_ready": false,
+      "publication_allowed": false
+    },
+    {
+      "approval_queue_id": "ag06l_publish_approval_003",
+      "source_article_path": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "current_state": "queued_for_upgrade_review",
+      "approval_state": "not_approved",
+      "publish_ready": false,
+      "publication_allowed": false
+    },
+    {
+      "approval_queue_id": "ag06l_publish_approval_004",
+      "source_article_path": "articles/media/ethics-ai-generated-content-journalism.html",
+      "current_state": "queued_for_upgrade_review",
+      "approval_state": "not_approved",
+      "publish_ready": false,
+      "publication_allowed": false
+    },
+    {
+      "approval_queue_id": "ag06l_publish_approval_005",
+      "source_article_path": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "current_state": "queued_for_upgrade_review",
+      "approval_state": "not_approved",
+      "publish_ready": false,
+      "publication_allowed": false
+    }
+  ],
+  "no_mutation_summary": {
+    "approval_state_changed": false,
+    "publish_ready_set": false,
+    "publication_approval_granted": false,
+    "public_article_mutation_performed": false,
+    "reference_insertion_performed": false,
+    "content_packet_generation_performed": false,
+    "jsonl_append_performed": false,
+    "scaffold_import_performed": false,
+    "public_publishing_performed": false,
+    "backend_activation_performed": false,
+    "supabase_enabled": false,
+    "auth_enabled": false
+  },
+  "next_stage_id": "AG06Z"
+}
