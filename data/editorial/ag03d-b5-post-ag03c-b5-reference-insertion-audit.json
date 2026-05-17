@@ -1,0 +1,577 @@
+{
+  "audit_id": "AG03D_B5_POST_AG03C_B5_REFERENCE_INSERTION_AUDIT",
+  "module_id": "AG03D-B5",
+  "status": "post_ag03c_b5_reference_insertion_audit_completed",
+  "generated_at": "2026-05-17T02:45:21.937Z",
+  "mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "article_text_mutation_performed": false,
+  "article_image_mutation_performed": false,
+  "image_credit_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "new_reference_insertion_performed": false,
+  "reference_candidate_population_performed": false,
+  "reference_approval_performed": false,
+  "external_fetch_performed_by_script": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "source_context": {
+    "ag03a_queue_entry_count": 72,
+    "ag03a_batch_count": 6,
+    "completed_article_count_before_batch_5": 48,
+    "ag03c_b5_apply_processed_article_count": 12,
+    "ag03c_b5_apply_inserted_reference_count": 24
+  },
+  "summary": {
+    "audited_batch_5_article_count": 12,
+    "expected_batch_5_article_count": 12,
+    "confirmed_ag03c_b5_reference_link_count": 24,
+    "expected_batch_5_reference_count": 24,
+    "entries_with_two_ag03c_b5_links": 12,
+    "entries_with_one_ag03c_b5_block": 12,
+    "entries_with_all_approved_urls": 12,
+    "entries_with_ag03c_b5_checked_marker": 12,
+    "ag03c_b5_apply_and_live_scan_reconcile": true,
+    "completed_total_article_count_after_batch_5": 60,
+    "completed_total_reference_count_after_batch_5": 120,
+    "remaining_reference_queue_count": 12,
+    "expected_remaining_reference_queue_count": 12,
+    "next_batch_id": "AG03B_BATCH_06",
+    "next_batch_found": true,
+    "next_batch_article_count": 12,
+    "ready_for_ag03b_batch_6": true
+  },
+  "completed_batch_5_articles": [
+    {
+      "article_path": "articles/sports/evolution-sports-analytics-athlete-performance-strategy.html",
+      "title": "The Evolution of Sports Analytics: Transforming Athlete Performance and Strategy",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7661681/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/"
+      ],
+      "found_approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7661681/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7661681/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/evolution-sports-analytics-player-psychology.html",
+      "title": "The Evolution of Sports Analytics: Beyond Numbers to Player Psychology",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://bjsm.bmj.com/content/53/11/667",
+        "https://bjsm.bmj.com/content/59/21/1459"
+      ],
+      "found_approved_urls": [
+        "https://bjsm.bmj.com/content/53/11/667",
+        "https://bjsm.bmj.com/content/59/21/1459"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://bjsm.bmj.com/content/53/11/667",
+        "https://bjsm.bmj.com/content/59/21/1459"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/evolution-sports-analytics-transforming-strategies-performance.html",
+      "title": "The Evolution of Sports Analytics: Transforming Team Strategies and Player Performance",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7661681/",
+        "https://www.mdpi.com/2076-3417/13/23/12965"
+      ],
+      "found_approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7661681/",
+        "https://www.mdpi.com/2076-3417/13/23/12965"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7661681/",
+        "https://www.mdpi.com/2076-3417/13/23/12965"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/evolution-tactical-analytics-football-performance-fan-engagement.html",
+      "title": "The Evolution of Tactical Analytics in Football: Implications for Team Performance and Fan Engagement",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.statsperform.com/resource/exploring-the-evolution-of-sport-data-from-performance-analysis-to-fan-engagement/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11549348/"
+      ],
+      "found_approved_urls": [
+        "https://www.statsperform.com/resource/exploring-the-evolution-of-sport-data-from-performance-analysis-to-fan-engagement/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11549348/"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.statsperform.com/resource/exploring-the-evolution-of-sport-data-from-performance-analysis-to-fan-engagement/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11549348/"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/legacy-transformation-historical-arc-global-sports-future.html",
+      "title": "Legacy and Transformation: The Historical Arc of Global Sports and Its Future Trajectories",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.olympics.com/ioc/olympic-agenda-2020-plus-5",
+        "https://www.unesco.org/en/articles/sports-development"
+      ],
+      "found_approved_urls": [
+        "https://www.olympics.com/ioc/olympic-agenda-2020-plus-5",
+        "https://www.unesco.org/en/articles/sports-development"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.olympics.com/ioc/olympic-agenda-2020-plus-5",
+        "https://www.unesco.org/en/articles/sports-development"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/mental-health-initiatives-professional-sports-2026.html",
+      "title": "Mental Health Initiatives Taking Root in Professional Sports",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.olympics.com/ioc/news/ioc-announces-comprehensive-mental-health-support-for-athletes-at-milano-cortina-2026",
+        "https://bjsm.bmj.com/content/59/21/1459"
+      ],
+      "found_approved_urls": [
+        "https://www.olympics.com/ioc/news/ioc-announces-comprehensive-mental-health-support-for-athletes-at-milano-cortina-2026",
+        "https://bjsm.bmj.com/content/59/21/1459"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.olympics.com/ioc/news/ioc-announces-comprehensive-mental-health-support-for-athletes-at-milano-cortina-2026",
+        "https://bjsm.bmj.com/content/59/21/1459"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/revolutionizing-athlete-recovery-ai-wearable-tech.html",
+      "title": "Revolutionizing Athlete Recovery: The Role of AI and Wearable Tech",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11151756/"
+      ],
+      "found_approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11151756/"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11151756/"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/sports/role-of-data-analytics-in-next-generation-athlete-performance.html",
+      "title": "The Role of Data Analytics in Shaping Next-Generation Athlete Performance",
+      "category": "sports",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/",
+        "https://www.mdpi.com/2076-3417/14/8/3361"
+      ],
+      "found_approved_urls": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/",
+        "https://www.mdpi.com/2076-3417/14/8/3361"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7859639/",
+        "https://www.mdpi.com/2076-3417/14/8/3361"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/from-multipolarity-to-new-world-orders.html",
+      "title": "From Multipolarity to New World Orders: Historical Comparisons and Strategic Implications for 21st Century Geopolitics",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_urls": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.chathamhouse.org/2025/03/competing-visions-international-order/01-fracturing-us-led-liberal-international-order",
+        "https://www.swp-berlin.org/publikation/multipolarities-the-world-order-visions-of-others"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/future-russia-west-relations-2026.html",
+      "title": "The Future of Russia-West Relations: Beyond Sanctions and Retaliation",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.chathamhouse.org/2025/07/understanding-russias-black-sea-strategy",
+        "https://www.nato-pa.int/document/2025-013-dsc-25-e-natos-future-russia-strategy-patterson-report"
+      ],
+      "found_approved_urls": [
+        "https://www.chathamhouse.org/2025/07/understanding-russias-black-sea-strategy",
+        "https://www.nato-pa.int/document/2025-013-dsc-25-e-natos-future-russia-strategy-patterson-report"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.chathamhouse.org/2025/07/understanding-russias-black-sea-strategy",
+        "https://www.nato-pa.int/document/2025-013-dsc-25-e-natos-future-russia-strategy-patterson-report"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-impact-china-belt-road-initiative-2026.html",
+      "title": "The Geopolitical Impact of China’s Belt and Road Initiative Expansion",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.cfr.org/articles/belt-and-road-tracker",
+        "https://openknowledge.worldbank.org/entities/publication/16252360-1cf1-546e-9978-9e57b5f32cec"
+      ],
+      "found_approved_urls": [
+        "https://www.cfr.org/articles/belt-and-road-tracker",
+        "https://openknowledge.worldbank.org/entities/publication/16252360-1cf1-546e-9978-9e57b5f32cec"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.cfr.org/articles/belt-and-road-tracker",
+        "https://openknowledge.worldbank.org/entities/publication/16252360-1cf1-546e-9978-9e57b5f32cec"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-emerging-green-energy-alliances.html",
+      "title": "Geopolitical Implications of the Emerging Green Energy Alliances",
+      "category": "world",
+      "approved_reference_count": 2,
+      "approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_urls": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "found_approved_url_count": 2,
+      "ag03c_b5_reference_block_count": 1,
+      "ag03c_b5_reference_link_count": 2,
+      "ag03c_b5_checked_present": true,
+      "ag03c_b5_hrefs": [
+        "https://www.iea.org/reports/global-critical-minerals-outlook-2025",
+        "https://www.irena.org/Publications/2023/Jul/Geopolitics-of-the-Energy-Transition-Critical-Materials"
+      ],
+      "approved_urls_match_live_article": true,
+      "live_article_has_exactly_two_ag03c_b5_links": true,
+      "live_article_has_one_ag03c_b5_block": true,
+      "audit_status": "passed"
+    }
+  ],
+  "completed_reference_scaling_articles_after_batch_5": [
+    "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+    "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+    "articles/media/ethics-ai-generated-content-journalism-society.html",
+    "articles/media/ethics-ai-generated-content-journalism.html",
+    "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+    "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+    "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+    "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+    "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+    "articles/media/role-public-media-combating-misinformation-digital-age.html",
+    "articles/media/role-public-media-countering-disinformation-digital-age.html",
+    "articles/media/role-public-media-countering-misinformation.html",
+    "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+    "articles/media/social-media-political-polarization-2026.html",
+    "articles/media/what-narratives-make-visible.html",
+    "articles/policy/advancing-digital-literacy-public-education-2026.html",
+    "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+    "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+    "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+    "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+    "articles/policy/innovations-public-health-infrastructure-post-pandemic-recovery.html",
+    "articles/policy/innovations-public-health-infrastructure-preparing-future-pandemics.html",
+    "articles/policy/reimagining-public-healthcare-delivery-through-digital-infrastructure.html",
+    "articles/policy/reimagining-urban-public-transport-sustainability-accessibility-challenges.html",
+    "articles/policy/reimagining-urban-public-transport-sustainable-models.html",
+    "articles/policy/scaling-community-healthcare-outreach.html",
+    "articles/policy/welfare-state-evolution-historical-lessons-institutional-comparisons.html",
+    "articles/policy/when-implementation-tells-the-real-story.html",
+    "articles/spiritual/contemplating-impermanence-path-spiritual-liberation.html",
+    "articles/spiritual/contemplative-silence-rediscovering-inner-clarity.html",
+    "articles/spiritual/how-attention-becomes-worship.html",
+    "articles/spiritual/integrating-mindfulness-daily-routines-spiritual-growth.html",
+    "articles/spiritual/resurgence-ancient-meditation-modern-mental-health.html",
+    "articles/spiritual/resurgence-contemplative-practices-modern-urban-life.html",
+    "articles/spiritual/resurgence-mindfulness-modern-spiritual-practice.html",
+    "articles/spiritual/revival-ancient-meditation-modern-urban-life.html",
+    "articles/spiritual/role-of-contemplative-practices-in-modern-mental-health-care.html",
+    "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practice.html",
+    "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practices.html",
+    "articles/spiritual/spiritual-ecology-nurturing-nature-soul-connection.html",
+    "articles/spiritual/tracing-evolution-civilizational-wisdom-spirituality.html",
+    "articles/sports/data-analytics-athlete-performance.html",
+    "articles/sports/evolution-athlete-mental-health-programs-professional-sports.html",
+    "articles/sports/evolution-athlete-recovery-innovations-peak-performance.html",
+    "articles/sports/evolution-athlete-recovery-science-innovation.html",
+    "articles/sports/evolution-athlete-recovery-science-technology-policy.html",
+    "articles/sports/evolution-of-sports-analytics-beyond-the-numbers.html",
+    "articles/sports/evolution-sports-analytics-athlete-performance-strategy.html",
+    "articles/sports/evolution-sports-analytics-player-psychology.html",
+    "articles/sports/evolution-sports-analytics-transforming-strategies-performance.html",
+    "articles/sports/evolution-tactical-analytics-football-performance-fan-engagement.html",
+    "articles/sports/legacy-transformation-historical-arc-global-sports-future.html",
+    "articles/sports/mental-health-initiatives-professional-sports-2026.html",
+    "articles/sports/revolutionizing-athlete-recovery-ai-wearable-tech.html",
+    "articles/sports/role-of-data-analytics-in-next-generation-athlete-performance.html",
+    "articles/world/from-multipolarity-to-new-world-orders.html",
+    "articles/world/future-russia-west-relations-2026.html",
+    "articles/world/geopolitical-impact-china-belt-road-initiative-2026.html",
+    "articles/world/geopolitical-implications-emerging-green-energy-alliances.html"
+  ],
+  "remaining_reference_queue_after_batch_5": [
+    {
+      "queue_id": "AG03A_REF_QUEUE_061",
+      "article_path": "articles/world/geopolitical-implications-emerging-indo-pacific-security-architecture.html",
+      "category": "world",
+      "title": "Geopolitical Implications of the Emerging Indo-Pacific Security Architecture",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_062",
+      "article_path": "articles/world/geopolitical-implications-emerging-renewable-energy-alliances.html",
+      "category": "world",
+      "title": "Geopolitical Implications of Emerging Renewable Energy Alliances",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_063",
+      "article_path": "articles/world/geopolitical-implications-new-arctic-trade-routes.html",
+      "category": "world",
+      "title": "Geopolitical Implications of the New Arctic Trade Routes",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_064",
+      "article_path": "articles/world/geopolitical-implications-renewable-energy-transitions.html",
+      "category": "world",
+      "title": "The Geopolitical Implications of Renewable Energy Transitions",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_065",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-balancing-power-diplomacy.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Balancing Power and Diplomacy",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_066",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Emerging Alliances and Strategic Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_067",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alignments-challenges.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Strategic Alignments and Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_068",
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alliances-emerging-challenges.html",
+      "category": "world",
+      "title": "Geopolitical Shifts in the Indo-Pacific: Strategic Alliances and Emerging Challenges",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_069",
+      "article_path": "articles/world/geopolitics-renewable-energy-global-south.html",
+      "category": "world",
+      "title": "The Geopolitics of Renewable Energy Transitions in the Global South",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_070",
+      "article_path": "articles/world/navigating-multipolarity-new-dynamics-global-power-2026.html",
+      "category": "world",
+      "title": "Navigating Multipolarity: The New Dynamics of Global Power in 2026",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_071",
+      "article_path": "articles/world/reading-confrontation-beyond-headlines.html",
+      "category": "world",
+      "title": "Reading confrontation beyond headlines",
+      "queue_status": "pending_ag03b_candidate_population"
+    },
+    {
+      "queue_id": "AG03A_REF_QUEUE_072",
+      "article_path": "articles/world/strategic-realignments-indo-pacific-diplomatic-developments.html",
+      "category": "world",
+      "title": "Strategic Realignments in the Indo-Pacific: Assessing the Latest Diplomatic Developments",
+      "queue_status": "pending_ag03b_candidate_population"
+    }
+  ],
+  "next_batch": {
+    "batch_id": "AG03B_BATCH_06",
+    "batch_number": 6,
+    "status": "queued_for_later",
+    "article_count": 12,
+    "article_paths": [
+      "articles/world/geopolitical-implications-emerging-indo-pacific-security-architecture.html",
+      "articles/world/geopolitical-implications-emerging-renewable-energy-alliances.html",
+      "articles/world/geopolitical-implications-new-arctic-trade-routes.html",
+      "articles/world/geopolitical-implications-renewable-energy-transitions.html",
+      "articles/world/geopolitical-shifts-indo-pacific-balancing-power-diplomacy.html",
+      "articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html",
+      "articles/world/geopolitical-shifts-indo-pacific-strategic-alignments-challenges.html",
+      "articles/world/geopolitical-shifts-indo-pacific-strategic-alliances-emerging-challenges.html",
+      "articles/world/geopolitics-renewable-energy-global-south.html",
+      "articles/world/navigating-multipolarity-new-dynamics-global-power-2026.html",
+      "articles/world/reading-confrontation-beyond-headlines.html",
+      "articles/world/strategic-realignments-indo-pacific-diplomatic-developments.html"
+    ],
+    "candidate_population_status": "pending",
+    "reference_insertion_status": "not_allowed_in_ag03a"
+  },
+  "blocked_capabilities": [
+    "article_html_mutation",
+    "article_text_mutation",
+    "article_image_mutation",
+    "image_credit_mutation",
+    "reference_url_change",
+    "new_reference_insertion",
+    "reference_candidate_population",
+    "reference_approval",
+    "external_fetch_by_script",
+    "api_route",
+    "server_endpoint",
+    "backend_activation",
+    "supabase",
+    "auth",
+    "real_login",
+    "real_signup",
+    "user_account_collection",
+    "credential_collection",
+    "payment",
+    "admin_ui",
+    "subscriber_output",
+    "public_dynamic_output",
+    "frontend_deployment",
+    "backend_deployment",
+    "file_deletion",
+    "file_move"
+  ],
+  "next_recommended_stage": {
+    "module_id": "AG03B-B6",
+    "title": "Verified Reference Candidate Population — Batch 6",
+    "allowed": true,
+    "only_after_ag03d_b5_validation": true,
+    "scope": "populate candidate reference URLs for AG03A Batch 6 only",
+    "article_html_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "external_research_allowed": true,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
