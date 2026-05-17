@@ -1,0 +1,388 @@
+{
+  "module_id": "AG07I",
+  "title": "Quality and Visitor-Value Scoring Boundary Model",
+  "status": "scoring_boundary_defined",
+  "quality_visitor_value_scoring_boundary_only": true,
+  "generated_from": {
+    "ag07hReview": "data/content-intelligence/quality-reviews/ag07h-visual-data-enrichment-boundary-workbench.json",
+    "ag07hWorkbench": "data/content-intelligence/visual-registry/ag07h-visual-data-enrichment-workbench.json",
+    "ag07hSchema": "data/content-intelligence/schema/visual-data-enrichment-workbench.schema.json",
+    "ag07hLearning": "data/content-intelligence/learning/ag07h-visual-data-enrichment-boundary-learning.json",
+    "ag07gReview": "data/content-intelligence/quality-reviews/ag07g-reference-discovery-boundary-workbench.json",
+    "ag07gWorkbench": "data/content-intelligence/reference-registry/ag07g-reference-discovery-workbench.json",
+    "ag07fReview": "data/content-intelligence/quality-reviews/ag07f-preview-packet-schema-revision-boundary.json",
+    "ag07fBoundaryPlan": "data/content-intelligence/run-registry/ag07f-preview-packet-contract-boundary-plan.json",
+    "ag07cPacket": "data/content-intelligence/content-packets/ag07c-preview-only-dry-run-content-packet.json",
+    "ag06eLongFormStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06iVisualStandard": "data/content-intelligence/visual-registry/visual-data-infographic-requirement-standard.json",
+    "ag06jReferenceStandard": "data/content-intelligence/reference-registry/reference-source-credibility-standard.json",
+    "ag06kStoreManifest": "data/content-intelligence/run-registry/jsonl-first-content-intelligence-store-manifest.json",
+    "ag06lApprovalRegister": "data/content-intelligence/publish-queue/publish-queue-approval-state-register.json"
+  },
+  "summary": {
+    "ag07h_boundary_consumed": true,
+    "ag07g_boundary_consumed": true,
+    "ag07f_boundary_consumed": true,
+    "ag07c_packet_present": true,
+    "ag07c_packet_unchanged": true,
+    "quality_dimension_count": 5,
+    "visitor_value_dimension_count": 5,
+    "quality_weight_total": 100,
+    "visitor_value_weight_total": 100,
+    "scoring_thresholds_defined": true,
+    "readiness_gate_group_count": 5,
+    "reviewer_decision_field_count": 4,
+    "scoring_workflow_step_count": 5,
+    "article_inference_store_required_before_actual_scoring": true,
+    "next_stage_id": "AG07J",
+    "next_stage_title": "Article Inference Store Boundary",
+    "actual_score_calculation_performed": false,
+    "quality_score_calculated": false,
+    "visitor_value_score_calculated": false,
+    "combined_score_calculated": false,
+    "calculated_quality_score": null,
+    "calculated_visitor_value_score": null,
+    "calculated_combined_score": null,
+    "publish_ready_approval_performed": false,
+    "approval_state_changed": false,
+    "publish_ready_set": false,
+    "production_readiness_after_ag07i": "not_ready",
+    "publish_readiness_after_ag07i": "blocked",
+    "public_article_mutation_allowed": false,
+    "article_prose_generated": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false
+  },
+  "source_packet_snapshot": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "packet_modified_in_ag07i": false
+  },
+  "upstream_boundary_snapshot": {
+    "ag07h_visual_generation_performed": false,
+    "ag07h_image_insertion_performed": false,
+    "ag07g_reference_url_population_performed": false,
+    "ag07g_reference_insertion_performed": false
+  },
+  "long_form_standard_snapshot": {
+    "word_count_min": 1500,
+    "word_count_max": 2200,
+    "verified_reference_min": 2,
+    "verified_reference_max": 5,
+    "quality_score_gate_required": true,
+    "visitor_value_score_gate_required": true
+  },
+  "quality_dimensions": [
+    {
+      "dimension_id": "AG07I-Q-001",
+      "dimension_name": "factual_integrity_and_evidence_alignment",
+      "weight": 25,
+      "purpose": "Future assessment of claim accuracy, source support, and non-invented evidence.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-Q-002",
+      "dimension_name": "long_form_depth_and_structure",
+      "weight": 20,
+      "purpose": "Future assessment of 1500–2200 word long-form depth, sequencing, section logic, and completeness.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-Q-003",
+      "dimension_name": "originality_context_and_synthesis",
+      "weight": 20,
+      "purpose": "Future assessment of whether the article adds meaningful synthesis beyond generic summary.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-Q-004",
+      "dimension_name": "reference_and_source_readiness",
+      "weight": 20,
+      "purpose": "Future assessment of verified reference count, source credibility, link health, and reference placement.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-Q-005",
+      "dimension_name": "visual_data_accessibility_readiness",
+      "weight": 15,
+      "purpose": "Future assessment of visual relevance, data-unit usefulness, caption, alt-text, image credit, and mobile safety.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    }
+  ],
+  "visitor_value_dimensions": [
+    {
+      "dimension_id": "AG07I-V-001",
+      "dimension_name": "reader_intent_alignment",
+      "weight": 25,
+      "purpose": "Future assessment of how clearly the article answers the reader's likely intent.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-V-002",
+      "dimension_name": "clarity_and_readability",
+      "weight": 20,
+      "purpose": "Future assessment of accessible language, flow, scannability, and comprehension.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-V-003",
+      "dimension_name": "practical_takeaway_value",
+      "weight": 20,
+      "purpose": "Future assessment of useful insights, explanatory payoff, and actionable reader value.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-V-004",
+      "dimension_name": "trust_and_revisit_value",
+      "weight": 20,
+      "purpose": "Future assessment of whether the article feels credible, worth bookmarking, and worth sharing.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    },
+    {
+      "dimension_id": "AG07I-V-005",
+      "dimension_name": "engagement_and_presentation_value",
+      "weight": 15,
+      "purpose": "Future assessment of narrative pull, visual/data support, layout quality, and reader retention.",
+      "calculation_allowed_in_ag07i": false,
+      "dimension_status": "not_evaluated",
+      "calculated_score": null
+    }
+  ],
+  "scoring_thresholds": {
+    "quality_score_minimum_for_publish_ready": 80,
+    "visitor_value_score_minimum_for_publish_ready": 75,
+    "combined_score_minimum_for_publish_ready": 78,
+    "minimum_reference_count_before_scoring": 2,
+    "maximum_reference_count_standard": 5,
+    "article_inference_required_before_score_calculation": true,
+    "revised_preview_packet_required_before_score_calculation": true,
+    "reference_readiness_required_before_publish_ready": true,
+    "visual_data_readiness_required_before_publish_ready": true,
+    "reviewer_approval_required_before_publish_ready": true,
+    "actual_threshold_evaluation_performed_in_ag07i": false
+  },
+  "readiness_gate_groups": [
+    {
+      "gate_group_id": "AG07I-GATE-001",
+      "gate_group_name": "article_inference_gate",
+      "purpose": "Structured article inference must exist before any actual scoring.",
+      "required_before_score_calculation": true,
+      "evaluated_in_ag07i": false,
+      "gate_status": "not_evaluated",
+      "next_stage_dependency": "AG07J"
+    },
+    {
+      "gate_group_id": "AG07I-GATE-002",
+      "gate_group_name": "revised_preview_packet_gate",
+      "purpose": "A revised preview packet with populated planned fields must exist before scoring.",
+      "required_before_score_calculation": true,
+      "evaluated_in_ag07i": false,
+      "gate_status": "not_evaluated",
+      "next_stage_dependency": "future_revised_preview_packet_stage"
+    },
+    {
+      "gate_group_id": "AG07I-GATE-003",
+      "gate_group_name": "reference_readiness_gate",
+      "purpose": "Candidate and approved reference readiness must be reviewed before scoring/publish readiness.",
+      "required_before_score_calculation": true,
+      "evaluated_in_ag07i": false,
+      "gate_status": "not_evaluated",
+      "next_stage_dependency": "future_reference_population_review_stage"
+    },
+    {
+      "gate_group_id": "AG07I-GATE-004",
+      "gate_group_name": "visual_data_readiness_gate",
+      "purpose": "Visual/data slots, captions, alt text and credits must be reviewed before publish readiness.",
+      "required_before_publish_ready": true,
+      "evaluated_in_ag07i": false,
+      "gate_status": "not_evaluated",
+      "next_stage_dependency": "future_visual_population_review_stage"
+    },
+    {
+      "gate_group_id": "AG07I-GATE-005",
+      "gate_group_name": "editorial_approval_gate",
+      "purpose": "Reviewer decision must remain separate from scoring and must occur only after scoring evidence exists.",
+      "required_before_publish_ready": true,
+      "evaluated_in_ag07i": false,
+      "gate_status": "not_evaluated",
+      "next_stage_dependency": "future_approval_stage"
+    }
+  ],
+  "reviewer_decision_fields": [
+    {
+      "field_id": "reviewer_decision",
+      "allowed_values": [
+        "not_started",
+        "needs_article_inference",
+        "needs_revision",
+        "ready_for_scoring_later",
+        "blocked",
+        "rejected"
+      ],
+      "default_value_in_ag07i": "not_started",
+      "value_set_in_ag07i": false
+    },
+    {
+      "field_id": "score_review_notes",
+      "allowed_values": [
+        "free_text_future_field"
+      ],
+      "default_value_in_ag07i": "",
+      "value_set_in_ag07i": false
+    },
+    {
+      "field_id": "failure_reason",
+      "allowed_values": [
+        "article_inference_missing",
+        "revised_packet_missing",
+        "references_missing",
+        "visual_data_missing",
+        "quality_below_threshold",
+        "visitor_value_below_threshold",
+        "editorial_blocker"
+      ],
+      "default_value_in_ag07i": "",
+      "value_set_in_ag07i": false
+    },
+    {
+      "field_id": "approval_state",
+      "allowed_values": [
+        "not_started",
+        "review_pending",
+        "approved_later",
+        "rejected_later"
+      ],
+      "default_value_in_ag07i": "not_started",
+      "value_set_in_ag07i": false
+    }
+  ],
+  "scoring_workflow": [
+    {
+      "step_id": "AG07I-WF-001",
+      "step_name": "define_scoring_dimensions",
+      "description": "Define quality and visitor-value dimensions and weights.",
+      "performed_in_ag07i": true,
+      "calculation_step": false
+    },
+    {
+      "step_id": "AG07I-WF-002",
+      "step_name": "define_thresholds",
+      "description": "Define future thresholds for publish-readiness gates.",
+      "performed_in_ag07i": true,
+      "calculation_step": false
+    },
+    {
+      "step_id": "AG07I-WF-003",
+      "step_name": "require_article_inference_store",
+      "description": "Route next stage to AG07J Article Inference Store Boundary before any scoring.",
+      "performed_in_ag07i": true,
+      "calculation_step": false
+    },
+    {
+      "step_id": "AG07I-WF-004",
+      "step_name": "calculate_scores",
+      "description": "Future score calculation after article inference and revised packet exist.",
+      "performed_in_ag07i": false,
+      "calculation_step": true,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07I-WF-005",
+      "step_name": "set_publish_ready",
+      "description": "Future approval step only after scoring, references, visuals and editorial review pass.",
+      "performed_in_ag07i": false,
+      "calculation_step": false,
+      "future_approval_required": true
+    }
+  ],
+  "actual_scores": {
+    "quality_score": null,
+    "visitor_value_score": null,
+    "combined_score": null,
+    "calculation_status": "not_calculated_in_ag07i",
+    "score_calculation_allowed_in_ag07i": false
+  },
+  "future_stage_handoff": [
+    {
+      "stage_id": "AG07J",
+      "title": "Article Inference Store Boundary",
+      "receives_from_ag07i": [
+        "quality_dimensions",
+        "visitor_value_dimensions",
+        "scoring_thresholds",
+        "readiness_gate_groups",
+        "reviewer_decision_fields"
+      ],
+      "allowed_scope": "article inference schema/store boundary only with explicit approval",
+      "blocked_actions": [
+        "actual_score_calculation",
+        "publish_ready_set",
+        "approval_state_change",
+        "public_article_mutation",
+        "jsonl_production_append",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    }
+  ],
+  "actual_score_calculation_performed": false,
+  "quality_score_calculated": false,
+  "visitor_value_score_calculated": false,
+  "combined_score_calculated": false,
+  "scoring_execution_performed": false,
+  "article_inference_created": false,
+  "article_inference_stored": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
