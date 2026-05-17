@@ -1,0 +1,274 @@
+{
+  "module_id": "AG07D",
+  "title": "Preview Packet Gap Matrix",
+  "status": "gap_audit_completed",
+  "review_audit_only": true,
+  "generated_from": {
+    "ag07cPacket": "data/content-intelligence/content-packets/ag07c-preview-only-dry-run-content-packet.json",
+    "ag07cExecution": "data/content-intelligence/run-registry/ag07c-preview-only-dry-run-execution-record.json",
+    "ag07cReview": "data/content-intelligence/quality-reviews/ag07c-content-packet-generator-preview-only-dry-run.json",
+    "ag07cSchema": "data/content-intelligence/schema/content-packet-preview-dry-run.schema.json",
+    "ag07bReview": "data/content-intelligence/quality-reviews/ag07b-content-packet-generator-dry-run-implementation-plan.json",
+    "ag07aReview": "data/content-intelligence/quality-reviews/ag07a-long-form-content-packet-generator-design-dry-run-boundary.json",
+    "ag06zClosure": "data/content-intelligence/quality-reviews/content-intelligence-foundation-closure.json",
+    "ag06eStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06iVisualStandard": "data/content-intelligence/visual-registry/visual-data-infographic-requirement-standard.json",
+    "ag06jReferenceStandard": "data/content-intelligence/reference-registry/reference-source-credibility-standard.json",
+    "ag06kStoreManifest": "data/content-intelligence/run-registry/jsonl-first-content-intelligence-store-manifest.json",
+    "ag06lApprovalRegister": "data/content-intelligence/publish-queue/publish-queue-approval-state-register.json"
+  },
+  "summary": {
+    "ag07c_preview_packet_present": true,
+    "ag07c_preview_packet_status": "preview_only_dry_run",
+    "packet_preview_only": true,
+    "packet_production_packet": false,
+    "packet_publish_ready": false,
+    "packet_publication_allowed": false,
+    "packet_section_count": 14,
+    "placeholder_only_section_count": 14,
+    "gap_count": 8,
+    "production_blocker_count": 8,
+    "review_dimension_count": 6,
+    "recommended_next_action_count": 5,
+    "production_readiness": "not_ready",
+    "publish_readiness": "blocked",
+    "review_audit_only": true,
+    "article_prose_generated": false,
+    "public_article_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07E"
+  },
+  "reviewed_packet": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "selected_candidate": {
+      "source_article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "source_queue_id": "ag06f_public_upgrade_001",
+      "category": "media",
+      "detected_title": "Algorithmic Bias in Content Curation: Addressing the Challenges to Fair Representation",
+      "upgrade_priority": "medium",
+      "selected_for_preview_only_dry_run": true,
+      "selected_for_public_mutation": false,
+      "selected_for_publishing": false
+    }
+  },
+  "review_dimensions": [
+    {
+      "dimension_id": "schema_completeness",
+      "status": "passes_preview_level",
+      "observation": "Preview packet contains the required top-level packet contracts and section skeletons.",
+      "production_readiness": "not_ready"
+    },
+    {
+      "dimension_id": "content_depth",
+      "status": "gap_recorded",
+      "observation": "Section bodies are placeholders only.",
+      "production_readiness": "not_ready"
+    },
+    {
+      "dimension_id": "reference_readiness",
+      "status": "gap_recorded",
+      "observation": "Reference taxonomy exists, but URLs and approvals are empty.",
+      "production_readiness": "not_ready"
+    },
+    {
+      "dimension_id": "visual_readiness",
+      "status": "gap_recorded",
+      "observation": "Visual requirements exist, but no visual asset or data unit is generated.",
+      "production_readiness": "not_ready"
+    },
+    {
+      "dimension_id": "quality_readiness",
+      "status": "gap_recorded",
+      "observation": "Quality and visitor-value scores are not computed.",
+      "production_readiness": "not_ready"
+    },
+    {
+      "dimension_id": "publish_readiness",
+      "status": "blocked",
+      "observation": "Packet remains preview-only, non-production and not publish-ready.",
+      "production_readiness": "blocked"
+    }
+  ],
+  "gap_items": [
+    {
+      "gap_id": "AG07D-GAP-001",
+      "gap_area": "section_depth",
+      "severity": "expected_preview_gap",
+      "finding": "All packet sections are placeholder-only.",
+      "evidence": {
+        "section_count": 14,
+        "placeholder_only_count": 14
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Define section-level drafting requirements in a later revision-plan stage before any production packet generation."
+    },
+    {
+      "gap_id": "AG07D-GAP-002",
+      "gap_area": "article_prose",
+      "severity": "expected_preview_gap",
+      "finding": "No article prose or narrative text is generated in AG07C.",
+      "evidence": {
+        "narrative_text_generated": false,
+        "article_text_generated": false
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Keep prose generation blocked until a later explicitly approved packet drafting stage."
+    },
+    {
+      "gap_id": "AG07D-GAP-003",
+      "gap_area": "reference_plan",
+      "severity": "required_before_production",
+      "finding": "Reference requirement exists, but no candidate or approved reference URLs are populated.",
+      "evidence": {
+        "approved_reference_count": 0,
+        "candidate_reference_count": 0,
+        "urls_count": 0,
+        "source_taxonomy_available": true
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Create a later reference discovery/review workbench before any production packet is marked reference-ready."
+    },
+    {
+      "gap_id": "AG07D-GAP-004",
+      "gap_area": "visual_data_plan",
+      "severity": "required_before_production",
+      "finding": "Visual requirements are represented, but no visual asset, infographic, image credit or alt text is generated.",
+      "evidence": {
+        "visual_type_count": 10,
+        "primary_hero_visual_required": true,
+        "structured_visual_or_data_unit_required": true,
+        "visual_asset_generation_performed": false
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Define visual/data enrichment workbench before any production article packet is considered complete."
+    },
+    {
+      "gap_id": "AG07D-GAP-005",
+      "gap_area": "quality_scoring",
+      "severity": "required_before_publish_readiness",
+      "finding": "Quality score and visitor-value score are required by AG06E but not computed in the AG07C preview packet.",
+      "evidence": {
+        "quality_score_required": true,
+        "visitor_value_score_required": true,
+        "quality_scoring_performed": false,
+        "visitor_value_scoring_performed": false
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Define a later packet quality/visitor-value scoring audit before production closure."
+    },
+    {
+      "gap_id": "AG07D-GAP-006",
+      "gap_area": "publish_readiness",
+      "severity": "hard_blocker",
+      "finding": "Packet is not publish-ready and not publication-allowed.",
+      "evidence": {
+        "preview_only": true,
+        "production_packet": false,
+        "publish_ready": false,
+        "publication_allowed": false
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Keep publish-readiness blocked until production packet generation, editorial review, reference review and visual review are separately closed."
+    },
+    {
+      "gap_id": "AG07D-GAP-007",
+      "gap_area": "approval_state",
+      "severity": "hard_blocker",
+      "finding": "Approval state remains not approved and no approval transition has occurred.",
+      "evidence": {
+        "approval_state": "not_approved",
+        "publish_ready": false,
+        "approval_state_changed": false
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Keep approval-state transition blocked until a dedicated publish approval stage."
+    },
+    {
+      "gap_id": "AG07D-GAP-008",
+      "gap_area": "data_persistence",
+      "severity": "future_mapping_required",
+      "finding": "Future JSONL/database/Supabase mapping is represented, but no production JSONL append or database write is performed.",
+      "evidence": {
+        "jsonl_store_count": 10,
+        "jsonl_append_performed": false,
+        "database_write_performed": false,
+        "supabase_enabled": false
+      },
+      "production_blocker": true,
+      "recommended_next_action": "Carry schema-to-database mapping forward without enabling Supabase writes."
+    }
+  ],
+  "recommended_next_actions": [
+    {
+      "action_id": "AG07E-ACTION-001",
+      "action": "Create a preview packet revision plan.",
+      "allowed_in_ag07d": false,
+      "recommended_stage": "AG07E",
+      "production_mutation_required": false
+    },
+    {
+      "action_id": "AG07E-ACTION-002",
+      "action": "Define stronger section-level packet fields for future drafting.",
+      "allowed_in_ag07d": false,
+      "recommended_stage": "AG07E",
+      "production_mutation_required": false
+    },
+    {
+      "action_id": "AG07E-ACTION-003",
+      "action": "Define reference-workbench handoff requirements.",
+      "allowed_in_ag07d": false,
+      "recommended_stage": "AG07E or AG07G",
+      "production_mutation_required": false
+    },
+    {
+      "action_id": "AG07E-ACTION-004",
+      "action": "Define visual/data enrichment handoff requirements.",
+      "allowed_in_ag07d": false,
+      "recommended_stage": "AG07E or AG07H",
+      "production_mutation_required": false
+    },
+    {
+      "action_id": "AG07E-ACTION-005",
+      "action": "Preserve schema-to-Supabase/database compatibility without enabling database writes.",
+      "allowed_in_ag07d": false,
+      "recommended_stage": "DB mapping boundary stage",
+      "production_mutation_required": false
+    }
+  ],
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "reference_url_change_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
