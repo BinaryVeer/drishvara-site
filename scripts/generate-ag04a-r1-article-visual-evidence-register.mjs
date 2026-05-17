@@ -55,7 +55,21 @@ function isLikelyLogo(src) {
 }
 
 function isImageLike(src) {
-  return /\.(png|jpe?g|webp|svg|gif|avif)(\?|#|$)/i.test(String(src || ""));
+  const s = String(src || "").toLowerCase();
+
+  // Standard local/static images.
+  if (/\.(png|jpe?g|webp|svg|gif|avif)(\?|#|$)/i.test(s)) return true;
+
+  // Dynamic CDN image URLs often do not end with an extension.
+  // Unsplash image URLs are valid article visuals even when served with query params.
+  if (/^https?:\/\/images\.unsplash\.com\//i.test(s)) return true;
+  if (/^https?:\/\/images\.pexels\.com\//i.test(s)) return true;
+  if (/^https?:\/\/cdn\./i.test(s) && /image|photo|visual|media|asset|upload/.test(s)) return true;
+
+  // Local routed/generated image paths may also be extensionless.
+  if (/assets\/(article|articles|images|hero|visual|generated|media)/i.test(s)) return true;
+
+  return false;
 }
 
 function creditEvidence(html) {

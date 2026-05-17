@@ -2,7 +2,7 @@
   "register_id": "AG04A_R1_ARTICLE_VISUAL_EVIDENCE_REGISTER",
   "module_id": "AG04A-R1",
   "status": "article_visual_evidence_register_created",
-  "generated_at": "2026-05-17T04:47:12.365Z",
+  "generated_at": "2026-05-17T05:03:49.607Z",
   "mutation_performed": false,
   "article_html_mutation_performed": false,
   "article_text_mutation_performed": false,
@@ -57,7 +57,7 @@
     "articles_with_logo_or_brand_like_primary_image": 0,
     "articles_with_credit_or_source_evidence": 72,
     "articles_with_reading_width_evidence_aligned": 72,
-    "manual_review_queue_count": 1,
+    "manual_review_queue_count": 0,
     "ag03_integrity_preserved": true,
     "audit_only_no_mutation": true,
     "ready_for_ag04a_r2_manual_review_record": true
@@ -2911,13 +2911,13 @@
         "ag04a_reading_width_appears_aligned": true
       },
       "review_flags": {
-        "visual_evidence_gap": true,
+        "visual_evidence_gap": false,
         "credit_evidence_gap": false,
         "reading_width_evidence_gap": false,
         "ag03_reference_integrity_drift": false
       },
-      "manual_review_status": "manual_review_required_due_to_visual_evidence_gap",
-      "manual_review_note": "Manual visual review required before any correction patch."
+      "manual_review_status": "manual_review_not_required_by_audit",
+      "manual_review_note": "Audit evidence indicates visual, credit, reading width and AG03 reference integrity are acceptable; optional human review may still be performed for live visual quality."
     },
     {
       "register_id": "AG04A_R1_VISUAL_EVIDENCE_043",
@@ -4960,76 +4960,7 @@
       "manual_review_note": "Audit evidence indicates visual, credit, reading width and AG03 reference integrity are acceptable; optional human review may still be performed for live visual quality."
     }
   ],
-  "manual_review_queue": [
-    {
-      "register_id": "AG04A_R1_VISUAL_EVIDENCE_042",
-      "article_path": "articles/spiritual/tracing-evolution-civilizational-wisdom-spirituality.html",
-      "detected_title": "Tracing the Evolution of Civilizational Wisdom: Spirituality from Ancient Traditions to Modern Reflections",
-      "category": "spiritual",
-      "ag03_reference_link_count": 2,
-      "ag03_integrity_status": "passed",
-      "visual_evidence": {
-        "image_count": 2,
-        "primary_image_src": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80",
-        "primary_image_alt": "Ancient stone temple ruins bathed in warm sunlight symbolizing spiritual heritage",
-        "primary_image_has_ag02_hero_marker": false,
-        "primary_image_is_logo_or_brand_like": false,
-        "ag04a_has_usable_article_visual": true,
-        "ag04a_probable_logo_fallback_visual": false,
-        "first_image_sources": [
-          {
-            "src": "/favicon.svg",
-            "alt": "Drishvara",
-            "logo_or_brand_like": true,
-            "has_ag02_hero_marker": false
-          },
-          {
-            "src": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1350&amp;q=80",
-            "alt": "Ancient stone temple ruins bathed in warm sunlight symbolizing spiritual heritage",
-            "logo_or_brand_like": false,
-            "has_ag02_hero_marker": false
-          }
-        ]
-      },
-      "image_credit_evidence": {
-        "marker_present": false,
-        "generic_credit_text_present": true,
-        "snippets": [
-          "Image credit: Photo by Joshua Earle on Unsplash · <a href=\"https://unsplash.com/photos/6anudmpILw4\" target=\"_blank\" rel=\"noopener noreferrer\">Source</a> <span",
-          "attribution: Drishvara editorial visual for “Tracing the Evolution of Civilizational Wisdom: Spirituality from Ancient Traditions to Modern Reflections” (spiritual). Final image-source attrib"
-        ],
-        "credit_or_source_present": true
-      },
-      "reading_surface_evidence": {
-        "html_max_width_signals": [
-          "100%",
-          "700px",
-          "700px",
-          "980px",
-          "720px",
-          "980px",
-          "980px",
-          "1000px",
-          "1040px",
-          "900px"
-        ],
-        "html_justify_signal_present": true,
-        "ag04a_html_broad_width_signal_present": true,
-        "ag04a_html_justify_signal_present": true,
-        "ag04a_global_css_broad_width_signal_present": true,
-        "ag04a_global_css_justify_signal_present": true,
-        "ag04a_reading_width_appears_aligned": true
-      },
-      "review_flags": {
-        "visual_evidence_gap": true,
-        "credit_evidence_gap": false,
-        "reading_width_evidence_gap": false,
-        "ag03_reference_integrity_drift": false
-      },
-      "manual_review_status": "manual_review_required_due_to_visual_evidence_gap",
-      "manual_review_note": "Manual visual review required before any correction patch."
-    }
-  ],
+  "manual_review_queue": [],
   "blocked_capabilities": [
     "article_html_mutation",
     "article_text_mutation",
