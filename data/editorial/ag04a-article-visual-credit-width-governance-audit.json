@@ -1,0 +1,2175 @@
+{
+  "audit_id": "AG04A_ARTICLE_VISUAL_CREDIT_WIDTH_GOVERNANCE_AUDIT",
+  "module_id": "AG04A",
+  "status": "article_visual_credit_width_governance_audit_completed",
+  "generated_at": "2026-05-17T03:49:31.981Z",
+  "mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "article_text_mutation_performed": false,
+  "article_image_mutation_performed": false,
+  "image_credit_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "css_mutation_performed": false,
+  "external_fetch_performed_by_script": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "source_context": {
+    "ag03z_audit": "data/editorial/ag03z-final-verified-reference-closure-audit.json",
+    "ag03z_closed": true,
+    "ag03z_article_count": 72,
+    "ag03z_reference_count": 144
+  },
+  "summary": {
+    "scanned_article_count": 72,
+    "expected_article_count": 72,
+    "live_ag03_reference_link_count": 144,
+    "expected_ag03_reference_link_count": 144,
+    "articles_with_exactly_two_ag03_links": 72,
+    "articles_with_usable_article_visual": 72,
+    "articles_with_probable_logo_fallback_visual": 0,
+    "articles_with_image_credit_or_source": 72,
+    "articles_with_reading_width_aligned": 72,
+    "ag04b_follow_up_article_count": 0,
+    "issue_type_counts": {
+      "missing_article_visual": 0,
+      "probable_default_logo_or_brand_visual": 0,
+      "missing_image_credit_or_source": 0,
+      "reading_width_or_justification_needs_review": 0,
+      "ag03_reference_integrity_drift": 0
+    },
+    "ag03_integrity_preserved": true,
+    "audit_only_no_mutation": true,
+    "ready_for_ag04b_targeted_correction": true
+  },
+  "css_governance_signals": {
+    "css_file_count": 2,
+    "files_with_broad_width_signal": 2,
+    "files_with_justify_signal": 2,
+    "files_with_article_selector_signal": 2,
+    "global_broad_width_signal_present": true,
+    "global_justify_signal_present": true,
+    "css_files": [
+      {
+        "file_path": "assets/css/public-preview-polish.css",
+        "max_width_signals": [
+          {
+            "value": 126,
+            "unit": "px",
+            "broad": false
+          },
+          {
+            "value": 900,
+            "unit": "px",
+            "broad": true
+          },
+          {
+            "value": 180,
+            "unit": "px",
+            "broad": false
+          },
+          {
+            "value": 560,
+            "unit": "px",
+            "broad": false
+          },
+          {
+            "value": 100,
+            "unit": "%",
+            "broad": true
+          }
+        ],
+        "has_broad_width_signal": true,
+        "has_justify_signal": true,
+        "has_article_selector_signal": true
+      },
+      {
+        "file_path": "assets/css/public-preview-polish.css",
+        "max_width_signals": [
+          {
+            "value": 126,
+            "unit": "px",
+            "broad": false
+          },
+          {
+            "value": 900,
+            "unit": "px",
+            "broad": true
+          },
+          {
+            "value": 180,
+            "unit": "px",
+            "broad": false
+          },
+          {
+            "value": 560,
+            "unit": "px",
+            "broad": false
+          },
+          {
+            "value": 100,
+            "unit": "%",
+            "broad": true
+          }
+        ],
+        "has_broad_width_signal": true,
+        "has_justify_signal": true,
+        "has_article_selector_signal": true
+      }
+    ]
+  },
+  "article_results": [
+    {
+      "article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Al_Jazeera_English_Newsroom.jpg/1920px-Al_Jazeera_English_Newsroom.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/media-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/media-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/media-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/media-default.jpg",
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/media-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/role-public-media-combating-misinformation-digital-age.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-disinformation-digital-age.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-misinformation.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/media-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg",
+        "/assets/featured/fallback/media-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/social-media-political-polarization-2026.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/media/what-narratives-make-visible.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/media.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg",
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/innovations-public-health-infrastructure-post-pandemic-recovery.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg",
+        "https://upload.wikimedia.org/wikipedia/commons/e/e7/Newent_Community_School%2C_1_-_geograph.org.uk_-_6925261.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/innovations-public-health-infrastructure-preparing-future-pandemics.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/reimagining-public-healthcare-delivery-through-digital-infrastructure.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/reimagining-urban-public-transport-sustainability-accessibility-challenges.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/reimagining-urban-public-transport-sustainable-models.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/scaling-community-healthcare-outreach.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/welfare-state-evolution-historical-lessons-institutional-comparisons.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/policy-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/policy/when-implementation-tells-the-real-story.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/policy.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/contemplating-impermanence-path-spiritual-liberation.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/contemplative-silence-rediscovering-inner-clarity.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/how-attention-becomes-worship.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 1,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 0,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg"
+      ],
+      "probable_logo_or_brand_srcs": [],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/integrating-mindfulness-daily-routines-spiritual-growth.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/spirituality-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/resurgence-ancient-meditation-modern-mental-health.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg",
+        "/assets/featured/2026-04-11/spirituality/lead-1.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/resurgence-contemplative-practices-modern-urban-life.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/spirituality-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/resurgence-mindfulness-modern-spiritual-practice.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg",
+        "/assets/featured/2026-04-11/spirituality/lead-1.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/revival-ancient-meditation-modern-urban-life.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg",
+        "/assets/featured/2026-04-11/spirituality/lead-1.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/role-of-contemplative-practices-in-modern-mental-health-care.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/spirituality-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practice.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/spirituality-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/role-of-mindfulness-in-modern-spiritual-practices.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg",
+        "assets/featured/2026-04-11/spirituality/role-of-mindfulness-in-modern-spiritual-practices-lead-1.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/spiritual-ecology-nurturing-nature-soul-connection.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/spiritual.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/spiritual/tracing-evolution-civilizational-wisdom-spirituality.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/spirituality-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/data-analytics-athlete-performance.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-athlete-mental-health-programs-professional-sports.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg",
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-athlete-recovery-innovations-peak-performance.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg",
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-athlete-recovery-science-innovation.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-athlete-recovery-science-technology-policy.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-of-sports-analytics-beyond-the-numbers.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg",
+        "assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-sports-analytics-athlete-performance-strategy.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-sports-analytics-player-psychology.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg",
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-sports-analytics-transforming-strategies-performance.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/evolution-tactical-analytics-football-performance-fan-engagement.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/legacy-transformation-historical-arc-global-sports-future.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/mental-health-initiatives-professional-sports-2026.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/revolutionizing-athlete-recovery-ai-wearable-tech.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/sports-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/sports/role-of-data-analytics-in-next-generation-athlete-performance.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/sports.svg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Streichholz.jpg/1920px-Streichholz.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/from-multipolarity-to-new-world-orders.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/future-russia-west-relations-2026.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-impact-china-belt-road-initiative-2026.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-emerging-green-energy-alliances.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-emerging-indo-pacific-security-architecture.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-emerging-renewable-energy-alliances.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/World_Map_1689.JPG/1920px-World_Map_1689.JPG"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-new-arctic-trade-routes.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-implications-renewable-energy-transitions.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-balancing-power-diplomacy.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg",
+        "assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-emerging-alliances-strategic-challenges.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alignments-challenges.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitical-shifts-indo-pacific-strategic-alliances-emerging-challenges.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/geopolitics-renewable-energy-global-south.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/navigating-multipolarity-new-dynamics-global-power-2026.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 3,
+      "likely_article_visual_src_count": 2,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg",
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/reading-confrontation-beyond-headlines.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": true,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/article-defaults/world.svg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": true,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    },
+    {
+      "article_path": "articles/world/strategic-realignments-indo-pacific-diplomatic-developments.html",
+      "ag03_reference_link_count": 2,
+      "ag03_reference_block_count": 1,
+      "ag03_integrity_status": "passed",
+      "has_ag02_hero_marker": false,
+      "image_src_count": 2,
+      "likely_article_visual_src_count": 1,
+      "probable_logo_or_brand_src_count": 1,
+      "likely_article_visual_srcs": [
+        "/assets/featured/fallback/world-default.jpg"
+      ],
+      "probable_logo_or_brand_srcs": [
+        "/favicon.svg"
+      ],
+      "has_usable_article_visual": true,
+      "probable_logo_fallback_visual": false,
+      "has_ag02_image_credit_marker": false,
+      "has_generic_credit_text": true,
+      "has_image_credit_or_source": true,
+      "html_broad_width_signal_present": true,
+      "html_justify_signal_present": true,
+      "global_css_broad_width_signal_present": true,
+      "global_css_justify_signal_present": true,
+      "reading_width_appears_aligned": true,
+      "issue_types": [],
+      "needs_ag04b_follow_up": false
+    }
+  ],
+  "ag04b_issue_queue": [],
+  "next_recommended_stage": {
+    "module_id": "AG04B",
+    "title": "Targeted Article Visual, Credit and Reading Width Correction Patch",
+    "allowed": true,
+    "only_after_ag04a_validation": true,
+    "scope": "apply targeted corrections based on AG04A issue queue while preserving AG03 references",
+    "article_html_mutation_allowed": true,
+    "css_mutation_allowed": true,
+    "reference_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}

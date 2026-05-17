@@ -1,0 +1,75 @@
+{
+  "module_id": "AG04A",
+  "module_title": "Article Visual, Image Credit, and Reading Width Governance Audit",
+  "phase": "Article Visual / Image Credit / Reading Experience Governance",
+  "status": "audit_only",
+  "depends_on": [
+    "AG03Z",
+    "AG03D-B6",
+    "AG03C-B6",
+    "AG02"
+  ],
+  "article_html_mutation_enabled": false,
+  "article_text_mutation_enabled": false,
+  "article_image_mutation_enabled": false,
+  "image_credit_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "css_mutation_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag03z_closure_audit": "data/editorial/ag03z-final-verified-reference-closure-audit.json"
+  },
+  "expected": {
+    "article_count": 72,
+    "ag03_reference_link_count": 144,
+    "references_per_article": 2
+  },
+  "outputs": {
+    "audit": "data/editorial/ag04a-article-visual-credit-width-governance-audit.json",
+    "preview": "data/quality/ag04a-article-visual-credit-width-governance-preview.json"
+  },
+  "markers": {
+    "ag02_hero": "data-drishvara-ag02-hero-visual",
+    "ag02_credit": "data-drishvara-ag02-image-credit",
+    "ag03_reference_link_pattern": "data-drishvara-ag03c-*-reference-link",
+    "ag03_reference_block_pattern": "data-drishvara-ag03c-*-reference-block"
+  },
+  "issue_types": [
+    "missing_article_visual",
+    "probable_default_logo_or_brand_visual",
+    "missing_image_credit_or_source",
+    "reading_width_or_justification_needs_review",
+    "ag03_reference_integrity_drift"
+  ],
+  "recommended_next_stage": {
+    "module_id": "AG04B",
+    "title": "Targeted Article Visual, Credit and Reading Width Correction Patch",
+    "allowed": true,
+    "only_after_ag04a_validation": true,
+    "scope": "apply targeted corrections based on AG04A issue queue while preserving AG03 references",
+    "article_html_mutation_allowed": true,
+    "css_mutation_allowed": true,
+    "reference_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}

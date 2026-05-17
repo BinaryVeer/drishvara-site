@@ -1,0 +1,48 @@
+{
+  "preview_id": "AG04A_ARTICLE_VISUAL_CREDIT_WIDTH_GOVERNANCE_PREVIEW",
+  "module_id": "AG04A",
+  "status": "preview_article_visual_credit_width_governance_audit",
+  "preview_only": true,
+  "summary": {
+    "scanned_article_count": 72,
+    "expected_article_count": 72,
+    "live_ag03_reference_link_count": 144,
+    "expected_ag03_reference_link_count": 144,
+    "articles_with_exactly_two_ag03_links": 72,
+    "articles_with_usable_article_visual": 72,
+    "articles_with_probable_logo_fallback_visual": 0,
+    "articles_with_image_credit_or_source": 72,
+    "articles_with_reading_width_aligned": 72,
+    "ag04b_follow_up_article_count": 0,
+    "issue_type_counts": {
+      "missing_article_visual": 0,
+      "probable_default_logo_or_brand_visual": 0,
+      "missing_image_credit_or_source": 0,
+      "reading_width_or_justification_needs_review": 0,
+      "ag03_reference_integrity_drift": 0
+    },
+    "ag03_integrity_preserved": true,
+    "audit_only_no_mutation": true,
+    "ready_for_ag04b_targeted_correction": true
+  },
+  "css_governance_summary": {
+    "css_file_count": 2,
+    "global_broad_width_signal_present": true,
+    "global_justify_signal_present": true
+  },
+  "first_20_issue_queue_entries": [],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG04B",
+    "title": "Targeted Article Visual, Credit and Reading Width Correction Patch",
+    "allowed": true,
+    "only_after_ag04a_validation": true,
+    "scope": "apply targeted corrections based on AG04A issue queue while preserving AG03 references",
+    "article_html_mutation_allowed": true,
+    "css_mutation_allowed": true,
+    "reference_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
