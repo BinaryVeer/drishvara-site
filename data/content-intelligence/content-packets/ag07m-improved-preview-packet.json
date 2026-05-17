@@ -1,0 +1,294 @@
+{
+  "module_id": "AG07M",
+  "packet_id": "ag07m-improved-preview:ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "title": "Improved Preview Packet",
+  "status": "improved_preview_packet_created",
+  "preview_only": true,
+  "production_packet": false,
+  "publish_ready": false,
+  "publication_allowed": false,
+  "source_stage": "AG07M",
+  "generated_from": {
+    "ag07lReview": "data/content-intelligence/quality-reviews/ag07l-revised-preview-packet-dry-run-scoring.json",
+    "ag07lPacket": "data/content-intelligence/content-packets/ag07l-revised-preview-packet-dry-run.json",
+    "ag07lScoring": "data/content-intelligence/quality-registry/ag07l-dry-run-scoring-result.json",
+    "ag07lSchema": "data/content-intelligence/schema/revised-preview-packet-dry-run-scoring.schema.json",
+    "ag07lLearning": "data/content-intelligence/learning/ag07l-revised-preview-packet-dry-run-scoring-learning.json",
+    "ag07kInferenceRecord": "data/content-intelligence/inference-records/ag07k-preview-only-article-inference-record.json",
+    "ag07iScoringModel": "data/content-intelligence/quality-registry/ag07i-quality-visitor-value-scoring-model.json",
+    "ag07gWorkbench": "data/content-intelligence/reference-registry/ag07g-reference-discovery-workbench.json",
+    "ag07hWorkbench": "data/content-intelligence/visual-registry/ag07h-visual-data-enrichment-workbench.json",
+    "ag06eLongFormStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06kStoreManifest": "data/content-intelligence/run-registry/jsonl-first-content-intelligence-store-manifest.json",
+    "ag06lApprovalRegister": "data/content-intelligence/publish-queue/publish-queue-approval-state-register.json"
+  },
+  "source_packet_snapshot": {
+    "packet_id": "ag07l-revised-preview:ag07c_preview_only_packet_001",
+    "status": "revised_preview_packet_created",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "packet_modified_in_ag07m": false
+  },
+  "source_dry_run_scoring_snapshot": {
+    "quality_score": 62.4,
+    "visitor_value_score": 69.8,
+    "combined_score": 66.1,
+    "publish_ready_recommended": false,
+    "threshold_reason": "Dry-run scores are below threshold and reference/visual readiness remains incomplete."
+  },
+  "article_inference_summary": {
+    "theme_label": "Long-form upgrade readiness for an existing Drishvara public article",
+    "primary_reader_intent": "Understand the subject clearly with trustworthy context and useful takeaways.",
+    "audience_segment": "General informed readers seeking reflective, credible and accessible long-form insight.",
+    "required_depth_level": "long_form_explanatory_depth",
+    "evidence_burden": "verified_references_required_before_publish",
+    "upgrade_strategy": "Create revised preview packet using inference, reference boundary, visual/data boundary and scoring model."
+  },
+  "improved_sections": [
+    {
+      "section_id": "opening_context",
+      "section_title": "Opening Context",
+      "purpose": "Frame the topic, reader problem and why the subject deserves long-form treatment.",
+      "derived_from_inference": [
+        "article_theme",
+        "reader_intent",
+        "target_audience"
+      ],
+      "section_status": "improved_preview_only",
+      "prose_generated": false,
+      "outline_note": "Structured upgrade inference for quality, credibility, visitor value, reference readiness and visual/data planning.",
+      "improvement_applied_in_ag07m": true,
+      "improvement_focus": [
+        "clarity",
+        "evidence_alignment",
+        "reader_value",
+        "production_packet_readiness_later"
+      ],
+      "production_execution_performed": false
+    },
+    {
+      "section_id": "background_and_core_explanation",
+      "section_title": "Background and Core Explanation",
+      "purpose": "Move from basic context to deeper explanation without assuming expert knowledge.",
+      "derived_from_inference": [
+        "knowledge_depth",
+        "target_audience"
+      ],
+      "section_status": "improved_preview_only",
+      "prose_generated": false,
+      "outline_note": "brief_background_before_deeper_analysis",
+      "improvement_applied_in_ag07m": true,
+      "improvement_focus": [
+        "clarity",
+        "evidence_alignment",
+        "reader_value",
+        "production_packet_readiness_later"
+      ],
+      "production_execution_performed": false
+    },
+    {
+      "section_id": "evidence_and_reference_context",
+      "section_title": "Evidence and Reference Context",
+      "purpose": "Identify the evidence burden and source types needed before public release.",
+      "derived_from_inference": [
+        "evidence_requirement",
+        "reference_need"
+      ],
+      "section_status": "improved_preview_only",
+      "prose_generated": false,
+      "outline_note": "AG07G slots remain empty; future candidate population and link-health review are required.",
+      "improvement_applied_in_ag07m": true,
+      "improvement_focus": [
+        "clarity",
+        "evidence_alignment",
+        "reader_value",
+        "production_packet_readiness_later"
+      ],
+      "production_execution_performed": false
+    },
+    {
+      "section_id": "visual_data_support_plan",
+      "section_title": "Visual and Data Support Plan",
+      "purpose": "Define where hero visual, structured visual/data unit and accessibility fields will support the article.",
+      "derived_from_inference": [
+        "visual_data_need"
+      ],
+      "section_status": "improved_preview_only",
+      "prose_generated": false,
+      "outline_note": "structured_visual_or_infographic_recommended_where_reader_clarity_improves",
+      "improvement_applied_in_ag07m": true,
+      "improvement_focus": [
+        "clarity",
+        "evidence_alignment",
+        "reader_value",
+        "production_packet_readiness_later"
+      ],
+      "production_execution_performed": false
+    },
+    {
+      "section_id": "reader_value_and_takeaways",
+      "section_title": "Reader Value and Takeaways",
+      "purpose": "Convert the article from generic summary into useful reflective insight.",
+      "derived_from_inference": [
+        "reader_intent",
+        "originality_improvement_inference",
+        "recommended_upgrade_direction"
+      ],
+      "section_status": "improved_preview_only",
+      "prose_generated": false,
+      "outline_note": "Connect evidence, reader intent, visual support and practical takeaway into a coherent long-form article.",
+      "improvement_applied_in_ag07m": true,
+      "improvement_focus": [
+        "clarity",
+        "evidence_alignment",
+        "reader_value",
+        "production_packet_readiness_later"
+      ],
+      "production_execution_performed": false
+    },
+    {
+      "section_id": "limitations_and_next_revision_needs",
+      "section_title": "Limitations and Next Revision Needs",
+      "purpose": "Record what remains missing before production packet creation.",
+      "derived_from_inference": [
+        "gap_summary",
+        "future_scoring_dependency"
+      ],
+      "section_status": "improved_preview_only",
+      "prose_generated": false,
+      "outline_note": "Current preview packet remains skeletal and requires revised sections before scoring.",
+      "improvement_applied_in_ag07m": true,
+      "improvement_focus": [
+        "clarity",
+        "evidence_alignment",
+        "reader_value",
+        "production_packet_readiness_later"
+      ],
+      "production_execution_performed": false
+    }
+  ],
+  "improved_reference_plan": {
+    "preview_only": true,
+    "minimum_reference_need": 2,
+    "preferred_source_types": [
+      "primary_or_authoritative_source",
+      "credible_context_source",
+      "data_or_evidence_source_where_relevant"
+    ],
+    "candidate_reference_slots_available_from_ag07g": 5,
+    "reference_urls_populated_in_ag07l": false,
+    "reference_insertion_performed": false,
+    "reference_readiness_status": "not_ready_candidate_population_required",
+    "reference_gap_notes": "AG07G slots remain empty; future candidate population and link-health review are required.",
+    "improvement_status": "improved_preview_plan",
+    "required_future_reference_actions": [
+      "populate_candidate_reference_urls_later",
+      "verify_source_credibility_later",
+      "perform_link_health_check_later",
+      "approve_reference_slots_later"
+    ],
+    "reference_urls_populated_in_ag07m": false,
+    "production_execution_performed": false
+  },
+  "improved_visual_data_plan": {
+    "preview_only": true,
+    "visual_need_slots_available_from_ag07h": 3,
+    "data_unit_slots_available_from_ag07h": 3,
+    "hero_visual_need": "primary_hero_visual_required_before_public_article_apply",
+    "structured_visual_need": "structured_visual_or_infographic_recommended_where_reader_clarity_improves",
+    "data_unit_need": "key_fact_box_or_timeline_needed_if evidence/context supports it",
+    "accessibility_need": "caption_alt_text_image_credit_and_mobile_safe_layout_required",
+    "visual_generation_performed": false,
+    "image_insertion_performed": false,
+    "visual_data_readiness_status": "not_ready_candidate_visual_data_population_required",
+    "improvement_status": "improved_preview_plan",
+    "required_future_visual_actions": [
+      "select_or_generate_candidate_hero_visual_later",
+      "prepare_structured_visual_or_data_unit_later",
+      "populate_caption_alt_text_image_credit_later",
+      "perform_mobile_safe_layout_review_later"
+    ],
+    "data_unit_generation_performed": false,
+    "production_execution_performed": false
+  },
+  "improved_static_live_readiness_preview": {
+    "preview_only": true,
+    "target_article_path": "",
+    "target_category": "",
+    "existing_article_backup_required": true,
+    "html_mutation_sections": [
+      "article_body",
+      "reference_block",
+      "hero_visual_block",
+      "image_credit_block",
+      "metadata_block"
+    ],
+    "reference_block_insertion_point": "future_static_live_stage",
+    "hero_image_insertion_point": "future_static_live_stage",
+    "image_credit_block_required": true,
+    "alt_text_required": true,
+    "meta_title_required": true,
+    "meta_description_required": true,
+    "rollback_plan_required": true,
+    "post_mutation_validation_checklist_required": true,
+    "static_live_mutation_allowed_in_ag07l": false,
+    "improvement_status": "forward_compatible_preview",
+    "target_article_path_required_before_ag07o": true,
+    "rollback_plan_required_before_ag07p": true,
+    "post_mutation_validation_required_before_ag07q": true,
+    "static_live_mutation_allowed_in_ag07m": false,
+    "production_execution_performed": false
+  },
+  "production_candidate_readiness_preview": {
+    "ready_for_ag07n_production_packet_candidate": true,
+    "reason": "Improvement pass has mapped score gaps into forward-compatible production-packet requirements, but production creation remains blocked until AG07N approval.",
+    "remaining_blockers": [
+      "reference_url_population",
+      "reference_credibility_review",
+      "visual_or_data_candidate_population",
+      "caption_alt_text_image_credit_population",
+      "target_static_article_path_selection",
+      "human_approval_gate"
+    ]
+  },
+  "improvement_pass_only": true,
+  "improved_preview_packet_created": true,
+  "improvement_actions_created": true,
+  "dry_run_scores_consumed": true,
+  "dry_run_score_recalculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "production_score_record_created": false,
+  "production_packet_created": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "static_live_mutation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}

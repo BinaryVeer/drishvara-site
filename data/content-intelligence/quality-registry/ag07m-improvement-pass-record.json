@@ -1,0 +1,157 @@
+{
+  "module_id": "AG07M",
+  "title": "Improvement Pass Record",
+  "status": "improvement_actions_created",
+  "preview_only": true,
+  "production_record": false,
+  "source_packet_id": "ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "improved_packet_id": "ag07m-improved-preview:ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "source_scoring_record": "data/content-intelligence/quality-registry/ag07l-dry-run-scoring-result.json",
+  "baseline_dry_run_scores": {
+    "quality_score": 62.4,
+    "visitor_value_score": 69.8,
+    "combined_score": 66.1
+  },
+  "threshold_result_before_improvement": {
+    "quality_threshold_met": false,
+    "visitor_value_threshold_met": false,
+    "combined_threshold_met": false,
+    "publish_ready_recommended": false,
+    "reason": "Dry-run scores are below threshold and reference/visual readiness remains incomplete."
+  },
+  "source_improvement_priorities": [
+    "Populate and verify at least two credible references.",
+    "Strengthen evidence alignment before factual integrity can pass.",
+    "Develop actual article prose from the revised preview section plan.",
+    "Prepare hero visual, structured visual/data unit, caption, alt text and image credit.",
+    "Improve trust and revisit value through verified references and stronger synthesis."
+  ],
+  "improvement_actions": [
+    {
+      "action_id": "AG07M-ACTION-001",
+      "action_name": "reference_readiness_improvement",
+      "priority": "critical",
+      "source_gap": "Reference readiness score is low because candidate URLs are not populated or verified.",
+      "targeted_dimensions": [
+        "AG07I-Q-001",
+        "AG07I-Q-004",
+        "AG07I-V-004"
+      ],
+      "improvement_instruction": "Prepare future candidate-reference population with at least two credible sources, link-health check, source type and credibility status.",
+      "execution_status": "planned_preview_improvement",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-002",
+      "action_name": "evidence_alignment_improvement",
+      "priority": "critical",
+      "source_gap": "Evidence burden is clear but factual support remains incomplete.",
+      "targeted_dimensions": [
+        "AG07I-Q-001",
+        "AG07I-Q-003"
+      ],
+      "improvement_instruction": "Map claims to evidence slots before production packet candidacy.",
+      "execution_status": "planned_preview_improvement",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-003",
+      "action_name": "section_depth_improvement",
+      "priority": "high",
+      "source_gap": "Long-form section structure exists but actual prose is not generated.",
+      "targeted_dimensions": [
+        "AG07I-Q-002",
+        "AG07I-V-002",
+        "AG07I-V-003"
+      ],
+      "improvement_instruction": "Strengthen section-level outline with context, explanation, evidence, takeaway and limitation prompts.",
+      "execution_status": "planned_preview_improvement",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-004",
+      "action_name": "visual_data_accessibility_improvement",
+      "priority": "high",
+      "source_gap": "Visual/data plan exists but no asset, caption, alt text, image credit or data-unit candidate exists.",
+      "targeted_dimensions": [
+        "AG07I-Q-005",
+        "AG07I-V-005"
+      ],
+      "improvement_instruction": "Define candidate visual/data requirements for hero visual, structured visual/data unit, caption, alt text, image credit and mobile-safe rendering.",
+      "execution_status": "planned_preview_improvement",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-005",
+      "action_name": "visitor_value_improvement",
+      "priority": "high",
+      "source_gap": "Reader value direction exists but actionable payoff is not yet strong enough.",
+      "targeted_dimensions": [
+        "AG07I-V-001",
+        "AG07I-V-003",
+        "AG07I-V-004"
+      ],
+      "improvement_instruction": "Add reader takeaway prompts and trust/revisit-value checkpoints before production packet generation.",
+      "execution_status": "planned_preview_improvement",
+      "production_execution_performed": false
+    },
+    {
+      "action_id": "AG07M-ACTION-006",
+      "action_name": "static_live_readiness_forward_compatibility",
+      "priority": "medium",
+      "source_gap": "Static-live fields exist only as preview placeholders.",
+      "targeted_dimensions": [
+        "AG07I-Q-002",
+        "AG07I-V-005"
+      ],
+      "improvement_instruction": "Carry target article path, backup need, mutation sections, rollback and post-mutation checklist into AG07N/AG07O without mutating static files now.",
+      "execution_status": "planned_preview_improvement",
+      "production_execution_performed": false
+    }
+  ],
+  "improvement_pass_result": {
+    "improved_preview_packet_created": true,
+    "production_packet_created": false,
+    "score_recalculated": false,
+    "publish_ready_recommended": false,
+    "next_review_stage": "AG07N"
+  },
+  "improvement_pass_only": true,
+  "improved_preview_packet_created": true,
+  "improvement_actions_created": true,
+  "dry_run_scores_consumed": true,
+  "dry_run_score_recalculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "production_score_record_created": false,
+  "production_packet_created": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "static_live_mutation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
