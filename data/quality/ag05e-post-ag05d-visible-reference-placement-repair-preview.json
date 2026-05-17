@@ -1,0 +1,37 @@
+{
+  "preview_id": "AG05E_POST_AG05D_VISIBLE_REFERENCE_PLACEMENT_REPAIR_PREVIEW",
+  "module_id": "AG05E",
+  "preview_only": true,
+  "status": "post_ag05d_visible_reference_repair_audit_passed",
+  "summary": {
+    "audited_article_count": 72,
+    "expected_article_count": 72,
+    "articles_with_two_ag03_links": 72,
+    "articles_with_one_ag05d_visible_block": 72,
+    "articles_with_zero_visible_placeholder_sections": 72,
+    "articles_with_reference_urls_unchanged_from_ag05d": 72,
+    "articles_with_ag03_before_back_links": 72,
+    "total_neutralized_placeholder_sections": 72,
+    "failed_article_count": 0,
+    "ag03_integrity_preserved": true,
+    "ag04_closure_preserved": true,
+    "reference_url_change_performed": false,
+    "audit_only_no_mutation": true,
+    "ready_for_ag05f_live_redeployment_manual_verification": true
+  },
+  "failed_article_audit_results": [],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG05F",
+    "title": "Live Redeployment and Manual Visible Reference Verification Record",
+    "allowed": true,
+    "only_after_ag05e_validation": true,
+    "scope": "after Vercel deployment, manually verify that live article pages show verified references and no placeholder reference section",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_action_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
