@@ -1,0 +1,271 @@
+{
+  "module_id": "AG07G",
+  "preview_only": true,
+  "reference_discovery_boundary_only": true,
+  "summary": {
+    "ag07f_boundary_consumed": true,
+    "ag07e_revision_plan_consumed": true,
+    "ag07c_packet_present": true,
+    "ag07c_packet_unchanged": true,
+    "reference_contract_section_present": true,
+    "source_category_slot_count": 3,
+    "candidate_reference_slot_count": 5,
+    "source_type_taxonomy_available": true,
+    "credibility_tier_available": true,
+    "lifecycle_status_available": true,
+    "rejection_reason_available": true,
+    "review_workflow_step_count": 5,
+    "credibility_check_count": 5,
+    "reference_url_population_performed": false,
+    "candidate_reference_url_count": 0,
+    "approved_reference_url_count": 0,
+    "rejected_reference_url_count": 0,
+    "live_url_fetch_performed": false,
+    "link_health_fetch_performed": false,
+    "reference_insertion_performed": false,
+    "production_readiness_after_ag07g": "not_ready",
+    "publish_readiness_after_ag07g": "blocked",
+    "public_article_mutation_allowed": false,
+    "article_prose_generated": false,
+    "visual_generation_allowed": false,
+    "jsonl_production_append_allowed": false,
+    "database_write_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07H"
+  },
+  "source_packet_snapshot": {
+    "content_packet_id": "ag07c_preview_only_packet_001",
+    "status": "preview_only_dry_run",
+    "preview_only": true,
+    "production_packet": false,
+    "publish_ready": false,
+    "publication_allowed": false,
+    "packet_modified_in_ag07g": false
+  },
+  "source_category_slots": [
+    {
+      "slot_id": "AG07G-SLOT-001",
+      "source_category": "primary_or_authoritative_source",
+      "expected_count_min": 1,
+      "expected_count_max": 2,
+      "urls_count": 0,
+      "url_population_allowed_in_ag07g": false
+    },
+    {
+      "slot_id": "AG07G-SLOT-002",
+      "source_category": "credible_context_source",
+      "expected_count_min": 1,
+      "expected_count_max": 2,
+      "urls_count": 0,
+      "url_population_allowed_in_ag07g": false
+    },
+    {
+      "slot_id": "AG07G-SLOT-003",
+      "source_category": "data_or_evidence_source",
+      "expected_count_min": 0,
+      "expected_count_max": 1,
+      "urls_count": 0,
+      "url_population_allowed_in_ag07g": false
+    }
+  ],
+  "candidate_reference_slots": [
+    {
+      "slot_id": "AG07G-CANDIDATE-01",
+      "required_before_publish": true,
+      "candidate_status": "empty_boundary_slot",
+      "candidate_url_empty": true,
+      "approved_url_empty": true,
+      "url_population_allowed_in_ag07g": false,
+      "insertion_allowed_in_ag07g": false
+    },
+    {
+      "slot_id": "AG07G-CANDIDATE-02",
+      "required_before_publish": true,
+      "candidate_status": "empty_boundary_slot",
+      "candidate_url_empty": true,
+      "approved_url_empty": true,
+      "url_population_allowed_in_ag07g": false,
+      "insertion_allowed_in_ag07g": false
+    },
+    {
+      "slot_id": "AG07G-CANDIDATE-03",
+      "required_before_publish": false,
+      "candidate_status": "empty_boundary_slot",
+      "candidate_url_empty": true,
+      "approved_url_empty": true,
+      "url_population_allowed_in_ag07g": false,
+      "insertion_allowed_in_ag07g": false
+    },
+    {
+      "slot_id": "AG07G-CANDIDATE-04",
+      "required_before_publish": false,
+      "candidate_status": "empty_boundary_slot",
+      "candidate_url_empty": true,
+      "approved_url_empty": true,
+      "url_population_allowed_in_ag07g": false,
+      "insertion_allowed_in_ag07g": false
+    },
+    {
+      "slot_id": "AG07G-CANDIDATE-05",
+      "required_before_publish": false,
+      "candidate_status": "empty_boundary_slot",
+      "candidate_url_empty": true,
+      "approved_url_empty": true,
+      "url_population_allowed_in_ag07g": false,
+      "insertion_allowed_in_ag07g": false
+    }
+  ],
+  "review_workflow": [
+    {
+      "step_id": "AG07G-WF-001",
+      "step_name": "candidate_discovery",
+      "description": "Future step to discover candidate sources for each slot.",
+      "allowed_in_ag07g": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07G-WF-002",
+      "step_name": "credibility_screening",
+      "description": "Future step to check source authority, relevance and quality.",
+      "allowed_in_ag07g": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07G-WF-003",
+      "step_name": "link_health_review",
+      "description": "Future step to check if links are reachable, non-spam, non-broken and relevant.",
+      "allowed_in_ag07g": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07G-WF-004",
+      "step_name": "editorial_approval",
+      "description": "Future step to approve references before packet production or article insertion.",
+      "allowed_in_ag07g": false,
+      "future_approval_required": true
+    },
+    {
+      "step_id": "AG07G-WF-005",
+      "step_name": "article_reference_insertion",
+      "description": "Future public article insertion step; explicitly blocked in AG07G.",
+      "allowed_in_ag07g": false,
+      "future_approval_required": true
+    }
+  ],
+  "credibility_checklist": [
+    {
+      "check_id": "AG07G-CHECK-001",
+      "check_name": "source_identity",
+      "description": "Source identity must be clear before approval.",
+      "required_before_approval": true,
+      "evaluated_in_ag07g": false
+    },
+    {
+      "check_id": "AG07G-CHECK-002",
+      "check_name": "relevance_to_article",
+      "description": "Source must directly support the future article claim or context.",
+      "required_before_approval": true,
+      "evaluated_in_ag07g": false
+    },
+    {
+      "check_id": "AG07G-CHECK-003",
+      "check_name": "credibility_tier",
+      "description": "Source must meet the credibility standard defined in AG06J.",
+      "required_before_approval": true,
+      "evaluated_in_ag07g": false
+    },
+    {
+      "check_id": "AG07G-CHECK-004",
+      "check_name": "link_health",
+      "description": "Source URL must be reachable and non-spam before insertion.",
+      "required_before_approval": true,
+      "evaluated_in_ag07g": false
+    },
+    {
+      "check_id": "AG07G-CHECK-005",
+      "check_name": "non_invented_reference",
+      "description": "Reference must not be invented, guessed or placeholder-disguised as verified.",
+      "required_before_approval": true,
+      "evaluated_in_ag07g": false
+    }
+  ],
+  "future_stage_handoff": [
+    {
+      "stage_id": "AG07H",
+      "title": "Visual and Data Enrichment Boundary / Workbench",
+      "receives_from_ag07g": [
+        "reference_need_context",
+        "source_evidence_expectation"
+      ],
+      "allowed_scope": "visual/data planning only with explicit approval",
+      "blocked_actions": [
+        "visual_generation",
+        "article_mutation",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07I",
+      "title": "Quality and Visitor-Value Scoring Boundary",
+      "receives_from_ag07g": [
+        "reference_readiness_fields",
+        "credibility_checklist"
+      ],
+      "allowed_scope": "quality/visitor-value scoring boundary only with explicit approval",
+      "blocked_actions": [
+        "publish_ready_set",
+        "approval_state_change",
+        "publishing"
+      ]
+    },
+    {
+      "stage_id": "AG07J",
+      "title": "Reference Candidate Population Dry Run",
+      "receives_from_ag07g": [
+        "candidate_reference_slots",
+        "source_category_slots",
+        "review_workflow"
+      ],
+      "allowed_scope": "candidate URL population only if explicitly approved later",
+      "blocked_actions": [
+        "reference_insertion",
+        "public_article_mutation",
+        "publishing",
+        "backend_auth_supabase_activation"
+      ]
+    }
+  ],
+  "next_stage_id": "AG07H",
+  "reference_url_population_performed": false,
+  "candidate_reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "rejected_reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "web_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "reference_insertion_performed": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false
+}
