@@ -1,0 +1,320 @@
+{
+  "preview_id": "AG06D_EXISTING_PUBLIC_ARTICLE_CLASSIFICATION_PREVIEW",
+  "module_id": "AG06D",
+  "preview_only": true,
+  "status": "preview_existing_public_article_classification",
+  "summary": {
+    "classified_public_article_count": 77,
+    "source_public_article_count_from_ag06a": 77,
+    "test_corpus_retention_candidate_count": 77,
+    "reference_governance_candidate_count": 5,
+    "expected_reference_governance_candidate_count_from_ag06a": 5,
+    "long_form_upgrade_candidate_count": 77,
+    "below_preferred_length_candidate_count": 77,
+    "visual_enrichment_candidate_count": 77,
+    "final_public_product_ready_count": 0,
+    "archive_or_delete_recommended_count": 0,
+    "high_priority_upgrade_or_governance_count": 5,
+    "medium_priority_upgrade_count": 72,
+    "public_article_mutation_performed": false,
+    "reference_url_change_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "classification_register_only": true,
+    "ready_for_ag06e_long_form_article_standard": true,
+    "next_stage_id": "AG06E"
+  },
+  "reference_governance_candidates": [
+    {
+      "article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "word_count_estimate": 390,
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    },
+    {
+      "article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "word_count_estimate": 388,
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    },
+    {
+      "article_path": "articles/spiritual/contemplative-practices-modern-mental-health.html",
+      "word_count_estimate": 475,
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    },
+    {
+      "article_path": "articles/sports/mental-health-awareness-professional-athletics-2026.html",
+      "word_count_estimate": 405,
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    },
+    {
+      "article_path": "articles/world/ai-future-warfare-2026.html",
+      "word_count_estimate": 382,
+      "ag03_reference_link_count": 0,
+      "ag05d_visible_reference_block_count": 0,
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    }
+  ],
+  "sample_upgrade_candidates": [
+    {
+      "article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "word_count_estimate": 464,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "word_count_estimate": 575,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "word_count_estimate": 614,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-content-journalism.html",
+      "word_count_estimate": 556,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "word_count_estimate": 559,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+      "word_count_estimate": 229,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+      "word_count_estimate": 525,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+      "word_count_estimate": 221,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "word_count_estimate": 390,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "reference_governance_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "high",
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    },
+    {
+      "article_path": "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+      "word_count_estimate": 943,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/role-public-media-combating-misinformation-digital-age.html",
+      "word_count_estimate": 595,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-disinformation-digital-age.html",
+      "word_count_estimate": 544,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/role-public-media-countering-misinformation.html",
+      "word_count_estimate": 663,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "word_count_estimate": 613,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/social-media-political-polarization-2026.html",
+      "word_count_estimate": 434,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/media/what-narratives-make-visible.html",
+      "word_count_estimate": 469,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "word_count_estimate": 402,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "word_count_estimate": 388,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "reference_governance_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "high",
+      "recommended_handling": "retain_as_test_corpus_and_route_to_reference_governance_before_upgrade"
+    },
+    {
+      "article_path": "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "word_count_estimate": 225,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    },
+    {
+      "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "word_count_estimate": 608,
+      "classification_tags": [
+        "test_corpus_retention_candidate",
+        "long_form_upgrade_candidate",
+        "below_preferred_length_candidate",
+        "visual_enrichment_candidate"
+      ],
+      "upgrade_priority": "medium",
+      "recommended_handling": "retain_as_test_corpus_and_upgrade_using_long_form_visual_standard"
+    }
+  ],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG06E",
+    "title": "Long-Form Article Standard",
+    "allowed": true,
+    "only_after_ag06d_validation": true,
+    "scope": "define the mandatory long-form article standard for future Drishvara production: 1500–2200 words, verified references, visual intelligence, quality scoring and publish-readiness.",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}

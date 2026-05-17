@@ -1,0 +1,70 @@
+{
+  "module_id": "AG06D",
+  "module_title": "Existing Public Article Classification",
+  "phase": "Content Intelligence Foundation",
+  "status": "classification_register_stage",
+  "depends_on": [
+    "AG06C",
+    "AG06B",
+    "AG06A",
+    "SOURCE_TREE_ACTIVE_REGISTER"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "public_article_mutation_enabled": false,
+  "public_article_archive_enabled": false,
+  "public_article_delete_enabled": false,
+  "input_files": {
+    "ag06a_audit": "data/editorial/ag06a-full-source-of-truth-inventory-audit.json",
+    "ag06b_manifest": "data/content-intelligence/schema/content-intelligence-schema-manifest.json",
+    "ag06c_register": "data/content-intelligence/run-registry/scaffold-output-preservation-register.json",
+    "source_tree_active_register": "data/quality/source-tree-active-register.json"
+  },
+  "classification_thresholds": {
+    "long_form_min_word_count": 1500,
+    "preferred_min_word_count": 1200,
+    "structured_visual_required": true,
+    "verified_reference_link_count_required": 2,
+    "visible_reference_block_required": 1,
+    "visible_ar01_placeholder_count_allowed": 0
+  },
+  "outputs": {
+    "classification_register": "data/content-intelligence/quality-reviews/public-article-classification-register.json",
+    "preview": "data/quality/ag06d-existing-public-article-classification-preview.json"
+  },
+  "recommended_next_stage": {
+    "module_id": "AG06E",
+    "title": "Long-Form Article Standard",
+    "allowed": true,
+    "only_after_ag06d_validation": true,
+    "scope": "define the mandatory long-form article standard for future Drishvara production: 1500–2200 words, verified references, visual intelligence, quality scoring and publish-readiness.",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
