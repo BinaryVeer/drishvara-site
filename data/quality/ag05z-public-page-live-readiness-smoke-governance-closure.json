@@ -1,0 +1,73 @@
+{
+  "module_id": "AG05Z",
+  "module_title": "Public Page and Live-Readiness Smoke Governance Closure",
+  "phase": "Public Page / Live-Readiness / Visible Reference Governance",
+  "status": "final_closure_audit_only",
+  "depends_on": [
+    "AG05F",
+    "AG05E-R1",
+    "AG05D-R1",
+    "AG05E",
+    "AG05D",
+    "AG05C",
+    "AG05B",
+    "AG05A",
+    "AG04Z",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "favicon_mutation_enabled": false,
+  "navigation_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag05f_record": "data/editorial/ag05f-live-redeployment-manual-visible-reference-verification-record.json",
+    "ag05e_r1_audit": "data/editorial/ag05e-r1-post-ag05d-r1-ar01-placeholder-neutralization-audit.json",
+    "ag05d_r1_apply_result": "data/quality/ag05d-r1-ar01-visible-placeholder-neutralization-apply-result.json",
+    "ag05e_audit": "data/editorial/ag05e-post-ag05d-visible-reference-placement-repair-audit.json",
+    "ag05d_apply_result": "data/quality/ag05d-targeted-visible-reference-placement-repair-apply-result.json",
+    "ag05c_result": "data/editorial/ag05c-manual-live-page-smoke-review-result-record.json",
+    "ag05b_checklist": "data/editorial/ag05b-manual-live-page-smoke-review-checklist.json",
+    "ag05a_audit": "data/editorial/ag05a-public-page-live-readiness-smoke-audit.json",
+    "ag04z_closure": "data/editorial/ag04z-article-visual-credit-width-governance-closure.json",
+    "ag03z_closure": "data/editorial/ag03z-final-verified-reference-closure-audit.json"
+  },
+  "expected": {
+    "article_count": 72,
+    "ag03_links_per_article": 2,
+    "ag05d_visible_block_per_article": 1,
+    "visible_ar01_placeholder_count": 0,
+    "ag05f_next_stage": "AG05Z",
+    "ag05f_correction_required": false
+  },
+  "outputs": {
+    "closure_record": "data/editorial/ag05z-public-page-live-readiness-smoke-governance-closure.json",
+    "preview": "data/quality/ag05z-public-page-live-readiness-smoke-governance-closure-preview.json"
+  },
+  "closure_result": {
+    "ag05_public_page_live_readiness_smoke_governance_closed": true,
+    "next_stage": "return_to_next_planned_drishvara_workstream"
+  }
+}
