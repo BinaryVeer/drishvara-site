@@ -1,0 +1,373 @@
+{
+  "module_id": "AG06K",
+  "title": "JSONL-first Content Intelligence Store Standard",
+  "standard_type": "future_jsonl_first_content_intelligence_store_standard",
+  "status": "storage_governance_schema_only",
+  "governance_only": true,
+  "depends_on": [
+    "AG06H-R1",
+    "AG06I",
+    "AG06J",
+    "AG06B"
+  ],
+  "generated_from": {
+    "ag06hR1Review": "data/content-intelligence/quality-reviews/content-intelligence-foundation-alignment-review.json",
+    "ag06iClosure": "data/content-intelligence/quality-reviews/visual-data-infographic-requirement-schema-closure.json",
+    "ag06jClosure": "data/content-intelligence/quality-reviews/reference-source-credibility-schema-closure.json",
+    "ag06jReferenceStandard": "data/content-intelligence/reference-registry/reference-source-credibility-standard.json",
+    "ag06bContentPacketSchema": "data/content-intelligence/schema/content-packet.schema.json",
+    "ag06fUpgradeQueue": "data/content-intelligence/publish-queue/long-form-upgrade-queue.json",
+    "ag06hBatchPlanning": "data/content-intelligence/publish-queue/long-form-batch-01-content-packet-planning.json"
+  },
+  "purpose": "Define JSONL-first storage governance for future content packets, source candidates, visual plans, quality reviews, publish queue state, learning snapshots, run registry and audit events without generating production JSONL content.",
+  "summary": {
+    "record_family_count": 10,
+    "common_line_contract_defined": true,
+    "append_only_default": true,
+    "schema_version_required": true,
+    "audit_trace_required": true,
+    "mutation_controls_required": true,
+    "source_trace_required": true,
+    "state_model_count": 10,
+    "jsonl_file_creation_allowed_in_ag06k": false,
+    "jsonl_append_allowed_in_ag06k": false,
+    "jsonl_import_allowed_in_ag06k": false,
+    "database_write_allowed_in_ag06k": false,
+    "public_article_mutation_allowed": false,
+    "content_packet_generation_allowed": false,
+    "public_publishing_allowed": false,
+    "next_stage_id": "AG06L"
+  },
+  "common_line_contract": {
+    "encoding": "utf-8",
+    "line_format": "one_valid_json_object_per_line",
+    "blank_lines_allowed": false,
+    "trailing_commas_allowed": false,
+    "append_only_default": true,
+    "stable_record_id_required": true,
+    "schema_version_required": true,
+    "stage_id_required": true,
+    "created_at_required": true,
+    "updated_at_required": true,
+    "audit_trace_required": true,
+    "mutation_controls_required": true,
+    "source_trace_required": true,
+    "public_ready_flag_default": false,
+    "publish_ready_flag_default": false
+  },
+  "record_families": [
+    {
+      "family_id": "content_packet_record",
+      "future_file_path": "data/content-intelligence/content-packets/content-packets.jsonl",
+      "purpose": "Future durable content packet records for long-form article production.",
+      "owner_folder": "content-packets",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "content_packet_id",
+        "article_slug",
+        "category",
+        "title",
+        "version",
+        "created_at",
+        "updated_at"
+      ],
+      "required_governance_fields": [
+        "stage_id",
+        "approval_state",
+        "source_trace",
+        "mutation_controls",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "reference_candidate_record",
+      "future_file_path": "data/content-intelligence/reference-registry/reference-candidates.jsonl",
+      "purpose": "Future candidate reference pool records before approval.",
+      "owner_folder": "reference-registry",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "reference_id",
+        "candidate_url_hash",
+        "source_type"
+      ],
+      "required_governance_fields": [
+        "credibility_tier",
+        "link_health_status",
+        "approval_status",
+        "reviewer_note",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "approved_reference_record",
+      "future_file_path": "data/content-intelligence/reference-registry/approved-references.jsonl",
+      "purpose": "Future approved reference records after source credibility review.",
+      "owner_folder": "reference-registry",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "reference_id",
+        "canonical_url_hash"
+      ],
+      "required_governance_fields": [
+        "approval_status",
+        "approved_by_stage",
+        "claim_or_section_supported",
+        "source_quality_score",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "rejected_reference_record",
+      "future_file_path": "data/content-intelligence/reference-registry/rejected-references.jsonl",
+      "purpose": "Future rejected reference trail with rejection reasons.",
+      "owner_folder": "reference-registry",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "reference_id"
+      ],
+      "required_governance_fields": [
+        "rejection_reason",
+        "replacement_required",
+        "reviewer_note",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "visual_plan_record",
+      "future_file_path": "data/content-intelligence/visual-registry/visual-plans.jsonl",
+      "purpose": "Future visual/data/infographic planning records.",
+      "owner_folder": "visual-registry",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "visual_id",
+        "visual_type"
+      ],
+      "required_governance_fields": [
+        "rights_or_credit_status",
+        "generation_status",
+        "review_status",
+        "visual_quality_score",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "quality_review_record",
+      "future_file_path": "data/content-intelligence/quality-reviews/quality-reviews.jsonl",
+      "purpose": "Future quality, visitor-value and publish-readiness review records.",
+      "owner_folder": "quality-reviews",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "review_id",
+        "review_stage"
+      ],
+      "required_governance_fields": [
+        "quality_score",
+        "visitor_value_score",
+        "publish_readiness_gates",
+        "review_status",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "publish_queue_state_record",
+      "future_file_path": "data/content-intelligence/publish-queue/publish-queue-states.jsonl",
+      "purpose": "Future article approval and publish queue state transitions.",
+      "owner_folder": "publish-queue",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "queue_id",
+        "state"
+      ],
+      "required_governance_fields": [
+        "allowed_next_states",
+        "blocked_actions",
+        "approval_required",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "learning_snapshot_record",
+      "future_file_path": "data/content-intelligence/learning/learning-snapshots.jsonl",
+      "purpose": "Future learning snapshots from article production, review and correction cycles.",
+      "owner_folder": "learning",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "learning_id",
+        "source_stage",
+        "related_article_or_packet_id"
+      ],
+      "required_governance_fields": [
+        "learning_type",
+        "safe_to_reuse",
+        "review_status",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "run_registry_record",
+      "future_file_path": "data/content-intelligence/run-registry/run-registry.jsonl",
+      "purpose": "Future generation/review run records and reproducibility metadata.",
+      "owner_folder": "run-registry",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "run_id",
+        "stage_id",
+        "timestamp"
+      ],
+      "required_governance_fields": [
+        "input_artifacts",
+        "output_artifacts",
+        "mutation_flags",
+        "validation_status",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "audit_event_record",
+      "future_file_path": "data/content-intelligence/run-registry/audit-events.jsonl",
+      "purpose": "Future append-only audit event records for governance-critical decisions.",
+      "owner_folder": "run-registry",
+      "record_status_in_ag06k": "schema_only_not_created",
+      "required_identity_fields": [
+        "record_id",
+        "event_id",
+        "stage_id",
+        "timestamp"
+      ],
+      "required_governance_fields": [
+        "event_type",
+        "decision",
+        "actor_or_process",
+        "affected_artifacts",
+        "audit_trace"
+      ]
+    }
+  ],
+  "state_model": [
+    "planned_not_created",
+    "draft_record_allowed_in_future_stage",
+    "under_review",
+    "revision_required",
+    "approved_for_content_packet",
+    "approved_for_publish_queue",
+    "publish_ready",
+    "published_in_later_stage",
+    "rejected",
+    "archived_by_explicit_approval_only"
+  ],
+  "required_store_manifest_fields": [
+    "store_id",
+    "store_name",
+    "owner_folder",
+    "future_file_path",
+    "record_family",
+    "schema_id",
+    "schema_version",
+    "append_policy",
+    "review_policy",
+    "mutation_policy",
+    "retention_policy",
+    "activation_status"
+  ],
+  "future_file_naming_rules": {
+    "extension": ".jsonl",
+    "naming_style": "lowercase-kebab-case",
+    "one_record_family_per_file": true,
+    "no_mixed_record_families": true,
+    "no_public_article_html_inside_jsonl": true,
+    "no_raw_secret_or_private_identity_storage": true
+  },
+  "data_safety_rules": {
+    "pii_default_allowed": false,
+    "secrets_allowed": false,
+    "raw_user_profile_storage_allowed": false,
+    "public_html_mutation_through_jsonl_allowed": false,
+    "database_sync_allowed_in_ag06k": false,
+    "external_publish_allowed_in_ag06k": false
+  },
+  "validation_rules_for_future_jsonl": [
+    "Each line must parse as one JSON object.",
+    "Each record must include record_id, schema_id, schema_version, stage_id and audit_trace.",
+    "Each record must include mutation_controls.",
+    "Each record family must match the declared future file path.",
+    "No record may mark public_ready=true unless a later approved stage permits it.",
+    "No record may mark publish_ready=true unless the publish-readiness register approves it.",
+    "No record may contain secrets, tokens or raw credentials.",
+    "No record may be imported from scaffold output without explicit approval."
+  ],
+  "guardrail_rules": [
+    "AG06K defines future JSONL store governance but does not create production JSONL records.",
+    "AG06K does not append to JSONL files.",
+    "AG06K does not import scaffold outputs.",
+    "AG06K does not write to any database.",
+    "AG06K does not activate Supabase or Auth.",
+    "AG06K does not mutate public articles.",
+    "AG06K does not insert references.",
+    "AG06K does not generate content packets.",
+    "AG06K does not publish content."
+  ],
+  "next_stage": {
+    "module_id": "AG06L",
+    "title": "Publish Queue and Approval State Register",
+    "allowed_scope": "queue/approval schema and governance only",
+    "blocked_scope": "publishing, article mutation, reference insertion, backend activation"
+  },
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "verified_reference_population_performed": false,
+  "candidate_reference_population_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "scaffold_import_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false,
+  "jsonl_file_created": false,
+  "jsonl_production_record_created": false,
+  "jsonl_append_performed": false,
+  "jsonl_import_performed": false,
+  "database_write_performed": false
+}

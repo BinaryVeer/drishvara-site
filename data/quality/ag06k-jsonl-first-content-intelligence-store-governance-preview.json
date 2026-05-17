@@ -1,0 +1,101 @@
+{
+  "module_id": "AG06K",
+  "preview_only": true,
+  "summary": {
+    "record_family_count": 10,
+    "common_line_contract_defined": true,
+    "append_only_default": true,
+    "schema_version_required": true,
+    "audit_trace_required": true,
+    "mutation_controls_required": true,
+    "source_trace_required": true,
+    "state_model_count": 10,
+    "jsonl_file_creation_allowed_in_ag06k": false,
+    "jsonl_append_allowed_in_ag06k": false,
+    "jsonl_import_allowed_in_ag06k": false,
+    "database_write_allowed_in_ag06k": false,
+    "public_article_mutation_allowed": false,
+    "content_packet_generation_allowed": false,
+    "public_publishing_allowed": false,
+    "next_stage_id": "AG06L"
+  },
+  "record_families_preview": [
+    {
+      "family_id": "content_packet_record",
+      "future_file_path": "data/content-intelligence/content-packets/content-packets.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "reference_candidate_record",
+      "future_file_path": "data/content-intelligence/reference-registry/reference-candidates.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "approved_reference_record",
+      "future_file_path": "data/content-intelligence/reference-registry/approved-references.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "rejected_reference_record",
+      "future_file_path": "data/content-intelligence/reference-registry/rejected-references.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "visual_plan_record",
+      "future_file_path": "data/content-intelligence/visual-registry/visual-plans.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "quality_review_record",
+      "future_file_path": "data/content-intelligence/quality-reviews/quality-reviews.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "publish_queue_state_record",
+      "future_file_path": "data/content-intelligence/publish-queue/publish-queue-states.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "learning_snapshot_record",
+      "future_file_path": "data/content-intelligence/learning/learning-snapshots.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "run_registry_record",
+      "future_file_path": "data/content-intelligence/run-registry/run-registry.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    },
+    {
+      "family_id": "audit_event_record",
+      "future_file_path": "data/content-intelligence/run-registry/audit-events.jsonl",
+      "record_status_in_ag06k": "schema_only_not_created"
+    }
+  ],
+  "state_model_preview": [
+    "planned_not_created",
+    "draft_record_allowed_in_future_stage",
+    "under_review",
+    "revision_required",
+    "approved_for_content_packet",
+    "approved_for_publish_queue",
+    "publish_ready",
+    "published_in_later_stage",
+    "rejected",
+    "archived_by_explicit_approval_only"
+  ],
+  "no_mutation_summary": {
+    "jsonl_file_created": false,
+    "jsonl_append_performed": false,
+    "jsonl_import_performed": false,
+    "scaffold_import_performed": false,
+    "database_write_performed": false,
+    "public_article_mutation_performed": false,
+    "reference_insertion_performed": false,
+    "content_packet_generation_performed": false,
+    "public_publishing_performed": false,
+    "backend_activation_performed": false,
+    "supabase_enabled": false,
+    "auth_enabled": false
+  },
+  "next_stage_id": "AG06L"
+}

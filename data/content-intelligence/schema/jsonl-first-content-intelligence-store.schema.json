@@ -1,0 +1,279 @@
+{
+  "schema_id": "drishvara/ag06k/jsonl-first-content-intelligence-store.schema.json",
+  "module_id": "AG06K",
+  "title": "JSONL-first Content Intelligence Store Governance Schema",
+  "status": "schema_only",
+  "description": "Schema for future JSONL-first content-intelligence stores. This schema does not create JSONL files, append records, import scaffold outputs, mutate public articles, activate database storage or publish content.",
+  "required_top_level_fields": [
+    "store_id",
+    "record_family",
+    "future_file_path",
+    "common_line_contract",
+    "record_required_fields",
+    "state_model",
+    "mutation_controls",
+    "audit_trace"
+  ],
+  "common_line_contract": {
+    "encoding": "utf-8",
+    "line_format": "one_valid_json_object_per_line",
+    "blank_lines_allowed": false,
+    "trailing_commas_allowed": false,
+    "append_only_default": true,
+    "stable_record_id_required": true,
+    "schema_version_required": true,
+    "stage_id_required": true,
+    "created_at_required": true,
+    "updated_at_required": true,
+    "audit_trace_required": true,
+    "mutation_controls_required": true,
+    "source_trace_required": true,
+    "public_ready_flag_default": false,
+    "publish_ready_flag_default": false
+  },
+  "record_family_ids": [
+    "content_packet_record",
+    "reference_candidate_record",
+    "approved_reference_record",
+    "rejected_reference_record",
+    "visual_plan_record",
+    "quality_review_record",
+    "publish_queue_state_record",
+    "learning_snapshot_record",
+    "run_registry_record",
+    "audit_event_record"
+  ],
+  "record_family_contracts": [
+    {
+      "family_id": "content_packet_record",
+      "future_file_path": "data/content-intelligence/content-packets/content-packets.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "content_packet_id",
+        "article_slug",
+        "category",
+        "title",
+        "version",
+        "created_at",
+        "updated_at"
+      ],
+      "required_governance_fields": [
+        "stage_id",
+        "approval_state",
+        "source_trace",
+        "mutation_controls",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "reference_candidate_record",
+      "future_file_path": "data/content-intelligence/reference-registry/reference-candidates.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "reference_id",
+        "candidate_url_hash",
+        "source_type"
+      ],
+      "required_governance_fields": [
+        "credibility_tier",
+        "link_health_status",
+        "approval_status",
+        "reviewer_note",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "approved_reference_record",
+      "future_file_path": "data/content-intelligence/reference-registry/approved-references.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "reference_id",
+        "canonical_url_hash"
+      ],
+      "required_governance_fields": [
+        "approval_status",
+        "approved_by_stage",
+        "claim_or_section_supported",
+        "source_quality_score",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "rejected_reference_record",
+      "future_file_path": "data/content-intelligence/reference-registry/rejected-references.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "reference_id"
+      ],
+      "required_governance_fields": [
+        "rejection_reason",
+        "replacement_required",
+        "reviewer_note",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "visual_plan_record",
+      "future_file_path": "data/content-intelligence/visual-registry/visual-plans.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "visual_id",
+        "visual_type"
+      ],
+      "required_governance_fields": [
+        "rights_or_credit_status",
+        "generation_status",
+        "review_status",
+        "visual_quality_score",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "quality_review_record",
+      "future_file_path": "data/content-intelligence/quality-reviews/quality-reviews.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "review_id",
+        "review_stage"
+      ],
+      "required_governance_fields": [
+        "quality_score",
+        "visitor_value_score",
+        "publish_readiness_gates",
+        "review_status",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "publish_queue_state_record",
+      "future_file_path": "data/content-intelligence/publish-queue/publish-queue-states.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "article_or_packet_id",
+        "queue_id",
+        "state"
+      ],
+      "required_governance_fields": [
+        "allowed_next_states",
+        "blocked_actions",
+        "approval_required",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "learning_snapshot_record",
+      "future_file_path": "data/content-intelligence/learning/learning-snapshots.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "learning_id",
+        "source_stage",
+        "related_article_or_packet_id"
+      ],
+      "required_governance_fields": [
+        "learning_type",
+        "safe_to_reuse",
+        "review_status",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "run_registry_record",
+      "future_file_path": "data/content-intelligence/run-registry/run-registry.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "run_id",
+        "stage_id",
+        "timestamp"
+      ],
+      "required_governance_fields": [
+        "input_artifacts",
+        "output_artifacts",
+        "mutation_flags",
+        "validation_status",
+        "audit_trace"
+      ]
+    },
+    {
+      "family_id": "audit_event_record",
+      "future_file_path": "data/content-intelligence/run-registry/audit-events.jsonl",
+      "required_identity_fields": [
+        "record_id",
+        "event_id",
+        "stage_id",
+        "timestamp"
+      ],
+      "required_governance_fields": [
+        "event_type",
+        "decision",
+        "actor_or_process",
+        "affected_artifacts",
+        "audit_trace"
+      ]
+    }
+  ],
+  "allowed_states": [
+    "planned_not_created",
+    "draft_record_allowed_in_future_stage",
+    "under_review",
+    "revision_required",
+    "approved_for_content_packet",
+    "approved_for_publish_queue",
+    "publish_ready",
+    "published_in_later_stage",
+    "rejected",
+    "archived_by_explicit_approval_only"
+  ],
+  "future_jsonl_creation_allowed_in_ag06k": false,
+  "future_jsonl_append_allowed_in_ag06k": false,
+  "scaffold_import_allowed_in_ag06k": false,
+  "database_write_allowed_in_ag06k": false,
+  "public_mutation_allowed_in_ag06k": false,
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "verified_reference_population_performed": false,
+  "candidate_reference_population_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "scaffold_import_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false,
+  "jsonl_file_created": false,
+  "jsonl_production_record_created": false,
+  "jsonl_append_performed": false,
+  "jsonl_import_performed": false,
+  "database_write_performed": false
+}
