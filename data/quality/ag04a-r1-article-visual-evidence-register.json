@@ -1,0 +1,66 @@
+{
+  "module_id": "AG04A-R1",
+  "module_title": "Article Visual Evidence Register and Manual Review Queue",
+  "phase": "Article Visual / Image Credit / Reading Surface Governance",
+  "status": "evidence_register_manual_review_queue_only",
+  "depends_on": [
+    "AG04A",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "article_text_mutation_enabled": false,
+  "article_image_mutation_enabled": false,
+  "image_credit_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "css_mutation_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag04a_audit": "data/editorial/ag04a-article-visual-credit-width-governance-audit.json",
+    "ag03z_closure_audit": "data/editorial/ag03z-final-verified-reference-closure-audit.json"
+  },
+  "expected": {
+    "article_count": 72,
+    "references_per_article": 2,
+    "ag03_reference_link_count": 144
+  },
+  "outputs": {
+    "evidence_register": "data/editorial/ag04a-r1-article-visual-evidence-register.json",
+    "preview": "data/quality/ag04a-r1-article-visual-evidence-preview.json"
+  },
+  "review_status_values": [
+    "manual_review_pending",
+    "manual_review_not_required_by_audit",
+    "manual_review_required_due_to_visual_evidence_gap"
+  ],
+  "recommended_next_stage": {
+    "module_id": "AG04A-R2",
+    "title": "Manual Visual Review Result Record",
+    "allowed": true,
+    "only_after_ag04a_r1_validation": true,
+    "scope": "record human review outcome before deciding whether AG04B correction is required",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "reference_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false,
+    "deployment_allowed": false
+  }
+}
