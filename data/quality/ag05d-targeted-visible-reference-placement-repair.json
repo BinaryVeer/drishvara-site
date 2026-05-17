@@ -1,0 +1,66 @@
+{
+  "module_id": "AG05D",
+  "module_title": "Targeted Visible Reference Placement Repair",
+  "phase": "Public Page / Live-Readiness / Visible Reference Governance",
+  "status": "targeted_article_html_repair",
+  "depends_on": [
+    "AG05C",
+    "AG05B",
+    "AG05A",
+    "AG04Z",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": true,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "favicon_mutation_enabled": false,
+  "navigation_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag05c_result": "data/editorial/ag05c-manual-live-page-smoke-review-result-record.json",
+    "ag03z_closure": "data/editorial/ag03z-final-verified-reference-closure-audit.json",
+    "ag04z_closure": "data/editorial/ag04z-article-visual-credit-width-governance-closure.json"
+  },
+  "outputs": {
+    "apply_result": "data/quality/ag05d-targeted-visible-reference-placement-repair-apply-result.json",
+    "preview": "data/quality/ag05d-targeted-visible-reference-placement-repair-preview.json"
+  },
+  "expected": {
+    "references_per_repaired_article": 2,
+    "minimum_repaired_article_count": 1
+  },
+  "recommended_next_stage": {
+    "module_id": "AG05E",
+    "title": "Post-AG05D Visible Reference Placement Repair Audit",
+    "allowed": true,
+    "only_after_ag05d_validation": true,
+    "scope": "verify visible reference placement after AG05D and decide whether AG05Z closure is allowed",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
