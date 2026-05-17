@@ -1,0 +1,88 @@
+{
+  "module_id": "AG06C",
+  "module_title": "Scaffold Output Preservation Register",
+  "phase": "Content Intelligence Foundation",
+  "status": "preservation_register_stage",
+  "depends_on": [
+    "AG06B",
+    "AG06A",
+    "SOURCE_TREE_ACTIVE_REGISTER"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "public_article_mutation_enabled": false,
+  "scaffold_file_copy_enabled": false,
+  "scaffold_file_move_enabled": false,
+  "scaffold_file_delete_enabled": false,
+  "input_files": {
+    "ag06b_manifest": "data/content-intelligence/schema/content-intelligence-schema-manifest.json",
+    "ag06a_audit": "data/editorial/ag06a-full-source-of-truth-inventory-audit.json",
+    "source_tree_active_register": "data/quality/source-tree-active-register.json",
+    "run_registry_schema": "data/content-intelligence/schema/run-registry.schema.json",
+    "content_packet_schema": "data/content-intelligence/schema/content-packet.schema.json",
+    "visual_registry_schema": "data/content-intelligence/schema/visual-registry.schema.json",
+    "learning_snapshot_schema": "data/content-intelligence/schema/learning-snapshot.schema.json"
+  },
+  "scan": {
+    "scaffold_output_root": "drishvara_phase01_scaffold/content/outputs",
+    "artifact_markers": [
+      "01_input.json",
+      "02_normalized_brief.json",
+      "03_story_draft.json",
+      "04_visual_plan.json",
+      "05_integrated_draft.json",
+      "06_guard_report",
+      "07_publish_bundle.json",
+      "08_final_output.md",
+      "09_final_output.html",
+      "10_learning_snapshot.json",
+      "11_promotion_summary.json",
+      "12_playbook_summary.json"
+    ]
+  },
+  "outputs": {
+    "preservation_register": "data/content-intelligence/run-registry/scaffold-output-preservation-register.json",
+    "preview": "data/quality/ag06c-scaffold-output-preservation-preview.json"
+  },
+  "expected": {
+    "minimum_run_entry_count": 60,
+    "minimum_final_markdown_count": 60,
+    "minimum_visual_plan_count": 60,
+    "minimum_learning_snapshot_count": 60
+  },
+  "recommended_next_stage": {
+    "module_id": "AG06D",
+    "title": "Existing Public Article Classification",
+    "allowed": true,
+    "only_after_ag06c_validation": true,
+    "scope": "classify existing 77 public articles as test corpus, upgrade candidate, archive candidate, exclude candidate or reference-governance candidate",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
