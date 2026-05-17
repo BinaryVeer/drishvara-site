@@ -1,0 +1,47 @@
+{
+  "module_id": "AG05D-R1",
+  "module_title": "AR01 Visible Placeholder Neutralization",
+  "status": "targeted_article_html_repair",
+  "depends_on": [
+    "AG05E",
+    "AG05D",
+    "AG05C",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": true,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "frontend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag05d_apply_result": "data/quality/ag05d-targeted-visible-reference-placement-repair-apply-result.json"
+  },
+  "outputs": {
+    "apply_result": "data/quality/ag05d-r1-ar01-visible-placeholder-neutralization-apply-result.json",
+    "preview": "data/quality/ag05d-r1-ar01-visible-placeholder-neutralization-preview.json"
+  },
+  "expected": {
+    "processed_article_count": 72,
+    "references_per_article": 2,
+    "visible_ag05d_blocks_per_article": 1,
+    "visible_ar01_placeholder_count": 0
+  },
+  "recommended_next_stage": {
+    "module_id": "AG05E-R1",
+    "title": "Post-AG05D-R1 AR01 Placeholder Neutralization Audit",
+    "allowed": true,
+    "scope": "audit visible reference presentation after AR01 placeholder neutralization",
+    "article_html_mutation_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
