@@ -1,0 +1,64 @@
+{
+  "register_id": "SOURCE_TREE_ACTIVE_REGISTER",
+  "status": "housekeeping_source_of_truth_separation",
+  "purpose": "Define active source folders, production-intelligence folders and excluded local/archive folders before AG06A.",
+  "active_public_site_files": [
+    "index.html",
+    "article.html",
+    "insights.html",
+    "about.html",
+    "login.html",
+    "submissions.html",
+    "admin.html",
+    "articles/",
+    "assets/",
+    "package.json",
+    "package-lock.json",
+    "vercel.json"
+  ],
+  "active_governance_data_folders": [
+    "data/",
+    "docs/",
+    "scripts/"
+  ],
+  "active_automation_future_backend_folders": [
+    "api/",
+    "services/",
+    "supabase/",
+    "specs/"
+  ],
+  "production_intelligence_folders_for_ag06_review": [
+    "drishvara_phase01_scaffold/",
+    "generated/"
+  ],
+  "excluded_from_public_scans": [
+    "_local_archive/",
+    "archive/",
+    "review-bundles/",
+    "node_modules/",
+    ".git/",
+    "*.backup*",
+    "index.backup*.html",
+    "index.html.backup-*",
+    "assets/js/*.backup-*",
+    "data/ChatGPT Image*.png"
+  ],
+  "public_scan_include": [
+    "index.html",
+    "article.html",
+    "insights.html",
+    "articles/"
+  ],
+  "content_intelligence_scan_include": [
+    "drishvara_phase01_scaffold/",
+    "generated/",
+    "data/",
+    "docs/",
+    "scripts/",
+    "api/",
+    "services/",
+    "supabase/",
+    "specs/"
+  ],
+  "next_stage": "AG06A_FULL_SOURCE_OF_TRUTH_INVENTORY_AUDIT"
+}
