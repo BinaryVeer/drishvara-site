@@ -1,0 +1,186 @@
+{
+  "module_id": "AG07B",
+  "preview_only": true,
+  "summary": {
+    "ag06z_foundation_closed": true,
+    "ag07a_boundary_closed": true,
+    "ag07_requires_explicit_user_approval": true,
+    "source_queue_count_from_ag06f": 77,
+    "planning_entry_count_from_ag06h": 0,
+    "approval_queue_count_from_ag06l": 77,
+    "approval_entries_not_publish_ready": true,
+    "planned_component_count": 6,
+    "future_implementation_file_count": 4,
+    "dry_run_algorithm_step_count": 7,
+    "planned_validation_count": 8,
+    "candidate_preview_count": 5,
+    "implementation_plan_defined": true,
+    "generator_code_creation_allowed_in_ag07b": false,
+    "generator_implementation_allowed_in_ag07b": false,
+    "dry_run_execution_allowed_in_ag07b": false,
+    "content_packet_generation_allowed": false,
+    "content_packet_output_write_allowed": false,
+    "public_article_mutation_allowed": false,
+    "reference_insertion_allowed": false,
+    "visual_generation_allowed": false,
+    "scaffold_import_allowed": false,
+    "jsonl_append_allowed": false,
+    "publishing_allowed": false,
+    "backend_auth_supabase_allowed": false,
+    "next_stage_id": "AG07C"
+  },
+  "planned_components_preview": [
+    {
+      "component_id": "readonly_input_loader",
+      "implementation_status_in_ag07b": "planned_not_created",
+      "execution_allowed_in_ag07b": false
+    },
+    {
+      "component_id": "source_context_assembler",
+      "implementation_status_in_ag07b": "planned_not_created",
+      "execution_allowed_in_ag07b": false
+    },
+    {
+      "component_id": "content_packet_object_builder",
+      "implementation_status_in_ag07b": "planned_not_created",
+      "execution_allowed_in_ag07b": false
+    },
+    {
+      "component_id": "dry_run_validator",
+      "implementation_status_in_ag07b": "planned_not_created",
+      "execution_allowed_in_ag07b": false
+    },
+    {
+      "component_id": "dry_run_preview_writer",
+      "implementation_status_in_ag07b": "planned_not_created",
+      "execution_allowed_in_ag07b": false
+    },
+    {
+      "component_id": "audit_trace_builder",
+      "implementation_status_in_ag07b": "planned_not_created",
+      "execution_allowed_in_ag07b": false
+    }
+  ],
+  "future_implementation_files_preview": [
+    {
+      "future_file_path": "scripts/generate-ag07c-content-packet-generator-dry-run-preview.mjs",
+      "future_purpose": "Potential later dry-run preview generator script.",
+      "allowed_in_ag07b": false,
+      "requires_explicit_later_approval": true
+    },
+    {
+      "future_file_path": "scripts/validate-ag07c-content-packet-generator-dry-run-preview.mjs",
+      "future_purpose": "Potential later validator for dry-run preview outputs.",
+      "allowed_in_ag07b": false,
+      "requires_explicit_later_approval": true
+    },
+    {
+      "future_file_path": "data/content-intelligence/content-packets/ag07c-dry-run-preview.json",
+      "future_purpose": "Potential later preview-only dry-run content packet output.",
+      "allowed_in_ag07b": false,
+      "requires_explicit_later_approval": true
+    },
+    {
+      "future_file_path": "data/quality/ag07c-content-packet-generator-dry-run-preview.json",
+      "future_purpose": "Potential later quality registry for dry-run preview.",
+      "allowed_in_ag07b": false,
+      "requires_explicit_later_approval": true
+    }
+  ],
+  "candidate_preview": [
+    {
+      "preview_id": "ag07b_plan_candidate_001",
+      "source_article_path": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "source_queue_id": "ag06f_public_upgrade_001",
+      "category": "media",
+      "detected_title": "Algorithmic Bias in Content Curation: Addressing the Challenges to Fair Representation",
+      "planned_for_future_dry_run": true,
+      "selected_for_execution_in_ag07b": false,
+      "content_packet_generation_performed": false,
+      "content_packet_output_written": false,
+      "public_article_mutation_performed": false,
+      "reference_insertion_performed": false,
+      "jsonl_append_performed": false,
+      "publishing_performed": false
+    },
+    {
+      "preview_id": "ag07b_plan_candidate_002",
+      "source_article_path": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "source_queue_id": "ag06f_public_upgrade_002",
+      "category": "media",
+      "detected_title": "The Ethics of AI-Generated Content in Journalism and Public Discourse",
+      "planned_for_future_dry_run": true,
+      "selected_for_execution_in_ag07b": false,
+      "content_packet_generation_performed": false,
+      "content_packet_output_written": false,
+      "public_article_mutation_performed": false,
+      "reference_insertion_performed": false,
+      "jsonl_append_performed": false,
+      "publishing_performed": false
+    },
+    {
+      "preview_id": "ag07b_plan_candidate_003",
+      "source_article_path": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "source_queue_id": "ag06f_public_upgrade_003",
+      "category": "media",
+      "detected_title": "The Ethics of AI-Generated Content in Journalism and Its Societal Implications",
+      "planned_for_future_dry_run": true,
+      "selected_for_execution_in_ag07b": false,
+      "content_packet_generation_performed": false,
+      "content_packet_output_written": false,
+      "public_article_mutation_performed": false,
+      "reference_insertion_performed": false,
+      "jsonl_append_performed": false,
+      "publishing_performed": false
+    },
+    {
+      "preview_id": "ag07b_plan_candidate_004",
+      "source_article_path": "articles/media/ethics-ai-generated-content-journalism.html",
+      "source_queue_id": "ag06f_public_upgrade_004",
+      "category": "media",
+      "detected_title": "The Ethics of AI-Generated Content in Journalism",
+      "planned_for_future_dry_run": true,
+      "selected_for_execution_in_ag07b": false,
+      "content_packet_generation_performed": false,
+      "content_packet_output_written": false,
+      "public_article_mutation_performed": false,
+      "reference_insertion_performed": false,
+      "jsonl_append_performed": false,
+      "publishing_performed": false
+    },
+    {
+      "preview_id": "ag07b_plan_candidate_005",
+      "source_article_path": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "source_queue_id": "ag06f_public_upgrade_005",
+      "category": "media",
+      "detected_title": "The Ethics of AI-Generated News: Balancing Speed and Accuracy",
+      "planned_for_future_dry_run": true,
+      "selected_for_execution_in_ag07b": false,
+      "content_packet_generation_performed": false,
+      "content_packet_output_written": false,
+      "public_article_mutation_performed": false,
+      "reference_insertion_performed": false,
+      "jsonl_append_performed": false,
+      "publishing_performed": false
+    }
+  ],
+  "no_mutation_summary": {
+    "generator_code_created": false,
+    "generator_runtime_created": false,
+    "ag07_content_packet_generator_implemented": false,
+    "ag07_dry_run_execution_performed": false,
+    "content_packet_generation_performed": false,
+    "content_packet_output_written": false,
+    "dry_run_preview_written": false,
+    "public_article_mutation_performed": false,
+    "reference_insertion_performed": false,
+    "visual_asset_generation_performed": false,
+    "scaffold_import_performed": false,
+    "jsonl_append_performed": false,
+    "public_publishing_performed": false,
+    "backend_activation_performed": false,
+    "supabase_enabled": false,
+    "auth_enabled": false
+  },
+  "next_stage_id": "AG07C"
+}
