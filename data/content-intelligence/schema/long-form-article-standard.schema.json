@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "drishvara/content-intelligence/long-form-article-standard.schema.json",
+  "title": "AG06E Long-Form Article Standard Content Packet Schema",
+  "module_id": "AG06E",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "article_identity",
+    "target_word_count",
+    "actual_word_count",
+    "verified_references",
+    "visual_plan",
+    "data_enrichment_units",
+    "quality_score",
+    "visitor_value_score",
+    "review_status",
+    "publish_readiness_gates"
+  ],
+  "properties": {
+    "article_identity": {
+      "type": "object",
+      "required": [
+        "title",
+        "category",
+        "topic_intent"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "topic_intent": {
+          "type": "string"
+        }
+      }
+    },
+    "target_word_count": {
+      "type": "integer",
+      "minimum": 1500,
+      "maximum": 2200
+    },
+    "actual_word_count": {
+      "type": "integer",
+      "minimum": 1500,
+      "maximum": 2200
+    },
+    "verified_references": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "url",
+          "title",
+          "source_type",
+          "verification_status"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": "string"
+          },
+          "verification_status": {
+            "const": "verified"
+          }
+        }
+      }
+    },
+    "visual_plan": {
+      "type": "object",
+      "required": [
+        "primary_visual_required",
+        "image_credit_required"
+      ],
+      "properties": {
+        "primary_visual_required": {
+          "const": true
+        },
+        "image_credit_required": {
+          "const": true
+        }
+      }
+    },
+    "data_enrichment_units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality_score": {
+      "type": "integer",
+      "minimum": 85,
+      "maximum": 100
+    },
+    "visitor_value_score": {
+      "type": "integer",
+      "minimum": 80,
+      "maximum": 100
+    },
+    "review_status": {
+      "enum": [
+        "draft",
+        "standard_check_pending",
+        "reference_review_pending",
+        "visual_review_pending",
+        "editorial_review_pending",
+        "quality_review_pending",
+        "publish_ready",
+        "revision_required",
+        "rejected",
+        "retained_for_learning"
+      ]
+    },
+    "publish_readiness_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "governance_only": true,
+  "runtime_activation_enabled": false,
+  "public_output_enabled": false
+}
