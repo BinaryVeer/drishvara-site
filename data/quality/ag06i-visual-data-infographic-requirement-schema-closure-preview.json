@@ -1,0 +1,110 @@
+{
+  "module_id": "AG06I",
+  "preview_only": true,
+  "summary": {
+    "primary_hero_visual_required": true,
+    "minimum_primary_hero_visual_count": 1,
+    "structured_visual_or_data_unit_required": true,
+    "minimum_structured_visual_or_data_unit_count": 1,
+    "allowed_visual_type_count": 10,
+    "structured_enrichment_type_count": 9,
+    "image_credit_or_attribution_required": true,
+    "alt_text_plan_required": true,
+    "mobile_safe_layout_required": true,
+    "visual_quality_score_required": true,
+    "visual_quality_score_min_publish_ready": 80,
+    "visual_asset_generation_allowed": false,
+    "infographic_generation_allowed": false,
+    "public_article_mutation_allowed": false,
+    "next_stage_id": "AG06J"
+  },
+  "visual_types_preview": [
+    {
+      "type_id": "hero_visual",
+      "label": "Primary Hero Visual",
+      "required": true,
+      "counts_as_structured_enrichment": false
+    },
+    {
+      "type_id": "data_box",
+      "label": "Structured Data Box",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "comparison_table",
+      "label": "Comparison Table",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "timeline",
+      "label": "Timeline",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "concept_diagram",
+      "label": "Concept Diagram",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "flowchart",
+      "label": "Flowchart",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "chart_or_graph",
+      "label": "Chart or Graph",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "map_or_spatial_view",
+      "label": "Map or Spatial View",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "infographic",
+      "label": "Infographic",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    },
+    {
+      "type_id": "structured_key_takeaways_box",
+      "label": "Structured Key Takeaways Box",
+      "required": false,
+      "counts_as_structured_enrichment": true
+    }
+  ],
+  "publish_readiness_gates_preview": [
+    "primary_hero_visual_planned",
+    "primary_hero_visual_credit_or_attribution_planned",
+    "primary_hero_visual_alt_text_planned",
+    "at_least_one_structured_visual_or_data_unit_planned",
+    "visual_source_or_data_basis_recorded",
+    "rights_credit_review_pending_or_passed",
+    "mobile_safe_layout_expectation_recorded",
+    "visual_quality_score_planned",
+    "no_visual_asset_generation_in_ag06i",
+    "no_public_article_mutation_in_ag06i"
+  ],
+  "no_mutation_summary": {
+    "visual_asset_generation_performed": false,
+    "infographic_generation_performed": false,
+    "chart_generation_performed": false,
+    "map_generation_performed": false,
+    "public_article_mutation_performed": false,
+    "css_mutation_performed": false,
+    "javascript_mutation_performed": false,
+    "reference_url_change_performed": false,
+    "public_publishing_performed": false,
+    "backend_activation_performed": false,
+    "supabase_enabled": false,
+    "auth_enabled": false
+  },
+  "next_stage_id": "AG06J"
+}

@@ -1,0 +1,281 @@
+{
+  "module_id": "AG06I",
+  "title": "Visual / Data / Infographic Requirement Standard",
+  "standard_type": "future_long_form_visual_intelligence_standard",
+  "status": "schema_closure_only",
+  "governance_only": true,
+  "depends_on": [
+    "AG06H-R1",
+    "AG06E",
+    "AG06H",
+    "AG06B"
+  ],
+  "generated_from": {
+    "ag06hR1Review": "data/content-intelligence/quality-reviews/content-intelligence-foundation-alignment-review.json",
+    "ag06eStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06hPlanningQueue": "data/content-intelligence/publish-queue/long-form-batch-01-content-packet-planning.json",
+    "contentPacketSchema": "data/content-intelligence/schema/content-packet.schema.json"
+  },
+  "purpose": "Define the mandatory visual, data-box, chart, graph, table, map, diagram and infographic requirements for future Drishvara long-form content packets without generating visual assets or mutating public articles.",
+  "summary": {
+    "primary_hero_visual_required": true,
+    "minimum_primary_hero_visual_count": 1,
+    "structured_visual_or_data_unit_required": true,
+    "minimum_structured_visual_or_data_unit_count": 1,
+    "allowed_visual_type_count": 10,
+    "structured_enrichment_type_count": 9,
+    "image_credit_or_attribution_required": true,
+    "alt_text_plan_required": true,
+    "mobile_safe_layout_required": true,
+    "visual_quality_score_required": true,
+    "visual_quality_score_min_publish_ready": 80,
+    "visual_asset_generation_allowed": false,
+    "infographic_generation_allowed": false,
+    "public_article_mutation_allowed": false,
+    "next_stage_id": "AG06J"
+  },
+  "visual_types": [
+    {
+      "type_id": "hero_visual",
+      "label": "Primary Hero Visual",
+      "required": true,
+      "minimum_per_article": 1,
+      "maximum_per_article": 1,
+      "purpose": "Give the article a clear first visual identity and topic signal.",
+      "required_fields": [
+        "visual_intent",
+        "placement",
+        "source_or_generation_basis",
+        "rights_or_credit_status",
+        "alt_text_plan",
+        "mobile_safe_expectation"
+      ]
+    },
+    {
+      "type_id": "data_box",
+      "label": "Structured Data Box",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Summarise facts, figures, definitions, frameworks or comparison points in a reader-friendly box."
+    },
+    {
+      "type_id": "comparison_table",
+      "label": "Comparison Table",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Compare concepts, options, timelines, stakeholder roles or before/after states."
+    },
+    {
+      "type_id": "timeline",
+      "label": "Timeline",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Show sequence, evolution, milestones or process stages."
+    },
+    {
+      "type_id": "concept_diagram",
+      "label": "Concept Diagram",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Explain relationships, systems, workflows or layered ideas visually."
+    },
+    {
+      "type_id": "flowchart",
+      "label": "Flowchart",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Represent decisions, review gates, service journeys or procedural logic."
+    },
+    {
+      "type_id": "chart_or_graph",
+      "label": "Chart or Graph",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Represent quantitative relationships where credible data is available."
+    },
+    {
+      "type_id": "map_or_spatial_view",
+      "label": "Map or Spatial View",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Represent geography, regional variation, route, location or distribution when relevant."
+    },
+    {
+      "type_id": "infographic",
+      "label": "Infographic",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Combine key ideas, numbers and visual hierarchy into a compact reader-value unit."
+    },
+    {
+      "type_id": "structured_key_takeaways_box",
+      "label": "Structured Key Takeaways Box",
+      "required": false,
+      "counts_as_structured_enrichment": true,
+      "purpose": "Provide high-retention reader takeaways when a richer chart or diagram is not appropriate."
+    }
+  ],
+  "structured_enrichment_types": [
+    "data_box",
+    "comparison_table",
+    "timeline",
+    "concept_diagram",
+    "flowchart",
+    "chart_or_graph",
+    "map_or_spatial_view",
+    "infographic",
+    "structured_key_takeaways_box"
+  ],
+  "mandatory_article_visual_requirements": {
+    "primary_hero_visual": {
+      "required": true,
+      "minimum_count": 1,
+      "maximum_count": 1,
+      "must_have_credit_or_attribution": true,
+      "must_have_alt_text_plan": true,
+      "must_have_caption_or_context_plan": true
+    },
+    "structured_visual_or_data_unit": {
+      "required": true,
+      "minimum_count": 1,
+      "accepted_types": [
+        "data_box",
+        "comparison_table",
+        "timeline",
+        "concept_diagram",
+        "flowchart",
+        "chart_or_graph",
+        "map_or_spatial_view",
+        "infographic",
+        "structured_key_takeaways_box"
+      ],
+      "may_be_non_generated_textual_structure": true,
+      "examples": [
+        "data_box",
+        "comparison_table",
+        "timeline",
+        "concept_diagram",
+        "flowchart",
+        "chart_or_graph",
+        "map_or_spatial_view",
+        "infographic"
+      ]
+    }
+  },
+  "per_visual_record_required_fields": [
+    "visual_id",
+    "visual_type",
+    "article_or_packet_id",
+    "placement",
+    "visual_intent",
+    "reader_value",
+    "source_or_data_basis",
+    "rights_or_credit_status",
+    "credit_or_attribution_text",
+    "alt_text_plan",
+    "caption_or_context_plan",
+    "mobile_safe_layout_expectation",
+    "generation_status",
+    "review_status"
+  ],
+  "allowed_generation_statuses": [
+    "not_generated",
+    "planning_only",
+    "candidate_needed",
+    "candidate_under_review",
+    "approved_for_future_generation",
+    "generated_in_later_stage",
+    "rejected"
+  ],
+  "allowed_review_statuses": [
+    "planned_not_reviewed",
+    "visual_review_pending",
+    "source_basis_review_pending",
+    "rights_credit_review_pending",
+    "accessibility_review_pending",
+    "approved_for_packet",
+    "revision_required",
+    "rejected"
+  ],
+  "visual_quality_scoring": {
+    "scale_min": 0,
+    "scale_max": 100,
+    "publish_ready_minimum": 80,
+    "weights": {
+      "relevance_to_article_argument": 20,
+      "reader_comprehension_value": 20,
+      "evidence_or_source_basis": 15,
+      "rights_credit_and_attribution_readiness": 15,
+      "mobile_layout_safety": 10,
+      "accessibility_alt_text_and_caption_plan": 10,
+      "originality_and_drishvara_visual_voice": 10
+    }
+  },
+  "publish_readiness_gates": [
+    "primary_hero_visual_planned",
+    "primary_hero_visual_credit_or_attribution_planned",
+    "primary_hero_visual_alt_text_planned",
+    "at_least_one_structured_visual_or_data_unit_planned",
+    "visual_source_or_data_basis_recorded",
+    "rights_credit_review_pending_or_passed",
+    "mobile_safe_layout_expectation_recorded",
+    "visual_quality_score_planned",
+    "no_visual_asset_generation_in_ag06i",
+    "no_public_article_mutation_in_ag06i"
+  ],
+  "explicit_exclusions": [
+    "AG06I does not generate hero images.",
+    "AG06I does not generate infographics.",
+    "AG06I does not generate charts, maps, diagrams or visual assets.",
+    "AG06I does not edit public article HTML.",
+    "AG06I does not change CSS or JavaScript.",
+    "AG06I does not insert or change references.",
+    "AG06I does not copy, move, delete or import scaffold outputs.",
+    "AG06I does not publish content.",
+    "AG06I does not activate backend, Auth, Supabase, API, subscriber, login or signup functionality."
+  ],
+  "next_stage": {
+    "module_id": "AG06J",
+    "title": "Reference and Source Credibility Schema Closure",
+    "allowed_scope": "schema/document/registry/preview/validator only",
+    "blocked_scope": "web fetching by script, reference insertion, article mutation, public publishing"
+  },
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "reference_insertion_performed": false,
+  "verified_reference_population_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "scaffold_import_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_generation_performed": false,
+  "infographic_generation_performed": false,
+  "chart_generation_performed": false,
+  "map_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false
+}
