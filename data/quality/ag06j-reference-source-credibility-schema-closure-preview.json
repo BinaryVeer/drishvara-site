@@ -1,0 +1,119 @@
+{
+  "module_id": "AG06J",
+  "preview_only": true,
+  "summary": {
+    "verified_reference_min_per_long_form_article": 2,
+    "verified_reference_max_per_long_form_article": 5,
+    "candidate_reference_minimum_recommended_per_article": 4,
+    "approved_reference_minimum_required_for_publish_ready": 2,
+    "source_type_count": 11,
+    "credibility_tier_count": 5,
+    "lifecycle_status_count": 13,
+    "rejection_reason_count": 12,
+    "source_quality_score_required": true,
+    "source_quality_score_min_publish_ready": 85,
+    "link_health_review_required": true,
+    "approved_and_rejected_source_trail_required": true,
+    "no_web_fetching_by_script": true,
+    "reference_url_population_allowed": false,
+    "reference_insertion_allowed": false,
+    "public_article_mutation_allowed": false,
+    "next_stage_id": "AG06K"
+  },
+  "source_type_preview": [
+    {
+      "source_type": "official_government_or_public_institution",
+      "credibility_default": "preferred"
+    },
+    {
+      "source_type": "peer_reviewed_or_academic",
+      "credibility_default": "preferred"
+    },
+    {
+      "source_type": "recognized_institutional_report",
+      "credibility_default": "preferred"
+    },
+    {
+      "source_type": "credible_data_or_statistics_source",
+      "credibility_default": "preferred"
+    },
+    {
+      "source_type": "reputable_news_or_wire",
+      "credibility_default": "accepted"
+    },
+    {
+      "source_type": "primary_document_or_original_material",
+      "credibility_default": "preferred"
+    },
+    {
+      "source_type": "domain_expert_or_explainer",
+      "credibility_default": "conditional"
+    },
+    {
+      "source_type": "classical_or_traditional_text_reference",
+      "credibility_default": "conditional"
+    },
+    {
+      "source_type": "brand_or_commercial_source",
+      "credibility_default": "restricted"
+    },
+    {
+      "source_type": "user_generated_or_social_media",
+      "credibility_default": "restricted"
+    },
+    {
+      "source_type": "weak_or_disallowed_source",
+      "credibility_default": "rejected"
+    }
+  ],
+  "credibility_tier_preview": [
+    {
+      "tier": "preferred",
+      "approval_allowed": true
+    },
+    {
+      "tier": "accepted",
+      "approval_allowed": true
+    },
+    {
+      "tier": "conditional",
+      "approval_allowed": true
+    },
+    {
+      "tier": "restricted",
+      "approval_allowed": false
+    },
+    {
+      "tier": "rejected",
+      "approval_allowed": false
+    }
+  ],
+  "publish_readiness_gates_preview": [
+    "candidate_reference_pool_planned",
+    "minimum_approved_reference_count_met",
+    "source_type_recorded_for_each_reference",
+    "credibility_tier_recorded_for_each_reference",
+    "claim_or_section_supported_recorded",
+    "link_health_review_pending_or_passed",
+    "approved_and_rejected_source_trail_recorded",
+    "source_quality_score_planned",
+    "no_web_fetching_by_script_in_ag06j",
+    "no_reference_insertion_in_ag06j",
+    "no_public_article_mutation_in_ag06j"
+  ],
+  "no_mutation_summary": {
+    "web_fetching_by_script_performed": false,
+    "reference_url_population_performed": false,
+    "reference_insertion_performed": false,
+    "public_article_mutation_performed": false,
+    "css_mutation_performed": false,
+    "javascript_mutation_performed": false,
+    "scaffold_import_performed": false,
+    "content_packet_generation_performed": false,
+    "public_publishing_performed": false,
+    "backend_activation_performed": false,
+    "supabase_enabled": false,
+    "auth_enabled": false
+  },
+  "next_stage_id": "AG06K"
+}

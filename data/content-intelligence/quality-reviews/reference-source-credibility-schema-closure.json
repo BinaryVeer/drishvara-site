@@ -1,0 +1,116 @@
+{
+  "module_id": "AG06J",
+  "title": "Reference and Source Credibility Schema Closure",
+  "status": "schema_closure_only",
+  "governance_only": true,
+  "depends_on": [
+    "AG06H-R1",
+    "AG06E",
+    "AG06I",
+    "AG06B"
+  ],
+  "generated_from": {
+    "ag06hR1Review": "data/content-intelligence/quality-reviews/content-intelligence-foundation-alignment-review.json",
+    "ag06eStandard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06iClosure": "data/content-intelligence/quality-reviews/visual-data-infographic-requirement-schema-closure.json",
+    "ag06iVisualStandard": "data/content-intelligence/visual-registry/visual-data-infographic-requirement-standard.json",
+    "contentPacketSchema": "data/content-intelligence/schema/content-packet.schema.json"
+  },
+  "optional_evidence": {
+    "ag03zClosure": {
+      "path": "data/quality/ag03z-final-verified-reference-closure-audit.json",
+      "present": true
+    },
+    "ag05zClosure": {
+      "path": "data/quality/ag05z-public-page-live-readiness-smoke-governance-closure.json",
+      "present": true
+    },
+    "ag06dClassification": {
+      "path": "data/content-intelligence/quality-reviews/public-article-classification-register.json",
+      "present": true
+    }
+  },
+  "summary": {
+    "verified_reference_min_per_long_form_article": 2,
+    "verified_reference_max_per_long_form_article": 5,
+    "candidate_reference_minimum_recommended_per_article": 4,
+    "approved_reference_minimum_required_for_publish_ready": 2,
+    "source_type_count": 11,
+    "credibility_tier_count": 5,
+    "lifecycle_status_count": 13,
+    "rejection_reason_count": 12,
+    "source_quality_score_required": true,
+    "source_quality_score_min_publish_ready": 85,
+    "link_health_review_required": true,
+    "approved_and_rejected_source_trail_required": true,
+    "no_web_fetching_by_script": true,
+    "reference_url_population_allowed": false,
+    "reference_insertion_allowed": false,
+    "public_article_mutation_allowed": false,
+    "next_stage_id": "AG06K"
+  },
+  "alignment_with_ag06h_r1": {
+    "immediate_next_stage_from_ag06h_r1": "AG06I",
+    "corrected_remaining_path_contains_ag06j": true,
+    "ag07_blocked_until_ag06z": true
+  },
+  "alignment_with_ag06e": {
+    "verified_reference_min": 2,
+    "verified_reference_max": 5,
+    "publish_readiness_gate_count_from_ag06e": 16
+  },
+  "alignment_with_ag06i": {
+    "ag06i_next_stage_id": "AG06J",
+    "visual_source_or_data_basis_gate_present": true
+  },
+  "standard_file": "data/content-intelligence/reference-registry/reference-source-credibility-standard.json",
+  "schema_file": "data/content-intelligence/schema/reference-source-credibility.schema.json",
+  "closure_decision": {
+    "decision": "reference_source_credibility_schema_closed_for_foundation",
+    "proceed_to_ag06k_jsonl_first_content_intelligence_store_governance": true,
+    "web_fetching_by_script_allowed": false,
+    "reference_url_population_allowed": false,
+    "reference_insertion_allowed": false,
+    "public_article_mutation_allowed": false,
+    "content_packet_generation_allowed": false,
+    "publication_allowed": false
+  },
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "verified_reference_population_performed": false,
+  "candidate_reference_population_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "link_health_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "scaffold_import_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false
+}
