@@ -1,0 +1,219 @@
+{
+  "module_id": "AG07Z",
+  "title": "Repeatable Production Readiness Closure Learning",
+  "status": "learning_record_only",
+  "closure_governance_only": true,
+  "generated_from": {
+    "ag07qReview": "data/content-intelligence/quality-reviews/ag07q-post-mutation-audit.json",
+    "ag07qAuditReport": "data/content-intelligence/audit-records/ag07q-post-mutation-audit-report.json",
+    "ag07qRollbackReadiness": "data/content-intelligence/quality-registry/ag07q-rollback-readiness-record.json",
+    "ag07qSchema": "data/content-intelligence/schema/post-mutation-audit.schema.json",
+    "ag07qLearning": "data/content-intelligence/learning/ag07q-post-mutation-audit-learning.json",
+    "ag07pReview": "data/content-intelligence/quality-reviews/ag07p-one-article-controlled-apply.json",
+    "ag07pApplyRecord": "data/content-intelligence/apply-records/ag07p-one-article-controlled-apply.json",
+    "ag07oReview": "data/content-intelligence/quality-reviews/ag07o-approval-controlled-single-article-mutation-plan.json",
+    "ag07nCandidate": "data/content-intelligence/content-packets/ag07n-production-packet-candidate.json",
+    "ag06zClosure": "data/quality/ag06z-content-intelligence-foundation-closure.json",
+    "targetArticle": "articles/policy/when-implementation-tells-the-real-story.html",
+    "backupArticle": "archive/ag07p-backups/when-implementation-tells-the-real-story-before-ag07p.html"
+  },
+  "summary": {
+    "ag07q_audit_consumed": true,
+    "ag07_chain_closure_performed": true,
+    "all_closure_evidence_passed": true,
+    "final_evidence_recorded": true,
+    "repeatable_doctrine_created": true,
+    "future_safe_operating_rules_created": true,
+    "next_cycle_recommendations_created": true,
+    "target_article_path": "articles/policy/when-implementation-tells-the-real-story.html",
+    "backup_file_path": "archive/ag07p-backups/when-implementation-tells-the-real-story-before-ag07p.html",
+    "target_start_marker_count": 1,
+    "target_end_marker_count": 1,
+    "backup_start_marker_count": 0,
+    "backup_end_marker_count": 0,
+    "article_files_with_ag07p_marker_count": 1,
+    "rollback_ready": true,
+    "forbidden_system_guards_passed": true,
+    "post_apply_quality_status": "passed",
+    "new_article_mutation_performed": false,
+    "file_edit_performed": false,
+    "reference_insertion_performed": false,
+    "reference_url_population_performed": false,
+    "visual_generation_performed": false,
+    "production_jsonl_append_performed": false,
+    "database_write_performed": false,
+    "supabase_write_performed": false,
+    "public_publishing_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "production_readiness_after_ag07z": "repeatable_chain_closed_one_article_audited",
+    "publish_readiness_after_ag07z": "static_file_changed_not_publish_approved",
+    "next_recommended_cycle": "Repeatable Article Upgrade Cycle Planning with explicit approval"
+  },
+  "learning_points_from_ag07q": [
+    "Post-mutation audit must be separate from the apply stage.",
+    "Marker scope proves whether a controlled one-article apply stayed within boundary.",
+    "Backup integrity is the rollback foundation.",
+    "A static article change does not imply publishing approval or backend activation.",
+    "AG07Z can close the controlled chain only if AG07Q passes."
+  ],
+  "ag07z_learning_points": [
+    "The AG07 chain is now repeatable because it progressed from boundary to candidate to plan to one-article apply to post-mutation audit to closure.",
+    "The safest future pattern is one target article per controlled apply until batch controls are separately designed.",
+    "A static article change should remain separate from publish-ready approval, production JSONL persistence, database/Supabase activation and backend activation.",
+    "Each future article upgrade must preserve backup-first and audit-after doctrine.",
+    "AG07Z closes the chain but does not authorize the next cycle."
+  ],
+  "repeatable_operating_doctrine": [
+    {
+      "doctrine_id": "AG07Z-DOC-001",
+      "rule": "Foundation before generation",
+      "instruction": "AG06 foundation evidence must remain closed before any future article upgrade cycle starts."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-002",
+      "rule": "Boundary before execution",
+      "instruction": "Each future cycle must define its allowed and blocked actions before tooling or mutation."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-003",
+      "rule": "Candidate before apply",
+      "instruction": "A production-packet candidate must exist before any static article apply."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-004",
+      "rule": "Plan before apply",
+      "instruction": "A controlled mutation plan, approval checklist, backup plan and rollback plan must exist before apply."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-005",
+      "rule": "One article at a time",
+      "instruction": "Future controlled applies should mutate only one explicitly approved target article per apply stage."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-006",
+      "rule": "Backup before mutation",
+      "instruction": "The target article must be backed up before any static apply."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-007",
+      "rule": "Audit after mutation",
+      "instruction": "Every apply must be followed by a post-mutation audit before closure."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-008",
+      "rule": "Static file change is not publishing approval",
+      "instruction": "A committed static file change does not activate publishing approval, backend, Auth, Supabase, API or database write."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-009",
+      "rule": "References and visuals require their own gates",
+      "instruction": "Reference URL population, insertion, visual generation and image credit population must remain controlled by their own approved stages."
+    },
+    {
+      "doctrine_id": "AG07Z-DOC-010",
+      "rule": "Evidence must travel forward",
+      "instruction": "Each stage must record review, registry, schema, learning and preview evidence for future repetition."
+    }
+  ],
+  "future_safe_operating_rules": [
+    {
+      "rule_id": "AG07Z-RULE-001",
+      "area": "target selection",
+      "allowed": "select one target article only after explicit approval",
+      "blocked": "multi-article apply without a separate batch approval and audit design"
+    },
+    {
+      "rule_id": "AG07Z-RULE-002",
+      "area": "article mutation",
+      "allowed": "one controlled static article mutation with backup",
+      "blocked": "unbounded public article mutation or silent file edits"
+    },
+    {
+      "rule_id": "AG07Z-RULE-003",
+      "area": "reference handling",
+      "allowed": "reference insertion only after candidate URLs are verified and approved",
+      "blocked": "invented links, broken links, parked links, spam links or unverified reference insertion"
+    },
+    {
+      "rule_id": "AG07Z-RULE-004",
+      "area": "visual handling",
+      "allowed": "visual insertion only with image credit, alt text and caption",
+      "blocked": "uncredited images, missing alt text, layout-breaking assets or undocumented generated visuals"
+    },
+    {
+      "rule_id": "AG07Z-RULE-005",
+      "area": "storage",
+      "allowed": "governance artifacts and approved static file commits",
+      "blocked": "production JSONL append, database write or Supabase write without separate activation approval"
+    },
+    {
+      "rule_id": "AG07Z-RULE-006",
+      "area": "runtime",
+      "allowed": "static repo change only",
+      "blocked": "backend, API, Auth, Supabase, subscriber/admin/payment activation"
+    },
+    {
+      "rule_id": "AG07Z-RULE-007",
+      "area": "closure",
+      "allowed": "evidence-based closure after audit",
+      "blocked": "closing an apply chain without post-mutation audit and rollback readiness"
+    }
+  ],
+  "ag07_chain_closure_created": true,
+  "final_evidence_recorded": true,
+  "repeatable_doctrine_created": true,
+  "future_safe_operating_rules_created": true,
+  "next_cycle_recommendations_created": true,
+  "closure_artifacts_created": true,
+  "target_article_read_performed": true,
+  "backup_file_read_performed": true,
+  "marker_scope_verified": true,
+  "rollback_readiness_carried_forward": true,
+  "forbidden_system_guard_carried_forward": true,
+  "post_apply_quality_carried_forward": true,
+  "new_article_mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "rollback_test_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "production_packet_created": false,
+  "actual_production_packet_created": false,
+  "production_content_generated": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "dry_run_score_recalculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "production_score_record_created": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "human_apply_approval_performed": false,
+  "multi_article_mutation_performed": false,
+  "backend_auth_supabase_activation_performed": false
+}
