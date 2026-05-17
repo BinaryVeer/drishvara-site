@@ -1,0 +1,214 @@
+{
+  "module_id": "AG07Q",
+  "title": "Post-Mutation Audit Report",
+  "status": "post_mutation_audit_passed",
+  "audit_only": true,
+  "generated_from": {
+    "ag07pReview": "data/content-intelligence/quality-reviews/ag07p-one-article-controlled-apply.json",
+    "ag07pApplyRecord": "data/content-intelligence/apply-records/ag07p-one-article-controlled-apply.json",
+    "ag07pAuditPrep": "data/content-intelligence/quality-registry/ag07p-post-apply-audit-prep.json",
+    "ag07pSchema": "data/content-intelligence/schema/one-article-controlled-apply.schema.json",
+    "ag07pLearning": "data/content-intelligence/learning/ag07p-one-article-controlled-apply-learning.json",
+    "ag07oMutationPlan": "data/content-intelligence/mutation-plans/ag07o-controlled-single-article-mutation-plan.json",
+    "targetArticle": "articles/policy/when-implementation-tells-the-real-story.html",
+    "backupArticle": "archive/ag07p-backups/when-implementation-tells-the-real-story-before-ag07p.html"
+  },
+  "target_article_path": "articles/policy/when-implementation-tells-the-real-story.html",
+  "backup_file_path": "archive/ag07p-backups/when-implementation-tells-the-real-story-before-ag07p.html",
+  "target_hash_sha256_at_audit_start": "284895e719461817d5a26976665ae5360349f9281b71339a81a8729ff5dc8ad1",
+  "target_hash_sha256_at_audit_end": "284895e719461817d5a26976665ae5360349f9281b71339a81a8729ff5dc8ad1",
+  "backup_hash_sha256": "5f9509e264f94a6a6824f5c07e66cdffc08c0aa2f9f416b46d57d70d8dbdd7da",
+  "article_files_scanned_count": 77,
+  "article_files_with_ag07p_start_marker": [
+    "articles/policy/when-implementation-tells-the-real-story.html"
+  ],
+  "article_files_with_ag07p_end_marker": [
+    "articles/policy/when-implementation-tells-the-real-story.html"
+  ],
+  "audit_checks": [
+    {
+      "audit_id": "AG07Q-AUD-001",
+      "audit_name": "target_article_exists",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-002",
+      "audit_name": "backup_file_exists",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-003",
+      "audit_name": "target_contains_exactly_one_start_marker",
+      "expected": 1,
+      "observed": 1,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-004",
+      "audit_name": "target_contains_exactly_one_end_marker",
+      "expected": 1,
+      "observed": 1,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-005",
+      "audit_name": "backup_contains_no_start_marker",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-006",
+      "audit_name": "backup_contains_no_end_marker",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-007",
+      "audit_name": "only_one_article_contains_ag07p_start_marker",
+      "expected": [
+        "articles/policy/when-implementation-tells-the-real-story.html"
+      ],
+      "observed": [
+        "articles/policy/when-implementation-tells-the-real-story.html"
+      ],
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-008",
+      "audit_name": "only_one_article_contains_ag07p_end_marker",
+      "expected": [
+        "articles/policy/when-implementation-tells-the-real-story.html"
+      ],
+      "observed": [
+        "articles/policy/when-implementation-tells-the-real-story.html"
+      ],
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-009",
+      "audit_name": "target_differs_from_backup",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-010",
+      "audit_name": "ag07p_review_confirmed_single_article_mutation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-011",
+      "audit_name": "ag07p_apply_record_confirms_marker_scope",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-012",
+      "audit_name": "forbidden_system_guards_confirmed",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "audit_id": "AG07Q-AUD-013",
+      "audit_name": "post_apply_quality_status",
+      "expected": "pass",
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "forbidden_system_guard_observations": {
+    "production_jsonl_append_performed": true,
+    "database_write_performed": true,
+    "supabase_write_performed": true,
+    "backend_auth_supabase_activation_performed": true,
+    "public_publishing_performed": true,
+    "reference_insertion_performed": true,
+    "reference_url_population_performed": true,
+    "visual_generation_performed": true,
+    "image_insertion_performed": true
+  },
+  "rollback_readiness": {
+    "rollback_ready": true,
+    "rollback_method": "restore target article from pre-apply backup",
+    "target_article_path": "articles/policy/when-implementation-tells-the-real-story.html",
+    "backup_file_path": "archive/ag07p-backups/when-implementation-tells-the-real-story-before-ag07p.html",
+    "backup_hash_sha256": "5f9509e264f94a6a6824f5c07e66cdffc08c0aa2f9f416b46d57d70d8dbdd7da",
+    "target_hash_sha256_at_audit": "284895e719461817d5a26976665ae5360349f9281b71339a81a8729ff5dc8ad1",
+    "rollback_execution_performed_in_ag07q": false,
+    "rollback_test_performed_in_ag07q": false,
+    "rollback_risk_status": "low",
+    "rollback_notes": [
+      "Backup file exists from AG07P.",
+      "Backup does not contain AG07P markers.",
+      "Rollback was not executed in AG07Q because AG07Q is audit-only."
+    ]
+  },
+  "post_apply_quality": {
+    "status": "pass",
+    "visible_section_heading_present": true,
+    "reader_lens_present": true,
+    "controlled_update_note_present": true,
+    "manual_visual_review_required": true
+  },
+  "post_mutation_audit_only": true,
+  "audit_artifacts_created": true,
+  "target_article_read_performed": true,
+  "backup_file_read_performed": true,
+  "marker_scope_scan_performed": true,
+  "hash_audit_performed": true,
+  "rollback_readiness_checked": true,
+  "forbidden_system_guard_checked": true,
+  "post_apply_quality_checked": true,
+  "new_article_mutation_performed": false,
+  "target_article_file_write_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "rollback_test_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "production_packet_created": false,
+  "actual_production_packet_created": false,
+  "production_content_generated": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "dry_run_score_recalculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "production_score_record_created": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "human_apply_approval_performed": false,
+  "multi_article_mutation_performed": false
+}
