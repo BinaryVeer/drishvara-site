@@ -1,0 +1,110 @@
+{
+  "module_id": "AG06H-R1",
+  "preview_only": true,
+  "summary": {
+    "current_head_expected_after_ag06h": "bc85419",
+    "current_completed_stage": "AG06H",
+    "alignment_review_only": true,
+    "handbook_foundation_items": 6,
+    "covered_count": 1,
+    "partly_covered_requires_closure_count": 4,
+    "pending_count": 1,
+    "corrected_remaining_stage_count": 6,
+    "immediate_next_stage": "AG06I",
+    "immediate_next_stage_title": "Visual / Data / Infographic Requirement Schema Closure",
+    "ag07_blocked_until_ag06z": true,
+    "article_mutation_allowed": false,
+    "content_packet_generation_allowed": false,
+    "public_publishing_allowed": false,
+    "backend_auth_supabase_allowed": false
+  },
+  "alignment_preview": [
+    {
+      "handbook_stage": "AG06E",
+      "handbook_intent": "Define Long-Form Article Standard",
+      "current_coverage_stage": "AG06E",
+      "coverage_status": "covered"
+    },
+    {
+      "handbook_stage": "AG06F",
+      "handbook_intent": "Define Visual / Infographic / Data-Box Schema",
+      "current_coverage_stage": "AG06E + AG06H",
+      "coverage_status": "partly_covered_requires_closure"
+    },
+    {
+      "handbook_stage": "AG06G",
+      "handbook_intent": "Define Reference and Source Credibility Schema",
+      "current_coverage_stage": "AG06E + AG06F + AG06H",
+      "coverage_status": "partly_covered_requires_closure"
+    },
+    {
+      "handbook_stage": "AG06H",
+      "handbook_intent": "Define JSONL-first Content Intelligence Store",
+      "current_coverage_stage": "AG06B + AG06H",
+      "coverage_status": "partly_covered_requires_closure"
+    },
+    {
+      "handbook_stage": "AG06I",
+      "handbook_intent": "Define Publish Queue and Approval Register",
+      "current_coverage_stage": "AG06F + AG06G + AG06H",
+      "coverage_status": "partly_covered_requires_closure"
+    },
+    {
+      "handbook_stage": "AG06Z",
+      "handbook_intent": "Close Content Intelligence Foundation",
+      "current_coverage_stage": "not_started",
+      "coverage_status": "pending"
+    }
+  ],
+  "corrected_remaining_path_preview": [
+    {
+      "next_stage": "AG06I",
+      "title": "Visual / Data / Infographic Requirement Schema Closure",
+      "allowed_scope": "schema/document/registry/preview/validator only",
+      "blocked_scope": "visual generation, article mutation, CSS/JS mutation, publishing"
+    },
+    {
+      "next_stage": "AG06J",
+      "title": "Reference and Source Credibility Schema Closure",
+      "allowed_scope": "schema/document/registry/preview/validator only",
+      "blocked_scope": "web fetching by script, reference insertion, article mutation, public publishing"
+    },
+    {
+      "next_stage": "AG06K",
+      "title": "JSONL-first Content Intelligence Store Governance",
+      "allowed_scope": "storage governance/schema only",
+      "blocked_scope": "content generation, public mutation, backend activation, Supabase activation"
+    },
+    {
+      "next_stage": "AG06L",
+      "title": "Publish Queue and Approval State Register",
+      "allowed_scope": "queue/approval schema and governance only",
+      "blocked_scope": "publishing, article mutation, reference insertion, backend activation"
+    },
+    {
+      "next_stage": "AG06Z",
+      "title": "Content Intelligence Foundation Closure",
+      "allowed_scope": "closure audit only",
+      "blocked_scope": "public mutation, publishing, backend/Auth/Supabase activation"
+    },
+    {
+      "next_stage": "AG07+",
+      "title": "Long-Form Article Generator / Visual Agent / Quality Scorer / Semi-Auto Queue",
+      "allowed_scope": "future stage after foundation closure",
+      "blocked_scope": "automatic public publishing until separately approved"
+    }
+  ],
+  "no_mutation_summary": {
+    "public_article_mutation_performed": false,
+    "reference_url_change_performed": false,
+    "reference_insertion_performed": false,
+    "scaffold_import_performed": false,
+    "content_packet_generation_performed": false,
+    "article_rewrite_performed": false,
+    "public_publishing_performed": false,
+    "backend_activation_performed": false,
+    "supabase_enabled": false,
+    "auth_enabled": false
+  },
+  "next_stage_id": "AG06I"
+}

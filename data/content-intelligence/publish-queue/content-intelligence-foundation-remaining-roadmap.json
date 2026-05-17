@@ -1,0 +1,110 @@
+{
+  "module_id": "AG06H-R1",
+  "title": "Content Intelligence Foundation Remaining Roadmap",
+  "status": "roadmap_only",
+  "summary": {
+    "current_head_expected_after_ag06h": "bc85419",
+    "current_completed_stage": "AG06H",
+    "alignment_review_only": true,
+    "handbook_foundation_items": 6,
+    "covered_count": 1,
+    "partly_covered_requires_closure_count": 4,
+    "pending_count": 1,
+    "corrected_remaining_stage_count": 6,
+    "immediate_next_stage": "AG06I",
+    "immediate_next_stage_title": "Visual / Data / Infographic Requirement Schema Closure",
+    "ag07_blocked_until_ag06z": true,
+    "article_mutation_allowed": false,
+    "content_packet_generation_allowed": false,
+    "public_publishing_allowed": false,
+    "backend_auth_supabase_allowed": false
+  },
+  "corrected_remaining_path": [
+    {
+      "next_stage": "AG06I",
+      "title": "Visual / Data / Infographic Requirement Schema Closure",
+      "purpose": "Create the dedicated schema and governance closure for visual intelligence requirements across future long-form Featured Reads.",
+      "allowed_scope": "schema/document/registry/preview/validator only",
+      "blocked_scope": "visual generation, article mutation, CSS/JS mutation, publishing"
+    },
+    {
+      "next_stage": "AG06J",
+      "title": "Reference and Source Credibility Schema Closure",
+      "purpose": "Define candidate-source, approved-source, rejected-source, verification-status and link-health governance before source discovery or insertion.",
+      "allowed_scope": "schema/document/registry/preview/validator only",
+      "blocked_scope": "web fetching by script, reference insertion, article mutation, public publishing"
+    },
+    {
+      "next_stage": "AG06K",
+      "title": "JSONL-first Content Intelligence Store Governance",
+      "purpose": "Define durable JSONL-first storage conventions for content packets, source candidates, visual plans, quality reviews and learning snapshots.",
+      "allowed_scope": "storage governance/schema only",
+      "blocked_scope": "content generation, public mutation, backend activation, Supabase activation"
+    },
+    {
+      "next_stage": "AG06L",
+      "title": "Publish Queue and Approval State Register",
+      "purpose": "Define draft, review, approved, publish-ready, published and rejected states before any production article upgrade.",
+      "allowed_scope": "queue/approval schema and governance only",
+      "blocked_scope": "publishing, article mutation, reference insertion, backend activation"
+    },
+    {
+      "next_stage": "AG06Z",
+      "title": "Content Intelligence Foundation Closure",
+      "purpose": "Close AG06 foundation after AG06I-AG06L are validated.",
+      "allowed_scope": "closure audit only",
+      "blocked_scope": "public mutation, publishing, backend/Auth/Supabase activation"
+    },
+    {
+      "next_stage": "AG07+",
+      "title": "Long-Form Article Generator / Visual Agent / Quality Scorer / Semi-Auto Queue",
+      "purpose": "Begin production-tooling work only after AG06Z closure and explicit user approval.",
+      "allowed_scope": "future stage after foundation closure",
+      "blocked_scope": "automatic public publishing until separately approved"
+    }
+  ],
+  "stage_gate_rules": [
+    "AG06I through AG06L must remain governance/schema/registry-only unless separately approved.",
+    "AG06Z must close the foundation before AG07 production-tooling work begins.",
+    "No article rewrite generation may begin before AG07 and explicit approval.",
+    "No public article mutation may occur before a later approved public upgrade patch.",
+    "No reference URL insertion or change may occur until reference/source credibility schema is closed and a later approved insertion patch exists.",
+    "No scaffold copy, move, delete or import may occur without explicit approval.",
+    "No backend, Auth, Supabase, subscriber or dynamic public output activation may occur in AG06."
+  ],
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "reference_insertion_performed": false,
+  "verified_reference_population_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "scaffold_import_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false
+}
