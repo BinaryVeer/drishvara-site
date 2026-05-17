@@ -1,0 +1,64 @@
+{
+  "module_id": "AG05B",
+  "module_title": "Manual Live Page Smoke Review Checklist",
+  "phase": "Public Page / Live-Readiness / Manual Smoke Review Governance",
+  "status": "manual_live_review_checklist_only",
+  "depends_on": [
+    "AG05A",
+    "AG04Z",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "favicon_mutation_enabled": false,
+  "navigation_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag05a_audit": "data/editorial/ag05a-public-page-live-readiness-smoke-audit.json"
+  },
+  "outputs": {
+    "checklist": "data/editorial/ag05b-manual-live-page-smoke-review-checklist.json",
+    "preview": "data/quality/ag05b-manual-live-page-smoke-review-preview.json"
+  },
+  "review_status_values": [
+    "pending_manual_live_review",
+    "passed_manual_live_review",
+    "failed_manual_live_review",
+    "not_applicable"
+  ],
+  "recommended_next_stage": {
+    "module_id": "AG05C",
+    "title": "Manual Live Page Smoke Review Result Record",
+    "allowed": true,
+    "only_after_ag05b_validation": true,
+    "scope": "record actual manual/live review observations and decide whether AG05D targeted correction or AG05Z closure is required",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}

@@ -1,0 +1,951 @@
+{
+  "checklist_id": "AG05B_MANUAL_LIVE_PAGE_SMOKE_REVIEW_CHECKLIST",
+  "module_id": "AG05B",
+  "status": "manual_live_review_pending",
+  "generated_at": "2026-05-17T05:58:04.377Z",
+  "mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "favicon_mutation_performed": false,
+  "navigation_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "source_context": {
+    "ag05a_audit": "data/editorial/ag05a-public-page-live-readiness-smoke-audit.json",
+    "ag05a_summary": {
+      "scanned_html_file_count": 86,
+      "homepage_detected": true,
+      "homepage_count": 1,
+      "article_page_count_from_static_scan": 77,
+      "article_count_from_ag03z": 72,
+      "article_count_from_ag04z": 72,
+      "ag03_reference_link_count_from_ag03z": 144,
+      "ag04_visual_credit_width_closed": true,
+      "ag03_reference_scaling_closed": true,
+      "homepage_favicon_signal_present": true,
+      "homepage_logo_signal_present": true,
+      "homepage_navigation_signal_present": true,
+      "signin_join_candidate_count": 85,
+      "signin_join_candidates_with_navigation": 85,
+      "signin_join_candidates_with_home_return": 85,
+      "article_pages_with_ag03_reference_links": 72,
+      "article_pages_with_primary_image_signal": 77,
+      "article_pages_with_image_credit_signal": 77,
+      "article_pages_with_reading_width_signal": 77,
+      "backend_or_auth_signal_file_count": 0,
+      "issue_queue_count": 1,
+      "issue_type_counts": {
+        "homepage_missing": 0,
+        "favicon_signal_missing": 0,
+        "navigation_signal_missing": 0,
+        "signin_join_navigation_needs_manual_review": 0,
+        "article_count_below_expected": 0,
+        "backend_or_auth_activation_signal_found": 0,
+        "ag03_or_ag04_closure_drift": 0,
+        "manual_live_review_required": 1
+      },
+      "audit_only_no_mutation": true,
+      "ready_for_ag05b_manual_live_review_record": true
+    },
+    "ag05a_issue_queue": [
+      {
+        "issue_type": "manual_live_review_required",
+        "severity": "normal",
+        "note": "AG05A is a static audit. Manual/live review is still required for visual rendering, clickability, favicon display, and sign-in/join navigation behaviour."
+      }
+    ]
+  },
+  "summary": {
+    "checklist_item_count": 52,
+    "homepage_check_count": 5,
+    "article_sample_check_count": 20,
+    "navigation_signin_join_check_count": 25,
+    "backend_auth_no_activation_check_count": 2,
+    "pending_manual_live_review_count": 52,
+    "passed_manual_live_review_count": 0,
+    "failed_manual_live_review_count": 0,
+    "correction_required_count": 0,
+    "manual_live_review_completed": false,
+    "audit_only_no_mutation": true,
+    "ready_for_ag05c_manual_live_review_result_record": true
+  },
+  "checklist_items": [
+    {
+      "check_id": "AG05B_HOME_001",
+      "review_area": "homepage",
+      "target": "index.html",
+      "description": "Homepage opens correctly without layout break.",
+      "evidence_from_ag05a": {
+        "file_path": "index.html",
+        "is_homepage_candidate": true,
+        "is_article_page": false,
+        "is_signin_or_join_candidate": true,
+        "favicon_signal_present": true,
+        "logo_signal_present": true,
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true,
+        "backend_or_auth_signal_present": false,
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": false,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_HOME_002",
+      "review_area": "homepage",
+      "target": "index.html",
+      "description": "Homepage logo/brand is visible and aligned.",
+      "evidence_from_ag05a": {
+        "file_path": "index.html",
+        "is_homepage_candidate": true,
+        "is_article_page": false,
+        "is_signin_or_join_candidate": true,
+        "favicon_signal_present": true,
+        "logo_signal_present": true,
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true,
+        "backend_or_auth_signal_present": false,
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": false,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_HOME_003",
+      "review_area": "homepage",
+      "target": "index.html",
+      "description": "Homepage favicon/icon appears correctly in browser tab.",
+      "evidence_from_ag05a": {
+        "file_path": "index.html",
+        "is_homepage_candidate": true,
+        "is_article_page": false,
+        "is_signin_or_join_candidate": true,
+        "favicon_signal_present": true,
+        "logo_signal_present": true,
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true,
+        "backend_or_auth_signal_present": false,
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": false,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_HOME_004",
+      "review_area": "homepage",
+      "target": "index.html",
+      "description": "Homepage navigation/menu is visible and usable.",
+      "evidence_from_ag05a": {
+        "file_path": "index.html",
+        "is_homepage_candidate": true,
+        "is_article_page": false,
+        "is_signin_or_join_candidate": true,
+        "favicon_signal_present": true,
+        "logo_signal_present": true,
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true,
+        "backend_or_auth_signal_present": false,
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": false,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_HOME_005",
+      "review_area": "homepage",
+      "target": "index.html",
+      "description": "Homepage language toggle does not change language accidentally on normal clicks.",
+      "evidence_from_ag05a": {
+        "file_path": "index.html",
+        "is_homepage_candidate": true,
+        "is_article_page": false,
+        "is_signin_or_join_candidate": true,
+        "favicon_signal_present": true,
+        "logo_signal_present": true,
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true,
+        "backend_or_auth_signal_present": false,
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": false,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_001",
+      "review_area": "article_page_sample",
+      "target": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_002",
+      "review_area": "article_page_sample",
+      "target": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_003",
+      "review_area": "article_page_sample",
+      "target": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_004",
+      "review_area": "article_page_sample",
+      "target": "articles/media/ethics-ai-generated-content-journalism.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_005",
+      "review_area": "article_page_sample",
+      "target": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_006",
+      "review_area": "article_page_sample",
+      "target": "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_007",
+      "review_area": "article_page_sample",
+      "target": "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_008",
+      "review_area": "article_page_sample",
+      "target": "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_009",
+      "review_area": "article_page_sample",
+      "target": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_010",
+      "review_area": "article_page_sample",
+      "target": "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_011",
+      "review_area": "article_page_sample",
+      "target": "articles/media/role-public-media-combating-misinformation-digital-age.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_012",
+      "review_area": "article_page_sample",
+      "target": "articles/media/role-public-media-countering-disinformation-digital-age.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_013",
+      "review_area": "article_page_sample",
+      "target": "articles/media/role-public-media-countering-misinformation.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_014",
+      "review_area": "article_page_sample",
+      "target": "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_015",
+      "review_area": "article_page_sample",
+      "target": "articles/media/social-media-political-polarization-2026.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_016",
+      "review_area": "article_page_sample",
+      "target": "articles/media/what-narratives-make-visible.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_017",
+      "review_area": "article_page_sample",
+      "target": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_018",
+      "review_area": "article_page_sample",
+      "target": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 0,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_019",
+      "review_area": "article_page_sample",
+      "target": "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_ARTICLE_020",
+      "review_area": "article_page_sample",
+      "target": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "description": "Article page opens; visual, credit/source, broad justified reading surface and two reference links are visible.",
+      "evidence_from_ag05a": {
+        "ag03_reference_link_count": 2,
+        "primary_image_signal_present": true,
+        "image_credit_signal_present": true,
+        "reading_width_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_001",
+      "review_area": "navigation_signin_join",
+      "target": "about.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_002",
+      "review_area": "navigation_signin_join",
+      "target": "article.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_003",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/algorithmic-bias-content-curation-fair-representation.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_004",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/ethics-ai-generated-content-journalism-public-discourse.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_005",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/ethics-ai-generated-content-journalism-society.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_006",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/ethics-ai-generated-content-journalism.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_007",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/ethics-ai-generated-news-speed-accuracy.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_008",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/impact-ai-generated-content-news-credibility-public-trust.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_009",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/impact-algorithmic-content-curation-public-discourse-democracy.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_010",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/impact-algorithmic-curation-public-discourse-democracy.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_011",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_012",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/media-role-shaping-democracy-historical-institutional-consequences.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_013",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/role-public-media-combating-misinformation-digital-age.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_014",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/role-public-media-countering-disinformation-digital-age.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_015",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/role-public-media-countering-misinformation.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_016",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/role-public-media-upholding-democratic-values-digital-age.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_017",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/social-media-political-polarization-2026.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_018",
+      "review_area": "navigation_signin_join",
+      "target": "articles/media/what-narratives-make-visible.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_019",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_020",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_021",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/digital-literacy-initiatives-bridging-urban-rural-divide.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_022",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_023",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/innovations-public-health-infrastructure-future-pandemics.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_024",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/innovations-public-health-infrastructure-pandemic-recovery.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NAV_025",
+      "review_area": "navigation_signin_join",
+      "target": "articles/policy/innovations-public-health-infrastructure-pandemic-response.html",
+      "description": "Sign-in/join/navigation elements, if visible on this page, should allow user to return to homepage or main navigation without dead-end behaviour.",
+      "evidence_from_ag05a": {
+        "navigation_signal_present": true,
+        "home_return_signal_present": true,
+        "join_signin_signal_present": true
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NOAUTH_001",
+      "review_area": "backend_auth_supabase_no_activation",
+      "target": "static_public_pages",
+      "description": "Confirm no real login/signup/auth data collection is active on public pages.",
+      "evidence_from_ag05a": {
+        "backend_or_auth_signal_file_count": 0
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    },
+    {
+      "check_id": "AG05B_NOAUTH_002",
+      "review_area": "backend_auth_supabase_no_activation",
+      "target": "static_public_pages",
+      "description": "Confirm Supabase/Auth/API routes remain no-go unless explicitly activated in a future stage.",
+      "evidence_from_ag05a": {
+        "ag05a_backend_or_auth_signal_results": []
+      },
+      "observation_status": "pending_manual_live_review",
+      "operator_observation": "",
+      "correction_required": null,
+      "notes": ""
+    }
+  ],
+  "next_recommended_stage": {
+    "module_id": "AG05C",
+    "title": "Manual Live Page Smoke Review Result Record",
+    "allowed": true,
+    "only_after_ag05b_validation": true,
+    "scope": "record actual manual/live review observations and decide whether AG05D targeted correction or AG05Z closure is required",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
