@@ -1,0 +1,40 @@
+{
+  "preview_id": "AG05E_R1_POST_AG05D_R1_AR01_PLACEHOLDER_NEUTRALIZATION_PREVIEW",
+  "module_id": "AG05E-R1",
+  "preview_only": true,
+  "status": "post_ag05d_r1_ar01_placeholder_neutralization_audit_passed",
+  "summary": {
+    "audited_article_count": 72,
+    "expected_article_count": 72,
+    "articles_with_two_ag03_links": 72,
+    "articles_with_one_ag05d_visible_block": 72,
+    "articles_with_zero_visible_ar01_placeholders": 72,
+    "articles_with_neutralized_ar01_placeholders": 72,
+    "articles_with_neutralized_ar01_placeholders_hidden": 72,
+    "articles_with_reference_urls_unchanged_from_ag05d_r1": 72,
+    "articles_with_ag03_before_back_links": 72,
+    "total_visible_ar01_placeholder_count": 0,
+    "total_neutralized_ar01_placeholder_count": 288,
+    "failed_article_count": 0,
+    "ag03_integrity_preserved": true,
+    "ag04_closure_preserved": true,
+    "reference_url_change_performed": false,
+    "audit_only_no_mutation": true,
+    "ready_for_ag05f_live_redeployment_manual_verification": true
+  },
+  "failed_article_audit_results": [],
+  "mutation_performed": false,
+  "next_recommended_stage": {
+    "module_id": "AG05F",
+    "title": "Live Redeployment and Manual Visible Reference Verification Record",
+    "allowed": true,
+    "only_after_ag05e_r1_validation": true,
+    "scope": "verify on live site after deployment that verified references are visible and old placeholder references are hidden",
+    "article_html_mutation_allowed": false,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "deployment_action_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
