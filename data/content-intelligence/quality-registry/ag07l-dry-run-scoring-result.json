@@ -1,0 +1,148 @@
+{
+  "module_id": "AG07L",
+  "title": "Dry-Run Quality and Visitor-Value Scoring Result",
+  "status": "dry_run_scores_calculated",
+  "preview_only": true,
+  "production_score_record": false,
+  "source_packet_id": "ag07l-revised-preview:ag07c_preview_only_packet_001",
+  "source_inference_record_id": "article-inference-preview:ag07c_preview_only_packet_001:ag07k",
+  "scoring_model_source": "AG07I",
+  "scoring_scope": "dry_run_only",
+  "quality_dimension_scores": [
+    {
+      "dimension_id": "AG07I-Q-001",
+      "dimension_name": "factual_integrity_and_evidence_alignment",
+      "weight": 25,
+      "dry_run_score": 58,
+      "rationale": "Evidence need is clearly inferred, but reference URLs remain unpopulated and link-health review is pending."
+    },
+    {
+      "dimension_id": "AG07I-Q-002",
+      "dimension_name": "long_form_depth_and_structure",
+      "weight": 20,
+      "dry_run_score": 76,
+      "rationale": "Revised preview structure is defined with long-form section logic, but prose is not generated."
+    },
+    {
+      "dimension_id": "AG07I-Q-003",
+      "dimension_name": "originality_context_and_synthesis",
+      "weight": 20,
+      "dry_run_score": 72,
+      "rationale": "Synthesis opportunity and upgrade strategy are present, but final narrative still requires improvement."
+    },
+    {
+      "dimension_id": "AG07I-Q-004",
+      "dimension_name": "reference_and_source_readiness",
+      "weight": 20,
+      "dry_run_score": 45,
+      "rationale": "Reference need is clear, but candidate references remain empty and not reviewed."
+    },
+    {
+      "dimension_id": "AG07I-Q-005",
+      "dimension_name": "visual_data_accessibility_readiness",
+      "weight": 15,
+      "dry_run_score": 62,
+      "rationale": "Visual/data need and accessibility need are identified, but no assets, captions, alt text or credits exist."
+    }
+  ],
+  "visitor_value_dimension_scores": [
+    {
+      "dimension_id": "AG07I-V-001",
+      "dimension_name": "reader_intent_alignment",
+      "weight": 25,
+      "dry_run_score": 78,
+      "rationale": "Reader intent is now explicit and mapped to revised sections."
+    },
+    {
+      "dimension_id": "AG07I-V-002",
+      "dimension_name": "clarity_and_readability",
+      "weight": 20,
+      "dry_run_score": 74,
+      "rationale": "Section structure supports clarity, but article prose is not yet available for readability review."
+    },
+    {
+      "dimension_id": "AG07I-V-003",
+      "dimension_name": "practical_takeaway_value",
+      "weight": 20,
+      "dry_run_score": 70,
+      "rationale": "Takeaway direction is planned, but final actionable content is pending."
+    },
+    {
+      "dimension_id": "AG07I-V-004",
+      "dimension_name": "trust_and_revisit_value",
+      "weight": 20,
+      "dry_run_score": 58,
+      "rationale": "Trust remains limited because references are not populated or verified."
+    },
+    {
+      "dimension_id": "AG07I-V-005",
+      "dimension_name": "engagement_and_presentation_value",
+      "weight": 15,
+      "dry_run_score": 66,
+      "rationale": "Visual/data support is planned but not yet produced or inserted."
+    }
+  ],
+  "dry_run_scores": {
+    "quality_score": 62.4,
+    "visitor_value_score": 69.8,
+    "combined_score": 66.1
+  },
+  "threshold_snapshot": {
+    "quality_score_minimum_for_publish_ready": 80,
+    "visitor_value_score_minimum_for_publish_ready": 75,
+    "combined_score_minimum_for_publish_ready": 78
+  },
+  "threshold_result": {
+    "quality_threshold_met": false,
+    "visitor_value_threshold_met": false,
+    "combined_threshold_met": false,
+    "publish_ready_recommended": false,
+    "reason": "Dry-run scores are below threshold and reference/visual readiness remains incomplete."
+  },
+  "improvement_priorities": [
+    "Populate and verify at least two credible references.",
+    "Strengthen evidence alignment before factual integrity can pass.",
+    "Develop actual article prose from the revised preview section plan.",
+    "Prepare hero visual, structured visual/data unit, caption, alt text and image credit.",
+    "Improve trust and revisit value through verified references and stronger synthesis."
+  ],
+  "score_calculation_type": "dry_run_non_production",
+  "actual_score_calculation_performed": false,
+  "publish_ready_approval_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "revised_preview_packet_created": true,
+  "dry_run_score_calculation_performed": true,
+  "dry_run_quality_score_calculated": true,
+  "dry_run_visitor_value_score_calculated": true,
+  "dry_run_combined_score_calculated": true,
+  "production_score_record_created": false,
+  "production_packet_created": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "article_prose_generated": false,
+  "narrative_text_generated": false,
+  "production_content_generated": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "scaffold_import_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "static_live_mutation_performed": false
+}
