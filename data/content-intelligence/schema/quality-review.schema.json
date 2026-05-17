@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "governance_module": "AG06B",
+  "status": "schema_definition_only",
+  "public_article_mutation_allowed": false,
+  "backend_activation_allowed": false,
+  "supabase_activation_allowed": false,
+  "auth_activation_allowed": false,
+  "schema_id": "DRISHVARA_QUALITY_REVIEW_SCHEMA",
+  "description": "Stores content quality, factual risk, visual depth and visitor value scoring.",
+  "fields": {
+    "review_id": "string",
+    "content_id": "string",
+    "word_count": "number",
+    "long_form_compliance": "boolean",
+    "reference_compliance": "boolean",
+    "visual_compliance": "boolean",
+    "originality_score": "number|null",
+    "visitor_value_score": "number|null",
+    "factual_risk_level": "enum: low | medium | high | unknown",
+    "review_status": "enum: passed | failed | needs_revision | pending",
+    "issues": "array<object>"
+  }
+}

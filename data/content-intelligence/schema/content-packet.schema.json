@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.1.0",
+  "governance_module": "AG06B",
+  "status": "schema_definition_only",
+  "public_article_mutation_allowed": false,
+  "backend_activation_allowed": false,
+  "supabase_activation_allowed": false,
+  "auth_activation_allowed": false,
+  "schema_id": "DRISHVARA_CONTENT_PACKET_SCHEMA",
+  "description": "Canonical schema for one future Drishvara article/content package.",
+  "required_sections": [
+    "identity",
+    "topic",
+    "audience",
+    "intent",
+    "research",
+    "references",
+    "drafts",
+    "final_article",
+    "visuals",
+    "quality",
+    "review",
+    "publishing",
+    "learning",
+    "reuse"
+  ],
+  "fields": {
+    "identity": {
+      "content_id": "string; stable unique ID",
+      "run_id": "string; generation run ID",
+      "source_layer": "enum: public_article | scaffold_output | generated_draft | manual_seed | future_pipeline",
+      "created_at": "ISO datetime",
+      "updated_at": "ISO datetime"
+    },
+    "topic": {
+      "title": "string",
+      "category": "string",
+      "subcategory": "string|null",
+      "tags": "array<string>",
+      "topic_origin": "string",
+      "why_this_topic_matters": "string"
+    },
+    "audience": {
+      "target_reader": "string",
+      "reading_level": "string",
+      "visitor_value_statement": "string"
+    },
+    "intent": {
+      "article_intent": "enum: explain | compare | reflect | guide | analyze | synthesize",
+      "expected_reader_takeaway": "string",
+      "content_depth_target": "enum: short | standard | long_form | research_grade"
+    },
+    "research": {
+      "research_brief": "object",
+      "source_candidates": "array<object>",
+      "rejected_sources": "array<object>",
+      "source_notes": "string"
+    },
+    "references": {
+      "approved_references": "array<{url,title,source_type,credibility_class,availability_status,checked_at}>",
+      "reference_count": "number",
+      "insertion_status": "enum: pending | inserted | verified | failed"
+    },
+    "drafts": {
+      "outline": "object|string",
+      "draft_v1": "string",
+      "draft_v2": "string|null",
+      "integrated_draft": "string|null",
+      "editorial_revision_notes": "array<string>"
+    },
+    "final_article": {
+      "final_markdown_path": "string|null",
+      "final_html_path": "string|null",
+      "final_text": "string|null",
+      "word_count": "number",
+      "required_min_word_count": "number",
+      "required_max_word_count": "number"
+    },
+    "visuals": {
+      "hero_visual_prompt": "string|null",
+      "visual_plan": "array<object>",
+      "infographic_plan": "array<object>",
+      "chart_or_table_plan": "array<object>",
+      "actual_visual_assets": "array<object>",
+      "image_credit": "string|null",
+      "attribution_status": "enum: pending | verified | not_required"
+    },
+    "quality": {
+      "quality_score": "number|null",
+      "source_score": "number|null",
+      "visual_score": "number|null",
+      "originality_score": "number|null",
+      "factual_risk_level": "enum: low | medium | high | unknown",
+      "visitor_value_score": "number|null"
+    },
+    "review": {
+      "human_review_status": "enum: not_started | pending | approved | rejected | needs_revision",
+      "reviewer_notes": "array<string>",
+      "approval_record_id": "string|null"
+    },
+    "publishing": {
+      "publish_status": "enum: draft | review_queue | approved | publish_ready | published | archived | rejected",
+      "published_url": "string|null",
+      "public_article_path": "string|null",
+      "published_at": "ISO datetime|null"
+    },
+    "learning": {
+      "learning_snapshot_path": "string|null",
+      "extracted_lessons": "array<object>",
+      "promoted_lessons": "array<object>"
+    },
+    "reuse": {
+      "reuse_tags": "array<string>",
+      "embedding_eligible": "boolean",
+      "ml_training_eligible": "boolean",
+      "future_article_seed_eligible": "boolean"
+    }
+  }
+}

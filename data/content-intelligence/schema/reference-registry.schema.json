@@ -1,0 +1,24 @@
+{
+  "schema_version": "0.1.0",
+  "governance_module": "AG06B",
+  "status": "schema_definition_only",
+  "public_article_mutation_allowed": false,
+  "backend_activation_allowed": false,
+  "supabase_activation_allowed": false,
+  "auth_activation_allowed": false,
+  "schema_id": "DRISHVARA_REFERENCE_REGISTRY_SCHEMA",
+  "description": "Tracks source candidates, approved references, rejected references and link health.",
+  "fields": {
+    "reference_id": "string",
+    "content_id": "string",
+    "url": "string",
+    "title": "string|null",
+    "source_domain": "string|null",
+    "source_type": "enum: official | academic | news | institutional | book | dataset | other",
+    "credibility_class": "enum: high | medium | low | unknown",
+    "availability_status": "enum: pending | reachable | unreachable | redirected | rejected",
+    "reason_for_selection": "string|null",
+    "rejection_reason": "string|null",
+    "checked_at": "ISO datetime|null"
+  }
+}

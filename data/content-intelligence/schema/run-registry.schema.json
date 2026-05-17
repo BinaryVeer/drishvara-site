@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1.0",
+  "governance_module": "AG06B",
+  "status": "schema_definition_only",
+  "public_article_mutation_allowed": false,
+  "backend_activation_allowed": false,
+  "supabase_activation_allowed": false,
+  "auth_activation_allowed": false,
+  "schema_id": "DRISHVARA_RUN_REGISTRY_SCHEMA",
+  "description": "Tracks generation runs and maps run artifacts to content packets.",
+  "fields": {
+    "run_id": "string",
+    "run_type": "enum: scaffold | public_generator | future_pipeline | manual",
+    "input_path": "string|null",
+    "output_folder": "string|null",
+    "artifact_paths": "array<string>",
+    "content_id": "string|null",
+    "run_status": "enum: complete | partial | failed | archived",
+    "generated_at": "ISO datetime|null",
+    "preservation_status": "enum: unregistered | registered | reviewed | imported"
+  }
+}

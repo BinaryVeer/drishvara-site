@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.1.0",
+  "governance_module": "AG06B",
+  "status": "schema_definition_only",
+  "public_article_mutation_allowed": false,
+  "backend_activation_allowed": false,
+  "supabase_activation_allowed": false,
+  "auth_activation_allowed": false,
+  "schema_id": "DRISHVARA_LEARNING_SNAPSHOT_SCHEMA",
+  "description": "Stores lessons extracted from generated outputs for future production intelligence.",
+  "fields": {
+    "learning_id": "string",
+    "content_id": "string",
+    "run_id": "string|null",
+    "lesson_type": "enum: writing | structure | visual | reference | quality | audience | failure",
+    "lesson_summary": "string",
+    "evidence_path": "string|null",
+    "promotion_status": "enum: candidate | validated | promoted | rejected"
+  }
+}

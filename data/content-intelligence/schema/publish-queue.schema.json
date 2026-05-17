@@ -1,0 +1,22 @@
+{
+  "schema_version": "0.1.0",
+  "governance_module": "AG06B",
+  "status": "schema_definition_only",
+  "public_article_mutation_allowed": false,
+  "backend_activation_allowed": false,
+  "supabase_activation_allowed": false,
+  "auth_activation_allowed": false,
+  "schema_id": "DRISHVARA_PUBLISH_QUEUE_SCHEMA",
+  "description": "Controls draft to approval to publish-ready workflow.",
+  "fields": {
+    "queue_id": "string",
+    "content_id": "string",
+    "queue_status": "enum: draft | pending_review | approved | publish_ready | published | rejected | archived",
+    "required_checks": "array<string>",
+    "completed_checks": "array<string>",
+    "approval_required": "boolean",
+    "approved_by": "string|null",
+    "approved_at": "ISO datetime|null",
+    "publish_target_path": "string|null"
+  }
+}
