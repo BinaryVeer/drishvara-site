@@ -1,0 +1,1857 @@
+{
+  "module_id": "AG06H",
+  "title": "Batch 01 Content Packet Upgrade Planning Review",
+  "status": "planning_review_only",
+  "depends_on": [
+    "AG06G"
+  ],
+  "generated_from": {
+    "ag06g_batch_selection": "data/content-intelligence/publish-queue/long-form-batch-01-dry-run-selection.json",
+    "ag06g_dry_run_review": "data/content-intelligence/quality-reviews/long-form-content-packet-upgrade-dry-run-review.json",
+    "ag06e_long_form_standard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+    "ag06b_content_packet_schema": "data/content-intelligence/schema/content-packet.schema.json"
+  },
+  "summary": {
+    "source_batch_id_from_ag06g": "AG06G_BATCH_01_DRY_RUN",
+    "source_selected_batch_count_from_ag06g": 5,
+    "planning_entry_count": 5,
+    "high_priority_planning_entry_count": 5,
+    "medium_priority_planning_entry_count": 0,
+    "entries_with_reference_discovery_plan_required": 5,
+    "entries_with_visual_plan_required": 5,
+    "entries_with_data_enrichment_plan_required": 5,
+    "content_packet_schema_required_section_count": 14,
+    "content_packet_schema_field_count": 14,
+    "publish_readiness_gate_count": 16,
+    "planning_only": true,
+    "content_packet_generation_performed": false,
+    "content_packet_created": false,
+    "article_rewrite_performed": false,
+    "current_public_articles_mutated": false,
+    "scaffold_outputs_mutated": false,
+    "reference_url_change_performed": false,
+    "verified_reference_population_performed": false,
+    "visual_asset_generation_performed": false,
+    "infographic_generation_performed": false,
+    "quality_scoring_performed": false,
+    "visitor_value_scoring_performed": false,
+    "public_publishing_enabled": false,
+    "next_stage_id": "AG06I"
+  },
+  "planning_decision": {
+    "decision": "batch_01_content_packet_planning_created_not_approved_for_generation",
+    "batch_01_planning_created": true,
+    "content_packet_generation_allowed": false,
+    "article_rewrite_allowed": false,
+    "reference_population_allowed": false,
+    "visual_generation_allowed": false,
+    "scaffold_import_allowed": false,
+    "article_mutation_allowed": false,
+    "publication_allowed": false,
+    "backend_auth_supabase_allowed": false
+  },
+  "planning_queue": {
+    "module_id": "AG06H",
+    "queue_id": "long-form-batch-01-content-packet-planning",
+    "title": "Batch 01 Content Packet Upgrade Planning Queue",
+    "status": "planning_only",
+    "depends_on": [
+      "AG06G",
+      "AG06F",
+      "AG06E",
+      "AG06B"
+    ],
+    "generated_from": {
+      "ag06g_batch_selection": "data/content-intelligence/publish-queue/long-form-batch-01-dry-run-selection.json",
+      "ag06g_dry_run_review": "data/content-intelligence/quality-reviews/long-form-content-packet-upgrade-dry-run-review.json",
+      "ag06e_long_form_standard": "data/content-intelligence/quality-reviews/long-form-article-standard.json",
+      "ag06b_content_packet_schema": "data/content-intelligence/schema/content-packet.schema.json"
+    },
+    "summary": {
+      "source_batch_id_from_ag06g": "AG06G_BATCH_01_DRY_RUN",
+      "source_selected_batch_count_from_ag06g": 5,
+      "planning_entry_count": 5,
+      "high_priority_planning_entry_count": 5,
+      "medium_priority_planning_entry_count": 0,
+      "entries_with_reference_discovery_plan_required": 5,
+      "entries_with_visual_plan_required": 5,
+      "entries_with_data_enrichment_plan_required": 5,
+      "content_packet_schema_required_section_count": 14,
+      "content_packet_schema_field_count": 14,
+      "publish_readiness_gate_count": 16,
+      "planning_only": true,
+      "content_packet_generation_performed": false,
+      "content_packet_created": false,
+      "article_rewrite_performed": false,
+      "current_public_articles_mutated": false,
+      "scaffold_outputs_mutated": false,
+      "reference_url_change_performed": false,
+      "verified_reference_population_performed": false,
+      "visual_asset_generation_performed": false,
+      "infographic_generation_performed": false,
+      "quality_scoring_performed": false,
+      "visitor_value_scoring_performed": false,
+      "public_publishing_enabled": false,
+      "next_stage_id": "AG06I"
+    },
+    "content_packet_schema_snapshot": {
+      "schema_id": "DRISHVARA_CONTENT_PACKET_SCHEMA",
+      "schema_version": "0.1.0",
+      "governance_module": "AG06B",
+      "required_sections": [
+        "identity",
+        "topic",
+        "audience",
+        "intent",
+        "research",
+        "references",
+        "drafts",
+        "final_article",
+        "visuals",
+        "quality",
+        "review",
+        "publishing",
+        "learning",
+        "reuse"
+      ],
+      "field_keys": [
+        "identity",
+        "topic",
+        "audience",
+        "intent",
+        "research",
+        "references",
+        "drafts",
+        "final_article",
+        "visuals",
+        "quality",
+        "review",
+        "publishing",
+        "learning",
+        "reuse"
+      ],
+      "schema_structure_note": "AG06H uses required_sections and fields because the existing content-packet schema is not a JSON-Schema properties-based document."
+    },
+    "planning_entries": [
+      {
+        "planning_id": "ag06h_batch01_plan_01",
+        "source_dry_run_selection_id": "ag06g_batch01_01",
+        "source_queue_id": "ag06f_public_upgrade_009",
+        "source_article_path": "articles/media/media-literacy-deepfakes-misinformation-2026.html",
+        "category": "media",
+        "detected_title": "Media Literacy in the Age of Deepfakes and Misinformation",
+        "source_word_count_estimate": 390,
+        "source_reference_link_count": 0,
+        "upgrade_priority": "high",
+        "planning_scope": "content_packet_upgrade_planning_only",
+        "planned_target_standard": {
+          "word_count_min": 1500,
+          "word_count_max": 2200,
+          "verified_reference_min": 2,
+          "verified_reference_max": 5,
+          "requires_visual_plan": true,
+          "requires_primary_visual": true,
+          "requires_image_credit": true,
+          "requires_data_box_chart_graph_or_infographic": true,
+          "quality_score_min_publish_ready": 85,
+          "visitor_value_score_min_publish_ready": 80
+        },
+        "planning_requirements": {
+          "source_article_review_required": true,
+          "reference_discovery_plan_required": true,
+          "reference_verification_plan_required": true,
+          "long_form_outline_plan_required": true,
+          "visual_plan_required": true,
+          "image_credit_plan_required": true,
+          "data_enrichment_plan_required": true,
+          "quality_review_plan_required": true,
+          "visitor_value_review_plan_required": true,
+          "editorial_review_plan_required": true,
+          "publish_readiness_review_plan_required": true
+        },
+        "planned_content_packet_sections": [
+          {
+            "section_name": "identity",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "topic",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "audience",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "intent",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "research",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "references",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "drafts",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "final_article",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "visuals",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "quality",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "review",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "publishing",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "learning",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "reuse",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          }
+        ],
+        "planned_publish_readiness_gates": [
+          {
+            "gate": "content_packet_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "word_count_within_1500_2200",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "minimum_two_verified_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "maximum_five_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "all_reference_urls_verified",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "no_broken_spam_parked_or_irrelevant_reference",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visual_plan_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "primary_visual_available",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "image_credit_or_attribution_recorded",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "data_box_chart_graph_or_infographic_present",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "quality_score_at_least_85",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visitor_value_score_at_least_80",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "editorial_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "accuracy_and_safety_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "rights_and_originality_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "publish_queue_status_publish_ready",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          }
+        ],
+        "scaffold_candidate_planning": {
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "run_id": "scaffold_0008",
+              "content_id_candidate": "ci_scaffold_0008",
+              "detected_title": "From Complaint to Closure: Explaining Grievance Redressal in Rural Water Service Delivery as an Accountability Chain",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-grievance-redressal-in-rural-water-service-delivery/2026-04-16T09-25-37-523Z",
+              "final_markdown_word_count_estimate": 2877,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0066",
+              "content_id_candidate": "ci_scaffold_0066",
+              "detected_title": "Why Standby Pump Redundancy Matters in Rural Water Schemes",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-28/how-drishvara-should-explain-standby-pump-redundancy-in-rural-water-schemes/2026-04-28T11-32-23-164Z",
+              "final_markdown_word_count_estimate": 2831,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0022",
+              "content_id_candidate": "ci_scaffold_0022",
+              "detected_title": "Making Rural Water Service Performance Monitoring Easy to Act On",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-rural-water-service-performance-monitoring-with-vis/2026-04-16T09-30-21-408Z",
+              "final_markdown_word_count_estimate": 2718,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            }
+          ]
+        },
+        "planning_decision_status": {
+          "content_packet_plan_created": true,
+          "content_packet_generated": false,
+          "article_rewrite_generated": false,
+          "reference_urls_populated": false,
+          "visual_asset_generated": false,
+          "infographic_generated": false,
+          "quality_scored": false,
+          "visitor_value_scored": false,
+          "ready_for_content_packet_generation": false,
+          "ready_for_article_mutation": false,
+          "ready_for_publication": false
+        },
+        "blocked_actions": [
+          "public_article_html_mutation",
+          "reference_url_population_or_change",
+          "scaffold_copy_move_delete_import",
+          "article_rewrite_generation",
+          "content_packet_generation",
+          "visual_asset_generation",
+          "infographic_generation",
+          "public_publishing",
+          "backend_auth_supabase_activation"
+        ],
+        "mutation_controls": {
+          "public_article_mutation_performed": false,
+          "reference_url_change_performed": false,
+          "scaffold_file_copy_performed": false,
+          "scaffold_file_move_performed": false,
+          "scaffold_file_delete_performed": false,
+          "scaffold_import_performed": false,
+          "content_packet_generation_performed": false,
+          "article_rewrite_performed": false,
+          "public_publishing_performed": false
+        },
+        "notes": "AG06H creates planning requirements only. It does not generate the content packet, article rewrite, references, visuals, infographic, scores, or public article mutation."
+      },
+      {
+        "planning_id": "ag06h_batch01_plan_02",
+        "source_dry_run_selection_id": "ag06g_batch01_02",
+        "source_queue_id": "ag06f_public_upgrade_018",
+        "source_article_path": "articles/policy/digital-governance-transparency-public-participation-2026.html",
+        "category": "policy",
+        "detected_title": "Digital Governance: Enhancing Transparency and Public Participation",
+        "source_word_count_estimate": 388,
+        "source_reference_link_count": 0,
+        "upgrade_priority": "high",
+        "planning_scope": "content_packet_upgrade_planning_only",
+        "planned_target_standard": {
+          "word_count_min": 1500,
+          "word_count_max": 2200,
+          "verified_reference_min": 2,
+          "verified_reference_max": 5,
+          "requires_visual_plan": true,
+          "requires_primary_visual": true,
+          "requires_image_credit": true,
+          "requires_data_box_chart_graph_or_infographic": true,
+          "quality_score_min_publish_ready": 85,
+          "visitor_value_score_min_publish_ready": 80
+        },
+        "planning_requirements": {
+          "source_article_review_required": true,
+          "reference_discovery_plan_required": true,
+          "reference_verification_plan_required": true,
+          "long_form_outline_plan_required": true,
+          "visual_plan_required": true,
+          "image_credit_plan_required": true,
+          "data_enrichment_plan_required": true,
+          "quality_review_plan_required": true,
+          "visitor_value_review_plan_required": true,
+          "editorial_review_plan_required": true,
+          "publish_readiness_review_plan_required": true
+        },
+        "planned_content_packet_sections": [
+          {
+            "section_name": "identity",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "topic",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "audience",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "intent",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "research",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "references",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "drafts",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "final_article",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "visuals",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "quality",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "review",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "publishing",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "learning",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "reuse",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          }
+        ],
+        "planned_publish_readiness_gates": [
+          {
+            "gate": "content_packet_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "word_count_within_1500_2200",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "minimum_two_verified_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "maximum_five_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "all_reference_urls_verified",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "no_broken_spam_parked_or_irrelevant_reference",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visual_plan_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "primary_visual_available",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "image_credit_or_attribution_recorded",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "data_box_chart_graph_or_infographic_present",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "quality_score_at_least_85",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visitor_value_score_at_least_80",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "editorial_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "accuracy_and_safety_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "rights_and_originality_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "publish_queue_status_publish_ready",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          }
+        ],
+        "scaffold_candidate_planning": {
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "run_id": "scaffold_0006",
+              "content_id_candidate": "ci_scaffold_0006",
+              "detected_title": "Clarifying Accountability in Public Infrastructure Delivery",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-governance-accountability-in-public-infrastructure-/2026-04-16T08-46-07-810Z",
+              "final_markdown_word_count_estimate": 1763,
+              "token_overlap_score": 2,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0005",
+              "content_id_candidate": "ci_scaffold_0005",
+              "detected_title": "Making Governance Accountability Clear in Public Infrastructure Delivery",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-governance-accountability-in-public-infrastructure-/2026-04-16T07-18-45-401Z",
+              "final_markdown_word_count_estimate": 1490,
+              "token_overlap_score": 2,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0007",
+              "content_id_candidate": "ci_scaffold_0007",
+              "detected_title": "Clarifying Accountability in Public Infrastructure Delivery Through Structured Communication",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-governance-accountability-in-public-infrastructure-/2026-04-16T08-51-11-005Z",
+              "final_markdown_word_count_estimate": 1412,
+              "token_overlap_score": 2,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            }
+          ]
+        },
+        "planning_decision_status": {
+          "content_packet_plan_created": true,
+          "content_packet_generated": false,
+          "article_rewrite_generated": false,
+          "reference_urls_populated": false,
+          "visual_asset_generated": false,
+          "infographic_generated": false,
+          "quality_scored": false,
+          "visitor_value_scored": false,
+          "ready_for_content_packet_generation": false,
+          "ready_for_article_mutation": false,
+          "ready_for_publication": false
+        },
+        "blocked_actions": [
+          "public_article_html_mutation",
+          "reference_url_population_or_change",
+          "scaffold_copy_move_delete_import",
+          "article_rewrite_generation",
+          "content_packet_generation",
+          "visual_asset_generation",
+          "infographic_generation",
+          "public_publishing",
+          "backend_auth_supabase_activation"
+        ],
+        "mutation_controls": {
+          "public_article_mutation_performed": false,
+          "reference_url_change_performed": false,
+          "scaffold_file_copy_performed": false,
+          "scaffold_file_move_performed": false,
+          "scaffold_file_delete_performed": false,
+          "scaffold_import_performed": false,
+          "content_packet_generation_performed": false,
+          "article_rewrite_performed": false,
+          "public_publishing_performed": false
+        },
+        "notes": "AG06H creates planning requirements only. It does not generate the content packet, article rewrite, references, visuals, infographic, scores, or public article mutation."
+      },
+      {
+        "planning_id": "ag06h_batch01_plan_03",
+        "source_dry_run_selection_id": "ag06g_batch01_03",
+        "source_queue_id": "ag06f_public_upgrade_033",
+        "source_article_path": "articles/spiritual/contemplative-practices-modern-mental-health.html",
+        "category": "spiritual",
+        "detected_title": "The Role of Contemplative Practices in Modern Mental Health Frameworks",
+        "source_word_count_estimate": 475,
+        "source_reference_link_count": 0,
+        "upgrade_priority": "high",
+        "planning_scope": "content_packet_upgrade_planning_only",
+        "planned_target_standard": {
+          "word_count_min": 1500,
+          "word_count_max": 2200,
+          "verified_reference_min": 2,
+          "verified_reference_max": 5,
+          "requires_visual_plan": true,
+          "requires_primary_visual": true,
+          "requires_image_credit": true,
+          "requires_data_box_chart_graph_or_infographic": true,
+          "quality_score_min_publish_ready": 85,
+          "visitor_value_score_min_publish_ready": 80
+        },
+        "planning_requirements": {
+          "source_article_review_required": true,
+          "reference_discovery_plan_required": true,
+          "reference_verification_plan_required": true,
+          "long_form_outline_plan_required": true,
+          "visual_plan_required": true,
+          "image_credit_plan_required": true,
+          "data_enrichment_plan_required": true,
+          "quality_review_plan_required": true,
+          "visitor_value_review_plan_required": true,
+          "editorial_review_plan_required": true,
+          "publish_readiness_review_plan_required": true
+        },
+        "planned_content_packet_sections": [
+          {
+            "section_name": "identity",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "topic",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "audience",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "intent",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "research",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "references",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "drafts",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "final_article",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "visuals",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "quality",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "review",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "publishing",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "learning",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "reuse",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          }
+        ],
+        "planned_publish_readiness_gates": [
+          {
+            "gate": "content_packet_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "word_count_within_1500_2200",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "minimum_two_verified_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "maximum_five_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "all_reference_urls_verified",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "no_broken_spam_parked_or_irrelevant_reference",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visual_plan_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "primary_visual_available",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "image_credit_or_attribution_recorded",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "data_box_chart_graph_or_infographic_present",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "quality_score_at_least_85",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visitor_value_score_at_least_80",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "editorial_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "accuracy_and_safety_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "rights_and_originality_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "publish_queue_status_publish_ready",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          }
+        ],
+        "scaffold_candidate_planning": {
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "run_id": "scaffold_0008",
+              "content_id_candidate": "ci_scaffold_0008",
+              "detected_title": "From Complaint to Closure: Explaining Grievance Redressal in Rural Water Service Delivery as an Accountability Chain",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-grievance-redressal-in-rural-water-service-delivery/2026-04-16T09-25-37-523Z",
+              "final_markdown_word_count_estimate": 2877,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0066",
+              "content_id_candidate": "ci_scaffold_0066",
+              "detected_title": "Why Standby Pump Redundancy Matters in Rural Water Schemes",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-28/how-drishvara-should-explain-standby-pump-redundancy-in-rural-water-schemes/2026-04-28T11-32-23-164Z",
+              "final_markdown_word_count_estimate": 2831,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0022",
+              "content_id_candidate": "ci_scaffold_0022",
+              "detected_title": "Making Rural Water Service Performance Monitoring Easy to Act On",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-rural-water-service-performance-monitoring-with-vis/2026-04-16T09-30-21-408Z",
+              "final_markdown_word_count_estimate": 2718,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            }
+          ]
+        },
+        "planning_decision_status": {
+          "content_packet_plan_created": true,
+          "content_packet_generated": false,
+          "article_rewrite_generated": false,
+          "reference_urls_populated": false,
+          "visual_asset_generated": false,
+          "infographic_generated": false,
+          "quality_scored": false,
+          "visitor_value_scored": false,
+          "ready_for_content_packet_generation": false,
+          "ready_for_article_mutation": false,
+          "ready_for_publication": false
+        },
+        "blocked_actions": [
+          "public_article_html_mutation",
+          "reference_url_population_or_change",
+          "scaffold_copy_move_delete_import",
+          "article_rewrite_generation",
+          "content_packet_generation",
+          "visual_asset_generation",
+          "infographic_generation",
+          "public_publishing",
+          "backend_auth_supabase_activation"
+        ],
+        "mutation_controls": {
+          "public_article_mutation_performed": false,
+          "reference_url_change_performed": false,
+          "scaffold_file_copy_performed": false,
+          "scaffold_file_move_performed": false,
+          "scaffold_file_delete_performed": false,
+          "scaffold_import_performed": false,
+          "content_packet_generation_performed": false,
+          "article_rewrite_performed": false,
+          "public_publishing_performed": false
+        },
+        "notes": "AG06H creates planning requirements only. It does not generate the content packet, article rewrite, references, visuals, infographic, scores, or public article mutation."
+      },
+      {
+        "planning_id": "ag06h_batch01_plan_04",
+        "source_dry_run_selection_id": "ag06g_batch01_04",
+        "source_queue_id": "ag06f_public_upgrade_057",
+        "source_article_path": "articles/sports/mental-health-awareness-professional-athletics-2026.html",
+        "category": "sports",
+        "detected_title": "Mental Health Awareness in Professional Athletics: Challenges and Progress",
+        "source_word_count_estimate": 405,
+        "source_reference_link_count": 0,
+        "upgrade_priority": "high",
+        "planning_scope": "content_packet_upgrade_planning_only",
+        "planned_target_standard": {
+          "word_count_min": 1500,
+          "word_count_max": 2200,
+          "verified_reference_min": 2,
+          "verified_reference_max": 5,
+          "requires_visual_plan": true,
+          "requires_primary_visual": true,
+          "requires_image_credit": true,
+          "requires_data_box_chart_graph_or_infographic": true,
+          "quality_score_min_publish_ready": 85,
+          "visitor_value_score_min_publish_ready": 80
+        },
+        "planning_requirements": {
+          "source_article_review_required": true,
+          "reference_discovery_plan_required": true,
+          "reference_verification_plan_required": true,
+          "long_form_outline_plan_required": true,
+          "visual_plan_required": true,
+          "image_credit_plan_required": true,
+          "data_enrichment_plan_required": true,
+          "quality_review_plan_required": true,
+          "visitor_value_review_plan_required": true,
+          "editorial_review_plan_required": true,
+          "publish_readiness_review_plan_required": true
+        },
+        "planned_content_packet_sections": [
+          {
+            "section_name": "identity",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "topic",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "audience",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "intent",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "research",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "references",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "drafts",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "final_article",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "visuals",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "quality",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "review",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "publishing",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "learning",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "reuse",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          }
+        ],
+        "planned_publish_readiness_gates": [
+          {
+            "gate": "content_packet_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "word_count_within_1500_2200",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "minimum_two_verified_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "maximum_five_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "all_reference_urls_verified",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "no_broken_spam_parked_or_irrelevant_reference",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visual_plan_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "primary_visual_available",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "image_credit_or_attribution_recorded",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "data_box_chart_graph_or_infographic_present",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "quality_score_at_least_85",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visitor_value_score_at_least_80",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "editorial_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "accuracy_and_safety_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "rights_and_originality_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "publish_queue_status_publish_ready",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          }
+        ],
+        "scaffold_candidate_planning": {
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "run_id": "scaffold_0008",
+              "content_id_candidate": "ci_scaffold_0008",
+              "detected_title": "From Complaint to Closure: Explaining Grievance Redressal in Rural Water Service Delivery as an Accountability Chain",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-grievance-redressal-in-rural-water-service-delivery/2026-04-16T09-25-37-523Z",
+              "final_markdown_word_count_estimate": 2877,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0066",
+              "content_id_candidate": "ci_scaffold_0066",
+              "detected_title": "Why Standby Pump Redundancy Matters in Rural Water Schemes",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-28/how-drishvara-should-explain-standby-pump-redundancy-in-rural-water-schemes/2026-04-28T11-32-23-164Z",
+              "final_markdown_word_count_estimate": 2831,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0022",
+              "content_id_candidate": "ci_scaffold_0022",
+              "detected_title": "Making Rural Water Service Performance Monitoring Easy to Act On",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-rural-water-service-performance-monitoring-with-vis/2026-04-16T09-30-21-408Z",
+              "final_markdown_word_count_estimate": 2718,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            }
+          ]
+        },
+        "planning_decision_status": {
+          "content_packet_plan_created": true,
+          "content_packet_generated": false,
+          "article_rewrite_generated": false,
+          "reference_urls_populated": false,
+          "visual_asset_generated": false,
+          "infographic_generated": false,
+          "quality_scored": false,
+          "visitor_value_scored": false,
+          "ready_for_content_packet_generation": false,
+          "ready_for_article_mutation": false,
+          "ready_for_publication": false
+        },
+        "blocked_actions": [
+          "public_article_html_mutation",
+          "reference_url_population_or_change",
+          "scaffold_copy_move_delete_import",
+          "article_rewrite_generation",
+          "content_packet_generation",
+          "visual_asset_generation",
+          "infographic_generation",
+          "public_publishing",
+          "backend_auth_supabase_activation"
+        ],
+        "mutation_controls": {
+          "public_article_mutation_performed": false,
+          "reference_url_change_performed": false,
+          "scaffold_file_copy_performed": false,
+          "scaffold_file_move_performed": false,
+          "scaffold_file_delete_performed": false,
+          "scaffold_import_performed": false,
+          "content_packet_generation_performed": false,
+          "article_rewrite_performed": false,
+          "public_publishing_performed": false
+        },
+        "notes": "AG06H creates planning requirements only. It does not generate the content packet, article rewrite, references, visuals, infographic, scores, or public article mutation."
+      },
+      {
+        "planning_id": "ag06h_batch01_plan_05",
+        "source_dry_run_selection_id": "ag06g_batch01_05",
+        "source_queue_id": "ag06f_public_upgrade_061",
+        "source_article_path": "articles/world/ai-future-warfare-2026.html",
+        "category": "world",
+        "detected_title": "Artificial Intelligence and the Future of Warfare: Strategic and Ethical Dimensions",
+        "source_word_count_estimate": 382,
+        "source_reference_link_count": 0,
+        "upgrade_priority": "high",
+        "planning_scope": "content_packet_upgrade_planning_only",
+        "planned_target_standard": {
+          "word_count_min": 1500,
+          "word_count_max": 2200,
+          "verified_reference_min": 2,
+          "verified_reference_max": 5,
+          "requires_visual_plan": true,
+          "requires_primary_visual": true,
+          "requires_image_credit": true,
+          "requires_data_box_chart_graph_or_infographic": true,
+          "quality_score_min_publish_ready": 85,
+          "visitor_value_score_min_publish_ready": 80
+        },
+        "planning_requirements": {
+          "source_article_review_required": true,
+          "reference_discovery_plan_required": true,
+          "reference_verification_plan_required": true,
+          "long_form_outline_plan_required": true,
+          "visual_plan_required": true,
+          "image_credit_plan_required": true,
+          "data_enrichment_plan_required": true,
+          "quality_review_plan_required": true,
+          "visitor_value_review_plan_required": true,
+          "editorial_review_plan_required": true,
+          "publish_readiness_review_plan_required": true
+        },
+        "planned_content_packet_sections": [
+          {
+            "section_name": "identity",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "topic",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "audience",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "intent",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "research",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "references",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "drafts",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "final_article",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "visuals",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "quality",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "review",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "publishing",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "learning",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          },
+          {
+            "section_name": "reuse",
+            "required": true,
+            "planning_status": "planned_not_generated",
+            "generation_status": "not_generated",
+            "review_status": "pending_future_review",
+            "mutation_performed": false
+          }
+        ],
+        "planned_publish_readiness_gates": [
+          {
+            "gate": "content_packet_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "word_count_within_1500_2200",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "minimum_two_verified_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "maximum_five_references",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "all_reference_urls_verified",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "no_broken_spam_parked_or_irrelevant_reference",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visual_plan_complete",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "primary_visual_available",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "image_credit_or_attribution_recorded",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "data_box_chart_graph_or_infographic_present",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "quality_score_at_least_85",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "visitor_value_score_at_least_80",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "editorial_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "accuracy_and_safety_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "rights_and_originality_review_passed",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          },
+          {
+            "gate": "publish_queue_status_publish_ready",
+            "planned": true,
+            "passed": false,
+            "review_status": "pending_future_review"
+          }
+        ],
+        "scaffold_candidate_planning": {
+          "candidate_count": 3,
+          "candidates": [
+            {
+              "run_id": "scaffold_0008",
+              "content_id_candidate": "ci_scaffold_0008",
+              "detected_title": "From Complaint to Closure: Explaining Grievance Redressal in Rural Water Service Delivery as an Accountability Chain",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-grievance-redressal-in-rural-water-service-delivery/2026-04-16T09-25-37-523Z",
+              "final_markdown_word_count_estimate": 2877,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0066",
+              "content_id_candidate": "ci_scaffold_0066",
+              "detected_title": "Why Standby Pump Redundancy Matters in Rural Water Schemes",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-28/how-drishvara-should-explain-standby-pump-redundancy-in-rural-water-schemes/2026-04-28T11-32-23-164Z",
+              "final_markdown_word_count_estimate": 2831,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            },
+            {
+              "run_id": "scaffold_0022",
+              "content_id_candidate": "ci_scaffold_0022",
+              "detected_title": "Making Rural Water Service Performance Monitoring Easy to Act On",
+              "run_directory": "drishvara_phase01_scaffold/content/outputs/2026-04-16/how-drishvara-should-explain-rural-water-service-performance-monitoring-with-vis/2026-04-16T09-30-21-408Z",
+              "final_markdown_word_count_estimate": 2718,
+              "token_overlap_score": 0,
+              "has_visual_plan": true,
+              "has_learning_snapshot": true,
+              "permitted_use_in_ag06h": "review_reference_only",
+              "import_status": "not_imported",
+              "copy_move_delete_status": "not_performed"
+            }
+          ]
+        },
+        "planning_decision_status": {
+          "content_packet_plan_created": true,
+          "content_packet_generated": false,
+          "article_rewrite_generated": false,
+          "reference_urls_populated": false,
+          "visual_asset_generated": false,
+          "infographic_generated": false,
+          "quality_scored": false,
+          "visitor_value_scored": false,
+          "ready_for_content_packet_generation": false,
+          "ready_for_article_mutation": false,
+          "ready_for_publication": false
+        },
+        "blocked_actions": [
+          "public_article_html_mutation",
+          "reference_url_population_or_change",
+          "scaffold_copy_move_delete_import",
+          "article_rewrite_generation",
+          "content_packet_generation",
+          "visual_asset_generation",
+          "infographic_generation",
+          "public_publishing",
+          "backend_auth_supabase_activation"
+        ],
+        "mutation_controls": {
+          "public_article_mutation_performed": false,
+          "reference_url_change_performed": false,
+          "scaffold_file_copy_performed": false,
+          "scaffold_file_move_performed": false,
+          "scaffold_file_delete_performed": false,
+          "scaffold_import_performed": false,
+          "content_packet_generation_performed": false,
+          "article_rewrite_performed": false,
+          "public_publishing_performed": false
+        },
+        "notes": "AG06H creates planning requirements only. It does not generate the content packet, article rewrite, references, visuals, infographic, scores, or public article mutation."
+      }
+    ],
+    "mutation_performed": false,
+    "public_article_mutation_performed": false,
+    "article_html_mutation_performed": false,
+    "homepage_mutation_performed": false,
+    "css_mutation_performed": false,
+    "javascript_mutation_performed": false,
+    "reference_url_change_performed": false,
+    "external_fetch_performed_by_script": false,
+    "live_url_fetch_performed": false,
+    "backend_activation_performed": false,
+    "api_route_created": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "real_login_enabled": false,
+    "real_signup_enabled": false,
+    "user_account_collection_enabled": false,
+    "frontend_deployment_performed": false,
+    "scaffold_file_copy_performed": false,
+    "scaffold_file_move_performed": false,
+    "scaffold_file_delete_performed": false,
+    "file_deletion_performed": false,
+    "file_move_performed": false,
+    "public_article_archive_performed": false,
+    "public_article_delete_performed": false,
+    "public_publishing_performed": false,
+    "content_packet_generation_performed": false,
+    "content_packet_created": false,
+    "article_rewrite_performed": false,
+    "scaffold_import_performed": false,
+    "verified_reference_population_performed": false,
+    "visual_asset_generation_performed": false,
+    "infographic_generation_performed": false,
+    "quality_scoring_performed": false,
+    "visitor_value_scoring_performed": false
+  },
+  "next_recommended_stage": {
+    "module_id": "AG06I",
+    "title": "Batch 01 Source and Reference Discovery Workbench",
+    "allowed_scope": "research/discovery workbench and candidate reference planning only unless separately approved",
+    "blocked_scope": "public article mutation, reference insertion, scaffold import, content packet generation, publishing, backend/Auth/Supabase activation"
+  },
+  "mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "homepage_mutation_performed": false,
+  "css_mutation_performed": false,
+  "javascript_mutation_performed": false,
+  "reference_url_change_performed": false,
+  "external_fetch_performed_by_script": false,
+  "live_url_fetch_performed": false,
+  "backend_activation_performed": false,
+  "api_route_created": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "frontend_deployment_performed": false,
+  "scaffold_file_copy_performed": false,
+  "scaffold_file_move_performed": false,
+  "scaffold_file_delete_performed": false,
+  "file_deletion_performed": false,
+  "file_move_performed": false,
+  "public_article_archive_performed": false,
+  "public_article_delete_performed": false,
+  "public_publishing_performed": false,
+  "content_packet_generation_performed": false,
+  "content_packet_created": false,
+  "article_rewrite_performed": false,
+  "scaffold_import_performed": false,
+  "verified_reference_population_performed": false,
+  "visual_asset_generation_performed": false,
+  "infographic_generation_performed": false,
+  "quality_scoring_performed": false,
+  "visitor_value_scoring_performed": false
+}
