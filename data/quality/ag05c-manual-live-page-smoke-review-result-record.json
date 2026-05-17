@@ -1,0 +1,68 @@
+{
+  "module_id": "AG05C",
+  "module_title": "Manual Live Page Smoke Review Result Record",
+  "phase": "Public Page / Live-Readiness / Manual Smoke Review Governance",
+  "status": "manual_live_review_result_record_only",
+  "depends_on": [
+    "AG05B",
+    "AG05A",
+    "AG04Z",
+    "AG03Z"
+  ],
+  "article_html_mutation_enabled": false,
+  "homepage_mutation_enabled": false,
+  "css_mutation_enabled": false,
+  "javascript_mutation_enabled": false,
+  "favicon_mutation_enabled": false,
+  "navigation_mutation_enabled": false,
+  "reference_url_change_enabled": false,
+  "external_fetch_enabled_by_script": false,
+  "live_url_fetch_enabled": false,
+  "runtime_enabled": false,
+  "server_endpoint_enabled": false,
+  "api_route_enabled": false,
+  "backend_activation_enabled": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "real_signup_enabled": false,
+  "user_account_collection_enabled": false,
+  "credential_collection_enabled": false,
+  "payment_enabled": false,
+  "admin_ui_enabled": false,
+  "subscriber_output_enabled": false,
+  "public_dynamic_output_enabled": false,
+  "frontend_deployment_enabled": false,
+  "backend_deployment_enabled": false,
+  "file_deletion_enabled": false,
+  "file_move_enabled": false,
+  "input_files": {
+    "ag05b_checklist": "data/editorial/ag05b-manual-live-page-smoke-review-checklist.json"
+  },
+  "outputs": {
+    "review_result": "data/editorial/ag05c-manual-live-page-smoke-review-result-record.json",
+    "preview": "data/quality/ag05c-manual-live-page-smoke-review-result-preview.json"
+  },
+  "manual_review_basis": {
+    "deployment_observed_current_commit": "98bf994",
+    "deployment_observed_status": "ready_current_production",
+    "sample_article_path": "articles/policy/advancing-digital-literacy-public-education-2026.html",
+    "sample_article_local_ag03_marker_count": 2,
+    "sample_article_live_html_contains_ag03_links": true,
+    "sample_article_visible_reader_placeholder_still_visible": true
+  },
+  "recommended_next_stage": {
+    "module_id": "AG05D",
+    "title": "Targeted Visible Reference Placement Repair",
+    "allowed": true,
+    "only_after_ag05c_validation": true,
+    "scope": "repair visible article reference presentation by ensuring verified AG03 links are displayed in the reader surface and obsolete placeholder reference blocks are hidden/removed where verified links exist",
+    "article_html_mutation_allowed": true,
+    "css_mutation_allowed": false,
+    "javascript_mutation_allowed": false,
+    "reference_url_change_allowed": false,
+    "deployment_allowed": false,
+    "supabase_allowed": false,
+    "auth_allowed": false
+  }
+}
