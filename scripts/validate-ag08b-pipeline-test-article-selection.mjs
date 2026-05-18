@@ -39,6 +39,25 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag08gControlledApplyAllowsPostMutation(selectedPath, currentHash) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    return (
+      applyRecord.module_id === "AG08G" &&
+      applyRecord.selected_article_path === selectedPath &&
+      applyRecord.post_apply_hash === currentHash &&
+      applyRecord.exactly_one_article_file_mutated === true &&
+      applyRecord.article_mutation_performed === true &&
+      applyRecord.production_readiness_after_ag08g === "one_article_applied_pending_post_apply_audit"
+    );
+  } catch {
+    return false;
+  }
+}
+
 function checkFalseFields(objects, fields) {
   for (const field of fields) {
     for (const obj of objects) {
@@ -104,7 +123,14 @@ if (selectedHtml.includes("<!-- AG07P-CONTROLLED-APPLY-START -->")) {
 
 if (selection.selection_boundary.target_count !== 1) fail("Selection boundary target count must be 1");
 if (selection.selection_boundary.exact_selected_target_article_path !== selectedPath) fail("Exact selected target path mismatch");
-if (selection.selected_article.sha256_at_selection !== sha256(selectedHtml)) fail("Selected article hash must match current file");
+const selectedHash = sha256(selectedHtml);
+
+if (
+  selection.selected_article.sha256_at_selection !== selectedHash &&
+  !ag08gControlledApplyAllowsPostMutation(selection.selected_article.article_path, selectedHash)
+) {
+  fail("Selected article hash must match current file or AG08G controlled post-apply hash");
+}
 if (selection.ag08c_handoff.next_stage_id !== "AG08C") fail("Selection must hand off to AG08C");
 if (selection.ag08c_handoff.explicit_approval_required !== true) fail("AG08C handoff must require explicit approval");
 if (selection.ag08c_handoff.selected_article_path !== selectedPath) fail("AG08C handoff selected article path mismatch");

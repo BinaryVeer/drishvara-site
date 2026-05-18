@@ -1,0 +1,183 @@
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+
+const root = process.cwd();
+
+const requiredFiles = [
+  "data/content-intelligence/quality-reviews/ag08f-draft-approval-controlled-apply-plan.json",
+  "data/content-intelligence/approval-registry/ag08f-draft-reference-approval-record.json",
+  "data/content-intelligence/mutation-plans/ag08f-controlled-apply-plan.json",
+  "data/content-intelligence/quality-reviews/ag08g-one-article-controlled-apply.json",
+  "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json",
+  "data/content-intelligence/quality-registry/ag08g-post-apply-audit-prep.json",
+  "data/content-intelligence/schema/one-article-controlled-apply-ag08g.schema.json",
+  "data/content-intelligence/learning/ag08g-one-article-controlled-apply-learning.json",
+  "data/quality/ag08g-one-article-controlled-apply.json",
+  "data/quality/ag08g-one-article-controlled-apply-preview.json",
+  "docs/quality/AG08G_ONE_ARTICLE_CONTROLLED_APPLY.md",
+  "package.json"
+];
+
+function fail(message) {
+  console.error(`❌ AG08G validation failed: ${message}`);
+  process.exit(1);
+}
+
+function pass(message) {
+  console.log(`✅ ${message}`);
+}
+
+function readJson(relativePath) {
+  return JSON.parse(fs.readFileSync(path.join(root, relativePath), "utf8"));
+}
+
+function sha256(text) {
+  return crypto.createHash("sha256").update(text).digest("hex");
+}
+
+function countOccurrences(text, needle) {
+  return String(text).split(needle).length - 1;
+}
+
+function listHtmlFiles(dir) {
+  const out = [];
+  if (!fs.existsSync(path.join(root, dir))) return out;
+
+  function walk(absDir) {
+    for (const entry of fs.readdirSync(absDir, { withFileTypes: true })) {
+      const abs = path.join(absDir, entry.name);
+      if (entry.isDirectory()) walk(abs);
+      else if (entry.isFile() && entry.name.endsWith(".html")) out.push(path.relative(root, abs));
+    }
+  }
+
+  walk(path.join(root, dir));
+  return out;
+}
+
+for (const file of requiredFiles) {
+  if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
+}
+
+const ag08fReview = readJson("data/content-intelligence/quality-reviews/ag08f-draft-approval-controlled-apply-plan.json");
+const ag08fApproval = readJson("data/content-intelligence/approval-registry/ag08f-draft-reference-approval-record.json");
+const ag08fApplyPlan = readJson("data/content-intelligence/mutation-plans/ag08f-controlled-apply-plan.json");
+
+const review = readJson("data/content-intelligence/quality-reviews/ag08g-one-article-controlled-apply.json");
+const applyRecord = readJson("data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
+const auditPrep = readJson("data/content-intelligence/quality-registry/ag08g-post-apply-audit-prep.json");
+const schema = readJson("data/content-intelligence/schema/one-article-controlled-apply-ag08g.schema.json");
+const learning = readJson("data/content-intelligence/learning/ag08g-one-article-controlled-apply-learning.json");
+const registry = readJson("data/quality/ag08g-one-article-controlled-apply.json");
+const preview = readJson("data/quality/ag08g-one-article-controlled-apply-preview.json");
+const pkg = readJson("package.json");
+
+for (const obj of [review, applyRecord, auditPrep, schema, learning, registry, preview]) {
+  if (obj.module_id !== "AG08G") fail(`module_id must be AG08G in ${obj.title || "object"}`);
+}
+
+if (ag08fReview.closure_decision.proceed_to_ag08g_only_with_explicit_user_approval !== true) fail("AG08F must authorize AG08G");
+if (ag08fReview.closure_decision.article_mutation_performed !== false) fail("AG08F must not have mutated article");
+
+const target = ag08fApplyPlan.ag08g_target_article_path;
+const backup = ag08fApplyPlan.ag08g_backup_path;
+
+if (target !== "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html") fail("AG08G target path mismatch");
+if (applyRecord.selected_article_path !== target) fail("Apply record target mismatch");
+if (auditPrep.selected_article_path !== target) fail("Audit prep target mismatch");
+if (review.summary.selected_article_path !== target) fail("Review summary target mismatch");
+
+if (!fs.existsSync(path.join(root, target))) fail(`Target article missing: ${target}`);
+if (!fs.existsSync(path.join(root, backup))) fail(`Backup missing: ${backup}`);
+
+const targetHtml = fs.readFileSync(path.join(root, target), "utf8");
+const backupHtml = fs.readFileSync(path.join(root, backup), "utf8");
+
+const targetHash = sha256(targetHtml);
+const backupHash = sha256(backupHtml);
+
+if (backupHash !== applyRecord.backup_hash) fail("Backup hash mismatch");
+if (backupHash !== applyRecord.pre_apply_hash) fail("Backup must match pre-apply hash");
+if (targetHash !== applyRecord.post_apply_hash) fail("Target hash mismatch");
+if (targetHash === backupHash) fail("Target must differ from backup after apply");
+
+if (backupHtml.includes("AG08G-CONTROLLED-APPLY")) fail("Backup must not contain AG08G marker");
+if (countOccurrences(targetHtml, "AG08G-CONTROLLED-APPLY") !== 1) fail("Target must contain exactly one AG08G marker");
+if (countOccurrences(targetHtml, "AG08G-APPROVED-REFERENCES") !== 1) fail("Target must contain exactly one AG08G approved references marker");
+
+const approvedRefs = ag08fApproval.reference_approval.approved_references || [];
+if (approvedRefs.length < 2) fail("At least two AG08F approved references are required");
+
+for (const ref of approvedRefs) {
+  if (!targetHtml.includes(ref.url)) fail(`Approved reference URL missing from target article: ${ref.url}`);
+}
+
+const articleFilesWithMarker = listHtmlFiles("articles").filter((file) => {
+  const html = fs.readFileSync(path.join(root, file), "utf8");
+  return html.includes("AG08G-CONTROLLED-APPLY");
+});
+
+if (articleFilesWithMarker.length !== 1) fail(`Exactly one article must contain AG08G marker; found ${articleFilesWithMarker.length}`);
+if (articleFilesWithMarker[0] !== target) fail(`AG08G marker found in wrong article: ${articleFilesWithMarker[0]}`);
+
+const backupImageCount = countOccurrences(backupHtml.toLowerCase(), "<img");
+const targetImageCount = countOccurrences(targetHtml.toLowerCase(), "<img");
+if (targetImageCount > backupImageCount) fail("AG08G must not increase image count");
+
+if (applyRecord.exactly_one_article_file_mutated !== true) fail("Apply record must confirm exactly one article mutation");
+if (applyRecord.backup_created_before_apply !== true) fail("Backup must be created before apply");
+if (applyRecord.article_mutation_performed !== true) fail("Article mutation must be true in AG08G");
+if (applyRecord.article_file_write_performed !== true) fail("Article file write must be true in AG08G");
+if (applyRecord.reference_insertion_performed !== true) fail("Reference insertion must be true in AG08G");
+if (applyRecord.visual_generation_performed !== false) fail("Visual generation must be false");
+if (applyRecord.image_insertion_performed !== false) fail("Image insertion must be false");
+if (applyRecord.production_jsonl_append_performed !== false) fail("Production JSONL append must be false");
+if (applyRecord.database_write_performed !== false) fail("Database write must be false");
+if (applyRecord.supabase_write_performed !== false) fail("Supabase write must be false");
+if (applyRecord.backend_auth_supabase_activation_performed !== false) fail("Backend/Auth/Supabase activation must be false");
+if (applyRecord.public_publishing_performed !== false) fail("Publishing must be false");
+
+if (auditPrep.status !== "post_apply_audit_required") fail("AG08H audit must be required");
+if (auditPrep.ag08h_handoff.next_stage_id !== "AG08H") fail("AG08H handoff missing");
+if (auditPrep.ag08h_handoff.explicit_approval_required !== true) fail("AG08H must require explicit approval");
+
+if (schema.selected_article_mutation_allowed_in_ag08g !== true) fail("Schema must allow selected article mutation");
+if (schema.approved_reference_insertion_allowed_in_ag08g !== true) fail("Schema must allow approved reference insertion");
+if (schema.visual_generation_allowed_in_ag08g !== false) fail("Schema must block visual generation");
+if (schema.image_insertion_allowed_in_ag08g !== false) fail("Schema must block image insertion");
+if (schema.multi_article_mutation_allowed_in_ag08g !== false) fail("Schema must block multi-article mutation");
+if (schema.homepage_mutation_allowed_in_ag08g !== false) fail("Schema must block homepage mutation");
+if (schema.css_js_mutation_allowed_in_ag08g !== false) fail("Schema must block CSS/JS mutation");
+if (schema.production_jsonl_append_allowed_in_ag08g !== false) fail("Schema must block JSONL append");
+if (schema.database_write_allowed_in_ag08g !== false) fail("Schema must block database write");
+if (schema.supabase_write_allowed_in_ag08g !== false) fail("Schema must block Supabase write");
+if (schema.backend_auth_supabase_allowed_in_ag08g !== false) fail("Schema must block backend/Auth/Supabase");
+if (schema.publishing_allowed_in_ag08g !== false) fail("Schema must block publishing");
+
+if (review.closure_decision.decision !== "ag08g_one_article_apply_completed_pending_ag08h_audit") fail("Closure decision mismatch");
+if (review.closure_decision.proceed_to_ag08h_only_with_explicit_user_approval !== true) fail("AG08H must require explicit approval");
+
+for (const scriptName of ["generate:ag08g", "validate:ag08g"]) {
+  if (!pkg.scripts?.[scriptName]) fail(`Missing package script: ${scriptName}`);
+}
+
+if (!pkg.scripts?.["validate:project"]?.includes("npm run validate:ag08g")) {
+  fail("validate:project must include validate:ag08g");
+}
+
+pass("AG08G registry is present.");
+pass("AG08G document is present.");
+pass("AG08G review, apply record, audit prep, schema, learning record and preview are present.");
+pass("AG08F approval and controlled apply plan are consumed.");
+pass(`Backup exists: ${backup}`);
+pass("Backup has no AG08G marker.");
+pass(`Exactly one selected article is mutated: ${target}`);
+pass("Target article contains exactly one AG08G controlled apply marker.");
+pass("AG08F-approved references are inserted.");
+pass("Exactly one article contains the AG08G marker.");
+pass("No visual generation or image insertion is performed.");
+pass("No production JSONL append, database write, Supabase write, backend/Auth/Supabase activation or publishing is performed.");
+pass("Production readiness is one_article_applied_pending_post_apply_audit.");
+pass("Publish readiness is static_file_changed_not_publish_approved.");
+pass("AG08H Post-Apply Audit is identified as next only with explicit approval.");

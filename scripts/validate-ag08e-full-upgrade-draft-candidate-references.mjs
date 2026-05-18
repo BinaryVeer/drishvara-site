@@ -43,6 +43,31 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag08gControlledApplyAllowsPostMutation() {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG08G" ||
+      applyRecord.exactly_one_article_file_mutated !== true ||
+      applyRecord.article_mutation_performed !== true ||
+      applyRecord.production_readiness_after_ag08g !== "one_article_applied_pending_post_apply_audit"
+    ) {
+      return false;
+    }
+
+    const targetAbs = path.join(root, applyRecord.selected_article_path);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const currentHash = sha256(fs.readFileSync(targetAbs, "utf8"));
+    return applyRecord.post_apply_hash === currentHash;
+  } catch {
+    return false;
+  }
+}
+
 function countWords(text) {
   return String(text || "")
     .replace(/<[^>]+>/g, " ")
@@ -112,9 +137,9 @@ if (!fs.existsSync(path.join(root, selectedPath))) fail(`Selected article does n
 const selectedHtml = fs.readFileSync(path.join(root, selectedPath), "utf8");
 const selectedHash = sha256(selectedHtml);
 
-if (draft.selected_article.sha256_before_ag08e !== selectedHash) fail("Draft selected article hash mismatch");
-if (readiness.selected_article_sha256_before_ag08e !== selectedHash) fail("Readiness selected article hash mismatch");
-if (ag08dInference.selected_article_sha256_before_ag08d !== selectedHash) fail("AG08E hash must match AG08D hash");
+if (draft.selected_article.sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("Draft selected article hash mismatch or AG08G controlled post-apply hash missing");
+if (readiness.selected_article_sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("Readiness selected article hash mismatch or AG08G controlled post-apply hash missing");
+if (ag08dInference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("AG08E hash must match AG08D hash or AG08G controlled post-apply hash missing");
 
 if (!draft.draft_candidate?.draft_text) fail("Draft text missing");
 const actualDraftWords = countWords(draft.draft_candidate.draft_text);

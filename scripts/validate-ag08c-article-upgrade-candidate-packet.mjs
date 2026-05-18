@@ -42,6 +42,32 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag08gControlledApplyAllowsPostMutation() {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG08G" ||
+      applyRecord.exactly_one_article_file_mutated !== true ||
+      applyRecord.article_mutation_performed !== true ||
+      applyRecord.production_readiness_after_ag08g !== "one_article_applied_pending_post_apply_audit"
+    ) {
+      return false;
+    }
+
+    const targetPath = applyRecord.selected_article_path;
+    const targetAbs = path.join(root, targetPath);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const currentHash = sha256(fs.readFileSync(targetAbs, "utf8"));
+    return applyRecord.post_apply_hash === currentHash;
+  } catch {
+    return false;
+  }
+}
+
 function checkFalseFields(objects, fields) {
   for (const field of fields) {
     for (const obj of objects) {
@@ -100,8 +126,33 @@ if (!fs.existsSync(path.join(root, selectedPath))) fail(`Selected article does n
 
 const selectedHtml = fs.readFileSync(path.join(root, selectedPath), "utf8");
 const selectedHash = sha256(selectedHtml);
-if (packet.selected_article.sha256_before_ag08c !== selectedHash) fail("Packet selected article hash mismatch");
-if (readiness.selected_article_sha256_before_ag08c !== selectedHash) fail("Readiness selected article hash mismatch");
+const ag08cSelectedArticlePath =
+  packet.selected_article?.article_path ||
+  packet.selected_article_path ||
+  packet.target_article_path ||
+  "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html";
+
+const ag08cSelectedArticleAbs = path.join(root, ag08cSelectedArticlePath);
+
+if (!fs.existsSync(ag08cSelectedArticleAbs)) {
+  fail(`AG08C selected article missing: ${ag08cSelectedArticlePath}`);
+}
+
+const currentArticleHash = sha256(fs.readFileSync(ag08cSelectedArticleAbs, "utf8"));
+
+const ag08cPacketOriginalHash =
+  packet.selected_article?.sha256_at_packet_creation ||
+  packet.selected_article?.sha256_before_ag08c ||
+  packet.selected_article_sha256_before_ag08c ||
+  packet.selected_article_hash;
+
+if (
+  ag08cPacketOriginalHash !== currentArticleHash &&
+  !ag08gControlledApplyAllowsPostMutation()
+) {
+  fail("Packet selected article hash mismatch or AG08G controlled post-apply hash missing");
+}
+if (readiness.selected_article_sha256_before_ag08c !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("Readiness selected article hash mismatch or AG08G controlled post-apply hash missing");
 if (packet.selected_article.sha256_before_ag08c !== ag08bSelection.selected_article.sha256_at_selection) fail("AG08C hash must match AG08B selection hash");
 
 if (!packet.current_article_analysis) fail("Current article analysis missing");
