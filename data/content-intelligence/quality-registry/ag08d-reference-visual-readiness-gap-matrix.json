@@ -1,0 +1,178 @@
+{
+  "module_id": "AG08D",
+  "title": "Reference, Visual and Quality Readiness Gap Matrix",
+  "status": "readiness_review_completed_for_ag08e",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "selected_article_sha256_before_ag08d": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+  "reference_readiness": {
+    "status": "reference_ready_for_candidate_population_in_ag08e",
+    "url_population_performed_in_ag08d": false,
+    "reference_insertion_performed_in_ag08d": false,
+    "recommended_reference_count_for_ag08e": 3,
+    "acceptable_reference_count_range": {
+      "min": 2,
+      "max": 5
+    },
+    "required_source_types": [
+      "official digital health / public health mission source",
+      "credible institutional health systems or public health source",
+      "implementation/accountability/data quality source"
+    ],
+    "reference_query_themes_for_ag08e": [
+      "digital health mission public healthcare delivery India official",
+      "health information systems public health service delivery data quality",
+      "digital health governance patient experience service delivery"
+    ],
+    "source_quality_rules_for_ag08e": [
+      "Prefer official, institutional, peer-reviewed, multilateral or credible public health sources.",
+      "Reject parked, spam, broken, irrelevant, promotional or unverifiable links.",
+      "Do not invent source titles or URLs.",
+      "Every inserted reference must support a specific article claim."
+    ],
+    "ag08e_requires_web_or_manual_source_verification": true
+  },
+  "visual_data_readiness": {
+    "status": "visual_data_ready_for_candidate_design_in_ag08e",
+    "visual_generation_performed_in_ag08d": false,
+    "image_insertion_performed_in_ag08d": false,
+    "recommended_visual_direction": "simple static explanatory flow or implementation loop",
+    "recommended_visual_caption_need": true,
+    "recommended_alt_text_need": true,
+    "recommended_credit_need": true,
+    "recommended_data_unit_type": "implementation indicator checklist",
+    "recommended_data_unit_fields": [
+      "facility/service point",
+      "digital record or request",
+      "assignment or referral",
+      "turnaround time",
+      "medicine/diagnostic/service status",
+      "feedback or grievance closure"
+    ],
+    "visual_risk_controls_for_ag08e": [
+      "Do not use uncredited third-party images.",
+      "Do not generate visual assets unless separately approved.",
+      "If only concept is needed, keep visual as planned_not_generated.",
+      "If inserted later, preserve mobile-safe layout and image-credit block."
+    ]
+  },
+  "quality_gap_matrix": [
+    {
+      "gap_id": "AG08D-GAP-001",
+      "area": "long_form_depth",
+      "current_status": "gap_confirmed",
+      "evidence": "Current estimated word count is 608.",
+      "required_ag08e_action": "Generate full upgraded draft candidate in 1500–2200 word range, if approved."
+    },
+    {
+      "gap_id": "AG08D-GAP-002",
+      "area": "reader_value",
+      "current_status": "gap_confirmed",
+      "evidence": "AG08C candidate packet requires stronger policy interpretation and reader lens.",
+      "required_ag08e_action": "Draft should explain practical implications, not just describe digital innovation."
+    },
+    {
+      "gap_id": "AG08D-GAP-003",
+      "area": "reference_support",
+      "current_status": "candidate_population_required",
+      "evidence": "AG08C has reference need plan but no candidate URLs.",
+      "required_ag08e_action": "Populate candidate references only after source verification."
+    },
+    {
+      "gap_id": "AG08D-GAP-004",
+      "area": "visual_data_enrichment",
+      "current_status": "concept_required",
+      "evidence": "AG08C recommends explanatory flow/data unit but no visual generation.",
+      "required_ag08e_action": "Prepare visual/data concept; keep generation blocked unless explicitly approved."
+    },
+    {
+      "gap_id": "AG08D-GAP-005",
+      "area": "apply_safety",
+      "current_status": "future_gate_required",
+      "evidence": "Article hash is stable; no backup exists for AG08 apply yet.",
+      "required_ag08e_action": "Do not mutate in AG08E; backup and apply plan should come later."
+    }
+  ],
+  "ag08e_handoff": {
+    "next_stage_id": "AG08E",
+    "next_stage_title": "Full Upgrade Draft + Candidate References",
+    "explicit_approval_required": true,
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "allowed_scope": [
+      "generate full upgraded article draft candidate as artifact only",
+      "populate candidate reference URLs with verification notes",
+      "prepare visual/data concept without article insertion",
+      "prepare draft-readiness record"
+    ],
+    "blocked_scope": [
+      "article file mutation",
+      "final article apply",
+      "reference insertion into article HTML",
+      "visual insertion into article HTML",
+      "production JSONL append",
+      "database/Supabase write",
+      "backend/Auth/Supabase activation",
+      "publishing"
+    ]
+  },
+  "readiness_review_only": true,
+  "selected_article_read_performed": true,
+  "selected_article_hash_verified": true,
+  "article_inference_review_created": true,
+  "reference_readiness_review_created": true,
+  "visual_data_readiness_review_created": true,
+  "quality_gap_matrix_created": true,
+  "ag08e_handoff_created": true,
+  "selected_article_mutated": false,
+  "article_mutation_performed": false,
+  "new_article_generation_performed": false,
+  "new_article_file_created": false,
+  "article_file_created": false,
+  "article_prose_generated": false,
+  "final_article_prose_generated": false,
+  "narrative_text_generated": false,
+  "candidate_final_draft_generated": false,
+  "candidate_packet_mutated": false,
+  "production_packet_created": false,
+  "production_article_packet_created": false,
+  "score_calculation_performed": false,
+  "dry_run_score_calculation_performed": false,
+  "actual_score_calculation_performed": false,
+  "approval_state_changed": false,
+  "publish_ready_set": false,
+  "public_article_mutation_performed": false,
+  "article_html_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}
