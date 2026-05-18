@@ -1,0 +1,168 @@
+{
+  "module_id": "AG08I",
+  "preview_only": true,
+  "planning_only": true,
+  "status": "visual_generation_image_insertion_plan_created",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag08i": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+    "visual_plan_created": true,
+    "visual_type_defined": true,
+    "source_rights_rules_defined": true,
+    "image_credit_attribution_defined": true,
+    "alt_text_caption_defined": true,
+    "placement_rules_defined": true,
+    "mobile_layout_checks_defined": true,
+    "fallback_rule_defined": true,
+    "backup_rollback_requirement_defined": true,
+    "future_controlled_apply_boundary_defined": true,
+    "next_stage_id": "AG08J",
+    "next_stage_title": "Visual Candidate Generation / Asset Selection",
+    "next_stage_requires_explicit_approval": true,
+    "production_readiness_after_ag08i": "visual_plan_created_not_apply_ready",
+    "publish_readiness_after_ag08i": "blocked",
+    "visual_generation_plan_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag08i": false,
+    "file_edit_performed_in_ag08i": false,
+    "selected_article_file_write_performed_in_ag08i": false,
+    "visual_generation_performed_in_ag08i": false,
+    "visual_asset_created_in_ag08i": false,
+    "image_insertion_performed_in_ag08i": false,
+    "image_file_write_performed_in_ag08i": false,
+    "css_mutation_performed_in_ag08i": false,
+    "js_mutation_performed_in_ag08i": false,
+    "reference_insertion_performed_in_ag08i": false,
+    "production_jsonl_append_performed_in_ag08i": false,
+    "database_write_performed_in_ag08i": false,
+    "supabase_write_performed_in_ag08i": false,
+    "backend_auth_supabase_activation_performed_in_ag08i": false,
+    "public_publishing_performed_in_ag08i": false,
+    "publishing_approval_performed_in_ag08i": false,
+    "rollback_execution_performed_in_ag08i": false
+  },
+  "visual_requirement_plan": {
+    "recommended_visual_type": "editorial_hero_illustration_with_optional_supporting_data_card",
+    "visual_intent": "Represent digital public healthcare delivery as a human-centred governance system rather than as a decorative technology image.",
+    "primary_component": {
+      "component_id": "AG08I-VIS-001",
+      "component_type": "primary_hero_visual",
+      "required": true,
+      "planned_dimensions": {
+        "recommended_ratio": "16:9",
+        "minimum_width_px": 1200,
+        "mobile_safe_crop_required": true
+      },
+      "planned_output_path": "assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08j-primary-hero.webp",
+      "alt_text_draft": "Illustration of digital public healthcare delivery connecting frontline care, records, telemedicine and governance dashboards.",
+      "caption_draft": "Digital innovation strengthens public healthcare when technology, frontline service and accountable governance operate together.",
+      "image_credit_required": true,
+      "credit_status": "to_be_populated_after_visual_source_or_generation_is_finalised"
+    },
+    "source_rights_rules": {
+      "allowed_sources": [
+        "original generated illustration with internal prompt/audit record",
+        "properly licensed stock or open-license image with verifiable licence",
+        "self-created infographic or editorial SVG with no third-party protected marks"
+      ],
+      "disallowed_sources": [
+        "copied news photos without licence",
+        "uncredited government or institutional images",
+        "images containing protected logos unless usage is clearly lawful and necessary",
+        "AI-generated image without internal source/credit disclosure record",
+        "medical patient image implying diagnosis or identity"
+      ],
+      "credit_requirement": "Every visual must carry a visible image-credit/attribution block or generated-image disclosure, as applicable.",
+      "rights_status_before_apply": "must_be_approved_before_any_image_insertion"
+    },
+    "placement_rules": {
+      "preferred_location": "inside selected article after title/intro area and before first major section, without disrupting AG08G references or legacy governance blocks",
+      "preserve_required_markers": [
+        "AG08G-CONTROLLED-APPLY",
+        "AG08G-APPROVED-REFERENCES",
+        "AG08G-LEGACY-GOVERNANCE-PRESERVED",
+        "data-drishvara-ag03c-b2-reference-block",
+        "data-drishvara-ag05d-visible-reference-block"
+      ],
+      "image_wrapper_id": "ag08j-article-visual-block",
+      "figure_required": true,
+      "figcaption_required": true,
+      "alt_text_required": true,
+      "visible_credit_required": true,
+      "lazy_loading_allowed": true,
+      "width_policy": "must not break long-form reading width or mobile layout"
+    },
+    "mobile_layout_checks": [
+      "image scales to container width",
+      "no horizontal overflow at 360px viewport",
+      "caption remains readable",
+      "credit block remains visible but not visually dominant",
+      "legacy reference blocks remain after article body/reference area",
+      "no CLS-heavy layout jump from missing dimensions"
+    ],
+    "fallback_rule": {
+      "fallback_required": true,
+      "fallback_option": "category-level policy fallback SVG if visual asset fails or is not approved",
+      "fallback_must_preserve_article_readability": true,
+      "fallback_credit_required": true
+    }
+  },
+  "future_controlled_apply_boundary": {
+    "next_stage_id": "AG08J",
+    "next_stage_title": "Visual Candidate Generation / Asset Selection",
+    "explicit_approval_required": true,
+    "ag08j_allowed_scope": [
+      "create visual candidate artifact only",
+      "record prompt/source/licence/credit candidate",
+      "record alt text and caption candidate",
+      "record planned asset path",
+      "do not mutate article HTML unless a later apply stage is explicitly approved"
+    ],
+    "ag08j_blocked_scope": [
+      "article mutation",
+      "image insertion into selected article",
+      "CSS/JS mutation",
+      "production JSONL append",
+      "database/Supabase write",
+      "backend/Auth/Supabase activation",
+      "publishing approval"
+    ],
+    "future_apply_stage_recommendation": {
+      "recommended_stage_id": "AG08K",
+      "recommended_stage_title": "Controlled Visual Image Insertion Apply",
+      "preconditions": [
+        "AG08J visual candidate generated or selected",
+        "source/rights/credit approved",
+        "alt text and caption approved",
+        "backup path confirmed",
+        "exact insertion point confirmed",
+        "validate:project clean before apply"
+      ],
+      "allowed_apply_scope_if_later_approved": [
+        "create pre-apply backup if current article changed after AG08G backup",
+        "insert one approved visual block into selected article",
+        "preserve AG08G and legacy governance markers",
+        "record apply audit artifacts"
+      ]
+    }
+  },
+  "visual_generation_plan_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag08i": false,
+  "file_edit_performed_in_ag08i": false,
+  "selected_article_file_write_performed_in_ag08i": false,
+  "visual_generation_performed_in_ag08i": false,
+  "visual_asset_created_in_ag08i": false,
+  "image_insertion_performed_in_ag08i": false,
+  "image_file_write_performed_in_ag08i": false,
+  "css_mutation_performed_in_ag08i": false,
+  "js_mutation_performed_in_ag08i": false,
+  "reference_insertion_performed_in_ag08i": false,
+  "production_jsonl_append_performed_in_ag08i": false,
+  "database_write_performed_in_ag08i": false,
+  "supabase_write_performed_in_ag08i": false,
+  "backend_auth_supabase_activation_performed_in_ag08i": false,
+  "public_publishing_performed_in_ag08i": false,
+  "publishing_approval_performed_in_ag08i": false,
+  "rollback_execution_performed_in_ag08i": false
+}

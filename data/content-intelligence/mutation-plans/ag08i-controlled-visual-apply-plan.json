@@ -1,0 +1,87 @@
+{
+  "module_id": "AG08I",
+  "title": "Controlled Visual Apply Plan Boundary",
+  "status": "future_visual_apply_boundary_created_not_executed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "current_article_hash_at_ag08i": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+  "visual_requirement_plan_file": "data/content-intelligence/visual-registry/ag08i-visual-generation-image-insertion-plan.json",
+  "future_controlled_apply_boundary": {
+    "next_stage_id": "AG08J",
+    "next_stage_title": "Visual Candidate Generation / Asset Selection",
+    "explicit_approval_required": true,
+    "ag08j_allowed_scope": [
+      "create visual candidate artifact only",
+      "record prompt/source/licence/credit candidate",
+      "record alt text and caption candidate",
+      "record planned asset path",
+      "do not mutate article HTML unless a later apply stage is explicitly approved"
+    ],
+    "ag08j_blocked_scope": [
+      "article mutation",
+      "image insertion into selected article",
+      "CSS/JS mutation",
+      "production JSONL append",
+      "database/Supabase write",
+      "backend/Auth/Supabase activation",
+      "publishing approval"
+    ],
+    "future_apply_stage_recommendation": {
+      "recommended_stage_id": "AG08K",
+      "recommended_stage_title": "Controlled Visual Image Insertion Apply",
+      "preconditions": [
+        "AG08J visual candidate generated or selected",
+        "source/rights/credit approved",
+        "alt text and caption approved",
+        "backup path confirmed",
+        "exact insertion point confirmed",
+        "validate:project clean before apply"
+      ],
+      "allowed_apply_scope_if_later_approved": [
+        "create pre-apply backup if current article changed after AG08G backup",
+        "insert one approved visual block into selected article",
+        "preserve AG08G and legacy governance markers",
+        "record apply audit artifacts"
+      ]
+    }
+  },
+  "backup_rollback_requirement": {
+    "rollback_ready_from_ag08h": true,
+    "existing_ag08g_backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+    "ag08i_backup_created": false,
+    "future_visual_apply_backup_required": true,
+    "future_backup_rule": "AG08K or any visual insertion apply stage must create a fresh pre-visual-apply backup because the article already changed in AG08G.",
+    "rollback_execution_performed_in_ag08i": false
+  },
+  "forbidden_in_ag08i": [
+    "visual generation",
+    "image asset creation",
+    "image insertion",
+    "article mutation",
+    "file edit",
+    "CSS/JS mutation",
+    "reference insertion",
+    "production JSONL append",
+    "database/Supabase write",
+    "backend/Auth/Supabase activation",
+    "publishing approval"
+  ],
+  "visual_generation_plan_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag08i": false,
+  "file_edit_performed_in_ag08i": false,
+  "selected_article_file_write_performed_in_ag08i": false,
+  "visual_generation_performed_in_ag08i": false,
+  "visual_asset_created_in_ag08i": false,
+  "image_insertion_performed_in_ag08i": false,
+  "image_file_write_performed_in_ag08i": false,
+  "css_mutation_performed_in_ag08i": false,
+  "js_mutation_performed_in_ag08i": false,
+  "reference_insertion_performed_in_ag08i": false,
+  "production_jsonl_append_performed_in_ag08i": false,
+  "database_write_performed_in_ag08i": false,
+  "supabase_write_performed_in_ag08i": false,
+  "backend_auth_supabase_activation_performed_in_ag08i": false,
+  "public_publishing_performed_in_ag08i": false,
+  "publishing_approval_performed_in_ag08i": false,
+  "rollback_execution_performed_in_ag08i": false
+}

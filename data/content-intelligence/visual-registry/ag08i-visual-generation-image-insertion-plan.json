@@ -1,0 +1,91 @@
+{
+  "target_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "target_article_hash_at_ag08i": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+  "planning_status": "visual_plan_created_no_asset_generated",
+  "recommended_visual_type": "editorial_hero_illustration_with_optional_supporting_data_card",
+  "visual_intent": "Represent digital public healthcare delivery as a human-centred governance system rather than as a decorative technology image.",
+  "preferred_visual_direction": {
+    "primary_scene": "A balanced public-health service ecosystem showing a healthcare worker, digital records, telemedicine link, rural patient access and governance dashboard elements.",
+    "tone": "serious, policy-oriented, human-centred, clean and trustworthy",
+    "avoid": [
+      "stock-photo-like hospital glamour",
+      "unverified government logos",
+      "medical diagnosis imagery",
+      "overly futuristic AI robot imagery",
+      "crowded infographic with unreadable text",
+      "religious/political symbols unrelated to the article"
+    ],
+    "design_language": "Drishvara editorial illustration; calm, credible, long-form reading support"
+  },
+  "visual_components": [
+    {
+      "component_id": "AG08I-VIS-001",
+      "component_type": "primary_hero_visual",
+      "required": true,
+      "planned_dimensions": {
+        "recommended_ratio": "16:9",
+        "minimum_width_px": 1200,
+        "mobile_safe_crop_required": true
+      },
+      "planned_output_path": "assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08j-primary-hero.webp",
+      "alt_text_draft": "Illustration of digital public healthcare delivery connecting frontline care, records, telemedicine and governance dashboards.",
+      "caption_draft": "Digital innovation strengthens public healthcare when technology, frontline service and accountable governance operate together.",
+      "image_credit_required": true,
+      "credit_status": "to_be_populated_after_visual_source_or_generation_is_finalised"
+    },
+    {
+      "component_id": "AG08I-VIS-002",
+      "component_type": "supporting_data_or_process_card",
+      "required": false,
+      "planned_use": "Optional future visual explaining service-delivery flow from patient access to digital record, teleconsultation, follow-up and governance review.",
+      "insertion_status": "deferred"
+    }
+  ],
+  "source_rights_rules": {
+    "allowed_sources": [
+      "original generated illustration with internal prompt/audit record",
+      "properly licensed stock or open-license image with verifiable licence",
+      "self-created infographic or editorial SVG with no third-party protected marks"
+    ],
+    "disallowed_sources": [
+      "copied news photos without licence",
+      "uncredited government or institutional images",
+      "images containing protected logos unless usage is clearly lawful and necessary",
+      "AI-generated image without internal source/credit disclosure record",
+      "medical patient image implying diagnosis or identity"
+    ],
+    "credit_requirement": "Every visual must carry a visible image-credit/attribution block or generated-image disclosure, as applicable.",
+    "rights_status_before_apply": "must_be_approved_before_any_image_insertion"
+  },
+  "placement_rules": {
+    "preferred_location": "inside selected article after title/intro area and before first major section, without disrupting AG08G references or legacy governance blocks",
+    "preserve_required_markers": [
+      "AG08G-CONTROLLED-APPLY",
+      "AG08G-APPROVED-REFERENCES",
+      "AG08G-LEGACY-GOVERNANCE-PRESERVED",
+      "data-drishvara-ag03c-b2-reference-block",
+      "data-drishvara-ag05d-visible-reference-block"
+    ],
+    "image_wrapper_id": "ag08j-article-visual-block",
+    "figure_required": true,
+    "figcaption_required": true,
+    "alt_text_required": true,
+    "visible_credit_required": true,
+    "lazy_loading_allowed": true,
+    "width_policy": "must not break long-form reading width or mobile layout"
+  },
+  "mobile_layout_checks": [
+    "image scales to container width",
+    "no horizontal overflow at 360px viewport",
+    "caption remains readable",
+    "credit block remains visible but not visually dominant",
+    "legacy reference blocks remain after article body/reference area",
+    "no CLS-heavy layout jump from missing dimensions"
+  ],
+  "fallback_rule": {
+    "fallback_required": true,
+    "fallback_option": "category-level policy fallback SVG if visual asset fails or is not approved",
+    "fallback_must_preserve_article_readability": true,
+    "fallback_credit_required": true
+  }
+}

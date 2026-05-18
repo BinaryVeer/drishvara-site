@@ -1,0 +1,103 @@
+{
+  "module_id": "AG08I",
+  "title": "Visual Apply Planning Readiness",
+  "status": "visual_plan_ready_pending_future_explicit_stage",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "readiness_checks": [
+    {
+      "check_id": "AG08I-CHECK-001",
+      "name": "ag08h_audit_passed",
+      "status": "passed",
+      "evidence": "post_apply_audit_passed"
+    },
+    {
+      "check_id": "AG08I-CHECK-002",
+      "name": "selected_article_hash_matches_ag08g_post_apply",
+      "status": "passed",
+      "evidence": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5"
+    },
+    {
+      "check_id": "AG08I-CHECK-003",
+      "name": "rollback_ready",
+      "status": "passed",
+      "evidence": "rollback_ready_not_executed"
+    },
+    {
+      "check_id": "AG08I-CHECK-004",
+      "name": "visual_standard_consumed",
+      "status": "passed",
+      "evidence": "Visual / Data / Infographic Requirement Schema Closure"
+    },
+    {
+      "check_id": "AG08I-CHECK-005",
+      "name": "visual_plan_created_without_generation",
+      "status": "passed",
+      "evidence": "visual_generation_performed_in_ag08i=false"
+    },
+    {
+      "check_id": "AG08I-CHECK-006",
+      "name": "future_apply_boundary_created",
+      "status": "passed",
+      "evidence": "AG08J"
+    }
+  ],
+  "all_readiness_checks_passed": true,
+  "ag08j_handoff": {
+    "next_stage_id": "AG08J",
+    "next_stage_title": "Visual Candidate Generation / Asset Selection",
+    "explicit_approval_required": true,
+    "ag08j_allowed_scope": [
+      "create visual candidate artifact only",
+      "record prompt/source/licence/credit candidate",
+      "record alt text and caption candidate",
+      "record planned asset path",
+      "do not mutate article HTML unless a later apply stage is explicitly approved"
+    ],
+    "ag08j_blocked_scope": [
+      "article mutation",
+      "image insertion into selected article",
+      "CSS/JS mutation",
+      "production JSONL append",
+      "database/Supabase write",
+      "backend/Auth/Supabase activation",
+      "publishing approval"
+    ],
+    "future_apply_stage_recommendation": {
+      "recommended_stage_id": "AG08K",
+      "recommended_stage_title": "Controlled Visual Image Insertion Apply",
+      "preconditions": [
+        "AG08J visual candidate generated or selected",
+        "source/rights/credit approved",
+        "alt text and caption approved",
+        "backup path confirmed",
+        "exact insertion point confirmed",
+        "validate:project clean before apply"
+      ],
+      "allowed_apply_scope_if_later_approved": [
+        "create pre-apply backup if current article changed after AG08G backup",
+        "insert one approved visual block into selected article",
+        "preserve AG08G and legacy governance markers",
+        "record apply audit artifacts"
+      ]
+    }
+  },
+  "visual_generation_plan_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag08i": false,
+  "file_edit_performed_in_ag08i": false,
+  "selected_article_file_write_performed_in_ag08i": false,
+  "visual_generation_performed_in_ag08i": false,
+  "visual_asset_created_in_ag08i": false,
+  "image_insertion_performed_in_ag08i": false,
+  "image_file_write_performed_in_ag08i": false,
+  "css_mutation_performed_in_ag08i": false,
+  "js_mutation_performed_in_ag08i": false,
+  "reference_insertion_performed_in_ag08i": false,
+  "production_jsonl_append_performed_in_ag08i": false,
+  "database_write_performed_in_ag08i": false,
+  "supabase_write_performed_in_ag08i": false,
+  "backend_auth_supabase_activation_performed_in_ag08i": false,
+  "public_publishing_performed_in_ag08i": false,
+  "publishing_approval_performed_in_ag08i": false,
+  "rollback_execution_performed_in_ag08i": false
+}
