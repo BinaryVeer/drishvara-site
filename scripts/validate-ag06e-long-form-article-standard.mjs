@@ -42,7 +42,7 @@ if (preview.preview_only !== true) fail("Preview must be preview-only");
 if (standard.governance_only !== true) fail("Standard must be governance-only");
 
 if (standard.summary.word_count_min !== 1500) fail("Minimum word count must be 1500");
-if (standard.summary.word_count_max !== 2200) fail("Maximum word count must be 2200");
+if (standard.summary.word_count_max !== 5500) fail("Maximum word count must be 5500");
 if (standard.summary.verified_reference_min !== 2) fail("Minimum verified references must be 2");
 if (standard.summary.verified_reference_max !== 5) fail("Maximum verified references must be 5");
 
@@ -68,7 +68,7 @@ if (preview.visitor_value_weight_total !== 100) fail("Preview visitor-value weig
 
 if (!Array.isArray(standard.publish_readiness_gates)) fail("Publish readiness gates must be an array");
 for (const gate of [
-  "word_count_within_1500_2200",
+  "word_count_within_1500_5500",
   "minimum_two_verified_references",
   "all_reference_urls_verified",
   "visual_plan_complete",
@@ -86,7 +86,7 @@ if (!standard.review_status_standard.allowed_statuses.includes("publish_ready"))
 if (standard.review_status_standard.publish_ready_status !== "publish_ready") fail("Publish-ready status must equal publish_ready");
 
 if (schema.properties?.actual_word_count?.minimum !== 1500) fail("Schema actual_word_count minimum must be 1500");
-if (schema.properties?.actual_word_count?.maximum !== 2200) fail("Schema actual_word_count maximum must be 2200");
+if (schema.properties?.actual_word_count?.maximum !== 5500) fail("Schema actual_word_count maximum must be 5500");
 if (schema.properties?.verified_references?.minItems !== 2) fail("Schema verified_references minItems must be 2");
 if (schema.properties?.verified_references?.maxItems !== 5) fail("Schema verified_references maxItems must be 5");
 if (schema.properties?.quality_score?.minimum !== 85) fail("Schema quality_score minimum must be 85");
@@ -157,7 +157,7 @@ for (const phrase of [
 pass("AG06E registry is present.");
 pass("AG06E document is present.");
 pass("AG06E standard, schema and preview are present.");
-pass("Long-form word-count standard is 1500–2200 words.");
+pass("Long-form word-count standard is 1500–5500 words.");
 pass("Verified reference standard is 2–5 references.");
 pass("Visual plan, primary visual, image credit and data enrichment are required.");
 pass("Quality score and visitor-value score gates are declared.");

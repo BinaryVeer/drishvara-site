@@ -19,7 +19,7 @@
   "purpose": "Define the mandatory Drishvara long-form article standard for future production without modifying current public articles, scaffold outputs, references, CSS, JavaScript, backend, Auth, Supabase, or publishing state.",
   "summary": {
     "word_count_min": 1500,
-    "word_count_max": 2200,
+    "word_count_max": 5500,
     "verified_reference_min": 2,
     "verified_reference_max": 5,
     "requires_visual_plan": true,
@@ -38,7 +38,7 @@
   },
   "article_length_standard": {
     "minimum_words": 1500,
-    "maximum_words": 2200,
+    "maximum_words": 5500,
     "ideal_band_words": "1700-2000",
     "below_minimum_status": "long_form_upgrade_required",
     "above_maximum_status": "editorial_compression_required",
@@ -149,7 +149,7 @@
   },
   "publish_readiness_gates": [
     "content_packet_complete",
-    "word_count_within_1500_2200",
+    "word_count_within_1500_5500",
     "minimum_two_verified_references",
     "maximum_five_references",
     "all_reference_urls_verified",

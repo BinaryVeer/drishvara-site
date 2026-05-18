@@ -212,7 +212,7 @@ const noMutationControls = {
 };
 
 const targetWordMin = 1500;
-const targetWordMax = 2200;
+const targetWordMax = 5500;
 const targetReferenceMin = 2;
 const targetReferenceMax = 5;
 

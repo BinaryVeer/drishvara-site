@@ -32,7 +32,7 @@ No visual is generated or inserted in AG08D.
 
 ## Quality Gaps
 
-- long_form_depth: gap_confirmed — Generate full upgraded draft candidate in 1500–2200 word range, if approved.
+- long_form_depth: gap_confirmed — Generate full upgraded draft candidate in 1500–5500 word range, if approved.
 - reader_value: gap_confirmed — Draft should explain practical implications, not just describe digital innovation.
 - reference_support: candidate_population_required — Populate candidate references only after source verification.
 - visual_data_enrichment: concept_required — Prepare visual/data concept; keep generation blocked unless explicitly approved.

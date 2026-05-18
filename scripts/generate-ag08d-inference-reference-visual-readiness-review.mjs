@@ -288,7 +288,7 @@ const qualityGapMatrix = [
     area: "long_form_depth",
     current_status: currentWords < 1500 ? "gap_confirmed" : "watch",
     evidence: `Current estimated word count is ${currentWords}.`,
-    required_ag08e_action: "Generate full upgraded draft candidate in 1500–2200 word range, if approved."
+    required_ag08e_action: "Generate full upgraded draft candidate in 1500–5500 word range, if approved."
   },
   {
     gap_id: "AG08D-GAP-002",

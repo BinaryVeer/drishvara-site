@@ -79,7 +79,7 @@ const visitorValueWeights = {
 
 const requiredPublishGates = [
   "content_packet_complete",
-  "word_count_within_1500_2200",
+  "word_count_within_1500_5500",
   "minimum_two_verified_references",
   "maximum_five_references",
   "all_reference_urls_verified",
@@ -112,7 +112,7 @@ const standard = {
   purpose: "Define the mandatory Drishvara long-form article standard for future production without modifying current public articles, scaffold outputs, references, CSS, JavaScript, backend, Auth, Supabase, or publishing state.",
   summary: {
     word_count_min: 1500,
-    word_count_max: 2200,
+    word_count_max: 5500,
     verified_reference_min: 2,
     verified_reference_max: 5,
     requires_visual_plan: true,
@@ -131,7 +131,7 @@ const standard = {
   },
   article_length_standard: {
     minimum_words: 1500,
-    maximum_words: 2200,
+    maximum_words: 5500,
     ideal_band_words: "1700-2000",
     below_minimum_status: "long_form_upgrade_required",
     above_maximum_status: "editorial_compression_required",
@@ -283,8 +283,8 @@ const schema = {
         topic_intent: { type: "string" }
       }
     },
-    target_word_count: { type: "integer", minimum: 1500, maximum: 2200 },
-    actual_word_count: { type: "integer", minimum: 1500, maximum: 2200 },
+    target_word_count: { type: "integer", minimum: 1500, maximum: 5500 },
+    actual_word_count: { type: "integer", minimum: 1500, maximum: 5500 },
     verified_references: {
       type: "array",
       minItems: 2,
@@ -355,7 +355,7 @@ AG06E is a standard-setting and governance-only layer. It does not edit current 
 
 AG06E applies to future Drishvara production articles and upgraded content packets. A future article should be treated as publish-ready only when it satisfies the following minimum standard:
 
-- 1,500–2,200 words.
+- 1,500–5,500 words.
 - 2–5 verified references.
 - A completed visual plan.
 - A primary visual with image credit or attribution.
@@ -366,7 +366,7 @@ AG06E applies to future Drishvara production articles and upgraded content packe
 
 ## Long-Form Standard
 
-The required article length is 1,500–2,200 words, with an ideal operating band of 1,700–2,000 words. Articles below this range must be marked as long_form_upgrade_required. Articles above this range must be reviewed for editorial compression.
+The required article length is 1,500–5,500 words, with an ideal operating band of 1,800–3,000 words. Articles below this range must be marked as long_form_upgrade_required. Articles above this range must be reviewed for editorial compression.
 
 ## Reference Standard
 
@@ -440,7 +440,7 @@ AG06E does not:
 AG06E is acceptable only if:
 
 - AG06E registry, document, standard, schema and preview files are present;
-- word-count standard is exactly 1,500–2,200 words;
+- word-count standard is exactly 1,500–5,500 words;
 - reference standard is exactly 2–5 verified references;
 - visual plan, primary visual, image credit and data-enrichment requirements are declared;
 - quality-score and visitor-value-score gates are declared;
