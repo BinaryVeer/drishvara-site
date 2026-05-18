@@ -1,0 +1,280 @@
+{
+  "module_id": "AG08H",
+  "title": "Post-Apply Audit Report",
+  "status": "post_apply_audit_passed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+  "generated_from": {
+    "ag08gReview": "data/content-intelligence/quality-reviews/ag08g-one-article-controlled-apply.json",
+    "ag08gApplyRecord": "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json",
+    "ag08gAuditPrep": "data/content-intelligence/quality-registry/ag08g-post-apply-audit-prep.json",
+    "ag08gSchema": "data/content-intelligence/schema/one-article-controlled-apply-ag08g.schema.json",
+    "ag08gLearning": "data/content-intelligence/learning/ag08g-one-article-controlled-apply-learning.json",
+    "ag08fApproval": "data/content-intelligence/approval-registry/ag08f-draft-reference-approval-record.json",
+    "ag08fApplyPlan": "data/content-intelligence/mutation-plans/ag08f-controlled-apply-plan.json"
+  },
+  "ag08g_evidence": {
+    "ag08g_review_status": "one_article_controlled_apply_completed",
+    "ag08g_apply_status": "one_article_controlled_apply_completed_pending_audit",
+    "ag08g_schema_status": "schema_one_article_controlled_apply",
+    "ag08g_audit_prep_status": "post_apply_audit_required",
+    "ag08g_learning_status": "learning_record_only"
+  },
+  "backup_integrity": {
+    "backup_exists": true,
+    "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+    "backup_hash_current": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "backup_hash_recorded": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "pre_apply_hash_recorded": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "backup_matches_recorded_backup_hash": true,
+    "backup_matches_pre_apply_hash": true,
+    "backup_has_ag08g_marker": false,
+    "backup_integrity_status": "passed"
+  },
+  "mutation_scope": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "current_article_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+    "post_apply_hash_recorded": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+    "article_matches_post_apply_hash": true,
+    "article_differs_from_backup": true,
+    "ag08g_marker_count_in_target": 1,
+    "approved_reference_marker_count_in_target": 1,
+    "article_files_with_ag08g_marker": [
+      "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html"
+    ],
+    "exactly_one_article_contains_ag08g_marker": true,
+    "mutation_scope_status": "passed"
+  },
+  "reference_audit": {
+    "approved_reference_count": 3,
+    "inserted_reference_count": 3,
+    "inserted_reference_checks": [
+      {
+        "reference_id": "AG08E-REF-001",
+        "title": "Ayushman Bharat Digital Mission — ABDM Components",
+        "url": "https://abdm.gov.in/abdm",
+        "approved_in_ag08f": true,
+        "inserted_in_target_article": true,
+        "inserted_status": "present"
+      },
+      {
+        "reference_id": "AG08E-REF-002",
+        "title": "WHO — Global Strategy on Digital Health 2020–2025",
+        "url": "https://www.who.int/publications/i/item/9789240020924",
+        "approved_in_ag08f": true,
+        "inserted_in_target_article": true,
+        "inserted_status": "present"
+      },
+      {
+        "reference_id": "AG08E-REF-003",
+        "title": "Telemedicine Practice Guidelines",
+        "url": "https://esanjeevani.mohfw.gov.in/assets/guidelines/Telemedicine_Practice_Guidelines.pdf",
+        "approved_in_ag08f": true,
+        "inserted_in_target_article": true,
+        "inserted_status": "present"
+      }
+    ],
+    "reference_insertion_status": "passed"
+  },
+  "legacy_governance_preservation": {
+    "ag08g_legacy_preservation_marker_present": true,
+    "ag03c_b2_marker_present": true,
+    "ag05d_marker_present": true,
+    "ag03_reference_integrity_visible": true,
+    "legacy_governance_preservation_status": "passed"
+  },
+  "forbidden_system_guards": {
+    "no_new_article_mutation_in_ag08h": true,
+    "no_file_edit_to_selected_article_in_ag08h": true,
+    "no_reference_insertion_in_ag08h": true,
+    "no_visual_generation_in_ag08h": true,
+    "no_image_insertion_in_ag08h": true,
+    "no_production_jsonl_append_in_ag08h": true,
+    "no_database_write_in_ag08h": true,
+    "no_supabase_write_in_ag08h": true,
+    "no_backend_auth_supabase_activation_in_ag08h": true,
+    "no_publishing_approval_in_ag08h": true,
+    "carried_from_ag08g": {
+      "visual_generation_performed": false,
+      "image_insertion_performed": false,
+      "production_jsonl_append_performed": false,
+      "database_write_performed": false,
+      "supabase_write_performed": false,
+      "backend_auth_supabase_activation_performed": false,
+      "public_publishing_performed": false
+    },
+    "forbidden_system_guard_status": "passed"
+  },
+  "rollback_readiness": {
+    "rollback_ready": true,
+    "rollback_source": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+    "rollback_target": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "expected_restore_hash": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "current_target_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+    "rollback_validation_steps": [
+      "Copy backup file to selected article path.",
+      "Confirm selected article hash equals backup hash.",
+      "Confirm AG08G marker is absent after rollback.",
+      "Run validate:ag08g only if AG08G remains expected, or run a dedicated rollback validator if rollback is executed.",
+      "Run validate:project after rollback."
+    ],
+    "rollback_execution_performed": false
+  },
+  "audit_checks": [
+    {
+      "check_id": "AG08H-CHECK-001",
+      "name": "ag08g_apply_record_consumed",
+      "status": "passed",
+      "evidence": "one_article_controlled_apply_completed_pending_audit"
+    },
+    {
+      "check_id": "AG08H-CHECK-002",
+      "name": "backup_integrity",
+      "status": "passed",
+      "evidence": {
+        "backup_exists": true,
+        "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+        "backup_hash_current": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+        "backup_hash_recorded": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+        "pre_apply_hash_recorded": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+        "backup_matches_recorded_backup_hash": true,
+        "backup_matches_pre_apply_hash": true,
+        "backup_has_ag08g_marker": false,
+        "backup_integrity_status": "passed"
+      }
+    },
+    {
+      "check_id": "AG08H-CHECK-003",
+      "name": "single_article_mutation_scope",
+      "status": "passed",
+      "evidence": {
+        "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+        "current_article_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+        "post_apply_hash_recorded": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+        "article_matches_post_apply_hash": true,
+        "article_differs_from_backup": true,
+        "ag08g_marker_count_in_target": 1,
+        "approved_reference_marker_count_in_target": 1,
+        "article_files_with_ag08g_marker": [
+          "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html"
+        ],
+        "exactly_one_article_contains_ag08g_marker": true,
+        "mutation_scope_status": "passed"
+      }
+    },
+    {
+      "check_id": "AG08H-CHECK-004",
+      "name": "approved_reference_insertion",
+      "status": "passed",
+      "evidence": {
+        "approved_reference_count": 3,
+        "inserted_reference_count": 3,
+        "inserted_reference_checks": [
+          {
+            "reference_id": "AG08E-REF-001",
+            "title": "Ayushman Bharat Digital Mission — ABDM Components",
+            "url": "https://abdm.gov.in/abdm",
+            "approved_in_ag08f": true,
+            "inserted_in_target_article": true,
+            "inserted_status": "present"
+          },
+          {
+            "reference_id": "AG08E-REF-002",
+            "title": "WHO — Global Strategy on Digital Health 2020–2025",
+            "url": "https://www.who.int/publications/i/item/9789240020924",
+            "approved_in_ag08f": true,
+            "inserted_in_target_article": true,
+            "inserted_status": "present"
+          },
+          {
+            "reference_id": "AG08E-REF-003",
+            "title": "Telemedicine Practice Guidelines",
+            "url": "https://esanjeevani.mohfw.gov.in/assets/guidelines/Telemedicine_Practice_Guidelines.pdf",
+            "approved_in_ag08f": true,
+            "inserted_in_target_article": true,
+            "inserted_status": "present"
+          }
+        ],
+        "reference_insertion_status": "passed"
+      }
+    },
+    {
+      "check_id": "AG08H-CHECK-005",
+      "name": "legacy_governance_preservation",
+      "status": "passed",
+      "evidence": {
+        "ag08g_legacy_preservation_marker_present": true,
+        "ag03c_b2_marker_present": true,
+        "ag05d_marker_present": true,
+        "ag03_reference_integrity_visible": true,
+        "legacy_governance_preservation_status": "passed"
+      }
+    },
+    {
+      "check_id": "AG08H-CHECK-006",
+      "name": "forbidden_system_guards",
+      "status": "passed",
+      "evidence": {
+        "no_new_article_mutation_in_ag08h": true,
+        "no_file_edit_to_selected_article_in_ag08h": true,
+        "no_reference_insertion_in_ag08h": true,
+        "no_visual_generation_in_ag08h": true,
+        "no_image_insertion_in_ag08h": true,
+        "no_production_jsonl_append_in_ag08h": true,
+        "no_database_write_in_ag08h": true,
+        "no_supabase_write_in_ag08h": true,
+        "no_backend_auth_supabase_activation_in_ag08h": true,
+        "no_publishing_approval_in_ag08h": true,
+        "carried_from_ag08g": {
+          "visual_generation_performed": false,
+          "image_insertion_performed": false,
+          "production_jsonl_append_performed": false,
+          "database_write_performed": false,
+          "supabase_write_performed": false,
+          "backend_auth_supabase_activation_performed": false,
+          "public_publishing_performed": false
+        },
+        "forbidden_system_guard_status": "passed"
+      }
+    },
+    {
+      "check_id": "AG08H-CHECK-007",
+      "name": "rollback_readiness",
+      "status": "passed",
+      "evidence": {
+        "rollback_ready": true,
+        "rollback_source": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+        "rollback_target": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+        "expected_restore_hash": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+        "current_target_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+        "rollback_validation_steps": [
+          "Copy backup file to selected article path.",
+          "Confirm selected article hash equals backup hash.",
+          "Confirm AG08G marker is absent after rollback.",
+          "Run validate:ag08g only if AG08G remains expected, or run a dedicated rollback validator if rollback is executed.",
+          "Run validate:project after rollback."
+        ],
+        "rollback_execution_performed": false
+      }
+    }
+  ],
+  "post_apply_audit_only": true,
+  "selected_article_read_performed": true,
+  "backup_read_performed": true,
+  "audit_artifacts_created": true,
+  "new_article_mutation_performed": false,
+  "selected_article_mutation_performed_in_ag08h": false,
+  "article_mutation_performed_in_ag08h": false,
+  "file_edit_performed_in_ag08h": false,
+  "selected_article_file_write_performed_in_ag08h": false,
+  "reference_insertion_performed_in_ag08h": false,
+  "visual_generation_performed_in_ag08h": false,
+  "image_insertion_performed_in_ag08h": false,
+  "production_jsonl_append_performed_in_ag08h": false,
+  "database_write_performed_in_ag08h": false,
+  "supabase_write_performed_in_ag08h": false,
+  "backend_auth_supabase_activation_performed_in_ag08h": false,
+  "public_publishing_performed_in_ag08h": false,
+  "publishing_approval_performed_in_ag08h": false,
+  "rollback_execution_performed": false
+}

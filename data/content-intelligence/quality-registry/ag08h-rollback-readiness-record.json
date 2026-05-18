@@ -1,0 +1,52 @@
+{
+  "module_id": "AG08H",
+  "title": "Rollback Readiness Record",
+  "status": "rollback_ready_not_executed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+  "rollback_readiness": {
+    "rollback_ready": true,
+    "rollback_source": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+    "rollback_target": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "expected_restore_hash": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "current_target_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+    "rollback_validation_steps": [
+      "Copy backup file to selected article path.",
+      "Confirm selected article hash equals backup hash.",
+      "Confirm AG08G marker is absent after rollback.",
+      "Run validate:ag08g only if AG08G remains expected, or run a dedicated rollback validator if rollback is executed.",
+      "Run validate:project after rollback."
+    ],
+    "rollback_execution_performed": false
+  },
+  "backup_integrity": {
+    "backup_exists": true,
+    "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+    "backup_hash_current": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "backup_hash_recorded": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "pre_apply_hash_recorded": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+    "backup_matches_recorded_backup_hash": true,
+    "backup_matches_pre_apply_hash": true,
+    "backup_has_ag08g_marker": false,
+    "backup_integrity_status": "passed"
+  },
+  "rollback_execution_performed": false,
+  "post_apply_audit_only": true,
+  "selected_article_read_performed": true,
+  "backup_read_performed": true,
+  "audit_artifacts_created": true,
+  "new_article_mutation_performed": false,
+  "selected_article_mutation_performed_in_ag08h": false,
+  "article_mutation_performed_in_ag08h": false,
+  "file_edit_performed_in_ag08h": false,
+  "selected_article_file_write_performed_in_ag08h": false,
+  "reference_insertion_performed_in_ag08h": false,
+  "visual_generation_performed_in_ag08h": false,
+  "image_insertion_performed_in_ag08h": false,
+  "production_jsonl_append_performed_in_ag08h": false,
+  "database_write_performed_in_ag08h": false,
+  "supabase_write_performed_in_ag08h": false,
+  "backend_auth_supabase_activation_performed_in_ag08h": false,
+  "public_publishing_performed_in_ag08h": false,
+  "publishing_approval_performed_in_ag08h": false
+}
