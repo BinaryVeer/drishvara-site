@@ -1,0 +1,87 @@
+{
+  "module_id": "AG08J",
+  "title": "Article Object Placement Doctrine",
+  "status": "layout_doctrine_created",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "doctrine_basis": "Approved visual/object placement must preserve article shape, justified text, reading width and mobile readability.",
+  "global_article_layout_rules": {
+    "preserve_article_shape": true,
+    "main_text_must_remain_justified": true,
+    "object_must_not_deform_reading_column": true,
+    "object_must_not_break_mobile_layout": true,
+    "object_must_not_disturb_references_or_legacy_governance_blocks": true,
+    "object_must_not_create_horizontal_overflow": true
+  },
+  "object_type_rules": {
+    "hero_image": {
+      "preferred_location": "near/top of article after heading/intro as already planned",
+      "alignment": "centered within article reading column",
+      "text_wrap": "not_required",
+      "width_behavior": "full readable column width, mobile-safe",
+      "notes": "Hero image may remain top-positioned; it must not disturb title, introduction, AG08G references or legacy governance blocks."
+    },
+    "infographic": {
+      "preferred_location": "after relevant section paragraph, before next major section",
+      "alignment": "centered",
+      "text_wrap": "allowed_only_if_readability_is_preserved",
+      "width_behavior": "contained within reading column",
+      "notes": "Infographic should support the argument, not dominate the article."
+    },
+    "graph_or_chart": {
+      "preferred_location": "near the paragraph interpreting the data",
+      "alignment": "centered",
+      "text_wrap": "not_preferred_for_dense_charts",
+      "width_behavior": "responsive, readable labels, no overflow",
+      "notes": "Charts must include caption, source note and accessible alt text."
+    },
+    "table": {
+      "preferred_location": "after the explanatory paragraph introducing the data",
+      "alignment": "centered within vertical reading flow",
+      "text_wrap": "not_allowed",
+      "width_behavior": "responsive table wrapper required in future apply",
+      "notes": "Tables with data must remain centrally aligned and must not compress body text."
+    },
+    "figure_or_diagram": {
+      "preferred_location": "near concept explanation",
+      "alignment": "centered",
+      "text_wrap": "allowed only around object boundary if visually stable",
+      "width_behavior": "bounded figure block",
+      "notes": "Conceptual figures should preserve vertical flow and not split critical paragraphs."
+    },
+    "map": {
+      "preferred_location": "only where geographic explanation is necessary",
+      "alignment": "centered",
+      "text_wrap": "not_preferred",
+      "width_behavior": "responsive, captioned, source credited",
+      "notes": "Maps require stronger source/rights and accuracy review."
+    }
+  },
+  "future_validation_requirements": [
+    "Hero/image/figure/table must remain within article reading column.",
+    "Main article text remains justified after insertion.",
+    "No object overlaps references, footer or legacy governance blocks.",
+    "No horizontal overflow at mobile width.",
+    "Tables use responsive wrapper and are centrally aligned.",
+    "Graphs/figures include source/caption/alt text.",
+    "Text wrapping is allowed only where it preserves readability and object boundary integrity."
+  ],
+  "visual_candidate_stage_only": true,
+  "candidate_record_created": true,
+  "actual_visual_generation_performed_in_ag08j": false,
+  "image_asset_created_in_ag08j": false,
+  "image_file_write_performed_in_ag08j": false,
+  "image_insertion_performed_in_ag08j": false,
+  "article_mutation_performed_in_ag08j": false,
+  "file_edit_performed_in_ag08j": false,
+  "selected_article_file_write_performed_in_ag08j": false,
+  "css_mutation_performed_in_ag08j": false,
+  "js_mutation_performed_in_ag08j": false,
+  "reference_insertion_performed_in_ag08j": false,
+  "production_jsonl_append_performed_in_ag08j": false,
+  "database_write_performed_in_ag08j": false,
+  "supabase_write_performed_in_ag08j": false,
+  "backend_auth_supabase_activation_performed_in_ag08j": false,
+  "public_publishing_performed_in_ag08j": false,
+  "publishing_approval_performed_in_ag08j": false,
+  "rollback_execution_performed_in_ag08j": false
+}
