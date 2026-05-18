@@ -1,0 +1,115 @@
+{
+  "module_id": "AG08F",
+  "title": "Apply Readiness Record",
+  "status": "ag08g_apply_plan_ready_pending_explicit_approval",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "selected_article_sha256_before_ag08f": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+  "readiness_checks": [
+    {
+      "check_id": "AG08F-CHECK-001",
+      "name": "ag08e_draft_candidate_present",
+      "status": "passed",
+      "evidence": "Draft word count estimate: 1605"
+    },
+    {
+      "check_id": "AG08F-CHECK-002",
+      "name": "draft_word_count_within_1500_5500",
+      "status": "passed",
+      "evidence": {
+        "min": 1500,
+        "max": 5500
+      }
+    },
+    {
+      "check_id": "AG08F-CHECK-003",
+      "name": "candidate_references_approved",
+      "status": "passed",
+      "evidence": "Approved reference count: 3"
+    },
+    {
+      "check_id": "AG08F-CHECK-004",
+      "name": "selected_article_hash_unchanged",
+      "status": "passed",
+      "evidence": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4"
+    },
+    {
+      "check_id": "AG08F-CHECK-005",
+      "name": "backup_rollback_plan_ready",
+      "status": "passed",
+      "evidence": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html"
+    },
+    {
+      "check_id": "AG08F-CHECK-006",
+      "name": "visual_generation_deferred",
+      "status": "passed",
+      "evidence": "not_approved_for_ag08g"
+    },
+    {
+      "check_id": "AG08F-CHECK-007",
+      "name": "ag08g_handoff_ready",
+      "status": "passed",
+      "evidence": "One-Article Controlled Apply"
+    }
+  ],
+  "all_readiness_checks_passed": true,
+  "ag08g_handoff": {
+    "next_stage_id": "AG08G",
+    "next_stage_title": "One-Article Controlled Apply",
+    "explicit_approval_required": true,
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "allowed_scope": "create pre-apply backup and mutate exactly one selected article using AG08E approved draft and AG08F approved references",
+    "blocked_scope": "multi-article mutation, visual generation, image insertion, production JSONL append, database/Supabase write, backend/Auth/Supabase activation and publishing approval"
+  },
+  "draft_approval_plan_only": true,
+  "draft_candidate_reviewed": true,
+  "draft_candidate_approved_for_ag08g_apply": true,
+  "candidate_references_reviewed": true,
+  "candidate_references_approved_for_ag08g_insertion": true,
+  "controlled_apply_plan_created": true,
+  "backup_rollback_plan_created": true,
+  "post_apply_audit_checklist_created": true,
+  "ag08g_handoff_created": true,
+  "selected_article_read_performed": true,
+  "selected_article_hash_verified": true,
+  "selected_article_mutated": false,
+  "article_mutation_performed": false,
+  "new_article_file_created": false,
+  "article_file_created": false,
+  "final_article_file_generated": false,
+  "article_html_mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed_by_script": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed_for_article": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}

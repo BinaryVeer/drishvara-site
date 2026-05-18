@@ -1,0 +1,194 @@
+{
+  "module_id": "AG08F",
+  "title": "Draft and Reference Approval Record",
+  "status": "draft_and_references_approved_for_ag08g_apply_plan",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "selected_article_sha256_before_ag08f": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+  "draft_approval": {
+    "draft_title": "Enhancing Public Healthcare Delivery through Digital Innovation",
+    "draft_word_count_estimate": 1605,
+    "target_word_count_range": {
+      "min": 1500,
+      "max": 5500
+    },
+    "within_target_word_count_range": true,
+    "approved_for_ag08g_apply": true,
+    "approval_status": "approved_for_controlled_apply_plan",
+    "approval_basis": [
+      "Draft is within revised long-form range.",
+      "Draft addresses AG08D quality gaps on long-form depth and reader value.",
+      "Candidate references are available as artifact-only records.",
+      "Selected article hash remains unchanged since AG08E."
+    ],
+    "required_ag08g_adjustments": [
+      "Convert markdown artifact into static article HTML block.",
+      "Insert approved references in a visible references section.",
+      "Preserve existing article shell, navigation, footer, hero/credit safety and site layout.",
+      "Add exactly one AG08G controlled apply marker.",
+      "Create pre-apply backup before modifying the article file."
+    ]
+  },
+  "reference_approval": {
+    "candidate_reference_count": 3,
+    "approved_reference_count": 3,
+    "approval_status": "approved_for_ag08g_reference_insertion",
+    "approved_references": [
+      {
+        "reference_id": "AG08E-REF-001",
+        "title": "Ayushman Bharat Digital Mission — ABDM Components",
+        "url": "https://abdm.gov.in/abdm",
+        "source_owner": "Ayushman Bharat Digital Mission / National Health Authority",
+        "source_type": "official_government_programme",
+        "relevance_to_draft": "Supports the article's discussion of integrated digital health infrastructure and continuity across health systems.",
+        "verification_status": "candidate_verified_contextually_not_inserted",
+        "link_health_status": "reachable_during_ag08e_planning_context",
+        "insertion_status": "approved_not_inserted",
+        "claim_support_scope": [
+          "digital health infrastructure",
+          "integrated ecosystem",
+          "health records and public digital health architecture"
+        ],
+        "approval_status": "approved_for_ag08g_insertion",
+        "approval_order": 1,
+        "approved_for_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+        "approved_use": "visible_reference_block_and_supporting_reference_metadata",
+        "ag08f_approval_note": "Approved as candidate reference for AG08G controlled article apply; not inserted in AG08F."
+      },
+      {
+        "reference_id": "AG08E-REF-002",
+        "title": "WHO — Global Strategy on Digital Health 2020–2025",
+        "url": "https://www.who.int/publications/i/item/9789240020924",
+        "source_owner": "World Health Organization",
+        "source_type": "multilateral_public_health_strategy",
+        "relevance_to_draft": "Supports the article's framing that digital health requires strategy, governance, resources and health-system integration.",
+        "verification_status": "candidate_verified_contextually_not_inserted",
+        "link_health_status": "reachable_during_ag08e_planning_context",
+        "insertion_status": "approved_not_inserted",
+        "claim_support_scope": [
+          "digital health strategy",
+          "governance",
+          "equitable and sustainable adoption"
+        ],
+        "approval_status": "approved_for_ag08g_insertion",
+        "approval_order": 2,
+        "approved_for_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+        "approved_use": "visible_reference_block_and_supporting_reference_metadata",
+        "ag08f_approval_note": "Approved as candidate reference for AG08G controlled article apply; not inserted in AG08F."
+      },
+      {
+        "reference_id": "AG08E-REF-003",
+        "title": "Telemedicine Practice Guidelines",
+        "url": "https://esanjeevani.mohfw.gov.in/assets/guidelines/Telemedicine_Practice_Guidelines.pdf",
+        "source_owner": "Ministry of Health and Family Welfare / eSanjeevani-hosted guideline asset",
+        "source_type": "official_guideline_pdf",
+        "relevance_to_draft": "Supports the article's references to telemedicine, documentation, patient consent, digital consultation practices and service delivery safeguards.",
+        "verification_status": "candidate_verified_contextually_not_inserted",
+        "link_health_status": "reachable_during_ag08e_planning_context",
+        "insertion_status": "approved_not_inserted",
+        "claim_support_scope": [
+          "telemedicine",
+          "patient consent",
+          "documentation and digital records",
+          "service delivery safeguards"
+        ],
+        "approval_status": "approved_for_ag08g_insertion",
+        "approval_order": 3,
+        "approved_for_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+        "approved_use": "visible_reference_block_and_supporting_reference_metadata",
+        "ag08f_approval_note": "Approved as candidate reference for AG08G controlled article apply; not inserted in AG08F."
+      }
+    ],
+    "insertion_status": "approved_not_inserted_in_ag08f",
+    "reference_rules_for_ag08g": [
+      "Insert only AG08F-approved URLs.",
+      "Do not create or invent additional references in AG08G.",
+      "Preserve source titles, URLs and source-owner fields.",
+      "Place references in a visible section after article body and before footer/back links where feasible.",
+      "Maintain exactly the approved AG08F reference set unless AG08G validator blocks apply."
+    ]
+  },
+  "visual_decision": {
+    "visual_generation_approval_status": "not_approved_for_ag08g",
+    "image_insertion_approval_status": "not_approved_for_ag08g",
+    "visual_data_concept_status": "carried_forward_as_concept_only",
+    "rationale": "The pilot controlled apply should focus on article text and approved references. Visual generation/insertion remains deferred to a later dedicated visual stage.",
+    "ag08g_visual_scope": "do_not_generate_or_insert_visuals"
+  },
+  "backup_rollback_plan": {
+    "backup_required_before_apply": true,
+    "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+    "backup_creation_stage": "AG08G",
+    "rollback_strategy": {
+      "rollback_possible": true,
+      "rollback_stage_if_needed": "AG08H_or_manual_emergency_restore",
+      "restore_source": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+      "restore_target": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "rollback_validation": [
+        "target article restored to backup hash",
+        "AG08G marker absent after rollback",
+        "existing site validation passes"
+      ]
+    },
+    "backup_status_in_ag08f": "planned_not_created"
+  },
+  "ag08g_handoff": {
+    "next_stage_id": "AG08G",
+    "next_stage_title": "One-Article Controlled Apply",
+    "explicit_approval_required": true,
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "allowed_scope": "create pre-apply backup and mutate exactly one selected article using AG08E approved draft and AG08F approved references",
+    "blocked_scope": "multi-article mutation, visual generation, image insertion, production JSONL append, database/Supabase write, backend/Auth/Supabase activation and publishing approval"
+  },
+  "draft_approval_plan_only": true,
+  "draft_candidate_reviewed": true,
+  "draft_candidate_approved_for_ag08g_apply": true,
+  "candidate_references_reviewed": true,
+  "candidate_references_approved_for_ag08g_insertion": true,
+  "controlled_apply_plan_created": true,
+  "backup_rollback_plan_created": true,
+  "post_apply_audit_checklist_created": true,
+  "ag08g_handoff_created": true,
+  "selected_article_read_performed": true,
+  "selected_article_hash_verified": true,
+  "selected_article_mutated": false,
+  "article_mutation_performed": false,
+  "new_article_file_created": false,
+  "article_file_created": false,
+  "final_article_file_generated": false,
+  "article_html_mutation_performed": false,
+  "public_article_mutation_performed": false,
+  "static_live_apply_performed": false,
+  "static_live_mutation_performed": false,
+  "file_edit_performed": false,
+  "file_write_performed": false,
+  "article_file_write_performed": false,
+  "target_article_file_write_performed": false,
+  "backup_file_created": false,
+  "rollback_execution_performed": false,
+  "reference_insertion_performed": false,
+  "reference_url_population_performed": false,
+  "approved_reference_url_population_performed": false,
+  "live_url_fetch_performed_by_script": false,
+  "visual_generation_performed": false,
+  "visual_asset_generation_performed": false,
+  "image_insertion_performed": false,
+  "data_unit_generation_performed": false,
+  "caption_alt_credit_population_performed_for_article": false,
+  "production_jsonl_append_performed": false,
+  "jsonl_append_performed": false,
+  "jsonl_production_record_created": false,
+  "database_write_performed": false,
+  "supabase_write_performed": false,
+  "supabase_enabled": false,
+  "auth_enabled": false,
+  "backend_activation_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "api_route_created": false,
+  "public_publishing_performed": false,
+  "publication_approval_granted": false,
+  "public_output_activation_performed": false,
+  "subscriber_output_activation_performed": false,
+  "admin_output_activation_performed": false,
+  "payment_activation_performed": false,
+  "multi_article_mutation_performed": false
+}
