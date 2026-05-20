@@ -1,0 +1,184 @@
+{
+  "module_id": "AG09A",
+  "preview_only": true,
+  "status": "live_readiness_audit_completed",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+    "audit_status": "live_readiness_audit_completed",
+    "correction_required": true,
+    "gap_count": 2,
+    "public_experience_readiness": "public_experience_audited_with_correction_gaps",
+    "publish_readiness": "blocked_pending_ag09b_correction_plan_or_editorial_approval",
+    "next_stage_id": "AG09B",
+    "next_stage_title": "Public Experience Correction Plan",
+    "next_stage_requires_explicit_approval": true,
+    "audit_only": true,
+    "local_static_audit_only": true,
+    "live_url_fetch_performed_in_ag09a": false,
+    "article_mutation_performed_in_ag09a": false,
+    "selected_article_file_write_performed_in_ag09a": false,
+    "homepage_mutation_performed_in_ag09a": false,
+    "css_mutation_performed_in_ag09a": false,
+    "js_mutation_performed_in_ag09a": false,
+    "reference_insertion_performed_in_ag09a": false,
+    "reference_url_change_performed_in_ag09a": false,
+    "visual_generation_performed_in_ag09a": false,
+    "image_asset_creation_performed_in_ag09a": false,
+    "image_insertion_performed_in_ag09a": false,
+    "production_jsonl_append_performed_in_ag09a": false,
+    "database_write_performed_in_ag09a": false,
+    "supabase_write_performed_in_ag09a": false,
+    "backend_auth_supabase_activation_performed_in_ag09a": false,
+    "public_publishing_performed_in_ag09a": false,
+    "publishing_approval_performed_in_ag09a": false
+  },
+  "checks": [
+    {
+      "check_id": "AG09A-CHECK-001",
+      "area": "article_file",
+      "name": "selected_article_exists_and_hash_matches_ag08k",
+      "status": "passed",
+      "evidence": {
+        "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+        "article_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e"
+      }
+    },
+    {
+      "check_id": "AG09A-CHECK-002",
+      "area": "visual_rendering",
+      "name": "hero_visual_block_asset_alt_caption_credit_present",
+      "status": "passed",
+      "evidence": {
+        "marker_count": 1,
+        "asset_src": "../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08ka-primary-hero.svg",
+        "asset_file_exists": true,
+        "alt_present": true,
+        "caption_present": true,
+        "credit_present": true
+      }
+    },
+    {
+      "check_id": "AG09A-CHECK-003",
+      "area": "reference_display",
+      "name": "reference_governance_markers_visible_or_preserved",
+      "status": "passed",
+      "evidence": {
+        "ag08g_approved_references_marker": true,
+        "ag08g_legacy_marker": true,
+        "ag03_or_ag05_marker_present": true
+      }
+    },
+    {
+      "check_id": "AG09A-CHECK-004",
+      "area": "metadata",
+      "name": "basic_seo_metadata_present",
+      "status": "passed",
+      "evidence": {
+        "title": "Enhancing Public Healthcare Delivery through Digital Innovation",
+        "has_title": true,
+        "has_meta_description": true,
+        "has_canonical": false
+      }
+    },
+    {
+      "check_id": "AG09A-CHECK-005",
+      "area": "social_preview",
+      "name": "open_graph_or_social_preview_metadata_present",
+      "status": "review_required",
+      "evidence": {
+        "has_og_title": false,
+        "has_og_description": false,
+        "has_og_image": false,
+        "has_twitter_card": false
+      }
+    },
+    {
+      "check_id": "AG09A-CHECK-006",
+      "area": "homepage_listing",
+      "name": "upgraded_article_discoverability_from_static_listing",
+      "status": "review_required",
+      "evidence": {
+        "listing_files_checked": [
+          {
+            "file": "index.html",
+            "contains_article_path": false,
+            "contains_article_slug": false,
+            "contains_article_title": false
+          }
+        ],
+        "linked_from_any_listing": false
+      }
+    },
+    {
+      "check_id": "AG09A-CHECK-007",
+      "area": "layout_mobile",
+      "name": "static_layout_safety_signals",
+      "status": "passed",
+      "evidence": {
+        "width_height_declared": true,
+        "figcaption_present": true,
+        "no_inline_table_graph_inserted_by_ag08k": true
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "gap_id": "AG09A-GAP-005",
+      "area": "social_preview",
+      "name": "open_graph_or_social_preview_metadata_present",
+      "severity": "medium",
+      "status": "open_for_ag09b_correction_plan",
+      "evidence": {
+        "has_og_title": false,
+        "has_og_description": false,
+        "has_og_image": false,
+        "has_twitter_card": false
+      }
+    },
+    {
+      "gap_id": "AG09A-GAP-006",
+      "area": "homepage_listing",
+      "name": "upgraded_article_discoverability_from_static_listing",
+      "severity": "medium",
+      "status": "open_for_ag09b_correction_plan",
+      "evidence": {
+        "listing_files_checked": [
+          {
+            "file": "index.html",
+            "contains_article_path": false,
+            "contains_article_slug": false,
+            "contains_article_title": false
+          }
+        ],
+        "linked_from_any_listing": false
+      }
+    }
+  ],
+  "ag09b_handoff": {
+    "next_stage_id": "AG09B",
+    "next_stage_title": "Public Experience Correction Plan",
+    "explicit_approval_required": true,
+    "allowed_scope": "Plan corrections for metadata, listing/card linkage, social preview, visual display, references and public-readiness gates.",
+    "blocked_scope": "No article mutation, homepage mutation, CSS/JS mutation, publishing or backend activation unless a later apply stage is explicitly approved."
+  },
+  "audit_only": true,
+  "local_static_audit_only": true,
+  "live_url_fetch_performed_in_ag09a": false,
+  "article_mutation_performed_in_ag09a": false,
+  "selected_article_file_write_performed_in_ag09a": false,
+  "homepage_mutation_performed_in_ag09a": false,
+  "css_mutation_performed_in_ag09a": false,
+  "js_mutation_performed_in_ag09a": false,
+  "reference_insertion_performed_in_ag09a": false,
+  "reference_url_change_performed_in_ag09a": false,
+  "visual_generation_performed_in_ag09a": false,
+  "image_asset_creation_performed_in_ag09a": false,
+  "image_insertion_performed_in_ag09a": false,
+  "production_jsonl_append_performed_in_ag09a": false,
+  "database_write_performed_in_ag09a": false,
+  "supabase_write_performed_in_ag09a": false,
+  "backend_auth_supabase_activation_performed_in_ag09a": false,
+  "public_publishing_performed_in_ag09a": false,
+  "publishing_approval_performed_in_ag09a": false
+}
