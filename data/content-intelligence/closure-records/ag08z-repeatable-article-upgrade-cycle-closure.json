@@ -1,0 +1,184 @@
+{
+  "module_id": "AG08Z",
+  "title": "Repeatable Article Upgrade Cycle Closure",
+  "status": "repeatable_article_upgrade_cycle_closed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "generated_from": {
+    "ag08aReview": "data/content-intelligence/quality-reviews/ag08a-repeatable-article-upgrade-cycle-planning.json",
+    "ag08bSelection": "data/content-intelligence/selection-registry/ag08b-selected-pipeline-test-article.json",
+    "ag08gApply": "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json",
+    "ag08hAudit": "data/content-intelligence/audit-records/ag08h-post-apply-audit-report.json",
+    "ag08iReview": "data/content-intelligence/quality-reviews/ag08i-visual-generation-image-insertion-plan.json",
+    "ag08jReview": "data/content-intelligence/quality-reviews/ag08j-visual-candidate-generation-asset-selection.json",
+    "ag08kaReview": "data/content-intelligence/quality-reviews/ag08ka-visual-asset-creation-source-finalisation.json",
+    "ag08kApply": "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json",
+    "ag08lAudit": "data/content-intelligence/audit-records/ag08l-post-visual-insertion-audit-report.json",
+    "ag08lRollback": "data/content-intelligence/quality-registry/ag08l-rollback-readiness-record.json"
+  },
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "current_article_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+    "ag08_cycle_closed": true,
+    "text_reference_upgrade_applied_and_audited": true,
+    "visual_asset_created_inserted_and_audited": true,
+    "cost_control_recorded": true,
+    "layout_doctrine_validated": true,
+    "rollback_ready": true,
+    "production_readiness_after_ag08z": "repeatable_cycle_closed_one_article_audited",
+    "publish_readiness_after_ag08z": "static_file_changed_not_publish_approved",
+    "next_stage_id": "AG09A",
+    "next_stage_title": "Next Article Selection / Repeatable Cycle Start",
+    "next_stage_requires_explicit_approval": true,
+    "closure_only": true,
+    "selected_article_read_performed": true,
+    "new_article_mutation_performed_in_ag08z": false,
+    "selected_article_file_write_performed_in_ag08z": false,
+    "reference_insertion_performed_in_ag08z": false,
+    "reference_url_change_performed_in_ag08z": false,
+    "visual_generation_performed_in_ag08z": false,
+    "image_asset_creation_performed_in_ag08z": false,
+    "image_insertion_performed_in_ag08z": false,
+    "css_mutation_performed_in_ag08z": false,
+    "js_mutation_performed_in_ag08z": false,
+    "production_jsonl_append_performed_in_ag08z": false,
+    "database_write_performed_in_ag08z": false,
+    "supabase_write_performed_in_ag08z": false,
+    "backend_auth_supabase_activation_performed_in_ag08z": false,
+    "public_publishing_performed_in_ag08z": false,
+    "publishing_approval_performed_in_ag08z": false,
+    "rollback_execution_performed_in_ag08z": false
+  },
+  "final_evidence": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "current_article_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+    "ag08_selected_article_source": "data/content-intelligence/selection-registry/ag08b-selected-pipeline-test-article.json",
+    "text_reference_apply": {
+      "stage": "AG08G",
+      "status": "one_article_controlled_apply_completed_pending_audit",
+      "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+      "pre_apply_hash": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+      "post_apply_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+      "approved_references_inserted": [
+        {
+          "reference_id": "AG08E-REF-001",
+          "title": "Ayushman Bharat Digital Mission — ABDM Components",
+          "url": "https://abdm.gov.in/abdm",
+          "insertion_status": "inserted_by_ag08g"
+        },
+        {
+          "reference_id": "AG08E-REF-002",
+          "title": "WHO — Global Strategy on Digital Health 2020–2025",
+          "url": "https://www.who.int/publications/i/item/9789240020924",
+          "insertion_status": "inserted_by_ag08g"
+        },
+        {
+          "reference_id": "AG08E-REF-003",
+          "title": "Telemedicine Practice Guidelines",
+          "url": "https://esanjeevani.mohfw.gov.in/assets/guidelines/Telemedicine_Practice_Guidelines.pdf",
+          "insertion_status": "inserted_by_ag08g"
+        }
+      ]
+    },
+    "post_text_reference_audit": {
+      "stage": "AG08H",
+      "status": "post_apply_audit_passed",
+      "rollback_ready": true
+    },
+    "visual_planning": {
+      "stage": "AG08I",
+      "status": "visual_generation_image_insertion_plan_created"
+    },
+    "visual_candidate_selection": {
+      "stage": "AG08J",
+      "status": "visual_candidate_record_created_not_inserted"
+    },
+    "visual_asset_source_finalisation": {
+      "stage": "AG08K-A",
+      "status": "visual_asset_created_source_finalised_not_inserted",
+      "cost_control": "internal SVG asset; no external image-generation/API call"
+    },
+    "visual_insertion_apply": {
+      "stage": "AG08K",
+      "status": "controlled_visual_image_inserted_pending_post_insertion_audit",
+      "backup_path": "archive/ag08k-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08k.html",
+      "asset_path": "assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08ka-primary-hero.svg",
+      "post_insertion_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e"
+    },
+    "post_visual_insertion_audit": {
+      "stage": "AG08L",
+      "status": "post_visual_insertion_audit_passed",
+      "rollback_ready": true
+    }
+  },
+  "repeatable_doctrine": {
+    "doctrine_id": "AG08Z-REPEATABLE-DOCTRINE-001",
+    "status": "created",
+    "operating_model": "single_article_controlled_cycle",
+    "stage_sequence_proven": [
+      "selection",
+      "candidate packet",
+      "readiness review",
+      "draft/reference candidate",
+      "approval/apply plan",
+      "controlled text/reference apply",
+      "post-apply audit",
+      "visual plan",
+      "visual candidate record",
+      "visual asset/source finalisation",
+      "controlled visual insertion",
+      "post-visual-insertion audit",
+      "cycle closure"
+    ],
+    "core_rules": [
+      "Select exactly one target article for pipeline testing unless batch mode is explicitly approved.",
+      "Separate text/reference mutation from visual/image insertion.",
+      "Create a backup before every mutation stage.",
+      "Treat visual generation/source finalisation as separate from visual insertion.",
+      "Prefer cost-controlled internal assets before external image-generation/API calls.",
+      "Do not publish merely because static article files changed.",
+      "Do not activate backend/Auth/Supabase/database paths during static article upgrade stages.",
+      "Preserve AG03/AG05/AG08 governance markers during later-stage mutations.",
+      "Make older validators forward-compatible with later controlled mutations only when supported by apply/audit records.",
+      "Require explicit approval before every mutation, visual insertion, closure or publishing-related stage."
+    ],
+    "cost_control_lessons": [
+      "Use internal SVG/editorial assets where adequate.",
+      "Avoid repeated GPT/image-generation calls for early pipeline testing.",
+      "Generate candidate records and prompts before any expensive asset generation.",
+      "Reuse approved source/credit/alt/caption records across later stages.",
+      "Keep visual insertion as an audited controlled apply rather than a side-effect of draft generation."
+    ],
+    "layout_lessons": [
+      "Hero visual insertion near the article top is safest for first visual apply.",
+      "Tables, graphs, figures and infographics need separate layout validation before insertion.",
+      "Text must remain justified and article shape must not deform.",
+      "Tables and data figures should be centrally aligned in the reading column.",
+      "Text wrapping is allowed only when it preserves readability and object boundary integrity."
+    ],
+    "rollback_lessons": [
+      "Maintain separate backups for text/reference apply and visual insertion.",
+      "Rollback readiness must be recorded but not executed during audit/closure stages.",
+      "Every mutation stage should record pre/post hashes."
+    ]
+  },
+  "final_readiness_record_file": "data/content-intelligence/quality-registry/ag08z-final-readiness-record.json",
+  "next_cycle_recommendations_file": "data/content-intelligence/quality-registry/ag08z-next-cycle-recommendations.json",
+  "closure_only": true,
+  "selected_article_read_performed": true,
+  "new_article_mutation_performed_in_ag08z": false,
+  "selected_article_file_write_performed_in_ag08z": false,
+  "reference_insertion_performed_in_ag08z": false,
+  "reference_url_change_performed_in_ag08z": false,
+  "visual_generation_performed_in_ag08z": false,
+  "image_asset_creation_performed_in_ag08z": false,
+  "image_insertion_performed_in_ag08z": false,
+  "css_mutation_performed_in_ag08z": false,
+  "js_mutation_performed_in_ag08z": false,
+  "production_jsonl_append_performed_in_ag08z": false,
+  "database_write_performed_in_ag08z": false,
+  "supabase_write_performed_in_ag08z": false,
+  "backend_auth_supabase_activation_performed_in_ag08z": false,
+  "public_publishing_performed_in_ag08z": false,
+  "publishing_approval_performed_in_ag08z": false,
+  "rollback_execution_performed_in_ag08z": false
+}

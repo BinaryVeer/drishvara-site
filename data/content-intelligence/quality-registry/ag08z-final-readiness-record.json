@@ -1,0 +1,127 @@
+{
+  "module_id": "AG08Z",
+  "title": "AG08Z Final Readiness Record",
+  "status": "repeatable_cycle_closed_one_article_text_reference_visual_audited",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "final_readiness_checks": [
+    {
+      "check_id": "AG08Z-CHECK-001",
+      "name": "ag08l_audit_passed",
+      "status": "passed",
+      "evidence": "post_visual_insertion_audit_passed"
+    },
+    {
+      "check_id": "AG08Z-CHECK-002",
+      "name": "current_article_hash_matches_ag08k",
+      "status": "passed",
+      "evidence": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e"
+    },
+    {
+      "check_id": "AG08Z-CHECK-003",
+      "name": "rollback_ready",
+      "status": "passed",
+      "evidence": "rollback_ready_not_executed"
+    },
+    {
+      "check_id": "AG08Z-CHECK-004",
+      "name": "forbidden_system_guards_confirmed",
+      "status": "passed",
+      "evidence": "passed"
+    },
+    {
+      "check_id": "AG08Z-CHECK-005",
+      "name": "layout_integrity_confirmed",
+      "status": "passed",
+      "evidence": "passed"
+    },
+    {
+      "check_id": "AG08Z-CHECK-006",
+      "name": "governance_preservation_confirmed",
+      "status": "passed",
+      "evidence": "passed"
+    }
+  ],
+  "final_readiness_passed": true,
+  "production_readiness": "repeatable_cycle_closed_one_article_audited",
+  "publish_readiness": "static_file_changed_not_publish_approved",
+  "final_evidence": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "current_article_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+    "ag08_selected_article_source": "data/content-intelligence/selection-registry/ag08b-selected-pipeline-test-article.json",
+    "text_reference_apply": {
+      "stage": "AG08G",
+      "status": "one_article_controlled_apply_completed_pending_audit",
+      "backup_path": "archive/ag08g-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08g.html",
+      "pre_apply_hash": "7ada93aff7e2dcaadb970bae7d037ddd4839c96acf79094636c40548880eadd4",
+      "post_apply_hash": "9b69660270938d4cc7f80f19764ecb55a5cf92ecd0f7e63a32d6287318838bd5",
+      "approved_references_inserted": [
+        {
+          "reference_id": "AG08E-REF-001",
+          "title": "Ayushman Bharat Digital Mission — ABDM Components",
+          "url": "https://abdm.gov.in/abdm",
+          "insertion_status": "inserted_by_ag08g"
+        },
+        {
+          "reference_id": "AG08E-REF-002",
+          "title": "WHO — Global Strategy on Digital Health 2020–2025",
+          "url": "https://www.who.int/publications/i/item/9789240020924",
+          "insertion_status": "inserted_by_ag08g"
+        },
+        {
+          "reference_id": "AG08E-REF-003",
+          "title": "Telemedicine Practice Guidelines",
+          "url": "https://esanjeevani.mohfw.gov.in/assets/guidelines/Telemedicine_Practice_Guidelines.pdf",
+          "insertion_status": "inserted_by_ag08g"
+        }
+      ]
+    },
+    "post_text_reference_audit": {
+      "stage": "AG08H",
+      "status": "post_apply_audit_passed",
+      "rollback_ready": true
+    },
+    "visual_planning": {
+      "stage": "AG08I",
+      "status": "visual_generation_image_insertion_plan_created"
+    },
+    "visual_candidate_selection": {
+      "stage": "AG08J",
+      "status": "visual_candidate_record_created_not_inserted"
+    },
+    "visual_asset_source_finalisation": {
+      "stage": "AG08K-A",
+      "status": "visual_asset_created_source_finalised_not_inserted",
+      "cost_control": "internal SVG asset; no external image-generation/API call"
+    },
+    "visual_insertion_apply": {
+      "stage": "AG08K",
+      "status": "controlled_visual_image_inserted_pending_post_insertion_audit",
+      "backup_path": "archive/ag08k-backups/enhancing-public-healthcare-delivery-digital-innovation-before-ag08k.html",
+      "asset_path": "assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08ka-primary-hero.svg",
+      "post_insertion_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e"
+    },
+    "post_visual_insertion_audit": {
+      "stage": "AG08L",
+      "status": "post_visual_insertion_audit_passed",
+      "rollback_ready": true
+    }
+  },
+  "closure_only": true,
+  "selected_article_read_performed": true,
+  "new_article_mutation_performed_in_ag08z": false,
+  "selected_article_file_write_performed_in_ag08z": false,
+  "reference_insertion_performed_in_ag08z": false,
+  "reference_url_change_performed_in_ag08z": false,
+  "visual_generation_performed_in_ag08z": false,
+  "image_asset_creation_performed_in_ag08z": false,
+  "image_insertion_performed_in_ag08z": false,
+  "css_mutation_performed_in_ag08z": false,
+  "js_mutation_performed_in_ag08z": false,
+  "production_jsonl_append_performed_in_ag08z": false,
+  "database_write_performed_in_ag08z": false,
+  "supabase_write_performed_in_ag08z": false,
+  "backend_auth_supabase_activation_performed_in_ag08z": false,
+  "public_publishing_performed_in_ag08z": false,
+  "publishing_approval_performed_in_ag08z": false,
+  "rollback_execution_performed_in_ag08z": false
+}

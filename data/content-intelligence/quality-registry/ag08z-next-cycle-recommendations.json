@@ -1,0 +1,55 @@
+{
+  "module_id": "AG08Z",
+  "title": "AG08Z Next-Cycle Recommendations",
+  "status": "recommendations_recorded_not_started",
+  "recommended_next_stage": {
+    "stage_id": "AG09A",
+    "title": "Next Article Selection / Repeatable Cycle Start",
+    "explicit_approval_required": true
+  },
+  "recommended_options": [
+    {
+      "option_id": "AG08Z-NEXT-001",
+      "recommendation": "Select one more existing article and repeat the same pipeline with fewer exploratory patches.",
+      "risk": "low",
+      "cost": "low"
+    },
+    {
+      "option_id": "AG08Z-NEXT-002",
+      "recommendation": "Improve AG08 generator/validator helpers into reusable shared utilities before batch mode.",
+      "risk": "medium",
+      "cost": "low"
+    },
+    {
+      "option_id": "AG08Z-NEXT-003",
+      "recommendation": "Create an internal visual component bank for hero SVGs, diagrams, tables and data cards.",
+      "risk": "medium",
+      "cost": "medium"
+    },
+    {
+      "option_id": "AG08Z-NEXT-004",
+      "recommendation": "Defer batch article mutation until at least two single-article cycles pass end-to-end.",
+      "risk": "low",
+      "cost": "low"
+    }
+  ],
+  "not_started_in_ag08z": true,
+  "closure_only": true,
+  "selected_article_read_performed": true,
+  "new_article_mutation_performed_in_ag08z": false,
+  "selected_article_file_write_performed_in_ag08z": false,
+  "reference_insertion_performed_in_ag08z": false,
+  "reference_url_change_performed_in_ag08z": false,
+  "visual_generation_performed_in_ag08z": false,
+  "image_asset_creation_performed_in_ag08z": false,
+  "image_insertion_performed_in_ag08z": false,
+  "css_mutation_performed_in_ag08z": false,
+  "js_mutation_performed_in_ag08z": false,
+  "production_jsonl_append_performed_in_ag08z": false,
+  "database_write_performed_in_ag08z": false,
+  "supabase_write_performed_in_ag08z": false,
+  "backend_auth_supabase_activation_performed_in_ag08z": false,
+  "public_publishing_performed_in_ag08z": false,
+  "publishing_approval_performed_in_ag08z": false,
+  "rollback_execution_performed_in_ag08z": false
+}
