@@ -40,7 +40,40 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG09C" ||
+      applyRecord.status !== "controlled_public_experience_corrections_applied_pending_audit"
+    ) {
+      return false;
+    }
+
+    if (selectedPath && selectedPath !== applyRecord.selected_article_path) return false;
+
+    const targetAbs = path.join(root, applyRecord.selected_article_path);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const html = fs.readFileSync(targetAbs, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.post_correction_hash === hashToCheck &&
+      html.includes("AG09C-PUBLIC-EXPERIENCE-METADATA") &&
+      html.includes('property="og:title"') &&
+      html.includes('name="twitter:card"')
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag09cControlledPublicExperienceCorrectionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -108,7 +141,7 @@ if (!fs.existsSync(path.join(root, target))) fail(`Target article missing: ${tar
 
 const targetHtml = fs.readFileSync(path.join(root, target), "utf8");
 const currentHash = sha256(targetHtml);
-if (currentHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash)) fail("Target article hash must match AG08G post-apply hash or AG08K controlled visual insertion hash");
+if (currentHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash) && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) fail("Target article hash must match AG08G post-apply hash or AG08K controlled visual insertion hash or AG09C controlled post-correction hash");
 
 if (review.status !== "visual_candidate_record_created_not_inserted") fail("AG08J review status mismatch");
 if (candidate.status !== "visual_candidate_record_created_no_asset_generated") fail("Candidate record status mismatch");

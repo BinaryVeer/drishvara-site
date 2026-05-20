@@ -39,6 +39,38 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG09C" ||
+      applyRecord.status !== "controlled_public_experience_corrections_applied_pending_audit"
+    ) {
+      return false;
+    }
+
+    if (selectedPath && selectedPath !== applyRecord.selected_article_path) return false;
+
+    const targetAbs = path.join(root, applyRecord.selected_article_path);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const html = fs.readFileSync(targetAbs, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.post_correction_hash === hashToCheck &&
+      html.includes("AG09C-PUBLIC-EXPERIENCE-METADATA") &&
+      html.includes('property="og:title"') &&
+      html.includes('name="twitter:card"')
+    );
+  } catch {
+    return false;
+  }
+}
+
 function countOccurrences(text, needle) {
   return String(text || "").split(needle).length - 1;
 }
@@ -103,7 +135,7 @@ const targetHash = sha256(targetHtml);
 const backupHash = sha256(backupHtml);
 const assetHash = sha256(assetSvg);
 
-if (targetHash !== ag08kApply.post_insertion_hash) fail("Target hash must match AG08K post-insertion hash");
+if (targetHash !== ag08kApply.post_insertion_hash && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) fail("Target hash must match AG08K post-insertion hash or AG09C controlled post-correction hash");
 if (backupHash !== ag08kApply.backup_hash) fail("Backup hash must match AG08K backup hash");
 if (backupHash !== ag08kApply.pre_insertion_hash) fail("Backup hash must match AG08K pre-insertion hash");
 if (targetHash === backupHash) fail("Target must differ from AG08K backup");

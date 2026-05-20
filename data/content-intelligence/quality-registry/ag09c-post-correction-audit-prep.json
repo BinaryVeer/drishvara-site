@@ -1,0 +1,73 @@
+{
+  "module_id": "AG09C",
+  "title": "AG09C Post-Correction Audit Prep",
+  "status": "post_public_experience_correction_audit_required",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "pre_correction_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+  "post_correction_hash": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "mutated_files": [
+    {
+      "file_path": "index.html",
+      "pre_hash": "8491f671eb1fea3f1d60240752365ad407653623514cc5c74afa8f6a4b26d5cc",
+      "post_hash": "00332a0a618f96585fa0bbd84f8b9d18ae97c3f4d982413993e4f9f8b355202e",
+      "correction_type": "homepage_or_featured_listing_discoverability_correction"
+    },
+    {
+      "file_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "pre_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+      "post_hash": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+      "correction_type": "article_head_metadata_and_social_preview"
+    }
+  ],
+  "backups": [
+    {
+      "file_path": "index.html",
+      "backup_path": "archive/ag09c-backups/index.html-before-ag09c",
+      "backup_hash": "8491f671eb1fea3f1d60240752365ad407653623514cc5c74afa8f6a4b26d5cc",
+      "pre_hash": "8491f671eb1fea3f1d60240752365ad407653623514cc5c74afa8f6a4b26d5cc"
+    },
+    {
+      "file_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "backup_path": "archive/ag09c-backups/articles__policy__enhancing-public-healthcare-delivery-digital-innovation.html-before-ag09c",
+      "backup_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+      "pre_hash": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e"
+    }
+  ],
+  "audit_checks_for_ag09d": [
+    "All AG09B planned correction items were applied or explicitly recorded.",
+    "Fresh backups exist for every mutated file.",
+    "Selected article has canonical, description, OG and Twitter metadata if metadata/social gaps were planned.",
+    "Listing/homepage file contains discoverable link if listing gap was planned.",
+    "No CSS/JS mutation occurred.",
+    "No reference URL change occurred.",
+    "No visual/image generation or insertion occurred.",
+    "No backend/database/Supabase activation or publishing occurred.",
+    "validate:project passes after correction."
+  ],
+  "ag09d_handoff": {
+    "next_stage_id": "AG09D",
+    "next_stage_title": "Post-Correction Public Experience Audit",
+    "explicit_approval_required": true
+  },
+  "controlled_public_experience_correction_apply_stage": true,
+  "article_mutation_performed_in_ag09c": true,
+  "selected_article_file_write_performed_in_ag09c": true,
+  "homepage_or_listing_mutation_performed_in_ag09c": true,
+  "fresh_backups_created_before_apply": true,
+  "correction_items_applied_count": 2,
+  "correction_items_planned_count": 2,
+  "css_mutation_performed_in_ag09c": false,
+  "js_mutation_performed_in_ag09c": false,
+  "reference_insertion_performed_in_ag09c": false,
+  "reference_url_change_performed_in_ag09c": false,
+  "visual_generation_performed_in_ag09c": false,
+  "image_asset_creation_performed_in_ag09c": false,
+  "image_insertion_performed_in_ag09c": false,
+  "live_url_fetch_performed_in_ag09c": false,
+  "production_jsonl_append_performed_in_ag09c": false,
+  "database_write_performed_in_ag09c": false,
+  "supabase_write_performed_in_ag09c": false,
+  "backend_auth_supabase_activation_performed_in_ag09c": false,
+  "public_publishing_performed_in_ag09c": false,
+  "publishing_approval_performed_in_ag09c": false
+}
