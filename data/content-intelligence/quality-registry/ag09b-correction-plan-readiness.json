@@ -1,0 +1,132 @@
+{
+  "module_id": "AG09B",
+  "title": "Correction Plan Readiness",
+  "status": "correction_plan_ready_pending_explicit_ag09c",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "source_gap_count": 2,
+  "correction_item_count": 2,
+  "readiness_checks": [
+    {
+      "check_id": "AG09B-CHECK-001",
+      "name": "ag09a_audit_consumed",
+      "status": "passed",
+      "evidence": "live_readiness_audit_completed"
+    },
+    {
+      "check_id": "AG09B-CHECK-002",
+      "name": "ag09a_gap_count_carried",
+      "status": "passed",
+      "evidence": {
+        "recorded": 2,
+        "actual": 2
+      }
+    },
+    {
+      "check_id": "AG09B-CHECK-003",
+      "name": "correction_items_match_gaps",
+      "status": "passed",
+      "evidence": {
+        "gaps": 2,
+        "corrections": 2
+      }
+    },
+    {
+      "check_id": "AG09B-CHECK-004",
+      "name": "selected_article_hash_unchanged",
+      "status": "passed",
+      "evidence": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e"
+    },
+    {
+      "check_id": "AG09B-CHECK-005",
+      "name": "future_apply_boundary_created",
+      "status": "passed",
+      "evidence": "AG09C"
+    },
+    {
+      "check_id": "AG09B-CHECK-006",
+      "name": "no_mutation_performed",
+      "status": "passed",
+      "evidence": "mutation=false"
+    }
+  ],
+  "readiness_passed": true,
+  "publish_ready": false,
+  "publish_readiness": "blocked_pending_controlled_correction_apply_and_audit",
+  "ag09c_handoff": {
+    "module_id": "AG09B",
+    "title": "AG09B to AG09C Controlled Public Experience Correction Apply Boundary",
+    "status": "future_apply_boundary_created_not_executed",
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag09b": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+    "next_stage_id": "AG09C",
+    "next_stage_title": "Controlled Public Experience Correction Apply",
+    "explicit_approval_required": true,
+    "ag09c_preconditions": [
+      "User explicitly approves AG09C.",
+      "AG09B correction plan is validated.",
+      "Exact correction items are approved.",
+      "Fresh backup is created for every file that will be mutated.",
+      "No correction expands beyond AG09A gap scope unless separately approved.",
+      "No publishing approval is granted merely because static files change.",
+      "validate:project passes after apply."
+    ],
+    "allowed_future_apply_scope": [
+      "selected article head metadata correction if required",
+      "selected article social-preview metadata correction if required",
+      "homepage/listing/card discoverability correction if required",
+      "minimal visual block/layout safety correction if required",
+      "post-correction audit prep"
+    ],
+    "blocked_future_apply_scope": [
+      "new article rewrite",
+      "new article selection",
+      "multi-article mutation",
+      "new visual generation",
+      "new image insertion",
+      "reference URL changes unless separately approved",
+      "global CSS/JS mutation unless separately approved",
+      "database/Supabase/backend/Auth activation",
+      "publishing approval"
+    ],
+    "correction_plan_only": true,
+    "source_gap_count": 2,
+    "correction_item_count": 2,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag09b": false,
+    "selected_article_file_write_performed_in_ag09b": false,
+    "homepage_mutation_performed_in_ag09b": false,
+    "css_mutation_performed_in_ag09b": false,
+    "js_mutation_performed_in_ag09b": false,
+    "reference_insertion_performed_in_ag09b": false,
+    "reference_url_change_performed_in_ag09b": false,
+    "visual_generation_performed_in_ag09b": false,
+    "image_asset_creation_performed_in_ag09b": false,
+    "image_insertion_performed_in_ag09b": false,
+    "live_url_fetch_performed_in_ag09b": false,
+    "production_jsonl_append_performed_in_ag09b": false,
+    "database_write_performed_in_ag09b": false,
+    "supabase_write_performed_in_ag09b": false,
+    "backend_auth_supabase_activation_performed_in_ag09b": false,
+    "public_publishing_performed_in_ag09b": false,
+    "publishing_approval_performed_in_ag09b": false
+  },
+  "correction_plan_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09b": false,
+  "selected_article_file_write_performed_in_ag09b": false,
+  "homepage_mutation_performed_in_ag09b": false,
+  "css_mutation_performed_in_ag09b": false,
+  "js_mutation_performed_in_ag09b": false,
+  "reference_insertion_performed_in_ag09b": false,
+  "reference_url_change_performed_in_ag09b": false,
+  "visual_generation_performed_in_ag09b": false,
+  "image_asset_creation_performed_in_ag09b": false,
+  "image_insertion_performed_in_ag09b": false,
+  "live_url_fetch_performed_in_ag09b": false,
+  "production_jsonl_append_performed_in_ag09b": false,
+  "database_write_performed_in_ag09b": false,
+  "supabase_write_performed_in_ag09b": false,
+  "backend_auth_supabase_activation_performed_in_ag09b": false,
+  "public_publishing_performed_in_ag09b": false,
+  "publishing_approval_performed_in_ag09b": false
+}

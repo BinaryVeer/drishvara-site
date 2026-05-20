@@ -1,0 +1,105 @@
+{
+  "module_id": "AG09B",
+  "title": "Public Experience Correction Plan",
+  "status": "correction_plan_created_not_executed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag09b": "c4b7dcb2298c7ea639d6ae20581b1bced1cbd8f533d07404eb31e9c76bf94d5e",
+  "source_audit": "data/content-intelligence/audit-records/ag09a-live-readiness-public-experience-audit-report.json",
+  "source_gap_register": "data/content-intelligence/quality-registry/ag09a-public-experience-gap-register.json",
+  "source_gap_count": 2,
+  "correction_item_count": 2,
+  "correction_items": [
+    {
+      "source_gap_id": "AG09A-GAP-005",
+      "source_area": "social_preview",
+      "source_name": "open_graph_or_social_preview_metadata_present",
+      "source_severity": "medium",
+      "source_status": "open_for_ag09b_correction_plan",
+      "evidence": {
+        "has_og_title": false,
+        "has_og_description": false,
+        "has_og_image": false,
+        "has_twitter_card": false
+      },
+      "correction_status": "planned_not_executed",
+      "approval_required_before_apply": true,
+      "correction_id": "AG09B-CORRECTION-SOCIAL-PREVIEW",
+      "correction_type": "open_graph_twitter_metadata_correction",
+      "target_files_if_later_approved": [
+        "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html"
+      ],
+      "planned_actions": [
+        "Add or complete og:title and og:description if missing.",
+        "Add or complete og:image using the approved AG08K hero visual or a future approved social-preview image.",
+        "Add twitter:card metadata if missing.",
+        "Keep image source and credit aligned with AG08K-A/AG08K records."
+      ],
+      "future_apply_scope": "selected_article_head_only",
+      "mutation_allowed_in_ag09b": false
+    },
+    {
+      "source_gap_id": "AG09A-GAP-006",
+      "source_area": "homepage_listing",
+      "source_name": "upgraded_article_discoverability_from_static_listing",
+      "source_severity": "medium",
+      "source_status": "open_for_ag09b_correction_plan",
+      "evidence": {
+        "listing_files_checked": [
+          {
+            "file": "index.html",
+            "contains_article_path": false,
+            "contains_article_slug": false,
+            "contains_article_title": false
+          }
+        ],
+        "linked_from_any_listing": false
+      },
+      "correction_status": "planned_not_executed",
+      "approval_required_before_apply": true,
+      "correction_id": "AG09B-CORRECTION-LISTING",
+      "correction_type": "homepage_or_featured_listing_discoverability_correction",
+      "target_files_if_later_approved": [
+        "index.html",
+        "articles.html",
+        "featured-reads.html"
+      ],
+      "planned_actions": [
+        "Ensure the upgraded article slug \"enhancing-public-healthcare-delivery-digital-innovation\" is discoverable from the relevant public listing/card surface.",
+        "Confirm title/category/card date/card excerpt are consistent with the upgraded article.",
+        "Use existing listing/card patterns instead of introducing a new layout system.",
+        "Do not change article body during listing-only correction."
+      ],
+      "future_apply_scope": "listing_surface_only",
+      "mutation_allowed_in_ag09b": false
+    }
+  ],
+  "correction_strategy": {
+    "principle": "Plan the narrowest possible corrections for AG09A public-experience gaps without starting a new article pipeline.",
+    "execution_mode": "future_controlled_apply_only",
+    "sequencing": [
+      "metadata/social-preview corrections first if required",
+      "listing/card discoverability correction if required",
+      "layout/mobile correction only if static evidence requires it",
+      "post-correction public-experience audit after any future apply"
+    ]
+  },
+  "correction_plan_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09b": false,
+  "selected_article_file_write_performed_in_ag09b": false,
+  "homepage_mutation_performed_in_ag09b": false,
+  "css_mutation_performed_in_ag09b": false,
+  "js_mutation_performed_in_ag09b": false,
+  "reference_insertion_performed_in_ag09b": false,
+  "reference_url_change_performed_in_ag09b": false,
+  "visual_generation_performed_in_ag09b": false,
+  "image_asset_creation_performed_in_ag09b": false,
+  "image_insertion_performed_in_ag09b": false,
+  "live_url_fetch_performed_in_ag09b": false,
+  "production_jsonl_append_performed_in_ag09b": false,
+  "database_write_performed_in_ag09b": false,
+  "supabase_write_performed_in_ag09b": false,
+  "backend_auth_supabase_activation_performed_in_ag09b": false,
+  "public_publishing_performed_in_ag09b": false,
+  "publishing_approval_performed_in_ag09b": false
+}
