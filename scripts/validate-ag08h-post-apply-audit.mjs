@@ -36,6 +36,40 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG08K" ||
+      applyRecord.status !== "controlled_visual_image_inserted_pending_post_insertion_audit" ||
+      applyRecord.image_insertion_performed_in_ag08k !== true ||
+      applyRecord.article_mutation_performed_in_ag08k !== true ||
+      applyRecord.exactly_one_visual_block_inserted !== true
+    ) {
+      return false;
+    }
+
+    if (selectedPath && selectedPath !== applyRecord.selected_article_path) return false;
+
+    const targetAbs = path.join(root, applyRecord.selected_article_path);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const html = fs.readFileSync(targetAbs, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes("AG08K-HERO-VISUAL-INSERTION") &&
+      html.includes(applyRecord.asset_src_inserted)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function countOccurrences(text, needle) {
   return String(text || "").split(needle).length - 1;
 }
@@ -106,7 +140,7 @@ const hasAg05dEvidence =
   /drishvara-ag05d-visible-reference-block/i.test(targetHtml);
 
 
-if (targetHash !== ag08gApply.post_apply_hash) fail("Target hash must match AG08G post-apply hash");
+if (targetHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, targetHash)) fail("Target hash must match AG08G post-apply hash or AG08K controlled visual insertion hash");
 if (backupHash !== ag08gApply.backup_hash) fail("Backup hash must match AG08G backup hash");
 if (backupHash !== ag08gApply.pre_apply_hash) fail("Backup hash must match AG08G pre-apply hash");
 if (targetHash === backupHash) fail("Target must differ from backup");

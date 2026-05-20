@@ -40,6 +40,40 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG08K" ||
+      applyRecord.status !== "controlled_visual_image_inserted_pending_post_insertion_audit" ||
+      applyRecord.image_insertion_performed_in_ag08k !== true ||
+      applyRecord.article_mutation_performed_in_ag08k !== true ||
+      applyRecord.exactly_one_visual_block_inserted !== true
+    ) {
+      return false;
+    }
+
+    if (selectedPath && selectedPath !== applyRecord.selected_article_path) return false;
+
+    const targetAbs = path.join(root, applyRecord.selected_article_path);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const html = fs.readFileSync(targetAbs, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes("AG08K-HERO-VISUAL-INSERTION") &&
+      html.includes(applyRecord.asset_src_inserted)
+    );
+  } catch {
+    return false;
+  }
+}
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -72,7 +106,7 @@ if (!fs.existsSync(path.join(root, target))) fail(`Target article missing: ${tar
 const targetHtml = fs.readFileSync(path.join(root, target), "utf8");
 const currentArticleHash = sha256(targetHtml);
 
-if (currentArticleHash !== ag08gApply.post_apply_hash) fail("Selected article hash must match AG08G post-apply hash");
+if (currentArticleHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentArticleHash)) fail("Selected article hash must match AG08G post-apply hash or AG08K controlled visual insertion hash");
 
 const assetPath = assetRecord.asset.asset_path;
 if (!fs.existsSync(path.join(root, assetPath))) fail(`Asset file missing: ${assetPath}`);
@@ -86,7 +120,7 @@ if (!svg.includes("<desc")) fail("SVG description missing");
 if (svgHash !== assetRecord.asset.asset_hash_sha256) fail("Asset hash mismatch");
 if (assetRecord.asset.file_created !== true) fail("Asset record must confirm file creation");
 if (assetRecord.asset.inserted_into_article !== false) fail("Asset must not be inserted into article");
-if (targetHtml.includes(assetPath)) fail("Selected article must not reference the AG08K-A asset yet");
+if (targetHtml.includes(assetPath) && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentArticleHash)) fail("Selected article must not reference the AG08K-A asset yet unless AG08K controlled insertion is valid");
 
 if (review.status !== "visual_asset_created_source_finalised_not_inserted") fail("AG08K-A review status mismatch");
 if (assetRecord.status !== "visual_asset_created_source_finalised_not_inserted") fail("Asset record status mismatch");

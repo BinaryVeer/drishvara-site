@@ -39,6 +39,40 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    if (
+      applyRecord.module_id !== "AG08K" ||
+      applyRecord.status !== "controlled_visual_image_inserted_pending_post_insertion_audit" ||
+      applyRecord.image_insertion_performed_in_ag08k !== true ||
+      applyRecord.article_mutation_performed_in_ag08k !== true ||
+      applyRecord.exactly_one_visual_block_inserted !== true
+    ) {
+      return false;
+    }
+
+    if (selectedPath && selectedPath !== applyRecord.selected_article_path) return false;
+
+    const targetAbs = path.join(root, applyRecord.selected_article_path);
+    if (!fs.existsSync(targetAbs)) return false;
+
+    const html = fs.readFileSync(targetAbs, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes("AG08K-HERO-VISUAL-INSERTION") &&
+      html.includes(applyRecord.asset_src_inserted)
+    );
+  } catch {
+    return false;
+  }
+}
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -74,7 +108,7 @@ if (!fs.existsSync(path.join(root, target))) fail(`Target article missing: ${tar
 
 const targetHtml = fs.readFileSync(path.join(root, target), "utf8");
 const currentHash = sha256(targetHtml);
-if (currentHash !== ag08gApply.post_apply_hash) fail("Target article hash must match AG08G post-apply hash");
+if (currentHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash)) fail("Target article hash must match AG08G post-apply hash or AG08K controlled visual insertion hash");
 
 if (review.status !== "visual_generation_image_insertion_plan_created") fail("AG08I review status mismatch");
 if (registry.status !== "visual_generation_image_insertion_plan_created") fail("AG08I registry status mismatch");
@@ -85,7 +119,7 @@ if (schema.status !== "schema_visual_plan_only") fail("Schema status mismatch");
 if (learning.status !== "learning_record_only") fail("Learning status mismatch");
 
 if (visualPlan.target_article_path !== target) fail("Visual plan target mismatch");
-if (visualPlan.target_article_hash_at_ag08i !== currentHash) fail("Visual plan hash mismatch");
+if (visualPlan.target_article_hash_at_ag08i !== currentHash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash)) fail("Visual plan hash mismatch or AG08K controlled visual insertion hash missing");
 if (visualPlan.planning_status !== "visual_plan_created_no_asset_generated") fail("Visual plan status mismatch");
 if (!visualPlan.recommended_visual_type) fail("Recommended visual type missing");
 if (!visualPlan.visual_intent) fail("Visual intent missing");
