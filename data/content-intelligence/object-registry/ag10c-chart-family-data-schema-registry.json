@@ -1,0 +1,261 @@
+{
+  "module_id": "AG10C",
+  "title": "Chart Family Data Schema Registry",
+  "status": "chart_family_data_schema_registry_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10c": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "source_chart_object_count": 28,
+  "chart_families": [
+    {
+      "family_id": "AG10C-CHART-FOUNDATIONAL",
+      "family_name": "Foundational Charts",
+      "chart_types": [
+        "bar_chart",
+        "column_chart",
+        "line_chart",
+        "histogram",
+        "pie_chart",
+        "kpi_chart",
+        "donut_chart"
+      ],
+      "primary_data_shape": "category_value_or_series",
+      "minimum_required_fields": [
+        "label",
+        "value",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "basic comparison",
+        "single metric",
+        "distribution",
+        "simple trend"
+      ],
+      "avoid_when": [
+        "too many categories",
+        "unverified values",
+        "mobile labels become unreadable"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-COMPARISON",
+      "family_name": "Comparison Charts",
+      "chart_types": [
+        "treemap_chart",
+        "pareto_chart",
+        "radar_chart",
+        "funnel_chart",
+        "waterfall_chart",
+        "stacked_bar_chart"
+      ],
+      "primary_data_shape": "multi_category_or_stage_comparison",
+      "minimum_required_fields": [
+        "category",
+        "value",
+        "group_or_stage",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "part-to-whole",
+        "ranked contribution",
+        "stage movement",
+        "layered comparison"
+      ],
+      "avoid_when": [
+        "weak category logic",
+        "misleading part-to-whole relation",
+        "dense labels"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-RELATIONSHIP",
+      "family_name": "Relationship and Correlation Charts",
+      "chart_types": [
+        "scatter_plot",
+        "bubble_chart",
+        "sankey_chart",
+        "area_chart"
+      ],
+      "primary_data_shape": "x_y_or_flow_series",
+      "minimum_required_fields": [
+        "x_value",
+        "y_value",
+        "label",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "correlation",
+        "relationship",
+        "flow",
+        "volume movement"
+      ],
+      "avoid_when": [
+        "small sample without explanation",
+        "unclear relationship",
+        "causation implied from correlation"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-TIME",
+      "family_name": "Time and Trend Charts",
+      "chart_types": [
+        "step_chart",
+        "candlestick_chart",
+        "sparkline"
+      ],
+      "primary_data_shape": "date_or_period_series",
+      "minimum_required_fields": [
+        "period",
+        "value",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "trend",
+        "time movement",
+        "compact repeated signals",
+        "periodic change"
+      ],
+      "avoid_when": [
+        "missing dates",
+        "mixed periodicity",
+        "unclear time zone or period basis"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-GEO",
+      "family_name": "Geographic Insight Charts",
+      "chart_types": [
+        "geo_chart",
+        "scatter_map",
+        "geographic_bubble_chart",
+        "heatmap_chart"
+      ],
+      "primary_data_shape": "location_value_or_coordinate_series",
+      "minimum_required_fields": [
+        "location",
+        "value",
+        "unit",
+        "geo_scope",
+        "source_note"
+      ],
+      "best_for": [
+        "regional comparison",
+        "location density",
+        "spatial distribution"
+      ],
+      "avoid_when": [
+        "unverified boundaries",
+        "unlicensed base map",
+        "mobile unreadability"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-SPECIAL",
+      "family_name": "Special Charts",
+      "chart_types": [
+        "box_plot_whisker_plot",
+        "pictograph",
+        "gantt_chart",
+        "dot_plot"
+      ],
+      "primary_data_shape": "specialized_series_or_interval_data",
+      "minimum_required_fields": [
+        "label",
+        "value_or_interval",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "distribution",
+        "project timeline",
+        "icon-based quantity",
+        "dot comparison"
+      ],
+      "avoid_when": [
+        "reader unfamiliarity",
+        "requires heavy explanation",
+        "labels cannot fit mobile"
+      ]
+    }
+  ],
+  "universal_chart_data_schema": {
+    "required_metadata": [
+      "dataset_id",
+      "dataset_version",
+      "source_id",
+      "source_name",
+      "source_url_or_reference",
+      "source_access_date",
+      "licence_or_usage_note",
+      "data_owner_or_publisher",
+      "data_extraction_method",
+      "data_cleaning_status",
+      "unit_standardisation_status",
+      "freshness_status",
+      "reuse_eligibility_status"
+    ],
+    "required_chart_fields": [
+      "chart_type",
+      "title",
+      "subtitle_or_context",
+      "labels",
+      "values",
+      "units",
+      "source_note",
+      "caption",
+      "alt_text",
+      "credit_display",
+      "mobile_fallback_text"
+    ],
+    "optional_chart_fields": [
+      "series",
+      "groups",
+      "colors",
+      "annotations",
+      "thresholds",
+      "rank",
+      "geo_scope",
+      "period",
+      "confidence_note"
+    ]
+  },
+  "no_chart_generation_in_ag10c": true,
+  "no_chart_rendering_in_ag10c": true,
+  "data_visualization_chart_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10c": false,
+  "selected_article_file_write_performed_in_ag10c": false,
+  "homepage_mutation_performed_in_ag10c": false,
+  "css_mutation_performed_in_ag10c": false,
+  "js_mutation_performed_in_ag10c": false,
+  "reference_insertion_performed_in_ag10c": false,
+  "reference_url_change_performed_in_ag10c": false,
+  "data_fetch_performed_in_ag10c": false,
+  "external_dataset_download_performed_in_ag10c": false,
+  "dataset_creation_performed_in_ag10c": false,
+  "dataset_mutation_performed_in_ag10c": false,
+  "chart_generation_performed_in_ag10c": false,
+  "graph_generation_performed_in_ag10c": false,
+  "data_visualization_render_performed_in_ag10c": false,
+  "chart_template_creation_performed_in_ag10c": false,
+  "rendered_object_creation_performed_in_ag10c": false,
+  "object_insertion_performed_in_ag10c": false,
+  "visual_generation_performed_in_ag10c": false,
+  "image_generation_performed_in_ag10c": false,
+  "image_insertion_performed_in_ag10c": false,
+  "infographic_generation_performed_in_ag10c": false,
+  "table_generation_performed_in_ag10c": false,
+  "figure_generation_performed_in_ag10c": false,
+  "map_generation_performed_in_ag10c": false,
+  "live_url_fetch_performed_in_ag10c": false,
+  "deployment_trigger_performed_in_ag10c": false,
+  "production_jsonl_append_performed_in_ag10c": false,
+  "database_write_performed_in_ag10c": false,
+  "supabase_write_performed_in_ag10c": false,
+  "backend_auth_supabase_activation_performed_in_ag10c": false,
+  "rollback_execution_performed_in_ag10c": false,
+  "public_publishing_operation_performed_in_ag10c": false
+}

@@ -1,0 +1,134 @@
+{
+  "module_id": "AG10C",
+  "title": "Data Source, Dataset and Inference Doctrine",
+  "status": "data_source_dataset_inference_doctrine_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10c": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "data_lifecycle": [
+    "source_metadata_record",
+    "extracted_data_record",
+    "cleaned_normalized_dataset",
+    "derived_metrics_record",
+    "inference_interpretation_log",
+    "dataset_object_binding",
+    "article_dataset_mapping",
+    "reuse_learning_log"
+  ],
+  "registry_entities": [
+    {
+      "entity": "data_sources",
+      "purpose": "Store source metadata, publisher, date, URL/reference, licence and access date."
+    },
+    {
+      "entity": "datasets",
+      "purpose": "Store extracted and cleaned values with version, schema and hash."
+    },
+    {
+      "entity": "dataset_versions",
+      "purpose": "Preserve changes across time and avoid silent data replacement."
+    },
+    {
+      "entity": "derived_metrics",
+      "purpose": "Store calculated percentages, ratios, rankings, averages, trends, gaps and comparisons."
+    },
+    {
+      "entity": "inference_logs",
+      "purpose": "Record what inference was drawn from data and why it is justified."
+    },
+    {
+      "entity": "dataset_object_bindings",
+      "purpose": "Map datasets and fields to chart/table/infographic templates."
+    },
+    {
+      "entity": "article_dataset_map",
+      "purpose": "Record which article uses which dataset, metric or inference."
+    },
+    {
+      "entity": "reuse_logs",
+      "purpose": "Track when a dataset, metric or rendered object is reused in another article."
+    }
+  ],
+  "data_credit_logic": [
+    {
+      "data_origin": "external_official_or_research_source",
+      "credit_pattern": "Data source: [source name]. Data visualization: Drishvara.",
+      "ownership_note": "Source data remains attributed to the source; visualization and interpretation are Drishvara-controlled."
+    },
+    {
+      "data_origin": "internally_derived_metric_from_external_data",
+      "credit_pattern": "Data source: [source name]. Analysis: Drishvara.",
+      "ownership_note": "Derived metric/inference is Drishvara analysis, subject to source data rights."
+    },
+    {
+      "data_origin": "internal_drishvara_dataset",
+      "credit_pattern": "Data and visualization: Drishvara.",
+      "ownership_note": "Treat as Drishvara-owned/controlled if created through Drishvara workflow."
+    },
+    {
+      "data_origin": "mixed_sources",
+      "credit_pattern": "Sources: [source list]. Analysis and visualization: Drishvara.",
+      "ownership_note": "All sources must be separately recorded and verified."
+    }
+  ],
+  "freshness_rules": [
+    {
+      "freshness_band": "current",
+      "condition": "Dataset is recent and source context remains valid.",
+      "reuse_allowed": true
+    },
+    {
+      "freshness_band": "contextual",
+      "condition": "Dataset is older but still valid for historical or analytical context.",
+      "reuse_allowed": true,
+      "required_note": "Historical/contextual data note required."
+    },
+    {
+      "freshness_band": "stale",
+      "condition": "Dataset may no longer represent the present situation.",
+      "reuse_allowed": false,
+      "required_action": "Refresh source or mark as archival."
+    }
+  ],
+  "storage_rules_before_backend_activation": [
+    "Store source metadata, dataset schema, derived metrics and inference records as governed JSON/CSV artifacts.",
+    "Do not store full copyrighted reports unless licence permits.",
+    "Store source links, extracted permitted facts, cleaned values, data hash and reuse status.",
+    "Keep article prose, source data, derived metrics, inference and visualization records separate."
+  ],
+  "no_data_fetch_in_ag10c": true,
+  "no_dataset_creation_in_ag10c": true,
+  "data_visualization_chart_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10c": false,
+  "selected_article_file_write_performed_in_ag10c": false,
+  "homepage_mutation_performed_in_ag10c": false,
+  "css_mutation_performed_in_ag10c": false,
+  "js_mutation_performed_in_ag10c": false,
+  "reference_insertion_performed_in_ag10c": false,
+  "reference_url_change_performed_in_ag10c": false,
+  "data_fetch_performed_in_ag10c": false,
+  "external_dataset_download_performed_in_ag10c": false,
+  "dataset_creation_performed_in_ag10c": false,
+  "dataset_mutation_performed_in_ag10c": false,
+  "chart_generation_performed_in_ag10c": false,
+  "graph_generation_performed_in_ag10c": false,
+  "data_visualization_render_performed_in_ag10c": false,
+  "chart_template_creation_performed_in_ag10c": false,
+  "rendered_object_creation_performed_in_ag10c": false,
+  "object_insertion_performed_in_ag10c": false,
+  "visual_generation_performed_in_ag10c": false,
+  "image_generation_performed_in_ag10c": false,
+  "image_insertion_performed_in_ag10c": false,
+  "infographic_generation_performed_in_ag10c": false,
+  "table_generation_performed_in_ag10c": false,
+  "figure_generation_performed_in_ag10c": false,
+  "map_generation_performed_in_ag10c": false,
+  "live_url_fetch_performed_in_ag10c": false,
+  "deployment_trigger_performed_in_ag10c": false,
+  "production_jsonl_append_performed_in_ag10c": false,
+  "database_write_performed_in_ag10c": false,
+  "supabase_write_performed_in_ag10c": false,
+  "backend_auth_supabase_activation_performed_in_ag10c": false,
+  "rollback_execution_performed_in_ag10c": false,
+  "public_publishing_operation_performed_in_ag10c": false
+}

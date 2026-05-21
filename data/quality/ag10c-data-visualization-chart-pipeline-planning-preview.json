@@ -1,0 +1,340 @@
+{
+  "module_id": "AG10C",
+  "preview_only": true,
+  "status": "data_visualization_chart_pipeline_planning_created_not_executed",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag10c": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "source_chart_object_count": 28,
+    "chart_family_count": 6,
+    "data_lifecycle_steps": 8,
+    "registry_entity_count": 8,
+    "template_pipeline_steps": 6,
+    "next_stage_id": "AG10D",
+    "next_stage_title": "Infographic Pipeline Planning",
+    "next_stage_requires_explicit_approval": true,
+    "data_visualization_chart_pipeline_planning_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag10c": false,
+    "selected_article_file_write_performed_in_ag10c": false,
+    "homepage_mutation_performed_in_ag10c": false,
+    "css_mutation_performed_in_ag10c": false,
+    "js_mutation_performed_in_ag10c": false,
+    "reference_insertion_performed_in_ag10c": false,
+    "reference_url_change_performed_in_ag10c": false,
+    "data_fetch_performed_in_ag10c": false,
+    "external_dataset_download_performed_in_ag10c": false,
+    "dataset_creation_performed_in_ag10c": false,
+    "dataset_mutation_performed_in_ag10c": false,
+    "chart_generation_performed_in_ag10c": false,
+    "graph_generation_performed_in_ag10c": false,
+    "data_visualization_render_performed_in_ag10c": false,
+    "chart_template_creation_performed_in_ag10c": false,
+    "rendered_object_creation_performed_in_ag10c": false,
+    "object_insertion_performed_in_ag10c": false,
+    "visual_generation_performed_in_ag10c": false,
+    "image_generation_performed_in_ag10c": false,
+    "image_insertion_performed_in_ag10c": false,
+    "infographic_generation_performed_in_ag10c": false,
+    "table_generation_performed_in_ag10c": false,
+    "figure_generation_performed_in_ag10c": false,
+    "map_generation_performed_in_ag10c": false,
+    "live_url_fetch_performed_in_ag10c": false,
+    "deployment_trigger_performed_in_ag10c": false,
+    "production_jsonl_append_performed_in_ag10c": false,
+    "database_write_performed_in_ag10c": false,
+    "supabase_write_performed_in_ag10c": false,
+    "backend_auth_supabase_activation_performed_in_ag10c": false,
+    "rollback_execution_performed_in_ag10c": false,
+    "public_publishing_operation_performed_in_ag10c": false
+  },
+  "chart_families_preview": [
+    {
+      "family_id": "AG10C-CHART-FOUNDATIONAL",
+      "family_name": "Foundational Charts",
+      "chart_types": [
+        "bar_chart",
+        "column_chart",
+        "line_chart",
+        "histogram",
+        "pie_chart",
+        "kpi_chart",
+        "donut_chart"
+      ],
+      "primary_data_shape": "category_value_or_series",
+      "minimum_required_fields": [
+        "label",
+        "value",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "basic comparison",
+        "single metric",
+        "distribution",
+        "simple trend"
+      ],
+      "avoid_when": [
+        "too many categories",
+        "unverified values",
+        "mobile labels become unreadable"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-COMPARISON",
+      "family_name": "Comparison Charts",
+      "chart_types": [
+        "treemap_chart",
+        "pareto_chart",
+        "radar_chart",
+        "funnel_chart",
+        "waterfall_chart",
+        "stacked_bar_chart"
+      ],
+      "primary_data_shape": "multi_category_or_stage_comparison",
+      "minimum_required_fields": [
+        "category",
+        "value",
+        "group_or_stage",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "part-to-whole",
+        "ranked contribution",
+        "stage movement",
+        "layered comparison"
+      ],
+      "avoid_when": [
+        "weak category logic",
+        "misleading part-to-whole relation",
+        "dense labels"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-RELATIONSHIP",
+      "family_name": "Relationship and Correlation Charts",
+      "chart_types": [
+        "scatter_plot",
+        "bubble_chart",
+        "sankey_chart",
+        "area_chart"
+      ],
+      "primary_data_shape": "x_y_or_flow_series",
+      "minimum_required_fields": [
+        "x_value",
+        "y_value",
+        "label",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "correlation",
+        "relationship",
+        "flow",
+        "volume movement"
+      ],
+      "avoid_when": [
+        "small sample without explanation",
+        "unclear relationship",
+        "causation implied from correlation"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-TIME",
+      "family_name": "Time and Trend Charts",
+      "chart_types": [
+        "step_chart",
+        "candlestick_chart",
+        "sparkline"
+      ],
+      "primary_data_shape": "date_or_period_series",
+      "minimum_required_fields": [
+        "period",
+        "value",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "trend",
+        "time movement",
+        "compact repeated signals",
+        "periodic change"
+      ],
+      "avoid_when": [
+        "missing dates",
+        "mixed periodicity",
+        "unclear time zone or period basis"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-GEO",
+      "family_name": "Geographic Insight Charts",
+      "chart_types": [
+        "geo_chart",
+        "scatter_map",
+        "geographic_bubble_chart",
+        "heatmap_chart"
+      ],
+      "primary_data_shape": "location_value_or_coordinate_series",
+      "minimum_required_fields": [
+        "location",
+        "value",
+        "unit",
+        "geo_scope",
+        "source_note"
+      ],
+      "best_for": [
+        "regional comparison",
+        "location density",
+        "spatial distribution"
+      ],
+      "avoid_when": [
+        "unverified boundaries",
+        "unlicensed base map",
+        "mobile unreadability"
+      ]
+    },
+    {
+      "family_id": "AG10C-CHART-SPECIAL",
+      "family_name": "Special Charts",
+      "chart_types": [
+        "box_plot_whisker_plot",
+        "pictograph",
+        "gantt_chart",
+        "dot_plot"
+      ],
+      "primary_data_shape": "specialized_series_or_interval_data",
+      "minimum_required_fields": [
+        "label",
+        "value_or_interval",
+        "unit",
+        "source_note"
+      ],
+      "best_for": [
+        "distribution",
+        "project timeline",
+        "icon-based quantity",
+        "dot comparison"
+      ],
+      "avoid_when": [
+        "reader unfamiliarity",
+        "requires heavy explanation",
+        "labels cannot fit mobile"
+      ]
+    }
+  ],
+  "data_lifecycle_preview": [
+    "source_metadata_record",
+    "extracted_data_record",
+    "cleaned_normalized_dataset",
+    "derived_metrics_record",
+    "inference_interpretation_log",
+    "dataset_object_binding",
+    "article_dataset_mapping",
+    "reuse_learning_log"
+  ],
+  "template_pipeline_preview": [
+    "object_template",
+    "data_binding",
+    "rendered_object_instance",
+    "article_placement",
+    "post_insertion_audit",
+    "reuse_log"
+  ],
+  "ag10d_handoff": {
+    "module_id": "AG10C",
+    "title": "AG10C to AG10D Infographic Pipeline Planning Boundary",
+    "status": "ag10d_boundary_created_not_started",
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag10c": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "next_stage_id": "AG10D",
+    "next_stage_title": "Infographic Pipeline Planning",
+    "explicit_approval_required": true,
+    "ag10d_allowed_scope": [
+      "Define governed infographic pipeline.",
+      "Classify infographic families by structure and article purpose.",
+      "Define infographic content-block schema.",
+      "Define infographic template and rendered-instance doctrine.",
+      "Define infographic theme, ownership, credit and mobile rules.",
+      "Define infographic cost-control gates."
+    ],
+    "ag10d_blocked_scope": [
+      "No infographic generation.",
+      "No image or SVG asset creation.",
+      "No object insertion.",
+      "No article mutation.",
+      "No CSS/JS mutation.",
+      "No database/Supabase/backend/Auth activation.",
+      "No publishing operation."
+    ],
+    "data_visualization_chart_pipeline_planning_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag10c": false,
+    "selected_article_file_write_performed_in_ag10c": false,
+    "homepage_mutation_performed_in_ag10c": false,
+    "css_mutation_performed_in_ag10c": false,
+    "js_mutation_performed_in_ag10c": false,
+    "reference_insertion_performed_in_ag10c": false,
+    "reference_url_change_performed_in_ag10c": false,
+    "data_fetch_performed_in_ag10c": false,
+    "external_dataset_download_performed_in_ag10c": false,
+    "dataset_creation_performed_in_ag10c": false,
+    "dataset_mutation_performed_in_ag10c": false,
+    "chart_generation_performed_in_ag10c": false,
+    "graph_generation_performed_in_ag10c": false,
+    "data_visualization_render_performed_in_ag10c": false,
+    "chart_template_creation_performed_in_ag10c": false,
+    "rendered_object_creation_performed_in_ag10c": false,
+    "object_insertion_performed_in_ag10c": false,
+    "visual_generation_performed_in_ag10c": false,
+    "image_generation_performed_in_ag10c": false,
+    "image_insertion_performed_in_ag10c": false,
+    "infographic_generation_performed_in_ag10c": false,
+    "table_generation_performed_in_ag10c": false,
+    "figure_generation_performed_in_ag10c": false,
+    "map_generation_performed_in_ag10c": false,
+    "live_url_fetch_performed_in_ag10c": false,
+    "deployment_trigger_performed_in_ag10c": false,
+    "production_jsonl_append_performed_in_ag10c": false,
+    "database_write_performed_in_ag10c": false,
+    "supabase_write_performed_in_ag10c": false,
+    "backend_auth_supabase_activation_performed_in_ag10c": false,
+    "rollback_execution_performed_in_ag10c": false,
+    "public_publishing_operation_performed_in_ag10c": false
+  },
+  "data_visualization_chart_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10c": false,
+  "selected_article_file_write_performed_in_ag10c": false,
+  "homepage_mutation_performed_in_ag10c": false,
+  "css_mutation_performed_in_ag10c": false,
+  "js_mutation_performed_in_ag10c": false,
+  "reference_insertion_performed_in_ag10c": false,
+  "reference_url_change_performed_in_ag10c": false,
+  "data_fetch_performed_in_ag10c": false,
+  "external_dataset_download_performed_in_ag10c": false,
+  "dataset_creation_performed_in_ag10c": false,
+  "dataset_mutation_performed_in_ag10c": false,
+  "chart_generation_performed_in_ag10c": false,
+  "graph_generation_performed_in_ag10c": false,
+  "data_visualization_render_performed_in_ag10c": false,
+  "chart_template_creation_performed_in_ag10c": false,
+  "rendered_object_creation_performed_in_ag10c": false,
+  "object_insertion_performed_in_ag10c": false,
+  "visual_generation_performed_in_ag10c": false,
+  "image_generation_performed_in_ag10c": false,
+  "image_insertion_performed_in_ag10c": false,
+  "infographic_generation_performed_in_ag10c": false,
+  "table_generation_performed_in_ag10c": false,
+  "figure_generation_performed_in_ag10c": false,
+  "map_generation_performed_in_ag10c": false,
+  "live_url_fetch_performed_in_ag10c": false,
+  "deployment_trigger_performed_in_ag10c": false,
+  "production_jsonl_append_performed_in_ag10c": false,
+  "database_write_performed_in_ag10c": false,
+  "supabase_write_performed_in_ag10c": false,
+  "backend_auth_supabase_activation_performed_in_ag10c": false,
+  "rollback_execution_performed_in_ag10c": false,
+  "public_publishing_operation_performed_in_ag10c": false
+}
