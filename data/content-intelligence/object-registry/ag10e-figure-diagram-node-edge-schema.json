@@ -1,0 +1,145 @@
+{
+  "module_id": "AG10E",
+  "title": "Figure and Diagram Node Edge Schema",
+  "status": "figure_diagram_node_edge_schema_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10e": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "schema_components": [
+    {
+      "component_type": "node",
+      "required_fields": [
+        "node_id",
+        "label",
+        "node_type",
+        "short_description"
+      ],
+      "optional_fields": [
+        "level",
+        "group",
+        "icon_role",
+        "source_note"
+      ]
+    },
+    {
+      "component_type": "edge",
+      "required_fields": [
+        "edge_id",
+        "from_node_id",
+        "to_node_id",
+        "relationship_type",
+        "direction"
+      ],
+      "optional_fields": [
+        "edge_label",
+        "condition",
+        "weight_or_priority",
+        "source_note"
+      ]
+    },
+    {
+      "component_type": "swimlane",
+      "required_fields": [
+        "lane_id",
+        "lane_label",
+        "assigned_nodes"
+      ],
+      "optional_fields": [
+        "actor_role",
+        "stage_group",
+        "responsibility_note"
+      ]
+    },
+    {
+      "component_type": "axis",
+      "required_fields": [
+        "axis_id",
+        "axis_label",
+        "axis_meaning"
+      ],
+      "optional_fields": [
+        "scale_min",
+        "scale_max",
+        "quadrant_labels"
+      ]
+    },
+    {
+      "component_type": "annotation",
+      "required_fields": [
+        "annotation_id",
+        "target_id",
+        "annotation_text"
+      ],
+      "optional_fields": [
+        "annotation_type",
+        "priority",
+        "source_note"
+      ]
+    },
+    {
+      "component_type": "legend",
+      "required_fields": [
+        "legend_id",
+        "legend_items"
+      ],
+      "optional_fields": [
+        "color_role_mapping",
+        "symbol_mapping"
+      ]
+    },
+    {
+      "component_type": "fallback_summary",
+      "required_fields": [
+        "summary_text",
+        "main_insight"
+      ],
+      "optional_fields": [
+        "mobile_version_note",
+        "accessibility_note"
+      ]
+    }
+  ],
+  "validation_rules": [
+    "Every node must have a short readable label.",
+    "Every edge must have direction or relationship logic.",
+    "Decision flows must identify decision points separately from action nodes.",
+    "Hierarchy diagrams must not imply authority where the relation is only functional.",
+    "Logic trees must avoid unsupported causality.",
+    "Mobile fallback summary is mandatory for dense diagrams.",
+    "Caption and credit must be present before future rendering."
+  ],
+  "figure_diagram_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10e": false,
+  "selected_article_file_write_performed_in_ag10e": false,
+  "homepage_mutation_performed_in_ag10e": false,
+  "css_mutation_performed_in_ag10e": false,
+  "js_mutation_performed_in_ag10e": false,
+  "reference_insertion_performed_in_ag10e": false,
+  "reference_url_change_performed_in_ag10e": false,
+  "data_fetch_performed_in_ag10e": false,
+  "dataset_creation_performed_in_ag10e": false,
+  "figure_generation_performed_in_ag10e": false,
+  "diagram_generation_performed_in_ag10e": false,
+  "figure_render_performed_in_ag10e": false,
+  "diagram_render_performed_in_ag10e": false,
+  "figure_template_creation_performed_in_ag10e": false,
+  "diagram_template_creation_performed_in_ag10e": false,
+  "rendered_figure_diagram_creation_performed_in_ag10e": false,
+  "svg_asset_creation_performed_in_ag10e": false,
+  "image_asset_creation_performed_in_ag10e": false,
+  "object_insertion_performed_in_ag10e": false,
+  "visual_generation_performed_in_ag10e": false,
+  "image_generation_performed_in_ag10e": false,
+  "chart_generation_performed_in_ag10e": false,
+  "infographic_generation_performed_in_ag10e": false,
+  "table_generation_performed_in_ag10e": false,
+  "map_generation_performed_in_ag10e": false,
+  "live_url_fetch_performed_in_ag10e": false,
+  "deployment_trigger_performed_in_ag10e": false,
+  "production_jsonl_append_performed_in_ag10e": false,
+  "database_write_performed_in_ag10e": false,
+  "supabase_write_performed_in_ag10e": false,
+  "backend_auth_supabase_activation_performed_in_ag10e": false,
+  "rollback_execution_performed_in_ag10e": false,
+  "public_publishing_operation_performed_in_ag10e": false
+}

@@ -1,0 +1,276 @@
+{
+  "module_id": "AG10E",
+  "title": "Figure and Diagram Family Structure Registry",
+  "status": "figure_diagram_family_structure_registry_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10e": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "source_figure_diagram_object_count": 18,
+  "figure_diagram_families": [
+    {
+      "family_id": "AG10E-FIG-CONCEPT",
+      "family_name": "Concept and Framework Diagrams",
+      "figure_diagram_types": [
+        "concept_diagram",
+        "framework_diagram",
+        "simplified_model_diagram",
+        "explanatory_diagram"
+      ],
+      "best_for": [
+        "abstract concept explanation",
+        "reader mental model",
+        "framework summary",
+        "structured interpretation"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "core_concept",
+        "nodes",
+        "relationships",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "concept is too vague",
+        "diagram repeats prose without added clarity",
+        "too many labels for mobile"
+      ]
+    },
+    {
+      "family_id": "AG10E-FIG-SYSTEM",
+      "family_name": "System and Architecture Diagrams",
+      "figure_diagram_types": [
+        "architecture_diagram",
+        "system_diagram",
+        "schematic_figure"
+      ],
+      "best_for": [
+        "platform architecture",
+        "process architecture",
+        "component relationship",
+        "technical or institutional system"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "components",
+        "interfaces_or_links",
+        "flow_direction",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "system relationship is not verified",
+        "diagram requires technical precision not available",
+        "too many layers"
+      ]
+    },
+    {
+      "family_id": "AG10E-FIG-GOVERNANCE",
+      "family_name": "Governance, Hierarchy and Org Diagrams",
+      "figure_diagram_types": [
+        "governance_flow_diagram",
+        "hierarchy_org_diagram"
+      ],
+      "best_for": [
+        "institutional hierarchy",
+        "governance chain",
+        "authority flow",
+        "approval path"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "levels",
+        "roles_or_entities",
+        "relationship_labels",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "roles are not confirmed",
+        "hierarchy may change frequently",
+        "sensitive internal structure not approved"
+      ]
+    },
+    {
+      "family_id": "AG10E-FIG-FLOW",
+      "family_name": "Process, Decision and Logic Diagrams",
+      "figure_diagram_types": [
+        "decision_flow",
+        "logic_tree",
+        "process_figure",
+        "swimlane_flow"
+      ],
+      "best_for": [
+        "decision logic",
+        "workflow route",
+        "cross-actor process",
+        "conditional steps"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "nodes_or_steps",
+        "edges",
+        "decision_points",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "logic is speculative",
+        "too many branches",
+        "flow becomes unreadable on mobile"
+      ]
+    },
+    {
+      "family_id": "AG10E-FIG-RELATIONSHIP",
+      "family_name": "Relationship and Network Diagrams",
+      "figure_diagram_types": [
+        "network_diagram",
+        "venn_diagram"
+      ],
+      "best_for": [
+        "relationship mapping",
+        "overlap explanation",
+        "stakeholder network",
+        "concept intersection"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "entities_or_sets",
+        "relationships_or_intersections",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "relationships are unverified",
+        "overlap is subjective without explanation",
+        "network density is high"
+      ]
+    },
+    {
+      "family_id": "AG10E-FIG-MATRIX",
+      "family_name": "Matrix and Quadrant Figures",
+      "figure_diagram_types": [
+        "matrix_diagram",
+        "quadrant_figure"
+      ],
+      "best_for": [
+        "classification",
+        "priority mapping",
+        "risk/opportunity framing",
+        "two-axis positioning"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "x_axis",
+        "y_axis",
+        "items_or_positions",
+        "interpretation_note",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "axis logic is weak",
+        "positions are not evidence-backed",
+        "too many points"
+      ]
+    },
+    {
+      "family_id": "AG10E-FIG-ANNOTATED",
+      "family_name": "Annotated Figures",
+      "figure_diagram_types": [
+        "annotated_figure"
+      ],
+      "best_for": [
+        "explain parts of a visual",
+        "highlight key features",
+        "reader guidance"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "base_visual_reference",
+        "annotations",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "base visual rights unclear",
+        "annotations clutter the visual",
+        "mobile labels are unreadable"
+      ]
+    }
+  ],
+  "universal_figure_diagram_schema": {
+    "required_metadata": [
+      "figure_diagram_type",
+      "article_id",
+      "object_template_id",
+      "source_or_logic_record",
+      "rights_controller",
+      "credit_display",
+      "caption",
+      "alt_text",
+      "mobile_fallback_text",
+      "layout_zone",
+      "theme_variant",
+      "reuse_eligibility_status"
+    ],
+    "required_structure_fields": [
+      "title",
+      "core_message",
+      "nodes_or_components",
+      "relationships_or_edges",
+      "visual_structure",
+      "source_or_logic_note",
+      "editorial_purpose"
+    ],
+    "optional_structure_fields": [
+      "swimlanes",
+      "levels",
+      "axis_labels",
+      "decision_points",
+      "annotations",
+      "icons",
+      "legend",
+      "grouping",
+      "sequence_order",
+      "fallback_summary"
+    ]
+  },
+  "no_figure_generation_in_ag10e": true,
+  "no_diagram_generation_in_ag10e": true,
+  "no_rendering_in_ag10e": true,
+  "figure_diagram_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10e": false,
+  "selected_article_file_write_performed_in_ag10e": false,
+  "homepage_mutation_performed_in_ag10e": false,
+  "css_mutation_performed_in_ag10e": false,
+  "js_mutation_performed_in_ag10e": false,
+  "reference_insertion_performed_in_ag10e": false,
+  "reference_url_change_performed_in_ag10e": false,
+  "data_fetch_performed_in_ag10e": false,
+  "dataset_creation_performed_in_ag10e": false,
+  "figure_generation_performed_in_ag10e": false,
+  "diagram_generation_performed_in_ag10e": false,
+  "figure_render_performed_in_ag10e": false,
+  "diagram_render_performed_in_ag10e": false,
+  "figure_template_creation_performed_in_ag10e": false,
+  "diagram_template_creation_performed_in_ag10e": false,
+  "rendered_figure_diagram_creation_performed_in_ag10e": false,
+  "svg_asset_creation_performed_in_ag10e": false,
+  "image_asset_creation_performed_in_ag10e": false,
+  "object_insertion_performed_in_ag10e": false,
+  "visual_generation_performed_in_ag10e": false,
+  "image_generation_performed_in_ag10e": false,
+  "chart_generation_performed_in_ag10e": false,
+  "infographic_generation_performed_in_ag10e": false,
+  "table_generation_performed_in_ag10e": false,
+  "map_generation_performed_in_ag10e": false,
+  "live_url_fetch_performed_in_ag10e": false,
+  "deployment_trigger_performed_in_ag10e": false,
+  "production_jsonl_append_performed_in_ag10e": false,
+  "database_write_performed_in_ag10e": false,
+  "supabase_write_performed_in_ag10e": false,
+  "backend_auth_supabase_activation_performed_in_ag10e": false,
+  "rollback_execution_performed_in_ag10e": false,
+  "public_publishing_operation_performed_in_ag10e": false
+}
