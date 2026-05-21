@@ -1,0 +1,91 @@
+{
+  "module_id": "AG10H",
+  "title": "Image Generation Gate Readiness",
+  "status": "image_generation_gate_readiness_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10h": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "source_gate_file": "data/content-intelligence/quality-registry/ag10g-new-aspect-inclusion-gate.json",
+  "gate_questions_carried_forward": [
+    {
+      "gate_id": "VISITOR-VALUE",
+      "question": "Will this improve what a visitor sees?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless visitor-facing value is established."
+    },
+    {
+      "gate_id": "TRUST-VALUE",
+      "question": "Will this make articles more trustworthy?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless trust, evidence, source, credit or clarity improves."
+    },
+    {
+      "gate_id": "MEMORY-VALUE",
+      "question": "Will this make Drishvara memorable?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it strengthens brand recall or reading experience."
+    },
+    {
+      "gate_id": "COST-VALUE",
+      "question": "Will this reduce future cost?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it supports reuse, templates, automation or reduced repeated generation."
+    },
+    {
+      "gate_id": "INTELLIGENCE-VALUE",
+      "question": "Will this create reusable intelligence?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it contributes reusable data, templates, logic, inference or governance memory."
+    }
+  ],
+  "ag10h_gate_assessment": {
+    "generated_image_editorial_visual_pipeline_planning": {
+      "visitor_value": "yes",
+      "trust_value": "yes_with_conditions",
+      "memory_value": "yes",
+      "cost_value": "yes_with_conditions",
+      "intelligence_value": "yes",
+      "inclusion_decision": "allowed_for_planning_only",
+      "condition_notes": [
+        "Trust value depends on prompt provenance, rights metadata, source/reference separation, visible credit and avoiding misleading visuals before any future generation.",
+        "Cost value depends on reusable concept templates, prompt templates, rendered-instance records and reuse checks before new generation."
+      ]
+    }
+  },
+  "pass_rule": "Generated image/editorial visual features may proceed only when all five New Aspect Inclusion Gate questions are answered yes or yes_with_conditions.",
+  "no_image_generation_in_ag10h": true,
+  "no_external_image_api_call_in_ag10h": true,
+  "generated_image_editorial_visual_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10h": false,
+  "selected_article_file_write_performed_in_ag10h": false,
+  "homepage_mutation_performed_in_ag10h": false,
+  "css_mutation_performed_in_ag10h": false,
+  "js_mutation_performed_in_ag10h": false,
+  "reference_insertion_performed_in_ag10h": false,
+  "reference_url_change_performed_in_ag10h": false,
+  "image_generation_performed_in_ag10h": false,
+  "external_image_api_call_performed_in_ag10h": false,
+  "image_asset_creation_performed_in_ag10h": false,
+  "rendered_image_creation_performed_in_ag10h": false,
+  "visual_generation_performed_in_ag10h": false,
+  "prompt_finalisation_performed_in_ag10h": false,
+  "candidate_image_selection_performed_in_ag10h": false,
+  "image_concept_template_creation_performed_in_ag10h": false,
+  "object_insertion_performed_in_ag10h": false,
+  "chart_generation_performed_in_ag10h": false,
+  "infographic_generation_performed_in_ag10h": false,
+  "table_generation_performed_in_ag10h": false,
+  "figure_generation_performed_in_ag10h": false,
+  "diagram_generation_performed_in_ag10h": false,
+  "map_generation_performed_in_ag10h": false,
+  "data_fetch_performed_in_ag10h": false,
+  "dataset_creation_performed_in_ag10h": false,
+  "live_url_fetch_performed_in_ag10h": false,
+  "deployment_trigger_performed_in_ag10h": false,
+  "production_jsonl_append_performed_in_ag10h": false,
+  "database_write_performed_in_ag10h": false,
+  "supabase_write_performed_in_ag10h": false,
+  "backend_auth_supabase_activation_performed_in_ag10h": false,
+  "rollback_execution_performed_in_ag10h": false,
+  "public_publishing_operation_performed_in_ag10h": false
+}

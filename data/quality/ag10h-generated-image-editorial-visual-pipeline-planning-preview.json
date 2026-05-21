@@ -1,0 +1,458 @@
+{
+  "module_id": "AG10H",
+  "preview_only": true,
+  "status": "generated_image_editorial_visual_pipeline_planning_created_not_executed",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag10h": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "source_image_object_count": 11,
+    "image_family_count": 6,
+    "prompt_schema_component_count": 8,
+    "gate_question_count": 5,
+    "template_pipeline_steps": 6,
+    "next_stage_id": "AG10I",
+    "next_stage_title": "Generated Image Candidate Selection and Prompt Finalisation",
+    "next_stage_requires_explicit_approval": true,
+    "generated_image_editorial_visual_pipeline_planning_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag10h": false,
+    "selected_article_file_write_performed_in_ag10h": false,
+    "homepage_mutation_performed_in_ag10h": false,
+    "css_mutation_performed_in_ag10h": false,
+    "js_mutation_performed_in_ag10h": false,
+    "reference_insertion_performed_in_ag10h": false,
+    "reference_url_change_performed_in_ag10h": false,
+    "image_generation_performed_in_ag10h": false,
+    "external_image_api_call_performed_in_ag10h": false,
+    "image_asset_creation_performed_in_ag10h": false,
+    "rendered_image_creation_performed_in_ag10h": false,
+    "visual_generation_performed_in_ag10h": false,
+    "prompt_finalisation_performed_in_ag10h": false,
+    "candidate_image_selection_performed_in_ag10h": false,
+    "image_concept_template_creation_performed_in_ag10h": false,
+    "object_insertion_performed_in_ag10h": false,
+    "chart_generation_performed_in_ag10h": false,
+    "infographic_generation_performed_in_ag10h": false,
+    "table_generation_performed_in_ag10h": false,
+    "figure_generation_performed_in_ag10h": false,
+    "diagram_generation_performed_in_ag10h": false,
+    "map_generation_performed_in_ag10h": false,
+    "data_fetch_performed_in_ag10h": false,
+    "dataset_creation_performed_in_ag10h": false,
+    "live_url_fetch_performed_in_ag10h": false,
+    "deployment_trigger_performed_in_ag10h": false,
+    "production_jsonl_append_performed_in_ag10h": false,
+    "database_write_performed_in_ag10h": false,
+    "supabase_write_performed_in_ag10h": false,
+    "backend_auth_supabase_activation_performed_in_ag10h": false,
+    "rollback_execution_performed_in_ag10h": false,
+    "public_publishing_operation_performed_in_ag10h": false
+  },
+  "gate_preview": [
+    {
+      "gate_id": "VISITOR-VALUE",
+      "question": "Will this improve what a visitor sees?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless visitor-facing value is established."
+    },
+    {
+      "gate_id": "TRUST-VALUE",
+      "question": "Will this make articles more trustworthy?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless trust, evidence, source, credit or clarity improves."
+    },
+    {
+      "gate_id": "MEMORY-VALUE",
+      "question": "Will this make Drishvara memorable?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it strengthens brand recall or reading experience."
+    },
+    {
+      "gate_id": "COST-VALUE",
+      "question": "Will this reduce future cost?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it supports reuse, templates, automation or reduced repeated generation."
+    },
+    {
+      "gate_id": "INTELLIGENCE-VALUE",
+      "question": "Will this create reusable intelligence?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it contributes reusable data, templates, logic, inference or governance memory."
+    }
+  ],
+  "image_families_preview": [
+    {
+      "family_id": "AG10H-IMG-HERO",
+      "family_name": "Hero and Cover Editorial Visuals",
+      "image_types": [
+        "hero_image",
+        "data_backed_visual_cover",
+        "single_image_editorial_visual"
+      ],
+      "best_for": [
+        "article identity",
+        "first impression",
+        "category tone",
+        "visual memorability"
+      ],
+      "minimum_concept_inputs": [
+        "article_type",
+        "core_theme",
+        "visual_metaphor",
+        "aspect_ratio",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "visual is decorative only",
+        "concept is misleading",
+        "asset duplicates existing visual without added value"
+      ]
+    },
+    {
+      "family_id": "AG10H-IMG-SECTION",
+      "family_name": "Section Support and Editorial Illustrations",
+      "image_types": [
+        "section_support_image",
+        "editorial_illustration"
+      ],
+      "best_for": [
+        "section transition",
+        "concept support",
+        "article rhythm",
+        "reader retention"
+      ],
+      "minimum_concept_inputs": [
+        "section_context",
+        "visual_role",
+        "composition_hint",
+        "caption",
+        "alt_text"
+      ],
+      "avoid_when": [
+        "breaks article flow",
+        "too many visuals in article",
+        "adds cost without comprehension value"
+      ]
+    },
+    {
+      "family_id": "AG10H-IMG-CONCEPTUAL",
+      "family_name": "Conceptual and Stylized Generated Visuals",
+      "image_types": [
+        "conceptual_illustration",
+        "stylized_generated_image"
+      ],
+      "best_for": [
+        "abstract idea",
+        "reflective article",
+        "symbolic expression",
+        "brand recall"
+      ],
+      "minimum_concept_inputs": [
+        "concept",
+        "symbolic_elements",
+        "style_constraints",
+        "theme_alignment",
+        "negative_constraints"
+      ],
+      "avoid_when": [
+        "style imitation risk",
+        "unclear symbolism",
+        "visual may look generic or unrelated"
+      ]
+    },
+    {
+      "family_id": "AG10H-IMG-PHOTO",
+      "family_name": "Photo-style Generated Visuals",
+      "image_types": [
+        "photo_style_generated_image"
+      ],
+      "best_for": [
+        "realistic scene support",
+        "human-scale context",
+        "policy/service situation illustration"
+      ],
+      "minimum_concept_inputs": [
+        "scene_description",
+        "setting",
+        "subject_type",
+        "realism_constraints",
+        "rights_safety_note"
+      ],
+      "avoid_when": [
+        "could imply real event/person",
+        "sensitive identity risk",
+        "requires documentary accuracy"
+      ]
+    },
+    {
+      "family_id": "AG10H-IMG-ANNOTATED",
+      "family_name": "Annotated and Quote Hybrid Visuals",
+      "image_types": [
+        "annotated_image",
+        "quote_image_hybrid"
+      ],
+      "best_for": [
+        "explain visual element",
+        "highlight insight",
+        "brand quote card",
+        "reader takeaway"
+      ],
+      "minimum_concept_inputs": [
+        "base_visual_or_concept",
+        "annotation_text",
+        "quote_or_takeaway",
+        "text_hierarchy",
+        "credit"
+      ],
+      "avoid_when": [
+        "text becomes unreadable",
+        "quote source unclear",
+        "annotation clutters visual"
+      ]
+    },
+    {
+      "family_id": "AG10H-IMG-MULTIPANEL",
+      "family_name": "Multi-panel Editorial Visuals",
+      "image_types": [
+        "multi_panel_editorial_visual"
+      ],
+      "best_for": [
+        "story sequence",
+        "before-after logic",
+        "multi-step editorial scene",
+        "visual explainer"
+      ],
+      "minimum_concept_inputs": [
+        "panel_count",
+        "panel_sequence",
+        "visual_storyline",
+        "caption",
+        "mobile_fallback_text"
+      ],
+      "avoid_when": [
+        "too dense for mobile",
+        "better suited as infographic",
+        "requires excessive generation cost"
+      ]
+    }
+  ],
+  "prompt_schema_preview": [
+    {
+      "component_type": "concept_record",
+      "required_fields": [
+        "concept_id",
+        "article_id",
+        "image_type",
+        "editorial_purpose",
+        "core_message"
+      ],
+      "optional_fields": [
+        "article_section",
+        "category",
+        "reader_effect",
+        "reuse_note"
+      ]
+    },
+    {
+      "component_type": "prompt_record",
+      "required_fields": [
+        "prompt_id",
+        "concept_id",
+        "prompt_intent",
+        "composition_guidance",
+        "style_constraints"
+      ],
+      "optional_fields": [
+        "negative_prompt_or_constraints",
+        "aspect_ratio",
+        "dimension_target",
+        "seed_or_version_note"
+      ]
+    },
+    {
+      "component_type": "source_reference_record",
+      "required_fields": [
+        "reference_policy",
+        "external_reference_used",
+        "source_or_inspiration_note"
+      ],
+      "optional_fields": [
+        "source_url_or_record_id",
+        "licence_note",
+        "attribution_requirement"
+      ]
+    },
+    {
+      "component_type": "rights_provenance_record",
+      "required_fields": [
+        "rights_controller",
+        "ownership_status",
+        "generation_method",
+        "commercial_use_note"
+      ],
+      "optional_fields": [
+        "tool_terms_note",
+        "human_editorial_contribution",
+        "third_party_risk_note"
+      ]
+    },
+    {
+      "component_type": "safety_risk_record",
+      "required_fields": [
+        "human_likeness_risk",
+        "brand_logo_risk",
+        "artist_style_risk",
+        "misleading_visual_risk"
+      ],
+      "optional_fields": [
+        "mitigation_note",
+        "review_required"
+      ]
+    },
+    {
+      "component_type": "rendered_visual_record",
+      "required_fields": [
+        "rendered_visual_id",
+        "concept_template_id",
+        "asset_path",
+        "asset_hash"
+      ],
+      "optional_fields": [
+        "dimensions",
+        "format",
+        "version",
+        "cost_marker"
+      ]
+    },
+    {
+      "component_type": "accessibility_record",
+      "required_fields": [
+        "alt_text",
+        "caption",
+        "mobile_fallback_text"
+      ],
+      "optional_fields": [
+        "long_description",
+        "screen_reader_note"
+      ]
+    },
+    {
+      "component_type": "reuse_record",
+      "required_fields": [
+        "reuse_status",
+        "reuse_scope",
+        "context_validity_note"
+      ],
+      "optional_fields": [
+        "prior_article_ids",
+        "expiry_or_refresh_note",
+        "do_not_reuse_reason"
+      ]
+    }
+  ],
+  "template_pipeline_preview": [
+    "image_concept_template",
+    "prompt_or_concept_binding",
+    "rendered_visual_instance",
+    "article_placement",
+    "post_insertion_layout_audit",
+    "reuse_log"
+  ],
+  "ag10i_handoff": {
+    "module_id": "AG10H",
+    "title": "AG10H to AG10I Generated Image Candidate Selection and Prompt Finalisation Boundary",
+    "status": "ag10i_boundary_created_not_started",
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag10h": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "next_stage_id": "AG10I",
+    "next_stage_title": "Generated Image Candidate Selection and Prompt Finalisation",
+    "explicit_approval_required": true,
+    "ag10i_allowed_scope": [
+      "Select image/editorial visual candidate family for a controlled target article or article type.",
+      "Apply New Aspect Inclusion Gate to the selected candidate.",
+      "Prepare reusable concept candidate record.",
+      "Prepare draft prompt/concept record.",
+      "Prepare source/reference and rights/provenance checks.",
+      "Prepare cost and reuse decision before any generation."
+    ],
+    "ag10i_blocked_scope": [
+      "No image generation.",
+      "No external image API call.",
+      "No image asset creation.",
+      "No article mutation.",
+      "No object insertion.",
+      "No CSS/JS mutation.",
+      "No database/Supabase/backend/Auth activation.",
+      "No publishing operation."
+    ],
+    "generated_image_editorial_visual_pipeline_planning_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag10h": false,
+    "selected_article_file_write_performed_in_ag10h": false,
+    "homepage_mutation_performed_in_ag10h": false,
+    "css_mutation_performed_in_ag10h": false,
+    "js_mutation_performed_in_ag10h": false,
+    "reference_insertion_performed_in_ag10h": false,
+    "reference_url_change_performed_in_ag10h": false,
+    "image_generation_performed_in_ag10h": false,
+    "external_image_api_call_performed_in_ag10h": false,
+    "image_asset_creation_performed_in_ag10h": false,
+    "rendered_image_creation_performed_in_ag10h": false,
+    "visual_generation_performed_in_ag10h": false,
+    "prompt_finalisation_performed_in_ag10h": false,
+    "candidate_image_selection_performed_in_ag10h": false,
+    "image_concept_template_creation_performed_in_ag10h": false,
+    "object_insertion_performed_in_ag10h": false,
+    "chart_generation_performed_in_ag10h": false,
+    "infographic_generation_performed_in_ag10h": false,
+    "table_generation_performed_in_ag10h": false,
+    "figure_generation_performed_in_ag10h": false,
+    "diagram_generation_performed_in_ag10h": false,
+    "map_generation_performed_in_ag10h": false,
+    "data_fetch_performed_in_ag10h": false,
+    "dataset_creation_performed_in_ag10h": false,
+    "live_url_fetch_performed_in_ag10h": false,
+    "deployment_trigger_performed_in_ag10h": false,
+    "production_jsonl_append_performed_in_ag10h": false,
+    "database_write_performed_in_ag10h": false,
+    "supabase_write_performed_in_ag10h": false,
+    "backend_auth_supabase_activation_performed_in_ag10h": false,
+    "rollback_execution_performed_in_ag10h": false,
+    "public_publishing_operation_performed_in_ag10h": false
+  },
+  "generated_image_editorial_visual_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10h": false,
+  "selected_article_file_write_performed_in_ag10h": false,
+  "homepage_mutation_performed_in_ag10h": false,
+  "css_mutation_performed_in_ag10h": false,
+  "js_mutation_performed_in_ag10h": false,
+  "reference_insertion_performed_in_ag10h": false,
+  "reference_url_change_performed_in_ag10h": false,
+  "image_generation_performed_in_ag10h": false,
+  "external_image_api_call_performed_in_ag10h": false,
+  "image_asset_creation_performed_in_ag10h": false,
+  "rendered_image_creation_performed_in_ag10h": false,
+  "visual_generation_performed_in_ag10h": false,
+  "prompt_finalisation_performed_in_ag10h": false,
+  "candidate_image_selection_performed_in_ag10h": false,
+  "image_concept_template_creation_performed_in_ag10h": false,
+  "object_insertion_performed_in_ag10h": false,
+  "chart_generation_performed_in_ag10h": false,
+  "infographic_generation_performed_in_ag10h": false,
+  "table_generation_performed_in_ag10h": false,
+  "figure_generation_performed_in_ag10h": false,
+  "diagram_generation_performed_in_ag10h": false,
+  "map_generation_performed_in_ag10h": false,
+  "data_fetch_performed_in_ag10h": false,
+  "dataset_creation_performed_in_ag10h": false,
+  "live_url_fetch_performed_in_ag10h": false,
+  "deployment_trigger_performed_in_ag10h": false,
+  "production_jsonl_append_performed_in_ag10h": false,
+  "database_write_performed_in_ag10h": false,
+  "supabase_write_performed_in_ag10h": false,
+  "backend_auth_supabase_activation_performed_in_ag10h": false,
+  "rollback_execution_performed_in_ag10h": false,
+  "public_publishing_operation_performed_in_ag10h": false
+}

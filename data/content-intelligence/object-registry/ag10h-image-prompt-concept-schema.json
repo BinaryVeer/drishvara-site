@@ -1,0 +1,165 @@
+{
+  "module_id": "AG10H",
+  "title": "Image Prompt and Concept Schema",
+  "status": "image_prompt_concept_schema_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10h": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "schema_components": [
+    {
+      "component_type": "concept_record",
+      "required_fields": [
+        "concept_id",
+        "article_id",
+        "image_type",
+        "editorial_purpose",
+        "core_message"
+      ],
+      "optional_fields": [
+        "article_section",
+        "category",
+        "reader_effect",
+        "reuse_note"
+      ]
+    },
+    {
+      "component_type": "prompt_record",
+      "required_fields": [
+        "prompt_id",
+        "concept_id",
+        "prompt_intent",
+        "composition_guidance",
+        "style_constraints"
+      ],
+      "optional_fields": [
+        "negative_prompt_or_constraints",
+        "aspect_ratio",
+        "dimension_target",
+        "seed_or_version_note"
+      ]
+    },
+    {
+      "component_type": "source_reference_record",
+      "required_fields": [
+        "reference_policy",
+        "external_reference_used",
+        "source_or_inspiration_note"
+      ],
+      "optional_fields": [
+        "source_url_or_record_id",
+        "licence_note",
+        "attribution_requirement"
+      ]
+    },
+    {
+      "component_type": "rights_provenance_record",
+      "required_fields": [
+        "rights_controller",
+        "ownership_status",
+        "generation_method",
+        "commercial_use_note"
+      ],
+      "optional_fields": [
+        "tool_terms_note",
+        "human_editorial_contribution",
+        "third_party_risk_note"
+      ]
+    },
+    {
+      "component_type": "safety_risk_record",
+      "required_fields": [
+        "human_likeness_risk",
+        "brand_logo_risk",
+        "artist_style_risk",
+        "misleading_visual_risk"
+      ],
+      "optional_fields": [
+        "mitigation_note",
+        "review_required"
+      ]
+    },
+    {
+      "component_type": "rendered_visual_record",
+      "required_fields": [
+        "rendered_visual_id",
+        "concept_template_id",
+        "asset_path",
+        "asset_hash"
+      ],
+      "optional_fields": [
+        "dimensions",
+        "format",
+        "version",
+        "cost_marker"
+      ]
+    },
+    {
+      "component_type": "accessibility_record",
+      "required_fields": [
+        "alt_text",
+        "caption",
+        "mobile_fallback_text"
+      ],
+      "optional_fields": [
+        "long_description",
+        "screen_reader_note"
+      ]
+    },
+    {
+      "component_type": "reuse_record",
+      "required_fields": [
+        "reuse_status",
+        "reuse_scope",
+        "context_validity_note"
+      ],
+      "optional_fields": [
+        "prior_article_ids",
+        "expiry_or_refresh_note",
+        "do_not_reuse_reason"
+      ]
+    }
+  ],
+  "validation_rules": [
+    "Every image concept must pass the New Aspect Inclusion Gate before future generation.",
+    "Prompt/concept records must separate editorial intent from rendered output.",
+    "External references must not be copied without rights clearance.",
+    "Avoid identifiable real-person likeness unless rights and consent are confirmed.",
+    "Avoid third-party brand/logo usage unless legally allowed.",
+    "Avoid living-artist style imitation or protected style risk.",
+    "Every rendered visual must have caption, alt text, credit, hash and reuse status before insertion.",
+    "No prompt is finalised in AG10H."
+  ],
+  "generated_image_editorial_visual_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10h": false,
+  "selected_article_file_write_performed_in_ag10h": false,
+  "homepage_mutation_performed_in_ag10h": false,
+  "css_mutation_performed_in_ag10h": false,
+  "js_mutation_performed_in_ag10h": false,
+  "reference_insertion_performed_in_ag10h": false,
+  "reference_url_change_performed_in_ag10h": false,
+  "image_generation_performed_in_ag10h": false,
+  "external_image_api_call_performed_in_ag10h": false,
+  "image_asset_creation_performed_in_ag10h": false,
+  "rendered_image_creation_performed_in_ag10h": false,
+  "visual_generation_performed_in_ag10h": false,
+  "prompt_finalisation_performed_in_ag10h": false,
+  "candidate_image_selection_performed_in_ag10h": false,
+  "image_concept_template_creation_performed_in_ag10h": false,
+  "object_insertion_performed_in_ag10h": false,
+  "chart_generation_performed_in_ag10h": false,
+  "infographic_generation_performed_in_ag10h": false,
+  "table_generation_performed_in_ag10h": false,
+  "figure_generation_performed_in_ag10h": false,
+  "diagram_generation_performed_in_ag10h": false,
+  "map_generation_performed_in_ag10h": false,
+  "data_fetch_performed_in_ag10h": false,
+  "dataset_creation_performed_in_ag10h": false,
+  "live_url_fetch_performed_in_ag10h": false,
+  "deployment_trigger_performed_in_ag10h": false,
+  "production_jsonl_append_performed_in_ag10h": false,
+  "database_write_performed_in_ag10h": false,
+  "supabase_write_performed_in_ag10h": false,
+  "backend_auth_supabase_activation_performed_in_ag10h": false,
+  "rollback_execution_performed_in_ag10h": false,
+  "public_publishing_operation_performed_in_ag10h": false
+}
