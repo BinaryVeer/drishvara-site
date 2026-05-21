@@ -1,0 +1,150 @@
+{
+  "module_id": "AG10F",
+  "title": "Table Row Column Cell Schema",
+  "status": "table_row_column_cell_schema_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10f": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "schema_components": [
+    {
+      "component_type": "table",
+      "required_fields": [
+        "table_id",
+        "title",
+        "table_type",
+        "caption",
+        "credit"
+      ],
+      "optional_fields": [
+        "subtitle",
+        "source_note",
+        "footnotes",
+        "fallback_summary"
+      ]
+    },
+    {
+      "component_type": "column",
+      "required_fields": [
+        "column_id",
+        "column_label",
+        "data_type"
+      ],
+      "optional_fields": [
+        "unit",
+        "alignment",
+        "width_hint",
+        "mobile_priority",
+        "sort_enabled"
+      ]
+    },
+    {
+      "component_type": "row",
+      "required_fields": [
+        "row_id",
+        "row_label",
+        "cells"
+      ],
+      "optional_fields": [
+        "group",
+        "rank",
+        "highlight_status",
+        "source_note"
+      ]
+    },
+    {
+      "component_type": "cell",
+      "required_fields": [
+        "cell_id",
+        "column_id",
+        "row_id",
+        "value"
+      ],
+      "optional_fields": [
+        "display_value",
+        "unit",
+        "format",
+        "link_ref",
+        "confidence_note"
+      ]
+    },
+    {
+      "component_type": "footnote",
+      "required_fields": [
+        "footnote_id",
+        "marker",
+        "text"
+      ],
+      "optional_fields": [
+        "source_ref",
+        "applies_to_cell_or_column"
+      ]
+    },
+    {
+      "component_type": "responsive_wrapper",
+      "required_fields": [
+        "wrapper_id",
+        "overflow_strategy",
+        "mobile_fallback_text"
+      ],
+      "optional_fields": [
+        "stacked_view_rule",
+        "priority_columns",
+        "scroll_hint"
+      ]
+    },
+    {
+      "component_type": "accessibility_summary",
+      "required_fields": [
+        "summary_text",
+        "main_insight"
+      ],
+      "optional_fields": [
+        "screen_reader_note",
+        "mobile_version_note"
+      ]
+    }
+  ],
+  "validation_rules": [
+    "Every table must have a title, caption and credit.",
+    "Every column must have a stable label and data type.",
+    "Tables with more than four columns require responsive strategy.",
+    "Wide tables must not deform article shape or force uncontrolled horizontal overflow.",
+    "Numeric values must carry units where applicable.",
+    "Source note or internal logic note is mandatory for factual/data tables.",
+    "Mobile fallback summary is mandatory for dense tables.",
+    "Table must remain centrally aligned in vertical article flow unless a specific layout exception is approved."
+  ],
+  "table_structured_object_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10f": false,
+  "selected_article_file_write_performed_in_ag10f": false,
+  "homepage_mutation_performed_in_ag10f": false,
+  "css_mutation_performed_in_ag10f": false,
+  "js_mutation_performed_in_ag10f": false,
+  "reference_insertion_performed_in_ag10f": false,
+  "reference_url_change_performed_in_ag10f": false,
+  "data_fetch_performed_in_ag10f": false,
+  "dataset_creation_performed_in_ag10f": false,
+  "table_generation_performed_in_ag10f": false,
+  "structured_object_creation_performed_in_ag10f": false,
+  "table_render_performed_in_ag10f": false,
+  "table_template_creation_performed_in_ag10f": false,
+  "rendered_table_creation_performed_in_ag10f": false,
+  "html_table_asset_creation_performed_in_ag10f": false,
+  "csv_export_creation_performed_in_ag10f": false,
+  "object_insertion_performed_in_ag10f": false,
+  "visual_generation_performed_in_ag10f": false,
+  "image_generation_performed_in_ag10f": false,
+  "chart_generation_performed_in_ag10f": false,
+  "infographic_generation_performed_in_ag10f": false,
+  "figure_generation_performed_in_ag10f": false,
+  "diagram_generation_performed_in_ag10f": false,
+  "map_generation_performed_in_ag10f": false,
+  "live_url_fetch_performed_in_ag10f": false,
+  "deployment_trigger_performed_in_ag10f": false,
+  "production_jsonl_append_performed_in_ag10f": false,
+  "database_write_performed_in_ag10f": false,
+  "supabase_write_performed_in_ag10f": false,
+  "backend_auth_supabase_activation_performed_in_ag10f": false,
+  "rollback_execution_performed_in_ag10f": false,
+  "public_publishing_operation_performed_in_ag10f": false
+}

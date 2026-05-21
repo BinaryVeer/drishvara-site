@@ -1,0 +1,414 @@
+{
+  "module_id": "AG10F",
+  "preview_only": true,
+  "status": "table_structured_object_pipeline_planning_created_not_executed",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag10f": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "source_table_object_count": 13,
+    "table_family_count": 6,
+    "row_column_schema_component_count": 7,
+    "template_pipeline_steps": 6,
+    "next_stage_id": "AG10G",
+    "next_stage_title": "Map and Geographic Object Pipeline Planning",
+    "next_stage_requires_explicit_approval": true,
+    "table_structured_object_pipeline_planning_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag10f": false,
+    "selected_article_file_write_performed_in_ag10f": false,
+    "homepage_mutation_performed_in_ag10f": false,
+    "css_mutation_performed_in_ag10f": false,
+    "js_mutation_performed_in_ag10f": false,
+    "reference_insertion_performed_in_ag10f": false,
+    "reference_url_change_performed_in_ag10f": false,
+    "data_fetch_performed_in_ag10f": false,
+    "dataset_creation_performed_in_ag10f": false,
+    "table_generation_performed_in_ag10f": false,
+    "structured_object_creation_performed_in_ag10f": false,
+    "table_render_performed_in_ag10f": false,
+    "table_template_creation_performed_in_ag10f": false,
+    "rendered_table_creation_performed_in_ag10f": false,
+    "html_table_asset_creation_performed_in_ag10f": false,
+    "csv_export_creation_performed_in_ag10f": false,
+    "object_insertion_performed_in_ag10f": false,
+    "visual_generation_performed_in_ag10f": false,
+    "image_generation_performed_in_ag10f": false,
+    "chart_generation_performed_in_ag10f": false,
+    "infographic_generation_performed_in_ag10f": false,
+    "figure_generation_performed_in_ag10f": false,
+    "diagram_generation_performed_in_ag10f": false,
+    "map_generation_performed_in_ag10f": false,
+    "live_url_fetch_performed_in_ag10f": false,
+    "deployment_trigger_performed_in_ag10f": false,
+    "production_jsonl_append_performed_in_ag10f": false,
+    "database_write_performed_in_ag10f": false,
+    "supabase_write_performed_in_ag10f": false,
+    "backend_auth_supabase_activation_performed_in_ag10f": false,
+    "rollback_execution_performed_in_ag10f": false,
+    "public_publishing_operation_performed_in_ag10f": false
+  },
+  "table_families_preview": [
+    {
+      "family_id": "AG10F-TABLE-DATA",
+      "family_name": "Data, Facts and Summary Tables",
+      "table_types": [
+        "data_table",
+        "facts_table",
+        "summary_table"
+      ],
+      "best_for": [
+        "structured facts",
+        "indicator display",
+        "compact summary",
+        "evidence listing"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "columns",
+        "rows",
+        "source_note",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "values are unverified",
+        "too many columns for mobile",
+        "table repeats prose without added value"
+      ]
+    },
+    {
+      "family_id": "AG10F-TABLE-COMPARISON",
+      "family_name": "Comparison and Feature Matrix Tables",
+      "table_types": [
+        "comparison_table",
+        "feature_matrix",
+        "pros_cons_table"
+      ],
+      "best_for": [
+        "side-by-side comparison",
+        "feature comparison",
+        "advantages and limitations",
+        "option evaluation"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "comparison_axes",
+        "items",
+        "values_or_notes",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "items are not comparable",
+        "criteria are biased",
+        "table should be an infographic instead"
+      ]
+    },
+    {
+      "family_id": "AG10F-TABLE-RANKING-KPI",
+      "family_name": "Ranking, Score and KPI Tables",
+      "table_types": [
+        "ranking_table",
+        "score_table",
+        "kpi_summary_table"
+      ],
+      "best_for": [
+        "ranked indicators",
+        "score-based comparison",
+        "performance summary",
+        "dashboard-style table"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "rank_or_metric",
+        "value",
+        "unit",
+        "period",
+        "source_note"
+      ],
+      "avoid_when": [
+        "ranking logic is unclear",
+        "score calculation is not explained",
+        "periods are mixed"
+      ]
+    },
+    {
+      "family_id": "AG10F-TABLE-TIMELINE-POLICY",
+      "family_name": "Timeline and Policy Provision Tables",
+      "table_types": [
+        "timeline_table",
+        "policy_provision_table"
+      ],
+      "best_for": [
+        "dated events",
+        "policy clauses",
+        "implementation sequence",
+        "programme provisions"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "period_or_clause",
+        "description",
+        "status_or_note",
+        "source_note"
+      ],
+      "avoid_when": [
+        "dates are speculative",
+        "legal/policy text requires exact citation not summary",
+        "timeline is too long"
+      ]
+    },
+    {
+      "family_id": "AG10F-TABLE-RISK",
+      "family_name": "Risk Matrix Tables",
+      "table_types": [
+        "risk_matrix"
+      ],
+      "best_for": [
+        "risk-likelihood-impact framing",
+        "mitigation planning",
+        "priority classification"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "risk",
+        "likelihood",
+        "impact",
+        "mitigation_or_note",
+        "source_or_logic_note"
+      ],
+      "avoid_when": [
+        "risk scoring is unsupported",
+        "matrix implies certainty",
+        "sensitive operational risk not approved"
+      ]
+    },
+    {
+      "family_id": "AG10F-TABLE-GLOSSARY",
+      "family_name": "Glossary and Definition Tables",
+      "table_types": [
+        "glossary_table"
+      ],
+      "best_for": [
+        "terms",
+        "abbreviations",
+        "concept definitions",
+        "reader support"
+      ],
+      "minimum_structure_blocks": [
+        "title",
+        "term",
+        "definition",
+        "context_note"
+      ],
+      "avoid_when": [
+        "definitions are not stable",
+        "too many terms",
+        "glossary interrupts article flow"
+      ]
+    }
+  ],
+  "row_column_schema_preview": [
+    {
+      "component_type": "table",
+      "required_fields": [
+        "table_id",
+        "title",
+        "table_type",
+        "caption",
+        "credit"
+      ],
+      "optional_fields": [
+        "subtitle",
+        "source_note",
+        "footnotes",
+        "fallback_summary"
+      ]
+    },
+    {
+      "component_type": "column",
+      "required_fields": [
+        "column_id",
+        "column_label",
+        "data_type"
+      ],
+      "optional_fields": [
+        "unit",
+        "alignment",
+        "width_hint",
+        "mobile_priority",
+        "sort_enabled"
+      ]
+    },
+    {
+      "component_type": "row",
+      "required_fields": [
+        "row_id",
+        "row_label",
+        "cells"
+      ],
+      "optional_fields": [
+        "group",
+        "rank",
+        "highlight_status",
+        "source_note"
+      ]
+    },
+    {
+      "component_type": "cell",
+      "required_fields": [
+        "cell_id",
+        "column_id",
+        "row_id",
+        "value"
+      ],
+      "optional_fields": [
+        "display_value",
+        "unit",
+        "format",
+        "link_ref",
+        "confidence_note"
+      ]
+    },
+    {
+      "component_type": "footnote",
+      "required_fields": [
+        "footnote_id",
+        "marker",
+        "text"
+      ],
+      "optional_fields": [
+        "source_ref",
+        "applies_to_cell_or_column"
+      ]
+    },
+    {
+      "component_type": "responsive_wrapper",
+      "required_fields": [
+        "wrapper_id",
+        "overflow_strategy",
+        "mobile_fallback_text"
+      ],
+      "optional_fields": [
+        "stacked_view_rule",
+        "priority_columns",
+        "scroll_hint"
+      ]
+    },
+    {
+      "component_type": "accessibility_summary",
+      "required_fields": [
+        "summary_text",
+        "main_insight"
+      ],
+      "optional_fields": [
+        "screen_reader_note",
+        "mobile_version_note"
+      ]
+    }
+  ],
+  "template_pipeline_preview": [
+    "table_template",
+    "row_column_data_binding",
+    "rendered_table_instance",
+    "article_placement",
+    "post_insertion_layout_audit",
+    "reuse_log"
+  ],
+  "ag10g_handoff": {
+    "module_id": "AG10F",
+    "title": "AG10F to AG10G Map and Geographic Object Pipeline Planning Boundary",
+    "status": "ag10g_boundary_created_not_started",
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag10f": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "next_stage_id": "AG10G",
+    "next_stage_title": "Map and Geographic Object Pipeline Planning",
+    "explicit_approval_required": true,
+    "ag10g_allowed_scope": [
+      "Define governed map and geographic object pipeline.",
+      "Classify geographic maps, regional focus maps, bubble maps, heat maps and service-area maps.",
+      "Define geo-data schema and coordinate/location rules.",
+      "Define reusable map template and rendered-instance doctrine.",
+      "Define source/licence/credit/mobile/accessibility rules.",
+      "Define map fallback and cost-control gates."
+    ],
+    "ag10g_blocked_scope": [
+      "No map generation.",
+      "No geographic object rendering.",
+      "No data fetch.",
+      "No object insertion.",
+      "No article mutation.",
+      "No CSS/JS mutation.",
+      "No database/Supabase/backend/Auth activation.",
+      "No publishing operation."
+    ],
+    "table_structured_object_pipeline_planning_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag10f": false,
+    "selected_article_file_write_performed_in_ag10f": false,
+    "homepage_mutation_performed_in_ag10f": false,
+    "css_mutation_performed_in_ag10f": false,
+    "js_mutation_performed_in_ag10f": false,
+    "reference_insertion_performed_in_ag10f": false,
+    "reference_url_change_performed_in_ag10f": false,
+    "data_fetch_performed_in_ag10f": false,
+    "dataset_creation_performed_in_ag10f": false,
+    "table_generation_performed_in_ag10f": false,
+    "structured_object_creation_performed_in_ag10f": false,
+    "table_render_performed_in_ag10f": false,
+    "table_template_creation_performed_in_ag10f": false,
+    "rendered_table_creation_performed_in_ag10f": false,
+    "html_table_asset_creation_performed_in_ag10f": false,
+    "csv_export_creation_performed_in_ag10f": false,
+    "object_insertion_performed_in_ag10f": false,
+    "visual_generation_performed_in_ag10f": false,
+    "image_generation_performed_in_ag10f": false,
+    "chart_generation_performed_in_ag10f": false,
+    "infographic_generation_performed_in_ag10f": false,
+    "figure_generation_performed_in_ag10f": false,
+    "diagram_generation_performed_in_ag10f": false,
+    "map_generation_performed_in_ag10f": false,
+    "live_url_fetch_performed_in_ag10f": false,
+    "deployment_trigger_performed_in_ag10f": false,
+    "production_jsonl_append_performed_in_ag10f": false,
+    "database_write_performed_in_ag10f": false,
+    "supabase_write_performed_in_ag10f": false,
+    "backend_auth_supabase_activation_performed_in_ag10f": false,
+    "rollback_execution_performed_in_ag10f": false,
+    "public_publishing_operation_performed_in_ag10f": false
+  },
+  "table_structured_object_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10f": false,
+  "selected_article_file_write_performed_in_ag10f": false,
+  "homepage_mutation_performed_in_ag10f": false,
+  "css_mutation_performed_in_ag10f": false,
+  "js_mutation_performed_in_ag10f": false,
+  "reference_insertion_performed_in_ag10f": false,
+  "reference_url_change_performed_in_ag10f": false,
+  "data_fetch_performed_in_ag10f": false,
+  "dataset_creation_performed_in_ag10f": false,
+  "table_generation_performed_in_ag10f": false,
+  "structured_object_creation_performed_in_ag10f": false,
+  "table_render_performed_in_ag10f": false,
+  "table_template_creation_performed_in_ag10f": false,
+  "rendered_table_creation_performed_in_ag10f": false,
+  "html_table_asset_creation_performed_in_ag10f": false,
+  "csv_export_creation_performed_in_ag10f": false,
+  "object_insertion_performed_in_ag10f": false,
+  "visual_generation_performed_in_ag10f": false,
+  "image_generation_performed_in_ag10f": false,
+  "chart_generation_performed_in_ag10f": false,
+  "infographic_generation_performed_in_ag10f": false,
+  "figure_generation_performed_in_ag10f": false,
+  "diagram_generation_performed_in_ag10f": false,
+  "map_generation_performed_in_ag10f": false,
+  "live_url_fetch_performed_in_ag10f": false,
+  "deployment_trigger_performed_in_ag10f": false,
+  "production_jsonl_append_performed_in_ag10f": false,
+  "database_write_performed_in_ag10f": false,
+  "supabase_write_performed_in_ag10f": false,
+  "backend_auth_supabase_activation_performed_in_ag10f": false,
+  "rollback_execution_performed_in_ag10f": false,
+  "public_publishing_operation_performed_in_ag10f": false
+}

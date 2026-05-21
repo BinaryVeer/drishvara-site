@@ -1,0 +1,95 @@
+{
+  "module_id": "AG10F",
+  "title": "Table Theme, Credit, Mobile and Cost Doctrine",
+  "status": "table_theme_credit_mobile_doctrine_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10f": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "theme_source_status": "theme_color_layout_doctrine_created_not_applied",
+  "ownership_source_status": "ownership_rights_credit_doctrine_created_not_applied",
+  "data_doctrine_source_status": "data_source_dataset_inference_doctrine_created_not_applied",
+  "table_theme_rules": [
+    "Tables must inherit Drishvara article theme and editorial tone.",
+    "Use clean borders, readable spacing and restrained highlight states.",
+    "Avoid dense spreadsheet-like formatting unless article purpose requires it.",
+    "Header hierarchy must be visually clear.",
+    "Every table requires caption, credit, alt text or accessibility summary and mobile fallback text where applicable."
+  ],
+  "credit_rules": [
+    {
+      "condition": "internally structured table using Drishvara logic",
+      "credit": "Table: Drishvara."
+    },
+    {
+      "condition": "external source data used",
+      "credit": "Data source: [source]. Table: Drishvara."
+    },
+    {
+      "condition": "derived metrics or analysis used",
+      "credit": "Data source: [source]. Analysis and table: Drishvara."
+    },
+    {
+      "condition": "mixed sources used",
+      "credit": "Sources: [source list]. Table: Drishvara."
+    }
+  ],
+  "mobile_rules": [
+    "No uncontrolled horizontal overflow.",
+    "Tables should use responsive wrappers when width exceeds article column.",
+    "Dense tables should convert to stacked cards or provide fallback summary on mobile.",
+    "Priority columns should be defined for mobile views.",
+    "Captions, credits and footnotes must remain readable and must not overlap table content."
+  ],
+  "placement_rules": [
+    "Tables should be centrally aligned in vertical article flow.",
+    "Tables must not deform article shape.",
+    "Tables should not interrupt paragraphs without editorial reason.",
+    "Long tables should be placed after explanatory context, not before the reader understands the topic.",
+    "Small structured objects may appear as cards only if layout-safe."
+  ],
+  "cost_rules": [
+    "Prefer reusable HTML/structured table templates before custom generation.",
+    "Do not create a table when a short bullet, callout or chart communicates the point better.",
+    "Record template reuse before creating a new table template.",
+    "Data-backed tables require source/data doctrine record before future rendering."
+  ],
+  "accessibility_rules": [
+    "Accessibility summary must describe the main table insight.",
+    "Column headers and row labels must be meaningful.",
+    "Color must not be the only carrier of meaning.",
+    "Footnotes must be associated with the relevant row, column or cell."
+  ],
+  "table_structured_object_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10f": false,
+  "selected_article_file_write_performed_in_ag10f": false,
+  "homepage_mutation_performed_in_ag10f": false,
+  "css_mutation_performed_in_ag10f": false,
+  "js_mutation_performed_in_ag10f": false,
+  "reference_insertion_performed_in_ag10f": false,
+  "reference_url_change_performed_in_ag10f": false,
+  "data_fetch_performed_in_ag10f": false,
+  "dataset_creation_performed_in_ag10f": false,
+  "table_generation_performed_in_ag10f": false,
+  "structured_object_creation_performed_in_ag10f": false,
+  "table_render_performed_in_ag10f": false,
+  "table_template_creation_performed_in_ag10f": false,
+  "rendered_table_creation_performed_in_ag10f": false,
+  "html_table_asset_creation_performed_in_ag10f": false,
+  "csv_export_creation_performed_in_ag10f": false,
+  "object_insertion_performed_in_ag10f": false,
+  "visual_generation_performed_in_ag10f": false,
+  "image_generation_performed_in_ag10f": false,
+  "chart_generation_performed_in_ag10f": false,
+  "infographic_generation_performed_in_ag10f": false,
+  "figure_generation_performed_in_ag10f": false,
+  "diagram_generation_performed_in_ag10f": false,
+  "map_generation_performed_in_ag10f": false,
+  "live_url_fetch_performed_in_ag10f": false,
+  "deployment_trigger_performed_in_ag10f": false,
+  "production_jsonl_append_performed_in_ag10f": false,
+  "database_write_performed_in_ag10f": false,
+  "supabase_write_performed_in_ag10f": false,
+  "backend_auth_supabase_activation_performed_in_ag10f": false,
+  "rollback_execution_performed_in_ag10f": false,
+  "public_publishing_operation_performed_in_ag10f": false
+}
