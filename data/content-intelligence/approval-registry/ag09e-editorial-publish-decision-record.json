@@ -1,0 +1,84 @@
+{
+  "module_id": "AG09E",
+  "title": "Editorial Publish Decision Record",
+  "status": "editorial_publish_decision_boundary_created_not_approved",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag09e": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "decision_type": "editorial_publish_boundary_only",
+  "editorial_publish_candidate": true,
+  "editorial_publish_approved": false,
+  "public_publishing_performed": false,
+  "publish_decision_required_from_user": true,
+  "publish_decision_options": [
+    {
+      "option_id": "AG09E-OPTION-001",
+      "label": "Approve controlled publish-preparation stage",
+      "next_stage": "AG09F",
+      "description": "Prepare controlled publish/live-verification checklist without backend activation."
+    },
+    {
+      "option_id": "AG09E-OPTION-002",
+      "label": "Hold for manual editorial review",
+      "next_stage": null,
+      "description": "Keep the article static changes in repository but do not proceed toward publish decision."
+    },
+    {
+      "option_id": "AG09E-OPTION-003",
+      "label": "Rollback AG09C public-experience corrections",
+      "next_stage": "AG09R",
+      "description": "Use AG09D rollback readiness if corrections need to be reverted."
+    }
+  ],
+  "eligibility_checks": [
+    {
+      "check_id": "AG09E-CHECK-001",
+      "name": "ag09d_audit_passed",
+      "status": "passed",
+      "evidence": "post_correction_public_experience_audit_passed"
+    },
+    {
+      "check_id": "AG09E-CHECK-002",
+      "name": "selected_article_hash_matches_ag09c",
+      "status": "passed",
+      "evidence": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313"
+    },
+    {
+      "check_id": "AG09E-CHECK-003",
+      "name": "public_experience_ready_for_editorial_review",
+      "status": "passed",
+      "evidence": "public_experience_corrections_audited_pending_editorial_publish_decision"
+    },
+    {
+      "check_id": "AG09E-CHECK-004",
+      "name": "rollback_ready_not_executed",
+      "status": "passed",
+      "evidence": "rollback_ready_not_executed"
+    },
+    {
+      "check_id": "AG09E-CHECK-005",
+      "name": "forbidden_system_guards_carried_forward",
+      "status": "passed",
+      "evidence": "passed"
+    }
+  ],
+  "editorial_publish_decision_boundary_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09e": false,
+  "selected_article_file_write_performed_in_ag09e": false,
+  "homepage_mutation_performed_in_ag09e": false,
+  "css_mutation_performed_in_ag09e": false,
+  "js_mutation_performed_in_ag09e": false,
+  "reference_insertion_performed_in_ag09e": false,
+  "reference_url_change_performed_in_ag09e": false,
+  "visual_generation_performed_in_ag09e": false,
+  "image_asset_creation_performed_in_ag09e": false,
+  "image_insertion_performed_in_ag09e": false,
+  "live_url_fetch_performed_in_ag09e": false,
+  "production_jsonl_append_performed_in_ag09e": false,
+  "database_write_performed_in_ag09e": false,
+  "supabase_write_performed_in_ag09e": false,
+  "backend_auth_supabase_activation_performed_in_ag09e": false,
+  "public_publishing_performed_in_ag09e": false,
+  "publishing_approval_granted_in_ag09e": false,
+  "rollback_execution_performed_in_ag09e": false
+}
