@@ -1,0 +1,201 @@
+{
+  "module_id": "AG09F",
+  "preview_only": true,
+  "status": "publish_preparation_live_verification_plan_created_not_executed",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag09f": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "live_article_url": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "preparation_ready": true,
+    "checklist_item_count": 7,
+    "publish_readiness": "blocked_pending_live_verification_and_explicit_editorial_approval",
+    "publish_approval_granted": false,
+    "public_publishing_performed": false,
+    "next_stage_id": "AG09G",
+    "next_stage_title": "Controlled Live Verification and Deployment Observation Audit",
+    "next_stage_requires_explicit_approval": true,
+    "publish_preparation_plan_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag09f": false,
+    "selected_article_file_write_performed_in_ag09f": false,
+    "homepage_mutation_performed_in_ag09f": false,
+    "css_mutation_performed_in_ag09f": false,
+    "js_mutation_performed_in_ag09f": false,
+    "reference_insertion_performed_in_ag09f": false,
+    "reference_url_change_performed_in_ag09f": false,
+    "visual_generation_performed_in_ag09f": false,
+    "image_asset_creation_performed_in_ag09f": false,
+    "image_insertion_performed_in_ag09f": false,
+    "live_url_fetch_performed_in_ag09f": false,
+    "deployment_trigger_performed_in_ag09f": false,
+    "production_jsonl_append_performed_in_ag09f": false,
+    "database_write_performed_in_ag09f": false,
+    "supabase_write_performed_in_ag09f": false,
+    "backend_auth_supabase_activation_performed_in_ag09f": false,
+    "public_publishing_performed_in_ag09f": false,
+    "publishing_approval_granted_in_ag09f": false,
+    "rollback_execution_performed_in_ag09f": false
+  },
+  "preparation_checks": [
+    {
+      "check_id": "AG09F-CHECK-001",
+      "group": "source_readiness",
+      "name": "ag09e_decision_boundary_consumed",
+      "status": "planned_ready",
+      "evidence": "editorial_publish_decision_boundary_created_not_approved"
+    },
+    {
+      "check_id": "AG09F-CHECK-002",
+      "group": "source_readiness",
+      "name": "ag09d_public_experience_audit_passed",
+      "status": "planned_ready",
+      "evidence": "post_correction_public_experience_audit_passed"
+    },
+    {
+      "check_id": "AG09F-CHECK-003",
+      "group": "article_integrity",
+      "name": "selected_article_hash_matches_ag09c",
+      "status": "planned_ready",
+      "evidence": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313"
+    },
+    {
+      "check_id": "AG09F-CHECK-004",
+      "group": "publish_boundary",
+      "name": "publish_approval_remains_blocked",
+      "status": "planned_ready",
+      "evidence": false
+    },
+    {
+      "check_id": "AG09F-CHECK-005",
+      "group": "system_boundary",
+      "name": "backend_database_supabase_activation_remains_blocked",
+      "status": "planned_ready",
+      "evidence": {
+        "backend_activation_ready": false,
+        "database_activation_ready": false,
+        "supabase_activation_ready": false
+      }
+    }
+  ],
+  "live_verification_checklist": [
+    {
+      "item_id": "AG09F-LIVE-001",
+      "area": "article_url",
+      "check": "Open the live article URL and confirm HTTP 200 / page loads.",
+      "target": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "execution_status": "planned_not_executed"
+    },
+    {
+      "item_id": "AG09F-LIVE-002",
+      "area": "article_rendering",
+      "check": "Confirm title, article body, reference section, hero SVG, caption and visual credit render correctly.",
+      "target": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "execution_status": "planned_not_executed"
+    },
+    {
+      "item_id": "AG09F-LIVE-003",
+      "area": "homepage_listing",
+      "check": "Open homepage and confirm the AG09C listing card/link is visible and points to the selected article.",
+      "target": "https://drishvara.com/",
+      "execution_status": "planned_not_executed"
+    },
+    {
+      "item_id": "AG09F-LIVE-004",
+      "area": "metadata",
+      "check": "Inspect rendered HTML and confirm canonical, description, OG and Twitter metadata exist.",
+      "target": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "execution_status": "planned_not_executed"
+    },
+    {
+      "item_id": "AG09F-LIVE-005",
+      "area": "mobile_layout",
+      "check": "Check mobile viewport for overflow, distorted visual, broken text flow or card deformation.",
+      "target": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "execution_status": "planned_not_executed"
+    },
+    {
+      "item_id": "AG09F-LIVE-006",
+      "area": "forbidden_systems",
+      "check": "Confirm no backend/Auth/Supabase/database path is activated as part of static article readiness.",
+      "target": "static deployment boundary",
+      "execution_status": "planned_not_executed"
+    },
+    {
+      "item_id": "AG09F-LIVE-007",
+      "area": "publish_decision",
+      "check": "Confirm final editorial publish approval remains a separate explicit decision after live verification.",
+      "target": "approval boundary",
+      "execution_status": "planned_not_executed"
+    }
+  ],
+  "ag09g_handoff": {
+    "module_id": "AG09F",
+    "title": "AG09F to AG09G Controlled Live Verification Boundary",
+    "status": "future_live_verification_boundary_created_not_executed",
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag09f": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "next_stage_id": "AG09G",
+    "next_stage_title": "Controlled Live Verification and Deployment Observation Audit",
+    "explicit_approval_required": true,
+    "ag09g_allowed_scope": [
+      "Verify live article URL availability.",
+      "Verify homepage/listing discoverability.",
+      "Verify visible hero visual, caption and credit.",
+      "Verify reference and metadata presence.",
+      "Record manual or automated observation results.",
+      "Keep final publish approval separate."
+    ],
+    "ag09g_blocked_scope": [
+      "No new article mutation.",
+      "No homepage mutation.",
+      "No CSS/JS mutation.",
+      "No reference URL change.",
+      "No new visual/image generation or insertion.",
+      "No production JSONL append.",
+      "No database/Supabase/backend/Auth activation.",
+      "No final publish approval unless separately approved."
+    ],
+    "publish_preparation_plan_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag09f": false,
+    "selected_article_file_write_performed_in_ag09f": false,
+    "homepage_mutation_performed_in_ag09f": false,
+    "css_mutation_performed_in_ag09f": false,
+    "js_mutation_performed_in_ag09f": false,
+    "reference_insertion_performed_in_ag09f": false,
+    "reference_url_change_performed_in_ag09f": false,
+    "visual_generation_performed_in_ag09f": false,
+    "image_asset_creation_performed_in_ag09f": false,
+    "image_insertion_performed_in_ag09f": false,
+    "live_url_fetch_performed_in_ag09f": false,
+    "deployment_trigger_performed_in_ag09f": false,
+    "production_jsonl_append_performed_in_ag09f": false,
+    "database_write_performed_in_ag09f": false,
+    "supabase_write_performed_in_ag09f": false,
+    "backend_auth_supabase_activation_performed_in_ag09f": false,
+    "public_publishing_performed_in_ag09f": false,
+    "publishing_approval_granted_in_ag09f": false,
+    "rollback_execution_performed_in_ag09f": false
+  },
+  "publish_preparation_plan_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09f": false,
+  "selected_article_file_write_performed_in_ag09f": false,
+  "homepage_mutation_performed_in_ag09f": false,
+  "css_mutation_performed_in_ag09f": false,
+  "js_mutation_performed_in_ag09f": false,
+  "reference_insertion_performed_in_ag09f": false,
+  "reference_url_change_performed_in_ag09f": false,
+  "visual_generation_performed_in_ag09f": false,
+  "image_asset_creation_performed_in_ag09f": false,
+  "image_insertion_performed_in_ag09f": false,
+  "live_url_fetch_performed_in_ag09f": false,
+  "deployment_trigger_performed_in_ag09f": false,
+  "production_jsonl_append_performed_in_ag09f": false,
+  "database_write_performed_in_ag09f": false,
+  "supabase_write_performed_in_ag09f": false,
+  "backend_auth_supabase_activation_performed_in_ag09f": false,
+  "public_publishing_performed_in_ag09f": false,
+  "publishing_approval_granted_in_ag09f": false,
+  "rollback_execution_performed_in_ag09f": false
+}
