@@ -1,0 +1,153 @@
+{
+  "module_id": "AG10G",
+  "title": "Geo Data and Location Schema",
+  "status": "geo_data_location_schema_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10g": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "schema_components": [
+    {
+      "component_type": "geo_source",
+      "required_fields": [
+        "geo_source_id",
+        "source_name",
+        "source_reference",
+        "licence_or_usage_note"
+      ],
+      "optional_fields": [
+        "access_date",
+        "publisher",
+        "version",
+        "boundary_source_note"
+      ]
+    },
+    {
+      "component_type": "location_record",
+      "required_fields": [
+        "location_id",
+        "location_name",
+        "geo_scope"
+      ],
+      "optional_fields": [
+        "latitude",
+        "longitude",
+        "region_id",
+        "district",
+        "state",
+        "country",
+        "coordinate_precision"
+      ]
+    },
+    {
+      "component_type": "region_boundary_record",
+      "required_fields": [
+        "region_id",
+        "region_name",
+        "boundary_source",
+        "boundary_usage_status"
+      ],
+      "optional_fields": [
+        "simplification_level",
+        "validity_period",
+        "sensitivity_note"
+      ]
+    },
+    {
+      "component_type": "map_metric",
+      "required_fields": [
+        "metric_id",
+        "metric_label",
+        "value",
+        "unit",
+        "source_note"
+      ],
+      "optional_fields": [
+        "period",
+        "classification_band",
+        "confidence_note",
+        "derived_metric_id"
+      ]
+    },
+    {
+      "component_type": "legend",
+      "required_fields": [
+        "legend_id",
+        "legend_items",
+        "classification_rule"
+      ],
+      "optional_fields": [
+        "color_role_mapping",
+        "thresholds",
+        "scale_note"
+      ]
+    },
+    {
+      "component_type": "mobile_fallback",
+      "required_fields": [
+        "fallback_summary",
+        "main_geo_insight"
+      ],
+      "optional_fields": [
+        "top_locations",
+        "regional_pattern_note",
+        "accessibility_note"
+      ]
+    },
+    {
+      "component_type": "reuse_record",
+      "required_fields": [
+        "reuse_status",
+        "freshness_status",
+        "context_validity_note"
+      ],
+      "optional_fields": [
+        "expiry_date",
+        "reuse_restriction",
+        "prior_article_ids"
+      ]
+    }
+  ],
+  "validation_rules": [
+    "Every map must have a geo source or boundary source note.",
+    "Every location must have a declared geo scope.",
+    "Coordinate precision must be recorded when latitude/longitude is used.",
+    "Sensitive or precise locations must be reviewed before future rendering.",
+    "Map must not imply official boundaries unless source supports it.",
+    "Mobile fallback summary is mandatory for all map objects.",
+    "Map source, licence and credit must be recorded before any future rendering.",
+    "Map must pass the New Aspect Inclusion Gate before future generation or insertion."
+  ],
+  "map_geographic_object_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10g": false,
+  "selected_article_file_write_performed_in_ag10g": false,
+  "homepage_mutation_performed_in_ag10g": false,
+  "css_mutation_performed_in_ag10g": false,
+  "js_mutation_performed_in_ag10g": false,
+  "reference_insertion_performed_in_ag10g": false,
+  "reference_url_change_performed_in_ag10g": false,
+  "data_fetch_performed_in_ag10g": false,
+  "dataset_creation_performed_in_ag10g": false,
+  "geo_dataset_creation_performed_in_ag10g": false,
+  "map_generation_performed_in_ag10g": false,
+  "geographic_object_render_performed_in_ag10g": false,
+  "map_template_creation_performed_in_ag10g": false,
+  "rendered_map_creation_performed_in_ag10g": false,
+  "svg_asset_creation_performed_in_ag10g": false,
+  "image_asset_creation_performed_in_ag10g": false,
+  "object_insertion_performed_in_ag10g": false,
+  "visual_generation_performed_in_ag10g": false,
+  "image_generation_performed_in_ag10g": false,
+  "chart_generation_performed_in_ag10g": false,
+  "infographic_generation_performed_in_ag10g": false,
+  "table_generation_performed_in_ag10g": false,
+  "figure_generation_performed_in_ag10g": false,
+  "diagram_generation_performed_in_ag10g": false,
+  "live_url_fetch_performed_in_ag10g": false,
+  "deployment_trigger_performed_in_ag10g": false,
+  "production_jsonl_append_performed_in_ag10g": false,
+  "database_write_performed_in_ag10g": false,
+  "supabase_write_performed_in_ag10g": false,
+  "backend_auth_supabase_activation_performed_in_ag10g": false,
+  "rollback_execution_performed_in_ag10g": false,
+  "public_publishing_operation_performed_in_ag10g": false
+}

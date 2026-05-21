@@ -1,0 +1,99 @@
+{
+  "module_id": "AG10G",
+  "title": "New Aspect Inclusion Gate",
+  "status": "new_aspect_inclusion_gate_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10g": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "purpose": "Before any new aspect, object family, visual type, data layer, map type or article feature is added to Drishvara, it must pass these five governance questions.",
+  "gate_questions": [
+    {
+      "gate_id": "VISITOR-VALUE",
+      "question": "Will this improve what a visitor sees?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless visitor-facing value is established."
+    },
+    {
+      "gate_id": "TRUST-VALUE",
+      "question": "Will this make articles more trustworthy?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless trust, evidence, source, credit or clarity improves."
+    },
+    {
+      "gate_id": "MEMORY-VALUE",
+      "question": "Will this make Drishvara memorable?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it strengthens brand recall or reading experience."
+    },
+    {
+      "gate_id": "COST-VALUE",
+      "question": "Will this reduce future cost?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it supports reuse, templates, automation or reduced repeated generation."
+    },
+    {
+      "gate_id": "INTELLIGENCE-VALUE",
+      "question": "Will this create reusable intelligence?",
+      "required_answer_for_inclusion": "yes_or_yes_with_conditions",
+      "failure_action": "Do not include unless it contributes reusable data, templates, logic, inference or governance memory."
+    }
+  ],
+  "pass_rule": "A new aspect may be included only if all five gate questions are answered yes or yes_with_conditions, with the condition recorded.",
+  "reject_rule": "Any no answer blocks inclusion until the aspect is redesigned.",
+  "applies_to_future_stages": [
+    "new object family",
+    "new visual type",
+    "new data layer",
+    "new chart/map/table/figure/infographic template",
+    "new article feature",
+    "new automated generation step",
+    "new database/backend activation proposal"
+  ],
+  "ag10g_gate_assessment": {
+    "map_geographic_object_pipeline_planning": {
+      "visitor_value": "yes",
+      "trust_value": "yes_with_conditions",
+      "memory_value": "yes",
+      "cost_value": "yes_with_conditions",
+      "intelligence_value": "yes",
+      "inclusion_decision": "allowed_for_planning_only",
+      "condition_notes": [
+        "Trust value depends on verified geo-source, licence and boundary notes before any future rendering.",
+        "Cost value depends on reusable map templates and avoiding expensive external generation unless necessary."
+      ]
+    }
+  },
+  "map_geographic_object_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10g": false,
+  "selected_article_file_write_performed_in_ag10g": false,
+  "homepage_mutation_performed_in_ag10g": false,
+  "css_mutation_performed_in_ag10g": false,
+  "js_mutation_performed_in_ag10g": false,
+  "reference_insertion_performed_in_ag10g": false,
+  "reference_url_change_performed_in_ag10g": false,
+  "data_fetch_performed_in_ag10g": false,
+  "dataset_creation_performed_in_ag10g": false,
+  "geo_dataset_creation_performed_in_ag10g": false,
+  "map_generation_performed_in_ag10g": false,
+  "geographic_object_render_performed_in_ag10g": false,
+  "map_template_creation_performed_in_ag10g": false,
+  "rendered_map_creation_performed_in_ag10g": false,
+  "svg_asset_creation_performed_in_ag10g": false,
+  "image_asset_creation_performed_in_ag10g": false,
+  "object_insertion_performed_in_ag10g": false,
+  "visual_generation_performed_in_ag10g": false,
+  "image_generation_performed_in_ag10g": false,
+  "chart_generation_performed_in_ag10g": false,
+  "infographic_generation_performed_in_ag10g": false,
+  "table_generation_performed_in_ag10g": false,
+  "figure_generation_performed_in_ag10g": false,
+  "diagram_generation_performed_in_ag10g": false,
+  "live_url_fetch_performed_in_ag10g": false,
+  "deployment_trigger_performed_in_ag10g": false,
+  "production_jsonl_append_performed_in_ag10g": false,
+  "database_write_performed_in_ag10g": false,
+  "supabase_write_performed_in_ag10g": false,
+  "backend_auth_supabase_activation_performed_in_ag10g": false,
+  "rollback_execution_performed_in_ag10g": false,
+  "public_publishing_operation_performed_in_ag10g": false
+}

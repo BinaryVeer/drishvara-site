@@ -1,0 +1,240 @@
+{
+  "module_id": "AG10G",
+  "title": "Map and Geographic Object Family Registry",
+  "status": "map_geographic_object_family_registry_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10g": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "source_map_object_count": 8,
+  "map_families": [
+    {
+      "family_id": "AG10G-MAP-BASE",
+      "family_name": "Geographic and Regional Focus Maps",
+      "map_types": [
+        "geographic_map",
+        "regional_focus_map"
+      ],
+      "best_for": [
+        "location context",
+        "regional identity",
+        "policy geography",
+        "area explanation"
+      ],
+      "minimum_geo_inputs": [
+        "region_name",
+        "geo_scope",
+        "source_or_boundary_note",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "boundary source is unclear",
+        "region is politically sensitive without source",
+        "map adds no reader value"
+      ]
+    },
+    {
+      "family_id": "AG10G-MAP-DISTRIBUTION",
+      "family_name": "Bubble and Heat Maps",
+      "map_types": [
+        "bubble_map",
+        "heat_map",
+        "location_insight_visual"
+      ],
+      "best_for": [
+        "density",
+        "concentration",
+        "regional variation",
+        "indicator intensity"
+      ],
+      "minimum_geo_inputs": [
+        "location",
+        "value",
+        "unit",
+        "geo_scope",
+        "source_note"
+      ],
+      "avoid_when": [
+        "values are unverified",
+        "scale is misleading",
+        "mobile labels become unreadable"
+      ]
+    },
+    {
+      "family_id": "AG10G-MAP-THEMATIC",
+      "family_name": "Choropleth and Thematic Maps",
+      "map_types": [
+        "choropleth_thematic_map"
+      ],
+      "best_for": [
+        "state/district/category comparison",
+        "indicator distribution",
+        "policy coverage"
+      ],
+      "minimum_geo_inputs": [
+        "region_id_or_name",
+        "value",
+        "classification_rule",
+        "source_note",
+        "legend_rule"
+      ],
+      "avoid_when": [
+        "classification distorts meaning",
+        "boundary file rights unclear",
+        "data is stale"
+      ]
+    },
+    {
+      "family_id": "AG10G-MAP-SERVICE",
+      "family_name": "Service-Area and Coverage Maps",
+      "map_types": [
+        "service_area_map"
+      ],
+      "best_for": [
+        "scheme coverage",
+        "service geography",
+        "locality mapping",
+        "infrastructure reach"
+      ],
+      "minimum_geo_inputs": [
+        "service_area_name",
+        "coverage_type",
+        "location_reference",
+        "source_note"
+      ],
+      "avoid_when": [
+        "service area is not verified",
+        "precise location is sensitive",
+        "map may imply official boundary incorrectly"
+      ]
+    },
+    {
+      "family_id": "AG10G-MAP-FLOW",
+      "family_name": "Route and Flow Maps",
+      "map_types": [
+        "route_or_flow_map"
+      ],
+      "best_for": [
+        "movement",
+        "supply path",
+        "connectivity",
+        "migration or transport flow"
+      ],
+      "minimum_geo_inputs": [
+        "origin",
+        "destination",
+        "flow_direction",
+        "flow_value_or_description",
+        "source_note"
+      ],
+      "avoid_when": [
+        "route is speculative",
+        "flow is not source-backed",
+        "visual becomes cluttered"
+      ]
+    },
+    {
+      "family_id": "AG10G-MAP-CHART-HYBRID",
+      "family_name": "Geo Chart and Scatter Map Hybrids",
+      "map_types": [
+        "geo_chart",
+        "scatter_map",
+        "geographic_bubble_chart",
+        "heatmap_chart"
+      ],
+      "best_for": [
+        "map-supported data visualization",
+        "location-value plotting",
+        "spatial BI object"
+      ],
+      "minimum_geo_inputs": [
+        "location_or_coordinate",
+        "value",
+        "unit",
+        "source_note",
+        "mobile_fallback_text"
+      ],
+      "avoid_when": [
+        "better suited as non-map chart",
+        "coordinate precision is weak",
+        "interactive rendering would be required but unavailable"
+      ]
+    }
+  ],
+  "universal_map_schema": {
+    "required_metadata": [
+      "map_type",
+      "article_id",
+      "object_template_id",
+      "geo_source_or_logic_record",
+      "map_source_or_boundary_source",
+      "licence_or_usage_note",
+      "rights_controller",
+      "credit_display",
+      "caption",
+      "alt_text",
+      "mobile_fallback_text",
+      "layout_zone",
+      "theme_variant",
+      "reuse_eligibility_status"
+    ],
+    "required_geo_fields": [
+      "geo_scope",
+      "location_or_region_name",
+      "value_or_context",
+      "source_note",
+      "boundary_note",
+      "editorial_purpose",
+      "responsive_strategy"
+    ],
+    "optional_geo_fields": [
+      "latitude",
+      "longitude",
+      "region_id",
+      "district",
+      "state",
+      "country",
+      "classification_rule",
+      "legend_rule",
+      "scale_note",
+      "coordinate_precision",
+      "sensitivity_note",
+      "fallback_summary"
+    ]
+  },
+  "no_map_generation_in_ag10g": true,
+  "no_geographic_object_rendering_in_ag10g": true,
+  "map_geographic_object_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10g": false,
+  "selected_article_file_write_performed_in_ag10g": false,
+  "homepage_mutation_performed_in_ag10g": false,
+  "css_mutation_performed_in_ag10g": false,
+  "js_mutation_performed_in_ag10g": false,
+  "reference_insertion_performed_in_ag10g": false,
+  "reference_url_change_performed_in_ag10g": false,
+  "data_fetch_performed_in_ag10g": false,
+  "dataset_creation_performed_in_ag10g": false,
+  "geo_dataset_creation_performed_in_ag10g": false,
+  "map_generation_performed_in_ag10g": false,
+  "geographic_object_render_performed_in_ag10g": false,
+  "map_template_creation_performed_in_ag10g": false,
+  "rendered_map_creation_performed_in_ag10g": false,
+  "svg_asset_creation_performed_in_ag10g": false,
+  "image_asset_creation_performed_in_ag10g": false,
+  "object_insertion_performed_in_ag10g": false,
+  "visual_generation_performed_in_ag10g": false,
+  "image_generation_performed_in_ag10g": false,
+  "chart_generation_performed_in_ag10g": false,
+  "infographic_generation_performed_in_ag10g": false,
+  "table_generation_performed_in_ag10g": false,
+  "figure_generation_performed_in_ag10g": false,
+  "diagram_generation_performed_in_ag10g": false,
+  "live_url_fetch_performed_in_ag10g": false,
+  "deployment_trigger_performed_in_ag10g": false,
+  "production_jsonl_append_performed_in_ag10g": false,
+  "database_write_performed_in_ag10g": false,
+  "supabase_write_performed_in_ag10g": false,
+  "backend_auth_supabase_activation_performed_in_ag10g": false,
+  "rollback_execution_performed_in_ag10g": false,
+  "public_publishing_operation_performed_in_ag10g": false
+}
