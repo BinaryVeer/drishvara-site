@@ -1,0 +1,129 @@
+{
+  "module_id": "AG09H",
+  "preview_only": true,
+  "status": "final_editorial_publish_approval_recorded",
+  "summary": {
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_at_ag09h": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+    "final_editorial_publish_approved": true,
+    "public_publishing_performed_in_ag09h": false,
+    "deployment_trigger_performed_in_ag09h": false,
+    "backend_activation_performed_in_ag09h": false,
+    "additional_objects_deferred": true,
+    "closure_status": "ag09_final_editorial_approval_closed_static_article",
+    "final_editorial_decision_only": true,
+    "selected_article_read_performed": true,
+    "article_mutation_performed_in_ag09h": false,
+    "selected_article_file_write_performed_in_ag09h": false,
+    "homepage_mutation_performed_in_ag09h": false,
+    "css_mutation_performed_in_ag09h": false,
+    "js_mutation_performed_in_ag09h": false,
+    "reference_insertion_performed_in_ag09h": false,
+    "reference_url_change_performed_in_ag09h": false,
+    "visual_generation_performed_in_ag09h": false,
+    "image_asset_creation_performed_in_ag09h": false,
+    "image_insertion_performed_in_ag09h": false,
+    "infographic_generation_performed_in_ag09h": false,
+    "graph_generation_performed_in_ag09h": false,
+    "table_generation_performed_in_ag09h": false,
+    "figure_generation_performed_in_ag09h": false,
+    "live_url_fetch_performed_in_ag09h": false,
+    "production_jsonl_append_performed_in_ag09h": false,
+    "database_write_performed_in_ag09h": false,
+    "supabase_write_performed_in_ag09h": false,
+    "backend_auth_supabase_activation_performed_in_ag09h": false,
+    "rollback_execution_performed_in_ag09h": false
+  },
+  "user_manual_confirmation": {
+    "confirmation_source": "user_manual_mobile_review_in_chat",
+    "confirmation_status": "confirmed",
+    "confirmation_summary": "User reviewed the target article and related mobile surfaces on phone and confirmed links and layout are working.",
+    "target_article_confirmed": true,
+    "links_working_confirmed": true,
+    "mobile_layout_acceptable_confirmed": true,
+    "hero_visual_acceptable_confirmed": true,
+    "references_visible_confirmed": true,
+    "note_on_additional_objects": "Only one approved image/visual is present in this AG09 article cycle. Infographics, graphs, tables and other objects are deferred to future object-pipeline stages."
+  },
+  "approval_checks": [
+    {
+      "check_id": "AG09H-CHECK-001",
+      "name": "ag09g_live_verification_no_failures",
+      "status": "passed",
+      "evidence": {
+        "total_observations": 7,
+        "passed": 6,
+        "review_required": 1,
+        "failed": 0,
+        "manual_review_required": 1
+      }
+    },
+    {
+      "check_id": "AG09H-CHECK-002",
+      "name": "manual_mobile_confirmation_received",
+      "status": "passed",
+      "evidence": {
+        "confirmation_source": "user_manual_mobile_review_in_chat",
+        "confirmation_status": "confirmed",
+        "confirmation_summary": "User reviewed the target article and related mobile surfaces on phone and confirmed links and layout are working.",
+        "target_article_confirmed": true,
+        "links_working_confirmed": true,
+        "mobile_layout_acceptable_confirmed": true,
+        "hero_visual_acceptable_confirmed": true,
+        "references_visible_confirmed": true,
+        "note_on_additional_objects": "Only one approved image/visual is present in this AG09 article cycle. Infographics, graphs, tables and other objects are deferred to future object-pipeline stages."
+      }
+    },
+    {
+      "check_id": "AG09H-CHECK-003",
+      "name": "selected_article_hash_matches_ag09c",
+      "status": "passed",
+      "evidence": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313"
+    },
+    {
+      "check_id": "AG09H-CHECK-004",
+      "name": "publishing_separated_from_backend_activation",
+      "status": "passed",
+      "evidence": {
+        "database_write": false,
+        "supabase_write": false,
+        "backend_auth_supabase_activation": false
+      }
+    },
+    {
+      "check_id": "AG09H-CHECK-005",
+      "name": "additional_objects_deferred",
+      "status": "passed",
+      "evidence": "Only one approved image/visual is present in this AG09 article cycle. Infographics, graphs, tables and other objects are deferred to future object-pipeline stages."
+    }
+  ],
+  "future_recommendations": [
+    "Start a separate governed object-pipeline cycle for infographics, graphs, tables and figures.",
+    "Create a site-wide visual asset audit for older article broken-image placeholders.",
+    "Keep backend/Auth/Supabase/database activation outside static article editorial approval.",
+    "Create repeatable final approval template for future upgraded articles."
+  ],
+  "final_editorial_decision_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09h": false,
+  "selected_article_file_write_performed_in_ag09h": false,
+  "homepage_mutation_performed_in_ag09h": false,
+  "css_mutation_performed_in_ag09h": false,
+  "js_mutation_performed_in_ag09h": false,
+  "reference_insertion_performed_in_ag09h": false,
+  "reference_url_change_performed_in_ag09h": false,
+  "visual_generation_performed_in_ag09h": false,
+  "image_asset_creation_performed_in_ag09h": false,
+  "image_insertion_performed_in_ag09h": false,
+  "infographic_generation_performed_in_ag09h": false,
+  "graph_generation_performed_in_ag09h": false,
+  "table_generation_performed_in_ag09h": false,
+  "figure_generation_performed_in_ag09h": false,
+  "live_url_fetch_performed_in_ag09h": false,
+  "deployment_trigger_performed_in_ag09h": false,
+  "production_jsonl_append_performed_in_ag09h": false,
+  "database_write_performed_in_ag09h": false,
+  "supabase_write_performed_in_ag09h": false,
+  "backend_auth_supabase_activation_performed_in_ag09h": false,
+  "rollback_execution_performed_in_ag09h": false
+}
