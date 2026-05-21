@@ -1,0 +1,101 @@
+{
+  "module_id": "AG09Z",
+  "title": "Final AG09 Chain Closure and Next-System Handoff",
+  "status": "ag09_chain_closed_next_system_handoff_created",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag09z": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "closed_chain_scope": "One upgraded static article: public-experience correction, live verification, mobile confirmation and final editorial decision.",
+  "ag09_chain_closed": true,
+  "final_editorial_static_article_approved": true,
+  "public_publishing_operation_performed": false,
+  "deployment_trigger_performed": false,
+  "backend_activation_performed": false,
+  "closure_checks": [
+    {
+      "check_id": "AG09Z-CHECK-001",
+      "name": "ag09h_final_editorial_approval_recorded",
+      "status": "passed",
+      "evidence": "final_editorial_publish_approval_recorded"
+    },
+    {
+      "check_id": "AG09Z-CHECK-002",
+      "name": "ag09h_chain_closed",
+      "status": "passed",
+      "evidence": "ag09_final_editorial_approval_closed_static_article"
+    },
+    {
+      "check_id": "AG09Z-CHECK-003",
+      "name": "selected_article_hash_stable",
+      "status": "passed",
+      "evidence": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313"
+    },
+    {
+      "check_id": "AG09Z-CHECK-004",
+      "name": "live_verification_no_failed_items",
+      "status": "passed",
+      "evidence": {
+        "total_observations": 7,
+        "passed": 6,
+        "review_required": 1,
+        "failed": 0,
+        "manual_review_required": 1
+      }
+    },
+    {
+      "check_id": "AG09Z-CHECK-005",
+      "name": "additional_objects_deferred",
+      "status": "passed",
+      "evidence": "Infographics, graphs, tables, figures, maps and diagrams are deferred to AG10A governed object-pipeline planning."
+    },
+    {
+      "check_id": "AG09Z-CHECK-006",
+      "name": "forbidden_systems_not_activated",
+      "status": "passed",
+      "evidence": {
+        "deployment_trigger": false,
+        "backend_activation": false,
+        "publishing_operation": false
+      }
+    }
+  ],
+  "carried_forward_evidence": {
+    "ag09h_approval_status": "final_editorial_publish_approval_recorded",
+    "ag09h_readiness_status": "final_editorial_static_article_approved",
+    "ag09h_closure_status": "ag09_final_editorial_approval_closed_static_article",
+    "ag09g_live_observation_status": "controlled_live_verification_completed_with_review_required",
+    "ag09g_observation_summary": {
+      "total_observations": 7,
+      "passed": 6,
+      "review_required": 1,
+      "failed": 0,
+      "manual_review_required": 1
+    },
+    "target_article_post_correction_hash": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313"
+  },
+  "final_chain_closure_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09z": false,
+  "selected_article_file_write_performed_in_ag09z": false,
+  "homepage_mutation_performed_in_ag09z": false,
+  "css_mutation_performed_in_ag09z": false,
+  "js_mutation_performed_in_ag09z": false,
+  "reference_insertion_performed_in_ag09z": false,
+  "reference_url_change_performed_in_ag09z": false,
+  "visual_generation_performed_in_ag09z": false,
+  "image_asset_creation_performed_in_ag09z": false,
+  "image_insertion_performed_in_ag09z": false,
+  "infographic_generation_performed_in_ag09z": false,
+  "graph_generation_performed_in_ag09z": false,
+  "table_generation_performed_in_ag09z": false,
+  "figure_generation_performed_in_ag09z": false,
+  "map_generation_performed_in_ag09z": false,
+  "diagram_generation_performed_in_ag09z": false,
+  "live_url_fetch_performed_in_ag09z": false,
+  "deployment_trigger_performed_in_ag09z": false,
+  "production_jsonl_append_performed_in_ag09z": false,
+  "database_write_performed_in_ag09z": false,
+  "supabase_write_performed_in_ag09z": false,
+  "backend_auth_supabase_activation_performed_in_ag09z": false,
+  "rollback_execution_performed_in_ag09z": false,
+  "public_publishing_operation_performed_in_ag09z": false
+}

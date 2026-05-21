@@ -1,0 +1,85 @@
+{
+  "module_id": "AG09Z",
+  "title": "AG09Z to AG10A Governed Object Pipeline Planning Handoff",
+  "status": "ag10a_handoff_created_not_started",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag09z": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "next_stage_id": "AG10A",
+  "next_stage_title": "Governed Object Pipeline Planning",
+  "explicit_approval_required": true,
+  "ag10a_purpose": "Create a governed, cost-aware object pipeline for non-text article assets and site-wide visual integrity.",
+  "ag10a_scope_candidates": [
+    {
+      "object_type": "infographic",
+      "purpose": "Explain article logic, policy flow, concept architecture or reader lens visually.",
+      "placement_rule": "Controlled insertion only after article-shape, wrap and mobile-width checks."
+    },
+    {
+      "object_type": "graph_or_chart",
+      "purpose": "Represent quantitative data only where validated data source exists.",
+      "placement_rule": "Centrally aligned in reading column; no mobile overflow."
+    },
+    {
+      "object_type": "table",
+      "purpose": "Show structured comparison, timeline, references or datasets.",
+      "placement_rule": "Responsive table wrapper required; central alignment for vertical reading flow."
+    },
+    {
+      "object_type": "figure_or_diagram",
+      "purpose": "Show systems, stages, frameworks or causal relationships.",
+      "placement_rule": "Controlled width; caption and attribution mandatory."
+    },
+    {
+      "object_type": "map",
+      "purpose": "Use only where location-based explanation adds value.",
+      "placement_rule": "Source/rights and mobile behavior must be approved first."
+    },
+    {
+      "object_type": "broken_image_placeholder_audit",
+      "purpose": "Detect older pages where image placeholders or missing visuals appear.",
+      "placement_rule": "Site-wide audit first; correction plan later."
+    }
+  ],
+  "cost_control_doctrine": [
+    "Do not use external image generation unless internal SVG/template solution is insufficient.",
+    "Prefer reusable internal object templates.",
+    "Separate object candidate planning from object generation.",
+    "Generate or insert only after approval and source/rights/attribution checks.",
+    "Do not re-run full article pipeline merely to add objects."
+  ],
+  "blocked_scope_in_ag09z": [
+    "No object generation.",
+    "No article mutation.",
+    "No image insertion.",
+    "No infographic/table/graph/figure/map insertion.",
+    "No CSS/JS mutation.",
+    "No backend/Auth/Supabase/database activation.",
+    "No deployment trigger."
+  ],
+  "final_chain_closure_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag09z": false,
+  "selected_article_file_write_performed_in_ag09z": false,
+  "homepage_mutation_performed_in_ag09z": false,
+  "css_mutation_performed_in_ag09z": false,
+  "js_mutation_performed_in_ag09z": false,
+  "reference_insertion_performed_in_ag09z": false,
+  "reference_url_change_performed_in_ag09z": false,
+  "visual_generation_performed_in_ag09z": false,
+  "image_asset_creation_performed_in_ag09z": false,
+  "image_insertion_performed_in_ag09z": false,
+  "infographic_generation_performed_in_ag09z": false,
+  "graph_generation_performed_in_ag09z": false,
+  "table_generation_performed_in_ag09z": false,
+  "figure_generation_performed_in_ag09z": false,
+  "map_generation_performed_in_ag09z": false,
+  "diagram_generation_performed_in_ag09z": false,
+  "live_url_fetch_performed_in_ag09z": false,
+  "deployment_trigger_performed_in_ag09z": false,
+  "production_jsonl_append_performed_in_ag09z": false,
+  "database_write_performed_in_ag09z": false,
+  "supabase_write_performed_in_ag09z": false,
+  "backend_auth_supabase_activation_performed_in_ag09z": false,
+  "rollback_execution_performed_in_ag09z": false,
+  "public_publishing_operation_performed_in_ag09z": false
+}
