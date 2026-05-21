@@ -1,0 +1,143 @@
+{
+  "module_id": "AG10B",
+  "title": "Object Eligibility Rules",
+  "status": "object_eligibility_rules_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10b": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "universal_eligibility_rules": [
+    "Object must have clear editorial purpose.",
+    "Object must map to an approved object family.",
+    "Object must preserve article shape and reading column.",
+    "Object must be mobile-safe or have a fallback summary.",
+    "Object must follow Drishvara theme/color doctrine.",
+    "Object must carry caption/credit/alt text/accessibility metadata where applicable.",
+    "Object must pass source/rights/ownership review before generation or insertion.",
+    "Object must pass cost-control review before expensive generation."
+  ],
+  "family_eligibility_rules": [
+    {
+      "family": "charts_graphs_bi_visuals",
+      "required_inputs": [
+        "validated_data_or_structured_values",
+        "chart_type_reason",
+        "axis_or_label_plan",
+        "source_note"
+      ],
+      "blocked_if": [
+        "no_data_source",
+        "misleading_scale",
+        "labels_unreadable_on_mobile"
+      ]
+    },
+    {
+      "family": "infographics",
+      "required_inputs": [
+        "story_structure",
+        "section_sequence",
+        "caption",
+        "credit",
+        "mobile_width_plan"
+      ],
+      "blocked_if": [
+        "too_text_heavy",
+        "unclear_flow",
+        "requires_unverified_facts"
+      ]
+    },
+    {
+      "family": "figures_diagrams",
+      "required_inputs": [
+        "concept_structure",
+        "label_plan",
+        "caption",
+        "credit"
+      ],
+      "blocked_if": [
+        "too_complex_for_mobile",
+        "duplicates_article_without_new_value"
+      ]
+    },
+    {
+      "family": "tables_structured_objects",
+      "required_inputs": [
+        "row_column_schema",
+        "source_or_internal_logic",
+        "responsive_wrapper_plan"
+      ],
+      "blocked_if": [
+        "too_wide_without_mobile_strategy",
+        "unverified_values"
+      ]
+    },
+    {
+      "family": "maps_geographic_objects",
+      "required_inputs": [
+        "geo_scope",
+        "map_source_or_internal_geometry",
+        "rights_status",
+        "mobile_fallback_text"
+      ],
+      "blocked_if": [
+        "unlicensed_map_base",
+        "unclear_region_boundary",
+        "mobile_unreadable"
+      ]
+    },
+    {
+      "family": "generated_and_editorial_images",
+      "required_inputs": [
+        "prompt_or_concept_record",
+        "rights_controller",
+        "caption",
+        "credit",
+        "alt_text"
+      ],
+      "blocked_if": [
+        "third_party_likeness_risk",
+        "brand_or_logo_risk",
+        "style_imitation_risk"
+      ]
+    },
+    {
+      "family": "article_support_objects",
+      "required_inputs": [
+        "object_text",
+        "placement_reason",
+        "layout_style"
+      ],
+      "blocked_if": [
+        "clutters_article",
+        "repeats_nearby_text_without_value"
+      ]
+    }
+  ],
+  "object_taxonomy_selection_doctrine_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10b": false,
+  "selected_article_file_write_performed_in_ag10b": false,
+  "homepage_mutation_performed_in_ag10b": false,
+  "css_mutation_performed_in_ag10b": false,
+  "js_mutation_performed_in_ag10b": false,
+  "reference_insertion_performed_in_ag10b": false,
+  "reference_url_change_performed_in_ag10b": false,
+  "visual_generation_performed_in_ag10b": false,
+  "image_generation_performed_in_ag10b": false,
+  "image_asset_creation_performed_in_ag10b": false,
+  "image_insertion_performed_in_ag10b": false,
+  "infographic_generation_performed_in_ag10b": false,
+  "graph_generation_performed_in_ag10b": false,
+  "chart_generation_performed_in_ag10b": false,
+  "table_generation_performed_in_ag10b": false,
+  "figure_generation_performed_in_ag10b": false,
+  "map_generation_performed_in_ag10b": false,
+  "diagram_generation_performed_in_ag10b": false,
+  "object_insertion_performed_in_ag10b": false,
+  "live_url_fetch_performed_in_ag10b": false,
+  "deployment_trigger_performed_in_ag10b": false,
+  "production_jsonl_append_performed_in_ag10b": false,
+  "database_write_performed_in_ag10b": false,
+  "supabase_write_performed_in_ag10b": false,
+  "backend_auth_supabase_activation_performed_in_ag10b": false,
+  "rollback_execution_performed_in_ag10b": false,
+  "public_publishing_operation_performed_in_ag10b": false
+}

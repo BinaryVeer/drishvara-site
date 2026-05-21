@@ -1,0 +1,108 @@
+{
+  "module_id": "AG10B",
+  "title": "Object Selection Scoring Doctrine",
+  "status": "object_selection_scoring_doctrine_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10b": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "scoring_dimensions": [
+    {
+      "dimension": "editorial_relevance",
+      "weight": 25,
+      "meaning": "How directly the object improves understanding of the article."
+    },
+    {
+      "dimension": "evidence_or_data_strength",
+      "weight": 15,
+      "meaning": "Whether the object is supported by reliable data, source text or approved internal reasoning."
+    },
+    {
+      "dimension": "reader_comprehension_value",
+      "weight": 15,
+      "meaning": "Whether the object makes complex content easier to understand."
+    },
+    {
+      "dimension": "layout_feasibility",
+      "weight": 12,
+      "meaning": "Whether the object can fit article width without deforming the page."
+    },
+    {
+      "dimension": "mobile_feasibility",
+      "weight": 12,
+      "meaning": "Whether the object remains readable on mobile."
+    },
+    {
+      "dimension": "theme_fit",
+      "weight": 8,
+      "meaning": "Whether the object can inherit Drishvara color, tone and visual language."
+    },
+    {
+      "dimension": "rights_credit_confidence",
+      "weight": 8,
+      "meaning": "Whether ownership, source, licence and credit can be safely recorded."
+    },
+    {
+      "dimension": "cost_efficiency",
+      "weight": 5,
+      "meaning": "Whether the object can be created using reusable/internal methods before expensive generation."
+    }
+  ],
+  "decision_bands": [
+    {
+      "score_min": 80,
+      "score_max": 100,
+      "decision": "strong_candidate_for_future_controlled_generation_or_insertion"
+    },
+    {
+      "score_min": 60,
+      "score_max": 79,
+      "decision": "candidate_requires_editorial_review"
+    },
+    {
+      "score_min": 40,
+      "score_max": 59,
+      "decision": "weak_candidate_hold"
+    },
+    {
+      "score_min": 0,
+      "score_max": 39,
+      "decision": "do_not_generate_or_insert"
+    }
+  ],
+  "disqualification_rules": [
+    "No source or evidence for data-backed object.",
+    "Unclear ownership, licence or credit.",
+    "Likely mobile overflow or unreadable labels.",
+    "Object duplicates article prose without adding comprehension value.",
+    "Object would require expensive generation without clear editorial benefit.",
+    "Object may deform article layout or break justified reading flow."
+  ],
+  "object_taxonomy_selection_doctrine_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10b": false,
+  "selected_article_file_write_performed_in_ag10b": false,
+  "homepage_mutation_performed_in_ag10b": false,
+  "css_mutation_performed_in_ag10b": false,
+  "js_mutation_performed_in_ag10b": false,
+  "reference_insertion_performed_in_ag10b": false,
+  "reference_url_change_performed_in_ag10b": false,
+  "visual_generation_performed_in_ag10b": false,
+  "image_generation_performed_in_ag10b": false,
+  "image_asset_creation_performed_in_ag10b": false,
+  "image_insertion_performed_in_ag10b": false,
+  "infographic_generation_performed_in_ag10b": false,
+  "graph_generation_performed_in_ag10b": false,
+  "chart_generation_performed_in_ag10b": false,
+  "table_generation_performed_in_ag10b": false,
+  "figure_generation_performed_in_ag10b": false,
+  "map_generation_performed_in_ag10b": false,
+  "diagram_generation_performed_in_ag10b": false,
+  "object_insertion_performed_in_ag10b": false,
+  "live_url_fetch_performed_in_ag10b": false,
+  "deployment_trigger_performed_in_ag10b": false,
+  "production_jsonl_append_performed_in_ag10b": false,
+  "database_write_performed_in_ag10b": false,
+  "supabase_write_performed_in_ag10b": false,
+  "backend_auth_supabase_activation_performed_in_ag10b": false,
+  "rollback_execution_performed_in_ag10b": false,
+  "public_publishing_operation_performed_in_ag10b": false
+}

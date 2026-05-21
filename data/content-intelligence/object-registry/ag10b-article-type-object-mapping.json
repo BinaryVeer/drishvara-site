@@ -1,0 +1,151 @@
+{
+  "module_id": "AG10B",
+  "title": "Article Type to Object Mapping",
+  "status": "article_type_object_mapping_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10b": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "mappings": [
+    {
+      "article_type": "policy_public_programme",
+      "preferred_objects": [
+        "hero_image",
+        "process_flow_infographic",
+        "comparison_table",
+        "kpi_chart",
+        "timeline_infographic",
+        "key_takeaway_box"
+      ],
+      "avoid_unless_needed": [
+        "pie_chart",
+        "photo_style_generated_image"
+      ],
+      "rationale": "Policy articles benefit from flow, comparison, timeline and evidence-oriented objects."
+    },
+    {
+      "article_type": "world_affairs",
+      "preferred_objects": [
+        "map",
+        "timeline_infographic",
+        "comparison_table",
+        "explainer_infographic",
+        "evidence_box",
+        "line_chart"
+      ],
+      "avoid_unless_needed": [
+        "donut_chart",
+        "pictograph"
+      ],
+      "rationale": "World affairs pieces often need geography, chronology and comparative context."
+    },
+    {
+      "article_type": "spirituality_reflection",
+      "preferred_objects": [
+        "hero_image",
+        "quote_image_hybrid",
+        "concept_diagram",
+        "definition_block",
+        "timeline_block",
+        "reader_lens_box"
+      ],
+      "avoid_unless_needed": [
+        "scatter_plot",
+        "candlestick_chart",
+        "waterfall_chart"
+      ],
+      "rationale": "Reflective articles need symbolic and conceptual support rather than dense BI visuals."
+    },
+    {
+      "article_type": "sports",
+      "preferred_objects": [
+        "line_chart",
+        "ranking_table",
+        "stat_card",
+        "comparison_card",
+        "sparkline",
+        "bar_chart"
+      ],
+      "avoid_unless_needed": [
+        "policy_summary_infographic",
+        "risk_matrix"
+      ],
+      "rationale": "Sports articles often benefit from trend, ranking, form and comparison objects."
+    },
+    {
+      "article_type": "media_society",
+      "preferred_objects": [
+        "timeline_infographic",
+        "concept_diagram",
+        "comparison_table",
+        "stat_card",
+        "quote_image_hybrid"
+      ],
+      "avoid_unless_needed": [
+        "geo_chart",
+        "candlestick_chart"
+      ],
+      "rationale": "Media/social pieces benefit from narrative structure and interpretive diagrams."
+    },
+    {
+      "article_type": "daily_weekly_exclusive_episode",
+      "preferred_objects": [
+        "hero_image",
+        "key_takeaway_box",
+        "timeline_block",
+        "reader_lens_box",
+        "quote_image_hybrid"
+      ],
+      "avoid_unless_needed": [
+        "heavy_table",
+        "dense_chart"
+      ],
+      "rationale": "Exclusive episodes need consistent identity and readable recurring structure."
+    }
+  ],
+  "density_rules": [
+    {
+      "article_length_band": "short_under_800_words",
+      "suggested_object_count": "0_to_1"
+    },
+    {
+      "article_length_band": "standard_800_to_1500_words",
+      "suggested_object_count": "1_to_2"
+    },
+    {
+      "article_length_band": "long_form_1500_to_2200_words",
+      "suggested_object_count": "2_to_4"
+    },
+    {
+      "article_length_band": "deep_research_above_2200_words",
+      "suggested_object_count": "3_to_6_only_if_layout_safe"
+    }
+  ],
+  "object_taxonomy_selection_doctrine_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10b": false,
+  "selected_article_file_write_performed_in_ag10b": false,
+  "homepage_mutation_performed_in_ag10b": false,
+  "css_mutation_performed_in_ag10b": false,
+  "js_mutation_performed_in_ag10b": false,
+  "reference_insertion_performed_in_ag10b": false,
+  "reference_url_change_performed_in_ag10b": false,
+  "visual_generation_performed_in_ag10b": false,
+  "image_generation_performed_in_ag10b": false,
+  "image_asset_creation_performed_in_ag10b": false,
+  "image_insertion_performed_in_ag10b": false,
+  "infographic_generation_performed_in_ag10b": false,
+  "graph_generation_performed_in_ag10b": false,
+  "chart_generation_performed_in_ag10b": false,
+  "table_generation_performed_in_ag10b": false,
+  "figure_generation_performed_in_ag10b": false,
+  "map_generation_performed_in_ag10b": false,
+  "diagram_generation_performed_in_ag10b": false,
+  "object_insertion_performed_in_ag10b": false,
+  "live_url_fetch_performed_in_ag10b": false,
+  "deployment_trigger_performed_in_ag10b": false,
+  "production_jsonl_append_performed_in_ag10b": false,
+  "database_write_performed_in_ag10b": false,
+  "supabase_write_performed_in_ag10b": false,
+  "backend_auth_supabase_activation_performed_in_ag10b": false,
+  "rollback_execution_performed_in_ag10b": false,
+  "public_publishing_operation_performed_in_ag10b": false
+}
