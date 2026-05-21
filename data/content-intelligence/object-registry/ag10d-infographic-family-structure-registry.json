@@ -1,0 +1,268 @@
+{
+  "module_id": "AG10D",
+  "title": "Infographic Family Structure Registry",
+  "status": "infographic_family_structure_registry_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10d": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "source_infographic_object_count": 20,
+  "infographic_families": [
+    {
+      "family_id": "AG10D-INFO-TIMELINE",
+      "family_name": "Timeline and Milestone Infographics",
+      "infographic_types": [
+        "timeline_infographic",
+        "milestone_infographic",
+        "roadmap_infographic"
+      ],
+      "best_for": [
+        "historical sequence",
+        "policy evolution",
+        "project journey",
+        "future roadmap"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "time_points",
+        "short_labels",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "dates are unclear",
+        "sequence is speculative",
+        "too many milestones for mobile"
+      ]
+    },
+    {
+      "family_id": "AG10D-INFO-PROCESS",
+      "family_name": "Process and Step Infographics",
+      "infographic_types": [
+        "process_flow_infographic",
+        "step_by_step_infographic",
+        "cycle_infographic"
+      ],
+      "best_for": [
+        "workflow",
+        "methodology",
+        "implementation stages",
+        "repeatable process"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "steps",
+        "connector_logic",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "process order is not confirmed",
+        "too many branches",
+        "workflow is better explained as text"
+      ]
+    },
+    {
+      "family_id": "AG10D-INFO-COMPARISON",
+      "family_name": "Comparison and Before-After Infographics",
+      "infographic_types": [
+        "comparison_infographic",
+        "before_after_infographic",
+        "problem_solution_infographic"
+      ],
+      "best_for": [
+        "contrast",
+        "policy alternatives",
+        "change explanation",
+        "problem-response framing"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "comparison_axes",
+        "left_right_or_before_after_blocks",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "comparison is biased",
+        "sides are not comparable",
+        "requires dense table instead"
+      ]
+    },
+    {
+      "family_id": "AG10D-INFO-STRUCTURE",
+      "family_name": "Hierarchy, Pyramid and Decision Infographics",
+      "infographic_types": [
+        "pyramid_infographic",
+        "hierarchy_infographic",
+        "decision_tree_infographic"
+      ],
+      "best_for": [
+        "governance structure",
+        "layered model",
+        "decision path",
+        "priority ladder"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "levels_or_nodes",
+        "relationship_labels",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "relationships are not stable",
+        "tree becomes unreadable on mobile"
+      ]
+    },
+    {
+      "family_id": "AG10D-INFO-EXPLAINER",
+      "family_name": "Explainer, Policy Summary and Fact-Sheet Infographics",
+      "infographic_types": [
+        "explainer_infographic",
+        "policy_summary_infographic",
+        "fact_sheet_infographic",
+        "checklist_infographic"
+      ],
+      "best_for": [
+        "reader guidance",
+        "policy simplification",
+        "summary facts",
+        "quick comprehension"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "key_points",
+        "icons_or_sections",
+        "source_note",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "facts are not verified",
+        "too much text",
+        "summary would oversimplify complex issue"
+      ]
+    },
+    {
+      "family_id": "AG10D-INFO-DATA-REGIONAL",
+      "family_name": "Statistical and Regional Insight Infographics",
+      "infographic_types": [
+        "statistical_infographic",
+        "regional_insight_infographic"
+      ],
+      "best_for": [
+        "data-backed insight",
+        "regional pattern",
+        "indicator summary",
+        "high-level numeric story"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "metrics",
+        "source_note",
+        "data_context",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "data source is weak",
+        "better suited for chart/table",
+        "numbers are outdated"
+      ]
+    },
+    {
+      "family_id": "AG10D-INFO-STORY",
+      "family_name": "Storyboard and Cause-Effect Infographics",
+      "infographic_types": [
+        "storyboard_infographic",
+        "cause_effect_infographic"
+      ],
+      "best_for": [
+        "narrative chain",
+        "cause and response",
+        "reader journey",
+        "impact pathway"
+      ],
+      "minimum_content_blocks": [
+        "title",
+        "story_frames_or_causal_links",
+        "short_text",
+        "caption",
+        "credit"
+      ],
+      "avoid_when": [
+        "causality is not supported",
+        "storyline becomes editorially forced"
+      ]
+    }
+  ],
+  "universal_infographic_schema": {
+    "required_metadata": [
+      "infographic_type",
+      "article_id",
+      "object_template_id",
+      "source_or_logic_record",
+      "rights_controller",
+      "credit_display",
+      "caption",
+      "alt_text",
+      "mobile_fallback_text",
+      "layout_zone",
+      "theme_variant",
+      "reuse_eligibility_status"
+    ],
+    "required_content_fields": [
+      "title",
+      "core_message",
+      "content_blocks",
+      "block_order",
+      "visual_structure",
+      "source_note",
+      "editorial_purpose"
+    ],
+    "optional_content_fields": [
+      "icons",
+      "labels",
+      "connectors",
+      "metrics",
+      "time_points",
+      "comparison_axes",
+      "annotations",
+      "regional_context",
+      "reader_instruction"
+    ]
+  },
+  "no_infographic_generation_in_ag10d": true,
+  "no_infographic_rendering_in_ag10d": true,
+  "infographic_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10d": false,
+  "selected_article_file_write_performed_in_ag10d": false,
+  "homepage_mutation_performed_in_ag10d": false,
+  "css_mutation_performed_in_ag10d": false,
+  "js_mutation_performed_in_ag10d": false,
+  "reference_insertion_performed_in_ag10d": false,
+  "reference_url_change_performed_in_ag10d": false,
+  "data_fetch_performed_in_ag10d": false,
+  "dataset_creation_performed_in_ag10d": false,
+  "infographic_generation_performed_in_ag10d": false,
+  "infographic_render_performed_in_ag10d": false,
+  "infographic_template_creation_performed_in_ag10d": false,
+  "rendered_infographic_creation_performed_in_ag10d": false,
+  "svg_asset_creation_performed_in_ag10d": false,
+  "image_asset_creation_performed_in_ag10d": false,
+  "object_insertion_performed_in_ag10d": false,
+  "visual_generation_performed_in_ag10d": false,
+  "image_generation_performed_in_ag10d": false,
+  "chart_generation_performed_in_ag10d": false,
+  "table_generation_performed_in_ag10d": false,
+  "figure_generation_performed_in_ag10d": false,
+  "map_generation_performed_in_ag10d": false,
+  "live_url_fetch_performed_in_ag10d": false,
+  "deployment_trigger_performed_in_ag10d": false,
+  "production_jsonl_append_performed_in_ag10d": false,
+  "database_write_performed_in_ag10d": false,
+  "supabase_write_performed_in_ag10d": false,
+  "backend_auth_supabase_activation_performed_in_ag10d": false,
+  "rollback_execution_performed_in_ag10d": false,
+  "public_publishing_operation_performed_in_ag10d": false
+}

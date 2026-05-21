@@ -1,0 +1,121 @@
+{
+  "module_id": "AG10D",
+  "title": "Infographic Content Block Schema",
+  "status": "infographic_content_block_schema_created_not_applied",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag10d": "37bf11b225fe9c7a87fbd001838d34e77557711478bdad81dbe780654bd29313",
+  "block_types": [
+    {
+      "block_type": "headline_block",
+      "required_fields": [
+        "title",
+        "short_context"
+      ],
+      "max_text_guidance": "Short, direct and readable on mobile."
+    },
+    {
+      "block_type": "step_block",
+      "required_fields": [
+        "step_number",
+        "label",
+        "description"
+      ],
+      "max_text_guidance": "One short phrase or sentence per step."
+    },
+    {
+      "block_type": "metric_block",
+      "required_fields": [
+        "metric_label",
+        "value",
+        "unit",
+        "source_note"
+      ],
+      "max_text_guidance": "Use only verified numeric values."
+    },
+    {
+      "block_type": "comparison_block",
+      "required_fields": [
+        "comparison_axis",
+        "left_value",
+        "right_value",
+        "interpretation_note"
+      ],
+      "max_text_guidance": "Keep both sides balanced."
+    },
+    {
+      "block_type": "timeline_block",
+      "required_fields": [
+        "period_or_date",
+        "event_label",
+        "event_note"
+      ],
+      "max_text_guidance": "Avoid long event descriptions."
+    },
+    {
+      "block_type": "hierarchy_block",
+      "required_fields": [
+        "level",
+        "node_label",
+        "relationship_note"
+      ],
+      "max_text_guidance": "Keep hierarchy labels compact."
+    },
+    {
+      "block_type": "cause_effect_block",
+      "required_fields": [
+        "cause",
+        "effect",
+        "evidence_or_context"
+      ],
+      "max_text_guidance": "Do not imply unsupported causation."
+    },
+    {
+      "block_type": "callout_block",
+      "required_fields": [
+        "callout_label",
+        "callout_text"
+      ],
+      "max_text_guidance": "Use sparingly for emphasis."
+    }
+  ],
+  "content_validation_rules": [
+    "Each infographic must have one clear core message.",
+    "Each block must be independently readable.",
+    "Text density must remain mobile-safe.",
+    "Facts, metrics and dates must map to a source or internal inference record.",
+    "Causality must not be implied without evidence.",
+    "Caption and credit must be present before future rendering."
+  ],
+  "infographic_pipeline_planning_only": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag10d": false,
+  "selected_article_file_write_performed_in_ag10d": false,
+  "homepage_mutation_performed_in_ag10d": false,
+  "css_mutation_performed_in_ag10d": false,
+  "js_mutation_performed_in_ag10d": false,
+  "reference_insertion_performed_in_ag10d": false,
+  "reference_url_change_performed_in_ag10d": false,
+  "data_fetch_performed_in_ag10d": false,
+  "dataset_creation_performed_in_ag10d": false,
+  "infographic_generation_performed_in_ag10d": false,
+  "infographic_render_performed_in_ag10d": false,
+  "infographic_template_creation_performed_in_ag10d": false,
+  "rendered_infographic_creation_performed_in_ag10d": false,
+  "svg_asset_creation_performed_in_ag10d": false,
+  "image_asset_creation_performed_in_ag10d": false,
+  "object_insertion_performed_in_ag10d": false,
+  "visual_generation_performed_in_ag10d": false,
+  "image_generation_performed_in_ag10d": false,
+  "chart_generation_performed_in_ag10d": false,
+  "table_generation_performed_in_ag10d": false,
+  "figure_generation_performed_in_ag10d": false,
+  "map_generation_performed_in_ag10d": false,
+  "live_url_fetch_performed_in_ag10d": false,
+  "deployment_trigger_performed_in_ag10d": false,
+  "production_jsonl_append_performed_in_ag10d": false,
+  "database_write_performed_in_ag10d": false,
+  "supabase_write_performed_in_ag10d": false,
+  "backend_auth_supabase_activation_performed_in_ag10d": false,
+  "rollback_execution_performed_in_ag10d": false,
+  "public_publishing_operation_performed_in_ag10d": false
+}
