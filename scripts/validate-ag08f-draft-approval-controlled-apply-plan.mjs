@@ -110,7 +110,40 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
 
 
 
+
+function ag11cControlledInfographicInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11c-infographic-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "infographic_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.infographic_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11bControlledChartInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11cControlledInfographicInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11b-chart-bi-graph-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -271,9 +304,9 @@ const currentHash = sha256(html);
 
 for (const obj of [review.summary, approval, applyPlan, readiness]) {
   const hash = obj.selected_article_sha256_before_ag08f;
-  if (hash && hash !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Selected article hash mismatch in AG08F artifacts or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state");
+  if (hash && hash !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("Selected article hash mismatch in AG08F artifacts or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
 }
-if (ag08eDraft.selected_article.sha256_before_ag08e !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("AG08F hash must match AG08E hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state");
+if (ag08eDraft.selected_article.sha256_before_ag08e !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("AG08F hash must match AG08E hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
 
 const draftWords = countWords(ag08eDraft.draft_candidate.draft_text);
 if (approval.draft_approval.draft_word_count_estimate !== draftWords) fail("Draft approval word count mismatch");
@@ -302,7 +335,7 @@ if (applyPlan.ag08g_target_article_path !== selectedPath) fail("AG08G target pat
 if (applyPlan.allowed_ag08g_mutation_scope.exactly_one_article_file !== true) fail("AG08G scope must be exactly one article file");
 if (applyPlan.allowed_ag08g_mutation_scope.allowed_target_article_path !== selectedPath) fail("AG08G allowed path mismatch");
 if (!applyPlan.article_body_apply_strategy.marker_required.includes("AG08G-CONTROLLED-APPLY")) fail("AG08G marker requirement missing");
-if (applyPlan.article_body_apply_strategy.marker_count_required_after_apply !== 1) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("AG08G marker count must be one or AG11B controlled chart post-insertion record explains the later approved article state");
+if (applyPlan.article_body_apply_strategy.marker_count_required_after_apply !== 1) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("AG08G marker count must be one or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
 if (applyPlan.reference_apply_strategy.approved_reference_count !== approval.reference_approval.approved_reference_count) fail("Reference apply count mismatch");
 if (applyPlan.reference_apply_strategy.insert_only_approved_references !== true) fail("AG08G must insert only approved references");
 if (applyPlan.visual_apply_strategy.visual_generation_approval_status !== "not_approved_for_ag08g") fail("Visual generation must remain not approved");
