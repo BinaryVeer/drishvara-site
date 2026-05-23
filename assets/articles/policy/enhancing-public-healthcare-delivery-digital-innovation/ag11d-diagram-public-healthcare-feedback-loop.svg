@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Public healthcare digital feedback loop</title>
+  <desc id="desc">Conceptual loop diagram with five nodes: public need, digital signal, triage, service response and trust feedback.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7fafc"/>
+      <stop offset="100%" stop-color="#eef6f9"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#1A738C"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#1A738C" flood-opacity="0.13"/>
+    </filter>
+    <style>
+      .title{font-family:Inter,Arial,sans-serif;font-size:33px;font-weight:800;fill:#17324d}
+      .subtitle{font-family:Inter,Arial,sans-serif;font-size:18px;font-weight:500;fill:#4a6070}
+      .nodeTitle{font-family:Inter,Arial,sans-serif;font-size:17px;font-weight:800;fill:#17324d}
+      .note{font-family:Inter,Arial,sans-serif;font-size:13px;font-weight:600;fill:#607685}
+      .edge{fill:none;stroke:#1A738C;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow);opacity:.86}
+      .softEdge{fill:none;stroke:#4480A8;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow);opacity:.45}
+    </style>
+  </defs>
+  <rect width="1200" height="720" rx="36" fill="url(#bg)"/>
+  <circle cx="1050" cy="125" r="150" fill="#B6D0E9" opacity="0.20"/>
+  <circle cx="160" cy="610" r="165" fill="#4480A8" opacity="0.08"/>
+
+  <g filter="url(#shadow)">
+    <rect x="58" y="58" width="1084" height="604" rx="30" fill="#ffffff" stroke="#B6D0E9" stroke-width="2"/>
+  </g>
+
+  <text x="88" y="116" class="title">Public healthcare digital feedback loop</text>
+  <text x="90" y="150" class="subtitle">Conceptual relationship diagram based on the article’s service-delivery and trust themes</text>
+
+  <path class="edge" d="M338 300 C 360 248, 360 228, 390 214"/>
+  <path class="edge" d="M560 226 C 584 206, 610 204, 646 226"/>
+  <path class="edge" d="M806 228 C 842 236, 864 252, 882 286"/>
+  <path class="edge" d="M870 390 C 788 462, 690 488, 652 476"/>
+  <path class="softEdge" d="M470 486 C 338 516, 194 456, 190 382"/>
+
+  
+  <g>
+    <rect x="130" y="270" width="210" height="112" rx="24" fill="#ffffff" stroke="#B6D0E9" stroke-width="2"/>
+    <circle cx="162" cy="304" r="16" fill="#1A738C" opacity="0.95"/>
+    <text x="188" y="310" class="nodeTitle">Public need</text>
+    <foreignObject x="154" y="328" width="166" height="42">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Inter,Arial,sans-serif;font-size:12.5px;line-height:1.32;color:#4a6070;">Citizen or patient experience creates a service signal.</div>
+    </foreignObject>
+  </g>
+
+
+  <g>
+    <rect x="350" y="170" width="210" height="112" rx="24" fill="#ffffff" stroke="#B6D0E9" stroke-width="2"/>
+    <circle cx="382" cy="204" r="16" fill="#1A738C" opacity="0.95"/>
+    <text x="408" y="210" class="nodeTitle">Digital signal</text>
+    <foreignObject x="374" y="228" width="166" height="42">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Inter,Arial,sans-serif;font-size:12.5px;line-height:1.32;color:#4a6070;">Need, feedback or service status becomes visible.</div>
+    </foreignObject>
+  </g>
+
+
+  <g>
+    <rect x="610" y="170" width="210" height="112" rx="24" fill="#ffffff" stroke="#B6D0E9" stroke-width="2"/>
+    <circle cx="642" cy="204" r="16" fill="#1A738C" opacity="0.95"/>
+    <text x="668" y="210" class="nodeTitle">Triage</text>
+    <foreignObject x="634" y="228" width="166" height="42">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Inter,Arial,sans-serif;font-size:12.5px;line-height:1.32;color:#4a6070;">Teams prioritise what requires response.</div>
+    </foreignObject>
+  </g>
+
+
+  <g>
+    <rect x="830" y="270" width="210" height="112" rx="24" fill="#ffffff" stroke="#B6D0E9" stroke-width="2"/>
+    <circle cx="862" cy="304" r="16" fill="#1A738C" opacity="0.95"/>
+    <text x="888" y="310" class="nodeTitle">Service response</text>
+    <foreignObject x="854" y="328" width="166" height="42">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Inter,Arial,sans-serif;font-size:12.5px;line-height:1.32;color:#4a6070;">Facility or programme action is coordinated.</div>
+    </foreignObject>
+  </g>
+
+
+  <g>
+    <rect x="470" y="430" width="210" height="112" rx="24" fill="#ffffff" stroke="#B6D0E9" stroke-width="2"/>
+    <circle cx="502" cy="464" r="16" fill="#1A738C" opacity="0.95"/>
+    <text x="528" y="470" class="nodeTitle">Trust feedback</text>
+    <foreignObject x="494" y="488" width="166" height="42">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Inter,Arial,sans-serif;font-size:12.5px;line-height:1.32;color:#4a6070;">Outcome visibility strengthens the next service loop.</div>
+    </foreignObject>
+  </g>
+
+
+  <rect x="88" y="590" width="1018" height="44" rx="16" fill="#F7FAFC" stroke="#B6D0E9"/>
+  <text x="112" y="618" class="note">Source: article-derived conceptual synthesis. This figure explains relationships and does not claim a formal official workflow.</text>
+</svg>

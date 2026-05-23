@@ -72,7 +72,40 @@ function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPat
 
 
 
+
+function ag11dControlledFigureDiagramInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11d-figure-diagram-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "figure_diagram_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.diagram_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11cControlledInfographicInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11dControlledFigureDiagramInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11c-infographic-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -272,9 +305,9 @@ const hasAg05dEvidence =
   /drishvara-ag05d-visible-reference-block/i.test(targetHtml);
 
 
-if (targetHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, targetHash) && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("Target hash must match AG08G post-apply hash or AG08K controlled visual insertion hash or AG09C controlled post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
-if (backupHash !== ag08gApply.backup_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("Backup hash must match AG08G backup hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
-if (backupHash !== ag08gApply.pre_apply_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("Backup hash must match AG08G pre-apply hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
+if (targetHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, targetHash) && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Target hash must match AG08G post-apply hash or AG08K controlled visual insertion hash or AG09C controlled post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (backupHash !== ag08gApply.backup_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Backup hash must match AG08G backup hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (backupHash !== ag08gApply.pre_apply_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Backup hash must match AG08G pre-apply hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
 if (targetHash === backupHash) fail("Target must differ from backup");
 if (backupHtml.includes("AG08G-CONTROLLED-APPLY")) fail("Backup must not contain AG08G marker");
 

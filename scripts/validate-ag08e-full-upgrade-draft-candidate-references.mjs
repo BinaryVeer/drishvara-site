@@ -114,7 +114,40 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
 
 
 
+
+function ag11dControlledFigureDiagramInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11d-figure-diagram-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "figure_diagram_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.diagram_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11cControlledInfographicInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11dControlledFigureDiagramInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11c-infographic-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -305,9 +338,9 @@ if (!fs.existsSync(path.join(root, selectedPath))) fail(`Selected article does n
 const selectedHtml = fs.readFileSync(path.join(root, selectedPath), "utf8");
 const selectedHash = sha256(selectedHtml);
 
-if (draft.selected_article.sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("Draft selected article hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
-if (readiness.selected_article_sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("Readiness selected article hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
-if (ag08dInference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) fail("AG08E hash must match AG08D hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state");
+if (draft.selected_article.sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Draft selected article hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (readiness.selected_article_sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Readiness selected article hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (ag08dInference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("AG08E hash must match AG08D hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
 
 if (!draft.draft_candidate?.draft_text) fail("Draft text missing");
 const actualDraftWords = countWords(draft.draft_candidate.draft_text);
