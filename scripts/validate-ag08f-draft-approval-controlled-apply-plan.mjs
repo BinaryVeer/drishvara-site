@@ -41,6 +41,7 @@ function sha256(text) {
 }
 
 function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -73,6 +74,7 @@ function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPat
 }
 
 function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -106,7 +108,39 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
   }
 }
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag08gControlledApplyAllowsPostMutation() {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   if (ag09cControlledPublicExperienceCorrectionAllowsPostMutation(...arguments)) return true;
   if (ag08kControlledVisualInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
@@ -204,9 +238,9 @@ const currentHash = sha256(html);
 
 for (const obj of [review.summary, approval, applyPlan, readiness]) {
   const hash = obj.selected_article_sha256_before_ag08f;
-  if (hash && hash !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("Selected article hash mismatch in AG08F artifacts or AG08G controlled post-apply hash missing");
+  if (hash && hash !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Selected article hash mismatch in AG08F artifacts or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing");
 }
-if (ag08eDraft.selected_article.sha256_before_ag08e !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("AG08F hash must match AG08E hash or AG08G controlled post-apply hash missing");
+if (ag08eDraft.selected_article.sha256_before_ag08e !== currentHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("AG08F hash must match AG08E hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state");
 
 const draftWords = countWords(ag08eDraft.draft_candidate.draft_text);
 if (approval.draft_approval.draft_word_count_estimate !== draftWords) fail("Draft approval word count mismatch");

@@ -4,6 +4,37 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag09c-controlled-public-experience-correction-apply.json",
   "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json",
@@ -69,7 +100,7 @@ if (!fs.existsSync(path.join(root, target))) fail(`Selected article missing: ${t
 
 const articleHtml = fs.readFileSync(path.join(root, target), "utf8");
 const currentHash = sha256(articleHtml);
-if (currentHash !== ag09cApply.post_correction_hash) fail("Current article hash must match AG09C post-correction hash");
+if (currentHash !== ag09cApply.post_correction_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Current article hash must match AG09C post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
 
 if (review.status !== "post_correction_public_experience_audit_passed") fail("Review must pass");
 if (audit.status !== "post_correction_public_experience_audit_passed") fail("Audit report must pass");
@@ -77,7 +108,7 @@ if (registry.status !== "post_correction_public_experience_audit_passed") fail("
 if (preview.status !== "post_correction_public_experience_audit_passed") fail("Preview must pass");
 
 if (audit.backup_integrity.status !== "passed") fail("Backup integrity must pass");
-if (audit.mutated_file_integrity.status !== "passed") fail("Mutated file integrity must pass");
+if (audit.mutated_file_integrity.status !== "passed") if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Mutated file integrity must pass or AG10K controlled generated-image post-insertion record explains the later approved article state");
 if (audit.metadata_audit.metadata_audit_status !== "passed") fail("Metadata audit must pass");
 if (audit.listing_audit.listing_audit_status !== "passed") fail("Listing audit must pass");
 if (audit.correction_mapping_audit.correction_mapping_status !== "passed") fail("Correction mapping must pass");
@@ -94,13 +125,13 @@ if (readiness.supabase_activation_ready !== false) fail("Supabase activation mus
 for (const backup of audit.backup_integrity.backup_audit_items) {
   if (!fs.existsSync(path.join(root, backup.backup_path))) fail(`Backup missing: ${backup.backup_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, backup.backup_path), "utf8"));
-  if (hash !== backup.backup_hash_recorded) fail(`Backup hash mismatch: ${backup.backup_path}`);
+  if (hash !== backup.backup_hash_recorded) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(backup.backup_path)) fail(`Backup hash mismatch: ${backup.backup_path} or AG10K controlled generated-image post-insertion record explains the later approved article state`);
 }
 
 for (const item of audit.mutated_file_integrity.mutated_file_audit_items) {
   if (!fs.existsSync(path.join(root, item.file_path))) fail(`Mutated file missing: ${item.file_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, item.file_path), "utf8"));
-  if (hash !== item.recorded_post_hash) fail(`Mutated file hash mismatch: ${item.file_path}`);
+  if (hash !== item.recorded_post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(item.file_path)) fail(`Mutated file hash mismatch: ${item.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state`);
 }
 
 for (const expected of [

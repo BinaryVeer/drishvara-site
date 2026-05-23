@@ -40,6 +40,7 @@ function sha256(text) {
 }
 
 function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -72,6 +73,7 @@ function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPat
 }
 
 function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -105,7 +107,39 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
   }
 }
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag08gControlledApplyAllowsPostMutation(selectedPath, currentHash) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath, currentHash)) return true;
   if (ag09cControlledPublicExperienceCorrectionAllowsPostMutation(...arguments)) return true;
   if (ag08kControlledVisualInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
@@ -197,7 +231,7 @@ if (
   selection.selected_article.sha256_at_selection !== selectedHash &&
   !ag08gControlledApplyAllowsPostMutation(selection.selected_article.article_path, selectedHash)
 ) {
-  fail("Selected article hash must match current file, AG08G controlled post-apply hash, or AG09C controlled post-correction hash");
+  fail("Selected article hash must match current file, AG08G controlled post-apply hash, AG09C controlled post-correction hash, or AG10K controlled generated-image post-insertion hash");
 }
 if (selection.ag08c_handoff.next_stage_id !== "AG08C") fail("Selection must hand off to AG08C");
 if (selection.ag08c_handoff.explicit_approval_required !== true) fail("AG08C handoff must require explicit approval");

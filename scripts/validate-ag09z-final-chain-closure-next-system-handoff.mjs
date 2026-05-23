@@ -4,6 +4,37 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag09h-final-editorial-publish-approval-decision.json",
   "data/content-intelligence/approval-registry/ag09h-final-editorial-publish-approval-decision.json",
@@ -77,7 +108,7 @@ const target = ag09cApply.selected_article_path;
 if (!fs.existsSync(path.join(root, target))) fail(`Selected article missing: ${target}`);
 
 const currentHash = sha256(fs.readFileSync(path.join(root, target), "utf8"));
-if (currentHash !== ag09cApply.post_correction_hash) fail("Selected article hash must match AG09C post-correction hash");
+if (currentHash !== ag09cApply.post_correction_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Selected article hash must match AG09C post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
 
 if (review.status !== "ag09_chain_closed_next_system_handoff_created") fail("Review status mismatch");
 if (closure.status !== "ag09_chain_closed_next_system_handoff_created") fail("Closure status mismatch");

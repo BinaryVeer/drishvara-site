@@ -39,7 +39,39 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -72,6 +104,7 @@ function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPat
 }
 
 function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   if (ag09cControlledPublicExperienceCorrectionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -141,7 +174,7 @@ if (!fs.existsSync(path.join(root, target))) fail(`Target article missing: ${tar
 
 const targetHtml = fs.readFileSync(path.join(root, target), "utf8");
 const currentHash = sha256(targetHtml);
-if (currentHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash) && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) fail("Target article hash must match AG08G post-apply hash or AG08K controlled visual insertion hash or AG09C controlled post-correction hash");
+if (currentHash !== ag08gApply.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash) && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Target article hash must match AG08G post-apply hash or AG08K controlled visual insertion hash or AG09C controlled post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
 
 if (review.status !== "visual_generation_image_insertion_plan_created") fail("AG08I review status mismatch");
 if (registry.status !== "visual_generation_image_insertion_plan_created") fail("AG08I registry status mismatch");
@@ -152,7 +185,7 @@ if (schema.status !== "schema_visual_plan_only") fail("Schema status mismatch");
 if (learning.status !== "learning_record_only") fail("Learning status mismatch");
 
 if (visualPlan.target_article_path !== target) fail("Visual plan target mismatch");
-if (visualPlan.target_article_hash_at_ag08i !== currentHash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash)) fail("Visual plan hash mismatch or AG08K controlled visual insertion hash missing");
+if (visualPlan.target_article_hash_at_ag08i !== currentHash && !ag08kControlledVisualInsertionAllowsPostMutation(target, currentHash)) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Visual plan hash mismatch or AG08K controlled visual insertion hash missing or AG10K controlled generated-image post-insertion hash missing");
 if (visualPlan.planning_status !== "visual_plan_created_no_asset_generated") fail("Visual plan status mismatch");
 if (!visualPlan.recommended_visual_type) fail("Recommended visual type missing");
 if (!visualPlan.visual_intent) fail("Visual intent missing");

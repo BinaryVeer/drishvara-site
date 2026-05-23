@@ -44,6 +44,7 @@ function sha256(text) {
 }
 
 function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -76,6 +77,7 @@ function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPat
 }
 
 function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08k-controlled-visual-image-insertion-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -109,7 +111,39 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
   }
 }
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag08gControlledApplyAllowsPostMutation() {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   if (ag09cControlledPublicExperienceCorrectionAllowsPostMutation(...arguments)) return true;
   if (ag08kControlledVisualInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag08g-one-article-controlled-apply.json");
@@ -205,9 +239,9 @@ if (!fs.existsSync(path.join(root, selectedPath))) fail(`Selected article does n
 const selectedHtml = fs.readFileSync(path.join(root, selectedPath), "utf8");
 const selectedHash = sha256(selectedHtml);
 
-if (draft.selected_article.sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("Draft selected article hash mismatch or AG08G controlled post-apply hash missing");
-if (readiness.selected_article_sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("Readiness selected article hash mismatch or AG08G controlled post-apply hash missing");
-if (ag08dInference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) fail("AG08E hash must match AG08D hash or AG08G controlled post-apply hash missing");
+if (draft.selected_article.sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Draft selected article hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing");
+if (readiness.selected_article_sha256_before_ag08e !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Readiness selected article hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing");
+if (ag08dInference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("AG08E hash must match AG08D hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state");
 
 if (!draft.draft_candidate?.draft_text) fail("Draft text missing");
 const actualDraftWords = countWords(draft.draft_candidate.draft_text);

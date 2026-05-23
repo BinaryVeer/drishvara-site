@@ -39,7 +39,39 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+
+function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "generated_image_inserted_pending_post_insertion_audit" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag10kControlledGeneratedImageInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag09c-controlled-public-experience-correction-apply.json");
   if (!fs.existsSync(applyRecordPath)) return false;
 
@@ -135,12 +167,12 @@ const targetHash = sha256(targetHtml);
 const backupHash = sha256(backupHtml);
 const assetHash = sha256(assetSvg);
 
-if (targetHash !== ag08kApply.post_insertion_hash && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) fail("Target hash must match AG08K post-insertion hash or AG09C controlled post-correction hash");
-if (backupHash !== ag08kApply.backup_hash) fail("Backup hash must match AG08K backup hash");
-if (backupHash !== ag08kApply.pre_insertion_hash) fail("Backup hash must match AG08K pre-insertion hash");
+if (targetHash !== ag08kApply.post_insertion_hash && !ag09cControlledPublicExperienceCorrectionAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Target hash must match AG08K post-insertion hash or AG09C controlled post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
+if (backupHash !== ag08kApply.backup_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Backup hash must match AG08K backup hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
+if (backupHash !== ag08kApply.pre_insertion_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Backup hash must match AG08K pre-insertion hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
 if (targetHash === backupHash) fail("Target must differ from AG08K backup");
 if (backupHtml.includes("AG08K-HERO-VISUAL-INSERTION")) fail("Backup must not contain AG08K marker");
-if (assetHash !== ag08kApply.asset_hash_sha256) fail("Asset hash must match AG08K apply record");
+if (assetHash !== ag08kApply.asset_hash_sha256) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Asset hash must match AG08K apply record or AG10K controlled generated-image post-insertion record explains the later approved article state");
 
 if (countOccurrences(targetHtml, "AG08K-HERO-VISUAL-INSERTION") !== 1) fail("Target must contain exactly one AG08K marker");
 if (countOccurrences(targetHtml, 'id="ag08k-hero-visual-block"') !== 1) fail("Target must contain exactly one AG08K hero visual block ID");
