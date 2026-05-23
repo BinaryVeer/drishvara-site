@@ -1,0 +1,72 @@
+{
+  "module_id": "AG12B",
+  "title": "Object Density Production Rule Record",
+  "status": "production_density_rules_created",
+  "rule_principle": "Objects should improve comprehension, trust, memory, cost efficiency and reusable intelligence; object count should not be maximised by default.",
+  "default_density_rules": [
+    {
+      "article_band": "short_read",
+      "approximate_words": "400-650",
+      "recommended_visible_objects": "0-1",
+      "maximum_visible_objects": 1,
+      "note": "Use one high-value support object only if it improves the visitor view."
+    },
+    {
+      "article_band": "standard_feature",
+      "approximate_words": "650-1000",
+      "recommended_visible_objects": "1-2",
+      "maximum_visible_objects": 2,
+      "note": "Prefer one visual object and one reader-support object."
+    },
+    {
+      "article_band": "long_feature",
+      "approximate_words": "1000-1600",
+      "recommended_visible_objects": "2-3",
+      "maximum_visible_objects": 3,
+      "note": "Use objects from different families only when each has a clear role."
+    },
+    {
+      "article_band": "deep_dive_or_explainer",
+      "approximate_words": "1600+",
+      "recommended_visible_objects": "3-4",
+      "maximum_visible_objects": 4,
+      "note": "Allow higher density only when the article structure can carry it."
+    },
+    {
+      "article_band": "capability_demo_or_internal_pilot",
+      "approximate_words": "any",
+      "recommended_visible_objects": "controlled exception",
+      "maximum_visible_objects": 7,
+      "note": "All object families may appear only for governed capability demonstration, not normal public density."
+    }
+  ],
+  "object_priority_rules": [
+    "Hero/support image may remain near the relevant article segment.",
+    "Chart/table should appear only when data or structured reading is genuinely useful.",
+    "Infographic/diagram should not duplicate each other unless the article is a deep explainer.",
+    "Map/geographic object should be schematic unless verified geographic data is available.",
+    "Composite reader-lens card is useful near the close of an object-rich article.",
+    "Visible credit, caption, source note and accessibility text remain mandatory."
+  ],
+  "controlled_object_rich_layout_refinement_plan_only": true,
+  "refinement_decision_planning_performed_in_ag12b": true,
+  "production_density_rules_created_in_ag12b": true,
+  "selected_article_treatment_planned_in_ag12b": true,
+  "ag12c_boundary_created_in_ag12b": true,
+  "selected_article_read_performed": true,
+  "article_mutation_performed_in_ag12b": false,
+  "selected_article_file_write_performed_in_ag12b": false,
+  "object_generation_performed_in_ag12b": false,
+  "object_insertion_performed_in_ag12b": false,
+  "image_generation_performed_in_ag12b": false,
+  "data_fetch_performed_in_ag12b": false,
+  "reference_url_change_performed_in_ag12b": false,
+  "homepage_mutation_performed_in_ag12b": false,
+  "css_file_mutation_performed_in_ag12b": false,
+  "js_file_mutation_performed_in_ag12b": false,
+  "production_jsonl_append_performed_in_ag12b": false,
+  "database_write_performed_in_ag12b": false,
+  "supabase_write_performed_in_ag12b": false,
+  "backend_auth_supabase_activation_performed_in_ag12b": false,
+  "public_publishing_operation_performed_in_ag12b": false
+}
