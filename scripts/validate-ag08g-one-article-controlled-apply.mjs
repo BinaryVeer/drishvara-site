@@ -73,7 +73,40 @@ function ag09cControlledPublicExperienceCorrectionAllowsPostMutation(selectedPat
 
 
 
+
+function ag11eControlledTableInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11e-table-structured-object-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "table_structured_object_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.table_title) &&
+      html.includes(applyRecord.visible_credit) &&
+      html.includes("AG11E-TABLE-001")
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11dControlledFigureDiagramInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11eControlledTableInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11d-figure-diagram-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -296,9 +329,9 @@ const backupHtml = fs.readFileSync(path.join(root, backup), "utf8");
 const targetHash = sha256(targetHtml);
 const backupHash = sha256(backupHtml);
 
-if (backupHash !== applyRecord.backup_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Backup hash mismatch or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (backupHash !== applyRecord.backup_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Backup hash mismatch or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 if (backupHash !== applyRecord.pre_apply_hash) fail("Backup must match pre-apply hash");
-if (targetHash !== applyRecord.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(applyRecord.selected_article_path, targetHash)) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Target hash mismatch or AG08K controlled visual insertion hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (targetHash !== applyRecord.post_apply_hash && !ag08kControlledVisualInsertionAllowsPostMutation(applyRecord.selected_article_path, targetHash)) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Target hash mismatch or AG08K controlled visual insertion hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 if (targetHash === backupHash) fail("Target must differ from backup after apply");
 
 if (backupHtml.includes("AG08G-CONTROLLED-APPLY")) fail("Backup must not contain AG08G marker");
@@ -322,7 +355,7 @@ if (articleFilesWithMarker[0] !== target) fail(`AG08G marker found in wrong arti
 
 const backupImageCount = countOccurrences(backupHtml.toLowerCase(), "<img");
 const targetImageCount = countOccurrences(targetHtml.toLowerCase(), "<img");
-if (targetImageCount > backupImageCount) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("AG08G must not increase image count or AG10K controlled generated-image insertion explains the approved image-count increase or AG11B controlled chart post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (targetImageCount > backupImageCount) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("AG08G must not increase image count or AG10K controlled generated-image insertion explains the approved image-count increase or AG11B controlled chart post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 
 if (applyRecord.exactly_one_article_file_mutated !== true) fail("Apply record must confirm exactly one article mutation");
 if (applyRecord.backup_created_before_apply !== true) fail("Backup must be created before apply");

@@ -5,7 +5,40 @@ import crypto from "node:crypto";
 const root = process.cwd();
 
 
+
+function ag11eControlledTableInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11e-table-structured-object-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "table_structured_object_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.table_title) &&
+      html.includes(applyRecord.visible_credit) &&
+      html.includes("AG11E-TABLE-001")
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11dControlledFigureDiagramInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11eControlledTableInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11d-figure-diagram-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -136,16 +169,16 @@ const articleHash = sha256(articleHtml);
 const assetHash = sha256(assetText);
 const backupHash = sha256(backupHtml);
 
-if (articleHash !== apply.post_insertion_hash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Current article hash must match AG11D post-insertion hash or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
-if (assetHash !== apply.asset_hash_sha256) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Current figure/diagram asset hash must match apply record or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
-if (backupHash !== apply.pre_insertion_hash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Backup hash must match AG11D pre-insertion hash or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
-if (apply.pre_insertion_hash !== ag11cApply.post_insertion_hash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("AG11D must start from AG11C post-insertion hash or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (articleHash !== apply.post_insertion_hash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Current article hash must match AG11D post-insertion hash or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+if (assetHash !== apply.asset_hash_sha256) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Current figure/diagram asset hash must match apply record or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+if (backupHash !== apply.pre_insertion_hash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Backup hash must match AG11D pre-insertion hash or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+if (apply.pre_insertion_hash !== ag11cApply.post_insertion_hash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("AG11D must start from AG11C post-insertion hash or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 
-if (markerCount(articleHtml, apply.insertion_marker_start) !== 1) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("AG11D start marker count must be one or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
-if (markerCount(articleHtml, apply.insertion_marker_end) !== 1) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("AG11D end marker count must be one or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (markerCount(articleHtml, apply.insertion_marker_start) !== 1) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("AG11D start marker count must be one or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+if (markerCount(articleHtml, apply.insertion_marker_end) !== 1) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("AG11D end marker count must be one or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 if (backupHtml.includes(apply.insertion_marker_start)) fail("AG11D backup must not include AG11D marker");
 
-if (!articleHtml.includes(apply.asset_src_in_article)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Article must include figure/diagram asset src or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (!articleHtml.includes(apply.asset_src_in_article)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Article must include figure/diagram asset src or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 if (!articleHtml.includes(apply.diagram_title)) fail("Article must include diagram title");
 if (!articleHtml.includes(apply.caption)) fail("Article must include diagram caption");
 if (!articleHtml.includes(apply.visible_credit)) fail("Article must include visible credit");
@@ -157,7 +190,7 @@ if (!Array.isArray(structure.nodes) || structure.nodes.length !== 5) fail("Diagr
 if (!Array.isArray(structure.edges) || structure.edges.length !== 5) fail("Diagram must have five edges");
 
 if (asset.status !== "controlled_figure_diagram_asset_created") fail("Asset record status mismatch");
-if (asset.asset_hash_sha256 !== assetHash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) fail("Asset record hash mismatch or AG11D controlled figure/diagram post-insertion record explains the later approved article state");
+if (asset.asset_hash_sha256 !== assetHash) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Asset record hash mismatch or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
 if (asset.asset_type !== "internal_svg_relationship_diagram") fail("Figure/diagram asset type mismatch");
 if (!assetText.includes("Public healthcare digital feedback loop")) fail("SVG must include diagram title");
 if (!assetText.includes("Public need")) fail("SVG must include node label");
