@@ -1,0 +1,138 @@
+{
+  "module_id": "AG11F",
+  "title": "Map / Geographic Object Controlled Cycle Closure and Reuse Handoff",
+  "status": "map_geographic_object_controlled_cycle_closed_reuse_handoff_recorded",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "asset_path": "assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag11f-schematic-geographic-access-pathway.svg",
+  "post_insertion_hash": "7110031b7096b0b8a574b7be46ef9e56415b559353da754157a34ebeaf309312",
+  "reusable_intelligence": {
+    "map_template": "schematic_geographic_access_pathway",
+    "source_logic": "article_derived_conceptual_geographic_access_synthesis",
+    "placement_logic": {
+      "location_strategy": "Inserted after AG11E table block so the structured reading lens is followed by a schematic access geography explanation.",
+      "alignment": "center",
+      "max_width": "940px",
+      "width": "100%",
+      "height": "auto",
+      "title_present": true,
+      "schematic_note_present": true,
+      "node_labels_present": true,
+      "route_direction_present": true,
+      "caption_present": true,
+      "credit_present": true,
+      "mobile_behavior": "responsive SVG image width with auto height; static audit completed in AG11F",
+      "spacing_above_below": "2.5rem margin above/below section object"
+    },
+    "geo_node_link_pattern": {
+      "geo_nodes": [
+        {
+          "node_id": "AG11F-GEO-001",
+          "label": "Remote user area",
+          "description": "Where distance or terrain can affect access.",
+          "x": 160,
+          "y": 410,
+          "kind": "schematic_area"
+        },
+        {
+          "node_id": "AG11F-GEO-002",
+          "label": "Local service point",
+          "description": "First service contact or support node.",
+          "x": 390,
+          "y": 300,
+          "kind": "schematic_point"
+        },
+        {
+          "node_id": "AG11F-GEO-003",
+          "label": "District coordination",
+          "description": "Operational visibility and response linkage.",
+          "x": 635,
+          "y": 240,
+          "kind": "schematic_node"
+        },
+        {
+          "node_id": "AG11F-GEO-004",
+          "label": "Referral service",
+          "description": "Higher-level service or facility connection.",
+          "x": 860,
+          "y": 350,
+          "kind": "schematic_point"
+        }
+      ],
+      "geo_links": [
+        {
+          "link_id": "AG11F-LINK-001",
+          "from": "Remote user area",
+          "to": "Local service point"
+        },
+        {
+          "link_id": "AG11F-LINK-002",
+          "from": "Local service point",
+          "to": "District coordination"
+        },
+        {
+          "link_id": "AG11F-LINK-003",
+          "from": "District coordination",
+          "to": "Referral service"
+        },
+        {
+          "link_id": "AG11F-LINK-004",
+          "from": "District coordination",
+          "to": "Remote user area",
+          "relation": "digital feedback visibility"
+        }
+      ]
+    },
+    "map_rules": {
+      "schematic_only": true,
+      "not_to_scale": true,
+      "no_boundary_claim": true,
+      "no_real_location_claim": true,
+      "no_source_backed_dataset_claim": true,
+      "source_note_required": true
+    },
+    "caption_credit_pattern": {
+      "caption": "Schematic geographic-access object showing how remote users, local service points, district coordination and referral services may connect through digital support. It is not a real map, not to scale, and not an administrative boundary representation.",
+      "visible_credit": "Schematic map object: Drishvara. Source: article-derived conceptual synthesis."
+    },
+    "future_reuse_conditions": [
+      "Use only where geographic access is conceptually relevant.",
+      "Do not present schematic geography as a real administrative map.",
+      "Do not imply source-backed geographic data unless a verified source record exists.",
+      "Retain not-to-scale note, caption, visible credit and alt text.",
+      "Re-audit placement and mobile layout after insertion."
+    ]
+  },
+  "ready_for_ag11g": true,
+  "publishing_ready": false,
+  "backend_activation_ready": false,
+  "supabase_activation_ready": false,
+  "map_geographic_object_controlled_cycle_only": true,
+  "five_step_compact_cycle_executed": true,
+  "geo_location_finalisation_performed_in_ag11f": true,
+  "controlled_map_geographic_object_creation_performed_in_ag11f": true,
+  "article_insertion_and_placement_tuning_performed_in_ag11f": true,
+  "post_insertion_audit_performed_in_ag11f": true,
+  "closure_reuse_handoff_performed_in_ag11f": true,
+  "selected_article_read_performed": true,
+  "selected_article_file_write_performed_in_ag11f": true,
+  "backup_created_in_ag11f": true,
+  "article_mutation_performed_in_ag11f": true,
+  "map_geographic_asset_creation_performed_in_ag11f": true,
+  "object_insertion_performed_in_ag11f": true,
+  "invented_geography_used_in_ag11f": false,
+  "real_administrative_boundary_claim_made_in_ag11f": false,
+  "source_backed_map_claim_made_in_ag11f": false,
+  "external_geo_data_fetch_performed_in_ag11f": false,
+  "external_map_api_call_performed_in_ag11f": false,
+  "uncontrolled_map_generation_performed_in_ag11f": false,
+  "image_generation_performed_in_ag11f": false,
+  "reference_url_change_performed_in_ag11f": false,
+  "homepage_mutation_performed_in_ag11f": false,
+  "css_file_mutation_performed_in_ag11f": false,
+  "js_file_mutation_performed_in_ag11f": false,
+  "production_jsonl_append_performed_in_ag11f": false,
+  "database_write_performed_in_ag11f": false,
+  "supabase_write_performed_in_ag11f": false,
+  "backend_auth_supabase_activation_performed_in_ag11f": false,
+  "public_publishing_operation_performed_in_ag11f": false
+}

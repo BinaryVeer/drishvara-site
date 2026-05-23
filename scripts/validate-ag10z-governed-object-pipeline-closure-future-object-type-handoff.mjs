@@ -8,7 +8,40 @@ const root = process.cwd();
 
 
 
+
+function ag11fControlledMapInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11f-map-geographic-object-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "map_geographic_object_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.map_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11eControlledTableInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11fControlledMapInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11e-table-structured-object-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -232,9 +265,9 @@ const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8")
 const assetHash = sha256(fs.readFileSync(path.join(root, assetPath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (articleHash !== ag10kApply.post_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Article hash must remain AG10K post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
-if (assetHash !== ag10jAsset.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Asset hash must match AG10J asset record or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
-if (backupHash !== ag10kApply.pre_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Backup hash must match AG10K pre-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+if (articleHash !== ag10kApply.post_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Article hash must remain AG10K post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
+if (assetHash !== ag10jAsset.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Asset hash must match AG10J asset record or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
+if (backupHash !== ag10kApply.pre_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Backup hash must match AG10K pre-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
 
 for (const obj of [review, closure, registry, preview]) {
   if (obj.status !== "ag10_governed_object_pipeline_closed_future_handoff_recorded") {
@@ -283,7 +316,7 @@ if (readiness.backend_activation_ready !== false) fail("Readiness must keep back
 if (readiness.supabase_activation_ready !== false) fail("Readiness must keep Supabase blocked");
 
 if (future.reusable_generated_image_intelligence.asset_path !== ag10mReuse.asset_path) fail("Reusable asset path mismatch");
-if (future.reusable_generated_image_intelligence.asset_hash_sha256 !== ag10mReuse.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Reusable asset hash mismatch or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+if (future.reusable_generated_image_intelligence.asset_hash_sha256 !== ag10mReuse.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Reusable asset hash mismatch or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
 if (!Array.isArray(future.standing_inclusion_gate) || future.standing_inclusion_gate.length !== 5) fail("Standing inclusion gate must contain five questions");
 if (!future.cost_control_doctrine_carried_forward.some((item) => item.includes("Supabase"))) fail("Supabase/backend separation note must be carried forward");
 

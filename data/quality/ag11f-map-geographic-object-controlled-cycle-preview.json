@@ -1,0 +1,163 @@
+{
+  "module_id": "AG11F",
+  "preview_only": true,
+  "status": "map_geographic_object_controlled_cycle_closed_reuse_handoff_recorded",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "post_insertion_hash": "7110031b7096b0b8a574b7be46ef9e56415b559353da754157a34ebeaf309312",
+  "asset_path": "assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag11f-schematic-geographic-access-pathway.svg",
+  "map_title": "Schematic geographic access pathway",
+  "geo_nodes": [
+    {
+      "node_id": "AG11F-GEO-001",
+      "label": "Remote user area",
+      "description": "Where distance or terrain can affect access.",
+      "x": 160,
+      "y": 410,
+      "kind": "schematic_area"
+    },
+    {
+      "node_id": "AG11F-GEO-002",
+      "label": "Local service point",
+      "description": "First service contact or support node.",
+      "x": 390,
+      "y": 300,
+      "kind": "schematic_point"
+    },
+    {
+      "node_id": "AG11F-GEO-003",
+      "label": "District coordination",
+      "description": "Operational visibility and response linkage.",
+      "x": 635,
+      "y": 240,
+      "kind": "schematic_node"
+    },
+    {
+      "node_id": "AG11F-GEO-004",
+      "label": "Referral service",
+      "description": "Higher-level service or facility connection.",
+      "x": 860,
+      "y": 350,
+      "kind": "schematic_point"
+    }
+  ],
+  "geo_links": [
+    {
+      "link_id": "AG11F-LINK-001",
+      "from": "Remote user area",
+      "to": "Local service point"
+    },
+    {
+      "link_id": "AG11F-LINK-002",
+      "from": "Local service point",
+      "to": "District coordination"
+    },
+    {
+      "link_id": "AG11F-LINK-003",
+      "from": "District coordination",
+      "to": "Referral service"
+    },
+    {
+      "link_id": "AG11F-LINK-004",
+      "from": "District coordination",
+      "to": "Remote user area",
+      "relation": "digital feedback visibility"
+    }
+  ],
+  "placement": {
+    "location_strategy": "Inserted after AG11E table block so the structured reading lens is followed by a schematic access geography explanation.",
+    "alignment": "center",
+    "max_width": "940px",
+    "width": "100%",
+    "height": "auto",
+    "title_present": true,
+    "schematic_note_present": true,
+    "node_labels_present": true,
+    "route_direction_present": true,
+    "caption_present": true,
+    "credit_present": true,
+    "mobile_behavior": "responsive SVG image width with auto height; static audit completed in AG11F",
+    "spacing_above_below": "2.5rem margin above/below section object"
+  },
+  "next_stage": {
+    "module_id": "AG11F",
+    "title": "AG11F to AG11G Article-Support Composite Object Controlled Cycle Boundary",
+    "status": "ag11g_boundary_created_not_started",
+    "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash_after_ag11f": "7110031b7096b0b8a574b7be46ef9e56415b559353da754157a34ebeaf309312",
+    "next_stage_id": "AG11G",
+    "next_stage_title": "Article-Support Composite Object Controlled Cycle",
+    "explicit_approval_required": true,
+    "ag11g_allowed_scope": [
+      "Run compact article-support composite object cycle only.",
+      "Perform candidate and component-block finalisation.",
+      "Create one controlled article-support composite object.",
+      "Insert approved composite object with placement tuning.",
+      "Audit and close composite object cycle with reuse handoff."
+    ],
+    "ag11g_blocked_scope": [
+      "No decorative-only object.",
+      "No article mutation before controlled apply sub-step.",
+      "No CSS/JS mutation unless separately approved.",
+      "No backend/Auth/Supabase/database activation.",
+      "No public publishing operation."
+    ],
+    "map_geographic_object_controlled_cycle_only": true,
+    "five_step_compact_cycle_executed": true,
+    "geo_location_finalisation_performed_in_ag11f": true,
+    "controlled_map_geographic_object_creation_performed_in_ag11f": true,
+    "article_insertion_and_placement_tuning_performed_in_ag11f": true,
+    "post_insertion_audit_performed_in_ag11f": true,
+    "closure_reuse_handoff_performed_in_ag11f": true,
+    "selected_article_read_performed": true,
+    "selected_article_file_write_performed_in_ag11f": true,
+    "backup_created_in_ag11f": true,
+    "article_mutation_performed_in_ag11f": true,
+    "map_geographic_asset_creation_performed_in_ag11f": true,
+    "object_insertion_performed_in_ag11f": true,
+    "invented_geography_used_in_ag11f": false,
+    "real_administrative_boundary_claim_made_in_ag11f": false,
+    "source_backed_map_claim_made_in_ag11f": false,
+    "external_geo_data_fetch_performed_in_ag11f": false,
+    "external_map_api_call_performed_in_ag11f": false,
+    "uncontrolled_map_generation_performed_in_ag11f": false,
+    "image_generation_performed_in_ag11f": false,
+    "reference_url_change_performed_in_ag11f": false,
+    "homepage_mutation_performed_in_ag11f": false,
+    "css_file_mutation_performed_in_ag11f": false,
+    "js_file_mutation_performed_in_ag11f": false,
+    "production_jsonl_append_performed_in_ag11f": false,
+    "database_write_performed_in_ag11f": false,
+    "supabase_write_performed_in_ag11f": false,
+    "backend_auth_supabase_activation_performed_in_ag11f": false,
+    "public_publishing_operation_performed_in_ag11f": false
+  },
+  "map_geographic_object_controlled_cycle_only": true,
+  "five_step_compact_cycle_executed": true,
+  "geo_location_finalisation_performed_in_ag11f": true,
+  "controlled_map_geographic_object_creation_performed_in_ag11f": true,
+  "article_insertion_and_placement_tuning_performed_in_ag11f": true,
+  "post_insertion_audit_performed_in_ag11f": true,
+  "closure_reuse_handoff_performed_in_ag11f": true,
+  "selected_article_read_performed": true,
+  "selected_article_file_write_performed_in_ag11f": true,
+  "backup_created_in_ag11f": true,
+  "article_mutation_performed_in_ag11f": true,
+  "map_geographic_asset_creation_performed_in_ag11f": true,
+  "object_insertion_performed_in_ag11f": true,
+  "invented_geography_used_in_ag11f": false,
+  "real_administrative_boundary_claim_made_in_ag11f": false,
+  "source_backed_map_claim_made_in_ag11f": false,
+  "external_geo_data_fetch_performed_in_ag11f": false,
+  "external_map_api_call_performed_in_ag11f": false,
+  "uncontrolled_map_generation_performed_in_ag11f": false,
+  "image_generation_performed_in_ag11f": false,
+  "reference_url_change_performed_in_ag11f": false,
+  "homepage_mutation_performed_in_ag11f": false,
+  "css_file_mutation_performed_in_ag11f": false,
+  "js_file_mutation_performed_in_ag11f": false,
+  "production_jsonl_append_performed_in_ag11f": false,
+  "database_write_performed_in_ag11f": false,
+  "supabase_write_performed_in_ag11f": false,
+  "backend_auth_supabase_activation_performed_in_ag11f": false,
+  "public_publishing_operation_performed_in_ag11f": false
+}

@@ -112,7 +112,40 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
 
 
 
+
+function ag11fControlledMapInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11f-map-geographic-object-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "map_geographic_object_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.map_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11eControlledTableInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11fControlledMapInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11e-table-structured-object-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -363,7 +396,7 @@ if (
   selection.selected_article.sha256_at_selection !== selectedHash &&
   !ag08gControlledApplyAllowsPostMutation(selection.selected_article.article_path, selectedHash)
 ) {
-  if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) fail("Selected article hash must match current file, AG08G controlled post-apply hash, AG09C controlled post-correction hash, or AG10K controlled generated-image post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state");
+  if (!ag11bControlledChartInsertionAllowsPostMutation()) if (!ag11cControlledInfographicInsertionAllowsPostMutation()) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation()) if (!ag11eControlledTableInsertionAllowsPostMutation()) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Selected article hash must match current file, AG08G controlled post-apply hash, AG09C controlled post-correction hash, or AG10K controlled generated-image post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
 }
 if (selection.ag08c_handoff.next_stage_id !== "AG08C") fail("Selection must hand off to AG08C");
 if (selection.ag08c_handoff.explicit_approval_required !== true) fail("AG08C handoff must require explicit approval");
