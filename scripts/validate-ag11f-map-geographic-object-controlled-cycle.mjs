@@ -5,7 +5,40 @@ import crypto from "node:crypto";
 const root = process.cwd();
 
 
+
+function ag11gControlledCompositeInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11g-article-support-composite-object-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "article_support_composite_object_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.object_title) &&
+      html.includes(applyRecord.visible_credit) &&
+      html.includes("AG11G-COMPOSITE-001")
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11fControlledMapInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11gControlledCompositeInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11f-map-geographic-object-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -136,16 +169,16 @@ const articleHash = sha256(articleHtml);
 const assetHash = sha256(assetText);
 const backupHash = sha256(backupHtml);
 
-if (articleHash !== apply.post_insertion_hash) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Current article hash must match AG11F post-insertion hash or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
-if (assetHash !== apply.asset_hash_sha256) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Current map/geographic asset hash must match apply record or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
-if (backupHash !== apply.pre_insertion_hash) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Backup hash must match AG11F pre-insertion hash or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
-if (apply.pre_insertion_hash !== ag11eApply.post_insertion_hash) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("AG11F must start from AG11E post-insertion hash or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
+if (articleHash !== apply.post_insertion_hash) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Current article hash must match AG11F post-insertion hash or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (assetHash !== apply.asset_hash_sha256) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Current map/geographic asset hash must match apply record or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (backupHash !== apply.pre_insertion_hash) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Backup hash must match AG11F pre-insertion hash or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (apply.pre_insertion_hash !== ag11eApply.post_insertion_hash) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("AG11F must start from AG11E post-insertion hash or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
 
-if (markerCount(articleHtml, apply.insertion_marker_start) !== 1) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("AG11F start marker count must be one or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
-if (markerCount(articleHtml, apply.insertion_marker_end) !== 1) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("AG11F end marker count must be one or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
+if (markerCount(articleHtml, apply.insertion_marker_start) !== 1) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("AG11F start marker count must be one or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (markerCount(articleHtml, apply.insertion_marker_end) !== 1) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("AG11F end marker count must be one or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
 if (backupHtml.includes(apply.insertion_marker_start)) fail("AG11F backup must not include AG11F marker");
 
-if (!articleHtml.includes(apply.asset_src_in_article)) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Article must include map/geographic asset src or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
+if (!articleHtml.includes(apply.asset_src_in_article)) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Article must include map/geographic asset src or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
 if (!articleHtml.includes(apply.map_title)) fail("Article must include map title");
 if (!articleHtml.includes(apply.caption)) fail("Article must include map caption");
 if (!articleHtml.includes(apply.visible_credit)) fail("Article must include visible credit");
@@ -160,7 +193,7 @@ if (!Array.isArray(geoFinalisation.geo_nodes) || geoFinalisation.geo_nodes.lengt
 if (!Array.isArray(geoFinalisation.geo_links) || geoFinalisation.geo_links.length !== 4) fail("Map object must have four schematic geo links");
 
 if (asset.status !== "controlled_schematic_map_geographic_asset_created") fail("Asset record status mismatch");
-if (asset.asset_hash_sha256 !== assetHash) if (!ag11fControlledMapInsertionAllowsPostMutation()) fail("Asset record hash mismatch or AG11F controlled map/geographic-object post-insertion record explains the later approved article state");
+if (asset.asset_hash_sha256 !== assetHash) if (!ag11fControlledMapInsertionAllowsPostMutation()) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Asset record hash mismatch or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state");
 if (asset.asset_type !== "internal_svg_schematic_geographic_access_object") fail("Map/geographic asset type mismatch");
 if (!assetText.includes("Schematic geographic access pathway")) fail("SVG must include map title");
 if (!assetText.includes("Remote user area")) fail("SVG must include schematic node label");
