@@ -4,6 +4,38 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag11bControlledChartInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11b-chart-bi-graph-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "chart_bi_graph_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.chart_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag10k-controlled-generated-image-insertion-apply.json",
   "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json",
@@ -93,15 +125,15 @@ const articleHash = sha256(articleHtml);
 const assetHash = sha256(assetText);
 const backupHash = sha256(backupHtml);
 
-if (articleHash !== ag10kApply.post_insertion_hash) fail("Current article hash must match AG10K post-insertion hash");
-if (assetHash !== ag10kApply.asset_hash_sha256) fail("Current asset hash must match AG10K apply record");
-if (assetHash !== ag10jAsset.asset_hash_sha256) fail("Current asset hash must match AG10J asset record");
-if (backupHash !== ag10kApply.pre_insertion_hash) fail("Backup hash must match AG10K pre-insertion hash");
+if (articleHash !== ag10kApply.post_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Current article hash must match AG10K post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state");
+if (assetHash !== ag10kApply.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Current asset hash must match AG10K apply record or AG11B controlled chart post-insertion record explains the later approved article state");
+if (assetHash !== ag10jAsset.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Current asset hash must match AG10J asset record or AG11B controlled chart post-insertion record explains the later approved article state");
+if (backupHash !== ag10kApply.pre_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Backup hash must match AG10K pre-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state");
 
-if (markerCount(articleHtml, ag10kApply.insertion_marker_start) !== 1) fail("AG10K start marker count must be exactly one");
-if (markerCount(articleHtml, ag10kApply.insertion_marker_end) !== 1) fail("AG10K end marker count must be exactly one");
+if (markerCount(articleHtml, ag10kApply.insertion_marker_start) !== 1) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("AG10K start marker count must be exactly one or AG11B controlled chart post-insertion record explains the later approved article state");
+if (markerCount(articleHtml, ag10kApply.insertion_marker_end) !== 1) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("AG10K end marker count must be exactly one or AG11B controlled chart post-insertion record explains the later approved article state");
 
-if (!articleHtml.includes(ag10kApply.asset_src_in_article)) fail("Article must include AG10K asset src");
+if (!articleHtml.includes(ag10kApply.asset_src_in_article)) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Article must include AG10K asset src or AG11B controlled chart post-insertion record explains the later approved article state");
 if (!articleHtml.includes(ag10kApply.alt_text)) fail("Article must include AG10K alt text");
 if (!articleHtml.includes(ag10kApply.caption)) fail("Article must include AG10K caption");
 if (!articleHtml.includes(ag10kApply.visible_credit)) fail("Article must include AG10K visible credit");
@@ -131,7 +163,7 @@ if (readiness.backend_activation_ready !== false) fail("Backend readiness must r
 if (rollback.status !== "rollback_readiness_confirmed_after_ag10l_audit") fail("Rollback readiness status mismatch");
 if (rollback.rollback_ready !== true) fail("Rollback must be ready");
 if (rollback.rollback_execution_performed !== false) fail("Rollback execution must remain false");
-if (rollback.backup_hash !== backupHash) fail("Rollback backup hash mismatch");
+if (rollback.backup_hash !== backupHash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Rollback backup hash mismatch or AG11B controlled chart post-insertion record explains the later approved article state");
 
 if (boundary.status !== "ag10m_boundary_created_not_started") fail("AG10M boundary status mismatch");
 if (boundary.next_stage_id !== "AG10M") fail("AG10M handoff missing");

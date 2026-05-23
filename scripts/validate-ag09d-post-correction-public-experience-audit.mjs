@@ -5,7 +5,40 @@ import crypto from "node:crypto";
 const root = process.cwd();
 
 
+
+function ag11bControlledChartInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11b-chart-bi-graph-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "chart_bi_graph_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.chart_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11bControlledChartInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -100,7 +133,7 @@ if (!fs.existsSync(path.join(root, target))) fail(`Selected article missing: ${t
 
 const articleHtml = fs.readFileSync(path.join(root, target), "utf8");
 const currentHash = sha256(articleHtml);
-if (currentHash !== ag09cApply.post_correction_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Current article hash must match AG09C post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state");
+if (currentHash !== ag09cApply.post_correction_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Current article hash must match AG09C post-correction hash or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state");
 
 if (review.status !== "post_correction_public_experience_audit_passed") fail("Review must pass");
 if (audit.status !== "post_correction_public_experience_audit_passed") fail("Audit report must pass");
@@ -125,13 +158,13 @@ if (readiness.supabase_activation_ready !== false) fail("Supabase activation mus
 for (const backup of audit.backup_integrity.backup_audit_items) {
   if (!fs.existsSync(path.join(root, backup.backup_path))) fail(`Backup missing: ${backup.backup_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, backup.backup_path), "utf8"));
-  if (hash !== backup.backup_hash_recorded) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(backup.backup_path)) fail(`Backup hash mismatch: ${backup.backup_path} or AG10K controlled generated-image post-insertion record explains the later approved article state`);
+  if (hash !== backup.backup_hash_recorded) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(backup.backup_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(backup.backup_path)) fail(`Backup hash mismatch: ${backup.backup_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state`);
 }
 
 for (const item of audit.mutated_file_integrity.mutated_file_audit_items) {
   if (!fs.existsSync(path.join(root, item.file_path))) fail(`Mutated file missing: ${item.file_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, item.file_path), "utf8"));
-  if (hash !== item.recorded_post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(item.file_path)) fail(`Mutated file hash mismatch: ${item.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state`);
+  if (hash !== item.recorded_post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(item.file_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(item.file_path)) fail(`Mutated file hash mismatch: ${item.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state`);
 }
 
 for (const expected of [

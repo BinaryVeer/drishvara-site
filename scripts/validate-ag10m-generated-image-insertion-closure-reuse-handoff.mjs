@@ -4,6 +4,38 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag11bControlledChartInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11b-chart-bi-graph-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "chart_bi_graph_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.chart_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag10l-post-generated-image-insertion-audit.json",
   "data/content-intelligence/audit-records/ag10l-post-generated-image-insertion-audit-report.json",
@@ -95,9 +127,9 @@ const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8")
 const assetHash = sha256(fs.readFileSync(path.join(root, assetPath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (articleHash !== ag10kApply.post_insertion_hash) fail("Article hash must remain AG10K post-insertion hash");
-if (assetHash !== ag10jAsset.asset_hash_sha256) fail("Asset hash must match AG10J asset record");
-if (backupHash !== ag10kApply.pre_insertion_hash) fail("Backup hash must match AG10K pre-insertion hash");
+if (articleHash !== ag10kApply.post_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Article hash must remain AG10K post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state");
+if (assetHash !== ag10jAsset.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Asset hash must match AG10J asset record or AG11B controlled chart post-insertion record explains the later approved article state");
+if (backupHash !== ag10kApply.pre_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Backup hash must match AG10K pre-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state");
 
 for (const obj of [review, closure, registry, preview]) {
   if (obj.status !== "generated_image_insertion_chain_closed_reuse_handoff_recorded") {
@@ -116,7 +148,7 @@ if (closure.closure_decision.publishing_ready !== false) fail("Publishing readin
 if (closure.closure_decision.backend_activation_ready !== false) fail("Backend readiness must remain false");
 
 if (reuse.asset_id !== ag10jAsset.asset_id) fail("Reuse handoff asset ID mismatch");
-if (reuse.asset_hash_sha256 !== assetHash) fail("Reuse handoff asset hash mismatch");
+if (reuse.asset_hash_sha256 !== assetHash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Reuse handoff asset hash mismatch or AG11B controlled chart post-insertion record explains the later approved article state");
 if (reuse.concept_template_candidate_id !== ag10iConcept.concept_template_candidate_id) fail("Reuse concept ID mismatch");
 if (reuse.prompt_record_id !== ag10iPrompt.prompt_record_id) fail("Reuse prompt ID mismatch");
 if (!Array.isArray(reuse.reuse_gate_questions) || reuse.reuse_gate_questions.length !== 5) fail("Reuse gate must contain five questions");

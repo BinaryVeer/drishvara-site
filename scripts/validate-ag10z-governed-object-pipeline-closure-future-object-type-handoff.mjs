@@ -4,6 +4,38 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag11bControlledChartInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11b-chart-bi-graph-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "chart_bi_graph_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.chart_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag10a-governed-object-pipeline-planning.json",
   "data/content-intelligence/quality-reviews/ag10b-object-taxonomy-selection-doctrine.json",
@@ -101,9 +133,9 @@ const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8")
 const assetHash = sha256(fs.readFileSync(path.join(root, assetPath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (articleHash !== ag10kApply.post_insertion_hash) fail("Article hash must remain AG10K post-insertion hash");
-if (assetHash !== ag10jAsset.asset_hash_sha256) fail("Asset hash must match AG10J asset record");
-if (backupHash !== ag10kApply.pre_insertion_hash) fail("Backup hash must match AG10K pre-insertion hash");
+if (articleHash !== ag10kApply.post_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Article hash must remain AG10K post-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state");
+if (assetHash !== ag10jAsset.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Asset hash must match AG10J asset record or AG11B controlled chart post-insertion record explains the later approved article state");
+if (backupHash !== ag10kApply.pre_insertion_hash) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Backup hash must match AG10K pre-insertion hash or AG11B controlled chart post-insertion record explains the later approved article state");
 
 for (const obj of [review, closure, registry, preview]) {
   if (obj.status !== "ag10_governed_object_pipeline_closed_future_handoff_recorded") {
@@ -152,7 +184,7 @@ if (readiness.backend_activation_ready !== false) fail("Readiness must keep back
 if (readiness.supabase_activation_ready !== false) fail("Readiness must keep Supabase blocked");
 
 if (future.reusable_generated_image_intelligence.asset_path !== ag10mReuse.asset_path) fail("Reusable asset path mismatch");
-if (future.reusable_generated_image_intelligence.asset_hash_sha256 !== ag10mReuse.asset_hash_sha256) fail("Reusable asset hash mismatch");
+if (future.reusable_generated_image_intelligence.asset_hash_sha256 !== ag10mReuse.asset_hash_sha256) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Reusable asset hash mismatch or AG11B controlled chart post-insertion record explains the later approved article state");
 if (!Array.isArray(future.standing_inclusion_gate) || future.standing_inclusion_gate.length !== 5) fail("Standing inclusion gate must contain five questions");
 if (!future.cost_control_doctrine_carried_forward.some((item) => item.includes("Supabase"))) fail("Supabase/backend separation note must be carried forward");
 

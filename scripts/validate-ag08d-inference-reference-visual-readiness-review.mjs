@@ -112,7 +112,40 @@ function ag08kControlledVisualInsertionAllowsPostMutation(selectedPath = null, c
 }
 
 
+
+function ag11bControlledChartInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11b-chart-bi-graph-controlled-cycle-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "chart_bi_graph_inserted_audited_closed" &&
+      applyRecord.post_insertion_hash === hashToCheck &&
+      html.includes(applyRecord.insertion_marker_start) &&
+      html.includes(applyRecord.insertion_marker_end) &&
+      html.includes(applyRecord.asset_src_in_article) &&
+      html.includes(applyRecord.chart_title) &&
+      html.includes(applyRecord.visible_credit)
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag10kControlledGeneratedImageInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag11bControlledChartInsertionAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag10k-controlled-generated-image-insertion-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -231,10 +264,10 @@ if (!fs.existsSync(path.join(root, selectedPath))) fail(`Selected article does n
 const selectedHtml = fs.readFileSync(path.join(root, selectedPath), "utf8");
 const selectedHash = sha256(selectedHtml);
 
-if (inference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Inference hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing");
-if (readiness.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Readiness hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing");
-if (review.summary.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("Review hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing");
-if (ag08cPacket.selected_article.sha256_before_ag08c !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) fail("AG08D article hash must match AG08C hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state");
+if (inference.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Inference hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state");
+if (readiness.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Readiness hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state");
+if (review.summary.selected_article_sha256_before_ag08d !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("Review hash mismatch or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion hash missing or AG11B controlled chart post-insertion record explains the later approved article state");
+if (ag08cPacket.selected_article.sha256_before_ag08c !== selectedHash) if (!ag08gControlledApplyAllowsPostMutation()) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation()) if (!ag11bControlledChartInsertionAllowsPostMutation()) fail("AG08D article hash must match AG08C hash or AG08G controlled post-apply hash missing or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state");
 
 if (!inference.inferred_article_intent) fail("Inference intent missing");
 if (!Array.isArray(inference.inferred_risks) || inference.inferred_risks.length < 3) fail("Inference risks missing");
