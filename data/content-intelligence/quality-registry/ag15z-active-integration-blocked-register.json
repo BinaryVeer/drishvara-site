@@ -1,0 +1,91 @@
+{
+  "module_id": "AG15Z",
+  "title": "Active Generated Article Queue Integration Blocked Register",
+  "status": "active_queue_integration_remains_blocked",
+  "blockers_inherited_from_ag15d": [
+    {
+      "blocker_id": "AG15D-BLOCKER-001",
+      "blocker": "No active generated article batch has been approved for queue insertion.",
+      "required_resolution": "Approve a future controlled generation or candidate set before active queue integration.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-002",
+      "blocker": "No active queue mutation stage has been approved.",
+      "required_resolution": "Create and audit a controlled apply stage before writing queue records.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-003",
+      "blocker": "No Admin action execution is enabled.",
+      "required_resolution": "Keep queue entries non-public until a later secure Admin execution stage is approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-004",
+      "blocker": "No public visibility switch is approved.",
+      "required_resolution": "Public visibility must remain false until a later publish-control stage.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-005",
+      "blocker": "No publishing operation is approved.",
+      "required_resolution": "Publish execution requires separate explicit approval.",
+      "current_status": "blocked"
+    }
+  ],
+  "final_ag15_blocked_items": [
+    "New article generation.",
+    "Article mutation.",
+    "Active Admin Review Queue record creation.",
+    "Queue-index mutation.",
+    "Admin/Editor action execution.",
+    "Real credentials.",
+    "Auth/backend/Supabase activation.",
+    "GitHub write token wiring.",
+    "Public visibility switch.",
+    "Publishing operation.",
+    "Deployment trigger."
+  ],
+  "allowed_after_ag15z_without_new_approval": [
+    "Review AG15 planning records.",
+    "Review AG15 dry-run records.",
+    "Review non-active scaffold files.",
+    "Proceed to public visibility and publish-control preparation planning."
+  ],
+  "not_allowed_after_ag15z_without_new_approval": [
+    "Generate new articles.",
+    "Write active Admin Review Queue records.",
+    "Mutate queue index.",
+    "Make article publicly visible.",
+    "Publish article.",
+    "Enable Admin/Editor action execution."
+  ],
+  "generated_article_admin_queue_integration_closure_only": true,
+  "ag15_chain_closure_created_in_ag15z": true,
+  "preparation_summary_created_in_ag15z": true,
+  "active_integration_blocked_register_created_in_ag15z": true,
+  "ag16a_boundary_created_in_ag15z": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15z": false,
+  "article_mutation_performed_in_ag15z": false,
+  "queue_mutation_performed_in_ag15z": false,
+  "active_admin_review_queue_record_created_in_ag15z": false,
+  "queue_index_mutation_performed_in_ag15z": false,
+  "admin_action_execution_performed_in_ag15z": false,
+  "editor_action_execution_performed_in_ag15z": false,
+  "real_credential_created_in_ag15z": false,
+  "hardcoded_password_created_in_ag15z": false,
+  "password_hash_created_in_repo_in_ag15z": false,
+  "auth_activation_performed_in_ag15z": false,
+  "backend_activation_performed_in_ag15z": false,
+  "supabase_activation_performed_in_ag15z": false,
+  "database_write_performed_in_ag15z": false,
+  "github_token_created_or_exposed_in_ag15z": false,
+  "github_write_operation_performed_in_ag15z": false,
+  "active_action_handler_created_in_ag15z": false,
+  "api_endpoint_created_in_ag15z": false,
+  "public_visibility_switch_performed_in_ag15z": false,
+  "public_publishing_operation_performed_in_ag15z": false,
+  "deployment_trigger_performed_in_ag15z": false
+}
