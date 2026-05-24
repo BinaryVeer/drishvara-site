@@ -1,0 +1,29 @@
+{
+  "module_id": "AG22B",
+  "title": "AG22B to AG22C Batch Publishing Dry-run Boundary",
+  "status": "ag22c_boundary_created_not_started",
+  "next_stage_id": "AG22C",
+  "next_stage_title": "Batch Publishing Dry-run",
+  "allowed_scope": [
+    "Dry-run multiple article candidates.",
+    "Prepare proposed static paths.",
+    "Prepare proposed public surface deltas.",
+    "Prepare proposed deployment and rollback checklist.",
+    "Do not publish."
+  ],
+  "blocked_scope": [
+    "No article generation.",
+    "No article mutation.",
+    "No queue mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No public visibility switch.",
+    "No public index mutation.",
+    "No deployment trigger.",
+    "No live smoke-test.",
+    "No rollback execution.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

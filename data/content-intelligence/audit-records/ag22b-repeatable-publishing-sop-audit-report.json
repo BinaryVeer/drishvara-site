@@ -1,0 +1,61 @@
+{
+  "module_id": "AG22B",
+  "title": "Repeatable Publishing SOP Audit Report",
+  "status": "repeatable_publishing_sop_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG22B-01",
+      "area": "sop_plan",
+      "passed": true,
+      "note": "Repeatable SOP includes intake, checks, static file, public surface, GitHub readiness, deployment readiness and closure."
+    },
+    {
+      "check_id": "AG22B-02",
+      "area": "route_map",
+      "passed": true,
+      "note": "Source-to-static-publish route is defined."
+    },
+    {
+      "check_id": "AG22B-03",
+      "area": "batch_scope",
+      "passed": true,
+      "note": "Batch dry-run scope covers generated, manual and backlog/future article cases."
+    },
+    {
+      "check_id": "AG22B-04",
+      "area": "blocked_actions",
+      "passed": true,
+      "note": "All real execution actions remain blocked."
+    },
+    {
+      "check_id": "AG22B-05",
+      "area": "supabase_defer",
+      "passed": true,
+      "note": "Supabase/Auth/backend remains deferred."
+    }
+  ],
+  "failed_checks": [],
+  "summary": {
+    "audit_passed": true,
+    "failed_checks": 0,
+    "sop_complete": true,
+    "route_map_complete": true,
+    "batch_dry_run_scope_complete": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "article_generated": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
