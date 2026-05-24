@@ -1,0 +1,71 @@
+{
+  "module_id": "AG14F",
+  "title": "Admin Editor Action Risk Control Register",
+  "status": "risk_control_register_defined",
+  "critical_risks": [
+    {
+      "risk": "Hardcoded credentials in static files",
+      "severity": "critical",
+      "control": "Credentials must remain outside repository/browser code; first-login reset must run through secure auth layer.",
+      "status": "blocked_by_design"
+    },
+    {
+      "risk": "Browser-exposed GitHub or Supabase secret",
+      "severity": "critical",
+      "control": "All write tokens/service keys must remain server-side only.",
+      "status": "blocked_by_design"
+    },
+    {
+      "risk": "Editor can publish directly",
+      "severity": "high",
+      "control": "Editor role blocked from publish and publish_and_close actions.",
+      "status": "controlled_in_model"
+    },
+    {
+      "risk": "Admin publishes stale article version",
+      "severity": "high",
+      "control": "Pre-action hash and version validation required before publish.",
+      "status": "handler_requirement"
+    },
+    {
+      "risk": "No audit trail for decision",
+      "severity": "high",
+      "control": "Audit write required for all Admin/Editor actions.",
+      "status": "handler_requirement"
+    },
+    {
+      "risk": "Public visibility switched without Admin approval",
+      "severity": "critical",
+      "control": "Only Admin publish/publish_and_close may set public_visibility true through secure handler.",
+      "status": "handler_requirement"
+    },
+    {
+      "risk": "Route confusion between public Sign in and Admin console",
+      "severity": "medium",
+      "control": "signin.html is public route; admin.html is internal route.",
+      "status": "controlled_by_ag14d"
+    }
+  ],
+  "workflow_model_audit_secure_action_handler_readiness_only": true,
+  "workflow_model_audited_in_ag14f": true,
+  "secure_action_handler_readiness_defined_in_ag14f": true,
+  "implementation_path_matrix_defined_in_ag14f": true,
+  "action_risk_control_register_defined_in_ag14f": true,
+  "ag14g_boundary_created_in_ag14f": true,
+  "selected_article_read_performed": true,
+  "admin_action_execution_performed_in_ag14f": false,
+  "editor_action_execution_performed_in_ag14f": false,
+  "action_handler_created_in_ag14f": false,
+  "real_credential_created_in_ag14f": false,
+  "hardcoded_password_created_in_ag14f": false,
+  "password_hash_created_in_repo_in_ag14f": false,
+  "auth_activation_performed_in_ag14f": false,
+  "backend_activation_performed_in_ag14f": false,
+  "supabase_activation_performed_in_ag14f": false,
+  "database_write_performed_in_ag14f": false,
+  "article_mutation_performed_in_ag14f": false,
+  "queue_mutation_performed_in_ag14f": false,
+  "public_visibility_switch_performed_in_ag14f": false,
+  "public_publishing_operation_performed_in_ag14f": false,
+  "deployment_trigger_performed_in_ag14f": false
+}

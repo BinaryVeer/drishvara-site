@@ -1,0 +1,80 @@
+{
+  "module_id": "AG14F",
+  "title": "Action Handler Implementation Path Decision Matrix",
+  "status": "implementation_path_matrix_defined_no_activation",
+  "recommended_strategy": "hybrid_static_github_first_supabase_later",
+  "options": [
+    {
+      "option_id": "github_backed_static_action_handler",
+      "description": "Use a server-side function or protected GitHub Action/API path to update JSON records, commit publish/archive/correction state and trigger deployment later.",
+      "advantages": [
+        "Fits current GitHub/Vercel static architecture.",
+        "Lower complexity than full database migration.",
+        "Keeps audit records as versioned files.",
+        "Good for early controlled Admin/Editor workflow."
+      ],
+      "risks": [
+        "Requires secure server-side token handling.",
+        "Needs careful concurrency/hash checks.",
+        "Not ideal for high-volume multi-user editorial operations."
+      ],
+      "near_term_fit": "high",
+      "activation_status": "not_active"
+    },
+    {
+      "option_id": "supabase_auth_database",
+      "description": "Use Supabase Auth, role tables, article queue tables and audit logs.",
+      "advantages": [
+        "Proper user authentication and role management.",
+        "Cleaner dynamic queue and decision handling.",
+        "Better long-term for multi-user platform."
+      ],
+      "risks": [
+        "Higher setup and security burden.",
+        "Requires backend policy design.",
+        "Supabase activation has intentionally been blocked so far."
+      ],
+      "near_term_fit": "medium_later",
+      "activation_status": "not_active"
+    },
+    {
+      "option_id": "hybrid_static_now_supabase_later",
+      "description": "Start with GitHub-backed static queue and secure server-side action handler; migrate to Supabase/Auth once admin workflow stabilizes.",
+      "advantages": [
+        "Preserves current governance path.",
+        "Allows gradual rollout.",
+        "Avoids premature backend complexity.",
+        "Keeps future Supabase migration open."
+      ],
+      "risks": [
+        "Requires disciplined schema compatibility.",
+        "Temporary static workflow must not become permanent security shortcut."
+      ],
+      "near_term_fit": "recommended",
+      "activation_status": "not_active"
+    }
+  ],
+  "decision_note": "AG14F recommends the hybrid path but does not activate it. AG14G should prepare the secure action-handler architecture plan.",
+  "workflow_model_audit_secure_action_handler_readiness_only": true,
+  "workflow_model_audited_in_ag14f": true,
+  "secure_action_handler_readiness_defined_in_ag14f": true,
+  "implementation_path_matrix_defined_in_ag14f": true,
+  "action_risk_control_register_defined_in_ag14f": true,
+  "ag14g_boundary_created_in_ag14f": true,
+  "selected_article_read_performed": true,
+  "admin_action_execution_performed_in_ag14f": false,
+  "editor_action_execution_performed_in_ag14f": false,
+  "action_handler_created_in_ag14f": false,
+  "real_credential_created_in_ag14f": false,
+  "hardcoded_password_created_in_ag14f": false,
+  "password_hash_created_in_repo_in_ag14f": false,
+  "auth_activation_performed_in_ag14f": false,
+  "backend_activation_performed_in_ag14f": false,
+  "supabase_activation_performed_in_ag14f": false,
+  "database_write_performed_in_ag14f": false,
+  "article_mutation_performed_in_ag14f": false,
+  "queue_mutation_performed_in_ag14f": false,
+  "public_visibility_switch_performed_in_ag14f": false,
+  "public_publishing_operation_performed_in_ag14f": false,
+  "deployment_trigger_performed_in_ag14f": false
+}
