@@ -1,0 +1,106 @@
+{
+  "module_id": "AG15C",
+  "title": "Generated Article Admin Queue Schema Dry-run Validation Report",
+  "status": "schema_dry_run_validation_passed",
+  "dry_run_only": true,
+  "checks": [
+    {
+      "check_id": "AG15C-DRYRUN-001",
+      "area": "article_path",
+      "status": "passed",
+      "note": "Seed candidate article path must exist."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-002",
+      "area": "article_hash",
+      "status": "passed",
+      "note": "Seed candidate article hash must match current file hash."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-003",
+      "area": "intake_required_fields",
+      "status": "passed",
+      "note": "All AG15B required intake fields must be represented in dry-run record."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-004",
+      "area": "default_publication_controls_intake",
+      "status": "passed",
+      "note": "Dry-run intake record must default to non-public and not publish-approved."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-005",
+      "area": "queue_record_publication_controls",
+      "status": "passed",
+      "note": "Dry-run queue record must remain non-public and must not mutate active queue index."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-006",
+      "area": "quality_evidence_presence",
+      "status": "passed",
+      "note": "Mandatory quality evidence fields must be mapped in dry-run."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-007",
+      "area": "preview_state",
+      "status": "passed",
+      "note": "Preview state must be present and hash-aligned."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-008",
+      "area": "batch_failure_policy_alignment",
+      "status": "passed",
+      "note": "Dry-run must preserve AG15B batch validation defaults."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-009",
+      "area": "no_active_queue_mutation",
+      "status": "passed",
+      "note": "AG15C must not write to active queue or queue index."
+    },
+    {
+      "check_id": "AG15C-DRYRUN-010",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG15C performs dry-run records only and no article generation, queue mutation, visibility switch or publishing."
+    }
+  ],
+  "failed_checks": [],
+  "validation_summary": {
+    "total_checks": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "active_queue_mutation_performed": false,
+  "article_mutation_performed": false,
+  "public_visibility_switch_performed": false,
+  "publishing_operation_performed": false,
+  "generated_article_admin_queue_schema_dry_run_only": true,
+  "generated_article_intake_dry_run_created_in_ag15c": true,
+  "admin_review_queue_record_dry_run_created_in_ag15c": true,
+  "quality_evidence_preview_state_dry_run_created_in_ag15c": true,
+  "schema_dry_run_validation_report_created_in_ag15c": true,
+  "ag15d_boundary_created_in_ag15c": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15c": false,
+  "article_mutation_performed_in_ag15c": false,
+  "queue_mutation_performed_in_ag15c": false,
+  "active_admin_review_queue_record_created_in_ag15c": false,
+  "queue_index_mutation_performed_in_ag15c": false,
+  "admin_action_execution_performed_in_ag15c": false,
+  "editor_action_execution_performed_in_ag15c": false,
+  "real_credential_created_in_ag15c": false,
+  "hardcoded_password_created_in_ag15c": false,
+  "password_hash_created_in_repo_in_ag15c": false,
+  "auth_activation_performed_in_ag15c": false,
+  "backend_activation_performed_in_ag15c": false,
+  "supabase_activation_performed_in_ag15c": false,
+  "database_write_performed_in_ag15c": false,
+  "github_token_created_or_exposed_in_ag15c": false,
+  "github_write_operation_performed_in_ag15c": false,
+  "active_action_handler_created_in_ag15c": false,
+  "api_endpoint_created_in_ag15c": false,
+  "public_visibility_switch_performed_in_ag15c": false,
+  "public_publishing_operation_performed_in_ag15c": false,
+  "deployment_trigger_performed_in_ag15c": false
+}
