@@ -1,0 +1,87 @@
+{
+  "module_id": "AG15A",
+  "title": "Next Path Decision after Admin Editor Secure Handler Chain Closure",
+  "status": "next_path_decision_completed_content_queue_integration_selected",
+  "ag14_chain_state": {
+    "ag14_chain_closed": true,
+    "completed_stage_count": 10,
+    "live_admin_editor_implementation_blocked": true,
+    "public_publish_execution_active": false
+  },
+  "decision_options": [
+    {
+      "path_id": "content_article_queue_integration",
+      "label": "Generated Article to Admin Review Queue Integration",
+      "selected": true,
+      "rationale": [
+        "New generated articles must systematically land in Admin Review Queue after quality checks.",
+        "Admin/Editor architecture is ready as a governed destination, but real action execution remains blocked.",
+        "This path strengthens production movement without premature Auth/action-handler activation."
+      ],
+      "next_stage": "AG15B"
+    },
+    {
+      "path_id": "admin_editor_visual_refinement",
+      "label": "Admin/Editor visual UI refinement only",
+      "selected": false,
+      "rationale": [
+        "Useful later, but less urgent than ensuring future generated articles enter the review queue."
+      ]
+    },
+    {
+      "path_id": "real_auth_action_execution_planning",
+      "label": "Real Auth/action-handler implementation planning",
+      "selected": false,
+      "rationale": [
+        "Premature until generated article queue integration and publication-state records are stable."
+      ]
+    }
+  ],
+  "selected_path": {
+    "path_id": "content_article_queue_integration",
+    "next_stage_id": "AG15B",
+    "next_stage_title": "Generated Article to Admin Review Queue Integration Plan"
+  },
+  "retained_blocks": [
+    "Real credentials.",
+    "Hardcoded passwords.",
+    "Password hashes in repository.",
+    "Real login/Auth.",
+    "Backend activation.",
+    "Supabase activation.",
+    "GitHub write token wiring.",
+    "Active action handler endpoint.",
+    "Admin action execution.",
+    "Editor action execution.",
+    "Queue mutation.",
+    "Article mutation.",
+    "Audit write.",
+    "Public visibility switch.",
+    "Publishing operation.",
+    "Deployment trigger."
+  ],
+  "next_path_decision_after_ag14_closure_only": true,
+  "next_path_decision_created_in_ag15a": true,
+  "generated_article_admin_queue_conveyor_scope_created_in_ag15a": true,
+  "ag15b_boundary_created_in_ag15a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15a": false,
+  "article_mutation_performed_in_ag15a": false,
+  "queue_mutation_performed_in_ag15a": false,
+  "admin_action_execution_performed_in_ag15a": false,
+  "editor_action_execution_performed_in_ag15a": false,
+  "real_credential_created_in_ag15a": false,
+  "hardcoded_password_created_in_ag15a": false,
+  "password_hash_created_in_repo_in_ag15a": false,
+  "auth_activation_performed_in_ag15a": false,
+  "backend_activation_performed_in_ag15a": false,
+  "supabase_activation_performed_in_ag15a": false,
+  "database_write_performed_in_ag15a": false,
+  "github_token_created_or_exposed_in_ag15a": false,
+  "github_write_operation_performed_in_ag15a": false,
+  "active_action_handler_created_in_ag15a": false,
+  "api_endpoint_created_in_ag15a": false,
+  "public_visibility_switch_performed_in_ag15a": false,
+  "public_publishing_operation_performed_in_ag15a": false,
+  "deployment_trigger_performed_in_ag15a": false
+}

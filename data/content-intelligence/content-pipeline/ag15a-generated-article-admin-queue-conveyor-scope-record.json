@@ -1,0 +1,67 @@
+{
+  "module_id": "AG15A",
+  "title": "Generated Article Admin Queue Conveyor Scope Record",
+  "status": "generated_article_admin_queue_conveyor_scope_defined",
+  "purpose": "Define the next production conveyor belt from future generated article to Admin Review Queue without enabling live publishing.",
+  "conveyor_principle": "Every newly generated article should have a deterministic path: generation output → quality evidence → preview state → Admin Review Queue record → public visibility remains false until approved.",
+  "current_seed_queue_state": {
+    "seed_queue_index": "data/admin-review/index/admin-review-queue-index.json",
+    "seed_candidate": {
+      "article_id": "enhancing-public-healthcare-delivery-digital-innovation",
+      "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+      "status": "ready_for_admin_review",
+      "publish_readiness_score": 92,
+      "public_visibility": false,
+      "publish_approved": false
+    }
+  },
+  "ag15b_planning_scope": [
+    "Define generated article intake record.",
+    "Define required quality evidence before Admin queue handoff.",
+    "Define generated article queue record schema.",
+    "Define article preview/public visibility flags.",
+    "Define reference/credit/object/layout readiness fields.",
+    "Define batch validation checks.",
+    "Define failure states and non-public archive states.",
+    "Keep actual article generation and queue mutation blocked until later approved stage."
+  ],
+  "ag15b_core_questions": [
+    "What minimum metadata must every generated article carry?",
+    "Which quality checks must pass before Admin queue entry?",
+    "How should public visibility remain false by default?",
+    "How should rejected/archived article intelligence be retained?",
+    "How should object-rich and text-only articles be routed differently?"
+  ],
+  "not_in_ag15b_scope_yet": [
+    "No new article generation.",
+    "No live Admin/Editor action execution.",
+    "No real Auth.",
+    "No public publishing.",
+    "No visibility switch.",
+    "No GitHub write token wiring."
+  ],
+  "next_path_decision_after_ag14_closure_only": true,
+  "next_path_decision_created_in_ag15a": true,
+  "generated_article_admin_queue_conveyor_scope_created_in_ag15a": true,
+  "ag15b_boundary_created_in_ag15a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15a": false,
+  "article_mutation_performed_in_ag15a": false,
+  "queue_mutation_performed_in_ag15a": false,
+  "admin_action_execution_performed_in_ag15a": false,
+  "editor_action_execution_performed_in_ag15a": false,
+  "real_credential_created_in_ag15a": false,
+  "hardcoded_password_created_in_ag15a": false,
+  "password_hash_created_in_repo_in_ag15a": false,
+  "auth_activation_performed_in_ag15a": false,
+  "backend_activation_performed_in_ag15a": false,
+  "supabase_activation_performed_in_ag15a": false,
+  "database_write_performed_in_ag15a": false,
+  "github_token_created_or_exposed_in_ag15a": false,
+  "github_write_operation_performed_in_ag15a": false,
+  "active_action_handler_created_in_ag15a": false,
+  "api_endpoint_created_in_ag15a": false,
+  "public_visibility_switch_performed_in_ag15a": false,
+  "public_publishing_operation_performed_in_ag15a": false,
+  "deployment_trigger_performed_in_ag15a": false
+}
