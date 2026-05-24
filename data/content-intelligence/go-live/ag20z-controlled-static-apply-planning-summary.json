@@ -1,0 +1,104 @@
+{
+  "module_id": "AG20Z",
+  "title": "Controlled Static Apply Planning Summary",
+  "status": "ag20_controlled_static_apply_planning_completed",
+  "selected_path": "hybrid_staged_path_static_first",
+  "static_github_controlled_first": true,
+  "supabase_auth_backend_deferred": true,
+  "supabase_auth_reminder_required_in_future": true,
+  "completed_stage_count": 6,
+  "completed_stages": [
+    {
+      "stage_id": "AG20A",
+      "title": "Controlled Static Apply Readiness",
+      "result": "Prepared candidate, GitHub token no-secrets, public surface, rollback/smoke-test and approval gate readiness."
+    },
+    {
+      "stage_id": "AG20B",
+      "title": "Controlled Static Apply Readiness Audit",
+      "result": "Audited AG20A and approved only AG20C final authorization package."
+    },
+    {
+      "stage_id": "AG20C",
+      "title": "Controlled Static Apply Final Authorization",
+      "result": "Prepared candidate, public surface, GitHub write, rollback/deployment/smoke-test and approval phrase final gate records."
+    },
+    {
+      "stage_id": "AG20D",
+      "title": "Controlled Static Apply Final Authorization Audit",
+      "result": "Audited AG20C and approved only AG20E execution plan."
+    },
+    {
+      "stage_id": "AG20E",
+      "title": "Controlled Static Apply Execution Plan",
+      "result": "Planned approval sequence, token precondition, file mutation order, public surface order, deployment/smoke-test order and rollback order."
+    },
+    {
+      "stage_id": "AG20F",
+      "title": "Controlled Static Apply Execution Plan Audit",
+      "result": "Audited AG20E with zero failed checks and approved AG20Z closure only."
+    }
+  ],
+  "seed_candidate": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "hash_verified": true
+  },
+  "required_future_approval_phrase": "Proceed with first controlled static apply",
+  "final_ag20_state": {
+    "readiness_package_created": true,
+    "readiness_audited": true,
+    "final_authorization_package_created": true,
+    "final_authorization_audited": true,
+    "execution_plan_created": true,
+    "execution_plan_audited": true,
+    "ready_for_ag21_controlled_static_apply_transition_gate": true,
+    "explicit_approval_phrase_executed": false,
+    "candidate_apply_enabled": false,
+    "github_token_created": false,
+    "github_token_exposed": false,
+    "github_token_wired": false,
+    "github_write_enabled": false,
+    "article_mutation_enabled": false,
+    "queue_mutation_enabled": false,
+    "admin_editor_execution_enabled": false,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "deployment_trigger_enabled": false,
+    "live_smoke_test_enabled": false,
+    "rollback_execution_enabled": false,
+    "publishing_enabled": false,
+    "supabase_auth_backend_enabled": false
+  },
+  "controlled_static_apply_planning_closure_only": true,
+  "ag20_chain_closure_created_in_ag20z": true,
+  "controlled_static_apply_summary_created_in_ag20z": true,
+  "controlled_static_apply_blocked_register_created_in_ag20z": true,
+  "ag21a_boundary_created_in_ag20z": true,
+  "selected_article_read_performed": true,
+  "explicit_approval_phrase_executed_in_ag20z": false,
+  "article_generation_performed_in_ag20z": false,
+  "article_mutation_performed_in_ag20z": false,
+  "queue_mutation_performed_in_ag20z": false,
+  "active_admin_review_queue_record_created_in_ag20z": false,
+  "queue_index_mutation_performed_in_ag20z": false,
+  "admin_action_execution_performed_in_ag20z": false,
+  "editor_action_execution_performed_in_ag20z": false,
+  "real_credential_created_in_ag20z": false,
+  "hardcoded_password_created_in_repo_in_ag20z": false,
+  "password_hash_created_in_repo_in_ag20z": false,
+  "auth_activation_performed_in_ag20z": false,
+  "backend_activation_performed_in_ag20z": false,
+  "supabase_activation_performed_in_ag20z": false,
+  "database_write_performed_in_ag20z": false,
+  "github_token_created_or_exposed_in_ag20z": false,
+  "github_write_operation_performed_in_ag20z": false,
+  "active_action_handler_created_in_ag20z": false,
+  "api_endpoint_created_in_ag20z": false,
+  "public_visibility_switch_performed_in_ag20z": false,
+  "public_index_mutation_performed_in_ag20z": false,
+  "deployment_trigger_performed_in_ag20z": false,
+  "live_smoke_test_performed_in_ag20z": false,
+  "rollback_execution_performed_in_ag20z": false,
+  "public_publishing_operation_performed_in_ag20z": false
+}
