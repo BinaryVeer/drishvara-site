@@ -4,6 +4,35 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag12cControlledLayoutRefinementAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-controlled-layout-refinement-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "controlled_layout_refinement_applied_pending_post_refinement_audit" &&
+      applyRecord.post_refinement_hash === hashToCheck &&
+      html.includes("AG12C-LAYOUT-REFINEMENT:START") &&
+      html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag12a-object-rich-article-layout-production-readiness-audit.json",
   "data/content-intelligence/audit-records/ag12a-object-rich-article-layout-production-readiness-audit-report.json",
@@ -76,7 +105,7 @@ const articlePath = ag11gApply.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 
 const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (articleHash !== ag11gApply.post_insertion_hash) fail("Current article hash must remain AG11G post-insertion hash");
+if (articleHash !== ag11gApply.post_insertion_hash) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("Current article hash must remain AG11G post-insertion hash or AG12C controlled layout-refinement post-apply record explains the later approved article state");
 
 if (review.status !== "controlled_refinement_plan_created_no_article_mutation") fail("Review status mismatch");
 if (plan.status !== "controlled_refinement_plan_created_no_article_mutation") fail("Plan status mismatch");

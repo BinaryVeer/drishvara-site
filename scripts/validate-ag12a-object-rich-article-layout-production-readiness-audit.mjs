@@ -4,6 +4,35 @@ import crypto from "node:crypto";
 
 const root = process.cwd();
 
+
+function ag12cControlledLayoutRefinementAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-controlled-layout-refinement-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "controlled_layout_refinement_applied_pending_post_refinement_audit" &&
+      applyRecord.post_refinement_hash === hashToCheck &&
+      html.includes("AG12C-LAYOUT-REFINEMENT:START") &&
+      html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')
+    );
+  } catch {
+    return false;
+  }
+}
+
 const requiredFiles = [
   "data/content-intelligence/quality-reviews/ag11z-remaining-object-family-completion-closure.json",
   "data/content-intelligence/closure-records/ag11z-remaining-object-family-completion-closure.json",
@@ -75,7 +104,7 @@ const articlePath = ag11gApply.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 
 const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (articleHash !== ag11gApply.post_insertion_hash) fail("Current article hash must remain AG11G post-insertion hash");
+if (articleHash !== ag11gApply.post_insertion_hash) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("Current article hash must remain AG11G post-insertion hash or AG12C controlled layout-refinement post-apply record explains the later approved article state");
 
 if (review.status !== "object_rich_article_layout_audit_completed_refinement_recommended") fail("Review status mismatch");
 if (audit.status !== "object_rich_article_layout_audit_completed_refinement_recommended") fail("Audit status mismatch");
@@ -95,8 +124,8 @@ if (!Array.isArray(density.object_sequence) || density.object_sequence.length !=
 
 for (const object of density.object_sequence) {
   if (object.present !== true) fail(`${object.family_id} must be present`);
-  if (object.start_marker_count !== 1) fail(`${object.family_id} start marker count must be one`);
-  if (object.end_marker_count !== 1) fail(`${object.family_id} end marker count must be one`);
+  if (object.start_marker_count !== 1) if (!ag12cControlledLayoutRefinementAllowsPostMutation(object.family_id)) fail(`${object.family_id} start marker count must be one or AG12C controlled layout-refinement post-apply record explains the later approved article state`);
+  if (object.end_marker_count !== 1) if (!ag12cControlledLayoutRefinementAllowsPostMutation(object.family_id)) fail(`${object.family_id} end marker count must be one or AG12C controlled layout-refinement post-apply record explains the later approved article state`);
   if (object.visible_credit_present !== true) fail(`${object.family_id} visible credit must be present`);
 }
 

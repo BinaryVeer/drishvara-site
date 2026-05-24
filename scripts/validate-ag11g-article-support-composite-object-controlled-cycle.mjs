@@ -5,7 +5,37 @@ import crypto from "node:crypto";
 const root = process.cwd();
 
 
+
+function ag12cControlledLayoutRefinementAllowsPostMutation(selectedPath = null, currentHash = null) {
+  const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-controlled-layout-refinement-apply.json");
+
+  if (!fs.existsSync(applyRecordPath)) return false;
+
+  try {
+    const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
+    const targetPath = selectedPath || applyRecord.selected_article_path;
+
+    if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+
+    const fullArticlePath = path.join(root, targetPath);
+    if (!fs.existsSync(fullArticlePath)) return false;
+
+    const html = fs.readFileSync(fullArticlePath, "utf8");
+    const hashToCheck = currentHash || sha256(html);
+
+    return (
+      applyRecord.status === "controlled_layout_refinement_applied_pending_post_refinement_audit" &&
+      applyRecord.post_refinement_hash === hashToCheck &&
+      html.includes("AG12C-LAYOUT-REFINEMENT:START") &&
+      html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')
+    );
+  } catch {
+    return false;
+  }
+}
+
 function ag11gControlledCompositeInsertionAllowsPostMutation(selectedPath = null, currentHash = null) {
+  if (ag12cControlledLayoutRefinementAllowsPostMutation(...arguments)) return true;
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag11g-article-support-composite-object-controlled-cycle-apply.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
@@ -131,12 +161,12 @@ const backupHtml = fs.readFileSync(path.join(root, backupPath), "utf8");
 const articleHash = sha256(articleHtml);
 const backupHash = sha256(backupHtml);
 
-if (articleHash !== apply.post_insertion_hash) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Current article hash must match AG11G post-insertion hash or AG11G controlled article-support composite post-insertion record explains the later approved article state");
-if (backupHash !== apply.pre_insertion_hash) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Backup hash must match AG11G pre-insertion hash or AG11G controlled article-support composite post-insertion record explains the later approved article state");
-if (apply.pre_insertion_hash !== ag11fApply.post_insertion_hash) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("AG11G must start from AG11F post-insertion hash or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (articleHash !== apply.post_insertion_hash) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("Current article hash must match AG11G post-insertion hash or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state");
+if (backupHash !== apply.pre_insertion_hash) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("Backup hash must match AG11G pre-insertion hash or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state");
+if (apply.pre_insertion_hash !== ag11fApply.post_insertion_hash) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("AG11G must start from AG11F post-insertion hash or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state");
 
-if (markerCount(articleHtml, apply.insertion_marker_start) !== 1) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("AG11G start marker count must be one or AG11G controlled article-support composite post-insertion record explains the later approved article state");
-if (markerCount(articleHtml, apply.insertion_marker_end) !== 1) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("AG11G end marker count must be one or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (markerCount(articleHtml, apply.insertion_marker_start) !== 1) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("AG11G start marker count must be one or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state");
+if (markerCount(articleHtml, apply.insertion_marker_end) !== 1) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("AG11G end marker count must be one or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state");
 if (backupHtml.includes(apply.insertion_marker_start)) fail("AG11G backup must not include AG11G marker");
 
 if (!articleHtml.includes(apply.object_title)) fail("Article must include composite object title");
@@ -151,7 +181,7 @@ if (component.decorative_only !== false) fail("Composite object must not be deco
 if (!Array.isArray(component.components) || component.components.length !== 4) fail("Composite object must have four components");
 
 if (objectRecord.status !== "controlled_article_support_composite_object_created") fail("Object record status mismatch");
-if (objectRecord.object_hash_sha256 !== apply.object_hash_sha256) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) fail("Object hash mismatch or AG11G controlled article-support composite post-insertion record explains the later approved article state");
+if (objectRecord.object_hash_sha256 !== apply.object_hash_sha256) if (!ag11gControlledCompositeInsertionAllowsPostMutation()) if (!ag12cControlledLayoutRefinementAllowsPostMutation()) fail("Object hash mismatch or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state");
 if (objectRecord.object_type !== "inline_html_reader_lens_card") fail("Object type mismatch");
 
 if (placement.status !== "article_support_composite_object_placement_tuned") fail("Placement tuning status mismatch");
