@@ -1,0 +1,107 @@
+{
+  "module_id": "AG17Z",
+  "title": "Static Go-live Preparation Summary",
+  "status": "ag17_static_go_live_preparation_chain_completed",
+  "selected_path": "hybrid_staged_path",
+  "static_github_controlled_first": true,
+  "supabase_auth_backend_deferred": true,
+  "supabase_auth_reminder_required_in_future": true,
+  "completed_stage_count": 5,
+  "completed_stages": [
+    {
+      "stage_id": "AG17A",
+      "title": "Controlled Go-live Implementation Path Decision",
+      "result": "Selected hybrid staged path: static/GitHub-controlled first, Supabase/Auth/backend later."
+    },
+    {
+      "stage_id": "AG17B",
+      "title": "Hybrid Static Go-live Implementation Plan",
+      "result": "Planned static/GitHub first architecture, public exposure sequence, no-secrets GitHub requirements, Admin/Editor readiness, rollback/audit plan and Supabase/Auth defer reminder."
+    },
+    {
+      "stage_id": "AG17C",
+      "title": "Hybrid Static Go-live Implementation Plan Audit",
+      "result": "Audited AG17B plan with zero failed checks and approved only non-active static go-live scaffold."
+    },
+    {
+      "stage_id": "AG17D",
+      "title": "Non-active Static Go-live Implementation Scaffold",
+      "result": "Created non-active static go-live helper and no-write/no-deployment/no-publishing templates outside /api."
+    },
+    {
+      "stage_id": "AG17E",
+      "title": "Non-active Static Go-live Implementation Scaffold Audit",
+      "result": "Audited scaffold with zero failed checks and confirmed no live GitHub write, visibility, public index, deployment, publish or Supabase/Auth/backend path."
+    }
+  ],
+  "seed_candidate": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "hash_verified": true
+  },
+  "final_static_go_live_preparation_state": {
+    "path_decision_completed": true,
+    "static_architecture_planned": true,
+    "public_exposure_sequence_planned": true,
+    "github_secret_requirements_planned_no_secrets": true,
+    "admin_editor_static_action_readiness_planned": true,
+    "rollback_audit_plan_defined": true,
+    "non_active_static_go_live_scaffold_created": true,
+    "non_active_static_go_live_scaffold_audited": true,
+    "github_write_enabled": false,
+    "github_token_created": false,
+    "github_token_exposed": false,
+    "github_token_wired": false,
+    "admin_editor_execution_enabled": false,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "deployment_trigger_enabled": false,
+    "publishing_enabled": false,
+    "supabase_auth_backend_enabled": false
+  },
+  "inherited_public_visibility_controls": {
+    "public_visibility_model_defined": true,
+    "publish_control_model_defined": true,
+    "public_surface_filter_contract_defined": true,
+    "public_surface_exclusion_contract_defined": true,
+    "schema_dry_run_passed": true,
+    "dry_run_audit_passed": true,
+    "non_active_public_filter_scaffold_created": true,
+    "non_active_public_filter_scaffold_audited": true,
+    "public_exposure_requires_public_visibility_true": true,
+    "public_exposure_requires_publish_approved_true": true,
+    "public_exposure_requires_public_index_allowed_true": true,
+    "public_exposure_requires_hash_integrity": true,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "publishing_enabled": false
+  },
+  "static_go_live_preparation_chain_closure_only": true,
+  "ag17_chain_closure_created_in_ag17z": true,
+  "static_go_live_preparation_summary_created_in_ag17z": true,
+  "real_static_activation_blocked_register_created_in_ag17z": true,
+  "ag18a_boundary_created_in_ag17z": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17z": false,
+  "article_mutation_performed_in_ag17z": false,
+  "queue_mutation_performed_in_ag17z": false,
+  "active_admin_review_queue_record_created_in_ag17z": false,
+  "queue_index_mutation_performed_in_ag17z": false,
+  "admin_action_execution_performed_in_ag17z": false,
+  "editor_action_execution_performed_in_ag17z": false,
+  "real_credential_created_in_ag17z": false,
+  "hardcoded_password_created_in_repo_in_ag17z": false,
+  "password_hash_created_in_repo_in_ag17z": false,
+  "auth_activation_performed_in_ag17z": false,
+  "backend_activation_performed_in_ag17z": false,
+  "supabase_activation_performed_in_ag17z": false,
+  "database_write_performed_in_ag17z": false,
+  "github_token_created_or_exposed_in_ag17z": false,
+  "github_write_operation_performed_in_ag17z": false,
+  "active_action_handler_created_in_ag17z": false,
+  "api_endpoint_created_in_ag17z": false,
+  "public_visibility_switch_performed_in_ag17z": false,
+  "public_index_mutation_performed_in_ag17z": false,
+  "deployment_trigger_performed_in_ag17z": false,
+  "public_publishing_operation_performed_in_ag17z": false
+}
