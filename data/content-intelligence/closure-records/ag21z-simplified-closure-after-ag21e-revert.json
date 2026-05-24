@@ -1,0 +1,35 @@
+{
+  "module_id": "AG21Z",
+  "title": "Simplified Closure After AG21E Revert",
+  "status": "ag21_closed_after_ag21e_revert_ready_for_ag22a_decision_gate",
+  "reason_for_closure": "AG21E was introduced as an additional conservative confirmation layer beyond the agreed path and has been reverted.",
+  "accepted_last_stage": "AG21D",
+  "reverted_stage": "AG21E",
+  "superseded_boundary": "data/content-intelligence/mutation-plans/ag21d-to-ag21e-controlled-static-apply-execution-confirmation-boundary.json",
+  "superseded_next_stage_from_ag21d": "AG21E",
+  "corrected_next_stage": "AG22A",
+  "corrected_next_stage_title": "First Controlled Static Apply Decision Gate",
+  "required_future_approval_phrase": "Proceed with first controlled static apply",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "explicit_approval_phrase_executed": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "article_mutated": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  },
+  "final_decision": {
+    "ag21_closed": true,
+    "proceed_to_ag22a_first_controlled_static_apply_decision_gate": true,
+    "proceed_to_ag21e": false,
+    "proceed_to_ag21f": false,
+    "execute_real_apply_now": false
+  }
+}

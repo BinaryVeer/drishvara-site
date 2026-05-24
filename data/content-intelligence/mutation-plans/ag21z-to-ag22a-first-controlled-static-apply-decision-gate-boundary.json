@@ -1,0 +1,23 @@
+{
+  "module_id": "AG21Z",
+  "title": "AG21Z to AG22A First Controlled Static Apply Decision Gate Boundary",
+  "status": "ag22a_boundary_created_not_started",
+  "next_stage_id": "AG22A",
+  "next_stage_title": "First Controlled Static Apply Decision Gate",
+  "purpose": "Move from planning/readiness to a single controlled decision gate for first static apply.",
+  "required_future_approval_phrase": "Proceed with first controlled static apply",
+  "allowed_scope": [
+    "Decide whether to proceed with first controlled static apply.",
+    "Restate candidate, surfaces, GitHub write, deployment, smoke-test and rollback preconditions.",
+    "Keep Supabase/Auth/backend deferred."
+  ],
+  "blocked_scope": [
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No article mutation.",
+    "No public visibility switch.",
+    "No deployment.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ]
+}
