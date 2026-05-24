@@ -1,0 +1,72 @@
+{
+  "module_id": "AG14G",
+  "title": "GitHub-backed Static Action Handler Contract",
+  "status": "github_backed_static_contract_defined_not_activated",
+  "contract_purpose": "Define how a future secure server-side handler can update static JSON queue/audit files without exposing GitHub write credentials to the browser.",
+  "proposed_endpoint_contract": {
+    "endpoint_placeholder": "/api/admin-action",
+    "method": "POST",
+    "active_in_ag14g": false,
+    "required_request_fields": [
+      "actor_identifier",
+      "actor_role",
+      "article_id",
+      "requested_action",
+      "current_status",
+      "expected_new_status",
+      "pre_action_hash",
+      "decision_or_submission_remarks",
+      "client_request_id"
+    ],
+    "required_server_validations": [
+      "Verify authenticated session.",
+      "Verify actor role.",
+      "Verify requested action is permitted for actor role.",
+      "Verify article_id exists in queue.",
+      "Verify current_status matches server record.",
+      "Verify pre_action_hash matches server-side file/content hash.",
+      "Verify transition is allowed.",
+      "Verify required remarks/confirmation fields are present.",
+      "Verify no hard blocker prevents requested action."
+    ],
+    "planned_file_write_targets": [
+      "data/admin-review/queue/<article-id>.json",
+      "data/admin-review/index/admin-review-queue-index.json",
+      "data/admin-review/audit/<article-id>/<timestamp>-<action>.json",
+      "data/admin-review/versions/<article-id>/<version>.json"
+    ],
+    "planned_commit_pattern": "Admin action: <action> <article-id>",
+    "deployment_trigger_policy": "Not part of AG14G. Future publish execution requires separate approval and must not run automatically from this plan."
+  },
+  "browser_restrictions": [
+    "Browser must not receive GitHub token.",
+    "Browser must not write repository files directly.",
+    "Browser must not decide final state without server validation.",
+    "Browser must not bypass audit creation."
+  ],
+  "secure_action_handler_architecture_plan_only": true,
+  "secure_action_handler_architecture_defined_in_ag14g": true,
+  "github_backed_static_contract_defined_in_ag14g": true,
+  "environment_secret_role_access_plan_defined_in_ag14g": true,
+  "action_execution_sequence_audit_plan_defined_in_ag14g": true,
+  "supabase_later_migration_path_preserved_in_ag14g": true,
+  "ag14h_boundary_created_in_ag14g": true,
+  "selected_article_read_performed": true,
+  "action_handler_created_in_ag14g": false,
+  "admin_action_execution_performed_in_ag14g": false,
+  "editor_action_execution_performed_in_ag14g": false,
+  "real_credential_created_in_ag14g": false,
+  "hardcoded_password_created_in_ag14g": false,
+  "password_hash_created_in_repo_in_ag14g": false,
+  "auth_activation_performed_in_ag14g": false,
+  "backend_activation_performed_in_ag14g": false,
+  "supabase_activation_performed_in_ag14g": false,
+  "database_write_performed_in_ag14g": false,
+  "github_token_created_or_exposed_in_ag14g": false,
+  "github_write_operation_performed_in_ag14g": false,
+  "article_mutation_performed_in_ag14g": false,
+  "queue_mutation_performed_in_ag14g": false,
+  "public_visibility_switch_performed_in_ag14g": false,
+  "public_publishing_operation_performed_in_ag14g": false,
+  "deployment_trigger_performed_in_ag14g": false
+}

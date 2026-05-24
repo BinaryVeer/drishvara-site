@@ -1,0 +1,87 @@
+{
+  "module_id": "AG14G",
+  "title": "Secure Action Handler Architecture Plan",
+  "status": "secure_action_handler_architecture_plan_defined_not_implemented",
+  "architecture_strategy": "hybrid_static_github_first_supabase_later",
+  "guiding_principle": "Admin/Editor UI must remain static-read-only until a server-side action handler with role authentication, secret isolation, hash validation and audit logging is implemented.",
+  "planned_handler_boundary": {
+    "handler_type": "server_side_action_handler_or_trusted_function",
+    "browser_role": "submit action request only",
+    "server_role": "validate role, validate action, validate hash, write audit, update queue/status, optionally trigger publish/deploy in later approved stage",
+    "secret_location": "environment_variables_or_secret_manager_only",
+    "browser_secret_exposure_allowed": false
+  },
+  "action_domains": [
+    {
+      "domain": "admin_decisions",
+      "actions": [
+        "archive",
+        "return_for_correction",
+        "publish",
+        "publish_and_close"
+      ],
+      "publish_capable_actions": [
+        "publish",
+        "publish_and_close"
+      ],
+      "execution_status": "planned_not_active"
+    },
+    {
+      "domain": "editor_submissions",
+      "actions": [
+        "create_manual_article",
+        "save_draft",
+        "preview",
+        "submit_to_admin",
+        "edit_returned_article",
+        "resubmit_to_admin"
+      ],
+      "publish_capable_actions": [],
+      "execution_status": "planned_not_active"
+    }
+  ],
+  "required_security_layers": [
+    "Authenticated actor identity.",
+    "Role-action allowlist.",
+    "First-login reset already completed for bootstrap accounts.",
+    "Server-side secret storage.",
+    "Request origin/CSRF validation.",
+    "Input schema validation.",
+    "Pre-action article hash match.",
+    "State transition allowlist.",
+    "Audit write before or atomically with state change.",
+    "Post-action hash capture.",
+    "Rollback/recovery record.",
+    "No client-side write token."
+  ],
+  "preserved_future_path": {
+    "github_backed_static_first": true,
+    "supabase_auth_database_later": true,
+    "migration_note": "Queue JSON and audit fields should remain compatible with future Supabase table design."
+  },
+  "secure_action_handler_architecture_plan_only": true,
+  "secure_action_handler_architecture_defined_in_ag14g": true,
+  "github_backed_static_contract_defined_in_ag14g": true,
+  "environment_secret_role_access_plan_defined_in_ag14g": true,
+  "action_execution_sequence_audit_plan_defined_in_ag14g": true,
+  "supabase_later_migration_path_preserved_in_ag14g": true,
+  "ag14h_boundary_created_in_ag14g": true,
+  "selected_article_read_performed": true,
+  "action_handler_created_in_ag14g": false,
+  "admin_action_execution_performed_in_ag14g": false,
+  "editor_action_execution_performed_in_ag14g": false,
+  "real_credential_created_in_ag14g": false,
+  "hardcoded_password_created_in_ag14g": false,
+  "password_hash_created_in_repo_in_ag14g": false,
+  "auth_activation_performed_in_ag14g": false,
+  "backend_activation_performed_in_ag14g": false,
+  "supabase_activation_performed_in_ag14g": false,
+  "database_write_performed_in_ag14g": false,
+  "github_token_created_or_exposed_in_ag14g": false,
+  "github_write_operation_performed_in_ag14g": false,
+  "article_mutation_performed_in_ag14g": false,
+  "queue_mutation_performed_in_ag14g": false,
+  "public_visibility_switch_performed_in_ag14g": false,
+  "public_publishing_operation_performed_in_ag14g": false,
+  "deployment_trigger_performed_in_ag14g": false
+}

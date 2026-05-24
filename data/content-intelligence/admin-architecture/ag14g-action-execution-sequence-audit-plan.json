@@ -1,0 +1,118 @@
+{
+  "module_id": "AG14G",
+  "title": "Action Execution Sequence and Audit Plan",
+  "status": "action_execution_sequence_audit_plan_defined_not_executable",
+  "sequence_for_future_admin_or_editor_action": [
+    {
+      "step": 1,
+      "name": "receive_request",
+      "description": "Receive action request from UI.",
+      "server_side_required": true
+    },
+    {
+      "step": 2,
+      "name": "authenticate_actor",
+      "description": "Verify actor identity and role.",
+      "server_side_required": true
+    },
+    {
+      "step": 3,
+      "name": "validate_action_allowlist",
+      "description": "Confirm action is allowed for role.",
+      "server_side_required": true
+    },
+    {
+      "step": 4,
+      "name": "load_server_record",
+      "description": "Load article queue/status/version record server-side.",
+      "server_side_required": true
+    },
+    {
+      "step": 5,
+      "name": "validate_hash_and_status",
+      "description": "Compare supplied current status and hash with server-side record.",
+      "server_side_required": true
+    },
+    {
+      "step": 6,
+      "name": "validate_transition",
+      "description": "Check requested status transition against AG14E model.",
+      "server_side_required": true
+    },
+    {
+      "step": 7,
+      "name": "create_audit_record",
+      "description": "Create audit record with actor, action, remarks, status, hashes and timestamp.",
+      "server_side_required": true
+    },
+    {
+      "step": 8,
+      "name": "apply_state_change",
+      "description": "Update queue/status/version record only after validation and audit path is ready.",
+      "server_side_required": true
+    },
+    {
+      "step": 9,
+      "name": "record_post_hash",
+      "description": "Capture post-action hash and final state.",
+      "server_side_required": true
+    },
+    {
+      "step": 10,
+      "name": "return_result",
+      "description": "Return action result to UI without exposing secrets.",
+      "server_side_required": true
+    }
+  ],
+  "audit_fields_inherited_from_ag14e": [
+    "audit_id",
+    "article_id",
+    "article_origin",
+    "version",
+    "actor_role",
+    "actor_identifier",
+    "action",
+    "decision_or_submission_remarks",
+    "timestamp",
+    "previous_status",
+    "new_status",
+    "pre_action_hash",
+    "post_action_hash",
+    "public_visibility_before",
+    "public_visibility_after",
+    "hard_blockers_at_action_time"
+  ],
+  "rollback_model": [
+    "Every action writes pre-action hash.",
+    "Every changed queue/status file is versioned or recoverable.",
+    "Archive does not delete content.",
+    "Return for correction preserves Admin remarks and prior version.",
+    "Publish requires final Admin confirmation and post-action hash.",
+    "Publish and close records closure separately."
+  ],
+  "secure_action_handler_architecture_plan_only": true,
+  "secure_action_handler_architecture_defined_in_ag14g": true,
+  "github_backed_static_contract_defined_in_ag14g": true,
+  "environment_secret_role_access_plan_defined_in_ag14g": true,
+  "action_execution_sequence_audit_plan_defined_in_ag14g": true,
+  "supabase_later_migration_path_preserved_in_ag14g": true,
+  "ag14h_boundary_created_in_ag14g": true,
+  "selected_article_read_performed": true,
+  "action_handler_created_in_ag14g": false,
+  "admin_action_execution_performed_in_ag14g": false,
+  "editor_action_execution_performed_in_ag14g": false,
+  "real_credential_created_in_ag14g": false,
+  "hardcoded_password_created_in_ag14g": false,
+  "password_hash_created_in_repo_in_ag14g": false,
+  "auth_activation_performed_in_ag14g": false,
+  "backend_activation_performed_in_ag14g": false,
+  "supabase_activation_performed_in_ag14g": false,
+  "database_write_performed_in_ag14g": false,
+  "github_token_created_or_exposed_in_ag14g": false,
+  "github_write_operation_performed_in_ag14g": false,
+  "article_mutation_performed_in_ag14g": false,
+  "queue_mutation_performed_in_ag14g": false,
+  "public_visibility_switch_performed_in_ag14g": false,
+  "public_publishing_operation_performed_in_ag14g": false,
+  "deployment_trigger_performed_in_ag14g": false
+}
