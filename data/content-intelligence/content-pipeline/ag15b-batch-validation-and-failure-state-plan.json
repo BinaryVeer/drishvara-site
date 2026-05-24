@@ -1,0 +1,125 @@
+{
+  "module_id": "AG15B",
+  "title": "Batch Validation and Failure State Plan",
+  "status": "batch_validation_failure_state_plan_defined",
+  "purpose": "Define checks needed when multiple generated articles are routed toward Admin Review Queue.",
+  "batch_validation_checks": [
+    "No duplicate article_id.",
+    "No duplicate slug in same category.",
+    "Article path exists.",
+    "Article hash exists and matches file.",
+    "Title and category exist.",
+    "Reference evidence present.",
+    "Credit evidence present where applicable.",
+    "Object evidence present where applicable.",
+    "Preview evidence present.",
+    "public_visibility is false by default.",
+    "publish_approved is false by default.",
+    "Queue status is non-public before Admin decision.",
+    "Queue index and candidate records are consistent.",
+    "Broken-link risk is flagged where verification is incomplete.",
+    "Mobile/layout risk is flagged where unresolved."
+  ],
+  "failure_states": [
+    {
+      "state": "blocked_missing_required_metadata",
+      "public_visibility": false,
+      "publish_approved": false,
+      "action": "do_not_queue_until_fixed"
+    },
+    {
+      "state": "blocked_missing_quality_evidence",
+      "public_visibility": false,
+      "publish_approved": false,
+      "action": "hold_in_generation_output"
+    },
+    {
+      "state": "blocked_reference_under_verification",
+      "public_visibility": false,
+      "publish_approved": false,
+      "action": "queue_only_if_editorial_verification_note_present"
+    },
+    {
+      "state": "blocked_layout_mobile_risk",
+      "public_visibility": false,
+      "publish_approved": false,
+      "action": "return_to_layout_review"
+    },
+    {
+      "state": "archived_non_public",
+      "public_visibility": false,
+      "publish_approved": false,
+      "action": "retain_for_intelligence_not_publication"
+    }
+  ],
+  "object_routing_logic": [
+    {
+      "object_profile": "text_only",
+      "required_evidence": [
+        "reference_evidence",
+        "preview_evidence",
+        "hash_evidence"
+      ]
+    },
+    {
+      "object_profile": "image_only",
+      "required_evidence": [
+        "reference_evidence",
+        "credit_evidence",
+        "object_evidence",
+        "preview_evidence",
+        "hash_evidence"
+      ]
+    },
+    {
+      "object_profile": "object_rich",
+      "required_evidence": [
+        "reference_evidence",
+        "credit_evidence",
+        "object_evidence",
+        "layout_evidence",
+        "preview_evidence",
+        "hash_evidence"
+      ]
+    },
+    {
+      "object_profile": "data_supported",
+      "required_evidence": [
+        "source_data_evidence",
+        "reference_evidence",
+        "object_evidence",
+        "layout_evidence",
+        "preview_evidence",
+        "hash_evidence"
+      ]
+    }
+  ],
+  "generated_article_admin_queue_integration_plan_only": true,
+  "generated_article_intake_schema_plan_created_in_ag15b": true,
+  "admin_review_queue_record_schema_plan_created_in_ag15b": true,
+  "quality_evidence_preview_state_plan_created_in_ag15b": true,
+  "batch_validation_failure_state_plan_created_in_ag15b": true,
+  "ag15c_boundary_created_in_ag15b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15b": false,
+  "article_mutation_performed_in_ag15b": false,
+  "queue_mutation_performed_in_ag15b": false,
+  "admin_review_queue_record_created_in_ag15b": false,
+  "queue_index_mutation_performed_in_ag15b": false,
+  "admin_action_execution_performed_in_ag15b": false,
+  "editor_action_execution_performed_in_ag15b": false,
+  "real_credential_created_in_ag15b": false,
+  "hardcoded_password_created_in_ag15b": false,
+  "password_hash_created_in_repo_in_ag15b": false,
+  "auth_activation_performed_in_ag15b": false,
+  "backend_activation_performed_in_ag15b": false,
+  "supabase_activation_performed_in_ag15b": false,
+  "database_write_performed_in_ag15b": false,
+  "github_token_created_or_exposed_in_ag15b": false,
+  "github_write_operation_performed_in_ag15b": false,
+  "active_action_handler_created_in_ag15b": false,
+  "api_endpoint_created_in_ag15b": false,
+  "public_visibility_switch_performed_in_ag15b": false,
+  "public_publishing_operation_performed_in_ag15b": false,
+  "deployment_trigger_performed_in_ag15b": false
+}

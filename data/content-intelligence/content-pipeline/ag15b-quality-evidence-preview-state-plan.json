@@ -1,0 +1,87 @@
+{
+  "module_id": "AG15B",
+  "title": "Quality Evidence and Preview State Plan",
+  "status": "quality_evidence_preview_state_plan_defined",
+  "purpose": "Define required evidence before a generated article can be routed to Admin Review Queue.",
+  "mandatory_quality_evidence": [
+    {
+      "evidence_id": "reference_evidence",
+      "required": true,
+      "description": "Reference links verified, or explicitly marked under editorial verification."
+    },
+    {
+      "evidence_id": "credit_evidence",
+      "required": true,
+      "description": "Image/object credits present where applicable."
+    },
+    {
+      "evidence_id": "object_evidence",
+      "required": true,
+      "description": "Generated image/chart/infographic/diagram/table/map/composite objects have approval or not-applicable status."
+    },
+    {
+      "evidence_id": "layout_evidence",
+      "required": true,
+      "description": "Article layout and object placement have passed readability and mobile-safety checks."
+    },
+    {
+      "evidence_id": "preview_evidence",
+      "required": true,
+      "description": "Local or live preview observation record exists before Admin queue handoff."
+    },
+    {
+      "evidence_id": "hash_evidence",
+      "required": true,
+      "description": "Article hash recorded at queue handoff."
+    }
+  ],
+  "preview_state_model": {
+    "preview_required_before_queue": true,
+    "preview_type_allowed": [
+      "local_preview",
+      "controlled_live_preview",
+      "static_html_preview"
+    ],
+    "preview_record_required_fields": [
+      "preview_path_or_url",
+      "preview_timestamp",
+      "article_hash_at_preview",
+      "layout_observation",
+      "object_observation",
+      "mobile_observation",
+      "known_issues"
+    ]
+  },
+  "default_publication_state_at_preview": {
+    "public_visibility": false,
+    "publish_approved": false
+  },
+  "generated_article_admin_queue_integration_plan_only": true,
+  "generated_article_intake_schema_plan_created_in_ag15b": true,
+  "admin_review_queue_record_schema_plan_created_in_ag15b": true,
+  "quality_evidence_preview_state_plan_created_in_ag15b": true,
+  "batch_validation_failure_state_plan_created_in_ag15b": true,
+  "ag15c_boundary_created_in_ag15b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15b": false,
+  "article_mutation_performed_in_ag15b": false,
+  "queue_mutation_performed_in_ag15b": false,
+  "admin_review_queue_record_created_in_ag15b": false,
+  "queue_index_mutation_performed_in_ag15b": false,
+  "admin_action_execution_performed_in_ag15b": false,
+  "editor_action_execution_performed_in_ag15b": false,
+  "real_credential_created_in_ag15b": false,
+  "hardcoded_password_created_in_ag15b": false,
+  "password_hash_created_in_repo_in_ag15b": false,
+  "auth_activation_performed_in_ag15b": false,
+  "backend_activation_performed_in_ag15b": false,
+  "supabase_activation_performed_in_ag15b": false,
+  "database_write_performed_in_ag15b": false,
+  "github_token_created_or_exposed_in_ag15b": false,
+  "github_write_operation_performed_in_ag15b": false,
+  "active_action_handler_created_in_ag15b": false,
+  "api_endpoint_created_in_ag15b": false,
+  "public_visibility_switch_performed_in_ag15b": false,
+  "public_publishing_operation_performed_in_ag15b": false,
+  "deployment_trigger_performed_in_ag15b": false
+}
