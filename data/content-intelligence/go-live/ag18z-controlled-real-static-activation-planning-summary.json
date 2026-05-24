@@ -1,0 +1,98 @@
+{
+  "module_id": "AG18Z",
+  "title": "Controlled Real Static Activation Planning Summary",
+  "status": "ag18_controlled_real_static_activation_planning_completed",
+  "selected_path": "hybrid_staged_path_static_first",
+  "static_github_controlled_first": true,
+  "supabase_auth_backend_deferred": true,
+  "supabase_auth_reminder_required_in_future": true,
+  "completed_stage_count": 6,
+  "completed_stages": [
+    {
+      "stage_id": "AG18A",
+      "title": "Controlled Real Static Activation Planning",
+      "result": "Defined candidate selection, GitHub secret governance without secrets, public index delta review, rollback and smoke-test planning."
+    },
+    {
+      "stage_id": "AG18B",
+      "title": "Controlled Real Static Activation Plan Audit",
+      "result": "Audited AG18A and approved only AG18C dry-run."
+    },
+    {
+      "stage_id": "AG18C",
+      "title": "First Public Candidate and File Delta Dry-run",
+      "result": "Dry-ran candidate readiness, public filter, intended file delta, public surfaces, rollback and smoke-test with no mutation."
+    },
+    {
+      "stage_id": "AG18D",
+      "title": "First Public Candidate and File Delta Dry-run Audit",
+      "result": "Audited AG18C with zero failed checks and approved only AG18E non-active scaffold."
+    },
+    {
+      "stage_id": "AG18E",
+      "title": "Non-active Real Static Activation Scaffold",
+      "result": "Created non-active helper and templates for candidate apply, public index delta, GitHub write payload, rollback and smoke-test."
+    },
+    {
+      "stage_id": "AG18F",
+      "title": "Non-active Real Static Activation Scaffold Audit",
+      "result": "Audited AG18E with zero failed checks and approved AG18Z closure only."
+    }
+  ],
+  "seed_candidate": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "hash_verified": true
+  },
+  "final_ag18_state": {
+    "real_static_activation_planning_defined": true,
+    "plan_audited": true,
+    "first_candidate_dry_run_completed": true,
+    "first_candidate_dry_run_audited": true,
+    "non_active_real_static_activation_scaffold_created": true,
+    "non_active_real_static_activation_scaffold_audited": true,
+    "ready_for_ag19_pre_apply_readiness_planning": true,
+    "candidate_apply_enabled": false,
+    "github_token_created": false,
+    "github_token_exposed": false,
+    "github_token_wired": false,
+    "github_write_enabled": false,
+    "article_mutation_enabled": false,
+    "queue_mutation_enabled": false,
+    "admin_editor_execution_enabled": false,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "deployment_trigger_enabled": false,
+    "publishing_enabled": false,
+    "supabase_auth_backend_enabled": false
+  },
+  "inherited_static_go_live_summary": "data/content-intelligence/go-live/ag17z-static-go-live-preparation-summary.json",
+  "controlled_real_static_activation_planning_closure_only": true,
+  "ag18_chain_closure_created_in_ag18z": true,
+  "controlled_real_static_activation_summary_created_in_ag18z": true,
+  "pre_apply_blocked_register_created_in_ag18z": true,
+  "ag19a_boundary_created_in_ag18z": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag18z": false,
+  "article_mutation_performed_in_ag18z": false,
+  "queue_mutation_performed_in_ag18z": false,
+  "active_admin_review_queue_record_created_in_ag18z": false,
+  "queue_index_mutation_performed_in_ag18z": false,
+  "admin_action_execution_performed_in_ag18z": false,
+  "editor_action_execution_performed_in_ag18z": false,
+  "real_credential_created_in_ag18z": false,
+  "hardcoded_password_created_in_repo_in_ag18z": false,
+  "password_hash_created_in_repo_in_ag18z": false,
+  "auth_activation_performed_in_ag18z": false,
+  "backend_activation_performed_in_ag18z": false,
+  "supabase_activation_performed_in_ag18z": false,
+  "database_write_performed_in_ag18z": false,
+  "github_token_created_or_exposed_in_ag18z": false,
+  "github_write_operation_performed_in_ag18z": false,
+  "active_action_handler_created_in_ag18z": false,
+  "api_endpoint_created_in_ag18z": false,
+  "public_visibility_switch_performed_in_ag18z": false,
+  "public_index_mutation_performed_in_ag18z": false,
+  "deployment_trigger_performed_in_ag18z": false,
+  "public_publishing_operation_performed_in_ag18z": false
+}
