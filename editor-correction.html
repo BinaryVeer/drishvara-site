@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Admin and Editor Access | Drishvara</title>
+  <title>Editor Correction Workspace | Drishvara</title>
   <style>
 :root {
   --ink:#071421;
@@ -63,7 +63,7 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:900px){.grid.two,.grid.three,.split{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="admin-login" data-auth-mode="scaffold-only" data-real-auth="not-active">
+<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="editor-correction" data-auth-mode="scaffold-only" data-real-auth="not-active">
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Drishvara home">
@@ -77,55 +77,37 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
     </header>
     
 <section class="hero">
-  <span class="badge">Restricted workspace preview</span>
-  <h1>Admin & Editor Access</h1>
-  <p>This scaffold prepares the controlled Drishvara review workspace. Real authentication, credentials and password reset are not active in this static UI.</p>
+  <span class="badge">Correction scaffold</span>
+  <h1>Correction Workspace</h1>
+  <p>Returned articles will open here with Admin remarks. Editor can manually revise and resubmit to Admin after secure workflow activation.</p>
 </section>
 
-<section class="grid two">
-  <div class="card">
-    <h2>Access panel</h2>
-    <p class="notice">Bootstrap credentials must be issued outside public code. First login must force password reset after secure authentication is activated.</p>
-    <div class="form-row">
-      <label for="role">Role</label>
-      <select id="role" aria-label="Select role">
-        <option>Admin</option>
-        <option>Editor</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label for="identifier">Login identifier</label>
-      <input id="identifier" type="email" placeholder="Issued securely outside public code" autocomplete="off">
-    </div>
-    <div class="form-row">
-      <label for="accessPhrase">Password</label>
-      <input id="accessPhrase" type="password" placeholder="Not stored in this page" autocomplete="off">
-    </div>
-    <div class="actions">
-      <button type="button" disabled data-auth-action="disabled-until-secure-auth">Access console</button>
-      <a class="btn secondary" href="admin-dashboard.html">Preview Admin dashboard</a>
-      <a class="btn secondary" href="editor-dashboard.html">Preview Editor dashboard</a>
-    </div>
-    <p class="small">No credential validation is performed here. This page is a visual scaffold only.</p>
-  </div>
+<section class="split">
+  <aside class="card">
+    <h2>Admin remarks</h2>
+    <p class="notice">No active correction task yet. This scaffold shows the planned correction workspace.</p>
+    <p class="small">Future correction reasons: editorial issue, reference issue, object/layout issue, mobile issue, tone issue, publish-risk issue, other.</p>
+  </aside>
 
-  <div class="card">
-    <h2>Role boundaries</h2>
-    <div class="grid">
-      <div>
-        <h3>Admin</h3>
-        <p>Can review, archive, return for correction, publish, publish and close after secure workflow activation.</p>
-      </div>
-      <div>
-        <h3>Editor</h3>
-        <p>Can manually create articles, correct returned articles, preview, save draft and submit to Admin. Editor cannot publish.</p>
-      </div>
-      <div>
-        <h3>Security doctrine</h3>
-        <p>Real credentials, password reset and role enforcement require a secure server-side/auth layer. No password is committed to the repository.</p>
-      </div>
+  <section class="card">
+    <h2>Returned article editor</h2>
+    <div class="form-row"><label>Article title</label><input value="Enhancing Public Healthcare Delivery through Digital Innovation"></div>
+    <div class="form-row"><label>Correction notes</label><textarea placeholder="Editor correction notes"></textarea></div>
+    <div class="form-row"><label>Corrected body</label><textarea class="editor-area" placeholder="Returned article content will appear here for manual correction"></textarea></div>
+    <div class="actions">
+      <button type="button" disabled data-editor-action="save_revision">Save revision</button>
+      <button type="button" disabled data-editor-action="preview_revision">Preview revision</button>
+      <button type="button" disabled data-editor-action="resubmit_to_admin">Resubmit to Admin</button>
     </div>
-  </div>
+  </section>
+
+  <aside class="card">
+    <h2>Versioning</h2>
+    <p>v1 — pipeline/editor original</p>
+    <p>v2 — editor correction</p>
+    <p>v3 — further correction if returned again</p>
+    <p class="small">All future correction actions must preserve article hash and audit trail.</p>
+  </aside>
 </section>
 
   </main>

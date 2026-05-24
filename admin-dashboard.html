@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Admin and Editor Access | Drishvara</title>
+  <title>Admin Review Queue | Drishvara</title>
   <style>
 :root {
   --ink:#071421;
@@ -63,7 +63,7 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:900px){.grid.two,.grid.three,.split{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="admin-login" data-auth-mode="scaffold-only" data-real-auth="not-active">
+<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="admin-dashboard" data-auth-mode="scaffold-only" data-real-auth="not-active">
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Drishvara home">
@@ -77,54 +77,59 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
     </header>
     
 <section class="hero">
-  <span class="badge">Restricted workspace preview</span>
-  <h1>Admin & Editor Access</h1>
-  <p>This scaffold prepares the controlled Drishvara review workspace. Real authentication, credentials and password reset are not active in this static UI.</p>
+  <span class="badge">Admin dashboard scaffold</span>
+  <h1>Admin Review Queue</h1>
+  <p>Review generated and editor-submitted articles before public visibility. Action buttons are intentionally disabled until secure action handling is activated.</p>
 </section>
 
-<section class="grid two">
-  <div class="card">
-    <h2>Access panel</h2>
-    <p class="notice">Bootstrap credentials must be issued outside public code. First login must force password reset after secure authentication is activated.</p>
-    <div class="form-row">
-      <label for="role">Role</label>
-      <select id="role" aria-label="Select role">
-        <option>Admin</option>
-        <option>Editor</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label for="identifier">Login identifier</label>
-      <input id="identifier" type="email" placeholder="Issued securely outside public code" autocomplete="off">
-    </div>
-    <div class="form-row">
-      <label for="accessPhrase">Password</label>
-      <input id="accessPhrase" type="password" placeholder="Not stored in this page" autocomplete="off">
-    </div>
-    <div class="actions">
-      <button type="button" disabled data-auth-action="disabled-until-secure-auth">Access console</button>
-      <a class="btn secondary" href="admin-dashboard.html">Preview Admin dashboard</a>
-      <a class="btn secondary" href="editor-dashboard.html">Preview Editor dashboard</a>
-    </div>
-    <p class="small">No credential validation is performed here. This page is a visual scaffold only.</p>
-  </div>
+<section class="grid three">
+  <div class="card"><p class="small">Pending candidates</p><div class="kpi" id="candidateCount">1</div></div>
+  <div class="card"><p class="small">Readiness score</p><div class="kpi">92/100</div></div>
+  <div class="card"><p class="small">Hard blockers</p><div class="kpi">0</div></div>
+</section>
 
+<section class="card" style="margin-top:18px">
+  <h2>Seed candidate</h2>
+  <table class="table" aria-label="Admin review queue">
+    <thead>
+      <tr>
+        <th>Article</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Score</th>
+        <th>Preview</th>
+        <th>Admin actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Enhancing Public Healthcare Delivery through Digital Innovation</strong><br><span class="small">enhancing-public-healthcare-delivery-digital-innovation</span></td>
+        <td>policy</td>
+        <td><span class="status">ready_for_admin_review</span><br><span class="small">Public visibility: false</span></td>
+        <td><strong>92/100</strong><br><span class="small">Zero hard blockers</span></td>
+        <td><a class="btn secondary" href="https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html" target="_blank" rel="noopener">Open live preview</a></td>
+        <td>
+          <div class="actions">
+            <button type="button" disabled data-admin-action="archive">Archive</button>
+            <button type="button" disabled data-admin-action="return_for_correction">Return for correction</button>
+            <button type="button" disabled data-admin-action="publish">Publish</button>
+            <button type="button" disabled data-admin-action="publish_and_close">Publish and close</button>
+          </div>
+          <p class="small">Requires secure Admin action handler.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="grid two" style="margin-top:18px">
   <div class="card">
-    <h2>Role boundaries</h2>
-    <div class="grid">
-      <div>
-        <h3>Admin</h3>
-        <p>Can review, archive, return for correction, publish, publish and close after secure workflow activation.</p>
-      </div>
-      <div>
-        <h3>Editor</h3>
-        <p>Can manually create articles, correct returned articles, preview, save draft and submit to Admin. Editor cannot publish.</p>
-      </div>
-      <div>
-        <h3>Security doctrine</h3>
-        <p>Real credentials, password reset and role enforcement require a secure server-side/auth layer. No password is committed to the repository.</p>
-      </div>
-    </div>
+    <h2>Admin decision rules</h2>
+    <p>Archive keeps the record for intelligence and reuse. Return for correction opens Editor correction workspace. Publish makes public after secure workflow activation. Publish and close removes it from pending queue.</p>
+  </div>
+  <div class="card">
+    <h2>Audit requirement</h2>
+    <p>Every action must later record actor, role, timestamp, remarks, previous status, new status and article hash.</p>
   </div>
 </section>
 

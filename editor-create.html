@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Admin and Editor Access | Drishvara</title>
+  <title>Editor Manual Article Creation | Drishvara</title>
   <style>
 :root {
   --ink:#071421;
@@ -63,7 +63,7 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:900px){.grid.two,.grid.three,.split{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="admin-login" data-auth-mode="scaffold-only" data-real-auth="not-active">
+<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="editor-create" data-auth-mode="scaffold-only" data-real-auth="not-active">
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Drishvara home">
@@ -77,55 +77,62 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
     </header>
     
 <section class="hero">
-  <span class="badge">Restricted workspace preview</span>
-  <h1>Admin & Editor Access</h1>
-  <p>This scaffold prepares the controlled Drishvara review workspace. Real authentication, credentials and password reset are not active in this static UI.</p>
+  <span class="badge">Manual creation scaffold</span>
+  <h1>Create Manual Article</h1>
+  <p>This workspace lets an Editor draft original content and submit it to Admin after secure save/submit actions are activated.</p>
 </section>
 
-<section class="grid two">
-  <div class="card">
-    <h2>Access panel</h2>
-    <p class="notice">Bootstrap credentials must be issued outside public code. First login must force password reset after secure authentication is activated.</p>
-    <div class="form-row">
-      <label for="role">Role</label>
-      <select id="role" aria-label="Select role">
-        <option>Admin</option>
-        <option>Editor</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label for="identifier">Login identifier</label>
-      <input id="identifier" type="email" placeholder="Issued securely outside public code" autocomplete="off">
-    </div>
-    <div class="form-row">
-      <label for="accessPhrase">Password</label>
-      <input id="accessPhrase" type="password" placeholder="Not stored in this page" autocomplete="off">
-    </div>
-    <div class="actions">
-      <button type="button" disabled data-auth-action="disabled-until-secure-auth">Access console</button>
-      <a class="btn secondary" href="admin-dashboard.html">Preview Admin dashboard</a>
-      <a class="btn secondary" href="editor-dashboard.html">Preview Editor dashboard</a>
-    </div>
-    <p class="small">No credential validation is performed here. This page is a visual scaffold only.</p>
-  </div>
+<section class="split">
+  <aside class="card">
+    <h2>Sections</h2>
+    <nav class="navlist">
+      <a href="#meta">Metadata</a>
+      <a href="#body">Article body</a>
+      <a href="#refs">References</a>
+      <a href="#objects">Objects / visuals</a>
+      <a href="#seo">SEO</a>
+    </nav>
+    <p class="small">Editor-created articles must still pass Admin review.</p>
+  </aside>
 
-  <div class="card">
-    <h2>Role boundaries</h2>
-    <div class="grid">
-      <div>
-        <h3>Admin</h3>
-        <p>Can review, archive, return for correction, publish, publish and close after secure workflow activation.</p>
-      </div>
-      <div>
-        <h3>Editor</h3>
-        <p>Can manually create articles, correct returned articles, preview, save draft and submit to Admin. Editor cannot publish.</p>
-      </div>
-      <div>
-        <h3>Security doctrine</h3>
-        <p>Real credentials, password reset and role enforcement require a secure server-side/auth layer. No password is committed to the repository.</p>
-      </div>
+  <section class="card">
+    <h2 id="meta">Article metadata</h2>
+    <div class="grid two">
+      <div class="form-row"><label>Title</label><input placeholder="Enter article title"></div>
+      <div class="form-row"><label>Category</label><select><option>Spirituality</option><option>Policy</option><option>World affairs</option><option>Media & society</option><option>Public programmes</option></select></div>
     </div>
-  </div>
+    <div class="form-row"><label>Summary</label><textarea placeholder="Short editorial summary"></textarea></div>
+
+    <h2 id="body">Article body</h2>
+    <div class="form-row"><label>Main body</label><textarea class="editor-area" placeholder="Write article content manually"></textarea></div>
+
+    <h2 id="refs">References</h2>
+    <div class="grid two">
+      <div class="form-row"><label>Reference 1</label><input placeholder="Verified reference URL"></div>
+      <div class="form-row"><label>Reference 2</label><input placeholder="Verified reference URL"></div>
+    </div>
+
+    <h2 id="objects">Objects / visuals</h2>
+    <div class="form-row"><label>Object notes</label><textarea placeholder="Chart, image, table, figure or other object requirement"></textarea></div>
+
+    <h2 id="seo">SEO</h2>
+    <div class="grid two">
+      <div class="form-row"><label>SEO title</label><input placeholder="SEO title"></div>
+      <div class="form-row"><label>SEO description</label><input placeholder="SEO description"></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" disabled data-editor-action="save_draft">Save draft</button>
+      <button type="button" disabled data-editor-action="preview">Preview</button>
+      <button type="button" disabled data-editor-action="submit_to_admin">Submit to Admin</button>
+    </div>
+  </section>
+
+  <aside class="card">
+    <h2>Readiness</h2>
+    <p class="notice">Manual article creation is scaffold-only. Save and submit require secure workflow activation.</p>
+    <p class="small">Required before Admin review: title, category, body, references, credits, preview check and no hard blockers.</p>
+  </aside>
 </section>
 
   </main>

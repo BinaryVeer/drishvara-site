@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Admin and Editor Access | Drishvara</title>
+  <title>Editor Workspace | Drishvara</title>
   <style>
 :root {
   --ink:#071421;
@@ -63,7 +63,7 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:900px){.grid.two,.grid.three,.split{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="admin-login" data-auth-mode="scaffold-only" data-real-auth="not-active">
+<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="editor-dashboard" data-auth-mode="scaffold-only" data-real-auth="not-active">
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Drishvara home">
@@ -77,55 +77,40 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
     </header>
     
 <section class="hero">
-  <span class="badge">Restricted workspace preview</span>
-  <h1>Admin & Editor Access</h1>
-  <p>This scaffold prepares the controlled Drishvara review workspace. Real authentication, credentials and password reset are not active in this static UI.</p>
+  <span class="badge">Editor workspace scaffold</span>
+  <h1>Editor Dashboard</h1>
+  <p>Create manual articles, correct returned articles, preview content and submit to Admin. Editor publishing is blocked by design.</p>
 </section>
 
-<section class="grid two">
+<section class="grid three">
   <div class="card">
-    <h2>Access panel</h2>
-    <p class="notice">Bootstrap credentials must be issued outside public code. First login must force password reset after secure authentication is activated.</p>
-    <div class="form-row">
-      <label for="role">Role</label>
-      <select id="role" aria-label="Select role">
-        <option>Admin</option>
-        <option>Editor</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <label for="identifier">Login identifier</label>
-      <input id="identifier" type="email" placeholder="Issued securely outside public code" autocomplete="off">
-    </div>
-    <div class="form-row">
-      <label for="accessPhrase">Password</label>
-      <input id="accessPhrase" type="password" placeholder="Not stored in this page" autocomplete="off">
-    </div>
-    <div class="actions">
-      <button type="button" disabled data-auth-action="disabled-until-secure-auth">Access console</button>
-      <a class="btn secondary" href="admin-dashboard.html">Preview Admin dashboard</a>
-      <a class="btn secondary" href="editor-dashboard.html">Preview Editor dashboard</a>
-    </div>
-    <p class="small">No credential validation is performed here. This page is a visual scaffold only.</p>
+    <h2>Create</h2>
+    <p>Start a manual article using Drishvara article fields, references, credits and preview structure.</p>
+    <div class="actions"><a class="btn" href="editor-create.html">Create new article</a></div>
   </div>
+  <div class="card">
+    <h2>Corrections</h2>
+    <p>Open returned articles with Admin remarks and submit corrected versions back to Admin.</p>
+    <div class="actions"><a class="btn" href="editor-correction.html">Open correction workspace</a></div>
+  </div>
+  <div class="card">
+    <h2>Submitted</h2>
+    <p>Track editor-submitted articles awaiting Admin decision. This list will become dynamic after secure workflow activation.</p>
+    <div class="actions"><button type="button" disabled>View submitted queue</button></div>
+  </div>
+</section>
 
-  <div class="card">
-    <h2>Role boundaries</h2>
-    <div class="grid">
-      <div>
-        <h3>Admin</h3>
-        <p>Can review, archive, return for correction, publish, publish and close after secure workflow activation.</p>
-      </div>
-      <div>
-        <h3>Editor</h3>
-        <p>Can manually create articles, correct returned articles, preview, save draft and submit to Admin. Editor cannot publish.</p>
-      </div>
-      <div>
-        <h3>Security doctrine</h3>
-        <p>Real credentials, password reset and role enforcement require a secure server-side/auth layer. No password is committed to the repository.</p>
-      </div>
-    </div>
-  </div>
+<section class="card" style="margin-top:18px">
+  <h2>Editor rights</h2>
+  <table class="table">
+    <thead><tr><th>Allowed</th><th>Blocked</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Create manual article, save draft, edit returned article, preview, submit to Admin, resubmit to Admin.</td>
+        <td>Publish, publish and close, approve public visibility, bypass Admin review.</td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
   </main>
