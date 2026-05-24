@@ -1,0 +1,159 @@
+{
+  "module_id": "AG15F",
+  "title": "Non-active Admin Queue Integration Scaffold Audit Report",
+  "status": "non_active_integration_scaffold_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG15F-AUDIT-001",
+      "area": "ag15e_dependency",
+      "status": "passed",
+      "note": "AG15E review, apply, inventory, mapping, guard, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG15F-AUDIT-002",
+      "area": "scaffold_file_presence",
+      "status": "passed",
+      "note": "All AG15E scaffold files must exist."
+    },
+    {
+      "check_id": "AG15F-AUDIT-003",
+      "area": "scaffold_outside_api",
+      "status": "passed",
+      "note": "Scaffold files must remain outside /api and no active integration endpoint may exist."
+    },
+    {
+      "check_id": "AG15F-AUDIT-004",
+      "area": "mapper_non_active_guard",
+      "status": "passed",
+      "note": "Mapper scaffold must remain non-active and default to non-public/not-approved publication state."
+    },
+    {
+      "check_id": "AG15F-AUDIT-005",
+      "area": "mapper_prohibited_runtime_text",
+      "status": "passed",
+      "note": "Mapper scaffold must not import fs, access env, call fetch, use GitHub clients or write files."
+    },
+    {
+      "check_id": "AG15F-AUDIT-006",
+      "area": "template_publication_defaults",
+      "status": "passed",
+      "note": "Intake and queue templates must preserve public_visibility=false and publish_approved=false."
+    },
+    {
+      "check_id": "AG15F-AUDIT-007",
+      "area": "template_write_guards",
+      "status": "passed",
+      "note": "Templates must block active queue writes and queue-index writes."
+    },
+    {
+      "check_id": "AG15F-AUDIT-008",
+      "area": "fixture_safety",
+      "status": "passed",
+      "note": "Seed fixture must remain dry-run/non-public and must not mutate queue index."
+    },
+    {
+      "check_id": "AG15F-AUDIT-009",
+      "area": "inventory_alignment",
+      "status": "passed",
+      "note": "AG15E inventory must confirm no active queue record and no queue-index mutation."
+    },
+    {
+      "check_id": "AG15F-AUDIT-010",
+      "area": "mapping_contract_alignment",
+      "status": "passed",
+      "note": "Mapping contract must block active writes and preserve default publication controls."
+    },
+    {
+      "check_id": "AG15F-AUDIT-011",
+      "area": "guard_alignment",
+      "status": "passed",
+      "note": "Guard record must block active queue write, queue-index write, visibility switch and publishing."
+    },
+    {
+      "check_id": "AG15F-AUDIT-012",
+      "area": "ag15d_blockers_remain",
+      "status": "passed",
+      "note": "AG15D blockers must continue blocking active queue write and publishing."
+    },
+    {
+      "check_id": "AG15F-AUDIT-013",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG15F is audit-only and does not mutate scaffold files, queues, articles, visibility or publishing state."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "decision": {
+    "non_active_scaffold_safe": true,
+    "active_queue_write_present": false,
+    "queue_index_mutation_present": false,
+    "public_visibility_switch_present": false,
+    "publishing_operation_present": false,
+    "ready_for_ag15z_closure": true
+  },
+  "file_records": [
+    {
+      "file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/candidate-to-admin-queue.non-active.mjs",
+      "hash": "d967656bdf7541aa8d680c50a621d23355ddf2e2cbeee9ef0cc5db24ece9aedd",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/generated-article-intake.template.json",
+      "hash": "e53af87db553d0d2bc446f7947877fac34be643411a3efcbf61a2431b773560b",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/admin-review-queue-record.template.json",
+      "hash": "4f2087b2eb3ac464be9ad2ea7bbc61210a49bd023fcafa809373a7e248dffd36",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/validation-fixture.seed-candidate.json",
+      "hash": "a298b4ab52926efc6076d0e9ab3c36ec9a6f051e003bd73698ec9b6a53c7fb72",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/README.md",
+      "hash": "c3f1ffb95c0318ef8bc59986c88834faa99552ac103aab83f2f8ad5e2439e755",
+      "inside_api": false,
+      "exists": true
+    }
+  ],
+  "non_active_admin_queue_integration_scaffold_audit_only": true,
+  "non_active_integration_scaffold_audited_in_ag15f": true,
+  "non_active_integration_scaffold_closure_created_in_ag15f": true,
+  "safety_record_created_in_ag15f": true,
+  "ag15z_boundary_created_in_ag15f": true,
+  "selected_article_read_performed": true,
+  "scaffold_file_mutation_performed_in_ag15f": false,
+  "article_generation_performed_in_ag15f": false,
+  "article_mutation_performed_in_ag15f": false,
+  "queue_mutation_performed_in_ag15f": false,
+  "active_admin_review_queue_record_created_in_ag15f": false,
+  "queue_index_mutation_performed_in_ag15f": false,
+  "admin_action_execution_performed_in_ag15f": false,
+  "editor_action_execution_performed_in_ag15f": false,
+  "real_credential_created_in_ag15f": false,
+  "hardcoded_password_created_in_ag15f": false,
+  "password_hash_created_in_repo_in_ag15f": false,
+  "auth_activation_performed_in_ag15f": false,
+  "backend_activation_performed_in_ag15f": false,
+  "supabase_activation_performed_in_ag15f": false,
+  "database_write_performed_in_ag15f": false,
+  "github_token_created_or_exposed_in_ag15f": false,
+  "github_write_operation_performed_in_ag15f": false,
+  "active_action_handler_created_in_ag15f": false,
+  "api_endpoint_created_in_ag15f": false,
+  "public_visibility_switch_performed_in_ag15f": false,
+  "public_publishing_operation_performed_in_ag15f": false,
+  "deployment_trigger_performed_in_ag15f": false
+}
