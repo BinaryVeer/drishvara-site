@@ -1,0 +1,100 @@
+{
+  "module_id": "AG16A",
+  "title": "Public Visibility State Model",
+  "status": "public_visibility_state_model_defined",
+  "purpose": "Define the public/private visibility states that control whether a generated article can appear in public Drishvara surfaces.",
+  "default_state": {
+    "public_visibility": false,
+    "publish_approved": false,
+    "public_index_allowed": false,
+    "featured_reads_allowed": false
+  },
+  "visibility_states": [
+    {
+      "state": "internal_generated",
+      "public_visibility": false,
+      "publish_approved": false,
+      "public_index_allowed": false,
+      "featured_reads_allowed": false,
+      "description": "Generated or prepared content not yet ready for Admin review."
+    },
+    {
+      "state": "ready_for_admin_review",
+      "public_visibility": false,
+      "publish_approved": false,
+      "public_index_allowed": false,
+      "featured_reads_allowed": false,
+      "description": "Candidate is available for Admin review only."
+    },
+    {
+      "state": "returned_for_correction",
+      "public_visibility": false,
+      "publish_approved": false,
+      "public_index_allowed": false,
+      "featured_reads_allowed": false,
+      "description": "Returned to Editor/manual correction; must not appear publicly."
+    },
+    {
+      "state": "archived_internal",
+      "public_visibility": false,
+      "publish_approved": false,
+      "public_index_allowed": false,
+      "featured_reads_allowed": false,
+      "description": "Retained as internal intelligence and not shown publicly."
+    },
+    {
+      "state": "publish_approved_pending_exposure",
+      "public_visibility": false,
+      "publish_approved": true,
+      "public_index_allowed": false,
+      "featured_reads_allowed": false,
+      "description": "Admin approval exists, but public exposure has not yet been executed."
+    },
+    {
+      "state": "public_published",
+      "public_visibility": true,
+      "publish_approved": true,
+      "public_index_allowed": true,
+      "featured_reads_allowed": true,
+      "description": "Only this state can appear in public Featured Reads and public indexes."
+    },
+    {
+      "state": "published_closed",
+      "public_visibility": true,
+      "publish_approved": true,
+      "public_index_allowed": true,
+      "featured_reads_allowed": true,
+      "description": "Published and closed from further ordinary workflow changes."
+    }
+  ],
+  "hard_rule": "No article may appear in public Featured Reads or public article indexes unless public_visibility=true and publish_approved=true.",
+  "public_visibility_publish_control_preparation_only": true,
+  "public_visibility_state_model_created_in_ag16a": true,
+  "publish_control_state_model_created_in_ag16a": true,
+  "featured_reads_public_filter_plan_created_in_ag16a": true,
+  "archive_internal_intelligence_plan_created_in_ag16a": true,
+  "ag16b_boundary_created_in_ag16a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16a": false,
+  "article_mutation_performed_in_ag16a": false,
+  "queue_mutation_performed_in_ag16a": false,
+  "active_admin_review_queue_record_created_in_ag16a": false,
+  "queue_index_mutation_performed_in_ag16a": false,
+  "admin_action_execution_performed_in_ag16a": false,
+  "editor_action_execution_performed_in_ag16a": false,
+  "real_credential_created_in_ag16a": false,
+  "hardcoded_password_created_in_ag16a": false,
+  "password_hash_created_in_repo_in_ag16a": false,
+  "auth_activation_performed_in_ag16a": false,
+  "backend_activation_performed_in_ag16a": false,
+  "supabase_activation_performed_in_ag16a": false,
+  "database_write_performed_in_ag16a": false,
+  "github_token_created_or_exposed_in_ag16a": false,
+  "github_write_operation_performed_in_ag16a": false,
+  "active_action_handler_created_in_ag16a": false,
+  "api_endpoint_created_in_ag16a": false,
+  "public_visibility_switch_performed_in_ag16a": false,
+  "public_index_mutation_performed_in_ag16a": false,
+  "public_publishing_operation_performed_in_ag16a": false,
+  "deployment_trigger_performed_in_ag16a": false
+}

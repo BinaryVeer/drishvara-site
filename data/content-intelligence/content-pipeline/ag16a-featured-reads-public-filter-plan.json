@@ -1,0 +1,65 @@
+{
+  "module_id": "AG16A",
+  "title": "Featured Reads Public Filter Plan",
+  "status": "featured_reads_public_filter_plan_defined",
+  "purpose": "Plan the filtering rule for public Featured Reads and article listing surfaces.",
+  "filter_rule": {
+    "include_if_all_true": [
+      "public_visibility === true",
+      "publish_approved === true",
+      "status in ['public_published', 'published_closed']",
+      "article_path exists",
+      "article_hash matches latest approved record"
+    ],
+    "exclude_if_any_true": [
+      "public_visibility === false",
+      "publish_approved === false",
+      "status in ['internal_generated', 'ready_for_admin_review', 'returned_for_correction', 'archived_internal']",
+      "quality_evidence missing",
+      "preview_record missing",
+      "hash mismatch"
+    ]
+  },
+  "affected_public_surfaces_planned": [
+    "Featured Reads listing",
+    "Category article listing",
+    "Homepage article cards",
+    "Search/discovery index if activated later",
+    "Sitemap or public feed if activated later"
+  ],
+  "non_public_surfaces_planned": [
+    "Admin Review Queue",
+    "Editor correction workspace",
+    "Internal archive/intelligence registry",
+    "Quality audit records"
+  ],
+  "public_visibility_publish_control_preparation_only": true,
+  "public_visibility_state_model_created_in_ag16a": true,
+  "publish_control_state_model_created_in_ag16a": true,
+  "featured_reads_public_filter_plan_created_in_ag16a": true,
+  "archive_internal_intelligence_plan_created_in_ag16a": true,
+  "ag16b_boundary_created_in_ag16a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16a": false,
+  "article_mutation_performed_in_ag16a": false,
+  "queue_mutation_performed_in_ag16a": false,
+  "active_admin_review_queue_record_created_in_ag16a": false,
+  "queue_index_mutation_performed_in_ag16a": false,
+  "admin_action_execution_performed_in_ag16a": false,
+  "editor_action_execution_performed_in_ag16a": false,
+  "real_credential_created_in_ag16a": false,
+  "hardcoded_password_created_in_ag16a": false,
+  "password_hash_created_in_repo_in_ag16a": false,
+  "auth_activation_performed_in_ag16a": false,
+  "backend_activation_performed_in_ag16a": false,
+  "supabase_activation_performed_in_ag16a": false,
+  "database_write_performed_in_ag16a": false,
+  "github_token_created_or_exposed_in_ag16a": false,
+  "github_write_operation_performed_in_ag16a": false,
+  "active_action_handler_created_in_ag16a": false,
+  "api_endpoint_created_in_ag16a": false,
+  "public_visibility_switch_performed_in_ag16a": false,
+  "public_index_mutation_performed_in_ag16a": false,
+  "public_publishing_operation_performed_in_ag16a": false,
+  "deployment_trigger_performed_in_ag16a": false
+}

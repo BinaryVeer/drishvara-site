@@ -1,0 +1,75 @@
+{
+  "module_id": "AG16A",
+  "title": "Publish-Control State Model",
+  "status": "publish_control_state_model_defined",
+  "purpose": "Define the planned controls that must be satisfied before an article can move from Admin review to public exposure.",
+  "publish_control_gates": [
+    {
+      "gate_id": "admin_decision_gate",
+      "required": true,
+      "requirement": "Admin decision must be Publish or Publish and close."
+    },
+    {
+      "gate_id": "quality_evidence_gate",
+      "required": true,
+      "requirement": "Reference, credit, object, layout, preview and hash evidence must be present or explicitly not applicable."
+    },
+    {
+      "gate_id": "hash_integrity_gate",
+      "required": true,
+      "requirement": "Article hash at approval must match the candidate record."
+    },
+    {
+      "gate_id": "visibility_state_gate",
+      "required": true,
+      "requirement": "Candidate must not already be in returned, archived or blocked state."
+    },
+    {
+      "gate_id": "public_index_gate",
+      "required": true,
+      "requirement": "Public index update must be separately controlled and auditable."
+    }
+  ],
+  "allowed_admin_publish_actions_later": [
+    "publish",
+    "publish_and_close"
+  ],
+  "blocked_until_later_stage": [
+    "Actual Admin button execution.",
+    "Article mutation.",
+    "Queue mutation.",
+    "Public index mutation.",
+    "Visibility switch.",
+    "Publishing operation.",
+    "Deployment trigger."
+  ],
+  "public_visibility_publish_control_preparation_only": true,
+  "public_visibility_state_model_created_in_ag16a": true,
+  "publish_control_state_model_created_in_ag16a": true,
+  "featured_reads_public_filter_plan_created_in_ag16a": true,
+  "archive_internal_intelligence_plan_created_in_ag16a": true,
+  "ag16b_boundary_created_in_ag16a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16a": false,
+  "article_mutation_performed_in_ag16a": false,
+  "queue_mutation_performed_in_ag16a": false,
+  "active_admin_review_queue_record_created_in_ag16a": false,
+  "queue_index_mutation_performed_in_ag16a": false,
+  "admin_action_execution_performed_in_ag16a": false,
+  "editor_action_execution_performed_in_ag16a": false,
+  "real_credential_created_in_ag16a": false,
+  "hardcoded_password_created_in_ag16a": false,
+  "password_hash_created_in_repo_in_ag16a": false,
+  "auth_activation_performed_in_ag16a": false,
+  "backend_activation_performed_in_ag16a": false,
+  "supabase_activation_performed_in_ag16a": false,
+  "database_write_performed_in_ag16a": false,
+  "github_token_created_or_exposed_in_ag16a": false,
+  "github_write_operation_performed_in_ag16a": false,
+  "active_action_handler_created_in_ag16a": false,
+  "api_endpoint_created_in_ag16a": false,
+  "public_visibility_switch_performed_in_ag16a": false,
+  "public_index_mutation_performed_in_ag16a": false,
+  "public_publishing_operation_performed_in_ag16a": false,
+  "deployment_trigger_performed_in_ag16a": false
+}
