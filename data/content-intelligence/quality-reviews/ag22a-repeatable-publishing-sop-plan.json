@@ -1,0 +1,43 @@
+{
+  "module_id": "AG22A",
+  "title": "Repeatable Publishing SOP Plan",
+  "status": "repeatable_publishing_sop_plan_created_pending_audit",
+  "depends_on": [
+    "AG21Z"
+  ],
+  "generated_from": {
+    "ag21zReview": "data/content-intelligence/quality-reviews/ag21z-simplified-closure-after-ag21e-revert.json",
+    "ag21zClosure": "data/content-intelligence/closure-records/ag21z-simplified-closure-after-ag21e-revert.json",
+    "ag21zBoundary": "data/content-intelligence/mutation-plans/ag21z-to-ag22a-first-controlled-static-apply-decision-gate-boundary.json",
+    "approvalPhrase": "data/content-intelligence/go-live/ag19e-explicit-approval-phrase-record.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "sop_plan_file": "data/content-intelligence/go-live/ag22a-repeatable-publishing-sop-plan.json",
+  "route_map_file": "data/content-intelligence/go-live/ag22a-source-to-static-publish-route-map.json",
+  "batch_scope_file": "data/content-intelligence/go-live/ag22a-batch-publishing-dry-run-scope.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag22a-repeatable-publishing-sop-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag22a-repeatable-publishing-sop-audit-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag22a-to-ag22b-repeatable-publishing-sop-audit-boundary.json",
+  "summary": {
+    "ag22_series_started": true,
+    "agreed_series_alignment_done": true,
+    "ready_for_ag22b": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "approval_phrase_executed": false,
+    "article_generated": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

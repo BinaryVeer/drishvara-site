@@ -1,0 +1,33 @@
+{
+  "module_id": "AG22A",
+  "title": "Batch Publishing Dry-run Scope",
+  "status": "batch_dry_run_scope_defined_no_execution",
+  "purpose": "Prepare AG22C scope for dry-running multiple future articles without publishing.",
+  "planned_dry_run_inputs": [
+    "One generated article candidate",
+    "One manually edited article candidate",
+    "One backlog/future-series article candidate"
+  ],
+  "dry_run_outputs_expected_later": [
+    "Proposed static article paths",
+    "Proposed public surface deltas",
+    "Proposed batch index update",
+    "Proposed deployment checklist",
+    "Proposed rollback checklist"
+  ],
+  "blocked_state": {
+    "approval_phrase_executed": false,
+    "article_generated": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

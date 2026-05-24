@@ -1,0 +1,38 @@
+{
+  "module_id": "AG22A",
+  "title": "Repeatable Publishing SOP Blocker Register",
+  "status": "repeatable_publishing_sop_operations_blocked_pending_ag22b_audit",
+  "blocked_items": [
+    "No article generation.",
+    "No article mutation.",
+    "No queue mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No public visibility switch.",
+    "No public index mutation.",
+    "No deployment trigger.",
+    "No live smoke-test.",
+    "No rollback execution.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "allowed_now": [
+    "Review AG22A SOP plan.",
+    "Proceed to AG22B SOP Audit."
+  ],
+  "blocked_state": {
+    "approval_phrase_executed": false,
+    "article_generated": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

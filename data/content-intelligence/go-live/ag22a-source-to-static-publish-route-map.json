@@ -1,0 +1,46 @@
+{
+  "module_id": "AG22A",
+  "title": "Source to Static Publish Route Map",
+  "status": "route_map_created_no_execution",
+  "source_types": [
+    {
+      "source_type": "generated_article",
+      "description": "Article produced by governed generation pipeline and moved into review/publishing workflow."
+    },
+    {
+      "source_type": "manual_article",
+      "description": "Article drafted or corrected manually and then passed through same static publishing workflow."
+    },
+    {
+      "source_type": "future_batch_article",
+      "description": "Multiple articles prepared for dry-run batch publishing without live publication."
+    }
+  ],
+  "repeatable_route": [
+    "Source intake",
+    "Content and metadata check",
+    "Reference/image-credit check",
+    "Static article file preparation",
+    "Public surface delta preparation",
+    "GitHub write readiness",
+    "Deployment readiness",
+    "Live smoke-test readiness",
+    "Rollback readiness",
+    "Closure and learning record"
+  ],
+  "blocked_state": {
+    "approval_phrase_executed": false,
+    "article_generated": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

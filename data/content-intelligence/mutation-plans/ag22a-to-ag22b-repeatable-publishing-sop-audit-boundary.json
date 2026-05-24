@@ -1,0 +1,29 @@
+{
+  "module_id": "AG22A",
+  "title": "AG22A to AG22B Repeatable Publishing SOP Audit Boundary",
+  "status": "ag22b_boundary_created_not_started",
+  "next_stage_id": "AG22B",
+  "next_stage_title": "SOP Audit",
+  "allowed_scope": [
+    "Audit repeatable publishing SOP.",
+    "Audit generated/manual/batch route map.",
+    "Audit batch dry-run scope.",
+    "Confirm no real publishing action is enabled.",
+    "Confirm Supabase/Auth/backend remains deferred."
+  ],
+  "blocked_scope": [
+    "No article generation.",
+    "No article mutation.",
+    "No queue mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No public visibility switch.",
+    "No public index mutation.",
+    "No deployment trigger.",
+    "No live smoke-test.",
+    "No rollback execution.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

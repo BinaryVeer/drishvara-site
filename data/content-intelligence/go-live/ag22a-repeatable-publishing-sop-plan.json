@@ -1,0 +1,74 @@
+{
+  "module_id": "AG22A",
+  "title": "Repeatable Publishing SOP Plan",
+  "status": "repeatable_publishing_sop_plan_created_pending_audit",
+  "alignment_note": "AG21Z boundary used the earlier title 'First Controlled Static Apply Decision Gate'. AG22A now aligns it to the agreed AG22 series: Repeatable Publishing SOP Plan.",
+  "selected_path": "hybrid_staged_static_first",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "required_future_approval_phrase": "Proceed with first controlled static apply",
+  "sop_objective": "Define a repeatable, auditable, static-first publishing workflow for generated/manual articles without executing publication in AG22A.",
+  "sop_steps": [
+    {
+      "step": 1,
+      "name": "Article Intake",
+      "work": "Accept generated/manual/batch candidate article into controlled review path.",
+      "execute_now": false
+    },
+    {
+      "step": 2,
+      "name": "Content Readiness",
+      "work": "Check title, category, summary, references, image credit, metadata and article body completeness.",
+      "execute_now": false
+    },
+    {
+      "step": 3,
+      "name": "Static File Preparation",
+      "work": "Prepare intended static article path and file delta.",
+      "execute_now": false
+    },
+    {
+      "step": 4,
+      "name": "Public Surface Delta",
+      "work": "Prepare intended Featured Reads/category/homepage/sitemap/feed/search updates.",
+      "execute_now": false
+    },
+    {
+      "step": 5,
+      "name": "GitHub Write Readiness",
+      "work": "Confirm token handling and write preconditions without creating token or writing.",
+      "execute_now": false
+    },
+    {
+      "step": 6,
+      "name": "Deployment and Smoke-test Readiness",
+      "work": "Prepare deployment, article URL check, layout check, references check and rollback checklist.",
+      "execute_now": false
+    },
+    {
+      "step": 7,
+      "name": "Closure",
+      "work": "Record result, blockers and learning after dry-run or controlled apply.",
+      "execute_now": false
+    }
+  ],
+  "related_records": {
+    "route_map": "data/content-intelligence/go-live/ag22a-source-to-static-publish-route-map.json",
+    "batch_scope": "data/content-intelligence/go-live/ag22a-batch-publishing-dry-run-scope.json"
+  },
+  "blocked_state": {
+    "approval_phrase_executed": false,
+    "article_generated": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
