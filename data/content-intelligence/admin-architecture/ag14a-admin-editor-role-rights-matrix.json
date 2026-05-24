@@ -1,0 +1,87 @@
+{
+  "module_id": "AG14A",
+  "title": "Admin and Editor Role Rights Matrix",
+  "status": "admin_editor_role_rights_defined",
+  "roles": [
+    {
+      "role": "admin",
+      "purpose": "Final publishing authority and queue governance.",
+      "allowed_rights": [
+        "View all Admin Review candidates.",
+        "View publish-readiness score, hard blockers, warnings and remarks.",
+        "Preview article in live-site style.",
+        "Archive article.",
+        "Return article for correction.",
+        "Publish article.",
+        "Publish and close article.",
+        "View audit trail.",
+        "Reset editor access after secure auth is activated."
+      ],
+      "blocked_rights": [
+        "No direct credential hardcoding.",
+        "No bypass of audit trail.",
+        "No backend/Auth/Supabase activation without separate approval."
+      ]
+    },
+    {
+      "role": "editor",
+      "purpose": "Manual article creation and correction workspace.",
+      "allowed_rights": [
+        "Create new manual article.",
+        "Save manual article draft.",
+        "Edit returned article.",
+        "Edit title, subtitle, category, tags and article body.",
+        "Add/edit references, captions, credits and alt text.",
+        "Preview desktop and mobile layout.",
+        "Submit article to Admin.",
+        "Resubmit corrected article to Admin."
+      ],
+      "blocked_rights": [
+        "Cannot publish.",
+        "Cannot publish and close.",
+        "Cannot approve public visibility.",
+        "Cannot archive final record unless Admin grants it later.",
+        "Cannot reset Admin credential."
+      ]
+    }
+  ],
+  "admin_actions": [
+    "archive",
+    "return_for_correction",
+    "publish",
+    "publish_and_close"
+  ],
+  "editor_actions": [
+    "create_manual_article",
+    "save_draft",
+    "edit_returned_article",
+    "preview",
+    "submit_to_admin",
+    "resubmit_to_admin"
+  ],
+  "admin_editor_login_role_credential_architecture_only": true,
+  "admin_editor_roles_defined_in_ag14a": true,
+  "bootstrap_credential_doctrine_defined_in_ag14a": true,
+  "first_login_reset_doctrine_defined_in_ag14a": true,
+  "admin_editor_workflow_defined_in_ag14a": true,
+  "ag14b_boundary_created_in_ag14a": true,
+  "selected_article_read_performed": true,
+  "login_page_created_in_ag14a": false,
+  "dashboard_page_created_in_ag14a": false,
+  "credential_created_in_public_code_in_ag14a": false,
+  "hardcoded_password_created_in_ag14a": false,
+  "password_hash_created_in_repo_in_ag14a": false,
+  "auth_activation_performed_in_ag14a": false,
+  "backend_activation_performed_in_ag14a": false,
+  "supabase_activation_performed_in_ag14a": false,
+  "database_write_performed_in_ag14a": false,
+  "article_mutation_performed_in_ag14a": false,
+  "public_visibility_switch_performed_in_ag14a": false,
+  "object_generation_performed_in_ag14a": false,
+  "object_insertion_performed_in_ag14a": false,
+  "object_removal_performed_in_ag14a": false,
+  "css_file_mutation_performed_in_ag14a": false,
+  "js_file_mutation_performed_in_ag14a": false,
+  "deployment_trigger_performed_in_ag14a": false,
+  "public_publishing_operation_performed_in_ag14a": false
+}

@@ -1,0 +1,103 @@
+{
+  "module_id": "AG14A",
+  "title": "Admin and Editor Workflow State Model",
+  "status": "admin_editor_workflow_state_model_defined",
+  "entry_routes": [
+    {
+      "route": "pipeline_generated_article",
+      "state_flow": [
+        "pipeline_verified",
+        "ready_for_admin_review",
+        "admin_decision_pending"
+      ]
+    },
+    {
+      "route": "editor_manual_article",
+      "state_flow": [
+        "editor_draft",
+        "submitted_to_admin",
+        "ready_for_admin_review",
+        "admin_decision_pending"
+      ]
+    },
+    {
+      "route": "returned_for_correction",
+      "state_flow": [
+        "returned_for_correction",
+        "editor_revision",
+        "resubmitted_to_admin",
+        "ready_for_admin_review"
+      ]
+    }
+  ],
+  "visibility_states": [
+    {
+      "state": "admin_only",
+      "public_visibility": false,
+      "meaning": "Visible in Admin/Editor workspace only."
+    },
+    {
+      "state": "returned_for_correction",
+      "public_visibility": false,
+      "meaning": "Visible to Editor for correction and to Admin for audit trail."
+    },
+    {
+      "state": "archived",
+      "public_visibility": false,
+      "meaning": "Not public, retained for intelligence, audit and reuse."
+    },
+    {
+      "state": "published",
+      "public_visibility": true,
+      "meaning": "Publicly visible after Admin approval."
+    },
+    {
+      "state": "published_closed",
+      "public_visibility": true,
+      "meaning": "Published and removed from pending workflow queue."
+    }
+  ],
+  "audit_trail_required_fields": [
+    "article_id",
+    "version",
+    "actor_role",
+    "actor_identifier",
+    "action",
+    "decision_remarks",
+    "timestamp",
+    "pre_action_hash",
+    "post_action_hash",
+    "previous_status",
+    "new_status"
+  ],
+  "versioning_model": [
+    "v1_pipeline_or_editor_original",
+    "v2_editor_correction",
+    "v3_additional_revision_if_returned_again"
+  ],
+  "admin_editor_login_role_credential_architecture_only": true,
+  "admin_editor_roles_defined_in_ag14a": true,
+  "bootstrap_credential_doctrine_defined_in_ag14a": true,
+  "first_login_reset_doctrine_defined_in_ag14a": true,
+  "admin_editor_workflow_defined_in_ag14a": true,
+  "ag14b_boundary_created_in_ag14a": true,
+  "selected_article_read_performed": true,
+  "login_page_created_in_ag14a": false,
+  "dashboard_page_created_in_ag14a": false,
+  "credential_created_in_public_code_in_ag14a": false,
+  "hardcoded_password_created_in_ag14a": false,
+  "password_hash_created_in_repo_in_ag14a": false,
+  "auth_activation_performed_in_ag14a": false,
+  "backend_activation_performed_in_ag14a": false,
+  "supabase_activation_performed_in_ag14a": false,
+  "database_write_performed_in_ag14a": false,
+  "article_mutation_performed_in_ag14a": false,
+  "public_visibility_switch_performed_in_ag14a": false,
+  "object_generation_performed_in_ag14a": false,
+  "object_insertion_performed_in_ag14a": false,
+  "object_removal_performed_in_ag14a": false,
+  "css_file_mutation_performed_in_ag14a": false,
+  "js_file_mutation_performed_in_ag14a": false,
+  "deployment_trigger_performed_in_ag14a": false,
+  "public_publishing_operation_performed_in_ag14a": false
+}
