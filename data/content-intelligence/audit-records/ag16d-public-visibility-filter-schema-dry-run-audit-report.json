@@ -1,0 +1,122 @@
+{
+  "module_id": "AG16D",
+  "title": "Public Visibility Filter Schema Dry-run Audit Report",
+  "status": "public_visibility_filter_schema_dry_run_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG16D-AUDIT-001",
+      "area": "ag16c_dependency",
+      "status": "passed",
+      "note": "AG16C review, dry-run records, validation report, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG16D-AUDIT-002",
+      "area": "ag16c_validation_result",
+      "status": "passed",
+      "note": "AG16C validation report must pass with zero failed checks."
+    },
+    {
+      "check_id": "AG16D-AUDIT-003",
+      "area": "seed_hash_integrity",
+      "status": "passed",
+      "note": "Seed candidate article hash must remain unchanged and dry-run record must match."
+    },
+    {
+      "check_id": "AG16D-AUDIT-004",
+      "area": "seed_candidate_public_filter",
+      "status": "passed",
+      "note": "Seed/pre-publication candidate must fail public filter as expected."
+    },
+    {
+      "check_id": "AG16D-AUDIT-005",
+      "area": "internal_state_exclusion",
+      "status": "passed",
+      "note": "Internal, review, returned and archived states must remain excluded from public surfaces."
+    },
+    {
+      "check_id": "AG16D-AUDIT-006",
+      "area": "pending_exposure_exclusion",
+      "status": "passed",
+      "note": "publish_approved_pending_exposure must remain non-public until separate exposure controls pass."
+    },
+    {
+      "check_id": "AG16D-AUDIT-007",
+      "area": "bad_combo_exclusion",
+      "status": "passed",
+      "note": "Bad combinations must fail public filters."
+    },
+    {
+      "check_id": "AG16D-AUDIT-008",
+      "area": "public_pass_conditions",
+      "status": "passed",
+      "note": "public_published and published_closed pass only under strict visibility/approval/index/hash/evidence controls."
+    },
+    {
+      "check_id": "AG16D-AUDIT-009",
+      "area": "filter_contract_alignment",
+      "status": "passed",
+      "note": "AG16C dry-run must align with AG16B include/exclude contracts."
+    },
+    {
+      "check_id": "AG16D-AUDIT-010",
+      "area": "exclusion_contract_alignment",
+      "status": "passed",
+      "note": "AG16B exclusion contract must keep returned, archived and pending-exposure states out of public surfaces."
+    },
+    {
+      "check_id": "AG16D-AUDIT-011",
+      "area": "no_runtime_mutation",
+      "status": "passed",
+      "note": "AG16C must not switch visibility, mutate public index, publish or mutate articles."
+    },
+    {
+      "check_id": "AG16D-AUDIT-012",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG16D is audit/readiness only and does not implement public filters, switch visibility, mutate public index or publish."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "decision": {
+    "dry_run_valid": true,
+    "public_filter_contract_valid": true,
+    "ready_for_non_active_public_filter_scaffold": true,
+    "public_visibility_switch_ready": false,
+    "public_index_mutation_ready": false,
+    "publish_ready": false
+  },
+  "public_visibility_filter_schema_dry_run_audit_only": true,
+  "public_visibility_filter_schema_dry_run_audited_in_ag16d": true,
+  "implementation_readiness_decision_created_in_ag16d": true,
+  "public_filter_safety_record_created_in_ag16d": true,
+  "ag16e_boundary_created_in_ag16d": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16d": false,
+  "article_mutation_performed_in_ag16d": false,
+  "queue_mutation_performed_in_ag16d": false,
+  "active_admin_review_queue_record_created_in_ag16d": false,
+  "queue_index_mutation_performed_in_ag16d": false,
+  "admin_action_execution_performed_in_ag16d": false,
+  "editor_action_execution_performed_in_ag16d": false,
+  "real_credential_created_in_ag16d": false,
+  "hardcoded_password_created_in_repo_in_ag16d": false,
+  "password_hash_created_in_repo_in_ag16d": false,
+  "auth_activation_performed_in_ag16d": false,
+  "backend_activation_performed_in_ag16d": false,
+  "supabase_activation_performed_in_ag16d": false,
+  "database_write_performed_in_ag16d": false,
+  "github_token_created_or_exposed_in_ag16d": false,
+  "github_write_operation_performed_in_ag16d": false,
+  "active_action_handler_created_in_ag16d": false,
+  "api_endpoint_created_in_ag16d": false,
+  "public_filter_implementation_scaffold_created_in_ag16d": false,
+  "public_visibility_switch_performed_in_ag16d": false,
+  "public_index_mutation_performed_in_ag16d": false,
+  "public_publishing_operation_performed_in_ag16d": false,
+  "deployment_trigger_performed_in_ag16d": false
+}
