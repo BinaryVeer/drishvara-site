@@ -1,0 +1,104 @@
+{
+  "module_id": "AG17B",
+  "title": "Controlled Public Exposure Sequence Plan",
+  "status": "controlled_public_exposure_sequence_planned_no_execution",
+  "purpose": "Define the future sequence for making an Admin-approved article public, without executing any step.",
+  "planned_sequence": [
+    {
+      "order": 1,
+      "step_id": "verify_admin_queue_record",
+      "description": "Confirm article exists in Admin Review Queue and has Admin-approved decision.",
+      "execution_now": false
+    },
+    {
+      "order": 2,
+      "step_id": "verify_quality_evidence",
+      "description": "Confirm quality, reference, credit, object, layout, preview and hash evidence.",
+      "execution_now": false
+    },
+    {
+      "order": 3,
+      "step_id": "verify_public_filter_eligibility",
+      "description": "Confirm public_visibility, publish_approved, public_index_allowed, hash and preview controls.",
+      "execution_now": false
+    },
+    {
+      "order": 4,
+      "step_id": "prepare_public_index_delta",
+      "description": "Prepare intended public index/listing delta as a reviewable plan, not as a mutation.",
+      "execution_now": false
+    },
+    {
+      "order": 5,
+      "step_id": "controlled_repository_write_later",
+      "description": "A later stage may wire controlled GitHub write after secrets, rollback and audit plan are separately approved.",
+      "execution_now": false
+    },
+    {
+      "order": 6,
+      "step_id": "deployment_trigger_later",
+      "description": "A later stage may trigger deployment only after public index mutation is approved.",
+      "execution_now": false
+    },
+    {
+      "order": 7,
+      "step_id": "post_deployment_smoke_test_later",
+      "description": "Verify public article, Featured Reads, category listing, homepage card, sitemap/feed if applicable.",
+      "execution_now": false
+    }
+  ],
+  "current_ag17b_execution_state": {
+    "public_visibility_switch_performed": false,
+    "public_index_mutation_performed": false,
+    "publishing_operation_performed": false,
+    "deployment_trigger_performed": false
+  },
+  "inherited_public_exposure_controls": {
+    "public_visibility_model_defined": true,
+    "publish_control_model_defined": true,
+    "public_surface_filter_contract_defined": true,
+    "public_surface_exclusion_contract_defined": true,
+    "schema_dry_run_passed": true,
+    "dry_run_audit_passed": true,
+    "non_active_public_filter_scaffold_created": true,
+    "non_active_public_filter_scaffold_audited": true,
+    "public_exposure_requires_public_visibility_true": true,
+    "public_exposure_requires_publish_approved_true": true,
+    "public_exposure_requires_public_index_allowed_true": true,
+    "public_exposure_requires_hash_integrity": true,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "publishing_enabled": false
+  },
+  "hybrid_static_go_live_implementation_plan_only": true,
+  "static_github_go_live_architecture_plan_created_in_ag17b": true,
+  "controlled_public_exposure_sequence_plan_created_in_ag17b": true,
+  "github_secret_requirements_no_secrets_plan_created_in_ag17b": true,
+  "admin_editor_static_action_readiness_plan_created_in_ag17b": true,
+  "rollback_audit_plan_created_in_ag17b": true,
+  "supabase_auth_defer_reminder_carried_forward_in_ag17b": true,
+  "ag17c_boundary_created_in_ag17b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17b": false,
+  "article_mutation_performed_in_ag17b": false,
+  "queue_mutation_performed_in_ag17b": false,
+  "active_admin_review_queue_record_created_in_ag17b": false,
+  "queue_index_mutation_performed_in_ag17b": false,
+  "admin_action_execution_performed_in_ag17b": false,
+  "editor_action_execution_performed_in_ag17b": false,
+  "real_credential_created_in_ag17b": false,
+  "hardcoded_password_created_in_repo_in_ag17b": false,
+  "password_hash_created_in_repo_in_ag17b": false,
+  "auth_activation_performed_in_ag17b": false,
+  "backend_activation_performed_in_ag17b": false,
+  "supabase_activation_performed_in_ag17b": false,
+  "database_write_performed_in_ag17b": false,
+  "github_token_created_or_exposed_in_ag17b": false,
+  "github_write_operation_performed_in_ag17b": false,
+  "active_action_handler_created_in_ag17b": false,
+  "api_endpoint_created_in_ag17b": false,
+  "public_visibility_switch_performed_in_ag17b": false,
+  "public_index_mutation_performed_in_ag17b": false,
+  "public_publishing_operation_performed_in_ag17b": false,
+  "deployment_trigger_performed_in_ag17b": false
+}

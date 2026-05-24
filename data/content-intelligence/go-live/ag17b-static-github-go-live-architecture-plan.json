@@ -1,0 +1,81 @@
+{
+  "module_id": "AG17B",
+  "title": "Static GitHub Go-live Architecture Plan",
+  "status": "static_github_go_live_architecture_planned",
+  "selected_path": "hybrid_staged_path_static_first",
+  "architecture_mode": "static_github_controlled_first",
+  "purpose": "Plan a controlled static go-live route using existing GitHub/Vercel/static artifacts before Supabase/Auth/backend activation.",
+  "planned_components": [
+    {
+      "component_id": "public_static_site",
+      "role": "Serves approved public pages through the existing static deployment path.",
+      "activation_now": false
+    },
+    {
+      "component_id": "admin_review_records",
+      "role": "Repository-governed JSON records preserve Admin Review Queue state and quality evidence.",
+      "activation_now": false
+    },
+    {
+      "component_id": "public_filter_helper",
+      "role": "Non-active AG16E helper remains a reference scaffold for later public-surface filtering.",
+      "activation_now": false
+    },
+    {
+      "component_id": "github_controlled_publish_path",
+      "role": "Future controlled write path may update approved public records through GitHub, but no token or write is created in AG17B.",
+      "activation_now": false
+    },
+    {
+      "component_id": "supabase_auth_backend",
+      "role": "Deferred. Must not activate before explicit reminder and separate approval.",
+      "activation_now": false,
+      "deferred": true
+    }
+  ],
+  "design_principles": [
+    "Minimum live surface first.",
+    "No backend/Auth before static path is stable.",
+    "No public exposure without public_visibility=true and publish_approved=true.",
+    "No GitHub token in repository.",
+    "No automatic publishing without Admin-controlled decision and audit.",
+    "Every real write must be separately approved in a later apply stage."
+  ],
+  "source_lineage": {
+    "ag14_admin_editor_chain": "data/content-intelligence/quality-reviews/ag14z-admin-editor-secure-handler-chain-closure.json",
+    "ag15_admin_queue_chain": "data/content-intelligence/content-pipeline/ag15z-generated-article-admin-queue-preparation-summary.json",
+    "ag16_public_visibility_chain": "data/content-intelligence/content-pipeline/ag16z-public-visibility-publish-control-summary.json",
+    "ag17a_decision": "data/content-intelligence/go-live/ag17a-hybrid-staged-path-decision-record.json"
+  },
+  "hybrid_static_go_live_implementation_plan_only": true,
+  "static_github_go_live_architecture_plan_created_in_ag17b": true,
+  "controlled_public_exposure_sequence_plan_created_in_ag17b": true,
+  "github_secret_requirements_no_secrets_plan_created_in_ag17b": true,
+  "admin_editor_static_action_readiness_plan_created_in_ag17b": true,
+  "rollback_audit_plan_created_in_ag17b": true,
+  "supabase_auth_defer_reminder_carried_forward_in_ag17b": true,
+  "ag17c_boundary_created_in_ag17b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17b": false,
+  "article_mutation_performed_in_ag17b": false,
+  "queue_mutation_performed_in_ag17b": false,
+  "active_admin_review_queue_record_created_in_ag17b": false,
+  "queue_index_mutation_performed_in_ag17b": false,
+  "admin_action_execution_performed_in_ag17b": false,
+  "editor_action_execution_performed_in_ag17b": false,
+  "real_credential_created_in_ag17b": false,
+  "hardcoded_password_created_in_repo_in_ag17b": false,
+  "password_hash_created_in_repo_in_ag17b": false,
+  "auth_activation_performed_in_ag17b": false,
+  "backend_activation_performed_in_ag17b": false,
+  "supabase_activation_performed_in_ag17b": false,
+  "database_write_performed_in_ag17b": false,
+  "github_token_created_or_exposed_in_ag17b": false,
+  "github_write_operation_performed_in_ag17b": false,
+  "active_action_handler_created_in_ag17b": false,
+  "api_endpoint_created_in_ag17b": false,
+  "public_visibility_switch_performed_in_ag17b": false,
+  "public_index_mutation_performed_in_ag17b": false,
+  "public_publishing_operation_performed_in_ag17b": false,
+  "deployment_trigger_performed_in_ag17b": false
+}

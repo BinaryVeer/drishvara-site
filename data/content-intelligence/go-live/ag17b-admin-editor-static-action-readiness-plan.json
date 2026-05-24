@@ -1,0 +1,70 @@
+{
+  "module_id": "AG17B",
+  "title": "Admin Editor Static Action Readiness Plan",
+  "status": "admin_editor_static_action_readiness_planned_no_execution",
+  "purpose": "Plan how Admin/Editor actions can later interact with the static/GitHub-controlled go-live route.",
+  "planned_roles": [
+    {
+      "role": "Admin",
+      "future_actions": [
+        "Archive",
+        "Return for correction",
+        "Publish",
+        "Publish and close"
+      ],
+      "execution_now": false
+    },
+    {
+      "role": "Editor",
+      "future_actions": [
+        "Manual correction",
+        "Manual article creation",
+        "Submit to Admin"
+      ],
+      "execution_now": false
+    }
+  ],
+  "planned_static_action_model": {
+    "current_state": "planning_only",
+    "future_action_submission": "reviewable action payload",
+    "future_action_handler": "controlled static/GitHub action handler only after separate approval",
+    "current_active_handler": false
+  },
+  "limitations_of_static_stage": [
+    "Not a full multi-user database-backed workflow.",
+    "Concurrent edits remain limited until backend/Auth stage.",
+    "Credential and role controls must be carefully implemented before action execution."
+  ],
+  "supabase_auth_still_deferred": true,
+  "hybrid_static_go_live_implementation_plan_only": true,
+  "static_github_go_live_architecture_plan_created_in_ag17b": true,
+  "controlled_public_exposure_sequence_plan_created_in_ag17b": true,
+  "github_secret_requirements_no_secrets_plan_created_in_ag17b": true,
+  "admin_editor_static_action_readiness_plan_created_in_ag17b": true,
+  "rollback_audit_plan_created_in_ag17b": true,
+  "supabase_auth_defer_reminder_carried_forward_in_ag17b": true,
+  "ag17c_boundary_created_in_ag17b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17b": false,
+  "article_mutation_performed_in_ag17b": false,
+  "queue_mutation_performed_in_ag17b": false,
+  "active_admin_review_queue_record_created_in_ag17b": false,
+  "queue_index_mutation_performed_in_ag17b": false,
+  "admin_action_execution_performed_in_ag17b": false,
+  "editor_action_execution_performed_in_ag17b": false,
+  "real_credential_created_in_ag17b": false,
+  "hardcoded_password_created_in_repo_in_ag17b": false,
+  "password_hash_created_in_repo_in_ag17b": false,
+  "auth_activation_performed_in_ag17b": false,
+  "backend_activation_performed_in_ag17b": false,
+  "supabase_activation_performed_in_ag17b": false,
+  "database_write_performed_in_ag17b": false,
+  "github_token_created_or_exposed_in_ag17b": false,
+  "github_write_operation_performed_in_ag17b": false,
+  "active_action_handler_created_in_ag17b": false,
+  "api_endpoint_created_in_ag17b": false,
+  "public_visibility_switch_performed_in_ag17b": false,
+  "public_index_mutation_performed_in_ag17b": false,
+  "public_publishing_operation_performed_in_ag17b": false,
+  "deployment_trigger_performed_in_ag17b": false
+}
