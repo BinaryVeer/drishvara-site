@@ -1,0 +1,79 @@
+{
+  "module_id": "AG20E",
+  "title": "Deployment Smoke-test Order Plan",
+  "status": "deployment_smoke_test_order_planned_no_execution",
+  "inherited_rollback_deployment_summary": "data/content-intelligence/go-live/ag20c-rollback-deployment-smoke-test-authorization-summary.json",
+  "planned_order_for_later_apply": [
+    {
+      "order": 1,
+      "operation": "Record pre-deployment branch and commit.",
+      "executed_now": false
+    },
+    {
+      "order": 2,
+      "operation": "Trigger deployment only after approved GitHub write.",
+      "executed_now": false
+    },
+    {
+      "order": 3,
+      "operation": "Run live article URL check.",
+      "executed_now": false
+    },
+    {
+      "order": 4,
+      "operation": "Run Featured Reads and category listing checks.",
+      "executed_now": false
+    },
+    {
+      "order": 5,
+      "operation": "Run mobile layout, references and image-credit checks.",
+      "executed_now": false
+    }
+  ],
+  "current_execution_state": {
+    "deployment_smoke_test_order_defined": true,
+    "deployment_triggered_now": false,
+    "live_smoke_test_executed_now": false,
+    "article_url_checked_now": false,
+    "featured_reads_checked_now": false,
+    "category_listing_checked_now": false,
+    "mobile_layout_checked_now": false,
+    "references_checked_now": false,
+    "image_credit_checked_now": false,
+    "published_now": false
+  },
+  "controlled_static_apply_execution_plan_only": true,
+  "execution_plan_created_in_ag20e": true,
+  "approval_sequence_plan_created_in_ag20e": true,
+  "token_precondition_plan_created_in_ag20e": true,
+  "file_mutation_order_plan_created_in_ag20e": true,
+  "public_surface_switch_order_plan_created_in_ag20e": true,
+  "deployment_smoke_test_order_plan_created_in_ag20e": true,
+  "rollback_order_plan_created_in_ag20e": true,
+  "blocker_register_created_in_ag20e": true,
+  "ag20f_boundary_created_in_ag20e": true,
+  "selected_article_read_performed": true,
+  "explicit_approval_phrase_executed_in_ag20e": false,
+  "article_generation_performed_in_ag20e": false,
+  "article_mutation_performed_in_ag20e": false,
+  "queue_mutation_performed_in_ag20e": false,
+  "active_admin_review_queue_record_created_in_ag20e": false,
+  "queue_index_mutation_performed_in_ag20e": false,
+  "admin_action_execution_performed_in_ag20e": false,
+  "editor_action_execution_performed_in_ag20e": false,
+  "real_credential_created_in_ag20e": false,
+  "hardcoded_password_created_in_repo_in_ag20e": false,
+  "password_hash_created_in_repo_in_ag20e": false,
+  "auth_activation_performed_in_ag20e": false,
+  "backend_activation_performed_in_ag20e": false,
+  "supabase_activation_performed_in_ag20e": false,
+  "database_write_performed_in_ag20e": false,
+  "github_token_created_or_exposed_in_ag20e": false,
+  "github_write_operation_performed_in_ag20e": false,
+  "active_action_handler_created_in_ag20e": false,
+  "api_endpoint_created_in_ag20e": false,
+  "public_visibility_switch_performed_in_ag20e": false,
+  "public_index_mutation_performed_in_ag20e": false,
+  "deployment_trigger_performed_in_ag20e": false,
+  "public_publishing_operation_performed_in_ag20e": false
+}

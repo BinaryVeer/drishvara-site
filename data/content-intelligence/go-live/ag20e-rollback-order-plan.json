@@ -1,0 +1,67 @@
+{
+  "module_id": "AG20E",
+  "title": "Rollback Order Plan",
+  "status": "rollback_order_planned_no_execution",
+  "planned_rollback_order_for_later_apply": [
+    {
+      "order": 1,
+      "operation": "Use recorded pre-apply HEAD commit.",
+      "executed_now": false
+    },
+    {
+      "order": 2,
+      "operation": "Revert controlled static apply commit if smoke-test fails.",
+      "executed_now": false
+    },
+    {
+      "order": 3,
+      "operation": "Re-run smoke-test after rollback.",
+      "executed_now": false
+    },
+    {
+      "order": 4,
+      "operation": "Record rollback result.",
+      "executed_now": false
+    }
+  ],
+  "current_rollback_state": {
+    "rollback_order_defined": true,
+    "rollback_executed_now": false,
+    "rollback_commit_created_now": false,
+    "rollback_smoke_test_executed_now": false
+  },
+  "controlled_static_apply_execution_plan_only": true,
+  "execution_plan_created_in_ag20e": true,
+  "approval_sequence_plan_created_in_ag20e": true,
+  "token_precondition_plan_created_in_ag20e": true,
+  "file_mutation_order_plan_created_in_ag20e": true,
+  "public_surface_switch_order_plan_created_in_ag20e": true,
+  "deployment_smoke_test_order_plan_created_in_ag20e": true,
+  "rollback_order_plan_created_in_ag20e": true,
+  "blocker_register_created_in_ag20e": true,
+  "ag20f_boundary_created_in_ag20e": true,
+  "selected_article_read_performed": true,
+  "explicit_approval_phrase_executed_in_ag20e": false,
+  "article_generation_performed_in_ag20e": false,
+  "article_mutation_performed_in_ag20e": false,
+  "queue_mutation_performed_in_ag20e": false,
+  "active_admin_review_queue_record_created_in_ag20e": false,
+  "queue_index_mutation_performed_in_ag20e": false,
+  "admin_action_execution_performed_in_ag20e": false,
+  "editor_action_execution_performed_in_ag20e": false,
+  "real_credential_created_in_ag20e": false,
+  "hardcoded_password_created_in_repo_in_ag20e": false,
+  "password_hash_created_in_repo_in_ag20e": false,
+  "auth_activation_performed_in_ag20e": false,
+  "backend_activation_performed_in_ag20e": false,
+  "supabase_activation_performed_in_ag20e": false,
+  "database_write_performed_in_ag20e": false,
+  "github_token_created_or_exposed_in_ag20e": false,
+  "github_write_operation_performed_in_ag20e": false,
+  "active_action_handler_created_in_ag20e": false,
+  "api_endpoint_created_in_ag20e": false,
+  "public_visibility_switch_performed_in_ag20e": false,
+  "public_index_mutation_performed_in_ag20e": false,
+  "deployment_trigger_performed_in_ag20e": false,
+  "public_publishing_operation_performed_in_ag20e": false
+}
