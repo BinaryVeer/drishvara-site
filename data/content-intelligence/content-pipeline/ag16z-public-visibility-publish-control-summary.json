@@ -1,0 +1,88 @@
+{
+  "module_id": "AG16Z",
+  "title": "Public Visibility Publish-Control Summary",
+  "status": "ag16_public_visibility_publish_control_preparation_completed",
+  "completed_stage_count": 6,
+  "completed_stages": [
+    {
+      "stage_id": "AG16A",
+      "title": "Public Visibility and Publish-Control Preparation",
+      "result": "Defined public visibility model, publish-control model, Featured Reads public filter doctrine and archive/internal-intelligence retention plan."
+    },
+    {
+      "stage_id": "AG16B",
+      "title": "Public Visibility and Publish Filter Schema Plan",
+      "result": "Converted doctrine into visibility fields, publish-control fields, public surface filter contract, exclusion contract and validation plan."
+    },
+    {
+      "stage_id": "AG16C",
+      "title": "Public Visibility and Publish Filter Schema Dry-run",
+      "result": "Dry-ran seed, excluded and hypothetical public states; confirmed non-approved states fail and public states pass only under strict controls."
+    },
+    {
+      "stage_id": "AG16D",
+      "title": "Public Visibility and Publish Filter Schema Dry-run Audit",
+      "result": "Audited dry-run with zero failed checks and approved only a non-active public filter scaffold."
+    },
+    {
+      "stage_id": "AG16E",
+      "title": "Non-active Public Filter Implementation Scaffold",
+      "result": "Created non-active public filter helper, templates and validation fixtures outside /api."
+    },
+    {
+      "stage_id": "AG16F",
+      "title": "Non-active Public Filter Implementation Scaffold Audit",
+      "result": "Audited scaffold with zero failed checks and confirmed no active exposure endpoint, visibility switch, public index mutation or publishing path."
+    }
+  ],
+  "seed_candidate": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "hash_verified": true
+  },
+  "final_public_control_state": {
+    "public_visibility_model_defined": true,
+    "publish_control_model_defined": true,
+    "public_surface_filter_contract_defined": true,
+    "public_surface_exclusion_contract_defined": true,
+    "schema_dry_run_passed": true,
+    "dry_run_audit_passed": true,
+    "non_active_public_filter_scaffold_created": true,
+    "non_active_public_filter_scaffold_audited": true,
+    "public_exposure_requires_public_visibility_true": true,
+    "public_exposure_requires_publish_approved_true": true,
+    "public_exposure_requires_public_index_allowed_true": true,
+    "public_exposure_requires_hash_integrity": true,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "publishing_enabled": false
+  },
+  "public_visibility_publish_control_closure_only": true,
+  "ag16_chain_closure_created_in_ag16z": true,
+  "public_visibility_publish_control_summary_created_in_ag16z": true,
+  "public_exposure_blocked_register_created_in_ag16z": true,
+  "ag17a_boundary_created_in_ag16z": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16z": false,
+  "article_mutation_performed_in_ag16z": false,
+  "queue_mutation_performed_in_ag16z": false,
+  "active_admin_review_queue_record_created_in_ag16z": false,
+  "queue_index_mutation_performed_in_ag16z": false,
+  "admin_action_execution_performed_in_ag16z": false,
+  "editor_action_execution_performed_in_ag16z": false,
+  "real_credential_created_in_ag16z": false,
+  "hardcoded_password_created_in_repo_in_ag16z": false,
+  "password_hash_created_in_repo_in_ag16z": false,
+  "auth_activation_performed_in_ag16z": false,
+  "backend_activation_performed_in_ag16z": false,
+  "supabase_activation_performed_in_ag16z": false,
+  "database_write_performed_in_ag16z": false,
+  "github_token_created_or_exposed_in_ag16z": false,
+  "github_write_operation_performed_in_ag16z": false,
+  "active_action_handler_created_in_ag16z": false,
+  "api_endpoint_created_in_ag16z": false,
+  "public_visibility_switch_performed_in_ag16z": false,
+  "public_index_mutation_performed_in_ag16z": false,
+  "public_publishing_operation_performed_in_ag16z": false,
+  "deployment_trigger_performed_in_ag16z": false
+}
