@@ -1,0 +1,148 @@
+{
+  "module_id": "AG18D",
+  "title": "First Public Candidate File Delta Dry-run Audit Report",
+  "status": "first_public_candidate_file_delta_dry_run_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG18D-AUDIT-001",
+      "area": "ag18c_dependency",
+      "status": "passed",
+      "note": "AG18C review, dry-run outputs, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG18D-AUDIT-002",
+      "area": "candidate_readiness_dry_run",
+      "status": "passed",
+      "note": "Candidate readiness dry-run must remain no-apply and no-mutation."
+    },
+    {
+      "check_id": "AG18D-AUDIT-003",
+      "area": "public_filter_dry_run",
+      "status": "passed",
+      "note": "Public filter dry-run must fail current public exposure while allowing only hypothetical future pass."
+    },
+    {
+      "check_id": "AG18D-AUDIT-004",
+      "area": "intended_file_delta_dry_run",
+      "status": "passed",
+      "note": "Intended file delta must remain preview-only with no file mutation, Git write or deployment."
+    },
+    {
+      "check_id": "AG18D-AUDIT-005",
+      "area": "featured_reads_delta_dry_run",
+      "status": "passed",
+      "note": "Featured Reads delta must remain preview-only and not included publicly."
+    },
+    {
+      "check_id": "AG18D-AUDIT-006",
+      "area": "category_listing_delta_dry_run",
+      "status": "passed",
+      "note": "Category listing delta must remain preview-only."
+    },
+    {
+      "check_id": "AG18D-AUDIT-007",
+      "area": "homepage_card_delta_dry_run",
+      "status": "passed",
+      "note": "Homepage card delta must remain preview-only."
+    },
+    {
+      "check_id": "AG18D-AUDIT-008",
+      "area": "sitemap_feed_search_delta_dry_run",
+      "status": "passed",
+      "note": "Sitemap/feed/search delta must remain preview-only."
+    },
+    {
+      "check_id": "AG18D-AUDIT-009",
+      "area": "rollback_smoke_test_dry_run",
+      "status": "passed",
+      "note": "Rollback and smoke-test must remain dry-run only with no execution."
+    },
+    {
+      "check_id": "AG18D-AUDIT-010",
+      "area": "ag18b_safety_inheritance",
+      "status": "passed",
+      "note": "AG18B safety controls must remain inherited."
+    },
+    {
+      "check_id": "AG18D-AUDIT-011",
+      "area": "ag18b_decision_inheritance",
+      "status": "passed",
+      "note": "AG18B decision must allow only dry-run and block every real activation action."
+    },
+    {
+      "check_id": "AG18D-AUDIT-012",
+      "area": "readiness_alignment",
+      "status": "passed",
+      "note": "AG18C readiness must point to AG18D audit while activation remains blocked."
+    },
+    {
+      "check_id": "AG18D-AUDIT-013",
+      "area": "supabase_auth_defer_reminder",
+      "status": "passed",
+      "note": "Supabase/Auth/backend defer reminder must remain active."
+    },
+    {
+      "check_id": "AG18D-AUDIT-014",
+      "area": "stage_controls_no_activation",
+      "status": "passed",
+      "note": "AG18C summary must confirm no real activation readiness."
+    },
+    {
+      "check_id": "AG18D-AUDIT-015",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG18D is audit-only and performs no mutation, credential creation, GitHub write, visibility switch, public index mutation, deployment, publishing or backend activation."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 15,
+    "passed": 15,
+    "failed": 0
+  },
+  "decision": {
+    "ag18c_dry_run_valid": true,
+    "candidate_readiness_dry_run_valid": true,
+    "public_filter_dry_run_valid": true,
+    "file_delta_dry_run_valid": true,
+    "public_surface_deltas_preview_only": true,
+    "rollback_smoke_test_dry_run_valid": true,
+    "no_file_mutation_performed": true,
+    "no_github_token_created": true,
+    "no_github_write_performed": true,
+    "no_public_visibility_switch_performed": true,
+    "no_public_index_mutation_performed": true,
+    "no_deployment_triggered": true,
+    "no_publishing_performed": true,
+    "supabase_auth_backend_deferred": true,
+    "ready_for_non_active_real_static_activation_scaffold": true
+  },
+  "first_public_candidate_file_delta_dry_run_audit_only": true,
+  "dry_run_outputs_audited_in_ag18d": true,
+  "non_active_real_static_activation_scaffold_decision_created_in_ag18d": true,
+  "file_delta_dry_run_safety_record_created_in_ag18d": true,
+  "ag18e_boundary_created_in_ag18d": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag18d": false,
+  "article_mutation_performed_in_ag18d": false,
+  "queue_mutation_performed_in_ag18d": false,
+  "active_admin_review_queue_record_created_in_ag18d": false,
+  "queue_index_mutation_performed_in_ag18d": false,
+  "admin_action_execution_performed_in_ag18d": false,
+  "editor_action_execution_performed_in_ag18d": false,
+  "real_credential_created_in_ag18d": false,
+  "hardcoded_password_created_in_repo_in_ag18d": false,
+  "password_hash_created_in_repo_in_ag18d": false,
+  "auth_activation_performed_in_ag18d": false,
+  "backend_activation_performed_in_ag18d": false,
+  "supabase_activation_performed_in_ag18d": false,
+  "database_write_performed_in_ag18d": false,
+  "github_token_created_or_exposed_in_ag18d": false,
+  "github_write_operation_performed_in_ag18d": false,
+  "active_action_handler_created_in_ag18d": false,
+  "api_endpoint_created_in_ag18d": false,
+  "public_visibility_switch_performed_in_ag18d": false,
+  "public_index_mutation_performed_in_ag18d": false,
+  "deployment_trigger_performed_in_ag18d": false,
+  "public_publishing_operation_performed_in_ag18d": false
+}
