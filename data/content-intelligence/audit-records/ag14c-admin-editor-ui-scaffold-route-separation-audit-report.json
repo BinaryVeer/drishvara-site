@@ -1,0 +1,106 @@
+{
+  "module_id": "AG14C",
+  "title": "Admin Editor UI Scaffold Route Separation Audit Report",
+  "status": "ui_scaffold_audit_passed_route_separation_refinement_required",
+  "checks": [
+    {
+      "check_id": "AG14C-AUDIT-001",
+      "area": "ui_pages_exist",
+      "status": "passed",
+      "note": "All five AG14B scaffold pages must exist."
+    },
+    {
+      "check_id": "AG14C-AUDIT-002",
+      "area": "scaffold_marker",
+      "status": "passed",
+      "note": "All Admin/Editor scaffold pages must carry AG14B scaffold marker."
+    },
+    {
+      "check_id": "AG14C-AUDIT-003",
+      "area": "noindex_boundary",
+      "status": "passed",
+      "note": "Admin/Editor scaffold pages must be noindex/nofollow."
+    },
+    {
+      "check_id": "AG14C-AUDIT-004",
+      "area": "credential_safety",
+      "status": "passed",
+      "note": "No real credentials, bootstrap identifiers, password hashes or auth implementation should appear in scaffold pages."
+    },
+    {
+      "check_id": "AG14C-AUDIT-005",
+      "area": "disabled_actions",
+      "status": "passed",
+      "note": "Admin/Editor action buttons should remain disabled scaffold actions."
+    },
+    {
+      "check_id": "AG14C-AUDIT-006",
+      "area": "public_route_product_positioning",
+      "status": "refinement_required",
+      "note": "Product decision: public Sign in / Join must be separate from internal Admin/Editor route."
+    },
+    {
+      "check_id": "AG14C-AUDIT-007",
+      "area": "public_nav_internal_admin_exposure",
+      "status": "passed",
+      "note": "No direct public navigation reference to internal Admin/Editor route was detected in scanned root HTML files."
+    },
+    {
+      "check_id": "AG14C-AUDIT-008",
+      "area": "separate_public_signin_page",
+      "status": "refinement_required",
+      "note": "Separate public Sign in / Join page should be created/restored in AG14D."
+    },
+    {
+      "check_id": "AG14C-AUDIT-009",
+      "area": "forbidden_mutation_guards",
+      "status": "passed",
+      "note": "AG14C is audit only and does not mutate pages."
+    }
+  ],
+  "failed_checks": [],
+  "refinement_required_checks": [
+    {
+      "check_id": "AG14C-AUDIT-006",
+      "area": "public_route_product_positioning",
+      "status": "refinement_required",
+      "note": "Product decision: public Sign in / Join must be separate from internal Admin/Editor route."
+    },
+    {
+      "check_id": "AG14C-AUDIT-008",
+      "area": "separate_public_signin_page",
+      "status": "refinement_required",
+      "note": "Separate public Sign in / Join page should be created/restored in AG14D."
+    }
+  ],
+  "audit_summary": {
+    "total_checks": 9,
+    "passed": 7,
+    "refinement_required": 2,
+    "failed": 0
+  },
+  "decision": {
+    "ui_scaffold_integrity_passed": true,
+    "credential_safety_passed": true,
+    "route_separation_required": true,
+    "ready_for_ag14d_route_separation_apply": true
+  },
+  "admin_editor_ui_scaffold_route_separation_audit_only": true,
+  "ui_scaffold_audited_in_ag14c": true,
+  "route_separation_audited_in_ag14c": true,
+  "public_signin_separation_decision_recorded_in_ag14c": true,
+  "ag14d_boundary_created_in_ag14c": true,
+  "article_mutation_performed_in_ag14c": false,
+  "page_mutation_performed_in_ag14c": false,
+  "login_page_created_in_ag14c": false,
+  "signin_page_created_in_ag14c": false,
+  "real_credential_created_in_ag14c": false,
+  "hardcoded_password_created_in_ag14c": false,
+  "auth_activation_performed_in_ag14c": false,
+  "backend_activation_performed_in_ag14c": false,
+  "supabase_activation_performed_in_ag14c": false,
+  "database_write_performed_in_ag14c": false,
+  "public_visibility_switch_performed_in_ag14c": false,
+  "public_publishing_operation_performed_in_ag14c": false,
+  "deployment_trigger_performed_in_ag14c": false
+}

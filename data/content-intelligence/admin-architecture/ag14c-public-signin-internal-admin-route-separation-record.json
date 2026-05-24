@@ -1,0 +1,170 @@
+{
+  "module_id": "AG14C",
+  "title": "Public Sign-in and Internal Admin Route Separation Record",
+  "status": "public_signin_internal_admin_route_separation_refinement_required",
+  "product_decision": {
+    "public_signin_join_route": "signin.html",
+    "internal_admin_route": "admin.html",
+    "admin_dashboard_route": "admin-dashboard.html",
+    "editor_dashboard_route": "editor-dashboard.html",
+    "decision": "Keep public visitor Sign in / Join separate from internal Admin/Editor console.",
+    "rationale": [
+      "Public Sign in / Join supports future subscriber/member positioning.",
+      "Admin/Editor console is back-office publishing control and should not be public-nav facing.",
+      "Internal routes should stay noindex/nofollow and hidden from normal public navigation."
+    ]
+  },
+  "current_findings": {
+    "existing_public_signin_candidates": [],
+    "has_separate_public_signin_page": false,
+    "public_nav_references_internal_admin": false,
+    "scanned_public_html_files": [
+      {
+        "file": "about.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "article.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "contact.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "dashboard.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "index.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "insights.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "login.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      },
+      {
+        "file": "submissions.html",
+        "references_admin_html": false,
+        "references_admin_dashboard": false,
+        "references_editor_dashboard": false,
+        "has_signin_join_text": true,
+        "references_public_signin": false
+      }
+    ],
+    "admin_editor_pages": [
+      {
+        "page": "admin.html",
+        "exists": true,
+        "hash": "a992c6476b41ba6f44ea4d0125df989c5cda7cf2ba95822f8d5d7d12d939b193",
+        "has_scaffold_marker": true,
+        "has_noindex": true,
+        "has_scaffold_auth_mode": true,
+        "has_real_auth_signals": false,
+        "has_hardcoded_bootstrap_identifier": false,
+        "has_disabled_actions": true
+      },
+      {
+        "page": "admin-dashboard.html",
+        "exists": true,
+        "hash": "ef193348e8e68f5bd2df1083d18a050268b8264431a613c2709d9ecae1ff1e25",
+        "has_scaffold_marker": true,
+        "has_noindex": true,
+        "has_scaffold_auth_mode": true,
+        "has_real_auth_signals": false,
+        "has_hardcoded_bootstrap_identifier": false,
+        "has_disabled_actions": true
+      },
+      {
+        "page": "editor-dashboard.html",
+        "exists": true,
+        "hash": "cfeab9d321bf15b15e6f7ebd304db6263e389d5a4b66609874ec14a67c451eb0",
+        "has_scaffold_marker": true,
+        "has_noindex": true,
+        "has_scaffold_auth_mode": true,
+        "has_real_auth_signals": false,
+        "has_hardcoded_bootstrap_identifier": false,
+        "has_disabled_actions": true
+      },
+      {
+        "page": "editor-create.html",
+        "exists": true,
+        "hash": "c84b772b84ddb1210b213fe1e4f97aaffacea10b9750d59eea538298d3c4f5f2",
+        "has_scaffold_marker": true,
+        "has_noindex": true,
+        "has_scaffold_auth_mode": true,
+        "has_real_auth_signals": false,
+        "has_hardcoded_bootstrap_identifier": false,
+        "has_disabled_actions": true
+      },
+      {
+        "page": "editor-correction.html",
+        "exists": true,
+        "hash": "00b415a57c0a3d9c567384dc3f1f323215dd68c05f53ec031d30aab3c0c55bc9",
+        "has_scaffold_marker": true,
+        "has_noindex": true,
+        "has_scaffold_auth_mode": true,
+        "has_real_auth_signals": false,
+        "has_hardcoded_bootstrap_identifier": false,
+        "has_disabled_actions": true
+      }
+    ]
+  },
+  "required_ag14d_treatment": [
+    "Create or restore signin.html as public visitor/member Sign in / Join preview page.",
+    "Keep admin.html as internal Admin/Editor access route.",
+    "Ensure public nav Sign in / Join points to signin.html, not admin.html.",
+    "Keep admin/editor routes noindex/nofollow.",
+    "Do not activate real authentication, credentials, backend, Supabase or publishing."
+  ],
+  "admin_editor_ui_scaffold_route_separation_audit_only": true,
+  "ui_scaffold_audited_in_ag14c": true,
+  "route_separation_audited_in_ag14c": true,
+  "public_signin_separation_decision_recorded_in_ag14c": true,
+  "ag14d_boundary_created_in_ag14c": true,
+  "article_mutation_performed_in_ag14c": false,
+  "page_mutation_performed_in_ag14c": false,
+  "login_page_created_in_ag14c": false,
+  "signin_page_created_in_ag14c": false,
+  "real_credential_created_in_ag14c": false,
+  "hardcoded_password_created_in_ag14c": false,
+  "auth_activation_performed_in_ag14c": false,
+  "backend_activation_performed_in_ag14c": false,
+  "supabase_activation_performed_in_ag14c": false,
+  "database_write_performed_in_ag14c": false,
+  "public_visibility_switch_performed_in_ag14c": false,
+  "public_publishing_operation_performed_in_ag14c": false,
+  "deployment_trigger_performed_in_ag14c": false
+}
