@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Sign in / Join | Drishvara</title>
+  <style>
+    :root{--navy:#0b1726;--gold:#d9b96e;--gold2:#f0d58b;--muted:#9fb0c3;--line:rgba(217,185,110,.28);--card:rgba(255,255,255,.06)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 20% 0%,#18304d 0,#0b1726 38%,#050b12 100%);color:#f8fbff;min-height:100vh}
+    a{color:inherit;text-decoration:none}
+    .shell{max-width:1120px;margin:0 auto;padding:28px 20px 54px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:34px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--gold2);box-shadow:0 0 28px rgba(217,185,110,.25)}
+    .brand-title{font-weight:850;letter-spacing:.04em}
+    .nav{display:flex;gap:12px;flex-wrap:wrap;color:#dce7f2;font-size:14px}
+    .nav a{opacity:.86}
+    .hero{padding:38px;border-radius:30px;background:linear-gradient(135deg,rgba(217,185,110,.12),rgba(255,255,255,.035));border:1px solid var(--line);margin-bottom:20px}
+    h1{font-size:clamp(34px,5vw,58px);line-height:1.02;margin:0 0 14px}
+    h2{font-size:23px;margin:0 0 12px}
+    p{color:#cbd6e2;line-height:1.65;margin:0 0 12px}
+    .small{font-size:13px;color:var(--muted)}
+    .badge{border:1px solid var(--line);background:rgba(217,185,110,.09);color:var(--gold2);padding:7px 11px;border-radius:999px;font-size:12px;font-weight:750;display:inline-flex;margin-bottom:16px}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    .card{border:1px solid var(--line);background:linear-gradient(180deg,var(--card),rgba(255,255,255,.028));border-radius:24px;padding:22px;box-shadow:0 20px 65px rgba(0,0,0,.22)}
+    .form-row{display:grid;gap:8px;margin-bottom:14px}
+    label{font-size:13px;font-weight:760;color:#eaf2fb}
+    input,select{width:100%;border:1px solid rgba(159,176,195,.35);background:rgba(4,10,17,.55);color:#fff;border-radius:14px;padding:12px 13px;outline:none}
+    .btn,button{border:1px solid var(--line);background:linear-gradient(135deg,rgba(217,185,110,.22),rgba(217,185,110,.08));color:#fff;border-radius:14px;padding:11px 14px;font-weight:780;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    button[disabled]{opacity:.55;cursor:not-allowed}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .notice{border:1px dashed rgba(240,213,139,.45);background:rgba(240,213,139,.08);border-radius:18px;padding:14px;color:#f5e7bf}
+    @media(max-width:860px){.grid{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body data-drishvara-public-signin="ag14d-public-scaffold" data-auth-mode="public-preview-only" data-real-auth="not-active">
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Drishvara home">
+        <span class="brand-mark">D</span>
+        <span>
+          <span class="brand-title">Drishvara</span><br>
+          <span class="small">Vision. Reflection. Insight.</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="insights.html">Insights</a>
+        <a href="submissions.html">Submissions</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <span class="badge">Public access preview</span>
+      <h1>Sign in / Join Drishvara</h1>
+      <p>Member access is being prepared for future personalised readings, saved insights, submissions and guided experiences. This page is visitor-facing and separate from internal publishing operations.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Join the upcoming experience</h2>
+        <p>Drishvara will open member features progressively. For now, this public page preserves the product pathway without collecting credentials or personal data.</p>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="Member sign-in is not active yet" autocomplete="off">
+        </div>
+        <div class="form-row">
+          <label for="interest">Area of interest</label>
+          <select id="interest">
+            <option>Daily reflections</option>
+            <option>Featured reads</option>
+            <option>Submissions</option>
+            <option>Future personalised guidance</option>
+          </select>
+        </div>
+        <div class="actions">
+          <button type="button" disabled data-public-auth-action="pending">Join waitlist soon</button>
+          <a class="btn" href="index.html">Return home</a>
+        </div>
+        <p class="small">No password, login credential or user account is created on this static preview page.</p>
+      </div>
+
+      <div class="card">
+        <h2>What this page is for</h2>
+        <p class="notice">This is the public Sign in / Join route for future members and visitors.</p>
+        <p>It keeps the product journey clean while internal editorial and publishing controls remain separate.</p>
+        <h2>Future features</h2>
+        <p>Saved reads, guided submissions, personalised dashboards, member preferences and notification controls may be added only after secure authentication is activated.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
