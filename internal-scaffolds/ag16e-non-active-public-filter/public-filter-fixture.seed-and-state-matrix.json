@@ -1,0 +1,29 @@
+{
+  "module_id": "AG16E",
+  "title": "Public Filter Fixture Seed and State Matrix",
+  "status": "non_active_fixture_only",
+  "dry_run_only": true,
+  "source_seed_dry_run_file": "data/content-intelligence/content-pipeline/dry-runs/ag16c-seed-candidate-public-filter-dry-run.json",
+  "source_state_matrix_dry_run_file": "data/content-intelligence/content-pipeline/dry-runs/ag16c-public-visibility-state-matrix-dry-run.json",
+  "source_public_pass_shape_dry_run_file": "data/content-intelligence/content-pipeline/dry-runs/ag16c-hypothetical-public-published-shape-dry-run.json",
+  "seed_candidate_case": {
+    "expected_public_filter_result": false,
+    "actual_public_filter_result": false,
+    "public_visibility": false,
+    "publish_approved": false
+  },
+  "state_matrix_summary": {
+    "total_rows": 10,
+    "passed_rows": 10,
+    "failed_rows": 0
+  },
+  "public_pass_case": {
+    "expected_public_filter_result": true,
+    "actual_public_filter_result": true,
+    "public_visibility": true,
+    "publish_approved": true
+  },
+  "public_visibility_switch_enabled": false,
+  "public_index_update_enabled": false,
+  "publishing_enabled": false
+}

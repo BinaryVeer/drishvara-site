@@ -1,0 +1,37 @@
+{
+  "module_id": "AG16E",
+  "title": "Public Index Exposure Template",
+  "status": "non_active_template_only",
+  "dry_run_only": true,
+  "public_index_update_enabled": false,
+  "public_surface_update_enabled": false,
+  "sitemap_update_enabled": false,
+  "feed_update_enabled": false,
+  "publish_execution_enabled": false,
+  "include_contract": {
+    "include_article_only_if_all_true": [
+      "record.public_visibility === true",
+      "record.publish_approved === true",
+      "record.public_index_allowed === true",
+      "record.featured_reads_allowed === true for Featured Reads surfaces",
+      "record.status in ['public_published', 'published_closed']",
+      "record.article_path exists",
+      "record.article_hash === record.approved_hash",
+      "record.quality_evidence_status in ['complete', 'not_applicable']",
+      "record.preview_status === 'passed'",
+      "record.hash_integrity_status === 'matched'"
+    ]
+  },
+  "exclude_contract": {
+    "exclude_article_if_any_true": [
+      "record.public_visibility !== true",
+      "record.publish_approved !== true",
+      "record.public_index_allowed !== true",
+      "record.status in ['internal_generated', 'ready_for_admin_review', 'returned_for_correction', 'archived_internal']",
+      "record.quality_evidence_status in ['missing', 'partial']",
+      "record.preview_status in ['missing', 'present']",
+      "record.hash_integrity_status in ['missing', 'mismatch']",
+      "record.article_hash !== record.approved_hash"
+    ]
+  }
+}

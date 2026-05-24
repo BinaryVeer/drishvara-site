@@ -1,0 +1,31 @@
+{
+  "module_id": "AG16E",
+  "title": "Public Filter Record Template",
+  "status": "non_active_template_only",
+  "dry_run_only": true,
+  "required_fields": [
+    "article_id",
+    "article_path",
+    "article_hash",
+    "approved_hash",
+    "status",
+    "public_visibility",
+    "publish_approved",
+    "public_index_allowed",
+    "featured_reads_allowed",
+    "quality_evidence_status",
+    "preview_status",
+    "hash_integrity_status"
+  ],
+  "default_values": {
+    "public_visibility": false,
+    "publish_approved": false,
+    "public_index_allowed": false,
+    "featured_reads_allowed": false,
+    "approved_hash": null,
+    "status": "ready_for_admin_review"
+  },
+  "public_visibility_switch_enabled": false,
+  "public_index_update_enabled": false,
+  "publishing_enabled": false
+}
