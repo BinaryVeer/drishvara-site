@@ -1,0 +1,45 @@
+{
+  "module_id": "AG17D",
+  "title": "Publication State Fixture Approved and Blocked",
+  "status": "non_active_fixture_only",
+  "dry_run_only": true,
+  "seed_candidate": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "expected_public_exposure_now": false,
+    "reason": "Seed candidate remains non-public until real public exposure apply stage is approved."
+  },
+  "blocked_case": {
+    "status": "ready_for_admin_review",
+    "public_visibility": false,
+    "publish_approved": false,
+    "public_index_allowed": false,
+    "expected_public_exposure": false
+  },
+  "approved_but_not_exposed_case": {
+    "status": "publish_approved_pending_exposure",
+    "public_visibility": false,
+    "publish_approved": true,
+    "public_index_allowed": false,
+    "approved_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "expected_public_exposure": false
+  },
+  "hypothetical_public_case": {
+    "status": "public_published",
+    "public_visibility": true,
+    "publish_approved": true,
+    "public_index_allowed": true,
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "approved_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "quality_evidence_status": "complete",
+    "preview_status": "passed",
+    "hash_integrity_status": "matched",
+    "expected_public_exposure": true,
+    "note": "Hypothetical only; AG17D does not switch visibility, mutate index, deploy or publish."
+  },
+  "github_write_enabled": false,
+  "public_visibility_switch_enabled": false,
+  "public_index_update_enabled": false,
+  "deployment_trigger_enabled": false,
+  "publishing_enabled": false
+}

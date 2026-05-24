@@ -1,0 +1,31 @@
+{
+  "module_id": "AG17D",
+  "title": "Public Exposure Delta Template",
+  "status": "non_active_no_write_template_only",
+  "dry_run_only": true,
+  "article_id": null,
+  "article_path": null,
+  "article_hash": null,
+  "approved_hash": null,
+  "target_public_surfaces": [
+    "featured_reads",
+    "category_listing",
+    "homepage_card"
+  ],
+  "required_before_future_write": [
+    "public_visibility === true",
+    "publish_approved === true",
+    "public_index_allowed === true",
+    "article_hash === approved_hash",
+    "quality_evidence_status in ['complete', 'not_applicable']",
+    "preview_status === 'passed'",
+    "hash_integrity_status === 'matched'",
+    "rollback plan recorded",
+    "audit record prepared"
+  ],
+  "public_visibility_switch_enabled": false,
+  "public_index_update_enabled": false,
+  "github_write_enabled": false,
+  "deployment_trigger_enabled": false,
+  "publishing_enabled": false
+}
