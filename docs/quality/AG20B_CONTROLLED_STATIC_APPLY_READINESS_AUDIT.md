@@ -1,0 +1,33 @@
+# AG20B — Controlled Static Apply Readiness Audit
+
+## Purpose
+
+AG20B audits the AG20A controlled static apply readiness package.
+
+AG20B is audit-only. It does not execute the approval phrase, generate articles, mutate articles, create active Admin Review Queue records, mutate queues or indexes, execute Admin/Editor actions, activate Auth/backend/Supabase, create or wire GitHub tokens, write to GitHub, switch public visibility, mutate public indexes, trigger deployment or publish anything.
+
+## Audit Result
+
+AG20A controlled static apply readiness package passed audit with zero failed checks.
+
+## Decision
+
+AG20C may proceed only as Controlled Static Apply Final Authorization.
+
+Not approved: approval phrase execution, real candidate apply, GitHub token creation, GitHub write, public visibility switch, public index mutation, deployment trigger, publish execution or Supabase/Auth/backend activation.
+
+## Approval Phrase
+
+Future controlled static apply still requires the exact phrase:
+
+`Proceed with first controlled static apply`
+
+This phrase is not executed in AG20B.
+
+## Supabase/Auth Reminder
+
+Hybrid staged path remains in force: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit reminder, review and approval.
+
+## Next Stage
+
+AG20C — Controlled Static Apply Final Authorization — only with explicit approval.
