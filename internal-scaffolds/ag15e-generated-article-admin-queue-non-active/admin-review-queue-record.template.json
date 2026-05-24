@@ -1,0 +1,36 @@
+{
+  "module_id": "AG15E",
+  "title": "Admin Review Queue Record Template",
+  "status": "non_active_template_only",
+  "dry_run_only": true,
+  "template_type": "admin_review_queue_record",
+  "required_fields": [
+    "article_id",
+    "slug",
+    "title",
+    "category",
+    "article_path",
+    "article_hash",
+    "generation_batch_id",
+    "queue_status",
+    "public_visibility",
+    "publish_approved",
+    "admin_decision_status",
+    "editor_task_status",
+    "quality_evidence",
+    "risk_flags",
+    "created_at",
+    "updated_at",
+    "audit_pointer"
+  ],
+  "default_values": {
+    "queue_status": "ready_for_admin_review",
+    "public_visibility": false,
+    "publish_approved": false,
+    "admin_decision_status": "pending_admin_review",
+    "editor_task_status": "none",
+    "audit_pointer": null
+  },
+  "active_queue_write_enabled": false,
+  "queue_index_write_enabled": false
+}

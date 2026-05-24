@@ -1,0 +1,88 @@
+{
+  "module_id": "AG15E",
+  "title": "Candidate to Queue Mapping Template Record",
+  "status": "candidate_to_queue_mapping_template_created_non_active",
+  "dry_run_only": true,
+  "mapper_file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/candidate-to-admin-queue.non-active.mjs",
+  "intake_template_file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/generated-article-intake.template.json",
+  "queue_template_file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/admin-review-queue-record.template.json",
+  "fixture_file": "internal-scaffolds/ag15e-generated-article-admin-queue-non-active/validation-fixture.seed-candidate.json",
+  "mapping_contract": {
+    "source": "generated_article_candidate_or_intake_record",
+    "target": "admin_review_queue_record_shape",
+    "active_write_allowed": false,
+    "public_visibility_default": false,
+    "publish_approved_default": false
+  },
+  "field_mapping": [
+    [
+      "article_id",
+      "article_id"
+    ],
+    [
+      "slug",
+      "slug"
+    ],
+    [
+      "title",
+      "title"
+    ],
+    [
+      "category",
+      "category"
+    ],
+    [
+      "article_path",
+      "article_path"
+    ],
+    [
+      "article_hash",
+      "article_hash"
+    ],
+    [
+      "quality_evidence",
+      "quality_evidence"
+    ],
+    [
+      "public_visibility",
+      false
+    ],
+    [
+      "publish_approved",
+      false
+    ],
+    [
+      "admin_decision_status",
+      "pending_admin_review"
+    ]
+  ],
+  "non_active_admin_queue_integration_scaffold_only": true,
+  "scaffold_files_created_in_ag15e": true,
+  "candidate_to_queue_mapping_template_created_in_ag15e": true,
+  "no_write_queue_handoff_template_created_in_ag15e": true,
+  "validation_fixture_created_in_ag15e": true,
+  "guard_record_created_in_ag15e": true,
+  "ag15f_boundary_created_in_ag15e": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15e": false,
+  "article_mutation_performed_in_ag15e": false,
+  "queue_mutation_performed_in_ag15e": false,
+  "active_admin_review_queue_record_created_in_ag15e": false,
+  "queue_index_mutation_performed_in_ag15e": false,
+  "admin_action_execution_performed_in_ag15e": false,
+  "editor_action_execution_performed_in_ag15e": false,
+  "real_credential_created_in_ag15e": false,
+  "hardcoded_password_created_in_ag15e": false,
+  "password_hash_created_in_repo_in_ag15e": false,
+  "auth_activation_performed_in_ag15e": false,
+  "backend_activation_performed_in_ag15e": false,
+  "supabase_activation_performed_in_ag15e": false,
+  "database_write_performed_in_ag15e": false,
+  "github_token_created_or_exposed_in_ag15e": false,
+  "github_write_operation_performed_in_ag15e": false,
+  "active_action_handler_created_in_ag15e": false,
+  "api_endpoint_created_in_ag15e": false,
+  "public_visibility_switch_performed_in_ag15e": false,
+  "public_publishing_operation_performed_in_ag15e": false,
+  "deployment_trigger_performed_in_ag15e": false
+}

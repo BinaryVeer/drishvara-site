@@ -1,0 +1,36 @@
+{
+  "module_id": "AG15E",
+  "title": "Generated Article Intake Template",
+  "status": "non_active_template_only",
+  "dry_run_only": true,
+  "template_type": "generated_article_intake",
+  "required_fields": [
+    "article_id",
+    "slug",
+    "title",
+    "category",
+    "content_type",
+    "generation_batch_id",
+    "generation_stage_id",
+    "article_path",
+    "article_hash",
+    "source_trace_record",
+    "quality_evidence_record",
+    "preview_record",
+    "object_profile",
+    "reference_profile",
+    "credit_profile",
+    "layout_profile",
+    "queue_target",
+    "public_visibility",
+    "publish_approved",
+    "status"
+  ],
+  "default_values": {
+    "queue_target": "admin_review_queue",
+    "public_visibility": false,
+    "publish_approved": false,
+    "status": "generated_pending_quality_evidence"
+  },
+  "active_queue_write_enabled": false
+}
