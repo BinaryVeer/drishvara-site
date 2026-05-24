@@ -1,0 +1,103 @@
+{
+  "module_id": "AG13C",
+  "title": "Controlled Live Preview Observation Audit Report",
+  "status": "controlled_live_preview_observation_audit_passed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "live_url": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "final_url": "https://www.drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "local_article_hash_at_ag13c": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "live_html_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "checks": [
+    {
+      "check_id": "AG13C-AUDIT-001",
+      "area": "local_article_hash_stability",
+      "status": "passed",
+      "note": "Local article remains at AG12C post-refinement hash."
+    },
+    {
+      "check_id": "AG13C-AUDIT-002",
+      "area": "live_http_status",
+      "status": "passed",
+      "note": "Live URL returned HTTP 200."
+    },
+    {
+      "check_id": "AG13C-AUDIT-003",
+      "area": "live_article_presence",
+      "status": "passed",
+      "note": "Live response appears to be an HTML document."
+    },
+    {
+      "check_id": "AG13C-AUDIT-004",
+      "area": "live_refined_layout_presence",
+      "status": "passed",
+      "note": "Live article should include AG12C refinement markers and three collapsed pilot objects."
+    },
+    {
+      "check_id": "AG13C-AUDIT-005",
+      "area": "live_primary_object_presence",
+      "status": "passed",
+      "note": "Live article should include chart, table and composite primary object evidence."
+    },
+    {
+      "check_id": "AG13C-AUDIT-006",
+      "area": "live_credit_caption_accessibility_presence",
+      "status": "passed",
+      "note": "Live article should retain credit and caption/accessibility indicators."
+    },
+    {
+      "check_id": "AG13C-AUDIT-007",
+      "area": "live_hash_alignment",
+      "status": "passed",
+      "note": "Live HTML hash matches local refined article hash."
+    },
+    {
+      "check_id": "AG13C-AUDIT-008",
+      "area": "rollback_evidence",
+      "status": "passed",
+      "note": "Rollback backup remains available and clean."
+    },
+    {
+      "check_id": "AG13C-AUDIT-009",
+      "area": "forbidden_mutation_and_publish_guards",
+      "status": "passed",
+      "note": "AG13C performs observation only and does not publish."
+    }
+  ],
+  "failed_checks": [],
+  "warning_checks": [],
+  "audit_summary": {
+    "total_checks": 9,
+    "passed": 9,
+    "warnings": 0,
+    "failed": 0
+  },
+  "decision": {
+    "live_preview_observation_passed": true,
+    "ready_for_ag13z_final_publish_decision_closure": true,
+    "publish_ready": false,
+    "reason_publish_blocked": "AG13C is live/deployment preview observation only. Final publish decision/closure is reserved for AG13Z."
+  },
+  "controlled_live_preview_observation_audit_only": true,
+  "live_preview_observation_performed_in_ag13c": true,
+  "live_fetch_performed_in_ag13c": true,
+  "live_url_checked_in_ag13c": "https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "deployment_trigger_performed_in_ag13c": false,
+  "final_publish_decision_not_made_in_ag13c": true,
+  "selected_article_read_performed": true,
+  "ready_for_ag13z": true,
+  "article_mutation_performed_in_ag13c": false,
+  "selected_article_file_write_performed_in_ag13c": false,
+  "object_generation_performed_in_ag13c": false,
+  "object_insertion_performed_in_ag13c": false,
+  "object_removal_performed_in_ag13c": false,
+  "image_generation_performed_in_ag13c": false,
+  "reference_url_change_performed_in_ag13c": false,
+  "homepage_mutation_performed_in_ag13c": false,
+  "css_file_mutation_performed_in_ag13c": false,
+  "js_file_mutation_performed_in_ag13c": false,
+  "production_jsonl_append_performed_in_ag13c": false,
+  "database_write_performed_in_ag13c": false,
+  "supabase_write_performed_in_ag13c": false,
+  "backend_auth_supabase_activation_performed_in_ag13c": false,
+  "public_publishing_operation_performed_in_ag13c": false
+}
