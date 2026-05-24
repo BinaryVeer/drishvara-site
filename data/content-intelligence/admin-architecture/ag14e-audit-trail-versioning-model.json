@@ -1,0 +1,79 @@
+{
+  "module_id": "AG14E",
+  "title": "Audit Trail and Versioning Model",
+  "status": "audit_trail_versioning_model_defined",
+  "audit_record_required_for_actions": [
+    "archive",
+    "return_for_correction",
+    "publish",
+    "publish_and_close",
+    "create_manual_article",
+    "save_draft",
+    "submit_to_admin",
+    "edit_returned_article",
+    "resubmit_to_admin"
+  ],
+  "audit_required_fields": [
+    "audit_id",
+    "article_id",
+    "article_origin",
+    "version",
+    "actor_role",
+    "actor_identifier",
+    "action",
+    "decision_or_submission_remarks",
+    "timestamp",
+    "previous_status",
+    "new_status",
+    "pre_action_hash",
+    "post_action_hash",
+    "public_visibility_before",
+    "public_visibility_after",
+    "hard_blockers_at_action_time"
+  ],
+  "versioning_rules": [
+    {
+      "version": "v1",
+      "meaning": "Original pipeline-generated or editor-created draft.",
+      "created_by": "pipeline_or_editor"
+    },
+    {
+      "version": "v2",
+      "meaning": "First editor correction after Admin return.",
+      "created_by": "editor"
+    },
+    {
+      "version": "v3_plus",
+      "meaning": "Further corrections if Admin returns again.",
+      "created_by": "editor"
+    }
+  ],
+  "hash_rules": [
+    "Every submit/resubmit/publish/archive decision must record pre/post article hash.",
+    "Admin must see version identity before publish decision.",
+    "Returned-for-correction tasks must preserve Admin remarks and prior version hash.",
+    "Archived items must retain full content, score, remarks and audit trail for future intelligence."
+  ],
+  "audit_storage_recommendation": "Static JSON audit records first; secure database/Supabase audit table later after explicit Auth/backend activation.",
+  "admin_editor_decision_submission_workflow_model_only": true,
+  "admin_decision_model_created_in_ag14e": true,
+  "editor_submission_workflow_created_in_ag14e": true,
+  "audit_trail_versioning_model_created_in_ag14e": true,
+  "queue_status_taxonomy_created_in_ag14e": true,
+  "ag14f_boundary_created_in_ag14e": true,
+  "selected_article_read_performed": true,
+  "admin_action_execution_performed_in_ag14e": false,
+  "editor_action_execution_performed_in_ag14e": false,
+  "article_mutation_performed_in_ag14e": false,
+  "queue_mutation_performed_in_ag14e": false,
+  "public_visibility_switch_performed_in_ag14e": false,
+  "public_publishing_operation_performed_in_ag14e": false,
+  "real_credential_created_in_ag14e": false,
+  "hardcoded_password_created_in_ag14e": false,
+  "password_hash_created_in_repo_in_ag14e": false,
+  "auth_activation_performed_in_ag14e": false,
+  "backend_activation_performed_in_ag14e": false,
+  "supabase_activation_performed_in_ag14e": false,
+  "database_write_performed_in_ag14e": false,
+  "deployment_trigger_performed_in_ag14e": false
+}

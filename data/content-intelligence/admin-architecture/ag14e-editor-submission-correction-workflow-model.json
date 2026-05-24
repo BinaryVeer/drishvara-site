@@ -1,0 +1,147 @@
+{
+  "module_id": "AG14E",
+  "title": "Editor Submission and Correction Workflow Model",
+  "status": "editor_submission_correction_workflow_model_defined",
+  "source_editor_actions": [
+    "create_manual_article",
+    "save_draft",
+    "edit_returned_article",
+    "preview",
+    "submit_to_admin",
+    "resubmit_to_admin"
+  ],
+  "editor_role_principle": "Editor can create and correct content manually, but cannot publish.",
+  "editor_actions": [
+    {
+      "action": "create_manual_article",
+      "allowed_from_statuses": [
+        "none"
+      ],
+      "resulting_status": "editor_draft",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "title",
+        "category",
+        "body",
+        "editor_identifier"
+      ],
+      "admin_review_required": true,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "save_draft",
+      "allowed_from_statuses": [
+        "editor_draft",
+        "editor_revision"
+      ],
+      "resulting_status": "same_status",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "draft_content",
+        "editor_identifier"
+      ],
+      "admin_review_required": false,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "preview",
+      "allowed_from_statuses": [
+        "editor_draft",
+        "editor_revision",
+        "returned_for_correction"
+      ],
+      "resulting_status": "same_status",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "preview_mode"
+      ],
+      "admin_review_required": false,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "submit_to_admin",
+      "allowed_from_statuses": [
+        "editor_draft"
+      ],
+      "resulting_status": "ready_for_admin_review",
+      "intermediate_status": "submitted_to_admin",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "editor_submission_remarks",
+        "article_version",
+        "article_hash"
+      ],
+      "admin_review_required": true,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "edit_returned_article",
+      "allowed_from_statuses": [
+        "returned_for_correction"
+      ],
+      "resulting_status": "editor_revision",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "admin_return_reference",
+        "editor_identifier"
+      ],
+      "admin_review_required": true,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "resubmit_to_admin",
+      "allowed_from_statuses": [
+        "editor_revision"
+      ],
+      "resulting_status": "ready_for_admin_review",
+      "intermediate_status": "resubmitted_to_admin",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "editor_revision_remarks",
+        "corrected_article_version",
+        "corrected_article_hash"
+      ],
+      "admin_review_required": true,
+      "execution_available_in_ag14e": false
+    }
+  ],
+  "editor_blocked_actions": [
+    "publish",
+    "publish_and_close",
+    "approve_public_visibility",
+    "delete_audit_trail",
+    "reset_admin_credential"
+  ],
+  "manual_article_required_sections": [
+    "title",
+    "category",
+    "summary",
+    "body",
+    "references_or_source_notes",
+    "caption_credit_alt_text_if_objects_used",
+    "seo_title",
+    "seo_description",
+    "editor_submission_remarks"
+  ],
+  "admin_editor_decision_submission_workflow_model_only": true,
+  "admin_decision_model_created_in_ag14e": true,
+  "editor_submission_workflow_created_in_ag14e": true,
+  "audit_trail_versioning_model_created_in_ag14e": true,
+  "queue_status_taxonomy_created_in_ag14e": true,
+  "ag14f_boundary_created_in_ag14e": true,
+  "selected_article_read_performed": true,
+  "admin_action_execution_performed_in_ag14e": false,
+  "editor_action_execution_performed_in_ag14e": false,
+  "article_mutation_performed_in_ag14e": false,
+  "queue_mutation_performed_in_ag14e": false,
+  "public_visibility_switch_performed_in_ag14e": false,
+  "public_publishing_operation_performed_in_ag14e": false,
+  "real_credential_created_in_ag14e": false,
+  "hardcoded_password_created_in_ag14e": false,
+  "password_hash_created_in_repo_in_ag14e": false,
+  "auth_activation_performed_in_ag14e": false,
+  "backend_activation_performed_in_ag14e": false,
+  "supabase_activation_performed_in_ag14e": false,
+  "database_write_performed_in_ag14e": false,
+  "deployment_trigger_performed_in_ag14e": false
+}

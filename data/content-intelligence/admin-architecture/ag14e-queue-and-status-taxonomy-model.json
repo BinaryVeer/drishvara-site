@@ -1,0 +1,105 @@
+{
+  "module_id": "AG14E",
+  "title": "Queue and Status Taxonomy Model",
+  "status": "queue_status_taxonomy_model_defined",
+  "seed_queue_source": "data/admin-review/index/admin-review-queue-index.json",
+  "seed_candidate": {
+    "article_id": "enhancing-public-healthcare-delivery-digital-innovation",
+    "status": "ready_for_admin_review",
+    "publish_readiness_score": 92,
+    "public_visibility": false,
+    "publish_approved": false
+  },
+  "queues": [
+    {
+      "queue": "admin_review_queue",
+      "statuses": [
+        "ready_for_admin_review",
+        "submitted_to_admin",
+        "resubmitted_to_admin"
+      ],
+      "visible_to": [
+        "admin"
+      ],
+      "public_visibility": false
+    },
+    {
+      "queue": "editor_draft_queue",
+      "statuses": [
+        "editor_draft"
+      ],
+      "visible_to": [
+        "editor"
+      ],
+      "public_visibility": false
+    },
+    {
+      "queue": "editor_correction_queue",
+      "statuses": [
+        "returned_for_correction",
+        "editor_revision"
+      ],
+      "visible_to": [
+        "editor",
+        "admin"
+      ],
+      "public_visibility": false
+    },
+    {
+      "queue": "archive_queue",
+      "statuses": [
+        "archived"
+      ],
+      "visible_to": [
+        "admin"
+      ],
+      "public_visibility": false
+    },
+    {
+      "queue": "published_queue",
+      "statuses": [
+        "published",
+        "published_closed"
+      ],
+      "visible_to": [
+        "admin",
+        "public_if_published"
+      ],
+      "public_visibility": true
+    }
+  ],
+  "canonical_statuses": [
+    "pipeline_verified",
+    "editor_draft",
+    "submitted_to_admin",
+    "ready_for_admin_review",
+    "returned_for_correction",
+    "editor_revision",
+    "resubmitted_to_admin",
+    "archived",
+    "published",
+    "published_closed"
+  ],
+  "visibility_principle": "No article becomes public merely by being generated, edited or submitted. Public visibility requires Admin publish or publish_and_close action through a future secure action handler.",
+  "admin_editor_decision_submission_workflow_model_only": true,
+  "admin_decision_model_created_in_ag14e": true,
+  "editor_submission_workflow_created_in_ag14e": true,
+  "audit_trail_versioning_model_created_in_ag14e": true,
+  "queue_status_taxonomy_created_in_ag14e": true,
+  "ag14f_boundary_created_in_ag14e": true,
+  "selected_article_read_performed": true,
+  "admin_action_execution_performed_in_ag14e": false,
+  "editor_action_execution_performed_in_ag14e": false,
+  "article_mutation_performed_in_ag14e": false,
+  "queue_mutation_performed_in_ag14e": false,
+  "public_visibility_switch_performed_in_ag14e": false,
+  "public_publishing_operation_performed_in_ag14e": false,
+  "real_credential_created_in_ag14e": false,
+  "hardcoded_password_created_in_ag14e": false,
+  "password_hash_created_in_repo_in_ag14e": false,
+  "auth_activation_performed_in_ag14e": false,
+  "backend_activation_performed_in_ag14e": false,
+  "supabase_activation_performed_in_ag14e": false,
+  "database_write_performed_in_ag14e": false,
+  "deployment_trigger_performed_in_ag14e": false
+}

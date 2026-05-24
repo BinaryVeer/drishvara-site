@@ -1,0 +1,137 @@
+{
+  "module_id": "AG14E",
+  "title": "Admin Decision State Transition Model",
+  "status": "admin_decision_state_transition_model_defined",
+  "source_admin_actions": [
+    "archive",
+    "return_for_correction",
+    "publish",
+    "publish_and_close"
+  ],
+  "admin_role_principle": "Admin alone controls public visibility and final publication decision.",
+  "admin_actions": [
+    {
+      "action": "archive",
+      "allowed_from_statuses": [
+        "ready_for_admin_review",
+        "submitted_to_admin",
+        "resubmitted_to_admin",
+        "returned_for_correction"
+      ],
+      "resulting_status": "archived",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "admin_decision_remarks",
+        "archive_reason"
+      ],
+      "creates_editor_task": false,
+      "closes_admin_review": true,
+      "audit_required": true,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "return_for_correction",
+      "allowed_from_statuses": [
+        "ready_for_admin_review",
+        "submitted_to_admin",
+        "resubmitted_to_admin"
+      ],
+      "resulting_status": "returned_for_correction",
+      "public_visibility_after_action": false,
+      "required_fields": [
+        "admin_decision_remarks",
+        "correction_category",
+        "correction_priority"
+      ],
+      "creates_editor_task": true,
+      "editor_queue_target": "editor_correction_queue",
+      "closes_admin_review": false,
+      "audit_required": true,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "publish",
+      "allowed_from_statuses": [
+        "ready_for_admin_review",
+        "submitted_to_admin",
+        "resubmitted_to_admin"
+      ],
+      "resulting_status": "published",
+      "public_visibility_after_action": true,
+      "required_fields": [
+        "admin_decision_remarks",
+        "publish_confirmation"
+      ],
+      "creates_editor_task": false,
+      "closes_admin_review": false,
+      "audit_required": true,
+      "execution_available_in_ag14e": false
+    },
+    {
+      "action": "publish_and_close",
+      "allowed_from_statuses": [
+        "ready_for_admin_review",
+        "submitted_to_admin",
+        "resubmitted_to_admin"
+      ],
+      "resulting_status": "published_closed",
+      "public_visibility_after_action": true,
+      "required_fields": [
+        "admin_decision_remarks",
+        "publish_confirmation",
+        "closure_confirmation"
+      ],
+      "creates_editor_task": false,
+      "closes_admin_review": true,
+      "audit_required": true,
+      "execution_available_in_ag14e": false
+    }
+  ],
+  "correction_categories": [
+    "editorial_issue",
+    "reference_issue",
+    "object_layout_issue",
+    "mobile_preview_issue",
+    "tone_positioning_issue",
+    "publish_risk_issue",
+    "metadata_seo_issue",
+    "other"
+  ],
+  "correction_priorities": [
+    "low",
+    "medium",
+    "high",
+    "blocker"
+  ],
+  "hard_publish_blockers": [
+    "missing_admin_approval",
+    "missing_audit_trail",
+    "missing_article_hash",
+    "missing_rollback_record",
+    "known_broken_reference",
+    "missing_required_credit",
+    "mobile_layout_failed",
+    "unsupported_claim_flagged"
+  ],
+  "admin_editor_decision_submission_workflow_model_only": true,
+  "admin_decision_model_created_in_ag14e": true,
+  "editor_submission_workflow_created_in_ag14e": true,
+  "audit_trail_versioning_model_created_in_ag14e": true,
+  "queue_status_taxonomy_created_in_ag14e": true,
+  "ag14f_boundary_created_in_ag14e": true,
+  "selected_article_read_performed": true,
+  "admin_action_execution_performed_in_ag14e": false,
+  "editor_action_execution_performed_in_ag14e": false,
+  "article_mutation_performed_in_ag14e": false,
+  "queue_mutation_performed_in_ag14e": false,
+  "public_visibility_switch_performed_in_ag14e": false,
+  "public_publishing_operation_performed_in_ag14e": false,
+  "real_credential_created_in_ag14e": false,
+  "hardcoded_password_created_in_ag14e": false,
+  "password_hash_created_in_repo_in_ag14e": false,
+  "auth_activation_performed_in_ag14e": false,
+  "backend_activation_performed_in_ag14e": false,
+  "supabase_activation_performed_in_ag14e": false,
+  "database_write_performed_in_ag14e": false,
+  "deployment_trigger_performed_in_ag14e": false
+}
