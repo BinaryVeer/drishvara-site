@@ -1,0 +1,46 @@
+{
+  "module_id": "AG14I",
+  "title": "Admin Action Request Schema Scaffold",
+  "status": "schema_scaffold_non_active",
+  "active_endpoint": false,
+  "required_fields_for_future_handler": [
+    "actor_identifier",
+    "actor_role",
+    "article_id",
+    "requested_action",
+    "current_status",
+    "expected_new_status",
+    "pre_action_hash",
+    "decision_or_submission_remarks",
+    "client_request_id"
+  ],
+  "allowed_actor_roles": [
+    "admin",
+    "editor"
+  ],
+  "allowed_admin_actions": [
+    "archive",
+    "return_for_correction",
+    "publish",
+    "publish_and_close"
+  ],
+  "allowed_editor_actions": [
+    "create_manual_article",
+    "save_draft",
+    "preview",
+    "submit_to_admin",
+    "edit_returned_article",
+    "resubmit_to_admin"
+  ],
+  "forbidden_in_ag14i": [
+    "No real credential.",
+    "No password.",
+    "No password hash.",
+    "No GitHub token.",
+    "No external data service service key.",
+    "No database mutation.",
+    "No queue mutation.",
+    "No article mutation.",
+    "No publish execution."
+  ]
+}

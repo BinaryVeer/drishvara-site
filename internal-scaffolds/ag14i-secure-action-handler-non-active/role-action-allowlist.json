@@ -1,0 +1,35 @@
+{
+  "module_id": "AG14I",
+  "title": "Role Action Allowlist Scaffold",
+  "status": "role_action_allowlist_scaffold_non_active",
+  "active_enforcement": false,
+  "admin": {
+    "allowed_actions": [
+      "archive",
+      "return_for_correction",
+      "publish",
+      "publish_and_close"
+    ],
+    "blocked_actions": [
+      "bypass_audit",
+      "write_without_hash_check",
+      "expose_secret_to_browser"
+    ]
+  },
+  "editor": {
+    "allowed_actions": [
+      "create_manual_article",
+      "save_draft",
+      "preview",
+      "submit_to_admin",
+      "edit_returned_article",
+      "resubmit_to_admin"
+    ],
+    "blocked_actions": [
+      "publish",
+      "publish_and_close",
+      "approve_public_visibility",
+      "reset_admin_credential"
+    ]
+  }
+}
