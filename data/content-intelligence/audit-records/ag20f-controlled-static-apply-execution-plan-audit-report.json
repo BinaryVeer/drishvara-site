@@ -1,0 +1,149 @@
+{
+  "module_id": "AG20F",
+  "title": "Controlled Static Apply Execution Plan Audit Report",
+  "status": "controlled_static_apply_execution_plan_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG20F-AUDIT-001",
+      "area": "ag20e_dependency",
+      "status": "passed",
+      "note": "AG20E review, execution plan, sequence plans, blocker register, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG20F-AUDIT-002",
+      "area": "execution_plan",
+      "status": "passed",
+      "note": "Execution plan must be plan-only and must not authorise or execute real apply."
+    },
+    {
+      "check_id": "AG20F-AUDIT-003",
+      "area": "approval_sequence",
+      "status": "passed",
+      "note": "Approval phrase execution sequence must be defined but not executed."
+    },
+    {
+      "check_id": "AG20F-AUDIT-004",
+      "area": "github_token_precondition",
+      "status": "passed",
+      "note": "GitHub token precondition may be planned only; no token or write may occur."
+    },
+    {
+      "check_id": "AG20F-AUDIT-005",
+      "area": "file_mutation_order",
+      "status": "passed",
+      "note": "File mutation order must be planned without mutating files or writing to Git."
+    },
+    {
+      "check_id": "AG20F-AUDIT-006",
+      "area": "public_surface_switch_order",
+      "status": "passed",
+      "note": "Public surface switch order must be planned without switching visibility or mutating indexes."
+    },
+    {
+      "check_id": "AG20F-AUDIT-007",
+      "area": "deployment_smoke_test_order",
+      "status": "passed",
+      "note": "Deployment and smoke-test order must be planned without deployment, live checks or publishing."
+    },
+    {
+      "check_id": "AG20F-AUDIT-008",
+      "area": "rollback_order",
+      "status": "passed",
+      "note": "Rollback order must be planned without rollback execution."
+    },
+    {
+      "check_id": "AG20F-AUDIT-009",
+      "area": "blocker_register",
+      "status": "passed",
+      "note": "Execution plan blocker register must keep all real operations blocked."
+    },
+    {
+      "check_id": "AG20F-AUDIT-010",
+      "area": "ag20d_decision_inheritance",
+      "status": "passed",
+      "note": "AG20D decision must allow only AG20E execution plan and block real apply."
+    },
+    {
+      "check_id": "AG20F-AUDIT-011",
+      "area": "ag20d_safety_inheritance",
+      "status": "passed",
+      "note": "AG20D safety controls must remain inherited."
+    },
+    {
+      "check_id": "AG20F-AUDIT-012",
+      "area": "readiness_alignment",
+      "status": "passed",
+      "note": "AG20E readiness must point to AG20F audit while real apply remains blocked."
+    },
+    {
+      "check_id": "AG20F-AUDIT-013",
+      "area": "supabase_auth_defer_reminder",
+      "status": "passed",
+      "note": "Supabase/Auth/backend defer reminder must remain active."
+    },
+    {
+      "check_id": "AG20F-AUDIT-014",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG20F is audit-only and performs no approval phrase execution, mutation, credential creation, GitHub write, deployment, smoke-test, rollback, publishing or backend activation."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "decision": {
+    "ag20e_execution_plan_valid": true,
+    "approval_sequence_valid": true,
+    "github_token_precondition_valid": true,
+    "file_mutation_order_valid": true,
+    "public_surface_switch_order_valid": true,
+    "deployment_smoke_test_order_valid": true,
+    "rollback_order_valid": true,
+    "no_approval_phrase_executed": true,
+    "no_candidate_apply_performed": true,
+    "no_github_token_created": true,
+    "no_github_write_performed": true,
+    "no_public_visibility_switch_performed": true,
+    "no_public_index_mutation_performed": true,
+    "no_deployment_triggered": true,
+    "no_live_smoke_test_performed": true,
+    "no_rollback_executed": true,
+    "no_publishing_performed": true,
+    "supabase_auth_backend_deferred": true,
+    "ready_for_ag20z_closure": true
+  },
+  "controlled_static_apply_execution_plan_audit_only": true,
+  "ag20e_execution_plan_audited_in_ag20f": true,
+  "execution_plan_audit_closure_created_in_ag20f": true,
+  "execution_plan_safety_record_created_in_ag20f": true,
+  "ag20z_boundary_created_in_ag20f": true,
+  "selected_article_read_performed": true,
+  "explicit_approval_phrase_executed_in_ag20f": false,
+  "article_generation_performed_in_ag20f": false,
+  "article_mutation_performed_in_ag20f": false,
+  "queue_mutation_performed_in_ag20f": false,
+  "active_admin_review_queue_record_created_in_ag20f": false,
+  "queue_index_mutation_performed_in_ag20f": false,
+  "admin_action_execution_performed_in_ag20f": false,
+  "editor_action_execution_performed_in_ag20f": false,
+  "real_credential_created_in_ag20f": false,
+  "hardcoded_password_created_in_repo_in_ag20f": false,
+  "password_hash_created_in_repo_in_ag20f": false,
+  "auth_activation_performed_in_ag20f": false,
+  "backend_activation_performed_in_ag20f": false,
+  "supabase_activation_performed_in_ag20f": false,
+  "database_write_performed_in_ag20f": false,
+  "github_token_created_or_exposed_in_ag20f": false,
+  "github_write_operation_performed_in_ag20f": false,
+  "active_action_handler_created_in_ag20f": false,
+  "api_endpoint_created_in_ag20f": false,
+  "public_visibility_switch_performed_in_ag20f": false,
+  "public_index_mutation_performed_in_ag20f": false,
+  "deployment_trigger_performed_in_ag20f": false,
+  "live_smoke_test_performed_in_ag20f": false,
+  "rollback_execution_performed_in_ag20f": false,
+  "public_publishing_operation_performed_in_ag20f": false
+}
