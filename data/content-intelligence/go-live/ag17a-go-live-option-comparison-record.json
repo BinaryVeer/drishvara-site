@@ -1,0 +1,89 @@
+{
+  "module_id": "AG17A",
+  "title": "Go-live Implementation Option Comparison Record",
+  "status": "go_live_options_compared",
+  "options": [
+    {
+      "option_id": "option_1_static_github_controlled_first",
+      "label": "GitHub-backed static controlled path first",
+      "description": "Use the current static/GitHub/Vercel architecture with governed generated artifacts, no real backend/Auth activation at first.",
+      "advantages": [
+        "Lowest operational complexity.",
+        "Fits current repository governance flow.",
+        "Keeps cost low.",
+        "Allows controlled article/public index workflow before database activation.",
+        "Avoids premature Supabase/Auth surface area."
+      ],
+      "risks": [
+        "Manual/semi-manual control remains higher.",
+        "Not ideal for multi-user concurrent editorial operations.",
+        "Real Admin/Editor actions still need carefully controlled implementation."
+      ],
+      "suitable_now": true
+    },
+    {
+      "option_id": "option_2_supabase_auth_backed_now",
+      "label": "Supabase/Auth-backed implementation now",
+      "description": "Activate backend/Auth/database for Admin/Editor workflow immediately.",
+      "advantages": [
+        "Better for true multi-user login and database-backed queue state.",
+        "Cleaner long-term model for action audit and role controls."
+      ],
+      "risks": [
+        "Higher implementation complexity.",
+        "Higher security and secret-management requirement.",
+        "Potential recurring cost and maintenance overhead.",
+        "Premature because current public flow has not yet been live-tested."
+      ],
+      "suitable_now": false
+    },
+    {
+      "option_id": "option_3_hybrid_staged_path",
+      "label": "Hybrid staged path",
+      "description": "Proceed first with GitHub-backed static controlled go-live, then move Supabase/Auth/backend later when the editorial-publication workflow is stable and real multi-user/database needs are unavoidable.",
+      "advantages": [
+        "Balances safety, cost and implementation speed.",
+        "Preserves existing static governance system.",
+        "Defers backend/Auth until it becomes necessary.",
+        "Creates a clean future upgrade path.",
+        "Avoids premature database/Auth activation."
+      ],
+      "risks": [
+        "Requires discipline to not bypass the later Supabase/Auth reminder checkpoint.",
+        "Some Admin/Editor actions may remain simulated or controlled until later activation."
+      ],
+      "suitable_now": true,
+      "selected": true
+    }
+  ],
+  "recommended_option_id": "option_3_hybrid_staged_path",
+  "controlled_go_live_implementation_path_decision_only": true,
+  "go_live_option_comparison_created_in_ag17a": true,
+  "hybrid_staged_path_selected_in_ag17a": true,
+  "supabase_auth_defer_reminder_created_in_ag17a": true,
+  "real_activation_blocker_register_created_in_ag17a": true,
+  "ag17b_boundary_created_in_ag17a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17a": false,
+  "article_mutation_performed_in_ag17a": false,
+  "queue_mutation_performed_in_ag17a": false,
+  "active_admin_review_queue_record_created_in_ag17a": false,
+  "queue_index_mutation_performed_in_ag17a": false,
+  "admin_action_execution_performed_in_ag17a": false,
+  "editor_action_execution_performed_in_ag17a": false,
+  "real_credential_created_in_ag17a": false,
+  "hardcoded_password_created_in_repo_in_ag17a": false,
+  "password_hash_created_in_repo_in_ag17a": false,
+  "auth_activation_performed_in_ag17a": false,
+  "backend_activation_performed_in_ag17a": false,
+  "supabase_activation_performed_in_ag17a": false,
+  "database_write_performed_in_ag17a": false,
+  "github_token_created_or_exposed_in_ag17a": false,
+  "github_write_operation_performed_in_ag17a": false,
+  "active_action_handler_created_in_ag17a": false,
+  "api_endpoint_created_in_ag17a": false,
+  "public_visibility_switch_performed_in_ag17a": false,
+  "public_index_mutation_performed_in_ag17a": false,
+  "public_publishing_operation_performed_in_ag17a": false,
+  "deployment_trigger_performed_in_ag17a": false
+}

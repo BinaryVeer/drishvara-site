@@ -1,0 +1,58 @@
+{
+  "module_id": "AG17A",
+  "title": "Hybrid Staged Path Decision Record",
+  "status": "hybrid_staged_go_live_path_selected",
+  "selected_path": "hybrid_staged_path",
+  "selected_sequence": [
+    {
+      "sequence_id": "stage_1",
+      "title": "Static/GitHub-controlled go-live first",
+      "intent": "Activate the minimum controlled live flow using repository-governed artifacts, static public filter logic and manual Admin review governance.",
+      "activation_status_now": "planning_only_not_active"
+    },
+    {
+      "sequence_id": "stage_2",
+      "title": "Supabase/Auth/backend later",
+      "intent": "Move to backend/Auth/database only after the static go-live path is stable and real multi-user or database-backed workflow requirements are confirmed.",
+      "activation_status_now": "deferred"
+    }
+  ],
+  "decision_rationale": [
+    "Current Drishvara system has strong file-based governance and static deployment readiness.",
+    "Public visibility and publish-control chain has only reached non-active scaffold maturity.",
+    "Supabase/Auth activation is not required before proving public content flow.",
+    "Hybrid staging reduces cost, risk and implementation complexity.",
+    "The system should explicitly remind the user before moving to Supabase/Auth/backend activation."
+  ],
+  "selected_next_stage": "AG17B",
+  "selected_next_stage_title": "Hybrid Static Go-live Implementation Plan",
+  "controlled_go_live_implementation_path_decision_only": true,
+  "go_live_option_comparison_created_in_ag17a": true,
+  "hybrid_staged_path_selected_in_ag17a": true,
+  "supabase_auth_defer_reminder_created_in_ag17a": true,
+  "real_activation_blocker_register_created_in_ag17a": true,
+  "ag17b_boundary_created_in_ag17a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17a": false,
+  "article_mutation_performed_in_ag17a": false,
+  "queue_mutation_performed_in_ag17a": false,
+  "active_admin_review_queue_record_created_in_ag17a": false,
+  "queue_index_mutation_performed_in_ag17a": false,
+  "admin_action_execution_performed_in_ag17a": false,
+  "editor_action_execution_performed_in_ag17a": false,
+  "real_credential_created_in_ag17a": false,
+  "hardcoded_password_created_in_repo_in_ag17a": false,
+  "password_hash_created_in_repo_in_ag17a": false,
+  "auth_activation_performed_in_ag17a": false,
+  "backend_activation_performed_in_ag17a": false,
+  "supabase_activation_performed_in_ag17a": false,
+  "database_write_performed_in_ag17a": false,
+  "github_token_created_or_exposed_in_ag17a": false,
+  "github_write_operation_performed_in_ag17a": false,
+  "active_action_handler_created_in_ag17a": false,
+  "api_endpoint_created_in_ag17a": false,
+  "public_visibility_switch_performed_in_ag17a": false,
+  "public_index_mutation_performed_in_ag17a": false,
+  "public_publishing_operation_performed_in_ag17a": false,
+  "deployment_trigger_performed_in_ag17a": false
+}

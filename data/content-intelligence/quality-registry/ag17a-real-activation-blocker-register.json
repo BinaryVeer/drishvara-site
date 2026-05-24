@@ -1,0 +1,81 @@
+{
+  "module_id": "AG17A",
+  "title": "Real Activation Blocker Register",
+  "status": "real_activation_blockers_recorded",
+  "blockers_before_real_go_live_execution": [
+    {
+      "blocker_id": "AG17A-BLOCKER-001",
+      "blocker": "No real Admin/Editor action execution approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG17A-BLOCKER-002",
+      "blocker": "No GitHub write token wiring approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG17A-BLOCKER-003",
+      "blocker": "No public visibility switch approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG17A-BLOCKER-004",
+      "blocker": "No public index mutation approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG17A-BLOCKER-005",
+      "blocker": "No publishing operation approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG17A-BLOCKER-006",
+      "blocker": "No Supabase/Auth/backend activation approved.",
+      "current_status": "blocked_deferred_for_later_stage"
+    }
+  ],
+  "inherited_blockers_from_ag16z": [
+    "Actual public visibility switch.",
+    "Actual public index mutation.",
+    "Actual Featured Reads public listing mutation.",
+    "Actual category listing mutation.",
+    "Actual homepage article card mutation.",
+    "Actual sitemap/feed/search index mutation.",
+    "Article mutation.",
+    "Admin/Editor action execution.",
+    "Real credentials.",
+    "Auth/backend/Supabase activation.",
+    "GitHub write token wiring.",
+    "Publishing operation.",
+    "Deployment trigger."
+  ],
+  "controlled_go_live_implementation_path_decision_only": true,
+  "go_live_option_comparison_created_in_ag17a": true,
+  "hybrid_staged_path_selected_in_ag17a": true,
+  "supabase_auth_defer_reminder_created_in_ag17a": true,
+  "real_activation_blocker_register_created_in_ag17a": true,
+  "ag17b_boundary_created_in_ag17a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17a": false,
+  "article_mutation_performed_in_ag17a": false,
+  "queue_mutation_performed_in_ag17a": false,
+  "active_admin_review_queue_record_created_in_ag17a": false,
+  "queue_index_mutation_performed_in_ag17a": false,
+  "admin_action_execution_performed_in_ag17a": false,
+  "editor_action_execution_performed_in_ag17a": false,
+  "real_credential_created_in_ag17a": false,
+  "hardcoded_password_created_in_repo_in_ag17a": false,
+  "password_hash_created_in_repo_in_ag17a": false,
+  "auth_activation_performed_in_ag17a": false,
+  "backend_activation_performed_in_ag17a": false,
+  "supabase_activation_performed_in_ag17a": false,
+  "database_write_performed_in_ag17a": false,
+  "github_token_created_or_exposed_in_ag17a": false,
+  "github_write_operation_performed_in_ag17a": false,
+  "active_action_handler_created_in_ag17a": false,
+  "api_endpoint_created_in_ag17a": false,
+  "public_visibility_switch_performed_in_ag17a": false,
+  "public_index_mutation_performed_in_ag17a": false,
+  "public_publishing_operation_performed_in_ag17a": false,
+  "deployment_trigger_performed_in_ag17a": false
+}
