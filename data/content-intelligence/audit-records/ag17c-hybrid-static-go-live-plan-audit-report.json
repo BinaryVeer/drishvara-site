@@ -1,0 +1,126 @@
+{
+  "module_id": "AG17C",
+  "title": "Hybrid Static Go-live Plan Audit Report",
+  "status": "hybrid_static_go_live_plan_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG17C-AUDIT-001",
+      "area": "ag17b_dependency",
+      "status": "passed",
+      "note": "AG17B review, plans, reminder, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG17C-AUDIT-002",
+      "area": "hybrid_path_lineage",
+      "status": "passed",
+      "note": "Hybrid staged path must remain selected with static/GitHub-controlled path first."
+    },
+    {
+      "check_id": "AG17C-AUDIT-003",
+      "area": "static_github_architecture",
+      "status": "passed",
+      "note": "Architecture must plan static/GitHub first and defer Supabase/Auth/backend."
+    },
+    {
+      "check_id": "AG17C-AUDIT-004",
+      "area": "public_exposure_sequence_no_execution",
+      "status": "passed",
+      "note": "Public exposure sequence must remain a plan only with no visibility, index, publish or deployment execution."
+    },
+    {
+      "check_id": "AG17C-AUDIT-005",
+      "area": "github_secret_plan_no_secrets",
+      "status": "passed",
+      "note": "GitHub secret requirements may be planned, but no secret/token/write may be created, exposed or wired."
+    },
+    {
+      "check_id": "AG17C-AUDIT-006",
+      "area": "admin_editor_static_action_readiness",
+      "status": "passed",
+      "note": "Admin/Editor actions must remain readiness-only, with no active handler and Supabase/Auth deferred."
+    },
+    {
+      "check_id": "AG17C-AUDIT-007",
+      "area": "rollback_audit_plan_no_execution",
+      "status": "passed",
+      "note": "Rollback/audit must be planned without executing rollback or audit write."
+    },
+    {
+      "check_id": "AG17C-AUDIT-008",
+      "area": "supabase_auth_defer_reminder",
+      "status": "passed",
+      "note": "Supabase/Auth/backend defer reminder must be carried forward."
+    },
+    {
+      "check_id": "AG17C-AUDIT-009",
+      "area": "real_activation_blockers",
+      "status": "passed",
+      "note": "Real activation blockers must remain in force."
+    },
+    {
+      "check_id": "AG17C-AUDIT-010",
+      "area": "ag16_public_control_inheritance",
+      "status": "passed",
+      "note": "AG16 public visibility and publish-control blockers must remain inherited."
+    },
+    {
+      "check_id": "AG17C-AUDIT-011",
+      "area": "stage_controls_no_real_activation",
+      "status": "passed",
+      "note": "AG17B stage controls must confirm no GitHub write, visibility switch, public index mutation, publishing or deployment."
+    },
+    {
+      "check_id": "AG17C-AUDIT-012",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG17C is audit/readiness only and performs no scaffold creation, credentials, GitHub write, action execution, visibility switch, public index mutation, deployment or publishing."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "decision": {
+    "static_github_go_live_plan_valid": true,
+    "supabase_auth_deferred": true,
+    "no_secrets_created": true,
+    "no_github_write_path_activated": true,
+    "no_admin_editor_execution_enabled": true,
+    "no_visibility_switch_performed": true,
+    "no_public_index_mutation_performed": true,
+    "no_deployment_triggered": true,
+    "no_publishing_performed": true,
+    "ready_for_non_active_static_go_live_scaffold": true
+  },
+  "hybrid_static_go_live_plan_audit_only": true,
+  "hybrid_static_go_live_plan_audited_in_ag17c": true,
+  "non_active_static_go_live_scaffold_decision_created_in_ag17c": true,
+  "static_go_live_safety_record_created_in_ag17c": true,
+  "ag17d_boundary_created_in_ag17c": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag17c": false,
+  "article_mutation_performed_in_ag17c": false,
+  "queue_mutation_performed_in_ag17c": false,
+  "active_admin_review_queue_record_created_in_ag17c": false,
+  "queue_index_mutation_performed_in_ag17c": false,
+  "admin_action_execution_performed_in_ag17c": false,
+  "editor_action_execution_performed_in_ag17c": false,
+  "real_credential_created_in_ag17c": false,
+  "hardcoded_password_created_in_repo_in_ag17c": false,
+  "password_hash_created_in_repo_in_ag17c": false,
+  "auth_activation_performed_in_ag17c": false,
+  "backend_activation_performed_in_ag17c": false,
+  "supabase_activation_performed_in_ag17c": false,
+  "database_write_performed_in_ag17c": false,
+  "github_token_created_or_exposed_in_ag17c": false,
+  "github_write_operation_performed_in_ag17c": false,
+  "active_action_handler_created_in_ag17c": false,
+  "api_endpoint_created_in_ag17c": false,
+  "static_go_live_scaffold_created_in_ag17c": false,
+  "public_visibility_switch_performed_in_ag17c": false,
+  "public_index_mutation_performed_in_ag17c": false,
+  "public_publishing_operation_performed_in_ag17c": false,
+  "deployment_trigger_performed_in_ag17c": false
+}
