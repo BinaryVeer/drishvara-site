@@ -1,0 +1,28 @@
+{
+  "module_id": "AG22C",
+  "title": "AG22C to AG22D Batch Dry-run Audit Boundary",
+  "status": "ag22d_boundary_created_not_started",
+  "next_stage_id": "AG22D",
+  "next_stage_title": "Batch Dry-run Audit",
+  "allowed_scope": [
+    "Audit dry-run candidate manifest.",
+    "Audit proposed static paths.",
+    "Audit proposed public surface deltas.",
+    "Confirm no file mutation, GitHub write, deployment or publishing occurred."
+  ],
+  "blocked_scope": [
+    "No article file creation.",
+    "No article mutation.",
+    "No queue mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No public visibility switch.",
+    "No public index mutation.",
+    "No deployment trigger.",
+    "No live smoke-test.",
+    "No rollback execution.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

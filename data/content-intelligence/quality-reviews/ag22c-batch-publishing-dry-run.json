@@ -1,0 +1,45 @@
+{
+  "module_id": "AG22C",
+  "title": "Batch Publishing Dry-run",
+  "status": "batch_publishing_dry_run_completed_ready_for_ag22d_audit",
+  "depends_on": [
+    "AG22B"
+  ],
+  "generated_from": {
+    "ag22bReview": "data/content-intelligence/quality-reviews/ag22b-repeatable-publishing-sop-audit.json",
+    "ag22bAudit": "data/content-intelligence/audit-records/ag22b-repeatable-publishing-sop-audit-report.json",
+    "ag22bDecision": "data/content-intelligence/go-live/ag22b-batch-publishing-dry-run-decision-record.json",
+    "ag22bReadiness": "data/content-intelligence/quality-registry/ag22b-batch-publishing-dry-run-readiness-record.json",
+    "ag22bBoundary": "data/content-intelligence/mutation-plans/ag22b-to-ag22c-batch-publishing-dry-run-boundary.json",
+    "ag22aBatchScope": "data/content-intelligence/go-live/ag22a-batch-publishing-dry-run-scope.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "dry_run_report_file": "data/content-intelligence/go-live/ag22c-batch-publishing-dry-run-report.json",
+  "candidate_manifest_file": "data/content-intelligence/go-live/ag22c-dry-run-candidate-manifest.json",
+  "public_surface_deltas_file": "data/content-intelligence/go-live/ag22c-proposed-public-surface-deltas.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag22c-batch-publishing-dry-run-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag22c-batch-dry-run-audit-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag22c-to-ag22d-batch-dry-run-audit-boundary.json",
+  "summary": {
+    "dry_run_completed": true,
+    "candidate_count": 3,
+    "real_execution_done": false,
+    "ready_for_ag22d": true,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

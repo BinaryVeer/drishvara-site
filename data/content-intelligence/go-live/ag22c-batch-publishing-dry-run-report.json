@@ -1,0 +1,34 @@
+{
+  "module_id": "AG22C",
+  "title": "Batch Publishing Dry-run Report",
+  "status": "batch_publishing_dry_run_completed_no_publish",
+  "dry_run_only": true,
+  "candidate_count": 3,
+  "dry_run_result": {
+    "proposed_static_paths_created_as_plan_only": true,
+    "proposed_public_surface_deltas_created_as_plan_only": true,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "published": false
+  },
+  "next_expected_stage": "AG22D",
+  "next_expected_stage_title": "Batch Dry-run Audit",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
