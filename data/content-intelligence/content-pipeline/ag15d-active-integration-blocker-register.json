@@ -1,0 +1,79 @@
+{
+  "module_id": "AG15D",
+  "title": "Active Integration Blocker Register",
+  "status": "active_integration_blockers_recorded",
+  "blockers_before_active_queue_integration": [
+    {
+      "blocker_id": "AG15D-BLOCKER-001",
+      "blocker": "No active generated article batch has been approved for queue insertion.",
+      "required_resolution": "Approve a future controlled generation or candidate set before active queue integration.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-002",
+      "blocker": "No active queue mutation stage has been approved.",
+      "required_resolution": "Create and audit a controlled apply stage before writing queue records.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-003",
+      "blocker": "No Admin action execution is enabled.",
+      "required_resolution": "Keep queue entries non-public until a later secure Admin execution stage is approved.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-004",
+      "blocker": "No public visibility switch is approved.",
+      "required_resolution": "Public visibility must remain false until a later publish-control stage.",
+      "current_status": "blocked"
+    },
+    {
+      "blocker_id": "AG15D-BLOCKER-005",
+      "blocker": "No publishing operation is approved.",
+      "required_resolution": "Publish execution requires separate explicit approval.",
+      "current_status": "blocked"
+    }
+  ],
+  "allowed_next_without_resolving_blockers": [
+    "Create non-active integration scaffold.",
+    "Create sample candidate-to-queue mapping templates.",
+    "Create no-write queue handoff templates.",
+    "Create validation fixtures that do not mutate active queue."
+  ],
+  "not_allowed_next_without_resolving_blockers": [
+    "Generate new articles.",
+    "Write active Admin Review Queue records.",
+    "Mutate queue index.",
+    "Switch public visibility.",
+    "Publish articles.",
+    "Enable Admin/Editor action execution."
+  ],
+  "schema_dry_run_audit_integration_readiness_only": true,
+  "schema_dry_run_audited_in_ag15d": true,
+  "integration_readiness_decision_created_in_ag15d": true,
+  "active_integration_blocker_register_created_in_ag15d": true,
+  "ag15e_boundary_created_in_ag15d": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15d": false,
+  "article_mutation_performed_in_ag15d": false,
+  "queue_mutation_performed_in_ag15d": false,
+  "active_admin_review_queue_record_created_in_ag15d": false,
+  "queue_index_mutation_performed_in_ag15d": false,
+  "non_active_integration_scaffold_created_in_ag15d": false,
+  "admin_action_execution_performed_in_ag15d": false,
+  "editor_action_execution_performed_in_ag15d": false,
+  "real_credential_created_in_ag15d": false,
+  "hardcoded_password_created_in_ag15d": false,
+  "password_hash_created_in_repo_in_ag15d": false,
+  "auth_activation_performed_in_ag15d": false,
+  "backend_activation_performed_in_ag15d": false,
+  "supabase_activation_performed_in_ag15d": false,
+  "database_write_performed_in_ag15d": false,
+  "github_token_created_or_exposed_in_ag15d": false,
+  "github_write_operation_performed_in_ag15d": false,
+  "active_action_handler_created_in_ag15d": false,
+  "api_endpoint_created_in_ag15d": false,
+  "public_visibility_switch_performed_in_ag15d": false,
+  "public_publishing_operation_performed_in_ag15d": false,
+  "deployment_trigger_performed_in_ag15d": false
+}

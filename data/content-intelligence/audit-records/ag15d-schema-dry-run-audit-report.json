@@ -1,0 +1,115 @@
+{
+  "module_id": "AG15D",
+  "title": "Generated Article Admin Queue Schema Dry-run Audit Report",
+  "status": "schema_dry_run_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG15D-AUDIT-001",
+      "area": "ag15c_dependency",
+      "status": "passed",
+      "note": "AG15C review, dry-run records, validation report, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG15D-AUDIT-002",
+      "area": "dry_run_validation_result",
+      "status": "passed",
+      "note": "AG15C validation report must pass with zero failed checks."
+    },
+    {
+      "check_id": "AG15D-AUDIT-003",
+      "area": "seed_hash_integrity",
+      "status": "passed",
+      "note": "Seed article hash must remain unchanged and dry-run hash must match."
+    },
+    {
+      "check_id": "AG15D-AUDIT-004",
+      "area": "intake_publication_defaults",
+      "status": "passed",
+      "note": "Intake dry-run must preserve non-public and not-approved defaults."
+    },
+    {
+      "check_id": "AG15D-AUDIT-005",
+      "area": "queue_publication_defaults",
+      "status": "passed",
+      "note": "Queue dry-run must preserve non-public and not-approved defaults."
+    },
+    {
+      "check_id": "AG15D-AUDIT-006",
+      "area": "no_active_queue_mutation",
+      "status": "passed",
+      "note": "AG15C must not create active queue record or mutate queue index."
+    },
+    {
+      "check_id": "AG15D-AUDIT-007",
+      "area": "quality_evidence_mapping",
+      "status": "passed",
+      "note": "Mandatory quality evidence must be mapped in dry-run."
+    },
+    {
+      "check_id": "AG15D-AUDIT-008",
+      "area": "preview_state_hash_alignment",
+      "status": "passed",
+      "note": "Preview state must be present and hash-aligned."
+    },
+    {
+      "check_id": "AG15D-AUDIT-009",
+      "area": "ag15b_schema_alignment",
+      "status": "passed",
+      "note": "Dry-run must remain aligned with AG15B queue schema and batch validation plan."
+    },
+    {
+      "check_id": "AG15D-AUDIT-010",
+      "area": "active_queue_index_not_changed_by_stage",
+      "status": "passed",
+      "note": "AG15D consumes active queue index only for reference and does not mutate it."
+    },
+    {
+      "check_id": "AG15D-AUDIT-011",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG15D is audit/readiness only and does not generate articles, mutate queues, switch visibility or publish."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 11,
+    "passed": 11,
+    "failed": 0
+  },
+  "decision": {
+    "dry_run_valid": true,
+    "schema_shape_usable": true,
+    "ready_for_non_active_integration_scaffold": true,
+    "active_queue_mutation_ready": false,
+    "article_generation_ready": false,
+    "public_publish_ready": false
+  },
+  "schema_dry_run_audit_integration_readiness_only": true,
+  "schema_dry_run_audited_in_ag15d": true,
+  "integration_readiness_decision_created_in_ag15d": true,
+  "active_integration_blocker_register_created_in_ag15d": true,
+  "ag15e_boundary_created_in_ag15d": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag15d": false,
+  "article_mutation_performed_in_ag15d": false,
+  "queue_mutation_performed_in_ag15d": false,
+  "active_admin_review_queue_record_created_in_ag15d": false,
+  "queue_index_mutation_performed_in_ag15d": false,
+  "non_active_integration_scaffold_created_in_ag15d": false,
+  "admin_action_execution_performed_in_ag15d": false,
+  "editor_action_execution_performed_in_ag15d": false,
+  "real_credential_created_in_ag15d": false,
+  "hardcoded_password_created_in_ag15d": false,
+  "password_hash_created_in_repo_in_ag15d": false,
+  "auth_activation_performed_in_ag15d": false,
+  "backend_activation_performed_in_ag15d": false,
+  "supabase_activation_performed_in_ag15d": false,
+  "database_write_performed_in_ag15d": false,
+  "github_token_created_or_exposed_in_ag15d": false,
+  "github_write_operation_performed_in_ag15d": false,
+  "active_action_handler_created_in_ag15d": false,
+  "api_endpoint_created_in_ag15d": false,
+  "public_visibility_switch_performed_in_ag15d": false,
+  "public_publishing_operation_performed_in_ag15d": false,
+  "deployment_trigger_performed_in_ag15d": false
+}
