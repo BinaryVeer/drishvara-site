@@ -1,0 +1,136 @@
+{
+  "module_id": "AG21B",
+  "title": "Controlled Static Apply Transition Gate Audit Report",
+  "status": "controlled_static_apply_transition_gate_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG21B-AUDIT-001",
+      "area": "ag21a_dependency",
+      "status": "passed",
+      "note": "AG21A review, transition gate package, lock records, blocker register, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG21B-AUDIT-002",
+      "area": "transition_gate_package",
+      "status": "passed",
+      "note": "Transition gate package must remain gate-only and must not authorise real apply."
+    },
+    {
+      "check_id": "AG21B-AUDIT-003",
+      "area": "final_precondition_lock",
+      "status": "passed",
+      "note": "Final preconditions must be locked for audit but not executed."
+    },
+    {
+      "check_id": "AG21B-AUDIT-004",
+      "area": "approval_phrase_lock",
+      "status": "passed",
+      "note": "Approval phrase must be locked but not executed."
+    },
+    {
+      "check_id": "AG21B-AUDIT-005",
+      "area": "candidate_surface_lock",
+      "status": "passed",
+      "note": "Candidate and public surfaces must be locked without mutation."
+    },
+    {
+      "check_id": "AG21B-AUDIT-006",
+      "area": "token_write_deployment_lock",
+      "status": "passed",
+      "note": "Token/write/deployment must be locked without token creation, GitHub write, deployment, smoke-test or publishing."
+    },
+    {
+      "check_id": "AG21B-AUDIT-007",
+      "area": "operator_decision_matrix",
+      "status": "passed",
+      "note": "Operator matrix must allow audit/review/rescope only and block execution decisions."
+    },
+    {
+      "check_id": "AG21B-AUDIT-008",
+      "area": "blocker_register",
+      "status": "passed",
+      "note": "AG21A blocker register must keep all real execution operations blocked."
+    },
+    {
+      "check_id": "AG21B-AUDIT-009",
+      "area": "ag20z_inheritance",
+      "status": "passed",
+      "note": "AG20Z closure state must remain inherited and non-active."
+    },
+    {
+      "check_id": "AG21B-AUDIT-010",
+      "area": "readiness_alignment",
+      "status": "passed",
+      "note": "AG21A readiness must point to audit while all real apply operations remain blocked."
+    },
+    {
+      "check_id": "AG21B-AUDIT-011",
+      "area": "supabase_auth_defer_reminder",
+      "status": "passed",
+      "note": "Supabase/Auth/backend defer reminder must remain active."
+    },
+    {
+      "check_id": "AG21B-AUDIT-012",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG21B is audit-only and performs no approval phrase execution, mutation, credential creation, GitHub write, deployment, smoke-test, rollback, publishing or backend activation."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 12,
+    "passed": 12,
+    "failed": 0
+  },
+  "decision": {
+    "ag21a_transition_gate_valid": true,
+    "final_precondition_lock_valid": true,
+    "approval_phrase_lock_valid": true,
+    "candidate_surface_lock_valid": true,
+    "token_write_deployment_lock_valid": true,
+    "operator_decision_matrix_valid": true,
+    "no_approval_phrase_executed": true,
+    "no_candidate_apply_performed": true,
+    "no_github_token_created": true,
+    "no_github_write_performed": true,
+    "no_public_visibility_switch_performed": true,
+    "no_public_index_mutation_performed": true,
+    "no_deployment_triggered": true,
+    "no_live_smoke_test_performed": true,
+    "no_rollback_executed": true,
+    "no_publishing_performed": true,
+    "supabase_auth_backend_deferred": true,
+    "ready_for_controlled_static_apply_execution_readiness": true
+  },
+  "controlled_static_apply_transition_gate_audit_only": true,
+  "ag21a_transition_gate_audited_in_ag21b": true,
+  "execution_readiness_decision_created_in_ag21b": true,
+  "transition_gate_safety_record_created_in_ag21b": true,
+  "ag21c_boundary_created_in_ag21b": true,
+  "selected_article_read_performed": true,
+  "explicit_approval_phrase_executed_in_ag21b": false,
+  "article_generation_performed_in_ag21b": false,
+  "article_mutation_performed_in_ag21b": false,
+  "queue_mutation_performed_in_ag21b": false,
+  "active_admin_review_queue_record_created_in_ag21b": false,
+  "queue_index_mutation_performed_in_ag21b": false,
+  "admin_action_execution_performed_in_ag21b": false,
+  "editor_action_execution_performed_in_ag21b": false,
+  "real_credential_created_in_ag21b": false,
+  "hardcoded_password_created_in_repo_in_ag21b": false,
+  "password_hash_created_in_repo_in_ag21b": false,
+  "auth_activation_performed_in_ag21b": false,
+  "backend_activation_performed_in_ag21b": false,
+  "supabase_activation_performed_in_ag21b": false,
+  "database_write_performed_in_ag21b": false,
+  "github_token_created_or_exposed_in_ag21b": false,
+  "github_write_operation_performed_in_ag21b": false,
+  "active_action_handler_created_in_ag21b": false,
+  "api_endpoint_created_in_ag21b": false,
+  "public_visibility_switch_performed_in_ag21b": false,
+  "public_index_mutation_performed_in_ag21b": false,
+  "deployment_trigger_performed_in_ag21b": false,
+  "live_smoke_test_performed_in_ag21b": false,
+  "rollback_execution_performed_in_ag21b": false,
+  "public_publishing_operation_performed_in_ag21b": false
+}
