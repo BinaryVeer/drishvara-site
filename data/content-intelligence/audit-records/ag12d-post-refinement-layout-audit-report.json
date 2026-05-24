@@ -1,0 +1,97 @@
+{
+  "module_id": "AG12D",
+  "title": "Post-Refinement Layout Audit Report",
+  "status": "post_refinement_layout_audit_passed",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "article_hash_at_ag12d": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "pre_refinement_hash": "f2b7374f1c28ace44cd4526e91fcc8ea4733f98abdc1fa9e82aea8328fdcd87c",
+  "post_refinement_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "checks": [
+    {
+      "check_id": "AG12D-AUDIT-001",
+      "area": "article_hash_stability",
+      "status": "passed",
+      "note": "AG12D must not mutate the article."
+    },
+    {
+      "check_id": "AG12D-AUDIT-002",
+      "area": "original_governed_marker_preservation",
+      "status": "passed",
+      "note": "All original governed object markers must remain exactly once."
+    },
+    {
+      "check_id": "AG12D-AUDIT-003",
+      "area": "primary_visible_object_count",
+      "status": "passed",
+      "note": "Four primary objects should remain in the normal reading flow."
+    },
+    {
+      "check_id": "AG12D-AUDIT-004",
+      "area": "collapsed_pilot_object_count",
+      "status": "passed",
+      "note": "Three pilot objects should remain accessible inside collapsed details blocks."
+    },
+    {
+      "check_id": "AG12D-AUDIT-005",
+      "area": "treatment_validity",
+      "status": "passed",
+      "note": "Each object family should have the AG12C-planned treatment."
+    },
+    {
+      "check_id": "AG12D-AUDIT-006",
+      "area": "caption_credit_accessibility_presence",
+      "status": "passed",
+      "note": "Credits and caption/accessibility text should remain available."
+    },
+    {
+      "check_id": "AG12D-AUDIT-007",
+      "area": "rollback_readiness",
+      "status": "passed",
+      "note": "AG12C backup should remain valid and free from refinement markers."
+    },
+    {
+      "check_id": "AG12D-AUDIT-008",
+      "area": "forbidden_mutation_guards",
+      "status": "passed",
+      "note": "AG12D is audit only."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "production_readiness_assessment": {
+    "refined_layout_audit_passed": true,
+    "primary_visible_object_count": 4,
+    "collapsed_pilot_object_count": 3,
+    "object_complete_evidence_preserved": true,
+    "publish_ready": false,
+    "reason_publish_blocked": "AG12D is audit only. AG12Z closure must decide production-readiness status."
+  },
+  "post_refinement_layout_audit_only": true,
+  "post_refinement_hash_audited_in_ag12d": true,
+  "primary_collapsed_treatment_audited_in_ag12d": true,
+  "original_marker_preservation_audited_in_ag12d": true,
+  "caption_credit_accessibility_audited_in_ag12d": true,
+  "rollback_readiness_audited_in_ag12d": true,
+  "selected_article_read_performed": true,
+  "ready_for_ag12z": true,
+  "article_mutation_performed_in_ag12d": false,
+  "selected_article_file_write_performed_in_ag12d": false,
+  "object_generation_performed_in_ag12d": false,
+  "object_insertion_performed_in_ag12d": false,
+  "object_removal_performed_in_ag12d": false,
+  "image_generation_performed_in_ag12d": false,
+  "data_fetch_performed_in_ag12d": false,
+  "reference_url_change_performed_in_ag12d": false,
+  "homepage_mutation_performed_in_ag12d": false,
+  "css_file_mutation_performed_in_ag12d": false,
+  "js_file_mutation_performed_in_ag12d": false,
+  "production_jsonl_append_performed_in_ag12d": false,
+  "database_write_performed_in_ag12d": false,
+  "supabase_write_performed_in_ag12d": false,
+  "backend_auth_supabase_activation_performed_in_ag12d": false,
+  "public_publishing_operation_performed_in_ag12d": false
+}
