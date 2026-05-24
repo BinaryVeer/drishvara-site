@@ -1,0 +1,165 @@
+{
+  "module_id": "AG16F",
+  "title": "Non-active Public Filter Scaffold Audit Report",
+  "status": "non_active_public_filter_scaffold_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG16F-AUDIT-001",
+      "area": "ag16e_dependency",
+      "status": "passed",
+      "note": "AG16E review, apply, inventory, helper contract, guard, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG16F-AUDIT-002",
+      "area": "scaffold_file_presence",
+      "status": "passed",
+      "note": "All AG16E scaffold files must exist."
+    },
+    {
+      "check_id": "AG16F-AUDIT-003",
+      "area": "scaffold_outside_api",
+      "status": "passed",
+      "note": "Scaffold files must remain outside /api and no active public filter endpoint may exist."
+    },
+    {
+      "check_id": "AG16F-AUDIT-004",
+      "area": "helper_non_active_guard",
+      "status": "passed",
+      "note": "Helper must remain non-active and block visibility switch, public index update, publishing and article mutation."
+    },
+    {
+      "check_id": "AG16F-AUDIT-005",
+      "area": "helper_prohibited_runtime_text",
+      "status": "passed",
+      "note": "Helper must not import fs, access env, call fetch, use GitHub clients or write files."
+    },
+    {
+      "check_id": "AG16F-AUDIT-006",
+      "area": "record_template_defaults",
+      "status": "passed",
+      "note": "Record template must preserve non-public defaults."
+    },
+    {
+      "check_id": "AG16F-AUDIT-007",
+      "area": "record_template_runtime_guards",
+      "status": "passed",
+      "note": "Record template must block visibility switch, public index update and publishing."
+    },
+    {
+      "check_id": "AG16F-AUDIT-008",
+      "area": "fixture_safety",
+      "status": "passed",
+      "note": "Fixture must preserve non-public seed case and hypothetical-only public-pass case."
+    },
+    {
+      "check_id": "AG16F-AUDIT-009",
+      "area": "public_index_template_guard",
+      "status": "passed",
+      "note": "Public index exposure template must block all live public surface updates."
+    },
+    {
+      "check_id": "AG16F-AUDIT-010",
+      "area": "inventory_alignment",
+      "status": "passed",
+      "note": "AG16E inventory must confirm no endpoint, public index mutation, visibility switch or publishing."
+    },
+    {
+      "check_id": "AG16F-AUDIT-011",
+      "area": "helper_contract_alignment",
+      "status": "passed",
+      "note": "Helper contract must block active public exposure, visibility switch, index update and publishing."
+    },
+    {
+      "check_id": "AG16F-AUDIT-012",
+      "area": "guard_alignment",
+      "status": "passed",
+      "note": "AG16E guard must block visibility switch, public index update, publishing and article mutation."
+    },
+    {
+      "check_id": "AG16F-AUDIT-013",
+      "area": "ag16d_safety_inheritance",
+      "status": "passed",
+      "note": "AG16D safety controls must remain inherited."
+    },
+    {
+      "check_id": "AG16F-AUDIT-014",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG16F is audit-only and does not mutate scaffold files, articles, public visibility, public indexes or publishing state."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 14,
+    "passed": 14,
+    "failed": 0
+  },
+  "decision": {
+    "non_active_public_filter_scaffold_safe": true,
+    "active_public_filter_endpoint_present": false,
+    "public_visibility_switch_present": false,
+    "public_index_mutation_present": false,
+    "publishing_operation_present": false,
+    "ready_for_ag16z_closure": true
+  },
+  "file_records": [
+    {
+      "file": "internal-scaffolds/ag16e-non-active-public-filter/public-surface-filter.non-active.mjs",
+      "hash": "d79895c8739d4a6e6f2ccf9f1f062606cd3b2994878ff5857fe245782f691e59",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag16e-non-active-public-filter/public-filter-record.template.json",
+      "hash": "1059bf373581604ed1cda04aed97a69227cb659be37c88ea4ce36cb8df01e7e3",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag16e-non-active-public-filter/public-filter-fixture.seed-and-state-matrix.json",
+      "hash": "42396de78f5545dc64b1d772d6a652e4ac0123fb03683fcc41a63eb466251cff",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag16e-non-active-public-filter/public-index-exposure.template.json",
+      "hash": "f4a21d5fa50da1f9dbaeb77a184c2dbd4842ce5af4b1103678153ab910c5d737",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag16e-non-active-public-filter/README.md",
+      "hash": "c478b93770b75f9dbb2c1ef2812e19adecc191c7104ce9e31557a0c886bf4615",
+      "inside_api": false,
+      "exists": true
+    }
+  ],
+  "non_active_public_filter_scaffold_audit_only": true,
+  "non_active_public_filter_scaffold_audited_in_ag16f": true,
+  "non_active_public_filter_scaffold_closure_created_in_ag16f": true,
+  "public_filter_scaffold_safety_record_created_in_ag16f": true,
+  "ag16z_boundary_created_in_ag16f": true,
+  "scaffold_file_mutation_performed_in_ag16f": false,
+  "article_generation_performed_in_ag16f": false,
+  "article_mutation_performed_in_ag16f": false,
+  "queue_mutation_performed_in_ag16f": false,
+  "active_admin_review_queue_record_created_in_ag16f": false,
+  "queue_index_mutation_performed_in_ag16f": false,
+  "admin_action_execution_performed_in_ag16f": false,
+  "editor_action_execution_performed_in_ag16f": false,
+  "real_credential_created_in_ag16f": false,
+  "hardcoded_password_created_in_repo_in_ag16f": false,
+  "password_hash_created_in_repo_in_ag16f": false,
+  "auth_activation_performed_in_ag16f": false,
+  "backend_activation_performed_in_ag16f": false,
+  "supabase_activation_performed_in_ag16f": false,
+  "database_write_performed_in_ag16f": false,
+  "github_token_created_or_exposed_in_ag16f": false,
+  "github_write_operation_performed_in_ag16f": false,
+  "active_action_handler_created_in_ag16f": false,
+  "api_endpoint_created_in_ag16f": false,
+  "public_visibility_switch_performed_in_ag16f": false,
+  "public_index_mutation_performed_in_ag16f": false,
+  "public_publishing_operation_performed_in_ag16f": false,
+  "deployment_trigger_performed_in_ag16f": false
+}
