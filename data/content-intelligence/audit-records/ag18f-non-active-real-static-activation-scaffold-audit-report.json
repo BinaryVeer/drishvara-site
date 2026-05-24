@@ -1,0 +1,195 @@
+{
+  "module_id": "AG18F",
+  "title": "Non-active Real Static Activation Scaffold Audit Report",
+  "status": "non_active_real_static_activation_scaffold_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG18F-AUDIT-001",
+      "area": "ag18e_dependency",
+      "status": "passed",
+      "note": "AG18E review, apply, inventory, helper contract, guard, readiness and boundary are present."
+    },
+    {
+      "check_id": "AG18F-AUDIT-002",
+      "area": "scaffold_file_presence",
+      "status": "passed",
+      "note": "All AG18E scaffold files must exist."
+    },
+    {
+      "check_id": "AG18F-AUDIT-003",
+      "area": "scaffold_outside_api",
+      "status": "passed",
+      "note": "Scaffold files must remain outside /api and no active real static activation or publish endpoint may exist."
+    },
+    {
+      "check_id": "AG18F-AUDIT-004",
+      "area": "helper_non_active_guard",
+      "status": "passed",
+      "note": "Helper must remain non-active and block candidate apply, token, GitHub write, visibility, index, deployment, publishing and backend."
+    },
+    {
+      "check_id": "AG18F-AUDIT-005",
+      "area": "helper_prohibited_runtime_text",
+      "status": "passed",
+      "note": "Helper must not import fs, access env, call fetch, use GitHub clients, run child processes or write files."
+    },
+    {
+      "check_id": "AG18F-AUDIT-006",
+      "area": "candidate_apply_template_guards",
+      "status": "passed",
+      "note": "Candidate apply template must remain preview-only and not switch candidate flags."
+    },
+    {
+      "check_id": "AG18F-AUDIT-007",
+      "area": "public_index_delta_template_guards",
+      "status": "passed",
+      "note": "Public index delta template must not mutate public files or list real file changes."
+    },
+    {
+      "check_id": "AG18F-AUDIT-008",
+      "area": "github_write_payload_template_guards",
+      "status": "passed",
+      "note": "GitHub write payload template must not create, expose, wire or commit secrets and must not enable write."
+    },
+    {
+      "check_id": "AG18F-AUDIT-009",
+      "area": "rollback_template_guards",
+      "status": "passed",
+      "note": "Rollback template must remain preview-only and non-executable."
+    },
+    {
+      "check_id": "AG18F-AUDIT-010",
+      "area": "smoke_test_template_guards",
+      "status": "passed",
+      "note": "Smoke-test checklist must not trigger deployment, publish or execute checks."
+    },
+    {
+      "check_id": "AG18F-AUDIT-011",
+      "area": "inventory_alignment",
+      "status": "passed",
+      "note": "AG18E inventory must confirm no active endpoint, token path, write path, mutation path, deployment, publishing or backend activation."
+    },
+    {
+      "check_id": "AG18F-AUDIT-012",
+      "area": "helper_contract_alignment",
+      "status": "passed",
+      "note": "Helper contract must block all real static activation paths."
+    },
+    {
+      "check_id": "AG18F-AUDIT-013",
+      "area": "guard_alignment",
+      "status": "passed",
+      "note": "Guard record must block candidate apply, token, write, mutations, deployment, publishing, execution and backend activation."
+    },
+    {
+      "check_id": "AG18F-AUDIT-014",
+      "area": "ag18d_decision_safety_inheritance",
+      "status": "passed",
+      "note": "AG18D decision and safety must allow only non-active scaffold and block all real activation paths."
+    },
+    {
+      "check_id": "AG18F-AUDIT-015",
+      "area": "supabase_auth_defer_reminder",
+      "status": "passed",
+      "note": "Supabase/Auth/backend defer reminder must remain active."
+    },
+    {
+      "check_id": "AG18F-AUDIT-016",
+      "area": "forbidden_operations",
+      "status": "passed",
+      "note": "AG18F is audit-only and performs no article generation, mutation, credentials, GitHub write, visibility switch, public index mutation, deployment, publishing or Supabase/Auth/backend activation."
+    }
+  ],
+  "failed_checks": [],
+  "audit_summary": {
+    "total_checks": 16,
+    "passed": 16,
+    "failed": 0
+  },
+  "decision": {
+    "ag18e_scaffold_safe": true,
+    "active_endpoint_present": false,
+    "github_token_path_present": false,
+    "github_write_path_present": false,
+    "candidate_apply_path_present": false,
+    "article_mutation_path_present": false,
+    "queue_mutation_path_present": false,
+    "public_visibility_switch_present": false,
+    "public_index_mutation_present": false,
+    "deployment_trigger_present": false,
+    "publishing_operation_present": false,
+    "supabase_auth_backend_activation_present": false,
+    "ready_for_ag18z_closure": true
+  },
+  "file_records": [
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/real-static-activation-helper.non-active.mjs",
+      "hash": "47b114cc56065eb46471925854f938aa7475c3d5374d555f952faa728580b158",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/first-public-candidate-apply.template.json",
+      "hash": "1c6c25c1fb92af168014dd3368a2346a7ad0eb6e8b521aec0224e64a5763b174",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/public-index-delta-apply.template.json",
+      "hash": "05b231cca0f13a9ab05152aaf74e04b864989a94d66892126dccd6c7c9a1031f",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/github-write-payload.template.json",
+      "hash": "7f50b5575523d2936f37c42007060cf8d3fea8cd01c21efa1b2cf67ed38d0ee5",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/rollback-record.template.json",
+      "hash": "c9aff02dc3aabed4ebe89419a905690fcec2b553d93fd6fe80a3ac5fc2ca5ef7",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/smoke-test-checklist.template.json",
+      "hash": "6d82c555143b2ebc50b11e0608325ffb171e5276fcfa2dddd868f5e06daab05a",
+      "inside_api": false,
+      "exists": true
+    },
+    {
+      "file": "internal-scaffolds/ag18e-non-active-real-static-activation/README.md",
+      "hash": "61bf23265140a2fb727776392e3182ae93b35b9074b9a0be4dcc336c60348511",
+      "inside_api": false,
+      "exists": true
+    }
+  ],
+  "non_active_real_static_activation_scaffold_audit_only": true,
+  "ag18e_scaffold_audited_in_ag18f": true,
+  "scaffold_audit_closure_created_in_ag18f": true,
+  "real_static_activation_safety_record_created_in_ag18f": true,
+  "ag18z_boundary_created_in_ag18f": true,
+  "article_generation_performed_in_ag18f": false,
+  "article_mutation_performed_in_ag18f": false,
+  "queue_mutation_performed_in_ag18f": false,
+  "active_admin_review_queue_record_created_in_ag18f": false,
+  "queue_index_mutation_performed_in_ag18f": false,
+  "admin_action_execution_performed_in_ag18f": false,
+  "editor_action_execution_performed_in_ag18f": false,
+  "real_credential_created_in_ag18f": false,
+  "hardcoded_password_created_in_repo_in_ag18f": false,
+  "password_hash_created_in_repo_in_ag18f": false,
+  "auth_activation_performed_in_ag18f": false,
+  "backend_activation_performed_in_ag18f": false,
+  "supabase_activation_performed_in_ag18f": false,
+  "database_write_performed_in_ag18f": false,
+  "github_token_created_or_exposed_in_ag18f": false,
+  "github_write_operation_performed_in_ag18f": false,
+  "active_action_handler_created_in_ag18f": false,
+  "api_endpoint_created_in_ag18f": false,
+  "public_visibility_switch_performed_in_ag18f": false,
+  "public_index_mutation_performed_in_ag18f": false,
+  "deployment_trigger_performed_in_ag18f": false,
+  "public_publishing_operation_performed_in_ag18f": false
+}
