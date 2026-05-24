@@ -1,0 +1,99 @@
+{
+  "module_id": "AG19Z",
+  "title": "First Static Activation Planning Summary",
+  "status": "ag19_first_static_activation_planning_completed",
+  "selected_path": "hybrid_staged_path_static_first",
+  "static_github_controlled_first": true,
+  "supabase_auth_backend_deferred": true,
+  "supabase_auth_reminder_required_in_future": true,
+  "completed_stage_count": 6,
+  "completed_stages": [
+    {
+      "stage_id": "AG19A",
+      "title": "First Static Activation Pre-Apply Readiness Plan",
+      "result": "Defined checklist, candidate evidence, public filter evidence, exact file delta, rollback strategy, manual approval and GitHub no-secrets plan."
+    },
+    {
+      "stage_id": "AG19B",
+      "title": "Pre-Apply Readiness Audit",
+      "result": "Audited AG19A and approved only AG19C final public delta dry-run."
+    },
+    {
+      "stage_id": "AG19C",
+      "title": "Final Public Delta Dry-run",
+      "result": "Dry-ran final public delta, public surface previews, rollback and smoke-test preview without mutation."
+    },
+    {
+      "stage_id": "AG19D",
+      "title": "Final Public Delta Dry-run Audit",
+      "result": "Audited AG19C and approved only AG19E approval package."
+    },
+    {
+      "stage_id": "AG19E",
+      "title": "First Static Activation Approval Package",
+      "result": "Created approval package and explicit approval phrase record without executing approval."
+    },
+    {
+      "stage_id": "AG19F",
+      "title": "First Static Activation Approval Package Audit",
+      "result": "Audited AG19E with zero failed checks and approved AG19Z closure only."
+    }
+  ],
+  "seed_candidate": {
+    "article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+    "article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+    "hash_verified": true
+  },
+  "explicit_approval_phrase_required_later": "Proceed with first controlled static apply",
+  "final_ag19_state": {
+    "pre_apply_readiness_planned": true,
+    "pre_apply_readiness_audited": true,
+    "final_public_delta_dry_run_completed": true,
+    "final_public_delta_dry_run_audited": true,
+    "approval_package_created": true,
+    "approval_package_audited": true,
+    "ready_for_ag20_controlled_static_apply_readiness": true,
+    "explicit_user_approval_executed": false,
+    "candidate_apply_enabled": false,
+    "github_token_created": false,
+    "github_token_exposed": false,
+    "github_token_wired": false,
+    "github_write_enabled": false,
+    "article_mutation_enabled": false,
+    "queue_mutation_enabled": false,
+    "admin_editor_execution_enabled": false,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "deployment_trigger_enabled": false,
+    "publishing_enabled": false,
+    "supabase_auth_backend_enabled": false
+  },
+  "first_static_activation_planning_closure_only": true,
+  "ag19_chain_closure_created_in_ag19z": true,
+  "first_static_activation_summary_created_in_ag19z": true,
+  "controlled_static_apply_blocked_register_created_in_ag19z": true,
+  "ag20a_boundary_created_in_ag19z": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag19z": false,
+  "article_mutation_performed_in_ag19z": false,
+  "queue_mutation_performed_in_ag19z": false,
+  "active_admin_review_queue_record_created_in_ag19z": false,
+  "queue_index_mutation_performed_in_ag19z": false,
+  "admin_action_execution_performed_in_ag19z": false,
+  "editor_action_execution_performed_in_ag19z": false,
+  "real_credential_created_in_ag19z": false,
+  "hardcoded_password_created_in_repo_in_ag19z": false,
+  "password_hash_created_in_repo_in_ag19z": false,
+  "auth_activation_performed_in_ag19z": false,
+  "backend_activation_performed_in_ag19z": false,
+  "supabase_activation_performed_in_ag19z": false,
+  "database_write_performed_in_ag19z": false,
+  "github_token_created_or_exposed_in_ag19z": false,
+  "github_write_operation_performed_in_ag19z": false,
+  "active_action_handler_created_in_ag19z": false,
+  "api_endpoint_created_in_ag19z": false,
+  "public_visibility_switch_performed_in_ag19z": false,
+  "public_index_mutation_performed_in_ag19z": false,
+  "deployment_trigger_performed_in_ag19z": false,
+  "public_publishing_operation_performed_in_ag19z": false
+}
