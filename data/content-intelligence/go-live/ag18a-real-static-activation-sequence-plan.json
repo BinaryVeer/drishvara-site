@@ -1,0 +1,104 @@
+{
+  "module_id": "AG18A",
+  "title": "Real Static Activation Sequence Plan",
+  "status": "real_static_activation_sequence_planned_no_execution",
+  "selected_path": "hybrid_staged_path_static_first",
+  "purpose": "Plan the first real static activation sequence without executing any write, visibility switch, public index mutation, deployment or publishing.",
+  "sequence": [
+    {
+      "order": 1,
+      "step_id": "confirm_candidate",
+      "description": "Confirm first public candidate from Admin Review Queue and quality evidence records.",
+      "execution_now": false
+    },
+    {
+      "order": 2,
+      "step_id": "confirm_admin_approval",
+      "description": "Verify Admin approval decision and evidence references before any public exposure.",
+      "execution_now": false
+    },
+    {
+      "order": 3,
+      "step_id": "confirm_public_filter",
+      "description": "Verify public_visibility, publish_approved, public_index_allowed, hash integrity, quality and preview controls.",
+      "execution_now": false
+    },
+    {
+      "order": 4,
+      "step_id": "prepare_file_delta_review",
+      "description": "Prepare exact intended file delta for public indexes and reading surfaces, but do not mutate files.",
+      "execution_now": false
+    },
+    {
+      "order": 5,
+      "step_id": "confirm_secret_governance",
+      "description": "Confirm future GitHub token/secret governance without creating, exposing or wiring secrets.",
+      "execution_now": false
+    },
+    {
+      "order": 6,
+      "step_id": "confirm_rollback_path",
+      "description": "Confirm rollback commit/path and pre-write hash evidence.",
+      "execution_now": false
+    },
+    {
+      "order": 7,
+      "step_id": "confirm_manual_approval_gate",
+      "description": "Require explicit user approval before any later real apply stage.",
+      "execution_now": false
+    },
+    {
+      "order": 8,
+      "step_id": "future_controlled_apply",
+      "description": "Future stage may apply exact approved delta only after AG18/AG19 audit closure and explicit approval.",
+      "execution_now": false
+    },
+    {
+      "order": 9,
+      "step_id": "future_deployment_smoke_test",
+      "description": "Future stage may trigger deployment and smoke-test only after controlled apply and audit.",
+      "execution_now": false
+    }
+  ],
+  "execution_state_now": {
+    "candidate_confirmed_for_real_publish": false,
+    "file_delta_created": false,
+    "github_secret_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "article_published": false
+  },
+  "controlled_real_static_activation_planning_only": true,
+  "real_static_activation_sequence_plan_created_in_ag18a": true,
+  "first_public_candidate_selection_plan_created_in_ag18a": true,
+  "github_secret_governance_no_secrets_plan_created_in_ag18a": true,
+  "public_index_delta_review_plan_created_in_ag18a": true,
+  "rollback_smoke_test_plan_created_in_ag18a": true,
+  "real_static_activation_blocker_register_created_in_ag18a": true,
+  "ag18b_boundary_created_in_ag18a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag18a": false,
+  "article_mutation_performed_in_ag18a": false,
+  "queue_mutation_performed_in_ag18a": false,
+  "active_admin_review_queue_record_created_in_ag18a": false,
+  "queue_index_mutation_performed_in_ag18a": false,
+  "admin_action_execution_performed_in_ag18a": false,
+  "editor_action_execution_performed_in_ag18a": false,
+  "real_credential_created_in_ag18a": false,
+  "hardcoded_password_created_in_repo_in_ag18a": false,
+  "password_hash_created_in_repo_in_ag18a": false,
+  "auth_activation_performed_in_ag18a": false,
+  "backend_activation_performed_in_ag18a": false,
+  "supabase_activation_performed_in_ag18a": false,
+  "database_write_performed_in_ag18a": false,
+  "github_token_created_or_exposed_in_ag18a": false,
+  "github_write_operation_performed_in_ag18a": false,
+  "active_action_handler_created_in_ag18a": false,
+  "api_endpoint_created_in_ag18a": false,
+  "public_visibility_switch_performed_in_ag18a": false,
+  "public_index_mutation_performed_in_ag18a": false,
+  "deployment_trigger_performed_in_ag18a": false,
+  "public_publishing_operation_performed_in_ag18a": false
+}

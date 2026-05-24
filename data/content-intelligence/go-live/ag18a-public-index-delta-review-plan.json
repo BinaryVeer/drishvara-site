@@ -1,0 +1,98 @@
+{
+  "module_id": "AG18A",
+  "title": "Public Index Delta Review Plan",
+  "status": "public_index_delta_review_planned_no_mutation",
+  "purpose": "Define how intended public surface/file deltas will be reviewed before any future static apply.",
+  "future_delta_targets": [
+    {
+      "target_id": "featured_reads_index",
+      "description": "Featured Reads listing or index entry for the approved article.",
+      "mutation_now": false
+    },
+    {
+      "target_id": "category_listing",
+      "description": "Category/topic listing entry where article belongs.",
+      "mutation_now": false
+    },
+    {
+      "target_id": "homepage_card",
+      "description": "Homepage reading surface card only if the article is selected for homepage exposure.",
+      "mutation_now": false
+    },
+    {
+      "target_id": "episode_index",
+      "description": "Future weekly/episodic index if article belongs to an episode series.",
+      "mutation_now": false
+    },
+    {
+      "target_id": "sitemap_feed_search",
+      "description": "Sitemap/feed/search index only if AG19/AG20 approve it.",
+      "mutation_now": false
+    }
+  ],
+  "review_requirements_before_future_mutation": [
+    "Before/after diff must be generated.",
+    "Only approved files may appear in delta.",
+    "No unrelated public file may change.",
+    "No hidden credential or token may appear in delta.",
+    "Article URL/slug must be stable.",
+    "Previous/next/related links must be safe if episode flow applies.",
+    "Mobile layout impact must be reviewed.",
+    "Rollback must be defined."
+  ],
+  "mutation_state_now": {
+    "public_index_delta_generated": false,
+    "public_index_mutated": false,
+    "featured_reads_mutated": false,
+    "homepage_mutated": false,
+    "sitemap_feed_mutated": false
+  },
+  "inherited_public_controls": {
+    "public_visibility_model_defined": true,
+    "publish_control_model_defined": true,
+    "public_surface_filter_contract_defined": true,
+    "public_surface_exclusion_contract_defined": true,
+    "schema_dry_run_passed": true,
+    "dry_run_audit_passed": true,
+    "non_active_public_filter_scaffold_created": true,
+    "non_active_public_filter_scaffold_audited": true,
+    "public_exposure_requires_public_visibility_true": true,
+    "public_exposure_requires_publish_approved_true": true,
+    "public_exposure_requires_public_index_allowed_true": true,
+    "public_exposure_requires_hash_integrity": true,
+    "public_visibility_switch_enabled": false,
+    "public_index_mutation_enabled": false,
+    "publishing_enabled": false
+  },
+  "controlled_real_static_activation_planning_only": true,
+  "real_static_activation_sequence_plan_created_in_ag18a": true,
+  "first_public_candidate_selection_plan_created_in_ag18a": true,
+  "github_secret_governance_no_secrets_plan_created_in_ag18a": true,
+  "public_index_delta_review_plan_created_in_ag18a": true,
+  "rollback_smoke_test_plan_created_in_ag18a": true,
+  "real_static_activation_blocker_register_created_in_ag18a": true,
+  "ag18b_boundary_created_in_ag18a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag18a": false,
+  "article_mutation_performed_in_ag18a": false,
+  "queue_mutation_performed_in_ag18a": false,
+  "active_admin_review_queue_record_created_in_ag18a": false,
+  "queue_index_mutation_performed_in_ag18a": false,
+  "admin_action_execution_performed_in_ag18a": false,
+  "editor_action_execution_performed_in_ag18a": false,
+  "real_credential_created_in_ag18a": false,
+  "hardcoded_password_created_in_repo_in_ag18a": false,
+  "password_hash_created_in_repo_in_ag18a": false,
+  "auth_activation_performed_in_ag18a": false,
+  "backend_activation_performed_in_ag18a": false,
+  "supabase_activation_performed_in_ag18a": false,
+  "database_write_performed_in_ag18a": false,
+  "github_token_created_or_exposed_in_ag18a": false,
+  "github_write_operation_performed_in_ag18a": false,
+  "active_action_handler_created_in_ag18a": false,
+  "api_endpoint_created_in_ag18a": false,
+  "public_visibility_switch_performed_in_ag18a": false,
+  "public_index_mutation_performed_in_ag18a": false,
+  "deployment_trigger_performed_in_ag18a": false,
+  "public_publishing_operation_performed_in_ag18a": false
+}
