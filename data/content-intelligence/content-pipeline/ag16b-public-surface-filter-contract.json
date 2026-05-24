@@ -1,0 +1,70 @@
+{
+  "module_id": "AG16B",
+  "title": "Public Surface Filter Contract",
+  "status": "public_surface_filter_contract_defined",
+  "purpose": "Define the exact inclusion and exclusion contract for Featured Reads and other public article surfaces.",
+  "public_surfaces_covered": [
+    "Featured Reads listing",
+    "Category article listing",
+    "Homepage article cards",
+    "Public article sitemap if activated later",
+    "Public article feed/search if activated later"
+  ],
+  "include_contract": {
+    "include_article_only_if_all_true": [
+      "record.public_visibility === true",
+      "record.publish_approved === true",
+      "record.public_index_allowed === true",
+      "record.featured_reads_allowed === true for Featured Reads surfaces",
+      "record.status in ['public_published', 'published_closed']",
+      "record.article_path exists",
+      "record.article_hash === record.approved_hash",
+      "record.quality_evidence_status in ['complete', 'not_applicable']",
+      "record.preview_status === 'passed'",
+      "record.hash_integrity_status === 'matched'"
+    ]
+  },
+  "exclude_contract": {
+    "exclude_article_if_any_true": [
+      "record.public_visibility !== true",
+      "record.publish_approved !== true",
+      "record.public_index_allowed !== true",
+      "record.status in ['internal_generated', 'ready_for_admin_review', 'returned_for_correction', 'archived_internal']",
+      "record.quality_evidence_status in ['missing', 'partial']",
+      "record.preview_status in ['missing', 'present']",
+      "record.hash_integrity_status in ['missing', 'mismatch']",
+      "record.article_hash !== record.approved_hash"
+    ]
+  },
+  "source_doctrine": "data/content-intelligence/content-pipeline/ag16a-featured-reads-public-filter-plan.json",
+  "public_visibility_publish_filter_schema_plan_only": true,
+  "public_visibility_field_schema_plan_created_in_ag16b": true,
+  "publish_control_field_schema_plan_created_in_ag16b": true,
+  "public_surface_filter_contract_created_in_ag16b": true,
+  "public_surface_exclusion_contract_created_in_ag16b": true,
+  "validation_plan_created_in_ag16b": true,
+  "ag16c_boundary_created_in_ag16b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16b": false,
+  "article_mutation_performed_in_ag16b": false,
+  "queue_mutation_performed_in_ag16b": false,
+  "active_admin_review_queue_record_created_in_ag16b": false,
+  "queue_index_mutation_performed_in_ag16b": false,
+  "admin_action_execution_performed_in_ag16b": false,
+  "editor_action_execution_performed_in_ag16b": false,
+  "real_credential_created_in_ag16b": false,
+  "hardcoded_password_created_in_repo_in_ag16b": false,
+  "password_hash_created_in_repo_in_ag16b": false,
+  "auth_activation_performed_in_ag16b": false,
+  "backend_activation_performed_in_ag16b": false,
+  "supabase_activation_performed_in_ag16b": false,
+  "database_write_performed_in_ag16b": false,
+  "github_token_created_or_exposed_in_ag16b": false,
+  "github_write_operation_performed_in_ag16b": false,
+  "active_action_handler_created_in_ag16b": false,
+  "api_endpoint_created_in_ag16b": false,
+  "public_visibility_switch_performed_in_ag16b": false,
+  "public_index_mutation_performed_in_ag16b": false,
+  "public_publishing_operation_performed_in_ag16b": false,
+  "deployment_trigger_performed_in_ag16b": false
+}

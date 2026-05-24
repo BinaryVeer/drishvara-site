@@ -1,0 +1,113 @@
+{
+  "module_id": "AG16B",
+  "title": "Public Visibility Field Schema Plan",
+  "status": "public_visibility_field_schema_plan_defined",
+  "purpose": "Define the minimum fields required to evaluate whether an article may appear on public Drishvara surfaces.",
+  "required_fields": [
+    {
+      "field": "article_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "field": "article_path",
+      "type": "string",
+      "required": true
+    },
+    {
+      "field": "article_hash",
+      "type": "sha256",
+      "required": true
+    },
+    {
+      "field": "status",
+      "type": "enum",
+      "required": true,
+      "allowed_values": [
+        "internal_generated",
+        "ready_for_admin_review",
+        "returned_for_correction",
+        "archived_internal",
+        "publish_approved_pending_exposure",
+        "public_published",
+        "published_closed"
+      ]
+    },
+    {
+      "field": "public_visibility",
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    {
+      "field": "publish_approved",
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    {
+      "field": "public_index_allowed",
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    {
+      "field": "featured_reads_allowed",
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    {
+      "field": "approved_hash",
+      "type": "sha256_or_null",
+      "required": true,
+      "default": null
+    },
+    {
+      "field": "visibility_decision_record",
+      "type": "path_or_null",
+      "required": true,
+      "default": null
+    }
+  ],
+  "invariant_rules": [
+    "public_visibility defaults to false.",
+    "publish_approved defaults to false.",
+    "public_index_allowed defaults to false.",
+    "featured_reads_allowed defaults to false.",
+    "public_index_allowed can be true only when public_visibility=true and publish_approved=true.",
+    "featured_reads_allowed can be true only when public_visibility=true and publish_approved=true.",
+    "approved_hash must match article_hash before public exposure."
+  ],
+  "source_doctrine": "data/content-intelligence/content-pipeline/ag16a-public-visibility-state-model.json",
+  "public_visibility_publish_filter_schema_plan_only": true,
+  "public_visibility_field_schema_plan_created_in_ag16b": true,
+  "publish_control_field_schema_plan_created_in_ag16b": true,
+  "public_surface_filter_contract_created_in_ag16b": true,
+  "public_surface_exclusion_contract_created_in_ag16b": true,
+  "validation_plan_created_in_ag16b": true,
+  "ag16c_boundary_created_in_ag16b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16b": false,
+  "article_mutation_performed_in_ag16b": false,
+  "queue_mutation_performed_in_ag16b": false,
+  "active_admin_review_queue_record_created_in_ag16b": false,
+  "queue_index_mutation_performed_in_ag16b": false,
+  "admin_action_execution_performed_in_ag16b": false,
+  "editor_action_execution_performed_in_ag16b": false,
+  "real_credential_created_in_ag16b": false,
+  "hardcoded_password_created_in_repo_in_ag16b": false,
+  "password_hash_created_in_repo_in_ag16b": false,
+  "auth_activation_performed_in_ag16b": false,
+  "backend_activation_performed_in_ag16b": false,
+  "supabase_activation_performed_in_ag16b": false,
+  "database_write_performed_in_ag16b": false,
+  "github_token_created_or_exposed_in_ag16b": false,
+  "github_write_operation_performed_in_ag16b": false,
+  "active_action_handler_created_in_ag16b": false,
+  "api_endpoint_created_in_ag16b": false,
+  "public_visibility_switch_performed_in_ag16b": false,
+  "public_index_mutation_performed_in_ag16b": false,
+  "public_publishing_operation_performed_in_ag16b": false,
+  "deployment_trigger_performed_in_ag16b": false
+}

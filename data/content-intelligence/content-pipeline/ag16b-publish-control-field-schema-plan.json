@@ -1,0 +1,121 @@
+{
+  "module_id": "AG16B",
+  "title": "Publish-Control Field Schema Plan",
+  "status": "publish_control_field_schema_plan_defined",
+  "purpose": "Define the minimum fields required to evaluate publish approval before public exposure.",
+  "required_fields": [
+    {
+      "field": "admin_decision_status",
+      "type": "enum",
+      "required": true,
+      "allowed_values": [
+        "pending_admin_review",
+        "returned_for_correction",
+        "archived",
+        "publish",
+        "publish_and_close"
+      ]
+    },
+    {
+      "field": "admin_decision_by",
+      "type": "string_or_null",
+      "required": true,
+      "default": null
+    },
+    {
+      "field": "admin_decision_at",
+      "type": "iso_timestamp_or_null",
+      "required": true,
+      "default": null
+    },
+    {
+      "field": "quality_evidence_status",
+      "type": "enum",
+      "required": true,
+      "allowed_values": [
+        "missing",
+        "partial",
+        "complete",
+        "not_applicable"
+      ]
+    },
+    {
+      "field": "preview_status",
+      "type": "enum",
+      "required": true,
+      "allowed_values": [
+        "missing",
+        "present",
+        "passed"
+      ]
+    },
+    {
+      "field": "hash_integrity_status",
+      "type": "enum",
+      "required": true,
+      "allowed_values": [
+        "missing",
+        "mismatch",
+        "matched"
+      ]
+    },
+    {
+      "field": "publish_approved",
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    {
+      "field": "publish_execution_status",
+      "type": "enum",
+      "required": true,
+      "default": "not_executed",
+      "allowed_values": [
+        "not_executed",
+        "blocked",
+        "ready_for_later_execution",
+        "executed"
+      ]
+    }
+  ],
+  "publish_approval_rule": {
+    "publish_approved_can_be_true_only_if_all_true": [
+      "admin_decision_status in ['publish', 'publish_and_close']",
+      "quality_evidence_status in ['complete', 'not_applicable']",
+      "preview_status === 'passed'",
+      "hash_integrity_status === 'matched'"
+    ],
+    "public_visibility_still_requires_separate_switch": true
+  },
+  "source_doctrine": "data/content-intelligence/content-pipeline/ag16a-publish-control-state-model.json",
+  "public_visibility_publish_filter_schema_plan_only": true,
+  "public_visibility_field_schema_plan_created_in_ag16b": true,
+  "publish_control_field_schema_plan_created_in_ag16b": true,
+  "public_surface_filter_contract_created_in_ag16b": true,
+  "public_surface_exclusion_contract_created_in_ag16b": true,
+  "validation_plan_created_in_ag16b": true,
+  "ag16c_boundary_created_in_ag16b": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag16b": false,
+  "article_mutation_performed_in_ag16b": false,
+  "queue_mutation_performed_in_ag16b": false,
+  "active_admin_review_queue_record_created_in_ag16b": false,
+  "queue_index_mutation_performed_in_ag16b": false,
+  "admin_action_execution_performed_in_ag16b": false,
+  "editor_action_execution_performed_in_ag16b": false,
+  "real_credential_created_in_ag16b": false,
+  "hardcoded_password_created_in_repo_in_ag16b": false,
+  "password_hash_created_in_repo_in_ag16b": false,
+  "auth_activation_performed_in_ag16b": false,
+  "backend_activation_performed_in_ag16b": false,
+  "supabase_activation_performed_in_ag16b": false,
+  "database_write_performed_in_ag16b": false,
+  "github_token_created_or_exposed_in_ag16b": false,
+  "github_write_operation_performed_in_ag16b": false,
+  "active_action_handler_created_in_ag16b": false,
+  "api_endpoint_created_in_ag16b": false,
+  "public_visibility_switch_performed_in_ag16b": false,
+  "public_index_mutation_performed_in_ag16b": false,
+  "public_publishing_operation_performed_in_ag16b": false,
+  "deployment_trigger_performed_in_ag16b": false
+}
