@@ -1,0 +1,84 @@
+{
+  "module_id": "AG19A",
+  "title": "Exact File Delta Pre-Apply Plan",
+  "status": "exact_file_delta_pre_apply_planned_no_mutation",
+  "purpose": "Define the exact public surface files that must be reviewed before future first static apply.",
+  "candidate_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "candidate_article_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "proposed_future_delta_targets": [
+    {
+      "target_id": "featured_reads_index",
+      "future_action": "Add article card/listing only after AG19/AG20 approval.",
+      "exact_file_selected_now": false,
+      "mutation_now": false
+    },
+    {
+      "target_id": "category_listing",
+      "future_action": "Add article to relevant category listing only after approval.",
+      "exact_file_selected_now": false,
+      "mutation_now": false
+    },
+    {
+      "target_id": "homepage_card",
+      "future_action": "Add homepage card only if separately approved.",
+      "exact_file_selected_now": false,
+      "mutation_now": false
+    },
+    {
+      "target_id": "sitemap_feed_search",
+      "future_action": "Update sitemap/feed/search only if approved in later stage.",
+      "exact_file_selected_now": false,
+      "mutation_now": false
+    }
+  ],
+  "required_delta_review_before_future_apply": [
+    "Before/after diff.",
+    "Approved file list only.",
+    "No unrelated file mutation.",
+    "No credential or secret exposure.",
+    "No unapproved homepage exposure.",
+    "Rollback file delta prepared."
+  ],
+  "mutation_state_now": {
+    "exact_file_delta_generated": false,
+    "featured_reads_mutated": false,
+    "category_listing_mutated": false,
+    "homepage_mutated": false,
+    "sitemap_feed_search_mutated": false,
+    "git_write_performed": false
+  },
+  "inherited_file_delta_dry_run": "data/content-intelligence/go-live/ag18c-intended-file-delta-dry-run.json",
+  "first_static_activation_pre_apply_readiness_plan_only": true,
+  "pre_apply_checklist_plan_created_in_ag19a": true,
+  "candidate_evidence_requirement_plan_created_in_ag19a": true,
+  "final_public_filter_evidence_plan_created_in_ag19a": true,
+  "exact_file_delta_pre_apply_plan_created_in_ag19a": true,
+  "rollback_branch_commit_strategy_plan_created_in_ag19a": true,
+  "manual_approval_gate_plan_created_in_ag19a": true,
+  "github_secret_storage_no_secrets_plan_created_in_ag19a": true,
+  "blocker_register_created_in_ag19a": true,
+  "ag19b_boundary_created_in_ag19a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag19a": false,
+  "article_mutation_performed_in_ag19a": false,
+  "queue_mutation_performed_in_ag19a": false,
+  "active_admin_review_queue_record_created_in_ag19a": false,
+  "queue_index_mutation_performed_in_ag19a": false,
+  "admin_action_execution_performed_in_ag19a": false,
+  "editor_action_execution_performed_in_ag19a": false,
+  "real_credential_created_in_ag19a": false,
+  "hardcoded_password_created_in_repo_in_ag19a": false,
+  "password_hash_created_in_repo_in_ag19a": false,
+  "auth_activation_performed_in_ag19a": false,
+  "backend_activation_performed_in_ag19a": false,
+  "supabase_activation_performed_in_ag19a": false,
+  "database_write_performed_in_ag19a": false,
+  "github_token_created_or_exposed_in_ag19a": false,
+  "github_write_operation_performed_in_ag19a": false,
+  "active_action_handler_created_in_ag19a": false,
+  "api_endpoint_created_in_ag19a": false,
+  "public_visibility_switch_performed_in_ag19a": false,
+  "public_index_mutation_performed_in_ag19a": false,
+  "deployment_trigger_performed_in_ag19a": false,
+  "public_publishing_operation_performed_in_ag19a": false
+}

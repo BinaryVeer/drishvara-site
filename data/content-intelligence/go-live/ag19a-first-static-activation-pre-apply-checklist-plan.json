@@ -1,0 +1,96 @@
+{
+  "module_id": "AG19A",
+  "title": "First Static Activation Pre-Apply Checklist Plan",
+  "status": "first_static_activation_pre_apply_checklist_planned_no_execution",
+  "purpose": "Define exact checklist before any future first static activation apply.",
+  "checklist_items": [
+    {
+      "item_id": "candidate_confirmed",
+      "requirement": "Confirm the first candidate article path and hash.",
+      "completed_now": false
+    },
+    {
+      "item_id": "admin_approval_evidence",
+      "requirement": "Confirm Admin approval evidence before any future apply.",
+      "completed_now": false
+    },
+    {
+      "item_id": "quality_evidence",
+      "requirement": "Confirm quality, reference, image credit and layout evidence.",
+      "completed_now": false
+    },
+    {
+      "item_id": "public_filter_evidence",
+      "requirement": "Confirm public_visibility, publish_approved, public_index_allowed and approved hash evidence.",
+      "completed_now": false
+    },
+    {
+      "item_id": "exact_file_delta",
+      "requirement": "Confirm exact files proposed for future mutation.",
+      "completed_now": false
+    },
+    {
+      "item_id": "secret_storage",
+      "requirement": "Confirm GitHub token storage governance without creating secrets.",
+      "completed_now": false
+    },
+    {
+      "item_id": "rollback_strategy",
+      "requirement": "Confirm branch, commit hash and rollback path.",
+      "completed_now": false
+    },
+    {
+      "item_id": "manual_approval",
+      "requirement": "Obtain explicit manual approval before any real apply.",
+      "completed_now": false
+    },
+    {
+      "item_id": "smoke_test_plan",
+      "requirement": "Confirm post-deploy smoke-test checklist.",
+      "completed_now": false
+    }
+  ],
+  "execution_state_now": {
+    "pre_apply_completed": false,
+    "candidate_apply_executed": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "published": false
+  },
+  "first_static_activation_pre_apply_readiness_plan_only": true,
+  "pre_apply_checklist_plan_created_in_ag19a": true,
+  "candidate_evidence_requirement_plan_created_in_ag19a": true,
+  "final_public_filter_evidence_plan_created_in_ag19a": true,
+  "exact_file_delta_pre_apply_plan_created_in_ag19a": true,
+  "rollback_branch_commit_strategy_plan_created_in_ag19a": true,
+  "manual_approval_gate_plan_created_in_ag19a": true,
+  "github_secret_storage_no_secrets_plan_created_in_ag19a": true,
+  "blocker_register_created_in_ag19a": true,
+  "ag19b_boundary_created_in_ag19a": true,
+  "selected_article_read_performed": true,
+  "article_generation_performed_in_ag19a": false,
+  "article_mutation_performed_in_ag19a": false,
+  "queue_mutation_performed_in_ag19a": false,
+  "active_admin_review_queue_record_created_in_ag19a": false,
+  "queue_index_mutation_performed_in_ag19a": false,
+  "admin_action_execution_performed_in_ag19a": false,
+  "editor_action_execution_performed_in_ag19a": false,
+  "real_credential_created_in_ag19a": false,
+  "hardcoded_password_created_in_repo_in_ag19a": false,
+  "password_hash_created_in_repo_in_ag19a": false,
+  "auth_activation_performed_in_ag19a": false,
+  "backend_activation_performed_in_ag19a": false,
+  "supabase_activation_performed_in_ag19a": false,
+  "database_write_performed_in_ag19a": false,
+  "github_token_created_or_exposed_in_ag19a": false,
+  "github_write_operation_performed_in_ag19a": false,
+  "active_action_handler_created_in_ag19a": false,
+  "api_endpoint_created_in_ag19a": false,
+  "public_visibility_switch_performed_in_ag19a": false,
+  "public_index_mutation_performed_in_ag19a": false,
+  "deployment_trigger_performed_in_ag19a": false,
+  "public_publishing_operation_performed_in_ag19a": false
+}
