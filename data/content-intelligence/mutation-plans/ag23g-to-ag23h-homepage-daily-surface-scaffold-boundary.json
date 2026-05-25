@@ -1,0 +1,27 @@
+{
+  "module_id": "AG23G",
+  "title": "AG23G to AG23H Homepage Daily Surface Scaffold Boundary",
+  "status": "ag23h_boundary_created_not_started",
+  "next_stage_id": "AG23H",
+  "next_stage_title": "Homepage Daily Surface Scaffold",
+  "allowed_scope": [
+    "Create non-active homepage daily surface scaffold.",
+    "Create templates for route, First Light signal and signal score.",
+    "Keep non-live and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No live feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

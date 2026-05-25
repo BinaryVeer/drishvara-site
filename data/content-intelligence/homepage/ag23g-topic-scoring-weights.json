@@ -1,0 +1,53 @@
+{
+  "module_id": "AG23G",
+  "title": "Topic Scoring Weights",
+  "status": "topic_scoring_weights_created_no_runtime_scoring",
+  "weights": [
+    {
+      "field": "public_relevance",
+      "weight": 5
+    },
+    {
+      "field": "freshness",
+      "weight": 4
+    },
+    {
+      "field": "drishvara_fit",
+      "weight": 5
+    },
+    {
+      "field": "reference_availability",
+      "weight": 5
+    },
+    {
+      "field": "series_potential",
+      "weight": 4
+    },
+    {
+      "field": "visual_object_potential",
+      "weight": 3
+    },
+    {
+      "field": "sensitivity_risk",
+      "weight": -5
+    },
+    {
+      "field": "repetition_risk",
+      "weight": -3
+    }
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

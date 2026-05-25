@@ -1,0 +1,27 @@
+{
+  "module_id": "AG23G",
+  "title": "Topic Ranking Decision Rules",
+  "status": "topic_ranking_rules_created_no_runtime_scoring",
+  "rules": [
+    "Source verification status must not be reject.",
+    "Strong scores require reference availability and Drishvara fit.",
+    "Series candidates require series potential and educational depth.",
+    "High sensitivity risk requires hold or additional review.",
+    "Homepage First Light-only signals may remain useful without becoming articles.",
+    "No topic is generated or published by scoring alone."
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

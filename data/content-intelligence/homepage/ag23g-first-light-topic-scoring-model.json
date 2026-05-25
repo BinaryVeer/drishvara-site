@@ -1,0 +1,28 @@
+{
+  "module_id": "AG23G",
+  "title": "First Light Topic Scoring Model",
+  "status": "first_light_topic_scoring_model_created_ready_for_ag23h",
+  "purpose": "Define non-runtime topic scoring for First Light signals before homepage scaffold planning.",
+  "scoring_formula": "positive_score_total_minus_risk_penalties",
+  "score_fields_file": "data/content-intelligence/homepage/ag23g-topic-score-fields.json",
+  "scoring_weights_file": "data/content-intelligence/homepage/ag23g-topic-scoring-weights.json",
+  "thresholds_file": "data/content-intelligence/homepage/ag23g-topic-score-thresholds.json",
+  "decision_rules_file": "data/content-intelligence/homepage/ag23g-topic-ranking-decision-rules.json",
+  "future_output": "ranked_signal_candidates_for_homepage_daily_surface_scaffold",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

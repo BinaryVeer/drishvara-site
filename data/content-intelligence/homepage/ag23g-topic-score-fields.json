@@ -1,0 +1,61 @@
+{
+  "module_id": "AG23G",
+  "title": "Topic Score Fields",
+  "status": "topic_score_fields_created_no_runtime_scoring",
+  "fields": [
+    {
+      "field": "public_relevance",
+      "score_range": "0_to_5",
+      "direction": "positive"
+    },
+    {
+      "field": "freshness",
+      "score_range": "0_to_5",
+      "direction": "positive"
+    },
+    {
+      "field": "drishvara_fit",
+      "score_range": "0_to_5",
+      "direction": "positive"
+    },
+    {
+      "field": "reference_availability",
+      "score_range": "0_to_5",
+      "direction": "positive"
+    },
+    {
+      "field": "series_potential",
+      "score_range": "0_to_5",
+      "direction": "positive"
+    },
+    {
+      "field": "visual_object_potential",
+      "score_range": "0_to_5",
+      "direction": "positive"
+    },
+    {
+      "field": "sensitivity_risk",
+      "score_range": "0_to_minus_5",
+      "direction": "negative"
+    },
+    {
+      "field": "repetition_risk",
+      "score_range": "0_to_minus_5",
+      "direction": "negative"
+    }
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

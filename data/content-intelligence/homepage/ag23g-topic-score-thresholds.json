@@ -1,0 +1,33 @@
+{
+  "module_id": "AG23G",
+  "title": "Topic Score Thresholds",
+  "status": "topic_score_thresholds_created_no_runtime_scoring",
+  "thresholds": [
+    {
+      "score_band": "25_plus",
+      "decision": "strong_article_or_series_candidate"
+    },
+    {
+      "score_band": "18_to_24",
+      "decision": "topic_bank_or_first_light_only"
+    },
+    {
+      "score_band": "below_18",
+      "decision": "hold_or_reject_for_now"
+    }
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
