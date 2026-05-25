@@ -1,0 +1,62 @@
+{
+  "module_id": "AG25A",
+  "title": "Featured Reads Inventory and Gap Audit",
+  "status": "featured_reads_inventory_gap_audit_created_ready_for_ag25b",
+  "purpose": "Create a non-mutating inventory and gap audit of existing Featured Reads/article files, categories, references, image credits, objects, summaries and card-readiness signals.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/episodes/ag24z-episodic-knowledge-engine-closure.json",
+    "data/content-intelligence/episodes/ag24z-ag24-source-chain-register.json",
+    "data/content-intelligence/episodes/ag24z-ag25-featured-reads-handoff-plan.json",
+    "data/content-intelligence/featured-reads/ag25-featured-reads-production-strengthening-plan.json",
+    "data/content-intelligence/featured-reads/ag25-featured-reads-source-reference-gate-model.json",
+    "data/content-intelligence/featured-reads/ag25-featured-reads-quality-strengthening-model.json",
+    "data/content-intelligence/admin-editor/ag26-admin-editor-manual-workflow-strengthening-plan.json",
+    "data/content-intelligence/backend-decision/ag27-supabase-auth-backend-decision-checkpoint.json"
+  ],
+  "consumed_source_summary": {
+    "ag24z_status": "episodic_knowledge_engine_closed_ready_for_ag25",
+    "ag25_umbrella_status": "featured_reads_production_strengthening_created_ready_for_ag26",
+    "ag26_umbrella_status": "admin_editor_manual_workflow_strengthening_created_ready_for_ag27",
+    "ag27_status": "supabase_auth_backend_decision_checkpoint_created_backend_deferred",
+    "backend_deferred": true
+  },
+  "audit_scope": {
+    "stage_type": "inventory_gap_audit",
+    "article_files_scanned": 77,
+    "categories_detected": 5,
+    "articles_with_gaps": 0,
+    "total_gap_count": 0,
+    "mutation_status": "blocked",
+    "next_stage": "AG25B"
+  },
+  "inventory_file": "data/content-intelligence/featured-reads/ag25a-featured-reads-inventory-register.json",
+  "gap_register_file": "data/content-intelligence/featured-reads/ag25a-featured-reads-gap-register.json",
+  "category_card_summary_file": "data/content-intelligence/featured-reads/ag25a-category-card-summary-inventory.json",
+  "future_consumption_plan_file": "data/content-intelligence/featured-reads/ag25a-future-consumption-plan.json",
+  "article_file_mutation_allowed_in_ag25a": false,
+  "reference_verification_runtime_allowed_in_ag25a": false,
+  "public_mutation_allowed_in_ag25a": false,
+  "publication_allowed_in_ag25a": false,
+  "deployment_allowed_in_ag25a": false,
+  "supabase_auth_backend_deferred": true,
+  "blocked_state": {
+    "inventory_runtime_enabled": false,
+    "article_file_mutated": false,
+    "reference_verified_runtime": false,
+    "image_credit_written": false,
+    "layout_changed": false,
+    "card_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "module_id": "AG25A",
+  "title": "Featured Reads Inventory and Gap Audit",
+  "status": "featured_reads_inventory_gap_audit_created_ready_for_ag25b",
+  "depends_on": [
+    "AG24Z",
+    "AG25",
+    "AG26",
+    "AG27"
+  ],
+  "generated_from": {
+    "ag24zClosure": "data/content-intelligence/episodes/ag24z-episodic-knowledge-engine-closure.json",
+    "ag24zSourceChain": "data/content-intelligence/episodes/ag24z-ag24-source-chain-register.json",
+    "ag24zAg25Handoff": "data/content-intelligence/episodes/ag24z-ag25-featured-reads-handoff-plan.json",
+    "ag25UmbrellaPlan": "data/content-intelligence/featured-reads/ag25-featured-reads-production-strengthening-plan.json",
+    "ag25SourceGate": "data/content-intelligence/featured-reads/ag25-featured-reads-source-reference-gate-model.json",
+    "ag25QualityModel": "data/content-intelligence/featured-reads/ag25-featured-reads-quality-strengthening-model.json",
+    "ag26UmbrellaPlan": "data/content-intelligence/admin-editor/ag26-admin-editor-manual-workflow-strengthening-plan.json",
+    "ag27DecisionCheckpoint": "data/content-intelligence/backend-decision/ag27-supabase-auth-backend-decision-checkpoint.json"
+  },
+  "audit_file": "data/content-intelligence/featured-reads/ag25a-featured-reads-inventory-gap-audit.json",
+  "inventory_file": "data/content-intelligence/featured-reads/ag25a-featured-reads-inventory-register.json",
+  "gap_register_file": "data/content-intelligence/featured-reads/ag25a-featured-reads-gap-register.json",
+  "category_card_summary_file": "data/content-intelligence/featured-reads/ag25a-category-card-summary-inventory.json",
+  "future_consumption_plan_file": "data/content-intelligence/featured-reads/ag25a-future-consumption-plan.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag25a-featured-reads-inventory-gap-audit-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag25a-reference-verification-strengthening-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag25a-to-ag25b-reference-verification-strengthening-boundary.json",
+  "summary": {
+    "inventory_gap_audit_created": true,
+    "article_files_scanned": 77,
+    "categories_detected": 5,
+    "articles_with_gaps": 0,
+    "total_gap_count": 0,
+    "ready_for_ag25b": true,
+    "article_file_mutation_done": false,
+    "public_mutation_done": false,
+    "deployment_done": false,
+    "publishing_done": false,
+    "backend_activation_done": false,
+    "real_execution_done": false
+  },
+  "blocked_state": {
+    "inventory_runtime_enabled": false,
+    "article_file_mutated": false,
+    "reference_verified_runtime": false,
+    "image_credit_written": false,
+    "layout_changed": false,
+    "card_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

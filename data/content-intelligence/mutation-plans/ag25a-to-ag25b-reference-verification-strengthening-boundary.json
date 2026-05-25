@@ -1,0 +1,30 @@
+{
+  "module_id": "AG25A",
+  "title": "AG25A to AG25B Reference Verification Strengthening Boundary",
+  "status": "ag25b_boundary_created_not_started",
+  "next_stage_id": "AG25B",
+  "next_stage_title": "Reference Verification Strengthening",
+  "allowed_scope": [
+    "Consume AG25A inventory and gap register.",
+    "Prioritise articles with fewer than two detected references.",
+    "Plan reference verification strengthening.",
+    "Keep all article mutation, public mutation, deployment, publishing and backend activation blocked."
+  ],
+  "blocked_scope": [
+    "No article file mutation.",
+    "No reference verification runtime.",
+    "No image credit write.",
+    "No layout change.",
+    "No card change.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
