@@ -1,0 +1,210 @@
+{
+  "module_id": "AG24D",
+  "title": "Educational Series Structure Plan",
+  "status": "educational_series_structure_plan_created_ready_for_ag24e",
+  "purpose": "Define chapter-wise teaching structure for Tuesday Learning Series using AG24C calendar lanes and AG24B scoring gates, without selecting topics or generating episodes.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-weekly-episodic-rhythm-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-series-type-registry.json",
+    "data/content-intelligence/episodes/ag24b-topic-selection-scoring-engine-plan.json",
+    "data/content-intelligence/quality-reviews/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/episodes/ag24c-weekly-lane-calendar-structure.json",
+    "data/content-intelligence/episodes/ag24c-episode-slot-schema.json",
+    "data/content-intelligence/episodes/ag24c-future-consumption-plan.json",
+    "data/content-intelligence/quality-registry/ag24c-educational-series-structure-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag24c-to-ag24d-educational-series-structure-plan-boundary.json",
+    "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json",
+    "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json"
+  ],
+  "consumed_source_summary": {
+    "ag24a_status": "episodic_content_doctrine_created_ready_for_ag24b",
+    "ag24a_rhythm_status": "weekly_episodic_rhythm_doctrine_created_no_generation",
+    "ag24a_series_type_status": "series_type_registry_created_no_generation",
+    "ag24b_status": "governed_plan_only_non_active",
+    "ag24c_status": "twelve_week_episode_calendar_plan_created_ready_for_ag24d",
+    "ag24c_ready_for_ag24d": true,
+    "ag23g_status": "first_light_topic_scoring_model_created_ready_for_ag23h",
+    "ag23f_status": "first_light_source_verification_plan_created_ready_for_ag23g",
+    "ag23z_closed": true
+  },
+  "structure_scope": {
+    "target_lane": "tuesday_learning",
+    "season_length_weeks": 12,
+    "chapter_count": 12,
+    "archetype_count": 5,
+    "topic_selection_status": "not_selected",
+    "episode_generation_status": "blocked"
+  },
+  "tuesday_learning_structure_file": "data/content-intelligence/episodes/ag24d-tuesday-learning-series-structure.json",
+  "chapter_model_file": "data/content-intelligence/episodes/ag24d-educational-chapter-model.json",
+  "archetype_registry_file": "data/content-intelligence/episodes/ag24d-educational-series-archetype-registry.json",
+  "future_consumption_plan_file": "data/content-intelligence/episodes/ag24d-future-consumption-plan.json",
+  "chapter_frames": [
+    {
+      "chapter_no": 1,
+      "chapter_role": "Orientation and promise",
+      "purpose": "Introduce the learning question, season promise, reader benefit and scope boundary."
+    },
+    {
+      "chapter_no": 2,
+      "chapter_role": "Historical or conceptual background",
+      "purpose": "Explain origin, vocabulary and why the concept matters."
+    },
+    {
+      "chapter_no": 3,
+      "chapter_role": "Core mechanism or central concept",
+      "purpose": "Teach the basic structure or mechanism in simple but disciplined form."
+    },
+    {
+      "chapter_no": 4,
+      "chapter_role": "Evidence, sources and verification",
+      "purpose": "Show how the topic is known, sourced, debated or verified."
+    },
+    {
+      "chapter_no": 5,
+      "chapter_role": "Case example or lived/public context",
+      "purpose": "Translate the concept into an example, public system, historical case or practical scenario."
+    },
+    {
+      "chapter_no": 6,
+      "chapter_role": "Visual explanation and object-rich learning",
+      "purpose": "Use diagrams, tables, concept maps, timelines or examples to improve understanding."
+    },
+    {
+      "chapter_no": 7,
+      "chapter_role": "Application and practical interpretation",
+      "purpose": "Explain how readers can apply the concept or interpret related real-world situations."
+    },
+    {
+      "chapter_no": 8,
+      "chapter_role": "Complexity, limitations and contradictions",
+      "purpose": "Record caveats, competing views, limitations and misuse risks."
+    },
+    {
+      "chapter_no": 9,
+      "chapter_role": "Comparison with adjacent ideas or systems",
+      "purpose": "Compare with related concepts, schools, methods, systems or interpretations."
+    },
+    {
+      "chapter_no": 10,
+      "chapter_role": "Future direction and emerging questions",
+      "purpose": "Discuss what is changing, unresolved or likely to matter next."
+    },
+    {
+      "chapter_no": 11,
+      "chapter_role": "Reader synthesis and reflective takeaway",
+      "purpose": "Help the reader consolidate what was learned and reflect on its meaning."
+    },
+    {
+      "chapter_no": 12,
+      "chapter_role": "Season consolidation and next-season bridge",
+      "purpose": "Summarise the season and prepare continuation, archive, or adjacent series planning."
+    }
+  ],
+  "educational_archetypes": [
+    {
+      "archetype_id": "vedic_mathematics_learning_series",
+      "label": "Vedic Mathematics Learning Series",
+      "status": "template_only_not_selected",
+      "topic_type": "evergreen_educational_series",
+      "allowed_lane": "tuesday_learning",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "No unsupported scriptural attribution; Sanskrit and historical claims require source discipline.",
+      "object_potential": [
+        "worked examples",
+        "method comparison table",
+        "step diagram",
+        "practice box"
+      ]
+    },
+    {
+      "archetype_id": "genetics_mutations_learning_series",
+      "label": "Genetics and Mutations Learning Series",
+      "status": "template_only_not_selected",
+      "topic_type": "evergreen_educational_series",
+      "allowed_lane": "tuesday_learning",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "Scientific and health-related claims require credible references and non-medical-advice framing.",
+      "object_potential": [
+        "gene-to-trait flow diagram",
+        "mutation type table",
+        "risk disclaimer box",
+        "case timeline"
+      ]
+    },
+    {
+      "archetype_id": "engines_and_technology_learning_series",
+      "label": "Engines and Technology Evolution Learning Series",
+      "status": "template_only_not_selected",
+      "topic_type": "evergreen_educational_series",
+      "allowed_lane": "tuesday_learning",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "Technical claims must separate simplified explanation from engineering precision.",
+      "object_potential": [
+        "mechanism diagram",
+        "timeline",
+        "component table",
+        "system map"
+      ]
+    },
+    {
+      "archetype_id": "health_diagnosis_fundamentals_learning_series",
+      "label": "Health Diagnosis Fundamentals Learning Series",
+      "status": "template_only_not_selected",
+      "topic_type": "evergreen_educational_series",
+      "allowed_lane": "tuesday_learning",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "Must not provide diagnosis or treatment advice; must remain educational and source-backed.",
+      "object_potential": [
+        "process flow",
+        "test-purpose table",
+        "red-flag disclaimer",
+        "example interpretation box"
+      ]
+    },
+    {
+      "archetype_id": "ai_for_public_systems_learning_series",
+      "label": "AI for Public Systems Learning Series",
+      "status": "template_only_not_selected",
+      "topic_type": "public_systems_insight",
+      "allowed_lane": "tuesday_learning",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "Public-system claims require policy, institutional, technical or credible editorial source checks.",
+      "object_potential": [
+        "governance flow",
+        "risk-control matrix",
+        "case comparison",
+        "implementation map"
+      ]
+    }
+  ],
+  "topic_assignment_allowed_in_ag24d": false,
+  "episode_generation_allowed_in_ag24d": false,
+  "article_generation_allowed_in_ag24d": false,
+  "target_verified_references_per_episode": 2,
+  "no_unsupported_educational_claims": true,
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "educational_topic_selected": false,
+    "educational_series_activated": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
