@@ -1,0 +1,118 @@
+{
+  "module_id": "AG24H",
+  "title": "Production Stage Registry",
+  "status": "production_stage_registry_created_no_runtime",
+  "stage_count": 8,
+  "stages": [
+    {
+      "stage_id": "candidate_intake",
+      "order": 1,
+      "purpose": "Accept a future topic candidate from AG24B scoring or a later editorial selection stage.",
+      "required_input": [
+        "AG24B topic score",
+        "AG24G index slot",
+        "AG24F metadata shell"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "topic_score_gate",
+      "order": 2,
+      "purpose": "Confirm strong_series_candidate decision, score 25+, and lane compatibility.",
+      "required_input": [
+        "AG24B decision",
+        "AG24B total score",
+        "topic type",
+        "lane id"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "source_reference_gate",
+      "order": 3,
+      "purpose": "Confirm source verification path, two-reference target, and editorial-verification status.",
+      "required_input": [
+        "AG23F verification doctrine",
+        "reference status",
+        "source caution note"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "risk_safety_gate",
+      "order": 4,
+      "purpose": "Confirm sensitivity, repetition, health/legal/political/spiritual and breaking-news cautions.",
+      "required_input": [
+        "risk flags",
+        "sensitivity score",
+        "editorial caution note"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "lane_structure_mapping",
+      "order": 5,
+      "purpose": "Map the candidate to Tuesday, Friday or Sunday lane structure and season position.",
+      "required_input": [
+        "AG24C lane",
+        "AG24D chapter model or AG24E continuity model",
+        "AG24G index entry"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "brief_skeleton_preparation",
+      "order": 6,
+      "purpose": "Prepare a future brief skeleton without generating prose, article body or public output.",
+      "required_input": [
+        "learning question or continuity role",
+        "source/risk contract",
+        "visual/object need"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "editorial_review_handoff",
+      "order": 7,
+      "purpose": "Define future handoff to editorial/Admin review without mutating queues.",
+      "required_input": [
+        "metadata shell",
+        "brief skeleton state",
+        "blocked/public flags"
+      ],
+      "output_status": "planned_not_executed"
+    },
+    {
+      "stage_id": "quality_audit_precheck",
+      "order": 8,
+      "purpose": "Prepare AG24I quality audit inputs for future completeness, source and risk checks.",
+      "required_input": [
+        "metadata completeness",
+        "source status",
+        "risk status",
+        "navigation status"
+      ],
+      "output_status": "planned_not_executed"
+    }
+  ],
+  "runtime_execution_allowed": false,
+  "blocked_state": {
+    "production_conveyor_runtime_enabled": false,
+    "topic_selected_for_production": false,
+    "brief_generated": false,
+    "draft_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "editor_queue_mutated": false,
+    "admin_queue_mutated": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

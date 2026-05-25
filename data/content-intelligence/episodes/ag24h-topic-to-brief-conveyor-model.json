@@ -1,0 +1,40 @@
+{
+  "module_id": "AG24H",
+  "title": "Topic-to-Brief Conveyor Model",
+  "status": "topic_to_brief_conveyor_model_created_no_generation",
+  "model_type": "non_active_planning_contract",
+  "allowed_candidate_sources": [
+    "AG24B strong_series_candidate",
+    "future manually reviewed editorial selection",
+    "future First Light promoted signal after AG23F source gate"
+  ],
+  "required_gates": [
+    "AG24B score 25+",
+    "AG23F source/reference gate",
+    "AG24F metadata shell",
+    "AG24G non-active index slot",
+    "risk/safety gate"
+  ],
+  "generated_brief_allowed": false,
+  "generated_draft_allowed": false,
+  "article_generation_allowed": false,
+  "blocked_state": {
+    "production_conveyor_runtime_enabled": false,
+    "topic_selected_for_production": false,
+    "brief_generated": false,
+    "draft_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "editor_queue_mutated": false,
+    "admin_queue_mutated": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
