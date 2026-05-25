@@ -1,0 +1,27 @@
+{
+  "module_id": "AG23Z",
+  "title": "AG23Z to AG24A Episodic Content Doctrine Boundary",
+  "status": "ag24a_boundary_created_not_started",
+  "next_stage_id": "AG24A",
+  "next_stage_title": "Episodic Content Doctrine",
+  "allowed_scope": [
+    "Define weekly episodes, educational series, burning topic series and Sunday flagship reads.",
+    "Define Tuesday Learning, Friday World Lens and Sunday Deep Read doctrine.",
+    "Keep planning-only and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No live feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

@@ -1,0 +1,50 @@
+{
+  "module_id": "AG23Z",
+  "title": "Homepage Daily Surface and First Light Closure",
+  "status": "ag23_homepage_daily_surface_and_first_light_closed_ready_for_ag24a",
+  "depends_on": [
+    "AG23A",
+    "AG23B",
+    "AG23C",
+    "AG23D",
+    "AG23E",
+    "AG23F",
+    "AG23G",
+    "AG23H",
+    "AG23I"
+  ],
+  "generated_from": {
+    "ag23aReview": "data/content-intelligence/quality-reviews/ag23a-homepage-daily-route-doctrine.json",
+    "ag23bReview": "data/content-intelligence/quality-reviews/ag23b-first-light-24-hour-signal-engine.json",
+    "ag23cReview": "data/content-intelligence/quality-reviews/ag23c-signal-to-article-conversion-logic.json",
+    "ag23dReview": "data/content-intelligence/quality-reviews/ag23d-discover-read-reflect-mapping.json",
+    "ag23eReview": "data/content-intelligence/quality-reviews/ag23e-daily-homepage-data-schema.json",
+    "ag23fReview": "data/content-intelligence/quality-reviews/ag23f-first-light-source-verification-plan.json",
+    "ag23gReview": "data/content-intelligence/quality-reviews/ag23g-first-light-topic-scoring-model.json",
+    "ag23hReview": "data/content-intelligence/quality-reviews/ag23h-homepage-daily-surface-scaffold.json",
+    "ag23iReview": "data/content-intelligence/quality-reviews/ag23i-homepage-daily-surface-audit.json",
+    "ag23iAudit": "data/content-intelligence/audit-records/ag23i-homepage-daily-surface-audit-report.json",
+    "ag23iDecision": "data/content-intelligence/go-live/ag23i-homepage-daily-surface-and-first-light-closure-decision-record.json",
+    "ag23iReadiness": "data/content-intelligence/quality-registry/ag23i-homepage-daily-surface-and-first-light-closure-readiness-record.json",
+    "ag23iBoundary": "data/content-intelligence/mutation-plans/ag23i-to-ag23z-homepage-daily-surface-and-first-light-closure-boundary.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "closure_file": "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json",
+  "summary_file": "data/content-intelligence/homepage/ag23z-homepage-daily-surface-and-first-light-summary.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag23z-episodic-knowledge-engine-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag23z-to-ag24a-episodic-content-doctrine-boundary.json",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
