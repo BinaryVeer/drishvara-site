@@ -1,0 +1,35 @@
+{
+  "module_id": "AG25D",
+  "title": "AG25D to AG25Z Featured Reads Production Readiness Closure Boundary",
+  "status": "ag25z_boundary_created_not_started",
+  "next_stage_id": "AG25Z",
+  "next_stage_title": "Featured Reads Production Readiness Closure",
+  "allowed_scope": [
+    "Consume AG25A inventory/gap audit.",
+    "Consume AG25B reference verification strengthening.",
+    "Consume AG25C image credit and attribution completion.",
+    "Consume AG25D layout audit.",
+    "Close the detailed AG25A-AG25D Featured Reads readiness chain.",
+    "Keep public mutation, deployment, publishing and backend activation blocked."
+  ],
+  "blocked_scope": [
+    "No runtime layout audit.",
+    "No article file mutation.",
+    "No layout change.",
+    "No card change.",
+    "No summary change.",
+    "No CSS change.",
+    "No mobile layout change.",
+    "No image/table/figure position change.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

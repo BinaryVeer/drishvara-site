@@ -1,0 +1,43 @@
+{
+  "module_id": "AG25D",
+  "title": "Mobile Article Width Audit Model",
+  "status": "mobile_article_width_audit_model_created_no_layout_mutation",
+  "layout_rules": [
+    "Article body width should remain readable on desktop and mobile.",
+    "Images, tables, figures, graphs and infographics should not overflow the reading column.",
+    "Attribution blocks should remain readable and not deform the article shape.",
+    "Tables and figures should stay centrally aligned where vertical flow is more suitable.",
+    "Text wrapping around non-hero objects may be used later only if it preserves readability."
+  ],
+  "future_manual_check_fields": [
+    "article_width_status",
+    "object_overflow_status",
+    "mobile_layout_status",
+    "hero_image_position_status",
+    "table_alignment_status",
+    "attribution_block_layout_status"
+  ],
+  "runtime_layout_check_enabled": false,
+  "css_mutation_allowed": false,
+  "blocked_state": {
+    "layout_audit_runtime_enabled": false,
+    "article_file_mutated": false,
+    "layout_changed": false,
+    "card_changed": false,
+    "summary_changed": false,
+    "css_changed": false,
+    "mobile_layout_changed": false,
+    "image_position_changed": false,
+    "table_position_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

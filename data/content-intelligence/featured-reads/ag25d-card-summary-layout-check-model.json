@@ -1,0 +1,43 @@
+{
+  "module_id": "AG25D",
+  "title": "Card and Summary Layout Check Model",
+  "status": "card_summary_layout_check_model_created_no_card_mutation",
+  "required_future_card_fields": [
+    "title",
+    "summary_or_description",
+    "category",
+    "featured_badge_or_card_signal",
+    "hero_or_object_status",
+    "reference_status",
+    "credit_status",
+    "editorial_note"
+  ],
+  "card_rules": [
+    "Featured Read cards should carry a readable title and short summary.",
+    "Cards should not depend on unsupported runtime data.",
+    "Card text should not be generated or rewritten in AG25D.",
+    "Card readiness gaps should be preserved for AG25Z and future manual workflow stages."
+  ],
+  "card_mutation_allowed": false,
+  "blocked_state": {
+    "layout_audit_runtime_enabled": false,
+    "article_file_mutated": false,
+    "layout_changed": false,
+    "card_changed": false,
+    "summary_changed": false,
+    "css_changed": false,
+    "mobile_layout_changed": false,
+    "image_position_changed": false,
+    "table_position_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
