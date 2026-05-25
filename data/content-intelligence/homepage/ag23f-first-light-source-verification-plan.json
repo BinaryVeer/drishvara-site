@@ -1,0 +1,27 @@
+{
+  "module_id": "AG23F",
+  "title": "First Light Source and Verification Plan",
+  "status": "first_light_source_verification_plan_created_ready_for_ag23g",
+  "purpose": "Define how First Light signals will be source-reviewed before scoring or conversion into homepage/article candidates.",
+  "verification_model": "planning_only_non_live",
+  "source_categories_file": "data/content-intelligence/homepage/ag23f-allowed-source-categories.json",
+  "verification_workflow_file": "data/content-intelligence/homepage/ag23f-source-verification-workflow.json",
+  "rejection_rules_file": "data/content-intelligence/homepage/ag23f-unsupported-claim-rejection-rules.json",
+  "future_allowed_output": "verified_or_review_ready_signal_candidates_for_ag23g_scoring",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

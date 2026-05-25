@@ -1,0 +1,35 @@
+{
+  "module_id": "AG23F",
+  "title": "Unsupported Claim Rejection Rules",
+  "status": "unsupported_claim_rejection_rules_created",
+  "reject_or_hold_when": [
+    "Signal depends only on unverified social media posts.",
+    "Source is unavailable, broken, parked, spam-like or irrelevant.",
+    "Claim uses breaking-news certainty without reliable confirmation.",
+    "Health, legal, financial or safety-sensitive claim lacks authoritative support.",
+    "Religious/cultural statement is framed as universal fact without qualification.",
+    "Topic is high-risk, defamatory, sensational or unsuitable for Drishvara tone."
+  ],
+  "inherited_safety_rules": [
+    "Prefer 24-hour signals only when reliable sources are available.",
+    "Do not present unverified social media claims as facts.",
+    "Use cautious wording for developing events.",
+    "Separate signal summary from Drishvara reflection.",
+    "Do not auto-generate article from a signal until AG23C conversion logic scores it.",
+    "Do not activate scraping, API calls or live feeds in AG23B."
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "module_id": "AG23F",
+  "title": "Allowed Source Categories",
+  "status": "allowed_source_categories_created_no_fetching",
+  "categories": [
+    {
+      "category": "official_primary",
+      "use_for": "policy, public programme, institutional or government claims",
+      "minimum_requirement": "direct official page, circular, report, release or portal record"
+    },
+    {
+      "category": "reputed_news_reference",
+      "use_for": "daily signal context and public-interest developments",
+      "minimum_requirement": "credible outlet with clear date, author/source attribution and non-sensational framing"
+    },
+    {
+      "category": "knowledge_reference",
+      "use_for": "science, health, education and explanatory topics",
+      "minimum_requirement": "reputed institutional, academic, educational or technical source"
+    },
+    {
+      "category": "cultural_calendar_reference",
+      "use_for": "festival, panchang, observance and cultural timing context",
+      "minimum_requirement": "careful wording; avoid presenting interpretive traditions as universal fact"
+    }
+  ],
+  "inherited_source_bands": [
+    "official_primary",
+    "reputed_news_reference",
+    "knowledge_reference",
+    "cultural_calendar_reference"
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

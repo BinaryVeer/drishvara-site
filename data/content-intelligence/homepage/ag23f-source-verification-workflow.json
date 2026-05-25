@@ -1,0 +1,35 @@
+{
+  "module_id": "AG23F",
+  "title": "Source Verification Workflow",
+  "status": "source_verification_workflow_created_no_live_check",
+  "workflow_steps": [
+    "Identify the signal claim.",
+    "Classify claim type: official, current event, knowledge, cultural/calendar, reflection.",
+    "Assign minimum acceptable source category.",
+    "Check date/freshness requirement.",
+    "Check whether claim wording is factual, interpretive or reflective.",
+    "Mark verification status: verified, needs_review, hold or reject.",
+    "Only verified or reviewed signals may move to AG23G topic scoring later."
+  ],
+  "verification_status_values": [
+    "verified",
+    "needs_review",
+    "hold",
+    "reject"
+  ],
+  "no_live_check_now": true,
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

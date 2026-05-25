@@ -1,0 +1,48 @@
+{
+  "module_id": "AG23F",
+  "title": "First Light Source and Verification Plan",
+  "status": "first_light_source_verification_plan_created_ready_for_ag23g",
+  "depends_on": [
+    "AG23E"
+  ],
+  "generated_from": {
+    "ag23eReview": "data/content-intelligence/quality-reviews/ag23e-daily-homepage-data-schema.json",
+    "ag23eSchema": "data/content-intelligence/homepage/ag23e-daily-homepage-data-schema.json",
+    "ag23eFirstLightSchema": "data/content-intelligence/homepage/ag23e-first-light-card-schema.json",
+    "ag23eReadiness": "data/content-intelligence/quality-registry/ag23e-first-light-source-verification-readiness-record.json",
+    "ag23eBoundary": "data/content-intelligence/mutation-plans/ag23e-to-ag23f-first-light-source-verification-plan-boundary.json",
+    "ag23bSourceBands": "data/content-intelligence/homepage/ag23b-first-light-source-band-plan.json",
+    "ag23bSafetyRules": "data/content-intelligence/homepage/ag23b-first-light-freshness-and-safety-rules.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "plan_file": "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json",
+  "source_categories_file": "data/content-intelligence/homepage/ag23f-allowed-source-categories.json",
+  "verification_workflow_file": "data/content-intelligence/homepage/ag23f-source-verification-workflow.json",
+  "rejection_rules_file": "data/content-intelligence/homepage/ag23f-unsupported-claim-rejection-rules.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag23f-source-verification-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag23f-topic-scoring-model-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag23f-to-ag23g-first-light-topic-scoring-model-boundary.json",
+  "summary": {
+    "source_verification_plan_created": true,
+    "source_categories_created": true,
+    "verification_workflow_created": true,
+    "rejection_rules_created": true,
+    "ready_for_ag23g": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

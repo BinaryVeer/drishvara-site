@@ -1,0 +1,27 @@
+{
+  "module_id": "AG23F",
+  "title": "AG23F to AG23G First Light Topic Scoring Model Boundary",
+  "status": "ag23g_boundary_created_not_started",
+  "next_stage_id": "AG23G",
+  "next_stage_title": "First Light Topic Scoring Model",
+  "allowed_scope": [
+    "Define relevance, freshness, Drishvara fit, reference readiness, series potential and risk scoring.",
+    "Use source verification status as scoring gate.",
+    "Keep non-live and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No live feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
