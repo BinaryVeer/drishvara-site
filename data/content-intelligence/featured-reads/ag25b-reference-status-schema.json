@@ -1,0 +1,50 @@
+{
+  "module_id": "AG25B",
+  "title": "Reference Status Schema",
+  "status": "reference_status_schema_created_no_runtime_fetch",
+  "target_verified_references_per_featured_read": 2,
+  "allowed_statuses": [
+    "verified",
+    "partially_verified",
+    "count_signal_present_unverified",
+    "needs_reference_addition_or_editorial_verification",
+    "under_editorial_verification",
+    "blocked_broken_or_spam_source"
+  ],
+  "blocked_reference_conditions": [
+    "broken link",
+    "parked domain",
+    "spam-like source",
+    "unreachable source",
+    "irrelevant source",
+    "invented citation",
+    "unsupported breaking-news claim"
+  ],
+  "verification_fields_for_future_manual_review": [
+    "reference_url",
+    "reference_title",
+    "source_type",
+    "claim_supported",
+    "reachability_status",
+    "credibility_status",
+    "editorial_note"
+  ],
+  "runtime_fetch_enabled": false,
+  "blocked_state": {
+    "reference_runtime_verification_enabled": false,
+    "external_link_fetch_enabled": false,
+    "live_scraping_enabled": false,
+    "article_file_mutated": false,
+    "reference_written_to_article": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

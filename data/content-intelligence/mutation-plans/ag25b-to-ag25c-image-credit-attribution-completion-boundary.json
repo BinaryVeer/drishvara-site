@@ -1,0 +1,30 @@
+{
+  "module_id": "AG25B",
+  "title": "AG25B to AG25C Image Credit and Attribution Completion Boundary",
+  "status": "ag25c_boundary_created_not_started",
+  "next_stage_id": "AG25C",
+  "next_stage_title": "Image Credit and Attribution Completion",
+  "allowed_scope": [
+    "Consume AG25A image/object credit gaps.",
+    "Consume AG25B reference status schema and worklist.",
+    "Plan image credit and attribution completion without writing article files.",
+    "Keep public mutation, deployment, publishing and backend activation blocked."
+  ],
+  "blocked_scope": [
+    "No runtime reference verification.",
+    "No external link fetch.",
+    "No live scraping.",
+    "No article file mutation.",
+    "No reference write to article.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
