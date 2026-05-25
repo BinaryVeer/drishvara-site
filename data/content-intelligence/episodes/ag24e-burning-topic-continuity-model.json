@@ -1,0 +1,103 @@
+{
+  "module_id": "AG24E",
+  "title": "Burning Topic Continuity Model",
+  "status": "burning_topic_continuity_model_created_no_live_feed",
+  "required_continuity_fields": [
+    "episode_no",
+    "continuity_role",
+    "current_context",
+    "what_changed_since_last_episode",
+    "verified_facts",
+    "source_requirement",
+    "uncertainty_note",
+    "risk_or_sensitivity_note",
+    "visual_or_object_need",
+    "reader_watchpoint",
+    "previous_next_position"
+  ],
+  "continuity_frames": [
+    {
+      "episode_no": 1,
+      "continuity_role": "Issue orientation",
+      "purpose": "Define the topic, why it matters now, what is known, and what is not yet established."
+    },
+    {
+      "episode_no": 2,
+      "continuity_role": "Background and timeline",
+      "purpose": "Trace the relevant background, chronology and institutional/public context."
+    },
+    {
+      "episode_no": 3,
+      "continuity_role": "Key actors and forces",
+      "purpose": "Explain institutions, groups, technologies, policies, markets or social forces involved."
+    },
+    {
+      "episode_no": 4,
+      "continuity_role": "Evidence and source map",
+      "purpose": "Separate verified facts, credible reporting, official records, expert interpretation and open questions."
+    },
+    {
+      "episode_no": 5,
+      "continuity_role": "Public impact lens",
+      "purpose": "Explain impact on citizens, systems, economy, environment, governance, culture or everyday life."
+    },
+    {
+      "episode_no": 6,
+      "continuity_role": "Comparative perspective",
+      "purpose": "Compare with another country, sector, historical case, policy model or institutional response."
+    },
+    {
+      "episode_no": 7,
+      "continuity_role": "Risk, misinformation and uncertainty",
+      "purpose": "Record disputed claims, misinformation risks, unknowns, limitations and editorial cautions."
+    },
+    {
+      "episode_no": 8,
+      "continuity_role": "Scenario pathways",
+      "purpose": "Describe possible future pathways without pretending prediction certainty."
+    },
+    {
+      "episode_no": 9,
+      "continuity_role": "Governance and accountability view",
+      "purpose": "Explain who can act, what mechanisms exist, and what accountability questions matter."
+    },
+    {
+      "episode_no": 10,
+      "continuity_role": "Human and ethical dimension",
+      "purpose": "Connect the issue to human consequences, values, equity, trust and social meaning."
+    },
+    {
+      "episode_no": 11,
+      "continuity_role": "Reader synthesis",
+      "purpose": "Help the reader consolidate the moving issue and understand what to watch next."
+    },
+    {
+      "episode_no": 12,
+      "continuity_role": "Season review and continuation decision",
+      "purpose": "Close, extend, archive or convert the topic into a future deep-read/learning series candidate."
+    }
+  ],
+  "minimum_episode_count_for_series": 8,
+  "preferred_episode_count_for_season": 12,
+  "live_update_rule": "No live feed, scraping or API-driven update is allowed in AG24E. Any future update must pass manual source verification and editorial review.",
+  "blocked_state": {
+    "burning_topic_selected": false,
+    "burning_series_activated": false,
+    "live_signal_feed_enabled": false,
+    "live_scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

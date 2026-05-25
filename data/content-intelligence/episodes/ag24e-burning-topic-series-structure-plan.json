@@ -1,0 +1,239 @@
+{
+  "module_id": "AG24E",
+  "title": "Burning Topic Series Structure Plan",
+  "status": "burning_topic_series_structure_plan_created_ready_for_ag24f",
+  "purpose": "Define continuity format for evolving public/world topics through the Friday World Lens lane without selecting topics, enabling live feeds, scraping, API calls, article generation, publication or backend activation.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-weekly-episodic-rhythm-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-series-type-registry.json",
+    "data/content-intelligence/episodes/ag24b-topic-selection-scoring-engine-plan.json",
+    "data/content-intelligence/quality-reviews/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/episodes/ag24c-weekly-lane-calendar-structure.json",
+    "data/content-intelligence/episodes/ag24c-episode-slot-schema.json",
+    "data/content-intelligence/episodes/ag24c-future-consumption-plan.json",
+    "data/content-intelligence/quality-reviews/ag24d-educational-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24d-educational-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24d-tuesday-learning-series-structure.json",
+    "data/content-intelligence/episodes/ag24d-educational-chapter-model.json",
+    "data/content-intelligence/episodes/ag24d-future-consumption-plan.json",
+    "data/content-intelligence/quality-registry/ag24d-burning-topic-series-structure-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag24d-to-ag24e-burning-topic-series-structure-plan-boundary.json",
+    "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json",
+    "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json"
+  ],
+  "consumed_source_summary": {
+    "ag24a_status": "episodic_content_doctrine_created_ready_for_ag24b",
+    "ag24a_rhythm_status": "weekly_episodic_rhythm_doctrine_created_no_generation",
+    "ag24a_series_type_status": "series_type_registry_created_no_generation",
+    "ag24b_status": "governed_plan_only_non_active",
+    "ag24c_status": "twelve_week_episode_calendar_plan_created_ready_for_ag24d",
+    "ag24d_status": "educational_series_structure_plan_created_ready_for_ag24e",
+    "ag24d_ready_for_ag24e": true,
+    "ag23g_status": "first_light_topic_scoring_model_created_ready_for_ag23h",
+    "ag23f_status": "first_light_source_verification_plan_created_ready_for_ag23g",
+    "ag23z_closed": true
+  },
+  "structure_scope": {
+    "target_lane": "friday_world_lens",
+    "season_length_weeks": 12,
+    "continuity_episode_count": 12,
+    "archetype_count": 6,
+    "topic_selection_status": "not_selected",
+    "live_feed_status": "blocked",
+    "episode_generation_status": "blocked"
+  },
+  "friday_world_lens_structure_file": "data/content-intelligence/episodes/ag24e-friday-world-lens-series-structure.json",
+  "continuity_model_file": "data/content-intelligence/episodes/ag24e-burning-topic-continuity-model.json",
+  "archetype_registry_file": "data/content-intelligence/episodes/ag24e-burning-topic-archetype-registry.json",
+  "future_consumption_plan_file": "data/content-intelligence/episodes/ag24e-future-consumption-plan.json",
+  "continuity_frames": [
+    {
+      "episode_no": 1,
+      "continuity_role": "Issue orientation",
+      "purpose": "Define the topic, why it matters now, what is known, and what is not yet established."
+    },
+    {
+      "episode_no": 2,
+      "continuity_role": "Background and timeline",
+      "purpose": "Trace the relevant background, chronology and institutional/public context."
+    },
+    {
+      "episode_no": 3,
+      "continuity_role": "Key actors and forces",
+      "purpose": "Explain institutions, groups, technologies, policies, markets or social forces involved."
+    },
+    {
+      "episode_no": 4,
+      "continuity_role": "Evidence and source map",
+      "purpose": "Separate verified facts, credible reporting, official records, expert interpretation and open questions."
+    },
+    {
+      "episode_no": 5,
+      "continuity_role": "Public impact lens",
+      "purpose": "Explain impact on citizens, systems, economy, environment, governance, culture or everyday life."
+    },
+    {
+      "episode_no": 6,
+      "continuity_role": "Comparative perspective",
+      "purpose": "Compare with another country, sector, historical case, policy model or institutional response."
+    },
+    {
+      "episode_no": 7,
+      "continuity_role": "Risk, misinformation and uncertainty",
+      "purpose": "Record disputed claims, misinformation risks, unknowns, limitations and editorial cautions."
+    },
+    {
+      "episode_no": 8,
+      "continuity_role": "Scenario pathways",
+      "purpose": "Describe possible future pathways without pretending prediction certainty."
+    },
+    {
+      "episode_no": 9,
+      "continuity_role": "Governance and accountability view",
+      "purpose": "Explain who can act, what mechanisms exist, and what accountability questions matter."
+    },
+    {
+      "episode_no": 10,
+      "continuity_role": "Human and ethical dimension",
+      "purpose": "Connect the issue to human consequences, values, equity, trust and social meaning."
+    },
+    {
+      "episode_no": 11,
+      "continuity_role": "Reader synthesis",
+      "purpose": "Help the reader consolidate the moving issue and understand what to watch next."
+    },
+    {
+      "episode_no": 12,
+      "continuity_role": "Season review and continuation decision",
+      "purpose": "Close, extend, archive or convert the topic into a future deep-read/learning series candidate."
+    }
+  ],
+  "burning_archetypes": [
+    {
+      "archetype_id": "ai_regulation_and_society",
+      "label": "AI Regulation and Society",
+      "status": "template_only_not_selected",
+      "topic_type": "burning_current_topic",
+      "allowed_lane": "friday_world_lens",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above; AG23G First Light bridge allowed only with source verification",
+      "source_caution": "Regulatory and technology claims require official, institutional or credible expert/editorial sources.",
+      "object_potential": [
+        "regulation timeline",
+        "risk-control matrix",
+        "actor map",
+        "comparison table"
+      ]
+    },
+    {
+      "archetype_id": "climate_water_stress_and_public_systems",
+      "label": "Climate, Water Stress and Public Systems",
+      "status": "template_only_not_selected",
+      "topic_type": "burning_current_topic",
+      "allowed_lane": "friday_world_lens",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above; source and uncertainty gates mandatory",
+      "source_caution": "Climate, water and public-system claims require careful separation of observed data, projections and interpretation.",
+      "object_potential": [
+        "impact pathway",
+        "water stress map concept",
+        "source reliability table",
+        "scenario matrix"
+      ]
+    },
+    {
+      "archetype_id": "global_conflict_and_geopolitical_shifts",
+      "label": "Global Conflict and Geopolitical Shifts",
+      "status": "template_only_not_selected",
+      "topic_type": "burning_current_topic",
+      "allowed_lane": "friday_world_lens",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above; high-sensitivity risk review required",
+      "source_caution": "Conflict topics require high factual caution, no propaganda amplification and no unsupported breaking-news claims.",
+      "object_potential": [
+        "timeline",
+        "actor map",
+        "claim verification table",
+        "scenario pathways"
+      ]
+    },
+    {
+      "archetype_id": "sports_governance_and_society",
+      "label": "Sports Governance and Society",
+      "status": "template_only_not_selected",
+      "topic_type": "burning_current_topic",
+      "allowed_lane": "friday_world_lens",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "Sporting, institutional and public-facing claims require verified event records and credible reporting.",
+      "object_potential": [
+        "event timeline",
+        "institutional map",
+        "rules explainer",
+        "impact matrix"
+      ]
+    },
+    {
+      "archetype_id": "public_health_alert_and_system_response",
+      "label": "Public Health Alert and System Response",
+      "status": "template_only_not_selected",
+      "topic_type": "burning_current_topic",
+      "allowed_lane": "friday_world_lens",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above; health safety framing mandatory",
+      "source_caution": "Health-related topics must not provide diagnosis/treatment advice and must rely on official or credible medical/public health sources.",
+      "object_potential": [
+        "response flow",
+        "risk communication table",
+        "do/don't disclaimer box",
+        "institutional responsibility map"
+      ]
+    },
+    {
+      "archetype_id": "media_society_and_public_trust",
+      "label": "Media, Society and Public Trust",
+      "status": "template_only_not_selected",
+      "topic_type": "burning_current_topic",
+      "allowed_lane": "friday_world_lens",
+      "selection_gate": "AG24B strong_series_candidate with score 25 or above",
+      "source_caution": "Media/society claims require avoiding overgeneralisation and distinguishing evidence from interpretation.",
+      "object_potential": [
+        "narrative flow",
+        "claim-type table",
+        "public trust map",
+        "reflection box"
+      ]
+    }
+  ],
+  "topic_assignment_allowed_in_ag24e": false,
+  "live_signal_feed_allowed_in_ag24e": false,
+  "scraping_allowed_in_ag24e": false,
+  "external_api_call_allowed_in_ag24e": false,
+  "episode_generation_allowed_in_ag24e": false,
+  "article_generation_allowed_in_ag24e": false,
+  "target_verified_references_per_episode": 2,
+  "no_unsupported_breaking_news_claims": true,
+  "source_verification_required": true,
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "burning_topic_selected": false,
+    "burning_series_activated": false,
+    "live_signal_feed_enabled": false,
+    "live_scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

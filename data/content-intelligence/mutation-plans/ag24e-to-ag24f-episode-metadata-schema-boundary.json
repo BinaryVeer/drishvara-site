@@ -1,0 +1,33 @@
+{
+  "module_id": "AG24E",
+  "title": "AG24E to AG24F Episode Metadata Schema Boundary",
+  "status": "ag24f_boundary_created_not_started",
+  "next_stage_id": "AG24F",
+  "next_stage_title": "Episode Metadata Schema",
+  "allowed_scope": [
+    "Consume Tuesday Learning, Friday World Lens and Sunday Deep Read lane structures.",
+    "Define metadata fields for series, season, episode, category, status, references and navigation.",
+    "Include source verification and risk-status metadata for burning-topic episodes.",
+    "Keep planning-only and non-mutating."
+  ],
+  "blocked_scope": [
+    "No final burning topic selection.",
+    "No burning topic series activation.",
+    "No live signal feed.",
+    "No scraping.",
+    "No external API call.",
+    "No episode generation.",
+    "No article generation.",
+    "No episode file creation.",
+    "No article file creation.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

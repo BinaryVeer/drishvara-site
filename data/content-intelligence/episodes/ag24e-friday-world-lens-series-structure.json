@@ -1,0 +1,107 @@
+{
+  "module_id": "AG24E",
+  "title": "Friday World Lens / Burning Topic Series Structure",
+  "status": "friday_world_lens_series_structure_created_no_topic_selection",
+  "source_calendar_lane": "friday_world_lens",
+  "source_calendar_file": "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json",
+  "season_length_weeks": 12,
+  "episode_count": 12,
+  "required_topic_gate": {
+    "scoring_stage": "AG24B",
+    "required_decision": "strong_series_candidate",
+    "minimum_total_score": 25,
+    "first_light_bridge_allowed": true,
+    "source_verification_stage": "AG23F",
+    "topic_bank_allowed_without_rescore": false
+  },
+  "continuity_frames": [
+    {
+      "episode_no": 1,
+      "continuity_role": "Issue orientation",
+      "purpose": "Define the topic, why it matters now, what is known, and what is not yet established."
+    },
+    {
+      "episode_no": 2,
+      "continuity_role": "Background and timeline",
+      "purpose": "Trace the relevant background, chronology and institutional/public context."
+    },
+    {
+      "episode_no": 3,
+      "continuity_role": "Key actors and forces",
+      "purpose": "Explain institutions, groups, technologies, policies, markets or social forces involved."
+    },
+    {
+      "episode_no": 4,
+      "continuity_role": "Evidence and source map",
+      "purpose": "Separate verified facts, credible reporting, official records, expert interpretation and open questions."
+    },
+    {
+      "episode_no": 5,
+      "continuity_role": "Public impact lens",
+      "purpose": "Explain impact on citizens, systems, economy, environment, governance, culture or everyday life."
+    },
+    {
+      "episode_no": 6,
+      "continuity_role": "Comparative perspective",
+      "purpose": "Compare with another country, sector, historical case, policy model or institutional response."
+    },
+    {
+      "episode_no": 7,
+      "continuity_role": "Risk, misinformation and uncertainty",
+      "purpose": "Record disputed claims, misinformation risks, unknowns, limitations and editorial cautions."
+    },
+    {
+      "episode_no": 8,
+      "continuity_role": "Scenario pathways",
+      "purpose": "Describe possible future pathways without pretending prediction certainty."
+    },
+    {
+      "episode_no": 9,
+      "continuity_role": "Governance and accountability view",
+      "purpose": "Explain who can act, what mechanisms exist, and what accountability questions matter."
+    },
+    {
+      "episode_no": 10,
+      "continuity_role": "Human and ethical dimension",
+      "purpose": "Connect the issue to human consequences, values, equity, trust and social meaning."
+    },
+    {
+      "episode_no": 11,
+      "continuity_role": "Reader synthesis",
+      "purpose": "Help the reader consolidate the moving issue and understand what to watch next."
+    },
+    {
+      "episode_no": 12,
+      "continuity_role": "Season review and continuation decision",
+      "purpose": "Close, extend, archive or convert the topic into a future deep-read/learning series candidate."
+    }
+  ],
+  "burning_archetypes": [
+    "ai_regulation_and_society",
+    "climate_water_stress_and_public_systems",
+    "global_conflict_and_geopolitical_shifts",
+    "sports_governance_and_society",
+    "public_health_alert_and_system_response",
+    "media_society_and_public_trust"
+  ],
+  "blocked_state": {
+    "burning_topic_selected": false,
+    "burning_series_activated": false,
+    "live_signal_feed_enabled": false,
+    "live_scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
