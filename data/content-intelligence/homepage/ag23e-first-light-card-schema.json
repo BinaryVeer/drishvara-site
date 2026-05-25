@@ -1,0 +1,39 @@
+{
+  "module_id": "AG23E",
+  "title": "First Light Card Schema",
+  "status": "first_light_card_schema_created_no_runtime_write",
+  "fields": [
+    "signal_id",
+    "signal_date",
+    "signal_window",
+    "signal_type",
+    "region_scope",
+    "headline",
+    "one_line_signal",
+    "source_band",
+    "verification_status",
+    "freshness_score",
+    "risk_note",
+    "recommended_output_type"
+  ],
+  "verification_status_values": [
+    "verified",
+    "needs_review",
+    "hold",
+    "reject"
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

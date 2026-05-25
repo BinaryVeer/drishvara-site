@@ -1,0 +1,48 @@
+{
+  "module_id": "AG23E",
+  "title": "Daily Homepage Data Schema",
+  "status": "daily_homepage_data_schema_created_ready_for_ag23f",
+  "depends_on": [
+    "AG23D"
+  ],
+  "generated_from": {
+    "ag23dReview": "data/content-intelligence/quality-reviews/ag23d-discover-read-reflect-mapping.json",
+    "ag23dMapping": "data/content-intelligence/homepage/ag23d-discover-read-reflect-mapping.json",
+    "ag23dMovement": "data/content-intelligence/homepage/ag23d-homepage-movement-module-map.json",
+    "ag23dPlacement": "data/content-intelligence/homepage/ag23d-signal-output-placement-map.json",
+    "ag23dReflection": "data/content-intelligence/homepage/ag23d-reflection-layer-map.json",
+    "ag23dReadiness": "data/content-intelligence/quality-registry/ag23d-daily-homepage-data-schema-readiness-record.json",
+    "ag23dBoundary": "data/content-intelligence/mutation-plans/ag23d-to-ag23e-daily-homepage-data-schema-boundary.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "schema_file": "data/content-intelligence/homepage/ag23e-daily-homepage-data-schema.json",
+  "first_light_schema_file": "data/content-intelligence/homepage/ag23e-first-light-card-schema.json",
+  "read_surface_schema_file": "data/content-intelligence/homepage/ag23e-read-surface-schema.json",
+  "reflection_schema_file": "data/content-intelligence/homepage/ag23e-reflection-surface-schema.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag23e-daily-homepage-data-schema-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag23e-first-light-source-verification-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag23e-to-ag23f-first-light-source-verification-plan-boundary.json",
+  "summary": {
+    "daily_homepage_schema_created": true,
+    "first_light_schema_created": true,
+    "read_surface_schema_created": true,
+    "reflection_schema_created": true,
+    "ready_for_ag23f": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

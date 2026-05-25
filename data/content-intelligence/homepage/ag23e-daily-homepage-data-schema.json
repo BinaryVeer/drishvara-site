@@ -1,0 +1,42 @@
+{
+  "module_id": "AG23E",
+  "title": "Daily Homepage Data Schema",
+  "status": "daily_homepage_data_schema_created_ready_for_ag23f",
+  "purpose": "Define planning-only data schema for the daily homepage surface across Discover, Read and Reflect.",
+  "homepage_route": [
+    "Discover",
+    "Read",
+    "Reflect"
+  ],
+  "daily_surface_record": {
+    "date_key": "YYYY-MM-DD",
+    "route_version": "discover_read_reflect_v1",
+    "first_light_cards": [],
+    "read_surface_items": [],
+    "reflection_items": [],
+    "editorial_status": "draft",
+    "source_verification_status": "pending",
+    "runtime_enabled": false
+  },
+  "schema_files": {
+    "first_light_card_schema": "data/content-intelligence/homepage/ag23e-first-light-card-schema.json",
+    "read_surface_schema": "data/content-intelligence/homepage/ag23e-read-surface-schema.json",
+    "reflection_surface_schema": "data/content-intelligence/homepage/ag23e-reflection-surface-schema.json"
+  },
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

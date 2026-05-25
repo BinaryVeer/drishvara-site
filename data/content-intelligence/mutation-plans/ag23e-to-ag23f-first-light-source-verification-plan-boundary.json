@@ -1,0 +1,28 @@
+{
+  "module_id": "AG23E",
+  "title": "AG23E to AG23F First Light Source and Verification Plan Boundary",
+  "status": "ag23f_boundary_created_not_started",
+  "next_stage_id": "AG23F",
+  "next_stage_title": "First Light Source and Verification Plan",
+  "allowed_scope": [
+    "Define source verification workflow.",
+    "Define allowed source categories and rejection rules.",
+    "Define checks against unsupported breaking-news claims.",
+    "Keep non-live and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No live feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
