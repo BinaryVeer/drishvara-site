@@ -1,0 +1,72 @@
+{
+  "module_id": "AG26",
+  "title": "Admin/Editor Role Permission Planning Model",
+  "status": "role_permission_planning_model_created_no_auth_activation",
+  "role_model_type": "planning_only_no_accounts_no_login",
+  "roles": [
+    {
+      "role_id": "founder_admin_planning",
+      "label": "Founder/Admin Planning Role",
+      "planned_responsibility": "Final review authority in future manual workflow planning.",
+      "runtime_account_created": false,
+      "login_enabled": false
+    },
+    {
+      "role_id": "editor_reviewer_planning",
+      "label": "Editor Reviewer Planning Role",
+      "planned_responsibility": "Review content structure, coherence and editorial fit.",
+      "runtime_account_created": false,
+      "login_enabled": false
+    },
+    {
+      "role_id": "source_reference_reviewer_planning",
+      "label": "Source and Reference Reviewer Planning Role",
+      "planned_responsibility": "Review source credibility, two-reference target and citation status.",
+      "runtime_account_created": false,
+      "login_enabled": false
+    },
+    {
+      "role_id": "risk_quality_reviewer_planning",
+      "label": "Risk and Quality Reviewer Planning Role",
+      "planned_responsibility": "Review sensitivity, unsupported claims, metadata and non-public controls.",
+      "runtime_account_created": false,
+      "login_enabled": false
+    },
+    {
+      "role_id": "layout_object_reviewer_planning",
+      "label": "Layout and Object Reviewer Planning Role",
+      "planned_responsibility": "Review image/object placement, credits and mobile-safe layout readiness.",
+      "runtime_account_created": false,
+      "login_enabled": false
+    }
+  ],
+  "permissions_runtime_enabled": false,
+  "auth_activation_allowed_in_ag26": false,
+  "blocked_state": {
+    "manual_workflow_runtime_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "user_accounts_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "review_queue_runtime_created": false,
+    "approval_queue_runtime_created": false,
+    "editor_queue_mutated": false,
+    "admin_queue_mutated": false,
+    "featured_read_selected_for_publication": false,
+    "featured_read_generated": false,
+    "article_file_created": false,
+    "image_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

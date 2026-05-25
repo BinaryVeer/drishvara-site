@@ -1,0 +1,117 @@
+{
+  "module_id": "AG26",
+  "title": "Manual Review Queue Workflow Model",
+  "status": "manual_review_queue_workflow_model_created_no_runtime_queue",
+  "workflow_type": "planning_only_manual_queue_model",
+  "step_count": 8,
+  "steps": [
+    {
+      "step_id": "candidate_record_intake",
+      "order": 1,
+      "purpose": "Receive future candidate record from AG25 production strengthening or later editorial planning.",
+      "required_source": [
+        "AG25 production control model",
+        "AG24B scoring gate",
+        "AG24F metadata schema"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "source_reference_review",
+      "order": 2,
+      "purpose": "Manually review two-reference target, source quality and under-editorial-verification status.",
+      "required_source": [
+        "AG25 source gate model",
+        "AG23F verification plan"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "risk_sensitivity_review",
+      "order": 3,
+      "purpose": "Manually review sensitivity, unsupported claims, breaking-news caution and category-specific risk.",
+      "required_source": [
+        "AG24I quality audit",
+        "AG25 quality strengthening model"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "layout_object_review",
+      "order": 4,
+      "purpose": "Review image/object readiness, image credit requirement and mobile-safe layout guard.",
+      "required_source": [
+        "AG25 quality strengthening model"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "editorial_decision_record",
+      "order": 5,
+      "purpose": "Record future editorial decision without approving publication or writing runtime data.",
+      "required_source": [
+        "AG26 role planning model"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "correction_loop_record",
+      "order": 6,
+      "purpose": "Define correction return path for future Admin/Editor workflow.",
+      "required_source": [
+        "AG24H editorial handoff model"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "final_internal_clearance_candidate",
+      "order": 7,
+      "purpose": "Define internal clearance candidate state while keeping publish approval false.",
+      "required_source": [
+        "AG24I non-public controls",
+        "AG25 production controls"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    },
+    {
+      "step_id": "publish_block_verification",
+      "order": 8,
+      "purpose": "Verify no public publishing, deployment, GitHub write or backend activation occurs.",
+      "required_source": [
+        "AG25 blocker register",
+        "AG24Z non-activation closure"
+      ],
+      "runtime_execution_status": "planned_not_executed"
+    }
+  ],
+  "review_queue_runtime_created": false,
+  "admin_queue_mutation_allowed": false,
+  "editor_queue_mutation_allowed": false,
+  "blocked_state": {
+    "manual_workflow_runtime_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "user_accounts_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "review_queue_runtime_created": false,
+    "approval_queue_runtime_created": false,
+    "editor_queue_mutated": false,
+    "admin_queue_mutated": false,
+    "featured_read_selected_for_publication": false,
+    "featured_read_generated": false,
+    "article_file_created": false,
+    "image_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

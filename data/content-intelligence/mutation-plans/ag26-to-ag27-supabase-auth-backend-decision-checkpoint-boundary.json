@@ -1,0 +1,37 @@
+{
+  "module_id": "AG26",
+  "title": "AG26 to AG27 Supabase/Auth/Backend Decision Checkpoint Boundary",
+  "status": "ag27_boundary_created_not_started",
+  "next_stage_id": "AG27",
+  "next_stage_title": "Supabase/Auth/Backend Decision Checkpoint",
+  "allowed_scope": [
+    "Consume AG26 role/permission planning model.",
+    "Consume AG26 manual queue workflow model.",
+    "Consume AG26 approval gate model.",
+    "Decide whether Supabase/Auth/backend remains deferred or enters a separately approved path.",
+    "Do not activate backend/Auth/Supabase automatically."
+  ],
+  "blocked_scope": [
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No user account creation.",
+    "No Auth activation.",
+    "No backend activation.",
+    "No Supabase activation.",
+    "No runtime review queue creation.",
+    "No Admin queue mutation.",
+    "No Editor queue mutation.",
+    "No Featured Read generation.",
+    "No article file creation.",
+    "No image generation trigger.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true
+}

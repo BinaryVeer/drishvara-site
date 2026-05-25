@@ -1,0 +1,37 @@
+{
+  "module_id": "AG26",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag27_and_later_dynamic_site",
+  "future_consumption": {
+    "AG27": "Supabase/Auth/Backend Decision Checkpoint should consume AG26 role, workflow and approval-gate models to decide whether backend activation remains deferred or enters a separately approved activation path.",
+    "AG28_to_AG40": "Backend/Auth/dynamic publishing stages may consume AG26 only if AG27 explicitly approves backend activation.",
+    "future_static_path": "If backend remains deferred, AG26 models remain manual governance references for static/GitHub-controlled production."
+  },
+  "blocked_state": {
+    "manual_workflow_runtime_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "user_accounts_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "review_queue_runtime_created": false,
+    "approval_queue_runtime_created": false,
+    "editor_queue_mutated": false,
+    "admin_queue_mutated": false,
+    "featured_read_selected_for_publication": false,
+    "featured_read_generated": false,
+    "article_file_created": false,
+    "image_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
