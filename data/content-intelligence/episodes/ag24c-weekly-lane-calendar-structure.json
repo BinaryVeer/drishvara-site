@@ -1,0 +1,80 @@
+{
+  "module_id": "AG24C",
+  "title": "Weekly Lane Calendar Structure",
+  "status": "weekly_lane_calendar_structure_created_no_topic_selection",
+  "duration_weeks": 12,
+  "total_lanes": 3,
+  "total_reserved_slots": 36,
+  "lanes": [
+    {
+      "lane_id": "tuesday_learning",
+      "day": "Tuesday",
+      "product_name": "Tuesday Learning Series",
+      "primary_role": "Teach one evergreen topic chapter-wise.",
+      "allowed_topic_types": [
+        "evergreen_educational_series",
+        "public_systems_insight"
+      ],
+      "required_scoring_stage": "AG24B",
+      "required_decision": "strong_series_candidate",
+      "minimum_score_for_promotion": 25
+    },
+    {
+      "lane_id": "friday_world_lens",
+      "day": "Friday",
+      "product_name": "Friday World Lens / Burning Topic",
+      "primary_role": "Explain evolving public or world issues with context and continuity.",
+      "allowed_topic_types": [
+        "burning_current_topic",
+        "first_light_promoted_signal",
+        "public_systems_insight"
+      ],
+      "required_scoring_stage": "AG24B",
+      "required_decision": "strong_series_candidate",
+      "minimum_score_for_promotion": 25
+    },
+    {
+      "lane_id": "sunday_deep_read",
+      "day": "Sunday",
+      "product_name": "Sunday Deep Read / Weekly Lens",
+      "primary_role": "Create a reflective flagship read connecting events, knowledge and meaning.",
+      "allowed_topic_types": [
+        "reflective_cultural_topic",
+        "public_systems_insight",
+        "first_light_promoted_signal"
+      ],
+      "required_scoring_stage": "AG24B",
+      "required_decision": "strong_series_candidate",
+      "minimum_score_for_promotion": 25
+    }
+  ],
+  "week_frames": [
+    "Orientation and promise",
+    "Historical or conceptual background",
+    "Core mechanism or central concept",
+    "Evidence, sources and verification",
+    "Case example or lived/public context",
+    "Visual explanation and object-rich learning",
+    "Application and practical interpretation",
+    "Complexity, limitations and contradictions",
+    "Comparison with adjacent ideas or systems",
+    "Future direction and emerging questions",
+    "Reader synthesis and reflective takeaway",
+    "Season consolidation and next-season bridge"
+  ],
+  "blocked_state": {
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

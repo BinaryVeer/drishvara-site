@@ -1,0 +1,55 @@
+{
+  "module_id": "AG24C",
+  "title": "12-Week Episode Calendar Plan",
+  "status": "twelve_week_episode_calendar_plan_created_ready_for_ag24d",
+  "depends_on": [
+    "AG24A",
+    "AG24B",
+    "AG23G",
+    "AG23F",
+    "AG23Z"
+  ],
+  "generated_from": {
+    "ag24aReview": "data/content-intelligence/quality-reviews/ag24a-episodic-content-doctrine.json",
+    "ag24aDoctrine": "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json",
+    "ag24aRhythm": "data/content-intelligence/episodes/ag24a-weekly-episodic-rhythm-doctrine.json",
+    "ag24aSeriesTypes": "data/content-intelligence/episodes/ag24a-series-type-registry.json",
+    "ag24bPlan": "data/content-intelligence/episodes/ag24b-topic-selection-scoring-engine-plan.json",
+    "ag23gScoringModel": "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "ag23fVerificationPlan": "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json",
+    "ag23zClosure": "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "calendar_plan_file": "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json",
+  "lane_structure_file": "data/content-intelligence/episodes/ag24c-weekly-lane-calendar-structure.json",
+  "slot_schema_file": "data/content-intelligence/episodes/ag24c-episode-slot-schema.json",
+  "future_consumption_plan_file": "data/content-intelligence/episodes/ag24c-future-consumption-plan.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag24c-12-week-episode-calendar-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag24c-educational-series-structure-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag24c-to-ag24d-educational-series-structure-plan-boundary.json",
+  "summary": {
+    "twelve_week_calendar_created": true,
+    "total_reserved_slots": 36,
+    "topic_assignment_done": false,
+    "article_generation_done": false,
+    "ready_for_ag24d": true,
+    "prior_ag_records_consumed": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
