@@ -1,0 +1,41 @@
+{
+  "module_id": "AG22Z",
+  "title": "Repeatable Static Publishing Workflow Closure",
+  "status": "ag22_repeatable_static_publishing_workflow_closed_ready_for_ag23a_candidate_gate",
+  "depends_on": [
+    "AG22A",
+    "AG22B",
+    "AG22C",
+    "AG22D"
+  ],
+  "generated_from": {
+    "ag22aReview": "data/content-intelligence/quality-reviews/ag22a-repeatable-publishing-sop-plan.json",
+    "ag22bReview": "data/content-intelligence/quality-reviews/ag22b-repeatable-publishing-sop-audit.json",
+    "ag22cReview": "data/content-intelligence/quality-reviews/ag22c-batch-publishing-dry-run.json",
+    "ag22dReview": "data/content-intelligence/quality-reviews/ag22d-batch-dry-run-audit.json",
+    "ag22dAudit": "data/content-intelligence/audit-records/ag22d-batch-dry-run-audit-report.json",
+    "ag22dDecision": "data/content-intelligence/go-live/ag22d-repeatable-static-publishing-workflow-closure-decision-record.json",
+    "ag22dReadiness": "data/content-intelligence/quality-registry/ag22d-repeatable-static-publishing-workflow-closure-readiness-record.json",
+    "ag22dBoundary": "data/content-intelligence/mutation-plans/ag22d-to-ag22z-repeatable-static-publishing-workflow-closure-boundary.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "closure_file": "data/content-intelligence/closure-records/ag22z-repeatable-static-publishing-workflow-closure.json",
+  "summary_file": "data/content-intelligence/go-live/ag22z-repeatable-static-publishing-workflow-summary.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag22z-first-controlled-static-publish-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag22z-to-ag23a-first-controlled-static-publish-candidate-gate-boundary.json",
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

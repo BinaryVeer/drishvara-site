@@ -1,0 +1,23 @@
+{
+  "module_id": "AG22Z",
+  "title": "AG22Z to AG23A First Controlled Static Publish Candidate Gate Boundary",
+  "status": "ag23a_boundary_created_not_started",
+  "next_stage_id": "AG23A",
+  "next_stage_title": "First Controlled Static Publish Candidate Gate",
+  "allowed_scope": [
+    "Select or confirm first article candidate for controlled static publish.",
+    "Confirm intended static file path and public surface deltas.",
+    "Confirm GitHub write, deployment, smoke-test and rollback preconditions.",
+    "Keep Supabase/Auth/backend deferred."
+  ],
+  "blocked_scope": [
+    "No article mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No public visibility switch.",
+    "No deployment.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

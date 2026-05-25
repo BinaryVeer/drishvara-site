@@ -1,0 +1,36 @@
+{
+  "module_id": "AG22Z",
+  "title": "Repeatable Static Publishing Workflow Summary",
+  "status": "repeatable_static_publishing_workflow_closed",
+  "completed_stages": [
+    "AG22A — Repeatable Publishing SOP Plan",
+    "AG22B — SOP Audit",
+    "AG22C — Batch Publishing Dry-run",
+    "AG22D — Batch Dry-run Audit"
+  ],
+  "result": {
+    "sop_defined": true,
+    "sop_audited": true,
+    "batch_dry_run_completed": true,
+    "batch_dry_run_audited": true,
+    "workflow_ready_for_first_controlled_static_publish_candidate_gate": true,
+    "real_execution_done": false
+  },
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

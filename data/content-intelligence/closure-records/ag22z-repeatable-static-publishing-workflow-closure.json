@@ -1,0 +1,31 @@
+{
+  "module_id": "AG22Z",
+  "title": "Repeatable Static Publishing Workflow Closure",
+  "status": "ag22_repeatable_static_publishing_workflow_closed_ready_for_ag23a_candidate_gate",
+  "closure_decision": {
+    "ag22_closed": true,
+    "proceed_to_ag23a_first_controlled_static_publish_candidate_gate": true,
+    "perform_article_mutation_now": false,
+    "perform_github_write_now": false,
+    "perform_public_visibility_switch_now": false,
+    "perform_deployment_now": false,
+    "perform_publishing_now": false,
+    "activate_supabase_auth_backend_now": false
+  },
+  "summary_file": "data/content-intelligence/go-live/ag22z-repeatable-static-publishing-workflow-summary.json",
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
