@@ -1,0 +1,45 @@
+{
+  "module_id": "AG24Z",
+  "title": "AG25 Featured Reads Production Strengthening Handoff Plan",
+  "status": "ag25_handoff_created_not_started",
+  "next_stage_id": "AG25",
+  "next_stage_title": "Featured Reads Production Strengthening",
+  "handoff_assets": [
+    "AG24A doctrine for episodic rhythm and guardrails",
+    "AG24B topic scoring engine",
+    "AG24C 12-week calendar and 36-slot structure",
+    "AG24D Tuesday Learning educational structure",
+    "AG24E Friday World Lens burning-topic continuity model",
+    "AG24F episode metadata schema",
+    "AG24G non-active index and navigation scaffold",
+    "AG24H production conveyor",
+    "AG24I quality audit checklist and source/risk controls"
+  ],
+  "handoff_constraints": [
+    "AG25 must not ignore AG24 records.",
+    "AG25 must remain non-publish/non-deploy unless separately approved.",
+    "AG25 must preserve source verification and two-reference discipline.",
+    "AG25 must preserve non-Supabase/non-backend status unless explicitly activated later."
+  ],
+  "blocked_state": {
+    "ag24_chain_closed": true,
+    "public_publish_enabled": false,
+    "article_generation_enabled": false,
+    "episode_generation_enabled": false,
+    "topic_selection_enabled": false,
+    "live_feed_enabled": false,
+    "scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "runtime_navigation_enabled": false,
+    "production_conveyor_runtime_enabled": false,
+    "quality_audit_runtime_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

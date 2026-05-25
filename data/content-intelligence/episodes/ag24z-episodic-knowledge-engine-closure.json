@@ -1,0 +1,138 @@
+{
+  "module_id": "AG24Z",
+  "title": "Episodic Knowledge Engine Closure",
+  "status": "episodic_knowledge_engine_closed_ready_for_ag25",
+  "purpose": "Close the AG24 Episodic Knowledge Engine planning chain as a governed, non-active foundation for Drishvara's future episodic content workflows.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/quality-reviews/ag24a-episodic-content-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json",
+    "data/content-intelligence/episodes/ag24b-topic-selection-scoring-engine-plan.json",
+    "data/content-intelligence/quality-reviews/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/quality-reviews/ag24d-educational-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24d-educational-series-structure-plan.json",
+    "data/content-intelligence/quality-reviews/ag24e-burning-topic-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24e-burning-topic-series-structure-plan.json",
+    "data/content-intelligence/quality-reviews/ag24f-episode-metadata-schema.json",
+    "data/content-intelligence/episodes/ag24f-episode-metadata-schema.json",
+    "data/content-intelligence/quality-reviews/ag24g-episode-index-navigation-scaffold.json",
+    "data/content-intelligence/episodes/ag24g-episode-index-navigation-scaffold.json",
+    "data/content-intelligence/quality-reviews/ag24h-episode-production-conveyor.json",
+    "data/content-intelligence/episodes/ag24h-episode-production-conveyor.json",
+    "data/content-intelligence/quality-reviews/ag24i-episode-quality-audit.json",
+    "data/content-intelligence/episodes/ag24i-episode-quality-audit-plan.json",
+    "data/content-intelligence/quality-registry/ag24i-episodic-knowledge-engine-closure-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag24i-to-ag24z-episodic-knowledge-engine-closure-boundary.json",
+    "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json",
+    "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json",
+    "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  ],
+  "consumed_stage_chain": [
+    {
+      "stage_id": "AG24A",
+      "title": "Episodic Content Doctrine",
+      "status": "episodic_content_doctrine_created_ready_for_ag24b",
+      "file": "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json"
+    },
+    {
+      "stage_id": "AG24B",
+      "title": "Topic Selection and Scoring Engine Plan",
+      "status": "governed_plan_only_non_active",
+      "file": "data/content-intelligence/episodes/ag24b-topic-selection-scoring-engine-plan.json"
+    },
+    {
+      "stage_id": "AG24C",
+      "title": "12-Week Episode Calendar Plan",
+      "status": "twelve_week_episode_calendar_plan_created_ready_for_ag24d",
+      "file": "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json"
+    },
+    {
+      "stage_id": "AG24D",
+      "title": "Educational Series Structure Plan",
+      "status": "educational_series_structure_plan_created_ready_for_ag24e",
+      "file": "data/content-intelligence/episodes/ag24d-educational-series-structure-plan.json"
+    },
+    {
+      "stage_id": "AG24E",
+      "title": "Burning Topic Series Structure Plan",
+      "status": "burning_topic_series_structure_plan_created_ready_for_ag24f",
+      "file": "data/content-intelligence/episodes/ag24e-burning-topic-series-structure-plan.json"
+    },
+    {
+      "stage_id": "AG24F",
+      "title": "Episode Metadata Schema",
+      "status": "episode_metadata_schema_created_ready_for_ag24g",
+      "file": "data/content-intelligence/episodes/ag24f-episode-metadata-schema.json"
+    },
+    {
+      "stage_id": "AG24G",
+      "title": "Episode Index and Navigation Scaffold",
+      "status": "episode_index_navigation_scaffold_created_ready_for_ag24h",
+      "file": "data/content-intelligence/episodes/ag24g-episode-index-navigation-scaffold.json"
+    },
+    {
+      "stage_id": "AG24H",
+      "title": "Episode Production Conveyor",
+      "status": "episode_production_conveyor_created_ready_for_ag24i",
+      "file": "data/content-intelligence/episodes/ag24h-episode-production-conveyor.json"
+    },
+    {
+      "stage_id": "AG24I",
+      "title": "Episode Quality Audit",
+      "status": "episode_quality_audit_created_ready_for_ag24z",
+      "file": "data/content-intelligence/episodes/ag24i-episode-quality-audit-plan.json"
+    }
+  ],
+  "closure_decision": {
+    "ag24_closed": true,
+    "ready_for_ag25": true,
+    "next_stage_id": "AG25",
+    "next_stage_title": "Featured Reads Production Strengthening",
+    "static_github_controlled_path_preserved": true,
+    "supabase_auth_backend_deferred": true,
+    "no_public_mutation_done": true,
+    "no_runtime_activation_done": true
+  },
+  "closure_summary": {
+    "stages_closed": 9,
+    "calendar_reserved_slots": 36,
+    "metadata_schema_created": true,
+    "index_scaffold_created": true,
+    "production_conveyor_created": true,
+    "quality_audit_created": true,
+    "topic_selection_done": false,
+    "episode_generation_done": false,
+    "article_generation_done": false,
+    "public_publish_done": false,
+    "backend_activation_done": false
+  },
+  "source_chain_file": "data/content-intelligence/episodes/ag24z-ag24-source-chain-register.json",
+  "non_activation_closure_file": "data/content-intelligence/episodes/ag24z-non-activation-closure-register.json",
+  "ag25_handoff_plan_file": "data/content-intelligence/episodes/ag24z-ag25-featured-reads-handoff-plan.json",
+  "future_consumption_plan_file": "data/content-intelligence/episodes/ag24z-future-consumption-plan.json",
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "ag24_chain_closed": true,
+    "public_publish_enabled": false,
+    "article_generation_enabled": false,
+    "episode_generation_enabled": false,
+    "topic_selection_enabled": false,
+    "live_feed_enabled": false,
+    "scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "runtime_navigation_enabled": false,
+    "production_conveyor_runtime_enabled": false,
+    "quality_audit_runtime_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
