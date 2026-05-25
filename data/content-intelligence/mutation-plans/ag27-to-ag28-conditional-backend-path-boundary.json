@@ -1,0 +1,38 @@
+{
+  "module_id": "AG27",
+  "title": "AG27 to AG28 Conditional Backend Path Boundary",
+  "status": "ag28_backend_path_blocked_pending_explicit_approval",
+  "next_stage_id": "AG28",
+  "next_stage_title": "Conditional backend/Auth/dynamic publishing path",
+  "allowed_scope_without_approval": [
+    "Review AG27 decision record.",
+    "Discuss whether backend remains deferred.",
+    "Prepare no code and no activation."
+  ],
+  "allowed_scope_only_if_explicitly_approved": [
+    "Begin backend design planning.",
+    "Prepare Supabase/Auth/backend schema planning.",
+    "Define security and rollback controls before runtime activation."
+  ],
+  "blocked_scope": [
+    "No Supabase activation.",
+    "No Auth activation.",
+    "No backend activation.",
+    "No database schema creation.",
+    "No database migration creation.",
+    "No environment secret creation.",
+    "No user account creation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No runtime API creation.",
+    "No runtime write activation.",
+    "No dynamic publishing activation.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No GitHub write automation.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required": true
+}

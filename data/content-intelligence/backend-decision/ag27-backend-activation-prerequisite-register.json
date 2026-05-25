@@ -1,0 +1,65 @@
+{
+  "module_id": "AG27",
+  "title": "Backend Activation Prerequisite Register",
+  "status": "backend_activation_prerequisites_registered_not_satisfied",
+  "activation_allowed_now": false,
+  "explicit_user_approval_required": true,
+  "prerequisites": [
+    {
+      "prerequisite_id": "approval",
+      "label": "Explicit approval to activate backend",
+      "satisfied": false
+    },
+    {
+      "prerequisite_id": "data_model",
+      "label": "Final backend data model reviewed",
+      "satisfied": false
+    },
+    {
+      "prerequisite_id": "security",
+      "label": "Auth/security/access-control rules reviewed",
+      "satisfied": false
+    },
+    {
+      "prerequisite_id": "cost",
+      "label": "Cost and usage exposure reviewed",
+      "satisfied": false
+    },
+    {
+      "prerequisite_id": "secrets",
+      "label": "Secrets/environment variable handling approved",
+      "satisfied": false
+    },
+    {
+      "prerequisite_id": "rollback",
+      "label": "Rollback and disablement plan prepared",
+      "satisfied": false
+    },
+    {
+      "prerequisite_id": "manual_governance",
+      "label": "Admin/Editor manual governance translated into backend rules",
+      "satisfied": false
+    }
+  ],
+  "blocked_state": {
+    "backend_decision_checkpoint_created": true,
+    "backend_activation_approved": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "database_schema_created": false,
+    "database_migration_created": false,
+    "env_secret_created": false,
+    "user_accounts_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_api_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

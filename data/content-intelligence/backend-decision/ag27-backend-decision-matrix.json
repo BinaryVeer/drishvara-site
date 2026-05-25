@@ -1,0 +1,60 @@
+{
+  "module_id": "AG27",
+  "title": "Backend Decision Matrix",
+  "status": "backend_decision_matrix_created_no_activation",
+  "current_decision": "defer_supabase_auth_backend",
+  "decision_basis": [
+    "Hybrid staged path selected: static/GitHub-controlled go-live first.",
+    "AG24Z closed the episodic engine as non-active and no-backend.",
+    "AG25 and AG26 strengthened production and manual workflow planning without runtime activation.",
+    "No explicit user approval has been given to activate Supabase/Auth/backend.",
+    "Backend activation would introduce security, cost, operations and governance responsibilities that require a separate approval point."
+  ],
+  "decision_options": [
+    {
+      "option_id": "continue_static_governed_path",
+      "label": "Continue static/GitHub-controlled path",
+      "selected_now": true,
+      "requires_user_approval": false,
+      "risk_level": "low",
+      "note": "Preserves current non-mutating/non-backend governance."
+    },
+    {
+      "option_id": "prepare_backend_design_only",
+      "label": "Prepare backend design only",
+      "selected_now": false,
+      "requires_user_approval": true,
+      "risk_level": "medium",
+      "note": "Would still avoid activation but may begin schema planning if approved."
+    },
+    {
+      "option_id": "activate_supabase_auth_backend",
+      "label": "Activate Supabase/Auth/backend",
+      "selected_now": false,
+      "requires_user_approval": true,
+      "risk_level": "high",
+      "note": "Blocked unless explicit approval is given after AG27."
+    }
+  ],
+  "blocked_state": {
+    "backend_decision_checkpoint_created": true,
+    "backend_activation_approved": false,
+    "supabase_enabled": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "database_schema_created": false,
+    "database_migration_created": false,
+    "env_secret_created": false,
+    "user_accounts_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_api_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
