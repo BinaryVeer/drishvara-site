@@ -1,0 +1,32 @@
+{
+  "module_id": "AG24G",
+  "title": "AG24G to AG24H Episode Production Conveyor Boundary",
+  "status": "ag24h_boundary_created_not_started",
+  "next_stage_id": "AG24H",
+  "next_stage_title": "Episode Production Conveyor",
+  "allowed_scope": [
+    "Consume AG24G non-active index entries.",
+    "Define topic-to-brief-to-review production conveyor.",
+    "Use AG24F lifecycle and production-control fields.",
+    "Keep all generation and publication blocked unless explicitly approved in later governed stages."
+  ],
+  "blocked_scope": [
+    "No public episode index creation.",
+    "No public navigation creation.",
+    "No runtime navigation activation.",
+    "No final episode topic selection.",
+    "No episode generation.",
+    "No article generation.",
+    "No episode file creation.",
+    "No article file creation.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
