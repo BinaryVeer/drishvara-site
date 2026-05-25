@@ -1,0 +1,30 @@
+{
+  "module_id": "AG24F",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag24g_to_dynamic_site",
+  "future_consumption": {
+    "AG24G": "Episode Index and Navigation Scaffold should consume episode_id, series_id, season_id, lane_id, episode_no, previous/next fields and lifecycle status.",
+    "AG24H": "Episode Production Conveyor should use lifecycle_status, topic scoring fields, source status, risk status and production-control fields.",
+    "AG24I": "Episode Quality Audit should validate metadata completeness, no fake references, no public flags and source/risk consistency.",
+    "AG24Z": "Episodic Knowledge Engine Closure should preserve metadata schema as the core episode contract.",
+    "future_dynamic_site": "Later backend/Admin/Editor stages must consume AG24F metadata fields instead of inventing runtime schemas from scratch."
+  },
+  "blocked_state": {
+    "metadata_runtime_enabled": false,
+    "episode_index_created": false,
+    "navigation_scaffold_created": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

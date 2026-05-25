@@ -1,0 +1,32 @@
+{
+  "module_id": "AG24F",
+  "title": "AG24F to AG24G Episode Index and Navigation Scaffold Boundary",
+  "status": "ag24g_boundary_created_not_started",
+  "next_stage_id": "AG24G",
+  "next_stage_title": "Episode Index and Navigation Scaffold",
+  "allowed_scope": [
+    "Consume AG24F episode metadata schema.",
+    "Define non-active episode index structure.",
+    "Define previous/next navigation scaffold.",
+    "Keep all episode records non-public and non-mutating."
+  ],
+  "blocked_scope": [
+    "No metadata runtime activation.",
+    "No episode index creation.",
+    "No navigation scaffold creation.",
+    "No final episode topic selection.",
+    "No episode generation.",
+    "No article generation.",
+    "No episode file creation.",
+    "No article file creation.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

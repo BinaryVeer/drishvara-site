@@ -1,0 +1,47 @@
+{
+  "module_id": "AG24F",
+  "title": "Series, Season and Slot Metadata Contract",
+  "status": "series_season_slot_metadata_contract_created_no_runtime",
+  "supported_lanes": [
+    {
+      "lane_id": "tuesday_learning",
+      "source_stage": "AG24D",
+      "metadata_focus": "chapter_role, learning_question, educational sequence"
+    },
+    {
+      "lane_id": "friday_world_lens",
+      "source_stage": "AG24E",
+      "metadata_focus": "continuity_role, current_context, source/risk status"
+    },
+    {
+      "lane_id": "sunday_deep_read",
+      "source_stage": "AG24C",
+      "metadata_focus": "reflection/deep-read identity; detailed structure deferred to later AG24 stage"
+    }
+  ],
+  "season_contract": {
+    "season_id_format": "ag24-season-01",
+    "episode_id_format": "ag24-{lane_id}-s01-e{episode_no}",
+    "slot_id_source": "AG24C slot_id",
+    "season_length_weeks": 12,
+    "reserved_slot_count": 36
+  },
+  "blocked_state": {
+    "metadata_runtime_enabled": false,
+    "episode_index_created": false,
+    "navigation_scaffold_created": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

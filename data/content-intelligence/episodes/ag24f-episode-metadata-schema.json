@@ -1,0 +1,508 @@
+{
+  "module_id": "AG24F",
+  "title": "Episode Metadata Schema",
+  "status": "episode_metadata_schema_created_ready_for_ag24g",
+  "purpose": "Define non-runtime metadata fields for Drishvara episodic knowledge records so future index, navigation, conveyor and quality stages can consume consistent episode identity, source, risk, navigation and production-control fields.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-weekly-episodic-rhythm-doctrine.json",
+    "data/content-intelligence/episodes/ag24a-series-type-registry.json",
+    "data/content-intelligence/episodes/ag24b-topic-selection-scoring-engine-plan.json",
+    "data/content-intelligence/episodes/ag24c-12-week-episode-calendar-plan.json",
+    "data/content-intelligence/episodes/ag24c-episode-slot-schema.json",
+    "data/content-intelligence/episodes/ag24d-educational-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24d-educational-chapter-model.json",
+    "data/content-intelligence/quality-reviews/ag24e-burning-topic-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24e-burning-topic-series-structure-plan.json",
+    "data/content-intelligence/episodes/ag24e-friday-world-lens-series-structure.json",
+    "data/content-intelligence/episodes/ag24e-burning-topic-continuity-model.json",
+    "data/content-intelligence/episodes/ag24e-future-consumption-plan.json",
+    "data/content-intelligence/quality-registry/ag24e-episode-metadata-schema-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag24e-to-ag24f-episode-metadata-schema-boundary.json",
+    "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json",
+    "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json"
+  ],
+  "consumed_source_summary": {
+    "ag24a_status": "episodic_content_doctrine_created_ready_for_ag24b",
+    "ag24a_rhythm_status": "weekly_episodic_rhythm_doctrine_created_no_generation",
+    "ag24a_series_type_status": "series_type_registry_created_no_generation",
+    "ag24b_status": "governed_plan_only_non_active",
+    "ag24c_reserved_slots": 36,
+    "ag24d_status": "educational_series_structure_plan_created_ready_for_ag24e",
+    "ag24e_status": "burning_topic_series_structure_plan_created_ready_for_ag24f",
+    "ag24e_ready_for_ag24f": true,
+    "ag23g_status": "first_light_topic_scoring_model_created_ready_for_ag23h",
+    "ag23f_status": "first_light_source_verification_plan_created_ready_for_ag23g",
+    "ag23z_closed": true
+  },
+  "schema_scope": {
+    "metadata_runtime_enabled": false,
+    "total_field_groups": 7,
+    "total_schema_fields": 51,
+    "supported_lanes": [
+      "tuesday_learning",
+      "friday_world_lens",
+      "sunday_deep_read"
+    ],
+    "lifecycle_status_count": 7,
+    "index_creation_status": "blocked_until_ag24g"
+  },
+  "metadata_field_groups": {
+    "identity": [
+      "episode_id",
+      "series_id",
+      "season_id",
+      "slot_id",
+      "lane_id",
+      "episode_no",
+      "week",
+      "day",
+      "product_name",
+      "planned_badge"
+    ],
+    "series_context": [
+      "series_type",
+      "series_title",
+      "series_archetype_id",
+      "chapter_role",
+      "continuity_role",
+      "week_frame",
+      "learning_question",
+      "current_context"
+    ],
+    "topic_scoring": [
+      "topic_id",
+      "topic_title",
+      "topic_type",
+      "ag24b_decision",
+      "ag24b_total_score",
+      "ag24b_score_breakdown",
+      "topic_selection_status"
+    ],
+    "source_and_references": [
+      "source_verification_required",
+      "source_status",
+      "target_verified_references",
+      "reference_pack_status",
+      "reference_count",
+      "under_editorial_verification",
+      "unsupported_claims_blocked"
+    ],
+    "risk_and_safety": [
+      "risk_status",
+      "sensitivity_risk",
+      "repetition_risk",
+      "health_or_legal_or_political_caution",
+      "breaking_news_caution",
+      "editorial_caution_note"
+    ],
+    "navigation": [
+      "previous_episode_id",
+      "next_episode_id",
+      "index_position",
+      "series_total_episodes",
+      "navigation_status"
+    ],
+    "production_control": [
+      "lifecycle_status",
+      "public_visibility",
+      "publish_approved",
+      "article_generation_allowed",
+      "backend_required",
+      "supabase_required",
+      "created_by",
+      "contact_email"
+    ]
+  },
+  "schema_fields": [
+    {
+      "field": "episode_id",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "series_id",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "season_id",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "slot_id",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "lane_id",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "episode_no",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "week",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "day",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "product_name",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "planned_badge",
+      "group": "identity",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "series_type",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "series_title",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "series_archetype_id",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "chapter_role",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "continuity_role",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "week_frame",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "learning_question",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "current_context",
+      "group": "series_context",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "topic_id",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "future_value_blocked",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "topic_title",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "future_value_blocked",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "topic_type",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "ag24b_decision",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "ag24b_total_score",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "future_value_blocked",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "ag24b_score_breakdown",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "topic_selection_status",
+      "group": "topic_scoring",
+      "required_in_ag24f": true,
+      "value_status": "future_value_blocked",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "source_verification_required",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "source_status",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "target_verified_references",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "reference_pack_status",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "reference_count",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "under_editorial_verification",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "unsupported_claims_blocked",
+      "group": "source_and_references",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "risk_status",
+      "group": "risk_and_safety",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "sensitivity_risk",
+      "group": "risk_and_safety",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "repetition_risk",
+      "group": "risk_and_safety",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "health_or_legal_or_political_caution",
+      "group": "risk_and_safety",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "breaking_news_caution",
+      "group": "risk_and_safety",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "editorial_caution_note",
+      "group": "risk_and_safety",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "previous_episode_id",
+      "group": "navigation",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "next_episode_id",
+      "group": "navigation",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "index_position",
+      "group": "navigation",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "series_total_episodes",
+      "group": "navigation",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "navigation_status",
+      "group": "navigation",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "lifecycle_status",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "public_visibility",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "publish_approved",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "article_generation_allowed",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "backend_required",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "supabase_required",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "created_by",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    },
+    {
+      "field": "contact_email",
+      "group": "production_control",
+      "required_in_ag24f": true,
+      "value_status": "schema_only",
+      "public_allowed_in_ag24f": false
+    }
+  ],
+  "lifecycle_registry_file": "data/content-intelligence/episodes/ag24f-episode-lifecycle-status-registry.json",
+  "series_season_contract_file": "data/content-intelligence/episodes/ag24f-series-season-slot-metadata-contract.json",
+  "navigation_reference_risk_contract_file": "data/content-intelligence/episodes/ag24f-navigation-reference-risk-metadata-contract.json",
+  "future_consumption_plan_file": "data/content-intelligence/episodes/ag24f-future-consumption-plan.json",
+  "public_visibility_default": false,
+  "publish_approved_default": false,
+  "article_generation_allowed_default": false,
+  "backend_required_default": false,
+  "supabase_required_default": false,
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "metadata_runtime_enabled": false,
+    "episode_index_created": false,
+    "navigation_scaffold_created": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

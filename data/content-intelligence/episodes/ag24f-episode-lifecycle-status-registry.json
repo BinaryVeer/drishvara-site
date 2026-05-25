@@ -1,0 +1,70 @@
+{
+  "module_id": "AG24F",
+  "title": "Episode Lifecycle Status Registry",
+  "status": "episode_lifecycle_status_registry_created_no_runtime",
+  "lifecycle_statuses": [
+    {
+      "status_id": "reserved_not_selected",
+      "meaning": "Calendar slot exists but no topic has been selected.",
+      "public_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "status_id": "topic_candidate_scored",
+      "meaning": "A topic candidate has AG24B scoring evidence but is not yet selected.",
+      "public_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "status_id": "selected_for_planning",
+      "meaning": "A future editorial stage selected the topic for planning only.",
+      "public_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "status_id": "brief_ready",
+      "meaning": "A future brief may be ready for internal review only.",
+      "public_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "status_id": "draft_ready_for_review",
+      "meaning": "A future draft may be ready for Admin/Editor review only.",
+      "public_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "status_id": "returned_for_correction",
+      "meaning": "A future Admin/Editor workflow may return the item for correction.",
+      "public_allowed": false,
+      "publish_allowed": false
+    },
+    {
+      "status_id": "publish_candidate",
+      "meaning": "A future item may become a candidate for publication only after all gates.",
+      "public_allowed": false,
+      "publish_allowed": false
+    }
+  ],
+  "default_status": "reserved_not_selected",
+  "public_visibility_rule": "No AG24F lifecycle status permits public visibility.",
+  "publish_approval_rule": "No AG24F lifecycle status permits publishing.",
+  "blocked_state": {
+    "metadata_runtime_enabled": false,
+    "episode_index_created": false,
+    "navigation_scaffold_created": false,
+    "episode_topic_selected": false,
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
