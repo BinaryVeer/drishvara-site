@@ -1,0 +1,42 @@
+{
+  "module_id": "AG25",
+  "title": "Featured Reads Quality Strengthening Model",
+  "status": "quality_strengthening_model_created_no_public_mutation",
+  "quality_checks": [
+    "topic relevance and originality",
+    "AG24B scoring compatibility",
+    "reference availability and credibility",
+    "source-claim alignment",
+    "risk and sensitivity review",
+    "image/object attribution readiness",
+    "mobile-safe layout readiness",
+    "metadata completeness",
+    "non-public and no-publish flags",
+    "cost-control gate before generation"
+  ],
+  "consumed_quality_sources": [
+    "data/content-intelligence/episodes/ag24i-episode-quality-audit-plan.json",
+    "data/content-intelligence/episodes/ag24f-episode-metadata-schema.json",
+    "data/content-intelligence/homepage/ag23f-first-light-source-verification-plan.json"
+  ],
+  "public_mutation_allowed": false,
+  "blocked_state": {
+    "featured_read_selected_for_publication": false,
+    "featured_read_generated": false,
+    "article_file_created": false,
+    "image_generation_triggered": false,
+    "reference_fetch_runtime_enabled": false,
+    "live_scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

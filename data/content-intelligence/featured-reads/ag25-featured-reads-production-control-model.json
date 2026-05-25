@@ -1,0 +1,40 @@
+{
+  "module_id": "AG25",
+  "title": "Featured Reads Production Control Model",
+  "status": "production_control_model_created_no_generation",
+  "production_flow": [
+    "candidate intake",
+    "topic/scoring review",
+    "source/reference gate",
+    "risk/sensitivity gate",
+    "image/object planning",
+    "metadata preparation",
+    "editorial verification",
+    "quality audit handoff"
+  ],
+  "generation_allowed_in_ag25": false,
+  "image_generation_allowed_in_ag25": false,
+  "article_file_creation_allowed_in_ag25": false,
+  "github_write_allowed_in_ag25": false,
+  "deploy_allowed_in_ag25": false,
+  "publish_allowed_in_ag25": false,
+  "blocked_state": {
+    "featured_read_selected_for_publication": false,
+    "featured_read_generated": false,
+    "article_file_created": false,
+    "image_generation_triggered": false,
+    "reference_fetch_runtime_enabled": false,
+    "live_scraping_enabled": false,
+    "external_api_call_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
