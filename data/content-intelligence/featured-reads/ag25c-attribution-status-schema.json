@@ -1,0 +1,50 @@
+{
+  "module_id": "AG25C",
+  "title": "Attribution Status Schema",
+  "status": "attribution_status_schema_created_no_runtime",
+  "allowed_statuses": [
+    "credit_signal_present_unverified",
+    "verified_credit_present",
+    "needs_credit_or_editorial_attribution_review",
+    "public_domain_or_generated_asset_pending_note",
+    "source_unknown_under_editorial_verification",
+    "blocked_missing_required_credit"
+  ],
+  "required_future_fields": [
+    "asset_id",
+    "asset_type",
+    "asset_location",
+    "credit_text",
+    "source_url",
+    "licence_or_usage_note",
+    "verification_status",
+    "editorial_note"
+  ],
+  "attribution_rules": [
+    "Every article image/object should have a credit, source note, generated-asset note or editorial-verification status.",
+    "Generated images should still carry generation/ownership/editorial note.",
+    "Externally sourced images should not be treated as usable without source/credit review.",
+    "Credit completion must not distort article layout or card display."
+  ],
+  "runtime_attribution_check_enabled": false,
+  "blocked_state": {
+    "image_credit_runtime_enabled": false,
+    "attribution_runtime_enabled": false,
+    "article_file_mutated": false,
+    "image_credit_written_to_article": false,
+    "attribution_written_to_article": false,
+    "image_generation_triggered": false,
+    "image_file_mutated": false,
+    "layout_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
