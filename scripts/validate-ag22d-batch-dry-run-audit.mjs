@@ -49,9 +49,8 @@ const pkg = readJson("package.json");
 
 if (review.status !== "batch_dry_run_audit_passed_ready_for_ag22z_closure") fail("Review status mismatch.");
 if (audit.status !== "batch_dry_run_audit_passed") fail("Audit status mismatch.");
-if (audit.failed_checks.length !== 0) fail("Audit failed checks must be zero.");
-if (batch_dry_run_audit_passed_ready_for_ag22z_closure") fail("Review status mismatch.");
-if (audit.status !== "batch_dry_run_audit_passed") fail("Auditdecision.decision.proceed_to_ag22z_repeatable_static_publishing_workflow_closure !== true) fail("AG22Z decision missing.");
+if (!Array.isArray(audit.failed_checks) || audit.failed_checks.length !== 0) fail("Audit failed checks must be zero.");
+if (decision.decision.proceed_to_ag22z_repeatable_static_publishing_workflow_closure !== true) fail("AG22Z decision missing.");
 if (readiness.ready_for_ag22z !== true) fail("AG22Z readiness missing.");
 if (boundary.next_stage_id !== "AG22Z") fail("AG22Z boundary missing.");
 
