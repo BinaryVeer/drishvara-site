@@ -1,0 +1,26 @@
+{
+  "module_id": "AG23A",
+  "title": "AG23A to AG23B First Light 24-Hour Signal Engine Boundary",
+  "status": "ag23b_boundary_created_not_started",
+  "next_stage_id": "AG23B",
+  "next_stage_title": "First Light 24-Hour Signal Engine",
+  "allowed_scope": [
+    "Define First Light signal categories.",
+    "Define curated India, regional and world signal inputs.",
+    "Define signal freshness and source-safety rules.",
+    "Keep it planning-only and non-live."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No First Light live feed.",
+    "No news scraping.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

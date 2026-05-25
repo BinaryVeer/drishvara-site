@@ -1,0 +1,43 @@
+{
+  "module_id": "AG23A",
+  "title": "Homepage Daily Route Doctrine",
+  "status": "homepage_daily_route_doctrine_created_pending_ag23b",
+  "realignment_note": "AG22Z boundary used the earlier title 'First Controlled Static Publish Candidate Gate'. AG23A realigns AG23 to the agreed Homepage Daily Surface and First Light planning series.",
+  "agreed_ag23_series": [
+    "AG23A — Homepage Daily Route Doctrine",
+    "AG23B — First Light 24-Hour Signal Engine",
+    "AG23C — Signal-to-Article Conversion Logic",
+    "AG23D — Discover/Read/Reflect Mapping",
+    "AG23E — Daily Homepage Data Schema",
+    "AG23F — First Light Source and Verification Plan",
+    "AG23G — First Light Topic Scoring Model",
+    "AG23H — Homepage Daily Surface Scaffold",
+    "AG23I — Homepage Daily Surface Audit",
+    "AG23Z — Homepage Daily Surface and First Light Closure"
+  ],
+  "route_principle": "Homepage should move as one daily surface: Discover → Read → Reflect.",
+  "editorial_principles": [
+    "Curate signals; do not chase random breaking news.",
+    "Separate factual signal from reflective interpretation.",
+    "Convert strong signals into article briefs or episode candidates.",
+    "Avoid unsupported claims and unverified source-dependent content.",
+    "Keep Supabase/Auth/backend deferred under hybrid staged path."
+  ],
+  "route_file": "data/content-intelligence/homepage/ag23a-discover-read-reflect-route-map.json",
+  "module_map_file": "data/content-intelligence/homepage/ag23a-homepage-module-intent-map.json",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
