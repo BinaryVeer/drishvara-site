@@ -1,0 +1,99 @@
+{
+  "module_id": "AG24I",
+  "title": "Quality Checklist Registry",
+  "status": "quality_checklist_registry_created_no_runtime_audit",
+  "check_count": 12,
+  "checklist_items": [
+    {
+      "check_id": "metadata_completeness",
+      "check_group": "metadata",
+      "purpose": "Verify that future episode records carry required AG24F identity, series, source, risk, navigation and production-control fields.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "calendar_slot_integrity",
+      "check_group": "calendar",
+      "purpose": "Verify that every future episode maps to a valid AG24C reserved slot and AG24G index entry.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "topic_score_gate",
+      "check_group": "topic_scoring",
+      "purpose": "Verify AG24B strong_series_candidate decision and score 25+ before topic use.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "source_reference_gate",
+      "check_group": "source",
+      "purpose": "Verify two-reference target, source status, reachable links and under-editorial-verification handling.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "unsupported_claim_block",
+      "check_group": "source",
+      "purpose": "Block unsupported breaking-news, medical, legal, political, spiritual or scriptural claims.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "risk_safety_gate",
+      "check_group": "risk",
+      "purpose": "Verify sensitivity, repetition and category-specific caution fields.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "lane_structure_fit",
+      "check_group": "structure",
+      "purpose": "Verify Tuesday Learning, Friday World Lens and Sunday Deep Read lane fit.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "navigation_coherence",
+      "check_group": "navigation",
+      "purpose": "Verify previous/next episode fields and non-public navigation state.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "visual_object_readiness",
+      "check_group": "layout",
+      "purpose": "Verify object-rich readiness without breaking article readability or mobile layout.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "non_public_control",
+      "check_group": "publication_safety",
+      "purpose": "Verify public_visibility=false, publish_approved=false and article_generation_allowed=false until later approval.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "production_conveyor_gate",
+      "check_group": "production",
+      "purpose": "Verify AG24H conveyor stages remain gated and no queue mutation occurs without later activation.",
+      "status": "defined_not_executed"
+    },
+    {
+      "check_id": "backend_supabase_defer_gate",
+      "check_group": "backend_safety",
+      "purpose": "Verify Supabase/Auth/backend remains deferred under the hybrid staged path.",
+      "status": "defined_not_executed"
+    }
+  ],
+  "runtime_execution_allowed": false,
+  "blocked_state": {
+    "quality_audit_runtime_enabled": false,
+    "episode_quality_execution_done": false,
+    "topic_selected": false,
+    "brief_generated": false,
+    "draft_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

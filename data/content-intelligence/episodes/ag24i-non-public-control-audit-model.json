@@ -1,0 +1,42 @@
+{
+  "module_id": "AG24I",
+  "title": "Non-public Control Audit Model",
+  "status": "non_public_control_audit_model_created_no_public_mutation",
+  "required_false_flags": [
+    "public_visibility",
+    "publish_approved",
+    "article_generation_allowed",
+    "backend_required",
+    "supabase_required"
+  ],
+  "forbidden_operations": [
+    "episode_file_created",
+    "article_file_created",
+    "public_index_mutated",
+    "homepage_mutated",
+    "github_write_performed",
+    "deployment_triggered",
+    "published",
+    "supabase_auth_backend_activated"
+  ],
+  "public_mutation_allowed": false,
+  "runtime_write_allowed": false,
+  "blocked_state": {
+    "quality_audit_runtime_enabled": false,
+    "episode_quality_execution_done": false,
+    "topic_selected": false,
+    "brief_generated": false,
+    "draft_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
