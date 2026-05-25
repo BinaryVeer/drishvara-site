@@ -1,0 +1,121 @@
+{
+  "module_id": "AG26A",
+  "title": "Editor Correction Field Model",
+  "status": "editor_correction_field_model_created_no_data_write",
+  "field_group_count": 6,
+  "correction_fields": [
+    {
+      "field_group": "article_create_edit",
+      "fields": [
+        "article_mode",
+        "article_id_or_slug",
+        "article_title",
+        "article_subtitle",
+        "article_summary",
+        "category",
+        "tags",
+        "article_type",
+        "section_outline",
+        "body_sections",
+        "closing_reflection"
+      ]
+    },
+    {
+      "field_group": "reference",
+      "fields": [
+        "reference_url",
+        "reference_title",
+        "source_type",
+        "claim_supported",
+        "reachability_status",
+        "credibility_status",
+        "editorial_reference_note"
+      ]
+    },
+    {
+      "field_group": "attribution",
+      "fields": [
+        "asset_id",
+        "asset_type",
+        "credit_text",
+        "source_url",
+        "licence_or_usage_note",
+        "generated_asset_note",
+        "verification_status",
+        "editorial_attribution_note"
+      ]
+    },
+    {
+      "field_group": "object_generation",
+      "fields": [
+        "object_type",
+        "object_subtype",
+        "object_prompt",
+        "object_data_source",
+        "object_section_anchor",
+        "object_layout_mode",
+        "object_credit_status",
+        "object_generation_status"
+      ]
+    },
+    {
+      "field_group": "layout_card_seo",
+      "fields": [
+        "summary_or_description_status",
+        "featured_card_signal_status",
+        "seo_title",
+        "seo_description",
+        "card_title",
+        "card_summary",
+        "article_width_status",
+        "object_overflow_status",
+        "mobile_layout_status",
+        "attribution_block_layout_status"
+      ]
+    },
+    {
+      "field_group": "editor_decision",
+      "fields": [
+        "editor_review_status",
+        "editor_decision",
+        "correction_required",
+        "correction_note",
+        "escalate_to_admin",
+        "public_visibility",
+        "publish_approved"
+      ]
+    }
+  ],
+  "public_visibility_default": false,
+  "publish_approved_default": false,
+  "correction_data_write_allowed": false,
+  "blocked_state": {
+    "editor_workspace_runtime_enabled": false,
+    "editor_login_created": false,
+    "editor_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "review_queue_runtime_created": false,
+    "correction_data_written": false,
+    "article_created": false,
+    "article_file_mutated": false,
+    "featured_read_generated": false,
+    "image_generation_triggered": false,
+    "graph_generation_triggered": false,
+    "table_generation_triggered": false,
+    "infographic_generation_triggered": false,
+    "diagram_generation_triggered": false,
+    "object_inserted_into_article": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

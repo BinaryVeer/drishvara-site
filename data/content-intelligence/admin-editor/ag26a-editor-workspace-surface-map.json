@@ -1,0 +1,123 @@
+{
+  "module_id": "AG26A",
+  "title": "Editor Workspace Surface Map",
+  "status": "editor_workspace_surface_map_created_no_runtime_ui",
+  "surface_count": 12,
+  "surfaces": [
+    {
+      "surface_id": "editor_dashboard",
+      "label": "Editor Dashboard",
+      "purpose": "Show planned editor-level overview of article inventory, unresolved AG25Z work and pending review states.",
+      "input_source": "AG25Z readiness matrix and unresolved work register",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "browse_articles",
+      "label": "Browse Articles",
+      "purpose": "Browse existing articles by category, article type, readiness, gap status, reference status, attribution status and layout status.",
+      "input_source": "AG25A inventory and AG25Z unresolved work register",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "create_new_article",
+      "label": "Create New Article",
+      "purpose": "Plan editor-side new article creation with topic, category, article type, structure, references and object requirements.",
+      "input_source": "AG26A create/edit article tool model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "edit_existing_article",
+      "label": "Edit Existing Article",
+      "purpose": "Plan editor-side edit workflow for title, summary, body sections, references, attribution, layout, card and SEO fields.",
+      "input_source": "AG26A create/edit article tool model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "article_structure_editor",
+      "label": "Article Structure Editor",
+      "purpose": "Plan section-level editing for headline, introduction, body sections, conclusion, reflection boxes and object anchors.",
+      "input_source": "AG26A create/edit article tool model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "auto_article_tool_browser",
+      "label": "Auto-Article Tool Browser",
+      "purpose": "Browse available article preparation tools for images, graphs, tables, infographics, diagrams, references, quotes and layout controls.",
+      "input_source": "AG26A auto article tool inventory",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "reference_manager",
+      "label": "Reference Manager",
+      "purpose": "Expose future manual fields for reference URL, source type, credibility, claim support and editorial verification status.",
+      "input_source": "AG25B reference worklist",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "image_object_attribution_manager",
+      "label": "Image/Object and Attribution Manager",
+      "purpose": "Expose future manual fields for image/object source, credit, licence note, generated-asset note and editorial verification status.",
+      "input_source": "AG25C attribution worklist",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "graph_table_infographic_manager",
+      "label": "Graph, Table and Infographic Manager",
+      "purpose": "Plan editor selection and placement of charts, tables, infographics, diagrams and other article objects.",
+      "input_source": "AG26A object generation tool model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "seo_card_summary_editor",
+      "label": "SEO/Card/Summary Editor",
+      "purpose": "Plan fields for meta description, card title, summary, category badge and article preview text.",
+      "input_source": "AG25D card and layout audit model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "article_preview_panel",
+      "label": "Article Preview Panel",
+      "purpose": "Plan editor preview of article, card, mobile layout and object placement before submission.",
+      "input_source": "AG26A preview-submit workflow model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "submit_return_hold_decision_panel",
+      "label": "Submit / Return / Hold Decision Panel",
+      "purpose": "Plan editor decisions such as submit to admin review, return for correction, hold or keep as draft candidate.",
+      "input_source": "AG26A review state model",
+      "runtime_enabled": false
+    }
+  ],
+  "runtime_ui_created": false,
+  "editor_login_required_now": false,
+  "blocked_state": {
+    "editor_workspace_runtime_enabled": false,
+    "editor_login_created": false,
+    "editor_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "review_queue_runtime_created": false,
+    "correction_data_written": false,
+    "article_created": false,
+    "article_file_mutated": false,
+    "featured_read_generated": false,
+    "image_generation_triggered": false,
+    "graph_generation_triggered": false,
+    "table_generation_triggered": false,
+    "infographic_generation_triggered": false,
+    "diagram_generation_triggered": false,
+    "object_inserted_into_article": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
