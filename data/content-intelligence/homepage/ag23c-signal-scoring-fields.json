@@ -1,0 +1,51 @@
+{
+  "module_id": "AG23C",
+  "title": "Signal Scoring Fields",
+  "status": "signal_scoring_fields_created_no_runtime_scoring",
+  "fields": [
+    {
+      "field": "relevance",
+      "weight_hint": 20,
+      "purpose": "How strongly the signal fits Drishvara’s public value."
+    },
+    {
+      "field": "freshness",
+      "weight_hint": 15,
+      "purpose": "Whether the signal is still timely within the intended daily window."
+    },
+    {
+      "field": "source_quality",
+      "weight_hint": 20,
+      "purpose": "Whether the signal is supported by credible/available references."
+    },
+    {
+      "field": "drishvara_fit",
+      "weight_hint": 20,
+      "purpose": "Whether the signal supports insight, explanation or reflection."
+    },
+    {
+      "field": "series_potential",
+      "weight_hint": 15,
+      "purpose": "Whether the topic can sustain weekly or multi-part treatment."
+    },
+    {
+      "field": "risk_control",
+      "weight_hint": 10,
+      "purpose": "Whether the signal can be handled without unsupported or sensitive claims."
+    }
+  ],
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_brief_written_to_public": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

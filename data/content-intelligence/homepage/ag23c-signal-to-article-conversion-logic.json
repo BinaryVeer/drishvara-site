@@ -1,0 +1,60 @@
+{
+  "module_id": "AG23C",
+  "title": "Signal-to-Article Conversion Logic",
+  "status": "signal_to_article_conversion_logic_created_ready_for_ag23d",
+  "purpose": "Define how First Light signals may become homepage cards, article briefs or weekly episode candidates.",
+  "conversion_path": [
+    "Signal intake from First Light registry",
+    "Signal safety and source-quality check",
+    "Signal scoring",
+    "Output classification",
+    "Article brief template preparation",
+    "Episode candidate flagging",
+    "Discover/Read/Reflect mapping in AG23D"
+  ],
+  "decision_rules": [
+    {
+      "outcome": "daily_homepage_signal_card",
+      "condition": "Signal is timely and useful but not deep enough for full article."
+    },
+    {
+      "outcome": "featured_read_brief",
+      "condition": "Signal has strong relevance, source quality and Drishvara fit."
+    },
+    {
+      "outcome": "weekly_episode_candidate",
+      "condition": "Signal has high series potential and educational depth."
+    },
+    {
+      "outcome": "hold_or_reject",
+      "condition": "Signal has weak source support, high risk or low Drishvara fit."
+    }
+  ],
+  "source_signal_types": [
+    "india_public_life",
+    "regional_northeast",
+    "world_affairs",
+    "knowledge_science_health",
+    "culture_spirituality_time",
+    "long_series_candidate"
+  ],
+  "scoring_fields_file": "data/content-intelligence/homepage/ag23c-signal-scoring-fields.json",
+  "article_brief_template_file": "data/content-intelligence/homepage/ag23c-article-brief-template.json",
+  "episode_candidate_logic_file": "data/content-intelligence/homepage/ag23c-weekly-episode-candidate-logic.json",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_brief_written_to_public": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

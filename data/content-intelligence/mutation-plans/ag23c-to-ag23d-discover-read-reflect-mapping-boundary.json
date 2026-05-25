@@ -1,0 +1,26 @@
+{
+  "module_id": "AG23C",
+  "title": "AG23C to AG23D Discover Read Reflect Mapping Boundary",
+  "status": "ag23d_boundary_created_not_started",
+  "next_stage_id": "AG23D",
+  "next_stage_title": "Discover/Read/Reflect Mapping",
+  "allowed_scope": [
+    "Map signal outcomes to Discover, Read and Reflect movements.",
+    "Define where homepage modules should appear in the daily journey.",
+    "Keep mapping non-live and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No live First Light feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
