@@ -1,0 +1,55 @@
+{
+  "module_id": "AG23B",
+  "title": "First Light Source Band Plan",
+  "status": "source_band_plan_created_no_fetching",
+  "source_bands": [
+    {
+      "band": "official_primary",
+      "examples": [
+        "government portals",
+        "official releases",
+        "institutional reports"
+      ],
+      "trust_use": "highest_preference_for_policy_or_public_programme_claims"
+    },
+    {
+      "band": "reputed_news_reference",
+      "examples": [
+        "established national/international newsrooms"
+      ],
+      "trust_use": "contextual_signal_only_until_verified"
+    },
+    {
+      "band": "knowledge_reference",
+      "examples": [
+        "research institutions",
+        "academic explainers",
+        "reputed public knowledge sources"
+      ],
+      "trust_use": "for science, health, education and explanatory topics"
+    },
+    {
+      "band": "cultural_calendar_reference",
+      "examples": [
+        "calendar records",
+        "festival references",
+        "traditional timing sources"
+      ],
+      "trust_use": "for reflective/calendar context with careful wording"
+    }
+  ],
+  "no_live_fetching_now": true,
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

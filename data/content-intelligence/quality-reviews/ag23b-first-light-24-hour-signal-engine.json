@@ -1,0 +1,45 @@
+{
+  "module_id": "AG23B",
+  "title": "First Light 24-Hour Signal Engine",
+  "status": "first_light_24_hour_signal_engine_created_ready_for_ag23c",
+  "depends_on": [
+    "AG23A"
+  ],
+  "generated_from": {
+    "ag23aReview": "data/content-intelligence/quality-reviews/ag23a-homepage-daily-route-doctrine.json",
+    "ag23aDoctrine": "data/content-intelligence/homepage/ag23a-homepage-daily-route-doctrine.json",
+    "ag23aRoute": "data/content-intelligence/homepage/ag23a-discover-read-reflect-route-map.json",
+    "ag23aModuleMap": "data/content-intelligence/homepage/ag23a-homepage-module-intent-map.json",
+    "ag23aReadiness": "data/content-intelligence/quality-registry/ag23a-first-light-signal-engine-readiness-record.json",
+    "ag23aBoundary": "data/content-intelligence/mutation-plans/ag23a-to-ag23b-first-light-24-hour-signal-engine-boundary.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "engine_file": "data/content-intelligence/homepage/ag23b-first-light-24-hour-signal-engine.json",
+  "signal_types_file": "data/content-intelligence/homepage/ag23b-first-light-signal-type-registry.json",
+  "source_bands_file": "data/content-intelligence/homepage/ag23b-first-light-source-band-plan.json",
+  "freshness_rules_file": "data/content-intelligence/homepage/ag23b-first-light-freshness-and-safety-rules.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag23b-first-light-signal-engine-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag23b-signal-to-article-conversion-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag23b-to-ag23c-signal-to-article-conversion-logic-boundary.json",
+  "summary": {
+    "first_light_signal_engine_created": true,
+    "live_feed_enabled": false,
+    "scraping_enabled": false,
+    "ready_for_ag23c": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

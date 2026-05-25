@@ -1,0 +1,26 @@
+{
+  "module_id": "AG23B",
+  "title": "AG23B to AG23C Signal-to-Article Conversion Logic Boundary",
+  "status": "ag23c_boundary_created_not_started",
+  "next_stage_id": "AG23C",
+  "next_stage_title": "Signal-to-Article Conversion Logic",
+  "allowed_scope": [
+    "Define how signals become article briefs or episode candidates.",
+    "Define scoring fields for relevance, freshness, Drishvara fit, risk and series potential.",
+    "Keep it non-live and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No live First Light feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

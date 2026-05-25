@@ -1,0 +1,33 @@
+{
+  "module_id": "AG23B",
+  "title": "First Light 24-Hour Signal Engine",
+  "status": "first_light_24_hour_signal_engine_created_pending_ag23c",
+  "engine_type": "planning_only_non_live",
+  "purpose": "Define how Drishvara will identify and structure curated 24-hour signals for the homepage Discover layer.",
+  "signal_window": "rolling_24_hour_reference_window",
+  "signal_type_registry_file": "data/content-intelligence/homepage/ag23b-first-light-signal-type-registry.json",
+  "source_band_plan_file": "data/content-intelligence/homepage/ag23b-first-light-source-band-plan.json",
+  "freshness_rules_file": "data/content-intelligence/homepage/ag23b-first-light-freshness-and-safety-rules.json",
+  "future_outputs": [
+    "daily_signal_candidates",
+    "signal_relevance_scores",
+    "article_brief_candidates",
+    "weekly_episode_candidates",
+    "homepage_discover_cards"
+  ],
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
