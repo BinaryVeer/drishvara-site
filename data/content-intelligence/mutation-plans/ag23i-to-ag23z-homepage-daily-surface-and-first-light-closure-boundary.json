@@ -1,0 +1,28 @@
+{
+  "module_id": "AG23I",
+  "title": "AG23I to AG23Z Homepage Daily Surface and First Light Closure Boundary",
+  "status": "ag23z_boundary_created_not_started",
+  "next_stage_id": "AG23Z",
+  "next_stage_title": "Homepage Daily Surface and First Light Closure",
+  "allowed_scope": [
+    "Close AG23 homepage daily surface and First Light planning/scaffold chain.",
+    "Summarise AG23A to AG23I outputs.",
+    "Preserve non-live, non-mutating state.",
+    "Create next boundary to AG24 Episodic Knowledge Engine."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No live feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
