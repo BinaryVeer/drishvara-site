@@ -1,0 +1,28 @@
+{
+  "module_id": "AG22D",
+  "title": "AG22D to AG22Z Repeatable Static Publishing Workflow Closure Boundary",
+  "status": "ag22z_boundary_created_not_started",
+  "next_stage_id": "AG22Z",
+  "next_stage_title": "Repeatable Static Publishing Workflow Closure",
+  "allowed_scope": [
+    "Close AG22 repeatable publishing workflow.",
+    "Summarise AG22A to AG22D outputs.",
+    "Record that SOP and batch dry-run are ready.",
+    "Keep real publishing blocked until later explicit controlled apply."
+  ],
+  "blocked_scope": [
+    "No article file creation.",
+    "No article mutation.",
+    "No queue mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No public visibility switch.",
+    "No public index mutation.",
+    "No deployment trigger.",
+    "No live smoke-test.",
+    "No rollback execution.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

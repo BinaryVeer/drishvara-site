@@ -1,0 +1,45 @@
+{
+  "module_id": "AG22D",
+  "title": "Batch Dry-run Audit",
+  "status": "batch_dry_run_audit_passed_ready_for_ag22z_closure",
+  "depends_on": [
+    "AG22C"
+  ],
+  "generated_from": {
+    "ag22cReview": "data/content-intelligence/quality-reviews/ag22c-batch-publishing-dry-run.json",
+    "ag22cReport": "data/content-intelligence/go-live/ag22c-batch-publishing-dry-run-report.json",
+    "ag22cManifest": "data/content-intelligence/go-live/ag22c-dry-run-candidate-manifest.json",
+    "ag22cDeltas": "data/content-intelligence/go-live/ag22c-proposed-public-surface-deltas.json",
+    "ag22cBlocker": "data/content-intelligence/quality-registry/ag22c-batch-publishing-dry-run-blocker-register.json",
+    "ag22cReadiness": "data/content-intelligence/quality-registry/ag22c-batch-dry-run-audit-readiness-record.json",
+    "ag22cBoundary": "data/content-intelligence/mutation-plans/ag22c-to-ag22d-batch-dry-run-audit-boundary.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "audit_file": "data/content-intelligence/audit-records/ag22d-batch-dry-run-audit-report.json",
+  "decision_file": "data/content-intelligence/go-live/ag22d-repeatable-static-publishing-workflow-closure-decision-record.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag22d-repeatable-static-publishing-workflow-closure-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag22d-to-ag22z-repeatable-static-publishing-workflow-closure-boundary.json",
+  "summary": {
+    "audit_passed": true,
+    "failed_checks": 0,
+    "candidate_count": 3,
+    "deltas_count": 3,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

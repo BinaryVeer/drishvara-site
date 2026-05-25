@@ -1,0 +1,61 @@
+{
+  "module_id": "AG22D",
+  "title": "Batch Dry-run Audit Report",
+  "status": "batch_dry_run_audit_passed",
+  "checks": [
+    {
+      "check_id": "AG22D-01",
+      "area": "candidate_manifest",
+      "passed": true,
+      "note": "Dry-run contains three article candidate types."
+    },
+    {
+      "check_id": "AG22D-02",
+      "area": "surface_deltas",
+      "passed": true,
+      "note": "Public surface deltas are plan-only and non-mutating."
+    },
+    {
+      "check_id": "AG22D-03",
+      "area": "dry_run_report",
+      "passed": true,
+      "note": "Dry-run completed without GitHub write, deployment or publishing."
+    },
+    {
+      "check_id": "AG22D-04",
+      "area": "blocked_state",
+      "passed": true,
+      "note": "All real actions remain blocked."
+    },
+    {
+      "check_id": "AG22D-05",
+      "area": "supabase_defer",
+      "passed": true,
+      "note": "Supabase/Auth/backend remains deferred."
+    }
+  ],
+  "failed_checks": [],
+  "summary": {
+    "audit_passed": true,
+    "failed_checks": 0,
+    "candidate_count": 3,
+    "deltas_count": 3,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "article_generated": false,
+    "article_file_created": false,
+    "article_mutated": false,
+    "queue_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "public_visibility_switched": false,
+    "public_index_mutated": false,
+    "deployment_triggered": false,
+    "live_smoke_test_performed": false,
+    "rollback_executed": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
