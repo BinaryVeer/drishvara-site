@@ -1,0 +1,36 @@
+{
+  "module_id": "AG23D",
+  "title": "Discover Read Reflect Mapping",
+  "status": "discover_read_reflect_mapping_created_ready_for_ag23e",
+  "purpose": "Map First Light signals and article conversion outcomes into the homepage daily journey.",
+  "inherited_route": "Discover → Read → Reflect",
+  "route_order": [
+    "Discover",
+    "Read",
+    "Reflect"
+  ],
+  "conversion_outputs": [
+    "daily_homepage_signal_card",
+    "featured_read_brief",
+    "weekly_episode_candidate",
+    "hold_or_reject"
+  ],
+  "movement_map_file": "data/content-intelligence/homepage/ag23d-homepage-movement-module-map.json",
+  "placement_map_file": "data/content-intelligence/homepage/ag23d-signal-output-placement-map.json",
+  "reflection_map_file": "data/content-intelligence/homepage/ag23d-reflection-layer-map.json",
+  "supabase_auth_backend_deferred": true,
+  "supabase_reminder": "Hybrid staged path remains selected: static/GitHub-controlled go-live first; Supabase/Auth/backend later only after explicit review and approval.",
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "module_id": "AG23D",
+  "title": "AG23D to AG23E Daily Homepage Data Schema Boundary",
+  "status": "ag23e_boundary_created_not_started",
+  "next_stage_id": "AG23E",
+  "next_stage_title": "Daily Homepage Data Schema",
+  "allowed_scope": [
+    "Define daily homepage data schema.",
+    "Define data fields for First Light, Featured Reads, weekly episodes and reflection layers.",
+    "Keep schema non-live and non-mutating."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No live First Light feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}

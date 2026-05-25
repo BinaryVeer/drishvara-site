@@ -1,0 +1,48 @@
+{
+  "module_id": "AG23D",
+  "title": "Discover Read Reflect Mapping",
+  "status": "discover_read_reflect_mapping_created_ready_for_ag23e",
+  "depends_on": [
+    "AG23C"
+  ],
+  "generated_from": {
+    "ag23cReview": "data/content-intelligence/quality-reviews/ag23c-signal-to-article-conversion-logic.json",
+    "ag23cLogic": "data/content-intelligence/homepage/ag23c-signal-to-article-conversion-logic.json",
+    "ag23cScoring": "data/content-intelligence/homepage/ag23c-signal-scoring-fields.json",
+    "ag23cBrief": "data/content-intelligence/homepage/ag23c-article-brief-template.json",
+    "ag23cEpisode": "data/content-intelligence/homepage/ag23c-weekly-episode-candidate-logic.json",
+    "ag23cReadiness": "data/content-intelligence/quality-registry/ag23c-discover-read-reflect-mapping-readiness-record.json",
+    "ag23cBoundary": "data/content-intelligence/mutation-plans/ag23c-to-ag23d-discover-read-reflect-mapping-boundary.json",
+    "ag23aRoute": "data/content-intelligence/homepage/ag23a-discover-read-reflect-route-map.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "mapping_file": "data/content-intelligence/homepage/ag23d-discover-read-reflect-mapping.json",
+  "movement_map_file": "data/content-intelligence/homepage/ag23d-homepage-movement-module-map.json",
+  "placement_map_file": "data/content-intelligence/homepage/ag23d-signal-output-placement-map.json",
+  "reflection_map_file": "data/content-intelligence/homepage/ag23d-reflection-layer-map.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag23d-discover-read-reflect-mapping-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag23d-daily-homepage-data-schema-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag23d-to-ag23e-daily-homepage-data-schema-boundary.json",
+  "summary": {
+    "discover_read_reflect_mapping_created": true,
+    "movement_map_created": true,
+    "placement_map_created": true,
+    "reflection_map_created": true,
+    "ready_for_ag23e": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "homepage_mutated": false,
+    "first_light_live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
