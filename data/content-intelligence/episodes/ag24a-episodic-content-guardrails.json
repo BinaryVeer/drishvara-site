@@ -1,0 +1,38 @@
+{
+  "module_id": "AG24A",
+  "title": "Episodic Content Guardrails",
+  "status": "episodic_content_guardrails_created_no_generation",
+  "guardrails": [
+    "No random episode generation without topic scoring.",
+    "Each series must show 8–12 episode potential where applicable.",
+    "Every episode topic must pass reference availability and source safety review.",
+    "Burning topics must use careful wording and avoid unsupported breaking-news claims.",
+    "Educational series should be chapter-wise and explanatory.",
+    "Episodes remain inside Featured Reads/Reading Surface initially, differentiated by badges and episode metadata.",
+    "No episode becomes public without later Admin/publish workflow."
+  ],
+  "consumed_prior_logic": {
+    "ag23c_episode_candidate_rules": [
+      "Topic has educational depth.",
+      "Topic can be broken into weekly chapters.",
+      "Topic has durable audience value beyond one day.",
+      "Topic can be supported by credible references.",
+      "Topic can connect Discover → Read → Reflect without becoming random news commentary."
+    ],
+    "ag23g_scoring_model": "First Light Topic Scoring Model"
+  },
+  "blocked_state": {
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

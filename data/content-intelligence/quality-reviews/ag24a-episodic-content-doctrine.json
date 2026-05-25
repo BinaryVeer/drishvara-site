@@ -1,0 +1,49 @@
+{
+  "module_id": "AG24A",
+  "title": "Episodic Content Doctrine",
+  "status": "episodic_content_doctrine_created_ready_for_ag24b",
+  "depends_on": [
+    "AG23Z"
+  ],
+  "generated_from": {
+    "ag23zReview": "data/content-intelligence/quality-reviews/ag23z-homepage-daily-surface-and-first-light-closure.json",
+    "ag23zClosure": "data/content-intelligence/closure-records/ag23z-homepage-daily-surface-and-first-light-closure.json",
+    "ag23zSummary": "data/content-intelligence/homepage/ag23z-homepage-daily-surface-and-first-light-summary.json",
+    "ag23zReadiness": "data/content-intelligence/quality-registry/ag23z-episodic-knowledge-engine-readiness-record.json",
+    "ag23zBoundary": "data/content-intelligence/mutation-plans/ag23z-to-ag24a-episodic-content-doctrine-boundary.json",
+    "ag23cEpisodeLogic": "data/content-intelligence/homepage/ag23c-weekly-episode-candidate-logic.json",
+    "ag23gScoringModel": "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "doctrine_file": "data/content-intelligence/episodes/ag24a-episodic-content-doctrine.json",
+  "rhythm_file": "data/content-intelligence/episodes/ag24a-weekly-episodic-rhythm-doctrine.json",
+  "series_type_registry_file": "data/content-intelligence/episodes/ag24a-series-type-registry.json",
+  "guardrails_file": "data/content-intelligence/episodes/ag24a-episodic-content-guardrails.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag24a-episodic-content-doctrine-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag24a-topic-selection-scoring-engine-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag24a-to-ag24b-topic-selection-scoring-engine-plan-boundary.json",
+  "summary": {
+    "episodic_content_doctrine_created": true,
+    "weekly_rhythm_doctrine_created": true,
+    "series_type_registry_created": true,
+    "guardrails_created": true,
+    "ready_for_ag24b": true,
+    "real_execution_done": false,
+    "prior_ag_records_consumed": true,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "episode_generated": false,
+    "article_generated": false,
+    "episode_file_created": false,
+    "article_file_created": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "module_id": "AG24A",
+  "title": "AG24A to AG24B Topic Selection and Scoring Engine Plan Boundary",
+  "status": "ag24b_boundary_created_not_started",
+  "next_stage_id": "AG24B",
+  "next_stage_title": "Topic Selection and Scoring Engine Plan",
+  "allowed_scope": [
+    "Plan topic scoring for relevance, evergreen value, audience benefit, references, series depth, visual potential, brand fit and risk.",
+    "Consume AG23G topic scoring model.",
+    "Keep planning-only and non-mutating."
+  ],
+  "blocked_scope": [
+    "No episode generation.",
+    "No article generation.",
+    "No episode file creation.",
+    "No article file creation.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
