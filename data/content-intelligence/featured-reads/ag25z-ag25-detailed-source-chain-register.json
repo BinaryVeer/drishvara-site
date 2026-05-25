@@ -1,0 +1,57 @@
+{
+  "module_id": "AG25Z",
+  "title": "AG25 Detailed Source Chain Register",
+  "status": "ag25_detailed_source_chain_registered_for_closure",
+  "chain_length": 4,
+  "closed_chain": [
+    {
+      "stage_id": "AG25A",
+      "title": "Featured Reads Inventory and Gap Audit",
+      "status": "featured_reads_inventory_gap_audit_created_ready_for_ag25b",
+      "file": "data/content-intelligence/featured-reads/ag25a-featured-reads-inventory-gap-audit.json"
+    },
+    {
+      "stage_id": "AG25B",
+      "title": "Reference Verification Strengthening",
+      "status": "reference_verification_strengthening_created_ready_for_ag25c",
+      "file": "data/content-intelligence/featured-reads/ag25b-reference-verification-strengthening-plan.json"
+    },
+    {
+      "stage_id": "AG25C",
+      "title": "Image Credit and Attribution Completion",
+      "status": "image_credit_attribution_completion_created_ready_for_ag25d",
+      "file": "data/content-intelligence/featured-reads/ag25c-image-credit-attribution-completion-plan.json"
+    },
+    {
+      "stage_id": "AG25D",
+      "title": "Featured Reads Layout Audit",
+      "status": "featured_reads_layout_audit_created_ready_for_ag25z",
+      "file": "data/content-intelligence/featured-reads/ag25d-featured-reads-layout-audit-plan.json"
+    }
+  ],
+  "umbrella_records_consumed": [
+    "data/content-intelligence/featured-reads/ag25-featured-reads-production-strengthening-plan.json",
+    "data/content-intelligence/admin-editor/ag26-admin-editor-manual-workflow-strengthening-plan.json",
+    "data/content-intelligence/backend-decision/ag27-supabase-auth-backend-decision-checkpoint.json"
+  ],
+  "blocked_state": {
+    "ag25_detailed_chain_closed": true,
+    "featured_read_generation_enabled": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "reference_runtime_verification_enabled": false,
+    "attribution_runtime_enabled": false,
+    "layout_runtime_enabled": false,
+    "image_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

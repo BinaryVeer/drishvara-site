@@ -1,0 +1,32 @@
+{
+  "module_id": "AG25Z",
+  "title": "AG25Z to AG26A Editor Workspace UX Plan Boundary",
+  "status": "ag26a_boundary_created_not_started",
+  "next_stage_id": "AG26A",
+  "next_stage_title": "Editor Workspace UX Plan",
+  "allowed_scope": [
+    "Consume AG25Z Featured Reads readiness matrix.",
+    "Consume unresolved reference, attribution, card and layout work registers.",
+    "Design editor-side planning UX only.",
+    "Keep account creation, Auth, backend, article mutation, public mutation, deployment and publishing blocked."
+  ],
+  "blocked_scope": [
+    "No Featured Read generation.",
+    "No article file creation.",
+    "No article file mutation.",
+    "No runtime reference verification.",
+    "No runtime attribution check.",
+    "No runtime layout check.",
+    "No image generation trigger.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
