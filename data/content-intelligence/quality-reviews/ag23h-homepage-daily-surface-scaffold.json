@@ -1,0 +1,51 @@
+{
+  "module_id": "AG23H",
+  "title": "Homepage Daily Surface Scaffold",
+  "status": "homepage_daily_surface_scaffold_created_ready_for_ag23i",
+  "depends_on": [
+    "AG23G"
+  ],
+  "generated_from": {
+    "ag23gReview": "data/content-intelligence/quality-reviews/ag23g-first-light-topic-scoring-model.json",
+    "ag23gModel": "data/content-intelligence/homepage/ag23g-first-light-topic-scoring-model.json",
+    "ag23gFields": "data/content-intelligence/homepage/ag23g-topic-score-fields.json",
+    "ag23gWeights": "data/content-intelligence/homepage/ag23g-topic-scoring-weights.json",
+    "ag23gThresholds": "data/content-intelligence/homepage/ag23g-topic-score-thresholds.json",
+    "ag23gRules": "data/content-intelligence/homepage/ag23g-topic-ranking-decision-rules.json",
+    "ag23gReadiness": "data/content-intelligence/quality-registry/ag23g-homepage-daily-surface-scaffold-readiness-record.json",
+    "ag23gBoundary": "data/content-intelligence/mutation-plans/ag23g-to-ag23h-homepage-daily-surface-scaffold-boundary.json",
+    "supabaseReminder": "data/content-intelligence/go-live/ag17b-supabase-auth-defer-carry-forward-reminder.json"
+  },
+  "scaffold_file": "data/content-intelligence/homepage/ag23h-homepage-daily-surface-scaffold.json",
+  "route_template_file": "data/content-intelligence/homepage/ag23h-discover-read-reflect-route-template.json",
+  "first_light_template_file": "data/content-intelligence/homepage/ag23h-first-light-signal-template.json",
+  "score_template_file": "data/content-intelligence/homepage/ag23h-signal-score-template.json",
+  "daily_surface_template_file": "data/content-intelligence/homepage/ag23h-daily-surface-record-template.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag23h-homepage-daily-surface-scaffold-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag23h-homepage-daily-surface-audit-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag23h-to-ag23i-homepage-daily-surface-audit-boundary.json",
+  "summary": {
+    "scaffold_created": true,
+    "route_template_created": true,
+    "first_light_template_created": true,
+    "score_template_created": true,
+    "daily_surface_template_created": true,
+    "ready_for_ag23i": true,
+    "real_execution_done": false,
+    "supabase_auth_backend_deferred": true
+  },
+  "blocked_state": {
+    "homepage_mutated": false,
+    "data_written_to_runtime": false,
+    "live_feed_enabled": false,
+    "news_scraping_enabled": false,
+    "external_api_called": false,
+    "article_generated": false,
+    "article_file_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "article_published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

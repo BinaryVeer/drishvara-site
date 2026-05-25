@@ -1,0 +1,27 @@
+{
+  "module_id": "AG23H",
+  "title": "AG23H to AG23I Homepage Daily Surface Audit Boundary",
+  "status": "ag23i_boundary_created_not_started",
+  "next_stage_id": "AG23I",
+  "next_stage_title": "Homepage Daily Surface Audit",
+  "allowed_scope": [
+    "Audit homepage daily surface scaffold.",
+    "Audit route, First Light signal, score and daily surface templates.",
+    "Confirm source safety and no live mutation."
+  ],
+  "blocked_scope": [
+    "No homepage mutation.",
+    "No runtime data write.",
+    "No live feed.",
+    "No scraping.",
+    "No external API call.",
+    "No article generation.",
+    "No article file creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No Supabase/Auth/backend activation."
+  ],
+  "supabase_auth_backend_deferred": true
+}
