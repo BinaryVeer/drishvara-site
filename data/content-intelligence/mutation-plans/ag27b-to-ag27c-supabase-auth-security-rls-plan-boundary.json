@@ -1,0 +1,40 @@
+{
+  "module_id": "AG27B",
+  "title": "AG27B to AG27C Supabase/Auth Security and RLS Plan Boundary",
+  "status": "ag27c_boundary_created_not_started",
+  "next_stage_id": "AG27C",
+  "next_stage_title": "Supabase/Auth Security and RLS Plan",
+  "allowed_scope": [
+    "Consume AG27A backend need assessment.",
+    "Consume AG27B selected non-active Supabase/Auth planning decision.",
+    "Plan tables, roles, RLS, audit, rollback and secrets governance.",
+    "Keep Supabase/Auth/backend activation blocked.",
+    "Keep secrets, env vars, database creation, RLS application, deployment and public mutation blocked."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No Supabase connection.",
+    "No database table creation.",
+    "No RLS policy creation.",
+    "No Auth activation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route creation.",
+    "No queue runtime creation.",
+    "No audit runtime creation.",
+    "No article state runtime creation.",
+    "No dynamic publish runtime creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation.",
+    "No AG28 start until AG27Z permits it."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_activation": true
+}

@@ -1,0 +1,113 @@
+{
+  "module_id": "AG27B",
+  "title": "Backend Decision Audit",
+  "status": "backend_decision_audit_created_ready_for_ag27c",
+  "purpose": "Audit backend options after AG27A and decide the next governed backend path: continue static only, plan Supabase/Auth, or choose another backend. AG27B selects non-active Supabase/Auth/backend planning for AG27C without activation.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/quality-reviews/ag27a-backend-need-assessment.json",
+    "data/content-intelligence/backend-decision/ag27a-backend-need-assessment.json",
+    "data/content-intelligence/backend-decision/ag27a-backend-need-signal-register.json",
+    "data/content-intelligence/backend-decision/ag27a-static-vs-backend-readiness-matrix.json",
+    "data/content-intelligence/backend-decision/ag27a-backend-planning-scope-register.json",
+    "data/content-intelligence/quality-registry/ag27a-backend-decision-audit-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag27a-to-ag27b-backend-decision-audit-boundary.json",
+    "data/content-intelligence/quality-reviews/ag26z-manual-admin-editor-workflow-closure.json",
+    "data/content-intelligence/admin-editor/ag26z-manual-admin-editor-workflow-closure.json",
+    "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json",
+    "data/content-intelligence/admin-editor/ag26z-ag27-backend-deferral-carry-forward.json",
+    "data/content-intelligence/backend-decision/ag27-supabase-auth-backend-decision-checkpoint.json",
+    "data/content-intelligence/backend-decision/ag27-backend-deferral-record.json",
+    "data/content-intelligence/mutation-plans/ag27-to-ag28-conditional-backend-path-boundary.json",
+    "data/content-intelligence/featured-reads/ag25z-featured-reads-production-readiness-closure.json",
+    "data/content-intelligence/episodes/ag24z-episodic-knowledge-engine-closure.json"
+  ],
+  "consumed_source_summary": {
+    "ag27a_status": "backend_need_assessment_created_ready_for_ag27b",
+    "ag27a_backend_planning_allowed": true,
+    "ag26z_status": "manual_admin_editor_workflow_closed_ag27_backend_deferred",
+    "ag27_checkpoint_status": "supabase_auth_backend_decision_checkpoint_created_backend_deferred",
+    "ag27_backend_deferred": true,
+    "ag28_blocked": true
+  },
+  "decision_audit": {
+    "decision_checks": [
+      {
+        "check_id": "backend_need_exists",
+        "expected": "Backend need exists for future real workflow",
+        "passed": true
+      },
+      {
+        "check_id": "static_path_still_safe_now",
+        "expected": "Static path remains sufficient for current no-runtime stage",
+        "passed": true
+      },
+      {
+        "check_id": "activation_not_needed_now",
+        "expected": "Backend activation should not start now",
+        "passed": true
+      },
+      {
+        "check_id": "ag28_still_blocked",
+        "expected": "AG28 remains blocked pending explicit approval",
+        "passed": true
+      },
+      {
+        "check_id": "supabase_planning_is_reasonable",
+        "expected": "Supabase/Auth planning is the selected non-active path",
+        "passed": true
+      }
+    ],
+    "failed_checks": [],
+    "selected_option_id": "controlled_non_active_supabase_auth_planning",
+    "decision_result": "proceed_to_ag27c_security_rls_planning_no_activation",
+    "backend_planning_approved_for_next_stage": true,
+    "backend_activation_approved_now": false,
+    "supabase_sandbox_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "database_creation_approved_now": false,
+    "secrets_or_env_setup_approved_now": false,
+    "ag28_allowed_now": false
+  },
+  "option_matrix_file": "data/content-intelligence/backend-decision/ag27b-backend-option-decision-matrix.json",
+  "supabase_planning_decision_file": "data/content-intelligence/backend-decision/ag27b-supabase-planning-decision-record.json",
+  "non_activation_audit_file": "data/content-intelligence/backend-decision/ag27b-non-activation-audit-register.json",
+  "future_consumption_plan_file": "data/content-intelligence/backend-decision/ag27b-future-consumption-plan.json",
+  "backend_decision_audit_created": true,
+  "backend_planning_selected_in_ag27b": true,
+  "backend_activation_allowed_in_ag27b": false,
+  "supabase_activation_allowed_in_ag27b": false,
+  "auth_activation_allowed_in_ag27b": false,
+  "database_creation_allowed_in_ag27b": false,
+  "rls_policy_creation_allowed_in_ag27b": false,
+  "secret_creation_allowed_in_ag27b": false,
+  "deployment_allowed_in_ag27b": false,
+  "public_mutation_allowed_in_ag27b": false,
+  "blocked_state": {
+    "backend_decision_audit_created": true,
+    "selected_non_active_backend_planning_path": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_created": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "module_id": "AG27B",
+  "title": "Supabase Planning Decision Record",
+  "status": "supabase_auth_backend_planning_selected_no_activation",
+  "decision": {
+    "backend_planning_path_selected": true,
+    "selected_backend_family": "Supabase/Auth planning",
+    "planning_mode": "non_active_architecture_and_security_planning_only",
+    "proceed_to_ag27c": true,
+    "proceed_to_ag28_now": false,
+    "supabase_sandbox_activation_now": false,
+    "auth_activation_now": false,
+    "database_creation_now": false,
+    "secrets_or_env_setup_now": false,
+    "deployment_now": false
+  },
+  "rationale": [
+    "AG26 Admin/Editor workflow requires future role separation and assigned queues.",
+    "AG26 publish actions are plan-only and require future controlled execution path.",
+    "AG27A identified backend need for real queue, audit logs, rollback and dynamic publishing.",
+    "Planning can proceed without activating runtime backend."
+  ],
+  "blocked_state": {
+    "backend_decision_audit_created": true,
+    "selected_non_active_backend_planning_path": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_created": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

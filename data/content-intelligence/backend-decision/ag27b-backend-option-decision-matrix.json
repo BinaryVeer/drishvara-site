@@ -1,0 +1,76 @@
+{
+  "module_id": "AG27B",
+  "title": "Backend Option Decision Matrix",
+  "status": "backend_option_decision_matrix_created_no_activation",
+  "options": [
+    {
+      "option_id": "continue_static_only",
+      "label": "Continue static/GitHub-controlled path only",
+      "fit_for_current_public_site": "high",
+      "fit_for_real_admin_editor_queue": "low",
+      "fit_for_audit_logs_and_rollback": "low",
+      "fit_for_future_dynamic_publish": "low",
+      "operational_risk": "low",
+      "cost_now": "low",
+      "selected": false,
+      "decision_note": "Safe for current public reading surface, but insufficient for real Admin/Editor login, database queue and dynamic publishing."
+    },
+    {
+      "option_id": "controlled_non_active_supabase_auth_planning",
+      "label": "Plan Supabase/Auth/backend architecture without activation",
+      "fit_for_current_public_site": "medium",
+      "fit_for_real_admin_editor_queue": "high",
+      "fit_for_audit_logs_and_rollback": "high",
+      "fit_for_future_dynamic_publish": "high",
+      "operational_risk": "medium_controlled",
+      "cost_now": "low_planning_only",
+      "selected": true,
+      "decision_note": "Best next planning path because it prepares Admin/Editor roles, queue, audit logs, RLS and state model without activating runtime backend."
+    },
+    {
+      "option_id": "choose_other_backend",
+      "label": "Choose another backend later",
+      "fit_for_current_public_site": "medium",
+      "fit_for_real_admin_editor_queue": "unknown_until_evaluated",
+      "fit_for_audit_logs_and_rollback": "unknown_until_evaluated",
+      "fit_for_future_dynamic_publish": "unknown_until_evaluated",
+      "operational_risk": "unknown",
+      "cost_now": "medium_due_to_re-evaluation",
+      "selected": false,
+      "decision_note": "Not selected now because existing planning and prior checkpoint already reference Supabase/Auth as the controlled path."
+    }
+  ],
+  "selected_option_id": "controlled_non_active_supabase_auth_planning",
+  "selected_decision": "Proceed with non-active Supabase/Auth/backend planning through AG27C. Do not activate Supabase, Auth, database, secrets, runtime routes or deployment.",
+  "rejected_paths": [
+    "continue_static_only_as_final_path_for_admin_editor_workflow",
+    "switch_to_other_backend_now",
+    "activate_supabase_now"
+  ],
+  "blocked_state": {
+    "backend_decision_audit_created": true,
+    "selected_non_active_backend_planning_path": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_created": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
