@@ -1,0 +1,141 @@
+{
+  "module_id": "AG33C",
+  "title": "Audit Event Field Preview Model",
+  "status": "audit_event_field_preview_model_created_no_runtime",
+  "field_source": "data/content-intelligence/backend-architecture/ag31c-audit-log-field-schema.json",
+  "required_fields": [
+    "audit_event_id",
+    "article_id",
+    "actor_id",
+    "actor_role",
+    "action_type",
+    "before_state",
+    "after_state",
+    "before_hash",
+    "after_hash",
+    "decision_note",
+    "created_at"
+  ],
+  "field_validation_preview": [
+    {
+      "field": "audit_event_id",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "article_id",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "actor_id",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "actor_role",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "action_type",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "before_state",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "after_state",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "before_hash",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "after_hash",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "decision_note",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    },
+    {
+      "field": "created_at",
+      "required": true,
+      "validate_now": false,
+      "write_now": false
+    }
+  ],
+  "execute_now": false,
+  "audit_runtime_created": false,
+  "database_write_created": false,
+  "blocked_state": {
+    "non_active_audit_write_scaffold_created": true,
+    "preview_only_audit_write_shape_created": true,
+    "audit_event_field_preview_model_created": true,
+    "before_after_hash_preview_model_created": true,
+    "rollback_reference_preview_model_created": true,
+    "audit_write_non_activation_audit_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "queue_mutation_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "audit_write_runtime_created": false,
+    "hash_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_guard_runtime_created": false,
+    "publish_handler_runtime_created": false,
+    "return_handler_runtime_created": false,
+    "archive_handler_runtime_created": false,
+    "rollback_runtime_created": false,
+    "public_filter_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
