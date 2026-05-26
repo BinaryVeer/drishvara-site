@@ -1,0 +1,66 @@
+{
+  "module_id": "AG27B",
+  "title": "Backend Decision Matrix",
+  "status": "backend_decision_matrix_created_continue_static",
+  "decision_rows": [
+    {
+      "option_id": "continue_static",
+      "label": "Continue static/GitHub-controlled path",
+      "selected_now": true,
+      "activation_required": false,
+      "reason": "Current approved path does not require runtime Auth/backend and AG26Z closed Admin/Editor workflow as non-runtime planning."
+    },
+    {
+      "option_id": "plan_supabase_auth_backend",
+      "label": "Plan Supabase/Auth/backend",
+      "selected_now": false,
+      "activation_required": false,
+      "reason": "May be needed later for real login, runtime queues, audit logs and dynamic publishing, but explicit approval has not been given."
+    },
+    {
+      "option_id": "choose_alternate_backend",
+      "label": "Choose another backend",
+      "selected_now": false,
+      "activation_required": false,
+      "reason": "No comparative backend selection has been approved; current checkpoint remains backend-deferred."
+    },
+    {
+      "option_id": "activate_backend_now",
+      "label": "Activate backend now",
+      "selected_now": false,
+      "activation_required": true,
+      "reason": "Not allowed; user has not approved Supabase/Auth/backend activation."
+    }
+  ],
+  "selected_decision": "continue_static",
+  "backend_planning_approved_now": false,
+  "backend_activation_approved_now": false,
+  "supabase_auth_architecture_plan_allowed_now": false,
+  "rls_security_plan_allowed_now": false,
+  "ag28_allowed_now": false,
+  "blocked_state": {
+    "backend_decision_audit_created": true,
+    "continue_static_decision_preserved": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "database_created": false,
+    "migration_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "ag27c_allowed_now": false,
+    "ag27d_allowed_now": false,
+    "ag28_allowed_now": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
