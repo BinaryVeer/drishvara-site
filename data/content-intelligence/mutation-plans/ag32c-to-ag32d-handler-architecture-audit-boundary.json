@@ -1,0 +1,42 @@
+{
+  "module_id": "AG32C",
+  "title": "AG32C to AG32D Handler Architecture Audit Boundary",
+  "status": "ag32d_boundary_created_non_active_handler_architecture_audit_only",
+  "next_stage_id": "AG32D",
+  "next_stage_title": "Handler Architecture Audit",
+  "allowed_scope": [
+    "Consume AG32A publish handler plan.",
+    "Consume AG32B return/archive handler plan.",
+    "Consume AG32C publish guard rules.",
+    "Confirm handlers are still plan-only and cannot execute.",
+    "Confirm no real database write, publish action or public mutation occurs.",
+    "Preserve Admin final authority and Editor no-publish governance."
+  ],
+  "blocked_scope": [
+    "No publish guard runtime.",
+    "No publish handler runtime.",
+    "No route guard runtime.",
+    "No public filter runtime.",
+    "No audit runtime.",
+    "No hash runtime.",
+    "No rollback runtime.",
+    "No database table creation.",
+    "No migration generation.",
+    "No SQL generation.",
+    "No RLS policy application.",
+    "No Auth activation.",
+    "No backend/Supabase connection.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route runtime.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}
