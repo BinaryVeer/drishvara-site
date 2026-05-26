@@ -1,0 +1,65 @@
+{
+  "module_id": "AG26D",
+  "title": "Static Scaffold Risk Register",
+  "status": "static_scaffold_risk_register_created_no_blocking_risk",
+  "risks": [
+    {
+      "risk_id": "accidental_live_route",
+      "description": "A static scaffold may later be mistaken for a live route.",
+      "mitigation": "Keep AG26C and AG26D records marked static/no-live-route and require AG26Z closure before later UI work.",
+      "current_blocker": false
+    },
+    {
+      "risk_id": "editor_scope_expansion",
+      "description": "Editor scope could drift into independent article creation or global browse.",
+      "mitigation": "Preserve AG26A assignment alignment and AG26D role-separation audit.",
+      "current_blocker": false
+    },
+    {
+      "risk_id": "publish_button_confusion",
+      "description": "Planned publish actions could be misunderstood as executable.",
+      "mitigation": "Keep Publish and Publish-and-close as disabled/plan-only until separately approved controlled path.",
+      "current_blocker": false
+    },
+    {
+      "risk_id": "backend_activation_drift",
+      "description": "Admin/Editor workflow may tempt backend/Auth activation.",
+      "mitigation": "AG27 backend deferral remains source-of-truth; AG28 remains blocked pending explicit approval.",
+      "current_blocker": false
+    }
+  ],
+  "blocking_risk_count": 0,
+  "blocked_state": {
+    "ux_scaffold_audit_created": true,
+    "runtime_ui_created": false,
+    "live_route_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "queue_runtime_created": false,
+    "assignment_runtime_created": false,
+    "assignment_data_written": false,
+    "review_action_executed": false,
+    "archive_executed": false,
+    "return_for_correction_executed": false,
+    "publish_executed": false,
+    "publish_and_close_executed": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "object_generation_triggered": false,
+    "public_visibility_changed": false,
+    "publish_approved_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
