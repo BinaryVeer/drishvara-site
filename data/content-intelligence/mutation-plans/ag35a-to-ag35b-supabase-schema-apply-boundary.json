@@ -1,0 +1,26 @@
+{
+  "module_id": "AG35A",
+  "title": "AG35A to AG35B Supabase Schema Apply Boundary",
+  "status": "ag35b_boundary_created_controlled_supabase_schema_apply",
+  "next_stage_id": "AG35B",
+  "next_stage_title": "Supabase Schema Apply",
+  "allowed_scope": [
+    "Consume AG35A explicit approval record.",
+    "Prepare controlled Supabase schema apply step.",
+    "Use AG29 schema/RLS planning and AG34 readiness controls.",
+    "Keep service role key outside repo and frontend.",
+    "Keep Auth user creation blocked until AG35C.",
+    "Keep public mutation blocked."
+  ],
+  "blocked_scope": [
+    "No public mutation.",
+    "No deployment.",
+    "No production publish.",
+    "No service role exposure.",
+    "No Auth user creation in AG35B.",
+    "No credentials in repo.",
+    "No unreviewed schema/RLS application."
+  ],
+  "explicit_approval_received": true,
+  "controlled_activation_selected": true
+}
