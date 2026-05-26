@@ -1,0 +1,85 @@
+{
+  "module_id": "AG27D",
+  "title": "Role Access Security Matrix",
+  "status": "role_access_security_matrix_created_no_auth_activation",
+  "role_access_rows": [
+    {
+      "role_id": "admin",
+      "can_read_all_review_queue": true,
+      "can_assign_to_editor": true,
+      "can_publish_future_runtime": true,
+      "can_manage_roles_future": true,
+      "can_use_service_role_key": false,
+      "notes": "Admin is final reviewer and final publish authority, but service role access must remain server-only."
+    },
+    {
+      "role_id": "editor",
+      "can_create_new_candidate": true,
+      "can_edit_own_candidate": true,
+      "can_edit_admin_assigned_content": true,
+      "can_publish_future_runtime": false,
+      "can_read_unassigned_system_content": false,
+      "notes": "Editor cannot publish and cannot pick system-generated content unless assigned by Admin."
+    },
+    {
+      "role_id": "system",
+      "can_create_generated_candidate_future": true,
+      "can_publish_without_admin": false,
+      "can_route_to_admin_first": true,
+      "can_bypass_admin_review": false,
+      "notes": "System-generated content must always land in Admin review first."
+    },
+    {
+      "role_id": "public_reader",
+      "can_read_published_content": true,
+      "can_read_drafts": false,
+      "can_read_review_queue": false,
+      "can_read_audit_logs": false,
+      "notes": "Public role must only see published content."
+    },
+    {
+      "role_id": "subscriber_future",
+      "can_read_published_content": true,
+      "can_read_personalized_content_future": true,
+      "can_read_admin_editor_workflow": false,
+      "can_mutate_content": false,
+      "notes": "Future subscriber access must be isolated from editorial workflow."
+    },
+    {
+      "role_id": "auditor_future",
+      "can_read_audit_logs_future": true,
+      "can_mutate_content": false,
+      "can_publish": false,
+      "notes": "Optional future read-only governance role."
+    }
+  ],
+  "admin_final_publish_authority": true,
+  "editor_publish_authority": false,
+  "auth_activation_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "controlled_activation_stage_placement_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

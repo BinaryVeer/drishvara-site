@@ -1,0 +1,109 @@
+{
+  "module_id": "AG27D",
+  "title": "Table RLS Policy Blueprint",
+  "status": "table_rls_policy_blueprint_created_no_policy_apply",
+  "rls_rows": [
+    {
+      "table_group_id": "identity_access",
+      "planned_tables": [
+        "profiles",
+        "roles",
+        "user_roles",
+        "role_permissions",
+        "session_audit_events"
+      ],
+      "rls_strategy": "Users can read own profile; Admin can read/manage role mappings through controlled server path; public cannot read role mappings.",
+      "policy_apply_now": false
+    },
+    {
+      "table_group_id": "content_core",
+      "planned_tables": [
+        "articles",
+        "article_versions",
+        "article_sections",
+        "article_metadata",
+        "article_status_history"
+      ],
+      "rls_strategy": "Public reads only published articles; Admin reads all; Editor reads own candidates and Admin-assigned records only.",
+      "policy_apply_now": false
+    },
+    {
+      "table_group_id": "admin_editor_workflow",
+      "planned_tables": [
+        "review_queue",
+        "editor_assignments",
+        "admin_decisions",
+        "editor_returns",
+        "workflow_comments"
+      ],
+      "rls_strategy": "Admin reads/writes workflow records; Editor reads assigned items and creates return/comment records; system inserts candidates but cannot publish.",
+      "policy_apply_now": false
+    },
+    {
+      "table_group_id": "references_attribution_objects",
+      "planned_tables": [
+        "article_references",
+        "reference_verification_status",
+        "article_assets",
+        "asset_attributions",
+        "object_requirements",
+        "object_generation_requests"
+      ],
+      "rls_strategy": "Admin has review authority; Editor can edit objects/references for own or assigned content; public sees only published-safe records.",
+      "policy_apply_now": false
+    },
+    {
+      "table_group_id": "publishing_audit",
+      "planned_tables": [
+        "publish_records",
+        "publish_snapshots",
+        "rollback_records",
+        "audit_logs",
+        "governance_events"
+      ],
+      "rls_strategy": "Admin creates publish records; public has no audit-log access; audit records are append-only through server-controlled paths.",
+      "policy_apply_now": false
+    },
+    {
+      "table_group_id": "future_reader_personalization",
+      "planned_tables": [
+        "subscriber_profiles",
+        "reader_preferences",
+        "saved_items",
+        "entitlements",
+        "notification_preferences"
+      ],
+      "rls_strategy": "Subscribers can read/write own preference records only; no access to editorial workflow.",
+      "policy_apply_now": false
+    }
+  ],
+  "rls_policy_creation_allowed_now": false,
+  "rls_policy_apply_allowed_now": false,
+  "migration_creation_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "controlled_activation_stage_placement_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "module_id": "AG27D",
+  "title": "Controlled Activation Stage Placement Plan",
+  "status": "controlled_activation_stage_placement_created_no_activation",
+  "activation_position_decision": {
+    "activation_not_in_ag27d": true,
+    "activation_not_in_ag27z": true,
+    "recommended_future_activation_window": "after_AG28_architecture_and_AG29_schema_rls_security_closure_with_explicit_apply_approval",
+    "activation_should_begin_as": "controlled_sandbox_activation_not_live_public_dynamic_publish",
+    "live_public_dynamic_publishing_after": "separate_post_activation_admin_publish_audit"
+  },
+  "recommended_sequence": [
+    {
+      "stage": "AG28",
+      "role": "Backend/Auth Architecture Blueprint",
+      "activation_allowed": false,
+      "purpose": "Convert AG27C/AG27D planning into detailed backend architecture records."
+    },
+    {
+      "stage": "AG29",
+      "role": "Schema/RLS/Security Model and controlled activation audit/apply decision",
+      "activation_allowed": "only_if_explicitly_approved_then_sandbox_first",
+      "purpose": "Prepare schema/RLS/security and decide whether controlled sandbox activation can begin."
+    },
+    {
+      "stage": "AG30",
+      "role": "Admin/Editor Login UI and Route Scaffold",
+      "activation_allowed": "only_after_security_and_secret_controls_pass",
+      "purpose": "Connect or scaffold login UI depending on AG29 result."
+    },
+    {
+      "stage": "AG31_plus",
+      "role": "Backend Queue and Article State Integration",
+      "activation_allowed": "only_after_auth_and_rls_are_validated",
+      "purpose": "Integrate queue/state/publish workflow only after role security is proven."
+    }
+  ],
+  "minimum_activation_preconditions": [
+    "Explicit user approval for controlled activation.",
+    "No secrets in repo.",
+    "Supabase project selected/created outside repo.",
+    "Environment variable plan approved.",
+    "Schema and RLS migration reviewed.",
+    "Admin and Editor test accounts planned securely.",
+    "Rollback and disable plan prepared.",
+    "No dynamic public publishing until Admin publish audit passes."
+  ],
+  "activation_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "controlled_activation_stage_placement_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

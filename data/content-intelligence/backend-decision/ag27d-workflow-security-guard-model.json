@@ -1,0 +1,71 @@
+{
+  "module_id": "AG27D",
+  "title": "Workflow Security Guard Model",
+  "status": "workflow_security_guard_model_created_no_runtime_queue",
+  "workflow_security_rules": [
+    {
+      "rule_id": "system_generated_to_admin_first",
+      "rule": "System-generated content must be visible to Admin first and must not directly reach Editor/public publishing.",
+      "enforce_later_with_rls": true,
+      "active_now": false
+    },
+    {
+      "rule_id": "editor_assignment_required_for_system_content",
+      "rule": "Editor can edit system-generated/existing content only after Admin assignment.",
+      "enforce_later_with_rls": true,
+      "active_now": false
+    },
+    {
+      "rule_id": "editor_new_candidate_to_admin_review",
+      "rule": "Editor independent new article candidates must go to Admin review before publishing.",
+      "enforce_later_with_rls": true,
+      "active_now": false
+    },
+    {
+      "rule_id": "admin_only_publish",
+      "rule": "Only Admin can approve/push final publish in future runtime.",
+      "enforce_later_with_rls": true,
+      "active_now": false
+    },
+    {
+      "rule_id": "public_published_only",
+      "rule": "Public readers can read only published-safe content.",
+      "enforce_later_with_rls": true,
+      "active_now": false
+    },
+    {
+      "rule_id": "audit_append_only",
+      "rule": "Audit logs and publish records must be append-only or server-controlled.",
+      "enforce_later_with_rls": true,
+      "active_now": false
+    }
+  ],
+  "runtime_queue_allowed_now": false,
+  "runtime_write_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "controlled_activation_stage_placement_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
