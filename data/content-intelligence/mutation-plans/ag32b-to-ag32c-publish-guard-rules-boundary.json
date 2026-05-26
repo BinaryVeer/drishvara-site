@@ -1,0 +1,39 @@
+{
+  "module_id": "AG32B",
+  "title": "AG32B to AG32C Publish Guard Rules Boundary",
+  "status": "ag32c_boundary_created_non_active_publish_guard_rules_only",
+  "next_stage_id": "AG32C",
+  "next_stage_title": "Publish Guard Rules",
+  "allowed_scope": [
+    "Consume AG32A publish handler plan.",
+    "Consume AG32B return/archive handler plan.",
+    "Define publish guard rules requiring Admin role, approved state/hash, public filter pass, audit record and rollback path.",
+    "Preserve Admin final authority.",
+    "Preserve Editor assigned-only and no-publish governance.",
+    "Keep handlers, backend, database, Auth/Supabase, secrets, deployment and public mutation inactive."
+  ],
+  "blocked_scope": [
+    "No return handler runtime.",
+    "No archive handler runtime.",
+    "No assignment query.",
+    "No audit runtime.",
+    "No database table creation.",
+    "No migration generation.",
+    "No SQL generation.",
+    "No RLS policy application.",
+    "No Auth activation.",
+    "No backend/Supabase connection.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route runtime.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}
