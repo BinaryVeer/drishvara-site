@@ -1,0 +1,102 @@
+{
+  "module_id": "AG31B",
+  "title": "Static to Future Database Queue Plan",
+  "status": "static_to_future_db_queue_plan_created_no_database",
+  "future_tables_planned": [
+    {
+      "table_name": "articles",
+      "purpose": "Holds future article records and current state.",
+      "create_now": false
+    },
+    {
+      "table_name": "article_queue_items",
+      "purpose": "Maps article records into Admin/Editor queue lanes.",
+      "create_now": false
+    },
+    {
+      "table_name": "article_assignments",
+      "purpose": "Maps Admin-assigned items to Editors.",
+      "create_now": false
+    },
+    {
+      "table_name": "article_state_events",
+      "purpose": "Future audit/event log for state transitions.",
+      "create_now": false
+    }
+  ],
+  "future_queue_fields": [
+    "queue_item_id",
+    "article_id",
+    "current_state",
+    "assigned_editor_id",
+    "assigned_by_admin_id",
+    "queue_lane",
+    "priority",
+    "created_at",
+    "updated_at",
+    "last_state_event_id"
+  ],
+  "mapping_rules": [
+    {
+      "source_surface": "/admin/review",
+      "future_queue_lane": "admin_review",
+      "allowed_roles": [
+        "admin"
+      ],
+      "create_now": false
+    },
+    {
+      "source_surface": "/editor/workspace",
+      "future_queue_lane": "assigned_corrections",
+      "allowed_roles": [
+        "editor"
+      ],
+      "create_now": false
+    }
+  ],
+  "database_table_created": false,
+  "migration_generated": false,
+  "sql_generated": false,
+  "rls_policy_applied": false,
+  "blocked_state": {
+    "queue_integration_plan_created": true,
+    "admin_review_queue_map_created": true,
+    "editor_assignment_queue_map_created": true,
+    "static_to_future_db_queue_plan_created": true,
+    "queue_non_activation_audit_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
