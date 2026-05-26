@@ -1,0 +1,79 @@
+{
+  "module_id": "AG26B",
+  "title": "Admin Assignment Control Model",
+  "status": "admin_assignment_control_model_created_no_runtime_queue",
+  "assignment_actions": [
+    {
+      "action_id": "assign_new_draft_to_editor",
+      "label": "Assign New Draft to Editor",
+      "purpose": "Admin sends a new article draft task to Editor.",
+      "execution_enabled": false
+    },
+    {
+      "action_id": "assign_existing_article_to_editor",
+      "label": "Assign Existing Article to Editor",
+      "purpose": "Admin sends an existing article candidate to Editor for correction or enrichment.",
+      "execution_enabled": false
+    },
+    {
+      "action_id": "reassign_editor",
+      "label": "Reassign Editor",
+      "purpose": "Admin changes the assigned editor in a future workflow.",
+      "execution_enabled": false
+    },
+    {
+      "action_id": "withdraw_assignment",
+      "label": "Withdraw Assignment",
+      "purpose": "Admin withdraws an assigned item before final review.",
+      "execution_enabled": false
+    },
+    {
+      "action_id": "receive_editor_return",
+      "label": "Receive Editor Return",
+      "purpose": "Admin receives editor-completed work back into Admin review.",
+      "execution_enabled": false
+    }
+  ],
+  "assignment_flow": [
+    "Admin selects article candidate or new draft task.",
+    "Admin assigns item to Editor with note and expected correction/preparation scope.",
+    "Editor works only inside assigned workspace.",
+    "Editor sends work back to Admin.",
+    "Admin reviews evidence, delta and final status."
+  ],
+  "admin_is_assignment_originator": true,
+  "editor_self_assignment_allowed": false,
+  "assignment_runtime_enabled": false,
+  "assignment_data_write_allowed": false,
+  "blocked_state": {
+    "admin_workspace_runtime_enabled": false,
+    "admin_login_created": false,
+    "admin_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "admin_queue_runtime_created": false,
+    "editor_queue_runtime_created": false,
+    "assignment_runtime_created": false,
+    "assignment_data_written": false,
+    "review_action_executed": false,
+    "archive_executed": false,
+    "return_for_correction_executed": false,
+    "publish_executed": false,
+    "publish_and_close_executed": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "public_visibility_changed": false,
+    "publish_approved_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

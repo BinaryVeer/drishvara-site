@@ -1,0 +1,113 @@
+{
+  "module_id": "AG26B",
+  "title": "Admin Workspace Surface Map",
+  "status": "admin_workspace_surface_map_created_no_runtime_ui",
+  "surface_count": 12,
+  "surfaces": [
+    {
+      "surface_id": "admin_dashboard",
+      "label": "Admin Dashboard",
+      "purpose": "Show admin-level summary of assignments, returned items, evidence status, delta status and blocked publish actions.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_article_inventory",
+      "label": "Admin Article Inventory",
+      "purpose": "Browse all article candidates and readiness records at Admin planning level.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "assignment_control_panel",
+      "label": "Assignment Control Panel",
+      "purpose": "Plan Admin assignment of new draft tasks or existing article edits to Editor.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "editor_return_review_panel",
+      "label": "Editor Return Review Panel",
+      "purpose": "Review work sent back by Editor with notes, reference status, attribution status and layout status.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "evidence_review_panel",
+      "label": "Evidence Review Panel",
+      "purpose": "Review Admin approval evidence, source status, image credit status, layout status and editorial notes.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "delta_review_panel",
+      "label": "Delta Review Panel",
+      "purpose": "Plan before/after file delta review before any later controlled static apply path.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "return_for_correction_panel",
+      "label": "Return for Correction Panel",
+      "purpose": "Plan Admin return of item to Editor with structured correction notes.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "archive_panel",
+      "label": "Archive Panel",
+      "purpose": "Plan Admin archive decision for unsuitable or deferred candidates.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "publish_decision_panel",
+      "label": "Publish Decision Panel",
+      "purpose": "Plan Admin publish and publish-and-close decisions as blocked/non-executable actions until a later approved controlled publishing path.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "tool_approval_panel",
+      "label": "Tool Approval Panel",
+      "purpose": "Plan Admin approval of editor tool use for assigned articles, including images, graphs, tables, infographics and diagrams.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "audit_notes_panel",
+      "label": "Audit and Notes Panel",
+      "purpose": "Plan audit trail fields for Admin decisions, evidence notes, return notes and closure notes.",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_status_summary_panel",
+      "label": "Admin Status Summary Panel",
+      "purpose": "Show planned non-runtime status for assigned, returned, archived, internally cleared and blocked-for-publish items.",
+      "runtime_enabled": false
+    }
+  ],
+  "runtime_ui_created": false,
+  "admin_login_required_now": false,
+  "blocked_state": {
+    "admin_workspace_runtime_enabled": false,
+    "admin_login_created": false,
+    "admin_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "admin_queue_runtime_created": false,
+    "editor_queue_runtime_created": false,
+    "assignment_runtime_created": false,
+    "assignment_data_written": false,
+    "review_action_executed": false,
+    "archive_executed": false,
+    "return_for_correction_executed": false,
+    "publish_executed": false,
+    "publish_and_close_executed": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "public_visibility_changed": false,
+    "publish_approved_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

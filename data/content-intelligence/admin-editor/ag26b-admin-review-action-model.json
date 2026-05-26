@@ -1,0 +1,94 @@
+{
+  "module_id": "AG26B",
+  "title": "Admin Review Action Model",
+  "status": "admin_review_action_model_created_no_live_action",
+  "admin_review_actions": [
+    {
+      "action_id": "return_for_correction",
+      "label": "Return for correction",
+      "purpose": "Admin returns the article to Editor with structured correction notes.",
+      "execution_enabled": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "action_id": "archive",
+      "label": "Archive",
+      "purpose": "Admin archives unsuitable, duplicate, weak, unsafe or deferred article candidates.",
+      "execution_enabled": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "action_id": "hold_for_admin_review",
+      "label": "Hold for Admin review",
+      "purpose": "Admin keeps the article in internal review pending evidence, delta review or policy decision.",
+      "execution_enabled": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "action_id": "internal_clearance_candidate",
+      "label": "Internal clearance candidate",
+      "purpose": "Admin marks that the item may later enter controlled static apply readiness; this is not publishing.",
+      "execution_enabled": false,
+      "public_mutation_allowed": false
+    },
+    {
+      "action_id": "publish_plan_only",
+      "label": "Publish",
+      "purpose": "Plan the Admin publish action, but keep actual publishing blocked until later controlled static/dynamic approval path.",
+      "execution_enabled": false,
+      "public_mutation_allowed": false,
+      "requires_future_controlled_publish_stage": true
+    },
+    {
+      "action_id": "publish_and_close_plan_only",
+      "label": "Publish and close",
+      "purpose": "Plan Admin publish-and-close action, but keep execution blocked until later controlled static/dynamic approval path.",
+      "execution_enabled": false,
+      "public_mutation_allowed": false,
+      "requires_future_controlled_publish_stage": true
+    }
+  ],
+  "planned_actions_named_in_roadmap": [
+    "Archive",
+    "Return for correction",
+    "Publish",
+    "Publish and close"
+  ],
+  "publish_actions_planned_only": true,
+  "publish_execution_allowed_in_ag26b": false,
+  "public_visibility_change_allowed_in_ag26b": false,
+  "publish_approved_change_allowed_in_ag26b": false,
+  "github_write_allowed_in_ag26b": false,
+  "deployment_allowed_in_ag26b": false,
+  "blocked_state": {
+    "admin_workspace_runtime_enabled": false,
+    "admin_login_created": false,
+    "admin_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "admin_queue_runtime_created": false,
+    "editor_queue_runtime_created": false,
+    "assignment_runtime_created": false,
+    "assignment_data_written": false,
+    "review_action_executed": false,
+    "archive_executed": false,
+    "return_for_correction_executed": false,
+    "publish_executed": false,
+    "publish_and_close_executed": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "public_visibility_changed": false,
+    "publish_approved_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
