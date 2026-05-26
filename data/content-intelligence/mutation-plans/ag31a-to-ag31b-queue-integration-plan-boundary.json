@@ -1,0 +1,42 @@
+{
+  "module_id": "AG31A",
+  "title": "AG31A to AG31B Queue Integration Plan Boundary",
+  "status": "ag31b_boundary_created_non_active_queue_integration_plan_only",
+  "next_stage_id": "AG31B",
+  "next_stage_title": "Queue Integration Plan",
+  "allowed_scope": [
+    "Consume AG31A article state register.",
+    "Consume AG31A transition map.",
+    "Consume AG31A role-state permission matrix.",
+    "Map static Admin Review Queue records to future database-backed queue planning.",
+    "Preserve Admin final clearance.",
+    "Preserve Editor assigned-only and no-publish governance.",
+    "Keep queue/database/backend runtime inactive."
+  ],
+  "blocked_scope": [
+    "No database table creation.",
+    "No migration generation.",
+    "No queue runtime.",
+    "No assignment query.",
+    "No article state runtime.",
+    "No state transition runtime.",
+    "No publish runtime.",
+    "No Auth activation.",
+    "No real Admin login.",
+    "No real Editor login.",
+    "No backend/Supabase connection.",
+    "No RLS policy application.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route runtime.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}

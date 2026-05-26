@@ -1,0 +1,97 @@
+{
+  "module_id": "AG31A",
+  "title": "Article State Register",
+  "status": "article_state_register_created_no_runtime",
+  "state_count": 7,
+  "article_states": [
+    {
+      "state": "draft",
+      "meaning": "Article exists as a draft or generated candidate, not yet sent to Editor or Admin review.",
+      "public_visible": false,
+      "terminal_state": false
+    },
+    {
+      "state": "editor_submitted",
+      "meaning": "Editor has submitted assigned work back to Admin for review.",
+      "public_visible": false,
+      "terminal_state": false
+    },
+    {
+      "state": "admin_review",
+      "meaning": "Article is under Admin review/final clearance.",
+      "public_visible": false,
+      "terminal_state": false
+    },
+    {
+      "state": "returned",
+      "meaning": "Admin has returned article to Editor for correction.",
+      "public_visible": false,
+      "terminal_state": false
+    },
+    {
+      "state": "archived",
+      "meaning": "Article is archived and not eligible for publish unless reopened by Admin later.",
+      "public_visible": false,
+      "terminal_state": true
+    },
+    {
+      "state": "publish_approved",
+      "meaning": "Admin has approved article for future controlled publish action.",
+      "public_visible": false,
+      "terminal_state": false
+    },
+    {
+      "state": "published",
+      "meaning": "Article is public-visible after future controlled publish action.",
+      "public_visible": true,
+      "terminal_state": true
+    }
+  ],
+  "source_alignment": {
+    "ag29a_state_field_model_consumed": true,
+    "required_roadmap_states_present": true
+  },
+  "database_created": false,
+  "runtime_created": false,
+  "blocked_state": {
+    "article_state_model_created": true,
+    "article_state_register_created": true,
+    "article_state_transition_map_created": true,
+    "role_state_permission_matrix_created": true,
+    "non_activation_audit_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
