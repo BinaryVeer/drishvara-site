@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drishvara Editor Login — Non-active Scaffold</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #17324d;
+      --muted: #64748b;
+      --accent: #1f7a8c;
+      --accent2: #375985;
+      --border: #dbeafe;
+      --warn: #92400e;
+      --warn-bg: #fffbeb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(55, 89, 133, 0.12), transparent 32%),
+        linear-gradient(135deg, #f8fafc 0%, #eef7fb 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .shell {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .brand, .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      padding: 28px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1.02;
+      margin: 0 0 14px;
+    }
+    h2 { margin-top: 0; }
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .notice {
+      border: 1px solid #fcd34d;
+      background: var(--warn-bg);
+      color: var(--warn);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-top: 20px;
+      font-weight: 800;
+    }
+    label {
+      display: block;
+      font-weight: 800;
+      margin: 18px 0 8px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 14px 15px;
+      font-size: 16px;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      border: 0;
+      border-radius: 16px;
+      padding: 15px 18px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(135deg, #1f7a8c, #375985);
+      cursor: not-allowed;
+      opacity: 0.88;
+    }
+    .meta {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      font-size: 14px;
+    }
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #1e3a8a;
+      font-weight: 900;
+    }
+    .small {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 16px;
+    }
+    .rule {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    @media (max-width: 760px) {
+      .shell { grid-template-columns: 1fr; }
+      .brand, .card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="brand" aria-label="Drishvara Editor login context">
+      <div>
+        <div class="eyebrow">Drishvara Editor</div>
+        <h1>Editor Login UI Scaffold</h1>
+        <p>This page is a governed, non-active interface preview for the future Editor workspace. It does not authenticate, store credentials, create sessions, call APIs or connect to backend services.</p>
+        <div class="notice">Non-active scaffold only. Editor login is not real.</div>
+      </div>
+      <div class="meta">
+        <span class="pill">AG30B</span>
+        <span>Editor access: assigned items only</span>
+        <span>Editor publishing: blocked</span>
+        <span>Backend/Auth activation: blocked</span>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Editor login preview form">
+      <div class="eyebrow">Preview form</div>
+      <h2>Editor access</h2>
+      <p>For future assigned-article correction and send-back workflow after explicit activation approval.</p>
+
+      <form id="editor-login-preview" autocomplete="off">
+        <label for="editor-email">Editor email</label>
+        <input id="editor-email" name="editor-email" type="email" placeholder="editor@example.com" aria-describedby="non-active-help" />
+
+        <label for="editor-password">Password</label>
+        <input id="editor-password" name="editor-password" type="password" placeholder="Not active" aria-describedby="non-active-help" />
+
+        <button type="submit">Preview only — editor login not active</button>
+      </form>
+
+      <div class="rule">Editor can work only on Admin-assigned items.</div>
+      <div class="rule">Editor cannot self-assign, globally browse or publish.</div>
+
+      <p id="non-active-help" class="small">This form blocks submission locally. No credential is processed, stored, validated or transmitted.</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("editor-login-preview").addEventListener("submit", function (event) {
+      event.preventDefault();
+      alert("AG30B preview only: real Editor login is not active.");
+    });
+  </script>
+</body>
+</html>

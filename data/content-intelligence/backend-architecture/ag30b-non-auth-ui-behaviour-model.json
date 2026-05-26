@@ -1,0 +1,82 @@
+{
+  "module_id": "AG30B",
+  "title": "Non-Auth UI Behaviour Model",
+  "status": "non_auth_ui_behaviour_model_created_no_runtime",
+  "behaviours": [
+    {
+      "behaviour_id": "form_submission_blocked",
+      "description": "Submit action is blocked and shows a non-active editor scaffold notice.",
+      "runtime_auth_call": false
+    },
+    {
+      "behaviour_id": "no_credential_processing",
+      "description": "Entered values are not sent anywhere, not stored and not validated.",
+      "runtime_auth_call": false
+    },
+    {
+      "behaviour_id": "no_session_creation",
+      "description": "No session token, cookie or storage item is created.",
+      "runtime_auth_call": false
+    },
+    {
+      "behaviour_id": "no_backend_fetch",
+      "description": "No fetch/XHR/API/backend request is made.",
+      "runtime_auth_call": false
+    },
+    {
+      "behaviour_id": "no_assignment_query",
+      "description": "No assigned-article query is executed.",
+      "runtime_auth_call": false
+    },
+    {
+      "behaviour_id": "no_publish_access",
+      "description": "Editor publishing remains blocked in all future states.",
+      "runtime_auth_call": false
+    }
+  ],
+  "credential_storage_created": false,
+  "browser_storage_used": false,
+  "backend_request_created": false,
+  "assignment_query_created": false,
+  "blocked_state": {
+    "editor_login_ui_scaffold_created": true,
+    "editor_login_page_created": true,
+    "editor_login_interface_model_created": true,
+    "editor_login_route_preview_created": true,
+    "editor_assigned_only_ui_model_created": true,
+    "non_auth_ui_behaviour_model_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "editor_assignment_runtime_created": false,
+    "editor_workspace_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
