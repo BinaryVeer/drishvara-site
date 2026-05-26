@@ -1,0 +1,52 @@
+{
+  "module_id": "AG26Z",
+  "title": "Admin/Editor Routing Closure Register",
+  "status": "admin_editor_routing_closed_ready_for_existing_ag27",
+  "closed_governance_rules": {
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_new_article_candidate_goes_to_admin_review": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "admin_can_send_system_generated_content_to_editor_for_editing": true,
+    "editor_direct_system_article_edit_allowed": false,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority": false,
+    "system_publish_without_admin": false
+  },
+  "closed_flows": [
+    "Editor independent new article candidate → Admin review.",
+    "System/AI generated candidate → Admin first.",
+    "Admin review → optional Editor assignment for editing.",
+    "Editor edit → return to Admin.",
+    "Admin final review → Admin-only future publish control.",
+    "No Editor publishing.",
+    "No system direct publishing."
+  ],
+  "blocked_state": {
+    "ag26_detailed_chain_closed": true,
+    "runtime_ui_created": false,
+    "runtime_route_created": false,
+    "component_file_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "runtime_queue_created": false,
+    "queue_data_written": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "object_generation_triggered": false,
+    "article_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

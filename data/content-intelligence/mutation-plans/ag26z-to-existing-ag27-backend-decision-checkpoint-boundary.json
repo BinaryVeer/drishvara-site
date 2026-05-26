@@ -1,0 +1,40 @@
+{
+  "module_id": "AG26Z",
+  "title": "AG26Z to Existing AG27 Backend Decision Checkpoint Boundary",
+  "status": "existing_ag27_boundary_confirmed_ag28_blocked",
+  "next_stage_id": "AG27_EXISTING_CONFIRMATION",
+  "next_stage_title": "Existing AG27 Backend Decision Checkpoint Confirmation",
+  "allowed_scope": [
+    "Confirm existing AG27 checkpoint remains valid.",
+    "Confirm Supabase/Auth/backend remains deferred.",
+    "Confirm AG28 remains blocked unless explicit approval is given.",
+    "Do not create backend, Auth, Supabase, database, runtime queues, deployment or publishing."
+  ],
+  "blocked_scope": [
+    "No runtime UI creation.",
+    "No public HTML page creation.",
+    "No React/component file creation.",
+    "No runtime route creation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No Auth activation.",
+    "No backend activation.",
+    "No Supabase activation.",
+    "No runtime queue creation.",
+    "No queue data write.",
+    "No article file mutation.",
+    "No article creation.",
+    "No article/object generation trigger.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No AG28 backend/Auth/dynamic publishing start without explicit approval."
+  ],
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_ag28": true
+}
