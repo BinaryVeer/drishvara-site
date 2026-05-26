@@ -1,0 +1,41 @@
+{
+  "module_id": "AG27C",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag27d_and_ag27z",
+  "future_consumption": {
+    "AG27D": "Conditional Supabase/Auth security detail planning may consume AG27C tables, roles, RLS and secret-governance model if approved; still no activation.",
+    "AG27Z": "Backend Decision Closure should consume AG27A, AG27B and AG27C to close AG27 as non-active backend planning approved or backend deferred.",
+    "AG28": "AG28 Backend/Auth Architecture Blueprint may start only after AG27Z explicitly permits non-active backend architecture planning. AG28 still must not activate real backend unless later approved.",
+    "AG29_to_AG40": "Schema, login, queue and dynamic publishing stages remain future controlled stages, with real activation requiring explicit approval."
+  },
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "table_plan_created": true,
+    "role_access_model_created": true,
+    "rls_policy_plan_created": true,
+    "audit_secret_governance_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false,
+    "ag28_allowed_now": false
+  }
+}

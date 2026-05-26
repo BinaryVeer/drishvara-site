@@ -1,0 +1,90 @@
+{
+  "module_id": "AG27C",
+  "title": "RLS Policy Plan",
+  "status": "rls_policy_plan_created_no_policy_application",
+  "policy_groups": [
+    {
+      "policy_id": "admin_full_review_scope",
+      "table_scope": [
+        "articles",
+        "review_queue",
+        "admin_decisions",
+        "editor_decisions",
+        "reference_evidence",
+        "object_assets"
+      ],
+      "planned_rule": "Admin can read review records and take planned final-clearance actions.",
+      "apply_now": false
+    },
+    {
+      "policy_id": "editor_assigned_only_scope",
+      "table_scope": [
+        "articles",
+        "review_queue",
+        "editor_decisions",
+        "reference_evidence",
+        "object_assets"
+      ],
+      "planned_rule": "Editor can read/update only records assigned to that editor through review_queue.",
+      "apply_now": false
+    },
+    {
+      "policy_id": "public_published_read_only_scope",
+      "table_scope": [
+        "articles"
+      ],
+      "planned_rule": "Public can read only records with public_visibility=true and published state after future controlled activation.",
+      "apply_now": false
+    },
+    {
+      "policy_id": "audit_append_only_scope",
+      "table_scope": [
+        "audit_logs",
+        "publish_logs",
+        "rollback_records"
+      ],
+      "planned_rule": "Audit and publish logs are append-only for controlled server-side actions.",
+      "apply_now": false
+    },
+    {
+      "policy_id": "subscriber_future_read_scope",
+      "table_scope": [
+        "articles"
+      ],
+      "planned_rule": "Subscriber can access only future permitted subscriber surfaces; no Admin/Editor actions.",
+      "apply_now": false
+    }
+  ],
+  "rls_application_allowed": false,
+  "policy_sql_generated": false,
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "table_plan_created": true,
+    "role_access_model_created": true,
+    "rls_policy_plan_created": true,
+    "audit_secret_governance_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false,
+    "ag28_allowed_now": false
+  }
+}

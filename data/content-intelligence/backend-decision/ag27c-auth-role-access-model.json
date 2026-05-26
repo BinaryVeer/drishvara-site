@@ -1,0 +1,76 @@
+{
+  "module_id": "AG27C",
+  "title": "Auth Role Access Model",
+  "status": "auth_role_access_model_created_no_auth_activation",
+  "roles": [
+    {
+      "role_code": "admin",
+      "purpose": "Assign work, review returned work, review evidence/delta, archive, return for correction and later approve controlled publish actions.",
+      "can_assign_to_editor": true,
+      "can_receive_editor_return": true,
+      "can_final_clear": true,
+      "can_publish_now": false
+    },
+    {
+      "role_code": "editor",
+      "purpose": "Open only Admin-assigned article workspaces, edit/prep assigned items and send back to Admin.",
+      "can_browse_all_articles": false,
+      "can_self_assign": false,
+      "can_create_independent_article": false,
+      "can_publish_now": false
+    },
+    {
+      "role_code": "subscriber",
+      "purpose": "Future reader/account features only; no Admin/Editor workflow rights.",
+      "can_edit_articles": false,
+      "can_publish_now": false
+    },
+    {
+      "role_code": "anonymous_public",
+      "purpose": "Read public static/dynamic pages only.",
+      "can_edit_articles": false,
+      "can_access_admin_editor": false
+    }
+  ],
+  "access_rules": [
+    "Admin is final clearance authority.",
+    "Editor can access only assigned queue items.",
+    "Editor cannot browse global article inventory.",
+    "Editor cannot self-assign.",
+    "Editor cannot publish.",
+    "Public users cannot access Admin/Editor workflow.",
+    "Subscriber role, if added later, cannot inherit Admin/Editor rights by default."
+  ],
+  "auth_activation_allowed": false,
+  "login_creation_allowed": false,
+  "blocked_state": {
+    "supabase_auth_security_rls_plan_created": true,
+    "table_plan_created": true,
+    "role_access_model_created": true,
+    "rls_policy_plan_created": true,
+    "audit_secret_governance_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false,
+    "ag28_allowed_now": false
+  }
+}
