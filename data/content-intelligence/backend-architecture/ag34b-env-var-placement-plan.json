@@ -1,0 +1,100 @@
+{
+  "module_id": "AG34B",
+  "title": "Environment Variable Placement Plan",
+  "status": "env_var_placement_plan_created_no_write",
+  "planning_mode": "readiness_only",
+  "planned_variables": [
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_URL",
+      "visibility": "frontend_safe_public_url",
+      "planned_location_later": [
+        "local .env.local",
+        "Vercel environment variables"
+      ],
+      "value_recorded_now": false,
+      "write_now": false
+    },
+    {
+      "name": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "visibility": "frontend_anon_public_key_with_rls_required",
+      "planned_location_later": [
+        "local .env.local",
+        "Vercel environment variables"
+      ],
+      "value_recorded_now": false,
+      "write_now": false
+    },
+    {
+      "name": "SUPABASE_SERVICE_ROLE_KEY",
+      "visibility": "server_only_never_frontend",
+      "planned_location_later": [
+        "server-only environment variable after explicit approval"
+      ],
+      "value_recorded_now": false,
+      "write_now": false
+    }
+  ],
+  "env_vars_written": false,
+  "env_file_created": false,
+  "env_file_modified": false,
+  "secrets_created": false,
+  "blocked_state": {
+    "environment_secret_readiness_created": true,
+    "env_var_placement_plan_created": true,
+    "secret_naming_readiness_plan_created": true,
+    "service_role_protection_plan_created": true,
+    "local_vercel_env_readiness_plan_created": true,
+    "secret_readiness_non_activation_audit_created": true,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "test_admin_created": false,
+    "test_editor_created": false,
+    "runtime_backend_created": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "database_write_done": false,
+    "sql_generated": false,
+    "sql_applied": false,
+    "migration_generated": false,
+    "migration_applied": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "env_file_created": false,
+    "env_file_modified": false,
+    "service_role_key_created": false,
+    "service_role_key_stored": false,
+    "service_role_key_exposed": false,
+    "anon_key_exposed_unsafely": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "route_guard_runtime_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "queue_mutation_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "audit_write_runtime_created": false,
+    "hash_runtime_created": false,
+    "rollback_runtime_created": false,
+    "publish_guard_runtime_created": false,
+    "publish_handler_runtime_created": false,
+    "return_handler_runtime_created": false,
+    "archive_handler_runtime_created": false,
+    "public_filter_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

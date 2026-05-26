@@ -1,0 +1,40 @@
+{
+  "module_id": "AG34B",
+  "title": "AG34B to AG34C Test User and Role Plan Boundary",
+  "status": "ag34c_boundary_created_test_user_role_plan_only",
+  "next_stage_id": "AG34C",
+  "next_stage_title": "Test User and Role Plan",
+  "allowed_scope": [
+    "Consume AG34A backend activation readiness checklist.",
+    "Consume AG34B environment and secret readiness.",
+    "Plan test Admin and Editor user identities without creating accounts.",
+    "Plan role restrictions and later verification steps.",
+    "Keep Supabase/Auth/backend/database/RLS/secrets activation blocked."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No Supabase connection.",
+    "No Auth activation.",
+    "No real Admin/Editor user creation.",
+    "No test Admin/Editor user creation.",
+    "No database table creation.",
+    "No database write.",
+    "No SQL generation or application.",
+    "No migration generation or application.",
+    "No RLS policy creation or application.",
+    "No secret creation.",
+    "No environment variable write.",
+    "No .env file creation or modification.",
+    "No service-role key creation, storage or exposure.",
+    "No server/API route runtime.",
+    "No handler, queue, audit or rollback runtime.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}
