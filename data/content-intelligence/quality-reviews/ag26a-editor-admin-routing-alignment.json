@@ -1,0 +1,77 @@
+{
+  "module_id": "AG26A_ALIGNMENT",
+  "title": "Editor/Admin Routing Alignment",
+  "status": "editor_admin_routing_alignment_created_ready_for_ag26b",
+  "depends_on": [
+    "AG26A",
+    "AG25Z",
+    "AG26",
+    "AG27"
+  ],
+  "generated_from": {
+    "ag26aPlan": "data/content-intelligence/admin-editor/ag26a-editor-workspace-ux-plan.json",
+    "ag26aReview": "data/content-intelligence/quality-reviews/ag26a-editor-workspace-ux-plan.json",
+    "ag26aPreview": "data/quality/ag26a-editor-workspace-ux-plan-preview.json",
+    "ag26aReadiness": "data/content-intelligence/quality-registry/ag26a-admin-workspace-ux-plan-readiness-record.json",
+    "ag26aBoundary": "data/content-intelligence/mutation-plans/ag26a-to-ag26b-admin-workspace-ux-plan-boundary.json",
+    "ag26aBlocker": "data/content-intelligence/quality-registry/ag26a-editor-workspace-ux-plan-blocker-register.json",
+    "ag25zClosure": "data/content-intelligence/featured-reads/ag25z-featured-reads-production-readiness-closure.json",
+    "ag26UmbrellaPlan": "data/content-intelligence/admin-editor/ag26-admin-editor-manual-workflow-strengthening-plan.json",
+    "ag27DecisionCheckpoint": "data/content-intelligence/backend-decision/ag27-supabase-auth-backend-decision-checkpoint.json"
+  },
+  "patched_files": [
+    "data/content-intelligence/admin-editor/ag26a-editor-workspace-ux-plan.json",
+    "data/content-intelligence/quality-reviews/ag26a-editor-workspace-ux-plan.json",
+    "data/quality/ag26a-editor-workspace-ux-plan-preview.json",
+    "data/content-intelligence/quality-registry/ag26a-admin-workspace-ux-plan-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag26a-to-ag26b-admin-workspace-ux-plan-boundary.json",
+    "data/content-intelligence/quality-registry/ag26a-editor-workspace-ux-plan-blocker-register.json"
+  ],
+  "generated_files": {
+    "review": "data/content-intelligence/quality-reviews/ag26a-editor-admin-routing-alignment.json",
+    "routingModel": "data/content-intelligence/admin-editor/ag26a-admin-editor-system-routing-model.json",
+    "authoringEditPolicy": "data/content-intelligence/admin-editor/ag26a-editor-authoring-and-admin-assigned-edit-policy.json",
+    "registry": "data/quality/ag26a-editor-admin-routing-alignment.json",
+    "preview": "data/quality/ag26a-editor-admin-routing-alignment-preview.json",
+    "doc": "docs/quality/AG26A_EDITOR_ADMIN_ROUTING_ALIGNMENT.md"
+  },
+  "summary": {
+    "routing_alignment_created": true,
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_new_article_candidate_goes_to_admin_review": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "admin_can_forward_system_content_to_editor_for_edit": true,
+    "editor_direct_system_article_edit_allowed": false,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority": false,
+    "ready_for_ag26b": true,
+    "article_mutation_done": false,
+    "backend_activation_done": false,
+    "deployment_done": false,
+    "publishing_done": false
+  },
+  "blocked_state": {
+    "routing_alignment_created": true,
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_direct_system_article_edit_allowed": false,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

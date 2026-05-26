@@ -98,5 +98,20 @@
     "deployment_triggered": false,
     "published": false,
     "supabase_auth_backend_activated": false
+  },
+  "admin_editor_system_routing_model_file": "data/content-intelligence/admin-editor/ag26a-admin-editor-system-routing-model.json",
+  "editor_authoring_and_admin_assigned_edit_policy_file": "data/content-intelligence/admin-editor/ag26a-editor-authoring-and-admin-assigned-edit-policy.json",
+  "routing_governance": {
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_can_use_full_toolset_for_new_article_candidate": true,
+    "editor_new_article_candidate_must_go_to_admin": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "admin_can_forward_system_generated_content_to_editor": true,
+    "editor_direct_system_article_edit_allowed": false,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority": false
   }
 }

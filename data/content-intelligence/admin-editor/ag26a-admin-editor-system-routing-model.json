@@ -1,0 +1,91 @@
+{
+  "module_id": "AG26A_ALIGNMENT",
+  "title": "Admin-Editor-System Routing Model",
+  "status": "admin_editor_system_routing_model_created_ready_for_ag26b",
+  "purpose": "Clarify role routing for editor-created article candidates, system-generated content, Admin review, Editor editing assignment and final publishing authority.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "role_routing_rules": {
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_can_use_full_toolset_for_own_new_article_candidate": true,
+    "editor_new_article_candidate_goes_to_admin_review": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "admin_can_publish_system_generated_content_after_review": true,
+    "admin_can_send_system_generated_content_to_editor_for_editing": true,
+    "editor_direct_system_article_pickup_allowed": false,
+    "editor_direct_system_article_edit_allowed": false,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "editor_can_use_full_toolset_for_admin_assigned_edit": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_reviewer_after_editor_return": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority": false
+  },
+  "canonical_flows": [
+    {
+      "flow_id": "editor_new_article_candidate_flow",
+      "title": "Editor Independent New Article Candidate Flow",
+      "steps": [
+        "Editor creates a new article candidate independently.",
+        "Editor may use article authoring, reference, image, graph, table, infographic, diagram, layout and preview tools.",
+        "Editor submits the candidate to Admin.",
+        "Admin reviews and decides hold, return, approve for future publication, or publish when publishing path is active."
+      ],
+      "editor_can_initiate": true,
+      "admin_review_required": true,
+      "editor_publish_allowed": false
+    },
+    {
+      "flow_id": "system_generated_content_review_flow",
+      "title": "System/AI Generated Content Review Flow",
+      "steps": [
+        "System/AI pipeline generates article or module candidate.",
+        "System sends the candidate to Admin first.",
+        "Admin reviews the system-generated candidate.",
+        "Admin may publish, hold, reject, or send to Editor for editing.",
+        "Editor edits only if Admin assigns it.",
+        "Editor returns edited candidate to Admin.",
+        "Admin makes final publish decision."
+      ],
+      "editor_can_initiate": false,
+      "admin_review_required": true,
+      "editor_publish_allowed": false
+    },
+    {
+      "flow_id": "admin_assigned_editor_edit_flow",
+      "title": "Admin-Assigned Editor Edit Flow",
+      "steps": [
+        "Admin forwards a system-generated or existing article candidate to Editor.",
+        "Editor edits using the full editor toolset.",
+        "Editor may correct references, attribution, objects, layout, SEO/card fields and article sections.",
+        "Editor sends the edited version back to Admin.",
+        "Admin performs final review and publication decision."
+      ],
+      "editor_can_initiate": false,
+      "admin_assignment_required": true,
+      "editor_publish_allowed": false
+    }
+  ],
+  "blocked_state": {
+    "routing_alignment_created": true,
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_direct_system_article_edit_allowed": false,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
