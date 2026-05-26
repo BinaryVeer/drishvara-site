@@ -1,0 +1,83 @@
+{
+  "module_id": "AG30A",
+  "title": "Admin Login Interface Model",
+  "status": "admin_login_interface_model_created_no_auth_activation",
+  "page_path": "admin/login.html",
+  "interface_elements": [
+    {
+      "element_id": "admin_email_field",
+      "label": "Admin email",
+      "type": "email",
+      "enabled_for_real_login": false
+    },
+    {
+      "element_id": "admin_password_field",
+      "label": "Password",
+      "type": "password",
+      "enabled_for_real_login": false
+    },
+    {
+      "element_id": "admin_preview_button",
+      "label": "Preview only — login not active",
+      "type": "button",
+      "enabled_for_real_login": false
+    },
+    {
+      "element_id": "non_active_notice",
+      "label": "Non-active scaffold notice",
+      "type": "notice",
+      "enabled_for_real_login": false
+    },
+    {
+      "element_id": "governance_summary",
+      "label": "Governance summary",
+      "type": "summary",
+      "enabled_for_real_login": false
+    }
+  ],
+  "visual_governance": {
+    "non_active_label_required": true,
+    "admin_role_visible": true,
+    "auth_disabled_notice_visible": true,
+    "backend_disabled_notice_visible": true
+  },
+  "auth_enabled": false,
+  "real_login_enabled": false,
+  "blocked_state": {
+    "admin_login_ui_scaffold_created": true,
+    "admin_login_page_created": true,
+    "admin_login_interface_model_created": true,
+    "admin_login_route_preview_created": true,
+    "non_auth_ui_behaviour_model_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

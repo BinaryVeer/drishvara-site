@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drishvara Admin Login — Non-active Scaffold</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <style>
+    :root {
+      --bg: #f7fafc;
+      --panel: #ffffff;
+      --text: #17324d;
+      --muted: #64748b;
+      --accent: #1f7a8c;
+      --border: #dbeafe;
+      --warn: #92400e;
+      --warn-bg: #fffbeb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(31, 122, 140, 0.12), transparent 30%),
+        linear-gradient(135deg, #f8fafc 0%, #eef7fb 100%);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .shell {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .brand, .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      padding: 28px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1.02;
+      margin: 0 0 14px;
+    }
+    p {
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .notice {
+      border: 1px solid #fcd34d;
+      background: var(--warn-bg);
+      color: var(--warn);
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-top: 20px;
+      font-weight: 700;
+    }
+    label {
+      display: block;
+      font-weight: 800;
+      margin: 18px 0 8px;
+    }
+    input {
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 14px 15px;
+      font-size: 16px;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      border: 0;
+      border-radius: 16px;
+      padding: 15px 18px;
+      font-weight: 900;
+      color: white;
+      background: linear-gradient(135deg, #1f7a8c, #17324d);
+      cursor: not-allowed;
+      opacity: 0.88;
+    }
+    .meta {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      font-size: 14px;
+    }
+    .pill {
+      display: inline-flex;
+      width: fit-content;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: #1e3a8a;
+      font-weight: 800;
+    }
+    .small {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 16px;
+    }
+    @media (max-width: 760px) {
+      .shell { grid-template-columns: 1fr; }
+      .brand, .card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="brand" aria-label="Drishvara Admin login context">
+      <div>
+        <div class="eyebrow">Drishvara Admin</div>
+        <h1>Admin Login UI Scaffold</h1>
+        <p>This page is a governed, non-active interface preview for the future Admin workspace. It does not authenticate, store credentials, create sessions, call APIs or connect to Supabase.</p>
+        <div class="notice">Non-active scaffold only. Login is not real.</div>
+      </div>
+      <div class="meta">
+        <span class="pill">AG30A</span>
+        <span>Backend/Auth activation: blocked</span>
+        <span>Supabase connection: blocked</span>
+        <span>Public mutation: blocked</span>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Admin login preview form">
+      <div class="eyebrow">Preview form</div>
+      <h2>Admin access</h2>
+      <p>For future Admin review, assignment and final-clearance workflows after explicit activation approval.</p>
+
+      <form id="admin-login-preview" autocomplete="off">
+        <label for="admin-email">Admin email</label>
+        <input id="admin-email" name="admin-email" type="email" placeholder="admin@example.com" aria-describedby="non-active-help" />
+
+        <label for="admin-password">Password</label>
+        <input id="admin-password" name="admin-password" type="password" placeholder="Not active" aria-describedby="non-active-help" />
+
+        <button type="submit">Preview only — login not active</button>
+      </form>
+
+      <p id="non-active-help" class="small">This form blocks submission locally. No credential is processed, stored, validated or transmitted.</p>
+      <p class="small"><strong>Governance:</strong> Admin remains final clearance authority. Editor will remain assigned-only and cannot publish.</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("admin-login-preview").addEventListener("submit", function (event) {
+      event.preventDefault();
+      alert("AG30A preview only: real Admin login is not active.");
+    });
+  </script>
+</body>
+</html>
