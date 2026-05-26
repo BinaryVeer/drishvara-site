@@ -1,0 +1,107 @@
+{
+  "module_id": "AG27C",
+  "title": "Supabase Table Architecture Blueprint",
+  "status": "supabase_table_architecture_blueprint_created_no_tables",
+  "table_groups": [
+    {
+      "table_group_id": "identity_access",
+      "planned_tables": [
+        "profiles",
+        "roles",
+        "user_roles",
+        "role_permissions",
+        "session_audit_events"
+      ],
+      "purpose": "Map Supabase Auth users to Drishvara roles and permissions.",
+      "create_now": false
+    },
+    {
+      "table_group_id": "content_core",
+      "planned_tables": [
+        "articles",
+        "article_versions",
+        "article_sections",
+        "article_metadata",
+        "article_status_history"
+      ],
+      "purpose": "Represent article candidates, versions, sections and status transitions.",
+      "create_now": false
+    },
+    {
+      "table_group_id": "admin_editor_workflow",
+      "planned_tables": [
+        "review_queue",
+        "editor_assignments",
+        "admin_decisions",
+        "editor_returns",
+        "workflow_comments"
+      ],
+      "purpose": "Support Admin-first review, Editor assignment, Editor return and Admin final decision.",
+      "create_now": false
+    },
+    {
+      "table_group_id": "references_attribution_objects",
+      "planned_tables": [
+        "article_references",
+        "reference_verification_status",
+        "article_assets",
+        "asset_attributions",
+        "object_requirements",
+        "object_generation_requests"
+      ],
+      "purpose": "Track sources, reference verification, images, credits, objects and generation requirements.",
+      "create_now": false
+    },
+    {
+      "table_group_id": "publishing_audit",
+      "planned_tables": [
+        "publish_records",
+        "publish_snapshots",
+        "rollback_records",
+        "audit_logs",
+        "governance_events"
+      ],
+      "purpose": "Track final Admin publish decisions, snapshots, rollback records and audit history.",
+      "create_now": false
+    },
+    {
+      "table_group_id": "future_reader_personalization",
+      "planned_tables": [
+        "subscriber_profiles",
+        "reader_preferences",
+        "saved_items",
+        "entitlements",
+        "notification_preferences"
+      ],
+      "purpose": "Future personalization/subscriber layer only after separate approval.",
+      "create_now": false
+    }
+  ],
+  "table_creation_allowed_now": false,
+  "migration_creation_allowed_now": false,
+  "schema_execution_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_architecture_plan_created": true,
+    "explicit_planning_approval_recorded": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

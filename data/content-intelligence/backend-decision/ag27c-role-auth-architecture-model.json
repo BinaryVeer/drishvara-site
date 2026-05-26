@@ -1,0 +1,92 @@
+{
+  "module_id": "AG27C",
+  "title": "Role and Auth Architecture Model",
+  "status": "role_auth_architecture_model_created_no_auth_activation",
+  "roles": [
+    {
+      "role_id": "admin",
+      "auth_actor": true,
+      "purpose": "Core reviewer, assignment authority, final publish authority and governance owner.",
+      "can_create_independent_article_candidate": true,
+      "can_review_system_content_first": true,
+      "can_assign_to_editor": true,
+      "can_publish_future_runtime": true,
+      "rls_scope_needed_later": true
+    },
+    {
+      "role_id": "editor",
+      "auth_actor": true,
+      "purpose": "Creates independent article candidates and edits Admin-assigned system/existing content.",
+      "can_create_independent_article_candidate": true,
+      "can_edit_admin_assigned_content": true,
+      "can_publish_future_runtime": false,
+      "rls_scope_needed_later": true
+    },
+    {
+      "role_id": "system",
+      "auth_actor": false,
+      "purpose": "Represents AI/system-generated content source and automation events.",
+      "can_publish_future_runtime": false,
+      "must_route_generated_content_to_admin": true,
+      "rls_scope_needed_later": true
+    },
+    {
+      "role_id": "public_reader",
+      "auth_actor": false,
+      "purpose": "Unauthenticated public reader of already-published content only.",
+      "can_view_published_content_only": true,
+      "can_view_drafts_or_queue": false,
+      "rls_scope_needed_later": true
+    },
+    {
+      "role_id": "subscriber_future",
+      "auth_actor": true,
+      "purpose": "Future reader account/personalization/subscriber role.",
+      "can_view_personalized_content_later": true,
+      "can_access_admin_editor_queue": false,
+      "rls_scope_needed_later": true
+    },
+    {
+      "role_id": "auditor_future",
+      "auth_actor": true,
+      "purpose": "Future read-only audit/review role if governance requires it.",
+      "can_view_audit_logs_later": true,
+      "can_modify_content": false,
+      "rls_scope_needed_later": true
+    }
+  ],
+  "auth_principles": [
+    "Admin and Editor are distinct future Auth actors.",
+    "Admin remains final publish authority.",
+    "Editor cannot publish.",
+    "System-generated content must route to Admin first.",
+    "Editor edits system/existing content only after Admin assignment.",
+    "Public readers should only see published content.",
+    "Subscriber/personalization is future-only and must not expose Admin/Editor workflow."
+  ],
+  "auth_activation_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_architecture_plan_created": true,
+    "explicit_planning_approval_recorded": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

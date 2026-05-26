@@ -1,0 +1,51 @@
+{
+  "module_id": "AG27C",
+  "title": "Publishing State Architecture",
+  "status": "publishing_state_architecture_created_no_dynamic_publish",
+  "planned_states": [
+    "draft_candidate",
+    "system_generated_pending_admin_review",
+    "editor_created_pending_admin_review",
+    "admin_under_review",
+    "admin_assigned_to_editor",
+    "under_editor_review",
+    "editor_returned_to_admin",
+    "admin_hold",
+    "admin_rejected",
+    "admin_publish_candidate",
+    "published",
+    "rollback_candidate",
+    "archived"
+  ],
+  "publish_rules": {
+    "admin_can_publish_later": true,
+    "editor_can_publish_later": false,
+    "system_can_publish_later_without_admin": false,
+    "public_can_view_only_published": true
+  },
+  "dynamic_publishing_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_architecture_plan_created": true,
+    "explicit_planning_approval_recorded": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

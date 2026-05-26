@@ -1,0 +1,63 @@
+{
+  "module_id": "AG27C",
+  "title": "Admin/Editor Workflow Architecture",
+  "status": "admin_editor_workflow_architecture_created_no_runtime_queue",
+  "canonical_backend_flows": [
+    {
+      "flow_id": "system_generated_to_admin",
+      "steps": [
+        "System creates candidate record in future review queue.",
+        "Candidate is visible to Admin first.",
+        "Admin reviews and decides hold/reject/assign/publish candidate later."
+      ],
+      "queue_runtime_created_now": false
+    },
+    {
+      "flow_id": "editor_new_candidate_to_admin",
+      "steps": [
+        "Editor creates new article candidate.",
+        "Candidate enters Admin review queue.",
+        "Admin performs final review and future publish decision."
+      ],
+      "queue_runtime_created_now": false
+    },
+    {
+      "flow_id": "admin_assigned_editor_edit",
+      "steps": [
+        "Admin assigns system/existing content to Editor.",
+        "Editor edits using permitted tools.",
+        "Editor returns content to Admin.",
+        "Admin performs final decision."
+      ],
+      "queue_runtime_created_now": false
+    }
+  ],
+  "admin_first_system_review": true,
+  "admin_final_publish_authority": true,
+  "editor_publish_authority": false,
+  "runtime_queue_allowed_now": false,
+  "blocked_state": {
+    "supabase_auth_architecture_plan_created": true,
+    "explicit_planning_approval_recorded": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
