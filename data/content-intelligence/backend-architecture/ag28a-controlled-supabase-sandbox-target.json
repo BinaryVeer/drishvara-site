@@ -1,0 +1,49 @@
+{
+  "module_id": "AG28A",
+  "title": "Controlled Supabase Sandbox Target",
+  "status": "controlled_supabase_sandbox_target_created_no_activation",
+  "sandbox_direction": {
+    "target_mode": "future_controlled_sandbox",
+    "activation_now": false,
+    "public_live_dynamic_publish_now": false,
+    "recommended_first_activation_mode": "sandbox_only_not_public_dynamic_publish",
+    "activation_entry_not_before": "AG35_controlled_supabase_auth_activation",
+    "readiness_gate_before_activation": "AG34_controlled_backend_activation_readiness",
+    "first_live_dynamic_publish_not_before": "AG38_first_controlled_dynamic_publish_apply"
+  },
+  "sandbox_principles": [
+    "Sandbox activation must not create public dynamic publishing by default.",
+    "Admin and Editor test users must be controlled.",
+    "No service role key in client or repository.",
+    "Schema and RLS must pass audit before any runtime write.",
+    "Rollback and disable path must exist before activation.",
+    "Public site must remain stable if sandbox is disabled."
+  ],
+  "blocked_state": {
+    "backend_architecture_blueprint_created": true,
+    "moving_toward_controlled_sandbox_activation": true,
+    "sandbox_activation_done": false,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

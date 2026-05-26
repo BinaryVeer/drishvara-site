@@ -1,0 +1,39 @@
+{
+  "module_id": "AG28A",
+  "title": "AG28A to AG28B Database Table Plan Boundary",
+  "status": "ag28b_boundary_created_not_started",
+  "next_stage_id": "AG28B",
+  "next_stage_title": "Database Table Plan",
+  "allowed_scope": [
+    "Consume AG28A backend architecture blueprint.",
+    "Consume AG28A controlled Supabase sandbox target.",
+    "Consume AG28A Admin/Editor backend module map.",
+    "Consume AG28A backend data-flow blueprint.",
+    "Define planned tables, relationships, IDs and state fields only.",
+    "Do not create Supabase project, database, tables, migrations, RLS policies, secrets, runtime queues or dynamic publishing."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No backend activation.",
+    "No Auth activation.",
+    "No database creation.",
+    "No table creation.",
+    "No migration execution.",
+    "No RLS policy creation.",
+    "No RLS policy apply.",
+    "No secret creation.",
+    "No service role key creation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No runtime queue creation.",
+    "No runtime write path.",
+    "No dynamic publishing.",
+    "No article mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true,
+  "activation_allowed_in_ag28b": false
+}

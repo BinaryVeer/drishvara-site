@@ -1,0 +1,38 @@
+{
+  "module_id": "AG28A",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag28b_to_ag28z",
+  "future_consumption": {
+    "AG28B": "Database Table Plan should consume AG28A architecture layers, module map and data-flow blueprint to define exact planned table groups and relationships without creating tables.",
+    "AG28C": "Auth Flow Plan should consume AG28A identity/access layer and data-flow blueprint to define login/session/route-protection flow without enabling Auth.",
+    "AG28D": "Backend Architecture Audit should verify AG28A-AG28C are blueprint-only and contain no secrets, database creation or runtime activation.",
+    "AG28Z": "Backend Architecture Closure should close AG28 as blueprint-only and hand off to AG29 schema/RLS/security model."
+  },
+  "blocked_state": {
+    "backend_architecture_blueprint_created": true,
+    "moving_toward_controlled_sandbox_activation": true,
+    "sandbox_activation_done": false,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

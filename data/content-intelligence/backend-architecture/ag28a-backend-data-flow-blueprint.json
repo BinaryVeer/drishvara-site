@@ -1,0 +1,77 @@
+{
+  "module_id": "AG28A",
+  "title": "Backend Data Flow Blueprint",
+  "status": "backend_data_flow_blueprint_created_no_runtime_write",
+  "planned_flows": [
+    {
+      "flow_id": "system_generated_candidate_to_admin",
+      "source": "system_generation_pipeline",
+      "target": "admin_review_queue",
+      "rule": "System-generated content lands in Admin review first.",
+      "runtime_enabled_now": false
+    },
+    {
+      "flow_id": "editor_new_candidate_to_admin",
+      "source": "editor_workspace",
+      "target": "admin_review_queue",
+      "rule": "Editor-created article candidate goes to Admin before any publishing.",
+      "runtime_enabled_now": false
+    },
+    {
+      "flow_id": "admin_assignment_to_editor",
+      "source": "admin_review",
+      "target": "editor_assignment",
+      "rule": "Admin may assign content to Editor for editing.",
+      "runtime_enabled_now": false
+    },
+    {
+      "flow_id": "editor_return_to_admin",
+      "source": "editor_workspace",
+      "target": "admin_review",
+      "rule": "Editor returns edited content to Admin.",
+      "runtime_enabled_now": false
+    },
+    {
+      "flow_id": "admin_publish_decision",
+      "source": "admin_review",
+      "target": "publish_records",
+      "rule": "Only Admin may approve future dynamic publish.",
+      "runtime_enabled_now": false
+    },
+    {
+      "flow_id": "public_read_published",
+      "source": "published_content_view",
+      "target": "public_reader",
+      "rule": "Public reader sees only approved published content.",
+      "runtime_enabled_now": false
+    }
+  ],
+  "runtime_write_enabled_now": false,
+  "blocked_state": {
+    "backend_architecture_blueprint_created": true,
+    "moving_toward_controlled_sandbox_activation": true,
+    "sandbox_activation_done": false,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
