@@ -1,0 +1,279 @@
+{
+  "module_id": "AG26C",
+  "title": "Static Screen Registry",
+  "status": "static_screen_registry_created_no_live_routes",
+  "screen_count": 24,
+  "screens": [
+    {
+      "screen_id": "admin_admin_dashboard",
+      "role": "admin",
+      "title": "Admin Dashboard",
+      "purpose": "Show admin-level summary of assignments, returned items, evidence status, delta status and blocked publish actions.",
+      "source_surface_id": "admin_dashboard",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_admin_article_inventory",
+      "role": "admin",
+      "title": "Admin Article Inventory",
+      "purpose": "Browse all article candidates and readiness records at Admin planning level.",
+      "source_surface_id": "admin_article_inventory",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_assignment_control_panel",
+      "role": "admin",
+      "title": "Assignment Control Panel",
+      "purpose": "Plan Admin assignment of new draft tasks or existing article edits to Editor.",
+      "source_surface_id": "assignment_control_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_editor_return_review_panel",
+      "role": "admin",
+      "title": "Editor Return Review Panel",
+      "purpose": "Review work sent back by Editor with notes, reference status, attribution status and layout status.",
+      "source_surface_id": "editor_return_review_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_evidence_review_panel",
+      "role": "admin",
+      "title": "Evidence Review Panel",
+      "purpose": "Review Admin approval evidence, source status, image credit status, layout status and editorial notes.",
+      "source_surface_id": "evidence_review_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_delta_review_panel",
+      "role": "admin",
+      "title": "Delta Review Panel",
+      "purpose": "Plan before/after file delta review before any later controlled static apply path.",
+      "source_surface_id": "delta_review_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_return_for_correction_panel",
+      "role": "admin",
+      "title": "Return for Correction Panel",
+      "purpose": "Plan Admin return of item to Editor with structured correction notes.",
+      "source_surface_id": "return_for_correction_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_archive_panel",
+      "role": "admin",
+      "title": "Archive Panel",
+      "purpose": "Plan Admin archive decision for unsuitable or deferred candidates.",
+      "source_surface_id": "archive_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_publish_decision_panel",
+      "role": "admin",
+      "title": "Publish Decision Panel",
+      "purpose": "Plan Admin publish and publish-and-close decisions as blocked/non-executable actions until a later approved controlled publishing path.",
+      "source_surface_id": "publish_decision_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_tool_approval_panel",
+      "role": "admin",
+      "title": "Tool Approval Panel",
+      "purpose": "Plan Admin approval of editor tool use for assigned articles, including images, graphs, tables, infographics and diagrams.",
+      "source_surface_id": "tool_approval_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_audit_notes_panel",
+      "role": "admin",
+      "title": "Audit and Notes Panel",
+      "purpose": "Plan audit trail fields for Admin decisions, evidence notes, return notes and closure notes.",
+      "source_surface_id": "audit_notes_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "admin_admin_status_summary_panel",
+      "role": "admin",
+      "title": "Admin Status Summary Panel",
+      "purpose": "Show planned non-runtime status for assigned, returned, archived, internally cleared and blocked-for-publish items.",
+      "source_surface_id": "admin_status_summary_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_editor_dashboard",
+      "role": "editor",
+      "title": "Editor Dashboard",
+      "purpose": "Show planned editor-level overview of article inventory, unresolved AG25Z work and pending review states.",
+      "source_surface_id": "editor_dashboard",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_browse_articles",
+      "role": "editor",
+      "title": "Browse Admin-Assigned Articles",
+      "purpose": "Browse only articles/draft assignments sent by Admin to the Editor, filterable by category, type, readiness, reference, attribution and layout status.",
+      "source_surface_id": "browse_articles",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_create_new_article",
+      "role": "editor",
+      "title": "Prepare Admin-Assigned New Article Draft",
+      "purpose": "Prepare a new article draft only when Admin assigns a new article task to the Editor; no independent article creation is allowed.",
+      "source_surface_id": "create_new_article",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_edit_existing_article",
+      "role": "editor",
+      "title": "Edit Admin-Assigned Existing Article",
+      "purpose": "Edit only an existing article assigned by Admin; the Editor cannot browse or self-select unassigned repository articles.",
+      "source_surface_id": "edit_existing_article",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_article_structure_editor",
+      "role": "editor",
+      "title": "Assigned Article Structure Editor",
+      "purpose": "Edit structure, sections, reflection blocks and object anchors only within an Admin-assigned article workspace.",
+      "source_surface_id": "article_structure_editor",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_auto_article_tool_browser",
+      "role": "editor",
+      "title": "Assigned Article Tool Browser",
+      "purpose": "Browse article preparation tools only inside an Admin-assigned article workspace; tools cannot be executed independently.",
+      "source_surface_id": "auto_article_tool_browser",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_reference_manager",
+      "role": "editor",
+      "title": "Reference Manager",
+      "purpose": "Expose future manual fields for reference URL, source type, credibility, claim support and editorial verification status.",
+      "source_surface_id": "reference_manager",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_image_object_attribution_manager",
+      "role": "editor",
+      "title": "Image/Object and Attribution Manager",
+      "purpose": "Expose future manual fields for image/object source, credit, licence note, generated-asset note and editorial verification status.",
+      "source_surface_id": "image_object_attribution_manager",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_graph_table_infographic_manager",
+      "role": "editor",
+      "title": "Assigned Article Object Manager",
+      "purpose": "Plan graphs, tables, infographics, figures and diagrams only for the Admin-assigned article.",
+      "source_surface_id": "graph_table_infographic_manager",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_seo_card_summary_editor",
+      "role": "editor",
+      "title": "SEO/Card/Summary Editor",
+      "purpose": "Plan fields for meta description, card title, summary, category badge and article preview text.",
+      "source_surface_id": "seo_card_summary_editor",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_article_preview_panel",
+      "role": "editor",
+      "title": "Assigned Article Preview Panel",
+      "purpose": "Preview assigned article, card, mobile layout, references and objects before sending back to Admin.",
+      "source_surface_id": "article_preview_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    },
+    {
+      "screen_id": "editor_submit_return_hold_decision_panel",
+      "role": "editor",
+      "title": "Send Back to Admin / Return with Notes / Hold Panel",
+      "purpose": "Send edited work back to Admin, return with editorial notes, or hold for clarification; Editor cannot publish.",
+      "source_surface_id": "submit_return_hold_decision_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false,
+      "live_action_enabled": false
+    }
+  ],
+  "live_routes_created": false,
+  "runtime_navigation_enabled": false,
+  "blocked_state": {
+    "static_ux_scaffold_created": true,
+    "runtime_ui_created": false,
+    "live_route_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "queue_runtime_created": false,
+    "assignment_runtime_created": false,
+    "assignment_data_written": false,
+    "review_action_executed": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "object_generation_triggered": false,
+    "public_visibility_changed": false,
+    "publish_approved_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "module_id": "AG26C",
+  "title": "AG26C to AG26D UX Scaffold Audit Boundary",
+  "status": "ag26d_boundary_created_not_started",
+  "next_stage_id": "AG26D",
+  "next_stage_title": "UX Scaffold Audit",
+  "allowed_scope": [
+    "Consume AG26C static screen registry.",
+    "Consume AG26C static component registry.",
+    "Consume AG26C role-flow scaffold.",
+    "Audit role separation, non-execution, disabled publish actions, no live route, no Auth/backend and no public mutation.",
+    "Keep public mutation, deployment, publishing, Auth, backend and Supabase blocked."
+  ],
+  "blocked_scope": [
+    "No runtime UI creation.",
+    "No live route creation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No Auth activation.",
+    "No backend activation.",
+    "No Supabase activation.",
+    "No runtime queue creation.",
+    "No assignment runtime creation.",
+    "No assignment data write.",
+    "No review action execution.",
+    "No article file creation.",
+    "No article file mutation.",
+    "No object generation trigger.",
+    "No public visibility change.",
+    "No publish-approved change.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "admin_final_clearance_required": true,
+  "editor_workflow_rule": "Admin assigns item to Editor; Editor sends work back to Admin; Admin decides.",
+  "supabase_auth_backend_deferred": true
+}

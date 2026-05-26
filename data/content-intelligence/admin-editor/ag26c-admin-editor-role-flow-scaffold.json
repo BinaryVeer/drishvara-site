@@ -1,0 +1,92 @@
+{
+  "module_id": "AG26C",
+  "title": "Admin Editor Role Flow Scaffold",
+  "status": "admin_editor_role_flow_scaffold_created_no_queue_execution",
+  "flow_rule": "Admin assigns item to Editor; Editor works only on Admin-assigned item; Editor sends back to Admin; Admin decides.",
+  "role_flow": [
+    {
+      "step": 1,
+      "actor": "Admin",
+      "action": "Selects article candidate or new draft task",
+      "scaffold_screen": "admin_assignment_control_panel",
+      "execution_enabled": false
+    },
+    {
+      "step": 2,
+      "actor": "Admin",
+      "action": "Assigns item to Editor in planning model",
+      "scaffold_screen": "admin_assignment_control_panel",
+      "execution_enabled": false
+    },
+    {
+      "step": 3,
+      "actor": "Editor",
+      "action": "Works only on Admin-assigned article workspace",
+      "scaffold_screen": "editor_browse_articles / editor_edit_existing_article / editor_create_new_article",
+      "execution_enabled": false
+    },
+    {
+      "step": 4,
+      "actor": "Editor",
+      "action": "Uses tools only within assigned article workspace",
+      "scaffold_screen": "editor_auto_article_tool_browser",
+      "execution_enabled": false
+    },
+    {
+      "step": 5,
+      "actor": "Editor",
+      "action": "Sends edited/prepared work back to Admin",
+      "scaffold_screen": "editor_submit_return_hold_decision_panel",
+      "execution_enabled": false
+    },
+    {
+      "step": 6,
+      "actor": "Admin",
+      "action": "Reviews evidence and delta",
+      "scaffold_screen": "admin_evidence_review_panel / admin_delta_review_panel",
+      "execution_enabled": false
+    },
+    {
+      "step": 7,
+      "actor": "Admin",
+      "action": "Plans Archive, Return for correction, Publish or Publish-and-close decision",
+      "scaffold_screen": "admin_publish_decision_panel / admin_archive_panel / admin_return_for_correction_panel",
+      "execution_enabled": false
+    }
+  ],
+  "editor_global_browse_allowed": false,
+  "editor_self_assignment_allowed": false,
+  "editor_publish_allowed": false,
+  "admin_final_clearance_required": true,
+  "runtime_queue_enabled": false,
+  "assignment_write_enabled": false,
+  "blocked_state": {
+    "static_ux_scaffold_created": true,
+    "runtime_ui_created": false,
+    "live_route_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "queue_runtime_created": false,
+    "assignment_runtime_created": false,
+    "assignment_data_written": false,
+    "review_action_executed": false,
+    "article_file_created": false,
+    "article_file_mutated": false,
+    "object_generation_triggered": false,
+    "public_visibility_changed": false,
+    "publish_approved_changed": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}
