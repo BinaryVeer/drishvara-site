@@ -1,0 +1,83 @@
+{
+  "module_id": "AG31D",
+  "title": "State Transition Non-Activation Audit Register",
+  "status": "state_transition_non_activation_audit_passed",
+  "checks": [
+    {
+      "check_id": "no_state_transition_runtime",
+      "passed": true,
+      "evidence": "AG31D audits transition planning only."
+    },
+    {
+      "check_id": "no_audit_or_hash_runtime",
+      "passed": true,
+      "evidence": "Audit/hash models remain records only."
+    },
+    {
+      "check_id": "no_queue_runtime_or_assignment_query",
+      "passed": true,
+      "evidence": "AG31B queue planning remains non-active."
+    },
+    {
+      "check_id": "no_database_migration_or_sql",
+      "passed": true,
+      "evidence": "No database, migration or SQL is generated."
+    },
+    {
+      "check_id": "no_auth_backend_secret_or_public_mutation",
+      "passed": true,
+      "evidence": "Auth/backend/Supabase/secrets/deployment/public mutation remain blocked."
+    },
+    {
+      "check_id": "admin_editor_governance_preserved",
+      "passed": true,
+      "evidence": "Admin final clearance and Editor restrictions are preserved."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "state_transition_audit_created": true,
+    "illegal_transition_audit_created": true,
+    "admin_approval_gate_audit_created": true,
+    "editor_restriction_audit_created": true,
+    "publish_path_audit_created": true,
+    "state_transition_non_activation_audit_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "hash_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_runtime_created": false,
+    "rollback_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
