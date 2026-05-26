@@ -1,0 +1,84 @@
+{
+  "module_id": "AG30C",
+  "title": "Non-Auth Route Audit Register",
+  "status": "non_auth_route_audit_passed",
+  "checks": [
+    {
+      "check_id": "static_pages_only",
+      "passed": true,
+      "evidence": "AG30C creates static placeholder pages only."
+    },
+    {
+      "check_id": "no_auth_runtime",
+      "passed": true,
+      "evidence": "No Auth activation or session runtime is created."
+    },
+    {
+      "check_id": "no_backend_requests",
+      "passed": true,
+      "evidence": "Pages do not call fetch/XHR/API/backend services."
+    },
+    {
+      "check_id": "no_browser_storage",
+      "passed": true,
+      "evidence": "Pages do not use localStorage/sessionStorage for auth."
+    },
+    {
+      "check_id": "admin_editor_rules_visible",
+      "passed": true,
+      "evidence": "Admin final clearance and Editor assigned-only/no-publish rules are visible in scaffold records."
+    },
+    {
+      "check_id": "no_deployment_or_public_mutation",
+      "passed": true,
+      "evidence": "No deployment, publishing or public mutation is performed."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "protected_route_scaffold_created": true,
+    "protected_route_map_created": true,
+    "route_guard_placeholder_model_created": true,
+    "route_surface_scaffold_register_created": true,
+    "non_auth_route_audit_created": true,
+    "admin_index_page_created": true,
+    "admin_review_page_created": true,
+    "editor_index_page_created": true,
+    "editor_workspace_page_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "admin_review_runtime_created": false,
+    "editor_workspace_runtime_created": false,
+    "editor_assignment_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
