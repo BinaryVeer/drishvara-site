@@ -1,0 +1,80 @@
+{
+  "module_id": "AG27A",
+  "title": "Backend Need Signal Register",
+  "status": "backend_need_signal_register_created_no_activation",
+  "signals": [
+    {
+      "signal_id": "multi_user_admin_editor_login",
+      "label": "Multi-user Admin/Editor login",
+      "future_backend_need": true,
+      "needed_now_for_static_path": false,
+      "reason": "Real Admin and Editor login requires Auth/session and role persistence, but AG26 is currently only a non-runtime planning scaffold."
+    },
+    {
+      "signal_id": "database_backed_review_queue",
+      "label": "Database-backed review and assignment queue",
+      "future_backend_need": true,
+      "needed_now_for_static_path": false,
+      "reason": "Live Admin review queue, Editor assignment, returned edits and decision states require persistent queue tables; current stage only preserves queue models."
+    },
+    {
+      "signal_id": "richer_audit_trail",
+      "label": "Richer audit trail and decision history",
+      "future_backend_need": true,
+      "needed_now_for_static_path": false,
+      "reason": "Real audit logs require append-only database records, actor identity and timestamped actions; current records are static governance artifacts."
+    },
+    {
+      "signal_id": "subscriber_personalization",
+      "label": "Subscriber or reader personalization",
+      "future_backend_need": true,
+      "needed_now_for_static_path": false,
+      "reason": "Subscriber profiles, preferences, saved items, personalization and entitlements require backend/Auth/data storage, which remains deferred."
+    },
+    {
+      "signal_id": "dynamic_admin_publishing",
+      "label": "Dynamic Admin publishing",
+      "future_backend_need": true,
+      "needed_now_for_static_path": false,
+      "reason": "Admin-click publish from a dashboard requires runtime state and write path; current path remains static/GitHub-controlled and no-publish."
+    },
+    {
+      "signal_id": "runtime_object_generation_tracking",
+      "label": "Runtime object generation tracking",
+      "future_backend_need": true,
+      "needed_now_for_static_path": false,
+      "reason": "Generated images, graphs, tables, infographics and prompts need cost, provenance and status tracking before runtime generation is enabled."
+    },
+    {
+      "signal_id": "static_governance_continuation",
+      "label": "Static governance continuation",
+      "future_backend_need": false,
+      "needed_now_for_static_path": true,
+      "reason": "The current approved path can continue using static governed records without activating backend/Auth/Supabase."
+    }
+  ],
+  "future_backend_need_count": 6,
+  "immediate_static_path_need_count": 1,
+  "backend_activation_approved_now": false,
+  "blocked_state": {
+    "backend_need_assessment_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "database_created": false,
+    "migration_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

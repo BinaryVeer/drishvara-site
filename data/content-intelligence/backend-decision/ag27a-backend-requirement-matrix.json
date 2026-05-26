@@ -1,0 +1,80 @@
+{
+  "module_id": "AG27A",
+  "title": "Backend Requirement Matrix",
+  "status": "backend_requirement_matrix_created_no_activation",
+  "requirement_rows": [
+    {
+      "capability": "Admin/Editor login",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": true,
+      "activation_status": "deferred",
+      "notes": "Planned in AG26, not implemented."
+    },
+    {
+      "capability": "Admin review queue",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": true,
+      "activation_status": "deferred",
+      "notes": "Queue model exists; runtime queue remains blocked."
+    },
+    {
+      "capability": "Editor assignment and return-to-Admin flow",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": true,
+      "activation_status": "deferred",
+      "notes": "Routing governance is closed; no live workflow queue exists yet."
+    },
+    {
+      "capability": "Admin final publish control",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": true,
+      "activation_status": "deferred",
+      "notes": "Admin-only publish authority is preserved; publish runtime remains blocked."
+    },
+    {
+      "capability": "Audit trail",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": true,
+      "activation_status": "deferred",
+      "notes": "Current audit is file-based governance; live audit trail needs backend."
+    },
+    {
+      "capability": "Subscriber/personalization",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": true,
+      "activation_status": "deferred",
+      "notes": "Can remain planned until backend/Auth activation is separately approved."
+    },
+    {
+      "capability": "Static article and governance pipeline",
+      "can_continue_static_now": true,
+      "backend_required_for_runtime": false,
+      "activation_status": "continue_static",
+      "notes": "Current governed static path remains valid."
+    }
+  ],
+  "immediate_backend_required_for_current_static_path": false,
+  "backend_required_for_future_dynamic_admin_editor_runtime": true,
+  "backend_activation_approved_now": false,
+  "blocked_state": {
+    "backend_need_assessment_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "database_created": false,
+    "migration_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

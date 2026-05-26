@@ -1,0 +1,32 @@
+{
+  "module_id": "AG27A",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag27b",
+  "future_consumption": {
+    "AG27B": "Backend Decision Audit should consume AG27A need signals, requirement matrix, static-vs-backend assessment, AG26Z closure and existing AG27 checkpoint to decide continue static / plan backend / choose another backend.",
+    "AG27C": "Supabase/Auth Architecture Plan must remain conditional and should be generated only if backend planning is explicitly approved.",
+    "AG27D": "Security/RLS planning must remain conditional and should not start without explicit approval.",
+    "AG27Z": "Backend Decision Closure should close the AG27 detailed decision chain as backend deferred unless approval changes."
+  },
+  "blocked_state": {
+    "backend_need_assessment_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "database_created": false,
+    "migration_created": false,
+    "rls_policy_created": false,
+    "secret_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
