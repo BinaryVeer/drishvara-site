@@ -1,0 +1,137 @@
+{
+  "module_id": "AG28",
+  "title": "Backend Module Map",
+  "status": "backend_module_map_created_no_runtime_modules",
+  "module_count": 10,
+  "modules": [
+    {
+      "module_id": "auth_identity_module",
+      "label": "Auth and Identity Module",
+      "purpose": "Future Supabase/Auth identity, user profile and role linkage.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27c-auth-role-access-model.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "role_access_module",
+      "label": "Role and Access Module",
+      "purpose": "Admin, Editor, Subscriber and Public role boundaries.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27d-access-boundary-matrix.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "article_state_module",
+      "label": "Article State Module",
+      "purpose": "Future article state machine for draft, assigned, returned, archived, approved and published states.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27c-supabase-table-plan.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "assignment_queue_module",
+      "label": "Assignment Queue Module",
+      "purpose": "Future Admin-to-Editor assignment and Editor-to-Admin return workflow.",
+      "consumes": [
+        "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json",
+        "data/content-intelligence/backend-decision/ag27c-supabase-table-plan.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "editor_workspace_service_module",
+      "label": "Editor Workspace Service Module",
+      "purpose": "Future assigned-only Editor workspace boundary.",
+      "consumes": [
+        "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json",
+        "data/content-intelligence/backend-decision/ag27d-rls-test-scenario-model.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "admin_review_service_module",
+      "label": "Admin Review Service Module",
+      "purpose": "Future Admin evidence review, delta review, return, archive and final clearance actions.",
+      "consumes": [
+        "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json",
+        "data/content-intelligence/backend-decision/ag27c-supabase-table-plan.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "audit_rollback_module",
+      "label": "Audit and Rollback Module",
+      "purpose": "Future audit log, publish log and rollback record handling.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27c-audit-secret-governance-plan.json",
+        "data/content-intelligence/backend-decision/ag27d-activation-guard-register.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "controlled_publish_module",
+      "label": "Controlled Publish Module",
+      "purpose": "Future dynamic publish and publish-and-close architecture, still blocked from execution.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27z-backend-activation-deferral-register.json",
+        "data/content-intelligence/backend-decision/ag27d-activation-guard-register.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "asset_reference_evidence_module",
+      "label": "Asset and Reference Evidence Module",
+      "purpose": "Future source verification, image/object attribution and evidence records.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27c-supabase-table-plan.json"
+      ],
+      "runtime_created_now": false
+    },
+    {
+      "module_id": "secret_environment_module",
+      "label": "Secret and Environment Module",
+      "purpose": "Future server-side secret placement and environment governance.",
+      "consumes": [
+        "data/content-intelligence/backend-decision/ag27c-audit-secret-governance-plan.json",
+        "data/content-intelligence/backend-decision/ag27d-secret-risk-register.json"
+      ],
+      "runtime_created_now": false
+    }
+  ],
+  "runtime_modules_created": false,
+  "blocked_state": {
+    "backend_auth_architecture_blueprint_created": true,
+    "module_map_created": true,
+    "api_route_taxonomy_created": true,
+    "auth_session_model_created": true,
+    "service_boundary_model_created": true,
+    "secret_environment_doctrine_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

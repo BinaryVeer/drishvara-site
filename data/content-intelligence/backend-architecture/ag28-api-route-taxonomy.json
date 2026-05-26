@@ -1,0 +1,113 @@
+{
+  "module_id": "AG28",
+  "title": "API Route Taxonomy",
+  "status": "api_route_taxonomy_created_no_routes",
+  "route_group_count": 7,
+  "route_taxonomy": [
+    {
+      "route_group": "auth_routes",
+      "planned_routes": [
+        "/api/auth/session",
+        "/api/auth/logout",
+        "/api/auth/role"
+      ],
+      "purpose": "Future Auth/session checks.",
+      "created_now": false
+    },
+    {
+      "route_group": "admin_assignment_routes",
+      "planned_routes": [
+        "/api/admin/assign",
+        "/api/admin/reassign",
+        "/api/admin/withdraw-assignment"
+      ],
+      "purpose": "Future Admin assignment control.",
+      "created_now": false
+    },
+    {
+      "route_group": "editor_workspace_routes",
+      "planned_routes": [
+        "/api/editor/assigned",
+        "/api/editor/save",
+        "/api/editor/send-back"
+      ],
+      "purpose": "Future assigned-only Editor workspace.",
+      "created_now": false
+    },
+    {
+      "route_group": "admin_review_routes",
+      "planned_routes": [
+        "/api/admin/review",
+        "/api/admin/return",
+        "/api/admin/archive",
+        "/api/admin/clear"
+      ],
+      "purpose": "Future Admin review decisions.",
+      "created_now": false
+    },
+    {
+      "route_group": "evidence_routes",
+      "planned_routes": [
+        "/api/evidence/references",
+        "/api/evidence/assets",
+        "/api/evidence/layout"
+      ],
+      "purpose": "Future reference, attribution and layout evidence review.",
+      "created_now": false
+    },
+    {
+      "route_group": "audit_routes",
+      "planned_routes": [
+        "/api/audit/logs",
+        "/api/audit/delta",
+        "/api/audit/rollback"
+      ],
+      "purpose": "Future audit, delta and rollback visibility.",
+      "created_now": false
+    },
+    {
+      "route_group": "controlled_publish_routes",
+      "planned_routes": [
+        "/api/publish/dry-run",
+        "/api/publish/apply",
+        "/api/publish/rollback"
+      ],
+      "purpose": "Future controlled publish action, blocked until later explicit approval.",
+      "created_now": false
+    }
+  ],
+  "api_routes_created": false,
+  "server_routes_created": false,
+  "blocked_state": {
+    "backend_auth_architecture_blueprint_created": true,
+    "module_map_created": true,
+    "api_route_taxonomy_created": true,
+    "auth_session_model_created": true,
+    "service_boundary_model_created": true,
+    "secret_environment_doctrine_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
