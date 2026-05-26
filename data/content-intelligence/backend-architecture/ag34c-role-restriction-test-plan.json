@@ -1,0 +1,103 @@
+{
+  "module_id": "AG34C",
+  "title": "Role Restriction Test Plan",
+  "status": "role_restriction_test_plan_created_no_runtime",
+  "planning_mode": "restriction_test_plan_only",
+  "restriction_tests": [
+    {
+      "test_id": "admin_final_clearance",
+      "expected_result": "Admin can perform final approval gate.",
+      "execute_now": false
+    },
+    {
+      "test_id": "editor_assigned_only_access",
+      "expected_result": "Editor sees only Admin-assigned article records.",
+      "execute_now": false
+    },
+    {
+      "test_id": "editor_no_publish",
+      "expected_result": "Editor cannot publish or approve final publication.",
+      "execute_now": false
+    },
+    {
+      "test_id": "editor_no_archive",
+      "expected_result": "Editor cannot archive article records.",
+      "execute_now": false
+    },
+    {
+      "test_id": "editor_no_global_queue",
+      "expected_result": "Editor cannot browse all submitted/review/published records.",
+      "execute_now": false
+    },
+    {
+      "test_id": "public_no_private_queue_access",
+      "expected_result": "Unauthenticated/public users cannot access Admin/Editor queues or audit data.",
+      "execute_now": false
+    }
+  ],
+  "rls_policy_created": false,
+  "rls_policy_applied": false,
+  "route_guard_runtime_created": false,
+  "assignment_query_created": false,
+  "database_write_done": false,
+  "blocked_state": {
+    "test_user_role_plan_created": true,
+    "test_admin_user_plan_created": true,
+    "test_editor_user_plan_created": true,
+    "role_restriction_test_plan_created": true,
+    "login_test_boundary_plan_created": true,
+    "test_user_role_non_activation_audit_created": true,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "test_admin_created": false,
+    "test_editor_created": false,
+    "test_user_invitation_sent": false,
+    "test_user_password_created": false,
+    "runtime_backend_created": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "database_write_done": false,
+    "sql_generated": false,
+    "sql_applied": false,
+    "migration_generated": false,
+    "migration_applied": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "env_file_created": false,
+    "env_file_modified": false,
+    "service_role_key_created": false,
+    "service_role_key_stored": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "route_guard_runtime_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "queue_mutation_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "audit_write_runtime_created": false,
+    "hash_runtime_created": false,
+    "rollback_runtime_created": false,
+    "publish_guard_runtime_created": false,
+    "publish_handler_runtime_created": false,
+    "return_handler_runtime_created": false,
+    "archive_handler_runtime_created": false,
+    "public_filter_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
