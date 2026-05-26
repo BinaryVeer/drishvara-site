@@ -1,0 +1,99 @@
+{
+  "module_id": "AG27D",
+  "title": "Access Boundary Matrix",
+  "status": "access_boundary_matrix_created_no_auth_activation",
+  "boundary_count": 5,
+  "boundaries": [
+    {
+      "boundary_id": "admin_article_review_scope",
+      "actor_role": "admin",
+      "target_scope": "all_review_articles_and_assignments",
+      "allowed_future_actions": [
+        "assign_to_editor",
+        "review_return",
+        "return_for_correction",
+        "archive",
+        "approve_publish_plan"
+      ],
+      "blocked_now": true,
+      "rule": "Admin may become final clearance authority only after future Auth/backend activation."
+    },
+    {
+      "boundary_id": "editor_assigned_article_scope",
+      "actor_role": "editor",
+      "target_scope": "assigned_articles_only",
+      "allowed_future_actions": [
+        "edit_assigned_item",
+        "add_editor_note",
+        "send_back_to_admin"
+      ],
+      "blocked_now": true,
+      "rule": "Editor must never access unassigned article workflow records."
+    },
+    {
+      "boundary_id": "public_read_scope",
+      "actor_role": "anonymous_public",
+      "target_scope": "published_public_articles_only",
+      "allowed_future_actions": [
+        "read_public_article"
+      ],
+      "blocked_now": true,
+      "rule": "Public read access must require public_visibility=true and published state."
+    },
+    {
+      "boundary_id": "subscriber_future_scope",
+      "actor_role": "subscriber",
+      "target_scope": "future_subscriber_surfaces_only",
+      "allowed_future_actions": [
+        "read_subscriber_allowed_content"
+      ],
+      "blocked_now": true,
+      "rule": "Subscriber must not inherit Admin or Editor workflow permissions."
+    },
+    {
+      "boundary_id": "service_role_server_only_scope",
+      "actor_role": "service_role",
+      "target_scope": "server_side_controlled_actions_only",
+      "allowed_future_actions": [
+        "controlled_publish_apply",
+        "audit_append",
+        "rollback_prepare"
+      ],
+      "blocked_now": true,
+      "rule": "Service role must never be exposed to frontend or committed to repo."
+    }
+  ],
+  "auth_activation_allowed": false,
+  "blocked_state": {
+    "conditional_security_rls_detail_plan_created": true,
+    "access_boundary_matrix_created": true,
+    "rls_test_scenario_model_created": true,
+    "secret_risk_register_created": true,
+    "activation_guard_register_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false,
+    "ag28_allowed_now": false
+  }
+}

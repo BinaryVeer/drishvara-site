@@ -1,0 +1,84 @@
+{
+  "module_id": "AG27D",
+  "title": "RLS Test Scenario Model",
+  "status": "rls_test_scenario_model_created_no_policy_application",
+  "scenario_count": 7,
+  "scenarios": [
+    {
+      "scenario_id": "editor_cannot_read_unassigned_article",
+      "expected_result": "deny",
+      "planned_assertion": "editor_id must match review_queue.assigned_to_editor_id",
+      "executable_now": false
+    },
+    {
+      "scenario_id": "editor_can_read_assigned_article",
+      "expected_result": "allow_after_activation",
+      "planned_assertion": "assigned queue row exists and status is active/returned_to_editor",
+      "executable_now": false
+    },
+    {
+      "scenario_id": "editor_cannot_publish",
+      "expected_result": "deny",
+      "planned_assertion": "publish transition requires Admin/server-side controlled action",
+      "executable_now": false
+    },
+    {
+      "scenario_id": "admin_can_review_all_internal_candidates",
+      "expected_result": "allow_after_activation",
+      "planned_assertion": "actor role is admin",
+      "executable_now": false
+    },
+    {
+      "scenario_id": "public_cannot_read_unpublished_article",
+      "expected_result": "deny",
+      "planned_assertion": "public_visibility must be true and article_state must be published",
+      "executable_now": false
+    },
+    {
+      "scenario_id": "audit_logs_append_only",
+      "expected_result": "allow_insert_deny_update_delete_after_activation",
+      "planned_assertion": "audit logs cannot be mutated after creation",
+      "executable_now": false
+    },
+    {
+      "scenario_id": "service_role_not_frontend_available",
+      "expected_result": "deny_frontend_exposure",
+      "planned_assertion": "service role only exists server-side in future approved backend",
+      "executable_now": false
+    }
+  ],
+  "rls_test_execution_allowed": false,
+  "rls_policy_application_allowed": false,
+  "blocked_state": {
+    "conditional_security_rls_detail_plan_created": true,
+    "access_boundary_matrix_created": true,
+    "rls_test_scenario_model_created": true,
+    "secret_risk_register_created": true,
+    "activation_guard_register_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false,
+    "ag28_allowed_now": false
+  }
+}

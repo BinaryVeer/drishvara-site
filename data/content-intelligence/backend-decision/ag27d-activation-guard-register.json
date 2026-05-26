@@ -1,0 +1,77 @@
+{
+  "module_id": "AG27D",
+  "title": "Activation Guard Register",
+  "status": "activation_guard_register_created_activation_blocked",
+  "guard_count": 7,
+  "guards": [
+    {
+      "guard_id": "explicit_approval_guard",
+      "required_before_activation": true,
+      "description": "No Supabase/Auth/backend activation without explicit user approval."
+    },
+    {
+      "guard_id": "secret_presence_guard",
+      "required_before_activation": true,
+      "description": "Secrets must be configured only outside repository and verified before activation."
+    },
+    {
+      "guard_id": "rls_policy_review_guard",
+      "required_before_activation": true,
+      "description": "All RLS policies must be reviewed before table creation or live use."
+    },
+    {
+      "guard_id": "test_user_guard",
+      "required_before_activation": true,
+      "description": "Test Admin and Editor users must be planned before activation."
+    },
+    {
+      "guard_id": "rollback_guard",
+      "required_before_activation": true,
+      "description": "Rollback and audit plan must exist before any publish handler activation."
+    },
+    {
+      "guard_id": "no_frontend_service_role_guard",
+      "required_before_activation": true,
+      "description": "Service role key must never be used in frontend code."
+    },
+    {
+      "guard_id": "non_public_dry_run_guard",
+      "required_before_activation": true,
+      "description": "Dynamic publish flow must be dry-run tested on non-public data before real use."
+    }
+  ],
+  "all_guards_required_before_future_activation": true,
+  "activation_allowed_now": false,
+  "blocked_state": {
+    "conditional_security_rls_detail_plan_created": true,
+    "access_boundary_matrix_created": true,
+    "rls_test_scenario_model_created": true,
+    "secret_risk_register_created": true,
+    "activation_guard_register_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false,
+    "ag28_allowed_now": false
+  }
+}
