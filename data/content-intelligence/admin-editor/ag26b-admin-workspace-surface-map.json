@@ -1,0 +1,105 @@
+{
+  "module_id": "AG26B",
+  "title": "Admin Workspace Surface Map",
+  "status": "admin_workspace_surface_map_created_no_runtime_ui",
+  "surface_count": 10,
+  "surfaces": [
+    {
+      "surface_id": "admin_dashboard",
+      "label": "Admin Dashboard",
+      "purpose": "Show system-generated, editor-created, editor-returned and unresolved content streams for Admin review.",
+      "input_source": "AG26A routing model, AG25Z readiness matrix and unresolved register",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "system_generated_content_inbox",
+      "label": "System Generated Content Inbox",
+      "purpose": "Receive AI/system-generated article or module candidates first for Admin review.",
+      "input_source": "AG26A Admin-Editor-System routing model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "editor_created_candidate_inbox",
+      "label": "Editor Created Candidate Inbox",
+      "purpose": "Receive independently created Editor article candidates for Admin review.",
+      "input_source": "AG26A editor create/edit model and routing policy",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "editor_returned_content_inbox",
+      "label": "Editor Returned Content Inbox",
+      "purpose": "Receive edited articles returned by Editor after Admin assignment.",
+      "input_source": "AG26A routing model and editor review state model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_review_detail_view",
+      "label": "Admin Review Detail View",
+      "purpose": "Review article body, references, attribution, object/tool requirements, card/SEO and layout readiness.",
+      "input_source": "AG25Z readiness matrix, AG26A tool browser, correction and preview-submit models",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "assign_to_editor_panel",
+      "label": "Assign to Editor Panel",
+      "purpose": "Forward system-generated or existing content to Editor when Admin finds editing is required.",
+      "input_source": "AG26A routing model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_tool_approval_panel",
+      "label": "Admin Tool Approval Panel",
+      "purpose": "Approve or reject proposed article tools, object generation needs and cost-sensitive preparation steps.",
+      "input_source": "AG26A auto-article tool inventory and object generation model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_reference_attribution_review",
+      "label": "Admin Reference and Attribution Review",
+      "purpose": "Review source status, references, image/object credits and editorial verification flags.",
+      "input_source": "AG25B and AG25C worklists",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_publish_control_panel",
+      "label": "Admin Final Publish Control Panel",
+      "purpose": "Plan Admin-only final publish authority while keeping runtime publishing blocked in AG26B.",
+      "input_source": "AG26 approval gate and AG26A routing model",
+      "runtime_enabled": false
+    },
+    {
+      "surface_id": "admin_audit_and_history_panel",
+      "label": "Admin Audit and History Panel",
+      "purpose": "Plan status history for Admin decisions, Editor assignments, returned edits, holds and publish clearance.",
+      "input_source": "AG26 manual queue workflow model",
+      "runtime_enabled": false
+    }
+  ],
+  "runtime_ui_created": false,
+  "admin_login_required_now": false,
+  "blocked_state": {
+    "admin_workspace_runtime_enabled": false,
+    "admin_login_created": false,
+    "admin_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "admin_review_queue_runtime_created": false,
+    "admin_assignment_queue_runtime_created": false,
+    "publish_runtime_enabled": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "featured_read_generated": false,
+    "object_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

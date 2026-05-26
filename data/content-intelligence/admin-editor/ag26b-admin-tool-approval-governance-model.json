@@ -1,0 +1,101 @@
+{
+  "module_id": "AG26B",
+  "title": "Admin Tool Approval Governance Model",
+  "status": "admin_tool_approval_governance_model_created_no_generation",
+  "governed_tool_groups": [
+    {
+      "group_id": "article_authoring_tools",
+      "label": "Article Authoring Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "reference_source_tools",
+      "label": "Reference and Source Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "image_asset_tools",
+      "label": "Image and Asset Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "graph_chart_tools",
+      "label": "Graph and Chart Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "table_tools",
+      "label": "Table Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "infographic_tools",
+      "label": "Infographic Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "figure_diagram_tools",
+      "label": "Figure and Diagram Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "cultural_textual_tools",
+      "label": "Cultural and Textual Enhancement Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "layout_preview_tools",
+      "label": "Layout and Preview Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    },
+    {
+      "group_id": "cost_governance_tools",
+      "label": "Cost and Governance Tools",
+      "admin_approval_required_for_future_generation": true,
+      "runtime_execution_enabled": false
+    }
+  ],
+  "cost_sensitive_controls": [
+    "Admin can approve or reject image generation requirement.",
+    "Admin can approve or reject graph/table/infographic/diagram generation requirement.",
+    "Admin can require reuse of internal artifacts before new generation.",
+    "Admin can mark reference or attribution as under editorial verification.",
+    "Admin can block public publishing when source/object confidence is insufficient."
+  ],
+  "object_generation_allowed_in_ag26b": false,
+  "tool_runtime_execution_allowed_in_ag26b": false,
+  "blocked_state": {
+    "admin_workspace_runtime_enabled": false,
+    "admin_login_created": false,
+    "admin_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "admin_review_queue_runtime_created": false,
+    "admin_assignment_queue_runtime_created": false,
+    "publish_runtime_enabled": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "featured_read_generated": false,
+    "object_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

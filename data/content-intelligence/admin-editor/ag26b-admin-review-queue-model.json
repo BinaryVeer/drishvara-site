@@ -1,0 +1,89 @@
+{
+  "module_id": "AG26B",
+  "title": "Admin Review Queue Model",
+  "status": "admin_review_queue_model_created_no_runtime_queue",
+  "queue_sources": [
+    "system_generated_content",
+    "editor_created_new_article_candidate",
+    "editor_returned_admin_assigned_edit",
+    "unresolved_featured_reads_work",
+    "future_module_generated_candidate"
+  ],
+  "admin_decision_states": [
+    {
+      "state_id": "admin_not_opened",
+      "label": "Not Opened by Admin",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": true
+    },
+    {
+      "state_id": "admin_under_review",
+      "label": "Under Admin Review",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": true
+    },
+    {
+      "state_id": "admin_sent_to_editor",
+      "label": "Sent to Editor for Editing",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": true
+    },
+    {
+      "state_id": "editor_returned_to_admin",
+      "label": "Returned by Editor to Admin",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": true
+    },
+    {
+      "state_id": "admin_hold",
+      "label": "Admin Hold",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": false
+    },
+    {
+      "state_id": "admin_rejected",
+      "label": "Rejected by Admin",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": false
+    },
+    {
+      "state_id": "admin_publish_candidate",
+      "label": "Admin Publish Candidate",
+      "publish_allowed_now": false,
+      "editor_assignment_allowed_later": false
+    }
+  ],
+  "routing_rules_applied": {
+    "system_generated_content_first_goes_to_admin": true,
+    "editor_new_article_candidate_goes_to_admin": true,
+    "editor_returned_content_goes_to_admin": true,
+    "editor_direct_publish_allowed": false,
+    "admin_final_publish_authority": true
+  },
+  "runtime_queue_created": false,
+  "blocked_state": {
+    "admin_workspace_runtime_enabled": false,
+    "admin_login_created": false,
+    "admin_account_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "admin_review_queue_runtime_created": false,
+    "admin_assignment_queue_runtime_created": false,
+    "publish_runtime_enabled": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "featured_read_generated": false,
+    "object_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "data_written_to_runtime": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "supabase_auth_backend_activated": false
+  }
+}

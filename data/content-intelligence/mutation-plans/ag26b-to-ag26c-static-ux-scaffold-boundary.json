@@ -1,0 +1,41 @@
+{
+  "module_id": "AG26B",
+  "title": "AG26B to AG26C Static UX Scaffold Boundary",
+  "status": "ag26c_boundary_created_not_started",
+  "next_stage_id": "AG26C",
+  "next_stage_title": "Static UX Scaffold",
+  "allowed_scope": [
+    "Consume AG26A full Editor Workspace UX Plan.",
+    "Consume AG26A Admin-Editor-System routing model.",
+    "Consume AG26B Admin Workspace UX Plan.",
+    "Create non-runtime static UX scaffold only.",
+    "Preserve Admin-first review for system-generated content.",
+    "Preserve Editor independent new article candidate flow.",
+    "Preserve Editor edit-only-after-Admin-assignment rule for system/existing content.",
+    "Preserve Admin-only final publish authority.",
+    "Keep Auth, backend, runtime queues, article mutation, generation, deployment and publishing blocked."
+  ],
+  "blocked_scope": [
+    "No Admin workspace runtime UI.",
+    "No Admin login creation.",
+    "No Admin account creation.",
+    "No Auth activation.",
+    "No backend activation.",
+    "No Supabase activation.",
+    "No runtime Admin review queue creation.",
+    "No runtime assignment queue creation.",
+    "No article file mutation.",
+    "No article creation.",
+    "No Featured Read generation.",
+    "No object generation trigger.",
+    "No public index mutation.",
+    "No homepage mutation.",
+    "No category page mutation.",
+    "No sitemap/feed mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true
+}
