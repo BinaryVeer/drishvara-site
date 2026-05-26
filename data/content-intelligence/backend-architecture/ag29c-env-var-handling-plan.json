@@ -1,0 +1,84 @@
+{
+  "module_id": "AG29C",
+  "title": "Environment Variable Handling Plan",
+  "status": "env_var_handling_plan_created_no_env_write",
+  "handling_rules": [
+    "Do not commit .env files.",
+    "Do not print secret values in terminal outputs.",
+    "Do not expose service role keys to client bundles.",
+    "Use platform-level encrypted environment storage only after explicit activation approval.",
+    "Separate public-safe variables from server-only variables.",
+    "Review RLS before any anon-key client use.",
+    "Rotate all secrets immediately if exposed in logs, commits or chat."
+  ],
+  "planned_env_keys": [
+    {
+      "key_name": "SUPABASE_URL",
+      "server_only": false,
+      "public_safe_after_activation_review": true,
+      "write_now": false
+    },
+    {
+      "key_name": "SUPABASE_ANON_KEY",
+      "server_only": false,
+      "public_safe_after_activation_review": true,
+      "write_now": false
+    },
+    {
+      "key_name": "SUPABASE_SERVICE_ROLE_KEY",
+      "server_only": true,
+      "public_safe_after_activation_review": false,
+      "write_now": false
+    },
+    {
+      "key_name": "GITHUB_WRITE_TOKEN",
+      "server_only": true,
+      "public_safe_after_activation_review": false,
+      "write_now": false
+    },
+    {
+      "key_name": "SESSION_SIGNING_SECRET",
+      "server_only": true,
+      "public_safe_after_activation_review": false,
+      "write_now": false
+    }
+  ],
+  "env_vars_written": false,
+  "env_file_created": false,
+  "blocked_state": {
+    "secret_governance_plan_created": true,
+    "secret_boundary_register_created": true,
+    "env_var_handling_plan_created": true,
+    "service_role_safety_plan_created": true,
+    "secret_rotation_audit_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
