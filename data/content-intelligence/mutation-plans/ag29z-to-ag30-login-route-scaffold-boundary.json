@@ -1,0 +1,34 @@
+{
+  "module_id": "AG29Z",
+  "title": "AG29Z to AG30 Login/Route Scaffold Boundary",
+  "status": "ag30_boundary_created_non_active_login_route_scaffold_only",
+  "next_stage_id": "AG30",
+  "next_stage_title": "Admin/Editor Login UI and Route Scaffold",
+  "allowed_scope": [
+    "Create non-active Admin/Editor login UI scaffold.",
+    "Create non-active route naming/placement plan.",
+    "Create non-active session-state placeholder plan.",
+    "Create role-based navigation visibility model.",
+    "Create Admin/Editor route guard plan without real Auth.",
+    "Preserve Editor assigned-only and no-publish governance."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No Supabase connection.",
+    "No Auth activation.",
+    "No real Admin login.",
+    "No real Editor login.",
+    "No session runtime.",
+    "No SQL or migrations.",
+    "No database creation.",
+    "No RLS policy application.",
+    "No secrets or env vars.",
+    "No server/API route runtime.",
+    "No deployment.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}

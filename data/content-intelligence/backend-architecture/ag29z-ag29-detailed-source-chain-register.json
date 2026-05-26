@@ -1,0 +1,69 @@
+{
+  "module_id": "AG29Z",
+  "title": "AG29 Detailed Source Chain Register",
+  "status": "ag29_detailed_source_chain_registered_for_closure",
+  "chain_length": 4,
+  "closed_chain": [
+    {
+      "stage_id": "AG29A",
+      "title": "Supabase Schema Draft",
+      "status": "supabase_schema_draft_created_ready_for_ag29b",
+      "file": "data/content-intelligence/backend-architecture/ag29a-supabase-schema-draft.json"
+    },
+    {
+      "stage_id": "AG29B",
+      "title": "RLS Policy Plan",
+      "status": "rls_policy_plan_created_ready_for_ag29c",
+      "file": "data/content-intelligence/backend-architecture/ag29b-rls-policy-plan.json"
+    },
+    {
+      "stage_id": "AG29C",
+      "title": "Secret Governance Plan",
+      "status": "secret_governance_plan_created_ready_for_ag29d",
+      "file": "data/content-intelligence/backend-architecture/ag29c-secret-governance-plan.json"
+    },
+    {
+      "stage_id": "AG29D",
+      "title": "Schema/RLS Security Audit",
+      "status": "schema_rls_security_audit_created_ready_for_ag29z",
+      "file": "data/content-intelligence/backend-architecture/ag29d-schema-rls-security-audit.json"
+    }
+  ],
+  "consumed_architecture_baseline": "data/content-intelligence/backend-architecture/ag28-backend-auth-architecture-blueprint.json",
+  "consumed_backend_decision_closure": "data/content-intelligence/backend-decision/ag27z-backend-decision-closure.json",
+  "blocked_state": {
+    "schema_rls_closure_created": true,
+    "ag29_detailed_chain_closed": true,
+    "non_active_schema_rls_planning_closed": true,
+    "ag30_non_active_login_route_scaffold_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
