@@ -1,0 +1,43 @@
+{
+  "module_id": "AG26D",
+  "title": "Role and Routing Audit",
+  "status": "role_routing_audit_passed_ready_for_ag26z",
+  "audit_rules": {
+    "editor_independent_new_article_candidate_allowed": true,
+    "editor_new_article_candidate_goes_to_admin_review": true,
+    "system_generated_content_first_goes_to_admin": true,
+    "admin_core_reviewer_for_system_generated_content": true,
+    "editor_direct_system_article_edit_blocked": true,
+    "editor_can_edit_admin_assigned_system_article": true,
+    "editor_returns_to_admin_after_edit": true,
+    "admin_final_publish_authority": true,
+    "editor_publish_authority_blocked": true,
+    "system_publish_without_admin_blocked": true
+  },
+  "audit_passed": true,
+  "blocked_state": {
+    "ux_scaffold_audit_created": true,
+    "runtime_ui_created": false,
+    "runtime_route_created": false,
+    "component_file_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "runtime_queue_created": false,
+    "queue_data_written": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "object_generation_triggered": false,
+    "article_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
