@@ -1,0 +1,38 @@
+{
+  "module_id": "AG27A",
+  "title": "AG27A to AG27B Backend Decision Audit Boundary",
+  "status": "ag27b_boundary_created_not_started",
+  "next_stage_id": "AG27B",
+  "next_stage_title": "Backend Decision Audit",
+  "allowed_scope": [
+    "Consume AG27A backend need signals.",
+    "Audit whether to continue static, continue non-active backend planning, or prepare controlled sandbox planning.",
+    "Keep Supabase/Auth/backend activation blocked.",
+    "Keep secrets, env vars, database tables, RLS policies and deployment blocked."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No Supabase connection.",
+    "No database table creation.",
+    "No RLS policy creation.",
+    "No Auth activation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route creation.",
+    "No queue runtime creation.",
+    "No audit runtime creation.",
+    "No article state runtime creation.",
+    "No dynamic publish runtime creation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation.",
+    "No AG28 start until AG27 closure permits it."
+  ],
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_activation": true
+}

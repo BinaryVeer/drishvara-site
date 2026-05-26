@@ -1,0 +1,62 @@
+{
+  "module_id": "AG27A",
+  "title": "Backend Planning Scope Register",
+  "status": "backend_planning_scope_created_no_backend_activation",
+  "planning_allowed_now": [
+    "Need assessment",
+    "Decision audit",
+    "Non-active backend architecture blueprint",
+    "Non-active table plan",
+    "Non-active role and access model",
+    "Non-active RLS/security planning",
+    "Secret-governance planning without storing secrets",
+    "Audit-log shape planning",
+    "Rollback-state planning"
+  ],
+  "explicitly_blocked_now": [
+    "Supabase project creation",
+    "Supabase connection",
+    "Database table creation",
+    "RLS policy application",
+    "Auth activation",
+    "Admin login creation",
+    "Editor login creation",
+    "Secrets or env var writing",
+    "Runtime API route creation",
+    "Dynamic publish handler activation",
+    "Deployment",
+    "Public mutation"
+  ],
+  "operator_context": {
+    "backend_planning_requested": true,
+    "backend_activation_requested": false,
+    "controlled_sandbox_activation_requested": false,
+    "current_decision": "plan_backend_without_activation"
+  },
+  "blocked_state": {
+    "backend_need_assessment_created": true,
+    "backend_planning_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_created": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

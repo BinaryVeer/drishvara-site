@@ -1,0 +1,104 @@
+{
+  "module_id": "AG27A",
+  "title": "Backend Need Signal Register",
+  "status": "backend_need_signal_register_created_no_activation",
+  "signal_count": 7,
+  "high_backend_relevance_count": 4,
+  "signals": [
+    {
+      "signal_id": "admin_editor_multi_user_roles",
+      "label": "Admin/Editor multi-user role separation",
+      "source": "AG26A-AG26Z Admin/Editor workflow",
+      "backend_relevance": "high",
+      "current_static_support": "planning_only",
+      "backend_needed_for_real_execution": true,
+      "activation_needed_now": false
+    },
+    {
+      "signal_id": "database_backed_review_queue",
+      "label": "Database-backed review and assignment queue",
+      "source": "AG26B assignment control and AG26C role-flow scaffold",
+      "backend_relevance": "high",
+      "current_static_support": "planning_only",
+      "backend_needed_for_real_execution": true,
+      "activation_needed_now": false
+    },
+    {
+      "signal_id": "audit_logs_and_delta_history",
+      "label": "Audit logs, delta review and rollback records",
+      "source": "AG26B evidence/delta review and AG26D audit",
+      "backend_relevance": "high",
+      "current_static_support": "record_only",
+      "backend_needed_for_real_execution": true,
+      "activation_needed_now": false
+    },
+    {
+      "signal_id": "article_state_machine",
+      "label": "Article states: draft, editor submitted, admin review, returned, archived, approved, published",
+      "source": "AG26A/AG26B review-state and Admin action models",
+      "backend_relevance": "high",
+      "current_static_support": "planning_only",
+      "backend_needed_for_real_execution": true,
+      "activation_needed_now": false
+    },
+    {
+      "signal_id": "dynamic_publish_action",
+      "label": "Admin dynamic publish action",
+      "source": "AG26B publish and publish-and-close plan-only actions",
+      "backend_relevance": "future_high",
+      "current_static_support": "blocked_plan_only",
+      "backend_needed_for_real_execution": true,
+      "activation_needed_now": false
+    },
+    {
+      "signal_id": "subscriber_features",
+      "label": "Subscriber/user features",
+      "source": "future personalization/subscriber roadmap",
+      "backend_relevance": "medium_future",
+      "current_static_support": "not_required_for_current_stage",
+      "backend_needed_for_real_execution": true,
+      "activation_needed_now": false
+    },
+    {
+      "signal_id": "static_github_controlled_continuation",
+      "label": "Static/GitHub-controlled continuation",
+      "source": "AG26Z boundary and AG27 backend deferral",
+      "backend_relevance": "current_safe_path",
+      "current_static_support": "sufficient_for_now",
+      "backend_needed_for_real_execution": false,
+      "activation_needed_now": false
+    }
+  ],
+  "assessment_summary": {
+    "backend_planning_is_now_useful": true,
+    "backend_activation_is_needed_now": false,
+    "static_path_remains_valid_now": true,
+    "controlled_backend_planning_should_continue_to_ag27b": true
+  },
+  "blocked_state": {
+    "backend_need_assessment_created": true,
+    "backend_planning_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_created": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

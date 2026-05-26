@@ -1,0 +1,75 @@
+{
+  "module_id": "AG27A",
+  "title": "Static vs Backend Readiness Matrix",
+  "status": "static_vs_backend_matrix_created_no_activation",
+  "matrix": [
+    {
+      "capability": "Article reading/public pages",
+      "static_path": "sufficient_now",
+      "backend_path": "not_required_now",
+      "decision": "continue_static"
+    },
+    {
+      "capability": "Admin assigns article to Editor",
+      "static_path": "planning_only",
+      "backend_path": "needed_for_real_queue",
+      "decision": "plan_backend_do_not_activate"
+    },
+    {
+      "capability": "Editor assigned-only workspace",
+      "static_path": "planning_only",
+      "backend_path": "needed_for_login_and_row_scope",
+      "decision": "plan_backend_do_not_activate"
+    },
+    {
+      "capability": "Audit log and rollback trail",
+      "static_path": "record_only",
+      "backend_path": "needed_for_real_actions",
+      "decision": "plan_backend_do_not_activate"
+    },
+    {
+      "capability": "Publish and publish-and-close",
+      "static_path": "blocked_plan_only",
+      "backend_path": "needed_for_dynamic_execution",
+      "decision": "defer_execution"
+    },
+    {
+      "capability": "Subscriber/account features",
+      "static_path": "not_current",
+      "backend_path": "future_needed",
+      "decision": "defer_to_later"
+    }
+  ],
+  "conclusion": {
+    "backend_need_exists_for_future_real_workflow": true,
+    "backend_activation_required_immediately": false,
+    "controlled_backend_planning_should_begin": true,
+    "supabase_sandbox_activation_should_wait": true
+  },
+  "blocked_state": {
+    "backend_need_assessment_created": true,
+    "backend_planning_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "database_table_created": false,
+    "rls_policy_created": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
