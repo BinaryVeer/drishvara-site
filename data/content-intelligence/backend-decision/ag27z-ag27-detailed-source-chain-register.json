@@ -1,0 +1,63 @@
+{
+  "module_id": "AG27Z",
+  "title": "AG27 Detailed Source Chain Register",
+  "status": "ag27_detailed_source_chain_registered_for_closure",
+  "chain_length": 4,
+  "closed_chain": [
+    {
+      "stage_id": "AG27A",
+      "title": "Backend Need Assessment",
+      "status": "backend_need_assessment_created_ready_for_ag27b",
+      "file": "data/content-intelligence/backend-decision/ag27a-backend-need-assessment.json"
+    },
+    {
+      "stage_id": "AG27B",
+      "title": "Backend Decision Audit",
+      "status": "backend_decision_audit_created_ready_for_ag27c",
+      "file": "data/content-intelligence/backend-decision/ag27b-backend-decision-audit.json"
+    },
+    {
+      "stage_id": "AG27C",
+      "title": "Supabase/Auth Security and RLS Plan",
+      "status": "supabase_auth_security_rls_plan_created_ready_for_conditional_ag27d",
+      "file": "data/content-intelligence/backend-decision/ag27c-supabase-auth-security-rls-plan.json"
+    },
+    {
+      "stage_id": "AG27D",
+      "title": "Conditional Security/RLS Detail Plan",
+      "status": "conditional_security_rls_detail_plan_created_ready_for_ag27z",
+      "file": "data/content-intelligence/backend-decision/ag27d-conditional-security-rls-detail-plan.json"
+    }
+  ],
+  "original_checkpoint_consumed": "data/content-intelligence/backend-decision/ag27-supabase-auth-backend-decision-checkpoint.json",
+  "blocked_state": {
+    "backend_decision_closure_created": true,
+    "ag27_detailed_chain_closed": true,
+    "non_active_backend_planning_closed": true,
+    "ag28_non_active_architecture_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

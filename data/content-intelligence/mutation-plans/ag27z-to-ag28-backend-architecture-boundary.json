@@ -1,0 +1,32 @@
+{
+  "module_id": "AG27Z",
+  "title": "AG27Z to AG28 Backend Architecture Boundary",
+  "status": "ag28_boundary_created_non_active_architecture_only",
+  "next_stage_id": "AG28",
+  "next_stage_title": "Backend/Auth Architecture Blueprint",
+  "allowed_scope": [
+    "Create backend/Auth architecture blueprint.",
+    "Map AG27C table plan into architecture modules.",
+    "Map AG27D access boundaries and activation guards into architecture governance.",
+    "Plan non-active API route taxonomy.",
+    "Plan non-active queue and audit service boundaries.",
+    "Plan non-active environment/secret placement doctrine."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No Supabase connection.",
+    "No SQL/migration generation.",
+    "No database creation.",
+    "No RLS policy application.",
+    "No Auth activation.",
+    "No Admin/Editor login creation.",
+    "No secrets or env var writing.",
+    "No runtime route creation.",
+    "No deployment.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}
