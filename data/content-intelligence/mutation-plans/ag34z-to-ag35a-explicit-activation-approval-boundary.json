@@ -1,0 +1,41 @@
+{
+  "module_id": "AG34Z",
+  "title": "AG34Z to AG35A Explicit Activation Approval Boundary",
+  "status": "ag35a_boundary_created_explicit_activation_approval_stop_point_only",
+  "next_stage_id": "AG35A",
+  "next_stage_title": "Explicit Activation Approval",
+  "allowed_scope": [
+    "Stop and request explicit user approval.",
+    "Summarize what activation would change.",
+    "Confirm Supabase/Auth/backend/database/secrets/account risks.",
+    "Confirm no action will occur unless the user approves.",
+    "Do not generate or apply Supabase schema before approval.",
+    "Do not create accounts, secrets, env vars, database tables or runtime before approval."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No Supabase connection.",
+    "No Auth activation.",
+    "No real Admin/Editor user creation.",
+    "No test Admin/Editor user creation.",
+    "No credential generation.",
+    "No database table creation.",
+    "No database write.",
+    "No SQL generation or application.",
+    "No migration generation or application.",
+    "No RLS policy creation or application.",
+    "No secret creation.",
+    "No environment variable write.",
+    "No service-role key creation, storage or exposure.",
+    "No server/API route runtime.",
+    "No handler, queue, audit or rollback runtime.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred_until_explicit_approval": true,
+  "supabase_auth_backend_deferred_until_explicit_approval": true,
+  "explicit_approval_required_before_real_activation": true
+}
