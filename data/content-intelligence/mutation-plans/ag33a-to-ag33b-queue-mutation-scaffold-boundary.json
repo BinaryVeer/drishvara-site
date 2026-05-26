@@ -1,0 +1,41 @@
+{
+  "module_id": "AG33A",
+  "title": "AG33A to AG33B Queue Mutation Scaffold Boundary",
+  "status": "ag33b_boundary_created_non_active_queue_mutation_scaffold_only",
+  "next_stage_id": "AG33B",
+  "next_stage_title": "Non-active Queue Mutation Scaffold",
+  "allowed_scope": [
+    "Consume AG33A disabled publish control model.",
+    "Consume AG33A preview-only publish handler shape.",
+    "Create preview-only queue mutation shapes for article state changes.",
+    "Keep queue runtime, database write, handler runtime and public mutation inactive.",
+    "Preserve Admin final authority and Editor assigned-only/no-publish governance."
+  ],
+  "blocked_scope": [
+    "No publish handler runtime.",
+    "No publish guard runtime.",
+    "No route guard runtime.",
+    "No public filter runtime.",
+    "No audit runtime.",
+    "No hash runtime.",
+    "No rollback runtime.",
+    "No database table creation.",
+    "No migration generation.",
+    "No SQL generation.",
+    "No RLS policy application.",
+    "No Auth activation.",
+    "No backend/Supabase connection.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route runtime.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}

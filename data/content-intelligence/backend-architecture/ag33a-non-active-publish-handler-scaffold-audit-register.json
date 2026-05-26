@@ -1,0 +1,91 @@
+{
+  "module_id": "AG33A",
+  "title": "Non-active Publish Handler Scaffold Audit Register",
+  "status": "non_active_publish_handler_scaffold_audit_passed",
+  "checks": [
+    {
+      "check_id": "disabled_control_only",
+      "passed": true,
+      "evidence": "Publish control is represented as disabled preview-only model."
+    },
+    {
+      "check_id": "preview_shape_only",
+      "passed": true,
+      "evidence": "Handler shape is a planning record and cannot execute."
+    },
+    {
+      "check_id": "no_handler_or_guard_runtime",
+      "passed": true,
+      "evidence": "No publish handler or guard runtime is created."
+    },
+    {
+      "check_id": "no_server_or_api_route",
+      "passed": true,
+      "evidence": "No server/API route is created."
+    },
+    {
+      "check_id": "no_database_sql_or_rls",
+      "passed": true,
+      "evidence": "No database, migration, SQL or RLS is generated/applied."
+    },
+    {
+      "check_id": "no_github_write_deployment_or_public_mutation",
+      "passed": true,
+      "evidence": "No GitHub write, deployment, publishing or public mutation is performed."
+    },
+    {
+      "check_id": "admin_editor_governance_preserved",
+      "passed": true,
+      "evidence": "Admin final clearance and Editor no-publish rules are preserved."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "non_active_publish_handler_scaffold_created": true,
+    "disabled_publish_control_model_created": true,
+    "preview_only_publish_handler_shape_created": true,
+    "scaffold_guard_binding_model_created": true,
+    "scaffold_non_activation_audit_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "hash_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_guard_runtime_created": false,
+    "publish_handler_runtime_created": false,
+    "return_handler_runtime_created": false,
+    "archive_handler_runtime_created": false,
+    "rollback_runtime_created": false,
+    "public_filter_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
