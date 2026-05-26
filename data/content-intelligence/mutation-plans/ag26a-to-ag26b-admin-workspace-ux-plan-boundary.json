@@ -5,6 +5,8 @@
   "next_stage_id": "AG26B",
   "next_stage_title": "Admin Workspace UX Plan",
   "allowed_scope": [
+    "Consume AG26A admin-assigned-only editor workflow alignment.",
+    "Plan Admin assignment, reassignment, review, final clearance and override UX.",
     "Consume AG26A editor workspace surface map.",
     "Consume AG26A auto-article tool inventory.",
     "Consume AG26A create/edit article tool model.",
@@ -40,5 +42,8 @@
     "No deployment trigger.",
     "No publishing."
   ],
-  "supabase_auth_backend_deferred": true
+  "supabase_auth_backend_deferred": true,
+  "editor_assignment_rule": "Editor receives work from Admin and sends work back to Admin.",
+  "editor_independent_creation_blocked": true,
+  "editor_global_browse_blocked": true
 }

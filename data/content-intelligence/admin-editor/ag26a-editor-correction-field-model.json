@@ -2,8 +2,22 @@
   "module_id": "AG26A",
   "title": "Editor Correction Field Model",
   "status": "editor_correction_field_model_created_no_data_write",
-  "field_group_count": 6,
+  "field_group_count": 7,
   "correction_fields": [
+    {
+      "field_group": "admin_assignment",
+      "fields": [
+        "assignment_id",
+        "assigned_by_admin",
+        "assigned_to_editor",
+        "assignment_type",
+        "assignment_note",
+        "assigned_article_id_or_slug",
+        "assignment_due_status",
+        "send_back_to_admin_status",
+        "editor_completion_note"
+      ]
+    },
     {
       "field_group": "article_create_edit",
       "fields": [
@@ -117,5 +131,20 @@
     "deployment_triggered": false,
     "published": false,
     "supabase_auth_backend_activated": false
-  }
+  },
+  "assignment_governance": {
+    "editor_can_only_work_on_admin_assigned_items": true,
+    "editor_can_create_independent_article": false,
+    "editor_can_browse_all_articles": false,
+    "editor_can_self_assign_article": false,
+    "editor_can_publish": false,
+    "editor_can_deploy": false,
+    "editor_can_change_public_visibility": false,
+    "editor_can_mark_publish_approved": false,
+    "editor_returns_work_to_admin": true,
+    "admin_is_assignment_originator": true,
+    "admin_is_final_clearance_authority": true,
+    "editor_tool_use_scope": "assigned_article_only"
+  },
+  "editor_can_edit_only_assigned_fields": true
 }

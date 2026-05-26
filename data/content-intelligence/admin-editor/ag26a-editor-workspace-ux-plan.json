@@ -2,7 +2,7 @@
   "module_id": "AG26A",
   "title": "Editor Workspace UX Plan",
   "status": "editor_workspace_ux_plan_created_ready_for_ag26b",
-  "purpose": "Plan the full editor-side workspace UX for browsing existing articles, creating new article candidates, editing existing article candidates, managing references, images, graphs, tables, infographics, figures, diagrams, cultural/textual elements, SEO/card fields, previews and submit/return/hold states without creating logins, runtime queues, backend objects, article mutations, generation calls, publishing or deployments.",
+  "purpose": "Plan the full editor-side workspace UX for Admin-assigned article work only. The Editor may browse only Admin-assigned articles, prepare Admin-assigned new article drafts, edit Admin-assigned existing articles, use article preparation tools only within the assigned article workspace, preview the assigned work and send it back to Admin. The Editor cannot independently create, self-assign, browse all articles, publish, deploy, mutate public pages or activate backend systems.",
   "created_by": "vikash vaibhav",
   "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
   "consumed_source_of_truth": [
@@ -47,7 +47,11 @@
     "article_creation_status": "blocked",
     "article_mutation_status": "blocked",
     "object_generation_status": "blocked",
-    "next_stage": "AG26B"
+    "next_stage": "AG26B",
+    "assignment_model": "admin_assigned_items_only",
+    "editor_global_browse_status": "blocked",
+    "editor_independent_creation_status": "blocked",
+    "editor_return_to_admin_status": "required"
   },
   "workspace_surface_map_file": "data/content-intelligence/admin-editor/ag26a-editor-workspace-surface-map.json",
   "auto_article_tool_inventory_file": "data/content-intelligence/admin-editor/ag26a-editor-auto-article-tool-inventory.json",
@@ -98,5 +102,25 @@
     "deployment_triggered": false,
     "published": false,
     "supabase_auth_backend_activated": false
-  }
+  },
+  "assignment_governance": {
+    "editor_can_only_work_on_admin_assigned_items": true,
+    "editor_can_create_independent_article": false,
+    "editor_can_browse_all_articles": false,
+    "editor_can_self_assign_article": false,
+    "editor_can_publish": false,
+    "editor_can_deploy": false,
+    "editor_can_change_public_visibility": false,
+    "editor_can_mark_publish_approved": false,
+    "editor_returns_work_to_admin": true,
+    "admin_is_assignment_originator": true,
+    "admin_is_final_clearance_authority": true,
+    "editor_tool_use_scope": "assigned_article_only"
+  },
+  "editor_can_only_work_on_admin_assigned_items": true,
+  "editor_can_create_independent_article": false,
+  "editor_can_browse_all_articles": false,
+  "editor_can_self_assign_article": false,
+  "editor_returns_work_to_admin": true,
+  "admin_final_clearance_required": true
 }

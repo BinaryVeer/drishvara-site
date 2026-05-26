@@ -53,3 +53,12 @@ AG26A does not create Editor login, Editor account, Auth, backend, Supabase, run
 ## Next Stage
 
 AG26B — Admin Workspace UX Plan.
+
+
+## Admin-Assigned Editor Workflow Alignment
+
+The Editor workspace is restricted to Admin-assigned work. The Editor cannot independently create articles, browse all repository articles, self-assign work, publish, deploy or change public visibility.
+
+Correct flow:
+
+Admin assigns/sends article → Editor edits/prepares assigned work → Editor sends back to Admin → Admin decides next action.
