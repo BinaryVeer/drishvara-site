@@ -1,0 +1,116 @@
+{
+  "module_id": "AG29B",
+  "title": "Role Scope Policy Register",
+  "status": "role_scope_policy_register_created_no_rls_application",
+  "role_scopes": [
+    {
+      "role_code": "admin",
+      "planned_scope": "full_internal_review_scope",
+      "permitted_future_actions": [
+        "assign",
+        "review",
+        "return_for_correction",
+        "archive",
+        "final_clearance",
+        "publish_plan_only"
+      ],
+      "blocked_now": true,
+      "rls_policy_apply_now": false
+    },
+    {
+      "role_code": "editor",
+      "planned_scope": "assigned_items_only",
+      "permitted_future_actions": [
+        "read_assigned",
+        "save_assigned_work",
+        "submit_to_admin"
+      ],
+      "forbidden_future_actions": [
+        "global_browse",
+        "self_assign",
+        "publish",
+        "admin_clearance"
+      ],
+      "blocked_now": true,
+      "rls_policy_apply_now": false
+    },
+    {
+      "role_code": "subscriber",
+      "planned_scope": "future_subscriber_read_only_surfaces",
+      "permitted_future_actions": [
+        "read_subscriber_allowed_content"
+      ],
+      "forbidden_future_actions": [
+        "admin_review",
+        "editor_workspace",
+        "publish"
+      ],
+      "blocked_now": true,
+      "rls_policy_apply_now": false
+    },
+    {
+      "role_code": "anonymous_public",
+      "planned_scope": "published_public_content_only",
+      "permitted_future_actions": [
+        "read_published_public_article"
+      ],
+      "forbidden_future_actions": [
+        "read_unpublished",
+        "admin_review",
+        "editor_workspace"
+      ],
+      "blocked_now": true,
+      "rls_policy_apply_now": false
+    },
+    {
+      "role_code": "service_role_server_only",
+      "planned_scope": "controlled_server_actions_only",
+      "permitted_future_actions": [
+        "append_audit",
+        "controlled_publish_apply",
+        "rollback_prepare"
+      ],
+      "forbidden_future_actions": [
+        "frontend_exposure"
+      ],
+      "blocked_now": true,
+      "rls_policy_apply_now": false
+    }
+  ],
+  "rls_policies_applied": false,
+  "auth_enabled": false,
+  "blocked_state": {
+    "rls_policy_plan_created": true,
+    "role_scope_register_created": true,
+    "table_rule_map_created": true,
+    "system_action_policy_plan_created": true,
+    "public_reader_policy_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

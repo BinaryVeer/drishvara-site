@@ -1,0 +1,61 @@
+{
+  "module_id": "AG29B",
+  "title": "Public Reader Policy Plan",
+  "status": "public_reader_policy_plan_created_no_public_runtime",
+  "public_rules": [
+    {
+      "rule_id": "published_article_read_only",
+      "target_table": "articles",
+      "planned_condition": "public_visibility=true AND article_state='published'",
+      "apply_now": false
+    },
+    {
+      "rule_id": "public_reference_rendered_only",
+      "target_table": "reference_evidence",
+      "planned_condition": "only approved rendered public reference fields may be exposed through future public surface",
+      "apply_now": false
+    },
+    {
+      "rule_id": "public_asset_rendered_only",
+      "target_table": "object_assets",
+      "planned_condition": "only approved rendered asset metadata may be exposed through future public surface",
+      "apply_now": false
+    }
+  ],
+  "public_runtime_created": false,
+  "public_policy_applied": false,
+  "blocked_state": {
+    "rls_policy_plan_created": true,
+    "role_scope_register_created": true,
+    "table_rule_map_created": true,
+    "system_action_policy_plan_created": true,
+    "public_reader_policy_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "module_id": "AG29B",
+  "title": "Table RLS Rule Map",
+  "status": "table_rls_rule_map_created_no_policy_application",
+  "table_policy_groups": [
+    {
+      "table_name": "users",
+      "planned_rules": [
+        "Admin can view users for assignment planning after activation.",
+        "Editor can view own profile only after activation.",
+        "Public cannot read user records."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "roles",
+      "planned_rules": [
+        "Admin can read active role definitions after activation.",
+        "Public can never mutate role definitions.",
+        "Editor cannot mutate roles."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "articles",
+      "planned_rules": [
+        "Admin can read internal review articles after activation.",
+        "Editor can read only assigned article records after activation.",
+        "Public can read only published and public-visible articles after activation."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "review_queue",
+      "planned_rules": [
+        "Admin can create assignments after activation.",
+        "Editor can read only rows assigned to that editor after activation.",
+        "Editor cannot self-assign."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "editor_decisions",
+      "planned_rules": [
+        "Editor can insert decisions only for assigned articles after activation.",
+        "Admin can read editor decisions after activation.",
+        "Public cannot access editor decisions."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "admin_decisions",
+      "planned_rules": [
+        "Admin can create decisions after activation.",
+        "Editor can read returned decisions relevant to assigned articles after activation.",
+        "Public cannot access admin decisions."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "publish_logs",
+      "planned_rules": [
+        "Server-side controlled action can append publish logs after activation.",
+        "Admin can read publish logs after activation.",
+        "No update/delete after creation."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "audit_logs",
+      "planned_rules": [
+        "Audit logs are append-only after activation.",
+        "Admin can read audit logs after activation.",
+        "Editor can read only limited audit context for assigned items if needed."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "rollback_records",
+      "planned_rules": [
+        "Server-side controlled action can create rollback records after activation.",
+        "Admin can read rollback records after activation.",
+        "Public cannot access rollback records."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "reference_evidence",
+      "planned_rules": [
+        "Admin can review evidence after activation.",
+        "Editor can edit evidence only for assigned articles after activation.",
+        "Public can only see public rendered references, not internal evidence fields."
+      ],
+      "apply_now": false
+    },
+    {
+      "table_name": "object_assets",
+      "planned_rules": [
+        "Admin can review object assets after activation.",
+        "Editor can update assets only for assigned articles after activation.",
+        "Public can only see approved rendered asset metadata."
+      ],
+      "apply_now": false
+    }
+  ],
+  "rls_policies_created": false,
+  "rls_policies_applied": false,
+  "blocked_state": {
+    "rls_policy_plan_created": true,
+    "role_scope_register_created": true,
+    "table_rule_map_created": true,
+    "system_action_policy_plan_created": true,
+    "public_reader_policy_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

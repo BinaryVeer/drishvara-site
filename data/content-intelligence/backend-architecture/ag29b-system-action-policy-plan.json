@@ -1,0 +1,71 @@
+{
+  "module_id": "AG29B",
+  "title": "System Action Policy Plan",
+  "status": "system_action_policy_plan_created_no_runtime",
+  "system_actions": [
+    {
+      "action_id": "append_audit_log",
+      "actor": "server_side_controlled_action",
+      "planned_permission": "insert_only",
+      "target_table": "audit_logs",
+      "execute_now": false
+    },
+    {
+      "action_id": "append_publish_log",
+      "actor": "server_side_controlled_action",
+      "planned_permission": "insert_only",
+      "target_table": "publish_logs",
+      "execute_now": false
+    },
+    {
+      "action_id": "prepare_rollback_record",
+      "actor": "server_side_controlled_action",
+      "planned_permission": "insert_only",
+      "target_table": "rollback_records",
+      "execute_now": false
+    },
+    {
+      "action_id": "change_article_to_published",
+      "actor": "future_admin_approved_server_action",
+      "planned_permission": "guarded_update",
+      "target_table": "articles",
+      "execute_now": false
+    }
+  ],
+  "runtime_created": false,
+  "service_role_used_now": false,
+  "blocked_state": {
+    "rls_policy_plan_created": true,
+    "role_scope_register_created": true,
+    "table_rule_map_created": true,
+    "system_action_policy_plan_created": true,
+    "public_reader_policy_plan_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
