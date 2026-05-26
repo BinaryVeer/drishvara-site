@@ -1,0 +1,34 @@
+{
+  "module_id": "AG26C",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag26d_to_ag26z",
+  "future_consumption": {
+    "AG26D": "UX Scaffold Audit should consume AG26C screen, navigation, component and workflow-state scaffold records and verify routing, role boundaries, non-runtime status, backend deferral and no-publish guards.",
+    "AG26Z": "Manual Admin/Editor Workflow Closure should consume AG26A, AG26B, AG26C and AG26D records to close the detailed Admin/Editor manual workflow chain.",
+    "future_runtime_stage": "Any future runtime UI or backend stage must explicitly convert these scaffold records only after separate approval; AG26C itself creates no runtime UI."
+  },
+  "blocked_state": {
+    "static_ux_scaffold_created": true,
+    "runtime_ui_created": false,
+    "admin_workspace_runtime_enabled": false,
+    "editor_workspace_runtime_enabled": false,
+    "login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "runtime_queue_created": false,
+    "queue_data_written": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "object_generation_triggered": false,
+    "article_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

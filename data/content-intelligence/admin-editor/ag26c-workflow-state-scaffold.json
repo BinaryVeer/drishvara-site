@@ -1,0 +1,81 @@
+{
+  "module_id": "AG26C",
+  "title": "Workflow State Scaffold",
+  "status": "workflow_state_scaffold_created_no_queue_mutation",
+  "state_transitions": [
+    {
+      "transition_id": "system_to_admin",
+      "from": "system_generated_candidate",
+      "to": "admin_under_review",
+      "allowed": true,
+      "runtime_enabled": false
+    },
+    {
+      "transition_id": "editor_new_to_admin",
+      "from": "editor_created_new_article_candidate",
+      "to": "admin_under_review",
+      "allowed": true,
+      "runtime_enabled": false
+    },
+    {
+      "transition_id": "admin_to_editor_assignment",
+      "from": "admin_under_review",
+      "to": "under_editor_review",
+      "allowed": true,
+      "runtime_enabled": false
+    },
+    {
+      "transition_id": "editor_return_to_admin",
+      "from": "under_editor_review",
+      "to": "editor_returned_to_admin",
+      "allowed": true,
+      "runtime_enabled": false
+    },
+    {
+      "transition_id": "admin_final_publish_candidate",
+      "from": "editor_returned_to_admin_or_admin_under_review",
+      "to": "admin_publish_candidate",
+      "allowed": true,
+      "runtime_enabled": false
+    },
+    {
+      "transition_id": "editor_direct_publish",
+      "from": "under_editor_review",
+      "to": "published",
+      "allowed": false,
+      "runtime_enabled": false
+    },
+    {
+      "transition_id": "system_direct_publish",
+      "from": "system_generated_candidate",
+      "to": "published",
+      "allowed": false,
+      "runtime_enabled": false
+    }
+  ],
+  "queue_mutation_allowed": false,
+  "blocked_state": {
+    "static_ux_scaffold_created": true,
+    "runtime_ui_created": false,
+    "admin_workspace_runtime_enabled": false,
+    "editor_workspace_runtime_enabled": false,
+    "login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "runtime_queue_created": false,
+    "queue_data_written": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "object_generation_triggered": false,
+    "article_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

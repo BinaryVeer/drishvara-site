@@ -1,0 +1,82 @@
+{
+  "module_id": "AG26C",
+  "title": "Admin/Editor Navigation Scaffold",
+  "status": "admin_editor_navigation_scaffold_created_no_runtime_routes",
+  "navigation_groups": [
+    {
+      "nav_group_id": "editor_workspace",
+      "label": "Editor Workspace",
+      "routes_planned": [
+        "editor_dashboard_static",
+        "editor_browse_articles_static",
+        "editor_create_new_candidate_static",
+        "editor_edit_admin_assigned_static",
+        "editor_tool_browser_static",
+        "editor_reference_manager_static",
+        "editor_object_manager_static",
+        "editor_preview_submit_static"
+      ],
+      "runtime_routes_created": false
+    },
+    {
+      "nav_group_id": "admin_workspace",
+      "label": "Admin Workspace",
+      "routes_planned": [
+        "admin_dashboard_static",
+        "admin_system_generated_inbox_static",
+        "admin_editor_created_inbox_static",
+        "admin_editor_returned_inbox_static",
+        "admin_review_detail_static",
+        "admin_assign_to_editor_static",
+        "admin_tool_approval_static",
+        "admin_publish_control_static"
+      ],
+      "runtime_routes_created": false
+    },
+    {
+      "nav_group_id": "workflow_governance",
+      "label": "Workflow Governance",
+      "routes_planned": [
+        "admin_first_system_review",
+        "editor_new_candidate_to_admin",
+        "admin_assigned_editor_edit",
+        "editor_return_to_admin",
+        "admin_final_publish_control"
+      ],
+      "runtime_routes_created": false
+    }
+  ],
+  "canonical_navigation_rules": {
+    "system_generated_content_first_lands_in_admin": true,
+    "editor_created_new_candidate_lands_in_admin": true,
+    "admin_assigned_edit_lands_in_editor": true,
+    "editor_returned_edit_lands_in_admin": true,
+    "admin_final_publish_only": true,
+    "editor_publish_route_exists": false
+  },
+  "runtime_routes_created": false,
+  "blocked_state": {
+    "static_ux_scaffold_created": true,
+    "runtime_ui_created": false,
+    "admin_workspace_runtime_enabled": false,
+    "editor_workspace_runtime_enabled": false,
+    "login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "runtime_queue_created": false,
+    "queue_data_written": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "object_generation_triggered": false,
+    "article_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "module_id": "AG26C",
+  "title": "Admin/Editor Static Screen Scaffold",
+  "status": "admin_editor_static_screen_scaffold_created_no_runtime_ui",
+  "screen_counts": {
+    "editor_screens": 8,
+    "admin_screens": 8,
+    "total_screens": 16
+  },
+  "editor_screens": [
+    {
+      "screen_id": "editor_dashboard_static",
+      "label": "Editor Dashboard",
+      "source_surface": "editor_dashboard",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_browse_articles_static",
+      "label": "Browse Articles / Assigned and Own Candidates",
+      "source_surface": "browse_articles",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_create_new_candidate_static",
+      "label": "Create New Article Candidate",
+      "source_surface": "create_new_article",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_edit_admin_assigned_static",
+      "label": "Edit Admin-Assigned System/Existing Content",
+      "source_surface": "edit_existing_article",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_tool_browser_static",
+      "label": "Auto-Article Tool Browser",
+      "source_surface": "auto_article_tool_browser",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_reference_manager_static",
+      "label": "Reference Manager",
+      "source_surface": "reference_manager",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_object_manager_static",
+      "label": "Image/Object/Graph/Table/Infographic Manager",
+      "source_surface": "graph_table_infographic_manager",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "editor_preview_submit_static",
+      "label": "Preview and Send Back to Admin",
+      "source_surface": "article_preview_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    }
+  ],
+  "admin_screens": [
+    {
+      "screen_id": "admin_dashboard_static",
+      "label": "Admin Dashboard",
+      "source_surface": "admin_dashboard",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_system_generated_inbox_static",
+      "label": "System Generated Content Inbox",
+      "source_surface": "system_generated_content_inbox",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_editor_created_inbox_static",
+      "label": "Editor Created Candidate Inbox",
+      "source_surface": "editor_created_candidate_inbox",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_editor_returned_inbox_static",
+      "label": "Editor Returned Content Inbox",
+      "source_surface": "editor_returned_content_inbox",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_review_detail_static",
+      "label": "Admin Review Detail",
+      "source_surface": "admin_review_detail_view",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_assign_to_editor_static",
+      "label": "Assign to Editor",
+      "source_surface": "assign_to_editor_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_tool_approval_static",
+      "label": "Tool Approval Governance",
+      "source_surface": "admin_tool_approval_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    },
+    {
+      "screen_id": "admin_publish_control_static",
+      "label": "Final Publish Control",
+      "source_surface": "admin_publish_control_panel",
+      "scaffold_type": "static_planning_screen",
+      "runtime_enabled": false
+    }
+  ],
+  "runtime_ui_created": false,
+  "blocked_state": {
+    "static_ux_scaffold_created": true,
+    "runtime_ui_created": false,
+    "admin_workspace_runtime_enabled": false,
+    "editor_workspace_runtime_enabled": false,
+    "login_created": false,
+    "auth_enabled": false,
+    "backend_enabled": false,
+    "supabase_enabled": false,
+    "runtime_queue_created": false,
+    "queue_data_written": false,
+    "article_file_mutated": false,
+    "article_created": false,
+    "object_generation_triggered": false,
+    "article_generation_triggered": false,
+    "public_index_mutated": false,
+    "homepage_mutated": false,
+    "category_page_mutated": false,
+    "sitemap_feed_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
