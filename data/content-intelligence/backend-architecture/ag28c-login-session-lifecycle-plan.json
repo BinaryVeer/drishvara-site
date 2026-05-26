@@ -1,0 +1,67 @@
+{
+  "module_id": "AG28C",
+  "title": "Login Session Lifecycle Plan",
+  "status": "login_session_lifecycle_plan_created_no_login_runtime",
+  "lifecycle_steps": [
+    {
+      "step_id": "login_page_view",
+      "purpose": "Future Admin/Editor login page loads.",
+      "runtime_created_now": false
+    },
+    {
+      "step_id": "credential_submission",
+      "purpose": "Future Supabase Auth credential submission.",
+      "runtime_created_now": false
+    },
+    {
+      "step_id": "session_received",
+      "purpose": "Future session token received and stored by approved Auth client.",
+      "runtime_created_now": false
+    },
+    {
+      "step_id": "profile_role_lookup",
+      "purpose": "Future profile and role lookup from profiles/user_roles/roles.",
+      "runtime_created_now": false
+    },
+    {
+      "step_id": "route_access_decision",
+      "purpose": "Future route guard checks required role and permission.",
+      "runtime_created_now": false
+    },
+    {
+      "step_id": "session_refresh_logout",
+      "purpose": "Future session refresh/logout and audit event creation.",
+      "runtime_created_now": false
+    }
+  ],
+  "login_runtime_created_now": false,
+  "session_runtime_created_now": false,
+  "auth_activation_allowed_now": false,
+  "blocked_state": {
+    "auth_flow_plan_created": true,
+    "auth_activation_done": false,
+    "login_runtime_created": false,
+    "session_runtime_created": false,
+    "route_guard_runtime_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "table_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

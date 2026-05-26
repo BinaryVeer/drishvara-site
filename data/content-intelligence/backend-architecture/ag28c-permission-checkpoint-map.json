@@ -1,0 +1,117 @@
+{
+  "module_id": "AG28C",
+  "title": "Permission Checkpoint Map",
+  "status": "permission_checkpoint_map_created_no_runtime_checks",
+  "permission_checkpoints": [
+    {
+      "checkpoint_id": "admin_review_queue_access",
+      "actor": "admin",
+      "required_permission": "review_queue.read_all",
+      "table_basis": [
+        "profiles",
+        "roles",
+        "user_roles",
+        "role_permissions",
+        "review_queue"
+      ],
+      "runtime_check_created_now": false
+    },
+    {
+      "checkpoint_id": "admin_assign_to_editor",
+      "actor": "admin",
+      "required_permission": "editor_assignment.create",
+      "table_basis": [
+        "editor_assignments",
+        "admin_decisions",
+        "workflow_comments"
+      ],
+      "runtime_check_created_now": false
+    },
+    {
+      "checkpoint_id": "editor_assigned_content_access",
+      "actor": "editor",
+      "required_permission": "assigned_content.read_update",
+      "table_basis": [
+        "editor_assignments",
+        "articles",
+        "article_versions",
+        "editor_returns"
+      ],
+      "runtime_check_created_now": false
+    },
+    {
+      "checkpoint_id": "editor_new_candidate_create",
+      "actor": "editor",
+      "required_permission": "article_candidate.create",
+      "table_basis": [
+        "articles",
+        "article_versions",
+        "article_sections",
+        "review_queue"
+      ],
+      "runtime_check_created_now": false
+    },
+    {
+      "checkpoint_id": "admin_publish_control",
+      "actor": "admin",
+      "required_permission": "publish_records.create",
+      "table_basis": [
+        "admin_decisions",
+        "publish_records",
+        "publish_snapshots",
+        "audit_logs"
+      ],
+      "runtime_check_created_now": false
+    },
+    {
+      "checkpoint_id": "public_published_read",
+      "actor": "public_reader",
+      "required_permission": "published_content.read",
+      "table_basis": [
+        "articles",
+        "publish_records",
+        "publish_snapshots"
+      ],
+      "runtime_check_created_now": false
+    },
+    {
+      "checkpoint_id": "secret_service_role_server_only",
+      "actor": "server_controlled",
+      "required_permission": "service_role.server_only",
+      "table_basis": [
+        "environment_only_not_repo"
+      ],
+      "runtime_check_created_now": false
+    }
+  ],
+  "admin_final_publish_authority": true,
+  "editor_publish_authority": false,
+  "runtime_permission_checks_created_now": false,
+  "blocked_state": {
+    "auth_flow_plan_created": true,
+    "auth_activation_done": false,
+    "login_runtime_created": false,
+    "session_runtime_created": false,
+    "route_guard_runtime_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "table_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

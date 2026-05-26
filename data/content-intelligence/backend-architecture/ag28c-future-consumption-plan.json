@@ -1,0 +1,38 @@
+{
+  "module_id": "AG28C",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag28d_to_ag28z",
+  "future_consumption": {
+    "AG28D": "Backend Architecture Audit should consume AG28A/AG28B/AG28C and verify blueprint-only architecture, no Auth runtime, no database objects, no secrets and no route guards.",
+    "AG28Z": "Backend Architecture Closure should close AG28 as blueprint-only and hand off to AG29 schema/RLS/security model.",
+    "AG29": "Schema/RLS/Security Model should consume permission checkpoints and route protection flows to define RLS policies later.",
+    "AG30": "Admin/Editor Login UI and Route Scaffold should use AG28C routes and lifecycle as UI-only/non-active login scaffolding."
+  },
+  "blocked_state": {
+    "auth_flow_plan_created": true,
+    "auth_activation_done": false,
+    "login_runtime_created": false,
+    "session_runtime_created": false,
+    "route_guard_runtime_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "table_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

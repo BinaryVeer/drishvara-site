@@ -1,0 +1,102 @@
+{
+  "module_id": "AG28C",
+  "title": "Route Protection Flow Blueprint",
+  "status": "route_protection_flow_blueprint_created_no_route_guards",
+  "route_groups": [
+    {
+      "route_group_id": "public_routes",
+      "planned_routes": [
+        "/",
+        "/articles/*",
+        "/featured-reads/*",
+        "/category/*"
+      ],
+      "required_role_later": "public_reader",
+      "protected_later": false,
+      "runtime_route_guard_created_now": false
+    },
+    {
+      "route_group_id": "admin_routes",
+      "planned_routes": [
+        "/admin",
+        "/admin/review",
+        "/admin/assign",
+        "/admin/publish-control",
+        "/admin/audit"
+      ],
+      "required_role_later": "admin",
+      "protected_later": true,
+      "runtime_route_guard_created_now": false
+    },
+    {
+      "route_group_id": "editor_routes",
+      "planned_routes": [
+        "/editor",
+        "/editor/workspace",
+        "/editor/create",
+        "/editor/assigned",
+        "/editor/return"
+      ],
+      "required_role_later": "editor",
+      "protected_later": true,
+      "runtime_route_guard_created_now": false
+    },
+    {
+      "route_group_id": "future_subscriber_routes",
+      "planned_routes": [
+        "/account",
+        "/saved",
+        "/preferences"
+      ],
+      "required_role_later": "subscriber_future",
+      "protected_later": true,
+      "runtime_route_guard_created_now": false
+    },
+    {
+      "route_group_id": "server_action_routes",
+      "planned_routes": [
+        "future_server_actions_only"
+      ],
+      "required_role_later": "server_controlled",
+      "protected_later": true,
+      "runtime_route_guard_created_now": false
+    }
+  ],
+  "route_protection_rules": [
+    "Public routes show only published content.",
+    "Admin routes require Admin role.",
+    "Editor routes require Editor role.",
+    "Editor cannot access Admin publish-control routes.",
+    "Admin can access review, assignment, publish-control and audit surfaces.",
+    "Server actions must not run from public client context.",
+    "Route guard implementation is deferred to later non-active scaffold stages."
+  ],
+  "route_guard_runtime_created_now": false,
+  "blocked_state": {
+    "auth_flow_plan_created": true,
+    "auth_activation_done": false,
+    "login_runtime_created": false,
+    "session_runtime_created": false,
+    "route_guard_runtime_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "table_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

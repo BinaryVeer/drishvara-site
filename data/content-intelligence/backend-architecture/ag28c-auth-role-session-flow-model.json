@@ -1,0 +1,106 @@
+{
+  "module_id": "AG28C",
+  "title": "Auth Role Session Flow Model",
+  "status": "auth_role_session_flow_model_created_no_auth_activation",
+  "auth_actors": [
+    {
+      "actor_id": "admin",
+      "auth_required_later": true,
+      "route_scope": [
+        "/admin",
+        "/admin/review",
+        "/admin/publish-control",
+        "/admin/audit"
+      ],
+      "future_session_type": "authenticated_admin_session",
+      "can_publish_future_runtime": true,
+      "activation_now": false
+    },
+    {
+      "actor_id": "editor",
+      "auth_required_later": true,
+      "route_scope": [
+        "/editor",
+        "/editor/workspace",
+        "/editor/create",
+        "/editor/assigned"
+      ],
+      "future_session_type": "authenticated_editor_session",
+      "can_publish_future_runtime": false,
+      "activation_now": false
+    },
+    {
+      "actor_id": "system",
+      "auth_required_later": false,
+      "route_scope": [
+        "server_controlled_generation_pipeline_future"
+      ],
+      "future_session_type": "server_controlled_system_action",
+      "can_publish_future_runtime": false,
+      "activation_now": false
+    },
+    {
+      "actor_id": "public_reader",
+      "auth_required_later": false,
+      "route_scope": [
+        "/",
+        "/articles/*",
+        "/featured-reads/*",
+        "/category/*"
+      ],
+      "future_session_type": "anonymous_public_read",
+      "can_publish_future_runtime": false,
+      "activation_now": false
+    },
+    {
+      "actor_id": "subscriber_future",
+      "auth_required_later": true,
+      "route_scope": [
+        "/account",
+        "/saved",
+        "/preferences"
+      ],
+      "future_session_type": "authenticated_reader_session",
+      "can_publish_future_runtime": false,
+      "activation_now": false
+    }
+  ],
+  "auth_flow_principles": [
+    "Admin and Editor are separate future authenticated actors.",
+    "Admin remains final publish authority.",
+    "Editor cannot publish.",
+    "System-generated content goes to Admin first.",
+    "Editor-created content goes to Admin review.",
+    "Public reader remains unauthenticated for published content only.",
+    "Subscriber future role is isolated from Admin/Editor workflow."
+  ],
+  "auth_activation_allowed_now": false,
+  "session_runtime_created_now": false,
+  "blocked_state": {
+    "auth_flow_plan_created": true,
+    "auth_activation_done": false,
+    "login_runtime_created": false,
+    "session_runtime_created": false,
+    "route_guard_runtime_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "table_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

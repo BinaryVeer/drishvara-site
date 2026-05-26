@@ -1,0 +1,40 @@
+{
+  "module_id": "AG28C",
+  "title": "AG28C to AG28D Backend Architecture Audit Boundary",
+  "status": "ag28d_boundary_created_not_started",
+  "next_stage_id": "AG28D",
+  "next_stage_title": "Backend Architecture Audit",
+  "allowed_scope": [
+    "Consume AG28A Backend Architecture Blueprint.",
+    "Consume AG28B Database Table Plan.",
+    "Consume AG28C Auth Flow Plan.",
+    "Audit that AG28A-AG28C remain blueprint-only.",
+    "Audit no Supabase/Auth/backend/database/table/migration/RLS/secret/runtime route guard/queue/dynamic publishing exists.",
+    "Do not activate Auth, Supabase, backend, database, route guards, runtime queues or dynamic publishing."
+  ],
+  "blocked_scope": [
+    "No Supabase Auth activation.",
+    "No Supabase project creation.",
+    "No backend activation.",
+    "No database creation.",
+    "No profile/role table creation.",
+    "No migration creation.",
+    "No migration execution.",
+    "No RLS policy creation.",
+    "No RLS policy apply.",
+    "No secret creation.",
+    "No service role key creation.",
+    "No Admin login runtime.",
+    "No Editor login runtime.",
+    "No session runtime.",
+    "No route guard runtime.",
+    "No runtime permission checks.",
+    "No runtime queue creation.",
+    "No runtime write path.",
+    "No dynamic publishing.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true,
+  "activation_allowed_in_ag28d": false
+}
