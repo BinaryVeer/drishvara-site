@@ -1,0 +1,83 @@
+{
+  "module_id": "AG29A",
+  "title": "Publish Audit and Rollback Schema Draft",
+  "status": "publish_audit_rollback_schema_draft_created_no_runtime",
+  "draft_tables": [
+    {
+      "table_name": "publish_logs",
+      "purpose": "Future audit trail for dynamic publish, dry-run, apply and rollback actions.",
+      "critical_fields": [
+        "article_id",
+        "action",
+        "before_hash",
+        "after_hash",
+        "rollback_ref",
+        "created_by",
+        "created_at"
+      ],
+      "create_now": false
+    },
+    {
+      "table_name": "audit_logs",
+      "purpose": "Future append-only audit record for Admin/Editor workflow actions.",
+      "critical_fields": [
+        "actor_id",
+        "actor_role",
+        "action",
+        "target_type",
+        "target_id",
+        "metadata_json",
+        "created_at"
+      ],
+      "create_now": false
+    },
+    {
+      "table_name": "rollback_records",
+      "purpose": "Future rollback pointer and recovery metadata.",
+      "critical_fields": [
+        "publish_log_id",
+        "article_id",
+        "rollback_path",
+        "rollback_hash",
+        "created_at"
+      ],
+      "create_now": false
+    }
+  ],
+  "audit_append_only_required": true,
+  "rollback_required_before_dynamic_publish": true,
+  "runtime_created": false,
+  "blocked_state": {
+    "supabase_schema_draft_created": true,
+    "entity_register_created": true,
+    "relationship_map_created": true,
+    "state_field_model_created": true,
+    "publish_audit_rollback_schema_draft_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

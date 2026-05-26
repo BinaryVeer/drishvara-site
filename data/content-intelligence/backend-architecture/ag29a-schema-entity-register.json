@@ -1,0 +1,257 @@
+{
+  "module_id": "AG29A",
+  "title": "Schema Entity Register",
+  "status": "schema_entity_register_created_no_database_objects",
+  "entity_count": 11,
+  "entities": [
+    {
+      "entity_id": "users",
+      "table_name": "users",
+      "purpose": "Store planned user identity linkage, display role, status and timestamps.",
+      "planned_columns": [
+        "id",
+        "email",
+        "display_name",
+        "role",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "roles",
+      "table_name": "roles",
+      "purpose": "Define Admin, Editor and future Subscriber roles.",
+      "planned_columns": [
+        "id",
+        "role_code",
+        "role_label",
+        "description",
+        "is_active"
+      ],
+      "sensitive": false,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "articles",
+      "table_name": "articles",
+      "purpose": "Store future article records, slug, category, state, assigned editor and public status.",
+      "planned_columns": [
+        "id",
+        "slug",
+        "title",
+        "category",
+        "article_state",
+        "assigned_editor_id",
+        "public_visibility",
+        "publish_approved",
+        "created_at",
+        "updated_at"
+      ],
+      "sensitive": false,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "review_queue",
+      "table_name": "review_queue",
+      "purpose": "Store Admin-to-Editor assignment queue and return-to-Admin flow.",
+      "planned_columns": [
+        "id",
+        "article_id",
+        "assigned_by_admin_id",
+        "assigned_to_editor_id",
+        "assignment_status",
+        "assignment_note",
+        "editor_return_note",
+        "created_at",
+        "updated_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "editor_decisions",
+      "table_name": "editor_decisions",
+      "purpose": "Record editor-side decisions and notes for assigned items.",
+      "planned_columns": [
+        "id",
+        "article_id",
+        "editor_id",
+        "decision",
+        "decision_note",
+        "created_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "admin_decisions",
+      "table_name": "admin_decisions",
+      "purpose": "Record Admin archive, return for correction, internal clearance, publish plan and publish-and-close plan decisions.",
+      "planned_columns": [
+        "id",
+        "article_id",
+        "admin_id",
+        "decision",
+        "decision_note",
+        "created_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "publish_logs",
+      "table_name": "publish_logs",
+      "purpose": "Future publish audit trail with before/after hash, public surface and rollback pointer.",
+      "planned_columns": [
+        "id",
+        "article_id",
+        "action",
+        "before_hash",
+        "after_hash",
+        "rollback_ref",
+        "created_by",
+        "created_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "audit_logs",
+      "table_name": "audit_logs",
+      "purpose": "System-wide audit trail for future Admin/Editor workflow actions.",
+      "planned_columns": [
+        "id",
+        "actor_id",
+        "actor_role",
+        "action",
+        "target_type",
+        "target_id",
+        "metadata_json",
+        "created_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "rollback_records",
+      "table_name": "rollback_records",
+      "purpose": "Store planned rollback references for future controlled publishing.",
+      "planned_columns": [
+        "id",
+        "publish_log_id",
+        "article_id",
+        "rollback_path",
+        "rollback_hash",
+        "created_at"
+      ],
+      "sensitive": true,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "reference_evidence",
+      "table_name": "reference_evidence",
+      "purpose": "Store reference verification, source credibility and evidence-review status.",
+      "planned_columns": [
+        "id",
+        "article_id",
+        "reference_url",
+        "source_type",
+        "credibility_status",
+        "verification_status",
+        "admin_note",
+        "created_at"
+      ],
+      "sensitive": false,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    },
+    {
+      "entity_id": "object_assets",
+      "table_name": "object_assets",
+      "purpose": "Store future image, graph, table, infographic, diagram and attribution metadata.",
+      "planned_columns": [
+        "id",
+        "article_id",
+        "asset_type",
+        "asset_source",
+        "credit_text",
+        "license_note",
+        "verification_status",
+        "created_at"
+      ],
+      "sensitive": false,
+      "source_stage": "AG27C",
+      "draft_status": "planned_only",
+      "schema_creation_now": false,
+      "sql_generation_now": false
+    }
+  ],
+  "database_objects_created": false,
+  "sql_generated": false,
+  "migrations_generated": false,
+  "blocked_state": {
+    "supabase_schema_draft_created": true,
+    "entity_register_created": true,
+    "relationship_map_created": true,
+    "state_field_model_created": true,
+    "publish_audit_rollback_schema_draft_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "module_id": "AG29A",
+  "title": "Table Relationship Map",
+  "status": "table_relationship_map_created_no_foreign_keys_applied",
+  "relationship_count": 13,
+  "relationships": [
+    {
+      "relationship_id": "users_to_roles",
+      "from_table": "users",
+      "from_column": "role",
+      "to_table": "roles",
+      "to_column": "role_code",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "review_queue_assigned_by_admin",
+      "from_table": "review_queue",
+      "from_column": "assigned_by_admin_id",
+      "to_table": "users",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "review_queue_assigned_to_editor",
+      "from_table": "review_queue",
+      "from_column": "assigned_to_editor_id",
+      "to_table": "users",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "review_queue_article",
+      "from_table": "review_queue",
+      "from_column": "article_id",
+      "to_table": "articles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "editor_decisions_article",
+      "from_table": "editor_decisions",
+      "from_column": "article_id",
+      "to_table": "articles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "editor_decisions_editor",
+      "from_table": "editor_decisions",
+      "from_column": "editor_id",
+      "to_table": "users",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "admin_decisions_article",
+      "from_table": "admin_decisions",
+      "from_column": "article_id",
+      "to_table": "articles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "admin_decisions_admin",
+      "from_table": "admin_decisions",
+      "from_column": "admin_id",
+      "to_table": "users",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "publish_logs_article",
+      "from_table": "publish_logs",
+      "from_column": "article_id",
+      "to_table": "articles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "rollback_records_publish_log",
+      "from_table": "rollback_records",
+      "from_column": "publish_log_id",
+      "to_table": "publish_logs",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "reference_evidence_article",
+      "from_table": "reference_evidence",
+      "from_column": "article_id",
+      "to_table": "articles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "object_assets_article",
+      "from_table": "object_assets",
+      "from_column": "article_id",
+      "to_table": "articles",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    },
+    {
+      "relationship_id": "audit_logs_actor",
+      "from_table": "audit_logs",
+      "from_column": "actor_id",
+      "to_table": "users",
+      "to_column": "id",
+      "type": "many_to_one",
+      "apply_now": false
+    }
+  ],
+  "foreign_keys_created": false,
+  "blocked_state": {
+    "supabase_schema_draft_created": true,
+    "entity_register_created": true,
+    "relationship_map_created": true,
+    "state_field_model_created": true,
+    "publish_audit_rollback_schema_draft_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
