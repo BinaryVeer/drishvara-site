@@ -1,0 +1,39 @@
+{
+  "module_id": "AG27Z",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag28_onward",
+  "future_consumption": {
+    "AG28": "Consume AG27C architecture, AG27D security/RLS and AG27Z closure to create Backend/Auth Architecture Blueprint only. Runtime activation remains blocked.",
+    "AG29": "Consume AG27Z activation handoff and AG28 blueprint to prepare Schema/RLS/Security Model and controlled sandbox activation audit/apply decision.",
+    "AG30": "Login UI and route scaffold should remain scaffold-only unless AG29 explicitly approves controlled activation.",
+    "AG31_plus": "Backend queue and article-state integration should start only after Auth/RLS/security validation.",
+    "publish_path": "Dynamic public publishing remains blocked until Admin-only publish audit passes after backend activation."
+  },
+  "blocked_state": {
+    "ag27_detailed_chain_closed": true,
+    "backend_planning_approved": true,
+    "controlled_activation_handoff_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

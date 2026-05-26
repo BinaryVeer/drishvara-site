@@ -1,0 +1,51 @@
+{
+  "module_id": "AG27Z",
+  "title": "AG28 Boundary Control Register",
+  "status": "ag28_blueprint_allowed_runtime_activation_blocked",
+  "ag28_scope_allowed": [
+    "Backend/Auth Architecture Blueprint.",
+    "Schema/data-flow translation from AG27C/AG27D records.",
+    "Provider-neutral and Supabase-specific blueprinting.",
+    "No live Supabase/Auth/backend connection.",
+    "No database/table/migration/policy/secret creation."
+  ],
+  "ag28_scope_blocked": [
+    "No Supabase project activation.",
+    "No Auth activation.",
+    "No database creation.",
+    "No migration execution.",
+    "No RLS policy creation or apply.",
+    "No service role key creation.",
+    "No runtime queue creation.",
+    "No dynamic publishing.",
+    "No deployment or publishing."
+  ],
+  "controlled_activation_moves_to_later_stage": true,
+  "blocked_state": {
+    "ag27_detailed_chain_closed": true,
+    "backend_planning_approved": true,
+    "controlled_activation_handoff_created": true,
+    "backend_activation_approved": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "supabase_project_created": false,
+    "database_created": false,
+    "migration_created": false,
+    "table_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "admin_login_created": false,
+    "editor_login_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

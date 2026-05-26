@@ -1,0 +1,42 @@
+{
+  "module_id": "AG27Z",
+  "title": "AG27Z to AG28 Backend/Auth Architecture Blueprint Boundary",
+  "status": "ag28_boundary_created_blueprint_only",
+  "next_stage_id": "AG28",
+  "next_stage_title": "Backend/Auth Architecture Blueprint",
+  "allowed_scope": [
+    "Consume AG27Z Backend Decision Closure.",
+    "Consume AG27C Supabase/Auth Architecture Plan.",
+    "Consume AG27D Security and RLS Plan.",
+    "Create backend/Auth architecture blueprint records only.",
+    "Carry controlled activation placement forward to AG29.",
+    "Do not activate Supabase/Auth/backend.",
+    "Do not create database, tables, migrations, RLS policies, secrets, runtime queues, deployment or publishing."
+  ],
+  "blocked_scope": [
+    "No backend activation.",
+    "No Auth activation.",
+    "No Supabase activation.",
+    "No Supabase project creation.",
+    "No database creation.",
+    "No table creation.",
+    "No migration creation.",
+    "No RLS policy creation.",
+    "No RLS policy apply.",
+    "No secret creation.",
+    "No service role key creation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No runtime queue creation.",
+    "No runtime write path.",
+    "No dynamic publishing.",
+    "No article mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true,
+  "activation_allowed_in_ag28": false,
+  "controlled_activation_later_stage": "AG29_or_later_only_after_explicit_apply_approval"
+}
