@@ -1,0 +1,103 @@
+{
+  "module_id": "AG28B",
+  "title": "Table Relationship Map",
+  "status": "table_relationship_map_created_no_constraints",
+  "planned_relationships": [
+    {
+      "from": "profiles.id",
+      "to": "user_roles.profile_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "roles.id",
+      "to": "user_roles.role_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "roles.id",
+      "to": "role_permissions.role_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "articles.id",
+      "to": "article_versions.article_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "article_versions.id",
+      "to": "article_sections.article_version_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "articles.id",
+      "to": "review_queue.article_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "articles.id",
+      "to": "editor_assignments.article_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "editor_assignments.id",
+      "to": "editor_returns.assignment_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "articles.id",
+      "to": "publish_records.article_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "publish_records.id",
+      "to": "publish_snapshots.publish_record_id",
+      "relationship": "one_to_one_or_many",
+      "create_now": false
+    },
+    {
+      "from": "articles.id",
+      "to": "article_references.article_id",
+      "relationship": "one_to_many",
+      "create_now": false
+    },
+    {
+      "from": "article_assets.id",
+      "to": "asset_attributions.asset_id",
+      "relationship": "one_to_one_or_many",
+      "create_now": false
+    }
+  ],
+  "constraint_creation_allowed_now": false,
+  "blocked_state": {
+    "database_table_plan_created": true,
+    "table_creation_done": false,
+    "database_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "supabase_project_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

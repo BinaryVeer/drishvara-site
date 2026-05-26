@@ -1,0 +1,40 @@
+{
+  "module_id": "AG28B",
+  "title": "AG28B to AG28C Auth Flow Plan Boundary",
+  "status": "ag28c_boundary_created_not_started",
+  "next_stage_id": "AG28C",
+  "next_stage_title": "Auth Flow Plan",
+  "allowed_scope": [
+    "Consume AG28B planned table inventory.",
+    "Consume AG28B relationship map.",
+    "Consume AG28B state and status field plan.",
+    "Consume AG28B audit, queue and publish table plan.",
+    "Define future login, session, role access and route-protection flow only.",
+    "Do not activate Auth, Supabase, backend, database, tables, migrations, RLS, secrets, runtime queues or dynamic publishing."
+  ],
+  "blocked_scope": [
+    "No Supabase project creation.",
+    "No backend activation.",
+    "No Auth activation.",
+    "No database creation.",
+    "No table creation.",
+    "No migration creation.",
+    "No migration execution.",
+    "No RLS policy creation.",
+    "No RLS policy apply.",
+    "No secret creation.",
+    "No service role key creation.",
+    "No Admin login creation.",
+    "No Editor login creation.",
+    "No runtime queue creation.",
+    "No runtime write path.",
+    "No dynamic publishing.",
+    "No article mutation.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing."
+  ],
+  "supabase_auth_backend_deferred": true,
+  "activation_allowed_in_ag28c": false
+}

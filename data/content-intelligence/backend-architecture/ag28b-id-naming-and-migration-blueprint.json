@@ -1,0 +1,52 @@
+{
+  "module_id": "AG28B",
+  "title": "ID Naming and Migration Blueprint",
+  "status": "id_naming_migration_blueprint_created_no_migrations",
+  "id_strategy": {
+    "primary_key_default": "uuid",
+    "public_slug_separate_from_primary_key": true,
+    "timestamps_required": true,
+    "actor_fields_suffix": "_profile_id",
+    "status_fields_suffix": "_status",
+    "audit_hash_fields": [
+      "before_hash",
+      "after_hash",
+      "snapshot_hash",
+      "event_payload_hash"
+    ]
+  },
+  "naming_rules": [
+    "Use snake_case table and field names.",
+    "Use UUID primary keys for backend records.",
+    "Keep public slug separate from internal UUID.",
+    "Use _id suffix for foreign-key-like fields.",
+    "Use created_at and updated_at where mutation is expected.",
+    "Use status/history tables for workflow transitions.",
+    "Do not execute migrations in AG28B."
+  ],
+  "migration_files_created_now": false,
+  "migration_execution_allowed_now": false,
+  "blocked_state": {
+    "database_table_plan_created": true,
+    "table_creation_done": false,
+    "database_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "supabase_project_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

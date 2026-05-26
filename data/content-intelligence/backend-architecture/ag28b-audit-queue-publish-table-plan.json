@@ -1,0 +1,57 @@
+{
+  "module_id": "AG28B",
+  "title": "Audit, Queue and Publish Table Plan",
+  "status": "audit_queue_publish_table_plan_created_no_runtime_queue",
+  "queue_principles": [
+    "System-generated content enters Admin review queue first.",
+    "Editor-created candidates enter Admin review queue before publishing.",
+    "Admin may assign content to Editor.",
+    "Editor returns assigned content to Admin.",
+    "Only Admin can create future publish records.",
+    "Audit logs should be append-only or server-controlled."
+  ],
+  "planned_queue_tables": [
+    "review_queue",
+    "editor_assignments",
+    "admin_decisions",
+    "editor_returns",
+    "workflow_comments"
+  ],
+  "planned_publish_tables": [
+    "publish_records",
+    "publish_snapshots",
+    "rollback_records"
+  ],
+  "planned_audit_tables": [
+    "audit_logs",
+    "governance_events",
+    "session_audit_events"
+  ],
+  "admin_final_publish_authority": true,
+  "editor_publish_authority": false,
+  "runtime_queue_created_now": false,
+  "dynamic_publish_created_now": false,
+  "blocked_state": {
+    "database_table_plan_created": true,
+    "table_creation_done": false,
+    "database_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "supabase_project_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

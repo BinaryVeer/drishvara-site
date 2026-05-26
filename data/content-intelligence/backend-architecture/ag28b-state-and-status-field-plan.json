@@ -1,0 +1,122 @@
+{
+  "module_id": "AG28B",
+  "title": "State and Status Field Plan",
+  "status": "state_status_field_plan_created_no_runtime_state",
+  "canonical_article_states": [
+    "draft_candidate",
+    "system_generated_pending_admin_review",
+    "editor_created_pending_admin_review",
+    "admin_under_review",
+    "admin_assigned_to_editor",
+    "under_editor_review",
+    "editor_returned_to_admin",
+    "admin_hold",
+    "admin_rejected",
+    "admin_publish_candidate",
+    "published",
+    "rollback_candidate",
+    "archived"
+  ],
+  "status_fields": [
+    {
+      "table": "articles",
+      "field": "current_status",
+      "allowed_values_source": "canonical_article_states",
+      "create_now": false
+    },
+    {
+      "table": "review_queue",
+      "field": "assigned_status",
+      "allowed_values": [
+        "unassigned",
+        "admin_review",
+        "assigned_to_editor",
+        "returned_to_admin",
+        "closed"
+      ],
+      "create_now": false
+    },
+    {
+      "table": "editor_assignments",
+      "field": "status",
+      "allowed_values": [
+        "assigned",
+        "in_progress",
+        "returned",
+        "cancelled"
+      ],
+      "create_now": false
+    },
+    {
+      "table": "reference_verification_status",
+      "field": "reachability_status",
+      "allowed_values": [
+        "pending",
+        "reachable",
+        "broken",
+        "under_editorial_verification"
+      ],
+      "create_now": false
+    },
+    {
+      "table": "reference_verification_status",
+      "field": "credibility_status",
+      "allowed_values": [
+        "pending",
+        "credible",
+        "weak",
+        "rejected",
+        "under_editorial_verification"
+      ],
+      "create_now": false
+    },
+    {
+      "table": "article_assets",
+      "field": "asset_status",
+      "allowed_values": [
+        "planned",
+        "approved",
+        "needs_credit",
+        "under_verification",
+        "rejected"
+      ],
+      "create_now": false
+    },
+    {
+      "table": "object_generation_requests",
+      "field": "generation_status",
+      "allowed_values": [
+        "planned",
+        "approved_for_future",
+        "blocked",
+        "generated",
+        "rejected"
+      ],
+      "create_now": false
+    }
+  ],
+  "runtime_state_enabled_now": false,
+  "blocked_state": {
+    "database_table_plan_created": true,
+    "table_creation_done": false,
+    "database_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "supabase_project_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}

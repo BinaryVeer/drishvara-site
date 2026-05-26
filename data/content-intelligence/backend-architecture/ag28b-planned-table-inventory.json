@@ -1,0 +1,476 @@
+{
+  "module_id": "AG28B",
+  "title": "Planned Table Inventory",
+  "status": "planned_table_inventory_created_no_tables",
+  "table_group_count": 6,
+  "planned_table_count": 31,
+  "table_groups": [
+    {
+      "group_id": "identity_access",
+      "purpose": "Future Auth-to-role mapping and session/audit identity controls.",
+      "tables": [
+        {
+          "table": "profiles",
+          "key": "id",
+          "fields": [
+            "id",
+            "auth_user_id",
+            "display_name",
+            "email",
+            "status",
+            "created_at",
+            "updated_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "roles",
+          "key": "id",
+          "fields": [
+            "id",
+            "role_code",
+            "role_name",
+            "description",
+            "is_active",
+            "created_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "user_roles",
+          "key": "id",
+          "fields": [
+            "id",
+            "profile_id",
+            "role_id",
+            "assigned_by",
+            "assigned_at",
+            "revoked_at",
+            "status"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "role_permissions",
+          "key": "id",
+          "fields": [
+            "id",
+            "role_id",
+            "permission_code",
+            "permission_scope",
+            "is_allowed"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "session_audit_events",
+          "key": "id",
+          "fields": [
+            "id",
+            "profile_id",
+            "event_type",
+            "ip_hash",
+            "user_agent_hash",
+            "created_at"
+          ],
+          "create_now": false
+        }
+      ]
+    },
+    {
+      "group_id": "content_core",
+      "purpose": "Future article candidate, version, section, metadata and status-history records.",
+      "tables": [
+        {
+          "table": "articles",
+          "key": "id",
+          "fields": [
+            "id",
+            "slug",
+            "title",
+            "category",
+            "origin",
+            "current_status",
+            "created_by",
+            "created_at",
+            "updated_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "article_versions",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "version_no",
+            "body_hash",
+            "created_by",
+            "created_at",
+            "is_current"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "article_sections",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_version_id",
+            "section_order",
+            "heading",
+            "body",
+            "section_type"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "article_metadata",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "seo_title",
+            "seo_description",
+            "card_title",
+            "card_summary",
+            "tags"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "article_status_history",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "from_status",
+            "to_status",
+            "changed_by",
+            "reason",
+            "changed_at"
+          ],
+          "create_now": false
+        }
+      ]
+    },
+    {
+      "group_id": "admin_editor_workflow",
+      "purpose": "Future Admin-first review, Editor assignment, Editor return and workflow comments.",
+      "tables": [
+        {
+          "table": "review_queue",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "queue_type",
+            "priority",
+            "assigned_status",
+            "created_at",
+            "updated_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "editor_assignments",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "editor_profile_id",
+            "assigned_by_admin_id",
+            "assignment_reason",
+            "due_status",
+            "status"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "admin_decisions",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "admin_profile_id",
+            "decision_type",
+            "decision_note",
+            "decision_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "editor_returns",
+          "key": "id",
+          "fields": [
+            "id",
+            "assignment_id",
+            "article_id",
+            "editor_profile_id",
+            "return_note",
+            "returned_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "workflow_comments",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "profile_id",
+            "comment_type",
+            "comment_body",
+            "created_at"
+          ],
+          "create_now": false
+        }
+      ]
+    },
+    {
+      "group_id": "references_attribution_objects",
+      "purpose": "Future reference verification, image/object attribution and object requirement tracking.",
+      "tables": [
+        {
+          "table": "article_references",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "url",
+            "title",
+            "source_type",
+            "claim_supported",
+            "created_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "reference_verification_status",
+          "key": "id",
+          "fields": [
+            "id",
+            "reference_id",
+            "reachability_status",
+            "credibility_status",
+            "verified_by",
+            "verified_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "article_assets",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "asset_type",
+            "asset_url",
+            "asset_status",
+            "created_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "asset_attributions",
+          "key": "id",
+          "fields": [
+            "id",
+            "asset_id",
+            "credit_text",
+            "source_url",
+            "license_note",
+            "verification_status"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "object_requirements",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "object_type",
+            "placement_hint",
+            "prompt_or_data_basis",
+            "approval_status"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "object_generation_requests",
+          "key": "id",
+          "fields": [
+            "id",
+            "object_requirement_id",
+            "requested_by",
+            "cost_guard_status",
+            "generation_status",
+            "created_at"
+          ],
+          "create_now": false
+        }
+      ]
+    },
+    {
+      "group_id": "publishing_audit",
+      "purpose": "Future Admin-only publish, rollback and append-only audit history.",
+      "tables": [
+        {
+          "table": "publish_records",
+          "key": "id",
+          "fields": [
+            "id",
+            "article_id",
+            "published_version_id",
+            "published_by_admin_id",
+            "published_at",
+            "public_url"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "publish_snapshots",
+          "key": "id",
+          "fields": [
+            "id",
+            "publish_record_id",
+            "snapshot_hash",
+            "snapshot_json",
+            "created_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "rollback_records",
+          "key": "id",
+          "fields": [
+            "id",
+            "publish_record_id",
+            "rollback_reason",
+            "rolled_back_by",
+            "rolled_back_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "audit_logs",
+          "key": "id",
+          "fields": [
+            "id",
+            "actor_profile_id",
+            "action_type",
+            "entity_type",
+            "entity_id",
+            "before_hash",
+            "after_hash",
+            "created_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "governance_events",
+          "key": "id",
+          "fields": [
+            "id",
+            "event_code",
+            "event_scope",
+            "event_payload_hash",
+            "created_at"
+          ],
+          "create_now": false
+        }
+      ]
+    },
+    {
+      "group_id": "future_reader_personalization",
+      "purpose": "Future subscriber/personalization layer, isolated from editorial workflow.",
+      "tables": [
+        {
+          "table": "subscriber_profiles",
+          "key": "id",
+          "fields": [
+            "id",
+            "profile_id",
+            "subscriber_status",
+            "created_at",
+            "updated_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "reader_preferences",
+          "key": "id",
+          "fields": [
+            "id",
+            "subscriber_profile_id",
+            "preference_key",
+            "preference_value",
+            "updated_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "saved_items",
+          "key": "id",
+          "fields": [
+            "id",
+            "subscriber_profile_id",
+            "article_id",
+            "saved_at"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "entitlements",
+          "key": "id",
+          "fields": [
+            "id",
+            "subscriber_profile_id",
+            "entitlement_code",
+            "status",
+            "valid_from",
+            "valid_to"
+          ],
+          "create_now": false
+        },
+        {
+          "table": "notification_preferences",
+          "key": "id",
+          "fields": [
+            "id",
+            "subscriber_profile_id",
+            "channel",
+            "enabled",
+            "updated_at"
+          ],
+          "create_now": false
+        }
+      ]
+    }
+  ],
+  "table_creation_allowed_now": false,
+  "blocked_state": {
+    "database_table_plan_created": true,
+    "table_creation_done": false,
+    "database_created": false,
+    "migration_created": false,
+    "migration_executed": false,
+    "supabase_project_created": false,
+    "backend_enabled": false,
+    "auth_enabled": false,
+    "supabase_enabled": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "secret_created": false,
+    "service_role_key_created": false,
+    "runtime_queue_created": false,
+    "runtime_write_enabled": false,
+    "dynamic_publishing_enabled": false,
+    "article_file_mutated": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false
+  }
+}
