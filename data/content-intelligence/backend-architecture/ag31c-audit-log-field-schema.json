@@ -1,0 +1,126 @@
+{
+  "module_id": "AG31C",
+  "title": "Audit Log Field Schema",
+  "status": "audit_log_field_schema_created_no_database",
+  "fields": [
+    {
+      "field_name": "audit_event_id",
+      "purpose": "Unique future audit event identifier.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "article_id",
+      "purpose": "Future linked article identifier.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "queue_item_id",
+      "purpose": "Future queue item reference, if applicable.",
+      "required_future": false,
+      "create_now": false
+    },
+    {
+      "field_name": "actor_id",
+      "purpose": "Future Admin/Editor/system actor identifier.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "actor_role",
+      "purpose": "admin, editor or future_controlled_publish_handler.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "action_type",
+      "purpose": "State or queue action performed.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "before_state",
+      "purpose": "Article state before transition.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "after_state",
+      "purpose": "Article state after transition.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "before_hash",
+      "purpose": "Future hash of article content before change.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "after_hash",
+      "purpose": "Future hash of article content after change.",
+      "required_future": true,
+      "create_now": false
+    },
+    {
+      "field_name": "decision_note",
+      "purpose": "Admin/Editor decision or correction note.",
+      "required_future": false,
+      "create_now": false
+    },
+    {
+      "field_name": "created_at",
+      "purpose": "Future server-side event timestamp.",
+      "required_future": true,
+      "create_now": false
+    }
+  ],
+  "required_field_count": 10,
+  "database_table_created": false,
+  "migration_generated": false,
+  "sql_generated": false,
+  "blocked_state": {
+    "audit_log_model_created": true,
+    "audit_log_field_schema_created": true,
+    "state_event_log_shape_created": true,
+    "before_after_hash_model_created": true,
+    "actor_action_timestamp_model_created": true,
+    "audit_log_non_activation_audit_created": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "hash_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}

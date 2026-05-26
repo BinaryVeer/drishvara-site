@@ -1,0 +1,43 @@
+{
+  "module_id": "AG31C",
+  "title": "AG31C to AG31D State Transition Audit Boundary",
+  "status": "ag31d_boundary_created_non_active_state_transition_audit_only",
+  "next_stage_id": "AG31D",
+  "next_stage_title": "State Transition Audit",
+  "allowed_scope": [
+    "Consume AG31A article state transition map.",
+    "Consume AG31B queue integration plan.",
+    "Consume AG31C audit log model.",
+    "Confirm no illegal transition can publish directly without Admin approval.",
+    "Confirm Editor cannot publish, self-assign or globally browse.",
+    "Keep audit/database/backend runtime inactive."
+  ],
+  "blocked_scope": [
+    "No audit runtime.",
+    "No hash runtime.",
+    "No database table creation.",
+    "No migration generation.",
+    "No SQL generation.",
+    "No queue runtime.",
+    "No assignment query.",
+    "No article state runtime.",
+    "No state transition runtime.",
+    "No RLS policy application.",
+    "No Auth activation.",
+    "No real Admin login.",
+    "No real Editor login.",
+    "No backend/Supabase connection.",
+    "No secrets creation.",
+    "No environment variable write.",
+    "No server/API route runtime.",
+    "No GitHub token creation.",
+    "No GitHub write.",
+    "No deployment trigger.",
+    "No publishing.",
+    "No public mutation."
+  ],
+  "backend_planning_selected": true,
+  "backend_activation_deferred": true,
+  "supabase_auth_backend_deferred": true,
+  "explicit_approval_required_before_real_activation": true
+}
