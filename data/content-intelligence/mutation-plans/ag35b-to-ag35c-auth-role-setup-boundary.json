@@ -1,0 +1,24 @@
+{
+  "module_id": "AG35B",
+  "title": "AG35B to AG35C Auth Role Setup Boundary",
+  "status": "ag35c_boundary_created_controlled_auth_role_setup_after_schema_apply_review",
+  "next_stage_id": "AG35C",
+  "next_stage_title": "Auth Role Setup",
+  "allowed_scope": [
+    "Consume AG35B schema/RLS package.",
+    "Confirm whether SQL was manually applied.",
+    "Plan/create role setup only under controlled boundary.",
+    "Keep credentials out of repo.",
+    "Keep public mutation blocked."
+  ],
+  "blocked_scope": [
+    "No public mutation.",
+    "No deployment.",
+    "No service-role exposure.",
+    "No credentials in repo.",
+    "No unverified Auth user creation."
+  ],
+  "controlled_activation_selected": true,
+  "schema_package_created": true,
+  "manual_apply_required_before_runtime_use": true
+}

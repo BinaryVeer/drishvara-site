@@ -1,0 +1,93 @@
+{
+  "module_id": "AG35B",
+  "title": "Schema Apply Non-Execution Audit Register",
+  "status": "schema_apply_package_non_execution_audit_passed",
+  "checks": [
+    {
+      "check_id": "sql_file_created",
+      "passed": true,
+      "evidence": "supabase/migrations/20260527_ag35b_drishvara_controlled_schema.sql"
+    },
+    {
+      "check_id": "no_secret_values",
+      "passed": true,
+      "evidence": "SQL contains no secret values."
+    },
+    {
+      "check_id": "no_supabase_connection",
+      "passed": true,
+      "evidence": "Generator does not connect to Supabase."
+    },
+    {
+      "check_id": "no_sql_apply",
+      "passed": true,
+      "evidence": "SQL is generated but not applied."
+    },
+    {
+      "check_id": "no_auth_user_creation",
+      "passed": true,
+      "evidence": "No Auth users, credentials or invitations are created."
+    },
+    {
+      "check_id": "no_env_write",
+      "passed": true,
+      "evidence": "No env vars or .env files are written."
+    },
+    {
+      "check_id": "no_public_mutation",
+      "passed": true,
+      "evidence": "No deployment, publishing or public mutation occurs."
+    },
+    {
+      "check_id": "governance_preserved",
+      "passed": true,
+      "evidence": "Admin final authority and Editor assigned-only/no-publish governance are reflected in RLS manifest."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "controlled_schema_apply_package_created": true,
+    "migration_sql_file_created": true,
+    "schema_manifest_created": true,
+    "rls_manifest_created": true,
+    "manual_apply_guide_created": true,
+    "supabase_project_created_now": false,
+    "supabase_connected_now": false,
+    "auth_enabled_now": false,
+    "real_admin_login_created_now": false,
+    "real_editor_login_created_now": false,
+    "test_admin_created_now": false,
+    "test_editor_created_now": false,
+    "credential_created_now": false,
+    "runtime_backend_created_now": false,
+    "database_table_created_now": false,
+    "database_constraint_created_now": false,
+    "database_index_created_now": false,
+    "database_write_done_now": false,
+    "sql_generated_now": true,
+    "sql_applied_now": false,
+    "migration_generated_now": true,
+    "migration_applied_now": false,
+    "rls_policy_created_now": true,
+    "rls_policy_applied_now": false,
+    "secrets_created_now": false,
+    "env_vars_written_now": false,
+    "service_role_key_created_now": false,
+    "service_role_key_stored_now": false,
+    "service_role_key_exposed_now": false,
+    "server_route_created_now": false,
+    "api_route_created_now": false,
+    "route_guard_runtime_created_now": false,
+    "session_runtime_created_now": false,
+    "assignment_query_created_now": false,
+    "queue_runtime_created_now": false,
+    "audit_runtime_created_now": false,
+    "rollback_runtime_created_now": false,
+    "publish_handler_runtime_created_now": false,
+    "github_write_performed_now": false,
+    "deployment_triggered_now": false,
+    "published_now": false,
+    "public_mutation_done_now": false,
+    "supabase_auth_backend_activated_now": false
+  }
+}
