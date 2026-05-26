@@ -1,0 +1,82 @@
+{
+  "module_id": "AG30Z",
+  "title": "AG30 Source Chain Register",
+  "status": "ag30_source_chain_registered_for_closure",
+  "chain_length": 4,
+  "closed_chain": [
+    {
+      "stage_id": "AG30A",
+      "title": "Admin Login UI Scaffold",
+      "status": "admin_login_ui_scaffold_created_ready_for_ag30b",
+      "file": "data/content-intelligence/backend-architecture/ag30a-admin-login-ui-scaffold.json"
+    },
+    {
+      "stage_id": "AG30B",
+      "title": "Editor Login UI Scaffold",
+      "status": "editor_login_ui_scaffold_created_ready_for_ag30c",
+      "file": "data/content-intelligence/backend-architecture/ag30b-editor-login-ui-scaffold.json"
+    },
+    {
+      "stage_id": "AG30C",
+      "title": "Protected Route Scaffold",
+      "status": "protected_route_scaffold_created_ready_for_ag30d",
+      "file": "data/content-intelligence/backend-architecture/ag30c-protected-route-scaffold.json"
+    },
+    {
+      "stage_id": "AG30D",
+      "title": "Login UI Audit",
+      "status": "login_ui_audit_created_ready_for_ag30z",
+      "file": "data/content-intelligence/backend-architecture/ag30d-login-ui-audit.json"
+    }
+  ],
+  "audited_pages": [
+    "admin/login.html",
+    "editor/login.html",
+    "admin/index.html",
+    "admin/review.html",
+    "editor/index.html",
+    "editor/workspace.html"
+  ],
+  "consumed_schema_rls_closure": "data/content-intelligence/backend-architecture/ag29z-schema-rls-closure.json",
+  "blocked_state": {
+    "login_ui_closure_created": true,
+    "ag30_chain_closed": true,
+    "non_active_login_route_scaffold_closed": true,
+    "ag31_queue_state_planning_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "admin_review_runtime_created": false,
+    "editor_workspace_runtime_created": false,
+    "editor_assignment_runtime_created": false,
+    "queue_runtime_created": false,
+    "audit_runtime_created": false,
+    "article_state_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
