@@ -1,0 +1,81 @@
+{
+  "module_id": "AG32Z",
+  "title": "AG32 Source Chain Register",
+  "status": "ag32_source_chain_registered_for_closure",
+  "chain_length": 4,
+  "closed_chain": [
+    {
+      "stage_id": "AG32A",
+      "title": "Publish Handler Plan",
+      "status": "publish_handler_plan_created_ready_for_ag32b",
+      "file": "data/content-intelligence/backend-architecture/ag32a-publish-handler-plan.json"
+    },
+    {
+      "stage_id": "AG32B",
+      "title": "Return/Archive Handler Plan",
+      "status": "return_archive_handler_plan_created_ready_for_ag32c",
+      "file": "data/content-intelligence/backend-architecture/ag32b-return-archive-handler-plan.json"
+    },
+    {
+      "stage_id": "AG32C",
+      "title": "Publish Guard Rules",
+      "status": "publish_guard_rules_created_ready_for_ag32d",
+      "file": "data/content-intelligence/backend-architecture/ag32c-publish-guard-rules.json"
+    },
+    {
+      "stage_id": "AG32D",
+      "title": "Handler Architecture Audit",
+      "status": "handler_architecture_audit_created_ready_for_ag32z",
+      "file": "data/content-intelligence/backend-architecture/ag32d-handler-architecture-audit.json"
+    }
+  ],
+  "consumed_ag31z_closure": "data/content-intelligence/backend-architecture/ag31z-queue-integration-closure.json",
+  "consumed_governance_source": "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json",
+  "blocked_state": {
+    "dynamic_handler_architecture_closure_created": true,
+    "ag32_chain_closed": true,
+    "non_active_dynamic_handler_architecture_closed": true,
+    "ag33_dynamic_publish_scaffold_allowed": true,
+    "runtime_backend_created": false,
+    "supabase_project_created": false,
+    "supabase_connected": false,
+    "sql_generated": false,
+    "migration_generated": false,
+    "database_table_created": false,
+    "database_constraint_created": false,
+    "database_index_created": false,
+    "rls_policy_created": false,
+    "rls_policy_applied": false,
+    "auth_enabled": false,
+    "real_admin_login_created": false,
+    "real_editor_login_created": false,
+    "session_runtime_created": false,
+    "credential_processing_created": false,
+    "route_guard_runtime_created": false,
+    "assignment_query_created": false,
+    "queue_runtime_created": false,
+    "article_state_runtime_created": false,
+    "state_transition_runtime_created": false,
+    "audit_runtime_created": false,
+    "hash_runtime_created": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_guard_runtime_created": false,
+    "publish_handler_runtime_created": false,
+    "return_handler_runtime_created": false,
+    "archive_handler_runtime_created": false,
+    "rollback_runtime_created": false,
+    "public_filter_runtime_created": false,
+    "secrets_created": false,
+    "env_vars_written": false,
+    "service_role_key_created": false,
+    "service_role_key_exposed": false,
+    "server_route_created": false,
+    "api_route_created": false,
+    "github_token_created": false,
+    "github_write_performed": false,
+    "deployment_triggered": false,
+    "published": false,
+    "public_mutation_done": false,
+    "supabase_auth_backend_activated": false
+  }
+}
