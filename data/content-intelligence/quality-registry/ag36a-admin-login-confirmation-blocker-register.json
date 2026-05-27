@@ -1,0 +1,34 @@
+{
+  "module_id": "AG36A-CONFIRM",
+  "title": "Admin Login Confirmation Blocker Register",
+  "status": "admin_login_confirmed_runtime_actions_still_blocked",
+  "blocked_items": [
+    "No password in repo/chat.",
+    "No token/cookie in repo/chat.",
+    "No Supabase key in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No publish/archive/return action execution.",
+    "No dynamic publish runtime."
+  ],
+  "blocked_state": {
+    "admin_login_confirmed": true,
+    "admin_protected_page_opened": true,
+    "editor_login_test_ready": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false
+  }
+}
