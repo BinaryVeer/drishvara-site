@@ -1,0 +1,46 @@
+{
+  "module_id": "AG36B-CONFIRM",
+  "title": "AG36B Confirmed to AG36C Role Restriction Test Boundary",
+  "status": "ag36c_role_restriction_test_boundary_confirmed",
+  "next_stage_id": "AG36C",
+  "next_stage_title": "Role Restriction Test",
+  "allowed_scope": [
+    "Test that Editor cannot perform Admin-only actions.",
+    "Test that Editor cannot publish.",
+    "Test that Editor cannot bypass Admin review.",
+    "Record only safe success/error observations.",
+    "Do not record password, token, cookie, Supabase key, service-role key or secret-bearing URL."
+  ],
+  "blocked_scope": [
+    "No password in repo/chat.",
+    "No token/cookie in repo/chat.",
+    "No Supabase key in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No publish action execution.",
+    "No Admin review bypass.",
+    "No dynamic publish runtime."
+  ],
+  "blocked_state": {
+    "editor_login_confirmed": true,
+    "editor_protected_page_opened": true,
+    "editor_rights_surface_observed": true,
+    "role_restriction_test_ready": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}
