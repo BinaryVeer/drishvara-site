@@ -1,0 +1,27 @@
+{
+  "module_id": "AG35Z",
+  "title": "AG35Z to AG36A Admin Login Test Boundary",
+  "status": "ag36a_boundary_created_admin_login_test_without_secret_recording",
+  "next_stage_id": "AG36A",
+  "next_stage_title": "Admin Login Test",
+  "allowed_scope": [
+    "Consume AG35Z Backend/Auth Activation Closure.",
+    "Test Admin login with manually configured Supabase Auth user.",
+    "Confirm protected Admin route/page behaviour.",
+    "Record only success/error status, no passwords/tokens/secrets.",
+    "Keep deployment, public mutation and dynamic publish runtime blocked."
+  ],
+  "blocked_scope": [
+    "No passwords in repo/chat.",
+    "No credentials in repo/chat.",
+    "No Supabase keys in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime.",
+    "No publish handler enablement.",
+    "No public article mutation."
+  ],
+  "backend_auth_activation_closed": true,
+  "controlled_activation_selected": true
+}

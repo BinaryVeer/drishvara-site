@@ -1,0 +1,52 @@
+{
+  "module_id": "AG35Z",
+  "title": "Activation Chain Register",
+  "status": "ag35_activation_chain_registered_for_closure",
+  "closed_chain": [
+    {
+      "stage_id": "AG35A",
+      "title": "Explicit Activation Approval",
+      "status": "explicit_activation_approval_recorded_ready_for_ag35b",
+      "file": "data/content-intelligence/backend-architecture/ag35a-explicit-activation-approval.json"
+    },
+    {
+      "stage_id": "AG35B",
+      "title": "Supabase Schema Apply Package and Manual Apply Confirmation",
+      "status": "manual_schema_apply_confirmed_ready_for_ag35c",
+      "file": "data/content-intelligence/backend-architecture/ag35b-manual-schema-apply-confirmation.json"
+    },
+    {
+      "stage_id": "AG35C",
+      "title": "Auth Role Setup Package and Manual Confirmation",
+      "status": "manual_auth_role_setup_confirmed_ready_for_ag35d",
+      "file": "data/content-intelligence/backend-architecture/ag35c-manual-auth-role-confirmation.json"
+    },
+    {
+      "stage_id": "AG35D",
+      "title": "Backend Activation Audit",
+      "status": "backend_activation_audit_created_ready_for_ag35z",
+      "file": "data/content-intelligence/backend-architecture/ag35d-backend-activation-audit.json"
+    }
+  ],
+  "chain_length": 4,
+  "closed_successfully": true,
+  "blocked_state": {
+    "backend_auth_activation_closure_created": true,
+    "ag35_activation_chain_closed": true,
+    "schema_apply_closed": true,
+    "auth_role_setup_closed": true,
+    "backend_activation_audit_closed": true,
+    "ag36_login_live_test_ready": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}

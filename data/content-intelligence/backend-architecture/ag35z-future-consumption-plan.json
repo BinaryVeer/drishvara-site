@@ -1,0 +1,32 @@
+{
+  "module_id": "AG35Z",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag36_and_later",
+  "future_consumption": {
+    "AG36A": "AG36A should consume AG35Z and test Admin login/protected Admin route without recording secrets.",
+    "AG36B": "AG36B should test Editor login/protected Editor workspace and assigned-only access.",
+    "AG36C": "AG36C should verify Editor cannot access Admin actions, publish, archive or global queue.",
+    "AG36D": "AG36D should audit login security, route protection and RLS behaviour.",
+    "AG36Z": "AG36Z should close login live tests before AG37 dynamic publish dry-run.",
+    "AG37": "AG37 should perform dynamic publish dry-run only after AG36 closure."
+  },
+  "blocked_state": {
+    "backend_auth_activation_closure_created": true,
+    "ag35_activation_chain_closed": true,
+    "schema_apply_closed": true,
+    "auth_role_setup_closed": true,
+    "backend_activation_audit_closed": true,
+    "ag36_login_live_test_ready": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}
