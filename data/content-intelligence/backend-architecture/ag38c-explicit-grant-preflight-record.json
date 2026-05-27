@@ -1,0 +1,66 @@
+{
+  "module_id": "AG38C",
+  "title": "Explicit Grant Preflight Record",
+  "status": "explicit_grant_preflight_passed_no_sql_executed",
+  "checked_grant_plan_file": "data/content-intelligence/backend-architecture/ag38b-supabase-explicit-grant-plan.json",
+  "authenticated_read_grants_planned": [
+    "grant usage on schema public to authenticated",
+    "grant select on public.profiles to authenticated",
+    "grant select on public.articles to authenticated",
+    "grant select on public.article_assignments to authenticated",
+    "grant select on public.article_audit_logs to authenticated",
+    "grant select on public.publish_rollback_refs to authenticated"
+  ],
+  "anon_grants_planned": [],
+  "write_grants_planned_in_ag38c": [],
+  "sql_file_created_in_ag38c": false,
+  "sql_executed_in_ag38c": false,
+  "rls_remains_primary_access_control_layer": true,
+  "preflight_checks": [
+    {
+      "check_id": "authenticated_read_grant_plan_present",
+      "passed": true
+    },
+    {
+      "check_id": "anon_grants_absent",
+      "passed": true
+    },
+    {
+      "check_id": "write_grants_absent",
+      "passed": true
+    },
+    {
+      "check_id": "sql_not_executed",
+      "passed": true
+    },
+    {
+      "check_id": "rls_primary_boundary_preserved",
+      "passed": true
+    }
+  ],
+  "preflight_passed": true,
+  "blocked_state": {
+    "controlled_apply_preflight_created": true,
+    "target_candidate_preflight_passed": true,
+    "explicit_grant_preflight_passed": true,
+    "audit_rollback_preflight_passed": true,
+    "operator_approval_preflight_checked": true,
+    "controlled_apply_audit_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}

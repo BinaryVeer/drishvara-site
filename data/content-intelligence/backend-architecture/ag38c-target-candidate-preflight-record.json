@@ -1,0 +1,60 @@
+{
+  "module_id": "AG38C",
+  "title": "Target Candidate Preflight Record",
+  "status": "target_candidate_preflight_passed_no_apply",
+  "checked_target": {
+    "target_mode": "test_or_non_public_article_only",
+    "candidate_slug": "enhancing-public-healthcare-delivery-digital-innovation",
+    "candidate_source_status": "ready_for_admin_review",
+    "intended_transition_if_later_approved": "ready_for_admin_review_to_published",
+    "public_surface_exposure_allowed_in_ag38b": false,
+    "real_publish_allowed_in_ag38b": false
+  },
+  "preflight_checks": [
+    {
+      "check_id": "target_is_test_or_non_public",
+      "passed": true
+    },
+    {
+      "check_id": "public_surface_exposure_blocked",
+      "passed": true
+    },
+    {
+      "check_id": "real_publish_blocked_in_ag38c",
+      "passed": true
+    },
+    {
+      "check_id": "admin_only_apply_requirement_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "editor_publish_block_preserved",
+      "passed": true
+    }
+  ],
+  "preflight_passed": true,
+  "blocked_state": {
+    "controlled_apply_preflight_created": true,
+    "target_candidate_preflight_passed": true,
+    "explicit_grant_preflight_passed": true,
+    "audit_rollback_preflight_passed": true,
+    "operator_approval_preflight_checked": true,
+    "controlled_apply_audit_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}

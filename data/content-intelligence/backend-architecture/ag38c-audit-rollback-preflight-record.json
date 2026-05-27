@@ -1,0 +1,55 @@
+{
+  "module_id": "AG38C",
+  "title": "Audit and Rollback Preflight Record",
+  "status": "audit_rollback_preflight_passed_no_write",
+  "checked_audit_rollback_plan_file": "data/content-intelligence/backend-architecture/ag38b-audit-rollback-plan.json",
+  "preflight_checks": [
+    {
+      "check_id": "audit_log_required",
+      "passed": true
+    },
+    {
+      "check_id": "before_after_hash_required",
+      "passed": true
+    },
+    {
+      "check_id": "rollback_reference_required",
+      "passed": true
+    },
+    {
+      "check_id": "audit_write_blocked_in_ag38c",
+      "passed": true
+    },
+    {
+      "check_id": "rollback_write_blocked_in_ag38c",
+      "passed": true
+    }
+  ],
+  "audit_log_write_allowed_in_ag38c": false,
+  "rollback_write_allowed_in_ag38c": false,
+  "preflight_passed": true,
+  "blocked_state": {
+    "controlled_apply_preflight_created": true,
+    "target_candidate_preflight_passed": true,
+    "explicit_grant_preflight_passed": true,
+    "audit_rollback_preflight_passed": true,
+    "operator_approval_preflight_checked": true,
+    "controlled_apply_audit_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}
