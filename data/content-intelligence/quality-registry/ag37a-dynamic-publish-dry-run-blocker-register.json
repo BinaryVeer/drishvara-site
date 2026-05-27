@@ -1,0 +1,37 @@
+{
+  "module_id": "AG37A",
+  "title": "Dynamic Publish Dry-run Blocker Register",
+  "status": "dynamic_publish_dry_run_blockers_preserved",
+  "blocked_items": [
+    "No real publish.",
+    "No public article mutation.",
+    "No database write.",
+    "No audit log write.",
+    "No rollback write.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime enablement."
+  ],
+  "blocked_state": {
+    "dynamic_publish_dry_run_created": true,
+    "admin_publish_action_simulated": true,
+    "test_non_public_article_only": true,
+    "guard_evaluation_created": true,
+    "queue_state_dry_run_ready": true,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

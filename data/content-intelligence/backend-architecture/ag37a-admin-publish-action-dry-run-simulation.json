@@ -1,0 +1,46 @@
+{
+  "module_id": "AG37A",
+  "title": "Admin Publish Action Dry-run Simulation",
+  "status": "admin_publish_action_simulated_without_mutation",
+  "simulation_scope": {
+    "actor_role": "admin",
+    "actor_authority": "final_clearance_authority",
+    "candidate_type": "test_or_non_public_article",
+    "candidate_slug": "enhancing-public-healthcare-delivery-digital-innovation",
+    "source_status": "ready_for_admin_review",
+    "intended_target_status": "published",
+    "public_visibility_before": false,
+    "public_visibility_after": "simulated_only_not_written"
+  },
+  "simulated_actions": [
+    "Admin selects publish action.",
+    "Publish guard checks Admin role.",
+    "Publish guard checks approved candidate status.",
+    "Publish guard checks public filter pass.",
+    "Publish guard prepares intended state transition.",
+    "Dry-run blocks actual database/public mutation."
+  ],
+  "actual_actions_executed": [],
+  "dry_run_only": true,
+  "blocked_state": {
+    "dynamic_publish_dry_run_created": true,
+    "admin_publish_action_simulated": true,
+    "test_non_public_article_only": true,
+    "guard_evaluation_created": true,
+    "queue_state_dry_run_ready": true,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}
