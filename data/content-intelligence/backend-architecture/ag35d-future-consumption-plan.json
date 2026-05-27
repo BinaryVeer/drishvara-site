@@ -1,0 +1,32 @@
+{
+  "module_id": "AG35D",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag35z_and_ag36",
+  "future_consumption": {
+    "AG35Z": "AG35Z should close Backend/Auth activation based on AG35A approval, AG35B schema apply confirmation, AG35C Auth role confirmation and AG35D audit.",
+    "AG36A": "AG36A should test Admin login and protected routes after AG35Z closure.",
+    "AG36B": "AG36B should test Editor login and assigned-only workspace access after AG35Z closure.",
+    "AG36C": "AG36C should test role restriction: Editor cannot perform Admin actions or publish.",
+    "AG36D": "AG36D should audit login security, session handling and RLS behaviour.",
+    "AG36Z": "AG36Z should close login live test before dynamic publish dry-run stages."
+  },
+  "blocked_state": {
+    "backend_activation_audit_created": true,
+    "schema_apply_audit_created": true,
+    "auth_role_audit_created": true,
+    "rls_access_control_audit_created": true,
+    "security_non_public_mutation_audit_created": true,
+    "ready_for_ag35z_backend_auth_activation_closure": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}

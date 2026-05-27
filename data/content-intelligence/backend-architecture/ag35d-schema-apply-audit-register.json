@@ -1,0 +1,47 @@
+{
+  "module_id": "AG35D",
+  "title": "Schema Apply Audit Register",
+  "status": "schema_apply_audit_passed",
+  "checks": [
+    {
+      "check_id": "ag35b_schema_apply_confirmed",
+      "passed": true,
+      "evidence": "AG35B manual schema apply confirmation is present."
+    },
+    {
+      "check_id": "ag35b_rls_apply_confirmed",
+      "passed": true,
+      "evidence": "AG35B manual RLS apply confirmation is present."
+    },
+    {
+      "check_id": "schema_tables_manifested",
+      "passed": true,
+      "evidence": "AG35B schema manifest contains all controlled workflow tables."
+    },
+    {
+      "check_id": "schema_sql_contains_rls",
+      "passed": true,
+      "evidence": "supabase/migrations/20260527_ag35b_drishvara_controlled_schema.sql"
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "backend_activation_audit_created": true,
+    "schema_apply_audit_created": true,
+    "auth_role_audit_created": true,
+    "rls_access_control_audit_created": true,
+    "security_non_public_mutation_audit_created": true,
+    "ready_for_ag35z_backend_auth_activation_closure": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}

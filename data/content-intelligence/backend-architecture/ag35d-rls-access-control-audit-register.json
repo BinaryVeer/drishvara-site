@@ -1,0 +1,47 @@
+{
+  "module_id": "AG35D",
+  "title": "RLS Access Control Audit Register",
+  "status": "rls_access_control_audit_passed",
+  "checks": [
+    {
+      "check_id": "admin_final_clearance_preserved",
+      "passed": true,
+      "evidence": "Admin final clearance authority remains source-of-truth."
+    },
+    {
+      "check_id": "editor_assigned_only_preserved",
+      "passed": true,
+      "evidence": "Editor assigned-only rule remains source-of-truth."
+    },
+    {
+      "check_id": "editor_no_publish_preserved",
+      "passed": true,
+      "evidence": "Editor cannot publish rule remains source-of-truth."
+    },
+    {
+      "check_id": "rls_manifest_contains_expected_policies",
+      "passed": true,
+      "evidence": "AG35B RLS manifest contains expected policies."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "backend_activation_audit_created": true,
+    "schema_apply_audit_created": true,
+    "auth_role_audit_created": true,
+    "rls_access_control_audit_created": true,
+    "security_non_public_mutation_audit_created": true,
+    "ready_for_ag35z_backend_auth_activation_closure": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}

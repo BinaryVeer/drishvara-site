@@ -1,0 +1,47 @@
+{
+  "module_id": "AG35D",
+  "title": "Auth Role Audit Register",
+  "status": "auth_role_audit_passed",
+  "checks": [
+    {
+      "check_id": "admin_role_confirmed",
+      "passed": true,
+      "evidence": "Admin profile row confirmed."
+    },
+    {
+      "check_id": "editor_role_confirmed",
+      "passed": true,
+      "evidence": "Editor profile row confirmed."
+    },
+    {
+      "check_id": "role_verification_passed",
+      "passed": true,
+      "evidence": "AG35C role verification passed."
+    },
+    {
+      "check_id": "role_mapping_sql_is_idempotent",
+      "passed": true,
+      "evidence": "supabase/migrations/20260527_ag35c_auth_role_mapping.sql"
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "backend_activation_audit_created": true,
+    "schema_apply_audit_created": true,
+    "auth_role_audit_created": true,
+    "rls_access_control_audit_created": true,
+    "security_non_public_mutation_audit_created": true,
+    "ready_for_ag35z_backend_auth_activation_closure": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}

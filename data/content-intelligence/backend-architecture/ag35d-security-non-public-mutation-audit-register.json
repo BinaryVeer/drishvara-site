@@ -1,0 +1,52 @@
+{
+  "module_id": "AG35D",
+  "title": "Security and Non-Public-Mutation Audit Register",
+  "status": "security_non_public_mutation_audit_passed",
+  "checks": [
+    {
+      "check_id": "no_passwords_recorded",
+      "passed": true,
+      "evidence": "No passwords are recorded."
+    },
+    {
+      "check_id": "no_supabase_keys_recorded",
+      "passed": true,
+      "evidence": "No Supabase keys or service-role key are recorded."
+    },
+    {
+      "check_id": "no_service_role_exposure",
+      "passed": true,
+      "evidence": "Service-role key exposure is false."
+    },
+    {
+      "check_id": "no_deployment_or_public_mutation",
+      "passed": true,
+      "evidence": "No deployment or public mutation is recorded."
+    },
+    {
+      "check_id": "no_dynamic_publish_runtime",
+      "passed": true,
+      "evidence": "AG35D is audit-only and does not create publish runtime."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "backend_activation_audit_created": true,
+    "schema_apply_audit_created": true,
+    "auth_role_audit_created": true,
+    "rls_access_control_audit_created": true,
+    "security_non_public_mutation_audit_created": true,
+    "ready_for_ag35z_backend_auth_activation_closure": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false,
+    "public_article_mutation_enabled": false
+  }
+}
