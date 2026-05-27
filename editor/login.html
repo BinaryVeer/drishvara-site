@@ -3,16 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Drishvara Editor Login — Non-active Scaffold</title>
+  <title>Drishvara Editor Login — Controlled Live Auth Test</title>
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg: #f7fafc;
       --panel: #ffffff;
       --text: #17324d;
       --muted: #64748b;
       --accent: #1f7a8c;
-      --accent2: #375985;
       --border: #dbeafe;
       --warn: #92400e;
       --warn-bg: #fffbeb;
@@ -24,7 +23,7 @@
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at top right, rgba(55, 89, 133, 0.12), transparent 32%),
+        radial-gradient(circle at top left, rgba(31, 122, 140, 0.12), transparent 30%),
         linear-gradient(135deg, #f8fafc 0%, #eef7fb 100%);
       display: grid;
       place-items: center;
@@ -33,12 +32,12 @@
     .shell {
       width: min(980px, 100%);
       display: grid;
-      grid-template-columns: 1.15fr 1fr;
+      grid-template-columns: 1fr 1.15fr;
       gap: 24px;
       align-items: stretch;
     }
     .brand, .card {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid var(--border);
       border-radius: 24px;
       box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
@@ -54,7 +53,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      font-weight: 900;
+      font-weight: 800;
       margin-bottom: 12px;
     }
     h1 {
@@ -75,7 +74,17 @@
       border-radius: 18px;
       padding: 14px 16px;
       margin-top: 20px;
-      font-weight: 800;
+      font-weight: 700;
+    }
+    .notice[data-kind="success"] {
+      border-color: #86efac;
+      background: #f0fdf4;
+      color: #166534;
+    }
+    .notice[data-kind="error"] {
+      border-color: #fca5a5;
+      background: #fef2f2;
+      color: #991b1b;
     }
     label {
       display: block;
@@ -99,9 +108,9 @@
       padding: 15px 18px;
       font-weight: 900;
       color: white;
-      background: linear-gradient(135deg, #1f7a8c, #375985);
-      cursor: not-allowed;
-      opacity: 0.88;
+      background: linear-gradient(135deg, #1f7a8c, #17324d);
+      cursor: pointer;
+      opacity: 1;
     }
     .meta {
       display: grid;
@@ -117,21 +126,12 @@
       border-radius: 999px;
       padding: 8px 12px;
       color: #1e3a8a;
-      font-weight: 900;
+      font-weight: 800;
     }
     .small {
       font-size: 13px;
       color: #64748b;
       margin-top: 16px;
-    }
-    .rule {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: #f1f5f9;
-      color: #334155;
-      font-size: 14px;
-      font-weight: 700;
     }
     @media (max-width: 760px) {
       .shell { grid-template-columns: 1fr; }
@@ -144,45 +144,43 @@
     <section class="brand" aria-label="Drishvara Editor login context">
       <div>
         <div class="eyebrow">Drishvara Editor</div>
-        <h1>Editor Login UI Scaffold</h1>
-        <p>This page is a governed, non-active interface preview for the future Editor workspace. It does not authenticate, store credentials, create sessions, call APIs or connect to backend services.</p>
-        <div class="notice">Non-active scaffold only. Editor login is not real.</div>
+        <h1>Editor Login</h1>
+        <p>This page is a governed Editor login test surface for controlled Supabase Auth verification. It uses only the browser-safe anon key from a local gitignored config file.</p>
+        <div class="notice" data-ag36b-status>Local Auth config pending. Editor login test not yet executed.</div>
       </div>
       <div class="meta">
-        <span class="pill">AG30B</span>
-        <span>Editor access: assigned items only</span>
+        <span class="pill">AG36B-R1</span>
+        <span>Backend/Auth activation: controlled AG35 closure complete</span>
+        <span>Supabase browser client: local config required</span>
+        <span>Editor access: assigned-only</span>
         <span>Editor publishing: blocked</span>
-        <span>Backend/Auth activation: blocked</span>
+        <span>Public mutation: blocked</span>
       </div>
     </section>
 
-    <section class="card" aria-label="Editor login preview form">
-      <div class="eyebrow">Preview form</div>
+    <section class="card" aria-label="Editor login form">
+      <div class="eyebrow">Controlled login test</div>
       <h2>Editor access</h2>
-      <p>For future assigned-article correction and send-back workflow after explicit activation approval.</p>
+      <p>For controlled Editor review, correction and assigned-only workflows after AG35 backend/Auth activation closure.</p>
 
       <form id="editor-login-preview" autocomplete="off">
         <label for="editor-email">Editor email</label>
         <input id="editor-email" name="editor-email" type="email" placeholder="editor@example.com" aria-describedby="non-active-help" />
 
         <label for="editor-password">Password</label>
-        <input id="editor-password" name="editor-password" type="password" placeholder="Not active" aria-describedby="non-active-help" />
+        <input id="editor-password" name="editor-password" type="password" placeholder="Enter password only in browser" aria-describedby="non-active-help" />
 
-        <button type="submit">Preview only — editor login not active</button>
+        <button type="submit" data-ag36b-submit>Sign in as Editor</button>
+        <button type="button" data-ag36b-signout style="margin-top:10px;background:#64748b;">Sign out locally</button>
       </form>
 
-      <div class="rule">Editor can work only on Admin-assigned items.</div>
-      <div class="rule">Editor cannot self-assign, globally browse or publish.</div>
-
-      <p id="non-active-help" class="small">This form blocks submission locally. No credential is processed, stored, validated or transmitted.</p>
+      <p id="non-active-help" class="small">This controlled test uses Supabase Auth in the browser. Do not record or share password, token, cookie, Supabase key or secret-bearing URL.</p>
+      <p class="small"><strong>Governance:</strong> Editor remains assigned-only and cannot publish. Admin remains final clearance authority.</p>
     </section>
   </main>
 
-  <script>
-    document.getElementById("editor-login-preview").addEventListener("submit", function (event) {
-      event.preventDefault();
-      alert("AG30B preview only: real Editor login is not active.");
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/js/drishvara-auth-local.js"></script>
+  <script src="../assets/js/ag36b-editor-live-auth.js"></script>
 </body>
 </html>

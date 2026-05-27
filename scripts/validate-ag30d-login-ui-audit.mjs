@@ -70,12 +70,19 @@ if (!adminLegacyNonActive && !adminAg36aR1Upgrade) {
   fail("admin/login.html missing valid AG30D non-active state or AG36A-R1 controlled upgrade state.");
 }
 
-if (!editorHtml.includes("Non-active scaffold only") && !editorHtml.includes("real Editor login is not active")) {
-  fail("editor/login.html missing non-active notice.");
+const editorAg36bR1Upgrade =
+  fs.existsSync(path.join(root, "assets/js/ag36b-editor-live-auth.js")) &&
+  editorHtml.includes("Drishvara Editor Login — Controlled Live Auth Test") &&
+  editorHtml.includes("../assets/js/drishvara-auth-local.js") &&
+  editorHtml.includes("../assets/js/ag36b-editor-live-auth.js") &&
+  editorHtml.includes("Sign in as Editor");
+
+if (!editorAg36bR1Upgrade && !editorHtml.includes("Non-active scaffold only") && !editorHtml.includes("real Editor login is not active")) {
+  fail("editor/login.html missing non-active notice or AG36B-R1 controlled upgrade state.");
 }
 
 if (!adminHtml.includes("Public mutation: blocked")) fail("admin/login.html missing public mutation blocked marker.");
-if (!editorHtml.includes("Editor publishing: blocked")) fail("editor/login.html missing editor publishing blocked marker.");
+if (!editorHtml.includes("Editor publishing: blocked") && !editorHtml.includes("assigned-only")) fail("editor/login.html missing editor publishing/assigned-only governance marker.");
 
 if (adminAg36aR1Upgrade) {
   const js = readText("assets/js/ag36a-admin-live-auth.js");

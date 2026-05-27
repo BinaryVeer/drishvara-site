@@ -1,0 +1,42 @@
+{
+  "module_id": "AG36B-R1",
+  "title": "Editor Local Auth Config Guide",
+  "status": "editor_local_auth_config_guide_created",
+  "shared_gitignored_local_config_path": "assets/js/drishvara-auth-local.js",
+  "committed_template_path": "assets/js/drishvara-auth-local.example.js",
+  "required_public_values_only": [
+    "Supabase Project URL",
+    "Supabase anon/public key",
+    "Optional editorEmail",
+    "Optional editorSuccessPath"
+  ],
+  "forbidden_values": [
+    "service-role key",
+    "database password",
+    "user password",
+    "Auth token",
+    "session cookie",
+    "JWT",
+    "environment secret"
+  ],
+  "blocked_state": {
+    "editor_live_auth_wiring_created": true,
+    "editor_login_html_patched": true,
+    "editor_live_auth_js_created": true,
+    "shared_local_config_used": true,
+    "local_secret_config_gitignored": true,
+    "real_editor_login_test_performed_by_script": false,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false
+  }
+}

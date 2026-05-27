@@ -1,0 +1,41 @@
+{
+  "module_id": "AG36B-R1",
+  "title": "AG36B-R1 to AG36B Manual Editor Login Confirmation Boundary",
+  "status": "manual_editor_login_confirmation_boundary_created",
+  "next_stage_id": "AG36B-CONFIRM",
+  "next_stage_title": "Manual Editor Login Confirmation",
+  "allowed_scope": [
+    "Use local gitignored browser config.",
+    "Test Editor login in browser.",
+    "Record only success/error status.",
+    "Do not record password, token, cookie, Supabase key, service-role key or secret-bearing URL."
+  ],
+  "blocked_scope": [
+    "No service-role key.",
+    "No password in repo/chat.",
+    "No token/cookie in repo/chat.",
+    "No committed Supabase URL/key.",
+    "No deployment.",
+    "No public mutation."
+  ],
+  "blocked_state": {
+    "editor_live_auth_wiring_created": true,
+    "editor_login_html_patched": true,
+    "editor_live_auth_js_created": true,
+    "shared_local_config_used": true,
+    "local_secret_config_gitignored": true,
+    "real_editor_login_test_performed_by_script": false,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "module_id": "AG36B-R1",
+  "title": "Editor Live Auth Test Readiness Record",
+  "status": "ready_for_manual_editor_live_auth_test_after_local_config",
+  "ready_for_manual_editor_login_test": true,
+  "required_before_test": [
+    "Ensure assets/js/drishvara-auth-local.js exists locally from assets/js/drishvara-auth-local.example.js",
+    "Fill browser-safe Supabase Project URL",
+    "Fill browser-safe Supabase anon/public key",
+    "Do not commit local config",
+    "Run python3 -m http.server 8080",
+    "Open http://localhost:8080/editor/login.html"
+  ],
+  "editor_email": "vikash4world@gmail.com",
+  "blocked_state": {
+    "editor_live_auth_wiring_created": true,
+    "editor_login_html_patched": true,
+    "editor_live_auth_js_created": true,
+    "shared_local_config_used": true,
+    "local_secret_config_gitignored": true,
+    "real_editor_login_test_performed_by_script": false,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false
+  }
+}
