@@ -1,0 +1,56 @@
+{
+  "module_id": "AG37D",
+  "title": "Guard Continuity Audit Register",
+  "status": "guard_continuity_audit_passed",
+  "checks": [
+    {
+      "check_id": "publish_guard_passed_for_dry_run",
+      "passed": true,
+      "source": "data/content-intelligence/backend-architecture/ag37a-publish-guard-evaluation-record.json"
+    },
+    {
+      "check_id": "state_guard_passed_for_dry_run",
+      "passed": true,
+      "source": "data/content-intelligence/backend-architecture/ag37b-state-guard-evaluation-record.json"
+    },
+    {
+      "check_id": "audit_guard_passed_for_dry_run",
+      "passed": true,
+      "source": "data/content-intelligence/backend-architecture/ag37c-audit-write-guard-evaluation-record.json"
+    },
+    {
+      "check_id": "editor_no_publish_preserved",
+      "passed": true,
+      "source": "AG37B state guard and AG26Z governance"
+    },
+    {
+      "check_id": "admin_final_clearance_preserved",
+      "passed": true,
+      "source": "AG37A publish dry-run actor role = admin"
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "dry_run_behaviour_audit_created": true,
+    "ag37_dry_run_chain_audited": true,
+    "mutation_block_continuity_confirmed": true,
+    "guard_continuity_confirmed": true,
+    "artifact_shape_continuity_confirmed": true,
+    "ready_for_ag37z_dynamic_publish_dry_run_closure": true,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}
