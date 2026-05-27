@@ -1,0 +1,49 @@
+{
+  "module_id": "AG37Z",
+  "title": "AG37Z to AG38A Controlled Apply Decision Boundary",
+  "status": "ag38a_controlled_apply_decision_boundary_created",
+  "next_stage_id": "AG38A",
+  "next_stage_title": "Controlled Apply Decision Checkpoint",
+  "allowed_scope": [
+    "Consume AG37Z dry-run closure.",
+    "Review whether controlled apply should be considered.",
+    "Confirm explicit operator approval requirement.",
+    "Keep real publish, database write, public mutation, deployment and service-role key use blocked unless separately approved."
+  ],
+  "blocked_scope": [
+    "No real publish.",
+    "No actual queue-state change.",
+    "No audit-log write.",
+    "No rollback write.",
+    "No database write.",
+    "No public article mutation.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime enablement.",
+    "No service-role key exposure."
+  ],
+  "blocked_state": {
+    "dynamic_publish_dry_run_closure_created": true,
+    "ag37_dry_run_chain_closed": true,
+    "dry_run_publish_capability_confirmed": true,
+    "dry_run_queue_state_capability_confirmed": true,
+    "dry_run_audit_shape_capability_confirmed": true,
+    "dry_run_behaviour_audit_passed": true,
+    "ready_for_ag38a_controlled_apply_decision": true,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}
