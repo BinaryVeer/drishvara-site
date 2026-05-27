@@ -1,0 +1,24 @@
+{
+  "module_id": "AG35C",
+  "title": "AG35C Confirmed to AG35D Backend Activation Audit Boundary",
+  "status": "ag35d_boundary_confirmed_backend_activation_audit",
+  "next_stage_id": "AG35D",
+  "next_stage_title": "Backend Activation Audit",
+  "allowed_scope": [
+    "Consume AG35B schema apply confirmation.",
+    "Consume AG35C Auth role confirmation.",
+    "Audit schema, RLS, profiles and role mapping readiness.",
+    "Keep deployment and public mutation blocked.",
+    "Prepare AG35Z closure only after audit passes."
+  ],
+  "blocked_scope": [
+    "No passwords in repo/chat.",
+    "No Supabase keys in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime."
+  ],
+  "manual_auth_role_setup_confirmed": true,
+  "controlled_activation_selected": true
+}

@@ -1,0 +1,39 @@
+{
+  "module_id": "AG35C",
+  "title": "Manual Auth Role Result Record",
+  "status": "manual_auth_role_mapping_result_recorded_success",
+  "operator_reported_result": "Supabase profiles query returned two active rows: one admin and one editor.",
+  "apply_surface": "Supabase SQL Editor and Authentication users",
+  "apply_mode": "manual_operator_action",
+  "admin_result": {
+    "email": "dwivedi.vikash.vaibhav@gmail.com",
+    "role": "admin",
+    "is_active": true
+  },
+  "editor_result": {
+    "email": "vikash4world@gmail.com",
+    "role": "editor",
+    "is_active": true
+  },
+  "result_contains_passwords": false,
+  "result_contains_supabase_keys": false,
+  "result_contains_project_url": false,
+  "result_contains_service_role_key": false,
+  "blocked_state": {
+    "manual_auth_role_confirmation_created": true,
+    "auth_users_confirmed_in_supabase": true,
+    "role_mapping_confirmed_in_profiles": true,
+    "admin_role_confirmed": true,
+    "editor_role_confirmed": true,
+    "ready_for_ag35d_backend_activation_audit": true,
+    "passwords_recorded": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false
+  }
+}
