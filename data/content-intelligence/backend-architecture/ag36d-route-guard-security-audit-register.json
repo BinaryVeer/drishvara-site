@@ -1,0 +1,52 @@
+{
+  "module_id": "AG36D",
+  "title": "Route Guard Security Audit Register",
+  "status": "route_guard_security_audit_passed",
+  "checks": [
+    {
+      "check_id": "editor_blocked_from_admin_dashboard",
+      "passed": true,
+      "evidence": "AG36C confirmed Editor cannot access Admin dashboard."
+    },
+    {
+      "check_id": "admin_allowed_to_admin_dashboard",
+      "passed": true,
+      "evidence": "AG36C confirmed Admin can access Admin dashboard."
+    },
+    {
+      "check_id": "profile_role_checked",
+      "passed": true,
+      "evidence": "Route guard checks profiles.role against required route role."
+    },
+    {
+      "check_id": "editor_no_admin_bypass",
+      "passed": true,
+      "evidence": "Editor route-bypass attempt was blocked."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "login_security_audit_created": true,
+    "admin_login_confirmed": true,
+    "editor_login_confirmed": true,
+    "role_restriction_confirmed": true,
+    "session_audit_passed": true,
+    "route_guard_security_audit_passed": true,
+    "secret_local_config_audit_passed": true,
+    "runtime_action_blocker_audit_passed": true,
+    "ready_for_ag36z_login_live_test_closure": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

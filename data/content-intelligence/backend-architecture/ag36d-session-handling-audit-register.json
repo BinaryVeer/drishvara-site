@@ -1,0 +1,52 @@
+{
+  "module_id": "AG36D",
+  "title": "Session Handling Audit Register",
+  "status": "session_handling_audit_passed",
+  "checks": [
+    {
+      "check_id": "admin_login_confirmed",
+      "passed": true,
+      "evidence": "data/content-intelligence/backend-architecture/ag36a-confirm-admin-login-success.json"
+    },
+    {
+      "check_id": "editor_login_confirmed",
+      "passed": true,
+      "evidence": "data/content-intelligence/backend-architecture/ag36b-confirm-editor-login-success.json"
+    },
+    {
+      "check_id": "route_guard_checks_session",
+      "passed": true,
+      "evidence": "AG36C route guard verifies active Supabase browser session."
+    },
+    {
+      "check_id": "no_session_value_recorded",
+      "passed": true,
+      "evidence": "No token or cookie value is recorded."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "login_security_audit_created": true,
+    "admin_login_confirmed": true,
+    "editor_login_confirmed": true,
+    "role_restriction_confirmed": true,
+    "session_audit_passed": true,
+    "route_guard_security_audit_passed": true,
+    "secret_local_config_audit_passed": true,
+    "runtime_action_blocker_audit_passed": true,
+    "ready_for_ag36z_login_live_test_closure": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

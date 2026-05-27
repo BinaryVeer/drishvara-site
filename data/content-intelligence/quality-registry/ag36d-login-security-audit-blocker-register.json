@@ -1,0 +1,39 @@
+{
+  "module_id": "AG36D",
+  "title": "Login Security Audit Blocker Register",
+  "status": "login_security_audit_blockers_preserved",
+  "blocked_items": [
+    "No password in repo/chat.",
+    "No token/cookie in repo/chat.",
+    "No Supabase key in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime.",
+    "No publish/archive/return action execution."
+  ],
+  "blocked_state": {
+    "login_security_audit_created": true,
+    "admin_login_confirmed": true,
+    "editor_login_confirmed": true,
+    "role_restriction_confirmed": true,
+    "session_audit_passed": true,
+    "route_guard_security_audit_passed": true,
+    "secret_local_config_audit_passed": true,
+    "runtime_action_blocker_audit_passed": true,
+    "ready_for_ag36z_login_live_test_closure": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}
