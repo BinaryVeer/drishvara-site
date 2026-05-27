@@ -1,0 +1,54 @@
+{
+  "module_id": "AG38A",
+  "title": "Controlled Apply Risk Review Record",
+  "status": "controlled_apply_risk_review_created_no_apply_authorized",
+  "reviewed_risks": [
+    {
+      "risk_id": "unintended_public_publication",
+      "severity": "high",
+      "mitigation_required_before_apply": "Use test/non-public article only and verify public surface after dry-run."
+    },
+    {
+      "risk_id": "incorrect_queue_state_transition",
+      "severity": "medium",
+      "mitigation_required_before_apply": "Use AG37B before/after queue-state model and rollback reference."
+    },
+    {
+      "risk_id": "missing_audit_or_rollback",
+      "severity": "high",
+      "mitigation_required_before_apply": "Prepare audit-log and rollback write path before any real apply."
+    },
+    {
+      "risk_id": "insufficient_data_api_grants",
+      "severity": "medium",
+      "mitigation_required_before_apply": "Prepare explicit authenticated-only GRANT package after review."
+    },
+    {
+      "risk_id": "excessive_anon_exposure",
+      "severity": "high",
+      "mitigation_required_before_apply": "No anon grants for Admin/Editor workflow tables."
+    }
+  ],
+  "risk_review_passed_for_decision_checkpoint": true,
+  "real_apply_authorized": false,
+  "blocked_state": {
+    "controlled_apply_decision_checkpoint_created": true,
+    "supabase_explicit_grant_review_added": true,
+    "operator_approval_gate_created": true,
+    "controlled_apply_package_ready_to_plan": true,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_prepared": false,
+    "sql_grants_executed": false
+  }
+}

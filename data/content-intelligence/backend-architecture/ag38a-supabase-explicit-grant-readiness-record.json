@@ -1,0 +1,55 @@
+{
+  "module_id": "AG38A",
+  "title": "Supabase Explicit Grant Readiness Record",
+  "status": "explicit_grant_review_added_no_sql_executed",
+  "reason": "Supabase has announced that new public tables will require explicit GRANTs for Data API access. Existing projects continue current behaviour for now, but Drishvara should become future-proof before controlled apply/public runtime work.",
+  "decision_scope": "readiness_review_only",
+  "current_treatment": {
+    "no_sql_grant_executed_in_ag38a": true,
+    "no_schema_migration_created_in_ag38a": true,
+    "no_supabase_cli_or_sql_editor_action_required_in_ag38a": true,
+    "no_anon_grant_to_admin_editor_tables": true,
+    "no_write_grant_until_controlled_apply_is_explicitly_approved": true,
+    "rls_remains_primary_access_control_layer": true
+  },
+  "proposed_future_grant_direction": {
+    "schema_usage_for_authenticated": "grant usage on schema public to authenticated",
+    "select_grants_for_authenticated_only": [
+      "public.profiles",
+      "public.articles",
+      "public.article_assignments",
+      "public.article_audit_logs",
+      "public.publish_rollback_refs"
+    ],
+    "anon_grants_for_admin_editor_workflow": [],
+    "write_grants_for_ag38a": [],
+    "write_grants_require_later_explicit_approval": true
+  },
+  "blocker_notes": [
+    "Do not grant Admin/Editor workflow tables to anon.",
+    "Do not prepare insert/update/delete grants in AG38A.",
+    "Do not run SQL in AG38A.",
+    "Do not use service-role key in repo/chat.",
+    "Keep RLS policies as the real access-control boundary."
+  ],
+  "blocked_state": {
+    "controlled_apply_decision_checkpoint_created": true,
+    "supabase_explicit_grant_review_added": true,
+    "operator_approval_gate_created": true,
+    "controlled_apply_package_ready_to_plan": true,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_prepared": false,
+    "sql_grants_executed": false
+  }
+}

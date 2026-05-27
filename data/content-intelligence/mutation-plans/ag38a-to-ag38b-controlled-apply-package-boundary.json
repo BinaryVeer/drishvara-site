@@ -1,0 +1,50 @@
+{
+  "module_id": "AG38A",
+  "title": "AG38A to AG38B Controlled Apply Package Boundary",
+  "status": "ag38b_controlled_apply_package_boundary_created",
+  "next_stage_id": "AG38B",
+  "next_stage_title": "Controlled Apply Package Planning",
+  "allowed_scope": [
+    "Consume AG38A decision checkpoint.",
+    "Plan controlled apply package only.",
+    "Include explicit Supabase GRANT review.",
+    "Plan authenticated-only read grants where required.",
+    "Keep anon grants blocked for Admin/Editor workflow tables.",
+    "Keep real publish, database write, public mutation and deployment blocked unless separately approved."
+  ],
+  "blocked_scope": [
+    "No real publish.",
+    "No queue-state write.",
+    "No audit-log write.",
+    "No rollback write.",
+    "No database write.",
+    "No public article mutation.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime enablement.",
+    "No service-role key exposure.",
+    "No anon grant for Admin/Editor workflow tables.",
+    "No write grants prepared or executed in AG38A.",
+    "No SQL grants executed in AG38A."
+  ],
+  "blocked_state": {
+    "controlled_apply_decision_checkpoint_created": true,
+    "supabase_explicit_grant_review_added": true,
+    "operator_approval_gate_created": true,
+    "controlled_apply_package_ready_to_plan": true,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_prepared": false,
+    "sql_grants_executed": false
+  }
+}

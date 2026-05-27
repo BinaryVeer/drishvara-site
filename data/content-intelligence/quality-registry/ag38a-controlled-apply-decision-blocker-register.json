@@ -1,0 +1,40 @@
+{
+  "module_id": "AG38A",
+  "title": "Controlled Apply Decision Blocker Register",
+  "status": "controlled_apply_decision_blockers_preserved",
+  "blocked_items": [
+    "No real publish.",
+    "No queue-state write.",
+    "No audit-log write.",
+    "No rollback write.",
+    "No database write.",
+    "No public article mutation.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime enablement.",
+    "No service-role key exposure.",
+    "No anon grant for Admin/Editor workflow tables.",
+    "No write grants prepared or executed in AG38A.",
+    "No SQL grants executed in AG38A."
+  ],
+  "blocked_state": {
+    "controlled_apply_decision_checkpoint_created": true,
+    "supabase_explicit_grant_review_added": true,
+    "operator_approval_gate_created": true,
+    "controlled_apply_package_ready_to_plan": true,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_prepared": false,
+    "sql_grants_executed": false
+  }
+}
