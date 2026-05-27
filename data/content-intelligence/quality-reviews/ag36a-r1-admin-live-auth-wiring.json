@@ -1,0 +1,59 @@
+{
+  "module_id": "AG36A-R1",
+  "title": "Admin Live Auth Wiring",
+  "status": "admin_live_auth_wiring_package_created_pending_manual_config_and_test",
+  "depends_on": [
+    "AG36A",
+    "AG35Z",
+    "AG35C"
+  ],
+  "generated_from": {
+    "ag36aReview": "data/content-intelligence/quality-reviews/ag36a-admin-login-test.json",
+    "ag36aPackage": "data/content-intelligence/backend-architecture/ag36a-admin-login-test-package.json",
+    "ag36aGuide": "data/content-intelligence/backend-architecture/ag36a-admin-login-manual-test-guide.json",
+    "ag36aChecklist": "data/content-intelligence/backend-architecture/ag36a-admin-login-test-checklist.json",
+    "ag35zClosure": "data/content-intelligence/backend-architecture/ag35z-backend-auth-activation-closure.json",
+    "ag35cRoleVerification": "data/content-intelligence/backend-architecture/ag35c-admin-editor-role-verification-record.json",
+    "adminLogin": "admin/login.html"
+  },
+  "package_file": "data/content-intelligence/backend-architecture/ag36a-r1-admin-live-auth-wiring-package.json",
+  "wiring_record_file": "data/content-intelligence/backend-architecture/ag36a-r1-admin-live-auth-wiring-record.json",
+  "local_config_guide_file": "data/content-intelligence/backend-architecture/ag36a-r1-local-auth-config-guide.json",
+  "non_secret_audit_file": "data/content-intelligence/backend-architecture/ag36a-r1-non-secret-wiring-audit-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag36a-r1-admin-live-auth-test-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag36a-r1-to-ag36a-manual-admin-login-confirmation-boundary.json",
+  "summary": {
+    "admin_live_auth_wiring_created": true,
+    "admin_login_html_patched": true,
+    "admin_live_auth_js_created": true,
+    "local_config_template_created": true,
+    "local_config_gitignored": true,
+    "ready_for_manual_admin_login_test_after_local_config": true,
+    "local_config_committed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_done": false,
+    "public_mutation_done": false
+  },
+  "blocked_state": {
+    "admin_live_auth_wiring_created": true,
+    "admin_login_html_patched": true,
+    "admin_live_auth_js_created": true,
+    "local_config_template_created": true,
+    "local_secret_config_gitignored": true,
+    "real_admin_login_test_performed_by_script": false,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false
+  }
+}

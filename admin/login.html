@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Drishvara Admin Login — Non-active Scaffold</title>
+  <title>Drishvara Admin Login — Controlled Live Auth Test</title>
   <meta name="robots" content="noindex,nofollow" />
   <style>
     :root {
@@ -133,14 +133,14 @@
     <section class="brand" aria-label="Drishvara Admin login context">
       <div>
         <div class="eyebrow">Drishvara Admin</div>
-        <h1>Admin Login UI Scaffold</h1>
-        <p>This page is a governed, non-active interface preview for the future Admin workspace. It does not authenticate, store credentials, create sessions, call APIs or connect to Supabase.</p>
-        <div class="notice">Non-active scaffold only. Login is not real.</div>
+        <h1>Admin Login</h1>
+        <p>This page is a governed Admin login test surface for controlled Supabase Auth verification. It uses only the browser-safe anon key from a local gitignored config file.</p>
+        <div class="notice" data-ag36a-status>Local Auth config pending. Login test not yet executed.</div>
       </div>
       <div class="meta">
         <span class="pill">AG30A</span>
-        <span>Backend/Auth activation: blocked</span>
-        <span>Supabase connection: blocked</span>
+        <span>Backend/Auth activation: controlled AG35 closure complete</span>
+        <span>Supabase browser client: local config required</span>
         <span>Public mutation: blocked</span>
       </div>
     </section>
@@ -148,28 +148,25 @@
     <section class="card" aria-label="Admin login preview form">
       <div class="eyebrow">Preview form</div>
       <h2>Admin access</h2>
-      <p>For future Admin review, assignment and final-clearance workflows after explicit activation approval.</p>
+      <p>For controlled Admin review, assignment and final-clearance workflows after AG35 backend/Auth activation closure.</p>
 
       <form id="admin-login-preview" autocomplete="off">
         <label for="admin-email">Admin email</label>
         <input id="admin-email" name="admin-email" type="email" placeholder="admin@example.com" aria-describedby="non-active-help" />
 
         <label for="admin-password">Password</label>
-        <input id="admin-password" name="admin-password" type="password" placeholder="Not active" aria-describedby="non-active-help" />
+        <input id="admin-password" name="admin-password" type="password" placeholder="Enter password only in browser" aria-describedby="non-active-help" />
 
-        <button type="submit">Preview only — login not active</button>
+        <button type="submit" data-ag36a-submit>Sign in as Admin</button><button type="button" data-ag36a-signout style="margin-top:10px;background:#64748b;">Sign out locally</button>
       </form>
 
-      <p id="non-active-help" class="small">This form blocks submission locally. No credential is processed, stored, validated or transmitted.</p>
+      <p id="non-active-help" class="small">This controlled test uses Supabase Auth in the browser. Do not record or share password, token, cookie, Supabase key or secret-bearing URL.</p>
       <p class="small"><strong>Governance:</strong> Admin remains final clearance authority. Editor will remain assigned-only and cannot publish.</p>
     </section>
   </main>
 
-  <script>
-    document.getElementById("admin-login-preview").addEventListener("submit", function (event) {
-      event.preventDefault();
-      alert("AG30A preview only: real Admin login is not active.");
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/js/drishvara-auth-local.js"></script>
+  <script src="../assets/js/ag36a-admin-live-auth.js"></script>
 </body>
 </html>

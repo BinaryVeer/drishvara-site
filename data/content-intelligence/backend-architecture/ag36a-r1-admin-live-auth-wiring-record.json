@@ -1,0 +1,39 @@
+{
+  "module_id": "AG36A-R1",
+  "title": "Admin Live Auth Wiring Record",
+  "status": "admin_live_auth_wiring_created_pending_local_config_and_manual_login_test",
+  "patched_files": [
+    "admin/login.html",
+    "assets/js/ag36a-admin-live-auth.js",
+    "assets/js/drishvara-auth-local.example.js",
+    ".gitignore"
+  ],
+  "live_auth_scope": {
+    "admin_login_page_wired_to_supabase_browser_client": true,
+    "admin_profile_role_verification_enabled": true,
+    "service_role_key_required": false,
+    "local_config_required": true,
+    "local_config_committed": false,
+    "public_mutation_enabled": false,
+    "deployment_enabled": false
+  },
+  "blocked_state": {
+    "admin_live_auth_wiring_created": true,
+    "admin_login_html_patched": true,
+    "admin_live_auth_js_created": true,
+    "local_config_template_created": true,
+    "local_secret_config_gitignored": true,
+    "real_admin_login_test_performed_by_script": false,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false
+  }
+}
