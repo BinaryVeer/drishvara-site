@@ -1,0 +1,28 @@
+{
+  "module_id": "AG36A",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag36a_confirmation_and_ag36b",
+  "future_consumption": {
+    "AG36A_manual_confirmation": "After Admin login is manually tested, record confirmation without credentials, tokens, cookies, keys or secret-bearing URLs.",
+    "AG36B": "AG36B should test Editor login and Editor workspace access after AG36A Admin login confirmation.",
+    "AG36C": "AG36C should test role restriction: Editor cannot perform Admin actions, publish, archive or access global queue.",
+    "AG36D": "AG36D should audit login security, session handling and RLS behaviour.",
+    "AG36Z": "AG36Z should close login live tests before AG37 dynamic publish dry-run."
+  },
+  "blocked_state": {
+    "admin_login_test_package_created": true,
+    "admin_manual_login_test_guide_created": true,
+    "admin_login_test_checklist_created": true,
+    "admin_login_test_performed_by_script": false,
+    "admin_password_recorded": false,
+    "auth_token_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false
+  }
+}

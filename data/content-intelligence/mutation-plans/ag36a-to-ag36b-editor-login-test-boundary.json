@@ -1,0 +1,26 @@
+{
+  "module_id": "AG36A",
+  "title": "AG36A to AG36B Editor Login Test Boundary",
+  "status": "ag36b_boundary_created_pending_manual_admin_login_confirmation",
+  "next_stage_id": "AG36B",
+  "next_stage_title": "Editor Login Test",
+  "allowed_scope": [
+    "Consume AG36A Admin login test package.",
+    "Proceed after Admin login manual confirmation.",
+    "Test Editor login and workspace route without recording credentials/tokens/secrets.",
+    "Keep deployment, public mutation and dynamic publish runtime blocked."
+  ],
+  "blocked_scope": [
+    "No password in repo/chat.",
+    "No Auth token in repo/chat.",
+    "No cookie/session value in repo/chat.",
+    "No Supabase anon key in repo/chat.",
+    "No service-role key exposure.",
+    "No env var recording.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime.",
+    "No publish handler enablement."
+  ],
+  "manual_admin_login_confirmation_required": true
+}

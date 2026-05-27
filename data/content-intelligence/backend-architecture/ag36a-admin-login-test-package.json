@@ -1,0 +1,62 @@
+{
+  "module_id": "AG36A",
+  "title": "Admin Login Test Package",
+  "status": "admin_login_test_package_created_pending_manual_admin_login_result",
+  "purpose": "Create controlled Admin login test package after AG35 Backend/Auth activation closure, without recording credentials, tokens, Supabase keys, deployment actions, public mutation or dynamic publish runtime.",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "consumed_source_of_truth": [
+    "data/content-intelligence/quality-reviews/ag35z-backend-auth-activation-closure.json",
+    "data/content-intelligence/backend-architecture/ag35z-backend-auth-activation-closure.json",
+    "data/content-intelligence/backend-architecture/ag35z-activation-chain-register.json",
+    "data/content-intelligence/backend-architecture/ag35z-backend-auth-closure-register.json",
+    "data/content-intelligence/backend-architecture/ag35z-ag36-login-live-test-handoff-plan.json",
+    "data/content-intelligence/backend-architecture/ag35z-post-activation-blocker-carry-forward.json",
+    "data/content-intelligence/quality-registry/ag35z-ag36-admin-login-test-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag35z-to-ag36a-admin-login-test-boundary.json",
+    "data/content-intelligence/backend-architecture/ag35c-manual-auth-role-confirmation.json",
+    "data/content-intelligence/backend-architecture/ag35c-admin-editor-role-verification-record.json",
+    "data/content-intelligence/backend-architecture/ag35d-backend-activation-audit.json",
+    "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json"
+  ],
+  "selected_test_user": {
+    "admin_email": "dwivedi.vikash.vaibhav@gmail.com",
+    "expected_role": "admin",
+    "expected_is_active": true
+  },
+  "package_decision": {
+    "admin_login_test_package_created": true,
+    "manual_admin_login_test_required": true,
+    "proceed_to_manual_admin_login_test": true,
+    "admin_login_test_performed_by_script": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false
+  },
+  "manual_guide_file": "data/content-intelligence/backend-architecture/ag36a-admin-login-manual-test-guide.json",
+  "checklist_file": "data/content-intelligence/backend-architecture/ag36a-admin-login-test-checklist.json",
+  "non_secret_audit_file": "data/content-intelligence/backend-architecture/ag36a-non-secret-login-test-audit-register.json",
+  "future_consumption_plan_file": "data/content-intelligence/backend-architecture/ag36a-future-consumption-plan.json",
+  "blocked_state": {
+    "admin_login_test_package_created": true,
+    "admin_manual_login_test_guide_created": true,
+    "admin_login_test_checklist_created": true,
+    "admin_login_test_performed_by_script": false,
+    "admin_password_recorded": false,
+    "auth_token_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false
+  }
+}

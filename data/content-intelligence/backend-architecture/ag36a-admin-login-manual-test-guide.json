@@ -1,0 +1,40 @@
+{
+  "module_id": "AG36A",
+  "title": "Admin Login Manual Test Guide",
+  "status": "admin_login_manual_test_guide_created_pending_operator_test",
+  "admin_test_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "test_mode": "manual_operator_login_test_without_secret_recording",
+  "manual_steps": [
+    "Open the Admin login surface or protected Admin route available in the current app/runtime.",
+    "Use the Admin test email configured in Supabase Auth.",
+    "Enter credentials only in the app/Supabase login UI; do not paste credentials into chat, terminal, repo or files.",
+    "Confirm whether Admin login succeeds.",
+    "Confirm whether the Admin protected page/route is reachable.",
+    "Confirm no publish, deployment or public mutation action is triggered.",
+    "Share only the visible success/error status, not credentials, tokens, keys, cookies or URLs containing secrets."
+  ],
+  "expected_result": {
+    "admin_auth_user_exists": true,
+    "admin_profile_role": "admin",
+    "admin_is_active": true,
+    "protected_admin_surface_reachable_after_login": "to_be_confirmed_manually",
+    "credentials_recorded": false,
+    "tokens_recorded": false
+  },
+  "blocked_state": {
+    "admin_login_test_package_created": true,
+    "admin_manual_login_test_guide_created": true,
+    "admin_login_test_checklist_created": true,
+    "admin_login_test_performed_by_script": false,
+    "admin_password_recorded": false,
+    "auth_token_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_handler_enabled": false
+  }
+}
