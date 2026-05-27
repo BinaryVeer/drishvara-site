@@ -1,0 +1,43 @@
+{
+  "module_id": "AG36C-CONFIRM",
+  "title": "AG36C Confirmed to AG36D Login Security Audit Boundary",
+  "status": "ag36d_login_security_audit_boundary_confirmed",
+  "next_stage_id": "AG36D",
+  "next_stage_title": "Login Security Audit",
+  "allowed_scope": [
+    "Audit login security, session handling and route guard behaviour.",
+    "Confirm no passwords, tokens, cookies, Supabase keys or service-role keys are recorded.",
+    "Confirm deployment, public mutation and dynamic publish runtime remain blocked."
+  ],
+  "blocked_scope": [
+    "No password in repo/chat.",
+    "No token/cookie in repo/chat.",
+    "No Supabase key in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No publish action execution.",
+    "No Admin review bypass.",
+    "No dynamic publish runtime."
+  ],
+  "blocked_state": {
+    "role_restriction_test_confirmed": true,
+    "editor_admin_dashboard_blocked": true,
+    "admin_admin_dashboard_allowed": true,
+    "route_guard_operational": true,
+    "ready_for_ag36d_login_security_audit": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

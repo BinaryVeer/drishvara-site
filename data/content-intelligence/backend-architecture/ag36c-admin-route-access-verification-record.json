@@ -1,0 +1,33 @@
+{
+  "module_id": "AG36C-CONFIRM",
+  "title": "Admin Route Access Verification Record",
+  "status": "admin_allowed_to_access_admin_dashboard",
+  "operator_reported_result": "Admin can access Admin dashboard.",
+  "tested_user_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "tested_user_role": "admin",
+  "tested_route": "admin-dashboard.html",
+  "expected_result": "allowed",
+  "observed_result": "allowed",
+  "observed_surface": "Admin Review Queue",
+  "verification_passed": true,
+  "blocked_state": {
+    "role_restriction_test_confirmed": true,
+    "editor_admin_dashboard_blocked": true,
+    "admin_admin_dashboard_allowed": true,
+    "route_guard_operational": true,
+    "ready_for_ag36d_login_security_audit": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

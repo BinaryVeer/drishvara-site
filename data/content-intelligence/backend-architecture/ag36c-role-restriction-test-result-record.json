@@ -1,0 +1,45 @@
+{
+  "module_id": "AG36C-CONFIRM",
+  "title": "Role Restriction Test Result Record",
+  "status": "role_restriction_test_passed",
+  "test_results": [
+    {
+      "test_id": "editor_admin_dashboard_block",
+      "passed": true,
+      "expected": "Editor cannot access Admin dashboard.",
+      "observed": "Editor blocked from admin route."
+    },
+    {
+      "test_id": "admin_admin_dashboard_access",
+      "passed": true,
+      "expected": "Admin can access Admin dashboard.",
+      "observed": "Admin Review Queue opened."
+    }
+  ],
+  "all_role_restriction_checks_passed": true,
+  "result_contains_password": false,
+  "result_contains_token": false,
+  "result_contains_cookie": false,
+  "result_contains_supabase_key": false,
+  "result_contains_service_role_key": false,
+  "blocked_state": {
+    "role_restriction_test_confirmed": true,
+    "editor_admin_dashboard_blocked": true,
+    "admin_admin_dashboard_allowed": true,
+    "route_guard_operational": true,
+    "ready_for_ag36d_login_security_audit": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}
