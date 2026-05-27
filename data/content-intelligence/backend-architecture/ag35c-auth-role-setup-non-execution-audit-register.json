@@ -1,0 +1,62 @@
+{
+  "module_id": "AG35C",
+  "title": "Auth Role Setup Non-Execution Audit Register",
+  "status": "auth_role_setup_non_execution_audit_passed",
+  "checks": [
+    {
+      "check_id": "package_only",
+      "passed": true,
+      "evidence": "AG35C creates guide, manifest and role-mapping SQL package only."
+    },
+    {
+      "check_id": "no_passwords",
+      "passed": true,
+      "evidence": "No password is stored in SQL."
+    },
+    {
+      "check_id": "no_secret_values",
+      "passed": true,
+      "evidence": "No secret values are stored."
+    },
+    {
+      "check_id": "no_auth_user_created_by_script",
+      "passed": true,
+      "evidence": "No Auth users are created by local script."
+    },
+    {
+      "check_id": "no_sql_apply_by_script",
+      "passed": true,
+      "evidence": "Role mapping SQL is generated but not applied by script."
+    },
+    {
+      "check_id": "no_deployment_public_mutation",
+      "passed": true,
+      "evidence": "No deployment or public mutation occurs."
+    },
+    {
+      "check_id": "governance_preserved",
+      "passed": true,
+      "evidence": "Admin final authority and Editor assigned-only/no-publish governance are preserved."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "auth_role_setup_package_created": true,
+    "auth_user_creation_guide_created": true,
+    "role_mapping_manifest_created": true,
+    "role_mapping_sql_file_created": true,
+    "manual_role_mapping_guide_created": true,
+    "auth_users_created_by_script": false,
+    "passwords_created_by_script": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "supabase_connected_by_script": false,
+    "role_mapping_sql_applied_by_script": false,
+    "database_write_done_by_script": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}

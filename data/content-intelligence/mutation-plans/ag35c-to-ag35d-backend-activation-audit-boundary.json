@@ -1,0 +1,22 @@
+{
+  "module_id": "AG35C",
+  "title": "AG35C to AG35D Backend Activation Audit Boundary",
+  "status": "ag35d_boundary_created_pending_manual_auth_role_confirmation",
+  "next_stage_id": "AG35D",
+  "next_stage_title": "Backend Activation Audit",
+  "allowed_scope": [
+    "Consume AG35C Auth role setup package.",
+    "Confirm manual Auth user creation.",
+    "Confirm manual role-mapping SQL execution.",
+    "Audit backend activation status.",
+    "Keep deployment and public mutation blocked."
+  ],
+  "blocked_scope": [
+    "No password or secret in repo/chat.",
+    "No service-role exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime."
+  ],
+  "manual_confirmation_required_before_ag35d": true
+}

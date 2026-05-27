@@ -1,0 +1,40 @@
+{
+  "module_id": "AG35C",
+  "title": "Auth Role Setup Blocker Register",
+  "status": "auth_role_setup_package_created_manual_actions_pending",
+  "blocked_now_by_script": [
+    "No Auth user creation by script.",
+    "No password generation by script.",
+    "No credential storage.",
+    "No secret/env var storage.",
+    "No service-role key handling.",
+    "No Supabase connection by script.",
+    "No role-mapping SQL apply by script.",
+    "No deployment.",
+    "No public mutation."
+  ],
+  "allowed_operator_action_after_review": [
+    "Manually create/invite Auth users in Supabase Dashboard.",
+    "Manually run AG35C role-mapping SQL in Supabase SQL Editor.",
+    "Share only success/error output."
+  ],
+  "blocked_state": {
+    "auth_role_setup_package_created": true,
+    "auth_user_creation_guide_created": true,
+    "role_mapping_manifest_created": true,
+    "role_mapping_sql_file_created": true,
+    "manual_role_mapping_guide_created": true,
+    "auth_users_created_by_script": false,
+    "passwords_created_by_script": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "supabase_connected_by_script": false,
+    "role_mapping_sql_applied_by_script": false,
+    "database_write_done_by_script": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "module_id": "AG35C",
+  "title": "Backend Activation Audit Readiness Record",
+  "status": "ready_for_ag35d_after_manual_auth_role_confirmation",
+  "ready_for_ag35d_after_manual_confirmation": true,
+  "next_stage_id": "AG35D",
+  "next_stage_title": "Backend Activation Audit",
+  "allowed_ag35d_mode": "backend_activation_audit_after_manual_auth_role_confirmation",
+  "auth_role_setup_package_created": true,
+  "manual_auth_user_creation_required": true,
+  "manual_role_mapping_sql_required": true,
+  "public_mutation_allowed_next": false,
+  "deployment_allowed_next": false,
+  "blocked_state": {
+    "auth_role_setup_package_created": true,
+    "auth_user_creation_guide_created": true,
+    "role_mapping_manifest_created": true,
+    "role_mapping_sql_file_created": true,
+    "manual_role_mapping_guide_created": true,
+    "auth_users_created_by_script": false,
+    "passwords_created_by_script": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "supabase_connected_by_script": false,
+    "role_mapping_sql_applied_by_script": false,
+    "database_write_done_by_script": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}

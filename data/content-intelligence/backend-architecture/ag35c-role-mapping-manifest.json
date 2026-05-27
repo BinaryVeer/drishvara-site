@@ -1,0 +1,46 @@
+{
+  "module_id": "AG35C",
+  "title": "Role Mapping Manifest",
+  "status": "role_mapping_manifest_created_pending_manual_apply",
+  "sql_file": "supabase/migrations/20260527_ag35c_auth_role_mapping.sql",
+  "planned_role_mappings": [
+    {
+      "email": "dwivedi.vikash.vaibhav@gmail.com",
+      "role": "admin",
+      "intended_authority": "Final approval, return, archive and publish approval authority"
+    },
+    {
+      "email": "vikash4world@gmail.com",
+      "role": "editor",
+      "intended_authority": "Assigned article editing and submit-back-to-Admin only"
+    }
+  ],
+  "governance_rules": {
+    "admin_final_clearance_authority": true,
+    "editor_assigned_only": true,
+    "editor_cannot_publish": true,
+    "editor_cannot_archive": true,
+    "public_cannot_access_private_queue_or_audit": true
+  },
+  "role_mapping_sql_created": true,
+  "role_mapping_sql_applied_by_script": false,
+  "blocked_state": {
+    "auth_role_setup_package_created": true,
+    "auth_user_creation_guide_created": true,
+    "role_mapping_manifest_created": true,
+    "role_mapping_sql_file_created": true,
+    "manual_role_mapping_guide_created": true,
+    "auth_users_created_by_script": false,
+    "passwords_created_by_script": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "supabase_connected_by_script": false,
+    "role_mapping_sql_applied_by_script": false,
+    "database_write_done_by_script": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}

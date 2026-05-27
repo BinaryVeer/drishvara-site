@@ -1,0 +1,30 @@
+{
+  "module_id": "AG35C",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag35d",
+  "future_consumption": {
+    "AG35C_manual_confirmation": "After manual Auth user creation and role-mapping SQL execution, record confirmation before AG35D if needed.",
+    "AG35D": "AG35D should audit backend activation including schema apply, Auth users and profile-role mapping.",
+    "AG35Z": "AG35Z should close Backend/Auth activation before AG36 login live tests.",
+    "AG36": "AG36 should test Admin login, Editor login and role restrictions."
+  },
+  "blocked_state": {
+    "auth_role_setup_package_created": true,
+    "auth_user_creation_guide_created": true,
+    "role_mapping_manifest_created": true,
+    "role_mapping_sql_file_created": true,
+    "manual_role_mapping_guide_created": true,
+    "auth_users_created_by_script": false,
+    "passwords_created_by_script": false,
+    "credentials_recorded": false,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "supabase_connected_by_script": false,
+    "role_mapping_sql_applied_by_script": false,
+    "database_write_done_by_script": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}
