@@ -1,0 +1,61 @@
+{
+  "module_id": "AG36Z",
+  "title": "Login Live Test Chain Register",
+  "status": "ag36_login_live_test_chain_registered_for_closure",
+  "closed_chain": [
+    {
+      "stage_id": "AG36A",
+      "title": "Admin Login Test",
+      "status": "admin_login_confirmed_ready_for_editor_login_test",
+      "result": "Admin login successful; Admin protected page opened.",
+      "file": "data/content-intelligence/backend-architecture/ag36a-confirm-admin-login-success.json"
+    },
+    {
+      "stage_id": "AG36B",
+      "title": "Editor Login Test",
+      "status": "editor_login_confirmed_ready_for_role_restriction_test",
+      "result": "Editor login successful; Editor protected dashboard opened.",
+      "file": "data/content-intelligence/backend-architecture/ag36b-confirm-editor-login-success.json"
+    },
+    {
+      "stage_id": "AG36C",
+      "title": "Role Restriction Test",
+      "status": "role_restriction_test_confirmed_ready_for_login_security_audit",
+      "result": "Editor blocked from Admin dashboard; Admin allowed to Admin dashboard.",
+      "file": "data/content-intelligence/backend-architecture/ag36c-confirm-role-restriction-test.json"
+    },
+    {
+      "stage_id": "AG36D",
+      "title": "Login Security Audit",
+      "status": "login_security_audit_created_ready_for_ag36z",
+      "result": "Session, route guard, secret safety and runtime blocker audits passed.",
+      "file": "data/content-intelligence/backend-architecture/ag36d-login-security-audit.json"
+    }
+  ],
+  "chain_length": 4,
+  "closed_successfully": true,
+  "blocked_state": {
+    "login_live_test_closure_created": true,
+    "ag36_login_chain_closed": true,
+    "admin_login_usable": true,
+    "editor_login_usable": true,
+    "role_restriction_passed": true,
+    "login_security_audit_passed": true,
+    "ready_for_ag37a_dynamic_publish_dry_run": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

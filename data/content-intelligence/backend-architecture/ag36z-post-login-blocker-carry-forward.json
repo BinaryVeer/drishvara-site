@@ -1,0 +1,43 @@
+{
+  "module_id": "AG36Z",
+  "title": "Post Login Blocker Carry Forward",
+  "status": "post_login_blockers_carried_forward_to_ag37",
+  "blocker_meaning": "Admin/Editor login is usable in controlled mode, but dynamic publish, public mutation, deployment and runtime article-state mutation remain blocked until governed AG37/AG38 stages.",
+  "blocked_items": {
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false
+  },
+  "blocked_state": {
+    "login_live_test_closure_created": true,
+    "ag36_login_chain_closed": true,
+    "admin_login_usable": true,
+    "editor_login_usable": true,
+    "role_restriction_passed": true,
+    "login_security_audit_passed": true,
+    "ready_for_ag37a_dynamic_publish_dry_run": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

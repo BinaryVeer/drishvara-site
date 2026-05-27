@@ -1,0 +1,50 @@
+{
+  "module_id": "AG36Z",
+  "title": "AG36Z to AG37A Dynamic Publish Dry-run Boundary",
+  "status": "ag37a_dynamic_publish_dry_run_boundary_created",
+  "next_stage_id": "AG37A",
+  "next_stage_title": "Dynamic Publish Dry-run",
+  "allowed_scope": [
+    "Consume AG36Z login live test closure.",
+    "Simulate Admin publish action against a test/non-public article.",
+    "Keep action dry-run only.",
+    "Record intended state changes and audit-log shape.",
+    "Do not mutate public article state.",
+    "Do not deploy.",
+    "Do not expose a public article dynamically."
+  ],
+  "blocked_scope": [
+    "No password in repo/chat.",
+    "No token/cookie in repo/chat.",
+    "No Supabase key in repo/chat.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime yet.",
+    "No publish/archive/return action execution yet."
+  ],
+  "blocked_state": {
+    "login_live_test_closure_created": true,
+    "ag36_login_chain_closed": true,
+    "admin_login_usable": true,
+    "editor_login_usable": true,
+    "role_restriction_passed": true,
+    "login_security_audit_passed": true,
+    "ready_for_ag37a_dynamic_publish_dry_run": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}

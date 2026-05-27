@@ -1,0 +1,37 @@
+{
+  "module_id": "AG36Z",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag37_and_later",
+  "future_consumption": {
+    "AG37A": "AG37A should simulate Admin publish action against a test/non-public article only in dry-run mode.",
+    "AG37B": "AG37B should verify queue state changes in dry-run mode without public exposure.",
+    "AG37C": "AG37C should verify audit log shape and rollback record without writing public output.",
+    "AG37D": "AG37D should audit dry-run behaviour and confirm no unintended public exposure.",
+    "AG37Z": "AG37Z should close dynamic publish dry-run readiness before any first controlled dynamic apply.",
+    "AG38": "AG38 should not begin until AG37 is closed and an explicit final approval gate is passed."
+  },
+  "blocked_state": {
+    "login_live_test_closure_created": true,
+    "ag36_login_chain_closed": true,
+    "admin_login_usable": true,
+    "editor_login_usable": true,
+    "role_restriction_passed": true,
+    "login_security_audit_passed": true,
+    "ready_for_ag37a_dynamic_publish_dry_run": true,
+    "password_recorded": false,
+    "auth_token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_url_recorded": false,
+    "supabase_anon_key_recorded": false,
+    "supabase_service_role_key_recorded": false,
+    "supabase_service_role_key_exposed": false,
+    "env_vars_recorded": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false,
+    "archive_action_executed": false,
+    "return_action_executed": false,
+    "admin_action_bypassed": false
+  }
+}
