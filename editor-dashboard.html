@@ -63,7 +63,7 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
 @media(max-width:900px){.grid.two,.grid.three,.split{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
-<body data-drishvara-admin-ui="ag14b-scaffold" data-page-type="editor-dashboard" data-auth-mode="scaffold-only" data-real-auth="not-active">
+<body data-required-role="editor" data-drishvara-admin-ui="ag14b-scaffold" data-page-type="editor-dashboard" data-auth-mode="scaffold-only" data-real-auth="not-active">
   <main class="shell">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Drishvara home">
@@ -115,5 +115,13 @@ button[disabled],.btn.disabled{opacity:.55;cursor:not-allowed}
 
   </main>
   
+
+  <div data-route-guard-status style="position:fixed;bottom:14px;right:14px;z-index:9999;padding:10px 14px;border-radius:999px;background:#0f172a;color:#facc15;font:700 12px system-ui;">
+    Checking editor route access…
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/drishvara-auth-local.js"></script>
+  <script src="assets/js/ag36c-route-guard.js"></script>
 </body>
 </html>

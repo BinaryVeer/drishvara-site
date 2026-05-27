@@ -1,0 +1,30 @@
+{
+  "module_id": "AG36C-R1",
+  "title": "Admin Editor Route Guard Record",
+  "status": "admin_editor_route_guard_wired",
+  "guard_file": "assets/js/ag36c-route-guard.js",
+  "local_config_file": "assets/js/drishvara-auth-local.js",
+  "local_config_committed": false,
+  "service_role_key_required": false,
+  "manual_tests_required": [
+    "While logged in as Editor, admin-dashboard.html should be blocked.",
+    "While logged in as Admin, admin-dashboard.html should open.",
+    "While logged in as Admin, editor-dashboard.html should be blocked unless Admin is also mapped as editor.",
+    "While logged in as Editor, editor-dashboard.html should open."
+  ],
+  "blocked_state": {
+    "route_guard_wiring_created": true,
+    "admin_dashboard_guarded": true,
+    "editor_dashboard_guarded": true,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_created": false,
+    "publish_action_executed": false
+  }
+}
