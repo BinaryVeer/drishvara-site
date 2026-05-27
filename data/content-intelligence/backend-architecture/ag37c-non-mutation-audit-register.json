@@ -1,0 +1,65 @@
+{
+  "module_id": "AG37C",
+  "title": "Audit Log Non-mutation Audit Register",
+  "status": "audit_log_non_mutation_audit_passed",
+  "checks": [
+    {
+      "check_id": "no_audit_log_write",
+      "passed": true,
+      "evidence": "Audit event shape is modelled only in JSON."
+    },
+    {
+      "check_id": "no_rollback_write",
+      "passed": true,
+      "evidence": "Rollback reference shape is modelled only in JSON."
+    },
+    {
+      "check_id": "no_hash_persistence",
+      "passed": true,
+      "evidence": "Before/after hashes are placeholders and not persisted."
+    },
+    {
+      "check_id": "no_database_write",
+      "passed": true,
+      "evidence": "No Supabase/API/database write command is generated."
+    },
+    {
+      "check_id": "no_public_article_mutation",
+      "passed": true,
+      "evidence": "Public article mutation remains blocked."
+    },
+    {
+      "check_id": "no_service_role_key",
+      "passed": true,
+      "evidence": "No service-role key is used or recorded."
+    },
+    {
+      "check_id": "no_deployment",
+      "passed": true,
+      "evidence": "No deployment command is generated."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "audit_log_dry_run_created": true,
+    "audit_event_shape_created": true,
+    "rollback_reference_shape_created": true,
+    "before_after_hash_preview_created": true,
+    "dry_run_behaviour_audit_ready": true,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

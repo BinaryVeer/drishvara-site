@@ -1,0 +1,45 @@
+{
+  "module_id": "AG37C",
+  "title": "Before/After Hash Preview Record",
+  "status": "before_after_hash_preview_created_without_write",
+  "hash_preview": {
+    "before_state_fingerprint_input": {
+      "article_id": "dry_run_seed_candidate_001",
+      "status": "ready_for_admin_review",
+      "queue": "admin_review_queue",
+      "public_visibility": false
+    },
+    "after_state_fingerprint_input": {
+      "article_id": "dry_run_seed_candidate_001",
+      "status": "published",
+      "queue": "published_or_removed_from_pending_queue",
+      "public_visibility": "simulated_only_not_written"
+    },
+    "before_hash_preview": "dry_run_before_hash_placeholder_not_persisted",
+    "after_hash_preview": "dry_run_after_hash_placeholder_not_persisted",
+    "hash_persisted": false
+  },
+  "dry_run_only": true,
+  "blocked_state": {
+    "audit_log_dry_run_created": true,
+    "audit_event_shape_created": true,
+    "rollback_reference_shape_created": true,
+    "before_after_hash_preview_created": true,
+    "dry_run_behaviour_audit_ready": true,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

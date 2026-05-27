@@ -1,0 +1,40 @@
+{
+  "module_id": "AG37C",
+  "title": "Rollback Reference Shape Dry-run",
+  "status": "rollback_reference_shape_created_without_write",
+  "rollback_shape": {
+    "rollback_ref_id": "dry_run_rollback_ref_001",
+    "linked_audit_event_id": "dry_run_audit_event_001",
+    "article_id": "dry_run_seed_candidate_001",
+    "article_slug": "enhancing-public-healthcare-delivery-digital-innovation",
+    "previous_status": "ready_for_admin_review",
+    "previous_queue": "admin_review_queue",
+    "previous_public_visibility": false,
+    "restore_action": "restore_to_admin_review_queue",
+    "dry_run_only": true
+  },
+  "actual_rollback_ref_written": false,
+  "dry_run_only": true,
+  "blocked_state": {
+    "audit_log_dry_run_created": true,
+    "audit_event_shape_created": true,
+    "rollback_reference_shape_created": true,
+    "before_after_hash_preview_created": true,
+    "dry_run_behaviour_audit_ready": true,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

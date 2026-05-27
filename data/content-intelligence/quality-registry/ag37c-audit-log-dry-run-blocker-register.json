@@ -1,0 +1,40 @@
+{
+  "module_id": "AG37C",
+  "title": "Audit Log Dry-run Blocker Register",
+  "status": "audit_log_dry_run_blockers_preserved",
+  "blocked_items": [
+    "No audit log write.",
+    "No rollback write.",
+    "No hash persistence.",
+    "No actual queue state change.",
+    "No real publish.",
+    "No public article mutation.",
+    "No database write.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime enablement."
+  ],
+  "blocked_state": {
+    "audit_log_dry_run_created": true,
+    "audit_event_shape_created": true,
+    "rollback_reference_shape_created": true,
+    "before_after_hash_preview_created": true,
+    "dry_run_behaviour_audit_ready": true,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}
