@@ -1,0 +1,52 @@
+{
+  "module_id": "AG38D",
+  "title": "Explicit Grant Security Audit Register",
+  "status": "explicit_grant_security_audit_passed",
+  "checks": [
+    {
+      "check_id": "authenticated_read_grant_plan_present",
+      "passed": true
+    },
+    {
+      "check_id": "anon_grants_absent",
+      "passed": true
+    },
+    {
+      "check_id": "write_grants_absent",
+      "passed": true
+    },
+    {
+      "check_id": "sql_not_executed",
+      "passed": true
+    },
+    {
+      "check_id": "rls_primary_boundary_preserved",
+      "passed": true
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "controlled_apply_audit_created": true,
+    "preflight_chain_audit_passed": true,
+    "explicit_grant_security_audit_passed": true,
+    "operator_approval_gate_audit_passed": true,
+    "no_mutation_audit_passed": true,
+    "controlled_apply_closure_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}

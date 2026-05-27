@@ -1,0 +1,51 @@
+{
+  "module_id": "AG38D",
+  "title": "Preflight Chain Audit Register",
+  "status": "preflight_chain_audit_passed",
+  "audited_chain": [
+    {
+      "stage_id": "AG38A",
+      "title": "Controlled Apply Decision Checkpoint",
+      "status": "controlled_apply_decision_checkpoint_created_ready_for_ag38b_package_planning",
+      "result": "Decision checkpoint created; no real apply approved."
+    },
+    {
+      "stage_id": "AG38B",
+      "title": "Controlled Apply Package Planning",
+      "status": "controlled_apply_package_planning_created_ready_for_ag38c_preflight",
+      "result": "Package planning completed; no SQL or mutation executed."
+    },
+    {
+      "stage_id": "AG38C",
+      "title": "Controlled Apply Preflight",
+      "status": "controlled_apply_preflight_created_ready_for_ag38d_audit",
+      "result": "Target, grant, audit/rollback and approval preflights passed."
+    }
+  ],
+  "chain_length": 3,
+  "all_chain_items_passed": true,
+  "blocked_state": {
+    "controlled_apply_audit_created": true,
+    "preflight_chain_audit_passed": true,
+    "explicit_grant_security_audit_passed": true,
+    "operator_approval_gate_audit_passed": true,
+    "no_mutation_audit_passed": true,
+    "controlled_apply_closure_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}

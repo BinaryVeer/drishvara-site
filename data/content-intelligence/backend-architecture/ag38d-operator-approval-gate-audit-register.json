@@ -1,0 +1,52 @@
+{
+  "module_id": "AG38D",
+  "title": "Operator Approval Gate Audit Register",
+  "status": "operator_approval_gate_audit_passed",
+  "checks": [
+    {
+      "check_id": "no_explicit_operator_approval_recorded",
+      "passed": true
+    },
+    {
+      "check_id": "real_apply_not_allowed",
+      "passed": true
+    },
+    {
+      "check_id": "public_mutation_not_allowed",
+      "passed": true
+    },
+    {
+      "check_id": "database_write_not_allowed",
+      "passed": true
+    },
+    {
+      "check_id": "deployment_not_allowed",
+      "passed": true
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "controlled_apply_audit_created": true,
+    "preflight_chain_audit_passed": true,
+    "explicit_grant_security_audit_passed": true,
+    "operator_approval_gate_audit_passed": true,
+    "no_mutation_audit_passed": true,
+    "controlled_apply_closure_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}
