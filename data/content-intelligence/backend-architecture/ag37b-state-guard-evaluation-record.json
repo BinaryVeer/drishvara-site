@@ -1,0 +1,59 @@
+{
+  "module_id": "AG37B",
+  "title": "State Guard Evaluation Record",
+  "status": "state_guard_evaluation_passed_for_dry_run",
+  "guard_checks": [
+    {
+      "check_id": "source_state_allowed",
+      "expected": "ready_for_admin_review",
+      "simulated_value": "ready_for_admin_review",
+      "passed": true
+    },
+    {
+      "check_id": "target_state_allowed",
+      "expected": "published",
+      "simulated_value": "published",
+      "passed": true
+    },
+    {
+      "check_id": "admin_actor_required",
+      "expected": "admin",
+      "simulated_value": "admin",
+      "passed": true
+    },
+    {
+      "check_id": "editor_cannot_publish_preserved",
+      "expected": true,
+      "simulated_value": true,
+      "passed": true
+    },
+    {
+      "check_id": "no_direct_public_write",
+      "expected": true,
+      "simulated_value": true,
+      "passed": true
+    }
+  ],
+  "all_state_guard_checks_passed": true,
+  "blocked_state": {
+    "queue_state_dry_run_created": true,
+    "queue_transition_simulated": true,
+    "before_after_model_created": true,
+    "audit_log_dry_run_ready": true,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

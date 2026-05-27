@@ -1,0 +1,56 @@
+{
+  "module_id": "AG37B",
+  "title": "Queue State Before/After Model",
+  "status": "queue_state_before_after_model_created",
+  "candidate": {
+    "article_id": "dry_run_seed_candidate_001",
+    "slug": "enhancing-public-healthcare-delivery-digital-innovation",
+    "category": "policy",
+    "title": "Enhancing Public Healthcare Delivery through Digital Innovation",
+    "source_status": "ready_for_admin_review",
+    "target_status": "published",
+    "public_visibility_before": false,
+    "public_visibility_after": "simulated_only_not_written",
+    "queue_membership_before": "admin_review_queue",
+    "queue_membership_after": "removed_from_admin_review_queue_simulated_only"
+  },
+  "before_state": {
+    "article_status": "ready_for_admin_review",
+    "queue_bucket": "admin_review_queue",
+    "public_visibility": false,
+    "publish_action_available_to_admin": true,
+    "archive_action_available_to_admin": true,
+    "return_action_available_to_admin": true
+  },
+  "simulated_after_state": {
+    "article_status": "published",
+    "queue_bucket": "published_queue_or_public_surface_pending_apply",
+    "public_visibility": "true_if_real_publish_later_approved",
+    "publish_action_available_to_admin": false,
+    "archive_action_available_to_admin": false,
+    "return_action_available_to_admin": false
+  },
+  "actual_after_state_written": null,
+  "dry_run_only": true,
+  "blocked_state": {
+    "queue_state_dry_run_created": true,
+    "queue_transition_simulated": true,
+    "before_after_model_created": true,
+    "audit_log_dry_run_ready": true,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

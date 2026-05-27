@@ -1,0 +1,43 @@
+{
+  "module_id": "AG37B",
+  "title": "Queue Transition Dry-run Simulation",
+  "status": "queue_transition_simulated_without_write",
+  "transition": {
+    "from_status": "ready_for_admin_review",
+    "to_status": "published",
+    "from_queue": "admin_review_queue",
+    "to_queue": "published_or_removed_from_pending_queue",
+    "actor_role": "admin",
+    "action": "publish",
+    "transition_type": "dry_run_only"
+  },
+  "simulated_effects": [
+    "Candidate leaves Admin Review Queue.",
+    "Candidate obtains published status.",
+    "Candidate would become eligible for public surface only after real controlled apply.",
+    "Admin action buttons would become unavailable after publish."
+  ],
+  "actual_effects_executed": [],
+  "dry_run_only": true,
+  "blocked_state": {
+    "queue_state_dry_run_created": true,
+    "queue_transition_simulated": true,
+    "before_after_model_created": true,
+    "audit_log_dry_run_ready": true,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "module_id": "AG37B",
+  "title": "Queue State Dry-run Blocker Register",
+  "status": "queue_state_dry_run_blockers_preserved",
+  "blocked_items": [
+    "No actual queue state change.",
+    "No real publish.",
+    "No public article mutation.",
+    "No database write.",
+    "No audit log write.",
+    "No rollback write.",
+    "No service-role key exposure.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime enablement."
+  ],
+  "blocked_state": {
+    "queue_state_dry_run_created": true,
+    "queue_transition_simulated": true,
+    "before_after_model_created": true,
+    "audit_log_dry_run_ready": true,
+    "actual_queue_state_changed": false,
+    "real_publish_executed": false,
+    "public_article_mutated": false,
+    "database_write_done": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "password_recorded": false,
+    "token_recorded": false,
+    "cookie_recorded": false,
+    "supabase_key_recorded": false
+  }
+}
