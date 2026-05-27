@@ -1,0 +1,23 @@
+{
+  "module_id": "AG35B",
+  "title": "AG35B Confirmed to AG35C Auth Role Setup Boundary",
+  "status": "ag35c_boundary_confirmed_controlled_auth_role_setup",
+  "next_stage_id": "AG35C",
+  "next_stage_title": "Auth Role Setup",
+  "allowed_scope": [
+    "Consume AG35B manual schema apply confirmation.",
+    "Create controlled Auth role setup plan.",
+    "Prepare Admin and Editor profile-role mapping.",
+    "Keep secrets out of repo and chat.",
+    "Keep deployment and public mutation blocked."
+  ],
+  "blocked_scope": [
+    "No service-role key in repo or chat.",
+    "No password in repo or chat.",
+    "No deployment.",
+    "No public mutation.",
+    "No dynamic publish runtime."
+  ],
+  "manual_schema_apply_confirmed": true,
+  "controlled_activation_selected": true
+}

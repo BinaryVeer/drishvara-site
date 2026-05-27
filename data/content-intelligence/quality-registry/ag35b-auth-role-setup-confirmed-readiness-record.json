@@ -1,0 +1,30 @@
+{
+  "module_id": "AG35B",
+  "title": "Auth Role Setup Confirmed Readiness Record",
+  "status": "ready_for_ag35c_auth_role_setup_confirmed_after_manual_schema_apply",
+  "ready_for_ag35c": true,
+  "next_stage_id": "AG35C",
+  "next_stage_title": "Auth Role Setup",
+  "allowed_ag35c_mode": "controlled_auth_role_setup",
+  "manual_schema_apply_confirmed": true,
+  "manual_rls_apply_confirmed": true,
+  "secrets_required_in_chat_or_repo": false,
+  "auth_user_creation_allowed_next_under_controlled_stage": true,
+  "public_mutation_allowed_next": false,
+  "deployment_allowed_next": false,
+  "blocked_state": {
+    "manual_schema_apply_confirmation_created": true,
+    "supabase_sql_editor_result_recorded": true,
+    "schema_apply_confirmed_by_operator": true,
+    "rls_apply_confirmed_by_operator": true,
+    "ready_for_ag35c_auth_role_setup": true,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "auth_user_created_by_repo": false,
+    "credential_created_by_repo": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}

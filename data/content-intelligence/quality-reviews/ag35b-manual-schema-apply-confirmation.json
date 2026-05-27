@@ -1,0 +1,54 @@
+{
+  "module_id": "AG35B",
+  "title": "Manual Schema Apply Confirmation",
+  "status": "manual_schema_apply_confirmed_ready_for_ag35c",
+  "depends_on": [
+    "AG35B",
+    "AG35A",
+    "AG34Z"
+  ],
+  "generated_from": {
+    "ag35bReview": "data/content-intelligence/quality-reviews/ag35b-supabase-schema-apply.json",
+    "ag35bPackage": "data/content-intelligence/backend-architecture/ag35b-supabase-schema-apply-package.json",
+    "ag35bSchemaManifest": "data/content-intelligence/backend-architecture/ag35b-schema-manifest.json",
+    "ag35bRlsManifest": "data/content-intelligence/backend-architecture/ag35b-rls-manifest.json",
+    "ag35bManualGuide": "data/content-intelligence/backend-architecture/ag35b-manual-supabase-apply-guide.json",
+    "ag35bReadiness": "data/content-intelligence/quality-registry/ag35b-auth-role-setup-readiness-record.json",
+    "ag35bBoundary": "data/content-intelligence/mutation-plans/ag35b-to-ag35c-auth-role-setup-boundary.json",
+    "ag35aApproval": "data/content-intelligence/backend-architecture/ag35a-explicit-activation-approval.json",
+    "ag34zClosure": "data/content-intelligence/backend-architecture/ag34z-backend-activation-readiness-closure.json",
+    "ag26zRoleGovernance": "data/content-intelligence/admin-editor/ag26z-role-governance-closure-register.json",
+    "sqlFile": "supabase/migrations/20260527_ag35b_drishvara_controlled_schema.sql"
+  },
+  "confirmation_file": "data/content-intelligence/backend-architecture/ag35b-manual-schema-apply-confirmation.json",
+  "supabase_result_record_file": "data/content-intelligence/backend-architecture/ag35b-manual-supabase-result-record.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag35b-auth-role-setup-confirmed-readiness-record.json",
+  "next_boundary_file": "data/content-intelligence/mutation-plans/ag35b-confirmed-to-ag35c-auth-role-setup-boundary.json",
+  "summary": {
+    "manual_schema_apply_confirmed": true,
+    "manual_rls_apply_confirmed": true,
+    "supabase_sql_editor_result_success": true,
+    "ready_for_ag35c": true,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "deployment_done": false,
+    "public_mutation_done": false
+  },
+  "blocked_state": {
+    "manual_schema_apply_confirmation_created": true,
+    "supabase_sql_editor_result_recorded": true,
+    "schema_apply_confirmed_by_operator": true,
+    "rls_apply_confirmed_by_operator": true,
+    "ready_for_ag35c_auth_role_setup": true,
+    "secrets_recorded": false,
+    "env_vars_recorded": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "auth_user_created_by_repo": false,
+    "credential_created_by_repo": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false
+  }
+}
