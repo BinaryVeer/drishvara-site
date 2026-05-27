@@ -1,0 +1,71 @@
+{
+  "module_id": "AG38B",
+  "title": "No-execution Audit Register",
+  "status": "no_execution_audit_passed_for_ag38b",
+  "checks": [
+    {
+      "check_id": "no_real_publish",
+      "passed": true
+    },
+    {
+      "check_id": "no_queue_state_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_audit_log_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_rollback_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_database_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_public_article_mutation",
+      "passed": true
+    },
+    {
+      "check_id": "no_deployment",
+      "passed": true
+    },
+    {
+      "check_id": "no_sql_grant_execution",
+      "passed": true
+    },
+    {
+      "check_id": "no_anon_grant",
+      "passed": true
+    },
+    {
+      "check_id": "no_service_role_key",
+      "passed": true
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "controlled_apply_package_planning_created": true,
+    "test_non_public_target_plan_created": true,
+    "explicit_grant_plan_created": true,
+    "audit_rollback_plan_created": true,
+    "controlled_apply_preflight_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}

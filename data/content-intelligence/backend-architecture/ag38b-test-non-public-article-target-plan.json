@@ -1,0 +1,45 @@
+{
+  "module_id": "AG38B",
+  "title": "Test / Non-public Article Target Plan",
+  "status": "test_non_public_article_target_plan_created",
+  "candidate_scope": {
+    "target_mode": "test_or_non_public_article_only",
+    "candidate_slug": "enhancing-public-healthcare-delivery-digital-innovation",
+    "candidate_source_status": "ready_for_admin_review",
+    "intended_transition_if_later_approved": "ready_for_admin_review_to_published",
+    "public_surface_exposure_allowed_in_ag38b": false,
+    "real_publish_allowed_in_ag38b": false
+  },
+  "mandatory_preconditions_before_any_later_apply": [
+    "Confirm exact test/non-public article.",
+    "Confirm Admin session and role.",
+    "Confirm Editor cannot publish.",
+    "Confirm rollback path.",
+    "Confirm audit-log write path.",
+    "Confirm explicit authenticated-only grants where required.",
+    "Record explicit operator approval."
+  ],
+  "blocked_state": {
+    "controlled_apply_package_planning_created": true,
+    "test_non_public_target_plan_created": true,
+    "explicit_grant_plan_created": true,
+    "audit_rollback_plan_created": true,
+    "controlled_apply_preflight_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}
