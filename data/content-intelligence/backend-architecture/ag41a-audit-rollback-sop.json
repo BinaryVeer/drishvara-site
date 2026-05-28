@@ -1,0 +1,50 @@
+{
+  "module_id": "AG41A",
+  "title": "Audit and Rollback SOP",
+  "status": "audit_rollback_sop_created",
+  "audit_requirements": [
+    "record actor id and actor role",
+    "record before and after article status",
+    "record before and after content hash where applicable",
+    "record decision note for publish/return/rollback",
+    "record public URL verification result",
+    "record listing verification result"
+  ],
+  "rollback_requirements": [
+    "capture previous status before publish",
+    "capture previous public artifact/path if applicable",
+    "capture previous listing state if applicable",
+    "define restore action",
+    "verify restored public state after rollback",
+    "create rollback audit note"
+  ],
+  "ag41a_position": "SOP only; no audit-log write or rollback write is executed.",
+  "blocked_state": {
+    "dynamic_publishing_sop_created": true,
+    "role_gate_model_created": true,
+    "publishing_workflow_sop_created": true,
+    "audit_rollback_sop_created": true,
+    "security_grant_sop_created": true,
+    "batch_dynamic_publishing_plan_ready": true,
+    "login_form_submitted": false,
+    "credentials_used": false,
+    "session_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "module_id": "AG41A",
+  "title": "Dynamic Publishing Role and Gate Model",
+  "status": "role_gate_model_created",
+  "role_model": {
+    "admin": [
+      "assign article to editor",
+      "review editor-submitted article",
+      "approve publish only after checklist completion",
+      "trigger controlled publish only in approved future execution stage",
+      "verify public URL and listing after publish",
+      "initiate rollback if audit fails"
+    ],
+    "editor": [
+      "work only on assigned articles",
+      "submit article for admin review",
+      "cannot approve publish",
+      "cannot trigger public mutation",
+      "cannot deploy",
+      "cannot access service-role keys"
+    ]
+  },
+  "mandatory_gates": [
+    "target article confirmation",
+    "editor submission gate",
+    "admin review gate",
+    "reference/image attribution check",
+    "audit-log requirement",
+    "rollback readiness",
+    "public listing verification",
+    "post-publish stabilisation check"
+  ],
+  "blocked_state": {
+    "dynamic_publishing_sop_created": true,
+    "role_gate_model_created": true,
+    "publishing_workflow_sop_created": true,
+    "audit_rollback_sop_created": true,
+    "security_grant_sop_created": true,
+    "batch_dynamic_publishing_plan_ready": true,
+    "login_form_submitted": false,
+    "credentials_used": false,
+    "session_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

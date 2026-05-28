@@ -1,0 +1,72 @@
+{
+  "module_id": "AG41A",
+  "title": "Dynamic Publishing Workflow SOP",
+  "status": "publishing_workflow_sop_created",
+  "workflow_sequence": [
+    {
+      "step_id": "01_draft_or_import",
+      "owner": "editor/admin",
+      "output": "draft article record",
+      "mutation_allowed_in_ag41a": false
+    },
+    {
+      "step_id": "02_editor_submit",
+      "owner": "editor",
+      "output": "editor submitted status",
+      "mutation_allowed_in_ag41a": false
+    },
+    {
+      "step_id": "03_admin_review",
+      "owner": "admin",
+      "output": "admin review decision",
+      "mutation_allowed_in_ag41a": false
+    },
+    {
+      "step_id": "04_publish_approval",
+      "owner": "admin",
+      "output": "publish approved decision",
+      "mutation_allowed_in_ag41a": false
+    },
+    {
+      "step_id": "05_controlled_publish_execution",
+      "owner": "admin/system",
+      "output": "future controlled publish only after explicit approval",
+      "mutation_allowed_in_ag41a": false
+    },
+    {
+      "step_id": "06_public_url_and_listing_verification",
+      "owner": "admin/system",
+      "output": "live verification record",
+      "mutation_allowed_in_ag41a": false
+    }
+  ],
+  "ag41a_position": "SOP only; no workflow mutation is executed.",
+  "blocked_state": {
+    "dynamic_publishing_sop_created": true,
+    "role_gate_model_created": true,
+    "publishing_workflow_sop_created": true,
+    "audit_rollback_sop_created": true,
+    "security_grant_sop_created": true,
+    "batch_dynamic_publishing_plan_ready": true,
+    "login_form_submitted": false,
+    "credentials_used": false,
+    "session_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
