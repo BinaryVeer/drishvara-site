@@ -1,0 +1,50 @@
+{
+  "module_id": "AG39B",
+  "title": "Audit and Rollback Execution Package Record",
+  "status": "audit_rollback_execution_package_created_no_write",
+  "audit_execution_requirements": {
+    "article_audit_logs_required": true,
+    "actor_role_required": "admin",
+    "action_type_required": "publish",
+    "before_state_required": true,
+    "after_state_required": true,
+    "before_after_hash_required": true,
+    "decision_note_required": true,
+    "audit_log_write_allowed_in_ag39b": false
+  },
+  "rollback_execution_requirements": {
+    "rollback_reference_required": true,
+    "previous_status_required": true,
+    "previous_queue_required": true,
+    "previous_public_visibility_required": true,
+    "rollback_write_allowed_in_ag39b": false
+  },
+  "writes_run": [],
+  "blocked_state": {
+    "controlled_execution_package_planning_created": true,
+    "target_execution_package_created": true,
+    "grant_instruction_package_created": true,
+    "audit_rollback_execution_package_created": true,
+    "operator_approval_requirement_carried_forward": true,
+    "controlled_execution_preflight_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
