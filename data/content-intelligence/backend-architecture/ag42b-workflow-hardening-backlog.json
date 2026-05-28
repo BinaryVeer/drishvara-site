@@ -1,0 +1,87 @@
+{
+  "module_id": "AG42B",
+  "title": "Workflow Hardening Backlog",
+  "status": "workflow_hardening_backlog_created_ready_for_ag42c",
+  "backlog_items": [
+    {
+      "item_id": "ag42b_h01",
+      "target_stage": "AG42C",
+      "title": "Failed publish midway dry-run",
+      "description": "Simulate a future publish failure after approval but before public listing confirmation.",
+      "priority": "high",
+      "mutation_allowed_in_ag42c": false
+    },
+    {
+      "item_id": "ag42b_h02",
+      "target_stage": "AG42C",
+      "title": "Rollback reference dry-run",
+      "description": "Confirm what rollback evidence must exist before any future controlled publish.",
+      "priority": "high",
+      "mutation_allowed_in_ag42c": false
+    },
+    {
+      "item_id": "ag42b_h03",
+      "target_stage": "AG42D",
+      "title": "Direct URL role regression",
+      "description": "Confirm Admin/Editor direct URL access boundaries before AG56.",
+      "priority": "high",
+      "mutation_allowed_in_ag42d": false
+    },
+    {
+      "item_id": "ag42b_h04",
+      "target_stage": "AG42D",
+      "title": "Audit-log required field review",
+      "description": "Confirm required future audit fields for publish, return, archive and rollback.",
+      "priority": "high",
+      "mutation_allowed_in_ag42d": false
+    },
+    {
+      "item_id": "ag42b_h05",
+      "target_stage": "AG55",
+      "title": "Final route and workflow release candidate validation",
+      "description": "Revalidate workflow before AG56 controlled dynamic content-loop test.",
+      "priority": "medium",
+      "mutation_allowed_in_ag55": false
+    }
+  ],
+  "ag42c_candidate_items": [
+    "ag42b_h01",
+    "ag42b_h02"
+  ],
+  "blocked_state": {
+    "workflow_defect_review_created": true,
+    "workflow_surface_inventory_created": true,
+    "route_guard_review_created": true,
+    "hardening_backlog_created": true,
+    "defect_classification_created": true,
+    "failed_publish_rollback_dry_run_ready": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
