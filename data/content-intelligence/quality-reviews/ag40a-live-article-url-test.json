@@ -1,0 +1,61 @@
+{
+  "module_id": "AG40A",
+  "title": "Live Article URL Test",
+  "status": "live_article_url_test_created_ready_for_ag40b",
+  "depends_on": [
+    "AG39Z",
+    "AG38Z"
+  ],
+  "generated_from": {
+    "ag39zClosure": "data/content-intelligence/backend-architecture/ag39z-controlled-execution-closure.json",
+    "ag39zReadiness": "data/content-intelligence/quality-registry/ag39z-live-article-url-test-readiness-record.json",
+    "ag39zBoundary": "data/content-intelligence/mutation-plans/ag39z-to-ag40a-live-article-url-test-boundary.json",
+    "ag39zApprovalCarryForward": "data/content-intelligence/backend-architecture/ag39z-operator-approval-carry-forward-record.json",
+    "ag39zLiveSmokeReadiness": "data/content-intelligence/backend-architecture/ag39z-live-dynamic-smoke-test-readiness-record.json"
+  },
+  "package_file": "data/content-intelligence/backend-architecture/ag40a-live-article-url-test-package.json",
+  "operator_approval_record_file": "data/content-intelligence/backend-architecture/ag40a-live-url-operator-approval-record.json",
+  "live_url_result_file": "data/content-intelligence/backend-architecture/ag40a-live-article-url-result-record.json",
+  "no_mutation_audit_file": "data/content-intelligence/backend-architecture/ag40a-no-mutation-audit-register.json",
+  "blocker_file": "data/content-intelligence/quality-registry/ag40a-live-article-url-test-blocker-register.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag40a-admin-editor-workflow-test-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag40a-to-ag40b-admin-editor-workflow-test-boundary.json",
+  "summary": {
+    "live_article_url_test_executed": true,
+    "live_article_url_test_passed": true,
+    "ready_for_ag40b": true,
+    "public_mutation_approved_now": false,
+    "real_publish_executed": false,
+    "database_write_done": false,
+    "public_mutation_done": false,
+    "deployment_done": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "sql_grants_executed": false
+  },
+  "blocked_state": {
+    "live_article_url_test_executed": true,
+    "live_article_url_test_passed": true,
+    "admin_editor_workflow_test_executed": false,
+    "public_listing_test_executed": false,
+    "explicit_operator_approval_recorded_for_ag40a": true,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
