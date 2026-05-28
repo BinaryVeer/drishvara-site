@@ -1,0 +1,66 @@
+{
+  "module_id": "AG40Z",
+  "title": "Live Smoke-test Chain Register",
+  "status": "ag40_live_smoke_test_chain_registered_for_closure",
+  "closed_chain": [
+    {
+      "stage_id": "AG40A",
+      "title": "Live Article URL Test",
+      "status": "live_article_url_test_created_ready_for_ag40b",
+      "result": "Live article URL responded successfully in read-only mode.",
+      "passed": true
+    },
+    {
+      "stage_id": "AG40B",
+      "title": "Admin/Editor Workflow Test",
+      "status": "admin_editor_workflow_test_created_ready_for_ag40c",
+      "result": "Admin/Editor workflow surfaces responded successfully in read-only mode.",
+      "passed": true
+    },
+    {
+      "stage_id": "AG40C",
+      "title": "Public Listing Test",
+      "status": "public_listing_test_created_ready_for_ag40d",
+      "result": "Public listing surface responded successfully in read-only mode.",
+      "passed": true
+    },
+    {
+      "stage_id": "AG40D",
+      "title": "Stabilisation Audit",
+      "status": "stabilisation_audit_created_ready_for_ag40z_closure",
+      "result": "Live smoke-test chain audited and confirmed stable.",
+      "passed": true
+    }
+  ],
+  "chain_length": 4,
+  "closed_successfully": true,
+  "blocked_state": {
+    "dynamic_stabilisation_closure_created": true,
+    "ag40_live_smoke_test_chain_closed": true,
+    "live_article_url_test_passed": true,
+    "admin_editor_workflow_test_passed": true,
+    "public_listing_test_passed": true,
+    "stabilisation_audit_passed": true,
+    "dynamic_publishing_sop_ready": true,
+    "login_form_submitted": false,
+    "credentials_used": false,
+    "session_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
