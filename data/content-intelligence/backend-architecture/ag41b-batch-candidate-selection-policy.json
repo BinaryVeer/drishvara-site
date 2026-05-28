@@ -1,0 +1,52 @@
+{
+  "module_id": "AG41B",
+  "title": "Batch Candidate Selection Policy",
+  "status": "batch_candidate_selection_policy_created",
+  "candidate_rules": [
+    "Only articles that have completed internal quality, reference and image/attribution checks may enter a batch.",
+    "Only articles with clear category, slug, title, excerpt and body readiness may enter a batch.",
+    "No article may enter batch execution without Admin final approval.",
+    "Editor-submitted articles must remain assigned-only until Admin review.",
+    "Rollback readiness must be confirmed before any future execution.",
+    "Batch execution requires a separate explicit operator approval stage."
+  ],
+  "recommended_initial_batch_size": {
+    "first_controlled_batch": 1,
+    "second_controlled_batch_if_successful": 3,
+    "later_batch_upper_limit_before_automation": 5
+  },
+  "excluded_from_batch": [
+    "draft articles without review",
+    "articles without references under editorial verification",
+    "articles with missing image credit/attribution",
+    "articles with unresolved layout/mobile issues",
+    "articles without rollback plan"
+  ],
+  "blocked_state": {
+    "batch_dynamic_publishing_plan_created": true,
+    "candidate_selection_policy_created": true,
+    "batch_risk_control_plan_created": true,
+    "batch_validation_plan_created": true,
+    "rollout_schedule_plan_created": true,
+    "monitoring_audit_dashboard_plan_ready": true,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
