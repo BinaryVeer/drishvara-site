@@ -1,0 +1,65 @@
+{
+  "module_id": "AG41Z",
+  "title": "Dynamic Publishing Chain Register",
+  "status": "ag41_dynamic_publishing_chain_registered_for_closure",
+  "closed_chain": [
+    {
+      "stage_id": "AG41A",
+      "title": "Dynamic Publishing SOP",
+      "status": "dynamic_publishing_sop_created_ready_for_ag41b_batch_plan",
+      "result": "SOP created with role gates, workflow, audit/rollback and security rules.",
+      "passed": true
+    },
+    {
+      "stage_id": "AG41B",
+      "title": "Batch Dynamic Publishing Plan",
+      "status": "batch_dynamic_publishing_plan_created_ready_for_ag41c_monitoring_dashboard_plan",
+      "result": "Batch candidate, risk, validation and rollout planning completed.",
+      "passed": true
+    },
+    {
+      "stage_id": "AG41C",
+      "title": "Monitoring and Audit Dashboard Plan",
+      "status": "monitoring_audit_dashboard_plan_created_ready_for_ag41d_dynamic_sop_audit",
+      "result": "Monitoring, audit-log, rollback and batch-health dashboard planning completed.",
+      "passed": true
+    },
+    {
+      "stage_id": "AG41D",
+      "title": "Dynamic SOP Audit",
+      "status": "dynamic_sop_audit_created_ready_for_ag41z_closure",
+      "result": "SOP, governance, monitoring and no-mutation audits passed.",
+      "passed": true
+    }
+  ],
+  "chain_length": 4,
+  "closed_successfully": true,
+  "blocked_state": {
+    "dynamic_publishing_closure_created": true,
+    "ag41_dynamic_publishing_chain_closed": true,
+    "first_controlled_batch_decision_ready": true,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "first_controlled_batch_executed": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

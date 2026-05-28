@@ -1,0 +1,41 @@
+{
+  "module_id": "AG41Z",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag42",
+  "future_consumption": {
+    "AG42A": "First Controlled Batch Decision Checkpoint.",
+    "AG42B": "First Controlled Batch Candidate Package, only if approved.",
+    "AG42C": "First Controlled Batch Preflight, only if approved.",
+    "AG42D": "First Controlled Batch Audit, only if approved.",
+    "AG42Z": "First Controlled Batch Closure or deferral, depending on approval path."
+  },
+  "governance_note": "AG42 must not be treated as automatic execution. It begins with a decision checkpoint and requires explicit operator approval before any mutation.",
+  "blocked_state": {
+    "dynamic_publishing_closure_created": true,
+    "ag41_dynamic_publishing_chain_closed": true,
+    "first_controlled_batch_decision_ready": true,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "first_controlled_batch_executed": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

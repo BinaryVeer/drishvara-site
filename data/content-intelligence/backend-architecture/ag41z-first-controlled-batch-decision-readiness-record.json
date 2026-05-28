@@ -1,0 +1,43 @@
+{
+  "module_id": "AG41Z",
+  "title": "First Controlled Batch Decision Readiness Record",
+  "status": "first_controlled_batch_decision_ready_no_execution",
+  "ready_for_ag42a": true,
+  "next_stage_id": "AG42A",
+  "next_stage_title": "First Controlled Batch Decision Checkpoint",
+  "recommended_next_decision": "Pause for explicit operator decision before any real controlled batch, public mutation, database write, deployment, SQL grant execution or service-role key use.",
+  "allowed_next_scope": [
+    "Decision checkpoint only.",
+    "Confirm whether first controlled batch execution should be considered.",
+    "Confirm exact one-article candidate if proceeding.",
+    "Keep all execution and mutation blocked unless separately approved."
+  ],
+  "blocked_state": {
+    "dynamic_publishing_closure_created": true,
+    "ag41_dynamic_publishing_chain_closed": true,
+    "first_controlled_batch_decision_ready": true,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "first_controlled_batch_executed": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
