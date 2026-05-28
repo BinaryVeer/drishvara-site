@@ -1,0 +1,70 @@
+{
+  "module_id": "AG41D",
+  "title": "Monitoring Plan Audit Register",
+  "status": "monitoring_plan_audit_passed",
+  "checks": [
+    {
+      "check_id": "dashboard_metric_model_has_minimum_metrics",
+      "passed": true
+    },
+    {
+      "check_id": "dashboard_runtime_not_enabled",
+      "passed": true
+    },
+    {
+      "check_id": "audit_log_dashboard_runtime_not_enabled",
+      "passed": true
+    },
+    {
+      "check_id": "audit_log_query_not_executed",
+      "passed": true
+    },
+    {
+      "check_id": "rollback_runtime_not_enabled",
+      "passed": true
+    },
+    {
+      "check_id": "rollback_write_not_executed",
+      "passed": true
+    },
+    {
+      "check_id": "batch_health_query_not_executed",
+      "passed": true
+    },
+    {
+      "check_id": "monitoring_job_not_created",
+      "passed": true
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "dynamic_sop_audit_created": true,
+    "sop_chain_audit_passed": true,
+    "governance_completeness_audit_passed": true,
+    "monitoring_plan_audit_passed": true,
+    "no_mutation_continuity_audit_passed": true,
+    "dynamic_publishing_closure_ready": true,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
