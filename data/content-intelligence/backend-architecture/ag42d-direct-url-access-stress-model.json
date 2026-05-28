@@ -1,0 +1,77 @@
+{
+  "module_id": "AG42D",
+  "title": "Direct URL Access Stress Model",
+  "status": "direct_url_access_stress_model_created_no_route_change",
+  "direct_url_stress_cases": [
+    {
+      "case_id": "url01_editor_opens_admin_dashboard",
+      "path_type": "admin dashboard direct URL",
+      "expected_result": "Editor must not access Admin-only surface.",
+      "required_future_verification": "manual or scripted regression before AG56",
+      "route_guard_modified_in_ag42d": false
+    },
+    {
+      "case_id": "url02_public_opens_admin_dashboard",
+      "path_type": "admin dashboard direct URL",
+      "expected_result": "Unauthenticated public user must not access Admin-only surface.",
+      "required_future_verification": "manual or scripted regression before AG56",
+      "route_guard_modified_in_ag42d": false
+    },
+    {
+      "case_id": "url03_admin_opens_editor_dashboard",
+      "path_type": "editor dashboard direct URL",
+      "expected_result": "Admin access behaviour must be explicitly defined; no silent unsafe role mixing.",
+      "required_future_verification": "manual or scripted regression before AG56",
+      "route_guard_modified_in_ag42d": false
+    },
+    {
+      "case_id": "url04_editor_uses_publish_action_route",
+      "path_type": "publish action endpoint/surface if present in future",
+      "expected_result": "Editor must not trigger publish action.",
+      "required_future_verification": "future execution gate before AG56",
+      "route_guard_modified_in_ag42d": false
+    }
+  ],
+  "direct_url_runtime_test_executed_in_ag42d": false,
+  "blocked_state": {
+    "permission_audit_stress_review_created": true,
+    "permission_stress_model_created": true,
+    "direct_url_stress_model_created": true,
+    "audit_log_required_field_model_created": true,
+    "role_boundary_exception_register_created": true,
+    "ag42z_closure_ready": true,
+    "stress_review_only": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "listing_mutated": false,
+    "article_file_created_or_changed": false,
+    "route_guard_runtime_modified": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "deployment_triggered": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

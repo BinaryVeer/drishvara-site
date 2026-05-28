@@ -1,0 +1,81 @@
+{
+  "module_id": "AG42D",
+  "title": "Role Boundary Exception Register",
+  "status": "role_boundary_exception_register_created",
+  "exceptions": [
+    {
+      "exception_id": "ag42d_e01",
+      "category": "direct_url_access_gap",
+      "severity": "high",
+      "description": "Direct URL access behaviour must be regression-confirmed before AG56.",
+      "carried_to": [
+        "AG55",
+        "AG56"
+      ],
+      "blocks_ag42z": false
+    },
+    {
+      "exception_id": "ag42d_e02",
+      "category": "editor_assigned_only_runtime_confirmation",
+      "severity": "medium",
+      "description": "Editor assigned-only behaviour must remain explicit during release candidate validation.",
+      "carried_to": [
+        "AG55"
+      ],
+      "blocks_ag42z": false
+    },
+    {
+      "exception_id": "ag42d_e03",
+      "category": "audit_log_runtime_confirmation",
+      "severity": "high",
+      "description": "Future audit-log write behaviour cannot be confirmed until controlled dynamic test stage; required fields are now modelled.",
+      "carried_to": [
+        "AG55",
+        "AG56"
+      ],
+      "blocks_ag42z": false
+    }
+  ],
+  "hard_blocker_count_for_ag42z": 0,
+  "blocked_state": {
+    "permission_audit_stress_review_created": true,
+    "permission_stress_model_created": true,
+    "direct_url_stress_model_created": true,
+    "audit_log_required_field_model_created": true,
+    "role_boundary_exception_register_created": true,
+    "ag42z_closure_ready": true,
+    "stress_review_only": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "listing_mutated": false,
+    "article_file_created_or_changed": false,
+    "route_guard_runtime_modified": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "deployment_triggered": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
