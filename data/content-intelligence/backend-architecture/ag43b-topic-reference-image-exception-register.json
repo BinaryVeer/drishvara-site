@@ -1,0 +1,98 @@
+{
+  "module_id": "AG43B",
+  "title": "Topic, Reference and Image Exception Register",
+  "status": "topic_reference_image_exception_register_created",
+  "exceptions": [
+    {
+      "exception_id": "ag43b_e01",
+      "category": "reference_verification_runtime",
+      "severity": "medium",
+      "description": "Reference verification state is modelled here; live fetch/verification execution remains deferred.",
+      "carried_to": [
+        "AG43C",
+        "AG46",
+        "AG55",
+        "AG56"
+      ],
+      "blocks_ag43c": false
+    },
+    {
+      "exception_id": "ag43b_e02",
+      "category": "image_credit_runtime",
+      "severity": "medium",
+      "description": "Image/credit readiness is modelled here; actual image/credit runtime validation remains for later Featured Reads/public readiness stages.",
+      "carried_to": [
+        "AG46",
+        "AG55",
+        "AG56"
+      ],
+      "blocks_ag43c": false
+    },
+    {
+      "exception_id": "ag43b_e03",
+      "category": "topic_promotion_boundary",
+      "severity": "critical",
+      "description": "Topic promotion to live article remains blocked until AG56 controlled dynamic content-loop test.",
+      "carried_to": [
+        "AG43C",
+        "AG43D",
+        "AG43Z",
+        "AG55",
+        "AG56"
+      ],
+      "blocks_ag43c": false
+    }
+  ],
+  "hard_blocker_count_for_ag43c": 0,
+  "blocked_state": {
+    "topic_reference_image_integration_created": true,
+    "readiness_matrix_created": true,
+    "reference_governance_model_created": true,
+    "image_visual_governance_model_created": true,
+    "combined_threshold_model_created": true,
+    "exception_register_created": true,
+    "ag43c_quality_longform_ready": true,
+    "integration_only": true,
+    "first_controlled_dynamic_content_loop_deferred_to_ag56": true,
+    "topic_promoted_to_live_article": false,
+    "topic_bank_mutated": false,
+    "article_generated": false,
+    "article_file_created_or_changed": false,
+    "article_quality_runtime_executed": false,
+    "reference_fetch_executed": false,
+    "reference_url_changed": false,
+    "image_generation_executed": false,
+    "image_file_created_or_changed": false,
+    "visual_registry_mutated": false,
+    "reference_registry_mutated": false,
+    "featured_reads_mutated": false,
+    "homepage_mutated": false,
+    "listing_mutated": false,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

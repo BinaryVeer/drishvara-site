@@ -1,0 +1,112 @@
+{
+  "module_id": "AG43B",
+  "title": "Topic, Reference and Image Readiness Matrix",
+  "status": "topic_reference_image_readiness_matrix_created",
+  "purpose": "Model how existing topic score, reference availability and image/visual readiness signals combine into one article-intelligence readiness layer.",
+  "matrix_dimensions": [
+    {
+      "dimension": "topic_score_band",
+      "source": "data/content-intelligence/homepage/ag23g-topic-score-thresholds.json",
+      "accepted_values": [
+        "25_plus",
+        "18_to_24",
+        "below_18"
+      ],
+      "use_in_ag43": "readiness classification only",
+      "runtime_mutation": false
+    },
+    {
+      "dimension": "reference_availability",
+      "source": "data/content-intelligence/homepage/ag23g-topic-score-fields.json",
+      "accepted_values": [
+        "verified_available",
+        "needs_verification",
+        "insufficient",
+        "editorial_verification_required"
+      ],
+      "use_in_ag43": "reference readiness signal",
+      "runtime_mutation": false
+    },
+    {
+      "dimension": "image_visual_readiness",
+      "source": "scripts/article-quality-review-preflight.js",
+      "accepted_values": [
+        "approved_with_credit",
+        "needs_credit",
+        "needs_replacement",
+        "not_required"
+      ],
+      "use_in_ag43": "visual readiness signal",
+      "runtime_mutation": false
+    },
+    {
+      "dimension": "sensitivity_repetition_risk",
+      "source": "data/content-intelligence/homepage/ag23g-topic-score-fields.json",
+      "accepted_values": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "use_in_ag43": "risk gate",
+      "runtime_mutation": false
+    }
+  ],
+  "readiness_decision_rule": [
+    "A topic with 25+ score can become an article/series candidate only if reference readiness and image/visual readiness are not blocking.",
+    "A topic with 18-24 score remains First Light/topic bank unless upgraded by reference strength and editorial decision.",
+    "A topic below 18 remains archive/ignore for now.",
+    "High sensitivity or high repetition risk blocks promotion regardless of raw score.",
+    "No topic is promoted to a live article in AG43B."
+  ],
+  "blocked_state": {
+    "topic_reference_image_integration_created": true,
+    "readiness_matrix_created": true,
+    "reference_governance_model_created": true,
+    "image_visual_governance_model_created": true,
+    "combined_threshold_model_created": true,
+    "exception_register_created": true,
+    "ag43c_quality_longform_ready": true,
+    "integration_only": true,
+    "first_controlled_dynamic_content_loop_deferred_to_ag56": true,
+    "topic_promoted_to_live_article": false,
+    "topic_bank_mutated": false,
+    "article_generated": false,
+    "article_file_created_or_changed": false,
+    "article_quality_runtime_executed": false,
+    "reference_fetch_executed": false,
+    "reference_url_changed": false,
+    "image_generation_executed": false,
+    "image_file_created_or_changed": false,
+    "visual_registry_mutated": false,
+    "reference_registry_mutated": false,
+    "featured_reads_mutated": false,
+    "homepage_mutated": false,
+    "listing_mutated": false,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "deployment_done": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
