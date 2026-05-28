@@ -1,0 +1,143 @@
+{
+  "module_id": "AG40B",
+  "title": "Admin/Editor Route Result Record",
+  "status": "admin_editor_routes_available",
+  "base_url": "https://drishvara.com",
+  "route_results": [
+    {
+      "route_id": "admin_login",
+      "expected_surface": "admin_login",
+      "selected_url": "https://drishvara.com/admin/login.html",
+      "route_available": true,
+      "attempts": [
+        {
+          "url": "https://drishvara.com/admin/login.html",
+          "final_url": "https://www.drishvara.com/admin/login.html",
+          "http_status": 200,
+          "response_ok": true,
+          "content_type": "text/html; charset=utf-8",
+          "elapsed_ms": 1945,
+          "page_title": "Drishvara Admin Login — Controlled Live Auth Test",
+          "has_html": true,
+          "has_drishvara_signal": true,
+          "has_admin_signal": true,
+          "has_editor_signal": true,
+          "has_login_signal": true,
+          "has_dashboard_signal": true,
+          "sample_sha256": "5449842f407ffdf82eea13b8f420ef03e9e81c6be6835c5cb7050e8ceff7d209",
+          "error_message": null
+        }
+      ]
+    },
+    {
+      "route_id": "editor_login",
+      "expected_surface": "editor_login",
+      "selected_url": "https://drishvara.com/editor/login.html",
+      "route_available": true,
+      "attempts": [
+        {
+          "url": "https://drishvara.com/editor/login.html",
+          "final_url": "https://www.drishvara.com/editor/login.html",
+          "http_status": 200,
+          "response_ok": true,
+          "content_type": "text/html; charset=utf-8",
+          "elapsed_ms": 963,
+          "page_title": "Drishvara Editor Login — Controlled Live Auth Test",
+          "has_html": true,
+          "has_drishvara_signal": true,
+          "has_admin_signal": true,
+          "has_editor_signal": true,
+          "has_login_signal": true,
+          "has_dashboard_signal": true,
+          "sample_sha256": "f9abb63a4f05a9db91c6e0218d82af7fbe3732dbc97bd2411c51b59464665702",
+          "error_message": null
+        }
+      ]
+    },
+    {
+      "route_id": "admin_dashboard",
+      "expected_surface": "admin_dashboard_or_guarded_route",
+      "selected_url": "https://drishvara.com/admin-dashboard.html",
+      "route_available": true,
+      "attempts": [
+        {
+          "url": "https://drishvara.com/admin-dashboard.html",
+          "final_url": "https://www.drishvara.com/admin-dashboard.html",
+          "http_status": 200,
+          "response_ok": true,
+          "content_type": "text/html; charset=utf-8",
+          "elapsed_ms": 639,
+          "page_title": "Admin Review Queue | Drishvara",
+          "has_html": true,
+          "has_drishvara_signal": true,
+          "has_admin_signal": true,
+          "has_editor_signal": true,
+          "has_login_signal": false,
+          "has_dashboard_signal": true,
+          "sample_sha256": "19402a25c07919551fca0c355318856c684a81ca8c45981faf2612db26454749",
+          "error_message": null
+        }
+      ]
+    },
+    {
+      "route_id": "editor_dashboard",
+      "expected_surface": "editor_dashboard_or_guarded_route",
+      "selected_url": "https://drishvara.com/editor-dashboard.html",
+      "route_available": true,
+      "attempts": [
+        {
+          "url": "https://drishvara.com/editor-dashboard.html",
+          "final_url": "https://www.drishvara.com/editor-dashboard.html",
+          "http_status": 200,
+          "response_ok": true,
+          "content_type": "text/html; charset=utf-8",
+          "elapsed_ms": 737,
+          "page_title": "Editor Workspace | Drishvara",
+          "has_html": true,
+          "has_drishvara_signal": true,
+          "has_admin_signal": true,
+          "has_editor_signal": true,
+          "has_login_signal": false,
+          "has_dashboard_signal": true,
+          "sample_sha256": "b78e7079f6985f6d8c386664d59c667cc4523633fa143d26fea6cf9d56a8f72e",
+          "error_message": null
+        }
+      ]
+    }
+  ],
+  "login_surfaces_passed": true,
+  "dashboard_surfaces_available": true,
+  "workflow_surface_test_passed": true,
+  "read_only_get_requests_only": true,
+  "blocked_state": {
+    "admin_editor_workflow_test_executed": true,
+    "admin_login_route_available": true,
+    "editor_login_route_available": true,
+    "admin_dashboard_route_available": true,
+    "editor_dashboard_route_available": true,
+    "workflow_surface_test_passed": true,
+    "public_listing_test_executed": false,
+    "explicit_operator_approval_recorded_for_ag40b": true,
+    "login_form_submitted": false,
+    "credentials_used": false,
+    "session_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

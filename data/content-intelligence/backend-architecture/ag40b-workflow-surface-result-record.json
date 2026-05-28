@@ -1,0 +1,73 @@
+{
+  "module_id": "AG40B",
+  "title": "Workflow Surface Result Record",
+  "status": "workflow_surfaces_available_no_login_submitted",
+  "checked_surfaces": [
+    "admin_login",
+    "editor_login",
+    "admin_dashboard_or_guarded_route",
+    "editor_dashboard_or_guarded_route"
+  ],
+  "workflow_checks": [
+    {
+      "check_id": "admin_login_available",
+      "passed": true
+    },
+    {
+      "check_id": "editor_login_available",
+      "passed": true
+    },
+    {
+      "check_id": "admin_dashboard_or_guarded_route_available",
+      "passed": true
+    },
+    {
+      "check_id": "editor_dashboard_or_guarded_route_available",
+      "passed": true
+    },
+    {
+      "check_id": "no_login_form_submitted",
+      "passed": true
+    },
+    {
+      "check_id": "no_credentials_used",
+      "passed": true
+    },
+    {
+      "check_id": "no_session_created",
+      "passed": true
+    }
+  ],
+  "workflow_surface_test_passed": true,
+  "blocked_state": {
+    "admin_editor_workflow_test_executed": true,
+    "admin_login_route_available": true,
+    "editor_login_route_available": true,
+    "admin_dashboard_route_available": true,
+    "editor_dashboard_route_available": true,
+    "workflow_surface_test_passed": true,
+    "public_listing_test_executed": false,
+    "explicit_operator_approval_recorded_for_ag40b": true,
+    "login_form_submitted": false,
+    "credentials_used": false,
+    "session_created": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
