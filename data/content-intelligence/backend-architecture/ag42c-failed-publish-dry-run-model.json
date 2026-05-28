@@ -1,0 +1,77 @@
+{
+  "module_id": "AG42C",
+  "title": "Failed Publish Dry-run Model",
+  "status": "failed_publish_dry_run_model_created_no_publish_executed",
+  "dry_run_scenarios": [
+    {
+      "scenario_id": "fp01_approval_without_public_write",
+      "scenario": "Admin approves future article, but public article artifact is not created.",
+      "expected_detection": "public URL verification fails",
+      "required_response": "do not mark article as published; keep/revert to approved or publish_failed state",
+      "write_executed_in_ag42c": false
+    },
+    {
+      "scenario_id": "fp02_article_created_listing_missing",
+      "scenario": "Article artifact exists, but Featured Reads/category/homepage listing does not update.",
+      "expected_detection": "public listing verification fails",
+      "required_response": "block publish completion and require listing reconciliation",
+      "write_executed_in_ag42c": false
+    },
+    {
+      "scenario_id": "fp03_listing_updated_article_missing",
+      "scenario": "Listing points to article URL but article URL returns missing/broken state.",
+      "expected_detection": "article URL verification fails",
+      "required_response": "remove listing pointer through rollback plan in future execution stage",
+      "write_executed_in_ag42c": false
+    },
+    {
+      "scenario_id": "fp04_audit_log_gap",
+      "scenario": "Public surface changes but audit log is missing or incomplete.",
+      "expected_detection": "audit completeness check fails",
+      "required_response": "block completion and require audit repair before go-live decision",
+      "write_executed_in_ag42c": false
+    }
+  ],
+  "publish_executed_in_ag42c": false,
+  "blocked_state": {
+    "failed_publish_rollback_dry_run_created": true,
+    "failed_publish_model_created": true,
+    "rollback_model_created": true,
+    "public_listing_failure_model_created": true,
+    "recovery_checklist_created": true,
+    "permission_audit_stress_review_ready": true,
+    "dry_run_only": true,
+    "publish_failure_simulated_as_model_only": true,
+    "rollback_simulated_as_model_only": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "listing_mutated": false,
+    "article_file_created_or_changed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

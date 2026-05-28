@@ -1,0 +1,76 @@
+{
+  "module_id": "AG42C",
+  "title": "Rollback Dry-run Model",
+  "status": "rollback_dry_run_model_created_no_rollback_write",
+  "rollback_prerequisites": [
+    "previous article status captured",
+    "previous public URL or artifact reference captured where applicable",
+    "previous listing state captured where applicable",
+    "decision note captured",
+    "actor role captured",
+    "rollback verification target defined",
+    "post-rollback public URL/listing verification defined"
+  ],
+  "rollback_scenarios": [
+    {
+      "scenario_id": "rb01_public_article_revert",
+      "scenario": "Future controlled article publish must be reverted.",
+      "required_restore_reference": "previous public artifact/status reference",
+      "write_executed_in_ag42c": false
+    },
+    {
+      "scenario_id": "rb02_listing_revert",
+      "scenario": "Future listing change must be reverted after failed verification.",
+      "required_restore_reference": "previous listing state",
+      "write_executed_in_ag42c": false
+    },
+    {
+      "scenario_id": "rb03_status_revert",
+      "scenario": "Article workflow status must be restored after failed publish.",
+      "required_restore_reference": "before_state / after_state transition record",
+      "write_executed_in_ag42c": false
+    }
+  ],
+  "rollback_write_executed_in_ag42c": false,
+  "blocked_state": {
+    "failed_publish_rollback_dry_run_created": true,
+    "failed_publish_model_created": true,
+    "rollback_model_created": true,
+    "public_listing_failure_model_created": true,
+    "recovery_checklist_created": true,
+    "permission_audit_stress_review_ready": true,
+    "dry_run_only": true,
+    "publish_failure_simulated_as_model_only": true,
+    "rollback_simulated_as_model_only": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "listing_mutated": false,
+    "article_file_created_or_changed": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
