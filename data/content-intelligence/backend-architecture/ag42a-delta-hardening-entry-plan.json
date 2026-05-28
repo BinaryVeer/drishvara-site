@@ -1,0 +1,74 @@
+{
+  "module_id": "AG42A",
+  "title": "Delta Hardening Entry Plan",
+  "status": "delta_hardening_entry_plan_created_ready_for_ag42b",
+  "ag42_sequence": [
+    {
+      "stage_id": "AG42A",
+      "title": "Roadmap Reconciliation and Existing-Logic Consumption Gate",
+      "purpose": "Reconcile old AG41Z first-batch boundary and consume existing repo logic.",
+      "mutation_allowed": false
+    },
+    {
+      "stage_id": "AG42B",
+      "title": "Workflow Defect Review",
+      "purpose": "Review Admin/Editor/publish route defects and workflow hardening gaps.",
+      "mutation_allowed": false
+    },
+    {
+      "stage_id": "AG42C",
+      "title": "Failed Publish and Rollback Dry-run",
+      "purpose": "Simulate failed publish and rollback behaviour without writes.",
+      "mutation_allowed": false
+    },
+    {
+      "stage_id": "AG42D",
+      "title": "Admin/Editor Permission and Audit-log Stress Review",
+      "purpose": "Stress role boundaries and audit completeness.",
+      "mutation_allowed": false
+    },
+    {
+      "stage_id": "AG42Z",
+      "title": "Dynamic Workflow Hardening Closure",
+      "purpose": "Close dynamic publishing hardening and prepare AG43.",
+      "mutation_allowed": false
+    }
+  ],
+  "next_stage_id": "AG42B",
+  "blocked_state": {
+    "roadmap_reconciliation_created": true,
+    "existing_logic_consumption_gate_created": true,
+    "ag41z_first_controlled_batch_boundary_acknowledged": true,
+    "first_controlled_dynamic_content_loop_deferred_to_ag56": true,
+    "no_duplicate_audit_rulebook_created": true,
+    "workflow_defect_review_ready": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

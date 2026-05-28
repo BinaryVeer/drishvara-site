@@ -1,0 +1,221 @@
+{
+  "module_id": "AG42A",
+  "title": "Existing Logic Consumption Register",
+  "status": "existing_logic_consumption_register_created",
+  "principle": "AG42-AG56 must consume existing repo logic and add only delta/cross-module/release-readiness checks.",
+  "consumed_logic": [
+    {
+      "stream": "AG06B Content Intelligence Schema",
+      "source_files": [
+        "scripts/validate-ag06b-content-intelligence-schema.mjs"
+      ],
+      "consumed_for": [
+        "AG43",
+        "AG46",
+        "AG55"
+      ],
+      "do_not_duplicate": [
+        "content packet schema",
+        "reference registry",
+        "visual registry",
+        "quality review schema",
+        "publish queue schema"
+      ],
+      "delta_needed_later": [
+        "cross-module release integration",
+        "Version 01 final inventory reconciliation"
+      ]
+    },
+    {
+      "stream": "AG23G First Light Topic Scoring",
+      "source_files": [
+        "scripts/validate-ag23g-first-light-topic-scoring-model.mjs",
+        "data/content-intelligence/homepage/ag23g-topic-score-fields.json",
+        "data/content-intelligence/homepage/ag23g-topic-score-thresholds.json"
+      ],
+      "consumed_for": [
+        "AG43",
+        "AG44",
+        "AG45",
+        "AG56"
+      ],
+      "do_not_duplicate": [
+        "topic score fields",
+        "threshold bands",
+        "sensitivity/repetition risk logic"
+      ],
+      "delta_needed_later": [
+        "connect topic scoring to V01 controlled content loop",
+        "homepage signal-to-read-surface mapping"
+      ]
+    },
+    {
+      "stream": "Article Quality Review Preflight",
+      "source_files": [
+        "scripts/article-quality-review-preflight.js"
+      ],
+      "consumed_for": [
+        "AG43",
+        "AG46",
+        "AG55",
+        "AG56"
+      ],
+      "do_not_duplicate": [
+        "quality_score",
+        "source_reference_status",
+        "image approval status",
+        "safe URL checks",
+        "Featured Reads metadata checks"
+      ],
+      "delta_needed_later": [
+        "long-form V01 article readiness package",
+        "controlled article candidate final checklist"
+      ]
+    },
+    {
+      "stream": "D02 Word of the Day",
+      "source_files": [
+        "scripts/word-of-day-bank-preflight.js"
+      ],
+      "consumed_for": [
+        "AG48",
+        "AG55",
+        "AG56"
+      ],
+      "do_not_duplicate": [
+        "word bank",
+        "rotation policy",
+        "multilingual word fields",
+        "runtime/Supabase/Auth disabled guards"
+      ],
+      "delta_needed_later": [
+        "homepage Discover/Reflect integration",
+        "AG56 smoke-test visibility"
+      ]
+    },
+    {
+      "stream": "D05 Panchang/Festival Source Validation",
+      "source_files": [
+        "scripts/panchang-festival-source-validation-preflight.js"
+      ],
+      "consumed_for": [
+        "AG47",
+        "AG55",
+        "AG56"
+      ],
+      "do_not_duplicate": [
+        "source registry",
+        "observance registry",
+        "validation preview",
+        "live calculation/API/Supabase disabled guards"
+      ],
+      "delta_needed_later": [
+        "V01 public preview boundary",
+        "homepage Discover integration"
+      ]
+    },
+    {
+      "stream": "D07 Subscriber Guidance and Personalization",
+      "source_files": [
+        "scripts/subscriber-guidance-personalization-preflight.js"
+      ],
+      "consumed_for": [
+        "AG49",
+        "AG50",
+        "AG52",
+        "AG55"
+      ],
+      "do_not_duplicate": [
+        "scaffold-only subscriber schema",
+        "consent control",
+        "synthetic preview-only rule",
+        "birth context/profile storage disabled guard"
+      ],
+      "delta_needed_later": [
+        "V01 personalisation deferral register",
+        "psychometric scaffold privacy boundary"
+      ]
+    },
+    {
+      "stream": "AG27A Backend Need Assessment",
+      "source_files": [
+        "scripts/validate-ag27a-backend-need-assessment.mjs"
+      ],
+      "consumed_for": [
+        "AG49",
+        "AG52",
+        "AG55",
+        "AG56"
+      ],
+      "do_not_duplicate": [
+        "backend future-need signal",
+        "static/GitHub path sufficient for current stage",
+        "backend/Supabase/Auth/secrets/database/deployment blocked guards"
+      ],
+      "delta_needed_later": [
+        "release-stage reminder",
+        "explicit approval gate before any backend activation"
+      ]
+    },
+    {
+      "stream": "AG40-AG41 Dynamic Publishing Planning",
+      "source_files": [
+        "data/content-intelligence/backend-architecture/ag40z-dynamic-stabilisation-closure.json",
+        "data/content-intelligence/backend-architecture/ag41z-dynamic-publishing-closure.json"
+      ],
+      "consumed_for": [
+        "AG42",
+        "AG55",
+        "AG56"
+      ],
+      "do_not_duplicate": [
+        "live smoke chain",
+        "dynamic publishing SOP",
+        "batch plan",
+        "monitoring dashboard plan",
+        "dynamic SOP audit"
+      ],
+      "delta_needed_later": [
+        "workflow hardening",
+        "defect review",
+        "roadmap supersession from first batch decision to AG56 controlled content loop"
+      ]
+    }
+  ],
+  "blocked_state": {
+    "roadmap_reconciliation_created": true,
+    "existing_logic_consumption_gate_created": true,
+    "ag41z_first_controlled_batch_boundary_acknowledged": true,
+    "first_controlled_dynamic_content_loop_deferred_to_ag56": true,
+    "no_duplicate_audit_rulebook_created": true,
+    "workflow_defect_review_ready": true,
+    "first_controlled_batch_execution_approved_now": false,
+    "first_controlled_batch_executed": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "candidate_selected_for_execution": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "dashboard_runtime_enabled": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "backend_activation_approved_now": false,
+    "supabase_activation_approved_now": false,
+    "auth_activation_approved_now": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
