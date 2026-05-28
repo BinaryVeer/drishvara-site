@@ -1,0 +1,35 @@
+{
+  "module_id": "AG38Z",
+  "title": "Future Consumption Plan",
+  "status": "future_consumption_plan_created_for_ag39_and_later",
+  "future_consumption": {
+    "AG39A": "AG39A should be a public mutation decision checkpoint only. It must not perform public mutation or real publish without explicit operator approval.",
+    "AG39B": "AG39B may prepare a tightly scoped controlled apply execution package only after AG39A approval.",
+    "AG39C": "AG39C should prepare SQL/grant execution instructions only if the operator explicitly approves, and should keep service-role key out of repo/chat.",
+    "AG39D": "AG39D should audit any approved controlled apply execution package before execution.",
+    "AG39Z": "AG39Z should close the public mutation decision chain and either continue blocking or proceed to a separately approved execution stage."
+  },
+  "blocked_state": {
+    "controlled_apply_closure_created": true,
+    "ag38_controlled_apply_chain_closed": true,
+    "approval_gate_carried_forward": true,
+    "explicit_grant_review_carried_forward": true,
+    "public_mutation_decision_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}

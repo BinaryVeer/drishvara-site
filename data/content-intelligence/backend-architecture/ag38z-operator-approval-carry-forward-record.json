@@ -1,0 +1,44 @@
+{
+  "module_id": "AG38Z",
+  "title": "Operator Approval Carry Forward Record",
+  "status": "operator_approval_requirement_carried_forward",
+  "approval_state": {
+    "explicit_operator_approval_recorded": false,
+    "real_apply_allowed_now": false,
+    "public_mutation_allowed_now": false,
+    "database_write_allowed_now": false,
+    "deployment_allowed_now": false,
+    "service_role_key_allowed_in_repo_or_chat": false
+  },
+  "mandatory_before_any_future_real_apply": [
+    "Explicit operator approval must be recorded.",
+    "Exact target article must be confirmed.",
+    "Rollback plan must be operational.",
+    "Audit-log write path must be operational.",
+    "Supabase grants must be reviewed and applied only if approved.",
+    "No public mutation unless separately approved."
+  ],
+  "blocked_state": {
+    "controlled_apply_closure_created": true,
+    "ag38_controlled_apply_chain_closed": true,
+    "approval_gate_carried_forward": true,
+    "explicit_grant_review_carried_forward": true,
+    "public_mutation_decision_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}
