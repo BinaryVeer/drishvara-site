@@ -11,20 +11,38 @@ const root = process.cwd();
 
 function ag12cControlledLayoutRefinementAllowsPostMutation(selectedPath = null, currentHash = null) {
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-controlled-layout-refinement-apply.json");
+  const r1ApplyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
 
   try {
     const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
-    const targetPath = selectedPath || applyRecord.selected_article_path;
+    const r1ApplyRecord = fs.existsSync(r1ApplyRecordPath)
+      ? JSON.parse(fs.readFileSync(r1ApplyRecordPath, "utf8"))
+      : null;
 
+    const targetPath = selectedPath || r1ApplyRecord?.selected_article_path || applyRecord.selected_article_path;
     if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
+    if (r1ApplyRecord && r1ApplyRecord.selected_article_path !== targetPath) return false;
 
     const fullArticlePath = path.join(root, targetPath);
     if (!fs.existsSync(fullArticlePath)) return false;
 
     const html = fs.readFileSync(fullArticlePath, "utf8");
     const hashToCheck = currentHash || sha256(html);
+
+    if (
+      r1ApplyRecord &&
+      r1ApplyRecord.status === "public_object_label_layout_repair_applied" &&
+      r1ApplyRecord.pre_repair_hash === applyRecord.post_refinement_hash &&
+      r1ApplyRecord.post_repair_hash === hashToCheck &&
+      html.includes("AG12C-R1") &&
+      html.includes('data-drishvara-layout-treatment="reader-facing-object"') &&
+      !html.includes("Additional pilot object:") &&
+      !html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')
+    ) {
+      return true;
+    }
 
     return (
       applyRecord.status === "controlled_layout_refinement_applied_pending_post_refinement_audit" &&

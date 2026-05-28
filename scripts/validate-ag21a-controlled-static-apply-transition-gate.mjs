@@ -47,6 +47,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -93,7 +128,7 @@ if (ag20zSummary.final_ag20_state.ready_for_ag21_controlled_static_apply_transit
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (currentHash !== ag13zCandidate.article_hash) fail("Seed candidate hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1 repaired article state missing");
 
 if (review.status !== "controlled_static_apply_transition_gate_created_pending_audit") fail("Review status mismatch");
 if (transitionGate.status !== "controlled_static_apply_transition_gate_created_pending_audit") fail("Transition gate status mismatch");
@@ -108,7 +143,7 @@ if (readiness.status !== "ready_for_ag21b_controlled_static_apply_transition_gat
 if (transitionGate.transition_gate_only !== true) fail("Transition gate must be transition-gate-only");
 if (transitionGate.required_future_approval_phrase !== phrase) fail("Transition gate phrase mismatch");
 if (transitionGate.seed_candidate.article_path !== articlePath) fail("Transition gate candidate path mismatch");
-if (transitionGate.seed_candidate.article_hash !== currentHash) fail("Transition gate candidate hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(transitionGate.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Transition gate candidate hash mismatch or AG12C-R1 repaired article state missing");
 
 for (const key of [
   "explicit_approval_phrase_executed_now",
@@ -127,7 +162,7 @@ for (const key of [
 }
 
 if (finalPreconditions.required_future_approval_phrase !== phrase) fail("Final preconditions phrase mismatch");
-if (finalPreconditions.seed_candidate.article_hash !== currentHash) fail("Final preconditions candidate hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(finalPreconditions.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Final preconditions candidate hash mismatch or AG12C-R1 repaired article state missing");
 for (const [key, value] of Object.entries(finalPreconditions.current_lock_state)) {
   if (key === "final_preconditions_locked_for_audit") {
     if (value !== true) fail("Final preconditions must be locked for audit");
@@ -146,7 +181,7 @@ for (const [key, value] of Object.entries(approvalPhraseLock.current_phrase_stat
 }
 
 if (candidateSurfaceLock.seed_candidate.article_path !== articlePath) fail("Candidate/surface path mismatch");
-if (candidateSurfaceLock.seed_candidate.article_hash !== currentHash) fail("Candidate/surface hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(candidateSurfaceLock.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate/surface hash mismatch or AG12C-R1 repaired article state missing");
 for (const surface of candidateSurfaceLock.future_public_surface_candidates) {
   if (surface.mutate_now !== false) fail(`Surface must not mutate now: ${surface.surface_id}`);
 }

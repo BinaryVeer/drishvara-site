@@ -49,6 +49,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -90,7 +125,7 @@ if (ag19cBoundary.next_stage_id !== "AG19D") fail("AG19D boundary missing in AG1
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (currentHash !== ag13zCandidate.article_hash) fail("Seed candidate hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1 repaired article state missing");
 
 if (review.status !== "final_public_delta_dry_run_audit_passed_ready_for_ag19e_approval_package") fail("Review status mismatch");
 if (audit.status !== "final_public_delta_dry_run_audit_passed") fail("Audit status mismatch");
@@ -104,7 +139,7 @@ if (audit.decision.ag19c_final_delta_dry_run_valid !== true) fail("AG19C final d
 if (audit.decision.ready_for_first_static_activation_approval_package !== true) fail("AG19E approval package readiness missing");
 
 if (ag19cFinalDelta.candidate_article_path !== articlePath) fail("Candidate article path mismatch");
-if (ag19cFinalDelta.candidate_article_hash !== currentHash) fail("Candidate article hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(ag19cFinalDelta.candidate_article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate article hash mismatch or AG12C-R1 repaired article state missing");
 if (!ag19cFinalDelta.proposed_public_targets_preview.every((target) => target.exact_file_mutation_now === false && target.apply_now === false)) fail("Final delta targets must remain no-mutation/no-apply");
 if (ag19cFinalDelta.dry_run_result.final_delta_preview_completed !== true) fail("Final delta preview must be completed");
 for (const key of [

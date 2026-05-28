@@ -47,6 +47,26 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function articleHashMatchesCurrentOrAg12cR1(recordedHash, articlePath, currentHash) {
+  if (recordedHash === currentHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      ag12cR1Apply.selected_article_path === articlePath &&
+      ag12cR1Apply.pre_repair_hash === recordedHash &&
+      ag12cR1Apply.post_repair_hash === currentHash
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -81,7 +101,7 @@ if (ag15bBoundary.next_stage_id !== "AG15C") fail("AG15C boundary missing in AG1
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (currentHash !== ag13zCandidate.article_hash) fail("Seed candidate article hash mismatch");
+if (!articleHashMatchesCurrentOrAg12cR1(ag13zCandidate.article_hash, articlePath, currentHash)) fail("Seed candidate article hash mismatch or AG12C-R1 repaired article state missing");
 
 if (review.status !== "generated_article_admin_queue_schema_dry_run_passed") fail("Review status mismatch");
 if (intake.status !== "generated_article_intake_dry_run_passed") fail("Intake dry-run status mismatch");
@@ -95,7 +115,7 @@ if (queueDryRun.dry_run_only !== true) fail("Queue record must be dry-run only")
 if (qualityPreview.dry_run_only !== true) fail("Quality preview must be dry-run only");
 
 if (intake.article_path !== articlePath) fail("Intake article path mismatch");
-if (intake.article_hash !== currentHash) fail("Intake article hash mismatch");
+if (!articleHashMatchesCurrentOrAg12cR1(intake.article_hash, articlePath, currentHash)) fail("Intake article hash mismatch or AG12C-R1 repaired article state missing");
 if (intake.public_visibility !== false) fail("Intake public_visibility must be false");
 if (intake.publish_approved !== false) fail("Intake publish_approved must be false");
 if (intake.queue_target !== "admin_review_queue") fail("Intake queue target mismatch");
@@ -108,7 +128,7 @@ if (queueDryRun.publish_approved !== false) fail("Queue dry-run publish_approved
 if (queueDryRun.queue_status !== "ready_for_admin_review") fail("Queue dry-run status must be ready_for_admin_review");
 
 if (qualityPreview.preview_state.preview_record_present !== true) fail("Preview record must be present");
-if (qualityPreview.preview_state.article_hash_at_preview !== currentHash) fail("Preview hash mismatch");
+if (!articleHashMatchesCurrentOrAg12cR1(qualityPreview.preview_state.article_hash_at_preview, articlePath, currentHash)) fail("Preview hash mismatch or AG12C-R1 repaired article state missing");
 if (qualityPreview.default_publication_state_at_preview.public_visibility !== false) fail("Preview public_visibility must be false");
 if (qualityPreview.default_publication_state_at_preview.publish_approved !== false) fail("Preview publish_approved must be false");
 

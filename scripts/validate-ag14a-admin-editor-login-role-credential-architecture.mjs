@@ -44,6 +44,26 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag13zCandidateHashMatchesCurrentOrAg12cR1(candidate, currentHash) {
+  if (candidate?.article_hash === currentHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      ag12cR1Apply.selected_article_path === candidate?.selected_article_path &&
+      ag12cR1Apply.pre_repair_hash === candidate?.article_hash &&
+      ag12cR1Apply.post_repair_hash === currentHash
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -80,7 +100,7 @@ const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 
 const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (articleHash !== ag13zCandidate.article_hash) fail("Article hash must match AG13Z candidate hash");
+if (!ag13zCandidateHashMatchesCurrentOrAg12cR1(ag13zCandidate, articleHash)) fail("Article hash must match AG13Z candidate hash or AG12C-R1 repaired article state");
 
 if (review.status !== "admin_editor_login_role_credential_architecture_defined") fail("Review status mismatch");
 if (architecture.status !== "admin_editor_login_role_credential_architecture_defined") fail("Architecture status mismatch");

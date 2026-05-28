@@ -43,6 +43,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -83,7 +118,15 @@ if (!fs.existsSync(path.join(root, backupPath))) fail(`AG12C backup missing: ${b
 const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (articleHash !== ag12cApply.post_refinement_hash) fail("Current article hash must match AG12C post-refinement hash");
+const ag12cR1ApplyPath = "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json";
+const hasAg12cR1Repair = fs.existsSync(path.join(root, ag12cR1ApplyPath));
+const ag12cR1Apply = hasAg12cR1Repair ? readJson(ag12cR1ApplyPath) : null;
+
+if (hasAg12cR1Repair) {
+  if (!hashPairMatchesCurrentOrAg12cR1Repair(articleHash, ag12cR1Apply.post_repair_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Current article hash must match AG12C-R1 post-repair hash or AG12C-R1 repaired article state missing");
+} else if (articleHash !== ag12cApply.post_refinement_hash) {
+  fail("Current article hash must match AG12C post-refinement hash");
+}
 if (backupHash !== ag12cApply.pre_refinement_hash) fail("Backup hash must match AG12C pre-refinement hash");
 if (backupHash !== ag12cRollback.backup_hash) fail("Backup hash must match AG12C rollback record");
 
@@ -98,8 +141,12 @@ if (audit.failed_checks.length !== 0) fail("AG12D failed checks must be zero");
 if (audit.production_readiness_assessment.refined_layout_audit_passed !== true) fail("Refined layout audit must pass");
 if (audit.production_readiness_assessment.publish_ready !== false) fail("AG12D must not mark publish ready");
 
-if (treatment.primary_visible_object_count !== 4) fail("Primary visible object count must be four");
-if (treatment.collapsed_pilot_object_count !== 3) fail("Collapsed pilot object count must be three");
+if (hasAg12cR1Repair) {
+  if (ag12cR1Apply.reader_facing_object_count_after_repair !== 3) fail("AG12C-R1 reader-facing object count must be three");
+} else {
+  if (treatment.primary_visible_object_count !== 4) fail("Primary visible object count must be four");
+  if (treatment.collapsed_pilot_object_count !== 3) fail("Collapsed pilot object count must be three");
+}
 if (treatment.all_original_markers_preserved_once !== true) fail("Original governed markers must be preserved");
 if (treatment.all_treatments_valid !== true) fail("Object treatments must be valid");
 if (treatment.all_credits_present !== true) fail("Credits must be present");

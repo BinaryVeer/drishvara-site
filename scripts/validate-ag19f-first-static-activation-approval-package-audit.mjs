@@ -49,6 +49,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -91,7 +126,7 @@ if (ag19eBoundary.next_stage_id !== "AG19F") fail("AG19F boundary missing in AG1
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (currentHash !== ag13zCandidate.article_hash) fail("Seed candidate hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1 repaired article state missing");
 
 if (review.status !== "first_static_activation_approval_package_audit_passed_ready_for_ag19z_closure") fail("Review status mismatch");
 if (audit.status !== "first_static_activation_approval_package_audit_passed") fail("Audit status mismatch");
@@ -106,7 +141,7 @@ if (audit.decision.ready_for_ag19z_closure !== true) fail("AG19Z readiness missi
 
 if (ag19ePackage.package_only !== true) fail("Approval package must be package-only");
 if (ag19ePackage.candidate.article_path !== articlePath) fail("Approval package path mismatch");
-if (ag19ePackage.candidate.article_hash !== currentHash) fail("Approval package hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(ag19ePackage.candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Approval package hash mismatch or AG12C-R1 repaired article state missing");
 for (const key of [
   "explicit_user_approval_received_now",
   "real_static_apply_authorised_now",
@@ -122,7 +157,7 @@ for (const key of [
 }
 
 if (ag19eCandidate.candidate.article_path !== articlePath) fail("Candidate summary path mismatch");
-if (ag19eCandidate.candidate.article_hash !== currentHash) fail("Candidate summary hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(ag19eCandidate.candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate summary hash mismatch or AG12C-R1 repaired article state missing");
 if (!Object.values(ag19eCandidate.current_evidence_state).every((value) => value === false)) fail("Candidate evidence state must remain false");
 
 for (const [key, value] of Object.entries(ag19ePublicDelta.summary_state)) {

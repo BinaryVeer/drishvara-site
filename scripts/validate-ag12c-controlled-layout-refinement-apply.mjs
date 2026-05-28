@@ -43,6 +43,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 function markerCount(text, marker) {
   const escaped = marker.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return (text.match(new RegExp(escaped, "g")) || []).length;
@@ -90,9 +125,18 @@ const backupHtml = fs.readFileSync(path.join(root, backupPath), "utf8");
 const articleHash = sha256(articleHtml);
 const backupHash = sha256(backupHtml);
 
-if (articleHash !== apply.post_refinement_hash) fail("Current article hash must match AG12C post-refinement hash");
+const ag12cR1ApplyPath = "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json";
+const hasAg12cR1Repair = fs.existsSync(path.join(root, ag12cR1ApplyPath));
+const ag12cR1Apply = hasAg12cR1Repair ? readJson(ag12cR1ApplyPath) : null;
+
+if (hasAg12cR1Repair) {
+  if (!hashPairMatchesCurrentOrAg12cR1Repair(articleHash, ag12cR1Apply.post_repair_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Current article hash must match AG12C-R1 post-repair hash or AG12C-R1 repaired article state missing");
+  if (!hashPairMatchesCurrentOrAg12cR1Repair(ag12cR1Apply.pre_repair_hash, apply.post_refinement_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("AG12C-R1 must start from AG12C post-refinement hash or AG12C-R1 repaired article state missing");
+} else {
+  if (!hashPairMatchesCurrentOrAg12cR1Repair(articleHash, apply.post_refinement_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Current article hash must match AG12C post-refinement hash or AG12C-R1 repaired article state missing");
+}
 if (backupHash !== apply.pre_refinement_hash) fail("Backup hash must match AG12C pre-refinement hash");
-if (apply.pre_refinement_hash !== ag11gApply.post_insertion_hash) fail("AG12C must start from AG11G post-insertion hash");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(apply.pre_refinement_hash, ag11gApply.post_insertion_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("AG12C must start from AG11G post-insertion hash or AG12C-R1 repaired article state missing");
 if (apply.post_refinement_hash === apply.pre_refinement_hash) fail("AG12C post-refinement hash must differ from pre-refinement hash");
 
 if (backupHtml.includes("AG12C-LAYOUT-REFINEMENT")) fail("Backup must not include AG12C refinement markers");
@@ -112,7 +156,15 @@ for (const marker of originalMarkers) {
   if (markerCount(articleHtml, marker) !== 1) fail(`Original governed marker must remain once: ${marker}`);
 }
 
-if (markerCount(articleHtml, 'data-drishvara-layout-treatment="collapsed-pilot-annex"') !== 3) {
+if (hasAg12cR1Repair) {
+  if (markerCount(articleHtml, 'data-drishvara-layout-treatment="collapsed-pilot-annex"') !== 0) {
+    fail("AG12C-R1 state must not retain collapsed pilot annex treatment");
+  }
+  if (markerCount(articleHtml, 'data-drishvara-layout-treatment="reader-facing-object"') !== 3) {
+    fail("AG12C-R1 state must contain three reader-facing object blocks");
+  }
+  if (articleHtml.includes("Additional pilot object:")) fail("AG12C-R1 state must remove internal pilot labels");
+} else if (markerCount(articleHtml, 'data-drishvara-layout-treatment="collapsed-pilot-annex"') !== 3) {
   fail("Exactly three pilot objects must be collapsed");
 }
 
@@ -121,8 +173,13 @@ for (const familyId of ["INFOGRAPHIC", "FIGURE_DIAGRAM", "MAP_GEOGRAPHIC_OBJECT"
   if (!articleHtml.includes(`AG12C-LAYOUT-REFINEMENT:END:${familyId}`)) fail(`${familyId} AG12C end marker missing`);
 }
 
-if (layout.public_primary_visible_object_count_after_refinement !== 4) fail("Primary visible count must be four");
-if (layout.collapsed_pilot_object_count_after_refinement !== 3) fail("Collapsed pilot count must be three");
+if (hasAg12cR1Repair) {
+  if (ag12cR1Apply.reader_facing_object_count_after_repair !== 3) fail("AG12C-R1 reader-facing object count must be three");
+  if (ag12cR1Apply.original_governed_object_markers_preserved !== true) fail("AG12C-R1 must preserve governed object markers");
+} else {
+  if (layout.public_primary_visible_object_count_after_refinement !== 4) fail("Primary visible count must be four");
+  if (layout.collapsed_pilot_object_count_after_refinement !== 3) fail("Collapsed pilot count must be three");
+}
 if (layout.status !== "controlled_layout_refinement_applied") fail("Layout treatment status mismatch");
 
 if (apply.status !== "controlled_layout_refinement_applied_pending_post_refinement_audit") fail("Apply status mismatch");

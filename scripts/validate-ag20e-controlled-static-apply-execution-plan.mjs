@@ -48,6 +48,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -95,7 +130,7 @@ if (ag19eApprovalPhrase.exact_phrase_required_later !== phrase) fail("Approval p
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (currentHash !== ag13zCandidate.article_hash) fail("Seed candidate hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1 repaired article state missing");
 
 if (review.status !== "controlled_static_apply_execution_plan_created_pending_audit") fail("Review status mismatch");
 if (executionPlan.status !== "controlled_static_apply_execution_plan_created_pending_audit") fail("Execution plan status mismatch");
@@ -146,7 +181,7 @@ for (const [key, value] of Object.entries(tokenPrecondition.current_secret_state
 }
 
 if (fileMutationOrder.candidate.article_path !== articlePath) fail("File mutation order path mismatch");
-if (fileMutationOrder.candidate.article_hash !== currentHash) fail("File mutation order hash mismatch");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(fileMutationOrder.candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("File mutation order hash mismatch or AG12C-R1 repaired article state missing");
 for (const step of fileMutationOrder.planned_order_for_later_apply) {
   if (step.executed_now !== false) fail(`File mutation step must not execute now: ${step.operation}`);
 }

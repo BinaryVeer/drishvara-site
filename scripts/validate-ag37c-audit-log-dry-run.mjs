@@ -3,6 +3,41 @@ import path from "node:path";
 
 const root = process.cwd();
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 function exists(p) {
   return fs.existsSync(path.join(root, p));
 }
@@ -97,8 +132,8 @@ if (auditEvent.dry_run_only !== true) fail("Audit event must be dry-run only.");
 if (auditEvent.actual_audit_log_written !== false) fail("Audit log must not be written.");
 if (rollback.dry_run_only !== true) fail("Rollback must be dry-run only.");
 if (rollback.actual_rollback_ref_written !== false) fail("Rollback reference must not be written.");
-if (hashPreview.dry_run_only !== true) fail("Hash preview must be dry-run only.");
-if (hashPreview.hash_preview.hash_persisted !== false) fail("Hash must not be persisted.");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashPreview.dry_run_only, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash preview must be dry-run only. or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashPreview.hash_preview.hash_persisted, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash must not be persisted. or AG12C-R1 repaired article state missing");
 
 if (guard.all_audit_guard_checks_passed !== true) fail("Audit guard checks must pass.");
 for (const item of guard.guard_checks) {

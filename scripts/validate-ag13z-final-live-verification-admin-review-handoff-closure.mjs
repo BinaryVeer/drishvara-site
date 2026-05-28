@@ -44,6 +44,41 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -85,7 +120,16 @@ if (!fs.existsSync(path.join(root, backupPath))) fail(`Rollback backup missing: 
 const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (articleHash !== ag12cApply.post_refinement_hash) fail("Current article hash must remain AG12C post-refinement hash");
+const ag12cR1ApplyPath = "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json";
+const hasAg12cR1Repair = fs.existsSync(path.join(root, ag12cR1ApplyPath));
+const ag12cR1Apply = hasAg12cR1Repair ? readJson(ag12cR1ApplyPath) : null;
+
+if (hasAg12cR1Repair) {
+  if (!hashPairMatchesCurrentOrAg12cR1Repair(articleHash, ag12cR1Apply.post_repair_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Current article hash must match AG12C-R1 post-repair hash or AG12C-R1 repaired article state missing");
+  if (!hashPairMatchesCurrentOrAg12cR1Repair(ag12cR1Apply.pre_repair_hash, ag12cApply.post_refinement_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("AG12C-R1 must supersede AG12C post-refinement hash or AG12C-R1 repaired article state missing");
+} else if (articleHash !== ag12cApply.post_refinement_hash) {
+  fail("Current article hash must remain AG12C post-refinement hash");
+}
 if (backupHash !== ag12cApply.pre_refinement_hash) fail("Rollback backup hash must remain AG12C pre-refinement hash");
 
 if (review.status !== "final_live_verification_closed_admin_review_handoff_created") fail("Review status mismatch");

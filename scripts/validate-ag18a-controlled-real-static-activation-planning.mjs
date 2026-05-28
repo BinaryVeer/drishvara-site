@@ -49,6 +49,61 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  if (leftHash === rightHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+
+    const articlePathMatches =
+      articlePath === null ||
+      articlePath === undefined ||
+      ag12cR1Apply.selected_article_path === articlePath;
+
+    if (!articlePathMatches) return false;
+
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      (
+        (
+          ag12cR1Apply.pre_repair_hash === leftHash &&
+          ag12cR1Apply.post_repair_hash === rightHash
+        ) ||
+        (
+          ag12cR1Apply.pre_repair_hash === rightHash &&
+          ag12cR1Apply.post_repair_hash === leftHash
+        )
+      )
+    );
+  } catch {
+    return false;
+  }
+}
+
+
+function articleHashMatchesCurrentOrAg12cR1(recordedHash, articlePath, currentHash) {
+  if (recordedHash === currentHash) return true;
+
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+
+  try {
+    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+    return (
+      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+      ag12cR1Apply.selected_article_path === articlePath &&
+      ag12cR1Apply.pre_repair_hash === recordedHash &&
+      ag12cR1Apply.post_repair_hash === currentHash
+    );
+  } catch {
+    return false;
+  }
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -90,7 +145,7 @@ if (ag17aDecision.selected_path !== "hybrid_staged_path") fail("Hybrid staged pa
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (currentHash !== ag13zCandidate.article_hash) fail("Seed candidate article hash mismatch");
+if (!articleHashMatchesCurrentOrAg12cR1(ag13zCandidate.article_hash, articlePath, currentHash)) fail("Seed candidate article hash mismatch or AG12C-R1 repaired article state missing");
 
 if (review.status !== "controlled_real_static_activation_planning_defined_real_activation_blocked") fail("Review status mismatch");
 if (sequence.status !== "real_static_activation_sequence_planned_no_execution") fail("Sequence plan status mismatch");
@@ -106,7 +161,7 @@ for (const [key, value] of Object.entries(sequence.execution_state_now)) {
   if (value !== false) fail(`Sequence execution state must remain false: ${key}`);
 }
 
-if (candidate.candidate_under_consideration.hash_verified !== true) fail("Candidate hash must be verified");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(candidate.candidate_under_consideration.hash_verified, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate hash must be verified or AG12C-R1 repaired article state missing");
 if (candidate.selection_decision_now.first_candidate_selected_for_real_apply !== false) fail("Candidate must not be selected for real apply");
 if (candidate.selection_decision_now.public_visibility_enabled !== false) fail("Candidate must not enable public visibility");
 if (candidate.selection_decision_now.publish_approved_enabled !== false) fail("Candidate must not enable publish approved");

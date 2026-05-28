@@ -42,6 +42,27 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
+function ag12cR1AwarePostRefinementHashMatches(ag12cApply, currentHash) {
+  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+
+  if (fs.existsSync(ag12cR1ApplyPath)) {
+    try {
+      const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+      return (
+        ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
+        ag12cR1Apply.selected_article_path === ag12cApply.selected_article_path &&
+        ag12cR1Apply.pre_repair_hash === ag12cApply.post_refinement_hash &&
+        ag12cR1Apply.post_repair_hash === currentHash
+      );
+    } catch {
+      return false;
+    }
+  }
+
+  return ag12cApply.post_refinement_hash === currentHash;
+}
+
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -82,7 +103,7 @@ if (!fs.existsSync(path.join(root, backupPath))) fail(`Rollback backup missing: 
 const localHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (localHash !== ag12cApply.post_refinement_hash) fail("Local article hash must remain AG12C post-refinement hash");
+if (!ag12cR1AwarePostRefinementHashMatches(ag12cApply, localHash)) fail("Article hash must match AG12C or AG12C-R1 refined state");
 if (backupHash !== ag12cApply.pre_refinement_hash) fail("Rollback backup hash must remain AG12C pre-refinement hash");
 
 if (review.status !== "controlled_live_preview_observation_audit_passed") fail("Review status mismatch");

@@ -1,0 +1,66 @@
+{
+  "module_id": "AG12C-R1",
+  "title": "Public Object Label and Layout Repair",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "source_module_corrected": "AG12C",
+  "source_apply_record": "data/content-intelligence/apply-records/ag12c-controlled-layout-refinement-apply.json",
+  "pre_repair_hash": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "observed_pre_repair_hash_at_runtime": "29b6a7b6b0ccf7762a1a3391e61f7f12b0a163e54069b61b5830e213a1531cf4",
+  "post_repair_hash": "b8b0a3de34483fca0fe6c564dba74b68ddf478994c2bbef43b7759dc2ec22494",
+  "backup_path": "data/content-intelligence/backups/ag12c-r1-pre-public-object-label-layout-repair.html",
+  "repair_scope": [
+    "Replace reader-visible internal pilot labels.",
+    "Convert collapsed pilot annex wrappers into reader-facing object blocks.",
+    "Preserve all governed inserted article objects.",
+    "Do not generate new object assets.",
+    "Do not remove object assets.",
+    "Do not change references, image assets, external URLs, database, backend, Supabase, Auth or deployment."
+  ],
+  "object_generation_performed": false,
+  "new_object_inserted": false,
+  "existing_object_removed": false,
+  "reference_fetch_performed": false,
+  "image_generation_performed": false,
+  "public_publishing_operation_performed": false,
+  "database_write_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "service_role_key_exposed": false,
+  "status": "public_object_label_layout_repair_audit_passed",
+  "checks": [
+    {
+      "check_id": "no_additional_pilot_object_label",
+      "passed": true
+    },
+    {
+      "check_id": "no_collapsed_pilot_annex_public_treatment",
+      "passed": true
+    },
+    {
+      "check_id": "three_reader_facing_blocks",
+      "passed": true
+    },
+    {
+      "check_id": "governed_object_markers_preserved_once",
+      "passed": true
+    },
+    {
+      "check_id": "no_object_generation",
+      "passed": true
+    },
+    {
+      "check_id": "no_object_removal",
+      "passed": true
+    },
+    {
+      "check_id": "no_backend_or_database_activation",
+      "passed": true
+    },
+    {
+      "check_id": "no_public_publish",
+      "passed": true
+    }
+  ],
+  "failed_checks": []
+}
