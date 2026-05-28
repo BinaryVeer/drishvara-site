@@ -1,0 +1,50 @@
+{
+  "module_id": "AG39Z",
+  "title": "Operator Approval Carry Forward Record",
+  "status": "operator_approval_requirement_carried_forward_to_ag40",
+  "approval_state": {
+    "explicit_operator_approval_recorded": false,
+    "execution_authorized_now": false,
+    "public_mutation_allowed_now": false,
+    "live_smoke_test_execution_allowed_now": false,
+    "database_write_allowed_now": false,
+    "deployment_allowed_now": false,
+    "service_role_key_allowed_in_repo_or_chat": false
+  },
+  "required_before_any_future_live_test_execution": [
+    "Explicit operator approval.",
+    "Exact live/test article URL or slug confirmation.",
+    "Rollback and audit path confirmation.",
+    "Grant/RLS confirmation.",
+    "No service-role key in repo/chat.",
+    "No unintended public surface mutation."
+  ],
+  "blocked_state": {
+    "controlled_execution_closure_created": true,
+    "ag39_controlled_execution_chain_closed": true,
+    "live_dynamic_smoke_test_readiness_created": true,
+    "live_article_url_test_ready_to_plan": true,
+    "explicit_operator_approval_recorded": false,
+    "execution_authorized_now": false,
+    "public_mutation_approved_now": false,
+    "live_article_url_test_executed": false,
+    "admin_editor_workflow_test_executed": false,
+    "public_listing_test_executed": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
