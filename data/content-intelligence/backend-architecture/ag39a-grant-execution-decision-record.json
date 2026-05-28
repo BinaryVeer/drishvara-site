@@ -1,0 +1,41 @@
+{
+  "module_id": "AG39A",
+  "title": "Grant Execution Decision Record",
+  "status": "grant_execution_decision_created_no_sql_executed",
+  "inherited_from_ag38z": "data/content-intelligence/backend-architecture/ag38z-explicit-grant-carry-forward-record.json",
+  "decision_scope": "decision_only_no_sql_execution",
+  "grant_decision": {
+    "authenticated_read_grants_may_be_packaged_later": true,
+    "anon_grants_for_admin_editor_tables_allowed": false,
+    "write_grants_allowed_without_approval": false,
+    "sql_grants_allowed_now": false,
+    "sql_grants_executed_now": false,
+    "service_role_key_required_in_repo_or_chat": false,
+    "rls_remains_primary_access_control_layer": true
+  },
+  "blocked_state": {
+    "public_mutation_decision_checkpoint_created": true,
+    "public_mutation_risk_review_created": true,
+    "operator_approval_gate_created": true,
+    "grant_execution_decision_created": true,
+    "execution_scope_decision_created": true,
+    "controlled_execution_package_ready_to_plan": true,
+    "explicit_operator_approval_recorded": false,
+    "public_mutation_approved_now": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_grants_executed": false
+  }
+}
