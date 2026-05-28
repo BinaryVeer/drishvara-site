@@ -1,0 +1,99 @@
+{
+  "module_id": "AG41C",
+  "title": "No-mutation Audit Register",
+  "status": "no_mutation_audit_passed_for_ag41c",
+  "checks": [
+    {
+      "check_id": "planning_only",
+      "passed": true
+    },
+    {
+      "check_id": "no_dashboard_runtime",
+      "passed": true
+    },
+    {
+      "check_id": "no_dashboard_query_execution",
+      "passed": true
+    },
+    {
+      "check_id": "no_monitoring_job_created",
+      "passed": true
+    },
+    {
+      "check_id": "no_batch_execution",
+      "passed": true
+    },
+    {
+      "check_id": "no_public_mutation",
+      "passed": true
+    },
+    {
+      "check_id": "no_real_publish",
+      "passed": true
+    },
+    {
+      "check_id": "no_database_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_audit_log_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_rollback_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_deployment",
+      "passed": true
+    },
+    {
+      "check_id": "no_sql_file_created",
+      "passed": true
+    },
+    {
+      "check_id": "no_sql_grant_execution",
+      "passed": true
+    },
+    {
+      "check_id": "no_service_role_key",
+      "passed": true
+    },
+    {
+      "check_id": "no_anon_grant",
+      "passed": true
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "monitoring_audit_dashboard_plan_created": true,
+    "dashboard_metric_model_created": true,
+    "audit_log_dashboard_plan_created": true,
+    "rollback_monitoring_plan_created": true,
+    "batch_health_monitoring_plan_created": true,
+    "dynamic_sop_audit_ready": true,
+    "dashboard_runtime_enabled": false,
+    "dashboard_ui_created_now": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}

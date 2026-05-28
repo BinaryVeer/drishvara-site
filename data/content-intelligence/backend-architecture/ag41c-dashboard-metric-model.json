@@ -1,0 +1,75 @@
+{
+  "module_id": "AG41C",
+  "title": "Dashboard Metric Model",
+  "status": "dashboard_metric_model_created",
+  "dashboard_metrics": [
+    {
+      "metric_id": "article_pipeline_status_count",
+      "purpose": "count articles by draft, editor_submitted, admin_review, publish_approved, published and returned status",
+      "source_table_planned": "articles",
+      "runtime_query_executed_in_ag41c": false
+    },
+    {
+      "metric_id": "editor_assignment_backlog",
+      "purpose": "track assigned, returned, submitted and closed editor assignments",
+      "source_table_planned": "article_assignments",
+      "runtime_query_executed_in_ag41c": false
+    },
+    {
+      "metric_id": "publish_approval_queue",
+      "purpose": "track articles waiting for Admin approval before controlled publish",
+      "source_table_planned": "articles",
+      "runtime_query_executed_in_ag41c": false
+    },
+    {
+      "metric_id": "audit_log_completeness",
+      "purpose": "track whether required audit records exist for future publish/rollback events",
+      "source_table_planned": "article_audit_logs",
+      "runtime_query_executed_in_ag41c": false
+    },
+    {
+      "metric_id": "rollback_readiness",
+      "purpose": "track whether rollback reference exists before future publish execution",
+      "source_table_planned": "publish_rollback_refs",
+      "runtime_query_executed_in_ag41c": false
+    },
+    {
+      "metric_id": "public_listing_verification",
+      "purpose": "track post-publish public URL and listing verification state",
+      "source_table_planned": "future_public_verification_records",
+      "runtime_query_executed_in_ag41c": false
+    }
+  ],
+  "dashboard_runtime_enabled_in_ag41c": false,
+  "blocked_state": {
+    "monitoring_audit_dashboard_plan_created": true,
+    "dashboard_metric_model_created": true,
+    "audit_log_dashboard_plan_created": true,
+    "rollback_monitoring_plan_created": true,
+    "batch_health_monitoring_plan_created": true,
+    "dynamic_sop_audit_ready": true,
+    "dashboard_runtime_enabled": false,
+    "dashboard_ui_created_now": false,
+    "dashboard_data_query_executed": false,
+    "monitoring_job_created": false,
+    "batch_execution_authorized_now": false,
+    "batch_publish_executed": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
