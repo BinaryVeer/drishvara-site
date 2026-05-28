@@ -1,0 +1,91 @@
+{
+  "module_id": "AG39D",
+  "title": "No-mutation Audit Register",
+  "status": "no_mutation_audit_passed_for_ag39d",
+  "checks": [
+    {
+      "check_id": "no_operator_approval_recorded",
+      "passed": true
+    },
+    {
+      "check_id": "no_execution_authorized",
+      "passed": true
+    },
+    {
+      "check_id": "no_public_mutation",
+      "passed": true
+    },
+    {
+      "check_id": "no_real_publish",
+      "passed": true
+    },
+    {
+      "check_id": "no_queue_state_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_audit_log_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_rollback_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_database_write",
+      "passed": true
+    },
+    {
+      "check_id": "no_public_article_mutation",
+      "passed": true
+    },
+    {
+      "check_id": "no_deployment",
+      "passed": true
+    },
+    {
+      "check_id": "no_sql_file_created",
+      "passed": true
+    },
+    {
+      "check_id": "no_sql_grant_execution",
+      "passed": true
+    },
+    {
+      "check_id": "no_anon_grant",
+      "passed": true
+    },
+    {
+      "check_id": "no_service_role_key",
+      "passed": true
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "controlled_execution_audit_created": true,
+    "preflight_chain_audit_passed": true,
+    "grant_security_audit_passed": true,
+    "operator_approval_gate_audit_passed": true,
+    "no_mutation_audit_passed": true,
+    "controlled_execution_closure_ready": true,
+    "explicit_operator_approval_recorded": false,
+    "public_mutation_approved_now": false,
+    "execution_authorized_now": false,
+    "real_apply_approved_now": false,
+    "real_publish_executed": false,
+    "actual_queue_state_changed": false,
+    "audit_log_write_done": false,
+    "rollback_write_done": false,
+    "database_write_done": false,
+    "public_article_mutated": false,
+    "deployment_triggered": false,
+    "public_mutation_done": false,
+    "dynamic_publish_runtime_enabled": false,
+    "service_role_key_recorded": false,
+    "service_role_key_exposed": false,
+    "anon_access_granted": false,
+    "write_grants_executed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false
+  }
+}
