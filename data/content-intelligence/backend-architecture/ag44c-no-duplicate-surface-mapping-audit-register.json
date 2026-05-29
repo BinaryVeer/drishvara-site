@@ -1,0 +1,64 @@
+{
+  "module_id": "AG44C",
+  "title": "No-duplicate Surface Mapping Audit Register",
+  "status": "no_duplicate_surface_mapping_audit_passed_for_ag44c",
+  "checks": [
+    {
+      "check_id": "ag44b_consumed_not_recreated",
+      "passed": true
+    },
+    {
+      "check_id": "ag23_homepage_first_light_consumed_not_recreated",
+      "passed": true
+    },
+    {
+      "check_id": "ag25_featured_reads_consumed_not_recreated",
+      "passed": true
+    },
+    {
+      "check_id": "episode_to_surface_mapping_recorded_without_runtime_surface",
+      "passed": true
+    },
+    {
+      "check_id": "badge_navigation_planned_without_public_activation",
+      "passed": true
+    },
+    {
+      "check_id": "no_episode_generation",
+      "passed": true
+    },
+    {
+      "check_id": "no_homepage_or_featured_reads_mutation",
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "ag44c_episode_surface_mapping_completed": true,
+    "ag44b_consumed": true,
+    "ag23_homepage_first_light_sources_consumed": true,
+    "ag25_featured_reads_sources_consumed": true,
+    "episode_to_surface_model_recorded": true,
+    "badge_navigation_plan_recorded": true,
+    "duplicate_episode_surface_system_created": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "object_generation_executed": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "category_listing_mutated": false,
+    "article_listing_mutated": false,
+    "runtime_file_mutated": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

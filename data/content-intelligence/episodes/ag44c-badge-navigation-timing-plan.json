@@ -1,0 +1,60 @@
+{
+  "module_id": "AG44C",
+  "title": "Episode Badge and Navigation Timing Plan",
+  "status": "badge_navigation_timing_plan_recorded",
+  "planned_badges": [
+    {
+      "rhythm_key": "tuesday",
+      "public_badge_label": "Tuesday Learning",
+      "placement_candidate": "future reading surface card",
+      "enabled_now": false
+    },
+    {
+      "rhythm_key": "friday",
+      "public_badge_label": "World Lens",
+      "placement_candidate": "future topical episode card",
+      "enabled_now": false
+    },
+    {
+      "rhythm_key": "sunday",
+      "public_badge_label": "Deep Read",
+      "placement_candidate": "future Featured Reads/deep-read card",
+      "enabled_now": false
+    }
+  ],
+  "navigation_timing_rules": [
+    "Badges must remain planned metadata until approved public-surface activation.",
+    "Episode cards should not be rendered into homepage or Featured Reads in AG44C.",
+    "Future surface mapping should preserve AG23 Discover → Read → Reflect movement.",
+    "Future Featured Reads placement should consume AG25/AG46 long-form strengthening records."
+  ],
+  "mutation_now": false,
+  "blocked_state": {
+    "ag44c_episode_surface_mapping_completed": true,
+    "ag44b_consumed": true,
+    "ag23_homepage_first_light_sources_consumed": true,
+    "ag25_featured_reads_sources_consumed": true,
+    "episode_to_surface_model_recorded": true,
+    "badge_navigation_plan_recorded": true,
+    "duplicate_episode_surface_system_created": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "object_generation_executed": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "category_listing_mutated": false,
+    "article_listing_mutated": false,
+    "runtime_file_mutated": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

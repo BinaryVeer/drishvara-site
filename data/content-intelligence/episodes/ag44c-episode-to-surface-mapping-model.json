@@ -1,0 +1,68 @@
+{
+  "module_id": "AG44C",
+  "title": "Episode-to-Surface Mapping Model",
+  "status": "episode_to_surface_mapping_model_created",
+  "consumed_from_ag44b": {
+    "ag44b_review": "data/content-intelligence/quality-reviews/ag44b-weekly-rhythm-calendar-alignment.json",
+    "ag44b_rhythm_model": "data/content-intelligence/episodes/ag44b-weekly-rhythm-model.json",
+    "ag44b_calendar_consumption": "data/content-intelligence/episodes/ag44b-calendar-consumption-map.json",
+    "ag44b_series_alignment": "data/content-intelligence/episodes/ag44b-series-structure-alignment-map.json"
+  },
+  "rhythm_to_surface_mapping": [
+    {
+      "rhythm_key": "tuesday",
+      "rhythm_label": "Tuesday Learning",
+      "planned_surface": "Reading surface / learning episode lane",
+      "public_activation_now": false,
+      "mutation_now": false
+    },
+    {
+      "rhythm_key": "friday",
+      "rhythm_label": "Friday World Lens / Burning Topic",
+      "planned_surface": "Reading surface / timely world lens lane",
+      "public_activation_now": false,
+      "mutation_now": false
+    },
+    {
+      "rhythm_key": "sunday",
+      "rhythm_label": "Sunday Deep Read",
+      "planned_surface": "Featured Reads / deep-read episode lane",
+      "public_activation_now": false,
+      "mutation_now": false
+    }
+  ],
+  "result": {
+    "episode_surface_mapping_recorded": true,
+    "existing_surfaces_consumed": true,
+    "new_public_surface_created": false,
+    "duplicate_episode_surface_system_created": false
+  },
+  "blocked_state": {
+    "ag44c_episode_surface_mapping_completed": true,
+    "ag44b_consumed": true,
+    "ag23_homepage_first_light_sources_consumed": true,
+    "ag25_featured_reads_sources_consumed": true,
+    "episode_to_surface_model_recorded": true,
+    "badge_navigation_plan_recorded": true,
+    "duplicate_episode_surface_system_created": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "object_generation_executed": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "category_listing_mutated": false,
+    "article_listing_mutated": false,
+    "runtime_file_mutated": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
