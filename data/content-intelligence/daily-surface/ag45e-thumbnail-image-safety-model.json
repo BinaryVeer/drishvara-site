@@ -1,0 +1,74 @@
+{
+  "module_id": "AG45E",
+  "title": "Thumbnail and Image Safety Model",
+  "status": "thumbnail_image_safety_model_recorded",
+  "planned_fields": [
+    "image_url",
+    "image_credit",
+    "image_usage_status",
+    "image_source_type"
+  ],
+  "source_types": [
+    {
+      "type": "publisher_link_preview",
+      "treatment": "Use only as external preview metadata in later approved runtime stages where permitted; do not download or rehost."
+    },
+    {
+      "type": "licensed_or_public_domain_asset",
+      "treatment": "May be considered later only with license and attribution recorded."
+    },
+    {
+      "type": "drishvara_editorial_synthesis",
+      "treatment": "Use Drishvara-created visual credit where the asset is prepared internally and no external statistical dataset is introduced unless separately cited."
+    },
+    {
+      "type": "unsafe_or_unclear_rights_asset",
+      "treatment": "Exclude or hold under editorial verification."
+    }
+  ],
+  "safety_rules": [
+    "Do not download or store publisher images in AG45E.",
+    "Do not rehost third-party thumbnails unless rights are explicitly cleared in a later approved stage.",
+    "Use image URL and credit metadata only in early stages.",
+    "Never use adult, explicit, violent shock, hate, extremist or reputation-risk imagery.",
+    "When rights are unclear, use under editorial verification or a Drishvara neutral placeholder in later approved UI stages.",
+    "Image credit must remain visibly connected to the visual when public rendering is later approved."
+  ],
+  "image_fetch_now": false,
+  "blocked_state": {
+    "ag45e_image_link_attribution_safety_recorded": true,
+    "ag45d_consumed": true,
+    "link_safety_model_recorded": true,
+    "thumbnail_image_safety_model_recorded": true,
+    "attribution_credit_display_model_recorded": true,
+    "external_asset_no_download_policy_recorded": true,
+    "verification_status_bands_recorded": true,
+    "image_reference_governance_consumed_where_available": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "thumbnail_fetch_executed": false,
+    "video_fetch_executed": false,
+    "image_downloaded_or_rehosted": false,
+    "video_downloaded_or_rehosted": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

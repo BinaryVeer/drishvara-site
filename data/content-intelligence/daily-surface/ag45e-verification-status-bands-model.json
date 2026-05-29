@@ -1,0 +1,69 @@
+{
+  "module_id": "AG45E",
+  "title": "Verification Status Bands Model",
+  "status": "verification_status_bands_model_recorded",
+  "bands": [
+    {
+      "status": "verified",
+      "meaning": "Source link, attribution and asset usage have been checked in a later approved verification stage."
+    },
+    {
+      "status": "reachable_pending_editorial_review",
+      "meaning": "Source appears reachable in a later approved verification stage, but editorial review is still pending."
+    },
+    {
+      "status": "under_editorial_verification",
+      "meaning": "Source or visual asset is being checked; use only cautious public wording if displayed later."
+    },
+    {
+      "status": "metadata_only_not_fetched",
+      "meaning": "Record exists as planned metadata only; no live fetch has occurred."
+    },
+    {
+      "status": "broken_or_unreachable",
+      "meaning": "Link or source could not be reached in a later verification stage."
+    },
+    {
+      "status": "unsafe_or_excluded",
+      "meaning": "Source or asset failed safety/reputation/rights checks."
+    }
+  ],
+  "default_status_for_ag45e": "metadata_only_not_fetched",
+  "public_display_rule": "Do not claim verification publicly unless status is verified or otherwise clearly approved in a later governed stage.",
+  "blocked_state": {
+    "ag45e_image_link_attribution_safety_recorded": true,
+    "ag45d_consumed": true,
+    "link_safety_model_recorded": true,
+    "thumbnail_image_safety_model_recorded": true,
+    "attribution_credit_display_model_recorded": true,
+    "external_asset_no_download_policy_recorded": true,
+    "verification_status_bands_recorded": true,
+    "image_reference_governance_consumed_where_available": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "thumbnail_fetch_executed": false,
+    "video_fetch_executed": false,
+    "image_downloaded_or_rehosted": false,
+    "video_downloaded_or_rehosted": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
