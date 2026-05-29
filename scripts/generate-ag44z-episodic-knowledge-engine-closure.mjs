@@ -247,10 +247,10 @@ const noMutationAudit = {
 const readiness = {
   module_id: "AG44Z",
   title: "Next Governed Stage Readiness Record",
-  status: "ready_for_next_governed_stage_after_ag44_closure",
+  status: "ready_for_ag45_homepage_daily_surface_first_light_activation",
   ready_for_next_governed_stage: true,
   next_stage_id: "AG45",
-  next_stage_title: "Next governed post-episodic stage",
+  next_stage_title: "Homepage Daily Surface and First Light Activation",
   hard_blocker_count_for_next_governed_stage: 0,
   ag56_dynamic_content_loop_still_deferred: true,
   article_mutation_allowed_next: false,
@@ -271,9 +271,9 @@ const readiness = {
 const boundary = {
   module_id: "AG44Z",
   title: "AG44Z to Next Governed Stage Boundary",
-  status: "next_governed_stage_boundary_created",
+  status: "ag45_homepage_daily_surface_first_light_boundary_created",
   next_stage_id: "AG45",
-  next_stage_title: "Next governed post-episodic stage",
+  next_stage_title: "Homepage Daily Surface and First Light Activation",
   allowed_scope: [
     "Consume AG44Z closure outputs.",
     "Continue only to the next approved governed stage.",
@@ -426,7 +426,7 @@ AG44Z closes the governed AG44 episodic knowledge-engine chain.
 
 ## Next
 
-Proceed only to the next approved governed stage after this closure.
+Proceed only to AG45 — Homepage Daily Surface and First Light Activation.
 `;
 
 writeJson(outputs.chainAudit, chainAudit);

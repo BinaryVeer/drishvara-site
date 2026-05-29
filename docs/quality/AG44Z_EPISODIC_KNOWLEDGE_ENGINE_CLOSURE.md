@@ -35,4 +35,4 @@ AG44Z closes the governed AG44 episodic knowledge-engine chain.
 
 ## Next
 
-Proceed only to the next approved governed stage after this closure.
+Proceed only to AG45 — Homepage Daily Surface and First Light Activation.
