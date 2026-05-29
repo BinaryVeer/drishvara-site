@@ -1,0 +1,61 @@
+{
+  "module_id": "AG45H",
+  "title": "Retention, Privacy and Safety Model",
+  "status": "retention_privacy_safety_model_recorded",
+  "data_scope": {
+    "public_source_metadata_only": true,
+    "personal_user_data_included": false,
+    "private_user_behaviour_tracking_included": false,
+    "raw_scraped_article_text_included": false,
+    "downloaded_third_party_assets_included": false
+  },
+  "retention_principles": [
+    "Store public-source metadata only in later approved backend stages.",
+    "Do not store full third-party article text.",
+    "Do not download or rehost third-party images/videos unless rights are cleared in later approved stages.",
+    "Keep safety and verification status with every future record.",
+    "Retain source URL and publisher attribution for traceability.",
+    "Use editorial review statuses for uncertain assets/sources."
+  ],
+  "safety_controls": [
+    "unsafe_or_excluded records must not be public-facing",
+    "broken_or_unreachable links must not be presented as verified",
+    "under_editorial_verification records require cautious handling",
+    "adult/explicit/hate/extremist/reputation-risk content must be excluded",
+    "service-role keys must never be recorded in repo or chat"
+  ],
+  "blocked_state": {
+    "ag45h_backend_metadata_pattern_schema_recorded": true,
+    "ag45g_consumed": true,
+    "metadata_schema_plan_recorded": true,
+    "yearly_pattern_study_schema_recorded": true,
+    "inference_traceability_model_recorded": true,
+    "retention_privacy_safety_model_recorded": true,
+    "backend_activation_deferral_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_grants_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_exposed": false,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "homepage_mutated": false,
+    "homepage_runtime_script_mutated": false,
+    "css_mutated": false,
+    "public_card_rendering_activated": false,
+    "video_popup_activated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false
+  }
+}

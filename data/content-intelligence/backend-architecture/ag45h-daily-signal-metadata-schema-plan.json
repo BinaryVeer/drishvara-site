@@ -1,0 +1,123 @@
+{
+  "module_id": "AG45H",
+  "title": "Daily Signal Metadata Schema Plan",
+  "status": "daily_signal_metadata_schema_plan_recorded_no_sql_no_db_write",
+  "schema_name_planning_only": "daily_signal_surface_records",
+  "table_creation_now": false,
+  "sql_creation_now": false,
+  "database_write_now": false,
+  "backend_activation_now": false,
+  "planned_field_groups": [
+    {
+      "group": "identity_and_time",
+      "fields": [
+        "signal_id",
+        "date",
+        "rank",
+        "created_at",
+        "updated_at",
+        "version"
+      ]
+    },
+    {
+      "group": "display_copy",
+      "fields": [
+        "drishvara_title",
+        "drishvara_subtitle",
+        "region_scope",
+        "category",
+        "surface_tag"
+      ]
+    },
+    {
+      "group": "source_traceability",
+      "fields": [
+        "source_title",
+        "publisher_name",
+        "reporter_name",
+        "reporter_profile_url",
+        "source_url",
+        "canonical_url"
+      ]
+    },
+    {
+      "group": "asset_metadata",
+      "fields": [
+        "image_url",
+        "image_credit",
+        "image_usage_status",
+        "video_url",
+        "video_creator",
+        "video_credit",
+        "video_rights_status"
+      ]
+    },
+    {
+      "group": "selection_and_inference",
+      "fields": [
+        "credibility_score",
+        "selection_reason",
+        "theme_tags",
+        "inference_tags",
+        "pattern_value",
+        "reference_value",
+        "article_planning_value"
+      ]
+    },
+    {
+      "group": "safety_and_verification",
+      "fields": [
+        "safety_status",
+        "verification_status",
+        "rights_status",
+        "editorial_review_status",
+        "excluded_reason"
+      ]
+    }
+  ],
+  "required_minimum_fields_later": [
+    "date",
+    "rank",
+    "region_scope",
+    "drishvara_title",
+    "drishvara_subtitle",
+    "publisher_name",
+    "source_url",
+    "verification_status",
+    "safety_status"
+  ],
+  "blocked_state": {
+    "ag45h_backend_metadata_pattern_schema_recorded": true,
+    "ag45g_consumed": true,
+    "metadata_schema_plan_recorded": true,
+    "yearly_pattern_study_schema_recorded": true,
+    "inference_traceability_model_recorded": true,
+    "retention_privacy_safety_model_recorded": true,
+    "backend_activation_deferral_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_grants_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_exposed": false,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "homepage_mutated": false,
+    "homepage_runtime_script_mutated": false,
+    "css_mutated": false,
+    "public_card_rendering_activated": false,
+    "video_popup_activated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false
+  }
+}
