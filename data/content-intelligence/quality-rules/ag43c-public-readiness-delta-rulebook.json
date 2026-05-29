@@ -1,0 +1,80 @@
+{
+  "module_id": "AG43C",
+  "title": "Public Readiness Delta Rulebook",
+  "status": "public_readiness_delta_rules_recorded",
+  "purpose": "Record only the missing delta rules discovered from the tested article/PDF; do not duplicate existing modules.",
+  "delta_rules": [
+    {
+      "rule_id": "ag43c_delta_01",
+      "rule": "No public-facing internal labels such as Additional pilot object.",
+      "already_corrected_by": "AG12C-R1",
+      "remaining_action": "consume and preserve"
+    },
+    {
+      "rule_id": "ag43c_delta_02",
+      "rule": "Drishvara-created visuals/objects use concise editorial synthesis credit.",
+      "already_corrected_by": "AR01-R1",
+      "remaining_action": "consume and preserve"
+    },
+    {
+      "rule_id": "ag43c_delta_03",
+      "rule": "Object title, body, caption and source/basis note should remain visually connected.",
+      "already_partially_handled_by": [
+        "AG12C-R1",
+        "AV01",
+        "AV02"
+      ],
+      "remaining_action": "carry to AG43D/AG46 template-hardening review"
+    },
+    {
+      "rule_id": "ag43c_delta_04",
+      "rule": "No empty object shell, clipped chart, clipped diagram/card text, or broken table flow.",
+      "already_partially_handled_by": [
+        "AG12C-R1"
+      ],
+      "remaining_action": "carry to AG43D/AG46/AG53 rendering and export checks"
+    },
+    {
+      "rule_id": "ag43c_delta_05",
+      "rule": "Browser print header/footer must not appear in controlled PDF/export view.",
+      "already_partially_handled_by": [],
+      "remaining_action": "carry to AG53 print/export validation"
+    },
+    {
+      "rule_id": "ag43c_delta_06",
+      "rule": "References should be consolidated into one clean public section when final reference-verification stage is reached.",
+      "already_partially_handled_by": [
+        "AR01",
+        "AR01-R1"
+      ],
+      "remaining_action": "carry to later reference-verification/rendering stage"
+    }
+  ],
+  "duplicate_module_created": false,
+  "blocked_state": {
+    "article_quality_longform_readiness_integrated": true,
+    "existing_quality_module_consumed": true,
+    "ag43b_topic_reference_image_model_consumed": true,
+    "ag12c_r1_object_label_repair_consumed": true,
+    "ar01_r1_credit_reference_cleanup_consumed": true,
+    "duplicate_quality_module_created": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "topic_promoted_to_live_article": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "object_generation_executed": false,
+    "object_removed": false,
+    "css_js_mutated": false,
+    "featured_reads_mutated": false,
+    "homepage_mutated": false,
+    "listing_mutated": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
