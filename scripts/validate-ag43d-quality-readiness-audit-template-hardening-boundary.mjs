@@ -64,7 +64,7 @@ const required = [
   "data/content-intelligence/backend-architecture/ag43d-no-mutation-audit-register.json",
   "data/content-intelligence/quality-registry/ag43d-quality-readiness-audit-blocker-register.json",
   "data/content-intelligence/quality-registry/ag43d-template-hardening-readiness-record.json",
-  "data/content-intelligence/mutation-plans/ag43d-to-ag43e-template-hardening-planning-boundary.json",
+  "data/content-intelligence/mutation-plans/ag43d-to-ag43z-article-intelligence-quality-closure-boundary.json",
   "data/quality/ag43d-quality-readiness-audit-template-hardening-boundary.json",
   "data/quality/ag43d-quality-readiness-audit-template-hardening-boundary-preview.json",
   "docs/quality/AG43D_QUALITY_READINESS_AUDIT_TEMPLATE_HARDENING_BOUNDARY.md",
@@ -101,7 +101,7 @@ const carryForward = readJson("data/content-intelligence/quality-registry/ag43d-
 const noMutationAudit = readJson("data/content-intelligence/backend-architecture/ag43d-no-mutation-audit-register.json");
 const blocker = readJson("data/content-intelligence/quality-registry/ag43d-quality-readiness-audit-blocker-register.json");
 const readiness = readJson("data/content-intelligence/quality-registry/ag43d-template-hardening-readiness-record.json");
-const boundary = readJson("data/content-intelligence/mutation-plans/ag43d-to-ag43e-template-hardening-planning-boundary.json");
+const boundary = readJson("data/content-intelligence/mutation-plans/ag43d-to-ag43z-article-intelligence-quality-closure-boundary.json");
 const preview = readJson("data/quality/ag43d-quality-readiness-audit-template-hardening-boundary-preview.json");
 const pkg = readJson("package.json");
 
@@ -149,10 +149,10 @@ for (const marker of [
   if (count(articleHtml, marker) !== 1) fail(`Governed object marker missing or duplicated: ${marker}`);
 }
 
-if (review.status !== "quality_readiness_audit_passed_ready_for_ag43e") fail("Review status mismatch.");
+if (review.status !== "quality_readiness_audit_passed_ready_for_ag43z") fail("Review status mismatch.");
 if (review.current_article_hash !== articleHash) fail("Review article hash mismatch.");
-if (review.summary.ready_for_ag43e !== true) fail("Review AG43E readiness missing.");
-if (review.summary.hard_blocker_count_for_ag43e !== 0) fail("Review hard blocker count must be zero.");
+if (review.summary.ready_for_ag43z !== true) fail("Review AG43Z readiness missing.");
+if (review.summary.hard_blocker_count_for_ag43z !== 0) fail("Review hard blocker count must be zero.");
 
 if (audit.status !== "quality_readiness_audit_passed_template_hardening_boundary_ready") fail("Audit status mismatch.");
 if (audit.failed_checks.length !== 0) fail("Audit failed checks must be zero.");
@@ -172,8 +172,8 @@ if (referenceBoundary.status !== "reference_consolidation_boundary_created") fai
 if (referenceBoundary.reference_fetch_allowed_now !== false) fail("Reference fetch must remain blocked.");
 if (referenceBoundary.external_link_verification_allowed_now !== false) fail("External link verification must remain blocked.");
 
-if (carryForward.status !== "carry_forward_items_recorded_for_ag43e") fail("Carry-forward status mismatch.");
-if (carryForward.hard_blocker_count_for_ag43e !== 0) fail("Carry-forward hard blocker count must be zero.");
+if (carryForward.status !== "carry_forward_items_recorded_for_ag43z") fail("Carry-forward status mismatch.");
+if (carryForward.hard_blocker_count_for_ag43z !== 0) fail("Carry-forward hard blocker count must be zero.");
 if (!carryForward.items.some((item) => item.category === "template_rendering")) fail("Template rendering carry-forward missing.");
 if (!carryForward.items.some((item) => item.category === "print_pdf_export")) fail("Print/PDF export carry-forward missing.");
 if (!carryForward.items.some((item) => item.category === "reference_consolidation")) fail("Reference consolidation carry-forward missing.");
@@ -185,11 +185,11 @@ for (const check of noMutationAudit.checks) {
   if (check.passed !== true) fail(`No-mutation check failed: ${check.check_id}`);
 }
 
-if (blocker.status !== "no_hard_blockers_for_ag43e") fail("Blocker status mismatch.");
-if (blocker.hard_blocker_count_for_ag43e !== 0) fail("Blocker count must be zero.");
+if (blocker.status !== "no_hard_blockers_for_ag43z") fail("Blocker status mismatch.");
+if (blocker.hard_blocker_count_for_ag43z !== 0) fail("Blocker count must be zero.");
 
-if (readiness.ready_for_ag43e !== true) fail("Readiness must permit AG43E.");
-if (readiness.next_stage_id !== "AG43E") fail("Readiness next stage must be AG43E.");
+if (readiness.ready_for_ag43z !== true) fail("Readiness must permit AG43Z.");
+if (readiness.next_stage_id !== "AG43Z") fail("Readiness next stage must be AG43Z.");
 if (readiness.article_mutation_allowed_next !== false) fail("Article mutation must remain blocked.");
 if (readiness.public_mutation_allowed_next !== false) fail("Public mutation must remain blocked.");
 if (readiness.article_generation_allowed_next !== false) fail("Article generation must remain blocked.");
@@ -200,8 +200,8 @@ if (readiness.deployment_allowed_next !== false) fail("Deployment must remain bl
 if (readiness.backend_activation_allowed_next !== false) fail("Backend activation must remain blocked.");
 if (readiness.service_role_key_required_in_repo_or_chat !== false) fail("Service-role key must not be required.");
 
-if (boundary.next_stage_id !== "AG43E") fail("Boundary must point to AG43E.");
-if (preview.ready_for_ag43e !== 1) fail("Preview AG43E readiness missing.");
+if (boundary.next_stage_id !== "AG43Z") fail("Boundary must point to AG43Z.");
+if (preview.ready_for_ag43z !== 1) fail("Preview AG43Z readiness missing.");
 if (preview.article_mutated !== 0) fail("Preview article mutation must be zero.");
 if (preview.template_mutated !== 0) fail("Preview template mutation must be zero.");
 if (preview.css_js_mutated !== 0) fail("Preview CSS/JS mutation must be zero.");
@@ -221,7 +221,7 @@ pass("AG43D Quality Readiness Audit and Template-Hardening Boundary is present."
 pass("AG43C, AG12C-R1 and AR01-R1 are consumed.");
 pass("Quality readiness audit is valid with zero hard blockers.");
 pass("Template/rendering, print/PDF export and reference consolidation boundaries are valid.");
-pass("Carry-forward register for AG43E/AG46/AG53/AG56 is valid.");
+pass("Carry-forward register for AG43Z/AG46/AG53/AG56 is valid.");
 pass("No-mutation audit is valid.");
-pass("AG43E Template, Export and Reference Hardening Plan readiness is valid.");
+pass("AG43Z Article Intelligence and Quality Automation Closure readiness is valid.");
 pass("No article/template/CSS/JS mutation, reference fetch, image generation, publishing, deployment, database write, backend activation or service-role key exposure is recorded.");

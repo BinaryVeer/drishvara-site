@@ -33,7 +33,7 @@ const outputs = {
   noMutationAudit: "data/content-intelligence/backend-architecture/ag43d-no-mutation-audit-register.json",
   blocker: "data/content-intelligence/quality-registry/ag43d-quality-readiness-audit-blocker-register.json",
   readiness: "data/content-intelligence/quality-registry/ag43d-template-hardening-readiness-record.json",
-  boundary: "data/content-intelligence/mutation-plans/ag43d-to-ag43e-template-hardening-planning-boundary.json",
+  boundary: "data/content-intelligence/mutation-plans/ag43d-to-ag43z-article-intelligence-quality-closure-boundary.json",
   registry: "data/quality/ag43d-quality-readiness-audit-template-hardening-boundary.json",
   preview: "data/quality/ag43d-quality-readiness-audit-template-hardening-boundary-preview.json",
   doc: "docs/quality/AG43D_QUALITY_READINESS_AUDIT_TEMPLATE_HARDENING_BOUNDARY.md"
@@ -221,7 +221,7 @@ const templateBoundary = {
   module_id: "AG43D",
   title: "Template and Rendering Hardening Boundary",
   status: "template_rendering_hardening_boundary_created",
-  purpose: "Prepare AG43E to model template/rendering hardening without mutating live article files.",
+  purpose: "Prepare AG43Z to model template/rendering hardening without mutating live article files.",
   hardening_targets: [
     "object title/body/caption/basis note visual grouping",
     "avoid empty object shells",
@@ -250,7 +250,7 @@ const exportBoundary = {
     "prevent large empty object shells in exported article",
     "preserve readable text contrast in PDF/export output"
   ],
-  carried_to_later_stage: ["AG43E", "AG46", "AG53"],
+  carried_to_later_stage: ["AG43Z", "AG46", "AG53"],
   mutation_now: false,
   blocked_state: blockedState
 };
@@ -275,13 +275,13 @@ const referenceBoundary = {
 const carryForward = {
   module_id: "AG43D",
   title: "Carry-forward Template, Export and Reference Register",
-  status: "carry_forward_items_recorded_for_ag43e",
+  status: "carry_forward_items_recorded_for_ag43z",
   items: [
     {
       item_id: "ag43d_cf_01",
       category: "template_rendering",
       description: "Verify object grouping, no clipping and no empty shell in template/rendering hardening.",
-      carried_to: ["AG43E", "AG46"]
+      carried_to: ["AG43Z", "AG46"]
     },
     {
       item_id: "ag43d_cf_02",
@@ -302,7 +302,7 @@ const carryForward = {
       carried_to: ["AG55", "AG56"]
     }
   ],
-  hard_blocker_count_for_ag43e: 0,
+  hard_blocker_count_for_ag43z: 0,
   blocked_state: blockedState
 };
 
@@ -338,21 +338,21 @@ const noMutationAudit = {
 const blocker = {
   module_id: "AG43D",
   title: "Quality Readiness Audit Blocker Register",
-  status: "no_hard_blockers_for_ag43e",
+  status: "no_hard_blockers_for_ag43z",
   hard_blockers: [],
   soft_carry_forward_items: carryForward.items,
-  hard_blocker_count_for_ag43e: 0,
+  hard_blocker_count_for_ag43z: 0,
   blocked_state: blockedState
 };
 
 const readiness = {
   module_id: "AG43D",
-  title: "AG43E Template Hardening Planning Readiness Record",
-  status: "ready_for_ag43e_template_hardening_planning",
-  ready_for_ag43e: true,
-  next_stage_id: "AG43E",
-  next_stage_title: "Template, Export and Reference Hardening Plan",
-  hard_blocker_count_for_ag43e: 0,
+  title: "AG43Z Article Intelligence and Quality Closure Readiness Record",
+  status: "ready_for_ag43z_template_hardening_planning",
+  ready_for_ag43z: true,
+  next_stage_id: "AG43Z",
+  next_stage_title: "Article Intelligence and Quality Automation Closure",
+  hard_blocker_count_for_ag43z: 0,
   ag56_dynamic_content_loop_still_deferred: true,
   article_mutation_allowed_next: false,
   public_mutation_allowed_next: false,
@@ -368,10 +368,10 @@ const readiness = {
 
 const boundary = {
   module_id: "AG43D",
-  title: "AG43D to AG43E Template Hardening Planning Boundary",
-  status: "ag43e_template_hardening_planning_boundary_created",
-  next_stage_id: "AG43E",
-  next_stage_title: "Template, Export and Reference Hardening Plan",
+  title: "AG43D to AG43Z Article Intelligence and Quality Closure Boundary",
+  status: "ag43z_template_hardening_planning_boundary_created",
+  next_stage_id: "AG43Z",
+  next_stage_title: "Article Intelligence and Quality Automation Closure",
   allowed_scope: [
     "Create template/rendering hardening plan.",
     "Create print/PDF export hardening plan.",
@@ -404,7 +404,7 @@ const boundary = {
 const review = {
   module_id: "AG43D",
   title: "Quality Readiness Audit and Template-Hardening Boundary",
-  status: "quality_readiness_audit_passed_ready_for_ag43e",
+  status: "quality_readiness_audit_passed_ready_for_ag43z",
   selected_article_path: inputs.article,
   current_article_hash: articleHash,
   depends_on: ["AG43C", "AG12C-R1", "AR01-R1"],
@@ -420,8 +420,8 @@ const review = {
   boundary_file: outputs.boundary,
   summary: {
     ag43d_quality_readiness_audit_completed: true,
-    ready_for_ag43e: true,
-    hard_blocker_count_for_ag43e: 0,
+    ready_for_ag43z: true,
+    hard_blocker_count_for_ag43z: 0,
     template_hardening_boundary_created: true,
     export_hardening_boundary_created: true,
     reference_consolidation_boundary_created: true,
@@ -451,8 +451,8 @@ const preview = {
   module_id: "AG43D",
   status: review.status,
   ag43d_quality_readiness_audit_completed: 1,
-  ready_for_ag43e: 1,
-  hard_blocker_count_for_ag43e: 0,
+  ready_for_ag43z: 1,
+  hard_blocker_count_for_ag43z: 0,
   template_hardening_boundary_created: 1,
   export_hardening_boundary_created: 1,
   reference_consolidation_boundary_created: 1,
@@ -487,7 +487,7 @@ AG43D audits AG43C and creates the boundary for template/rendering/export/refere
 - Public internal object labels are absent.
 - Drishvara editorial synthesis credit surface is present.
 - Governed object insertion markers are preserved.
-- No hard blockers remain for AG43E planning.
+- No hard blockers remain for AG43Z planning.
 
 ## Carry-forward
 
@@ -511,7 +511,7 @@ AG43D audits AG43C and creates the boundary for template/rendering/export/refere
 
 ## Next
 
-AG43E — Template, Export and Reference Hardening Plan.
+AG43Z — Article Intelligence and Quality Automation Closure.
 `;
 
 writeJson(outputs.audit, audit);
@@ -531,5 +531,5 @@ writeText(outputs.doc, doc);
 console.log("✅ AG43D Quality Readiness Audit and Template-Hardening Boundary generated.");
 console.log("✅ AG43C, AG12C-R1 and AR01-R1 consumed.");
 console.log("✅ Template/export/reference hardening boundaries created.");
-console.log("✅ Ready for AG43E Template, Export and Reference Hardening Plan.");
+console.log("✅ Ready for AG43Z Article Intelligence and Quality Automation Closure.");
 console.log("✅ No article/template/CSS/JS mutation, reference fetch, image generation, publishing, deployment, database write or backend activation recorded.");
