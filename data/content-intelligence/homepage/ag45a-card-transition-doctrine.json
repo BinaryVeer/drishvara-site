@@ -1,0 +1,51 @@
+{
+  "module_id": "AG45A",
+  "title": "Daily Signal Card Transition Doctrine",
+  "status": "card_transition_doctrine_recorded",
+  "transition_options": [
+    "Blinds",
+    "Peel-off",
+    "Ripple"
+  ],
+  "layout_rule": "Transitions apply only inside the allotted Daily Signal card container, not across the full homepage.",
+  "fixed_space_rules": [
+    "No homepage layout shift.",
+    "Card height remains fixed.",
+    "Only cards transition.",
+    "Text is compact and clipped gracefully or expanded on click.",
+    "Animation remains calm and lightweight."
+  ],
+  "deterministic_rotation_option": {
+    "day_index_mod_3_0": "Blinds",
+    "day_index_mod_3_1": "Peel-off",
+    "day_index_mod_3_2": "Ripple"
+  },
+  "activate_now": false,
+  "blocked_state": {
+    "ag45a_daily_signal_surface_doctrine_recorded": true,
+    "ag44z_consumed": true,
+    "ag23_homepage_first_light_sources_consumed": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
