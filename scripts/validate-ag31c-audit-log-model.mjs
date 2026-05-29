@@ -3,38 +3,69 @@ import path from "node:path";
 
 const root = process.cwd();
 
-function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
-  if (leftHash === rightHash) return true;
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
+    }
+  ];
 
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+  const edges = [];
 
-    const articlePathMatches =
-      articlePath === null ||
-      articlePath === undefined ||
-      ag12cR1Apply.selected_article_path === articlePath;
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
 
-    if (!articlePathMatches) return false;
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
 
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      (
-        (
-          ag12cR1Apply.pre_repair_hash === leftHash &&
-          ag12cR1Apply.post_repair_hash === rightHash
-        ) ||
-        (
-          ag12cR1Apply.pre_repair_hash === rightHash &&
-          ag12cR1Apply.post_repair_hash === leftHash
-        )
-      )
-    );
-  } catch {
-    return false;
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
+
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(leftHash, rightHash, articlePath);
 }
 
 
@@ -125,7 +156,7 @@ if (model.contact_email !== "dwivedi.vikash.vaibhav@gmail.com") fail("contact_em
 if (model.model_decision.non_active_audit_log_model_created !== true) fail("Model decision missing.");
 if (model.model_decision.audit_log_field_schema_created !== true) fail("Field schema decision missing.");
 if (model.model_decision.state_event_log_shape_created !== true) fail("State event decision missing.");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(model.model_decision.before_after_hash_model_created, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash model decision missing. or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(model.model_decision.before_after_hash_model_created, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash model decision missing. or AG12C-R1/AR01-R1 approved repair-chain state missing");
 if (model.model_decision.actor_action_timestamp_model_created !== true) fail("Actor/timestamp decision missing.");
 if (model.model_decision.proceed_to_ag31d_state_transition_audit !== true) fail("AG31D readiness missing.");
 
@@ -198,11 +229,11 @@ for (const e of eventShape.future_logged_events) {
 }
 
 if (hashModel.status !== "before_after_hash_model_created_no_hash_runtime") fail("Hash model status mismatch.");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.future_hash_requirements.before_hash_required_for_mutating_state_change, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("before_hash required missing. or AG12C-R1 repaired article state missing");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.future_hash_requirements.after_hash_required_for_mutating_state_change, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("after_hash required missing. or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.future_hash_requirements.before_hash_required_for_mutating_state_change, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("before_hash required missing. or AG12C-R1/AR01-R1 approved repair-chain state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.future_hash_requirements.after_hash_required_for_mutating_state_change, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("after_hash required missing. or AG12C-R1/AR01-R1 approved repair-chain state missing");
 if (hashModel.future_hash_requirements.rollback_reference_required !== true) fail("Rollback reference required missing.");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.hash_runtime_created, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash runtime must not be created. or AG12C-R1 repaired article state missing");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.database_created, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash database must not be created. or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.hash_runtime_created, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash runtime must not be created. or AG12C-R1/AR01-R1 approved repair-chain state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashModel.database_created, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash database must not be created. or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 if (actorModel.status !== "actor_action_timestamp_model_created_no_runtime") fail("Actor model status mismatch.");
 if (actorModel.client_timestamp_trusted !== false) fail("Client timestamp must not be trusted.");
@@ -232,7 +263,7 @@ if (readiness.ready_for_ag31d !== true) fail("AG31D readiness missing.");
 if (readiness.allowed_ag31d_mode !== "non_active_state_transition_audit_only") fail("AG31D mode mismatch.");
 if (readiness.real_execution_allowed_now !== false) fail("Real execution must be false.");
 if (readiness.audit_runtime_allowed_now !== false) fail("Audit runtime must be false.");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(readiness.hash_runtime_allowed_now, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash runtime must be false. or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(readiness.hash_runtime_allowed_now, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash runtime must be false. or AG12C-R1/AR01-R1 approved repair-chain state missing");
 if (readiness.state_transition_runtime_allowed_now !== false) fail("State transition runtime must be false.");
 if (readiness.auth_activation_allowed_now !== false) fail("Auth activation must be false.");
 if (readiness.backend_activation_allowed_now !== false) fail("Backend activation must be false.");

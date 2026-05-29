@@ -44,23 +44,73 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
-function ag13zCandidateHashMatchesCurrentOrAg12cR1(candidate, currentHash) {
-  if (candidate?.article_hash === currentHash) return true;
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
+    }
+  ];
 
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      ag12cR1Apply.selected_article_path === candidate?.selected_article_path &&
-      ag12cR1Apply.pre_repair_hash === candidate?.article_hash &&
-      ag12cR1Apply.post_repair_hash === currentHash
-    );
-  } catch {
-    return false;
+  const edges = [];
+
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
+
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
+
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
+
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function ag13zCandidateHashMatchesCurrentOrAg12cR1(candidate, currentHash) {
+  return articleHashAcceptedByRepairChain(
+    candidate?.article_hash,
+    currentHash,
+    candidate?.selected_article_path || null
+  );
 }
 
 
@@ -100,7 +150,7 @@ const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 
 const articleHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (!ag13zCandidateHashMatchesCurrentOrAg12cR1(ag13zCandidate, articleHash)) fail("Article hash must match AG13Z candidate hash or AG12C-R1 repaired article state");
+if (!ag13zCandidateHashMatchesCurrentOrAg12cR1(ag13zCandidate, articleHash)) fail("Article hash must match AG13Z candidate hash, AG12C-R1 repaired state, or AR01-R1 approved credit-cleanup state");
 
 if (review.status !== "admin_editor_login_role_credential_architecture_defined") fail("Review status mismatch");
 if (architecture.status !== "admin_editor_login_role_credential_architecture_defined") fail("Architecture status mismatch");

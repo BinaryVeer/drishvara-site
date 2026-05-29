@@ -42,24 +42,86 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
-function ag12cR1AwarePostRefinementHashMatches(ag12cApply, currentHash) {
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  if (fs.existsSync(ag12cR1ApplyPath)) {
-    try {
-      const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
-      return (
-        ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-        ag12cR1Apply.selected_article_path === ag12cApply.selected_article_path &&
-        ag12cR1Apply.pre_repair_hash === ag12cApply.post_refinement_hash &&
-        ag12cR1Apply.post_repair_hash === currentHash
-      );
-    } catch {
-      return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
     }
+  ];
+
+  const edges = [];
+
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
+
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
+
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
 
-  return ag12cApply.post_refinement_hash === currentHash;
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function articleHashAcceptedByApprovedRepairChain(recordedHash, currentHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath);
+}
+
+function ag12cApplyHashAcceptedByApprovedRepairChain(ag12cApply, currentHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(
+    ag12cApply?.post_refinement_hash,
+    currentHash,
+    articlePath || ag12cApply?.selected_article_path || null
+  );
+}
+
+
+function ag12cR1AwarePostRefinementHashMatches(ag12cApply, currentHash) {
+  return articleHashAcceptedByRepairChain(
+    ag12cApply?.post_refinement_hash,
+    currentHash,
+    ag12cApply?.selected_article_path || null
+  );
 }
 
 
@@ -103,7 +165,7 @@ if (!fs.existsSync(path.join(root, backupPath))) fail(`Rollback backup missing: 
 const localHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
 const backupHash = sha256(fs.readFileSync(path.join(root, backupPath), "utf8"));
 
-if (!ag12cR1AwarePostRefinementHashMatches(ag12cApply, localHash)) fail("Article hash must match AG12C or AG12C-R1 refined state");
+if (!ag12cApplyHashAcceptedByApprovedRepairChain(ag12cApply, localHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Article hash must match AG12C, AG12C-R1 or AR01-R1 approved repair-chain state");
 if (backupHash !== ag12cApply.pre_refinement_hash) fail("Rollback backup hash must remain AG12C pre-refinement hash");
 
 if (review.status !== "controlled_live_preview_observation_audit_passed") fail("Review status mismatch");

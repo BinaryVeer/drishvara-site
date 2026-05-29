@@ -1,0 +1,77 @@
+{
+  "module_id": "AR01-R1",
+  "title": "Credit and Reference Surface Cleanup",
+  "selected_article_path": "articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html",
+  "created_by": "vikash vaibhav",
+  "contact_email": "dwivedi.vikash.vaibhav@gmail.com",
+  "source_module_corrected": "AR01 / AG05D family",
+  "pre_repair_hash": "b8b0a3de34483fca0fe6c564dba74b68ddf478994c2bbef43b7759dc2ec22494",
+  "post_repair_hash": "e851d46b126b4b20f157d990d2bb6181aae0870d06d3c4f5eb35ca3db0cc1b1a",
+  "backup_path": "data/content-intelligence/backups/ar01-r1-pre-credit-reference-surface-cleanup.html",
+  "replacement_count": 7,
+  "repair_scope": [
+    "Normalize Drishvara-created visual/object credits.",
+    "Remove unnecessary final image-source attribution-under-verification wording for Drishvara-created visuals.",
+    "Preserve existing reference governance.",
+    "Preserve all governed article objects and insertion markers.",
+    "Do not fetch references.",
+    "Do not generate images.",
+    "Do not remove objects.",
+    "Do not publish, deploy, write database records, activate backend/Auth/Supabase or expose service-role keys."
+  ],
+  "article_mutation_performed_in_ar01_r1": true,
+  "reference_fetch_performed": false,
+  "external_link_verification_performed": false,
+  "image_generation_performed": false,
+  "object_generation_performed": false,
+  "existing_object_removed": false,
+  "public_publishing_operation_performed": false,
+  "database_write_performed": false,
+  "deployment_performed": false,
+  "backend_auth_supabase_activation_performed": false,
+  "service_role_key_exposed": false,
+  "status": "credit_reference_surface_cleanup_audit_passed",
+  "checks": [
+    {
+      "check_id": "drishvara_visual_credit_normalized",
+      "passed": true
+    },
+    {
+      "check_id": "chart_basis_normalized",
+      "passed": true
+    },
+    {
+      "check_id": "article_derived_object_basis_normalized",
+      "passed": true
+    },
+    {
+      "check_id": "final_image_source_under_verification_removed_for_drishvara_created_visuals",
+      "passed": true
+    },
+    {
+      "check_id": "governed_object_markers_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "no_reference_fetch",
+      "passed": true
+    },
+    {
+      "check_id": "no_image_generation",
+      "passed": true
+    },
+    {
+      "check_id": "no_object_removal",
+      "passed": true
+    },
+    {
+      "check_id": "no_publish_or_deployment",
+      "passed": true
+    },
+    {
+      "check_id": "no_backend_auth_supabase_activation",
+      "passed": true
+    }
+  ],
+  "failed_checks": []
+}

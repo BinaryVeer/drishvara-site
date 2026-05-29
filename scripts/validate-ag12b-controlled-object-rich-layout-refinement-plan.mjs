@@ -7,19 +7,29 @@ const root = process.cwd();
 
 function ag12cControlledLayoutRefinementAllowsPostMutation(selectedPath = null, currentHash = null) {
   const applyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-controlled-layout-refinement-apply.json");
-  const r1ApplyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  const ag12cR1ApplyRecordPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
+  const ar01R1ApplyRecordPath = path.join(root, "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json");
 
   if (!fs.existsSync(applyRecordPath)) return false;
 
   try {
     const applyRecord = JSON.parse(fs.readFileSync(applyRecordPath, "utf8"));
-    const r1ApplyRecord = fs.existsSync(r1ApplyRecordPath)
-      ? JSON.parse(fs.readFileSync(r1ApplyRecordPath, "utf8"))
+    const ag12cR1ApplyRecord = fs.existsSync(ag12cR1ApplyRecordPath)
+      ? JSON.parse(fs.readFileSync(ag12cR1ApplyRecordPath, "utf8"))
+      : null;
+    const ar01R1ApplyRecord = fs.existsSync(ar01R1ApplyRecordPath)
+      ? JSON.parse(fs.readFileSync(ar01R1ApplyRecordPath, "utf8"))
       : null;
 
-    const targetPath = selectedPath || r1ApplyRecord?.selected_article_path || applyRecord.selected_article_path;
+    const targetPath =
+      selectedPath ||
+      ar01R1ApplyRecord?.selected_article_path ||
+      ag12cR1ApplyRecord?.selected_article_path ||
+      applyRecord.selected_article_path;
+
     if (!targetPath || applyRecord.selected_article_path !== targetPath) return false;
-    if (r1ApplyRecord && r1ApplyRecord.selected_article_path !== targetPath) return false;
+    if (ag12cR1ApplyRecord && ag12cR1ApplyRecord.selected_article_path !== targetPath) return false;
+    if (ar01R1ApplyRecord && ar01R1ApplyRecord.selected_article_path !== targetPath) return false;
 
     const fullArticlePath = path.join(root, targetPath);
     if (!fs.existsSync(fullArticlePath)) return false;
@@ -27,25 +37,44 @@ function ag12cControlledLayoutRefinementAllowsPostMutation(selectedPath = null, 
     const html = fs.readFileSync(fullArticlePath, "utf8");
     const hashToCheck = currentHash || sha256(html);
 
-    if (
-      r1ApplyRecord &&
-      r1ApplyRecord.status === "public_object_label_layout_repair_applied" &&
-      r1ApplyRecord.pre_repair_hash === applyRecord.post_refinement_hash &&
-      r1ApplyRecord.post_repair_hash === hashToCheck &&
-      html.includes("AG12C-R1") &&
-      html.includes('data-drishvara-layout-treatment="reader-facing-object"') &&
-      !html.includes("Additional pilot object:") &&
-      !html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')
-    ) {
-      return true;
-    }
-
-    return (
+    const ag12cOriginalState =
       applyRecord.status === "controlled_layout_refinement_applied_pending_post_refinement_audit" &&
       applyRecord.post_refinement_hash === hashToCheck &&
       html.includes("AG12C-LAYOUT-REFINEMENT:START") &&
-      html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')
-    );
+      html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"');
+
+    if (ag12cOriginalState) return true;
+
+    const ag12cR1State =
+      ag12cR1ApplyRecord &&
+      ag12cR1ApplyRecord.status === "public_object_label_layout_repair_applied" &&
+      ag12cR1ApplyRecord.pre_repair_hash === applyRecord.post_refinement_hash &&
+      ag12cR1ApplyRecord.post_repair_hash === hashToCheck &&
+      html.includes("AG12C-R1") &&
+      html.includes('data-drishvara-layout-treatment="reader-facing-object"') &&
+      !html.includes("Additional pilot object:") &&
+      !html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"');
+
+    if (ag12cR1State) return true;
+
+    const ar01R1ChainedState =
+      ag12cR1ApplyRecord &&
+      ar01R1ApplyRecord &&
+      ag12cR1ApplyRecord.status === "public_object_label_layout_repair_applied" &&
+      ar01R1ApplyRecord.status === "credit_reference_surface_cleanup_applied" &&
+      ag12cR1ApplyRecord.pre_repair_hash === applyRecord.post_refinement_hash &&
+      ar01R1ApplyRecord.pre_repair_hash === ag12cR1ApplyRecord.post_repair_hash &&
+      ar01R1ApplyRecord.post_repair_hash === hashToCheck &&
+      html.includes("AG12C-R1") &&
+      html.includes('data-drishvara-layout-treatment="reader-facing-object"') &&
+      html.includes("Drishvara editorial synthesis") &&
+      !html.includes("Additional pilot object:") &&
+      !html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"') &&
+      !html.includes("Final image-source attribution");
+
+    if (ar01R1ChainedState) return true;
+
+    return false;
   } catch {
     return false;
   }

@@ -49,58 +49,74 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
-function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
-  if (leftHash === rightHash) return true;
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
+    }
+  ];
 
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+  const edges = [];
 
-    const articlePathMatches =
-      articlePath === null ||
-      articlePath === undefined ||
-      ag12cR1Apply.selected_article_path === articlePath;
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
 
-    if (!articlePathMatches) return false;
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
 
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      (
-        (
-          ag12cR1Apply.pre_repair_hash === leftHash &&
-          ag12cR1Apply.post_repair_hash === rightHash
-        ) ||
-        (
-          ag12cR1Apply.pre_repair_hash === rightHash &&
-          ag12cR1Apply.post_repair_hash === leftHash
-        )
-      )
-    );
-  } catch {
-    return false;
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
+
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(leftHash, rightHash, articlePath);
 }
 
 
 function articleHashMatchesCurrentOrAg12cR1(recordedHash, articlePath, currentHash) {
-  if (recordedHash === currentHash) return true;
-
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
-
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      ag12cR1Apply.selected_article_path === articlePath &&
-      ag12cR1Apply.pre_repair_hash === recordedHash &&
-      ag12cR1Apply.post_repair_hash === currentHash
-    );
-  } catch {
-    return false;
-  }
+  return articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath);
 }
 
 
@@ -145,7 +161,7 @@ if (ag17aDecision.selected_path !== "hybrid_staged_path") fail("Hybrid staged pa
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (!articleHashMatchesCurrentOrAg12cR1(ag13zCandidate.article_hash, articlePath, currentHash)) fail("Seed candidate article hash mismatch or AG12C-R1 repaired article state missing");
+if (!articleHashMatchesCurrentOrAg12cR1(ag13zCandidate.article_hash, articlePath, currentHash)) fail("Seed candidate article hash mismatch or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 if (review.status !== "controlled_real_static_activation_planning_defined_real_activation_blocked") fail("Review status mismatch");
 if (sequence.status !== "real_static_activation_sequence_planned_no_execution") fail("Sequence plan status mismatch");
@@ -161,7 +177,7 @@ for (const [key, value] of Object.entries(sequence.execution_state_now)) {
   if (value !== false) fail(`Sequence execution state must remain false: ${key}`);
 }
 
-if (!hashPairMatchesCurrentOrAg12cR1Repair(candidate.candidate_under_consideration.hash_verified, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate hash must be verified or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(candidate.candidate_under_consideration.hash_verified, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate hash must be verified or AG12C-R1/AR01-R1 approved repair-chain state missing");
 if (candidate.selection_decision_now.first_candidate_selected_for_real_apply !== false) fail("Candidate must not be selected for real apply");
 if (candidate.selection_decision_now.public_visibility_enabled !== false) fail("Candidate must not enable public visibility");
 if (candidate.selection_decision_now.publish_approved_enabled !== false) fail("Candidate must not enable publish approved");

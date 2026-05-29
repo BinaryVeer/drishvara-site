@@ -47,38 +47,69 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
-function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
-  if (leftHash === rightHash) return true;
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
+    }
+  ];
 
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+  const edges = [];
 
-    const articlePathMatches =
-      articlePath === null ||
-      articlePath === undefined ||
-      ag12cR1Apply.selected_article_path === articlePath;
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
 
-    if (!articlePathMatches) return false;
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
 
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      (
-        (
-          ag12cR1Apply.pre_repair_hash === leftHash &&
-          ag12cR1Apply.post_repair_hash === rightHash
-        ) ||
-        (
-          ag12cR1Apply.pre_repair_hash === rightHash &&
-          ag12cR1Apply.post_repair_hash === leftHash
-        )
-      )
-    );
-  } catch {
-    return false;
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
+
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(leftHash, rightHash, articlePath);
 }
 
 
@@ -128,7 +159,7 @@ if (ag20zSummary.final_ag20_state.ready_for_ag21_controlled_static_apply_transit
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 if (review.status !== "controlled_static_apply_transition_gate_created_pending_audit") fail("Review status mismatch");
 if (transitionGate.status !== "controlled_static_apply_transition_gate_created_pending_audit") fail("Transition gate status mismatch");
@@ -143,7 +174,7 @@ if (readiness.status !== "ready_for_ag21b_controlled_static_apply_transition_gat
 if (transitionGate.transition_gate_only !== true) fail("Transition gate must be transition-gate-only");
 if (transitionGate.required_future_approval_phrase !== phrase) fail("Transition gate phrase mismatch");
 if (transitionGate.seed_candidate.article_path !== articlePath) fail("Transition gate candidate path mismatch");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(transitionGate.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Transition gate candidate hash mismatch or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(transitionGate.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Transition gate candidate hash mismatch or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 for (const key of [
   "explicit_approval_phrase_executed_now",
@@ -162,7 +193,7 @@ for (const key of [
 }
 
 if (finalPreconditions.required_future_approval_phrase !== phrase) fail("Final preconditions phrase mismatch");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(finalPreconditions.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Final preconditions candidate hash mismatch or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(finalPreconditions.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Final preconditions candidate hash mismatch or AG12C-R1/AR01-R1 approved repair-chain state missing");
 for (const [key, value] of Object.entries(finalPreconditions.current_lock_state)) {
   if (key === "final_preconditions_locked_for_audit") {
     if (value !== true) fail("Final preconditions must be locked for audit");
@@ -181,7 +212,7 @@ for (const [key, value] of Object.entries(approvalPhraseLock.current_phrase_stat
 }
 
 if (candidateSurfaceLock.seed_candidate.article_path !== articlePath) fail("Candidate/surface path mismatch");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(candidateSurfaceLock.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate/surface hash mismatch or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(candidateSurfaceLock.seed_candidate.article_hash, currentHash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Candidate/surface hash mismatch or AG12C-R1/AR01-R1 approved repair-chain state missing");
 for (const surface of candidateSurfaceLock.future_public_surface_candidates) {
   if (surface.mutate_now !== false) fail(`Surface must not mutate now: ${surface.surface_id}`);
 }

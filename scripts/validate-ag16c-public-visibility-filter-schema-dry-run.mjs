@@ -47,38 +47,69 @@ function sha256(text) {
   return crypto.createHash("sha256").update(text).digest("hex");
 }
 
-function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
-  if (leftHash === rightHash) return true;
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
+    }
+  ];
 
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+  const edges = [];
 
-    const articlePathMatches =
-      articlePath === null ||
-      articlePath === undefined ||
-      ag12cR1Apply.selected_article_path === articlePath;
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
 
-    if (!articlePathMatches) return false;
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
 
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      (
-        (
-          ag12cR1Apply.pre_repair_hash === leftHash &&
-          ag12cR1Apply.post_repair_hash === rightHash
-        ) ||
-        (
-          ag12cR1Apply.pre_repair_hash === rightHash &&
-          ag12cR1Apply.post_repair_hash === leftHash
-        )
-      )
-    );
-  } catch {
-    return false;
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
+
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(leftHash, rightHash, articlePath);
 }
 
 
@@ -116,7 +147,7 @@ if (ag16bBoundary.next_stage_id !== "AG16C") fail("AG16C boundary missing in AG1
 const articlePath = ag13zCandidate.selected_article_path;
 if (!fs.existsSync(path.join(root, articlePath))) fail(`Selected article missing: ${articlePath}`);
 const currentHash = sha256(fs.readFileSync(path.join(root, articlePath), "utf8"));
-if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(currentHash, ag13zCandidate.article_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Seed candidate hash mismatch or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 if (review.status !== "public_visibility_filter_schema_dry_run_passed") fail("Review status mismatch");
 if (seedDryRun.status !== "seed_candidate_public_filter_dry_run_failed_as_expected") fail("Seed dry-run status mismatch");
@@ -165,7 +196,7 @@ if (publicPass.expected_public_filter_result !== true) fail("Hypothetical public
 if (publicPass.actual_public_filter_result !== true) fail("Hypothetical public shape actual result must be true");
 if (publicPass.record_under_test.public_visibility !== true) fail("Hypothetical public shape public_visibility must be true");
 if (publicPass.record_under_test.publish_approved !== true) fail("Hypothetical public shape publish_approved must be true");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(publicPass.record_under_test.article_hash, publicPass.record_under_test.approved_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hypothetical public shape hash must match approved_hash or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(publicPass.record_under_test.article_hash, publicPass.record_under_test.approved_hash, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hypothetical public shape hash must match approved_hash or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 if (!Array.isArray(validationReport.checks) || validationReport.checks.length !== 10) fail("Validation report must include ten checks");
 if (validationReport.failed_checks.length !== 0) fail("Validation report failed checks must be zero");

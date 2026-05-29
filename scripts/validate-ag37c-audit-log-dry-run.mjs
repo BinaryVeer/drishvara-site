@@ -3,38 +3,69 @@ import path from "node:path";
 
 const root = process.cwd();
 
-function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
-  if (leftHash === rightHash) return true;
+function articleHashAcceptedByRepairChain(recordedHash, currentHash, articlePath = null) {
+  if (recordedHash === currentHash) return true;
 
-  const ag12cR1ApplyPath = path.join(root, "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json");
-  if (!fs.existsSync(ag12cR1ApplyPath)) return false;
+  const repairRecords = [
+    {
+      path: "data/content-intelligence/apply-records/ag12c-r1-public-object-label-layout-repair.json",
+      status: "public_object_label_layout_repair_applied"
+    },
+    {
+      path: "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json",
+      status: "credit_reference_surface_cleanup_applied"
+    }
+  ];
 
-  try {
-    const ag12cR1Apply = JSON.parse(fs.readFileSync(ag12cR1ApplyPath, "utf8"));
+  const edges = [];
 
-    const articlePathMatches =
-      articlePath === null ||
-      articlePath === undefined ||
-      ag12cR1Apply.selected_article_path === articlePath;
+  for (const repairRecord of repairRecords) {
+    const fullRepairPath = path.join(root, repairRecord.path);
+    if (!fs.existsSync(fullRepairPath)) continue;
 
-    if (!articlePathMatches) return false;
+    try {
+      const record = JSON.parse(fs.readFileSync(fullRepairPath, "utf8"));
+      const articlePathMatches =
+        articlePath === null ||
+        articlePath === undefined ||
+        record.selected_article_path === articlePath;
 
-    return (
-      ag12cR1Apply.status === "public_object_label_layout_repair_applied" &&
-      (
-        (
-          ag12cR1Apply.pre_repair_hash === leftHash &&
-          ag12cR1Apply.post_repair_hash === rightHash
-        ) ||
-        (
-          ag12cR1Apply.pre_repair_hash === rightHash &&
-          ag12cR1Apply.post_repair_hash === leftHash
-        )
-      )
-    );
-  } catch {
-    return false;
+      if (
+        record.status === repairRecord.status &&
+        articlePathMatches &&
+        record.pre_repair_hash &&
+        record.post_repair_hash
+      ) {
+        edges.push([record.pre_repair_hash, record.post_repair_hash]);
+      }
+    } catch {}
   }
+
+  function canReach(start, target) {
+    if (!start || !target) return false;
+
+    let current = start;
+    const seen = new Set([current]);
+
+    for (let i = 0; i < edges.length + 3; i += 1) {
+      if (current === target) return true;
+
+      const edge = edges.find(([from]) => from === current);
+      if (!edge) return false;
+
+      current = edge[1];
+      if (seen.has(current)) return false;
+      seen.add(current);
+    }
+
+    return current === target;
+  }
+
+  return canReach(recordedHash, currentHash) || canReach(currentHash, recordedHash);
+}
+
+function hashPairMatchesCurrentOrAg12cR1Repair(leftHash, rightHash, articlePath = null) {
+  return articleHashAcceptedByRepairChain(leftHash, rightHash, articlePath);
 }
 
 
@@ -132,8 +163,8 @@ if (auditEvent.dry_run_only !== true) fail("Audit event must be dry-run only.");
 if (auditEvent.actual_audit_log_written !== false) fail("Audit log must not be written.");
 if (rollback.dry_run_only !== true) fail("Rollback must be dry-run only.");
 if (rollback.actual_rollback_ref_written !== false) fail("Rollback reference must not be written.");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(hashPreview.dry_run_only, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash preview must be dry-run only. or AG12C-R1 repaired article state missing");
-if (!hashPairMatchesCurrentOrAg12cR1Repair(hashPreview.hash_preview.hash_persisted, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash must not be persisted. or AG12C-R1 repaired article state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashPreview.dry_run_only, true, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash preview must be dry-run only. or AG12C-R1/AR01-R1 approved repair-chain state missing");
+if (!hashPairMatchesCurrentOrAg12cR1Repair(hashPreview.hash_preview.hash_persisted, false, typeof articlePath !== "undefined" ? articlePath : null)) fail("Hash must not be persisted. or AG12C-R1/AR01-R1 approved repair-chain state missing");
 
 if (guard.all_audit_guard_checks_passed !== true) fail("Audit guard checks must pass.");
 for (const item of guard.guard_checks) {

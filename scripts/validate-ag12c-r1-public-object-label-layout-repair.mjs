@@ -63,7 +63,24 @@ if (treatment.status !== "reader_facing_object_layout_treatment_recorded") fail(
 if (audit.status !== "public_object_label_layout_repair_audit_passed") fail("Audit status mismatch.");
 if (readiness.status !== "ready_for_ar01_credit_reference_surface_cleanup") fail("Readiness status mismatch.");
 
-if (sha256(html) !== apply.post_repair_hash) fail("Current article hash must match AG12C-R1 post repair hash.");
+const currentArticleHash = sha256(html);
+const ar01R1ApplyPath = "data/content-intelligence/apply-records/ar01-r1-credit-reference-surface-cleanup.json";
+const hasAr01R1Repair = fs.existsSync(full(ar01R1ApplyPath));
+const ar01R1Apply = hasAr01R1Repair ? readJson(ar01R1ApplyPath) : null;
+
+const currentHashAccepted =
+  currentArticleHash === apply.post_repair_hash ||
+  (
+    ar01R1Apply &&
+    ar01R1Apply.status === "credit_reference_surface_cleanup_applied" &&
+    ar01R1Apply.selected_article_path === articlePath &&
+    ar01R1Apply.pre_repair_hash === apply.post_repair_hash &&
+    ar01R1Apply.post_repair_hash === currentArticleHash
+  );
+
+if (!currentHashAccepted) {
+  fail("Current article hash must match AG12C-R1 post repair hash or AR01-R1 post repair hash chained from AG12C-R1.");
+}
 if (html.includes("Additional pilot object:")) fail("Internal Additional pilot object label still present.");
 if (html.includes('data-drishvara-layout-treatment="collapsed-pilot-annex"')) fail("Collapsed pilot annex treatment still present.");
 if (html.includes("ag12c-collapsed-pilot-object")) fail("Collapsed pilot object class still present.");

@@ -1,0 +1,1826 @@
+
+<header class="drishvara-hf07-header" data-drishvara-hf07-unified-header="true">
+  <a class="drishvara-hf07-brand" href="../../index.html" aria-label="Drishvara Home">Drishvara</a>
+
+  <nav class="drishvara-hf07-nav" data-drishvara-hf07-nav="true" aria-label="Primary navigation">
+    <a class="drishvara-hf07-link" href="../../index.html">Home</a>
+    <a class="drishvara-hf07-link" href="../../about.html">About</a>
+    <a class="drishvara-hf07-link active" href="../../insights.html">Insights</a>
+    <a class="drishvara-hf07-link" href="../../submissions.html">Submissions</a>
+    <a class="drishvara-hf07-link" href="../../dashboard.html">Dashboard</a>
+    <a class="drishvara-hf07-link" href="../../contact.html">Contact</a>
+    <a class="drishvara-hf07-link" href="../../login.html" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
+  </nav>
+
+  <div class="drishvara-hf07-controls" data-drishvara-hf07-controls="true">
+    <label class="drishvara-hf07-timezone-label" for="drishvara-hf07-timezone-articles-policy-enhancing-public-healthcare-delivery-digital-innovation-html">Time zone</label>
+    <select id="drishvara-hf07-timezone-articles-policy-enhancing-public-healthcare-delivery-digital-innovation-html" data-drishvara-hf07-timezone="true" aria-label="Select timezone">
+      <option value="Asia/Kolkata">India — IST</option>
+      <option value="UTC">UTC</option>
+      <option value="Asia/Dubai">Dubai — GST</option>
+      <option value="Asia/Singapore">Singapore — SGT</option>
+      <option value="Europe/London">London</option>
+      <option value="America/New_York">New York</option>
+    </select>
+
+    <div class="drishvara-hf07-language-toggle" data-drishvara-hf07-language-toggle="true" aria-label="Language toggle">
+      <button type="button" data-drishvara-hf07-lang-choice="en" aria-pressed="true">EN</button>
+      <button type="button" data-drishvara-hf07-lang-choice="hi" aria-pressed="false">हिंदी</button>
+    </div>
+  </div>
+</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-drishvara-hf13-top-band-neutralised="true">
+/*
+  HF13: neutralise visible top band while preserving settled design.
+*/
+html,
+body {
+  background-color: #071329 !important;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(211, 169, 72, 0.07), transparent 34rem),
+    linear-gradient(180deg, #071329 0%, #071329 38%, #0b1833 100%) !important;
+}
+
+body::before {
+  background: transparent !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+[data-drishvara-hf07-unified-header] {
+  margin-top: 18px !important;
+  background: linear-gradient(135deg, rgba(8, 20, 44, 0.96), rgba(12, 27, 56, 0.94)) !important;
+}
+</style>
+
+<script data-drishvara-hf12-safe-select-system="true">
+(function () {
+  function closeAllExcept(except) {
+    document.querySelectorAll("[data-drishvara-hf12-select]").forEach(function (wrap) {
+      if (wrap !== except) wrap.setAttribute("data-open", "false");
+    });
+  }
+
+  function selectedText(select) {
+    var option = select.options[select.selectedIndex];
+    return option ? option.textContent.trim() : "Select";
+  }
+
+  function buildSafeSelect(select) {
+    if (!select || select.dataset.drishvaraHf12Converted === "true") return;
+
+    var inHeader = !!select.closest("[data-drishvara-hf07-unified-header]");
+    var isCurrentHeaderTimezone = select.hasAttribute("data-drishvara-hf07-timezone");
+
+    if (inHeader && !isCurrentHeaderTimezone) {
+      select.classList.add("drishvara-hf12-native-select-hidden");
+      select.dataset.drishvaraHf12Converted = "true";
+      return;
+    }
+
+    var wrap = document.createElement("div");
+    wrap.className = "drishvara-hf12-select";
+    wrap.setAttribute("data-drishvara-hf12-select", "true");
+    wrap.setAttribute("data-open", "false");
+
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "drishvara-hf12-select-button";
+    button.setAttribute("aria-haspopup", "listbox");
+    button.setAttribute("aria-expanded", "false");
+    button.textContent = selectedText(select);
+
+    var menu = document.createElement("div");
+    menu.className = "drishvara-hf12-select-menu";
+    menu.setAttribute("role", "listbox");
+
+    Array.prototype.slice.call(select.options).forEach(function (option) {
+      var item = document.createElement("button");
+      item.type = "button";
+      item.className = "drishvara-hf12-select-option";
+      item.setAttribute("role", "option");
+      item.dataset.value = option.value;
+      item.textContent = option.textContent;
+      item.setAttribute("aria-selected", option.selected ? "true" : "false");
+
+      item.addEventListener("click", function () {
+        select.value = option.value;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+
+        button.textContent = selectedText(select);
+        menu.querySelectorAll(".drishvara-hf12-select-option").forEach(function (x) {
+          x.setAttribute("aria-selected", x === item ? "true" : "false");
+        });
+
+        wrap.setAttribute("data-open", "false");
+        button.setAttribute("aria-expanded", "false");
+      });
+
+      menu.appendChild(item);
+    });
+
+    button.addEventListener("click", function () {
+      var willOpen = wrap.getAttribute("data-open") !== "true";
+      closeAllExcept(wrap);
+      wrap.setAttribute("data-open", willOpen ? "true" : "false");
+      button.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    });
+
+    select.addEventListener("change", function () {
+      button.textContent = selectedText(select);
+      menu.querySelectorAll(".drishvara-hf12-select-option").forEach(function (item) {
+        item.setAttribute("aria-selected", item.dataset.value === select.value ? "true" : "false");
+      });
+    });
+
+    wrap.appendChild(button);
+    wrap.appendChild(menu);
+
+    select.classList.add("drishvara-hf12-native-select-hidden");
+    select.dataset.drishvaraHf12Converted = "true";
+    select.insertAdjacentElement("afterend", wrap);
+  }
+
+  function activateSafeSelects() {
+    document.querySelectorAll("select").forEach(buildSafeSelect);
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest("[data-drishvara-hf12-select]")) closeAllExcept(null);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeAllExcept(null);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", activateSafeSelects, { once: true });
+  } else {
+    activateSafeSelects();
+  }
+})();
+</script>
+<style data-drishvara-hf12-select-freeze-elimination="true">
+/*
+  HF12: eliminate native select freeze by replacing user-facing select interaction
+  with safe button-based controls while keeping original select values synced.
+*/
+.drishvara-hf12-native-select-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+[data-drishvara-hf07-unified-header] select:not([data-drishvara-hf07-timezone]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.drishvara-hf12-select {
+  position: relative;
+  display: inline-block;
+  min-width: min(220px, 100%);
+  max-width: 100%;
+  z-index: 95000;
+  font-family: inherit;
+}
+
+.drishvara-hf12-select-button {
+  width: 100%;
+  min-height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(211, 169, 72, 0.38);
+  background: rgba(5, 16, 37, 0.96);
+  color: #f8f1df;
+  padding: 8px 38px 8px 14px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1.2;
+  position: relative;
+}
+
+.drishvara-hf12-select-button::after {
+  content: "⌄";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-53%);
+  opacity: 0.86;
+}
+
+.drishvara-hf12-select-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  width: max(100%, 220px);
+  max-width: min(360px, 90vw);
+  max-height: 280px;
+  overflow-y: auto;
+  border: 1px solid rgba(211, 169, 72, 0.36);
+  border-radius: 16px;
+  background: #071329;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+  padding: 6px;
+  z-index: 99999;
+}
+
+.drishvara-hf12-select[data-open="true"] .drishvara-hf12-select-menu {
+  display: grid;
+  gap: 4px;
+}
+
+.drishvara-hf12-select-option {
+  border: 0;
+  width: 100%;
+  border-radius: 12px;
+  background: transparent;
+  color: #f8f1df;
+  padding: 9px 10px;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.drishvara-hf12-select-option:hover,
+.drishvara-hf12-select-option[aria-selected="true"] {
+  background: rgba(211, 169, 72, 0.18);
+  color: #ffe38a;
+}
+
+[data-drishvara-hf07-unified-header] .drishvara-hf12-select {
+  min-width: 170px;
+}
+
+[data-drishvara-hf07-unified-header] .drishvara-hf12-select-button {
+  height: 38px;
+}
+
+@media (max-width: 700px) {
+  .drishvara-hf12-select {
+    width: min(260px, 92vw);
+  }
+
+  .drishvara-hf12-select-menu {
+    width: min(320px, 92vw);
+  }
+}
+</style>
+
+<style data-drishvara-hf11-top-paint-refinement="true">
+/*
+  HF11: top paint-band refinement.
+  Keeps the settled design but reduces the perceived top color band.
+*/
+html,
+body {
+  background-color: #071329 !important;
+}
+
+body {
+  background:
+    linear-gradient(180deg, #071329 0%, #071329 22%, #0b1833 100%) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 132px;
+  pointer-events: none;
+  z-index: 0;
+  background: linear-gradient(180deg, #071329 0%, rgba(7, 19, 41, 0.96) 100%);
+}
+
+[data-drishvara-hf07-unified-header] {
+  margin-top: 16px !important;
+  position: relative !important;
+  z-index: 90000 !important;
+}
+
+@media (max-width: 700px) {
+  body::before {
+    height: 96px;
+  }
+
+  [data-drishvara-hf07-unified-header] {
+    margin-top: 10px !important;
+  }
+}
+</style>
+
+<script data-drishvara-hf10-paint-ready="true">
+(function () {
+  function markReady() {
+    document.documentElement.setAttribute("data-drishvara-hf10-paint", "ready");
+    if (document.body) document.body.classList.add("drishvara-hf10-paint-ready");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", markReady, { once: true });
+  } else {
+    markReady();
+  }
+})();
+</script>
+<style data-drishvara-hf10-critical-paint="true">
+/*
+  HF10 early paint layer.
+  Prevents top-band color flash and header transition during page navigation.
+*/
+:root {
+  color-scheme: dark;
+  --drishvara-paint-bg: #071329;
+  --drishvara-paint-bg-2: #0b1833;
+  --drishvara-paint-gold: #d7ad45;
+  --drishvara-paint-text: #f8f1df;
+  --drishvara-paint-border: rgba(211, 169, 72, 0.34);
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: var(--drishvara-paint-bg) !important;
+}
+
+body {
+  background:
+    radial-gradient(circle at top center, rgba(211, 169, 72, 0.10), transparent 34rem),
+    linear-gradient(180deg, var(--drishvara-paint-bg) 0%, var(--drishvara-paint-bg-2) 100%) !important;
+  color: var(--drishvara-paint-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+[data-drishvara-hf07-unified-header] {
+  background:
+    linear-gradient(135deg, rgba(8, 20, 44, 0.98), rgba(14, 31, 63, 0.94)) !important;
+  border-color: var(--drishvara-paint-border) !important;
+  color: var(--drishvara-paint-text) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  will-change: auto !important;
+  backface-visibility: hidden;
+}
+
+[data-drishvara-hf07-nav],
+[data-drishvara-hf07-controls],
+[data-drishvara-hf07-timezone],
+[data-drishvara-hf07-language-toggle] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
+.drishvara-hf05-header,
+[data-drishvara-hf06-duplicate-nav="true"],
+[data-drishvara-hf07-duplicate-nav="true"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.drishvara-hf07-header,
+.drishvara-hf07-nav,
+.drishvara-hf07-controls {
+  transition: none !important;
+  animation: none !important;
+}
+</style>
+<meta name="theme-color" content="#071329" data-drishvara-hf10-theme-color="true">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enhancing Public Healthcare Delivery through Digital Innovation: Policy and Practical Outcomes | Drishvara</title>
+  <meta name="description" content="A Drishvara featured read on how digital innovation can strengthen public healthcare delivery through service access, records, telemedicine and accountable governance.">
+    <style>
+    :root {
+      --bg-1: #08142d;
+      --bg-2: #12254a;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-strong: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.08);
+      --text-main: #f5f1e8;
+      --text-soft: #d7deea;
+      --text-muted: #9aa8bc;
+      --gold: #c9a24a;
+      --gold-soft: rgba(201, 162, 74, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 50% 10%, rgba(201, 162, 74, 0.08), transparent 18%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .page {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-main);
+    }
+
+    .brand img {
+      width: 38px;
+      height: auto;
+      display: block;
+    }
+
+    .brand-name {
+      font-size: 1.12rem;
+      letter-spacing: 0.2px;
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .topbar-nav a {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topbar-nav a:hover {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .article-shell {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px 26px;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .category-pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--gold-soft);
+      border: 1px solid rgba(201, 162, 74, 0.18);
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.08;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      margin: 0 0 18px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--text-soft);
+    }
+
+    .summary-box {
+      margin: 0 0 22px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .hero-media-wrap { margin-bottom: 24px; }
+
+    .hero-image-tag {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: block;
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+    }
+
+    .hero-image-tag.used-fallback {
+      background: linear-gradient(135deg, rgba(201,162,74,0.14), rgba(255,255,255,0.03));
+    }
+
+    .media-credit {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.84rem;
+      line-height: 1.6;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .media-credit a { color: var(--gold); }
+
+    .media-credit .mode {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-soft);
+      font-size: 0.76rem;
+    }
+
+    .article-body {
+      color: var(--text-main);
+      font-size: 1.02rem;
+      line-height: 1.95;
+    }
+
+    .article-body p { margin: 0 0 18px; }
+
+    .resource-section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .resource-section h2 {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      color: var(--text-main);
+    }
+
+    .resource-links {
+      display: grid;
+      gap: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .resource-links a {
+      color: var(--gold);
+      word-break: break-word;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 720px) {
+      .page { padding: 20px 16px 48px; }
+      .article-shell { padding: 22px 18px; }
+      .hero-image-tag { height: 200px; }
+    }
+  </style>
+
+  <style id="drishvara-reading-overrides">
+    body {
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: clamp(1.9rem, 3.4vw, 2.9rem) !important;
+      line-height: 1.1 !important;
+      letter-spacing: -0.025em !important;
+      max-width: 980px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    article,
+    .article-body,
+    main article {
+      max-width: 980px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    p,
+    li {
+      font-size: clamp(1rem, 1.22vw, 1.08rem) !important;
+      line-height: 1.86 !important;
+      text-align: justify !important;
+      text-justify: inter-word !important;
+    }
+
+    img {
+      width: 100% !important;
+      max-height: 360px !important;
+      object-fit: cover !important;
+      border-radius: 18px !important;
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+  </style>
+
+
+  <style id="drishvara-typography-final-pass">
+    body {
+      overflow-x: hidden;
+    }
+
+    h1 {
+      max-width: 1000px !important;
+      font-size: clamp(1.9rem, 3vw, 2.75rem) !important;
+      line-height: 1.12 !important;
+      letter-spacing: -0.02em !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    article,
+    .article-body,
+    main article {
+      max-width: 1040px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    p,
+    li {
+      max-width: 900px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      font-size: clamp(1rem, 1.08vw, 1.065rem) !important;
+      line-height: 1.86 !important;
+      text-align: justify !important;
+      text-justify: inter-word !important;
+      hyphens: auto !important;
+    }
+
+    h2,
+    h3,
+    blockquote,
+    ul,
+    ol {
+      max-width: 900px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    img {
+      width: 100% !important;
+      max-height: 340px !important;
+      object-fit: cover !important;
+      border-radius: 16px !important;
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    figcaption,
+    .image-credit {
+      max-width: 900px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      font-family: Arial, Helvetica, sans-serif !important;
+      font-size: 0.82rem !important;
+      line-height: 1.5 !important;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: clamp(1.62rem, 7vw, 2.15rem) !important;
+      }
+
+      p,
+      li {
+        text-align: left !important;
+        line-height: 1.78 !important;
+      }
+
+      img {
+        max-height: 280px !important;
+      }
+    }
+  </style>
+
+
+
+
+<style data-drishvara-hf01-dropdown-guard="passive" data-drishvara-hf05-native-dropdown-safety="true">
+  /*
+    HF05 passive native-dropdown safety.
+    Important: no JavaScript event blocking is attached to native select controls.
+  */
+  select,
+  option,
+  [data-drishvara-form-control="select"],
+  [data-drishvara-hf05-timezone] {
+    pointer-events: auto !important;
+    user-select: auto !important;
+    touch-action: manipulation !important;
+    position: relative;
+    z-index: 1000;
+  }
+
+  [data-drishvara-auth-placeholder="true"] {
+    cursor: default;
+  }
+</style>
+
+<style data-drishvara-hf07-responsive-dropdowns="true">
+  /*
+    HF07 unified public UI system.
+    Static frontend only. No Auth, API, Supabase, backend, database, or deployment activation.
+  */
+
+  :root {
+    --drishvara-ui-bg: rgba(8, 20, 44, 0.94);
+    --drishvara-ui-bg-2: rgba(14, 31, 63, 0.90);
+    --drishvara-ui-gold: #d7ad45;
+    --drishvara-ui-text: #f8f1df;
+    --drishvara-ui-muted: rgba(248, 241, 223, 0.76);
+    --drishvara-ui-border: rgba(211, 169, 72, 0.35);
+  }
+
+  body.drishvara-hf07-active {
+    overflow-x: hidden;
+  }
+
+  .drishvara-hf07-header {
+    width: min(1180px, calc(100% - 40px));
+    margin: 18px auto 26px;
+    padding: 12px 16px;
+    border: 1px solid var(--drishvara-ui-border);
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--drishvara-ui-bg), var(--drishvara-ui-bg-2));
+    box-shadow: 0 18px 52px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(14px);
+    color: var(--drishvara-ui-text);
+    display: grid;
+    grid-template-columns: auto minmax(320px, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 90000;
+    box-sizing: border-box;
+    pointer-events: auto;
+  }
+
+  .drishvara-hf07-brand {
+    color: var(--drishvara-ui-gold) !important;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .drishvara-hf07-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.56rem 0.95rem;
+    margin: 0;
+    padding: 0;
+    pointer-events: auto;
+  }
+
+  .drishvara-hf07-link {
+    color: var(--drishvara-ui-text) !important;
+    opacity: 0.96;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 0.96rem;
+    line-height: 1.2;
+    pointer-events: auto;
+  }
+
+  .drishvara-hf07-link.active,
+  .drishvara-hf07-link:hover {
+    color: var(--drishvara-ui-gold) !important;
+  }
+
+  .drishvara-hf07-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    pointer-events: auto;
+    min-width: 0;
+  }
+
+  .drishvara-hf07-timezone-label {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+  }
+
+  select,
+  textarea,
+  input,
+  [data-drishvara-hf07-timezone],
+  [data-drishvara-form-control="select"] {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  select,
+  [data-drishvara-hf07-timezone],
+  [data-drishvara-hf05-timezone] {
+    min-height: 38px;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    touch-action: manipulation !important;
+    position: relative;
+    z-index: 90010;
+  }
+
+  .drishvara-hf07-header select,
+  [data-drishvara-hf07-timezone] {
+    width: min(170px, 34vw);
+    min-width: 132px;
+    height: 36px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--drishvara-ui-border);
+    background: rgba(5, 16, 37, 0.96);
+    color: var(--drishvara-ui-text);
+    outline: none;
+    appearance: auto;
+  }
+
+  .drishvara-hf07-language-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    pointer-events: auto;
+  }
+
+  .drishvara-hf07-language-toggle button {
+    min-width: 38px;
+    height: 32px;
+    padding: 0 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--drishvara-ui-border);
+    background: rgba(248, 241, 223, 0.08);
+    color: var(--drishvara-ui-text);
+    font-weight: 700;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  .drishvara-hf07-language-toggle button[aria-pressed="true"] {
+    background: var(--drishvara-ui-gold);
+    color: #071329;
+  }
+
+  body.drishvara-hf07-active .drishvara-hf05-header,
+  body.drishvara-hf07-active nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
+  body.drishvara-hf07-active [data-drishvara-hf06-duplicate-nav="true"],
+  body.drishvara-hf07-active [data-drishvara-hf07-duplicate-nav="true"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body.drishvara-hf07-active .orbit,
+  body.drishvara-hf07-active .hero-orbit,
+  body.drishvara-hf07-active .cosmic-orbit,
+  body.drishvara-hf07-active .orbit-layer,
+  body.drishvara-hf07-active .hero-visual,
+  body.drishvara-hf07-active .hero-decoration,
+  body.drishvara-hf07-active [data-decorative="true"] {
+    pointer-events: none !important;
+  }
+
+  @media (max-width: 980px) {
+    .drishvara-hf07-header {
+      width: min(100% - 28px, 1180px);
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .drishvara-hf07-controls {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .drishvara-hf07-header select,
+    [data-drishvara-hf07-timezone] {
+      width: min(220px, 70vw);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .drishvara-hf07-header {
+      width: min(100% - 16px, 1180px);
+      margin: 10px auto 18px;
+      border-radius: 18px;
+      padding: 10px;
+    }
+
+    .drishvara-hf07-nav {
+      gap: 0.45rem 0.72rem;
+    }
+
+    .drishvara-hf07-link {
+      font-size: 0.9rem;
+    }
+
+    .drishvara-hf07-controls {
+      width: 100%;
+    }
+
+    .drishvara-hf07-header select,
+    [data-drishvara-hf07-timezone] {
+      width: min(260px, 92vw);
+    }
+  }
+</style>
+
+<style data-drishvara-hf08-visible-nav-cleanup="true">
+  /*
+    HF08: visible navigation and literal newline cleanup.
+    Static frontend only. No backend, Auth, API, Supabase, or deployment activation.
+  */
+
+  body.drishvara-hf08-active [data-drishvara-hf07-unified-header] {
+    display: grid !important;
+    grid-template-columns: auto minmax(520px, 1fr) auto !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.58rem 0.92rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: auto !important;
+    position: static !important;
+    z-index: 90020 !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] a,
+  body.drishvara-hf08-active .drishvara-hf07-link {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #f8f1df !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+    font-size: 0.96rem !important;
+    pointer-events: auto !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] a.active,
+  body.drishvara-hf08-active [data-drishvara-hf07-nav] a:hover {
+    color: #d7ad45 !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-controls],
+  body.drishvara-hf08-active .drishvara-hf07-controls {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.5rem !important;
+    flex-wrap: nowrap !important;
+    pointer-events: auto !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-timezone] {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  body.drishvara-hf08-active [data-drishvara-hf07-language-toggle] {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  @media (max-width: 1100px) {
+    body.drishvara-hf08-active [data-drishvara-hf07-unified-header] {
+      grid-template-columns: 1fr !important;
+      justify-items: center !important;
+      text-align: center !important;
+    }
+
+    body.drishvara-hf08-active [data-drishvara-hf07-nav] {
+      max-width: 100% !important;
+    }
+
+    body.drishvara-hf08-active [data-drishvara-hf07-controls] {
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+    }
+  }
+
+  @media (max-width: 560px) {
+    body.drishvara-hf08-active [data-drishvara-hf07-nav] {
+      gap: 0.45rem 0.72rem !important;
+    }
+
+    body.drishvara-hf08-active [data-drishvara-hf07-nav] a {
+      font-size: 0.9rem !important;
+    }
+  }
+</style>
+
+
+<style data-drishvara-hf09-flicker-guard="true">
+  /*
+    HF09 early paint guard.
+    Prevents legacy nav/header fragments and accidental text artifacts from flashing during navigation.
+  */
+  nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
+  .drishvara-hf05-header,
+  [data-drishvara-hf06-duplicate-nav="true"],
+  [data-drishvara-hf07-duplicate-nav="true"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  [data-drishvara-hf07-unified-header] {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  [data-drishvara-hf07-nav] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+</style>
+<link rel="icon" href="/favicon.ico?v=hf14" sizes="any" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="manifest" href="/site.webmanifest?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+
+
+
+<style data-drishvara-ar01-reference-image-credit-style="true">
+  .drishvara-ar01-evidence {
+    margin: 2.4rem auto 1.4rem;
+    padding: clamp(1.2rem, 2vw, 1.6rem);
+    border: 1px solid rgba(211, 169, 72, 0.28);
+    border-radius: 22px;
+    background: rgba(12, 27, 56, 0.76);
+    color: #f8f1df;
+  }
+
+  .drishvara-ar01-evidence h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    line-height: 1.2;
+  }
+
+  .drishvara-ar01-evidence p {
+    margin: 0.4rem 0;
+    color: rgba(248, 241, 223, 0.78);
+    line-height: 1.65;
+  }
+
+  .drishvara-ar01-reference-list {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1rem 0;
+    padding-left: 1.25rem;
+  }
+
+  .drishvara-ar01-reference-list li {
+    color: rgba(248, 241, 223, 0.82);
+    line-height: 1.55;
+  }
+
+  .drishvara-ar01-status {
+    display: inline-flex;
+    width: fit-content;
+    margin: 0.35rem 0 0.7rem;
+    padding: 0.32rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(211, 169, 72, 0.34);
+    color: #d7ad45;
+    font-size: 0.86rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .drishvara-ar01-image-credit {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(248, 241, 223, 0.12);
+    color: rgba(248, 241, 223, 0.66);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+</style>
+<style data-drishvara-av01-article-reading-width="true">
+/*
+  AV01: broad long-form article reading surface.
+  Intended for 1200+ word Drishvara articles.
+*/
+:root {
+  --drishvara-article-outer-max: 1240px;
+  --drishvara-article-body-max: 1120px;
+  --drishvara-article-text-max: 1080px;
+}
+
+main,
+.article-page main,
+.article-shell,
+.article-wrap,
+.article-container,
+.article-content,
+.published-article,
+article {
+  max-width: var(--drishvara-article-outer-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.article-card,
+.article-body,
+.article-reading-panel,
+.article-panel,
+article > section,
+main > section {
+  max-width: var(--drishvara-article-body-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+article p,
+.article-body p,
+.article-content p,
+.article-card p,
+.article-reading-panel p,
+.published-article p,
+main p {
+  max-width: var(--drishvara-article-text-max) !important;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify !important;
+  text-justify: inter-word;
+  line-height: 1.82;
+  hyphens: auto;
+}
+
+article h1,
+.article-content h1,
+.article-title,
+main h1 {
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+article img,
+.article-content img,
+.article-card img,
+.published-article img,
+main img {
+  max-width: 100%;
+}
+
+img[data-drishvara-av01-category-fallback-visual="true"] {
+  width: min(100%, 1120px) !important;
+  max-height: 520px !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 auto 2rem !important;
+  border-radius: 18px;
+}
+
+.drishvara-av01-category-fallback-frame {
+  max-width: 1120px !important;
+  margin: 0 auto 2rem !important;
+}
+
+@media (max-width: 780px) {
+  :root {
+    --drishvara-article-outer-max: calc(100vw - 24px);
+    --drishvara-article-body-max: calc(100vw - 28px);
+    --drishvara-article-text-max: calc(100vw - 38px);
+  }
+
+  article p,
+  .article-body p,
+  .article-content p,
+  .article-card p,
+  .article-reading-panel p,
+  .published-article p,
+  main p {
+    text-align: left !important;
+    hyphens: none;
+    line-height: 1.74;
+  }
+}
+</style>
+<meta data-drishvara-av01-checked="true" content="article-visual-reading-width-standardised">
+<style data-drishvara-av02-article-visual-repair="true">
+/* AV02: broad justified article reading and corrected article visual behaviour */
+:root {
+  --drishvara-article-outer-max: 1280px;
+  --drishvara-article-body-max: 1160px;
+  --drishvara-article-text-max: 1120px;
+}
+
+main,
+.article-page main,
+.article-shell,
+.article-wrap,
+.article-container,
+.article-content,
+.published-article,
+article {
+  max-width: var(--drishvara-article-outer-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.article-card,
+.article-body,
+.article-reading-panel,
+.article-panel,
+article > section,
+main > section {
+  max-width: var(--drishvara-article-body-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+article p,
+.article-body p,
+.article-content p,
+.article-card p,
+.article-reading-panel p,
+.published-article p,
+main p {
+  max-width: var(--drishvara-article-text-max) !important;
+  text-align: justify !important;
+  text-justify: inter-word;
+  line-height: 1.82;
+  hyphens: auto;
+}
+
+img[data-drishvara-av01-category-fallback-visual="true"] {
+  width: min(100%, 1120px) !important;
+  max-height: 560px !important;
+  height: auto !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 auto 2rem !important;
+  border-radius: 18px;
+}
+
+img[data-drishvara-av02-restored-brand-mark="true"] {
+  width: 34px !important;
+  height: 34px !important;
+  max-width: 34px !important;
+  max-height: 34px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto 1rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 780px) {
+  :root {
+    --drishvara-article-outer-max: calc(100vw - 24px);
+    --drishvara-article-body-max: calc(100vw - 28px);
+    --drishvara-article-text-max: calc(100vw - 38px);
+  }
+
+  article p,
+  .article-body p,
+  .article-content p,
+  .article-card p,
+  .article-reading-panel p,
+  .published-article p,
+  main p {
+    text-align: left !important;
+    hyphens: none;
+  }
+}
+</style>
+<meta data-drishvara-ag03c-b2-checked="true" content="batch-02-approved-references-inserted">
+  <link rel="canonical" href="https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html">
+  <meta property="og:title" content="Enhancing Public Healthcare Delivery through Digital Innovation">
+  <meta property="og:description" content="A Drishvara featured read on how digital innovation can strengthen public healthcare delivery through service access, records, telemedicine and accountable governance.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://drishvara.com/articles/policy/enhancing-public-healthcare-delivery-digital-innovation.html">
+  <meta property="og:image" content="https://drishvara.com/assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08ka-primary-hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Enhancing Public Healthcare Delivery through Digital Innovation">
+  <meta name="twitter:description" content="A Drishvara featured read on how digital innovation can strengthen public healthcare delivery through service access, records, telemedicine and accountable governance.">
+  <meta name="twitter:image" content="https://drishvara.com/assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08ka-primary-hero.svg">
+  <!-- AG09C-PUBLIC-EXPERIENCE-METADATA -->
+</head>
+<body>
+<nav class="site-nav" data-drishvara-hf01-common-nav="true">
+      <a href="../../index.html">Home</a>
+      <a href="../../about.html">About</a>
+      <a href="../../insights.html" class="active">Insights</a>
+      <a href="../../submissions.html">Submissions</a>
+      <a href="../../dashboard.html">Dashboard</a>
+      <a href="../../contact.html">Contact</a>
+      <a href="../../login.html" class="account-placeholder" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
+    </nav>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">
+        <img data-drishvara-av02-restored-brand-mark="true" src="/favicon.svg" alt="Drishvara" />
+        <div class="brand-name">Drishvara</div>
+      </div>
+
+      <div class="topbar-nav">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/insights.html">Insights</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </div>
+
+    <article id="ag08g-controlled-upgrade" class="drishvara-article ag08g-controlled-upgrade" data-ag08g-controlled-apply="true">
+  <!-- AG08G-CONTROLLED-APPLY -->
+  <h1>Enhancing Public Healthcare Delivery through Digital Innovation</h1>
+<p>Digital innovation in public healthcare is often described through visible tools: health IDs, dashboards, teleconsultation platforms, digital records, mobile applications and analytics systems. These tools matter, but the real test is not whether a system has adopted technology. The real test is whether technology improves the experience of a patient, the confidence of a frontline worker, the ability of a facility to respond, and the capacity of administrators to identify service gaps before they become failures.</p>
+<figure id="ag08k-hero-visual-block" class="drishvara-article-visual drishvara-article-hero-visual ag08k-hero-visual-block" data-drishvara-ag08k-visual-insertion="true" data-drishvara-visual-type="primary_hero_visual">
+  <!-- AG08K-HERO-VISUAL-INSERTION -->
+  <img src="../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag08ka-primary-hero.svg" alt="Illustration of digital public healthcare delivery connecting frontline care, records, telemedicine and governance dashboards." width="1600" height="900" loading="lazy" decoding="async" />
+  <figcaption>
+    <span class="drishvara-visual-caption">Digital innovation strengthens public healthcare when technology, frontline service and accountable governance operate together.</span>
+    <span class="drishvara-visual-credit">Visual: Drishvara editorial illustration.</span>
+  </figcaption>
+</figure>
+
+<p>Public healthcare delivery is not a single transaction. It is a chain of actions: registration, screening, diagnosis, consultation, medicine availability, referral, follow-up, grievance response and reporting. When any link is weak, the citizen experiences the entire system as weak. Digital innovation can make this chain visible and measurable. It can reduce delays, support continuity of care, and help decision-makers understand where support is needed. However, this happens only when digital systems are embedded in real workflows rather than treated as parallel reporting layers.</p>
+
+<!-- AG10K-GENERATED-IMAGE-INSERTION:START -->
+<section class="drishvara-article-object ag10k-section-support-visual" data-drishvara-stage="AG10K" data-asset-id="AG10J-SVG-SECTION-SUPPORT-001" style="max-width:980px;margin:2.4rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    <img src="../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag10j-section-support-digital-healthcare-service-pathway.svg" alt="Editorial illustration of a digital public healthcare service pathway connecting citizen access, health facility, data systems and service feedback." loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 18px 42px rgba(26,115,140,0.16);border:1px solid rgba(182,208,233,0.9);" />
+    <figcaption style="margin-top:0.85rem;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;">
+      <span>Digital tools can strengthen healthcare delivery when they connect service access, data visibility and accountability.</span>
+      <br />
+      <small style="color:#607685;">Visual: Drishvara.</small>
+    </figcaption>
+  </figure>
+</section>
+<!-- AG10K-GENERATED-IMAGE-INSERTION:END -->
+
+<!-- AG11B-CHART-BI-GRAPH-INSERTION:START -->
+<section class="drishvara-article-object ag11b-chart-bi-graph-object" data-drishvara-stage="AG11B" data-object-family="chart-bi-graph" data-asset-id="AG11B-CHART-001" style="max-width:940px;margin:2.5rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    <img src="../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag11b-chart-theme-emphasis.svg" alt="Horizontal bar chart showing deterministic theme counts for digital access, service delivery, data visibility, and trust and accountability in the article text." loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 18px 42px rgba(26,115,140,0.14);border:1px solid rgba(182,208,233,0.9);" />
+    <figcaption style="margin-top:0.85rem;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;">
+      <strong>Theme emphasis in this article.</strong>
+      <span>Theme-emphasis chart based on deterministic article-text term counts; it is not an external statistical dataset.</span>
+      <br />
+      <small style="color:#607685;">Chart: Drishvara. Source: article-text theme count.</small>
+    </figcaption>
+  </figure>
+</section>
+<!-- AG11B-CHART-BI-GRAPH-INSERTION:END -->
+
+
+<!-- AG12C-LAYOUT-REFINEMENT:START:INFOGRAPHIC -->
+<section class="drishvara-layout-refinement ag12c-r1-reader-facing-object-block" data-drishvara-stage="AG12C-R1" data-drishvara-layout-treatment="reader-facing-object" data-object-family="INFOGRAPHIC" style="max-width:940px;margin:2.2rem auto;border:1px solid rgba(182,208,233,0.95);border-radius:18px;background:#F7FAFC;padding:1rem 1rem 1.15rem;">
+  <h2 class="drishvara-ag12c-r1-object-title" style="margin:0 0 1rem;font-size:1.15rem;line-height:1.35;color:#17324d;text-align:left;">Service-flow view</h2>
+  <div class="drishvara-ag12c-r1-object-body" style="margin-top:0;">
+<!-- AG11C-INFOGRAPHIC-INSERTION:START -->
+<section class="drishvara-article-object ag11c-infographic-object" data-drishvara-stage="AG11C" data-object-family="infographic" data-asset-id="AG11C-INFO-001" style="max-width:940px;margin:2.5rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    <img src="../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag11c-infographic-digital-healthcare-delivery-flow.svg" alt="Four-step infographic showing digital touchpoint, information capture, service response and trust loop in public healthcare delivery." loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 18px 42px rgba(26,115,140,0.14);border:1px solid rgba(182,208,233,0.9);" />
+    <figcaption style="margin-top:0.85rem;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;">
+      <strong>How digital innovation supports public healthcare delivery.</strong>
+      <span>Conceptual infographic showing a digital healthcare delivery flow; it does not represent a statistical dataset or official workflow.</span>
+      <br />
+      <small style="color:#607685;">Infographic: Drishvara. Source: article-derived conceptual synthesis.</small>
+    </figcaption>
+  </figure>
+</section>
+<!-- AG11C-INFOGRAPHIC-INSERTION:END -->
+  </div>
+</section>
+<!-- AG12C-LAYOUT-REFINEMENT:END:INFOGRAPHIC -->
+
+
+<!-- AG12C-LAYOUT-REFINEMENT:START:FIGURE_DIAGRAM -->
+<section class="drishvara-layout-refinement ag12c-r1-reader-facing-object-block" data-drishvara-stage="AG12C-R1" data-drishvara-layout-treatment="reader-facing-object" data-object-family="FIGURE_DIAGRAM" style="max-width:940px;margin:2.2rem auto;border:1px solid rgba(182,208,233,0.95);border-radius:18px;background:#F7FAFC;padding:1rem 1rem 1.15rem;">
+  <h2 class="drishvara-ag12c-r1-object-title" style="margin:0 0 1rem;font-size:1.15rem;line-height:1.35;color:#17324d;text-align:left;">Digital feedback loop</h2>
+  <div class="drishvara-ag12c-r1-object-body" style="margin-top:0;">
+<!-- AG11D-FIGURE-DIAGRAM-INSERTION:START -->
+<section class="drishvara-article-object ag11d-figure-diagram-object" data-drishvara-stage="AG11D" data-object-family="figure-diagram" data-asset-id="AG11D-DIAGRAM-001" style="max-width:940px;margin:2.5rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    <img src="../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag11d-diagram-public-healthcare-feedback-loop.svg" alt="Conceptual loop diagram with five nodes: public need, digital signal, triage, service response and trust feedback." loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 18px 42px rgba(26,115,140,0.14);border:1px solid rgba(182,208,233,0.9);" />
+    <figcaption style="margin-top:0.85rem;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;">
+      <strong>Public healthcare digital feedback loop.</strong>
+      <span>Conceptual diagram showing how public need, digital signals, triage, service response and trust feedback can reinforce healthcare delivery.</span>
+      <br />
+      <small style="color:#607685;">Diagram: Drishvara. Source: article-derived conceptual synthesis.</small>
+    </figcaption>
+  </figure>
+</section>
+<!-- AG11D-FIGURE-DIAGRAM-INSERTION:END -->
+  </div>
+</section>
+<!-- AG12C-LAYOUT-REFINEMENT:END:FIGURE_DIAGRAM -->
+
+<!-- AG11E-TABLE-STRUCTURED-OBJECT-INSERTION:START -->
+<section class="drishvara-article-object ag11e-table-structured-object" data-drishvara-stage="AG11E" data-object-family="table-structured-object" data-object-id="AG11E-TABLE-001" style="max-width:940px;margin:2.5rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    <figcaption style="margin:0 0 0.85rem 0;font-size:1.05rem;line-height:1.5;color:#17324d;text-align:center;">
+      <strong>Digital healthcare delivery — structured reading lens</strong>
+    </figcaption>
+    <div role="img" aria-label="Structured table with four rows comparing digital access, data visibility, service response and trust loop across reader question, article signal and governance value." style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:20px;border:1px solid rgba(182,208,233,0.95);box-shadow:0 18px 42px rgba(26,115,140,0.12);background:#ffffff;">
+    <table style="width:100%;min-width:760px;border-collapse:separate;border-spacing:0;font-size:0.94rem;">
+      <thead>
+        <tr><th scope="col" style="padding:0.85rem 0.9rem;text-align:left;background:#EAF3F7;color:#17324d;font-weight:800;border-bottom:1px solid #B6D0E9;white-space:normal;">Reading lens</th><th scope="col" style="padding:0.85rem 0.9rem;text-align:left;background:#EAF3F7;color:#17324d;font-weight:800;border-bottom:1px solid #B6D0E9;white-space:normal;">Reader question</th><th scope="col" style="padding:0.85rem 0.9rem;text-align:left;background:#EAF3F7;color:#17324d;font-weight:800;border-bottom:1px solid #B6D0E9;white-space:normal;">Article signal</th><th scope="col" style="padding:0.85rem 0.9rem;text-align:left;background:#EAF3F7;color:#17324d;font-weight:800;border-bottom:1px solid #B6D0E9;white-space:normal;">Governance value</th></tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row" style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;font-weight:800;color:#17324d;">Digital access</th>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Where does the citizen first interact?</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Digital channels can make public-healthcare access more visible.</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Improves entry-point clarity.</td>
+      </tr>
+      <tr>
+        <th scope="row" style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;font-weight:800;color:#17324d;">Data visibility</th>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">What becomes easier to see?</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Service needs, feedback and monitoring signals become easier to organise.</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Supports better prioritisation.</td>
+      </tr>
+      <tr>
+        <th scope="row" style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;font-weight:800;color:#17324d;">Service response</th>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">How can teams act faster?</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Structured information can guide triage, response and coordination.</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Reduces avoidable delay.</td>
+      </tr>
+      <tr>
+        <th scope="row" style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;font-weight:800;color:#17324d;">Trust loop</th>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">What improves public confidence?</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Feedback, transparency and follow-up can reinforce trust.</td>
+        <td style="padding:0.82rem 0.9rem;vertical-align:top;border-bottom:1px solid rgba(182,208,233,0.75);color:#31485a;line-height:1.48;">Strengthens accountability.</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+    <p style="margin:0.85rem auto 0;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;max-width:820px;">
+      <span>Structured table summarising the article’s conceptual service-delivery logic; it does not introduce external statistics or official rankings.</span>
+      <br />
+      <small style="color:#607685;">Table: Drishvara. Source: article-derived conceptual synthesis.</small>
+    </p>
+  </figure>
+</section>
+<!-- AG11E-TABLE-STRUCTURED-OBJECT-INSERTION:END -->
+
+
+<!-- AG12C-LAYOUT-REFINEMENT:START:MAP_GEOGRAPHIC_OBJECT -->
+<section class="drishvara-layout-refinement ag12c-r1-reader-facing-object-block" data-drishvara-stage="AG12C-R1" data-drishvara-layout-treatment="reader-facing-object" data-object-family="MAP_GEOGRAPHIC_OBJECT" style="max-width:940px;margin:2.2rem auto;border:1px solid rgba(182,208,233,0.95);border-radius:18px;background:#F7FAFC;padding:1rem 1rem 1.15rem;">
+  <h2 class="drishvara-ag12c-r1-object-title" style="margin:0 0 1rem;font-size:1.15rem;line-height:1.35;color:#17324d;text-align:left;">Schematic geographic-access view</h2>
+  <div class="drishvara-ag12c-r1-object-body" style="margin-top:0;">
+<!-- AG11F-MAP-GEOGRAPHIC-OBJECT-INSERTION:START -->
+<section class="drishvara-article-object ag11f-map-geographic-object" data-drishvara-stage="AG11F" data-object-family="map-geographic-object" data-asset-id="AG11F-MAP-001" style="max-width:940px;margin:2.5rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    <img src="../../assets/articles/policy/enhancing-public-healthcare-delivery-digital-innovation/ag11f-schematic-geographic-access-pathway.svg" alt="Schematic geographic access pathway with remote community, local service point, district coordination and referral service connected through digital support." loading="lazy" decoding="async" style="display:block;width:100%;height:auto;border-radius:22px;box-shadow:0 18px 42px rgba(26,115,140,0.14);border:1px solid rgba(182,208,233,0.9);" />
+    <figcaption style="margin-top:0.85rem;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;">
+      <strong>Schematic geographic access pathway.</strong>
+      <span>Schematic geographic-access object showing how remote users, local service points, district coordination and referral services may connect through digital support. It is not a real map, not to scale, and not an administrative boundary representation.</span>
+      <br />
+      <small style="color:#607685;">Schematic map object: Drishvara. Source: article-derived conceptual synthesis.</small>
+    </figcaption>
+  </figure>
+</section>
+<!-- AG11F-MAP-GEOGRAPHIC-OBJECT-INSERTION:END -->
+  </div>
+</section>
+<!-- AG12C-LAYOUT-REFINEMENT:END:MAP_GEOGRAPHIC_OBJECT -->
+
+<!-- AG11G-ARTICLE-SUPPORT-COMPOSITE-OBJECT-INSERTION:START -->
+<section class="drishvara-article-object ag11g-article-support-composite-object" data-drishvara-stage="AG11G" data-object-family="article-support-composite-object" data-object-id="AG11G-COMPOSITE-001" style="max-width:880px;margin:2.5rem auto;padding:0;">
+  <figure style="margin:0 auto;text-align:center;">
+    
+<div role="note" aria-label="Reader lens card with key insight, why it matters, caution and reusable intelligence points." style="border-radius:24px;border:1px solid rgba(182,208,233,0.95);box-shadow:0 18px 42px rgba(26,115,140,0.12);background:linear-gradient(135deg,#ffffff 0%,#f7fafc 100%);overflow:hidden;">
+  <div style="padding:1.2rem 1.35rem;background:linear-gradient(135deg,#4480A8 0%,#1A738C 100%);color:#ffffff;text-align:left;">
+    <div style="font-size:0.78rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:800;opacity:0.88;">Article-support composite</div>
+    <div style="font-size:1.35rem;line-height:1.25;font-weight:850;margin-top:0.25rem;">Drishvara reader lens</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid rgba(182,208,233,0.8);">
+    
+    <div style="padding:1rem 1.15rem;border-right:1px solid rgba(182,208,233,0.55);border-bottom:1px solid rgba(182,208,233,0.55);text-align:left;">
+      <div style="font-size:0.82rem;font-weight:850;color:#1A738C;margin-bottom:0.35rem;">Key insight</div>
+      <div style="font-size:0.94rem;line-height:1.52;color:#31485a;">Digital public-healthcare innovation becomes meaningful when it improves visibility, response and trust.</div>
+    </div>
+    <div style="padding:1rem 1.15rem;border-right:1px solid rgba(182,208,233,0.55);border-bottom:1px solid rgba(182,208,233,0.55);text-align:left;">
+      <div style="font-size:0.82rem;font-weight:850;color:#1A738C;margin-bottom:0.35rem;">Why it matters</div>
+      <div style="font-size:0.94rem;line-height:1.52;color:#31485a;">Readers can connect technology discussion with service delivery, accountability and public experience.</div>
+    </div>
+    <div style="padding:1rem 1.15rem;border-right:1px solid rgba(182,208,233,0.55);border-bottom:1px solid rgba(182,208,233,0.55);text-align:left;">
+      <div style="font-size:0.82rem;font-weight:850;color:#1A738C;margin-bottom:0.35rem;">Read carefully</div>
+      <div style="font-size:0.94rem;line-height:1.52;color:#31485a;">The supporting visuals are explanatory objects; they do not replace verified programme data or official records.</div>
+    </div>
+    <div style="padding:1rem 1.15rem;border-right:1px solid rgba(182,208,233,0.55);border-bottom:1px solid rgba(182,208,233,0.55);text-align:left;">
+      <div style="font-size:0.82rem;font-weight:850;color:#1A738C;margin-bottom:0.35rem;">Reusable intelligence</div>
+      <div style="font-size:0.94rem;line-height:1.52;color:#31485a;">The same object pattern can support future articles where a concise reader lens improves comprehension.</div>
+    </div>
+  </div>
+  <div style="padding:0.85rem 1.15rem;background:#F7FAFC;color:#607685;font-size:0.84rem;line-height:1.45;text-align:left;">
+    Composite object: Drishvara. Source: article-derived editorial synthesis.
+  </div>
+</div>
+    <figcaption style="margin:0.85rem auto 0;font-size:0.94rem;line-height:1.55;color:#4a6070;text-align:center;max-width:820px;">
+      <span>Composite article-support object summarising the article’s key reading lens. It is editorial synthesis, not a new external source.</span>
+      <br />
+      <small style="color:#607685;">Composite object: Drishvara. Source: article-derived editorial synthesis.</small>
+    </figcaption>
+  </figure>
+</section>
+<!-- AG11G-ARTICLE-SUPPORT-COMPOSITE-OBJECT-INSERTION:END -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>A mature digital-health approach therefore begins with a simple question: what service problem is being solved? In many public systems, the problem is not the absence of data but the absence of usable, timely and trusted data. A dashboard that receives late or incomplete entries may create a sense of control without improving actual care. A digital record that is not used during referral may become a database entry rather than a clinical tool. A mobile application that citizens cannot access or understand may increase exclusion instead of improving access. Digital innovation must therefore be judged by service improvement, not by software deployment alone.</p>
+<p>The first value of digital innovation is continuity. Patients often move between sub-centres, primary health centres, community health centres, district hospitals and referral institutions. Without continuity of records, each level may treat the patient as a fresh case. Digital health architecture can help reduce this fragmentation by allowing authorised and secure access to relevant information. For administrators, the same continuity can show whether referrals are completed, whether diagnostics are delayed, whether medicines are available, and whether follow-up is happening. In this sense, digital records are not only records; they are instruments for continuity and accountability.</p>
+<p>The second value is timely decision-making. Health systems need both routine reporting and alert-based action. Routine reporting helps understand trends, but alert-based action helps prevent failure. For example, repeated stock-outs, delayed diagnostic results, high referral pendency, unusually low service reporting or unresolved grievances should trigger managerial attention. A digital system becomes useful when it converts data into action points for facility staff, district teams and state-level administrators. If the system only collects data but does not create responsibility for action, it remains an information repository rather than a delivery platform.</p>
+<p>The third value is frontline enablement. Public healthcare workers already carry heavy responsibilities. Digital systems should reduce duplication, simplify reporting and support service delivery. If every programme creates a separate login, separate form and separate dashboard, the frontline worker experiences digital innovation as additional burden. Integration is therefore essential. A good digital-health model should allow common identifiers, shared service records, simplified workflows and role-based access. The goal should be to make the worker’s job easier and the citizen’s journey smoother.</p>
+<p>The fourth value is citizen trust. People trust public systems when they experience reliability, clarity and fairness. Digital tools can support this trust through appointment information, teleconsultation access, test-status visibility, grievance tracking, referral communication and feedback loops. But digital access must be inclusive. Systems should account for language, device availability, connectivity, disability, gender barriers and local service literacy. A digital-first approach should never become digital-only. Public healthcare still requires human support, community facilitation and physical service availability.</p>
+<p>Digital innovation also brings risks. One risk is fragmentation. If systems are built separately by programme, geography or vendor, data may not flow across the service chain. Another risk is poor data quality. If staff enter data only for compliance, the system may look complete while reality remains different. A third risk is over-centralisation. Dashboards can centralise visibility, but action often has to happen at facility, block and district levels. A fourth risk is privacy. Health data is sensitive and must be protected through consent, security, access controls and clear accountability. A fifth risk is exclusion. Citizens who are not digitally literate should not be denied service or dignity.</p>
+<p>For this reason, the governance layer is as important as the technology layer. Every digital-health system should define who enters data, who verifies it, who acts on it, who monitors delays, who resolves errors and who is accountable for service closure. Technology can show the problem, but governance decides whether the problem is solved. A district officer should not only see that referrals are pending; the officer should know which facility is responsible, what support is needed and whether the citizen received care. A state dashboard should not only display aggregate numbers; it should help identify where policy, finance, staffing or supply-chain support is required.</p>
+<p>A practical digital-health delivery model can track a few core indicators. First, whether the service request or patient encounter was recorded. Second, whether it was assigned to the correct facility or provider. Third, whether the service was delivered within a reasonable time. Fourth, whether medicine, diagnostic, referral or follow-up status was updated. Fifth, whether grievances or feedback were captured. Sixth, whether unresolved cases were escalated. These indicators are simple, but they connect technology to the lived experience of public service delivery.</p>
+<p>Digital innovation also changes how health programmes learn. Traditional reviews often depend on monthly reports and meeting presentations. Digital systems can support near-real-time learning if data is trusted and interpreted properly. Districts can compare performance across facilities, identify recurring service bottlenecks and test corrective actions. State teams can identify patterns that require policy support. Programme managers can understand whether low performance is due to staffing, training, infrastructure, stock, connectivity, data entry burden or poor citizen outreach. In this way, digital systems become learning systems.</p>
+<p>However, the human element cannot be replaced. Public health systems depend on trust between citizens and service providers. A teleconsultation platform may improve access, but it cannot replace the need for referral support where physical examination or emergency care is required. A digital record may improve continuity, but it requires staff to use it correctly. A health ID may support interoperability, but citizens must understand consent and benefit. Technology is therefore an enabler, not a substitute for public health capacity.</p>
+<p>For administrators, the most useful lens is implementation realism. A digital-health initiative should be assessed through five questions. Is the system solving a clearly defined service problem? Is it integrated with existing workflows? Are frontline workers trained and supported? Are data quality and privacy safeguards built in? Are review mechanisms linked to corrective action? If the answer to these questions is weak, the platform may appear modern but deliver limited transformation.</p>
+<p>The future of public healthcare delivery will require digital systems that are interoperable, inclusive, secure and action-oriented. The strongest models will not be those with the most dashboards, but those where technology quietly strengthens the patient journey and administrative response. A citizen should experience fewer repeated explanations, fewer avoidable visits, clearer communication and faster support. A health worker should experience less duplication and better decision support. A district or state administrator should see not only numbers, but the service reality behind the numbers.</p>
+<p>Digital innovation can therefore become a bridge between policy intention and delivery reality. It can help public systems move from episodic reporting to continuous service intelligence. But this promise will be achieved only when technology is designed around people, workflows and accountability. The goal is not to digitise bureaucracy. The goal is to make public healthcare more reliable, responsive and humane.</p>
+<p>For a public healthcare administrator, the most important shift is from passive monitoring to active service management. A digital system should not merely show that a service was reported; it should help identify whether the service was actually delivered, where the delay occurred, and who is responsible for the next action. This is especially important in large public systems where field realities differ across geography, staffing patterns, infrastructure gaps and citizen access. Digital tools become meaningful when they help managers distinguish between a reporting gap, a capacity gap, a supply gap and a governance gap.</p>
+<p>The design of digital health systems should also recognise the difference between data availability and data usability. Data may be available in large quantities but still remain unusable if it is fragmented, duplicated, delayed or disconnected from decision-making. A useful system should therefore prioritise clean service pathways, common identifiers, role-based dashboards, exception alerts and feedback loops. The purpose is not to collect more information for its own sake, but to create a reliable chain from citizen need to service response.</p>
+<p>This also means that digital innovation should be evaluated continuously. A platform may work well during launch but weaken later if training, maintenance, data quality checks and field support are not sustained. Public systems require periodic review of user burden, service outcomes, privacy safeguards, interoperability and citizen experience. The best digital-health initiatives are therefore not one-time technology projects. They are living governance systems that must be improved as service needs, institutional capacity and citizen expectations evolve.</p>
+<h2>Reader's Lens</h2>
+<p>The practical value of digital health lies in whether it improves the last-mile experience. A strong digital system should help a patient receive care more smoothly, help a worker perform duties with less duplication, and help administrators act before small gaps become systemic failures. Technology is useful when it strengthens public service delivery; it is inadequate when it only creates another layer of reporting.</p>
+  <section id="ag08g-approved-references" class="article-references ag08g-approved-references" aria-label="References">
+  <!-- AG08G-APPROVED-REFERENCES -->
+  <h2>References</h2>
+  <ol>
+    <li><a href="https://abdm.gov.in/abdm" target="_blank" rel="noopener noreferrer">Ayushman Bharat Digital Mission — ABDM Components</a><br><span>Ayushman Bharat Digital Mission / National Health Authority</span></li>
+    <li><a href="https://www.who.int/publications/i/item/9789240020924" target="_blank" rel="noopener noreferrer">WHO — Global Strategy on Digital Health 2020–2025</a><br><span>World Health Organization</span></li>
+    <li><a href="https://esanjeevani.mohfw.gov.in/assets/guidelines/Telemedicine_Practice_Guidelines.pdf" target="_blank" rel="noopener noreferrer">Telemedicine Practice Guidelines</a><br><span>Ministry of Health and Family Welfare / eSanjeevani-hosted guideline asset</span></li>
+  </ol>
+</section>
+
+<section id="ag08g-legacy-governance-preservation" class="ag08g-legacy-governance-preservation" aria-label="Previous governance evidence">
+  <!-- AG08G-LEGACY-GOVERNANCE-PRESERVED -->
+  <ol class="drishvara-ar01-reference-list">
+    <li data-drishvara-ar01-reference-slot="1" data-drishvara-ag05d-r1-ar01-placeholder-neutralized="true" hidden aria-hidden="true" style="display:none"><strong>Reference 1:</strong> Under editorial verification.</li>
+    <li data-drishvara-ar01-reference-slot="2" data-drishvara-ag05d-r1-ar01-placeholder-neutralized="true" hidden aria-hidden="true" style="display:none"><strong>Reference 2:</strong> Under editorial verification.</li>
+  </ol>
+  <div class="drishvara-ar01-image-credit" data-drishvara-ar01-image-credit="true">
+    Image credit / attribution: Drishvara editorial visual for “Enhancing Public Healthcare Delivery through Digital Innovation: Policy and Practical Outcomes” (policy). Final image-source attribution, where applicable, is under editorial verification.
+  </div>
+</section>
+
+
+<section data-drishvara-ag05d-visible-reference-block="true" class="drishvara-article-evidence drishvara-ag05d-visible-reference-block" data-drishvara-ag03c-b2-reference-block="true" data-drishvara-ag03c-batch="02">
+  <h2>Editorial references and image credit</h2>
+  <p>Verified references approved under AG03B-B2-R1 for Batch 2 insertion.</p>
+  <ol>
+<li>
+      <a data-drishvara-ag03c-b2-reference-link="true" href="https://www.who.int/publications/i/item/9789240020924" target="_blank" rel="noopener noreferrer">Global strategy on digital health 2020-2025</a>
+      <span class="drishvara-reference-source"> — World Health Organization</span>
+    </li>
+<li>
+      <a data-drishvara-ag03c-b2-reference-link="true" href="https://www.worldbank.org/en/topic/health/publication/digital-in-health-unlocking-the-value-for-everyone" target="_blank" rel="noopener noreferrer">Digital-in-Health: Unlocking the Value for Everyone</a>
+      <span class="drishvara-reference-source"> — World Bank</span>
+    </li>
+  </ol>
+<ol class="drishvara-ar01-reference-list">
+    <li data-drishvara-ar01-reference-slot="1" data-drishvara-ag05d-r1-ar01-placeholder-neutralized="true" hidden aria-hidden="true" style="display:none"><strong>Reference 1:</strong> Under editorial verification.</li>
+    <li data-drishvara-ar01-reference-slot="2" data-drishvara-ag05d-r1-ar01-placeholder-neutralized="true" hidden aria-hidden="true" style="display:none"><strong>Reference 2:</strong> Under editorial verification.</li>
+  </ol>
+</section>
+</article>
+  </div>
+
+
+
+<script data-drishvara-hf07-ui-system="true">
+(function () {
+  function setLanguageButtonState(lang) {
+    document.querySelectorAll("[data-drishvara-hf07-lang-choice]").forEach(function (button) {
+      var active = button.getAttribute("data-drishvara-hf07-lang-choice") === lang;
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+  }
+
+  function applyLanguageChoice(lang) {
+    var safeLang = lang === "hi" ? "hi" : "en";
+    try {
+      localStorage.setItem("drishvaraLanguage", safeLang);
+      localStorage.setItem("drishvara:language", safeLang);
+      localStorage.setItem("preferredLanguage", safeLang);
+    } catch (error) {}
+
+    document.documentElement.setAttribute("lang", safeLang === "hi" ? "hi" : "en");
+    document.documentElement.setAttribute("data-drishvara-language", safeLang);
+    setLanguageButtonState(safeLang);
+
+    try {
+      window.dispatchEvent(new CustomEvent("drishvara:language-change", { detail: { language: safeLang } }));
+    } catch (error) {}
+
+    if (typeof window.setDrishvaraLanguage === "function") {
+      try { window.setDrishvaraLanguage(safeLang); } catch (error) {}
+    }
+
+    if (window.DrishvaraLanguage && typeof window.DrishvaraLanguage.setLanguage === "function") {
+      try { window.DrishvaraLanguage.setLanguage(safeLang); } catch (error) {}
+    }
+  }
+
+  function activateUI07() {
+    document.body.classList.add("drishvara-hf07-active");
+
+    document.querySelectorAll("[data-drishvara-hf07-lang-choice]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        applyLanguageChoice(button.getAttribute("data-drishvara-hf07-lang-choice"));
+      });
+    });
+
+    document.querySelectorAll("[data-drishvara-auth-placeholder='true']").forEach(function (link) {
+      link.setAttribute("aria-disabled", "true");
+      
+    });
+
+    document.querySelectorAll("[data-drishvara-hf07-timezone]").forEach(function (timezone) {
+      try {
+        var saved = localStorage.getItem("drishvaraTimezone") || localStorage.getItem("drishvara:timezone");
+        if (saved) timezone.value = saved;
+      } catch (error) {}
+
+      timezone.addEventListener("change", function () {
+        try {
+          localStorage.setItem("drishvaraTimezone", timezone.value);
+          localStorage.setItem("drishvara:timezone", timezone.value);
+        } catch (error) {}
+
+        try {
+          window.dispatchEvent(new CustomEvent("drishvara:timezone-change", { detail: { timezone: timezone.value } }));
+        } catch (error) {}
+      });
+    });
+
+    var initialLang = "en";
+    try {
+      initialLang =
+        localStorage.getItem("drishvaraLanguage") ||
+        localStorage.getItem("drishvara:language") ||
+        localStorage.getItem("preferredLanguage") ||
+        "en";
+    } catch (error) {}
+    setLanguageButtonState(initialLang === "hi" ? "hi" : "en");
+
+    var hf07Nav = document.querySelector("[data-drishvara-hf07-nav]");
+    Array.prototype.slice.call(document.querySelectorAll("nav")).forEach(function (nav) {
+      if (nav === hf07Nav) return;
+      var text = (nav.textContent || "").replace(/\s+/g, " ").trim();
+      if (text.includes("Home") && text.includes("Submissions") && text.includes("Dashboard")) {
+        nav.setAttribute("data-drishvara-hf07-duplicate-nav", "true");
+        nav.setAttribute("aria-hidden", "true");
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", activateUI07);
+  } else {
+    activateUI07();
+  }
+})();
+</script>
+
+<script data-drishvara-hf08-literal-newline-cleanup="true">
+(function () {
+  function activateHF08() {
+    document.body.classList.add("drishvara-hf08-active");
+
+    // Runtime cleanup only for text nodes containing accidental literal backslash-n.
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    nodes.forEach(function (node) {
+      if (node.nodeValue && node.nodeValue.indexOf("\\n") !== -1) {
+        node.nodeValue = node.nodeValue.replace(/\\n/g, "");
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", activateHF08);
+  } else {
+    activateHF08();
+  }
+})();
+</script>
+</body>
+</html>
