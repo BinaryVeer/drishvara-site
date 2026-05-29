@@ -1,0 +1,66 @@
+{
+  "module_id": "AG45C",
+  "title": "Permutation and Rebalance Rules",
+  "status": "permutation_rebalance_rules_recorded",
+  "default_distribution": {
+    "india": 6,
+    "international": 4
+  },
+  "allowed_rebalance_cases_later": [
+    {
+      "case_id": "global_major_event",
+      "possible_distribution": "5 India / 5 International",
+      "condition": "Only when a major global event dominates credible public-interest signals."
+    },
+    {
+      "case_id": "india_major_public_day",
+      "possible_distribution": "7 India / 3 International",
+      "condition": "Only when India has several high-relevance public-interest developments."
+    },
+    {
+      "case_id": "northeast_high_relevance_day",
+      "possible_distribution": "6 India / 4 International with 2 Northeast-tagged India signals",
+      "condition": "Only when multiple credible Northeast signals carry strategic, public-service or national relevance."
+    }
+  ],
+  "non_negotiable_rules": [
+    "Total daily signal count remains 10 unless a later governed stage changes it.",
+    "Northeast Watch must be actively checked daily.",
+    "Rebalance must not be used to force low-credibility signals.",
+    "Public homepage space remains fixed; rebalance changes stored signal mix, not homepage layout size.",
+    "No automatic runtime rebalance is activated in AG45C."
+  ],
+  "blocked_state": {
+    "ag45c_signal_selection_model_recorded": true,
+    "ag45b_consumed": true,
+    "ten_signal_selection_model_recorded": true,
+    "india_six_signal_allocation_recorded": true,
+    "northeast_watch_selection_recorded": true,
+    "international_four_signal_selection_recorded": true,
+    "topic_diversity_inference_scoring_recorded": true,
+    "permutation_rebalance_rules_recorded": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

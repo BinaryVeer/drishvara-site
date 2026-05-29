@@ -1,0 +1,73 @@
+{
+  "module_id": "AG45C",
+  "title": "Northeast Watch Selection Model",
+  "status": "northeast_watch_selection_model_recorded",
+  "region_scope": [
+    "Arunachal Pradesh",
+    "Assam",
+    "Meghalaya",
+    "Nagaland",
+    "Manipur",
+    "Mizoram",
+    "Tripura",
+    "Sikkim"
+  ],
+  "watch_themes": [
+    "border affairs",
+    "China-related regional implications",
+    "infrastructure and connectivity",
+    "environment and climate",
+    "tribal and cultural identity",
+    "security and strategic geography",
+    "public schemes and governance",
+    "education, youth and sports",
+    "regional economy and livelihoods"
+  ],
+  "minimum_daily_process": [
+    "Northeast Watch must be actively checked daily to determine whether at least one credible Northeast India signal is available.",
+    "Prefer original regional reporting with visible byline or credible desk attribution.",
+    "Prioritise strategic, cultural, environmental, public-service, infrastructure, youth, sports and China-related regional implications.",
+    "If no credible Northeast signal is available, record the slot as not-filled-with-reason in a later runtime/backend stage.",
+    "Do not force low-credibility Northeast content merely to satisfy the slot."
+  ],
+  "visibility_rule": "Northeast Watch must be surfaced as a mainstream India signal tag, not hidden as a minor subcategory.",
+  "scoring_boosts_consumed_from_ag45b": {
+    "northeast_watch_candidate_boost": 10,
+    "original_regional_reporting_boost": 8,
+    "strategic_border_or_china_related_context_boost": 6,
+    "public_service_or_connectivity_context_boost": 5
+  },
+  "blocked_state": {
+    "ag45c_signal_selection_model_recorded": true,
+    "ag45b_consumed": true,
+    "ten_signal_selection_model_recorded": true,
+    "india_six_signal_allocation_recorded": true,
+    "northeast_watch_selection_recorded": true,
+    "international_four_signal_selection_recorded": true,
+    "topic_diversity_inference_scoring_recorded": true,
+    "permutation_rebalance_rules_recorded": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

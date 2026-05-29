@@ -1,0 +1,63 @@
+{
+  "module_id": "AG45C",
+  "title": "Daily Signal Ranking Matrix",
+  "status": "daily_signal_ranking_matrix_recorded",
+  "ranking_flow": [
+    "Candidate passes source-tier safety gate.",
+    "Candidate receives credibility score from AG45B model.",
+    "Candidate receives public relevance and inference-value score.",
+    "Candidate is mapped to India, Northeast Watch or International pool.",
+    "Candidate is checked for diversity and repetition risk.",
+    "Top 6 India and top 4 International candidates are selected by weighted score.",
+    "Northeast Watch candidate is included when credible and sufficiently relevant.",
+    "Final display rank is editorially adjustable in later approved stages."
+  ],
+  "hard_exclusion_gates": [
+    "adult/explicit content",
+    "hate/extremist content",
+    "violent shock content",
+    "unverified allegation-heavy claims without credible source backing",
+    "copyright-unsafe image/video usage",
+    "publisher/reporter/source traceability below minimum acceptable level",
+    "content likely to damage Drishvara credibility"
+  ],
+  "display_rank_rules": {
+    "first_three_cards": "Should represent India, Northeast Watch and World where possible.",
+    "middle_cards": "Should preserve topic diversity.",
+    "final_cards": "May carry culture/human/knowledge or deeper world signal.",
+    "no_live_ranking_now": true
+  },
+  "blocked_state": {
+    "ag45c_signal_selection_model_recorded": true,
+    "ag45b_consumed": true,
+    "ten_signal_selection_model_recorded": true,
+    "india_six_signal_allocation_recorded": true,
+    "northeast_watch_selection_recorded": true,
+    "international_four_signal_selection_recorded": true,
+    "topic_diversity_inference_scoring_recorded": true,
+    "permutation_rebalance_rules_recorded": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

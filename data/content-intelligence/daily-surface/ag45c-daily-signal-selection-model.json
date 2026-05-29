@@ -1,0 +1,62 @@
+{
+  "module_id": "AG45C",
+  "title": "Daily Signal Selection Model",
+  "status": "daily_signal_selection_model_recorded_ready_for_ag45d",
+  "selection_count": {
+    "total_daily_signals": 10,
+    "default_india_signals": 6,
+    "default_international_signals": 4,
+    "northeast_watch_minimum": "At least one Northeast Watch candidate must be actively checked and included when credible source material is available."
+  },
+  "source_inputs": {
+    "credibility_model": "data/content-intelligence/daily-surface/ag45b-source-credibility-model.json",
+    "publisher_rules": "data/content-intelligence/daily-surface/ag45b-publisher-credibility-rules.json",
+    "reporter_anchor_rules": "data/content-intelligence/daily-surface/ag45b-reporter-anchor-verification-rules.json",
+    "underreported_source_model": "data/content-intelligence/daily-surface/ag45b-underreported-source-inclusion-model.json",
+    "northeast_source_model": "data/content-intelligence/daily-surface/ag45b-northeast-source-prioritisation-model.json",
+    "tier_risk_register": "data/content-intelligence/daily-surface/ag45b-source-tier-risk-register.json"
+  },
+  "selection_principles": [
+    "Select signals, not noise.",
+    "Give preference to primary reporting for factual developments.",
+    "Use analytical explainers as perspective layer where they add interpretation.",
+    "Prioritise long-term pattern value over short-lived virality.",
+    "Keep Northeast India visible as a standing India signal watch.",
+    "Balance national, regional and international public relevance.",
+    "Exclude unsafe, explicit, hate-driven, reputation-risk or copyright-unsafe sources.",
+    "Do not fetch, scrape or verify live links in AG45C."
+  ],
+  "blocked_state": {
+    "ag45c_signal_selection_model_recorded": true,
+    "ag45b_consumed": true,
+    "ten_signal_selection_model_recorded": true,
+    "india_six_signal_allocation_recorded": true,
+    "northeast_watch_selection_recorded": true,
+    "international_four_signal_selection_recorded": true,
+    "topic_diversity_inference_scoring_recorded": true,
+    "permutation_rebalance_rules_recorded": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
