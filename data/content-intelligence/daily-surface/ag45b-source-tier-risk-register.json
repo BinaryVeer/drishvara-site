@@ -1,0 +1,73 @@
+{
+  "module_id": "AG45B",
+  "title": "Source Tier and Risk Register",
+  "status": "source_tier_risk_register_recorded",
+  "tiers": [
+    {
+      "tier": "Tier 1",
+      "name": "Primary credible reporting",
+      "allowed_use": "daily signal base source",
+      "risk_level": "low_to_moderate"
+    },
+    {
+      "tier": "Tier 2",
+      "name": "Analytical explainer / credible anchor / domain expert",
+      "allowed_use": "perspective layer or signal support",
+      "risk_level": "moderate",
+      "examples_note": "Use public names only as model examples, not permanent endorsement."
+    },
+    {
+      "tier": "Tier 3",
+      "name": "Opinion, debate, commentary, interview",
+      "allowed_use": "clearly labelled context only",
+      "risk_level": "moderate_to_high"
+    },
+    {
+      "tier": "Tier 4",
+      "name": "Restricted / unsafe / unverified / reputation-risk source",
+      "allowed_use": "excluded unless manually cleared",
+      "risk_level": "high"
+    }
+  ],
+  "restricted_content_filters": [
+    "adult or explicit content",
+    "hate or extremist content",
+    "violent shock content",
+    "unverified allegation-heavy material",
+    "propaganda-heavy or manipulative framing",
+    "copyright-unsafe image/video handling",
+    "content likely to damage Drishvara’s credibility"
+  ],
+  "blocked_state": {
+    "ag45b_source_credibility_model_recorded": true,
+    "ag45a_consumed": true,
+    "publisher_credibility_rules_recorded": true,
+    "reporter_anchor_verification_rules_recorded": true,
+    "underreported_source_inclusion_model_recorded": true,
+    "northeast_source_prioritisation_model_recorded": true,
+    "source_tier_risk_register_recorded": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}

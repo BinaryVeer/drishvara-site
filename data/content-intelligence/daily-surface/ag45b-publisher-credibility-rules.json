@@ -1,0 +1,67 @@
+{
+  "module_id": "AG45B",
+  "title": "Publisher Credibility Rules",
+  "status": "publisher_credibility_rules_recorded",
+  "positive_indicators": [
+    "clear publisher identity",
+    "visible editorial ownership or newsroom structure",
+    "consistent publishing history",
+    "correction or update practice where available",
+    "original reporting or credible desk synthesis",
+    "low sensationalism",
+    "clear bylines or desk accountability",
+    "domain reputation and archive depth"
+  ],
+  "risk_indicators": [
+    "anonymous ownership",
+    "clickbait or rage-bait framing",
+    "adult/explicit adjacency",
+    "communal hate or extremist framing",
+    "persistent misinformation history",
+    "heavy plagiarism or copied content",
+    "deceptive headline/body mismatch",
+    "unsafe image/video rights practice"
+  ],
+  "underreported_publisher_treatment": {
+    "allowed": true,
+    "rationale": "A smaller or regional publisher may be used when it has credible inputs, local access, archive history and source accountability.",
+    "safeguards": [
+      "Prefer original regional reporting over copied national summaries.",
+      "Check whether the publisher has a stable archive and identifiable editorial presence.",
+      "Use corroboration for high-stakes claims.",
+      "Avoid publicly labelling any source as unreliable; use internal verification-status bands."
+    ]
+  },
+  "blocked_state": {
+    "ag45b_source_credibility_model_recorded": true,
+    "ag45a_consumed": true,
+    "publisher_credibility_rules_recorded": true,
+    "reporter_anchor_verification_rules_recorded": true,
+    "underreported_source_inclusion_model_recorded": true,
+    "northeast_source_prioritisation_model_recorded": true,
+    "source_tier_risk_register_recorded": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "video_fetch_executed": false,
+    "video_popup_activated": false,
+    "homepage_mutated": false,
+    "featured_reads_mutated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "episode_generated": false,
+    "topic_promoted": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
