@@ -1,0 +1,44 @@
+{
+  "module_id": "AG43D",
+  "title": "Print/PDF Export Hardening Boundary",
+  "status": "print_pdf_export_hardening_boundary_created",
+  "purpose": "Carry forward browser print/PDF export defects to later export validation without mutating current article.",
+  "export_hardening_targets": [
+    "exclude browser print header/footer from controlled export view",
+    "avoid page-break clipping of article objects",
+    "keep object title/body/caption/basis note together where possible",
+    "prevent large empty object shells in exported article",
+    "preserve readable text contrast in PDF/export output"
+  ],
+  "carried_to_later_stage": [
+    "AG43E",
+    "AG46",
+    "AG53"
+  ],
+  "mutation_now": false,
+  "blocked_state": {
+    "ag43d_quality_readiness_audit_completed": true,
+    "ag43c_consumed": true,
+    "template_hardening_boundary_created": true,
+    "export_hardening_boundary_created": true,
+    "reference_consolidation_boundary_created": true,
+    "article_mutated": false,
+    "article_generated": false,
+    "template_mutated": false,
+    "css_js_mutated": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "object_generation_executed": false,
+    "object_removed": false,
+    "featured_reads_mutated": false,
+    "homepage_mutated": false,
+    "listing_mutated": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "database_write_performed": false,
+    "backend_auth_supabase_activation_performed": false,
+    "sql_file_created": false,
+    "sql_grants_executed": false,
+    "service_role_key_exposed": false
+  }
+}
