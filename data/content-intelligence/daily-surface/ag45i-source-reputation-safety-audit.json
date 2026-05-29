@@ -1,0 +1,72 @@
+{
+  "module_id": "AG45I",
+  "title": "Source Reputation and Safety Audit",
+  "status": "source_reputation_safety_audit_passed",
+  "checks": [
+    {
+      "check_id": "underreported_sources_allowed_with_safeguards",
+      "result": "passed",
+      "basis": "AG45B allows smaller/regional sources with archive, accountability and non-sensational safeguards."
+    },
+    {
+      "check_id": "northeast_watch_not_forced",
+      "result": "passed",
+      "basis": "AG45C requires active Northeast checking but does not force low-credibility Northeast content."
+    },
+    {
+      "check_id": "adult_explicit_hate_extremist_exclusion",
+      "result": "passed",
+      "basis": "AG45B, AG45E and AG45F exclude adult, explicit, hate, extremist and reputation-risk content."
+    },
+    {
+      "check_id": "commentary_not_primary_reporting",
+      "result": "passed",
+      "basis": "AG45B and AG45D distinguish reports, explains, analyses, argues and discusses."
+    },
+    {
+      "check_id": "public_negative_source_label_avoided",
+      "result": "passed",
+      "basis": "AG45B uses internal verification bands rather than public negative reliability labels."
+    }
+  ],
+  "audit_passed": true,
+  "blocked_state": {
+    "ag45i_legal_safety_reputation_audit_recorded": true,
+    "ag45a_to_ag45h_chain_consumed": true,
+    "legal_attribution_audit_passed": true,
+    "source_reputation_safety_audit_passed": true,
+    "content_rights_risk_audit_passed": true,
+    "public_surface_nonactivation_audit_passed": true,
+    "backend_deferral_service_key_audit_passed": true,
+    "ag45z_closure_ready": true,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "reporter_live_verification_executed": false,
+    "external_link_verification_executed": false,
+    "image_fetch_executed": false,
+    "thumbnail_fetch_executed": false,
+    "video_fetch_executed": false,
+    "image_downloaded_or_rehosted": false,
+    "video_downloaded_or_rehosted": false,
+    "video_embed_created": false,
+    "video_popup_activated": false,
+    "video_generation_executed": false,
+    "homepage_mutated": false,
+    "homepage_runtime_script_mutated": false,
+    "css_mutated": false,
+    "public_card_rendering_activated": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "reference_fetch_executed": false,
+    "image_generation_executed": false,
+    "public_publishing_operation_performed": false,
+    "deployment_performed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_grants_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_exposed": false
+  }
+}
