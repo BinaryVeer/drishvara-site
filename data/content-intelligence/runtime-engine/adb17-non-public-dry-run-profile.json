@@ -1,0 +1,51 @@
+{
+  "module_id": "ADB17",
+  "title": "Non-public Dry-run Profile",
+  "status": "non_public_dry_run_profile_recorded",
+  "dry_run_profile_id": "ADB17-DRYRUN-7DAY-INTERNAL-001",
+  "dry_run_status": "planned_not_executed",
+  "date_window_strategy": "7_day_initial_window",
+  "location_strategy": {
+    "primary_profile": "India default review profile",
+    "regional_reference_candidates": [
+      "Varanasi",
+      "Patna/Bihar-Mithila",
+      "Ranchi",
+      "Itanagar"
+    ]
+  },
+  "ayanamsha_strategy": {
+    "primary_candidate": "reviewed_candidate_profile_from_seed_foundation",
+    "comparison_required_before_public_use": true,
+    "hardcoded_final_ayanamsha": false
+  },
+  "public_flags": {
+    "public_use_allowed": false,
+    "editorial_review_status": "pending_review",
+    "evidence_status": "calculation_dry_run",
+    "output_visibility": "internal_only"
+  },
+  "blocked_state": {
+    "adb17_engine_contract_recorded": true,
+    "adb16_consumed": true,
+    "formula_coverage_contract_recorded": true,
+    "dry_run_profile_recorded": true,
+    "input_output_contract_recorded": true,
+    "trace_log_contract_recorded": true,
+    "adb18_validation_handoff_recorded": true,
+    "ready_for_adb18_validation_protocol": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

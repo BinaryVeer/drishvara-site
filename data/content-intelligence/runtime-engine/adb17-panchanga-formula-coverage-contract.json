@@ -1,0 +1,67 @@
+{
+  "module_id": "ADB17",
+  "title": "Panchanga Formula Coverage Contract",
+  "status": "formula_coverage_contract_recorded",
+  "required_formula_families": [
+    {
+      "formula_key": "tithi_from_moon_sun_angular_separation",
+      "output": "tithi",
+      "basis": "Moon-Sun angular separation divided into 12-degree bands",
+      "dry_run_requirement": "candidate calculation plus transition trace"
+    },
+    {
+      "formula_key": "nakshatra_from_sidereal_moon_longitude",
+      "output": "nakshatra",
+      "basis": "sidereal Moon longitude divided into 27 equal divisions",
+      "dry_run_requirement": "candidate calculation plus boundary trace"
+    },
+    {
+      "formula_key": "yoga_from_sun_moon_longitude_sum",
+      "output": "yoga",
+      "basis": "sum of sidereal Sun and Moon longitudes divided into 27 equal divisions",
+      "dry_run_requirement": "candidate calculation plus boundary trace"
+    },
+    {
+      "formula_key": "karana_from_half_tithi",
+      "output": "karana",
+      "basis": "half-tithi sequence and special karana rules",
+      "dry_run_requirement": "candidate calculation plus sequence trace"
+    },
+    {
+      "formula_key": "vara_from_local_sunrise_boundary",
+      "output": "vara",
+      "basis": "local sunrise day-boundary",
+      "dry_run_requirement": "local sunrise basis must be visible"
+    },
+    {
+      "formula_key": "rashi_from_sidereal_moon_longitude",
+      "output": "rashi",
+      "basis": "sidereal Moon longitude divided into 12 signs",
+      "dry_run_requirement": "candidate calculation plus ayanamsha trace"
+    }
+  ],
+  "coverage_status": "contract_only_not_executed",
+  "blocked_state": {
+    "adb17_engine_contract_recorded": true,
+    "adb16_consumed": true,
+    "formula_coverage_contract_recorded": true,
+    "dry_run_profile_recorded": true,
+    "input_output_contract_recorded": true,
+    "trace_log_contract_recorded": true,
+    "adb18_validation_handoff_recorded": true,
+    "ready_for_adb18_validation_protocol": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

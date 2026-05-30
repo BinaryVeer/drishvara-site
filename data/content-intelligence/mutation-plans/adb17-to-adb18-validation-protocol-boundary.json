@@ -1,0 +1,46 @@
+{
+  "module_id": "ADB17",
+  "title": "ADB17 to ADB18 Validation Protocol Boundary",
+  "status": "adb18_validation_protocol_boundary_created",
+  "next_stage_id": "ADB18",
+  "next_stage_title": "Dry-run Validation Protocol and Seed Sufficiency Audit",
+  "allowed_scope": [
+    "Validate seed sufficiency against the ADB17 engine contract.",
+    "Define trusted Panchang comparison protocol.",
+    "Define location/sunrise and ayanamsha validation checks.",
+    "Define dry-run acceptance thresholds.",
+    "Keep runtime execution and public activation blocked."
+  ],
+  "blocked_scope": [
+    "Runtime calculation execution",
+    "Computed Panchang row write",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure in repo/chat",
+    "AG47 resume before ADB20"
+  ],
+  "blocked_state": {
+    "adb17_engine_contract_recorded": true,
+    "adb16_consumed": true,
+    "formula_coverage_contract_recorded": true,
+    "dry_run_profile_recorded": true,
+    "input_output_contract_recorded": true,
+    "trace_log_contract_recorded": true,
+    "adb18_validation_handoff_recorded": true,
+    "ready_for_adb18_validation_protocol": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

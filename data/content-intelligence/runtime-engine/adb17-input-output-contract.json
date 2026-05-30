@@ -1,0 +1,51 @@
+{
+  "module_id": "ADB17",
+  "title": "Runtime Input / Output Contract",
+  "status": "input_output_contract_recorded",
+  "input_tables_or_sources": [
+    "calculation_profiles",
+    "ephemeris_profiles",
+    "ayanamsha_profiles",
+    "location_time_profiles",
+    "panchanga_formula_rules",
+    "regional_calendar_profiles",
+    "source_authorities"
+  ],
+  "candidate_output_tables": [
+    "astronomical_input_snapshots",
+    "panchanga_calculation_runs",
+    "panchanga_calculation_trace_logs",
+    "panchang_daily_records"
+  ],
+  "required_output_controls": {
+    "public_use_allowed": false,
+    "editorial_review_status": "pending_review",
+    "runtime_run_status": "dry_run",
+    "trace_required": true,
+    "comparison_required_before_public_use": true
+  },
+  "database_write_status_now": "not_approved_in_adb17",
+  "blocked_state": {
+    "adb17_engine_contract_recorded": true,
+    "adb16_consumed": true,
+    "formula_coverage_contract_recorded": true,
+    "dry_run_profile_recorded": true,
+    "input_output_contract_recorded": true,
+    "trace_log_contract_recorded": true,
+    "adb18_validation_handoff_recorded": true,
+    "ready_for_adb18_validation_protocol": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

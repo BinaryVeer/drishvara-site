@@ -1,0 +1,39 @@
+{
+  "module_id": "ADB17",
+  "title": "ADB18 Validation Hand-off",
+  "status": "adb18_validation_handoff_recorded",
+  "handoff_to_stage": "ADB18",
+  "required_adb18_checks": [
+    "Seed sufficiency for all required input tables",
+    "Reference Panchang comparison protocol",
+    "Formula coverage sufficiency",
+    "Location/sunrise basis validation",
+    "Ayanamsha comparison requirement",
+    "Dry-run date-window selection",
+    "No public activation check"
+  ],
+  "ready_for_adb18": true,
+  "blocked_state": {
+    "adb17_engine_contract_recorded": true,
+    "adb16_consumed": true,
+    "formula_coverage_contract_recorded": true,
+    "dry_run_profile_recorded": true,
+    "input_output_contract_recorded": true,
+    "trace_log_contract_recorded": true,
+    "adb18_validation_handoff_recorded": true,
+    "ready_for_adb18_validation_protocol": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}
