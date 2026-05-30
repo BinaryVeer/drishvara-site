@@ -1,0 +1,72 @@
+{
+  "module_id": "AD05",
+  "title": "Corpus Database Planning Map",
+  "status": "corpus_database_planning_map_recorded",
+  "planned_tables_no_sql": [
+    {
+      "table_name": "word_corpus",
+      "purpose": "Word of the Day and vocabulary records.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "sanskrit_name_corpus",
+      "purpose": "Sanskrit names and culturally important terms.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "sutra_quote_corpus",
+      "purpose": "Short source-attributed sutra/quote/excerpt records.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "reflection_prompt_rules",
+      "purpose": "Reflection prompt templates and rules.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "source_authorities",
+      "purpose": "Shared source authority and confidence records.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "editorial_review_status",
+      "purpose": "Shared editorial workflow status.",
+      "status": "planning_only_no_sql"
+    }
+  ],
+  "no_sql_rule": "AD05 creates schema planning only. SQL migrations and database writes remain blocked.",
+  "blocked_state": {
+    "ad05_word_sutra_reflection_corpus_schema_recorded": true,
+    "ad04_consumed": true,
+    "corpus_doctrine_recorded": true,
+    "word_corpus_schema_recorded": true,
+    "sanskrit_name_term_schema_recorded": true,
+    "sutra_quote_schema_recorded": true,
+    "reflection_prompt_schema_recorded": true,
+    "textual_discipline_model_recorded": true,
+    "corpus_source_attribution_review_map_recorded": true,
+    "corpus_database_planning_map_recorded": true,
+    "ready_for_ad06": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "word_of_day_generated": false,
+    "sutra_quote_generated": false,
+    "reflection_prompt_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "copyrighted_text_reproduced": false,
+    "unverified_translation_published": false,
+    "unverified_nityanand_claim_made": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
