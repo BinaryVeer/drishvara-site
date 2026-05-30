@@ -1,0 +1,121 @@
+{
+  "module_id": "ADB01",
+  "title": "No-mutation Audit Register",
+  "status": "no_mutation_audit_passed_for_adb01",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "ag47_resume_allowed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "public_content_generated",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "guidance_generated",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "panchang_calculation_executed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "seed_data_inserted",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "sql_file_created",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "sql_migration_created",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "sql_executed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "database_write_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "supabase_table_created",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "supabase_schema_modified",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "backend_auth_supabase_activation_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "deployment_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "service_role_key_exposed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "adb01_database_build_approval_checkpoint_recorded": true,
+    "adz_consumed": true,
+    "build_path_decision_matrix_recorded": true,
+    "security_gate_register_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "ready_for_adb02": true,
+    "selected_path": "local_schema_dictionary_first",
+    "sql_draft_approved": false,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "module_id": "ADB01",
+  "title": "Database Build Approval Checkpoint",
+  "status": "database_build_approval_checkpoint_recorded",
+  "checkpoint_result": "approved_for_local_schema_dictionary_planning_only",
+  "selected_path": "local_schema_dictionary_first",
+  "decision_summary": [
+    "The AD foundation is closed and ready to enter database-build planning.",
+    "The safe next step is local schema dictionary planning, not SQL migration creation.",
+    "SQL draft generation remains blocked until a later explicit approval checkpoint.",
+    "SQL execution, Supabase table creation, seed insertion and backend activation remain blocked.",
+    "No service-role key is required, requested, pasted or committed."
+  ],
+  "explicit_non_approvals": {
+    "sql_draft_approved": false,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "service_role_key_required": false
+  },
+  "blocked_state": {
+    "adb01_database_build_approval_checkpoint_recorded": true,
+    "adz_consumed": true,
+    "build_path_decision_matrix_recorded": true,
+    "security_gate_register_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "ready_for_adb02": true,
+    "selected_path": "local_schema_dictionary_first",
+    "sql_draft_approved": false,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
