@@ -1,0 +1,71 @@
+{
+  "module_id": "ADB05",
+  "title": "Duplicate Avoidance Audit",
+  "status": "duplicate_avoidance_audit_passed",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "m01_not_replaced_by_weaker_schema",
+      "passed": true
+    },
+    {
+      "check_id": "m02_vrat_logic_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "m03_d05_festival_registry_logic_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "m04_location_sunrise_logic_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "m04a_validation_learning_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "d06_mantra_source_review_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "id01_security_boundary_preserved",
+      "passed": true
+    },
+    {
+      "check_id": "adb02_base_schema_not_rewritten",
+      "passed": true
+    },
+    {
+      "check_id": "no_seed_insert_script_created",
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "adb05_sql_migration_draft_recorded": true,
+    "adb04a_consumed": true,
+    "adb02_base_schema_consumed": true,
+    "legacy_m_d_id_consumed": true,
+    "base_schema_tables_drafted": true,
+    "calculation_engine_extension_tables_drafted": true,
+    "sql_draft_file_created": true,
+    "sql_draft_manifest_recorded": true,
+    "ready_for_adb06": true,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "runtime_calculation_executed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

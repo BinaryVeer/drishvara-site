@@ -1,0 +1,89 @@
+{
+  "module_id": "ADB05",
+  "title": "No Execution Audit",
+  "status": "no_execution_audit_passed_for_adb05",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "sql_draft_file_created",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "check_id": "sql_executed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "database_write_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "supabase_connection_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "supabase_table_created",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "supabase_schema_modified",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "seed_data_inserted",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "runtime_calculation_executed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "service_role_key_exposed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "adb05_sql_migration_draft_recorded": true,
+    "adb04a_consumed": true,
+    "adb02_base_schema_consumed": true,
+    "legacy_m_d_id_consumed": true,
+    "base_schema_tables_drafted": true,
+    "calculation_engine_extension_tables_drafted": true,
+    "sql_draft_file_created": true,
+    "sql_draft_manifest_recorded": true,
+    "ready_for_adb06": true,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "runtime_calculation_executed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

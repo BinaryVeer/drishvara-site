@@ -1,0 +1,101 @@
+{
+  "module_id": "ADB05",
+  "title": "Legacy Consumption Map",
+  "status": "legacy_consumption_map_recorded",
+  "consumed_sources": [
+    "ADB02 base schema dictionary",
+    "ADB04A schema extension delta",
+    "M00 through M10 methodology records",
+    "D01 through D06 knowledge records",
+    "ID01 and available ID02 implementation records",
+    "AD00 through ADZ foundation records",
+    "ADB01 through ADB04 database-build records"
+  ],
+  "mapped_legacy_to_sql": [
+    {
+      "legacy": "M01",
+      "sql_tables": [
+        "calculation_methodologies",
+        "calculation_profiles",
+        "ephemeris_profiles",
+        "ayanamsha_profiles",
+        "astronomical_input_snapshots",
+        "panchanga_formula_rules",
+        "panchanga_calculation_runs",
+        "panchanga_calculation_trace_logs"
+      ]
+    },
+    {
+      "legacy": "M02",
+      "sql_tables": [
+        "tithi_vrat_rule_families",
+        "fasting_parana_rule_profiles",
+        "observance_conflict_flags"
+      ]
+    },
+    {
+      "legacy": "M03 and D05",
+      "sql_tables": [
+        "festival_observance_rule_registry",
+        "regional_festival_rules",
+        "regional_sampradaya_rule_variants"
+      ]
+    },
+    {
+      "legacy": "M04",
+      "sql_tables": [
+        "location_time_profiles",
+        "sunrise_sunset_moonrise_event_windows"
+      ]
+    },
+    {
+      "legacy": "M04A",
+      "sql_tables": [
+        "validation_learning_cycles",
+        "calculation_variance_records",
+        "calibration_backlog_records"
+      ]
+    },
+    {
+      "legacy": "D01-D04",
+      "sql_tables": [
+        "daily_guidance_rule_sets",
+        "word_of_day_rotation_rules",
+        "reflection_prompt_rules"
+      ]
+    },
+    {
+      "legacy": "D06",
+      "sql_tables": [
+        "mantra_source_review_registry",
+        "mantra_candidate_review_records"
+      ]
+    }
+  ],
+  "blocked_state": {
+    "adb05_sql_migration_draft_recorded": true,
+    "adb04a_consumed": true,
+    "adb02_base_schema_consumed": true,
+    "legacy_m_d_id_consumed": true,
+    "base_schema_tables_drafted": true,
+    "calculation_engine_extension_tables_drafted": true,
+    "sql_draft_file_created": true,
+    "sql_draft_manifest_recorded": true,
+    "ready_for_adb06": true,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "runtime_calculation_executed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
