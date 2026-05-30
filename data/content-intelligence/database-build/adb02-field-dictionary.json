@@ -1,0 +1,192 @@
+{
+  "module_id": "ADB02",
+  "title": "Local Field Dictionary",
+  "status": "field_dictionary_recorded",
+  "universal_fields": [
+    "id",
+    "record_key",
+    "source_id",
+    "supported_claim",
+    "source_confidence_band",
+    "verification_status",
+    "editorial_review_status",
+    "public_use_allowed",
+    "created_at",
+    "updated_at",
+    "notes"
+  ],
+  "table_field_sets": [
+    {
+      "table_name": "source_authorities",
+      "fields": [
+        "source_id",
+        "source_title",
+        "source_type",
+        "author_or_institution",
+        "tradition_or_region",
+        "source_locator",
+        "source_confidence_band",
+        "verification_status",
+        "editorial_review_status",
+        "public_use_allowed",
+        "copyright_or_usage_note",
+        "notes"
+      ]
+    },
+    {
+      "table_name": "panchang_daily_records",
+      "fields": [
+        "date_key",
+        "location_id",
+        "latitude",
+        "longitude",
+        "timezone",
+        "sunrise_reference",
+        "regional_profile_id",
+        "calculation_profile_id",
+        "tithi_id",
+        "nakshatra_id",
+        "yoga_id",
+        "karana_id",
+        "vara_id",
+        "source_id",
+        "verification_status",
+        "editorial_review_status",
+        "public_use_allowed",
+        "notes"
+      ]
+    },
+    {
+      "table_name": "regional_calendar_profiles",
+      "fields": [
+        "regional_profile_id",
+        "region_or_tradition",
+        "rule_type",
+        "rule_summary",
+        "supported_rule",
+        "source_id",
+        "source_confidence_band",
+        "verification_status",
+        "editorial_review_status",
+        "public_use_allowed",
+        "difference_handling_note",
+        "notes"
+      ]
+    },
+    {
+      "table_name": "word_corpus",
+      "fields": [
+        "word_id",
+        "word_key",
+        "word_devanagari",
+        "word_iast",
+        "word_common_transliteration",
+        "word_language",
+        "root_or_dhatu",
+        "literal_meaning",
+        "contextual_meaning",
+        "short_reflection_use",
+        "source_id",
+        "source_locator",
+        "verification_status",
+        "editorial_review_status",
+        "public_use_allowed",
+        "notes"
+      ]
+    },
+    {
+      "table_name": "sutra_quote_corpus",
+      "fields": [
+        "quote_id",
+        "quote_key",
+        "source_text_family",
+        "source_title",
+        "chapter_section_reference",
+        "original_text_short_excerpt",
+        "transliteration",
+        "translation_or_paraphrase",
+        "context_note",
+        "copyright_status_note",
+        "source_id",
+        "source_locator",
+        "verification_status",
+        "editorial_review_status",
+        "public_use_allowed",
+        "notes"
+      ]
+    },
+    {
+      "table_name": "vedic_guidance_rules",
+      "fields": [
+        "guidance_rule_id",
+        "guidance_rule_key",
+        "guidance_theme",
+        "linked_panchanga_elements",
+        "linked_regional_profile_id",
+        "linked_word_id",
+        "linked_quote_id",
+        "linked_reflection_prompt_id",
+        "interpretation_note",
+        "tone",
+        "claim_risk_level",
+        "safety_note",
+        "source_dependency_level",
+        "editorial_review_status",
+        "public_use_allowed",
+        "notes"
+      ]
+    },
+    {
+      "table_name": "star_reflection_rules",
+      "fields": [
+        "star_reflection_rule_id",
+        "star_reflection_rule_key",
+        "reflection_basis",
+        "linked_nakshatra_id",
+        "linked_rashi_id",
+        "linked_tithi_id",
+        "linked_panchanga_context",
+        "linked_regional_profile_id",
+        "reflection_theme",
+        "interpretation_boundary",
+        "tone",
+        "claim_risk_level",
+        "safety_note",
+        "editorial_review_status",
+        "public_use_allowed",
+        "notes"
+      ]
+    }
+  ],
+  "rule": "Field dictionary is planning-only and does not create schema, SQL or database objects.",
+  "blocked_state": {
+    "adb02_local_schema_dictionary_recorded": true,
+    "adb01_consumed": true,
+    "table_dictionary_recorded": true,
+    "field_dictionary_recorded": true,
+    "relationship_blueprint_recorded": true,
+    "index_constraint_plan_recorded": true,
+    "local_schema_validation_checklist_recorded": true,
+    "no_sql_export_plan_recorded": true,
+    "ready_for_adb03": true,
+    "sql_draft_approved": false,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
