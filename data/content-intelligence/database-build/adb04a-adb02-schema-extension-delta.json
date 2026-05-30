@@ -1,0 +1,159 @@
+{
+  "module_id": "ADB04A",
+  "title": "ADB02 Schema Extension Delta",
+  "status": "adb02_schema_extension_delta_recorded",
+  "treatment": "additive_delta_to_committed_adb02_not_history_rewrite",
+  "base_schema_source": "ADB02",
+  "extension_required_before_adb05": true,
+  "required_extension_table_groups": [
+    {
+      "group_id": "calculation_engine_core",
+      "source_records": [
+        "M01",
+        "AD04"
+      ],
+      "tables": [
+        "calculation_methodologies",
+        "calculation_profiles",
+        "ephemeris_profiles",
+        "ayanamsha_profiles",
+        "panchanga_formula_rules",
+        "panchanga_element_intervals",
+        "panchanga_calculation_runs",
+        "panchanga_calculation_trace_logs"
+      ]
+    },
+    {
+      "group_id": "astronomical_inputs",
+      "source_records": [
+        "M01"
+      ],
+      "tables": [
+        "astronomical_input_snapshots",
+        "solar_lunar_longitude_records",
+        "sidereal_conversion_records",
+        "interpolation_root_finding_logs"
+      ]
+    },
+    {
+      "group_id": "location_event_windows",
+      "source_records": [
+        "M04"
+      ],
+      "tables": [
+        "location_time_profiles",
+        "sunrise_sunset_moonrise_event_windows",
+        "event_window_basis_profiles",
+        "coordinate_timezone_review_records"
+      ]
+    },
+    {
+      "group_id": "observance_rule_engine",
+      "source_records": [
+        "M02",
+        "M03",
+        "D05"
+      ],
+      "tables": [
+        "tithi_vrat_rule_families",
+        "fasting_parana_rule_profiles",
+        "festival_observance_rule_registry",
+        "regional_sampradaya_rule_variants",
+        "observance_conflict_flags"
+      ]
+    },
+    {
+      "group_id": "guidance_word_mantra",
+      "source_records": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D06",
+        "M06",
+        "M07"
+      ],
+      "tables": [
+        "daily_guidance_rule_sets",
+        "word_of_day_rotation_rules",
+        "mantra_source_review_registry",
+        "mantra_candidate_review_records",
+        "personalization_scoring_rules"
+      ]
+    },
+    {
+      "group_id": "validation_learning",
+      "source_records": [
+        "M04A",
+        "M10",
+        "ID01"
+      ],
+      "tables": [
+        "validation_learning_cycles",
+        "calculation_variance_records",
+        "calibration_backlog_records",
+        "methodology_activation_audits"
+      ]
+    }
+  ],
+  "required_trace_fields_from_m01": [
+    "input_date",
+    "input_location",
+    "timezone",
+    "sunrise_basis",
+    "ephemeris_source",
+    "ayanamsha_source",
+    "solar_longitude",
+    "lunar_longitude",
+    "sidereal_conversion_basis",
+    "interpolation_or_root_finding_method",
+    "element_transition_times",
+    "skipped_repeated_flags",
+    "source_registry_reference",
+    "software_library_version",
+    "calculation_timestamp",
+    "reviewer_status"
+  ],
+  "required_event_fields_from_m04": [
+    "location_id",
+    "latitude",
+    "longitude",
+    "coordinate_precision",
+    "coordinate_source",
+    "timezone_id",
+    "timezone_version",
+    "sunrise_basis",
+    "sunset_basis",
+    "moonrise_basis",
+    "event_window_basis",
+    "review_status"
+  ],
+  "blocked_state": {
+    "adb04a_legacy_methodology_alignment_recorded": true,
+    "adb04_consumed": true,
+    "m_series_consumed": true,
+    "d_series_consumed": true,
+    "id_series_consumed": true,
+    "adb02_schema_extension_delta_recorded": true,
+    "duplicate_prevention_map_recorded": true,
+    "calculation_engine_schema_requirements_recorded": true,
+    "revised_adb05_scope_recorded": true,
+    "ready_for_adb05_revised_sql_draft": true,
+    "legacy_files_altered": false,
+    "adb02_commit_rewritten": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false
+  }
+}

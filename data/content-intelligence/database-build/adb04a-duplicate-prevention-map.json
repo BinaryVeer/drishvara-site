@@ -1,0 +1,64 @@
+{
+  "module_id": "ADB04A",
+  "title": "Duplicate Prevention Map",
+  "status": "duplicate_prevention_map_recorded",
+  "rules": [
+    "Do not recreate M01 as a weaker calculation table; consume M01 formulas and trace requirements.",
+    "Do not create separate festival-rule tables that ignore M03 and D05.",
+    "Do not create mantra tables that ignore D06 source/review records.",
+    "Do not duplicate ID01 content-governance tables; link AD/ADB tables to existing content governance where required.",
+    "Do not rewrite ADB02 history; add ADB04A delta as formal correction layer.",
+    "Do not create runtime/API tables that imply activation before backend/Auth approval.",
+    "Do not create seed-insert scripts in ADB05."
+  ],
+  "table_merge_guidance": [
+    {
+      "existing_or_prior_logic": "ADB02 panchang_daily_records",
+      "delta_treatment": "Keep as output/cache table, but add calculation-run and trace references from M01."
+    },
+    {
+      "existing_or_prior_logic": "ADB02 regional_calendar_profiles",
+      "delta_treatment": "Keep, but link to M02/M03 regional and sampradaya rule variants."
+    },
+    {
+      "existing_or_prior_logic": "ADB02 word_corpus",
+      "delta_treatment": "Keep, but align with D02 word bank and rotation policy."
+    },
+    {
+      "existing_or_prior_logic": "ADB02 vedic_guidance_rules",
+      "delta_treatment": "Keep, but align with D03/D04 rule schema and validation policy."
+    },
+    {
+      "existing_or_prior_logic": "ADB02 claim_risk_register",
+      "delta_treatment": "Keep, but enforce M00/M10 safety blockers."
+    }
+  ],
+  "blocked_state": {
+    "adb04a_legacy_methodology_alignment_recorded": true,
+    "adb04_consumed": true,
+    "m_series_consumed": true,
+    "d_series_consumed": true,
+    "id_series_consumed": true,
+    "adb02_schema_extension_delta_recorded": true,
+    "duplicate_prevention_map_recorded": true,
+    "calculation_engine_schema_requirements_recorded": true,
+    "revised_adb05_scope_recorded": true,
+    "ready_for_adb05_revised_sql_draft": true,
+    "legacy_files_altered": false,
+    "adb02_commit_rewritten": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false
+  }
+}

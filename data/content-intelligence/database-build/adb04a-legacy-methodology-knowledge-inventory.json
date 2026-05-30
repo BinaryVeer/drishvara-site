@@ -1,0 +1,161 @@
+{
+  "module_id": "ADB04A",
+  "title": "Legacy Methodology and Knowledge Inventory",
+  "status": "legacy_methodology_knowledge_inventory_recorded",
+  "consumed_m_series_modules": [
+    {
+      "module_id": "M00",
+      "title": "Source Doctrine & Sanskrit Integrity Framework",
+      "registry_path": "data/methodology/m00-source-doctrine.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M01",
+      "title": "Panchang Calculation Methodology Specification",
+      "registry_path": "data/methodology/m01-panchang-calculation-methodology.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M02",
+      "title": "Tithi / Vrat / Fasting-Day Rule Engine",
+      "registry_path": "data/methodology/m02-tithi-vrat-fasting-rule-methodology.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M03",
+      "title": "Festival Rule Registry",
+      "registry_path": "data/methodology/m03-festival-rule-registry.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M04",
+      "title": "Location / Timezone / Sunrise Basis",
+      "registry_path": "data/methodology/m04-location-timezone-sunrise-basis.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M04A",
+      "title": "Periodic Validation, Calibration & Learning Register",
+      "registry_path": "data/methodology/m04a-periodic-validation-learning-register.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M05",
+      "title": "Name / DOB / Location Methodology",
+      "registry_path": "data/methodology/m05-name-dob-location-methodology.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M06",
+      "title": "Lucky Number / Colour / Mantra Selection Methodology",
+      "registry_path": "data/methodology/m06-lucky-number-colour-mantra-selection.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M06A",
+      "title": "Symbolic Scoring Formula & Mapping Doctrine",
+      "registry_path": "data/methodology/m06a-symbolic-scoring-formula-mapping.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M07",
+      "title": "Subscriber Personalization Scoring Logic",
+      "registry_path": "data/methodology/m07-subscriber-personalization-scoring.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M08",
+      "title": "Server-side API Contract",
+      "registry_path": "data/methodology/m08-server-side-api-contract.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M09",
+      "title": "Internal Calculation Preview",
+      "registry_path": "data/methodology/m09-internal-calculation-preview.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    },
+    {
+      "module_id": "M10",
+      "title": "Methodology Activation Readiness Report",
+      "registry_path": "data/methodology/m10-methodology-activation-readiness-report.json",
+      "status": "methodology_or_review_only",
+      "runtime_status": "disabled",
+      "public_output_status": "disabled"
+    }
+  ],
+  "consumed_d_series_files": [
+    "data/knowledge/daily-guidance/daily-guidance-engine-governance-d01.json",
+    "data/knowledge/daily-guidance/word-of-day-bank-d02.json",
+    "data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json",
+    "data/knowledge/daily-guidance/daily-guidance-rule-schema-d03.json",
+    "data/knowledge/daily-guidance/daily-guidance-rule-validation-policy-d04.json",
+    "data/knowledge/sanatan/panchang-source-policy-d01.json",
+    "data/knowledge/sanatan/festival-observance-registry-d05.json",
+    "data/knowledge/sanatan/panchang-festival-source-registry-d05.json",
+    "data/knowledge/sanatan/mantra-candidate-registry-d06.json",
+    "data/knowledge/sanatan/mantra-source-registry-d06.json"
+  ],
+  "consumed_id_series_files": [
+    "data/implementation/id01-supabase-logical-schema-rls-design-without-migration.json",
+    "data/implementation/id02-api-route-contract-design-preview.json",
+    "data/implementation/id02-api-route-contract-design-without-route-creation.json"
+  ],
+  "id02_files_found": [
+    "data/implementation/id02-api-route-contract-design-preview.json",
+    "data/implementation/id02-api-route-contract-design-without-route-creation.json"
+  ],
+  "inventory_result": "legacy_records_exist_and_must_be_consumed_before_adb05",
+  "blocked_state": {
+    "adb04a_legacy_methodology_alignment_recorded": true,
+    "adb04_consumed": true,
+    "m_series_consumed": true,
+    "d_series_consumed": true,
+    "id_series_consumed": true,
+    "adb02_schema_extension_delta_recorded": true,
+    "duplicate_prevention_map_recorded": true,
+    "calculation_engine_schema_requirements_recorded": true,
+    "revised_adb05_scope_recorded": true,
+    "ready_for_adb05_revised_sql_draft": true,
+    "legacy_files_altered": false,
+    "adb02_commit_rewritten": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false
+  }
+}
