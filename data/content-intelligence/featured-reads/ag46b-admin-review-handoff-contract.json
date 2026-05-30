@@ -1,0 +1,63 @@
+{
+  "module_id": "AG46B",
+  "title": "Featured Reads Admin Review Handoff Contract",
+  "status": "admin_review_handoff_contract_recorded",
+  "source_of_truth": [
+    "AG26 Admin/Editor Manual Workflow Strengthening",
+    "AG43 article readiness and closure",
+    "AG46A production scope guard"
+  ],
+  "contract_rules": [
+    "Featured Reads production readiness should route to Admin/Editor review before publication.",
+    "Admin handoff should expose blockers, warnings, reference status, visual-credit status and export-readiness status.",
+    "Admin actions remain review-only unless a later approved stage enables publication workflow.",
+    "No admin queue mutation, GitHub write, public publish or deployment is executed in AG46B.",
+    "Backend/Auth/Supabase remains deferred unless a later approved stage explicitly activates it."
+  ],
+  "production_acceptance_criteria_later": [
+    "hard blockers visible",
+    "warnings visible",
+    "reference status visible",
+    "visual-credit status visible",
+    "clean export status visible",
+    "publish remains blocked until approved workflow"
+  ],
+  "blocked_state": {
+    "ag46b_featured_reads_production_hardening_contract_recorded": true,
+    "ag46a_consumed": true,
+    "ag43z_consumed": true,
+    "ag45z_consumed": true,
+    "reference_section_contract_recorded": true,
+    "visual_credit_contract_recorded": true,
+    "long_form_scanability_contract_recorded": true,
+    "object_layout_clean_export_contract_recorded": true,
+    "admin_review_handoff_contract_recorded": true,
+    "no_duplicate_consumption_audit_recorded": true,
+    "ready_for_ag46c": true,
+    "featured_reads_publication_executed": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "article_file_written": false,
+    "reference_fetch_executed": false,
+    "reference_url_verification_executed": false,
+    "image_fetch_executed": false,
+    "image_generation_executed": false,
+    "visual_asset_created": false,
+    "homepage_mutated": false,
+    "css_mutated": false,
+    "runtime_script_mutated": false,
+    "public_rendering_activated": false,
+    "clean_export_generated": false,
+    "pdf_generated": false,
+    "admin_queue_mutated": false,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
