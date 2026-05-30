@@ -1,0 +1,38 @@
+{
+  "module_id": "ADB16",
+  "title": "Dry-run Scope Decision",
+  "status": "dry_run_scope_decision_recorded",
+  "approved_for_planning_only": true,
+  "first_dry_run_scope_recommendation": {
+    "date_window": "7_day_initial_window",
+    "output_visibility": "internal_only",
+    "public_use_allowed_default": false,
+    "editorial_review_status_default": "pending_review",
+    "output_tables_candidate": [
+      "astronomical_input_snapshots",
+      "panchanga_calculation_runs",
+      "panchanga_calculation_trace_logs",
+      "panchang_daily_records"
+    ]
+  },
+  "execution_status": "not_executed_in_adb16",
+  "blocked_state": {
+    "adb16_runtime_decision_recorded": true,
+    "adb15_consumed": true,
+    "runtime_engine_planning_approved": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "adb17_engine_contract_ready": true,
+    "adb17_to_adb20_compact_path_recorded": true,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed_after_adb20_only": true,
+    "ag47_resume_now": false
+  }
+}

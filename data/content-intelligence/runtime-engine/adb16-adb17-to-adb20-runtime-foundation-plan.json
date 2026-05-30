@@ -1,0 +1,67 @@
+{
+  "module_id": "ADB16",
+  "title": "ADB17 to ADB20 Runtime Foundation Plan",
+  "status": "compact_runtime_foundation_path_recorded",
+  "stages": [
+    {
+      "stage_id": "ADB17",
+      "title": "Calculation Engine Contract and Dry-run Profile",
+      "purpose": "Define calculation-engine inputs, outputs, supported Panchanga fields, dry-run date/location/profile, and non-public execution boundaries.",
+      "must_not_do": [
+        "execute runtime calculation",
+        "write computed Panchang rows",
+        "activate backend/Auth",
+        "deploy"
+      ]
+    },
+    {
+      "stage_id": "ADB18",
+      "title": "Dry-run Validation Protocol and Seed Sufficiency Audit",
+      "purpose": "Define comparison checks against trusted Panchang references, source-dependency checks, location/sunrise basis checks, and seed gaps.",
+      "must_not_do": [
+        "execute public runtime",
+        "publish calculated results",
+        "deploy"
+      ]
+    },
+    {
+      "stage_id": "ADB19",
+      "title": "Non-public Runtime Package Boundary",
+      "purpose": "Prepare a future dry-run execution package boundary and result-capture structure without public activation.",
+      "must_not_do": [
+        "public API activation",
+        "RLS public policy activation",
+        "deployment"
+      ]
+    },
+    {
+      "stage_id": "ADB20",
+      "title": "ADB Runtime Foundation Closure and AG47 Return Gate",
+      "purpose": "Close the ADB foundation after schema, seed and runtime-planning checks; return to AG47 with runtime execution deferred.",
+      "must_not_do": [
+        "resume AG47 before closure",
+        "activate runtime without later explicit decision"
+      ]
+    }
+  ],
+  "compact_path_end_state": "ADB20 closes ADB foundation and records AG47 return gate.",
+  "blocked_state": {
+    "adb16_runtime_decision_recorded": true,
+    "adb15_consumed": true,
+    "runtime_engine_planning_approved": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "adb17_engine_contract_ready": true,
+    "adb17_to_adb20_compact_path_recorded": true,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed_after_adb20_only": true,
+    "ag47_resume_now": false
+  }
+}

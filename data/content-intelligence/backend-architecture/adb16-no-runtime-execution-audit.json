@@ -1,0 +1,52 @@
+{
+  "module_id": "ADB16",
+  "title": "No Runtime Execution Audit",
+  "status": "no_runtime_execution_audit_passed_for_adb16",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "runtime_calculation_execution_approved_now",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "runtime_calculation_executed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "computed_panchang_rows_written",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "public_content_generated",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "adb16_runtime_decision_recorded": true,
+    "adb15_consumed": true,
+    "runtime_engine_planning_approved": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "adb17_engine_contract_ready": true,
+    "adb17_to_adb20_compact_path_recorded": true,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed_after_adb20_only": true,
+    "ag47_resume_now": false
+  }
+}
