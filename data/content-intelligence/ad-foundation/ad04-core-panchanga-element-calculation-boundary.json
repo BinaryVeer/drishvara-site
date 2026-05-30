@@ -1,0 +1,76 @@
+{
+  "module_id": "AD04",
+  "title": "Core Panchanga Element Calculation Boundary",
+  "status": "core_panchanga_element_calculation_boundary_recorded",
+  "core_elements": [
+    {
+      "element_id": "tithi",
+      "future_method_boundary": "Derive from Sun-Moon angular relation and local time boundaries; exact formula/engine to be approved later.",
+      "runtime_status": "not_executed"
+    },
+    {
+      "element_id": "vara",
+      "future_method_boundary": "Derive from local weekday with sunrise-day handling where Panchanga tradition requires it.",
+      "runtime_status": "not_executed"
+    },
+    {
+      "element_id": "nakshatra",
+      "future_method_boundary": "Derive from Moon longitude segment and pada; exact ephemeris/correction policy to be approved later.",
+      "runtime_status": "not_executed"
+    },
+    {
+      "element_id": "yoga",
+      "future_method_boundary": "Derive from combined solar-lunar longitude segment; exact formula/engine to be approved later.",
+      "runtime_status": "not_executed"
+    },
+    {
+      "element_id": "karana",
+      "future_method_boundary": "Derive from half-tithi division and sequence rules; exact implementation to be approved later.",
+      "runtime_status": "not_executed"
+    }
+  ],
+  "universal_required_metadata_for_future_calculation": [
+    "gregorian_date",
+    "location_id",
+    "latitude",
+    "longitude",
+    "timezone",
+    "sunrise_reference",
+    "regional_profile_id",
+    "calculation_profile_id",
+    "source_id",
+    "source_confidence_band",
+    "editorial_review_status"
+  ],
+  "blocked_state": {
+    "ad04_calendar_calculation_methodology_recorded": true,
+    "ad03_consumed": true,
+    "calculation_doctrine_recorded": true,
+    "core_element_calculation_boundary_recorded": true,
+    "sunrise_location_methodology_recorded": true,
+    "ayanamsha_correction_awareness_recorded": true,
+    "regional_calculation_profile_map_recorded": true,
+    "validation_cross_check_model_recorded": true,
+    "calculation_non_execution_policy_recorded": true,
+    "ready_for_ad05": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "ephemeris_engine_integrated": false,
+    "ayanamsha_selected_for_runtime": false,
+    "festival_date_finalised": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "module_id": "AD04",
+  "title": "Regional Calculation Profile Map",
+  "status": "regional_calculation_profile_map_recorded",
+  "profile_links": [
+    {
+      "regional_profile_id": "north_india_general",
+      "calculation_dependencies": [
+        "purnimanta/amanta awareness",
+        "sunrise tithi decision metadata",
+        "festival time-window metadata",
+        "Kashi/Hindi belt source validation"
+      ]
+    },
+    {
+      "regional_profile_id": "east_india_bihar_mithila",
+      "calculation_dependencies": [
+        "regional observance acceptance metadata",
+        "festival/vrata rule source metadata",
+        "local calendar naming convention",
+        "Bihar/Mithila source validation"
+      ]
+    },
+    {
+      "regional_profile_id": "south_indian_panchangam",
+      "calculation_dependencies": [
+        "amanta month awareness",
+        "regional language/display convention",
+        "regional new year/festival rule metadata",
+        "state/tradition-specific Panchangam source validation"
+      ]
+    },
+    {
+      "regional_profile_id": "location_specific_sunrise_profile",
+      "calculation_dependencies": [
+        "latitude",
+        "longitude",
+        "timezone",
+        "sunrise_reference",
+        "local_day_start",
+        "local_day_end"
+      ]
+    }
+  ],
+  "rule": "Regional calculation profiles are mapped for future use only; no profile is applied to public output in AD04.",
+  "blocked_state": {
+    "ad04_calendar_calculation_methodology_recorded": true,
+    "ad03_consumed": true,
+    "calculation_doctrine_recorded": true,
+    "core_element_calculation_boundary_recorded": true,
+    "sunrise_location_methodology_recorded": true,
+    "ayanamsha_correction_awareness_recorded": true,
+    "regional_calculation_profile_map_recorded": true,
+    "validation_cross_check_model_recorded": true,
+    "calculation_non_execution_policy_recorded": true,
+    "ready_for_ad05": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "ephemeris_engine_integrated": false,
+    "ayanamsha_selected_for_runtime": false,
+    "festival_date_finalised": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

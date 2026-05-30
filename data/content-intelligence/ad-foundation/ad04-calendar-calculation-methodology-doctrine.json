@@ -1,0 +1,53 @@
+{
+  "module_id": "AD04",
+  "title": "Calendar Calculation Methodology Doctrine",
+  "status": "calendar_calculation_methodology_doctrine_recorded",
+  "doctrine_rules": [
+    "AD04 records methodology boundaries only; it does not execute Panchanga calculations.",
+    "Future Panchanga calculations must separate astronomical computation, regional rule profile, editorial interpretation and public display.",
+    "Tithi, Vara, Nakshatra, Yoga and Karana calculations must carry source, calculation profile, location and review metadata.",
+    "Sunrise and local place context must be treated as calculation-sensitive.",
+    "Ayanamsha, correction policy and ephemeris assumptions must be explicit before runtime use.",
+    "Festival and vrata date logic must be profile-aware and source-attributed.",
+    "Public-facing output must remain reflective/contextual unless a later validated calculation engine is approved."
+  ],
+  "methodology_layers": [
+    "astronomical_input_layer",
+    "panchanga_element_computation_layer",
+    "regional_rule_profile_layer",
+    "source_confidence_and_cross_check_layer",
+    "editorial_interpretation_layer",
+    "public_guidance_safety_layer"
+  ],
+  "blocked_state": {
+    "ad04_calendar_calculation_methodology_recorded": true,
+    "ad03_consumed": true,
+    "calculation_doctrine_recorded": true,
+    "core_element_calculation_boundary_recorded": true,
+    "sunrise_location_methodology_recorded": true,
+    "ayanamsha_correction_awareness_recorded": true,
+    "regional_calculation_profile_map_recorded": true,
+    "validation_cross_check_model_recorded": true,
+    "calculation_non_execution_policy_recorded": true,
+    "ready_for_ad05": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "ephemeris_engine_integrated": false,
+    "ayanamsha_selected_for_runtime": false,
+    "festival_date_finalised": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
