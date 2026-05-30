@@ -154,6 +154,8 @@ BEGIN
         CASE
           WHEN format_type(a.atttypid, a.atttypmod) IN ('json', 'jsonb')
             THEN format('(%L::jsonb -> %L)::%s', row_data::text, a.attname, format_type(a.atttypid, a.atttypmod))
+          WHEN a.attndims > 0
+            THEN format('ARRAY(SELECT jsonb_array_elements_text(%L::jsonb -> %L))::%s', row_data::text, a.attname, format_type(a.atttypid, a.atttypmod))
           ELSE
             format('(%L::jsonb ->> %L)::%s', row_data::text, a.attname, format_type(a.atttypid, a.atttypmod))
         END,
