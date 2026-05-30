@@ -1,0 +1,65 @@
+{
+  "module_id": "AD02",
+  "title": "Database Field Planning Map",
+  "status": "database_field_planning_map_recorded",
+  "planned_tables_no_sql": [
+    {
+      "table_name": "panchang_element_master",
+      "purpose": "Stores canonical definitions for tithi, vara, nakshatra, yoga, karana and supporting elements.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "panchang_daily_records",
+      "purpose": "Future daily Panchanga records by date/location/profile.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "regional_calendar_profiles",
+      "purpose": "Future regional rule profiles.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "source_authorities",
+      "purpose": "Future source authority records.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "methodology_notes",
+      "purpose": "Future methodology notes for calculation and editorial rules.",
+      "status": "planning_only_no_sql"
+    }
+  ],
+  "field_mapping_principles": [
+    "Every future Panchanga record should carry date, location, regional profile, calculation profile, source and review status.",
+    "Master tables should carry Sanskrit/Hindi/English labels separately.",
+    "Public guidance text should be stored separately from calculation data.",
+    "AD02 creates no SQL file and writes no database records."
+  ],
+  "blocked_state": {
+    "ad02_panchanga_ontology_recorded": true,
+    "ad01_consumed": true,
+    "core_panchanga_elements_recorded": true,
+    "supporting_panchanga_fields_recorded": true,
+    "time_location_context_recorded": true,
+    "label_display_language_model_recorded": true,
+    "regional_profile_placeholder_recorded": true,
+    "database_field_planning_map_recorded": true,
+    "ready_for_ad03": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

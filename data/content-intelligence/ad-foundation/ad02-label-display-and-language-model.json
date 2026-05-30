@@ -1,0 +1,82 @@
+{
+  "module_id": "AD02",
+  "title": "Label, Display and Language Model",
+  "status": "label_display_language_model_recorded",
+  "label_layers": [
+    {
+      "layer": "internal_key",
+      "examples": [
+        "tithi",
+        "nakshatra",
+        "rahu_kala",
+        "chandrabalam"
+      ],
+      "purpose": "Stable code/database key."
+    },
+    {
+      "layer": "sanskrit_devanagari_label",
+      "examples": [
+        "तिथि",
+        "नक्षत्र",
+        "राहुकाल"
+      ],
+      "purpose": "Traditional Sanskrit/Hindi display where appropriate."
+    },
+    {
+      "layer": "english_label",
+      "examples": [
+        "Tithi",
+        "Nakshatra",
+        "Rahu Kala"
+      ],
+      "purpose": "Reader-facing English display."
+    },
+    {
+      "layer": "public_explanation",
+      "examples": [
+        "A lunar-day marker used in Panchanga tradition."
+      ],
+      "purpose": "Simple non-claim explanatory wording."
+    },
+    {
+      "layer": "editorial_guidance_text",
+      "examples": [
+        "Use this only for reflective context, not deterministic outcome prediction."
+      ],
+      "purpose": "Drishvara reflection layer wording."
+    }
+  ],
+  "doctrine_rules": [
+    "Public labels must not expose internal developer keys.",
+    "Sanskrit labels must be reviewed before public use.",
+    "Hindi/English explanations should avoid fear-based or deterministic prediction wording.",
+    "Nityanand Mishra ji style discipline applies to word/context precision, not unverified algorithm claims."
+  ],
+  "blocked_state": {
+    "ad02_panchanga_ontology_recorded": true,
+    "ad01_consumed": true,
+    "core_panchanga_elements_recorded": true,
+    "supporting_panchanga_fields_recorded": true,
+    "time_location_context_recorded": true,
+    "label_display_language_model_recorded": true,
+    "regional_profile_placeholder_recorded": true,
+    "database_field_planning_map_recorded": true,
+    "ready_for_ad03": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
