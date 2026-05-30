@@ -1,0 +1,66 @@
+{
+  "module_id": "AD06",
+  "title": "Guidance and Reflection Database Planning Map",
+  "status": "guidance_reflection_database_planning_map_recorded",
+  "planned_tables_no_sql": [
+    {
+      "table_name": "vedic_guidance_rules",
+      "purpose": "Stores reflective Vedic guidance rule templates and safety metadata.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "star_reflection_rules",
+      "purpose": "Stores star/nakshatra/rashi/tithi reflection rule templates and safety metadata.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "guidance_context_links",
+      "purpose": "Links guidance rules to Panchanga, corpus, regional and observance contexts.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "claim_risk_register",
+      "purpose": "Stores claim-risk level and blocked-language audit.",
+      "status": "planning_only_no_sql"
+    },
+    {
+      "table_name": "editorial_review_status",
+      "purpose": "Shared review workflow status.",
+      "status": "planning_only_no_sql"
+    }
+  ],
+  "no_sql_rule": "AD06 creates planning records only. SQL migrations and database writes remain blocked.",
+  "blocked_state": {
+    "ad06_vedic_guidance_star_reflection_rule_model_recorded": true,
+    "ad05_consumed": true,
+    "guidance_doctrine_recorded": true,
+    "vedic_guidance_rule_model_recorded": true,
+    "star_reflection_rule_model_recorded": true,
+    "panchanga_context_linkage_model_recorded": true,
+    "corpus_guidance_linkage_map_recorded": true,
+    "claim_risk_tone_safety_model_recorded": true,
+    "guidance_database_planning_map_recorded": true,
+    "ready_for_ad07": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "star_reflection_generated": false,
+    "vedic_guidance_generated": false,
+    "word_of_day_generated": false,
+    "panchang_prediction_generated": false,
+    "deterministic_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

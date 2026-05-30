@@ -1,0 +1,76 @@
+{
+  "module_id": "AD06",
+  "title": "Panchanga Context Linkage Model",
+  "status": "panchanga_context_linkage_model_recorded",
+  "allowed_context_links": [
+    {
+      "context_key": "tithi_context",
+      "source_model": "AD02/AD04",
+      "guidance_use": "Reflective day-context only unless future calculation is validated."
+    },
+    {
+      "context_key": "vara_context",
+      "source_model": "AD02/AD04",
+      "guidance_use": "Weekday cultural/reflection context."
+    },
+    {
+      "context_key": "nakshatra_context",
+      "source_model": "AD02/AD04",
+      "guidance_use": "Star Reflection context with source/calculation traceability."
+    },
+    {
+      "context_key": "yoga_context",
+      "source_model": "AD02/AD04",
+      "guidance_use": "Contextual reflection only."
+    },
+    {
+      "context_key": "karana_context",
+      "source_model": "AD02/AD04",
+      "guidance_use": "Contextual reflection only."
+    },
+    {
+      "context_key": "regional_profile_context",
+      "source_model": "AD03",
+      "guidance_use": "Prevents silent cross-region rule mixing."
+    }
+  ],
+  "linkage_rules": [
+    "Every Panchanga-linked guidance rule must identify which context element is being used.",
+    "Context linkage does not imply calculation execution.",
+    "Regional profile must be recorded when regional difference affects interpretation.",
+    "Public display must not imply that the Panchanga has been calculated unless a later validated engine exists."
+  ],
+  "blocked_state": {
+    "ad06_vedic_guidance_star_reflection_rule_model_recorded": true,
+    "ad05_consumed": true,
+    "guidance_doctrine_recorded": true,
+    "vedic_guidance_rule_model_recorded": true,
+    "star_reflection_rule_model_recorded": true,
+    "panchanga_context_linkage_model_recorded": true,
+    "corpus_guidance_linkage_map_recorded": true,
+    "claim_risk_tone_safety_model_recorded": true,
+    "guidance_database_planning_map_recorded": true,
+    "ready_for_ad07": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "star_reflection_generated": false,
+    "vedic_guidance_generated": false,
+    "word_of_day_generated": false,
+    "panchang_prediction_generated": false,
+    "deterministic_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
