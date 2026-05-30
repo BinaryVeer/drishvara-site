@@ -1,0 +1,46 @@
+{
+  "module_id": "ADB20",
+  "title": "AG47 Return Readiness Record",
+  "status": "ready_to_return_to_ag47",
+  "ready_for_ag47": true,
+  "next_stage_id": "AG47",
+  "next_stage_title": "Return to Governed AG Roadmap",
+  "ag47_allowed_scope": [
+    "Resume AG roadmap from AG47.",
+    "Use ADB20 closure as source-of-truth for database/runtime foundation.",
+    "Use ADS reconciliation to avoid duplicate seed/runtime planning.",
+    "Build product-facing surfaces without enabling live database reading unless later approved."
+  ],
+  "ag47_blocked_scope_by_default": [
+    "Runtime Panchang calculation execution",
+    "Website database-reading/API runtime activation",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment without explicit approval",
+    "Service-role key exposure"
+  ],
+  "hard_blocker_count_for_ag47": 0,
+  "blocked_state": {
+    "adb20_runtime_foundation_closed": true,
+    "adb19_consumed": true,
+    "adb_schema_foundation_completed": true,
+    "adb_seed_foundation_completed": true,
+    "adb_runtime_planning_completed": true,
+    "ads_coverage_reconciliation_completed": true,
+    "ag47_return_gate_created": true,
+    "ag47_return_allowed": true,
+    "api_runtime_database_reading_approved_now": false,
+    "website_database_reading_enabled": false,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

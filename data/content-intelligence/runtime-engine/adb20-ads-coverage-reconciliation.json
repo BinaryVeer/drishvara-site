@@ -1,0 +1,135 @@
+{
+  "module_id": "ADB20",
+  "title": "ADS01–ADS08 Coverage Reconciliation",
+  "status": "ads_coverage_reconciliation_completed",
+  "ads_items": [
+    {
+      "ads_id": "ADS01",
+      "title": "Seed data source pack planning",
+      "coverage_status": "covered",
+      "covered_by": [
+        "ADB11"
+      ],
+      "notes": "Seed source planning boundary and seed pack catalogue recorded."
+    },
+    {
+      "ads_id": "ADS02",
+      "title": "Source authority seed data",
+      "coverage_status": "covered_as_basic_foundation",
+      "covered_by": [
+        "ADB12",
+        "ADB13",
+        "ADB14",
+        "ADB15"
+      ],
+      "notes": "Source authority draft pack generated, validated, inserted and verified."
+    },
+    {
+      "ads_id": "ADS03",
+      "title": "Panchanga master seed data",
+      "coverage_status": "partially_covered",
+      "covered_by": [
+        "ADB12",
+        "ADB15"
+      ],
+      "notes": "Basic Panchanga master sample/foundation inserted. Full 30 tithi, 27 nakshatra, yoga, karana and full rashi production corpus remains future expansion."
+    },
+    {
+      "ads_id": "ADS04",
+      "title": "Regional rule-profile seed data",
+      "coverage_status": "partially_covered",
+      "covered_by": [
+        "ADB12",
+        "ADB15",
+        "ADB18"
+      ],
+      "notes": "North India, East India/Bihar/Mithila and South Panchangam scaffolds recorded. Full regional rule-profile depth remains future expansion."
+    },
+    {
+      "ads_id": "ADS05",
+      "title": "Word/Sutra/Reflection corpus seed data",
+      "coverage_status": "partially_covered",
+      "covered_by": [
+        "ADB12",
+        "ADB15"
+      ],
+      "notes": "Basic word/reflection/mantra review and claim-risk seed foundation exists. Rich corpus expansion remains future work."
+    },
+    {
+      "ads_id": "ADS06",
+      "title": "Guidance/Star Reflection rule seed data",
+      "coverage_status": "partially_covered_deferred_for_ag_module",
+      "covered_by": [
+        "ADB12",
+        "ADB16",
+        "ADB17",
+        "ADB18"
+      ],
+      "notes": "Rule scaffolds and safety boundaries exist. Full guidance/star-reflection rule data should be implemented in AG guidance/reflection modules after AG47 return."
+    },
+    {
+      "ads_id": "ADS07",
+      "title": "Daily Panchang generation/loading strategy",
+      "coverage_status": "planned_not_executed",
+      "covered_by": [
+        "ADB16",
+        "ADB17",
+        "ADB18",
+        "ADB19"
+      ],
+      "notes": "Runtime route, dry-run scope, formula validation and non-public package boundary are recorded. No generation/loading has been executed."
+    },
+    {
+      "ads_id": "ADS08",
+      "title": "Seed validation and public-use audit",
+      "coverage_status": "covered_for_current_foundation",
+      "covered_by": [
+        "ADB13",
+        "ADB15",
+        "ADB18",
+        "ADB19"
+      ],
+      "notes": "Seed validation, public-use false defaults, no-public activation, no-runtime and no-secret audits recorded."
+    },
+    {
+      "ads_id": "API_RUNTIME",
+      "title": "Website starts reading from database",
+      "coverage_status": "deferred",
+      "covered_by": [
+        "ADB20"
+      ],
+      "notes": "Website database reading/API runtime remains explicitly deferred. No public database read path is activated."
+    }
+  ],
+  "unresolved_after_adb20": [
+    "Full Panchanga master corpus expansion.",
+    "Full regional rule-profile expansion.",
+    "Rich word/sutra/reflection corpus expansion.",
+    "Full guidance/star-reflection rule seed data.",
+    "Daily Panchang dry-run execution.",
+    "Website/API database-reading runtime activation."
+  ],
+  "blocked_state": {
+    "adb20_runtime_foundation_closed": true,
+    "adb19_consumed": true,
+    "adb_schema_foundation_completed": true,
+    "adb_seed_foundation_completed": true,
+    "adb_runtime_planning_completed": true,
+    "ads_coverage_reconciliation_completed": true,
+    "ag47_return_gate_created": true,
+    "ag47_return_allowed": true,
+    "api_runtime_database_reading_approved_now": false,
+    "website_database_reading_enabled": false,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}
