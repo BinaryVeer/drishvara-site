@@ -1,0 +1,49 @@
+{
+  "module_id": "ADB11",
+  "title": "Seed Validation and Review Workflow",
+  "status": "seed_validation_review_workflow_recorded",
+  "review_sequence": [
+    "Draft seed JSON/CSV records locally.",
+    "Validate required fields and source dependency.",
+    "Validate no public_use_allowed true unless manually approved.",
+    "Validate no long copyrighted text extraction.",
+    "Validate no deterministic/fear-based claims.",
+    "Validate Sanskrit/transliteration review status.",
+    "Validate regional-rule variation and conflict visibility.",
+    "Approve later insertion package only after review."
+  ],
+  "approval_gates": [
+    "ADB12 seed draft pack generation",
+    "ADB13 seed draft validation",
+    "ADB14 seed insertion approval checkpoint",
+    "ADB15 seed insertion execution and result capture"
+  ],
+  "blocked_state": {
+    "adb11_seed_source_planning_recorded": true,
+    "adb10_consumed": true,
+    "seed_pack_catalogue_recorded": true,
+    "source_authority_seed_plan_recorded": true,
+    "panchanga_master_seed_plan_recorded": true,
+    "calculation_profile_seed_plan_recorded": true,
+    "location_profile_seed_plan_recorded": true,
+    "festival_vrat_seed_plan_recorded": true,
+    "word_sutra_mantra_seed_plan_recorded": true,
+    "validation_review_workflow_recorded": true,
+    "seed_loading_boundary_recorded": true,
+    "ready_for_adb12_seed_draft_pack": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

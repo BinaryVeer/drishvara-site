@@ -1,0 +1,52 @@
+{
+  "module_id": "ADB11",
+  "title": "Seed Source Planning Doctrine",
+  "status": "seed_source_planning_doctrine_recorded",
+  "doctrine": [
+    "Seed data must be source-first and reviewable before insertion.",
+    "No seed row may be inserted until a later explicit insertion approval stage.",
+    "Source authorities must be loaded before dependent Panchanga, corpus, guidance or rule records.",
+    "Calculation profile seeds must remain methodology records, not runtime execution.",
+    "Regional rule seeds must preserve variation rather than force one universal rule.",
+    "Mantra and Sanskrit content must remain under source/review control.",
+    "Public-use fields must default to false until editorial approval."
+  ],
+  "methodology_alignment": [
+    "M00 source doctrine and Sanskrit integrity",
+    "M01 Panchanga calculation methodology",
+    "M02 tithi/vrat/fasting methodology",
+    "M03 festival rule registry",
+    "M04 location/timezone/sunrise basis",
+    "M04A validation learning register",
+    "D01-D06 knowledge/governance files",
+    "AD01, AD08, AD09, AD10 foundation records"
+  ],
+  "blocked_state": {
+    "adb11_seed_source_planning_recorded": true,
+    "adb10_consumed": true,
+    "seed_pack_catalogue_recorded": true,
+    "source_authority_seed_plan_recorded": true,
+    "panchanga_master_seed_plan_recorded": true,
+    "calculation_profile_seed_plan_recorded": true,
+    "location_profile_seed_plan_recorded": true,
+    "festival_vrat_seed_plan_recorded": true,
+    "word_sutra_mantra_seed_plan_recorded": true,
+    "validation_review_workflow_recorded": true,
+    "seed_loading_boundary_recorded": true,
+    "ready_for_adb12_seed_draft_pack": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

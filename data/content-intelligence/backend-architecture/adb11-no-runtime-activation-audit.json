@@ -1,0 +1,67 @@
+{
+  "module_id": "ADB11",
+  "title": "No Runtime Activation Audit",
+  "status": "no_runtime_activation_audit_passed_for_adb11",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "runtime_calculation_executed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "backend_auth_supabase_activation_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "deployment_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "service_role_key_exposed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "public_content_generated",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "adb11_seed_source_planning_recorded": true,
+    "adb10_consumed": true,
+    "seed_pack_catalogue_recorded": true,
+    "source_authority_seed_plan_recorded": true,
+    "panchanga_master_seed_plan_recorded": true,
+    "calculation_profile_seed_plan_recorded": true,
+    "location_profile_seed_plan_recorded": true,
+    "festival_vrat_seed_plan_recorded": true,
+    "word_sutra_mantra_seed_plan_recorded": true,
+    "validation_review_workflow_recorded": true,
+    "seed_loading_boundary_recorded": true,
+    "ready_for_adb12_seed_draft_pack": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

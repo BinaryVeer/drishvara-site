@@ -1,0 +1,50 @@
+{
+  "module_id": "ADB11",
+  "title": "Seed Loading Boundary",
+  "status": "seed_loading_boundary_recorded",
+  "allowed_now": [
+    "Plan seed packs.",
+    "Define source requirements.",
+    "Define field requirements.",
+    "Define validation workflow.",
+    "Prepare readiness for draft seed pack generation."
+  ],
+  "blocked_now": [
+    "INSERT SQL generation",
+    "COPY command generation",
+    "Seed data insertion",
+    "Runtime Panchanga calculation",
+    "Backend/Auth activation",
+    "Deployment",
+    "Service-role key exposure",
+    "Public content generation"
+  ],
+  "blocked_state": {
+    "adb11_seed_source_planning_recorded": true,
+    "adb10_consumed": true,
+    "seed_pack_catalogue_recorded": true,
+    "source_authority_seed_plan_recorded": true,
+    "panchanga_master_seed_plan_recorded": true,
+    "calculation_profile_seed_plan_recorded": true,
+    "location_profile_seed_plan_recorded": true,
+    "festival_vrat_seed_plan_recorded": true,
+    "word_sutra_mantra_seed_plan_recorded": true,
+    "validation_review_workflow_recorded": true,
+    "seed_loading_boundary_recorded": true,
+    "ready_for_adb12_seed_draft_pack": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

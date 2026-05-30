@@ -1,0 +1,130 @@
+{
+  "module_id": "ADB11",
+  "title": "Seed Pack Catalogue",
+  "status": "seed_pack_catalogue_recorded",
+  "seed_packs": [
+    {
+      "pack_id": "ADB12-SP01",
+      "pack_name": "Source Authority Seed Draft Pack",
+      "target_tables": [
+        "source_authorities",
+        "source_texts",
+        "source_confidence_register",
+        "editorial_review_status",
+        "methodology_notes"
+      ],
+      "dependency_level": 1,
+      "insertion_status": "not_approved"
+    },
+    {
+      "pack_id": "ADB12-SP02",
+      "pack_name": "Panchanga Master Seed Draft Pack",
+      "target_tables": [
+        "panchang_element_master",
+        "tithi_master",
+        "nakshatra_master",
+        "yoga_master",
+        "karana_master",
+        "vara_master",
+        "rashi_master"
+      ],
+      "dependency_level": 2,
+      "insertion_status": "not_approved"
+    },
+    {
+      "pack_id": "ADB12-SP03",
+      "pack_name": "Calculation Profile Seed Draft Pack",
+      "target_tables": [
+        "calculation_methodologies",
+        "calculation_profiles",
+        "ephemeris_profiles",
+        "ayanamsha_profiles",
+        "panchanga_formula_rules"
+      ],
+      "dependency_level": 2,
+      "insertion_status": "not_approved"
+    },
+    {
+      "pack_id": "ADB12-SP04",
+      "pack_name": "Location and Event-window Seed Draft Pack",
+      "target_tables": [
+        "location_time_profiles",
+        "sunrise_sunset_moonrise_event_windows"
+      ],
+      "dependency_level": 3,
+      "insertion_status": "not_approved"
+    },
+    {
+      "pack_id": "ADB12-SP05",
+      "pack_name": "Festival Vrat Observance Seed Draft Pack",
+      "target_tables": [
+        "regional_calendar_profiles",
+        "tithi_vrat_rule_families",
+        "fasting_parana_rule_profiles",
+        "festival_observance_rule_registry",
+        "regional_sampradaya_rule_variants",
+        "observance_conflict_flags"
+      ],
+      "dependency_level": 3,
+      "insertion_status": "not_approved"
+    },
+    {
+      "pack_id": "ADB12-SP06",
+      "pack_name": "Word Sutra Mantra Reflection Seed Draft Pack",
+      "target_tables": [
+        "word_corpus",
+        "sanskrit_name_corpus",
+        "sutra_quote_corpus",
+        "reflection_prompt_rules",
+        "daily_guidance_rule_sets",
+        "word_of_day_rotation_rules",
+        "mantra_source_review_registry",
+        "mantra_candidate_review_records"
+      ],
+      "dependency_level": 3,
+      "insertion_status": "not_approved"
+    },
+    {
+      "pack_id": "ADB12-SP07",
+      "pack_name": "Validation Learning Seed Draft Pack",
+      "target_tables": [
+        "validation_learning_cycles",
+        "calculation_variance_records",
+        "calibration_backlog_records",
+        "methodology_activation_audits",
+        "claim_risk_register"
+      ],
+      "dependency_level": 4,
+      "insertion_status": "not_approved"
+    }
+  ],
+  "total_seed_packs_planned": 7,
+  "blocked_state": {
+    "adb11_seed_source_planning_recorded": true,
+    "adb10_consumed": true,
+    "seed_pack_catalogue_recorded": true,
+    "source_authority_seed_plan_recorded": true,
+    "panchanga_master_seed_plan_recorded": true,
+    "calculation_profile_seed_plan_recorded": true,
+    "location_profile_seed_plan_recorded": true,
+    "festival_vrat_seed_plan_recorded": true,
+    "word_sutra_mantra_seed_plan_recorded": true,
+    "validation_review_workflow_recorded": true,
+    "seed_loading_boundary_recorded": true,
+    "ready_for_adb12_seed_draft_pack": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

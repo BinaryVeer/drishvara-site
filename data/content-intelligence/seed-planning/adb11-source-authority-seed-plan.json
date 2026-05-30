@@ -1,0 +1,61 @@
+{
+  "module_id": "ADB11",
+  "title": "Source Authority Seed Plan",
+  "status": "source_authority_seed_plan_recorded",
+  "priority": "first_seed_pack",
+  "target_tables": [
+    "source_authorities",
+    "source_texts",
+    "source_confidence_register",
+    "editorial_review_status",
+    "methodology_notes"
+  ],
+  "required_fields_before_insert": [
+    "source_id",
+    "source_title",
+    "source_type",
+    "author_or_institution",
+    "tradition_or_region",
+    "source_locator",
+    "source_confidence_band",
+    "verification_status",
+    "editorial_review_status",
+    "public_use_allowed"
+  ],
+  "governance_rules": [
+    "public_use_allowed must be false by default.",
+    "verification_status must not be treated as verified unless reviewed.",
+    "Nityanand Mishra Ji-aligned methodology references must be recorded as methodology influence/source-context where permitted, not as unsupported direct attribution.",
+    "Traditional sources must record region/tradition and source locator where available.",
+    "No copyrighted long text extraction is approved."
+  ],
+  "insertion_status": "not_approved",
+  "blocked_state": {
+    "adb11_seed_source_planning_recorded": true,
+    "adb10_consumed": true,
+    "seed_pack_catalogue_recorded": true,
+    "source_authority_seed_plan_recorded": true,
+    "panchanga_master_seed_plan_recorded": true,
+    "calculation_profile_seed_plan_recorded": true,
+    "location_profile_seed_plan_recorded": true,
+    "festival_vrat_seed_plan_recorded": true,
+    "word_sutra_mantra_seed_plan_recorded": true,
+    "validation_review_workflow_recorded": true,
+    "seed_loading_boundary_recorded": true,
+    "ready_for_adb12_seed_draft_pack": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
