@@ -1,0 +1,53 @@
+{
+  "module_id": "ADB18",
+  "title": "Runtime Risk Register",
+  "status": "runtime_risk_register_recorded",
+  "risks": [
+    {
+      "risk_id": "RUNTIME-RISK-001",
+      "risk": "Ephemeris or ayanamsha mismatch may shift tithi/nakshatra timing.",
+      "mitigation": "Trace all longitude and ayanamsha inputs; compare against reviewed references."
+    },
+    {
+      "risk_id": "RUNTIME-RISK-002",
+      "risk": "Location/sunrise basis may change observance date.",
+      "mitigation": "Keep regional variation visible and require location-specific sunrise basis."
+    },
+    {
+      "risk_id": "RUNTIME-RISK-003",
+      "risk": "Seed foundation is not full production corpus.",
+      "mitigation": "Use only non-public dry-run planning until seed expansion and validation."
+    },
+    {
+      "risk_id": "RUNTIME-RISK-004",
+      "risk": "Public interpretation may appear deterministic or predictive.",
+      "mitigation": "Keep public output blocked and non-claim safety boundary active."
+    }
+  ],
+  "blocked_state": {
+    "adb18_validation_protocol_recorded": true,
+    "adb17_consumed": true,
+    "seed_sufficiency_audit_recorded": true,
+    "reference_comparison_protocol_recorded": true,
+    "formula_validation_protocol_recorded": true,
+    "location_sunrise_ayanamsha_protocol_recorded": true,
+    "dry_run_acceptance_thresholds_recorded": true,
+    "runtime_risk_register_recorded": true,
+    "adb19_runtime_package_handoff_recorded": true,
+    "ready_for_adb19_runtime_package_boundary": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "dry_run_package_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

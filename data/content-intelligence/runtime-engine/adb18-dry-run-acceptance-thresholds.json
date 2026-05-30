@@ -1,0 +1,55 @@
+{
+  "module_id": "ADB18",
+  "title": "Dry-run Acceptance Thresholds",
+  "status": "dry_run_acceptance_thresholds_recorded",
+  "dry_run_scope": "7_day_initial_window_internal_only",
+  "acceptance_gates_before_public_use": [
+    {
+      "gate": "tithi_match_or_explained_variance",
+      "threshold": "100_percent_match_or_explained_variance"
+    },
+    {
+      "gate": "nakshatra_match_or_explained_variance",
+      "threshold": "100_percent_match_or_explained_variance"
+    },
+    {
+      "gate": "sunrise_basis_explained",
+      "threshold": "all_rows_have_location_sunrise_basis"
+    },
+    {
+      "gate": "trace_log_complete",
+      "threshold": "all_calculated_outputs_have_trace_log"
+    },
+    {
+      "gate": "review_status_controlled",
+      "threshold": "all_rows_public_use_allowed_false_until_editorial_approval"
+    }
+  ],
+  "public_release_threshold": "not_defined_until_later_public_activation_stage",
+  "blocked_state": {
+    "adb18_validation_protocol_recorded": true,
+    "adb17_consumed": true,
+    "seed_sufficiency_audit_recorded": true,
+    "reference_comparison_protocol_recorded": true,
+    "formula_validation_protocol_recorded": true,
+    "location_sunrise_ayanamsha_protocol_recorded": true,
+    "dry_run_acceptance_thresholds_recorded": true,
+    "runtime_risk_register_recorded": true,
+    "adb19_runtime_package_handoff_recorded": true,
+    "ready_for_adb19_runtime_package_boundary": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "dry_run_package_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

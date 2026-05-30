@@ -1,0 +1,53 @@
+{
+  "module_id": "ADB18",
+  "title": "Location / Sunrise / Ayanamsha Validation Protocol",
+  "status": "location_sunrise_ayanamsha_protocol_recorded",
+  "location_validation": {
+    "first_profile": "India default review profile",
+    "regional_candidates": [
+      "Varanasi",
+      "Patna/Bihar-Mithila",
+      "Ranchi",
+      "Itanagar"
+    ],
+    "required_checks": [
+      "timezone_id",
+      "latitude_longitude_source",
+      "sunrise_basis",
+      "moonrise_basis",
+      "regional calendar profile mapping"
+    ]
+  },
+  "ayanamsha_validation": {
+    "first_candidate": "reviewed candidate from seed foundation",
+    "final_ayanamsha_hardcoded": false,
+    "required_comparison_before_public_use": true
+  },
+  "validation_execution_status": "not_executed_in_adb18",
+  "blocked_state": {
+    "adb18_validation_protocol_recorded": true,
+    "adb17_consumed": true,
+    "seed_sufficiency_audit_recorded": true,
+    "reference_comparison_protocol_recorded": true,
+    "formula_validation_protocol_recorded": true,
+    "location_sunrise_ayanamsha_protocol_recorded": true,
+    "dry_run_acceptance_thresholds_recorded": true,
+    "runtime_risk_register_recorded": true,
+    "adb19_runtime_package_handoff_recorded": true,
+    "ready_for_adb19_runtime_package_boundary": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "dry_run_package_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "module_id": "ADB18",
+  "title": "Formula Coverage Validation Protocol",
+  "status": "formula_validation_protocol_recorded",
+  "formula_checks": [
+    {
+      "formula_key": "tithi_from_moon_sun_angular_separation",
+      "required_trace": [
+        "sun_longitude",
+        "moon_longitude",
+        "angular_difference",
+        "tithi_number"
+      ]
+    },
+    {
+      "formula_key": "nakshatra_from_sidereal_moon_longitude",
+      "required_trace": [
+        "moon_longitude",
+        "ayanamsha_adjustment",
+        "sidereal_moon_longitude",
+        "nakshatra_number"
+      ]
+    },
+    {
+      "formula_key": "yoga_from_sun_moon_longitude_sum",
+      "required_trace": [
+        "sidereal_sun_longitude",
+        "sidereal_moon_longitude",
+        "sum_mod_360",
+        "yoga_number"
+      ]
+    },
+    {
+      "formula_key": "karana_from_half_tithi",
+      "required_trace": [
+        "tithi_number",
+        "half_tithi_index",
+        "karana_sequence_rule"
+      ]
+    },
+    {
+      "formula_key": "vara_from_local_sunrise_boundary",
+      "required_trace": [
+        "location_profile_id",
+        "sunrise_time",
+        "weekday_boundary"
+      ]
+    },
+    {
+      "formula_key": "rashi_from_sidereal_moon_longitude",
+      "required_trace": [
+        "sidereal_moon_longitude",
+        "rashi_number"
+      ]
+    }
+  ],
+  "coverage_result": "sufficient_for_protocol_not_execution",
+  "blocked_state": {
+    "adb18_validation_protocol_recorded": true,
+    "adb17_consumed": true,
+    "seed_sufficiency_audit_recorded": true,
+    "reference_comparison_protocol_recorded": true,
+    "formula_validation_protocol_recorded": true,
+    "location_sunrise_ayanamsha_protocol_recorded": true,
+    "dry_run_acceptance_thresholds_recorded": true,
+    "runtime_risk_register_recorded": true,
+    "adb19_runtime_package_handoff_recorded": true,
+    "ready_for_adb19_runtime_package_boundary": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "dry_run_package_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

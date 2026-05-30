@@ -1,0 +1,47 @@
+{
+  "module_id": "ADB18",
+  "title": "Reference Panchang Comparison Protocol",
+  "status": "reference_comparison_protocol_recorded",
+  "comparison_scope": [
+    "tithi at local sunrise",
+    "nakshatra at local sunrise",
+    "tithi transition window",
+    "nakshatra transition window",
+    "vara based on local sunrise",
+    "festival/vrat candidate disagreement flag"
+  ],
+  "reference_policy": [
+    "Use reviewed trusted Panchang references only.",
+    "Record region/tradition of each reference.",
+    "Do not hide disagreement; flag regional or calculation-basis differences.",
+    "No output becomes public until reviewed."
+  ],
+  "minimum_reference_count_before_public_use": 2,
+  "comparison_execution_status": "not_executed_in_adb18",
+  "blocked_state": {
+    "adb18_validation_protocol_recorded": true,
+    "adb17_consumed": true,
+    "seed_sufficiency_audit_recorded": true,
+    "reference_comparison_protocol_recorded": true,
+    "formula_validation_protocol_recorded": true,
+    "location_sunrise_ayanamsha_protocol_recorded": true,
+    "dry_run_acceptance_thresholds_recorded": true,
+    "runtime_risk_register_recorded": true,
+    "adb19_runtime_package_handoff_recorded": true,
+    "ready_for_adb19_runtime_package_boundary": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "dry_run_package_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}
