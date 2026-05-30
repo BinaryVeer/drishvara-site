@@ -1,0 +1,46 @@
+{
+  "module_id": "ADB10",
+  "title": "ADB10 to ADB11 Seed Source Planning Boundary",
+  "status": "adb11_seed_source_planning_boundary_created",
+  "next_stage_id": "ADB11",
+  "next_stage_title": "Seed Data Source Planning and Loading Boundary",
+  "allowed_scope": [
+    "Plan seed data source packs.",
+    "Define source-authority seed requirements.",
+    "Define Panchanga master seed requirements.",
+    "Define calculation profile seed requirements.",
+    "Define validation and review workflow before insertion.",
+    "Keep actual seed insert blocked until later explicit approval."
+  ],
+  "blocked_scope": [
+    "Seed data insertion",
+    "Runtime calculation execution",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure in repo/chat",
+    "Public content generation",
+    "AG47 resume"
+  ],
+  "blocked_state": {
+    "adb10_live_schema_execution_result_recorded": true,
+    "adb09_consumed": true,
+    "live_schema_sql_execution_completed_by_operator": true,
+    "critical_table_verification_passed": true,
+    "critical_table_match_count": 17,
+    "schema_only_execution_scope_respected": true,
+    "ready_for_adb11_seed_source_planning": true,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
