@@ -1,0 +1,105 @@
+{
+  "module_id": "ADZ",
+  "title": "ADZ Carry-forward Register",
+  "status": "adz_carry_forward_register_recorded",
+  "carry_forward_items": [
+    {
+      "item_id": "non_prediction_boundary",
+      "carried_to": [
+        "ADB01",
+        "AG47",
+        "AG49",
+        "AG52",
+        "AG55",
+        "AG56"
+      ],
+      "rule": "All future guidance remains reflective/contextual unless separately approved and validated."
+    },
+    {
+      "item_id": "source_attribution_and_supported_claim",
+      "carried_to": [
+        "ADB01",
+        "ADB02",
+        "ADB03",
+        "AG49",
+        "AG52",
+        "AG56"
+      ],
+      "rule": "Every source/seed/corpus/guidance item must carry source and supported-claim metadata."
+    },
+    {
+      "item_id": "regional_profile_handling",
+      "carried_to": [
+        "ADB01",
+        "ADB02",
+        "AG47",
+        "AG52",
+        "AG56"
+      ],
+      "rule": "Regional Panchang differences remain explicit profiles."
+    },
+    {
+      "item_id": "no_runtime_no_sql_until_approval",
+      "carried_to": [
+        "ADB01",
+        "ADB02",
+        "ADB03",
+        "ADB04"
+      ],
+      "rule": "No SQL or database execution occurs without explicit approval."
+    },
+    {
+      "item_id": "existing_supabase_schema_preservation",
+      "carried_to": [
+        "ADB01",
+        "ADB02",
+        "ADB03",
+        "ADB04"
+      ],
+      "rule": "Existing content-publishing schema must be preserved and linked, not duplicated."
+    },
+    {
+      "item_id": "service_role_key_safety",
+      "carried_to": [
+        "ADB01",
+        "ADB02",
+        "ADB03",
+        "ADB04",
+        "AG56"
+      ],
+      "rule": "Never paste or commit service-role keys."
+    }
+  ],
+  "blocked_state": {
+    "adz_foundation_closure_recorded": true,
+    "ad00_to_ad10_chain_closed": true,
+    "source_of_truth_chain_recorded": true,
+    "foundation_scope_register_recorded": true,
+    "adb01_database_build_approval_readiness_recorded": true,
+    "carry_forward_register_recorded": true,
+    "no_duplicate_closure_audit_recorded": true,
+    "ready_for_adb01": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "methodology_published_publicly": false,
+    "guidance_generated": false,
+    "star_reflection_generated": false,
+    "word_of_day_generated": false,
+    "panchang_prediction_generated": false,
+    "deterministic_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
