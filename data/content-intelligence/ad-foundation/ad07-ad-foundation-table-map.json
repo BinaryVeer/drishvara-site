@@ -1,0 +1,88 @@
+{
+  "module_id": "AD07",
+  "title": "AD Foundation Table Map",
+  "status": "ad_foundation_table_map_recorded",
+  "planned_table_groups": [
+    {
+      "group_id": "source_and_review",
+      "tables": [
+        "source_authorities",
+        "source_texts",
+        "source_confidence_register",
+        "editorial_review_status",
+        "methodology_notes"
+      ]
+    },
+    {
+      "group_id": "panchanga_core",
+      "tables": [
+        "panchang_element_master",
+        "tithi_master",
+        "nakshatra_master",
+        "yoga_master",
+        "karana_master",
+        "vara_master",
+        "rashi_master",
+        "panchang_daily_records"
+      ]
+    },
+    {
+      "group_id": "regional_calendar",
+      "tables": [
+        "regional_calendar_profiles",
+        "regional_festival_rules",
+        "festival_observance_rules",
+        "muhurta_rules"
+      ]
+    },
+    {
+      "group_id": "corpus",
+      "tables": [
+        "word_corpus",
+        "sanskrit_name_corpus",
+        "sutra_quote_corpus",
+        "reflection_prompt_rules"
+      ]
+    },
+    {
+      "group_id": "guidance_and_reflection",
+      "tables": [
+        "vedic_guidance_rules",
+        "star_reflection_rules",
+        "guidance_context_links",
+        "claim_risk_register"
+      ]
+    }
+  ],
+  "planning_rule": "This is table planning only. No SQL file, SQL migration, Supabase write or database change is created in AD07.",
+  "blocked_state": {
+    "ad07_database_schema_planning_recorded": true,
+    "ad00_to_ad06_consumed": true,
+    "existing_supabase_schema_snapshot_consumed": true,
+    "ad_foundation_table_map_recorded": true,
+    "local_database_schema_plan_recorded": true,
+    "supabase_extension_plan_recorded": true,
+    "table_relationship_index_map_recorded": true,
+    "migration_deferral_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "ready_for_ad08": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

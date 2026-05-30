@@ -1,0 +1,50 @@
+{
+  "module_id": "AD07",
+  "title": "Local Database Schema Plan",
+  "status": "local_database_schema_plan_recorded",
+  "purpose": "Prepare a local/offline schema-planning view for AD source, Panchanga, corpus and guidance tables before any Supabase migration is approved.",
+  "local_schema_principles": [
+    "Use local planning records to validate table relationships before Supabase activation.",
+    "Keep source/review metadata reusable across Panchanga, corpus and guidance records.",
+    "Keep calculation_profile_id and regional_profile_id explicit.",
+    "Keep public guidance text separate from raw Panchanga/corpus data.",
+    "Keep claim-risk and editorial review status available for every public-facing candidate.",
+    "Do not create a SQLite file or execute any database operation in AD07."
+  ],
+  "planned_local_objects_no_file_created": [
+    "local_schema_dictionary",
+    "local_relationship_dictionary",
+    "local_seed_manifest_template",
+    "local_validation_manifest_template"
+  ],
+  "blocked_state": {
+    "ad07_database_schema_planning_recorded": true,
+    "ad00_to_ad06_consumed": true,
+    "existing_supabase_schema_snapshot_consumed": true,
+    "ad_foundation_table_map_recorded": true,
+    "local_database_schema_plan_recorded": true,
+    "supabase_extension_plan_recorded": true,
+    "table_relationship_index_map_recorded": true,
+    "migration_deferral_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "ready_for_ad08": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
