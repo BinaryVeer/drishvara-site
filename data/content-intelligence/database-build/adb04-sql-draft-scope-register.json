@@ -1,0 +1,61 @@
+{
+  "module_id": "ADB04",
+  "title": "SQL Draft Scope Register",
+  "status": "sql_draft_scope_register_recorded",
+  "adb05_allowed_sql_draft_scope": [
+    "Create a migration draft file only.",
+    "Draft table definitions from ADB02 table dictionary.",
+    "Draft columns from ADB02 field dictionary.",
+    "Draft foreign key intent from ADB02 relationship blueprint.",
+    "Draft indexes and constraints from ADB02 index/constraint plan.",
+    "Include comments/guardrails showing no execution.",
+    "Prepare a validation-only SQL draft for review."
+  ],
+  "adb05_blocked_scope": [
+    "Run SQL",
+    "Connect to Supabase",
+    "Use service-role key",
+    "Create live tables",
+    "Modify live schema",
+    "Insert seed data",
+    "Activate backend/Auth",
+    "Deploy"
+  ],
+  "required_draft_labels": [
+    "DRAFT_ONLY",
+    "NOT_EXECUTED",
+    "REVIEW_REQUIRED",
+    "NO_SERVICE_ROLE_KEY",
+    "NO_SEED_INSERT"
+  ],
+  "blocked_state": {
+    "adb04_sql_draft_approval_checkpoint_recorded": true,
+    "adb03_consumed": true,
+    "sql_draft_scope_register_recorded": true,
+    "migration_draft_guardrails_recorded": true,
+    "execution_deferral_recorded": true,
+    "security_gate_confirmation_recorded": true,
+    "no_sql_no_db_write_audit_recorded": true,
+    "ready_for_adb05": true,
+    "sql_draft_generation_approved_for_adb05": true,
+    "sql_draft_created": false,
+    "sql_execution_approved": false,
+    "database_write_approved": false,
+    "supabase_activation_approved": false,
+    "seed_insert_approved": false,
+    "ag47_resume_allowed": false,
+    "public_content_generated": false,
+    "guidance_generated": false,
+    "panchang_calculation_executed": false,
+    "seed_data_inserted": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
