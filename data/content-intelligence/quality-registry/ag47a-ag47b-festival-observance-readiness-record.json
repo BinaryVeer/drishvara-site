@@ -1,0 +1,47 @@
+{
+  "module_id": "AG47A",
+  "title": "AG47B Festival Observance Readiness Record",
+  "status": "ready_for_ag47b_festival_observance_registry",
+  "ready_for_ag47b": true,
+  "next_stage_id": "AG47B",
+  "next_stage_title": "Festival and Observance Registry Integration",
+  "ag47b_allowed_scope": [
+    "Consume M02/M03 methodology.",
+    "Consume D05 observance registry/source validation records.",
+    "Prepare public preview display rules.",
+    "Prepare regional/manual verification notes.",
+    "Keep live calculation/API/database reading disabled."
+  ],
+  "ag47b_blocked_scope": [
+    "Runtime Panchang calculation execution",
+    "Automated festival/vrat public decisioning",
+    "Website database-reading/API runtime activation",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure"
+  ],
+  "hard_blocker_count_for_ag47b": 0,
+  "blocked_state": {
+    "ag47a_panchang_method_location_basis_consumed": true,
+    "ag47r_consumed": true,
+    "adb20_ads_consumed": true,
+    "method_boundary_confirmed": true,
+    "location_basis_boundary_confirmed": true,
+    "source_validation_consumed": true,
+    "live_calculation_disabled_confirmed": true,
+    "ready_for_ag47b_festival_observance_registry": true,
+    "runtime_panchang_calculation_approved_now": false,
+    "runtime_panchang_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_generated_panchang_output": false,
+    "public_content_generated": false
+  }
+}

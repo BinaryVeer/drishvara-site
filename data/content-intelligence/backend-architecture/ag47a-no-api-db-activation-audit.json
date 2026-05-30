@@ -1,0 +1,61 @@
+{
+  "module_id": "AG47A",
+  "title": "No API / DB Activation Audit",
+  "status": "no_api_db_activation_audit_passed",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "api_runtime_database_reading_approved_now",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "backend_auth_supabase_activation_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "rls_public_policy_activation_approved",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "deployment_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "service_role_key_exposed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "ag47a_panchang_method_location_basis_consumed": true,
+    "ag47r_consumed": true,
+    "adb20_ads_consumed": true,
+    "method_boundary_confirmed": true,
+    "location_basis_boundary_confirmed": true,
+    "source_validation_consumed": true,
+    "live_calculation_disabled_confirmed": true,
+    "ready_for_ag47b_festival_observance_registry": true,
+    "runtime_panchang_calculation_approved_now": false,
+    "runtime_panchang_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_generated_panchang_output": false,
+    "public_content_generated": false
+  }
+}

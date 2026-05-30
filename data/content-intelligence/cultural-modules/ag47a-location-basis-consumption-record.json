@@ -1,0 +1,38 @@
+{
+  "module_id": "AG47A",
+  "title": "Location Basis Consumption Record",
+  "status": "location_basis_consumption_recorded",
+  "consumed_logic_families": [
+    "location_time_profiles",
+    "regional calendar profile candidates",
+    "sunrise/location basis from ADB16–ADB20"
+  ],
+  "first_preview_policy": {
+    "location_specific_runtime_required_for_exact_panchang": true,
+    "live_location_calculation_enabled_now": false,
+    "default_public_language": "Panchang preview is method-bound and under review; live calculation is not enabled.",
+    "regional_difference_handling": "Do not suppress regional disagreement; show under-review/regional-note status where applicable."
+  },
+  "blocked_state": {
+    "ag47a_panchang_method_location_basis_consumed": true,
+    "ag47r_consumed": true,
+    "adb20_ads_consumed": true,
+    "method_boundary_confirmed": true,
+    "location_basis_boundary_confirmed": true,
+    "source_validation_consumed": true,
+    "live_calculation_disabled_confirmed": true,
+    "ready_for_ag47b_festival_observance_registry": true,
+    "runtime_panchang_calculation_approved_now": false,
+    "runtime_panchang_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_generated_panchang_output": false,
+    "public_content_generated": false
+  }
+}
