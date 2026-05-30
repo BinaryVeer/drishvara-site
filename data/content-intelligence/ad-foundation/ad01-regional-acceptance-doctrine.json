@@ -1,0 +1,93 @@
+{
+  "module_id": "AD01",
+  "title": "Regional Acceptance Doctrine",
+  "status": "regional_acceptance_doctrine_recorded",
+  "regional_profiles_to_prepare_in_ad03": [
+    {
+      "profile_id": "north_india_general",
+      "coverage": [
+        "Uttar Pradesh",
+        "Hindi belt",
+        "Kashi-influenced references where applicable"
+      ],
+      "expected_difference_types": [
+        "purnimanta month usage",
+        "festival date decision traditions",
+        "sunrise tithi handling"
+      ]
+    },
+    {
+      "profile_id": "east_india_bihar_mithila",
+      "coverage": [
+        "Bihar",
+        "Mithila",
+        "East India where applicable"
+      ],
+      "expected_difference_types": [
+        "regional vrat/festival observance rules",
+        "local acceptance patterns",
+        "traditional calendar naming and observance continuity"
+      ]
+    },
+    {
+      "profile_id": "south_indian_panchangam",
+      "coverage": [
+        "Tamil",
+        "Telugu",
+        "Kannada",
+        "Malayalam-influenced Panchangam traditions where later sourced"
+      ],
+      "expected_difference_types": [
+        "amanta month usage",
+        "regional nakshatra/festival handling",
+        "regional new year/calendar conventions"
+      ]
+    },
+    {
+      "profile_id": "location_specific_sunrise_profile",
+      "coverage": [
+        "all regions"
+      ],
+      "expected_difference_types": [
+        "sunrise-based day boundary",
+        "local latitude-longitude sensitivity",
+        "timezone handling"
+      ]
+    }
+  ],
+  "doctrine_rules": [
+    "Regional differences must be recorded as profiles, not treated as errors.",
+    "A Panchang or festival output must eventually carry region/profile metadata.",
+    "Where regional rules differ, Drishvara should explain the difference rather than force one uniform date.",
+    "Local sunrise and place context must be treated as calculation-sensitive metadata.",
+    "Regional acceptance must be grounded in source and editorial review status."
+  ],
+  "blocked_state": {
+    "ad01_source_authenticity_regional_acceptance_doctrine_recorded": true,
+    "ad00_consumed": true,
+    "source_hierarchy_recorded": true,
+    "regional_acceptance_doctrine_recorded": true,
+    "nityanand_mishra_style_discipline_recorded": true,
+    "classical_panchanga_basis_recorded": true,
+    "source_confidence_model_recorded": true,
+    "attribution_claim_boundary_recorded": true,
+    "ready_for_ad02": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_algorithm_claimed_from_person": false,
+    "unverified_personal_attribution_made": false,
+    "deterministic_prediction_claim_made": false,
+    "web_scraping_executed": false,
+    "live_source_fetch_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}

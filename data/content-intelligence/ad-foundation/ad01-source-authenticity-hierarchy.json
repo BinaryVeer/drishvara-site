@@ -1,0 +1,97 @@
+{
+  "module_id": "AD01",
+  "title": "Source Authenticity Hierarchy",
+  "status": "source_authenticity_hierarchy_recorded",
+  "hierarchy": [
+    {
+      "tier": "tier_1_classical_and_traditional_basis",
+      "description": "Classical Panchanga and Jyotisha basis used to define concepts and canonical ontology.",
+      "allowed_source_types": [
+        "Surya Siddhanta and Siddhanta tradition references",
+        "accepted Panchanga element traditions",
+        "traditional muhurta and vrata/festival calculation references",
+        "regional Panchang/Panchangam source traditions with clear provenance"
+      ],
+      "usage": "Define canonical fields, source vocabulary and calculation awareness."
+    },
+    {
+      "tier": "tier_2_regional_living_acceptance",
+      "description": "Regionally accepted living Panchang traditions and festival decision practices.",
+      "allowed_source_types": [
+        "Kashi / North Indian Panchang tradition",
+        "Mithila / Bihar tradition",
+        "Uttar Pradesh / Hindi belt tradition",
+        "East Indian regional Panchang traditions",
+        "South Indian Panchangam traditions",
+        "temple/trust/cultural-institution Panchang outputs with source details"
+      ],
+      "usage": "Record regional rule profiles without forcing one region's practice onto all users."
+    },
+    {
+      "tier": "tier_3_modern_study_and_cross_verification",
+      "description": "Modern research papers, astronomy-calendar studies and comparative Panchang analysis.",
+      "allowed_source_types": [
+        "peer-reviewed or institutional research",
+        "astronomical calendar studies",
+        "source-attributed comparative Panchang studies"
+      ],
+      "usage": "Support methodology notes, corrections, differences and caution flags."
+    },
+    {
+      "tier": "tier_4_sanskritic_textual_discipline_and_editorial_style",
+      "description": "Scholars, authors and teachers whose style supports Sanskrit accuracy and cultural explanation.",
+      "allowed_source_types": [
+        "verified books",
+        "verified talks/interviews",
+        "published articles",
+        "source-attributed public lectures"
+      ],
+      "usage": "Guide wording discipline, not calculation claims unless specifically verified."
+    },
+    {
+      "tier": "tier_5_editorial_reflection_layer",
+      "description": "Drishvara's own reflective interpretation and editorial guidance layer.",
+      "allowed_source_types": [
+        "source-attributed methodology notes",
+        "editorially reviewed reflection rules",
+        "non-deterministic guidance templates"
+      ],
+      "usage": "Generate reflective guidance only after source, calculation and regional-profile layers are established."
+    }
+  ],
+  "prohibited_source_usage": [
+    "Do not use viral astrology posts as canonical source.",
+    "Do not claim a Panchang method from a living scholar without specific verified source.",
+    "Do not mix regional festival rules without recording the region/profile.",
+    "Do not present reflective guidance as deterministic prediction.",
+    "Do not create database seed records without source and review status."
+  ],
+  "blocked_state": {
+    "ad01_source_authenticity_regional_acceptance_doctrine_recorded": true,
+    "ad00_consumed": true,
+    "source_hierarchy_recorded": true,
+    "regional_acceptance_doctrine_recorded": true,
+    "nityanand_mishra_style_discipline_recorded": true,
+    "classical_panchanga_basis_recorded": true,
+    "source_confidence_model_recorded": true,
+    "attribution_claim_boundary_recorded": true,
+    "ready_for_ad02": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_algorithm_claimed_from_person": false,
+    "unverified_personal_attribution_made": false,
+    "deterministic_prediction_claim_made": false,
+    "web_scraping_executed": false,
+    "live_source_fetch_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
