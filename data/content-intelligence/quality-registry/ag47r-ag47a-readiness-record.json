@@ -1,0 +1,43 @@
+{
+  "module_id": "AG47R",
+  "title": "AG47A Readiness Record",
+  "status": "ready_for_ag47a_panchang_method_location_basis",
+  "ready_for_ag47a": true,
+  "next_stage_id": "AG47A",
+  "next_stage_title": "Panchang Method and Location Basis Consumption",
+  "ag47a_allowed_scope": [
+    "Consume M01/M04 methodology.",
+    "Consume D05 source validation.",
+    "Consume Panchang schema/runtime records.",
+    "Consume ADB20 ADS reconciliation.",
+    "Confirm method boundary and disabled live calculation status."
+  ],
+  "ag47a_blocked_scope": [
+    "Runtime Panchang calculation execution",
+    "Website database-reading/API runtime activation",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure",
+    "Public generated Panchang output"
+  ],
+  "hard_blocker_count_for_ag47a": 0,
+  "blocked_state": {
+    "ag47r_alignment_recorded": true,
+    "ag47_return_gate_preserved": true,
+    "ag47_forward_pointer_corrected_by_supersession": true,
+    "v01_stage_plan_preserved": true,
+    "ag47a_ready": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

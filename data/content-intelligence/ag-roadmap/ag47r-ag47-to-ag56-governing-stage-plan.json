@@ -1,0 +1,577 @@
+{
+  "module_id": "AG47R",
+  "title": "AG47 to AG56 Governing Stage Plan",
+  "status": "governing_stage_plan_recorded",
+  "stages": [
+    {
+      "stage_id": "AG47",
+      "title": "Panchang, Festival and Vedic Guidance Implementation Readiness",
+      "objective": "Consume existing methodology/governance and prepare safe V01 public preview integration.",
+      "substages": [
+        {
+          "sub_stage": "AG47A",
+          "primary_work": "Panchang Method and Location Basis Consumption",
+          "existing_logic_to_consume": [
+            "M01/M04 methodology",
+            "D05 source validation",
+            "Panchang schema/runtime files",
+            "ADB20 ADS reconciliation"
+          ],
+          "delta_output_no_duplicate_rule": "Confirm method boundary and disabled live calculation status."
+        },
+        {
+          "sub_stage": "AG47B",
+          "primary_work": "Festival and Observance Registry Integration",
+          "existing_logic_to_consume": [
+            "M02/M03 methodology",
+            "D05 observance registry",
+            "ADB20 ADS04/ADS07/ADS08 status"
+          ],
+          "delta_output_no_duplicate_rule": "Prepare public preview display rules and regional/manual verification notes."
+        },
+        {
+          "sub_stage": "AG47C",
+          "primary_work": "Vedic Guidance and Sanskrit Integrity Safety Gate",
+          "existing_logic_to_consume": [
+            "M00 source doctrine",
+            "D03/D04 daily guidance",
+            "D06 mantra review",
+            "ADB20 ADS06/ADS08 status"
+          ],
+          "delta_output_no_duplicate_rule": "Preserve no invented mantra, no deterministic claim and source-integrity rules."
+        },
+        {
+          "sub_stage": "AG47D",
+          "primary_work": "Cultural Module Integration Audit",
+          "existing_logic_to_consume": [
+            "AG47A–AG47C outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Audit homepage Discover integration and safety boundaries."
+        },
+        {
+          "sub_stage": "AG47Z",
+          "primary_work": "Panchang/Festival/Vedic Closure",
+          "existing_logic_to_consume": [
+            "AG47 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close V01 implementation readiness without live calculation/API activation."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG48",
+      "title": "Word of the Day and Reflection Implementation Readiness",
+      "objective": "Consume existing Word bank and reflection/governance logic for V01 homepage integration.",
+      "substages": [
+        {
+          "sub_stage": "AG48A",
+          "primary_work": "Word Bank and Rotation Consumption",
+          "existing_logic_to_consume": [
+            "D02 word-of-day bank",
+            "word-of-day-bank-preflight.js"
+          ],
+          "delta_output_no_duplicate_rule": "Confirm curated bank, approved status, rotation policy and repeat control."
+        },
+        {
+          "sub_stage": "AG48B",
+          "primary_work": "Multilingual Language Safety Review",
+          "existing_logic_to_consume": [
+            "D02 multilingual fields",
+            "language runtime"
+          ],
+          "delta_output_no_duplicate_rule": "Check Sanskrit/Hindi/English meanings, transliteration and no toggle corruption."
+        },
+        {
+          "sub_stage": "AG48C",
+          "primary_work": "Reflection Prompt and Homepage Integration",
+          "existing_logic_to_consume": [
+            "D07 daily reflection preview",
+            "AG45 homepage movement model"
+          ],
+          "delta_output_no_duplicate_rule": "Map word/reflection to Discover/Reflect surface without personalisation activation."
+        },
+        {
+          "sub_stage": "AG48D",
+          "primary_work": "Word/Reflection Integration Audit",
+          "existing_logic_to_consume": [
+            "AG48A–AG48C outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Audit integration; no external API, Supabase, Auth or dynamic runtime activation."
+        },
+        {
+          "sub_stage": "AG48Z",
+          "primary_work": "Word and Reflection Closure",
+          "existing_logic_to_consume": [
+            "AG48 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close V01 readiness and hand off to user/personalisation readiness."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG49",
+      "title": "User Accounts and Personalisation Readiness",
+      "objective": "Preserve future personalisation path while keeping V01 static/GitHub-first and privacy-safe.",
+      "substages": [
+        {
+          "sub_stage": "AG49A",
+          "primary_work": "User/Profile Model Consumption and Gap Review",
+          "existing_logic_to_consume": [
+            "D07 subscriber personalisation schema",
+            "daily-guidance subscriber schema"
+          ],
+          "delta_output_no_duplicate_rule": "Review future fields and disabled-now states."
+        },
+        {
+          "sub_stage": "AG49B",
+          "primary_work": "Consent, Entitlement and Sensitive Data Gate",
+          "existing_logic_to_consume": [
+            "D07 input policy",
+            "subscriber-guidance-personalization-preflight.js"
+          ],
+          "delta_output_no_duplicate_rule": "Preserve explicit consent, secure storage requirement and blocked birth-detail collection."
+        },
+        {
+          "sub_stage": "AG49C",
+          "primary_work": "Auth/RLS/Role Access Deferral Review",
+          "existing_logic_to_consume": [
+            "AG27/AG35 backend/Auth/Supabase planning",
+            "auth-client/session-guard"
+          ],
+          "delta_output_no_duplicate_rule": "Confirm no hidden backend activation; list future trigger conditions."
+        },
+        {
+          "sub_stage": "AG49D",
+          "primary_work": "Personalisation Privacy Audit",
+          "existing_logic_to_consume": [
+            "AG49A–AG49C outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Audit privacy, consent, storage, public exposure and non-deterministic guidance boundaries."
+        },
+        {
+          "sub_stage": "AG49Z",
+          "primary_work": "User/Personalisation Readiness Closure",
+          "existing_logic_to_consume": [
+            "AG49 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close V01 readiness; keep personalised output disabled unless separately approved."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG50",
+      "title": "Psychometric and Assessment Product Governance Scaffold",
+      "objective": "Document assessment product scaffold/governance only; do not activate public assessment in V01.",
+      "substages": [
+        {
+          "sub_stage": "AG50A",
+          "primary_work": "Assessment Doctrine and Age-Adaptive Boundary",
+          "existing_logic_to_consume": [
+            "Existing product notes",
+            "privacy/governance records",
+            "future psychometric plan"
+          ],
+          "delta_output_no_duplicate_rule": "Define non-diagnostic, consent-first, age-adaptive boundaries."
+        },
+        {
+          "sub_stage": "AG50B",
+          "primary_work": "Question Bank and Trait-Mapping Scaffold",
+          "existing_logic_to_consume": [
+            "Future schema plan only"
+          ],
+          "delta_output_no_duplicate_rule": "Define fields, trait dimensions, review status and contradiction flags without launching runtime."
+        },
+        {
+          "sub_stage": "AG50C",
+          "primary_work": "Scoring, Contradiction and Insight Boundary",
+          "existing_logic_to_consume": [
+            "Future analytics/personalisation models"
+          ],
+          "delta_output_no_duplicate_rule": "Define score/confidence/contradiction/human review logic; no deterministic labels."
+        },
+        {
+          "sub_stage": "AG50D",
+          "primary_work": "Psychometric Privacy and Ethics Audit",
+          "existing_logic_to_consume": [
+            "AG49 privacy outputs",
+            "AG52 legal/disclaimer plan"
+          ],
+          "delta_output_no_duplicate_rule": "Audit minors, consent, sensitive inference, data minimisation and disclaimer needs."
+        },
+        {
+          "sub_stage": "AG50Z",
+          "primary_work": "Assessment Scaffold Closure",
+          "existing_logic_to_consume": [
+            "AG50 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close V01 scaffold; defer real assessment product to V02 unless separately approved."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG51",
+      "title": "Analytics, Monitoring and Editorial Dashboard Planning",
+      "objective": "Define monitoring and dashboards for editorial/module health without enabling runtime queries.",
+      "substages": [
+        {
+          "sub_stage": "AG51A",
+          "primary_work": "Editorial Monitoring Model",
+          "existing_logic_to_consume": [
+            "AG41C monitoring plan",
+            "admin/editor workflow records"
+          ],
+          "delta_output_no_duplicate_rule": "Define panels for queue, assignments, returned items, references and image credits."
+        },
+        {
+          "sub_stage": "AG51B",
+          "primary_work": "Article and Module Health Model",
+          "existing_logic_to_consume": [
+            "AG23/AG43/AG45/AG46/AG47/AG48 outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Define metrics for topic score, First Light, episode, Featured Reads, Panchang, Word and listing status."
+        },
+        {
+          "sub_stage": "AG51C",
+          "primary_work": "Audit/Error/Exception Tracking Model",
+          "existing_logic_to_consume": [
+            "AG42 audit-log completeness",
+            "AG41C exception tracking"
+          ],
+          "delta_output_no_duplicate_rule": "Define broken URL, missing reference/credit, layout, role, audit and rollback exceptions."
+        },
+        {
+          "sub_stage": "AG51D",
+          "primary_work": "Dashboard Planning Audit",
+          "existing_logic_to_consume": [
+            "AG51A–AG51C outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Audit dashboard plan; no runtime dashboard, database query or monitoring job."
+        },
+        {
+          "sub_stage": "AG51Z",
+          "primary_work": "Analytics and Monitoring Closure",
+          "existing_logic_to_consume": [
+            "AG51 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close dashboard planning and hand off to security/privacy/legal hardening."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG52",
+      "title": "Security, Privacy, Source, Legal and Compliance Hardening",
+      "objective": "Consolidate secret safety, source doctrine, legal disclaimers, privacy and backend/Auth deferral.",
+      "substages": [
+        {
+          "sub_stage": "AG52A",
+          "primary_work": "Secret, Environment and Service-role Safety Audit",
+          "existing_logic_to_consume": [
+            "AG27/AG35/AG36 secret governance",
+            ".gitignore/local config records"
+          ],
+          "delta_output_no_duplicate_rule": "Audit repo/browser/public config for service-role, secrets and unsafe env leakage."
+        },
+        {
+          "sub_stage": "AG52B",
+          "primary_work": "RLS, Grants and Public Exposure Audit",
+          "existing_logic_to_consume": [
+            "AG29 schema/RLS audit",
+            "Supabase explicit grant readiness records"
+          ],
+          "delta_output_no_duplicate_rule": "Review public exposure and maintain no unintended anon access."
+        },
+        {
+          "sub_stage": "AG52C",
+          "primary_work": "Source, Reference, Image Credit and Disclaimer Readiness",
+          "existing_logic_to_consume": [
+            "AG25 references/image credits",
+            "M00/D cultural doctrine",
+            "AG50 psychometric scaffold"
+          ],
+          "delta_output_no_duplicate_rule": "Prepare editorial/source/image/Vedic/psychometric/privacy disclaimers."
+        },
+        {
+          "sub_stage": "AG52D",
+          "primary_work": "Security and Compliance Closure Audit",
+          "existing_logic_to_consume": [
+            "AG52A–AG52C outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Audit combined security/legal/privacy posture and backend deferral."
+        },
+        {
+          "sub_stage": "AG52Z",
+          "primary_work": "Security/Privacy/Legal Closure",
+          "existing_logic_to_consume": [
+            "AG52 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close compliance hardening before public QA."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG53",
+      "title": "Performance, SEO, Accessibility and Mobile QA",
+      "objective": "Validate public quality and discoverability for V01 surfaces.",
+      "substages": [
+        {
+          "sub_stage": "AG53A",
+          "primary_work": "Performance and Page-weight Review",
+          "existing_logic_to_consume": [
+            "public HTML/assets",
+            "image governance",
+            "homepage/article surfaces"
+          ],
+          "delta_output_no_duplicate_rule": "Review page size, image load, JS/CSS load and mobile speed risks."
+        },
+        {
+          "sub_stage": "AG53B",
+          "primary_work": "SEO Metadata, Sitemap and Robots Review",
+          "existing_logic_to_consume": [
+            "SEO preflight",
+            "sitemap/url governance",
+            "article-quality preflight"
+          ],
+          "delta_output_no_duplicate_rule": "Review titles, descriptions, OG/canonical, sitemap, robots and article URL correctness."
+        },
+        {
+          "sub_stage": "AG53C",
+          "primary_work": "Mobile and Accessibility QA",
+          "existing_logic_to_consume": [
+            "homepage/article/layout validators",
+            "language runtime"
+          ],
+          "delta_output_no_duplicate_rule": "Check responsive layout, alt text readiness, contrast, tap targets and table/figure safety."
+        },
+        {
+          "sub_stage": "AG53D",
+          "primary_work": "Public UX and Browser Compatibility Audit",
+          "existing_logic_to_consume": [
+            "live verification records",
+            "homepage QA history"
+          ],
+          "delta_output_no_duplicate_rule": "Audit Chrome/Safari/mobile route behaviour, navigation and language stability."
+        },
+        {
+          "sub_stage": "AG53Z",
+          "primary_work": "Public Quality Closure",
+          "existing_logic_to_consume": [
+            "AG53 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close public quality readiness and hand off to release operations."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG54",
+      "title": "Backup, Rollback, Migration and Release Operations",
+      "objective": "Create operational safety before V01 release candidate freeze.",
+      "substages": [
+        {
+          "sub_stage": "AG54A",
+          "primary_work": "Backup and Restore Plan",
+          "existing_logic_to_consume": [
+            "Git baseline",
+            "repo/content/data records",
+            "Supabase deferral records"
+          ],
+          "delta_output_no_duplicate_rule": "Define repo/content/static artifact backup and restore method."
+        },
+        {
+          "sub_stage": "AG54B",
+          "primary_work": "Deployment and Release Checklist",
+          "existing_logic_to_consume": [
+            "Vercel/GitHub static path",
+            "validate:project chain"
+          ],
+          "delta_output_no_duplicate_rule": "Define validate, git status, commit, push, Vercel/live check sequence."
+        },
+        {
+          "sub_stage": "AG54C",
+          "primary_work": "Rollback and Incident Response Plan",
+          "existing_logic_to_consume": [
+            "AG42 rollback dry-run",
+            "AG41 audit/rollback SOP"
+          ],
+          "delta_output_no_duplicate_rule": "Define triggers and action path for homepage, article, listing, privacy or route breakage."
+        },
+        {
+          "sub_stage": "AG54D",
+          "primary_work": "Release Operations Audit",
+          "existing_logic_to_consume": [
+            "AG54A–AG54C outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Audit backup, release, rollback and incident response readiness."
+        },
+        {
+          "sub_stage": "AG54Z",
+          "primary_work": "Release Operations Closure",
+          "existing_logic_to_consume": [
+            "AG54 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close operational readiness before release candidate freeze."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG55",
+      "title": "Version 01 Release Candidate Freeze, Completed-Stack Reconciliation and Final Audit",
+      "objective": "Freeze V01 scope and reconcile every completed repo stream before AG56.",
+      "substages": [
+        {
+          "sub_stage": "AG55A",
+          "primary_work": "Version 01 Scope Freeze",
+          "existing_logic_to_consume": [
+            "AG42–AG54 outputs",
+            "full repo inventory/digest"
+          ],
+          "delta_output_no_duplicate_rule": "Freeze included modules and explicitly defer V02 items."
+        },
+        {
+          "sub_stage": "AG55B",
+          "primary_work": "Completed Repo Stack and Dependency Reconciliation",
+          "existing_logic_to_consume": [
+            "M00–M10",
+            "D01–D10",
+            "AG03–AG41",
+            "QA/HF/LV records",
+            "docs/quality"
+          ],
+          "delta_output_no_duplicate_rule": "Verify completed streams are consumed; resolve old roadmap conflicts including AG41Z → AG42A pointer."
+        },
+        {
+          "sub_stage": "AG55C",
+          "primary_work": "End-to-End Release Candidate Validation",
+          "existing_logic_to_consume": [
+            "validate:project",
+            "all stage validators",
+            "public route checks"
+          ],
+          "delta_output_no_duplicate_rule": "Validate V01 as a whole: homepage, articles, First Light, episodes, Word, Panchang, security and release ops."
+        },
+        {
+          "sub_stage": "AG55D",
+          "primary_work": "Go/No-Go Audit for AG56",
+          "existing_logic_to_consume": [
+            "AG55A–AG55C outputs",
+            "AG54 rollback plan"
+          ],
+          "delta_output_no_duplicate_rule": "Confirm AG56 controlled dynamic content-loop can be attempted only with explicit approval."
+        },
+        {
+          "sub_stage": "AG55Z",
+          "primary_work": "Version 01 Release Candidate Closure",
+          "existing_logic_to_consume": [
+            "AG55 audit outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Close V01 RC and permit AG56 controlled dynamic test path."
+        }
+      ]
+    },
+    {
+      "stage_id": "AG56",
+      "title": "Version 01 Controlled Dynamic Content Loop Test and Go-Live",
+      "objective": "Run one controlled end-to-end V01 content loop, then decide go-live.",
+      "substages": [
+        {
+          "sub_stage": "AG56.1",
+          "primary_work": "Controlled Dynamic Article Generation Test",
+          "existing_logic_to_consume": [
+            "AG43 topic/content-intelligence",
+            "AG45 First Light",
+            "AG46 long-form standard"
+          ],
+          "delta_output_no_duplicate_rule": "Select one signal/topic, apply scoring, prepare one article/episode candidate with refs and credit status."
+        },
+        {
+          "sub_stage": "AG56.2",
+          "primary_work": "Admin/Editor Review Workflow Test",
+          "existing_logic_to_consume": [
+            "AG42 hardened workflow",
+            "AG36/AG40 role tests",
+            "AG41 SOP"
+          ],
+          "delta_output_no_duplicate_rule": "Test editor correction/submit path and Admin final approval."
+        },
+        {
+          "sub_stage": "AG56.3",
+          "primary_work": "Controlled Publish Test for One Article",
+          "existing_logic_to_consume": [
+            "AG54 release/rollback plan",
+            "AG41 publish SOP"
+          ],
+          "delta_output_no_duplicate_rule": "Publish one article only after explicit approval, with audit and rollback readiness."
+        },
+        {
+          "sub_stage": "AG56.4",
+          "primary_work": "Public URL and Listing Verification",
+          "existing_logic_to_consume": [
+            "AG40A/AG40C smoke tests",
+            "AG46 listing/category behaviour"
+          ],
+          "delta_output_no_duplicate_rule": "Verify live URL, content, references, image credits, category and listing update."
+        },
+        {
+          "sub_stage": "AG56.5",
+          "primary_work": "Homepage and Module Surface Verification",
+          "existing_logic_to_consume": [
+            "AG45 homepage movement",
+            "AG23 route records"
+          ],
+          "delta_output_no_duplicate_rule": "Verify First Light/Featured Reads/episode cards and Discover → Read → Reflect flow."
+        },
+        {
+          "sub_stage": "AG56.6",
+          "primary_work": "Word/Panchang/Reflection/Vedic Preview Smoke Test",
+          "existing_logic_to_consume": [
+            "AG47/AG48 readiness records",
+            "D02/D05/D07 validators"
+          ],
+          "delta_output_no_duplicate_rule": "Smoke-test preview surfaces without invented mantra, unsupported claims or language instability."
+        },
+        {
+          "sub_stage": "AG56.7",
+          "primary_work": "Audit-log and Rollback Readiness Verification",
+          "existing_logic_to_consume": [
+            "AG42 audit fields",
+            "AG54 rollback plan"
+          ],
+          "delta_output_no_duplicate_rule": "Confirm action audit, before/after status, rollback reference and public verification evidence."
+        },
+        {
+          "sub_stage": "AG56.8",
+          "primary_work": "Version 01 Go-Live Decision",
+          "existing_logic_to_consume": [
+            "AG56.1–AG56.7 outputs"
+          ],
+          "delta_output_no_duplicate_rule": "Decide go/no-go based on controlled test result and unresolved blockers."
+        },
+        {
+          "sub_stage": "AG56Z",
+          "primary_work": "Version 01 Live Closure",
+          "existing_logic_to_consume": [
+            "AG56 go-live decision"
+          ],
+          "delta_output_no_duplicate_rule": "Declare Drishvara V01 live or deferred with explicit defect list; V02 remains separate scaffolded expansion."
+        }
+      ]
+    }
+  ],
+  "blocked_state": {
+    "ag47r_alignment_recorded": true,
+    "ag47_return_gate_preserved": true,
+    "ag47_forward_pointer_corrected_by_supersession": true,
+    "v01_stage_plan_preserved": true,
+    "ag47a_ready": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

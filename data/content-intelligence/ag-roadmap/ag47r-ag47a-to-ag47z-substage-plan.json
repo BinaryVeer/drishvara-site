@@ -1,0 +1,75 @@
+{
+  "module_id": "AG47R",
+  "title": "AG47A to AG47Z Substage Plan",
+  "status": "ag47a_to_ag47z_plan_recorded",
+  "objective": "Consume existing methodology/governance and prepare safe V01 public preview integration.",
+  "substages": [
+    {
+      "sub_stage": "AG47A",
+      "primary_work": "Panchang Method and Location Basis Consumption",
+      "existing_logic_to_consume": [
+        "M01/M04 methodology",
+        "D05 source validation",
+        "Panchang schema/runtime files",
+        "ADB20 ADS reconciliation"
+      ],
+      "delta_output_no_duplicate_rule": "Confirm method boundary and disabled live calculation status."
+    },
+    {
+      "sub_stage": "AG47B",
+      "primary_work": "Festival and Observance Registry Integration",
+      "existing_logic_to_consume": [
+        "M02/M03 methodology",
+        "D05 observance registry",
+        "ADB20 ADS04/ADS07/ADS08 status"
+      ],
+      "delta_output_no_duplicate_rule": "Prepare public preview display rules and regional/manual verification notes."
+    },
+    {
+      "sub_stage": "AG47C",
+      "primary_work": "Vedic Guidance and Sanskrit Integrity Safety Gate",
+      "existing_logic_to_consume": [
+        "M00 source doctrine",
+        "D03/D04 daily guidance",
+        "D06 mantra review",
+        "ADB20 ADS06/ADS08 status"
+      ],
+      "delta_output_no_duplicate_rule": "Preserve no invented mantra, no deterministic claim and source-integrity rules."
+    },
+    {
+      "sub_stage": "AG47D",
+      "primary_work": "Cultural Module Integration Audit",
+      "existing_logic_to_consume": [
+        "AG47A–AG47C outputs"
+      ],
+      "delta_output_no_duplicate_rule": "Audit homepage Discover integration and safety boundaries."
+    },
+    {
+      "sub_stage": "AG47Z",
+      "primary_work": "Panchang/Festival/Vedic Closure",
+      "existing_logic_to_consume": [
+        "AG47 audit outputs"
+      ],
+      "delta_output_no_duplicate_rule": "Close V01 implementation readiness without live calculation/API activation."
+    }
+  ],
+  "next_actual_stage": "AG47A",
+  "blocked_state": {
+    "ag47r_alignment_recorded": true,
+    "ag47_return_gate_preserved": true,
+    "ag47_forward_pointer_corrected_by_supersession": true,
+    "v01_stage_plan_preserved": true,
+    "ag47a_ready": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

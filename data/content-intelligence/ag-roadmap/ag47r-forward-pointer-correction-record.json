@@ -1,0 +1,38 @@
+{
+  "module_id": "AG47R",
+  "title": "Forward Pointer Correction Record",
+  "status": "forward_pointer_corrected_by_supersession",
+  "superseded_records_without_git_rewrite": [
+    {
+      "file": "data/content-intelligence/quality-registry/ag47-ag48-panchang-festival-surface-readiness-record.json",
+      "superseded_pointer": "AG48",
+      "replacement_pointer": "AG47A",
+      "reason": "AG47 readiness was created as a return-gate pointer, but original implementation roadmap requires AG47A first."
+    },
+    {
+      "file": "data/content-intelligence/mutation-plans/ag47-to-ag48-panchang-festival-surface-boundary.json",
+      "superseded_pointer": "AG48",
+      "replacement_pointer": "AG47A",
+      "reason": "Boundary corrected by AG47R without rewriting pushed history."
+    }
+  ],
+  "no_git_history_rewrite": true,
+  "blocked_state": {
+    "ag47r_alignment_recorded": true,
+    "ag47_return_gate_preserved": true,
+    "ag47_forward_pointer_corrected_by_supersession": true,
+    "v01_stage_plan_preserved": true,
+    "ag47a_ready": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}
