@@ -1,0 +1,49 @@
+{
+  "module_id": "ADB13",
+  "title": "ADB13 to ADB14 Seed Insertion Approval Boundary",
+  "status": "adb14_seed_insertion_approval_boundary_created",
+  "next_stage_id": "ADB14",
+  "next_stage_title": "Seed Insertion Approval Checkpoint",
+  "allowed_scope": [
+    "Open seed insertion approval checkpoint.",
+    "Review whether draft seed packs may be converted into an insertion package.",
+    "Decide whether INSERT/COPY generation may be allowed in a later stage.",
+    "Keep actual seed insertion blocked unless explicitly approved.",
+    "Keep runtime calculation, backend/Auth activation and deployment blocked."
+  ],
+  "blocked_scope_by_default": [
+    "Actual seed insertion",
+    "Runtime calculation execution",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure in repo/chat",
+    "AG47 resume"
+  ],
+  "blocked_state": {
+    "adb13_seed_draft_validation_recorded": true,
+    "adb12_consumed": true,
+    "seed_draft_structure_validation_passed": true,
+    "source_dependency_validation_passed": true,
+    "public_use_safety_validation_passed": true,
+    "no_insert_copy_validation_passed": true,
+    "sanskrit_mantra_review_validation_passed": true,
+    "regional_variation_validation_passed": true,
+    "ready_for_adb14_seed_insertion_approval_checkpoint": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
