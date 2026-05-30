@@ -1,0 +1,50 @@
+{
+  "module_id": "ADB09",
+  "title": "Schema-only Execution Scope",
+  "status": "schema_only_execution_scope_recorded",
+  "allowed_in_adb10_if_operator_confirms_preflight": [
+    "Execute the reviewed ADB05 SQL schema draft manually.",
+    "Create schema tables only.",
+    "Create schema indexes only.",
+    "Use operator-side Supabase dashboard or local authenticated CLI without sharing secrets.",
+    "Record execution result after manual execution."
+  ],
+  "not_allowed_in_adb10": [
+    "Insert seed data.",
+    "Run Panchanga calculations.",
+    "Activate runtime API/backend.",
+    "Enable Auth/RLS policy for public runtime.",
+    "Deploy website changes.",
+    "Expose or commit service-role key.",
+    "Generate public Panchang/Guidance output."
+  ],
+  "sql_draft_path": "data/content-intelligence/database-build/sql-drafts/adb05_astro_drishvara_schema_draft.sql",
+  "blocked_state": {
+    "adb09_final_execution_approval_recorded": true,
+    "adb08_consumed": true,
+    "final_schema_only_execution_approval_recorded": true,
+    "schema_only_execution_scope_recorded": true,
+    "operator_responsibility_notice_recorded": true,
+    "pre_execution_reconfirmation_checklist_recorded": true,
+    "ready_for_adb10_live_schema_execution": true,
+    "schema_only_sql_execution_approved_for_adb10": true,
+    "database_schema_write_approved_for_adb10": true,
+    "supabase_connection_approved_for_adb10_operator_side": true,
+    "sql_executed_in_adb09": false,
+    "database_write_performed_in_adb09": false,
+    "supabase_connection_performed_in_adb09": false,
+    "supabase_table_created_in_adb09": false,
+    "supabase_schema_modified_in_adb09": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

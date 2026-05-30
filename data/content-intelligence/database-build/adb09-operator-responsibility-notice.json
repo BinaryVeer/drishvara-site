@@ -1,0 +1,40 @@
+{
+  "module_id": "ADB09",
+  "title": "Operator Responsibility Notice",
+  "status": "operator_responsibility_notice_recorded",
+  "notice": [
+    "Execution must be performed manually by the operator in the correct Supabase project.",
+    "No secret should be pasted into chat or committed to the repo.",
+    "Operator must confirm project, backup, schema collision and SQL draft path before execution.",
+    "Only the ADB05 schema draft may be executed in ADB10.",
+    "No seed INSERT/COPY is approved."
+  ],
+  "blocked_state": {
+    "adb09_final_execution_approval_recorded": true,
+    "adb08_consumed": true,
+    "final_schema_only_execution_approval_recorded": true,
+    "schema_only_execution_scope_recorded": true,
+    "operator_responsibility_notice_recorded": true,
+    "pre_execution_reconfirmation_checklist_recorded": true,
+    "ready_for_adb10_live_schema_execution": true,
+    "schema_only_sql_execution_approved_for_adb10": true,
+    "database_schema_write_approved_for_adb10": true,
+    "supabase_connection_approved_for_adb10_operator_side": true,
+    "sql_executed_in_adb09": false,
+    "database_write_performed_in_adb09": false,
+    "supabase_connection_performed_in_adb09": false,
+    "supabase_table_created_in_adb09": false,
+    "supabase_schema_modified_in_adb09": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
