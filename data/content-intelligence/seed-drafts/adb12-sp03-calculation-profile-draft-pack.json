@@ -1,0 +1,109 @@
+{
+  "pack_id": "ADB12-SP03",
+  "pack_name": "Calculation Profile Seed Draft Pack",
+  "status": "draft_only_not_inserted",
+  "target_tables": [
+    "calculation_methodologies",
+    "calculation_profiles",
+    "ephemeris_profiles",
+    "ayanamsha_profiles",
+    "panchanga_formula_rules"
+  ],
+  "draft_only": true,
+  "insertion_status": "not_approved",
+  "public_use_allowed_default": false,
+  "review_status_default": "pending_review",
+  "generated_for_review_only": true,
+  "records": {
+    "calculation_methodologies": [
+      {
+        "methodology_id": "METH-KALA-DRISHTI-001",
+        "methodology_module": "AD09/M01",
+        "methodology_name": "Kala-Drishti Panchanga Methodology",
+        "methodology_version": "draft-v1",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "calculation_scope": "panchanga_elements_and_observance_support",
+        "review_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ],
+    "ephemeris_profiles": [
+      {
+        "ephemeris_profile_id": "EPH-REVIEWED-LIBRARY-CANDIDATE",
+        "ephemeris_name": "Reviewed Ephemeris Library Candidate",
+        "ephemeris_source": "to_be_finalised_after_validation",
+        "library_or_dataset_version": "pending",
+        "review_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ],
+    "ayanamsha_profiles": [
+      {
+        "ayanamsha_profile_id": "AYA-REVIEWED-CANDIDATE",
+        "ayanamsha_name": "Reviewed Ayanamsha Candidate",
+        "ayanamsha_basis": "to_be_finalised_after_source_and_calculation_validation",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "review_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ],
+    "calculation_profiles": [
+      {
+        "calculation_profile_id": "CALC-KALA-DRISHTI-DRAFT-001",
+        "profile_name": "Kala-Drishti Draft Calculation Profile",
+        "methodology_id": "METH-KALA-DRISHTI-001",
+        "ephemeris_profile_id": "EPH-REVIEWED-LIBRARY-CANDIDATE",
+        "ayanamsha_profile_id": "AYA-REVIEWED-CANDIDATE",
+        "location_time_profile_required": true,
+        "interpolation_or_root_finding_method": "to_be_finalised_after_validation",
+        "review_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ],
+    "panchanga_formula_rules": [
+      {
+        "formula_rule_id": "FORMULA-TITHI-MOON-SUN-001",
+        "formula_key": "tithi_from_moon_sun_angular_separation",
+        "formula_name": "Tithi from Moon-Sun angular separation",
+        "element_type": "tithi",
+        "formula_expression": "floor(((moon_longitude - sun_longitude) mod 360) / 12) + 1",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "methodology_id": "METH-KALA-DRISHTI-001",
+        "public_use_allowed": false
+      },
+      {
+        "formula_rule_id": "FORMULA-NAKSHATRA-MOON-001",
+        "formula_key": "nakshatra_from_sidereal_moon_longitude",
+        "formula_name": "Nakshatra from sidereal Moon longitude",
+        "element_type": "nakshatra",
+        "formula_expression": "floor(sidereal_moon_longitude / (360/27)) + 1",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "methodology_id": "METH-KALA-DRISHTI-001",
+        "public_use_allowed": false
+      }
+    ]
+  },
+  "runtime_execution_status": "disabled",
+  "blocked_state": {
+    "adb12_seed_draft_pack_generated": true,
+    "adb11_consumed": true,
+    "seven_seed_draft_packs_generated": true,
+    "draft_seed_json_files_generated": true,
+    "ready_for_adb13_seed_draft_validation": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

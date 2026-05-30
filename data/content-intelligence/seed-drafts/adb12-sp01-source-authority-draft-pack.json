@@ -1,0 +1,140 @@
+{
+  "pack_id": "ADB12-SP01",
+  "pack_name": "Source Authority Seed Draft Pack",
+  "status": "draft_only_not_inserted",
+  "target_tables": [
+    "source_authorities",
+    "source_texts",
+    "source_confidence_register",
+    "editorial_review_status",
+    "methodology_notes"
+  ],
+  "draft_only": true,
+  "insertion_status": "not_approved",
+  "public_use_allowed_default": false,
+  "review_status_default": "pending_review",
+  "generated_for_review_only": true,
+  "records": {
+    "source_confidence_register": [
+      {
+        "confidence_key": "classical_primary",
+        "confidence_label": "Classical primary",
+        "public_use_allowed": false,
+        "notes": "Requires source locator and review before public use."
+      },
+      {
+        "confidence_key": "traditional_regional",
+        "confidence_label": "Traditional regional",
+        "public_use_allowed": false,
+        "notes": "Used where regional practice differs."
+      },
+      {
+        "confidence_key": "methodology_influence",
+        "confidence_label": "Methodology influence",
+        "public_use_allowed": false,
+        "notes": "Influence record only; not a direct textual citation."
+      },
+      {
+        "confidence_key": "under_review",
+        "confidence_label": "Under review",
+        "public_use_allowed": false,
+        "notes": "Default state."
+      }
+    ],
+    "editorial_review_status": [
+      {
+        "review_status_key": "pending_review",
+        "review_status_label": "Pending review",
+        "public_use_allowed": false
+      },
+      {
+        "review_status_key": "source_verified",
+        "review_status_label": "Source verified",
+        "public_use_allowed": false
+      },
+      {
+        "review_status_key": "editorial_approved",
+        "review_status_label": "Editorial approved",
+        "public_use_allowed": false
+      },
+      {
+        "review_status_key": "public_ready",
+        "review_status_label": "Public ready",
+        "public_use_allowed": false
+      }
+    ],
+    "source_authorities": [
+      {
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "source_title": "Classical Panchanga Calculation Basis",
+        "source_type": "methodology_basis",
+        "author_or_institution": "Classical Jyotisha/Panchanga tradition",
+        "tradition_or_region": "Bharat / classical Panchanga",
+        "source_confidence_band": "classical_primary",
+        "verification_status": "under_editorial_verification",
+        "editorial_review_status": "pending_review",
+        "public_use_allowed": false,
+        "notes": "Draft authority record for calculation methodology; exact source locator to be reviewed."
+      },
+      {
+        "source_id": "SRC-NITYANAND-MISHRA-STYLE-DISCIPLINE",
+        "source_title": "Nityanand Mishra Ji-aligned Sanskrit and Source Discipline",
+        "source_type": "methodology_influence",
+        "author_or_institution": "Nityanand Mishra Ji — influence/context only",
+        "tradition_or_region": "Sanskrit/source-discipline orientation",
+        "source_confidence_band": "methodology_influence",
+        "verification_status": "under_editorial_verification",
+        "editorial_review_status": "pending_review",
+        "public_use_allowed": false,
+        "notes": "Not a direct claim or quote; records the intended discipline of source care, Sanskrit accuracy and non-random attribution."
+      },
+      {
+        "source_id": "SRC-REGIONAL-PANCHANGA-PRACTICE",
+        "source_title": "Regional Panchanga Practice Register",
+        "source_type": "regional_practice_register",
+        "author_or_institution": "Regional Panchanga traditions",
+        "tradition_or_region": "North India, East India/Bihar/Mithila, South Indian Panchangam",
+        "source_confidence_band": "traditional_regional",
+        "verification_status": "under_editorial_verification",
+        "editorial_review_status": "pending_review",
+        "public_use_allowed": false,
+        "notes": "Draft umbrella source authority for regional rule variation."
+      }
+    ],
+    "source_texts": [],
+    "methodology_notes": [
+      {
+        "methodology_note_id": "METH-KALA-DRISHTI-DB-FIRST",
+        "methodology_module": "AD09/ADB12",
+        "methodology_title": "Kala-Drishti Database-first Methodology",
+        "method_name": "Kala-Drishti",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "supported_claim": "Drishvara should compute and store Panchanga/guidance from reviewed internal rule data rather than live internet lookups.",
+        "review_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ]
+  },
+  "blocked_state": {
+    "adb12_seed_draft_pack_generated": true,
+    "adb11_consumed": true,
+    "seven_seed_draft_packs_generated": true,
+    "draft_seed_json_files_generated": true,
+    "ready_for_adb13_seed_draft_validation": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

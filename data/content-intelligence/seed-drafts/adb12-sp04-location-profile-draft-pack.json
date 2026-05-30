@@ -1,0 +1,58 @@
+{
+  "pack_id": "ADB12-SP04",
+  "pack_name": "Location and Event-window Seed Draft Pack",
+  "status": "draft_only_not_inserted",
+  "target_tables": [
+    "location_time_profiles",
+    "sunrise_sunset_moonrise_event_windows"
+  ],
+  "draft_only": true,
+  "insertion_status": "not_approved",
+  "public_use_allowed_default": false,
+  "review_status_default": "pending_review",
+  "generated_for_review_only": true,
+  "records": {
+    "location_time_profiles": [
+      {
+        "location_time_profile_id": "LOC-INDIA-DEFAULT-REVIEW",
+        "location_label": "India default review profile",
+        "latitude": 23,
+        "longitude": 82,
+        "coordinate_precision": "country_context_placeholder",
+        "coordinate_source": "review_required",
+        "timezone_id": "Asia/Kolkata",
+        "timezone_version": "pending",
+        "sunrise_basis": "apparent_sunrise_review_required",
+        "sunset_basis": "apparent_sunset_review_required",
+        "moonrise_basis": "moonrise_review_required",
+        "event_window_basis": "location_specific_review_required",
+        "review_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ],
+    "sunrise_sunset_moonrise_event_windows": []
+  },
+  "event_window_generation_status": "not_generated",
+  "blocked_state": {
+    "adb12_seed_draft_pack_generated": true,
+    "adb11_consumed": true,
+    "seven_seed_draft_packs_generated": true,
+    "draft_seed_json_files_generated": true,
+    "ready_for_adb13_seed_draft_validation": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

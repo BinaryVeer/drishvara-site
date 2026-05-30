@@ -1,0 +1,161 @@
+{
+  "pack_id": "ADB12-SP02",
+  "pack_name": "Panchanga Master Seed Draft Pack",
+  "status": "draft_only_not_inserted",
+  "target_tables": [
+    "panchang_element_master",
+    "tithi_master",
+    "nakshatra_master",
+    "yoga_master",
+    "karana_master",
+    "vara_master",
+    "rashi_master"
+  ],
+  "draft_only": true,
+  "insertion_status": "not_approved",
+  "public_use_allowed_default": false,
+  "review_status_default": "pending_review",
+  "generated_for_review_only": true,
+  "records": {
+    "panchang_element_master": [
+      {
+        "element_id": "EL-TITHI",
+        "element_name": "Tithi",
+        "element_type": "tithi",
+        "definition": "Lunar day based on Moon-Sun angular separation.",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "element_id": "EL-NAKSHATRA",
+        "element_name": "Nakshatra",
+        "element_type": "nakshatra",
+        "definition": "Lunar mansion based on sidereal Moon longitude.",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "element_id": "EL-YOGA",
+        "element_name": "Yoga",
+        "element_type": "yoga",
+        "definition": "Element based on combined Sun and Moon longitude.",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "element_id": "EL-KARANA",
+        "element_name": "Karana",
+        "element_type": "karana",
+        "definition": "Half-tithi division.",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "element_id": "EL-VARA",
+        "element_name": "Vara",
+        "element_type": "vara",
+        "definition": "Weekday tied to local sunrise basis.",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      }
+    ],
+    "tithi_master_sample": [
+      {
+        "tithi_id": "TITHI-01-SHUKLA-PRATIPADA",
+        "tithi_number": 1,
+        "tithi_name": "Shukla Pratipada",
+        "paksha": "Shukla",
+        "angular_start_degree": 0,
+        "angular_end_degree": 12,
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "tithi_id": "TITHI-15-PURNIMA",
+        "tithi_number": 15,
+        "tithi_name": "Purnima",
+        "paksha": "Shukla",
+        "angular_start_degree": 168,
+        "angular_end_degree": 180,
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "tithi_id": "TITHI-30-AMAVASYA",
+        "tithi_number": 30,
+        "tithi_name": "Amavasya",
+        "paksha": "Krishna",
+        "angular_start_degree": 348,
+        "angular_end_degree": 360,
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      }
+    ],
+    "nakshatra_master_sample": [
+      {
+        "nakshatra_id": "NAK-01-ASHWINI",
+        "nakshatra_number": 1,
+        "nakshatra_name": "Ashwini",
+        "sidereal_start_degree": 0,
+        "sidereal_end_degree": 13.333333,
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      },
+      {
+        "nakshatra_id": "NAK-02-BHARANI",
+        "nakshatra_number": 2,
+        "nakshatra_name": "Bharani",
+        "sidereal_start_degree": 13.333333,
+        "sidereal_end_degree": 26.666667,
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      }
+    ],
+    "yoga_master_sample": [],
+    "karana_master_sample": [],
+    "vara_master_sample": [
+      {
+        "vara_id": "VARA-SUNDAY",
+        "vara_name": "Ravivara",
+        "weekday_index": 0,
+        "sunrise_boundary_rule": "local_sunrise_based",
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      }
+    ],
+    "rashi_master_sample": [
+      {
+        "rashi_id": "RASHI-01-MESHA",
+        "rashi_number": 1,
+        "rashi_name": "Mesha",
+        "sidereal_start_degree": 0,
+        "sidereal_end_degree": 30,
+        "source_id": "SRC-CLASSICAL-PANCHANGA-BASIS",
+        "public_use_allowed": false
+      }
+    ]
+  },
+  "note": "ADB12 includes representative sample rows only. Full 30 tithi, 27 nakshatra, 27 yoga, karana and 12 rashi completion belongs to validation/expansion after source review.",
+  "blocked_state": {
+    "adb12_seed_draft_pack_generated": true,
+    "adb11_consumed": true,
+    "seven_seed_draft_packs_generated": true,
+    "draft_seed_json_files_generated": true,
+    "ready_for_adb13_seed_draft_validation": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

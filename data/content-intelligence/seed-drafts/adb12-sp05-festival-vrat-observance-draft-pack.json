@@ -1,0 +1,90 @@
+{
+  "pack_id": "ADB12-SP05",
+  "pack_name": "Festival Vrat Observance Seed Draft Pack",
+  "status": "draft_only_not_inserted",
+  "target_tables": [
+    "regional_calendar_profiles",
+    "regional_festival_rules",
+    "festival_observance_rules",
+    "tithi_vrat_rule_families",
+    "fasting_parana_rule_profiles",
+    "festival_observance_rule_registry",
+    "regional_sampradaya_rule_variants",
+    "observance_conflict_flags"
+  ],
+  "draft_only": true,
+  "insertion_status": "not_approved",
+  "public_use_allowed_default": false,
+  "review_status_default": "pending_review",
+  "generated_for_review_only": true,
+  "records": {
+    "regional_calendar_profiles": [
+      {
+        "regional_profile_id": "REG-NORTH-INDIA-GENERAL-DRAFT",
+        "region_or_tradition": "North India general",
+        "rule_type": "regional_profile",
+        "rule_summary": "Draft regional Panchanga profile for North India.",
+        "source_id": "SRC-REGIONAL-PANCHANGA-PRACTICE",
+        "public_use_allowed": false
+      },
+      {
+        "regional_profile_id": "REG-EAST-BIHAR-MITHILA-DRAFT",
+        "region_or_tradition": "East India / Bihar / Mithila",
+        "rule_type": "regional_profile",
+        "rule_summary": "Draft regional Panchanga profile for East India, Bihar and Mithila contexts.",
+        "source_id": "SRC-REGIONAL-PANCHANGA-PRACTICE",
+        "public_use_allowed": false
+      },
+      {
+        "regional_profile_id": "REG-SOUTH-PANCHANGAM-DRAFT",
+        "region_or_tradition": "South Indian Panchangam",
+        "rule_type": "regional_profile",
+        "rule_summary": "Draft profile for South Indian Panchangam variation tracking.",
+        "source_id": "SRC-REGIONAL-PANCHANGA-PRACTICE",
+        "public_use_allowed": false
+      }
+    ],
+    "tithi_vrat_rule_families": [
+      {
+        "rule_family_id": "VRAT-SUNRISE-TOUCHING",
+        "rule_family_key": "sunrise_touching",
+        "rule_family_name": "Sunrise-touching tithi rule",
+        "event_window_basis": "sunrise",
+        "source_id": "SRC-REGIONAL-PANCHANGA-PRACTICE",
+        "public_use_allowed": false
+      },
+      {
+        "rule_family_id": "VRAT-PARANA-RULE",
+        "rule_family_key": "parana_fast_breaking",
+        "rule_family_name": "Parana fast-breaking rule",
+        "event_window_basis": "parana_window",
+        "source_id": "SRC-REGIONAL-PANCHANGA-PRACTICE",
+        "public_use_allowed": false
+      }
+    ],
+    "festival_observance_rule_registry": [],
+    "observance_conflict_flags": []
+  },
+  "blocked_state": {
+    "adb12_seed_draft_pack_generated": true,
+    "adb11_consumed": true,
+    "seven_seed_draft_packs_generated": true,
+    "draft_seed_json_files_generated": true,
+    "ready_for_adb13_seed_draft_validation": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

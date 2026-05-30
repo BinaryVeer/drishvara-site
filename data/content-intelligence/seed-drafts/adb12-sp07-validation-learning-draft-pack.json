@@ -1,0 +1,71 @@
+{
+  "pack_id": "ADB12-SP07",
+  "pack_name": "Validation Learning Seed Draft Pack",
+  "status": "draft_only_not_inserted",
+  "target_tables": [
+    "validation_learning_cycles",
+    "calculation_variance_records",
+    "calibration_backlog_records",
+    "methodology_activation_audits"
+  ],
+  "draft_only": true,
+  "insertion_status": "not_approved",
+  "public_use_allowed_default": false,
+  "review_status_default": "pending_review",
+  "generated_for_review_only": true,
+  "records": {
+    "validation_learning_cycles": [
+      {
+        "validation_cycle_id": "VAL-CYCLE-PANCHANGA-BASELINE-001",
+        "cycle_key": "panchanga_baseline_validation",
+        "validation_scope": "tithi_nakshatra_yoga_karana_sunrise_moonrise",
+        "reviewer_status": "pending_review",
+        "public_use_allowed": false
+      }
+    ],
+    "calibration_backlog_records": [
+      {
+        "backlog_record_id": "CAL-BACKLOG-EPHEMERIS-001",
+        "backlog_key": "ephemeris_candidate_review",
+        "related_module": "M01/ADB12",
+        "issue_summary": "Select and validate ephemeris source before runtime calculation.",
+        "priority": "high",
+        "resolution_status": "open"
+      }
+    ],
+    "methodology_activation_audits": [
+      {
+        "activation_audit_id": "ACT-KALA-DRISHTI-RUNTIME-LOCK-001",
+        "methodology_module": "Kala-Drishti",
+        "activation_stage": "methodology_only",
+        "required_gate": "future_runtime_calculation_approval",
+        "gate_status": "pending_review",
+        "runtime_enabled": false,
+        "public_output_enabled": false,
+        "supabase_enabled": false
+      }
+    ]
+  },
+  "blocked_state": {
+    "adb12_seed_draft_pack_generated": true,
+    "adb11_consumed": true,
+    "seven_seed_draft_packs_generated": true,
+    "draft_seed_json_files_generated": true,
+    "ready_for_adb13_seed_draft_validation": true,
+    "insert_sql_generated": false,
+    "copy_command_generated": false,
+    "seed_insert_approved": false,
+    "seed_data_inserted": false,
+    "database_write_performed": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
