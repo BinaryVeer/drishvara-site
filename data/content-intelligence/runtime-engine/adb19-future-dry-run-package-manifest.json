@@ -1,0 +1,57 @@
+{
+  "module_id": "ADB19",
+  "title": "Future Dry-run Package Manifest",
+  "status": "future_dry_run_package_manifest_recorded",
+  "future_package_id": "ADB-FUTURE-DRYRUN-PANCHANGA-001",
+  "package_type": "future_non_public_internal_dry_run",
+  "package_prepared_for_execution_now": false,
+  "dry_run_scope": {
+    "date_window": "7_day_initial_window_internal_only",
+    "output_visibility": "internal_only",
+    "public_use_allowed": false,
+    "editorial_review_status": "pending_review",
+    "evidence_status": "calculation_dry_run"
+  },
+  "required_inputs": [
+    "calculation_profile_id",
+    "ephemeris_profile_id",
+    "ayanamsha_profile_id",
+    "location_time_profile_id",
+    "regional_calendar_profile_id",
+    "formula_rule_ids",
+    "date_window",
+    "reference_panchang_sources_for_comparison"
+  ],
+  "candidate_outputs": [
+    "astronomical_input_snapshots",
+    "panchanga_calculation_runs",
+    "panchanga_calculation_trace_logs",
+    "panchang_daily_records"
+  ],
+  "blocked_state": {
+    "adb19_non_public_runtime_package_boundary_recorded": true,
+    "adb18_consumed": true,
+    "future_dry_run_package_manifest_recorded": true,
+    "dry_run_command_boundary_recorded": true,
+    "runtime_result_capture_template_recorded": true,
+    "non_public_storage_boundary_recorded": true,
+    "rollback_stop_rules_recorded": true,
+    "ready_for_adb20_runtime_foundation_closure": true,
+    "dry_run_execution_package_prepared_for_future": true,
+    "dry_run_command_generated_for_execution_now": false,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "panchanga_trace_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "module_id": "ADB19",
+  "title": "Dry-run Command Boundary",
+  "status": "dry_run_command_boundary_recorded",
+  "command_generation_status": "not_generated_for_execution",
+  "command_execution_status": "not_executed",
+  "future_command_requirements": [
+    "Must run only against internal dry-run mode.",
+    "Must set public_use_allowed=false.",
+    "Must capture trace logs.",
+    "Must capture comparison variance.",
+    "Must not deploy or expose API.",
+    "Must not use service-role key in repo/chat."
+  ],
+  "command_blockers_before_future_execution": [
+    "ADB20 closure and later explicit runtime dry-run approval",
+    "reference Panchang source selection",
+    "ephemeris and ayanamsha final candidate selection for dry-run",
+    "operator-side secret handling plan if database write is later approved"
+  ],
+  "blocked_state": {
+    "adb19_non_public_runtime_package_boundary_recorded": true,
+    "adb18_consumed": true,
+    "future_dry_run_package_manifest_recorded": true,
+    "dry_run_command_boundary_recorded": true,
+    "runtime_result_capture_template_recorded": true,
+    "non_public_storage_boundary_recorded": true,
+    "rollback_stop_rules_recorded": true,
+    "ready_for_adb20_runtime_foundation_closure": true,
+    "dry_run_execution_package_prepared_for_future": true,
+    "dry_run_command_generated_for_execution_now": false,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "computed_panchang_rows_written": false,
+    "panchanga_trace_rows_written": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_now": false,
+    "ag47_resume_allowed_after_adb20_only": true
+  }
+}
