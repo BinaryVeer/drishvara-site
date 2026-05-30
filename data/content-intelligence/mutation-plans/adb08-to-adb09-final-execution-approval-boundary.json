@@ -1,0 +1,59 @@
+{
+  "module_id": "ADB08",
+  "title": "ADB08 to ADB09 Final Execution Approval Boundary",
+  "status": "adb09_final_execution_approval_boundary_created",
+  "next_stage_id": "ADB09",
+  "next_stage_title": "Final Live SQL Execution Approval Checkpoint",
+  "allowed_scope": [
+    "Review ADB08 execution package.",
+    "Review preflight, schema-collision, backup/rollback and secret-handling checklists.",
+    "Decide whether live schema-only SQL execution may be approved.",
+    "Keep seed insertion, runtime calculation, backend/Auth activation and deployment blocked."
+  ],
+  "blocked_scope_until_explicit_phrase": [
+    "SQL execution",
+    "database write",
+    "Supabase connection",
+    "Supabase table creation",
+    "Supabase schema modification"
+  ],
+  "always_blocked_until_later_stage": [
+    "seed data insertion",
+    "runtime calculation execution",
+    "backend/Auth/Supabase activation",
+    "service-role key exposure in repo/chat",
+    "deployment",
+    "AG47 resume"
+  ],
+  "blocked_state": {
+    "adb08_execution_package_recorded": true,
+    "adb07_consumed": true,
+    "manual_runbook_recorded": true,
+    "operator_preflight_checklist_recorded": true,
+    "schema_collision_checklist_recorded": true,
+    "backup_rollback_checklist_recorded": true,
+    "secret_handling_runbook_recorded": true,
+    "execution_command_boundary_recorded": true,
+    "approval_phrase_register_recorded": true,
+    "ready_for_adb09_final_execution_approval": true,
+    "sql_execution_approved_now": false,
+    "database_write_approved_now": false,
+    "supabase_connection_approved_now": false,
+    "supabase_table_creation_approved_now": false,
+    "supabase_schema_modification_approved_now": false,
+    "seed_insert_approved_now": false,
+    "service_role_key_required_now": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_connection_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "runtime_calculation_executed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

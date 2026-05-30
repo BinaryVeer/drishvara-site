@@ -1,0 +1,50 @@
+{
+  "module_id": "ADB08",
+  "title": "Live Execution Approval Phrase Register",
+  "status": "approval_phrase_register_recorded",
+  "required_future_approval_phrase": "APPROVE LIVE SQL EXECUTION AFTER ADB09 REVIEW",
+  "approval_phrase_not_given_in_adb08": true,
+  "approval_phrase_required_for": [
+    "SQL execution",
+    "database write",
+    "Supabase table creation",
+    "Supabase schema modification"
+  ],
+  "not_covered_by_phrase": [
+    "seed data insertion",
+    "runtime calculation execution",
+    "backend/Auth activation",
+    "deployment"
+  ],
+  "blocked_state": {
+    "adb08_execution_package_recorded": true,
+    "adb07_consumed": true,
+    "manual_runbook_recorded": true,
+    "operator_preflight_checklist_recorded": true,
+    "schema_collision_checklist_recorded": true,
+    "backup_rollback_checklist_recorded": true,
+    "secret_handling_runbook_recorded": true,
+    "execution_command_boundary_recorded": true,
+    "approval_phrase_register_recorded": true,
+    "ready_for_adb09_final_execution_approval": true,
+    "sql_execution_approved_now": false,
+    "database_write_approved_now": false,
+    "supabase_connection_approved_now": false,
+    "supabase_table_creation_approved_now": false,
+    "supabase_schema_modification_approved_now": false,
+    "seed_insert_approved_now": false,
+    "service_role_key_required_now": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_connection_performed": false,
+    "supabase_table_created": false,
+    "supabase_schema_modified": false,
+    "seed_data_inserted": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "runtime_calculation_executed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
