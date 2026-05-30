@@ -1,0 +1,79 @@
+{
+  "module_id": "AD03",
+  "title": "Regional Difference Decision Matrix",
+  "status": "regional_difference_decision_matrix_recorded",
+  "difference_types": [
+    {
+      "difference_type": "amanta_vs_purnimanta_masa",
+      "impacted_profiles": [
+        "north_india_general",
+        "south_indian_panchangam"
+      ],
+      "handling_rule": "Store both canonical field options where needed; public output must identify active regional profile."
+    },
+    {
+      "difference_type": "sunrise_tithi_vs_time_window_rule",
+      "impacted_profiles": [
+        "north_india_general",
+        "east_india_bihar_mithila",
+        "south_indian_panchangam"
+      ],
+      "handling_rule": "Future festival/vrata rule records must specify whether sunrise, pradosha, nishita or other time-window rules apply."
+    },
+    {
+      "difference_type": "regional_festival_observance_variation",
+      "impacted_profiles": [
+        "east_india_bihar_mithila",
+        "south_indian_panchangam",
+        "north_india_general"
+      ],
+      "handling_rule": "Do not collapse regional observance differences into a single final date without explanatory profile metadata."
+    },
+    {
+      "difference_type": "language_and_display_convention",
+      "impacted_profiles": [
+        "north_india_general",
+        "east_india_bihar_mithila",
+        "south_indian_panchangam"
+      ],
+      "handling_rule": "Separate internal key, Sanskrit label, regional/local display label and English explanation."
+    },
+    {
+      "difference_type": "place_based_sunrise_difference",
+      "impacted_profiles": [
+        "location_specific_sunrise_profile"
+      ],
+      "handling_rule": "Future Panchang calculations must include location/timezone; AD03 only records this requirement."
+    }
+  ],
+  "blocked_state": {
+    "ad03_regional_panchang_rule_profiles_recorded": true,
+    "ad02_consumed": true,
+    "regional_profile_doctrine_recorded": true,
+    "north_india_profile_recorded": true,
+    "east_india_bihar_mithila_profile_recorded": true,
+    "south_indian_panchangam_profile_recorded": true,
+    "location_specific_sunrise_profile_recorded": true,
+    "regional_difference_matrix_recorded": true,
+    "source_requirement_map_recorded": true,
+    "ready_for_ad04": true,
+    "ag47_resume_allowed": false,
+    "homepage_mutated": false,
+    "public_content_generated": false,
+    "panchang_prediction_generated": false,
+    "panchang_calculation_executed": false,
+    "festival_date_finalised": false,
+    "regional_rule_applied_to_public_output": false,
+    "panchang_daily_record_seeded": false,
+    "live_source_fetch_executed": false,
+    "web_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "sql_executed": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
