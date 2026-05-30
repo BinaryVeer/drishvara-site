@@ -1,0 +1,33 @@
+{
+  "module_id": "ADB15",
+  "title": "Seed Row-count Verification Result",
+  "status": "row_count_verification_passed",
+  "verification_method": "operator_ran_total_seed_rows_query_in_supabase_sql_editor",
+  "total_seed_rows_expected_minimum": 1,
+  "total_seed_rows_observed": 45,
+  "verification_result": "passed",
+  "notes": [
+    "The earlier malformed array literal was corrected in ADB14 array-casting patch.",
+    "The second manual Supabase execution succeeded.",
+    "The aggregate row-count query returned 45 total seed rows."
+  ],
+  "blocked_state": {
+    "adb15_seed_insertion_result_captured": true,
+    "adb14_consumed": true,
+    "manual_supabase_seed_insertion_succeeded": true,
+    "total_seed_rows_verified": 45,
+    "seed_foundation_available_in_supabase": true,
+    "ready_for_adb16_runtime_decision_checkpoint": true,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}

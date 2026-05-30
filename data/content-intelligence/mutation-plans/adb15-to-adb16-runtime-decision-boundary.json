@@ -1,0 +1,41 @@
+{
+  "module_id": "ADB15",
+  "title": "ADB15 to ADB16 Runtime Decision Boundary",
+  "status": "adb16_runtime_decision_boundary_created",
+  "next_stage_id": "ADB16",
+  "next_stage_title": "Runtime Calculation Decision Checkpoint",
+  "allowed_scope": [
+    "Decide whether to start runtime calculation-engine planning.",
+    "Review seed foundation sufficiency.",
+    "Plan additional seed expansion if required.",
+    "Plan Panchanga calculation dry-run strategy if approved.",
+    "Keep public runtime/backend/Auth/deployment blocked unless separately approved."
+  ],
+  "blocked_scope_by_default": [
+    "Runtime Panchanga calculation execution",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure in repo/chat",
+    "AG47 resume without explicit decision"
+  ],
+  "blocked_state": {
+    "adb15_seed_insertion_result_captured": true,
+    "adb14_consumed": true,
+    "manual_supabase_seed_insertion_succeeded": true,
+    "total_seed_rows_verified": 45,
+    "seed_foundation_available_in_supabase": true,
+    "ready_for_adb16_runtime_decision_checkpoint": true,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
