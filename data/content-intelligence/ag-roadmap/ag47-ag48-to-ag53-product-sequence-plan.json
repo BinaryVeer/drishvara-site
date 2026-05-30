@@ -1,0 +1,81 @@
+{
+  "module_id": "AG47",
+  "title": "AG48 to AG53 Product Sequence Plan",
+  "status": "ag48_to_ag53_product_sequence_recorded",
+  "planned_sequence": [
+    {
+      "stage_id": "AG48",
+      "title": "Panchang and Festival Surface Scaffold",
+      "scope": "Create governed static/non-runtime surface structure for Panchang and Festival view.",
+      "blocked": [
+        "runtime calculation",
+        "live DB read",
+        "public generated Panchang"
+      ]
+    },
+    {
+      "stage_id": "AG49",
+      "title": "Today's Vedic Guidance Surface Scaffold",
+      "scope": "Create non-deterministic guidance surface structure using safety and review controls.",
+      "blocked": [
+        "automated guidance generation",
+        "predictive/fear-based claims"
+      ]
+    },
+    {
+      "stage_id": "AG50",
+      "title": "Word of the Day and Reflection Surface Scaffold",
+      "scope": "Create word/reflection surface using corpus governance, attribution and review states.",
+      "blocked": [
+        "unreviewed Sanskrit/mantra publication"
+      ]
+    },
+    {
+      "stage_id": "AG51",
+      "title": "Star Reflection Surface Scaffold",
+      "scope": "Create star-reflection product surface without runtime/prediction activation.",
+      "blocked": [
+        "astrological prediction claims",
+        "runtime calculation"
+      ]
+    },
+    {
+      "stage_id": "AG52",
+      "title": "User Personalisation and Account Boundary",
+      "scope": "Plan personalization/account boundary without activating Auth.",
+      "blocked": [
+        "Auth activation",
+        "personal data collection"
+      ]
+    },
+    {
+      "stage_id": "AG53",
+      "title": "Assessment and Insight Layer Governance",
+      "scope": "Plan psychometric/assessment/AI-insight governance without production activation.",
+      "blocked": [
+        "high-stakes assessment output",
+        "unvalidated AI profiling"
+      ]
+    }
+  ],
+  "blocked_state": {
+    "ag47_governed_return_recorded": true,
+    "adb20_consumed": true,
+    "adb_foundation_preserved_as_source_of_truth": true,
+    "ads_gaps_carried_forward": true,
+    "daily_surface_sequence_recorded": true,
+    "ready_for_ag48_panchang_festival_surface": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

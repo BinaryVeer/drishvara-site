@@ -1,0 +1,57 @@
+{
+  "module_id": "AG47",
+  "title": "ADS Gap Carry-forward Map",
+  "status": "ads_gap_carry_forward_recorded",
+  "carried_forward_gaps": [
+    {
+      "ads_id": "ADS03",
+      "gap": "Full Panchanga master corpus expansion remains future work.",
+      "effect_on_ag": "AG48 may scaffold Panchang/Festival surface but must not claim full runtime coverage."
+    },
+    {
+      "ads_id": "ADS04",
+      "gap": "Full regional rule-profile depth remains future work.",
+      "effect_on_ag": "Regional differences must be shown as under review where applicable."
+    },
+    {
+      "ads_id": "ADS05",
+      "gap": "Word/Sutra/Reflection corpus is basic, not rich.",
+      "effect_on_ag": "Word/reflection surfaces should use placeholder/governed scaffold until corpus expansion."
+    },
+    {
+      "ads_id": "ADS06",
+      "gap": "Guidance/Star Reflection rule seed data is partial.",
+      "effect_on_ag": "Guidance and star-reflection surfaces must remain non-deterministic and review-gated."
+    },
+    {
+      "ads_id": "ADS07",
+      "gap": "Daily Panchang generation/loading strategy is planned but not executed.",
+      "effect_on_ag": "No generated Panchang output should be published."
+    },
+    {
+      "ads_id": "API_RUNTIME",
+      "gap": "Website database reading/API runtime is deferred.",
+      "effect_on_ag": "AG surfaces must not query Supabase live."
+    }
+  ],
+  "blocked_state": {
+    "ag47_governed_return_recorded": true,
+    "adb20_consumed": true,
+    "adb_foundation_preserved_as_source_of_truth": true,
+    "ads_gaps_carried_forward": true,
+    "daily_surface_sequence_recorded": true,
+    "ready_for_ag48_panchang_festival_surface": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

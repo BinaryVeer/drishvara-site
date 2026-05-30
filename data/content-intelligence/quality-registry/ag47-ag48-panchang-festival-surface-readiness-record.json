@@ -1,0 +1,44 @@
+{
+  "module_id": "AG47",
+  "title": "AG48 Panchang Festival Surface Readiness Record",
+  "status": "ready_for_ag48_panchang_festival_surface",
+  "ready_for_ag48": true,
+  "next_stage_id": "AG48",
+  "next_stage_title": "Panchang and Festival Surface Scaffold",
+  "ag48_allowed_scope": [
+    "Create governed Panchang/Festival surface scaffold.",
+    "Use ADB20/ADS reconciliation as source-of-truth.",
+    "Show runtime/API status as deferred where needed.",
+    "Preserve regional difference and public-use review boundaries."
+  ],
+  "ag48_blocked_scope": [
+    "Runtime Panchang calculation execution.",
+    "Website database-reading/API runtime activation.",
+    "Backend/Auth/Supabase runtime activation.",
+    "RLS public policy activation.",
+    "Deployment without explicit approval.",
+    "Service-role key exposure.",
+    "Public generated Panchang output."
+  ],
+  "hard_blocker_count_for_ag48": 0,
+  "blocked_state": {
+    "ag47_governed_return_recorded": true,
+    "adb20_consumed": true,
+    "adb_foundation_preserved_as_source_of_truth": true,
+    "ads_gaps_carried_forward": true,
+    "daily_surface_sequence_recorded": true,
+    "ready_for_ag48_panchang_festival_surface": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}

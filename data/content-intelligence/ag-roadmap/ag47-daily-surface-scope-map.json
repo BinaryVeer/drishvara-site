@@ -1,0 +1,74 @@
+{
+  "module_id": "AG47",
+  "title": "Daily Surface Scope Map",
+  "status": "daily_surface_scope_map_recorded",
+  "product_surface_families": [
+    {
+      "surface_id": "SURFACE-PANCHANG-FESTIVAL",
+      "name": "Panchang and Festival View",
+      "source_foundation": [
+        "ADS03",
+        "ADS04",
+        "ADS07",
+        "ADS08"
+      ],
+      "next_likely_stage": "AG48",
+      "runtime_requirement": "deferred",
+      "public_output_status": "not_generated"
+    },
+    {
+      "surface_id": "SURFACE-VEDIC-GUIDANCE",
+      "name": "Today's Vedic Guidance",
+      "source_foundation": [
+        "ADS06",
+        "ADS08"
+      ],
+      "next_likely_stage": "AG49",
+      "runtime_requirement": "deferred",
+      "public_output_status": "not_generated"
+    },
+    {
+      "surface_id": "SURFACE-WORD-REFLECTION",
+      "name": "Word of the Day / Sutra / Reflection",
+      "source_foundation": [
+        "ADS05",
+        "ADS08"
+      ],
+      "next_likely_stage": "AG50",
+      "runtime_requirement": "not_required_for_first_static_scaffold",
+      "public_output_status": "not_generated"
+    },
+    {
+      "surface_id": "SURFACE-STAR-REFLECTION",
+      "name": "Star Reflection",
+      "source_foundation": [
+        "ADS06",
+        "ADS08"
+      ],
+      "next_likely_stage": "AG51",
+      "runtime_requirement": "deferred",
+      "public_output_status": "not_generated"
+    }
+  ],
+  "public_display_policy": "AG stages may scaffold surfaces, but live database/runtime content must remain disabled unless later approved.",
+  "blocked_state": {
+    "ag47_governed_return_recorded": true,
+    "adb20_consumed": true,
+    "adb_foundation_preserved_as_source_of_truth": true,
+    "ads_gaps_carried_forward": true,
+    "daily_surface_sequence_recorded": true,
+    "ready_for_ag48_panchang_festival_surface": true,
+    "runtime_calculation_execution_approved_now": false,
+    "runtime_calculation_executed": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "rls_public_policy_activation_performed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}
