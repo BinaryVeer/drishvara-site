@@ -1,0 +1,48 @@
+{
+  "module_id": "AG46A",
+  "title": "Featured Reads Source-of-Truth Consumption Map",
+  "status": "featured_reads_source_of_truth_consumption_map_recorded",
+  "consumed_source_of_truth_records": {
+    "ag43z_article_intelligence_quality_closure": "data/content-intelligence/closure-records/ag43z-article-intelligence-quality-automation-closure.json",
+    "ag43z_article_quality_review": "data/content-intelligence/quality-reviews/ag43z-article-intelligence-quality-automation-closure.json",
+    "ag45z_daily_signal_surface_closure": "data/content-intelligence/closure-records/ag45z-daily-signal-surface-first-light-closure.json",
+    "ag45z_daily_signal_review": "data/content-intelligence/quality-reviews/ag45z-daily-signal-surface-first-light-closure.json",
+    "ag45z_carry_forward": "data/content-intelligence/quality-registry/ag45z-carry-forward-register.json"
+  },
+  "consumption_rules": [
+    "AG46 must consume AG43 article intelligence and quality automation closure as the article-quality source of truth.",
+    "AG46 must consume AG45 Daily Signal Surface and First Light closure where Featured Reads needs daily-signal/reference learning.",
+    "AG46 must not recreate AG43 article-quality modules.",
+    "AG46 must not recreate AG45 Daily Signal Surface modules.",
+    "AG46 must record only delta production-strengthening rules for Featured Reads.",
+    "AG46 must keep public publication, article mutation, reference fetching and image generation blocked unless later explicitly approved."
+  ],
+  "blocked_state": {
+    "ag46a_featured_reads_production_strengthening_entry_recorded": true,
+    "ag43z_consumed": true,
+    "ag45z_consumed": true,
+    "source_of_truth_consumption_map_recorded": true,
+    "production_scope_guard_recorded": true,
+    "no_duplicate_governance_map_recorded": true,
+    "delta_strengthening_register_recorded": true,
+    "ready_for_ag46b": true,
+    "featured_reads_publication_executed": false,
+    "article_mutated": false,
+    "article_generated": false,
+    "reference_fetch_executed": false,
+    "image_fetch_executed": false,
+    "image_generation_executed": false,
+    "video_fetch_executed": false,
+    "homepage_mutated": false,
+    "public_card_rendering_activated": false,
+    "daily_signal_fetch_executed": false,
+    "news_scraping_executed": false,
+    "sql_file_created": false,
+    "sql_migration_created": false,
+    "database_write_performed": false,
+    "supabase_table_created": false,
+    "backend_auth_supabase_activation_performed": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false
+  }
+}
