@@ -1,0 +1,41 @@
+{
+  "module_id": "ADB14",
+  "title": "ADB14 to ADB15 Seed Insertion Result Boundary",
+  "status": "adb15_seed_insertion_result_boundary_created",
+  "next_stage_id": "ADB15",
+  "next_stage_title": "Seed Insertion Result Capture and Verification",
+  "allowed_scope": [
+    "Capture Supabase seed insertion result.",
+    "Verify seed table row counts.",
+    "Record inserted/skipped rows if available.",
+    "Confirm no runtime calculation was activated.",
+    "Confirm backend/Auth/deployment remain blocked."
+  ],
+  "blocked_scope": [
+    "Runtime calculation execution",
+    "Backend/Auth/Supabase runtime activation",
+    "RLS public policy activation",
+    "Deployment",
+    "Service-role key exposure in repo/chat",
+    "AG47 resume"
+  ],
+  "blocked_state": {
+    "adb14_seed_insertion_approval_package_recorded": true,
+    "adb13_consumed": true,
+    "seed_insert_sql_generated": true,
+    "seed_insert_approved_for_manual_operator_execution": true,
+    "ready_for_adb15_seed_insertion_result_capture": true,
+    "seed_data_inserted_by_repo": false,
+    "database_write_performed_by_repo": false,
+    "runtime_calculation_approved": false,
+    "runtime_calculation_executed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false,
+    "ag47_resume_allowed": false
+  }
+}
