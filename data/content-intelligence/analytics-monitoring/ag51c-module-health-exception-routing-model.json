@@ -1,0 +1,96 @@
+{
+  "module_id": "AG51C",
+  "title": "Module Health Exception Routing Model",
+  "status": "module_health_exception_routing_model_recorded",
+  "planned_module_exception_routes_design_only": [
+    {
+      "module": "First Light",
+      "exception_routes": [
+        "topic_score_gap",
+        "daily_surface_gap",
+        "homepage_surface_gap",
+        "manual_review_required"
+      ]
+    },
+    {
+      "module": "Episodes",
+      "exception_routes": [
+        "calendar_gap",
+        "episode_readiness_gap",
+        "listing_gap",
+        "manual_review_required"
+      ]
+    },
+    {
+      "module": "Featured Reads",
+      "exception_routes": [
+        "article_quality_gap",
+        "reference_gap",
+        "image_credit_gap",
+        "listing_gap",
+        "manual_review_required"
+      ]
+    },
+    {
+      "module": "Panchang/Festival",
+      "exception_routes": [
+        "seed_source_gap",
+        "regional_rule_gap",
+        "public_preview_gap",
+        "no_live_calculation_guard_review"
+      ]
+    },
+    {
+      "module": "Word/Reflection",
+      "exception_routes": [
+        "word_bank_gap",
+        "translation_gap",
+        "reflection_prompt_gap",
+        "personalisation_disabled_guard_review"
+      ]
+    }
+  ],
+  "runtime_position": {
+    "module_exception_runtime_enabled_now": false,
+    "routing_job_enabled_now": false,
+    "queue_mutation_enabled_now": false
+  },
+  "blocked_state": {
+    "ag51c_audit_error_exception_tracking_model_recorded": true,
+    "ag51b_consumed": true,
+    "audit_error_exception_taxonomy_recorded": true,
+    "broken_url_reference_exception_model_recorded": true,
+    "image_credit_exception_model_recorded": true,
+    "layout_language_safety_exception_model_recorded": true,
+    "module_health_exception_routing_model_recorded": true,
+    "rollback_manual_review_exception_boundary_recorded": true,
+    "ready_for_ag51d_dashboard_planning_audit": true,
+    "live_dashboard_enabled": false,
+    "exception_dashboard_runtime_enabled": false,
+    "analytics_runtime_enabled": false,
+    "article_health_runtime_enabled": false,
+    "module_health_runtime_enabled": false,
+    "health_score_runtime_enabled": false,
+    "runtime_database_query_enabled": false,
+    "monitoring_job_enabled": false,
+    "scheduled_monitoring_job_enabled": false,
+    "automated_link_checking_enabled": false,
+    "automated_reference_checking_enabled": false,
+    "automated_image_checking_enabled": false,
+    "external_fetch_or_api_enabled": false,
+    "exception_auto_resolution_enabled": false,
+    "editorial_assignment_mutation_enabled": false,
+    "queue_mutation_enabled": false,
+    "github_write_enabled": false,
+    "public_content_mutation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "supabase_auth_backend_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_dashboard_exposed": false
+  }
+}

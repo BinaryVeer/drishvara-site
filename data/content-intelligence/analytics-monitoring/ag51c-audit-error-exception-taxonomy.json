@@ -1,0 +1,105 @@
+{
+  "module_id": "AG51C",
+  "title": "Audit / Error / Exception Taxonomy",
+  "status": "audit_error_exception_taxonomy_recorded",
+  "exception_groups_design_only": [
+    {
+      "group": "reference_exceptions",
+      "examples": [
+        "missing_reference",
+        "broken_reference",
+        "unverified_reference",
+        "irrelevant_reference",
+        "reference_under_editorial_verification"
+      ]
+    },
+    {
+      "group": "image_credit_exceptions",
+      "examples": [
+        "missing_image_credit",
+        "missing_image_source",
+        "unclear_image_rights_note",
+        "image_under_editorial_verification"
+      ]
+    },
+    {
+      "group": "layout_language_exceptions",
+      "examples": [
+        "layout_break",
+        "mobile_width_issue",
+        "language_toggle_issue",
+        "translation_quality_issue",
+        "article_readability_issue"
+      ]
+    },
+    {
+      "group": "quality_safety_exceptions",
+      "examples": [
+        "claim_language_risk",
+        "policy_boundary_pending",
+        "cultural_integrity_pending",
+        "source_confidence_pending"
+      ]
+    },
+    {
+      "group": "module_health_exceptions",
+      "examples": [
+        "module_surface_missing",
+        "listing_not_updated",
+        "handoff_gap",
+        "closure_record_missing"
+      ]
+    },
+    {
+      "group": "rollback_exception",
+      "examples": [
+        "rollback_record_missing",
+        "last_known_good_state_unclear",
+        "manual_review_required"
+      ]
+    }
+  ],
+  "runtime_position": {
+    "exception_tracking_runtime_enabled_now": false,
+    "exception_dashboard_enabled_now": false,
+    "design_only_taxonomy": true
+  },
+  "blocked_state": {
+    "ag51c_audit_error_exception_tracking_model_recorded": true,
+    "ag51b_consumed": true,
+    "audit_error_exception_taxonomy_recorded": true,
+    "broken_url_reference_exception_model_recorded": true,
+    "image_credit_exception_model_recorded": true,
+    "layout_language_safety_exception_model_recorded": true,
+    "module_health_exception_routing_model_recorded": true,
+    "rollback_manual_review_exception_boundary_recorded": true,
+    "ready_for_ag51d_dashboard_planning_audit": true,
+    "live_dashboard_enabled": false,
+    "exception_dashboard_runtime_enabled": false,
+    "analytics_runtime_enabled": false,
+    "article_health_runtime_enabled": false,
+    "module_health_runtime_enabled": false,
+    "health_score_runtime_enabled": false,
+    "runtime_database_query_enabled": false,
+    "monitoring_job_enabled": false,
+    "scheduled_monitoring_job_enabled": false,
+    "automated_link_checking_enabled": false,
+    "automated_reference_checking_enabled": false,
+    "automated_image_checking_enabled": false,
+    "external_fetch_or_api_enabled": false,
+    "exception_auto_resolution_enabled": false,
+    "editorial_assignment_mutation_enabled": false,
+    "queue_mutation_enabled": false,
+    "github_write_enabled": false,
+    "public_content_mutation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "supabase_auth_backend_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_dashboard_exposed": false
+  }
+}
