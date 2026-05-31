@@ -1,0 +1,62 @@
+{
+  "module_id": "AG51Z",
+  "title": "AG51A to AG51D Consumption Summary",
+  "status": "ag51a_to_ag51d_consumption_summarised",
+  "consumed_outputs": [
+    {
+      "stage_id": "AG51A",
+      "consumed_boundary": "editorial monitoring panel model, review queue model, assignment/return model, reference/image-credit monitoring model",
+      "result": "editorial monitoring remains planning-only"
+    },
+    {
+      "stage_id": "AG51B",
+      "consumed_boundary": "article health metrics, module health metrics, content surface status, reference/image-credit health and quality gate health",
+      "result": "article/module health scoring remains non-runtime"
+    },
+    {
+      "stage_id": "AG51C",
+      "consumed_boundary": "audit/error/exception taxonomy, broken URL/reference model, image-credit exception model, layout/language/safety model and rollback/manual review boundary",
+      "result": "exception tracking remains non-runtime with no automated checking or auto-resolution"
+    },
+    {
+      "stage_id": "AG51D",
+      "consumed_boundary": "dashboard planning audit, panel readiness audit and runtime blocker continuity audit",
+      "result": "AG51 closure readiness confirmed"
+    }
+  ],
+  "blocked_state": {
+    "ag51z_analytics_monitoring_closed": true,
+    "ag51a_ag51b_ag51c_ag51d_consumed": true,
+    "analytics_monitoring_closure_completed": true,
+    "post_ag51_roadmap_checkpoint_handoff_created": true,
+    "ready_for_post_ag51_roadmap_checkpoint": true,
+    "live_dashboard_enabled": false,
+    "dashboard_runtime_enabled": false,
+    "exception_dashboard_runtime_enabled": false,
+    "analytics_runtime_enabled": false,
+    "article_health_runtime_enabled": false,
+    "module_health_runtime_enabled": false,
+    "health_score_runtime_enabled": false,
+    "runtime_database_query_enabled": false,
+    "monitoring_job_enabled": false,
+    "scheduled_monitoring_job_enabled": false,
+    "automated_link_checking_enabled": false,
+    "automated_reference_checking_enabled": false,
+    "automated_image_checking_enabled": false,
+    "external_fetch_or_api_enabled": false,
+    "exception_auto_resolution_enabled": false,
+    "editorial_assignment_mutation_enabled": false,
+    "queue_mutation_enabled": false,
+    "github_write_enabled": false,
+    "public_content_mutation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "supabase_auth_backend_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_dashboard_exposed": false
+  }
+}
