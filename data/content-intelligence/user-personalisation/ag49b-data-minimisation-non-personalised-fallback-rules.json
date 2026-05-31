@@ -1,0 +1,53 @@
+{
+  "module_id": "AG49B",
+  "title": "Data Minimisation and Non-personalised Fallback Rules",
+  "status": "data_minimisation_non_personalised_fallback_recorded",
+  "minimisation_rules": [
+    "Do not collect a profile field unless it is required for an approved feature.",
+    "Prefer non-personalised content where possible.",
+    "Use optional preferences before sensitive traits.",
+    "Do not infer sensitive traits from behaviour without explicit consent.",
+    "Do not require birth details for general reflection or cultural content.",
+    "Keep account-free fallback available until Auth is explicitly approved."
+  ],
+  "fallback_position": {
+    "non_personalised_fallback_required": true,
+    "account_free_use_preserved_now": true,
+    "personalised_output_enabled_now": false
+  },
+  "blocked_state": {
+    "ag49b_consent_entitlement_sensitive_data_gate_recorded": true,
+    "ag49a_consumed": true,
+    "consent_model_gate_recorded": true,
+    "entitlement_access_gate_recorded": true,
+    "sensitive_data_classification_recorded": true,
+    "blocked_by_default_field_register_recorded": true,
+    "minimisation_fallback_rules_recorded": true,
+    "consent_withdrawal_export_deletion_boundary_recorded": true,
+    "ready_for_ag49c_personalisation_logic_safety": true,
+    "auth_activation_approved_now": false,
+    "auth_activation_performed": false,
+    "user_account_creation_enabled": false,
+    "profile_creation_enabled": false,
+    "personal_data_collection_enabled": false,
+    "consent_collection_enabled": false,
+    "entitlement_runtime_enabled": false,
+    "birth_detail_collection_enabled": false,
+    "sensitive_data_collection_enabled": false,
+    "location_collection_enabled": false,
+    "religious_practice_collection_enabled": false,
+    "psychometric_data_collection_enabled": false,
+    "personalised_reflection_enabled": false,
+    "personalised_guidance_generation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_personalised_output_generated": false,
+    "public_content_generated": false
+  }
+}

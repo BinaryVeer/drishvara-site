@@ -1,0 +1,86 @@
+{
+  "module_id": "AG49B",
+  "title": "No Personal Data Collection Audit",
+  "status": "no_personal_data_collection_audit_passed",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "personal_data_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "consent_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "birth_detail_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "sensitive_data_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "location_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "religious_practice_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "psychometric_data_collection_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "ag49b_consent_entitlement_sensitive_data_gate_recorded": true,
+    "ag49a_consumed": true,
+    "consent_model_gate_recorded": true,
+    "entitlement_access_gate_recorded": true,
+    "sensitive_data_classification_recorded": true,
+    "blocked_by_default_field_register_recorded": true,
+    "minimisation_fallback_rules_recorded": true,
+    "consent_withdrawal_export_deletion_boundary_recorded": true,
+    "ready_for_ag49c_personalisation_logic_safety": true,
+    "auth_activation_approved_now": false,
+    "auth_activation_performed": false,
+    "user_account_creation_enabled": false,
+    "profile_creation_enabled": false,
+    "personal_data_collection_enabled": false,
+    "consent_collection_enabled": false,
+    "entitlement_runtime_enabled": false,
+    "birth_detail_collection_enabled": false,
+    "sensitive_data_collection_enabled": false,
+    "location_collection_enabled": false,
+    "religious_practice_collection_enabled": false,
+    "psychometric_data_collection_enabled": false,
+    "personalised_reflection_enabled": false,
+    "personalised_guidance_generation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_personalised_output_generated": false,
+    "public_content_generated": false
+  }
+}
