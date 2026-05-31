@@ -1,0 +1,99 @@
+{
+  "module_id": "AG49A",
+  "title": "Profile Field Gap Register",
+  "status": "profile_field_gap_register_recorded",
+  "field_groups_for_future_review": [
+    {
+      "group": "account_identity",
+      "examples": [
+        "user_id",
+        "email_hash",
+        "display_name_optional"
+      ],
+      "required_before_activation": [
+        "consent basis",
+        "storage basis",
+        "access control",
+        "deletion path"
+      ]
+    },
+    {
+      "group": "preference_profile",
+      "examples": [
+        "language_preference",
+        "content_interest",
+        "notification_preference"
+      ],
+      "required_before_activation": [
+        "explicit opt-in",
+        "edit path",
+        "disable path"
+      ]
+    },
+    {
+      "group": "cultural_personalisation",
+      "examples": [
+        "region",
+        "tradition_context",
+        "calendar_preference"
+      ],
+      "required_before_activation": [
+        "non-discrimination note",
+        "manual review",
+        "no deterministic claim"
+      ]
+    },
+    {
+      "group": "sensitive_or_high_risk_fields",
+      "examples": [
+        "birth details",
+        "location",
+        "religious practice",
+        "psychometric traits"
+      ],
+      "required_before_activation": [
+        "separate explicit consent",
+        "purpose limitation",
+        "minimisation",
+        "privacy/legal review"
+      ]
+    }
+  ],
+  "blocking_gaps_for_ag49b": [],
+  "carry_forward_gaps": [
+    "Actual field list must be approved before any account/profile activation.",
+    "Sensitive fields must be separately classified in AG49B.",
+    "Consent and entitlement model must be defined before collection.",
+    "RLS/Auth/access model must remain deferred until explicit backend approval.",
+    "No user-facing profile form may be introduced in AG49A."
+  ],
+  "blocked_state": {
+    "ag49a_user_profile_model_consumed": true,
+    "ag48z_consumed": true,
+    "d07_subscriber_schema_candidates_reviewed": true,
+    "daily_guidance_subscriber_schema_candidates_reviewed": true,
+    "profile_field_gap_register_recorded": true,
+    "disabled_now_state_register_recorded": true,
+    "privacy_risk_precheck_recorded": true,
+    "ready_for_ag49b_consent_entitlement_sensitive_data_gate": true,
+    "auth_activation_approved_now": false,
+    "auth_activation_performed": false,
+    "user_account_creation_enabled": false,
+    "profile_creation_enabled": false,
+    "personal_data_collection_enabled": false,
+    "birth_detail_collection_enabled": false,
+    "sensitive_data_collection_enabled": false,
+    "personalised_reflection_enabled": false,
+    "personalised_guidance_generation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_personalised_output_generated": false,
+    "public_content_generated": false
+  }
+}

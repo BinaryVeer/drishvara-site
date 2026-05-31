@@ -1,0 +1,50 @@
+{
+  "module_id": "AG49A",
+  "title": "Privacy Risk Precheck Record",
+  "status": "privacy_risk_precheck_recorded",
+  "risk_flags_for_ag49b": [
+    "personal data collection requires explicit consent and purpose limitation",
+    "birth details and location are sensitive/high-risk in spiritual/astrological contexts",
+    "profile-based guidance can imply personalised claims and must be non-deterministic",
+    "minor/child-related data requires separate protection if ever introduced",
+    "user deletion/export/withdrawal paths must exist before account activation",
+    "backend/Auth/RLS must be explicitly approved before any live profile data path"
+  ],
+  "ag49b_required_focus": [
+    "consent model",
+    "entitlement model",
+    "sensitive data classification",
+    "data minimisation",
+    "blocked fields until privacy approval",
+    "non-personalised fallback state"
+  ],
+  "blocked_state": {
+    "ag49a_user_profile_model_consumed": true,
+    "ag48z_consumed": true,
+    "d07_subscriber_schema_candidates_reviewed": true,
+    "daily_guidance_subscriber_schema_candidates_reviewed": true,
+    "profile_field_gap_register_recorded": true,
+    "disabled_now_state_register_recorded": true,
+    "privacy_risk_precheck_recorded": true,
+    "ready_for_ag49b_consent_entitlement_sensitive_data_gate": true,
+    "auth_activation_approved_now": false,
+    "auth_activation_performed": false,
+    "user_account_creation_enabled": false,
+    "profile_creation_enabled": false,
+    "personal_data_collection_enabled": false,
+    "birth_detail_collection_enabled": false,
+    "sensitive_data_collection_enabled": false,
+    "personalised_reflection_enabled": false,
+    "personalised_guidance_generation_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_personalised_output_generated": false,
+    "public_content_generated": false
+  }
+}
