@@ -1,0 +1,78 @@
+{
+  "module_id": "AG50A",
+  "title": "Multi-agent Assessment Architecture",
+  "status": "multi_agent_architecture_recorded",
+  "architecture_layers": [
+    {
+      "layer": "Secure student identity layer",
+      "function": "map records to unique encrypted or pseudonymous student code",
+      "runtime_enabled_now": false
+    },
+    {
+      "layer": "Age-adaptive assessment layer",
+      "function": "select age/class-appropriate questionnaire, tasks and observation inputs",
+      "runtime_enabled_now": false
+    },
+    {
+      "layer": "Agent 1 assessment output collector",
+      "function": "collect basic allowed data and model-wise outputs against encrypted code",
+      "runtime_enabled_now": false
+    },
+    {
+      "layer": "Agent 2 correlation and validation engine",
+      "function": "compare model outputs with academic results, learning indicators and observations using statistical methods",
+      "runtime_enabled_now": false
+    },
+    {
+      "layer": "Agent 3 contradiction/error flagging agent",
+      "function": "flag mismatch, contradiction, bias signal, output-vs-observed trait gaps and human-review cases",
+      "runtime_enabled_now": false
+    },
+    {
+      "layer": "Human review layer",
+      "function": "teacher/counsellor/guardian-facing interpretation before any support guidance",
+      "runtime_enabled_now": false
+    }
+  ],
+  "blocked_state": {
+    "ag50a_assessment_psychometric_entry_recorded": true,
+    "ag49z_consumed": true,
+    "class5_onward_doctrine_recorded": true,
+    "age_adaptive_band_model_recorded": true,
+    "multi_agent_architecture_recorded": true,
+    "methodology_validation_approach_recorded": true,
+    "child_minor_data_blocker_recorded": true,
+    "non_diagnostic_non_deterministic_boundary_recorded": true,
+    "ready_for_ag50b_child_minor_consent_school_permission_gate": true,
+    "student_data_collection_enabled": false,
+    "child_minor_profile_creation_enabled": false,
+    "guardian_consent_runtime_enabled": false,
+    "school_permission_runtime_enabled": false,
+    "psychometric_test_runtime_enabled": false,
+    "assessment_runtime_scoring_enabled": false,
+    "academic_result_upload_enabled": false,
+    "teacher_observation_upload_enabled": false,
+    "model_output_correlation_runtime_enabled": false,
+    "ai_generated_student_report_enabled": false,
+    "diagnosis_enabled": false,
+    "deterministic_career_prediction_enabled": false,
+    "student_ranking_enabled": false,
+    "auth_activation_approved_now": false,
+    "auth_activation_performed": false,
+    "user_account_creation_enabled": false,
+    "profile_creation_enabled": false,
+    "personal_data_collection_enabled": false,
+    "birth_detail_collection_enabled": false,
+    "sensitive_data_collection_enabled": false,
+    "psychometric_data_collection_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "service_role_key_exposed": false,
+    "public_content_generated": false
+  }
+}
