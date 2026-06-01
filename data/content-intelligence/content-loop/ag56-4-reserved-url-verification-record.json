@@ -1,0 +1,90 @@
+{
+  "module_id": "AG56.4",
+  "title": "Reserved URL Verification Record",
+  "status": "reserved_url_path_verified_against_manifest",
+  "audit_passed": true,
+  "publish_test_id": "AG56-3-PUBLISH-TEST-001",
+  "candidate_id": "AG56-1-CANDIDATE-001",
+  "reserved_slug": "attention-rhythm-after-endless-feeds",
+  "intended_public_path": "/reads/attention-rhythm-after-endless-feeds",
+  "verification_mode": "static_manifest_path_verification_only",
+  "path_checks": [
+    {
+      "check_id": "path_starts_with_reads",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "check_id": "slug_matches_manifest",
+      "expected": "attention-rhythm-after-endless-feeds",
+      "actual": "attention-rhythm-after-endless-feeds",
+      "passed": true
+    },
+    {
+      "check_id": "no_live_route_created",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "no_live_url_checked",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "no_deployment_required",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "public_route_created_now": false,
+  "actual_public_url_live_now": false,
+  "live_public_check_executed_now": false,
+  "blocked_state": {
+    "ag56_4_public_url_listing_verification_recorded": true,
+    "ag56_3_consumed": true,
+    "reserved_url_path_verified_against_manifest": true,
+    "listing_manifest_verified": true,
+    "article_label_route_status_recorded": true,
+    "public_url_listing_verification_completed": true,
+    "ready_for_ag56_5_homepage_module_surface_verification": true,
+    "live_site_article_published": false,
+    "actual_public_url_live": false,
+    "public_route_created": false,
+    "public_listing_live_updated": false,
+    "homepage_live_updated": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "public_page_mutation_enabled": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "actual_deployment_triggered": false,
+    "vercel_deployment_triggered": false,
+    "github_release_created": false,
+    "live_public_check_executed": false,
+    "browser_automation_enabled": false,
+    "external_audit_api_enabled": false,
+    "homepage_surface_mutated_now": false,
+    "module_surface_mutated_now": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_used": false,
+    "service_role_key_exposed": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "runtime_publish_queue_enabled": false,
+    "runtime_cms_enabled": false,
+    "public_dashboard_exposed": false,
+    "external_fetch_enabled": false,
+    "ag56_5_homepage_surface_verification_executed": false,
+    "ag56_8_go_live_decision_made": false,
+    "actual_go_live_approval_granted": false,
+    "v02_item_activated": false
+  }
+}
