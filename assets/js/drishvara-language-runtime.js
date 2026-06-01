@@ -125,6 +125,7 @@
     "Clarity over noise": "शोर से अधिक स्पष्टता",
     "Depth over speed": "गति से अधिक गहराई",
     "Reflection over reaction": "प्रतिक्रिया से अधिक चिंतन",
+    "Discover → Read → Reflect": "खोजें → पढ़ें → चिंतन करें",
     "Prepared surface": "तैयार सतह",
     "Live-event cards will appear after editorial activation.": "संपादकीय सक्रियण के बाद लाइव इवेंट कार्ड दिखाई देंगे।",
     "Tournament cards are held for verified sports context.": "टूर्नामेंट कार्ड सत्यापित खेल संदर्भ के लिए रोके गए हैं।",

@@ -1,0 +1,22 @@
+{
+  "module_id": "AG58B",
+  "title": "AG58B Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag58aReview": "data/content-intelligence/quality-reviews/ag58a-final-static-release-candidate-build-readiness.json",
+    "ag58aBuildReadiness": "data/content-intelligence/release-candidate/ag58a-build-readiness-record.json",
+    "ag58aBuildManifest": "data/content-intelligence/release-candidate/ag58a-static-build-readiness-manifest.json",
+    "ag58aReadiness": "data/content-intelligence/quality-registry/ag58a-ag58b-static-route-page-surface-preview-readiness-record.json",
+    "ag58aBoundary": "data/content-intelligence/mutation-plans/ag58a-to-ag58b-static-route-page-surface-preview-boundary.json",
+    "indexHtml": "index.html",
+    "languageRuntime": "assets/js/drishvara-language-runtime.js"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "03c41a3",
+    "head_full": "03c41a3a393dc0be62b7b14dc258baef6bb64b34",
+    "origin_main": "03c41a3",
+    "status_at_generation": "M assets/js/drishvara-language-runtime.js\n M data/content-intelligence/release-candidate/ag58a-static-build-readiness-manifest.json\n M package.json\n?? scripts/generate-ag58b-static-route-page-surface-preview-verification.mjs\n?? scripts/validate-ag58b-static-route-page-surface-preview-verification.mjs"
+  },
+  "interpretation": "AG58B verifies static route/page/surface preview readiness after AG58A static build readiness. It does not deploy, run live checks, activate backend/runtime, use service-role keys or start V02."
+}

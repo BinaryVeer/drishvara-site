@@ -1,0 +1,20 @@
+{
+  "module_id": "AG58B",
+  "title": "AG58B to AG58Z Deployment Readiness Closure Boundary",
+  "status": "ag58z_deployment_readiness_closure_boundary_created",
+  "allowed_scope": [
+    "Close AG58 release-candidate readiness series.",
+    "Record that AG58A build readiness and AG58B static surface preview verification passed.",
+    "Prepare AG59 controlled public go-live decision stage."
+  ],
+  "blocked_scope": [
+    "deployment or Vercel trigger until AG59 explicit approval",
+    "GitHub release/tag creation until AG59 explicit approval",
+    "live public check until AG59 explicit approval",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
