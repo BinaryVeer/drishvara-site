@@ -1,0 +1,29 @@
+{
+  "module_id": "AG57Z",
+  "title": "AG58 Final Static Release Candidate Handoff Record",
+  "status": "ag58_final_static_release_candidate_handoff_recorded",
+  "next_series": "AG58",
+  "next_stage_id": "AG58A",
+  "next_stage_title": "Final Static Release Candidate Build Readiness",
+  "recommended_sequence": [
+    "AG58A — Final Static Release Candidate Build Readiness",
+    "AG58B — Static Route/Page/Surface Preview Verification",
+    "AG58Z — Deployment Readiness Closure"
+  ],
+  "ag58_allowed_scope": [
+    "Run local/static build verification.",
+    "Run validate:project.",
+    "Verify corrected homepage/static surfaces remain stable.",
+    "Prepare deployment readiness record without triggering deployment."
+  ],
+  "ag58_blocked_scope": [
+    "deployment or Vercel trigger unless separately approved",
+    "GitHub release/tag creation",
+    "live public check unless separately approved",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

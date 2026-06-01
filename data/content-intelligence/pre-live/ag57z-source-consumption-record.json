@@ -1,0 +1,26 @@
+{
+  "module_id": "AG57Z",
+  "title": "AG57Z Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag57cReview": "data/content-intelligence/quality-reviews/ag57c-defect-clearance-validation.json",
+    "ag57cValidation": "data/content-intelligence/pre-live/ag57c-defect-clearance-validation-record.json",
+    "ag57cPublicCopy": "data/content-intelligence/pre-live/ag57c-public-copy-validation-record.json",
+    "ag57cSignalRule": "data/content-intelligence/pre-live/ag57c-daily-signal-rule-validation-record.json",
+    "ag57cSafety": "data/content-intelligence/pre-live/ag57c-safety-boundary-validation-record.json",
+    "ag57cReadiness": "data/content-intelligence/quality-registry/ag57c-ag57z-pre-live-defect-clearance-closure-readiness-record.json",
+    "ag57cBoundary": "data/content-intelligence/mutation-plans/ag57c-to-ag57z-pre-live-defect-clearance-closure-boundary.json",
+    "ag57bReview": "data/content-intelligence/quality-reviews/ag57b-public-ui-content-correction.json",
+    "ag57bClearance": "data/content-intelligence/pre-live/ag57b-defect-clearance-record.json",
+    "ag57aReview": "data/content-intelligence/quality-reviews/ag57a-pre-live-defect-clearance-file-mapping.json",
+    "ag56zReview": "data/content-intelligence/quality-reviews/ag56z-version-01-live-closure.json"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "d28bcb7",
+    "head_full": "d28bcb790e632c8cdedd1d500e00ff3543a90d7f",
+    "origin_main": "d28bcb7",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag57z-pre-live-defect-clearance-closure.mjs\n?? scripts/validate-ag57z-pre-live-defect-clearance-closure.mjs"
+  },
+  "interpretation": "AG57Z closes the pre-live defect clearance series. AG57A mapped defects, AG57B applied actual UI/content corrections, and AG57C validated all five defects as cleared. No deployment, backend/runtime activation, service-role use or V02 expansion is performed."
+}

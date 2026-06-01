@@ -1,0 +1,21 @@
+{
+  "module_id": "AG57Z",
+  "title": "AG57Z to AG58A Final Static Release Candidate Build Readiness Boundary",
+  "status": "ag58a_final_static_release_candidate_build_readiness_boundary_created",
+  "allowed_scope": [
+    "Run local/static build verification.",
+    "Run validate:project.",
+    "Verify corrected homepage/static surfaces remain stable.",
+    "Prepare deployment readiness record without triggering deployment."
+  ],
+  "blocked_scope": [
+    "deployment or Vercel trigger unless separately approved",
+    "GitHub release/tag creation",
+    "live public check unless separately approved",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
