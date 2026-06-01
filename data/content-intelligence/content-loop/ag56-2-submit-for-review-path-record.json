@@ -1,0 +1,88 @@
+{
+  "module_id": "AG56.2",
+  "title": "Submit-for-Review Path Record",
+  "status": "submit_for_review_path_recorded",
+  "audit_passed": true,
+  "candidate_id": "AG56-1-CANDIDATE-001",
+  "simulated_review_queue": {
+    "queue_name": "AG56 controlled content review queue",
+    "submitter_role": "draft_generation_operator",
+    "reviewer_role": "admin_editor",
+    "submission_state": "submitted_for_review_record_only",
+    "runtime_queue_enabled": false,
+    "backend_queue_enabled": false,
+    "notification_sent": false
+  },
+  "submission_checks": [
+    {
+      "check_id": "single_candidate_only",
+      "result": "pass"
+    },
+    {
+      "check_id": "unpublished_candidate",
+      "result": "pass"
+    },
+    {
+      "check_id": "reference_status_recorded",
+      "result": "pass_pending_verification"
+    },
+    {
+      "check_id": "image_credit_status_recorded",
+      "result": "pass_pending_credit"
+    },
+    {
+      "check_id": "no_public_surface_mutation",
+      "result": "pass"
+    },
+    {
+      "check_id": "no_backend_runtime",
+      "result": "pass"
+    }
+  ],
+  "blocked_state": {
+    "ag56_2_admin_editor_review_workflow_test_recorded": true,
+    "ag56_1_consumed": true,
+    "ag26_admin_editor_context_consumed": true,
+    "editor_correction_path_recorded": true,
+    "submit_for_review_path_recorded": true,
+    "final_approval_workflow_recorded": true,
+    "review_decision_register_recorded": true,
+    "admin_editor_review_workflow_completed": true,
+    "candidate_ready_for_ag56_3_publish_test_decision": true,
+    "ready_for_ag56_3_controlled_publish_test": true,
+    "article_published": false,
+    "public_url_created": false,
+    "public_listing_updated": false,
+    "homepage_updated": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "public_page_mutation_enabled": false,
+    "ag56_3_publish_test_approved": false,
+    "ag56_3_publish_test_executed": false,
+    "ag56_8_go_live_decision_made": false,
+    "actual_go_live_approval_granted": false,
+    "actual_deployment_triggered": false,
+    "vercel_deployment_triggered": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "github_release_created": false,
+    "live_public_check_executed": false,
+    "browser_automation_enabled": false,
+    "external_audit_api_enabled": false,
+    "runtime_generation_api_called": false,
+    "runtime_review_queue_enabled": false,
+    "runtime_admin_account_enabled": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_used": false,
+    "service_role_key_exposed": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "public_dashboard_exposed": false,
+    "external_fetch_enabled": false,
+    "v02_item_activated": false
+  }
+}
