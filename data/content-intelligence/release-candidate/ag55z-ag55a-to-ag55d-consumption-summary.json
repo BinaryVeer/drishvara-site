@@ -1,0 +1,59 @@
+{
+  "module_id": "AG55Z",
+  "title": "AG55A to AG55D Consumption Summary",
+  "status": "ag55a_to_ag55d_consumption_summarised",
+  "consumed_outputs": [
+    {
+      "stage_id": "AG55A",
+      "result": "V01 scope frozen; V02 and dynamic/runtime items deferred."
+    },
+    {
+      "stage_id": "AG55B",
+      "result": "Completed repo stack, dependency records and old roadmap pointer reconciled."
+    },
+    {
+      "stage_id": "AG55C",
+      "result": "End-to-end release candidate validation readiness recorded."
+    },
+    {
+      "stage_id": "AG55D",
+      "result": "Go/no-go readiness review recommends AG55Z closure only; no actual go-live."
+    }
+  ],
+  "blocked_state": {
+    "ag55z_v01_release_candidate_closed": true,
+    "ag55a_ag55b_ag55c_ag55d_consumed": true,
+    "v01_release_candidate_closure_completed": true,
+    "ag56_1_controlled_dynamic_article_generation_handoff_created": true,
+    "ready_for_ag56_1_controlled_dynamic_article_generation_test": true,
+    "actual_go_live_approval_granted": false,
+    "actual_deployment_triggered": false,
+    "vercel_deployment_triggered": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "github_release_created": false,
+    "live_public_check_executed": false,
+    "browser_automation_enabled": false,
+    "external_audit_api_enabled": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "public_page_mutation_enabled": false,
+    "ag56_1_generation_test_executed": false,
+    "controlled_dynamic_content_loop_activated": false,
+    "ag56_publish_test_approved": false,
+    "ag56_publish_test_executed": false,
+    "ag56_go_live_decision_made": false,
+    "v02_item_activated": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_used": false,
+    "service_role_key_exposed": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "public_dashboard_exposed": false,
+    "external_fetch_enabled": false
+  }
+}
