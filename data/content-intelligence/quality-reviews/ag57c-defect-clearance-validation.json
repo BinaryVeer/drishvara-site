@@ -1,0 +1,33 @@
+{
+  "module_id": "AG57C",
+  "title": "Defect Clearance Validation",
+  "status": "defect_clearance_validation_ready_for_ag57z",
+  "depends_on": [
+    "AG57B",
+    "AG57A",
+    "AG56Z"
+  ],
+  "source_file": "data/content-intelligence/pre-live/ag57c-source-consumption-record.json",
+  "validation_file": "data/content-intelligence/pre-live/ag57c-defect-clearance-validation-record.json",
+  "public_copy_file": "data/content-intelligence/pre-live/ag57c-public-copy-validation-record.json",
+  "signal_rule_file": "data/content-intelligence/pre-live/ag57c-daily-signal-rule-validation-record.json",
+  "safety_file": "data/content-intelligence/pre-live/ag57c-safety-boundary-validation-record.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag57c-ag57z-pre-live-defect-clearance-closure-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag57c-to-ag57z-pre-live-defect-clearance-closure-boundary.json",
+  "summary": {
+    "ag57c_defect_clearance_validation_recorded": true,
+    "all_ag56z_pre_live_defects_validated_cleared": true,
+    "public_copy_validation_passed": true,
+    "daily_signal_rule_validation_passed": true,
+    "safety_boundary_validation_passed": true,
+    "cleared_defect_count": 5,
+    "remaining_defect_count": 0,
+    "ready_for_ag57z_pre_live_defect_clearance_closure": true,
+    "deployment_performed": false,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "git_head_short": "fec5832",
+    "branch": "main"
+  }
+}

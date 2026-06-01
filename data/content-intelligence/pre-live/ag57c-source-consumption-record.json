@@ -1,0 +1,22 @@
+{
+  "module_id": "AG57C",
+  "title": "AG57C Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag57bReview": "data/content-intelligence/quality-reviews/ag57b-public-ui-content-correction.json",
+    "ag57bApply": "data/content-intelligence/pre-live/ag57b-public-ui-content-correction-apply-record.json",
+    "ag57bClearance": "data/content-intelligence/pre-live/ag57b-defect-clearance-record.json",
+    "ag57bDelta": "data/content-intelligence/pre-live/ag57b-source-file-delta-record.json",
+    "ag57bReadiness": "data/content-intelligence/quality-registry/ag57b-ag57c-defect-clearance-validation-readiness-record.json",
+    "ag57bBoundary": "data/content-intelligence/mutation-plans/ag57b-to-ag57c-defect-clearance-validation-boundary.json",
+    "indexHtml": "index.html"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "fec5832",
+    "head_full": "fec58329d97cd4b9ee7ff54cd6ab1143771efd0a",
+    "origin_main": "fec5832",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag57c-defect-clearance-validation.mjs\n?? scripts/validate-ag57c-defect-clearance-validation.mjs"
+  },
+  "interpretation": "AG57C validates that AG57B actual UI/content corrections cleared the five AG56Z pre-live defects. No deployment, live check, backend/runtime, service-role use or V02 expansion is performed."
+}
