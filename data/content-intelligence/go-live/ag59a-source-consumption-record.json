@@ -1,0 +1,23 @@
+{
+  "module_id": "AG59A",
+  "title": "AG59A Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag58zReview": "data/content-intelligence/quality-reviews/ag58z-deployment-readiness-closure.json",
+    "ag58zClosure": "data/content-intelligence/release-candidate/ag58z-deployment-readiness-closure-record.json",
+    "ag58zFinalRc": "data/content-intelligence/release-candidate/ag58z-final-static-release-candidate-status-record.json",
+    "ag58zHandoff": "data/content-intelligence/release-candidate/ag58z-ag59-controlled-public-go-live-handoff-record.json",
+    "ag58zReadiness": "data/content-intelligence/quality-registry/ag58z-ag59a-controlled-public-go-live-approval-readiness-record.json",
+    "ag58zBoundary": "data/content-intelligence/mutation-plans/ag58z-to-ag59a-controlled-public-go-live-approval-boundary.json",
+    "ag58bReview": "data/content-intelligence/quality-reviews/ag58b-static-route-page-surface-preview-verification.json",
+    "ag58aReview": "data/content-intelligence/quality-reviews/ag58a-final-static-release-candidate-build-readiness.json"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "41161b2",
+    "head_full": "41161b26efd7f096b3d1362860d0e3ddccc6a118",
+    "origin_main": "41161b2",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag59a-controlled-public-go-live-approval-gate.mjs\n?? scripts/validate-ag59a-controlled-public-go-live-approval-gate.mjs"
+  },
+  "interpretation": "AG59A records the controlled public go-live approval gate. It does not deploy. It requires a separate explicit user approval before AG59B controlled deployment/public release step."
+}

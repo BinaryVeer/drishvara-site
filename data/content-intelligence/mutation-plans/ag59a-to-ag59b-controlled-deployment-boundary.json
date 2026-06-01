@@ -1,0 +1,22 @@
+{
+  "module_id": "AG59A",
+  "title": "AG59A to AG59B Controlled Deployment Boundary",
+  "status": "ag59b_controlled_deployment_boundary_created_pending_explicit_approval",
+  "allowed_scope_after_explicit_approval": [
+    "Confirm clean working tree.",
+    "Run npm run build.",
+    "Run npm run validate:project.",
+    "Execute the confirmed deployment/public release mechanism only after explicit approval.",
+    "Record deployment result for AG59C live public URL verification."
+  ],
+  "blocked_scope_until_explicit_approval": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "live public check",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

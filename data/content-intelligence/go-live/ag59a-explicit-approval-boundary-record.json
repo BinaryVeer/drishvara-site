@@ -1,0 +1,25 @@
+{
+  "module_id": "AG59A",
+  "title": "Explicit Approval Boundary Record",
+  "status": "explicit_approval_boundary_recorded",
+  "audit_passed": true,
+  "ag59b_blocked_until_explicit_approval": true,
+  "required_user_action": "User must explicitly approve AG59B controlled deployment/public release in a separate message.",
+  "not_sufficient_phrases": [
+    "go ahead",
+    "continue",
+    "next step",
+    "proceed"
+  ],
+  "sufficient_approval_phrase": "I explicitly approve AG59B controlled deployment/public release for Drishvara V01.",
+  "blocked_until_approval": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "live public check",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "module_id": "AG59A",
+  "title": "Rollback / Checkpoint Record",
+  "status": "rollback_checkpoint_recorded_for_pre_deployment_gate",
+  "audit_passed": true,
+  "checkpoint_commit": "41161b2",
+  "checkpoint_commit_full": "41161b26efd7f096b3d1362860d0e3ddccc6a118",
+  "recommended_pre_deployment_commands": [
+    "git log --oneline -5",
+    "git status --short",
+    "npm run build",
+    "npm run validate:project"
+  ],
+  "recommended_rollback_reference": "41161b2",
+  "rollback_executed": false,
+  "git_revert_executed": false,
+  "git_reset_executed": false
+}
