@@ -1,0 +1,36 @@
+{
+  "module_id": "AG59B",
+  "title": "Controlled Deployment / Public Release Step",
+  "status": "controlled_public_release_step_ready_for_push_and_ag59c",
+  "depends_on": [
+    "AG59A",
+    "AG58Z",
+    "AG58B",
+    "AG58A"
+  ],
+  "source_file": "data/content-intelligence/go-live/ag59b-source-consumption-record.json",
+  "approval_file": "data/content-intelligence/go-live/ag59b-explicit-approval-record.json",
+  "release_plan_file": "data/content-intelligence/go-live/ag59b-controlled-release-plan-record.json",
+  "release_execution_file": "data/content-intelligence/go-live/ag59b-controlled-release-execution-record.json",
+  "rollback_file": "data/content-intelligence/go-live/ag59b-rollback-checkpoint-continuity-record.json",
+  "no_backend_runtime_audit_file": "data/content-intelligence/backend-architecture/ag59b-no-backend-auth-rls-database-runtime-audit.json",
+  "no_v02_expansion_audit_file": "data/content-intelligence/backend-architecture/ag59b-no-v02-expansion-audit.json",
+  "no_live_public_check_audit_file": "data/content-intelligence/backend-architecture/ag59b-no-live-public-check-audit.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag59b-ag59c-live-public-url-verification-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag59b-to-ag59c-live-public-url-verification-boundary.json",
+  "summary": {
+    "ag59b_controlled_public_release_recorded": true,
+    "explicit_user_approval_recorded": true,
+    "controlled_public_release_step_authorized": true,
+    "repository_push_to_main_required_to_complete_ag59b": true,
+    "ready_for_ag59c_after_push": true,
+    "deployment_platform_cli_executed_by_generator": false,
+    "github_release_created": false,
+    "live_public_check_performed": false,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "git_head_short": "14562a5",
+    "branch": "main"
+  }
+}

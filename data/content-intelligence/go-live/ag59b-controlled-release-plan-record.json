@@ -1,0 +1,17 @@
+{
+  "module_id": "AG59B",
+  "title": "Controlled Release Plan Record",
+  "status": "controlled_release_plan_recorded",
+  "audit_passed": true,
+  "release_path": "GitHub/static controlled public release path",
+  "release_mechanism": "Commit AG59B records and push to origin/main.",
+  "pre_release_commands": [
+    "npm run build",
+    "npm run validate:project",
+    "git status --short"
+  ],
+  "release_command": "git push origin main",
+  "direct_vercel_cli_invoked": false,
+  "github_release_or_tag_created": false,
+  "live_public_check_deferred_to_ag59c": true
+}

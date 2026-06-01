@@ -1,0 +1,24 @@
+{
+  "module_id": "AG59B",
+  "title": "AG59B Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag59aReview": "data/content-intelligence/quality-reviews/ag59a-controlled-public-go-live-approval-gate.json",
+    "ag59aGate": "data/content-intelligence/go-live/ag59a-controlled-public-go-live-approval-gate-record.json",
+    "ag59aMechanism": "data/content-intelligence/go-live/ag59a-deployment-mechanism-confirmation-record.json",
+    "ag59aRollback": "data/content-intelligence/go-live/ag59a-rollback-checkpoint-record.json",
+    "ag59aApprovalBoundary": "data/content-intelligence/go-live/ag59a-explicit-approval-boundary-record.json",
+    "ag59aReadiness": "data/content-intelligence/quality-registry/ag59a-ag59b-controlled-deployment-readiness-record.json",
+    "ag59aBoundary": "data/content-intelligence/mutation-plans/ag59a-to-ag59b-controlled-deployment-boundary.json",
+    "ag58zReview": "data/content-intelligence/quality-reviews/ag58z-deployment-readiness-closure.json",
+    "ag58zFinalRc": "data/content-intelligence/release-candidate/ag58z-final-static-release-candidate-status-record.json"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "14562a5",
+    "head_full": "14562a55434e4494201fb9b6e8ee601a3d7e8336",
+    "origin_main": "14562a5",
+    "status_at_generation": "M data/content-intelligence/release-candidate/ag58a-static-build-readiness-manifest.json\n M package.json\n?? scripts/generate-ag59b-controlled-deployment-public-release.mjs\n?? scripts/validate-ag59b-controlled-deployment-public-release.mjs"
+  },
+  "interpretation": "AG59B records explicit approval and prepares the controlled static public release through repository push to main. Live URL verification is deferred to AG59C."
+}

@@ -1,0 +1,19 @@
+{
+  "module_id": "AG59B",
+  "title": "AG59B to AG59C Live Public URL Verification Boundary",
+  "status": "ag59c_live_public_url_verification_boundary_created",
+  "allowed_scope_after_ag59b_push": [
+    "Verify live public URL.",
+    "Verify homepage is reachable.",
+    "Verify corrected public copy remains visible.",
+    "Verify Daily Signal / Sports Desk / Knowledge surfaces are visible or safely fallback.",
+    "Record live verification result."
+  ],
+  "blocked_scope": [
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
