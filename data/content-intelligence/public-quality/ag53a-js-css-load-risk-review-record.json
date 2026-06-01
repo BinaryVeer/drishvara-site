@@ -1,0 +1,149 @@
+{
+  "module_id": "AG53A",
+  "title": "JS/CSS Load Risk Review Record",
+  "status": "js_css_load_risk_review_recorded",
+  "audit_passed": true,
+  "script_style_candidate_count": 2219,
+  "largest_script_style_candidates": [
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/PlotlyChart.B6LaAfIh.js",
+      "size_bytes": 4662781
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/pydeck/nbextension/static/index.js",
+      "size_bytes": 4240485
+    },
+    {
+      "file": "venv/share/jupyter/nbextensions/pydeck/index.js",
+      "size_bytes": 4240485
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/DeckGlJsonChart.BezMwSiz.js",
+      "size_bytes": 2590369
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/StreamlitSyntaxHighlighter.D7dcQ3te.js",
+      "size_bytes": 1563635
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/GraphVizChart.Bc7oRXRk.js",
+      "size_bytes": 826903
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/embed.Bqebd2RE.js",
+      "size_bytes": 792032
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/src.D9MArGZj.js",
+      "size_bytes": 753960
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/pandasStylerUtils.C9v_N371.js",
+      "size_bytes": 738050
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/protobuf.DyZGXwGk.js",
+      "size_bytes": 563120
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/DataFrame.B82b-MoD.js",
+      "size_bytes": 428202
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/rehype-katex.BejrJay3.js",
+      "size_bytes": 262791
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/lib.BT2isyPB.js",
+      "size_bytes": 258896
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/worker-D4HKuP8s.js",
+      "size_bytes": 253994
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/index.D2ZqaFuW.js",
+      "size_bytes": 207842
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/rehype-raw.DycST9n0.js",
+      "size_bytes": 188874
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/v4.D-g8Wqsd.js",
+      "size_bytes": 169375
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/webgl-device.nb31PRHP.js",
+      "size_bytes": 153313
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/isLength.DwwZub7z.js",
+      "size_bytes": 133035
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/reactJsonViewCompat.D5MCl5lB.js",
+      "size_bytes": 119641
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/useIntlLocale.CzDvWKbw.js",
+      "size_bytes": 108531
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/utils.D9m7Ykmm.js",
+      "size_bytes": 87321
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/timepicker.CM65sYVo.js",
+      "size_bytes": 84048
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/getColors.DUygtxH4.js",
+      "size_bytes": 77042
+    },
+    {
+      "file": "venv/lib/python3.13/site-packages/streamlit/static/static/js/utils.CQY8BYux.js",
+      "size_bytes": 73042
+    }
+  ],
+  "review_rules": [
+    "Monitor large JS/CSS source and public candidates before release.",
+    "Avoid unnecessary client-side runtime for static V01 surfaces.",
+    "Preserve deferred backend/API/database stance from AG52Z.",
+    "AG53A does not build, bundle, deploy or mutate source files."
+  ],
+  "review_position": "static_repo_review_only_no_build_no_deploy",
+  "blocked_state": {
+    "ag53a_performance_page_weight_review_recorded": true,
+    "ag52z_consumed": true,
+    "public_asset_inventory_recorded": true,
+    "page_weight_risk_model_recorded": true,
+    "image_load_risk_review_recorded": true,
+    "js_css_load_risk_review_recorded": true,
+    "mobile_speed_risk_readiness_recorded": true,
+    "static_performance_review_boundary_recorded": true,
+    "ready_for_ag53b_seo_metadata_sitemap_robots_review": true,
+    "lighthouse_runtime_enabled": false,
+    "external_performance_api_enabled": false,
+    "browser_automation_enabled": false,
+    "external_fetch_enabled": false,
+    "reference_fetch_runtime_enabled": false,
+    "image_scraping_enabled": false,
+    "image_external_api_enabled": false,
+    "public_page_mutation_enabled": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_used": false,
+    "service_role_key_exposed": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "public_dashboard_exposed": false
+  }
+}
