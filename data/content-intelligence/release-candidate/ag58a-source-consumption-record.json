@@ -1,0 +1,20 @@
+{
+  "module_id": "AG58A",
+  "title": "AG58A Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag57zReview": "data/content-intelligence/quality-reviews/ag57z-pre-live-defect-clearance-closure.json",
+    "ag57zClosure": "data/content-intelligence/pre-live/ag57z-pre-live-defect-clearance-closure-record.json",
+    "ag57zFinalDefectStatus": "data/content-intelligence/pre-live/ag57z-final-defect-status-record.json",
+    "ag57zReadiness": "data/content-intelligence/quality-registry/ag57z-ag58a-final-static-release-candidate-build-readiness-record.json",
+    "buildManifest": "data/content-intelligence/release-candidate/ag58a-static-build-readiness-manifest.json"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "555fa07",
+    "head_full": "555fa0733a594add49c1c6eaf5abc827b0fdb15d",
+    "origin_main": "555fa07",
+    "status_at_generation": "M package.json\n?? data/content-intelligence/release-candidate/ag58a-static-build-readiness-manifest.json\n?? scripts/build-static-release-candidate.mjs\n?? scripts/generate-ag58a-final-static-release-candidate-build-readiness.mjs\n?? scripts/validate-ag58a-final-static-release-candidate-build-readiness.mjs"
+  },
+  "interpretation": "AG58A defines and validates a safe top-level npm build command for static release-candidate readiness. The build command is local/static only and does not deploy."
+}

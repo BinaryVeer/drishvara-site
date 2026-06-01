@@ -1,0 +1,20 @@
+{
+  "module_id": "AG58A",
+  "title": "AG58A to AG58B Static Route/Page/Surface Preview Boundary",
+  "status": "ag58b_static_route_page_surface_preview_boundary_created",
+  "allowed_scope": [
+    "Verify static homepage/public surface files.",
+    "Verify corrected UI/content remains present after static build readiness.",
+    "Verify local route/page/surface readiness without deployment."
+  ],
+  "blocked_scope": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "live public check unless separately approved",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
