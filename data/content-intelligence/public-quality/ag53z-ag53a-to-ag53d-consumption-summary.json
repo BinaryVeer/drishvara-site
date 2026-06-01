@@ -1,0 +1,61 @@
+{
+  "module_id": "AG53Z",
+  "title": "AG53A to AG53D Consumption Summary",
+  "status": "ag53a_to_ag53d_consumption_summarised",
+  "consumed_outputs": [
+    {
+      "stage_id": "AG53A",
+      "consumed_boundary": "performance/page-weight, asset inventory, image load, JS/CSS load and mobile speed readiness",
+      "result": "static performance readiness recorded without runtime measurement or deployment"
+    },
+    {
+      "stage_id": "AG53B",
+      "consumed_boundary": "SEO metadata, OG/canonical, sitemap/robots and URL surface readiness",
+      "result": "static discoverability readiness recorded without crawler/API scans or metadata mutation"
+    },
+    {
+      "stage_id": "AG53C",
+      "consumed_boundary": "mobile layout, accessibility semantics, keyboard/focus, alt text and readability/contrast",
+      "result": "static mobile/accessibility readiness recorded without browser automation or accessibility crawler"
+    },
+    {
+      "stage_id": "AG53D",
+      "consumed_boundary": "public UX flow, navigation/reading surface, browser compatibility and fallback/error readiness",
+      "result": "static public UX/browser compatibility readiness recorded without runtime or mutation"
+    }
+  ],
+  "blocked_state": {
+    "ag53z_public_quality_closed": true,
+    "ag53a_ag53b_ag53c_ag53d_consumed": true,
+    "public_quality_closure_completed": true,
+    "ag54a_backup_restore_handoff_created": true,
+    "ready_for_ag54a_backup_restore_plan": true,
+    "browser_automation_enabled": false,
+    "external_browser_compatibility_api_enabled": false,
+    "external_audit_api_enabled": false,
+    "lighthouse_runtime_enabled": false,
+    "external_fetch_enabled": false,
+    "accessibility_crawler_runtime_enabled": false,
+    "crawler_runtime_enabled": false,
+    "public_metadata_mutation_enabled": false,
+    "sitemap_generation_runtime_enabled": false,
+    "robots_deployment_enabled": false,
+    "public_page_mutation_enabled": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_used": false,
+    "service_role_key_exposed": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "public_dashboard_exposed": false,
+    "image_scraping_enabled": false,
+    "image_external_api_enabled": false
+  }
+}
