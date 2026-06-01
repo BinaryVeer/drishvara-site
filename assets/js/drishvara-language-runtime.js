@@ -136,7 +136,7 @@
     "General reflective preview only; no deterministic prediction or live calculation is active.": "केवल सामान्य चिंतनात्मक पूर्वावलोकन; कोई निश्चित भविष्यवाणी या लाइव गणना सक्रिय नहीं है।",
     "Preview status: source and regional-method verification required before any live Panchang output.": "पूर्वावलोकन स्थिति: किसी भी लाइव पंचांग आउटपुट से पहले स्रोत और क्षेत्रीय पद्धति सत्यापन आवश्यक है।",
     "Curated language preview; meanings remain editorially reviewed before public expansion.": "चयनित भाषा पूर्वावलोकन; सार्वजनिक विस्तार से पहले अर्थ संपादकीय समीक्षा में रहेंगे।",
-    "Reflective prompt only; not a personal prediction, assessment, or decision guide.": "केवल चिंतनात्मक संकेत; यह व्यक्तिगत भविष्यवाणी, आकलन या निर्णय मार्गदर्शिका नहीं है।",,
+    "Reflective prompt only; not a personal prediction, assessment, or decision guide.": "केवल चिंतनात्मक संकेत; यह व्यक्तिगत भविष्यवाणी, आकलन या निर्णय मार्गदर्शिका नहीं है।",
     "Signal over spectacle": "प्रदर्शन से अधिक संकेत",
     "Meaning over information": "सूचना से अधिक अर्थ",
 
