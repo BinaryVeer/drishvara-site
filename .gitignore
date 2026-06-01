@@ -24,3 +24,14 @@ drishvara-untracked-backup-bundle-*.zip
 
 # Drishvara local browser Auth config — never commit real Supabase values
 assets/js/drishvara-auth-local.js
+
+# AG52A local environment file guards
+.env
+.env.local
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!*.env.example
+!*.env.sample
+!*.env.template

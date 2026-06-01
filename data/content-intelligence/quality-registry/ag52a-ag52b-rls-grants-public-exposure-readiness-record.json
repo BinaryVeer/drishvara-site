@@ -1,0 +1,59 @@
+{
+  "module_id": "AG52A",
+  "title": "AG52B RLS, Grants and Public Exposure Audit Readiness Record",
+  "status": "ready_for_ag52b_rls_grants_public_exposure_audit",
+  "ready_for_ag52b": true,
+  "next_stage_id": "AG52B",
+  "next_stage_title": "RLS, Grants and Public Exposure Audit",
+  "ag52b_allowed_scope": [
+    "Review schema/RLS/grant/public exposure records as audit planning.",
+    "Check public exposure and unintended anon access boundaries.",
+    "Consume AG52A secret/environment/service-role safety outputs.",
+    "Keep backend/Auth/Supabase runtime, grant mutation, database/API reading and deployment disabled."
+  ],
+  "ag52b_blocked_scope": [
+    "Supabase/Auth/backend activation",
+    "Service-role use",
+    "Runtime database/API reading",
+    "RLS/grant mutation",
+    "Public policy activation",
+    "Deployment",
+    "Public dashboard exposure",
+    "Content publishing"
+  ],
+  "hard_blocker_count_for_ag52b": 0,
+  "blocker_details": {
+    "secret_candidate_risk": false,
+    "environment_file_risk": false,
+    "browser_public_config_risk": false
+  },
+  "blocked_state": {
+    "ag52a_secret_environment_service_role_safety_audit_recorded": true,
+    "ag51z_consumed": true,
+    "repo_secret_exposure_audit_recorded": true,
+    "environment_file_handling_audit_recorded": true,
+    "service_role_key_safety_audit_recorded": true,
+    "browser_public_config_exposure_audit_recorded": true,
+    "local_config_gitignore_audit_recorded": true,
+    "secret_safety_boundary_recorded": true,
+    "ready_for_ag52b_rls_grants_public_exposure_audit": true,
+    "secret_committed_to_repo": false,
+    "env_file_committed_to_repo": false,
+    "browser_public_secret_exposed": false,
+    "service_role_key_exposed": false,
+    "service_role_key_used": false,
+    "service_role_key_required_for_current_stage": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "rls_grant_mutation_enabled": false,
+    "rls_public_policy_activation_approved": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "public_dashboard_exposed": false,
+    "public_content_mutation_enabled": false,
+    "content_publishing_enabled": false
+  }
+}
