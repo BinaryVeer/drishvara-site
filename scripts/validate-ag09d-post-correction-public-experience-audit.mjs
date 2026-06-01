@@ -437,6 +437,33 @@ function creditTextSupersededByAr01R1(originalCredit, html, articlePath = null) 
 }
 
 
+function ag57bPublicUiContentCorrectionAllowsPostMutation(filePath) {
+  const normalizedFilePath = filePath || "";
+  const reviewPath = path.join(root, "data/content-intelligence/quality-reviews/ag57b-public-ui-content-correction.json");
+  const applyPath = path.join(root, "data/content-intelligence/pre-live/ag57b-public-ui-content-correction-apply-record.json");
+  const deltaPath = path.join(root, "data/content-intelligence/pre-live/ag57b-source-file-delta-record.json");
+  const clearancePath = path.join(root, "data/content-intelligence/pre-live/ag57b-defect-clearance-record.json");
+
+  if (!fs.existsSync(reviewPath) || !fs.existsSync(applyPath) || !fs.existsSync(deltaPath) || !fs.existsSync(clearancePath)) return false;
+
+  try {
+    const review = JSON.parse(fs.readFileSync(reviewPath, "utf8"));
+    const apply = JSON.parse(fs.readFileSync(applyPath, "utf8"));
+    const delta = JSON.parse(fs.readFileSync(deltaPath, "utf8"));
+    const clearance = JSON.parse(fs.readFileSync(clearancePath, "utf8"));
+
+    if (review.status !== "public_ui_content_correction_applied_ready_for_ag57c") return false;
+    if (review.summary?.actual_source_changes_applied !== true) return false;
+    if (apply.actual_source_changes_applied !== true) return false;
+    if (!Array.isArray(delta.changed_files) || !delta.changed_files.includes(normalizedFilePath)) return false;
+    if (!Array.isArray(clearance.corrected_defects) || clearance.corrected_defects.length !== 5) return false;
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 for (const file of requiredFiles) {
   if (!fs.existsSync(path.join(root, file))) fail(`Missing required file: ${file}`);
 }
@@ -494,13 +521,13 @@ if (readiness.supabase_activation_ready !== false) fail("Supabase activation mus
 for (const backup of audit.backup_integrity.backup_audit_items) {
   if (!fs.existsSync(path.join(root, backup.backup_path))) fail(`Backup missing: ${backup.backup_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, backup.backup_path), "utf8"));
-  if (hash !== backup.backup_hash_recorded) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(backup.backup_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(backup.backup_path)) if (!ag11cControlledInfographicInsertionAllowsPostMutation(backup.backup_path)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation(backup.backup_path)) if (!ag11eControlledTableInsertionAllowsPostMutation(backup.backup_path)) if (!ag11fControlledMapInsertionAllowsPostMutation(backup.backup_path)) if (!ag11gControlledCompositeInsertionAllowsPostMutation(backup.backup_path)) if (!ag12cControlledLayoutRefinementAllowsPostMutation(backup.backup_path)) fail(`Backup hash mismatch: ${backup.backup_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state`);
+  if (hash !== backup.backup_hash_recorded) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(backup.backup_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(backup.backup_path)) if (!ag11cControlledInfographicInsertionAllowsPostMutation(backup.backup_path)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation(backup.backup_path)) if (!ag11eControlledTableInsertionAllowsPostMutation(backup.backup_path)) if (!ag11fControlledMapInsertionAllowsPostMutation(backup.backup_path)) if (!ag11gControlledCompositeInsertionAllowsPostMutation(backup.backup_path)) if (!ag12cControlledLayoutRefinementAllowsPostMutation(backup.backup_path)) fail(`Backup hash mismatch: ${backup.backup_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state or AG57B public UI-content correction record explains the later approved homepage state`);
 }
 
 for (const item of audit.mutated_file_integrity.mutated_file_audit_items) {
   if (!fs.existsSync(path.join(root, item.file_path))) fail(`Mutated file missing: ${item.file_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, item.file_path), "utf8"));
-  if (hash !== item.recorded_post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(item.file_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(item.file_path)) if (!ag11cControlledInfographicInsertionAllowsPostMutation(item.file_path)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation(item.file_path)) if (!ag11eControlledTableInsertionAllowsPostMutation(item.file_path)) if (!ag11fControlledMapInsertionAllowsPostMutation(item.file_path)) if (!ag11gControlledCompositeInsertionAllowsPostMutation(item.file_path)) if (!ag12cControlledLayoutRefinementAllowsPostMutation(item.file_path)) fail(`Mutated file hash mismatch: ${item.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state`);
+  if (hash !== item.recorded_post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(item.file_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(item.file_path)) if (!ag11cControlledInfographicInsertionAllowsPostMutation(item.file_path)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation(item.file_path)) if (!ag11eControlledTableInsertionAllowsPostMutation(item.file_path)) if (!ag11fControlledMapInsertionAllowsPostMutation(item.file_path)) if (!ag11gControlledCompositeInsertionAllowsPostMutation(item.file_path)) if (!ag12cControlledLayoutRefinementAllowsPostMutation(item.file_path)) if (!ag57bPublicUiContentCorrectionAllowsPostMutation(item.file_path || item.file || item.path)) fail(`Mutated file hash mismatch: ${item.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state`);
 }
 
 for (const expected of [

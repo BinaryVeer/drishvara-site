@@ -497,10 +497,36 @@ for (const backup of apply.backups) {
   if (backupHash !== backup.pre_hash) fail(`Backup must match pre-hash: ${backup.backup_path}`);
 }
 
+function ag57bPublicUiContentCorrectionAllowsPostMutation(filePath) {
+  const reviewPath = path.join(root, "data/content-intelligence/quality-reviews/ag57b-public-ui-content-correction.json");
+  const applyPath = path.join(root, "data/content-intelligence/pre-live/ag57b-public-ui-content-correction-apply-record.json");
+  const deltaPath = path.join(root, "data/content-intelligence/pre-live/ag57b-source-file-delta-record.json");
+  const clearancePath = path.join(root, "data/content-intelligence/pre-live/ag57b-defect-clearance-record.json");
+
+  if (!fs.existsSync(reviewPath) || !fs.existsSync(applyPath) || !fs.existsSync(deltaPath) || !fs.existsSync(clearancePath)) return false;
+
+  try {
+    const review = JSON.parse(fs.readFileSync(reviewPath, "utf8"));
+    const apply = JSON.parse(fs.readFileSync(applyPath, "utf8"));
+    const delta = JSON.parse(fs.readFileSync(deltaPath, "utf8"));
+    const clearance = JSON.parse(fs.readFileSync(clearancePath, "utf8"));
+
+    if (review.status !== "public_ui_content_correction_applied_ready_for_ag57c") return false;
+    if (review.summary?.actual_source_changes_applied !== true) return false;
+    if (apply.actual_source_changes_applied !== true) return false;
+    if (!Array.isArray(delta.changed_files) || !delta.changed_files.includes(filePath)) return false;
+    if (!Array.isArray(clearance.corrected_defects) || clearance.corrected_defects.length !== 5) return false;
+
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 for (const mutated of apply.mutated_files) {
   if (!fs.existsSync(path.join(root, mutated.file_path))) fail(`Mutated file missing: ${mutated.file_path}`);
   const hash = sha256(fs.readFileSync(path.join(root, mutated.file_path), "utf8"));
-  if (hash !== mutated.post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(mutated.file_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(mutated.file_path)) if (!ag11cControlledInfographicInsertionAllowsPostMutation(mutated.file_path)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation(mutated.file_path)) if (!ag11eControlledTableInsertionAllowsPostMutation(mutated.file_path)) if (!ag11fControlledMapInsertionAllowsPostMutation(mutated.file_path)) if (!ag11gControlledCompositeInsertionAllowsPostMutation(mutated.file_path)) if (!ag12cControlledLayoutRefinementAllowsPostMutation(mutated.file_path)) fail(`Mutated file post hash mismatch: ${mutated.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state`);
+  if (hash !== mutated.post_hash) if (!ag10kControlledGeneratedImageInsertionAllowsPostMutation(mutated.file_path)) if (!ag11bControlledChartInsertionAllowsPostMutation(mutated.file_path)) if (!ag11cControlledInfographicInsertionAllowsPostMutation(mutated.file_path)) if (!ag11dControlledFigureDiagramInsertionAllowsPostMutation(mutated.file_path)) if (!ag11eControlledTableInsertionAllowsPostMutation(mutated.file_path)) if (!ag11fControlledMapInsertionAllowsPostMutation(mutated.file_path)) if (!ag11gControlledCompositeInsertionAllowsPostMutation(mutated.file_path)) if (!ag12cControlledLayoutRefinementAllowsPostMutation(mutated.file_path)) if (!ag57bPublicUiContentCorrectionAllowsPostMutation(mutated.file_path)) fail(`Mutated file post hash mismatch: ${mutated.file_path} or AG10K controlled generated-image post-insertion record explains the later approved article state or AG11B controlled chart post-insertion record explains the later approved article state or AG11C controlled infographic post-insertion record explains the later approved article state or AG11D controlled figure/diagram post-insertion record explains the later approved article state or AG11E controlled table/structured-object post-insertion record explains the later approved article state or AG11F controlled map/geographic-object post-insertion record explains the later approved article state or AG11G controlled article-support composite post-insertion record explains the later approved article state or AG12C controlled layout-refinement post-apply record explains the later approved article state or AG57B public UI-content correction record explains the later approved homepage state`);
 }
 
 for (const expected of [

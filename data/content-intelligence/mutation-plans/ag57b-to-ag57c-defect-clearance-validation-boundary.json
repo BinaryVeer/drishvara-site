@@ -1,0 +1,21 @@
+{
+  "module_id": "AG57B",
+  "title": "AG57B to AG57C Defect Clearance Validation Boundary",
+  "status": "ag57c_defect_clearance_validation_boundary_created",
+  "allowed_scope": [
+    "Validate corrected public copy.",
+    "Validate Sports Desk stable fallback.",
+    "Validate Daily Signal 10 / 6 / 4 rule.",
+    "Validate Discover → Read → Reflect alignment.",
+    "Validate Word/Panchang/Reflection/Vedic safety text."
+  ],
+  "blocked_scope": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "module_id": "AG57B",
+  "title": "Public UI-Content Correction Patch",
+  "status": "public_ui_content_correction_applied_ready_for_ag57c",
+  "depends_on": [
+    "AG57A",
+    "AG56Z"
+  ],
+  "apply_file": "data/content-intelligence/pre-live/ag57b-public-ui-content-correction-apply-record.json",
+  "defect_clearance_file": "data/content-intelligence/pre-live/ag57b-defect-clearance-record.json",
+  "file_delta_file": "data/content-intelligence/pre-live/ag57b-source-file-delta-record.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag57b-ag57c-defect-clearance-validation-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag57b-to-ag57c-defect-clearance-validation-boundary.json",
+  "summary": {
+    "ag57b_public_ui_content_correction_applied": true,
+    "actual_source_changes_applied": true,
+    "corrected_defect_count": 5,
+    "ready_for_ag57c_defect_clearance_validation": true,
+    "deployment_performed": false,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "git_head_short": "e1cf903",
+    "branch": "main"
+  }
+}

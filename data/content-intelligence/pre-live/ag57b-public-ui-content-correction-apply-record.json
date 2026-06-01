@@ -1,0 +1,26 @@
+{
+  "module_id": "AG57B",
+  "title": "Public UI-Content Correction Apply Record",
+  "status": "public_ui_content_correction_applied",
+  "actual_source_changes_applied": true,
+  "consumed_inputs": {
+    "ag57aReview": "data/content-intelligence/quality-reviews/ag57a-pre-live-defect-clearance-file-mapping.json",
+    "ag57aFileMap": "data/content-intelligence/pre-live/ag57a-defect-file-mapping-record.json",
+    "ag57aPlan": "data/content-intelligence/pre-live/ag57a-to-ag57b-correction-target-plan.json",
+    "ag57aReadiness": "data/content-intelligence/quality-registry/ag57a-ag57b-public-ui-content-correction-readiness-record.json",
+    "ag56zDefects": "data/content-intelligence/content-loop/ag56z-pre-live-defect-list-record.json"
+  },
+  "apply_git_context": {
+    "branch": "main",
+    "head": "e1cf903",
+    "head_full": "e1cf903cd3363a59b903282f00569bca65c32f93",
+    "origin_main": "e1cf903",
+    "status_after_patch": "M assets/js/drishvara-language-runtime.js\n M generated/daily-context/2026-04-11-daily-context.json\n M generated/daily-context/2026-04-30-daily-context.json\n M generated/daily-context/2026-05-10-daily-context.json\n M generated/sports-context/2026-04-30-sports-context.json\n M generated/sports-context/2026-05-10-sports-context.json\n M index.html\n M package.json\n M scripts/build-sports-context.js\n?? scripts/apply-ag57b-public-ui-content-correction.mjs\n?? scripts/validate-ag57b-public-ui-content-correction.mjs"
+  },
+  "file_delta_record": "data/content-intelligence/pre-live/ag57b-source-file-delta-record.json",
+  "defect_clearance_record": "data/content-intelligence/pre-live/ag57b-defect-clearance-record.json",
+  "no_deployment": true,
+  "no_backend_runtime": true,
+  "no_service_role_use": true,
+  "no_v02_expansion": true
+}
