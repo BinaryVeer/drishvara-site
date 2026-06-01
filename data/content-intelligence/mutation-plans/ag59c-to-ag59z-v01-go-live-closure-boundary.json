@@ -1,0 +1,17 @@
+{
+  "module_id": "AG59C",
+  "title": "AG59C to AG59Z V01 Go-Live Closure Boundary",
+  "status": "ag59z_v01_go_live_closure_boundary_created",
+  "allowed_scope": [
+    "Close V01 go-live.",
+    "Record live URL verification evidence.",
+    "Preserve backend/Auth/Supabase and V02 deferrals."
+  ],
+  "blocked_scope": [
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

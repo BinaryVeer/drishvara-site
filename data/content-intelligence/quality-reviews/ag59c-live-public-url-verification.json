@@ -1,0 +1,35 @@
+{
+  "module_id": "AG59C",
+  "title": "Live Public URL Verification",
+  "status": "live_public_url_verification_passed_ready_for_ag59z",
+  "depends_on": [
+    "AG59B",
+    "AG59B-R1",
+    "AG59A",
+    "AG58Z"
+  ],
+  "source_file": "data/content-intelligence/go-live/ag59c-source-consumption-record.json",
+  "live_fetch_file": "data/content-intelligence/go-live/ag59c-live-url-fetch-record.json",
+  "public_copy_file": "data/content-intelligence/go-live/ag59c-live-public-copy-verification-record.json",
+  "surface_file": "data/content-intelligence/go-live/ag59c-live-surface-verification-record.json",
+  "release_status_file": "data/content-intelligence/go-live/ag59c-live-release-status-record.json",
+  "no_backend_runtime_audit_file": "data/content-intelligence/backend-architecture/ag59c-no-backend-auth-rls-database-runtime-audit.json",
+  "no_v02_expansion_audit_file": "data/content-intelligence/backend-architecture/ag59c-no-v02-expansion-audit.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag59c-ag59z-v01-go-live-closure-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag59c-to-ag59z-v01-go-live-closure-boundary.json",
+  "summary": {
+    "ag59c_live_public_url_verification_recorded": true,
+    "live_url": "https://binaryveer.github.io/drishvara-site/",
+    "live_url_reachable": true,
+    "status_code": 200,
+    "forbidden_internal_labels_cleared": true,
+    "required_public_labels_present": true,
+    "live_surface_verification_passed": true,
+    "ready_for_ag59z_v01_go_live_closure": true,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "git_head_short": "7ef49a2",
+    "branch": "main"
+  }
+}
