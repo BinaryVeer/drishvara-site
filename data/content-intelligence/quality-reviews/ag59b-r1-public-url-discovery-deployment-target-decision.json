@@ -1,0 +1,37 @@
+{
+  "module_id": "AG59B-R1",
+  "title": "Public URL Discovery / Deployment Target Decision",
+  "status": "public_url_discovery_completed_github_pages_activation_recommended",
+  "depends_on": [
+    "AG59B",
+    "AG59A",
+    "AG58Z"
+  ],
+  "source_file": "data/content-intelligence/go-live/ag59b-r1-source-consumption-record.json",
+  "discovery_file": "data/content-intelligence/go-live/ag59b-r1-public-url-discovery-record.json",
+  "target_decision_file": "data/content-intelligence/go-live/ag59b-r1-deployment-target-decision-record.json",
+  "github_pages_plan_file": "data/content-intelligence/go-live/ag59b-r1-github-pages-activation-plan-record.json",
+  "ag59c_blocker_file": "data/content-intelligence/go-live/ag59b-r1-ag59c-live-url-blocker-record.json",
+  "no_deployment_execution_audit_file": "data/content-intelligence/backend-architecture/ag59b-r1-no-deployment-execution-audit.json",
+  "no_backend_runtime_audit_file": "data/content-intelligence/backend-architecture/ag59b-r1-no-backend-auth-rls-database-runtime-audit.json",
+  "no_v02_expansion_audit_file": "data/content-intelligence/backend-architecture/ag59b-r1-no-v02-expansion-audit.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag59b-r1-public-host-activation-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag59b-r1-to-public-host-activation-boundary.json",
+  "summary": {
+    "ag59b_r1_public_url_discovery_recorded": true,
+    "public_url_configured": false,
+    "live_public_url_confirmed": false,
+    "github_pages_static_branch_root_recommended": true,
+    "manual_public_host_activation_required": true,
+    "ready_for_ag59c_now": false,
+    "ready_for_ag59c_after_confirmed_url": true,
+    "deployment_platform_cli_executed": false,
+    "github_pages_api_mutation_executed": false,
+    "live_public_check_performed": false,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "git_head_short": "c7eadc7",
+    "branch": "main"
+  }
+}

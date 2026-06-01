@@ -1,0 +1,19 @@
+{
+  "module_id": "AG59B-R1",
+  "title": "AG59B-R1 to Public Host Activation Boundary",
+  "status": "public_host_activation_boundary_created",
+  "allowed_scope": [
+    "Enable GitHub Pages manually through GitHub UI.",
+    "Use main branch and /root folder.",
+    "Return the generated live URL.",
+    "Proceed to AG59C only after URL is confirmed."
+  ],
+  "blocked_scope": [
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion",
+    "live verification without confirmed URL"
+  ]
+}

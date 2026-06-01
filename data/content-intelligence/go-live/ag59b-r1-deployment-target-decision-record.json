@@ -1,0 +1,16 @@
+{
+  "module_id": "AG59B-R1",
+  "title": "Deployment Target Decision Record",
+  "status": "github_pages_static_branch_root_recommended_pending_user_ui_activation",
+  "audit_passed": true,
+  "recommended_target": "GitHub Pages",
+  "recommended_source": "Deploy from branch: main / root",
+  "reason": [
+    "Repository is static-first and already pushed to GitHub main.",
+    "No backend/Auth/Supabase runtime is required for V01.",
+    "No Vercel CLI or local Vercel project config is available.",
+    "GitHub Pages can serve the static root without introducing backend/runtime scope."
+  ],
+  "expected_url_after_activation": "https://binaryveer.github.io/drishvara-site/",
+  "custom_domain_status": "not_configured"
+}

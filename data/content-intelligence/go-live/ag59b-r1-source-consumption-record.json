@@ -1,0 +1,22 @@
+{
+  "module_id": "AG59B-R1",
+  "title": "AG59B-R1 Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag59bReview": "data/content-intelligence/quality-reviews/ag59b-controlled-deployment-public-release.json",
+    "ag59bApproval": "data/content-intelligence/go-live/ag59b-explicit-approval-record.json",
+    "ag59bReleasePlan": "data/content-intelligence/go-live/ag59b-controlled-release-plan-record.json",
+    "ag59bReadiness": "data/content-intelligence/quality-registry/ag59b-ag59c-live-public-url-verification-readiness-record.json",
+    "ag59bBoundary": "data/content-intelligence/mutation-plans/ag59b-to-ag59c-live-public-url-verification-boundary.json",
+    "packageJson": "package.json",
+    "vercelJson": "vercel.json"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "c7eadc7",
+    "head_full": "c7eadc7d330e4d4b419ffe86c72530b8b1f7e57b",
+    "origin_main": "c7eadc7",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag59b-r1-public-url-discovery-deployment-target-decision.mjs\n?? scripts/validate-ag59b-r1-public-url-discovery-deployment-target-decision.mjs"
+  },
+  "interpretation": "AG59B-R1 records that AG59B repository push is complete but AG59C cannot proceed until a live public URL is configured or confirmed."
+}
