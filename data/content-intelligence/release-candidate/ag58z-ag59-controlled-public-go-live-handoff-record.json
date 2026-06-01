@@ -1,0 +1,30 @@
+{
+  "module_id": "AG58Z",
+  "title": "AG59 Controlled Public Go-Live Handoff Record",
+  "status": "ag59_controlled_public_go_live_handoff_recorded",
+  "next_series": "AG59",
+  "next_stage_id": "AG59A",
+  "next_stage_title": "Controlled Public Go-Live Approval Gate",
+  "recommended_sequence": [
+    "AG59A — Explicit Controlled Public Go-Live Approval Gate",
+    "AG59B — Controlled Deployment / Public Release Step, only after explicit approval",
+    "AG59C — Live Public URL Verification, only after deployment approval",
+    "AG59Z — V01 Go-Live Closure"
+  ],
+  "ag59_allowed_scope_after_explicit_approval": [
+    "Authorize controlled deployment/public release.",
+    "Run deployment command or Vercel trigger only if explicitly approved.",
+    "Run live public verification only after deployment/public release.",
+    "Record final V01 go-live closure."
+  ],
+  "ag59_blocked_until_explicit_approval": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "live public check",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

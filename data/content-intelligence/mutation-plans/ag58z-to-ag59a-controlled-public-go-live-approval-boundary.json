@@ -1,0 +1,21 @@
+{
+  "module_id": "AG58Z",
+  "title": "AG58Z to AG59A Controlled Public Go-Live Approval Boundary",
+  "status": "ag59a_controlled_public_go_live_approval_boundary_created",
+  "allowed_scope": [
+    "Ask for and record explicit user approval for controlled public go-live.",
+    "Confirm exact deployment mechanism before execution.",
+    "Confirm rollback/checkpoint command before deployment.",
+    "Keep backend/Auth/Supabase and V02 out of scope unless separately approved."
+  ],
+  "blocked_scope_until_ag59_explicit_approval": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "live public check",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
