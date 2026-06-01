@@ -1,0 +1,87 @@
+{
+  "module_id": "AG54C",
+  "title": "Rollback Trigger Register",
+  "status": "rollback_trigger_register_recorded",
+  "audit_passed": true,
+  "trigger_categories_design_only": [
+    {
+      "trigger_id": "homepage_breakage",
+      "examples": [
+        "homepage blank screen",
+        "hero/navigation broken",
+        "language toggle unstable"
+      ],
+      "initial_response": "pause release movement and verify against last known Git baseline"
+    },
+    {
+      "trigger_id": "article_route_breakage",
+      "examples": [
+        "featured/read route not loading",
+        "article layout broken",
+        "content missing"
+      ],
+      "initial_response": "compare route with AG53 public quality outputs and AG54A baseline"
+    },
+    {
+      "trigger_id": "listing_navigation_breakage",
+      "examples": [
+        "navigation dead-end",
+        "listing route mismatch",
+        "404 for expected public surface"
+      ],
+      "initial_response": "isolate route issue and prepare revert plan if future deployment exists"
+    },
+    {
+      "trigger_id": "privacy_security_boundary_breakage",
+      "examples": [
+        "private/internal record exposed",
+        "unexpected backend/Auth behavior",
+        "secret/config exposure suspicion"
+      ],
+      "initial_response": "stop release movement and escalate under AG52Z blockers"
+    },
+    {
+      "trigger_id": "deployment_pipeline_breakage",
+      "examples": [
+        "validation fails",
+        "push mismatch",
+        "provider mapping error"
+      ],
+      "initial_response": "do not deploy; return to AG54A/AG54B verification sequence"
+    }
+  ],
+  "rollback_triggered_now": false,
+  "blocked_state": {
+    "ag54c_rollback_incident_response_plan_recorded": true,
+    "ag54b_consumed": true,
+    "rollback_trigger_register_recorded": true,
+    "incident_response_action_path_recorded": true,
+    "route_breakage_plan_recorded": true,
+    "privacy_security_incident_plan_recorded": true,
+    "communication_escalation_plan_recorded": true,
+    "rollback_incident_boundary_recorded": true,
+    "ready_for_ag54d_release_operations_audit": true,
+    "actual_rollback_executed": false,
+    "git_revert_or_reset_executed": false,
+    "restore_operation_executed": false,
+    "incident_action_executed": false,
+    "live_public_check_executed": false,
+    "deployment_approved": false,
+    "deployment_performed": false,
+    "vercel_deployment_triggered": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "public_page_mutation_enabled": false,
+    "backend_auth_supabase_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "service_role_key_used": false,
+    "service_role_key_exposed": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "public_dashboard_exposed": false,
+    "external_fetch_enabled": false
+  }
+}
