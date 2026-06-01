@@ -1,0 +1,79 @@
+{
+  "module_id": "AG52Z",
+  "title": "No Publishing / Deployment Audit",
+  "status": "no_publishing_deployment_audit_passed",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "public_page_mutation_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "content_publishing_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "public_content_mutation_enabled",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "public_dashboard_exposed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "deployment_approved",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "deployment_performed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": [],
+  "blocked_state": {
+    "ag52z_security_privacy_legal_closed": true,
+    "ag52a_ag52b_ag52c_ag52d_consumed": true,
+    "security_privacy_legal_closure_completed": true,
+    "ag53a_performance_page_weight_handoff_created": true,
+    "ready_for_ag53a_performance_page_weight_review": true,
+    "secret_committed_to_repo": false,
+    "env_file_committed_to_repo": false,
+    "browser_public_secret_exposed": false,
+    "service_role_key_exposed": false,
+    "service_role_key_used": false,
+    "service_role_key_required_for_current_stage": false,
+    "rls_policy_mutation_enabled": false,
+    "grant_mutation_enabled": false,
+    "rls_public_policy_activation_approved": false,
+    "database_permission_change_enabled": false,
+    "supabase_auth_backend_activation_approved": false,
+    "backend_auth_supabase_activation_performed": false,
+    "runtime_database_query_enabled": false,
+    "website_database_reading_enabled": false,
+    "api_runtime_database_reading_approved_now": false,
+    "reference_fetch_runtime_enabled": false,
+    "automated_external_link_checking_enabled": false,
+    "automated_reference_verification_enabled": false,
+    "image_scraping_enabled": false,
+    "image_external_api_enabled": false,
+    "disclaimer_runtime_injection_enabled": false,
+    "public_page_mutation_enabled": false,
+    "content_publishing_enabled": false,
+    "public_content_mutation_enabled": false,
+    "public_dashboard_exposed": false,
+    "deployment_approved": false,
+    "deployment_performed": false
+  }
+}
