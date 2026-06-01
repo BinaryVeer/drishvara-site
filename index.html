@@ -3734,12 +3734,12 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     opacity: 1 !important;
   }
 </style>
-<link rel="icon" href="/favicon.ico?v=hf14" sizes="any" data-drishvara-hf14-exact-logo-favicon="true">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
-<link rel="manifest" href="/site.webmanifest?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" href="favicon.ico?v=hf14" sizes="any" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" type="image/svg+xml" href="favicon.svg?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+<link rel="manifest" href="site.webmanifest?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
 </head>
 <body>
 
@@ -5420,5 +5420,36 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
   }
 })();
 </script>
+
+<script data-drishvara-ag59c-r1-dom-copy-stabilizer="true">
+(() => {
+  const desiredText = {
+    "#batch03-flow-kicker": "Discover → Read → Reflect",
+    "#batch03-flow-title": "From daily signals to deeper reading and reflection",
+    "#batch03-route-pill": "Discover → Read → Reflect",
+    "#first-light-title": "First Light — 10 Daily Signals"
+  };
+
+  function setText(selector, value) {
+    const element = document.querySelector(selector);
+    if (element && element.textContent.trim() !== value) {
+      element.textContent = value;
+    }
+  }
+
+  function stabilizeDrishvaraPublicCopy() {
+    Object.entries(desiredText).forEach(([selector, value]) => setText(selector, value));
+  }
+
+  document.addEventListener("DOMContentLoaded", stabilizeDrishvaraPublicCopy);
+  window.addEventListener("load", () => {
+    stabilizeDrishvaraPublicCopy();
+    setTimeout(stabilizeDrishvaraPublicCopy, 150);
+    setTimeout(stabilizeDrishvaraPublicCopy, 600);
+    setTimeout(stabilizeDrishvaraPublicCopy, 1500);
+  });
+})();
+</script>
+
 </body>
 </html>
