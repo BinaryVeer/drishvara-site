@@ -1,0 +1,22 @@
+{
+  "module_id": "AG57A",
+  "title": "AG57A to AG57B Public UI-Content Correction Boundary",
+  "status": "ag57b_public_ui_content_correction_boundary_created",
+  "allowed_scope": [
+    "Edit source/UI/content files needed to clear AG56Z defects.",
+    "Replace internal public copy.",
+    "Fix stable fallback for loading/fetching surfaces.",
+    "Align homepage doctrine and daily signal rules.",
+    "Strengthen safety wording for Word/Panchang/Reflection/Vedic preview modules."
+  ],
+  "blocked_scope": [
+    "deployment or Vercel trigger",
+    "GitHub release/tag creation",
+    "live public check unless separately approved",
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

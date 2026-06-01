@@ -1,0 +1,20 @@
+{
+  "module_id": "AG57A",
+  "title": "AG57A Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_sources": [
+    "data/content-intelligence/quality-reviews/ag56z-version-01-live-closure.json",
+    "data/content-intelligence/content-loop/ag56z-pre-live-defect-list-record.json",
+    "data/content-intelligence/content-loop/ag56z-post-closure-handoff-record.json",
+    "data/content-intelligence/quality-registry/ag56z-pre-live-defect-clearance-readiness-record.json",
+    "data/content-intelligence/mutation-plans/ag56z-to-pre-live-defect-clearance-boundary.json"
+  ],
+  "current_git_context": {
+    "branch": "main",
+    "head": "2f03f13",
+    "head_full": "2f03f13cf96d703b26fa5a046c1dd27561ea741c",
+    "origin_main": "2f03f13",
+    "status": "M package.json\n?? scripts/generate-ag57a-pre-live-defect-clearance-file-mapping.mjs\n?? scripts/validate-ag57a-pre-live-defect-clearance-file-mapping.mjs"
+  },
+  "interpretation": "AG57A maps the AG56Z pre-live defects to likely source files/components. It does not modify UI/content. AG57B must apply actual corrections."
+}
