@@ -1,0 +1,49 @@
+{
+  "module_id": "AG60F",
+  "title": "Reading Surface Hierarchy Record",
+  "status": "reading_surface_hierarchy_checked",
+  "source_of_truth": {
+    "article_index_path": "data/article-index.json",
+    "public_total": 77,
+    "public_latest_count": 8,
+    "public_by_date_count": 1,
+    "public_topic_count": 5
+  },
+  "surfaces": {
+    "featured_reads": {
+      "present": true,
+      "current_role": "main curated editorial reading surface",
+      "current_source": "homepage UI data via fetchHomepageUIData().featuredReads",
+      "issue": "If homepage UI data is absent, it shows unavailable fallback even though article-index has public reads.",
+      "recommended_ag60g_action": "Use clear curated-surface copy and optionally fallback to publicLatest while preserving curated hierarchy."
+    },
+    "today_reading_guide": {
+      "present": true,
+      "current_role": "guided route into current reads",
+      "current_source": "homepage UI data via fetchHomepageUIData().readingGuide",
+      "issue": "If homepage UI data is absent, it shows unavailable fallback while article-index has public reads.",
+      "recommended_ag60g_action": "Generate a source-backed guide from publicLatest when homepage UI data is absent."
+    },
+    "indexed_reads": {
+      "present": true,
+      "current_role": "latest public index feed",
+      "current_source": "data/article-index.json publicLatest with fallback chain",
+      "issue": "Raw fallback copy still says alignment/activation even though source is available.",
+      "recommended_ag60g_action": "Update copy and preserve active publicLatest rendering."
+    },
+    "browse_by_date": {
+      "present": true,
+      "current_role": "date-wise archive browsing shell",
+      "current_source": "static shell only",
+      "issue": "publicByDate exists but the UI is not connected to it.",
+      "recommended_ag60g_action": "Connect date/theme UI to publicByDate/publicTopics or reword as prepared if not connected."
+    },
+    "ag09c_single_featured_read": {
+      "present": true,
+      "current_role": "older public-experience featured listing",
+      "current_source": "static AG09C block",
+      "issue": "Duplicates the main Featured Reads hierarchy and visually interrupts the reading surface.",
+      "recommended_ag60g_action": "Rationalise: integrate into Featured Reads, rename as editorial sample, or remove after confirming source purpose."
+    }
+  }
+}

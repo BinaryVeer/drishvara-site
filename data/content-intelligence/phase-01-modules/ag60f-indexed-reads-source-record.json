@@ -1,0 +1,16 @@
+{
+  "module_id": "AG60F",
+  "title": "Indexed Reads Source Record",
+  "status": "indexed_reads_source_verified",
+  "source_path": "data/article-index.json",
+  "loader_function": "loadArticleIndex()",
+  "fetch_path": "data/article-index.json",
+  "source_arrays": {
+    "publicLatest": 8,
+    "publishedItems": 77,
+    "latest": 8,
+    "items": 148
+  },
+  "rendering_rule": "publicLatest -> publishedItems.slice(0,6) -> latest -> items.slice(0,6)",
+  "conclusion": "Indexed Reads has a valid static source and should not be treated as unavailable."
+}

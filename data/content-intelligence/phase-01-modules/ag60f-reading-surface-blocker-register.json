@@ -1,0 +1,37 @@
+{
+  "module_id": "AG60F",
+  "title": "Reading Surface Blocker Register",
+  "status": "reading_surface_blockers_recorded",
+  "blockers": [
+    {
+      "id": "AG60F-B01",
+      "surface": "Featured Reads",
+      "issue": "Featured Reads depends on homepage UI data and does not fallback to article-index public reads.",
+      "severity": "medium"
+    },
+    {
+      "id": "AG60F-B02",
+      "surface": "Today’s Reading Guide",
+      "issue": "Reading Guide depends on homepage UI data and does not fallback to article-index public reads.",
+      "severity": "medium"
+    },
+    {
+      "id": "AG60F-B03",
+      "surface": "Indexed Reads",
+      "issue": "Source is valid, but placeholder/fallback language still suggests it is not activated.",
+      "severity": "low"
+    },
+    {
+      "id": "AG60F-B04",
+      "surface": "Browse by Date",
+      "issue": "publicByDate/publicTopics exist but UI remains a shell.",
+      "severity": "medium"
+    },
+    {
+      "id": "AG60F-B05",
+      "surface": "Single Featured Read",
+      "issue": "AG09C single Featured Read block duplicates the main Featured Reads surface.",
+      "severity": "medium"
+    }
+  ]
+}

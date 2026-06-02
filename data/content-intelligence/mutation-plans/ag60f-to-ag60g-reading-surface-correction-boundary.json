@@ -1,0 +1,20 @@
+{
+  "module_id": "AG60F",
+  "title": "AG60F to AG60G Boundary",
+  "status": "ag60g_reading_surface_correction_boundary_created",
+  "allowed_next_scope": [
+    "Update reading surface labels and explanatory copy.",
+    "Use data/article-index.json publicLatest as fallback source for Reading Guide if homepage UI data is absent.",
+    "Preserve Indexed Reads as latest public index feed.",
+    "Connect or clearly mark Browse by Date using publicByDate/publicTopics.",
+    "Rationalise the static AG09C single Featured Read block."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "live news fetching",
+    "unverified Panchang/Vedic/Word methodology activation"
+  ]
+}

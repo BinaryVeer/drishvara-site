@@ -1,0 +1,46 @@
+{
+  "module_id": "AG60F",
+  "title": "Reading Surface Hierarchy and Indexed Reads Activation Check",
+  "status": "ag60f_reading_surface_hierarchy_checked",
+  "current_git_context": {
+    "branch": "main",
+    "head": "4e4db7b",
+    "head_full": "4e4db7bdc84316fd44efe81ad15d05d95407ae40",
+    "origin_main": "4e4db7b",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag60f-reading-surface-hierarchy-check.mjs\n?? scripts/validate-ag60f-reading-surface-hierarchy-check.mjs"
+  },
+  "checks": {
+    "featured_reads_section_present": true,
+    "reading_guide_section_present": true,
+    "indexed_reads_section_present": true,
+    "indexed_reads_fetches_article_index": true,
+    "indexed_reads_uses_publicLatest": true,
+    "indexed_reads_fallbacks_to_publishedItems": true,
+    "browse_by_date_present": true,
+    "browse_by_date_static_shell": true,
+    "ag09c_single_featured_read_present": true,
+    "featured_reads_uses_homepage_ui_data": true,
+    "reading_guide_uses_homepage_ui_data": true
+  },
+  "hierarchy_file": "data/content-intelligence/phase-01-modules/ag60f-reading-surface-hierarchy-record.json",
+  "article_source_file": "data/content-intelligence/phase-01-modules/ag60f-indexed-reads-source-record.json",
+  "blocker_file": "data/content-intelligence/phase-01-modules/ag60f-reading-surface-blocker-register.json",
+  "no_backend_runtime_audit_file": "data/content-intelligence/backend-architecture/ag60f-no-backend-auth-rls-database-runtime-audit.json",
+  "no_v02_expansion_audit_file": "data/content-intelligence/backend-architecture/ag60f-no-v02-expansion-audit.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag60f-ag60g-reading-surface-correction-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag60f-to-ag60g-reading-surface-correction-boundary.json",
+  "summary": {
+    "article_index_valid": true,
+    "indexed_reads_source_active": true,
+    "public_total": 77,
+    "public_latest_count": 8,
+    "featured_reads_needs_source_fallback_or_hierarchy_copy": true,
+    "reading_guide_needs_source_fallback": true,
+    "browse_by_date_needs_publicByDate_connection_or_copy": true,
+    "ag09c_single_featured_read_duplication_present": true,
+    "ready_for_ag60g": true,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false
+  }
+}
