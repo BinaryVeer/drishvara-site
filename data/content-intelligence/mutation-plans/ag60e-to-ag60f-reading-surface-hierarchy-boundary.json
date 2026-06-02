@@ -1,0 +1,17 @@
+{
+  "module_id": "AG60E",
+  "title": "AG60E to AG60F Boundary",
+  "status": "ag60f_reading_surface_hierarchy_boundary_created",
+  "allowed_next_scope": [
+    "Verify Featured Reads / Indexed Reads / Today’s Reading Guide / Browse by Date source hierarchy.",
+    "Use data/article-index.json as the active article-index source.",
+    "Correct public copy or rendering only where source-backed."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "news/sports live fetching without governed source rules"
+  ]
+}

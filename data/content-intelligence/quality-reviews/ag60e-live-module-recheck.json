@@ -1,0 +1,33 @@
+{
+  "module_id": "AG60E",
+  "title": "Live Module Recheck",
+  "status": "ag60e_live_module_recheck_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "c8a02bf",
+    "head_full": "c8a02bf4a22bd99b73114c310ee281a30f000d3f",
+    "origin_main": "c8a02bf",
+    "status_at_generation": "M package.json\n?? data/content-intelligence/backend-architecture/ag60e-no-backend-auth-rls-database-runtime-audit.json\n?? data/content-intelligence/backend-architecture/ag60e-no-v02-expansion-audit.json\n?? data/content-intelligence/mutation-plans/ag60e-to-ag60f-reading-surface-hierarchy-boundary.json\n?? data/content-intelligence/phase-01-modules/ag60e-article-index-verification-record.json\n?? data/content-intelligence/phase-01-modules/ag60e-live-module-status-record.json\n?? data/content-intelligence/quality-registry/ag60e-ag60f-reading-surface-hierarchy-readiness-record.json\n?? data/content-intelligence/quality-reviews/ag60e-live-module-recheck.json\n?? data/quality/ag60e-live-module-recheck-preview.json\n?? data/quality/ag60e-live-module-recheck.json\n?? docs/quality/AG60E_LIVE_MODULE_RECHECK.md\n?? scripts/generate-ag60e-live-module-recheck.mjs\n?? scripts/validate-ag60e-live-module-recheck.mjs"
+  },
+  "evidence_files": {
+    "article_index": "data/article-index.json",
+    "daily_context": "generated/daily-context.json",
+    "sports_context": "generated/sports-context.json",
+    "homepage": "index.html"
+  },
+  "summary": {
+    "homepage_live_modules_present": false,
+    "article_index_valid": true,
+    "article_index_public_total": 77,
+    "article_index_public_latest_count": 8,
+    "first_light_corrected": true,
+    "first_light_actual_signal_selection_active": false,
+    "sports_live_intelligence_active": false,
+    "methodology_gated_modules_remain_gated": true,
+    "ready_for_ag60f": true,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false
+  },
+  "conclusion": "AG60E confirms the live module surface is stable after AG60D-R3. The correct article index path is data/article-index.json and it is valid with public records. Next work should rationalise the Reading Surface hierarchy rather than repair a missing article-index path."
+}

@@ -1,0 +1,80 @@
+{
+  "module_id": "AG60E",
+  "title": "Live Module Status Record",
+  "status": "live_module_recheck_recorded",
+  "homepage_presence": {
+    "First Light — 10 Daily Signals": true,
+    "Featured Reads": true,
+    "Today’s Reading Guide": true,
+    "Latest from Drishvara": true,
+    "Sports Desk": true,
+    "Word of the Day": true,
+    "Today's Vedic Guidance": false,
+    "Panchang & Festival View": true,
+    "Upcoming Observance": true,
+    "Browse by Date": true,
+    "Star Reflection": true,
+    "Psychometric Assessment": true
+  },
+  "first_light": {
+    "visible": true,
+    "public_render_corrected_to": [
+      "India",
+      "Northeast Watch",
+      "World"
+    ],
+    "actual_signal_selection_active": false,
+    "source_status": "prepared_surface_rule_only",
+    "selection_rule": {
+      "default_total": 10,
+      "india_focused": 6,
+      "international": 4
+    }
+  },
+  "article_index": {
+    "module_id": "AG60E",
+    "title": "Article Index Verification Record",
+    "status": "article_index_verified",
+    "path": "data/article-index.json",
+    "source_path": "data/article-index.json",
+    "fetch_path_in_homepage": "data/article-index.json",
+    "total": 148,
+    "publicTotal": 77,
+    "items_count": 148,
+    "publishedItems_count": 77,
+    "publicLatest_count": 8,
+    "featuredReads_key_present": false,
+    "sample_public_latest_title": "Advancing Digital Literacy through Public Education Programs",
+    "conclusion": "The correct public article-index source is data/article-index.json. The earlier data/articles/index.json check was not the active homepage path."
+  },
+  "featured_reads_and_indexed_reads": {
+    "featured_reads_visible": true,
+    "indexed_reads_visible": true,
+    "reading_guide_visible": true,
+    "source_available": true,
+    "source_path": "data/article-index.json",
+    "unresolved": [
+      "featuredReads array is not present; publicLatest/publishedItems are available.",
+      "Featured Reads / Indexed Reads / Today’s Reading Guide / single Featured Read hierarchy needs rationalisation.",
+      "Browse by Date should be checked against publicByDate."
+    ]
+  },
+  "sports_desk": {
+    "visible": true,
+    "status": "prepared_surface",
+    "source": "static-github-pages-fallback",
+    "live_events_count": 0,
+    "tournament_watch_count": 0,
+    "major_updates_count": 0,
+    "featured_article_active": false,
+    "conclusion": "Prepared-surface fallback only; not live sports intelligence yet."
+  },
+  "methodology_gated_modules": {
+    "word_of_the_day": "visible but curated/static-preview style; methodology verification pending",
+    "vedic_guidance": "visible but reviewed-method/non-deterministic safety copy remains",
+    "panchang_festival": "visible but source/regional-method verification gated",
+    "upcoming_observance": "visible but needs source and calendar-method verification",
+    "star_reflection": "visible but reflective prompt only",
+    "psychometric_assessment": "visible but coming-soon/product-layer placeholder"
+  }
+}
