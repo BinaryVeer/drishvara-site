@@ -1,0 +1,22 @@
+{
+  "module_id": "AG60H",
+  "title": "AG60H to AG60I Boundary",
+  "status": "ag60i_methodology_gated_module_correction_boundary_created",
+  "allowed_next_scope": [
+    "Reword public copy for methodology-gated modules.",
+    "Remove or suppress exact-looking Panchang values if not source-backed.",
+    "Disable or de-emphasise inactive input forms.",
+    "Retain safety notes where modules are preview-only.",
+    "Reduce prominence of prepared-only Sports Desk if needed."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "live Panchang calculation",
+    "live astrology/personal prediction",
+    "live sports/news fetching without governed source rules",
+    "psychometric data collection"
+  ]
+}

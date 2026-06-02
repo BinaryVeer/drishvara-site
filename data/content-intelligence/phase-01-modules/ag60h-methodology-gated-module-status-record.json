@@ -1,0 +1,71 @@
+{
+  "module_id": "AG60H",
+  "title": "Methodology-Gated Module Status Record",
+  "status": "methodology_gated_modules_audited",
+  "modules": {
+    "word_of_the_day": {
+      "visible": true,
+      "current_state": "curated_static_preview",
+      "public_copy_safety": true,
+      "activation_status": "not fully activated",
+      "issue": "Needs verified word-selection methodology, Sanskrit/Hindi integrity workflow, and editorial source basis. User has specifically indicated Nityanand Mishra Ji style/methodology alignment should be considered before activation.",
+      "recommended_ag60i_action": "Keep as reviewed-method preview or connect to a verified word-bank source with clear methodology note."
+    },
+    "vedic_guidance": {
+      "visible": true,
+      "current_state": "reflective_preview",
+      "public_copy_safety": true,
+      "activation_status": "not live calculated",
+      "issue": "Shows weekday, colour, food and mantra copy but remains general reflective guidance. Needs governed rule basis before stronger public claims.",
+      "recommended_ag60i_action": "Retain as general reflective module unless rule-source and calculation basis are verified."
+    },
+    "panchang_festival_view": {
+      "visible": true,
+      "current_state": "static_location_preview",
+      "public_copy_safety": true,
+      "activation_status": "not live Panchang",
+      "issue": "Shows sunrise/moon/tithi/nakshatra/yoga-style fields but source/regional method is not verified. This must not be presented as live Panchang.",
+      "recommended_ag60i_action": "Either keep as clearly labelled preview or suppress exact Panchang values until source/regional method is implemented."
+    },
+    "upcoming_observance": {
+      "visible": true,
+      "current_state": "festival_preview_under_editorial_verification",
+      "activation_status": "not live calendar",
+      "issue": "Needs festival/observance source registry, date basis, regional applicability and bilingual naming review.",
+      "recommended_ag60i_action": "Use safe editorial verification copy until registry is connected."
+    },
+    "star_reflection": {
+      "visible": true,
+      "current_state": "input_form_reflective_prompt",
+      "public_copy_safety": true,
+      "activation_status": "not predictive/personalized",
+      "issue": "Inputs are visible, but there is no governed personal-calculation or consent flow yet.",
+      "recommended_ag60i_action": "Keep as non-functional preview or disable inputs until proper consent/methodology layer exists."
+    },
+    "psychometric_assessment": {
+      "visible": true,
+      "current_state": "coming_soon_placeholder",
+      "public_copy_safety": true,
+      "activation_status": "not active",
+      "issue": "Product layer is visible but not activated. Requires consent, data model, age gating and assessment methodology.",
+      "recommended_ag60i_action": "Keep as coming soon, or move lower if it distracts from live Phase-01 reading surfaces."
+    },
+    "sports_desk": {
+      "visible": true,
+      "current_state": "prepared_surface_fallback",
+      "source": "static-github-pages-fallback",
+      "activation_status": "not live sports intelligence",
+      "live_events_count": 0,
+      "tournament_watch_count": 0,
+      "major_updates_count": 0,
+      "issue": "Sports Desk is structurally present but generated/sports-context.json contains empty prepared arrays.",
+      "recommended_ag60i_action": "Keep as prepared Sports Desk or reduce prominence until governed sports sourcing is implemented."
+    }
+  },
+  "daily_context_observation": {
+    "generated_daily_context_status": "prepared_surface",
+    "daily_context_source": "static-github-pages-fallback",
+    "first_light_rule_available": true,
+    "note": "generated/daily-context.json is currently a prepared surface rule record, not a live cultural-methodology data source."
+  }
+}
