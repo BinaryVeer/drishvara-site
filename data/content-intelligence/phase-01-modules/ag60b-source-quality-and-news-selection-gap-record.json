@@ -1,0 +1,45 @@
+{
+  "module_id": "AG60B",
+  "title": "Source Quality and News Selection Gap Record",
+  "status": "source_quality_generation_gaps_recorded",
+  "gaps": [
+    {
+      "gap_id": "news_source_fetching_quality_unverified",
+      "modules": [
+        "first_light",
+        "featured_reads",
+        "today_reading_guide",
+        "indexed_reads"
+      ],
+      "status": "unverified",
+      "description": "Need to verify whether source fetching, scoring, title generation, subtitle generation and selection quality match planned logic."
+    },
+    {
+      "gap_id": "first_light_10_6_4_selection_rule_unverified",
+      "modules": [
+        "first_light"
+      ],
+      "status": "partially_present_as_static_fallback",
+      "description": "Generated daily context contains default rule, but AG60B must not treat it as full source-driven selection until source/fetch script proves it."
+    },
+    {
+      "gap_id": "sports_context_live_generation_unverified",
+      "modules": [
+        "sports_desk"
+      ],
+      "status": "static_fallback_present",
+      "description": "Sports fallback JSON exists, but live sports/news context quality and heading generation are not yet verified."
+    },
+    {
+      "gap_id": "methodology_backed_daily_cultural_modules_pending",
+      "modules": [
+        "word_of_day",
+        "vedic_guidance",
+        "panchang_festival",
+        "upcoming_observance"
+      ],
+      "status": "methodology_pending",
+      "description": "Cultural modules require source-method validation before being treated as generated factual modules."
+    }
+  ]
+}

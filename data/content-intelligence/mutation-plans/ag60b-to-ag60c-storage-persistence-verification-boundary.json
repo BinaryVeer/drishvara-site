@@ -1,0 +1,17 @@
+{
+  "module_id": "AG60B",
+  "title": "AG60B to AG60C Boundary",
+  "status": "ag60c_storage_persistence_verification_boundary_created",
+  "allowed_scope": [
+    "Inspect static/generated persistence records.",
+    "Map future Supabase table needs without activating backend.",
+    "Classify modules as generated_static, hardcoded, placeholder, methodology_pending or backend_deferred."
+  ],
+  "blocked_scope_without_future_approval": [
+    "Supabase/Auth activation",
+    "runtime database writes",
+    "service-role use",
+    "RLS/grant mutation",
+    "V02 expansion"
+  ]
+}

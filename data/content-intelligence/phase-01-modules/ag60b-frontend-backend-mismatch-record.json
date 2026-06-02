@@ -1,0 +1,44 @@
+{
+  "module_id": "AG60B",
+  "title": "Frontend / Backend Mismatch Record",
+  "status": "frontend_backend_mismatches_recorded",
+  "mismatches": [
+    {
+      "mismatch_id": "frontend_claims_dynamic_but_backend_deferred",
+      "affected_modules": [
+        "first_light",
+        "featured_reads",
+        "single_featured_read",
+        "indexed_reads",
+        "today_reading_guide",
+        "sports_desk",
+        "browse_by_date",
+        "founder_notebook",
+        "star_reflection",
+        "psychometric_assessment",
+        "ads_partner_slot"
+      ],
+      "status": "backend_deferred",
+      "description": "Any module suggesting persistence/dynamic retrieval must be treated as generated/static until Supabase/Auth/backend is explicitly activated."
+    },
+    {
+      "mismatch_id": "homepage_visible_modules_exceed_verified_generation",
+      "affected_modules": [
+        "word_of_day",
+        "vedic_guidance",
+        "panchang_festival",
+        "upcoming_observance"
+      ],
+      "status": "functional_gap",
+      "description": "Several visible modules are ahead of verified generation/fetch/persistence logic and need AG60D correction or activation."
+    },
+    {
+      "mismatch_id": "vercel_parallel_deployment_noise",
+      "affected_modules": [
+        "hosting"
+      ],
+      "status": "housekeeping_required",
+      "description": "Vercel project-hvz3q failure emails are from stale/parallel deployment target; official V01 live host is GitHub Pages."
+    }
+  ]
+}

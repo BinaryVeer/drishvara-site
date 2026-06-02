@@ -1,0 +1,22 @@
+{
+  "module_id": "AG60B",
+  "title": "AG60B Source Consumption Record",
+  "status": "source_consumption_recorded",
+  "consumed_inputs": {
+    "ag60aReview": "data/content-intelligence/quality-reviews/ag60a-phase-01-live-module-inventory-source-map.json",
+    "ag60aInventory": "data/content-intelligence/phase-01-modules/ag60a-live-module-inventory-record.json",
+    "ag60aFrontendBackendMap": "data/content-intelligence/phase-01-modules/ag60a-frontend-backend-source-map-record.json",
+    "ag60aMethodologyGate": "data/content-intelligence/phase-01-modules/ag60a-methodology-verification-gate-record.json",
+    "ag59zReview": "data/content-intelligence/quality-reviews/ag59z-v01-go-live-closure.json",
+    "ag27Review": "data/content-intelligence/quality-reviews/ag27-supabase-auth-backend-decision-checkpoint.json",
+    "indexHtml": "index.html"
+  },
+  "current_git_context": {
+    "branch": "main",
+    "head": "d8f41a6",
+    "head_full": "d8f41a67b700d917f4f7284cc86f53a78ccad26b",
+    "origin_main": "d8f41a6",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag60b-generation-fetch-logic-verification.mjs\n?? scripts/validate-ag60b-generation-fetch-logic-verification.mjs"
+  },
+  "interpretation": "AG60B verifies generation/fetch/source evidence for Phase-01 modules. It does not activate backend/Supabase or mutate public UI."
+}

@@ -1,0 +1,35 @@
+{
+  "module_id": "AG60B",
+  "title": "Title / Subtitle Generation Verification Record",
+  "status": "title_subtitle_issues_and_generation_gaps_recorded",
+  "checks": [
+    {
+      "module_id": "first_light",
+      "issue": "Label/title mismatch",
+      "evidence": "Homepage still has legacy public heading text possibility: First Light — 24 Hrs across India, while intended logic is First Light — 10 Daily Signals.",
+      "status": "not_detected_in_index",
+      "recommended_fix_stage": "AG60D"
+    },
+    {
+      "module_id": "today_reading_guide",
+      "issue": "Reading guide heading/subheading may be hardcoded",
+      "evidence": "AG60B must verify whether Step 1/2/3 are generated from current Featured Reads or static copy.",
+      "status": "generation_logic_unverified",
+      "recommended_fix_stage": "AG60B/AG60D"
+    },
+    {
+      "module_id": "featured_reads",
+      "issue": "Featured Reads and Featured Read hierarchy",
+      "evidence": "Both grid and single featured read exist; may confuse editorial hierarchy.",
+      "status": "duplicate_or_hierarchy_decision_required",
+      "recommended_fix_stage": "AG60D"
+    },
+    {
+      "module_id": "word_of_day",
+      "issue": "Word selection and subtitle/multilingual correctness",
+      "evidence": "Requires Nityanand Mishra ji methodology/source-style verification before daily generation claim.",
+      "status": "methodology_pending",
+      "recommended_fix_stage": "AG60C/AG60D"
+    }
+  ]
+}

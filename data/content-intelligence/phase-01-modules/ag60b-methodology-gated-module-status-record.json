@@ -1,0 +1,45 @@
+{
+  "module_id": "AG60B",
+  "title": "Methodology-Gated Module Status Record",
+  "status": "methodology_gated_modules_not_fully_activated",
+  "gates_from_ag60a": [
+    {
+      "module": "Word of the Day",
+      "gate": "Nityanand Mishra ji methodology/style reference and Sanskrit/Hindi correctness verification required before calling it generated."
+    },
+    {
+      "module": "Panchang & Festival View",
+      "gate": "Traditional panchang source/calculation method and date/location logic verification required."
+    },
+    {
+      "module": "Today’s Vedic Guidance",
+      "gate": "Reviewed-method, non-deterministic, source-backed guidance required; no invented mantra/unsupported claim."
+    },
+    {
+      "module": "Upcoming Observance",
+      "gate": "Festival calendar/source verification required before public factual claim."
+    }
+  ],
+  "module_status": [
+    {
+      "module_id": "word_of_day",
+      "status": "methodology_pending",
+      "requirement": "Verify Nityanand Mishra ji methodology/style reference, Sanskrit correctness, Hindi meaning and editorial source before automated/daily generation."
+    },
+    {
+      "module_id": "panchang_festival",
+      "status": "methodology_pending",
+      "requirement": "Verify panchang calculation/source method, date/location behaviour and festival source."
+    },
+    {
+      "module_id": "vedic_guidance",
+      "status": "methodology_pending",
+      "requirement": "Verify reviewed-source basis; ensure no deterministic prediction, invented mantra or unsupported claim."
+    },
+    {
+      "module_id": "upcoming_observance",
+      "status": "methodology_pending",
+      "requirement": "Verify festival calendar source and date logic; current text like Akshaya Tritiya must not be treated as generated fact until verified."
+    }
+  ]
+}
