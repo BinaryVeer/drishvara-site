@@ -3740,6 +3740,28 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
 <link rel="manifest" href="site.webmanifest?v=hf14" data-drishvara-hf14-exact-logo-favicon="true">
+
+<style data-drishvara-ag60g-r1-prepaint-hidden-surface-guard="true">
+  [data-drishvara-ag60g-hidden-duplicate-featured-read="true"],
+  [data-drishvara-ag60d-r1-hidden-duplicate-sports-strip="true"],
+  [data-drishvara-ag60d-r2-hidden-duplicate-sports-strip="true"],
+  [data-drishvara-ag60d-r3-hidden-duplicate-sports-strip="true"],
+  [data-drishvara-prepaint-hidden="true"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  html[data-drishvara-ag60-prepaint="active"]:not([data-drishvara-ag60-stable="true"]) #first-light-list,
+  html[data-drishvara-ag60-prepaint="active"]:not([data-drishvara-ag60-stable="true"]) #featured-reads-grid,
+  html[data-drishvara-ag60-prepaint="active"]:not([data-drishvara-ag60-stable="true"]) #reading-guide-list,
+  html[data-drishvara-ag60-prepaint="active"]:not([data-drishvara-ag60-stable="true"]) #article-index-list {
+    visibility: hidden;
+  }
+</style>
+<script data-drishvara-ag60g-r1-prepaint-state="true">
+  document.documentElement.setAttribute("data-drishvara-ag60-prepaint", "active");
+</script>
+
 </head>
 <body>
 
@@ -5960,6 +5982,23 @@ document.addEventListener("DOMContentLoaded", () => {
     initialiseAg60gOpenDayFromArticleIndex();
   }
 });
+</script>
+
+
+<script data-drishvara-ag60g-r1-prepaint-release="true">
+(() => {
+  function markStable() {
+    document.documentElement.setAttribute("data-drishvara-ag60-stable", "true");
+  }
+
+  if (document.readyState === "complete") {
+    setTimeout(markStable, 350);
+  } else {
+    window.addEventListener("load", () => setTimeout(markStable, 350), { once: true });
+  }
+
+  setTimeout(markStable, 2500);
+})();
 </script>
 
 </body>
