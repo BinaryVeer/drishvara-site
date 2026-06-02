@@ -1,0 +1,33 @@
+{
+  "module_id": "AG60C",
+  "title": "Storage / Persistence Verification",
+  "status": "storage_persistence_verification_recorded",
+  "depends_on": [
+    "AG60B",
+    "AG60A",
+    "AG59Z",
+    "AG27"
+  ],
+  "source_file": "data/content-intelligence/phase-01-modules/ag60c-source-consumption-record.json",
+  "persistence_matrix_file": "data/content-intelligence/phase-01-modules/ag60c-module-storage-persistence-matrix-record.json",
+  "static_files_file": "data/content-intelligence/phase-01-modules/ag60c-static-generated-file-verification-record.json",
+  "future_supabase_file": "data/content-intelligence/phase-01-modules/ag60c-future-supabase-persistence-need-record.json",
+  "frontend_sync_file": "data/content-intelligence/phase-01-modules/ag60c-frontend-storage-sync-gap-record.json",
+  "no_backend_runtime_audit_file": "data/content-intelligence/backend-architecture/ag60c-no-backend-auth-rls-database-runtime-audit.json",
+  "no_v02_expansion_audit_file": "data/content-intelligence/backend-architecture/ag60c-no-v02-expansion-audit.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag60c-ag60d-ui-module-correction-readiness-record.json",
+  "boundary_file": "data/content-intelligence/mutation-plans/ag60c-to-ag60d-ui-module-correction-boundary.json",
+  "summary": {
+    "ag60c_recorded": true,
+    "module_count": 15,
+    "static_generated_files_verified": true,
+    "future_supabase_needs_mapped": 13,
+    "frontend_storage_sync_gaps_recorded": 6,
+    "ready_for_ag60d": true,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "git_head_short": "06c7b7f",
+    "branch": "main"
+  }
+}

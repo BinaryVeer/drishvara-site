@@ -1,0 +1,18 @@
+{
+  "module_id": "AG60C",
+  "title": "AG60C to AG60D Boundary",
+  "status": "ag60d_ui_module_correction_boundary_created",
+  "allowed_scope": [
+    "Apply frontend copy/layout corrections based on AG60A-AG60C evidence.",
+    "Hide, merge or reword placeholders.",
+    "Correct First Light and other title/subtitle mismatches.",
+    "Do not activate Supabase/Auth/backend."
+  ],
+  "blocked_scope_without_future_approval": [
+    "Supabase/Auth activation",
+    "runtime database writes",
+    "service-role use",
+    "RLS/grant mutation",
+    "V02 expansion"
+  ]
+}

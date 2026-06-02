@@ -1,0 +1,50 @@
+{
+  "module_id": "AG60C",
+  "title": "Frontend / Storage Sync Gap Record",
+  "status": "frontend_storage_sync_gaps_recorded",
+  "gap_count": 6,
+  "gaps": [
+    {
+      "gap_id": "first_light_title_persistence_sync",
+      "module_id": "first_light",
+      "status": "not_detected",
+      "issue": "Frontend heading may not reflect the selected 10 Daily Signals persistence model.",
+      "ag60d_action": "replace legacy heading with First Light — 10 Daily Signals if intended final title is confirmed."
+    },
+    {
+      "gap_id": "featured_reads_and_single_featured_read_hierarchy",
+      "module_id": "featured_reads",
+      "status": "editorial_storage_hierarchy_required",
+      "issue": "Featured Reads grid and single Featured Read both exist; persistence/source hierarchy must be clarified.",
+      "ag60d_action": "merge, rename, or define one as current feature and one as archive/grid."
+    },
+    {
+      "gap_id": "indexed_reads_not_confirmed_as_populated_index",
+      "module_id": "indexed_reads",
+      "status": "activation_required_or_hide",
+      "issue": "Indexed Reads should not remain placeholder if Phase-01 article index exists.",
+      "ag60d_action": "connect to generated index or hide placeholder block."
+    },
+    {
+      "gap_id": "sports_multiple_placeholder_cards",
+      "module_id": "sports_desk",
+      "status": "simplification_or_activation_required",
+      "issue": "Sports Desk has prepared placeholders and a static fallback; full live sports context is not verified.",
+      "ag60d_action": "simplify to one prepared sports module or connect real curated sports context."
+    },
+    {
+      "gap_id": "methodology_gated_modules_visible_before_method_verification",
+      "module_id": "word_panchang_vedic_observance",
+      "status": "methodology_pending",
+      "issue": "Word/Panchang/Vedic/Observance modules need source/method verification before generated claims.",
+      "ag60d_action": "retain as reviewed-preview only or hide factual-looking claims until method verified."
+    },
+    {
+      "gap_id": "ads_placeholder_visible",
+      "module_id": "ads_partner_slot",
+      "status": "hide_recommended",
+      "issue": "Visible ad/sponsored placeholder weakens public credibility.",
+      "ag60d_action": "hide until partner/ad policy exists."
+    }
+  ]
+}

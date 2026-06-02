@@ -1,0 +1,21 @@
+{
+  "module_id": "AG60C",
+  "title": "Static / Generated File Verification Record",
+  "status": "static_generated_files_verified",
+  "checks": [
+    {
+      "file": "generated/daily-context.json",
+      "exists": true,
+      "valid_json": true,
+      "size_bytes": 390
+    },
+    {
+      "file": "generated/sports-context.json",
+      "exists": true,
+      "valid_json": true,
+      "size_bytes": 519
+    }
+  ],
+  "all_required_static_files_valid": true,
+  "interpretation": "V01 currently relies on GitHub Pages static/generated files for selected module contexts. This is not Supabase persistence."
+}
