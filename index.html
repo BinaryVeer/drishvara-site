@@ -4014,7 +4014,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
         <section>
           <h2 class="section-title">Featured Reads</h2>
           <p class="section-intro">
-            The main reading surface of Drishvara. These are the most important stories to read today.
+            Curated editorial picks from Drishvara. When daily curation is unavailable, this surface uses the latest public reads from the article index.
           </p>
 
           <div class="feature-grid" id="featured-reads-grid">
@@ -4035,7 +4035,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
           <div class="label">Today’s Reading Guide</div>
           <h2 class="section-title-sm">Start Here Today</h2>
           <p id="reading-guide-intro">
-            A compact guide to the stories worth reading today. Use this as a quick route into the full articles.
+            A guided route into current public reads. Curated guide data is preferred; latest indexed reads are used when daily guide data is unavailable.
           </p>
 
           <div class="reading-guide-list" id="reading-guide-list">
@@ -4051,13 +4051,13 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
           <div class="label">Indexed Reads</div>
           <h2 class="section-title-sm" id="article-index-title">Latest from Drishvara</h2>
           <p id="article-index-intro">
-            Recently generated and published reads from the Drishvara content pipeline.
+            Latest public reads from the Drishvara article index.
           </p>
           <div class="reading-guide-list" id="article-index-list">
             <div class="reading-guide-item">
               <div class="sub">Article Index</div>
-              <div class="title">Full article index is being aligned with verified Phase-01 reads.</div>
-              <div class="meta">Until activation, use Featured Reads and the reading guide above.</div>
+              <div class="title">Latest public reads are loading from the article index.</div>
+              <div class="meta">This section uses data/article-index.json and publicLatest records.</div>
             </div>
           </div>
           <div class="reading-guide-links">
@@ -4074,7 +4074,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
             <p id="founder-notebook-entry">This week’s notebook is being prepared.</p>
           </div>
         </div>
-      <section data-drishvara-ag09c-public-experience-listing="true" class="drishvara-public-readiness-featured-link" aria-labelledby="ag09c-featured-read-title">
+      <section data-drishvara-ag09c-public-experience-listing="true" data-drishvara-ag60g-hidden-duplicate-featured-read="true" class="drishvara-public-readiness-featured-link" aria-labelledby="ag09c-featured-read-title" hidden aria-hidden="true">
   <!-- AG09C-PUBLIC-EXPERIENCE-LISTING -->
   <h2 id="ag09c-featured-read-title">Featured Read</h2>
   <article>
@@ -4173,7 +4173,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
             </select>
             <button class="btn btn-secondary" id="open-day-button">Open that Day</button>
           </div>
-          <div class="utility-note" id="open-day-note">Archive browsing shell is ready. Live date-wise retrieval will be connected next.</div>
+          <div class="utility-note" id="open-day-note">Date-wise archive uses the public article index. Select a date or theme to inspect available public reads.</div>
         </div>
 
         <div class="card" id="psychometric-card">
@@ -4326,12 +4326,207 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
       `;
     }
 
+
+    function ag60gReadingSurfaceHierarchyMarker() {
+      return "AG60G_READING_SURFACE_HIERARCHY_CORRECTION";
+    }
+
+    let ag60gArticleIndexCache = null;
+
+    async function fetchAg60gArticleIndexData() {
+      if (ag60gArticleIndexCache) return ag60gArticleIndexCache;
+
+      try {
+        const response = await fetch("data/article-index.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("data/article-index.json unavailable");
+        ag60gArticleIndexCache = await response.json();
+        return ag60gArticleIndexCache;
+      } catch (error) {
+        console.log("AG60G article index unavailable:", error.message);
+        return null;
+      }
+    }
+
+    function ag60gPublicItems(indexData) {
+      if (!indexData || typeof indexData !== "object") return [];
+      if (Array.isArray(indexData.publicLatest) && indexData.publicLatest.length) return indexData.publicLatest;
+      if (Array.isArray(indexData.publishedItems) && indexData.publishedItems.length) return indexData.publishedItems;
+      if (Array.isArray(indexData.latest) && indexData.latest.length) return indexData.latest;
+      if (Array.isArray(indexData.items) && indexData.items.length) return indexData.items;
+      return [];
+    }
+
+    function ag60gEscape(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function ag60gTitle(item, fallback = "Untitled Drishvara read") {
+      if (typeof localizedTitle === "function") return localizedTitle(item, fallback);
+      return item?.title || fallback;
+    }
+
+    function ag60gSummary(item, fallback = "A Drishvara read prepared for public discovery.") {
+      if (typeof localizedSummary === "function") return localizedSummary(item, fallback);
+      return item?.summary || fallback;
+    }
+
+    function ag60gHref(item) {
+      if (!item) return "article.html";
+      return item.url || item.directUrl || item.path || (item.folder ? `article.html?folder=${encodeURIComponent(item.folder)}` : "article.html");
+    }
+
+    function ag60gImage(item) {
+      const raw = String(item?.image || item?.imagePath || "").trim();
+      if (!raw) return "";
+      return raw;
+    }
+
+    function renderAg60gFeaturedReadsFromArticleIndex(indexData) {
+      const grid = document.getElementById("featured-reads-grid");
+      if (!grid) return false;
+
+      const items = ag60gPublicItems(indexData).slice(0, 3);
+      if (!items.length) return false;
+
+      grid.innerHTML = items.map((item) => {
+        const image = ag60gImage(item);
+        const imageHtml = image
+          ? `<img class="feature-image" src="${ag60gEscape(image)}" alt="${ag60gEscape(ag60gTitle(item))}" loading="lazy" referrerpolicy="no-referrer" />`
+          : `<div class="image-fallback-text">Drishvara read</div>`;
+
+        return `
+          <article class="feature-card" data-drishvara-ag60g-featured-read="article-index-fallback">
+            <div class="feature-image-wrap">${imageHtml}</div>
+            <div class="feature-body">
+              <div class="label">Featured Read · ${ag60gEscape(item.tag || item.source || "Drishvara")}</div>
+              <h3>${ag60gEscape(ag60gTitle(item))}</h3>
+              <p>${ag60gEscape(ag60gSummary(item))}</p>
+              <div class="reading-guide-links">
+                <a href="${ag60gEscape(ag60gHref(item))}">Read now</a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      return true;
+    }
+
+    function renderAg60gReadingGuideFromArticleIndex(indexData) {
+      const guideList = document.getElementById("reading-guide-list");
+      const intro = document.getElementById("reading-guide-intro");
+      if (!guideList) return false;
+
+      const items = ag60gPublicItems(indexData).slice(0, 3);
+      if (!items.length) return false;
+
+      if (intro) {
+        intro.textContent = "A source-backed route into the latest public reads from Drishvara.";
+      }
+
+      const guideLabels = ["Start", "Deepen", "Continue"];
+
+      guideList.innerHTML = items.map((item, index) => `
+        <div class="reading-guide-item" data-drishvara-ag60g-reading-guide="article-index-fallback">
+          <div class="sub">${ag60gEscape(guideLabels[index] || "Read")} · ${ag60gEscape(item.tag || item.source || "Drishvara")}</div>
+          <div class="title">${ag60gEscape(ag60gTitle(item))}</div>
+          <div class="meta">${ag60gEscape(ag60gSummary(item))}</div>
+          <div class="reading-guide-links">
+            <a href="${ag60gEscape(ag60gHref(item))}">Open read</a>
+          </div>
+        </div>
+      `).join("");
+
+      return true;
+    }
+
+    function normaliseAg60gTopic(value) {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    async function initialiseAg60gOpenDayFromArticleIndex() {
+      const dateInput = document.getElementById("open-day-date");
+      const themeSelect = document.getElementById("open-day-theme");
+      const button = document.getElementById("open-day-button");
+      const note = document.getElementById("open-day-note");
+      if (!dateInput || !themeSelect || !button || !note) return;
+
+      const indexData = await fetchAg60gArticleIndexData();
+      if (!indexData) {
+        note.textContent = "Date-wise archive will appear after the article index is available.";
+        return;
+      }
+
+      const publicByDate = indexData.publicByDate && typeof indexData.publicByDate === "object" ? indexData.publicByDate : {};
+      const publicTopics = indexData.publicTopics && typeof indexData.publicTopics === "object" ? indexData.publicTopics : {};
+      const publicTotal = typeof indexData.publicTotal === "number" ? indexData.publicTotal : ag60gPublicItems(indexData).length;
+
+      const topicKeys = Object.keys(publicTopics).sort();
+      if (topicKeys.length) {
+        themeSelect.innerHTML = `<option value="">All Themes</option>` + topicKeys.map((topic) => {
+          const label = topic.replace(/[-_]+/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+          return `<option value="${ag60gEscape(topic)}">${ag60gEscape(label)}</option>`;
+        }).join("");
+      }
+
+      note.innerHTML = `Archive source active: ${ag60gEscape(publicTotal)} public reads, ${ag60gEscape(Object.keys(publicByDate).length)} dates, ${ag60gEscape(topicKeys.length)} themes.`;
+
+      button.addEventListener("click", () => {
+        const selectedDate = dateInput.value;
+        const selectedTopic = themeSelect.value;
+
+        let candidates = selectedDate && Array.isArray(publicByDate[selectedDate])
+          ? publicByDate[selectedDate]
+          : ag60gPublicItems(indexData);
+
+        if (selectedTopic) {
+          candidates = candidates.filter((item) => {
+            const tag = normaliseAg60gTopic(item.tag || item.topic || item.source || "");
+            return tag === normaliseAg60gTopic(selectedTopic) || String(item.path || "").includes(selectedTopic);
+          });
+        }
+
+        const results = candidates.slice(0, 5);
+
+        if (!results.length) {
+          note.innerHTML = "No public reads found for the selected date/theme. Try All Themes or a recent date.";
+          return;
+        }
+
+        note.innerHTML = `
+          <strong>${results.length} public read${results.length === 1 ? "" : "s"} found:</strong>
+          <div class="reading-guide-list" style="margin-top: 0.75rem;">
+            ${results.map((item) => `
+              <div class="reading-guide-item">
+                <div class="sub">${ag60gEscape(item.date || selectedDate || "Drishvara")} · ${ag60gEscape(item.tag || item.source || "Read")}</div>
+                <div class="title">${ag60gEscape(ag60gTitle(item))}</div>
+                <div class="reading-guide-links">
+                  <a href="${ag60gEscape(ag60gHref(item))}">Open read</a>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }, { passive: true });
+    }
+
+
     async function loadFeaturedReads() {
       const grid = document.getElementById("featured-reads-grid");
       if (!grid) return;
 
       const homepageData = await fetchHomepageUIData();
       if (homepageData && renderHomepageFeaturedReads(homepageData.featuredReads)) {
+        return;
+      }
+
+      const indexData = await fetchAg60gArticleIndexData();
+      if (renderAg60gFeaturedReadsFromArticleIndex(indexData)) {
         return;
       }
 
@@ -4342,8 +4537,8 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
           </div>
           <div class="feature-body">
             <div class="label">Featured Reads</div>
-            <h3>Today’s featured articles are not available yet.</h3>
-            <p>The homepage UI data source is not available yet.</p>
+            <h3>Featured reads are being prepared.</h3>
+            <p>The article index did not return public reads for this surface.</p>
           </div>
         </div>
       `;
@@ -4419,11 +4614,16 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
         return;
       }
 
+      const indexData = await fetchAg60gArticleIndexData();
+      if (renderAg60gReadingGuideFromArticleIndex(indexData)) {
+        return;
+      }
+
       guideList.innerHTML = `
         <div class="reading-guide-item">
           <div class="sub">Reading Guide</div>
-          <div class="title">Today’s reading guide is not available yet.</div>
-          <div class="meta">The homepage UI data source is not available yet.</div>
+          <div class="title">Today’s reading guide is being prepared.</div>
+          <div class="meta">The article index did not return public reads for this surface.</div>
         </div>
       `;
     }
@@ -5751,6 +5951,15 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     setTimeout(run, 1800);
   });
 })();
+</script>
+
+
+<script data-drishvara-ag60g-open-day-init="true">
+document.addEventListener("DOMContentLoaded", () => {
+  if (typeof initialiseAg60gOpenDayFromArticleIndex === "function") {
+    initialiseAg60gOpenDayFromArticleIndex();
+  }
+});
 </script>
 
 </body>
