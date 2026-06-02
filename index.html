@@ -5515,16 +5515,16 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 (() => {
   const firstLightCards = [
     {
-      oldLabels: ["India"],
+      oldLabels: ["Northeast"],
       label: "India",
       body: "India signals form the default national layer for civic, institutional, technology, economy, environment and public-service movement.",
       note: "Source status: selected signal records will carry publisher attribution after daily signal activation."
     },
     {
       oldLabels: [],
-      label: "India Watch",
-      body: "India India remains a standing watch category where credible material is available, so regional movement is not lost inside national coverage.",
-      note: "Source status: India Watch requires credibility and attribution checks before live selection."
+      label: "Northeast Watch",
+      body: "Northeast India remains a standing watch category where credible material is available, so regional movement is not lost inside national coverage.",
+      note: "Source status: Northeast Watch requires credibility and attribution checks before live selection."
     },
     {
       oldLabels: [],
@@ -5607,144 +5607,6 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     setTimeout(applyAg60dR1, 600);
     setTimeout(applyAg60dR1, 1500);
   });
-})();
-</script>
-
-
-
-
-
-<script data-drishvara-ag60d-r2-firstlight-runtime-source-fix="true">
-(() => {
-  const finalCards = [
-    {
-      tag: "India",
-      body: "India signals form the default national layer for civic, institutional, technology, economy, environment and public-service movement.",
-      note: "Source status: selected signal records will carry publisher attribution after daily signal activation."
-    },
-    {
-      tag: "Northeast Watch",
-      body: "Northeast India remains a standing watch category where credible material is available, so regional movement is not lost inside national coverage.",
-      note: "Source status: Northeast Watch requires credibility and attribution checks before live selection."
-    },
-    {
-      tag: "World",
-      body: "World signals provide the international layer for technology, economy, society, environment and geopolitics.",
-      note: "Source status: world signals require source attribution and verification before article movement."
-    }
-  ];
-
-  function textOf(node) {
-    return (node.innerText || node.textContent || "").trim();
-  }
-
-  function findFirstLightRoot() {
-    const title = document.querySelector("#first-light-title");
-    if (!title) return null;
-
-    const candidates = Array.from(document.querySelectorAll("section, article, div"))
-      .filter((node) => {
-        const t = textOf(node);
-        return t.includes("First Light — 10 Daily Signals") &&
-          t.includes("Default daily selection") &&
-          t.includes("A curated snapshot") &&
-          t.length > 400 &&
-          t.length < 9000;
-      })
-      .sort((a, b) => textOf(a).length - textOf(b).length);
-
-    return candidates[0] || title.closest("section") || title.closest("div");
-  }
-
-  function leaves(node) {
-    return Array.from(node.querySelectorAll("*"))
-      .filter((child) => child.children.length === 0 && textOf(child).length > 0);
-  }
-
-  function candidateCards(root) {
-    if (!root) return [];
-
-    const cards = Array.from(root.querySelectorAll("article, li, div"))
-      .filter((node) => {
-        const t = textOf(node);
-
-        if (t.includes("First Light — 10 Daily Signals")) return false;
-        if (t.includes("Default daily selection")) return false;
-        if (t.includes("A curated snapshot")) return false;
-        if (t.includes("Discover") && t.includes("Read") && t.includes("Reflect")) return false;
-
-        const leafCount = leaves(node).length;
-        return t.length > 60 && t.length < 900 && leafCount >= 2 && leafCount <= 8;
-      })
-      .sort((a, b) => {
-        const ar = a.getBoundingClientRect();
-        const br = b.getBoundingClientRect();
-        if (Math.abs(ar.top - br.top) > 8) return ar.top - br.top;
-        return ar.left - br.left;
-      });
-
-    const result = [];
-    for (const card of cards) {
-      if (result.some((existing) => existing.contains(card))) continue;
-      if (result.some((existing) => card.contains(existing))) continue;
-      result.push(card);
-      if (result.length === 3) break;
-    }
-    return result;
-  }
-
-  function applyFirstLightRuntimeSourceFix() {
-    const root = findFirstLightRoot();
-    const cards = candidateCards(root);
-    if (cards.length < 3) return;
-
-    cards.slice(0, 3).forEach((card, index) => {
-      const spec = finalCards[index];
-      const leaf = leaves(card);
-
-      if (leaf[0]) leaf[0].textContent = spec.tag;
-      if (leaf[1]) leaf[1].textContent = spec.body;
-      if (leaf[2]) leaf[2].textContent = spec.note;
-
-      card.setAttribute("data-drishvara-ag60d-r2-firstlight-card", spec.tag);
-    });
-  }
-
-  function hideDuplicateLiveSportsStrip() {
-    const candidates = Array.from(document.querySelectorAll("section, article, aside, div"))
-      .filter((node) => {
-        const t = textOf(node);
-        return t.includes("LIVE SPORTS") &&
-          t.includes("Today’s sports watch is being prepared") &&
-          t.length < 3000;
-      })
-      .sort((a, b) => textOf(a).length - textOf(b).length);
-
-    const target = candidates[0];
-    if (target) {
-      target.setAttribute("data-drishvara-ag60d-r2-hidden-duplicate-sports-strip", "true");
-      target.style.display = "none";
-    }
-  }
-
-  function applyAg60dR2() {
-    applyFirstLightRuntimeSourceFix();
-    hideDuplicateLiveSportsStrip();
-  }
-
-  function start() {
-    applyAg60dR2();
-    [150, 500, 1200, 2500, 4000].forEach((ms) => setTimeout(applyAg60dR2, ms));
-
-    const observer = new MutationObserver(() => applyAg60dR2());
-    observer.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", start);
-  } else {
-    start();
-  }
 })();
 </script>
 
