@@ -94,9 +94,9 @@ const sportsRequired = [
 ];
 
 const knowledgeRequired = [
-  "General reflective preview only; no deterministic prediction or live calculation is active.",
-  "Preview status: source and regional-method verification required before any live Panchang output.",
-  "Curated language preview; meanings remain editorially reviewed before public expansion.",
+  "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
+  "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.",
+  "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.",
   "Reflective prompt only; not a personal prediction, assessment, or decision guide."
 ];
 
@@ -104,8 +104,8 @@ const languageRequired = [
   "Discover → Read → Reflect",
   "Prepared surface",
   "First Light — 10 Daily Signals",
-  "General reflective preview only; no deterministic prediction or live calculation is active.",
-  "Preview status: source and regional-method verification required before any live Panchang output."
+  "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
+  "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified."
 ];
 
 function resultsForRequired(list, text) {

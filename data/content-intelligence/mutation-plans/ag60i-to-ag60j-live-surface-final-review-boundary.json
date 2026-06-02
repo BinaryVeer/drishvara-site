@@ -1,0 +1,20 @@
+{
+  "module_id": "AG60I",
+  "title": "AG60I to AG60J Boundary",
+  "status": "ag60j_live_surface_final_review_boundary_created",
+  "allowed_next_scope": [
+    "Final live visual review of homepage modules.",
+    "Check for remaining internal labels, placeholders, hidden surfaces, duplicate objects and misleading public copy.",
+    "Verify no backend/Auth/V02 activation occurred."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "live Panchang calculation",
+    "personal prediction runtime",
+    "psychometric data collection",
+    "live sports/news fetching without governed source rules"
+  ]
+}

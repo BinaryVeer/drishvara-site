@@ -59,9 +59,9 @@ for (const term of requiredVisibleTerms) {
 }
 
 const methodologyFlags = {
-  word_safety_note_present: indexHtml.includes("Curated language preview; meanings remain editorially reviewed before public expansion."),
-  vedic_safety_note_present: indexHtml.includes("General reflective preview only; no deterministic prediction or live calculation is active."),
-  panchang_safety_note_present: indexHtml.includes("Preview status: source and regional-method verification required before any live Panchang output."),
+  word_safety_note_present: indexHtml.includes("Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification."),
+  vedic_safety_note_present: indexHtml.includes("Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation."),
+  panchang_safety_note_present: indexHtml.includes("Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified."),
   star_safety_note_present: indexHtml.includes("Reflective prompt only; not a personal prediction, assessment, or decision guide."),
   psychometric_coming_soon_present: indexHtml.includes("Psychometric Assessment") && indexHtml.includes("Coming Soon"),
   sports_prepared_surface_present: sportsContext.status === "prepared_surface"

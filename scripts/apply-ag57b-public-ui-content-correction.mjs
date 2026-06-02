@@ -108,7 +108,7 @@ indexHtml = ensureContains(
 indexHtml = ensureContains(
   indexHtml,
   '<div class="label">Today’s Vedic Guidance</div>',
-  '\n          <p class="section-note vedic-safety-note">General reflective preview only; no deterministic prediction or live calculation is active.</p>',
+  '\n          <p class="section-note vedic-safety-note">Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.</p>',
   changes,
   "index.html",
   "vedic_safety_note"
@@ -117,7 +117,7 @@ indexHtml = ensureContains(
 indexHtml = ensureContains(
   indexHtml,
   '<div class="label">Panchang & Festival View</div>',
-  '\n          <p class="section-note panchang-safety-note">Preview status: source and regional-method verification required before any live Panchang output.</p>',
+  '\n          <p class="section-note panchang-safety-note">Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.</p>',
   changes,
   "index.html",
   "panchang_safety_note"
@@ -126,7 +126,7 @@ indexHtml = ensureContains(
 indexHtml = ensureContains(
   indexHtml,
   '<div class="label">Word of the Day</div>',
-  '\n          <p class="section-note word-safety-note">Curated language preview; meanings remain editorially reviewed before public expansion.</p>',
+  '\n          <p class="section-note word-safety-note">Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.</p>',
   changes,
   "index.html",
   "word_safety_note"
@@ -158,9 +158,9 @@ if (exists("assets/js/drishvara-language-runtime.js")) {
     '    "Featured sports reading will appear after curation.": "चयन के बाद प्रमुख खेल लेख दिखाई देगा।",',
     '    "First Light — 10 Daily Signals": "प्रथम संकेत — 10 दैनिक संकेत",',
     '    "Default daily selection: 10 signals — 6 India-focused and 4 international — reviewed before article movement.": "डिफ़ॉल्ट दैनिक चयन: 10 संकेत — 6 भारत-केंद्रित और 4 अंतरराष्ट्रीय — लेख प्रवाह से पहले समीक्षा किए गए।",',
-    '    "General reflective preview only; no deterministic prediction or live calculation is active.": "केवल सामान्य चिंतनात्मक पूर्वावलोकन; कोई निश्चित भविष्यवाणी या लाइव गणना सक्रिय नहीं है।",',
-    '    "Preview status: source and regional-method verification required before any live Panchang output.": "पूर्वावलोकन स्थिति: किसी भी लाइव पंचांग आउटपुट से पहले स्रोत और क्षेत्रीय पद्धति सत्यापन आवश्यक है।",',
-    '    "Curated language preview; meanings remain editorially reviewed before public expansion.": "चयनित भाषा पूर्वावलोकन; सार्वजनिक विस्तार से पहले अर्थ संपादकीय समीक्षा में रहेंगे।",',
+    '    "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.": "केवल सामान्य चिंतनात्मक पूर्वावलोकन; कोई निश्चित भविष्यवाणी या लाइव गणना सक्रिय नहीं है।",',
+    '    "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.": "पूर्वावलोकन स्थिति: किसी भी लाइव पंचांग आउटपुट से पहले स्रोत और क्षेत्रीय पद्धति सत्यापन आवश्यक है।",',
+    '    "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.": "चयनित भाषा पूर्वावलोकन; सार्वजनिक विस्तार से पहले अर्थ संपादकीय समीक्षा में रहेंगे।",',
     '    "Reflective prompt only; not a personal prediction, assessment, or decision guide.": "केवल चिंतनात्मक संकेत; यह व्यक्तिगत भविष्यवाणी, आकलन या निर्णय मार्गदर्शिका नहीं है।",'
   ];
 

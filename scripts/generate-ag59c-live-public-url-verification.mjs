@@ -89,7 +89,7 @@ const requiredPublicStrings = [
   "Default daily selection: 10 signals — 6 India-focused and 4 international",
   "Live-event cards will appear after editorial activation.",
   "Tournament cards are held for verified sports context.",
-  "General reflective preview only; no deterministic prediction or live calculation is active."
+  "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation."
 ];
 
 const forbiddenResults = forbiddenPublicStrings.map((text) => ({

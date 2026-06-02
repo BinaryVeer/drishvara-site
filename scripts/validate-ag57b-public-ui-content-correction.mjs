@@ -67,9 +67,9 @@ for (const good of [
   "Tournament cards are held for verified sports context.",
   "Major sports updates will appear after editorial review.",
   "Featured sports reading will appear after curation.",
-  "General reflective preview only; no deterministic prediction or live calculation is active.",
-  "Preview status: source and regional-method verification required before any live Panchang output.",
-  "Curated language preview; meanings remain editorially reviewed before public expansion.",
+  "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
+  "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.",
+  "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.",
   "Reflective prompt only; not a personal prediction, assessment, or decision guide."
 ]) {
   if (!indexHtml.includes(good)) fail(`Expected corrected public text missing in index.html: ${good}`);
@@ -81,8 +81,8 @@ if (exists("assets/js/drishvara-language-runtime.js")) {
     "From daily signals to deeper reading and reflection",
     "Prepared surface",
     "First Light — 10 Daily Signals",
-    "General reflective preview only; no deterministic prediction or live calculation is active.",
-    "Preview status: source and regional-method verification required before any live Panchang output."
+    "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
+    "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified."
   ]) {
     if (!runtime.includes(good)) fail(`Language runtime missing corrected key: ${good}`);
   }
