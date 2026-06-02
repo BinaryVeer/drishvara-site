@@ -1,0 +1,17 @@
+{
+  "module_id": "AG60A",
+  "title": "AG60A to AG60B Boundary",
+  "status": "ag60b_generation_fetch_logic_verification_boundary_created",
+  "allowed_scope": [
+    "Inspect generation/fetch scripts and generated data.",
+    "Classify each module as working_static, working_generated, methodology_pending, placeholder_to_hide, placeholder_to_activate, duplicate_to_merge, or backend_deferred.",
+    "Do not activate Supabase/Auth/backend without explicit future approval."
+  ],
+  "blocked_scope_without_future_approval": [
+    "Supabase/Auth activation",
+    "runtime database writes",
+    "service-role use",
+    "RLS/grant mutation",
+    "V02 expansion"
+  ]
+}
