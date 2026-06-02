@@ -1,0 +1,29 @@
+{
+  "module_id": "AG60D",
+  "title": "Methodology Gate Preservation Record",
+  "status": "methodology_gates_preserved",
+  "audit_passed": true,
+  "methodology_modules": [
+    {
+      "module_id": "word_of_day",
+      "status": "methodology_pending",
+      "requirement": "Verify Nityanand Mishra ji methodology/style reference, Sanskrit correctness, Hindi meaning and editorial source before automated/daily generation."
+    },
+    {
+      "module_id": "panchang_festival",
+      "status": "methodology_pending",
+      "requirement": "Verify panchang calculation/source method, date/location behaviour and festival source."
+    },
+    {
+      "module_id": "vedic_guidance",
+      "status": "methodology_pending",
+      "requirement": "Verify reviewed-source basis; ensure no deterministic prediction, invented mantra or unsupported claim."
+    },
+    {
+      "module_id": "upcoming_observance",
+      "status": "methodology_pending",
+      "requirement": "Verify festival calendar source and date logic; current text like Akshaya Tritiya must not be treated as generated fact until verified."
+    }
+  ],
+  "preservation_rule": "Word of the Day, Panchang, Vedic Guidance and Upcoming Observance remain source/methodology-gated and must not be treated as fully generated factual modules until AG60 methodology verification is complete."
+}

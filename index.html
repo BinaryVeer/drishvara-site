@@ -4056,8 +4056,8 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
           <div class="reading-guide-list" id="article-index-list">
             <div class="reading-guide-item">
               <div class="sub">Article Index</div>
-              <div class="title">Indexed reads will appear after editorial activation.</div>
-              <div class="meta">Generated article index will appear here.</div>
+              <div class="title">Full article index is being aligned with verified Phase-01 reads.</div>
+              <div class="meta">Until activation, use Featured Reads and the reading guide above.</div>
             </div>
           </div>
           <div class="reading-guide-links">
@@ -5447,6 +5447,65 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     setTimeout(stabilizeDrishvaraPublicCopy, 150);
     setTimeout(stabilizeDrishvaraPublicCopy, 600);
     setTimeout(stabilizeDrishvaraPublicCopy, 1500);
+  });
+})();
+</script>
+
+
+<script data-drishvara-ag60d-placeholder-alignment="true">
+(() => {
+  const textCorrections = {
+    "#batch03-flow-kicker": "Discover → Read → Reflect",
+    "#batch03-flow-title": "From daily signals to deeper reading and reflection",
+    "#batch03-route-pill": "Discover → Read → Reflect",
+    "#first-light-title": "First Light — 10 Daily Signals"
+  };
+
+  const placeholderPhrasesToHide = [
+    "Reserved space for future ads / sponsored insight / partner slot",
+    "Live-event cards will appear after editorial activation.",
+    "Tournament cards are held for verified sports context.",
+    "Major sports updates will appear after editorial review.",
+    "Featured sports reading will appear after curation."
+  ];
+
+  function setText(selector, value) {
+    const element = document.querySelector(selector);
+    if (element && element.textContent.trim() !== value) {
+      element.textContent = value;
+    }
+  }
+
+  function hideSmallestBlockContaining(phrase) {
+    const candidates = Array.from(document.querySelectorAll("article, section, aside, .card, .module-card, .placeholder, .batch03-card, .sports-card, .panel, div"))
+      .filter((node) => {
+        const text = (node.innerText || node.textContent || "").trim();
+        return text.includes(phrase) && text.length < 2600;
+      })
+      .sort((a, b) => {
+        const ta = (a.innerText || a.textContent || "").length;
+        const tb = (b.innerText || b.textContent || "").length;
+        return ta - tb;
+      });
+
+    const target = candidates[0];
+    if (target) {
+      target.setAttribute("data-drishvara-ag60d-hidden-placeholder", "true");
+      target.style.display = "none";
+    }
+  }
+
+  function alignPhase01PublicModules() {
+    Object.entries(textCorrections).forEach(([selector, value]) => setText(selector, value));
+    placeholderPhrasesToHide.forEach(hideSmallestBlockContaining);
+  }
+
+  document.addEventListener("DOMContentLoaded", alignPhase01PublicModules);
+  window.addEventListener("load", () => {
+    alignPhase01PublicModules();
+    setTimeout(alignPhase01PublicModules, 150);
+    setTimeout(alignPhase01PublicModules, 600);
+    setTimeout(alignPhase01PublicModules, 1500);
   });
 })();
 </script>
