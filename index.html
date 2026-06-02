@@ -5610,5 +5610,148 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 })();
 </script>
 
+
+<script data-drishvara-ag60d-r3-firstlight-rendered-card-fix="true">
+(() => {
+  const legacy = {
+    first: ["North" + "east"],
+    second: ["North" + " India"],
+    third: ["National" + " Pulse"]
+  };
+
+  const finalCards = [
+    {
+      tag: "India",
+      legacy: legacy.first,
+      body: "India signals form the default national layer for civic, institutional, technology, economy, environment and public-service movement.",
+      note: "Source status: selected signal records will carry publisher attribution after daily signal activation."
+    },
+    {
+      tag: "Northeast Watch",
+      legacy: legacy.second,
+      body: "Northeast India remains a standing watch category where credible material is available, so regional movement is not lost inside national coverage.",
+      note: "Source status: Northeast Watch requires credibility and attribution checks before live selection."
+    },
+    {
+      tag: "World",
+      legacy: legacy.third,
+      body: "World signals provide the international layer for technology, economy, society, environment and geopolitics.",
+      note: "Source status: world signals require source attribution and verification before article movement."
+    }
+  ];
+
+  function textOf(node) {
+    return (node.innerText || node.textContent || "").trim();
+  }
+
+  function leaves(node) {
+    return Array.from(node.querySelectorAll("*")).filter((child) => {
+      return child.children.length === 0 && textOf(child).length > 0;
+    });
+  }
+
+  function firstLightRoot() {
+    const title = document.getElementById("first-light-title");
+    if (!title) return null;
+
+    const candidates = Array.from(document.querySelectorAll("section, article, div"))
+      .filter((node) => {
+        const t = textOf(node);
+        return t.includes("First Light — 10 Daily Signals") &&
+          t.includes("Default daily selection") &&
+          t.includes("A curated snapshot") &&
+          t.length > 350 &&
+          t.length < 7000;
+      })
+      .sort((a, b) => textOf(a).length - textOf(b).length);
+
+    return candidates[0] || title.closest("section") || title.closest("div");
+  }
+
+  function findCard(root, spec) {
+    if (!root) return null;
+
+    const accepted = [spec.tag, ...spec.legacy];
+    const label = leaves(root).find((node) => accepted.includes(textOf(node)));
+    if (!label) return null;
+
+    const candidates = [];
+    let node = label.parentElement;
+
+    while (node && node !== root.parentElement) {
+      const t = textOf(node);
+      if (
+        t.length > 40 &&
+        t.length < 1200 &&
+        !t.includes("First Light — 10 Daily Signals") &&
+        !t.includes("Default daily selection") &&
+        !t.includes("A curated snapshot")
+      ) {
+        candidates.push(node);
+      }
+      node = node.parentElement;
+    }
+
+    return candidates.sort((a, b) => textOf(a).length - textOf(b).length)[0] || label.parentElement;
+  }
+
+  function applyFirstLightCards() {
+    const root = firstLightRoot();
+    if (!root) return;
+
+    finalCards.forEach((spec) => {
+      const card = findCard(root, spec);
+      if (!card) return;
+
+      const leaf = leaves(card);
+      const accepted = [spec.tag, ...spec.legacy];
+      const labelIndex = leaf.findIndex((node) => accepted.includes(textOf(node)));
+
+      if (labelIndex >= 0) leaf[labelIndex].textContent = spec.tag;
+
+      const remaining = leaves(card).filter((node) => textOf(node) !== spec.tag);
+      if (remaining[0]) remaining[0].textContent = spec.body;
+      if (remaining[1]) remaining[1].textContent = spec.note;
+
+      card.setAttribute("data-drishvara-ag60d-r3-firstlight-card", spec.tag);
+    });
+  }
+
+  function hideDuplicateSportsStrip() {
+    const candidates = Array.from(document.querySelectorAll("section, article, aside, div"))
+      .filter((node) => {
+        const t = textOf(node);
+        return t.includes("LIVE SPORTS") &&
+          t.includes("Today’s sports watch is being prepared") &&
+          t.length < 3000;
+      })
+      .sort((a, b) => textOf(a).length - textOf(b).length);
+
+    if (candidates[0]) {
+      candidates[0].setAttribute("data-drishvara-ag60d-r3-hidden-duplicate-sports-strip", "true");
+      candidates[0].style.display = "none";
+    }
+  }
+
+  function run() {
+    applyFirstLightCards();
+    hideDuplicateSportsStrip();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+
+  window.addEventListener("load", () => {
+    run();
+    setTimeout(run, 200);
+    setTimeout(run, 800);
+    setTimeout(run, 1800);
+  });
+})();
+</script>
+
 </body>
 </html>
