@@ -1,0 +1,17 @@
+{
+  "module_id": "AG59C-R1",
+  "title": "AG59C-R1 to AG59Z Boundary",
+  "status": "ag59z_v01_go_live_closure_boundary_reopened_after_runtime_stabilisation",
+  "allowed_scope": [
+    "Close V01 go-live.",
+    "Record live runtime stabilisation evidence.",
+    "Preserve backend/Auth/Supabase and V02 deferrals."
+  ],
+  "blocked_scope_without_future_approval": [
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
