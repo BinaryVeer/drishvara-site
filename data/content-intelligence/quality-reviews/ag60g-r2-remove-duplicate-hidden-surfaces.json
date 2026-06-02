@@ -1,0 +1,26 @@
+{
+  "module_id": "AG60G-R2",
+  "title": "Remove Duplicate Hidden Reading Surface Objects",
+  "status": "ag60g_r2_duplicate_hidden_surfaces_removed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "34c42cb",
+    "head_full": "34c42cb25b85d033ccd627ba16e9c011266e0aa4",
+    "origin_main": "34c42cb",
+    "status_at_generation": "M index.html\n M package.json\n M scripts/validate-ag60f-reading-surface-hierarchy-check.mjs\n M scripts/validate-ag60g-reading-surface-correction-apply.mjs\n?? data/content-intelligence/backend-architecture/ag60g-r2-no-backend-auth-rls-database-runtime-audit.json\n?? data/content-intelligence/backend-architecture/ag60g-r2-no-v02-expansion-audit.json\n?? data/content-intelligence/phase-01-modules/ag60g-r2-remove-duplicate-hidden-surfaces-record.json\n?? data/content-intelligence/quality-registry/ag60g-r2-ag60h-methodology-gated-module-audit-readiness-record.json\n?? data/content-intelligence/quality-reviews/ag60g-r2-remove-duplicate-hidden-surfaces.json\n?? data/quality/ag60g-r2-remove-duplicate-hidden-surfaces-preview.json\n?? data/quality/ag60g-r2-remove-duplicate-hidden-surfaces.json\n?? docs/quality/AG60G_R2_REMOVE_DUPLICATE_HIDDEN_SURFACES.md\n?? scripts/generate-ag60g-r2-remove-duplicate-hidden-surfaces.mjs\n?? scripts/validate-ag60g-r2-remove-duplicate-hidden-surfaces.mjs"
+  },
+  "apply_file": "data/content-intelligence/phase-01-modules/ag60g-r2-remove-duplicate-hidden-surfaces-record.json",
+  "no_backend_runtime_audit_file": "data/content-intelligence/backend-architecture/ag60g-r2-no-backend-auth-rls-database-runtime-audit.json",
+  "no_v02_expansion_audit_file": "data/content-intelligence/backend-architecture/ag60g-r2-no-v02-expansion-audit.json",
+  "readiness_file": "data/content-intelligence/quality-registry/ag60g-r2-ag60h-methodology-gated-module-audit-readiness-record.json",
+  "summary": {
+    "duplicate_ag09c_single_featured_read_removed": true,
+    "prepaint_hidden_surface_guard_removed": true,
+    "reading_surface_fallbacks_retained": true,
+    "article_index_public_total": 77,
+    "ready_for_ag60h": true,
+    "backend_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false
+  }
+}

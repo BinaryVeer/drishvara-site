@@ -45,7 +45,7 @@ for (const snippet of [
   "renderAg60gFeaturedReadsFromArticleIndex",
   "renderAg60gReadingGuideFromArticleIndex",
   "initialiseAg60gOpenDayFromArticleIndex",
-  "data-drishvara-ag60g-hidden-duplicate-featured-read",
+  "AG60G-R2-DUPLICATE-FEATURED-READ-REMOVED",
   "publicLatest",
   "publicByDate",
   "publicTopics"
@@ -63,7 +63,7 @@ if (review.status !== "ag60g_reading_surface_correction_applied") fail("Review s
 if (review.summary.featured_reads_article_index_fallback_active !== true) fail("Featured Reads fallback summary missing.");
 if (review.summary.reading_guide_article_index_fallback_active !== true) fail("Reading Guide fallback summary missing.");
 if (review.summary.browse_by_date_public_index_connection_active !== true) fail("Browse by Date source connection summary missing.");
-if (review.summary.duplicate_ag09c_single_featured_read_hidden !== true) fail("Duplicate AG09C hidden summary missing.");
+if (review.summary.duplicate_ag09c_single_featured_read_hidden !== true) fail("Duplicate AG09C hidden/removal summary missing.");
 if (review.summary.backend_runtime_activated !== false) fail("Backend runtime must remain false.");
 if (review.summary.v02_expansion_started !== false) fail("V02 expansion must remain false.");
 if (apply.audit_passed !== true) fail("Apply record must pass.");
@@ -83,6 +83,6 @@ for (const auditPath of [
 pass("AG60G Reading Surface Correction Apply is present.");
 pass("Featured Reads and Today’s Reading Guide have article-index fallback.");
 pass("Indexed Reads and Browse by Date are source-aligned.");
-pass("Duplicate AG09C single Featured Read is hidden with marker preserved.");
+pass("Duplicate AG09C single Featured Read is removed for public-surface optimisation.");
 pass("No backend/runtime/service-role/V02 action is recorded.");
 pass("AG60H Methodology-Gated Module Audit readiness is valid.");

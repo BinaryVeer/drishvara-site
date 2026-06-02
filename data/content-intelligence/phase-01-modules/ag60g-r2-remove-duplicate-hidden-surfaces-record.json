@@ -1,0 +1,23 @@
+{
+  "module_id": "AG60G-R2",
+  "title": "Remove Duplicate Hidden Surfaces Record",
+  "status": "duplicate_hidden_surfaces_removed",
+  "audit_passed": true,
+  "corrected_files": [
+    "index.html"
+  ],
+  "removed_objects": [
+    "Duplicate AG09C single Featured Read block",
+    "AG60G-R1 pre-paint hidden surface CSS guard",
+    "AG60G-R1 pre-paint state script",
+    "AG60G-R1 pre-paint release script"
+  ],
+  "retained_objects": [
+    "Main Featured Reads",
+    "Today’s Reading Guide",
+    "Indexed Reads / Latest from Drishvara",
+    "Browse by Date",
+    "AG60G article-index fallback functions"
+  ],
+  "reason": "Repeated or unnecessary public UI objects should be removed rather than hidden to reduce first-paint flash, DOM clutter, and future maintenance confusion."
+}

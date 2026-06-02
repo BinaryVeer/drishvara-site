@@ -49,10 +49,14 @@ for (const requiredSnippet of [
   'fetch("data/article-index.json"',
   "indexData.publicLatest",
   "indexData.publishedItems",
-  "AG09C-PUBLIC-EXPERIENCE-LISTING"
+  "AG60G_READING_SURFACE_HIERARCHY_CORRECTION"
 ]) {
   if (!indexHtml.includes(requiredSnippet)) fail(`Missing reading surface snippet: ${requiredSnippet}`);
 }
+
+const ag09cPresent = indexHtml.includes("AG09C-PUBLIC-EXPERIENCE-LISTING");
+const ag09cRemoved = indexHtml.includes("AG60G-R2-DUPLICATE-FEATURED-READ-REMOVED");
+if (!ag09cPresent && !ag09cRemoved) fail("AG09C single Featured Read must be present historically or removed by AG60G-R2.");
 
 const articleIndex = readJson("data/article-index.json");
 if ((articleIndex.publicTotal || 0) <= 0) fail("article-index publicTotal must be > 0.");
