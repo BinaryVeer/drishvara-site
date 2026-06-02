@@ -1,0 +1,19 @@
+{
+  "module_id": "AG59Z",
+  "title": "AG59Z to Post-Live Stabilisation Boundary",
+  "status": "post_live_stabilisation_boundary_created",
+  "allowed_scope": [
+    "Monitor live site availability.",
+    "Record public copy or layout defects discovered after go-live.",
+    "Plan custom domain or hosting changes separately.",
+    "Plan backend/Auth/Supabase activation only through future explicit approval.",
+    "Plan V02 separately."
+  ],
+  "blocked_scope_without_future_approval": [
+    "backend/Auth/Supabase activation",
+    "runtime database/API reading",
+    "RLS/grant mutation",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
