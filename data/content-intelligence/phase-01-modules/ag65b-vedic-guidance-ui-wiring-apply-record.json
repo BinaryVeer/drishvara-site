@@ -1,0 +1,31 @@
+{
+  "module_id": "AG65B",
+  "title": "Today's Vedic Guidance UI Wiring Apply Record",
+  "status": "vedic_guidance_ui_wiring_applied",
+  "corrected_files": [
+    "index.html"
+  ],
+  "source_file": "generated/vedic-guidance-working-data.json",
+  "ui_targets": [
+    "#vedic-title-hi",
+    "#vedic-weekday-hi",
+    "#vedic-colour-hi",
+    "#vedic-food-hi",
+    "#vedic-mantra-hi",
+    "#vedic-note-en",
+    ".vedic-safety-note"
+  ],
+  "behaviour": {
+    "fetches_generated_vedic_guidance_data": true,
+    "updates_safe_preview_fields": true,
+    "preserves_non_prediction_language": true,
+    "keeps_safe_fallback": true,
+    "rule_execution_active": false,
+    "mantra_publication_allowed": false,
+    "panchang_dependent_logic_active": false,
+    "personal_prediction_active": false,
+    "deterministic_claim_active": false,
+    "runtime_ai_enabled": false,
+    "backend_enabled": false
+  }
+}

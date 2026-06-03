@@ -1,0 +1,27 @@
+{
+  "module_id": "AG65B",
+  "title": "Today's Vedic Guidance UI Data Contract Record",
+  "status": "vedic_guidance_ui_data_contract_recorded",
+  "source_file": "generated/vedic-guidance-working-data.json",
+  "field_mapping": {
+    "vedic-title-hi": "vedic_guidance.hindi_title",
+    "vedic-weekday-hi": "vedic_guidance.weekday_hindi",
+    "vedic-colour-hi": "vedic_guidance.suggested_colour_hindi",
+    "vedic-food-hi": "vedic_guidance.food_hindi",
+    "vedic-mantra-hi": "vedic_guidance.mantra_hindi",
+    "vedic-note-en": "vedic_guidance.short_note_english",
+    "vedic-safety-note": "vedic_guidance.methodology_note"
+  },
+  "current_safe_preview": {
+    "hindi_title": "आज का वैदिक संकेत",
+    "weekday_hindi": "विधि सत्यापनाधीन",
+    "suggested_colour_hindi": "स्रोत सत्यापन के बाद प्रकाशित",
+    "food_hindi": "सामान्य चिंतन संकेत",
+    "mantra_hindi": "मंत्र प्रदर्शन स्रोत-सत्यापन के पश्चात",
+    "short_note_english": "General reflection only. No personal prediction or live Panchang-based calculation is active.",
+    "public_use_mode": "safe_reflective_preview",
+    "source_status": "under_verification"
+  },
+  "current_public_state": "safe_reflective_preview_from_generated_working_data",
+  "note": "AG65B wires the UI to generated safe working data. Rule execution, mantra publication, personal prediction and live Panchang-dependent guidance remain inactive."
+}

@@ -6398,5 +6398,88 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script data-drishvara-ag65b-vedic-guidance-ui-wiring="true">
+(() => {
+  const DATA_PATH = "generated/vedic-guidance-working-data.json";
+
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el && value !== undefined && value !== null && String(value).trim()) {
+      el.textContent = String(value);
+    }
+  }
+
+  function markVedicCard(data) {
+    const title = document.getElementById("vedic-title-hi");
+    const card = title ? title.closest(".card") : null;
+    if (!card) return;
+
+    card.setAttribute("data-drishvara-ag65b-source", DATA_PATH);
+    card.setAttribute("data-drishvara-ag65b-public-ready", data.public_ui_ready === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag65b-rule-execution-active", data.rule_execution_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag65b-panchang-dependent-logic-active", data.panchang_dependent_logic_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag65b-mantra-publication-allowed", data.mantra_publication_allowed === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag65b-personal-prediction-active", data.personal_prediction_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag65b-deterministic-claim-active", data.deterministic_claim_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag65b-ai-generation-active", data.ai_generation_active === true ? "true" : "false");
+  }
+
+  function markSafetyNote(guidance) {
+    const note = document.querySelector(".vedic-safety-note");
+    if (!note) return;
+
+    note.textContent = guidance.methodology_note || "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.";
+    note.setAttribute("data-drishvara-ag65b-vedic-methodology-note", "true");
+  }
+
+  function applyAg65bVedicGuidance(data) {
+    if (!data || !data.vedic_guidance) return false;
+
+    const guidance = data.vedic_guidance;
+
+    setText("vedic-title-hi", guidance.hindi_title);
+    setText("vedic-weekday-hi", guidance.weekday_hindi);
+    setText("vedic-colour-hi", guidance.suggested_colour_hindi);
+    setText("vedic-food-hi", guidance.food_hindi);
+    setText("vedic-mantra-hi", guidance.mantra_hindi);
+    setText("vedic-note-en", guidance.short_note_english);
+
+    markSafetyNote(guidance);
+    markVedicCard(data);
+
+    document.documentElement.setAttribute("data-drishvara-ag65b-vedic-guidance-wired", "true");
+    return true;
+  }
+
+  async function loadAg65bVedicGuidance() {
+    try {
+      const response = await fetch(DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to load ${DATA_PATH}`);
+      const data = await response.json();
+      applyAg65bVedicGuidance(data);
+    } catch (error) {
+      setText("vedic-note-en", "Today's Vedic Guidance working data could not be loaded. The safe reflective preview remains visible.");
+      const title = document.getElementById("vedic-title-hi");
+      const card = title ? title.closest(".card") : null;
+      if (card) card.setAttribute("data-drishvara-ag65b-vedic-guidance-fallback", "true");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg65bVedicGuidance, { once: true });
+  } else {
+    loadAg65bVedicGuidance();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg65bVedicGuidance();
+    setTimeout(loadAg65bVedicGuidance, 600);
+  }, { once: true });
+
+  window.drishvaraAg65bLoadVedicGuidance = loadAg65bVedicGuidance;
+})();
+</script>
+
 </body>
 </html>
