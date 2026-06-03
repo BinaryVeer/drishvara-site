@@ -1,0 +1,25 @@
+{
+  "module_id": "AG64Z",
+  "title": "AG64Z to AG65 Boundary",
+  "status": "ag65_vedic_guidance_boundary_created",
+  "allowed_next_scope": [
+    "Create Today's Vedic Guidance initial working data.",
+    "Create weekday/colour/food/mantra source methodology.",
+    "Create bilingual terminology safety schema.",
+    "Create feedback/admin review/absorption schema.",
+    "Generate safe Vedic Guidance working-data JSON.",
+    "Wire UI only after working data exists."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live Panchang-dependent guidance calculation",
+    "personal prediction",
+    "mantra or ritual claim without verified source",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption without admin review"
+  ]
+}
