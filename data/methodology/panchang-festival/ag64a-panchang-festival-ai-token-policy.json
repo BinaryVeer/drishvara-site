@@ -1,0 +1,26 @@
+{
+  "module_id": "AG64A",
+  "title": "Panchang & Festival AI and Token Policy",
+  "status": "ai_policy_defined_runtime_inactive",
+  "ai_runtime_active": false,
+  "user_triggered_ai_allowed": false,
+  "allowed_future_ai_roles_after_approval": [
+    "summarise source notes for admin review",
+    "flag conflicting observance dates",
+    "triage user feedback for admin review",
+    "prepare bilingual non-authoritative explanation after source approval"
+  ],
+  "blocked_ai_roles": [
+    "calculate Panchang values without verified engine/source",
+    "invent tithi/nakshatra/yoga/paksha",
+    "invent festival date",
+    "invent mantra or ritual instruction",
+    "override regional method without admin review",
+    "publish AI-generated values directly"
+  ],
+  "cost_policy": {
+    "expected_monthly_token_pressure": "low_until_source_registry_activation",
+    "initial_monthly_cap_inr": 1000,
+    "stronger_model_use": "only for conflict/source-note review after approval"
+  }
+}

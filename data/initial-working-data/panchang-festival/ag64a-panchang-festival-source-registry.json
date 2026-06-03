@@ -1,0 +1,42 @@
+{
+  "module_id": "AG64A",
+  "title": "Panchang & Festival Source Registry",
+  "status": "source_registry_defined_live_source_use_disabled",
+  "live_source_fetching_enabled": false,
+  "external_api_enabled": false,
+  "calculation_library_enabled": false,
+  "source_levels": [
+    {
+      "level": 1,
+      "label": "Primary textual or astronomical source",
+      "use_case": "Canonical calculation basis, established jyotisha/Panchang text, recognised astronomical source."
+    },
+    {
+      "level": 2,
+      "label": "Traditional commentary or regional authority",
+      "use_case": "Regional Panchang authority, observance rule family, temple/tradition-specific practice note."
+    },
+    {
+      "level": 3,
+      "label": "Modern scholarly or technical source",
+      "use_case": "Academic or technical Panchang calculation/history reference."
+    },
+    {
+      "level": 4,
+      "label": "Drishvara editorial curation",
+      "use_case": "Simplified public-facing explanation only; cannot invent authority."
+    }
+  ],
+  "source_record_schema": {
+    "source_id": "string",
+    "source_name": "string",
+    "source_level": "1 | 2 | 3 | 4",
+    "source_type": "textual | astronomical | regional_panchang | temple_tradition | scholarly | editorial",
+    "region_or_rule_family": "string_or_null",
+    "url_or_reference": "string_or_null",
+    "access_status": "verified | under_verification | unavailable | blocked",
+    "allowed_for_public_values": false,
+    "admin_approved": false,
+    "review_note": "string"
+  }
+}

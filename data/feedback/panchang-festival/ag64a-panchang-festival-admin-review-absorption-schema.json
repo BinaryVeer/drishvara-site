@@ -1,0 +1,27 @@
+{
+  "module_id": "AG64A",
+  "title": "Panchang & Festival Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_required": true,
+  "automatic_absorption_allowed": false,
+  "fields": [
+    "review_id",
+    "feedback_id",
+    "source_id",
+    "observance_id",
+    "admin_decision",
+    "decision_reason",
+    "approved_change_type",
+    "source_registry_update_required",
+    "regional_rule_update_required",
+    "calculation_method_update_required",
+    "observance_registry_update_required",
+    "absorbed_into_methodology_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin-approved feedback can modify Panchang source registry, regional method, calculation basis, observance rule or public output status.",
+  "methodology_versioning": {
+    "current_version": "panchang_festival_method_v1",
+    "next_version_trigger": "admin-approved source/method/observance update"
+  }
+}

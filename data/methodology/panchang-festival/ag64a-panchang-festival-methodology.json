@@ -1,0 +1,47 @@
+{
+  "module_id": "AG64A",
+  "title": "Panchang & Festival Methodology",
+  "status": "methodology_created_not_runtime_active",
+  "methodology_version": "panchang_festival_method_v1",
+  "principles": [
+    "Panchang calculation must be location-aware where relevant.",
+    "Sunrise basis must be explicitly declared.",
+    "Tithi start/end should be treated as intervals, not only labels.",
+    "Raw astronomical calculation must be separated from observance decision.",
+    "Festival/vrat decisions must carry rule notes.",
+    "Regional variations must be allowed through declared rule families.",
+    "Controversial or regionally divergent dates must be marked rather than flattened.",
+    "Output must distinguish calculated tithi, observance recommendation, regional variation and editorial note.",
+    "No exact public Panchang output is allowed until source, method, location and date basis are verified.",
+    "User feedback cannot directly alter Panchang/festival output; admin review is mandatory."
+  ],
+  "output_separation": {
+    "calculation_layer": [
+      "tithi",
+      "nakshatra",
+      "yoga",
+      "paksha",
+      "sunrise_basis",
+      "date_basis"
+    ],
+    "observance_layer": [
+      "festival_name",
+      "vrat_rule",
+      "regional_applicability",
+      "date_note"
+    ],
+    "editorial_layer": [
+      "public_explanation",
+      "safety_note",
+      "source_status_note"
+    ]
+  },
+  "blocked_now": [
+    "No live calculation.",
+    "No exact Panchang value.",
+    "No exact observance date decision.",
+    "No runtime AI generation.",
+    "No external API/source fetch.",
+    "No backend/Auth/Supabase activation."
+  ]
+}

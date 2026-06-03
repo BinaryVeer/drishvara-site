@@ -1,0 +1,73 @@
+{
+  "module_id": "AG64A",
+  "title": "Panchang & Festival Initial Working Data",
+  "status": "initial_working_data_created_not_publicly_wired",
+  "public_ui_activation_status": "not_wired_in_ag64a",
+  "default_place": "Itanagar",
+  "supported_locations": [
+    {
+      "place": "Itanagar",
+      "state_region": "Arunachal Pradesh",
+      "timezone": "Asia/Kolkata",
+      "default_public_selection": true,
+      "calculation_enabled_now": false
+    },
+    {
+      "place": "Delhi",
+      "state_region": "Delhi",
+      "timezone": "Asia/Kolkata",
+      "default_public_selection": false,
+      "calculation_enabled_now": false
+    },
+    {
+      "place": "Mumbai",
+      "state_region": "Maharashtra",
+      "timezone": "Asia/Kolkata",
+      "default_public_selection": false,
+      "calculation_enabled_now": false
+    },
+    {
+      "place": "Kolkata",
+      "state_region": "West Bengal",
+      "timezone": "Asia/Kolkata",
+      "default_public_selection": false,
+      "calculation_enabled_now": false
+    },
+    {
+      "place": "Guwahati",
+      "state_region": "Assam",
+      "timezone": "Asia/Kolkata",
+      "default_public_selection": false,
+      "calculation_enabled_now": false
+    }
+  ],
+  "working_data_contract": {
+    "generated_file": "generated/panchang-festival-working-data.json",
+    "required_panchang_ui_targets": [
+      "panchang-place-select",
+      "panchang-sunrise",
+      "panchang-sunset",
+      "panchang-moonrise",
+      "panchang-moonset",
+      "panchang-tithi",
+      "panchang-nakshatra",
+      "panchang-yoga",
+      "panchang-paksha"
+    ],
+    "required_observance_ui_targets": [
+      "upcoming-observance-title",
+      "upcoming-observance-name",
+      "upcoming-observance-note"
+    ],
+    "current_public_mode": "safe_preview_without_exact_panchang_values"
+  },
+  "blocked_now": [
+    "No sunrise/sunset/moonrise/moonset calculation.",
+    "No tithi/nakshatra/yoga/paksha exact output.",
+    "No festival date claim.",
+    "No regional observance determination.",
+    "No live API/source fetch.",
+    "No runtime AI.",
+    "No backend/Auth/Supabase/V02 activation."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "module_id": "AG64A",
+  "title": "AG64A to AG64B Boundary",
+  "status": "ag64b_panchang_festival_ui_wiring_boundary_created",
+  "allowed_next_scope": [
+    "Wire homepage Panchang & Festival card to generated/panchang-festival-working-data.json.",
+    "Keep values safe and withheld.",
+    "Preserve source/method/location/date basis labels.",
+    "Do not activate live calculation, external API, runtime AI or backend."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live Panchang calculation",
+    "external Panchang/festival API fetch",
+    "runtime AI generation",
+    "exact public tithi/nakshatra/yoga/paksha values",
+    "festival/vrat date decision",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption"
+  ]
+}

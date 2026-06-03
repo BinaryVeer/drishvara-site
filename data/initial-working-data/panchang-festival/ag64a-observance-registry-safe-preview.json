@@ -1,0 +1,31 @@
+{
+  "module_id": "AG64A",
+  "title": "Observance Registry Safe Preview",
+  "status": "observance_registry_safe_preview_created_not_active",
+  "dynamic_observance_selection_active": false,
+  "records": [
+    {
+      "observance_id": "registry_under_editorial_verification",
+      "title": "Upcoming Observance",
+      "name": "Festival and observance registry is under editorial verification.",
+      "note": "Dates, regional applicability and bilingual naming will be published only after source review.",
+      "region_scope": "not_applicable_until_verified",
+      "rule_family": "not_selected",
+      "public_ready": false,
+      "source_status": "under_editorial_verification"
+    }
+  ],
+  "future_record_schema": {
+    "observance_id": "string",
+    "observance_name_en": "string",
+    "observance_name_hi": "string",
+    "observance_type": "festival | vrat | jayanti | regional_observance | civic_cultural",
+    "region_scope": "national | regional | local | tradition_specific",
+    "rule_family": "string",
+    "date_basis": "string",
+    "source_id": "string",
+    "source_status": "verified | under_verification | contested | blocked",
+    "public_ready": false,
+    "admin_review_status": "pending"
+  }
+}

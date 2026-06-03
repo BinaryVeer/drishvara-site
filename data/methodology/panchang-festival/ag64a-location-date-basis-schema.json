@@ -1,0 +1,25 @@
+{
+  "module_id": "AG64A",
+  "title": "Panchang Location and Date Basis Schema",
+  "status": "location_date_basis_schema_created_calculation_inactive",
+  "location_required_for_future_calculation": true,
+  "timezone_required": true,
+  "sunrise_basis_required": true,
+  "date_basis_required": true,
+  "regional_method_required": true,
+  "calculation_engine_active_now": false,
+  "fields": [
+    "place",
+    "latitude",
+    "longitude",
+    "timezone",
+    "civil_date",
+    "sunrise_basis",
+    "ayanamsa_or_calculation_method_if_applicable",
+    "regional_rule_family",
+    "calculation_source_id",
+    "observance_rule_source_id",
+    "review_status"
+  ],
+  "safety_rule": "Do not display exact Panchang values unless every basis field and source status is verified."
+}
