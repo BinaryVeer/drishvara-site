@@ -1,0 +1,29 @@
+{
+  "module_id": "AG63B",
+  "title": "Word of the Day UI Data Contract Record",
+  "status": "word_of_the_day_ui_data_contract_recorded",
+  "source_file": "generated/word-of-day.json",
+  "required_generated_fields": [
+    "word.english",
+    "word.hindi",
+    "word.sanskrit",
+    "word.meaning"
+  ],
+  "optional_generated_fields": [
+    "word.meaning_hi",
+    "word.theme",
+    "word.usage_context",
+    "word.note",
+    "word.public_use_mode"
+  ],
+  "current_word": {
+    "word_id": "reflection",
+    "english": "Reflection",
+    "hindi": "मनन",
+    "sanskrit": "मननम्",
+    "public_use_mode": "reviewed_preview_only",
+    "review_status": "approved"
+  },
+  "public_state_now": "reviewed_linguistic_preview_from_generated_working_data",
+  "note": "AG63B wires the UI to initial working data. Dynamic rotation, AI generation and full classical-source expansion remain inactive."
+}

@@ -6229,5 +6229,79 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+
+<script data-drishvara-ag63b-word-of-day-ui-wiring="true">
+(() => {
+  const WORD_DATA_PATH = "generated/word-of-day.json";
+
+  function setText(selector, value) {
+    const el = document.querySelector(selector);
+    if (el && value !== undefined && value !== null && String(value).trim()) {
+      el.textContent = String(value);
+    }
+  }
+
+  function markWordCard(data) {
+    const english = document.getElementById("word-english");
+    const card = english ? english.closest(".card") : null;
+    if (!card) return;
+
+    card.setAttribute("data-drishvara-ag63b-word-source", WORD_DATA_PATH);
+    card.setAttribute("data-drishvara-ag63b-word-public-ready", data.public_ui_ready === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag63b-dynamic-rotation-active", data.dynamic_rotation_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag63b-ai-generation-active", data.ai_generation_active === true ? "true" : "false");
+  }
+
+  function applyAg63bWordOfTheDay(data) {
+    if (!data || !data.word) return false;
+
+    const word = data.word;
+
+    setText("#word-english", word.english);
+    setText("#word-hindi", word.hindi);
+    setText("#word-sanskrit", word.sanskrit);
+    setText("#word-meaning", word.meaning);
+
+    const note = document.querySelector("[data-drishvara-ag60i-word-methodology-note]");
+    if (note) {
+      note.textContent = word.note || "Reviewed linguistic preview only; deeper source attribution is required before full classical-source expansion.";
+      note.setAttribute("data-drishvara-ag63b-word-methodology-note", "true");
+    }
+
+    markWordCard(data);
+    document.documentElement.setAttribute("data-drishvara-ag63b-word-of-day-wired", "true");
+    return true;
+  }
+
+  async function loadAg63bWordOfTheDay() {
+    try {
+      const response = await fetch(WORD_DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to load ${WORD_DATA_PATH}`);
+      const data = await response.json();
+      applyAg63bWordOfTheDay(data);
+    } catch (error) {
+      const note = document.querySelector("[data-drishvara-ag60i-word-methodology-note]");
+      if (note) {
+        note.textContent = "Word of the Day working data could not be loaded. The safe reviewed preview remains visible.";
+        note.setAttribute("data-drishvara-ag63b-word-fallback", "true");
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg63bWordOfTheDay, { once: true });
+  } else {
+    loadAg63bWordOfTheDay();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg63bWordOfTheDay();
+    setTimeout(loadAg63bWordOfTheDay, 600);
+  }, { once: true });
+
+  window.drishvaraAg63bLoadWordOfTheDay = loadAg63bWordOfTheDay;
+})();
+</script>
+
 </body>
 </html>

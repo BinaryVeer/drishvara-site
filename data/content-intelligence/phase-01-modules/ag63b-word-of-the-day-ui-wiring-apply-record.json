@@ -1,0 +1,25 @@
+{
+  "module_id": "AG63B",
+  "title": "Word of the Day UI Wiring Apply Record",
+  "status": "word_of_the_day_ui_wiring_applied",
+  "corrected_files": [
+    "index.html"
+  ],
+  "source_file": "generated/word-of-day.json",
+  "ui_targets": [
+    "#word-english",
+    "#word-hindi",
+    "#word-sanskrit",
+    "#word-meaning",
+    "[data-drishvara-ag60i-word-methodology-note]"
+  ],
+  "behaviour": {
+    "fetches_generated_word_data": true,
+    "updates_word_fields": true,
+    "preserves_methodology_note": true,
+    "keeps_safe_fallback": true,
+    "dynamic_rotation_active": false,
+    "runtime_ai_enabled": false,
+    "backend_enabled": false
+  }
+}
