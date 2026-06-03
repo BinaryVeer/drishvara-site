@@ -6481,5 +6481,110 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script data-drishvara-ag66b-star-reflection-ui-wiring="true">
+(() => {
+  const DATA_PATH = "generated/star-reflection-working-data.json";
+
+  function findStarCard() {
+    return Array.from(document.querySelectorAll(".card")).find((card) => {
+      const label = card.querySelector(".label");
+      return label && label.textContent.trim() === "Star Reflection";
+    });
+  }
+
+  function setText(el, value) {
+    if (el && value !== undefined && value !== null && String(value).trim()) {
+      el.textContent = String(value);
+    }
+  }
+
+  function keepControlDisabled(control) {
+    if (!control) return;
+    control.disabled = true;
+    control.setAttribute("disabled", "");
+    control.setAttribute("aria-disabled", "true");
+    control.setAttribute("data-drishvara-ag66b-input-disabled", "true");
+  }
+
+  function applyAg66bStarReflection(data) {
+    if (!data || !data.star_reflection) return false;
+
+    const star = data.star_reflection;
+    const card = findStarCard();
+    if (!card) return false;
+
+    setText(card.querySelector(".label"), star.label);
+    setText(card.querySelector(".star-safety-note"), star.safety_note);
+    setText(card.querySelector("h2"), star.heading);
+
+    const body = Array.from(card.querySelectorAll("p")).find((p) => !p.classList.contains("star-safety-note"));
+    setText(body, star.body);
+
+    const inputs = card.querySelectorAll("input");
+    if (inputs[0]) inputs[0].setAttribute("placeholder", star.name_placeholder || "Name");
+    if (inputs[1]) inputs[1].setAttribute("placeholder", star.dob_placeholder || "Date of Birth (DD/MM/YYYY)");
+    inputs.forEach(keepControlDisabled);
+
+    const select = card.querySelector("select");
+    if (select) {
+      const options = Array.isArray(star.language_options) && star.language_options.length ? star.language_options : ["English", "Hindi"];
+      select.innerHTML = options.map((item) => `<option>${String(item)}</option>`).join("");
+      keepControlDisabled(select);
+    }
+
+    const button = card.querySelector("button");
+    if (button) {
+      button.textContent = star.button_label || "Reflection Method Under Review";
+      keepControlDisabled(button);
+    }
+
+    card.setAttribute("data-drishvara-ag66b-source", DATA_PATH);
+    card.setAttribute("data-drishvara-ag66b-public-ready", data.public_ui_ready === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-personal-input-enabled", data.personal_input_collection_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-consent-collection-enabled", data.consent_collection_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-birth-detail-processing-enabled", data.birth_detail_processing_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-astrology-calculation-active", data.astrology_calculation_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-horoscope-prediction-active", data.horoscope_prediction_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-assessment-scoring-active", data.assessment_scoring_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-deterministic-claim-active", data.deterministic_claim_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-decision-guidance-active", data.decision_guidance_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag66b-ai-generation-active", data.ai_generation_active === true ? "true" : "false");
+
+    document.documentElement.setAttribute("data-drishvara-ag66b-star-reflection-wired", "true");
+    return true;
+  }
+
+  async function loadAg66bStarReflection() {
+    try {
+      const response = await fetch(DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to load ${DATA_PATH}`);
+      const data = await response.json();
+      applyAg66bStarReflection(data);
+    } catch (error) {
+      const card = findStarCard();
+      if (card) {
+        card.setAttribute("data-drishvara-ag66b-star-reflection-fallback", "true");
+        const body = Array.from(card.querySelectorAll("p")).find((p) => !p.classList.contains("star-safety-note"));
+        setText(body, "Star Reflection working data could not be loaded. Personal input remains disabled.");
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg66bStarReflection, { once: true });
+  } else {
+    loadAg66bStarReflection();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg66bStarReflection();
+    setTimeout(loadAg66bStarReflection, 600);
+  }, { once: true });
+
+  window.drishvaraAg66bLoadStarReflection = loadAg66bStarReflection;
+})();
+</script>
+
 </body>
 </html>
