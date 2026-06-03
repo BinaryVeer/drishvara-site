@@ -1,0 +1,27 @@
+{
+  "module_id": "AG66A",
+  "title": "AG66A to AG66B Boundary",
+  "status": "ag66b_star_reflection_ui_wiring_boundary_created",
+  "allowed_next_scope": [
+    "Wire homepage Star Reflection card to generated/star-reflection-working-data.json.",
+    "Keep all personal input disabled.",
+    "Preserve non-prediction, non-assessment and consent/privacy-gated language.",
+    "Do not activate personal input, consent runtime, prediction, assessment, runtime AI or backend."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "personal input collection",
+    "name/DOB/birth-time/birth-location processing",
+    "consent collection runtime",
+    "personalised astrology",
+    "horoscope prediction",
+    "assessment or scoring",
+    "decision guidance",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption"
+  ]
+}

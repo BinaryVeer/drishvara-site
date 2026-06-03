@@ -1,0 +1,27 @@
+{
+  "module_id": "AG66A",
+  "title": "Star Reflection AI and Token Policy",
+  "status": "ai_policy_defined_runtime_inactive",
+  "ai_runtime_active": false,
+  "user_triggered_ai_allowed": false,
+  "allowed_future_ai_roles_after_approval": [
+    "summarise admin-approved reflection themes",
+    "triage user feedback for admin review",
+    "check non-prediction and non-assessment language",
+    "generate safe non-personal prompts after approval"
+  ],
+  "blocked_ai_roles": [
+    "generate personal prediction",
+    "process DOB/birth data without consent",
+    "produce horoscope calculation",
+    "score personality or mental state",
+    "give decision guidance",
+    "directly absorb user feedback",
+    "publish personalised output without admin/privacy review"
+  ],
+  "cost_policy": {
+    "expected_monthly_token_pressure": "low_until_consent_backend_activation",
+    "initial_monthly_cap_inr": 1000,
+    "stronger_model_use": "only for privacy/safety-language review after explicit approval"
+  }
+}

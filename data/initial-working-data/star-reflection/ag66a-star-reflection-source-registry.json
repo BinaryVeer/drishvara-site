@@ -1,0 +1,41 @@
+{
+  "module_id": "AG66A",
+  "title": "Star Reflection Source Registry",
+  "status": "source_registry_defined_live_source_use_disabled",
+  "live_source_fetching_enabled": false,
+  "external_api_enabled": false,
+  "astrology_calculation_library_enabled": false,
+  "source_levels": [
+    {
+      "level": 1,
+      "label": "Consent and privacy governance",
+      "use_case": "Required before any personal input, birth detail, profile or subscriber data can be processed."
+    },
+    {
+      "level": 2,
+      "label": "Reflection doctrine",
+      "use_case": "Non-predictive, non-diagnostic reflective prompt framework."
+    },
+    {
+      "level": 3,
+      "label": "Astro-symbolic methodology",
+      "use_case": "Symbolic correlation only after source/method review; not deterministic prediction."
+    },
+    {
+      "level": 4,
+      "label": "Editorial safe preview",
+      "use_case": "Public copy that does not process personal data or claim outcomes."
+    }
+  ],
+  "source_record_schema": {
+    "source_id": "string",
+    "source_name": "string",
+    "source_level": "1 | 2 | 3 | 4",
+    "source_domain": "consent | privacy | reflection | symbolic_method | editorial",
+    "url_or_reference": "string_or_null",
+    "access_status": "verified | under_verification | unavailable | blocked",
+    "allowed_for_public_values": false,
+    "admin_approved": false,
+    "review_note": "string"
+  }
+}

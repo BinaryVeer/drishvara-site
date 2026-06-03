@@ -1,0 +1,51 @@
+{
+  "module_id": "AG66A",
+  "title": "Star Reflection Methodology",
+  "status": "methodology_created_not_runtime_active",
+  "methodology_version": "star_reflection_method_v1",
+  "principles": [
+    "Treat Star Reflection as a reflective prompt, not prediction.",
+    "Do not make deterministic astrology claims.",
+    "Do not provide assessment, diagnosis, scoring or decision guidance.",
+    "Do not process name, date of birth, birth time or birth location without explicit consent and backend privacy controls.",
+    "Keep personal input disabled until consent/privacy/reflection-method governance is complete.",
+    "Separate symbolic reflection from horoscope calculation.",
+    "User feedback cannot directly modify reflection logic; admin review is mandatory.",
+    "Any future personalised layer must require consent, entitlement and privacy review."
+  ],
+  "output_separation": {
+    "public_safe_preview_layer": [
+      "label",
+      "heading",
+      "safety_note",
+      "disabled_input_status"
+    ],
+    "future_consent_layer": [
+      "consent_status",
+      "purpose_scope",
+      "privacy_flags"
+    ],
+    "future_reflection_layer": [
+      "non_predictive_prompt",
+      "language_preference",
+      "reflection_theme"
+    ],
+    "blocked_layers": [
+      "horoscope_prediction",
+      "deterministic_claim",
+      "assessment_score",
+      "decision_guidance"
+    ]
+  },
+  "blocked_now": [
+    "No personal input collection.",
+    "No consent runtime.",
+    "No astrology calculation.",
+    "No personalised reflection.",
+    "No prediction.",
+    "No assessment/scoring.",
+    "No runtime AI generation.",
+    "No external API/source fetch.",
+    "No backend/Auth/Supabase activation."
+  ]
+}

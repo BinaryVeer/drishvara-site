@@ -1,0 +1,27 @@
+{
+  "module_id": "AG66A",
+  "title": "Star Reflection Consent and Privacy Schema",
+  "status": "consent_privacy_schema_created_runtime_inactive",
+  "consent_collection_enabled_now": false,
+  "personal_input_collection_enabled_now": false,
+  "birth_detail_processing_enabled_now": false,
+  "required_before_any_personal_input": [
+    "explicit consent screen",
+    "purpose limitation",
+    "sensitive data notice",
+    "retention/deletion policy",
+    "withdrawal/export/deletion path",
+    "age/minor gate where applicable",
+    "privacy redaction policy",
+    "admin/legal review"
+  ],
+  "sensitive_data_fields": [
+    "name",
+    "date_of_birth",
+    "birth_time",
+    "birth_location",
+    "language_preference",
+    "reflection_history"
+  ],
+  "public_default_rule": "No personal data should be collected or processed in the public static preview."
+}

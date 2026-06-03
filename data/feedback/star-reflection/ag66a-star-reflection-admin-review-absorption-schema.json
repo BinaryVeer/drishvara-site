@@ -1,0 +1,27 @@
+{
+  "module_id": "AG66A",
+  "title": "Star Reflection Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_required": true,
+  "automatic_absorption_allowed": false,
+  "fields": [
+    "review_id",
+    "feedback_id",
+    "source_id",
+    "admin_decision",
+    "decision_reason",
+    "approved_change_type",
+    "privacy_update_required",
+    "consent_update_required",
+    "reflection_method_update_required",
+    "public_copy_update_required",
+    "input_gate_update_required",
+    "absorbed_into_methodology_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin-approved feedback can modify Star Reflection copy, consent/privacy schema, input gate, source registry or future methodology.",
+  "methodology_versioning": {
+    "current_version": "star_reflection_method_v1",
+    "next_version_trigger": "admin-approved consent/privacy/reflection-method update"
+  }
+}
