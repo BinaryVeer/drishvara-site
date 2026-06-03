@@ -1,0 +1,24 @@
+{
+  "module_id": "AG60J",
+  "title": "First Light AI Selection Readiness Record",
+  "status": "first_light_ai_selection_needed_not_yet_operational",
+  "current_state": {
+    "selection_rule_present": true,
+    "live_source_collection_active": false,
+    "ai_shortlisting_active": false,
+    "admin_approval_active": false,
+    "feedback_absorption_active": false
+  },
+  "intended_future_pipeline": [
+    "source registry collects candidate signals",
+    "system normalises title, source, date, region and category",
+    "AI summarises/classifies/scores candidates",
+    "system clusters duplicates",
+    "selection engine chooses 10 using India/Northeast/World diversity rules",
+    "admin can approve/change/reject",
+    "approved output becomes daily First Light",
+    "user feedback goes to admin queue",
+    "admin-approved feedback becomes methodology/version update"
+  ],
+  "cost_control_rule": "Use nano/mini models for scoring and classification; reserve stronger model only for final editorial synthesis."
+}

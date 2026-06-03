@@ -1,0 +1,29 @@
+{
+  "module_id": "AG60J",
+  "title": "First Visit Intro Video Identification Record",
+  "status": "intro_video_module_identified_not_yet_implemented",
+  "module_name": "First Visit Intro Video Modal",
+  "purpose": "Show a 30-second Drishvara introduction when a visitor lands for the first time.",
+  "current_state": {
+    "video_asset_exists": false,
+    "modal_logic_exists": false,
+    "first_visit_memory_exists": false,
+    "transcript_exists": false,
+    "bilingual_caption_exists": false,
+    "ui_wiring_exists": false
+  },
+  "required_future_components": [
+    "30-second lightweight video file",
+    "poster/thumbnail image",
+    "English/Hindi title and subtitle",
+    "short transcript",
+    "captions/subtitles if possible",
+    "skip/close button",
+    "do-not-show-again logic using localStorage first",
+    "no autoplay sound",
+    "mobile-safe modal layout",
+    "accessibility labels",
+    "validator confirming video is non-blocking"
+  ],
+  "recommended_next_stage": "AG61 — First Visit Intro Video Modal Foundation"
+}

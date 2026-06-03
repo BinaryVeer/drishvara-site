@@ -1,0 +1,21 @@
+{
+  "module_id": "AG60J",
+  "title": "AG60J to AG61 Boundary",
+  "status": "ag61_first_visit_intro_video_boundary_created",
+  "allowed_next_scope": [
+    "Define intro video modal doctrine.",
+    "Create initial working data for intro video metadata.",
+    "Create transcript/caption schema.",
+    "Add non-blocking modal UI only if video/poster assets are available or placeholder is explicitly approved.",
+    "Use localStorage first-visit logic only; no backend activation."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "forced autoplay with sound",
+    "blocking popup that prevents site use",
+    "user-tracking beyond local first-visit preference"
+  ]
+}
