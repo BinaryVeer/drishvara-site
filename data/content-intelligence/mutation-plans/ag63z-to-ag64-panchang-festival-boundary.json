@@ -1,0 +1,25 @@
+{
+  "module_id": "AG63Z",
+  "title": "AG63Z to AG64 Boundary",
+  "status": "ag64_panchang_festival_boundary_created",
+  "allowed_next_scope": [
+    "Create Panchang & Festival initial working data.",
+    "Create source/methodology basis for Panchang/festival fields.",
+    "Create regional/location/date-basis schema.",
+    "Create observance registry schema.",
+    "Create feedback/admin review/absorption schema.",
+    "Generate safe Panchang/Festival working-data JSON.",
+    "Wire UI only after working data exists."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live Panchang calculation",
+    "deterministic observance claim without source/method rule",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption without admin review"
+  ]
+}
