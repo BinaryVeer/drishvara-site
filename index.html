@@ -5970,9 +5970,80 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<script data-drishvara-ag62b-first-light-ui-wiring="true">
+
+<style data-drishvara-ag62z-r1-first-light-three-lane-transition-style="true">
+  #first-light-list {
+    display: grid;
+    gap: 18px;
+  }
+
+  .drishvara-ag62z-r1-first-light-lane {
+    width: 100%;
+    min-height: 178px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .drishvara-ag62z-r1-first-light-lane .sub {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .drishvara-ag62z-r1-first-light-lane .title {
+    font-size: clamp(1.08rem, 1.45vw, 1.32rem);
+    line-height: 1.45;
+    margin-bottom: 12px;
+  }
+
+  .drishvara-ag62z-r1-first-light-lane .meta {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .drishvara-ag62z-r1-first-light-lane [data-ag62z-r1-lane-title],
+  .drishvara-ag62z-r1-first-light-lane [data-ag62z-r1-lane-meta],
+  .drishvara-ag62z-r1-first-light-lane [data-ag62z-r1-lane-counter] {
+    transition: opacity 420ms ease, transform 420ms ease;
+  }
+
+  .drishvara-ag62z-r1-first-light-lane.is-transitioning [data-ag62z-r1-lane-title],
+  .drishvara-ag62z-r1-first-light-lane.is-transitioning [data-ag62z-r1-lane-meta],
+  .drishvara-ag62z-r1-first-light-lane.is-transitioning [data-ag62z-r1-lane-counter] {
+    opacity: 0.30;
+    transform: translateY(10px);
+  }
+
+  .drishvara-ag62z-r1-lane-footer {
+    margin-top: 18px;
+    font-size: 0.84rem;
+    opacity: 0.74;
+    letter-spacing: 0.01em;
+  }
+
+  @media (min-width: 980px) {
+    .drishvara-ag62z-r1-first-light-lane {
+      min-height: 190px;
+      padding: 24px 26px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .drishvara-ag62z-r1-first-light-lane {
+      min-height: 162px;
+      padding: 18px 18px;
+    }
+  }
+</style>
+
+<script data-drishvara-ag62b-first-light-ui-wiring="true" data-drishvara-ag62z-r1-first-light-three-lane-transition="true">
 (() => {
   const DATA_PATH = "generated/first-light-working-data.json";
+  const ROTATION_INTERVAL_MS = 4400;
+  const TRANSITION_MS = 420;
+  const timers = [];
 
   function escapeAg62bHtml(value) {
     return String(value || "")
@@ -5988,8 +6059,83 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el && value) el.textContent = value;
   }
 
+  function clearAg62zR1Timers() {
+    while (timers.length) {
+      clearInterval(timers.pop());
+    }
+  }
+
+  function laneKey(item) {
+    const place = String(item?.place || "").toLowerCase();
+    if (place.includes("northeast")) return "northeast";
+    if (place.includes("world") || place.includes("international")) return "world";
+    return "india";
+  }
+
+  function groupedLanes(items) {
+    const grouped = { india: [], northeast: [], world: [] };
+
+    items.forEach((item) => {
+      grouped[laneKey(item)].push(item);
+    });
+
+    return [
+      {
+        key: "india",
+        label: "India",
+        count: grouped.india.length || 5,
+        caption: "Five India-focused signals transition here",
+        items: grouped.india
+      },
+      {
+        key: "northeast",
+        label: "Northeast Watch",
+        count: grouped.northeast.length || 1,
+        caption: "Northeast signal window",
+        items: grouped.northeast
+      },
+      {
+        key: "world",
+        label: "World",
+        count: grouped.world.length || 4,
+        caption: "Four international signals transition here",
+        items: grouped.world
+      }
+    ];
+  }
+
+  function updateLane(card, items, index) {
+    const item = items[index] || {};
+    const title = card.querySelector("[data-ag62z-r1-lane-title]");
+    const meta = card.querySelector("[data-ag62z-r1-lane-meta]");
+    const counter = card.querySelector("[data-ag62z-r1-lane-counter]");
+
+    if (title) title.textContent = item.signal || "Signal slot reserved for reviewed First Light working data.";
+    if (meta) meta.textContent = item.note || "Source registry, AI scoring and admin approval are required before public activation.";
+    if (counter) counter.textContent = `${index + 1} of ${items.length}`;
+  }
+
+  function rotateLane(card, items) {
+    if (!card || !Array.isArray(items) || items.length <= 1) return;
+
+    let index = 0;
+    const timer = setInterval(() => {
+      index = (index + 1) % items.length;
+      card.classList.add("is-transitioning");
+
+      setTimeout(() => {
+        updateLane(card, items, index);
+        card.classList.remove("is-transitioning");
+      }, TRANSITION_MS);
+    }, ROTATION_INTERVAL_MS);
+
+    timers.push(timer);
+  }
+
   function renderAg62bFirstLight(data) {
     if (!data || !data.firstLight) return false;
+
+    clearAg62zR1Timers();
 
     const firstLight = data.firstLight;
     const items = Array.isArray(firstLight.items) ? firstLight.items : [];
@@ -6002,24 +6148,48 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!list || !items.length) return false;
 
     const publicReady = data.public_ui_ready === true;
-    const statusLabel = publicReady ? "Reviewed Signal" : "Working Data";
+    const statusLabel = publicReady ? "Reviewed Signals" : "Working Data";
+    const lanes = groupedLanes(items);
 
-    list.innerHTML = items.map((item, index) => `
-      <div class="reading-guide-item" data-drishvara-ag62b-first-light-item="true" data-slot-id="${escapeAg62bHtml(item.slot_id || `slot_${index + 1}`)}">
-        <div class="sub">${escapeAg62bHtml(item.place || "First Light")} · ${escapeAg62bHtml(statusLabel)}</div>
-        <div class="title">${escapeAg62bHtml(item.signal || "Signal slot pending review.")}</div>
-        <div class="meta">${escapeAg62bHtml(item.note || "Source registry, AI scoring and admin review are required before activation.")}</div>
-      </div>
-    `).join("");
+    list.innerHTML = lanes.map((lane) => {
+      const first = lane.items[0] || {};
+      return `
+        <div class="reading-guide-item drishvara-ag62z-r1-first-light-lane"
+          data-drishvara-ag62b-first-light-item="lane"
+          data-drishvara-ag62z-r1-first-light-lane="true"
+          data-lane="${escapeAg62bHtml(lane.key)}">
+          <div>
+            <div class="sub">${escapeAg62bHtml(lane.label)} · ${escapeAg62bHtml(statusLabel)}</div>
+            <div class="title" data-ag62z-r1-lane-title>${escapeAg62bHtml(first.signal || "Signal slot reserved for reviewed First Light working data.")}</div>
+            <div class="meta" data-ag62z-r1-lane-meta>${escapeAg62bHtml(first.note || "Source registry, AI scoring and admin approval are required before public activation.")}</div>
+          </div>
+          <div class="drishvara-ag62z-r1-lane-footer">
+            <span>${escapeAg62bHtml(lane.caption)}</span>
+            <span> · </span>
+            <span data-ag62z-r1-lane-counter>1 of ${escapeAg62bHtml(String(Math.max(lane.items.length, 1)))}</span>
+          </div>
+        </div>
+      `;
+    }).join("");
+
+    lanes.forEach((lane) => {
+      const card = list.querySelector(`[data-lane="${lane.key}"]`);
+      rotateLane(card, lane.items);
+    });
 
     const card = document.getElementById("first-light-card");
     if (card) {
       card.setAttribute("data-drishvara-ag62b-source", DATA_PATH);
       card.setAttribute("data-drishvara-ag62b-public-ready", publicReady ? "true" : "false");
       card.setAttribute("data-drishvara-ag62b-items", String(items.length));
+      card.setAttribute("data-drishvara-ag62z-r1-visible-lanes", "3");
+      card.setAttribute("data-drishvara-ag62z-r1-transition-enabled", "true");
+      card.setAttribute("data-drishvara-ag62z-r1-large-lane-cards", "true");
     }
 
     document.documentElement.setAttribute("data-drishvara-ag62b-first-light-wired", "true");
+    document.documentElement.setAttribute("data-drishvara-ag62z-r1-first-light-three-lane", "true");
+    document.documentElement.setAttribute("data-drishvara-ag62z-r1-large-lane-cards", "true");
     return true;
   }
 
@@ -6033,7 +6203,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const list = document.getElementById("first-light-list");
       if (list) {
         list.innerHTML = `
-          <div class="reading-guide-item" data-drishvara-ag62b-first-light-fallback="true">
+          <div class="reading-guide-item drishvara-ag62z-r1-first-light-lane" data-drishvara-ag62b-first-light-fallback="true">
             <div class="sub">First Light · Working Data</div>
             <div class="title">First Light working data could not be loaded.</div>
             <div class="meta">The safe fallback remains active until generated/first-light-working-data.json is available.</div>
@@ -6057,6 +6227,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg62bLoadFirstLight = loadAg62bFirstLight;
 })();
 </script>
+
 
 </body>
 </html>

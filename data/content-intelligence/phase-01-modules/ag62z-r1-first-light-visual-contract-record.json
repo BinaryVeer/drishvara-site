@@ -1,0 +1,39 @@
+{
+  "module_id": "AG62Z-R1",
+  "title": "First Light Visual Contract Record",
+  "status": "first_light_visual_contract_corrected",
+  "visual_rule": "Render 3 larger visible slots/windows: India, Northeast Watch, World.",
+  "data_rule": "Retain 10 underlying signals for future AI/admin selection.",
+  "card_sizing_rule": {
+    "width": "full available First Light card width",
+    "default_min_height_px": 178,
+    "desktop_min_height_px": 190,
+    "mobile_min_height_px": 162,
+    "purpose": "Give enough visible space for transition movement and readable signal summaries."
+  },
+  "transition_rule": {
+    "enabled": true,
+    "interval_ms": 4400,
+    "transition_ms": 420,
+    "effect": "opacity and vertical translate transition between underlying signals"
+  },
+  "lane_contract": [
+    {
+      "lane": "India",
+      "expected_underlying_items": 5,
+      "behaviour": "Rotate/transition through India signal items."
+    },
+    {
+      "lane": "Northeast Watch",
+      "expected_underlying_items": 1,
+      "behaviour": "Show Northeast Watch signal window; transition-ready if more items are added later."
+    },
+    {
+      "lane": "World",
+      "expected_underlying_items": 4,
+      "behaviour": "Rotate/transition through World signal items."
+    }
+  ],
+  "public_state_now": "large_working_data_transition_preview",
+  "future_state": "same three-lane layout should render real reviewed daily signals after source/AI/admin activation."
+}
