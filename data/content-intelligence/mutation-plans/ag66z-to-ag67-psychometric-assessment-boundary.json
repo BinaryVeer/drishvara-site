@@ -1,0 +1,28 @@
+{
+  "module_id": "AG66Z",
+  "title": "AG66Z to AG67 Boundary",
+  "status": "ag67_psychometric_assessment_boundary_created",
+  "allowed_next_scope": [
+    "Create Psychometric and Assessment initial working data.",
+    "Create consent, minor, privacy and ethics schema.",
+    "Create non-diagnostic and non-deterministic assessment boundary.",
+    "Create feedback/admin review/absorption schema.",
+    "Generate safe assessment scaffold working-data JSON.",
+    "Wire UI only after working data exists."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public assessment launch",
+    "psychometric scoring",
+    "trait diagnosis",
+    "mental health inference",
+    "minor data processing",
+    "enabled personal input collection",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption without admin review"
+  ]
+}
