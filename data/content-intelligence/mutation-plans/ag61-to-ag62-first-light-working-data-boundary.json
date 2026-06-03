@@ -1,0 +1,21 @@
+{
+  "module_id": "AG61",
+  "title": "AG61 to AG62 Boundary",
+  "status": "ag62_first_light_working_data_boundary_created",
+  "allowed_next_scope": [
+    "Create First Light initial working data.",
+    "Create source registry and candidate signal schema.",
+    "Create AI scoring methodology.",
+    "Create admin feedback/approval/absorption schema.",
+    "Keep backend/Auth/V02 deferred."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "uncontrolled live scraping",
+    "user-triggered AI without admin budget/control",
+    "intro video modal activation without video asset"
+  ]
+}

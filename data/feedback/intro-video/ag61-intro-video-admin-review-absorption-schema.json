@@ -1,0 +1,22 @@
+{
+  "module_id": "AG61",
+  "title": "Intro Video Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_fields": [
+    "review_id",
+    "feedback_id",
+    "admin_decision",
+    "decision_reason",
+    "approved_change_type",
+    "script_change_needed",
+    "caption_change_needed",
+    "video_edit_needed",
+    "absorbed_into_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin-approved feedback can modify intro script, transcript, captions, video cut, or modal behaviour.",
+  "versioning": {
+    "current_methodology_version": "intro_video_method_v1",
+    "next_version_trigger": "admin-approved feedback or asset replacement"
+  }
+}

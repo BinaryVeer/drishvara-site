@@ -1,0 +1,48 @@
+{
+  "module_id": "AG61",
+  "title": "Paid Preview Admin-Operated Space Policy",
+  "status": "paid_preview_space_planned_not_publicly_active",
+  "purpose": "Create a future monetisation space where approved external/partner videos may be shown only after admin review and commercial approval.",
+  "relation_to_intro_video": {
+    "core_intro_video": "Drishvara-owned first-visit welcome/introduction asset.",
+    "paid_preview_space": "Separate admin-operated monetisation surface; not the default welcome video.",
+    "separation_required": true
+  },
+  "operating_model": {
+    "admin_operated": true,
+    "user_direct_publish_allowed": false,
+    "public_submission_allowed_now": false,
+    "automatic_publication_allowed": false,
+    "sponsor_or_paid_label_required": true,
+    "content_safety_review_required": true,
+    "editorial_fit_review_required": true,
+    "payment_terms_required_before_publication": true,
+    "legal_disclaimer_required": true
+  },
+  "future_workflow": [
+    "Potential publisher submits video proposal through an approved channel.",
+    "Admin checks category, safety, quality, duration and brand fit.",
+    "Admin checks commercial/payment terms.",
+    "Admin approves, rejects or requests revision.",
+    "Approved video enters paid preview queue.",
+    "System records decision, validity period, sponsor label and version.",
+    "Only approved and active paid preview videos can be surfaced later."
+  ],
+  "blocked_now": [
+    "No paid preview UI is activated.",
+    "No paid video upload form is active.",
+    "No payment collection is active.",
+    "No ad/sponsor runtime is active.",
+    "No backend database write is active."
+  ],
+  "future_database_requirements": [
+    "paid_preview_submissions",
+    "paid_preview_admin_reviews",
+    "paid_preview_approval_log",
+    "paid_preview_payment_terms",
+    "paid_preview_asset_registry",
+    "paid_preview_publication_window",
+    "paid_preview_feedback_queue",
+    "paid_preview_absorption_log"
+  ]
+}

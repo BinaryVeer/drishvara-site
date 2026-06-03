@@ -1,0 +1,28 @@
+{
+  "module_id": "AG61",
+  "title": "First Visit Intro Video Methodology",
+  "status": "methodology_defined_activation_blocked_until_asset",
+  "principles": [
+    "The intro video must be non-blocking and skippable.",
+    "The video must not autoplay with sound.",
+    "The core Drishvara first-visit intro video must not be used as advertisement inventory.",
+    "A separate paid preview/sponsored video space may be planned only as an admin-operated, clearly labelled, review-gated monetisation surface.",
+    "The user must be able to close it immediately.",
+    "The modal should appear only once per configured localStorage window.",
+    "The transcript must exist before public activation.",
+    "The video must be lightweight enough for mobile networks.",
+    "No backend tracking is allowed in the current static phase."
+  ],
+  "quality_gates_before_activation": [
+    "video asset exists",
+    "poster image exists",
+    "English transcript exists",
+    "Hindi caption/summary exists",
+    "file size/performance check passes",
+    "mobile modal check passes",
+    "accessibility labels exist",
+    "close/skip works",
+    "localStorage first-visit rule works",
+    "validator confirms no backend/Auth/V02 activation"
+  ]
+}

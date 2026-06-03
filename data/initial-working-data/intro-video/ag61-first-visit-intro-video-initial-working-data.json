@@ -1,0 +1,48 @@
+{
+  "module_id": "AG61",
+  "title": "First Visit Intro Video Initial Working Data",
+  "status": "initial_working_data_defined_asset_pending",
+  "module_name": "First Visit Intro Video Modal",
+  "activation_status": "not_activated",
+  "public_goal": "Explain Drishvara to first-time visitors in approximately 30 seconds without blocking site use.",
+  "intended_runtime": {
+    "show_condition": "first visit or after configured cooldown",
+    "first_phase_storage": "localStorage only",
+    "storage_key": "drishvara:intro-video:seen",
+    "default_cooldown_days": 30,
+    "autoplay_sound": false,
+    "skippable": true,
+    "close_button_required": true,
+    "mobile_safe": true,
+    "accessibility_required": true
+  },
+  "asset_placeholders": {
+    "video_file": null,
+    "poster_image": null,
+    "transcript_en": null,
+    "transcript_hi": null,
+    "caption_file": null,
+    "duration_seconds_target": 30
+  },
+  "paid_preview_space": {
+    "status": "planned_admin_operated_not_publicly_active",
+    "purpose": "Allow approved external/partner preview videos to be considered as a future monetised space.",
+    "public_ui_active_now": false,
+    "admin_review_required": true,
+    "sponsor_label_required": true,
+    "content_safety_review_required": true,
+    "payment_or_commercial_terms_required": true,
+    "automatic_user_submission_allowed": false,
+    "automatic_publication_allowed": false
+  },
+  "public_copy_draft": {
+    "title_en": "Welcome to Drishvara",
+    "subtitle_en": "A daily route into signals, reading, reflection and evolving knowledge.",
+    "title_hi": "दृश्वरा में आपका स्वागत है",
+    "subtitle_hi": "दैनिक संकेत, पठन, चिंतन और विकसित होते ज्ञान की एक शांत यात्रा।",
+    "cta_label_en": "Enter Drishvara",
+    "cta_label_hi": "दृश्वरा में प्रवेश करें",
+    "skip_label_en": "Skip",
+    "skip_label_hi": "छोड़ें"
+  }
+}
