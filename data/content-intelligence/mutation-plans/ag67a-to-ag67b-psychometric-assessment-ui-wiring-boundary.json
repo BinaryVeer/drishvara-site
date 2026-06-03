@@ -1,0 +1,32 @@
+{
+  "module_id": "AG67A",
+  "title": "AG67A to AG67B Boundary",
+  "status": "ag67b_psychometric_assessment_ui_wiring_boundary_created",
+  "allowed_next_scope": [
+    "Wire homepage Psychometric Assessment card to generated/psychometric-assessment-working-data.json.",
+    "Keep assessment placeholder safe and non-interactive.",
+    "Preserve no assessment, no data collection and no scoring language.",
+    "Do not activate questionnaire, consent runtime, scoring, reporting, runtime AI or backend."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public assessment launch",
+    "questionnaire runtime",
+    "personal input collection",
+    "student/minor data collection",
+    "guardian consent runtime",
+    "school permission runtime",
+    "psychometric scoring",
+    "trait diagnosis",
+    "mental health inference",
+    "academic/career deterministic prediction",
+    "student ranking",
+    "AI-generated assessment report",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption"
+  ]
+}

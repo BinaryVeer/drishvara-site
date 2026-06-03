@@ -1,0 +1,52 @@
+{
+  "module_id": "AG67A",
+  "title": "Psychometric and Assessment Methodology",
+  "status": "methodology_created_not_runtime_active",
+  "methodology_version": "psychometric_assessment_method_v1",
+  "principles": [
+    "Treat this surface as a future guided self-discovery layer, not a live assessment.",
+    "Do not launch questionnaire, scoring, diagnosis or decision guidance without explicit approval.",
+    "Do not process child/minor/student data without guardian consent and school/institution permission where applicable.",
+    "Do not infer mental health, disability, suitability or risk from unverified signals.",
+    "Do not create deterministic academic, career or personality predictions.",
+    "Use validated and reviewed instruments only after licensing, age-appropriateness and ethics review.",
+    "User feedback cannot directly modify assessment logic; admin and ethics review are mandatory.",
+    "Any future agentic analysis must remain explainable, auditable and human-reviewable."
+  ],
+  "output_separation": {
+    "public_safe_placeholder_layer": [
+      "title",
+      "subtitle",
+      "status",
+      "safety_note"
+    ],
+    "future_consent_layer": [
+      "consent_status",
+      "guardian_consent_status",
+      "school_permission_status"
+    ],
+    "future_assessment_layer": [
+      "questionnaire_id",
+      "responses",
+      "score_model",
+      "interpretation"
+    ],
+    "blocked_layers": [
+      "diagnosis",
+      "mental_health_inference",
+      "deterministic_prediction",
+      "ranking",
+      "decision_guidance"
+    ]
+  },
+  "blocked_now": [
+    "No questionnaire runtime.",
+    "No scoring runtime.",
+    "No trait diagnosis.",
+    "No mental-health inference.",
+    "No student/minor data processing.",
+    "No AI-generated report.",
+    "No external API/source fetch.",
+    "No backend/Auth/Supabase activation."
+  ]
+}

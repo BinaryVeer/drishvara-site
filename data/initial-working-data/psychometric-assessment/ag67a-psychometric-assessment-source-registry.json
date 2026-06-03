@@ -1,0 +1,43 @@
+{
+  "module_id": "AG67A",
+  "title": "Psychometric and Assessment Source Registry",
+  "status": "source_registry_defined_live_source_use_disabled",
+  "live_source_fetching_enabled": false,
+  "external_api_enabled": false,
+  "psychometric_library_enabled": false,
+  "scoring_model_enabled": false,
+  "source_levels": [
+    {
+      "level": 1,
+      "label": "Ethics, consent and privacy",
+      "use_case": "Required before any assessment, student/minor data or personal profile processing."
+    },
+    {
+      "level": 2,
+      "label": "Validated psychometric instrument",
+      "use_case": "Only reviewed, licensed/allowed and age-appropriate instruments may be used in future."
+    },
+    {
+      "level": 3,
+      "label": "Educational/reflection framework",
+      "use_case": "Non-diagnostic, non-deterministic self-reflection or learning-support prompts."
+    },
+    {
+      "level": 4,
+      "label": "Editorial safe placeholder",
+      "use_case": "Public static copy that does not collect data, score, diagnose or recommend decisions."
+    }
+  ],
+  "source_record_schema": {
+    "source_id": "string",
+    "source_name": "string",
+    "source_level": "1 | 2 | 3 | 4",
+    "source_domain": "ethics | consent | privacy | psychometric_instrument | education | editorial",
+    "url_or_reference": "string_or_null",
+    "licence_or_use_status": "verified | under_verification | unavailable | blocked",
+    "age_band_allowed": "adult | minor | child | not_applicable | blocked",
+    "public_use_allowed": false,
+    "admin_approved": false,
+    "review_note": "string"
+  }
+}

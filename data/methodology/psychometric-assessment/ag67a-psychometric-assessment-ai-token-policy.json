@@ -1,0 +1,27 @@
+{
+  "module_id": "AG67A",
+  "title": "Psychometric and Assessment AI and Token Policy",
+  "status": "ai_policy_defined_runtime_inactive",
+  "ai_runtime_active": false,
+  "user_triggered_ai_allowed": false,
+  "allowed_future_ai_roles_after_approval": [
+    "triage admin-reviewed feedback",
+    "check non-diagnostic/non-deterministic language",
+    "summarise validated instrument documentation for admin review",
+    "assist human reviewer after consent/backend activation"
+  ],
+  "blocked_ai_roles": [
+    "diagnose personality or mental health",
+    "score a child/minor",
+    "produce academic/career prediction",
+    "rank students",
+    "generate assessment report without human review",
+    "process sensitive responses without consent",
+    "directly absorb user feedback"
+  ],
+  "cost_policy": {
+    "expected_monthly_token_pressure": "low_until_backend_and_assessment_runtime_approval",
+    "initial_monthly_cap_inr": 1000,
+    "stronger_model_use": "only for safety/ethics-language review after explicit approval"
+  }
+}

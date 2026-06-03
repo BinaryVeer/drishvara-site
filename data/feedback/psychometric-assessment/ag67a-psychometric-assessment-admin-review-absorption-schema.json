@@ -1,0 +1,30 @@
+{
+  "module_id": "AG67A",
+  "title": "Psychometric and Assessment Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_required": true,
+  "ethics_review_required": true,
+  "automatic_absorption_allowed": false,
+  "fields": [
+    "review_id",
+    "feedback_id",
+    "source_id",
+    "admin_decision",
+    "ethics_decision",
+    "decision_reason",
+    "approved_change_type",
+    "privacy_update_required",
+    "consent_update_required",
+    "minor_protection_update_required",
+    "assessment_method_update_required",
+    "public_copy_update_required",
+    "runtime_gate_update_required",
+    "absorbed_into_methodology_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin/ethics-approved feedback can modify assessment copy, consent/privacy schema, minor protection schema, source registry, runtime gate or future methodology.",
+  "methodology_versioning": {
+    "current_version": "psychometric_assessment_method_v1",
+    "next_version_trigger": "admin/ethics-approved consent, instrument, safety or runtime update"
+  }
+}

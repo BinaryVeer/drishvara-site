@@ -1,0 +1,26 @@
+{
+  "module_id": "AG67A",
+  "title": "Child/Minor Protection Schema",
+  "status": "minor_protection_schema_created_runtime_inactive",
+  "minor_data_processing_enabled_now": false,
+  "guardian_consent_runtime_enabled_now": false,
+  "school_permission_runtime_enabled_now": false,
+  "required_before_minor_assessment": [
+    "verified guardian consent",
+    "school/institution permission where applicable",
+    "age-appropriate questionnaire review",
+    "human review layer",
+    "risk escalation pathway",
+    "no mental-health diagnosis",
+    "no deterministic academic/career prediction",
+    "secure storage and deletion workflow"
+  ],
+  "blocked_now": [
+    "minor questionnaire",
+    "child/minor profile creation",
+    "guardian consent capture",
+    "school permission capture",
+    "minor score generation",
+    "minor trait report generation"
+  ]
+}

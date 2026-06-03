@@ -1,0 +1,41 @@
+{
+  "module_id": "AG67A",
+  "title": "Psychometric and Assessment Initial Working Data",
+  "status": "initial_working_data_created_not_publicly_wired",
+  "public_ui_activation_status": "not_wired_in_ag67a",
+  "current_public_mode": "safe_placeholder_without_assessment_runtime",
+  "working_data_contract": {
+    "generated_file": "generated/psychometric-assessment-working-data.json",
+    "current_ui_targets": [
+      "psychometric-card",
+      "psychometric-subtitle",
+      "status-badge",
+      "utility-note"
+    ],
+    "sensitive_future_inputs": [
+      "name",
+      "age",
+      "class_or_grade",
+      "school",
+      "guardian_name",
+      "guardian_consent",
+      "questionnaire_responses",
+      "trait_scores",
+      "academic_result_mapping",
+      "model_output"
+    ]
+  },
+  "blocked_now": [
+    "No questionnaire launch.",
+    "No personal input collection.",
+    "No student/minor data collection.",
+    "No guardian consent runtime.",
+    "No school permission workflow runtime.",
+    "No psychometric scoring.",
+    "No trait diagnosis.",
+    "No mental-health inference.",
+    "No career/academic deterministic prediction.",
+    "No AI-generated assessment report.",
+    "No backend/Auth/Supabase/V02 activation."
+  ]
+}
