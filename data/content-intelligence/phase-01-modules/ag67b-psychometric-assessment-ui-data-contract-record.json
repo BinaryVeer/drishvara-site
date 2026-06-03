@@ -1,0 +1,25 @@
+{
+  "module_id": "AG67B",
+  "title": "Psychometric Assessment UI Data Contract Record",
+  "status": "psychometric_assessment_ui_data_contract_recorded",
+  "source_file": "generated/psychometric-assessment-working-data.json",
+  "field_mapping": {
+    "psychometric-card": "psychometric_assessment.card_id",
+    "card.label": "psychometric_assessment.label",
+    "card.title": "psychometric_assessment.title",
+    "psychometric-subtitle": "psychometric_assessment.subtitle",
+    "status-badge": "psychometric_assessment.status_label",
+    "utility-note": "psychometric_assessment.safety_note"
+  },
+  "current_safe_placeholder": {
+    "label": "Psychometric Assessment",
+    "title": "Psychometric Assessment",
+    "subtitle": "A reflective module for personality, decision style, work energy, and growth signals.",
+    "status_label": "Coming Soon",
+    "safety_note": "This space is reserved for future guided self-discovery. No assessment, data collection or scoring is active.",
+    "public_use_mode": "safe_placeholder_only",
+    "source_status": "ethics_consent_methodology_under_governance_review"
+  },
+  "current_public_state": "safe_placeholder_from_generated_working_data",
+  "note": "AG67B wires the UI to generated safe working data. Public assessment, questionnaire runtime, data collection, scoring, diagnosis, reporting, runtime AI and backend remain inactive."
+}

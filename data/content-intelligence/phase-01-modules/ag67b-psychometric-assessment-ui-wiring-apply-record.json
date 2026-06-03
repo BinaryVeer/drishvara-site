@@ -1,0 +1,32 @@
+{
+  "module_id": "AG67B",
+  "title": "Psychometric Assessment UI Wiring Apply Record",
+  "status": "psychometric_assessment_ui_wiring_applied",
+  "corrected_files": [
+    "index.html"
+  ],
+  "source_file": "generated/psychometric-assessment-working-data.json",
+  "ui_targets": [
+    "#psychometric-card",
+    "#psychometric-subtitle",
+    ".status-badge",
+    ".utility-note"
+  ],
+  "behaviour": {
+    "fetches_generated_psychometric_assessment_data": true,
+    "updates_safe_placeholder_fields": true,
+    "preserves_non_interactive_placeholder": true,
+    "preserves_no_assessment_data_collection_scoring_language": true,
+    "public_assessment_launch_enabled": false,
+    "personal_input_collection_enabled": false,
+    "student_data_collection_enabled": false,
+    "child_minor_data_processing_enabled": false,
+    "guardian_consent_runtime_enabled": false,
+    "school_permission_runtime_enabled": false,
+    "questionnaire_runtime_enabled": false,
+    "scoring_runtime_enabled": false,
+    "report_generation_enabled": false,
+    "runtime_ai_enabled": false,
+    "backend_enabled": false
+  }
+}

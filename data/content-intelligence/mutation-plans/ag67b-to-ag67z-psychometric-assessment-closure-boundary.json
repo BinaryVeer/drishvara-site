@@ -1,0 +1,30 @@
+{
+  "module_id": "AG67B",
+  "title": "AG67B to AG67Z Boundary",
+  "status": "ag67z_psychometric_assessment_closure_boundary_created",
+  "allowed_next_scope": [
+    "Validate Psychometric Assessment working data + UI wiring end-to-end.",
+    "Confirm live HTML contains AG67B script and generated/psychometric-assessment-working-data.json is accessible.",
+    "Record closure before moving beyond current governed row."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public assessment launch",
+    "questionnaire runtime",
+    "data collection",
+    "student/minor data collection",
+    "guardian consent runtime",
+    "school permission runtime",
+    "psychometric scoring",
+    "diagnosis",
+    "mental-health inference",
+    "academic/career prediction",
+    "report generation",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct feedback absorption"
+  ]
+}

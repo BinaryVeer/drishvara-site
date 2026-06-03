@@ -6586,5 +6586,87 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script data-drishvara-ag67b-psychometric-assessment-ui-wiring="true">
+(() => {
+  const DATA_PATH = "generated/psychometric-assessment-working-data.json";
+
+  function setText(el, value) {
+    if (el && value !== undefined && value !== null && String(value).trim()) {
+      el.textContent = String(value);
+    }
+  }
+
+  function applyAg67bPsychometricAssessment(data) {
+    if (!data || !data.psychometric_assessment) return false;
+
+    const psych = data.psychometric_assessment;
+    const card = document.getElementById("psychometric-card");
+    if (!card) return false;
+
+    const label = card.querySelector(".label");
+    const title = card.querySelector("h2");
+    const subtitle = document.getElementById("psychometric-subtitle");
+    const status = card.querySelector(".status-badge");
+    const note = card.querySelector(".utility-note");
+
+    setText(label, psych.label);
+    setText(title, psych.title);
+    setText(subtitle, psych.subtitle);
+    setText(status, psych.status_label);
+    setText(note, psych.safety_note);
+
+    card.setAttribute("data-drishvara-ag67b-source", DATA_PATH);
+    card.setAttribute("data-drishvara-ag67b-public-ready", data.public_ui_ready === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-public-assessment-launch-enabled", data.public_assessment_launch_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-personal-input-enabled", data.personal_input_collection_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-student-data-enabled", data.student_data_collection_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-child-minor-data-enabled", data.child_minor_data_processing_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-guardian-consent-runtime-enabled", data.guardian_consent_runtime_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-school-permission-runtime-enabled", data.school_permission_runtime_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-questionnaire-runtime-enabled", data.questionnaire_runtime_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-psychometric-test-runtime-enabled", data.psychometric_test_runtime_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-scoring-runtime-enabled", data.scoring_runtime_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-trait-diagnosis-enabled", data.trait_diagnosis_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-mental-health-inference-enabled", data.mental_health_inference_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-report-generation-enabled", data.report_generation_enabled === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-ai-generation-active", data.ai_generation_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag67b-non-interactive", "true");
+
+    document.documentElement.setAttribute("data-drishvara-ag67b-psychometric-assessment-wired", "true");
+    return true;
+  }
+
+  async function loadAg67bPsychometricAssessment() {
+    try {
+      const response = await fetch(DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to load ${DATA_PATH}`);
+      const data = await response.json();
+      applyAg67bPsychometricAssessment(data);
+    } catch (error) {
+      const card = document.getElementById("psychometric-card");
+      if (card) {
+        card.setAttribute("data-drishvara-ag67b-psychometric-assessment-fallback", "true");
+        const note = card.querySelector(".utility-note");
+        setText(note, "Psychometric Assessment working data could not be loaded. No assessment, data collection or scoring is active.");
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg67bPsychometricAssessment, { once: true });
+  } else {
+    loadAg67bPsychometricAssessment();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg67bPsychometricAssessment();
+    setTimeout(loadAg67bPsychometricAssessment, 600);
+  }, { once: true });
+
+  window.drishvaraAg67bLoadPsychometricAssessment = loadAg67bPsychometricAssessment;
+})();
+</script>
+
 </body>
 </html>
