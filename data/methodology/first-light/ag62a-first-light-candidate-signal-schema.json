@@ -1,0 +1,31 @@
+{
+  "module_id": "AG62A",
+  "title": "First Light Candidate Signal Schema",
+  "status": "candidate_signal_schema_created",
+  "candidate_fields": {
+    "candidate_id": "unique candidate identifier",
+    "collection_date": "YYYY-MM-DD",
+    "source_id": "registered source reference",
+    "source_name": "source display name",
+    "source_url": "source URL",
+    "published_at": "source publication timestamp if available",
+    "region_layer": "India | Northeast Watch | World",
+    "category": "working category",
+    "raw_title": "candidate source title",
+    "raw_excerpt": "candidate source excerpt if available",
+    "neutral_summary": "AI or editor generated neutral summary",
+    "language": "en | hi | other",
+    "duplicate_cluster_id": "near-duplicate cluster reference",
+    "source_credibility_score": "0-100",
+    "public_importance_score": "0-100",
+    "novelty_score": "0-100",
+    "diversity_score": "0-100",
+    "civic_value_score": "0-100",
+    "risk_penalty": "0-100",
+    "final_score": "computed score",
+    "ai_model_used": "model route used for summarisation/scoring",
+    "ai_cost_estimate_tokens": "estimated tokens used",
+    "admin_status": "pending_review | approved | rejected | needs_source_check",
+    "absorption_version": "methodology version after approved feedback"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "module_id": "AG62A",
+  "title": "First Light AI-Assisted Scoring Methodology",
+  "status": "ai_scoring_methodology_defined_not_runtime_active",
+  "ai_runtime_active": false,
+  "scoring_formula": "final_score = credibility*0.25 + public_importance*0.25 + novelty*0.15 + diversity*0.15 + civic_value*0.15 - risk_penalty*0.20",
+  "weights": {
+    "credibility": 0.25,
+    "public_importance": 0.25,
+    "novelty": 0.15,
+    "diversity": 0.15,
+    "civic_value": 0.15,
+    "risk_penalty": 0.2
+  },
+  "selection_constraints": [
+    "Select exactly 10 signals.",
+    "Select 5 India general signals.",
+    "Select 1 Northeast Watch signal.",
+    "Select 4 World signals.",
+    "Avoid duplicate story clusters unless public importance requires one follow-up.",
+    "Do not select unverified claims.",
+    "Do not select sensational/low-credibility content.",
+    "Admin review can override AI ranking."
+  ],
+  "ai_role": [
+    "summarise candidate neutrally",
+    "classify region/category",
+    "score using methodology",
+    "flag risks and source concerns",
+    "propose final 10 for admin review"
+  ],
+  "blocked_now": [
+    "No live AI call is performed in AG62A.",
+    "No live news fetch is performed in AG62A.",
+    "No public UI wiring is performed in AG62A.",
+    "No backend write is performed in AG62A."
+  ]
+}

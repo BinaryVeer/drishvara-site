@@ -1,0 +1,42 @@
+{
+  "module_id": "AG62A",
+  "title": "First Light AI Routing and Token Budget Policy",
+  "status": "ai_routing_token_budget_defined_not_active",
+  "monthly_cost_control": {
+    "initial_phase_cap_inr": 10000,
+    "controlled_launch_cap_inr": 25000,
+    "hard_review_threshold_inr": 50000
+  },
+  "model_routing": {
+    "nano_or_low_cost_model": [
+      "source classification",
+      "duplicate detection",
+      "basic relevance scoring",
+      "feedback triage"
+    ],
+    "mini_model": [
+      "neutral summaries",
+      "candidate signal notes",
+      "admin review suggestions"
+    ],
+    "stronger_model_selective": [
+      "final editorial synthesis",
+      "sensitive issue review",
+      "methodology conflict resolution"
+    ]
+  },
+  "token_budget_per_daily_cycle": {
+    "light_mode_candidates": 50,
+    "moderate_mode_candidates": 100,
+    "heavy_mode_candidates": 200,
+    "ag62_initial_mode": "light_mode_only_until_admin_approval",
+    "user_triggered_ai_allowed": false
+  },
+  "cost_guardrails": [
+    "No user-triggered First Light AI generation in initial phase.",
+    "Candidate scan count must be capped.",
+    "Admin approval required before increasing candidate volume.",
+    "Batch/off-peak processing preferred where possible.",
+    "Approved feedback improves methodology prompts/data, not uncontrolled model training."
+  ]
+}

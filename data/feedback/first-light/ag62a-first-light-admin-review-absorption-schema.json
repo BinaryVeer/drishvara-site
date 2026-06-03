@@ -1,0 +1,25 @@
+{
+  "module_id": "AG62A",
+  "title": "First Light Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_required": true,
+  "automatic_absorption_allowed": false,
+  "fields": [
+    "review_id",
+    "feedback_id",
+    "candidate_id",
+    "admin_decision",
+    "decision_reason",
+    "approved_change_type",
+    "source_registry_update_required",
+    "scoring_weight_update_required",
+    "category_rule_update_required",
+    "absorbed_into_methodology_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin-approved feedback can modify source registry, scoring weights, category rules or selection prompts.",
+  "methodology_versioning": {
+    "current_version": "first_light_method_v1",
+    "next_version_trigger": "admin-approved scoring/source/category update"
+  }
+}

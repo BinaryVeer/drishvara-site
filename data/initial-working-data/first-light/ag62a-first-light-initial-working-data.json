@@ -1,0 +1,104 @@
+{
+  "module_id": "AG62A",
+  "title": "First Light Initial Working Data",
+  "status": "initial_working_data_created_not_publicly_wired",
+  "public_ui_activation_status": "not_wired_in_ag62a",
+  "selection_rule": {
+    "default_total": 10,
+    "india_focused_total": 6,
+    "india_general": 5,
+    "northeast_watch": 1,
+    "international_world": 4,
+    "rule_note": "Northeast Watch is counted inside the six India-focused signals. Public presentation should remain India / Northeast Watch / World."
+  },
+  "selection_slots": [
+    {
+      "slot_id": "india_01",
+      "layer": "India",
+      "required": true
+    },
+    {
+      "slot_id": "india_02",
+      "layer": "India",
+      "required": true
+    },
+    {
+      "slot_id": "india_03",
+      "layer": "India",
+      "required": true
+    },
+    {
+      "slot_id": "india_04",
+      "layer": "India",
+      "required": true
+    },
+    {
+      "slot_id": "india_05",
+      "layer": "India",
+      "required": true
+    },
+    {
+      "slot_id": "northeast_01",
+      "layer": "Northeast Watch",
+      "required": true
+    },
+    {
+      "slot_id": "world_01",
+      "layer": "World",
+      "required": true
+    },
+    {
+      "slot_id": "world_02",
+      "layer": "World",
+      "required": true
+    },
+    {
+      "slot_id": "world_03",
+      "layer": "World",
+      "required": true
+    },
+    {
+      "slot_id": "world_04",
+      "layer": "World",
+      "required": true
+    }
+  ],
+  "initial_working_categories": [
+    "public policy and governance",
+    "technology and AI",
+    "economy and livelihoods",
+    "environment and climate",
+    "education and society",
+    "public health",
+    "science and research",
+    "culture and civic life",
+    "Northeast India watch",
+    "international movement"
+  ],
+  "daily_output_contract": {
+    "expected_public_items": 10,
+    "required_item_fields_for_ui": [
+      "place",
+      "signal",
+      "note"
+    ],
+    "extended_fields_for_admin_ai": [
+      "signal_id",
+      "source_id",
+      "source_name",
+      "source_url",
+      "published_at",
+      "region_layer",
+      "category",
+      "raw_title",
+      "neutral_summary",
+      "credibility_score",
+      "public_importance_score",
+      "novelty_score",
+      "diversity_score",
+      "risk_penalty",
+      "final_score",
+      "admin_status"
+    ]
+  }
+}

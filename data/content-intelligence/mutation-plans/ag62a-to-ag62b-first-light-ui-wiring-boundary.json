@@ -1,0 +1,21 @@
+{
+  "module_id": "AG62A",
+  "title": "AG62A to AG62B Boundary",
+  "status": "ag62b_first_light_ui_wiring_boundary_created",
+  "allowed_next_scope": [
+    "Wire homepage First Light to generated/first-light-working-data.json.",
+    "Keep public copy clear that the current output is reviewed working data until real source candidates are configured.",
+    "Do not activate live news fetching.",
+    "Do not activate backend/Auth/V02.",
+    "Do not allow user-triggered AI generation."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live scraping",
+    "uncontrolled source fetching",
+    "runtime AI calls",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

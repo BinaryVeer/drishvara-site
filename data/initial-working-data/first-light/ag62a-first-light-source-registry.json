@@ -1,0 +1,40 @@
+{
+  "module_id": "AG62A",
+  "title": "First Light Source Registry",
+  "status": "source_registry_defined_live_fetching_disabled",
+  "live_fetching_enabled": false,
+  "scraping_enabled": false,
+  "external_api_enabled": false,
+  "admin_can_edit_sources_later": true,
+  "source_layers": [
+    {
+      "layer": "India",
+      "target_slots": 5,
+      "source_policy": "Use verified Indian institutional, civic, public-interest and high-credibility editorial sources after source registration."
+    },
+    {
+      "layer": "Northeast Watch",
+      "target_slots": 1,
+      "source_policy": "Use Northeast-specific verified sources only after credibility and attribution checks."
+    },
+    {
+      "layer": "World",
+      "target_slots": 4,
+      "source_policy": "Use global sources only after credibility, relevance and public-interest checks."
+    }
+  ],
+  "source_record_schema": {
+    "source_id": "string",
+    "source_name": "string",
+    "source_type": "official | public_institution | reputable_media | research | civil_society | other_review_required",
+    "region_layer": "India | Northeast Watch | World",
+    "homepage_url": "string_or_null",
+    "rss_url": "string_or_null",
+    "credibility_tier": "A | B | C | blocked",
+    "attribution_required": true,
+    "allowed_for_ai_scan": false,
+    "admin_approved": false,
+    "review_note": "string"
+  },
+  "seed_sources_pending_admin_configuration": true
+}
