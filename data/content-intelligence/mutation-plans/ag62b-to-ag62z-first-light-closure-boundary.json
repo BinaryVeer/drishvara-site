@@ -1,0 +1,19 @@
+{
+  "module_id": "AG62B",
+  "title": "AG62B to AG62Z Boundary",
+  "status": "ag62z_first_light_closure_boundary_created",
+  "allowed_next_scope": [
+    "Validate First Light working data + UI wiring end-to-end.",
+    "Confirm live HTML contains AG62B script and no live fetch/runtime AI/backend activation.",
+    "Record closure before moving to Word of the Day."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live scraping",
+    "runtime AI calls",
+    "user-triggered AI",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

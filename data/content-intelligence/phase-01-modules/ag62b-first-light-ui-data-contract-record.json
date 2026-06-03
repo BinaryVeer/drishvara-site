@@ -1,0 +1,23 @@
+{
+  "module_id": "AG62B",
+  "title": "First Light UI Data Contract Record",
+  "status": "first_light_ui_data_contract_recorded",
+  "source_file": "generated/first-light-working-data.json",
+  "ui_container": "#first-light-list",
+  "title_target": "#first-light-title",
+  "intro_target": "#first-light-intro",
+  "rule_note_target": "#first-light-rule-note",
+  "required_item_fields": [
+    "place",
+    "signal",
+    "note"
+  ],
+  "extended_item_fields": [
+    "signal_id",
+    "slot_id",
+    "public_ready"
+  ],
+  "current_item_count": 10,
+  "current_public_ready": false,
+  "note": "AG62B wires the UI to initial working data. Real source-backed public signals still require source registration, AI scoring and admin approval."
+}

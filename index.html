@@ -5969,5 +5969,94 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+<script data-drishvara-ag62b-first-light-ui-wiring="true">
+(() => {
+  const DATA_PATH = "generated/first-light-working-data.json";
+
+  function escapeAg62bHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function setAg62bText(id, value) {
+    const el = document.getElementById(id);
+    if (el && value) el.textContent = value;
+  }
+
+  function renderAg62bFirstLight(data) {
+    if (!data || !data.firstLight) return false;
+
+    const firstLight = data.firstLight;
+    const items = Array.isArray(firstLight.items) ? firstLight.items : [];
+    const list = document.getElementById("first-light-list");
+
+    setAg62bText("first-light-title", firstLight.title || "First Light — 10 Daily Signals");
+    setAg62bText("first-light-intro", firstLight.intro || "");
+    setAg62bText("first-light-rule-note", firstLight.rule_note || "");
+
+    if (!list || !items.length) return false;
+
+    const publicReady = data.public_ui_ready === true;
+    const statusLabel = publicReady ? "Reviewed Signal" : "Working Data";
+
+    list.innerHTML = items.map((item, index) => `
+      <div class="reading-guide-item" data-drishvara-ag62b-first-light-item="true" data-slot-id="${escapeAg62bHtml(item.slot_id || `slot_${index + 1}`)}">
+        <div class="sub">${escapeAg62bHtml(item.place || "First Light")} · ${escapeAg62bHtml(statusLabel)}</div>
+        <div class="title">${escapeAg62bHtml(item.signal || "Signal slot pending review.")}</div>
+        <div class="meta">${escapeAg62bHtml(item.note || "Source registry, AI scoring and admin review are required before activation.")}</div>
+      </div>
+    `).join("");
+
+    const card = document.getElementById("first-light-card");
+    if (card) {
+      card.setAttribute("data-drishvara-ag62b-source", DATA_PATH);
+      card.setAttribute("data-drishvara-ag62b-public-ready", publicReady ? "true" : "false");
+      card.setAttribute("data-drishvara-ag62b-items", String(items.length));
+    }
+
+    document.documentElement.setAttribute("data-drishvara-ag62b-first-light-wired", "true");
+    return true;
+  }
+
+  async function loadAg62bFirstLight() {
+    try {
+      const response = await fetch(DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to load ${DATA_PATH}`);
+      const data = await response.json();
+      renderAg62bFirstLight(data);
+    } catch (error) {
+      const list = document.getElementById("first-light-list");
+      if (list) {
+        list.innerHTML = `
+          <div class="reading-guide-item" data-drishvara-ag62b-first-light-fallback="true">
+            <div class="sub">First Light · Working Data</div>
+            <div class="title">First Light working data could not be loaded.</div>
+            <div class="meta">The safe fallback remains active until generated/first-light-working-data.json is available.</div>
+          </div>
+        `;
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg62bFirstLight, { once: true });
+  } else {
+    loadAg62bFirstLight();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg62bFirstLight();
+    setTimeout(loadAg62bFirstLight, 600);
+  }, { once: true });
+
+  window.drishvaraAg62bLoadFirstLight = loadAg62bFirstLight;
+})();
+</script>
+
 </body>
 </html>
