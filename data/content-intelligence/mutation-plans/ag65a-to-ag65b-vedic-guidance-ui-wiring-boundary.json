@@ -1,0 +1,24 @@
+{
+  "module_id": "AG65A",
+  "title": "AG65A to AG65B Boundary",
+  "status": "ag65b_vedic_guidance_ui_wiring_boundary_created",
+  "allowed_next_scope": [
+    "Wire homepage Today's Vedic Guidance card to generated/vedic-guidance-working-data.json.",
+    "Keep all values safe and source-verification-gated.",
+    "Preserve non-prediction and no live Panchang dependency language.",
+    "Do not activate rule execution, mantra publication, runtime AI or backend."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "rule-based weekday/colour/food activation",
+    "mantra publication",
+    "personal prediction",
+    "live Panchang-dependent guidance",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "module_id": "AG65A",
+  "title": "Today's Vedic Guidance Source Registry",
+  "status": "source_registry_defined_live_source_use_disabled",
+  "live_source_fetching_enabled": false,
+  "external_api_enabled": false,
+  "panchang_dependency_active": false,
+  "source_levels": [
+    {
+      "level": 1,
+      "label": "Primary textual source",
+      "use_case": "Any mantra, ritual or rule-based claim must be tied to a verified textual/source reference."
+    },
+    {
+      "level": 2,
+      "label": "Traditional or regional authority",
+      "use_case": "Regional practice, weekday association, vrata/observance-related guidance."
+    },
+    {
+      "level": 3,
+      "label": "Modern scholarly or editorial source",
+      "use_case": "Plain-language explanation and non-authoritative reflection."
+    },
+    {
+      "level": 4,
+      "label": "Drishvara editorial reflection",
+      "use_case": "Safe reflective prompt only; cannot create authority, mantra or prescription."
+    }
+  ],
+  "source_record_schema": {
+    "source_id": "string",
+    "source_name": "string",
+    "source_level": "1 | 2 | 3 | 4",
+    "guidance_domain": "weekday | colour | food | mantra | reflection | panchang_dependency",
+    "source_type": "textual | traditional | scholarly | editorial",
+    "url_or_reference": "string_or_null",
+    "access_status": "verified | under_verification | unavailable | blocked",
+    "allowed_for_public_values": false,
+    "admin_approved": false,
+    "review_note": "string"
+  }
+}

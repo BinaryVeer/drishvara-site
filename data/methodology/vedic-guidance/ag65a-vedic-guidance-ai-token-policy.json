@@ -1,0 +1,26 @@
+{
+  "module_id": "AG65A",
+  "title": "Today's Vedic Guidance AI and Token Policy",
+  "status": "ai_policy_defined_runtime_inactive",
+  "ai_runtime_active": false,
+  "user_triggered_ai_allowed": false,
+  "allowed_future_ai_roles_after_approval": [
+    "flag missing source attribution",
+    "compare bilingual terminology for consistency",
+    "triage user feedback for admin review",
+    "summarise reviewed source notes into non-prescriptive copy"
+  ],
+  "blocked_ai_roles": [
+    "invent mantra",
+    "invent religious remedy",
+    "publish weekday/colour/food logic without source",
+    "generate personal prediction",
+    "directly alter public guidance",
+    "absorb user feedback without admin approval"
+  ],
+  "cost_policy": {
+    "expected_monthly_token_pressure": "low_until_admin_review_workflow_activation",
+    "initial_monthly_cap_inr": 1000,
+    "stronger_model_use": "only for Sanskrit/source-risk review after explicit approval"
+  }
+}

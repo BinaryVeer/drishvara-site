@@ -1,0 +1,43 @@
+{
+  "module_id": "AG65A",
+  "title": "Today's Vedic Guidance Methodology",
+  "status": "methodology_created_not_runtime_active",
+  "methodology_version": "vedic_guidance_method_v1",
+  "principles": [
+    "Treat the module as reflective guidance, not prediction.",
+    "Do not make personal, deterministic or decision-guiding claims.",
+    "Do not publish mantra text unless the mantra source, transliteration, meaning and usage context are verified.",
+    "Do not infer weekday, colour or food guidance from unreviewed associations.",
+    "Do not connect live Panchang values to guidance until the Panchang engine is separately approved.",
+    "Keep Hindi/English terminology bilingual and non-prescriptive.",
+    "Separate reflection note from religious instruction.",
+    "User feedback cannot directly modify guidance logic; admin review is mandatory."
+  ],
+  "output_separation": {
+    "date_context_layer": [
+      "weekday_hindi"
+    ],
+    "rule_layer": [
+      "suggested_colour_hindi",
+      "food_hindi",
+      "mantra_hindi"
+    ],
+    "reflection_layer": [
+      "short_note_english"
+    ],
+    "safety_layer": [
+      "source_status",
+      "public_use_mode",
+      "methodology_note"
+    ]
+  },
+  "blocked_now": [
+    "No live rule execution.",
+    "No mantra publication.",
+    "No ritual instruction.",
+    "No prediction.",
+    "No runtime AI generation.",
+    "No external API/source fetch.",
+    "No backend/Auth/Supabase activation."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "module_id": "AG65A",
+  "title": "Today's Vedic Guidance Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_required": true,
+  "automatic_absorption_allowed": false,
+  "fields": [
+    "review_id",
+    "feedback_id",
+    "rule_id",
+    "source_id",
+    "admin_decision",
+    "decision_reason",
+    "approved_change_type",
+    "source_registry_update_required",
+    "mantra_review_required",
+    "weekday_rule_update_required",
+    "colour_food_rule_update_required",
+    "public_use_mode_change",
+    "absorbed_into_methodology_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin-approved feedback can modify source registry, guidance rules, mantra status, bilingual terminology or public output status.",
+  "methodology_versioning": {
+    "current_version": "vedic_guidance_method_v1",
+    "next_version_trigger": "admin-approved source/rule/mantra update"
+  }
+}
