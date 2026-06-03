@@ -1,0 +1,25 @@
+{
+  "module_id": "AG64B",
+  "title": "Panchang & Festival UI Data Contract Record",
+  "status": "panchang_festival_ui_data_contract_recorded",
+  "source_file": "generated/panchang-festival-working-data.json",
+  "panchang_field_mapping": {
+    "panchang-place-select": "panchang.place",
+    "panchang-sunrise": "panchang.calculation_source",
+    "panchang-sunset": "panchang.regional_method",
+    "panchang-moonrise": "panchang.location_basis",
+    "panchang-moonset": "panchang.date_basis",
+    "panchang-tithi": "panchang.tithi",
+    "panchang-nakshatra": "panchang.nakshatra",
+    "panchang-yoga": "panchang.yoga",
+    "panchang-paksha": "panchang.paksha"
+  },
+  "observance_field_mapping": {
+    "upcoming-observance-title": "observance.subtitle",
+    "upcoming-observance-name": "observance.name",
+    "upcoming-observance-note": "observance.note"
+  },
+  "current_public_state": "safe_preview_from_generated_working_data",
+  "exact_values_withheld": true,
+  "note": "AG64B wires the UI to generated safe working data. Live calculation, external API fetch, exact Panchang values and festival date decisions remain inactive."
+}

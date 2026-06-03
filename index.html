@@ -6303,5 +6303,100 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script data-drishvara-ag64b-panchang-festival-ui-wiring="true">
+(() => {
+  const DATA_PATH = "generated/panchang-festival-working-data.json";
+
+  function setText(id, value) {
+    const el = document.getElementById(id);
+    if (el && value !== undefined && value !== null && String(value).trim()) {
+      el.textContent = String(value);
+    }
+  }
+
+  function setSelectValue(id, value) {
+    const el = document.getElementById(id);
+    if (!el || !value) return;
+    const text = String(value);
+    const option = Array.from(el.options || []).find((item) => item.value === text || item.textContent === text);
+    if (option) {
+      el.value = option.value;
+    }
+  }
+
+  function markPanchangCard(data) {
+    const table = document.querySelector("[data-drishvara-ag60i-panchang-preview-safe]");
+    const card = table ? table.closest(".card") : null;
+    if (!card) return;
+
+    card.setAttribute("data-drishvara-ag64b-source", DATA_PATH);
+    card.setAttribute("data-drishvara-ag64b-public-ready", data.public_ui_ready === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag64b-live-calculation-active", data.live_calculation_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag64b-external-api-fetch-active", data.external_api_fetch_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag64b-ai-generation-active", data.ai_generation_active === true ? "true" : "false");
+  }
+
+  function applyAg64bPanchangFestival(data) {
+    if (!data || !data.panchang || !data.observance) return false;
+
+    const panchang = data.panchang;
+    const observance = data.observance;
+
+    setSelectValue("panchang-place-select", panchang.place);
+    setText("panchang-sunrise", panchang.calculation_source);
+    setText("panchang-sunset", panchang.regional_method);
+    setText("panchang-moonrise", panchang.location_basis);
+    setText("panchang-moonset", panchang.date_basis);
+    setText("panchang-tithi", panchang.tithi);
+    setText("panchang-nakshatra", panchang.nakshatra);
+    setText("panchang-yoga", panchang.yoga);
+    setText("panchang-paksha", panchang.paksha);
+
+    setText("upcoming-observance-title", observance.subtitle);
+    setText("upcoming-observance-name", observance.name);
+    setText("upcoming-observance-note", observance.note);
+
+    const table = document.querySelector("[data-drishvara-ag60i-panchang-preview-safe]");
+    if (table) {
+      table.setAttribute("data-drishvara-ag64b-panchang-working-data", "true");
+      table.setAttribute("data-drishvara-ag64b-exact-values-withheld", "true");
+    }
+
+    markPanchangCard(data);
+    document.documentElement.setAttribute("data-drishvara-ag64b-panchang-festival-wired", "true");
+    return true;
+  }
+
+  async function loadAg64bPanchangFestival() {
+    try {
+      const response = await fetch(DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error(`Unable to load ${DATA_PATH}`);
+      const data = await response.json();
+      applyAg64bPanchangFestival(data);
+    } catch (error) {
+      setText("upcoming-observance-note", "Panchang & Festival working data could not be loaded. The safe preview remains visible.");
+      const table = document.querySelector("[data-drishvara-ag60i-panchang-preview-safe]");
+      if (table) {
+        table.setAttribute("data-drishvara-ag64b-panchang-fallback", "true");
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg64bPanchangFestival, { once: true });
+  } else {
+    loadAg64bPanchangFestival();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg64bPanchangFestival();
+    setTimeout(loadAg64bPanchangFestival, 600);
+  }, { once: true });
+
+  window.drishvaraAg64bLoadPanchangFestival = loadAg64bPanchangFestival;
+})();
+</script>
+
 </body>
 </html>

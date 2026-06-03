@@ -1,0 +1,33 @@
+{
+  "module_id": "AG64B",
+  "title": "Panchang & Festival UI Wiring Apply Record",
+  "status": "panchang_festival_ui_wiring_applied",
+  "corrected_files": [
+    "index.html"
+  ],
+  "source_file": "generated/panchang-festival-working-data.json",
+  "ui_targets": [
+    "#panchang-place-select",
+    "#panchang-sunrise",
+    "#panchang-sunset",
+    "#panchang-moonrise",
+    "#panchang-moonset",
+    "#panchang-tithi",
+    "#panchang-nakshatra",
+    "#panchang-yoga",
+    "#panchang-paksha",
+    "#upcoming-observance-title",
+    "#upcoming-observance-name",
+    "#upcoming-observance-note"
+  ],
+  "behaviour": {
+    "fetches_generated_panchang_festival_data": true,
+    "updates_safe_preview_fields": true,
+    "exact_values_remain_withheld": true,
+    "keeps_safe_fallback": true,
+    "live_calculation_active": false,
+    "external_api_fetch_active": false,
+    "runtime_ai_enabled": false,
+    "backend_enabled": false
+  }
+}
