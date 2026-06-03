@@ -1,0 +1,26 @@
+{
+  "module_id": "AG65Z",
+  "title": "AG65Z to AG66 Boundary",
+  "status": "ag66_star_reflection_boundary_created",
+  "allowed_next_scope": [
+    "Create Star Reflection initial working data.",
+    "Create consent/privacy/reflection-method schema.",
+    "Create non-prediction and non-assessment boundary.",
+    "Create user/admin feedback and review/absorption schema.",
+    "Generate safe Star Reflection working-data JSON.",
+    "Wire UI only after working data exists."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "personal prediction",
+    "deterministic astrology claim",
+    "assessment or decision guidance",
+    "enabled personal input collection",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption without admin review"
+  ]
+}
