@@ -1,0 +1,20 @@
+{
+  "module_id": "AG63A",
+  "title": "Word Selection and Rotation Policy",
+  "status": "rotation_policy_created_not_dynamic_public_runtime",
+  "consumed_d02_rotation_policy_status": "policy_scaffold",
+  "public_rotation_enabled_now": false,
+  "selection_mode_now": "first_approved_seed_for_initial_working_data",
+  "future_rotation_basis": [
+    "calendar date",
+    "theme balance",
+    "avoid recent repetition",
+    "manual editorial override after review"
+  ],
+  "blocked_behaviour": [
+    "unreviewed AI word generation",
+    "external API word fetch",
+    "runtime DOM generation of new words",
+    "prediction-style claims"
+  ]
+}

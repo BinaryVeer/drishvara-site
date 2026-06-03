@@ -1,0 +1,26 @@
+{
+  "module_id": "AG63A",
+  "title": "Word of the Day AI and Token Policy",
+  "status": "ai_policy_defined_runtime_inactive",
+  "ai_runtime_active": false,
+  "user_triggered_ai_allowed": false,
+  "allowed_future_ai_roles_after_approval": [
+    "detect duplicate or semantically close words",
+    "suggest simplified explanation for admin review",
+    "flag Hindi/English meaning mismatch",
+    "flag Sanskrit/source-risk issues",
+    "triage user feedback for admin review"
+  ],
+  "blocked_ai_roles": [
+    "invent new Sanskrit words",
+    "claim scriptural origin without source",
+    "directly publish generated word meanings",
+    "absorb user feedback without admin approval",
+    "generate mantras or religious claims"
+  ],
+  "cost_policy": {
+    "expected_monthly_token_pressure": "low",
+    "recommended_model_route": "low-cost model for triage; stronger model only for Sanskrit/source-risk review",
+    "initial_monthly_cap_inr": 1000
+  }
+}

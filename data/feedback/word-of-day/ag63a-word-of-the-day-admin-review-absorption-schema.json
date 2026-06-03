@@ -1,0 +1,26 @@
+{
+  "module_id": "AG63A",
+  "title": "Word of the Day Admin Review and Absorption Schema",
+  "status": "admin_review_absorption_schema_defined_not_runtime_active",
+  "admin_review_required": true,
+  "automatic_absorption_allowed": false,
+  "fields": [
+    "review_id",
+    "feedback_id",
+    "word_id",
+    "admin_decision",
+    "decision_reason",
+    "approved_change_type",
+    "meaning_update_required",
+    "source_update_required",
+    "sanskrit_review_required",
+    "public_use_mode_change",
+    "absorbed_into_methodology_version",
+    "reviewed_at"
+  ],
+  "absorption_rule": "Only admin-approved feedback can modify word meaning, source basis, Sanskrit/Hindi term, usage context or public-use status.",
+  "methodology_versioning": {
+    "current_version": "word_of_day_method_v1",
+    "next_version_trigger": "admin-approved meaning/source/Sanskrit review update"
+  }
+}

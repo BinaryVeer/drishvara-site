@@ -1,0 +1,21 @@
+{
+  "module_id": "AG63A",
+  "title": "AG63A to AG63B Boundary",
+  "status": "ag63b_word_of_the_day_ui_wiring_boundary_created",
+  "allowed_next_scope": [
+    "Wire homepage Word of the Day to generated/word-of-day.json.",
+    "Keep public copy as reviewed linguistic preview.",
+    "Preserve Sanskrit/source safety note.",
+    "Do not activate dynamic rotation, runtime AI or backend."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "unreviewed AI word generation",
+    "external word API fetch",
+    "scriptural/source claim without attribution",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct user feedback absorption"
+  ]
+}
