@@ -1,0 +1,41 @@
+{
+  "module_id": "AG68Z-R1",
+  "title": "Sports Desk Archive Search Index",
+  "status": "archive_search_shell_ready_no_database_runtime",
+  "archive_search_shell_active": true,
+  "static_archive_search_enabled": true,
+  "database_search_active": false,
+  "backend_runtime_activated": false,
+  "public_ui_ready": false,
+  "records_publicly_available": false,
+  "verified_link_required": true,
+  "source_verification_required": true,
+  "records": [],
+  "record_schema": {
+    "archive_id": "string",
+    "sport": "string",
+    "event_name": "string",
+    "event_date": "YYYY-MM-DD",
+    "category": "result | update | tournament | article | context",
+    "result_or_status": "string",
+    "short_summary": "string",
+    "source_name": "string",
+    "source_url": "string",
+    "source_type": "official | established_sports_portal | recognised_news_sports_desk | internal_drishvara_article",
+    "source_verified": "boolean",
+    "last_verified_at": "YYYY-MM-DD",
+    "internal_article_link": "string optional"
+  },
+  "public_empty_state": "No verified sports archive records are active yet.",
+  "future_database_note": "Past sports results and event updates should ultimately be retained in Drishvara database tables and exposed through governed search.",
+  "blocked_sources": [
+    "betting or odds portals",
+    "fantasy-gaming portals",
+    "unverified social media posts",
+    "random blogs",
+    "parked or broken links",
+    "AI-invented results",
+    "scraped live-score claims",
+    "unverified transfer or injury rumours"
+  ]
+}

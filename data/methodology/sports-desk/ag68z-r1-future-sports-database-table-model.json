@@ -1,0 +1,50 @@
+{
+  "module_id": "AG68Z-R1",
+  "title": "Future Sports Database Table Model",
+  "status": "future_database_model_recorded_no_database_activation",
+  "database_runtime_active": false,
+  "backend_activation_required": true,
+  "future_tables": {
+    "sports_events": [
+      "event_id",
+      "sport",
+      "event_name",
+      "event_date",
+      "category",
+      "result_or_status",
+      "short_summary",
+      "created_at",
+      "updated_at",
+      "public_status"
+    ],
+    "sports_event_sources": [
+      "source_id",
+      "event_id",
+      "source_name",
+      "source_url",
+      "source_type",
+      "source_verified",
+      "last_verified_at",
+      "verification_notes"
+    ],
+    "sports_archive_search_index": [
+      "index_id",
+      "event_id",
+      "search_keywords",
+      "sport",
+      "event_date",
+      "category",
+      "public_search_enabled"
+    ],
+    "sports_admin_review_log": [
+      "review_id",
+      "event_id",
+      "reviewer",
+      "decision",
+      "source_check_status",
+      "published_status",
+      "reviewed_at"
+    ]
+  },
+  "current_stage_treatment": "Schema recorded only. No database, backend, Auth, Supabase or runtime write is activated."
+}

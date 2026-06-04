@@ -3744,6 +3744,74 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 
 
 
+
+<style data-drishvara-ag68z-r1-sports-desk-transition-style="true">
+  .drishvara-ag68z-r1-sports-transition-card {
+    min-height: 190px;
+  }
+
+  .drishvara-ag68z-r1-sports-transition-card [data-ag68zr1-sports-title],
+  .drishvara-ag68z-r1-sports-transition-card [data-ag68zr1-sports-meta],
+  .drishvara-ag68z-r1-sports-transition-card [data-ag68zr1-sports-status],
+  .drishvara-ag68z-r1-sports-transition-card [data-ag68zr1-sports-counter] {
+    transition: opacity 260ms ease, transform 260ms ease;
+  }
+
+  .drishvara-ag68z-r1-sports-transition-card.is-transitioning [data-ag68zr1-sports-title],
+  .drishvara-ag68z-r1-sports-transition-card.is-transitioning [data-ag68zr1-sports-meta],
+  .drishvara-ag68z-r1-sports-transition-card.is-transitioning [data-ag68zr1-sports-status],
+  .drishvara-ag68z-r1-sports-transition-card.is-transitioning [data-ag68zr1-sports-counter] {
+    opacity: 0.14;
+    transform: translateY(8px);
+  }
+
+  .drishvara-ag68z-r1-sports-status {
+    margin-top: 0.55rem;
+    font-size: 0.88rem;
+    opacity: 0.78;
+  }
+
+  .drishvara-ag68z-r1-sports-counter {
+    margin-top: 0.35rem;
+    font-size: 0.78rem;
+    opacity: 0.58;
+  }
+
+  .drishvara-ag68z-r1-archive-search {
+    margin-top: 1.6rem;
+  }
+
+  .drishvara-ag68z-r1-archive-search .form-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .drishvara-ag68z-r1-archive-search input {
+    width: 100%;
+  }
+
+  .drishvara-ag68z-r1-archive-results {
+    margin-top: 0.8rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .drishvara-ag68z-r1-archive-result {
+    padding: 0.8rem;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: rgba(15, 23, 42, 0.24);
+  }
+
+  @media (max-width: 720px) {
+    .drishvara-ag68z-r1-archive-search .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 </head>
 <body>
 
@@ -6820,6 +6888,243 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   window.drishvaraAg68bLoadSportsDesk = loadAg68bSportsDesk;
+})();
+</script>
+
+
+<script data-drishvara-ag68z-r1-sports-desk-transition-archive="true">
+(() => {
+  const SPORTS_DATA_PATH = "generated/sports-desk-working-data.json";
+  const ARCHIVE_DATA_PATH = "generated/sports-desk-archive-index.json";
+  const intervals = new Map();
+
+  function escapeAg68zr1Html(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function cleanAg68zr1Status(value) {
+    const text = String(value || "under_verification").replace(/_/g, " ").trim();
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  function sectionById(desk, sectionId) {
+    const sections = Array.isArray(desk.sections) ? desk.sections : [];
+    return sections.find((section) => section && section.section_id === sectionId) || null;
+  }
+
+  function renderShell(targetId, section, cardClass, fallbackTitle, fallbackMeta) {
+    const target = document.getElementById(targetId);
+    if (!target) return null;
+
+    const items = Array.isArray(section?.items) && section.items.length ? section.items : [
+      { title: fallbackTitle, meta: fallbackMeta, source_status: "under_verification" }
+    ];
+
+    const first = items[0] || {};
+    target.innerHTML = `
+      <div class="${escapeAg68zr1Html(cardClass)} drishvara-ag68z-r1-sports-transition-card"
+        data-drishvara-ag68z-r1-sports-transition-card="true"
+        data-ag68zr1-section="${escapeAg68zr1Html(section?.section_id || "fallback")}">
+        <div class="sub" data-ag68zr1-sports-label>Working Data</div>
+        <div class="title" data-ag68zr1-sports-title>${escapeAg68zr1Html(first.title || fallbackTitle)}</div>
+        <div class="meta" data-ag68zr1-sports-meta>${escapeAg68zr1Html(first.meta || fallbackMeta)}</div>
+        <div class="drishvara-ag68z-r1-sports-status" data-ag68zr1-sports-status>Status: ${escapeAg68zr1Html(cleanAg68zr1Status(first.source_status || section?.status))}</div>
+        <div class="drishvara-ag68z-r1-sports-counter" data-ag68zr1-sports-counter>1 / ${escapeAg68zr1Html(items.length)}</div>
+      </div>
+    `;
+
+    return {
+      card: target.querySelector("[data-drishvara-ag68z-r1-sports-transition-card]"),
+      items,
+      index: 0
+    };
+  }
+
+  function updateShell(state, section) {
+    if (!state?.card || !state.items.length) return;
+
+    state.index = (state.index + 1) % state.items.length;
+    const item = state.items[state.index] || {};
+
+    state.card.classList.add("is-transitioning");
+
+    window.setTimeout(() => {
+      const title = state.card.querySelector("[data-ag68zr1-sports-title]");
+      const meta = state.card.querySelector("[data-ag68zr1-sports-meta]");
+      const status = state.card.querySelector("[data-ag68zr1-sports-status]");
+      const counter = state.card.querySelector("[data-ag68zr1-sports-counter]");
+
+      if (title) title.textContent = item.title || "Sports Desk item reserved for review.";
+      if (meta) meta.textContent = item.meta || "No active sports feed is enabled.";
+      if (status) status.textContent = "Status: " + cleanAg68zr1Status(item.source_status || section?.status);
+      if (counter) counter.textContent = `${state.index + 1} / ${state.items.length}`;
+
+      state.card.classList.remove("is-transitioning");
+    }, 260);
+  }
+
+  function clearIntervals() {
+    intervals.forEach((id) => window.clearInterval(id));
+    intervals.clear();
+  }
+
+  function ensureArchiveSearchShell(card) {
+    if (!card || document.getElementById("sports-archive-search")) return;
+
+    const panel = document.createElement("div");
+    panel.className = "drishvara-ag68z-r1-archive-search";
+    panel.id = "sports-archive-search";
+    panel.setAttribute("data-drishvara-ag68z-r1-sports-archive-search", "true");
+    panel.innerHTML = `
+      <div class="sports-section-heading">Search Previous Events</div>
+      <p class="section-note">A verified sports archive is being prepared. Past results and event updates will be searchable after source verification and archive governance are active.</p>
+      <div class="form-grid">
+        <input id="sports-archive-search-input" type="search" placeholder="Search event, tournament, sport or result" aria-label="Search previous sports events" />
+        <button class="btn btn-secondary" id="sports-archive-search-button" type="button">Search</button>
+      </div>
+      <div class="utility-note" id="sports-archive-search-status">Database-backed archive search is not active. Static verified records will appear here after approval.</div>
+      <div class="drishvara-ag68z-r1-archive-results" id="sports-archive-search-results"></div>
+    `;
+    card.appendChild(panel);
+  }
+
+  function renderArchiveResults(records, query) {
+    const results = document.getElementById("sports-archive-search-results");
+    const status = document.getElementById("sports-archive-search-status");
+    if (!results || !status) return;
+
+    const q = String(query || "").trim().toLowerCase();
+    const approved = Array.isArray(records) ? records.filter((record) => record && record.source_verified === true) : [];
+
+    if (!q) {
+      results.innerHTML = "";
+      status.textContent = "Enter an event, tournament, sport or result keyword. Only verified archive records will be shown.";
+      return;
+    }
+
+    const matches = approved.filter((record) => {
+      const hay = [
+        record.sport,
+        record.event_name,
+        record.category,
+        record.result_or_status,
+        record.short_summary,
+        record.source_name
+      ].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+
+    if (!matches.length) {
+      results.innerHTML = "";
+      status.textContent = "No verified sports archive records are active for this search yet.";
+      return;
+    }
+
+    status.textContent = `${matches.length} verified archive record(s) found.`;
+    results.innerHTML = matches.slice(0, 10).map((record) => {
+      const link = record.source_url
+        ? `<a href="${escapeAg68zr1Html(record.source_url)}" target="_blank" rel="noopener noreferrer">Open verified source</a>`
+        : "";
+      return `
+        <div class="drishvara-ag68z-r1-archive-result">
+          <div class="sub">${escapeAg68zr1Html(record.sport || "Sport")} · ${escapeAg68zr1Html(record.event_date || "Date under review")}</div>
+          <div class="title">${escapeAg68zr1Html(record.event_name || "Verified event record")}</div>
+          <div class="meta">${escapeAg68zr1Html(record.result_or_status || "Status under review")}</div>
+          <div class="meta">${escapeAg68zr1Html(record.short_summary || "")}</div>
+          <div class="reading-guide-links">${link}</div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  async function loadArchiveIndex() {
+    try {
+      const response = await fetch(ARCHIVE_DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error("Archive index unavailable");
+      return await response.json();
+    } catch {
+      return { records: [], database_search_active: false };
+    }
+  }
+
+  function wireArchiveSearch(archive) {
+    const input = document.getElementById("sports-archive-search-input");
+    const button = document.getElementById("sports-archive-search-button");
+    if (!input || !button) return;
+
+    const records = Array.isArray(archive?.records) ? archive.records : [];
+
+    const runSearch = () => renderArchiveResults(records, input.value);
+    button.addEventListener("click", runSearch);
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") runSearch();
+    });
+  }
+
+  async function loadAg68zr1SportsTransitions() {
+    const card = document.getElementById("sports-desk");
+    if (!card) return;
+
+    ensureArchiveSearchShell(card);
+
+    try {
+      const response = await fetch(SPORTS_DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error("Sports Desk working data unavailable");
+      const data = await response.json();
+      const desk = data.sports_desk || {};
+
+      clearIntervals();
+
+      const configs = [
+        ["live_events", "sports-live-events-list", "sports-item", "Live-event card reserved for reviewed sports context.", "No live event feed is active.", 5200],
+        ["tournament_watch", "sports-tournaments-list", "tournament-card", "Tournament watch card reserved for verified tournament context.", "No tournament feed is active.", 6100],
+        ["major_updates", "sports-major-updates-list", "major-update-card", "Major sports update reserved for editorial review.", "No live update feed is active.", 7000],
+        ["featured_sports_article", "featured-sports-article-wrap", "featured-sports-article-card", "Featured sports article slot reserved for reviewed Drishvara read.", "No featured sports article is active from this working data.", 7900]
+      ];
+
+      configs.forEach(([sectionId, targetId, cardClass, fallbackTitle, fallbackMeta, interval]) => {
+        const section = sectionById(desk, sectionId);
+        const state = renderShell(targetId, section, cardClass, fallbackTitle, fallbackMeta);
+        if (state && state.items.length > 1) {
+          intervals.set(sectionId, window.setInterval(() => updateShell(state, section), interval));
+        }
+      });
+
+      card.setAttribute("data-drishvara-ag68z-r1-sports-transition-ready", "true");
+      card.setAttribute("data-drishvara-ag68z-r1-sports-archive-shell", "true");
+      card.setAttribute("data-drishvara-ag68z-r1-live-sourcing-active", data.live_sports_sourcing_active === true ? "true" : "false");
+      card.setAttribute("data-drishvara-ag68z-r1-database-search-active", data.database_archive_search_active === true ? "true" : "false");
+
+      document.documentElement.setAttribute("data-drishvara-ag68z-r1-sports-transition-ready", "true");
+      document.documentElement.setAttribute("data-drishvara-ag68z-r1-sports-archive-shell", "true");
+
+      const archive = await loadArchiveIndex();
+      wireArchiveSearch(archive);
+    } catch {
+      card.setAttribute("data-drishvara-ag68z-r1-sports-transition-ready", "fallback");
+      card.setAttribute("data-drishvara-ag68z-r1-live-sourcing-active", "false");
+      card.setAttribute("data-drishvara-ag68z-r1-database-search-active", "false");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg68zr1SportsTransitions, { once: true });
+  } else {
+    loadAg68zr1SportsTransitions();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg68zr1SportsTransitions();
+    setTimeout(loadAg68zr1SportsTransitions, 900);
+    setTimeout(loadAg68zr1SportsTransitions, 1600);
+  });
+
+  window.drishvaraAg68zr1LoadSportsDeskTransitions = loadAg68zr1SportsTransitions;
 })();
 </script>
 
