@@ -1,0 +1,22 @@
+{
+  "module_id": "AG67Z-R1",
+  "title": "AG67Z-R1 to Next Governed Stage Boundary",
+  "status": "next_governed_stage_requires_user_confirmation",
+  "current_record_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Proceed to the next user-approved governed row.",
+    "Optionally create Sports Desk working-data foundation in a future governed stage.",
+    "Optionally perform live URL recheck when DNS/network is available."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "sports active UI wiring",
+    "live sports sourcing",
+    "runtime sports API",
+    "backend/Auth/Supabase activation",
+    "database writes",
+    "service-role use",
+    "deployment or publish mutation",
+    "V02 expansion"
+  ]
+}
