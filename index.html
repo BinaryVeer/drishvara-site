@@ -6668,5 +6668,160 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
+
+<script data-drishvara-ag68b-sports-desk-ui-wiring="true">
+(() => {
+  const SPORTS_DATA_PATH = "generated/sports-desk-working-data.json";
+
+  function escapeAg68bHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function setAg68bText(id, value) {
+    const element = document.getElementById(id);
+    if (element && typeof value === "string" && value.trim()) {
+      element.textContent = value;
+    }
+  }
+
+  function getAg68bSection(desk, sectionId) {
+    const sections = Array.isArray(desk.sections) ? desk.sections : [];
+    return sections.find((section) => section && section.section_id === sectionId) || null;
+  }
+
+  function renderAg68bItems(section, cardClass, fallbackTitle, fallbackMeta) {
+    const items = Array.isArray(section?.items) && section.items.length ? section.items : [
+      {
+        title: fallbackTitle,
+        meta: fallbackMeta,
+        source_status: "under_verification",
+        cta_enabled: false
+      }
+    ];
+
+    return items.map((item) => {
+      const status = item.source_status || section?.status || "under_verification";
+      const ctaEnabled = item.cta_enabled === true && item.internal_article_link;
+      const cta = ctaEnabled
+        ? `<div class="reading-guide-links"><a href="${escapeAg68bHtml(item.internal_article_link)}">${escapeAg68bHtml(item.cta_label || "Read Article")}</a></div>`
+        : "";
+
+      return `
+        <div class="${escapeAg68bHtml(cardClass)}" data-drishvara-ag68b-sports-item="true" data-ag68b-section="${escapeAg68bHtml(section?.section_id || "fallback")}">
+          <div class="sub">${escapeAg68bHtml(section?.active === true ? "Reviewed Sports Context" : "Working Data")}</div>
+          <div class="title">${escapeAg68bHtml(item.title || fallbackTitle)}</div>
+          <div class="meta">${escapeAg68bHtml(item.meta || fallbackMeta)} · ${escapeAg68bHtml(status)}</div>
+          ${cta}
+        </div>
+      `;
+    }).join("");
+  }
+
+  function applyAg68bSportsDesk(data) {
+    const desk = data?.sports_desk || {};
+    const card = document.getElementById("sports-desk");
+    if (!card) return;
+
+    const publicReady = data.public_ui_ready === true;
+    const liveSourcing = data.live_sports_sourcing_active === true || data.runtime_sports_api_active === true;
+
+    setAg68bText("sports-desk-title", desk.title || "Sports Desk");
+
+    const intro = card.querySelector("p");
+    if (intro) {
+      intro.textContent = desk.subtitle || "Prepared sports desk for verified tournament context, major updates, and selected sports reads.";
+    }
+
+    const liveEvents = getAg68bSection(desk, "live_events");
+    const tournamentWatch = getAg68bSection(desk, "tournament_watch");
+    const majorUpdates = getAg68bSection(desk, "major_updates");
+    const featuredArticle = getAg68bSection(desk, "featured_sports_article");
+
+    const liveTarget = document.getElementById("sports-live-events-list");
+    if (liveTarget) {
+      liveTarget.innerHTML = renderAg68bItems(
+        liveEvents,
+        "sports-item",
+        "Live-event card reserved for reviewed sports context.",
+        "No live event feed is active."
+      );
+    }
+
+    const tournamentTarget = document.getElementById("sports-tournaments-list");
+    if (tournamentTarget) {
+      tournamentTarget.innerHTML = renderAg68bItems(
+        tournamentWatch,
+        "tournament-card",
+        "Tournament watch card reserved for verified tournament context.",
+        "No tournament feed is active."
+      );
+    }
+
+    const majorTarget = document.getElementById("sports-major-updates-list");
+    if (majorTarget) {
+      majorTarget.innerHTML = renderAg68bItems(
+        majorUpdates,
+        "major-update-card",
+        "Major sports update reserved for editorial review.",
+        "No live update feed is active."
+      );
+    }
+
+    const featuredTarget = document.getElementById("featured-sports-article-wrap");
+    if (featuredTarget) {
+      featuredTarget.innerHTML = renderAg68bItems(
+        featuredArticle,
+        "featured-sports-article-card",
+        "Featured sports article slot reserved for reviewed Drishvara read.",
+        "No featured sports article is active from this working data."
+      );
+    }
+
+    card.setAttribute("data-drishvara-ag68b-sports-desk-wired", "true");
+    card.setAttribute("data-drishvara-ag68b-public-ready", publicReady ? "true" : "false");
+    card.setAttribute("data-drishvara-ag68b-live-sourcing-active", liveSourcing ? "true" : "false");
+    card.setAttribute("data-drishvara-ag68b-runtime-api-active", data.runtime_sports_api_active === true ? "true" : "false");
+    card.setAttribute("data-drishvara-ag68b-ai-generation-active", data.ai_generation_active === true ? "true" : "false");
+
+    document.documentElement.setAttribute("data-drishvara-ag68b-sports-desk-wired", "true");
+    document.documentElement.setAttribute("data-drishvara-ag68b-sports-live-sourcing-active", liveSourcing ? "true" : "false");
+  }
+
+  async function loadAg68bSportsDesk() {
+    try {
+      const response = await fetch(SPORTS_DATA_PATH, { cache: "no-store" });
+      if (!response.ok) throw new Error("Sports Desk working data unavailable");
+      const data = await response.json();
+      applyAg68bSportsDesk(data);
+    } catch (error) {
+      const card = document.getElementById("sports-desk");
+      if (card) {
+        card.setAttribute("data-drishvara-ag68b-sports-desk-wired", "fallback");
+        card.setAttribute("data-drishvara-ag68b-public-ready", "false");
+        card.setAttribute("data-drishvara-ag68b-live-sourcing-active", "false");
+      }
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", loadAg68bSportsDesk, { once: true });
+  } else {
+    loadAg68bSportsDesk();
+  }
+
+  window.addEventListener("load", () => {
+    loadAg68bSportsDesk();
+    setTimeout(loadAg68bSportsDesk, 600);
+  });
+
+  window.drishvaraAg68bLoadSportsDesk = loadAg68bSportsDesk;
+})();
+</script>
+
 </body>
 </html>

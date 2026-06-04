@@ -1,0 +1,22 @@
+{
+  "module_id": "AG68B",
+  "title": "AG68B to AG68Z Sports Desk Closure Boundary",
+  "status": "ag68z_closure_boundary_defined",
+  "allowed_next_scope": [
+    "Close AG68A working-data foundation and AG68B UI wiring.",
+    "Record final Sports Desk status.",
+    "Keep live sports sourcing and runtime API inactive."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live sports sourcing",
+    "runtime sports API",
+    "external API fetch",
+    "web scraping",
+    "real-time score updates",
+    "betting/odds/fantasy content",
+    "backend/Auth/Supabase activation",
+    "database writes",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "module_id": "AG68B",
+  "title": "Sports Desk UI Data Contract Record",
+  "status": "sports_desk_ui_data_contract_recorded",
+  "source_path": "generated/sports-desk-working-data.json",
+  "required_root_flags": [
+    "public_ui_ready",
+    "working_data_publicly_wired",
+    "source_collection_active",
+    "live_sports_sourcing_active",
+    "external_api_fetch_active",
+    "runtime_sports_api_active",
+    "ai_generation_active",
+    "ai_selection_active"
+  ],
+  "required_card_fields": [
+    "sports_desk.card_id",
+    "sports_desk.title",
+    "sports_desk.subtitle",
+    "sports_desk.status_label",
+    "sports_desk.safety_note",
+    "sports_desk.sections"
+  ],
+  "required_sections": [
+    "live_events",
+    "tournament_watch",
+    "major_updates",
+    "featured_sports_article"
+  ],
+  "active_state_now": {
+    "public_ui_ready": false,
+    "working_data_publicly_wired_after_ag68b": true,
+    "live_sports_sourcing_active": false,
+    "runtime_sports_api_active": false,
+    "ai_generation_active": false
+  }
+}

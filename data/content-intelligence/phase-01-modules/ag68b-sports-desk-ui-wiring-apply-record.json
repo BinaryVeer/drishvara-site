@@ -1,0 +1,33 @@
+{
+  "module_id": "AG68B",
+  "title": "Sports Desk UI Wiring Apply Record",
+  "status": "sports_desk_ui_wired_to_working_data",
+  "current_git_context": {
+    "branch": "main",
+    "head": "c3c7a64",
+    "head_full": "c3c7a6442a424e2d659ff7ac5085acfd66999020",
+    "origin_main": "c3c7a64",
+    "status_at_generation": "M index.html\n M package.json\n?? scripts/generate-ag68b-sports-desk-ui-wiring.mjs\n?? scripts/validate-ag68b-sports-desk-ui-wiring.mjs"
+  },
+  "mutated_files": [
+    "index.html"
+  ],
+  "generated_data_source": "generated/sports-desk-working-data.json",
+  "injected_script_marker": "data-drishvara-ag68b-sports-desk-ui-wiring=\"true\"",
+  "public_ui_targets": [
+    "sports-desk",
+    "sports-live-events-list",
+    "sports-tournaments-list",
+    "sports-major-updates-list",
+    "featured-sports-article-wrap"
+  ],
+  "wiring_behaviour": {
+    "fetches_generated_working_data": true,
+    "renders_reserved_working_data_slots": true,
+    "keeps_existing_fallback_on_fetch_failure": true,
+    "public_ready_flag_respected": true,
+    "live_sourcing_flag_respected": true,
+    "active_sports_feed_enabled": false,
+    "external_api_enabled": false
+  }
+}
