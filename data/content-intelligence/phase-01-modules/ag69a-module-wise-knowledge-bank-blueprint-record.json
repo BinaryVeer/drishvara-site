@@ -1,0 +1,133 @@
+{
+  "module_id": "AG69A",
+  "title": "Module-Wise Knowledge Bank Blueprint Record",
+  "status": "module_wise_blueprint_defined",
+  "modules": {
+    "word_of_the_day": {
+      "risk_level": "low",
+      "next_stage": "AG69B",
+      "knowledge_bank_fields": [
+        "word_id",
+        "english_word",
+        "hindi_word",
+        "sanskrit_word",
+        "transliteration",
+        "meaning",
+        "usage_sentence",
+        "theme",
+        "difficulty_level",
+        "source_reference",
+        "etymology_claim_allowed",
+        "classical_claim_allowed",
+        "public_ready",
+        "review_status"
+      ],
+      "strict_rules": [
+        "No unsupported etymology.",
+        "No false Sanskrit claim.",
+        "No classical claim without source verification."
+      ]
+    },
+    "vedic_guidance": {
+      "risk_level": "medium_high",
+      "knowledge_bank_fields": [
+        "guidance_rule_id",
+        "weekday",
+        "theme",
+        "colour_suggestion",
+        "food_suggestion",
+        "reflection_basis",
+        "mantra_id",
+        "source_reference",
+        "public_ready",
+        "review_status"
+      ],
+      "strict_rules": [
+        "No invented mantra.",
+        "No false scriptural attribution.",
+        "Fallback if mantra/source is unverified."
+      ]
+    },
+    "panchang_festival": {
+      "risk_level": "high",
+      "knowledge_bank_fields": [
+        "concept_id",
+        "panchang_element",
+        "astronomical_basis",
+        "observance_rule",
+        "regional_basis",
+        "date_basis",
+        "calculation_method",
+        "source_reference",
+        "public_ready",
+        "review_status"
+      ],
+      "strict_rules": [
+        "Separate astronomical calculation from observance tradition.",
+        "No invented tithi/festival date.",
+        "No exact public Panchang output before method validation."
+      ]
+    },
+    "star_reflection": {
+      "risk_level": "high_sensitive",
+      "knowledge_bank_fields": [
+        "reflection_rule_id",
+        "input_basis",
+        "mapping_basis",
+        "reflection_theme",
+        "sensitivity_level",
+        "public_claim_allowed",
+        "admin_only_concordance_allowed",
+        "consent_required",
+        "source_reference",
+        "review_status"
+      ],
+      "strict_rules": [
+        "Reflective, not deterministic.",
+        "Consent required for birth-related processing.",
+        "Admin-only concordance separated from public result."
+      ]
+    },
+    "sports_archive": {
+      "risk_level": "medium",
+      "knowledge_bank_fields": [
+        "event_id",
+        "sport",
+        "event_name",
+        "event_date",
+        "category",
+        "result_or_status",
+        "short_summary",
+        "source_name",
+        "source_url",
+        "source_verified",
+        "public_ready"
+      ],
+      "strict_rules": [
+        "Only verified source links.",
+        "No betting/odds/fantasy source.",
+        "No unverified result."
+      ]
+    },
+    "psychometric_assessment": {
+      "risk_level": "very_high_sensitive",
+      "knowledge_bank_fields": [
+        "client_id",
+        "unit_id",
+        "assessment_subject_code",
+        "assessment_session",
+        "response_set",
+        "derived_profile",
+        "teacher_manager_verification",
+        "verification_percentage",
+        "prescription",
+        "result_log"
+      ],
+      "strict_rules": [
+        "Identity separated by unique code.",
+        "Teacher/manager verification required.",
+        "No harmful deterministic labelling."
+      ]
+    }
+  }
+}

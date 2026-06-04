@@ -1,0 +1,22 @@
+{
+  "module_id": "AG69A",
+  "title": "Module Output Result-Saving Doctrine Record",
+  "status": "result_saving_doctrine_defined",
+  "result_record_required_fields": [
+    "result_id",
+    "module_id",
+    "methodology_version",
+    "input_context_hash_or_code",
+    "selected_knowledge_record_ids",
+    "output_payload",
+    "source_basis",
+    "public_output_allowed",
+    "admin_only",
+    "review_status",
+    "generated_at",
+    "saved_at"
+  ],
+  "public_output_rule": "Only public-safe output payload can be displayed. Internal source weights, private discipline, sensitive concordance and admin-only notes remain hidden.",
+  "result_storage_now": "static_result_schema_only",
+  "result_storage_future": "Supabase table after backend approval"
+}

@@ -1,0 +1,40 @@
+{
+  "module_id": "AG69A",
+  "title": "Common Knowledge Record Schema",
+  "status": "common_schema_defined",
+  "required_fields": [
+    "record_id",
+    "module_id",
+    "record_type",
+    "language_scope",
+    "content_payload",
+    "source_tier",
+    "source_reference_id",
+    "claim_level",
+    "review_status",
+    "public_use_allowed",
+    "admin_only",
+    "sensitivity_level",
+    "methodology_rule_id",
+    "created_at",
+    "last_reviewed_at",
+    "review_notes"
+  ],
+  "recommended_status_values": [
+    "candidate",
+    "source_checked",
+    "reviewed",
+    "approved",
+    "rejected",
+    "public_safe",
+    "admin_only",
+    "retired"
+  ],
+  "public_gate": {
+    "public_use_allowed_required": true,
+    "review_status_required": "approved",
+    "public_safe_required": true,
+    "source_reference_required": true,
+    "claim_level_required": true
+  }
+}

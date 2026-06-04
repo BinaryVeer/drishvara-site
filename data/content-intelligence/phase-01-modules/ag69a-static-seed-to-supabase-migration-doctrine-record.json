@@ -1,0 +1,29 @@
+{
+  "module_id": "AG69A",
+  "title": "Static Seed to Supabase Migration Doctrine Record",
+  "status": "static_to_supabase_migration_doctrine_defined_no_database_activation",
+  "current_mode": "static_governed_seed_bank",
+  "future_mode": "supabase_postgres_after_explicit_approval",
+  "supabase_activation_now": false,
+  "migration_pipeline": [
+    "candidate_seed_json",
+    "validator_pass",
+    "source_review",
+    "approved_static_bank",
+    "sql_schema_preview",
+    "sql_seed_preview",
+    "dry_run_validation",
+    "explicit_user_approval",
+    "supabase_apply",
+    "post_apply_readback_validation",
+    "method_output_test"
+  ],
+  "blocked_now": [
+    "supabase_migration_apply",
+    "database_write",
+    "auth_activation",
+    "service_role_use",
+    "rls_mutation",
+    "runtime_api_activation"
+  ]
+}

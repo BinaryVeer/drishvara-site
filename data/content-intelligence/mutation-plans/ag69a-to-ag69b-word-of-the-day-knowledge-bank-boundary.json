@@ -1,0 +1,22 @@
+{
+  "module_id": "AG69A",
+  "title": "AG69A to AG69B Word of the Day Knowledge Bank Boundary",
+  "status": "ag69b_boundary_defined",
+  "allowed_next_scope": [
+    "Create Word of the Day candidate knowledge bank.",
+    "Create Word source registry.",
+    "Create word selection methodology rules.",
+    "Generate test output from approved/static-safe records only.",
+    "Keep Supabase/database inactive."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "Supabase migration apply",
+    "database write",
+    "backend/Auth/Supabase activation",
+    "service-role use",
+    "runtime API activation",
+    "public use of candidate word records",
+    "unsupported Sanskrit or etymology claim",
+    "V02 expansion"
+  ]
+}

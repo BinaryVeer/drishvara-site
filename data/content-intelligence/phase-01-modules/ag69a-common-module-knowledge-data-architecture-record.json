@@ -1,0 +1,39 @@
+{
+  "module_id": "AG69A",
+  "title": "Common Module Knowledge/Data Architecture Record",
+  "status": "common_module_architecture_defined",
+  "shared_layers": [
+    "source_registry",
+    "knowledge_bank",
+    "methodology_rules",
+    "output_generation_test",
+    "result_log",
+    "review_log",
+    "ui_public_safe_output"
+  ],
+  "static_repo_paths": [
+    "data/knowledge-base/word-of-day/",
+    "data/knowledge-base/vedic-guidance/",
+    "data/knowledge-base/panchang-festival/",
+    "data/knowledge-base/star-reflection/",
+    "data/knowledge-base/sports-desk/",
+    "data/knowledge-base/psychometric-assessment/",
+    "data/knowledge-base/_governance/"
+  ],
+  "generated_output_paths": [
+    "generated/word-of-day.json",
+    "generated/vedic-guidance-working-data.json",
+    "generated/panchang-festival-working-data.json",
+    "generated/star-reflection-working-data.json",
+    "generated/sports-desk-working-data.json",
+    "generated/module-results/"
+  ],
+  "module_activation_order_recommended": [
+    "word_of_the_day",
+    "vedic_guidance",
+    "panchang_festival",
+    "star_reflection",
+    "sports_archive",
+    "psychometric_assessment"
+  ]
+}

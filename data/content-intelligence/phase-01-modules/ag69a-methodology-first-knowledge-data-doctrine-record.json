@@ -1,0 +1,80 @@
+{
+  "module_id": "AG69A",
+  "title": "Methodology-First Knowledge/Data Foundation Doctrine",
+  "status": "methodology_first_knowledge_data_governance_recorded",
+  "current_git_context": {
+    "branch": "main",
+    "head": "8f2ca17",
+    "head_full": "8f2ca17a5d8e146173c875d30f83c90ea07f0924",
+    "origin_main": "8f2ca17",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag69a-methodology-first-knowledge-data-governance.mjs\n?? scripts/validate-ag69a-methodology-first-knowledge-data-governance.mjs"
+  },
+  "principle": "For every Drishvara module, methodology must be validated before data bank creation, and data bank records must be source-checked before output generation.",
+  "pipeline": [
+    "methodology_first",
+    "field_ontology",
+    "source_hierarchy",
+    "candidate_data",
+    "purity_source_safety_validation",
+    "approved_knowledge_bank",
+    "output_test",
+    "result_saving_model",
+    "ui_display",
+    "closure"
+  ],
+  "no_compromise_rules": [
+    "No public naming or attribution of private internal study influences.",
+    "No invented Sanskrit, mantra, etymology, scriptural reference, festival rule, tithi or astrological claim.",
+    "No database population from unverified discussion or raw notes.",
+    "No public output from candidate records.",
+    "No sensitive personal output without consent and admin/public separation.",
+    "No backend, Supabase, Auth or RLS activation in AG69A."
+  ],
+  "source_tiers": [
+    {
+      "tier": "A",
+      "label": "primary_canonical_or_official",
+      "use": "May support direct rules only after text, edition, translation, context and scope are verified.",
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "B",
+      "label": "scholarly_or_peer_reviewed",
+      "use": "May support methodology, interpretation, historical context, technical background or analytical framework.",
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "C",
+      "label": "expert_or_internal_study_discipline",
+      "use": "May guide internal quality discipline or candidate methodology, but not public attribution or direct authority claim.",
+      "public_claim_allowed_after_review": false
+    },
+    {
+      "tier": "D",
+      "label": "drishvara_editorial_synthesis",
+      "use": "May be used for safe explanatory or reflective public text when source-backed claims are separated.",
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "blocked",
+      "label": "unsupported_or_unverified",
+      "use": "Must not feed public module output.",
+      "public_claim_allowed_after_review": false
+    }
+  ],
+  "claim_levels": [
+    "label_only",
+    "definition",
+    "translation",
+    "transliteration",
+    "usage_example",
+    "cultural_context",
+    "technical_background",
+    "methodological_rule",
+    "astronomical_calculation",
+    "mantra_text",
+    "scriptural_or_classical_reference",
+    "reflective_prompt",
+    "prediction_or_deterministic_claim_blocked"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "module_id": "AG69A",
+  "title": "Candidate Reviewed Approved Lifecycle",
+  "status": "lifecycle_defined",
+  "lifecycle_order": [
+    "candidate",
+    "extracted",
+    "normalised",
+    "source_checked",
+    "methodology_checked",
+    "reviewed",
+    "approved",
+    "method_tested",
+    "output_tested",
+    "public_safe"
+  ],
+  "strict_rule": "No candidate record can feed public module output before approved, method_tested and output_tested status.",
+  "blocked_shortcut": "No direct movement from discussion, uploaded note, AI output or raw paper into active public output or database seed."
+}

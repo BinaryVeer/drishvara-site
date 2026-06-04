@@ -1,0 +1,74 @@
+{
+  "module_id": "AG69A",
+  "title": "Source Tier and Claim-Level Governance Record",
+  "status": "source_tier_and_claim_level_governance_defined",
+  "source_tiers": [
+    {
+      "tier": "A",
+      "label": "primary_canonical_or_official",
+      "use": "May support direct rules only after text, edition, translation, context and scope are verified.",
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "B",
+      "label": "scholarly_or_peer_reviewed",
+      "use": "May support methodology, interpretation, historical context, technical background or analytical framework.",
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "C",
+      "label": "expert_or_internal_study_discipline",
+      "use": "May guide internal quality discipline or candidate methodology, but not public attribution or direct authority claim.",
+      "public_claim_allowed_after_review": false
+    },
+    {
+      "tier": "D",
+      "label": "drishvara_editorial_synthesis",
+      "use": "May be used for safe explanatory or reflective public text when source-backed claims are separated.",
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "blocked",
+      "label": "unsupported_or_unverified",
+      "use": "Must not feed public module output.",
+      "public_claim_allowed_after_review": false
+    }
+  ],
+  "claim_levels": [
+    "label_only",
+    "definition",
+    "translation",
+    "transliteration",
+    "usage_example",
+    "cultural_context",
+    "technical_background",
+    "methodological_rule",
+    "astronomical_calculation",
+    "mantra_text",
+    "scriptural_or_classical_reference",
+    "reflective_prompt",
+    "prediction_or_deterministic_claim_blocked"
+  ],
+  "blocked_sources": [
+    "random blogs",
+    "unsupported social media posts",
+    "broken or parked links",
+    "AI-invented claims",
+    "unverified Sanskrit/mantra copies",
+    "unverified Panchang/festival date claims",
+    "betting, odds or fantasy portals for sports facts",
+    "deterministic psychological or astrological labelling"
+  ],
+  "required_source_fields": [
+    "source_reference_id",
+    "source_title_or_label",
+    "source_type",
+    "source_tier",
+    "source_url_or_repository_note",
+    "source_access_status",
+    "source_review_status",
+    "claim_scope_allowed",
+    "public_attribution_allowed",
+    "admin_only"
+  ]
+}
