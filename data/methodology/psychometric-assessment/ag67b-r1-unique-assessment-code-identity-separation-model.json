@@ -1,0 +1,33 @@
+{
+  "module_id": "AG67B-R1",
+  "title": "Unique Assessment Code and Identity Separation Model",
+  "status": "identity_separation_model_recorded",
+  "principle": "Name and sensitive identifiers are used for authorised identity/reporting only, not for model learning.",
+  "identity_data_layer": [
+    "name",
+    "age",
+    "class_or_degree",
+    "institution_or_company",
+    "unit_or_section",
+    "DOB_optional",
+    "birth_place_optional",
+    "birth_time_optional",
+    "registered_email",
+    "guardian_or_manager_context_where_applicable"
+  ],
+  "assessment_data_layer": [
+    "unique_assessment_code",
+    "assessment_response_vector",
+    "derived_support_pattern",
+    "verification_result",
+    "prescription_category",
+    "admin_review_status",
+    "anonymised_methodology_signal"
+  ],
+  "printed_report_rule": "Individual student/employee institutional report must be code-only. Verification console may show name plus code to authorised teacher/manager/admin.",
+  "code_examples": [
+    "DV-SCH-CL10-A-023",
+    "DV-CMP-FIN-014",
+    "DV-IND-CAR-008"
+  ]
+}

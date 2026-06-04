@@ -1,0 +1,66 @@
+{
+  "module_id": "AG67B-R1",
+  "title": "Teacher / Manager Verification Model",
+  "status": "verification_model_recorded",
+  "principle": "Verification is person-specific and uses report-derived statements. Teacher/manager sees actual name plus unique assessment code only in the authorised verification console. Printed individual report remains code-only.",
+  "scale": {
+    "1": {
+      "label": "Strongly Disagree",
+      "percentage": 0
+    },
+    "2": {
+      "label": "Disagree",
+      "percentage": 25
+    },
+    "3": {
+      "label": "Not Sure / Insufficient Observation",
+      "percentage": 50
+    },
+    "4": {
+      "label": "Agree",
+      "percentage": 75
+    },
+    "5": {
+      "label": "Strongly Agree",
+      "percentage": 100
+    }
+  },
+  "verification_formula": "Average percentage value across all verified statements.",
+  "interpretation": [
+    {
+      "band": "80_and_above",
+      "label": "strongly_verified",
+      "treatment": "positive candidate after admin/academic review"
+    },
+    {
+      "band": "50_to_79",
+      "label": "partially_verified",
+      "treatment": "observation required; no automatic reinforcement"
+    },
+    {
+      "band": "below_50",
+      "label": "mismatch_review",
+      "treatment": "send to admin/academic review queue"
+    }
+  ],
+  "student_statement_examples": [
+    "The student understands better when a new concept is introduced through a story, example, or real-life situation.",
+    "The student benefits from visual explanation such as diagrams, charts, flow maps, or board illustrations.",
+    "The student needs step-by-step worked examples before attempting calculation-based questions independently.",
+    "The student participates better in small-group discussion than in full-class open discussion.",
+    "The student shows interest in project, activity, model-making, experiment, or innovation-based learning.",
+    "The student requires encouragement or confidence-building before attempting difficult or unfamiliar tasks.",
+    "The student is more comfortable when instructions are structured, clear, and broken into smaller steps.",
+    "The student can explain ideas better verbally or through examples than through long written answers."
+  ],
+  "manager_statement_examples": [
+    "The employee performs better with structured task clarity.",
+    "The employee contributes better in idea-generation or exploratory discussions.",
+    "The employee needs written briefing before execution.",
+    "The employee coordinates well in collaborative tasks.",
+    "The employee shows stronger performance in independent analysis.",
+    "The employee benefits from short review cycles.",
+    "The employee handles operational tasks consistently.",
+    "The employee responds well to visual dashboards or trackers."
+  ]
+}

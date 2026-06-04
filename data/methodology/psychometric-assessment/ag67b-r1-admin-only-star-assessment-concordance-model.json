@@ -1,0 +1,29 @@
+{
+  "module_id": "AG67B-R1",
+  "title": "Admin-Only Star Assessment Concordance Model",
+  "status": "admin_only_concordance_model_recorded",
+  "terminology": "Internal Star–Assessment Concordance Review",
+  "optional_inputs": [
+    "DOB",
+    "place_of_birth",
+    "state_of_birth",
+    "birth_time"
+  ],
+  "visibility": {
+    "public_user": false,
+    "student": false,
+    "parent": false,
+    "teacher": false,
+    "school_client": false,
+    "company_client": false,
+    "manager": false,
+    "admin_reviewer": true
+  },
+  "rule": {
+    "similarity_75_or_above": "positive_concordance_candidate_admin_review_required",
+    "below_75": "neutral_no_concordance",
+    "negative_reinforcement_from_assessment_to_star_methodology": false,
+    "automatic_methodology_update": false
+  },
+  "rationale": "Assessment and star reflection are different systems. Positive concordance can be studied after aggregation; mismatch must not weaken star methodology."
+}

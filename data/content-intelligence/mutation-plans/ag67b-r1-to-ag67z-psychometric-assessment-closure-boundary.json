@@ -1,0 +1,32 @@
+{
+  "module_id": "AG67B-R1",
+  "title": "AG67B-R1 to AG67Z Boundary",
+  "status": "ag67z_psychometric_assessment_closure_boundary_refined",
+  "allowed_next_scope": [
+    "Close AG67 including AG67A foundation, AG67B UI wiring and AG67B-R1 doctrine.",
+    "Record live verification evidence from AG67B.",
+    "Preserve no runtime activation."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public assessment launch",
+    "subscription/login runtime",
+    "questionnaire runtime",
+    "data collection",
+    "student/minor data collection",
+    "guardian consent runtime",
+    "school permission runtime",
+    "psychometric scoring",
+    "diagnosis",
+    "mental-health inference",
+    "academic/career prediction",
+    "report generation runtime",
+    "PDF/CSV/email runtime",
+    "runtime AI calls",
+    "external API/live source fetch",
+    "Supabase/Auth/backend activation",
+    "runtime database writes",
+    "service-role use",
+    "V02 expansion",
+    "direct feedback absorption"
+  ]
+}

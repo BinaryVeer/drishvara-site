@@ -1,0 +1,50 @@
+{
+  "module_id": "AG67B-R1",
+  "title": "Learning-Pattern Grouping and Peer-Collaboration Model",
+  "status": "grouping_and_collaboration_model_recorded",
+  "school_institution_rule": {
+    "terminology": "Learning-Pattern Grouping Prescription",
+    "formula": "total_assessed_learners_in_class_or_cohort / number_of_sections_or_groups = target_group_size",
+    "example": {
+      "class": "Class 10",
+      "total_students": 50,
+      "sections": 2,
+      "target_group_size": 25,
+      "output": "Two recommended learning-pattern groups of approximately 25 students each."
+    },
+    "purpose": [
+      "academic-year planning",
+      "enrollment-stage planning",
+      "section composition support",
+      "teaching-method planning",
+      "remedial group design",
+      "enrichment group design",
+      "activity-group planning"
+    ],
+    "output_type": "group-wise coded student list with common learning-support pattern and teaching-method prescription",
+    "not_pairwise_peer_bonding": true,
+    "not_automatic_section_allocation": true
+  },
+  "company_organisation_rule": {
+    "terminology": "Peer-Collaboration / Work-Style Bonding Recommendation",
+    "formula": "department_size <= 20 ? top_3_recommendations : top_5_recommendations",
+    "purpose": [
+      "productivity support",
+      "task-pairing support",
+      "work-style balancing",
+      "collaboration planning",
+      "manager-reviewed intervention planning"
+    ],
+    "output_type": "top-N coded collaboration suggestions",
+    "not_appraisal_decision": true
+  },
+  "safeguards": [
+    "No ranking.",
+    "No labelling as weak/strong.",
+    "No caste/religion/gender/community grouping.",
+    "No mental-health inference.",
+    "No permanent sectioning without teacher/admin review.",
+    "No automatic student placement.",
+    "No employee appraisal, promotion, salary or termination use."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "module_id": "AG67B-R1",
+  "title": "Client Entitlement and Quota Model",
+  "status": "entitlement_quota_model_recorded",
+  "token_required": true,
+  "inactive_now": true,
+  "client_registration_fields": {
+    "institution": [
+      "institution_name",
+      "institution_type",
+      "admin_contact",
+      "registered_email",
+      "phone",
+      "address",
+      "state",
+      "district",
+      "city",
+      "unit_branch_campus_name",
+      "unit_address",
+      "assessment_campaign",
+      "number_of_students"
+    ],
+    "company": [
+      "organisation_name",
+      "organisation_type",
+      "hr_admin_contact",
+      "registered_email",
+      "phone",
+      "head_office_address",
+      "unit_branch_department_name",
+      "unit_address",
+      "assessment_campaign",
+      "number_of_employees"
+    ],
+    "individual": [
+      "name_or_display_name",
+      "age",
+      "registered_email",
+      "consent",
+      "optional_DOB",
+      "optional_birth_place",
+      "optional_birth_time"
+    ]
+  },
+  "quota_rule": {
+    "purchased_slots": "client_purchased_count",
+    "bonus_percentage": 2,
+    "total_slots_formula": "purchased_slots + floor_or_policy_defined_2_percent_bonus",
+    "track": [
+      "purchased_slots",
+      "bonus_slots",
+      "total_slots",
+      "used_slots",
+      "remaining_slots",
+      "expired_slots"
+    ]
+  },
+  "blocked_now": [
+    "payment runtime",
+    "subscription runtime",
+    "login runtime",
+    "quota enforcement runtime",
+    "assessment page activation"
+  ]
+}
