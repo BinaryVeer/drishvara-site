@@ -1,0 +1,22 @@
+{
+  "module_id": "AG68A",
+  "title": "AG68A to AG68B Sports Desk UI Wiring Boundary",
+  "status": "ag68b_ui_wiring_boundary_defined",
+  "allowed_next_scope": [
+    "Wire Sports Desk public UI to generated/sports-desk-working-data.json.",
+    "Keep fallback behaviour when public_ui_ready is false.",
+    "Retain no live sports sourcing, no external sports API and no AI generation."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "live sports sourcing",
+    "runtime sports API",
+    "external API fetch",
+    "web scraping",
+    "real-time score updates",
+    "betting/odds/fantasy content",
+    "backend/Auth/Supabase activation",
+    "database writes",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "module_id": "AG68A",
+  "title": "Sports Desk Source Registry",
+  "status": "source_registry_defined_no_live_fetch",
+  "purpose": "Define future governed source categories for Sports Desk without activating live sourcing.",
+  "source_collection_active": false,
+  "external_api_fetch_active": false,
+  "live_sports_sourcing_active": false,
+  "source_categories": [
+    {
+      "category": "official_event_sources",
+      "examples": [
+        "official tournament/event websites",
+        "official federation/league notices",
+        "official broadcaster schedules where legally accessible"
+      ],
+      "current_status": "under_editorial_verification"
+    },
+    {
+      "category": "credible_sports_news_sources",
+      "examples": [
+        "recognised sports desks of credible news organisations",
+        "publicly accessible verified sports reports",
+        "official team or competition updates"
+      ],
+      "current_status": "under_editorial_verification"
+    },
+    {
+      "category": "internal_drishvara_sports_reads",
+      "examples": [
+        "sports articles already generated and reviewed inside Drishvara",
+        "future sports explainer reads",
+        "future tournament context reads"
+      ],
+      "current_status": "prepared_for_future_review"
+    }
+  ],
+  "blocked_now": [
+    "live score fetching",
+    "betting or odds data",
+    "unverified rumours",
+    "social-media-only sports sourcing",
+    "automated live scraping",
+    "runtime sports API",
+    "paywalled content ingestion"
+  ]
+}

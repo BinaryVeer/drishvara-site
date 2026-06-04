@@ -1,0 +1,26 @@
+{
+  "module_id": "AG68A",
+  "title": "Sports Desk AI Routing and Token Policy",
+  "status": "ai_policy_recorded_no_ai_generation",
+  "ai_generation_active": false,
+  "ai_selection_active": false,
+  "token_use_now": 0,
+  "future_ai_use_allowed_only_for": [
+    "ranking reviewed candidate sports items",
+    "summarising verified sports context",
+    "matching a sports update with an internal Drishvara explainer",
+    "detecting stale or unverified sports items before publication"
+  ],
+  "blocked_ai_use": [
+    "live score invention",
+    "match result guessing",
+    "injury speculation",
+    "betting/fantasy prediction",
+    "unverified transfer/selection rumours"
+  ],
+  "cost_control": [
+    "reuse approved sports candidate records",
+    "avoid repeated AI calls for unchanged sports context",
+    "prefer static working data until live sports governance is approved"
+  ]
+}

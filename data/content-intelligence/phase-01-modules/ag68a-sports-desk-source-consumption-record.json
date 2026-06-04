@@ -1,0 +1,43 @@
+{
+  "module_id": "AG68A",
+  "title": "Sports Desk Source Consumption Record",
+  "status": "existing_sports_context_consumed_as_fallback_evidence",
+  "consumed_inputs": {
+    "ag67z_r1_surface_verification": "data/content-intelligence/quality-reviews/ag67z-r1-homepage-route-founder-continuity-sports-fallback-verification.json",
+    "data_sports_context_json_present": true,
+    "generated_sports_context_json_present": true,
+    "index_html_sports_surface_present": true
+  },
+  "existing_context_summary": {
+    "data_sports_context_keys": [
+      "version",
+      "module",
+      "date",
+      "public_output_enabled",
+      "live_api_enabled",
+      "live_update_mode",
+      "right_top_live_update",
+      "topRightLiveUpdate",
+      "live_events",
+      "liveEvents",
+      "tournament_watch",
+      "tournamentWatch",
+      "major_updates",
+      "majorUpdates",
+      "featured_sports_article",
+      "featuredSportsArticle",
+      "guardrails",
+      "audit"
+    ],
+    "generated_sports_context_keys": [
+      "status",
+      "source",
+      "live_events",
+      "tournament_watch",
+      "major_updates",
+      "featured_article",
+      "fallbacks"
+    ]
+  },
+  "treatment": "Existing sports context files remain legacy/fallback evidence. AG68A creates a new generated/sports-desk-working-data.json foundation but does not wire it to public UI."
+}

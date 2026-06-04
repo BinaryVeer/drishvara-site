@@ -1,0 +1,93 @@
+{
+  "module_id": "AG68A",
+  "title": "Sports Desk Initial Working Data",
+  "status": "initial_sports_desk_working_data_ready_not_publicly_wired",
+  "existing_fallback_surface_visible": true,
+  "public_ui_ready": false,
+  "working_data_publicly_wired": false,
+  "source_collection_active": false,
+  "live_sports_sourcing_active": false,
+  "external_api_fetch_active": false,
+  "runtime_sports_api_active": false,
+  "ai_generation_active": false,
+  "ai_selection_active": false,
+  "report_generation_enabled": false,
+  "sports_desk": {
+    "card_id": "sports-desk",
+    "title": "Sports Desk",
+    "subtitle": "Prepared sports desk for verified tournament context, major updates, and selected sports reads.",
+    "status_label": "Editorial Preview",
+    "safety_note": "Sports Desk is a prepared surface. Live sports sourcing, external sports APIs and real-time updates are not active.",
+    "public_use_mode": "fallback_preview_only",
+    "source_status": "sports sources under editorial verification",
+    "sections": [
+      {
+        "section_id": "live_events",
+        "label": "Live Events",
+        "active": false,
+        "status": "reserved_for_reviewed_working_data",
+        "items": [
+          {
+            "slot_id": "live_event_slot_01",
+            "title": "Live-event card reserved for reviewed sports context.",
+            "meta": "No live event feed is active.",
+            "source_status": "under_verification",
+            "cta_enabled": false
+          }
+        ]
+      },
+      {
+        "section_id": "tournament_watch",
+        "label": "Tournament Watch",
+        "active": false,
+        "status": "reserved_for_reviewed_working_data",
+        "items": [
+          {
+            "slot_id": "tournament_slot_01",
+            "title": "Tournament watch card reserved for verified tournament context.",
+            "meta": "No tournament feed is active.",
+            "source_status": "under_verification",
+            "cta_enabled": false
+          }
+        ]
+      },
+      {
+        "section_id": "major_updates",
+        "label": "Major Updates",
+        "active": false,
+        "status": "reserved_for_reviewed_working_data",
+        "items": [
+          {
+            "slot_id": "major_update_slot_01",
+            "title": "Major sports update reserved for editorial review.",
+            "meta": "No live update feed is active.",
+            "source_status": "under_verification",
+            "cta_enabled": false
+          }
+        ]
+      },
+      {
+        "section_id": "featured_sports_article",
+        "label": "Featured Sports Article",
+        "active": false,
+        "status": "reserved_for_reviewed_internal_article",
+        "items": [
+          {
+            "slot_id": "featured_sports_article_slot_01",
+            "title": "Featured sports article slot reserved for reviewed Drishvara read.",
+            "meta": "No featured sports article is active from this working data.",
+            "source_status": "under_editorial_review",
+            "cta_enabled": false,
+            "internal_article_link": ""
+          }
+        ]
+      }
+    ]
+  },
+  "legacy_context_consumed": {
+    "data_sports_context_json_present": true,
+    "generated_sports_context_json_present": true,
+    "legacy_context_status": "consumed_as_fallback_evidence_only",
+    "legacy_context_not_replaced": true
+  }
+}
