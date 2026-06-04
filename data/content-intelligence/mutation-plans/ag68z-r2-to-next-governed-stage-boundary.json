@@ -1,0 +1,24 @@
+{
+  "module_id": "AG68Z-R2",
+  "title": "AG68Z-R2 to Next Governed Stage Boundary",
+  "status": "next_governed_stage_requires_user_confirmation",
+  "current_verification_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Proceed to the next user-approved governed row.",
+    "Repeat live verification if network/DNS was unavailable.",
+    "Prepare next static/public module only through governed generate → validate → project validate → build sequence."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "backend/Auth/Supabase activation",
+    "database writes",
+    "database archive search activation",
+    "live sports sourcing",
+    "runtime sports API",
+    "external API fetch",
+    "web scraping",
+    "automatic publication",
+    "service-role use",
+    "V02 expansion"
+  ]
+}
