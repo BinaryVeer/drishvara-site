@@ -1,0 +1,71 @@
+{
+  "module_id": "AG69L",
+  "title": "Manual Pilot Lexical Evidence Capture",
+  "status": "ag69l_manual_pilot_lexical_evidence_capture_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "8601e1f1",
+    "head_full": "8601e1f1ee9539958a00d74085d7bcbe7e3a7d9d",
+    "origin_main": "8601e1f1",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag69l-manual-pilot-lexical-evidence-capture.mjs\n?? scripts/validate-ag69l-manual-pilot-lexical-evidence-capture.mjs"
+  },
+  "consumed_previous_stage": {
+    "stage": "AG69K",
+    "source_file": "data/content-intelligence/quality-reviews/ag69k-word-asset-logic-alignment-end-to-end-path-optimization.json",
+    "status": "ag69k_word_asset_logic_alignment_end_to_end_path_optimization_completed"
+  },
+  "consumed_workflow_step": {
+    "step": 3,
+    "name": "lexical_source_capture",
+    "description": "Capture exact lexical/source evidence for pilot words with source_access_checked and reuse_note_checked.",
+    "output": "manual_evidence_records"
+  },
+  "generated_records": {
+    "captureRecord": "data/knowledge-base/word-of-day/ag69l-manual-pilot-lexical-evidence-capture-record.json",
+    "normalizedEvidence": "data/knowledge-base/word-of-day/ag69l-normalized-pilot-evidence-records.json",
+    "qualityGate": "data/knowledge-base/word-of-day/ag69l-pilot-evidence-quality-gate-result.json",
+    "sourceUseAudit": "data/knowledge-base/word-of-day/ag69l-source-use-copyright-safety-audit.json",
+    "attachmentBlock": "data/knowledge-base/word-of-day/ag69l-no-word-record-attachment-audit.json",
+    "sourcePromotionBlock": "data/knowledge-base/word-of-day/ag69l-no-source-promotion-audit.json",
+    "noMutationAudit": "data/knowledge-base/word-of-day/ag69l-no-generated-word-or-ui-mutation-audit.json",
+    "noBackend": "data/content-intelligence/backend-architecture/ag69l-no-backend-auth-rls-database-runtime-audit.json",
+    "noV02": "data/content-intelligence/backend-architecture/ag69l-no-v02-expansion-audit.json",
+    "readiness": "data/content-intelligence/quality-registry/ag69l-ag69m-pilot-evidence-attachment-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag69l-to-ag69m-pilot-evidence-attachment-boundary.json",
+    "review": "data/content-intelligence/quality-reviews/ag69l-manual-pilot-lexical-evidence-capture.json",
+    "registry": "data/quality/ag69l-manual-pilot-lexical-evidence-capture.json",
+    "preview": "data/quality/ag69l-manual-pilot-lexical-evidence-capture-preview.json",
+    "doc": "docs/quality/AG69L_MANUAL_PILOT_LEXICAL_EVIDENCE_CAPTURE.md"
+  },
+  "summary": {
+    "ag69k_consumed": true,
+    "manual_pilot_lexical_evidence_captured": true,
+    "evidence_capture_count": 3,
+    "normalized_evidence_records_created": true,
+    "source_access_checked_for_all_records": true,
+    "reuse_note_checked_for_all_records": true,
+    "quality_gate_passed_for_capture": true,
+    "attachment_candidate_count_for_ag69m": 3,
+    "source_evidence_attached_to_word_records_count": 0,
+    "source_reference_ids_attached_to_word_records_count": 0,
+    "source_promoted_count": 0,
+    "reviewed_records_created": false,
+    "approved_records_created": false,
+    "reviewed_bank_created": false,
+    "approved_bank_created": false,
+    "public_output_from_word_records_allowed": false,
+    "source_content_ingested": false,
+    "bulk_copyrighted_ingestion": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "new_word_card_created": false,
+    "active_tithi_vara_selection_started": false,
+    "panchang_value_generation_started": false,
+    "supabase_database_write_performed": false,
+    "backend_runtime_activated": false,
+    "database_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "ready_for_ag69m": true
+  }
+}
