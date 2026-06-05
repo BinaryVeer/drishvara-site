@@ -1,0 +1,28 @@
+{
+  "module_id": "AG69D",
+  "title": "AG69D to AG69E Word Source Mapping Boundary",
+  "status": "ag69e_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Map candidate word records to source_reference_id where directly relevant.",
+    "Create review queue for source, language, transliteration and meaning checks.",
+    "Keep all mapped word records candidate or reviewed only until approval validator passes.",
+    "Do not replace generated/word-of-day.json."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "source content bulk ingestion",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "public attribution of internal study influence",
+    "Nityanand Misra published-work public attribution without exact verification",
+    "unsupported Sanskrit claim",
+    "unsupported etymology claim",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

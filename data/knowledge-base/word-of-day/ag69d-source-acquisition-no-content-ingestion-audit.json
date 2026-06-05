@@ -1,0 +1,45 @@
+{
+  "module_id": "AG69D",
+  "title": "Source Acquisition No-Content-Ingestion Audit",
+  "status": "source_acquisition_metadata_only_audit_passed",
+  "audit_passed": true,
+  "checks": [
+    {
+      "check_id": "source_metadata_recorded",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "check_id": "source_content_ingested",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "bulk_copyrighted_ingestion",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "approved_word_records_created",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "generated_word_json_modified",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "public_attribution_of_internal_influence",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    }
+  ],
+  "failed_checks": []
+}

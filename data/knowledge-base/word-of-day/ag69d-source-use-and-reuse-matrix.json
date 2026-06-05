@@ -1,0 +1,37 @@
+{
+  "module_id": "AG69D",
+  "title": "Source Use and Reuse Matrix",
+  "status": "source_use_reuse_matrix_created",
+  "use_classes": [
+    {
+      "use_class": "metadata_only",
+      "allowed_now": true,
+      "description": "Record source name, URL, institution, category, allowed-use and blocked-use."
+    },
+    {
+      "use_class": "lexical_lookup_manual_review",
+      "allowed_now": false,
+      "description": "Permitted only in future reviewed stage; no bulk capture."
+    },
+    {
+      "use_class": "corpus_attestation_review",
+      "allowed_now": false,
+      "description": "Permitted only in future reviewed stage; no bulk capture."
+    },
+    {
+      "use_class": "published_work_manual_review",
+      "allowed_now": false,
+      "description": "Permitted only after exact work/edition verification and copyright/reuse review."
+    },
+    {
+      "use_class": "public_output_source_basis",
+      "allowed_now": false,
+      "description": "Blocked until approved word records exist."
+    },
+    {
+      "use_class": "bulk_ingestion",
+      "allowed_now": false,
+      "description": "Blocked unless licence/reuse permission is explicitly approved."
+    }
+  ]
+}
