@@ -1,0 +1,73 @@
+{
+  "module_id": "AG69B",
+  "title": "Word of the Day Source Hierarchy",
+  "status": "word_source_hierarchy_defined",
+  "source_hierarchy": [
+    {
+      "tier": "A",
+      "label": "standard_language_reference",
+      "accepted_for": [
+        "definition",
+        "translation",
+        "transliteration"
+      ],
+      "examples_description_only": [
+        "reviewed dictionaries",
+        "approved lexicons",
+        "institutional language references"
+      ],
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "B",
+      "label": "reviewed_textual_or_scholarly_context",
+      "accepted_for": [
+        "cultural_context",
+        "usage_context"
+      ],
+      "examples_description_only": [
+        "reviewed books",
+        "scholarly articles",
+        "approved educational references"
+      ],
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "C",
+      "label": "internal_editorial_language_discipline",
+      "accepted_for": [
+        "candidate_quality_filtering",
+        "tone_alignment"
+      ],
+      "examples_description_only": [
+        "internal style discipline",
+        "editorial judgement"
+      ],
+      "public_claim_allowed_after_review": false
+    },
+    {
+      "tier": "D",
+      "label": "drishvara_editorial_synthesis",
+      "accepted_for": [
+        "safe usage sentence",
+        "reflection prompt"
+      ],
+      "examples_description_only": [
+        "editorial synthesis based on approved records"
+      ],
+      "public_claim_allowed_after_review": true
+    },
+    {
+      "tier": "blocked",
+      "label": "unsupported_or_unverified",
+      "accepted_for": [],
+      "examples_description_only": [
+        "AI-invented etymology",
+        "unsupported Sanskrit",
+        "random social media explanation"
+      ],
+      "public_claim_allowed_after_review": false
+    }
+  ],
+  "source_rule": "Candidate words may be stored without public use, but public output requires reviewed and approved source basis."
+}

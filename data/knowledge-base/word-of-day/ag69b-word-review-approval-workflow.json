@@ -1,0 +1,41 @@
+{
+  "module_id": "AG69B",
+  "title": "Word Review and Approval Workflow",
+  "status": "word_review_approval_workflow_defined",
+  "workflow": [
+    "candidate_record_created",
+    "language_scope_identified",
+    "source_reference_attached",
+    "source_checked",
+    "meaning_checked",
+    "transliteration_checked",
+    "etymology_claim_blocked_unless_source_verified",
+    "reviewed",
+    "approved",
+    "method_tested",
+    "output_tested",
+    "public_safe"
+  ],
+  "transition_rules": [
+    {
+      "from": "candidate",
+      "to": "reviewed",
+      "requires": [
+        "source_reference_id",
+        "language_review_status_reviewed",
+        "safety_review_status_reviewed"
+      ]
+    },
+    {
+      "from": "reviewed",
+      "to": "approved",
+      "requires": [
+        "approved_source",
+        "approved_language_review",
+        "approved_safety_review",
+        "editorial_approval",
+        "public_use_permission"
+      ]
+    }
+  ]
+}

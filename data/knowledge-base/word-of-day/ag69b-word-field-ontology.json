@@ -1,0 +1,173 @@
+{
+  "module_id": "AG69B",
+  "title": "Word of the Day Field Ontology",
+  "status": "word_field_ontology_defined",
+  "consumed_governance": "AG69A",
+  "methodology_sequence_position": [
+    "methodology_first_completed_by_ag69a",
+    "field_ontology_defined_by_ag69b",
+    "source_hierarchy_defined_by_ag69b",
+    "candidate_data_foundation_created_by_ag69b",
+    "purity_source_safety_validation_defined_by_ag69b",
+    "approved_bank_not_created_yet",
+    "output_test_planned_not_public",
+    "result_saving_model_planned_not_runtime",
+    "ui_display_not_changed",
+    "closure_pending_after_later_review_stage"
+  ],
+  "required_fields": [
+    {
+      "field": "record_id",
+      "type": "string",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "module_id",
+      "type": "string",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "bank_class",
+      "type": "candidate|reviewed|approved",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "word_id",
+      "type": "string",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "english_word",
+      "type": "string",
+      "required": true,
+      "public_visible": true
+    },
+    {
+      "field": "hindi_word",
+      "type": "string",
+      "required": false,
+      "public_visible": true
+    },
+    {
+      "field": "sanskrit_word",
+      "type": "string",
+      "required": false,
+      "public_visible": true
+    },
+    {
+      "field": "transliteration",
+      "type": "string",
+      "required": false,
+      "public_visible": true
+    },
+    {
+      "field": "meaning",
+      "type": "string",
+      "required": true,
+      "public_visible": true
+    },
+    {
+      "field": "usage_sentence",
+      "type": "string",
+      "required": false,
+      "public_visible": true
+    },
+    {
+      "field": "theme",
+      "type": "string",
+      "required": true,
+      "public_visible": true
+    },
+    {
+      "field": "difficulty_level",
+      "type": "basic|intermediate|advanced",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "source_reference_id",
+      "type": "string|null",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "source_tier",
+      "type": "A|B|C|D|pending|blocked",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "source_status",
+      "type": "candidate_unverified|source_checked|approved_source|blocked",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "review_status",
+      "type": "candidate|under_review|reviewed|approved|rejected",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "claim_level",
+      "type": "label_only|definition|translation|transliteration|usage_example|cultural_context|blocked",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "public_use_permission",
+      "type": "not_allowed|allowed_after_review|approved_for_public_output",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "public_output_allowed",
+      "type": "boolean",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "etymology_claim_allowed",
+      "type": "boolean",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "classical_claim_allowed",
+      "type": "boolean",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "language_review_status",
+      "type": "pending|reviewed|approved|rejected",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "safety_review_status",
+      "type": "pending|reviewed|approved|rejected",
+      "required": true,
+      "public_visible": false
+    },
+    {
+      "field": "editorial_review_status",
+      "type": "pending|reviewed|approved|rejected",
+      "required": true,
+      "public_visible": false
+    }
+  ],
+  "public_gate": {
+    "bank_class_required": "approved",
+    "review_status_required": "approved",
+    "public_use_permission_required": "approved_for_public_output",
+    "public_output_allowed_required": true,
+    "source_status_required": "approved_source",
+    "safety_review_status_required": "approved",
+    "language_review_status_required": "approved"
+  }
+}

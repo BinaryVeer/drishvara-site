@@ -1,0 +1,27 @@
+{
+  "module_id": "AG69B",
+  "title": "Word Purity, Source and Safety Rules",
+  "status": "word_purity_source_safety_rules_defined",
+  "blocked_conditions": [
+    "invented_sanskrit",
+    "loose_transliteration",
+    "unsupported_etymology",
+    "unsupported_classical_claim",
+    "candidate_record_used_for_public_output",
+    "missing_source_reference_for_public_output",
+    "unapproved_language_review",
+    "unapproved_safety_review",
+    "unapproved_public_use_permission"
+  ],
+  "required_approval_gates": [
+    "source_reference_present",
+    "source_status_approved_source",
+    "review_status_approved",
+    "public_use_permission_approved_for_public_output",
+    "language_review_status_approved",
+    "safety_review_status_approved",
+    "editorial_review_status_approved",
+    "public_output_allowed_true"
+  ],
+  "public_output_constraint": "Candidate and reviewed word records must not feed public output. Only approved records may be selected in a later output-test stage."
+}

@@ -1,0 +1,25 @@
+{
+  "module_id": "AG69B",
+  "title": "AG69B to AG69C Word Review / Approved Bank Boundary",
+  "status": "ag69c_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Review candidate word records.",
+    "Attach source references.",
+    "Move safe records from candidate to reviewed.",
+    "Create approved-bank validator only after review gates are satisfied.",
+    "Keep generated public output unchanged."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public use of candidate word records",
+    "generated/word-of-day.json replacement from candidate data",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "unsupported Sanskrit claim",
+    "unsupported etymology claim",
+    "V02 expansion"
+  ]
+}
