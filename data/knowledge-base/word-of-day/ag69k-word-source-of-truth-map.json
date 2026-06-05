@@ -1,0 +1,75 @@
+{
+  "module_id": "AG69K",
+  "title": "Word of the Day Source-of-Truth Map",
+  "status": "word_source_of_truth_map_created",
+  "source_of_truth_layers": [
+    {
+      "layer_id": "active_public_preview_surface",
+      "active_now": true,
+      "source_files": [
+        "index.html",
+        "generated/word-of-day.json"
+      ],
+      "governing_stage": "AG63A/AG63B/AG63Z",
+      "rule": "Preserve until AG69 approved-output replacement stage."
+    },
+    {
+      "layer_id": "legacy_seed_bank",
+      "active_now": false,
+      "source_files": [
+        "data/knowledge/daily-guidance/word-of-day-bank-d02.json",
+        "data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json"
+      ],
+      "governing_stage": "D02 / AG48 / AG63",
+      "rule": "Use as legacy seed/context only."
+    },
+    {
+      "layer_id": "governed_future_bank",
+      "active_now": true,
+      "public_output_active_now": false,
+      "source_files_family": "ag69_governed_knowledge_bank_chain",
+      "governing_stage": "AG69A onward",
+      "rule": "Only this chain may produce future approved Word output after evidence/review/approval/output-test gates."
+    },
+    {
+      "layer_id": "selection_logic_future",
+      "active_now": false,
+      "source_files": [
+        "data/knowledge-base/word-of-day/ag69e-word-selection-context-doctrine.json",
+        "data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json"
+      ],
+      "rule": "Merge duplicate-control, Tithi/Vara/Festival/theme logic only after Panchang-selector validation."
+    },
+    {
+      "layer_id": "adjacent_safety_context",
+      "active_now": false,
+      "source_files_family": "sutra_mantra_reflection_vedic_guidance",
+      "rule": "Preserve but exclude from Word runtime unless separately validated."
+    }
+  ],
+  "current_public_generated_word_contract": {
+    "file": "generated/word-of-day.json",
+    "module_id": "AG63A",
+    "status": "initial_word_of_day_ready_not_publicly_wired",
+    "public_ui_ready": false,
+    "dynamic_rotation_active": false,
+    "ai_generation_active": false,
+    "source_expansion_active": false,
+    "word": {
+      "word_id": "reflection",
+      "english": "Reflection",
+      "hindi": "मनन",
+      "sanskrit": "मननम्",
+      "meaning": "Sustained inward consideration before response.",
+      "meaning_hi": "प्रतिक्रिया से पहले किया गया स्थिर आंतरिक विचार।",
+      "theme": "reflection",
+      "usage_context": "Daily reminder for thoughtful action.",
+      "source_basis": "D02 curated Word of the Day bank; not presented as scriptural source.",
+      "review_status": "approved",
+      "public_use_mode": "reviewed_preview_only",
+      "classical_claim_made": false,
+      "scriptural_claim_made": false,
+      "note": "Reviewed linguistic preview only; deeper source attribution is required before full classical-source expansion."
+    }
+  }
+}

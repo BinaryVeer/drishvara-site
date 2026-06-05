@@ -1,0 +1,46 @@
+{
+  "module_id": "AG69K",
+  "title": "Current Public UI Contract Preservation Record",
+  "status": "current_public_ui_contract_preserved_no_mutation",
+  "ui_reference_checks": [
+    {
+      "check_id": "word_card_label_present",
+      "pattern": "Word of the Day",
+      "passed": true
+    },
+    {
+      "check_id": "generated_word_path_referenced",
+      "pattern": "generated/word-of-day.json",
+      "passed": true
+    },
+    {
+      "check_id": "ag63b_ui_wiring_present",
+      "pattern": "data-drishvara-ag63b-word-of-day-ui-wiring",
+      "passed": true
+    }
+  ],
+  "visible_data_source": "generated/word-of-day.json",
+  "current_visible_word": {
+    "word_id": "reflection",
+    "english": "Reflection",
+    "hindi": "मनन",
+    "sanskrit": "मननम्",
+    "meaning": "Sustained inward consideration before response.",
+    "meaning_hi": "प्रतिक्रिया से पहले किया गया स्थिर आंतरिक विचार।",
+    "theme": "reflection",
+    "usage_context": "Daily reminder for thoughtful action.",
+    "source_basis": "D02 curated Word of the Day bank; not presented as scriptural source.",
+    "review_status": "approved",
+    "public_use_mode": "reviewed_preview_only",
+    "classical_claim_made": false,
+    "scriptural_claim_made": false,
+    "note": "Reviewed linguistic preview only; deeper source attribution is required before full classical-source expansion."
+  },
+  "current_public_flags": {
+    "public_ui_ready": false,
+    "dynamic_rotation_active": false,
+    "ai_generation_active": false,
+    "source_expansion_active": false
+  },
+  "decision": "Preserve current homepage Word card. No duplicate Word card and no generated/word-of-day.json replacement in AG69K."
+}

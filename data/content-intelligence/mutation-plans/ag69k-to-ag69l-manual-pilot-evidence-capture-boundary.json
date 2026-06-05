@@ -1,0 +1,33 @@
+{
+  "module_id": "AG69K",
+  "title": "AG69K to AG69L Manual Pilot Evidence Capture Boundary",
+  "status": "ag69l_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Use AG69J manual capture packet for the three pilot words.",
+    "Record exact manual lexical evidence status.",
+    "Use AG69K optimized path to avoid duplicate or conflicting logic.",
+    "Keep public_output_allowed=false.",
+    "Do not mutate generated/word-of-day.json or index.html."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "bulk dictionary/book content ingestion",
+    "source promotion to approved_source without exact verification",
+    "reviewed word bank creation",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "active tithi/vara word selection",
+    "Panchang value generation",
+    "UI display change",
+    "new Word of the Day card creation",
+    "deleting legacy D02/AG48/AG56/AG63 assets",
+    "public attribution of internal study influence",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

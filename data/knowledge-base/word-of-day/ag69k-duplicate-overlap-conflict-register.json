@@ -1,0 +1,49 @@
+{
+  "module_id": "AG69K",
+  "title": "Duplicate / Overlap / Conflict Register",
+  "status": "duplicate_overlap_conflict_register_created",
+  "items": [
+    {
+      "issue_id": "d02_approval_vs_ag69_approval",
+      "issue_type": "approval_overlap",
+      "description": "D02 contains approved preview entries, while AG69 requires separate reviewed/approved-bank lifecycle.",
+      "decision": "D02 approval is legacy-preview approval only; it must not be treated as AG69 approved bank.",
+      "action": "merge_as_candidate_or_evidence_pending_seed"
+    },
+    {
+      "issue_id": "d02_rotation_vs_ag69_tithi_vara_selector",
+      "issue_type": "selection_logic_overlap",
+      "description": "D02 rotation and AG48 repeat-control exist, while AG69 introduced Tithi/Vara/festival/theme context.",
+      "decision": "Merge useful repeat-control into future AG69 selector; do not run old rotation separately.",
+      "action": "merge_defer_until_panchang_selector_validation"
+    },
+    {
+      "issue_id": "ag63_generated_output_vs_ag69_future_output",
+      "issue_type": "active_public_contract_overlap",
+      "description": "AG63 currently drives generated/word-of-day.json, while AG69 will later produce governed output.",
+      "decision": "Preserve AG63 output until AG69 approved bank + output test + UI replacement stage passes.",
+      "action": "retain_active_now_future_replace_only_after_gate"
+    },
+    {
+      "issue_id": "word_reflection_bridge_vs_word_only_pipeline",
+      "issue_type": "scope_complexity",
+      "description": "AG48 connected Word and Reflection logic, but current work is Word-of-the-Day knowledge bank.",
+      "decision": "Do not mix reflection generation into Word runtime now.",
+      "action": "defer_reflection_runtime"
+    },
+    {
+      "issue_id": "sanskritdictionary_scout_vs_approved_source",
+      "issue_type": "source_quality_boundary",
+      "description": "AG69J added Sanskritdictionary.com as scout/lookup metadata, not an approved source.",
+      "decision": "Use as navigation/scout only; primary evidence should rely on verified lexical/institutional sources.",
+      "action": "block_as_public_claim_source"
+    },
+    {
+      "issue_id": "mantra_sutra_assets_vs_word_assets",
+      "issue_type": "module_scope_boundary",
+      "description": "Mantra/Sutra seed assets exist but have different safety requirements.",
+      "decision": "Preserve as adjacent safety context; exclude from Word runtime path.",
+      "action": "exclude_from_word_runtime_now"
+    }
+  ]
+}

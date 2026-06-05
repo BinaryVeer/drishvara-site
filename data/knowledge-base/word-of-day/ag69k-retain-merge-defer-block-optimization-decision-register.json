@@ -1,0 +1,63 @@
+{
+  "module_id": "AG69K",
+  "title": "Retain / Merge / Defer / Block / Runtime-Remove Decision Register",
+  "status": "optimization_decision_register_created",
+  "decisions": [
+    {
+      "decision_id": "retain_d02_seed",
+      "object": "D02 curated word bank",
+      "decision": "retain",
+      "reason": "Useful as historical seed and AG63/AG69F input.",
+      "runtime_use_now": false
+    },
+    {
+      "decision_id": "merge_rotation_logic",
+      "object": "D02 rotation + AG48 repeat-control + AG69E Tithi/Vara context",
+      "decision": "merge_later",
+      "reason": "All are selection-related, but running multiple selectors creates complexity.",
+      "runtime_use_now": false
+    },
+    {
+      "decision_id": "retain_ag63_ui",
+      "object": "AG63 homepage Word card and generated/word-of-day.json",
+      "decision": "retain_active",
+      "reason": "Visible public preview exists and is safe/cautious.",
+      "runtime_use_now": true
+    },
+    {
+      "decision_id": "block_duplicate_ui",
+      "object": "Any new Word of the Day card",
+      "decision": "block",
+      "reason": "Homepage already has a Word card.",
+      "runtime_use_now": false
+    },
+    {
+      "decision_id": "defer_tithi_vara",
+      "object": "Tithi/Vara/Festival-based selector",
+      "decision": "defer",
+      "reason": "Requires Panchang methodology/calculation/observance separation before selector activation.",
+      "runtime_use_now": false
+    },
+    {
+      "decision_id": "retain_ag69_source_chain",
+      "object": "AG69A-J methodology/source/evidence chain",
+      "decision": "retain_as_future_governed_source",
+      "reason": "This is the controlled path for source-verified Word output.",
+      "runtime_use_now": false
+    },
+    {
+      "decision_id": "block_scout_as_evidence",
+      "object": "AG69J scout observations",
+      "decision": "block_as_final_evidence",
+      "reason": "Scout observations are directional, not exact source evidence.",
+      "runtime_use_now": false
+    },
+    {
+      "decision_id": "remove_runtime_complexity_reflection_mantra_sutra",
+      "object": "Reflection/Sutra/Mantra adjacent logic inside Word runtime",
+      "decision": "remove_as_runtime_candidate_now",
+      "reason": "Different modules require separate safety and source gates.",
+      "runtime_use_now": false
+    }
+  ]
+}

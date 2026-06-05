@@ -1,0 +1,69 @@
+{
+  "module_id": "AG69K",
+  "title": "Future Execution Sequence Map",
+  "status": "future_execution_sequence_map_created",
+  "next_sequence": [
+    {
+      "stage": "AG69L",
+      "title": "Manual Pilot Lexical Evidence Capture",
+      "purpose": "Capture exact evidence status for Reflection, Discernment and Patience using AG69J capture packet.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69M",
+      "title": "Pilot Evidence Attachment — Public Output Still Blocked",
+      "purpose": "Attach source_reference_id and evidence status only where manual evidence passes.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69N",
+      "title": "Reviewed Word Bank Pilot Gate",
+      "purpose": "Promote only evidence-complete pilot records to reviewed bank.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69O",
+      "title": "Approved Word Bank Pilot Gate",
+      "purpose": "Approve records that pass source/language/claim/public-use review.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69P",
+      "title": "Word Selection Engine Doctrine and Test",
+      "purpose": "Merge duplicate-control, Tithi/Vara/Festival/theme rules into one selector without activating public runtime.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69Q",
+      "title": "Approved Output Test",
+      "purpose": "Generate safe daily Word output candidate from approved bank.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69R",
+      "title": "Static Result Saving and Repeat-Control History",
+      "purpose": "Save selected output and prevent duplication using static governed data.",
+      "public_output_allowed": false
+    },
+    {
+      "stage": "AG69S",
+      "title": "Existing Word Card Data Source Replacement",
+      "purpose": "Replace generated/word-of-day.json only after approved output-test gate; no duplicate UI.",
+      "public_output_allowed": true
+    },
+    {
+      "stage": "AG69Z",
+      "title": "Word of the Day Governed Pipeline Closure",
+      "purpose": "Close Word pipeline and preserve source-of-truth records.",
+      "public_output_allowed": true
+    }
+  ],
+  "blocked_until_specific_stage": {
+    "source_evidence_attachment": "AG69M",
+    "reviewed_bank_creation": "AG69N",
+    "approved_bank_creation": "AG69O",
+    "tithi_vara_selector_activation": "After AG69P and Panchang methodology validation",
+    "generated_word_replacement": "AG69S",
+    "ui_change": "AG69S existing-card update only"
+  }
+}

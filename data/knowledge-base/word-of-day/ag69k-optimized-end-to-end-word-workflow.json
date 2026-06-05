@@ -1,0 +1,80 @@
+{
+  "module_id": "AG69K",
+  "title": "Optimized End-to-End Word of the Day Workflow",
+  "status": "optimized_end_to_end_word_workflow_defined",
+  "workflow": [
+    {
+      "step": 1,
+      "name": "asset_discovery",
+      "description": "Before every Word patch, discover all Word-related assets across D/AD/ADB/AG48/AG56/AG63/AG69/generated/UI/scripts/docs.",
+      "output": "asset_inventory_and_logic_context"
+    },
+    {
+      "step": 2,
+      "name": "candidate_word_pool",
+      "description": "Use D02/AG69 candidate records only as seed/candidate pool; do not treat preview approval as final approval.",
+      "output": "candidate_word_records"
+    },
+    {
+      "step": 3,
+      "name": "lexical_source_capture",
+      "description": "Capture exact lexical/source evidence for pilot words with source_access_checked and reuse_note_checked.",
+      "output": "manual_evidence_records"
+    },
+    {
+      "step": 4,
+      "name": "language_and_form_validation",
+      "description": "Validate Sanskrit/Hindi form, meaning support, transliteration/script discipline and internal textual discipline.",
+      "output": "evidence_attached_records_public_false"
+    },
+    {
+      "step": 5,
+      "name": "reviewed_bank_gate",
+      "description": "Promote only evidence-complete records to reviewed bank.",
+      "output": "reviewed_word_bank"
+    },
+    {
+      "step": 6,
+      "name": "approved_bank_gate",
+      "description": "Approve only reviewed records that pass source, language, claim-level and public-use gates.",
+      "output": "approved_word_bank"
+    },
+    {
+      "step": 7,
+      "name": "selection_engine",
+      "description": "Use approved bank only. Selector may combine duplicate-control, Tithi, Vara, festival/theme context only after Panchang methodology validation.",
+      "output": "selected_daily_word_candidate"
+    },
+    {
+      "step": 8,
+      "name": "daily_output_generation",
+      "description": "Generate bounded Word output from approved selected record; no AI invention and no unsupported etymology/classical/scriptural claim.",
+      "output": "ag69_generated_word_output_candidate"
+    },
+    {
+      "step": 9,
+      "name": "result_saving_model",
+      "description": "Save daily result and duplicate-control history in static governed data first; Supabase/database remains blocked until approved.",
+      "output": "static_result_history"
+    },
+    {
+      "step": 10,
+      "name": "existing_ui_update",
+      "description": "Update existing homepage Word card data source only; do not create duplicate card.",
+      "output": "existing_word_card_updated_after_gate"
+    },
+    {
+      "step": 11,
+      "name": "closure",
+      "description": "Record closure with no backend/Auth/V02 activation unless separately approved.",
+      "output": "word_module_closure"
+    }
+  ],
+  "optimization_rules": [
+    "One selector only: merge useful D02/AG48/AG69 selection logic instead of running parallel selectors.",
+    "One public Word card only: preserve existing UI.",
+    "One governed output path only: AG69 approved bank must eventually replace AG63 preview output through a controlled replacement stage.",
+    "Adjacent Sutra/Mantra/Reflection logic is preserved as context but excluded from Word runtime now.",
+    "Scout sources are not evidence until exact manual lookup is captured."
+  ]
+}
