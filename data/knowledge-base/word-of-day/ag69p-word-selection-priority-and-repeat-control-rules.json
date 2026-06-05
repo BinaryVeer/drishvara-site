@@ -1,0 +1,21 @@
+{
+  "module_id": "AG69P",
+  "title": "Word Selection Priority and Repeat-Control Rules",
+  "status": "word_selection_priority_repeat_control_rules_defined",
+  "priority_order": [
+    "approved_bank_filter",
+    "public_output_block_filter",
+    "recent_duplicate_filter",
+    "festival_or_observance_theme_match",
+    "tithi_context_theme_match",
+    "vara_context_theme_match",
+    "general_theme_match",
+    "fallback_oldest_non_recent_approved_record"
+  ],
+  "duplicate_control": {
+    "repeat_window_policy": "do_not_repeat_if_legacy_word_id_in_recent_output_word_ids",
+    "fallback_policy": "select first approved pilot record not present in recent_output_word_ids",
+    "if_all_recent_policy": "select first approved pilot record but mark repeat_pressure=true for future review"
+  },
+  "current_stage_runtime_status": "static_dry_run_only"
+}

@@ -1,0 +1,118 @@
+{
+  "module_id": "AG69P",
+  "title": "Selector Dry-Run Result",
+  "status": "selector_dry_run_completed_no_runtime_activation",
+  "dry_run_count": 4,
+  "approved_bank_record_count": 3,
+  "panchang_values_generated": false,
+  "runtime_selector_active_now": false,
+  "public_output_allowed": false,
+  "generated_output_created": false,
+  "generated_word_json_modified": false,
+  "ui_display_changed": false,
+  "dry_run_selections": [
+    {
+      "selection_test_id": "ag69p_test_001_theme_reflection",
+      "selection_date_key": "static-test-date-001",
+      "context_used": {
+        "festival_context_key": null,
+        "observance_context_key": null,
+        "tithi_context_key": null,
+        "vara_context_key": null,
+        "theme_context_key": "reflection",
+        "recent_output_word_ids": []
+      },
+      "selected_approved_record_id": "ag69o_approved_001_reflection",
+      "selected_legacy_word_id": "reflection",
+      "selected_english": "Reflection",
+      "selected_hindi": "मनन",
+      "selected_sanskrit": "मननम्",
+      "selection_reason": "context_theme_match_after_duplicate_filter",
+      "repeat_pressure": false,
+      "public_output_allowed": false,
+      "runtime_selector_active_now": false,
+      "generated_output_created": false
+    },
+    {
+      "selection_test_id": "ag69p_test_002_duplicate_control",
+      "selection_date_key": "static-test-date-002",
+      "context_used": {
+        "festival_context_key": null,
+        "observance_context_key": null,
+        "tithi_context_key": null,
+        "vara_context_key": null,
+        "theme_context_key": "reflection",
+        "recent_output_word_ids": [
+          "reflection"
+        ]
+      },
+      "selected_approved_record_id": "ag69o_approved_002_discernment",
+      "selected_legacy_word_id": "discernment",
+      "selected_english": "Discernment",
+      "selected_hindi": "विवेक",
+      "selected_sanskrit": "विवेकः",
+      "selection_reason": "fallback_oldest_non_recent_approved_record",
+      "repeat_pressure": false,
+      "public_output_allowed": false,
+      "runtime_selector_active_now": false,
+      "generated_output_created": false
+    },
+    {
+      "selection_test_id": "ag69p_test_003_vara_context_label_only",
+      "selection_date_key": "static-test-date-003",
+      "context_used": {
+        "festival_context_key": null,
+        "observance_context_key": null,
+        "tithi_context_key": null,
+        "vara_context_key": "patience",
+        "theme_context_key": null,
+        "recent_output_word_ids": [
+          "reflection",
+          "discernment"
+        ]
+      },
+      "selected_approved_record_id": "ag69o_approved_003_patience",
+      "selected_legacy_word_id": "patience",
+      "selected_english": "Patience",
+      "selected_hindi": "धैर्य",
+      "selected_sanskrit": "धैर्यम्",
+      "selection_reason": "context_theme_match_after_duplicate_filter",
+      "repeat_pressure": false,
+      "public_output_allowed": false,
+      "runtime_selector_active_now": false,
+      "generated_output_created": false
+    },
+    {
+      "selection_test_id": "ag69p_test_004_tithi_context_label_only",
+      "selection_date_key": "static-test-date-004",
+      "context_used": {
+        "festival_context_key": null,
+        "observance_context_key": null,
+        "tithi_context_key": "discernment",
+        "vara_context_key": null,
+        "theme_context_key": null,
+        "recent_output_word_ids": [
+          "reflection"
+        ]
+      },
+      "selected_approved_record_id": "ag69o_approved_002_discernment",
+      "selected_legacy_word_id": "discernment",
+      "selected_english": "Discernment",
+      "selected_hindi": "विवेक",
+      "selected_sanskrit": "विवेकः",
+      "selection_reason": "context_theme_match_after_duplicate_filter",
+      "repeat_pressure": false,
+      "public_output_allowed": false,
+      "runtime_selector_active_now": false,
+      "generated_output_created": false
+    }
+  ],
+  "dry_run_assertions": {
+    "all_selected_from_approved_bank": true,
+    "all_public_output_blocked": true,
+    "no_runtime_selector_activation": true,
+    "duplicate_control_tested": true,
+    "tithi_context_label_tested_without_calculation": true,
+    "vara_context_label_tested_without_calculation": true
+  }
+}
