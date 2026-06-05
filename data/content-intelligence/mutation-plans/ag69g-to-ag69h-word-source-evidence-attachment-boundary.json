@@ -1,0 +1,29 @@
+{
+  "module_id": "AG69G",
+  "title": "AG69G to AG69H Word Source Evidence Attachment Boundary",
+  "status": "ag69h_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Attach exact source_reference_id evidence to selected draft records.",
+    "Record found / not_found / partial / needs_manual_review source evidence status.",
+    "Do not bulk-copy source text.",
+    "Update reviewed-draft status only where evidence supports it.",
+    "Keep public_output_allowed=false."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "bulk dictionary/book content ingestion",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "active tithi/vara word selection",
+    "Panchang value generation",
+    "UI display change",
+    "public attribution of internal study influence",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

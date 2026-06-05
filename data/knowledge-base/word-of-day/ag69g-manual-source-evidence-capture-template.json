@@ -1,0 +1,35 @@
+{
+  "module_id": "AG69G",
+  "title": "Manual Source Evidence Capture Template",
+  "status": "manual_source_evidence_template_created",
+  "template_only": true,
+  "source_reference_bank_used": "data/knowledge-base/word-of-day/ag69d-source-reference-bank-metadata.json",
+  "available_source_reference_count": 8,
+  "required_fields_for_future_evidence_attachment": [
+    "draft_id",
+    "legacy_word_id",
+    "source_reference_id",
+    "source_evidence_scope",
+    "source_evidence_status",
+    "word_form_found",
+    "meaning_supported",
+    "transliteration_supported",
+    "claim_level_supported",
+    "reuse_note_checked",
+    "reviewer_note",
+    "public_use_permission_after_review"
+  ],
+  "allowed_source_evidence_status_values": [
+    "found",
+    "not_found",
+    "partial",
+    "needs_manual_review",
+    "blocked"
+  ],
+  "prohibited_storage": [
+    "bulk dictionary entries",
+    "book chapter text",
+    "copyrighted source excerpts beyond fair citation/review limits",
+    "AI-generated source substitute"
+  ]
+}

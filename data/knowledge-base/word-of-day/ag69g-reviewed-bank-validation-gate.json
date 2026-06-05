@@ -1,0 +1,18 @@
+{
+  "module_id": "AG69G",
+  "title": "Reviewed-Bank Validation Gate",
+  "status": "reviewed_bank_validation_gate_defined",
+  "validation_requirements": [
+    "source_reference_ids must contain at least one approved source-reference metadata ID",
+    "source_evidence_attached must be true",
+    "source_status must be source_checked or approved_source",
+    "language_review_status must be reviewed or approved",
+    "safety_review_status must be reviewed or approved",
+    "editorial_review_status must be reviewed or approved",
+    "internal_textual_discipline_check must be passed or not_applicable",
+    "public_use_permission must be allowed_after_review or approved_for_public_output",
+    "public_output_allowed must remain false at reviewed-bank stage"
+  ],
+  "reviewed_bank_creation_allowed_now": false,
+  "reason": "Existing AG69F draft records have no attached source_reference_ids or source evidence."
+}

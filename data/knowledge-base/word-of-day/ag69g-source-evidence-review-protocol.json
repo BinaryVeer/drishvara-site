@@ -1,0 +1,25 @@
+{
+  "module_id": "AG69G",
+  "title": "Word Source Evidence Review Protocol",
+  "status": "source_evidence_review_protocol_defined",
+  "consumed_previous_stage": "AG69F",
+  "principle": "No evidence-pending Word record may become reviewed unless exact source evidence is attached and checked. AG69G defines and runs the validation gate; it does not fabricate evidence.",
+  "required_evidence_slots": [
+    "sanskrit_form_evidence",
+    "hindi_form_evidence",
+    "meaning_context_evidence",
+    "transliteration_review",
+    "internal_textual_discipline_check",
+    "public_use_permission_review",
+    "editorial_review"
+  ],
+  "source_rules": [
+    "Use source metadata from AG69D source-reference bank.",
+    "Do not copy bulk dictionary or book content into the repo.",
+    "Do not treat AG63/D02 preview status as AG69 source approval.",
+    "Do not use AI-generated meanings as source evidence.",
+    "Do not make etymology, classical or scriptural claims unless separate verified source evidence exists.",
+    "Nityanand Misra aligned published works remain candidate review inputs only unless exact work/edition is independently verified."
+  ],
+  "public_output_rule": "Reviewed-bank validation cannot produce public output. Public output remains blocked until a later approved-bank and output-test stage."
+}
