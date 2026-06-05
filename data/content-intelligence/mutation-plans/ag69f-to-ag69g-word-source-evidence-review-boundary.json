@@ -1,0 +1,30 @@
+{
+  "module_id": "AG69F",
+  "title": "AG69F to AG69G Word Source Evidence Review Boundary",
+  "status": "ag69g_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Review each evidence-pending draft.",
+    "Attach actual source_reference_id metadata where verified.",
+    "Mark found/not found/manual review evidence status.",
+    "Create reviewed-bank validation only for records passing source and language checks.",
+    "Keep public_output_allowed=false until approved-bank stage."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "bulk dictionary/book content ingestion",
+    "direct legacy preview to approved migration",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "active tithi/vara word selection",
+    "Panchang value generation",
+    "UI display change",
+    "public attribution of internal study influence",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

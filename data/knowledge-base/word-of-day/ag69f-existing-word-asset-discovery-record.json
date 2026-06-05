@@ -1,0 +1,57 @@
+{
+  "module_id": "AG69F",
+  "title": "Existing Word Asset Discovery Record",
+  "status": "existing_word_assets_discovered",
+  "current_git_context": {
+    "branch": "main",
+    "head": "5f9d2ec",
+    "head_full": "5f9d2ec6d5675cdedcd778ace3e15c6ae23f71b3",
+    "origin_main": "5f9d2ec",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag69f-legacy-word-bank-evidence-alignment-reviewed-draft.mjs\n?? scripts/validate-ag69f-legacy-word-bank-evidence-alignment-reviewed-draft.mjs"
+  },
+  "discovered_assets": {
+    "d02_word_bank": {
+      "path": "data/knowledge/daily-guidance/word-of-day-bank-d02.json",
+      "status": "curated_bank_scaffold",
+      "item_count": 12,
+      "approved_count": 11,
+      "needs_review_count": 1,
+      "item_fields": [
+        "id",
+        "meaning_en",
+        "meaning_hi",
+        "review_status",
+        "theme",
+        "usage_context",
+        "word_en",
+        "word_hi",
+        "word_sanskrit"
+      ]
+    },
+    "d02_rotation_policy": {
+      "path": "data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json",
+      "status": "policy_scaffold",
+      "public_rotation_enabled": false
+    },
+    "ag63_preview_bank": {
+      "path": "data/initial-working-data/word-of-day/ag63a-word-bank-approved-preview.json",
+      "status": "approved_preview_word_bank_created",
+      "item_count": 11
+    },
+    "ag63_initial_working_data": {
+      "path": "data/initial-working-data/word-of-day/ag63a-word-of-the-day-initial-working-data.json",
+      "status": "initial_working_data_created_not_publicly_wired"
+    },
+    "generated_word_output": {
+      "path": "generated/word-of-day.json",
+      "module_id": "AG63A",
+      "status": "initial_word_of_day_ready_not_publicly_wired",
+      "public_ui_ready": false,
+      "dynamic_rotation_active": false,
+      "ai_generation_active": false,
+      "source_expansion_active": false,
+      "available_preview_bank_count": 11
+    }
+  },
+  "conclusion": "Legacy D02/AG63 word records are working-data/approved-preview records, but not AG69 source-evidence approved records."
+}

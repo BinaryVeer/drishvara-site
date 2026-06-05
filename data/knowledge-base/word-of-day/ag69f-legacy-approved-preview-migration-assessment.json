@@ -1,0 +1,21 @@
+{
+  "module_id": "AG69F",
+  "title": "Legacy Approved Preview Migration Assessment",
+  "status": "migration_assessed_no_record_migrated_to_approved",
+  "d02_approved_count": 11,
+  "ag63_preview_count": 11,
+  "migration_to_ag69_reviewed_now": false,
+  "migration_to_ag69_approved_now": false,
+  "approved_bank_created_now": false,
+  "reason": "Legacy records contain useful curated preview fields but do not yet carry AG69 source_reference_id, source_status=approved_source, internal_textual_discipline_check, or approved public-use permission.",
+  "allowed_future_migration": [
+    "legacy_preview_to_evidence_pending",
+    "evidence_pending_to_reviewed_draft_after_source_evidence",
+    "reviewed_draft_to_approved_only_after AG69 approval validator passes"
+  ],
+  "blocked_now": [
+    "direct legacy approved-preview to AG69 approved",
+    "direct generated/word-of-day.json replacement",
+    "direct public output expansion"
+  ]
+}

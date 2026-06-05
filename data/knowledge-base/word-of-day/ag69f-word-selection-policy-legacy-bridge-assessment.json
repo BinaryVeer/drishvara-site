@@ -1,0 +1,34 @@
+{
+  "module_id": "AG69F",
+  "title": "Word Selection Policy Legacy Bridge Assessment",
+  "status": "selection_policy_bridge_assessed_not_active",
+  "legacy_rotation_policy": {
+    "path": "data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json",
+    "status": "policy_scaffold",
+    "public_rotation_enabled": false,
+    "rotation_basis_future": [
+      "calendar date",
+      "theme balance",
+      "avoid recent repetition",
+      "manual editorial override after review"
+    ]
+  },
+  "ag69e_selection_context_doctrine": {
+    "path": "data/knowledge-base/word-of-day/ag69e-word-selection-context-doctrine.json",
+    "status": "selection_context_doctrine_recorded_not_active",
+    "context_inputs_future": [
+      "tithi",
+      "vara_weekday",
+      "festival_or_observance_context",
+      "seasonal_or_cultural_context",
+      "historical_or_traditional_relevance",
+      "planetary_or_symbolic_association_only_if_source_backed",
+      "previously_used_word_duplication_check"
+    ]
+  },
+  "bridge_conclusion": "Legacy D02 rotation can be treated as older static rotation context only. Future selector must use approved word bank plus approved daily context including Tithi/Vara where available.",
+  "active_tithi_vara_selection_started": false,
+  "panchang_value_generation_started": false,
+  "dynamic_rotation_active_now": false,
+  "generated_word_json_modified": false
+}
