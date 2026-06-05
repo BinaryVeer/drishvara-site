@@ -1,0 +1,31 @@
+{
+  "module_id": "AG69I",
+  "title": "AG69I to AG69J Manual Source Evidence Capture Boundary",
+  "status": "ag69j_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Capture exact manual source evidence for the pilot words.",
+    "Attach source_reference_id only where the source lookup is actually verified.",
+    "Record found / not_found / partial / needs_manual_review / blocked status.",
+    "Keep public_output_allowed=false.",
+    "Do not copy bulk dictionary/book content."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "bulk dictionary/book content ingestion",
+    "source promotion to approved_source without exact verification",
+    "reviewed word bank creation",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "active tithi/vara word selection",
+    "Panchang value generation",
+    "UI display change",
+    "public attribution of internal study influence",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

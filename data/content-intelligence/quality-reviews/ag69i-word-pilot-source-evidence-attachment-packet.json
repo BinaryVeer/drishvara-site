@@ -1,0 +1,62 @@
+{
+  "module_id": "AG69I",
+  "title": "Word Pilot Source Evidence Selection and Attachment Packet",
+  "status": "ag69i_word_pilot_source_evidence_attachment_packet_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "cec38d8",
+    "head_full": "cec38d8e2f1bc6241c67f0b760881d6021a3b8d5",
+    "origin_main": "cec38d8",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag69i-word-pilot-source-evidence-attachment-packet.mjs\n?? scripts/validate-ag69i-word-pilot-source-evidence-attachment-packet.mjs"
+  },
+  "consumed_previous_stage": {
+    "stage": "AG69H",
+    "source_file": "data/content-intelligence/quality-reviews/ag69h-source-reference-hardening-evidence-attachment-readiness.json",
+    "status": "ag69h_source_reference_hardening_evidence_attachment_readiness_completed"
+  },
+  "generated_records": {
+    "pilotSelection": "data/knowledge-base/word-of-day/ag69i-pilot-word-selection-record.json",
+    "lookupPacket": "data/knowledge-base/word-of-day/ag69i-pilot-source-lookup-task-packet.json",
+    "attachmentAttempt": "data/knowledge-base/word-of-day/ag69i-source-evidence-attachment-attempt-no-records-attached.json",
+    "draftPreservationAudit": "data/knowledge-base/word-of-day/ag69i-word-draft-preservation-audit.json",
+    "sourcePreservationAudit": "data/knowledge-base/word-of-day/ag69i-source-reference-preservation-audit.json",
+    "manualEvidenceTemplate": "data/knowledge-base/word-of-day/ag69i-manual-evidence-entry-template.json",
+    "noMutationAudit": "data/knowledge-base/word-of-day/ag69i-no-generated-word-mutation-audit.json",
+    "noBackend": "data/content-intelligence/backend-architecture/ag69i-no-backend-auth-rls-database-runtime-audit.json",
+    "noV02": "data/content-intelligence/backend-architecture/ag69i-no-v02-expansion-audit.json",
+    "readiness": "data/content-intelligence/quality-registry/ag69i-ag69j-manual-source-evidence-capture-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag69i-to-ag69j-manual-source-evidence-capture-boundary.json",
+    "review": "data/content-intelligence/quality-reviews/ag69i-word-pilot-source-evidence-attachment-packet.json",
+    "registry": "data/quality/ag69i-word-pilot-source-evidence-attachment-packet.json",
+    "preview": "data/quality/ag69i-word-pilot-source-evidence-attachment-packet-preview.json",
+    "doc": "docs/quality/AG69I_WORD_PILOT_SOURCE_EVIDENCE_ATTACHMENT_PACKET.md"
+  },
+  "summary": {
+    "ag69h_consumed": true,
+    "pilot_word_selection_created": true,
+    "pilot_selected_count": 3,
+    "pilot_source_lookup_tasks_created": true,
+    "manual_evidence_template_created": true,
+    "source_evidence_attachment_attempted": true,
+    "source_evidence_attached_count": 0,
+    "source_reference_ids_attached_count": 0,
+    "source_promoted_count": 0,
+    "reviewed_records_created": false,
+    "approved_records_created": false,
+    "reviewed_bank_created": false,
+    "approved_bank_created": false,
+    "public_output_from_word_records_allowed": false,
+    "source_content_ingested": false,
+    "bulk_copyrighted_ingestion": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "active_tithi_vara_selection_started": false,
+    "panchang_value_generation_started": false,
+    "supabase_database_write_performed": false,
+    "backend_runtime_activated": false,
+    "database_runtime_activated": false,
+    "service_role_used": false,
+    "v02_expansion_started": false,
+    "ready_for_ag69j": true
+  }
+}
