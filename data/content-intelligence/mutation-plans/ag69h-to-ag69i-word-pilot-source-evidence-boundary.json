@@ -1,0 +1,31 @@
+{
+  "module_id": "AG69H",
+  "title": "AG69H to AG69I Word Pilot Source Evidence Boundary",
+  "status": "ag69i_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Select a very small pilot set of word records.",
+    "Attach source_reference_id metadata only where exact source lookup has been manually verified.",
+    "Record found / not_found / partial / needs_manual_review / blocked evidence status.",
+    "Keep public_output_allowed=false.",
+    "Do not copy bulk dictionary/book content."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "bulk dictionary/book content ingestion",
+    "source promotion to approved_source without exact verification",
+    "reviewed word bank creation",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "active tithi/vara word selection",
+    "Panchang value generation",
+    "UI display change",
+    "public attribution of internal study influence",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

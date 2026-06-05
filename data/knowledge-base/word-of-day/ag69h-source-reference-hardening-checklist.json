@@ -1,0 +1,48 @@
+{
+  "module_id": "AG69H",
+  "title": "Source Reference Hardening Checklist",
+  "status": "source_reference_hardening_checklist_created",
+  "consumed_previous_stage": "AG69G",
+  "principle": "A source-reference record must be hardened before it can be used as source evidence for a Word record. AG69H defines the hardening checklist but does not promote source records.",
+  "source_reference_count": 8,
+  "checklist": [
+    {
+      "gate_id": "access_reachability_check",
+      "requirement": "Source URL or repository reference must be reachable or independently locatable.",
+      "required_before_evidence_attachment": true
+    },
+    {
+      "gate_id": "institution_or_publisher_check",
+      "requirement": "Publisher/institution must be recorded and credible for the relevant source category.",
+      "required_before_evidence_attachment": true
+    },
+    {
+      "gate_id": "source_scope_check",
+      "requirement": "Source scope must match the evidence claim: Sanskrit form, Hindi form, meaning, corpus attestation, Vedic context, or published textual discipline.",
+      "required_before_evidence_attachment": true
+    },
+    {
+      "gate_id": "reuse_copyright_check",
+      "requirement": "Reuse note must confirm metadata-only use or permitted excerpt limits; bulk ingestion remains blocked.",
+      "required_before_evidence_attachment": true
+    },
+    {
+      "gate_id": "public_claim_check",
+      "requirement": "Public claim remains blocked unless source is approved and record-level evidence supports the exact claim.",
+      "required_before_public_output": true
+    },
+    {
+      "gate_id": "internal_discipline_boundary_check",
+      "requirement": "Internal textual discipline or Nityanand Misra aligned published-work handling cannot become public attribution without exact work verification and public-use approval.",
+      "required_before_public_output": true
+    }
+  ],
+  "blocked_now": [
+    "source_status_promotion_to_approved_source",
+    "source_claim_allowed_now",
+    "word_record_source_attachment",
+    "reviewed_word_record_creation",
+    "approved_word_record_creation",
+    "generated_word_json_replacement"
+  ]
+}

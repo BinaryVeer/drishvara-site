@@ -1,0 +1,73 @@
+{
+  "module_id": "AG69H",
+  "title": "Manual Verification Fields Contract",
+  "status": "manual_verification_fields_contract_created",
+  "purpose": "Defines exact fields required in AG69I or later when manual source evidence is attached to selected word records.",
+  "required_fields": [
+    "evidence_id",
+    "draft_id",
+    "legacy_word_id",
+    "source_reference_id",
+    "source_category",
+    "field_checked",
+    "word_form_found_status",
+    "meaning_supported_status",
+    "transliteration_supported_status",
+    "claim_level_supported",
+    "reuse_note_checked",
+    "source_access_checked",
+    "internal_textual_discipline_check",
+    "reviewer_note",
+    "review_status_after_evidence",
+    "public_use_permission_after_review",
+    "public_output_allowed"
+  ],
+  "allowed_status_values": {
+    "word_form_found_status": [
+      "found",
+      "not_found",
+      "partial",
+      "needs_manual_review",
+      "blocked"
+    ],
+    "meaning_supported_status": [
+      "supported",
+      "not_supported",
+      "partial",
+      "needs_manual_review",
+      "blocked"
+    ],
+    "transliteration_supported_status": [
+      "supported",
+      "not_supported",
+      "not_applicable",
+      "needs_manual_review",
+      "blocked"
+    ],
+    "claim_level_supported": [
+      "label_only",
+      "definition",
+      "translation",
+      "usage_context",
+      "blocked"
+    ],
+    "internal_textual_discipline_check": [
+      "pending",
+      "passed",
+      "failed",
+      "not_applicable"
+    ],
+    "review_status_after_evidence": [
+      "evidence_pending",
+      "evidence_attached",
+      "needs_manual_review",
+      "blocked"
+    ],
+    "public_use_permission_after_review": [
+      "not_allowed",
+      "allowed_after_review",
+      "approved_for_public_output"
+    ]
+  },
+  "public_output_rule": "AG69I evidence attachment may still keep public_output_allowed=false. Public output requires a later approved-bank and output-test stage."
+}
