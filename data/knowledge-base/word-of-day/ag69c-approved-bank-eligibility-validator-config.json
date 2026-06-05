@@ -1,0 +1,23 @@
+{
+  "module_id": "AG69C",
+  "title": "Approved Bank Eligibility Validator Config",
+  "status": "approved_bank_eligibility_validator_defined",
+  "eligibility_rules": [
+    "bank_class must be reviewed or approved before approval evaluation",
+    "source_reference_id must be present",
+    "source_status must be approved_source",
+    "review_status must be approved",
+    "public_use_permission must be approved_for_public_output",
+    "public_output_allowed must be true",
+    "language_review_status must be approved",
+    "safety_review_status must be approved",
+    "editorial_review_status must be approved",
+    "internal_textual_discipline_check must be passed or not_applicable",
+    "etymology_claim_allowed may be true only if etymology source is verified",
+    "classical_claim_allowed may be true only if classical/source context is verified"
+  ],
+  "candidate_records_eligible_now": false,
+  "reason_candidate_records_not_eligible": "AG69B records have no authenticated source reference, no approved source status, no approved review status and no public-use permission.",
+  "approved_bank_creation_now": false,
+  "public_output_creation_now": false
+}

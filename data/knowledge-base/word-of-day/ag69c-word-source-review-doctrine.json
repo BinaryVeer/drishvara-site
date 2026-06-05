@@ -1,0 +1,36 @@
+{
+  "module_id": "AG69C",
+  "title": "Word of the Day Source Review Doctrine",
+  "status": "source_review_doctrine_defined",
+  "consumed_previous_stage": "AG69B",
+  "principle": "No Word of the Day record may move from candidate to reviewed or approved without authenticated source review, language review, safety review and editorial approval.",
+  "minimum_source_requirements_for_approved_record": [
+    "At least one authenticated lexical or published source reference for the word form and basic meaning.",
+    "If Sanskrit form is used, Sanskrit lexical/source confirmation is required.",
+    "If Hindi form is used, Hindi lexical/source confirmation is required.",
+    "If transliteration is used, transliteration review is required.",
+    "If etymology is claimed, a separate verified etymology source is required.",
+    "If classical/scriptural context is claimed, a separate verified text/context source is required.",
+    "If no source is available, the record remains candidate or rejected."
+  ],
+  "allowed_source_recording": [
+    "source_reference_id",
+    "source_title",
+    "source_type",
+    "source_url_or_repository_note",
+    "publisher_or_institution",
+    "access_status",
+    "reuse_note",
+    "allowed_use",
+    "blocked_use",
+    "public_attribution_allowed",
+    "review_status"
+  ],
+  "blocked_behaviour": [
+    "AI-generated meaning treated as source.",
+    "Unverified Sanskrit word treated as approved.",
+    "Loose transliteration treated as approved.",
+    "Unsupported etymology or classical claim.",
+    "Public display from candidate or reviewed records."
+  ]
+}

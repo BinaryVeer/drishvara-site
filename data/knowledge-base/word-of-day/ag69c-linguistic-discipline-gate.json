@@ -1,0 +1,31 @@
+{
+  "module_id": "AG69C",
+  "title": "Linguistic Discipline Gate",
+  "status": "linguistic_discipline_gate_defined",
+  "gate_fields_required_for_future_review": [
+    "sanskrit_form_review_status",
+    "hindi_form_review_status",
+    "transliteration_review_status",
+    "meaning_context_review_status",
+    "internal_textual_discipline_check",
+    "source_alignment_review_status",
+    "public_language_safety_status"
+  ],
+  "internal_textual_discipline_rule": {
+    "required": true,
+    "allowed_status_values": [
+      "pending",
+      "passed",
+      "failed",
+      "not_applicable"
+    ],
+    "public_attribution_allowed": false,
+    "note": "Internal textual discipline may guide quality and correctness, but it must not be publicly named or presented as authority unless a specific published work is independently verified, citable and public-use approved."
+  },
+  "blocked_public_language": [
+    "as per private/internal teacher",
+    "according to internal study influence",
+    "verified by private influence",
+    "source verified when the source is not independently recorded"
+  ]
+}

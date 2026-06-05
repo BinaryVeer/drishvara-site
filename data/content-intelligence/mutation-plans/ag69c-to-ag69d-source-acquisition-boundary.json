@@ -1,0 +1,28 @@
+{
+  "module_id": "AG69C",
+  "title": "AG69C to AG69D Source Acquisition Boundary",
+  "status": "ag69d_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create source-reference bank metadata.",
+    "Fetch or manually record authenticated source metadata only.",
+    "Record relevant published-work candidate sources only after verification.",
+    "Map candidate word records to source_reference_id only after source review.",
+    "Keep all candidate records blocked from public output."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "bulk copyrighted source ingestion",
+    "approved word bank creation without source review",
+    "generated/word-of-day.json replacement",
+    "public use of candidate or reviewed word records",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "unsupported Sanskrit claim",
+    "unsupported etymology claim",
+    "public attribution of internal study influence",
+    "V02 expansion"
+  ]
+}
