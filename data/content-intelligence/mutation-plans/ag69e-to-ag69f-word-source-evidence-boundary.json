@@ -1,0 +1,29 @@
+{
+  "module_id": "AG69E",
+  "title": "AG69E to AG69F Word Source Evidence Boundary",
+  "status": "ag69f_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Capture source evidence metadata for candidate words.",
+    "Record whether each word-form and meaning is found, not found, or needs manual review.",
+    "Create reviewed-record draft only where source evidence supports it.",
+    "Keep public_output_allowed=false unless later approval stage passes."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "dictionary/book content bulk ingestion",
+    "approved word bank creation",
+    "public word output generation",
+    "generated/word-of-day.json replacement",
+    "UI display change",
+    "public attribution of internal study influence",
+    "Nityanand Misra published-work public attribution without exact verification",
+    "unsupported Sanskrit claim",
+    "unsupported etymology claim",
+    "Supabase/database writes",
+    "backend/Auth/Supabase activation",
+    "runtime database query",
+    "service-role use",
+    "V02 expansion"
+  ]
+}

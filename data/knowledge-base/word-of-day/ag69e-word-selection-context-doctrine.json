@@ -1,0 +1,55 @@
+{
+  "module_id": "AG69E",
+  "title": "Word of the Day Selection Context Doctrine",
+  "status": "selection_context_doctrine_recorded_not_active",
+  "principle": "Word of the Day must not be randomly generated. Once an approved word bank exists, daily selection should consider Panchang and contextual signals before fallback selection.",
+  "selection_context_inputs_future": [
+    "tithi",
+    "vara_weekday",
+    "festival_or_observance_context",
+    "seasonal_or_cultural_context",
+    "historical_or_traditional_relevance",
+    "planetary_or_symbolic_association_only_if_source_backed",
+    "previously_used_word_duplication_check"
+  ],
+  "selection_sequence_future": [
+    "load_approved_word_bank",
+    "load_approved_daily_context",
+    "check_tithi",
+    "check_vara_weekday",
+    "check_festival_or_observance_context",
+    "check_source_backed_theme_mapping",
+    "remove_recently_used_words",
+    "select_best_matching_approved_word",
+    "fallback_to_approved_vedic_indic_value_word_if_no_context_match",
+    "save_selection_result",
+    "display_public_safe_output"
+  ],
+  "fallback_rule": {
+    "fallback_allowed": true,
+    "fallback_source": "approved_vedic_indic_value_word_bank_only",
+    "fallback_condition": "No valid approved tithi/vara/context mapping is available or all mapped words were recently used.",
+    "public_output_allowed_from_candidate_records": false
+  },
+  "blocked_now": [
+    "active_tithi_based_selection",
+    "active_vara_based_selection",
+    "planetary_claim_without_source",
+    "AI_generated_daily_word",
+    "public_output_from_candidate_records",
+    "generated_word_json_replacement",
+    "Panchang_value_generation",
+    "Supabase_database_write",
+    "backend_runtime_activation",
+    "V02_expansion"
+  ],
+  "required_before_activation": [
+    "approved_word_bank",
+    "approved_tithi_vara_context_mapping_bank",
+    "approved_panchang_or_daily_context source",
+    "duplication_check_rule",
+    "selection_result_saving_model",
+    "public_output_validator"
+  ],
+  "current_stage_note": "AG69E records the future selector doctrine only. It does not activate tithi/vara-based selection and does not generate any public Word of the Day output."
+}
