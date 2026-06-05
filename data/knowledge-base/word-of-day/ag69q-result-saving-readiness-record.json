@@ -1,0 +1,23 @@
+{
+  "module_id": "AG69Q",
+  "title": "Result Saving Readiness Record",
+  "status": "result_saving_readiness_record_created",
+  "ready_for_static_result_saving": true,
+  "static_result_saving_candidate_count_for_ag69r": 4,
+  "required_ag69r_fields": [
+    "output_test_id",
+    "legacy_word_id",
+    "selected_approved_record_id",
+    "selection_test_id",
+    "selection_reason",
+    "repeat_pressure",
+    "result_date_key",
+    "public_output_allowed",
+    "generated_word_json_replacement_allowed"
+  ],
+  "blocked_until_ag69s": [
+    "generated/word-of-day.json replacement",
+    "existing homepage Word card data-source replacement",
+    "public Word output activation"
+  ]
+}
