@@ -1,0 +1,13 @@
+{
+  "module_id": "AG70A",
+  "title": "Production Bank Validation Plan",
+  "status": "production_bank_validation_plan_created",
+  "validator_strategy": [
+    "Validate production manifest exists for every module.",
+    "Validate candidate/reviewed/approved lifecycle paths exist in registry.",
+    "Validate module-specific required fields are declared.",
+    "Validate no module claims output eligibility before approved records exist.",
+    "Validate generated output and UI remain unchanged during registry creation."
+  ],
+  "first_operational_validator_next": "AG70B Word production bank validator"
+}

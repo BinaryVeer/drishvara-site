@@ -1,0 +1,131 @@
+{
+  "module_id": "AG70A",
+  "title": "Production Record Schema Contract",
+  "status": "production_record_schema_contract_created",
+  "common_required_fields": [
+    "record_id",
+    "module_id",
+    "record_type",
+    "source_reference_ids",
+    "evidence_status",
+    "review_status",
+    "public_use_permission",
+    "created_stage",
+    "last_reviewed_stage"
+  ],
+  "common_allowed_review_status": [
+    "candidate",
+    "reviewed",
+    "approved",
+    "blocked"
+  ],
+  "common_allowed_public_use_permission": [
+    "not_allowed",
+    "allowed_after_review",
+    "approved_for_output"
+  ],
+  "module_specific_required_fields": {
+    "word_of_day": [
+      "word_id",
+      "english",
+      "hindi",
+      "sanskrit",
+      "meaning_en",
+      "meaning_hi",
+      "source_reference_ids",
+      "evidence_status",
+      "claim_level",
+      "review_status",
+      "public_use_permission",
+      "approved_for_selector",
+      "theme_tags",
+      "repeat_control_tags"
+    ],
+    "today_vedic_guidance": [
+      "guidance_id",
+      "theme",
+      "title",
+      "guidance_text_en",
+      "guidance_text_hi",
+      "source_reference_ids",
+      "claim_level",
+      "review_status",
+      "public_use_permission",
+      "mantra_alteration_blocked",
+      "approved_for_output"
+    ],
+    "panchang_festival_view": [
+      "observance_id",
+      "name_en",
+      "name_hi",
+      "observance_type",
+      "rule_basis",
+      "regional_variation",
+      "source_reference_ids",
+      "astronomical_calculation_status",
+      "editorial_note",
+      "review_status",
+      "public_use_permission"
+    ],
+    "upcoming_observance": [
+      "observance_id",
+      "display_date_rule",
+      "name_en",
+      "name_hi",
+      "summary_en",
+      "summary_hi",
+      "source_reference_ids",
+      "regional_variation",
+      "review_status",
+      "public_use_permission",
+      "approved_for_output"
+    ],
+    "first_light_daily_signals": [
+      "signal_id",
+      "signal_type",
+      "title",
+      "summary",
+      "source_reference_ids",
+      "selection_tags",
+      "review_status",
+      "public_use_permission",
+      "approved_for_output"
+    ],
+    "sports_desk": [
+      "sports_record_id",
+      "sport",
+      "event_name",
+      "date_key",
+      "source_reference_ids",
+      "context_note",
+      "archive_status",
+      "review_status",
+      "public_use_permission",
+      "approved_for_output"
+    ],
+    "star_reflection": [
+      "reflection_id",
+      "theme",
+      "prompt_en",
+      "prompt_hi",
+      "consent_safe_status",
+      "deterministic_claim_blocked",
+      "source_reference_ids",
+      "review_status",
+      "public_use_permission",
+      "approved_for_output"
+    ],
+    "psychometric_assessment": [
+      "item_id",
+      "construct",
+      "question_text",
+      "response_scale",
+      "scoring_rule",
+      "interpretation_boundary",
+      "validation_status",
+      "privacy_status",
+      "review_status",
+      "approved_for_assessment"
+    ]
+  }
+}

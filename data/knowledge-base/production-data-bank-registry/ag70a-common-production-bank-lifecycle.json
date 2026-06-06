@@ -1,0 +1,34 @@
+{
+  "module_id": "AG70A",
+  "title": "Common Production Bank Lifecycle",
+  "status": "common_production_bank_lifecycle_defined",
+  "lifecycle": [
+    {
+      "stage": "candidate",
+      "meaning": "Record exists in the module bank but is not yet trusted for public-facing output.",
+      "output_eligible": false
+    },
+    {
+      "stage": "reviewed",
+      "meaning": "Record has passed source/form/content review but is not yet approved for output.",
+      "output_eligible": false
+    },
+    {
+      "stage": "approved",
+      "meaning": "Record has passed source, safety, language, reuse and public-use checks.",
+      "output_eligible": true
+    },
+    {
+      "stage": "output_eligible",
+      "meaning": "Approved record can be consumed by the module methodology/selector after the module connector gate passes.",
+      "output_eligible": true
+    }
+  ],
+  "blocked_flow": [
+    "raw_to_output",
+    "ai_generated_to_output",
+    "candidate_to_public",
+    "reviewed_to_public_without_approval",
+    "unsupported_source_claim_to_public"
+  ]
+}

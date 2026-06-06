@@ -1,0 +1,22 @@
+{
+  "module_id": "AG70A",
+  "title": "AG70A to AG70B Word Production Data Bank Batch 01 Boundary",
+  "status": "ag70b_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create Word of the Day production candidate/reviewed/approved bank Batch 01.",
+    "Use sourced records only.",
+    "Store production records under data/knowledge-base/word-of-day/production/.",
+    "Validate required Word fields and public-use gates."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "AI-fabricated Sanskrit or meaning records",
+    "unsupported etymology or scriptural claim"
+  ]
+}
