@@ -32,8 +32,15 @@ if (ag70j.status !== "ag70j_panchang_computation_basis_lock_daily_bank_completed
 if (ag70j.summary?.ready_for_ag70k !== true) {
   throw new Error("AG70J readiness for AG70K is missing.");
 }
-if (pendingDailyBank.status !== "panchang_daily_calculation_bank_batch_01_created_pending_internal_computation") {
-  throw new Error("AG70J pending daily bank must exist before AG70K.");
+const allowedInputDailyBankStatusesForAg70k = [
+  "panchang_daily_calculation_bank_batch_01_created_pending_internal_computation",
+  "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked",
+  "panchang_daily_calculation_bank_batch_01_internal_validation_failed_public_blocked",
+  "panchang_daily_calculation_bank_batch_01_internally_validated_public_blocked"
+];
+
+if (!allowedInputDailyBankStatusesForAg70k.includes(pendingDailyBank.status)) {
+  throw new Error(`AG70J/AG70K daily bank must exist before AG70K regeneration. Found status: ${pendingDailyBank.status}`);
 }
 if (generatedWord.dynamic_rotation_active !== false || generatedWord.ai_generation_active !== false || generatedWord.source_expansion_active !== false) {
   throw new Error("generated/word-of-day.json must remain inactive.");
@@ -207,7 +214,27 @@ function sunriseSunsetUtcMs(dateKey, lat, lon, isRise) {
   let UT = T - lngHour;
   UT = ((UT % 24) + 24) % 24;
 
-  return Date.UTC(year, month - 1, day, 0, 0, 0) + UT * 3600000;
+  const baseUtc = Date.UTC(year, month - 1, day, 0, 0, 0);
+  let eventMs = baseUtc + UT * 3600000;
+
+  // AG70K correction:
+  // The NOAA-style UT value can wrap for eastern longitudes. For India, early
+  // morning sunrise may appear as late UTC on the same UTC date, which converts
+  // to next local date. Anchor the computed event back to the requested local
+  // date_key using the locked Asia/Kolkata offset.
+  const offsetMinutes = 330;
+  const localDateKey = (ms) => {
+    const local = new Date(ms + offsetMinutes * 60 * 1000);
+    const yyyy = local.getUTCFullYear();
+    const mm = String(local.getUTCMonth() + 1).padStart(2, "0");
+    const dd = String(local.getUTCDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
+  if (localDateKey(eventMs) > dateKey) eventMs -= 86400000;
+  if (localDateKey(eventMs) < dateKey) eventMs += 86400000;
+
+  return eventMs;
 }
 
 function isoLocal(ms, offsetMinutes) {

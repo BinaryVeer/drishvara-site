@@ -128,7 +128,8 @@ const panchangManifest = readJson("data/knowledge-base/panchang-festival/product
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_internal_panchang_astronomical_computation_model",
   "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01",
-  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run"
+  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run",
+  "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (![0, 7].includes(panchangManifest.current_counts.panchang_daily_records)) fail("Panchang daily records must be 0 before AG70K or 7 after AG70K.");

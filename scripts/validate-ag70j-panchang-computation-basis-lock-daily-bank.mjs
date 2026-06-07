@@ -60,7 +60,8 @@ if (internal.daily_values_generated_now !== false) fail("Daily values must not b
 const daily = readJson("data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json");
 const allowedDailyBankStatuses = [
   "panchang_daily_calculation_bank_batch_01_created_pending_internal_computation",
-  "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked"
+  "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked",
+  "panchang_daily_calculation_bank_batch_01_internally_validated_public_blocked"
 ];
 if (!allowedDailyBankStatuses.includes(daily.status)) fail("Daily bank status mismatch.");
 if (daily.daily_request_record_count !== 7) fail("Daily request record count must be 7.");
@@ -79,7 +80,7 @@ for (const record of daily.records) {
   }
 
   if (daily.status === "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked") {
-    if (record.record_status !== "computed_internal_dry_run_public_blocked") fail(`Record must be computed dry-run: ${record.panchang_daily_record_id}`);
+    if (!["computed_internal_dry_run_public_blocked", "internally_validated_public_blocked"].includes(record.record_status)) fail(`Record must be computed dry-run or internally validated: ${record.panchang_daily_record_id}`);
     if (record.computed_values_present !== true) fail(`Computed values must be present: ${record.panchang_daily_record_id}`);
     for (const field of ["tithi", "nakshatra", "yoga", "karana", "paksha", "vara"]) {
       if (record[field] === null || record[field] === undefined) fail(`${field} must be populated after computation: ${record.panchang_daily_record_id}`);
@@ -110,7 +111,8 @@ for (const key of [
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01",
-  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run"
+  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run",
+  "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.daily_calculation_request_records !== 7) fail("Manifest daily request count mismatch.");

@@ -45,7 +45,11 @@ for (const key of ["external_panchang_sites_used_as_source", "external_panchang_
 if (engine.public_output_allowed_now !== false) fail("Public output must be blocked.");
 
 const bank = readJson("data/knowledge-base/panchang-festival/production/panchang-computed-daily-bank-batch-01-internal-dry-run.json");
-if (bank.status !== "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked") fail("Computed daily bank status mismatch.");
+const allowedComputedBankStatuses = [
+  "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked",
+  "panchang_daily_calculation_bank_batch_01_internally_validated_public_blocked"
+];
+if (!allowedComputedBankStatuses.includes(bank.status)) fail("Computed daily bank status mismatch.");
 if (bank.computed_panchang_daily_record_count !== 7) fail("Computed daily bank count must be 7.");
 if (bank.fabricated_value_count !== 0) fail("Fabricated value count must be zero.");
 if (bank.external_site_input_count !== 0) fail("External site input count must be zero.");
@@ -53,7 +57,7 @@ if (bank.public_output_allowed_now !== false) fail("Public output must be blocke
 if (!Array.isArray(bank.records) || bank.records.length !== 7) fail("Computed bank must have 7 records.");
 
 for (const record of bank.records) {
-  if (record.record_status !== "computed_internal_dry_run_public_blocked") fail(`Record status mismatch: ${record.panchang_daily_record_id}`);
+  if (!["computed_internal_dry_run_public_blocked", "internally_validated_public_blocked"].includes(record.record_status)) fail(`Record status mismatch: ${record.panchang_daily_record_id}`);
   if (record.computed_values_present !== true) fail(`Computed values missing: ${record.panchang_daily_record_id}`);
   if (record.public_output_allowed !== false) fail(`Public output not blocked: ${record.panchang_daily_record_id}`);
   for (const field of [
@@ -108,7 +112,11 @@ for (const key of ["observance_events_created_now", "eclipse_events_created_now"
 }
 
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (panchangManifest.status !== "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run",
+  "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation"
+];
+if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.panchang_daily_records !== 7) fail("Manifest Panchang daily records must be 7.");
 if (panchangManifest.current_counts.computed_internal_dry_run_records !== 7) fail("Manifest dry-run count must be 7.");
 if (panchangManifest.current_counts.observance_events !== 0) fail("Observance events must be zero.");

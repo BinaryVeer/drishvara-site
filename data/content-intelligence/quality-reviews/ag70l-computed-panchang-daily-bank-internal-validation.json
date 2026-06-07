@@ -1,0 +1,57 @@
+{
+  "module_id": "AG70L",
+  "title": "Computed Panchang Daily Bank Internal Validation",
+  "status": "ag70l_computed_panchang_daily_bank_internal_validation_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "138a1494",
+    "head_full": "138a1494b53a05dc886deff9729135ce6bfad2ce",
+    "origin_main": "138a1494",
+    "status_at_generation": "M data/content-intelligence/quality-reviews/ag70k-internal-panchang-daily-computation-engine-dry-run.json\n M data/knowledge-base/panchang-festival/production/panchang-computed-daily-bank-batch-01-internal-dry-run.json\n M data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json\n M data/knowledge-base/panchang-festival/production/production-bank-manifest.json\n M package.json\n M scripts/generate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n?? data/content-intelligence/mutation-plans/ag70l-to-ag70m-festival-observance-rule-bank-boundary.json\n?? data/content-intelligence/quality-registry/ag70l-ag70m-festival-observance-rule-bank-readiness-record.json\n?? data/content-intelligence/quality-reviews/ag70l-computed-panchang-daily-bank-internal-validation.json\n?? data/knowledge-base/panchang-festival/production/ag70l-computed-panchang-daily-bank-internal-validation.json\n?? data/knowledge-base/panchang-festival/production/ag70l-internal-formula-validation-report.json\n?? data/knowledge-base/panchang-festival/production/ag70l-locked-basis-validation-report.json\n?? data/knowledge-base/panchang-festival/production/ag70l-no-external-panchang-validation-source-audit.json\n?? data/knowledge-base/panchang-festival/production/ag70l-no-public-output-audit.json\n?? data/knowledge-base/panchang-festival/production/ag70l-time-window-boundary-validation-report.json\n?? data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json\n?? data/quality/ag70l-computed-panchang-daily-bank-internal-validation-preview.json\n?? data/quality/ag70l-computed-panchang-daily-bank-internal-validation.json\n?? docs/quality/AG70L_COMPUTED_PANCHANG_DAILY_BANK_INTERNAL_VALIDATION.md\n?? scripts/generate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n?? scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70k_review": "data/content-intelligence/quality-reviews/ag70k-internal-panchang-daily-computation-engine-dry-run.json",
+    "computed_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-computed-daily-bank-batch-01-internal-dry-run.json"
+  },
+  "generated_records": {
+    "validationRun": "data/knowledge-base/panchang-festival/production/ag70l-computed-panchang-daily-bank-internal-validation.json",
+    "validatedDailyBank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json",
+    "computedDailyBank": "data/knowledge-base/panchang-festival/production/panchang-computed-daily-bank-batch-01-internal-dry-run.json",
+    "dailyBank": "data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json",
+    "validationReport": "data/knowledge-base/panchang-festival/production/ag70l-internal-formula-validation-report.json",
+    "boundaryReport": "data/knowledge-base/panchang-festival/production/ag70l-time-window-boundary-validation-report.json",
+    "lockedBasisReport": "data/knowledge-base/panchang-festival/production/ag70l-locked-basis-validation-report.json",
+    "noExternalValidationAudit": "data/knowledge-base/panchang-festival/production/ag70l-no-external-panchang-validation-source-audit.json",
+    "noPublicOutputAudit": "data/knowledge-base/panchang-festival/production/ag70l-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70l-computed-panchang-daily-bank-internal-validation.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70l-ag70m-festival-observance-rule-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70l-to-ag70m-festival-observance-rule-bank-boundary.json",
+    "quality": "data/quality/ag70l-computed-panchang-daily-bank-internal-validation.json",
+    "preview": "data/quality/ag70l-computed-panchang-daily-bank-internal-validation-preview.json",
+    "doc": "docs/quality/AG70L_COMPUTED_PANCHANG_DAILY_BANK_INTERNAL_VALIDATION.md"
+  },
+  "summary": {
+    "internal_validation_completed": true,
+    "internal_validation_passed": true,
+    "validated_record_count": 7,
+    "total_record_count": 7,
+    "internal_validation_issue_count": 0,
+    "formula_validation_completed": true,
+    "boundary_validation_completed": true,
+    "locked_basis_validation_completed": true,
+    "external_panchang_sites_used_as_validation_source": false,
+    "external_panchang_sites_used_as_source_of_truth": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_allowed_only_later_for_manual_comparison": true,
+    "public_panchang_output_allowed_now": false,
+    "actual_observance_events_created_now": false,
+    "actual_eclipse_events_created_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70m": true
+  }
+}
