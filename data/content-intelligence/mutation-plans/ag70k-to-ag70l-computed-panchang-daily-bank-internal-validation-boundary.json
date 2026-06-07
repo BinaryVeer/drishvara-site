@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70K",
+  "title": "AG70K to AG70L Computed Panchang Daily Bank Internal Validation Boundary",
+  "status": "ag70l_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Validate computed values against AG70I formulas and AG70J locked basis.",
+    "Check ranges, boundaries, timezone conversion, sunrise basis and null safety.",
+    "Keep external Panchang sites outside production validation.",
+    "Keep manual external comparison deferred until after internal validation."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "actual festival/observance date publication",
+    "actual eclipse event publication",
+    "context interpretation production records",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

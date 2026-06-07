@@ -1,0 +1,31 @@
+{
+  "module_id": "AG70K",
+  "title": "Internal Panchang Daily Computation Engine Dry Run",
+  "status": "ag70k_internal_panchang_daily_computation_engine_dry_run_completed",
+  "purpose": "Populate Batch 01 pending daily records with internally computed preliminary Panchang values.",
+  "computation_model_id": "drishvara_internal_panchang_model_v1",
+  "precision_class": "internal_dry_run_preliminary_astronomical_approximation",
+  "location_id": "loc_in_ar_itangar_capital_complex_001",
+  "ayanamsa_id": "ayanamsa_lahiri_chitrapaksha_internal_v1",
+  "date_range": {
+    "start": "2026-06-08",
+    "end": "2026-06-14"
+  },
+  "algorithm_basis": [
+    "approximate solar longitude",
+    "approximate lunar longitude",
+    "Lahiri/Chitrapaksha approximate ayanamsa value",
+    "Tithi from Moon-Sun angular difference / 12 degrees",
+    "Nakshatra from sidereal Moon longitude / 13°20′",
+    "Yoga from sidereal Sun+Moon longitude / 13°20′",
+    "Karana from Moon-Sun angular difference / 6 degrees",
+    "Paksha from Tithi half",
+    "Vara from civil local date preliminary dry-run basis",
+    "approximate sunrise/sunset using internal solar calculation"
+  ],
+  "external_panchang_sites_used_as_source": false,
+  "external_panchang_sites_used_for_data_generation": false,
+  "external_panchang_sites_used_as_runtime_dependency": false,
+  "computed_record_count": 7,
+  "public_output_allowed_now": false
+}

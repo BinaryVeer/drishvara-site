@@ -127,10 +127,11 @@ for (const key of ["generated_word_json_modified", "ui_display_changed", "supaba
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_internal_panchang_astronomical_computation_model",
-  "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01"
+  "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01",
+  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
-if (panchangManifest.current_counts.panchang_daily_records !== 0) fail("Panchang daily records must be zero.");
+if (![0, 7].includes(panchangManifest.current_counts.panchang_daily_records)) fail("Panchang daily records must be 0 before AG70K or 7 after AG70K.");
 if (panchangManifest.current_counts.observance_events !== 0) fail("Observance events must be zero.");
 if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must be zero.");
 

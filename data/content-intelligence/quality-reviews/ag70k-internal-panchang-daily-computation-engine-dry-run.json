@@ -1,0 +1,57 @@
+{
+  "module_id": "AG70K",
+  "title": "Internal Panchang Daily Computation Engine Dry Run",
+  "status": "ag70k_internal_panchang_daily_computation_engine_dry_run_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "49e1d386",
+    "head_full": "49e1d38613a3405f10d6e339926271ffe01c149b",
+    "origin_main": "49e1d386",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n?? scripts/generate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n?? scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70j_review": "data/content-intelligence/quality-reviews/ag70j-panchang-computation-basis-lock-daily-bank.json",
+    "pending_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json"
+  },
+  "generated_records": {
+    "engineDryRun": "data/knowledge-base/panchang-festival/production/ag70k-internal-panchang-daily-computation-engine-dry-run.json",
+    "computedDailyBank": "data/knowledge-base/panchang-festival/production/panchang-computed-daily-bank-batch-01-internal-dry-run.json",
+    "dailyBank": "data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json",
+    "invariantReport": "data/knowledge-base/panchang-festival/production/ag70k-internal-computation-invariant-report.json",
+    "noExternalAudit": "data/knowledge-base/panchang-festival/production/ag70k-no-external-panchang-source-audit.json",
+    "noPublicOutputAudit": "data/knowledge-base/panchang-festival/production/ag70k-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70k-internal-panchang-daily-computation-engine-dry-run.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70k-ag70l-computed-panchang-daily-bank-internal-validation-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70k-to-ag70l-computed-panchang-daily-bank-internal-validation-boundary.json",
+    "quality": "data/quality/ag70k-internal-panchang-daily-computation-engine-dry-run.json",
+    "preview": "data/quality/ag70k-internal-panchang-daily-computation-engine-dry-run-preview.json",
+    "doc": "docs/quality/AG70K_INTERNAL_PANCHANG_DAILY_COMPUTATION_ENGINE_DRY_RUN.md"
+  },
+  "summary": {
+    "internal_computation_engine_dry_run_completed": true,
+    "computed_record_count": 7,
+    "invariant_issue_count": 0,
+    "tithi_values_populated": true,
+    "nakshatra_values_populated": true,
+    "yoga_values_populated": true,
+    "karana_values_populated": true,
+    "paksha_values_populated": true,
+    "vara_values_populated": true,
+    "sunrise_sunset_values_populated": true,
+    "solar_lunar_longitude_values_populated": true,
+    "fabricated_panchang_value_count": 0,
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "public_panchang_output_allowed_now": false,
+    "actual_observance_events_created_now": false,
+    "actual_eclipse_events_created_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70l": true
+  }
+}

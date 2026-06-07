@@ -58,19 +58,34 @@ for (const key of ["external_panchang_sites_used_as_source", "external_panchang_
 if (internal.daily_values_generated_now !== false) fail("Daily values must not be generated.");
 
 const daily = readJson("data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json");
-if (daily.status !== "panchang_daily_calculation_bank_batch_01_created_pending_internal_computation") fail("Daily bank status mismatch.");
+const allowedDailyBankStatuses = [
+  "panchang_daily_calculation_bank_batch_01_created_pending_internal_computation",
+  "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked"
+];
+if (!allowedDailyBankStatuses.includes(daily.status)) fail("Daily bank status mismatch.");
 if (daily.daily_request_record_count !== 7) fail("Daily request record count must be 7.");
-if (daily.computed_panchang_daily_record_count !== 0) fail("Computed daily record count must be zero.");
+if (![0, 7].includes(daily.computed_panchang_daily_record_count)) fail("Computed daily record count must be 0 before AG70K or 7 after AG70K.");
 if (daily.fabricated_value_count !== 0) fail("Fabricated value count must be zero.");
 if (daily.external_site_input_count !== 0) fail("External site input count must be zero.");
 if (!Array.isArray(daily.records) || daily.records.length !== 7) fail("Daily bank must contain 7 pending records.");
 
 for (const record of daily.records) {
-  if (record.record_status !== "pending_internal_computation") fail(`Record must be pending: ${record.panchang_daily_record_id}`);
-  if (record.computed_values_present !== false) fail(`Computed values must be absent: ${record.panchang_daily_record_id}`);
-  for (const field of ["tithi", "nakshatra", "yoga", "karana", "paksha", "vara"]) {
-    if (record[field] !== null) fail(`${field} must be null before computation: ${record.panchang_daily_record_id}`);
+  if (daily.status === "panchang_daily_calculation_bank_batch_01_created_pending_internal_computation") {
+    if (record.record_status !== "pending_internal_computation") fail(`Record must be pending: ${record.panchang_daily_record_id}`);
+    if (record.computed_values_present !== false) fail(`Computed values must be absent: ${record.panchang_daily_record_id}`);
+    for (const field of ["tithi", "nakshatra", "yoga", "karana", "paksha", "vara"]) {
+      if (record[field] !== null) fail(`${field} must be null before computation: ${record.panchang_daily_record_id}`);
+    }
   }
+
+  if (daily.status === "panchang_daily_calculation_bank_batch_01_computed_internal_dry_run_public_blocked") {
+    if (record.record_status !== "computed_internal_dry_run_public_blocked") fail(`Record must be computed dry-run: ${record.panchang_daily_record_id}`);
+    if (record.computed_values_present !== true) fail(`Computed values must be present: ${record.panchang_daily_record_id}`);
+    for (const field of ["tithi", "nakshatra", "yoga", "karana", "paksha", "vara"]) {
+      if (record[field] === null || record[field] === undefined) fail(`${field} must be populated after computation: ${record.panchang_daily_record_id}`);
+    }
+  }
+
   if (record.public_output_allowed !== false) fail("Public output must be false.");
 }
 
@@ -93,9 +108,13 @@ for (const key of [
 }
 
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (panchangManifest.status !== "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01",
+  "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run"
+];
+if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.daily_calculation_request_records !== 7) fail("Manifest daily request count mismatch.");
-if (panchangManifest.current_counts.panchang_daily_records !== 0) fail("Manifest computed daily records must be zero.");
+if (![0, 7].includes(panchangManifest.current_counts.panchang_daily_records)) fail("Manifest computed daily records must be 0 before AG70K or 7 after AG70K.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70j-panchang-computation-basis-lock-daily-bank.json");
 if (review.status !== "ag70j_panchang_computation_basis_lock_daily_bank_completed") fail("Review status mismatch.");
