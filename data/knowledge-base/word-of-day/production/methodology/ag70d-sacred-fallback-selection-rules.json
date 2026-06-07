@@ -1,0 +1,29 @@
+{
+  "module_id": "AG70D",
+  "title": "Sacred Fallback Selection Rules",
+  "status": "sacred_fallback_selection_rules_defined_not_runtime_active",
+  "fallback_selection_allowed_now": false,
+  "fallback_trigger_conditions": [
+    "primary_etymology_not_established",
+    "primary_morphology_blocked",
+    "primary_semantic_match_too_weak",
+    "primary_candidate_duplicate_blocked",
+    "no_primary_candidate_available_for_context_signal"
+  ],
+  "approved_fallback_bank_classes": [
+    "vishnu_sahasranama_bank",
+    "shiva_sahasranama_bank",
+    "vedic_term_bank",
+    "puranic_name_theme_bank",
+    "approved_sanskrit_lexical_bank"
+  ],
+  "fallback_required_gates": [
+    "fallback_record_approved",
+    "source_reference_ids_present",
+    "meaning_supported",
+    "public_use_permission_approved_for_output",
+    "semantic_theme_match",
+    "duplicate_control_passed"
+  ],
+  "fallback_public_explanation_rule": "Explain the word/name from approved source and meaning support only. Do not invent etymology or scriptural interpretation."
+}

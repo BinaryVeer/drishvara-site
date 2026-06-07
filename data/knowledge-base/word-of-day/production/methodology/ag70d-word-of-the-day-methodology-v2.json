@@ -1,0 +1,46 @@
+{
+  "module_id": "AG70D",
+  "title": "Word of the Day Methodology v2",
+  "status": "word_methodology_v2_supersession_defined_not_runtime_active",
+  "active_methodology_version": "word_of_day_method_v2_panchang_context_sanskrit_lexical_engine",
+  "supersedes_runtime_methodology_versions": [
+    "word_of_day_method_v1",
+    "ag63a_rotation_preview_method",
+    "d02_static_preview_rotation_policy"
+  ],
+  "runtime_selector_active_now": false,
+  "public_word_generation_allowed_now": false,
+  "generated_output_mutation_now": false,
+  "ui_mutation_now": false,
+  "purpose": "Replace the old rotation/preview method with a Panchang-context-driven Sanskrit lexical selection method.",
+  "method_summary": [
+    "Panchang engine produces day context from Tithi, Nakshatra, Yoga, Karana, Paksha, Vara and festival/observance context.",
+    "Context interpretation layer converts Panchang data into reviewable interpretive signals.",
+    "Morphology engine identifies possible Sanskrit forms, roots, stems and valid forms from sourced lexical knowledge.",
+    "Etymology engine provides sourced derivational/historical background where established.",
+    "Semantics engine defines exact meaning, semantic range, usage boundary and reflective sense.",
+    "Primary selection uses approved lexical records only.",
+    "If etymology or derivation is not established, the method must not fabricate; it routes to approved sacred fallback banks where appropriate.",
+    "Duplicate control checks date-wise published/suggested history before final output.",
+    "The selected word is saved date-wise for public current-day display and future subscriber archive browsing."
+  ],
+  "hard_rules": [
+    "No AI-invented Sanskrit word.",
+    "No unsupported etymology.",
+    "No mantra creation or alteration.",
+    "No raw candidate to public output.",
+    "No public output without approved source/public-use status.",
+    "No repeated publication without duplicate-control decision.",
+    "No generated/word-of-day.json replacement until output connector gate is approved."
+  ],
+  "dependencies": {
+    "panchang_context_connector": "data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json",
+    "lexical_engine_manifest": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-engine-manifest.json",
+    "morphology_schema": "data/knowledge-base/word-of-day/production/lexical-engine/morphology-engine-schema.json",
+    "etymology_schema": "data/knowledge-base/word-of-day/production/lexical-engine/etymology-engine-schema.json",
+    "semantics_schema": "data/knowledge-base/word-of-day/production/lexical-engine/semantics-engine-schema.json",
+    "fallback_schema": "data/knowledge-base/word-of-day/production/lexical-engine/sacred-fallback-bank-schema.json",
+    "daily_history_schema": "data/knowledge-base/word-of-day/production/daily-word-history-schema.json",
+    "subscriber_archive_schema": "data/knowledge-base/word-of-day/production/subscriber-word-archive-schema.json"
+  }
+}

@@ -114,7 +114,11 @@ for (const field of ["daily_word_record_id", "date_key", "search_terms", "subscr
 if (archive.records.length !== 0) fail("Subscriber archive records must be empty in AG70C.");
 
 const wordManifest = readJson("data/knowledge-base/word-of-day/production/production-bank-manifest.json");
-if (wordManifest.status !== "production_bank_manifest_created_lexical_engine_model_defined") fail("Word manifest status mismatch.");
+const allowedWordManifestStatuses = [
+  "production_bank_manifest_created_lexical_engine_model_defined",
+  "production_bank_manifest_created_word_methodology_v2_superseded"
+];
+if (!allowedWordManifestStatuses.includes(wordManifest.status)) fail("Word manifest status mismatch.");
 if (!wordManifest.lexical_engine_files?.morphology_engine_schema) fail("Word manifest missing lexical engine file map.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70c-sanskrit-lexical-engine-data-model.json");

@@ -1,0 +1,33 @@
+{
+  "module_id": "AG70D",
+  "title": "Duplicate Control and Daily History Rules",
+  "status": "duplicate_control_and_history_rules_defined_not_runtime_active",
+  "duplicate_control_active_now": false,
+  "history_saving_active_now": false,
+  "history_schema": "data/knowledge-base/word-of-day/production/daily-word-history-schema.json",
+  "subscriber_archive_schema": "data/knowledge-base/word-of-day/production/subscriber-word-archive-schema.json",
+  "duplicate_check_order": [
+    "exact selected_word_id",
+    "sanskrit_form",
+    "fallback_bank_record_id if applicable",
+    "theme/repeat_control_tags within repeat window"
+  ],
+  "replacement_rule": "If selected word was already published within the repeat-control window, select the next eligible approved candidate. If all candidates are repeated, choose least-recent eligible word and mark repeat_pressure=true.",
+  "daily_result_required_fields": [
+    "date_key",
+    "panchang_context_id",
+    "selection_path",
+    "selected_word_id",
+    "sanskrit_form",
+    "hindi_form",
+    "english_gloss",
+    "meaning_en",
+    "meaning_hi",
+    "source_bank_used",
+    "etymology_status",
+    "morphology_status",
+    "semantic_status",
+    "duplicate_check_status",
+    "published_status"
+  ]
+}

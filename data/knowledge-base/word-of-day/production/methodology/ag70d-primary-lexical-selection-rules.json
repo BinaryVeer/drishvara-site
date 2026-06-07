@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70D",
+  "title": "Primary Lexical Selection Rules",
+  "status": "primary_lexical_selection_rules_defined_not_runtime_active",
+  "primary_selection_allowed_now": false,
+  "required_gates": [
+    "approved_lexical_record_exists",
+    "morphology_status_established_or_review_approved",
+    "semantics_status_supported",
+    "source_reference_ids_present",
+    "public_use_permission_approved_for_output",
+    "context_signal_match_reviewed",
+    "duplicate_control_passed"
+  ],
+  "etymology_handling": {
+    "established": "May include sourced etymology/derivation note in user-facing explanation.",
+    "partially_established": "May use only bounded note after review; no strong derivation claim.",
+    "not_established": "Do not fabricate. Route to fallback bank or semantic-only path only if separately approved.",
+    "blocked": "Reject candidate."
+  },
+  "blocked": [
+    "candidate_record_without_approval",
+    "unsupported_etymology_claim",
+    "semantic_expansion_without_source",
+    "panchang_context_not_reviewed",
+    "duplicate_word_without_repeat_control_override"
+  ]
+}

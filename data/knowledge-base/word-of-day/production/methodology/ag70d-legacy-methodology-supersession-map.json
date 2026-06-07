@@ -1,0 +1,38 @@
+{
+  "module_id": "AG70D",
+  "title": "Legacy Word Methodology Supersession Map",
+  "status": "legacy_word_methodology_supersession_mapped_no_deletion",
+  "reason_for_no_deletion_now": "Discovery showed old Word/D02/AG48/AG63/AG69 files remain referenced by validators, preflights, current UI fallback or AG69K source-of-truth records. AG70D supersedes them as active methodology without deleting them.",
+  "legacy_files_preserved_as_reference": [
+    {
+      "path": "data/methodology/word-of-day/ag63a-word-of-the-day-methodology.json",
+      "previous_role": "initial Word methodology",
+      "new_status_after_ag70d": "legacy_reference_superseded_by_method_v2"
+    },
+    {
+      "path": "data/methodology/word-of-day/ag63a-word-selection-rotation-policy.json",
+      "previous_role": "date/theme/repeat rotation policy",
+      "new_status_after_ag70d": "legacy_reference_superseded_by_panchang_lexical_selection"
+    },
+    {
+      "path": "data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json",
+      "previous_role": "D02 preview rotation policy",
+      "new_status_after_ag70d": "legacy_preview_reference_not_active_production_method"
+    },
+    {
+      "path": "data/knowledge-base/word-of-day/ag69e-word-selection-context-doctrine.json",
+      "previous_role": "selection context doctrine not active",
+      "new_status_after_ag70d": "merged_conceptually_into_method_v2_context_layer"
+    },
+    {
+      "path": "data/knowledge-base/word-of-day/ag69k-optimized-end-to-end-word-workflow.json",
+      "previous_role": "source-of-truth optimized workflow",
+      "new_status_after_ag70d": "retained_source_of_truth_consumed_by_method_v2"
+    }
+  ],
+  "deleted_now": [],
+  "output_files_preserved": [
+    "generated/word-of-day.json",
+    "index.html existing AG63B Word card wiring"
+  ]
+}

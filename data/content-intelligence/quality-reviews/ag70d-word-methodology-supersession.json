@@ -1,0 +1,57 @@
+{
+  "module_id": "AG70D",
+  "title": "Word of the Day Methodology Supersession",
+  "status": "ag70d_word_methodology_supersession_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "023d99d4",
+    "head_full": "023d99d45053b7df819253f691bc6bd997c20604",
+    "origin_main": "023d99d4",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag70d-word-methodology-supersession.mjs\n?? scripts/validate-ag70d-word-methodology-supersession.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70c_review": "data/content-intelligence/quality-reviews/ag70c-sanskrit-lexical-engine-data-model.json",
+    "panchang_connector": "data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json",
+    "lexical_engine_manifest": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-engine-manifest.json"
+  },
+  "generated_records": {
+    "methodologyV2": "data/knowledge-base/word-of-day/production/methodology/ag70d-word-of-the-day-methodology-v2.json",
+    "legacySupersessionMap": "data/knowledge-base/word-of-day/production/methodology/ag70d-legacy-methodology-supersession-map.json",
+    "selectionFlowV2": "data/knowledge-base/word-of-day/production/methodology/ag70d-selection-flow-v2.json",
+    "primaryLexicalRules": "data/knowledge-base/word-of-day/production/methodology/ag70d-primary-lexical-selection-rules.json",
+    "fallbackRules": "data/knowledge-base/word-of-day/production/methodology/ag70d-sacred-fallback-selection-rules.json",
+    "duplicateHistoryRules": "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json",
+    "subscriberArchiveModel": "data/knowledge-base/word-of-day/production/methodology/ag70d-subscriber-archive-access-model.json",
+    "oldMethodologyPreservation": "data/knowledge-base/word-of-day/production/methodology/ag70d-old-methodology-preservation-audit.json",
+    "noOutputMutationAudit": "data/knowledge-base/word-of-day/production/methodology/ag70d-no-output-ui-runtime-mutation-audit.json",
+    "wordManifest": "data/knowledge-base/word-of-day/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70d-word-methodology-supersession.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70d-ag70e-word-production-knowledge-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70d-to-ag70e-word-production-knowledge-bank-boundary.json",
+    "quality": "data/quality/ag70d-word-methodology-supersession.json",
+    "preview": "data/quality/ag70d-word-methodology-supersession-preview.json",
+    "doc": "docs/quality/AG70D_WORD_METHODOLOGY_SUPERSESSION.md"
+  },
+  "summary": {
+    "word_methodology_v2_created": true,
+    "old_rotation_method_superseded": true,
+    "old_methodology_files_deleted_now": false,
+    "legacy_supersession_map_created": true,
+    "selection_flow_v2_defined": true,
+    "primary_lexical_selection_rules_defined": true,
+    "fallback_selection_rules_defined": true,
+    "duplicate_history_rules_defined": true,
+    "subscriber_archive_model_defined": true,
+    "word_manifest_updated_with_methodology_v2": true,
+    "actual_lexical_records_created_now": false,
+    "actual_fallback_records_created_now": false,
+    "daily_word_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "runtime_selector_active_now": false,
+    "public_word_generation_allowed_now": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70e": true
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "module_id": "AG70D",
+  "title": "AG70D to AG70E Word Production Knowledge Bank Foundation Boundary",
+  "status": "ag70e_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create first production knowledge-bank structure/records required by Methodology v2.",
+    "Create context interpretation records only with source/review status.",
+    "Create lexical/fallback candidate records only where evidence/source fields are present.",
+    "Keep public output blocked until approved output gate."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "AI-fabricated Sanskrit or meaning records",
+    "unsupported etymology",
+    "public Word output"
+  ]
+}

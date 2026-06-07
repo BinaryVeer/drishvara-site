@@ -1,0 +1,17 @@
+{
+  "module_id": "AG70D",
+  "title": "Subscriber Archive Access Model",
+  "status": "subscriber_archive_access_model_defined_not_runtime_active",
+  "subscriber_archive_active_now": false,
+  "public_access_rule": "General users see only the current day's Word of the Day after publication gate.",
+  "subscriber_access_rule": "Subscribers may browse/search historical suggested/published Word records after access/backend/subscription layer is approved.",
+  "browse_dimensions": [
+    "date_key",
+    "word",
+    "theme",
+    "panchang_context",
+    "selection_path",
+    "source_bank_used"
+  ],
+  "backend_dependency": "Deferred. No Supabase/Auth/subscription runtime activation in AG70D."
+}

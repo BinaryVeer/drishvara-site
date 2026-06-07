@@ -1,0 +1,64 @@
+{
+  "module_id": "AG70D",
+  "title": "Word Selection Flow v2",
+  "status": "word_selection_flow_v2_defined_not_runtime_active",
+  "runtime_selection_active_now": false,
+  "flow": [
+    {
+      "step": 1,
+      "name": "panchang_day_context",
+      "input": "date + location + Panchang calculation/observance context",
+      "output": "Tithi, Nakshatra, Yoga, Karana, Paksha, Vara, festival/observance/theme context",
+      "runtime_active_now": false
+    },
+    {
+      "step": 2,
+      "name": "context_interpretation",
+      "input": "reviewed Panchang context",
+      "output": "combined_interpretive_signal and context tags",
+      "runtime_active_now": false
+    },
+    {
+      "step": 3,
+      "name": "morphology_engine",
+      "input": "combined_interpretive_signal",
+      "output": "possible Sanskrit forms/roots/stems/valid forms from sourced lexical records",
+      "runtime_active_now": false
+    },
+    {
+      "step": 4,
+      "name": "etymology_engine",
+      "input": "morphology candidate",
+      "output": "established / partially_established / not_established derivational status",
+      "runtime_active_now": false
+    },
+    {
+      "step": 5,
+      "name": "semantics_engine",
+      "input": "morphology + etymology candidate",
+      "output": "meaning, semantic range, usage boundary, reflective sense",
+      "runtime_active_now": false
+    },
+    {
+      "step": 6,
+      "name": "primary_or_fallback_selection",
+      "input": "approved lexical candidate or fallback candidate",
+      "output": "selected word candidate",
+      "runtime_active_now": false
+    },
+    {
+      "step": 7,
+      "name": "duplicate_control",
+      "input": "selected word candidate + daily history",
+      "output": "final eligible word or replacement candidate",
+      "runtime_active_now": false
+    },
+    {
+      "step": 8,
+      "name": "datewise_result_saving",
+      "input": "final eligible word",
+      "output": "daily word history record and subscriber archive candidate",
+      "runtime_active_now": false
+    }
+  ]
+}
