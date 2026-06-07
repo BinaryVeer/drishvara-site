@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Location Basis Policy",
+  "status": "location_basis_policy_created_no_default_public_location_selected",
+  "purpose": "Define location requirements before Panchang computation, because Tithi/observance windows depend on local sunrise/timezone/geocoordinates.",
+  "policy_rules": [
+    "Every computed Panchang record must carry location_id, latitude, longitude and timezone.",
+    "No universal all-India Panchang record may be treated as exact for observance windows.",
+    "Default public location must be explicitly selected and reviewed before public computation.",
+    "User-selected/subscriber location handling is deferred until backend/subscription design is approved.",
+    "Static precomputed Panchang records must state the location basis in every record."
+  ],
+  "required_location_fields": [
+    "location_id",
+    "display_name",
+    "latitude",
+    "longitude",
+    "timezone",
+    "country",
+    "region",
+    "default_for_public_output",
+    "review_status",
+    "source_reference_id"
+  ],
+  "default_public_location_selected_now": false,
+  "user_location_runtime_active_now": false,
+  "location_records_created_now": 0
+}

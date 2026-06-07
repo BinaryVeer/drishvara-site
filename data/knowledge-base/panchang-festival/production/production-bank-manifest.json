@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_panchang_foundation_defined",
+  "status": "production_bank_manifest_created_panchang_calculation_source_location_basis_decision",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -17,7 +17,9 @@
     "output_eligible_records": 0,
     "daily_calculation_records": 0,
     "observance_events": 0,
-    "eclipse_events": 0
+    "eclipse_events": 0,
+    "panchang_daily_records": 0,
+    "context_interpretation_records": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -94,8 +96,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "panchang_foundation_defined_no_calculation_runtime",
-  "next_required_stage": "AG70C — Sanskrit Lexical Engine Data Model",
+  "current_status": "panchang_calculation_source_location_basis_decision_created_no_computation",
+  "next_required_stage": "AG70I — Panchang Astronomical Computation Model Production Setup",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -106,5 +108,16 @@
     "eclipse_schema": "data/knowledge-base/panchang-festival/production/eclipse-bank-schema.json",
     "eclipse_event_bank": "data/knowledge-base/panchang-festival/production/eclipse-event-bank.json",
     "panchang_to_word_context_connector": "data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json"
+  },
+  "ag70h_files": {
+    "decision_record": "data/knowledge-base/panchang-festival/production/ag70h-panchang-calculation-source-location-basis-decision.json",
+    "calculation_source_decision": "data/knowledge-base/panchang-festival/production/panchang-calculation-source-decision-register.json",
+    "location_basis_policy": "data/knowledge-base/panchang-festival/production/panchang-location-basis-policy.json",
+    "timezone_geocoordinate_rule": "data/knowledge-base/panchang-festival/production/panchang-timezone-geocoordinate-rule.json",
+    "ayanamsa_decision": "data/knowledge-base/panchang-festival/production/panchang-ayanamsa-decision-register.json",
+    "computation_input_contract": "data/knowledge-base/panchang-festival/production/panchang-computation-input-contract.json",
+    "observance_dependency_map": "data/knowledge-base/panchang-festival/production/panchang-observance-dependency-map.json",
+    "eclipse_calculation_decision": "data/knowledge-base/panchang-festival/production/panchang-eclipse-calculation-source-decision.json",
+    "no_computation_audit": "data/knowledge-base/panchang-festival/production/ag70h-no-panchang-computation-audit.json"
   }
 }

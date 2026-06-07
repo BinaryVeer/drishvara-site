@@ -1,0 +1,47 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Observance Dependency Map",
+  "status": "observance_dependency_map_created_no_observance_events",
+  "purpose": "Map raw Panchang computations to later festival/upcoming observance/eclipses before context interpretation.",
+  "dependencies": [
+    {
+      "downstream_module": "festival_observance_rule_bank",
+      "required_inputs": [
+        "computed_tithi_window",
+        "paksha",
+        "masa_if_added",
+        "sunrise_rule",
+        "regional_rule"
+      ],
+      "output_later": "festival_or_vrata_declaration"
+    },
+    {
+      "downstream_module": "upcoming_observance_event_bank",
+      "required_inputs": [
+        "observance_rule",
+        "computed_start_end_window",
+        "location_basis"
+      ],
+      "output_later": "named_observance_with_start_end_datetime"
+    },
+    {
+      "downstream_module": "eclipse_event_bank",
+      "required_inputs": [
+        "eclipse_source_or_calculation",
+        "visibility_region",
+        "contact_times"
+      ],
+      "output_later": "solar_or_lunar_eclipse_event_record"
+    },
+    {
+      "downstream_module": "panchang_context_interpretation_bank",
+      "required_inputs": [
+        "validated_daily_panchang_record",
+        "validated_observance_event"
+      ],
+      "output_later": "context_signal_for_word_engine"
+    }
+  ],
+  "observance_events_created_now": 0,
+  "context_interpretation_records_created_now": 0
+}

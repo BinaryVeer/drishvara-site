@@ -1,0 +1,29 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Calculation Source Decision Register",
+  "status": "calculation_source_decision_register_created_runtime_source_not_selected",
+  "purpose": "Create the governance decision record for selecting astronomical calculation sources/libraries before any Panchang computation.",
+  "decision_state": "runtime_calculation_source_not_selected_in_ag70h",
+  "required_future_decision_before_ag70i_runtime_setup": [
+    "Select astronomical computation method/library.",
+    "Confirm licence/reuse constraints.",
+    "Confirm supported solar/lunar longitude precision.",
+    "Confirm sunrise/sunset calculation support or source.",
+    "Confirm eclipse calculation/table source and visibility basis.",
+    "Confirm validation cross-check source policy."
+  ],
+  "candidate_source_classes_to_review": [
+    "astronomical_ephemeris_or_library",
+    "solar_lunar_longitude_computation_method",
+    "sunrise_sunset_calculation_method",
+    "eclipse_calculation_or_verified_ephemeris_table",
+    "independent_cross_check_reference"
+  ],
+  "blocked_source_classes": [
+    "random_panchang_website_as_source_of_truth",
+    "ai_generated_panchang_values",
+    "manual_festival_date_guess",
+    "unreviewed_timezone_or_coordinate_guess"
+  ],
+  "runtime_active_now": false
+}

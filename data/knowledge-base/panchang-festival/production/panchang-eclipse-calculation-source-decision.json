@@ -1,0 +1,27 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Eclipse Calculation Source Decision",
+  "status": "eclipse_calculation_source_decision_created_no_eclipse_events",
+  "purpose": "Define that solar/lunar eclipse events require source/calculation review before being added to Upcoming Observance.",
+  "supported_eclipse_types": [
+    "solar",
+    "lunar"
+  ],
+  "required_future_fields": [
+    "eclipse_id",
+    "eclipse_type",
+    "visibility_region",
+    "location_id",
+    "start_datetime_utc",
+    "maximum_datetime_utc",
+    "end_datetime_utc",
+    "start_datetime_local",
+    "maximum_datetime_local",
+    "end_datetime_local",
+    "source_or_calculation_reference_ids",
+    "review_status",
+    "public_use_permission"
+  ],
+  "eclipse_source_selected_for_runtime_now": false,
+  "eclipse_events_created_now": 0
+}

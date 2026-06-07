@@ -1,0 +1,23 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Timezone and Geocoordinate Rule",
+  "status": "timezone_geocoordinate_rule_created_no_runtime_activation",
+  "required_for_computation": true,
+  "rules": [
+    "All internal calculations must preserve UTC datetime and local datetime.",
+    "All published observance windows must state local timezone and location basis.",
+    "Sunrise-based day boundary must be calculated for the selected location.",
+    "Eclipse visibility must be location/region-aware.",
+    "Date-only observance records are insufficient where start/end windows exist."
+  ],
+  "required_datetime_fields": [
+    "start_datetime_utc",
+    "end_datetime_utc",
+    "start_datetime_local",
+    "end_datetime_local",
+    "timezone",
+    "location_id",
+    "calculation_generated_at"
+  ],
+  "runtime_active_now": false
+}

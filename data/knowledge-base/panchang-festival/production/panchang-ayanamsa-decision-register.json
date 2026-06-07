@@ -1,0 +1,18 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Ayanamsa Decision Register",
+  "status": "ayanamsa_decision_register_created_ayanamsa_not_selected",
+  "purpose": "Block Panchang computation until the ayanamsa basis is selected and documented.",
+  "ayanamsa_selected_now": false,
+  "required_future_decision": [
+    "Select ayanamsa basis.",
+    "Record source/method justification.",
+    "Apply same ayanamsa consistently to Tithi/Nakshatra/Yoga derivation where applicable.",
+    "Record version/date of computation model."
+  ],
+  "blocked": [
+    "mixing_ayanamsa_bases",
+    "unstated_ayanamsa",
+    "public_panchang_output_without_ayanamsa_record"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Computation Input Contract",
+  "status": "panchang_computation_input_contract_created_no_calculation",
+  "purpose": "Define the minimum input object required before AG70I/AG70J can create computed Panchang records.",
+  "required_inputs": [
+    "date_key",
+    "calculation_datetime_utc",
+    "location_id",
+    "latitude",
+    "longitude",
+    "timezone",
+    "ayanamsa_id",
+    "calculation_source_id",
+    "sun_longitude",
+    "moon_longitude",
+    "sunrise_local",
+    "sunset_local",
+    "validation_source_ids"
+  ],
+  "required_outputs_later": [
+    "tithi_window",
+    "nakshatra_window",
+    "yoga_window",
+    "karana_window",
+    "paksha",
+    "vara",
+    "sunrise_based_day_boundary",
+    "observance_candidates",
+    "eclipse_candidates_if_any"
+  ],
+  "calculation_records_created_now": 0
+}

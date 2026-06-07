@@ -1,25 +1,32 @@
 {
   "module_id": "AG70G",
-  "title": "AG70G to AG70H Context Interpretation Bank Boundary",
-  "status": "ag70h_boundary_defined",
+  "title": "Corrected AG70G to AG70H Boundary",
+  "status": "ag70h_panchang_calculation_source_location_basis_boundary_defined",
+  "legacy_filename_note": "This file name originally mentioned Context Interpretation. AG70H corrects the path so Panchang production data-bank work comes first.",
   "current_stage_completed": true,
   "next_stage_not_auto_started": true,
   "allowed_next_scope_after_user_confirmation": [
-    "Create context signal records for Panchang-to-Word interpretation.",
-    "Keep context interpretation records review-bound and not runtime-active.",
-    "Do not create Sanskrit word records yet.",
-    "Do not populate fallback names/terms yet."
+    "Create Panchang calculation source decision record.",
+    "Create location/geocoordinate and timezone basis policy.",
+    "Create ayanamsa decision placeholder.",
+    "Create computation input contract.",
+    "Create observance/eclipses dependency map.",
+    "Do not create context interpretation records until computed Panchang records exist."
   ],
   "blocked_scope_without_explicit_approval": [
     "generated/word-of-day.json replacement",
     "homepage UI change",
     "runtime selector activation",
-    "Supabase/database writes",
-    "backend/Auth activation",
     "AI-fabricated Sanskrit or meaning records",
     "unsupported etymology",
     "public Word output",
     "bulk dictionary/book content ingestion",
-    "fallback word/name/term population"
+    "fallback word/name/term population",
+    "context interpretation production records",
+    "public Panchang output",
+    "actual festival/observance date publication",
+    "actual eclipse event publication",
+    "Supabase/database writes",
+    "backend/Auth activation"
   ]
 }

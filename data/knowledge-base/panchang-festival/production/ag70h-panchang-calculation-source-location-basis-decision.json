@@ -1,0 +1,27 @@
+{
+  "module_id": "AG70H",
+  "title": "Panchang Calculation Source and Location Basis Decision",
+  "status": "ag70h_panchang_calculation_source_location_basis_decision_completed",
+  "purpose": "Correct the post-AG70G sequence and define the governed source/location basis before Panchang computation records are created.",
+  "corrective_transition_from_ag70g": true,
+  "corrected_next_path": [
+    "AG70H — Panchang Calculation Source and Location Basis Decision",
+    "AG70I — Panchang Astronomical Computation Model Production Setup",
+    "AG70J — Panchang Daily Calculation Bank Batch 01",
+    "AG70K — Festival / Observance Rule Bank Batch 01",
+    "AG70L — Upcoming Observance Computed Event Bank Batch 01",
+    "AG70M — Eclipse Event Bank Batch 01",
+    "AG70N — Panchang Computation Validation and Cross-Check",
+    "AG70O — Panchang Context Interpretation Production Data Bank Batch 01"
+  ],
+  "decision_summary": {
+    "panchang_must_be_location_specific": true,
+    "no_global_panchang_record_allowed_without_location_basis": true,
+    "calculation_source_selected_for_runtime_now": false,
+    "location_default_selected_for_public_output_now": false,
+    "ayanamsa_selected_for_runtime_now": false,
+    "actual_panchang_computation_created_now": false,
+    "observance_events_created_now": false,
+    "eclipse_events_created_now": false
+  }
+}
