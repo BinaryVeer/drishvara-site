@@ -1,0 +1,57 @@
+{
+  "module_id": "AG70J",
+  "title": "Panchang Computation Basis Lock and Daily Calculation Bank Batch 01",
+  "status": "ag70j_panchang_computation_basis_lock_daily_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "043fda14",
+    "head_full": "043fda149e90967a16b85177ac781797b429e4f5",
+    "origin_main": "043fda14",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n?? scripts/generate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n?? scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70i_review": "data/content-intelligence/quality-reviews/ag70i-internal-panchang-astronomical-computation-model.json",
+    "internal_model": "data/knowledge-base/panchang-festival/production/internal-astronomical-computation-model.json",
+    "computed_record_schema": "data/knowledge-base/panchang-festival/production/computed-panchang-daily-record-schema.json"
+  },
+  "generated_records": {
+    "basisLock": "data/knowledge-base/panchang-festival/production/ag70j-panchang-computation-basis-lock-daily-bank-batch-01.json",
+    "locationLock": "data/knowledge-base/panchang-festival/production/panchang-default-location-basis-lock.json",
+    "ayanamsaLock": "data/knowledge-base/panchang-festival/production/panchang-ayanamsa-basis-lock.json",
+    "internalComputationLock": "data/knowledge-base/panchang-festival/production/panchang-internal-computation-basis-lock.json",
+    "dailyBank": "data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json",
+    "noFabricationAudit": "data/knowledge-base/panchang-festival/production/ag70j-no-fabricated-panchang-values-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70j-panchang-computation-basis-lock-daily-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70j-ag70k-internal-panchang-daily-computation-engine-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70j-to-ag70k-internal-panchang-daily-computation-engine-boundary.json",
+    "quality": "data/quality/ag70j-panchang-computation-basis-lock-daily-bank.json",
+    "preview": "data/quality/ag70j-panchang-computation-basis-lock-daily-bank-preview.json",
+    "doc": "docs/quality/AG70J_PANCHANG_COMPUTATION_BASIS_LOCK_DAILY_BANK.md"
+  },
+  "summary": {
+    "default_location_locked": true,
+    "default_location_id": "loc_in_ar_itangar_capital_complex_001",
+    "default_location_name": "Itanagar, Arunachal Pradesh, India",
+    "ayanamsa_basis_locked": true,
+    "ayanamsa_id": "ayanamsa_lahiri_chitrapaksha_internal_v1",
+    "internal_computation_basis_locked": true,
+    "daily_calculation_bank_batch_01_created": true,
+    "daily_calculation_request_record_count": 7,
+    "computed_panchang_daily_record_count": 0,
+    "fabricated_panchang_value_count": 0,
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_allowed_only_after_output_for_manual_verification": true,
+    "actual_observance_events_created_now": false,
+    "actual_eclipse_events_created_now": false,
+    "context_interpretation_records_created_now": false,
+    "public_panchang_output_allowed_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70k": true
+  }
+}

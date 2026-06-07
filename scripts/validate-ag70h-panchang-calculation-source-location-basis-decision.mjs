@@ -112,7 +112,8 @@ if (!correctedBoundary.blocked_scope_without_explicit_approval.includes("context
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_panchang_calculation_source_location_basis_decision",
-  "production_bank_manifest_created_internal_panchang_astronomical_computation_model"
+  "production_bank_manifest_created_internal_panchang_astronomical_computation_model",
+  "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.panchang_daily_records !== 0) fail("Panchang daily records must be zero.");

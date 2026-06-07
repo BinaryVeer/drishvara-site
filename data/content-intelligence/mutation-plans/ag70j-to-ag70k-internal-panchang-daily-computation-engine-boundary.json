@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70J",
+  "title": "AG70J to AG70K Internal Panchang Daily Computation Engine Boundary",
+  "status": "ag70k_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create internal computation dry-run logic for Batch 01.",
+    "Populate computed Panchang values only from Drishvara internal computation model.",
+    "Record validation status for each computed value.",
+    "Keep public output blocked.",
+    "Keep external Panchang sites outside generation model; allow only later manual verification notes."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "actual festival/observance date publication",
+    "actual eclipse event publication",
+    "context interpretation production records",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency"
+  ]
+}

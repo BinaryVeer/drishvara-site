@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_internal_panchang_astronomical_computation_model",
+  "status": "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -19,7 +19,10 @@
     "observance_events": 0,
     "eclipse_events": 0,
     "panchang_daily_records": 0,
-    "context_interpretation_records": 0
+    "context_interpretation_records": 0,
+    "location_basis_records": 1,
+    "ayanamsa_basis_records": 1,
+    "daily_calculation_request_records": 7
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -96,8 +99,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "internal_panchang_astronomical_computation_model_defined_no_daily_records",
-  "next_required_stage": "AG70J — Panchang Daily Calculation Bank Batch 01",
+  "current_status": "panchang_computation_basis_locked_daily_bank_batch_01_pending_internal_computation",
+  "next_required_stage": "AG70K — Internal Panchang Daily Computation Engine Dry Run",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -132,5 +135,13 @@
     "manual_verification_policy": "data/knowledge-base/panchang-festival/production/post-computation-manual-verification-policy.json",
     "external_exclusion_audit": "data/knowledge-base/panchang-festival/production/ag70i-external-panchang-site-exclusion-audit.json",
     "no_daily_computation_audit": "data/knowledge-base/panchang-festival/production/ag70i-no-daily-panchang-computation-audit.json"
+  },
+  "ag70j_files": {
+    "basis_lock": "data/knowledge-base/panchang-festival/production/ag70j-panchang-computation-basis-lock-daily-bank-batch-01.json",
+    "location_lock": "data/knowledge-base/panchang-festival/production/panchang-default-location-basis-lock.json",
+    "ayanamsa_lock": "data/knowledge-base/panchang-festival/production/panchang-ayanamsa-basis-lock.json",
+    "internal_computation_lock": "data/knowledge-base/panchang-festival/production/panchang-internal-computation-basis-lock.json",
+    "daily_calculation_bank_batch_01": "data/knowledge-base/panchang-festival/production/panchang-daily-calculation-bank-batch-01.json",
+    "no_fabrication_audit": "data/knowledge-base/panchang-festival/production/ag70j-no-fabricated-panchang-values-audit.json"
   }
 }
