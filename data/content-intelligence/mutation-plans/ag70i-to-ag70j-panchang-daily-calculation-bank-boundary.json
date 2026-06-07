@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70I",
+  "title": "AG70I to AG70J Panchang Daily Calculation Bank Boundary",
+  "status": "ag70j_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create first controlled Panchang daily calculation bank records.",
+    "Use only internal computation model outputs.",
+    "Record date, location, timezone, model version and ayanamsa basis.",
+    "Keep public output blocked.",
+    "Keep external Panchang sites outside generation model; allow only later manual verification notes."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "actual festival/observance date publication",
+    "actual eclipse event publication",
+    "context interpretation production records",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency"
+  ]
+}

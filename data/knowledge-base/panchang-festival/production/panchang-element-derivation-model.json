@@ -1,0 +1,40 @@
+{
+  "module_id": "AG70I",
+  "title": "Panchang Element Derivation Model",
+  "status": "panchang_element_derivation_model_defined_no_records_generated",
+  "purpose": "Define derivation rules for Tithi, Nakshatra and Yoga from internal astronomical values.",
+  "formulas": {
+    "tithi": {
+      "basis": "moon_minus_sun_angular_difference_0_360",
+      "segment_degrees": 12,
+      "index_rule": "floor(angle / 12) + 1",
+      "range": "1..30",
+      "boundary_rule": "Tithi changes when Moon-Sun angular difference crosses multiples of 12 degrees."
+    },
+    "nakshatra": {
+      "basis": "moon_longitude_sidereal",
+      "segment_degrees": "13 + 1/3",
+      "index_rule": "floor(moon_longitude_sidereal / (13 + 1/3)) + 1",
+      "range": "1..27",
+      "boundary_rule": "Nakshatra changes when sidereal Moon longitude crosses 13°20′ segments."
+    },
+    "yoga": {
+      "basis": "(sun_longitude_sidereal + moon_longitude_sidereal) mod 360",
+      "segment_degrees": "13 + 1/3",
+      "index_rule": "floor(combined_sidereal_longitude / (13 + 1/3)) + 1",
+      "range": "1..27",
+      "boundary_rule": "Yoga changes when combined sidereal Sun+Moon longitude crosses 13°20′ segments."
+    }
+  },
+  "required_window_outputs_later": [
+    "element_index",
+    "element_name",
+    "start_datetime_utc",
+    "end_datetime_utc",
+    "start_datetime_local",
+    "end_datetime_local",
+    "calculation_confidence",
+    "review_status"
+  ],
+  "generated_records_now": 0
+}

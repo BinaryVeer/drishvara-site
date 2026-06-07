@@ -1,0 +1,32 @@
+{
+  "module_id": "AG70I",
+  "title": "Internal Panchang Astronomical Computation Model",
+  "status": "internal_panchang_astronomical_computation_model_defined_no_daily_records",
+  "purpose": "Define Drishvara's in-house Panchang computation model before any date-wise Panchang bank is populated.",
+  "source_of_truth_principle": {
+    "production_source_of_truth": "internal_governed_astronomical_computation",
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_used_for_public_claim": false,
+    "external_panchang_sites_allowed_only_for": "manual_post_computation_verification_after_drishvara_output"
+  },
+  "computation_chain": [
+    "date + location + timezone",
+    "sunrise/sunset",
+    "solar longitude",
+    "lunar longitude",
+    "moon_minus_sun_angular_difference",
+    "tithi",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "paksha",
+    "vara",
+    "later festival/observance rule engine",
+    "later eclipse computation/event model"
+  ],
+  "runtime_active_now": false,
+  "daily_records_created_now": 0,
+  "public_output_allowed_now": false
+}

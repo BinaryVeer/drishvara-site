@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_panchang_calculation_source_location_basis_decision",
+  "status": "production_bank_manifest_created_internal_panchang_astronomical_computation_model",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -96,8 +96,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "panchang_calculation_source_location_basis_decision_created_no_computation",
-  "next_required_stage": "AG70I — Panchang Astronomical Computation Model Production Setup",
+  "current_status": "internal_panchang_astronomical_computation_model_defined_no_daily_records",
+  "next_required_stage": "AG70J — Panchang Daily Calculation Bank Batch 01",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -119,5 +119,18 @@
     "observance_dependency_map": "data/knowledge-base/panchang-festival/production/panchang-observance-dependency-map.json",
     "eclipse_calculation_decision": "data/knowledge-base/panchang-festival/production/panchang-eclipse-calculation-source-decision.json",
     "no_computation_audit": "data/knowledge-base/panchang-festival/production/ag70h-no-panchang-computation-audit.json"
+  },
+  "ag70i_files": {
+    "internal_model": "data/knowledge-base/panchang-festival/production/internal-astronomical-computation-model.json",
+    "computation_method": "data/knowledge-base/panchang-festival/production/internal-panchang-computation-method-register.json",
+    "solar_lunar_longitude_model": "data/knowledge-base/panchang-festival/production/solar-lunar-longitude-computation-model.json",
+    "sunrise_sunset_model": "data/knowledge-base/panchang-festival/production/sunrise-sunset-computation-model.json",
+    "panchang_element_derivation_model": "data/knowledge-base/panchang-festival/production/panchang-element-derivation-model.json",
+    "ayanamsa_runtime_policy": "data/knowledge-base/panchang-festival/production/ayanamsa-runtime-policy.json",
+    "vara_paksha_karana_model": "data/knowledge-base/panchang-festival/production/vara-paksha-karana-computation-model.json",
+    "computed_record_schema": "data/knowledge-base/panchang-festival/production/computed-panchang-daily-record-schema.json",
+    "manual_verification_policy": "data/knowledge-base/panchang-festival/production/post-computation-manual-verification-policy.json",
+    "external_exclusion_audit": "data/knowledge-base/panchang-festival/production/ag70i-external-panchang-site-exclusion-audit.json",
+    "no_daily_computation_audit": "data/knowledge-base/panchang-festival/production/ag70i-no-daily-panchang-computation-audit.json"
   }
 }

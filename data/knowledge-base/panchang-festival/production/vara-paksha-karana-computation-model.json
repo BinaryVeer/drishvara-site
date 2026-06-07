@@ -1,0 +1,26 @@
+{
+  "module_id": "AG70I",
+  "title": "Vara, Paksha and Karana Computation Model",
+  "status": "vara_paksha_karana_model_defined_no_records_generated",
+  "purpose": "Define supporting Panchang element derivations.",
+  "derivation_rules": {
+    "paksha": {
+      "basis": "moon_minus_sun_angular_difference_0_360",
+      "shukla_rule": "0 <= angle < 180",
+      "krishna_rule": "180 <= angle < 360",
+      "note": "Record must carry normalized angle and tithi index."
+    },
+    "karana": {
+      "basis": "half_tithi_segment",
+      "segment_degrees": 6,
+      "index_rule": "floor(angle / 6) + 1",
+      "boundary_rule": "Karana changes every 6 degrees of Moon-Sun angular difference."
+    },
+    "vara": {
+      "basis": "local_date_or_sunrise_based_day_rule",
+      "rule_status": "final observance-specific day-boundary rule deferred to festival/observance stage",
+      "note": "Record must state whether civil local date or sunrise-based boundary was applied."
+    }
+  },
+  "generated_records_now": 0
+}

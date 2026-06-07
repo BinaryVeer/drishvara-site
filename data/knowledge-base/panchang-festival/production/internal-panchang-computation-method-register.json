@@ -1,0 +1,23 @@
+{
+  "module_id": "AG70I",
+  "title": "Internal Panchang Computation Method Register",
+  "status": "internal_computation_method_register_created_no_runtime_activation",
+  "method_id": "drishvara_internal_panchang_model_v1",
+  "model_type": "in_house_astronomical_computation_contract",
+  "permitted_future_implementation_options": [
+    "internal_algorithmic_implementation",
+    "offline_ephemeris_or_astronomical_library_after_license_review",
+    "locally_reproducible_calculation_module"
+  ],
+  "prohibited_implementation_options": [
+    "runtime_scraping_of_panchang_websites",
+    "external_panchang_website_as_source_of_truth",
+    "manual_date_guessing",
+    "ai_generated_panchang_without_computation",
+    "unrecorded_location_or_timezone_basis"
+  ],
+  "selected_for_runtime_now": false,
+  "implementation_dependency_installed_now": false,
+  "license_review_completed_now": false,
+  "next_required_action_for_ag70j": "Create first internal computed daily Panchang records only after calculation implementation and one governed location basis are selected."
+}

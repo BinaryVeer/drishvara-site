@@ -1,0 +1,21 @@
+{
+  "module_id": "AG70I",
+  "title": "Ayanamsa Runtime Policy",
+  "status": "ayanamsa_runtime_policy_created_selection_still_blocked",
+  "purpose": "Keep ayanamsa explicit and versioned before sidereal calculations are used for public or daily records.",
+  "ayanamsa_selected_for_runtime_now": false,
+  "required_before_first_daily_record": [
+    "ayanamsa_id",
+    "ayanamsa_name",
+    "definition_note",
+    "model_version",
+    "selection_justification",
+    "review_status"
+  ],
+  "rules": [
+    "No sidereal Nakshatra or Yoga computation may be recorded without ayanamsa_id.",
+    "No mixed ayanamsa basis is allowed within the same computation batch.",
+    "If ayanamsa policy changes, a new computation model version must be created."
+  ],
+  "daily_record_generation_blocked_until_selected": true
+}

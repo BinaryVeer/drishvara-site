@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70I",
+  "title": "Sunrise and Sunset Computation Model",
+  "status": "sunrise_sunset_model_defined_no_values_generated",
+  "purpose": "Define location-specific sunrise/sunset basis for Vara and observance-day determination.",
+  "required_inputs": [
+    "date_key",
+    "latitude",
+    "longitude",
+    "timezone",
+    "elevation_if_available",
+    "calculation_method_id"
+  ],
+  "required_outputs_later": [
+    "sunrise_datetime_utc",
+    "sunrise_datetime_local",
+    "sunset_datetime_utc",
+    "sunset_datetime_local",
+    "local_day_boundary_rule",
+    "review_status"
+  ],
+  "rules": [
+    "Vara is evaluated using local day/sunrise basis according to the observance rule later selected.",
+    "Observance windows must state whether civil date or sunrise-based day boundary is applied.",
+    "Date-only observance publication is blocked where start/end time is required."
+  ],
+  "generated_values_now": 0
+}

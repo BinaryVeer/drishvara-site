@@ -1,0 +1,24 @@
+{
+  "module_id": "AG70I",
+  "title": "Solar and Lunar Longitude Computation Model",
+  "status": "solar_lunar_longitude_model_defined_no_values_generated",
+  "purpose": "Define required solar/lunar angular values for Panchang element derivation.",
+  "required_internal_values": [
+    "sun_apparent_longitude_tropical",
+    "moon_apparent_longitude_tropical",
+    "ayanamsa_value_if_sidereal_conversion_required",
+    "sun_longitude_sidereal",
+    "moon_longitude_sidereal",
+    "moon_minus_sun_angular_difference_0_360",
+    "calculation_datetime_utc",
+    "location_id",
+    "calculation_model_version"
+  ],
+  "normalization_rules": [
+    "All angular values must be normalized to 0 <= value < 360.",
+    "Moon-Sun angular difference must be normalized to 0 <= value < 360.",
+    "Sidereal longitude must record the ayanamsa_id and ayanamsa_value used.",
+    "Every computed value must carry calculation timestamp and model version."
+  ],
+  "generated_values_now": 0
+}

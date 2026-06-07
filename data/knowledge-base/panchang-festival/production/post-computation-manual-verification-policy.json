@@ -1,0 +1,24 @@
+{
+  "module_id": "AG70I",
+  "title": "Post-Computation Manual Verification Policy",
+  "status": "post_computation_manual_verification_policy_created",
+  "purpose": "Define how external Panchang references may be used only after Drishvara computes its own output.",
+  "policy": {
+    "external_sites_in_production_model": false,
+    "external_sites_as_source_of_truth": false,
+    "external_sites_as_runtime_dependency": false,
+    "external_sites_as_data_generation_input": false,
+    "external_sites_for_public_claim": false,
+    "external_sites_for_manual_check_after_output": true,
+    "manual_check_process": "Operator may paste Drishvara-generated computed output into review workflow; external references may then be compared manually as verification notes only."
+  },
+  "required_manual_verification_record_fields_later": [
+    "drishvara_output_record_id",
+    "verification_reference_name",
+    "checked_field",
+    "match_status",
+    "difference_note",
+    "operator_review_note",
+    "final_action"
+  ]
+}

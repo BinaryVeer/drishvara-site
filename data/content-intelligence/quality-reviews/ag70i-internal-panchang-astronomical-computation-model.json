@@ -1,0 +1,62 @@
+{
+  "module_id": "AG70I",
+  "title": "Internal Panchang Astronomical Computation Model Production Setup",
+  "status": "ag70i_internal_panchang_astronomical_computation_model_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "2f4bbc87",
+    "head_full": "2f4bbc87bfbbe74b5ac2982203e034d7ec1d87f8",
+    "origin_main": "2f4bbc87",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n?? scripts/generate-ag70i-internal-panchang-astronomical-computation-model.mjs\n?? scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70h_review": "data/content-intelligence/quality-reviews/ag70h-panchang-calculation-source-location-basis-decision.json",
+    "computation_input_contract": "data/knowledge-base/panchang-festival/production/panchang-computation-input-contract.json"
+  },
+  "generated_records": {
+    "internalModel": "data/knowledge-base/panchang-festival/production/internal-astronomical-computation-model.json",
+    "computationMethod": "data/knowledge-base/panchang-festival/production/internal-panchang-computation-method-register.json",
+    "solarLunarLongitudeModel": "data/knowledge-base/panchang-festival/production/solar-lunar-longitude-computation-model.json",
+    "sunriseSunsetModel": "data/knowledge-base/panchang-festival/production/sunrise-sunset-computation-model.json",
+    "panchangElementDerivationModel": "data/knowledge-base/panchang-festival/production/panchang-element-derivation-model.json",
+    "ayanamsaRuntimePolicy": "data/knowledge-base/panchang-festival/production/ayanamsa-runtime-policy.json",
+    "varaPakshaKaranaModel": "data/knowledge-base/panchang-festival/production/vara-paksha-karana-computation-model.json",
+    "computedRecordSchema": "data/knowledge-base/panchang-festival/production/computed-panchang-daily-record-schema.json",
+    "manualVerificationPolicy": "data/knowledge-base/panchang-festival/production/post-computation-manual-verification-policy.json",
+    "externalExclusionAudit": "data/knowledge-base/panchang-festival/production/ag70i-external-panchang-site-exclusion-audit.json",
+    "noDailyComputationAudit": "data/knowledge-base/panchang-festival/production/ag70i-no-daily-panchang-computation-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70i-internal-panchang-astronomical-computation-model.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70i-ag70j-panchang-daily-calculation-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70i-to-ag70j-panchang-daily-calculation-bank-boundary.json",
+    "quality": "data/quality/ag70i-internal-panchang-astronomical-computation-model.json",
+    "preview": "data/quality/ag70i-internal-panchang-astronomical-computation-model-preview.json",
+    "doc": "docs/quality/AG70I_INTERNAL_PANCHANG_ASTRONOMICAL_COMPUTATION_MODEL.md"
+  },
+  "summary": {
+    "internal_panchang_model_defined": true,
+    "computation_method_register_created": true,
+    "solar_lunar_longitude_model_created": true,
+    "sunrise_sunset_model_created": true,
+    "panchang_element_derivation_model_created": true,
+    "ayanamsa_runtime_policy_created": true,
+    "vara_paksha_karana_model_created": true,
+    "computed_daily_record_schema_created": true,
+    "post_computation_manual_verification_policy_created": true,
+    "external_panchang_site_exclusion_audit_passed": true,
+    "panchang_manifest_updated": true,
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_used_for_manual_post_output_verification_only": true,
+    "actual_panchang_daily_records_created_now": false,
+    "actual_observance_events_created_now": false,
+    "actual_eclipse_events_created_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70j": true
+  }
+}
