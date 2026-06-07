@@ -1,0 +1,25 @@
+{
+  "module_id": "AG70C",
+  "title": "Panchang Context to Lexical Input Contract",
+  "status": "panchang_context_to_lexical_input_contract_created",
+  "consumed_connector": "data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json",
+  "runtime_connector_active_now": false,
+  "input_from_panchang_context_interpretation": [
+    "context_signal_id",
+    "tithi_context_key",
+    "nakshatra_context_key",
+    "yoga_context_key",
+    "paksha_context_key",
+    "vara_context_key",
+    "festival_context_key",
+    "combined_interpretive_signal",
+    "confidence_status"
+  ],
+  "passed_to_morphology_engine": [
+    "combined_interpretive_signal",
+    "context_tags",
+    "semantic_direction",
+    "blocked_if_panchang_context_unreviewed"
+  ],
+  "rule": "Raw Panchang values do not directly create a word. Reviewed contextual interpretation is passed to lexical engines."
+}

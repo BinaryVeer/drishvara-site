@@ -1,0 +1,55 @@
+{
+  "module_id": "AG70C",
+  "title": "Lexical Source Evidence Rules",
+  "status": "lexical_source_evidence_rules_created",
+  "purpose": "Define what counts as usable lexical evidence for Sanskrit morphology, etymology and semantics.",
+  "source_classes": [
+    {
+      "class_id": "lexical_dictionary",
+      "examples": [
+        "Cologne Digital Sanskrit Dictionaries",
+        "Sanskrit Heritage / INRIA",
+        "DSAL Sanskrit dictionaries including Apte where reuse permits"
+      ],
+      "allowed_use_now": "metadata_and_short_evidence_notes_only",
+      "requires_reuse_check": true
+    },
+    {
+      "class_id": "corpus_attestation",
+      "examples": [
+        "Digital Corpus of Sanskrit",
+        "GRETIL where reuse permits"
+      ],
+      "allowed_use_now": "attestation_reference_only",
+      "requires_reuse_check": true
+    },
+    {
+      "class_id": "traditional_text_or_name_bank",
+      "examples": [
+        "Vishnu Sahasranama",
+        "Shiva Sahasranama",
+        "Vedic source-term bank",
+        "Puranic name/theme bank"
+      ],
+      "allowed_use_now": "fallback_bank_schema_only_until sourced records are reviewed",
+      "requires_reuse_check": true
+    }
+  ],
+  "mandatory_checks": [
+    "source_access_checked",
+    "reuse_note_checked",
+    "word_form_found_status",
+    "meaning_supported_status",
+    "transliteration_supported_status",
+    "claim_level_supported",
+    "internal_textual_discipline_check",
+    "public_use_permission"
+  ],
+  "blocked_claims": [
+    "unsupported_etymology",
+    "scriptural_claim_without_exact_source",
+    "mantra_generation_or_alteration",
+    "invented_sanskrit_word",
+    "unsourced_meaning_expansion"
+  ]
+}

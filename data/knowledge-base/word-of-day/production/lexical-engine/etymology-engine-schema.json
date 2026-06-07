@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70C",
+  "title": "Etymology Engine Schema",
+  "status": "etymology_engine_schema_created_empty_bank",
+  "runtime_engine_active_now": false,
+  "purpose": "Provide sourced historical/root/derivational background where established; mark not_established when uncertain.",
+  "required_fields": [
+    "etymology_record_id",
+    "lexical_candidate_id",
+    "sanskrit_form",
+    "root_or_dhatu",
+    "derivational_note",
+    "historical_note",
+    "etymology_status",
+    "source_reference_ids",
+    "claim_level",
+    "review_status",
+    "public_explanation_allowed"
+  ],
+  "allowed_etymology_status": [
+    "established",
+    "partially_established",
+    "not_established",
+    "blocked"
+  ],
+  "rule": "If etymology_status is not_established, do not fabricate derivation. Route candidate to fallback or use semantic-only explanation if separately approved.",
+  "records": []
+}

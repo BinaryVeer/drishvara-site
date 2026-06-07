@@ -1,0 +1,45 @@
+{
+  "module_id": "AG70C",
+  "title": "Sacred Fallback Bank Schema",
+  "status": "sacred_fallback_bank_schema_created_empty_bank",
+  "purpose": "Provide fallback word/name candidates when primary lexical etymology or derivation is not established.",
+  "fallback_banks": [
+    {
+      "fallback_bank_id": "vishnu_sahasranama_bank",
+      "source_class": "traditional_name_bank",
+      "status": "schema_created_no_records"
+    },
+    {
+      "fallback_bank_id": "shiva_sahasranama_bank",
+      "source_class": "traditional_name_bank",
+      "status": "schema_created_no_records"
+    },
+    {
+      "fallback_bank_id": "vedic_term_bank",
+      "source_class": "vedic_source_term_bank",
+      "status": "schema_created_no_records"
+    },
+    {
+      "fallback_bank_id": "puranic_name_theme_bank",
+      "source_class": "puranic_name_theme_bank",
+      "status": "schema_created_no_records"
+    }
+  ],
+  "required_fields": [
+    "fallback_record_id",
+    "fallback_bank_id",
+    "sanskrit_form",
+    "hindi_form",
+    "english_gloss",
+    "meaning_en",
+    "meaning_hi",
+    "source_reference_ids",
+    "source_location_note",
+    "semantic_theme_tags",
+    "public_use_permission",
+    "approved_for_fallback_selection",
+    "duplicate_control_tags",
+    "review_status"
+  ],
+  "rule": "Fallback records are not a licence to invent. They require source reference, meaning support, public-use permission and repeat-control."
+}

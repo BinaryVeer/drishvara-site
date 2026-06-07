@@ -1,0 +1,29 @@
+{
+  "module_id": "AG70C",
+  "title": "Semantics Engine Schema",
+  "status": "semantics_engine_schema_created_empty_bank",
+  "runtime_engine_active_now": false,
+  "purpose": "Define exact meaning, semantic range, usage boundary and reflective sense for user-facing Word output.",
+  "required_fields": [
+    "semantics_record_id",
+    "lexical_candidate_id",
+    "sanskrit_form",
+    "meaning_en",
+    "meaning_hi",
+    "semantic_range",
+    "usage_boundary",
+    "reflective_sense",
+    "context_signal_match",
+    "source_reference_ids",
+    "semantic_evidence_status",
+    "review_status",
+    "public_explanation_allowed"
+  ],
+  "allowed_semantic_evidence_status": [
+    "supported",
+    "supported_with_limited_scope",
+    "needs_review",
+    "blocked"
+  ],
+  "records": []
+}

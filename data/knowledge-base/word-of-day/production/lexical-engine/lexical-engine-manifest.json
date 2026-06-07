@@ -1,0 +1,33 @@
+{
+  "module_id": "AG70C",
+  "title": "Sanskrit Lexical Engine Manifest",
+  "status": "sanskrit_lexical_engine_manifest_created_no_runtime_activation",
+  "purpose": "Define the morphology, etymology and semantics data model that Word of the Day must use after Panchang-context interpretation.",
+  "runtime_engine_active_now": false,
+  "public_word_generation_allowed_now": false,
+  "engine_components": {
+    "morphology_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/morphology-engine-schema.json",
+    "etymology_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/etymology-engine-schema.json",
+    "semantics_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/semantics-engine-schema.json",
+    "lexical_source_evidence_rules": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-source-evidence-rules.json",
+    "panchang_context_input_contract": "data/knowledge-base/word-of-day/production/lexical-engine/panchang-context-to-lexical-input-contract.json",
+    "sacred_fallback_bank_schema": "data/knowledge-base/word-of-day/production/lexical-engine/sacred-fallback-bank-schema.json"
+  },
+  "current_counts": {
+    "morphology_records": 0,
+    "etymology_records": 0,
+    "semantics_records": 0,
+    "approved_lexical_records": 0,
+    "sacred_fallback_records": 0,
+    "daily_history_records": 0,
+    "subscriber_archive_records": 0
+  },
+  "blocked_behaviour": [
+    "ai_invented_sanskrit_form",
+    "unsupported_etymology_claim",
+    "loose_transliteration_without_source",
+    "word_selection_without_morphology_semantics_check",
+    "fallback_selection_without_approved_source_bank",
+    "duplicate_publication_without_repeat_control"
+  ]
+}

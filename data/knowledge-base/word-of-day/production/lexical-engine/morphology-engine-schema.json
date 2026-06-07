@@ -1,0 +1,30 @@
+{
+  "module_id": "AG70C",
+  "title": "Morphology Engine Schema",
+  "status": "morphology_engine_schema_created_empty_bank",
+  "runtime_engine_active_now": false,
+  "purpose": "Identify possible Sanskrit forms, roots/stems and valid forms from sourced lexical knowledge based on Panchang-context interpretation.",
+  "required_fields": [
+    "morphology_record_id",
+    "lexical_candidate_id",
+    "input_context_signal_id",
+    "sanskrit_form",
+    "transliteration",
+    "root_or_dhatu",
+    "stem_or_pratipadika",
+    "part_of_speech",
+    "gender_if_applicable",
+    "number_case_if_applicable",
+    "valid_form_status",
+    "morphology_source_reference_ids",
+    "morphology_evidence_status",
+    "review_status"
+  ],
+  "allowed_valid_form_status": [
+    "established",
+    "attested_but_needs_review",
+    "not_established",
+    "blocked"
+  ],
+  "records": []
+}

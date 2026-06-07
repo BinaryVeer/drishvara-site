@@ -1,7 +1,7 @@
 {
   "module_id": "word_of_day",
   "title": "Word of the Day Production Bank Manifest",
-  "status": "production_bank_manifest_created_empty_bank",
+  "status": "production_bank_manifest_created_lexical_engine_model_defined",
   "production_path": "data/knowledge-base/word-of-day/production",
   "candidate_bank_path": "data/knowledge-base/word-of-day/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/word-of-day/production/reviewed-bank.json",
@@ -14,7 +14,14 @@
     "candidate_records": 0,
     "reviewed_records": 0,
     "approved_records": 0,
-    "output_eligible_records": 0
+    "output_eligible_records": 0,
+    "morphology_records": 0,
+    "etymology_records": 0,
+    "semantics_records": 0,
+    "approved_lexical_records": 0,
+    "sacred_fallback_records": 0,
+    "daily_history_records": 0,
+    "subscriber_archive_records": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/backend-architecture/ag48d-no-public-word-reflection-output-audit.json",
@@ -94,6 +101,17 @@
     "theme_tags",
     "repeat_control_tags"
   ],
-  "current_status": "structure_created_bank_not_filled",
-  "next_required_stage": "AG70B — Word of the Day Production Data Bank Batch 01"
+  "current_status": "lexical_engine_model_defined_no_records_filled",
+  "next_required_stage": "AG70D — Word of the Day Methodology Supersession",
+  "lexical_engine_files": {
+    "lexical_engine_manifest": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-engine-manifest.json",
+    "morphology_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/morphology-engine-schema.json",
+    "etymology_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/etymology-engine-schema.json",
+    "semantics_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/semantics-engine-schema.json",
+    "lexical_source_evidence_rules": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-source-evidence-rules.json",
+    "panchang_context_to_lexical_input_contract": "data/knowledge-base/word-of-day/production/lexical-engine/panchang-context-to-lexical-input-contract.json",
+    "sacred_fallback_bank_schema": "data/knowledge-base/word-of-day/production/lexical-engine/sacred-fallback-bank-schema.json",
+    "daily_word_history_schema": "data/knowledge-base/word-of-day/production/daily-word-history-schema.json",
+    "subscriber_word_archive_schema": "data/knowledge-base/word-of-day/production/subscriber-word-archive-schema.json"
+  }
 }

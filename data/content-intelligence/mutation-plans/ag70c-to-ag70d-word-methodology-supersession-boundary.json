@@ -1,0 +1,24 @@
+{
+  "module_id": "AG70C",
+  "title": "AG70C to AG70D Word Methodology Supersession Boundary",
+  "status": "ag70d_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create Word of the Day Methodology v2 supersession record.",
+    "Set old rotation-only method as legacy/reference.",
+    "Define Panchang-context → Morphology → Etymology → Semantics → primary/fallback word selection.",
+    "Keep generated output and UI unchanged."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "creating actual Sanskrit lexical records",
+    "creating actual sacred fallback records",
+    "public Word generation",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "AI-fabricated Sanskrit or meaning records"
+  ]
+}

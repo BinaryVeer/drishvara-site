@@ -1,0 +1,58 @@
+{
+  "module_id": "AG70C",
+  "title": "Sanskrit Lexical Engine Data Model",
+  "status": "ag70c_sanskrit_lexical_engine_data_model_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "1fe20a3d",
+    "head_full": "1fe20a3d2ba6270ba4b527a154f2f0d61d6f4ded",
+    "origin_main": "1fe20a3d",
+    "status_at_generation": "M package.json\n?? scripts/generate-ag70c-sanskrit-lexical-engine-data-model.mjs\n?? scripts/validate-ag70c-sanskrit-lexical-engine-data-model.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70b_review": "data/content-intelligence/quality-reviews/ag70b-panchang-methodology-astronomical-data-foundation.json",
+    "panchang_to_word_connector": "data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json"
+  },
+  "generated_records": {
+    "lexicalEngineManifest": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-engine-manifest.json",
+    "morphologyModel": "data/knowledge-base/word-of-day/production/lexical-engine/morphology-engine-schema.json",
+    "etymologyModel": "data/knowledge-base/word-of-day/production/lexical-engine/etymology-engine-schema.json",
+    "semanticsModel": "data/knowledge-base/word-of-day/production/lexical-engine/semantics-engine-schema.json",
+    "lexicalSourceEvidence": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-source-evidence-rules.json",
+    "panchangLexicalInput": "data/knowledge-base/word-of-day/production/lexical-engine/panchang-context-to-lexical-input-contract.json",
+    "candidateLexicalBankSchema": "data/knowledge-base/word-of-day/production/lexical-engine/candidate-lexical-bank-schema.json",
+    "approvedLexicalBankSchema": "data/knowledge-base/word-of-day/production/lexical-engine/approved-lexical-bank-schema.json",
+    "sacredFallbackSchema": "data/knowledge-base/word-of-day/production/lexical-engine/sacred-fallback-bank-schema.json",
+    "dailyWordHistorySchema": "data/knowledge-base/word-of-day/production/daily-word-history-schema.json",
+    "subscriberArchiveSchema": "data/knowledge-base/word-of-day/production/subscriber-word-archive-schema.json",
+    "wordManifest": "data/knowledge-base/word-of-day/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70c-sanskrit-lexical-engine-data-model.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70c-ag70d-word-methodology-supersession-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70c-to-ag70d-word-methodology-supersession-boundary.json",
+    "quality": "data/quality/ag70c-sanskrit-lexical-engine-data-model.json",
+    "preview": "data/quality/ag70c-sanskrit-lexical-engine-data-model-preview.json",
+    "doc": "docs/quality/AG70C_SANSKRIT_LEXICAL_ENGINE_DATA_MODEL.md"
+  },
+  "summary": {
+    "lexical_engine_manifest_created": true,
+    "morphology_engine_schema_created": true,
+    "etymology_engine_schema_created": true,
+    "semantics_engine_schema_created": true,
+    "lexical_source_evidence_rules_created": true,
+    "panchang_context_to_lexical_input_contract_created": true,
+    "sacred_fallback_bank_schema_created": true,
+    "daily_word_history_schema_created": true,
+    "subscriber_archive_schema_created": true,
+    "word_manifest_updated_with_lexical_engine_model": true,
+    "actual_lexical_records_created_now": false,
+    "actual_sacred_fallback_records_created_now": false,
+    "daily_word_history_records_created_now": false,
+    "subscriber_archive_records_created_now": false,
+    "public_word_generation_allowed_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70d": true
+  }
+}
