@@ -1,0 +1,59 @@
+{
+  "module_id": "AG70F",
+  "title": "Sanskrit Lexical Source Reference Bank Batch 01",
+  "status": "ag70f_sanskrit_lexical_source_reference_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "c46d73b4",
+    "head_full": "c46d73b48faebcc4dd5f2d67b4b6306ffe842ab4",
+    "origin_main": "c46d73b4",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70c-sanskrit-lexical-engine-data-model.mjs\n M scripts/validate-ag70d-word-methodology-supersession.mjs\n M scripts/validate-ag70e-word-production-knowledge-bank-foundation.mjs\n?? scripts/generate-ag70f-sanskrit-lexical-source-reference-bank.mjs\n?? scripts/validate-ag70f-sanskrit-lexical-source-reference-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70e_review": "data/content-intelligence/quality-reviews/ag70e-word-production-knowledge-bank-foundation.json",
+    "foundation_manifest": "data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json"
+  },
+  "generated_records": {
+    "sourceReferenceBank": "data/knowledge-base/word-of-day/production/knowledge-bank/sanskrit-lexical-source-reference-bank.json",
+    "sourceReviewPolicy": "data/knowledge-base/word-of-day/production/knowledge-bank/sanskrit-lexical-source-review-policy.json",
+    "sourceReuseBoundary": "data/knowledge-base/word-of-day/production/knowledge-bank/sanskrit-source-reuse-boundary-register.json",
+    "sacredFallbackFamilyRegister": "data/knowledge-base/word-of-day/production/knowledge-bank/sacred-fallback-source-family-register.json",
+    "lexicalSourceEvidenceMap": "data/knowledge-base/word-of-day/production/knowledge-bank/lexical-source-evidence-map.json",
+    "foundationManifest": "data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json",
+    "wordManifest": "data/knowledge-base/word-of-day/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70f-sanskrit-lexical-source-reference-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70f-ag70g-sacred-fallback-source-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70f-to-ag70g-sacred-fallback-source-bank-boundary.json",
+    "quality": "data/quality/ag70f-sanskrit-lexical-source-reference-bank.json",
+    "preview": "data/quality/ag70f-sanskrit-lexical-source-reference-bank-preview.json",
+    "doc": "docs/quality/AG70F_SANSKRIT_LEXICAL_SOURCE_REFERENCE_BANK.md"
+  },
+  "summary": {
+    "source_reference_bank_created": true,
+    "source_review_policy_created": true,
+    "source_reuse_boundary_created": true,
+    "sacred_fallback_family_register_created": true,
+    "nityanand_misra_review_references_added": true,
+    "lexical_source_evidence_map_linked_to_source_reference_bank": true,
+    "exact_source_reference_count": 12,
+    "review_guidance_reference_count": 2,
+    "nityanand_misra_reference_count": 2,
+    "source_family_placeholder_count": 4,
+    "total_source_reference_count": 18,
+    "bulk_ingestion_allowed_count": 0,
+    "public_claim_allowed_now_count": 0,
+    "actual_sanskrit_word_records_created_now": false,
+    "actual_morphology_records_created_now": false,
+    "actual_etymology_records_created_now": false,
+    "actual_semantics_records_created_now": false,
+    "actual_fallback_records_created_now": false,
+    "daily_word_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "runtime_selector_active_now": false,
+    "public_word_generation_allowed_now": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70g": true
+  }
+}

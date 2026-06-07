@@ -1,0 +1,22 @@
+{
+  "module_id": "AG70F",
+  "title": "Sanskrit Lexical Source Review Policy",
+  "status": "sanskrit_lexical_source_review_policy_created",
+  "policy_rules": [
+    "Source-reference record is not a public content approval.",
+    "Review-guidance references support discipline and validation caution only; they are not primary lexical evidence by themselves.",
+    "No dictionary/book/corpus text may be bulk ingested in this stage.",
+    "Source access and reuse notes must be checked before a source can support evidence mapping.",
+    "Every future lexical/fallback record must link to at least one source_reference_id and one evidence_id.",
+    "Sacred fallback source families require exact edition/source/recension selection before records can be populated.",
+    "Public claims require record-level review; source-level registration alone is insufficient."
+  ],
+  "blocked_use": [
+    "bulk_dictionary_ingestion",
+    "long_text_reproduction",
+    "public_etymology_claim_from_source_title_only",
+    "fallback_bank_population_from_source_family_placeholder",
+    "fallback_bank_population_from_review_guidance_reference_alone",
+    "AI_substitute_for_source_evidence"
+  ]
+}
