@@ -1,0 +1,36 @@
+{
+  "module_id": "AG70B",
+  "title": "Panchang to Word Context Connector",
+  "status": "panchang_to_word_context_connector_defined_not_runtime_active",
+  "runtime_connector_active_now": false,
+  "purpose": "Provide structured day-context interpretation for the future Sanskrit lexical engines and Word of the Day method.",
+  "input_context_fields": [
+    "tithi",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "paksha",
+    "vara",
+    "festival_context",
+    "observance_context"
+  ],
+  "output_context_fields_for_word_engine": [
+    "context_signal_id",
+    "tithi_context_key",
+    "nakshatra_context_key",
+    "yoga_context_key",
+    "paksha_context_key",
+    "vara_context_key",
+    "festival_context_key",
+    "combined_interpretive_signal",
+    "confidence_status",
+    "passed_to_morphology_engine"
+  ],
+  "downstream_dependency": [
+    "Sanskrit Morphology Engine",
+    "Sanskrit Etymology Engine",
+    "Sanskrit Semantics Engine",
+    "Word of the Day Selection Engine"
+  ],
+  "public_word_generation_allowed_now": false
+}

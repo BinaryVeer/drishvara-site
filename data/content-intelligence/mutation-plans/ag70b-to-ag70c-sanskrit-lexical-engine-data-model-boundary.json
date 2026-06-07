@@ -1,0 +1,24 @@
+{
+  "module_id": "AG70B",
+  "title": "AG70B to AG70C Sanskrit Lexical Engine Data Model Boundary",
+  "status": "ag70c_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create Sanskrit lexical engine data model.",
+    "Define morphology, etymology and semantics production-bank schemas.",
+    "Define fallback sacred-name/word bank schema.",
+    "Connect lexical engine model to Panchang context connector."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "actual festival date publication",
+    "actual eclipse date publication",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Panchang calculation activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "AI-fabricated Sanskrit or meaning records"
+  ]
+}

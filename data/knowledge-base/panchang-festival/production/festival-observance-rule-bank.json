@@ -1,0 +1,71 @@
+{
+  "module_id": "AG70B",
+  "title": "Festival and Observance Rule Bank",
+  "status": "observance_rule_bank_schema_created_rules_pending_population",
+  "approved_for_public_output_now": false,
+  "required_rule_fields": [
+    "observance_id",
+    "name_en",
+    "name_hi",
+    "observance_type",
+    "required_tithi",
+    "required_paksha",
+    "required_masa",
+    "required_nakshatra",
+    "required_yoga",
+    "sunrise_rule",
+    "nishita_rule",
+    "pradosha_rule",
+    "parana_rule",
+    "regional_variation",
+    "start_datetime_rule",
+    "end_datetime_rule",
+    "source_reference_ids",
+    "review_status",
+    "public_use_permission"
+  ],
+  "rule_templates": [
+    {
+      "template_id": "ekadashi_vrata_template",
+      "observance_type": "vrata",
+      "required_tithi": "Ekadashi",
+      "required_rule_classes": [
+        "tithi_window",
+        "sunrise_rule",
+        "parana_window_if_applicable"
+      ],
+      "review_status": "template_not_approved"
+    },
+    {
+      "template_id": "purnima_template",
+      "observance_type": "lunar_observance",
+      "required_tithi": "Purnima",
+      "required_rule_classes": [
+        "tithi_window",
+        "regional_rule_if_any"
+      ],
+      "review_status": "template_not_approved"
+    },
+    {
+      "template_id": "amavasya_template",
+      "observance_type": "lunar_observance",
+      "required_tithi": "Amavasya",
+      "required_rule_classes": [
+        "tithi_window",
+        "regional_rule_if_any"
+      ],
+      "review_status": "template_not_approved"
+    },
+    {
+      "template_id": "eclipse_observance_template",
+      "observance_type": "eclipse",
+      "required_rule_classes": [
+        "eclipse_visibility",
+        "contact_times",
+        "regional_visibility_note"
+      ],
+      "review_status": "template_not_approved"
+    }
+  ],
+  "rules": []
+}

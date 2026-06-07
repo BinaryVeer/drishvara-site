@@ -1,0 +1,56 @@
+{
+  "module_id": "AG70B",
+  "title": "Panchang Element Derivation Rules",
+  "status": "panchang_element_derivation_rules_defined_not_runtime_active",
+  "runtime_calculation_active_now": false,
+  "rules": [
+    {
+      "rule_id": "tithi_derivation",
+      "formula_note": "Tithi is derived from the angular difference between Moon and Sun; each Tithi spans 12 degrees.",
+      "required_inputs": [
+        "moon_longitude",
+        "sun_longitude"
+      ],
+      "output": "tithi_number and tithi_start_end_window",
+      "public_runtime_active_now": false
+    },
+    {
+      "rule_id": "nakshatra_derivation",
+      "formula_note": "Nakshatra is derived from Moon longitude across 27 equal divisions of 13°20′.",
+      "required_inputs": [
+        "moon_longitude"
+      ],
+      "output": "nakshatra_number and nakshatra_start_end_window",
+      "public_runtime_active_now": false
+    },
+    {
+      "rule_id": "yoga_derivation",
+      "formula_note": "Yoga is derived from the sum of Sun and Moon longitudes across 27 equal divisions.",
+      "required_inputs": [
+        "sun_longitude",
+        "moon_longitude"
+      ],
+      "output": "yoga_number and yoga_start_end_window",
+      "public_runtime_active_now": false
+    },
+    {
+      "rule_id": "karana_derivation",
+      "formula_note": "Karana is derived from half-Tithi divisions of 6 degrees with repeating and fixed Karana sequence handling.",
+      "required_inputs": [
+        "moon_sun_angular_difference"
+      ],
+      "output": "karana_name and karana_start_end_window",
+      "public_runtime_active_now": false
+    },
+    {
+      "rule_id": "vara_derivation",
+      "formula_note": "Vara is determined by the local sunrise-based civil day convention for Panchang use.",
+      "required_inputs": [
+        "local_sunrise",
+        "local_date"
+      ],
+      "output": "vara",
+      "public_runtime_active_now": false
+    }
+  ]
+}

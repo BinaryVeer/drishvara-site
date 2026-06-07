@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_empty_bank",
+  "status": "production_bank_manifest_created_panchang_foundation_defined",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -14,7 +14,10 @@
     "candidate_records": 0,
     "reviewed_records": 0,
     "approved_records": 0,
-    "output_eligible_records": 0
+    "output_eligible_records": 0,
+    "daily_calculation_records": 0,
+    "observance_events": 0,
+    "eclipse_events": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -91,6 +94,17 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "structure_created_bank_not_filled",
-  "next_required_stage": "Future AG70 series — Panchang/Festival Production Rule Bank"
+  "current_status": "panchang_foundation_defined_no_calculation_runtime",
+  "next_required_stage": "AG70C — Sanskrit Lexical Engine Data Model",
+  "foundation_files": {
+    "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
+    "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
+    "panchang_element_master_bank": "data/knowledge-base/panchang-festival/production/panchang-element-master-bank.json",
+    "derivation_rules": "data/knowledge-base/panchang-festival/production/panchang-element-derivation-rules.json",
+    "festival_observance_rule_bank": "data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json",
+    "daily_calculation_bank": "data/knowledge-base/panchang-festival/production/daily-panchang-calculation-bank.json",
+    "eclipse_schema": "data/knowledge-base/panchang-festival/production/eclipse-bank-schema.json",
+    "eclipse_event_bank": "data/knowledge-base/panchang-festival/production/eclipse-event-bank.json",
+    "panchang_to_word_context_connector": "data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json"
+  }
 }

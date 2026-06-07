@@ -1,0 +1,45 @@
+{
+  "module_id": "AG70B",
+  "title": "Astronomical Calculation Model",
+  "status": "astronomical_calculation_model_defined_not_runtime_active",
+  "purpose": "Define the in-house governed calculation inputs needed to derive Panchang elements and observance windows.",
+  "calculation_runtime_active_now": false,
+  "required_inputs": [
+    "julian_day",
+    "calculation_datetime_utc",
+    "calculation_datetime_local",
+    "timezone",
+    "latitude",
+    "longitude",
+    "ayanamsa_basis",
+    "sun_geocentric_longitude",
+    "moon_geocentric_longitude",
+    "planetary_longitudes_if_required",
+    "sunrise_local",
+    "sunset_local",
+    "moonrise_local_if_required",
+    "moonset_local_if_required"
+  ],
+  "derived_outputs": [
+    "tithi",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "paksha",
+    "vara",
+    "sunrise_based_day_boundary",
+    "observance_start_end_window",
+    "eclipse_visibility_window_if_applicable"
+  ],
+  "blocked_sources": [
+    "random_panchang_website_as_source_of_truth",
+    "ai_generated_panchang_values",
+    "manual_date_guess_without_calculation_or_rule_basis"
+  ],
+  "required_future_decision": [
+    "Select astronomical calculation library/algorithm.",
+    "Select ayanamsa basis.",
+    "Select default public location policy.",
+    "Define regional calendar handling."
+  ]
+}
