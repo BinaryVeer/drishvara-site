@@ -1,0 +1,27 @@
+{
+  "module_id": "AG70E",
+  "title": "Word Output Record Contract",
+  "status": "word_output_record_contract_created_no_output_generated",
+  "purpose": "Define the final bounded record that will later replace or feed generated/word-of-day.json only after output connector approval.",
+  "output_target_future": "generated/word-of-day.json",
+  "required_fields": [
+    "date_key",
+    "word_id",
+    "sanskrit",
+    "hindi",
+    "english",
+    "meaning_en",
+    "meaning_hi",
+    "context_summary",
+    "selection_path",
+    "source_bank_used",
+    "morphology_status",
+    "etymology_status",
+    "semantic_status",
+    "duplicate_check_status",
+    "public_use_permission",
+    "review_status",
+    "subscriber_archive_eligible"
+  ],
+  "output_generated_now": false
+}

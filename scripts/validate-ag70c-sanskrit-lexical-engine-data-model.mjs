@@ -116,7 +116,8 @@ if (archive.records.length !== 0) fail("Subscriber archive records must be empty
 const wordManifest = readJson("data/knowledge-base/word-of-day/production/production-bank-manifest.json");
 const allowedWordManifestStatuses = [
   "production_bank_manifest_created_lexical_engine_model_defined",
-  "production_bank_manifest_created_word_methodology_v2_superseded"
+  "production_bank_manifest_created_word_methodology_v2_superseded",
+  "production_bank_manifest_created_word_production_knowledge_bank_foundation"
 ];
 if (!allowedWordManifestStatuses.includes(wordManifest.status)) fail("Word manifest status mismatch.");
 if (!wordManifest.lexical_engine_files?.morphology_engine_schema) fail("Word manifest missing lexical engine file map.");

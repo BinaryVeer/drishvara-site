@@ -1,7 +1,7 @@
 {
   "module_id": "word_of_day",
   "title": "Word of the Day Production Bank Manifest",
-  "status": "production_bank_manifest_created_word_methodology_v2_superseded",
+  "status": "production_bank_manifest_created_word_production_knowledge_bank_foundation",
   "production_path": "data/knowledge-base/word-of-day/production",
   "candidate_bank_path": "data/knowledge-base/word-of-day/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/word-of-day/production/reviewed-bank.json",
@@ -24,7 +24,12 @@
     "subscriber_archive_records": 0,
     "methodology_v2_records": 1,
     "production_word_records": 0,
-    "generated_daily_word_records": 0
+    "generated_daily_word_records": 0,
+    "context_interpretation_records": 0,
+    "lexical_source_evidence_records": 0,
+    "approved_output_candidates": 0,
+    "daily_word_history_records": 0,
+    "duplicate_control_records": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/backend-architecture/ag48d-no-public-word-reflection-output-audit.json",
@@ -104,8 +109,8 @@
     "theme_tags",
     "repeat_control_tags"
   ],
-  "current_status": "word_methodology_v2_defined_no_runtime_activation",
-  "next_required_stage": "AG70E — Word Production Knowledge Bank Foundation",
+  "current_status": "word_production_knowledge_bank_foundation_created_empty_banks",
+  "next_required_stage": "AG70F — Sanskrit Lexical Source Reference Bank Batch 01",
   "lexical_engine_files": {
     "lexical_engine_manifest": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-engine-manifest.json",
     "morphology_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/morphology-engine-schema.json",
@@ -126,5 +131,19 @@
     "fallback_rules": "data/knowledge-base/word-of-day/production/methodology/ag70d-sacred-fallback-selection-rules.json",
     "duplicate_history_rules": "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json",
     "subscriber_archive_model": "data/knowledge-base/word-of-day/production/methodology/ag70d-subscriber-archive-access-model.json"
+  },
+  "knowledge_bank_files": {
+    "foundation_manifest": "data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json",
+    "context_interpretation_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/context-interpretation-bank.json",
+    "context_signal_taxonomy": "data/knowledge-base/word-of-day/production/knowledge-bank/context-signal-taxonomy.json",
+    "morphology_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/morphology-production-bank.json",
+    "etymology_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/etymology-production-bank.json",
+    "semantics_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/semantics-production-bank.json",
+    "sacred_fallback_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/sacred-fallback-production-bank.json",
+    "lexical_source_evidence_map": "data/knowledge-base/word-of-day/production/knowledge-bank/lexical-source-evidence-map.json",
+    "approved_output_candidate_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/approved-output-candidate-bank.json",
+    "daily_word_history_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/daily-word-history-bank.json",
+    "duplicate_control_history_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/duplicate-control-history-bank.json",
+    "output_record_contract": "data/knowledge-base/word-of-day/production/knowledge-bank/word-output-record-contract.json"
   }
 }
