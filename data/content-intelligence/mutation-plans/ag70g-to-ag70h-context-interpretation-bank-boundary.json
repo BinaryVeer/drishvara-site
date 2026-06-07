@@ -1,0 +1,25 @@
+{
+  "module_id": "AG70G",
+  "title": "AG70G to AG70H Context Interpretation Bank Boundary",
+  "status": "ag70h_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create context signal records for Panchang-to-Word interpretation.",
+    "Keep context interpretation records review-bound and not runtime-active.",
+    "Do not create Sanskrit word records yet.",
+    "Do not populate fallback names/terms yet."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "AI-fabricated Sanskrit or meaning records",
+    "unsupported etymology",
+    "public Word output",
+    "bulk dictionary/book content ingestion",
+    "fallback word/name/term population"
+  ]
+}

@@ -118,7 +118,8 @@ const allowedWordManifestStatuses = [
   "production_bank_manifest_created_lexical_engine_model_defined",
   "production_bank_manifest_created_word_methodology_v2_superseded",
   "production_bank_manifest_created_word_production_knowledge_bank_foundation",
-  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank"
+  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank",
+  "production_bank_manifest_created_sacred_fallback_source_bank"
 ];
 if (!allowedWordManifestStatuses.includes(wordManifest.status)) fail("Word manifest status mismatch.");
 if (!wordManifest.lexical_engine_files?.morphology_engine_schema) fail("Word manifest missing lexical engine file map.");

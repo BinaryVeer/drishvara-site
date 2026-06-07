@@ -112,7 +112,11 @@ if (reuse.status !== "sanskrit_source_reuse_boundary_register_created") fail("Re
 if (reuse.source_reference_ids.length !== 18) fail("Reuse boundary must include all source references.");
 
 const families = readJson("data/knowledge-base/word-of-day/production/knowledge-bank/sacred-fallback-source-family-register.json");
-if (families.status !== "sacred_fallback_source_family_register_created_exact_sources_pending") fail("Sacred fallback family register status mismatch.");
+const allowedSacredFallbackFamilyRegisterStatuses = [
+  "sacred_fallback_source_family_register_created_exact_sources_pending",
+  "sacred_fallback_source_family_register_exact_sources_selected_no_word_population"
+];
+if (!allowedSacredFallbackFamilyRegisterStatuses.includes(families.status)) fail("Sacred fallback family register status mismatch.");
 if (families.family_count !== 4) fail("Sacred fallback family count must be 4.");
 if (!families.review_guidance_reference_ids.includes("src_nityananda_misra_sunama_sarit")) fail("Sunama-Sarit review guidance missing from fallback register.");
 if (!families.review_guidance_reference_ids.includes("src_nityananda_misra_sunama")) fail("Sunama review guidance missing from fallback register.");
@@ -125,13 +129,21 @@ if (evidenceMap.evidence_records_created_now !== 0) fail("No evidence records sh
 if (!Array.isArray(evidenceMap.records) || evidenceMap.records.length !== 0) fail("Evidence records must remain empty in AG70F.");
 
 const foundation = readJson("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json");
-if (foundation.status !== "word_production_knowledge_bank_foundation_created_with_source_reference_bank") fail("Foundation manifest status mismatch.");
+const allowedFoundationStatuses = [
+  "word_production_knowledge_bank_foundation_created_with_source_reference_bank",
+  "word_production_knowledge_bank_foundation_created_with_sacred_fallback_source_bank"
+];
+if (!allowedFoundationStatuses.includes(foundation.status)) fail("Foundation manifest status mismatch.");
 if (foundation.current_counts.source_reference_records !== 18) fail("Foundation source reference count mismatch.");
 if (foundation.current_counts.nityanand_misra_reference_records !== 2) fail("Foundation Nityanand Misra reference count mismatch.");
 if (foundation.current_counts.evidence_records !== 0) fail("Evidence records must remain zero.");
 
 const wordManifest = readJson("data/knowledge-base/word-of-day/production/production-bank-manifest.json");
-if (wordManifest.status !== "production_bank_manifest_created_sanskrit_lexical_source_reference_bank") fail("Word manifest status mismatch.");
+const allowedWordManifestStatuses = [
+  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank",
+  "production_bank_manifest_created_sacred_fallback_source_bank"
+];
+if (!allowedWordManifestStatuses.includes(wordManifest.status)) fail("Word manifest status mismatch.");
 if (wordManifest.current_counts.source_reference_records !== 18) fail("Word manifest source reference count mismatch.");
 if (wordManifest.current_counts.nityanand_misra_reference_records !== 2) fail("Word manifest Nityanand Misra reference count mismatch.");
 if (wordManifest.current_counts.actual_lexical_records !== 0) fail("Actual lexical records must be zero.");

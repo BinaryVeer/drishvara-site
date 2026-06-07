@@ -108,7 +108,8 @@ const wordManifest = readJson("data/knowledge-base/word-of-day/production/produc
 const allowedWordManifestStatuses = [
   "production_bank_manifest_created_word_methodology_v2_superseded",
   "production_bank_manifest_created_word_production_knowledge_bank_foundation",
-  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank"
+  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank",
+  "production_bank_manifest_created_sacred_fallback_source_bank"
 ];
 if (!allowedWordManifestStatuses.includes(wordManifest.status)) fail("Word manifest status mismatch.");
 if (wordManifest.active_methodology_version !== "word_of_day_method_v2_panchang_context_sanskrit_lexical_engine") fail("Word manifest active methodology mismatch.");

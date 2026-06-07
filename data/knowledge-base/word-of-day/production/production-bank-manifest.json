@@ -1,7 +1,7 @@
 {
   "module_id": "word_of_day",
   "title": "Word of the Day Production Bank Manifest",
-  "status": "production_bank_manifest_created_sanskrit_lexical_source_reference_bank",
+  "status": "production_bank_manifest_created_sacred_fallback_source_bank",
   "production_path": "data/knowledge-base/word-of-day/production",
   "candidate_bank_path": "data/knowledge-base/word-of-day/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/word-of-day/production/reviewed-bank.json",
@@ -37,7 +37,8 @@
     "source_family_placeholder_records": 4,
     "actual_lexical_records": 0,
     "actual_fallback_records": 0,
-    "daily_word_records": 0
+    "daily_word_records": 0,
+    "fallback_source_records": 4
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/backend-architecture/ag48d-no-public-word-reflection-output-audit.json",
@@ -117,8 +118,8 @@
     "theme_tags",
     "repeat_control_tags"
   ],
-  "current_status": "sanskrit_lexical_source_reference_bank_batch_01_created_no_word_records",
-  "next_required_stage": "AG70G — Sacred Fallback Source Bank Batch 01",
+  "current_status": "sacred_fallback_source_bank_batch_01_created_no_word_records",
+  "next_required_stage": "AG70H — Context Interpretation Bank Batch 01",
   "lexical_engine_files": {
     "lexical_engine_manifest": "data/knowledge-base/word-of-day/production/lexical-engine/lexical-engine-manifest.json",
     "morphology_engine_schema": "data/knowledge-base/word-of-day/production/lexical-engine/morphology-engine-schema.json",
@@ -159,5 +160,10 @@
     "source_review_policy": "data/knowledge-base/word-of-day/production/knowledge-bank/sanskrit-lexical-source-review-policy.json",
     "source_reuse_boundary": "data/knowledge-base/word-of-day/production/knowledge-bank/sanskrit-source-reuse-boundary-register.json",
     "sacred_fallback_family_register": "data/knowledge-base/word-of-day/production/knowledge-bank/sacred-fallback-source-family-register.json"
+  },
+  "sacred_fallback_source_files": {
+    "sacred_fallback_source_bank": "data/knowledge-base/word-of-day/production/knowledge-bank/sacred-fallback-source-bank.json",
+    "sacred_fallback_source_map": "data/knowledge-base/word-of-day/production/knowledge-bank/sacred-fallback-source-map.json",
+    "no_fallback_word_population_audit": "data/knowledge-base/word-of-day/production/knowledge-bank/ag70g-no-fallback-word-population-audit.json"
   }
 }

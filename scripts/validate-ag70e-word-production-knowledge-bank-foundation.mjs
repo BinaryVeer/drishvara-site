@@ -47,7 +47,8 @@ if (!pkg.scripts?.["validate:project"]?.includes("npm run validate:ag70e")) {
 const foundation = readJson("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json");
 const allowedFoundationStatuses = [
   "word_production_knowledge_bank_foundation_created_empty_banks",
-  "word_production_knowledge_bank_foundation_created_with_source_reference_bank"
+  "word_production_knowledge_bank_foundation_created_with_source_reference_bank",
+  "word_production_knowledge_bank_foundation_created_with_sacred_fallback_source_bank"
 ];
 if (!allowedFoundationStatuses.includes(foundation.status)) fail("Foundation manifest status mismatch.");
 if (foundation.runtime_active_now !== false) fail("Runtime must be inactive.");
@@ -59,7 +60,8 @@ const allowedNonZeroFoundationCountKeys = new Set([
   "exact_source_reference_records",
   "review_guidance_reference_records",
   "nityanand_misra_reference_records",
-  "source_family_placeholder_records"
+  "source_family_placeholder_records",
+  "fallback_source_records"
 ]);
 
 for (const [key, value] of Object.entries(foundation.current_counts)) {
@@ -110,7 +112,8 @@ for (const field of ["date_key", "word_id", "sanskrit", "meaning_en", "selection
 const wordManifest = readJson("data/knowledge-base/word-of-day/production/production-bank-manifest.json");
 const allowedWordManifestStatuses = [
   "production_bank_manifest_created_word_production_knowledge_bank_foundation",
-  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank"
+  "production_bank_manifest_created_sanskrit_lexical_source_reference_bank",
+  "production_bank_manifest_created_sacred_fallback_source_bank"
 ];
 if (!allowedWordManifestStatuses.includes(wordManifest.status)) fail("Word manifest status mismatch.");
 if (!wordManifest.knowledge_bank_files?.foundation_manifest) fail("Word manifest missing knowledge bank file map.");
