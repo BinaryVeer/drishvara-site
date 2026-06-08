@@ -1,0 +1,41 @@
+{
+  "module_id": "AG70P",
+  "title": "Manual Post-Output Comparison Policy",
+  "status": "manual_post_output_comparison_policy_created",
+  "purpose": "Define how external Panchang/eclipse references may be used after internal output is generated.",
+  "allowed_use": [
+    "Manual comparison after Drishvara internal computed record exists.",
+    "Manual discrepancy note creation.",
+    "Manual reviewer comment on whether the discrepancy is calculation, convention, location, ayanamsa, observance-rule or source-format related.",
+    "Manual escalation to improve internal model or rule bank if repeated discrepancy is found."
+  ],
+  "blocked_use": [
+    "No external Panchang site as production source of truth.",
+    "No external Panchang site as data-generation input.",
+    "No scraping or runtime dependency.",
+    "No automatic overwrite of internal computed value.",
+    "No public claim based only on external comparison."
+  ],
+  "comparison_record_required_fields": [
+    "comparison_record_id",
+    "internal_record_id",
+    "module_area",
+    "comparison_reference_type",
+    "comparison_performed_by",
+    "comparison_date",
+    "comparison_result",
+    "discrepancy_type",
+    "manual_note",
+    "action_recommendation",
+    "public_output_impact"
+  ],
+  "comparison_status_values": [
+    "not_started",
+    "matched",
+    "minor_difference_requires_note",
+    "major_difference_requires_review",
+    "not_comparable_due_to_method_difference",
+    "blocked_due_to_unreliable_external_reference"
+  ],
+  "public_output_allowed_now": false
+}

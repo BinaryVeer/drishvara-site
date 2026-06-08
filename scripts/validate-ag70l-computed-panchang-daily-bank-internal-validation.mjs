@@ -123,7 +123,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation",
   "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
   "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
-  "production_bank_manifest_created_eclipse_computation_event_bank_batch_01"
+  "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
+  "production_bank_manifest_created_panchang_computation_verification_policy"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.panchang_daily_records !== 7) fail("Panchang daily records count must be 7.");

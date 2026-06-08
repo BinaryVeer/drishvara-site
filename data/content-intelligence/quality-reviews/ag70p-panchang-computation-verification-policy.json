@@ -1,0 +1,57 @@
+{
+  "module_id": "AG70P",
+  "title": "Panchang Computation Verification and Manual Post-Output Comparison Policy",
+  "status": "ag70p_panchang_computation_verification_policy_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "00ab6514",
+    "head_full": "00ab65140c9d81bd92af54d192e611a9e654dcf3",
+    "origin_main": "00ab6514",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n M scripts/validate-ag70o-eclipse-computation-event-bank.mjs\n?? scripts/generate-ag70p-panchang-computation-verification-policy.mjs\n?? scripts/validate-ag70p-panchang-computation-verification-policy.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70o_review": "data/content-intelligence/quality-reviews/ag70o-eclipse-computation-event-bank.json",
+    "validated_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json",
+    "observance_event_bank": "data/knowledge-base/upcoming-observance/production/observance-event-bank.json",
+    "eclipse_screening_bank": "data/knowledge-base/panchang-festival/production/eclipse-computation-screening-bank-batch-01.json"
+  },
+  "generated_records": {
+    "verificationPolicy": "data/knowledge-base/panchang-festival/production/ag70p-panchang-computation-verification-policy.json",
+    "manualComparisonPolicy": "data/knowledge-base/panchang-festival/production/ag70p-manual-post-output-comparison-policy.json",
+    "discrepancyPolicy": "data/knowledge-base/panchang-festival/production/ag70p-discrepancy-recording-policy.json",
+    "verificationReadinessRegister": "data/knowledge-base/panchang-festival/production/ag70p-verification-readiness-register.json",
+    "contextGate": "data/knowledge-base/panchang-festival/production/ag70p-context-interpretation-gate.json",
+    "noExternalTruthAudit": "data/knowledge-base/panchang-festival/production/ag70p-no-external-source-of-truth-audit.json",
+    "noPublicOutputAudit": "data/knowledge-base/panchang-festival/production/ag70p-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70p-panchang-computation-verification-policy.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70p-ag70q-panchang-context-interpretation-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70p-to-ag70q-panchang-context-interpretation-bank-boundary.json",
+    "quality": "data/quality/ag70p-panchang-computation-verification-policy.json",
+    "preview": "data/quality/ag70p-panchang-computation-verification-policy-preview.json",
+    "doc": "docs/quality/AG70P_PANCHANG_COMPUTATION_VERIFICATION_POLICY.md"
+  },
+  "summary": {
+    "verification_policy_created": true,
+    "manual_post_output_comparison_policy_created": true,
+    "discrepancy_recording_policy_created": true,
+    "verification_readiness_register_created": true,
+    "context_interpretation_gate_created": true,
+    "internal_validation_remains_primary": true,
+    "external_sites_allowed_only_for_manual_post_output_comparison": true,
+    "external_sites_used_as_source_of_truth": false,
+    "external_sites_used_for_data_generation": false,
+    "external_sites_used_as_runtime_dependency": false,
+    "external_sites_used_as_production_validation_source": false,
+    "auto_correction_from_external_site_allowed": false,
+    "public_panchang_output_allowed_now": false,
+    "public_observance_output_allowed_now": false,
+    "public_eclipse_output_allowed_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70q": true
+  }
+}

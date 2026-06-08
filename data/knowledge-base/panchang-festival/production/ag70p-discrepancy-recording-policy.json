@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70P",
+  "title": "Panchang Discrepancy Recording Policy",
+  "status": "panchang_discrepancy_recording_policy_created",
+  "purpose": "Record how discrepancies are classified without automatically changing internal computed values.",
+  "discrepancy_classes": [
+    "timezone_or_day_boundary_difference",
+    "location_coordinate_difference",
+    "ayanamsa_basis_difference",
+    "sunrise_basis_difference",
+    "tithi_boundary_difference",
+    "nakshatra_boundary_difference",
+    "yoga_boundary_difference",
+    "karana_boundary_difference",
+    "observance_rule_difference",
+    "eclipse_node_or_visibility_model_missing",
+    "external_reference_unreliable_or_unclear"
+  ],
+  "correction_policy": {
+    "auto_correction_allowed": false,
+    "manual_review_required": true,
+    "internal_model_patch_required_for_repeated_valid_discrepancy": true,
+    "source_citation_required_for_public_claim": true,
+    "public_output_allowed_before_resolution": false
+  },
+  "empty_discrepancy_register_created_now": true,
+  "discrepancy_records_created_now": 0
+}

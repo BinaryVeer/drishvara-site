@@ -1,0 +1,27 @@
+{
+  "module_id": "AG70P",
+  "title": "AG70P to AG70Q Panchang Context Interpretation Bank Boundary",
+  "status": "ag70q_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create Panchang Context Interpretation Bank Batch 01.",
+    "Interpret validated daily Panchang signals and internal observance candidates.",
+    "Keep Word of the Day generation blocked until lexical engine data banks are populated and validated.",
+    "Keep public output blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

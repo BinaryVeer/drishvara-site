@@ -1,0 +1,43 @@
+{
+  "module_id": "AG70P",
+  "title": "Panchang Computation Verification Policy",
+  "status": "panchang_computation_verification_policy_created",
+  "purpose": "Lock the verification hierarchy after internal Panchang, observance and eclipse screening records have been created.",
+  "verification_hierarchy": [
+    {
+      "level": 1,
+      "name": "internal_schema_and_presence_validation",
+      "description": "Every record must satisfy required schema, locked location/timezone/ayanamsa/model fields, public-blocking flags and null-safety rules.",
+      "source_of_truth_role": "primary"
+    },
+    {
+      "level": 2,
+      "name": "internal_formula_validation",
+      "description": "Computed Panchang values must match AG70I formulas and AG70J locked basis.",
+      "source_of_truth_role": "primary"
+    },
+    {
+      "level": 3,
+      "name": "internal_event_rule_validation",
+      "description": "Observance candidates must be derived from AG70M rule bank and AG70L validated daily Panchang records.",
+      "source_of_truth_role": "primary"
+    },
+    {
+      "level": 4,
+      "name": "internal_eclipse_screening_validation",
+      "description": "Eclipse screening may flag syzygy candidates but cannot confirm eclipse events until node-distance/contact/visibility model exists.",
+      "source_of_truth_role": "primary"
+    },
+    {
+      "level": 5,
+      "name": "manual_post_output_external_comparison",
+      "description": "External Panchang/eclipse references may be manually compared only after Drishvara internal output exists.",
+      "source_of_truth_role": "comparison_only_not_authoritative"
+    }
+  ],
+  "external_sites_as_source_of_truth_allowed": false,
+  "external_sites_as_runtime_dependency_allowed": false,
+  "external_sites_as_data_generation_input_allowed": false,
+  "external_sites_as_auto_correction_allowed": false,
+  "public_output_allowed_now": false
+}
