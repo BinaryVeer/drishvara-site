@@ -1,0 +1,24 @@
+{
+  "module_id": "AG70Z",
+  "title": "Bulk Scale Gate",
+  "status": "bulk_scale_gate_created_blocked_until_pilot_success",
+  "scale_targets_after_pilot_success": [
+    "all India State/UT capitals",
+    "major Indian cities",
+    "Indian districts",
+    "Indian blocks",
+    "global national capitals",
+    "major world cities"
+  ],
+  "prerequisites_before_scale": [
+    "AG71A pilot activation completed",
+    "AG71B runtime validation completed",
+    "AG71C pilot approval closure completed",
+    "no critical resolver/computation/display errors",
+    "source verification gate preserved",
+    "4-month refresh cadence preserved",
+    "coordinate-first UI path passes pilot runtime validation"
+  ],
+  "scale_allowed_now": false,
+  "public_output_allowed_now": false
+}

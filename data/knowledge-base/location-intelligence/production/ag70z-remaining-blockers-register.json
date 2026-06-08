@@ -1,0 +1,38 @@
+{
+  "module_id": "AG70Z",
+  "title": "Remaining Blockers Register",
+  "status": "remaining_blockers_register_created",
+  "blockers_before_public_or_full_scale_activation": [
+    {
+      "blocker_id": "source_verification_full_banks_pending",
+      "description": "Full source verification for India admin, India city/capital and global city/capital banks is pending.",
+      "blocks_full_scale_activation": true
+    },
+    {
+      "blocker_id": "candidate_coordinates_not_approved",
+      "description": "Candidate coordinates/timezones are not computation-approved except future pilot records after AG71A.",
+      "blocks_full_scale_activation": true
+    },
+    {
+      "blocker_id": "public_dropdown_not_activated",
+      "description": "Public dropdown remains blocked until pilot activation and validation stages.",
+      "blocks_full_scale_activation": true
+    },
+    {
+      "blocker_id": "runtime_computation_not_activated",
+      "description": "Panchang and Star Reflection runtime computation remain blocked until pilot runtime validation.",
+      "blocks_full_scale_activation": true
+    },
+    {
+      "blocker_id": "bulk_scale_requires_pilot_success",
+      "description": "Bulk location-bank scale is allowed only after the 4-location pilot passes.",
+      "blocks_full_scale_activation": true
+    },
+    {
+      "blocker_id": "coordinate_first_ui_path_not_pilot_validated",
+      "description": "Lat/long coordinate-first UI path for Panchang and Star Reflection must pass pilot validation before public activation.",
+      "blocks_full_scale_activation": true
+    }
+  ],
+  "public_output_allowed_now": false
+}

@@ -1,0 +1,16 @@
+{
+  "module_id": "AG70Z",
+  "title": "Pilot-first Scaling Rule",
+  "status": "pilot_first_scaling_rule_locked",
+  "governing_rule": "No full-scale public/location-bank activation before the verified 4-location pilot passes end-to-end validation.",
+  "required_sequence": [
+    "AG71A — Verified 4-Location Pilot Activation",
+    "AG71B — Pilot Runtime Validation",
+    "AG71C — Pilot Approval Closure",
+    "AG71D — Scale Location Banks"
+  ],
+  "pilot_success_required_before_bulk_scale": true,
+  "bulk_scale_allowed_after_pilot_success": true,
+  "bulk_scale_mode_after_success": "batchwise_using_same_validation_gates",
+  "public_output_allowed_now": false
+}

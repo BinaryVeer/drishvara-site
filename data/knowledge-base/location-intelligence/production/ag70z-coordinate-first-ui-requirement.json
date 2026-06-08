@@ -1,0 +1,36 @@
+{
+  "module_id": "AG70Z",
+  "title": "Coordinate-first UI Requirement",
+  "status": "coordinate_first_ui_requirement_locked",
+  "purpose": "Ensure Panchang and Star Reflection UI support both named-location selection and manual latitude/longitude input before pilot activation.",
+  "panchang_ui_modes_required": [
+    "select_location_from_dropdown",
+    "enter_coordinates"
+  ],
+  "panchang_coordinate_fields_required": [
+    "latitude_decimal",
+    "longitude_decimal",
+    "timezone",
+    "optional_location_label"
+  ],
+  "star_reflection_ui_modes_required": [
+    "select_birth_place_from_dropdown",
+    "enter_birth_coordinates"
+  ],
+  "star_reflection_coordinate_fields_required": [
+    "latitude_decimal",
+    "longitude_decimal",
+    "birth_timezone",
+    "optional_birth_place_label"
+  ],
+  "coordinate_first_rule": "Place name is optional when latitude, longitude, timezone and date/time basis are supplied.",
+  "ag71a_must_test": [
+    "dropdown-selected pilot locations",
+    "manual latitude/longitude input",
+    "timezone guard",
+    "Panchang input mapping",
+    "Star Reflection input mapping"
+  ],
+  "public_ui_activation_allowed_now": false,
+  "public_output_allowed_now": false
+}

@@ -1,0 +1,21 @@
+{
+  "module_id": "AG70Z",
+  "title": "Location Activation Gate",
+  "status": "location_activation_gate_created",
+  "required_before_ag71a_activation": [
+    "coordinate value present",
+    "timezone present",
+    "source/review status recorded",
+    "freshness or latest-official-release status recorded",
+    "pilot approval flag created",
+    "computation approval limited to pilot scope",
+    "public dropdown exposure limited to pilot scope",
+    "Panchang UI supports both Select Location and Enter Coordinates modes",
+    "Star Reflection UI supports both Select Birth Place and Enter Birth Coordinates modes",
+    "Coordinate-first path validates latitude, longitude, timezone and date/time basis"
+  ],
+  "activation_scope_allowed_next": "four_location_pilot_only",
+  "full_bank_activation_allowed_next": false,
+  "public_output_allowed_now": false,
+  "coordinate_first_ui_requirement_locked": true
+}

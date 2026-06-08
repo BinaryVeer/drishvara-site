@@ -105,7 +105,8 @@ const manifest = readJson("data/knowledge-base/panchang-festival/production/prod
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_india_cities_capitals_coordinate_bank",
   "production_bank_manifest_created_global_capitals_major_cities_coordinate_bank",
-  "production_bank_manifest_created_location_selection_resolver_test"
+  "production_bank_manifest_created_location_selection_resolver_test",
+  "production_bank_manifest_created_location_intelligence_foundation_closure"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.india_capital_coordinate_candidate_records < 36) fail("Manifest capital candidate count mismatch.");

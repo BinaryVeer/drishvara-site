@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70Z",
+  "title": "AG70Z to AG71A Verified 4-Location Pilot Activation Boundary",
+  "status": "ag71a_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create verified 4-location pilot activation records.",
+    "Mark only the 4 pilot locations as pilot-approved if their coordinate/timezone/source review gates pass.",
+    "Prepare pilot-only dropdown exposure flag.",
+    "Prepare pilot-only Panchang/Star Reflection runtime permission records."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "full location-bank activation",
+    "all India State/UT capitals activation",
+    "all districts activation",
+    "all blocks activation",
+    "all global capitals activation",
+    "all major world cities activation",
+    "public full dropdown activation",
+    "unrestricted Panchang runtime computation",
+    "unrestricted Star Reflection runtime computation",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "Supabase/database writes",
+    "backend/Auth activation"
+  ]
+}

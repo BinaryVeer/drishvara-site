@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_location_selection_resolver_test",
+  "status": "production_bank_manifest_created_location_intelligence_foundation_closure",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -74,7 +74,12 @@
     "location_resolver_coordinate_first_test_records": 3,
     "panchang_input_mapping_test_records": 6,
     "star_reflection_input_mapping_test_records": 4,
-    "resolver_computation_executed_records": 0
+    "resolver_computation_executed_records": 0,
+    "location_foundation_closure_records": 1,
+    "pilot_first_scaling_rule_records": 1,
+    "four_location_pilot_candidate_records": 4,
+    "full_scale_activation_records_now": 0,
+    "coordinate_first_ui_requirement_records": 1
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -151,8 +156,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "location_selection_resolver_test_created_internal_only_public_blocked",
-  "next_required_stage": "AG70Z — Location Intelligence Foundation Closure",
+  "current_status": "location_intelligence_foundation_closed_pilot_first_rule_recorded",
+  "next_required_stage": "AG71A \u2014 Verified 4-Location Pilot Activation",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -336,5 +341,15 @@
     "star_reflection_mapping": "data/knowledge-base/location-intelligence/production/ag70y-star-reflection-input-contract-mapping-test.json",
     "safety_audit": "data/knowledge-base/location-intelligence/production/ag70y-resolution-blocking-safety-audit.json",
     "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70y-no-public-output-audit.json"
+  },
+  "ag70z_files": {
+    "closure": "data/knowledge-base/location-intelligence/production/ag70z-location-intelligence-foundation-closure.json",
+    "pilot_rule": "data/knowledge-base/location-intelligence/production/ag70z-pilot-first-scaling-rule.json",
+    "pilot_candidate_set": "data/knowledge-base/location-intelligence/production/ag70z-four-location-pilot-candidate-set.json",
+    "activation_gate": "data/knowledge-base/location-intelligence/production/ag70z-location-activation-gate.json",
+    "scale_gate": "data/knowledge-base/location-intelligence/production/ag70z-bulk-scale-gate.json",
+    "remaining_blockers": "data/knowledge-base/location-intelligence/production/ag70z-remaining-blockers-register.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70z-no-public-output-audit.json",
+    "coordinate_first_ui_requirement": "data/knowledge-base/location-intelligence/production/ag70z-coordinate-first-ui-requirement.json"
   }
 }
