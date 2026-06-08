@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70W",
+  "title": "India City Coordinate Refresh Cadence Policy",
+  "status": "india_city_coordinate_refresh_cadence_policy_created",
+  "refresh_interval_months": 4,
+  "refresh_scope": [
+    "Indian State/UT capitals",
+    "Major Indian cities",
+    "coordinate value",
+    "timezone",
+    "source metadata",
+    "rename or administrative reassignment"
+  ],
+  "refresh_steps": [
+    "Fetch/check latest approved government coordinate/geospatial metadata.",
+    "Compare city/capital list and coordinates against current approved bank.",
+    "Stage coordinate differences as candidates.",
+    "Do not overwrite approved coordinates automatically.",
+    "Generate diff and validation report.",
+    "Promote only after review."
+  ],
+  "failure_policy": {
+    "fetch_failure": "Keep last approved coordinate bank active and create refresh_failure_review_required record.",
+    "schema_change": "Block import and require manual schema review.",
+    "large_coordinate_shift": "Block promotion and require manual geospatial review."
+  },
+  "public_output_allowed_now": false
+}

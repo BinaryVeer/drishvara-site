@@ -96,7 +96,8 @@ for (const key of [
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_location_import_selection_validation",
-  "production_bank_manifest_created_india_administrative_location_import_bank"
+  "production_bank_manifest_created_india_administrative_location_import_bank",
+  "production_bank_manifest_created_india_cities_capitals_coordinate_bank"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.location_selection_validation_records < 5) fail("Location selection validation count mismatch.");

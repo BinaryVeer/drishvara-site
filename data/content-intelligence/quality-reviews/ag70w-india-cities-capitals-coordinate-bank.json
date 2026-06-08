@@ -1,0 +1,56 @@
+{
+  "module_id": "AG70W",
+  "title": "India Cities and Capitals Coordinate Bank",
+  "status": "ag70w_india_cities_capitals_coordinate_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "a706cb94",
+    "head_full": "a706cb94d00bfbc33feb6fa05746da05a5878e03",
+    "origin_main": "a706cb94",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n M scripts/validate-ag70o-eclipse-computation-event-bank.mjs\n M scripts/validate-ag70p-panchang-computation-verification-policy.mjs\n M scripts/validate-ag70q-panchang-context-interpretation-bank.mjs\n M scripts/validate-ag70r-today-panchang-context-preview-output-test.mjs\n M scripts/validate-ag70s-today-panchang-preview-manual-verification-gate.mjs\n M scripts/validate-ag70t-location-intelligence-registry-and-panchang-basis-normalisation.mjs\n M scripts/validate-ag70u-location-import-and-selection-validation.mjs\n M scripts/validate-ag70v-india-administrative-location-import-bank.mjs\n?? scripts/generate-ag70w-india-cities-capitals-coordinate-bank.mjs\n?? scripts/validate-ag70w-india-cities-capitals-coordinate-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70v_review": "data/content-intelligence/quality-reviews/ag70v-india-administrative-location-import-bank.json",
+    "india_capitals_seed": "data/knowledge-base/location-intelligence/production/india-state-ut-capitals-seed.json",
+    "india_major_cities_seed": "data/knowledge-base/location-intelligence/production/india-major-cities-seed.json"
+  },
+  "generated_records": {
+    "sourcePolicy": "data/knowledge-base/location-intelligence/production/ag70w-india-city-coordinate-source-policy.json",
+    "refreshPolicy": "data/knowledge-base/location-intelligence/production/ag70w-city-coordinate-refresh-cadence-policy.json",
+    "coordinateSchema": "data/knowledge-base/location-intelligence/production/india-city-capital-coordinate-schema.json",
+    "coordinateBank": "data/knowledge-base/location-intelligence/production/india-cities-capitals-coordinate-bank.json",
+    "capitalCoordinateCandidates": "data/knowledge-base/location-intelligence/production/ag70w-india-capital-coordinate-candidates.json",
+    "majorCityCoordinateCandidates": "data/knowledge-base/location-intelligence/production/ag70w-india-major-city-coordinate-candidates.json",
+    "verificationQueue": "data/knowledge-base/location-intelligence/production/ag70w-coordinate-government-verification-queue.json",
+    "resolverReadiness": "data/knowledge-base/location-intelligence/production/ag70w-city-coordinate-resolver-readiness.json",
+    "noPublicOutputAudit": "data/knowledge-base/location-intelligence/production/ag70w-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70w-india-cities-capitals-coordinate-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70w-ag70x-global-capitals-major-cities-coordinate-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70w-to-ag70x-global-capitals-major-cities-coordinate-bank-boundary.json",
+    "quality": "data/quality/ag70w-india-cities-capitals-coordinate-bank.json",
+    "preview": "data/quality/ag70w-india-cities-capitals-coordinate-bank-preview.json",
+    "doc": "docs/quality/AG70W_INDIA_CITIES_CAPITALS_COORDINATE_BANK.md"
+  },
+  "summary": {
+    "india_city_capital_coordinate_bank_created": true,
+    "source_policy_created": true,
+    "refresh_policy_created": true,
+    "coordinate_schema_created": true,
+    "verification_queue_created": true,
+    "resolver_readiness_created": true,
+    "capital_candidate_record_count": 36,
+    "major_city_candidate_record_count": 16,
+    "total_candidate_record_count": 52,
+    "approved_computation_record_count": 0,
+    "government_coordinate_fetch_performed_now": false,
+    "public_dropdown_activation_performed_now": false,
+    "panchang_recomputation_performed_now": false,
+    "star_reflection_computation_performed_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "ready_for_ag70x": true
+  }
+}

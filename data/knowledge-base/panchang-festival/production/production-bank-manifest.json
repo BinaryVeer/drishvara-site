@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_india_administrative_location_import_bank",
+  "status": "production_bank_manifest_created_india_cities_capitals_coordinate_bank",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -59,7 +59,12 @@
     "india_admin_import_seed_records": 3,
     "india_admin_approved_computation_records": 0,
     "government_source_freshness_policy_records": 1,
-    "four_month_refresh_cadence_policy_records": 1
+    "four_month_refresh_cadence_policy_records": 1,
+    "india_capital_coordinate_candidate_records": 36,
+    "india_major_city_coordinate_candidate_records": 16,
+    "india_city_capital_total_candidate_records": 52,
+    "india_city_capital_approved_computation_records": 0,
+    "government_coordinate_fetch_records_now": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -136,8 +141,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "india_administrative_location_import_bank_created_public_blocked",
-  "next_required_stage": "AG70W — India Cities and Capitals Coordinate Bank",
+  "current_status": "india_cities_capitals_coordinate_bank_created_candidate_records_public_blocked",
+  "next_required_stage": "AG70X — Global Capitals and Major World Cities Coordinate Bank",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -290,5 +295,16 @@
     "coordinate_policy": "data/knowledge-base/location-intelligence/production/ag70v-india-admin-coordinate-basis-policy.json",
     "refresh_audit": "data/knowledge-base/location-intelligence/production/ag70v-refresh-safety-audit.json",
     "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70v-no-public-output-audit.json"
+  },
+  "ag70w_files": {
+    "source_policy": "data/knowledge-base/location-intelligence/production/ag70w-india-city-coordinate-source-policy.json",
+    "refresh_policy": "data/knowledge-base/location-intelligence/production/ag70w-city-coordinate-refresh-cadence-policy.json",
+    "coordinate_schema": "data/knowledge-base/location-intelligence/production/india-city-capital-coordinate-schema.json",
+    "coordinate_bank": "data/knowledge-base/location-intelligence/production/india-cities-capitals-coordinate-bank.json",
+    "capital_coordinate_candidates": "data/knowledge-base/location-intelligence/production/ag70w-india-capital-coordinate-candidates.json",
+    "major_city_coordinate_candidates": "data/knowledge-base/location-intelligence/production/ag70w-india-major-city-coordinate-candidates.json",
+    "verification_queue": "data/knowledge-base/location-intelligence/production/ag70w-coordinate-government-verification-queue.json",
+    "resolver_readiness": "data/knowledge-base/location-intelligence/production/ag70w-city-coordinate-resolver-readiness.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70w-no-public-output-audit.json"
   }
 }
