@@ -1,0 +1,78 @@
+{
+  "module_id": "AG70Y",
+  "title": "Coordinate-first Resolver Test Report",
+  "status": "coordinate_first_resolver_test_report_created",
+  "test_count": 3,
+  "valid_contract_count": 2,
+  "invalid_contract_count": 1,
+  "place_name_required": false,
+  "computation_executed_now": false,
+  "public_output_allowed_now": false,
+  "results": [
+    {
+      "input_mode": "coordinate_first",
+      "input": {
+        "latitude_decimal": 27.0844,
+        "longitude_decimal": 93.6053,
+        "timezone": "Asia/Kolkata",
+        "date_key_or_datetime_basis": "2026-06-08",
+        "optional_place_label": "User-entered coordinates near Itanagar"
+      },
+      "place_name_required": false,
+      "resolved": true,
+      "resolution_type": "coordinate_first_contract_valid",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "2026-06-08",
+      "missing_fields": [],
+      "contract_valid": true,
+      "computation_executed_now": false,
+      "public_output_allowed_now": false
+    },
+    {
+      "input_mode": "coordinate_first",
+      "input": {
+        "latitude_decimal": 23.3441,
+        "longitude_decimal": 85.3096,
+        "timezone": "Asia/Kolkata",
+        "date_key_or_datetime_basis": "1988-02-10T10:05:23",
+        "optional_place_label": "User-entered birth coordinates"
+      },
+      "place_name_required": false,
+      "resolved": true,
+      "resolution_type": "coordinate_first_contract_valid",
+      "latitude_decimal": 23.3441,
+      "longitude_decimal": 85.3096,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "1988-02-10T10:05:23",
+      "missing_fields": [],
+      "contract_valid": true,
+      "computation_executed_now": false,
+      "public_output_allowed_now": false
+    },
+    {
+      "input_mode": "coordinate_first",
+      "input": {
+        "latitude_decimal": 27.0844,
+        "longitude_decimal": 93.6053,
+        "timezone": null,
+        "date_key_or_datetime_basis": "2026-06-08",
+        "optional_place_label": "Missing timezone guard test"
+      },
+      "place_name_required": false,
+      "resolved": false,
+      "resolution_type": "coordinate_first_contract_invalid",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": null,
+      "date_key_or_datetime_basis": "2026-06-08",
+      "missing_fields": [
+        "timezone"
+      ],
+      "contract_valid": false,
+      "computation_executed_now": false,
+      "public_output_allowed_now": false
+    }
+  ]
+}

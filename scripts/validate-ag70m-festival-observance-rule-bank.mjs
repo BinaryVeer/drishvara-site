@@ -115,7 +115,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_location_import_selection_validation",
   "production_bank_manifest_created_india_administrative_location_import_bank",
   "production_bank_manifest_created_india_cities_capitals_coordinate_bank",
-  "production_bank_manifest_created_global_capitals_major_cities_coordinate_bank"
+  "production_bank_manifest_created_global_capitals_major_cities_coordinate_bank",
+  "production_bank_manifest_created_location_selection_resolver_test"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.festival_observance_rule_records !== 7) fail("Manifest rule count must be 7.");

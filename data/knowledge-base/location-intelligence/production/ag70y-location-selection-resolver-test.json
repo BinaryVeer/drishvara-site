@@ -1,0 +1,156 @@
+{
+  "module_id": "AG70Y",
+  "title": "Location Selection Resolver Test",
+  "status": "location_selection_resolver_test_created_internal_only",
+  "purpose": "Test named-location and coordinate-first resolver paths into Panchang and Star Reflection input contracts without computation/public activation.",
+  "named_resolver_report": "data/knowledge-base/location-intelligence/production/ag70y-named-location-resolver-test-report.json",
+  "coordinate_first_report": "data/knowledge-base/location-intelligence/production/ag70y-coordinate-first-resolver-test-report.json",
+  "panchang_mapping": "data/knowledge-base/location-intelligence/production/ag70y-panchang-input-contract-mapping-test.json",
+  "star_reflection_mapping": "data/knowledge-base/location-intelligence/production/ag70y-star-reflection-input-contract-mapping-test.json",
+  "safety_audit": "data/knowledge-base/location-intelligence/production/ag70y-resolution-blocking-safety-audit.json",
+  "named_location_tests": [
+    {
+      "input_label": "Itanagar-Arunachal Pradesh-India",
+      "source_bank": "location-selection-registry",
+      "resolved": true,
+      "resolution_type": "registry_record",
+      "location_type": "state_ut_capital",
+      "display_label": "Itanagar-Arunachal Pradesh-India",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "coordinate_status": "seed_coordinate_pending_final_review",
+      "computation_allowed_now": false,
+      "public_dropdown_activation_allowed_now": false
+    },
+    {
+      "input_label": "New Delhi-Delhi-India",
+      "source_bank": "india-cities-capitals-coordinate-bank",
+      "resolved": true,
+      "resolution_type": "candidate_coordinate_record",
+      "location_type": "state_ut_capital",
+      "display_label": "New Delhi-Delhi-India",
+      "latitude_decimal": 28.6139,
+      "longitude_decimal": 77.209,
+      "timezone": "Asia/Kolkata",
+      "coordinate_status": "candidate_coordinate_pending_government_verification",
+      "source_status": "pending_survey_of_india_or_approved_government_geospatial_verification",
+      "computation_allowed_now": false,
+      "public_dropdown_activation_allowed_now": false
+    },
+    {
+      "input_label": "Bhawanathpur-Garhwa-Jharkhand-India",
+      "source_bank": "india-administrative-location-import-bank",
+      "resolved": true,
+      "resolution_type": "identity_only_coordinate_pending",
+      "location_type": "subdistrict_or_block",
+      "display_label": "Bhawanathpur-Garhwa-Jharkhand-India",
+      "latitude_decimal": null,
+      "longitude_decimal": null,
+      "timezone": "Asia/Kolkata",
+      "coordinate_status": "pending_government_geospatial_verification",
+      "computation_allowed_now": false,
+      "public_dropdown_activation_allowed_now": false
+    },
+    {
+      "input_label": "Tokyo-Japan",
+      "source_bank": "global-capitals-major-cities-coordinate-bank",
+      "resolved": true,
+      "resolution_type": "candidate_coordinate_record",
+      "location_type": "national_capital",
+      "display_label": "Tokyo-Japan",
+      "latitude_decimal": 35.6762,
+      "longitude_decimal": 139.6503,
+      "timezone": "Asia/Tokyo",
+      "coordinate_status": "candidate_coordinate_pending_authoritative_verification",
+      "source_status": "pending_authoritative_global_source_verification",
+      "timezone_source_status": "pending_authoritative_timezone_verification",
+      "computation_allowed_now": false,
+      "public_dropdown_activation_allowed_now": false
+    },
+    {
+      "input_label": "Dubai-United Arab Emirates",
+      "source_bank": "global-capitals-major-cities-coordinate-bank",
+      "resolved": true,
+      "resolution_type": "candidate_coordinate_record",
+      "location_type": "major_world_city",
+      "display_label": "Dubai-United Arab Emirates",
+      "latitude_decimal": 25.2048,
+      "longitude_decimal": 55.2708,
+      "timezone": "Asia/Dubai",
+      "coordinate_status": "candidate_coordinate_pending_authoritative_verification",
+      "source_status": "pending_authoritative_global_source_verification",
+      "timezone_source_status": "pending_authoritative_timezone_verification",
+      "computation_allowed_now": false,
+      "public_dropdown_activation_allowed_now": false
+    }
+  ],
+  "coordinate_first_tests": [
+    {
+      "input_mode": "coordinate_first",
+      "input": {
+        "latitude_decimal": 27.0844,
+        "longitude_decimal": 93.6053,
+        "timezone": "Asia/Kolkata",
+        "date_key_or_datetime_basis": "2026-06-08",
+        "optional_place_label": "User-entered coordinates near Itanagar"
+      },
+      "place_name_required": false,
+      "resolved": true,
+      "resolution_type": "coordinate_first_contract_valid",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "2026-06-08",
+      "missing_fields": [],
+      "contract_valid": true,
+      "computation_executed_now": false,
+      "public_output_allowed_now": false
+    },
+    {
+      "input_mode": "coordinate_first",
+      "input": {
+        "latitude_decimal": 23.3441,
+        "longitude_decimal": 85.3096,
+        "timezone": "Asia/Kolkata",
+        "date_key_or_datetime_basis": "1988-02-10T10:05:23",
+        "optional_place_label": "User-entered birth coordinates"
+      },
+      "place_name_required": false,
+      "resolved": true,
+      "resolution_type": "coordinate_first_contract_valid",
+      "latitude_decimal": 23.3441,
+      "longitude_decimal": 85.3096,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "1988-02-10T10:05:23",
+      "missing_fields": [],
+      "contract_valid": true,
+      "computation_executed_now": false,
+      "public_output_allowed_now": false
+    },
+    {
+      "input_mode": "coordinate_first",
+      "input": {
+        "latitude_decimal": 27.0844,
+        "longitude_decimal": 93.6053,
+        "timezone": null,
+        "date_key_or_datetime_basis": "2026-06-08",
+        "optional_place_label": "Missing timezone guard test"
+      },
+      "place_name_required": false,
+      "resolved": false,
+      "resolution_type": "coordinate_first_contract_invalid",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": null,
+      "date_key_or_datetime_basis": "2026-06-08",
+      "missing_fields": [
+        "timezone"
+      ],
+      "contract_valid": false,
+      "computation_executed_now": false,
+      "public_output_allowed_now": false
+    }
+  ],
+  "public_output_allowed_now": false
+}
