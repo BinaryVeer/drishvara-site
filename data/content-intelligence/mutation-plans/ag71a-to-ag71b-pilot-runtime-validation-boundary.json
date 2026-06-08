@@ -1,0 +1,29 @@
+{
+  "module_id": "AG71A",
+  "title": "AG71A to AG71B Pilot Runtime Validation Boundary",
+  "status": "ag71b_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Validate pilot dropdown records internally.",
+    "Validate coordinate-first pilot input internally.",
+    "Validate Panchang pilot runtime computation path for 4 locations.",
+    "Validate Star Reflection pilot runtime mapping path for 4 locations.",
+    "Keep public UI/backend/Supabase blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "full location-bank activation",
+    "public full dropdown activation",
+    "unrestricted Panchang runtime computation",
+    "unrestricted Star Reflection runtime computation",
+    "all India State/UT capitals activation",
+    "all districts activation",
+    "all blocks activation",
+    "all global capitals activation",
+    "all major world cities activation",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "Supabase/database writes",
+    "backend/Auth activation"
+  ]
+}

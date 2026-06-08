@@ -1,0 +1,36 @@
+{
+  "module_id": "AG71A",
+  "title": "Coordinate-first Pilot Input Record",
+  "status": "coordinate_first_pilot_input_record_created",
+  "purpose": "Ensure AG71B tests manual latitude/longitude input path alongside dropdown-selected pilot locations.",
+  "coordinate_first_ui_requirement_source": "data/knowledge-base/location-intelligence/production/ag70z-coordinate-first-ui-requirement.json",
+  "input_record_count": 2,
+  "records": [
+    {
+      "pilot_input_id": "ag71a_coordinate_first_itanagar_like_001",
+      "input_mode": "coordinate_first",
+      "optional_label": "Manual coordinates — Itanagar test",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "2026-06-08",
+      "place_name_required": false,
+      "panchang_input_allowed_for_pilot": true,
+      "star_reflection_input_allowed_for_pilot": true,
+      "public_ui_change_performed_now": false
+    },
+    {
+      "pilot_input_id": "ag71a_coordinate_first_birth_like_001",
+      "input_mode": "coordinate_first",
+      "optional_label": "Manual coordinates — birth-location test",
+      "latitude_decimal": 23.3441,
+      "longitude_decimal": 85.3096,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "1988-02-10T10:05:23",
+      "place_name_required": false,
+      "panchang_input_allowed_for_pilot": false,
+      "star_reflection_input_allowed_for_pilot": true,
+      "public_ui_change_performed_now": false
+    }
+  ]
+}

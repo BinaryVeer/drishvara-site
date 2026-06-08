@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_location_intelligence_foundation_closure",
+  "status": "production_bank_manifest_created_verified_four_location_pilot_activation",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -79,7 +79,12 @@
     "pilot_first_scaling_rule_records": 1,
     "four_location_pilot_candidate_records": 4,
     "full_scale_activation_records_now": 0,
-    "coordinate_first_ui_requirement_records": 1
+    "coordinate_first_ui_requirement_records": 1,
+    "ag71a_pilot_approved_location_records": 4,
+    "ag71a_pilot_computation_allowed_records": 4,
+    "ag71a_coordinate_first_pilot_input_records": 2,
+    "ag71a_full_bank_activation_records": 0,
+    "ag71a_public_dropdown_ui_activation_records": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -156,8 +161,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "location_intelligence_foundation_closed_pilot_first_rule_recorded",
-  "next_required_stage": "AG71A \u2014 Verified 4-Location Pilot Activation",
+  "current_status": "verified_four_location_pilot_activation_created_runtime_validation_pending",
+  "next_required_stage": "AG71B — Pilot Runtime Validation",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -351,5 +356,16 @@
     "remaining_blockers": "data/knowledge-base/location-intelligence/production/ag70z-remaining-blockers-register.json",
     "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70z-no-public-output-audit.json",
     "coordinate_first_ui_requirement": "data/knowledge-base/location-intelligence/production/ag70z-coordinate-first-ui-requirement.json"
+  },
+  "ag71a_files": {
+    "activation": "data/knowledge-base/location-intelligence/production/ag71a-verified-four-location-pilot-activation.json",
+    "approved_records": "data/knowledge-base/location-intelligence/production/ag71a-pilot-approved-location-records.json",
+    "coordinate_basis": "data/knowledge-base/location-intelligence/production/ag71a-pilot-coordinate-timezone-basis.json",
+    "source_review": "data/knowledge-base/location-intelligence/production/ag71a-pilot-source-review-record.json",
+    "dropdown_permission": "data/knowledge-base/location-intelligence/production/ag71a-pilot-dropdown-permission-record.json",
+    "runtime_permission": "data/knowledge-base/location-intelligence/production/ag71a-pilot-runtime-permission-record.json",
+    "coordinate_first_pilot": "data/knowledge-base/location-intelligence/production/ag71a-coordinate-first-pilot-input-record.json",
+    "safety_audit": "data/knowledge-base/location-intelligence/production/ag71a-pilot-scope-safety-audit.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag71a-no-public-output-audit.json"
   }
 }
