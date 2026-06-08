@@ -1,0 +1,56 @@
+{
+  "module_id": "AG70O",
+  "title": "Eclipse Computation / Event Bank Batch 01",
+  "status": "ag70o_eclipse_computation_event_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "b0590c86",
+    "head_full": "b0590c866e1c8ed51790d786b1733c83e76a780b",
+    "origin_main": "b0590c86",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n?? scripts/generate-ag70o-eclipse-computation-event-bank.mjs\n?? scripts/validate-ag70o-eclipse-computation-event-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70n_review": "data/content-intelligence/quality-reviews/ag70n-upcoming-observance-computed-event-bank.json",
+    "validated_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json"
+  },
+  "generated_records": {
+    "eclipseModel": "data/knowledge-base/panchang-festival/production/eclipse-computation-model.json",
+    "eclipseScreeningBank": "data/knowledge-base/panchang-festival/production/eclipse-computation-screening-bank-batch-01.json",
+    "eclipseEventBank": "data/knowledge-base/panchang-festival/production/eclipse-computation-event-bank-batch-01.json",
+    "eclipseEventBankMirror": "data/knowledge-base/panchang-festival/production/eclipse-event-bank.json",
+    "nodeRequirementRecord": "data/knowledge-base/panchang-festival/production/ag70o-eclipse-node-requirement-record.json",
+    "noPublicationAudit": "data/knowledge-base/panchang-festival/production/ag70o-no-eclipse-publication-audit.json",
+    "noExternalSourceAudit": "data/knowledge-base/panchang-festival/production/ag70o-no-external-eclipse-source-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70o-eclipse-computation-event-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70o-ag70p-panchang-computation-verification-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70o-to-ag70p-panchang-computation-verification-boundary.json",
+    "quality": "data/quality/ag70o-eclipse-computation-event-bank.json",
+    "preview": "data/quality/ag70o-eclipse-computation-event-bank-preview.json",
+    "doc": "docs/quality/AG70O_ECLIPSE_COMPUTATION_EVENT_BANK.md"
+  },
+  "summary": {
+    "eclipse_computation_model_created": true,
+    "eclipse_screening_bank_created": true,
+    "eclipse_event_bank_created": true,
+    "node_requirement_record_created": true,
+    "screening_record_count": 7,
+    "syzygy_screening_candidate_count": 0,
+    "confirmed_eclipse_event_count": 0,
+    "published_eclipse_event_count": 0,
+    "confirmed_events_blocked_until_node_model": true,
+    "external_panchang_sites_used_as_source": false,
+    "external_eclipse_sites_used_as_source": false,
+    "external_sites_used_for_data_generation": false,
+    "external_sites_used_as_runtime_dependency": false,
+    "external_sites_used_as_validation_source": false,
+    "public_panchang_output_allowed_now": false,
+    "public_eclipse_output_allowed_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70p": true
+  }
+}

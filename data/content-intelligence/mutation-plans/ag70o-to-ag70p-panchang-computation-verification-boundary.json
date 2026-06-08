@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70O",
+  "title": "AG70O to AG70P Panchang Computation Verification Boundary",
+  "status": "ag70p_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Define Panchang computation verification policy.",
+    "Define manual post-output comparison workflow.",
+    "Keep external sites outside source/runtime/data-generation.",
+    "Keep public output blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "context interpretation production records",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

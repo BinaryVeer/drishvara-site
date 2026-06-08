@@ -105,7 +105,8 @@ if (noExternal.external_source_count !== 0) fail("External source count must be 
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
-  "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01"
+  "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
+  "production_bank_manifest_created_eclipse_computation_event_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.festival_observance_rule_records !== 7) fail("Manifest rule count must be 7.");

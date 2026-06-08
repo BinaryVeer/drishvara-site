@@ -105,10 +105,14 @@ for (const key of [
 if (noExternal.external_source_count !== 0) fail("External source count must be zero.");
 
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (panchangManifest.status !== "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
+  "production_bank_manifest_created_eclipse_computation_event_bank_batch_01"
+];
+if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.observance_events !== eventBank.computed_event_record_count) fail("Manifest observance event count mismatch.");
 if (panchangManifest.current_counts.published_observance_events !== 0) fail("Published observance events must be zero.");
-if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must be zero.");
+if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must remain zero until confirmed eclipse event stage.");
 if (panchangManifest.current_counts.context_interpretation_records !== 0) fail("Context records must be zero.");
 
 const upcomingManifest = readJson("data/knowledge-base/upcoming-observance/production/production-bank-manifest.json");

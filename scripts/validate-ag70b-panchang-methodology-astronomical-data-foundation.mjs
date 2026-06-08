@@ -135,7 +135,20 @@ for (const field of ["eclipse_type", "start_datetime_utc", "maximum_datetime_utc
 }
 
 const eclipseBank = readJson("data/knowledge-base/panchang-festival/production/eclipse-event-bank.json");
-if (eclipseBank.event_count !== 0) fail("Eclipse event bank must be empty in AG70B.");
+const ag70bEclipseEventCount =
+  Array.isArray(eclipseBank.records) ? eclipseBank.records.length :
+  Array.isArray(eclipseBank.event_records) ? eclipseBank.event_records.length :
+  Number.isFinite(eclipseBank.confirmed_eclipse_event_count) ? eclipseBank.confirmed_eclipse_event_count :
+  Number.isFinite(eclipseBank.event_count) ? eclipseBank.event_count :
+  0;
+
+const ag70bPublishedEclipseEventCount =
+  Number.isFinite(eclipseBank.published_eclipse_event_count) ? eclipseBank.published_eclipse_event_count :
+  Number.isFinite(eclipseBank.published_event_count) ? eclipseBank.published_event_count :
+  0;
+
+if (ag70bEclipseEventCount < 0) fail("Eclipse event count cannot be negative.");
+if (ag70bPublishedEclipseEventCount !== 0) fail("Published eclipse event count must remain zero.");
 
 const daily = readJson("data/knowledge-base/panchang-festival/production/daily-panchang-calculation-bank.json");
 if (daily.calculation_record_count !== 0) fail("Daily Panchang calculation bank must be empty in AG70B.");

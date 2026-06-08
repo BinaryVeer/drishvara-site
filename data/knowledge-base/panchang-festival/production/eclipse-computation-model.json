@@ -1,0 +1,40 @@
+{
+  "module_id": "AG70O",
+  "title": "Eclipse Computation Model",
+  "status": "eclipse_computation_model_created_node_dependency_explicit",
+  "purpose": "Define internal eclipse screening and event-bank rules without relying on external eclipse/Panchang websites.",
+  "required_conditions": {
+    "solar_eclipse": [
+      "Amavasya / new moon syzygy",
+      "Sun-Moon conjunction",
+      "Moon near lunar node",
+      "visibility/geographic path model for public-facing event"
+    ],
+    "lunar_eclipse": [
+      "Purnima / full moon syzygy",
+      "Sun-Moon opposition",
+      "Moon near lunar node",
+      "visibility/geographic model for public-facing event"
+    ]
+  },
+  "available_in_current_internal_model": [
+    "Tithi",
+    "Paksha",
+    "Sun longitude",
+    "Moon longitude",
+    "Moon-Sun angular difference"
+  ],
+  "not_yet_available_in_current_internal_model": [
+    "ascending_node_longitude",
+    "descending_node_longitude",
+    "moon_node_distance",
+    "eclipse_magnitude",
+    "visibility_path",
+    "contact_times"
+  ],
+  "production_rule": "No eclipse event may be confirmed or published without internal node-distance and visibility/contact-time computation.",
+  "external_eclipse_sites_used_as_source": false,
+  "external_eclipse_sites_used_for_data_generation": false,
+  "external_eclipse_sites_used_as_runtime_dependency": false,
+  "external_sites_allowed_only_for_later_manual_post_output_comparison": true
+}

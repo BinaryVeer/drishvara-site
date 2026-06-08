@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
+  "status": "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -29,7 +29,11 @@
     "festival_observance_rule_records": 7,
     "approved_event_candidate_rule_records": 7,
     "published_observance_events": 0,
-    "computed_observance_event_records": 2
+    "computed_observance_event_records": 2,
+    "eclipse_screening_records": 7,
+    "syzygy_screening_candidate_count": 0,
+    "confirmed_eclipse_events": 0,
+    "published_eclipse_events": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -106,8 +110,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "upcoming_observance_computed_event_bank_batch_01_created_public_blocked",
-  "next_required_stage": "AG70O — Eclipse Computation / Event Bank Batch 01",
+  "current_status": "eclipse_computation_event_bank_batch_01_created_no_confirmed_events_public_blocked",
+  "next_required_stage": "AG70P — Panchang Computation Verification and Manual Post-Output Comparison Policy",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -186,5 +190,14 @@
     "trayodashi_pradosha_window_report": "data/knowledge-base/panchang-festival/production/ag70n-trayodashi-pradosha-window-report.json",
     "no_publication_audit": "data/knowledge-base/upcoming-observance/production/ag70n-no-observance-publication-audit.json",
     "no_external_source_audit": "data/knowledge-base/upcoming-observance/production/ag70n-no-external-panchang-source-audit.json"
+  },
+  "ag70o_files": {
+    "eclipse_model": "data/knowledge-base/panchang-festival/production/eclipse-computation-model.json",
+    "eclipse_screening_bank": "data/knowledge-base/panchang-festival/production/eclipse-computation-screening-bank-batch-01.json",
+    "eclipse_event_bank": "data/knowledge-base/panchang-festival/production/eclipse-computation-event-bank-batch-01.json",
+    "eclipse_event_bank_mirror": "data/knowledge-base/panchang-festival/production/eclipse-event-bank.json",
+    "node_requirement_record": "data/knowledge-base/panchang-festival/production/ag70o-eclipse-node-requirement-record.json",
+    "no_publication_audit": "data/knowledge-base/panchang-festival/production/ag70o-no-eclipse-publication-audit.json",
+    "no_external_source_audit": "data/knowledge-base/panchang-festival/production/ag70o-no-external-eclipse-source-audit.json"
   }
 }
