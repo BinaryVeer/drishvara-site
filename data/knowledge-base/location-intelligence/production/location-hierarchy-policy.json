@@ -1,0 +1,19 @@
+{
+  "module_id": "AG70T",
+  "title": "Location Hierarchy Policy",
+  "status": "location_hierarchy_policy_created",
+  "hierarchy": [
+    "country",
+    "state_or_union_territory",
+    "district",
+    "block",
+    "city_or_capital_or_major_city",
+    "coordinate_first_custom_record"
+  ],
+  "selection_behavior": [
+    "A named location may resolve to a coordinate/timezone basis when verified.",
+    "A coordinate-first location may bypass country/state/district/city fields when latitude, longitude and timezone are provided.",
+    "District and block locations require official import or reviewed centroid/selected point before computation approval."
+  ],
+  "public_output_allowed_now": false
+}

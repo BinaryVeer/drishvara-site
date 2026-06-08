@@ -1,0 +1,29 @@
+{
+  "module_id": "AG70T",
+  "title": "AG70T to AG70U Location Import and Selection Validation Boundary",
+  "status": "ag70u_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Validate named-location selection behaviour.",
+    "Validate coordinate-first input contract.",
+    "Validate Itanagar display label normalisation.",
+    "Prepare official import validation checks for Indian districts/blocks, country capitals and major world cities.",
+    "Keep public/UI output blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public Star Reflection output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

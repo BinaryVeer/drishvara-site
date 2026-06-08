@@ -1,0 +1,49 @@
+{
+  "module_id": "AG70T",
+  "title": "Location Usage Map",
+  "status": "location_usage_map_created",
+  "shared_registry_used_by": [
+    {
+      "module": "Panchang",
+      "use_case": "date/location Panchang calculation basis",
+      "required_location_fields": [
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone",
+        "date_key"
+      ]
+    },
+    {
+      "module": "Star Reflection",
+      "use_case": "birth-location and current-location aware calculations",
+      "required_location_fields": [
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone",
+        "date_time_basis"
+      ]
+    },
+    {
+      "module": "Birth Location Handling",
+      "use_case": "date/time/place or coordinate-first birth input",
+      "required_location_fields": [
+        "date_of_birth",
+        "exact_time_of_birth",
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone_at_birth_datetime"
+      ]
+    },
+    {
+      "module": "Future Location-dependent Modules",
+      "use_case": "single governed location resolver",
+      "required_location_fields": [
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone"
+      ]
+    }
+  ],
+  "duplicate_location_logic_outside_registry_allowed": false,
+  "public_output_allowed_now": false
+}

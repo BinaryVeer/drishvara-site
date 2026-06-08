@@ -110,7 +110,8 @@ const manifest = readJson("data/knowledge-base/panchang-festival/production/prod
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01",
   "production_bank_manifest_created_today_panchang_context_preview_output_test",
-  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate"
+  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate",
+  "production_bank_manifest_created_location_intelligence_registry_panchang_basis_normalisation"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.context_interpretation_records !== 7) fail("Manifest context count must be 7.");

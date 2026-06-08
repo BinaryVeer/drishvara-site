@@ -1,0 +1,75 @@
+{
+  "module_id": "AG70T",
+  "title": "Location Intelligence Registry",
+  "status": "location_intelligence_registry_created_public_blocked",
+  "purpose": "Create a shared governed location layer for Panchang, Star Reflection, birth-location handling and future location-dependent modules.",
+  "supported_location_modes": [
+    "named_location_selection",
+    "coordinate_first_input"
+  ],
+  "supported_location_types": [
+    "state_ut_capital",
+    "major_indian_city",
+    "district",
+    "block",
+    "national_capital",
+    "major_world_city",
+    "coordinate_first_custom"
+  ],
+  "minimum_coordinate_first_fields": [
+    "latitude_decimal",
+    "longitude_decimal",
+    "timezone",
+    "date_time_basis"
+  ],
+  "full_population_scope_required_later": [
+    "all_indian_state_ut_capitals",
+    "all_indian_districts",
+    "all_indian_blocks",
+    "all_country_national_capitals",
+    "major_world_cities"
+  ],
+  "population_status": "registry_schema_seed_records_and_import_contracts_created_full_population_pending_governed_import",
+  "registry_record_count": 2,
+  "public_output_allowed_now": false,
+  "records": [
+    {
+      "location_registry_id": "loc_in_ar_itanagar_capital_complex_001",
+      "location_type": "state_ut_capital",
+      "country_name": "India",
+      "state_or_region_name": "Arunachal Pradesh",
+      "district_name": "Papum Pare",
+      "block_name": null,
+      "city_name": "Itanagar",
+      "display_label": "Itanagar-Arunachal Pradesh-India",
+      "ui_short_label": "Itanagar",
+      "timezone": "Asia/Kolkata",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "coordinate_status": "seed_coordinate_pending_final_review",
+      "source_status": "normalised_seed_record_pending_official_verification",
+      "old_location_ids": [
+        "loc_in_ar_itangar_capital_complex_001"
+      ],
+      "public_output_allowed_now": false
+    },
+    {
+      "location_seed_id": "ag70t_coordinate_first_example_itanagar_001",
+      "location_type": "coordinate_first_custom",
+      "country_name": null,
+      "state_or_region_name": null,
+      "district_name": null,
+      "block_name": null,
+      "city_name": null,
+      "display_label": "Custom Coordinates (27.0844, 93.6053)",
+      "ui_short_label": "Custom Coordinates",
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "date_time_basis_required": true,
+      "source_status": "user_provided_or_system_entered_coordinates",
+      "computation_allowed_when_timezone_confirmed": true,
+      "public_output_allowed_now": false
+    }
+  ]
+}

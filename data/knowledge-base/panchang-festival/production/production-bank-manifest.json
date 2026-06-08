@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_today_panchang_preview_manual_verification_gate",
+  "status": "production_bank_manifest_created_location_intelligence_registry_panchang_basis_normalisation",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -44,7 +44,14 @@
     "public_observance_outputs": 0,
     "public_eclipse_outputs": 0,
     "manual_verification_gate_records": 1,
-    "location_correction_notes": 1
+    "location_correction_notes": 1,
+    "location_intelligence_registry_records": 2,
+    "india_state_ut_capital_seed_records": 36,
+    "india_district_block_seed_records": 2,
+    "india_major_city_seed_records": 16,
+    "world_national_capital_seed_records": 16,
+    "world_major_city_seed_records": 12,
+    "coordinate_first_contract_records": 1
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -121,8 +128,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "today_panchang_preview_manual_verification_gate_created_public_blocked",
-  "next_required_stage": "AG70T — Location Identifier Correction / Panchang Preview Basis Normalisation",
+  "current_status": "location_intelligence_registry_created_public_blocked",
+  "next_required_stage": "AG70U — Location Import and Selection Validation",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -242,5 +249,17 @@
     "location_note": "data/knowledge-base/panchang-festival/production/ag70s-location-id-spelling-note.json",
     "decision_record": "data/knowledge-base/panchang-festival/production/ag70s-manual-verification-decision-record.json",
     "no_public_output_audit": "data/knowledge-base/panchang-festival/production/ag70s-no-public-output-audit.json"
+  },
+  "ag70t_files": {
+    "registry": "data/knowledge-base/location-intelligence/production/location-selection-registry.json",
+    "coordinate_contract": "data/knowledge-base/location-intelligence/production/location-coordinate-input-contract.json",
+    "display_policy": "data/knowledge-base/location-intelligence/production/location-display-label-policy.json",
+    "hierarchy_policy": "data/knowledge-base/location-intelligence/production/location-hierarchy-policy.json",
+    "timezone_policy": "data/knowledge-base/location-intelligence/production/location-timezone-basis-policy.json",
+    "usage_map": "data/knowledge-base/location-intelligence/production/location-usage-map.json",
+    "normalisation_map": "data/knowledge-base/location-intelligence/production/location-id-normalisation-map.json",
+    "itanagar_normalisation": "data/knowledge-base/location-intelligence/production/ag70t-itanagar-normalisation-record.json",
+    "panchang_basis_audit": "data/knowledge-base/location-intelligence/production/ag70t-panchang-basis-normalisation-audit.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70t-no-public-output-audit.json"
   }
 }

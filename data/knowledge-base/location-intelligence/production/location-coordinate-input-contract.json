@@ -1,0 +1,31 @@
+{
+  "module_id": "AG70T",
+  "title": "Coordinate-first Location Input Contract",
+  "status": "coordinate_first_input_contract_created",
+  "purpose": "Allow location-dependent computation without requiring a city/place name when latitude, longitude and timezone basis are provided.",
+  "minimum_required_fields_for_computation": [
+    "latitude_decimal",
+    "longitude_decimal",
+    "timezone",
+    "date_key_or_datetime_basis"
+  ],
+  "additional_required_fields_for_birth_or_star_reflection": [
+    "date_of_birth",
+    "exact_time_of_birth",
+    "timezone_at_birth_datetime",
+    "latitude_decimal",
+    "longitude_decimal"
+  ],
+  "optional_fields": [
+    "place_label",
+    "country_name",
+    "state_or_region_name",
+    "district_name",
+    "block_name",
+    "city_name",
+    "coordinate_source_note"
+  ],
+  "timezone_rule": "Latitude and longitude alone are not enough when date/time conversion is needed; timezone must be supplied, resolved or confirmed.",
+  "historical_timezone_note": "For birth-time use cases, historical timezone/DST handling may be required before final computation.",
+  "public_output_allowed_now": false
+}

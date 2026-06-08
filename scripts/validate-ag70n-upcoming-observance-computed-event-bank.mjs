@@ -111,7 +111,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_panchang_computation_verification_policy",
   "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01",
   "production_bank_manifest_created_today_panchang_context_preview_output_test",
-  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate"
+  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate",
+  "production_bank_manifest_created_location_intelligence_registry_panchang_basis_normalisation"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.observance_events !== eventBank.computed_event_record_count) fail("Manifest observance event count mismatch.");

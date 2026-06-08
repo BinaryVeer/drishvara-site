@@ -1,0 +1,65 @@
+{
+  "module_id": "AG70T",
+  "title": "Location Official Import Contracts",
+  "status": "location_official_import_contracts_created",
+  "import_contracts": [
+    {
+      "contract_id": "india_state_ut_capitals_official_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/india-state-ut-capitals-seed.json",
+      "required_fields": [
+        "state_or_ut_name",
+        "capital_name",
+        "timezone",
+        "latitude_decimal",
+        "longitude_decimal",
+        "source_reference",
+        "review_status"
+      ],
+      "import_status": "pending"
+    },
+    {
+      "contract_id": "india_districts_blocks_official_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/india-district-block-registry.json",
+      "required_fields": [
+        "state_name",
+        "district_name",
+        "block_name",
+        "centroid_or_selected_latitude",
+        "centroid_or_selected_longitude",
+        "timezone",
+        "source_reference",
+        "review_status"
+      ],
+      "import_status": "pending"
+    },
+    {
+      "contract_id": "world_country_capitals_authoritative_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/world-national-capitals-seed.json",
+      "required_fields": [
+        "country_name",
+        "capital_name",
+        "timezone",
+        "latitude_decimal",
+        "longitude_decimal",
+        "source_reference",
+        "review_status"
+      ],
+      "import_status": "pending"
+    },
+    {
+      "contract_id": "world_major_cities_authoritative_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/world-major-cities-seed.json",
+      "required_fields": [
+        "country_name",
+        "city_name",
+        "timezone",
+        "latitude_decimal",
+        "longitude_decimal",
+        "source_reference",
+        "review_status"
+      ],
+      "import_status": "pending"
+    }
+  ],
+  "public_output_allowed_now": false
+}
