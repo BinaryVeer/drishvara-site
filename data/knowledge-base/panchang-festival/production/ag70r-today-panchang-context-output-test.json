@@ -1,0 +1,67 @@
+{
+  "module_id": "AG70R",
+  "title": "Today Panchang Context Preview / Output Test",
+  "status": "today_panchang_context_preview_output_test_created_internal_only",
+  "purpose": "Create a readable internal output-test preview from AG70Q context interpretation for manual verification.",
+  "source_today_preview": "data/knowledge-base/panchang-festival/production/ag70q-today-context-interpretation-preview.json",
+  "source_context_bank": "data/knowledge-base/panchang-festival/production/ag70q-panchang-context-interpretation-bank-batch-01.json",
+  "selected_preview_date_key": "2026-06-08",
+  "requested_today_key_Asia_Kolkata": "2026-06-08",
+  "selected_from_batch_fallback_used": false,
+  "output_test_record_count": 1,
+  "public_output_allowed_now": false,
+  "ui_output_allowed_now": false,
+  "word_output_allowed_now": false,
+  "generated_word_json_modified": false,
+  "readable_preview": {
+    "title": "Today’s Panchang Context Preview",
+    "preview_status": "internal_output_test_only_not_public",
+    "date_key": "2026-06-08",
+    "location_id": "loc_in_ar_itangar_capital_complex_001",
+    "timezone": "Asia/Kolkata",
+    "panchang_elements": {
+      "tithi": "Krishna Ashtami",
+      "tithi_index": 23,
+      "nakshatra": "Shatabhisha",
+      "nakshatra_index": 24,
+      "yoga": "Vishkambha",
+      "yoga_index": 1,
+      "karana": "Balava",
+      "karana_index": 45,
+      "paksha": "Krishna Paksha",
+      "vara": "Monday",
+      "sunrise": "2026-06-08T04:20:38+05:30",
+      "sunset": "2026-06-08T18:08:28+05:30"
+    },
+    "context_summary_lines": [
+      "The day is internally identified with Krishna Ashtami in Krishna Paksha.",
+      "Nakshatra, Yoga and Karana are recorded as Shatabhisha, Vishkambha and Balava respectively.",
+      "No internal observance candidate is flagged for this date in Batch 01.",
+      "No confirmed eclipse signal is produced."
+    ],
+    "observance_candidates": [],
+    "eclipse_screening_note": "no_eclipse_candidate_screened",
+    "lexical_direction_preview": {
+      "status": "context_tokens_only_no_word_selection",
+      "tokens": [
+        "Krishna Ashtami",
+        "Shatabhisha",
+        "Vishkambha",
+        "Balava",
+        "Krishna Paksha",
+        "Monday"
+      ],
+      "word_selection_allowed_now": false
+    },
+    "user_visible_draft_preview": {
+      "headline": "Today’s Panchang Context — 2026-06-08",
+      "body_lines": [
+        "For 2026-06-08, the internal Panchang context is based on Krishna Ashtami in Krishna Paksha.",
+        "The recorded Nakshatra, Yoga and Karana are Shatabhisha, Vishkambha and Balava respectively.",
+        "No internal observance candidate is flagged for this preview date.",
+        "No confirmed eclipse signal is produced for this preview.",
+        "This is an internal preview only and is not yet approved for public display."
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "module_id": "AG70R",
+  "title": "AG70R to AG70S Today Panchang Preview Manual Verification Boundary",
+  "status": "ag70s_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Review AG70R readable preview manually.",
+    "Record approval/correction notes.",
+    "Keep public/UI output blocked unless explicitly approved later."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

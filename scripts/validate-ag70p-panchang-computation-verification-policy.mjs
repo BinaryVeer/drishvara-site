@@ -116,7 +116,8 @@ if (noPublic.context_interpretation_records_created_now !== 0) fail("Context rec
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_panchang_computation_verification_policy",
-  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01"
+  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01",
+  "production_bank_manifest_created_today_panchang_context_preview_output_test"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.panchang_verification_policy_records !== 1) fail("Manifest verification policy count must be 1.");
