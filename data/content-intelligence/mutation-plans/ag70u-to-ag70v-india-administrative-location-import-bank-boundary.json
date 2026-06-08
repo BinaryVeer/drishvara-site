@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70U",
+  "title": "AG70U to AG70V India Administrative Location Import Bank Boundary",
+  "status": "ag70v_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create India administrative location import bank.",
+    "Populate/prepare governed India State, District and Block records as per approved source/import contract.",
+    "Keep records source-status controlled.",
+    "Keep public/UI output blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public Star Reflection output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

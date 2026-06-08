@@ -1,0 +1,44 @@
+{
+  "module_id": "AG70U",
+  "title": "Coordinate-first Validation Report",
+  "status": "coordinate_first_validation_report_created",
+  "coordinate_first_supported": true,
+  "coordinate_first_place_name_required": false,
+  "minimum_contract_check": {
+    "check_id": "ag70u_coordinate_first_minimum_contract",
+    "input_example": {
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "date_key_or_datetime_basis": "2026-06-08"
+    },
+    "required_fields": [
+      "latitude_decimal",
+      "longitude_decimal",
+      "timezone",
+      "date_key_or_datetime_basis"
+    ],
+    "has_latitude": true,
+    "has_longitude": true,
+    "has_timezone": true,
+    "has_date_time_basis": true,
+    "place_name_required": false,
+    "passed": true,
+    "computation_allowed_when_timezone_confirmed": true,
+    "validation_note": "Coordinate-first input can proceed without city/place name when latitude, longitude, timezone and date/time basis are present."
+  },
+  "timezone_guard_check": {
+    "check_id": "ag70u_coordinate_first_timezone_guard",
+    "input_example": {
+      "latitude_decimal": 27.0844,
+      "longitude_decimal": 93.6053,
+      "timezone": null,
+      "date_key_or_datetime_basis": "2026-06-08"
+    },
+    "passed": true,
+    "computation_allowed": false,
+    "validation_note": "Latitude and longitude alone are not enough for date/time-sensitive computation; timezone must be supplied/resolved/confirmed."
+  },
+  "passed": true,
+  "public_output_allowed_now": false
+}

@@ -1,0 +1,55 @@
+{
+  "module_id": "AG70U",
+  "title": "Location Usage Map Compatibility Validation Report",
+  "status": "location_usage_map_compatibility_validation_report_created",
+  "usage_check_count": 4,
+  "usage_passed_count": 4,
+  "usage_all_passed": true,
+  "duplicate_location_logic_outside_registry_allowed": false,
+  "records": [
+    {
+      "module": "Panchang",
+      "record_present": true,
+      "required_location_fields": [
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone",
+        "date_key"
+      ],
+      "passed": true
+    },
+    {
+      "module": "Star Reflection",
+      "record_present": true,
+      "required_location_fields": [
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone",
+        "date_time_basis"
+      ],
+      "passed": true
+    },
+    {
+      "module": "Birth Location Handling",
+      "record_present": true,
+      "required_location_fields": [
+        "date_of_birth",
+        "exact_time_of_birth",
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone_at_birth_datetime"
+      ],
+      "passed": true
+    },
+    {
+      "module": "Future Location-dependent Modules",
+      "record_present": true,
+      "required_location_fields": [
+        "latitude_decimal",
+        "longitude_decimal",
+        "timezone"
+      ],
+      "passed": true
+    }
+  ]
+}

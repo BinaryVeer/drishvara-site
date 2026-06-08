@@ -1,0 +1,49 @@
+{
+  "module_id": "AG70U",
+  "title": "Location Import and Selection Validation",
+  "status": "ag70u_location_import_and_selection_validation_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "3c621158",
+    "head_full": "3c6211587b96d759febfb37cc483eb57ca04f9d5",
+    "origin_main": "3c621158",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n M scripts/validate-ag70o-eclipse-computation-event-bank.mjs\n M scripts/validate-ag70p-panchang-computation-verification-policy.mjs\n M scripts/validate-ag70q-panchang-context-interpretation-bank.mjs\n M scripts/validate-ag70r-today-panchang-context-preview-output-test.mjs\n M scripts/validate-ag70s-today-panchang-preview-manual-verification-gate.mjs\n M scripts/validate-ag70t-location-intelligence-registry-and-panchang-basis-normalisation.mjs\n?? scripts/generate-ag70u-location-import-and-selection-validation.mjs\n?? scripts/validate-ag70u-location-import-and-selection-validation.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70t_review": "data/content-intelligence/quality-reviews/ag70t-location-intelligence-registry-and-panchang-basis-normalisation.json",
+    "location_registry": "data/knowledge-base/location-intelligence/production/location-selection-registry.json"
+  },
+  "generated_records": {
+    "selectionValidation": "data/knowledge-base/location-intelligence/production/ag70u-location-selection-validation-report.json",
+    "coordinateValidation": "data/knowledge-base/location-intelligence/production/ag70u-coordinate-first-validation-report.json",
+    "displayValidation": "data/knowledge-base/location-intelligence/production/ag70u-display-label-validation-report.json",
+    "usageValidation": "data/knowledge-base/location-intelligence/production/ag70u-usage-map-compatibility-validation-report.json",
+    "importReadiness": "data/knowledge-base/location-intelligence/production/ag70u-import-readiness-validation-report.json",
+    "normalisationValidation": "data/knowledge-base/location-intelligence/production/ag70u-itanagar-normalisation-validation-report.json",
+    "noPublicOutputAudit": "data/knowledge-base/location-intelligence/production/ag70u-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70u-location-import-and-selection-validation.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70u-ag70v-india-administrative-location-import-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70u-to-ag70v-india-administrative-location-import-bank-boundary.json",
+    "quality": "data/quality/ag70u-location-import-and-selection-validation.json",
+    "preview": "data/quality/ag70u-location-import-and-selection-validation-preview.json",
+    "doc": "docs/quality/AG70U_LOCATION_IMPORT_AND_SELECTION_VALIDATION.md"
+  },
+  "summary": {
+    "named_location_selection_validated": true,
+    "coordinate_first_input_validated": true,
+    "display_label_policy_validated": true,
+    "usage_map_validated": true,
+    "import_contract_readiness_validated": true,
+    "itanagar_normalisation_validated": true,
+    "full_location_import_performed_now": false,
+    "panchang_recomputation_performed_now": false,
+    "dropdown_public_activation_performed": false,
+    "public_output_allowed_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "ready_for_ag70v": true
+  }
+}

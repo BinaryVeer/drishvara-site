@@ -1,0 +1,31 @@
+{
+  "module_id": "AG70U",
+  "title": "Display Label Validation Report",
+  "status": "display_label_validation_report_created",
+  "display_check_count": 3,
+  "display_passed_count": 3,
+  "display_all_passed": true,
+  "records": [
+    {
+      "check_id": "ag70u_display_no_internal_id_public",
+      "rule": "internal_id_exposure_allowed_in_public_ui",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "check_id": "ag70u_display_itanagar_short_label",
+      "rule": "panchang_preview_header",
+      "expected": "Itanagar",
+      "actual": "Itanagar",
+      "passed": true
+    },
+    {
+      "check_id": "ag70u_display_bhawanathpur_format",
+      "rule": "indian_block_format",
+      "expected": "Bhawanathpur-Garhwa-Jharkhand-India",
+      "actual": "Bhawanathpur-Garhwa-Jharkhand-India",
+      "passed": true
+    }
+  ]
+}

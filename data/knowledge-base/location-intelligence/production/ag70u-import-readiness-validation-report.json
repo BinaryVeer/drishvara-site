@@ -1,0 +1,46 @@
+{
+  "module_id": "AG70U",
+  "title": "Location Import Readiness Validation Report",
+  "status": "location_import_readiness_validation_report_created",
+  "import_contract_count": 4,
+  "import_contract_passed_count": 4,
+  "import_contracts_all_ready": true,
+  "ag70v_ready_for_india_district_block_import": true,
+  "ag70w_ready_for_india_city_capital_coordinate_bank": true,
+  "ag70x_ready_for_global_capital_city_import": true,
+  "no_full_population_performed_now": true,
+  "records": [
+    {
+      "contract_id": "india_state_ut_capitals_official_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/india-state-ut-capitals-seed.json",
+      "required_field_count": 7,
+      "import_status": "pending",
+      "passed": true,
+      "validation_note": "Import contract exists. Actual full data population is deferred to AG70V/AG70W/AG70X."
+    },
+    {
+      "contract_id": "india_districts_blocks_official_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/india-district-block-registry.json",
+      "required_field_count": 8,
+      "import_status": "pending",
+      "passed": true,
+      "validation_note": "Import contract exists. Actual full data population is deferred to AG70V/AG70W/AG70X."
+    },
+    {
+      "contract_id": "world_country_capitals_authoritative_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/world-national-capitals-seed.json",
+      "required_field_count": 7,
+      "import_status": "pending",
+      "passed": true,
+      "validation_note": "Import contract exists. Actual full data population is deferred to AG70V/AG70W/AG70X."
+    },
+    {
+      "contract_id": "world_major_cities_authoritative_import",
+      "target_file": "data/knowledge-base/location-intelligence/production/world-major-cities-seed.json",
+      "required_field_count": 7,
+      "import_status": "pending",
+      "passed": true,
+      "validation_note": "Import contract exists. Actual full data population is deferred to AG70V/AG70W/AG70X."
+    }
+  ]
+}
