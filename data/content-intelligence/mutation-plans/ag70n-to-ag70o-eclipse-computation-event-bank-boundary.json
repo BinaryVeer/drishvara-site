@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70N",
+  "title": "AG70N to AG70O Eclipse Computation / Event Bank Boundary",
+  "status": "ag70o_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create internal eclipse computation/event-bank structure.",
+    "Keep eclipse public publication blocked.",
+    "Keep external Panchang/eclipse sites outside runtime/data-generation.",
+    "Allow external comparison only after Drishvara produces its own computed eclipse output."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "context interpretation production records",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

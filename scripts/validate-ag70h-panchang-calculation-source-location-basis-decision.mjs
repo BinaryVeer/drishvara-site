@@ -116,11 +116,12 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_panchang_computation_basis_lock_daily_bank_batch_01",
   "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run",
   "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation",
-  "production_bank_manifest_created_festival_observance_rule_bank_batch_01"
+  "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
+  "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (![0, 7].includes(panchangManifest.current_counts.panchang_daily_records)) fail("Panchang daily records must be 0 before AG70K or 7 after AG70K.");
-if (panchangManifest.current_counts.observance_events !== 0) fail("Observance events must be zero.");
+if (![0, 2].includes(panchangManifest.current_counts.observance_events)) fail("Observance events must be 0 before AG70N or 2 after AG70N internal candidate generation.");
 if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must be zero.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70h-panchang-calculation-source-location-basis-decision.json");

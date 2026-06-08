@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
+  "status": "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -16,7 +16,7 @@
     "approved_records": 0,
     "output_eligible_records": 0,
     "daily_calculation_records": 0,
-    "observance_events": 0,
+    "observance_events": 2,
     "eclipse_events": 0,
     "panchang_daily_records": 7,
     "context_interpretation_records": 0,
@@ -28,7 +28,8 @@
     "internal_validation_issue_count": 0,
     "festival_observance_rule_records": 7,
     "approved_event_candidate_rule_records": 7,
-    "published_observance_events": 0
+    "published_observance_events": 0,
+    "computed_observance_event_records": 2
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -105,8 +106,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "festival_observance_rule_bank_batch_01_created_event_publication_blocked",
-  "next_required_stage": "AG70N — Upcoming Observance Computed Event Bank Batch 01",
+  "current_status": "upcoming_observance_computed_event_bank_batch_01_created_public_blocked",
+  "next_required_stage": "AG70O — Eclipse Computation / Event Bank Batch 01",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -176,5 +177,14 @@
     "rule_eligibility_map": "data/knowledge-base/panchang-festival/production/observance-rule-eligibility-map.json",
     "no_event_publication_audit": "data/knowledge-base/panchang-festival/production/ag70m-no-observance-event-publication-audit.json",
     "no_external_source_audit": "data/knowledge-base/panchang-festival/production/ag70m-no-external-panchang-source-audit.json"
+  },
+  "ag70n_files": {
+    "event_bank": "data/knowledge-base/upcoming-observance/production/observance-event-bank.json",
+    "event_bank_batch": "data/knowledge-base/upcoming-observance/production/upcoming-observance-computed-event-bank-batch-01.json",
+    "panchang_event_bank_mirror": "data/knowledge-base/panchang-festival/production/upcoming-observance-computed-event-bank-batch-01.json",
+    "rule_application_report": "data/knowledge-base/panchang-festival/production/ag70n-observance-rule-application-report.json",
+    "trayodashi_pradosha_window_report": "data/knowledge-base/panchang-festival/production/ag70n-trayodashi-pradosha-window-report.json",
+    "no_publication_audit": "data/knowledge-base/upcoming-observance/production/ag70n-no-observance-publication-audit.json",
+    "no_external_source_audit": "data/knowledge-base/upcoming-observance/production/ag70n-no-external-panchang-source-audit.json"
   }
 }

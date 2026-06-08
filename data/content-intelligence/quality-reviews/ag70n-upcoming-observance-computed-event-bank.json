@@ -1,0 +1,56 @@
+{
+  "module_id": "AG70N",
+  "title": "Upcoming Observance Computed Event Bank Batch 01",
+  "status": "ag70n_upcoming_observance_computed_event_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "637aa110",
+    "head_full": "637aa110c4184a1111e43d521838354089d13291",
+    "origin_main": "637aa110",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n?? scripts/generate-ag70n-upcoming-observance-computed-event-bank.mjs\n?? scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70m_review": "data/content-intelligence/quality-reviews/ag70m-festival-observance-rule-bank.json",
+    "validated_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json",
+    "rule_bank": "data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json"
+  },
+  "generated_records": {
+    "eventBank": "data/knowledge-base/upcoming-observance/production/observance-event-bank.json",
+    "eventBankBatch": "data/knowledge-base/upcoming-observance/production/upcoming-observance-computed-event-bank-batch-01.json",
+    "panchangEventBankMirror": "data/knowledge-base/panchang-festival/production/upcoming-observance-computed-event-bank-batch-01.json",
+    "ruleApplicationReport": "data/knowledge-base/panchang-festival/production/ag70n-observance-rule-application-report.json",
+    "trayodashiPradoshaWindowReport": "data/knowledge-base/panchang-festival/production/ag70n-trayodashi-pradosha-window-report.json",
+    "noPublicationAudit": "data/knowledge-base/upcoming-observance/production/ag70n-no-observance-publication-audit.json",
+    "noExternalSourceAudit": "data/knowledge-base/upcoming-observance/production/ag70n-no-external-panchang-source-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "upcomingManifest": "data/knowledge-base/upcoming-observance/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70n-upcoming-observance-computed-event-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70n-ag70o-eclipse-computation-event-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70n-to-ag70o-eclipse-computation-event-bank-boundary.json",
+    "quality": "data/quality/ag70n-upcoming-observance-computed-event-bank.json",
+    "preview": "data/quality/ag70n-upcoming-observance-computed-event-bank-preview.json",
+    "doc": "docs/quality/AG70N_UPCOMING_OBSERVANCE_COMPUTED_EVENT_BANK.md"
+  },
+  "summary": {
+    "upcoming_observance_event_bank_created": true,
+    "rule_application_report_created": true,
+    "trayodashi_pradosha_window_report_created": true,
+    "daily_record_count": 7,
+    "rule_record_count": 7,
+    "computed_event_record_count": 2,
+    "published_event_record_count": 0,
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "external_panchang_sites_used_as_validation_source": false,
+    "public_panchang_output_allowed_now": false,
+    "public_observance_output_allowed_now": false,
+    "actual_eclipse_events_created_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70o": true
+  }
+}

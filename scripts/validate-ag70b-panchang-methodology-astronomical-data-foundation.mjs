@@ -113,7 +113,20 @@ for (const field of ["start_datetime_local", "end_datetime_local", "observance_d
 }
 
 const eventBank = readJson("data/knowledge-base/upcoming-observance/production/observance-event-bank.json");
-if (eventBank.event_count !== 0) fail("Observance event bank must be empty in AG70B.");
+const ag70bEventBankCount =
+  Number.isFinite(eventBank.event_count) ? eventBank.event_count :
+  Number.isFinite(eventBank.computed_event_record_count) ? eventBank.computed_event_record_count :
+  Array.isArray(eventBank.records) ? eventBank.records.length :
+  Array.isArray(eventBank.event_records) ? eventBank.event_records.length :
+  0;
+
+const ag70bEventBankPublishedCount =
+  Number.isFinite(eventBank.published_event_record_count) ? eventBank.published_event_record_count :
+  Number.isFinite(eventBank.published_observance_event_count) ? eventBank.published_observance_event_count :
+  0;
+
+if (ag70bEventBankCount < 0) fail("Observance event count cannot be negative.");
+if (ag70bEventBankPublishedCount !== 0) fail("Published observance event count must remain zero.");
 
 const eclipseSchema = readJson("data/knowledge-base/panchang-festival/production/eclipse-bank-schema.json");
 if (eclipseSchema.status !== "eclipse_bank_schema_created_no_events_published") fail("Eclipse schema status mismatch.");

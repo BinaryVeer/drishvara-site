@@ -115,12 +115,13 @@ const panchangManifest = readJson("data/knowledge-base/panchang-festival/product
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_internal_panchang_daily_computation_engine_dry_run",
   "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation",
-  "production_bank_manifest_created_festival_observance_rule_bank_batch_01"
+  "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
+  "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.panchang_daily_records !== 7) fail("Manifest Panchang daily records must be 7.");
 if (panchangManifest.current_counts.computed_internal_dry_run_records !== 7) fail("Manifest dry-run count must be 7.");
-if (panchangManifest.current_counts.observance_events !== 0) fail("Observance events must be zero.");
+if (![0, 2].includes(panchangManifest.current_counts.observance_events)) fail("Observance events must be 0 before AG70N or 2 after AG70N internal candidate generation.");
 if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must be zero.");
 if (panchangManifest.current_counts.context_interpretation_records !== 0) fail("Context interpretation records must be zero.");
 
