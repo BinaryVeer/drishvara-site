@@ -1,0 +1,591 @@
+{
+  "module_id": "AG70Q",
+  "title": "Panchang Context Interpretation Bank Batch 01",
+  "status": "panchang_context_interpretation_bank_batch_01_created_public_blocked",
+  "purpose": "Create internal context interpretation records from validated Panchang records and internal observance/eclipse screening signals.",
+  "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+  "source_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json",
+  "source_observance_bank": "data/knowledge-base/upcoming-observance/production/observance-event-bank.json",
+  "source_eclipse_screening_bank": "data/knowledge-base/panchang-festival/production/eclipse-computation-screening-bank-batch-01.json",
+  "context_interpretation_record_count": 7,
+  "public_output_record_count": 0,
+  "word_output_record_count": 0,
+  "external_source_count": 0,
+  "records": [
+    {
+      "context_interpretation_id": "ag70q_ctx_20260608_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-08",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260608",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 23,
+          "name": "Krishna Ashtami"
+        },
+        "nakshatra": {
+          "index": 24,
+          "name": "Shatabhisha"
+        },
+        "yoga": {
+          "index": 1,
+          "name": "Vishkambha"
+        },
+        "karana": {
+          "index": 45,
+          "name": "Balava"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Monday",
+        "sunrise_datetime_local": "2026-06-08T04:20:38+05:30",
+        "sunset_datetime_local": "2026-06-08T18:08:28+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "middle_waning_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "no_internal_observance_candidate",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Ashtami in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Shatabhisha, Vishkambha and Balava respectively.",
+          "No internal observance candidate is flagged for this date in Batch 01.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Ashtami",
+          "Shatabhisha",
+          "Vishkambha",
+          "Balava",
+          "Krishna Paksha",
+          "Monday"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    },
+    {
+      "context_interpretation_id": "ag70q_ctx_20260609_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-09",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260609",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 24,
+          "name": "Krishna Navami"
+        },
+        "nakshatra": {
+          "index": 25,
+          "name": "Purva Bhadrapada"
+        },
+        "yoga": {
+          "index": 2,
+          "name": "Priti"
+        },
+        "karana": {
+          "index": 47,
+          "name": "Taitila"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Tuesday",
+        "sunrise_datetime_local": "2026-06-09T04:20:36+05:30",
+        "sunset_datetime_local": "2026-06-09T18:08:52+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "middle_waning_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "no_internal_observance_candidate",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Navami in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Purva Bhadrapada, Priti and Taitila respectively.",
+          "No internal observance candidate is flagged for this date in Batch 01.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Navami",
+          "Purva Bhadrapada",
+          "Priti",
+          "Taitila",
+          "Krishna Paksha",
+          "Tuesday"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    },
+    {
+      "context_interpretation_id": "ag70q_ctx_20260610_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-10",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260610",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 25,
+          "name": "Krishna Dashami"
+        },
+        "nakshatra": {
+          "index": 26,
+          "name": "Uttara Bhadrapada"
+        },
+        "yoga": {
+          "index": 3,
+          "name": "Ayushman"
+        },
+        "karana": {
+          "index": 49,
+          "name": "Vanija"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Wednesday",
+        "sunrise_datetime_local": "2026-06-10T04:20:35+05:30",
+        "sunset_datetime_local": "2026-06-10T18:09:16+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "middle_waning_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "no_internal_observance_candidate",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Dashami in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Uttara Bhadrapada, Ayushman and Vanija respectively.",
+          "No internal observance candidate is flagged for this date in Batch 01.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Dashami",
+          "Uttara Bhadrapada",
+          "Ayushman",
+          "Vanija",
+          "Krishna Paksha",
+          "Wednesday"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    },
+    {
+      "context_interpretation_id": "ag70q_ctx_20260611_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-11",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260611",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 26,
+          "name": "Krishna Ekadashi"
+        },
+        "nakshatra": {
+          "index": 27,
+          "name": "Revati"
+        },
+        "yoga": {
+          "index": 5,
+          "name": "Shobhana"
+        },
+        "karana": {
+          "index": 51,
+          "name": "Bava"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Thursday",
+        "sunrise_datetime_local": "2026-06-11T04:20:35+05:30",
+        "sunset_datetime_local": "2026-06-11T18:09:39+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "observance_sensitive_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "internal_observance_candidate_present",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [
+        {
+          "observance_event_id": "ag70n_evt_ekadashi_20260611_loc_in_ar_itangar_capital_complex_001",
+          "observance_key": "ekadashi",
+          "display_name": "Ekadashi",
+          "event_status": "computed_internal_candidate_public_blocked",
+          "publication_status": "blocked",
+          "public_output_allowed": false,
+          "source_rule_id": "observance_rule_ekadashi_vrata_internal_v1"
+        }
+      ],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Ekadashi in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Revati, Shobhana and Bava respectively.",
+          "Internal observance candidate signal present: Ekadashi.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Ekadashi",
+          "Revati",
+          "Shobhana",
+          "Bava",
+          "Krishna Paksha",
+          "Thursday",
+          "Ekadashi"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    },
+    {
+      "context_interpretation_id": "ag70q_ctx_20260612_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-12",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260612",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 27,
+          "name": "Krishna Dwadashi"
+        },
+        "nakshatra": {
+          "index": 1,
+          "name": "Ashwini"
+        },
+        "yoga": {
+          "index": 6,
+          "name": "Atiganda"
+        },
+        "karana": {
+          "index": 53,
+          "name": "Kaulava"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Friday",
+        "sunrise_datetime_local": "2026-06-12T04:20:37+05:30",
+        "sunset_datetime_local": "2026-06-12T18:10:01+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "general_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "no_internal_observance_candidate",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Dwadashi in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Ashwini, Atiganda and Kaulava respectively.",
+          "No internal observance candidate is flagged for this date in Batch 01.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Dwadashi",
+          "Ashwini",
+          "Atiganda",
+          "Kaulava",
+          "Krishna Paksha",
+          "Friday"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    },
+    {
+      "context_interpretation_id": "ag70q_ctx_20260613_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-13",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260613",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 28,
+          "name": "Krishna Trayodashi"
+        },
+        "nakshatra": {
+          "index": 3,
+          "name": "Krittika"
+        },
+        "yoga": {
+          "index": 7,
+          "name": "Sukarma"
+        },
+        "karana": {
+          "index": 55,
+          "name": "Gara"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Saturday",
+        "sunrise_datetime_local": "2026-06-13T04:20:39+05:30",
+        "sunset_datetime_local": "2026-06-13T18:10:23+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "observance_sensitive_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "no_internal_observance_candidate",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Trayodashi in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Krittika, Sukarma and Gara respectively.",
+          "No internal observance candidate is flagged for this date in Batch 01.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Trayodashi",
+          "Krittika",
+          "Sukarma",
+          "Gara",
+          "Krishna Paksha",
+          "Saturday"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    },
+    {
+      "context_interpretation_id": "ag70q_ctx_20260614_loc_in_ar_itangar_capital_complex_001",
+      "batch_id": "ag70q_batch_01_itanagar_20260608_20260614",
+      "date_key": "2026-06-14",
+      "location_id": "loc_in_ar_itangar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "panchang_daily_record_id": "ag70j_pending_itn_20260614",
+      "interpretation_status": "internal_context_interpretation_created_public_blocked",
+      "source_record_status": "internal_validation_passed",
+      "panchang_elements": {
+        "tithi": {
+          "index": 29,
+          "name": "Krishna Chaturdashi"
+        },
+        "nakshatra": {
+          "index": 4,
+          "name": "Rohini"
+        },
+        "yoga": {
+          "index": 8,
+          "name": "Dhriti"
+        },
+        "karana": {
+          "index": 58,
+          "name": "Shakuni"
+        },
+        "paksha": "Krishna Paksha",
+        "vara": "Sunday",
+        "sunrise_datetime_local": "2026-06-14T04:20:43+05:30",
+        "sunset_datetime_local": "2026-06-14T18:10:43+05:30"
+      },
+      "context_signals": {
+        "lunar_phase_signal": "waning_lunar_phase_signal",
+        "tithi_signal": "observance_sensitive_tithi_signal",
+        "nakshatra_signal": "nakshatra_context_signal_recorded_not_public_claim",
+        "yoga_signal": "yoga_context_signal_recorded_not_public_claim",
+        "karana_signal": "karana_context_signal_recorded_not_public_claim",
+        "vara_signal": "civil_weekday_context_signal",
+        "observance_signal": "internal_observance_candidate_present",
+        "eclipse_signal": "no_eclipse_candidate_screened"
+      },
+      "observance_candidates": [
+        {
+          "observance_event_id": "ag70n_evt_masik_shivaratri_20260614_loc_in_ar_itangar_capital_complex_001",
+          "observance_key": "masik_shivaratri",
+          "display_name": "Masik Shivaratri",
+          "event_status": "computed_internal_candidate_public_blocked",
+          "publication_status": "blocked",
+          "public_output_allowed": false,
+          "source_rule_id": "observance_rule_masik_shivaratri_internal_v1"
+        }
+      ],
+      "eclipse_screening": {
+        "signal": "no_eclipse_candidate_screened",
+        "eclipse_confirmed_now": false,
+        "public_eclipse_output_allowed_now": false
+      },
+      "internal_interpretation_summary": {
+        "summary_status": "internal_preview_only_not_public_copy",
+        "summary_lines": [
+          "The day is internally identified with Krishna Chaturdashi in Krishna Paksha.",
+          "Nakshatra, Yoga and Karana are recorded as Rohini, Dhriti and Shakuni respectively.",
+          "Internal observance candidate signal present: Masik Shivaratri.",
+          "No confirmed eclipse signal is produced."
+        ]
+      },
+      "lexical_input_preview": {
+        "lexical_input_status": "context_vector_ready_for_later_sanskrit_lexical_engine_not_word_output",
+        "morphology_engine_input_allowed_later": true,
+        "etymology_engine_input_allowed_later": true,
+        "semantics_engine_input_allowed_later": true,
+        "word_selection_allowed_now": false,
+        "suggested_context_tokens": [
+          "Krishna Chaturdashi",
+          "Rohini",
+          "Dhriti",
+          "Shakuni",
+          "Krishna Paksha",
+          "Sunday",
+          "Masik Shivaratri"
+        ],
+        "protected_boundary": "No Sanskrit word is generated or selected in AG70Q."
+      },
+      "external_panchang_source_used": false,
+      "external_panchang_validation_status": "comparison_only_not_started",
+      "public_output_allowed": false,
+      "word_output_allowed": false,
+      "ui_output_allowed": false,
+      "review_status": "created_for_internal_context_bank_only"
+    }
+  ]
+}

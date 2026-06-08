@@ -114,11 +114,15 @@ for (const key of [
 if (noPublic.context_interpretation_records_created_now !== 0) fail("Context records must be zero.");
 
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (manifest.status !== "production_bank_manifest_created_panchang_computation_verification_policy") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_panchang_computation_verification_policy",
+  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01"
+];
+if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.panchang_verification_policy_records !== 1) fail("Manifest verification policy count must be 1.");
 if (manifest.current_counts.manual_comparison_policy_records !== 1) fail("Manifest manual comparison policy count must be 1.");
 if (manifest.current_counts.discrepancy_records !== 0) fail("Manifest discrepancy records must be zero.");
-if (manifest.current_counts.context_interpretation_records !== 0) fail("Manifest context records must be zero.");
+if (![0, 7].includes(manifest.current_counts.context_interpretation_records)) fail("Manifest context records must be 0 before AG70Q or 7 after AG70Q.");
 if (manifest.current_counts.public_panchang_outputs !== 0) fail("Manifest public outputs must be zero.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70p-panchang-computation-verification-policy.json");

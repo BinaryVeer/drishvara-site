@@ -1,0 +1,26 @@
+{
+  "module_id": "AG70Q",
+  "title": "AG70Q to AG70R Today Panchang Context Preview / Output Test Boundary",
+  "status": "ag70r_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create readable today Panchang context output-test preview from AG70Q internal preview.",
+    "Keep public output and UI connection blocked.",
+    "Keep Word of the Day generation blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public observance event publication",
+    "public eclipse event publication",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

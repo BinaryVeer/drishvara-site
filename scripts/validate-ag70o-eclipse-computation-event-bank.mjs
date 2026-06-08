@@ -105,14 +105,15 @@ if (noExt.external_source_count !== 0) fail("External source count must be zero.
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
-  "production_bank_manifest_created_panchang_computation_verification_policy"
+  "production_bank_manifest_created_panchang_computation_verification_policy",
+  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.eclipse_screening_records !== 7) fail("Manifest screening record count must be 7.");
 if (manifest.current_counts.eclipse_events !== 0) fail("Manifest eclipse events must be zero.");
 if (manifest.current_counts.confirmed_eclipse_events !== 0) fail("Manifest confirmed eclipse events must be zero.");
 if (manifest.current_counts.published_eclipse_events !== 0) fail("Manifest published eclipse events must be zero.");
-if (manifest.current_counts.context_interpretation_records !== 0) fail("Manifest context records must be zero.");
+if (![0, 7].includes(manifest.current_counts.context_interpretation_records)) fail("Manifest context records must be 0 before AG70Q or 7 after AG70Q.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70o-eclipse-computation-event-bank.json");
 if (review.status !== "ag70o_eclipse_computation_event_bank_completed") fail("Review status mismatch.");

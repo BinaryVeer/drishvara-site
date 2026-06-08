@@ -124,7 +124,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
   "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
   "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
-  "production_bank_manifest_created_panchang_computation_verification_policy"
+  "production_bank_manifest_created_panchang_computation_verification_policy",
+  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.panchang_daily_records !== 7) fail("Panchang daily records count must be 7.");
@@ -132,7 +133,7 @@ if (panchangManifest.current_counts.internally_validated_panchang_daily_records 
 if (panchangManifest.current_counts.internal_validation_issue_count !== 0) fail("Validation issue count must be zero.");
 if (![0, 2].includes(panchangManifest.current_counts.observance_events)) fail("Observance events must be 0 before AG70N or 2 after AG70N internal candidate generation.");
 if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must be zero.");
-if (panchangManifest.current_counts.context_interpretation_records !== 0) fail("Context records must be zero.");
+if (![0, 7].includes(panchangManifest.current_counts.context_interpretation_records)) fail("Context records must be 0 before AG70Q or 7 after AG70Q internal context-bank creation.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70l-computed-panchang-daily-bank-internal-validation.json");
 if (review.status !== "ag70l_computed_panchang_daily_bank_internal_validation_completed") fail("Review status mismatch.");

@@ -1,0 +1,55 @@
+{
+  "module_id": "AG70Q",
+  "title": "Panchang Context Interpretation Bank Batch 01",
+  "status": "ag70q_panchang_context_interpretation_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "40871120",
+    "head_full": "4087112033ec39767375e7d8b8faf8eab6008444",
+    "origin_main": "40871120",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n M scripts/validate-ag70o-eclipse-computation-event-bank.mjs\n M scripts/validate-ag70p-panchang-computation-verification-policy.mjs\n?? scripts/generate-ag70q-panchang-context-interpretation-bank.mjs\n?? scripts/validate-ag70q-panchang-context-interpretation-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70p_review": "data/content-intelligence/quality-reviews/ag70p-panchang-computation-verification-policy.json",
+    "validated_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json",
+    "observance_event_bank": "data/knowledge-base/upcoming-observance/production/observance-event-bank.json",
+    "eclipse_screening_bank": "data/knowledge-base/panchang-festival/production/eclipse-computation-screening-bank-batch-01.json"
+  },
+  "generated_records": {
+    "contextBank": "data/knowledge-base/panchang-festival/production/ag70q-panchang-context-interpretation-bank-batch-01.json",
+    "todayPreview": "data/knowledge-base/panchang-festival/production/ag70q-today-context-interpretation-preview.json",
+    "signalMap": "data/knowledge-base/panchang-festival/production/ag70q-panchang-context-signal-map.json",
+    "lexicalInputPreview": "data/knowledge-base/panchang-festival/production/ag70q-word-context-lexical-input-preview.json",
+    "noWordOutputAudit": "data/knowledge-base/panchang-festival/production/ag70q-no-word-output-audit.json",
+    "noPublicOutputAudit": "data/knowledge-base/panchang-festival/production/ag70q-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70q-panchang-context-interpretation-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70q-ag70r-today-panchang-context-preview-output-test-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70q-to-ag70r-today-panchang-context-preview-output-test-boundary.json",
+    "quality": "data/quality/ag70q-panchang-context-interpretation-bank.json",
+    "preview": "data/quality/ag70q-panchang-context-interpretation-bank-preview.json",
+    "doc": "docs/quality/AG70Q_PANCHANG_CONTEXT_INTERPRETATION_BANK.md"
+  },
+  "summary": {
+    "context_interpretation_bank_created": true,
+    "today_context_preview_created": true,
+    "signal_map_created": true,
+    "lexical_input_preview_created": true,
+    "context_interpretation_record_count": 7,
+    "today_preview_record_count": 1,
+    "word_selection_performed_now": false,
+    "generated_word_json_modified": false,
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "external_panchang_sites_used_as_validation_source": false,
+    "public_panchang_output_allowed_now": false,
+    "public_observance_output_allowed_now": false,
+    "public_eclipse_output_allowed_now": false,
+    "public_word_output_allowed_now": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70r": true
+  }
+}

@@ -107,14 +107,15 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_festival_observance_rule_bank_batch_01",
   "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
   "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
-  "production_bank_manifest_created_panchang_computation_verification_policy"
+  "production_bank_manifest_created_panchang_computation_verification_policy",
+  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.festival_observance_rule_records !== 7) fail("Manifest rule count must be 7.");
 if (panchangManifest.current_counts.observance_events < 0) fail("Manifest observance events cannot be negative.");
 if (panchangManifest.current_counts.published_observance_events !== 0) fail("Manifest published observance events must remain zero.");
 if (panchangManifest.current_counts.eclipse_events !== 0) fail("Manifest eclipse events must be zero.");
-if (panchangManifest.current_counts.context_interpretation_records !== 0) fail("Manifest context records must be zero.");
+if (![0, 7].includes(panchangManifest.current_counts.context_interpretation_records)) fail("Manifest context records must be 0 before AG70Q or 7 after AG70Q.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag70m-festival-observance-rule-bank.json");
 if (review.status !== "ag70m_festival_observance_rule_bank_completed") fail("Review status mismatch.");

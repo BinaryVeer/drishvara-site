@@ -108,13 +108,14 @@ const panchangManifest = readJson("data/knowledge-base/panchang-festival/product
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01",
   "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
-  "production_bank_manifest_created_panchang_computation_verification_policy"
+  "production_bank_manifest_created_panchang_computation_verification_policy",
+  "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.observance_events !== eventBank.computed_event_record_count) fail("Manifest observance event count mismatch.");
 if (panchangManifest.current_counts.published_observance_events !== 0) fail("Published observance events must be zero.");
 if (panchangManifest.current_counts.eclipse_events !== 0) fail("Eclipse events must remain zero until confirmed eclipse event stage.");
-if (panchangManifest.current_counts.context_interpretation_records !== 0) fail("Context records must be zero.");
+if (![0, 7].includes(panchangManifest.current_counts.context_interpretation_records)) fail("Context records must be 0 before AG70Q or 7 after AG70Q internal context-bank creation.");
 
 const upcomingManifest = readJson("data/knowledge-base/upcoming-observance/production/production-bank-manifest.json");
 if (upcomingManifest.status !== "production_bank_manifest_created_upcoming_observance_computed_event_bank_batch_01") fail("Upcoming manifest status mismatch.");

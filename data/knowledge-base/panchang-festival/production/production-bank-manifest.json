@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_panchang_computation_verification_policy",
+  "status": "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -19,7 +19,7 @@
     "observance_events": 2,
     "eclipse_events": 0,
     "panchang_daily_records": 7,
-    "context_interpretation_records": 0,
+    "context_interpretation_records": 7,
     "location_basis_records": 1,
     "ayanamsa_basis_records": 1,
     "daily_calculation_request_records": 7,
@@ -37,7 +37,9 @@
     "panchang_verification_policy_records": 1,
     "manual_comparison_policy_records": 1,
     "discrepancy_records": 0,
-    "public_panchang_outputs": 0
+    "public_panchang_outputs": 0,
+    "today_context_preview_records": 1,
+    "word_output_records": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -114,8 +116,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "panchang_computation_verification_policy_created_public_output_blocked",
-  "next_required_stage": "AG70Q — Panchang Context Interpretation Bank Batch 01",
+  "current_status": "panchang_context_interpretation_bank_batch_01_created_public_blocked",
+  "next_required_stage": "AG70R — Today Panchang Context Preview / Output Test",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -212,5 +214,13 @@
     "context_gate": "data/knowledge-base/panchang-festival/production/ag70p-context-interpretation-gate.json",
     "no_external_truth_audit": "data/knowledge-base/panchang-festival/production/ag70p-no-external-source-of-truth-audit.json",
     "no_public_output_audit": "data/knowledge-base/panchang-festival/production/ag70p-no-public-output-audit.json"
+  },
+  "ag70q_files": {
+    "context_bank": "data/knowledge-base/panchang-festival/production/ag70q-panchang-context-interpretation-bank-batch-01.json",
+    "today_preview": "data/knowledge-base/panchang-festival/production/ag70q-today-context-interpretation-preview.json",
+    "signal_map": "data/knowledge-base/panchang-festival/production/ag70q-panchang-context-signal-map.json",
+    "lexical_input_preview": "data/knowledge-base/panchang-festival/production/ag70q-word-context-lexical-input-preview.json",
+    "no_word_output_audit": "data/knowledge-base/panchang-festival/production/ag70q-no-word-output-audit.json",
+    "no_public_output_audit": "data/knowledge-base/panchang-festival/production/ag70q-no-public-output-audit.json"
   }
 }
