@@ -76,10 +76,34 @@ for (const id of ["tithi_derivation", "nakshatra_derivation", "yoga_derivation",
 if (rules.runtime_calculation_active_now !== false) fail("Runtime calculation must be inactive.");
 
 const obs = readJson("data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json");
-if (obs.status !== "observance_rule_bank_schema_created_rules_pending_population") fail("Observance rule bank status mismatch.");
-if (obs.rules.length !== 0) fail("Actual observance rules should not be populated in AG70B.");
+const allowedObservanceRuleBankStatusesAg70b = [
+  "observance_rule_bank_schema_created_rules_pending_population",
+  "festival_observance_rule_bank_batch_01_created_event_publication_blocked"
+];
+if (!allowedObservanceRuleBankStatusesAg70b.includes(obs.status)) fail("Observance rule bank status mismatch.");
+const ag70bObservedRuleCount = Array.isArray(obs.rules)
+  ? obs.rules.length
+  : Array.isArray(obs.records)
+    ? obs.records.length
+    : 0;
+
+if (![0, 7].includes(ag70bObservedRuleCount)) {
+  fail("Actual observance rules should be 0 at AG70B foundation stage or 7 after AG70M rule-bank creation.");
+}
 for (const field of ["start_datetime_rule", "end_datetime_rule", "source_reference_ids", "review_status"]) {
-  if (!obs.required_rule_fields.includes(field)) fail(`Observance rule field missing: ${field}`);
+  if (Array.isArray(obs.required_rule_fields)) {
+    if (!obs.required_rule_fields.includes(field)) fail(`Observance rule field missing: ${field}`);
+  } else if (Array.isArray(obs.records)) {
+    // After AG70M, the observance rule bank is record-based instead of empty schema-only.
+    // Validate that each populated rule carries its own required_panchang_fields list.
+    for (const rule of obs.records) {
+      if (!Array.isArray(rule.required_panchang_fields) || rule.required_panchang_fields.length === 0) {
+        fail(`Observance rule required_panchang_fields missing after AG70M: ${rule.rule_id || "unknown_rule"}`);
+      }
+    }
+  } else {
+    fail("Observance rule field schema missing.");
+  }
 }
 
 const upcoming = readJson("data/knowledge-base/upcoming-observance/production/upcoming-observance-schema.json");

@@ -119,7 +119,11 @@ for (const key of ["observance_events_created_now", "eclipse_events_created_now"
 }
 
 const panchangManifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (panchangManifest.status !== "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_computed_panchang_daily_bank_internal_validation",
+  "production_bank_manifest_created_festival_observance_rule_bank_batch_01"
+];
+if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.panchang_daily_records !== 7) fail("Panchang daily records count must be 7.");
 if (panchangManifest.current_counts.internally_validated_panchang_daily_records !== 7) fail("Validated count must be 7.");
 if (panchangManifest.current_counts.internal_validation_issue_count !== 0) fail("Validation issue count must be zero.");

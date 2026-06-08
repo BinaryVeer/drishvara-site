@@ -1,0 +1,17 @@
+{
+  "module_id": "AG70M",
+  "title": "Panchang to Observance Rule Connector",
+  "status": "panchang_to_observance_rule_connector_created_no_events",
+  "input_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json",
+  "rule_bank": "data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json",
+  "connector_logic": [
+    "Use internally validated daily Panchang records only.",
+    "Match rule trigger.tithi_indices against record.tithi.index.",
+    "Match rule trigger.paksha_values against record.paksha.",
+    "Trayodashi is treated as the Tithi basis and Pradosha as its evening-window observance form.",
+    "For Trayodashi / Pradosha and other window-sensitive rules, event computation is deferred to AG70N.",
+    "Do not publish event dates in AG70M."
+  ],
+  "event_records_created_now": 0,
+  "public_output_allowed_now": false
+}

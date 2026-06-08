@@ -1,0 +1,57 @@
+{
+  "module_id": "AG70M",
+  "title": "Festival / Observance Rule Bank Batch 01",
+  "status": "ag70m_festival_observance_rule_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "4a706dd1",
+    "head_full": "4a706dd1cb00116a1301dae242ecb47e2d40db91",
+    "origin_main": "4a706dd1",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n?? scripts/generate-ag70m-festival-observance-rule-bank.mjs\n?? scripts/validate-ag70m-festival-observance-rule-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70l_review": "data/content-intelligence/quality-reviews/ag70l-computed-panchang-daily-bank-internal-validation.json",
+    "validated_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json"
+  },
+  "generated_records": {
+    "ruleBank": "data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json",
+    "ruleBankBatch": "data/knowledge-base/panchang-festival/production/festival-observance-rule-bank-batch-01.json",
+    "panchangToRuleConnector": "data/knowledge-base/panchang-festival/production/panchang-to-observance-rule-connector.json",
+    "ruleEligibilityMap": "data/knowledge-base/panchang-festival/production/observance-rule-eligibility-map.json",
+    "noEventPublicationAudit": "data/knowledge-base/panchang-festival/production/ag70m-no-observance-event-publication-audit.json",
+    "noExternalSourceAudit": "data/knowledge-base/panchang-festival/production/ag70m-no-external-panchang-source-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70m-festival-observance-rule-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70m-ag70n-upcoming-observance-computed-event-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70m-to-ag70n-upcoming-observance-computed-event-bank-boundary.json",
+    "quality": "data/quality/ag70m-festival-observance-rule-bank.json",
+    "preview": "data/quality/ag70m-festival-observance-rule-bank-preview.json",
+    "doc": "docs/quality/AG70M_FESTIVAL_OBSERVANCE_RULE_BANK.md"
+  },
+  "summary": {
+    "festival_observance_rule_bank_created": true,
+    "rule_record_count": 7,
+    "panchang_to_rule_connector_created": true,
+    "rule_eligibility_map_created": true,
+    "ekadashi_rule_created": true,
+    "purnima_rule_created": true,
+    "amavasya_rule_created": true,
+    "trayodashi_pradosha_rule_created": true,
+    "sankashti_chaturthi_rule_created": true,
+    "vinayaka_chaturthi_monthly_rule_created": true,
+    "masik_shivaratri_rule_created": true,
+    "observance_event_records_created_now": false,
+    "published_observance_event_count": 0,
+    "external_panchang_sites_used_as_source": false,
+    "external_panchang_sites_used_for_data_generation": false,
+    "external_panchang_sites_used_as_runtime_dependency": false,
+    "public_panchang_output_allowed_now": false,
+    "actual_eclipse_events_created_now": false,
+    "context_interpretation_records_created_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "supabase_activation_performed": false,
+    "backend_runtime_activated": false,
+    "ready_for_ag70n": true
+  }
+}

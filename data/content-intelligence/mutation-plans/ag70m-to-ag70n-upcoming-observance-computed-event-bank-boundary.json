@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70M",
+  "title": "AG70M to AG70N Upcoming Observance Computed Event Bank Boundary",
+  "status": "ag70n_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Apply AG70M rule records to AG70L internally validated Panchang daily records.",
+    "Create internal upcoming observance candidate event records.",
+    "Keep event publication/public output blocked.",
+    "Keep external Panchang sites outside production data-generation and validation."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public observance event publication",
+    "actual eclipse event publication",
+    "context interpretation production records",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

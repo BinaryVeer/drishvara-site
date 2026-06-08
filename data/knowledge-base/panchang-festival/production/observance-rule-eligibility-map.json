@@ -1,0 +1,116 @@
+{
+  "module_id": "AG70M",
+  "title": "Observance Rule Eligibility Map",
+  "status": "observance_rule_eligibility_map_created_no_events",
+  "eligible_input_statuses": [
+    "internally_validated_public_blocked"
+  ],
+  "required_daily_bank_status": "panchang_daily_calculation_bank_batch_01_internally_validated_public_blocked",
+  "rule_ids": [
+    "observance_rule_ekadashi_vrata_internal_v1",
+    "observance_rule_purnima_internal_v1",
+    "observance_rule_amavasya_internal_v1",
+    "observance_rule_trayodashi_pradosha_internal_v1",
+    "observance_rule_sankashti_chaturthi_internal_v1",
+    "observance_rule_vinayaka_chaturthi_monthly_internal_v1",
+    "observance_rule_masik_shivaratri_internal_v1"
+  ],
+  "eligibility_rules": [
+    {
+      "rule_id": "observance_rule_ekadashi_vrata_internal_v1",
+      "observance_key": "ekadashi",
+      "display_name": "Ekadashi",
+      "required_tithi_indices": [
+        11,
+        26
+      ],
+      "required_paksha_values": [
+        "Shukla Paksha",
+        "Krishna Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    },
+    {
+      "rule_id": "observance_rule_purnima_internal_v1",
+      "observance_key": "purnima",
+      "display_name": "Purnima",
+      "required_tithi_indices": [
+        15
+      ],
+      "required_paksha_values": [
+        "Shukla Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    },
+    {
+      "rule_id": "observance_rule_amavasya_internal_v1",
+      "observance_key": "amavasya",
+      "display_name": "Amavasya",
+      "required_tithi_indices": [
+        30
+      ],
+      "required_paksha_values": [
+        "Krishna Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    },
+    {
+      "rule_id": "observance_rule_trayodashi_pradosha_internal_v1",
+      "observance_key": "trayodashi_pradosha",
+      "display_name": "Trayodashi / Pradosha",
+      "required_tithi_indices": [
+        13,
+        28
+      ],
+      "required_paksha_values": [
+        "Shukla Paksha",
+        "Krishna Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    },
+    {
+      "rule_id": "observance_rule_sankashti_chaturthi_internal_v1",
+      "observance_key": "sankashti_chaturthi",
+      "display_name": "Sankashti Chaturthi",
+      "required_tithi_indices": [
+        19
+      ],
+      "required_paksha_values": [
+        "Krishna Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    },
+    {
+      "rule_id": "observance_rule_vinayaka_chaturthi_monthly_internal_v1",
+      "observance_key": "vinayaka_chaturthi_monthly",
+      "display_name": "Vinayaka Chaturthi",
+      "required_tithi_indices": [
+        4
+      ],
+      "required_paksha_values": [
+        "Shukla Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    },
+    {
+      "rule_id": "observance_rule_masik_shivaratri_internal_v1",
+      "observance_key": "masik_shivaratri",
+      "display_name": "Masik Shivaratri",
+      "required_tithi_indices": [
+        29
+      ],
+      "required_paksha_values": [
+        "Krishna Paksha"
+      ],
+      "approved_for_event_candidate_computation": true,
+      "approved_for_public_publication_now": false
+    }
+  ],
+  "event_records_created_now": 0
+}
