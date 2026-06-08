@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_today_panchang_context_preview_output_test",
+  "status": "production_bank_manifest_created_today_panchang_preview_manual_verification_gate",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -42,7 +42,9 @@
     "word_output_records": 0,
     "today_context_output_test_records": 1,
     "public_observance_outputs": 0,
-    "public_eclipse_outputs": 0
+    "public_eclipse_outputs": 0,
+    "manual_verification_gate_records": 1,
+    "location_correction_notes": 1
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -119,8 +121,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "today_panchang_context_preview_output_test_created_internal_only",
-  "next_required_stage": "AG70S — Today Panchang Preview Manual Verification Gate",
+  "current_status": "today_panchang_preview_manual_verification_gate_created_public_blocked",
+  "next_required_stage": "AG70T — Location Identifier Correction / Panchang Preview Basis Normalisation",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -233,5 +235,12 @@
     "output_test_audit": "data/knowledge-base/panchang-festival/production/ag70r-output-test-audit.json",
     "no_public_ui_audit": "data/knowledge-base/panchang-festival/production/ag70r-no-public-ui-output-audit.json",
     "no_word_output_audit": "data/knowledge-base/panchang-festival/production/ag70r-no-word-output-audit.json"
+  },
+  "ag70s_files": {
+    "manual_gate": "data/knowledge-base/panchang-festival/production/ag70s-today-panchang-preview-manual-verification-gate.json",
+    "content_review": "data/knowledge-base/panchang-festival/production/ag70s-preview-content-review-record.json",
+    "location_note": "data/knowledge-base/panchang-festival/production/ag70s-location-id-spelling-note.json",
+    "decision_record": "data/knowledge-base/panchang-festival/production/ag70s-manual-verification-decision-record.json",
+    "no_public_output_audit": "data/knowledge-base/panchang-festival/production/ag70s-no-public-output-audit.json"
   }
 }

@@ -121,7 +121,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
   "production_bank_manifest_created_panchang_computation_verification_policy",
   "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01",
-  "production_bank_manifest_created_today_panchang_context_preview_output_test"
+  "production_bank_manifest_created_today_panchang_context_preview_output_test",
+  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (![0, 7].includes(panchangManifest.current_counts.panchang_daily_records)) fail("Panchang daily records must be 0 before AG70K or 7 after AG70K.");

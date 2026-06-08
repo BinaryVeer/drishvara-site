@@ -118,7 +118,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_eclipse_computation_event_bank_batch_01",
   "production_bank_manifest_created_panchang_computation_verification_policy",
   "production_bank_manifest_created_panchang_context_interpretation_bank_batch_01",
-  "production_bank_manifest_created_today_panchang_context_preview_output_test"
+  "production_bank_manifest_created_today_panchang_context_preview_output_test",
+  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.daily_calculation_request_records !== 7) fail("Manifest daily request count mismatch.");

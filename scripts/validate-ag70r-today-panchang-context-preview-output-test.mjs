@@ -85,7 +85,11 @@ for (const key of [
 if (noWord.lexical_tokens_used_only_as_preview_context !== true) fail("Lexical tokens must be preview-only.");
 
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (manifest.status !== "production_bank_manifest_created_today_panchang_context_preview_output_test") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_today_panchang_context_preview_output_test",
+  "production_bank_manifest_created_today_panchang_preview_manual_verification_gate"
+];
+if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.today_context_output_test_records !== 1) fail("Manifest output test count must be 1.");
 if (manifest.current_counts.public_panchang_outputs !== 0) fail("Manifest public Panchang outputs must be zero.");
 if (manifest.current_counts.word_output_records !== 0) fail("Manifest Word outputs must be zero.");
