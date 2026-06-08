@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_location_import_selection_validation",
+  "status": "production_bank_manifest_created_india_administrative_location_import_bank",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -55,7 +55,11 @@
     "location_selection_validation_records": 5,
     "coordinate_first_validation_records": 2,
     "location_import_readiness_records": 4,
-    "full_location_import_records_added_now": 0
+    "full_location_import_records_added_now": 0,
+    "india_admin_import_seed_records": 3,
+    "india_admin_approved_computation_records": 0,
+    "government_source_freshness_policy_records": 1,
+    "four_month_refresh_cadence_policy_records": 1
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -132,8 +136,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "location_import_selection_validation_completed_public_blocked",
-  "next_required_stage": "AG70V — India Administrative Location Import Bank",
+  "current_status": "india_administrative_location_import_bank_created_public_blocked",
+  "next_required_stage": "AG70W — India Cities and Capitals Coordinate Bank",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -274,5 +278,17 @@
     "import_readiness": "data/knowledge-base/location-intelligence/production/ag70u-import-readiness-validation-report.json",
     "normalisation_validation": "data/knowledge-base/location-intelligence/production/ag70u-itanagar-normalisation-validation-report.json",
     "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70u-no-public-output-audit.json"
+  },
+  "ag70v_files": {
+    "source_policy": "data/knowledge-base/location-intelligence/production/ag70v-government-source-freshness-policy.json",
+    "refresh_policy": "data/knowledge-base/location-intelligence/production/ag70v-four-month-refresh-cadence-policy.json",
+    "source_registry": "data/knowledge-base/location-intelligence/production/ag70v-india-administrative-source-registry.json",
+    "fetch_plan": "data/knowledge-base/location-intelligence/production/ag70v-government-source-fetch-plan.json",
+    "import_bank": "data/knowledge-base/location-intelligence/production/india-administrative-location-import-bank.json",
+    "import_schema": "data/knowledge-base/location-intelligence/production/india-administrative-location-import-schema.json",
+    "sample_records": "data/knowledge-base/location-intelligence/production/ag70v-india-administrative-seed-records.json",
+    "coordinate_policy": "data/knowledge-base/location-intelligence/production/ag70v-india-admin-coordinate-basis-policy.json",
+    "refresh_audit": "data/knowledge-base/location-intelligence/production/ag70v-refresh-safety-audit.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70v-no-public-output-audit.json"
   }
 }

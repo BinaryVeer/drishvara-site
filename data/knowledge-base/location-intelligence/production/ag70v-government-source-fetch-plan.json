@@ -1,0 +1,56 @@
+{
+  "module_id": "AG70V",
+  "title": "Government Source Fetch Plan",
+  "status": "government_source_fetch_plan_created_no_runtime_fetch_dependency",
+  "fetch_mode": "manual_or_ci_controlled_fetch_not_runtime_dependency",
+  "runtime_fetch_dependency_allowed": false,
+  "sources_to_attempt_in_future_import_runner": [
+    {
+      "source_id": "gov_in_lgd_data_gov_catalog",
+      "reference_url": "https://www.data.gov.in/catalog/local-government-directory-lgd",
+      "expected_use": "State, District, Sub-district/Block, Village/local-body administrative identity and codes",
+      "fetch_result_required_fields": [
+        "source_url",
+        "http_status_or_file_status",
+        "metadata_last_updated",
+        "download_or_api_availability",
+        "schema_summary",
+        "record_count_if_available",
+        "fetch_timestamp",
+        "review_status"
+      ]
+    },
+    {
+      "source_id": "gov_in_lgd_direct",
+      "reference_url": "https://lgdirectory.gov.in/",
+      "expected_use": "Direct cross-check of administrative hierarchy and LGD codes",
+      "fetch_result_required_fields": [
+        "source_url",
+        "http_status_or_file_status",
+        "metadata_last_updated",
+        "download_or_api_availability",
+        "schema_summary",
+        "record_count_if_available",
+        "fetch_timestamp",
+        "review_status"
+      ]
+    },
+    {
+      "source_id": "survey_of_india_abdb",
+      "reference_url": "https://surveyofindia.gov.in/pages/administrative-boundary-data-base-abdb-",
+      "expected_use": "State/District/Sub-district boundary, HQ/centroid/selected point coordinate verification",
+      "fetch_result_required_fields": [
+        "source_url",
+        "http_status_or_file_status",
+        "metadata_last_updated",
+        "download_or_api_availability",
+        "schema_summary",
+        "record_count_if_available",
+        "fetch_timestamp",
+        "review_status"
+      ]
+    }
+  ],
+  "no_fetch_performed_now": true,
+  "reason_no_fetch_now": "AG70V creates governed import bank/source policy. Full fetch/import requires approved source access path and should be executed through controlled import runner."
+}

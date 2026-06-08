@@ -1,0 +1,56 @@
+{
+  "module_id": "AG70V",
+  "title": "India Administrative Location Import Bank",
+  "status": "ag70v_india_administrative_location_import_bank_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "62e33ffc",
+    "head_full": "62e33ffc1eecd69042a068dddabb5f557fdf76c8",
+    "origin_main": "62e33ffc",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n M scripts/validate-ag70o-eclipse-computation-event-bank.mjs\n M scripts/validate-ag70p-panchang-computation-verification-policy.mjs\n M scripts/validate-ag70q-panchang-context-interpretation-bank.mjs\n M scripts/validate-ag70r-today-panchang-context-preview-output-test.mjs\n M scripts/validate-ag70s-today-panchang-preview-manual-verification-gate.mjs\n M scripts/validate-ag70t-location-intelligence-registry-and-panchang-basis-normalisation.mjs\n M scripts/validate-ag70u-location-import-and-selection-validation.mjs\n?? scripts/generate-ag70v-india-administrative-location-import-bank.mjs\n?? scripts/validate-ag70v-india-administrative-location-import-bank.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag70u_review": "data/content-intelligence/quality-reviews/ag70u-location-import-and-selection-validation.json",
+    "location_registry": "data/knowledge-base/location-intelligence/production/location-selection-registry.json",
+    "import_contracts": "data/knowledge-base/location-intelligence/production/location-official-import-contracts.json"
+  },
+  "generated_records": {
+    "sourcePolicy": "data/knowledge-base/location-intelligence/production/ag70v-government-source-freshness-policy.json",
+    "refreshPolicy": "data/knowledge-base/location-intelligence/production/ag70v-four-month-refresh-cadence-policy.json",
+    "sourceRegistry": "data/knowledge-base/location-intelligence/production/ag70v-india-administrative-source-registry.json",
+    "fetchPlan": "data/knowledge-base/location-intelligence/production/ag70v-government-source-fetch-plan.json",
+    "importBank": "data/knowledge-base/location-intelligence/production/india-administrative-location-import-bank.json",
+    "importSchema": "data/knowledge-base/location-intelligence/production/india-administrative-location-import-schema.json",
+    "sampleRecords": "data/knowledge-base/location-intelligence/production/ag70v-india-administrative-seed-records.json",
+    "coordinatePolicy": "data/knowledge-base/location-intelligence/production/ag70v-india-admin-coordinate-basis-policy.json",
+    "refreshAudit": "data/knowledge-base/location-intelligence/production/ag70v-refresh-safety-audit.json",
+    "noPublicOutputAudit": "data/knowledge-base/location-intelligence/production/ag70v-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag70v-india-administrative-location-import-bank.json",
+    "readiness": "data/content-intelligence/quality-registry/ag70v-ag70w-india-cities-capitals-coordinate-bank-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag70v-to-ag70w-india-cities-capitals-coordinate-bank-boundary.json",
+    "quality": "data/quality/ag70v-india-administrative-location-import-bank.json",
+    "preview": "data/quality/ag70v-india-administrative-location-import-bank-preview.json",
+    "doc": "docs/quality/AG70V_INDIA_ADMINISTRATIVE_LOCATION_IMPORT_BANK.md"
+  },
+  "summary": {
+    "india_admin_import_bank_created": true,
+    "government_source_freshness_policy_created": true,
+    "four_month_refresh_cadence_policy_created": true,
+    "government_source_registry_created": true,
+    "fetch_plan_created": true,
+    "import_schema_created": true,
+    "coordinate_basis_policy_created": true,
+    "seed_record_count": 3,
+    "approved_computation_record_count": 0,
+    "full_import_performed_now": false,
+    "public_dropdown_activation_performed_now": false,
+    "panchang_recomputation_performed_now": false,
+    "star_reflection_computation_performed_now": false,
+    "generated_word_json_modified": false,
+    "ui_display_changed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "ready_for_ag70w": true
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "module_id": "AG70V",
+  "title": "India Administrative Source Registry",
+  "status": "india_administrative_source_registry_created_fetch_ready",
+  "source_priority": [
+    {
+      "source_id": "gov_in_lgd_data_gov_catalog",
+      "source_family": "LGD / data.gov.in",
+      "source_type": "government_administrative_identity_codes",
+      "use_case": "State, District, Sub-district/Block, Village/local-body administrative identity and codes",
+      "reference_url": "https://www.data.gov.in/catalog/local-government-directory-lgd",
+      "freshness_requirement_months": 12,
+      "refresh_interval_months": 4,
+      "source_status": "approved_primary_identity_source"
+    },
+    {
+      "source_id": "gov_in_lgd_direct",
+      "source_family": "LGD",
+      "source_type": "government_administrative_directory",
+      "use_case": "Direct cross-check of administrative hierarchy and LGD codes",
+      "reference_url": "https://lgdirectory.gov.in/",
+      "freshness_requirement_months": 12,
+      "refresh_interval_months": 4,
+      "source_status": "approved_primary_identity_crosscheck_source"
+    },
+    {
+      "source_id": "survey_of_india_abdb",
+      "source_family": "Survey of India",
+      "source_type": "government_geospatial_boundary_coordinate_basis",
+      "use_case": "State/District/Sub-district boundary, HQ/centroid/selected point coordinate verification",
+      "reference_url": "https://surveyofindia.gov.in/pages/administrative-boundary-data-base-abdb-",
+      "freshness_requirement_months": 12,
+      "refresh_interval_months": 4,
+      "source_status": "approved_coordinate_boundary_source_pending_dataset_access"
+    }
+  ],
+  "public_output_allowed_now": false
+}

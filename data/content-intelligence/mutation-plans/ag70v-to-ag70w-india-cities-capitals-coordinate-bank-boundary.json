@@ -1,0 +1,27 @@
+{
+  "module_id": "AG70V",
+  "title": "AG70V to AG70W India Cities and Capitals Coordinate Bank Boundary",
+  "status": "ag70w_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Create India cities and capitals coordinate bank.",
+    "Populate/prepare capital and major city coordinate records with source/freshness status.",
+    "Keep records source-status controlled.",
+    "Keep public/UI output blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public Star Reflection output",
+    "public location dropdown activation",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation",
+    "external Panchang site as source of truth",
+    "external Panchang site as data-generation input",
+    "external Panchang site as runtime dependency",
+    "external Panchang site as production validation source"
+  ]
+}

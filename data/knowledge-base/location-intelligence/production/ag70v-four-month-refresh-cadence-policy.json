@@ -1,0 +1,26 @@
+{
+  "module_id": "AG70V",
+  "title": "Four-month India Administrative Location Refresh Cadence Policy",
+  "status": "four_month_refresh_cadence_policy_created",
+  "refresh_interval_months": 4,
+  "refresh_target_scope": [
+    "Indian States/UTs",
+    "Indian Districts",
+    "Indian Sub-districts / Blocks",
+    "Coordinate/boundary/HQ basis"
+  ],
+  "refresh_steps": [
+    "Fetch latest source metadata from approved government source registry.",
+    "Stage additions, renames, retirements and code changes as candidates.",
+    "Compare with last approved registry.",
+    "Do not auto-overwrite approved records.",
+    "Generate diff report and validation report.",
+    "Promote only after validation/review."
+  ],
+  "failure_policy": {
+    "fetch_failure": "Keep last approved data active and create refresh_failure_review_required record.",
+    "schema_change": "Block import and require manual schema review.",
+    "large_unexpected_change": "Block promotion and require manual review."
+  },
+  "public_output_allowed_now": false
+}
