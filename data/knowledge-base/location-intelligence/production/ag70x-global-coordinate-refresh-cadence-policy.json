@@ -1,0 +1,28 @@
+{
+  "module_id": "AG70X",
+  "title": "Global Coordinate Refresh Cadence Policy",
+  "status": "global_coordinate_refresh_cadence_policy_created",
+  "refresh_interval_months": 4,
+  "refresh_scope": [
+    "national capitals",
+    "major world cities",
+    "coordinate value",
+    "timezone",
+    "country/city naming",
+    "source metadata"
+  ],
+  "refresh_steps": [
+    "Check latest approved authoritative global geographic dataset metadata.",
+    "Compare city/capital list and coordinates against current approved bank.",
+    "Stage coordinate/name/timezone differences as candidates.",
+    "Do not overwrite approved coordinates automatically.",
+    "Generate diff and validation report.",
+    "Promote only after review."
+  ],
+  "failure_policy": {
+    "fetch_failure": "Keep last approved global coordinate bank active and create refresh_failure_review_required record.",
+    "schema_change": "Block import and require manual schema review.",
+    "large_coordinate_shift": "Block promotion and require manual geospatial review."
+  },
+  "public_output_allowed_now": false
+}

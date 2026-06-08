@@ -102,7 +102,11 @@ for (const key of [
 }
 
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (manifest.status !== "production_bank_manifest_created_india_cities_capitals_coordinate_bank") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_india_cities_capitals_coordinate_bank",
+  "production_bank_manifest_created_global_capitals_major_cities_coordinate_bank"
+];
+if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.india_capital_coordinate_candidate_records < 36) fail("Manifest capital candidate count mismatch.");
 if (manifest.current_counts.india_major_city_coordinate_candidate_records < 10) fail("Manifest major city candidate count mismatch.");
 if (manifest.current_counts.india_city_capital_approved_computation_records !== 0) fail("Approved computation records must be zero.");

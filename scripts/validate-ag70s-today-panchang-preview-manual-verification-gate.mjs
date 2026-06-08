@@ -83,7 +83,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_location_intelligence_registry_panchang_basis_normalisation",
   "production_bank_manifest_created_location_import_selection_validation",
   "production_bank_manifest_created_india_administrative_location_import_bank",
-  "production_bank_manifest_created_india_cities_capitals_coordinate_bank"
+  "production_bank_manifest_created_india_cities_capitals_coordinate_bank",
+  "production_bank_manifest_created_global_capitals_major_cities_coordinate_bank"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.manual_verification_gate_records !== 1) fail("Manual gate count must be 1.");

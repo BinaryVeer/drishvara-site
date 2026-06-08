@@ -1,0 +1,32 @@
+{
+  "module_id": "AG70X",
+  "title": "Global Capitals / Major Cities Coordinate Schema",
+  "status": "global_capitals_major_cities_coordinate_schema_created",
+  "required_fields": [
+    "coordinate_record_id",
+    "location_type",
+    "country_name",
+    "city_name",
+    "display_label",
+    "ui_short_label",
+    "timezone",
+    "latitude_decimal",
+    "longitude_decimal",
+    "coordinate_value_status",
+    "coordinate_source_status",
+    "timezone_source_status",
+    "source_freshness_status",
+    "source_freshness_window_months",
+    "refresh_interval_months",
+    "computation_allowed_now",
+    "review_status"
+  ],
+  "computation_approval_required_statuses": {
+    "coordinate_value_status": "verified",
+    "coordinate_source_status": "authoritative_global_source_verified",
+    "timezone_source_status": "verified",
+    "source_freshness_status": "fresh_within_12_months_or_latest_official_release",
+    "review_status": "approved"
+  },
+  "public_output_allowed_now": false
+}

@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_india_cities_capitals_coordinate_bank",
+  "status": "production_bank_manifest_created_global_capitals_major_cities_coordinate_bank",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -64,7 +64,12 @@
     "india_major_city_coordinate_candidate_records": 16,
     "india_city_capital_total_candidate_records": 52,
     "india_city_capital_approved_computation_records": 0,
-    "government_coordinate_fetch_records_now": 0
+    "government_coordinate_fetch_records_now": 0,
+    "global_national_capital_candidate_records": 16,
+    "global_major_city_candidate_records": 12,
+    "global_total_candidate_records": 28,
+    "global_approved_computation_records": 0,
+    "authoritative_global_coordinate_fetch_records_now": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -141,8 +146,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "india_cities_capitals_coordinate_bank_created_candidate_records_public_blocked",
-  "next_required_stage": "AG70X — Global Capitals and Major World Cities Coordinate Bank",
+  "current_status": "global_capitals_major_cities_coordinate_bank_created_candidate_records_public_blocked",
+  "next_required_stage": "AG70Y — Location Selection Resolver Test",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -306,5 +311,16 @@
     "verification_queue": "data/knowledge-base/location-intelligence/production/ag70w-coordinate-government-verification-queue.json",
     "resolver_readiness": "data/knowledge-base/location-intelligence/production/ag70w-city-coordinate-resolver-readiness.json",
     "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70w-no-public-output-audit.json"
+  },
+  "ag70x_files": {
+    "source_policy": "data/knowledge-base/location-intelligence/production/ag70x-global-coordinate-source-policy.json",
+    "refresh_policy": "data/knowledge-base/location-intelligence/production/ag70x-global-coordinate-refresh-cadence-policy.json",
+    "coordinate_schema": "data/knowledge-base/location-intelligence/production/global-capitals-major-cities-coordinate-schema.json",
+    "coordinate_bank": "data/knowledge-base/location-intelligence/production/global-capitals-major-cities-coordinate-bank.json",
+    "capital_candidates": "data/knowledge-base/location-intelligence/production/ag70x-global-national-capital-coordinate-candidates.json",
+    "major_city_candidates": "data/knowledge-base/location-intelligence/production/ag70x-global-major-city-coordinate-candidates.json",
+    "verification_queue": "data/knowledge-base/location-intelligence/production/ag70x-global-coordinate-verification-queue.json",
+    "resolver_readiness": "data/knowledge-base/location-intelligence/production/ag70x-global-coordinate-resolver-readiness.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag70x-no-public-output-audit.json"
   }
 }

@@ -1,0 +1,40 @@
+{
+  "module_id": "AG70X",
+  "title": "Global Coordinate Resolver Readiness",
+  "status": "global_coordinate_resolver_readiness_created_internal_only",
+  "named_selection_resolution_supported": true,
+  "coordinate_value_resolution_supported_for_candidate_records": true,
+  "computation_resolution_enabled_now": false,
+  "reason_computation_not_enabled": "Coordinate/timezone values are candidate/pending authoritative-source verification.",
+  "examples": [
+    {
+      "input_label": "Tokyo-Japan",
+      "resolves_to_latitude": 35.6762,
+      "resolves_to_longitude": 139.6503,
+      "timezone": "Asia/Tokyo",
+      "computation_allowed_now": false
+    },
+    {
+      "input_label": "London-United Kingdom",
+      "resolves_to_latitude": 51.5074,
+      "resolves_to_longitude": -0.1278,
+      "timezone": "Europe/London",
+      "computation_allowed_now": false
+    },
+    {
+      "input_label": "New York-United States",
+      "resolves_to_latitude": 40.7128,
+      "resolves_to_longitude": -74.006,
+      "timezone": "America/New_York",
+      "computation_allowed_now": false
+    },
+    {
+      "input_label": "Dubai-United Arab Emirates",
+      "resolves_to_latitude": 25.2048,
+      "resolves_to_longitude": 55.2708,
+      "timezone": "Asia/Dubai",
+      "computation_allowed_now": false
+    }
+  ],
+  "public_output_allowed_now": false
+}

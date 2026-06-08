@@ -1,0 +1,23 @@
+{
+  "module_id": "AG70X",
+  "title": "AG70X to AG70Y Location Selection Resolver Test Boundary",
+  "status": "ag70y_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Test named-location resolver for Indian and global candidate records.",
+    "Test coordinate-first resolver.",
+    "Map resolver output to Panchang and Star Reflection input contracts.",
+    "Keep public/UI output and actual computation blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public Star Reflection output",
+    "public location dropdown activation",
+    "generated/word-of-day.json replacement",
+    "homepage UI change",
+    "runtime Word selector activation",
+    "Supabase/database writes",
+    "backend/Auth activation"
+  ]
+}
