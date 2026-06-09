@@ -20,6 +20,7 @@ const required = [
   "data/knowledge-base/location-intelligence/production/ag71d-panchang-coordinate-ui-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-behaviour-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-validation-safety-audit.json",
+  "data/knowledge-base/location-intelligence/production/ag71d-ui-finishing-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-visibility-fix-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-no-public-output-audit.json",
   "data/content-intelligence/quality-reviews/ag71d-pilot-ui-validation.json",
@@ -54,6 +55,26 @@ for (const marker of [
 ]) {
   if (!indexHtml.includes(marker)) fail(`index.html missing marker/field: ${marker}`);
 }
+
+for (const marker of [
+  "AG71D_UI_FINISHING_CORRECTION_START",
+  "AG71D_UI_FINISHING_TOGGLE_FIX_START",
+  "data-ag71c-selected-mode",
+  "id=\"star-birth-latitude\"",
+  "id=\"star-birth-longitude\"",
+  "id=\"star-birth-timezone\"",
+  "id=\"panchang-latitude\"",
+  "id=\"panchang-longitude\"",
+  "id=\"panchang-timezone\"",
+  "Reflection Locked Pending Review"
+]) {
+  if (!indexHtml.includes(marker)) fail(`index.html missing AG71D finishing correction marker: ${marker}`);
+}
+
+const finishingCorrection = readJson("data/knowledge-base/location-intelligence/production/ag71d-ui-finishing-correction-record.json");
+if (finishingCorrection.status !== "ui_finishing_correction_applied") fail("UI finishing correction record status mismatch.");
+if (finishingCorrection.active_frontend_file !== "index.html") fail("UI finishing correction must target active index.html.");
+
 
 for (const marker of [
   "AG71D_COORDINATE_TOGGLE_VISIBILITY_FIX_START",
@@ -142,6 +163,9 @@ for (const key of [
   "coordinate_toggle_contract_validated",
   "coordinate_toggle_visibility_fix_applied",
   "coordinate_fields_reveal_on_coordinates_selection",
+  "ui_finishing_correction_applied",
+  "star_coordinate_fields_reveal_on_selection",
+  "reflection_duplicate_action_label_corrected",
   "all_ui_contracts_passed",
   "ready_for_ag71e"
 ]) {

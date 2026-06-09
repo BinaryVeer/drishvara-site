@@ -3877,6 +3877,105 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 /* AG71C_ACTIVE_COORDINATE_INPUT_STYLE_END */
 </style>
 
+<style>
+
+/* AG71D_UI_FINISHING_CORRECTION_START */
+.ag71c-coordinate-surface {
+  margin: 1rem 0 1.15rem;
+  padding: 1rem;
+  border: 1px solid rgba(214, 176, 76, 0.38);
+  border-radius: 18px;
+  background: rgba(182, 208, 233, 0.075);
+}
+
+.ag71c-input-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+
+.ag71c-input-mode label {
+  min-height: 2.65rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(182, 208, 233, 0.22);
+  border-radius: 999px;
+  background: rgba(8, 21, 43, 0.42);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.92rem;
+  line-height: 1.15;
+  cursor: pointer;
+}
+
+.ag71c-input-mode input[type="radio"] {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  accent-color: #d6b04c;
+}
+
+.ag71c-coordinate-grid {
+  display: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.9rem;
+}
+
+.ag71c-coordinate-surface[data-ag71c-selected-mode="coordinates"] .ag71c-coordinate-grid {
+  display: grid;
+}
+
+.ag71c-field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.15;
+}
+
+.ag71c-coordinate-grid input {
+  width: 100%;
+  min-height: 2.7rem;
+  border-radius: 13px;
+  border: 1px solid rgba(182, 208, 233, 0.25);
+  background: rgba(15, 31, 57, 0.82);
+  color: rgba(255, 255, 255, 0.94);
+  padding: 0.68rem 0.82rem;
+  font: inherit;
+}
+
+.ag71c-coordinate-grid input::placeholder {
+  color: rgba(182, 194, 215, 0.72);
+}
+
+.ag71c-coordinate-note {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(182, 194, 215, 0.82);
+}
+
+.ag71c-review-action-lock,
+button[disabled].ag71c-review-action-lock {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+@media (max-width: 720px) {
+  .ag71c-input-mode {
+    grid-template-columns: 1fr;
+  }
+  .ag71c-coordinate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* AG71D_UI_FINISHING_CORRECTION_END */
+
+</style>
 </head>
 <body>
 
@@ -4255,7 +4354,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             
 
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
-          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="star-reflection">
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="star-reflection" data-ag71c-selected-mode="place">
             <div class="ag71c-input-mode" aria-label="Birth location input mode">
               <label>
                 <input type="radio" name="ag71c-star-location-mode" value="place" data-ag71c-mode checked>
@@ -4288,7 +4387,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
               <option>English</option>
               <option>Hindi</option>
             </select>
-            <button class="btn btn-primary" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true">Reflection Method Under Review</button>
+            <button class="btn btn-primary" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" class="ag71c-review-action-lock">Reflection Locked Pending Review</button>
           </div>
         </div>
 
@@ -4301,7 +4400,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           
 
           <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_START -->
-          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang">
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang" data-ag71c-selected-mode="place">
             <div class="ag71c-input-mode" aria-label="Panchang location input mode">
               <label>
                 <input type="radio" name="ag71c-panchang-location-mode" value="place" data-ag71c-mode checked>
@@ -7326,6 +7425,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 /* AG71D_COORDINATE_TOGGLE_RUNTIME_FIX_END */
+</script>
+
+
+<script>
+/* AG71D_UI_FINISHING_TOGGLE_FIX_START */
+(function () {
+  function syncAg71dSurface(surface) {
+    if (!surface) return;
+    var selected = surface.querySelector('input[data-ag71c-mode]:checked');
+    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
+    var isCoordinates = selected && selected.value === 'coordinates';
+
+    surface.setAttribute('data-ag71c-selected-mode', isCoordinates ? 'coordinates' : 'place');
+
+    if (fields) {
+      if (isCoordinates) {
+        fields.removeAttribute('hidden');
+        fields.style.display = 'grid';
+      } else {
+        fields.setAttribute('hidden', 'hidden');
+        fields.style.display = 'none';
+      }
+    }
+  }
+
+  function syncAg71dAllSurfaces() {
+    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(syncAg71dSurface);
+  }
+
+  document.addEventListener('change', function (event) {
+    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
+    syncAg71dSurface(event.target.closest('[data-ag71c-coordinate-surface]'));
+  }, true);
+
+  document.addEventListener('click', function (event) {
+    var surface = event.target && event.target.closest ? event.target.closest('[data-ag71c-coordinate-surface]') : null;
+    if (surface) window.setTimeout(function () { syncAg71dSurface(surface); }, 0);
+  }, true);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncAg71dAllSurfaces, { once: true });
+  } else {
+    syncAg71dAllSurfaces();
+  }
+})();
+/* AG71D_UI_FINISHING_TOGGLE_FIX_END */
 </script>
 
 </body>

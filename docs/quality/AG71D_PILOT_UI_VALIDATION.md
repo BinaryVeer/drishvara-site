@@ -21,3 +21,8 @@ AG71E — Pilot Runtime Output Test.
 ## Coordinate toggle visibility correction
 
 During live UI review, the Enter Coordinates radio option appeared, but the latitude/longitude fields did not reveal. AG71D corrected the active `index.html` by adding CSS and JS fallback visibility control so coordinate fields appear when Enter Coordinates is selected.
+
+
+## UI finishing correction
+
+AG71D was further corrected after live review. The Star Reflection coordinate fields now reveal when Enter Birth Coordinates is selected, the coordinate input surface has improved responsive finishing, and the duplicate action label was changed from “Reflection Method Under Review” to “Reflection Locked Pending Review”.
