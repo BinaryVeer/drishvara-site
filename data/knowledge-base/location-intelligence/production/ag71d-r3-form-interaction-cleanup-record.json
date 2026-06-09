@@ -1,0 +1,68 @@
+{
+  "module_id": "AG71D-R3",
+  "title": "Star/Panchang Form Interaction Cleanup Record",
+  "status": "form_interaction_cleanup_applied",
+  "active_frontend_file": "index.html",
+  "root_causes_corrected": [
+    "AG66B Star Reflection loader disabled all inputs inside the Star Reflection card.",
+    "AG66B Star Reflection loader overwrote the Birth Place dropdown with legacy method options.",
+    "AG64B/older Panchang loaders overwrote panchang-place-select from generated data.",
+    "Multiple AG71C/AG71D/R1/R2 controller scripts competed with native input/select behavior."
+  ],
+  "neutralized_legacy_scripts": [
+    "AG71C_ACTIVE_COORDINATE_INPUT_SCRIPT_START",
+    "AG71D_COORDINATE_TOGGLE_RUNTIME_FIX_START",
+    "AG71D_UI_FINISHING_TOGGLE_FIX_START",
+    "AG71D_FINAL_COORDINATE_TOGGLE_FIX_START",
+    "AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_START",
+    "AG71D_PLACE_SELECTION_TOGGLE_FIX_START",
+    "AG71D_R1_PILOT_DROPDOWN_RUNTIME_FIX_START",
+    "AG71D_R2_PILOT_DROPDOWN_RUNTIME_GUARD_START"
+  ],
+  "ui_controls_enabled_for_preview": [
+    "star-reflection-name",
+    "star-reflection-dob",
+    "star-birth-place-select",
+    "star-birth-latitude",
+    "star-birth-longitude",
+    "star-birth-timezone",
+    "star-birth-coordinate-label",
+    "panchang-place-select",
+    "panchang-latitude",
+    "panchang-longitude",
+    "panchang-timezone",
+    "panchang-coordinate-label"
+  ],
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "timezone": "Asia/Tokyo"
+    }
+  ],
+  "public_runtime_activation_performed": false,
+  "runtime_panchang_computation_performed": false,
+  "runtime_star_reflection_computation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false,
+  "full_location_bank_activation_performed": false
+}

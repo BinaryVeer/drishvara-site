@@ -4169,6 +4169,128 @@ button[disabled].ag71c-review-action-lock {
 /* AG71D_PLACE_SELECTION_UI_CORRECTION_END */
 
 </style>
+<style>
+
+/* AG71D_R3_FORM_INTERACTION_CLEANUP_STYLE_START */
+#star-reflection-name,
+#star-reflection-dob,
+#star-birth-place-select,
+#panchang-place-select,
+#star-birth-latitude,
+#star-birth-longitude,
+#star-birth-timezone,
+#star-birth-coordinate-label,
+#panchang-latitude,
+#panchang-longitude,
+#panchang-timezone,
+#panchang-coordinate-label,
+.ag71c-coordinate-surface input,
+.ag71d-location-select {
+  pointer-events: auto !important;
+  user-select: auto !important;
+  -webkit-user-select: auto !important;
+  opacity: 1 !important;
+  touch-action: manipulation !important;
+}
+
+.ag71c-coordinate-surface {
+  margin: 1rem 0 1.1rem;
+  padding: 1rem;
+  border: 1px solid rgba(214, 176, 76, 0.38);
+  border-radius: 18px;
+  background: rgba(182, 208, 233, 0.07);
+}
+
+.ag71c-input-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.9rem;
+}
+
+.ag71c-input-mode label {
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(182, 208, 233, 0.24);
+  border-radius: 999px;
+  background: rgba(8, 21, 43, 0.48);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.94);
+  cursor: pointer;
+}
+
+.ag71c-input-mode input[type="radio"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #d6b04c;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="place"] [data-ag71c-coordinate-fields] {
+  display: none !important;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] [data-ag71c-coordinate-fields] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ag71c-coordinate-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.ag71c-coordinate-grid input,
+.ag71d-location-select,
+#star-reflection-name,
+#star-reflection-dob {
+  min-height: 2.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(182, 208, 233, 0.28);
+  background: rgba(10, 25, 48, 0.9);
+  color: rgba(255, 255, 255, 0.96);
+  padding: 0.68rem 0.82rem;
+}
+
+.ag71d-place-select-shell {
+  margin: 0.9rem 0 1rem;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] ~ .ag71d-place-select-shell,
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] + .ag71d-place-select-shell {
+  display: none !important;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="place"] ~ .ag71d-place-select-shell,
+.ag71c-coordinate-surface[data-ag71d-mode="place"] + .ag71d-place-select-shell {
+  display: block !important;
+}
+
+.ag71d-select-label {
+  display: block;
+  margin: 0 0 0.38rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.9rem;
+}
+
+.ag71d-location-select {
+  width: 100%;
+  border-color: rgba(214, 176, 76, 0.58);
+  background: rgba(4, 16, 36, 0.96);
+}
+
+@media (max-width: 720px) {
+  .ag71c-input-mode,
+  .ag71c-coordinate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* AG71D_R3_FORM_INTERACTION_CLEANUP_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -4542,8 +4664,8 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <h2>What the stars say about you</h2>
           <p>Personal input is disabled until consent, privacy and reflection-method governance are complete.</p>
           <div class="form-grid">
-            <input type="text" placeholder="Name" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" />
-            <input type="text" placeholder="Date of Birth (DD/MM/YYYY)" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" />
+            <input id="star-reflection-name" type="text" placeholder="Name" autocomplete="name" data-ag71d-r3-preview-input="star-name" />
+            <input id="star-reflection-dob" type="text" inputmode="numeric" placeholder="Date of Birth (DD/MM/YYYY)" autocomplete="bday" data-ag71d-r3-preview-input="star-dob" />
             
 
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
@@ -5370,7 +5492,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
     function applyPanchang(panchang) {
       if (!panchang) return;
-      setSelectValue("panchang-place-select", panchang.place);
+      if (!document.getElementById("panchang-place-select")?.hasAttribute("data-ag71d-location-select")) setSelectValue("panchang-place-select", panchang.place);
       setText("panchang-sunrise", panchang.sunrise);
       setText("panchang-sunset", panchang.sunset);
       setText("panchang-moonrise", panchang.moonrise);
@@ -6849,7 +6971,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const panchang = data.panchang;
     const observance = data.observance;
 
-    setSelectValue("panchang-place-select", panchang.place);
+    if (!document.getElementById("panchang-place-select")?.hasAttribute("data-ag71d-location-select")) setSelectValue("panchang-place-select", panchang.place);
     setText("panchang-sunrise", panchang.calculation_source);
     setText("panchang-sunset", panchang.regional_method);
     setText("panchang-moonrise", panchang.location_basis);
@@ -7027,16 +7149,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const body = Array.from(card.querySelectorAll("p")).find((p) => !p.classList.contains("star-safety-note"));
     setText(body, star.body);
 
-    const inputs = card.querySelectorAll("input");
-    if (inputs[0]) inputs[0].setAttribute("placeholder", star.name_placeholder || "Name");
-    if (inputs[1]) inputs[1].setAttribute("placeholder", star.dob_placeholder || "Date of Birth (DD/MM/YYYY)");
-    inputs.forEach(keepControlDisabled);
+    const nameInput = card.querySelector("#star-reflection-name");
+    const dobInput = card.querySelector("#star-reflection-dob");
 
-    const select = card.querySelector("select");
-    if (select) {
+    if (nameInput) {
+      nameInput.setAttribute("placeholder", star.name_placeholder || "Name");
+      nameInput.disabled = false;
+      nameInput.removeAttribute("disabled");
+      nameInput.removeAttribute("aria-disabled");
+      nameInput.removeAttribute("data-drishvara-ag66b-input-disabled");
+    }
+
+    if (dobInput) {
+      dobInput.setAttribute("placeholder", star.dob_placeholder || "Date of Birth (DD/MM/YYYY)");
+      dobInput.disabled = false;
+      dobInput.removeAttribute("disabled");
+      dobInput.removeAttribute("aria-disabled");
+      dobInput.removeAttribute("data-drishvara-ag66b-input-disabled");
+    }
+
+    card.querySelectorAll("[data-ag71c-mode], #star-birth-place-select, #star-birth-latitude, #star-birth-longitude, #star-birth-timezone, #star-birth-coordinate-label").forEach((control) => {
+      control.disabled = false;
+      control.removeAttribute("disabled");
+      control.removeAttribute("aria-disabled");
+      control.removeAttribute("data-drishvara-ag66b-input-disabled");
+    });
+
+    const legacyMethodSelect = card.querySelector("select:not(#star-birth-place-select)");
+    if (legacyMethodSelect) {
       const options = Array.isArray(star.language_options) && star.language_options.length ? star.language_options : ["English", "Hindi"];
-      select.innerHTML = options.map((item) => `<option>${String(item)}</option>`).join("");
-      keepControlDisabled(select);
+      legacyMethodSelect.innerHTML = options.map((item) => `<option>${String(item)}</option>`).join("");
+      keepControlDisabled(legacyMethodSelect);
+    }
+
+    const birthPlaceSelect = card.querySelector("#star-birth-place-select");
+    if (birthPlaceSelect) {
+      birthPlaceSelect.disabled = false;
+      birthPlaceSelect.removeAttribute("disabled");
+      birthPlaceSelect.removeAttribute("aria-disabled");
+      birthPlaceSelect.removeAttribute("data-drishvara-ag66b-input-disabled");
     }
 
     const button = card.querySelector("button");
@@ -7565,380 +7716,94 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg68zr1LoadSportsDeskTransitions = loadAg68zr1SportsTransitions;
 })();
 </script>
-
-
 <script>
 /* AG71C_ACTIVE_COORDINATE_INPUT_SCRIPT_START */
 (function () {
-  function setupAg71cCoordinateSurface() {
-    document.querySelectorAll("[data-ag71c-coordinate-surface]").forEach(function (surface) {
-      var radios = surface.querySelectorAll('input[type="radio"][data-ag71c-mode]');
-      var coordinateFields = surface.querySelector("[data-ag71c-coordinate-fields]");
-      function sync() {
-        var selected = Array.prototype.find.call(radios, function (radio) { return radio.checked; });
-        if (!selected || !coordinateFields) return;
-        coordinateFields.hidden = selected.value !== "coordinates";
-      }
-      radios.forEach(function (radio) {
-        radio.addEventListener("change", sync);
-      });
-      sync();
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupAg71cCoordinateSurface, { once: true });
-  } else {
-    setupAg71cCoordinateSurface();
-  }
+  window.drishvaraAg71cCoordinateSurfaceSupersededByAg71dR3 = true;
 })();
 /* AG71C_ACTIVE_COORDINATE_INPUT_SCRIPT_END */
 </script>
-
-
 <script>
 /* AG71D_COORDINATE_TOGGLE_RUNTIME_FIX_START */
 (function () {
-  function syncSurface(surface) {
-    if (!surface) return;
-    var fields = surface.querySelector("[data-ag71c-coordinate-fields]");
-    var selected = surface.querySelector('input[data-ag71c-mode][value="coordinates"]:checked');
-    if (!fields) return;
-    if (selected) {
-      fields.removeAttribute("hidden");
-      fields.style.display = "grid";
-    } else {
-      fields.setAttribute("hidden", "hidden");
-      fields.style.display = "none";
-    }
-  }
-
-  function syncAll() {
-    document.querySelectorAll("[data-ag71c-coordinate-surface]").forEach(syncSurface);
-  }
-
-  document.addEventListener("change", function (event) {
-    if (!event.target || !event.target.matches("input[data-ag71c-mode]")) return;
-    syncSurface(event.target.closest("[data-ag71c-coordinate-surface]"));
-  });
-
-  document.addEventListener("click", function (event) {
-    if (!event.target) return;
-    var surface = event.target.closest && event.target.closest("[data-ag71c-coordinate-surface]");
-    if (surface) window.setTimeout(function () { syncSurface(surface); }, 0);
-  });
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", syncAll, { once: true });
-  } else {
-    syncAll();
-  }
+  window.drishvaraAg71dCoordinateToggleRuntimeFixSupersededByR3 = true;
 })();
 /* AG71D_COORDINATE_TOGGLE_RUNTIME_FIX_END */
 </script>
-
-
 <script>
 /* AG71D_UI_FINISHING_TOGGLE_FIX_START */
 (function () {
-  function syncAg71dSurface(surface) {
-    if (!surface) return;
-    var selected = surface.querySelector('input[data-ag71c-mode]:checked');
-    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
-    var isCoordinates = selected && selected.value === 'coordinates';
-
-    surface.setAttribute('data-ag71c-selected-mode', isCoordinates ? 'coordinates' : 'place');
-
-    if (fields) {
-      if (isCoordinates) {
-        fields.removeAttribute('hidden');
-        fields.style.display = 'grid';
-      } else {
-        fields.setAttribute('hidden', 'hidden');
-        fields.style.display = 'none';
-      }
-    }
-  }
-
-  function syncAg71dAllSurfaces() {
-    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(syncAg71dSurface);
-  }
-
-  document.addEventListener('change', function (event) {
-    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
-    syncAg71dSurface(event.target.closest('[data-ag71c-coordinate-surface]'));
-  }, true);
-
-  document.addEventListener('click', function (event) {
-    var surface = event.target && event.target.closest ? event.target.closest('[data-ag71c-coordinate-surface]') : null;
-    if (surface) window.setTimeout(function () { syncAg71dSurface(surface); }, 0);
-  }, true);
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncAg71dAllSurfaces, { once: true });
-  } else {
-    syncAg71dAllSurfaces();
-  }
+  window.drishvaraAg71dUiFinishingToggleFixSupersededByR3 = true;
 })();
 /* AG71D_UI_FINISHING_TOGGLE_FIX_END */
 </script>
-
-
 <script>
 /* AG71D_FINAL_COORDINATE_TOGGLE_FIX_START */
 (function () {
-  function syncSurface(surface) {
-    if (!surface) return;
-    var selected = surface.querySelector('input[data-ag71c-mode]:checked');
-    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
-    var coordinateMode = selected && selected.value === 'coordinates';
-
-    surface.setAttribute('data-ag71d-mode', coordinateMode ? 'coordinates' : 'place');
-    surface.setAttribute('data-ag71c-selected-mode', coordinateMode ? 'coordinates' : 'place');
-
-    if (!fields) return;
-    if (coordinateMode) {
-      fields.removeAttribute('hidden');
-      fields.style.setProperty('display', 'grid', 'important');
-    } else {
-      fields.setAttribute('hidden', 'hidden');
-      fields.style.setProperty('display', 'none', 'important');
-    }
-  }
-
-  function syncAll() {
-    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(syncSurface);
-  }
-
-  document.addEventListener('change', function (event) {
-    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
-    syncSurface(event.target.closest('[data-ag71c-coordinate-surface]'));
-  }, true);
-
-  document.addEventListener('click', function (event) {
-    var surface = event.target && event.target.closest
-      ? event.target.closest('[data-ag71c-coordinate-surface]')
-      : null;
-    if (surface) window.setTimeout(function () { syncSurface(surface); }, 0);
-  }, true);
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncAll, { once: true });
-  } else {
-    syncAll();
-  }
+  window.drishvaraAg71dFinalCoordinateToggleFixSupersededByR3 = true;
 })();
 /* AG71D_FINAL_COORDINATE_TOGGLE_FIX_END */
 </script>
-
-
 <script>
 /* AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_START */
 (function () {
   function setSurfaceMode(surface, mode) {
-    if (!surface) return;
-
-    var radios = surface.querySelectorAll('input[data-ag71c-mode]');
-    radios.forEach(function (radio) {
-      radio.removeAttribute('disabled');
-      radio.disabled = false;
-      radio.checked = radio.value === mode;
-      radio.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
-    });
-
-    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
-    surface.setAttribute('data-ag71d-mode', mode);
-    surface.setAttribute('data-ag71c-selected-mode', mode);
-
-    if (!fields) return;
-    if (mode === 'coordinates') {
-      fields.removeAttribute('hidden');
-      fields.style.setProperty('display', 'grid', 'important');
-      fields.style.setProperty('visibility', 'visible', 'important');
-      fields.style.setProperty('opacity', '1', 'important');
-    } else {
-      fields.setAttribute('hidden', 'hidden');
-      fields.style.setProperty('display', 'none', 'important');
+    if (typeof window.drishvaraAg71dR3SetMode === "function") {
+      window.drishvaraAg71dR3SetMode(surface, mode);
+    } else if (surface) {
+      surface.setAttribute("data-ag71d-mode", mode || "place");
     }
   }
 
-  function syncAllAg71dModeSurfaces() {
-    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(function (surface) {
-      var selected = surface.querySelector('input[data-ag71c-mode]:checked');
-      var mode = selected ? selected.value : 'place';
-      setSurfaceMode(surface, mode);
-    });
-  }
-
-  function handleModeIntent(target, event) {
-    var surface = target && target.closest ? target.closest('[data-ag71c-coordinate-surface]') : null;
-    if (!surface) return false;
-
-    var radio = target.matches && target.matches('input[data-ag71c-mode]')
-      ? target
-      : null;
-
-    if (!radio) {
-      var label = target.closest ? target.closest('label') : null;
-      radio = label ? label.querySelector('input[data-ag71c-mode]') : null;
+  window.drishvaraSyncAg71dCoordinateModes = function () {
+    if (typeof window.drishvaraAg71dR3BootFormCleanup === "function") {
+      window.drishvaraAg71dR3BootFormCleanup();
     }
-
-    if (!radio) return false;
-
-    if (event) event.preventDefault();
-    setSurfaceMode(surface, radio.value);
-    return true;
-  }
-
-  ['pointerdown', 'mousedown', 'touchstart', 'click', 'change'].forEach(function (type) {
-    document.addEventListener(type, function (event) {
-      if (!event.target) return;
-      handleModeIntent(event.target, event);
-    }, true);
-  });
-
-  document.addEventListener('keydown', function (event) {
-    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
-    if (event.key !== ' ' && event.key !== 'Enter') return;
-    handleModeIntent(event.target, event);
-  }, true);
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncAllAg71dModeSurfaces, { once: true });
-  } else {
-    syncAllAg71dModeSurfaces();
-  }
-
-  window.drishvaraSyncAg71dCoordinateModes = syncAllAg71dModeSurfaces;
+  };
 })();
 /* AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_END */
 </script>
-
-
 <script>
 /* AG71D_PLACE_SELECTION_TOGGLE_FIX_START */
 (function () {
-  function getShellForSurface(surface) {
-    if (!surface) return null;
-    var key = surface.getAttribute('data-ag71c-coordinate-surface');
-    return key ? document.querySelector('[data-ag71d-place-select-shell="' + key + '"]') : null;
-  }
-
-  function setMode(surface, mode) {
-    if (!surface) return;
-    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
-    var shell = getShellForSurface(surface);
-
-    surface.setAttribute('data-ag71d-mode', mode);
-    surface.setAttribute('data-ag71c-selected-mode', mode);
-
-    surface.querySelectorAll('input[data-ag71c-mode]').forEach(function (radio) {
-      radio.disabled = false;
-      radio.checked = radio.value === mode;
-      radio.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
-    });
-
-    if (fields) {
-      if (mode === 'coordinates') {
-        fields.removeAttribute('hidden');
-        fields.style.setProperty('display', 'grid', 'important');
-      } else {
-        fields.setAttribute('hidden', 'hidden');
-        fields.style.setProperty('display', 'none', 'important');
-      }
+  window.drishvaraAg71dSyncPlaceSelection = function () {
+    if (typeof window.drishvaraAg71dR3BootFormCleanup === "function") {
+      window.drishvaraAg71dR3BootFormCleanup();
     }
-
-    if (shell) {
-      shell.style.display = mode === 'coordinates' ? 'none' : 'block';
+  };
+  window.drishvaraAg71dSetCoordinateMode = function (surface, mode) {
+    if (typeof window.drishvaraAg71dR3SetMode === "function") {
+      window.drishvaraAg71dR3SetMode(surface, mode);
     }
-  }
-
-  function syncAll() {
-    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(function (surface) {
-      var selected = surface.querySelector('input[data-ag71c-mode]:checked');
-      setMode(surface, selected ? selected.value : 'place');
-    });
-  }
-
-  function modeFromTarget(target) {
-    if (!target) return null;
-    if (target.matches && target.matches('input[data-ag71c-mode]')) return target.value;
-    var label = target.closest ? target.closest('label') : null;
-    var radio = label ? label.querySelector('input[data-ag71c-mode]') : null;
-    return radio ? radio.value : null;
-  }
-
-  ['click', 'change', 'pointerdown', 'touchstart'].forEach(function (eventName) {
-    document.addEventListener(eventName, function (event) {
-      if (!event.target) return;
-      var surface = event.target.closest ? event.target.closest('[data-ag71c-coordinate-surface]') : null;
-      if (!surface) return;
-      var mode = modeFromTarget(event.target);
-      if (!mode) return;
-      event.preventDefault();
-      setMode(surface, mode);
-    }, true);
-  });
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncAll, { once: true });
-  } else {
-    syncAll();
-  }
-
-  window.drishvaraAg71dSetCoordinateMode = setMode;
-  window.drishvaraAg71dSyncPlaceSelection = syncAll;
+  };
 })();
 /* AG71D_PLACE_SELECTION_TOGGLE_FIX_END */
 </script>
-
-
 <script>
 /* AG71D_R1_PILOT_DROPDOWN_RUNTIME_FIX_START */
 (function () {
-  var pilotOptions = [{"value":"itanagar-arunachal-pradesh-india","label":"Itanagar","location_id":"loc_in_ar_itanagar_capital_complex_001","timezone":"Asia/Kolkata","pilot_status":"approved_four_location_pilot"},{"value":"new-delhi-delhi-india","label":"New Delhi","location_id":"loc_in_dl_new_delhi_capital_001","timezone":"Asia/Kolkata","pilot_status":"approved_four_location_pilot"},{"value":"ranchi-jharkhand-india","label":"Ranchi","location_id":"loc_in_jh_ranchi_city_001","timezone":"Asia/Kolkata","pilot_status":"approved_four_location_pilot"},{"value":"tokyo-japan","label":"Tokyo","location_id":"loc_jp_tokyo_capital_001","timezone":"Asia/Tokyo","pilot_status":"approved_four_location_pilot"}];
-
-  function optionMarkup(item, selected) {
-    return '<option value="' + item.value + '" data-location-id="' + item.location_id + '" data-timezone="' + item.timezone + '" data-pilot-status="' + item.pilot_status + '"' + (selected ? ' selected' : '') + '>' + item.label + '</option>';
-  }
-
-  function resetSelect(id, placeholder, selectFirst) {
-    var select = document.getElementById(id);
-    if (!select) return;
-
-    var html = '';
-    if (placeholder) {
-      html += '<option value=""' + (!selectFirst ? ' selected' : '') + '>' + placeholder + '</option>';
+  window.drishvaraAg71dR1ApplyPilotDropdowns = function () {
+    if (typeof window.drishvaraAg71dR3BootFormCleanup === "function") {
+      window.drishvaraAg71dR3BootFormCleanup();
     }
-
-    html += pilotOptions.map(function (item, index) {
-      return optionMarkup(item, selectFirst && index === 0);
-    }).join('');
-
-    select.innerHTML = html;
-  }
-
-  function applyPilotDropdowns() {
-    resetSelect('star-birth-place-select', 'Select birth place', false);
-    resetSelect('panchang-place-select', '', true);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyPilotDropdowns, { once: true });
-  } else {
-    applyPilotDropdowns();
-  }
-
-  window.setTimeout(applyPilotDropdowns, 250);
-  window.setTimeout(applyPilotDropdowns, 1000);
-  window.drishvaraAg71dR1ApplyPilotDropdowns = applyPilotDropdowns;
+  };
 })();
 /* AG71D_R1_PILOT_DROPDOWN_RUNTIME_FIX_END */
 </script>
-
-
 <script>
 /* AG71D_R2_PILOT_DROPDOWN_RUNTIME_GUARD_START */
+(function () {
+  window.drishvaraAg71dR2EnforcePilotDropdowns = function () {
+    if (typeof window.drishvaraAg71dR3BootFormCleanup === "function") {
+      window.drishvaraAg71dR3BootFormCleanup();
+    }
+  };
+})();
+/* AG71D_R2_PILOT_DROPDOWN_RUNTIME_GUARD_END */
+</script>
+
+<script>
+/* AG71D_R3_FORM_INTERACTION_CONTROLLER_START */
 (function () {
   var pilotLocations = [{"value": "itanagar-arunachal-pradesh-india", "label": "Itanagar", "location_id": "loc_in_ar_itanagar_capital_complex_001", "timezone": "Asia/Kolkata"}, {"value": "new-delhi-delhi-india", "label": "New Delhi", "location_id": "loc_in_dl_new_delhi_capital_001", "timezone": "Asia/Kolkata"}, {"value": "ranchi-jharkhand-india", "label": "Ranchi", "location_id": "loc_in_jh_ranchi_city_001", "timezone": "Asia/Kolkata"}, {"value": "tokyo-japan", "label": "Tokyo", "location_id": "loc_jp_tokyo_capital_001", "timezone": "Asia/Tokyo"}];
 
@@ -7946,86 +7811,151 @@ document.addEventListener("DOMContentLoaded", () => {
     return '<option value="' + item.value + '" data-location-id="' + item.location_id + '" data-timezone="' + item.timezone + '" data-pilot-status="approved_four_location_pilot"' + (selected ? ' selected' : '') + '>' + item.label + '</option>';
   }
 
-  function desiredOptions(selectId) {
-    if (selectId === 'star-birth-place-select') {
-      return '<option value="" selected>Select birth place</option>' + pilotLocations.map(function (item) {
-        return optionMarkup(item, false);
-      }).join('');
-    }
-
-    if (selectId === 'panchang-place-select') {
-      return pilotLocations.map(function (item, index) {
-        return optionMarkup(item, index === 0);
-      }).join('');
-    }
-
-    return '';
-  }
-
-  function optionLabels(select) {
-    return Array.prototype.map.call(select.options || [], function (option) {
-      return option.textContent.trim();
-    }).join('|');
-  }
-
-  function enforceSelect(selectId) {
+  function resetDropdown(selectId) {
     var select = document.getElementById(selectId);
     if (!select) return;
 
-    var required = ['Itanagar', 'New Delhi', 'Ranchi', 'Tokyo'];
-    var labels = optionLabels(select);
-    var polluted = labels.indexOf('Reflection Method Under Review') !== -1;
-    var missing = required.some(function (label) { return labels.indexOf(label) === -1; });
-    var tooFew = (select.options || []).length < required.length;
-
-    if (!polluted && !missing && !tooFew) return;
-
     var previousValue = select.value;
-    select.innerHTML = desiredOptions(selectId);
+    var html = '';
 
-    var values = Array.prototype.map.call(select.options, function (option) { return option.value; });
-    if (values.indexOf(previousValue) !== -1) {
-      select.value = previousValue;
-    } else if (selectId === 'star-birth-place-select') {
-      select.value = '';
-    } else {
-      select.value = 'itanagar-arunachal-pradesh-india';
+    if (selectId === 'star-birth-place-select') {
+      html += '<option value="">Select birth place</option>';
+      html += pilotLocations.map(function (item) { return optionMarkup(item, false); }).join('');
     }
 
-    select.setAttribute('data-ag71d-r2-guarded', 'true');
+    if (selectId === 'panchang-place-select') {
+      html += pilotLocations.map(function (item, index) { return optionMarkup(item, index === 0); }).join('');
+    }
+
+    if (html) {
+      select.innerHTML = html;
+      var values = Array.prototype.map.call(select.options || [], function (option) { return option.value; });
+      if (values.indexOf(previousValue) !== -1) select.value = previousValue;
+      else if (selectId === 'panchang-place-select') select.value = 'itanagar-arunachal-pradesh-india';
+      else select.value = '';
+    }
+
+    select.disabled = false;
+    select.removeAttribute('disabled');
+    select.removeAttribute('aria-disabled');
+    select.removeAttribute('data-drishvara-ag66b-input-disabled');
   }
 
-  function enforcePilotDropdowns() {
-    enforceSelect('star-birth-place-select');
-    enforceSelect('panchang-place-select');
+  function unlockControls() {
+    [
+      'star-reflection-name',
+      'star-reflection-dob',
+      'star-birth-place-select',
+      'panchang-place-select',
+      'star-birth-latitude',
+      'star-birth-longitude',
+      'star-birth-timezone',
+      'star-birth-coordinate-label',
+      'panchang-latitude',
+      'panchang-longitude',
+      'panchang-timezone',
+      'panchang-coordinate-label'
+    ].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.disabled = false;
+      el.readOnly = false;
+      el.removeAttribute('disabled');
+      el.removeAttribute('readonly');
+      el.removeAttribute('aria-disabled');
+      el.removeAttribute('data-drishvara-ag66b-input-disabled');
+      el.style.pointerEvents = 'auto';
+      el.style.userSelect = 'auto';
+    });
+
+    document.querySelectorAll('input[data-ag71c-mode]').forEach(function (radio) {
+      radio.disabled = false;
+      radio.removeAttribute('disabled');
+      radio.removeAttribute('aria-disabled');
+    });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', enforcePilotDropdowns, { once: true });
-  } else {
-    enforcePilotDropdowns();
+  function setMode(surface, mode) {
+    if (!surface) return;
+
+    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
+    var shellKey = surface.getAttribute('data-ag71c-coordinate-surface');
+    var shell = shellKey ? document.querySelector('[data-ag71d-place-select-shell="' + shellKey + '"]') : null;
+
+    surface.setAttribute('data-ag71d-mode', mode);
+    surface.setAttribute('data-ag71c-selected-mode', mode);
+
+    surface.querySelectorAll('input[data-ag71c-mode]').forEach(function (radio) {
+      radio.checked = radio.value === mode;
+      radio.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
+    });
+
+    if (fields) {
+      if (mode === 'coordinates') {
+        fields.removeAttribute("hidden");
+        fields.style.display = "grid";
+      } else {
+        fields.setAttribute("hidden", "hidden");
+        fields.style.display = "none";
+      }
+    }
+
+    if (shell) shell.style.display = mode === 'coordinates' ? 'none' : 'block';
   }
+
+  function syncSurfaces() {
+    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(function (surface) {
+      var selected = surface.querySelector('input[data-ag71c-mode]:checked');
+      setMode(surface, selected ? selected.value : 'place');
+    });
+  }
+
+  function boot() {
+    resetDropdown('star-birth-place-select');
+    resetDropdown('panchang-place-select');
+    unlockControls();
+    syncSurfaces();
+    document.documentElement.setAttribute('data-ag71d-r3-form-cleanup-active', 'true');
+  }
+
+  document.addEventListener('change', function (event) {
+    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
+    var surface = event.target.closest('[data-ag71c-coordinate-surface]');
+    setMode(surface, event.target.value);
+  });
+
+  document.addEventListener('click', function (event) {
+    if (!event.target) return;
+    if (event.target.matches('input, select, textarea, option')) return;
+
+    var label = event.target.closest ? event.target.closest('.ag71c-input-mode label') : null;
+    if (!label) return;
+
+    var radio = label.querySelector('input[data-ag71c-mode]');
+    if (!radio) return;
+
+    window.setTimeout(function () {
+      var surface = radio.closest('[data-ag71c-coordinate-surface]');
+      setMode(surface, radio.value);
+    }, 0);
+  });
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  else boot();
+
+  window.addEventListener('load', boot);
 
   var attempts = 0;
   var interval = window.setInterval(function () {
     attempts += 1;
-    enforcePilotDropdowns();
-    if (attempts >= 40) window.clearInterval(interval);
+    boot();
+    if (attempts >= 20) window.clearInterval(interval);
   }, 300);
 
-  var observer = new MutationObserver(function () {
-    enforcePilotDropdowns();
-  });
-
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    characterData: true
-  });
-
-  window.drishvaraAg71dR2EnforcePilotDropdowns = enforcePilotDropdowns;
+  window.drishvaraAg71dR3SetMode = setMode;
+  window.drishvaraAg71dR3BootFormCleanup = boot;
 })();
-/* AG71D_R2_PILOT_DROPDOWN_RUNTIME_GUARD_END */
+/* AG71D_R3_FORM_INTERACTION_CONTROLLER_END */
 </script>
 
 </body>
