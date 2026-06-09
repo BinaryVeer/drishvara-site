@@ -104,7 +104,8 @@ for (const key of [
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_location_intelligence_foundation_closure",
-  "production_bank_manifest_created_verified_four_location_pilot_activation"
+  "production_bank_manifest_created_verified_four_location_pilot_activation",
+  "production_bank_manifest_created_pilot_runtime_validation"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.location_foundation_closure_records !== 1) fail("Closure count must be 1.");

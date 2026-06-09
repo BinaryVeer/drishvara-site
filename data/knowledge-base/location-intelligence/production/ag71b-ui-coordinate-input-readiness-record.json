@@ -1,0 +1,24 @@
+{
+  "module_id": "AG71B",
+  "title": "UI Coordinate Input Readiness Record",
+  "status": "ui_coordinate_input_readiness_record_created",
+  "current_frontend_gap_confirmed": true,
+  "current_gap": "Frontend does not yet expose latitude/longitude coordinate input fields.",
+  "required_next_stage": "AG71C — Pilot UI Coordinate Input Surface",
+  "panchang_required_modes": [
+    "select_location_from_dropdown",
+    "enter_coordinates"
+  ],
+  "star_reflection_required_modes": [
+    "select_birth_place_from_dropdown",
+    "enter_birth_coordinates"
+  ],
+  "required_coordinate_fields": [
+    "latitude_decimal",
+    "longitude_decimal",
+    "timezone",
+    "optional_label"
+  ],
+  "public_ui_change_performed_now": false,
+  "ready_for_ag71c_ui_surface": true
+}

@@ -1,0 +1,28 @@
+{
+  "module_id": "AG71B",
+  "title": "AG71B to AG71C Pilot UI Coordinate Input Surface Boundary",
+  "status": "ag71c_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Add pilot UI input mode toggle for Select Location / Enter Coordinates.",
+    "Add latitude, longitude, timezone and optional label fields for Panchang.",
+    "Add birth latitude, birth longitude, birth timezone and optional label fields for Star Reflection.",
+    "Keep UI pilot-scoped and non-public unless explicitly activated.",
+    "Keep backend/Supabase blocked."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "full location-bank activation",
+    "public full dropdown activation",
+    "unrestricted Panchang runtime computation",
+    "unrestricted Star Reflection runtime computation",
+    "all India State/UT capitals activation",
+    "all districts activation",
+    "all blocks activation",
+    "all global capitals activation",
+    "all major world cities activation",
+    "generated/word-of-day.json replacement",
+    "Supabase/database writes",
+    "backend/Auth activation"
+  ]
+}

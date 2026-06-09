@@ -1,0 +1,53 @@
+{
+  "module_id": "AG71B",
+  "title": "Pilot Runtime Validation",
+  "status": "ag71b_pilot_runtime_validation_completed",
+  "current_git_context": {
+    "branch": "main",
+    "head": "aead257c",
+    "head_full": "aead257ce18cca0e45edef64d56bb21704fa1ad8",
+    "origin_main": "aead257c",
+    "status_at_generation": "M package.json\n M scripts/validate-ag70h-panchang-calculation-source-location-basis-decision.mjs\n M scripts/validate-ag70i-internal-panchang-astronomical-computation-model.mjs\n M scripts/validate-ag70j-panchang-computation-basis-lock-daily-bank.mjs\n M scripts/validate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs\n M scripts/validate-ag70l-computed-panchang-daily-bank-internal-validation.mjs\n M scripts/validate-ag70m-festival-observance-rule-bank.mjs\n M scripts/validate-ag70n-upcoming-observance-computed-event-bank.mjs\n M scripts/validate-ag70o-eclipse-computation-event-bank.mjs\n M scripts/validate-ag70p-panchang-computation-verification-policy.mjs\n M scripts/validate-ag70q-panchang-context-interpretation-bank.mjs\n M scripts/validate-ag70r-today-panchang-context-preview-output-test.mjs\n M scripts/validate-ag70s-today-panchang-preview-manual-verification-gate.mjs\n M scripts/validate-ag70t-location-intelligence-registry-and-panchang-basis-normalisation.mjs\n M scripts/validate-ag70u-location-import-and-selection-validation.mjs\n M scripts/validate-ag70v-india-administrative-location-import-bank.mjs\n M scripts/validate-ag70w-india-cities-capitals-coordinate-bank.mjs\n M scripts/validate-ag70x-global-capitals-major-cities-coordinate-bank.mjs\n M scripts/validate-ag70y-location-selection-resolver-test.mjs\n M scripts/validate-ag70z-location-intelligence-foundation-closure.mjs\n M scripts/validate-ag71a-verified-four-location-pilot-activation.mjs\n?? scripts/generate-ag71b-pilot-runtime-validation.mjs\n?? scripts/validate-ag71b-pilot-runtime-validation.mjs"
+  },
+  "consumed_previous_stage": {
+    "ag71a_review": "data/content-intelligence/quality-reviews/ag71a-verified-four-location-pilot-activation.json",
+    "ag71a_approved_records": "data/knowledge-base/location-intelligence/production/ag71a-pilot-approved-location-records.json",
+    "ag71a_coordinate_first_inputs": "data/knowledge-base/location-intelligence/production/ag71a-coordinate-first-pilot-input-record.json"
+  },
+  "generated_records": {
+    "validation": "data/knowledge-base/location-intelligence/production/ag71b-pilot-runtime-validation.json",
+    "dropdownResolver": "data/knowledge-base/location-intelligence/production/ag71b-dropdown-resolver-runtime-validation.json",
+    "coordinateFirstResolver": "data/knowledge-base/location-intelligence/production/ag71b-coordinate-first-runtime-validation.json",
+    "panchangRuntime": "data/knowledge-base/location-intelligence/production/ag71b-panchang-pilot-runtime-validation.json",
+    "starRuntime": "data/knowledge-base/location-intelligence/production/ag71b-star-reflection-pilot-runtime-validation.json",
+    "uiReadiness": "data/knowledge-base/location-intelligence/production/ag71b-ui-coordinate-input-readiness-record.json",
+    "safetyAudit": "data/knowledge-base/location-intelligence/production/ag71b-pilot-runtime-safety-audit.json",
+    "noPublicOutputAudit": "data/knowledge-base/location-intelligence/production/ag71b-no-public-output-audit.json",
+    "panchangManifest": "data/knowledge-base/panchang-festival/production/production-bank-manifest.json",
+    "review": "data/content-intelligence/quality-reviews/ag71b-pilot-runtime-validation.json",
+    "readiness": "data/content-intelligence/quality-registry/ag71b-ag71c-pilot-ui-coordinate-input-surface-readiness-record.json",
+    "boundary": "data/content-intelligence/mutation-plans/ag71b-to-ag71c-pilot-ui-coordinate-input-surface-boundary.json",
+    "quality": "data/quality/ag71b-pilot-runtime-validation.json",
+    "preview": "data/quality/ag71b-pilot-runtime-validation-preview.json",
+    "doc": "docs/quality/AG71B_PILOT_RUNTIME_VALIDATION.md"
+  },
+  "summary": {
+    "dropdown_resolver_validated": true,
+    "coordinate_first_resolver_validated": true,
+    "panchang_input_contract_validated": true,
+    "star_reflection_input_contract_validated": true,
+    "ui_coordinate_input_gap_confirmed": true,
+    "ui_coordinate_input_next_stage_required": true,
+    "dropdown_resolver_test_count": 4,
+    "coordinate_first_test_count": 2,
+    "panchang_contract_validation_count": 6,
+    "star_reflection_contract_validation_count": 6,
+    "public_ui_change_performed_now": false,
+    "panchang_runtime_computation_executed_now": false,
+    "star_reflection_runtime_computation_executed_now": false,
+    "generated_word_json_modified": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "ready_for_ag71c": true
+  }
+}
