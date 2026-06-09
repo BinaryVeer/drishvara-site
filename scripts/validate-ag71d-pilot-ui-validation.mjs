@@ -20,6 +20,7 @@ const required = [
   "data/knowledge-base/location-intelligence/production/ag71d-panchang-coordinate-ui-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-behaviour-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-validation-safety-audit.json",
+  "data/knowledge-base/location-intelligence/production/ag71d-place-selection-ui-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-star-mode-interaction-fix-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-final-ui-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-finishing-correction-record.json",
@@ -129,6 +130,34 @@ const starModeFix = readJson("data/knowledge-base/location-intelligence/producti
 if (starModeFix.status !== "star_reflection_mode_interaction_fix_applied") fail("Star mode interaction fix record status mismatch.");
 if (starModeFix.active_frontend_file !== "index.html") fail("Star mode interaction fix must target active index.html.");
 
+
+for (const marker of [
+  "AG71D_STAR_BIRTH_PLACE_SELECT_START",
+  "AG71D_PANCHANG_LOCATION_SELECT_START",
+  "AG71D_PLACE_SELECTION_UI_CORRECTION_START",
+  "AG71D_PLACE_SELECTION_TOGGLE_FIX_START",
+  "id=\"star-birth-place-select\"",
+  "data-ag71d-location-select=\"star-reflection\"",
+  "id=\"panchang-place-select\"",
+  "data-ag71d-location-select=\"panchang\"",
+  "window.drishvaraAg71dSetCoordinateMode"
+]) {
+  if (!indexHtml.includes(marker)) fail(`index.html missing place-selection correction marker: ${marker}`);
+}
+
+const placeSelectionCorrection = readJson("data/knowledge-base/location-intelligence/production/ag71d-place-selection-ui-correction-record.json");
+if (placeSelectionCorrection.status !== "place_selection_ui_correction_applied") fail("Place selection UI correction status mismatch.");
+if (placeSelectionCorrection.active_frontend_file !== "index.html") fail("Place selection correction must target active index.html.");
+
+const starBlockStart = indexHtml.indexOf("Star Reflection");
+const panchangBlockStart = indexHtml.indexOf("Panchang & Festival View", starBlockStart);
+if (starBlockStart >= 0 && panchangBlockStart > starBlockStart) {
+  const starBlock = indexHtml.slice(starBlockStart, panchangBlockStart);
+  if (/<select[\s\S]*Reflection Method Under Review[\s\S]*<\/select>/i.test(starBlock)) {
+    fail("Star Reflection must not use Reflection Method dropdown as location selector.");
+  }
+}
+
 const validation = readJson("data/knowledge-base/location-intelligence/production/ag71d-pilot-ui-validation.json");
 if (validation.status !== "pilot_ui_validation_completed") fail("Validation status mismatch.");
 if (validation.all_ui_contracts_passed !== true) fail("All UI contracts must pass.");
@@ -211,6 +240,10 @@ for (const key of [
   "star_mode_interaction_fix_applied",
   "star_birth_coordinates_selectable",
   "star_birth_coordinate_fields_reveal_path_hardened",
+  "place_selection_ui_correction_applied",
+  "star_birth_place_dropdown_added",
+  "panchang_location_dropdown_integrated_with_radio_mode",
+  "reflection_method_dropdown_deferred",
   "all_ui_contracts_passed",
   "ready_for_ag71e"
 ]) {

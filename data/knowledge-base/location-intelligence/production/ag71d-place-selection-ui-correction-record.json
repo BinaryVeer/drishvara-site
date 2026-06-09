@@ -1,0 +1,24 @@
+{
+  "module_id": "AG71D",
+  "title": "Place Selection UI Correction Record",
+  "status": "place_selection_ui_correction_applied",
+  "active_frontend_file": "index.html",
+  "issues_corrected": [
+    "Select Birth Place mode did not expose a birth-place dropdown.",
+    "Reflection Method dropdown was occupying the location-selection role.",
+    "Panchang location dropdown needed to be governed by Select Location / Enter Coordinates radio mode."
+  ],
+  "implemented_logic": {
+    "star_reflection_select_birth_place": "shows star-birth-place-select pilot dropdown",
+    "star_reflection_enter_birth_coordinates": "shows birth latitude/longitude/timezone fields and hides birth-place dropdown",
+    "panchang_select_location": "shows panchang-location-select pilot dropdown",
+    "panchang_enter_coordinates": "shows latitude/longitude/timezone fields and hides location dropdown"
+  },
+  "reflection_method_handling": "single locked reflection status/action retained; separate method dropdown deferred until multiple approved methods exist",
+  "public_runtime_activation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false,
+  "ag64b_compatibility_restored": true,
+  "panchang_select_canonical_id": "panchang-place-select",
+  "note": "Panchang Select Location uses the legacy AG64B target id panchang-place-select while retaining AG71D data attributes."
+}

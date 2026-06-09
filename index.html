@@ -4116,6 +4116,59 @@ button[disabled].ag71c-review-action-lock {
 /* AG71D_STAR_MODE_INTERACTION_FIX_STYLE_END */
 
 </style>
+<style>
+
+/* AG71D_PLACE_SELECTION_UI_CORRECTION_START */
+.ag71d-place-select-shell {
+  margin: 0.95rem 0 1rem;
+}
+
+.ag71d-select-label {
+  display: block;
+  margin: 0 0 0.38rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.ag71d-location-select {
+  width: 100%;
+  min-height: 2.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 176, 76, 0.58);
+  background: rgba(4, 16, 36, 0.95);
+  color: rgba(255, 255, 255, 0.96);
+  padding: 0.65rem 0.9rem;
+  font: inherit;
+}
+
+.ag71d-place-select-note {
+  margin: 0.55rem 0 0;
+  color: rgba(182, 194, 215, 0.78);
+  font-size: 0.8rem;
+  line-height: 1.42;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] + .ag71d-place-select-shell,
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] ~ .ag71d-place-select-shell {
+  display: none;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="place"] + .ag71d-place-select-shell,
+.ag71c-coordinate-surface[data-ag71d-mode="place"] ~ .ag71d-place-select-shell {
+  display: block;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] [data-ag71c-coordinate-fields] {
+  display: grid !important;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="place"] [data-ag71c-coordinate-fields] {
+  display: none !important;
+}
+/* AG71D_PLACE_SELECTION_UI_CORRECTION_END */
+
+</style>
 </head>
 <body>
 
@@ -4523,11 +4576,23 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           </div>
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_END -->
 
-<select disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true">
-              <option>English</option>
-              <option>Hindi</option>
+          <!-- AG71D_STAR_BIRTH_PLACE_SELECT_START -->
+          <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="star-reflection">
+            <label class="ag71d-select-label" for="star-birth-place-select">Birth Place</label>
+            <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place">
+              <option value="" selected>Select birth place</option>
+              
+<option value="itanagar-arunachal-pradesh-india">Itanagar</option>
+<option value="new-delhi-delhi-india">New Delhi</option>
+<option value="ranchi-jharkhand-india">Ranchi</option>
+<option value="tokyo-japan">Tokyo</option>
+
             </select>
-            <button class="btn btn-primary" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" class="ag71c-review-action-lock">Reflection Locked Pending Review</button>
+            <p class="ag71d-place-select-note">Birth-place selection is prepared for pilot validation only. Personalised output remains locked until consent, privacy and reflection-method governance are approved.</p>
+          </div>
+          <!-- AG71D_STAR_BIRTH_PLACE_SELECT_END -->
+
+<button class="btn btn-primary" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" class="ag71c-review-action-lock">Reflection Locked Pending Review</button>
           </div>
         </div>
 
@@ -4570,14 +4635,23 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_END -->
 
 <div class="form-grid">
-            <select id="panchang-place-select">
-              <option>Itanagar</option>
-              <option>Delhi</option>
-              <option>Mumbai</option>
-              <option>Kolkata</option>
-              <option>Guwahati</option>
+
+          <!-- AG71D_PANCHANG_LOCATION_SELECT_START -->
+          <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang">
+            <label class="ag71d-select-label" for="panchang-place-select">Panchang Location</label>
+            <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location">
+              
+<option value="itanagar-arunachal-pradesh-india">Itanagar</option>
+<option value="new-delhi-delhi-india">New Delhi</option>
+<option value="ranchi-jharkhand-india">Ranchi</option>
+<option value="tokyo-japan">Tokyo</option>
+
             </select>
+            <p class="ag71d-place-select-note">Location selection is prepared for the 4-location pilot only. Exact Panchang output remains withheld until computation and regional-method verification are approved.</p>
           </div>
+          <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
+
+</div>
 
           <div class="mini-table" data-drishvara-ag60i-panchang-preview-safe="true">
             <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-sunrise">Under verification</span></div>
@@ -7742,6 +7816,84 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraSyncAg71dCoordinateModes = syncAllAg71dModeSurfaces;
 })();
 /* AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_END */
+</script>
+
+
+<script>
+/* AG71D_PLACE_SELECTION_TOGGLE_FIX_START */
+(function () {
+  function getShellForSurface(surface) {
+    if (!surface) return null;
+    var key = surface.getAttribute('data-ag71c-coordinate-surface');
+    return key ? document.querySelector('[data-ag71d-place-select-shell="' + key + '"]') : null;
+  }
+
+  function setMode(surface, mode) {
+    if (!surface) return;
+    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
+    var shell = getShellForSurface(surface);
+
+    surface.setAttribute('data-ag71d-mode', mode);
+    surface.setAttribute('data-ag71c-selected-mode', mode);
+
+    surface.querySelectorAll('input[data-ag71c-mode]').forEach(function (radio) {
+      radio.disabled = false;
+      radio.checked = radio.value === mode;
+      radio.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
+    });
+
+    if (fields) {
+      if (mode === 'coordinates') {
+        fields.removeAttribute('hidden');
+        fields.style.setProperty('display', 'grid', 'important');
+      } else {
+        fields.setAttribute('hidden', 'hidden');
+        fields.style.setProperty('display', 'none', 'important');
+      }
+    }
+
+    if (shell) {
+      shell.style.display = mode === 'coordinates' ? 'none' : 'block';
+    }
+  }
+
+  function syncAll() {
+    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(function (surface) {
+      var selected = surface.querySelector('input[data-ag71c-mode]:checked');
+      setMode(surface, selected ? selected.value : 'place');
+    });
+  }
+
+  function modeFromTarget(target) {
+    if (!target) return null;
+    if (target.matches && target.matches('input[data-ag71c-mode]')) return target.value;
+    var label = target.closest ? target.closest('label') : null;
+    var radio = label ? label.querySelector('input[data-ag71c-mode]') : null;
+    return radio ? radio.value : null;
+  }
+
+  ['click', 'change', 'pointerdown', 'touchstart'].forEach(function (eventName) {
+    document.addEventListener(eventName, function (event) {
+      if (!event.target) return;
+      var surface = event.target.closest ? event.target.closest('[data-ag71c-coordinate-surface]') : null;
+      if (!surface) return;
+      var mode = modeFromTarget(event.target);
+      if (!mode) return;
+      event.preventDefault();
+      setMode(surface, mode);
+    }, true);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncAll, { once: true });
+  } else {
+    syncAll();
+  }
+
+  window.drishvaraAg71dSetCoordinateMode = setMode;
+  window.drishvaraAg71dSyncPlaceSelection = syncAll;
+})();
+/* AG71D_PLACE_SELECTION_TOGGLE_FIX_END */
 </script>
 
 </body>

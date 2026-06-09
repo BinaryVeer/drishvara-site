@@ -36,3 +36,13 @@ AG71D was corrected again after live review. The active `index.html` now uses ex
 ## Star Reflection mode interaction fix
 
 Live review showed that the Enter Birth Coordinates pill was visible but not selectable. AG71D now uses explicit event delegation and `setSurfaceMode()` control so the Star Reflection coordinate mode can be selected and birth latitude/longitude/timezone fields can reveal.
+
+
+## Place selection UI correction
+
+AG71D now uses the location-selection slot correctly. Star Reflection uses the former method dropdown space as a Birth Place dropdown when Select Birth Place is selected. Panchang uses the existing location dropdown when Select Location is selected. Enter Coordinates modes reveal coordinate fields and hide the corresponding location dropdown. Reflection method remains a locked status/action until multiple reviewed methods are approved.
+
+
+## AG64B Panchang target compatibility
+
+The Panchang location dropdown retains the canonical foundational UI target `id="panchang-place-select"` required by AG64B, while AG71D continues to use `data-ag71d-location-select="panchang"` for the newer place/coordinate toggle behavior.
