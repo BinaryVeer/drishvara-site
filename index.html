@@ -3864,6 +3864,16 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     grid-template-columns: 1fr;
   }
 }
+
+/* AG71D_COORDINATE_TOGGLE_VISIBILITY_FIX_START */
+.ag71c-coordinate-surface:not(:has(input[data-ag71c-mode][value="coordinates"]:checked)) .ag71c-coordinate-grid {
+  display: none !important;
+}
+.ag71c-coordinate-surface:has(input[data-ag71c-mode][value="coordinates"]:checked) .ag71c-coordinate-grid {
+  display: grid !important;
+}
+/* AG71D_COORDINATE_TOGGLE_VISIBILITY_FIX_END */
+
 /* AG71C_ACTIVE_COORDINATE_INPUT_STYLE_END */
 </style>
 
@@ -4256,7 +4266,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
                 Enter Birth Coordinates
               </label>
             </div>
-            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields hidden>
+            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields>
               <label class="ag71c-field-label">Birth Latitude
                 <input id="star-birth-latitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 23.3441">
               </label>
@@ -4302,7 +4312,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
                 Enter Coordinates
               </label>
             </div>
-            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields hidden>
+            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields>
               <label class="ag71c-field-label">Latitude
                 <input id="panchang-latitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 27.0844">
               </label>
@@ -7274,6 +7284,48 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 /* AG71C_ACTIVE_COORDINATE_INPUT_SCRIPT_END */
+</script>
+
+
+<script>
+/* AG71D_COORDINATE_TOGGLE_RUNTIME_FIX_START */
+(function () {
+  function syncSurface(surface) {
+    if (!surface) return;
+    var fields = surface.querySelector("[data-ag71c-coordinate-fields]");
+    var selected = surface.querySelector('input[data-ag71c-mode][value="coordinates"]:checked');
+    if (!fields) return;
+    if (selected) {
+      fields.removeAttribute("hidden");
+      fields.style.display = "grid";
+    } else {
+      fields.setAttribute("hidden", "hidden");
+      fields.style.display = "none";
+    }
+  }
+
+  function syncAll() {
+    document.querySelectorAll("[data-ag71c-coordinate-surface]").forEach(syncSurface);
+  }
+
+  document.addEventListener("change", function (event) {
+    if (!event.target || !event.target.matches("input[data-ag71c-mode]")) return;
+    syncSurface(event.target.closest("[data-ag71c-coordinate-surface]"));
+  });
+
+  document.addEventListener("click", function (event) {
+    if (!event.target) return;
+    var surface = event.target.closest && event.target.closest("[data-ag71c-coordinate-surface]");
+    if (surface) window.setTimeout(function () { syncSurface(surface); }, 0);
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", syncAll, { once: true });
+  } else {
+    syncAll();
+  }
+})();
+/* AG71D_COORDINATE_TOGGLE_RUNTIME_FIX_END */
 </script>
 
 </body>
