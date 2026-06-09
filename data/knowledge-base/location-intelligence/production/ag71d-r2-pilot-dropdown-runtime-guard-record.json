@@ -1,0 +1,44 @@
+{
+  "module_id": "AG71D-R2",
+  "title": "Pilot Dropdown Runtime Guard Record",
+  "status": "pilot_dropdown_runtime_guard_applied",
+  "active_frontend_file": "index.html",
+  "issue_corrected": "Live UI still showed Reflection Method Under Review in Star Birth Place dropdown and only Itanagar in Panchang dropdown after AG71D-R1.",
+  "root_cause_assumption": "Existing homepage wiring or generated-data hydration may overwrite dropdown options after static HTML load.",
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "timezone": "Asia/Tokyo"
+    }
+  ],
+  "guarded_selects": [
+    "star-birth-place-select",
+    "panchang-place-select"
+  ],
+  "panchang_ag64b_canonical_id_preserved": true,
+  "public_runtime_activation_performed": false,
+  "runtime_panchang_computation_performed": false,
+  "runtime_star_reflection_computation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false
+}

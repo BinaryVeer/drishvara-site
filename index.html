@@ -4581,7 +4581,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             <label class="ag71d-select-label" for="star-birth-place-select">Birth Place</label>
             <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place">
               <option value="" selected>Select birth place</option>
-              <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Itanagar</option>
+                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Itanagar</option>
               <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
               <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
               <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
@@ -4638,7 +4638,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang">
             <label class="ag71d-select-label" for="panchang-place-select">Panchang Location</label>
             <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location">
-              <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected>Itanagar</option>
+                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected>Itanagar</option>
               <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
               <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
               <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
@@ -7934,6 +7934,98 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71dR1ApplyPilotDropdowns = applyPilotDropdowns;
 })();
 /* AG71D_R1_PILOT_DROPDOWN_RUNTIME_FIX_END */
+</script>
+
+
+<script>
+/* AG71D_R2_PILOT_DROPDOWN_RUNTIME_GUARD_START */
+(function () {
+  var pilotLocations = [{"value": "itanagar-arunachal-pradesh-india", "label": "Itanagar", "location_id": "loc_in_ar_itanagar_capital_complex_001", "timezone": "Asia/Kolkata"}, {"value": "new-delhi-delhi-india", "label": "New Delhi", "location_id": "loc_in_dl_new_delhi_capital_001", "timezone": "Asia/Kolkata"}, {"value": "ranchi-jharkhand-india", "label": "Ranchi", "location_id": "loc_in_jh_ranchi_city_001", "timezone": "Asia/Kolkata"}, {"value": "tokyo-japan", "label": "Tokyo", "location_id": "loc_jp_tokyo_capital_001", "timezone": "Asia/Tokyo"}];
+
+  function optionMarkup(item, selected) {
+    return '<option value="' + item.value + '" data-location-id="' + item.location_id + '" data-timezone="' + item.timezone + '" data-pilot-status="approved_four_location_pilot"' + (selected ? ' selected' : '') + '>' + item.label + '</option>';
+  }
+
+  function desiredOptions(selectId) {
+    if (selectId === 'star-birth-place-select') {
+      return '<option value="" selected>Select birth place</option>' + pilotLocations.map(function (item) {
+        return optionMarkup(item, false);
+      }).join('');
+    }
+
+    if (selectId === 'panchang-place-select') {
+      return pilotLocations.map(function (item, index) {
+        return optionMarkup(item, index === 0);
+      }).join('');
+    }
+
+    return '';
+  }
+
+  function optionLabels(select) {
+    return Array.prototype.map.call(select.options || [], function (option) {
+      return option.textContent.trim();
+    }).join('|');
+  }
+
+  function enforceSelect(selectId) {
+    var select = document.getElementById(selectId);
+    if (!select) return;
+
+    var required = ['Itanagar', 'New Delhi', 'Ranchi', 'Tokyo'];
+    var labels = optionLabels(select);
+    var polluted = labels.indexOf('Reflection Method Under Review') !== -1;
+    var missing = required.some(function (label) { return labels.indexOf(label) === -1; });
+    var tooFew = (select.options || []).length < required.length;
+
+    if (!polluted && !missing && !tooFew) return;
+
+    var previousValue = select.value;
+    select.innerHTML = desiredOptions(selectId);
+
+    var values = Array.prototype.map.call(select.options, function (option) { return option.value; });
+    if (values.indexOf(previousValue) !== -1) {
+      select.value = previousValue;
+    } else if (selectId === 'star-birth-place-select') {
+      select.value = '';
+    } else {
+      select.value = 'itanagar-arunachal-pradesh-india';
+    }
+
+    select.setAttribute('data-ag71d-r2-guarded', 'true');
+  }
+
+  function enforcePilotDropdowns() {
+    enforceSelect('star-birth-place-select');
+    enforceSelect('panchang-place-select');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', enforcePilotDropdowns, { once: true });
+  } else {
+    enforcePilotDropdowns();
+  }
+
+  var attempts = 0;
+  var interval = window.setInterval(function () {
+    attempts += 1;
+    enforcePilotDropdowns();
+    if (attempts >= 40) window.clearInterval(interval);
+  }, 300);
+
+  var observer = new MutationObserver(function () {
+    enforcePilotDropdowns();
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  window.drishvaraAg71dR2EnforcePilotDropdowns = enforcePilotDropdowns;
+})();
+/* AG71D_R2_PILOT_DROPDOWN_RUNTIME_GUARD_END */
 </script>
 
 </body>
