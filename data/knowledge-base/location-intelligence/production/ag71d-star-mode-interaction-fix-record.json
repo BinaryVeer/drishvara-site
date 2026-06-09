@@ -1,0 +1,16 @@
+{
+  "module_id": "AG71D",
+  "title": "Star Reflection Mode Interaction Fix Record",
+  "status": "star_reflection_mode_interaction_fix_applied",
+  "active_frontend_file": "index.html",
+  "issue_corrected": "Enter Birth Coordinates radio/pill was visible but not selectable in the Star Reflection card.",
+  "fixes_applied": [
+    "Removed accidental disabled state from AG71C mode inputs.",
+    "Added pointer/click/change event delegation for coordinate mode pills.",
+    "Added explicit setSurfaceMode logic to reveal Star Reflection coordinate fields.",
+    "Added public window sync hook for manual browser validation."
+  ],
+  "public_runtime_activation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false
+}

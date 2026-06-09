@@ -4080,6 +4080,42 @@ button[disabled].ag71c-review-action-lock {
 /* AG71D_FINAL_COORDINATE_UI_STYLE_END */
 
 </style>
+<style>
+
+/* AG71D_STAR_MODE_INTERACTION_FIX_STYLE_START */
+.ag71c-coordinate-surface,
+.ag71c-coordinate-surface * {
+  pointer-events: auto;
+}
+
+.ag71c-coordinate-surface .ag71c-input-mode label {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.ag71c-coordinate-surface .ag71c-input-mode label:has(input[data-ag71c-mode]:checked),
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] .ag71c-input-mode label:has(input[data-ag71c-mode][value="coordinates"]),
+.ag71c-coordinate-surface[data-ag71d-mode="place"] .ag71c-input-mode label:has(input[data-ag71c-mode][value="place"]) {
+  border-color: rgba(214, 176, 76, 0.85);
+  box-shadow: 0 0 0 2px rgba(214, 176, 76, 0.16) inset;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] [data-ag71c-coordinate-fields] {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="place"] [data-ag71c-coordinate-fields] {
+  display: none !important;
+}
+/* AG71D_STAR_MODE_INTERACTION_FIX_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -7623,6 +7659,89 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 /* AG71D_FINAL_COORDINATE_TOGGLE_FIX_END */
+</script>
+
+
+<script>
+/* AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_START */
+(function () {
+  function setSurfaceMode(surface, mode) {
+    if (!surface) return;
+
+    var radios = surface.querySelectorAll('input[data-ag71c-mode]');
+    radios.forEach(function (radio) {
+      radio.removeAttribute('disabled');
+      radio.disabled = false;
+      radio.checked = radio.value === mode;
+      radio.setAttribute('aria-checked', radio.checked ? 'true' : 'false');
+    });
+
+    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
+    surface.setAttribute('data-ag71d-mode', mode);
+    surface.setAttribute('data-ag71c-selected-mode', mode);
+
+    if (!fields) return;
+    if (mode === 'coordinates') {
+      fields.removeAttribute('hidden');
+      fields.style.setProperty('display', 'grid', 'important');
+      fields.style.setProperty('visibility', 'visible', 'important');
+      fields.style.setProperty('opacity', '1', 'important');
+    } else {
+      fields.setAttribute('hidden', 'hidden');
+      fields.style.setProperty('display', 'none', 'important');
+    }
+  }
+
+  function syncAllAg71dModeSurfaces() {
+    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(function (surface) {
+      var selected = surface.querySelector('input[data-ag71c-mode]:checked');
+      var mode = selected ? selected.value : 'place';
+      setSurfaceMode(surface, mode);
+    });
+  }
+
+  function handleModeIntent(target, event) {
+    var surface = target && target.closest ? target.closest('[data-ag71c-coordinate-surface]') : null;
+    if (!surface) return false;
+
+    var radio = target.matches && target.matches('input[data-ag71c-mode]')
+      ? target
+      : null;
+
+    if (!radio) {
+      var label = target.closest ? target.closest('label') : null;
+      radio = label ? label.querySelector('input[data-ag71c-mode]') : null;
+    }
+
+    if (!radio) return false;
+
+    if (event) event.preventDefault();
+    setSurfaceMode(surface, radio.value);
+    return true;
+  }
+
+  ['pointerdown', 'mousedown', 'touchstart', 'click', 'change'].forEach(function (type) {
+    document.addEventListener(type, function (event) {
+      if (!event.target) return;
+      handleModeIntent(event.target, event);
+    }, true);
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
+    if (event.key !== ' ' && event.key !== 'Enter') return;
+    handleModeIntent(event.target, event);
+  }, true);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncAllAg71dModeSurfaces, { once: true });
+  } else {
+    syncAllAg71dModeSurfaces();
+  }
+
+  window.drishvaraSyncAg71dCoordinateModes = syncAllAg71dModeSurfaces;
+})();
+/* AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_END */
 </script>
 
 </body>

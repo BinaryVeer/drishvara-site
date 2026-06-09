@@ -31,3 +31,8 @@ AG71D was further corrected after live review. The Star Reflection coordinate fi
 ## Final UI correction
 
 AG71D was corrected again after live review. The active `index.html` now uses explicit `data-ag71d-mode` visibility control, a stronger delegated toggle script, improved responsive coordinate-field styling, and a single locked Star Reflection action instead of duplicate “Reflection Method Under Review” controls.
+
+
+## Star Reflection mode interaction fix
+
+Live review showed that the Enter Birth Coordinates pill was visible but not selectable. AG71D now uses explicit event delegation and `setSurfaceMode()` control so the Star Reflection coordinate mode can be selected and birth latitude/longitude/timezone fields can reveal.

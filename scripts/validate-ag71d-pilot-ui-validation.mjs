@@ -20,6 +20,7 @@ const required = [
   "data/knowledge-base/location-intelligence/production/ag71d-panchang-coordinate-ui-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-behaviour-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-validation-safety-audit.json",
+  "data/knowledge-base/location-intelligence/production/ag71d-star-mode-interaction-fix-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-final-ui-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-finishing-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-visibility-fix-record.json",
@@ -110,6 +111,24 @@ if (visibilityFix.status !== "coordinate_toggle_visibility_fix_applied") fail("C
 if (visibilityFix.active_frontend_file !== "index.html") fail("Visibility fix must target active index.html.");
 
 
+
+for (const marker of [
+  "AG71D_STAR_MODE_INTERACTION_FIX_STYLE_START",
+  "AG71D_STAR_MODE_INTERACTION_FIX_SCRIPT_START",
+  "function setSurfaceMode(surface, mode)",
+  "window.drishvaraSyncAg71dCoordinateModes",
+  "id=\"star-birth-latitude\"",
+  "id=\"star-birth-longitude\"",
+  "id=\"star-birth-timezone\"",
+  "id=\"star-birth-coordinate-label\""
+]) {
+  if (!indexHtml.includes(marker)) fail(`index.html missing Star mode interaction fix marker: ${marker}`);
+}
+
+const starModeFix = readJson("data/knowledge-base/location-intelligence/production/ag71d-star-mode-interaction-fix-record.json");
+if (starModeFix.status !== "star_reflection_mode_interaction_fix_applied") fail("Star mode interaction fix record status mismatch.");
+if (starModeFix.active_frontend_file !== "index.html") fail("Star mode interaction fix must target active index.html.");
+
 const validation = readJson("data/knowledge-base/location-intelligence/production/ag71d-pilot-ui-validation.json");
 if (validation.status !== "pilot_ui_validation_completed") fail("Validation status mismatch.");
 if (validation.all_ui_contracts_passed !== true) fail("All UI contracts must pass.");
@@ -189,6 +208,9 @@ for (const key of [
   "star_coordinate_reveal_corrected",
   "coordinate_ui_final_finishing_applied",
   "duplicate_reflection_method_control_removed",
+  "star_mode_interaction_fix_applied",
+  "star_birth_coordinates_selectable",
+  "star_birth_coordinate_fields_reveal_path_hardened",
   "all_ui_contracts_passed",
   "ready_for_ag71e"
 ]) {
