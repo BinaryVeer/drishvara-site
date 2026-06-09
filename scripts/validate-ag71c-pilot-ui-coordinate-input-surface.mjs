@@ -116,7 +116,11 @@ for (const key of [
 }
 
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
-if (manifest.status !== "production_bank_manifest_created_pilot_ui_coordinate_input_surface") fail("Panchang manifest status mismatch.");
+const allowedPanchangManifestStatuses = [
+  "production_bank_manifest_created_pilot_ui_coordinate_input_surface",
+  "production_bank_manifest_created_pilot_ui_validation"
+];
+if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.ag71c_ui_contract_records !== 2) fail("UI contract count must be 2.");
 if (manifest.current_counts.ag71c_frontend_patched_files !== 1) fail("AG71C frontend patched file count must be 1.");
 if (manifest.current_counts.ag71c_active_index_html_patch_records !== 1) fail("AG71C active index patch record count must be 1.");

@@ -1,0 +1,23 @@
+{
+  "module_id": "AG71D",
+  "title": "AG71D to AG71E Pilot Runtime Output Test Boundary",
+  "status": "ag71e_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Run internal pilot Panchang output test for the 4 pilot locations.",
+    "Run internal Star Reflection mapping/output-safety test for pilot inputs.",
+    "Validate output remains withheld or internal-only.",
+    "Record pilot result quality before approval closure."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "public Panchang output",
+    "public Star Reflection output",
+    "full location-bank activation",
+    "public full dropdown activation",
+    "unrestricted Panchang runtime computation",
+    "unrestricted Star Reflection runtime computation",
+    "Supabase/database writes",
+    "backend/Auth activation"
+  ]
+}

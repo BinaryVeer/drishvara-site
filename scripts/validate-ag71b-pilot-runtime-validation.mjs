@@ -113,7 +113,8 @@ for (const key of [
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_pilot_runtime_validation",
-  "production_bank_manifest_created_pilot_ui_coordinate_input_surface"
+  "production_bank_manifest_created_pilot_ui_coordinate_input_surface",
+  "production_bank_manifest_created_pilot_ui_validation"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.ag71b_dropdown_resolver_test_records !== 4) fail("Dropdown resolver count must be 4.");

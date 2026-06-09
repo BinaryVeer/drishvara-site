@@ -1,7 +1,7 @@
 {
   "module_id": "panchang_festival_view",
   "title": "Panchang & Festival View Production Bank Manifest",
-  "status": "production_bank_manifest_created_pilot_ui_coordinate_input_surface",
+  "status": "production_bank_manifest_created_pilot_ui_validation",
   "production_path": "data/knowledge-base/panchang-festival/production",
   "candidate_bank_path": "data/knowledge-base/panchang-festival/production/candidate-bank.json",
   "reviewed_bank_path": "data/knowledge-base/panchang-festival/production/reviewed-bank.json",
@@ -96,7 +96,14 @@
     "ag71c_ui_contract_records": 2,
     "ag71c_full_location_bank_activation_records": 0,
     "ag71c_runtime_computation_execution_records": 0,
-    "ag71c_active_index_html_patch_records": 1
+    "ag71c_active_index_html_patch_records": 1,
+    "ag71d_active_index_validation_records": 1,
+    "ag71d_star_ui_validation_records": 1,
+    "ag71d_panchang_ui_validation_records": 1,
+    "ag71d_toggle_validation_records": 1,
+    "ag71d_browser_runtime_execution_records": 0,
+    "ag71d_runtime_computation_execution_records": 0,
+    "ag71d_coordinate_toggle_visibility_fix_records": 1
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -173,8 +180,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "pilot_ui_coordinate_input_surface_created_validation_pending",
-  "next_required_stage": "AG71D \u2014 Pilot UI Validation",
+  "current_status": "pilot_ui_validation_completed_runtime_output_test_pending",
+  "next_required_stage": "AG71E \u2014 Pilot Runtime Output Test",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -399,5 +406,15 @@
     "safety_audit": "data/knowledge-base/location-intelligence/production/ag71c-ui-scope-safety-audit.json",
     "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag71c-no-public-output-audit.json",
     "active_index_html_patch_record": "data/knowledge-base/location-intelligence/production/ag71c-active-index-html-coordinate-input-patch-record.json"
+  },
+  "ag71d_files": {
+    "validation": "data/knowledge-base/location-intelligence/production/ag71d-pilot-ui-validation.json",
+    "active_index_validation": "data/knowledge-base/location-intelligence/production/ag71d-active-index-html-ui-validation.json",
+    "star_validation": "data/knowledge-base/location-intelligence/production/ag71d-star-reflection-coordinate-ui-validation.json",
+    "panchang_validation": "data/knowledge-base/location-intelligence/production/ag71d-panchang-coordinate-ui-validation.json",
+    "toggle_validation": "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-behaviour-validation.json",
+    "safety_audit": "data/knowledge-base/location-intelligence/production/ag71d-ui-validation-safety-audit.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag71d-no-public-output-audit.json",
+    "coordinate_toggle_visibility_fix": "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-visibility-fix-record.json"
   }
 }

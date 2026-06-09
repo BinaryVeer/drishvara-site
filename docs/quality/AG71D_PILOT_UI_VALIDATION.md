@@ -1,0 +1,23 @@
+# AG71D — Pilot UI Validation
+
+AG71D validates the active index.html coordinate-input UI added in AG71C.
+
+## Validated
+
+- Active index.html patch markers.
+- Star Reflection birth-coordinate input surface.
+- Panchang coordinate input surface.
+- Coordinate toggle script/static DOM contract.
+
+## Boundary
+
+No browser execution, no public runtime activation, no Panchang computation, no Star Reflection computation, no backend activation and no Supabase activation were performed.
+
+## Next
+
+AG71E — Pilot Runtime Output Test.
+
+
+## Coordinate toggle visibility correction
+
+During live UI review, the Enter Coordinates radio option appeared, but the latitude/longitude fields did not reveal. AG71D corrected the active `index.html` by adding CSS and JS fallback visibility control so coordinate fields appear when Enter Coordinates is selected.

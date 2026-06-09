@@ -1,0 +1,19 @@
+{
+  "module_id": "AG71D",
+  "title": "Coordinate Toggle Visibility Fix Record",
+  "status": "coordinate_toggle_visibility_fix_applied",
+  "active_frontend_file": "index.html",
+  "issue_detected": "Enter Coordinates radio option was visible, but latitude/longitude fields were not revealed.",
+  "fix_applied": [
+    "Removed hard hidden dependency from coordinate grid markup.",
+    "Added CSS :has visibility rule for coordinate radio selection.",
+    "Added delegated JS fallback to show/hide coordinate fields."
+  ],
+  "validated_surfaces": [
+    "Star Reflection birth-coordinate input",
+    "Panchang coordinate input"
+  ],
+  "public_runtime_activation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false
+}
