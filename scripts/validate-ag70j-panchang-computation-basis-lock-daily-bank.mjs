@@ -128,7 +128,8 @@ const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_location_selection_resolver_test",
   "production_bank_manifest_created_location_intelligence_foundation_closure",
   "production_bank_manifest_created_verified_four_location_pilot_activation",
-  "production_bank_manifest_created_pilot_runtime_validation"
+  "production_bank_manifest_created_pilot_runtime_validation",
+  "production_bank_manifest_created_pilot_ui_coordinate_input_surface"
 ];
 if (!allowedPanchangManifestStatuses.includes(panchangManifest.status)) fail("Panchang manifest status mismatch.");
 if (panchangManifest.current_counts.daily_calculation_request_records !== 7) fail("Manifest daily request count mismatch.");

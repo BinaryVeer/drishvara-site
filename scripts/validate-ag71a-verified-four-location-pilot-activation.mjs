@@ -140,7 +140,8 @@ for (const key of [
 const manifest = readJson("data/knowledge-base/panchang-festival/production/production-bank-manifest.json");
 const allowedPanchangManifestStatuses = [
   "production_bank_manifest_created_verified_four_location_pilot_activation",
-  "production_bank_manifest_created_pilot_runtime_validation"
+  "production_bank_manifest_created_pilot_runtime_validation",
+  "production_bank_manifest_created_pilot_ui_coordinate_input_surface"
 ];
 if (!allowedPanchangManifestStatuses.includes(manifest.status)) fail("Panchang manifest status mismatch.");
 if (manifest.current_counts.ag71a_pilot_approved_location_records !== 4) fail("Pilot approved count must be 4.");

@@ -1,0 +1,21 @@
+{
+  "module_id": "AG71C",
+  "title": "AG71C to AG71D Pilot UI Validation Boundary",
+  "status": "ag71d_boundary_defined",
+  "current_stage_completed": true,
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope_after_user_confirmation": [
+    "Validate Select Location / Enter Coordinates UI toggle.",
+    "Validate latitude, longitude, timezone and optional label fields.",
+    "Validate Panchang and Star Reflection UI contracts.",
+    "If static patch was not applied, patch exact frontend target from discovery report."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "full location-bank activation",
+    "public full dropdown activation",
+    "unrestricted Panchang runtime computation",
+    "unrestricted Star Reflection runtime computation",
+    "Supabase/database writes",
+    "backend/Auth activation"
+  ]
+}

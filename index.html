@@ -3812,6 +3812,61 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
   }
 </style>
 
+
+<style>
+/* AG71C_ACTIVE_COORDINATE_INPUT_STYLE_START */
+.ag71c-coordinate-surface {
+  margin: 1rem 0 1.1rem;
+  padding: 0.9rem;
+  border: 1px solid rgba(214, 176, 76, 0.35);
+  border-radius: 18px;
+  background: rgba(182, 208, 233, 0.08);
+}
+.ag71c-input-mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.8rem;
+  color: inherit;
+}
+.ag71c-input-mode label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+}
+.ag71c-coordinate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.ag71c-coordinate-grid[hidden] {
+  display: none !important;
+}
+.ag71c-coordinate-grid input {
+  width: 100%;
+}
+.ag71c-field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: inherit;
+  font-size: 0.88rem;
+}
+.ag71c-coordinate-note {
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0.82;
+}
+@media (max-width: 720px) {
+  .ag71c-coordinate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* AG71C_ACTIVE_COORDINATE_INPUT_STYLE_END */
+</style>
+
 </head>
 <body>
 
@@ -4187,7 +4242,39 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="form-grid">
             <input type="text" placeholder="Name" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" />
             <input type="text" placeholder="Date of Birth (DD/MM/YYYY)" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" />
-            <select disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true">
+            
+
+          <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="star-reflection">
+            <div class="ag71c-input-mode" aria-label="Birth location input mode">
+              <label>
+                <input type="radio" name="ag71c-star-location-mode" value="place" data-ag71c-mode checked>
+                Select Birth Place
+              </label>
+              <label>
+                <input type="radio" name="ag71c-star-location-mode" value="coordinates" data-ag71c-mode>
+                Enter Birth Coordinates
+              </label>
+            </div>
+            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields hidden>
+              <label class="ag71c-field-label">Birth Latitude
+                <input id="star-birth-latitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 23.3441">
+              </label>
+              <label class="ag71c-field-label">Birth Longitude
+                <input id="star-birth-longitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 85.3096">
+              </label>
+              <label class="ag71c-field-label">Birth Timezone
+                <input id="star-birth-timezone" type="text" placeholder="e.g. Asia/Kolkata">
+              </label>
+              <label class="ag71c-field-label">Optional Birth Place Label
+                <input id="star-birth-coordinate-label" type="text" placeholder="e.g. Ranchi, Jharkhand">
+              </label>
+            </div>
+            <p class="ag71c-coordinate-note">Coordinate input is prepared for pilot validation only. Personalised output remains disabled until consent, privacy and reflection-method governance are approved.</p>
+          </div>
+          <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_END -->
+
+<select disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true">
               <option>English</option>
               <option>Hindi</option>
             </select>
@@ -4201,7 +4288,39 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <h2>Location-based Panchang</h2>
           <p>Select a place for future Panchang activation. Public values remain withheld until source and regional-method verification is complete.</p>
 
-          <div class="form-grid">
+          
+
+          <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_START -->
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang">
+            <div class="ag71c-input-mode" aria-label="Panchang location input mode">
+              <label>
+                <input type="radio" name="ag71c-panchang-location-mode" value="place" data-ag71c-mode checked>
+                Select Location
+              </label>
+              <label>
+                <input type="radio" name="ag71c-panchang-location-mode" value="coordinates" data-ag71c-mode>
+                Enter Coordinates
+              </label>
+            </div>
+            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields hidden>
+              <label class="ag71c-field-label">Latitude
+                <input id="panchang-latitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 27.0844">
+              </label>
+              <label class="ag71c-field-label">Longitude
+                <input id="panchang-longitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 93.6053">
+              </label>
+              <label class="ag71c-field-label">Timezone
+                <input id="panchang-timezone" type="text" placeholder="e.g. Asia/Kolkata">
+              </label>
+              <label class="ag71c-field-label">Optional Location Label
+                <input id="panchang-coordinate-label" type="text" placeholder="e.g. Itanagar">
+              </label>
+            </div>
+            <p class="ag71c-coordinate-note">Coordinate input is prepared for pilot validation only. Exact Panchang values remain withheld until source, regional method and computation verification are approved.</p>
+          </div>
+          <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_END -->
+
+<div class="form-grid">
             <select id="panchang-place-select">
               <option>Itanagar</option>
               <option>Delhi</option>
@@ -7126,6 +7245,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.drishvaraAg68zr1LoadSportsDeskTransitions = loadAg68zr1SportsTransitions;
 })();
+</script>
+
+
+<script>
+/* AG71C_ACTIVE_COORDINATE_INPUT_SCRIPT_START */
+(function () {
+  function setupAg71cCoordinateSurface() {
+    document.querySelectorAll("[data-ag71c-coordinate-surface]").forEach(function (surface) {
+      var radios = surface.querySelectorAll('input[type="radio"][data-ag71c-mode]');
+      var coordinateFields = surface.querySelector("[data-ag71c-coordinate-fields]");
+      function sync() {
+        var selected = Array.prototype.find.call(radios, function (radio) { return radio.checked; });
+        if (!selected || !coordinateFields) return;
+        coordinateFields.hidden = selected.value !== "coordinates";
+      }
+      radios.forEach(function (radio) {
+        radio.addEventListener("change", sync);
+      });
+      sync();
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupAg71cCoordinateSurface, { once: true });
+  } else {
+    setupAg71cCoordinateSurface();
+  }
+})();
+/* AG71C_ACTIVE_COORDINATE_INPUT_SCRIPT_END */
 </script>
 
 </body>
