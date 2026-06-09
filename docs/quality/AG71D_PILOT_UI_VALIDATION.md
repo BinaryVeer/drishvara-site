@@ -26,3 +26,8 @@ During live UI review, the Enter Coordinates radio option appeared, but the lati
 ## UI finishing correction
 
 AG71D was further corrected after live review. The Star Reflection coordinate fields now reveal when Enter Birth Coordinates is selected, the coordinate input surface has improved responsive finishing, and the duplicate action label was changed from “Reflection Method Under Review” to “Reflection Locked Pending Review”.
+
+
+## Final UI correction
+
+AG71D was corrected again after live review. The active `index.html` now uses explicit `data-ag71d-mode` visibility control, a stronger delegated toggle script, improved responsive coordinate-field styling, and a single locked Star Reflection action instead of duplicate “Reflection Method Under Review” controls.

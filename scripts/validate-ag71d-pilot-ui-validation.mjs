@@ -20,6 +20,7 @@ const required = [
   "data/knowledge-base/location-intelligence/production/ag71d-panchang-coordinate-ui-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-behaviour-validation.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-validation-safety-audit.json",
+  "data/knowledge-base/location-intelligence/production/ag71d-final-ui-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-ui-finishing-correction-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-coordinate-toggle-visibility-fix-record.json",
   "data/knowledge-base/location-intelligence/production/ag71d-no-public-output-audit.json",
@@ -55,6 +56,24 @@ for (const marker of [
 ]) {
   if (!indexHtml.includes(marker)) fail(`index.html missing marker/field: ${marker}`);
 }
+
+for (const marker of [
+  "AG71D_FINAL_COORDINATE_UI_STYLE_START",
+  "AG71D_FINAL_COORDINATE_TOGGLE_FIX_START",
+  "data-ag71d-mode",
+  "id=\"star-birth-latitude\"",
+  "id=\"star-birth-longitude\"",
+  "id=\"star-birth-timezone\"",
+  "id=\"star-birth-coordinate-label\"",
+  "Reflection Locked Pending Review"
+]) {
+  if (!indexHtml.includes(marker)) fail(`index.html missing AG71D final UI correction marker: ${marker}`);
+}
+
+const finalCorrection = readJson("data/knowledge-base/location-intelligence/production/ag71d-final-ui-correction-record.json");
+if (finalCorrection.status !== "final_ui_correction_applied") fail("Final UI correction record status mismatch.");
+if (finalCorrection.active_frontend_file !== "index.html") fail("Final UI correction must target active index.html.");
+
 
 for (const marker of [
   "AG71D_UI_FINISHING_CORRECTION_START",
@@ -166,6 +185,10 @@ for (const key of [
   "ui_finishing_correction_applied",
   "star_coordinate_fields_reveal_on_selection",
   "reflection_duplicate_action_label_corrected",
+  "final_ui_correction_applied",
+  "star_coordinate_reveal_corrected",
+  "coordinate_ui_final_finishing_applied",
+  "duplicate_reflection_method_control_removed",
   "all_ui_contracts_passed",
   "ready_for_ag71e"
 ]) {

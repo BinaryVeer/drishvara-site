@@ -3976,6 +3976,110 @@ button[disabled].ag71c-review-action-lock {
 /* AG71D_UI_FINISHING_CORRECTION_END */
 
 </style>
+<style>
+
+/* AG71D_FINAL_COORDINATE_UI_STYLE_START */
+.ag71c-coordinate-surface {
+  margin: 1rem 0 1.1rem;
+  padding: 0.95rem;
+  border: 1px solid rgba(214, 176, 76, 0.36);
+  border-radius: 18px;
+  background: rgba(182, 208, 233, 0.07);
+}
+
+.ag71c-input-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.ag71c-input-mode label {
+  min-height: 2.7rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(182, 208, 233, 0.22);
+  border-radius: 999px;
+  background: rgba(8, 21, 43, 0.46);
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.92rem;
+  line-height: 1.16;
+  cursor: pointer;
+}
+
+.ag71c-input-mode input[type="radio"] {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+  accent-color: #d6b04c;
+}
+
+.ag71c-coordinate-grid {
+  display: none !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.85rem;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] .ag71c-coordinate-grid {
+  display: grid !important;
+}
+
+.ag71c-field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.88rem;
+  line-height: 1.15;
+}
+
+.ag71c-coordinate-grid input {
+  width: 100%;
+  min-height: 2.65rem;
+  border-radius: 13px;
+  border: 1px solid rgba(182, 208, 233, 0.28);
+  background: rgba(10, 25, 48, 0.88);
+  color: rgba(255, 255, 255, 0.96);
+  padding: 0.68rem 0.78rem;
+  font: inherit;
+}
+
+.ag71c-coordinate-grid input::placeholder {
+  color: rgba(182, 194, 215, 0.72);
+}
+
+.ag71c-coordinate-note {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(182, 194, 215, 0.82);
+}
+
+.ag71d-review-status {
+  margin: 0.9rem 0 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(214, 176, 76, 0.28);
+  border-radius: 14px;
+  background: rgba(8, 21, 43, 0.42);
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 720px) {
+  .ag71c-input-mode {
+    grid-template-columns: 1fr;
+  }
+  .ag71c-coordinate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* AG71D_FINAL_COORDINATE_UI_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -4354,7 +4458,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             
 
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
-          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="star-reflection" data-ag71c-selected-mode="place">
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="star-reflection" data-ag71d-mode="place" data-ag71c-selected-mode="place">
             <div class="ag71c-input-mode" aria-label="Birth location input mode">
               <label>
                 <input type="radio" name="ag71c-star-location-mode" value="place" data-ag71c-mode checked>
@@ -4400,7 +4504,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           
 
           <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_START -->
-          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang" data-ag71c-selected-mode="place">
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang" data-ag71d-mode="place" data-ag71c-selected-mode="place">
             <div class="ag71c-input-mode" aria-label="Panchang location input mode">
               <label>
                 <input type="radio" name="ag71c-panchang-location-mode" value="place" data-ag71c-mode checked>
@@ -7471,6 +7575,54 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 })();
 /* AG71D_UI_FINISHING_TOGGLE_FIX_END */
+</script>
+
+
+<script>
+/* AG71D_FINAL_COORDINATE_TOGGLE_FIX_START */
+(function () {
+  function syncSurface(surface) {
+    if (!surface) return;
+    var selected = surface.querySelector('input[data-ag71c-mode]:checked');
+    var fields = surface.querySelector('[data-ag71c-coordinate-fields]');
+    var coordinateMode = selected && selected.value === 'coordinates';
+
+    surface.setAttribute('data-ag71d-mode', coordinateMode ? 'coordinates' : 'place');
+    surface.setAttribute('data-ag71c-selected-mode', coordinateMode ? 'coordinates' : 'place');
+
+    if (!fields) return;
+    if (coordinateMode) {
+      fields.removeAttribute('hidden');
+      fields.style.setProperty('display', 'grid', 'important');
+    } else {
+      fields.setAttribute('hidden', 'hidden');
+      fields.style.setProperty('display', 'none', 'important');
+    }
+  }
+
+  function syncAll() {
+    document.querySelectorAll('[data-ag71c-coordinate-surface]').forEach(syncSurface);
+  }
+
+  document.addEventListener('change', function (event) {
+    if (!event.target || !event.target.matches('input[data-ag71c-mode]')) return;
+    syncSurface(event.target.closest('[data-ag71c-coordinate-surface]'));
+  }, true);
+
+  document.addEventListener('click', function (event) {
+    var surface = event.target && event.target.closest
+      ? event.target.closest('[data-ag71c-coordinate-surface]')
+      : null;
+    if (surface) window.setTimeout(function () { syncSurface(surface); }, 0);
+  }, true);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncAll, { once: true });
+  } else {
+    syncAll();
+  }
+})();
+/* AG71D_FINAL_COORDINATE_TOGGLE_FIX_END */
 </script>
 
 </body>
