@@ -1,0 +1,41 @@
+{
+  "module_id": "AG71D-R1",
+  "title": "Star Reflection Method Basis Clarification",
+  "status": "moon_led_panchanga_supported_basis_recorded",
+  "public_module_name": "Star Reflection",
+  "internal_basis": "Panchanga-aware Kala-Drishti reflection framework",
+  "clarification": "Star Reflection is not a star-only calculation. It is Moon-led, Panchanga-supported, Nakshatra-informed, and location/timezone dependent.",
+  "calculation_basis": {
+    "moon_led_elements": [
+      "Moon-Sun angular relationship for Tithi and Paksha context",
+      "Moon's Nakshatra position as lunar mansion/birth-star context"
+    ],
+    "sun_supported_elements": [
+      "Sunrise/local day boundary",
+      "Vara/day context",
+      "solar/seasonal context where governed"
+    ],
+    "panchanga_elements": [
+      "Tithi",
+      "Vara",
+      "Nakshatra",
+      "Yoga",
+      "Karana"
+    ],
+    "locality_inputs": [
+      "date",
+      "time",
+      "timezone",
+      "latitude",
+      "longitude",
+      "regional calendar/observance method where governed"
+    ]
+  },
+  "public_safety_boundary": {
+    "deterministic_prediction_allowed": false,
+    "personal_assessment_allowed": false,
+    "decision_guidance_allowed": false,
+    "reflective_prompt_only_until_governance_completion": true
+  },
+  "ui_implication": "Do not expose a Reflection Method dropdown until multiple approved methods exist. Use Birth Place or Birth Coordinates input for location basis."
+}

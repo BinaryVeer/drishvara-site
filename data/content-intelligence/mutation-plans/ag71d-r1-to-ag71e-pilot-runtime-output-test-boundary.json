@@ -1,0 +1,20 @@
+{
+  "module_id": "AG71D-R1",
+  "title": "AG71D-R1 to AG71E Boundary",
+  "status": "ag71e_boundary_defined",
+  "next_stage": "AG71E — Pilot Runtime Output Test",
+  "allowed_next_scope": [
+    "Internal runtime output test for 4 pilot locations.",
+    "Named-location and coordinate-first input contract testing.",
+    "Panchang internal output test remains non-public.",
+    "Star Reflection internal output-safety test remains non-public."
+  ],
+  "blocked_scope_without_explicit_approval": [
+    "full location-bank activation",
+    "public exact Panchang output",
+    "public personalised Star Reflection output",
+    "Supabase writes",
+    "backend/Auth activation",
+    "runtime AI generation"
+  ]
+}

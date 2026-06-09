@@ -107,7 +107,12 @@
     "ag71d_ui_finishing_correction_records": 1,
     "ag71d_final_ui_correction_records": 1,
     "ag71d_star_mode_interaction_fix_records": 1,
-    "ag71d_place_selection_ui_correction_records": 1
+    "ag71d_place_selection_ui_correction_records": 1,
+    "ag71d_r1_star_method_audit_records": 1,
+    "ag71d_r1_method_basis_clarification_records": 1,
+    "ag71d_r1_pilot_dropdown_correction_records": 1,
+    "ag71d_r1_pilot_dropdown_location_count": 4,
+    "ag71d_r1_public_runtime_output_records": 0
   },
   "methodology_sources_discovered": [
     "data/content-intelligence/ad-foundation/ad01-classical-panchanga-basis-register.json",
@@ -184,8 +189,8 @@
     "review_status",
     "public_use_permission"
   ],
-  "current_status": "pilot_ui_validation_completed_runtime_output_test_pending",
-  "next_required_stage": "AG71E \u2014 Pilot Runtime Output Test",
+  "current_status": "ag71d_r1_star_method_basis_and_pilot_dropdown_corrected_ag71e_pending",
+  "next_required_stage": "AG71E — Pilot Runtime Output Test",
   "foundation_files": {
     "astronomical_model": "data/knowledge-base/panchang-festival/production/astronomical-calculation-model.json",
     "location_coordinate_bank": "data/knowledge-base/panchang-festival/production/location-coordinate-bank.json",
@@ -424,5 +429,11 @@
     "final_ui_correction": "data/knowledge-base/location-intelligence/production/ag71d-final-ui-correction-record.json",
     "star_mode_interaction_fix": "data/knowledge-base/location-intelligence/production/ag71d-star-mode-interaction-fix-record.json",
     "place_selection_ui_correction": "data/knowledge-base/location-intelligence/production/ag71d-place-selection-ui-correction-record.json"
+  },
+  "ag71d_r1_files": {
+    "method_audit": "data/methodology/star-reflection/ag71d-r1-star-reflection-method-audit.json",
+    "method_basis": "data/methodology/star-reflection/ag71d-r1-star-reflection-method-basis-clarification.json",
+    "dropdown_correction": "data/knowledge-base/location-intelligence/production/ag71d-r1-pilot-dropdown-option-correction-record.json",
+    "no_public_output_audit": "data/knowledge-base/location-intelligence/production/ag71d-r1-no-public-output-audit.json"
   }
 }

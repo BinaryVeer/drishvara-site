@@ -1,0 +1,48 @@
+{
+  "module_id": "AG71D-R1",
+  "title": "Pilot Dropdown Option Correction Record",
+  "status": "pilot_dropdown_options_corrected",
+  "active_frontend_file": "index.html",
+  "star_birth_place_select_id": "star-birth-place-select",
+  "panchang_location_select_id": "panchang-place-select",
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "timezone": "Asia/Kolkata",
+      "pilot_status": "approved_four_location_pilot"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "timezone": "Asia/Kolkata",
+      "pilot_status": "approved_four_location_pilot"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "timezone": "Asia/Kolkata",
+      "pilot_status": "approved_four_location_pilot"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "timezone": "Asia/Tokyo",
+      "pilot_status": "approved_four_location_pilot"
+    }
+  ],
+  "corrections": [
+    "Star Birth Place dropdown options replaced with 4 pilot locations.",
+    "Panchang location dropdown options replaced with 4 pilot locations.",
+    "Panchang canonical AG64B id panchang-place-select preserved.",
+    "Runtime fallback added to prevent old Reflection Method label from repopulating the Birth Place dropdown."
+  ],
+  "reflection_method_dropdown_status": "deferred_until_multiple_reviewed_methods_exist",
+  "public_runtime_activation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false
+}

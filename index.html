@@ -4581,12 +4581,10 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             <label class="ag71d-select-label" for="star-birth-place-select">Birth Place</label>
             <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place">
               <option value="" selected>Select birth place</option>
-              
-<option value="itanagar-arunachal-pradesh-india">Itanagar</option>
-<option value="new-delhi-delhi-india">New Delhi</option>
-<option value="ranchi-jharkhand-india">Ranchi</option>
-<option value="tokyo-japan">Tokyo</option>
-
+              <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Itanagar</option>
+              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
+              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
+              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
             </select>
             <p class="ag71d-place-select-note">Birth-place selection is prepared for pilot validation only. Personalised output remains locked until consent, privacy and reflection-method governance are approved.</p>
           </div>
@@ -4640,12 +4638,10 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang">
             <label class="ag71d-select-label" for="panchang-place-select">Panchang Location</label>
             <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location">
-              
-<option value="itanagar-arunachal-pradesh-india">Itanagar</option>
-<option value="new-delhi-delhi-india">New Delhi</option>
-<option value="ranchi-jharkhand-india">Ranchi</option>
-<option value="tokyo-japan">Tokyo</option>
-
+              <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected>Itanagar</option>
+              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
+              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
+              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
             </select>
             <p class="ag71d-place-select-note">Location selection is prepared for the 4-location pilot only. Exact Panchang output remains withheld until computation and regional-method verification are approved.</p>
           </div>
@@ -7894,6 +7890,50 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71dSyncPlaceSelection = syncAll;
 })();
 /* AG71D_PLACE_SELECTION_TOGGLE_FIX_END */
+</script>
+
+
+<script>
+/* AG71D_R1_PILOT_DROPDOWN_RUNTIME_FIX_START */
+(function () {
+  var pilotOptions = [{"value":"itanagar-arunachal-pradesh-india","label":"Itanagar","location_id":"loc_in_ar_itanagar_capital_complex_001","timezone":"Asia/Kolkata","pilot_status":"approved_four_location_pilot"},{"value":"new-delhi-delhi-india","label":"New Delhi","location_id":"loc_in_dl_new_delhi_capital_001","timezone":"Asia/Kolkata","pilot_status":"approved_four_location_pilot"},{"value":"ranchi-jharkhand-india","label":"Ranchi","location_id":"loc_in_jh_ranchi_city_001","timezone":"Asia/Kolkata","pilot_status":"approved_four_location_pilot"},{"value":"tokyo-japan","label":"Tokyo","location_id":"loc_jp_tokyo_capital_001","timezone":"Asia/Tokyo","pilot_status":"approved_four_location_pilot"}];
+
+  function optionMarkup(item, selected) {
+    return '<option value="' + item.value + '" data-location-id="' + item.location_id + '" data-timezone="' + item.timezone + '" data-pilot-status="' + item.pilot_status + '"' + (selected ? ' selected' : '') + '>' + item.label + '</option>';
+  }
+
+  function resetSelect(id, placeholder, selectFirst) {
+    var select = document.getElementById(id);
+    if (!select) return;
+
+    var html = '';
+    if (placeholder) {
+      html += '<option value=""' + (!selectFirst ? ' selected' : '') + '>' + placeholder + '</option>';
+    }
+
+    html += pilotOptions.map(function (item, index) {
+      return optionMarkup(item, selectFirst && index === 0);
+    }).join('');
+
+    select.innerHTML = html;
+  }
+
+  function applyPilotDropdowns() {
+    resetSelect('star-birth-place-select', 'Select birth place', false);
+    resetSelect('panchang-place-select', '', true);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyPilotDropdowns, { once: true });
+  } else {
+    applyPilotDropdowns();
+  }
+
+  window.setTimeout(applyPilotDropdowns, 250);
+  window.setTimeout(applyPilotDropdowns, 1000);
+  window.drishvaraAg71dR1ApplyPilotDropdowns = applyPilotDropdowns;
+})();
+/* AG71D_R1_PILOT_DROPDOWN_RUNTIME_FIX_END */
 </script>
 
 </body>
