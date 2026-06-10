@@ -4509,6 +4509,96 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG71E_PILOT_SUBMIT_OUTPUT_STYLE_END */
 
 </style>
+<style>
+
+/* AG71E_R1_OUTPUT_CONSOLIDATION_STYLE_START */
+#star-birth-place-select,
+#panchang-place-select,
+select[data-ag71d-r5-native-select-compat="true"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  max-width: 1px !important;
+  max-height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+}
+
+[data-ag71e-preview-panel="panchang"] {
+  display: none !important;
+}
+
+.ag71e-preview-panel,
+.ag71e-preview-row,
+.ag71e-preview-row strong,
+.ag71e-preview-row span,
+[data-drishvara-ag60i-panchang-preview-safe="true"],
+[data-drishvara-ag60i-panchang-preview-safe="true"] *,
+.ag71d-r6-location-basis-line,
+.ag71d-r5-selection-summary,
+.ag71d-r5-search-forward-note {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.ag71e-preview-row,
+[data-drishvara-ag60i-panchang-preview-safe="true"] > *,
+[data-drishvara-ag60i-panchang-preview-safe="true"] div {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.ag71e-preview-row {
+  grid-template-columns: minmax(7.2rem, 0.8fr) minmax(0, 1.2fr) !important;
+  align-items: start;
+}
+
+.ag71e-preview-row span,
+.ag71e-preview-row strong {
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+[data-drishvara-ag60i-panchang-preview-safe="true"] {
+  overflow: hidden;
+}
+
+[data-drishvara-ag60i-panchang-preview-safe="true"] span,
+[data-drishvara-ag60i-panchang-preview-safe="true"] p,
+[data-drishvara-ag60i-panchang-preview-safe="true"] div {
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.ag71e-r1-panchang-inline-status {
+  margin: 0.72rem 0 0.95rem;
+  padding: 0.68rem 0.8rem;
+  border-radius: 12px;
+  border: 1px solid rgba(214, 176, 76, 0.28);
+  background: rgba(8, 21, 43, 0.36);
+  color: rgba(220, 226, 238, 0.88);
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 0.86rem;
+  line-height: 1.42;
+}
+
+@media (max-width: 720px) {
+  .ag71e-preview-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+/* AG71E_R1_OUTPUT_CONSOLIDATION_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -5047,12 +5137,15 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 </div>
 
           
+          <p class="ag71e-r1-panchang-inline-status" data-ag71e-r1-panchang-inline-status="true">
+            Select a pilot location or enter coordinates, then click Preview Panchang. The existing Panchang table below will receive the pilot-safe basis.
+          </p>
           <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_START -->
-          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang">
+          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang" data-ag71e-r1-compat-only="true">
             <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="panchang">
               Preview Panchang
             </button>
-            <div class="ag71e-preview-panel" data-ag71e-preview-panel="panchang" hidden>
+            <div class="ag71e-preview-panel" data-ag71e-r1-compat-hidden="true" data-ag71e-preview-panel="panchang" hidden>
               <p class="eyebrow">Pilot Panchang Preview</p>
               <h3>Location basis accepted for Panchang pilot</h3>
               <div class="ag71e-preview-grid" data-ag71e-preview-grid="panchang"></div>
@@ -5062,7 +5155,6 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             </div>
           </div>
           <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_END -->
-
           <div class="mini-table" data-drishvara-ag60i-panchang-preview-safe="true">
             <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-sunrise">Under verification</span></div>
             <div class="mini-row"><strong>Regional Method</strong><span id="panchang-sunset">Under verification</span></div>
@@ -8727,6 +8819,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return '<div class="ag71e-preview-row"><strong>' + label + '</strong><span>' + value + '</span></div>';
   }
 
+  function humanizeAg71e(value) {
+    return String(value || "")
+      .replace(/_/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/\b\w/g, function (ch) { return ch.toUpperCase(); });
+  }
+
   function safe(value, fallback) {
     return value === undefined || value === null || value === "" ? fallback : String(value);
   }
@@ -8748,13 +8848,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function basisLabel(basis) {
     if (!basis) return "Location basis unavailable";
     if (basis.basis_type === "approved_pilot_place") {
-      return safe(basis.display_label, "Pilot place") + " | " +
+      return safe(basis.display_label, "Pilot place") + " · " +
         safe(basis.latitude, "latitude pending") + ", " +
         safe(basis.longitude, "longitude pending") + " | " +
         safe(basis.timezone, "timezone pending");
     }
     if (basis.basis_type === "user_entered_coordinates") {
-      return safe(basis.display_label, "Custom coordinates") + " | " +
+      return safe(basis.display_label, "Custom coordinates") + " · " +
         safe(basis.latitude, "latitude pending") + ", " +
         safe(basis.longitude, "longitude pending") + " | " +
         safe(basis.timezone, "timezone pending");
@@ -8763,6 +8863,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showPanel(kind, rows) {
+    if (kind === "panchang") return;
     var panel = document.querySelector('[data-ag71e-preview-panel="' + kind + '"]');
     var grid = document.querySelector('[data-ag71e-preview-grid="' + kind + '"]');
     if (!panel || !grid) return;
@@ -8790,8 +8891,8 @@ document.addEventListener("DOMContentLoaded", () => {
       row("Name Basis", name || "Not provided"),
       row("DOB Basis", dob || "Not provided"),
       row("Location Basis", basisLabel(basis)),
-      row("Basis Type", safe(basis.basis_type, "pending")),
-      row("Review Status", safe(basis.review_status, "pending")),
+      row("Basis Type", humanizeAg71e(safe(basis.basis_type, "pending"))),
+      row("Review Status", humanizeAg71e(safe(basis.review_status, "pending"))),
       row("Reflection Basis", "Moon-led, Panchanga-supported, location-aware"),
       row("Output Status", "Personalised reflection remains locked pending consent and governance approval")
     ]);
@@ -8827,19 +8928,57 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateUpcomingObservanceNote(basis) {
-    var cards = Array.prototype.slice.call(document.querySelectorAll("*"));
+    var basisText = basisLabel(basis);
+    var candidates = Array.prototype.slice.call(document.querySelectorAll("article, section, .card, .mini-card, .feature-card, .info-card, div"));
     var target = null;
 
-    for (var i = 0; i < cards.length; i += 1) {
-      if (cards[i].textContent && cards[i].textContent.indexOf("Upcoming Observance") !== -1) {
-        target = cards[i];
+    for (var i = 0; i < candidates.length; i += 1) {
+      var text = candidates[i].textContent || "";
+      if (
+        text.indexOf("Upcoming Observance") !== -1 &&
+        (
+          text.indexOf("Festival and observance registry") !== -1 ||
+          text.indexOf("observance output remains") !== -1 ||
+          text.indexOf("editorial verification") !== -1
+        )
+      ) {
+        target = candidates[i];
         break;
       }
     }
 
     if (!target) return;
+
     target.setAttribute("data-ag71e-upcoming-observance-linked", "true");
-    target.setAttribute("data-ag71e-location-basis", basisLabel(basis));
+    target.setAttribute("data-ag71e-location-basis", basisText);
+
+    var nodes = Array.prototype.slice.call(target.querySelectorAll("p, span, div"));
+    var main = null;
+    var detail = null;
+
+    for (var j = 0; j < nodes.length; j += 1) {
+      var nodeText = nodes[j].textContent || "";
+      if (!main && nodeText.indexOf("Festival and observance registry") !== -1) {
+        main = nodes[j];
+      }
+      if (!detail && nodeText.indexOf("Dates, regional applicability") !== -1) {
+        detail = nodes[j];
+      }
+    }
+
+    if (main) {
+      main.textContent = "Observance lookup is linked to selected basis: " + basisText + ".";
+    }
+
+    if (detail) {
+      detail.textContent = "Dates, regional applicability and bilingual naming remain under editorial verification until source review is complete.";
+    }
+  }
+
+  function updatePanchangInlineStatus(basis) {
+    var status = document.querySelector('[data-ag71e-r1-panchang-inline-status="true"]');
+    if (!status) return;
+    status.textContent = "Preview applied to existing Panchang table using: " + basisLabel(basis) + ". Exact values remain withheld until verified.";
   }
 
   function previewPanchang() {
@@ -8849,13 +8988,14 @@ document.addEventListener("DOMContentLoaded", () => {
       row("Status", "Accepted for pilot-safe Panchang preview"),
       row("Date Basis", todayIso()),
       row("Location Basis", basisLabel(basis)),
-      row("Basis Type", safe(basis.basis_type, "pending")),
+      row("Basis Type", humanizeAg71e(safe(basis.basis_type, "pending"))),
       row("Timezone", safe(basis.timezone, "timezone pending")),
-      row("Review Status", safe(basis.review_status, "pending")),
+      row("Review Status", humanizeAg71e(safe(basis.review_status, "pending"))),
       row("Panchang Values", "Tithi, Nakshatra, Yoga and Paksha remain withheld until verified"),
       row("Upcoming Observance", "Linked to selected basis; observance output remains under editorial verification")
     ]);
 
+    updatePanchangInlineStatus(basis);
     updatePanchangMiniTable(basis);
     updateUpcomingObservanceNote(basis);
   }

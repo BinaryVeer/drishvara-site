@@ -50,7 +50,9 @@ if (starOutputIndex < 0 || starBasisIndex < 0 || starOutputIndex > starBasisInde
 }
 
 const panchangOutputIndex = html.indexOf("AG71E_PANCHANG_PREVIEW_OUTPUT_START");
-const panchangTableIndex = html.indexOf('data-drishvara-ag60i-panchang-preview-safe="true"');
+const panchangTail = panchangOutputIndex >= 0 ? html.slice(panchangOutputIndex) : "";
+const panchangTableMatch = panchangTail.match(/<div\s+class="mini-table"\s+data-drishvara-ag60i-panchang-preview-safe="true">/i);
+const panchangTableIndex = panchangTableMatch ? panchangOutputIndex + panchangTableMatch.index : -1;
 if (panchangOutputIndex < 0 || panchangTableIndex < 0 || panchangOutputIndex > panchangTableIndex) {
   fail("Panchang output panel must appear before existing Panchang table.");
 }
