@@ -1,0 +1,29 @@
+{
+  "module_id": "AG71E",
+  "title": "Pilot Submit Buttons and Safe Output Panels Record",
+  "status": "pilot_submit_output_contract_applied",
+  "active_frontend_file": "index.html",
+  "corrections": [
+    "Preview Star Reflection button added.",
+    "Star Reflection pilot-safe result panel added between input section and governance basis.",
+    "Preview Panchang button added.",
+    "Panchang pilot-safe result panel added before existing Panchang output table.",
+    "Panchang existing output table can be updated with pilot-safe location/date basis.",
+    "Upcoming Observance is linked to selected basis but remains withheld until editorial verification."
+  ],
+  "placement_rules": {
+    "star_reflection_output": "Displayed between birth-place/coordinate input section and reflection-basis governance note.",
+    "panchang_output": "Displayed before the existing Panchang table and safe values are reflected in the existing Panchang table where applicable."
+  },
+  "output_boundary": {
+    "star_reflection": "Input acknowledgement and basis preview only; no prediction or assessment.",
+    "panchang": "Location/date/basis preview only; exact Tithi/Nakshatra/Yoga/Paksha remain withheld.",
+    "upcoming_observance": "Linked to selected basis but not publicly computed."
+  },
+  "public_runtime_activation_performed": false,
+  "runtime_panchang_computation_performed": false,
+  "runtime_star_reflection_computation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false,
+  "full_location_bank_activation_performed": false
+}

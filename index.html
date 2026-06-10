@@ -4428,6 +4428,87 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG71D_R6_LOCATION_DATA_BINDING_STYLE_END */
 
 </style>
+<style>
+
+/* AG71E_PILOT_SUBMIT_OUTPUT_STYLE_START */
+.ag71e-preview-action-shell {
+  margin: 1rem 0 1.05rem;
+}
+
+.ag71e-preview-button {
+  width: 100%;
+  min-height: 2.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 176, 76, 0.76);
+  background: rgba(214, 176, 76, 0.16);
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 700;
+  cursor: pointer;
+  pointer-events: auto !important;
+}
+
+.ag71e-preview-button:hover {
+  background: rgba(214, 176, 76, 0.24);
+}
+
+.ag71e-preview-panel {
+  margin-top: 0.85rem;
+  padding: 0.9rem;
+  border-radius: 16px;
+  border: 1px solid rgba(214, 176, 76, 0.34);
+  background: rgba(8, 21, 43, 0.48);
+  color: rgba(220, 226, 238, 0.92);
+}
+
+.ag71e-preview-panel[hidden] {
+  display: none !important;
+}
+
+.ag71e-preview-panel h3 {
+  margin: 0.18rem 0 0.72rem;
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.ag71e-preview-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.ag71e-preview-row {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 0.72fr) minmax(0, 1.28fr);
+  gap: 0.65rem;
+  padding: 0.58rem 0.65rem;
+  border-radius: 12px;
+  background: rgba(182, 208, 233, 0.07);
+  border: 1px solid rgba(182, 208, 233, 0.12);
+}
+
+.ag71e-preview-row strong {
+  color: rgba(230, 235, 246, 0.95);
+}
+
+.ag71e-preview-row span {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.ag71e-preview-note {
+  margin: 0.72rem 0 0;
+  color: rgba(182, 208, 233, 0.80);
+  font-size: 0.86rem;
+  line-height: 1.46;
+}
+
+@media (max-width: 720px) {
+  .ag71e-preview-row {
+    grid-template-columns: 1fr;
+  }
+}
+/* AG71E_PILOT_SUBMIT_OUTPUT_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -4868,6 +4949,23 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <!-- AG71D_STAR_BIRTH_PLACE_SELECT_END -->
 
 
+          
+          <!-- AG71E_STAR_REFLECTION_PREVIEW_OUTPUT_START -->
+          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="star-reflection">
+            <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="star-reflection">
+              Preview Star Reflection
+            </button>
+            <div class="ag71e-preview-panel" data-ag71e-preview-panel="star-reflection" hidden>
+              <p class="eyebrow">Today’s Star Reflection Preview</p>
+              <h3>Reflection input accepted for pilot review</h3>
+              <div class="ag71e-preview-grid" data-ag71e-preview-grid="star-reflection"></div>
+              <p class="ag71e-preview-note">
+                Reflective prompt only. This is not a personal prediction, assessment, or decision guide. Personalised interpretation remains locked pending consent and governance approval.
+              </p>
+            </div>
+          </div>
+          <!-- AG71E_STAR_REFLECTION_PREVIEW_OUTPUT_END -->
+
           <div class="ag71d-method-basis-status" data-ag71d-r4-method-basis-status="true">
             Reflection basis: Moon-led, Panchanga-supported, location-aware. Personalised interpretation remains locked pending consent and governance review.
           </div>
@@ -4947,6 +5045,23 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
 
 </div>
+
+          
+          <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_START -->
+          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang">
+            <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="panchang">
+              Preview Panchang
+            </button>
+            <div class="ag71e-preview-panel" data-ag71e-preview-panel="panchang" hidden>
+              <p class="eyebrow">Pilot Panchang Preview</p>
+              <h3>Location basis accepted for Panchang pilot</h3>
+              <div class="ag71e-preview-grid" data-ag71e-preview-grid="panchang"></div>
+              <p class="ag71e-preview-note">
+                Exact Panchang values and upcoming observance details remain withheld until computation, source and regional-method verification are approved.
+              </p>
+            </div>
+          </div>
+          <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_END -->
 
           <div class="mini-table" data-drishvara-ag60i-panchang-preview-safe="true">
             <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-sunrise">Under verification</span></div>
@@ -8589,6 +8704,178 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71dR6GetLocationBasis = getBasis;
 })();
 /* AG71D_R6_LOCATION_DATA_BINDING_CONTROLLER_END */
+</script>
+
+
+<script>
+/* AG71E_PILOT_SUBMIT_OUTPUT_CONTROLLER_START */
+(function () {
+  function textOf(id) {
+    var el = document.getElementById(id);
+    return el ? String(el.value || "").trim() : "";
+  }
+
+  function todayIso() {
+    var d = new Date();
+    var yyyy = d.getFullYear();
+    var mm = String(d.getMonth() + 1).padStart(2, "0");
+    var dd = String(d.getDate()).padStart(2, "0");
+    return yyyy + "-" + mm + "-" + dd;
+  }
+
+  function row(label, value) {
+    return '<div class="ag71e-preview-row"><strong>' + label + '</strong><span>' + value + '</span></div>';
+  }
+
+  function safe(value, fallback) {
+    return value === undefined || value === null || value === "" ? fallback : String(value);
+  }
+
+  function getBasis(kind) {
+    if (typeof window.drishvaraAg71dR6GetLocationBasis === "function") {
+      return window.drishvaraAg71dR6GetLocationBasis(kind);
+    }
+    return {
+      basis_type: "basis_unavailable",
+      display_label: "Location basis unavailable",
+      latitude: "",
+      longitude: "",
+      timezone: "",
+      review_status: "not_available"
+    };
+  }
+
+  function basisLabel(basis) {
+    if (!basis) return "Location basis unavailable";
+    if (basis.basis_type === "approved_pilot_place") {
+      return safe(basis.display_label, "Pilot place") + " | " +
+        safe(basis.latitude, "latitude pending") + ", " +
+        safe(basis.longitude, "longitude pending") + " | " +
+        safe(basis.timezone, "timezone pending");
+    }
+    if (basis.basis_type === "user_entered_coordinates") {
+      return safe(basis.display_label, "Custom coordinates") + " | " +
+        safe(basis.latitude, "latitude pending") + ", " +
+        safe(basis.longitude, "longitude pending") + " | " +
+        safe(basis.timezone, "timezone pending");
+    }
+    return safe(basis.display_label, "Location basis pending");
+  }
+
+  function showPanel(kind, rows) {
+    var panel = document.querySelector('[data-ag71e-preview-panel="' + kind + '"]');
+    var grid = document.querySelector('[data-ag71e-preview-grid="' + kind + '"]');
+    if (!panel || !grid) return;
+
+    grid.innerHTML = rows.join("");
+    panel.hidden = false;
+    panel.removeAttribute("hidden");
+  }
+
+  function validDob(value) {
+    return /^\d{2}\/\d{2}\/\d{4}$/.test(value);
+  }
+
+  function previewStar() {
+    var name = textOf("star-reflection-name");
+    var dob = textOf("star-reflection-dob");
+    var basis = getBasis("star-reflection");
+
+    var status = "Accepted for pilot-safe preview";
+    if (!name) status = "Name pending";
+    if (!validDob(dob)) status = "DOB must follow DD/MM/YYYY";
+
+    showPanel("star-reflection", [
+      row("Status", status),
+      row("Name Basis", name || "Not provided"),
+      row("DOB Basis", dob || "Not provided"),
+      row("Location Basis", basisLabel(basis)),
+      row("Basis Type", safe(basis.basis_type, "pending")),
+      row("Review Status", safe(basis.review_status, "pending")),
+      row("Reflection Basis", "Moon-led, Panchanga-supported, location-aware"),
+      row("Output Status", "Personalised reflection remains locked pending consent and governance approval")
+    ]);
+  }
+
+  function updatePanchangMiniTable(basis) {
+    var table = document.querySelector('[data-drishvara-ag60i-panchang-preview-safe="true"]');
+    if (!table) return;
+
+    function update(label, value) {
+      var candidates = Array.prototype.slice.call(table.querySelectorAll("*"));
+      for (var i = 0; i < candidates.length; i += 1) {
+        var node = candidates[i];
+        if (!node.children || node.children.length < 2) continue;
+        if (!node.textContent || node.textContent.indexOf(label) === -1) continue;
+
+        var last = node.children[node.children.length - 1];
+        if (!last || last.textContent.indexOf(label) !== -1) continue;
+
+        last.textContent = value;
+        return;
+      }
+    }
+
+    update("Calculation Source", "Pilot-safe preview basis");
+    update("Regional Method", "Under verification");
+    update("Location Basis", basisLabel(basis));
+    update("Date Basis", todayIso());
+    update("Tithi", "Withheld until verified");
+    update("Nakshatra", "Withheld until verified");
+    update("Yoga", "Withheld until verified");
+    update("Paksha", "Withheld until verified");
+  }
+
+  function updateUpcomingObservanceNote(basis) {
+    var cards = Array.prototype.slice.call(document.querySelectorAll("*"));
+    var target = null;
+
+    for (var i = 0; i < cards.length; i += 1) {
+      if (cards[i].textContent && cards[i].textContent.indexOf("Upcoming Observance") !== -1) {
+        target = cards[i];
+        break;
+      }
+    }
+
+    if (!target) return;
+    target.setAttribute("data-ag71e-upcoming-observance-linked", "true");
+    target.setAttribute("data-ag71e-location-basis", basisLabel(basis));
+  }
+
+  function previewPanchang() {
+    var basis = getBasis("panchang");
+
+    showPanel("panchang", [
+      row("Status", "Accepted for pilot-safe Panchang preview"),
+      row("Date Basis", todayIso()),
+      row("Location Basis", basisLabel(basis)),
+      row("Basis Type", safe(basis.basis_type, "pending")),
+      row("Timezone", safe(basis.timezone, "timezone pending")),
+      row("Review Status", safe(basis.review_status, "pending")),
+      row("Panchang Values", "Tithi, Nakshatra, Yoga and Paksha remain withheld until verified"),
+      row("Upcoming Observance", "Linked to selected basis; observance output remains under editorial verification")
+    ]);
+
+    updatePanchangMiniTable(basis);
+    updateUpcomingObservanceNote(basis);
+  }
+
+  document.addEventListener("click", function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest("[data-ag71e-preview-button]")
+      : null;
+
+    if (!button) return;
+
+    var kind = button.getAttribute("data-ag71e-preview-button");
+    if (kind === "star-reflection") previewStar();
+    if (kind === "panchang") previewPanchang();
+  });
+
+  window.drishvaraAg71ePreviewStarReflection = previewStar;
+  window.drishvaraAg71ePreviewPanchang = previewPanchang;
+})();
+/* AG71E_PILOT_SUBMIT_OUTPUT_CONTROLLER_END */
 </script>
 
 </body>
