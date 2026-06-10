@@ -4398,6 +4398,36 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG71D_R5_PILOT_SELECTOR_FINALIZATION_STYLE_END */
 
 </style>
+<style>
+
+/* AG71D_R6_LOCATION_DATA_BINDING_STYLE_START */
+.ag71d-r6-location-basis-line,
+.ag71d-r6-coordinate-basis-summary {
+  margin: 0.52rem 0 0;
+  padding: 0.58rem 0.72rem;
+  border-radius: 12px;
+  border: 1px solid rgba(182, 208, 233, 0.18);
+  background: rgba(8, 21, 43, 0.30);
+  color: rgba(220, 226, 238, 0.84);
+  font-size: 0.82rem;
+  line-height: 1.38;
+}
+
+.ag71d-r6-coordinate-basis-summary {
+  display: none;
+}
+
+.ag71c-coordinate-surface[data-ag71d-mode="coordinates"] .ag71d-r6-coordinate-basis-summary {
+  display: block;
+}
+
+.ag71d-r4-location-option[data-review-status="approved_for_four_location_pilot"][aria-pressed="true"]::after {
+  content: "  ✓";
+  color: rgba(214, 176, 76, 0.95);
+}
+/* AG71D_R6_LOCATION_DATA_BINDING_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -4803,6 +4833,10 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             </div>
             <p class="ag71c-coordinate-note">Coordinate input is prepared for pilot validation only. Personalised output remains disabled until consent, privacy and reflection-method governance are approved.</p>
           </div>
+          
+            <p class="ag71d-r6-coordinate-basis-summary" data-ag71d-r6-coordinate-basis-summary="star-reflection">
+              Coordinate basis: awaiting birth coordinates
+            </p>
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_END -->
 
           <!-- AG71D_STAR_BIRTH_PLACE_SELECT_START -->
@@ -4810,17 +4844,17 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             <label class="ag71d-select-label" for="star-birth-place-select">Choose Birth Place</label>
             <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
               <option value="" selected>Select birth place</option>
-                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Itanagar</option>
-              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
-              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
-              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
+                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
+              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
+              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
+              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
             </select>
             <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_START -->
             <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="star-reflection" aria-label="Choose Birth Place">
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata">Itanagar</button>
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata">New Delhi</button>
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata">Ranchi</button>
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo">Tokyo</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</button>
             </div>
             <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_END -->
             <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="star-reflection">
@@ -4877,6 +4911,10 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             </div>
             <p class="ag71c-coordinate-note">Coordinate input is prepared for pilot validation only. Exact Panchang values remain withheld until source, regional method and computation verification are approved.</p>
           </div>
+          
+            <p class="ag71d-r6-coordinate-basis-summary" data-ag71d-r6-coordinate-basis-summary="panchang">
+              Coordinate basis: awaiting Panchang coordinates
+            </p>
           <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_END -->
 
 <div class="form-grid">
@@ -4885,17 +4923,17 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang">
             <label class="ag71d-select-label" for="panchang-place-select">Choose Panchang Location</label>
             <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
-                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected>Itanagar</option>
-              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
-              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
-              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
+                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
+              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
+              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
+              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
             </select>
             <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_START -->
             <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="panchang" aria-label="Choose Panchang Location">
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata">Itanagar</button>
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata">New Delhi</button>
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata">Ranchi</button>
-              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo">Tokyo</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</button>
             </div>
             <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_END -->
             <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="panchang">
@@ -8271,6 +8309,286 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71dR5UpdatePilotSelectionSummaries = updateAllSummaries;
 })();
 /* AG71D_R5_PILOT_SELECTOR_FINALIZATION_CONTROLLER_END */
+</script>
+
+
+<script type="application/json" id="ag71d-r6-pilot-location-binding-data">
+{
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "latitude": 27.0844,
+      "longitude": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "country": "India",
+      "location_type": "state_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "latitude": 28.6139,
+      "longitude": 77.209,
+      "timezone": "Asia/Kolkata",
+      "country": "India",
+      "location_type": "national_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "latitude": 23.3441,
+      "longitude": 85.3096,
+      "timezone": "Asia/Kolkata",
+      "country": "India",
+      "location_type": "state_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "latitude": 35.6762,
+      "longitude": 139.6503,
+      "timezone": "Asia/Tokyo",
+      "country": "Japan",
+      "location_type": "national_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    }
+  ]
+}
+</script>
+
+
+<script>
+/* AG71D_R6_LOCATION_DATA_BINDING_CONTROLLER_START */
+(function () {
+  var pilotLocations = [{"value": "itanagar-arunachal-pradesh-india", "label": "Itanagar", "location_id": "loc_in_ar_itanagar_capital_complex_001", "latitude": 27.0844, "longitude": 93.6053, "timezone": "Asia/Kolkata", "country": "India", "location_type": "state_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}, {"value": "new-delhi-delhi-india", "label": "New Delhi", "location_id": "loc_in_dl_new_delhi_capital_001", "latitude": 28.6139, "longitude": 77.209, "timezone": "Asia/Kolkata", "country": "India", "location_type": "national_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}, {"value": "ranchi-jharkhand-india", "label": "Ranchi", "location_id": "loc_in_jh_ranchi_city_001", "latitude": 23.3441, "longitude": 85.3096, "timezone": "Asia/Kolkata", "country": "India", "location_type": "state_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}, {"value": "tokyo-japan", "label": "Tokyo", "location_id": "loc_jp_tokyo_capital_001", "latitude": 35.6762, "longitude": 139.6503, "timezone": "Asia/Tokyo", "country": "Japan", "location_type": "national_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}];
+  var byValue = {};
+
+  pilotLocations.forEach(function (item) {
+    byValue[item.value] = item;
+  });
+
+  function formatCoord(item) {
+    return Number(item.latitude).toFixed(4) + ", " + Number(item.longitude).toFixed(4);
+  }
+
+  function getMode(kind) {
+    var surface = document.querySelector('[data-ag71c-coordinate-surface="' + kind + '"]');
+    if (!surface) return "place";
+    return surface.getAttribute("data-ag71d-mode") || surface.getAttribute("data-ag71c-selected-mode") || "place";
+  }
+
+  function selectIdForKind(kind) {
+    return kind === "star-reflection" ? "star-birth-place-select" : "panchang-place-select";
+  }
+
+  function coordinateIdsForKind(kind) {
+    if (kind === "star-reflection") {
+      return {
+        latitude: "star-birth-latitude",
+        longitude: "star-birth-longitude",
+        timezone: "star-birth-timezone",
+        label: "star-birth-coordinate-label"
+      };
+    }
+
+    return {
+      latitude: "panchang-latitude",
+      longitude: "panchang-longitude",
+      timezone: "panchang-timezone",
+      label: "panchang-coordinate-label"
+    };
+  }
+
+  function selectedLocation(kind) {
+    var select = document.getElementById(selectIdForKind(kind));
+    if (!select || !select.value) return null;
+    return byValue[select.value] || null;
+  }
+
+  function userCoordinateBasis(kind) {
+    var ids = coordinateIdsForKind(kind);
+    var lat = document.getElementById(ids.latitude);
+    var lon = document.getElementById(ids.longitude);
+    var tz = document.getElementById(ids.timezone);
+    var label = document.getElementById(ids.label);
+
+    return {
+      basis_type: "user_entered_coordinates",
+      latitude: lat ? lat.value.trim() : "",
+      longitude: lon ? lon.value.trim() : "",
+      timezone: tz ? tz.value.trim() : "",
+      display_label: label && label.value.trim() ? label.value.trim() : "Custom coordinates",
+      optional_location_label: label ? label.value.trim() : "",
+      review_status: "user_input_pending_validation"
+    };
+  }
+
+  function locationBasis(kind) {
+    var mode = getMode(kind);
+
+    if (mode === "coordinates") {
+      return userCoordinateBasis(kind);
+    }
+
+    var item = selectedLocation(kind);
+    if (!item) {
+      return {
+        basis_type: "approved_pilot_place",
+        selected: false,
+        display_label: "",
+        review_status: "not_selected"
+      };
+    }
+
+    return {
+      basis_type: "approved_pilot_place",
+      selected: true,
+      location_id: item.location_id,
+      display_label: item.label,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      timezone: item.timezone,
+      country: item.country,
+      location_type: item.location_type,
+      source_status: item.source_status,
+      review_status: item.review_status
+    };
+  }
+
+  function writeSelectDataset(kind) {
+    var select = document.getElementById(selectIdForKind(kind));
+    var basis = locationBasis(kind);
+    if (!select) return basis;
+
+    select.dataset.ag71dR6BasisType = basis.basis_type || "";
+    select.dataset.ag71dR6DisplayLabel = basis.display_label || "";
+    select.dataset.ag71dR6Latitude = basis.latitude || "";
+    select.dataset.ag71dR6Longitude = basis.longitude || "";
+    select.dataset.ag71dR6Timezone = basis.timezone || "";
+    select.dataset.ag71dR6ReviewStatus = basis.review_status || "";
+    if (basis.location_id) select.dataset.ag71dR6LocationId = basis.location_id;
+
+    return basis;
+  }
+
+  function ensureBasisLine(kind) {
+    var summary = document.querySelector('[data-ag71d-r5-selection-summary="' + kind + '"]');
+    if (!summary) return null;
+
+    var next = summary.nextElementSibling;
+    if (next && next.matches && next.matches('[data-ag71d-r6-location-basis-line="' + kind + '"]')) {
+      return next;
+    }
+
+    var line = document.createElement("p");
+    line.className = "ag71d-r6-location-basis-line";
+    line.setAttribute("data-ag71d-r6-location-basis-line", kind);
+    summary.insertAdjacentElement("afterend", line);
+    return line;
+  }
+
+  function updatePlaceSummary(kind) {
+    var basis = writeSelectDataset(kind);
+    var line = ensureBasisLine(kind);
+    if (!line) return;
+
+    if (!basis.selected && basis.basis_type === "approved_pilot_place") {
+      line.textContent = "Location basis: awaiting approved pilot location selection";
+      return;
+    }
+
+    if (basis.basis_type === "approved_pilot_place") {
+      line.textContent = "Location basis: " + basis.display_label + " | Coordinates: " + Number(basis.latitude).toFixed(4) + ", " + Number(basis.longitude).toFixed(4) + " | Timezone: " + basis.timezone + " | Review: 4-location pilot";
+      return;
+    }
+
+    line.textContent = "Location basis: coordinate entry mode active";
+  }
+
+  function updateCoordinateSummary(kind) {
+    var basis = userCoordinateBasis(kind);
+    var summary = document.querySelector('[data-ag71d-r6-coordinate-basis-summary="' + kind + '"]');
+    if (!summary) return;
+
+    var lat = basis.latitude || "latitude pending";
+    var lon = basis.longitude || "longitude pending";
+    var tz = basis.timezone || "timezone pending";
+    var label = basis.optional_location_label || "optional label not provided";
+
+    summary.textContent = "Coordinate basis: " + lat + ", " + lon + " | Timezone: " + tz + " | Display label: " + label;
+  }
+
+  function updateAll() {
+    updatePlaceSummary("star-reflection");
+    updatePlaceSummary("panchang");
+    updateCoordinateSummary("star-reflection");
+    updateCoordinateSummary("panchang");
+    document.documentElement.setAttribute("data-ag71d-r6-location-binding-active", "true");
+  }
+
+  function getBasis(kind) {
+    return locationBasis(kind);
+  }
+
+  document.addEventListener("click", function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest("[data-ag71d-r4-location-value]")
+      : null;
+    if (!button) return;
+
+    window.setTimeout(updateAll, 0);
+  });
+
+  document.addEventListener("change", function (event) {
+    if (!event.target) return;
+    if (
+      event.target.id === "star-birth-place-select" ||
+      event.target.id === "panchang-place-select" ||
+      event.target.matches("input[data-ag71c-mode]")
+    ) {
+      window.setTimeout(updateAll, 0);
+    }
+  });
+
+  document.addEventListener("input", function (event) {
+    if (!event.target) return;
+    if (
+      event.target.id === "star-birth-latitude" ||
+      event.target.id === "star-birth-longitude" ||
+      event.target.id === "star-birth-timezone" ||
+      event.target.id === "star-birth-coordinate-label" ||
+      event.target.id === "panchang-latitude" ||
+      event.target.id === "panchang-longitude" ||
+      event.target.id === "panchang-timezone" ||
+      event.target.id === "panchang-coordinate-label"
+    ) {
+      updateAll();
+    }
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateAll, { once: true });
+  } else {
+    updateAll();
+  }
+
+  window.addEventListener("load", updateAll);
+
+  window.drishvaraAg71dR6UpdateLocationBinding = updateAll;
+  window.drishvaraAg71dR6GetLocationBasis = getBasis;
+})();
+/* AG71D_R6_LOCATION_DATA_BINDING_CONTROLLER_END */
 </script>
 
 </body>

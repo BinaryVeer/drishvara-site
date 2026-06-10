@@ -1,0 +1,75 @@
+{
+  "module_id": "AG71D-R6",
+  "title": "Pilot Location Data Binding and Timezone Basis Record",
+  "status": "pilot_location_data_binding_applied",
+  "active_frontend_file": "index.html",
+  "corrections": [
+    "Four pilot location controls now carry latitude, longitude, timezone, location_id, country, type, source status and review status.",
+    "Selected place basis is summarized for Star Reflection and Panchang.",
+    "Coordinate-entry basis is summarized for Star Reflection and Panchang.",
+    "Optional place label is treated as display/reference label only, not as computation basis.",
+    "AG71E can consume window.drishvaraAg71dR6GetLocationBasis(kind)."
+  ],
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "latitude": 27.0844,
+      "longitude": 93.6053,
+      "timezone": "Asia/Kolkata",
+      "country": "India",
+      "location_type": "state_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "latitude": 28.6139,
+      "longitude": 77.209,
+      "timezone": "Asia/Kolkata",
+      "country": "India",
+      "location_type": "national_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "latitude": 23.3441,
+      "longitude": 85.3096,
+      "timezone": "Asia/Kolkata",
+      "country": "India",
+      "location_type": "state_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "latitude": 35.6762,
+      "longitude": 139.6503,
+      "timezone": "Asia/Tokyo",
+      "country": "Japan",
+      "location_type": "national_capital",
+      "source_status": "pilot_coordinate_candidate",
+      "review_status": "approved_for_four_location_pilot"
+    }
+  ],
+  "basis_rules": {
+    "approved_place_basis": "Selected pilot place resolves to location_id, display label, latitude, longitude and timezone.",
+    "coordinate_basis": "User-entered latitude, longitude and timezone form the computation basis; optional place label is display-only.",
+    "timezone_rule": "Selected pilot places resolve timezone automatically. Coordinate mode keeps typed timezone pending later IANA validation.",
+    "future_search_rule": "Searchable picker will return approved database records with coordinates, timezone, source freshness and review status."
+  },
+  "public_runtime_activation_performed": false,
+  "runtime_panchang_computation_performed": false,
+  "runtime_star_reflection_computation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false,
+  "full_location_bank_activation_performed": false
+}
