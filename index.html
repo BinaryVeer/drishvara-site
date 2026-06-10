@@ -4291,6 +4291,58 @@ button[disabled].ag71c-review-action-lock {
 /* AG71D_R3_FORM_INTERACTION_CLEANUP_STYLE_END */
 
 </style>
+<style>
+
+/* AG71D_R4_SELECT_AND_DOB_FINALIZATION_STYLE_START */
+.ag71d-r4-location-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.72rem;
+}
+
+.ag71d-r4-location-option {
+  min-height: 2.55rem;
+  border-radius: 14px;
+  border: 1px solid rgba(182, 208, 233, 0.28);
+  background: rgba(8, 21, 43, 0.58);
+  color: rgba(255, 255, 255, 0.94);
+  padding: 0.58rem 0.72rem;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  pointer-events: auto !important;
+}
+
+.ag71d-r4-location-option[aria-pressed="true"] {
+  border-color: rgba(214, 176, 76, 0.9);
+  background: rgba(214, 176, 76, 0.16);
+  box-shadow: 0 0 0 2px rgba(214, 176, 76, 0.12) inset;
+}
+
+#star-reflection-dob[data-ag71d-r4-date-mask="ddmmyyyy"] {
+  letter-spacing: 0.02em;
+}
+
+.ag71d-method-basis-status {
+  margin: 0.95rem 0 0.75rem;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid rgba(214, 176, 76, 0.28);
+  border-radius: 14px;
+  background: rgba(8, 21, 43, 0.42);
+  color: rgba(220, 226, 238, 0.9);
+  font-size: 0.88rem;
+  line-height: 1.42;
+}
+
+@media (max-width: 720px) {
+  .ag71d-r4-location-options {
+    grid-template-columns: 1fr;
+  }
+}
+/* AG71D_R4_SELECT_AND_DOB_FINALIZATION_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -4665,7 +4717,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <p>Personal input is disabled until consent, privacy and reflection-method governance are complete.</p>
           <div class="form-grid">
             <input id="star-reflection-name" type="text" placeholder="Name" autocomplete="name" data-ag71d-r3-preview-input="star-name" />
-            <input id="star-reflection-dob" type="text" inputmode="numeric" placeholder="Date of Birth (DD/MM/YYYY)" autocomplete="bday" data-ag71d-r3-preview-input="star-dob" />
+            <input id="star-reflection-dob" type="text" inputmode="numeric" maxlength="10" pattern="\\d{2}/\\d{2}/\\d{4}" placeholder="Date of Birth (DD/MM/YYYY)" autocomplete="bday" data-ag71d-r3-preview-input="star-dob" data-ag71d-r4-date-mask="ddmmyyyy" />
             
 
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
@@ -4708,10 +4760,22 @@ Enhancing Public Healthcare Delivery through Digital Innovation
               <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
               <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
             </select>
+            <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_START -->
+            <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="star-reflection" aria-label="Choose Birth Place">
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata">Itanagar</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata">New Delhi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata">Ranchi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo">Tokyo</button>
+            </div>
+            <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_END -->
             <p class="ag71d-place-select-note">Birth-place selection is prepared for pilot validation only. Personalised output remains locked until consent, privacy and reflection-method governance are approved.</p>
           </div>
           <!-- AG71D_STAR_BIRTH_PLACE_SELECT_END -->
 
+
+          <div class="ag71d-method-basis-status" data-ag71d-r4-method-basis-status="true">
+            Reflection basis: Moon-led, Panchanga-supported, location-aware. Personalised interpretation remains locked pending consent and governance review.
+          </div>
 <button class="btn btn-primary" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" class="ag71c-review-action-lock">Reflection Locked Pending Review</button>
           </div>
         </div>
@@ -4765,6 +4829,14 @@ Enhancing Public Healthcare Delivery through Digital Innovation
               <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
               <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot">Tokyo</option>
             </select>
+            <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_START -->
+            <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="panchang" aria-label="Choose Panchang Location">
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata">Itanagar</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata">New Delhi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata">Ranchi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo">Tokyo</button>
+            </div>
+            <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_END -->
             <p class="ag71d-place-select-note">Location selection is prepared for the 4-location pilot only. Exact Panchang output remains withheld until computation and regional-method verification are approved.</p>
           </div>
           <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
@@ -7192,7 +7264,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const button = card.querySelector("button");
     if (button) {
-      button.textContent = star.button_label || "Reflection Method Under Review";
+      const safeButtonLabel = star.button_label && star.button_label !== "Reflection Method Under Review"
+        ? star.button_label
+        : "Reflection Locked Pending Review";
+      button.textContent = safeButtonLabel;
       keepControlDisabled(button);
     }
 
@@ -7956,6 +8031,122 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71dR3BootFormCleanup = boot;
 })();
 /* AG71D_R3_FORM_INTERACTION_CONTROLLER_END */
+</script>
+
+
+<script>
+/* AG71D_R4_SELECT_AND_DOB_FINALIZATION_CONTROLLER_START */
+(function () {
+  var pilotLocations = [{"value": "itanagar-arunachal-pradesh-india", "label": "Itanagar", "location_id": "loc_in_ar_itanagar_capital_complex_001", "timezone": "Asia/Kolkata"}, {"value": "new-delhi-delhi-india", "label": "New Delhi", "location_id": "loc_in_dl_new_delhi_capital_001", "timezone": "Asia/Kolkata"}, {"value": "ranchi-jharkhand-india", "label": "Ranchi", "location_id": "loc_in_jh_ranchi_city_001", "timezone": "Asia/Kolkata"}, {"value": "tokyo-japan", "label": "Tokyo", "location_id": "loc_jp_tokyo_capital_001", "timezone": "Asia/Tokyo"}];
+
+  function getSelectForKind(kind) {
+    return document.getElementById(kind === 'star-reflection' ? 'star-birth-place-select' : 'panchang-place-select');
+  }
+
+  function syncButtons(kind) {
+    var select = getSelectForKind(kind);
+    if (!select) return;
+    document.querySelectorAll('[data-ag71d-r4-select-kind="' + kind + '"]').forEach(function (button) {
+      var active = button.getAttribute('data-ag71d-r4-location-value') === select.value;
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  function setLocation(kind, value) {
+    var select = getSelectForKind(kind);
+    if (!select) return;
+    select.value = value;
+    select.disabled = false;
+    select.removeAttribute('disabled');
+    select.removeAttribute('aria-disabled');
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+    syncButtons(kind);
+  }
+
+  function applyDobMask(value) {
+    var digits = String(value || '').replace(/\D/g, '').slice(0, 8);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 4) return digits.slice(0, 2) + '/' + digits.slice(2);
+    return digits.slice(0, 2) + '/' + digits.slice(2, 4) + '/' + digits.slice(4);
+  }
+
+  function unlockSelectsAndInputs() {
+    [
+      'star-reflection-name',
+      'star-reflection-dob',
+      'star-birth-place-select',
+      'panchang-place-select',
+      'star-birth-latitude',
+      'star-birth-longitude',
+      'star-birth-timezone',
+      'star-birth-coordinate-label',
+      'panchang-latitude',
+      'panchang-longitude',
+      'panchang-timezone',
+      'panchang-coordinate-label'
+    ].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.disabled = false;
+      el.readOnly = false;
+      el.removeAttribute('disabled');
+      el.removeAttribute('readonly');
+      el.removeAttribute('aria-disabled');
+      el.removeAttribute('data-drishvara-ag66b-input-disabled');
+      el.style.pointerEvents = 'auto';
+    });
+
+    var dob = document.getElementById('star-reflection-dob');
+    if (dob) {
+      dob.setAttribute('inputmode', 'numeric');
+      dob.setAttribute('maxlength', '10');
+      dob.setAttribute('pattern', '\\d{2}/\\d{2}/\\d{4}');
+      dob.setAttribute('placeholder', 'Date of Birth (DD/MM/YYYY)');
+      dob.setAttribute('data-ag71d-r4-date-mask', 'ddmmyyyy');
+    }
+  }
+
+  function boot() {
+    unlockSelectsAndInputs();
+    syncButtons('star-reflection');
+    syncButtons('panchang');
+    document.documentElement.setAttribute('data-ag71d-r4-select-dob-finalized', 'true');
+  }
+
+  document.addEventListener('click', function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest('[data-ag71d-r4-location-value]')
+      : null;
+    if (!button) return;
+    setLocation(
+      button.getAttribute('data-ag71d-r4-select-kind'),
+      button.getAttribute('data-ag71d-r4-location-value')
+    );
+  });
+
+  document.addEventListener('change', function (event) {
+    if (!event.target) return;
+    if (event.target.id === 'star-birth-place-select') syncButtons('star-reflection');
+    if (event.target.id === 'panchang-place-select') syncButtons('panchang');
+  });
+
+  document.addEventListener('input', function (event) {
+    if (!event.target || event.target.id !== 'star-reflection-dob') return;
+    var masked = applyDobMask(event.target.value);
+    if (event.target.value !== masked) event.target.value = masked;
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once: true });
+  } else {
+    boot();
+  }
+
+  window.addEventListener('load', boot);
+  window.drishvaraAg71dR4SetLocation = setLocation;
+  window.drishvaraAg71dR4ApplyDobMask = applyDobMask;
+})();
+/* AG71D_R4_SELECT_AND_DOB_FINALIZATION_CONTROLLER_END */
 </script>
 
 </body>

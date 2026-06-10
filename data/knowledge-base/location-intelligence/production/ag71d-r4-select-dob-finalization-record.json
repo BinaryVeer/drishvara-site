@@ -1,0 +1,45 @@
+{
+  "module_id": "AG71D-R4",
+  "title": "Select Control and DOB Mask Finalization Record",
+  "status": "select_control_and_dob_mask_finalized",
+  "active_frontend_file": "index.html",
+  "corrections": [
+    "DOB field now enforces numeric DD/MM/YYYY mask.",
+    "Star Birth Place has selectable pilot-location option buttons linked to star-birth-place-select.",
+    "Panchang Location has selectable pilot-location option buttons linked to panchang-place-select.",
+    "Reflection Method Under Review label is converted to locked governance status.",
+    "Native select ids are preserved for AG64B and AG71D compatibility."
+  ],
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "timezone": "Asia/Tokyo"
+    }
+  ],
+  "public_runtime_activation_performed": false,
+  "runtime_panchang_computation_performed": false,
+  "runtime_star_reflection_computation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false,
+  "full_location_bank_activation_performed": false
+}
