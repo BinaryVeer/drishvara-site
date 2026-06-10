@@ -1,0 +1,18 @@
+{
+  "from_module": "AG71H",
+  "to_module": "AG71I",
+  "transition": "four_location_internal_computation_execution",
+  "allowed_next_actions": [
+    "Create reusable internal computation function/harness",
+    "Execute against 28 AG71H request records",
+    "Validate computed values internally",
+    "Create public-blocked computed four-location bank"
+  ],
+  "blocked_actions": [
+    "Public Panchang output",
+    "Live UI exact value publication",
+    "External Panchang site dependency",
+    "Supabase/backend activation",
+    "Full location bank scale-up"
+  ]
+}

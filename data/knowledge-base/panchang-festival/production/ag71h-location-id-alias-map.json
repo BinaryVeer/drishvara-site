@@ -1,0 +1,24 @@
+{
+  "module_id": "AG71H",
+  "title": "Four-Location Panchang Location ID Alias Map",
+  "status": "location_id_alias_map_created",
+  "purpose": "Allow existing one-location Itanagar AG70 bank to be treated as reference-only while AG71H uses AG71D-R6 canonical pilot location ids.",
+  "canonical_source": "data/knowledge-base/location-intelligence/production/ag71d-r6-pilot-location-data-binding-record.json",
+  "aliases": [
+    {
+      "alias_id": "ag71h_alias_itanagar_legacy_spelling",
+      "legacy_location_id": "loc_in_ar_itangar_capital_complex_001",
+      "canonical_location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "alias_type": "legacy_spelling_correction",
+      "use_allowed_for": "reference_only_existing_ag70_bank",
+      "use_prohibited_for": [
+        "new AG71H computation request ids",
+        "public UI output",
+        "direct runtime join without explicit alias record"
+      ],
+      "review_status": "alias_recorded_not_public_runtime"
+    }
+  ],
+  "direct_rename_performed": false,
+  "public_output_allowed_now": false
+}
