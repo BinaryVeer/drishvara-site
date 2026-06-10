@@ -1,0 +1,62 @@
+{
+  "module_id": "AG71D-R5",
+  "title": "Pilot Selector UI Finalization Record",
+  "status": "pilot_selector_ui_finalized",
+  "active_frontend_file": "index.html",
+  "corrections": [
+    "Native location selects are preserved in DOM for validator/data compatibility but hidden from the visible pilot UI.",
+    "Four pilot location buttons are promoted as the visible selector for Star Reflection and Panchang.",
+    "Selected-location summaries are added for Star Reflection and Panchang.",
+    "Searchable location picker is recorded as the future scale-up path."
+  ],
+  "searchable_location_picker_forward_contract": {
+    "status": "planned_after_pilot_validation",
+    "interaction_pattern": "User types a place name; the picker filters approved database records and shows matching location options as the query is entered.",
+    "minimum_record_fields": [
+      "location_id",
+      "display_label",
+      "country",
+      "admin_level",
+      "latitude",
+      "longitude",
+      "timezone",
+      "source",
+      "source_freshness",
+      "review_status"
+    ],
+    "selection_rule": "Only reviewed or pilot-approved records may be selectable for Panchang or Star Reflection computation.",
+    "fallback_rule": "Coordinate-first input remains available when named location search does not find a user location."
+  },
+  "pilot_locations": [
+    {
+      "value": "itanagar-arunachal-pradesh-india",
+      "label": "Itanagar",
+      "location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "new-delhi-delhi-india",
+      "label": "New Delhi",
+      "location_id": "loc_in_dl_new_delhi_capital_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "ranchi-jharkhand-india",
+      "label": "Ranchi",
+      "location_id": "loc_in_jh_ranchi_city_001",
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "value": "tokyo-japan",
+      "label": "Tokyo",
+      "location_id": "loc_jp_tokyo_capital_001",
+      "timezone": "Asia/Tokyo"
+    }
+  ],
+  "public_runtime_activation_performed": false,
+  "runtime_panchang_computation_performed": false,
+  "runtime_star_reflection_computation_performed": false,
+  "backend_runtime_activated": false,
+  "supabase_activation_performed": false,
+  "full_location_bank_activation_performed": false
+}

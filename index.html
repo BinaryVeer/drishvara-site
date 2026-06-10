@@ -4343,6 +4343,61 @@ button[disabled].ag71c-review-action-lock {
 /* AG71D_R4_SELECT_AND_DOB_FINALIZATION_STYLE_END */
 
 </style>
+<style>
+
+/* AG71D_R5_PILOT_SELECTOR_FINALIZATION_STYLE_START */
+select[data-ag71d-r5-native-select-compat="true"] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+}
+
+.ag71d-r4-location-options {
+  margin-top: 0.25rem;
+}
+
+.ag71d-r4-location-option {
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.ag71d-r4-location-option:hover {
+  border-color: rgba(214, 176, 76, 0.72);
+  transform: translateY(-1px);
+}
+
+.ag71d-r4-location-option[aria-pressed="true"] {
+  color: #fff;
+  border-color: rgba(214, 176, 76, 0.98);
+  background: rgba(214, 176, 76, 0.20);
+}
+
+.ag71d-r5-selection-summary {
+  margin: 0.65rem 0 0;
+  padding: 0.6rem 0.72rem;
+  border-radius: 12px;
+  border: 1px solid rgba(182, 208, 233, 0.18);
+  background: rgba(8, 21, 43, 0.34);
+  color: rgba(220, 226, 238, 0.88);
+  font-size: 0.88rem;
+  line-height: 1.38;
+}
+
+.ag71d-r5-search-forward-note {
+  margin-top: 0.65rem;
+  color: rgba(182, 208, 233, 0.72);
+  font-size: 0.82rem;
+  line-height: 1.38;
+}
+/* AG71D_R5_PILOT_SELECTOR_FINALIZATION_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -4752,8 +4807,8 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
           <!-- AG71D_STAR_BIRTH_PLACE_SELECT_START -->
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="star-reflection">
-            <label class="ag71d-select-label" for="star-birth-place-select">Birth Place</label>
-            <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place">
+            <label class="ag71d-select-label" for="star-birth-place-select">Choose Birth Place</label>
+            <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
               <option value="" selected>Select birth place</option>
                             <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Itanagar</option>
               <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
@@ -4768,6 +4823,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
               <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo">Tokyo</button>
             </div>
             <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_END -->
+            <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="star-reflection">
+              Selected birth place: not selected
+            </p>
+            <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="star-reflection">
+              Future scale-up: search will show matching approved locations from the verified location database as you type.
+            </p>
             <p class="ag71d-place-select-note">Birth-place selection is prepared for pilot validation only. Personalised output remains locked until consent, privacy and reflection-method governance are approved.</p>
           </div>
           <!-- AG71D_STAR_BIRTH_PLACE_SELECT_END -->
@@ -4822,8 +4883,8 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
           <!-- AG71D_PANCHANG_LOCATION_SELECT_START -->
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang">
-            <label class="ag71d-select-label" for="panchang-place-select">Panchang Location</label>
-            <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location">
+            <label class="ag71d-select-label" for="panchang-place-select">Choose Panchang Location</label>
+            <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
                             <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected>Itanagar</option>
               <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">New Delhi</option>
               <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot">Ranchi</option>
@@ -4837,6 +4898,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
               <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo">Tokyo</button>
             </div>
             <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_END -->
+            <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="panchang">
+              Selected Panchang location: Itanagar
+            </p>
+            <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="panchang">
+              Future scale-up: search will show matching approved locations from the verified location database as you type.
+            </p>
             <p class="ag71d-place-select-note">Location selection is prepared for the 4-location pilot only. Exact Panchang output remains withheld until computation and regional-method verification are approved.</p>
           </div>
           <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
@@ -8147,6 +8214,63 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71dR4ApplyDobMask = applyDobMask;
 })();
 /* AG71D_R4_SELECT_AND_DOB_FINALIZATION_CONTROLLER_END */
+</script>
+
+
+<script>
+/* AG71D_R5_PILOT_SELECTOR_FINALIZATION_CONTROLLER_START */
+(function () {
+  function labelForValue(value) {
+    var button = document.querySelector('[data-ag71d-r4-location-value="' + value + '"]');
+    return button ? button.textContent.trim() : "";
+  }
+
+  function updateSummary(kind) {
+    var select = document.getElementById(kind === "star-reflection" ? "star-birth-place-select" : "panchang-place-select");
+    var summary = document.querySelector('[data-ag71d-r5-selection-summary="' + kind + '"]');
+    if (!select || !summary) return;
+
+    var label = labelForValue(select.value);
+    if (kind === "star-reflection") {
+      summary.textContent = label ? "Selected birth place: " + label : "Selected birth place: not selected";
+    } else {
+      summary.textContent = label ? "Selected Panchang location: " + label : "Selected Panchang location: not selected";
+    }
+  }
+
+  function updateAllSummaries() {
+    updateSummary("star-reflection");
+    updateSummary("panchang");
+    document.documentElement.setAttribute("data-ag71d-r5-pilot-selector-finalized", "true");
+  }
+
+  document.addEventListener("click", function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest("[data-ag71d-r4-location-value]")
+      : null;
+    if (!button) return;
+
+    window.setTimeout(function () {
+      updateSummary(button.getAttribute("data-ag71d-r4-select-kind"));
+    }, 0);
+  });
+
+  document.addEventListener("change", function (event) {
+    if (!event.target) return;
+    if (event.target.id === "star-birth-place-select") updateSummary("star-reflection");
+    if (event.target.id === "panchang-place-select") updateSummary("panchang");
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", updateAllSummaries, { once: true });
+  } else {
+    updateAllSummaries();
+  }
+
+  window.addEventListener("load", updateAllSummaries);
+  window.drishvaraAg71dR5UpdatePilotSelectionSummaries = updateAllSummaries;
+})();
+/* AG71D_R5_PILOT_SELECTOR_FINALIZATION_CONTROLLER_END */
 </script>
 
 </body>
