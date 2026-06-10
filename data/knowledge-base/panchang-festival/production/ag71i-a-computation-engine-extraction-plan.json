@@ -1,0 +1,47 @@
+{
+  "module_id": "AG71I-A",
+  "title": "Panchang Computation Engine Extraction Plan",
+  "status": "ag71i_a_engine_extraction_plan_created",
+  "purpose": "Extract AG70K internal Panchang dry-run logic into a reusable engine before executing four-location computation.",
+  "source_logic_file": "scripts/generate-ag70k-internal-panchang-daily-computation-engine-dry-run.mjs",
+  "target_engine_file": "scripts/lib/panchang-internal-dry-run-engine.mjs",
+  "diagnostic_finding": {
+    "ag70k_has_reusable_formula_logic": true,
+    "ag70k_logic_is_embedded_inside_generator": true,
+    "ag70k_hardcoded_timezone_offset_detected": true,
+    "ag71h_request_bank_ready": true,
+    "ag71h_request_record_count": 28
+  },
+  "required_engine_exports": [
+    "timezoneOffsetMinutes",
+    "solarLongitudeTropical",
+    "lunarLongitudeTropical",
+    "ayanamsaLahiriApprox",
+    "astronomicalState",
+    "sunriseSunsetUtcMs",
+    "findBoundary",
+    "computeInternalPanchangRecord",
+    "validateComputedRecord"
+  ],
+  "required_corrections_before_execution": [
+    "Replace hardcoded +05:30 offset with timezone-aware offset handling.",
+    "Support Asia/Kolkata and Asia/Tokyo for the current four-location pilot.",
+    "Use AG71H canonical location_id values only.",
+    "Keep legacy Itangar id only in alias/reference comparison.",
+    "Keep all outputs public-blocked."
+  ],
+  "not_performed_in_this_step": {
+    "engine_file_created": false,
+    "four_location_computation_executed": false,
+    "computed_records_written": false,
+    "ui_exact_values_wired": false,
+    "public_output_activated": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false
+  },
+  "next_step": {
+    "module_id": "AG71I-B",
+    "title": "Create Reusable Timezone-Aware Dry-Run Engine",
+    "instruction": "Create scripts/lib/panchang-internal-dry-run-engine.mjs from AG70K logic with timezone-aware offset handling, then validate exports before execution."
+  }
+}
