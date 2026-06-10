@@ -31,11 +31,20 @@ for (const marker of [
   "function updatePanchangInlineStatus",
   'data-ag71e-r1-panchang-inline-status="true"',
   'data-ag71e-r1-compat-hidden="true"',
-  "Observance lookup is linked to selected basis",
   "overflow-wrap: anywhere",
   "font-family: Arial"
 ]) {
   if (!html.includes(marker)) fail(`index.html missing marker: ${marker}`);
+}
+
+const hasOriginalR1ObservanceMarker = html.includes("Observance lookup is linked to selected basis");
+const hasR2SafeObservanceMarker =
+  html.includes("function findUpcomingObservanceCard()") &&
+  html.includes("Selected basis:") &&
+  html.includes("data-ag71e-r2-upcoming-observance-basis-line");
+
+if (!hasOriginalR1ObservanceMarker && !hasR2SafeObservanceMarker) {
+  fail("index.html missing AG71E-R1/R2 compatible observance basis marker.");
 }
 
 const record = readJson("data/knowledge-base/location-intelligence/production/ag71e-r1-output-consolidation-typography-record.json");

@@ -4599,6 +4599,34 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG71E_R1_OUTPUT_CONSOLIDATION_STYLE_END */
 
 </style>
+<style>
+
+/* AG71E_R2_OBSERVANCE_DOM_TARGETING_FIX_STYLE_START */
+.ag71e-r2-upcoming-observance-basis-line {
+  margin: 0.72rem 0 0;
+  padding: 0.68rem 0.78rem;
+  border-radius: 12px;
+  border: 1px solid rgba(214, 176, 76, 0.26);
+  background: rgba(8, 21, 43, 0.34);
+  color: rgba(220, 226, 238, 0.88);
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 0.84rem;
+  line-height: 1.44;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+[data-ag71e-r2-observance-safe-target="true"] {
+  overflow: hidden;
+}
+
+[data-ag71e-r2-observance-safe-target="true"] * {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* AG71E_R2_OBSERVANCE_DOM_TARGETING_FIX_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -8927,52 +8955,50 @@ document.addEventListener("DOMContentLoaded", () => {
     update("Paksha", "Withheld until verified");
   }
 
+  function findUpcomingObservanceCard() {
+    var headings = Array.prototype.slice.call(document.querySelectorAll("p, span, div, h2, h3, h4"));
+
+    for (var i = 0; i < headings.length; i += 1) {
+      var text = (headings[i].textContent || "").trim();
+      if (text === "Upcoming Observance") {
+        return headings[i].closest(".card, .mini-card, .info-card, .feature-card, section, article, div");
+      }
+    }
+
+    var allNodes = Array.prototype.slice.call(document.querySelectorAll(".card, .mini-card, .info-card, .feature-card, section, article, div"));
+    for (var j = 0; j < allNodes.length; j += 1) {
+      var nodeText = allNodes[j].textContent || "";
+      if (
+        nodeText.indexOf("Upcoming Observance") !== -1 &&
+        nodeText.indexOf("Festival and observance registry") !== -1
+      ) {
+        return allNodes[j];
+      }
+    }
+
+    return null;
+  }
+
   function updateUpcomingObservanceNote(basis) {
     var basisText = basisLabel(basis);
-    var candidates = Array.prototype.slice.call(document.querySelectorAll("article, section, .card, .mini-card, .feature-card, .info-card, div"));
-    var target = null;
+    var card = findUpcomingObservanceCard();
 
-    for (var i = 0; i < candidates.length; i += 1) {
-      var text = candidates[i].textContent || "";
-      if (
-        text.indexOf("Upcoming Observance") !== -1 &&
-        (
-          text.indexOf("Festival and observance registry") !== -1 ||
-          text.indexOf("observance output remains") !== -1 ||
-          text.indexOf("editorial verification") !== -1
-        )
-      ) {
-        target = candidates[i];
-        break;
-      }
+    if (!card) return;
+
+    card.setAttribute("data-ag71e-upcoming-observance-linked", "true");
+    card.setAttribute("data-ag71e-r2-observance-safe-target", "true");
+    card.setAttribute("data-ag71e-location-basis", basisText);
+
+    var line = card.querySelector('[data-ag71e-r2-upcoming-observance-basis-line="true"]');
+
+    if (!line) {
+      line = document.createElement("p");
+      line.className = "ag71e-r2-upcoming-observance-basis-line";
+      line.setAttribute("data-ag71e-r2-upcoming-observance-basis-line", "true");
+      card.appendChild(line);
     }
 
-    if (!target) return;
-
-    target.setAttribute("data-ag71e-upcoming-observance-linked", "true");
-    target.setAttribute("data-ag71e-location-basis", basisText);
-
-    var nodes = Array.prototype.slice.call(target.querySelectorAll("p, span, div"));
-    var main = null;
-    var detail = null;
-
-    for (var j = 0; j < nodes.length; j += 1) {
-      var nodeText = nodes[j].textContent || "";
-      if (!main && nodeText.indexOf("Festival and observance registry") !== -1) {
-        main = nodes[j];
-      }
-      if (!detail && nodeText.indexOf("Dates, regional applicability") !== -1) {
-        detail = nodes[j];
-      }
-    }
-
-    if (main) {
-      main.textContent = "Observance lookup is linked to selected basis: " + basisText + ".";
-    }
-
-    if (detail) {
-      detail.textContent = "Dates, regional applicability and bilingual naming remain under editorial verification until source review is complete.";
-    }
+    line.textContent = "Selected basis: " + basisText + ". Observance dates, regional applicability and bilingual naming remain under editorial verification.";
   }
 
   function updatePanchangInlineStatus(basis) {

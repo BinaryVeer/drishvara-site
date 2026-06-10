@@ -1,0 +1,21 @@
+{
+  "module_id": "AG71E-R2",
+  "title": "Panchang Upcoming Observance DOM Targeting Fix Record",
+  "status": "panchang_observance_dom_targeting_fixed",
+  "active_frontend_file": "index.html",
+  "corrections": [
+    "Upcoming Observance updater no longer uses broad destructive parent-container targeting.",
+    "Updater now finds the observance card at runtime by its heading.",
+    "Updater appends or updates one dedicated basis line without replacing existing content.",
+    "Existing observance card content and surrounding page assets are preserved.",
+    "Panchang preview continues to update the existing Panchang table."
+  ],
+  "boundary": {
+    "public_runtime_activation_performed": false,
+    "runtime_panchang_computation_performed": false,
+    "runtime_star_reflection_computation_performed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "full_location_bank_activation_performed": false
+  }
+}
