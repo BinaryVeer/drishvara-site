@@ -4627,6 +4627,25 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG71E_R2_OBSERVANCE_DOM_TARGETING_FIX_STYLE_END */
 
 </style>
+<style>
+
+/* AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_STYLE_START */
+.ag71f-pilot-safe-output-note {
+  margin: 0.72rem 0 0.95rem;
+  padding: 0.68rem 0.78rem;
+  border-radius: 12px;
+  border: 1px solid rgba(182, 208, 233, 0.18);
+  background: rgba(8, 21, 43, 0.30);
+  color: rgba(220, 226, 238, 0.84);
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 0.84rem;
+  line-height: 1.44;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_STYLE_END */
+
+</style>
 </head>
 <body>
 
@@ -5183,6 +5202,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             </div>
           </div>
           <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_END -->
+          <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_START -->
+          <p class="ag71f-pilot-safe-output-note" data-ag71f-pilot-safe-output-rendering="closed">
+            Pilot-safe preview mode is active. Location and coordinate basis can be previewed, while exact Panchang computation and personalised Star Reflection remain locked pending verification.
+          </p>
+          <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_END -->
+
           <div class="mini-table" data-drishvara-ag60i-panchang-preview-safe="true">
             <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-sunrise">Under verification</span></div>
             <div class="mini-row"><strong>Regional Method</strong><span id="panchang-sunset">Under verification</span></div>
@@ -9042,6 +9067,29 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71ePreviewPanchang = previewPanchang;
 })();
 /* AG71E_PILOT_SUBMIT_OUTPUT_CONTROLLER_END */
+</script>
+
+
+<script>
+/* AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_CONTROLLER_START */
+(function () {
+  function markClosureReady() {
+    document.documentElement.setAttribute("data-ag71f-pilot-safe-output-rendering", "closed");
+    document.documentElement.setAttribute("data-ag71f-runtime-computation", "not-activated");
+    document.documentElement.setAttribute("data-ag71f-star-personalized-output", "locked");
+    document.documentElement.setAttribute("data-ag71f-panchang-exact-values", "withheld");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", markClosureReady, { once: true });
+  } else {
+    markClosureReady();
+  }
+
+  window.addEventListener("load", markClosureReady);
+  window.drishvaraAg71fMarkPilotSafeOutputClosure = markClosureReady;
+})();
+/* AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_CONTROLLER_END */
 </script>
 
 </body>

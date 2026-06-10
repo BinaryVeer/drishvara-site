@@ -1,0 +1,47 @@
+{
+  "module_id": "AG71F",
+  "title": "Pilot-Safe Output Rendering Closure Record",
+  "status": "pilot_safe_output_rendering_closed",
+  "active_frontend_file": "index.html",
+  "closed_behaviour": {
+    "star_reflection": [
+      "Preview Star Reflection button is present.",
+      "Preview panel accepts name, DOB and selected/entered location basis.",
+      "Output is limited to basis acknowledgement and governance-safe reflection status.",
+      "Personalised Star Reflection interpretation remains locked."
+    ],
+    "panchang": [
+      "Preview Panchang button is present.",
+      "Preview updates the existing Panchang output table instead of a duplicate panel.",
+      "Location/date basis can be reflected safely.",
+      "Exact Tithi, Nakshatra, Yoga, Paksha and upcoming observance computation remain withheld."
+    ],
+    "upcoming_observance": [
+      "Upcoming Observance update is non-destructive.",
+      "Selected basis line can be appended without removing surrounding assets.",
+      "Editorial/source verification remains required before public observance output."
+    ]
+  },
+  "location_basis_flow": {
+    "approved_pilot_place": "Selected pilot place resolves to location_id, coordinates, timezone and review status through AG71D-R6.",
+    "coordinate_entry": "User-entered latitude, longitude and timezone form the basis; optional place label remains display-only.",
+    "consumer": "AG71E preview functions consume window.drishvaraAg71dR6GetLocationBasis(kind)."
+  },
+  "next_gate": {
+    "next_module": "AG71G",
+    "purpose": "Actual 4-location Panchang computation test and comparison against verified source/method records.",
+    "preconditions": [
+      "Method verification remains active.",
+      "Regional method and source freshness must be reviewed.",
+      "No full location bank scale-up until 4-location pilot computation passes."
+    ]
+  },
+  "boundary": {
+    "public_runtime_activation_performed": false,
+    "runtime_panchang_computation_performed": false,
+    "runtime_star_reflection_computation_performed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "full_location_bank_activation_performed": false
+  }
+}
