@@ -1,0 +1,40 @@
+{
+  "module_id": "AG71G",
+  "title": "Four-Location Panchang Computation Readiness Bridge",
+  "status": "ag71g_four_location_panchang_computation_readiness_bridge_completed",
+  "classification": "Path B \u2014 engine/banks exist but only as internal dry-run / one-location public-blocked records",
+  "decision": {
+    "direct_ui_computation_wiring_now": false,
+    "direct_public_output_now": false,
+    "four_location_harness_required_next": true,
+    "location_id_normalisation_required": true,
+    "existing_itanagar_bank_reusable_as_reference_only": true
+  },
+  "approved_next_step": {
+    "module_id": "AG71H",
+    "title": "Four-Location Internal Panchang Computation Harness",
+    "scope": [
+      "Consume AG71D-R6 four pilot locations.",
+      "Generate internal-only computed records for the pilot date range.",
+      "Carry canonical location_id, latitude, longitude and timezone.",
+      "Apply existing AG70K/AG70L-style internal dry-run model only if source code/function is discoverable.",
+      "If no reusable function is found, create harness contract and block computation.",
+      "Keep public output blocked."
+    ],
+    "non_goals": [
+      "No public Panchang value publication.",
+      "No live runtime API.",
+      "No external Panchang website dependency.",
+      "No Supabase/backend activation.",
+      "No full location bank activation."
+    ]
+  },
+  "boundary": {
+    "public_runtime_activation_performed": false,
+    "runtime_panchang_computation_performed": false,
+    "runtime_star_reflection_computation_performed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "full_location_bank_activation_performed": false
+  }
+}

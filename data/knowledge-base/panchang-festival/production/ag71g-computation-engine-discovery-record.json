@@ -1,0 +1,65 @@
+{
+  "module_id": "AG71G",
+  "title": "Four-Location Panchang Computation Engine Discovery Record",
+  "status": "ag71g_engine_discovery_completed_path_b",
+  "baseline": "866ae405",
+  "classification": "Path B \u2014 engine/banks exist but only as internal dry-run / one-location public-blocked records",
+  "source_records": {
+    "ag70k": "data/knowledge-base/panchang-festival/production/ag70k-internal-panchang-daily-computation-engine-dry-run.json",
+    "ag70l": "data/knowledge-base/panchang-festival/production/ag70l-computed-panchang-daily-bank-internal-validation.json",
+    "ag70p": "data/knowledge-base/panchang-festival/production/ag70p-panchang-computation-verification-policy.json",
+    "ag71d_r6": "data/knowledge-base/location-intelligence/production/ag71d-r6-pilot-location-data-binding-record.json",
+    "ag71f": "data/knowledge-base/location-intelligence/production/ag71f-pilot-safe-output-rendering-closure-record.json",
+    "existing_daily_bank": "data/knowledge-base/panchang-festival/production/panchang-validated-daily-bank-batch-01-internal.json"
+  },
+  "findings": {
+    "internal_computation_dry_run_exists": true,
+    "internal_validation_exists": true,
+    "existing_computed_location_count": 1,
+    "pilot_location_count": 4,
+    "existing_computation_is_four_location_ready": false,
+    "public_output_allowed_now": false,
+    "ui_runtime_computation_allowed_now": false
+  },
+  "engine_status": {
+    "computation_model_id": "drishvara_internal_panchang_model_v1",
+    "precision_class": "internal_dry_run_preliminary_astronomical_approximation",
+    "ag70k_computed_record_count": 7,
+    "ag70l_passed_record_count": 7,
+    "ag70p_public_output_allowed_now": false,
+    "external_sites_as_runtime_dependency_allowed": false
+  },
+  "root_cause": [
+    "Existing computed Panchang bank is one-location/Itanagar-only.",
+    "AG71D-R6 has four pilot locations: Itanagar, New Delhi, Ranchi and Tokyo.",
+    "Existing computed bank cannot be directly joined to AG71D-R6 because Itanagar location_id spelling differs.",
+    "Public output remains blocked by AG70P and AG71F boundaries."
+  ],
+  "location_id_mismatches": [
+    {
+      "pilot_location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": "loc_in_ar_itangar_capital_complex_001",
+      "classification": "location_id_normalisation_required_before_direct_join"
+    },
+    {
+      "pilot_location_id": "loc_in_dl_new_delhi_capital_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": null,
+      "classification": "location_id_normalisation_required_before_direct_join"
+    },
+    {
+      "pilot_location_id": "loc_in_jh_ranchi_city_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": null,
+      "classification": "location_id_normalisation_required_before_direct_join"
+    },
+    {
+      "pilot_location_id": "loc_jp_tokyo_capital_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": null,
+      "classification": "location_id_normalisation_required_before_direct_join"
+    }
+  ],
+  "next_required_action": "Create AG71H four-location internal computation harness using AG71D-R6 pilot locations, with location-id normalisation and public output blocked."
+}

@@ -1,0 +1,18 @@
+{
+  "from_module": "AG71G",
+  "to_module": "AG71H",
+  "transition": "four_location_computation_harness",
+  "allowed_next_actions": [
+    "Create four-location internal computation harness",
+    "Create location-id alias map",
+    "Generate internal-only pilot records if reusable computation logic is found",
+    "Validate schema and public blocking"
+  ],
+  "blocked_actions": [
+    "Public Panchang output",
+    "Live API/runtime computation",
+    "External Panchang site dependency",
+    "Supabase/backend activation",
+    "Full location bank scale-up"
+  ]
+}

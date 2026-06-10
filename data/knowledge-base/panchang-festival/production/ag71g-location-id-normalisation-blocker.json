@@ -1,0 +1,53 @@
+{
+  "module_id": "AG71G",
+  "title": "Location ID Normalisation Blocker",
+  "status": "location_id_normalisation_blocker_recorded",
+  "blocker_type": "existing_bank_to_pilot_location_join_blocker",
+  "existing_computed_location_ids": [
+    "loc_in_ar_itangar_capital_complex_001"
+  ],
+  "ag71d_r6_pilot_location_ids": [
+    "loc_in_ar_itanagar_capital_complex_001",
+    "loc_in_dl_new_delhi_capital_001",
+    "loc_in_jh_ranchi_city_001",
+    "loc_jp_tokyo_capital_001"
+  ],
+  "mismatches": [
+    {
+      "pilot_location_id": "loc_in_ar_itanagar_capital_complex_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": "loc_in_ar_itangar_capital_complex_001",
+      "classification": "location_id_normalisation_required_before_direct_join"
+    },
+    {
+      "pilot_location_id": "loc_in_dl_new_delhi_capital_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": null,
+      "classification": "location_id_normalisation_required_before_direct_join"
+    },
+    {
+      "pilot_location_id": "loc_in_jh_ranchi_city_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": null,
+      "classification": "location_id_normalisation_required_before_direct_join"
+    },
+    {
+      "pilot_location_id": "loc_jp_tokyo_capital_001",
+      "present_in_existing_computed_bank": false,
+      "possible_existing_bank_variant": null,
+      "classification": "location_id_normalisation_required_before_direct_join"
+    }
+  ],
+  "required_resolution": [
+    "Do not rename old records blindly.",
+    "Create a compatibility/normalisation map first.",
+    "Future AG71H harness must use AG71D-R6 canonical pilot location ids.",
+    "Old Itanagar computed bank may be consumed only through explicit alias mapping."
+  ],
+  "canonical_id_policy": {
+    "canonical_source_for_pilot": "AG71D-R6 pilot location data binding record",
+    "canonical_itanagar_id": "loc_in_ar_itanagar_capital_complex_001",
+    "legacy_variant_detected": "loc_in_ar_itangar_capital_complex_001",
+    "direct_ui_join_allowed_now": false
+  }
+}
