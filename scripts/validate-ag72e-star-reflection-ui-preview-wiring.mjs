@@ -80,7 +80,15 @@ for (const [key, value] of Object.entries(audit.checks || {})) {
 }
 
 const manifest = readJson("data/methodology/star-reflection/star-reflection-method-manifest.json");
-if (manifest.current_status !== "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready") fail("Star Reflection manifest AG72E status mismatch.");
+const allowedManifestStatuses = [
+  "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready",
+  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending"
+];
+
+if (!allowedManifestStatuses.includes(manifest.current_status)) {
+  fail(`Star Reflection manifest AG72E/AG72F status mismatch: ${manifest.current_status}`);
+}
+
 if (manifest.current_counts.ag72e_safe_preview_records !== 5) fail("Manifest must record 5 AG72E safe preview records.");
 
 pass("AG72E Star Reflection UI preview wiring is valid.");

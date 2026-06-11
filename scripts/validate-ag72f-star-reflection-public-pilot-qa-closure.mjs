@@ -46,7 +46,14 @@ if (eRecord.status !== "ag72e_star_reflection_ui_preview_wiring_applied") fail("
 if (eValidation.status !== "ag72e_star_reflection_ui_preview_validation_passed") fail("AG72E validation report status mismatch.");
 if (eValidation.issue_count !== 0) fail("AG72E validation issue count must be zero.");
 if (eAudit.status !== "ag72e_no_personal_data_storage_audit_passed") fail("AG72E no personal data audit status mismatch.");
-if (starManifest.current_status !== "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready") fail("Star Reflection manifest is not AG72F-ready.");
+const allowedManifestStatuses = [
+  "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready",
+  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending"
+];
+
+if (!allowedManifestStatuses.includes(starManifest.current_status)) {
+  fail(`Star Reflection manifest is not AG72F-ready or AG72F-closed: ${starManifest.current_status}`);
+}
 
 for (const marker of [
   "AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_STYLE_START",
