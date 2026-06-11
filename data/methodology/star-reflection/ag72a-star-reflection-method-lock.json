@@ -1,0 +1,35 @@
+{
+  "module_id": "AG72A",
+  "title": "Star Reflection Method Lock",
+  "status": "ag72a_star_reflection_method_locked",
+  "method_basis": {
+    "primary_basis": "moon_led_nakshatra_oriented",
+    "supporting_basis": [
+      "panchanga_supported",
+      "location_timezone_aware",
+      "date_sensitive",
+      "non_deterministic_reflective_guidance"
+    ],
+    "sun_basis_role": "supporting_context_only_not_primary_method",
+    "star_meaning": "nakshatra_lunar_mansion_context_not_generic_star_sign",
+    "default_public_pilot_depth": "day_level_reflection_until_birth_time_and_consent_contract_are_added"
+  },
+  "methodology_decision": {
+    "use_moon_or_sun": "moon_primary_sun_supporting",
+    "use_stars": "yes_as_nakshatra_context_not_western_star_sign_primary",
+    "requires_panchang_foundation": true,
+    "consumes_panchang_location_timezone_foundation": true,
+    "deterministic_prediction_allowed": false,
+    "personalised_assessment_allowed": false,
+    "medical_financial_legal_decision_guidance_allowed": false
+  },
+  "dependencies": {
+    "panchang_pilot_closure": "data/knowledge-base/panchang-festival/production/ag71r-panchang-public-pilot-qa-closure.json",
+    "panchang_pilot_preview_data": "generated/panchang-pilot-preview-data.json"
+  },
+  "next_step": {
+    "module_id": "AG72B",
+    "title": "Star Reflection Computation Contract",
+    "purpose": "Define the computation contract for deriving non-deterministic Star Reflection basis from user input and Panchang/location foundations."
+  }
+}

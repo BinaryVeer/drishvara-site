@@ -1,0 +1,27 @@
+{
+  "module_id": "AG72A",
+  "title": "Star Reflection Safety Boundary",
+  "status": "ag72a_safety_boundary_locked",
+  "allowed_output_style": [
+    "reflective_prompt",
+    "symbolic_context",
+    "non_deterministic_guidance",
+    "general introspective framing"
+  ],
+  "blocked_output_style": [
+    "deterministic prediction",
+    "guaranteed future event",
+    "medical guidance",
+    "financial guidance",
+    "legal guidance",
+    "sensitive profiling",
+    "personality diagnosis",
+    "relationship certainty claim",
+    "career certainty claim"
+  ],
+  "consent_privacy_boundary": {
+    "personalised_interpretation_requires_consent_gate": true,
+    "storage_of_personal_birth_data_without_explicit_policy": false,
+    "public_ui_must_show_reflective_not_predictive_language": true
+  }
+}

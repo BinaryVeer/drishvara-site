@@ -1,0 +1,40 @@
+{
+  "module_id": "AG72A",
+  "title": "Star Reflection Input Basis Map",
+  "status": "ag72a_input_basis_map_created",
+  "current_ui_inputs": {
+    "name": {
+      "element_id": "star-reflection-name",
+      "role": "optional_display_basis_only",
+      "computation_role": "none"
+    },
+    "date_of_birth": {
+      "element_id": "star-reflection-dob",
+      "expected_format": "DD/MM/YYYY",
+      "role": "date_basis",
+      "limitation": "without birth time, only day-level reflection may be produced"
+    },
+    "birth_place_select": {
+      "element_id": "star-birth-place-select",
+      "role": "location_timezone_basis",
+      "source": "four_location_pilot_location_registry"
+    },
+    "birth_coordinates": {
+      "element_ids": [
+        "star-birth-latitude",
+        "star-birth-longitude",
+        "star-birth-timezone",
+        "star-birth-coordinate-label"
+      ],
+      "role": "future_coordinate_basis",
+      "current_status": "accepted_for_basis_preview_only"
+    }
+  },
+  "method_mapping": {
+    "moon_position_context": "primary",
+    "nakshatra_context": "primary_reflective_symbolic_basis",
+    "panchanga_context": "supporting",
+    "sun_position_context": "secondary_supporting_context",
+    "western_sun_sign_context": "not_primary_method"
+  }
+}
