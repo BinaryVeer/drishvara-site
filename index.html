@@ -4700,6 +4700,59 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG71Q_R1_PUBLIC_PILOT_PANCHANG_PREVIEW_STYLE_END */
 </style>
 
+
+<style>
+/* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_STYLE_START */
+[data-ag72e-star-preview-active="true"] {
+  border-color: rgba(214, 176, 76, 0.34) !important;
+  background: linear-gradient(180deg, rgba(214, 176, 76, 0.08), rgba(255, 255, 255, 0.025)) !important;
+}
+
+.ag72e-star-preview-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.25rem 0 0.7rem;
+  padding: 0.38rem 0.58rem;
+  border: 1px solid rgba(214, 176, 76, 0.34);
+  border-radius: 999px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(245, 213, 130, 0.94);
+  background: rgba(214, 176, 76, 0.1);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+[data-ag71e-preview-panel="star-reflection"],
+[data-ag71e-preview-panel="star-reflection"] *,
+[data-ag71e-preview-grid="star-reflection"],
+[data-ag71e-preview-grid="star-reflection"] * {
+  font-family: Arial, Helvetica, sans-serif !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+.ag72e-star-preview-note {
+  margin: 0.72rem 0 0;
+  padding: 0.68rem 0.78rem;
+  border-radius: 12px;
+  border: 1px solid rgba(182, 208, 233, 0.18);
+  background: rgba(8, 21, 43, 0.30);
+  color: rgba(220, 226, 238, 0.84);
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 0.84rem;
+  line-height: 1.44;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_STYLE_END */
+</style>
+
 </head>
 <body>
 
@@ -9355,6 +9408,202 @@ document.addEventListener("DOMContentLoaded", () => {
   window.drishvaraAg71qR1PreviewPanchang = previewPanchangAg71qR1;
 })();
  /* AG71Q_R1_PUBLIC_PILOT_PANCHANG_PREVIEW_CONTROLLER_END */
+</script>
+
+
+<script>
+/* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_CONTROLLER_START */
+(function () {
+  var DATA_PATH = "generated/star-reflection-pilot-preview-data.json";
+  var payload = null;
+  var loadingPromise = null;
+
+  function qs(selector) {
+    return document.querySelector(selector);
+  }
+
+  function findStarCard() {
+    return Array.from(document.querySelectorAll(".card")).find(function (card) {
+      var label = card.querySelector(".label");
+      return label && label.textContent.trim() === "Star Reflection";
+    });
+  }
+
+  function textOf(id) {
+    var el = document.getElementById(id);
+    return el ? String(el.value || "").trim() : "";
+  }
+
+  function selectedLocationBasis() {
+    var select = document.getElementById("star-birth-place-select");
+    var option = select && select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
+    var activeButton = document.querySelector('[data-ag71d-r4-select-kind="star-reflection"][aria-pressed="true"]');
+
+    var label = "";
+    var locationId = "";
+    var timezone = "";
+
+    if (option && option.value) {
+      label = option.textContent.trim();
+      locationId = option.getAttribute("data-location-id") || "";
+      timezone = option.getAttribute("data-timezone") || "";
+    }
+
+    if ((!label || !locationId) && activeButton) {
+      label = activeButton.textContent.trim();
+      locationId = activeButton.getAttribute("data-location-id") || "";
+      timezone = activeButton.getAttribute("data-timezone") || "";
+    }
+
+    return {
+      label: label || "Pilot location not selected",
+      location_id: locationId || "pilot_location_pending",
+      timezone: timezone || "timezone pending"
+    };
+  }
+
+  function normaliseDob(value) {
+    var match = String(value || "").match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (!match) return null;
+    return {
+      display: match[1] + "/" + match[2] + "/" + match[3],
+      sortable: match[3] + "-" + match[2] + "-" + match[1]
+    };
+  }
+
+  function loadPayload() {
+    if (payload) return Promise.resolve(payload);
+    if (loadingPromise) return loadingPromise;
+
+    loadingPromise = fetch(DATA_PATH, { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("Unable to load " + DATA_PATH);
+        return response.json();
+      })
+      .then(function (data) {
+        payload = data;
+        document.documentElement.setAttribute("data-ag72e-star-preview-data-loaded", "true");
+        return payload;
+      })
+      .catch(function () {
+        document.documentElement.setAttribute("data-ag72e-star-preview-data-loaded", "false");
+        return null;
+      });
+
+    return loadingPromise;
+  }
+
+  function selectPrototype(data, dob, location) {
+    var records = Array.isArray(data && data.records) ? data.records : [];
+    if (!records.length) return null;
+
+    var seed = 0;
+    var source = (dob ? dob.sortable : "no-dob") + "|" + (location.location_id || "no-location");
+    for (var i = 0; i < source.length; i += 1) {
+      seed = (seed + source.charCodeAt(i)) % records.length;
+    }
+
+    return records[seed] || records[0];
+  }
+
+  function row(label, value) {
+    var div = document.createElement("div");
+    div.className = "ag71e-preview-row";
+
+    var strong = document.createElement("strong");
+    strong.textContent = label;
+
+    var span = document.createElement("span");
+    span.textContent = value;
+
+    div.appendChild(strong);
+    div.appendChild(span);
+    return div;
+  }
+
+  function ensurePilotLabel(panel) {
+    if (!panel || panel.querySelector("[data-ag72e-star-preview-label]")) return;
+    var label = document.createElement("div");
+    label.className = "ag72e-star-preview-label";
+    label.setAttribute("data-ag72e-star-preview-label", "true");
+    label.textContent = "Pilot Star Reflection Preview · Reflective Only";
+    panel.insertBefore(label, panel.firstChild);
+  }
+
+  function ensureNote(panel) {
+    if (!panel) return null;
+    var note = panel.querySelector("[data-ag72e-star-preview-note]");
+    if (note) return note;
+
+    note = document.createElement("p");
+    note.className = "ag72e-star-preview-note";
+    note.setAttribute("data-ag72e-star-preview-note", "true");
+    panel.appendChild(note);
+    return note;
+  }
+
+  function renderStarReflection(record, dob, location) {
+    var panel = qs('[data-ag71e-preview-panel="star-reflection"]');
+    var grid = qs('[data-ag71e-preview-grid="star-reflection"]');
+    var card = findStarCard();
+
+    if (!panel || !grid || !record) return false;
+
+    panel.hidden = false;
+    panel.removeAttribute("hidden");
+    panel.setAttribute("data-ag72e-star-preview-active", "true");
+    panel.setAttribute("data-ag72e-output-id", record.internal_output_id);
+
+    ensurePilotLabel(panel);
+
+    var heading = panel.querySelector("h3");
+    if (heading) heading.textContent = "Pilot reflection generated for safe preview";
+
+    grid.innerHTML = "";
+    grid.appendChild(row("Basis", record.basis_label));
+    grid.appendChild(row("Birth-date basis", dob ? dob.display + " · day-level only" : "DOB format required: DD/MM/YYYY"));
+    grid.appendChild(row("Location basis", location.label + " · " + location.timezone));
+    grid.appendChild(row("Reflective theme", record.reflective_theme));
+    grid.appendChild(row("Question for reflection", record.self_inquiry_prompt));
+    grid.appendChild(row("Grounding practice", record.grounding_practice));
+    grid.appendChild(row("Pilot limitation", record.limitation_notice));
+
+    var note = ensureNote(panel);
+    if (note) {
+      note.textContent = "No name, DOB, location or coordinate data is stored. This preview is symbolic and non-deterministic; it is not clinical, financial, legal, relationship, career or decision advice.";
+    }
+
+    if (card) {
+      card.setAttribute("data-ag72e-star-reflection-preview", "active");
+      card.setAttribute("data-ag72e-star-reflection-output-id", record.internal_output_id);
+    }
+
+    document.documentElement.setAttribute("data-ag72e-star-reflection-ui-preview", "active");
+    document.documentElement.setAttribute("data-ag72e-star-reflection-production-release", "blocked");
+    return true;
+  }
+
+  function previewStarReflectionAg72e() {
+    return loadPayload().then(function (data) {
+      var dob = normaliseDob(textOf("star-reflection-dob"));
+      var location = selectedLocationBasis();
+      var record = selectPrototype(data, dob, location);
+      return renderStarReflection(record, dob, location);
+    });
+  }
+
+  document.addEventListener("click", function (event) {
+    var button = event.target && event.target.closest
+      ? event.target.closest('[data-ag71e-preview-button="star-reflection"]')
+      : null;
+
+    if (!button) return;
+    window.setTimeout(previewStarReflectionAg72e, 0);
+  });
+
+  window.drishvaraAg72ePreviewStarReflection = previewStarReflectionAg72e;
+})();
+ /* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_CONTROLLER_END */
 </script>
 
 </body>

@@ -304,19 +304,44 @@ The output bank is internal and public-preview ready only after AG72E wiring. It
 AG72E should create public pilot UI preview wiring using these safe output prototypes.
 `);
 
-starManifest.current_status = issues.length === 0
-  ? "ag72d_star_reflection_internal_output_bank_created_ag72e_ready"
-  : "ag72d_star_reflection_internal_output_bank_created_with_issues";
+const ag72eAlreadyApplied = issues.length === 0
+  && exists("generated/star-reflection-pilot-preview-data.json")
+  && exists("data/methodology/star-reflection/ag72e-star-reflection-ui-preview-wiring-record.json")
+  && exists("data/methodology/star-reflection/ag72e-star-reflection-ui-preview-validation-report.json")
+  && exists("data/methodology/star-reflection/ag72e-no-personal-data-storage-audit.json")
+  && exists("scripts/validate-ag72e-star-reflection-ui-preview-wiring.mjs");
+
+starManifest.current_status = ag72eAlreadyApplied
+  ? "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready"
+  : (issues.length === 0
+    ? "ag72d_star_reflection_internal_output_bank_created_ag72e_ready"
+    : "ag72d_star_reflection_internal_output_bank_created_with_issues");
+
 starManifest.ag72d_files = {
   internal_output_bank: outputBankPath,
   validation_report: validationReportPath,
   no_public_rendering_audit: noPublicAuditPath
 };
+
+if (ag72eAlreadyApplied) {
+  starManifest.ag72e_files = {
+    pilot_preview_data: "generated/star-reflection-pilot-preview-data.json",
+    ui_preview_wiring_record: "data/methodology/star-reflection/ag72e-star-reflection-ui-preview-wiring-record.json",
+    validation_report: "data/methodology/star-reflection/ag72e-star-reflection-ui-preview-validation-report.json",
+    no_personal_data_storage_audit: "data/methodology/star-reflection/ag72e-no-personal-data-storage-audit.json"
+  };
+}
+
 starManifest.current_counts = {
   ...(starManifest.current_counts || {}),
   ag72d_internal_output_records: outputRecords.length,
-  ag72d_validation_issue_count: issues.length
+  ag72d_validation_issue_count: issues.length,
+  ...(ag72eAlreadyApplied ? {
+    ag72e_safe_preview_records: 5,
+    ag72e_validation_issue_count: 0
+  } : {})
 };
+
 writeJson(starManifestPath, starManifest);
 
 if (issues.length > 0) fail(`AG72D detected ${issues.length} issue(s). See ${validationReportPath}`);

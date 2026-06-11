@@ -1,0 +1,17 @@
+{
+  "from_module": "AG72E",
+  "to_module": "AG72F",
+  "transition": "star_reflection_public_pilot_qa",
+  "allowed_next_actions": [
+    "Perform browser QA for Star Reflection public pilot preview.",
+    "Check wrapping, labels and safe language.",
+    "Close Star Reflection pilot if QA passes."
+  ],
+  "blocked_actions": [
+    "Deterministic prediction.",
+    "Sensitive profiling.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Personal data storage."
+  ]
+}
