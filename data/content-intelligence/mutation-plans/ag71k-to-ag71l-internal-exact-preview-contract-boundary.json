@@ -1,0 +1,19 @@
+{
+  "from_module": "AG71K",
+  "to_module": "AG71L",
+  "transition": "internal_exact_preview_contract",
+  "allowed_next_actions": [
+    "Create internal-only exact Panchang preview contract.",
+    "Map AG71I-C fields to preview contract fields.",
+    "Keep exact values blocked from public UI.",
+    "Record contract validation."
+  ],
+  "blocked_actions": [
+    "Public Panchang exact-value output.",
+    "Live UI exact-value publication.",
+    "Generated public Panchang file replacement.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Full location-bank scale-up."
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "module_id": "AG71K",
+  "title": "Computed Bank Review Gate",
+  "status": "ag71k_computed_bank_review_gate_passed",
+  "source_validation": "data/knowledge-base/panchang-festival/production/ag71j-four-location-computed-bank-internal-validation.json",
+  "source_issue_report": "data/knowledge-base/panchang-festival/production/ag71j-computed-bank-validation-issue-report.json",
+  "source_computed_bank": "data/knowledge-base/panchang-festival/production/ag71i-c-four-location-computed-panchang-bank-internal.json",
+  "decision": {
+    "internal_computed_bank_accepted_for_next_contract": true,
+    "internal_exact_value_preview_contract_allowed_next": true,
+    "public_exact_value_output_allowed_now": false,
+    "ui_exact_value_wiring_allowed_now": false,
+    "backend_runtime_activation_allowed_now": false,
+    "supabase_activation_allowed_now": false,
+    "full_location_bank_scale_up_allowed_now": false
+  },
+  "review_basis": {
+    "computed_record_count": 28,
+    "location_count": 4,
+    "date_count": 7,
+    "ag71j_issue_count": 0,
+    "no_public_output_validation_passed": true
+  },
+  "next_step": {
+    "module_id": "AG71L",
+    "title": "Internal-only Exact Panchang Preview Contract",
+    "purpose": "Prepare a public-blocked internal exact-value preview contract. No public UI exact-value publication."
+  }
+}
