@@ -1,0 +1,32 @@
+{
+  "module_id": "AG71R",
+  "title": "Browser Manual QA Checklist",
+  "status": "manual_browser_qa_pending_user_confirmation",
+  "checklist": [
+    {
+      "item": "Click Preview Panchang for Itanagar",
+      "expected": "Existing mini-table updates with pilot-labelled values and no duplicate output panel."
+    },
+    {
+      "item": "Click Preview Panchang for New Delhi",
+      "expected": "Existing mini-table updates and location basis changes."
+    },
+    {
+      "item": "Click Preview Panchang for Ranchi",
+      "expected": "Existing mini-table updates and wrapping remains inside card."
+    },
+    {
+      "item": "Click Preview Panchang for Tokyo",
+      "expected": "Existing mini-table updates and timezone basis shows Asia/Tokyo."
+    },
+    {
+      "item": "Check Upcoming Observance",
+      "expected": "It remains separate and shows editorial-verification text, not overwritten as Panchang values."
+    },
+    {
+      "item": "Check mobile or narrow window",
+      "expected": "Mini-table rows wrap cleanly without text overflowing outside the card."
+    }
+  ],
+  "closure_note": "Static QA is passed. Browser manual QA should be confirmed by user screenshots before treating the visual pilot as fully accepted."
+}

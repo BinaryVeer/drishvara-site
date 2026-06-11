@@ -1,0 +1,31 @@
+{
+  "module_id": "AG71R",
+  "title": "Panchang Public Pilot QA & Closure",
+  "status": "ag71r_panchang_public_pilot_qa_static_closure_passed",
+  "source_ag71q_r1_record": "data/knowledge-base/panchang-festival/production/ag71q-r1-public-pilot-panchang-preview-implementation-record.json",
+  "source_pilot_data": "generated/panchang-pilot-preview-data.json",
+  "qa_summary": {
+    "static_qa_passed": true,
+    "pilot_preview_data_record_count": 28,
+    "pilot_location_count": 4,
+    "pilot_date_count": 7,
+    "exact_values_externalized_to_json": true,
+    "exact_values_not_embedded_in_index_html": true,
+    "existing_panchang_mini_table_reused": true,
+    "preview_button_target_present": true,
+    "upcoming_observance_preserved": true,
+    "browser_manual_qa_required_before_public_confidence": true
+  },
+  "panchang_pilot_status": {
+    "pilot_preview_implementation_complete": true,
+    "production_release_complete": false,
+    "full_location_bank_scale_up_complete": false,
+    "backend_runtime_active": false,
+    "supabase_active": false
+  },
+  "next_asset": {
+    "module_id": "AG72A",
+    "title": "Star Reflection Method Lock",
+    "purpose": "Lock Star Reflection basis after Panchang pilot preview foundation is complete."
+  }
+}
