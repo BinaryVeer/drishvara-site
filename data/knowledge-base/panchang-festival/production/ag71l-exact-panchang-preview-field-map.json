@@ -1,0 +1,35 @@
+{
+  "module_id": "AG71L",
+  "title": "Exact Panchang Preview Field Map",
+  "status": "ag71l_exact_preview_field_map_created",
+  "source_computed_bank": "data/knowledge-base/panchang-festival/production/ag71i-c-four-location-computed-panchang-bank-internal.json",
+  "field_map": {
+    "preview_date": "date_key",
+    "preview_location_id": "location_id",
+    "preview_location_label": "display_label",
+    "preview_timezone": "timezone",
+    "preview_timezone_offset_minutes": "timezone_offset_minutes",
+    "preview_snapshot_local": "snapshot_datetime_local",
+    "preview_tithi": "tithi.name",
+    "preview_tithi_index": "tithi.index",
+    "preview_nakshatra": "nakshatra.name",
+    "preview_nakshatra_index": "nakshatra.index",
+    "preview_yoga": "yoga.name",
+    "preview_yoga_index": "yoga.index",
+    "preview_karana": "karana.name",
+    "preview_karana_index": "karana.index",
+    "preview_paksha": "paksha",
+    "preview_vara": "vara",
+    "preview_sun_longitude_sidereal": "sun_longitude_sidereal",
+    "preview_moon_longitude_sidereal": "moon_longitude_sidereal",
+    "preview_moon_sun_angle": "moon_minus_sun_angular_difference",
+    "public_output_allowed": "public_output_allowed",
+    "ui_output_allowed": "ui_output_allowed"
+  },
+  "field_map_policy": {
+    "internal_only": true,
+    "public_blocked": true,
+    "ui_exact_value_blocked": true,
+    "no_index_html_wiring": true
+  }
+}

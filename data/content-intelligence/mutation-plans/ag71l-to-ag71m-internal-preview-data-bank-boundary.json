@@ -1,0 +1,18 @@
+{
+  "from_module": "AG71L",
+  "to_module": "AG71M",
+  "transition": "internal_exact_preview_data_bank",
+  "allowed_next_actions": [
+    "Create internal-only exact preview data bank.",
+    "Map AG71I-C fields into AG71L preview contract fields.",
+    "Validate public/UI blocking."
+  ],
+  "blocked_actions": [
+    "Public Panchang exact-value output.",
+    "Live UI exact-value wiring.",
+    "Generated public Panchang working-data replacement.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Full location-bank scale-up."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "module_id": "AG71L",
+  "title": "Internal-only Exact Panchang Preview Contract",
+  "status": "ag71l_internal_exact_panchang_preview_contract_created",
+  "source_review_gate": "data/knowledge-base/panchang-festival/production/ag71k-computed-bank-review-gate.json",
+  "source_computed_bank": "data/knowledge-base/panchang-festival/production/ag71i-c-four-location-computed-panchang-bank-internal.json",
+  "source_validation": "data/knowledge-base/panchang-festival/production/ag71j-four-location-computed-bank-internal-validation.json",
+  "purpose": "Define a public-blocked internal preview contract for exact Panchang fields after AG71J validation and AG71K review gate.",
+  "contract_scope": {
+    "record_source": "AG71I-C internal computed bank",
+    "record_count": 28,
+    "location_count": 4,
+    "date_count": 7,
+    "allowed_use": [
+      "internal validation",
+      "internal preview data-bank preparation",
+      "field mapping review",
+      "future public-blocked preview test"
+    ],
+    "prohibited_use": [
+      "public Panchang exact-value output",
+      "live UI exact-value publication",
+      "generated public Panchang working-data replacement",
+      "backend runtime activation",
+      "Supabase activation",
+      "full location-bank scale-up"
+    ]
+  },
+  "preview_contract_rules": {
+    "every_record_must_remain_public_blocked": true,
+    "every_record_must_remain_ui_blocked": true,
+    "exact_values_may_be_mapped_only_to_internal_preview_fields": true,
+    "public_generated_file_must_not_be_replaced": true,
+    "index_html_must_not_be_modified_for_exact_values": true,
+    "no_runtime_api": true
+  },
+  "required_exact_fields": [
+    "date_key",
+    "location_id",
+    "display_label",
+    "timezone",
+    "timezone_offset_minutes",
+    "snapshot_datetime_local",
+    "tithi",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "paksha",
+    "vara",
+    "sun_longitude_sidereal",
+    "moon_longitude_sidereal",
+    "moon_minus_sun_angular_difference",
+    "public_output_allowed",
+    "ui_output_allowed"
+  ],
+  "next_step": {
+    "module_id": "AG71M",
+    "title": "Internal Exact Panchang Preview Data Bank",
+    "purpose": "Create a public-blocked internal preview data bank from AG71I-C records using the AG71L contract."
+  }
+}
