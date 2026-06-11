@@ -1,0 +1,18 @@
+{
+  "from_module": "AG71M",
+  "to_module": "AG71N",
+  "transition": "internal_preview_data_bank_review",
+  "allowed_next_actions": [
+    "Review AG71M internal preview data bank.",
+    "Validate exact-preview record completeness.",
+    "Confirm no public-output leakage."
+  ],
+  "blocked_actions": [
+    "Public Panchang exact-value output.",
+    "Live UI exact-value publication.",
+    "Generated public Panchang working-data replacement.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Full location-bank scale-up."
+  ]
+}
