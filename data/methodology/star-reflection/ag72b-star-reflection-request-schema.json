@@ -1,0 +1,50 @@
+{
+  "module_id": "AG72B",
+  "title": "Star Reflection Request Schema",
+  "status": "ag72b_request_schema_created",
+  "schema_version": "ag72b.v1",
+  "required_fields_for_public_pilot": {
+    "date_of_birth": {
+      "type": "string",
+      "format": "DD/MM/YYYY",
+      "validation": "date_format_and_valid_calendar_date_required"
+    },
+    "location_basis": {
+      "type": "object",
+      "allowed_modes": [
+        "pilot_place_select",
+        "coordinate_basis_preview"
+      ],
+      "required_for": "timezone_and_day_level_context"
+    }
+  },
+  "optional_fields": {
+    "name": {
+      "type": "string",
+      "purpose": "display_only",
+      "computation_role": "none"
+    }
+  },
+  "future_fields_not_active_yet": {
+    "birth_time": {
+      "type": "string",
+      "format": "HH:mm",
+      "status": "future_contract_required_before_use"
+    },
+    "consent_token": {
+      "type": "string",
+      "status": "future_privacy_gate_required_before_personalisation"
+    }
+  },
+  "output_basis_record_shape": {
+    "basis_record_id": "string",
+    "date_basis": "YYYY-MM-DD",
+    "location_id": "string",
+    "timezone": "IANA timezone string",
+    "primary_symbolic_basis": "nakshatra_oriented_context",
+    "panchanga_supporting_context": "object",
+    "reflective_theme_keys": "array",
+    "uncertainty_notice": "string",
+    "deterministic_prediction_allowed": false
+  }
+}

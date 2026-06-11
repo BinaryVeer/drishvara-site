@@ -1,0 +1,44 @@
+{
+  "module_id": "AG72B",
+  "title": "Star Reflection Computation Contract",
+  "status": "ag72b_star_reflection_computation_contract_created",
+  "source_method_lock": "data/methodology/star-reflection/ag72a-star-reflection-method-lock.json",
+  "source_input_basis_map": "data/methodology/star-reflection/ag72a-star-reflection-input-basis-map.json",
+  "source_safety_boundary": "data/methodology/star-reflection/ag72a-star-reflection-safety-boundary.json",
+  "source_panchang_dependency": "data/methodology/star-reflection/ag72a-panchang-dependency-consumption-record.json",
+  "computation_scope": {
+    "primary_basis": "moon_led_nakshatra_oriented",
+    "panchanga_supported": true,
+    "location_timezone_aware": true,
+    "sun_context_role": "supporting_context_only",
+    "western_sun_sign_primary": false,
+    "birth_time_required_for_full_precision": true,
+    "public_pilot_without_birth_time": "day_level_reflective_basis_only"
+  },
+  "allowed_computation_outputs": [
+    "basis_record_id",
+    "date_basis",
+    "location_basis",
+    "timezone_basis",
+    "day_level_nakshatra_context",
+    "panchanga_context",
+    "reflective_theme_keys",
+    "uncertainty_notice"
+  ],
+  "blocked_computation_outputs": [
+    "deterministic prediction",
+    "future event guarantee",
+    "sensitive trait inference",
+    "personality diagnosis",
+    "health guidance",
+    "financial guidance",
+    "legal guidance",
+    "relationship certainty",
+    "career certainty"
+  ],
+  "next_step": {
+    "module_id": "AG72C",
+    "title": "Star Reflection Output Doctrine",
+    "purpose": "Define the safe reflective output structure before any internal output bank or UI rendering."
+  }
+}

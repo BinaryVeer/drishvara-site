@@ -1,0 +1,49 @@
+{
+  "module_id": "AG72B",
+  "title": "Star Reflection Basis Resolver Contract",
+  "status": "ag72b_basis_resolver_contract_created",
+  "resolver_flow": [
+    {
+      "step": 1,
+      "name": "collect_public_pilot_inputs",
+      "inputs": [
+        "optional_name",
+        "date_of_birth_dd_mm_yyyy",
+        "birth_place_or_coordinate_basis"
+      ],
+      "output": "normalised_basis_request"
+    },
+    {
+      "step": 2,
+      "name": "resolve_location_timezone",
+      "input": "birth_place_or_coordinate_basis",
+      "output": "location_timezone_basis",
+      "dependency": "AG71 location/timezone pilot foundation"
+    },
+    {
+      "step": 3,
+      "name": "resolve_day_level_panchanga_context",
+      "input": "date_basis + location_timezone_basis",
+      "output": "day_level_panchanga_context",
+      "dependency": "AG71Q-R1 Panchang public pilot preview data / future computation harness"
+    },
+    {
+      "step": 4,
+      "name": "derive_reflective_theme_keys",
+      "input": "nakshatra_oriented_panchanga_context",
+      "output": "non_deterministic_reflective_theme_keys"
+    },
+    {
+      "step": 5,
+      "name": "apply_safety_boundary",
+      "input": "reflective_theme_keys",
+      "output": "safe_reflection_basis_record"
+    }
+  ],
+  "resolver_policy": {
+    "no_birth_time_mode": "day_level_only",
+    "birth_time_mode": "future_contract_required",
+    "exact_personal_prediction": false,
+    "symbolic_reflection_only": true
+  }
+}
