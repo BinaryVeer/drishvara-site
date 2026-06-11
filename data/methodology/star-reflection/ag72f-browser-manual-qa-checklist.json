@@ -1,0 +1,32 @@
+{
+  "module_id": "AG72F",
+  "title": "Browser Manual QA Checklist",
+  "status": "manual_browser_qa_pending_user_confirmation",
+  "checklist": [
+    {
+      "item": "Enter a sample DOB in DD/MM/YYYY format and select Itanagar.",
+      "expected": "Preview Star Reflection updates the existing preview panel with reflective-only output."
+    },
+    {
+      "item": "Select New Delhi, Ranchi and Tokyo one by one.",
+      "expected": "The preview panel remains stable, wraps text properly, and location basis updates."
+    },
+    {
+      "item": "Check duplicate output panels.",
+      "expected": "No duplicate Star Reflection output panel appears."
+    },
+    {
+      "item": "Check safety language.",
+      "expected": "Output remains reflective, non-deterministic and clearly marked as pilot guidance."
+    },
+    {
+      "item": "Check privacy boundary.",
+      "expected": "No name, DOB, location or coordinate storage is indicated or performed."
+    },
+    {
+      "item": "Check locked primary action.",
+      "expected": "The old locked/governance button remains disabled; AG72E preview is still a pilot preview."
+    }
+  ],
+  "closure_note": "Static QA is passed. Browser manual QA should be confirmed by user screenshots before treating the visual pilot as accepted."
+}
