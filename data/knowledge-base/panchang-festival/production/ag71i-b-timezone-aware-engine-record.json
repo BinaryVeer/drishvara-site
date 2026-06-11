@@ -1,0 +1,34 @@
+{
+  "module_id": "AG71I-B",
+  "title": "Timezone-Aware Panchang Dry-Run Engine Record",
+  "status": "ag71i_b_timezone_aware_engine_created",
+  "engine_file": "scripts/lib/panchang-internal-dry-run-engine.mjs",
+  "source_plan": "data/knowledge-base/panchang-festival/production/ag71i-a-computation-engine-extraction-plan.json",
+  "supported_pilot_timezones": [
+    "Asia/Kolkata",
+    "Asia/Tokyo"
+  ],
+  "exports_required": [
+    "timezoneOffsetMinutes",
+    "solarLongitudeTropical",
+    "lunarLongitudeTropical",
+    "ayanamsaLahiriApprox",
+    "astronomicalState",
+    "findBoundary",
+    "computeInternalPanchangRecord",
+    "validateComputedRecord"
+  ],
+  "execution_boundary": {
+    "four_location_request_bank_executed": false,
+    "computed_panchang_bank_written": false,
+    "public_output_activated": false,
+    "ui_exact_values_wired": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false
+  },
+  "next_step": {
+    "module_id": "AG71I-C",
+    "title": "Execute AG71H Request Bank Internally",
+    "instruction": "Use the AG71I-B engine to compute the 28 AG71H request records into an internal-only public-blocked bank."
+  }
+}
