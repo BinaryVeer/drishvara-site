@@ -1,0 +1,18 @@
+{
+  "from_module": "AG71N",
+  "to_module": "AG71O",
+  "transition": "public_blocked_ui_preview_adapter",
+  "allowed_next_actions": [
+    "Create public-blocked UI preview adapter contract.",
+    "Map selected pilot location and date to AG71M preview record identity.",
+    "Validate adapter without public exact-value rendering."
+  ],
+  "blocked_actions": [
+    "Public Panchang exact-value output.",
+    "Live UI exact-value publication.",
+    "Generated public Panchang working-data replacement.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Full location-bank scale-up."
+  ]
+}
