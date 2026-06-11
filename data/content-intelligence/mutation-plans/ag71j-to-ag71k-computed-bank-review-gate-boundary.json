@@ -1,0 +1,17 @@
+{
+  "from_module": "AG71J",
+  "to_module": "AG71K",
+  "transition": "computed_bank_review_gate",
+  "allowed_next_actions": [
+    "Review AG71J validation result",
+    "Prepare internal-only exact-value preview contract if validation passed",
+    "Keep public output blocked"
+  ],
+  "blocked_actions": [
+    "Public Panchang exact-value output",
+    "Unreviewed UI exact-value publication",
+    "Backend runtime activation",
+    "Supabase activation",
+    "Full location-bank scale-up"
+  ]
+}
