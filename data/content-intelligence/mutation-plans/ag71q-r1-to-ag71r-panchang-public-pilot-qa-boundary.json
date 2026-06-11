@@ -1,0 +1,16 @@
+{
+  "from_module": "AG71Q-R1",
+  "to_module": "AG71R",
+  "transition": "panchang_public_pilot_qa",
+  "allowed_next_actions": [
+    "Perform UI QA for four pilot locations.",
+    "Check typography, wrapping and placement.",
+    "Close Panchang pilot if QA passes."
+  ],
+  "blocked_actions": [
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Full location-bank scale-up.",
+    "Unlabelled production Panchang release."
+  ]
+}
