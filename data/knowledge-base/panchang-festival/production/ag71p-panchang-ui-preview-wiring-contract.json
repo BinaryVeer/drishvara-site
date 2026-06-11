@@ -1,0 +1,40 @@
+{
+  "module_id": "AG71P",
+  "title": "Panchang UI Preview Wiring Contract",
+  "status": "ag71p_panchang_ui_preview_wiring_contract_created",
+  "source_adapter_contract": "data/knowledge-base/panchang-festival/production/ag71o-public-blocked-ui-preview-adapter-contract.json",
+  "source_adapter_lookup": "data/knowledge-base/panchang-festival/production/ag71o-public-blocked-ui-preview-adapter-lookup.json",
+  "source_index_file": "index.html",
+  "purpose": "Define controlled wiring between existing Panchang UI selection and AG71O public-blocked adapter records.",
+  "contract_scope": {
+    "adapter_record_count": 28,
+    "pilot_location_count": 4,
+    "pilot_date_count": 7,
+    "index_html_modified_now": false,
+    "exact_values_rendered_now": false,
+    "public_output_allowed_now": false
+  },
+  "wiring_rules": {
+    "selected_location_must_resolve_to_ag71o_adapter_key": true,
+    "selected_date_must_remain_within_pilot_date_bank": true,
+    "output_may_reference_internal_preview_record_id": true,
+    "exact_value_rendering_requires_next_implementation_gate": true,
+    "pilot_label_required": true,
+    "verification_label_required": true,
+    "no_backend_or_supabase": true,
+    "no_full_location_bank_scale_up": true
+  },
+  "blocked_now": [
+    "index.html exact-value mutation",
+    "public exact Panchang value rendering",
+    "generated public Panchang working-data replacement",
+    "backend runtime activation",
+    "Supabase activation",
+    "full location-bank scale-up"
+  ],
+  "next_step": {
+    "module_id": "AG71Q",
+    "title": "Panchang UI Preview Implementation",
+    "purpose": "Implement controlled, pilot-labelled UI preview using AG71O adapter and AG71M preview bank, while preserving public-blocking language."
+  }
+}

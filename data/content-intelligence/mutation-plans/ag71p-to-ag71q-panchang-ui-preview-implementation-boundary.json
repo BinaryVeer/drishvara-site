@@ -1,0 +1,18 @@
+{
+  "from_module": "AG71P",
+  "to_module": "AG71Q",
+  "transition": "panchang_ui_preview_implementation",
+  "allowed_next_actions": [
+    "Modify index.html for controlled pilot preview wiring.",
+    "Resolve selected pilot location/date through AG71O adapter.",
+    "Render pilot-labelled exact preview values in existing Panchang panel.",
+    "Keep upcoming observance separate."
+  ],
+  "blocked_actions": [
+    "Unlabelled public exact-value publication.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Full location-bank scale-up.",
+    "Replacing generated public Panchang working-data as a production source."
+  ]
+}

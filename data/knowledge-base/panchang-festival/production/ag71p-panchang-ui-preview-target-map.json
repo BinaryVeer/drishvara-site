@@ -1,0 +1,39 @@
+{
+  "module_id": "AG71P",
+  "title": "Panchang UI Preview Target Map",
+  "status": "ag71p_panchang_ui_preview_target_map_created",
+  "source_index_file": "index.html",
+  "wiring_targets": [
+    {
+      "ui_area": "panchang_location_selector",
+      "current_marker": "panchang-place-select",
+      "adapter_input": "selected_location_id",
+      "status": "existing_target_confirmed"
+    },
+    {
+      "ui_area": "panchang_preview_action",
+      "current_marker": "Preview Panchang",
+      "adapter_input": "selected_date_key",
+      "status": "existing_target_confirmed"
+    },
+    {
+      "ui_area": "panchang_output_panel",
+      "current_marker": "Panchang & Festival View",
+      "adapter_output": "internal_preview_record_id",
+      "status": "existing_panel_contract_required"
+    },
+    {
+      "ui_area": "upcoming_observance_panel",
+      "current_marker": "Upcoming Observance",
+      "adapter_output": "observance_context_future_gate",
+      "status": "existing_target_confirmed"
+    }
+  ],
+  "implementation_notes": [
+    "Use existing Panchang output area; do not create duplicate floating panels.",
+    "Selected location must map through AG71O adapter lookup.",
+    "Exact values must be labelled as pilot/internal verification preview if rendered in AG71Q.",
+    "Upcoming Observance must not be overwritten by Panchang preview status text.",
+    "Typography and wrapping must be handled in the final UI QA gate."
+  ]
+}
