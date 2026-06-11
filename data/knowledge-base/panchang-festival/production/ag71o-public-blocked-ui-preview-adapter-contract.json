@@ -1,0 +1,32 @@
+{
+  "module_id": "AG71O",
+  "title": "Public-blocked UI Preview Adapter Contract",
+  "status": "ag71o_public_blocked_ui_preview_adapter_contract_created",
+  "source_review": "data/knowledge-base/panchang-festival/production/ag71n-internal-preview-data-bank-review.json",
+  "source_preview_bank": "data/knowledge-base/panchang-festival/production/ag71m-internal-exact-panchang-preview-data-bank.json",
+  "source_field_map": "data/knowledge-base/panchang-festival/production/ag71l-exact-panchang-preview-field-map.json",
+  "purpose": "Define how selected pilot location/date resolves to AG71M internal preview records without public exact-value rendering.",
+  "adapter_scope": {
+    "adapter_record_count": 28,
+    "expected_adapter_record_count": 28,
+    "location_count": 4,
+    "date_count": 7,
+    "public_output_allowed_now": false,
+    "ui_exact_value_rendering_allowed_now": false,
+    "index_html_wiring_performed_now": false,
+    "generated_public_file_replacement_performed_now": false
+  },
+  "resolution_policy": {
+    "input_location_id": "selected pilot location id",
+    "input_date_key": "selected date key",
+    "adapter_key_format": "location_id__YYYY-MM-DD",
+    "output": "internal preview_record_id only",
+    "exact_values_may_be_loaded_by_adapter": false,
+    "exact_values_may_be_rendered_publicly": false
+  },
+  "next_step": {
+    "module_id": "AG71P",
+    "title": "Panchang UI Preview Wiring Contract",
+    "purpose": "Prepare controlled UI wiring for pilot Panchang preview while retaining public-blocking and verification labelling."
+  }
+}
