@@ -4754,6 +4754,70 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_STYLE_END */
 </style>
 
+
+<style>
+/* AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_STYLE_START */
+#star-reflection-birth-time,
+#star-reflection-name,
+#star-reflection-dob {
+  min-height: 2.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(182, 208, 233, 0.28);
+  background: rgba(10, 25, 48, 0.9);
+  color: rgba(255, 255, 255, 0.96);
+  padding: 0.68rem 0.82rem;
+}
+
+.ag73a-birth-time-field {
+  display: grid;
+  gap: 0.38rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.88rem;
+}
+
+.ag73a-birth-time-field span {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ag73a-birth-time-unknown {
+  min-height: 2.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(182, 208, 233, 0.22);
+  background: rgba(8, 21, 43, 0.42);
+  color: rgba(220, 226, 238, 0.9);
+  padding: 0.66rem 0.78rem;
+  display: flex;
+  align-items: center;
+  gap: 0.58rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.ag73a-birth-time-unknown input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #d6b04c;
+}
+
+.ag73a-birth-time-note {
+  grid-column: 1 / -1;
+  margin: -0.1rem 0 0.15rem;
+  color: rgba(182, 194, 215, 0.76);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.42;
+  overflow-wrap: anywhere;
+}
+
+#star-reflection-birth-time[disabled] {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+/* AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_STYLE_END */
+</style>
+
 </head>
 <body>
 
@@ -5129,6 +5193,19 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="form-grid">
             <input id="star-reflection-name" type="text" placeholder="Name" autocomplete="name" data-ag71d-r3-preview-input="star-name" />
             <input id="star-reflection-dob" type="text" inputmode="numeric" maxlength="10" pattern="\\d{2}/\\d{2}/\\d{4}" placeholder="Date of Birth (DD/MM/YYYY)" autocomplete="bday" data-ag71d-r3-preview-input="star-dob" data-ag71d-r4-date-mask="ddmmyyyy" />
+            <!-- AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_START -->
+            <label class="ag73a-birth-time-field" for="star-reflection-birth-time">
+              <span>Birth Time</span>
+              <input id="star-reflection-birth-time" type="text" inputmode="numeric" maxlength="5" pattern="\\d{2}:\\d{2}" placeholder="HH:MM" autocomplete="off" data-ag73a-birth-time-input="true" />
+            </label>
+            <label class="ag73a-birth-time-unknown">
+              <input id="star-birth-time-unknown" type="checkbox" data-ag73a-birth-time-unknown="true" />
+              <span>I don’t know exact birth time</span>
+            </label>
+            <p class="ag73a-birth-time-note" data-ag73a-birth-time-note="true">
+              Birth time is used only for this session-level reflective basis. It is not stored.
+            </p>
+            <!-- AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_END -->
             
 
           <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
@@ -9472,6 +9549,60 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
+  function normaliseBirthTime(value, unknownChecked) {
+    if (unknownChecked) {
+      return {
+        display: "Exact birth time not known",
+        sortable: "unknown-birth-time",
+        precision: "unknown"
+      };
+    }
+
+    var cleaned = String(value || "").trim();
+    var match = cleaned.match(/^(\d{2}):(\d{2})$/);
+    if (!match) {
+      return {
+        display: "Birth time pending - HH:MM",
+        sortable: "birth-time-pending",
+        precision: "pending"
+      };
+    }
+
+    var hour = Number(match[1]);
+    var minute = Number(match[2]);
+
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+      return {
+        display: "Birth time pending - HH:MM",
+        sortable: "birth-time-invalid",
+        precision: "invalid"
+      };
+    }
+
+    return {
+      display: match[1] + ":" + match[2],
+      sortable: match[1] + match[2],
+      precision: "exact_session_only"
+    };
+  }
+
+  function syncBirthTimeUnknownState() {
+    var timeInput = document.getElementById("star-reflection-birth-time");
+    var unknown = document.getElementById("star-birth-time-unknown");
+    if (!timeInput || !unknown) return;
+
+    if (unknown.checked) {
+      timeInput.value = "";
+      timeInput.disabled = true;
+      timeInput.setAttribute("aria-disabled", "true");
+      timeInput.setAttribute("data-ag73a-birth-time-state", "unknown");
+    } else {
+      timeInput.disabled = false;
+      timeInput.removeAttribute("aria-disabled");
+      timeInput.setAttribute("data-ag73a-birth-time-state", "exact_or_pending");
+    }
+  }
+
   function loadPayload() {
     if (payload) return Promise.resolve(payload);
     if (loadingPromise) return loadingPromise;
@@ -9494,12 +9625,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return loadingPromise;
   }
 
-  function selectPrototype(data, dob, location) {
+  function selectPrototype(data, dob, birthTime, location) {
     var records = Array.isArray(data && data.records) ? data.records : [];
     if (!records.length) return null;
 
     var seed = 0;
-    var source = (dob ? dob.sortable : "no-dob") + "|" + (location.location_id || "no-location");
+    var source = (dob ? dob.sortable : "no-dob") + "|" + (birthTime ? birthTime.sortable : "no-birth-time") + "|" + (location.location_id || "no-location");
     for (var i = 0; i < source.length; i += 1) {
       seed = (seed + source.charCodeAt(i)) % records.length;
     }
@@ -9543,7 +9674,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return note;
   }
 
-  function renderStarReflection(record, dob, location) {
+  function renderStarReflection(record, dob, birthTime, location) {
     var panel = qs('[data-ag71e-preview-panel="star-reflection"]');
     var grid = qs('[data-ag71e-preview-grid="star-reflection"]');
     var card = findStarCard();
@@ -9562,7 +9693,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     grid.innerHTML = "";
     grid.appendChild(row("Basis", record.basis_label));
-    grid.appendChild(row("Birth-date basis", dob ? dob.display + " - day-level only" : "DOB format required: DD/MM/YYYY"));
+    grid.appendChild(row("Birth-date basis", dob ? dob.display : "DOB format required: DD/MM/YYYY"));
+    grid.appendChild(row("Birth-time basis", birthTime ? birthTime.display + " - " + birthTime.precision : "Birth time pending - HH:MM"));
     grid.appendChild(row("Location basis", location.label + " - " + location.timezone));
     grid.appendChild(row("Reflective theme", record.reflective_theme));
     grid.appendChild(row("Question for reflection", record.self_inquiry_prompt));
@@ -9571,7 +9703,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var note = ensureNote(panel);
     if (note) {
-      note.textContent = "No name, DOB, location or coordinate data is stored. This preview is symbolic and non-deterministic; it is not clinical, financial, legal, relationship, career or decision advice.";
+      note.textContent = "No name, DOB, birth time, location or coordinate data is stored. This active pilot result is symbolic and non-deterministic; it is not clinical, financial, legal, relationship, career or decision advice.";
     }
 
     if (card) {
@@ -9586,12 +9718,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function previewStarReflectionAg72e() {
     return loadPayload().then(function (data) {
+      syncBirthTimeUnknownState();
       var dob = normaliseDob(textOf("star-reflection-dob"));
+      var birthTime = normaliseBirthTime(textOf("star-reflection-birth-time"), !!(document.getElementById("star-birth-time-unknown") && document.getElementById("star-birth-time-unknown").checked));
       var location = selectedLocationBasis();
-      var record = selectPrototype(data, dob, location);
-      return renderStarReflection(record, dob, location);
+      var record = selectPrototype(data, dob, birthTime, location);
+      return renderStarReflection(record, dob, birthTime, location);
     });
   }
+
+  document.addEventListener("input", function (event) {
+    if (!event.target || event.target.id !== "star-reflection-birth-time") return;
+
+    var digits = String(event.target.value || "").replace(/\D/g, "").slice(0, 4);
+    if (digits.length > 2) {
+      event.target.value = digits.slice(0, 2) + ":" + digits.slice(2);
+    } else {
+      event.target.value = digits;
+    }
+  });
+
+  document.addEventListener("change", function (event) {
+    if (!event.target || event.target.id !== "star-birth-time-unknown") return;
+    syncBirthTimeUnknownState();
+  });
 
   document.addEventListener("click", function (event) {
     var button = event.target && event.target.closest

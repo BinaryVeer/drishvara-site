@@ -1,0 +1,17 @@
+{
+  "from_module": "AG73A",
+  "to_module": "AG73B",
+  "transition": "birth_time_aware_contract",
+  "allowed_next_actions": [
+    "Update Star Reflection contract and schema for birth time.",
+    "Define exact vs unknown birth-time precision.",
+    "Keep session-only computation and no storage boundary."
+  ],
+  "blocked_actions": [
+    "Personal data storage.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Deterministic prediction.",
+    "Sensitive profiling."
+  ]
+}
