@@ -289,6 +289,10 @@ Manual browser QA remains pending. The user should confirm visual behaviour for 
 Star Reflection is statically closed for pilot, with browser manual QA pending.
 `);
 
+const ag73cAlreadyApplied = exists("data/methodology/star-reflection/ag73c-birth-time-aware-star-reflection-output-bank.json")
+  && exists("generated/star-reflection-active-result-data.json")
+  && exists("scripts/validate-ag73c-birth-time-aware-star-reflection-output-bank.mjs");
+
 const ag73bAlreadyApplied = exists("data/methodology/star-reflection/ag73b-birth-time-aware-star-reflection-contract.json")
   && exists("data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json")
   && exists("scripts/validate-ag73b-birth-time-aware-star-reflection-contract.mjs");
@@ -297,11 +301,13 @@ const ag73aAlreadyApplied = exists("data/methodology/star-reflection/ag73a-star-
   && exists("data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-validation-report.json")
   && exists("scripts/validate-ag73a-star-reflection-birth-time-input-surface.mjs");
 
-starManifest.current_status = ag73bAlreadyApplied
-  ? "ag73b_birth_time_aware_contract_created_ag73c_ready"
-  : (ag73aAlreadyApplied
-    ? "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
-    : "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending");
+starManifest.current_status = ag73cAlreadyApplied
+  ? "ag73c_birth_time_aware_output_bank_created_ag73d_ready"
+  : (ag73bAlreadyApplied
+    ? "ag73b_birth_time_aware_contract_created_ag73c_ready"
+    : (ag73aAlreadyApplied
+      ? "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
+      : "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending"));
 
 if (ag73aAlreadyApplied) {
   starManifest.ag73a_files = {
