@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74D",
+  "to_module": "AG74E",
+  "transition": "expanded_location_records_and_static_engine_shell_to_validation_sample_bank",
+  "allowed_next_actions": [
+    "Create static validation sample bank.",
+    "Create generated Panchang validation records for approved locations.",
+    "Create validator for sample-field conformance.",
+    "Prepare AG74F UI data-source switch boundary."
+  ],
+  "blocked_next_actions": [
+    "Final formula production claim",
+    "Backend runtime computation",
+    "Supabase/Auth activation",
+    "Free-coordinate production computation",
+    "Personal data storage"
+  ]
+}

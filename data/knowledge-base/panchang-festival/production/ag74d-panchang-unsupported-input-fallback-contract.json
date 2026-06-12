@@ -1,0 +1,26 @@
+{
+  "module_id": "AG74D",
+  "title": "Panchang Unsupported Input Fallback Contract",
+  "status": "ag74d_unsupported_input_fallback_locked",
+  "fallback_cases": {
+    "unsupported_location": {
+      "calculation_status": "unsupported_location",
+      "public_result_allowed": false,
+      "message": "This location is not yet available in the approved Panchang location set."
+    },
+    "invalid_date": {
+      "calculation_status": "invalid_date",
+      "public_result_allowed": false,
+      "message": "Enter a valid date before generating the Panchang result."
+    },
+    "missing_contract_field": {
+      "calculation_status": "missing_contract_field",
+      "public_result_allowed": false,
+      "message": "This record is missing a required calculation contract field."
+    }
+  },
+  "storage_policy": {
+    "user_input_storage_enabled": false,
+    "coordinate_storage_from_free_text_enabled": false
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "module_id": "AG74D",
+  "title": "Panchang Static Engine Shell",
+  "status": "ag74d_static_engine_shell_locked_ag74e_ready",
+  "engine_name": "drishvara_static_panchang_engine_shell_v1",
+  "implementation_state": "contract_shell_only_no_final_formula_release",
+  "permitted_runtime": {
+    "client_side_static_runtime": true,
+    "backend_runtime": false,
+    "external_ephemeris_api": false,
+    "supabase": false,
+    "service_role": false,
+    "personal_data_storage": false
+  },
+  "exported_engine_steps_for_ag74e": [
+    "normalizeLocalDateKey",
+    "resolveApprovedLocation",
+    "deriveJulianDayBasis",
+    "deriveSolarLongitudePlaceholder",
+    "deriveLunarLongitudePlaceholder",
+    "deriveTithiIndex",
+    "derivePaksha",
+    "deriveNakshatraSegment",
+    "deriveYogaSegment",
+    "deriveKaranaSegment",
+    "deriveSunriseSunsetBasis",
+    "renderGovernedPanchangRecord"
+  ],
+  "implementation_notes": [
+    "AG74D does not publish final astronomical formulas.",
+    "AG74D prepares a static engine shell and data boundary for AG74E validation sample wiring.",
+    "Unsupported free-coordinate computation remains blocked.",
+    "All outputs must carry calculated_under_verification status until later validation gates close."
+  ]
+}
