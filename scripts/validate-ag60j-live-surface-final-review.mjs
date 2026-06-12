@@ -93,7 +93,7 @@ for (const forbidden of [
 
 for (const runtimeKey of [
   "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
-  "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.",
+  "Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.",
   "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.",
   "Reflection Method Under Review",
   "Withheld until verified"

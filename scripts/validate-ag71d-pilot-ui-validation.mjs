@@ -56,7 +56,7 @@ for (const marker of [
   "id=\"panchang-longitude\"",
   "id=\"panchang-timezone\""
 ]) {
-  if (!indexHtml.includes(marker)) fail(`index.html missing marker/field: ${marker}`);
+  if (!indexHtml.includes(marker)) fail(`index.html missing AG71D-R4/AG73E-compatible marker/field: ${marker}`);
 }
 
 for (const marker of [
@@ -67,9 +67,9 @@ for (const marker of [
   "id=\"star-birth-longitude\"",
   "id=\"star-birth-timezone\"",
   "id=\"star-birth-coordinate-label\"",
-  "Reflection Locked Pending Review"
+  "Generate Star Reflection Result"
 ]) {
-  if (!indexHtml.includes(marker)) fail(`index.html missing AG71D final UI correction marker: ${marker}`);
+  if (!indexHtml.includes(marker)) fail(`index.html missing AG71D/AG73E-compatible final UI marker: ${marker}`);
 }
 
 const finalCorrection = readJson("data/knowledge-base/location-intelligence/production/ag71d-final-ui-correction-record.json");
@@ -87,7 +87,7 @@ for (const marker of [
   "id=\"panchang-latitude\"",
   "id=\"panchang-longitude\"",
   "id=\"panchang-timezone\"",
-  "Reflection Locked Pending Review"
+  "Generate Star Reflection Result"
 ]) {
   if (!indexHtml.includes(marker)) fail(`index.html missing AG71D finishing correction marker: ${marker}`);
 }

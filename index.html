@@ -4840,6 +4840,20 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG73D_STAR_REFLECTION_ACTIVE_RESULT_UI_WIRING_END */
 </style>
 
+
+<style>
+/* AG73E_ACTIVE_RESULT_QA_CLOSURE_STYLE_START */
+[data-ag73e-star-active-status="true"] {
+  border-color: rgba(214, 176, 76, 0.36);
+  background: rgba(214, 176, 76, 0.08);
+}
+
+[data-ag73e-asset-status="active"] {
+  border-color: rgba(214, 176, 76, 0.26) !important;
+}
+/* AG73E_ACTIVE_RESULT_QA_CLOSURE_STYLE_END */
+</style>
+
 </head>
 <body>
 
@@ -5211,7 +5225,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="label">Star Reflection</div>
           <p class="section-note star-safety-note">Reflective prompt only; not a personal prediction, assessment, or decision guide.</p>
           <h2>What the stars say about you</h2>
-          <p>Personal input is disabled until consent, privacy and reflection-method governance are complete.</p>
+          <p>Personal input is active for this static reflective result. Inputs are used only in this browser session and are not stored.</p>
           <div class="form-grid">
             <input id="star-reflection-name" type="text" placeholder="Name" autocomplete="name" data-ag71d-r3-preview-input="star-name" />
             <input id="star-reflection-dob" type="text" inputmode="numeric" maxlength="10" pattern="\\d{2}/\\d{2}/\\d{4}" placeholder="Date of Birth (DD/MM/YYYY)" autocomplete="bday" data-ag71d-r3-preview-input="star-dob" data-ag71d-r4-date-mask="ddmmyyyy" />
@@ -5288,7 +5302,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="star-reflection">
               Future scale-up: search will show matching approved locations from the verified location database as you type.
             </p>
-            <p class="ag71d-place-select-note">Birth-place selection is prepared for pilot validation only. Personalised output remains locked until consent, privacy and reflection-method governance are approved.</p>
+            <p class="ag71d-place-select-note">Birth-place selection is active for the static Star Reflection result. Inputs are used only in this browser session and are not stored.</p>
           </div>
           <!-- AG71D_STAR_BIRTH_PLACE_SELECT_END -->
 
@@ -5304,24 +5318,24 @@ Enhancing Public Healthcare Delivery through Digital Innovation
               <h3>Reflection input accepted for pilot review</h3>
               <div class="ag71e-preview-grid" data-ag71e-preview-grid="star-reflection"></div>
               <p class="ag71e-preview-note">
-                Reflective prompt only. This is not a personal prediction, assessment, or decision guide. Personalised interpretation remains locked pending consent and governance approval.
+                Reflective result only. This is not a deterministic prediction, assessment, or decision guide. Name, DOB, birth time and location are not stored.
               </p>
             </div>
           </div>
           <!-- AG71E_STAR_REFLECTION_PREVIEW_OUTPUT_END -->
 
           <div class="ag71d-method-basis-status" data-ag71d-r4-method-basis-status="true">
-            Reflection basis: Moon-led, Panchanga-supported, location-aware. Personalised interpretation remains locked pending consent and governance review.
+            Reflection basis: Moon-led, Panchanga-supported, birth-time-aware and location-aware. Result remains reflective and non-deterministic.
           </div>
-<button class="btn btn-primary" disabled aria-disabled="true" data-drishvara-ag60i-star-input-disabled="true" class="ag71c-review-action-lock">Reflection Locked Pending Review</button>
+<p class="ag71d-method-basis-status" data-ag73e-star-active-status="true">Star Reflection active result is enabled for DOB, birth time and selected birth-place basis. No personal data is stored.</p>
           </div>
         </div>
 
         <div class="card">
           <div class="label">Panchang & Festival View</div>
-          <p class="section-note panchang-safety-note">Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.</p>
+          <p class="section-note panchang-safety-note">Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.</p>
           <h2>Location-based Panchang</h2>
-          <p>Select a place for future Panchang activation. Public values remain withheld until source and regional-method verification is complete.</p>
+          <p>Select a pilot location to view the active calculated Panchang result. Values remain under verification.</p>
 
           
 
@@ -5351,7 +5365,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
                 <input id="panchang-coordinate-label" type="text" placeholder="e.g. Itanagar">
               </label>
             </div>
-            <p class="ag71c-coordinate-note">Coordinate input is prepared for pilot validation only. Exact Panchang values remain withheld until source, regional method and computation verification are approved.</p>
+            <p class="ag71c-coordinate-note">Coordinate input remains prepared for later scale-up. The active Panchang result currently uses approved pilot locations.</p>
           </div>
           
             <p class="ag71d-r6-coordinate-basis-summary" data-ag71d-r6-coordinate-basis-summary="panchang">
@@ -5384,7 +5398,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="panchang">
               Future scale-up: search will show matching approved locations from the verified location database as you type.
             </p>
-            <p class="ag71d-place-select-note">Location selection is prepared for the 4-location pilot only. Exact Panchang output remains withheld until computation and regional-method verification are approved.</p>
+            <p class="ag71d-place-select-note">Location selection is active for approved pilot locations. The active calculated Panchang pilot result remains under verification.</p>
           </div>
           <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
 
@@ -7838,7 +7852,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (button) {
       const safeButtonLabel = star.button_label && star.button_label !== "Reflection Method Under Review"
         ? star.button_label
-        : "Reflection Locked Pending Review";
+        : "Generate Star Reflection Result";
       button.textContent = safeButtonLabel;
       keepControlDisabled(button);
     }

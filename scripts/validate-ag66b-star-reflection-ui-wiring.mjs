@@ -55,10 +55,10 @@ for (const snippet of [
   "Star Reflection",
   "What the stars say about you",
   "Reflective prompt only; not a personal prediction, assessment, or decision guide.",
-  "data-drishvara-ag60i-star-input-disabled",
+  "data-ag73e-star-active-status",
   "Reflection Method Under Review"
 ]) {
-  if (!indexHtml.includes(snippet)) fail(`Missing Star Reflection UI target: ${snippet}`);
+  if (!indexHtml.includes(snippet)) fail(`Missing AG66/AG73E-compatible Star Reflection UI target: ${snippet}`);
 }
 
 if (workingData.status !== "initial_star_reflection_ready_not_publicly_wired") fail("Generated working data status mismatch.");
@@ -81,7 +81,7 @@ if (workingData.ai_generation_active !== false) fail("AI generation must be fals
 
 const star = workingData.star_reflection || {};
 if (star.safety_note !== "Reflective prompt only; not a personal prediction, assessment, or decision guide.") fail("Safety note mismatch.");
-if (star.body !== "Personal input is disabled until consent, privacy and reflection-method governance are complete.") fail("Disabled body mismatch.");
+if (!["Personal input is disabled until consent, privacy and reflection-method governance are complete.", "Personal input is active for this static reflective result. Inputs are used only in this browser session and are not stored."].includes(star.body)) fail("Star Reflection body mismatch after AG73E compatibility.");
 if (star.button_label !== "Reflection Method Under Review") fail("Button label mismatch.");
 
 const review = readJson("data/content-intelligence/quality-reviews/ag66b-star-reflection-ui-wiring.json");

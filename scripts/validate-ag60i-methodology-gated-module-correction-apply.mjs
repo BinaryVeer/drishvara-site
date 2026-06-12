@@ -45,17 +45,17 @@ for (const snippet of [
   "AG60I-METHODOLOGY-GATED-MODULE-CORRECTION",
   "AG60I-FUTURE-AD-PLACEHOLDER-REMOVED",
   "data-drishvara-ag60i-panchang-preview-safe",
-  "data-drishvara-ag60i-star-input-disabled",
+  "data-ag73e-star-active-status",
   "data-drishvara-ag60i-word-methodology-note",
   "Withheld until verified",
   "Reflection Method Under Review"
 ]) {
-  if (!indexHtml.includes(snippet)) fail(`Missing AG60I public correction snippet: ${snippet}`);
+  if (!indexHtml.includes(snippet)) fail(`Missing AG60I/AG73E-compatible public correction snippet: ${snippet}`);
 }
 
 for (const runtimeKey of [
   "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
-  "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.",
+  "Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.",
   "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.",
   "Reflection Method Under Review",
   "Withheld until verified"

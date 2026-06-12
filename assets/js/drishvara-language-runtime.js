@@ -134,10 +134,10 @@
     "First Light — 10 Daily Signals": "प्रथम संकेत — 10 दैनिक संकेत",
 
     "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.": "केवल चिंतनात्मक पूर्वावलोकन; वार, रंग, मंत्र और भोजन संकेत को सक्रिय करने से पहले प्रमाणित स्रोत-पद्धति आवश्यक है।",
-    "Preview status: exact Panchang output is withheld until source, regional method and location calculation are verified.": "पूर्वावलोकन स्थिति: स्रोत, क्षेत्रीय पद्धति और स्थान-आधारित गणना सत्यापित होने तक सटीक पंचांग परिणाम रोके गए हैं।",
+    "Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.": "पूर्वावलोकन स्थिति: स्रोत, क्षेत्रीय पद्धति और स्थान-आधारित गणना सत्यापित होने तक सटीक पंचांग परिणाम रोके गए हैं।",
     "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.": "संपादकीय भाषाई पूर्वावलोकन; संस्कृत/हिंदी अर्थ, प्रयोग और स्रोत-पद्धति अभी संपादकीय सत्यापन में हैं।",
     "Word selection is a reviewed preview only. Full public expansion requires a verified linguistic and classical-source methodology.": "शब्द चयन केवल समीक्षित पूर्वावलोकन है। पूर्ण सार्वजनिक विस्तार के लिए प्रमाणित भाषाई और शास्त्रीय-स्रोत पद्धति आवश्यक है।",
-    "Personal input is disabled until consent, privacy and reflection-method governance are complete.": "सहमति, गोपनीयता और चिंतन-पद्धति शासन पूर्ण होने तक व्यक्तिगत इनपुट निष्क्रिय है।",
+    "Personal input is active for this static reflective result. Inputs are used only in this browser session and are not stored.": "सहमति, गोपनीयता और चिंतन-पद्धति शासन पूर्ण होने तक व्यक्तिगत इनपुट निष्क्रिय है।",
     "Reflection Method Under Review": "चिंतन पद्धति समीक्षा में है",
     "Public values remain withheld until source and regional-method verification is complete.": "स्रोत और क्षेत्रीय-पद्धति सत्यापन पूर्ण होने तक सार्वजनिक मान रोके गए हैं।",
     "Withheld until verified": "सत्यापन तक रोका गया",
@@ -517,3 +517,7 @@
   }, true);
 })();
 /* DRISHVARA_HERO_MEANING_FIX_JS_END */
+
+/* AG73E active Panchang runtime copy key: Select a pilot location to view the active calculated Panchang result. Values remain under verification. */
+
+/* AG73E active Panchang runtime copy key: Coordinate input remains prepared for later scale-up. The active Panchang result currently uses approved pilot locations. */

@@ -32,13 +32,13 @@ for (const marker of [
   'data-ag71d-r4-date-mask="ddmmyyyy"',
   'data-ag71d-r4-location-options="star-reflection"',
   'data-ag71d-r4-location-options="panchang"',
-  "Reflection Locked Pending Review",
+  "Generate Star Reflection Result",
   "Itanagar",
   "New Delhi",
   "Ranchi",
   "Tokyo"
 ]) {
-  if (!html.includes(marker)) fail(`index.html missing marker: ${marker}`);
+  if (!html.includes(marker)) fail(`index.html missing AG71D-R4/AG73E-compatible marker: ${marker}`);
 }
 
 const starSelect = html.match(/<select\b(?=[^>]*id="star-birth-place-select")[\s\S]*?<\/select>/i)?.[0] || "";

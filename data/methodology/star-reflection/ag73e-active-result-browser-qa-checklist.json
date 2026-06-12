@@ -1,0 +1,32 @@
+{
+  "module_id": "AG73E",
+  "title": "Active Result Browser QA Checklist",
+  "status": "manual_browser_qa_pending_user_confirmation",
+  "checklist": [
+    {
+      "path": "star_reflection_exact_hhmm",
+      "steps": "Enter DOB, enter valid HH:MM, choose birth place, generate result.",
+      "expected": "Output shows active reflective result with exact_session_only birth-time basis."
+    },
+    {
+      "path": "star_reflection_unknown_time",
+      "steps": "Enter DOB, tick I don’t know exact birth time, choose birth place, generate result.",
+      "expected": "Output shows exact birth time not known and uses unknown-time basis."
+    },
+    {
+      "path": "star_reflection_pending_invalid_time",
+      "steps": "Enter DOB and leave HH:MM blank or invalid without ticking unknown.",
+      "expected": "Output falls back safely to pending_or_invalid basis."
+    },
+    {
+      "path": "panchang_active_result",
+      "steps": "Select Itanagar, New Delhi, Ranchi and Tokyo in Panchang.",
+      "expected": "Active calculated Panchang pilot result displays for approved pilot locations."
+    },
+    {
+      "path": "privacy_boundary",
+      "steps": "Inspect copy and browser storage/network manually.",
+      "expected": "No personal data storage, backend call, Supabase call or deterministic prediction."
+    }
+  ]
+}

@@ -50,11 +50,11 @@ for (const snippet of [
   "Star Reflection",
   "What the stars say about you",
   "Reflective prompt only; not a personal prediction, assessment, or decision guide.",
-  "Personal input is disabled until consent, privacy and reflection-method governance are complete.",
-  "data-drishvara-ag60i-star-input-disabled",
+  "Personal input is active for this static reflective result. Inputs are used only in this browser session and are not stored.",
+  "data-ag73e-star-active-status",
   "Reflection Method Under Review"
 ]) {
-  if (!indexHtml.includes(snippet)) fail(`Missing Star Reflection UI target: ${snippet}`);
+  if (!indexHtml.includes(snippet)) fail(`Missing AG66/AG73E-compatible Star Reflection UI target: ${snippet}`);
 }
 
 const initial = readJson("data/initial-working-data/star-reflection/ag66a-star-reflection-initial-working-data.json");
@@ -111,7 +111,7 @@ if (generated.ai_generation_active !== false) fail("AI generation must be false.
 
 const star = generated.star_reflection || {};
 if (star.safety_note !== "Reflective prompt only; not a personal prediction, assessment, or decision guide.") fail("Safety note mismatch.");
-if (star.body !== "Personal input is disabled until consent, privacy and reflection-method governance are complete.") fail("Disabled input body mismatch.");
+if (!["Personal input is disabled until consent, privacy and reflection-method governance are complete.", "Personal input is active for this static reflective result. Inputs are used only in this browser session and are not stored."].includes(star.body)) fail("Star Reflection body mismatch after AG73E compatibility.");
 if (star.button_label !== "Reflection Method Under Review") fail("Button label mismatch.");
 
 for (const forbidden of [
