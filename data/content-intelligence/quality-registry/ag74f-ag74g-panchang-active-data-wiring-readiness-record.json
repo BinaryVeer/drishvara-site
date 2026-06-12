@@ -1,0 +1,24 @@
+{
+  "module_id": "AG74F-AG74G",
+  "title": "AG74G Panchang Active Data Wiring Readiness",
+  "status": "ready_for_ag74g_panchang_active_data_wiring",
+  "consumed_records": [
+    "data/knowledge-base/panchang-festival/production/ag74f-panchang-static-engine-result-bank.json",
+    "generated/panchang-static-engine-results.json",
+    "data/knowledge-base/panchang-festival/production/ag74f-panchang-static-lookup-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74f-panchang-fallback-result-fixtures.json",
+    "data/content-intelligence/mutation-plans/ag74f-to-ag74g-panchang-active-data-wiring-boundary.json"
+  ],
+  "readiness_checks": {
+    "ag74e_consumed": true,
+    "static_engine_result_bank_generated": true,
+    "generated_static_results_ready": true,
+    "lookup_contract_locked": true,
+    "fallback_fixtures_locked": true,
+    "public_ui_changed": false,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_data_storage_enabled": false,
+    "live_ephemeris_api_dependency_enabled": false
+  }
+}

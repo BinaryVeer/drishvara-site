@@ -1,0 +1,31 @@
+{
+  "module_id": "AG74F",
+  "title": "Panchang Fallback Result Fixtures",
+  "status": "ag74f_fallback_result_fixtures_locked_ag74g_ready",
+  "fallback_results": [
+    {
+      "fallback_id": "ag74f_unsupported_location",
+      "calculation_status": "unsupported_location",
+      "user_visible_message": "Panchang result is available only for approved locations in this static calculation phase.",
+      "backend_runtime_used": false,
+      "supabase_used": false,
+      "live_api_used": false
+    },
+    {
+      "fallback_id": "ag74f_invalid_date",
+      "calculation_status": "invalid_date",
+      "user_visible_message": "Please select a valid date for Panchang calculation.",
+      "backend_runtime_used": false,
+      "supabase_used": false,
+      "live_api_used": false
+    },
+    {
+      "fallback_id": "ag74f_missing_contract_field",
+      "calculation_status": "missing_contract_field",
+      "user_visible_message": "Panchang result is unavailable because a required static calculation field is missing.",
+      "backend_runtime_used": false,
+      "supabase_used": false,
+      "live_api_used": false
+    }
+  ]
+}

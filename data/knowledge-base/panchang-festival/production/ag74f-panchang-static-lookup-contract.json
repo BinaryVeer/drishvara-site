@@ -1,0 +1,32 @@
+{
+  "module_id": "AG74F",
+  "title": "Panchang Static Lookup Contract",
+  "status": "ag74f_static_lookup_contract_locked_ag74g_ready",
+  "lookup_key": "location_id|local_date_key",
+  "required_inputs": [
+    "location_id",
+    "local_date_key"
+  ],
+  "required_result_fields": [
+    "result_id",
+    "lookup_key",
+    "location_id",
+    "location_label",
+    "timezone",
+    "local_date_key",
+    "tithi",
+    "tithi_index",
+    "paksha",
+    "nakshatra",
+    "yoga",
+    "karana",
+    "calculation_status",
+    "regional_method_note",
+    "authority_status"
+  ],
+  "unsupported_lookup_policy": {
+    "unsupported_location": "Use ag74f_unsupported_location fallback fixture.",
+    "invalid_date": "Use ag74f_invalid_date fallback fixture.",
+    "missing_contract_field": "Use ag74f_missing_contract_field fallback fixture."
+  }
+}

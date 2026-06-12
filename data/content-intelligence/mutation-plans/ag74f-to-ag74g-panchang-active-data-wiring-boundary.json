@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74F",
+  "to_module": "AG74G",
+  "transition": "static_engine_result_generation_to_active_data_wiring",
+  "allowed_next_actions": [
+    "Wire generated static Panchang result data to the active UI controller.",
+    "Preserve unsupported location and invalid date fallback routing.",
+    "Keep AG74A simplified active UI copy.",
+    "Validate no backend, Supabase, storage or live API activation."
+  ],
+  "blocked_next_actions": [
+    "Backend runtime calculation",
+    "Supabase/Auth activation",
+    "Personal profile storage",
+    "Live ephemeris API dependency",
+    "Final production religious authority claim"
+  ]
+}
