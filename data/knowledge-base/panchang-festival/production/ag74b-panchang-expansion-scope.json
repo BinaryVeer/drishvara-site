@@ -1,0 +1,39 @@
+{
+  "module_id": "AG74B",
+  "title": "Panchang Expansion Scope",
+  "status": "ag74b_panchang_expansion_scope_locked_ag74c_ready",
+  "baseline": {
+    "consumed_ag74a": true,
+    "current_asset_state": "active_calculated_static_pilot_result",
+    "current_data_path": "generated/panchang-pilot-preview-data.json"
+  },
+  "expansion_intent": {
+    "objective": "Move Panchang & Festival View from four-location static pilot to governed expanded active calculation coverage.",
+    "first_expansion_mode": "static_client_side_calculation_contract",
+    "public_ui_change_in_ag74b": false,
+    "production_release_enabled_now": false
+  },
+  "expansion_units": {
+    "date_basis": {
+      "supported_input_format": "YYYY-MM-DD internal date key",
+      "required_next_contract": "AG74C must define date normalization, timezone day-boundary handling and invalid-date fallback."
+    },
+    "location_basis": {
+      "supported_mode_now": "approved_location_records",
+      "coordinate_free_text_scale_up": "deferred_until_algorithm_validation",
+      "required_next_contract": "AG74C must define approved location schema, timezone contract, coordinate precision and fallback."
+    },
+    "observance_basis": {
+      "supported_mode_now": "static festival/observance linkage under verification",
+      "required_next_contract": "AG74C must define observance matching keys and regional-method disclaimers."
+    }
+  },
+  "blocked_scope_until_explicit_future_module": [
+    "live ephemeris API dependency",
+    "backend runtime calculation",
+    "Supabase/Auth activation",
+    "personal user profile storage",
+    "unverified custom latitude/longitude production output",
+    "final legal/religious observance authority claim"
+  ]
+}

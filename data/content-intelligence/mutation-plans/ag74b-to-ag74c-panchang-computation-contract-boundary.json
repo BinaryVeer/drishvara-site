@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74B",
+  "to_module": "AG74C",
+  "transition": "panchang_expansion_scope_to_computation_contract",
+  "allowed_next_actions": [
+    "Create Panchang computation contract.",
+    "Create expanded location schema.",
+    "Create exact-value validation sample contract.",
+    "Create generated data/engine preparation boundary."
+  ],
+  "blocked_next_actions": [
+    "Backend runtime activation",
+    "Supabase/Auth activation",
+    "Personal data storage",
+    "Production release claim",
+    "Unsupported free-coordinate production output"
+  ]
+}

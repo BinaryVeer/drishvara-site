@@ -1,0 +1,30 @@
+{
+  "module_id": "AG74B",
+  "title": "Panchang Calculation Doctrine",
+  "status": "ag74b_calculation_doctrine_locked_ag74c_ready",
+  "doctrine_version": "static_active_expansion_v1",
+  "calculation_principles": {
+    "ayanamsha_policy": "Lahiri sidereal method under verification",
+    "tithi_policy": "Moon-Sun angular separation based lunar day classification; exact algorithm and source validation to be contracted in AG74C.",
+    "nakshatra_policy": "Moon longitude segment classification into 27 nakshatras; exact algorithm and source validation to be contracted in AG74C.",
+    "yoga_policy": "Sun + Moon longitude sum segment classification; exact algorithm and source validation to be contracted in AG74C.",
+    "karana_policy": "Half-tithi classification; exact algorithm and exception handling to be contracted in AG74C.",
+    "paksha_policy": "Tithi index derived waxing/waning half-month classification; exact transition handling to be contracted in AG74C.",
+    "sunrise_sunset_policy": "Location/timezone day-boundary aware display; precise astronomical implementation to be contracted in AG74C."
+  },
+  "output_governance": {
+    "output_label": "calculated result under verification",
+    "user_warning_required": false,
+    "long_visible_transition_copy_required": false,
+    "machine_readable_governance_marker_required": true,
+    "regional_variation_note_required_in_records": true
+  },
+  "source_requirements_for_ag74c": [
+    "Define formulas or approved static lookup method.",
+    "Define timezone and local-date contract.",
+    "Define location schema and approved expansion set.",
+    "Define exact-value validation sample contract.",
+    "Define fallback behavior for unsupported dates/locations.",
+    "Confirm no backend/Supabase/storage activation."
+  ]
+}

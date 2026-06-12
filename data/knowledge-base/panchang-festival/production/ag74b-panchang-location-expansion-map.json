@@ -1,0 +1,56 @@
+{
+  "module_id": "AG74B",
+  "title": "Panchang Location Expansion Map",
+  "status": "ag74b_location_expansion_map_created_ag74c_ready",
+  "current_pilot_locations": [
+    {
+      "location_id": "itanagar_in",
+      "label": "Itanagar",
+      "country": "India",
+      "timezone": "Asia/Kolkata",
+      "expansion_role": "northeast_india_reference"
+    },
+    {
+      "location_id": "new_delhi_in",
+      "label": "New Delhi",
+      "country": "India",
+      "timezone": "Asia/Kolkata",
+      "expansion_role": "national_capital_reference"
+    },
+    {
+      "location_id": "ranchi_in",
+      "label": "Ranchi",
+      "country": "India",
+      "timezone": "Asia/Kolkata",
+      "expansion_role": "eastern_india_reference"
+    },
+    {
+      "location_id": "tokyo_jp",
+      "label": "Tokyo",
+      "country": "Japan",
+      "timezone": "Asia/Tokyo",
+      "expansion_role": "international_timezone_reference"
+    }
+  ],
+  "proposed_first_expansion_set": {
+    "india_core": [
+      "Itanagar",
+      "New Delhi",
+      "Ranchi",
+      "Guwahati",
+      "Kolkata",
+      "Mumbai",
+      "Chennai",
+      "Bengaluru",
+      "Varanasi",
+      "Ujjain"
+    ],
+    "international_timezone_references": [
+      "Tokyo",
+      "London",
+      "New York",
+      "Sydney"
+    ]
+  },
+  "ag74c_requirement": "AG74C must convert proposed labels into validated records with coordinates, timezone, country/region and fallback policy."
+}
