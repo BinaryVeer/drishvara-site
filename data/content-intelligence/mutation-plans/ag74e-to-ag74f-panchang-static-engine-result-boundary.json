@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74E",
+  "to_module": "AG74F",
+  "transition": "validation_sample_set_to_static_engine_result_generation",
+  "allowed_next_actions": [
+    "Create static Panchang result data from validation samples.",
+    "Create static lookup engine output contract.",
+    "Create unsupported location/date fallback fixtures.",
+    "Wire generated static result data for controlled validation."
+  ],
+  "blocked_next_actions": [
+    "Backend runtime calculation",
+    "Supabase/Auth activation",
+    "Personal profile storage",
+    "Live ephemeris API dependency",
+    "Final production religious authority claim"
+  ]
+}

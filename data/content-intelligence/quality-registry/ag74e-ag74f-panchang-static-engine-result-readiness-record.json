@@ -1,0 +1,22 @@
+{
+  "module_id": "AG74E-AG74F",
+  "title": "AG74F Panchang Static Engine Result Readiness",
+  "status": "ready_for_ag74f_panchang_static_engine_result_generation",
+  "consumed_records": [
+    "data/knowledge-base/panchang-festival/production/ag74e-panchang-validation-sample-set.json",
+    "data/knowledge-base/panchang-festival/production/ag74e-panchang-validation-sample-method.json",
+    "data/knowledge-base/panchang-festival/production/ag74e-panchang-static-engine-test-plan.json",
+    "generated/panchang-validation-samples.json",
+    "data/content-intelligence/mutation-plans/ag74e-to-ag74f-panchang-static-engine-result-boundary.json"
+  ],
+  "readiness_checks": {
+    "ag74d_consumed": true,
+    "sample_set_locked": true,
+    "generated_samples_ready": true,
+    "static_engine_test_plan_locked": true,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_data_storage_enabled": false,
+    "live_ephemeris_api_dependency_enabled": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "module_id": "AG74E",
+  "title": "Panchang Static Engine Test Plan",
+  "status": "ag74e_static_engine_test_plan_locked_ag74f_ready",
+  "ag74f_test_cases": [
+    {
+      "test_id": "ag74f_sample_lookup_by_location_and_date",
+      "description": "Static engine should return the matching fixture record for approved location id and date key."
+    },
+    {
+      "test_id": "ag74f_required_field_integrity",
+      "description": "Static engine output should include all AG74C required output fields."
+    },
+    {
+      "test_id": "ag74f_unsupported_location_fallback",
+      "description": "Static engine should return governed unsupported-location fallback."
+    },
+    {
+      "test_id": "ag74f_invalid_date_fallback",
+      "description": "Static engine should return governed invalid-date fallback."
+    },
+    {
+      "test_id": "ag74f_no_backend_or_live_api_dependency",
+      "description": "Static engine should not depend on backend, Supabase, Auth, service role or live ephemeris API."
+    }
+  ]
+}

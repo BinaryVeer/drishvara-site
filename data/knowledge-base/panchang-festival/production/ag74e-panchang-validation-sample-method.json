@@ -1,0 +1,20 @@
+{
+  "module_id": "AG74E",
+  "title": "Panchang Validation Sample Method",
+  "status": "ag74e_validation_sample_method_locked",
+  "method": {
+    "purpose": "Provide stable contract fixtures for AG74F static-engine result generation and validator wiring.",
+    "scope": "Field integrity, location/date normalization, fallback routing, and output-shape verification.",
+    "authority_status": "non_authoritative_under_verification",
+    "external_live_api_used": false,
+    "backend_runtime_used": false,
+    "personal_data_used": false
+  },
+  "required_controls": [
+    "Each sample must use an approved expanded location id.",
+    "Each sample must include timezone from approved location records.",
+    "Each sample must include tithi, tithi_index, paksha, nakshatra, yoga and karana.",
+    "Each sample must include calculation_status.",
+    "Each sample must carry non-authoritative regional method note."
+  ]
+}
