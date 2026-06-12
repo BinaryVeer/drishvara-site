@@ -48,11 +48,16 @@ if (eValidation.issue_count !== 0) fail("AG72E validation issue count must be ze
 if (eAudit.status !== "ag72e_no_personal_data_storage_audit_passed") fail("AG72E no personal data audit status mismatch.");
 const allowedManifestStatuses = [
   "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready",
-  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending"
+  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending",
+  "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready",
+  "ag73b_birth_time_aware_contract_created_ag73c_ready",
+  "ag73c_birth_time_aware_output_bank_created_ag73d_ready",
+  "ag73d_star_reflection_active_result_wiring_applied_ag73e_ready",
+  "ag73e_star_reflection_active_result_qa_closed"
 ];
 
 if (!allowedManifestStatuses.includes(starManifest.current_status)) {
-  fail(`Star Reflection manifest is not AG72F-ready or AG72F-closed: ${starManifest.current_status}`);
+  fail(`Star Reflection manifest is not AG72F/AG73-compatible: ${starManifest.current_status}`);
 }
 
 for (const marker of [
@@ -284,7 +289,37 @@ Manual browser QA remains pending. The user should confirm visual behaviour for 
 Star Reflection is statically closed for pilot, with browser manual QA pending.
 `);
 
-starManifest.current_status = "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending";
+const ag73bAlreadyApplied = exists("data/methodology/star-reflection/ag73b-birth-time-aware-star-reflection-contract.json")
+  && exists("data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json")
+  && exists("scripts/validate-ag73b-birth-time-aware-star-reflection-contract.mjs");
+
+const ag73aAlreadyApplied = exists("data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-surface.json")
+  && exists("data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-validation-report.json")
+  && exists("scripts/validate-ag73a-star-reflection-birth-time-input-surface.mjs");
+
+starManifest.current_status = ag73bAlreadyApplied
+  ? "ag73b_birth_time_aware_contract_created_ag73c_ready"
+  : (ag73aAlreadyApplied
+    ? "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
+    : "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending");
+
+if (ag73aAlreadyApplied) {
+  starManifest.ag73a_files = {
+    birth_time_input_surface: "data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-surface.json",
+    validation_report: "data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-validation-report.json",
+    no_storage_audit: "data/methodology/star-reflection/ag73a-birth-time-no-storage-audit.json"
+  };
+}
+
+if (ag73bAlreadyApplied) {
+  starManifest.ag73b_files = {
+    contract: "data/methodology/star-reflection/ag73b-birth-time-aware-star-reflection-contract.json",
+    request_schema: "data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json",
+    precision_policy: "data/methodology/star-reflection/ag73b-birth-time-precision-policy.json",
+    basis_resolver_contract: "data/methodology/star-reflection/ag73b-birth-time-aware-basis-resolver-contract.json",
+    no_storage_contract_audit: "data/methodology/star-reflection/ag73b-birth-time-no-storage-contract-audit.json"
+  };
+}
 starManifest.ag72f_files = {
   qa_closure: qaRecordPath,
   browser_manual_qa_checklist: browserChecklistPath,
