@@ -1,0 +1,17 @@
+{
+  "module_id": "AG74H",
+  "title": "Panchang Unsupported Input UI QA Contract",
+  "status": "ag74h_unsupported_input_ui_qa_contract_locked",
+  "unsupported_input_policy": {
+    "unsupported_location": "show governed fallback",
+    "invalid_date": "show governed fallback",
+    "missing_timezone": "block computation",
+    "missing_coordinates": "block computation"
+  },
+  "blocked_runtime_actions": {
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_data_storage_enabled": false,
+    "live_ephemeris_api_dependency_enabled": false
+  }
+}

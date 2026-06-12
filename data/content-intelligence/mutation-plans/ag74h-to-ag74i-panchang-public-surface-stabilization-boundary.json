@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74H",
+  "to_module": "AG74I",
+  "transition": "panchang_active_ui_qa_to_public_surface_stabilization",
+  "allowed_next_actions": [
+    "Stabilize public Panchang surface labels and helper copy.",
+    "Confirm active static data remains the runtime source.",
+    "Confirm fallback messages remain governed.",
+    "Prepare final QA closure before further expansion."
+  ],
+  "blocked_next_actions": [
+    "Backend runtime calculation",
+    "Supabase/Auth activation",
+    "Personal profile storage",
+    "Live ephemeris API dependency",
+    "Final production religious authority claim"
+  ]
+}

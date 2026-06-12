@@ -1,0 +1,30 @@
+{
+  "module_id": "AG74H",
+  "title": "Panchang Active Browser Render Contract",
+  "status": "ag74h_browser_render_contract_locked",
+  "active_data_source": "generated/panchang-active-static-result-data.json",
+  "required_browser_markers": [
+    "AG74G_PANCHANG_ACTIVE_DATA_WIRING_START",
+    "generated/panchang-active-static-result-data.json",
+    "data-ag74g-panchang-active-data-source"
+  ],
+  "required_render_fields": [
+    "preview_location_label",
+    "preview_timezone",
+    "preview_date",
+    "preview_tithi",
+    "preview_tithi_index",
+    "preview_paksha",
+    "preview_nakshatra",
+    "preview_yoga",
+    "preview_karana",
+    "calculation_status",
+    "authority_status"
+  ],
+  "ui_copy_policy": {
+    "restore_preview_copy": false,
+    "restore_locked_copy": false,
+    "visible_status": "calculated result under verification",
+    "hidden_legacy_marker_allowed": true
+  }
+}

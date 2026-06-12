@@ -1,0 +1,27 @@
+{
+  "module_id": "AG74H",
+  "title": "Panchang Active UI QA Checklist",
+  "status": "ag74h_active_ui_qa_checklist_locked",
+  "checklist": [
+    {
+      "item": "Load Panchang & Festival View and select Itanagar.",
+      "expected": "Renderer consumes AG74G active static result data and shows calculated-under-verification Panchang fields."
+    },
+    {
+      "item": "Select New Delhi and Ranchi.",
+      "expected": "Renderer switches active static result records without falling back to legacy preview-only copy."
+    },
+    {
+      "item": "Select Tokyo.",
+      "expected": "Renderer handles international timezone record from active static result data."
+    },
+    {
+      "item": "Inspect visible Panchang transition copy.",
+      "expected": "Old long pilot/preview/locked text remains absent from the public UI."
+    },
+    {
+      "item": "Inspect unsupported location/date route.",
+      "expected": "Unsupported input remains governed and does not trigger backend/runtime/API calls."
+    }
+  ]
+}
