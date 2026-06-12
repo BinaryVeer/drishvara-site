@@ -4818,6 +4818,28 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_STYLE_END */
 </style>
 
+
+<style>
+/* AG73D_STAR_REFLECTION_ACTIVE_RESULT_UI_WIRING_START */
+[data-ag73d-active-result-id] {
+  box-shadow: 0 0 0 1px rgba(214, 176, 76, 0.10) inset;
+}
+
+[data-ag73d-birth-time-precision="exact_session_only"] .ag72e-star-preview-label {
+  border-color: rgba(214, 176, 76, 0.56);
+}
+
+[data-ag73d-birth-time-precision="unknown"] .ag72e-star-preview-label,
+[data-ag73d-birth-time-precision="pending_or_invalid"] .ag72e-star-preview-label {
+  border-color: rgba(182, 208, 233, 0.28);
+}
+
+[data-ag73d-star-reflection-active-result-id] {
+  outline: 0;
+}
+/* AG73D_STAR_REFLECTION_ACTIVE_RESULT_UI_WIRING_END */
+</style>
+
 </head>
 <body>
 
@@ -5275,10 +5297,10 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <!-- AG71E_STAR_REFLECTION_PREVIEW_OUTPUT_START -->
           <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="star-reflection">
             <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="star-reflection">
-              Preview Star Reflection
+              Generate Star Reflection Result
             </button>
             <div class="ag71e-preview-panel" data-ag71e-preview-panel="star-reflection" hidden>
-              <p class="eyebrow">Today's Star Reflection Preview</p>
+              <p class="eyebrow">Today's Star Reflection Result</p>
               <h3>Reflection input accepted for pilot review</h3>
               <div class="ag71e-preview-grid" data-ag71e-preview-grid="star-reflection"></div>
               <p class="ag71e-preview-note">
@@ -9492,7 +9514,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 /* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_CONTROLLER_START */
 (function () {
-  var DATA_PATH = "generated/star-reflection-pilot-preview-data.json";
+  var DATA_PATH = "generated/star-reflection-active-result-data.json";
   var payload = null;
   var loadingPromise = null;
 
@@ -9564,7 +9586,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return {
         display: "Birth time pending - HH:MM",
         sortable: "birth-time-pending",
-        precision: "pending"
+        precision: "pending_or_invalid"
       };
     }
 
@@ -9575,7 +9597,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return {
         display: "Birth time pending - HH:MM",
         sortable: "birth-time-invalid",
-        precision: "invalid"
+        precision: "pending_or_invalid"
       };
     }
 
@@ -9629,13 +9651,32 @@ document.addEventListener("DOMContentLoaded", () => {
     var records = Array.isArray(data && data.records) ? data.records : [];
     if (!records.length) return null;
 
-    var seed = 0;
-    var source = (dob ? dob.sortable : "no-dob") + "|" + (birthTime ? birthTime.sortable : "no-birth-time") + "|" + (location.location_id || "no-location");
-    for (var i = 0; i < source.length; i += 1) {
-      seed = (seed + source.charCodeAt(i)) % records.length;
+    var precision = birthTime && birthTime.precision ? birthTime.precision : "pending_or_invalid";
+    var eligible = records.filter(function (record) {
+      return record.birth_time_precision === precision;
+    });
+
+    if (!eligible.length && precision === "pending") {
+      eligible = records.filter(function (record) {
+        return record.birth_time_precision === "pending_or_invalid";
+      });
     }
 
-    return records[seed] || records[0];
+    if (!eligible.length && precision === "invalid") {
+      eligible = records.filter(function (record) {
+        return record.birth_time_precision === "pending_or_invalid";
+      });
+    }
+
+    if (!eligible.length) eligible = records;
+
+    var seed = 0;
+    var source = (dob ? dob.sortable : "no-dob") + "|" + (birthTime ? birthTime.sortable : "no-birth-time") + "|" + (location.location_id || "no-location") + "|" + precision;
+    for (var i = 0; i < source.length; i += 1) {
+      seed = (seed + source.charCodeAt(i)) % eligible.length;
+    }
+
+    return eligible[seed] || eligible[0] || records[0];
   }
 
   function row(label, value) {
@@ -9658,7 +9699,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var label = document.createElement("div");
     label.className = "ag72e-star-preview-label";
     label.setAttribute("data-ag72e-star-preview-label", "true");
-    label.textContent = "Pilot Star Reflection Preview - Reflective Only";
+    label.textContent = "Active Star Reflection Result - Reflective Only";
     panel.insertBefore(label, panel.firstChild);
   }
 
@@ -9684,15 +9725,17 @@ document.addEventListener("DOMContentLoaded", () => {
     panel.hidden = false;
     panel.removeAttribute("hidden");
     panel.setAttribute("data-ag72e-star-preview-active", "true");
-    panel.setAttribute("data-ag72e-output-id", record.internal_output_id);
+    panel.setAttribute("data-ag72e-output-id", record.active_result_id || record.internal_output_id || "active-result-pending");
+    panel.setAttribute("data-ag73d-active-result-id", record.active_result_id || "active-result-pending");
+    panel.setAttribute("data-ag73d-birth-time-precision", record.birth_time_precision || "pending_or_invalid");
 
     ensurePilotLabel(panel);
 
     var heading = panel.querySelector("h3");
-    if (heading) heading.textContent = "Pilot reflection generated for safe preview";
+    if (heading) heading.textContent = "Active reflective result generated";
 
     grid.innerHTML = "";
-    grid.appendChild(row("Basis", record.basis_label));
+    grid.appendChild(row("Result basis", record.basis_label));
     grid.appendChild(row("Birth-date basis", dob ? dob.display : "DOB format required: DD/MM/YYYY"));
     grid.appendChild(row("Birth-time basis", birthTime ? birthTime.display + " - " + birthTime.precision : "Birth time pending - HH:MM"));
     grid.appendChild(row("Location basis", location.label + " - " + location.timezone));
@@ -9708,10 +9751,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (card) {
       card.setAttribute("data-ag72e-star-reflection-preview", "active");
-      card.setAttribute("data-ag72e-star-reflection-output-id", record.internal_output_id);
+      card.setAttribute("data-ag72e-star-reflection-output-id", record.active_result_id || record.internal_output_id || "active-result-pending");
+      card.setAttribute("data-ag73d-star-reflection-active-result-id", record.active_result_id || "active-result-pending");
     }
 
     document.documentElement.setAttribute("data-ag72e-star-reflection-ui-preview", "active");
+    document.documentElement.setAttribute("data-ag73d-star-reflection-active-result", "active");
     document.documentElement.setAttribute("data-ag72e-star-reflection-production-release", "blocked");
     return true;
   }

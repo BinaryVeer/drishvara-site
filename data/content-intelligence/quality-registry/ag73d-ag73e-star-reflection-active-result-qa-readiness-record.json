@@ -1,0 +1,14 @@
+{
+  "module_id": "AG73D-AG73E",
+  "title": "AG73E Star Reflection Active Result QA Readiness",
+  "status": "ready_for_ag73e_star_reflection_active_result_qa",
+  "ag73d_consumed": true,
+  "hard_blockers_for_ag73e": [],
+  "qa_requirements": [
+    "Confirm valid HH:MM selects exact-session result.",
+    "Confirm unknown birth time selects unknown-time result.",
+    "Confirm blank/invalid HH:MM uses pending/invalid fallback.",
+    "Confirm no duplicate output panel.",
+    "Confirm no storage/backend/Supabase activation."
+  ]
+}

@@ -52,7 +52,21 @@ if (sectionModel.status !== "ag72c_output_section_model_created") fail("AG72C se
 if (languagePolicy.status !== "ag72c_language_policy_created") fail("AG72C language policy status mismatch.");
 if (templateBank.status !== "ag72c_safe_template_bank_created") fail("AG72C safe template bank status mismatch.");
 if (noPredictionAudit.status !== "ag72c_no_prediction_output_audit_passed") fail("AG72C no-prediction audit status mismatch.");
-if (starManifest.current_status !== "ag72c_star_reflection_output_doctrine_created_ag72d_ready") fail("Star Reflection manifest is not AG72D-ready.");
+const ag72dCompatibleManifestStatuses = [
+  "ag72c_star_reflection_output_doctrine_created_ag72d_ready",
+  "ag72d_star_reflection_internal_output_bank_created_ag72e_ready",
+  "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready",
+  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending",
+  "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready",
+  "ag73b_birth_time_aware_contract_created_ag73c_ready",
+  "ag73c_birth_time_aware_output_bank_created_ag73d_ready",
+  "ag73d_star_reflection_active_result_wiring_applied_ag73e_ready",
+  "ag73e_star_reflection_active_result_qa_closed"
+];
+
+if (!ag72dCompatibleManifestStatuses.includes(starManifest.current_status)) {
+  fail(`Star Reflection manifest is not AG72D/AG73-compatible: ${starManifest.current_status}`);
+}
 
 for (const [key, value] of Object.entries(noPredictionAudit.checks || {})) {
   if (value !== false) fail(`AG72C no-prediction audit check must remain false: ${key}`);
@@ -304,6 +318,26 @@ The output bank is internal and public-preview ready only after AG72E wiring. It
 AG72E should create public pilot UI preview wiring using these safe output prototypes.
 `);
 
+const ag73dAlreadyApplied = issues.length === 0
+  && exists("data/methodology/star-reflection/ag73d-star-reflection-active-result-ui-wiring.json")
+  && exists("data/methodology/star-reflection/ag73d-star-reflection-active-result-ui-validation-report.json")
+  && exists("scripts/validate-ag73d-star-reflection-active-result-ui-wiring.mjs");
+
+const ag73cAlreadyApplied = issues.length === 0
+  && exists("data/methodology/star-reflection/ag73c-birth-time-aware-star-reflection-output-bank.json")
+  && exists("generated/star-reflection-active-result-data.json")
+  && exists("scripts/validate-ag73c-birth-time-aware-star-reflection-output-bank.mjs");
+
+const ag73bAlreadyApplied = issues.length === 0
+  && exists("data/methodology/star-reflection/ag73b-birth-time-aware-star-reflection-contract.json")
+  && exists("data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json")
+  && exists("scripts/validate-ag73b-birth-time-aware-star-reflection-contract.mjs");
+
+const ag73aAlreadyApplied = issues.length === 0
+  && exists("data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-surface.json")
+  && exists("data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-validation-report.json")
+  && exists("scripts/validate-ag73a-star-reflection-birth-time-input-surface.mjs");
+
 const ag72eAlreadyApplied = issues.length === 0
   && exists("generated/star-reflection-pilot-preview-data.json")
   && exists("data/methodology/star-reflection/ag72e-star-reflection-ui-preview-wiring-record.json")
@@ -311,11 +345,63 @@ const ag72eAlreadyApplied = issues.length === 0
   && exists("data/methodology/star-reflection/ag72e-no-personal-data-storage-audit.json")
   && exists("scripts/validate-ag72e-star-reflection-ui-preview-wiring.mjs");
 
-starManifest.current_status = ag72eAlreadyApplied
-  ? "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready"
-  : (issues.length === 0
-    ? "ag72d_star_reflection_internal_output_bank_created_ag72e_ready"
-    : "ag72d_star_reflection_internal_output_bank_created_with_issues");
+starManifest.current_status = ag73dAlreadyApplied
+  ? "ag73d_star_reflection_active_result_wiring_applied_ag73e_ready"
+  : (ag73cAlreadyApplied
+    ? "ag73c_birth_time_aware_output_bank_created_ag73d_ready"
+    : (ag73bAlreadyApplied
+      ? "ag73b_birth_time_aware_contract_created_ag73c_ready"
+      : (ag73aAlreadyApplied
+        ? "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
+        : (ag72eAlreadyApplied
+          ? "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready"
+          : (issues.length === 0
+            ? "ag72d_star_reflection_internal_output_bank_created_ag72e_ready"
+            : "ag72d_star_reflection_internal_output_bank_created_with_issues")))));
+
+if (ag72eAlreadyApplied) {
+  starManifest.ag72e_files = {
+    pilot_preview_data: "generated/star-reflection-pilot-preview-data.json",
+    ui_preview_wiring_record: "data/methodology/star-reflection/ag72e-star-reflection-ui-preview-wiring-record.json",
+    validation_report: "data/methodology/star-reflection/ag72e-star-reflection-ui-preview-validation-report.json",
+    no_personal_data_storage_audit: "data/methodology/star-reflection/ag72e-no-personal-data-storage-audit.json"
+  };
+}
+
+if (ag73aAlreadyApplied) {
+  starManifest.ag73a_files = {
+    birth_time_input_surface: "data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-surface.json",
+    validation_report: "data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-validation-report.json",
+    no_storage_audit: "data/methodology/star-reflection/ag73a-birth-time-no-storage-audit.json"
+  };
+}
+
+if (ag73bAlreadyApplied) {
+  starManifest.ag73b_files = {
+    contract: "data/methodology/star-reflection/ag73b-birth-time-aware-star-reflection-contract.json",
+    request_schema: "data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json",
+    precision_policy: "data/methodology/star-reflection/ag73b-birth-time-precision-policy.json",
+    basis_resolver_contract: "data/methodology/star-reflection/ag73b-birth-time-aware-basis-resolver-contract.json",
+    no_storage_contract_audit: "data/methodology/star-reflection/ag73b-birth-time-no-storage-contract-audit.json"
+  };
+}
+
+if (ag73cAlreadyApplied) {
+  starManifest.ag73c_files = {
+    output_bank: "data/methodology/star-reflection/ag73c-birth-time-aware-star-reflection-output-bank.json",
+    active_result_data: "generated/star-reflection-active-result-data.json",
+    validation_report: "data/methodology/star-reflection/ag73c-birth-time-aware-output-bank-validation-report.json",
+    no_storage_audit: "data/methodology/star-reflection/ag73c-active-result-no-storage-audit.json"
+  };
+}
+
+if (ag73dAlreadyApplied) {
+  starManifest.ag73d_files = {
+    ui_wiring: "data/methodology/star-reflection/ag73d-star-reflection-active-result-ui-wiring.json",
+    validation_report: "data/methodology/star-reflection/ag73d-star-reflection-active-result-ui-validation-report.json",
+    no_storage_ui_audit: "data/methodology/star-reflection/ag73d-active-result-no-storage-ui-audit.json"
+  };
+}
 
 starManifest.ag72d_files = {
   internal_output_bank: outputBankPath,

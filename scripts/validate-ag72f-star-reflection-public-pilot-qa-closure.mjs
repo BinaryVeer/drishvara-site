@@ -71,7 +71,30 @@ for (const marker of [
   "Pilot Star Reflection Preview",
   "Reflective Only"
 ]) {
-  if (!index.includes(marker)) fail(`index.html missing required AG72E/Star marker: ${marker}`);
+  if (!index.includes(marker)) {
+    if (
+      marker === "generated/star-reflection-pilot-preview-data.json" &&
+      index.includes("generated/star-reflection-active-result-data.json")
+    ) {
+      continue;
+    }
+
+    if (
+      marker === "Preview Star Reflection" &&
+      index.includes("Generate Star Reflection Result")
+    ) {
+      continue;
+    }
+
+    if (
+      marker === "Pilot Star Reflection Preview" &&
+      index.includes("Active Star Reflection Result")
+    ) {
+      continue;
+    }
+
+    fail(`index.html missing required AG72E/Star marker: ${marker}`);
+  }
 }
 
 for (const forbidden of [
@@ -289,6 +312,10 @@ Manual browser QA remains pending. The user should confirm visual behaviour for 
 Star Reflection is statically closed for pilot, with browser manual QA pending.
 `);
 
+const ag73dAlreadyApplied = exists("data/methodology/star-reflection/ag73d-star-reflection-active-result-ui-wiring.json")
+  && exists("data/methodology/star-reflection/ag73d-star-reflection-active-result-ui-validation-report.json")
+  && exists("scripts/validate-ag73d-star-reflection-active-result-ui-wiring.mjs");
+
 const ag73cAlreadyApplied = exists("data/methodology/star-reflection/ag73c-birth-time-aware-star-reflection-output-bank.json")
   && exists("generated/star-reflection-active-result-data.json")
   && exists("scripts/validate-ag73c-birth-time-aware-star-reflection-output-bank.mjs");
@@ -301,13 +328,15 @@ const ag73aAlreadyApplied = exists("data/methodology/star-reflection/ag73a-star-
   && exists("data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-validation-report.json")
   && exists("scripts/validate-ag73a-star-reflection-birth-time-input-surface.mjs");
 
-starManifest.current_status = ag73cAlreadyApplied
-  ? "ag73c_birth_time_aware_output_bank_created_ag73d_ready"
-  : (ag73bAlreadyApplied
-    ? "ag73b_birth_time_aware_contract_created_ag73c_ready"
-    : (ag73aAlreadyApplied
-      ? "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
-      : "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending"));
+starManifest.current_status = ag73dAlreadyApplied
+  ? "ag73d_star_reflection_active_result_wiring_applied_ag73e_ready"
+  : (ag73cAlreadyApplied
+    ? "ag73c_birth_time_aware_output_bank_created_ag73d_ready"
+    : (ag73bAlreadyApplied
+      ? "ag73b_birth_time_aware_contract_created_ag73c_ready"
+      : (ag73aAlreadyApplied
+        ? "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
+        : "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending")));
 
 if (ag73aAlreadyApplied) {
   starManifest.ag73a_files = {

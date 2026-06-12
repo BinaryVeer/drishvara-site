@@ -45,7 +45,16 @@ for (const marker of [
   'data-ag71e-preview-panel="star-reflection"',
   'data-ag71e-preview-grid="star-reflection"'
 ]) {
-  if (!index.includes(marker)) fail(`index.html missing AG72E marker: ${marker}`);
+  if (!index.includes(marker)) {
+    if (
+      marker === "generated/star-reflection-pilot-preview-data.json" &&
+      index.includes("generated/star-reflection-active-result-data.json")
+    ) {
+      continue;
+    }
+
+    fail(`index.html missing AG72E marker: ${marker}`);
+  }
 }
 
 for (const forbidden of [
@@ -82,7 +91,12 @@ for (const [key, value] of Object.entries(audit.checks || {})) {
 const manifest = readJson("data/methodology/star-reflection/star-reflection-method-manifest.json");
 const allowedManifestStatuses = [
   "ag72e_star_reflection_ui_preview_wiring_applied_ag72f_ready",
-  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending"
+  "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending",
+  "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready",
+  "ag73b_birth_time_aware_contract_created_ag73c_ready",
+  "ag73c_birth_time_aware_output_bank_created_ag73d_ready",
+  "ag73d_star_reflection_active_result_wiring_applied_ag73e_ready",
+  "ag73e_star_reflection_active_result_qa_closed"
 ];
 
 if (!allowedManifestStatuses.includes(manifest.current_status)) {
