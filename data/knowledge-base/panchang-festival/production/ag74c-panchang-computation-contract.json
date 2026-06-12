@@ -1,0 +1,91 @@
+{
+  "module_id": "AG74C",
+  "title": "Panchang Computation Contract",
+  "status": "ag74c_panchang_computation_contract_locked_ag74d_ready",
+  "baseline": {
+    "consumed_ag74b": true,
+    "doctrine_path": "data/knowledge-base/panchang-festival/production/ag74b-panchang-calculation-doctrine.json",
+    "location_map_path": "data/knowledge-base/panchang-festival/production/ag74b-panchang-location-expansion-map.json"
+  },
+  "computation_mode": {
+    "first_engine_mode": "static_client_side_calculation_engine",
+    "backend_runtime_required": false,
+    "external_ephemeris_api_required": false,
+    "supabase_required": false,
+    "user_profile_storage_required": false
+  },
+  "canonical_inputs": {
+    "local_date_key": {
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "normalization_rule": "Normalize against selected location timezone before computation."
+    },
+    "location_id": {
+      "type": "string",
+      "required": true,
+      "normalization_rule": "Must match an approved expanded location record."
+    },
+    "timezone": {
+      "type": "IANA timezone string",
+      "required": true,
+      "normalization_rule": "Timezone is resolved from the approved location record, not free user text."
+    },
+    "coordinates": {
+      "type": "decimal latitude/longitude",
+      "required": true,
+      "source": "approved_location_record",
+      "free_text_coordinates_enabled": false
+    }
+  },
+  "required_calculation_steps": [
+    {
+      "step_id": "julian_day_conversion",
+      "description": "Convert local date/time anchor to astronomical day basis using location timezone."
+    },
+    {
+      "step_id": "solar_longitude",
+      "description": "Compute or derive apparent sidereal solar longitude under the selected ayanamsha policy."
+    },
+    {
+      "step_id": "lunar_longitude",
+      "description": "Compute or derive apparent sidereal lunar longitude under the selected ayanamsha policy."
+    },
+    {
+      "step_id": "tithi_index",
+      "description": "Calculate Moon-Sun angular separation and classify into 30 tithi divisions."
+    },
+    {
+      "step_id": "paksha",
+      "description": "Classify tithi 1-15 as Shukla and 16-30 as Krishna, with transition rules held for AG74D implementation."
+    },
+    {
+      "step_id": "nakshatra",
+      "description": "Classify lunar longitude into 27 nakshatra segments."
+    },
+    {
+      "step_id": "yoga",
+      "description": "Classify Sun + Moon longitude sum into 27 yoga segments."
+    },
+    {
+      "step_id": "karana",
+      "description": "Classify half-tithi segment with fixed and repeating karana rules."
+    },
+    {
+      "step_id": "sunrise_sunset_basis",
+      "description": "Provide location-aware sunrise/sunset basis under verified static approximation or lookup boundary."
+    }
+  ],
+  "unsupported_input_policy": {
+    "unsupported_location": "Return governed unsupported-location fallback; do not estimate production Panchang from free text.",
+    "invalid_date": "Return invalid-date fallback; do not compute.",
+    "missing_timezone": "Block computation until approved timezone exists.",
+    "missing_coordinates": "Block computation until approved coordinates exist."
+  },
+  "output_status_policy": {
+    "public_label": "calculated result under verification",
+    "visible_long_warning_required": false,
+    "machine_readable_status_required": true,
+    "final_authority_claim_allowed": false
+  }
+}

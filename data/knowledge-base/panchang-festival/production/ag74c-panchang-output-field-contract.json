@@ -1,0 +1,92 @@
+{
+  "module_id": "AG74C",
+  "title": "Panchang Output Field Contract",
+  "status": "ag74c_output_field_contract_locked",
+  "required_output_fields": [
+    {
+      "field": "location_id",
+      "type": "string",
+      "source": "approved_location_record"
+    },
+    {
+      "field": "location_label",
+      "type": "string",
+      "source": "approved_location_record"
+    },
+    {
+      "field": "timezone",
+      "type": "IANA timezone string",
+      "source": "approved_location_record"
+    },
+    {
+      "field": "local_date_key",
+      "type": "YYYY-MM-DD string",
+      "source": "normalized_input"
+    },
+    {
+      "field": "tithi",
+      "type": "string",
+      "source": "computed_or_validated_static_engine"
+    },
+    {
+      "field": "tithi_index",
+      "type": "integer",
+      "allowed_range": "1-30"
+    },
+    {
+      "field": "paksha",
+      "type": "string",
+      "allowed_values": [
+        "Shukla",
+        "Krishna"
+      ]
+    },
+    {
+      "field": "nakshatra",
+      "type": "string",
+      "source": "computed_or_validated_static_engine"
+    },
+    {
+      "field": "yoga",
+      "type": "string",
+      "source": "computed_or_validated_static_engine"
+    },
+    {
+      "field": "karana",
+      "type": "string",
+      "source": "computed_or_validated_static_engine"
+    },
+    {
+      "field": "sunrise_basis",
+      "type": "string",
+      "source": "computed_or_validated_static_engine"
+    },
+    {
+      "field": "sunset_basis",
+      "type": "string",
+      "source": "computed_or_validated_static_engine"
+    },
+    {
+      "field": "calculation_status",
+      "type": "string",
+      "allowed_values": [
+        "calculated_under_verification",
+        "unsupported_location",
+        "invalid_date",
+        "missing_contract_field"
+      ]
+    },
+    {
+      "field": "regional_method_note",
+      "type": "string",
+      "required": true
+    }
+  ],
+  "forbidden_output_fields": [
+    "user_name",
+    "stored_birth_details",
+    "stored_coordinates_from_free_text",
+    "deterministic_prediction",
+    "final_religious_authority_claim"
+  ]
+}

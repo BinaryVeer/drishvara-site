@@ -1,0 +1,37 @@
+{
+  "module_id": "AG74C",
+  "title": "Panchang Expanded Location Schema",
+  "status": "ag74c_expanded_location_schema_locked",
+  "record_schema": {
+    "location_id": "stable lowercase id",
+    "label": "public display label",
+    "country": "country label",
+    "region": "state/province/region label where applicable",
+    "latitude": "decimal number",
+    "longitude": "decimal number",
+    "timezone": "IANA timezone string",
+    "calculation_profile": "india_standard_or_international_reference",
+    "enabled_for_ag74d_static_engine": "boolean",
+    "regional_note": "string"
+  },
+  "required_initial_locations_for_ag74d": [
+    "itanagar_in",
+    "new_delhi_in",
+    "ranchi_in",
+    "guwahati_in",
+    "kolkata_in",
+    "mumbai_in",
+    "chennai_in",
+    "bengaluru_in",
+    "varanasi_in",
+    "ujjain_in",
+    "tokyo_jp",
+    "london_gb",
+    "new_york_us",
+    "sydney_au"
+  ],
+  "free_coordinate_entry_policy": {
+    "allowed_in_ag74d": false,
+    "reason": "Approved location records are required before computed output is shown."
+  }
+}

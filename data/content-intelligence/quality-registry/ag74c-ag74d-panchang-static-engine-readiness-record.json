@@ -1,0 +1,22 @@
+{
+  "module_id": "AG74C-AG74D",
+  "title": "AG74D Panchang Static Engine Readiness",
+  "status": "ready_for_ag74d_panchang_static_engine_preparation",
+  "consumed_records": [
+    "data/knowledge-base/panchang-festival/production/ag74c-panchang-computation-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74c-panchang-output-field-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74c-panchang-expanded-location-schema.json",
+    "data/knowledge-base/panchang-festival/production/ag74c-panchang-validation-sample-contract.json",
+    "data/content-intelligence/mutation-plans/ag74c-to-ag74d-panchang-static-engine-boundary.json"
+  ],
+  "readiness_checks": {
+    "ag74b_consumed": true,
+    "computation_contract_locked": true,
+    "output_field_contract_locked": true,
+    "expanded_location_schema_locked": true,
+    "validation_sample_contract_locked": true,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_data_storage_enabled": false
+  }
+}

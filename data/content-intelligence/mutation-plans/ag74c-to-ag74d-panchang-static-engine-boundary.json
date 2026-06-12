@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74C",
+  "to_module": "AG74D",
+  "transition": "panchang_computation_contract_to_static_engine_preparation",
+  "allowed_next_actions": [
+    "Create approved expanded location records.",
+    "Create static Panchang engine shell.",
+    "Create deterministic contract tests using static validation samples.",
+    "Create generated expanded Panchang data preview records."
+  ],
+  "blocked_next_actions": [
+    "Backend runtime calculation",
+    "Supabase/Auth activation",
+    "Personal profile storage",
+    "Live ephemeris API dependency",
+    "Final production religious authority claim"
+  ]
+}

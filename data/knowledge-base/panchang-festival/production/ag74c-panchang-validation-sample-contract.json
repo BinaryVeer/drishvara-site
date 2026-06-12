@@ -1,0 +1,36 @@
+{
+  "module_id": "AG74C",
+  "title": "Panchang Validation Sample Contract",
+  "status": "ag74c_validation_sample_contract_locked",
+  "validation_sample_requirements_for_ag74d": {
+    "minimum_locations": 4,
+    "minimum_dates_per_location": 3,
+    "required_location_types": [
+      "India timezone reference",
+      "Northeast India reference",
+      "International timezone reference"
+    ],
+    "required_fields_per_sample": [
+      "local_date_key",
+      "location_id",
+      "timezone",
+      "tithi",
+      "tithi_index",
+      "paksha",
+      "nakshatra",
+      "yoga",
+      "karana",
+      "calculation_status"
+    ]
+  },
+  "tolerance_policy": {
+    "exact_name_match_required_for_static_samples": true,
+    "numeric_angle_tolerance_for_future_engine": "to_be_defined_in_ag74d",
+    "sunrise_sunset_display_precision": "to_be_defined_in_ag74d"
+  },
+  "blocked_validation_modes": [
+    "live API lookup during static build",
+    "backend runtime verification",
+    "user-submitted personal data validation"
+  ]
+}
