@@ -1,0 +1,38 @@
+{
+  "module_id": "AG73B",
+  "title": "Birth-Time-Aware Basis Resolver Contract",
+  "status": "ag73b_birth_time_aware_basis_resolver_contract_created",
+  "resolver_flow": [
+    {
+      "step": 1,
+      "name": "normalise_date_of_birth",
+      "output": "date_basis"
+    },
+    {
+      "step": 2,
+      "name": "normalise_birth_time",
+      "output": "birth_time_basis + birth_time_precision"
+    },
+    {
+      "step": 3,
+      "name": "resolve_birth_place_timezone",
+      "output": "location_timezone_basis"
+    },
+    {
+      "step": 4,
+      "name": "compose_star_reflection_basis_seed",
+      "output": "date + birth_time + location + timezone basis"
+    },
+    {
+      "step": 5,
+      "name": "select_safe_reflective_output",
+      "output": "non_deterministic_reflective_result"
+    }
+  ],
+  "resolver_constraints": {
+    "must_not_store_personal_inputs": true,
+    "must_not_call_backend": true,
+    "must_not_call_supabase": true,
+    "must_not_generate_deterministic_prediction": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "from_module": "AG73B",
+  "to_module": "AG73C",
+  "transition": "birth_time_aware_output_bank",
+  "allowed_next_actions": [
+    "Create birth-time-aware safe output records.",
+    "Add exact-time and unknown-time variants.",
+    "Prepare active pilot result data for UI use."
+  ],
+  "blocked_actions": [
+    "Personal data storage.",
+    "Backend runtime activation.",
+    "Supabase activation.",
+    "Deterministic prediction.",
+    "Sensitive profiling."
+  ]
+}

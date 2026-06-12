@@ -1,0 +1,40 @@
+{
+  "module_id": "AG73B",
+  "title": "Birth-Time-Aware Star Reflection Request Schema",
+  "status": "ag73b_birth_time_aware_request_schema_created",
+  "schema_version": "ag73b.v1",
+  "required_fields": {
+    "date_of_birth": {
+      "type": "string",
+      "format": "DD/MM/YYYY",
+      "source_element": "star-reflection-dob"
+    },
+    "birth_place": {
+      "type": "string",
+      "source_element": "star-birth-place-select",
+      "source_alternative": "data-ag71d-r4-select-kind=star-reflection"
+    },
+    "timezone": {
+      "type": "string",
+      "source": "selected pilot location timezone"
+    }
+  },
+  "birth_time_basis": {
+    "field": "birth_time",
+    "source_element": "star-reflection-birth-time",
+    "format": "HH:MM",
+    "required_if_unknown_not_checked": true,
+    "unknown_fallback_element": "star-birth-time-unknown",
+    "unknown_fallback_value": "exact_birth_time_unknown",
+    "session_level_only": true,
+    "stored": false
+  },
+  "request_basis_shape": {
+    "date_of_birth": "DD/MM/YYYY",
+    "birth_time": "HH:MM or exact_birth_time_unknown",
+    "birth_time_precision": "exact_session_only | unknown | pending | invalid",
+    "birth_place_location_id": "pilot location id",
+    "timezone": "IANA timezone",
+    "storage_allowed": false
+  }
+}

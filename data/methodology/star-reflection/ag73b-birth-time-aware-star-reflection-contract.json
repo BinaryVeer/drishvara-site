@@ -1,0 +1,50 @@
+{
+  "module_id": "AG73B",
+  "title": "Birth-Time-Aware Star Reflection Contract",
+  "status": "ag73b_birth_time_aware_contract_created",
+  "source_ag73a_input_surface": "data/methodology/star-reflection/ag73a-star-reflection-birth-time-input-surface.json",
+  "basis_contract": {
+    "active_basis": [
+      "date_of_birth",
+      "birth_time",
+      "birth_place",
+      "timezone"
+    ],
+    "primary_symbolic_basis": "moon_led_nakshatra_oriented",
+    "supporting_basis": [
+      "panchanga_context",
+      "location_timezone_context",
+      "birth_time_precision_context"
+    ],
+    "birth_time_mode": {
+      "exact": "HH:MM session-level basis",
+      "unknown": "explicit unknown-time fallback basis",
+      "pending_or_invalid": "safe fallback requiring correction or unknown-time selection"
+    }
+  },
+  "output_contract": {
+    "allowed": [
+      "birth_time_basis_label",
+      "birth_time_precision_label",
+      "reflective_theme_key",
+      "basis_record_id",
+      "safe_reflective_output"
+    ],
+    "blocked": [
+      "deterministic prediction",
+      "sensitive profiling",
+      "medical guidance",
+      "financial guidance",
+      "legal guidance",
+      "personal data storage",
+      "backend runtime activation",
+      "supabase activation"
+    ]
+  },
+  "activation_position": {
+    "public_asset_state": "active_birth_time_aware_pilot_result",
+    "production_personalisation_state": "not_enabled",
+    "storage_state": "disabled",
+    "backend_state": "deferred_under_ag27"
+  }
+}

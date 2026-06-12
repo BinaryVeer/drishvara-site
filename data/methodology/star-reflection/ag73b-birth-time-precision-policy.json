@@ -1,0 +1,33 @@
+{
+  "module_id": "AG73B",
+  "title": "Birth Time Precision Policy",
+  "status": "ag73b_birth_time_precision_policy_created",
+  "precision_modes": {
+    "exact_session_only": {
+      "input": "valid HH:MM",
+      "result_basis": "birth_time_aware_reflective_basis",
+      "public_label": "Birth time used for this session"
+    },
+    "unknown": {
+      "input": "I don\u2019t know exact birth time checked",
+      "result_basis": "unknown_time_reflective_basis",
+      "public_label": "Exact birth time not known"
+    },
+    "pending": {
+      "input": "blank HH:MM and unknown not checked",
+      "result_basis": "safe_pending_basis",
+      "public_label": "Birth time pending - HH:MM"
+    },
+    "invalid": {
+      "input": "outside 00:00-23:59",
+      "result_basis": "safe_invalid_basis",
+      "public_label": "Birth time pending - HH:MM"
+    }
+  },
+  "policy": {
+    "exact_mode_does_not_enable_prediction": true,
+    "unknown_mode_must_still_generate_safe_reflection": true,
+    "no_mode_allows_personal_data_storage": true,
+    "backend_not_required": true
+  }
+}

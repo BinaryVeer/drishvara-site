@@ -59,7 +59,11 @@ for (const [key, value] of Object.entries(audit.checks || {})) {
 const manifest = readJson("data/methodology/star-reflection/star-reflection-method-manifest.json");
 const allowed = [
   "ag72f_star_reflection_public_pilot_static_closure_passed_browser_qa_pending",
-  "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready"
+  "ag73a_star_reflection_birth_time_input_surface_added_ag73b_ready",
+  "ag73b_birth_time_aware_contract_created_ag73c_ready",
+  "ag73c_birth_time_aware_output_bank_created_ag73d_ready",
+  "ag73d_star_reflection_active_result_wiring_applied_ag73e_ready",
+  "ag73e_star_reflection_active_result_qa_closed"
 ];
 
 if (!allowed.includes(manifest.current_status)) fail(`Manifest is not AG73A-compatible: ${manifest.current_status}`);
