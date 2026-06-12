@@ -1,0 +1,24 @@
+{
+  "module_id": "AG74G",
+  "title": "Panchang Active Data Wiring Contract",
+  "status": "ag74g_active_data_wiring_contract_locked_ag74h_ready",
+  "baseline": {
+    "consumed_ag74f": true,
+    "static_engine_results_path": "generated/panchang-static-engine-results.json",
+    "active_runtime_data_path": "generated/panchang-active-static-result-data.json"
+  },
+  "wiring_scope": {
+    "public_ui_changed": false,
+    "data_source_changed": true,
+    "legacy_pilot_data_file_preserved": true,
+    "active_static_result_data_enabled": true
+  },
+  "runtime_policy": {
+    "browser_fetch_path": "generated/panchang-active-static-result-data.json",
+    "active_record_shape": "legacy_preview_compatible_plus_static_engine_fields",
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_data_storage_enabled": false,
+    "live_ephemeris_api_dependency_enabled": false
+  }
+}

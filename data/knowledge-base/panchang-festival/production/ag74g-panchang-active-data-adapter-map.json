@@ -1,0 +1,52 @@
+{
+  "module_id": "AG74G",
+  "title": "Panchang Active Data Adapter Map",
+  "status": "ag74g_adapter_map_locked",
+  "adapter_rules": [
+    {
+      "from": "location_id",
+      "to": "preview_location_id"
+    },
+    {
+      "from": "location_label",
+      "to": "preview_location_label"
+    },
+    {
+      "from": "timezone",
+      "to": "preview_timezone"
+    },
+    {
+      "from": "local_date_key",
+      "to": "preview_date"
+    },
+    {
+      "from": "tithi",
+      "to": "preview_tithi"
+    },
+    {
+      "from": "tithi_index",
+      "to": "preview_tithi_index"
+    },
+    {
+      "from": "paksha",
+      "to": "preview_paksha"
+    },
+    {
+      "from": "nakshatra",
+      "to": "preview_nakshatra"
+    },
+    {
+      "from": "yoga",
+      "to": "preview_yoga"
+    },
+    {
+      "from": "karana",
+      "to": "preview_karana"
+    }
+  ],
+  "compatibility_policy": {
+    "existing_panchang_renderer_reused": true,
+    "old_file_name_kept_as_legacy_marker_only": true,
+    "new_active_runtime_source": "generated/panchang-active-static-result-data.json"
+  }
+}

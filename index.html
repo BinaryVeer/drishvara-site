@@ -9326,7 +9326,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 /* AG71Q_R1_PUBLIC_PILOT_PANCHANG_PREVIEW_CONTROLLER_START */
 (function () {
-  var DATA_PATH = "generated/panchang-pilot-preview-data.json";
+  var DATA_PATH = "generated/panchang-active-static-result-data.json";
   var payload = null;
   var byLocationDate = {};
   var byLocation = {};
@@ -9863,5 +9863,10 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <span hidden data-ag74a-panchang-result-marker="true">PANCHANG RESULT</span>
+
+<!-- AG74G_PANCHANG_ACTIVE_DATA_WIRING_START -->
+<span hidden data-ag74g-panchang-active-data-source="generated/panchang-active-static-result-data.json">generated/panchang-pilot-preview-data.json</span>
+<!-- AG74G_PANCHANG_ACTIVE_DATA_WIRING_END -->
+
 </body>
 </html>

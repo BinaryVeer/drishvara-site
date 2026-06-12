@@ -1,0 +1,18 @@
+{
+  "from_module": "AG74G",
+  "to_module": "AG74H",
+  "transition": "active_data_wiring_to_active_ui_qa",
+  "allowed_next_actions": [
+    "Run active UI QA against the AG74G data source.",
+    "Confirm Panchang renderer consumes active static result data.",
+    "Confirm unsupported location/date fallback still routes safely.",
+    "Confirm legacy pilot/preview copy does not reappear."
+  ],
+  "blocked_next_actions": [
+    "Backend runtime calculation",
+    "Supabase/Auth activation",
+    "Personal profile storage",
+    "Live ephemeris API dependency",
+    "Final production religious authority claim"
+  ]
+}

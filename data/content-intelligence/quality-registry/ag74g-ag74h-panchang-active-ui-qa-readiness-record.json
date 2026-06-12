@@ -1,0 +1,22 @@
+{
+  "module_id": "AG74G-AG74H",
+  "title": "AG74H Panchang Active UI QA Readiness",
+  "status": "ready_for_ag74h_panchang_active_ui_qa",
+  "consumed_records": [
+    "generated/panchang-active-static-result-data.json",
+    "data/knowledge-base/panchang-festival/production/ag74g-panchang-active-data-wiring-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74g-panchang-active-data-adapter-map.json",
+    "data/knowledge-base/panchang-festival/production/ag74g-panchang-runtime-data-source-marker.json",
+    "data/content-intelligence/mutation-plans/ag74g-to-ag74h-panchang-active-ui-qa-boundary.json"
+  ],
+  "readiness_checks": {
+    "ag74f_consumed": true,
+    "active_static_result_data_ready": true,
+    "browser_fetch_path_updated": true,
+    "legacy_pilot_data_preserved": true,
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_data_storage_enabled": false,
+    "live_ephemeris_api_dependency_enabled": false
+  }
+}
