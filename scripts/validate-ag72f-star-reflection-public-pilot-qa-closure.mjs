@@ -68,8 +68,8 @@ for (const marker of [
   'data-ag71e-preview-button="star-reflection"',
   'data-ag71e-preview-panel="star-reflection"',
   'data-ag71e-preview-grid="star-reflection"',
-  "Pilot Star Reflection Preview",
-  "Reflective Only"
+  "STAR REFLECTION RESULT",
+  "STAR REFLECTION RESULT"
 ]) {
   if (!index.includes(marker)) {
     if (
@@ -80,14 +80,14 @@ for (const marker of [
     }
 
     if (
-      marker === "Preview Star Reflection" &&
+      marker === "Generate Star Reflection Result" &&
       index.includes("Generate Star Reflection Result")
     ) {
       continue;
     }
 
     if (
-      marker === "Pilot Star Reflection Preview" &&
+      marker === "STAR REFLECTION RESULT" &&
       index.includes("Active Star Reflection Result")
     ) {
       continue;
@@ -182,7 +182,7 @@ writeJson(browserChecklistPath, {
   checklist: [
     {
       item: "Enter a sample DOB in DD/MM/YYYY format and select Itanagar.",
-      expected: "Preview Star Reflection updates the existing preview panel with reflective-only output."
+      expected: "Generate Star Reflection Result updates the existing preview panel with reflective-only output."
     },
     {
       item: "Select New Delhi, Ranchi and Tokyo one by one.",

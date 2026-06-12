@@ -41,7 +41,7 @@ const index = fs.readFileSync(full("index.html"), "utf8");
 for (const term of [
   "Active calculated Panchang pilot result",
   "Generate Star Reflection Result",
-  "Active Star Reflection Result - Reflective Only",
+  "STAR REFLECTION RESULT",
   "Star Reflection active result is enabled",
   "No name, DOB, birth time, location or coordinate data is stored",
   "generated/star-reflection-active-result-data.json"

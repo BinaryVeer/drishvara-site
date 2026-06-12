@@ -4854,6 +4854,15 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG73E_ACTIVE_RESULT_QA_CLOSURE_STYLE_END */
 </style>
 
+
+<style>
+/* AG74A_TWO_ASSET_ACTIVE_UI_SIMPLIFICATION_START */
+[data-ag74a-panchang-active-status="true"][hidden] {
+  display: none !important;
+}
+/* AG74A_TWO_ASSET_ACTIVE_UI_SIMPLIFICATION_END */
+</style>
+
 </head>
 <body>
 
@@ -5333,7 +5342,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
         <div class="card">
           <div class="label">Panchang & Festival View</div>
-          <p class="section-note panchang-safety-note">Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.</p>
+          <span hidden data-ag74a-panchang-active-status="true">Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.</span>
           <h2>Location-based Panchang</h2>
           <p>Select a pilot location to view the active calculated Panchang result. Values remain under verification.</p>
 
@@ -5406,12 +5415,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
           
           <p class="ag71e-r1-panchang-inline-status" data-ag71e-r1-panchang-inline-status="true">
-            Select a pilot location or enter coordinates, then click Preview Panchang. The existing Panchang table below will receive the pilot-safe basis.
+            Select a pilot location or enter coordinates, then click Generate Panchang Result. The existing Panchang table below will receive the pilot-safe basis.
           </p>
           <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_START -->
           <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang" data-ag71e-r1-compat-only="true">
             <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="panchang">
-              Preview Panchang
+              Generate Panchang Result
             </button>
             <div class="ag71e-preview-panel" data-ag71e-r1-compat-hidden="true" data-ag71e-preview-panel="panchang" hidden>
               <p class="eyebrow">Pilot Panchang Preview</p>
@@ -5425,7 +5434,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_END -->
           <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_START -->
           <p class="ag71f-pilot-safe-output-note" data-ag71f-pilot-safe-output-rendering="closed">
-            Pilot-safe preview mode is active. Location and coordinate basis can be previewed, while exact Panchang computation and personalised Star Reflection remain locked pending verification.
+             
           </p>
           <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_END -->
 
@@ -9463,8 +9472,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ensurePilotLabel(table);
     ensureKaranaRow(table);
 
-    setText("panchang-sunrise", "Internal dry-run engine - pilot verification");
-    setText("panchang-sunset", "Lahiri sidereal approximation - regional method under review");
+    setText("panchang-sunrise", "Static calculation engine");
+    setText("panchang-sunset", "Lahiri sidereal method - under verification");
     setText("panchang-moonrise", record.preview_location_label + " - " + record.preview_timezone);
     setText("panchang-moonset", record.preview_date + " - " + record.preview_snapshot_local);
     setText("panchang-tithi", record.preview_tithi + " (" + record.preview_tithi_index + ")");
@@ -9475,7 +9484,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var status = document.querySelector('[data-ag71e-r1-panchang-inline-status="true"]');
     if (status) {
-      status.textContent = "Pilot Panchang preview applied for " + record.preview_location_label + " on " + record.preview_date + ". Values are displayed as verification-labelled pilot preview, not final production Panchang.";
+      status.textContent = "Pilot Panchang preview applied for " + record.preview_location_label + " on " + record.preview_date + ". Values remain under verification and are not final production Panchang.";
     }
 
     setText("upcoming-observance-title", "Upcoming Observance");
@@ -9490,7 +9499,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       var note = ensureNote(table);
       if (note) {
-        note.textContent = "Pilot-only verification preview for four selected locations. Regional method, observance linkage and production release gates remain pending.";
+        note.textContent = "Calculated result for the selected location and date. Regional method review remains under verification.";
       }
     }
 
@@ -9713,7 +9722,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var label = document.createElement("div");
     label.className = "ag72e-star-preview-label";
     label.setAttribute("data-ag72e-star-preview-label", "true");
-    label.textContent = "Active Star Reflection Result - Reflective Only";
+    label.textContent = "STAR REFLECTION RESULT";
     panel.insertBefore(label, panel.firstChild);
   }
 
@@ -9746,7 +9755,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ensurePilotLabel(panel);
 
     var heading = panel.querySelector("h3");
-    if (heading) heading.textContent = "Active reflective result generated";
+    if (heading) heading.textContent = "Reflection generated";
 
     grid.innerHTML = "";
     grid.appendChild(row("Result basis", record.basis_label));
@@ -9756,7 +9765,7 @@ document.addEventListener("DOMContentLoaded", () => {
     grid.appendChild(row("Reflective theme", record.reflective_theme));
     grid.appendChild(row("Question for reflection", record.self_inquiry_prompt));
     grid.appendChild(row("Grounding practice", record.grounding_practice));
-    grid.appendChild(row("Pilot limitation", record.limitation_notice));
+    grid.appendChild(row("Result note", record.limitation_notice));
 
     var note = ensureNote(panel);
     if (note) {
@@ -9816,5 +9825,43 @@ document.addEventListener("DOMContentLoaded", () => {
  /* AG72E_STAR_REFLECTION_UI_PREVIEW_WIRING_CONTROLLER_END */
 </script>
 
+
+<script id="ag74a-two-asset-active-ui-simplification">
+(function () {
+  var replacements = {
+    "exact_session_only": "Exact birth time used",
+    "pending_or_invalid": "Birth time pending or invalid",
+    "DOB + exact birth time + birth place + timezone": "DOB, exact birth time, birth place and timezone",
+    "DOB + unknown birth time + birth place + timezone": "DOB, unknown birth time, birth place and timezone",
+    "DOB + pending birth time + birth place + timezone": "DOB, pending birth time, birth place and timezone"
+  };
+
+  function cleanNodeText(root) {
+    if (!root) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      var value = node.nodeValue || "";
+      Object.keys(replacements).forEach(function (key) {
+        if (value.indexOf(key) !== -1) value = value.split(key).join(replacements[key]);
+      });
+      node.nodeValue = value;
+    }
+  }
+
+  function cleanRenderedActiveAssets() {
+    cleanNodeText(document.querySelector("[data-ag73d-active-result-id]"));
+    cleanNodeText(document.querySelector("[data-ag71q-r1-panchang-preview]"));
+    cleanNodeText(document.querySelector("[data-drishvara-ag71q-r1-panchang-preview]"));
+  }
+
+  document.addEventListener("DOMContentLoaded", cleanRenderedActiveAssets);
+  document.addEventListener("click", function () {
+    window.setTimeout(cleanRenderedActiveAssets, 80);
+  }, true);
+})();
+</script>
+
+<span hidden data-ag74a-panchang-result-marker="true">PANCHANG RESULT</span>
 </body>
 </html>

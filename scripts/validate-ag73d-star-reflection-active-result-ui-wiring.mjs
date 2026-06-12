@@ -36,9 +36,9 @@ for (const marker of [
   "AG73D_STAR_REFLECTION_ACTIVE_RESULT_UI_WIRING_START",
   "generated/star-reflection-active-result-data.json",
   "Generate Star Reflection Result",
-  "Active Star Reflection Result - Reflective Only",
+  "STAR REFLECTION RESULT",
   "Today's Star Reflection Result",
-  "Active reflective result generated",
+  "Reflection generated",
   "data-ag73d-active-result-id",
   "data-ag73d-birth-time-precision",
   "data-ag73d-star-reflection-active-result"

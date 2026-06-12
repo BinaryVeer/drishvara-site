@@ -34,7 +34,7 @@ for (const marker of [
   "AG71E_PANCHANG_PREVIEW_OUTPUT_START",
   "AG71E_R2_OBSERVANCE_DOM_TARGETING_FIX_STYLE_START",
   "window.drishvaraAg71dR6GetLocationBasis",
-  "exact Panchang computation and personalised Star Reflection remain locked"
+  "data-ag74a-panchang-active-status"
 ]) {
   if (!html.includes(marker)) fail(`index.html missing marker: ${marker}`);
 }

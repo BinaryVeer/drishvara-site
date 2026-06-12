@@ -36,7 +36,7 @@ for (const marker of [
   'data-ag71e-preview-panel="star-reflection"',
   'data-ag71e-preview-panel="panchang"',
   "Generate Star Reflection Result",
-  "Preview Panchang",
+  "Generate Panchang Result",
   "Moon-led, Panchanga-supported, location-aware",
   "Withheld until verified"
 ]) {
