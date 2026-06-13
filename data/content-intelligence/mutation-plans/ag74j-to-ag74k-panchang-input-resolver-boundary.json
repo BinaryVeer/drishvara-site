@@ -1,0 +1,26 @@
+{
+  "from_module": "AG74J",
+  "to_module": "AG74K",
+  "transition": "contract_and_methodology_lock_to_date_place_timezone_and_calendar_profile_resolver",
+  "ag74k_must_implement": [
+    "strict civil-date parsing and supported-range status",
+    "canonical and curated place resolution",
+    "coordinate plus reviewed IANA timezone validation",
+    "timezone precedence and governed rejection states",
+    "Varanasi canonical calendar-profile attachment",
+    "selected civil-date to Varanasi annual-book key semantics",
+    "deterministic resolver trace carrying AG74J versions"
+  ],
+  "ag74k_must_not_activate": [
+    "astronomical ephemeris calculation",
+    "sunrise or sunset calculation",
+    "lunar month generation",
+    "festival or ritual window generation",
+    "unrestricted place-name geocoding",
+    "backend runtime",
+    "Supabase",
+    "personal location storage",
+    "external ephemeris API",
+    "public method selector"
+  ]
+}

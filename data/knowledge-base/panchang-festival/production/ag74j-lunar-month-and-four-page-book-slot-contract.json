@@ -1,0 +1,42 @@
+{
+  "module_id": "AG74J",
+  "title": "Lunar Month and Four-page Book Slot Contract",
+  "status": "ag74j_month_and_book_slot_contract_locked",
+  "canonical_month_order": [
+    "chaitra",
+    "vaishakha",
+    "jyeshtha",
+    "ashadha",
+    "shravana",
+    "bhadrapada",
+    "ashvina",
+    "kartika",
+    "margashirsha",
+    "pausha",
+    "magha",
+    "phalguna"
+  ],
+  "month_naming_basis": "purnimanta_varanasi_profile",
+  "solar_ingress_assignment": {
+    "adhika_month_condition": "no_solar_ingress_occurs_within_the_relevant_lunar_month",
+    "kshaya_month_condition": "two_solar_ingresses_occur_within_the_relevant_lunar_month",
+    "adhika_instance_order": "adhika_precedes_nija_or_regular_instance",
+    "kshaya_handling": "mark_canonical_slot_exception_and_do_not_fabricate_a_physical_month"
+  },
+  "annual_book": {
+    "place_id": "varanasi_in",
+    "physical_page_count": 4,
+    "canonical_slots_per_page": 3,
+    "canonical_slot_count": 12,
+    "physical_month_record_count_fixed": false,
+    "slot_instance_cardinality": [
+      "zero_for_kshaya",
+      "one_regular",
+      "two_adhika_plus_nija"
+    ],
+    "gregorian_quarter_semantics_allowed": false,
+    "year_edge_partial_paksha_segments_must_be_explicit": true
+  },
+  "annual_month_records_generated": false,
+  "runtime_enabled": false
+}

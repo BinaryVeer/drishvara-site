@@ -1,0 +1,33 @@
+{
+  "module_id": "AG74J",
+  "title": "Date Input and Supported Range Contract",
+  "status": "ag74j_date_contract_locked",
+  "input_calendar": "proleptic_gregorian",
+  "input_format": "YYYY-MM-DD",
+  "semantic_type": "local_civil_date",
+  "supported_range": {
+    "start": "1900-01-01",
+    "end": "2100-12-31",
+    "boundaries_inclusive": true,
+    "profile_version": "1.0.0"
+  },
+  "validation_rules": {
+    "strict_calendar_validation_required": true,
+    "leap_year_validation_required": true,
+    "invalid_date_rejected": true,
+    "silent_clamping_allowed": false,
+    "nearest_supported_date_substitution_allowed": false,
+    "out_of_range_status": "unsupported_date_range"
+  },
+  "date_navigation": {
+    "previous_today_next_operate_on_civil_dates": true,
+    "timezone_for_today": "Asia/Kolkata",
+    "selected_date_preserved_when_result_unavailable": true
+  },
+  "annual_book_date_semantics": {
+    "annual_book_place": "varanasi_in",
+    "selected_date_components_reused_as_varanasi_civil_date": true,
+    "instant_conversion_from_daily_selected_place_allowed": false
+  },
+  "runtime_enabled": false
+}

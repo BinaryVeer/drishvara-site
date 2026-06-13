@@ -1,0 +1,29 @@
+{
+  "module_id": "AG74J",
+  "title": "Varanasi Hindu Year and Lunar Month Convention Contract",
+  "status": "ag74j_varanasi_calendar_convention_locked",
+  "profile_id": "drishvara_varanasi_standard_v1",
+  "place_id": "varanasi_in",
+  "timezone": "Asia/Kolkata",
+  "regional_basis": "north_india_varanasi_kashi",
+  "hindu_year": {
+    "system": "vikram_samvat",
+    "style": "chaitradi",
+    "boundary_event": "chaitra_shukla_pratipada",
+    "boundary_allocation": "varanasi_local_civil_date_under_locked_sunrise_rule",
+    "fixed_gregorian_offset_shortcut_allowed": false
+  },
+  "lunar_month": {
+    "convention": "purnimanta",
+    "month_cycle": "krishna_paksha_followed_by_shukla_paksha_ending_at_purnima",
+    "amanta_conversion_by_label_shift_only_allowed": false
+  },
+  "year_month_boundary_relation": {
+    "samvat_year_boundary_independent_of_purnimanta_month_boundary": true,
+    "chaitra_krishna_before_chaitra_shukla_pratipada": "belongs_to_previous_vikram_samvat_year",
+    "annual_book_interval": "from_chaitra_shukla_pratipada_inclusive_to_next_year_boundary_exclusive",
+    "canonical_book_slots_are_reporting_slots_not_assumed_full_uniform_month_intervals": true
+  },
+  "public_method_selector_enabled": false,
+  "runtime_enabled": false
+}

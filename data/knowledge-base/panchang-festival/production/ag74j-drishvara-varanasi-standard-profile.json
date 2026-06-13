@@ -1,0 +1,48 @@
+{
+  "module_id": "AG74J",
+  "title": "Drishvara Varanasi Standard Panchang Profile",
+  "status": "ag74j_canonical_profile_locked_ag74k_ready",
+  "profile_id": "drishvara_varanasi_standard_v1",
+  "public_label": "Drishvara Panchang — Varanasi Standard",
+  "canonical_location_id": "varanasi_in",
+  "regional_profile": "north_india_varanasi_kashi",
+  "lunar_month_convention": "purnimanta",
+  "hindu_year_system": "vikram_samvat",
+  "hindu_year_start": "chaitra_shukla_pratipada",
+  "astronomical_profile": "modern_drik_ephemeris_profile",
+  "ayanamsha_profile": "lahiri_chitrapaksha",
+  "supported_civil_date_range": {
+    "start": "1900-01-01",
+    "end": "2100-12-31",
+    "boundaries_inclusive": true
+  },
+  "user_method_selection": {
+    "enabled": false,
+    "rationale": "AG74J locks one canonical Drishvara public profile; it does not expose competing published Panchangs or calculation methods."
+  },
+  "alternate_public_panchang_options": [],
+  "rishikesh_panchang": {
+    "included_in_ag74j": false,
+    "production_dependency": false,
+    "public_method_option": false,
+    "future_validation_backlog_candidate": true
+  },
+  "consumed_contracts": [
+    "data/knowledge-base/panchang-festival/production/ag74j-date-input-and-supported-range-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-location-coordinate-timezone-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-varanasi-hindu-year-and-month-convention-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-lunar-month-and-four-page-book-slot-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-festival-and-ritual-window-semantics-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-astronomical-method-and-sunrise-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-methodology-and-rule-set-version-contract.json"
+  ],
+  "activation_state": {
+    "astronomical_runtime_enabled": false,
+    "festival_generation_enabled": false,
+    "unrestricted_geocoding_enabled": false,
+    "backend_runtime_enabled": false,
+    "external_ephemeris_api_enabled": false,
+    "supabase_enabled": false,
+    "personal_location_storage_enabled": false
+  }
+}

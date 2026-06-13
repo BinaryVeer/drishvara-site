@@ -1,0 +1,45 @@
+{
+  "module_id": "AG74J",
+  "title": "Location, Coordinate and Timezone Contract",
+  "status": "ag74j_location_timezone_contract_locked",
+  "default_public_location": {
+    "canonical_location_id": "varanasi_in",
+    "ui_location_id": "loc_in_up_varanasi_city_001",
+    "display_label": "Varanasi / Banaras",
+    "aliases": [
+      "Varanasi",
+      "Banaras",
+      "Benares",
+      "Kashi"
+    ],
+    "latitude": 25.3176,
+    "longitude": 82.9739,
+    "coordinate_precision": "city_centroid",
+    "timezone": "Asia/Kolkata"
+  },
+  "resolution_precedence": [
+    "approved_canonical_location_record",
+    "approved_curated_location_record",
+    "explicit_coordinates_with_reviewed_iana_timezone",
+    "future_reviewed_timezone_mapper_result"
+  ],
+  "timezone_contract": {
+    "iana_timezone_required": true,
+    "fixed_utc_offset_as_canonical_timezone_allowed": false,
+    "timezone_database_version_required_where_available": true,
+    "utc_offset_at_instant_required": true,
+    "dst_state_required_where_applicable": true
+  },
+  "rejection_rules": {
+    "unrestricted_place_name_geocoding_allowed": false,
+    "silent_varanasi_substitution_for_invalid_place_allowed": false,
+    "coordinates_without_reviewed_timezone_allowed": false,
+    "invalid_timezone_status": "unsupported_timezone",
+    "unresolved_place_status": "unsupported_location"
+  },
+  "privacy": {
+    "precise_user_coordinates_stored_by_ag74j": false,
+    "personal_location_storage_enabled": false
+  },
+  "runtime_enabled": false
+}

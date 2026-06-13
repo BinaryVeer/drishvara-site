@@ -1,0 +1,32 @@
+{
+  "module_id": "AG74J",
+  "title": "Festival Public and Ritual Window Semantics Contract",
+  "status": "ag74j_observance_window_semantics_locked",
+  "semantic_layers": {
+    "condition_window": "astronomical_or_rule_condition_interval_used_for_evaluation",
+    "observance_date": "civil_date_selected_by_the_reviewed_observance_rule",
+    "primary_public_window": "single_user_facing_interval_approved_for_general_display",
+    "ritual_window": "source_reviewed_muhurta_parana_or_other_ritual_interval",
+    "begins_ends": "boundaries_of_the_named_condition_or_approved_display_interval_only"
+  },
+  "separation_rules": {
+    "tithi_boundary_may_not_be_relabelled_as_ritual_window": true,
+    "observance_date_may_not_be_inferred_from_label_only": true,
+    "public_window_and_ritual_window_must_remain_distinct": true,
+    "unavailable_window_must_remain_unavailable": true,
+    "fabricated_window_allowed": false
+  },
+  "rule_requirements": [
+    "source_reference",
+    "rule_family",
+    "location_basis",
+    "timezone_basis",
+    "sunrise_or_event_window_dependency",
+    "regional_or_sampradaya_variant",
+    "methodology_version",
+    "review_status",
+    "public_output_approval"
+  ],
+  "festival_generation_enabled": false,
+  "runtime_enabled": false
+}

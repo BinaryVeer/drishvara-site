@@ -1,0 +1,59 @@
+{
+  "module_id": "AG74J",
+  "title": "Astronomical Method and Sunrise Contract",
+  "status": "ag74j_astronomical_method_and_sunrise_locked",
+  "calculation_tradition": {
+    "profile": "modern_drik_ephemeris_profile",
+    "public_method_label": "Drishvara Varanasi Standard",
+    "pure_surya_siddhanta_claim_allowed": false,
+    "undisclosed_mixing_of_modern_and_classical_values_allowed": false
+  },
+  "ephemeris": {
+    "backend_vendor_locked_in_ag74j": false,
+    "backend_selection_deferred_to": "AG74L",
+    "required_backend_properties": [
+      "deterministic",
+      "versioned",
+      "license_reviewed",
+      "accuracy_validated",
+      "traceable"
+    ]
+  },
+  "ayanamsha": {
+    "identity": "lahiri_chitrapaksha",
+    "explicitly_declared": true,
+    "implementation_version_required": true,
+    "numeric_model_or_library_version_deferred_to": "AG74L",
+    "silent_fallback_allowed": false
+  },
+  "longitude_basis": {
+    "core_panchang_sun_moon_longitudes": "geocentric_apparent_ecliptic",
+    "topocentric_use": "rise_set_and_other_observer_dependent_event_calculations_only"
+  },
+  "time_scales": {
+    "ephemeris_evaluation": [
+      "TT",
+      "TDB_where_backend_requires"
+    ],
+    "transition_storage": [
+      "UTC",
+      "local_time_with_iana_timezone"
+    ],
+    "delta_t_model_must_be_declared_and_versioned": true,
+    "precession_nutation_model_must_be_declared_and_versioned": true
+  },
+  "sunrise": {
+    "basis": "apparent_upper_limb_level_horizon",
+    "atmospheric_refraction": "standard_model_declared_by_backend",
+    "solar_disk_limb": "upper_limb",
+    "horizon": "level_horizon",
+    "default_observer_elevation_m": 0,
+    "approved_elevation_may_override_default": true,
+    "local_horizon_obstruction_model_enabled": false
+  },
+  "sunset": {
+    "must_mirror_sunrise_convention": true
+  },
+  "runtime_enabled": false,
+  "external_ephemeris_api_enabled": false
+}

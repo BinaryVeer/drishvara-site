@@ -1,0 +1,27 @@
+{
+  "module_id": "AG74J",
+  "title": "Methodology and Rule-set Version Contract",
+  "status": "ag74j_version_contract_locked",
+  "versions": {
+    "methodology_version": "1.0.0",
+    "canonical_profile_version": "1.0.0",
+    "date_range_contract_version": "1.0.0",
+    "location_timezone_contract_version": "1.0.0",
+    "lunar_rule_set_version": "1.0.0",
+    "festival_window_contract_version": "1.0.0",
+    "astronomical_contract_version": "1.0.0"
+  },
+  "runtime_trace_must_add": [
+    "ephemeris_backend_name",
+    "ephemeris_backend_version",
+    "ayanamsha_implementation_version",
+    "timezone_database_version",
+    "delta_t_model_version",
+    "precession_nutation_model_version",
+    "calculation_timestamp",
+    "source_registry_references"
+  ],
+  "immutable_result_identity_requires_all_versions": true,
+  "silent_version_change_allowed": false,
+  "backend_versions_deferred_to": "AG74L"
+}

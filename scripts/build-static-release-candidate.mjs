@@ -95,6 +95,28 @@ const ag74iBrowserQa = exists("data/quality/ag74i-panchang-public-surface-browse
   : null;
 check("ag74i_browser_qa_passed", ag74iBrowserQa?.status === "passed" && ag74iBrowserQa?.failure_count === 0, "AG74I browser interaction QA must pass.");
 
+const ag74jQuality = exists("data/quality/ag74j-panchang-contract-and-methodology-lock.json")
+  ? readJson("data/quality/ag74j-panchang-contract-and-methodology-lock.json")
+  : null;
+check(
+  "ag74j_contract_lock_passed",
+  ag74jQuality?.status === "ag74j_completed" &&
+    ag74jQuality?.issue_count === 0 &&
+    ag74jQuality?.ready_for_ag74k === true,
+  "AG74J contract and methodology lock must pass and make AG74K ready."
+);
+
+const ag74jProfile = exists("data/knowledge-base/panchang-festival/production/ag74j-drishvara-varanasi-standard-profile.json")
+  ? readJson("data/knowledge-base/panchang-festival/production/ag74j-drishvara-varanasi-standard-profile.json")
+  : null;
+check(
+  "ag74j_canonical_profile_locked",
+  ag74jProfile?.status === "ag74j_canonical_profile_locked_ag74k_ready" &&
+    ag74jProfile?.lunar_month_convention === "purnimanta" &&
+    ag74jProfile?.ayanamsha_profile === "lahiri_chitrapaksha",
+  "AG74J canonical Varanasi profile must be locked."
+);
+
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");
 
@@ -113,6 +135,7 @@ if (fs.existsSync(dailyDir)) {
 const pkg = exists("package.json") ? readJson("package.json") : {};
 check("validate_project_script_exists", Boolean(pkg.scripts?.["validate:project"]), "validate:project must exist.");
 check("ag57z_validate_script_exists", Boolean(pkg.scripts?.["validate:ag57z"]), "validate:ag57z must exist.");
+check("ag74j_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74j"]), "validate:ag74j must exist.");
 
 const manifest = {
   module_id: "AG58A",
