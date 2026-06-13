@@ -117,6 +117,11 @@ check(
   "AG74J canonical Varanasi profile must be locked."
 );
 
+const ag74kQuality = exists("data/quality/ag74k-panchang-input-resolver.json") ? readJson("data/quality/ag74k-panchang-input-resolver.json") : null;
+check("ag74k_input_resolver_passed", ag74kQuality?.status === "ag74k_completed" && ag74kQuality?.issue_count === 0 && ag74kQuality?.deterministic_test_pass_count === 15 && ag74kQuality?.ready_for_ag74l === true, "AG74K input resolver must pass and make AG74L ready.");
+const ag74kResults = exists("data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-test-results.json") ? readJson("data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-test-results.json") : null;
+check("ag74k_resolver_result_bank_valid", ag74kResults?.status === "ag74k_resolver_test_results_generated" && ag74kResults?.test_count === 15 && ag74kResults?.astronomical_computation_executed === false, "AG74K result bank must exist without astronomy.");
+
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");
 
@@ -136,6 +141,7 @@ const pkg = exists("package.json") ? readJson("package.json") : {};
 check("validate_project_script_exists", Boolean(pkg.scripts?.["validate:project"]), "validate:project must exist.");
 check("ag57z_validate_script_exists", Boolean(pkg.scripts?.["validate:ag57z"]), "validate:ag57z must exist.");
 check("ag74j_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74j"]), "validate:ag74j must exist.");
+check("ag74k_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74k"]), "validate:ag74k must exist.");
 
 const manifest = {
   module_id: "AG58A",

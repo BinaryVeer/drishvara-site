@@ -1,0 +1,44 @@
+{
+  "module_id": "AG74K",
+  "title": "Approved Location Source Map",
+  "status": "ag74k_location_source_map_locked",
+  "governing_sources": [
+    {
+      "path": "data/knowledge-base/panchang-festival/production/ag74j-location-coordinate-timezone-contract.json",
+      "role": "governing precedence and rejection contract"
+    },
+    {
+      "path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+      "role": "approved curated named-location source"
+    },
+    {
+      "path": "data/knowledge-base/location-intelligence/production/ag74i-varanasi-default-location-alias-record.json",
+      "role": "Varanasi alias identity"
+    },
+    {
+      "path": "data/knowledge-base/location-intelligence/production/location-selection-registry.json",
+      "role": "named and coordinate-first doctrine"
+    },
+    {
+      "path": "data/knowledge-base/location-intelligence/production/ag70y-location-selection-resolver-test.json",
+      "role": "historical resolver-test precedent only"
+    },
+    {
+      "path": "data/knowledge-base/location-intelligence/production/location-timezone-basis-policy.json",
+      "role": "timezone-required doctrine"
+    }
+  ],
+  "production_precedence": [
+    "ag74i_varanasi_alias",
+    "ag74d_approved_curated_record",
+    "explicit_coordinates_with_valid_iana_timezone"
+  ],
+  "excluded": [
+    "candidate banks pending verification",
+    "identity-only records without coordinates",
+    "free-text geocoding",
+    "nearest-place guesses",
+    "external Panchang sites"
+  ],
+  "duplication_rule": "Consume AG70T/AG70Y design evidence and AG74D/AG74I governed records; do not create a second independent location bank."
+}

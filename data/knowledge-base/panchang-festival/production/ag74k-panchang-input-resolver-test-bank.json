@@ -1,0 +1,195 @@
+{
+  "module_id": "AG74K",
+  "title": "Panchang Input Resolver Test Bank",
+  "status": "ag74k_test_bank_locked",
+  "test_count": 15,
+  "cases": [
+    {
+      "id": "varanasi_id",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "varanasi_in",
+        "book_date": "2026-06-13"
+      }
+    },
+    {
+      "id": "banaras_alias",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "alias": "Banaras"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "varanasi_in"
+      }
+    },
+    {
+      "id": "itanagar",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-01-01",
+        "canonical_location_id": "itanagar_in"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "itanagar_in",
+        "timezone": "Asia/Kolkata"
+      }
+    },
+    {
+      "id": "london",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-07-15",
+        "canonical_location_id": "london_gb"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "london_gb",
+        "timezone": "Europe/London",
+        "book_date": "2026-07-15"
+      }
+    },
+    {
+      "id": "unknown",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "unknown_place"
+      },
+      "expected": {
+        "status": "unsupported_location"
+      }
+    },
+    {
+      "id": "invalid_date",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-02-30",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "invalid_civil_date"
+      }
+    },
+    {
+      "id": "below_range",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "1899-12-31",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "unsupported_date_range"
+      }
+    },
+    {
+      "id": "upper_boundary",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2100-12-31",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "varanasi_in"
+      }
+    },
+    {
+      "id": "coordinate_valid",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 35.6762,
+        "longitude": 139.6503,
+        "timezone": "Asia/Tokyo",
+        "optional_place_label": "Custom Tokyo coordinates"
+      },
+      "expected": {
+        "status": "resolved",
+        "resolution_type": "coordinate_first",
+        "timezone": "Asia/Tokyo",
+        "book_date": "2026-06-13"
+      }
+    },
+    {
+      "id": "coordinate_no_timezone",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 27.0844,
+        "longitude": 93.6053
+      },
+      "expected": {
+        "status": "unsupported_timezone"
+      }
+    },
+    {
+      "id": "coordinate_bad_lat",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 91,
+        "longitude": 82.9739,
+        "timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "status": "invalid_coordinates"
+      }
+    },
+    {
+      "id": "coordinate_bad_timezone",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 25.3176,
+        "longitude": 82.9739,
+        "timezone": "Asia/NotAZone"
+      },
+      "expected": {
+        "status": "unsupported_timezone"
+      }
+    },
+    {
+      "id": "timezone_conflict",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in",
+        "timezone": "Europe/London"
+      },
+      "expected": {
+        "status": "timezone_conflict"
+      }
+    },
+    {
+      "id": "method_rejected",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in",
+        "method": "rishikesh_panchang"
+      },
+      "expected": {
+        "status": "unsupported_method_selector"
+      }
+    },
+    {
+      "id": "mode_rejected",
+      "input": {
+        "mode": "free_text_geocoding",
+        "civil_date": "2026-06-13",
+        "place": "Somewhere near Varanasi"
+      },
+      "expected": {
+        "status": "invalid_input_mode"
+      }
+    }
+  ]
+}

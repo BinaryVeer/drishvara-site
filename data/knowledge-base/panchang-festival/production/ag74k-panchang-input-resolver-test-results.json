@@ -1,0 +1,719 @@
+{
+  "module_id": "AG74K",
+  "title": "Panchang Input Resolver Test Results",
+  "status": "ag74k_resolver_test_results_generated",
+  "test_count": 15,
+  "generated_deterministically": true,
+  "public_output_allowed": false,
+  "astronomical_computation_executed": false,
+  "results": [
+    {
+      "test_id": "varanasi_id",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "varanasi_in",
+        "book_date": "2026-06-13"
+      },
+      "actual": {
+        "status": "resolved",
+        "resolved": true,
+        "civil_date": "2026-06-13",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "varanasi_in",
+          "display_label": "Varanasi",
+          "country": "India",
+          "region": "Uttar Pradesh",
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "annual_book_key": {
+          "civil_date": "2026-06-13",
+          "place_id": "varanasi_in",
+          "timezone": "Asia/Kolkata",
+          "instant_conversion_applied": false
+        },
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "canonical_id_lookup",
+            "approved_named_location_resolved",
+            "ag74j_profile_attached",
+            "varanasi_annual_book_key_attached"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "banaras_alias",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "alias": "Banaras"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "varanasi_in"
+      },
+      "actual": {
+        "status": "resolved",
+        "resolved": true,
+        "civil_date": "2026-06-13",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "varanasi_in",
+          "display_label": "Varanasi",
+          "country": "India",
+          "region": "Uttar Pradesh",
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "annual_book_key": {
+          "civil_date": "2026-06-13",
+          "place_id": "varanasi_in",
+          "timezone": "Asia/Kolkata",
+          "instant_conversion_applied": false
+        },
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "approved_alias_lookup",
+            "approved_named_location_resolved",
+            "ag74j_profile_attached",
+            "varanasi_annual_book_key_attached"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "itanagar",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-01-01",
+        "canonical_location_id": "itanagar_in"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "itanagar_in",
+        "timezone": "Asia/Kolkata"
+      },
+      "actual": {
+        "status": "resolved",
+        "resolved": true,
+        "civil_date": "2026-01-01",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "itanagar_in",
+          "display_label": "Itanagar",
+          "country": "India",
+          "region": "Arunachal Pradesh",
+          "latitude": 27.0844,
+          "longitude": 93.6053,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "annual_book_key": {
+          "civil_date": "2026-01-01",
+          "place_id": "varanasi_in",
+          "timezone": "Asia/Kolkata",
+          "instant_conversion_applied": false
+        },
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "canonical_id_lookup",
+            "approved_named_location_resolved",
+            "ag74j_profile_attached",
+            "varanasi_annual_book_key_attached"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "london",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-07-15",
+        "canonical_location_id": "london_gb"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "london_gb",
+        "timezone": "Europe/London",
+        "book_date": "2026-07-15"
+      },
+      "actual": {
+        "status": "resolved",
+        "resolved": true,
+        "civil_date": "2026-07-15",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "london_gb",
+          "display_label": "London",
+          "country": "United Kingdom",
+          "region": "England",
+          "latitude": 51.5074,
+          "longitude": -0.1278,
+          "timezone": "Europe/London",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "annual_book_key": {
+          "civil_date": "2026-07-15",
+          "place_id": "varanasi_in",
+          "timezone": "Asia/Kolkata",
+          "instant_conversion_applied": false
+        },
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "canonical_id_lookup",
+            "approved_named_location_resolved",
+            "ag74j_profile_attached",
+            "varanasi_annual_book_key_attached"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "unknown",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "unknown_place"
+      },
+      "expected": {
+        "status": "unsupported_location"
+      },
+      "actual": {
+        "status": "unsupported_location",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "canonical_id_lookup",
+            "named_location_not_found"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "invalid_date",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-02-30",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "invalid_civil_date"
+      },
+      "actual": {
+        "status": "invalid_civil_date",
+        "resolved": false,
+        "civil_date": "2026-02-30",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "below_range",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "1899-12-31",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "unsupported_date_range"
+      },
+      "actual": {
+        "status": "unsupported_date_range",
+        "resolved": false,
+        "civil_date": "1899-12-31",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "upper_boundary",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2100-12-31",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "resolved",
+        "location_id": "varanasi_in"
+      },
+      "actual": {
+        "status": "resolved",
+        "resolved": true,
+        "civil_date": "2100-12-31",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "varanasi_in",
+          "display_label": "Varanasi",
+          "country": "India",
+          "region": "Uttar Pradesh",
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "annual_book_key": {
+          "civil_date": "2100-12-31",
+          "place_id": "varanasi_in",
+          "timezone": "Asia/Kolkata",
+          "instant_conversion_applied": false
+        },
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "canonical_id_lookup",
+            "approved_named_location_resolved",
+            "ag74j_profile_attached",
+            "varanasi_annual_book_key_attached"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "coordinate_valid",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 35.6762,
+        "longitude": 139.6503,
+        "timezone": "Asia/Tokyo",
+        "optional_place_label": "Custom Tokyo coordinates"
+      },
+      "expected": {
+        "status": "resolved",
+        "resolution_type": "coordinate_first",
+        "timezone": "Asia/Tokyo",
+        "book_date": "2026-06-13"
+      },
+      "actual": {
+        "status": "resolved",
+        "resolved": true,
+        "civil_date": "2026-06-13",
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Custom Tokyo coordinates",
+          "country": null,
+          "region": null,
+          "latitude": 35.6762,
+          "longitude": 139.6503,
+          "timezone": "Asia/Tokyo",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "annual_book_key": {
+          "civil_date": "2026-06-13",
+          "place_id": "varanasi_in",
+          "timezone": "Asia/Kolkata",
+          "instant_conversion_applied": false
+        },
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "coordinate_first_validation_started",
+            "coordinate_first_resolved_without_geocoding",
+            "ag74j_profile_attached",
+            "varanasi_annual_book_key_attached"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "coordinate_no_timezone",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 27.0844,
+        "longitude": 93.6053
+      },
+      "expected": {
+        "status": "unsupported_timezone"
+      },
+      "actual": {
+        "status": "unsupported_timezone",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "coordinate_first_validation_started",
+            "iana_timezone_rejected"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "coordinate_bad_lat",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 91,
+        "longitude": 82.9739,
+        "timezone": "Asia/Kolkata"
+      },
+      "expected": {
+        "status": "invalid_coordinates"
+      },
+      "actual": {
+        "status": "invalid_coordinates",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "coordinate_first_validation_started",
+            "coordinate_range_rejected"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "coordinate_bad_timezone",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 25.3176,
+        "longitude": 82.9739,
+        "timezone": "Asia/NotAZone"
+      },
+      "expected": {
+        "status": "unsupported_timezone"
+      },
+      "actual": {
+        "status": "unsupported_timezone",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "coordinate_first_validation_started",
+            "iana_timezone_rejected"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "timezone_conflict",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in",
+        "timezone": "Europe/London"
+      },
+      "expected": {
+        "status": "timezone_conflict"
+      },
+      "actual": {
+        "status": "timezone_conflict",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "canonical_location_id": "varanasi_in",
+        "expected_timezone": "Asia/Kolkata",
+        "supplied_timezone": "Europe/London",
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "canonical_id_lookup",
+            "timezone_conflict"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "method_rejected",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in",
+        "method": "rishikesh_panchang"
+      },
+      "expected": {
+        "status": "unsupported_method_selector"
+      },
+      "actual": {
+        "status": "unsupported_method_selector",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "method_selector_rejected"
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "mode_rejected",
+      "input": {
+        "mode": "free_text_geocoding",
+        "civil_date": "2026-06-13",
+        "place": "Somewhere near Varanasi"
+      },
+      "expected": {
+        "status": "invalid_input_mode"
+      },
+      "actual": {
+        "status": "invalid_input_mode",
+        "resolved": false,
+        "civil_date": "2026-06-13",
+        "public_output_allowed": false,
+        "computation_executed": false,
+        "trace": {
+          "resolver_version": "1.0.0",
+          "methodology_version": "1.0.0",
+          "canonical_profile_version": "1.0.0",
+          "date_range_contract_version": "1.0.0",
+          "location_timezone_contract_version": "1.0.0",
+          "lunar_rule_set_version": "1.0.0",
+          "festival_window_contract_version": "1.0.0",
+          "astronomical_contract_version": "1.0.0",
+          "source_record_path": null,
+          "resolution_steps": [
+            "strict_civil_date_validation",
+            "input_mode_rejected"
+          ]
+        }
+      }
+    }
+  ]
+}

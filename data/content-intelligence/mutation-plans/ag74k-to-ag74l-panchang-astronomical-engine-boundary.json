@@ -1,0 +1,25 @@
+{
+  "from_module": "AG74K",
+  "to_module": "AG74L",
+  "transition": "validated_input_resolution_to_internal_astronomical_engine",
+  "ag74l_must_implement": [
+    "versioned deterministic ephemeris backend",
+    "UTC and TT/TDB handling",
+    "Delta-T model",
+    "precession and nutation model",
+    "geocentric apparent solar and lunar longitudes",
+    "Lahiri/Chitrapaksha conversion",
+    "transition root finding",
+    "traceable internal result contract"
+  ],
+  "ag74l_must_not_activate": [
+    "public Panchang publication",
+    "festival generation",
+    "unrestricted geocoding",
+    "backend deployment",
+    "Supabase",
+    "personal location storage",
+    "unaudited external ephemeris API",
+    "public method selector"
+  ]
+}

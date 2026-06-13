@@ -1,0 +1,67 @@
+{
+  "module_id": "AG74K",
+  "title": "Panchang Input Resolver Contract",
+  "status": "ag74k_input_resolver_contract_locked",
+  "profile_id": "drishvara_varanasi_standard_v1",
+  "supported_input_modes": [
+    "named_location",
+    "coordinate_first"
+  ],
+  "civil_date": {
+    "format": "YYYY-MM-DD",
+    "calendar": "proleptic_gregorian",
+    "start": "1900-01-01",
+    "end": "2100-12-31",
+    "inclusive": true,
+    "strict": true,
+    "silent_clamping": false,
+    "nearest_substitution": false
+  },
+  "named_location": {
+    "exact_only": true,
+    "fuzzy": false,
+    "nearest_substitution": false,
+    "timezone_override": false
+  },
+  "coordinate_first": {
+    "latitude_range": [
+      -90,
+      90
+    ],
+    "longitude_range": [
+      -180,
+      180
+    ],
+    "iana_timezone_required": true,
+    "reverse_geocoding": false,
+    "persistence": false
+  },
+  "annual_book": {
+    "place_id": "varanasi_in",
+    "timezone": "Asia/Kolkata",
+    "reuse_selected_civil_date_without_instant_conversion": true
+  },
+  "statuses": [
+    "resolved",
+    "invalid_input_mode",
+    "invalid_civil_date",
+    "unsupported_date_range",
+    "unsupported_location",
+    "invalid_coordinates",
+    "unsupported_timezone",
+    "timezone_conflict",
+    "unsupported_method_selector"
+  ],
+  "forbidden": [
+    "astronomy",
+    "sunrise",
+    "lunar_month_generation",
+    "festival_generation",
+    "unrestricted_geocoding",
+    "backend",
+    "Supabase",
+    "personal_location_storage",
+    "external_ephemeris_api",
+    "public_method_selector"
+  ]
+}

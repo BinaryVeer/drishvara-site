@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {loadAg74kResolverContext,resolveAg74kPanchangInput} from './lib/ag74k-panchang-input-resolver.mjs';
+const root=process.cwd();
+const bank=JSON.parse(fs.readFileSync(path.join(root,'data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-test-bank.json'),'utf8'));
+const ctx=loadAg74kResolverContext(root);
+const results=bank.cases.map(c=>({test_id:c.id,input:c.input,expected:c.expected,actual:resolveAg74kPanchangInput(c.input,ctx)}));
+fs.writeFileSync(path.join(root,'data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-test-results.json'),JSON.stringify({module_id:'AG74K',title:'Panchang Input Resolver Test Results',status:'ag74k_resolver_test_results_generated',test_count:results.length,generated_deterministically:true,public_output_allowed:false,astronomical_computation_executed:false,results},null,2)+'\n');
+console.log('✅ AG74K resolver test results generated: '+results.length+' cases.');
+console.log('✅ No astronomy, geocoding, persistence or public output executed.');

@@ -1,0 +1,30 @@
+{
+  "module_id": "AG74K",
+  "title": "Panchang Input Resolver Preview",
+  "status": "preview_matches_resolver_contract",
+  "examples": [
+    {
+      "input": "Varanasi + 2026-06-13",
+      "result": "resolved",
+      "profile": "drishvara_varanasi_standard_v1"
+    },
+    {
+      "input": "Banaras alias",
+      "result": "resolved to varanasi_in"
+    },
+    {
+      "input": "Valid coordinates + IANA timezone",
+      "result": "resolved without geocoding or persistence"
+    },
+    {
+      "input": "Unknown place",
+      "result": "unsupported_location"
+    },
+    {
+      "input": "Invalid/out-of-range date",
+      "result": "governed rejection"
+    }
+  ],
+  "public_output_allowed": false,
+  "astronomical_computation_executed": false
+}
