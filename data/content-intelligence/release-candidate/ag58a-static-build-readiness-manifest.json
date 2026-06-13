@@ -231,6 +231,16 @@
       "detail": "AG74M deterministic day-orchestration result bank must pass without festival, annual-calendar or external-API activation."
     },
     {
+      "id": "ag74n_festival_annual_calendar_passed",
+      "passed": true,
+      "detail": "AG74N annual calendar must pass 36 checks and make AG74O ready."
+    },
+    {
+      "id": "ag74n_validation_result_bank_valid",
+      "passed": true,
+      "detail": "AG74N result bank must pass while keeping unreviewed festival dates and public output blocked."
+    },
+    {
       "id": "daily_context_dir_exists",
       "passed": true,
       "detail": "generated/daily-context must exist."
@@ -314,14 +324,19 @@
       "id": "ag74m_validate_script_exists",
       "passed": true,
       "detail": "validate:ag74m must exist."
+    },
+    {
+      "id": "ag74n_validate_script_exists",
+      "passed": true,
+      "detail": "validate:ag74n must exist."
     }
   ],
   "failures": [],
   "current_git_context": {
     "branch": "main",
-    "head": "7e062e80",
-    "head_full": "7e062e80e8c5dee5c4d970564be011c8c6953cdf",
-    "origin_main": "7e062e80",
+    "head": "f5993c92",
+    "head_full": "f5993c921211437213bbb4f287a1e939b91f5606",
+    "origin_main": "f5993c92",
     "status_at_build": "clean"
   },
   "blocked_actions": [
