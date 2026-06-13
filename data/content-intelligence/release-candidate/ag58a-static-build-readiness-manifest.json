@@ -91,9 +91,44 @@
       "detail": "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation. must appear on public homepage."
     },
     {
-      "id": "required_present_Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.",
+      "id": "required_present_data-ag74i-panchang-public-surface=\"true\"",
       "passed": true,
-      "detail": "Active calculated Panchang pilot result is available for approved pilot locations and remains under verification. must appear on public homepage."
+      "detail": "data-ag74i-panchang-public-surface=\"true\" must appear on public homepage."
+    },
+    {
+      "id": "required_present_data-ag74i-default-location=\"varanasi_in\"",
+      "passed": true,
+      "detail": "data-ag74i-default-location=\"varanasi_in\" must appear on public homepage."
+    },
+    {
+      "id": "required_present_data-ag74i-default-timezone=\"Asia/Kolkata\"",
+      "passed": true,
+      "detail": "data-ag74i-default-timezone=\"Asia/Kolkata\" must appear on public homepage."
+    },
+    {
+      "id": "required_present_data-ag74i-exact-record-only=\"true\"",
+      "passed": true,
+      "detail": "data-ag74i-exact-record-only=\"true\" must appear on public homepage."
+    },
+    {
+      "id": "required_present_data-ag74i-public-approval-required=\"true\"",
+      "passed": true,
+      "detail": "data-ag74i-public-approval-required=\"true\" must appear on public homepage."
+    },
+    {
+      "id": "required_present_panchang-date-picker",
+      "passed": true,
+      "detail": "panchang-date-picker must appear on public homepage."
+    },
+    {
+      "id": "required_present_panchang-date-text",
+      "passed": true,
+      "detail": "panchang-date-text must appear on public homepage."
+    },
+    {
+      "id": "required_present_data-ag74i-varanasi-calendar-book=\"true\"",
+      "passed": true,
+      "detail": "data-ag74i-varanasi-calendar-book=\"true\" must appear on public homepage."
     },
     {
       "id": "required_present_Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.",
@@ -104,6 +139,56 @@
       "id": "required_present_Reflective prompt only; not a personal prediction, assessment, or decision guide.",
       "passed": true,
       "detail": "Reflective prompt only; not a personal prediction, assessment, or decision guide. must appear on public homepage."
+    },
+    {
+      "id": "ag74i_panchang_card_present",
+      "passed": true,
+      "detail": "AG74I Panchang card must exist."
+    },
+    {
+      "id": "ag74i_varanasi_default",
+      "passed": true,
+      "detail": "Varanasi must be the AG74I default."
+    },
+    {
+      "id": "ag74i_asia_kolkata_default",
+      "passed": true,
+      "detail": "Asia/Kolkata must be the AG74I default timezone."
+    },
+    {
+      "id": "ag74i_exact_only",
+      "passed": true,
+      "detail": "AG74I must use exact-record-only rendering."
+    },
+    {
+      "id": "ag74i_public_approval_required",
+      "passed": true,
+      "detail": "AG74I must require explicit public-display approval."
+    },
+    {
+      "id": "ag74i_governed_unavailable_copy",
+      "passed": true,
+      "detail": "Governed unavailable copy must be visible."
+    },
+    {
+      "id": "ag74i_date_controls",
+      "passed": true,
+      "detail": "All AG74I date controls must exist."
+    },
+    {
+      "id": "ag74i_annual_book_shell",
+      "passed": true,
+      "detail": "Four-page Varanasi annual-book shell must exist."
+    },
+    {
+      "id": "ag74i_no_visible_transition_copy",
+      "passed": true,
+      "detail": "Visible Panchang card must not expose transition-era status vocabulary."
+    },
+    {
+      "id": "ag74i_browser_qa_passed",
+      "passed": true,
+      "detail": "AG74I browser interaction QA must pass."
     },
     {
       "id": "daily_context_dir_exists",
@@ -174,9 +259,9 @@
   "failures": [],
   "current_git_context": {
     "branch": "main",
-    "head": "bdf3a886",
-    "head_full": "bdf3a886525ec2507babd1e42cf84415e27307cc",
-    "origin_main": "bdf3a886",
+    "head": "78095b55",
+    "head_full": "78095b550aa9012ff41250a639c054e3bf1f5b0e",
+    "origin_main": "78095b55",
     "status_at_build": "clean"
   },
   "blocked_actions": [
