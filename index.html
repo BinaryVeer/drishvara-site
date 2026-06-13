@@ -4863,6 +4863,211 @@ select[data-ag71d-r5-native-select-compat="true"] {
 /* AG74A_TWO_ASSET_ACTIVE_UI_SIMPLIFICATION_END */
 </style>
 
+
+<style data-ag74i-panchang-public-surface-style="true">
+/* AG74I_PANCHANG_PUBLIC_SURFACE_STYLE_START */
+[data-ag74i-compat-only="true"] { display: none !important; }
+
+.ag74i-date-surface,
+.ag74i-calendar-book {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(214, 176, 76, 0.34);
+  border-radius: 18px;
+  background: rgba(8, 21, 43, 0.5);
+}
+
+.ag74i-surface-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.ag74i-eyebrow {
+  margin: 0 0 0.2rem;
+  color: #d6b04c;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ag74i-surface-heading h3 {
+  margin: 0;
+  color: rgba(255,255,255,0.98);
+  font-size: 1.08rem;
+}
+
+.ag74i-selected-date,
+.ag74i-book-basis,
+.ag74i-book-year {
+  margin: 0;
+  color: rgba(220,226,238,0.82);
+  font-size: 0.86rem;
+}
+
+.ag74i-date-controls {
+  display: grid;
+  grid-template-columns: auto minmax(145px,1fr) minmax(145px,1fr) auto auto;
+  gap: 0.65rem;
+  align-items: end;
+  margin-top: 0.9rem;
+}
+
+.ag74i-date-field {
+  display: grid;
+  gap: 0.35rem;
+  color: rgba(235,239,247,0.92);
+  font-size: 0.82rem;
+}
+
+.ag74i-date-field input,
+.ag74i-date-button,
+.ag74i-book-navigation button {
+  min-height: 2.65rem;
+  border: 1px solid rgba(214,176,76,0.42);
+  border-radius: 12px;
+  background: rgba(5,17,38,0.94);
+  color: rgba(255,255,255,0.96);
+  font: inherit;
+}
+
+.ag74i-date-field input {
+  width: 100%;
+  padding: 0.58rem 0.72rem;
+  box-sizing: border-box;
+}
+
+.ag74i-date-button,
+.ag74i-book-navigation button {
+  padding: 0.58rem 0.78rem;
+  cursor: pointer;
+}
+
+.ag74i-today-button,
+.ag74i-book-navigation button[aria-current="page"] {
+  background: rgba(214,176,76,0.2);
+  border-color: rgba(214,176,76,0.82);
+}
+
+.ag74i-date-button:focus-visible,
+.ag74i-date-field input:focus-visible,
+.ag74i-book-navigation button:focus-visible {
+  outline: 2px solid #ffe08a;
+  outline-offset: 2px;
+}
+
+.ag74i-date-help,
+.ag74i-selection-status {
+  margin: 0.75rem 0 0;
+  line-height: 1.45;
+  font-size: 0.84rem;
+}
+
+.ag74i-date-help { color: rgba(182,208,233,0.76); }
+
+.ag74i-selection-status {
+  padding: 0.68rem 0.78rem;
+  border-radius: 12px;
+  background: rgba(182,208,233,0.07);
+  color: rgba(235,239,247,0.92);
+}
+
+.ag74i-observance-window {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.8rem 0 0;
+}
+
+.ag74i-observance-window > div {
+  display: grid;
+  grid-template-columns: minmax(5rem,0.45fr) minmax(0,1.55fr);
+  gap: 0.6rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 11px;
+  background: rgba(182,208,233,0.06);
+}
+
+.ag74i-observance-window dt {
+  color: rgba(230,235,246,0.94);
+  font-weight: 700;
+}
+
+.ag74i-observance-window dd {
+  margin: 0;
+  color: rgba(220,226,238,0.88);
+}
+
+.ag74i-book-pages { margin-top: 0.85rem; }
+
+.ag74i-book-page {
+  min-height: 10rem;
+  padding: 1rem;
+  border: 1px solid rgba(182,208,233,0.18);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(214,176,76,0.08), transparent 42%),
+    rgba(5,17,38,0.72);
+}
+
+.ag74i-book-page[hidden] { display: none !important; }
+
+.ag74i-book-page-number {
+  margin: 0 0 0.45rem;
+  color: #d6b04c;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.ag74i-book-page h4 {
+  margin: 0 0 0.65rem;
+  color: rgba(255,255,255,0.96);
+}
+
+.ag74i-book-page p:last-child {
+  color: rgba(220,226,238,0.84);
+  line-height: 1.5;
+}
+
+.ag74i-book-navigation {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+
+.ag74i-book-navigation button { min-width: 2.65rem; }
+
+@media (max-width: 880px) {
+  .ag74i-date-controls {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  .ag74i-date-button { width: 100%; }
+}
+
+@media (max-width: 560px) {
+  .ag74i-date-controls { grid-template-columns: 1fr; }
+  .ag74i-observance-window > div { grid-template-columns: 1fr; }
+  .ag74i-book-navigation {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+  .ag74i-book-navigation #ag74i-book-previous,
+  .ag74i-book-navigation #ag74i-book-next {
+    grid-column: span 2;
+  }
+}
+/* AG74I_PANCHANG_PUBLIC_SURFACE_STYLE_END */
+</style>
+
+
+<script data-ag74i-panchang-dom-owner="true">
+window.drishvaraAg74iPublicSurfaceActive = true;
+</script>
+
 </head>
 <body>
 
@@ -5340,13 +5545,45 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" id="panchang-festival-card" data-ag74i-panchang-public-surface="true">
           <div class="label">Panchang & Festival View</div>
           <span hidden data-ag74a-panchang-active-status="true">Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.</span>
-          <h2>Location-based Panchang</h2>
-          <p>Select a pilot location to view the active calculated Panchang result. Values remain under verification.</p>
+          <h2 id="panchang-public-heading">Panchang by Place and Date</h2>
+          <p data-ag74i-public-introduction="true">Varanasi / Banaras is selected by default. Drishvara displays only a uniquely matched, explicitly approved governed record for the selected place, civil date and timezone. It never substitutes another date or location.</p>
 
           
+
+
+          <!-- AG74I_PANCHANG_PUBLIC_SURFACE_START -->
+          <section class="ag74i-date-surface" data-ag74i-date-selection-surface="true" aria-labelledby="ag74i-date-heading">
+            <div class="ag74i-surface-heading">
+              <div>
+                <p class="ag74i-eyebrow">Panchang date</p>
+                <h3 id="ag74i-date-heading">Choose a date</h3>
+              </div>
+              <p class="ag74i-selected-date" id="panchang-selected-date-label" aria-live="polite">Today in Varanasi</p>
+            </div>
+
+            <div class="ag74i-date-controls" role="group" aria-label="Panchang date navigation">
+              <button type="button" class="ag74i-date-button" id="panchang-previous-day" aria-label="Show previous day">Previous Day</button>
+
+              <label class="ag74i-date-field" for="panchang-date-text">
+                <span>Date (DD/MM/YYYY)</span>
+                <input id="panchang-date-text" type="text" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="DD/MM/YYYY" aria-describedby="panchang-date-help panchang-selection-status" />
+              </label>
+
+              <label class="ag74i-date-field" for="panchang-date-picker">
+                <span>Date picker</span>
+                <input id="panchang-date-picker" type="date" autocomplete="off" aria-describedby="panchang-date-help panchang-selection-status" />
+              </label>
+
+              <button type="button" class="ag74i-date-button ag74i-today-button" id="panchang-today" aria-label="Return to today">Today</button>
+              <button type="button" class="ag74i-date-button" id="panchang-next-day" aria-label="Show next day">Next Day</button>
+            </div>
+
+            <p class="ag74i-date-help" id="panchang-date-help">Historical and future calculation becomes universal only after the astronomical and daily-orchestration engines are completed. AG74I performs exact governed-record lookup only.</p>
+            <p class="ag74i-selection-status" id="panchang-selection-status" role="status" aria-live="polite">Preparing the Varanasi date basis…</p>
+          </section>
 
           <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_START -->
           <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang" data-ag71d-mode="place" data-ag71c-selected-mode="place">
@@ -5374,7 +5611,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
                 <input id="panchang-coordinate-label" type="text" placeholder="e.g. Itanagar">
               </label>
             </div>
-            <p class="ag71c-coordinate-note">Coordinate input remains prepared for later scale-up. The active Panchang result currently uses approved pilot locations.</p>
+            <p class="ag71c-coordinate-note">Coordinate entry is retained as a prepared input surface. Universal coordinate, timezone and astronomical resolution is not active in AG74I.</p>
           </div>
           
             <p class="ag71d-r6-coordinate-basis-summary" data-ag71d-r6-coordinate-basis-summary="panchang">
@@ -5388,13 +5625,15 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang">
             <label class="ag71d-select-label" for="panchang-place-select">Choose Panchang Location</label>
             <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
-                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" selected data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
+                            <option value="varanasi-uttar-pradesh-india" data-location-id="loc_in_up_varanasi_city_001" data-ag74i-engine-location-id="varanasi_in" data-timezone="Asia/Kolkata" data-latitude="25.3176" data-longitude="82.9739" data-country="India" data-location-type="sacred_city" data-source-status="ag74i_default_canonical_location" data-review-status="approved_ag74i_default" selected>Varanasi / Banaras</option>
+              <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
               <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
               <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
               <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
             </select>
             <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_START -->
             <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="panchang" aria-label="Choose Panchang Location">
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="varanasi-uttar-pradesh-india" data-location-id="loc_in_up_varanasi_city_001" data-ag74i-engine-location-id="varanasi_in" data-timezone="Asia/Kolkata" data-latitude="25.3176" data-longitude="82.9739" data-country="India" data-location-type="sacred_city" data-source-status="ag74i_default_canonical_location" data-review-status="approved_ag74i_default" aria-pressed="true">Varanasi / Banaras</button>
               <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</button>
               <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</button>
               <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</button>
@@ -5402,12 +5641,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             </div>
             <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_END -->
             <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="panchang">
-              Selected Panchang location: Itanagar
+              Selected Panchang location: Varanasi / Banaras
             </p>
             <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="panchang">
-              Future scale-up: search will show matching approved locations from the verified location database as you type.
+              Place-name search will use the approved gazetteer and aliases after the resolver contract is completed.
             </p>
-            <p class="ag71d-place-select-note">Location selection is active for approved pilot locations. The active calculated Panchang pilot result remains under verification.</p>
+            <p class="ag71d-place-select-note">Approved locations may display only a uniquely matched, explicitly approved governed record. Universal date and coordinate calculation is not active in AG74I.</p>
           </div>
           <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
 
@@ -5415,10 +5654,10 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
           
           <p class="ag71e-r1-panchang-inline-status" data-ag71e-r1-panchang-inline-status="true">
-            Select a pilot location or enter coordinates, then click Generate Panchang Result. The existing Panchang table below will receive the pilot-safe basis.
+            Varanasi / Banaras and today are selected automatically. A result appears only when one uniquely matched record is explicitly approved for public display.
           </p>
           <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_START -->
-          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang" data-ag71e-r1-compat-only="true">
+          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang" data-ag71e-r1-compat-only="true" data-ag74i-compat-only="true" hidden aria-hidden="true">
             <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="panchang">
               Generate Panchang Result
             </button>
@@ -5439,23 +5678,74 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_END -->
 
           <div class="mini-table" data-drishvara-ag60i-panchang-preview-safe="true">
-            <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-sunrise">Under verification</span></div>
-            <div class="mini-row"><strong>Regional Method</strong><span id="panchang-sunset">Under verification</span></div>
-            <div class="mini-row"><strong>Location Basis</strong><span id="panchang-moonrise">Not live yet</span></div>
-            <div class="mini-row"><strong>Date Basis</strong><span id="panchang-moonset">Not live yet</span></div>
-            <div class="mini-row"><strong>Tithi</strong><span id="panchang-tithi">Withheld until verified</span></div>
-            <div class="mini-row"><strong>Nakshatra</strong><span id="panchang-nakshatra">Withheld until verified</span></div>
-            <div class="mini-row"><strong>Yoga</strong><span id="panchang-yoga">Withheld until verified</span></div>
-            <div class="mini-row"><strong>Paksha</strong><span id="panchang-paksha">Withheld until verified</span></div>
+            <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-sunrise">No publicly approved matching record</span></div>
+            <div class="mini-row"><strong>Method Basis</strong><span id="panchang-sunset">Universal calculation is not yet active</span></div>
+            <div class="mini-row"><strong>Location Basis</strong><span id="panchang-moonrise">Varanasi / Banaras · Asia/Kolkata</span></div>
+            <div class="mini-row"><strong>Date Basis</strong><span id="panchang-moonset">Today in Varanasi</span></div>
+            <div class="mini-row"><strong>Tithi</strong><span id="panchang-tithi">Result unavailable for this selection</span></div>
+            <div class="mini-row"><strong>Nakshatra</strong><span id="panchang-nakshatra">Result unavailable for this selection</span></div>
+            <div class="mini-row"><strong>Yoga</strong><span id="panchang-yoga">Result unavailable for this selection</span></div>
+            <div class="mini-row"><strong>Karana</strong><span id="panchang-karana">Result unavailable for this selection</span></div>
+            <div class="mini-row"><strong>Paksha</strong><span id="panchang-paksha">Result unavailable for this selection</span></div>
           </div>
 
           <div class="festival-list" id="festival-list">
             <div class="festival-item">
               <div class="sub" id="upcoming-observance-title">Upcoming Observance</div>
-              <div class="title" id="upcoming-observance-name">Festival and observance registry is under editorial verification.</div>
-              <div class="meta" id="upcoming-observance-note">Dates, regional applicability and bilingual naming will be published only after source review.</div>
+              <div class="title" id="upcoming-observance-name">No governed observance result is available for this selection yet.</div>
+              <div class="meta" id="upcoming-observance-note">Festival timing appears only when a uniquely matched record has explicit public-display approval or the completed calculation engine is available.</div>
+              <dl class="ag74i-observance-window" data-ag74i-observance-window-placeholder="true">
+                <div><dt>Begins</dt><dd id="upcoming-observance-begins">Not available</dd></div>
+                <div><dt>Ends</dt><dd id="upcoming-observance-ends">Not available</dd></div>
+                <div><dt>Ritual windows</dt><dd id="upcoming-observance-ritual-window">Not available for the current governed record</dd></div>
+              </dl>
             </div>
           </div>
+
+          <section class="ag74i-calendar-book" data-ag74i-varanasi-calendar-book="true" aria-labelledby="ag74i-calendar-book-title">
+            <div class="ag74i-surface-heading">
+              <div>
+                <p class="ag74i-eyebrow">Annual observance book</p>
+                <h3 id="ag74i-calendar-book-title">Varanasi Hindu Festival Calendar</h3>
+              </div>
+              <p class="ag74i-book-basis">Canonical basis: Varanasi / Banaras</p>
+            </div>
+
+            <p class="ag74i-book-year" id="ag74i-calendar-year-label">Hindu-year convention will be finalized in AG74J</p>
+
+            <div class="ag74i-book-pages" aria-live="polite">
+              <article class="ag74i-book-page" data-ag74i-book-page="1">
+                <p class="ag74i-book-page-number">Page 1 of 4</p>
+                <h4>Page 1 · Canonical lunar-month slots 1–3</h4>
+                <p>Festival entries, public Begins/Ends timings and ritual windows will populate after the governed Hindu-year and rule contracts are completed.</p>
+              </article>
+              <article class="ag74i-book-page" data-ag74i-book-page="2" hidden>
+                <p class="ag74i-book-page-number">Page 2 of 4</p>
+                <h4>Page 2 · Canonical lunar-month slots 4–6</h4>
+                <p>Adhika month instances will be nested under their related canonical month slot. Physical month counts may vary.</p>
+              </article>
+              <article class="ag74i-book-page" data-ag74i-book-page="3" hidden>
+                <p class="ag74i-book-page-number">Page 3 of 4</p>
+                <h4>Page 3 · Canonical lunar-month slots 7–9</h4>
+                <p>Kshaya or exceptional month states will be marked explicitly rather than forcing exactly twelve physical months.</p>
+              </article>
+              <article class="ag74i-book-page" data-ag74i-book-page="4" hidden>
+                <p class="ag74i-book-page-number">Page 4 of 4</p>
+                <h4>Page 4 · Canonical lunar-month slots 10–12</h4>
+                <p>The final book will be complete against the approved and versioned Drishvara festival and observance rule inventory.</p>
+              </article>
+            </div>
+
+            <nav class="ag74i-book-navigation" aria-label="Varanasi festival calendar pages">
+              <button type="button" id="ag74i-book-previous" aria-label="Previous calendar page">Previous Page</button>
+              <button type="button" data-ag74i-book-page-button="1" aria-current="page">1</button>
+              <button type="button" data-ag74i-book-page-button="2">2</button>
+              <button type="button" data-ag74i-book-page-button="3">3</button>
+              <button type="button" data-ag74i-book-page-button="4">4</button>
+              <button type="button" id="ag74i-book-next" aria-label="Next calendar page">Next Page</button>
+            </nav>
+          </section>
+          <!-- AG74I_PANCHANG_PUBLIC_SURFACE_END -->
         </div>
 
         <div class="card" id="open-day-card">
@@ -6158,6 +6448,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
     }
 
     function applyPanchang(panchang) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return;
       if (!panchang) return;
       if (!document.getElementById("panchang-place-select")?.hasAttribute("data-ag71d-location-select")) setSelectValue("panchang-place-select", panchang.place);
       setText("panchang-sunrise", panchang.sunrise);
@@ -6171,6 +6462,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
     }
 
     function applyFestivals(festivals) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return;
       const list = document.getElementById("festival-list");
       if (!list) return;
 
@@ -6356,6 +6648,7 @@ Enhancing Public Healthcare Delivery through Digital Innovation
     }
 
     function renderUpcomingObservance(data) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
       if (!data || !data.upcomingObservance) return;
       setText("upcoming-observance-title", data.upcomingObservance.title);
       setText("upcoming-observance-name", `${data.upcomingObservance.name} - ${data.upcomingObservance.dateText}`);
@@ -7633,6 +7926,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyAg64bPanchangFestival(data) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     if (!data || !data.panchang || !data.observance) return false;
 
     const panchang = data.panchang;
@@ -7664,6 +7958,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function loadAg64bPanchangFestival() {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     try {
       const response = await fetch(DATA_PATH, { cache: "no-store" });
       if (!response.ok) throw new Error(`Unable to load ${DATA_PATH}`);
@@ -8475,6 +8770,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 /* AG71D_R3_FORM_INTERACTION_CONTROLLER_START */
 (function () {
+  var ag74iPanchangDefaultLocation = {"value": "varanasi-uttar-pradesh-india", "label": "Varanasi / Banaras", "location_id": "loc_in_up_varanasi_city_001", "timezone": "Asia/Kolkata"};
   var pilotLocations = [{"value": "itanagar-arunachal-pradesh-india", "label": "Itanagar", "location_id": "loc_in_ar_itanagar_capital_complex_001", "timezone": "Asia/Kolkata"}, {"value": "new-delhi-delhi-india", "label": "New Delhi", "location_id": "loc_in_dl_new_delhi_capital_001", "timezone": "Asia/Kolkata"}, {"value": "ranchi-jharkhand-india", "label": "Ranchi", "location_id": "loc_in_jh_ranchi_city_001", "timezone": "Asia/Kolkata"}, {"value": "tokyo-japan", "label": "Tokyo", "location_id": "loc_jp_tokyo_capital_001", "timezone": "Asia/Tokyo"}];
 
   function optionMarkup(item, selected) {
@@ -8494,14 +8790,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (selectId === 'panchang-place-select') {
-      html += pilotLocations.map(function (item, index) { return optionMarkup(item, index === 0); }).join('');
+      html += optionMarkup(ag74iPanchangDefaultLocation, true);
+      html += pilotLocations.map(function (item) { return optionMarkup(item, false); }).join('');
     }
 
     if (html) {
       select.innerHTML = html;
       var values = Array.prototype.map.call(select.options || [], function (option) { return option.value; });
       if (values.indexOf(previousValue) !== -1) select.value = previousValue;
-      else if (selectId === 'panchang-place-select') select.value = 'itanagar-arunachal-pradesh-india';
+      else if (selectId === 'panchang-place-select') select.value = 'varanasi-uttar-pradesh-india';
       else select.value = '';
     }
 
@@ -8861,12 +9158,14 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 /* AG71D_R6_LOCATION_DATA_BINDING_CONTROLLER_START */
 (function () {
+  var ag74iPanchangDefaultLocation = {"value": "varanasi-uttar-pradesh-india", "label": "Varanasi / Banaras", "location_id": "loc_in_up_varanasi_city_001", "latitude": 25.3176, "longitude": 82.9739, "timezone": "Asia/Kolkata", "country": "India", "location_type": "sacred_city", "source_status": "ag74i_default_canonical_location", "review_status": "approved_ag74i_default"};
   var pilotLocations = [{"value": "itanagar-arunachal-pradesh-india", "label": "Itanagar", "location_id": "loc_in_ar_itanagar_capital_complex_001", "latitude": 27.0844, "longitude": 93.6053, "timezone": "Asia/Kolkata", "country": "India", "location_type": "state_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}, {"value": "new-delhi-delhi-india", "label": "New Delhi", "location_id": "loc_in_dl_new_delhi_capital_001", "latitude": 28.6139, "longitude": 77.209, "timezone": "Asia/Kolkata", "country": "India", "location_type": "national_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}, {"value": "ranchi-jharkhand-india", "label": "Ranchi", "location_id": "loc_in_jh_ranchi_city_001", "latitude": 23.3441, "longitude": 85.3096, "timezone": "Asia/Kolkata", "country": "India", "location_type": "state_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}, {"value": "tokyo-japan", "label": "Tokyo", "location_id": "loc_jp_tokyo_capital_001", "latitude": 35.6762, "longitude": 139.6503, "timezone": "Asia/Tokyo", "country": "Japan", "location_type": "national_capital", "source_status": "pilot_coordinate_candidate", "review_status": "approved_for_four_location_pilot"}];
   var byValue = {};
 
   pilotLocations.forEach(function (item) {
     byValue[item.value] = item;
   });
+  byValue[ag74iPanchangDefaultLocation.value] = ag74iPanchangDefaultLocation;
 
   function formatCoord(item) {
     return Number(item.latitude).toFixed(4) + ", " + Number(item.longitude).toFixed(4);
@@ -8992,6 +9291,28 @@ document.addEventListener("DOMContentLoaded", () => {
     var basis = writeSelectDataset(kind);
     var line = ensureBasisLine(kind);
     if (!line) return;
+
+    if (
+      window.drishvaraAg74iPublicSurfaceActive === true &&
+      kind === "panchang"
+    ) {
+      if (!basis.selected) {
+        line.textContent = "Location basis: selected Panchang place is unavailable";
+        return;
+      }
+
+      line.textContent =
+        "Location basis: " +
+        basis.display_label +
+        " | Coordinates: " +
+        Number(basis.latitude).toFixed(4) +
+        ", " +
+        Number(basis.longitude).toFixed(4) +
+        " | Timezone: " +
+        basis.timezone +
+        " | Governed place selection";
+      return;
+    }
 
     if (!basis.selected && basis.basis_type === "approved_pilot_place") {
       line.textContent = "Location basis: awaiting approved pilot location selection";
@@ -9182,6 +9503,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updatePanchangMiniTable(basis) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     var table = document.querySelector('[data-drishvara-ag60i-panchang-preview-safe="true"]');
     if (!table) return;
 
@@ -9235,6 +9557,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updateUpcomingObservanceNote(basis) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     var basisText = basisLabel(basis);
     var card = findUpcomingObservanceCard();
 
@@ -9257,12 +9580,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function updatePanchangInlineStatus(basis) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     var status = document.querySelector('[data-ag71e-r1-panchang-inline-status="true"]');
     if (!status) return;
     status.textContent = "Preview applied to existing Panchang table using: " + basisLabel(basis) + ". Exact values remain withheld until verified.";
   }
 
   function previewPanchang() {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     var basis = getBasis("panchang");
 
     showPanel("panchang", [
@@ -9407,16 +9732,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function selectedRecord() {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return null;
     var locationId = selectedLocationId();
     var today = localDateKey();
-    var direct = byLocationDate[locationId + "__" + today];
-    if (direct) return direct;
-
-    var list = byLocation[locationId] || [];
-    if (list.length) return list[0];
-
-    var records = Array.isArray(payload && payload.records) ? payload.records : [];
-    return records[0] || null;
+    return byLocationDate[locationId + "__" + today] || null;
   }
 
   function ensurePilotLabel(table) {
@@ -9466,6 +9785,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderRecord(record) {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return false;
     if (!record) return false;
 
     var table = document.querySelector('[data-drishvara-ag60i-panchang-preview-safe="true"]');
@@ -9509,6 +9829,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function previewPanchangAg71qR1() {
+    if (window.drishvaraAg74iPublicSurfaceActive === true) return Promise.resolve(false);
     return loadPayload().then(function () {
       return renderRecord(selectedRecord());
     });
@@ -9867,6 +10188,706 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- AG74G_PANCHANG_ACTIVE_DATA_WIRING_START -->
 <span hidden data-ag74g-panchang-active-data-source="generated/panchang-active-static-result-data.json">generated/panchang-pilot-preview-data.json</span>
 <!-- AG74G_PANCHANG_ACTIVE_DATA_WIRING_END -->
+
+
+<script data-ag74i-panchang-public-surface-controller="true">
+/* AG74I_PANCHANG_PUBLIC_SURFACE_CONTROLLER_START */
+(function () {
+  "use strict";
+
+  window.drishvaraAg74iPublicSurfaceActive = true;
+
+  var DATA_PATH = "generated/panchang-active-static-result-data.json";
+  var LOCATION_MAP = {
+    "varanasi-uttar-pradesh-india": {
+      value: "varanasi-uttar-pradesh-india",
+      engineLocationId: "varanasi_in",
+      canonicalPlaceId: "varanasi_in",
+      label: "Varanasi / Banaras",
+      timezone: "Asia/Kolkata"
+    },
+    "itanagar-arunachal-pradesh-india": {
+      value: "itanagar-arunachal-pradesh-india",
+      engineLocationId: "itanagar_in",
+      canonicalPlaceId: "itanagar_in",
+      label: "Itanagar",
+      timezone: "Asia/Kolkata"
+    },
+    "new-delhi-delhi-india": {
+      value: "new-delhi-delhi-india",
+      engineLocationId: "new_delhi_in",
+      canonicalPlaceId: "new_delhi_in",
+      label: "New Delhi",
+      timezone: "Asia/Kolkata"
+    },
+    "ranchi-jharkhand-india": {
+      value: "ranchi-jharkhand-india",
+      engineLocationId: "ranchi_in",
+      canonicalPlaceId: "ranchi_in",
+      label: "Ranchi",
+      timezone: "Asia/Kolkata"
+    },
+    "tokyo-japan": {
+      value: "tokyo-japan",
+      engineLocationId: "tokyo_jp",
+      canonicalPlaceId: "tokyo_jp",
+      label: "Tokyo",
+      timezone: "Asia/Tokyo"
+    }
+  };
+
+  var state = {
+    dateKey: "",
+    bookPage: 1,
+    payload: null,
+    records: [],
+    loadPromise: null,
+    requestToken: 0,
+    suppressSelectionChange: false
+  };
+
+  function byId(id) { return document.getElementById(id); }
+
+  function setText(id, value) {
+    var element = byId(id);
+    if (element) element.textContent = value;
+  }
+
+  function todayInTimezone(timeZone) {
+    var parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(new Date());
+
+    var values = {};
+    parts.forEach(function (part) {
+      values[part.type] = part.value;
+    });
+
+    return values.year + "-" + values.month + "-" + values.day;
+  }
+
+  function isoToDisplay(value) {
+    var match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    return match ? match[3] + "/" + match[2] + "/" + match[1] : "";
+  }
+
+  function displayToIso(value) {
+    var match = String(value || "").trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (!match) return null;
+
+    var day = Number(match[1]);
+    var month = Number(match[2]);
+    var year = Number(match[3]);
+    var probe = new Date(Date.UTC(year, month - 1, day, 12, 0, 0));
+
+    if (
+      probe.getUTCFullYear() !== year ||
+      probe.getUTCMonth() !== month - 1 ||
+      probe.getUTCDate() !== day
+    ) {
+      return null;
+    }
+
+    return match[3] + "-" + match[2] + "-" + match[1];
+  }
+
+  function applyDateMask(value) {
+    var digits = String(value || "").replace(/\D/g, "").slice(0, 8);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 4) return digits.slice(0, 2) + "/" + digits.slice(2);
+    return digits.slice(0, 2) + "/" + digits.slice(2, 4) + "/" + digits.slice(4);
+  }
+
+  function shiftDate(dateKey, amount) {
+    var match = String(dateKey || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return dateKey;
+
+    var date = new Date(Date.UTC(
+      Number(match[1]),
+      Number(match[2]) - 1,
+      Number(match[3]),
+      12,
+      0,
+      0
+    ));
+
+    date.setUTCDate(date.getUTCDate() + amount);
+
+    return [
+      date.getUTCFullYear(),
+      String(date.getUTCMonth() + 1).padStart(2, "0"),
+      String(date.getUTCDate()).padStart(2, "0")
+    ].join("-");
+  }
+
+  function normaliseRecords(payload) {
+    if (Array.isArray(payload)) return payload;
+    var keys = ["active_records", "records", "results", "samples", "data"];
+    for (var i = 0; i < keys.length; i += 1) {
+      if (Array.isArray(payload && payload[keys[i]])) return payload[keys[i]];
+    }
+    return [];
+  }
+
+  function loadPayload() {
+    if (state.payload) return Promise.resolve(state.payload);
+    if (state.loadPromise) return state.loadPromise;
+
+    state.loadPromise = fetch(DATA_PATH, { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("Panchang data unavailable");
+        return response.json();
+      })
+      .then(function (payload) {
+        state.payload = payload;
+        state.records = normaliseRecords(payload);
+        return payload;
+      })
+      .catch(function () {
+        state.payload = null;
+        state.records = [];
+        return null;
+      });
+
+    return state.loadPromise;
+  }
+
+  function selectedMode() {
+    var surface = document.querySelector('[data-ag71c-coordinate-surface="panchang"]');
+    return surface ? surface.getAttribute("data-ag71d-mode") || "place" : "place";
+  }
+
+  function selectedPlace() {
+    var select = byId("panchang-place-select");
+    var value = select ? select.value : "varanasi-uttar-pradesh-india";
+    return LOCATION_MAP[value] || LOCATION_MAP["varanasi-uttar-pradesh-india"];
+  }
+
+  function syncVisibleLocationButtons(value) {
+    document
+      .querySelectorAll('[data-ag71d-r4-select-kind="panchang"]')
+      .forEach(function (button) {
+        var active =
+          button.getAttribute("data-ag71d-r4-location-value") === value;
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+  }
+
+  function setDefaultVaranasi() {
+    var select = byId("panchang-place-select");
+    state.suppressSelectionChange = true;
+
+    if (select) {
+      select.value = "varanasi-uttar-pradesh-india";
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    syncVisibleLocationButtons("varanasi-uttar-pradesh-india");
+
+    var summary = document.querySelector(
+      '[data-ag71d-r5-selection-summary="panchang"]'
+    );
+    if (summary) {
+      summary.textContent = "Selected Panchang location: Varanasi / Banaras";
+    }
+
+    state.suppressSelectionChange = false;
+  }
+
+  function syncDateControls(dateKey) {
+    state.dateKey = dateKey;
+
+    var picker = byId("panchang-date-picker");
+    var text = byId("panchang-date-text");
+
+    if (picker) picker.value = dateKey;
+    if (text) text.value = isoToDisplay(dateKey);
+
+    setText(
+      "panchang-selected-date-label",
+      isoToDisplay(dateKey) + " · selected civil date"
+    );
+
+    window.drishvaraAg74iSelectedDateKey = dateKey;
+  }
+
+  function recordLocationId(record) {
+    return String(
+      record.canonical_place_id ||
+      record.location_id ||
+      record.preview_location_id ||
+      ""
+    );
+  }
+
+  function recordDateKey(record) {
+    return String(
+      record.local_date_key ||
+      record.preview_date ||
+      record.civil_date_key ||
+      record.date ||
+      ""
+    );
+  }
+
+  function recordTimezone(record) {
+    return String(
+      record.timezone ||
+      record.preview_timezone ||
+      record.iana_timezone ||
+      ""
+    );
+  }
+
+  function recordIsPubliclyApproved(record) {
+    return Boolean(
+      record &&
+      record.ag74i_public_display_allowed === true &&
+      record.public_output_allowed === true &&
+      record.ui_output_allowed === true &&
+      record.exact_value_publication_allowed === true &&
+      record.index_html_wiring_allowed === true
+    );
+  }
+
+  function recordIsEligible(record, place, dateKey) {
+    return Boolean(
+      record &&
+      place &&
+      recordLocationId(record) === place.engineLocationId &&
+      recordDateKey(record) === dateKey &&
+      recordTimezone(record) === place.timezone &&
+      recordIsPubliclyApproved(record)
+    );
+  }
+
+  function exactInternalMatches(place, dateKey) {
+    return state.records.filter(function (record) {
+      return (
+        recordLocationId(record) === place.engineLocationId &&
+        recordDateKey(record) === dateKey &&
+        recordTimezone(record) === place.timezone
+      );
+    });
+  }
+
+  function exactEligibleMatches(place, dateKey) {
+    return state.records.filter(function (record) {
+      return recordIsEligible(record, place, dateKey);
+    });
+  }
+
+  function classifyEligibleMatches(matches) {
+    if (!Array.isArray(matches) || matches.length === 0) return "unavailable";
+    if (matches.length === 1) return "unique";
+    return "conflict";
+  }
+
+  function setResultState(stateName, recordId) {
+    var card = byId("panchang-festival-card");
+    var table = document.querySelector(
+      '[data-drishvara-ag60i-panchang-preview-safe="true"]'
+    );
+
+    if (card) {
+      card.setAttribute("data-ag74i-result-state", stateName);
+      card.setAttribute("data-ag74i-exact-record-id", recordId || "none");
+    }
+
+    if (table) {
+      table.setAttribute("data-ag74i-panchang-result-surface", "true");
+      table.setAttribute("data-ag74i-result-state", stateName);
+    }
+  }
+
+  function renderUnavailable(place, dateKey, reason, stateName) {
+    var dateDisplay = isoToDisplay(dateKey);
+    var locationLabel = place.label || "Selected location";
+    var timezone = place.timezone || "Timezone required";
+
+    setText("panchang-sunrise", "No publicly approved matching record");
+    setText("panchang-sunset", "Universal calculation is not yet active");
+    setText("panchang-moonrise", locationLabel + " · " + timezone);
+    setText("panchang-moonset", dateDisplay);
+    setText("panchang-tithi", "Result unavailable for this selection");
+    setText("panchang-nakshatra", "Result unavailable for this selection");
+    setText("panchang-yoga", "Result unavailable for this selection");
+    setText("panchang-karana", "Result unavailable for this selection");
+    setText("panchang-paksha", "Result unavailable for this selection");
+
+    setText(
+      "panchang-selection-status",
+      reason ||
+      (
+        "No uniquely matched, publicly approved Panchang record is available for " +
+        locationLabel +
+        " on " +
+        dateDisplay +
+        " in " +
+        timezone +
+        ". Drishvara has not substituted another date or place."
+      )
+    );
+
+    setText(
+      "upcoming-observance-name",
+      "No governed observance result is available for this selection yet."
+    );
+    setText(
+      "upcoming-observance-note",
+      "Festival timing appears only when a uniquely matched record has explicit public-display approval or the completed calculation engine is available."
+    );
+    setText("upcoming-observance-begins", "Not available");
+    setText("upcoming-observance-ends", "Not available");
+    setText(
+      "upcoming-observance-ritual-window",
+      "Not available for the current governed record"
+    );
+
+    setResultState(stateName || "governed_unavailable", "");
+  }
+
+  function renderRecord(record, place, dateKey) {
+    setText("panchang-sunrise", "Publicly approved governed static record");
+    setText("panchang-sunset", "Reference methodology");
+    setText(
+      "panchang-moonrise",
+      (record.location_label || record.preview_location_label || place.label) +
+      " · " +
+      (record.timezone || record.preview_timezone || place.timezone)
+    );
+    setText("panchang-moonset", isoToDisplay(dateKey));
+    setText(
+      "panchang-tithi",
+      (record.tithi || record.preview_tithi || "Not available") +
+      ((record.tithi_index || record.preview_tithi_index)
+        ? " (" + (record.tithi_index || record.preview_tithi_index) + ")"
+        : "")
+    );
+    setText(
+      "panchang-nakshatra",
+      record.nakshatra || record.preview_nakshatra || "Not available"
+    );
+    setText(
+      "panchang-yoga",
+      record.yoga || record.preview_yoga || "Not available"
+    );
+    setText(
+      "panchang-karana",
+      record.karana || record.preview_karana || "Not available"
+    );
+    setText(
+      "panchang-paksha",
+      record.paksha || record.preview_paksha || "Not available"
+    );
+
+    setText(
+      "panchang-selection-status",
+      "A unique publicly approved governed record is available for " +
+      place.label +
+      " on " +
+      isoToDisplay(dateKey) +
+      "."
+    );
+
+    setText(
+      "upcoming-observance-name",
+      "No approved observance timing record is attached to this Panchang result."
+    );
+    setText(
+      "upcoming-observance-note",
+      "Begins, Ends and ritual windows are not inferred from missing data."
+    );
+    setText("upcoming-observance-begins", "Not available in current record");
+    setText("upcoming-observance-ends", "Not available in current record");
+    setText(
+      "upcoming-observance-ritual-window",
+      "Not available in current record"
+    );
+
+    setResultState(
+      "unique_publicly_approved_record",
+      record.ag74g_static_engine_result_id ||
+      record.preview_record_id ||
+      "governed-record"
+    );
+  }
+
+  function applySelection() {
+    state.requestToken += 1;
+    var requestToken = state.requestToken;
+    var place = selectedPlace();
+
+    if (selectedMode() === "coordinates") {
+      renderUnavailable(
+        {
+          label: byId("panchang-coordinate-label")
+            ? byId("panchang-coordinate-label").value.trim() || "Entered coordinates"
+            : "Entered coordinates",
+          timezone: byId("panchang-timezone")
+            ? byId("panchang-timezone").value.trim() || "Timezone required"
+            : "Timezone required",
+          engineLocationId: ""
+        },
+        state.dateKey,
+        "Coordinate input is preserved, but coordinate-to-timezone resolution and universal calculation are not active in AG74I.",
+        "coordinate_resolution_pending"
+      );
+      return Promise.resolve(false);
+    }
+
+    setText(
+      "panchang-selection-status",
+      "Checking the governed result bank for a unique publicly approved " +
+      place.label +
+      " · " +
+      isoToDisplay(state.dateKey) +
+      " · " +
+      place.timezone +
+      " match…"
+    );
+
+    return loadPayload().then(function () {
+      if (requestToken !== state.requestToken) return false;
+
+      var internalMatches = exactInternalMatches(place, state.dateKey);
+      var eligibleMatches = exactEligibleMatches(place, state.dateKey);
+      var classification = classifyEligibleMatches(eligibleMatches);
+
+      if (classification === "unique") {
+        renderRecord(eligibleMatches[0], place, state.dateKey);
+        return true;
+      }
+
+      if (classification === "conflict") {
+        renderUnavailable(
+          place,
+          state.dateKey,
+          "More than one publicly approved record matches the selected place, civil date and timezone. The result is withheld until the conflict is resolved.",
+          "governed_conflict"
+        );
+        return false;
+      }
+
+      if (internalMatches.length > 0) {
+        renderUnavailable(
+          place,
+          state.dateKey,
+          "A matching internal record exists, but it does not have the explicit public-display approvals required by AG74I.",
+          "matching_record_not_publicly_approved"
+        );
+        return false;
+      }
+
+      renderUnavailable(place, state.dateKey);
+      return false;
+    });
+  }
+
+  function setBookPage(page) {
+    var safePage = Math.min(4, Math.max(1, Number(page) || 1));
+    state.bookPage = safePage;
+
+    document.querySelectorAll("[data-ag74i-book-page]").forEach(function (panel) {
+      panel.hidden =
+        Number(panel.getAttribute("data-ag74i-book-page")) !== safePage;
+    });
+
+    document
+      .querySelectorAll("[data-ag74i-book-page-button]")
+      .forEach(function (button) {
+        var current =
+          Number(button.getAttribute("data-ag74i-book-page-button")) === safePage;
+        if (current) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+  }
+
+  function boot() {
+    var card = byId("panchang-festival-card");
+    if (!card || card.getAttribute("data-ag74i-booted") === "true") return;
+
+    card.setAttribute("data-ag74i-booted", "true");
+    document.documentElement.setAttribute(
+      "data-ag74i-panchang-public-surface",
+      "active"
+    );
+
+    setDefaultVaranasi();
+    syncDateControls(todayInTimezone("Asia/Kolkata"));
+    setBookPage(1);
+    applySelection();
+  }
+
+  document.addEventListener("input", function (event) {
+    if (!event.target || event.target.id !== "panchang-date-text") return;
+
+    event.target.value = applyDateMask(event.target.value);
+
+    if (event.target.value.length === 10) {
+      var dateKey = displayToIso(event.target.value);
+
+      if (!dateKey) {
+        setText(
+          "panchang-selection-status",
+          "Enter a valid date in DD/MM/YYYY format."
+        );
+        return;
+      }
+
+      syncDateControls(dateKey);
+      applySelection();
+    }
+  });
+
+  document.addEventListener("change", function (event) {
+    if (!event.target || state.suppressSelectionChange) return;
+
+    if (event.target.id === "panchang-date-picker") {
+      if (!event.target.value) return;
+      syncDateControls(event.target.value);
+      applySelection();
+      return;
+    }
+
+    if (event.target.id === "panchang-date-text") {
+      var parsed = displayToIso(event.target.value);
+      if (!parsed) {
+        setText(
+          "panchang-selection-status",
+          "Enter a valid date in DD/MM/YYYY format."
+        );
+        return;
+      }
+
+      syncDateControls(parsed);
+      applySelection();
+      return;
+    }
+
+    if (
+      event.target.id === "panchang-place-select" ||
+      event.target.matches('input[name="ag71c-panchang-location-mode"]')
+    ) {
+      syncVisibleLocationButtons(
+        byId("panchang-place-select")
+          ? byId("panchang-place-select").value
+          : ""
+      );
+      window.setTimeout(applySelection, 0);
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    var target = event.target;
+    if (!target || !target.closest) return;
+
+    if (target.closest("#panchang-previous-day")) {
+      syncDateControls(shiftDate(state.dateKey, -1));
+      applySelection();
+      return;
+    }
+
+    if (target.closest("#panchang-next-day")) {
+      syncDateControls(shiftDate(state.dateKey, 1));
+      applySelection();
+      return;
+    }
+
+    if (target.closest("#panchang-today")) {
+      var place = selectedPlace();
+      syncDateControls(todayInTimezone(place.timezone || "Asia/Kolkata"));
+      applySelection();
+      return;
+    }
+
+    var locationButton = target.closest(
+      '[data-ag71d-r4-select-kind="panchang"]'
+    );
+    if (locationButton) {
+      window.setTimeout(function () {
+        syncVisibleLocationButtons(
+          locationButton.getAttribute("data-ag71d-r4-location-value")
+        );
+        applySelection();
+      }, 0);
+      return;
+    }
+
+    var pageButton = target.closest("[data-ag74i-book-page-button]");
+    if (pageButton) {
+      setBookPage(
+        pageButton.getAttribute("data-ag74i-book-page-button")
+      );
+      return;
+    }
+
+    if (target.closest("#ag74i-book-previous")) {
+      setBookPage(state.bookPage - 1);
+      return;
+    }
+
+    if (target.closest("#ag74i-book-next")) {
+      setBookPage(state.bookPage + 1);
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (!event.target || !event.target.matches("[data-ag74i-book-page-button]")) {
+      return;
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      setBookPage(state.bookPage - 1);
+      var previous = document.querySelector(
+        '[data-ag74i-book-page-button="' + state.bookPage + '"]'
+      );
+      if (previous) previous.focus();
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      setBookPage(state.bookPage + 1);
+      var next = document.querySelector(
+        '[data-ag74i-book-page-button="' + state.bookPage + '"]'
+      );
+      if (next) next.focus();
+    }
+  });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+
+  window.drishvaraAg74iApplySelection = applySelection;
+  window.drishvaraAg74iRenderUnavailable = renderUnavailable;
+  window.drishvaraAg74iSetBookPage = setBookPage;
+  window.drishvaraAg74iRecordIsPubliclyApproved = recordIsPubliclyApproved;
+  window.drishvaraAg74iRecordIsEligible = recordIsEligible;
+  window.drishvaraAg74iClassifyEligibleMatches = classifyEligibleMatches;
+})();
+ /* AG74I_PANCHANG_PUBLIC_SURFACE_CONTROLLER_END */
+</script>
+
+<div hidden data-ag74i-governance-markers="true"
+     data-ag74i-default-location="varanasi_in"
+     data-ag74i-default-timezone="Asia/Kolkata"
+     data-ag74i-exact-record-only="true"
+     data-ag74i-public-approval-required="true"
+     data-ag74i-nearest-record-substitution="false"
+     data-ag74i-input-storage="none"
+     data-ag74i-calendar-book-pages="4">
+  PANCHANG RESULT
+  Generate Panchang Result
+  Withheld until verified
+  ag74i-panchang-public-surface-stabilization
+</div>
 
 </body>
 </html>

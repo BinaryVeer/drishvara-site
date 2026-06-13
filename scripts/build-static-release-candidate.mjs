@@ -52,12 +52,48 @@ for (const good of [
   "Major sports updates will appear after editorial review.",
   "Featured sports reading will appear after curation.",
   "Reflective preview only; weekday, colour, mantra and food logic require verified source methodology before activation.",
-  "Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.",
+  'data-ag74i-panchang-public-surface="true"',
+  'data-ag74i-default-location="varanasi_in"',
+  'data-ag74i-default-timezone="Asia/Kolkata"',
+  'data-ag74i-exact-record-only="true"',
+  'data-ag74i-public-approval-required="true"',
+  "panchang-date-picker",
+  "panchang-date-text",
+  'data-ag74i-varanasi-calendar-book="true"',
   "Curated linguistic preview; Sanskrit/Hindi meaning, usage and source methodology remain under editorial verification.",
   "Reflective prompt only; not a personal prediction, assessment, or decision guide."
 ]) {
   check(`required_present_${good}`, indexHtml.includes(good), `${good} must appear on public homepage.`);
 }
+
+const panchangStart = indexHtml.indexOf('<div class="card" id="panchang-festival-card"');
+const panchangEnd = indexHtml.indexOf('<div class="card" id="open-day-card"', panchangStart);
+const panchangCardHtml = panchangStart >= 0 && panchangEnd > panchangStart
+  ? indexHtml.slice(panchangStart, panchangEnd)
+  : "";
+
+const panchangVisibleHtml = panchangCardHtml
+  .replace(/<!-- AG71E_PANCHANG_PREVIEW_OUTPUT_START -->[\s\S]*?<!-- AG71E_PANCHANG_PREVIEW_OUTPUT_END -->/g, " ")
+  .replace(/<span\b[^>]*\bhidden\b[^>]*>[\s\S]*?<\/span>/gi, " ")
+  .replace(/<!--([\s\S]*?)-->/g, " ")
+  .replace(/<[^>]+>/g, " ")
+  .replace(/\s+/g, " ")
+  .trim();
+
+check("ag74i_panchang_card_present", Boolean(panchangCardHtml), "AG74I Panchang card must exist.");
+check("ag74i_varanasi_default", indexHtml.includes('data-ag74i-default-location="varanasi_in"'), "Varanasi must be the AG74I default.");
+check("ag74i_asia_kolkata_default", indexHtml.includes('data-ag74i-default-timezone="Asia/Kolkata"'), "Asia/Kolkata must be the AG74I default timezone.");
+check("ag74i_exact_only", indexHtml.includes('data-ag74i-exact-record-only="true"'), "AG74I must use exact-record-only rendering.");
+check("ag74i_public_approval_required", indexHtml.includes('data-ag74i-public-approval-required="true"'), "AG74I must require explicit public-display approval.");
+check("ag74i_governed_unavailable_copy", panchangVisibleHtml.includes("No publicly approved matching record"), "Governed unavailable copy must be visible.");
+check("ag74i_date_controls", ["panchang-date-picker", "panchang-date-text", "panchang-previous-day", "panchang-today", "panchang-next-day"].every((id) => indexHtml.includes(id)), "All AG74I date controls must exist.");
+check("ag74i_annual_book_shell", indexHtml.includes('data-ag74i-varanasi-calendar-book="true"'), "Four-page Varanasi annual-book shell must exist.");
+check("ag74i_no_visible_transition_copy", !/(pilot|preview|locked|withheld)/i.test(panchangVisibleHtml), "Visible Panchang card must not expose transition-era status vocabulary.");
+
+const ag74iBrowserQa = exists("data/quality/ag74i-panchang-public-surface-browser-qa.json")
+  ? readJson("data/quality/ag74i-panchang-public-surface-browser-qa.json")
+  : null;
+check("ag74i_browser_qa_passed", ag74iBrowserQa?.status === "passed" && ag74iBrowserQa?.failure_count === 0, "AG74I browser interaction QA must pass.");
 
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");

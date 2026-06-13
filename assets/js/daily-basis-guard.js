@@ -61,8 +61,31 @@
     return node.parentElement.closest("section, article, aside, div");
   }
 
+  function overlapsAg74iOwnedPanchang(card) {
+    const owned = document.querySelector(
+      '[data-ag74i-panchang-public-surface="true"]'
+    );
+
+    return Boolean(
+      owned &&
+      card &&
+      (
+        card === owned ||
+        card.contains(owned) ||
+        owned.contains(card)
+      )
+    );
+  }
+
   function patchCard(card, basis) {
     if (!card) return;
+
+    if (
+      window.drishvaraAg74iPublicSurfaceActive === true &&
+      overlapsAg74iOwnedPanchang(card)
+    ) {
+      return;
+    }
 
     const text = card.textContent || "";
     if (!isSensitiveDailyNode(text)) return;

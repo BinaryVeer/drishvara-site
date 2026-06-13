@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AG74I_BROWSER_QA_PENDING</title>
+</head>
+<body data-ag74i-browser-qa-status="pending">
+  <h1>AG74I Browser Interaction QA</h1>
+  <iframe id="site-frame" src="../index.html?ag74i-browser-qa=1" title="Drishvara AG74I test frame" style="width:1280px;height:1600px;border:0"></iframe>
+  <pre id="ag74i-browser-qa-result">{"status":"pending"}</pre>
+<script>
+(function () {
+  "use strict";
+
+  var resultNode = document.getElementById("ag74i-browser-qa-result");
+  var frame = document.getElementById("site-frame");
+  var checks = [];
+  var failures = [];
+
+  function wait(ms) {
+    return new Promise(function (resolve) { setTimeout(resolve, ms); });
+  }
+
+  function assertCheck(id, passed, detail) {
+    checks.push({ id: id, passed: Boolean(passed), detail: detail || "" });
+    if (!passed) failures.push(id + ": " + (detail || "failed"));
+  }
+
+  function todayInTimezone(timeZone) {
+    var parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(new Date());
+    var map = {};
+    parts.forEach(function (part) { map[part.type] = part.value; });
+    return map.year + "-" + map.month + "-" + map.day;
+  }
+
+  function shiftDate(dateKey, amount) {
+    var parts = dateKey.split("-").map(Number);
+    var date = new Date(Date.UTC(parts[0], parts[1] - 1, parts[2], 12));
+    date.setUTCDate(date.getUTCDate() + amount);
+    return [
+      date.getUTCFullYear(),
+      String(date.getUTCMonth() + 1).padStart(2, "0"),
+      String(date.getUTCDate()).padStart(2, "0")
+    ].join("-");
+  }
+
+  function panchangStorageKeys(win) {
+    var keys = [];
+    try {
+      for (var i = 0; i < win.localStorage.length; i += 1) {
+        var key = win.localStorage.key(i);
+        if (/panchang|ag74i/i.test(String(key || ""))) keys.push(key);
+      }
+    } catch (error) {}
+    return keys.sort();
+  }
+
+  async function run() {
+    await wait(2600);
+
+    var win = frame.contentWindow;
+    var doc = frame.contentDocument;
+    var card = doc.getElementById("panchang-festival-card");
+    var select = doc.getElementById("panchang-place-select");
+    var starSelect = doc.getElementById("star-birth-place-select");
+    var picker = doc.getElementById("panchang-date-picker");
+    var textInput = doc.getElementById("panchang-date-text");
+    var pickerNodeAtStart = picker;
+    var textNodeAtStart = textInput;
+    var expectedToday = todayInTimezone("Asia/Kolkata");
+    var storageBefore = panchangStorageKeys(win);
+
+    assertCheck("ag74i_owner_active", win.drishvaraAg74iPublicSurfaceActive === true, "AG74I ownership flag must be true.");
+    assertCheck("card_present", Boolean(card), "Panchang card must exist.");
+    assertCheck("neutral_heading", doc.getElementById("panchang-public-heading")?.textContent.trim() === "Panchang by Place and Date", "Heading must remain neutral after date/location changes.");
+
+    var varanasiOptions = select
+      ? Array.from(select.options).filter(function (option) {
+          return option.value === "varanasi-uttar-pradesh-india";
+        })
+      : [];
+
+    assertCheck("one_varanasi_option", varanasiOptions.length === 1, "Panchang selector must contain exactly one Varanasi option.");
+    assertCheck("varanasi_selected", select?.value === "varanasi-uttar-pradesh-india", "Varanasi must be the selected default.");
+    assertCheck("itanagar_not_selected", !Array.from(select?.options || []).find(function (option) {
+      return option.value === "itanagar-arunachal-pradesh-india" && option.selected;
+    }), "Itanagar must not remain selected.");
+    assertCheck("star_reflection_unchanged", !Array.from(starSelect?.options || []).some(function (option) {
+      return /varanasi|banaras|benares|kashi/i.test(option.textContent || "");
+    }), "Varanasi must not be inserted into Star Reflection.");
+    assertCheck("date_picker_today", picker?.value === expectedToday, "Panchang date picker must open on today in Asia/Kolkata.");
+    assertCheck("date_text_present", /^\d{2}\/\d{2}\/\d{4}$/.test(textInput?.value || ""), "DD/MM/YYYY text field must be populated.");
+    assertCheck("default_unavailable", card?.getAttribute("data-ag74i-result-state") === "governed_unavailable", "Current bank must produce governed unavailable state for Varanasi/today.");
+    assertCheck("no_public_record_id", card?.getAttribute("data-ag74i-exact-record-id") === "none", "No unapproved record may be labelled as public.");
+
+    var visibleText = (card?.innerText || "").toLowerCase();
+    assertCheck("no_visible_transition_vocabulary", !/(pilot|preview|locked|withheld)/i.test(visibleText), "Visible Panchang card must not expose transition-era status vocabulary.");
+
+    var basisLine = doc.querySelector(
+      '[data-ag71d-r6-location-basis-line="panchang"]'
+    );
+    assertCheck(
+      "governed_location_basis_copy",
+      Boolean(
+        basisLine &&
+        /governed place selection/i.test(basisLine.textContent || "") &&
+        !/pilot|preview|locked|withheld/i.test(basisLine.textContent || "")
+      ),
+      "Panchang location-basis copy must be governed and free of transition-era vocabulary."
+    );
+
+    var book = doc.querySelector('[data-ag74i-varanasi-calendar-book="true"]');
+    var pages = Array.from(doc.querySelectorAll("[data-ag74i-book-page]"));
+    assertCheck("book_present", Boolean(book), "Annual book must exist.");
+    assertCheck("book_after_observance", Boolean(
+      doc.getElementById("festival-list")?.compareDocumentPosition(book) &
+      win.Node.DOCUMENT_POSITION_FOLLOWING
+    ), "Annual book must appear below Upcoming Observance.");
+    assertCheck("four_pages", pages.length === 4, "Annual book must contain four pages.");
+    assertCheck("page_one_initial", pages.filter(function (page) { return !page.hidden; })[0]?.getAttribute("data-ag74i-book-page") === "1", "Page 1 must be open initially.");
+    assertCheck("observance_fields_present", Boolean(
+      doc.getElementById("upcoming-observance-begins") &&
+      doc.getElementById("upcoming-observance-ends") &&
+      doc.getElementById("upcoming-observance-ritual-window")
+    ), "Begins, Ends and ritual-window fields must exist.");
+
+    var nextDate = shiftDate(expectedToday, 1);
+    doc.getElementById("panchang-next-day")?.click();
+    await wait(500);
+    assertCheck("next_day_navigation", picker?.value === nextDate, "Next Day must advance one civil date.");
+    assertCheck("date_preserved_on_unavailable", card?.getAttribute("data-ag74i-result-state") === "governed_unavailable", "Unavailable state must preserve the selected date.");
+
+    doc.getElementById("panchang-today")?.click();
+    await wait(400);
+    assertCheck("today_reset", picker?.value === expectedToday, "Today must restore the active location date.");
+
+    var itanagarButton = doc.querySelector('[data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india"][data-ag71d-r4-select-kind="panchang"]');
+    itanagarButton?.click();
+    await wait(650);
+    assertCheck("location_change", select?.value === "itanagar-arunachal-pradesh-india", "Location button must update the Panchang selector.");
+    assertCheck("unapproved_record_rejected", card?.getAttribute("data-ag74i-result-state") !== "unique_publicly_approved_record", "Current static records with false publication flags must not render publicly.");
+
+    var syntheticBase = {
+      ag74i_public_display_allowed: true,
+      public_output_allowed: true,
+      ui_output_allowed: true,
+      exact_value_publication_allowed: true,
+      index_html_wiring_allowed: true,
+      location_id: "itanagar_in",
+      local_date_key: picker.value,
+      timezone: "Asia/Kolkata"
+    };
+
+    assertCheck("approval_flag_rejection", win.drishvaraAg74iRecordIsPubliclyApproved({
+      ag74i_public_display_allowed: false,
+      public_output_allowed: true,
+      ui_output_allowed: true,
+      exact_value_publication_allowed: true,
+      index_html_wiring_allowed: true
+    }) === false, "Explicit AG74I public approval must be mandatory.");
+
+    assertCheck("eligible_exact_match", win.drishvaraAg74iRecordIsEligible(
+      syntheticBase,
+      { engineLocationId: "itanagar_in", timezone: "Asia/Kolkata" },
+      picker.value
+    ) === true, "Exact eligible record test must pass.");
+
+    assertCheck("timezone_mismatch_rejected", win.drishvaraAg74iRecordIsEligible(
+      syntheticBase,
+      { engineLocationId: "itanagar_in", timezone: "Asia/Tokyo" },
+      picker.value
+    ) === false, "Timezone mismatch must be rejected.");
+
+    assertCheck("duplicate_conflict", win.drishvaraAg74iClassifyEligibleMatches([syntheticBase, syntheticBase]) === "conflict", "Duplicate eligible matches must classify as conflict.");
+
+    if (typeof win.drishvaraAg71ePreviewPanchang === "function") {
+      await Promise.resolve(win.drishvaraAg71ePreviewPanchang());
+    }
+    if (typeof win.drishvaraAg71qR1PreviewPanchang === "function") {
+      await Promise.resolve(win.drishvaraAg71qR1PreviewPanchang());
+    }
+    if (typeof win.drishvaraAg64bLoadPanchangFestival === "function") {
+      await Promise.resolve(win.drishvaraAg64bLoadPanchangFestival());
+    }
+
+    await wait(850);
+
+    assertCheck("legacy_observance_resistance", Boolean(
+      doc.getElementById("festival-list")?.contains(doc.getElementById("upcoming-observance-begins")) &&
+      doc.getElementById("festival-list")?.contains(doc.getElementById("upcoming-observance-ends")) &&
+      doc.getElementById("festival-list")?.contains(doc.getElementById("upcoming-observance-ritual-window"))
+    ), "Legacy writers must not replace the AG74I observance DOM.");
+
+    assertCheck("legacy_result_resistance", card?.getAttribute("data-ag74i-result-state") !== "unique_publicly_approved_record", "Legacy writers must not manufacture a public result.");
+
+    assertCheck(
+      "date_control_node_identity_preserved",
+      doc.getElementById("panchang-date-picker") === pickerNodeAtStart &&
+      doc.getElementById("panchang-date-text") === textNodeAtStart,
+      "No load-time guard may replace the initialized AG74I date controls."
+    );
+
+    doc.querySelector('[data-ag74i-book-page-button="2"]')?.click();
+    await wait(150);
+    assertCheck("book_page_navigation", pages.filter(function (page) { return !page.hidden; })[0]?.getAttribute("data-ag74i-book-page") === "2", "Calendar page 2 must open.");
+
+    var storageAfter = panchangStorageKeys(win);
+    assertCheck("no_panchang_persistent_storage", JSON.stringify(storageBefore) === JSON.stringify(storageAfter) && storageAfter.length === 0, "Panchang/date/location input must not create persistent browser keys.");
+
+    var report = {
+      module_id: "AG74I",
+      status: failures.length === 0 ? "passed" : "failed",
+      browser: navigator.userAgent,
+      check_count: checks.length,
+      failure_count: failures.length,
+      checks: checks,
+      failures: failures
+    };
+
+    resultNode.textContent = JSON.stringify(report);
+    document.body.setAttribute("data-ag74i-browser-qa-status", report.status);
+    document.body.setAttribute("data-ag74i-browser-qa-failure-count", String(report.failure_count));
+    document.title = failures.length === 0 ? "AG74I_BROWSER_QA_PASS" : "AG74I_BROWSER_QA_FAIL";
+  }
+
+  var qaStarted = false;
+
+  function startQaOnce() {
+    if (qaStarted) return;
+    qaStarted = true;
+
+    run().catch(function (error) {
+      var report = {
+        module_id: "AG74I",
+        status: "failed",
+        browser: navigator.userAgent,
+        check_count: checks.length,
+        failure_count: 1,
+        checks: checks,
+        failures: ["browser_harness_exception: " + String(error && error.stack ? error.stack : error)]
+      };
+      resultNode.textContent = JSON.stringify(report);
+      document.body.setAttribute("data-ag74i-browser-qa-status", "failed");
+      document.body.setAttribute("data-ag74i-browser-qa-failure-count", "1");
+      document.title = "AG74I_BROWSER_QA_FAIL";
+    });
+  }
+
+  frame.addEventListener("load", startQaOnce, { once: true });
+
+  if (frame.contentDocument && frame.contentDocument.readyState === "complete") {
+    window.setTimeout(startQaOnce, 0);
+  }
+})();
+</script>
+</body>
+</html>

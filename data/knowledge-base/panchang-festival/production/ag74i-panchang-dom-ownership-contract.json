@@ -1,0 +1,43 @@
+{
+  "module_id": "AG74I",
+  "title": "Panchang DOM Ownership Contract",
+  "status": "ag74i_dom_ownership_active",
+  "owner_flag": "window.drishvaraAg74iPublicSurfaceActive",
+  "owned_targets": [
+    "panchang-sunrise",
+    "panchang-sunset",
+    "panchang-moonrise",
+    "panchang-moonset",
+    "panchang-tithi",
+    "panchang-nakshatra",
+    "panchang-yoga",
+    "panchang-karana",
+    "panchang-paksha",
+    "festival-list",
+    "upcoming-observance-title",
+    "upcoming-observance-name",
+    "upcoming-observance-note"
+  ],
+  "guarded_legacy_writers": [
+    "applyPanchang",
+    "applyFestivals",
+    "applyAg64bPanchangFestival",
+    "loadAg64bPanchangFestival",
+    "updatePanchangMiniTable",
+    "updateUpcomingObservanceNote",
+    "updatePanchangInlineStatus",
+    "previewPanchang",
+    "AG71Q selectedRecord",
+    "AG71Q renderRecord",
+    "AG71Q previewPanchangAg71qR1",
+    "renderUpcomingObservance occurrences: 1",
+    "daily-basis-guard overlap exclusion"
+  ],
+  "ag74i_is_sole_runtime_owner": true,
+  "browser_qa": {
+    "passed": true,
+    "report_path": "data/quality/ag74i-panchang-public-surface-browser-qa.json",
+    "check_count": 32,
+    "failure_count": 0
+  }
+}

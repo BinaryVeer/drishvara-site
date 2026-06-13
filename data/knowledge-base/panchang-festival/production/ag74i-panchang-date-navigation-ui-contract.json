@@ -1,0 +1,37 @@
+{
+  "module_id": "AG74I",
+  "title": "Panchang Date Navigation UI Contract",
+  "status": "ag74i_date_navigation_ui_shell_active",
+  "controls": {
+    "native_date_picker_id": "panchang-date-picker",
+    "dd_mm_yyyy_text_id": "panchang-date-text",
+    "previous_day_id": "panchang-previous-day",
+    "today_id": "panchang-today",
+    "next_day_id": "panchang-next-day",
+    "selected_date_label_id": "panchang-selected-date-label",
+    "status_region_id": "panchang-selection-status"
+  },
+  "behaviour_at_ag74i": {
+    "controls_synchronised": true,
+    "exact_static_record_lookup_enabled": true,
+    "universal_recalculation_enabled": false,
+    "unavailable_state_on_no_unique_approved_record": true,
+    "panchang_specific_ids_separate_from_open_day_archive": true
+  },
+  "privacy": {
+    "state_scope": "transient_memory_only",
+    "local_storage_write": false,
+    "session_storage_write": false,
+    "cookie_write": false,
+    "indexed_db_write": false,
+    "backend_write": false,
+    "analytics_input_payload": false,
+    "supabase_write": false
+  },
+  "browser_qa": {
+    "passed": true,
+    "report_path": "data/quality/ag74i-panchang-public-surface-browser-qa.json",
+    "check_count": 32,
+    "failure_count": 0
+  }
+}

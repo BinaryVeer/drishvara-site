@@ -1,0 +1,54 @@
+{
+  "module_id": "AG74I",
+  "title": "Panchang Public Surface Contract",
+  "status": "ag74i_panchang_public_surface_stabilized",
+  "default_request": {
+    "canonical_place_id": "varanasi_in",
+    "display_label": "Varanasi / Banaras",
+    "alias_record": "data/knowledge-base/location-intelligence/production/ag74i-varanasi-default-location-alias-record.json",
+    "timezone": "Asia/Kolkata",
+    "date_semantics": "today_in_default_location_timezone",
+    "automatic_rendering": true,
+    "click_required": false
+  },
+  "exact_record_policy": {
+    "matching_fields": [
+      "canonical_engine_location_id",
+      "local_civil_date_key",
+      "iana_timezone"
+    ],
+    "public_display_approval_fields": [
+      "ag74i_public_display_allowed",
+      "public_output_allowed",
+      "ui_output_allowed",
+      "exact_value_publication_allowed",
+      "index_html_wiring_allowed"
+    ],
+    "unique_match_required": true,
+    "zero_matches_state": "governed_unavailable",
+    "multiple_matches_state": "governed_conflict",
+    "nearest_date_substitution_allowed": false,
+    "alternate_location_substitution_allowed": false,
+    "sample_relabelling_allowed": false
+  },
+  "current_bank_evidence": {
+    "active_record_count": 12,
+    "varanasi_internal_record_count": 0,
+    "exact_varanasi_today_internal_match_count": 0,
+    "exact_varanasi_today_publicly_approved_match_count": 0,
+    "default_result_state_at_application": "governed_unavailable"
+  },
+  "boundaries": {
+    "backend_runtime_activated": false,
+    "supabase_activation_performed": false,
+    "personal_input_storage_enabled": false,
+    "external_ephemeris_api_enabled": false,
+    "final_religious_authority_claimed": false
+  },
+  "browser_qa": {
+    "passed": true,
+    "report_path": "data/quality/ag74i-panchang-public-surface-browser-qa.json",
+    "check_count": 32,
+    "failure_count": 0
+  }
+}

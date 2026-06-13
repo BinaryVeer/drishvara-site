@@ -1,0 +1,29 @@
+{
+  "module_id": "AG74I",
+  "title": "Observance Window Placeholder Contract",
+  "status": "ag74i_observance_window_placeholders_active",
+  "visible_fields": [
+    "upcoming_observance_name",
+    "primary_public_window_begins",
+    "primary_public_window_ends",
+    "ritual_windows"
+  ],
+  "current_runtime_bank_has_governed_public_windows": false,
+  "placeholder_policy": {
+    "infer_from_tithi_boundary": false,
+    "fabricate_timing": false,
+    "show_not_available": true
+  },
+  "future_contract_fields": [
+    "astronomical_condition_window",
+    "observance_window",
+    "primary_public_window",
+    "ritual_windows"
+  ],
+  "browser_qa": {
+    "passed": true,
+    "report_path": "data/quality/ag74i-panchang-public-surface-browser-qa.json",
+    "check_count": 32,
+    "failure_count": 0
+  }
+}

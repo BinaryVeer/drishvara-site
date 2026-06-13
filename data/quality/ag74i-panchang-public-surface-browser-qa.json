@@ -1,0 +1,170 @@
+{
+  "module_id": "AG74I",
+  "status": "passed",
+  "browser": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/149.0.0.0 Safari/537.36",
+  "check_count": 32,
+  "failure_count": 0,
+  "checks": [
+    {
+      "id": "ag74i_owner_active",
+      "passed": true,
+      "detail": "AG74I ownership flag must be true."
+    },
+    {
+      "id": "card_present",
+      "passed": true,
+      "detail": "Panchang card must exist."
+    },
+    {
+      "id": "neutral_heading",
+      "passed": true,
+      "detail": "Heading must remain neutral after date/location changes."
+    },
+    {
+      "id": "one_varanasi_option",
+      "passed": true,
+      "detail": "Panchang selector must contain exactly one Varanasi option."
+    },
+    {
+      "id": "varanasi_selected",
+      "passed": true,
+      "detail": "Varanasi must be the selected default."
+    },
+    {
+      "id": "itanagar_not_selected",
+      "passed": true,
+      "detail": "Itanagar must not remain selected."
+    },
+    {
+      "id": "star_reflection_unchanged",
+      "passed": true,
+      "detail": "Varanasi must not be inserted into Star Reflection."
+    },
+    {
+      "id": "date_picker_today",
+      "passed": true,
+      "detail": "Panchang date picker must open on today in Asia/Kolkata."
+    },
+    {
+      "id": "date_text_present",
+      "passed": true,
+      "detail": "DD/MM/YYYY text field must be populated."
+    },
+    {
+      "id": "default_unavailable",
+      "passed": true,
+      "detail": "Current bank must produce governed unavailable state for Varanasi/today."
+    },
+    {
+      "id": "no_public_record_id",
+      "passed": true,
+      "detail": "No unapproved record may be labelled as public."
+    },
+    {
+      "id": "no_visible_transition_vocabulary",
+      "passed": true,
+      "detail": "Visible Panchang card must not expose transition-era status vocabulary."
+    },
+    {
+      "id": "governed_location_basis_copy",
+      "passed": true,
+      "detail": "Panchang location-basis copy must be governed and free of transition-era vocabulary."
+    },
+    {
+      "id": "book_present",
+      "passed": true,
+      "detail": "Annual book must exist."
+    },
+    {
+      "id": "book_after_observance",
+      "passed": true,
+      "detail": "Annual book must appear below Upcoming Observance."
+    },
+    {
+      "id": "four_pages",
+      "passed": true,
+      "detail": "Annual book must contain four pages."
+    },
+    {
+      "id": "page_one_initial",
+      "passed": true,
+      "detail": "Page 1 must be open initially."
+    },
+    {
+      "id": "observance_fields_present",
+      "passed": true,
+      "detail": "Begins, Ends and ritual-window fields must exist."
+    },
+    {
+      "id": "next_day_navigation",
+      "passed": true,
+      "detail": "Next Day must advance one civil date."
+    },
+    {
+      "id": "date_preserved_on_unavailable",
+      "passed": true,
+      "detail": "Unavailable state must preserve the selected date."
+    },
+    {
+      "id": "today_reset",
+      "passed": true,
+      "detail": "Today must restore the active location date."
+    },
+    {
+      "id": "location_change",
+      "passed": true,
+      "detail": "Location button must update the Panchang selector."
+    },
+    {
+      "id": "unapproved_record_rejected",
+      "passed": true,
+      "detail": "Current static records with false publication flags must not render publicly."
+    },
+    {
+      "id": "approval_flag_rejection",
+      "passed": true,
+      "detail": "Explicit AG74I public approval must be mandatory."
+    },
+    {
+      "id": "eligible_exact_match",
+      "passed": true,
+      "detail": "Exact eligible record test must pass."
+    },
+    {
+      "id": "timezone_mismatch_rejected",
+      "passed": true,
+      "detail": "Timezone mismatch must be rejected."
+    },
+    {
+      "id": "duplicate_conflict",
+      "passed": true,
+      "detail": "Duplicate eligible matches must classify as conflict."
+    },
+    {
+      "id": "legacy_observance_resistance",
+      "passed": true,
+      "detail": "Legacy writers must not replace the AG74I observance DOM."
+    },
+    {
+      "id": "legacy_result_resistance",
+      "passed": true,
+      "detail": "Legacy writers must not manufacture a public result."
+    },
+    {
+      "id": "date_control_node_identity_preserved",
+      "passed": true,
+      "detail": "No load-time guard may replace the initialized AG74I date controls."
+    },
+    {
+      "id": "book_page_navigation",
+      "passed": true,
+      "detail": "Calendar page 2 must open."
+    },
+    {
+      "id": "no_panchang_persistent_storage",
+      "passed": true,
+      "detail": "Panchang/date/location input must not create persistent browser keys."
+    }
+  ],
+  "failures": []
+}
