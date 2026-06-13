@@ -201,6 +201,16 @@
       "detail": "AG74J canonical Varanasi profile must be locked."
     },
     {
+      "id": "ag74k_input_resolver_passed",
+      "passed": true,
+      "detail": "AG74K input resolver must pass and make AG74L ready."
+    },
+    {
+      "id": "ag74k_resolver_result_bank_valid",
+      "passed": true,
+      "detail": "AG74K result bank must exist without astronomy."
+    },
+    {
       "id": "daily_context_dir_exists",
       "passed": true,
       "detail": "generated/daily-context must exist."
@@ -269,14 +279,19 @@
       "id": "ag74j_validate_script_exists",
       "passed": true,
       "detail": "validate:ag74j must exist."
+    },
+    {
+      "id": "ag74k_validate_script_exists",
+      "passed": true,
+      "detail": "validate:ag74k must exist."
     }
   ],
   "failures": [],
   "current_git_context": {
     "branch": "main",
-    "head": "89f2efcc",
-    "head_full": "89f2efcc39eee41e43d7512155237ddd777e15d8",
-    "origin_main": "89f2efcc",
+    "head": "ae605bb9",
+    "head_full": "ae605bb9e2ed2d6a2080f1eaa55be0c7f5175349",
+    "origin_main": "ae605bb9",
     "status_at_build": "clean"
   },
   "blocked_actions": [
