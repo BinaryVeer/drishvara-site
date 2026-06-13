@@ -221,6 +221,16 @@
       "detail": "AG74L deterministic astronomical validation result bank must pass without external API use."
     },
     {
+      "id": "ag74m_day_orchestration_passed",
+      "passed": true,
+      "detail": "AG74M day orchestration must pass twelve tests and make AG74N ready."
+    },
+    {
+      "id": "ag74m_validation_result_bank_valid",
+      "passed": true,
+      "detail": "AG74M deterministic day-orchestration result bank must pass without festival, annual-calendar or external-API activation."
+    },
+    {
       "id": "daily_context_dir_exists",
       "passed": true,
       "detail": "generated/daily-context must exist."
@@ -299,14 +309,19 @@
       "id": "ag74l_validate_script_exists",
       "passed": true,
       "detail": "validate:ag74l must exist."
+    },
+    {
+      "id": "ag74m_validate_script_exists",
+      "passed": true,
+      "detail": "validate:ag74m must exist."
     }
   ],
   "failures": [],
   "current_git_context": {
     "branch": "main",
-    "head": "f3e54736",
-    "head_full": "f3e5473667fc9622d7f913a3cc7bdc0c199f6e2b",
-    "origin_main": "f3e54736",
+    "head": "7e062e80",
+    "head_full": "7e062e80e8c5dee5c4d970564be011c8c6953cdf",
+    "origin_main": "7e062e80",
     "status_at_build": "clean"
   },
   "blocked_actions": [
