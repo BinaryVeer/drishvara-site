@@ -1,0 +1,22 @@
+{
+  "module_id": "AG74L",
+  "title": "Panchang Astronomical Engine Preview",
+  "status": "preview_matches_validated_internal_engine",
+  "engine": "Astronomy Engine 2.1.19",
+  "license": "MIT",
+  "calculation_profile": "Modern Drik / true ecliptic of date",
+  "ayanamsha": "Lahiri / Chitrapaksha — Drishvara linear TT model v1",
+  "supported_range": "1900-01-01 through 2100-12-31",
+  "validation_summary": {
+    "total_test_count": 10,
+    "passed_test_count": 10,
+    "failed_test_count": 0,
+    "max_sun_longitude_error_degrees": 0.0011564298739585865,
+    "max_moon_longitude_error_degrees": 0.01760537421398567,
+    "max_ayanamsha_error_degrees": 0.0006913443880876002,
+    "max_transition_time_error_seconds": 112.208,
+    "max_root_angle_residual_degrees": 0.000040878
+  },
+  "public_output": "blocked",
+  "sunrise_and_daily_orchestration": "deferred to AG74M"
+}

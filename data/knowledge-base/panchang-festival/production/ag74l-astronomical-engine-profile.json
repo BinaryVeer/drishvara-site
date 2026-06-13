@@ -1,0 +1,94 @@
+{
+  "module_id": "AG74L",
+  "title": "Panchang Astronomical Engine Profile",
+  "status": "ag74l_internal_astronomical_engine_profile_locked",
+  "engine_profile_id": "drishvara_astronomical_engine_v1",
+  "public_output_allowed": false,
+  "backend": {
+    "package_name": "astronomy-engine",
+    "package_version": "2.1.19",
+    "package_version_locked_exactly": true,
+    "license": "MIT",
+    "runtime_mode": "local_node_module_no_external_api",
+    "selected_model_summary": "Astronomy Engine apparent/true-of-date geocentric Sun and Moon primitives with version-locked Drishvara sidereal conversion.",
+    "selection_reasons": [
+      "JavaScript and Node compatible",
+      "deterministic local calculation",
+      "MIT licensed",
+      "no live ephemeris API dependency",
+      "official project accuracy target within one arcminute",
+      "validated by its maintainers against NOVAS and JPL Horizons"
+    ]
+  },
+  "non_selected_routes": [
+    {
+      "route": "Swiss Ephemeris runtime integration",
+      "status": "not_selected",
+      "reason": "Dual AGPL/professional licensing would require a separate distribution and service-licensing decision."
+    },
+    {
+      "route": "direct JPL DE440 binary integration",
+      "status": "not_selected_for_ag74l_v1",
+      "reason": "Large kernel and adapter footprint is disproportionate to the current static Node architecture."
+    },
+    {
+      "route": "AG71I preliminary dry-run formula engine",
+      "status": "retained_as_historical_test_evidence_not_promoted",
+      "reason": "It uses approximate solar, lunar and linear pilot formulas and fixed pilot timezone offsets."
+    }
+  ],
+  "time_scale_profile": {
+    "civil_input": "UTC ISO-8601 instant",
+    "universal_time": "Astronomy Engine UT with documented UT1≈UTC approximation",
+    "ephemeris_time": "TT",
+    "tdb_required_by_selected_backend": false,
+    "delta_t_model": "Espenak-Meeus piecewise polynomial as implemented by astronomy-engine 2.1.19",
+    "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1"
+  },
+  "orientation_profile": {
+    "sun_coordinates": "apparent geocentric true ecliptic of date",
+    "moon_coordinates": "geocentric true ecliptic of date",
+    "precession_model": "IAU 2006 precession implementation in astronomy-engine 2.1.19",
+    "nutation_model": "IAU 2000B nutation implementation in astronomy-engine 2.1.19",
+    "core_longitude_topocentric_correction_applied": false
+  },
+  "ayanamsha_profile": {
+    "identity": "lahiri_chitrapaksha",
+    "model_id": "drishvara_lahiri_linear_tt_v1",
+    "j2000_anchor_degrees": 23.85675,
+    "annual_rate_degrees_per_tropical_year": 0.013969,
+    "annual_rate_arcseconds_per_tropical_year": 50.2884,
+    "time_basis": "TT tropical years from J2000",
+    "silent_fallback_allowed": false
+  },
+  "supported_range": {
+    "start": "1900-01-01",
+    "end": "2100-12-31",
+    "boundaries_inclusive": true
+  },
+  "output_primitives": [
+    "julian_date_utc",
+    "ut_j2000_days",
+    "tt_j2000_days",
+    "delta_t_seconds",
+    "sun_longitude_tropical",
+    "moon_longitude_tropical",
+    "ayanamsha_degrees",
+    "sun_longitude_sidereal",
+    "moon_longitude_sidereal",
+    "moon_minus_sun_elongation",
+    "combined_sidereal_longitude_for_yoga"
+  ],
+  "activation_state": {
+    "internal_primitive_calculation_enabled": true,
+    "public_panchang_output_enabled": false,
+    "sunrise_or_sunset_enabled": false,
+    "daily_panchang_classification_enabled": false,
+    "lunar_month_generation_enabled": false,
+    "festival_generation_enabled": false,
+    "external_ephemeris_api_enabled": false,
+    "backend_service_deployment_enabled": false,
+    "supabase_enabled": false,
+    "personal_location_storage_enabled": false
+  }
+}

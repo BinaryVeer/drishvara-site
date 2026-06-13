@@ -1,0 +1,30 @@
+{
+  "module_id": "AG74L",
+  "title": "Transition Root-Finding Contract",
+  "status": "ag74l_transition_root_finding_contract_locked",
+  "supported_angle_families": [
+    "moon_sun_elongation",
+    "sidereal_moon_longitude",
+    "sidereal_sun_longitude",
+    "sidereal_yoga_sum"
+  ],
+  "algorithm": {
+    "search_direction": "forward_only",
+    "coarse_scan": "fixed UTC step with angular unwrapping",
+    "root_refinement": "deterministic bisection",
+    "default_step_hours": 3,
+    "default_tolerance_seconds": 0.5,
+    "maximum_iterations": 100,
+    "wrap_domain_degrees": "0<=angle<360",
+    "exact_start_boundary_policy": "find_next_cycle_boundary"
+  },
+  "future_consumers": {
+    "tithi": "moon_sun_elongation targets at multiples of 12 degrees",
+    "karana": "moon_sun_elongation targets at multiples of 6 degrees",
+    "nakshatra": "sidereal_moon_longitude targets at multiples of 360/27 degrees",
+    "yoga": "sidereal_yoga_sum targets at multiples of 360/27 degrees",
+    "sankranti": "sidereal_sun_longitude targets at multiples of 30 degrees"
+  },
+  "sunrise_or_daily_allocation_performed": false,
+  "public_output_allowed": false
+}

@@ -122,6 +122,30 @@ check("ag74k_input_resolver_passed", ag74kQuality?.status === "ag74k_completed" 
 const ag74kResults = exists("data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-test-results.json") ? readJson("data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-test-results.json") : null;
 check("ag74k_resolver_result_bank_valid", ag74kResults?.status === "ag74k_resolver_test_results_generated" && ag74kResults?.test_count === 15 && ag74kResults?.astronomical_computation_executed === false, "AG74K result bank must exist without astronomy.");
 
+const ag74lQuality = exists("data/quality/ag74l-panchang-astronomical-engine.json")
+  ? readJson("data/quality/ag74l-panchang-astronomical-engine.json")
+  : null;
+check(
+  "ag74l_astronomical_engine_passed",
+  ag74lQuality?.status === "ag74l_completed" &&
+    ag74lQuality?.issue_count === 0 &&
+    ag74lQuality?.deterministic_test_pass_count === 10 &&
+    ag74lQuality?.ready_for_ag74m === true,
+  "AG74L astronomical engine must pass ten benchmarks and make AG74M ready."
+);
+
+const ag74lResults = exists("data/knowledge-base/panchang-festival/production/ag74l-astronomical-validation-results.json")
+  ? readJson("data/knowledge-base/panchang-festival/production/ag74l-astronomical-validation-results.json")
+  : null;
+check(
+  "ag74l_validation_result_bank_valid",
+  ag74lResults?.status === "ag74l_astronomical_validation_passed" &&
+    ag74lResults?.summary?.total_test_count === 10 &&
+    ag74lResults?.summary?.failed_test_count === 0 &&
+    ag74lResults?.external_api_used === false,
+  "AG74L deterministic astronomical validation result bank must pass without external API use."
+);
+
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");
 
@@ -142,6 +166,7 @@ check("validate_project_script_exists", Boolean(pkg.scripts?.["validate:project"
 check("ag57z_validate_script_exists", Boolean(pkg.scripts?.["validate:ag57z"]), "validate:ag57z must exist.");
 check("ag74j_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74j"]), "validate:ag74j must exist.");
 check("ag74k_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74k"]), "validate:ag74k must exist.");
+check("ag74l_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74l"]), "validate:ag74l must exist.");
 
 const manifest = {
   module_id: "AG58A",

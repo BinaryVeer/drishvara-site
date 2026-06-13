@@ -1,0 +1,34 @@
+{
+  "from_module": "AG74L",
+  "to_module": "AG74M",
+  "transition": "validated_astronomical_primitives_to_location_aware_sunrise_and_daily_panchang_orchestration",
+  "ag74m_must_consume": [
+    "data/knowledge-base/panchang-festival/production/ag74l-astronomical-engine-profile.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-astronomical-validation-results.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-transition-root-finding-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-astronomical-method-and-sunrise-contract.json"
+  ],
+  "ag74m_must_implement": [
+    "local civil-date to UTC search-window construction",
+    "apparent upper-limb sunrise and sunset under the locked horizon convention",
+    "observer elevation handling",
+    "sunrise-allocated Panchang element state",
+    "previous and next tithi, nakshatra, yoga and karana transition times",
+    "vara and paksha daily orchestration",
+    "skipped and repeated element detection",
+    "traceable internal daily result contract"
+  ],
+  "ag74m_must_not_activate": [
+    "festival or ritual window generation",
+    "annual Hindu calendar generation",
+    "public Panchang publication",
+    "unrestricted geocoding",
+    "backend service deployment",
+    "Supabase",
+    "personal location storage",
+    "external ephemeris API",
+    "public method selector",
+    "CSS or public UI correction"
+  ]
+}

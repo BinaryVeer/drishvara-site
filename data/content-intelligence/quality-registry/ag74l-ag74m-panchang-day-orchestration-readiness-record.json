@@ -1,0 +1,33 @@
+{
+  "module_id": "AG74L-AG74M",
+  "title": "AG74M Panchang Day Orchestration Readiness",
+  "status": "ready_for_ag74m_panchang_day_orchestration",
+  "consumed_records": [
+    "data/knowledge-base/panchang-festival/production/ag74l-astronomical-engine-profile.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-astronomical-benchmark-fixtures.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-astronomical-validation-results.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-transition-root-finding-contract.json",
+    "data/content-intelligence/mutation-plans/ag74l-to-ag74m-panchang-day-orchestration-boundary.json"
+  ],
+  "readiness_checks": {
+    "exact_ephemeris_dependency_locked": true,
+    "local_deterministic_astronomical_engine_active": true,
+    "UTC_and_TT_trace_active": true,
+    "Delta_T_model_versioned": true,
+    "precession_and_nutation_models_versioned": true,
+    "apparent_geocentric_sun_longitude_active": true,
+    "geocentric_moon_longitude_active": true,
+    "Lahiri_Chitrapaksha_conversion_active": true,
+    "transition_root_finding_active": true,
+    "all_10_benchmarks_passed": true,
+    "legacy_preliminary_engine_promoted": false,
+    "public_panchang_output_activated": false,
+    "sunrise_runtime_activated": false,
+    "daily_panchang_classification_activated": false,
+    "festival_generation_activated": false,
+    "external_ephemeris_API_activated": false,
+    "backend_service_deployed": false,
+    "Supabase_activation_performed": false,
+    "personal_location_storage_enabled": false
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "module_id": "AG74L",
+  "title": "Astronomical Benchmark Fixtures",
+  "status": "ag74l_benchmark_fixtures_locked",
+  "reference_basis": {
+    "state_values": "Offline comparative values produced with Swiss Ephemeris 2.10.03 for apparent geocentric tropical longitudes and Lahiri ayanamsha; no Swiss code or runtime dependency is included.",
+    "transition_values": "Offline roots of the same comparative Sun-Moon longitude condition.",
+    "public_authority_claimed": false,
+    "runtime_dependency": false
+  },
+  "tolerances": {
+    "sun_longitude_degrees": 0.005,
+    "moon_longitude_degrees": 0.025,
+    "ayanamsha_degrees": 0.001,
+    "transition_time_seconds": 180,
+    "root_angle_residual_degrees": 0.001
+  },
+  "state_cases": [
+    {
+      "test_id": "state_1900_start",
+      "utc": "1900-01-01T00:00:00.000Z",
+      "expected": {
+        "sun_longitude_tropical": 280.153361628322,
+        "moon_longitude_tropical": 272.416372552137,
+        "ayanamsha_degrees": 22.460530592388
+      }
+    },
+    {
+      "test_id": "state_1950_start",
+      "utc": "1950-01-01T00:00:00.000Z",
+      "expected": {
+        "sun_longitude_tropical": 280.004857747506,
+        "moon_longitude_tropical": 61.415329763412,
+        "ayanamsha_degrees": 23.158725143876
+      }
+    },
+    {
+      "test_id": "state_j2000",
+      "utc": "2000-01-01T12:00:00.000Z",
+      "expected": {
+        "sun_longitude_tropical": 280.368919675343,
+        "moon_longitude_tropical": 223.32377543841,
+        "ayanamsha_degrees": 23.857092353709
+      }
+    },
+    {
+      "test_id": "state_2026_reference",
+      "utc": "2026-06-13T00:00:00.000Z",
+      "expected": {
+        "sun_longitude_tropical": 82.022715590417,
+        "moon_longitude_tropical": 51.771765235793,
+        "ayanamsha_degrees": 24.226538585974
+      }
+    },
+    {
+      "test_id": "state_2050_start",
+      "utc": "2050-01-01T00:00:00.000Z",
+      "expected": {
+        "sun_longitude_tropical": 280.748448300281,
+        "moon_longitude_tropical": 18.676526545018,
+        "ayanamsha_degrees": 24.555613102881
+      }
+    },
+    {
+      "test_id": "state_2100_start",
+      "utc": "2100-01-01T00:00:00.000Z",
+      "expected": {
+        "sun_longitude_tropical": 280.604428821126,
+        "moon_longitude_tropical": 157.415835165786,
+        "ayanamsha_degrees": 25.254268272812
+      }
+    }
+  ],
+  "transition_cases": [
+    {
+      "test_id": "transition_new_moon_2026_06",
+      "kind": "moon_sun_elongation",
+      "target_degrees": 0,
+      "start_utc": "2026-06-01T00:00:00.000Z",
+      "max_days": 40,
+      "expected_event_utc": "2026-06-15T02:54:11.714Z"
+    },
+    {
+      "test_id": "transition_full_moon_2026_06",
+      "kind": "moon_sun_elongation",
+      "target_degrees": 180,
+      "start_utc": "2026-06-15T00:00:00.000Z",
+      "max_days": 40,
+      "expected_event_utc": "2026-06-29T23:56:42.807Z"
+    },
+    {
+      "test_id": "transition_first_quarter_2000_01",
+      "kind": "moon_sun_elongation",
+      "target_degrees": 90,
+      "start_utc": "2000-01-01T00:00:00.000Z",
+      "max_days": 40,
+      "expected_event_utc": "2000-01-14T13:34:12.049Z"
+    },
+    {
+      "test_id": "transition_new_moon_2099_12",
+      "kind": "moon_sun_elongation",
+      "target_degrees": 0,
+      "start_utc": "2099-12-01T00:00:00.000Z",
+      "max_days": 60,
+      "expected_event_utc": "2099-12-11T23:10:42.077Z"
+    }
+  ]
+}
