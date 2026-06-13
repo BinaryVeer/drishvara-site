@@ -1,0 +1,37 @@
+{
+  "module_id":"AG74N",
+  "title":"Festival Rule Admission and Window Safety Contract",
+  "status":"ag74n_festival_rule_admission_contract_locked_internal_only",
+  "source_rule_inventory":"data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json",
+  "rule_precedence":["exact regional profile","parent-region profile","approved national/default profile","Varanasi canonical profile","governed unresolved-rule state"],
+  "rule_admission":{
+    "required_fields":["rule_id","rule_set_version","regional_profile_id","rule_priority","source_reference_ids","calculation_method_version","manual_review_status"],
+    "inherited_rule_count":7,
+    "source_reviewed_rule_count":0,
+    "pending_source_rule_may_generate_internal_condition_candidate":true,
+    "pending_source_rule_may_approve_final_observance_date":false,
+    "pending_source_rule_may_supply_primary_public_window":false,
+    "pending_source_rule_may_supply_ritual_window":false
+  },
+  "window_semantics":{
+    "astronomical_condition_window_separate":true,
+    "observance_date_separate":true,
+    "primary_public_window_separate":true,
+    "ritual_windows_separate":true,
+    "tithi_condition_may_be_relabelled_as_ritual_window":false,
+    "fabricated_window_allowed":false
+  },
+  "conflicts":{
+    "repeated_tithi":"manual review required",
+    "skipped_tithi":"manual review required",
+    "unreviewed_Pradosha_formula":"window unavailable",
+    "moonrise_dependency_not_computed":"window unavailable",
+    "unreviewed_night_window":"window unavailable"
+  },
+  "calendar_completeness_policy":{
+    "allowed_statuses":["complete_against_approved_rule_inventory","partial_rule_inventory","blocked_pending_rule_review"],
+    "current_status":"blocked_pending_rule_review",
+    "exhaustive_Hindu_observance_claim_allowed":false
+  },
+  "public_output_allowed":false
+}

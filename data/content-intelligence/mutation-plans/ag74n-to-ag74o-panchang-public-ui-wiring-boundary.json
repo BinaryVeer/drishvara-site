@@ -1,0 +1,36 @@
+{
+  "from_module":"AG74N",
+  "to_module":"AG74O",
+  "transition":"internal universal Panchang, annual Varanasi book and guarded observance candidates to complete public UI wiring",
+  "ag74o_must_consume":[
+    "scripts/lib/ag74m-panchang-day-orchestrator.mjs",
+    "scripts/lib/ag74n-panchang-calendar-engine.mjs",
+    "data/knowledge-base/panchang-festival/production/ag74n-varanasi-samvat-2083-annual-calendar.json",
+    "data/knowledge-base/panchang-festival/production/ag74n-festival-observance-candidate-bank-samvat-2083.json",
+    "data/knowledge-base/panchang-festival/production/ag74i-varanasi-annual-calendar-book-shell-contract.json"
+  ],
+  "ag74o_must_implement":[
+    "wire native date picker and DD/MM/YYYY field with bidirectional synchronization",
+    "wire Previous Day, Today and Next Day",
+    "wire curated place, approved alias and coordinate-first inputs",
+    "render calculated Tithi Paksha Nakshatra Yoga Karana sunrise sunset and transitions",
+    "populate four Varanasi annual-book pages and direct page navigation",
+    "open the annual-book page containing the selected Varanasi civil-date key",
+    "display only approved final observance dates and windows; otherwise show governed unavailable state",
+    "correct Panchang surface right-overflow and clipping",
+    "keep date and location controls within card width",
+    "implement mobile-safe annual-book and result navigation",
+    "apply Cambria to editorial headings and Arial to body labels buttons and inputs",
+    "retain Georgia only for the principal Drishvara wordmark",
+    "add loading stale-request cancellation latest-result-only focus and screen-reader updates"
+  ],
+  "ag74o_must_preserve":[
+    "Varanasi annual-book basis independent of selected daily location",
+    "selected civil-date reused directly as Varanasi book date key",
+    "no nearest-sample substitution",
+    "no public method selector",
+    "no persistent input storage",
+    "festival public approval guard"
+  ],
+  "ag74o_must_not_activate":["backend service","Supabase","Auth","analytics input persistence","external ephemeris API","public display of unreviewed festival candidates"]
+}

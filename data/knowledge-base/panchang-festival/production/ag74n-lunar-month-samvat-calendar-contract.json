@@ -1,0 +1,43 @@
+{
+  "module_id":"AG74N",
+  "title":"Lunar Month, Vikram Samvat and Annual Calendar Contract",
+  "status":"ag74n_lunar_month_samvat_calendar_contract_locked_internal_only",
+  "profile_id":"drishvara_varanasi_standard_v1",
+  "place_id":"varanasi_in",
+  "timezone":"Asia/Kolkata",
+  "supported_complete_boundary_years":{"start":1900,"end":2099},
+  "purnimanta_mapping":{
+    "physical_month_boundary":"full_moon_to_full_moon_reporting_semantics",
+    "shukla_paksha_assignment":"current_amanta_interval_month_identity",
+    "krishna_paksha_assignment":"next_amanta_interval_month_identity",
+    "month_name_basis":"sidereal_solar_ingress_identity of underlying new-moon interval",
+    "amanta_label_shift_only_allowed":false
+  },
+  "solar_ingress_assignment":{
+    "zero_ingress":"adhika instance",
+    "one_ingress":"regular instance",
+    "two_ingresses":"regular instance plus explicit next canonical Kshaya slot",
+    "adhika_precedes_nija":true,
+    "fabricated_kshaya_physical_month_allowed":false
+  },
+  "samvat_boundary":{
+    "system":"vikram_samvat",
+    "style":"chaitradi",
+    "event":"non-Adhika Chaitra Shukla Pratipada",
+    "normal_case":"first Varanasi sunrise carrying Shukla Pratipada",
+    "skipped_pratipada_at_sunrise":"select_local_civil_date_containing_pratipada_start_event_internal_only",
+    "repeated_pratipada_at_sunrise":"select first sunrise date internal only",
+    "exact_boundary_equality":"active post-transition value owns the equality instant",
+    "exception_rule_public_approval":false,
+    "external_comparison_required_at":"AG74P"
+  },
+  "annual_book":{
+    "interval":"boundary civil date inclusive to next boundary civil date exclusive",
+    "page_count":4,
+    "canonical_slots_per_page":3,
+    "canonical_slot_count":12,
+    "physical_month_record_count_fixed":false,
+    "Chaitra_edge_segments":"opening boundary segment and closing Krishna segment represented explicitly in one canonical reporting slot"
+  },
+  "public_output_allowed":false
+}

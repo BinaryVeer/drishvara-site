@@ -172,6 +172,36 @@ check(
   "AG74M deterministic day-orchestration result bank must pass without festival, annual-calendar or external-API activation."
 );
 
+const ag74nQuality = exists("data/quality/ag74n-panchang-festival-annual-calendar.json")
+  ? readJson("data/quality/ag74n-panchang-festival-annual-calendar.json")
+  : null;
+check(
+  "ag74n_festival_annual_calendar_passed",
+  ag74nQuality?.status === "ag74n_completed" &&
+    ag74nQuality?.issue_count === 0 &&
+    ag74nQuality?.deterministic_check_pass_count === 36 &&
+    ag74nQuality?.reference_daily_record_count === 384 &&
+    ag74nQuality?.ready_for_ag74o === true,
+  "AG74N annual calendar must pass 36 checks and make AG74O ready."
+);
+
+const ag74nResults = exists("data/knowledge-base/panchang-festival/production/ag74n-validation-results.json")
+  ? readJson("data/knowledge-base/panchang-festival/production/ag74n-validation-results.json")
+  : null;
+check(
+  "ag74n_validation_result_bank_valid",
+  ag74nResults?.status === "ag74n_festival_annual_calendar_validation_passed" &&
+    ag74nResults?.summary?.total_check_count === 36 &&
+    ag74nResults?.summary?.failed_check_count === 0 &&
+    ag74nResults?.annual_daily_record_count === 384 &&
+    ag74nResults?.condition_candidate_count === 114 &&
+    ag74nResults?.final_observance_date_approved_count === 0 &&
+    ag74nResults?.calendar_completeness_status === "blocked_pending_rule_review" &&
+    ag74nResults?.public_output_allowed === false &&
+    ag74nResults?.external_api_used === false,
+  "AG74N result bank must pass while keeping unreviewed festival dates and public output blocked."
+);
+
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");
 
@@ -194,6 +224,7 @@ check("ag74j_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74j"]), 
 check("ag74k_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74k"]), "validate:ag74k must exist.");
 check("ag74l_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74l"]), "validate:ag74l must exist.");
 check("ag74m_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74m"]), "validate:ag74m must exist.");
+check("ag74n_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74n"]), "validate:ag74n must exist.");
 
 const manifest = {
   module_id: "AG58A",

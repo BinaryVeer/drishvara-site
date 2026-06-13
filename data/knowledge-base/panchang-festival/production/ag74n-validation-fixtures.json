@@ -1,0 +1,68 @@
+{
+  "module_id": "AG74N",
+  "title": "Festival and Annual Calendar Deterministic Validation Fixtures",
+  "status": "ag74n_validation_fixtures_locked",
+  "reference_checks": [
+    {"test_id":"status","path":"status","expected":"ag74n_internal_annual_calendar_generated_public_blocked"},
+    {"test_id":"samvat","path":"samvat_year","expected":2083},
+    {"test_id":"start_date","path":"start_boundary.civil_date","expected":"2026-03-19"},
+    {"test_id":"start_exception","path":"start_boundary.allocation_status","expected":"pratipada_skipped_at_sunrise_event_civil_date_selected_internal"},
+    {"test_id":"start_sunrise_tithi","path":"start_boundary.selected_date_tithi_at_sunrise.index","expected":30},
+    {"test_id":"start_event_local","path":"start_boundary.chaitra_shukla_pratipada_start_local","expected":"2026-03-19T06:53:27+05:30"},
+    {"test_id":"end_date","path":"end_boundary_exclusive.civil_date","expected":"2027-04-07"},
+    {"test_id":"day_count","path":"daily_record_count","expected":384},
+    {"test_id":"page_count","path":"annual_book.physical_page_count","expected":4},
+    {"test_id":"slot_count","path":"annual_book.canonical_slot_count","expected":12},
+    {"test_id":"adhika_count","path":"month_model_summary.adhika_interval_count","expected":1},
+    {"test_id":"nija_count","path":"month_model_summary.nija_interval_count","expected":1},
+    {"test_id":"kshaya_count_reference_year","path":"month_model_summary.kshaya_exception_count","expected":0},
+    {"test_id":"jyeshtha_adhika_nija","path":"annual_book.pages.0.slots.2.slot_status","expected":"two_adhika_plus_nija"},
+    {"test_id":"chaitra_edge_split","path":"annual_book.pages.0.slots.0.instances.0.year_edge_split","expected":true},
+    {"test_id":"chaitra_segment_count","path":"annual_book.pages.0.slots.0.instances.0.segments.length","expected":2},
+    {"test_id":"first_day","path":"daily_records.0.civil_date","expected":"2026-03-19"},
+    {"test_id":"first_day_tithi","path":"daily_records.0.tithi.index","expected":30},
+    {"test_id":"last_day","path":"daily_records.383.civil_date","expected":"2027-04-06"},
+    {"test_id":"public_block","path":"public_output_allowed","expected":false}
+  ],
+  "festival_checks": [
+    {"test_id":"rule_count","path":"normalized_rule_count","expected":7},
+    {"test_id":"source_reviewed_count","path":"source_reviewed_rule_count","expected":0},
+    {"test_id":"candidate_count","path":"condition_candidate_count","expected":114},
+    {"test_id":"skipped_conflict_count","path":"skipped_conflict_count","expected":6},
+    {"test_id":"approved_final_count","path":"final_observance_date_approved_count","expected":0},
+    {"test_id":"completeness","path":"calendar_completeness_status","expected":"blocked_pending_rule_review"},
+    {"test_id":"festival_public_block","path":"public_output_allowed","expected":false}
+  ],
+  "synthetic_interval_checks": [
+    {
+      "test_id": "adhika_zero_ingress",
+      "solar_sign_at_start_index": 1,
+      "solar_ingress_count": 0,
+      "expected": {
+        "canonical_name": "Jyeshtha",
+        "instance_kind": "adhika",
+        "kshaya_after": null
+      }
+    },
+    {
+      "test_id": "regular_one_ingress",
+      "solar_sign_at_start_index": 5,
+      "solar_ingress_count": 1,
+      "expected": {
+        "canonical_name": "Ashvina",
+        "instance_kind": "regular",
+        "kshaya_after": null
+      }
+    },
+    {
+      "test_id": "kshaya_two_ingresses",
+      "solar_sign_at_start_index": 6,
+      "solar_ingress_count": 2,
+      "expected": {
+        "canonical_name": "Kartika",
+        "instance_kind": "regular",
+        "kshaya_after.canonical_name": "Margashirsha"
+      }
+    }
+  ]
+}

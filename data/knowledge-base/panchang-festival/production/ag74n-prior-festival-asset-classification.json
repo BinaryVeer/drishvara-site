@@ -1,0 +1,29 @@
+{
+  "module_id":"AG74N",
+  "title":"Prior Festival Asset Classification",
+  "status":"ag74n_prior_assets_classified",
+  "authoritative_inputs":[
+    "data/knowledge-base/panchang-festival/production/ag74j-festival-and-ritual-window-semantics-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-varanasi-hindu-year-and-month-convention-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-lunar-month-and-four-page-book-slot-contract.json",
+    "scripts/lib/ag74m-panchang-day-orchestrator.mjs"
+  ],
+  "ag70m_rule_bank":{
+    "path":"data/knowledge-base/panchang-festival/production/festival-observance-rule-bank.json",
+    "role":"internal_candidate_rule_inventory_only",
+    "traditional_source_review_status":"pending for all seven records",
+    "public_approval_count":0
+  },
+  "ag70n_legacy_pradosha_window":{
+    "path":"data/knowledge-base/panchang-festival/production/ag70n-trayodashi-pradosha-window-report.json",
+    "classification":"historical preliminary internal evidence",
+    "formula":"sunset minus 90 minutes to sunset plus 90 minutes",
+    "reused_by_ag74n":false,
+    "reason":"explicitly preliminary and not source-reviewed under AG74J window semantics"
+  },
+  "legacy_computed_event_banks":{
+    "classification":"historical public-blocked candidates from preliminary daily records",
+    "relabelled_as_ag74n_results":false,
+    "used_as_final festival dates":false
+  }
+}

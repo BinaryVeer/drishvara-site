@@ -1,0 +1,309 @@
+{
+  "module_id": "AG74N",
+  "title": "Festival and Annual Calendar Validation Results",
+  "status": "ag74n_festival_annual_calendar_validation_passed",
+  "engine_version": "1.0.0",
+  "summary": {
+    "total_check_count": 36,
+    "passed_check_count": 36,
+    "failed_check_count": 0
+  },
+  "reference_samvat_year": 2083,
+  "annual_daily_record_count": 384,
+  "condition_candidate_count": 114,
+  "final_observance_date_approved_count": 0,
+  "calendar_completeness_status": "blocked_pending_rule_review",
+  "public_output_allowed": false,
+  "public_ui_modified": false,
+  "external_api_used": false,
+  "checks": [
+    {
+      "test_id": "status",
+      "kind": "annual_reference",
+      "path": "status",
+      "expected": "ag74n_internal_annual_calendar_generated_public_blocked",
+      "actual": "ag74n_internal_annual_calendar_generated_public_blocked",
+      "passed": true
+    },
+    {
+      "test_id": "samvat",
+      "kind": "annual_reference",
+      "path": "samvat_year",
+      "expected": 2083,
+      "actual": 2083,
+      "passed": true
+    },
+    {
+      "test_id": "start_date",
+      "kind": "annual_reference",
+      "path": "start_boundary.civil_date",
+      "expected": "2026-03-19",
+      "actual": "2026-03-19",
+      "passed": true
+    },
+    {
+      "test_id": "start_exception",
+      "kind": "annual_reference",
+      "path": "start_boundary.allocation_status",
+      "expected": "pratipada_skipped_at_sunrise_event_civil_date_selected_internal",
+      "actual": "pratipada_skipped_at_sunrise_event_civil_date_selected_internal",
+      "passed": true
+    },
+    {
+      "test_id": "start_sunrise_tithi",
+      "kind": "annual_reference",
+      "path": "start_boundary.selected_date_tithi_at_sunrise.index",
+      "expected": 30,
+      "actual": 30,
+      "passed": true
+    },
+    {
+      "test_id": "start_event_local",
+      "kind": "annual_reference",
+      "path": "start_boundary.chaitra_shukla_pratipada_start_local",
+      "expected": "2026-03-19T06:53:27+05:30",
+      "actual": "2026-03-19T06:53:27+05:30",
+      "passed": true
+    },
+    {
+      "test_id": "end_date",
+      "kind": "annual_reference",
+      "path": "end_boundary_exclusive.civil_date",
+      "expected": "2027-04-07",
+      "actual": "2027-04-07",
+      "passed": true
+    },
+    {
+      "test_id": "day_count",
+      "kind": "annual_reference",
+      "path": "daily_record_count",
+      "expected": 384,
+      "actual": 384,
+      "passed": true
+    },
+    {
+      "test_id": "page_count",
+      "kind": "annual_reference",
+      "path": "annual_book.physical_page_count",
+      "expected": 4,
+      "actual": 4,
+      "passed": true
+    },
+    {
+      "test_id": "slot_count",
+      "kind": "annual_reference",
+      "path": "annual_book.canonical_slot_count",
+      "expected": 12,
+      "actual": 12,
+      "passed": true
+    },
+    {
+      "test_id": "adhika_count",
+      "kind": "annual_reference",
+      "path": "month_model_summary.adhika_interval_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true
+    },
+    {
+      "test_id": "nija_count",
+      "kind": "annual_reference",
+      "path": "month_model_summary.nija_interval_count",
+      "expected": 1,
+      "actual": 1,
+      "passed": true
+    },
+    {
+      "test_id": "kshaya_count_reference_year",
+      "kind": "annual_reference",
+      "path": "month_model_summary.kshaya_exception_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "test_id": "jyeshtha_adhika_nija",
+      "kind": "annual_reference",
+      "path": "annual_book.pages.0.slots.2.slot_status",
+      "expected": "two_adhika_plus_nija",
+      "actual": "two_adhika_plus_nija",
+      "passed": true
+    },
+    {
+      "test_id": "chaitra_edge_split",
+      "kind": "annual_reference",
+      "path": "annual_book.pages.0.slots.0.instances.0.year_edge_split",
+      "expected": true,
+      "actual": true,
+      "passed": true
+    },
+    {
+      "test_id": "chaitra_segment_count",
+      "kind": "annual_reference",
+      "path": "annual_book.pages.0.slots.0.instances.0.segments.length",
+      "expected": 2,
+      "actual": 2,
+      "passed": true
+    },
+    {
+      "test_id": "first_day",
+      "kind": "annual_reference",
+      "path": "daily_records.0.civil_date",
+      "expected": "2026-03-19",
+      "actual": "2026-03-19",
+      "passed": true
+    },
+    {
+      "test_id": "first_day_tithi",
+      "kind": "annual_reference",
+      "path": "daily_records.0.tithi.index",
+      "expected": 30,
+      "actual": 30,
+      "passed": true
+    },
+    {
+      "test_id": "last_day",
+      "kind": "annual_reference",
+      "path": "daily_records.383.civil_date",
+      "expected": "2027-04-06",
+      "actual": "2027-04-06",
+      "passed": true
+    },
+    {
+      "test_id": "public_block",
+      "kind": "annual_reference",
+      "path": "public_output_allowed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "test_id": "rule_count",
+      "kind": "festival_reference",
+      "path": "normalized_rule_count",
+      "expected": 7,
+      "actual": 7,
+      "passed": true
+    },
+    {
+      "test_id": "source_reviewed_count",
+      "kind": "festival_reference",
+      "path": "source_reviewed_rule_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "test_id": "candidate_count",
+      "kind": "festival_reference",
+      "path": "condition_candidate_count",
+      "expected": 114,
+      "actual": 114,
+      "passed": true
+    },
+    {
+      "test_id": "skipped_conflict_count",
+      "kind": "festival_reference",
+      "path": "skipped_conflict_count",
+      "expected": 6,
+      "actual": 6,
+      "passed": true
+    },
+    {
+      "test_id": "approved_final_count",
+      "kind": "festival_reference",
+      "path": "final_observance_date_approved_count",
+      "expected": 0,
+      "actual": 0,
+      "passed": true
+    },
+    {
+      "test_id": "completeness",
+      "kind": "festival_reference",
+      "path": "calendar_completeness_status",
+      "expected": "blocked_pending_rule_review",
+      "actual": "blocked_pending_rule_review",
+      "passed": true
+    },
+    {
+      "test_id": "festival_public_block",
+      "kind": "festival_reference",
+      "path": "public_output_allowed",
+      "expected": false,
+      "actual": false,
+      "passed": true
+    },
+    {
+      "test_id": "adhika_zero_ingress:canonical_name",
+      "kind": "synthetic_interval",
+      "path": "canonical_name",
+      "expected": "Jyeshtha",
+      "actual": "Jyeshtha",
+      "passed": true
+    },
+    {
+      "test_id": "adhika_zero_ingress:instance_kind",
+      "kind": "synthetic_interval",
+      "path": "instance_kind",
+      "expected": "adhika",
+      "actual": "adhika",
+      "passed": true
+    },
+    {
+      "test_id": "adhika_zero_ingress:kshaya_after",
+      "kind": "synthetic_interval",
+      "path": "kshaya_after",
+      "expected": null,
+      "actual": null,
+      "passed": true
+    },
+    {
+      "test_id": "regular_one_ingress:canonical_name",
+      "kind": "synthetic_interval",
+      "path": "canonical_name",
+      "expected": "Ashvina",
+      "actual": "Ashvina",
+      "passed": true
+    },
+    {
+      "test_id": "regular_one_ingress:instance_kind",
+      "kind": "synthetic_interval",
+      "path": "instance_kind",
+      "expected": "regular",
+      "actual": "regular",
+      "passed": true
+    },
+    {
+      "test_id": "regular_one_ingress:kshaya_after",
+      "kind": "synthetic_interval",
+      "path": "kshaya_after",
+      "expected": null,
+      "actual": null,
+      "passed": true
+    },
+    {
+      "test_id": "kshaya_two_ingresses:canonical_name",
+      "kind": "synthetic_interval",
+      "path": "canonical_name",
+      "expected": "Kartika",
+      "actual": "Kartika",
+      "passed": true
+    },
+    {
+      "test_id": "kshaya_two_ingresses:instance_kind",
+      "kind": "synthetic_interval",
+      "path": "instance_kind",
+      "expected": "regular",
+      "actual": "regular",
+      "passed": true
+    },
+    {
+      "test_id": "kshaya_two_ingresses:kshaya_after.canonical_name",
+      "kind": "synthetic_interval",
+      "path": "kshaya_after.canonical_name",
+      "expected": "Margashirsha",
+      "actual": "Margashirsha",
+      "passed": true
+    }
+  ]
+}
