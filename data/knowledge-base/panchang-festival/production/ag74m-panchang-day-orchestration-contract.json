@@ -1,0 +1,107 @@
+{
+  "module_id": "AG74M",
+  "title": "Panchang Day Orchestration Contract",
+  "status": "ag74m_day_orchestration_contract_locked_internal_only",
+  "consumes": [
+    "data/knowledge-base/panchang-festival/production/ag74j-astronomical-method-and-sunrise-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74k-panchang-input-resolver-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-astronomical-engine-profile.json",
+    "data/knowledge-base/panchang-festival/production/ag74l-transition-root-finding-contract.json",
+    "scripts/lib/ag74k-panchang-input-resolver.mjs",
+    "scripts/lib/ag74l-astronomical-engine.mjs"
+  ],
+  "input_contract": {
+    "raw_request_first_resolved_by_ag74k": true,
+    "required_fields": [
+      "mode",
+      "civil_date"
+    ],
+    "named_location_or_coordinate_first": true,
+    "observer_elevation_default_m": 0,
+    "elevation_override_requires": [
+      "observer_elevation_m",
+      "elevation_approval_status=approved",
+      "non-empty elevation_source"
+    ],
+    "elevation_supported_range_m": [
+      -500,
+      100000
+    ]
+  },
+  "local_civil_day_contract": {
+    "timezone_basis": "resolved IANA timezone",
+    "window_start": "first UTC instant whose local date equals the selected civil date",
+    "window_end": "first UTC instant whose local date is later than the selected civil date",
+    "dst_day_lengths_supported": [
+      23,
+      24,
+      25
+    ],
+    "nonexistent_local_date_status": "ag74m_nonexistent_local_civil_date_public_blocked",
+    "civil_date_not_converted_to_varanasi_instant": true
+  },
+  "sunrise_day_contract": {
+    "basis": "apparent_upper_limb_level_horizon",
+    "backend_function": "astronomy-engine SearchRiseSet",
+    "body": "Sun",
+    "atmospheric_refraction": "Astronomy Engine standard near-horizon model using 34 arcminutes scaled by atmospheric density",
+    "solar_limb": "upper_limb",
+    "observer_height": "approved elevation above mean sea level; default zero metres",
+    "meters_above_local_ground": 0,
+    "horizon_dip_enabled": false,
+    "terrain_obstruction_enabled": false,
+    "sunrise_required_for_daily_element_allocation": true,
+    "sunset_recorded_when_available": true
+  },
+  "daily_elements": {
+    "allocation_instant": "local sunrise",
+    "tithi": "floor(normalised Moon-Sun elongation / 12°) + 1",
+    "nakshatra": "floor(Lahiri sidereal Moon longitude / (360°/27)) + 1",
+    "yoga": "floor(combined Lahiri sidereal Sun+Moon longitude / (360°/27)) + 1",
+    "karana": "floor(normalised Moon-Sun elongation / 6°) + 1",
+    "paksha": "Shukla for tithi 1-15; Krishna for tithi 16-30",
+    "vara": "weekday of the sunrise-anchored local civil date"
+  },
+  "transition_contract": {
+    "next_transition_source": "AG74L versioned angular root finder",
+    "previous_transition_method": "30-minute backward scan followed by bisection to 0.5 seconds",
+    "previous_and_next_required_for": [
+      "tithi",
+      "nakshatra",
+      "yoga",
+      "karana"
+    ],
+    "utc_and_local_iana_time_required": true
+  },
+  "skipped_repeated_contract": {
+    "comparison_points": [
+      "previous local sunrise",
+      "current local sunrise",
+      "next local sunrise"
+    ],
+    "repeated_definition": "same element index at two consecutive available sunrises",
+    "skipped_definition": "one or more cyclic element indices not present at consecutive available sunrises",
+    "unavailable_neighbor_handling": "unknown rather than inferred where a neighboring sunrise is unavailable"
+  },
+  "governed_unavailable_states": [
+    "polar_day",
+    "polar_night",
+    "no_sunrise_within_local_civil_day",
+    "nonexistent_local_civil_date",
+    "invalid_observer_elevation",
+    "unapproved_elevation_override"
+  ],
+  "forbidden_actions": [
+    "festival or ritual window generation",
+    "lunar month generation",
+    "annual Hindu calendar generation",
+    "public Panchang publication",
+    "unrestricted geocoding",
+    "backend service deployment",
+    "Supabase",
+    "personal location storage",
+    "external ephemeris API",
+    "public method selector",
+    "CSS or public UI correction"
+  ]
+}

@@ -1,0 +1,3852 @@
+{
+  "module_id": "AG74M",
+  "title": "Panchang Day Orchestration Validation Results",
+  "status": "ag74m_day_orchestration_validation_passed",
+  "orchestrator_version": "1.0.0",
+  "summary": {
+    "total_test_count": 12,
+    "passed_test_count": 12,
+    "failed_test_count": 0
+  },
+  "sunrise_runtime_activated_internal_only": true,
+  "daily_panchang_classification_activated_internal_only": true,
+  "public_output_allowed": false,
+  "festival_generation_executed": false,
+  "annual_calendar_generation_executed": false,
+  "external_api_used": false,
+  "backend_service_deployed": false,
+  "supabase_activation_performed": false,
+  "results": [
+    {
+      "test_id": "varanasi_reference_day",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 24,
+        "location.timezone": "Asia/Kolkata",
+        "observer_elevation_m": 0,
+        "vara.english": "Saturday",
+        "paksha": "Krishna Paksha",
+        "elements.tithi.index": 28,
+        "elements.nakshatra.index": 3,
+        "elements.yoga.index": 7,
+        "elements.karana.index": 55,
+        "public_output_allowed": false
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-06-13",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "varanasi_in",
+          "display_label": "Varanasi",
+          "country": "India",
+          "region": "Uttar Pradesh",
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-06-13",
+          "timezone": "Asia/Kolkata",
+          "start_utc": "2026-06-12T18:30:00.000Z",
+          "end_utc_exclusive": "2026-06-13T18:30:00.000Z",
+          "start_local": "2026-06-13T00:00:00+05:30",
+          "end_local_exclusive": "2026-06-14T00:00:00+05:30",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-06-12T23:37:12.732Z",
+          "local": "2026-06-13T05:07:12+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-06-13T13:19:07.365Z",
+          "local": "2026-06-13T18:49:07+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-06-13T06:30:00.000Z",
+          "apparent_altitude_degrees": 87.853376271
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-06-12T23:37:12.732Z",
+          "start_local": "2026-06-13T05:07:12+05:30",
+          "end_utc": "2026-06-13T23:37:17.893Z",
+          "end_local": "2026-06-14T05:07:17+05:30",
+          "duration_hours": 24.001434,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 7,
+          "english": "Saturday",
+          "sanskrit": "Shanivara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Krishna Paksha",
+        "elements": {
+          "tithi": {
+            "index": 28,
+            "name": "Krishna Trayodashi",
+            "angle_degrees": 329.528083533,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T14:07:02.184Z",
+              "local": "2026-06-12T19:37:02+05:30",
+              "from_index": 27,
+              "to_index": 28,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T10:38:07.663Z",
+              "local": "2026-06-13T16:08:07+05:30",
+              "from_index": 28,
+              "to_index": 29,
+              "target_degrees": 336,
+              "angle_residual_degrees": 0.00003779,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 27,
+              "current_index": 28,
+              "next_index": 29,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 3,
+            "name": "Krittika",
+            "angle_degrees": 27.309228072,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T22:35:26.823Z",
+              "local": "2026-06-13T04:05:26+05:30",
+              "from_index": 2,
+              "to_index": 3,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T19:46:50.611Z",
+              "local": "2026-06-14T01:16:50+05:30",
+              "from_index": 3,
+              "to_index": 4,
+              "target_degrees": 40,
+              "angle_residual_degrees": 0.000036794,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 1,
+              "current_index": 3,
+              "next_index": 4,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                2
+              ],
+              "skipped_before_current_names": [
+                "Bharani"
+              ],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 7,
+            "name": "Sukarma",
+            "angle_degrees": 85.090372611,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T15:55:49.381Z",
+              "local": "2026-06-12T21:25:49+05:30",
+              "from_index": 6,
+              "to_index": 7,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T11:58:06.930Z",
+              "local": "2026-06-13T17:28:06+05:30",
+              "from_index": 7,
+              "to_index": 8,
+              "target_degrees": 93.333333333,
+              "angle_residual_degrees": 0.000069152667,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 6,
+              "current_index": 7,
+              "next_index": 8,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 55,
+            "name": "Gara",
+            "angle_degrees": 329.528083533,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T14:07:02.184Z",
+              "local": "2026-06-12T19:37:02+05:30",
+              "from_index": 54,
+              "to_index": 55,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T00:25:37.955Z",
+              "local": "2026-06-13T05:55:37+05:30",
+              "from_index": 55,
+              "to_index": 56,
+              "target_degrees": 330,
+              "angle_residual_degrees": 0.000038342,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 53,
+              "current_index": 55,
+              "next_index": 58,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                54
+              ],
+              "skipped_before_current_names": [
+                "Taitila"
+              ],
+              "skipped_after_current_indices": [
+                56,
+                57
+              ],
+              "skipped_after_current_names": [
+                "Vanija",
+                "Vishti"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-06-12T23:37:12.732Z",
+          "julian_date_utc": 2461204.484175139,
+          "ut_j2000_days": 9659.484175138889,
+          "tt_j2000_days": 9659.485046965527,
+          "delta_t_seconds": 75.325822,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.22618527,
+          "sun_longitude_tropical": 82.007329809,
+          "moon_longitude_tropical": 51.535413342,
+          "sun_longitude_sidereal": 57.781144539,
+          "moon_longitude_sidereal": 27.309228072,
+          "moon_minus_sun_elongation": 329.528083533,
+          "combined_sidereal_longitude_for_yoga": 85.090372611,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-06-12",
+            "sunrise_utc": "2026-06-11T23:37:08.687Z",
+            "sunrise_local": "2026-06-12T05:07:08+05:30",
+            "classification": {
+              "tithi": {
+                "index": 27,
+                "name": "Krishna Dwadashi",
+                "angle_degrees": 315.682954872
+              },
+              "nakshatra": {
+                "index": 1,
+                "name": "Ashwini",
+                "angle_degrees": 12.507943758
+              },
+              "yoga": {
+                "index": 6,
+                "name": "Atiganda",
+                "angle_degrees": 69.332932645
+              },
+              "karana": {
+                "index": 53,
+                "name": "Kaulava",
+                "angle_degrees": 315.682954872
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-06-14",
+            "sunrise_utc": "2026-06-13T23:37:17.893Z",
+            "sunrise_local": "2026-06-14T05:07:17+05:30",
+            "classification": {
+              "tithi": {
+                "index": 29,
+                "name": "Krishna Chaturdashi",
+                "angle_degrees": 343.699574685
+              },
+              "nakshatra": {
+                "index": 4,
+                "name": "Rohini",
+                "angle_degrees": 42.436739134
+              },
+              "yoga": {
+                "index": 8,
+                "name": "Dhriti",
+                "angle_degrees": 101.173903583
+              },
+              "karana": {
+                "index": 58,
+                "name": "Shakuni",
+                "angle_degrees": 343.699574685
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "canonical_id_lookup",
+              "approved_named_location_resolved",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Asia/Kolkata",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:civil_day_window.duration_hours",
+            "passed": true,
+            "expected": 24,
+            "actual": 24
+          },
+          {
+            "check": "exact:location.timezone",
+            "passed": true,
+            "expected": "Asia/Kolkata",
+            "actual": "Asia/Kolkata"
+          },
+          {
+            "check": "exact:observer_elevation_m",
+            "passed": true,
+            "expected": 0,
+            "actual": 0
+          },
+          {
+            "check": "exact:vara.english",
+            "passed": true,
+            "expected": "Saturday",
+            "actual": "Saturday"
+          },
+          {
+            "check": "exact:paksha",
+            "passed": true,
+            "expected": "Krishna Paksha",
+            "actual": "Krishna Paksha"
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 28,
+            "actual": 28
+          },
+          {
+            "check": "exact:elements.nakshatra.index",
+            "passed": true,
+            "expected": 3,
+            "actual": 3
+          },
+          {
+            "check": "exact:elements.yoga.index",
+            "passed": true,
+            "expected": 7,
+            "actual": 7
+          },
+          {
+            "check": "exact:elements.karana.index",
+            "passed": true,
+            "expected": 55,
+            "actual": 55
+          },
+          {
+            "check": "exact:public_output_allowed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          },
+          {
+            "check": "window:sunrise.utc",
+            "passed": true,
+            "expected": [
+              "2026-06-12T23:36:00.000Z",
+              "2026-06-12T23:39:00.000Z"
+            ],
+            "actual": "2026-06-12T23:37:12.732Z"
+          },
+          {
+            "check": "window:sunset.utc",
+            "passed": true,
+            "expected": [
+              "2026-06-13T13:17:00.000Z",
+              "2026-06-13T13:21:00.000Z"
+            ],
+            "actual": "2026-06-13T13:19:07.365Z"
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "london_british_summer_time",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-07-15",
+        "canonical_location_id": "london_gb"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 24,
+        "location.timezone": "Europe/London",
+        "sunrise.offset_minutes": 60,
+        "elements.tithi.index": 1,
+        "elements.nakshatra.index": 8
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-07-15",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "london_gb",
+          "display_label": "London",
+          "country": "United Kingdom",
+          "region": "England",
+          "latitude": 51.5074,
+          "longitude": -0.1278,
+          "timezone": "Europe/London",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-07-15",
+          "timezone": "Europe/London",
+          "start_utc": "2026-07-14T23:00:00.000Z",
+          "end_utc_exclusive": "2026-07-15T23:00:00.000Z",
+          "start_local": "2026-07-15T00:00:00+01:00",
+          "end_local_exclusive": "2026-07-16T00:00:00+01:00",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-07-15T04:00:55.189Z",
+          "local": "2026-07-15T05:00:55+01:00",
+          "offset_minutes": 60,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-07-15T20:11:23.378Z",
+          "local": "2026-07-15T21:11:23+01:00",
+          "offset_minutes": 60,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-07-15T11:00:00.000Z",
+          "apparent_altitude_degrees": 57.31405846
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-07-15T04:00:55.189Z",
+          "start_local": "2026-07-15T05:00:55+01:00",
+          "end_utc": "2026-07-16T04:02:07.141Z",
+          "end_local": "2026-07-16T05:02:07+01:00",
+          "duration_hours": 24.019987,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 4,
+          "english": "Wednesday",
+          "sanskrit": "Budhavara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Shukla Paksha",
+        "elements": {
+          "tithi": {
+            "index": 1,
+            "name": "Shukla Pratipada",
+            "angle_degrees": 10.648098844,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-07-14T09:43:30.608Z",
+              "local": "2026-07-14T10:43:30+01:00",
+              "from_index": 30,
+              "to_index": 1,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-07-15T06:21:24.778Z",
+              "local": "2026-07-15T07:21:24+01:00",
+              "from_index": 1,
+              "to_index": 2,
+              "target_degrees": 12,
+              "angle_residual_degrees": 0.000057761,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 30,
+              "current_index": 1,
+              "next_index": 3,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [
+                2
+              ],
+              "skipped_after_current_names": [
+                "Shukla Dwitiya"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 8,
+            "name": "Pushya",
+            "angle_degrees": 99.134054594,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-07-14T18:39:35.501Z",
+              "local": "2026-07-14T19:39:35+01:00",
+              "from_index": 7,
+              "to_index": 8,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-07-15T16:16:33.420Z",
+              "local": "2026-07-15T17:16:33+01:00",
+              "from_index": 8,
+              "to_index": 9,
+              "target_degrees": 106.666666667,
+              "angle_residual_degrees": 0.000063994333,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 7,
+              "current_index": 8,
+              "next_index": 9,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 15,
+            "name": "Vajra",
+            "angle_degrees": 187.620010344,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-07-15T02:33:58.440Z",
+              "local": "2026-07-15T03:33:58+01:00",
+              "from_index": 14,
+              "to_index": 15,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-07-15T22:59:57.620Z",
+              "local": "2026-07-15T23:59:57+01:00",
+              "from_index": 15,
+              "to_index": 16,
+              "target_degrees": 200,
+              "angle_residual_degrees": 0.000018216,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 13,
+              "current_index": 15,
+              "next_index": 16,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                14
+              ],
+              "skipped_before_current_names": [
+                "Harshana"
+              ],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 2,
+            "name": "Bava",
+            "angle_degrees": 10.648098844,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-07-14T20:00:02.893Z",
+              "local": "2026-07-14T21:00:02+01:00",
+              "from_index": 1,
+              "to_index": 2,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-07-15T06:21:24.778Z",
+              "local": "2026-07-15T07:21:24+01:00",
+              "from_index": 2,
+              "to_index": 3,
+              "target_degrees": 12,
+              "angle_residual_degrees": 0.000057761,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 60,
+              "current_index": 2,
+              "next_index": 5,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                1
+              ],
+              "skipped_before_current_names": [
+                "Kimstughna"
+              ],
+              "skipped_after_current_indices": [
+                3,
+                4
+              ],
+              "skipped_after_current_names": [
+                "Balava",
+                "Kaulava"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-07-15T04:00:55.189Z",
+          "julian_date_utc": 2461236.667305428,
+          "ut_j2000_days": 9691.66730542824,
+          "tt_j2000_days": 9691.668177884994,
+          "delta_t_seconds": 75.380264,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.227416141,
+          "sun_longitude_tropical": 112.713371891,
+          "moon_longitude_tropical": 123.361470735,
+          "sun_longitude_sidereal": 88.48595575,
+          "moon_longitude_sidereal": 99.134054594,
+          "moon_minus_sun_elongation": 10.648098844,
+          "combined_sidereal_longitude_for_yoga": 187.620010344,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-07-14",
+            "sunrise_utc": "2026-07-14T03:59:44.914Z",
+            "sunrise_local": "2026-07-14T04:59:44+01:00",
+            "classification": {
+              "tithi": {
+                "index": 30,
+                "name": "Amavasya",
+                "angle_degrees": 356.638623846
+              },
+              "nakshatra": {
+                "index": 7,
+                "name": "Punarvasu",
+                "angle_degrees": 84.169542952
+              },
+              "yoga": {
+                "index": 13,
+                "name": "Vyaghata",
+                "angle_degrees": 171.700462058
+              },
+              "karana": {
+                "index": 60,
+                "name": "Naga",
+                "angle_degrees": 356.638623846
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-07-16",
+            "sunrise_utc": "2026-07-16T04:02:07.141Z",
+            "sunrise_local": "2026-07-16T05:02:07+01:00",
+            "classification": {
+              "tithi": {
+                "index": 3,
+                "name": "Shukla Tritiya",
+                "angle_degrees": 24.364077865
+              },
+              "nakshatra": {
+                "index": 9,
+                "name": "Ashlesha",
+                "angle_degrees": 113.805155518
+              },
+              "yoga": {
+                "index": 16,
+                "name": "Siddhi",
+                "angle_degrees": 203.24623317
+              },
+              "karana": {
+                "index": 5,
+                "name": "Taitila",
+                "angle_degrees": 24.364077865
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "canonical_id_lookup",
+              "approved_named_location_resolved",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Europe/London",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:civil_day_window.duration_hours",
+            "passed": true,
+            "expected": 24,
+            "actual": 24
+          },
+          {
+            "check": "exact:location.timezone",
+            "passed": true,
+            "expected": "Europe/London",
+            "actual": "Europe/London"
+          },
+          {
+            "check": "exact:sunrise.offset_minutes",
+            "passed": true,
+            "expected": 60,
+            "actual": 60
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 1,
+            "actual": 1
+          },
+          {
+            "check": "exact:elements.nakshatra.index",
+            "passed": true,
+            "expected": 8,
+            "actual": 8
+          },
+          {
+            "check": "prefix:sunrise.local",
+            "passed": true,
+            "expected": "2026-07-15T05:",
+            "actual": "2026-07-15T05:00:55+01:00"
+          },
+          {
+            "check": "suffix:sunrise.local",
+            "passed": true,
+            "expected": "+01:00",
+            "actual": "2026-07-15T05:00:55+01:00"
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "new_york_spring_dst_day",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-03-08",
+        "canonical_location_id": "new_york_us"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 23,
+        "location.timezone": "America/New_York",
+        "sunrise.offset_minutes": -240,
+        "elements.tithi.index": 20
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-03-08",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "new_york_us",
+          "display_label": "New York",
+          "country": "United States",
+          "region": "New York",
+          "latitude": 40.7128,
+          "longitude": -74.006,
+          "timezone": "America/New_York",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-03-08",
+          "timezone": "America/New_York",
+          "start_utc": "2026-03-08T05:00:00.000Z",
+          "end_utc_exclusive": "2026-03-09T04:00:00.000Z",
+          "start_local": "2026-03-08T00:00:00-05:00",
+          "end_local_exclusive": "2026-03-09T00:00:00-04:00",
+          "duration_hours": 23
+        },
+        "sunrise": {
+          "utc": "2026-03-08T11:18:52.196Z",
+          "local": "2026-03-08T07:18:52-04:00",
+          "offset_minutes": -240,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-03-08T22:55:11.078Z",
+          "local": "2026-03-08T18:55:11-04:00",
+          "offset_minutes": -240,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-03-08T16:30:00.000Z",
+          "apparent_altitude_degrees": 43.828402633
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-03-08T11:18:52.196Z",
+          "start_local": "2026-03-08T07:18:52-04:00",
+          "end_utc": "2026-03-09T11:17:16.157Z",
+          "end_local": "2026-03-09T07:17:16-04:00",
+          "duration_hours": 23.973322,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 1,
+          "english": "Sunday",
+          "sanskrit": "Ravivara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Krishna Paksha",
+        "elements": {
+          "tithi": {
+            "index": 20,
+            "name": "Krishna Panchami",
+            "angle_degrees": 237.985819201,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-03-07T13:47:41.004Z",
+              "local": "2026-03-07T08:47:41-05:00",
+              "from_index": 19,
+              "to_index": 20,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-03-08T15:41:29.227Z",
+              "local": "2026-03-08T11:41:29-04:00",
+              "from_index": 20,
+              "to_index": 21,
+              "target_degrees": 240,
+              "angle_residual_degrees": 0.000048955,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 19,
+              "current_index": 20,
+              "next_index": 21,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 16,
+            "name": "Vishakha",
+            "angle_degrees": 201.654241898,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-03-08T08:01:30.252Z",
+              "local": "2026-03-08T04:01:30-04:00",
+              "from_index": 15,
+              "to_index": 16,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-03-09T10:41:18.680Z",
+              "local": "2026-03-09T06:41:18-04:00",
+              "from_index": 16,
+              "to_index": 17,
+              "target_degrees": 213.333333333,
+              "angle_residual_degrees": 0.000055696667,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 15,
+              "current_index": 16,
+              "next_index": 17,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 13,
+            "name": "Vyaghata",
+            "angle_degrees": 165.322664596,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-03-08T01:33:26.267Z",
+              "local": "2026-03-07T20:33:26-05:00",
+              "from_index": 12,
+              "to_index": 13,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-03-09T02:05:15.692Z",
+              "local": "2026-03-08T22:05:15-04:00",
+              "from_index": 13,
+              "to_index": 14,
+              "target_degrees": 173.333333333,
+              "angle_residual_degrees": 0.000020791667,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 12,
+              "current_index": 13,
+              "next_index": 14,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 40,
+            "name": "Taitila",
+            "angle_degrees": 237.985819201,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-03-08T02:41:14.285Z",
+              "local": "2026-03-07T21:41:14-05:00",
+              "from_index": 39,
+              "to_index": 40,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-03-08T15:41:29.227Z",
+              "local": "2026-03-08T11:41:29-04:00",
+              "from_index": 40,
+              "to_index": 41,
+              "target_degrees": 240,
+              "angle_residual_degrees": 0.000048955,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 38,
+              "current_index": 40,
+              "next_index": 42,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                39
+              ],
+              "skipped_before_current_names": [
+                "Kaulava"
+              ],
+              "skipped_after_current_indices": [
+                41
+              ],
+              "skipped_after_current_names": [
+                "Gara"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-03-08T11:18:52.196Z",
+          "julian_date_utc": 2461107.9714374538,
+          "ut_j2000_days": 9562.971437453703,
+          "tt_j2000_days": 9562.97230739673,
+          "delta_t_seconds": 75.163078,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.222494057,
+          "sun_longitude_tropical": 347.890916755,
+          "moon_longitude_tropical": 225.876735956,
+          "sun_longitude_sidereal": 323.668422698,
+          "moon_longitude_sidereal": 201.654241898,
+          "moon_minus_sun_elongation": 237.985819201,
+          "combined_sidereal_longitude_for_yoga": 165.322664596,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-03-07",
+            "sunrise_utc": "2026-03-07T11:20:27.767Z",
+            "sunrise_local": "2026-03-07T06:20:27-05:00",
+            "classification": {
+              "tithi": {
+                "index": 19,
+                "name": "Krishna Chaturthi",
+                "angle_degrees": 226.851649836
+              },
+              "nakshatra": {
+                "index": 15,
+                "name": "Swati",
+                "angle_degrees": 189.520976406
+              },
+              "yoga": {
+                "index": 12,
+                "name": "Dhruva",
+                "angle_degrees": 152.190302975
+              },
+              "karana": {
+                "index": 38,
+                "name": "Balava",
+                "angle_degrees": 226.851649836
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-03-09",
+            "sunrise_utc": "2026-03-09T11:17:16.157Z",
+            "sunrise_local": "2026-03-09T07:17:16-04:00",
+            "classification": {
+              "tithi": {
+                "index": 21,
+                "name": "Krishna Shashthi",
+                "angle_degrees": 248.964332246
+              },
+              "nakshatra": {
+                "index": 17,
+                "name": "Anuradha",
+                "angle_degrees": 213.63140571
+              },
+              "yoga": {
+                "index": 14,
+                "name": "Harshana",
+                "angle_degrees": 178.298479173
+              },
+              "karana": {
+                "index": 42,
+                "name": "Vanija",
+                "angle_degrees": 248.964332246
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "canonical_id_lookup",
+              "approved_named_location_resolved",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "America/New_York",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:civil_day_window.duration_hours",
+            "passed": true,
+            "expected": 23,
+            "actual": 23
+          },
+          {
+            "check": "exact:location.timezone",
+            "passed": true,
+            "expected": "America/New_York",
+            "actual": "America/New_York"
+          },
+          {
+            "check": "exact:sunrise.offset_minutes",
+            "passed": true,
+            "expected": -240,
+            "actual": -240
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 20,
+            "actual": 20
+          },
+          {
+            "check": "prefix:sunrise.local",
+            "passed": true,
+            "expected": "2026-03-08T07:",
+            "actual": "2026-03-08T07:18:52-04:00"
+          },
+          {
+            "check": "suffix:sunrise.local",
+            "passed": true,
+            "expected": "-04:00",
+            "actual": "2026-03-08T07:18:52-04:00"
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "sydney_southern_summer_day",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-01-15",
+        "canonical_location_id": "sydney_au"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 24,
+        "location.timezone": "Australia/Sydney",
+        "sunrise.offset_minutes": 660,
+        "elements.tithi.index": 27
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-01-15",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "sydney_au",
+          "display_label": "Sydney",
+          "country": "Australia",
+          "region": "New South Wales",
+          "latitude": -33.8688,
+          "longitude": 151.2093,
+          "timezone": "Australia/Sydney",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-01-15",
+          "timezone": "Australia/Sydney",
+          "start_utc": "2026-01-14T13:00:00.000Z",
+          "end_utc_exclusive": "2026-01-15T13:00:00.000Z",
+          "start_local": "2026-01-15T00:00:00+11:00",
+          "end_local_exclusive": "2026-01-16T00:00:00+11:00",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-01-14T18:59:28.164Z",
+          "local": "2026-01-15T05:59:28+11:00",
+          "offset_minutes": 660,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-01-15T09:08:59.934Z",
+          "local": "2026-01-15T20:08:59+11:00",
+          "offset_minutes": 660,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-01-15T01:00:00.000Z",
+          "apparent_altitude_degrees": 70.932747238
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-01-14T18:59:28.164Z",
+          "start_local": "2026-01-15T05:59:28+11:00",
+          "end_utc": "2026-01-15T19:00:25.295Z",
+          "end_local": "2026-01-16T06:00:25+11:00",
+          "duration_hours": 24.01587,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 5,
+          "english": "Thursday",
+          "sanskrit": "Guruvara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Krishna Paksha",
+        "elements": {
+          "tithi": {
+            "index": 27,
+            "name": "Krishna Dwadashi",
+            "angle_degrees": 314.992222882,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-01-14T12:23:10.672Z",
+              "local": "2026-01-14T23:23:10+11:00",
+              "from_index": 26,
+              "to_index": 27,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-01-15T14:46:55.820Z",
+              "local": "2026-01-16T01:46:55+11:00",
+              "from_index": 27,
+              "to_index": 28,
+              "target_degrees": 324,
+              "angle_residual_degrees": 0.000024573,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 26,
+              "current_index": 27,
+              "next_index": 28,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 17,
+            "name": "Anuradha",
+            "angle_degrees": 225.392103095,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-01-13T18:36:25.204Z",
+              "local": "2026-01-14T05:36:25+11:00",
+              "from_index": 16,
+              "to_index": 17,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-01-14T21:33:36.894Z",
+              "local": "2026-01-15T08:33:36+11:00",
+              "from_index": 17,
+              "to_index": 18,
+              "target_degrees": 226.666666667,
+              "angle_residual_degrees": 0.000027495333,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 17,
+              "current_index": 17,
+              "next_index": 18,
+              "repeated_from_previous": true,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 11,
+            "name": "Vriddhi",
+            "angle_degrees": 135.791983308,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-01-14T14:25:18.554Z",
+              "local": "2026-01-15T01:25:18+11:00",
+              "from_index": 10,
+              "to_index": 11,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-01-15T15:07:35.516Z",
+              "local": "2026-01-16T02:07:35+11:00",
+              "from_index": 11,
+              "to_index": 12,
+              "target_degrees": 146.666666667,
+              "angle_residual_degrees": 0.000020267333,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 10,
+              "current_index": 11,
+              "next_index": 12,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 53,
+            "name": "Kaulava",
+            "angle_degrees": 314.992222882,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-01-14T12:23:10.672Z",
+              "local": "2026-01-14T23:23:10+11:00",
+              "from_index": 52,
+              "to_index": 53,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-01-15T01:36:59.042Z",
+              "local": "2026-01-15T12:36:59+11:00",
+              "from_index": 53,
+              "to_index": 54,
+              "target_degrees": 318,
+              "angle_residual_degrees": 0.000027966,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 51,
+              "current_index": 53,
+              "next_index": 55,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                52
+              ],
+              "skipped_before_current_names": [
+                "Balava"
+              ],
+              "skipped_after_current_indices": [
+                54
+              ],
+              "skipped_after_current_names": [
+                "Taitila"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-01-14T18:59:28.164Z",
+          "julian_date_utc": 2461055.2912981943,
+          "ut_j2000_days": 9510.291298194445,
+          "tt_j2000_days": 9510.29216711314,
+          "delta_t_seconds": 75.074575,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.22047926,
+          "sun_longitude_tropical": 294.620359473,
+          "moon_longitude_tropical": 249.612582355,
+          "sun_longitude_sidereal": 270.399880213,
+          "moon_longitude_sidereal": 225.392103095,
+          "moon_minus_sun_elongation": 314.992222882,
+          "combined_sidereal_longitude_for_yoga": 135.791983308,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-01-14",
+            "sunrise_utc": "2026-01-13T18:58:31.594Z",
+            "sunrise_local": "2026-01-14T05:58:31+11:00",
+            "classification": {
+              "tithi": {
+                "index": 26,
+                "name": "Krishna Ekadashi",
+                "angle_degrees": 304.134869566
+              },
+              "nakshatra": {
+                "index": 17,
+                "name": "Anuradha",
+                "angle_degrees": 213.515226378
+              },
+              "yoga": {
+                "index": 10,
+                "name": "Ganda",
+                "angle_degrees": 122.895583189
+              },
+              "karana": {
+                "index": 51,
+                "name": "Bava",
+                "angle_degrees": 304.134869566
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-01-16",
+            "sunrise_utc": "2026-01-15T19:00:25.295Z",
+            "sunrise_local": "2026-01-16T06:00:25+11:00",
+            "classification": {
+              "tithi": {
+                "index": 28,
+                "name": "Krishna Trayodashi",
+                "angle_degrees": 325.932738093
+              },
+              "nakshatra": {
+                "index": 18,
+                "name": "Jyeshtha",
+                "angle_degrees": 237.35209754
+              },
+              "yoga": {
+                "index": 12,
+                "name": "Dhruva",
+                "angle_degrees": 148.771456986
+              },
+              "karana": {
+                "index": 55,
+                "name": "Gara",
+                "angle_degrees": 325.932738093
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "canonical_id_lookup",
+              "approved_named_location_resolved",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Australia/Sydney",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:civil_day_window.duration_hours",
+            "passed": true,
+            "expected": 24,
+            "actual": 24
+          },
+          {
+            "check": "exact:location.timezone",
+            "passed": true,
+            "expected": "Australia/Sydney",
+            "actual": "Australia/Sydney"
+          },
+          {
+            "check": "exact:sunrise.offset_minutes",
+            "passed": true,
+            "expected": 660,
+            "actual": 660
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 27,
+            "actual": 27
+          },
+          {
+            "check": "prefix:sunrise.local",
+            "passed": true,
+            "expected": "2026-01-15T05:",
+            "actual": "2026-01-15T05:59:28+11:00"
+          },
+          {
+            "check": "suffix:sunrise.local",
+            "passed": true,
+            "expected": "+11:00",
+            "actual": "2026-01-15T05:59:28+11:00"
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "tokyo_coordinate_first",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 35.6762,
+        "longitude": 139.6503,
+        "timezone": "Asia/Tokyo",
+        "optional_place_label": "Tokyo coordinate test"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "location.resolution_type": "coordinate_first",
+        "location.timezone": "Asia/Tokyo",
+        "elements.tithi.index": 28,
+        "elements.nakshatra.index": 2,
+        "persistence_performed": false,
+        "geocoding_performed": false
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-06-13",
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Tokyo coordinate test",
+          "country": null,
+          "region": null,
+          "latitude": 35.6762,
+          "longitude": 139.6503,
+          "timezone": "Asia/Tokyo",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-06-13",
+          "timezone": "Asia/Tokyo",
+          "start_utc": "2026-06-12T15:00:00.000Z",
+          "end_utc_exclusive": "2026-06-13T15:00:00.000Z",
+          "start_local": "2026-06-13T00:00:00+09:00",
+          "end_local_exclusive": "2026-06-14T00:00:00+09:00",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-06-12T19:25:01.265Z",
+          "local": "2026-06-13T04:25:01+09:00",
+          "offset_minutes": 540,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-06-13T09:57:53.255Z",
+          "local": "2026-06-13T18:57:53+09:00",
+          "offset_minutes": 540,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-06-13T03:00:00.000Z",
+          "apparent_altitude_degrees": 76.895705836
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-06-12T19:25:01.265Z",
+          "start_local": "2026-06-13T04:25:01+09:00",
+          "end_utc": "2026-06-13T19:25:01.900Z",
+          "end_local": "2026-06-14T04:25:01+09:00",
+          "duration_hours": 24.000176,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 7,
+          "english": "Saturday",
+          "sanskrit": "Shanivara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Krishna Paksha",
+        "elements": {
+          "tithi": {
+            "index": 28,
+            "name": "Krishna Trayodashi",
+            "angle_degrees": 327.076130734,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T14:07:01.967Z",
+              "local": "2026-06-12T23:07:01+09:00",
+              "from_index": 27,
+              "to_index": 28,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T10:38:07.446Z",
+              "local": "2026-06-13T19:38:07+09:00",
+              "from_index": 28,
+              "to_index": 29,
+              "target_degrees": 336,
+              "angle_residual_degrees": 0.000002209,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 27,
+              "current_index": 28,
+              "next_index": 29,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 2,
+            "name": "Bharani",
+            "angle_degrees": 24.689839411,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T00:58:30.444Z",
+              "local": "2026-06-12T09:58:30+09:00",
+              "from_index": 1,
+              "to_index": 2,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-12T22:35:26.606Z",
+              "local": "2026-06-13T07:35:26+09:00",
+              "from_index": 2,
+              "to_index": 3,
+              "target_degrees": 26.666666667,
+              "angle_residual_degrees": 0.000033585333,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 1,
+              "current_index": 2,
+              "next_index": 3,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 7,
+            "name": "Sukarma",
+            "angle_degrees": 82.303548088,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T15:55:49.604Z",
+              "local": "2026-06-13T00:55:49+09:00",
+              "from_index": 6,
+              "to_index": 7,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T11:58:06.713Z",
+              "local": "2026-06-13T20:58:06+09:00",
+              "from_index": 7,
+              "to_index": 8,
+              "target_degrees": 93.333333333,
+              "angle_residual_degrees": 0.000028734667,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 5,
+              "current_index": 7,
+              "next_index": 8,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                6
+              ],
+              "skipped_before_current_names": [
+                "Atiganda"
+              ],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 55,
+            "name": "Gara",
+            "angle_degrees": 327.076130734,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T14:07:01.967Z",
+              "local": "2026-06-12T23:07:01+09:00",
+              "from_index": 54,
+              "to_index": 55,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T00:25:37.738Z",
+              "local": "2026-06-13T09:25:37+09:00",
+              "from_index": 55,
+              "to_index": 56,
+              "target_degrees": 330,
+              "angle_residual_degrees": 0.000003076,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 53,
+              "current_index": 55,
+              "next_index": 57,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                54
+              ],
+              "skipped_before_current_names": [
+                "Taitila"
+              ],
+              "skipped_after_current_indices": [
+                56
+              ],
+              "skipped_after_current_names": [
+                "Vanija"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-06-12T19:25:01.265Z",
+          "julian_date_utc": 2461204.309042419,
+          "ut_j2000_days": 9659.309042418981,
+          "tt_j2000_days": 9659.309914242192,
+          "delta_t_seconds": 75.325525,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.226178572,
+          "sun_longitude_tropical": 81.839887249,
+          "moon_longitude_tropical": 48.916017983,
+          "sun_longitude_sidereal": 57.613708677,
+          "moon_longitude_sidereal": 24.689839411,
+          "moon_minus_sun_elongation": 327.076130734,
+          "combined_sidereal_longitude_for_yoga": 82.303548088,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-06-12",
+            "sunrise_utc": "2026-06-11T19:25:02.276Z",
+            "sunrise_local": "2026-06-12T04:25:02+09:00",
+            "classification": {
+              "tithi": {
+                "index": 27,
+                "name": "Krishna Dwadashi",
+                "angle_degrees": 313.301550261
+              },
+              "nakshatra": {
+                "index": 1,
+                "name": "Ashwini",
+                "angle_degrees": 9.959134161
+              },
+              "yoga": {
+                "index": 5,
+                "name": "Shobhana",
+                "angle_degrees": 66.61671806
+              },
+              "karana": {
+                "index": 53,
+                "name": "Kaulava",
+                "angle_degrees": 313.301550261
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-06-14",
+            "sunrise_utc": "2026-06-13T19:25:01.900Z",
+            "sunrise_local": "2026-06-14T04:25:01+09:00",
+            "classification": {
+              "tithi": {
+                "index": 29,
+                "name": "Krishna Chaturdashi",
+                "angle_degrees": 341.199956846
+              },
+              "nakshatra": {
+                "index": 3,
+                "name": "Krittika",
+                "angle_degrees": 39.769661995
+              },
+              "yoga": {
+                "index": 8,
+                "name": "Dhriti",
+                "angle_degrees": 98.339367143
+              },
+              "karana": {
+                "index": 57,
+                "name": "Vishti",
+                "angle_degrees": 341.199956846
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": null,
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "coordinate_first_validation_started",
+              "coordinate_first_resolved_without_geocoding",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Asia/Tokyo",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:location.resolution_type",
+            "passed": true,
+            "expected": "coordinate_first",
+            "actual": "coordinate_first"
+          },
+          {
+            "check": "exact:location.timezone",
+            "passed": true,
+            "expected": "Asia/Tokyo",
+            "actual": "Asia/Tokyo"
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 28,
+            "actual": 28
+          },
+          {
+            "check": "exact:elements.nakshatra.index",
+            "passed": true,
+            "expected": 2,
+            "actual": 2
+          },
+          {
+            "check": "exact:persistence_performed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          },
+          {
+            "check": "exact:geocoding_performed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "varanasi_skipped_tithi_detection",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-16",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "elements.tithi.index": 2,
+        "elements.tithi.sunrise_sequence.previous_index": 30,
+        "elements.tithi.sunrise_sequence.repeated_from_previous": false,
+        "elements.tithi.sunrise_sequence.skipped_before_current_indices": [
+          1
+        ]
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-06-16",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "varanasi_in",
+          "display_label": "Varanasi",
+          "country": "India",
+          "region": "Uttar Pradesh",
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-06-16",
+          "timezone": "Asia/Kolkata",
+          "start_utc": "2026-06-15T18:30:00.000Z",
+          "end_utc_exclusive": "2026-06-16T18:30:00.000Z",
+          "start_local": "2026-06-16T00:00:00+05:30",
+          "end_local_exclusive": "2026-06-17T00:00:00+05:30",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-06-15T23:37:31.477Z",
+          "local": "2026-06-16T05:07:31+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-06-16T13:20:04.290Z",
+          "local": "2026-06-16T18:50:04+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-06-16T06:30:00.000Z",
+          "apparent_altitude_degrees": 88.0122258
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-06-15T23:37:31.477Z",
+          "start_local": "2026-06-16T05:07:31+05:30",
+          "end_utc": "2026-06-16T23:37:39.852Z",
+          "end_local": "2026-06-17T05:07:39+05:30",
+          "duration_hours": 24.002326,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 3,
+          "english": "Tuesday",
+          "sanskrit": "Mangalavara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Shukla Paksha",
+        "elements": {
+          "tithi": {
+            "index": 2,
+            "name": "Shukla Dwitiya",
+            "angle_degrees": 12.358454962,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-15T23:01:17.941Z",
+              "local": "2026-06-16T04:31:17+05:30",
+              "from_index": 1,
+              "to_index": 2,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-16T19:22:49.493Z",
+              "local": "2026-06-17T00:52:49+05:30",
+              "from_index": 2,
+              "to_index": 3,
+              "target_degrees": 24,
+              "angle_residual_degrees": 0.000051682,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 30,
+              "current_index": 2,
+              "next_index": 3,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                1
+              ],
+              "skipped_before_current_names": [
+                "Shukla Pratipada"
+              ],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 6,
+            "name": "Ardra",
+            "angle_degrees": 73.007203906,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-15T13:38:22.892Z",
+              "local": "2026-06-15T19:08:22+05:30",
+              "from_index": 5,
+              "to_index": 6,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-16T10:42:16.242Z",
+              "local": "2026-06-16T16:12:16+05:30",
+              "from_index": 6,
+              "to_index": 7,
+              "target_degrees": 80,
+              "angle_residual_degrees": 0.00000429,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 5,
+              "current_index": 6,
+              "next_index": 7,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 11,
+            "name": "Vriddhi",
+            "angle_degrees": 133.655952851,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-15T23:08:46.622Z",
+              "local": "2026-06-16T04:38:46+05:30",
+              "from_index": 10,
+              "to_index": 11,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-16T19:04:24.708Z",
+              "local": "2026-06-17T00:34:24+05:30",
+              "from_index": 11,
+              "to_index": 12,
+              "target_degrees": 146.666666667,
+              "angle_residual_degrees": 0.000035558333,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 9,
+              "current_index": 11,
+              "next_index": 12,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                10
+              ],
+              "skipped_before_current_names": [
+                "Ganda"
+              ],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 3,
+            "name": "Balava",
+            "angle_degrees": 12.358454962,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-15T23:01:17.941Z",
+              "local": "2026-06-16T04:31:17+05:30",
+              "from_index": 2,
+              "to_index": 3,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-16T09:09:35.841Z",
+              "local": "2026-06-16T14:39:35+05:30",
+              "from_index": 3,
+              "to_index": 4,
+              "target_degrees": 18,
+              "angle_residual_degrees": 0.000005327,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 60,
+              "current_index": 3,
+              "next_index": 5,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                1,
+                2
+              ],
+              "skipped_before_current_names": [
+                "Kimstughna",
+                "Bava"
+              ],
+              "skipped_after_current_indices": [
+                4
+              ],
+              "skipped_after_current_names": [
+                "Kaulava"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-06-15T23:37:31.477Z",
+          "julian_date_utc": 2461207.484392095,
+          "ut_j2000_days": 9662.484392094908,
+          "tt_j2000_days": 9662.485263980245,
+          "delta_t_seconds": 75.330893,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.226300016,
+          "sun_longitude_tropical": 84.87504896,
+          "moon_longitude_tropical": 97.233503922,
+          "sun_longitude_sidereal": 60.648748944,
+          "moon_longitude_sidereal": 73.007203906,
+          "moon_minus_sun_elongation": 12.358454962,
+          "combined_sidereal_longitude_for_yoga": 133.655952851,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-06-15",
+            "sunrise_utc": "2026-06-14T23:37:24.149Z",
+            "sunrise_local": "2026-06-15T05:07:24+05:30",
+            "classification": {
+              "tithi": {
+                "index": 30,
+                "name": "Amavasya",
+                "angle_degrees": 358.038758064
+              },
+              "nakshatra": {
+                "index": 5,
+                "name": "Mrigashira",
+                "angle_degrees": 57.731795332
+              },
+              "yoga": {
+                "index": 9,
+                "name": "Shula",
+                "angle_degrees": 117.424832599
+              },
+              "karana": {
+                "index": 60,
+                "name": "Naga",
+                "angle_degrees": 358.038758064
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-06-17",
+            "sunrise_utc": "2026-06-16T23:37:39.852Z",
+            "sunrise_local": "2026-06-17T05:07:39+05:30",
+            "classification": {
+              "tithi": {
+                "index": 3,
+                "name": "Shukla Tritiya",
+                "angle_degrees": 26.476503332
+              },
+              "nakshatra": {
+                "index": 7,
+                "name": "Punarvasu",
+                "angle_degrees": 88.08078791
+              },
+              "yoga": {
+                "index": 12,
+                "name": "Dhruva",
+                "angle_degrees": 149.685072487
+              },
+              "karana": {
+                "index": 5,
+                "name": "Taitila",
+                "angle_degrees": 26.476503332
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "canonical_id_lookup",
+              "approved_named_location_resolved",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Asia/Kolkata",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 2,
+            "actual": 2
+          },
+          {
+            "check": "exact:elements.tithi.sunrise_sequence.previous_index",
+            "passed": true,
+            "expected": 30,
+            "actual": 30
+          },
+          {
+            "check": "exact:elements.tithi.sunrise_sequence.repeated_from_previous",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          },
+          {
+            "check": "exact:elements.tithi.sunrise_sequence.skipped_before_current_indices",
+            "passed": true,
+            "expected": [
+              1
+            ],
+            "actual": [
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "varanasi_repeated_tithi_detection",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-30",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "elements.tithi.index": 15,
+        "elements.tithi.sunrise_sequence.previous_index": 15,
+        "elements.tithi.sunrise_sequence.repeated_from_previous": true,
+        "elements.tithi.sunrise_sequence.skipped_before_current_indices": []
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-06-30",
+        "location": {
+          "resolution_type": "named_location",
+          "canonical_location_id": "varanasi_in",
+          "display_label": "Varanasi",
+          "country": "India",
+          "region": "Uttar Pradesh",
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "approved_curated_city_coordinate",
+          "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json"
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "civil_day_window": {
+          "civil_date": "2026-06-30",
+          "timezone": "Asia/Kolkata",
+          "start_utc": "2026-06-29T18:30:00.000Z",
+          "end_utc_exclusive": "2026-06-30T18:30:00.000Z",
+          "start_local": "2026-06-30T00:00:00+05:30",
+          "end_local_exclusive": "2026-07-01T00:00:00+05:30",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-06-29T23:40:52.769Z",
+          "local": "2026-06-30T05:10:52+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-06-30T13:22:33.275Z",
+          "local": "2026-06-30T18:52:33+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-06-30T06:30:00.000Z",
+          "apparent_altitude_degrees": 87.810914387
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-06-29T23:40:52.769Z",
+          "start_local": "2026-06-30T05:10:52+05:30",
+          "end_utc": "2026-06-30T23:41:13.209Z",
+          "end_local": "2026-07-01T05:11:13+05:30",
+          "duration_hours": 24.005678,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 3,
+          "english": "Tuesday",
+          "sanskrit": "Mangalavara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Shukla Paksha",
+        "elements": {
+          "tithi": {
+            "index": 15,
+            "name": "Purnima",
+            "angle_degrees": 179.880562114,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-28T21:36:46.675Z",
+              "local": "2026-06-29T03:06:46+05:30",
+              "from_index": 14,
+              "to_index": 15,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-29T23:56:34.516Z",
+              "local": "2026-06-30T05:26:34+05:30",
+              "from_index": 15,
+              "to_index": 16,
+              "target_degrees": 180,
+              "angle_residual_degrees": 0.000022104,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 15,
+              "current_index": 15,
+              "next_index": 16,
+              "repeated_from_previous": true,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 20,
+            "name": "Purva Ashadha",
+            "angle_degrees": 253.890324476,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-29T22:33:32.875Z",
+              "local": "2026-06-30T04:03:32+05:30",
+              "from_index": 19,
+              "to_index": 20,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-07-01T01:21:13.276Z",
+              "local": "2026-07-01T06:51:13+05:30",
+              "from_index": 20,
+              "to_index": 21,
+              "target_degrees": 266.666666667,
+              "angle_residual_degrees": 0.000040103333,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 19,
+              "current_index": 20,
+              "next_index": 20,
+              "repeated_from_previous": false,
+              "repeated_into_next": true,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 25,
+            "name": "Brahma",
+            "angle_degrees": 327.900086837,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-29T08:55:45.297Z",
+              "local": "2026-06-29T14:25:45+05:30",
+              "from_index": 24,
+              "to_index": 25,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-30T09:48:27.602Z",
+              "local": "2026-06-30T15:18:27+05:30",
+              "from_index": 25,
+              "to_index": 26,
+              "target_degrees": 333.333333333,
+              "angle_residual_degrees": 0.000018258667,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 24,
+              "current_index": 25,
+              "next_index": 26,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 30,
+            "name": "Bava",
+            "angle_degrees": 179.880562114,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-29T10:47:22.563Z",
+              "local": "2026-06-29T16:17:22+05:30",
+              "from_index": 29,
+              "to_index": 30,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-29T23:56:34.516Z",
+              "local": "2026-06-30T05:26:34+05:30",
+              "from_index": 30,
+              "to_index": 31,
+              "target_degrees": 180,
+              "angle_residual_degrees": 0.000022104,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 29,
+              "current_index": 30,
+              "next_index": 32,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [
+                31
+              ],
+              "skipped_after_current_names": [
+                "Balava"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-06-29T23:40:52.769Z",
+          "julian_date_utc": 2461221.4867218635,
+          "ut_j2000_days": 9676.486721863426,
+          "tt_j2000_days": 9676.487594022834,
+          "delta_t_seconds": 75.354573,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.226835547,
+          "sun_longitude_tropical": 98.236597908,
+          "moon_longitude_tropical": 278.117160022,
+          "sun_longitude_sidereal": 74.009762361,
+          "moon_longitude_sidereal": 253.890324476,
+          "moon_minus_sun_elongation": 179.880562114,
+          "combined_sidereal_longitude_for_yoga": 327.900086837,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-06-29",
+            "sunrise_utc": "2026-06-28T23:40:33.031Z",
+            "sunrise_local": "2026-06-29T05:10:33+05:30",
+            "classification": {
+              "tithi": {
+                "index": 15,
+                "name": "Purnima",
+                "angle_degrees": 168.938823223
+              },
+              "nakshatra": {
+                "index": 19,
+                "name": "Mula",
+                "angle_degrees": 241.995091768
+              },
+              "yoga": {
+                "index": 24,
+                "name": "Shukla",
+                "angle_degrees": 315.051360312
+              },
+              "karana": {
+                "index": 29,
+                "name": "Vishti",
+                "angle_degrees": 168.938823223
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-07-01",
+            "sunrise_utc": "2026-06-30T23:41:13.209Z",
+            "sunrise_local": "2026-07-01T05:11:13+05:30",
+            "classification": {
+              "tithi": {
+                "index": 16,
+                "name": "Krishna Pratipada",
+                "angle_degrees": 190.871683757
+              },
+              "nakshatra": {
+                "index": 20,
+                "name": "Purva Ashadha",
+                "angle_degrees": 265.834897548
+              },
+              "yoga": {
+                "index": 26,
+                "name": "Indra",
+                "angle_degrees": 340.798111339
+              },
+              "karana": {
+                "index": 32,
+                "name": "Kaulava",
+                "angle_degrees": 190.871683757
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": "data/knowledge-base/panchang-festival/production/ag74d-panchang-expanded-location-records.json",
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "canonical_id_lookup",
+              "approved_named_location_resolved",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Asia/Kolkata",
+          "observer_elevation_m": 0,
+          "elevation_source": "ag74j_default",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:elements.tithi.index",
+            "passed": true,
+            "expected": 15,
+            "actual": 15
+          },
+          {
+            "check": "exact:elements.tithi.sunrise_sequence.previous_index",
+            "passed": true,
+            "expected": 15,
+            "actual": 15
+          },
+          {
+            "check": "exact:elements.tithi.sunrise_sequence.repeated_from_previous",
+            "passed": true,
+            "expected": true,
+            "actual": true
+          },
+          {
+            "check": "exact:elements.tithi.sunrise_sequence.skipped_before_current_indices",
+            "passed": true,
+            "expected": [],
+            "actual": []
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "tromso_polar_day",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 69.6492,
+        "longitude": 18.9553,
+        "timezone": "Europe/Oslo",
+        "optional_place_label": "Tromso polar-day test"
+      },
+      "expected": {
+        "status": "ag74m_sunrise_unavailable_public_blocked",
+        "availability_reason": "polar_day",
+        "daily_panchang_classification_performed": false,
+        "sunrise": null,
+        "sunset": null
+      },
+      "actual": {
+        "status": "ag74m_sunrise_unavailable_public_blocked",
+        "availability_reason": "polar_day",
+        "civil_date": "2026-06-13",
+        "resolved_input": true,
+        "daily_panchang_classification_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false,
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Tromso polar-day test",
+          "country": null,
+          "region": null,
+          "latitude": 69.6492,
+          "longitude": 18.9553,
+          "timezone": "Europe/Oslo",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        },
+        "civil_day_window": {
+          "available": true,
+          "civil_date": "2026-06-13",
+          "timezone": "Europe/Oslo",
+          "start_utc": "2026-06-12T22:00:00.000Z",
+          "end_utc_exclusive": "2026-06-13T22:00:00.000Z",
+          "start_local": "2026-06-13T00:00:00+02:00",
+          "end_local_exclusive": "2026-06-14T00:00:00+02:00",
+          "duration_hours": 24
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "sunrise": null,
+        "sunset": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-06-13T10:00:00.000Z",
+          "apparent_altitude_degrees": 43.12071969
+        }
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_sunrise_unavailable_public_blocked",
+            "actual": "ag74m_sunrise_unavailable_public_blocked"
+          },
+          {
+            "check": "exact:availability_reason",
+            "passed": true,
+            "expected": "polar_day",
+            "actual": "polar_day"
+          },
+          {
+            "check": "exact:daily_panchang_classification_performed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          },
+          {
+            "check": "exact:sunrise",
+            "passed": true,
+            "expected": null,
+            "actual": null
+          },
+          {
+            "check": "exact:sunset",
+            "passed": true,
+            "expected": null,
+            "actual": null
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "tromso_polar_night",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-12-13",
+        "latitude": 69.6492,
+        "longitude": 18.9553,
+        "timezone": "Europe/Oslo",
+        "optional_place_label": "Tromso polar-night test"
+      },
+      "expected": {
+        "status": "ag74m_sunrise_unavailable_public_blocked",
+        "availability_reason": "polar_night",
+        "daily_panchang_classification_performed": false,
+        "sunrise": null,
+        "sunset": null
+      },
+      "actual": {
+        "status": "ag74m_sunrise_unavailable_public_blocked",
+        "availability_reason": "polar_night",
+        "civil_date": "2026-12-13",
+        "resolved_input": true,
+        "daily_panchang_classification_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false,
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Tromso polar-night test",
+          "country": null,
+          "region": null,
+          "latitude": 69.6492,
+          "longitude": 18.9553,
+          "timezone": "Europe/Oslo",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        },
+        "civil_day_window": {
+          "available": true,
+          "civil_date": "2026-12-13",
+          "timezone": "Europe/Oslo",
+          "start_utc": "2026-12-12T23:00:00.000Z",
+          "end_utc_exclusive": "2026-12-13T23:00:00.000Z",
+          "start_local": "2026-12-13T00:00:00+01:00",
+          "end_local_exclusive": "2026-12-14T00:00:00+01:00",
+          "duration_hours": 24
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon",
+        "elevation_source": "ag74j_default",
+        "sunrise": null,
+        "sunset": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-12-13T11:00:00.000Z",
+          "apparent_altitude_degrees": -2.262199379
+        }
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_sunrise_unavailable_public_blocked",
+            "actual": "ag74m_sunrise_unavailable_public_blocked"
+          },
+          {
+            "check": "exact:availability_reason",
+            "passed": true,
+            "expected": "polar_night",
+            "actual": "polar_night"
+          },
+          {
+            "check": "exact:daily_panchang_classification_performed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          },
+          {
+            "check": "exact:sunrise",
+            "passed": true,
+            "expected": null,
+            "actual": null
+          },
+          {
+            "check": "exact:sunset",
+            "passed": true,
+            "expected": null,
+            "actual": null
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "apia_nonexistent_local_date",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2011-12-30",
+        "latitude": -13.8333,
+        "longitude": -171.75,
+        "timezone": "Pacific/Apia",
+        "optional_place_label": "Apia skipped-date test"
+      },
+      "expected": {
+        "status": "ag74m_nonexistent_local_civil_date_public_blocked",
+        "availability_reason": "nonexistent_local_civil_date",
+        "daily_panchang_classification_performed": false
+      },
+      "actual": {
+        "status": "ag74m_nonexistent_local_civil_date_public_blocked",
+        "availability_reason": "nonexistent_local_civil_date",
+        "civil_date": "2011-12-30",
+        "resolved_input": true,
+        "daily_panchang_classification_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false,
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Apia skipped-date test",
+          "country": null,
+          "region": null,
+          "latitude": -13.8333,
+          "longitude": -171.75,
+          "timezone": "Pacific/Apia",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        },
+        "civil_day_window": {
+          "available": false,
+          "reason": "nonexistent_local_civil_date",
+          "civil_date": "2011-12-30",
+          "timezone": "Pacific/Apia"
+        },
+        "observer_elevation_m": 0,
+        "elevation_basis": "default_zero_level_horizon"
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_nonexistent_local_civil_date_public_blocked",
+            "actual": "ag74m_nonexistent_local_civil_date_public_blocked"
+          },
+          {
+            "check": "exact:availability_reason",
+            "passed": true,
+            "expected": "nonexistent_local_civil_date",
+            "actual": "nonexistent_local_civil_date"
+          },
+          {
+            "check": "exact:daily_panchang_classification_performed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "approved_elevation_override",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 25.3176,
+        "longitude": 82.9739,
+        "timezone": "Asia/Kolkata",
+        "optional_place_label": "Varanasi approved-elevation test",
+        "observer_elevation_m": 500,
+        "elevation_approval_status": "approved",
+        "elevation_source": "governed_ag74m_test_fixture"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "observer_elevation_m": 500,
+        "elevation_basis": "approved_override",
+        "sunrise.model.meters_above_local_ground": 0,
+        "sunrise.model.horizon_dip_enabled": false
+      },
+      "actual": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "module_id": "AG74M",
+        "orchestrator_version": "1.0.0",
+        "civil_date": "2026-06-13",
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Varanasi approved-elevation test",
+          "country": null,
+          "region": null,
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        },
+        "canonical_profile": {
+          "profile_id": "drishvara_varanasi_standard_v1",
+          "public_label": "Drishvara Panchang — Varanasi Standard",
+          "lunar_month_convention": "purnimanta",
+          "hindu_year_system": "vikram_samvat",
+          "astronomical_profile": "modern_drik_ephemeris_profile",
+          "ayanamsha_profile": "lahiri_chitrapaksha"
+        },
+        "observer_elevation_m": 500,
+        "elevation_basis": "approved_override",
+        "elevation_source": "governed_ag74m_test_fixture",
+        "civil_day_window": {
+          "civil_date": "2026-06-13",
+          "timezone": "Asia/Kolkata",
+          "start_utc": "2026-06-12T18:30:00.000Z",
+          "end_utc_exclusive": "2026-06-13T18:30:00.000Z",
+          "start_local": "2026-06-13T00:00:00+05:30",
+          "end_local_exclusive": "2026-06-14T00:00:00+05:30",
+          "duration_hours": 24
+        },
+        "sunrise": {
+          "utc": "2026-06-12T23:37:20.639Z",
+          "local": "2026-06-13T05:07:20+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset": {
+          "utc": "2026-06-13T13:18:59.454Z",
+          "local": "2026-06-13T18:48:59+05:30",
+          "offset_minutes": 330,
+          "model": {
+            "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+            "backend": "astronomy-engine@2.1.19",
+            "solar_limb": "upper_limb",
+            "atmospheric_refraction": "standard_34_arcminutes_density_adjusted",
+            "horizon": "level_horizon",
+            "meters_above_local_ground": 0,
+            "horizon_dip_enabled": false,
+            "terrain_obstruction_modelled": false
+          }
+        },
+        "sunset_availability_reason": null,
+        "midday_solar_altitude": {
+          "sample_utc": "2026-06-13T06:30:00.000Z",
+          "apparent_altitude_degrees": 87.853376264
+        },
+        "panchang_day_interval": {
+          "start_utc": "2026-06-12T23:37:20.639Z",
+          "start_local": "2026-06-13T05:07:20+05:30",
+          "end_utc": "2026-06-13T23:37:25.804Z",
+          "end_local": "2026-06-14T05:07:25+05:30",
+          "duration_hours": 24.001435,
+          "next_sunrise_available": true
+        },
+        "vara": {
+          "index": 7,
+          "english": "Saturday",
+          "sanskrit": "Shanivara",
+          "basis": "sunrise_anchored_local_civil_date"
+        },
+        "paksha": "Krishna Paksha",
+        "elements": {
+          "tithi": {
+            "index": 28,
+            "name": "Krishna Trayodashi",
+            "angle_degrees": 329.529367524,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T14:07:02.181Z",
+              "local": "2026-06-12T19:37:02+05:30",
+              "from_index": 27,
+              "to_index": 28,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T10:38:07.659Z",
+              "local": "2026-06-13T16:08:07+05:30",
+              "from_index": 28,
+              "to_index": 29,
+              "target_degrees": 336,
+              "angle_residual_degrees": 0.000037134,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 27,
+              "current_index": 28,
+              "next_index": 29,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "nakshatra": {
+            "index": 3,
+            "name": "Krittika",
+            "angle_degrees": 27.310599556,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T22:35:26.820Z",
+              "local": "2026-06-13T04:05:26+05:30",
+              "from_index": 2,
+              "to_index": 3,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T19:46:50.609Z",
+              "local": "2026-06-14T01:16:50+05:30",
+              "from_index": 3,
+              "to_index": 4,
+              "target_degrees": 40,
+              "angle_residual_degrees": 0.000036442,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 1,
+              "current_index": 3,
+              "next_index": 4,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                2
+              ],
+              "skipped_before_current_names": [
+                "Bharani"
+              ],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "yoga": {
+            "index": 7,
+            "name": "Sukarma",
+            "angle_degrees": 85.091831588,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T15:55:49.378Z",
+              "local": "2026-06-12T21:25:49+05:30",
+              "from_index": 6,
+              "to_index": 7,
+              "final_bracket_seconds": 0.439,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T11:58:06.927Z",
+              "local": "2026-06-13T17:28:06+05:30",
+              "from_index": 7,
+              "to_index": 8,
+              "target_degrees": 93.333333333,
+              "angle_residual_degrees": 0.000068593667,
+              "final_bracket_seconds": 0.44,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 6,
+              "current_index": 7,
+              "next_index": 8,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [],
+              "skipped_before_current_names": [],
+              "skipped_after_current_indices": [],
+              "skipped_after_current_names": [],
+              "unavailable_neighbor_means_unknown": true
+            }
+          },
+          "karana": {
+            "index": 55,
+            "name": "Gara",
+            "angle_degrees": 329.529367524,
+            "allocation_basis": "local_sunrise",
+            "previous_transition": {
+              "utc": "2026-06-12T14:07:02.181Z",
+              "local": "2026-06-12T19:37:02+05:30",
+              "from_index": 54,
+              "to_index": 55,
+              "final_bracket_seconds": 0.44,
+              "method": "30_minute_backward_scan_plus_bisection_0_5_seconds"
+            },
+            "next_transition": {
+              "utc": "2026-06-13T00:25:37.953Z",
+              "local": "2026-06-13T05:55:37+05:30",
+              "from_index": 55,
+              "to_index": 56,
+              "target_degrees": 330,
+              "angle_residual_degrees": 0.000038017,
+              "final_bracket_seconds": 0.439,
+              "method": "ag74l_versioned_angular_root_finder"
+            },
+            "sunrise_sequence": {
+              "previous_index": 53,
+              "current_index": 55,
+              "next_index": 58,
+              "repeated_from_previous": false,
+              "repeated_into_next": false,
+              "skipped_before_current_indices": [
+                54
+              ],
+              "skipped_before_current_names": [
+                "Taitila"
+              ],
+              "skipped_after_current_indices": [
+                56,
+                57
+              ],
+              "skipped_after_current_names": [
+                "Vanija",
+                "Vishti"
+              ],
+              "unavailable_neighbor_means_unknown": true
+            }
+          }
+        },
+        "astronomical_state_at_sunrise": {
+          "status": "ag74l_internal_primitive_computed_public_blocked",
+          "engine_profile_id": "drishvara_astronomical_engine_v1",
+          "engine_package": "astronomy-engine",
+          "engine_package_version": "2.1.19",
+          "utc": "2026-06-12T23:37:20.639Z",
+          "julian_date_utc": 2461204.484266655,
+          "ut_j2000_days": 9659.484266655092,
+          "tt_j2000_days": 9659.485138481732,
+          "delta_t_seconds": 75.325822,
+          "time_scale_profile": "UTC_as_UT1_approximation_plus_TT",
+          "delta_t_model_id": "ae_2_1_19_espenak_meeus_v1",
+          "precession_model_id": "ae_2_1_19_iau_2006_precession",
+          "nutation_model_id": "ae_2_1_19_iau_2000b_nutation",
+          "ayanamsha_model_id": "drishvara_lahiri_linear_tt_v1",
+          "ayanamsha_degrees": 24.226185273,
+          "sun_longitude_tropical": 82.007417305,
+          "moon_longitude_tropical": 51.536784829,
+          "sun_longitude_sidereal": 57.781232032,
+          "moon_longitude_sidereal": 27.310599556,
+          "moon_minus_sun_elongation": 329.529367524,
+          "combined_sidereal_longitude_for_yoga": 85.091831588,
+          "geocentric_core_longitudes": true,
+          "topocentric_correction_applied": false,
+          "sunrise_or_sunset_computed": false,
+          "panchang_elements_classified": false,
+          "public_output_allowed": false,
+          "external_api_used": false
+        },
+        "neighboring_sunrises": {
+          "previous": {
+            "civil_date": "2026-06-12",
+            "sunrise_utc": "2026-06-11T23:37:16.589Z",
+            "sunrise_local": "2026-06-12T05:07:16+05:30",
+            "classification": {
+              "tithi": {
+                "index": 27,
+                "name": "Krishna Dwadashi",
+                "angle_degrees": 315.684202451
+              },
+              "nakshatra": {
+                "index": 1,
+                "name": "Ashwini",
+                "angle_degrees": 12.509278788
+              },
+              "yoga": {
+                "index": 6,
+                "name": "Atiganda",
+                "angle_degrees": 69.334355126
+              },
+              "karana": {
+                "index": 53,
+                "name": "Kaulava",
+                "angle_degrees": 315.684202451
+              }
+            }
+          },
+          "next": {
+            "civil_date": "2026-06-14",
+            "sunrise_utc": "2026-06-13T23:37:25.804Z",
+            "sunrise_local": "2026-06-14T05:07:25+05:30",
+            "classification": {
+              "tithi": {
+                "index": 29,
+                "name": "Krishna Chaturdashi",
+                "angle_degrees": 343.700882587
+              },
+              "nakshatra": {
+                "index": 4,
+                "name": "Rohini",
+                "angle_degrees": 42.438134559
+              },
+              "yoga": {
+                "index": 8,
+                "name": "Dhriti",
+                "angle_degrees": 101.175386531
+              },
+              "karana": {
+                "index": 58,
+                "name": "Shakuni",
+                "angle_degrees": 343.700882587
+              }
+            }
+          }
+        },
+        "trace": {
+          "ag74k_resolver_trace": {
+            "resolver_version": "1.0.0",
+            "methodology_version": "1.0.0",
+            "canonical_profile_version": "1.0.0",
+            "date_range_contract_version": "1.0.0",
+            "location_timezone_contract_version": "1.0.0",
+            "lunar_rule_set_version": "1.0.0",
+            "festival_window_contract_version": "1.0.0",
+            "astronomical_contract_version": "1.0.0",
+            "source_record_path": null,
+            "resolution_steps": [
+              "strict_civil_date_validation",
+              "coordinate_first_validation_started",
+              "coordinate_first_resolved_without_geocoding",
+              "ag74j_profile_attached",
+              "varanasi_annual_book_key_attached"
+            ]
+          },
+          "ag74l_engine_profile_id": "drishvara_astronomical_engine_v1",
+          "ag74l_engine_package_version": "2.1.19",
+          "ag74m_orchestrator_version": "1.0.0",
+          "sunrise_profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+          "local_civil_day_timezone": "Asia/Kolkata",
+          "observer_elevation_m": 500,
+          "elevation_source": "governed_ag74m_test_fixture",
+          "transition_storage": [
+            "UTC",
+            "local_IANA_timezone"
+          ]
+        },
+        "daily_panchang_classification_performed": true,
+        "persistence_performed": false,
+        "geocoding_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_internal_day_orchestration_computed_public_blocked",
+            "actual": "ag74m_internal_day_orchestration_computed_public_blocked"
+          },
+          {
+            "check": "exact:observer_elevation_m",
+            "passed": true,
+            "expected": 500,
+            "actual": 500
+          },
+          {
+            "check": "exact:elevation_basis",
+            "passed": true,
+            "expected": "approved_override",
+            "actual": "approved_override"
+          },
+          {
+            "check": "exact:sunrise.model.meters_above_local_ground",
+            "passed": true,
+            "expected": 0,
+            "actual": 0
+          },
+          {
+            "check": "exact:sunrise.model.horizon_dip_enabled",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          }
+        ]
+      }
+    },
+    {
+      "test_id": "unapproved_elevation_override_rejected",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 25.3176,
+        "longitude": 82.9739,
+        "timezone": "Asia/Kolkata",
+        "optional_place_label": "Varanasi unapproved-elevation test",
+        "observer_elevation_m": 500
+      },
+      "expected": {
+        "status": "ag74m_unapproved_elevation_override_public_blocked",
+        "availability_reason": "unapproved_elevation_override",
+        "daily_panchang_classification_performed": false
+      },
+      "actual": {
+        "status": "ag74m_unapproved_elevation_override_public_blocked",
+        "availability_reason": "unapproved_elevation_override",
+        "civil_date": "2026-06-13",
+        "resolved_input": true,
+        "daily_panchang_classification_performed": false,
+        "public_output_allowed": false,
+        "festival_generation_executed": false,
+        "annual_calendar_generation_executed": false,
+        "external_api_used": false,
+        "backend_service_deployed": false,
+        "supabase_activation_performed": false,
+        "location": {
+          "resolution_type": "coordinate_first",
+          "canonical_location_id": null,
+          "display_label": "Varanasi unapproved-elevation test",
+          "country": null,
+          "region": null,
+          "latitude": 25.3176,
+          "longitude": 82.9739,
+          "timezone": "Asia/Kolkata",
+          "coordinate_precision": "user_supplied_unstored",
+          "source_record_path": null
+        }
+      },
+      "evaluation": {
+        "passed": true,
+        "checks": [
+          {
+            "check": "exact:status",
+            "passed": true,
+            "expected": "ag74m_unapproved_elevation_override_public_blocked",
+            "actual": "ag74m_unapproved_elevation_override_public_blocked"
+          },
+          {
+            "check": "exact:availability_reason",
+            "passed": true,
+            "expected": "unapproved_elevation_override",
+            "actual": "unapproved_elevation_override"
+          },
+          {
+            "check": "exact:daily_panchang_classification_performed",
+            "passed": true,
+            "expected": false,
+            "actual": false
+          }
+        ]
+      }
+    }
+  ]
+}

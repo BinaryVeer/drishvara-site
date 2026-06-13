@@ -146,6 +146,32 @@ check(
   "AG74L deterministic astronomical validation result bank must pass without external API use."
 );
 
+const ag74mQuality = exists("data/quality/ag74m-panchang-day-orchestration.json")
+  ? readJson("data/quality/ag74m-panchang-day-orchestration.json")
+  : null;
+check(
+  "ag74m_day_orchestration_passed",
+  ag74mQuality?.status === "ag74m_completed" &&
+    ag74mQuality?.issue_count === 0 &&
+    ag74mQuality?.deterministic_test_pass_count === 12 &&
+    ag74mQuality?.ready_for_ag74n === true,
+  "AG74M day orchestration must pass twelve tests and make AG74N ready."
+);
+
+const ag74mResults = exists("data/knowledge-base/panchang-festival/production/ag74m-day-orchestration-validation-results.json")
+  ? readJson("data/knowledge-base/panchang-festival/production/ag74m-day-orchestration-validation-results.json")
+  : null;
+check(
+  "ag74m_validation_result_bank_valid",
+  ag74mResults?.status === "ag74m_day_orchestration_validation_passed" &&
+    ag74mResults?.summary?.total_test_count === 12 &&
+    ag74mResults?.summary?.failed_test_count === 0 &&
+    ag74mResults?.festival_generation_executed === false &&
+    ag74mResults?.annual_calendar_generation_executed === false &&
+    ag74mResults?.external_api_used === false,
+  "AG74M deterministic day-orchestration result bank must pass without festival, annual-calendar or external-API activation."
+);
+
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");
 
@@ -167,6 +193,7 @@ check("ag57z_validate_script_exists", Boolean(pkg.scripts?.["validate:ag57z"]), 
 check("ag74j_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74j"]), "validate:ag74j must exist.");
 check("ag74k_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74k"]), "validate:ag74k must exist.");
 check("ag74l_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74l"]), "validate:ag74l must exist.");
+check("ag74m_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74m"]), "validate:ag74m must exist.");
 
 const manifest = {
   module_id: "AG58A",

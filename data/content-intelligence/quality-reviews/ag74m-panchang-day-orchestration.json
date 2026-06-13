@@ -1,0 +1,27 @@
+{
+  "module_id": "AG74M",
+  "title": "Panchang Day Orchestration Review",
+  "status": "ag74m_completed",
+  "decision_summary": {
+    "civil_day_basis": "resolved IANA timezone",
+    "sunrise_backend": "astronomy-engine@2.1.19 SearchRiseSet",
+    "sunrise_convention": "apparent upper limb, standard refraction, level horizon",
+    "observer_elevation": "zero metres default; governed approved override only",
+    "daily_allocation_instant": "local sunrise",
+    "transition_methods": {
+      "previous": "30-minute backward scan plus 0.5-second bisection",
+      "next": "AG74L versioned angular root finder"
+    },
+    "skipped_repeated_basis": "comparison across previous/current/next available local sunrises",
+    "deterministic_test_count": 12
+  },
+  "existing_ag70_sunrise_model_consumed_as_doctrine": true,
+  "ag70k_approximate_sunrise_engine_promoted": false,
+  "public_ui_changed": false,
+  "css_or_typography_changed": false,
+  "festival_generation_executed": false,
+  "annual_calendar_generation_executed": false,
+  "backend_service_deployed": false,
+  "supabase_activation_performed": false,
+  "next_module": "AG74N"
+}

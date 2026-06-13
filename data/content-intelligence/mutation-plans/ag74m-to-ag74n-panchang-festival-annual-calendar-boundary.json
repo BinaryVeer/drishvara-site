@@ -1,0 +1,35 @@
+{
+  "from_module": "AG74M",
+  "to_module": "AG74N",
+  "transition": "validated_sunrise_anchored_daily_panchang_records_to_festival_lunar_month_and_varanasi_annual_calendar_generation",
+  "ag74n_must_consume": [
+    "scripts/lib/ag74m-panchang-day-orchestrator.mjs",
+    "data/knowledge-base/panchang-festival/production/ag74m-panchang-day-orchestration-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74m-sunrise-sunset-profile.json",
+    "data/knowledge-base/panchang-festival/production/ag74m-day-orchestration-validation-results.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-varanasi-hindu-year-and-month-convention-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-lunar-month-and-four-page-book-slot-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74j-festival-and-ritual-window-semantics-contract.json"
+  ],
+  "ag74n_must_implement": [
+    "Purnimanta lunar month allocation",
+    "Vikram Samvat Chaitradi year boundary at Chaitra Shukla Pratipada",
+    "Adhika Masa detection",
+    "Kshaya Masa detection and representation",
+    "sunrise and event-window governed festival rules",
+    "full supported-year Varanasi daily generation",
+    "physical month segments mapped into four canonical reporting pages",
+    "year-edge partial paksha segments",
+    "traceable annual calendar and festival result bank"
+  ],
+  "ag74n_must_not_activate": [
+    "public Panchang publication",
+    "AG74O CSS or public UI correction",
+    "unrestricted geocoding",
+    "backend service deployment",
+    "Supabase",
+    "personal location storage",
+    "external ephemeris API",
+    "public method selector"
+  ]
+}

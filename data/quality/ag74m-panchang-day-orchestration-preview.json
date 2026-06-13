@@ -1,0 +1,18 @@
+{
+  "module_id": "AG74M",
+  "title": "Panchang Day Orchestration Preview",
+  "status": "preview_matches_internal_day_orchestrator",
+  "input_flow": "AG74K resolved date/location/timezone → AG74M local civil day",
+  "sunrise": "Astronomy Engine apparent upper limb with standard refraction and level horizon",
+  "elevation": "0 m default; approved traceable override only",
+  "daily_basis": "Tithi, Nakshatra, Yoga, Karana, Paksha and Vara allocated at local sunrise",
+  "transitions": "Previous and next UTC/local transition times for all four angular elements",
+  "skipped_repeated": "Detected across consecutive available local sunrises",
+  "timezone_examples": "Asia/Kolkata, Europe/London, America/New_York, Australia/Sydney and Asia/Tokyo",
+  "edge_examples": "23-hour DST day, polar day, polar night and Pacific/Apia skipped civil date",
+  "deterministic_tests": "12 passed",
+  "festival_generation": "Deferred to AG74N",
+  "annual_calendar_generation": "Deferred to AG74N",
+  "public_output": "Blocked",
+  "ui_change": "None; overflow and typography correction remains AG74O"
+}

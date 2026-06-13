@@ -1,0 +1,35 @@
+{
+  "module_id": "AG74M-AG74N",
+  "title": "AG74N Panchang Festival and Annual Calendar Readiness",
+  "status": "ready_for_ag74n_panchang_festival_and_annual_calendar_engine",
+  "consumed_records": [
+    "data/knowledge-base/panchang-festival/production/ag74m-panchang-day-orchestration-contract.json",
+    "data/knowledge-base/panchang-festival/production/ag74m-sunrise-sunset-profile.json",
+    "data/knowledge-base/panchang-festival/production/ag74m-day-orchestration-benchmark-fixtures.json",
+    "data/knowledge-base/panchang-festival/production/ag74m-day-orchestration-validation-results.json",
+    "data/content-intelligence/mutation-plans/ag74m-to-ag74n-panchang-festival-annual-calendar-boundary.json"
+  ],
+  "readiness_checks": {
+    "ag74k_input_resolution_consumed": true,
+    "ag74l_astronomical_primitives_consumed": true,
+    "local_civil_day_window_active": true,
+    "dst_23_hour_day_validated": true,
+    "apparent_upper_limb_sunrise_active_internal_only": true,
+    "sunset_active_internal_only": true,
+    "level_horizon_active": true,
+    "approved_elevation_handling_active": true,
+    "sunrise_element_allocation_active_internal_only": true,
+    "previous_next_transition_trace_active": true,
+    "skipped_repeated_detection_active": true,
+    "polar_day_night_unavailable_states_active": true,
+    "twelve_deterministic_tests_passed": true,
+    "festival_generation_activated": false,
+    "lunar_month_generation_activated": false,
+    "annual_calendar_generation_activated": false,
+    "public_panchang_output_activated": false,
+    "public_ui_modified": false,
+    "backend_service_deployed": false,
+    "supabase_activation_performed": false,
+    "external_ephemeris_api_enabled": false
+  }
+}

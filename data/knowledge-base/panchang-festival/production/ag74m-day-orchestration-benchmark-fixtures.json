@@ -1,0 +1,265 @@
+{
+  "module_id": "AG74M",
+  "title": "Panchang Day Orchestration Benchmark Fixtures",
+  "status": "ag74m_day_orchestration_fixtures_locked",
+  "test_count": 12,
+  "cases": [
+    {
+      "test_id": "varanasi_reference_day",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-13",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 24,
+        "location.timezone": "Asia/Kolkata",
+        "observer_elevation_m": 0,
+        "vara.english": "Saturday",
+        "paksha": "Krishna Paksha",
+        "elements.tithi.index": 28,
+        "elements.nakshatra.index": 3,
+        "elements.yoga.index": 7,
+        "elements.karana.index": 55,
+        "public_output_allowed": false
+      },
+      "expected_windows": [
+        {
+          "path": "sunrise.utc",
+          "start": "2026-06-12T23:36:00.000Z",
+          "end": "2026-06-12T23:39:00.000Z"
+        },
+        {
+          "path": "sunset.utc",
+          "start": "2026-06-13T13:17:00.000Z",
+          "end": "2026-06-13T13:21:00.000Z"
+        }
+      ]
+    },
+    {
+      "test_id": "london_british_summer_time",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-07-15",
+        "canonical_location_id": "london_gb"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 24,
+        "location.timezone": "Europe/London",
+        "sunrise.offset_minutes": 60,
+        "elements.tithi.index": 1,
+        "elements.nakshatra.index": 8
+      },
+      "expected_prefixes": [
+        {
+          "path": "sunrise.local",
+          "prefix": "2026-07-15T05:"
+        }
+      ],
+      "expected_suffixes": [
+        {
+          "path": "sunrise.local",
+          "suffix": "+01:00"
+        }
+      ]
+    },
+    {
+      "test_id": "new_york_spring_dst_day",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-03-08",
+        "canonical_location_id": "new_york_us"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 23,
+        "location.timezone": "America/New_York",
+        "sunrise.offset_minutes": -240,
+        "elements.tithi.index": 20
+      },
+      "expected_prefixes": [
+        {
+          "path": "sunrise.local",
+          "prefix": "2026-03-08T07:"
+        }
+      ],
+      "expected_suffixes": [
+        {
+          "path": "sunrise.local",
+          "suffix": "-04:00"
+        }
+      ]
+    },
+    {
+      "test_id": "sydney_southern_summer_day",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-01-15",
+        "canonical_location_id": "sydney_au"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "civil_day_window.duration_hours": 24,
+        "location.timezone": "Australia/Sydney",
+        "sunrise.offset_minutes": 660,
+        "elements.tithi.index": 27
+      },
+      "expected_prefixes": [
+        {
+          "path": "sunrise.local",
+          "prefix": "2026-01-15T05:"
+        }
+      ],
+      "expected_suffixes": [
+        {
+          "path": "sunrise.local",
+          "suffix": "+11:00"
+        }
+      ]
+    },
+    {
+      "test_id": "tokyo_coordinate_first",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 35.6762,
+        "longitude": 139.6503,
+        "timezone": "Asia/Tokyo",
+        "optional_place_label": "Tokyo coordinate test"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "location.resolution_type": "coordinate_first",
+        "location.timezone": "Asia/Tokyo",
+        "elements.tithi.index": 28,
+        "elements.nakshatra.index": 2,
+        "persistence_performed": false,
+        "geocoding_performed": false
+      }
+    },
+    {
+      "test_id": "varanasi_skipped_tithi_detection",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-16",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "elements.tithi.index": 2,
+        "elements.tithi.sunrise_sequence.previous_index": 30,
+        "elements.tithi.sunrise_sequence.repeated_from_previous": false,
+        "elements.tithi.sunrise_sequence.skipped_before_current_indices": [
+          1
+        ]
+      }
+    },
+    {
+      "test_id": "varanasi_repeated_tithi_detection",
+      "input": {
+        "mode": "named_location",
+        "civil_date": "2026-06-30",
+        "canonical_location_id": "varanasi_in"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "elements.tithi.index": 15,
+        "elements.tithi.sunrise_sequence.previous_index": 15,
+        "elements.tithi.sunrise_sequence.repeated_from_previous": true,
+        "elements.tithi.sunrise_sequence.skipped_before_current_indices": []
+      }
+    },
+    {
+      "test_id": "tromso_polar_day",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 69.6492,
+        "longitude": 18.9553,
+        "timezone": "Europe/Oslo",
+        "optional_place_label": "Tromso polar-day test"
+      },
+      "expected": {
+        "status": "ag74m_sunrise_unavailable_public_blocked",
+        "availability_reason": "polar_day",
+        "daily_panchang_classification_performed": false,
+        "sunrise": null,
+        "sunset": null
+      }
+    },
+    {
+      "test_id": "tromso_polar_night",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-12-13",
+        "latitude": 69.6492,
+        "longitude": 18.9553,
+        "timezone": "Europe/Oslo",
+        "optional_place_label": "Tromso polar-night test"
+      },
+      "expected": {
+        "status": "ag74m_sunrise_unavailable_public_blocked",
+        "availability_reason": "polar_night",
+        "daily_panchang_classification_performed": false,
+        "sunrise": null,
+        "sunset": null
+      }
+    },
+    {
+      "test_id": "apia_nonexistent_local_date",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2011-12-30",
+        "latitude": -13.8333,
+        "longitude": -171.75,
+        "timezone": "Pacific/Apia",
+        "optional_place_label": "Apia skipped-date test"
+      },
+      "expected": {
+        "status": "ag74m_nonexistent_local_civil_date_public_blocked",
+        "availability_reason": "nonexistent_local_civil_date",
+        "daily_panchang_classification_performed": false
+      }
+    },
+    {
+      "test_id": "approved_elevation_override",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 25.3176,
+        "longitude": 82.9739,
+        "timezone": "Asia/Kolkata",
+        "optional_place_label": "Varanasi approved-elevation test",
+        "observer_elevation_m": 500,
+        "elevation_approval_status": "approved",
+        "elevation_source": "governed_ag74m_test_fixture"
+      },
+      "expected": {
+        "status": "ag74m_internal_day_orchestration_computed_public_blocked",
+        "observer_elevation_m": 500,
+        "elevation_basis": "approved_override",
+        "sunrise.model.meters_above_local_ground": 0,
+        "sunrise.model.horizon_dip_enabled": false
+      }
+    },
+    {
+      "test_id": "unapproved_elevation_override_rejected",
+      "input": {
+        "mode": "coordinate_first",
+        "civil_date": "2026-06-13",
+        "latitude": 25.3176,
+        "longitude": 82.9739,
+        "timezone": "Asia/Kolkata",
+        "optional_place_label": "Varanasi unapproved-elevation test",
+        "observer_elevation_m": 500
+      },
+      "expected": {
+        "status": "ag74m_unapproved_elevation_override_public_blocked",
+        "availability_reason": "unapproved_elevation_override",
+        "daily_panchang_classification_performed": false
+      }
+    }
+  ]
+}

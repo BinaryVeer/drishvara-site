@@ -1,0 +1,41 @@
+{
+  "module_id": "AG74M",
+  "title": "Sunrise and Sunset Calculation Profile",
+  "status": "ag74m_sunrise_sunset_profile_locked_internal_only",
+  "profile_id": "drishvara_apparent_upper_limb_level_horizon_v1",
+  "backend": {
+    "package": "astronomy-engine",
+    "version": "2.1.19",
+    "function": "SearchRiseSet",
+    "execution": "local_offline",
+    "external_api": false
+  },
+  "observer": {
+    "latitude_longitude_source": "AG74K resolved location",
+    "elevation_default_m": 0,
+    "approved_elevation_override_allowed": true,
+    "observer_height_interpretation": "metres above mean sea level",
+    "meters_above_local_ground_passed_to_backend": 0
+  },
+  "physical_convention": {
+    "solar_disk_reference": "upper limb",
+    "atmospheric_refraction": "standard 34 arcminute near-horizon correction scaled for atmospheric density",
+    "horizon": "level horizon",
+    "horizon_dip": "disabled because metersAboveGround is zero",
+    "terrain_or_local_obstruction": "not modelled"
+  },
+  "event_search": {
+    "search_window": "resolved local civil-day UTC interval",
+    "event_must_fall_inside_window": true,
+    "sunrise_direction": 1,
+    "sunset_direction": -1,
+    "no_event_returns_governed_unavailable_state": true
+  },
+  "extreme_latitude_classification": {
+    "both_events_absent_and_midday_solar_altitude_positive": "polar_day",
+    "both_events_absent_and_midday_solar_altitude_nonpositive": "polar_night",
+    "sunrise_absent_but_sunset_present": "no_sunrise_within_local_civil_day"
+  },
+  "public_authority_claim_allowed": false,
+  "public_output_allowed": false
+}
