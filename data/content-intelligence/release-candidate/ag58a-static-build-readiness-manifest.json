@@ -211,6 +211,16 @@
       "detail": "AG74K result bank must exist without astronomy."
     },
     {
+      "id": "ag74l_astronomical_engine_passed",
+      "passed": true,
+      "detail": "AG74L astronomical engine must pass ten benchmarks and make AG74M ready."
+    },
+    {
+      "id": "ag74l_validation_result_bank_valid",
+      "passed": true,
+      "detail": "AG74L deterministic astronomical validation result bank must pass without external API use."
+    },
+    {
       "id": "daily_context_dir_exists",
       "passed": true,
       "detail": "generated/daily-context must exist."
@@ -284,14 +294,19 @@
       "id": "ag74k_validate_script_exists",
       "passed": true,
       "detail": "validate:ag74k must exist."
+    },
+    {
+      "id": "ag74l_validate_script_exists",
+      "passed": true,
+      "detail": "validate:ag74l must exist."
     }
   ],
   "failures": [],
   "current_git_context": {
     "branch": "main",
-    "head": "ae605bb9",
-    "head_full": "ae605bb9e2ed2d6a2080f1eaa55be0c7f5175349",
-    "origin_main": "ae605bb9",
+    "head": "f3e54736",
+    "head_full": "f3e5473667fc9622d7f913a3cc7bdc0c199f6e2b",
+    "origin_main": "f3e54736",
     "status_at_build": "clean"
   },
   "blocked_actions": [
