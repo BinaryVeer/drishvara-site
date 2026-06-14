@@ -202,6 +202,26 @@ check(
   "AG74N result bank must pass while keeping unreviewed festival dates and public output blocked."
 );
 
+const ag74oQuality = exists("data/quality/ag74o-panchang-public-ui-wiring.json")
+  ? readJson("data/quality/ag74o-panchang-public-ui-wiring.json")
+  : null;
+check(
+  "ag74o_public_ui_wiring_passed",
+  ag74oQuality?.status === "ag74o_completed" &&
+    ag74oQuality?.issue_count === 0 &&
+    ag74oQuality?.browser_qa_passed === true &&
+    ag74oQuality?.ready_for_ag74p === true,
+  "AG74O public UI wiring, browser QA and AG74P readiness must pass."
+);
+const ag74oBrowser = exists("data/quality/ag74o-panchang-public-ui-wiring-browser-qa.json")
+  ? readJson("data/quality/ag74o-panchang-public-ui-wiring-browser-qa.json")
+  : null;
+check(
+  "ag74o_browser_qa_passed",
+  ag74oBrowser?.status === "passed" && ag74oBrowser?.failure_count === 0 && ag74oBrowser?.check_count >= 35,
+  "AG74O desktop, tablet and mobile browser QA must pass."
+);
+
 const dailyDir = full("generated/daily-context");
 check("daily_context_dir_exists", fs.existsSync(dailyDir), "generated/daily-context must exist.");
 
@@ -225,6 +245,7 @@ check("ag74k_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74k"]), 
 check("ag74l_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74l"]), "validate:ag74l must exist.");
 check("ag74m_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74m"]), "validate:ag74m must exist.");
 check("ag74n_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74n"]), "validate:ag74n must exist.");
+check("ag74o_validate_script_exists", Boolean(pkg.scripts?.["validate:ag74o"]), "validate:ag74o must exist.");
 
 const manifest = {
   module_id: "AG58A",

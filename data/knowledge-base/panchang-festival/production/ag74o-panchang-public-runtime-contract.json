@@ -1,0 +1,53 @@
+{
+  "module_id": "AG74O",
+  "title": "Panchang Public Browser Runtime Contract",
+  "status": "ag74o_public_runtime_active_with_festival_guard",
+  "version": "1.0.0",
+  "runtime": {
+    "execution": "static_browser_only",
+    "astronomy_library": "astronomy-engine@2.1.19_exact_local_vendored_browser_bundle",
+    "browser_bundle_sha256": "f41139a87941ea017ab902b954c9389fa27ea72083d7fab4971756d7769d14e6",
+    "daily_engine": "browser_port_of_locked_AG74L_AG74M_formulas",
+    "supported_start": "1900-01-01",
+    "supported_end": "2100-12-31",
+    "default_location": "varanasi_in",
+    "automatic_rendering": true,
+    "click_required": false
+  },
+  "date_location": {
+    "native_and_text_sync": true,
+    "previous_today_next": true,
+    "curated_places": true,
+    "approved_aliases": true,
+    "coordinate_first_requires_supplied_iana_timezone": true,
+    "nearest_substitution": false,
+    "reverse_geocoding": false,
+    "public_named_location_control": "governed_dropdown_only",
+    "legacy_pilot_quick_pick_visible": false
+  },
+  "annual_book": {
+    "basis": "Varanasi_independent_of_daily_selected_location",
+    "reference_samvat_year": 2083,
+    "page_count": 4,
+    "canonical_slot_count": 12,
+    "selected_varanasi_date_opens_matching_page_when_in_reference_interval": true
+  },
+  "festival_guard": {
+    "condition_candidates_publicly_visible": false,
+    "approved_final_observance_required": true,
+    "approved_public_output_required": true,
+    "ritual_window_never_inferred": true
+  },
+  "external_api_used": false,
+  "persistence_enabled": false,
+  "backend_service_deployed": false,
+  "supabase_activation_performed": false,
+  "public_method_selector": false,
+  "ui_surface": {
+    "visible_daily_result_surface_count": 1,
+    "legacy_ag71e_panel": "hidden_inert_compatibility_only",
+    "named_place_selector": "single_governed_dropdown",
+    "coordinate_mode_selector_retained": true,
+    "legacy_quick_pick_buttons_visible": false
+  }
+}

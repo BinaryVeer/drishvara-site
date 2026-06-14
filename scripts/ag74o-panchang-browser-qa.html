@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>AG74O_BROWSER_QA_PENDING</title></head>
+<body data-ag74o-browser-qa-status="pending" data-ag74o-browser-qa-failure-count="0">
+<h1>AG74O Panchang Browser QA</h1>
+<iframe id="site-frame" src="../index.html?ag74o-browser-qa=1" title="Drishvara AG74O test frame" style="width:1280px;height:2400px;border:0"></iframe>
+<pre id="ag74o-browser-qa-result">{"status":"pending"}</pre>
+<script>
+(function(){
+  "use strict";
+  var frame=document.getElementById("site-frame"),resultNode=document.getElementById("ag74o-browser-qa-result"),checks=[],failures=[];
+  function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
+  function check(id,passed,detail){checks.push({id:id,passed:Boolean(passed),detail:detail});if(!passed)failures.push(id+": "+detail);}
+  async function waitFor(test,timeout){var start=Date.now();while(Date.now()-start<(timeout||30000)){try{if(test())return true;}catch(_error){}await delay(100);}return false;}
+  function fire(el,type){el.dispatchEvent(new Event(type,{bubbles:true}));}
+  function cardOverflowReport(doc){
+    var card=doc.getElementById("panchang-festival-card");
+    if(!card)return {passed:false,reason:"missing_card",viewport:doc.documentElement.clientWidth,nodes:[]};
+    var viewport=doc.documentElement.clientWidth,cardRect=card.getBoundingClientRect();
+    var entries=[
+      ["card",card],
+      ["date_surface",doc.querySelector(".ag74i-date-surface")],
+      ["coordinate_surface",doc.querySelector(".ag71c-coordinate-surface")],
+      ["place_selection",doc.querySelector('[data-ag74o-place-selection="governed-dropdown-only"]')],
+      ["daily_result",doc.querySelector('[data-ag74o-daily-result-surface="true"]')],
+      ["observance",doc.querySelector(".festival-list")],
+      ["annual_book",doc.querySelector(".ag74i-calendar-book")]
+    ].filter(function(entry){return Boolean(entry[1]);}).map(function(entry){
+      var node=entry[1],rect=node.getBoundingClientRect();
+      var withinCard=rect.left>=cardRect.left-1&&rect.right<=Math.min(viewport,cardRect.right)+1;
+      var widthSafe=node.scrollWidth<=node.clientWidth+1;
+      return {name:entry[0],left:Number(rect.left.toFixed(2)),right:Number(rect.right.toFixed(2)),width:Number(rect.width.toFixed(2)),clientWidth:node.clientWidth,scrollWidth:node.scrollWidth,withinCard:withinCard,widthSafe:widthSafe};
+    });
+    var cardInside=cardRect.left>=-1&&cardRect.right<=viewport+1;
+    return {passed:cardInside&&entries.every(function(entry){return entry.withinCard&&entry.widthSafe;}),viewport:viewport,cardInside:cardInside,card:{left:Number(cardRect.left.toFixed(2)),right:Number(cardRect.right.toFixed(2)),width:Number(cardRect.width.toFixed(2)),clientWidth:card.clientWidth,scrollWidth:card.scrollWidth},nodes:entries};
+  }
+  async function run(){
+    try{
+      var frameReady=await waitFor(function(){
+        var doc=frame.contentDocument;
+        var href=frame.contentWindow&&frame.contentWindow.location?String(frame.contentWindow.location.href||""):"";
+        return Boolean(
+          doc&&
+          doc.readyState==="complete"&&
+          /\/index\.html(?:[?#]|$)/.test(href)&&
+          doc.getElementById("panchang-festival-card")&&
+          doc.getElementById("panchang-date-picker")&&
+          doc.getElementById("panchang-date-text")
+        );
+      },30000);
+      if(!frameReady)throw new Error("Drishvara index iframe did not complete its expected DOM load.");
+      var win=frame.contentWindow,doc=frame.contentDocument;
+      check("ag74o_owner_active",win.drishvaraAg74oPublicSurfaceActive===true,"AG74O must own the public Panchang runtime.");
+      check("astronomy_local_bundle",Boolean(win.Astronomy&&win.Astronomy.SearchRiseSet),"Version-pinned local Astronomy Engine browser bundle must load.");
+      check("no_persistent_storage",!Object.keys(win.localStorage).concat(Object.keys(win.sessionStorage)).some(function(key){return /panchang|ag74o/i.test(key);}),"Panchang inputs must not be persisted.");
+      check("live_status",doc.getElementById("panchang-selection-status")?.getAttribute("aria-live")==="polite","Selection status must be a polite live region.");
+      check("busy_contract",doc.getElementById("panchang-festival-card")?.hasAttribute("aria-busy"),"Panchang card must expose aria-busy.");
+      check("default_calculated",await waitFor(function(){return doc.getElementById("panchang-festival-card")?.getAttribute("data-ag74o-result-state")==="calculated";}),"Default Varanasi/today calculation must complete automatically.");
+      check("default_varanasi",doc.getElementById("panchang-place-select")?.value==="varanasi-uttar-pradesh-india","Varanasi must remain the governed dropdown default.");
+      var legacyQuickPick=doc.querySelector('[data-ag71d-r4-location-options="panchang"]');
+      check("legacy_quick_pick_hidden",Boolean(legacyQuickPick&&(legacyQuickPick.hidden||legacyQuickPick.getAttribute("aria-hidden")==="true"||legacyQuickPick.offsetParent===null||win.getComputedStyle(legacyQuickPick).display==="none")),"Legacy pilot quick-pick location buttons must not remain visible after dropdown activation.");
+      check("source_local",/Calculated locally/.test(doc.getElementById("panchang-calculation-source")?.textContent||""),"Result must identify local browser calculation.");
+      check("festival_guard",/No source-reviewed public observance/.test(doc.getElementById("upcoming-observance-name")?.textContent||""),"Unreviewed candidates must not display as festival dates.");
+      var dailySurfaces=Array.from(doc.querySelectorAll('[data-ag74o-daily-result-surface="true"]'));
+      var visibleDailySurfaces=dailySurfaces.filter(function(node){return !node.hidden&&!node.closest('[hidden]')&&node.offsetParent!==null&&win.getComputedStyle(node).display!=="none";});
+      check("one_visible_daily_result_surface",dailySurfaces.length===1&&visibleDailySurfaces.length===1,"Exactly one visible daily Panchang result surface must exist. Observed total="+dailySurfaces.length+", visible="+visibleDailySurfaces.length);
+      var legacyPanel=doc.querySelector('[data-ag71e-preview-action-shell="panchang"]');
+      check("legacy_panel_hidden",Boolean(legacyPanel&&legacyPanel.hidden&&legacyPanel.getAttribute("aria-hidden")==="true"&&legacyPanel.hasAttribute("inert")&&legacyPanel.offsetParent===null),"Legacy AG71E Panchang panel must remain hidden, inert and absent from layout.");
+      var duplicateIds=Array.from(doc.querySelectorAll('[id]')).map(function(node){return node.id;}).filter(function(id,index,all){return all.indexOf(id)!==index;});
+      check("no_duplicate_result_ids",duplicateIds.filter(function(id){return /^panchang-|^upcoming-observance-/.test(id);}).length===0,"Panchang and observance result ids must be unique. Duplicates="+JSON.stringify(duplicateIds));
+
+      var picker=doc.getElementById("panchang-date-picker");
+      if(!picker)throw new Error("Required Panchang date picker is absent after iframe readiness.");
+      picker.value="2026-06-13";fire(picker,"change");
+      check("fixture_calculated",await waitFor(function(){return doc.getElementById("panchang-date-text")?.value==="13/06/2026"&&/Krishna Trayodashi/.test(doc.getElementById("panchang-tithi")?.textContent||"");}),"Varanasi 13/06/2026 must calculate deterministically.");
+      check("fixture_nakshatra",/Krittika/.test(doc.getElementById("panchang-nakshatra")?.textContent||""),"Expected Nakshatra must render.");
+      check("fixture_yoga",/Sukarma/.test(doc.getElementById("panchang-yoga")?.textContent||""),"Expected Yoga must render.");
+      check("fixture_karana",/Gara/.test(doc.getElementById("panchang-karana")?.textContent||""),"Expected Karana must render.");
+      check("transition_rendered",/Began/.test(doc.getElementById("panchang-tithi-transition")?.textContent||"")&&/Next/.test(doc.getElementById("panchang-tithi-transition")?.textContent||""),"Previous and next transition must render.");
+
+      doc.getElementById("panchang-next-day").click();
+      check("next_day",await waitFor(function(){return picker.value==="2026-06-14"&&doc.getElementById("panchang-festival-card")?.getAttribute("data-ag74o-result-state")==="calculated";}),"Next Day must calculate the next civil date.");
+      check("focus_after_navigation",doc.activeElement===doc.getElementById("panchang-selection-status"),"Keyboard focus must move to the updated status after explicit navigation.");
+      doc.getElementById("panchang-previous-day").click();
+      check("previous_day",await waitFor(function(){return picker.value==="2026-06-13";}),"Previous Day must restore the prior civil date.");
+
+      var governedSelect=doc.getElementById("panchang-place-select");
+      var safeWrap=governedSelect&&governedSelect.nextElementSibling&&governedSelect.nextElementSibling.matches&&governedSelect.nextElementSibling.matches("[data-drishvara-hf12-select]")?governedSelect.nextElementSibling:null;
+      var safeButton=safeWrap?safeWrap.querySelector(".drishvara-hf12-select-button"):null;
+      var tokyoOption=safeWrap?safeWrap.querySelector('.drishvara-hf12-select-option[data-value="tokyo-japan"]'):null;
+      if(!governedSelect||!safeWrap||!safeButton||!tokyoOption)throw new Error("Governed Panchang dropdown projection is incomplete.");
+      safeButton.click();tokyoOption.click();
+      var tokyoPassed=await waitFor(function(){return governedSelect.value==="tokyo-japan"&&tokyoOption.getAttribute("aria-selected")==="true"&&/Tokyo · Asia\/Tokyo/.test(doc.getElementById("panchang-moonrise")?.textContent||"")&&doc.getElementById("panchang-festival-card")?.getAttribute("data-ag74o-result-state")==="calculated";});
+      var tokyoObserved=win.drishvaraAg74oCurrentSelection?win.drishvaraAg74oCurrentSelection():{};
+      check("curated_tokyo",tokyoPassed,"Curated Tokyo governed-dropdown synchronization observed: "+JSON.stringify({selectValue:governedSelect.value,safeSelected:tokyoOption.getAttribute("aria-selected"),safeButtonText:safeButton.textContent.trim(),locationText:doc.getElementById("panchang-moonrise")?.textContent,resultState:doc.getElementById("panchang-festival-card")?.getAttribute("data-ag74o-result-state"),controller:tokyoObserved}));
+
+      var coordRadio=doc.querySelector('input[name="ag71c-panchang-location-mode"][value="coordinates"]');coordRadio.checked=true;fire(coordRadio,"change");
+      doc.getElementById("panchang-latitude").value="35.6762";doc.getElementById("panchang-longitude").value="139.6503";doc.getElementById("panchang-timezone").value="Asia/Tokyo";doc.getElementById("panchang-coordinate-label").value="Tokyo coordinate test";
+      await win.drishvaraAg74oApplySelection();
+      check("coordinate_first",doc.getElementById("panchang-festival-card")?.getAttribute("data-ag74o-result-state")==="calculated"&&/Tokyo coordinate test/.test(doc.getElementById("panchang-moonrise")?.textContent||""),"Coordinate-first calculation must complete with supplied IANA timezone.");
+      doc.getElementById("panchang-latitude").value="95";await win.drishvaraAg74oApplySelection();
+      check("invalid_coordinate_guard",doc.getElementById("panchang-festival-card")?.getAttribute("data-ag74o-result-state")==="governed_unavailable","Invalid coordinates must produce governed unavailable state.");
+
+      var placeRadio=doc.querySelector('input[name="ag71c-panchang-location-mode"][value="place"]');placeRadio.checked=true;fire(placeRadio,"change");
+      win.drishvaraAg74oChoosePlace("varanasi-uttar-pradesh-india");win.drishvaraAg74oSyncDate("2026-06-13");await win.drishvaraAg74oApplySelection();
+      check("book_populated",doc.querySelectorAll("[data-ag74o-book-slot]").length===12,"Annual book must populate twelve canonical slots.");
+      check("book_four_pages",doc.querySelectorAll("[data-ag74i-book-page]").length===4,"Annual book must retain four pages.");
+      check("book_selected_page",doc.querySelector('[data-ag74i-book-page-button="1"]')?.getAttribute("aria-current")==="page","Selected Jyeshtha date must open page 1.");
+      check("adhika_nija_visible",doc.querySelectorAll('[data-ag74o-instance-kind="adhika"]').length>=1&&doc.querySelectorAll('[data-ag74o-instance-kind="nija"]').length>=1,"Adhika and Nija instances must be represented.");
+      doc.querySelector('[data-ag74i-book-page-button="2"]').click();
+      check("direct_page_navigation",doc.querySelector('[data-ag74i-book-page="2"]')?.hidden===false,"Direct annual-book page navigation must work.");
+
+      var widths=[1280,768,390];
+      for(var i=0;i<widths.length;i+=1){
+        frame.style.width=widths[i]+"px";
+        await delay(250);
+        var overflowReport=cardOverflowReport(doc);
+        check("no_card_overflow_"+widths[i],overflowReport.passed,"Panchang card and controls must remain within "+widths[i]+"px viewport. Observed: "+JSON.stringify(overflowReport));
+      }
+
+      var headingFont=win.getComputedStyle(doc.getElementById("ag74i-date-heading")).fontFamily;
+      var labelFont=win.getComputedStyle(doc.querySelector(".ag74i-date-field")).fontFamily;
+      var bodyCopyFont=win.getComputedStyle(doc.getElementById("panchang-date-help")).fontFamily;
+      var controlFont=win.getComputedStyle(doc.getElementById("panchang-previous-day")).fontFamily;
+      var wordmark=doc.querySelector(".drishvara-hf07-brand, .drishvara-hf05-brand a");
+      var brandFont=wordmark?win.getComputedStyle(wordmark).fontFamily:"";
+      check("heading_cambria",/Cambria/i.test(headingFont),"Editorial Panchang headings must use Cambria.");
+      check("body_arial",/Arial/i.test(labelFont)&&/Arial/i.test(bodyCopyFont)&&/Arial/i.test(controlFont),"Panchang labels, explanatory copy and controls must use Arial. Observed: "+JSON.stringify({labelFont:labelFont,bodyCopyFont:bodyCopyFont,controlFont:controlFont}));
+      check("wordmark_georgia",/^Georgia/i.test(brandFont),"Georgia must remain the first font only on the principal Drishvara wordmark. Observed: "+brandFont);
+      check("latest_result_only",/requestToken/.test(String(win.drishvaraAg74oApplySelection)),"Request-token latest-result-only guard must be active.");
+      check("no_external_api",Array.from(doc.scripts).filter(function(script){return Boolean(script.src);}).every(function(script){return new URL(script.src,doc.baseURI).origin===win.location.origin;}),"Every runtime script must be served from the same local origin; no external ephemeris API or script may be used.");
+      check("no_method_selector",!doc.querySelector('[data-ag74o-method-selector]'),"No public method selector may be introduced.");
+      var generateButton=doc.querySelector('[data-ag71e-preview-button="panchang"]');
+      check("no_generate_button",!generateButton||generateButton.hidden||Boolean(generateButton.closest("[hidden]"))||generateButton.offsetParent===null||win.getComputedStyle(generateButton).display==="none","Automatic rendering must not expose or require a visible Generate button.");
+
+      var report={module_id:"AG74O",status:failures.length?"failed":"passed",check_count:checks.length,failure_count:failures.length,checks:checks,failures:failures};
+      resultNode.textContent=JSON.stringify(report);document.body.setAttribute("data-ag74o-browser-qa-status",report.status);document.body.setAttribute("data-ag74o-browser-qa-failure-count",String(report.failure_count));document.title=failures.length?"AG74O_BROWSER_QA_FAIL":"AG74O_BROWSER_QA_PASS";
+    }catch(error){
+      var report={module_id:"AG74O",status:"failed",check_count:checks.length,failure_count:1,checks:checks,failures:[String(error&&error.stack||error)]};
+      resultNode.textContent=JSON.stringify(report);document.body.setAttribute("data-ag74o-browser-qa-status","failed");document.body.setAttribute("data-ag74o-browser-qa-failure-count","1");document.title="AG74O_BROWSER_QA_FAIL";
+    }
+  }
+  run();
+})();
+</script>
+</body></html>

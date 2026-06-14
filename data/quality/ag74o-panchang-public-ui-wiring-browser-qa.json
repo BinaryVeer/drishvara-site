@@ -1,0 +1,204 @@
+{
+  "module_id": "AG74O",
+  "status": "passed",
+  "check_count": 39,
+  "failure_count": 0,
+  "checks": [
+    {
+      "id": "ag74o_owner_active",
+      "passed": true,
+      "detail": "AG74O must own the public Panchang runtime."
+    },
+    {
+      "id": "astronomy_local_bundle",
+      "passed": true,
+      "detail": "Version-pinned local Astronomy Engine browser bundle must load."
+    },
+    {
+      "id": "no_persistent_storage",
+      "passed": true,
+      "detail": "Panchang inputs must not be persisted."
+    },
+    {
+      "id": "live_status",
+      "passed": true,
+      "detail": "Selection status must be a polite live region."
+    },
+    {
+      "id": "busy_contract",
+      "passed": true,
+      "detail": "Panchang card must expose aria-busy."
+    },
+    {
+      "id": "default_calculated",
+      "passed": true,
+      "detail": "Default Varanasi/today calculation must complete automatically."
+    },
+    {
+      "id": "default_varanasi",
+      "passed": true,
+      "detail": "Varanasi must remain the governed dropdown default."
+    },
+    {
+      "id": "legacy_quick_pick_hidden",
+      "passed": true,
+      "detail": "Legacy pilot quick-pick location buttons must not remain visible after dropdown activation."
+    },
+    {
+      "id": "source_local",
+      "passed": true,
+      "detail": "Result must identify local browser calculation."
+    },
+    {
+      "id": "festival_guard",
+      "passed": true,
+      "detail": "Unreviewed candidates must not display as festival dates."
+    },
+    {
+      "id": "one_visible_daily_result_surface",
+      "passed": true,
+      "detail": "Exactly one visible daily Panchang result surface must exist. Observed total=1, visible=1"
+    },
+    {
+      "id": "legacy_panel_hidden",
+      "passed": true,
+      "detail": "Legacy AG71E Panchang panel must remain hidden, inert and absent from layout."
+    },
+    {
+      "id": "no_duplicate_result_ids",
+      "passed": true,
+      "detail": "Panchang and observance result ids must be unique. Duplicates=[]"
+    },
+    {
+      "id": "fixture_calculated",
+      "passed": true,
+      "detail": "Varanasi 13/06/2026 must calculate deterministically."
+    },
+    {
+      "id": "fixture_nakshatra",
+      "passed": true,
+      "detail": "Expected Nakshatra must render."
+    },
+    {
+      "id": "fixture_yoga",
+      "passed": true,
+      "detail": "Expected Yoga must render."
+    },
+    {
+      "id": "fixture_karana",
+      "passed": true,
+      "detail": "Expected Karana must render."
+    },
+    {
+      "id": "transition_rendered",
+      "passed": true,
+      "detail": "Previous and next transition must render."
+    },
+    {
+      "id": "next_day",
+      "passed": true,
+      "detail": "Next Day must calculate the next civil date."
+    },
+    {
+      "id": "focus_after_navigation",
+      "passed": true,
+      "detail": "Keyboard focus must move to the updated status after explicit navigation."
+    },
+    {
+      "id": "previous_day",
+      "passed": true,
+      "detail": "Previous Day must restore the prior civil date."
+    },
+    {
+      "id": "curated_tokyo",
+      "passed": true,
+      "detail": "Curated Tokyo governed-dropdown synchronization observed: {\"selectValue\":\"tokyo-japan\",\"safeSelected\":\"true\",\"safeButtonText\":\"Tokyo\",\"locationText\":\"Tokyo · Asia/Tokyo\",\"resultState\":\"calculated\",\"controller\":{\"stateValue\":\"tokyo-japan\",\"selectValue\":\"tokyo-japan\",\"safeSelectValue\":\"tokyo-japan\",\"safeSelectText\":\"Tokyo\",\"requestValue\":\"tokyo-japan\",\"requestLabel\":\"Tokyo\",\"resultState\":\"calculated\",\"locationText\":\"Tokyo · Asia/Tokyo\"}}"
+    },
+    {
+      "id": "coordinate_first",
+      "passed": true,
+      "detail": "Coordinate-first calculation must complete with supplied IANA timezone."
+    },
+    {
+      "id": "invalid_coordinate_guard",
+      "passed": true,
+      "detail": "Invalid coordinates must produce governed unavailable state."
+    },
+    {
+      "id": "book_populated",
+      "passed": true,
+      "detail": "Annual book must populate twelve canonical slots."
+    },
+    {
+      "id": "book_four_pages",
+      "passed": true,
+      "detail": "Annual book must retain four pages."
+    },
+    {
+      "id": "book_selected_page",
+      "passed": true,
+      "detail": "Selected Jyeshtha date must open page 1."
+    },
+    {
+      "id": "adhika_nija_visible",
+      "passed": true,
+      "detail": "Adhika and Nija instances must be represented."
+    },
+    {
+      "id": "direct_page_navigation",
+      "passed": true,
+      "detail": "Direct annual-book page navigation must work."
+    },
+    {
+      "id": "no_card_overflow_1280",
+      "passed": true,
+      "detail": "Panchang card and controls must remain within 1280px viewport. Observed: {\"passed\":true,\"viewport\":1265,\"cardInside\":true,\"card\":{\"left\":885,\"right\":1245,\"width\":360,\"clientWidth\":358,\"scrollWidth\":358},\"nodes\":[{\"name\":\"card\",\"left\":885,\"right\":1245,\"width\":360,\"clientWidth\":358,\"scrollWidth\":358,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"date_surface\",\"left\":908,\"right\":1222,\"width\":314,\"clientWidth\":312,\"scrollWidth\":312,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"coordinate_surface\",\"left\":908,\"right\":1222,\"width\":314,\"clientWidth\":312,\"scrollWidth\":312,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"place_selection\",\"left\":908,\"right\":1222,\"width\":314,\"clientWidth\":314,\"scrollWidth\":314,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"daily_result\",\"left\":908,\"right\":1222,\"width\":314,\"clientWidth\":314,\"scrollWidth\":314,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"observance\",\"left\":908,\"right\":1222,\"width\":314,\"clientWidth\":314,\"scrollWidth\":314,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"annual_book\",\"left\":908,\"right\":1222,\"width\":314,\"clientWidth\":312,\"scrollWidth\":312,\"withinCard\":true,\"widthSafe\":true}]}"
+    },
+    {
+      "id": "no_card_overflow_768",
+      "passed": true,
+      "detail": "Panchang card and controls must remain within 768px viewport. Observed: {\"passed\":true,\"viewport\":753,\"cardInside\":true,\"card\":{\"left\":16,\"right\":737,\"width\":721,\"clientWidth\":719,\"scrollWidth\":719},\"nodes\":[{\"name\":\"card\",\"left\":16,\"right\":737,\"width\":721,\"clientWidth\":719,\"scrollWidth\":719,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"date_surface\",\"left\":39,\"right\":714,\"width\":675,\"clientWidth\":673,\"scrollWidth\":673,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"coordinate_surface\",\"left\":39,\"right\":714,\"width\":675,\"clientWidth\":673,\"scrollWidth\":673,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"place_selection\",\"left\":39,\"right\":714,\"width\":675,\"clientWidth\":675,\"scrollWidth\":675,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"daily_result\",\"left\":39,\"right\":714,\"width\":675,\"clientWidth\":675,\"scrollWidth\":675,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"observance\",\"left\":39,\"right\":714,\"width\":675,\"clientWidth\":675,\"scrollWidth\":675,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"annual_book\",\"left\":39,\"right\":714,\"width\":675,\"clientWidth\":673,\"scrollWidth\":673,\"withinCard\":true,\"widthSafe\":true}]}"
+    },
+    {
+      "id": "no_card_overflow_390",
+      "passed": true,
+      "detail": "Panchang card and controls must remain within 390px viewport. Observed: {\"passed\":true,\"viewport\":375,\"cardInside\":true,\"card\":{\"left\":16,\"right\":359,\"width\":343,\"clientWidth\":341,\"scrollWidth\":341},\"nodes\":[{\"name\":\"card\",\"left\":16,\"right\":359,\"width\":343,\"clientWidth\":341,\"scrollWidth\":341,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"date_surface\",\"left\":39,\"right\":336,\"width\":297,\"clientWidth\":295,\"scrollWidth\":295,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"coordinate_surface\",\"left\":39,\"right\":336,\"width\":297,\"clientWidth\":295,\"scrollWidth\":295,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"place_selection\",\"left\":39,\"right\":336,\"width\":297,\"clientWidth\":297,\"scrollWidth\":297,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"daily_result\",\"left\":39,\"right\":336,\"width\":297,\"clientWidth\":297,\"scrollWidth\":297,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"observance\",\"left\":39,\"right\":336,\"width\":297,\"clientWidth\":297,\"scrollWidth\":297,\"withinCard\":true,\"widthSafe\":true},{\"name\":\"annual_book\",\"left\":39,\"right\":336,\"width\":297,\"clientWidth\":295,\"scrollWidth\":295,\"withinCard\":true,\"widthSafe\":true}]}"
+    },
+    {
+      "id": "heading_cambria",
+      "passed": true,
+      "detail": "Editorial Panchang headings must use Cambria."
+    },
+    {
+      "id": "body_arial",
+      "passed": true,
+      "detail": "Panchang labels, explanatory copy and controls must use Arial. Observed: {\"labelFont\":\"Arial, Helvetica, sans-serif\",\"bodyCopyFont\":\"Arial, Helvetica, sans-serif\",\"controlFont\":\"Arial, Helvetica, sans-serif\"}"
+    },
+    {
+      "id": "wordmark_georgia",
+      "passed": true,
+      "detail": "Georgia must remain the first font only on the principal Drishvara wordmark. Observed: Georgia, \"Times New Roman\", serif"
+    },
+    {
+      "id": "latest_result_only",
+      "passed": true,
+      "detail": "Request-token latest-result-only guard must be active."
+    },
+    {
+      "id": "no_external_api",
+      "passed": true,
+      "detail": "Every runtime script must be served from the same local origin; no external ephemeris API or script may be used."
+    },
+    {
+      "id": "no_method_selector",
+      "passed": true,
+      "detail": "No public method selector may be introduced."
+    },
+    {
+      "id": "no_generate_button",
+      "passed": true,
+      "detail": "Automatic rendering must not expose or require a visible Generate button."
+    }
+  ],
+  "failures": []
+}
