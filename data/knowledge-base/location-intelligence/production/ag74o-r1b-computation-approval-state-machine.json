@@ -1,0 +1,46 @@
+{
+  "module_id": "AG74O-R1B",
+  "title": "Computation and Public-Selection Approval State Machine",
+  "status": "ag74o_r1b_computation_approval_state_machine_locked",
+  "generated_at_utc": "2026-06-15T02:28:55.357Z",
+  "states": [
+    "identity_candidate",
+    "identity_verified",
+    "coordinate_candidate",
+    "coordinate_verified",
+    "timezone_verified",
+    "role_candidate",
+    "role_verified",
+    "computation_review_ready",
+    "computation_approved",
+    "public_selection_review_ready",
+    "public_selection_approved",
+    "blocked_pending_source_review",
+    "superseded",
+    "retired"
+  ],
+  "computation_approval_requires": [
+    "identity_verified",
+    "coordinate_verified",
+    "timezone_verified",
+    "public_label_verified",
+    "source_freshness_acceptable",
+    "no_unresolved_identity_or_coordinate_conflict",
+    "explicit_review_approval"
+  ],
+  "public_selection_requires": [
+    "computation_approved_or_explicit_noncomputing_public_role",
+    "public_label_verified",
+    "search_disambiguation_complete",
+    "explicit_public_selection_approval"
+  ],
+  "blocked_transitions": [
+    "coordinate_candidate_to_computation_approved_without_review",
+    "role_candidate_to_public_selection_approved_without_review",
+    "provenance_unknown_source_to_coordinate_verified",
+    "name_only_match_to_identity_verified"
+  ],
+  "automatic_approval_allowed": false,
+  "approved_computation_records_now": 0,
+  "approved_public_selection_records_now": 0
+}

@@ -1,0 +1,100 @@
+{
+  "module_id": "AG74O-R1B",
+  "title": "Universal Location Coordinate, Timezone and Role Schema",
+  "status": "ag74o_r1b_universal_location_coordinate_role_schema_locked",
+  "generated_at_utc": "2026-06-15T02:28:55.357Z",
+  "identity_fields": [
+    "location_record_id",
+    "canonical_place_id",
+    "jurisdiction_scope",
+    "location_type",
+    "country_iso2",
+    "country_iso3",
+    "country_m49",
+    "country_name",
+    "official_name",
+    "local_name",
+    "aliases",
+    "administrative_level_1_name",
+    "administrative_level_1_code",
+    "administrative_level_2_name",
+    "administrative_level_2_code",
+    "administrative_level_3_name",
+    "administrative_level_3_code",
+    "lgd_entity_type",
+    "lgd_code",
+    "external_gazetteer_ids"
+  ],
+  "coordinate_fields": [
+    "latitude_decimal",
+    "longitude_decimal",
+    "coordinate_basis",
+    "coordinate_precision",
+    "coordinate_source_id",
+    "coordinate_source_url",
+    "coordinate_source_release",
+    "coordinate_source_retrieved_at",
+    "coordinate_source_sha256",
+    "coordinate_verification_status",
+    "coordinate_reviewed_at",
+    "coordinate_reviewed_by"
+  ],
+  "timezone_fields": [
+    "timezone_iana",
+    "timezone_source_id",
+    "timezone_source_release",
+    "timezone_verification_status"
+  ],
+  "role_fields": [
+    "roles",
+    "is_national_capital",
+    "is_state_or_regional_capital",
+    "is_major_city",
+    "is_sacred_reference_location",
+    "capital_roles",
+    "role_source_ids",
+    "role_verification_status"
+  ],
+  "approval_fields": [
+    "identity_verification_status",
+    "public_label_verification_status",
+    "coordinate_verification_status",
+    "timezone_verification_status",
+    "role_verification_status",
+    "computation_approval_status",
+    "public_selection_status",
+    "supersession_status"
+  ],
+  "source_refresh_fields": [
+    "source_freshness_status",
+    "source_freshness_window_months",
+    "refresh_interval_months",
+    "last_verified_at",
+    "next_review_due_at"
+  ],
+  "supported_jurisdiction_scopes": [
+    "core_195_state",
+    "partially_recognised_or_separately_governed_entity",
+    "constituent_country_or_subnational_nation",
+    "dependency_or_territory",
+    "india_administrative_location"
+  ],
+  "supported_location_types": [
+    "state_or_union_territory",
+    "district",
+    "subdistrict",
+    "development_block",
+    "urban_local_body",
+    "city",
+    "national_capital",
+    "regional_capital",
+    "sacred_reference_location",
+    "coordinate_first_point"
+  ],
+  "coordinate_required_for_computation": true,
+  "timezone_required_for_computation": true,
+  "explicit_review_required_for_computation": true,
+  "explicit_review_required_for_public_selection": true,
+  "runtime_external_api_dependency_allowed": false,
+  "public_output_allowed_now": false
+}

@@ -1,0 +1,45 @@
+{
+  "module_id": "AG74O-R1B",
+  "title": "Coordinate, Timezone and Identity Source Hierarchy",
+  "status": "ag74o_r1b_coordinate_source_hierarchy_locked",
+  "generated_at_utc": "2026-06-15T02:28:55.357Z",
+  "source_freshness_window_months": 12,
+  "refresh_interval_months": 4,
+  "india_identity_priority": [
+    "Live NAPIX/LGD official API",
+    "Reviewed official LGD manual export snapshot",
+    "Official State/UT administrative publication"
+  ],
+  "india_coordinate_priority": [
+    "Survey of India or approved Government geospatial dataset",
+    "Official State/UT or municipal geospatial publication",
+    "Reviewed official headquarters/centroid publication"
+  ],
+  "global_identity_priority": [
+    "Official national government source",
+    "UN or intergovernmental official country/capital source",
+    "Approved authoritative global gazetteer"
+  ],
+  "global_coordinate_priority": [
+    "Official national geospatial source",
+    "UN or international authoritative geographic dataset",
+    "Natural Earth curated populated-place/admin-capital reference",
+    "SimpleMaps Basic World Cities as CC BY 4.0 candidate source",
+    "GeoNames or equivalent gazetteer as secondary cross-check"
+  ],
+  "timezone_priority": [
+    "IANA Time Zone Database mapping",
+    "Official national timezone legislation/publication",
+    "Approved geospatial timezone boundary source"
+  ],
+  "prohibited_direct_promotion_sources": [
+    "Unlicensed or provenance-unknown capital-coordinate CSV",
+    "User-supplied capital checklist without authoritative source review",
+    "Name-only duplicate matches"
+  ],
+  "automatic_source_overwrite_allowed": false,
+  "automatic_role_promotion_allowed": false,
+  "automatic_public_promotion_allowed": false,
+  "automatic_computation_activation_allowed": false,
+  "runtime_fetch_dependency_allowed": false
+}

@@ -1,0 +1,145 @@
+{
+  "module_id": "AG74O-R1B",
+  "title": "Global Source Evidence Register",
+  "status": "ag74o_r1b_global_source_evidence_registered",
+  "generated_at_utc": "2026-06-15T02:28:55.357Z",
+  "diagnosis_package": {
+    "filename": "AG74O_R1B_Combined_Global_Source_Diagnosis_20260615_072620.zip",
+    "sha256": "b5ac4522ddaa32ca62ad93b5f496f7024977dd7f67606446d7eafc20cf1c1ae8",
+    "report_manifest_verified": true,
+    "repository_head": "46086c972cfc5bd5d1e84e32270a9a56c26ef501"
+  },
+  "simplemaps_world_cities": {
+    "package_filename": "simplemaps_worldcities_basicv1.91.zip",
+    "package_sha256": "e3502b8fb1d960cd38098a4f36deda54fc5c0d8b6b22387ba65cb047fafcdfd9",
+    "entries": {
+      "license.pdf": {
+        "bytes": 6646,
+        "compressed_bytes": 4759,
+        "timestamp": "2026-5-21"
+      },
+      "worldcities.csv": {
+        "bytes": 5301275,
+        "compressed_bytes": 1822869,
+        "timestamp": "2026-5-21"
+      },
+      "worldcities.xlsx": {
+        "bytes": 3440505,
+        "compressed_bytes": 3349384,
+        "timestamp": "2026-5-21"
+      }
+    },
+    "worldcities_csv_sha256": "bd61a651937b38dac9e0d515394950f659cf25519fd398d0b87a49ecc3356384",
+    "worldcities_xlsx_sha256": "2aa6707cbac64e347bcd77aec91495d6d1b6b6b3c5349d9110655659641b9d8a",
+    "license_pdf_sha256": "f2af26c3aa49393a8355d46d820475fd5330b3e23e2021d907c72fc0d9cf1ef4",
+    "row_count": 49992,
+    "unique_city_id_count": 49992,
+    "duplicate_city_id_count": 0,
+    "country_or_territory_label_count": 242,
+    "iso2_count": 241,
+    "iso3_count": 241,
+    "coordinate_complete_count": 49992,
+    "population_present_count": 48778,
+    "capital_classification_counts": {
+      "primary": 250,
+      "admin": 3666,
+      "none": 33906,
+      "minor": 12170
+    },
+    "licence": {
+      "basic_world_cities_database": "CC BY 4.0",
+      "attribution_required": true,
+      "substantial_bulk_public_redistribution_policy": "Do not expose the full normalized vendor database as a bulk public download.",
+      "raw_package_commit_recommended": false,
+      "normalized_governed_subset_use_allowed": true
+    },
+    "source_role": "licensed candidate coordinates, aliases, population ranking and broad city discovery",
+    "public_bulk_redistribution_allowed_now": false,
+    "normalized_subset_promotion_requires_review": true
+  },
+  "capital_coordinate_csv": {
+    "package_filename": "df09a6834a8421b4f376c875194915c9-355eb56e164ddc3cd1a9467c524422cb674e71a9.zip",
+    "package_sha256": "4cce122829a1c9d5920d7d3e2b715aaa23d5b990321953c02f550d56108467d1",
+    "csv_entry": "df09a6834a8421b4f376c875194915c9-355eb56e164ddc3cd1a9467c524422cb674e71a9/country-capital-lat-long-population.csv",
+    "csv_sha256": "73e0772d3c95976ae6661f61a2176e9ca4f3bc4a0a3e08e52ed0204af5d3761c",
+    "csv_zip_timestamp": "2020-4-6",
+    "row_count": 234,
+    "unique_country_label_count": 233,
+    "duplicate_country_label_group_count": 1,
+    "coordinate_complete_count": 234,
+    "capital_type_counts": {
+      "Capital": 227,
+      "Economic Capital": 1,
+      "Seat of Government": 1,
+      "Others": 3,
+      "Administrative Capital": 1,
+      "Legislative Capital": 1
+    },
+    "licence_or_provenance_file_present": false,
+    "licence_status": "unknown_do_not_promote_or_commit_derived_values_yet",
+    "dataset_vintage_status": "archive_timestamp_2020_requires_current_authoritative_revalidation",
+    "allowed_use_now": "diagnostic cross-check and candidate-review evidence only",
+    "source_role": "diagnostic coordinate and capital-role cross-check only",
+    "direct_record_promotion_allowed": false
+  },
+  "cross_source_diagnosis": {
+    "exact_normalized_matches": 164,
+    "country_match_city_review_required": 38,
+    "country_label_crosswalk_required": 32,
+    "coordinate_distance_summary": {
+      "match_count": 164,
+      "median_km": 0.914,
+      "maximum_km": 11.98,
+      "within_1_km": 89,
+      "within_5_km": 151,
+      "over_10_km": 1
+    }
+  },
+  "candidate_checklists": [
+    {
+      "source_id": "user_supplied_195_country_capital_checklist",
+      "stated_country_count": 195,
+      "treatment": "candidate completeness and special-case checklist pending authoritative structuring and validation",
+      "raw_checklist_committed_now": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "core_195_scope": {
+    "definition": "193 UN Member States plus Holy See and State of Palestine",
+    "expected_count": 195
+  },
+  "separate_extended_scopes": [
+    "partially recognised or separately governed entities",
+    "constituent countries or subnational nations",
+    "dependencies and territories",
+    "disputed or transitional capital claims"
+  ],
+  "review_flags": [
+    {
+      "entity": "Capital-coordinate CSV",
+      "issue": "No licence, README, source URL or provenance file is bundled.",
+      "action": "Use only as diagnostic cross-check until provenance/licence is established."
+    },
+    {
+      "entity": "Capital-coordinate CSV",
+      "issue": "Archive timestamp is 2020-04-06.",
+      "action": "Treat names, capital roles and coordinates as historical candidates requiring current validation."
+    },
+    {
+      "entity": "SimpleMaps v1.91",
+      "issue": "Broad country/territory coverage exceeds the core 195 sovereign-state convention.",
+      "action": "Classify core sovereign states, extended entities and dependencies separately."
+    },
+    {
+      "entity": "Multi-capital countries",
+      "issue": "One country may legitimately require multiple capital-role records.",
+      "action": "Use role-specific links to one canonical city record; do not duplicate cities."
+    },
+    {
+      "entity": "Transition/dispute cases",
+      "issue": "Current legal and operational capital status may differ across sources.",
+      "action": "Create an explicit review queue; never silently overwrite."
+    }
+  ],
+  "public_output_allowed_now": false
+}

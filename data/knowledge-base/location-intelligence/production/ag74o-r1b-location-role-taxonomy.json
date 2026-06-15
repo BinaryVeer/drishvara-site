@@ -1,0 +1,41 @@
+{
+  "module_id": "AG74O-R1B",
+  "title": "Location Role Taxonomy",
+  "status": "ag74o_r1b_location_role_taxonomy_locked",
+  "generated_at_utc": "2026-06-15T02:28:55.357Z",
+  "primary_roles": [
+    "national_capital",
+    "state_or_regional_capital",
+    "major_city",
+    "sacred_reference_location"
+  ],
+  "capital_role_enum": [
+    "constitutional_capital",
+    "official_capital",
+    "administrative_capital",
+    "executive_capital",
+    "legislative_capital",
+    "judicial_capital",
+    "seat_of_government",
+    "de_facto_government_seat",
+    "economic_capital",
+    "seasonal_capital",
+    "historical_capital_reference",
+    "capital_transition_candidate"
+  ],
+  "capital_role_rules": [
+    "One canonical city may hold multiple capital roles.",
+    "A capital role must not create a duplicate city record.",
+    "Core-195 sovereign-state roles must remain distinct from extended-entity roles.",
+    "Constituent-country capitals are regional roles under their sovereign state.",
+    "Disputed or transitional claims require explicit status and source review."
+  ],
+  "sacred_reference_role_rules": [
+    "Sacred/reference status requires a governed tradition and source basis.",
+    "Sacred/reference role does not independently approve coordinates or public computation.",
+    "Complete sacred/reference city population is deferred to AG74O-R1D."
+  ],
+  "role_approval_required": true,
+  "automatic_role_promotion_allowed": false,
+  "public_output_allowed_now": false
+}
