@@ -251,6 +251,16 @@
       "detail": "AG74O-R1A must keep all 6,493 records coordinate-pending with zero public-selection and zero computation-approved records."
     },
     {
+      "id": "ag74o_r1b_coordinate_role_architecture_passed",
+      "passed": true,
+      "detail": "AG74O-R1B must validate the universal coordinate, timezone, role and approval architecture and make AG74O-R1C ready."
+    },
+    {
+      "id": "ag74o_r1b_public_activation_boundary_preserved",
+      "passed": true,
+      "detail": "AG74O-R1B must keep all candidate and queued records non-public and non-computational while preserving source, licence and provenance gates."
+    },
+    {
       "id": "daily_context_dir_exists",
       "passed": true,
       "detail": "generated/daily-context must exist."
@@ -344,14 +354,19 @@
       "id": "ag74o_r1a_validate_script_exists",
       "passed": true,
       "detail": "validate:ag74o-r1a must exist."
+    },
+    {
+      "id": "ag74o_r1b_validate_script_exists",
+      "passed": true,
+      "detail": "validate:ag74o-r1b must exist."
     }
   ],
   "failures": [],
   "current_git_context": {
     "branch": "main",
-    "head": "f633a077",
-    "head_full": "f633a077bb971b617ce3e7c1bfc561a6b1a0c88d",
-    "origin_main": "f633a077",
+    "head": "72582a7f",
+    "head_full": "72582a7f4e62c3a3ce64cf99bf778ceebbd699d2",
+    "origin_main": "72582a7f",
     "status_at_build": "clean"
   },
   "blocked_actions": [
