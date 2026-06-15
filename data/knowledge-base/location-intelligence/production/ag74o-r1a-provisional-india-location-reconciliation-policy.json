@@ -1,0 +1,21 @@
+{
+  "module_id": "AG74O-R1A",
+  "title": "Live NAPIX Reconciliation Policy",
+  "status": "ag74o_r1a_live_api_reconciliation_policy_locked",
+  "reconciliation_key": "location_type_and_lgd_code",
+  "rules": [
+    "Preserve manual-export source provenance.",
+    "Match live records by entity type and LGD code.",
+    "Validate official name, local name, hierarchy, active status and timestamps.",
+    "Replace provisional attributes only after live-source validation.",
+    "Add live API codes absent from the provisional snapshot as new records.",
+    "Mark stale or invalidated records superseded or retired; do not silently delete audit history.",
+    "Never merge different LGD codes only because their names are identical.",
+    "Resolve urban-local-body district and exact type from live API before public activation.",
+    "Import sub-districts through the separate official API when access is approved.",
+    "Keep coordinate approval separate from administrative identity approval."
+  ],
+  "automatic_public_promotion_allowed": false,
+  "automatic_computation_activation_allowed": false,
+  "public_output_allowed_now": false
+}

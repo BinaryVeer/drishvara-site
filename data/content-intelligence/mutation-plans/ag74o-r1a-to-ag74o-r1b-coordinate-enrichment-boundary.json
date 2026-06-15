@@ -1,0 +1,23 @@
+{
+  "module_id": "AG74O-R1A",
+  "title": "AG74O-R1A to AG74O-R1B Boundary",
+  "status": "ag74o_r1a_boundary_locked",
+  "next_stage": "AG74O-R1B",
+  "next_stage_purpose": "Coordinate enrichment architecture, capital/reference-location roles and computation-approval queue.",
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope": [
+    "Coordinate-source hierarchy",
+    "Headquarters and centroid review queue",
+    "Capital, major-city and sacred-reference roles",
+    "Timezone verification",
+    "Computation-approval schema"
+  ],
+  "blocked_without_explicit_validation": [
+    "Public location-combobox activation",
+    "Panchang computation for coordinate-pending records",
+    "Runtime external API dependency",
+    "Supabase activation",
+    "Homepage UI change",
+    "Deletion of historical AG70-AG74 location evidence"
+  ]
+}
