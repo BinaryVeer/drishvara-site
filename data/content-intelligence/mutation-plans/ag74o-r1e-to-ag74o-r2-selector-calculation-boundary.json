@@ -1,0 +1,33 @@
+{
+  "module_id": "AG74O-R1E",
+  "title": "AG74O-R1E to AG74O-R2 Boundary",
+  "status": "ag74o_r1e_to_r2_boundary_locked",
+  "next_stage": "AG74O-R2",
+  "next_stage_purpose": "Correct the selector and calculation path so it consumes the unified governed index, resolves only explicitly approved records, and returns governed unavailable or calculation-pending states otherwise.",
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope": [
+    "Selector query and result contract correction",
+    "Exact governed-record resolution",
+    "Approval-aware calculation resolver",
+    "Unavailable and calculation-pending state handling",
+    "Location, coordinate and timezone provenance display",
+    "No default Varanasi/today fabrication"
+  ],
+  "carried_forward_mandatory_reviews": [
+    "All seven unresolved R1C national-capital conflicts",
+    "All 195 R1C capital timezone reviews",
+    "All 196 R1D cross-bank reviews",
+    "All 1,255 R1D coordinate/timezone reviews",
+    "All 1,419 R1E unresolved canonical/search reviews",
+    "All sacred/reference role-source reviews"
+  ],
+  "blocked_without_explicit_validation": [
+    "Public selector activation for candidate-only records",
+    "Panchang computation for unapproved records",
+    "Automatic canonical-place merging",
+    "Automatic ambiguous-alias resolution",
+    "Runtime external API dependency",
+    "Supabase activation",
+    "Homepage UI mutation outside the approved R2 correction boundary"
+  ]
+}
