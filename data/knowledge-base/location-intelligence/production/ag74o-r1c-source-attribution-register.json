@@ -1,0 +1,61 @@
+{
+  "module_id": "AG74O-R1C",
+  "title": "Source Attribution and Licence Register",
+  "status": "ag74o_r1c_source_attribution_register_created",
+  "generated_at_utc": "2026-06-23T15:28:43.920Z",
+  "records": [
+    {
+      "source_id": "un_m49_overview",
+      "display_name": "United Nations Statistics Division — M49 Overview",
+      "canonical_url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+      "attribution_required": true,
+      "public_attribution_text": "Country identity codes cross-checked against the United Nations M49 standard.",
+      "redistribution_boundary": "Do not redistribute the acquired raw page as a Drishvara dataset."
+    },
+    {
+      "source_id": "un_member_states",
+      "display_name": "United Nations — Member States",
+      "canonical_url": "https://www.un.org/en/about-us/member-states",
+      "attribution_required": true,
+      "public_attribution_text": "Core sovereign-state scope cross-checked against United Nations member-state evidence.",
+      "redistribution_boundary": "Reference evidence only."
+    },
+    {
+      "source_id": "un_non_member_states",
+      "display_name": "United Nations — Non-Member States",
+      "canonical_url": "https://www.un.org/en/about-us/non-member-states",
+      "attribution_required": true,
+      "public_attribution_text": "Holy See and State of Palestine scope cross-checked against United Nations non-member-state evidence.",
+      "redistribution_boundary": "Reference evidence only."
+    },
+    {
+      "source_id": "world_bank_country_api",
+      "display_name": "World Bank Country API",
+      "canonical_url": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+      "attribution_required": true,
+      "public_attribution_text": "Capital names and coordinates are retained as crosscheck candidates pending explicit verification.",
+      "redistribution_boundary": "Candidate values must not be represented as Drishvara-verified coordinates."
+    },
+    {
+      "source_id": "iana_zone1970",
+      "display_name": "IANA Time Zone Database — zone1970.tab",
+      "canonical_url": "https://data.iana.org/time-zones/tzdb/zone1970.tab",
+      "attribution_required": true,
+      "public_attribution_text": "Timezone identifiers and country-zone candidates derive from the IANA Time Zone Database.",
+      "redistribution_boundary": "Country-zone candidates do not constitute capital-level timezone approval."
+    },
+    {
+      "source_id": "user_supplied_capital_checklist",
+      "display_name": "Internal R1C Capital Completeness Checklist",
+      "canonical_url": null,
+      "attribution_required": false,
+      "public_attribution_text": null,
+      "redistribution_boundary": "Internal candidate/review input; not an authoritative public source."
+    }
+  ],
+  "governance": {
+    "attribution_record_is_source_approval": false,
+    "runtime_external_fetch_required": false,
+    "public_output_allowed_now": false
+  }
+}

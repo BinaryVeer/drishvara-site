@@ -1,0 +1,108 @@
+{
+  "module_id": "AG74O-R1C",
+  "title": "Authoritative Source Register",
+  "status": "ag74o_r1c_authoritative_source_register_created",
+  "generated_at_utc": "2026-06-23T15:28:43.920Z",
+  "evidence": {
+    "identity_normalisation_package": {
+      "filename": "AG74O_R1C_Identity_Normalisation_20260615_095610.zip",
+      "sha256": "b8304fdaa9812b7f39bce048f1a0b61f64dae0fb914777bb0de5afb97cad9959",
+      "report_manifest_verified": true,
+      "repository_head": "52ecb83915cad4bceff4058e15ffe1a1aa73f4ce"
+    },
+    "authoritative_source_acquisition_package": {
+      "filename": "AG74O_R1C_Authoritative_Source_Acquisition_20260615_090937.zip",
+      "sha256": "c239f13555802d1b40d9f52dfba477d45552ecb9c6ea1bc17dc87283d97dba9b",
+      "report_manifest_verified": true,
+      "repository_head": "52ecb83915cad4bceff4058e15ffe1a1aa73f4ce"
+    }
+  },
+  "source_acquisition_status": "source_acquisition_completed_no_repository_mutation",
+  "normalisation_status": "normalisation_diagnosis_completed_no_repository_mutation",
+  "source_records": [
+    {
+      "source_id": "world_bank_country_api",
+      "source_url": "https://api.worldbank.org/v2/country?format=json&per_page=400",
+      "source_filename": "world_bank_country_api.json",
+      "required": true,
+      "retrieval_status": "downloaded",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-06-15T03:39:37.990205+00:00",
+      "sha256": "d985536335fa799f893291d736b6e4e12b871ca9b927acf50b204367a52ab4e3",
+      "evidence_role": "country_and_capital_crosscheck_candidate",
+      "direct_public_or_computation_promotion_allowed": false
+    },
+    {
+      "source_id": "un_m49_overview",
+      "source_url": "https://unstats.un.org/unsd/methodology/m49/overview/",
+      "source_filename": "un_m49_overview.html",
+      "required": true,
+      "retrieval_status": "downloaded",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-06-15T03:39:47.131187+00:00",
+      "sha256": "748f6ff7380c8a50ea9448f068b79e3a1ee31be63207249e8cc89bf1eb969d11",
+      "evidence_role": "core_identity_code_crosswalk",
+      "direct_public_or_computation_promotion_allowed": false
+    },
+    {
+      "source_id": "iana_zone1970",
+      "source_url": "https://data.iana.org/time-zones/tzdb/zone1970.tab",
+      "source_filename": "iana_zone1970.tab",
+      "required": true,
+      "retrieval_status": "downloaded",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-06-15T03:39:48.099192+00:00",
+      "sha256": "406555546e685b34eb46c24d826b649dd35e9d202f4c13a3c621ff21eddc1583",
+      "evidence_role": "country_zone_candidate_source_not_capital_level_verification",
+      "direct_public_or_computation_promotion_allowed": false
+    },
+    {
+      "source_id": "un_member_states",
+      "source_url": "https://www.un.org/en/about-us/member-states",
+      "source_filename": "un_member_states.html",
+      "required": false,
+      "retrieval_status": "downloaded",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-06-15T03:39:50.576723+00:00",
+      "sha256": "5596177973d8b2f8f2d06104e429f8c629fed036b3d84653cf4592d06708265f",
+      "evidence_role": "core_195_scope_evidence",
+      "direct_public_or_computation_promotion_allowed": false
+    },
+    {
+      "source_id": "un_non_member_states",
+      "source_url": "https://www.un.org/en/about-us/non-member-states",
+      "source_filename": "un_non_member_states.html",
+      "required": false,
+      "retrieval_status": "downloaded",
+      "http_status": 200,
+      "retrieved_at_utc": "2026-06-15T03:39:52.094521+00:00",
+      "sha256": "a0e0c9aa12672c08d39343d8118abb380218f24e7e29042cf80557bd1c40fd69",
+      "evidence_role": "core_195_scope_evidence",
+      "direct_public_or_computation_promotion_allowed": false
+    }
+  ],
+  "internal_candidate_inputs": [
+    {
+      "source_id": "user_supplied_core_and_extended_capital_checklist",
+      "filename": "ag74o_r1c_user_capital_checklist.csv",
+      "sha256": "a5aff79fae8b0b7f2fc9a55e3c01f02ae99cb86bb7c6d1690ce3981e3c0b8b40",
+      "row_count": 201,
+      "source_role": "candidate completeness and special-case review input",
+      "authoritative_capital_role_source": false,
+      "direct_promotion_allowed": false
+    }
+  ],
+  "source_priority": [
+    "Current official national government or constitutional evidence",
+    "UN or intergovernmental identity evidence",
+    "Approved authoritative geographic source",
+    "World Bank country/capital API as crosscheck candidate",
+    "IANA TZDB for timezone identifiers and country-zone candidates"
+  ],
+  "governance": {
+    "runtime_fetch_dependency_allowed": false,
+    "source_download_committed_now": false,
+    "automatic_source_overwrite_allowed": false,
+    "automatic_public_or_computation_promotion_allowed": false
+  }
+}
