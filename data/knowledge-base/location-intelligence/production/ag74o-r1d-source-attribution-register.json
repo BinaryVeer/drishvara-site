@@ -1,0 +1,35 @@
+{
+  "module_id": "AG74O-R1D",
+  "title": "R1D Source Attribution Register",
+  "status": "ag74o_r1d_source_attribution_register_created",
+  "generated_at_utc": "2026-06-23T17:31:37.469Z",
+  "sources": [
+    {
+      "source_id": "simplemaps_basic_world_cities_v1_91",
+      "source_role": "candidate coordinates, timezone, population ranking, aliases and broad city discovery",
+      "licence": "CC BY 4.0",
+      "attribution_required": true,
+      "normalized_subset_use_allowed": true,
+      "raw_or_bulk_public_redistribution_allowed": false,
+      "package_sha256": "e3502b8fb1d960cd38098a4f36deda54fc5c0d8b6b22387ba65cb047fafcdfd9",
+      "worldcities_csv_sha256": "bd61a651937b38dac9e0d515394950f659cf25519fd398d0b87a49ecc3356384",
+      "direct_public_or_computation_promotion_allowed": false
+    },
+    {
+      "source_id": "ag74o_r1c_national_capital_bank",
+      "source_role": "canonical-place overlap detection and role-link continuity",
+      "direct_public_or_computation_promotion_allowed": false
+    },
+    {
+      "source_id": "r1d_curated_sacred_reference_scope",
+      "source_role": "candidate tradition and calendar-reference scope requiring explicit source review",
+      "direct_public_or_computation_promotion_allowed": false
+    }
+  ],
+  "governance": {
+    "source_attribution_must_be_retained": true,
+    "automatic_source_overwrite_allowed": false,
+    "runtime_external_api_dependency_allowed": false,
+    "public_output_allowed_now": false
+  }
+}
