@@ -1,0 +1,35 @@
+{
+  "module_id": "AG74O-R2",
+  "title": "Governed Panchang Result-State Contract",
+  "status": "ag74o_r2_result_state_contract_created",
+  "generated_at_utc": "2026-06-23T18:50:58.287Z",
+  "states": {
+    "ui_state_only": {
+      "calculation_performed": false,
+      "meaning": "Landing date and place labels are established without resolving or calculating a result."
+    },
+    "loading": {
+      "calculation_performed": false,
+      "meaning": "Governed projection and local reference files are being checked."
+    },
+    "governed_unavailable": {
+      "calculation_performed": false,
+      "meaning": "No exact approved named-location or alias resolution exists."
+    },
+    "calculation_pending": {
+      "calculation_performed": false,
+      "meaning": "Input is structurally valid but one or more explicit approvals are absent."
+    },
+    "calculated": {
+      "calculation_performed": true,
+      "meaning": "All approval gates passed and the local browser engine completed."
+    },
+    "invalid_input": {
+      "calculation_performed": false,
+      "meaning": "Date, coordinate or IANA timezone validation failed without substitution."
+    }
+  },
+  "default_state": "ui_state_only",
+  "default_varanasi_today_calculation_allowed": false,
+  "unapproved_coordinate_calculation_allowed": false
+}

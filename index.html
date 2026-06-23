@@ -5117,6 +5117,85 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
 window.drishvaraAg74iPublicSurfaceActive = true;
 </script>
 
+
+<style data-ag74o-r2-selector-calculation-style="true">
+/* AG74O_R2_SELECTOR_CALCULATION_STYLE_START */
+.ag74o-r2-provenance{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:6px;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
+  margin-top:10px;
+  padding:12px 14px;
+  border:1px solid rgba(211,169,72,.22);
+  border-radius:14px;
+  background:rgba(7,19,41,.5);
+  font-family:Arial,sans-serif;
+  font-size:.9rem;
+  line-height:1.45;
+  overflow:hidden;
+}
+.ag74o-r2-provenance p,
+.ag74o-r2-provenance span,
+.ag74o-r2-provenance strong{
+  min-width:0;
+  max-width:100%;
+  margin:0;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+#panchang-festival-card .form-grid{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+#panchang-festival-card [data-ag74o-place-selection="governed-dropdown-only"]{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  inset:auto!important;
+  transform:none!important;
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:.9rem 0 1rem!important;
+  padding:0!important;
+  grid-column:1 / -1!important;
+  justify-self:stretch!important;
+  align-self:stretch!important;
+  box-sizing:border-box!important;
+}
+[data-ag74o-place-selection="governed-dropdown-only"],
+[data-ag74o-place-selection="governed-dropdown-only"] .drishvara-hf12-select,
+[data-ag74o-daily-result-surface="true"],
+.ag74i-date-surface,
+.ag71c-coordinate-surface,
+.ag74i-calendar-book{
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+[data-ag74o-place-selection="governed-dropdown-only"] .drishvara-hf12-select-button,
+[data-ag74o-place-selection="governed-dropdown-only"] .drishvara-hf12-select-menu{
+  max-width:100%!important;
+  box-sizing:border-box!important;
+}
+[data-ag74o-daily-result-surface="true"] td,
+[data-ag74o-daily-result-surface="true"] th{
+  min-width:0;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+/* AG74O_R2_SELECTOR_CALCULATION_STYLE_END */
+</style>
 </head>
 <body>
 
@@ -5632,6 +5711,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
 
             <p class="ag74i-date-help" id="panchang-date-help">Supported dates: 01/01/1900 to 31/12/2100. The text field and native date picker stay synchronized. Times use the selected IANA timezone.</p>
             <p class="ag74i-selection-status" id="panchang-selection-status" role="status" aria-live="polite" tabindex="-1">Preparing the Varanasi date basis…</p>
+<div class="ag74o-r2-provenance" data-ag74o-r2-provenance="true" aria-label="Location and approval provenance">
+  <p><strong>Location basis:</strong> <span id="panchang-location-provenance">Varanasi / Banaras · landing UI state only</span></p>
+  <p><strong>Coordinate basis:</strong> <span id="panchang-coordinate-provenance">No approved coordinate basis</span></p>
+  <p><strong>Timezone basis:</strong> <span id="panchang-timezone-provenance">Asia/Kolkata · UI date basis only</span></p>
+  <p><strong>Approval basis:</strong> <span id="panchang-approval-provenance">Public selection blocked · computation blocked</span></p>
+</div>
           </section>
 
           <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_START -->
@@ -5674,12 +5759,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
           <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang" data-ag74o-place-selection="governed-dropdown-only">
             <label class="ag71d-select-label" for="panchang-place-select">Choose Panchang Location</label>
             <label class="ag74o-alias-field" for="panchang-place-alias"><span>Approved place or alias</span><input id="panchang-place-alias" type="text" autocomplete="off" placeholder="e.g. Kashi or Tokyo" aria-describedby="panchang-selection-status"></label>
-            <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
-                            <option value="varanasi-uttar-pradesh-india" data-location-id="loc_in_up_varanasi_city_001" data-ag74i-engine-location-id="varanasi_in" data-timezone="Asia/Kolkata" data-latitude="25.3176" data-longitude="82.9739" data-country="India" data-location-type="sacred_city" data-source-status="ag74i_default_canonical_location" data-review-status="approved_ag74i_default" selected>Varanasi / Banaras</option>
-              <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
-              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
-              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
-              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
+            <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1" data-ag74o-r2-approved-option-count="0" data-ag74o-r2-ui-state-only="true" aria-describedby="panchang-selection-status panchang-approval-provenance">
+                            <option data-ag74o-r2-ui-state-only="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="varanasi-uttar-pradesh-india" data-location-id="loc_in_up_varanasi_city_001" data-ag74i-engine-location-id="varanasi_in" data-timezone="Asia/Kolkata" data-latitude="25.3176" data-longitude="82.9739" data-country="India" data-location-type="sacred_city" data-source-status="ag74i_default_canonical_location" data-review-status="approved_ag74i_default" selected>Varanasi / Banaras</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
             </select>
             <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_START -->
             <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="panchang" data-ag74o-compat-only="true" hidden aria-hidden="true" aria-label="Legacy Panchang Location Quick Pick">

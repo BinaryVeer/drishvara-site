@@ -21,24 +21,16 @@
   var ANNUAL_PATH = "data/knowledge-base/panchang-festival/production/ag74n-varanasi-samvat-2083-annual-calendar.json";
   var FESTIVAL_PATH = "data/knowledge-base/panchang-festival/production/ag74n-festival-observance-candidate-bank-samvat-2083.json";
 
-  var LOCATION_MAP = {
-    "varanasi-uttar-pradesh-india": { value:"varanasi-uttar-pradesh-india", canonicalId:"varanasi_in", label:"Varanasi / Banaras", timezone:"Asia/Kolkata", latitude:25.3176, longitude:82.9739 },
-    "itanagar-arunachal-pradesh-india": { value:"itanagar-arunachal-pradesh-india", canonicalId:"itanagar_in", label:"Itanagar", timezone:"Asia/Kolkata", latitude:27.0844, longitude:93.6053 },
-    "new-delhi-delhi-india": { value:"new-delhi-delhi-india", canonicalId:"new_delhi_in", label:"New Delhi", timezone:"Asia/Kolkata", latitude:28.6139, longitude:77.2090 },
-    "ranchi-jharkhand-india": { value:"ranchi-jharkhand-india", canonicalId:"ranchi_in", label:"Ranchi", timezone:"Asia/Kolkata", latitude:23.3441, longitude:85.3096 },
-    "tokyo-japan": { value:"tokyo-japan", canonicalId:"tokyo_jp", label:"Tokyo", timezone:"Asia/Tokyo", latitude:35.6762, longitude:139.6503 }
-  };
-
-  var ALIASES = {
-    "varanasi":"varanasi-uttar-pradesh-india",
-    "banaras":"varanasi-uttar-pradesh-india",
-    "benaras":"varanasi-uttar-pradesh-india",
-    "kashi":"varanasi-uttar-pradesh-india",
-    "itanagar":"itanagar-arunachal-pradesh-india",
-    "new delhi":"new-delhi-delhi-india",
-    "delhi":"new-delhi-delhi-india",
-    "ranchi":"ranchi-jharkhand-india",
-    "tokyo":"tokyo-japan"
+  var APPROVED_LOCATION_PATH = "data/knowledge-base/location-intelligence/production/ag74o-r2-browser-approved-location-projection.json";
+  var DEFAULT_UI_STATE = {
+    value:"varanasi-uttar-pradesh-india",
+    canonicalId:null,
+    label:"Varanasi / Banaras",
+    timezone:"Asia/Kolkata",
+    latitude:null,
+    longitude:null,
+    publicSelectionApproved:false,
+    computationApproved:false
   };
 
   var tithiNames = ["Shukla Pratipada","Shukla Dwitiya","Shukla Tritiya","Shukla Chaturthi","Shukla Panchami","Shukla Shashthi","Shukla Saptami","Shukla Ashtami","Shukla Navami","Shukla Dashami","Shukla Ekadashi","Shukla Dwadashi","Shukla Trayodashi","Shukla Chaturdashi","Purnima","Krishna Pratipada","Krishna Dwitiya","Krishna Tritiya","Krishna Chaturthi","Krishna Panchami","Krishna Shashthi","Krishna Saptami","Krishna Ashtami","Krishna Navami","Krishna Dashami","Krishna Ekadashi","Krishna Dwadashi","Krishna Trayodashi","Krishna Chaturdashi","Amavasya"];
@@ -244,8 +236,9 @@
   }
 
   function setResultState(name) {
+    var mapped=name==="calculated"?"unique_publicly_approved_record":name;
     card.setAttribute("data-ag74o-result-state",name);
-    card.setAttribute("data-ag74i-result-state",name==="calculated"?"unique_publicly_approved_record":"governed_unavailable");
+    card.setAttribute("data-ag74i-result-state",mapped);
   }
 
   function renderObservance(bank, dateKey) {
@@ -265,17 +258,42 @@
     setText("upcoming-observance-ritual-window",item.ritual_window?JSON.stringify(item.ritual_window):"Not available");
   }
 
-  function renderUnavailable(request, reason, focusStatus, bank) {
-    setText("panchang-calculation-source","Calculated result unavailable");
-    setText("panchang-method-basis","Drishvara Varanasi Standard · local browser calculation");
-    setText("panchang-moonrise",request.label+" · "+request.timezone);
+  function setProvenance(request, decision) {
+    decision=decision||{};
+    var label=request&&request.label?request.label:"Unresolved location";
+    var timezone=request&&request.timezone?request.timezone:"No timezone resolved";
+    var coordinateText="No approved coordinate basis";
+    if(request&&request.mode==="coordinates"&&Number.isFinite(request.latitude)&&Number.isFinite(request.longitude)){
+      coordinateText=request.latitude+", "+request.longitude+" · user supplied, not computation-approved";
+    }else if(decision.record&&Number.isFinite(decision.record.latitude)&&Number.isFinite(decision.record.longitude)){
+      coordinateText=decision.record.latitude+", "+decision.record.longitude+" · approved governed projection";
+    }
+    setText("panchang-location-provenance",label+(decision.record?" · exact governed record":" · UI/input state only"));
+    setText("panchang-coordinate-provenance",coordinateText);
+    setText("panchang-timezone-provenance",timezone+(decision.record?" · approved governed projection":" · not approved for computation"));
+    setText("panchang-approval-provenance",decision.record?"Public selection approved · computation approved":"Public selection blocked · computation blocked");
+  }
+
+  function renderGovernedState(request, stateName, reason, focusStatus, bank, decision) {
+    var pending=stateName==="calculation_pending"||stateName==="ui_state_only";
+    var invalid=stateName==="invalid_input";
+    setText("panchang-calculation-source",pending?"No Panchang computation performed":invalid?"Invalid input — no calculation performed":"Governed result unavailable");
+    setText("panchang-method-basis","Approval-aware governed resolver · local engine not invoked");
+    setText("panchang-moonrise",(request.label||"Unresolved location")+" · "+(request.timezone||"Timezone unavailable"));
     setText("panchang-moonset",isoToDisplay(request.dateKey));
-    ["panchang-sunrise","panchang-sunset","panchang-vara","panchang-tithi","panchang-nakshatra","panchang-yoga","panchang-karana","panchang-paksha"].forEach(function(id){setText(id,"Unavailable");});
-    ["panchang-tithi-transition","panchang-nakshatra-transition","panchang-yoga-transition","panchang-karana-transition"].forEach(function(id){setText(id,"Unavailable");});
-    setText("panchang-selection-status",reason+" No alternate date or location has been substituted.");
+    var dailyValue=pending?"Pending approval":"Unavailable";
+    ["panchang-sunrise","panchang-sunset","panchang-vara","panchang-tithi","panchang-nakshatra","panchang-yoga","panchang-karana","panchang-paksha"].forEach(function(id){setText(id,dailyValue);});
+    ["panchang-tithi-transition","panchang-nakshatra-transition","panchang-yoga-transition","panchang-karana-transition"].forEach(function(id){setText(id,dailyValue);});
+    setText("panchang-selection-status",reason+" No alternate date, place or timezone has been substituted.");
+    setProvenance(request,decision);
     renderObservance(bank,request.dateKey);
-    setResultState("governed_unavailable");setBusy(false);
+    setResultState(stateName);
+    setBusy(false);
     if(focusStatus&&byId("panchang-selection-status"))byId("panchang-selection-status").focus();
+  }
+
+  function renderUnavailable(request, reason, focusStatus, bank) {
+    renderGovernedState(request,"governed_unavailable",reason,focusStatus,bank,null);
   }
 
   function renderCalculated(request, result, focusStatus, bank) {
@@ -296,6 +314,7 @@
     setText("panchang-yoga-transition",compactTransition("yoga",result));
     setText("panchang-karana-transition",compactTransition("karana",result));
     setText("panchang-selection-status","Calculated for "+request.label+" on "+isoToDisplay(request.dateKey)+". Times use "+request.timezone+". No input has been stored.");
+    setProvenance(request,{record:request.governedRecord||null});
     renderObservance(bank,request.dateKey);
     setResultState("calculated");setBusy(false);
     if(focusStatus&&byId("panchang-selection-status"))byId("panchang-selection-status").focus();
@@ -337,66 +356,240 @@
   }
 
   function selectedMode() { var checked=document.querySelector('input[name="ag71c-panchang-location-mode"]:checked');return checked&&checked.value==="coordinates"?"coordinates":"place"; }
-  function normalAlias(value){return String(value||"").trim().toLowerCase().replace(/[\s_-]+/g," ");}
+  function normalAlias(value){return String(value||"").normalize("NFKD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase().replace(/[^a-z0-9]+/g," ").replace(/\s+/g," ").trim();}
+
+  var selectorHardeningActive=false;
+  var selectorObserver=null;
+
+  function hardenUiStateSelector() {
+    if(selectorHardeningActive)return;
+    selectorHardeningActive=true;
+    try{
+      var select=byId("panchang-place-select");
+      if(!select)return;
+
+      Array.prototype.slice.call(select.options||[]).forEach(function(option){
+        if(option.value!==DEFAULT_UI_STATE.value)option.remove();
+      });
+
+      var option=Array.prototype.slice.call(select.options||[]).find(function(item){
+        return item.value===DEFAULT_UI_STATE.value;
+      });
+
+      if(!option){
+        option=document.createElement("option");
+        option.value=DEFAULT_UI_STATE.value;
+        select.appendChild(option);
+      }
+
+      option.textContent="Varanasi / Banaras — landing UI state; calculation approval pending";
+      option.selected=true;
+      option.setAttribute("data-ag74o-r2-ui-state-only","true");
+      option.setAttribute("data-ag74o-r2-public-approved","false");
+      option.setAttribute("data-ag74o-r2-computation-approved","false");
+
+      select.value=DEFAULT_UI_STATE.value;
+      select.disabled=false;
+      select.removeAttribute("aria-disabled");
+      select.setAttribute("data-ag74o-r2-approved-option-count","0");
+      select.setAttribute("data-ag74o-r2-ui-state-only","true");
+
+      var safeWrap=select.nextElementSibling&&select.nextElementSibling.matches&&select.nextElementSibling.matches("[data-drishvara-hf12-select]")?select.nextElementSibling:null;
+      if(safeWrap){
+        safeWrap.setAttribute("data-open","false");
+        var safeButton=safeWrap.querySelector(".drishvara-hf12-select-button");
+        if(safeButton){
+          safeButton.textContent=option.textContent;
+          safeButton.disabled=false;
+          safeButton.removeAttribute("aria-disabled");
+          safeButton.setAttribute("aria-expanded","false");
+        }
+
+        safeWrap.querySelectorAll(".drishvara-hf12-select-option").forEach(function(item){
+          if(item.dataset.value!==DEFAULT_UI_STATE.value){
+            item.remove();
+            return;
+          }
+          item.textContent=option.textContent;
+          item.disabled=false;
+          item.removeAttribute("aria-disabled");
+          item.setAttribute("aria-selected","true");
+          item.setAttribute("data-ag74o-r2-ui-state-only","true");
+          item.setAttribute("data-ag74o-r2-public-approved","false");
+        });
+      }
+    }finally{
+      selectorHardeningActive=false;
+    }
+  }
+
+  function installSelectorHardening() {
+    var select=byId("panchang-place-select");
+    if(!select)return;
+    hardenUiStateSelector();
+    if(selectorObserver)selectorObserver.disconnect();
+    selectorObserver=new MutationObserver(function(){
+      window.setTimeout(hardenUiStateSelector,0);
+    });
+    selectorObserver.observe(select,{childList:true,subtree:false});
+    window.setTimeout(hardenUiStateSelector,0);
+    window.setTimeout(hardenUiStateSelector,100);
+  }
 
   function requestFromUi() {
-    if(selectedMode()==="coordinates")return {mode:"coordinates",dateKey:state.dateKey,label:(byId("panchang-coordinate-label")&&byId("panchang-coordinate-label").value.trim())||"Entered coordinates",latitude:Number(byId("panchang-latitude").value),longitude:Number(byId("panchang-longitude").value),timezone:String(byId("panchang-timezone").value||"").trim()};
-    var select=byId("panchang-place-select");
-    var selectedValue=select&&LOCATION_MAP[select.value]?select.value:state.selectedPlaceValue;
-    var alias=normalAlias(byId("panchang-place-alias")&&byId("panchang-place-alias").value),value=alias?ALIASES[alias]:selectedValue;
-    if(alias&&!value)return {invalid:true,dateKey:state.dateKey,label:"Entered place alias",timezone:"Timezone unavailable",reason:"This place or alias is not in the governed location list."};
-    var place=LOCATION_MAP[value]||LOCATION_MAP["varanasi-uttar-pradesh-india"];
-    return {mode:"place",dateKey:state.dateKey,label:place.label,latitude:place.latitude,longitude:place.longitude,timezone:place.timezone,canonicalId:place.canonicalId,value:place.value};
+    if(selectedMode()==="coordinates"){
+      return {
+        mode:"coordinates",
+        dateKey:state.dateKey,
+        label:(byId("panchang-coordinate-label")&&byId("panchang-coordinate-label").value.trim())||"Entered coordinates",
+        latitude:Number(byId("panchang-latitude").value),
+        longitude:Number(byId("panchang-longitude").value),
+        timezone:String(byId("panchang-timezone").value||"").trim()
+      };
+    }
+    var alias=normalAlias(byId("panchang-place-alias")&&byId("panchang-place-alias").value);
+    return {
+      mode:"place",
+      dateKey:state.dateKey,
+      query:alias,
+      value:DEFAULT_UI_STATE.value,
+      label:alias?"Entered place alias: "+alias:DEFAULT_UI_STATE.label,
+      latitude:null,
+      longitude:null,
+      timezone:alias?"":DEFAULT_UI_STATE.timezone,
+      canonicalId:null,
+      uiStateOnly:!alias
+    };
   }
 
   function loadReferenceData(signal) {
     if(state.referenceData)return Promise.resolve(state.referenceData);
     return Promise.all([
       fetch(ANNUAL_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Annual book unavailable");return response.json();}),
-      fetch(FESTIVAL_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Festival guard bank unavailable");return response.json();})
-    ]).then(function(values){state.referenceData={calendar:values[0],festival:values[1]};return state.referenceData;});
+      fetch(FESTIVAL_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Festival guard bank unavailable");return response.json();}),
+      fetch(APPROVED_LOCATION_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Governed approved-location projection unavailable");return response.json();})
+    ]).then(function(values){
+      if(!values[2]||values[2].record_count!==values[2].records.length)throw new Error("Governed projection count mismatch");
+      state.referenceData={calendar:values[0],festival:values[1],approvedLocations:values[2]};
+      return state.referenceData;
+    });
+  }
+
+  function resolveApprovedGovernedRecord(request, projection) {
+    if(!request.dateKey||request.dateKey<SUPPORTED_START||request.dateKey>SUPPORTED_END){
+      return {state:"invalid_input",reason:"Date must be from 01/01/1900 to 31/12/2100."};
+    }
+    if(request.mode==="coordinates"){
+      if(!Number.isFinite(request.latitude)||request.latitude< -90||request.latitude>90||!Number.isFinite(request.longitude)||request.longitude< -180||request.longitude>180){
+        return {state:"invalid_input",reason:"Latitude or longitude is outside the supported worldwide range."};
+      }
+      if(!request.timezone||!validTimezone(request.timezone)){
+        return {state:"invalid_input",reason:"Enter a validated IANA timezone for the supplied coordinates. Asia/Kolkata or another timezone will not be substituted."};
+      }
+      return {state:"calculation_pending",reason:"The coordinate request is valid, but no explicit coordinate, timezone and computation approval exists."};
+    }
+    var records=projection&&Array.isArray(projection.records)?projection.records:[];
+    if(request.query){
+      var matches=records.filter(function(record){
+        return Array.isArray(record.search_labels)&&record.search_labels.indexOf(request.query)!==-1;
+      });
+      if(matches.length!==1){
+        return {state:"governed_unavailable",reason:matches.length>1?"The place alias is ambiguous and requires governed review.":"This place or alias is not in the publicly approved governed location projection. Use coordinates with a validated IANA timezone to create a calculation-pending request."};
+      }
+      return {state:"approved",record:matches[0]};
+    }
+    var record=records.find(function(item){return item.selector_value===request.value;});
+    if(!record){
+      return {state:"calculation_pending",reason:"Varanasi/today is established as the landing UI state, but no exact public-selection and computation-approved record is available."};
+    }
+    return {state:"approved",record:record};
+  }
+
+  function requestFromApprovedRecord(request, record) {
+    return {
+      mode:"place",
+      dateKey:request.dateKey,
+      value:record.selector_value,
+      canonicalId:record.canonical_place_id,
+      label:record.display_label,
+      latitude:Number(record.latitude),
+      longitude:Number(record.longitude),
+      timezone:record.timezone,
+      governedRecord:record
+    };
   }
 
   async function applySelection(options) {
-    options=options||{};state.requestToken+=1;var token=state.requestToken;
-    if(state.activeAbort)state.activeAbort.abort();state.activeAbort=new AbortController();
+    options=options||{};
+    state.requestToken+=1;
+    var token=state.requestToken;
+    if(state.activeAbort)state.activeAbort.abort();
+    state.activeAbort=new AbortController();
     var request=requestFromUi();
-    if(request.invalid){renderUnavailable(request,request.reason,options.focusStatus===true,null);return false;}
-    setBusy(true);setResultState("loading");setText("panchang-selection-status","Calculating the selected civil date and loading the guarded Varanasi annual book…");
-    var result;
-    try{result=computeDay(request);}catch(error){result={available:false,reason:String(error&&error.message||error)};}
+    setBusy(true);
+    setResultState("loading");
+    setText("panchang-selection-status","Checking the governed location projection and approval state…");
     try{
-      var reference=await loadReferenceData(state.activeAbort.signal);await new Promise(function(resolve){setTimeout(resolve,0);});
+      var reference=await loadReferenceData(state.activeAbort.signal);
+      await new Promise(function(resolve){setTimeout(resolve,0);});
       if(token!==state.requestToken)return false;
       renderBook(reference.calendar,request.dateKey);
-      if(result.available)renderCalculated(request,result,options.focusStatus===true,reference.festival);else renderUnavailable(request,result.reason,options.focusStatus===true,reference.festival);
-      return result.available;
+      var decision=resolveApprovedGovernedRecord(request,reference.approvedLocations);
+      if(decision.state!=="approved"){
+        renderGovernedState(request,decision.state,decision.reason,options.focusStatus===true,reference.festival,decision);
+        return false;
+      }
+      var approvedRequest=requestFromApprovedRecord(request,decision.record);
+      var result;
+      try{result=computeDay(approvedRequest);}catch(error){result={available:false,reason:String(error&&error.message||error)};}
+      if(result.available)renderCalculated(approvedRequest,result,options.focusStatus===true,reference.festival);
+      else renderUnavailable(approvedRequest,result.reason||"Calculation could not be completed.",options.focusStatus===true,reference.festival);
+      return Boolean(result.available);
     }catch(error){
-      if(error&&error.name==="AbortError")return false;if(token!==state.requestToken)return false;
-      if(result.available)renderCalculated(request,result,options.focusStatus===true,null);else renderUnavailable(request,result.reason||"Calculation could not be completed.",options.focusStatus===true,null);
-      setText("ag74o-book-status","Annual reference book could not be loaded. Daily calculation remains available.");
-      return result.available;
+      if(error&&error.name==="AbortError")return false;
+      if(token!==state.requestToken)return false;
+      renderGovernedState(request,"governed_unavailable","The local governed projection or reference data could not be loaded.",options.focusStatus===true,null,null);
+      setText("ag74o-book-status","Annual reference book could not be loaded.");
+      return false;
     }
   }
 
   function choosePlace(value) {
-    if(!LOCATION_MAP[value])return false;
-    state.selectedPlaceValue=value;
+    if(value!==DEFAULT_UI_STATE.value)return false;
+    hardenUiStateSelector();
+    state.selectedPlaceValue=DEFAULT_UI_STATE.value;
     var select=byId("panchang-place-select");
     if(select){
-      select.value=value;
-      select.setAttribute("data-ag74o-selected-value",value);
+      select.value=DEFAULT_UI_STATE.value;
+      select.disabled=false;
+      select.removeAttribute("aria-disabled");
+      select.setAttribute("data-ag74o-selected-value",DEFAULT_UI_STATE.value);
+      select.setAttribute("data-ag74o-r2-approved-option-count","0");
+      select.setAttribute("data-ag74o-r2-ui-state-only","true");
       var safeWrap=select.nextElementSibling&&select.nextElementSibling.matches&&select.nextElementSibling.matches("[data-drishvara-hf12-select]")?select.nextElementSibling:null;
       if(safeWrap){
-        var selectedOption=select.options[select.selectedIndex];
+        safeWrap.setAttribute("data-open","false");
         var safeButton=safeWrap.querySelector(".drishvara-hf12-select-button");
-        if(safeButton&&selectedOption)safeButton.textContent=selectedOption.textContent.trim();
-        safeWrap.querySelectorAll(".drishvara-hf12-select-option").forEach(function(item){item.setAttribute("aria-selected",item.dataset.value===value?"true":"false");});
+        if(safeButton){
+          safeButton.textContent="Varanasi / Banaras — landing UI state; calculation approval pending";
+          safeButton.disabled=false;
+          safeButton.removeAttribute("aria-disabled");
+          safeButton.setAttribute("aria-expanded","false");
+        }
+        safeWrap.querySelectorAll(".drishvara-hf12-select-option").forEach(function(item){
+          item.disabled=false;
+          item.removeAttribute("aria-disabled");
+          item.setAttribute("aria-selected",item.dataset.value===DEFAULT_UI_STATE.value?"true":"false");
+        });
       }
     }
-    document.querySelectorAll('[data-ag71d-r4-select-kind="panchang"]').forEach(function(button){button.setAttribute("aria-pressed",button.getAttribute("data-ag71d-r4-location-value")===value?"true":"false");});
-    var summary=document.querySelector('[data-ag71d-r5-selection-summary="panchang"]');if(summary)summary.textContent="Selected Panchang location: "+LOCATION_MAP[value].label;
-    card.setAttribute("data-ag74o-selected-place",value);
+    document.querySelectorAll('[data-ag71d-r4-select-kind="panchang"]').forEach(function(button){
+      button.setAttribute("aria-pressed","false");
+      button.setAttribute("aria-disabled","true");
+    });
+    var summary=document.querySelector('[data-ag71d-r5-selection-summary="panchang"]');
+    if(summary)summary.textContent="Panchang landing state: Varansi / Banaras. Calculation approval pending.";
+    card.setAttribute("data-ag74o-selected-place",DEFAULT_UI_STATE.value);
     return true;
   }
 
@@ -420,13 +613,13 @@
     if(event.target.id==="panchang-date-picker"&&event.target.value){syncDate(event.target.value);applySelection();return;}
     if(event.target.id==="panchang-date-text"){var parsed=displayToIso(event.target.value);if(parsed){syncDate(parsed);applySelection();}return;}
     if(event.target.id==="panchang-place-select"){choosePlace(event.target.value);applySelection();return;}
-    if(event.target.id==="panchang-place-alias"){var request=requestFromUi();if(!request.invalid&&request.value)choosePlace(request.value);applySelection({focusStatus:true});return;}
+    if(event.target.id==="panchang-place-alias"){applySelection({focusStatus:true});return;}
     if(event.target.matches('input[name="ag71c-panchang-location-mode"]')){var surface=document.querySelector('[data-ag71c-coordinate-surface="panchang"]');if(surface)surface.setAttribute("data-ag71d-mode",event.target.value);applySelection();return;}
     if(["panchang-latitude","panchang-longitude","panchang-timezone","panchang-coordinate-label"].includes(event.target.id)&&selectedMode()==="coordinates")applySelection();
   });
 
   document.addEventListener("keydown",function(event){
-    if(event.target&&event.target.id==="panchang-place-alias"&&event.key==="Enter"){event.preventDefault();var request=requestFromUi();if(!request.invalid&&request.value)choosePlace(request.value);applySelection({focusStatus:true});}
+    if(event.target&&event.target.id==="panchang-place-alias"&&event.key==="Enter"){event.preventDefault();applySelection({focusStatus:true});}
     if(event.target&&event.target.matches("[data-ag74i-book-page-button]")&&(event.key==="ArrowLeft"||event.key==="ArrowRight")){event.preventDefault();setBookPage(state.bookPage+(event.key==="ArrowRight"?1:-1));var button=document.querySelector('[data-ag74i-book-page-button="'+state.bookPage+'"]');if(button)button.focus();}
   });
 
@@ -435,16 +628,65 @@
     function claim(){event.preventDefault();event.stopImmediatePropagation();}
     if(target.closest("#panchang-previous-day")){claim();syncDate(shiftDate(state.dateKey,-1));applySelection({focusStatus:true});return;}
     if(target.closest("#panchang-next-day")){claim();syncDate(shiftDate(state.dateKey,1));applySelection({focusStatus:true});return;}
-    if(target.closest("#panchang-today")){claim();var request=requestFromUi();syncDate(todayInTimezone(request.timezone&&validTimezone(request.timezone)?request.timezone:"Asia/Kolkata"));applySelection({focusStatus:true});return;}
+    if(target.closest("#panchang-today")){
+      claim();
+      var request=requestFromUi();
+      var timezone=request.mode==="coordinates"?request.timezone:DEFAULT_UI_STATE.timezone;
+      if(!timezone||!validTimezone(timezone)){
+        renderGovernedState(request,"invalid_input","A valid IANA timezone is required to determine Today. No timezone has been substituted.",true,state.referenceData&&state.referenceData.festival,null);
+        return;
+      }
+      syncDate(todayInTimezone(timezone));
+      applySelection({focusStatus:true});
+      return;
+    }
     var pageButton=target.closest("[data-ag74i-book-page-button]");if(pageButton){claim();setBookPage(pageButton.getAttribute("data-ag74i-book-page-button"));return;}
     if(target.closest("#ag74i-book-previous")){claim();setBookPage(state.bookPage-1);return;}
     if(target.closest("#ag74i-book-next")){claim();setBookPage(state.bookPage+1);return;}
   },true);
 
   function boot() {
-    if(!Astronomy){renderUnavailable({label:"Varanasi / Banaras",timezone:"Asia/Kolkata",dateKey:todayInTimezone("Asia/Kolkata")},"Local astronomy library did not load.",false,null);return;}
-    Astronomy.SetDeltaTFunction(Astronomy.DeltaT_EspenakMeeus);
-    choosePlace("varanasi-uttar-pradesh-india");syncDate(todayInTimezone("Asia/Kolkata"));setBookPage(1);applySelection();
+    if(Astronomy){
+      Astronomy.SetDeltaTFunction(Astronomy.DeltaT_EspenakMeeus);
+    }
+    installSelectorHardening();
+    choosePlace(DEFAULT_UI_STATE.value);
+    syncDate(todayInTimezone(DEFAULT_UI_STATE.timezone));
+    setBookPage(1);
+    var request=requestFromUi();
+    renderGovernedState(
+      request,
+      "ui_state_only",
+      "Varanasi/today is the landing UI state only. No exact public-selection and computation-approved record has been resolved.",
+      false,
+      null,
+      null
+    );
+    state.requestToken+=1;
+    var token=state.requestToken;
+    state.activeAbort=new AbortController();
+    setBusy(true);
+    loadReferenceData(state.activeAbort.signal).then(function(reference){
+      if(token!==state.requestToken)return;
+      renderBook(reference.calendar,state.dateKey);
+      renderObservance(reference.festival,state.dateKey);
+      setBusy(false);
+      setResultState("ui_state_only");
+    }).catch(function(error){
+      if(error&&error.name==="AbortError")return;
+      if(token!==state.requestToken)return;
+      setText("ag74o-book-status","Annual reference book could not be loaded.");
+      setBusy(false);
+      setResultState("ui_state_only");
+    });
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",function(){
+      window.setTimeout(installSelectorHardening,0);
+    },{once:true});
+  }else{
+    window.setTimeout(installSelectorHardening,0);
   }
 
   window.drishvaraAg74oApplySelection=applySelection;

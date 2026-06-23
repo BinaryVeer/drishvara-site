@@ -1,0 +1,31 @@
+{
+  "module_id": "AG74O-R2",
+  "title": "AG74O-R2 to AG74O-R3 Boundary",
+  "status": "ag74o_r2_to_r3_boundary_locked",
+  "next_stage": "AG74O-R3",
+  "next_stage_purpose": "Plan governed calendar activation using the corrected approval-aware selector and calculation path without promoting candidate-only locations or bypassing explicit approvals.",
+  "next_stage_not_auto_started": true,
+  "allowed_next_scope": [
+    "Governed calendar activation planning",
+    "Approved-record runtime projection refresh",
+    "Annual calendar and daily-result synchronization",
+    "Explicit approval-state consumption",
+    "Unavailable and calculation-pending state preservation"
+  ],
+  "carried_forward_mandatory_blocks": [
+    "Zero public-selection approved records",
+    "Zero computation-approved records",
+    "All 1,419 unresolved R1E canonical/search reviews",
+    "All unresolved coordinate and timezone reviews",
+    "All sacred/reference role-source reviews"
+  ],
+  "blocked_without_explicit_validation": [
+    "Candidate-only selector activation",
+    "Unapproved Panchang computation",
+    "Default Varanasi/today result fabrication",
+    "Automatic place or timezone substitution",
+    "Automatic ambiguous-alias resolution",
+    "Runtime external API dependency",
+    "Supabase or input persistence"
+  ]
+}

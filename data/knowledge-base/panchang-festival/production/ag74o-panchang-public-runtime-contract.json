@@ -1,36 +1,54 @@
 {
   "module_id": "AG74O",
   "title": "Panchang Public Browser Runtime Contract",
-  "status": "ag74o_public_runtime_active_with_festival_guard",
-  "version": "1.0.0",
+  "status": "ag74o_r2_governed_selector_calculation_gate_active_runtime_approval_blocked",
+  "version": "2.0.0",
   "runtime": {
     "execution": "static_browser_only",
     "astronomy_library": "astronomy-engine@2.1.19_exact_local_vendored_browser_bundle",
     "browser_bundle_sha256": "f41139a87941ea017ab902b954c9389fa27ea72083d7fab4971756d7769d14e6",
-    "daily_engine": "browser_port_of_locked_AG74L_AG74M_formulas",
+    "daily_engine": "retained_but_invoked_only_after_explicit_approval_gate",
     "supported_start": "1900-01-01",
     "supported_end": "2100-12-31",
-    "default_location": "varanasi_in",
-    "automatic_rendering": true,
-    "click_required": false
+    "default_ui_state_location": "Varanasi / Banaras",
+    "default_ui_state_timezone": "Asia/Kolkata",
+    "automatic_calculation_on_boot": false,
+    "click_required_for_request": false,
+    "approved_browser_projection_record_count": 0,
+    "public_runtime_activation_allowed_now": false
   },
   "date_location": {
     "native_and_text_sync": true,
     "previous_today_next": true,
-    "curated_places": true,
-    "approved_aliases": true,
-    "coordinate_first_requires_supplied_iana_timezone": true,
+    "named_place_selector_state": "active_governed_query_control_zero_approved_results",
+    "alias_query_state": "governed_unavailable_until_exact_public_approval",
+    "coordinate_mode_state": "validated_request_returns_calculation_pending_until_approved",
     "nearest_substitution": false,
+    "timezone_substitution": false,
     "reverse_geocoding": false,
-    "public_named_location_control": "governed_dropdown_only",
+    "public_named_location_control": "approval_aware_governed_projection_only",
     "legacy_pilot_quick_pick_visible": false
+  },
+  "result_states": [
+    "ui_state_only",
+    "loading",
+    "governed_unavailable",
+    "calculation_pending",
+    "calculated",
+    "invalid_input"
+  ],
+  "provenance_display": {
+    "location_basis_visible": true,
+    "coordinate_basis_visible": true,
+    "timezone_basis_visible": true,
+    "approval_basis_visible": true
   },
   "annual_book": {
     "basis": "Varanasi_independent_of_daily_selected_location",
     "reference_samvat_year": 2083,
     "page_count": 4,
     "canonical_slot_count": 12,
-    "selected_varanasi_date_opens_matching_page_when_in_reference_interval": true
+    "available_while_daily_calculation_is_blocked": true
   },
   "festival_guard": {
     "condition_candidates_publicly_visible": false,
@@ -46,7 +64,7 @@
   "ui_surface": {
     "visible_daily_result_surface_count": 1,
     "legacy_ag71e_panel": "hidden_inert_compatibility_only",
-    "named_place_selector": "single_governed_dropdown",
+    "named_place_selector": "single_active_governed_query_control_zero_approved_records",
     "coordinate_mode_selector_retained": true,
     "legacy_quick_pick_buttons_visible": false
   }

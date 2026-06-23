@@ -1,0 +1,30 @@
+{
+  "module_id": "AG74O-R2",
+  "title": "Location, Coordinate and Timezone Provenance Display Contract",
+  "status": "ag74o_r2_location_provenance_display_contract_created",
+  "generated_at_utc": "2026-06-23T18:50:58.287Z",
+  "required_dom_ids": [
+    "panchang-location-provenance",
+    "panchang-coordinate-provenance",
+    "panchang-timezone-provenance",
+    "panchang-approval-provenance"
+  ],
+  "required_fields": [
+    "canonical record identifier",
+    "display label",
+    "location source basis",
+    "coordinate source and verification status",
+    "timezone source and verification status",
+    "public-selection approval status",
+    "computation approval status",
+    "unresolved-review references"
+  ],
+  "ui_state_language": {
+    "location": "UI state only until an exact approved canonical record resolves",
+    "coordinate": "No approved coordinate basis",
+    "timezone": "Timezone may establish the UI date basis without approving calculation",
+    "approval": "Public selection and computation approval shown separately"
+  },
+  "candidate_value_may_be_described_as_approved": false,
+  "missing_provenance_may_be_silently_substituted": false
+}

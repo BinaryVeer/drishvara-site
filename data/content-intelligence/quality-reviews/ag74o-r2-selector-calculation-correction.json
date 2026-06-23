@@ -1,0 +1,75 @@
+{
+  "module_id": "AG74O-R2",
+  "title": "Selector and Calculation Correction Review",
+  "status": "ag74o_r2_selector_calculation_correction_completed",
+  "generated_at_utc": "2026-06-23T18:50:58.287Z",
+  "issue_count": 0,
+  "warning_count": 0,
+  "resolved_findings": [
+    {
+      "finding_id": "R2-F01",
+      "severity": "critical",
+      "title": "Current selector does not consume the R1E unified index",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F02",
+      "severity": "critical",
+      "title": "Unknown or unresolved place can fall back to Varanasi",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F03",
+      "severity": "critical",
+      "title": "Boot path automatically computes Varanasi today",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F04",
+      "severity": "critical",
+      "title": "Calculation executes before approval-aware resolution",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F05",
+      "severity": "major",
+      "title": "Coordinate mode accepts direct browser calculation without governed approval",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F06",
+      "severity": "major",
+      "title": "Today action can substitute Asia/Kolkata for an invalid timezone",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F07",
+      "severity": "major",
+      "title": "Selector and result do not display full provenance",
+      "resolution_status": "corrected_and_validated"
+    },
+    {
+      "finding_id": "R2-F08",
+      "severity": "major",
+      "title": "Calculation-pending state is absent",
+      "resolution_status": "corrected_and_validated"
+    }
+  ],
+  "summary": {
+    "critical_findings_corrected": 4,
+    "major_findings_corrected": 4,
+    "browser_approved_location_records": 0,
+    "automatic_default_calculation_removed": true,
+    "alternate_place_fallback_removed": true,
+    "timezone_fallback_removed": true,
+    "approval_gate_precedes_calculation": true,
+    "calculation_pending_state_added": true,
+    "provenance_display_added": true,
+    "public_location_selector_activated": false,
+    "panchang_computation_activated": false,
+    "runtime_external_api_activated": false,
+    "supabase_activated": false,
+    "input_persistence_enabled": false,
+    "ready_for_ag74o_r3_planning": true
+  }
+}

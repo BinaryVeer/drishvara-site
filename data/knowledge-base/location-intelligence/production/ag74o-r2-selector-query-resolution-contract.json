@@ -1,0 +1,79 @@
+{
+  "module_id": "AG74O-R2",
+  "title": "Selector Query and Exact Resolution Contract",
+  "status": "ag74o_r2_selector_query_resolution_contract_created",
+  "generated_at_utc": "2026-06-23T18:50:58.287Z",
+  "contract_id": "AG74O-R2-selector-calculation-correction",
+  "default_ui_state": {
+    "place_label": "Varanasi / Banaras",
+    "timezone_label": "Asia/Kolkata",
+    "date_basis": "today_in_ui_state_timezone",
+    "automatic_record_substitution_allowed": false,
+    "automatic_calculation_allowed": false
+  },
+  "selector_resolution_order": [
+    "Normalize input without approving it",
+    "Search R1E browser-safe governed projection",
+    "Reject ambiguous search-label matches",
+    "Require exact canonical record match",
+    "Require public-selection approval for selector result exposure",
+    "Return governed unavailable when no exact approved public record exists"
+  ],
+  "calculation_gate": [
+    "Exact canonical-place record resolved",
+    "Coordinate basis approved",
+    "Timezone basis approved",
+    "Computation approval explicitly granted",
+    "Selected date within supported range",
+    "No unresolved conflict blocks the record"
+  ],
+  "result_states": [
+    "ui_state_only",
+    "loading",
+    "governed_unavailable",
+    "calculation_pending",
+    "calculated",
+    "invalid_input"
+  ],
+  "coordinate_mode": {
+    "worldwide_range_validation_required": true,
+    "manual_iana_timezone_validation_required": true,
+    "automatic_timezone_substitution_allowed": false,
+    "automatic_computation_allowed": false,
+    "unapproved_valid_request_state": "calculation_pending"
+  },
+  "provenance_fields": [
+    "canonical record identifier",
+    "display label",
+    "location source basis",
+    "coordinate source and verification status",
+    "timezone source and verification status",
+    "public-selection approval status",
+    "computation approval status",
+    "unresolved-review references"
+  ],
+  "forbidden_behaviour": [
+    "Fallback to Varanasi or any alternate place after failed resolution",
+    "Fallback to Asia/Kolkata after failed timezone validation",
+    "Automatic calculation on page boot",
+    "Public exposure of candidate-only records as approved selector options",
+    "Automatic ambiguous alias resolution",
+    "Runtime external geocoding or timezone API",
+    "Supabase or persistent input storage"
+  ],
+  "current_browser_projection_record_count": 0,
+  "exact_resolution_outcomes": {
+    "exact_fully_approved_record": "approved_for_calculation_gate",
+    "exact_candidate_or_unapproved_ui_state": "calculation_pending",
+    "unknown_named_place_or_alias": "governed_unavailable",
+    "ambiguous_alias": "governed_unavailable",
+    "invalid_coordinate_or_timezone_input": "invalid_input",
+    "valid_unapproved_coordinate_request": "calculation_pending"
+  },
+  "governance": {
+    "fallback_to_default_place_allowed": false,
+    "fallback_to_default_timezone_allowed": false,
+    "ambiguous_alias_auto_resolution_allowed": false,
+    "candidate_only_public_option_allowed": false
+  }
+}
