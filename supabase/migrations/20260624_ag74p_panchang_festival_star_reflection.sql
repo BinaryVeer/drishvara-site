@@ -1,0 +1,32 @@
+-- AG74P final public release mirror schema
+-- No credentials or user personal data are contained in this migration.
+create extension if not exists pgcrypto;
+create table if not exists public.drishvara_panchang_locations (id text primary key,release_id text not null,selector_value text not null unique,display_label text not null,timezone text not null,latitude double precision not null,longitude double precision not null,search_labels jsonb not null default '[]'::jsonb,payload jsonb not null,content_hash text not null,created_at timestamptz not null default now());
+create table if not exists public.drishvara_panchang_daily_records (id text primary key,release_id text not null,canonical_place_id text not null,civil_date date not null,timezone text not null,payload jsonb not null,content_hash text not null,created_at timestamptz not null default now(),unique(canonical_place_id,civil_date));
+create table if not exists public.drishvara_festival_observances (id text primary key,release_id text not null,observance_key text not null,civil_date date not null,timezone text not null,payload jsonb not null,content_hash text not null,created_at timestamptz not null default now());
+create table if not exists public.drishvara_star_reflection_releases (id text primary key,release_id text not null,payload jsonb not null,content_hash text not null,created_at timestamptz not null default now());
+create table if not exists public.drishvara_release_manifests (release_id text primary key,status text not null,payload jsonb not null,content_hash text not null,created_at timestamptz not null default now(),activated_at timestamptz);
+create index if not exists idx_drishvara_daily_release on public.drishvara_panchang_daily_records(release_id);
+create index if not exists idx_drishvara_daily_date on public.drishvara_panchang_daily_records(civil_date);
+create index if not exists idx_drishvara_festival_release on public.drishvara_festival_observances(release_id);
+create index if not exists idx_drishvara_festival_date on public.drishvara_festival_observances(civil_date);
+alter table public.drishvara_panchang_locations enable row level security;
+alter table public.drishvara_panchang_daily_records enable row level security;
+alter table public.drishvara_festival_observances enable row level security;
+alter table public.drishvara_star_reflection_releases enable row level security;
+alter table public.drishvara_release_manifests enable row level security;
+drop policy if exists ag74p_locations_public_read on public.drishvara_panchang_locations;
+create policy ag74p_locations_public_read on public.drishvara_panchang_locations for select to anon,authenticated using (true);
+drop policy if exists ag74p_daily_public_read on public.drishvara_panchang_daily_records;
+create policy ag74p_daily_public_read on public.drishvara_panchang_daily_records for select to anon,authenticated using (true);
+drop policy if exists ag74p_festival_public_read on public.drishvara_festival_observances;
+create policy ag74p_festival_public_read on public.drishvara_festival_observances for select to anon,authenticated using (true);
+drop policy if exists ag74p_star_public_read on public.drishvara_star_reflection_releases;
+create policy ag74p_star_public_read on public.drishvara_star_reflection_releases for select to anon,authenticated using (true);
+drop policy if exists ag74p_manifest_public_read on public.drishvara_release_manifests;
+create policy ag74p_manifest_public_read on public.drishvara_release_manifests for select to anon,authenticated using (status='active');
+revoke insert,update,delete on public.drishvara_panchang_locations from anon,authenticated;
+revoke insert,update,delete on public.drishvara_panchang_daily_records from anon,authenticated;
+revoke insert,update,delete on public.drishvara_festival_observances from anon,authenticated;
+revoke insert,update,delete on public.drishvara_star_reflection_releases from anon,authenticated;
+revoke insert,update,delete on public.drishvara_release_manifests from anon,authenticated;

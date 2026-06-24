@@ -1,0 +1,101 @@
+{
+  "module_id": "AG74P",
+  "title": "Panchang Scientific and Public External Comparison Register",
+  "status": "ag74p_external_comparison_passed",
+  "generated_at_utc": "2026-06-24T17:19:53.880Z",
+  "release_id": "ag74p_final_2026_06_24",
+  "comparison_count": 6,
+  "passed_count": 6,
+  "failed_count": 0,
+  "scope_note": "Representative astronomical/date/name comparisons support the approved Varanasi annual data. They do not claim universal equivalence across every regional Panchang convention.",
+  "records": [
+    {
+      "comparison_id": "ag74p_new_moon_2026_03_19",
+      "comparison_type": "astronomical_phase_time",
+      "internal_utc": "2026-03-19T01:23:27.815Z",
+      "external_snapshot_utc": "2026-03-19T01:23:00.000Z",
+      "delta_seconds": 27.815,
+      "tolerance_seconds": 60,
+      "source": "Public 2026 Moon-phase calendar reporting New Moon at 01:23 UTC",
+      "source_url": "https://www.space.com/stargazing/full-moon-calendar",
+      "status": "pass"
+    },
+    {
+      "comparison_id": "ag74p_daily_2026-03-19",
+      "comparison_type": "external_panchang_name_comparison",
+      "date": "2026-03-19",
+      "internal": {
+        "tithi": "Amavasya",
+        "nakshatra": "Uttara Bhadrapada"
+      },
+      "external_snapshot": {
+        "tithi": "Amavasya",
+        "nakshatra": "Uttara Bhadrapada"
+      },
+      "tolerance": "name equality at sunrise/date-level public comparison",
+      "status": "pass",
+      "source": "Times of India Panchang, 19 March 2026",
+      "source_url": "https://timesofindia.indiatimes.com/astrology/panchang/panchang-today-march-19-2026-krishan-paksh-15-amavas-u-bhadrapada-shubh-muhurat-rahu-kaal-and-more/articleshow/129664370.cms"
+    },
+    {
+      "comparison_id": "ag74p_daily_2026-03-20",
+      "comparison_type": "external_panchang_name_comparison",
+      "date": "2026-03-20",
+      "internal": {
+        "tithi": "Shukla Dwitiya",
+        "nakshatra": "Revati"
+      },
+      "external_snapshot": {
+        "tithi": "Shukla Dwitiya",
+        "nakshatra": "Revati"
+      },
+      "tolerance": "name equality at sunrise/date-level public comparison",
+      "status": "pass",
+      "source": "Published daily Panchang comparison snapshot, 20 March 2026",
+      "source_url": "https://timesofindia.indiatimes.com/astrology/panchang/"
+    },
+    {
+      "comparison_id": "ag74p_daily_2026-06-19",
+      "comparison_type": "external_panchang_name_comparison",
+      "date": "2026-06-19",
+      "internal": {
+        "tithi": "Shukla Panchami",
+        "nakshatra": "Ashlesha"
+      },
+      "external_snapshot": {
+        "tithi": "Shukla Panchami",
+        "nakshatra": "Ashlesha"
+      },
+      "tolerance": "name equality at sunrise/date-level public comparison",
+      "status": "pass",
+      "source": "Times of India/Navbharat Times Panchang, 19 June 2026",
+      "source_url": "https://timesofindia.indiatimes.com/astrology/panchang/panchang-today-june-19-2026-shukla-paksh-5-panchami-ashlesha-shubh-muhurat-rahu-kaal-and-more/articleshow/131835627.cms"
+    },
+    {
+      "comparison_id": "ag74p_chaitra_navratri_boundary",
+      "comparison_type": "hindu_year_and_chaitra_start_date",
+      "internal_date": "2026-03-19",
+      "external_snapshot_date": "2026-03-19",
+      "source": "Economic Times and Navbharat Times Chaitra Navratri/Hindu New Year public date",
+      "source_url": "https://economictimes.indiatimes.com/news/new-updates/chaitra-navratri-2026-date-full-calendar-puja-details-day-wise-colours-and-rama-navami-2026-date/articleshow/129313623.cms",
+      "status": "pass"
+    },
+    {
+      "comparison_id": "ag74p_annual_structure",
+      "comparison_type": "internal_structural_cross_validation",
+      "internal": {
+        "civil_day_count": 384,
+        "daily_record_count": 384,
+        "page_count": 4,
+        "canonical_slot_count": 12
+      },
+      "expected": {
+        "civil_day_count": 384,
+        "daily_record_count": 384,
+        "page_count": 4,
+        "canonical_slot_count": 12
+      },
+      "status": "pass"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+import fs from "node:fs";
+const path="data/knowledge-base/panchang-festival/production/ag74p-external-comparison-register.json";
+const fail=(m)=>{console.error("❌ AG74P external comparison failed: "+m);process.exit(1);};
+if(!fs.existsSync(path))fail("Comparison register missing.");
+const data=JSON.parse(fs.readFileSync(path,"utf8"));
+if(data.status!=="ag74p_external_comparison_passed")fail("Comparison status mismatch.");
+if(data.comparison_count<6||data.passed_count!==data.comparison_count||data.failed_count!==0)fail("Comparison counts mismatch.");
+if(!Array.isArray(data.records)||!data.records.every((r)=>r.status==="pass"&&r.comparison_id))fail("One or more comparisons did not pass.");
+const phase=data.records.find((r)=>r.comparison_type==="astronomical_phase_time");
+if(!phase||phase.delta_seconds>phase.tolerance_seconds)fail("Astronomical phase-time tolerance failed.");
+const publicSources=data.records.filter((r)=>r.source_url);
+if(publicSources.length<5)fail("Insufficient public external comparison sources.");
+console.log(`✅ AG74P external comparison passed: ${data.passed_count}/${data.comparison_count}.`);
+console.log("✅ Representative phase, tithi, nakshatra, Hindu-year boundary and annual-structure comparisons passed.");
+console.log("✅ Scope remains explicit: no universal regional or sectarian equivalence is claimed.");

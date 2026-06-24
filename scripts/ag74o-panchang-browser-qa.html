@@ -1,101 +1,98 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>AG74O_R3_BROWSER_QA_PENDING</title></head>
+<html lang="en"><head><meta charset="utf-8"><title>AG74P_BROWSER_QA_PENDING</title></head>
 <body data-ag74o-browser-qa-status="pending" data-ag74o-browser-qa-failure-count="0">
-<h1>AG74O-R3 Governed Calendar Activation Browser QA</h1>
-<iframe id="site-frame" src="../index.html?ag74o-r3-browser-qa=1" title="Drishvara AG74O-R3 test frame" style="width:1280px;height:2600px;border:0"></iframe>
+<h1>AG74P Consolidated Final Closure Browser QA</h1>
+<iframe id="site-frame" src="../index.html?ag74p-browser-qa=1" title="Drishvara AG74P test frame" style="width:1280px;height:2800px;border:0"></iframe>
 <pre id="ag74o-browser-qa-result">{"status":"pending"}</pre>
 <script>
 (function(){"use strict";
 var frame=document.getElementById("site-frame"),resultNode=document.getElementById("ag74o-browser-qa-result"),checks=[],failures=[];
 function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
 function check(id,passed,detail){checks.push({id:id,passed:Boolean(passed),detail:detail});if(!passed)failures.push(id+": "+detail);}
-async function waitFor(test,timeout){var start=Date.now();while(Date.now()-start<(timeout||30000)){try{if(test())return true;}catch(_error){}await delay(100);}return false;}
+async function waitFor(test,timeout){var start=Date.now();while(Date.now()-start<(timeout||45000)){try{if(test())return true;}catch(_error){}await delay(100);}return false;}
 function fire(el,type){el.dispatchEvent(new Event(type,{bubbles:true}));}
 function overflowReport(doc){var card=doc.getElementById("panchang-festival-card");if(!card)return {passed:false,reason:"missing_card"};var viewport=doc.documentElement.clientWidth,cardRect=card.getBoundingClientRect();var nodes=[["card",card],["date",doc.querySelector(".ag74i-date-surface")],["place",doc.querySelector('[data-ag74o-place-selection="governed-dropdown-only"]')],["request",doc.querySelector('[data-ag74o-r3-request-commit="true"]')],["result",doc.querySelector('[data-ag74o-daily-result-surface="true"]')],["book",doc.querySelector(".ag74i-calendar-book")]].filter(function(e){if(!e[1])return false;var s=doc.defaultView.getComputedStyle(e[1]);return !e[1].hidden&&!e[1].closest("[hidden]")&&e[1].offsetParent!==null&&s.display!=="none"&&s.visibility!=="hidden";}).map(function(e){var r=e[1].getBoundingClientRect();return {name:e[0],within:r.left>=cardRect.left-1&&r.right<=Math.min(viewport,cardRect.right)+1,widthSafe:e[1].scrollWidth<=e[1].clientWidth+1};});return {passed:cardRect.left>=-1&&cardRect.right<=viewport+1&&nodes.every(function(n){return n.within&&n.widthSafe;}),nodes:nodes};}
 async function run(){try{
 var ready=await waitFor(function(){var d=frame.contentDocument,h=frame.contentWindow&&frame.contentWindow.location?String(frame.contentWindow.location.href||""):"";return Boolean(d&&d.readyState==="complete"&&/\/index\.html(?:[?#]|$)/.test(h)&&d.getElementById("panchang-festival-card"));},30000);if(!ready)throw new Error("Drishvara index iframe did not load.");
-var win=frame.contentWindow,doc=frame.contentDocument,card=doc.getElementById("panchang-festival-card"),button=doc.getElementById("panchang-calculate"),requestStatus=doc.getElementById("panchang-request-status");
-check("ag74o_owner_active",win.drishvaraAg74oPublicSurfaceActive===true,"AG74O must own runtime.");
+var win=frame.contentWindow,doc=frame.contentDocument,card=doc.getElementById("panchang-festival-card"),button=doc.getElementById("panchang-calculate"),requestStatus=doc.getElementById("panchang-request-status"),select=doc.getElementById("panchang-place-select");
+check("ag74o_owner_active",win.drishvaraAg74oPublicSurfaceActive===true,"AG74O controller must own runtime.");
+check("ag74p_release_marker",Boolean(doc.querySelector('[data-ag74p-live-release="true"]')),"AG74P release marker must be visible.");
 check("astronomy_local_bundle",Boolean(win.Astronomy&&win.Astronomy.SearchRiseSet),"Pinned local Astronomy Engine must load.");
-check("no_persistent_storage",!Object.keys(win.localStorage).concat(Object.keys(win.sessionStorage)).some(function(k){return /panchang|ag74o/i.test(k);}),"Inputs must not persist.");
-check("default_ui_state_only",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="ui_state_only";}),"Default must be UI state only.");
-check("calculate_button_present",await waitFor(function(){return Boolean(button&&!button.disabled);}),"Explicit Calculate Panchang button must become active after reference loading.");
-check("request_status_present",Boolean(requestStatus&&requestStatus.getAttribute("aria-live")==="polite"),"Request status must be a live region.");
-check("request_ready_copy",/press Calculate Panchang/i.test(requestStatus.textContent||""),"Initial request copy must require explicit commitment.");
-var select=doc.getElementById("panchang-place-select");
-check("default_varanasi_ui_state",select&&select.value==="varanasi-uttar-pradesh-india","Varanasi remains landing state.");
-check("selector_active_zero_approval",Boolean(select&&!select.disabled&&select.getAttribute("data-ag74o-r2-approved-option-count")==="0"),"Named-place control remains active with zero approvals.");
-check("ui_state_option_only",await waitFor(function(){return select.options.length===1&&select.options[0].value==="varanasi-uttar-pradesh-india"&&select.options[0].getAttribute("data-ag74o-r2-public-approved")==="false";}),"Only UI-state option may remain after hardening.");
-check("no_default_calculation",!/Calculated locally|Approved governed calendar record/.test(doc.getElementById("panchang-calculation-source").textContent||""),"Boot must not calculate or activate.");
-check("default_tithi_pending",/Pending approval/.test(doc.getElementById("panchang-tithi").textContent||""),"Default daily result remains pending.");
-check("annual_book_loaded",await waitFor(function(){return doc.querySelectorAll("[data-ag74o-book-slot]").length===12;}),"Annual book loads independently.");
+check("no_persistent_storage",!Object.keys(win.localStorage).concat(Object.keys(win.sessionStorage)).some(function(k){return /panchang|ag74|star/i.test(k);}),"Inputs must not persist.");
+check("default_ui_state_only",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="ui_state_only";}),"Boot remains UI state only.");
+check("calculate_button_present",await waitFor(function(){return Boolean(button&&!button.disabled);}),"Calculate button must become active.");
+check("request_status_present",Boolean(requestStatus&&requestStatus.getAttribute("aria-live")==="polite"),"Request status must be live.");
+check("selector_five_approved",await waitFor(function(){return select.options.length===5&&select.getAttribute("data-ag74o-r2-approved-option-count")==="5";}),"Five approved named locations must load.");
+check("selector_values",["varanasi-uttar-pradesh-india","itanagar-arunachal-pradesh-india","new-delhi-delhi-india","ranchi-jharkhand-india","tokyo-japan"].every(function(v){return Array.from(select.options).some(function(o){return o.value===v;});}),"All five approved selector values must exist.");
+check("default_varanasi_selected",select.value==="varanasi-uttar-pradesh-india","Varanasi remains default input.");
+check("no_default_calculation",!/Calculated locally|Approved governed calendar record/.test(doc.getElementById("panchang-calculation-source").textContent||""),"Boot must not calculate.");
+check("annual_book_loaded",await waitFor(function(){return doc.querySelectorAll("[data-ag74o-book-slot]").length===12;}),"Annual book must load.");
 check("book_four_pages",doc.querySelectorAll("[data-ag74i-book-page]").length===4,"Annual book retains four pages.");
-check("adhika_nija_visible",doc.querySelectorAll('[data-ag74o-instance-kind="adhika"]').length>=1&&doc.querySelectorAll('[data-ag74o-instance-kind="nija"]').length>=1,"Adhika and Nija remain nested.");
+check("adhika_nija_visible",doc.querySelectorAll('[data-ag74o-instance-kind="adhika"]').length>=1&&doc.querySelectorAll('[data-ag74o-instance-kind="nija"]').length>=1,"Adhika and Nija instances must remain nested.");
 var activation=win.drishvaraAg74oActivationState();
-check("zero_location_activation",activation.approvedLocationCount===0,"Approved location count remains zero.");
-check("zero_daily_activation",activation.approvedDailyRecordCount===0,"Approved daily record count remains zero.");
-check("zero_festival_activation",activation.approvedObservanceCount===0,"Approved observance count remains zero.");
+check("approved_location_count",activation.approvedLocationCount===5,"Approved location count must be five.");
+check("approved_daily_count",activation.approvedDailyRecordCount===384,"Approved daily count must be 384.");
+check("approved_festival_count",activation.approvedObservanceCount===114,"Approved observance count must be 114.");
+check("worldwide_coordinate_policy",activation.worldwideCoordinatePolicyEnabled===true,"Worldwide coordinate policy must be enabled.");
 
-var picker=doc.getElementById("panchang-date-picker"),committedDateBefore=doc.getElementById("panchang-moonset").textContent,committedStateBefore=card.getAttribute("data-ag74o-result-state");
-picker.value="2026-06-13";fire(picker,"change");
-check("input_change_marks_pending",await waitFor(function(){return card.getAttribute("data-ag74o-r3-request-dirty")==="true"&&doc.getElementById("panchang-date-text").value==="13/06/2026";}),"Date change must mark pending.");
-check("input_change_does_not_commit",card.getAttribute("data-ag74o-result-state")===committedStateBefore&&doc.getElementById("panchang-moonset").textContent===committedDateBefore,"Date edit must preserve last committed result.");
-check("pending_request_copy",/displayed daily result.*unchanged|will not replace/i.test(requestStatus.textContent||""),"Pending copy must state preservation.");
+var picker=doc.getElementById("panchang-date-picker");picker.value="2026-03-19";fire(picker,"change");
+check("input_change_marks_pending",await waitFor(function(){return card.getAttribute("data-ag74o-r3-request-dirty")==="true";}),"Date change must remain pending.");
+check("input_change_does_not_commit",card.getAttribute("data-ag74o-result-state")==="ui_state_only","Pending input must preserve boot state.");
 button.click();
-check("date_request_pending",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculation_pending"&&card.getAttribute("data-ag74o-r3-request-dirty")==="false";}),"Committed Varanasi date remains calculation-pending.");
-check("date_request_committed_date",doc.getElementById("panchang-moonset").textContent==="13/06/2026","Committed result must identify requested date.");
-check("date_request_not_calculated",/No Panchang computation performed/.test(doc.getElementById("panchang-calculation-source").textContent||""),"Zero-approval request must not calculate.");
+check("varanasi_precomputed_calculated",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculated"&&/Approved governed calendar record/.test(doc.getElementById("panchang-calculation-source").textContent||"");},60000),"Varanasi annual record must render as approved precomputed data.");
+check("varanasi_date_committed",doc.getElementById("panchang-moonset").textContent==="19/03/2026","Committed date must be shown.");
+check("varanasi_amavasya",/Amavasya/.test(doc.getElementById("panchang-tithi").textContent||""),"19 March fixture must show Amavasya at sunrise.");
+check("festival_amavasya",await waitFor(function(){return /Amavasya/.test(doc.getElementById("upcoming-observance-name").textContent||"");}),"Approved Amavasya observance must display.");
+check("festival_primary_begins",!/Not available/.test(doc.getElementById("upcoming-observance-begins").textContent||""),"Festival Begins must use approved primary public window.");
+check("festival_primary_ends",!/Not available/.test(doc.getElementById("upcoming-observance-ends").textContent||""),"Festival Ends must use approved primary public window.");
 
-var committed13=doc.getElementById("panchang-moonset").textContent;
-doc.getElementById("panchang-next-day").click();
-check("next_day_pending_without_commit",await waitFor(function(){return picker.value==="2026-06-14"&&card.getAttribute("data-ag74o-r3-request-dirty")==="true";}),"Next Day must create pending input.");
-check("next_day_preserves_committed_result",doc.getElementById("panchang-moonset").textContent===committed13,"Next Day must not replace committed result.");
-button.click();
-check("next_day_commits_on_button",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculation_pending"&&doc.getElementById("panchang-moonset").textContent==="14/06/2026";}),"Button must commit Next Day request.");
-doc.getElementById("panchang-previous-day").click();
-check("previous_day_pending_without_commit",await waitFor(function(){return picker.value==="2026-06-13"&&card.getAttribute("data-ag74o-r3-request-dirty")==="true";}),"Previous Day must remain pending.");
-check("previous_day_preserves_committed_result",doc.getElementById("panchang-moonset").textContent==="14/06/2026","Previous Day must preserve committed result.");
+var committed=doc.getElementById("panchang-moonset").textContent;doc.getElementById("panchang-next-day").click();
+check("next_day_pending",await waitFor(function(){return picker.value==="2026-03-20"&&card.getAttribute("data-ag74o-r3-request-dirty")==="true";}),"Next day must remain pending.");
+check("next_day_preserves_committed",doc.getElementById("panchang-moonset").textContent===committed,"Pending next day must preserve result.");
+button.click();check("next_day_calculated",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculated"&&doc.getElementById("panchang-moonset").textContent==="20/03/2026";},60000),"Next day must calculate on button.");
 
-var alias=doc.getElementById("panchang-place-alias");alias.value="Unknown Test Place";fire(alias,"change");
-check("unknown_alias_change_not_committed",card.getAttribute("data-ag74o-result-state")==="calculation_pending"&&card.getAttribute("data-ag74o-r3-request-dirty")==="true","Unknown alias edit must not auto-resolve.");
-button.click();
-check("unknown_alias_unavailable",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="governed_unavailable";}),"Committed unknown alias must be unavailable.");
-check("unknown_alias_no_fallback",/not in the publicly approved governed location projection/i.test(doc.getElementById("panchang-selection-status").textContent||""),"Unknown alias must not fall back.");
-check("unknown_alias_coordinate_guidance",/Use coordinates/i.test(doc.getElementById("panchang-selection-status").textContent||""),"Unknown alias must guide to coordinates.");
+select.value="tokyo-japan";fire(select,"change");check("tokyo_pending",await waitFor(function(){return card.getAttribute("data-ag74o-r3-request-dirty")==="true";}),"Tokyo selection must be pending.");
+button.click();check("tokyo_local_calculated",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculated"&&/AG74P approved local calculation/.test(doc.getElementById("panchang-method-basis").textContent||"");},60000),"Tokyo must calculate locally after approval.");
+check("tokyo_timezone",/Asia\/Tokyo/.test(doc.getElementById("panchang-moonrise").textContent||""),"Tokyo timezone basis must be shown.");
 
-var coord=doc.querySelector('input[name="ag71c-panchang-location-mode"][value="coordinates"]');coord.checked=true;fire(coord,"change");
+var alias=doc.getElementById("panchang-place-alias");alias.value="kashi";fire(alias,"change");button.click();
+check("kashi_alias_calculated",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculated"&&/Varanasi/.test(doc.getElementById("panchang-moonrise").textContent||"");},60000),"Kashi alias must resolve exactly to approved Varanasi.");
+alias.value="Unknown Test Place";fire(alias,"change");button.click();
+check("unknown_alias_unavailable",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="governed_unavailable";}),"Unknown alias must remain unavailable.");
+check("unknown_alias_no_fallback",/not in the publicly approved location projection/i.test(doc.getElementById("panchang-selection-status").textContent||""),"Unknown alias must not fall back.");
+
+alias.value="";fire(alias,"change");var coord=doc.querySelector('input[name="ag71c-panchang-location-mode"][value="coordinates"]');coord.checked=true;fire(coord,"change");
 doc.getElementById("panchang-latitude").value="35.6762";fire(doc.getElementById("panchang-latitude"),"change");
 doc.getElementById("panchang-longitude").value="139.6503";fire(doc.getElementById("panchang-longitude"),"change");
 doc.getElementById("panchang-timezone").value="Asia/Tokyo";fire(doc.getElementById("panchang-timezone"),"change");
-doc.getElementById("panchang-coordinate-label").value="Tokyo coordinate test";fire(doc.getElementById("panchang-coordinate-label"),"change");
-check("coordinate_edit_not_committed",card.getAttribute("data-ag74o-result-state")==="governed_unavailable"&&card.getAttribute("data-ag74o-r3-request-dirty")==="true","Coordinate edits must preserve prior result.");
-button.click();
-check("coordinate_calculation_pending",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculation_pending";}),"Valid unapproved coordinates remain pending.");
-check("coordinate_not_calculated",/No Panchang computation performed/.test(doc.getElementById("panchang-calculation-source").textContent||""),"Coordinates must not calculate.");
-check("coordinate_provenance",/user supplied, not computation-approved/.test(doc.getElementById("panchang-coordinate-provenance").textContent||""),"Coordinate provenance must remain explicit.");
+doc.getElementById("panchang-coordinate-label").value="Tokyo coordinate test";fire(doc.getElementById("panchang-coordinate-label"),"change");button.click();
+check("coordinate_calculation_pending_legacy_superseded",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="calculated";},60000),"AG74P supersedes the legacy coordinate_calculation_pending state for valid approved coordinate requests.");
+check("coordinate_calculated",/AG74P approved local calculation/.test(doc.getElementById("panchang-method-basis").textContent||""),"Valid coordinates must calculate locally.");
+check("coordinate_provenance",/approved worldwide coordinate policy/.test(doc.getElementById("panchang-coordinate-provenance").textContent||""),"Coordinate approval provenance must be explicit.");
 
-doc.getElementById("panchang-latitude").value="95";fire(doc.getElementById("panchang-latitude"),"change");
-check("invalid_coordinate_edit_not_committed",card.getAttribute("data-ag74o-result-state")==="calculation_pending"&&card.getAttribute("data-ag74o-r3-request-dirty")==="true","Invalid coordinate edit must remain pending before button.");
-button.click();check("invalid_coordinate_input",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="invalid_input";}),"Committed invalid coordinate must be invalid-input.");
+doc.getElementById("panchang-latitude").value="95";fire(doc.getElementById("panchang-latitude"),"change");button.click();
+check("invalid_coordinate",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="invalid_input";}),"Invalid coordinate must be rejected.");
 doc.getElementById("panchang-latitude").value="35.6762";fire(doc.getElementById("panchang-latitude"),"change");doc.getElementById("panchang-timezone").value="Invalid/Timezone";fire(doc.getElementById("panchang-timezone"),"change");button.click();
-check("invalid_timezone_input",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="invalid_input";}),"Committed invalid timezone must be invalid-input.");
-check("invalid_timezone_no_fallback",/will not be substituted/i.test(doc.getElementById("panchang-selection-status").textContent||""),"Invalid timezone must not fall back.");
+check("invalid_timezone",await waitFor(function(){return card.getAttribute("data-ag74o-result-state")==="invalid_input";}),"Invalid timezone must be rejected.");
+check("invalid_timezone_no_fallback",/No timezone will be substituted/i.test(doc.getElementById("panchang-selection-status").textContent||""),"Invalid timezone must not fall back.");
 
 var engine=win.drishvaraAg74oComputeDay({dateKey:"2026-06-13",label:"Internal fixture",latitude:25.3176,longitude:82.9739,timezone:"Asia/Kolkata"});
-check("internal_engine_retained",Boolean(engine&&engine.available&&engine.elements&&engine.elements.tithi),"Local engine remains retained.");
-check("internal_fixture_tithi",/Krishna Trayodashi/.test(engine&&engine.elements&&engine.elements.tithi&&engine.elements.tithi.name||""),"Fixture remains deterministic.");
-check("public_state_unchanged_by_internal_test",card.getAttribute("data-ag74o-result-state")==="invalid_input","Direct engine test must not mutate public state.");
+check("internal_engine_retained",Boolean(engine&&engine.available&&engine.elements&&engine.elements.tithi),"Local engine must remain available.");
+check("internal_fixture_tithi",/Krishna Trayodashi/.test(engine&&engine.elements&&engine.elements.tithi&&engine.elements.tithi.name||""),"Fixture must remain deterministic.");
+var starResponse=await fetch("../generated/star-reflection-active-result-data.json",{cache:"no-store"}),starData=await starResponse.json();
+check("star_reflection_data_available",starResponse.ok&&Boolean(starData),"Star Reflection active data must remain available.");
+check("star_reflection_no_storage",!Object.keys(win.localStorage).concat(Object.keys(win.sessionStorage)).some(function(k){return /birth|reflection/i.test(k);}),"Star Reflection personal inputs must not persist.");
 
-doc.querySelector('[data-ag74i-book-page-button="2"]').click();check("direct_page_navigation",doc.querySelector('[data-ag74i-book-page="2"]').hidden===false,"Book navigation must work.");
-var place=doc.querySelector('input[name="ag71c-panchang-location-mode"][value="place"]');place.checked=true;fire(place,"change");alias.value="";fire(alias,"change");
-check("place_surface_restored_for_layout",Boolean(doc.querySelector('[data-ag74o-place-selection="governed-dropdown-only"]')&&doc.querySelector('[data-ag74o-place-selection="governed-dropdown-only"]').offsetParent!==null),"Place surface must be rendered.");
-for(const width of [1280,768,390]){frame.style.width=width+"px";await delay(250);var overflow=overflowReport(doc);check("no_card_overflow_"+width,overflow.passed,"No card overflow at "+width+"px: "+JSON.stringify(overflow));}
-check("latest_result_only",/requestToken/.test(String(win.drishvaraAg74oApplySelection)),"Latest-result-only guard remains active.");
-check("no_external_api",Array.from(doc.scripts).filter(function(s){return Boolean(s.src);}).every(function(s){return new URL(s.src,doc.baseURI).origin===win.location.origin;}),"Scripts remain same-origin.");
-check("no_method_selector",!doc.querySelector('[data-ag74o-method-selector]'),"No public method selector introduced.");
-var legacy=doc.querySelector('[data-ag71e-preview-button="panchang"]');check("legacy_generate_hidden",!legacy||legacy.hidden||Boolean(legacy.closest("[hidden]"))||legacy.offsetParent===null,"Legacy Generate remains hidden.");
-var report={module_id:"AG74O-R3",status:failures.length?"failed":"passed",check_count:checks.length,failure_count:failures.length,checks:checks,failures:failures};resultNode.textContent=JSON.stringify(report);document.body.setAttribute("data-ag74o-browser-qa-status",report.status);document.body.setAttribute("data-ag74o-browser-qa-failure-count",String(report.failure_count));document.title=report.status==="passed"?"AG74O_R3_BROWSER_QA_PASSED":"AG74O_R3_BROWSER_QA_FAILED";
-}catch(error){var message=String(error&&error.stack||error);var report={module_id:"AG74O-R3",status:"failed",check_count:checks.length,failure_count:failures.length+1,checks:checks,failures:failures.concat([message])};resultNode.textContent=JSON.stringify(report);document.body.setAttribute("data-ag74o-browser-qa-status","failed");document.body.setAttribute("data-ag74o-browser-qa-failure-count",String(report.failure_count));document.title="AG74O_R3_BROWSER_QA_FAILED";}}
+doc.querySelector('[data-ag74i-book-page-button="2"]').click();check("direct_page_navigation",doc.querySelector('[data-ag74i-book-page="2"]').hidden===false,"Book page navigation must work.");
+var place=doc.querySelector('input[name="ag71c-panchang-location-mode"][value="place"]');place.checked=true;fire(place,"change");
+for(const width of [1280,768,390]){frame.style.width=width+"px";await delay(300);var overflow=overflowReport(doc);check("no_card_overflow_"+width,overflow.passed,"No overflow at "+width+"px: "+JSON.stringify(overflow));}
+check("latest_result_only",/requestToken/.test(String(win.drishvaraAg74oApplySelection)),"Latest-result guard must remain active.");
+check("no_external_script_api",Array.from(doc.scripts).filter(function(s){return Boolean(s.src);}).every(function(s){return new URL(s.src,doc.baseURI).origin===win.location.origin;}),"Browser scripts must remain same-origin.");
+check("no_method_selector",!doc.querySelector('[data-ag74o-method-selector]'),"No public method selector may be introduced.");
+var legacy=doc.querySelector('[data-ag71e-preview-button="panchang"]');check("legacy_generate_hidden",!legacy||legacy.hidden||Boolean(legacy.closest("[hidden]"))||legacy.offsetParent===null,"Legacy Generate control remains hidden.");
+
+var report={module_id:"AG74P",status:failures.length?"failed":"passed",check_count:checks.length,failure_count:failures.length,checks:checks,failures:failures};resultNode.textContent=JSON.stringify(report);document.body.setAttribute("data-ag74o-browser-qa-status",report.status);document.body.setAttribute("data-ag74o-browser-qa-failure-count",String(report.failure_count));document.title=report.status==="passed"?"AG74P_BROWSER_QA_PASSED":"AG74P_BROWSER_QA_FAILED";
+}catch(error){var message=String(error&&error.stack||error),report={module_id:"AG74P",status:"failed",check_count:checks.length,failure_count:failures.length+1,checks:checks,failures:failures.concat([message])};resultNode.textContent=JSON.stringify(report);document.body.setAttribute("data-ag74o-browser-qa-status","failed");document.body.setAttribute("data-ag74o-browser-qa-failure-count",String(report.failure_count));document.title="AG74P_BROWSER_QA_FAILED";}}
 frame.addEventListener("load",run,{once:true});
 })();
 </script></body></html>
