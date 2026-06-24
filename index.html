@@ -5196,6 +5196,46 @@ window.drishvaraAg74iPublicSurfaceActive = true;
 }
 /* AG74O_R2_SELECTOR_CALCULATION_STYLE_END */
 </style>
+
+<style data-ag74o-r3-calendar-activation-style="true">
+/* AG74O_R3_CALENDAR_ACTIVATION_STYLE_START */
+.ag74o-r3-request-actions{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:8px;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
+  margin:12px 0;
+}
+.ag74o-r3-calculate-button{
+  width:100%;
+  max-width:100%;
+  min-height:46px;
+  box-sizing:border-box;
+  border:1px solid rgba(211,169,72,.55);
+  border-radius:12px;
+  padding:11px 16px;
+  font:700 .96rem/1.2 Arial,sans-serif;
+  background:linear-gradient(135deg,rgba(211,169,72,.95),rgba(172,118,29,.95));
+  color:#071329;
+  cursor:pointer;
+}
+.ag74o-r3-calculate-button:disabled{opacity:.62;cursor:wait;}
+.ag74o-r3-request-status{
+  min-width:0;
+  max-width:100%;
+  margin:0;
+  font:400 .88rem/1.45 Arial,sans-serif;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+#panchang-festival-card[data-ag74o-r3-request-dirty="true"] .ag74o-r3-request-status{
+  font-weight:700;
+}
+/* AG74O_R3_CALENDAR_ACTIVATION_STYLE_END */
+</style>
 </head>
 <body>
 
@@ -5710,7 +5750,12 @@ Enhancing Public Healthcare Delivery through Digital Innovation
             </div>
 
             <p class="ag74i-date-help" id="panchang-date-help">Supported dates: 01/01/1900 to 31/12/2100. The text field and native date picker stay synchronized. Times use the selected IANA timezone.</p>
-            <p class="ag74i-selection-status" id="panchang-selection-status" role="status" aria-live="polite" tabindex="-1">Preparing the Varanasi date basis…</p>
+            
+<div class="ag74o-r3-request-actions" data-ag74o-r3-request-commit="true">
+  <button id="panchang-calculate" type="button" class="ag74o-r3-calculate-button" aria-describedby="panchang-request-status panchang-selection-status">Calculate Panchang</button>
+  <p id="panchang-request-status" class="ag74o-r3-request-status" data-ag74o-r3-request-state="ready" aria-live="polite">Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.</p>
+</div>
+<p class="ag74i-selection-status" id="panchang-selection-status" role="status" aria-live="polite" tabindex="-1">Preparing the Varanasi date basis…</p>
 <div class="ag74o-r2-provenance" data-ag74o-r2-provenance="true" aria-label="Location and approval provenance">
   <p><strong>Location basis:</strong> <span id="panchang-location-provenance">Varanasi / Banaras · landing UI state only</span></p>
   <p><strong>Coordinate basis:</strong> <span id="panchang-coordinate-provenance">No approved coordinate basis</span></p>

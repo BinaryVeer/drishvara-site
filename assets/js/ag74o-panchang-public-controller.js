@@ -22,6 +22,8 @@
   var FESTIVAL_PATH = "data/knowledge-base/panchang-festival/production/ag74n-festival-observance-candidate-bank-samvat-2083.json";
 
   var APPROVED_LOCATION_PATH = "data/knowledge-base/location-intelligence/production/ag74o-r2-browser-approved-location-projection.json";
+  var CALENDAR_ACTIVATION_PATH = "data/knowledge-base/panchang-festival/production/ag74o-r3-calendar-activation-projection.json";
+  var FESTIVAL_ACTIVATION_PATH = "data/knowledge-base/panchang-festival/production/ag74o-r3-festival-observance-activation-projection.json";
   var DEFAULT_UI_STATE = {
     value:"varanasi-uttar-pradesh-india",
     canonicalId:null,
@@ -65,7 +67,9 @@
     requestToken:0,
     activeAbort:null,
     referenceData:null,
-    selectedPlaceValue:"varanasi-uttar-pradesh-india"
+    selectedPlaceValue:"varanasi-uttar-pradesh-india",
+    pendingInputDirty:false,
+    lastCommittedRequest:null
   };
 
   function byId(id) { return document.getElementById(id); }
@@ -233,6 +237,11 @@
   function setBusy(busy) {
     card.setAttribute("aria-busy",busy?"true":"false");
     card.setAttribute("data-ag74o-loading",busy?"true":"false");
+    var button=byId("panchang-calculate");
+    if(button){
+      button.disabled=Boolean(busy);
+      button.setAttribute("aria-busy",busy?"true":"false");
+    }
   }
 
   function setResultState(name) {
@@ -242,7 +251,10 @@
   }
 
   function renderObservance(bank, dateKey) {
-    var item=bank&&Array.isArray(bank.candidates)?bank.candidates.find(function(candidate){return candidate.civil_date_candidate===dateKey&&candidate.final_observance_date_approved===true&&candidate.public_output_allowed===true;}):null;
+    var records=bank&&Array.isArray(bank.records)?bank.records:[];
+    var item=records.find(function(record){
+      return record.civil_date===dateKey&&record.final_observance_date_approved===true&&record.public_output_allowed===true;
+    })||null;
     if(!item){
       setText("upcoming-observance-name","No source-reviewed public observance is approved for this date.");
       setText("upcoming-observance-note","Internal condition candidates are not displayed as festival dates. Public and ritual windows remain unavailable until rule review is complete.");
@@ -252,10 +264,10 @@
       return;
     }
     setText("upcoming-observance-name",item.display_name);
-    setText("upcoming-observance-note","Source-reviewed public observance");
+    setText("upcoming-observance-note","Source-reviewed public observance · "+(item.location_basis&&item.location_basis.display_label||"Approved location basis"));
     setText("upcoming-observance-begins",item.primary_public_window&&item.primary_public_window.start_local||"Not available");
     setText("upcoming-observance-ends",item.primary_public_window&&item.primary_public_window.end_local||"Not available");
-    setText("upcoming-observance-ritual-window",item.ritual_window?JSON.stringify(item.ritual_window):"Not available");
+    setText("upcoming-observance-ritual-window",Array.isArray(item.ritual_windows)&&item.ritual_windows.length?JSON.stringify(item.ritual_windows):"Not available");
   }
 
   function setProvenance(request, decision) {
@@ -329,6 +341,43 @@
     var safe=Math.max(1,Math.min(4,Number(page)||1));state.bookPage=safe;
     document.querySelectorAll("[data-ag74i-book-page]").forEach(function(panel){panel.hidden=Number(panel.getAttribute("data-ag74i-book-page"))!==safe;});
     document.querySelectorAll("[data-ag74i-book-page-button]").forEach(function(button){if(Number(button.getAttribute("data-ag74i-book-page-button"))===safe)button.setAttribute("aria-current","page");else button.removeAttribute("aria-current");});
+  }
+
+  function setRequestStatus(message, stateName) {
+    setText("panchang-request-status",message);
+    var node=byId("panchang-request-status");
+    if(node)node.setAttribute("data-ag74o-r3-request-state",stateName||"ready");
+    card.setAttribute("data-ag74o-r3-request-state",stateName||"ready");
+  }
+
+  function refreshPendingBook() {
+    if(state.referenceData&&state.referenceData.calendar){
+      renderBook(state.referenceData.calendar,state.dateKey);
+    }
+  }
+
+  function markRequestPending(message) {
+    state.requestToken+=1;
+    if(state.activeAbort)state.activeAbort.abort();
+    state.activeAbort=null;
+    setBusy(false);
+    state.pendingInputDirty=true;
+    card.setAttribute("data-ag74o-r3-request-dirty","true");
+    setRequestStatus(message||"Inputs changed. Press Calculate Panchang to commit this request; the displayed daily result has not been replaced.","input_pending");
+    refreshPendingBook();
+  }
+
+  function settleCommittedRequest(request, resultState) {
+    state.pendingInputDirty=false;
+    state.lastCommittedRequest={
+      mode:request.mode,
+      dateKey:request.dateKey,
+      value:request.value||null,
+      label:request.label||null,
+      timezone:request.timezone||null
+    };
+    card.setAttribute("data-ag74o-r3-request-dirty","false");
+    setRequestStatus("Committed request resolved as "+resultState+" for "+isoToDisplay(request.dateKey)+". Further input changes will remain pending until Calculate Panchang is pressed again.","committed");
   }
 
   function renderBook(calendar, dateKey) {
@@ -466,11 +515,15 @@
     if(state.referenceData)return Promise.resolve(state.referenceData);
     return Promise.all([
       fetch(ANNUAL_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Annual book unavailable");return response.json();}),
-      fetch(FESTIVAL_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Festival guard bank unavailable");return response.json();}),
-      fetch(APPROVED_LOCATION_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Governed approved-location projection unavailable");return response.json();})
+      fetch(FESTIVAL_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Festival source bank unavailable");return response.json();}),
+      fetch(APPROVED_LOCATION_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Governed approved-location projection unavailable");return response.json();}),
+      fetch(CALENDAR_ACTIVATION_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Governed calendar activation projection unavailable");return response.json();}),
+      fetch(FESTIVAL_ACTIVATION_PATH,{cache:"no-store",signal:signal}).then(function(response){if(!response.ok)throw new Error("Governed festival activation projection unavailable");return response.json();})
     ]).then(function(values){
-      if(!values[2]||values[2].record_count!==values[2].records.length)throw new Error("Governed projection count mismatch");
-      state.referenceData={calendar:values[0],festival:values[1],approvedLocations:values[2]};
+      if(!values[2]||values[2].record_count!==values[2].records.length)throw new Error("Governed location projection count mismatch");
+      if(!values[3]||values[3].approved_daily_record_count!==values[3].records.length)throw new Error("Governed calendar activation count mismatch");
+      if(!values[4]||values[4].approved_observance_count!==values[4].records.length)throw new Error("Governed festival activation count mismatch");
+      state.referenceData={calendar:values[0],festivalSource:values[1],approvedLocations:values[2],calendarActivation:values[3],festivalActivation:values[4]};
       return state.referenceData;
     });
   }
@@ -519,6 +572,57 @@
     };
   }
 
+  function resolveActivatedCalendarRecord(request, projection) {
+    var records=projection&&Array.isArray(projection.records)?projection.records:[];
+    var matches=records.filter(function(record){
+      return record.civil_date===request.dateKey&&record.canonical_place_id===request.canonicalId&&record.timezone===request.timezone;
+    });
+    if(matches.length===0){
+      return {state:"calculation_pending",reason:"The location request passed its approval gate, but no exact daily calendar activation record is approved for this date, place and timezone."};
+    }
+    if(matches.length!==1){
+      return {state:"governed_unavailable",reason:"The daily calendar activation projection is not uniquely resolvable and requires governed review."};
+    }
+    var record=matches[0];
+    if(record.daily_record_approved!==true||record.public_output_allowed!==true){
+      return {state:"calculation_pending",reason:"The exact daily record exists but does not carry all public activation approvals."};
+    }
+    return {state:"approved",record:record};
+  }
+
+  function transitionDisplay(type, result) {
+    var transition=result&&result.transitions&&result.transitions[type];
+    if(!transition||!transition.previous||!transition.next||!transition.previous.local||!transition.next.local){
+      return "Approved transition detail unavailable";
+    }
+    return compactTransition(type,result);
+  }
+
+  function renderActivatedCalendarRecord(request, activationRecord, focusStatus, bank) {
+    var result=activationRecord.runtime_result||{};
+    setText("panchang-calculation-source","Approved governed calendar record");
+    setText("panchang-method-basis","Approved precomputed record · Modern Drik · Lahiri/Chitrapaksha");
+    setText("panchang-moonrise",request.label+" · "+request.timezone);
+    setText("panchang-moonset",isoToDisplay(request.dateKey));
+    setText("panchang-sunrise",result.sunrise&&result.sunrise.local?result.sunrise.local.replace("T"," "):"Not available");
+    setText("panchang-sunset",result.sunset&&result.sunset.local?result.sunset.local.replace("T"," "):"Not available");
+    setText("panchang-vara",result.vara?result.vara.english+" · "+result.vara.sanskrit:"Not available");
+    setText("panchang-tithi",result.elements&&result.elements.tithi?result.elements.tithi.name+" ("+result.elements.tithi.index+")":"Not available");
+    setText("panchang-nakshatra",result.elements&&result.elements.nakshatra?result.elements.nakshatra.name+" ("+result.elements.nakshatra.index+")":"Not available");
+    setText("panchang-yoga",result.elements&&result.elements.yoga?result.elements.yoga.name+" ("+result.elements.yoga.index+")":"Not available");
+    setText("panchang-karana",result.elements&&result.elements.karana?result.elements.karana.name+" ("+result.elements.karana.index+")":"Not available");
+    setText("panchang-paksha",result.paksha||"Not available");
+    setText("panchang-tithi-transition",transitionDisplay("tithi",result));
+    setText("panchang-nakshatra-transition",transitionDisplay("nakshatra",result));
+    setText("panchang-yoga-transition",transitionDisplay("yoga",result));
+    setText("panchang-karana-transition",transitionDisplay("karana",result));
+    setText("panchang-selection-status","Approved governed calendar record displayed for "+request.label+" on "+isoToDisplay(request.dateKey)+". Times use "+request.timezone+".");
+    setProvenance(request,{record:request.governedRecord||null});
+    renderObservance(bank,request.dateKey);
+    setResultState("calculated");setBusy(false);
+    if(focusStatus&&byId("panchang-selection-status"))byId("panchang-selection-status").focus();
+  }
+
   async function applySelection(options) {
     options=options||{};
     state.requestToken+=1;
@@ -528,7 +632,8 @@
     var request=requestFromUi();
     setBusy(true);
     setResultState("loading");
-    setText("panchang-selection-status","Checking the governed location projection and approval state…");
+    setRequestStatus("Checking the committed request against governed location, calendar and festival activation projections…","loading");
+    setText("panchang-selection-status","Checking the governed location, daily-record and approval state…");
     try{
       var reference=await loadReferenceData(state.activeAbort.signal);
       await new Promise(function(resolve){setTimeout(resolve,0);});
@@ -536,20 +641,39 @@
       renderBook(reference.calendar,request.dateKey);
       var decision=resolveApprovedGovernedRecord(request,reference.approvedLocations);
       if(decision.state!=="approved"){
-        renderGovernedState(request,decision.state,decision.reason,options.focusStatus===true,reference.festival,decision);
+        renderGovernedState(request,decision.state,decision.reason,options.focusStatus===true,reference.festivalActivation,decision);
+        settleCommittedRequest(request,decision.state);
         return false;
       }
       var approvedRequest=requestFromApprovedRecord(request,decision.record);
+      var calendarDecision=resolveActivatedCalendarRecord(approvedRequest,reference.calendarActivation);
+      if(calendarDecision.state!=="approved"){
+        renderGovernedState(approvedRequest,calendarDecision.state,calendarDecision.reason,options.focusStatus===true,reference.festivalActivation,calendarDecision);
+        settleCommittedRequest(approvedRequest,calendarDecision.state);
+        return false;
+      }
+      if(calendarDecision.record.output_mode==="approved_precomputed_record"){
+        renderActivatedCalendarRecord(approvedRequest,calendarDecision.record,options.focusStatus===true,reference.festivalActivation);
+        settleCommittedRequest(approvedRequest,"calculated");
+        return true;
+      }
+      if(calendarDecision.record.output_mode!=="approved_local_calculation"||calendarDecision.record.local_calculation_approved!==true){
+        renderGovernedState(approvedRequest,"calculation_pending","The exact daily activation record does not authorise a supported output mode.",options.focusStatus===true,reference.festivalActivation,calendarDecision);
+        settleCommittedRequest(approvedRequest,"calculation_pending");
+        return false;
+      }
       var result;
       try{result=computeDay(approvedRequest);}catch(error){result={available:false,reason:String(error&&error.message||error)};}
-      if(result.available)renderCalculated(approvedRequest,result,options.focusStatus===true,reference.festival);
-      else renderUnavailable(approvedRequest,result.reason||"Calculation could not be completed.",options.focusStatus===true,reference.festival);
+      if(result.available)renderCalculated(approvedRequest,result,options.focusStatus===true,reference.festivalActivation);
+      else renderUnavailable(approvedRequest,result.reason||"Calculation could not be completed.",options.focusStatus===true,reference.festivalActivation);
+      settleCommittedRequest(approvedRequest,result.available?"calculated":"governed_unavailable");
       return Boolean(result.available);
     }catch(error){
       if(error&&error.name==="AbortError")return false;
       if(token!==state.requestToken)return false;
-      renderGovernedState(request,"governed_unavailable","The local governed projection or reference data could not be loaded.",options.focusStatus===true,null,null);
+      renderGovernedState(request,"governed_unavailable","The local governed projections or reference data could not be loaded.",options.focusStatus===true,null,null);
       setText("ag74o-book-status","Annual reference book could not be loaded.");
+      settleCommittedRequest(request,"governed_unavailable");
       return false;
     }
   }
@@ -598,46 +722,84 @@
     event.stopImmediatePropagation();
     choosePlace(event.target.value);
     if(byId("panchang-place-alias"))byId("panchang-place-alias").value="";
-    applySelection({focusStatus:true});
+    markRequestPending("Place input changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
   },true);
 
   document.addEventListener("input",function(event){
     if(event.target&&event.target.id==="panchang-date-text"){
       event.target.value=applyDateMask(event.target.value);
-      if(event.target.value.length===10){var parsed=displayToIso(event.target.value);if(parsed){syncDate(parsed);applySelection();}else setText("panchang-selection-status","Enter a valid date in DD/MM/YYYY format.");}
+      if(event.target.value.length===10){
+        var parsed=displayToIso(event.target.value);
+        if(parsed){
+          syncDate(parsed);
+          markRequestPending("Date input changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
+        }else{
+          setRequestStatus("Enter a valid date in DD/MM/YYYY format. The displayed daily result is unchanged.","invalid_pending_input");
+        }
+      }
     }
   });
 
   document.addEventListener("change",function(event){
     if(!event.target)return;
-    if(event.target.id==="panchang-date-picker"&&event.target.value){syncDate(event.target.value);applySelection();return;}
-    if(event.target.id==="panchang-date-text"){var parsed=displayToIso(event.target.value);if(parsed){syncDate(parsed);applySelection();}return;}
-    if(event.target.id==="panchang-place-select"){choosePlace(event.target.value);applySelection();return;}
-    if(event.target.id==="panchang-place-alias"){applySelection({focusStatus:true});return;}
-    if(event.target.matches('input[name="ag71c-panchang-location-mode"]')){var surface=document.querySelector('[data-ag71c-coordinate-surface="panchang"]');if(surface)surface.setAttribute("data-ag71d-mode",event.target.value);applySelection();return;}
-    if(["panchang-latitude","panchang-longitude","panchang-timezone","panchang-coordinate-label"].includes(event.target.id)&&selectedMode()==="coordinates")applySelection();
+    if(event.target.id==="panchang-date-picker"&&event.target.value){
+      syncDate(event.target.value);
+      markRequestPending("Date input changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
+      return;
+    }
+    if(event.target.id==="panchang-date-text"){
+      var parsed=displayToIso(event.target.value);
+      if(parsed){syncDate(parsed);markRequestPending("Date input changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");}
+      else setRequestStatus("Enter a valid date in DD/MM/YYYY format. The displayed daily result is unchanged.","invalid_pending_input");
+      return;
+    }
+    if(event.target.id==="panchang-place-select"){
+      choosePlace(event.target.value);
+      markRequestPending("Place input changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
+      return;
+    }
+    if(event.target.id==="panchang-place-alias"){
+      markRequestPending("Place query changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
+      return;
+    }
+    if(event.target.matches('input[name="ag71c-panchang-location-mode"]')){
+      var surface=document.querySelector('[data-ag71c-coordinate-surface="panchang"]');
+      if(surface)surface.setAttribute("data-ag71d-mode",event.target.value);
+      markRequestPending("Location mode changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
+      return;
+    }
+    if(["panchang-latitude","panchang-longitude","panchang-timezone","panchang-coordinate-label"].includes(event.target.id)&&selectedMode()==="coordinates"){
+      markRequestPending("Coordinate or timezone input changed. Press Calculate Panchang to commit this request; the displayed daily result is unchanged.");
+    }
   });
 
   document.addEventListener("keydown",function(event){
-    if(event.target&&event.target.id==="panchang-place-alias"&&event.key==="Enter"){event.preventDefault();applySelection({focusStatus:true});}
-    if(event.target&&event.target.matches("[data-ag74i-book-page-button]")&&(event.key==="ArrowLeft"||event.key==="ArrowRight")){event.preventDefault();setBookPage(state.bookPage+(event.key==="ArrowRight"?1:-1));var button=document.querySelector('[data-ag74i-book-page-button="'+state.bookPage+'"]');if(button)button.focus();}
+    if(event.target&&event.target.id==="panchang-place-alias"&&event.key==="Enter"){
+      event.preventDefault();
+      markRequestPending("Place query is ready. Press Calculate Panchang to commit this request; Enter does not auto-calculate.");
+      var calculate=byId("panchang-calculate");if(calculate)calculate.focus();
+    }
+    if(event.target&&event.target.matches("[data-ag74i-book-page-button]")&&(event.key==="ArrowLeft"||event.key==="ArrowRight")){
+      event.preventDefault();setBookPage(state.bookPage+(event.key==="ArrowRight"?1:-1));var button=document.querySelector('[data-ag74i-book-page-button="'+state.bookPage+'"]');if(button)button.focus();
+    }
   });
 
   window.addEventListener("click",function(event){
     var target=event.target&&event.target.closest?event.target:null;if(!target)return;
     function claim(){event.preventDefault();event.stopImmediatePropagation();}
-    if(target.closest("#panchang-previous-day")){claim();syncDate(shiftDate(state.dateKey,-1));applySelection({focusStatus:true});return;}
-    if(target.closest("#panchang-next-day")){claim();syncDate(shiftDate(state.dateKey,1));applySelection({focusStatus:true});return;}
+    if(target.closest("#panchang-calculate")){claim();applySelection({focusStatus:true});return;}
+    if(target.closest("#panchang-previous-day")){claim();syncDate(shiftDate(state.dateKey,-1));markRequestPending("Previous Day selected. Press Calculate Panchang to commit it; the displayed daily result is unchanged.");return;}
+    if(target.closest("#panchang-next-day")){claim();syncDate(shiftDate(state.dateKey,1));markRequestPending("Next Day selected. Press Calculate Panchang to commit it; the displayed daily result is unchanged.");return;}
     if(target.closest("#panchang-today")){
       claim();
       var request=requestFromUi();
       var timezone=request.mode==="coordinates"?request.timezone:DEFAULT_UI_STATE.timezone;
       if(!timezone||!validTimezone(timezone)){
-        renderGovernedState(request,"invalid_input","A valid IANA timezone is required to determine Today. No timezone has been substituted.",true,state.referenceData&&state.referenceData.festival,null);
+        setRequestStatus("A valid IANA timezone is required to determine Today. No timezone was substituted and the displayed daily result is unchanged.","invalid_pending_input");
         return;
       }
       syncDate(todayInTimezone(timezone));
-      applySelection({focusStatus:true});
+      markRequestPending("Today selected using the stated timezone. Press Calculate Panchang to commit it; the displayed daily result is unchanged.");
       return;
     }
     var pageButton=target.closest("[data-ag74i-book-page-button]");if(pageButton){claim();setBookPage(pageButton.getAttribute("data-ag74i-book-page-button"));return;}
@@ -646,22 +808,15 @@
   },true);
 
   function boot() {
-    if(Astronomy){
-      Astronomy.SetDeltaTFunction(Astronomy.DeltaT_EspenakMeeus);
-    }
+    if(Astronomy){Astronomy.SetDeltaTFunction(Astronomy.DeltaT_EspenakMeeus);}
     installSelectorHardening();
     choosePlace(DEFAULT_UI_STATE.value);
     syncDate(todayInTimezone(DEFAULT_UI_STATE.timezone));
     setBookPage(1);
+    card.setAttribute("data-ag74o-r3-request-dirty","false");
     var request=requestFromUi();
-    renderGovernedState(
-      request,
-      "ui_state_only",
-      "Varanasi/today is the landing UI state only. No exact public-selection and computation-approved record has been resolved.",
-      false,
-      null,
-      null
-    );
+    renderGovernedState(request,"ui_state_only","Varanasi/today is the landing UI state only. No request has been committed and no exact public-selection, daily-record and computation-approved record has been resolved.",false,null,null);
+    setRequestStatus("Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.","ready");
     state.requestToken+=1;
     var token=state.requestToken;
     state.activeAbort=new AbortController();
@@ -669,15 +824,17 @@
     loadReferenceData(state.activeAbort.signal).then(function(reference){
       if(token!==state.requestToken)return;
       renderBook(reference.calendar,state.dateKey);
-      renderObservance(reference.festival,state.dateKey);
+      renderObservance(reference.festivalActivation,state.dateKey);
       setBusy(false);
       setResultState("ui_state_only");
+      setRequestStatus("Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.","ready");
     }).catch(function(error){
       if(error&&error.name==="AbortError")return;
       if(token!==state.requestToken)return;
       setText("ag74o-book-status","Annual reference book could not be loaded.");
       setBusy(false);
       setResultState("ui_state_only");
+      setRequestStatus("Reference data could not be loaded. No daily result was calculated.","reference_unavailable");
     });
   }
 
@@ -690,6 +847,17 @@
   }
 
   window.drishvaraAg74oApplySelection=applySelection;
+  window.drishvaraAg74oMarkRequestPending=markRequestPending;
+  window.drishvaraAg74oActivationState=function(){
+    var reference=state.referenceData||{};
+    return {
+      requestDirty:state.pendingInputDirty,
+      lastCommittedRequest:state.lastCommittedRequest,
+      approvedLocationCount:reference.approvedLocations?reference.approvedLocations.record_count:null,
+      approvedDailyRecordCount:reference.calendarActivation?reference.calendarActivation.approved_daily_record_count:null,
+      approvedObservanceCount:reference.festivalActivation?reference.festivalActivation.approved_observance_count:null
+    };
+  };
   window.drishvaraAg74oSetBookPage=setBookPage;
   window.drishvaraAg74oComputeDay=computeDay;
   window.drishvaraAg74oSyncDate=syncDate;

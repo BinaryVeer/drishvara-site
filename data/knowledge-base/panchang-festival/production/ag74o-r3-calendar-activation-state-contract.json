@@ -1,0 +1,21 @@
+{
+  "module_id": "AG74O-R3",
+  "title": "Governed Calendar Activation State Contract",
+  "status": "ag74o_r3_activation_layer_active_public_outputs_blocked",
+  "generated_at_utc": "2026-06-24T06:22:49.578Z",
+  "states": {
+    "ui_state_only": "Landing inputs shown; no request committed.",
+    "input_pending": "Inputs changed after the last committed request; displayed daily result remains unchanged.",
+    "loading": "Committed request is being checked against governed projections.",
+    "governed_unavailable": "Committed request has no exact approved named-place or alias record.",
+    "calculation_pending": "Committed request is structurally valid but one or more approvals are absent.",
+    "calculated": "Exact approved daily record rendered, or explicitly authorised local calculation completed.",
+    "invalid_input": "Committed date, coordinates or timezone failed validation without substitution."
+  },
+  "public_runtime_activation_allowed_now": false,
+  "approved_location_count": 0,
+  "approved_daily_record_count": 0,
+  "approved_observance_count": 0,
+  "automatic_input_commit_allowed": false,
+  "automatic_default_result_allowed": false
+}

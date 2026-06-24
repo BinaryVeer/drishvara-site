@@ -2,7 +2,7 @@
   "module_id": "AG74O",
   "title": "Panchang Public Browser Runtime Contract",
   "status": "ag74o_r2_governed_selector_calculation_gate_active_runtime_approval_blocked",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "runtime": {
     "execution": "static_browser_only",
     "astronomy_library": "astronomy-engine@2.1.19_exact_local_vendored_browser_bundle",
@@ -13,9 +13,13 @@
     "default_ui_state_location": "Varanasi / Banaras",
     "default_ui_state_timezone": "Asia/Kolkata",
     "automatic_calculation_on_boot": false,
-    "click_required_for_request": false,
+    "click_required_for_request": true,
     "approved_browser_projection_record_count": 0,
-    "public_runtime_activation_allowed_now": false
+    "public_runtime_activation_allowed_now": false,
+    "automatic_calculation_on_input_change": false,
+    "pending_input_preserves_last_committed_result": true,
+    "approved_daily_calendar_record_count": 0,
+    "approved_festival_observance_count": 0
   },
   "date_location": {
     "native_and_text_sync": true,
@@ -27,7 +31,9 @@
     "timezone_substitution": false,
     "reverse_geocoding": false,
     "public_named_location_control": "approval_aware_governed_projection_only",
-    "legacy_pilot_quick_pick_visible": false
+    "legacy_pilot_quick_pick_visible": false,
+    "input_change_commits_request": false,
+    "calculate_control_id": "panchang-calculate"
   },
   "result_states": [
     "ui_state_only",
@@ -48,13 +54,16 @@
     "reference_samvat_year": 2083,
     "page_count": 4,
     "canonical_slot_count": 12,
-    "available_while_daily_calculation_is_blocked": true
+    "available_while_daily_calculation_is_blocked": true,
+    "reference_book_is_not_daily_activation": true,
+    "pending_date_synchronization_allowed": true
   },
   "festival_guard": {
     "condition_candidates_publicly_visible": false,
     "approved_final_observance_required": true,
     "approved_public_output_required": true,
-    "ritual_window_never_inferred": true
+    "ritual_window_never_inferred": true,
+    "activation_projection_path": "data/knowledge-base/panchang-festival/production/ag74o-r3-festival-observance-activation-projection.json"
   },
   "external_api_used": false,
   "persistence_enabled": false,
@@ -67,5 +76,15 @@
     "named_place_selector": "single_active_governed_query_control_zero_approved_records",
     "coordinate_mode_selector_retained": true,
     "legacy_quick_pick_buttons_visible": false
+  },
+  "r3_calendar_activation": {
+    "status": "activation_layer_active_public_outputs_blocked",
+    "calendar_projection_path": "data/knowledge-base/panchang-festival/production/ag74o-r3-calendar-activation-projection.json",
+    "festival_projection_path": "data/knowledge-base/panchang-festival/production/ag74o-r3-festival-observance-activation-projection.json",
+    "approved_location_count": 0,
+    "approved_daily_record_count": 0,
+    "approved_observance_count": 0,
+    "explicit_request_commit_required": true,
+    "public_runtime_activation_allowed_now": false
   }
 }

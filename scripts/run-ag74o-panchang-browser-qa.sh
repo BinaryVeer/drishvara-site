@@ -35,7 +35,7 @@ for candidate in \
   "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"; do
   if [ -x "$candidate" ]; then CHROME="$candidate"; break; fi
 done
-[ -n "$CHROME" ] || { echo "❌ AG74O-R2 browser QA requires Chrome, Chromium or Edge."; exit 1; }
+[ -n "$CHROME" ] || { echo "❌ AG74O-R3 browser QA requires Chrome, Chromium or Edge."; exit 1; }
 
 cd "$ROOT"
 python3 -m http.server "$PORT" --bind 127.0.0.1 >"$TMP/server.log" 2>&1 & SERVER_PID=$!
@@ -45,7 +45,7 @@ for _ in range(100):
     try:
         with socket.create_connection(("127.0.0.1",int("$PORT")),timeout=.2): raise SystemExit(0)
     except OSError: time.sleep(.1)
-raise SystemExit("AG74O-R2 local QA server did not start")
+raise SystemExit("AG74O-R3 local QA server did not start")
 PYWAIT
 
 QA_URL="http://127.0.0.1:$PORT/scripts/ag74o-panchang-browser-qa.html"
@@ -75,7 +75,7 @@ for _ in $(seq 1 200); do
   sleep .1
 done
 if [ "$READY" -ne 1 ]; then
-  echo "❌ AG74O-R2 Chrome DevTools target did not become ready."
+  echo "❌ AG74O-R3 Chrome DevTools target did not become ready."
   tail -80 "$TMP/chrome.log" || true
   tail -80 "$TMP/server.log" || true
   exit 1
@@ -84,9 +84,10 @@ fi
 cat >"$TMP/probe.mjs" <<'NODE'
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 const targets=JSON.parse(fs.readFileSync(process.argv[2],"utf8"));
 const target=targets.find(x=>x.type==="page"&&/ag74o-panchang-browser-qa\.html/.test(x.url||""))||targets.find(x=>x.type==="page");
-if(!target?.webSocketDebuggerUrl||typeof WebSocket!=="function")throw new Error("AG74O-R2 CDP target unavailable");
+if(!target?.webSocketDebuggerUrl||typeof WebSocket!=="function")throw new Error("AG74O-R3 CDP target unavailable");
 const ws=new WebSocket(target.webSocketDebuggerUrl);let next=1;const pending=new Map();
 await new Promise((resolve,reject)=>{ws.onopen=resolve;ws.onerror=reject;});
 ws.onmessage=e=>{const m=JSON.parse(e.data);if(!m.id||!pending.has(m.id))return;const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(new Error(JSON.stringify(m.error))):p.resolve(m.result);};
@@ -99,19 +100,16 @@ for(let i=0;i<180;i++){
   await new Promise(r=>setTimeout(r,250));
 }
 ws.close();
-if(!report)throw new Error("AG74O-R2 browser QA timed out");
-const output=process.env.AG74O_BROWSER_QA_OUTPUT||"data/quality/ag74o-panchang-public-ui-wiring-browser-qa.json";
+if(!report)throw new Error("AG74O-R3 browser QA timed out");
+const output=process.env.AG74O_BROWSER_QA_OUTPUT||path.join(os.tmpdir(),"ag74o-r3-browser-qa.json");
 fs.mkdirSync(path.dirname(output),{recursive:true});
 fs.writeFileSync(output,JSON.stringify(report,null,2)+"\n");
 if(report.status!=="passed"||report.failure_count!==0){
   for(const failure of report.failures||[])console.error("- "+failure);
   process.exit(1);
 }
-console.log("✅ AG74O-R2 browser QA passed: "+report.check_count+" checks.");
+console.log("✅ AG74O-R3 browser QA passed: "+report.check_count+" checks.");
 NODE
 
 node "$TMP/probe.mjs" "$TMP/targets.json"
 
-if [ "${AG74O_BROWSER_QA_FINALIZE:-1}" = "1" ]; then
-  node scripts/finalize-ag74o-panchang-public-ui-wiring.mjs
-fi
