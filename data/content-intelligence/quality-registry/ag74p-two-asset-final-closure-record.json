@@ -1,7 +1,7 @@
 {
   "module_id": "AG74P",
   "title": "Panchang & Festival View and Star Reflection Final Closure Record",
-  "status": "ag74p_single_patch_code_data_and_release_package_complete_execution_evidence_pending",
+  "status": "ag74p_single_patch_final_execution_evidence_verified_and_formally_closed",
   "generated_at_utc": "2026-06-24T17:19:53.880Z",
   "release_id": "ag74p_final_2026_06_24",
   "panchang_festival_view": {
@@ -10,13 +10,16 @@
     "approved_named_locations": 5,
     "worldwide_coordinate_requests": true,
     "approved_daily_records": 384,
-    "approved_festival_observances": 114
+    "approved_festival_observances": 114,
+    "live_static_release_verified": true,
+    "supabase_public_release_mirror_verified": true
   },
   "star_reflection": {
     "functional_closure": true,
     "final_regression_closure": true,
     "personal_data_storage_enabled": false,
-    "deterministic_prediction_enabled": false
+    "deterministic_prediction_enabled": false,
+    "supabase_release_mirror_verified": true
   },
   "final_execution_gates": {
     "commit_and_push_required": true,
@@ -25,5 +28,68 @@
     "live_deployment_verification_required": true,
     "rollback_validation_required": true
   },
-  "no_additional_ag_numbered_patch_required": true
+  "no_additional_ag_numbered_patch_required": true,
+  "formal_closure_recorded_at_utc": "2026-06-25T02:05:37.566536Z",
+  "final_execution_results": {
+    "commit_and_push": {
+      "status": "passed",
+      "source_release_commit": "220f4675f1bb4f6dc9d6aa5fc2f550feceeb0e3a",
+      "commit_push_evidence_sha256": "7225475f63892971c1e38deebf5b2fb0d991a0b550b1e5105305080984f46bca"
+    },
+    "supabase_preflight": {
+      "status": "passed",
+      "offline_structure_preflight": true,
+      "live_credential_and_psql_preflight": true
+    },
+    "supabase_write_and_readback": {
+      "status": "passed",
+      "release_id": "ag74p_final_2026_06_24",
+      "verified_at_utc": "2026-06-25T01:54:24.280Z",
+      "service_role_readback": true,
+      "anonymous_public_readback": true,
+      "counts": {
+        "locations": 5,
+        "daily": 384,
+        "festivals": 114,
+        "star": 1,
+        "manifests": 1
+      },
+      "active_manifest_content_hash": "299a4841fbb95d6a5f1ef9abe8dc98d61fa5144af71de270c166e0a16c97f946"
+    },
+    "live_deployment_verification": {
+      "status": "passed",
+      "url": "https://binaryveer.github.io/drishvara-site",
+      "reviewed_release_assets_byte_identical": true,
+      "verified_assets": [
+        "index.html",
+        "assets/js/ag74o-panchang-public-controller.js",
+        "data/knowledge-base/location-intelligence/production/ag74p-approved-location-projection.json",
+        "data/knowledge-base/panchang-festival/production/ag74p-approved-daily-calendar-projection.json",
+        "data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json"
+      ]
+    },
+    "rollback_validation": {
+      "status": "guard_validated",
+      "explicit_confirmation_required": true,
+      "unconfirmed_mutation_blocked": true,
+      "destructive_rollback_drill_performed": false,
+      "note": "The production release remained active; the guarded rollback path was validated without deleting verified release rows."
+    }
+  },
+  "execution_evidence": {
+    "evidence_zip_name": "AG74P_Supabase_Live_Evidence_20260625_072403.zip",
+    "evidence_sha256": "993aa9a25eaf0665ace2285734d6bd4bdc36d29fe5fbb0a17393700bcaaec8f5",
+    "verified_release_id": "ag74p_final_2026_06_24",
+    "verified_at_utc": "2026-06-25T01:54:24.280Z",
+    "repository_unchanged_during_execution": true,
+    "credentials_retained_in_evidence": false,
+    "additional_ag_numbered_patch_started": false
+  },
+  "formal_closure": {
+    "status": "closed",
+    "same_ag74p_patch_continuity_preserved": true,
+    "runtime_and_database_execution_verified": true,
+    "public_anonymous_readback_verified": true,
+    "no_additional_ag_numbered_patch_required": true
+  }
 }
