@@ -1,0 +1,25 @@
+{
+  "module_id": "SUP01",
+  "title": "Supabase Schema, Canonical Data and Calculation Runtime Readiness Record",
+  "status": "sup01_runtime_foundation_code_and_migration_ready_live_execution_pending",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "runtime": {
+    "edge_function": "calculate-panchang",
+    "engine": "astronomy-engine@2.1.19",
+    "astronomical_profile_id": "drishvara_astronomical_engine_v1",
+    "ayanamsha_profile_id": "drishvara_lahiri_linear_tt_v1",
+    "normalized_runtime_tables": 4,
+    "input_persistence_enabled": false,
+    "public_ui_cutover_active": false
+  },
+  "live_execution_gates": {
+    "migration_apply_required": true,
+    "canonical_payload_write_required": true,
+    "edge_function_deployment_required": true,
+    "service_role_readback_required": true,
+    "anonymous_function_invocation_required": true,
+    "parity_matrix_required": true,
+    "rollback_validation_required": true
+  },
+  "next_stage_after_sup01_closure": "SUP02"
+}

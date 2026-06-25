@@ -1,0 +1,72 @@
+{
+  "module_id": "SUP01",
+  "title": "Panchang Server Runtime Parity Matrix",
+  "status": "sup01_parity_matrix_ready_live_execution_pending",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "public_cutover_allowed_now": false,
+  "cutover_stage": "SUP02",
+  "named_location_cases": [
+    "varanasi_in",
+    "itanagar_in",
+    "new_delhi_in",
+    "ranchi_in",
+    "tokyo_jp"
+  ],
+  "alias_cases": [
+    "Varanasi",
+    "Banaras",
+    "Benaras",
+    "Kashi"
+  ],
+  "coordinate_cases": [
+    {
+      "case": "valid_coordinates_valid_timezone",
+      "expected": "approved_server_calculation"
+    },
+    {
+      "case": "invalid_timezone",
+      "expected": "governed_error"
+    },
+    {
+      "case": "latitude_out_of_range",
+      "expected": "governed_error"
+    },
+    {
+      "case": "longitude_out_of_range",
+      "expected": "governed_error"
+    },
+    {
+      "case": "unknown_place_no_substitution",
+      "expected": "governed_error"
+    }
+  ],
+  "date_cases": [
+    "precomputed_varanasi_date",
+    "today",
+    "previous_day",
+    "next_day",
+    "hindu_year_boundary",
+    "1900-01-01",
+    "2100-12-31"
+  ],
+  "festival_rule_cases": [
+    "ekadashi",
+    "purnima",
+    "amavasya",
+    "trayodashi_pradosha",
+    "sankashti_chaturthi",
+    "vinayaka_chaturthi_monthly",
+    "masik_shivaratri"
+  ],
+  "festival_window_assertions": [
+    "astronomical_condition_window_remains_separate",
+    "observance_window_remains_separate",
+    "visible_begins_ends_map_to_primary_public_window",
+    "ritual_windows_never_overwrite_primary_public_window"
+  ],
+  "privacy_assertions": [
+    "calculation_request_not_persisted",
+    "location_input_not_persisted",
+    "personal_data_not_persisted"
+  ]
+}
