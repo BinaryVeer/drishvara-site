@@ -1,0 +1,22 @@
+{
+  "module_id": "SUP02",
+  "title": "Panchang Public Server Runtime Cutover Boundary",
+  "status": "sup02_public_runtime_cutover_readiness_prepared_local_apply_only",
+  "baseline_commit": "cd16f857c62c17f5c85dde907902d9f62577e51c",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
+  "sup01_formal_closure_preserved": true,
+  "public_ui_cutover_active": false,
+  "public_client_wired_in_index": false,
+  "live_database_migration_applied": false,
+  "live_function_deployment_performed": false,
+  "runtime_flag_activated": false,
+  "live_public_page_verified": false,
+  "commit_and_push_performed": false,
+  "browser_local_runtime_remains_active_during_readiness": true,
+  "server_only_controller_prepared_but_not_loaded": true,
+  "input_persistence_allowed": false,
+  "automatic_place_or_timezone_substitution_allowed": false,
+  "additional_ag_numbered_panchang_patch_required": false,
+  "next_controlled_action": "Review local readiness evidence, then commit and push SUP02 readiness before controlled live deployment and cutover"
+}

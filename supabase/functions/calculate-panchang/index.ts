@@ -71,7 +71,7 @@ Deno.serve(async (request: Request) => {
         select: "release_id,status,content_hash,activated_at",
         status: "eq.active",
         order: "activated_at.desc",
-        limit: "1"
+        limit: "2"
       })
     );
 
@@ -83,7 +83,47 @@ Deno.serve(async (request: Request) => {
       );
     }
 
+    const runtimeReleases = await restGet<{
+      runtime_release_id: string;
+      release_id: string;
+      status: string;
+      no_input_persistence: boolean;
+      public_ui_cutover_active: boolean;
+      content_hash: string;
+      activated_at: string | null;
+    }>(
+      "drishvara_panchang_runtime_releases",
+      new URLSearchParams({
+        select:
+          "runtime_release_id,release_id,status,no_input_persistence,public_ui_cutover_active,content_hash,activated_at",
+        status: "eq.active",
+        order: "activated_at.desc",
+        limit: "2"
+      })
+    );
+
+    if (runtimeReleases.length !== 1) {
+      return governedError(
+        "active_runtime_release_unavailable",
+        "No single active governed Panchang runtime release is available.",
+        503
+      );
+    }
+
     const manifest = manifests[0];
+    const runtimeRelease = runtimeReleases[0];
+
+    if (
+      runtimeRelease.release_id !== manifest.release_id ||
+      runtimeRelease.no_input_persistence !== true
+    ) {
+      return governedError(
+        "runtime_release_contract_mismatch",
+        "The active runtime release does not match the governed source release or privacy contract.",
+        503
+      );
+    }
+
     const locations = await restGet<LocationRow>(
       "drishvara_panchang_locations",
       new URLSearchParams({
@@ -122,9 +162,18 @@ Deno.serve(async (request: Request) => {
           release_id: `eq.${manifest.release_id}`,
           canonical_place_id: `eq.${resolved.canonical_place_id}`,
           civil_date: `eq.${resolved.civil_date}`,
-          limit: "1"
+          limit: "2"
         })
       );
+
+      if (exactRows.length > 1) {
+        return governedError(
+          "non_unique_precomputed_record",
+          "More than one governed daily record matches this request.",
+          503
+        );
+      }
+
       if (exactRows.length === 1) {
         const runtimeResult = exactRows[0].payload?.["runtime_result"];
         if (runtimeResult && typeof runtimeResult === "object") {
@@ -158,11 +207,21 @@ Deno.serve(async (request: Request) => {
     );
 
     return jsonResponse({
-      status: "sup01_governed_runtime_response",
+      status: runtimeRelease.public_ui_cutover_active
+        ? "sup02_governed_public_runtime_response"
+        : "sup02_governed_runtime_ready_cutover_inactive",
       release: {
         release_id: manifest.release_id,
         manifest_content_hash: manifest.content_hash,
         activated_at: manifest.activated_at
+      },
+      runtime: {
+        runtime_release_id: runtimeRelease.runtime_release_id,
+        runtime_content_hash: runtimeRelease.content_hash,
+        status: runtimeRelease.status,
+        activated_at: runtimeRelease.activated_at,
+        no_input_persistence: runtimeRelease.no_input_persistence,
+        public_ui_cutover_active: runtimeRelease.public_ui_cutover_active
       },
       request: {
         mode: resolved.mode,
@@ -192,11 +251,11 @@ Deno.serve(async (request: Request) => {
         location_input_persisted: false,
         personal_data_persisted: false
       },
-      public_ui_cutover_active: false,
-      next_cutover_stage: "SUP02"
+      public_ui_cutover_active: runtimeRelease.public_ui_cutover_active,
+      next_cutover_stage: runtimeRelease.public_ui_cutover_active ? null : "SUP02"
     });
   } catch (error) {
-    console.error("SUP01 calculate-panchang failure", error);
+    console.error("SUP02 calculate-panchang failure", error);
     return governedError(
       "runtime_failure",
       "The governed Panchang runtime could not complete this request.",

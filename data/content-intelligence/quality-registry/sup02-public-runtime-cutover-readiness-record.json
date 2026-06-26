@@ -1,0 +1,44 @@
+{
+  "module_id": "SUP02",
+  "title": "Panchang Public Server Runtime Cutover Readiness Record",
+  "status": "sup02_server_runtime_cutover_code_ready_live_execution_pending",
+  "baseline_commit": "cd16f857c62c17f5c85dde907902d9f62577e51c",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
+  "prepared_components": {
+    "public_edge_function_invocation_mode": true,
+    "runtime_release_dynamic_cutover_readback": true,
+    "server_only_browser_controller": true,
+    "non_activating_cutover_migration": true,
+    "guarded_disable_cutover_sql": true,
+    "annual_varanasi_book_preserved": true,
+    "approved_five_named_locations_preserved": true,
+    "worldwide_coordinates_preserved": true,
+    "server_governed_error_handling": true,
+    "festival_primary_public_window_rendering": true,
+    "ritual_window_separation": true,
+    "zero_input_persistence_contract": true
+  },
+  "deliberately_not_performed": {
+    "index_controller_switch": true,
+    "browser_astronomy_asset_removal": true,
+    "live_migration": true,
+    "edge_function_deployment": true,
+    "runtime_cutover_flag_activation": true,
+    "live_public_verification": true,
+    "commit": true,
+    "push": true
+  },
+  "execution_gates": [
+    "commit and push reviewed readiness code",
+    "apply SUP02 non-activating migration",
+    "deploy calculate-panchang public invocation configuration",
+    "verify anonymous invocation with cutover flag false",
+    "activate public_ui_cutover_active for the single active zero-persistence runtime",
+    "verify anonymous invocation with cutover flag true",
+    "apply and push public index controller switch",
+    "verify live public page is server-only",
+    "retain guarded rollback path"
+  ],
+  "next_stage_after_readiness_commit": "SUP02 controlled live deployment and cutover"
+}
