@@ -90,7 +90,7 @@ if (
   fail("Credential-shaped material found in SUP01 source files.");
 }
 
-console.log("✅ SUP01 runtime foundation is locally valid.");
+console.log("✅ SUP01 runtime foundation source remains locally valid.");
 console.log("✅ AG74P public UI and approved 5/384/114 projections remain byte-identical.");
-console.log("✅ Four normalized runtime tables, privilege hardening and calculate-panchang Edge Function are prepared.");
-console.log("✅ No live migration, function deployment, database write or public cutover has occurred.");
+console.log("✅ Four normalized runtime tables, privilege hardening and calculate-panchang source remain governed.");
+console.log("✅ Live activation and formal closure are validated separately by validate:sup01:closure.");

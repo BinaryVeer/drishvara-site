@@ -1,14 +1,23 @@
 {
   "module_id": "SUP01",
   "title": "Supabase Panchang Runtime Foundation Execution Boundary",
-  "status": "sup01_local_apply_authorized_live_execution_gated",
+  "status": "sup01_live_execution_evidence_verified_and_formally_closed",
   "baseline_commit": "45a5d8320b368db7bfc2b73e232086bb142f92b5",
+  "foundation_commit": "624f55a5193ee32811ef563154872334bf570bb8",
   "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
+  "formal_closure_authorized_at_utc": "2026-06-26T17:35:12Z",
   "public_ui_cutover_allowed": false,
   "database_write_allowed_during_local_apply": false,
   "edge_function_deployment_allowed_during_local_apply": false,
   "commit_and_push_allowed_during_local_apply": false,
   "ag74p_public_assets_must_remain_byte_identical": true,
   "additional_ag_numbered_panchang_patch_required": false,
-  "next_controlled_action": "SUP01 live migration, governed payload write, Edge Function deployment and parity readback"
+  "live_execution_completed": true,
+  "database_migration_applied": true,
+  "canonical_payload_write_completed": true,
+  "edge_function_deployed": true,
+  "runtime_release_active": true,
+  "public_ui_cutover_active": false,
+  "next_controlled_action": "SUP02 public client integration, governed cutover validation and public runtime switch"
 }

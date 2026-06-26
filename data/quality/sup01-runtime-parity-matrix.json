@@ -1,24 +1,25 @@
 {
   "module_id": "SUP01",
   "title": "Panchang Server Runtime Parity Matrix",
-  "status": "sup01_parity_matrix_ready_live_execution_pending",
+  "status": "sup01_live_runtime_parity_passed_and_closed",
   "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
   "public_cutover_allowed_now": false,
   "cutover_stage": "SUP02",
-  "named_location_cases": [
+  "planned_named_location_cases": [
     "varanasi_in",
     "itanagar_in",
     "new_delhi_in",
     "ranchi_in",
     "tokyo_jp"
   ],
-  "alias_cases": [
+  "planned_alias_cases": [
     "Varanasi",
     "Banaras",
     "Benaras",
     "Kashi"
   ],
-  "coordinate_cases": [
+  "planned_coordinate_cases": [
     {
       "case": "valid_coordinates_valid_timezone",
       "expected": "approved_server_calculation"
@@ -40,7 +41,7 @@
       "expected": "governed_error"
     }
   ],
-  "date_cases": [
+  "planned_date_cases": [
     "precomputed_varanasi_date",
     "today",
     "previous_day",
@@ -49,7 +50,7 @@
     "1900-01-01",
     "2100-12-31"
   ],
-  "festival_rule_cases": [
+  "planned_festival_rule_cases": [
     "ekadashi",
     "purnima",
     "amavasya",
@@ -68,5 +69,42 @@
     "calculation_request_not_persisted",
     "location_input_not_persisted",
     "personal_data_not_persisted"
-  ]
+  ],
+  "executed_results": {
+    "anonymous_invocation_before_activation": {
+      "status": "passed",
+      "passed": 12,
+      "total": 12,
+      "named_locations_verified": [
+        "varanasi_in",
+        "itanagar_in",
+        "new_delhi_in",
+        "ranchi_in",
+        "tokyo_jp"
+      ],
+      "alias_verified": "Banaras",
+      "coordinate_calculation_verified": true,
+      "governed_error_cases_verified": [
+        "unknown_place",
+        "invalid_timezone",
+        "invalid_latitude"
+      ]
+    },
+    "local_to_live_parity": {
+      "status": "passed",
+      "passed": 24,
+      "total": 24,
+      "failed": 0,
+      "precomputed_exact_record_verified": true,
+      "coordinate_server_calculation_verified": true,
+      "festival_record_parity_verified": true,
+      "festival_window_separation_verified": true
+    },
+    "anonymous_invocation_after_activation": {
+      "status": "passed",
+      "passed": 12,
+      "total": 12
+    }
+  },
+  "evidence_sha256": "8c1d633553f073c56d013b43474f16f201e248574b0f7be6871694791f9917de"
 }

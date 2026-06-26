@@ -1,25 +1,48 @@
 {
   "module_id": "SUP01",
   "title": "Supabase Schema, Canonical Data and Calculation Runtime Readiness Record",
-  "status": "sup01_runtime_foundation_code_and_migration_ready_live_execution_pending",
+  "status": "sup01_runtime_foundation_live_execution_verified_and_formally_closed",
   "source_release_id": "ag74p_final_2026_06_24",
+  "foundation_commit": "624f55a5193ee32811ef563154872334bf570bb8",
   "runtime": {
+    "runtime_release_id": "sup01_panchang_runtime_v1",
+    "status": "active",
     "edge_function": "calculate-panchang",
+    "edge_function_status": "ACTIVE",
+    "edge_function_version": 4,
     "engine": "astronomy-engine@2.1.19",
     "astronomical_profile_id": "drishvara_astronomical_engine_v1",
     "ayanamsha_profile_id": "drishvara_lahiri_linear_tt_v1",
     "normalized_runtime_tables": 4,
+    "normalized_runtime_counts": {
+      "aliases": 20,
+      "calculation_policies": 6,
+      "festival_rules": 7,
+      "runtime_releases": 1
+    },
     "input_persistence_enabled": false,
     "public_ui_cutover_active": false
   },
   "live_execution_gates": {
-    "migration_apply_required": true,
-    "canonical_payload_write_required": true,
-    "edge_function_deployment_required": true,
-    "service_role_readback_required": true,
-    "anonymous_function_invocation_required": true,
-    "parity_matrix_required": true,
-    "rollback_validation_required": true
+    "migration_apply": "passed",
+    "canonical_payload_write": "passed",
+    "edge_function_deployment": "passed",
+    "service_role_readback": "passed",
+    "anonymous_function_invocation_before_activation": "passed_12_of_12",
+    "runtime_parity": "passed_24_of_24",
+    "anonymous_function_invocation_after_activation": "passed_12_of_12",
+    "rollback_guard_validation": "passed"
   },
-  "next_stage_after_sup01_closure": "SUP02"
+  "evidence": {
+    "evidence_zip_name": "SUP01_Live_Execution_Evidence_20260626_225500.zip",
+    "evidence_sha256": "8c1d633553f073c56d013b43474f16f201e248574b0f7be6871694791f9917de",
+    "commit_push_evidence_sha256": "94e49deaad10f635ae852f8e63865913a8c13f1f865b1328629455b5985c517c",
+    "credentials_retained": false,
+    "repository_unchanged_during_live_execution": true
+  },
+  "formal_closure": {
+    "status": "closed",
+    "recorded_at_utc": "2026-06-26T17:35:12Z",
+    "next_stage": "SUP02"
+  }
 }

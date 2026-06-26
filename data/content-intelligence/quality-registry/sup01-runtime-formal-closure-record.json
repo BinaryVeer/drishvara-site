@@ -1,0 +1,103 @@
+{
+  "module_id": "SUP01",
+  "title": "Supabase Panchang Runtime Formal Closure Record",
+  "status": "sup01_live_execution_evidence_verified_and_formally_closed",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
+  "foundation_commit": "624f55a5193ee32811ef563154872334bf570bb8",
+  "supabase_project_ref": "pajlabwwszmhjhabxprf",
+  "formal_closure_recorded_at_utc": "2026-06-26T17:35:12Z",
+  "runtime": {
+    "edge_function": "calculate-panchang",
+    "edge_function_id": "4a924f8a-72cc-43c6-95f7-848e3daf2a4b",
+    "edge_function_status": "ACTIVE",
+    "edge_function_version": 4,
+    "engine": "astronomy-engine@2.1.19",
+    "runtime_release_status": "active",
+    "public_ui_cutover_active": false,
+    "input_persistence_enabled": false
+  },
+  "final_execution_results": {
+    "migration_and_privilege_hardening": {
+      "status": "passed",
+      "transactional_preflight": true,
+      "live_migration_applied": true,
+      "anon_authenticated_privileges_select_only": true
+    },
+    "canonical_runtime_payloads": {
+      "status": "passed",
+      "counts": {
+        "aliases": 20,
+        "calculation_policies": 6,
+        "festival_rules": 7,
+        "runtime_releases": 1
+      }
+    },
+    "preserved_ag74p_release": {
+      "status": "passed",
+      "counts": {
+        "locations": 5,
+        "daily": 384,
+        "festivals": 114,
+        "star": 1,
+        "manifests": 1
+      }
+    },
+    "edge_function_deployment": {
+      "status": "passed",
+      "function": "calculate-panchang",
+      "version": 4,
+      "active": true
+    },
+    "anonymous_invocation_before_activation": {
+      "status": "passed",
+      "passed": 12,
+      "total": 12
+    },
+    "runtime_parity": {
+      "status": "passed",
+      "passed": 24,
+      "total": 24,
+      "failed": 0
+    },
+    "runtime_activation": {
+      "status": "passed",
+      "runtime_release_status": "active",
+      "public_ui_cutover_active": false
+    },
+    "final_readback": {
+      "status": "passed",
+      "service_role": true,
+      "anonymous": true
+    },
+    "anonymous_invocation_after_activation": {
+      "status": "passed",
+      "passed": 12,
+      "total": 12
+    },
+    "rollback_validation": {
+      "status": "guard_validated",
+      "explicit_confirmation_required": true,
+      "unconfirmed_mutation_blocked": true,
+      "destructive_rollback_performed": false
+    }
+  },
+  "execution_evidence": {
+    "evidence_zip_name": "SUP01_Live_Execution_Evidence_20260626_225500.zip",
+    "evidence_sha256": "8c1d633553f073c56d013b43474f16f201e248574b0f7be6871694791f9917de",
+    "commit_push_evidence_sha256": "94e49deaad10f635ae852f8e63865913a8c13f1f865b1328629455b5985c517c",
+    "evidence_member_count": 63,
+    "repository_head_before": "624f55a5193ee32811ef563154872334bf570bb8",
+    "repository_head_after": "624f55a5193ee32811ef563154872334bf570bb8",
+    "repository_unchanged_during_execution": true,
+    "credentials_retained_in_evidence": false
+  },
+  "formal_closure": {
+    "status": "closed",
+    "sup01_scope_complete": true,
+    "ag74p_continuity_preserved": true,
+    "no_additional_ag_numbered_panchang_patch_required": true,
+    "public_cutover_deferred_to_sup02": true,
+    "next_stage": "SUP02"
+  }
+}

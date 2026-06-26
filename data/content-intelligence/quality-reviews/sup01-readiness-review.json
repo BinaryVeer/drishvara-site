@@ -1,27 +1,62 @@
 {
   "module_id": "SUP01",
-  "title": "Supabase Panchang Runtime Foundation Readiness Review",
-  "status": "sup01_diagnosis_passed_runtime_foundation_local_apply_ready",
+  "title": "Supabase Panchang Runtime Foundation Readiness and Execution Review",
+  "status": "sup01_diagnosis_live_execution_and_runtime_activation_verified",
   "diagnosis_evidence_sha256": "040bbe50389d91d894fdef6e9e819d7b0ce484c2cf2c3bc8ce8f602b06ff32b9",
+  "live_execution_evidence_sha256": "8c1d633553f073c56d013b43474f16f201e248574b0f7be6871694791f9917de",
   "findings": {
     "ag74p_formally_closed": true,
     "live_static_assets_match_formal_baseline": true,
-    "live_release_counts": {
+    "preserved_release_counts": {
       "locations": 5,
       "daily": 384,
       "festivals": 114,
       "star": 1,
       "manifests": 1
     },
-    "existing_calculation_function_present": false,
-    "browser_local_calculation_present": true,
-    "repository_json_runtime_present": true,
-    "excess_anon_authenticated_table_privileges_detected": [
+    "calculation_function_present": true,
+    "calculation_function_active": true,
+    "calculation_function_version": 4,
+    "browser_local_calculation_remains_present_until_sup02": true,
+    "repository_json_runtime_remains_present_until_sup02": true,
+    "original_excess_anon_authenticated_privileges": [
       "TRUNCATE",
       "REFERENCES",
       "TRIGGER"
     ],
-    "mandatory_privilege_hardening_included": true
+    "excess_privileges_remediated": true,
+    "current_anon_authenticated_table_privileges": [
+      "SELECT"
+    ],
+    "mandatory_privilege_hardening_verified": true,
+    "runtime_release_active": true,
+    "public_ui_cutover_active": false,
+    "input_or_personal_data_persisted": false
   },
-  "public_cutover_deferred_to": "SUP02"
+  "execution_results": {
+    "normalized_runtime_counts": {
+      "aliases": 20,
+      "policies": 6,
+      "rules": 7,
+      "runtime": 1
+    },
+    "anonymous_invocation_before_activation": {
+      "passed": 12,
+      "total": 12
+    },
+    "local_to_live_parity": {
+      "passed": 24,
+      "total": 24
+    },
+    "anonymous_invocation_after_activation": {
+      "passed": 12,
+      "total": 12
+    },
+    "service_role_readback": "passed",
+    "anonymous_readback": "passed",
+    "rollback_guard": "passed",
+    "destructive_rollback_performed": false
+  },
+  "public_cutover_deferred_to": "SUP02",
+  "formal_closure_status": "closed"
 }
