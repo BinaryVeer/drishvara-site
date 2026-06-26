@@ -1,0 +1,23 @@
+{
+  "module_id": "SUP02",
+  "title": "Panchang Public Runtime Final Cutover Validation",
+  "status": "sup02_final_cutover_local_code_validation_ready",
+  "post_deploy_evidence_sha256": "164e5304dd806400ca181aa3b4465f8d6d7f69f7ef3256fc25dcbbc27339af2d",
+  "checks": {
+    "post_deploy_evidence_verified": true,
+    "public_function_unauthenticated_invocation_passed_twice": true,
+    "runtime_flag_false_before_index_switch": true,
+    "local_index_loads_server_controller_once": true,
+    "local_index_does_not_load_browser_astronomy": true,
+    "local_index_does_not_load_ag74p_controller": true,
+    "ag74p_historical_controller_file_immutable": true,
+    "sup01_historical_closure_preserved": true,
+    "annual_book_four_pages_preserved": true,
+    "five_named_locations_and_worldwide_coordinates_preserved": true,
+    "festival_primary_and_ritual_windows_separated": true,
+    "no_input_or_personal_data_persistence": true,
+    "remote_public_switch_not_performed_during_local_apply": true,
+    "runtime_flag_activation_not_performed_during_local_apply": true
+  },
+  "next_controlled_action": "Review local evidence and commit/push the server-only index switch"
+}

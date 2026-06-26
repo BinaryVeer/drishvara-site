@@ -1,0 +1,40 @@
+{
+  "module_id": "SUP02",
+  "title": "Panchang Public Runtime Final Cutover Record",
+  "status": "sup02_final_cutover_code_prepared_live_activation_pending",
+  "baseline_commit": "35edabe78b1d0b7ae85edf83956a10abffbb4f80",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
+  "post_deploy_verification": {
+    "evidence_zip_name": "SUP02_Post_Deploy_Verification_Resume_Evidence_20260627_010604.zip",
+    "evidence_sha256": "164e5304dd806400ca181aa3b4465f8d6d7f69f7ef3256fc25dcbbc27339af2d",
+    "evidence_member_count": 53,
+    "cors_preflight": "passed",
+    "unauthenticated_invocation_first_pass": "passed_12_of_12",
+    "unauthenticated_invocation_final_pass": "passed_12_of_12",
+    "service_role_readback": "passed",
+    "anonymous_readback": "passed",
+    "runtime_release_status": "active",
+    "public_ui_cutover_active": false,
+    "input_persistence_enabled": false
+  },
+  "local_cutover_preparation": {
+    "server_only_index_wiring": true,
+    "browser_astronomy_removed_from_active_index": true,
+    "ag74p_controller_removed_from_active_index": true,
+    "historical_ag74p_controller_file_preserved": true,
+    "four_page_varanasi_book_preserved": true,
+    "five_named_locations_preserved": true,
+    "worldwide_coordinates_preserved": true,
+    "primary_public_window_mapping_preserved": true,
+    "ritual_window_separation_preserved": true,
+    "zero_input_persistence_guard_preserved": true
+  },
+  "pending_live_actions": {
+    "commit_and_push_index_switch": true,
+    "verify_production_server_controller": true,
+    "activate_runtime_flag": true,
+    "verify_live_rendering": true,
+    "formal_close_sup02": true
+  }
+}

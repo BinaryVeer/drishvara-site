@@ -1,0 +1,30 @@
+{
+  "module_id": "SUP02",
+  "title": "Panchang Public Runtime Final Cutover Boundary",
+  "status": "sup02_public_runtime_final_cutover_code_prepared_local_only",
+  "baseline_commit": "35edabe78b1d0b7ae85edf83956a10abffbb4f80",
+  "source_release_id": "ag74p_final_2026_06_24",
+  "runtime_release_id": "sup01_panchang_runtime_v1",
+  "post_deploy_evidence_sha256": "164e5304dd806400ca181aa3b4465f8d6d7f69f7ef3256fc25dcbbc27339af2d",
+  "ag74p_index_baseline_sha256": "a88abb450a2e428041f277baa23f83e8e956a93f61d58c80c0239407b39e18e2",
+  "ag74p_controller_sha256": "1b7ad9360a9081da22e5d80daf4ffc954629742196773fd599514731b95b3f44",
+  "server_controller_sha256": "e12d8a0969e06971e8c0bcdc870299a3622cd49d4e909f824aafc0c10977011a",
+  "sup01_historical_closure_preserved": true,
+  "local_public_index_switch_prepared": true,
+  "remote_public_index_switch_completed": false,
+  "runtime_flag_activation_completed": false,
+  "public_ui_cutover_active": false,
+  "live_public_verification_completed": false,
+  "commit_and_push_performed": false,
+  "input_persistence_enabled": false,
+  "rollback_automatic": false,
+  "rollback_requires_explicit_confirmation": true,
+  "required_execution_order": [
+    "commit and push reviewed server-only index switch while public_ui_cutover_active remains false",
+    "verify the production page loads the SUP02 controller and no browser astronomy or AG74P controller",
+    "activate public_ui_cutover_active for the single active zero-persistence runtime",
+    "verify unauthenticated function status and production Panchang rendering",
+    "record formal SUP02 closure"
+  ],
+  "next_controlled_action": "Review local apply evidence"
+}

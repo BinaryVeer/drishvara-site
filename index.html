@@ -10382,9 +10382,11 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- AG74G_PANCHANG_ACTIVE_DATA_WIRING_END -->
 
 
-<script data-ag74o-panchang-public-runtime="true">window.drishvaraAg74oPublicSurfaceActive = true;</script>
-<script src="assets/vendor/astronomy-engine-2.1.19.min.js" data-ag74o-local-astronomy-engine="2.1.19"></script>
-<script src="assets/js/ag74o-panchang-public-controller.js" data-ag74o-controller="true"></script>
+<script src="assets/js/sup02-panchang-server-controller.js"
+        data-sup02-controller="true"
+        data-sup02-runtime="server-only"
+        data-sup02-public-cutover="prepared-local"
+        data-sup02-input-storage="none"></script>
 <script data-ag74i-panchang-public-surface-controller="true">
 /* AG74I_PANCHANG_PUBLIC_SURFACE_CONTROLLER_START */
 (function () {
@@ -11071,7 +11073,21 @@ document.addEventListener("DOMContentLoaded", () => {
  /* AG74I_PANCHANG_PUBLIC_SURFACE_CONTROLLER_END */
 </script>
 
-<div hidden data-ag74o-governance-markers="true" data-ag74o-local-browser-calculation="true" data-ag74o-festival-publication-guard="true" data-ag74o-input-storage="none" data-ag74o-external-api="false" data-ag74o-book-pages="4">ag74o-panchang-public-ui-wiring</div>
+<div hidden data-ag74o-governance-markers="true"
+     data-ag74o-local-browser-calculation="retained-historical-asset-not-loaded"
+     data-ag74o-festival-publication-guard="true"
+     data-ag74o-input-storage="none"
+     data-ag74o-external-api="false"
+     data-ag74o-book-pages="4">ag74o-panchang-public-ui-wiring-retired-by-sup02</div>
+<div hidden data-sup02-governance-markers="true"
+     data-sup02-runtime="server-only"
+     data-sup02-public-cutover="prepared-local"
+     data-sup02-default-location="varanasi_in"
+     data-sup02-default-timezone="Asia/Kolkata"
+     data-sup02-input-storage="none"
+     data-sup02-place-substitution="false"
+     data-sup02-timezone-substitution="false"
+     data-sup02-calendar-book-pages="4">sup02-panchang-server-runtime-cutover</div>
 <div hidden data-ag74i-governance-markers="true"
      data-ag74i-default-location="varanasi_in"
      data-ag74i-default-timezone="Asia/Kolkata"

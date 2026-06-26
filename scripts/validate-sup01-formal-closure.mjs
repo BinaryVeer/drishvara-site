@@ -4,7 +4,9 @@ import path from "node:path";
 
 const root = process.cwd();
 const full = (value) => path.join(root, value);
-const readJson = (value) => JSON.parse(fs.readFileSync(full(value), "utf8"));
+const exists = (value) => fs.existsSync(full(value));
+const read = (value) => fs.readFileSync(full(value), "utf8");
+const readJson = (value) => JSON.parse(read(value));
 const fail = (message) => {
   console.error(`❌ SUP01 formal-closure validation failed: ${message}`);
   process.exit(1);
@@ -12,8 +14,10 @@ const fail = (message) => {
 const sha = (value) =>
   crypto.createHash("sha256").update(fs.readFileSync(full(value))).digest("hex");
 
-const evidenceSha = "8c1d633553f073c56d013b43474f16f201e248574b0f7be6871694791f9917de";
+const evidenceSha =
+  "8c1d633553f073c56d013b43474f16f201e248574b0f7be6871694791f9917de";
 const foundationCommit = "624f55a5193ee32811ef563154872334bf570bb8";
+const ag74pIndexBaseline = "a88abb450a2e428041f277baa23f83e8e956a93f61d58c80c0239407b39e18e2";
 
 const closure = readJson(
   "data/content-intelligence/quality-registry/sup01-runtime-formal-closure-record.json"
@@ -33,7 +37,7 @@ if (
   closure.runtime?.public_ui_cutover_active !== false ||
   closure.runtime?.input_persistence_enabled !== false
 ) {
-  fail("Closed runtime state mismatch.");
+  fail("Historical closed runtime state mismatch.");
 }
 
 const boundary = readJson(
@@ -46,7 +50,7 @@ if (
   boundary.public_ui_cutover_active !== false ||
   boundary.next_controlled_action?.startsWith("SUP02") !== true
 ) {
-  fail("Execution boundary is not formally closed into SUP02.");
+  fail("SUP01 execution boundary is not formally closed into SUP02.");
 }
 
 const readiness = readJson(
@@ -102,15 +106,35 @@ if (
   fail("Live validation record mismatch.");
 }
 
-const ag74pHashes = {
-  "index.html": "a88abb450a2e428041f277baa23f83e8e956a93f61d58c80c0239407b39e18e2",
-  "assets/js/ag74o-panchang-public-controller.js": "1b7ad9360a9081da22e5d80daf4ffc954629742196773fd599514731b95b3f44",
-  "data/knowledge-base/location-intelligence/production/ag74p-approved-location-projection.json": "c907a82b2577e28acdedc6d173bc3bc1476a2a6e9203787c9bab49c94354ad93",
-  "data/knowledge-base/panchang-festival/production/ag74p-approved-daily-calendar-projection.json": "4da533d3a887dc4d58a3fe1950a9fa71486621169612045d192851814c8b1a40",
-  "data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json": "0b4f3a3c9a2680eafc117d1fd2e37a5ceace895b0e3a5608801903bb74d25ab5"
+const immutableHashes = {
+  "assets/js/ag74o-panchang-public-controller.js":
+    "1b7ad9360a9081da22e5d80daf4ffc954629742196773fd599514731b95b3f44",
+  "data/knowledge-base/location-intelligence/production/ag74p-approved-location-projection.json":
+    "c907a82b2577e28acdedc6d173bc3bc1476a2a6e9203787c9bab49c94354ad93",
+  "data/knowledge-base/panchang-festival/production/ag74p-approved-daily-calendar-projection.json":
+    "4da533d3a887dc4d58a3fe1950a9fa71486621169612045d192851814c8b1a40",
+  "data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json":
+    "0b4f3a3c9a2680eafc117d1fd2e37a5ceace895b0e3a5608801903bb74d25ab5"
 };
-for (const [relative, expected] of Object.entries(ag74pHashes)) {
-  if (sha(relative) !== expected) fail(`AG74P public asset changed: ${relative}`);
+for (const [relative, expected] of Object.entries(immutableHashes)) {
+  if (sha(relative) !== expected) fail(`AG74P immutable asset changed: ${relative}`);
+}
+
+const finalBoundaryPath =
+  "data/content-intelligence/mutation-plans/sup02-public-runtime-final-cutover-boundary.json";
+const finalBoundary = exists(finalBoundaryPath) ? readJson(finalBoundaryPath) : null;
+if (!finalBoundary) {
+  if (sha("index.html") !== ag74pIndexBaseline) {
+    fail("AG74P index changed before a governed SUP02 cutover boundary existed.");
+  }
+} else {
+  if (
+    finalBoundary.ag74p_index_baseline_sha256 !== ag74pIndexBaseline ||
+    finalBoundary.sup01_historical_closure_preserved !== true ||
+    finalBoundary.local_public_index_switch_prepared !== true
+  ) {
+    fail("SUP02 transition does not preserve the historical SUP01 closure.");
+  }
 }
 
 const packageJson = readJson("package.json");
@@ -128,7 +152,7 @@ for (const doc of [
   "docs/quality/SUP01_PANCHANG_RUNTIME_READINESS.md",
   "docs/quality/SUP01_PANCHANG_RUNTIME_FORMAL_CLOSURE.md"
 ]) {
-  const content = fs.readFileSync(full(doc), "utf8");
+  const content = read(doc);
   if (!content.includes(evidenceSha) || !content.includes("SUP02")) {
     fail(`Closure evidence or SUP02 boundary missing from ${doc}`);
   }
@@ -145,28 +169,16 @@ const governedFiles = [
   "docs/quality/SUP01_PANCHANG_RUNTIME_FORMAL_CLOSURE.md",
   "scripts/validate-sup01-formal-closure.mjs"
 ];
-const governedText = governedFiles
-  .map((relative) => fs.readFileSync(full(relative), "utf8"))
-  .join("\n");
-
+const governedText = governedFiles.map(read).join("\n");
 const credentialPatterns = [
-  new RegExp([
-    "eyJ",
-    "[A-Za-z0-9_-]+",
-    "\\.",
-    "[A-Za-z0-9_-]+",
-    "\\.",
-    "[A-Za-z0-9_-]+"
-  ].join("")),
+  new RegExp(["eyJ", "[A-Za-z0-9_-]+", "\\.", "[A-Za-z0-9_-]+", "\\.", "[A-Za-z0-9_-]+"].join("")),
   new RegExp(["sb", "_secret_", "[A-Za-z0-9_-]+"].join("")),
   new RegExp(["postgres", "(?:ql)?", "://"].join(""))
 ];
-
 if (credentialPatterns.some((pattern) => pattern.test(governedText))) {
   fail("Credential-shaped material found in SUP01 closure files.");
 }
 
-console.log("✅ SUP01 formal closure is valid.");
-console.log("✅ Live migration, 20/6/7/1 runtime data, active function version 4 and 24/24 parity are recorded.");
-console.log("✅ Pre/post activation anonymous invocation passed 12/12 and final readbacks are closed.");
-console.log("✅ Public UI cutover remains false; SUP02 is the next governed stage.");
+console.log("✅ SUP01 historical formal closure remains valid.");
+console.log("✅ Live migration, 20/6/7/1 runtime data, version-4 deployment and 24/24 parity remain recorded.");
+console.log("✅ SUP02 may change the public index only through its separately governed cutover boundary.");

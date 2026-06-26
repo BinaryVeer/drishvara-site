@@ -64,6 +64,8 @@ if (!jwtVerified && !publicFunctionPrepared) {
   fail("calculate-panchang JWT mode is not explicitly governed.");
 }
 
+let publicFunctionPhase = "sup01_jwt_verified";
+
 if (publicFunctionPrepared) {
   const boundaryPath = path.join(
     root,
@@ -72,17 +74,35 @@ if (publicFunctionPrepared) {
   if (!fs.existsSync(boundaryPath)) {
     fail("Public function mode requires the governed SUP02 cutover boundary.");
   }
+
   const boundary = JSON.parse(fs.readFileSync(boundaryPath, "utf8"));
-  if (
-    boundary.module_id !== "SUP02" ||
-    boundary.status !==
-      "sup02_public_runtime_cutover_readiness_prepared_local_apply_only" ||
-    boundary.public_ui_cutover_active !== false ||
-    boundary.live_function_deployment_performed !== false ||
-    boundary.live_database_migration_applied !== false
-  ) {
+
+  const readinessPrepared =
+    boundary.module_id === "SUP02" &&
+    boundary.status ===
+      "sup02_public_runtime_cutover_readiness_prepared_local_apply_only" &&
+    boundary.public_ui_cutover_active === false &&
+    boundary.live_function_deployment_performed === false &&
+    boundary.live_database_migration_applied === false;
+
+  const nonactivatingDeploymentVerified =
+    boundary.module_id === "SUP02" &&
+    boundary.status ===
+      "sup02_nonactivating_live_deployment_verified_final_cutover_code_prepared_local_only" &&
+    boundary.public_ui_cutover_active === false &&
+    boundary.live_function_deployment_performed === true &&
+    boundary.live_database_migration_applied === true &&
+    boundary.public_unauthenticated_invocation_verified === true &&
+    boundary.runtime_flag_activated === false &&
+    boundary.commit_and_push_performed === false;
+
+  if (!readinessPrepared && !nonactivatingDeploymentVerified) {
     fail("SUP02 public-function preparation boundary mismatch.");
   }
+
+  publicFunctionPhase = readinessPrepared
+    ? "sup02_nonactivating_readiness"
+    : "sup02_nonactivating_deployment_verified";
 }
 
 const deno = JSON.parse(
@@ -98,8 +118,10 @@ if (deno.imports?.["astronomy-engine"] !== "npm:astronomy-engine@2.1.19") {
 console.log("✅ SUP01 Supabase offline preflight passed.");
 console.log("✅ Runtime function, normalized tables and full privilege hardening remain present.");
 console.log(
-  publicFunctionPrepared
-    ? "✅ SUP02 public invocation mode is prepared under a non-activating governed boundary."
-    : "✅ SUP01 gateway JWT verification remains configured."
+  publicFunctionPhase === "sup02_nonactivating_deployment_verified"
+    ? "✅ SUP02 public invocation deployment is verified while the runtime cutover flag remains false."
+    : publicFunctionPhase === "sup02_nonactivating_readiness"
+      ? "✅ SUP02 public invocation mode is prepared under a non-activating governed boundary."
+      : "✅ SUP01 gateway JWT verification remains configured."
 );
 console.log("✅ No network operation, migration, function deployment or live write was performed.");

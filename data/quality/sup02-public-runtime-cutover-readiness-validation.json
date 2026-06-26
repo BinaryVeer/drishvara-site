@@ -1,22 +1,21 @@
 {
   "module_id": "SUP02",
   "title": "Panchang Public Server Runtime Cutover Readiness Validation",
-  "status": "local_apply_validation_pending",
+  "status": "sup02_nonactivating_live_deployment_verified_final_cutover_local_validation",
+  "post_deploy_evidence_sha256": "164e5304dd806400ca181aa3b4465f8d6d7f69f7ef3256fc25dcbbc27339af2d",
   "checks": {
-    "sup01_formal_closure_preserved": true,
-    "ag74p_public_assets_unchanged_during_readiness": true,
-    "legacy_public_controller_still_active_during_readiness": true,
-    "server_only_controller_prepared_not_loaded": true,
-    "edge_function_reads_active_runtime_release": true,
-    "edge_function_returns_dynamic_cutover_flag": true,
-    "public_invocation_mode_prepared": true,
-    "migration_does_not_activate_cutover": true,
-    "runtime_release_public_select_policy_forward_compatible": true,
-    "rollback_disable_operation_prepared": true,
+    "sup01_historical_closure_preserved": true,
+    "ag74p_controller_and_projections_immutable": true,
+    "nonactivating_migration_verified": true,
+    "public_function_invocation_verified_twice": true,
+    "runtime_flag_remains_false": true,
+    "server_only_controller_prepared": true,
+    "local_index_switch_prepared": true,
+    "browser_astronomy_not_loaded_by_local_index": true,
+    "legacy_controller_not_loaded_by_local_index": true,
     "input_persistence_absent": true,
-    "live_database_operation_absent": true,
-    "live_function_deployment_absent": true,
-    "public_ui_mutation_absent": true
+    "remote_public_page_unchanged_during_local_apply": true,
+    "live_runtime_activation_absent": true
   },
-  "next_controlled_action": "SUP02 readiness evidence review and controlled commit/push"
+  "next_controlled_action": "SUP02 final-cutover local evidence review and controlled commit/push"
 }
