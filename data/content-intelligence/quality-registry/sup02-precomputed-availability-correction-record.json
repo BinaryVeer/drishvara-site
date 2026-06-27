@@ -1,0 +1,21 @@
+{
+  "module_id": "SUP02",
+  "correction_id": "sup02_precomputed_availability_contract_correction_2026_06_27",
+  "status": "sup02_precomputed_availability_contract_correction_locally_validated",
+  "affected_approved_exact_record_count": 384,
+  "diagnosed_legacy_available_missing_count": 384,
+  "controller_contract": "panchang.result.available must equal true before public rendering",
+  "normalisation_contract": {
+    "complete_legacy_result_without_available": "copy and add available=true",
+    "explicit_available_true": "preserve",
+    "explicit_available_false": "preserve",
+    "incomplete_legacy_result": "do not claim precomputed availability; use governed server calculation fallback"
+  },
+  "zero_input_persistence_preserved": true,
+  "public_cutover_flag_required_false_during_redeploy": true,
+  "database_payload_mutation_performed": false,
+  "browser_controller_mutation_performed": false,
+  "source_release_changed": false,
+  "runtime_release_changed": false,
+  "live_redeploy_evidence_pending": true
+}

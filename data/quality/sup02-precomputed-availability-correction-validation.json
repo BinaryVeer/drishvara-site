@@ -1,0 +1,19 @@
+{
+  "module_id": "SUP02",
+  "correction_id": "sup02_precomputed_availability_contract_correction_2026_06_27",
+  "status": "sup02_precomputed_availability_contract_validation_passed",
+  "checks": {
+    "diagnostic_evidence_bound": true,
+    "guarded_rollback_evidence_bound": true,
+    "all_384_exact_records_complete": true,
+    "all_384_exact_records_missing_legacy_available_discriminator": true,
+    "complete_legacy_payload_normalisation_defined": true,
+    "explicit_unavailable_preserved": true,
+    "incomplete_payload_fallback_preserved": true,
+    "controller_available_contract_preserved": true,
+    "zero_input_persistence_preserved": true,
+    "database_payload_mutation_forbidden": true,
+    "public_activation_forbidden_during_redeploy": true,
+    "credential_scan_required": true
+  }
+}

@@ -32,6 +32,63 @@ async function restGet<T>(
   return (await response.json()) as T[];
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function hasCompletePublicPanchangResult(
+  value: Record<string, unknown>
+): boolean {
+  const sunrise = isRecord(value["sunrise"]) ? value["sunrise"] : null;
+  const vara = isRecord(value["vara"]) ? value["vara"] : null;
+  const elements = isRecord(value["elements"]) ? value["elements"] : null;
+
+  if (
+    !sunrise ||
+    typeof sunrise["local"] !== "string" ||
+    sunrise["local"].length === 0 ||
+    !vara ||
+    typeof vara["english"] !== "string" ||
+    vara["english"].length === 0 ||
+    typeof vara["sanskrit"] !== "string" ||
+    vara["sanskrit"].length === 0 ||
+    typeof value["paksha"] !== "string" ||
+    value["paksha"].length === 0 ||
+    !elements
+  ) {
+    return false;
+  }
+
+  return ["tithi", "nakshatra", "yoga", "karana"].every((key) => {
+    const element = isRecord(elements[key]) ? elements[key] : null;
+    if (!element) return false;
+    return (
+      typeof element["name"] === "string" &&
+      String(element["name"]).length > 0 &&
+      Number.isInteger(element["index"])
+    );
+  });
+}
+
+function normalizePrecomputedRuntimeResult(
+  value: unknown
+): Record<string, unknown> | null {
+  if (!isRecord(value)) return null;
+
+  if (value["available"] === true || value["available"] === false) {
+    return value;
+  }
+
+  if (!hasCompletePublicPanchangResult(value)) {
+    return null;
+  }
+
+  return {
+    ...value,
+    available: true
+  };
+}
+
 Deno.serve(async (request: Request) => {
   if (request.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -175,8 +232,10 @@ Deno.serve(async (request: Request) => {
       }
 
       if (exactRows.length === 1) {
-        const runtimeResult = exactRows[0].payload?.["runtime_result"];
-        if (runtimeResult && typeof runtimeResult === "object") {
+        const runtimeResult = normalizePrecomputedRuntimeResult(
+          exactRows[0].payload?.["runtime_result"]
+        );
+        if (runtimeResult) {
           panchangSource = "approved_precomputed_record";
           panchangResult = runtimeResult;
           sourceContentHash = exactRows[0].content_hash;

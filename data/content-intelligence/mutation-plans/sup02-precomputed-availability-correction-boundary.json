@@ -1,0 +1,25 @@
+{
+  "module_id": "SUP02",
+  "correction_id": "sup02_precomputed_availability_contract_correction_2026_06_27",
+  "title": "Precomputed Panchang Availability Contract Correction Boundary",
+  "status": "sup02_precomputed_availability_contract_correction_ready_for_controlled_deploy",
+  "baseline_commit": "9ffb09b6b0cf2fb7f6445453b9de7455891afa29",
+  "diagnostic_evidence_sha256": "d92da45b8482cbf2416934cb0c79c4a4a4da767ac177841fce7c5fca650cf52d",
+  "rollback_evidence_sha256": "0bd5d3be699d9d0b91ab856b7fb902f8524563ec5b94490ddc25b32779e8d2b2",
+  "failure_cause": "Approved precomputed runtime_result payloads were complete but did not carry the public controller's required available=true discriminator.",
+  "correction": {
+    "normalise_only_complete_legacy_precomputed_results": true,
+    "preserve_explicit_available_false": true,
+    "fallback_incomplete_legacy_payload_to_server_calculation": true,
+    "change_browser_controller": false,
+    "change_approved_database_payloads": false,
+    "change_release_or_runtime_identity": false
+  },
+  "database_payload_mutation_allowed": false,
+  "public_cutover_activation_allowed": false,
+  "edge_function_redeploy_required": true,
+  "no_jwt_public_function_required": true,
+  "zero_input_persistence_required": true,
+  "commit_push_required_before_redeploy": true,
+  "formal_sup02_closure_allowed": false
+}
