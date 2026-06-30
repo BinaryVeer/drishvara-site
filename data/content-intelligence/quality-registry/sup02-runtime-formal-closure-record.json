@@ -1,0 +1,119 @@
+{
+  "stage": "SUP02",
+  "record_type": "public_runtime_formal_closure",
+  "status": "sup02_public_runtime_activation_verified_and_formally_closed",
+  "prepared_for": {
+    "name": "vikash vaibhav",
+    "identifier": "vikash4world@gmail.com"
+  },
+  "governed_repository_baseline": "26d90247c0d57fc36c8afec5187474c5ae572c9e",
+  "formal_closure": {
+    "status": "closed",
+    "closed_at_utc": "2026-06-30T16:59:00Z",
+    "next_stage": "AG75A",
+    "next_program": "AG75A-AG75E Star Reflection expansion",
+    "supabase_functional_sequence_complete": true,
+    "supabase_functional_stage_count": 2
+  },
+  "activation_evidence": {
+    "archive_name": "SUP02_Final_Public_Runtime_Activation_Evidence_20260628_142024.zip",
+    "evidence_sha256": "6c2bf09fb7c84cbc4cd1b07b1eb5bc140c81d54a9c0b1d0e379b9e7d6f253cfc",
+    "final_status": "SUP02_FINAL_PUBLIC_RUNTIME_ACTIVATION_VERIFIED",
+    "operation_boundary": "activation_only_no_deploy_no_repo_mutation_no_auto_rollback",
+    "selected_members_verified": [
+      "baseline_head.txt",
+      "baseline_origin_main.txt",
+      "final_head.txt",
+      "final_origin_main.txt",
+      "status_before.txt",
+      "status_after.txt",
+      "runtime_before.tsv",
+      "runtime_after.tsv",
+      "anonymous_runtime_after.json",
+      "function_verification/invocation_summary.json",
+      "anonymous_headers_after.txt",
+      "SUMMARY.md"
+    ]
+  },
+  "runtime_transition": {
+    "runtime_release_id": "sup01_panchang_runtime_v1",
+    "release_id": "ag74p_final_2026_06_24",
+    "status_before": "active",
+    "status_after": "active",
+    "active_runtime_rows_before": 1,
+    "active_runtime_rows_after": 1,
+    "public_ui_cutover_active_before": false,
+    "public_ui_cutover_active_after": true,
+    "input_persistence_enabled_before": false,
+    "input_persistence_enabled_after": false,
+    "anonymous_public_ui_cutover_active_after": true,
+    "anonymous_input_persistence_enabled_after": false
+  },
+  "public_verification": {
+    "status": "sup02_active_function_verification_passed",
+    "passed_cases": 12,
+    "total_cases": 12,
+    "failed_cases": 0,
+    "authentication_headers_sent": false,
+    "cors_http_status": 200,
+    "cors_access_control_allow_origin": "*",
+    "varanasi_and_banaras_available": true,
+    "named_places_and_worldwide_coordinates_governed": true,
+    "four_page_varanasi_annual_book_preserved": true
+  },
+  "activation_non_actions": {
+    "repository_modified_during_activation": false,
+    "edge_function_redeployed_during_activation": false,
+    "database_migration_applied_during_activation": false,
+    "automatic_rollback_performed": false
+  },
+  "historical_pre_activation_records": {
+    "preserved_unchanged": true,
+    "pending_language_is_historical": true,
+    "files": [
+      "data/content-intelligence/mutation-plans/sup02-public-runtime-final-cutover-boundary.json",
+      "data/content-intelligence/quality-registry/sup02-public-runtime-final-cutover-record.json",
+      "data/quality/sup02-public-runtime-final-cutover-validation.json",
+      "docs/quality/SUP02_PUBLIC_RUNTIME_FINAL_CUTOVER.md",
+      "scripts/validate-sup02-public-runtime-final-cutover.mjs",
+      "data/content-intelligence/mutation-plans/sup02-precomputed-availability-correction-boundary.json",
+      "data/content-intelligence/quality-registry/sup02-precomputed-availability-correction-record.json",
+      "data/quality/sup02-precomputed-availability-correction-validation.json",
+      "docs/quality/SUP02_PRECOMPUTED_AVAILABILITY_CORRECTION.md",
+      "scripts/validate-sup02-precomputed-availability-contract.mjs",
+      "data/content-intelligence/mutation-plans/sup02-public-runtime-cutover-boundary.json",
+      "data/content-intelligence/quality-registry/sup02-public-runtime-cutover-readiness-record.json",
+      "data/quality/sup02-public-runtime-cutover-readiness-validation.json",
+      "docs/quality/SUP02_PUBLIC_RUNTIME_CUTOVER_READINESS.md",
+      "scripts/validate-sup02-runtime-cutover-readiness.mjs",
+      "index.html",
+      "supabase/functions/calculate-panchang/index.ts"
+    ]
+  },
+  "immutable_repository_hashes": {
+    "data/content-intelligence/mutation-plans/sup02-public-runtime-final-cutover-boundary.json": "7f6ce3960b99847170f56ce97258c54df4a51f0deb2a84d20f5049ac764aed81",
+    "data/content-intelligence/quality-registry/sup02-public-runtime-final-cutover-record.json": "72944878330934a10244859a2738b0cfc1e20f70af4e942640581294bd8c58bb",
+    "data/quality/sup02-public-runtime-final-cutover-validation.json": "07d0ba7a8c4a82d17a4e442e065265a79e1664967eaf27f93e2ec01e9d5739d5",
+    "docs/quality/SUP02_PUBLIC_RUNTIME_FINAL_CUTOVER.md": "6a998c55dd0e720e150b01d3960ac8dedf03c9295cc881904dfd8e153f9d2cb8",
+    "scripts/validate-sup02-public-runtime-final-cutover.mjs": "d0eafe7d6cdcef18b8992776686347944e726e97dd2aad089a93027675076ca6",
+    "data/content-intelligence/mutation-plans/sup02-precomputed-availability-correction-boundary.json": "8a6b346c78f975ca112bb134545f93d361af9e1b44adb0cbccc9fd45f12a14fd",
+    "data/content-intelligence/quality-registry/sup02-precomputed-availability-correction-record.json": "f32959212e50803a20873bd8326d6b421446a3f4f74f3e33bc81380b6680d738",
+    "data/quality/sup02-precomputed-availability-correction-validation.json": "aa8f9b03a2ea8b8eda6608022f7248f9d53b482ac597996b32c47a6cea40a4e0",
+    "docs/quality/SUP02_PRECOMPUTED_AVAILABILITY_CORRECTION.md": "04d3638afa5a6b2b9f8767a79c60662f6b5adfb23b0c95a5f310137fa8c7380f",
+    "scripts/validate-sup02-precomputed-availability-contract.mjs": "25fc7ad4304964883dc824f7e6f22caceeb2bd905aff6e771f173f4abfba6c04",
+    "data/content-intelligence/mutation-plans/sup02-public-runtime-cutover-boundary.json": "4dee5356e59eca0e0ba7c0386e5ae2db362c44cbbc72039224babd1d1ee066f0",
+    "data/content-intelligence/quality-registry/sup02-public-runtime-cutover-readiness-record.json": "6d1287a287d2214097e60a671da42c0b581f36bddab6492e948e6c61bbec58dc",
+    "data/quality/sup02-public-runtime-cutover-readiness-validation.json": "2a787fc149cc52eb59e3e9dde694540209f9a969a7f6433c48b6a39fb81c1132",
+    "docs/quality/SUP02_PUBLIC_RUNTIME_CUTOVER_READINESS.md": "64772f263a0027d44f85f967c2a1d51eda56ced5b3cab2f9af3cbb66c6cfbd77",
+    "scripts/validate-sup02-runtime-cutover-readiness.mjs": "7dad762e398841ce48ac18a83794bc68eebcf064672124307159cfb72c6dd8b0",
+    "index.html": "6ba9e16c2ee35c0dfd4abdbc872f54dafaa6a4a938f1bcb2744d180a407c7cdf",
+    "supabase/functions/calculate-panchang/index.ts": "eaae3e78b788d879c7ed9d524cf101d83279b35934e1d7a7bb4325bbaaf18338"
+  },
+  "governance_boundary": {
+    "runtime_is_primary_public_calculation_path": true,
+    "public_inputs_are_not_persisted": true,
+    "repository_json_role": "audited_snapshots_fixtures_and_recovery_exports_only",
+    "no_additional_panchang_patch_stage": true,
+    "next_work_must_not_reactivate_sup01_or_sup02": true
+  }
+}
