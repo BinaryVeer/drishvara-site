@@ -1,0 +1,42 @@
+{
+  "module_id": "AG75A-AG75B",
+  "title": "AG75B Star Reflection Panchang and Nakshatra Integration Readiness",
+  "status": "ready_for_ag75b_star_reflection_panchang_nakshatra_integration_contract",
+  "governed_repository_baseline": "01aca0107d8f84bafb5f4532aec164a9e1e599de",
+  "ag75a_records": {
+    "scope": "data/methodology/star-reflection/ag75a-star-reflection-expansion-scope-and-method-integration.json",
+    "dependency_map": "data/methodology/star-reflection/ag75a-star-reflection-dependency-consumption-map.json",
+    "safety_boundary": "data/methodology/star-reflection/ag75a-star-reflection-safety-and-non-prediction-boundary.json"
+  },
+  "consumed_foundations": {
+    "ag72_method_and_output_doctrine": true,
+    "ag73_birth_time_aware_contract_and_output_bank": true,
+    "ag73e_active_result_qa_closure": true,
+    "ag74p_location_and_runtime_contract": true,
+    "sup02_runtime_formal_closure": true
+  },
+  "source_count": 32,
+  "hard_blockers": [],
+  "controlled_requirements_for_ag75b": [
+    "Map DOB, birth-time mode, birth place, coordinates and timezone to the governed Panchang request basis.",
+    "Define which Panchang response fields may be consumed by Star Reflection.",
+    "Define Nakshatra identity, index, transition and availability handling without inventing missing values.",
+    "Define exact, unknown and invalid birth-time degradation paths.",
+    "Define runtime failure and unavailable-response handling.",
+    "Require no authentication secret in browser code.",
+    "Require no personal input persistence.",
+    "Preserve reflective, non-deterministic output doctrine.",
+    "Prohibit any database, deployment, runtime-flag or UI mutation inside AG75B contract creation."
+  ],
+  "blocked_in_ag75b": [
+    "Public UI mutation.",
+    "Output-bank expansion.",
+    "Database migration or write.",
+    "Edge Function deployment.",
+    "Runtime activation or flag change.",
+    "Personal input persistence.",
+    "Deterministic prediction.",
+    "Reopening SUP01 or SUP02."
+  ],
+  "next_stage": "AG75B"
+}

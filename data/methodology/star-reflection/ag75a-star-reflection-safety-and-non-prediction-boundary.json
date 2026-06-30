@@ -1,0 +1,66 @@
+{
+  "module_id": "AG75A",
+  "title": "Star Reflection Safety and Non-Prediction Boundary",
+  "status": "ag75a_star_reflection_safety_and_non_prediction_boundary_locked",
+  "source_scope": "data/methodology/star-reflection/ag75a-star-reflection-expansion-scope-and-method-integration.json",
+  "inherited_constraints": {
+    "primary_orientation": "Moon-led and Nakshatra-oriented reflection",
+    "supporting_context": "Panchanga-supported, location-aware and timezone-aware",
+    "birth_time_modes": [
+      "exact_session_only",
+      "unknown",
+      "pending_or_invalid"
+    ],
+    "output_nature": "reflective_non_deterministic_symbolic_guidance",
+    "deterministic_prediction_allowed": false,
+    "sensitive_profiling_allowed": false,
+    "medical_financial_legal_advice_allowed": false,
+    "personal_data_storage_allowed": false,
+    "public_input_persistence_allowed": false
+  },
+  "mandatory_character": {
+    "reflective": true,
+    "symbolic": true,
+    "non_deterministic": true,
+    "non_fatalistic": true,
+    "culturally_respectful": true,
+    "transparent_about_basis_and_limitations": true
+  },
+  "prohibited_capabilities": {
+    "fixed_future_prediction": false,
+    "guaranteed_event_claim": false,
+    "diagnosis": false,
+    "sensitive_trait_inference": false,
+    "medical_advice": false,
+    "financial_advice": false,
+    "legal_advice": false,
+    "mental_health_assessment": false,
+    "relationship_certainty": false,
+    "career_certainty": false,
+    "decision_directive": false,
+    "personal_data_storage": false,
+    "public_input_persistence": false
+  },
+  "privacy_boundary": {
+    "name": "session_only_not_stored",
+    "date_of_birth": "session_only_not_stored",
+    "birth_time": "session_only_not_stored",
+    "birth_place": "session_only_not_stored",
+    "coordinates": "session_only_not_stored",
+    "timezone": "session_only_not_stored"
+  },
+  "degradation_rules": {
+    "exact_birth_time": "Use only the precision formally permitted by AG75B.",
+    "unknown_birth_time": "Degrade transparently and do not imply exact birth-star precision.",
+    "invalid_or_pending_birth_time": "Return an explicit limitation state rather than infer a value.",
+    "missing_runtime_value": "Mark unavailable and do not fabricate Panchang or Nakshatra data.",
+    "runtime_failure": "Provide a safe unavailable state without deterministic fallback claims."
+  },
+  "applies_to": [
+    "AG75A",
+    "AG75B",
+    "AG75C",
+    "AG75D",
+    "AG75E"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "module_id": "AG75A",
+  "title": "Star Reflection Dependency Consumption Map",
+  "status": "ag75a_dependency_consumption_map_created",
+  "source_scope": "data/methodology/star-reflection/ag75a-star-reflection-expansion-scope-and-method-integration.json",
+  "governed_repository_baseline": "01aca0107d8f84bafb5f4532aec164a9e1e599de",
+  "dependency_layers": {
+    "reflection_method": {
+      "sources": [
+        "data/methodology/star-reflection/ag72a-star-reflection-method-lock.json",
+        "data/methodology/star-reflection/ag72a-star-reflection-input-basis-map.json",
+        "data/methodology/star-reflection/ag72a-panchang-dependency-consumption-record.json",
+        "data/methodology/star-reflection/ag72a-star-reflection-safety-boundary.json",
+        "data/methodology/star-reflection/ag72b-star-reflection-computation-contract.json",
+        "data/methodology/star-reflection/ag72b-star-reflection-basis-resolver-contract.json",
+        "data/methodology/star-reflection/ag72b-star-reflection-request-schema.json",
+        "data/methodology/star-reflection/ag72b-star-reflection-limitation-policy.json",
+        "data/methodology/star-reflection/ag72b-no-prediction-computation-audit.json",
+        "data/methodology/star-reflection/ag72c-star-reflection-output-doctrine.json",
+        "data/methodology/star-reflection/ag72c-star-reflection-output-section-model.json",
+        "data/methodology/star-reflection/ag72c-star-reflection-language-policy.json",
+        "data/methodology/star-reflection/ag72c-star-reflection-safe-template-bank.json",
+        "data/methodology/star-reflection/ag72c-no-prediction-output-audit.json",
+        "data/methodology/star-reflection/ag73b-birth-time-aware-star-reflection-contract.json",
+        "data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json",
+        "data/methodology/star-reflection/ag73b-birth-time-aware-basis-resolver-contract.json",
+        "data/methodology/star-reflection/ag73b-birth-time-precision-policy.json",
+        "data/methodology/star-reflection/ag73b-birth-time-no-storage-contract-audit.json",
+        "data/methodology/star-reflection/ag73c-birth-time-aware-star-reflection-output-bank.json",
+        "data/methodology/star-reflection/ag73c-birth-time-aware-output-bank-validation-report.json",
+        "data/methodology/star-reflection/ag73c-active-result-no-storage-audit.json",
+        "data/methodology/star-reflection/ag73e-star-reflection-active-result-qa-closure.json",
+        "data/methodology/star-reflection/ag73e-active-result-qa-validation-report.json",
+        "data/methodology/star-reflection/ag73e-no-storage-no-backend-closure-audit.json"
+      ],
+      "consumption": "immutable_method_and_output_constraints"
+    },
+    "location_intelligence": {
+      "sources": [
+        "data/knowledge-base/location-intelligence/production/ag74p-approved-location-projection.json",
+        "data/knowledge-base/location-intelligence/production/ag74p-location-qualification-register.json"
+      ],
+      "consumption": "approved_named_locations_worldwide_coordinates_and_timezone_basis"
+    },
+    "panchang_runtime": {
+      "sources": [
+        "data/knowledge-base/panchang-festival/production/ag74p-public-runtime-contract.json",
+        "data/content-intelligence/quality-registry/sup02-runtime-formal-closure-record.json",
+        "data/quality/sup02-runtime-formal-closure-validation.json"
+      ],
+      "runtime_release_id": "sup01_panchang_runtime_v1",
+      "canonical_release_id": "ag74p_final_2026_06_24",
+      "public_cutover_active": true,
+      "public_input_persistence": false,
+      "ag75a_consumption_mode": "contract_reference_only_no_runtime_invocation"
+    }
+  },
+  "ag75b_required_contracts": [
+    "Map DOB, birth-time mode, birth place, coordinates and timezone to the governed Panchang request basis.",
+    "Define which Panchang response fields may be consumed by Star Reflection.",
+    "Define Nakshatra identity, index, transition and availability handling without inventing missing values.",
+    "Define exact, unknown and invalid birth-time degradation paths.",
+    "Define runtime failure and unavailable-response handling.",
+    "Require no authentication secret in browser code.",
+    "Require no personal input persistence.",
+    "Preserve reflective, non-deterministic output doctrine.",
+    "Prohibit any database, deployment, runtime-flag or UI mutation inside AG75B contract creation."
+  ],
+  "ag75a_non_actions": {
+    "runtime_called": false,
+    "database_mutated": false,
+    "edge_function_deployed": false,
+    "runtime_flag_changed": false,
+    "public_ui_modified": false,
+    "personal_input_persisted": false
+  },
+  "next_stage": "AG75B"
+}

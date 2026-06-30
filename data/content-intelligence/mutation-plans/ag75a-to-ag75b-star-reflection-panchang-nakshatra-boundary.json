@@ -1,0 +1,29 @@
+{
+  "from_module": "AG75A",
+  "to_module": "AG75B",
+  "transition": "star_reflection_panchang_nakshatra_basis_integration_contract",
+  "status": "ag75a_to_ag75b_boundary_locked",
+  "source_scope": "data/methodology/star-reflection/ag75a-star-reflection-expansion-scope-and-method-integration.json",
+  "source_dependency_map": "data/methodology/star-reflection/ag75a-star-reflection-dependency-consumption-map.json",
+  "source_safety_boundary": "data/methodology/star-reflection/ag75a-star-reflection-safety-and-non-prediction-boundary.json",
+  "allowed_next_actions": [
+    "Create an AG75B read-only runtime-consumption contract.",
+    "Map governed Panchang fields to Star Reflection basis fields.",
+    "Define Nakshatra-oriented resolution and degradation rules.",
+    "Define exact, unknown and invalid birth-time handling.",
+    "Define unavailable and runtime-error states.",
+    "Create AG75C readiness and mutation boundary.",
+    "Register a read-only AG75B validator."
+  ],
+  "blocked_actions": [
+    "Public UI mutation.",
+    "Output-bank expansion.",
+    "Database migration or write.",
+    "Edge Function deployment.",
+    "Runtime activation or flag change.",
+    "Personal input persistence.",
+    "Deterministic prediction.",
+    "Reopening SUP01 or SUP02."
+  ],
+  "mutation_class": "repository_governance_records_only_no_public_or_live_mutation"
+}
