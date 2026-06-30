@@ -1,0 +1,42 @@
+{
+  "from_module": "AG75C",
+  "to_module": "AG75D",
+  "transition": "star_reflection_public_ui_and_runtime_wiring",
+  "status": "ag75c_to_ag75d_boundary_locked",
+  "source_bank": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank.json",
+  "source_schema": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank-schema.json",
+  "source_matrix": "data/methodology/star-reflection/ag75c-star-reflection-resolution-state-output-matrix.json",
+  "source_validation": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank-validation-report.json",
+  "source_audit": "data/methodology/star-reflection/ag75c-no-storage-no-runtime-no-public-wiring-audit.json",
+  "allowed_next_actions": [
+    "Modify the controlled Star Reflection public UI surface.",
+    "Create or modify public controller code for non-persistent runtime requests.",
+    "Create a rule-based resolver for AG75B states.",
+    "Load and select from the immutable AG75C output bank.",
+    "Call the existing public Panchang Edge Function without browser secrets.",
+    "Create AG75E end-to-end QA readiness.",
+    "Register a read-only AG75D validator."
+  ],
+  "required_next_controls": [
+    "Use the existing closed SUP02 calculate-panchang function only.",
+    "Map AG75B resolution states to exactly one AG75C record.",
+    "Select exact records only after complete-minute transition-window proof.",
+    "Keep unknown-time Nakshatra explicitly labelled as day context.",
+    "Render pending, invalid, unavailable, error and ambiguity states distinctly.",
+    "Keep all personal inputs session-only and non-persistent.",
+    "Do not place service-role or other secrets in browser code.",
+    "Do not modify the AG75C bank during public wiring.",
+    "Preserve reflective, symbolic and non-deterministic output language.",
+    "Complete browser, privacy, failure-state and responsive QA before AG75E."
+  ],
+  "blocked_actions": [
+    "Database migration or direct browser database write.",
+    "Edge Function modification or deployment.",
+    "Runtime release or cutover-flag change.",
+    "Personal-input persistence in storage, logs or analytics.",
+    "Output-bank mutation or generation in the browser.",
+    "Deterministic prediction or sensitive profiling.",
+    "Reopening SUP01 or SUP02."
+  ],
+  "mutation_class": "controlled_public_ui_and_browser_runtime_wiring_no_backend_or_persistence_mutation"
+}

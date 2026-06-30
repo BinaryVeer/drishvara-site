@@ -1,0 +1,123 @@
+{
+  "module_id": "AG75C",
+  "title": "Expanded Star Reflection Output Bank Schema",
+  "status": "ag75c_output_bank_schema_locked",
+  "schema_version": "ag75c.output-bank.v1",
+  "source_bank": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank.json",
+  "record_types": {
+    "exact_nakshatra_reflection": {
+      "resolution_state": "exact_window_resolved",
+      "required_count": 27,
+      "required_fields": [
+        "record_id",
+        "resolution_state",
+        "nakshatra_index",
+        "nakshatra_name",
+        "basis_label",
+        "reflective_theme",
+        "self_inquiry_prompt",
+        "grounding_practice",
+        "limitation_notice",
+        "runtime_metadata_slots",
+        "safety_flags",
+        "record_kind",
+        "theme_key",
+        "sections"
+      ],
+      "nakshatra_index_range": [
+        1,
+        27
+      ],
+      "exact_claim_requires_ag75b_window_proof": true
+    },
+    "context_or_limitation": {
+      "required_count": 12,
+      "required_states": [
+        "unknown_day_context",
+        "pending_input",
+        "invalid_input",
+        "runtime_unavailable",
+        "runtime_error",
+        "runtime_contract_mismatch",
+        "missing_transition_metadata",
+        "invalid_nakshatra_index",
+        "unresolved_ambiguous_local_time",
+        "unresolved_nonexistent_local_time",
+        "exact_transition_minute_ambiguous",
+        "exact_outside_single_transition_window"
+      ],
+      "required_fields": [
+        "record_id",
+        "resolution_state",
+        "basis_label",
+        "reflective_theme",
+        "self_inquiry_prompt",
+        "grounding_practice",
+        "limitation_notice",
+        "runtime_metadata_slots",
+        "safety_flags",
+        "record_kind",
+        "nakshatra_index",
+        "nakshatra_name",
+        "theme_key",
+        "sections"
+      ],
+      "nakshatra_identity_must_be_null": true,
+      "exact_birth_nakshatra_claim_allowed": false
+    }
+  },
+  "required_sections": [
+    "basis",
+    "theme",
+    "self_inquiry",
+    "practice",
+    "limits"
+  ],
+  "runtime_metadata_slot_policy": {
+    "slots_are_schema_only": true,
+    "live_values_embedded_in_bank": false,
+    "allowed_slots": [
+      "panchang_source",
+      "release_id",
+      "runtime_release_id",
+      "civil_date",
+      "location_label",
+      "timezone",
+      "nakshatra_index",
+      "nakshatra_name",
+      "resolution_status",
+      "limitation_code"
+    ],
+    "personal_fields_prohibited": [
+      "name",
+      "date_of_birth",
+      "birth_time",
+      "raw_location_input",
+      "latitude",
+      "longitude"
+    ]
+  },
+  "mandatory_safety_flags": [
+    "reflective",
+    "symbolic",
+    "non_deterministic",
+    "non_fatalistic",
+    "limitation_present",
+    "exact_birth_nakshatra_claim_allowed",
+    "personal_data_absent",
+    "professional_advice_absent"
+  ],
+  "blocked_output_classes": [
+    "fixed_future_prediction",
+    "guaranteed_event",
+    "diagnosis",
+    "sensitive_trait_claim",
+    "relationship_certainty",
+    "career_certainty",
+    "medical_advice",
+    "financial_advice",
+    "legal_advice",
+    "directive_life_decision"
+  ],
+  "public_rendering_enabled": false
+}

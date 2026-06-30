@@ -1,0 +1,113 @@
+{
+  "module_id": "AG75C",
+  "title": "Star Reflection Resolution-State Output Matrix",
+  "status": "ag75c_resolution_state_output_matrix_created",
+  "source_bank": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank.json",
+  "required_state_count": 13,
+  "matrix": [
+    {
+      "resolution_state": "exact_window_resolved",
+      "record_count": 27,
+      "output_class": "exact_nakshatra_reflection",
+      "exact_birth_nakshatra_claim_allowed": true,
+      "nakshatra_identity": "governed index and name required",
+      "required_limitation": "AG75B complete-minute transition-window proof required"
+    },
+    {
+      "resolution_state": "unknown_day_context",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "Exact birth time is unknown. No exact birth Nakshatra is claimed; this remains symbolic, day-level and non-deterministic."
+    },
+    {
+      "resolution_state": "pending_input",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "No runtime request or exact Nakshatra resolution is permitted while birth-time input remains pending."
+    },
+    {
+      "resolution_state": "invalid_input",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "Invalid input is not inferred or repaired silently. No runtime request or exact birth Nakshatra claim is made."
+    },
+    {
+      "resolution_state": "runtime_unavailable",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "No Panchang value or Nakshatra identity is inferred from an unavailable result."
+    },
+    {
+      "resolution_state": "runtime_error",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "A technical failure provides no reflective or predictive Nakshatra basis."
+    },
+    {
+      "resolution_state": "runtime_contract_mismatch",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "A mismatched response must not be used for Panchang context or birth Nakshatra resolution."
+    },
+    {
+      "resolution_state": "missing_transition_metadata",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "Missing transition metadata blocks exact birth Nakshatra resolution; no boundary time is invented."
+    },
+    {
+      "resolution_state": "invalid_nakshatra_index",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "An invalid index is not wrapped, renamed or converted into an exact birth Nakshatra."
+    },
+    {
+      "resolution_state": "unresolved_ambiguous_local_time",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "Until the repeated local time is disambiguated, no exact birth Nakshatra is selected."
+    },
+    {
+      "resolution_state": "unresolved_nonexistent_local_time",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "A nonexistent local time is not shifted automatically and cannot support an exact birth Nakshatra claim."
+    },
+    {
+      "resolution_state": "exact_transition_minute_ambiguous",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "The contract does not choose either Nakshatra when a transition falls inside the entered minute."
+    },
+    {
+      "resolution_state": "exact_outside_single_transition_window",
+      "record_count": 1,
+      "output_class": "context_or_limitation",
+      "exact_birth_nakshatra_claim_allowed": false,
+      "nakshatra_identity": "null",
+      "required_limitation": "The available transition metadata is insufficient for an exact birth Nakshatra resolution outside its proven interval."
+    }
+  ]
+}

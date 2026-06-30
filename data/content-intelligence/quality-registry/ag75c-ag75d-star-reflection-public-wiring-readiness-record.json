@@ -1,0 +1,49 @@
+{
+  "module_id": "AG75C-AG75D",
+  "title": "AG75D Star Reflection Public Wiring Readiness",
+  "status": "ready_for_ag75d_star_reflection_public_ui_and_runtime_wiring",
+  "governed_repository_baseline": "b1f5b8534446d2acc0caf70c4ed07fa296814f1a",
+  "ag75c_records": {
+    "expanded_output_bank": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank.json",
+    "output_bank_schema": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank-schema.json",
+    "resolution_state_matrix": "data/methodology/star-reflection/ag75c-star-reflection-resolution-state-output-matrix.json",
+    "validation_report": "data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank-validation-report.json",
+    "no_storage_no_runtime_no_public_wiring_audit": "data/methodology/star-reflection/ag75c-no-storage-no-runtime-no-public-wiring-audit.json"
+  },
+  "record_count": 39,
+  "exact_window_record_count": 27,
+  "non_exact_record_count": 12,
+  "resolution_state_count": 13,
+  "hard_blockers": [],
+  "controlled_requirements_for_ag75d": [
+    "Use the existing closed SUP02 calculate-panchang function only.",
+    "Map AG75B resolution states to exactly one AG75C record.",
+    "Select exact records only after complete-minute transition-window proof.",
+    "Keep unknown-time Nakshatra explicitly labelled as day context.",
+    "Render pending, invalid, unavailable, error and ambiguity states distinctly.",
+    "Keep all personal inputs session-only and non-persistent.",
+    "Do not place service-role or other secrets in browser code.",
+    "Do not modify the AG75C bank during public wiring.",
+    "Preserve reflective, symbolic and non-deterministic output language.",
+    "Complete browser, privacy, failure-state and responsive QA before AG75E."
+  ],
+  "allowed_in_ag75d": [
+    "Modify the controlled Star Reflection public UI surface.",
+    "Create or modify public controller code for non-persistent runtime requests.",
+    "Create a rule-based resolver for AG75B states.",
+    "Load and select from the immutable AG75C output bank.",
+    "Call the existing public Panchang Edge Function without browser secrets.",
+    "Create AG75E end-to-end QA readiness.",
+    "Register a read-only AG75D validator."
+  ],
+  "blocked_in_ag75d": [
+    "Database migration or direct browser database write.",
+    "Edge Function modification or deployment.",
+    "Runtime release or cutover-flag change.",
+    "Personal-input persistence in storage, logs or analytics.",
+    "Output-bank mutation or generation in the browser.",
+    "Deterministic prediction or sensitive profiling.",
+    "Reopening SUP01 or SUP02."
+  ],
+  "next_stage": "AG75D"
+}
