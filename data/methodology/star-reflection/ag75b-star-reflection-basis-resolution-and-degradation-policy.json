@@ -1,0 +1,180 @@
+{
+  "module_id": "AG75B",
+  "title": "Star Reflection Basis Resolution and Degradation Policy",
+  "status": "ag75b_basis_resolution_and_degradation_policy_locked",
+  "source_integration_contract": "data/methodology/star-reflection/ag75b-star-reflection-panchang-nakshatra-integration-contract.json",
+  "nakshatra_index_map": [
+    {
+      "index": 1,
+      "name": "Ashwini"
+    },
+    {
+      "index": 2,
+      "name": "Bharani"
+    },
+    {
+      "index": 3,
+      "name": "Krittika"
+    },
+    {
+      "index": 4,
+      "name": "Rohini"
+    },
+    {
+      "index": 5,
+      "name": "Mrigashira"
+    },
+    {
+      "index": 6,
+      "name": "Ardra"
+    },
+    {
+      "index": 7,
+      "name": "Punarvasu"
+    },
+    {
+      "index": 8,
+      "name": "Pushya"
+    },
+    {
+      "index": 9,
+      "name": "Ashlesha"
+    },
+    {
+      "index": 10,
+      "name": "Magha"
+    },
+    {
+      "index": 11,
+      "name": "Purva Phalguni"
+    },
+    {
+      "index": 12,
+      "name": "Uttara Phalguni"
+    },
+    {
+      "index": 13,
+      "name": "Hasta"
+    },
+    {
+      "index": 14,
+      "name": "Chitra"
+    },
+    {
+      "index": 15,
+      "name": "Swati"
+    },
+    {
+      "index": 16,
+      "name": "Vishakha"
+    },
+    {
+      "index": 17,
+      "name": "Anuradha"
+    },
+    {
+      "index": 18,
+      "name": "Jyeshtha"
+    },
+    {
+      "index": 19,
+      "name": "Mula"
+    },
+    {
+      "index": 20,
+      "name": "Purva Ashadha"
+    },
+    {
+      "index": 21,
+      "name": "Uttara Ashadha"
+    },
+    {
+      "index": 22,
+      "name": "Shravana"
+    },
+    {
+      "index": 23,
+      "name": "Dhanishta"
+    },
+    {
+      "index": 24,
+      "name": "Shatabhisha"
+    },
+    {
+      "index": 25,
+      "name": "Purva Bhadrapada"
+    },
+    {
+      "index": 26,
+      "name": "Uttara Bhadrapada"
+    },
+    {
+      "index": 27,
+      "name": "Revati"
+    }
+  ],
+  "index_validation": {
+    "minimum": 1,
+    "maximum": 27,
+    "silent_wrap_allowed": false,
+    "invented_name_allowed": false
+  },
+  "time_representation": {
+    "birth_input_precision": "minute",
+    "birth_minute_interval": "[local HH:MM:00, local HH:MM plus one minute)",
+    "timezone": "resolved IANA timezone",
+    "ambiguous_dst_local_time": "unresolved_ambiguous_local_time",
+    "nonexistent_dst_local_time": "unresolved_nonexistent_local_time",
+    "implicit_timezone_offset_choice_allowed": false
+  },
+  "transition_semantics": {
+    "previous_boundary_inclusive_for_new_segment": true,
+    "next_boundary_exclusive_for_current_segment": true,
+    "current_segment_interval": "[previous transition, next transition)",
+    "transition_inside_birth_minute": "exact_transition_minute_ambiguous"
+  },
+  "exact_session_only_resolution": {
+    "prerequisites": [
+      "runtime response and privacy state valid",
+      "panchang result available=true",
+      "current Nakshatra name and index valid",
+      "previous and next transition objects complete",
+      "birth local minute maps uniquely in the resolved timezone"
+    ],
+    "resolved_current_segment": "The complete birth-minute interval lies at or after the previous transition and strictly before the next transition; use the current sunrise-anchored Nakshatra identity because the transitions prove that the same segment covers the entire birth minute.",
+    "boundary_minute": "If either transition occurs inside the birth-minute interval, do not choose either side; return exact_transition_minute_ambiguous.",
+    "before_previous_transition": "Return exact_outside_single_transition_window; the runtime does not provide the earlier transition needed to prove the birth segment.",
+    "at_or_after_next_transition": "Return exact_outside_single_transition_window unless a later governed runtime contract supplies the next-next boundary. The available next.toIndex remains transition metadata and must not be extended across an unproven interval.",
+    "next_to_index_use": "May identify the segment beginning exactly at the governed next transition, but current HH:MM minute precision cannot claim that segment when the transition falls inside the entered minute or when no next-next boundary proves the remainder of the interval."
+  },
+  "unknown_resolution": {
+    "resolution_status": "unknown_day_context",
+    "exact_birth_nakshatra": null,
+    "allowed_context": "The sunrise Nakshatra may be shown only as day-level Panchang context, explicitly not as the user's birth star.",
+    "exact_birth_star_claim_allowed": false
+  },
+  "pending_resolution": {
+    "resolution_status": "pending_input",
+    "runtime_request_allowed": false,
+    "exact_birth_nakshatra": null,
+    "public_degradation_class": "pending_or_invalid"
+  },
+  "invalid_resolution": {
+    "resolution_status": "invalid_input",
+    "runtime_request_allowed": false,
+    "exact_birth_nakshatra": null,
+    "public_degradation_class": "pending_or_invalid"
+  },
+  "runtime_degradation_states": [
+    "runtime_unavailable",
+    "runtime_error",
+    "runtime_contract_mismatch",
+    "missing_transition_metadata",
+    "invalid_nakshatra_index",
+    "unresolved_ambiguous_local_time",
+    "unresolved_nonexistent_local_time",
+    "exact_transition_minute_ambiguous",
+    "exact_outside_single_transition_window"
+  ],
+  "universal_rule": "No unresolved, unavailable or ambiguous state may be converted into a fabricated Panchang value, birth Nakshatra or prediction."
+}

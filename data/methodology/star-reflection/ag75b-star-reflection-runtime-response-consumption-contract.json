@@ -1,0 +1,101 @@
+{
+  "module_id": "AG75B",
+  "title": "Star Reflection Runtime Response Consumption Contract",
+  "status": "ag75b_runtime_response_consumption_contract_locked",
+  "source_integration_contract": "data/methodology/star-reflection/ag75b-star-reflection-panchang-nakshatra-integration-contract.json",
+  "accepted_response_status": "sup02_governed_public_runtime_response",
+  "required_release_state": {
+    "release_id": "ag74p_final_2026_06_24",
+    "runtime_release_id": "sup01_panchang_runtime_v1",
+    "runtime_status": "active",
+    "no_input_persistence": true,
+    "public_ui_cutover_active": true
+  },
+  "required_privacy_state": {
+    "calculation_request_persisted": false,
+    "location_input_persisted": false,
+    "personal_data_persisted": false
+  },
+  "accepted_panchang_sources": [
+    "approved_precomputed_record",
+    "approved_server_calculation"
+  ],
+  "source_handling_rule": "Apply one consumption contract to both accepted sources and preserve panchang.source and source_content_hash.",
+  "availability_gate": {
+    "available_true": "Continue only with fields that are present and valid.",
+    "available_false": "Return an explicit runtime_unavailable state using the governed reason; do not infer values.",
+    "missing_or_non_boolean": "Treat as contract failure unless the active runtime has already normalised a complete legacy precomputed result."
+  },
+  "mandatory_available_result_fields": [
+    "panchang.result.available",
+    "panchang.result.sunrise.local",
+    "panchang.result.vara.english",
+    "panchang.result.vara.sanskrit",
+    "panchang.result.paksha",
+    "panchang.result.elements.nakshatra.name",
+    "panchang.result.elements.nakshatra.index"
+  ],
+  "optional_available_result_fields": [
+    "panchang.result.elements.nakshatra.angle",
+    "panchang.result.transitions.nakshatra.previous",
+    "panchang.result.transitions.nakshatra.next",
+    "panchang.result.sunset.local",
+    "panchang.result.window",
+    "panchang.result.astronomical_state_at_sunrise"
+  ],
+  "exact_resolution_transition_requirements": {
+    "previous": [
+      "utc",
+      "local",
+      "fromIndex",
+      "toIndex"
+    ],
+    "next": [
+      "utc",
+      "local",
+      "fromIndex",
+      "toIndex"
+    ],
+    "missing_transition_result": "missing_transition_metadata_no_exact_birth_nakshatra"
+  },
+  "consumable_identity_fields": [
+    "panchang.source",
+    "panchang.source_content_hash",
+    "panchang.result.engine_profile_id",
+    "panchang.result.ayanamsha_profile",
+    "panchang.result.calculation_profile"
+  ],
+  "consumable_location_date_fields": [
+    "request.civil_date",
+    "location_basis.display_label",
+    "location_basis.timezone",
+    "location_basis.latitude",
+    "location_basis.longitude"
+  ],
+  "consumable_nakshatra_fields": [
+    "panchang.result.elements.nakshatra.name",
+    "panchang.result.elements.nakshatra.index",
+    "panchang.result.elements.nakshatra.angle",
+    "panchang.result.transitions.nakshatra.previous.utc",
+    "panchang.result.transitions.nakshatra.previous.local",
+    "panchang.result.transitions.nakshatra.previous.fromIndex",
+    "panchang.result.transitions.nakshatra.previous.toIndex",
+    "panchang.result.transitions.nakshatra.next.utc",
+    "panchang.result.transitions.nakshatra.next.local",
+    "panchang.result.transitions.nakshatra.next.fromIndex",
+    "panchang.result.transitions.nakshatra.next.toIndex"
+  ],
+  "supporting_fields": [
+    "panchang.result.sunrise.local",
+    "panchang.result.sunset.local",
+    "panchang.result.vara",
+    "panchang.result.paksha",
+    "panchang.result.window"
+  ],
+  "observances_consumed_by_star_reflection": false,
+  "runtime_error_handling": {
+    "http_or_governed_error": "runtime_error_safe_unavailable_state",
+    "release_or_privacy_mismatch": "runtime_contract_mismatch_no_consumption",
+    "malformed_nakshatra_index": "invalid_nakshatra_index_no_name_invention"
+  }
+}

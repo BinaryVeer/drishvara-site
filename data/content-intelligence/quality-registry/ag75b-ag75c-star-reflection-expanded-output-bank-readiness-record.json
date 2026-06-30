@@ -1,0 +1,52 @@
+{
+  "module_id": "AG75B-AG75C",
+  "title": "AG75C Expanded Star Reflection Output Bank Readiness",
+  "status": "ready_for_ag75c_expanded_star_reflection_output_bank",
+  "governed_repository_baseline": "34a633891b5ad9d72b841474342b6f0b14f2f53a",
+  "ag75b_records": {
+    "integration_contract": "data/methodology/star-reflection/ag75b-star-reflection-panchang-nakshatra-integration-contract.json",
+    "runtime_request_mapping": "data/methodology/star-reflection/ag75b-star-reflection-runtime-request-mapping-contract.json",
+    "runtime_response_consumption": "data/methodology/star-reflection/ag75b-star-reflection-runtime-response-consumption-contract.json",
+    "basis_resolution_and_degradation": "data/methodology/star-reflection/ag75b-star-reflection-basis-resolution-and-degradation-policy.json",
+    "no_storage_and_runtime_non_mutation_audit": "data/methodology/star-reflection/ag75b-star-reflection-no-storage-and-runtime-non-mutation-audit.json"
+  },
+  "source_count": 18,
+  "hard_blockers": [],
+  "required_ag75c_resolution_states": [
+    "exact_window_resolved",
+    "unknown_day_context",
+    "pending_input",
+    "invalid_input",
+    "runtime_unavailable",
+    "runtime_error",
+    "runtime_contract_mismatch",
+    "missing_transition_metadata",
+    "invalid_nakshatra_index",
+    "unresolved_ambiguous_local_time",
+    "unresolved_nonexistent_local_time",
+    "exact_transition_minute_ambiguous",
+    "exact_outside_single_transition_window"
+  ],
+  "controlled_requirements_for_ag75c": [
+    "Create internal safe output records for every required resolution state.",
+    "Keep exact birth-Nakshatra language limited to exact_window_resolved.",
+    "Label sunrise Nakshatra as day context only for unknown time.",
+    "Preserve source, release, location, date and limitation metadata.",
+    "Do not fabricate missing Nakshatra names, indices, transitions or times.",
+    "Preserve reflective, symbolic and non-deterministic language.",
+    "Do not modify the public UI, database, Edge Function or runtime flags.",
+    "Do not persist any personal input.",
+    "Create AG75D readiness only after output-bank validation passes."
+  ],
+  "blocked_in_ag75c": [
+    "Public UI mutation.",
+    "Live runtime invocation as part of bank generation.",
+    "Database migration or write.",
+    "Edge Function modification or deployment.",
+    "Runtime activation or cutover change.",
+    "Personal input persistence.",
+    "Deterministic prediction or sensitive profiling.",
+    "Reopening SUP01 or SUP02."
+  ],
+  "next_stage": "AG75C"
+}

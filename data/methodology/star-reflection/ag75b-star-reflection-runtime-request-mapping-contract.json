@@ -1,0 +1,97 @@
+{
+  "module_id": "AG75B",
+  "title": "Star Reflection Runtime Request Mapping Contract",
+  "status": "ag75b_runtime_request_mapping_contract_locked",
+  "source_integration_contract": "data/methodology/star-reflection/ag75b-star-reflection-panchang-nakshatra-integration-contract.json",
+  "runtime_endpoint": "calculate-panchang",
+  "runtime_method": "POST",
+  "maximum_body_bytes": 16384,
+  "source_input_contract": {
+    "date_of_birth_format": "DD/MM/YYYY",
+    "birth_time_format": "HH:MM",
+    "birth_time_unknown_value": "exact_birth_time_unknown",
+    "birth_place_required": true,
+    "timezone_required": true
+  },
+  "civil_date_mapping": {
+    "rule": "Convert DD/MM/YYYY to YYYY-MM-DD as the same local civil birth date; do not shift the date through UTC conversion.",
+    "supported_start": "1900-01-01",
+    "supported_end": "2100-12-31",
+    "invalid_date_result": "invalid_birth_date_no_runtime_request"
+  },
+  "precision_mode_request_eligibility": {
+    "exact_session_only": {
+      "runtime_request_eligible": true,
+      "runtime_purpose": "governed Panchang day and transition context",
+      "birth_time_sent_to_runtime": false
+    },
+    "unknown": {
+      "runtime_request_eligible": true,
+      "runtime_purpose": "day-level context only; exact birth Nakshatra blocked",
+      "birth_time_sent_to_runtime": false
+    },
+    "pending": {
+      "runtime_request_eligible": false,
+      "result": "pending_or_invalid limitation without runtime consumption"
+    },
+    "invalid": {
+      "runtime_request_eligible": false,
+      "result": "pending_or_invalid limitation without runtime consumption"
+    }
+  },
+  "named_location_mode": {
+    "mode": "named_location",
+    "accepted_identifiers": [
+      "place",
+      "selector_value",
+      "canonical_place_id"
+    ],
+    "exactly_one_identifier_preferred": true,
+    "automatic_place_substitution_allowed": false,
+    "automatic_timezone_substitution_allowed": false
+  },
+  "coordinate_mode": {
+    "mode": "coordinates",
+    "latitude_range": [
+      -90,
+      90
+    ],
+    "longitude_range": [
+      -180,
+      180
+    ],
+    "explicit_validated_iana_timezone_required": true
+  },
+  "runtime_body_allowed_fields": [
+    "civil_date",
+    "mode",
+    "place",
+    "selector_value",
+    "canonical_place_id",
+    "latitude",
+    "longitude",
+    "timezone"
+  ],
+  "runtime_body_prohibited_fields": [
+    "name",
+    "date_of_birth_raw",
+    "birth_time",
+    "birth_time_precision",
+    "reflection_output",
+    "personal_profile"
+  ],
+  "authentication_boundary": {
+    "browser_service_role_key_allowed": false,
+    "browser_secret_allowed": false,
+    "public_function_requires_user_auth_header": false
+  },
+  "persistence_boundary": {
+    "request_persistence_allowed": false,
+    "name_persistence_allowed": false,
+    "dob_persistence_allowed": false,
+    "birth_time_persistence_allowed": false,
+    "location_input_persistence_allowed": false,
+    "coordinate_persistence_allowed": false
+  },
+  "ag75b_runtime_called": false
+}

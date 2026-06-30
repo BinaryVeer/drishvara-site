@@ -1,0 +1,238 @@
+{
+  "module_id": "AG75B",
+  "title": "Star Reflection Panchang and Nakshatra Integration Contract",
+  "status": "ag75b_panchang_nakshatra_integration_contract_locked",
+  "prepared_for": {
+    "name": "vikash vaibhav",
+    "identifier": "vikash4world@gmail.com"
+  },
+  "governed_repository_baseline": "34a633891b5ad9d72b841474342b6f0b14f2f53a",
+  "candidate_contract": {
+    "archive_name": "AG75B_Candidate_Integration_Contract_20260630_231218.json",
+    "sha256": "e67a31b2a36424dd5a74dccb218269e81cee353c1ab38c0b2affa45c607e4df7",
+    "status_consumed": "ag75b_candidate_ready_for_review_not_applied"
+  },
+  "purpose": "Define the exact read-only contract by which Star Reflection may consume the closed Panchang runtime and resolve a Nakshatra-oriented reflective basis without storage, prediction or live-system mutation.",
+  "entry_conditions": {
+    "repository_clean": true,
+    "head_matches_origin_main": true,
+    "ag75a_valid": true,
+    "sup02_formally_closed": true,
+    "ag75b_targets_collision_free": true
+  },
+  "source_count": 18,
+  "immutable_source_register": [
+    {
+      "path": "data/methodology/star-reflection/ag75a-star-reflection-expansion-scope-and-method-integration.json",
+      "sha256": "37b0d81df3e297b072434baa8a23b17ab74aa7cf72018a90913fe8216bde8e7e",
+      "metadata": {
+        "module_id": "AG75A",
+        "title": "Star Reflection Scope and Method Integration",
+        "status": "ag75a_star_reflection_scope_and_method_integration_locked"
+      }
+    },
+    {
+      "path": "data/methodology/star-reflection/ag75a-star-reflection-dependency-consumption-map.json",
+      "sha256": "6a4531bed7676fd2f36375481154bdd31bfb9003bf858d3a44d829fe3587f2ef",
+      "metadata": {
+        "module_id": "AG75A",
+        "title": "Star Reflection Dependency Consumption Map",
+        "status": "ag75a_dependency_consumption_map_created",
+        "next_stage": "AG75B"
+      }
+    },
+    {
+      "path": "data/methodology/star-reflection/ag75a-star-reflection-safety-and-non-prediction-boundary.json",
+      "sha256": "fb3bd4d250416d94256b9a4ca6826326e89bf4df1c8e0e83a3bd6c1b0e9628a3",
+      "metadata": {
+        "module_id": "AG75A",
+        "title": "Star Reflection Safety and Non-Prediction Boundary",
+        "status": "ag75a_star_reflection_safety_and_non_prediction_boundary_locked"
+      }
+    },
+    {
+      "path": "data/content-intelligence/quality-registry/ag75a-ag75b-star-reflection-panchang-nakshatra-readiness-record.json",
+      "sha256": "d7c82c5f389673d0261505e069a9b85331a9f8a8c9ef5ac76351616a5185cfb3",
+      "metadata": {
+        "module_id": "AG75A-AG75B",
+        "title": "AG75B Star Reflection Panchang and Nakshatra Integration Readiness",
+        "status": "ready_for_ag75b_star_reflection_panchang_nakshatra_integration_contract",
+        "next_stage": "AG75B"
+      }
+    },
+    {
+      "path": "data/content-intelligence/mutation-plans/ag75a-to-ag75b-star-reflection-panchang-nakshatra-boundary.json",
+      "sha256": "86b3d10da3cc224585bb8e299a892873d88290f5929b69f2b24297e52e0bcfe9",
+      "metadata": {
+        "status": "ag75a_to_ag75b_boundary_locked"
+      }
+    },
+    {
+      "path": "data/content-intelligence/quality-reviews/ag75a-star-reflection-scope-and-method-integration.json",
+      "sha256": "a57ab24a8a8bf7045016e95754feed5df7bdaf7329053149fad5202fed29c60e",
+      "metadata": {
+        "module_id": "AG75A",
+        "title": "Star Reflection Scope and Method Integration Review",
+        "status": "ag75a_completed"
+      }
+    },
+    {
+      "path": "data/quality/ag75a-star-reflection-scope-and-method-integration.json",
+      "sha256": "48b973ebfaf5f5ad0b827a2fd28a8165657a6bf8797f576dbd57fa2bf1ebfdbc",
+      "metadata": {
+        "module_id": "AG75A",
+        "title": "Star Reflection Scope and Method Integration Validation",
+        "status": "ag75a_star_reflection_scope_and_method_integration_validation_passed",
+        "next_stage": "AG75B"
+      }
+    },
+    {
+      "path": "data/methodology/star-reflection/ag73b-birth-time-aware-request-schema.json",
+      "sha256": "47d2b3be18680a8eb88d073ff859bfa520d28d81e43d5e8a4f79aee45f6bbf12",
+      "metadata": {
+        "module_id": "AG73B",
+        "title": "Birth-Time-Aware Star Reflection Request Schema",
+        "status": "ag73b_birth_time_aware_request_schema_created"
+      }
+    },
+    {
+      "path": "data/methodology/star-reflection/ag73b-birth-time-aware-basis-resolver-contract.json",
+      "sha256": "aa6d8cb73c25aae0263d005a1fcd2408dd8d0f51e0194196bd61b0cc31815b82",
+      "metadata": {
+        "module_id": "AG73B",
+        "title": "Birth-Time-Aware Basis Resolver Contract",
+        "status": "ag73b_birth_time_aware_basis_resolver_contract_created"
+      }
+    },
+    {
+      "path": "data/methodology/star-reflection/ag73b-birth-time-precision-policy.json",
+      "sha256": "8aaac22beb848e3de5d4f8efc1fe2bb726b91253caa917b67d3c87adbcabdd44",
+      "metadata": {
+        "module_id": "AG73B",
+        "title": "Birth Time Precision Policy",
+        "status": "ag73b_birth_time_precision_policy_created"
+      }
+    },
+    {
+      "path": "data/methodology/star-reflection/ag73c-birth-time-aware-star-reflection-output-bank.json",
+      "sha256": "25b3f8d118456d295d7481336b32e81655c12d0fcaf4eee337e4863c43bf4294",
+      "metadata": {
+        "module_id": "AG73C",
+        "title": "Birth-Time-Aware Star Reflection Output Bank",
+        "status": "ag73c_birth_time_aware_output_bank_created"
+      }
+    },
+    {
+      "path": "data/knowledge-base/panchang-festival/production/ag74p-public-runtime-contract.json",
+      "sha256": "36e907b2abc0e1a7ac1e51366cc1c93c8d13c6068043d78d7d70396d1195460b",
+      "metadata": {
+        "module_id": "AG74P",
+        "title": "Panchang, Festival and Star Reflection Final Public Runtime Contract",
+        "status": "ag74p_static_public_runtime_approved_supabase_mirror_write_gated"
+      }
+    },
+    {
+      "path": "data/content-intelligence/quality-registry/sup02-runtime-formal-closure-record.json",
+      "sha256": "342157297d2cd4ee248990b7b0110432397732dc10b5d597f25267761486f2b1",
+      "metadata": {
+        "stage": "SUP02",
+        "status": "sup02_public_runtime_activation_verified_and_formally_closed",
+        "record_type": "public_runtime_formal_closure"
+      }
+    },
+    {
+      "path": "data/quality/sup02-runtime-formal-closure-validation.json",
+      "sha256": "5762fe6e33e709232d9288f6d6cba8943dd4f41fd1eb86bfe5c6fde5fb4b4be8",
+      "metadata": {
+        "stage": "SUP02",
+        "status": "sup02_public_runtime_formal_closure_validation_passed",
+        "record_type": "public_runtime_formal_closure_validation",
+        "next_stage": "AG75A"
+      }
+    },
+    {
+      "path": "supabase/functions/calculate-panchang/index.ts",
+      "sha256": "eaae3e78b788d879c7ed9d524cf101d83279b35934e1d7a7bb4325bbaaf18338",
+      "metadata": {}
+    },
+    {
+      "path": "supabase/functions/_shared/location-resolution.ts",
+      "sha256": "d37ca51184603ba5f41e1dc213f381cafe181b251c60ffd912afb1ad88b932e7",
+      "metadata": {}
+    },
+    {
+      "path": "supabase/functions/_shared/panchang-runtime.ts",
+      "sha256": "dc7397fc25ed89d3f589f270542fe73d95bb31f59654b8f49fb3068b0316d07b",
+      "metadata": {}
+    },
+    {
+      "path": "supabase/functions/_shared/http.ts",
+      "sha256": "5f1b7acace27d304c616a203a2fd6248cdbeae5f6dfa36f10aec0960f5e21587",
+      "metadata": {}
+    }
+  ],
+  "contract_layers": {
+    "runtime_request_mapping": "data/methodology/star-reflection/ag75b-star-reflection-runtime-request-mapping-contract.json",
+    "runtime_response_consumption": "data/methodology/star-reflection/ag75b-star-reflection-runtime-response-consumption-contract.json",
+    "basis_resolution_and_degradation": "data/methodology/star-reflection/ag75b-star-reflection-basis-resolution-and-degradation-policy.json",
+    "no_storage_and_runtime_non_mutation_audit": "data/methodology/star-reflection/ag75b-star-reflection-no-storage-and-runtime-non-mutation-audit.json"
+  },
+  "precision_mode_reconciliation": {
+    "ag73b_input_modes": [
+      "exact_session_only",
+      "unknown",
+      "pending",
+      "invalid"
+    ],
+    "existing_public_result_modes": [
+      "exact_session_only",
+      "unknown",
+      "pending_or_invalid"
+    ],
+    "rule": "Pending and invalid remain distinct input-validation states but share the existing cautious public degradation class pending_or_invalid until a later governed UI stage changes it."
+  },
+  "method_boundary": {
+    "primary_orientation": "Moon-led and Nakshatra-oriented reflection",
+    "supporting_context": "Panchanga-supported, location-aware and timezone-aware",
+    "output_nature": "reflective_non_deterministic_symbolic_guidance",
+    "exact_birth_nakshatra_claim_requires": "unambiguous transition-window resolution",
+    "sunrise_nakshatra_is_not_automatically_birth_nakshatra": true,
+    "missing_value_invention_allowed": false
+  },
+  "stage_scope": {
+    "allowed_actions": [
+      "Create repository-only request and response contracts.",
+      "Create the Nakshatra basis-resolution policy.",
+      "Create exact, unknown and invalid birth-time degradation rules.",
+      "Create explicit unavailable and runtime-failure handling.",
+      "Record immutable source hashes.",
+      "Prepare AG75C expanded-output-bank readiness.",
+      "Register a read-only AG75B validator."
+    ],
+    "blocked_actions": [
+      "Modify index.html or any public UI asset.",
+      "Create or expand the public Star Reflection output bank.",
+      "Call the live runtime as part of contract creation.",
+      "Modify or deploy the Edge Function.",
+      "Apply a database migration or write.",
+      "Change runtime activation or cutover flags.",
+      "Persist name, DOB, birth time, location or coordinates.",
+      "Expose a service-role key or browser authentication secret.",
+      "Generate deterministic prediction or sensitive profiling.",
+      "Reopen SUP01 or SUP02."
+    ],
+    "repository_contract_records_only": true,
+    "live_runtime_call": false,
+    "public_ui_change": false,
+    "output_bank_expansion": false,
+    "database_change": false,
+    "edge_function_change": false,
+    "runtime_flag_change": false,
+    "personal_input_persistence": false
+  },
+  "next_step": {
+    "module_id": "AG75C",
+    "title": "Expanded Star Reflection Output Bank",
+    "purpose": "Create safe output records for every governed resolution and degradation state before any AG75D public wiring."
+  }
+}

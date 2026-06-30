@@ -1,0 +1,29 @@
+{
+  "from_module": "AG75B",
+  "to_module": "AG75C",
+  "transition": "expanded_star_reflection_output_bank",
+  "status": "ag75b_to_ag75c_boundary_locked",
+  "source_integration_contract": "data/methodology/star-reflection/ag75b-star-reflection-panchang-nakshatra-integration-contract.json",
+  "source_request_mapping": "data/methodology/star-reflection/ag75b-star-reflection-runtime-request-mapping-contract.json",
+  "source_response_consumption": "data/methodology/star-reflection/ag75b-star-reflection-runtime-response-consumption-contract.json",
+  "source_resolution_policy": "data/methodology/star-reflection/ag75b-star-reflection-basis-resolution-and-degradation-policy.json",
+  "source_audit": "data/methodology/star-reflection/ag75b-star-reflection-no-storage-and-runtime-non-mutation-audit.json",
+  "allowed_next_actions": [
+    "Create internal safe output records for all governed resolution states.",
+    "Validate every record against the AG75A safety boundary.",
+    "Preserve exact versus contextual versus unavailable distinctions.",
+    "Create AG75D wiring readiness after AG75C validation.",
+    "Register a read-only AG75C validator."
+  ],
+  "blocked_actions": [
+    "Public UI mutation.",
+    "Live runtime invocation as part of bank generation.",
+    "Database migration or write.",
+    "Edge Function modification or deployment.",
+    "Runtime activation or cutover change.",
+    "Personal input persistence.",
+    "Deterministic prediction or sensitive profiling.",
+    "Reopening SUP01 or SUP02."
+  ],
+  "mutation_class": "repository_output_bank_records_only_no_public_or_live_mutation"
+}
