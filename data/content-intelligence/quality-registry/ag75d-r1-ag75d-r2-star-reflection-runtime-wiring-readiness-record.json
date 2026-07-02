@@ -1,0 +1,29 @@
+{
+  "module_id": "AG75D-R1-AG75D-R2",
+  "title": "AG75D-R2 Star Reflection Runtime and Output-Bank Wiring Readiness",
+  "status": "ready_for_ag75d_r2_star_reflection_runtime_and_output_bank_wiring",
+  "governed_repository_baseline": "aa05da21580e6f45d33162fba49684bd8cd97864",
+  "source_reconciliation_record": "data/content-intelligence/quality-registry/ag75d-r1-public-surface-reconciliation-record.json",
+  "source_controller": "assets/js/sup02-panchang-server-controller.js",
+  "controller_sha256": "980cfb25ead9c78464a0c36ad9aeee441de359c492c38f48a4d483ab547d4711",
+  "ag75c_output_bank_record_count": 39,
+  "ag75c_resolution_state_count": 13,
+  "shared_approved_location_count": 5,
+  "hard_blockers": [],
+  "controlled_requirements_for_ag75d_r2": [
+    "Use the existing closed SUP02 calculate-panchang function.",
+    "Map each AG75B resolution state to exactly one immutable AG75C record.",
+    "Resolve exact Nakshatra output only after complete-minute transition proof.",
+    "Keep unknown time labelled as day context, not birth star.",
+    "Keep pending, invalid, unavailable, error and ambiguity states distinct.",
+    "Use the reconciled five-location projection and coordinate mode.",
+    "Keep all personal inputs session-only and non-persistent.",
+    "Do not modify the AG75C bank, Edge Function, database or runtime flags."
+  ],
+  "next_stage": "AG75D-R2",
+  "ag75d_r1_browser_corrections": {
+    "star_reflection_birth_place_dropdown_operable": true,
+    "star_reflection_birth_place_select_width_operable": true,
+    "empty_observance_detail_list_hidden": true
+  }
+}

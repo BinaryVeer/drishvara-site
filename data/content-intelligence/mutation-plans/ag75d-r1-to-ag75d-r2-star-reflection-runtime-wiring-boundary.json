@@ -1,0 +1,26 @@
+{
+  "from_module": "AG75D-R1",
+  "to_module": "AG75D-R2",
+  "transition": "star_reflection_runtime_and_ag75c_output_bank_wiring",
+  "status": "ag75d_r1_to_ag75d_r2_boundary_locked",
+  "source_reconciliation_record": "data/content-intelligence/quality-registry/ag75d-r1-public-surface-reconciliation-record.json",
+  "source_readiness": "data/content-intelligence/quality-registry/ag75d-r1-ag75d-r2-star-reflection-runtime-wiring-readiness-record.json",
+  "allowed_next_actions": [
+    "Create a browser-only AG75B resolution-state resolver.",
+    "Load the immutable AG75C 39-record output bank.",
+    "Call the existing public Panchang function without secrets.",
+    "Render one safe Star Reflection record per resolved state.",
+    "Register a read-only AG75D-R2 validator."
+  ],
+  "blocked_actions": [
+    "Database migration or browser database write.",
+    "Edge Function modification or deployment.",
+    "Runtime release or cutover-flag change.",
+    "Output-bank mutation or browser generation.",
+    "Personal-input persistence.",
+    "Promotion of unapproved named locations.",
+    "All-faith calendar fabrication.",
+    "Deterministic prediction or sensitive profiling."
+  ],
+  "mutation_class": "controlled_star_reflection_browser_wiring_no_backend_or_persistence_mutation"
+}
