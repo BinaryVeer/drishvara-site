@@ -1,37 +1,7 @@
-
-<header class="drishvara-hf07-header" data-drishvara-hf07-unified-header="true">
-  <a class="drishvara-hf07-brand" href="index.html" aria-label="Drishvara Home">Drishvara</a>
-
-  <nav class="drishvara-hf07-nav" data-drishvara-hf07-nav="true" aria-label="Primary navigation">
-    <a class="drishvara-hf07-link" href="index.html">Home</a>
-    <a class="drishvara-hf07-link" href="about.html">About</a>
-    <a class="drishvara-hf07-link" href="insights.html">Insights</a>
-    <a class="drishvara-hf07-link" href="submissions.html">Submissions</a>
-    <a class="drishvara-hf07-link" href="dashboard.html">Dashboard</a>
-    <a class="drishvara-hf07-link" href="contact.html">Contact</a>
-    <a class="drishvara-hf07-link" href="login.html" data-drishvara-auth-placeholder="true" aria-disabled="true" title="Sign in / Join coming soon">Sign in / Join</a>
-  </nav>
-
-  <div class="drishvara-hf07-controls" data-drishvara-hf07-controls="true">
-    <label class="drishvara-hf07-timezone-label" for="drishvara-hf07-timezone-article-html">Time zone</label>
-    <select id="drishvara-hf07-timezone-article-html" data-drishvara-hf07-timezone="true" aria-label="Select timezone">
-      <option value="Asia/Kolkata">India — IST</option>
-      <option value="UTC">UTC</option>
-      <option value="Asia/Dubai">Dubai — GST</option>
-      <option value="Asia/Singapore">Singapore — SGT</option>
-      <option value="Europe/London">London</option>
-      <option value="America/New_York">New York</option>
-    </select>
-
-    <div class="drishvara-hf07-language-toggle" data-drishvara-hf07-language-toggle="true" aria-label="Language toggle">
-      <button type="button" data-drishvara-hf07-lang-choice="en" aria-pressed="true">EN</button>
-      <button type="button" data-drishvara-hf07-lang-choice="hi" aria-pressed="false">हिंदी</button>
-    </div>
-  </div>
-</header>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
 <style data-drishvara-hf13-top-band-neutralised="true">
 /*
   HF13: neutralise visible top band while preserving settled design.
@@ -413,7 +383,6 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 }
 </style>
 <meta name="theme-color" content="#071329" data-drishvara-hf10-theme-color="true">
-  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Article · Drishvara</title>
   <meta name="description" content="A Drishvara article reader." />
@@ -825,6 +794,10 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
   <meta name="twitter:image" content="https://www.drishvara.com/assets/logo/logo.png" />
 
   <link rel="stylesheet" href="/assets/css/public-preview-polish.css" />
+  <link rel="stylesheet" href="/assets/css/drishvara-v2-tokens.css?v=dv2-20260928" />
+  <link rel="stylesheet" href="/assets/css/drishvara-v2-shell.css?v=dv2-20260928" />
+  <link rel="stylesheet" href="/assets/css/drishvara-v2-components.css?v=dv2-20260928" />
+  <link rel="stylesheet" href="/assets/css/drishvara-v2-article.css?v=dv2-20260928" />
 
 
 
@@ -1641,6 +1614,9 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
       document.getElementById("article-meta").textContent = meta || "Drishvara Article";
       document.getElementById("article-body").innerHTML = bodyHtml || '<div class="reader-status">No article body available.</div>';
       document.title = `${title || "Article"} · Drishvara`;
+      if (window.DrishvaraV2Article && typeof window.DrishvaraV2Article.ensureArticleActions === "function") {
+        window.DrishvaraV2Article.ensureArticleActions();
+      }
     }
 
     function showError(message, detail = "") {
@@ -1731,6 +1707,14 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
         doc.body;
 
       let bodyHtml = cleanImportedArticle(bodyCandidate);
+      const approvedReferenceBlock = doc.querySelector('[data-drishvara-ag05d-visible-reference-block="true"]');
+      if (
+        approvedReferenceBlock &&
+        !bodyCandidate.contains(approvedReferenceBlock) &&
+        !bodyHtml.includes("data-drishvara-ag05d-visible-reference-block")
+      ) {
+        bodyHtml += approvedReferenceBlock.outerHTML;
+      }
 
       if (featuredImage && !bodyHtml.includes("<img")) {
         const imageSrc = featuredImage.getAttribute("src") || "";
@@ -2101,5 +2085,7 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
   }
 })();
 </script>
+<script src="/assets/js/drishvara-v2-shell.js?v=dv2-20260928"></script>
+<script src="/assets/js/drishvara-v2-article.js?v=dv2-20260928"></script>
 </body>
 </html>

@@ -77,8 +77,19 @@
     );
   }
 
+  function isV2ShellNode(node) {
+    return Boolean(
+      node &&
+      node.closest &&
+      node.closest(
+        ".dv2-header, #dv2-mobile-menu, #dv2-search-panel, #drishvara-v2-app, .dv2-footer"
+      )
+    );
+  }
+
   function patchCard(card, basis) {
     if (!card) return;
+    if (isV2ShellNode(card)) return;
 
     if (
       window.drishvaraAg74iPublicSurfaceActive === true &&
@@ -120,7 +131,7 @@
     const basis = dateParts(selectedTimezone());
 
     const candidates = Array.from(document.querySelectorAll("section, article, aside, div"))
-      .filter((node) => isSensitiveDailyNode(node.textContent || ""));
+      .filter((node) => !isV2ShellNode(node) && isSensitiveDailyNode(node.textContent || ""));
 
     const unique = new Set();
 

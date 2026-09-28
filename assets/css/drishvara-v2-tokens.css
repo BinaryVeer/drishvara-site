@@ -1,0 +1,47 @@
+:root {
+  --dv2-font-ui: Arial, Helvetica, sans-serif;
+  --dv2-font-editorial: Cambria, Georgia, serif;
+  --dv2-font-hi: "Nirmala UI", Mangal, "Noto Sans Devanagari", sans-serif;
+  --dv2-gold: #d7ad45;
+  --dv2-gold-deep: #9f7724;
+  --dv2-gold-soft: rgba(215, 173, 69, 0.18);
+  --dv2-ink: #111721;
+  --dv2-ink-soft: #445061;
+  --dv2-paper: #fffaf0;
+  --dv2-paper-2: #f5efe4;
+  --dv2-stone: #ece8df;
+  --dv2-stone-2: #d8d3c8;
+  --dv2-midnight: #071329;
+  --dv2-midnight-2: #0d1c39;
+  --dv2-time: #071a36;
+  --dv2-reflect: #160f2d;
+  --dv2-blue: #5b7fa8;
+  --dv2-teal: #4d8b86;
+  --dv2-violet: #6c5f96;
+  --dv2-indigo: #2e3b74;
+  --dv2-leaf: #60735d;
+  --dv2-border-dark: rgba(255, 255, 255, 0.14);
+  --dv2-border-light: rgba(17, 23, 33, 0.14);
+  --dv2-shadow-soft: 0 18px 50px rgba(7, 19, 41, 0.16);
+  --dv2-max: 1240px;
+  --dv2-radius: 8px;
+}
+
+html[data-drishvara-v2="active"] {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-drishvara-v2="active"] {
+    scroll-behavior: auto;
+  }
+
+  html[data-drishvara-v2="active"] *,
+  html[data-drishvara-v2="active"] *::before,
+  html[data-drishvara-v2="active"] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

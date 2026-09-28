@@ -130,10 +130,36 @@
   }
 
   function getOrCreateRoot() {
+    const v2Active =
+      document.documentElement.getAttribute("data-drishvara-v2") === "active" ||
+      document.querySelector(".dv2-header");
+
+    document
+      .querySelectorAll(".dv2-header [data-drishvara-timezone-control]")
+      .forEach(function (node) {
+        node.remove();
+      });
+
+    if (v2Active) {
+      let compatRoot = document.querySelector(
+        "[data-drishvara-timezone-control][data-drishvara-v2-compat='hidden']"
+      );
+      if (!compatRoot) {
+        compatRoot = document.createElement("span");
+        compatRoot.className = "nav-timezone-slot";
+        compatRoot.hidden = true;
+        compatRoot.setAttribute("aria-hidden", "true");
+        compatRoot.setAttribute("data-drishvara-timezone-control", "true");
+        compatRoot.setAttribute("data-drishvara-v2-compat", "hidden");
+        document.body.appendChild(compatRoot);
+      }
+      return compatRoot;
+    }
+
     let root = document.querySelector("[data-drishvara-timezone-control]");
     if (root) return root;
 
-    const nav = document.querySelector("nav");
+    const nav = document.querySelector("body > .page > .nav") || document.querySelector("nav:not(.dv2-nav)");
     if (!nav) return null;
 
     root = document.createElement("span");

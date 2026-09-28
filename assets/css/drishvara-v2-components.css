@@ -1,0 +1,112 @@
+body.drishvara-v2-active .card {
+  border-radius: var(--dv2-radius) !important;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-festival-card,
+body.drishvara-v2-active .dv2-reflect .card {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  border: 1px solid rgba(255, 250, 240, 0.16) !important;
+  border-radius: var(--dv2-radius) !important;
+  background: rgba(255, 250, 240, 0.06) !important;
+  box-shadow: none !important;
+  color: #fffaf0 !important;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-festival-card h2,
+body.drishvara-v2-active .dv2-time #panchang-festival-card h3,
+body.drishvara-v2-active .dv2-reflect .card h2,
+body.drishvara-v2-active .dv2-reflect .card h3 {
+  font-family: var(--dv2-font-editorial) !important;
+  letter-spacing: 0 !important;
+}
+
+body.drishvara-v2-active #panchang-festival-card .label,
+body.drishvara-v2-active .dv2-reflect .card .label {
+  color: #f0d487 !important;
+}
+
+body.drishvara-v2-active .dv2-time input,
+body.drishvara-v2-active .dv2-time select,
+body.drishvara-v2-active .dv2-reflect input,
+body.drishvara-v2-active .dv2-reflect select {
+  border-radius: var(--dv2-radius) !important;
+  font-family: var(--dv2-font-ui) !important;
+}
+
+body.drishvara-v2-active .dv2-time button,
+body.drishvara-v2-active .dv2-reflect button {
+  border-radius: var(--dv2-radius) !important;
+  font-family: var(--dv2-font-ui) !important;
+  min-height: 2.75rem !important;
+}
+
+body.drishvara-v2-active #star-reflection-name,
+body.drishvara-v2-active label[for="star-reflection-name"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.drishvara-v2-active [data-ag75d-e2-star-place-choice-panel] {
+  border: 1px solid rgba(215, 173, 69, 0.28);
+  border-radius: var(--dv2-radius);
+  background: rgba(255, 250, 240, 0.05);
+}
+
+body.drishvara-v2-active [data-ag75d-e2-star-place-value][aria-pressed="true"],
+body.drishvara-v2-active [data-ag71d-r4-select-kind="panchang"][aria-pressed="true"],
+body.drishvara-v2-active #panchang-calculate,
+body.drishvara-v2-active [data-ag71e-preview-button="star-reflection"] {
+  border-color: rgba(215, 173, 69, 0.72) !important;
+  background: var(--dv2-gold) !important;
+  color: #15100a !important;
+}
+
+body.drishvara-v2-active .ag74i-book-navigation {
+  align-items: stretch;
+}
+
+.dv2-year-glance {
+  display: none;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(255, 250, 240, 0.14);
+  border-radius: var(--dv2-radius);
+  padding: 1rem;
+  background: rgba(255, 250, 240, 0.05);
+}
+
+.dv2-year-glance[data-open="true"] {
+  display: grid;
+}
+
+.dv2-year-glance__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.72rem;
+}
+
+.dv2-year-month {
+  display: grid;
+  gap: 0.32rem;
+  border-top: 1px solid rgba(215, 173, 69, 0.32);
+  padding-top: 0.55rem;
+}
+
+.dv2-year-month strong {
+  color: #fffaf0;
+}
+
+.dv2-year-month span {
+  color: rgba(255, 250, 240, 0.7);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 700px) {
+  .dv2-year-glance__grid {
+    grid-template-columns: 1fr;
+  }
+}

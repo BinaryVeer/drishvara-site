@@ -1,0 +1,125 @@
+body.drishvara-v2-active.article-v2 {
+  background: #fffaf0 !important;
+  color: var(--dv2-ink) !important;
+  font-family: var(--dv2-font-ui) !important;
+}
+
+body.drishvara-v2-active.article-v2 > .page {
+  display: block;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+body.drishvara-v2-active.article-v2 > .page > .nav {
+  display: none !important;
+}
+
+body.drishvara-v2-active.article-v2 .article-shell {
+  width: min(100% - 2rem, 1180px) !important;
+  max-width: 1180px !important;
+  margin: 0 auto !important;
+  padding: clamp(3rem, 6vw, 5rem) 0 !important;
+  color: var(--dv2-ink) !important;
+  background: transparent !important;
+}
+
+body.drishvara-v2-active.article-v2 .article-shell > div[style*="text-align:center"] {
+  display: none !important;
+}
+
+body.drishvara-v2-active.article-v2 #article-meta {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: var(--dv2-gold-deep) !important;
+  font: 800 0.8rem/1.2 var(--dv2-font-ui) !important;
+  text-transform: uppercase;
+}
+
+body.drishvara-v2-active.article-v2 #article-meta::before {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--dv2-gold);
+  content: "";
+}
+
+body.drishvara-v2-active.article-v2 #article-title {
+  max-width: 980px !important;
+  margin: 0 !important;
+  color: var(--dv2-ink) !important;
+  font-family: var(--dv2-font-editorial) !important;
+  font-size: clamp(2.8rem, 7vw, 6.2rem) !important;
+  line-height: 0.95 !important;
+  letter-spacing: 0 !important;
+}
+
+body.drishvara-v2-active.article-v2 #article-subtitle {
+  max-width: 760px !important;
+  margin: 1.1rem 0 1.6rem !important;
+  color: var(--dv2-ink-soft) !important;
+  font: 1.18rem/1.55 var(--dv2-font-ui) !important;
+}
+
+body.drishvara-v2-active.article-v2 .divider {
+  width: 100% !important;
+  height: 1px !important;
+  margin: 1.5rem 0 2rem !important;
+  background: linear-gradient(90deg, var(--dv2-gold), transparent) !important;
+}
+
+body.drishvara-v2-active.article-v2 #article-body {
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  color: var(--dv2-ink) !important;
+  font-family: var(--dv2-font-ui) !important;
+}
+
+body.drishvara-v2-active.article-v2 #article-body p,
+body.drishvara-v2-active.article-v2 #article-body li {
+  font: 1.08rem/1.72 var(--dv2-font-ui) !important;
+  color: var(--dv2-ink) !important;
+}
+
+body.drishvara-v2-active.article-v2 #article-body h2,
+body.drishvara-v2-active.article-v2 #article-body h3 {
+  margin-top: 2.2rem !important;
+  font-family: var(--dv2-font-editorial) !important;
+  color: var(--dv2-ink) !important;
+}
+
+body.drishvara-v2-active.article-v2 #article-body img {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: var(--dv2-radius) !important;
+}
+
+body.drishvara-v2-active.article-v2 .article-trust-block,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence {
+  border: 1px solid rgba(17, 23, 33, 0.14) !important;
+  border-left: 2px solid var(--dv2-gold) !important;
+  border-radius: var(--dv2-radius) !important;
+  background: #f7efe0 !important;
+  color: var(--dv2-ink) !important;
+}
+
+body.drishvara-v2-active.article-v2 .back-row {
+  max-width: 760px;
+  margin: 2rem auto 0 !important;
+}
+
+body.drishvara-v2-active.article-v2 .back-link {
+  border-color: rgba(215, 173, 69, 0.38) !important;
+  border-radius: var(--dv2-radius) !important;
+  color: var(--dv2-ink) !important;
+}
+
+@media (max-width: 700px) {
+  body.drishvara-v2-active.article-v2 .article-shell {
+    width: min(100% - 1.25rem, 1180px) !important;
+    padding-top: 2.2rem !important;
+  }
+}
