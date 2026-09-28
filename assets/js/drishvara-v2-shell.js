@@ -40,9 +40,17 @@
 
   function publicItems(data) {
     if (!data || typeof data !== "object") return [];
-    if (Array.isArray(data.publicLatest)) return data.publicLatest;
     if (Array.isArray(data.publishedItems)) return data.publishedItems;
+    if (Array.isArray(data.publicLatest)) return data.publicLatest;
     return [];
+  }
+
+  function onHomePage() {
+    return /\/index\.html$|\/$/.test(location.pathname);
+  }
+
+  function worldHref(id) {
+    return onHomePage() ? "#" + id : rootPrefix() + "index.html#" + id;
   }
 
   function loadArticleIndex() {
@@ -244,8 +252,8 @@
     var nav = WORLDS.map(function (item) {
       var current = item[0] === active ? ' aria-current="true"' : "";
       return (
-        '<a href="#' +
-        item[0] +
+        '<a href="' +
+        worldHref(item[0]) +
         '"' +
         current +
         ">" +
@@ -261,8 +269,8 @@
       .concat(
         WORLDS.map(function (item) {
           return (
-            '<a href="#' +
-            item[0] +
+            '<a href="' +
+            worldHref(item[0]) +
             '"><strong>' +
             item[1] +
             "</strong><span>" +

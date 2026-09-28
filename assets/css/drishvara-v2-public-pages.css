@@ -1,0 +1,58 @@
+body.drishvara-v2-active.drishvara-v2-public-page {
+  background: var(--dv2-paper) !important;
+  color: var(--dv2-ink) !important;
+  font-family: var(--dv2-font-ui) !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page > header:not(.dv2-header),
+body.drishvara-v2-active.drishvara-v2-public-page .drishvara-hf07-header,
+body.drishvara-v2-active.drishvara-v2-public-page .drishvara-hf05-header,
+body.drishvara-v2-active.drishvara-v2-public-page .topbar,
+body.drishvara-v2-active.drishvara-v2-public-page .drishvara-login-header {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page main,
+body.drishvara-v2-active.drishvara-v2-public-page .page,
+body.drishvara-v2-active.drishvara-v2-public-page .shell,
+body.drishvara-v2-active.drishvara-v2-public-page .insights-shell,
+body.drishvara-v2-active.drishvara-v2-public-page .dashboard-shell {
+  max-width: var(--dv2-max) !important;
+  margin: 0 auto !important;
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 3vw, 2rem) !important;
+  background: transparent !important;
+  color: var(--dv2-ink) !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page h1,
+body.drishvara-v2-active.drishvara-v2-public-page h2,
+body.drishvara-v2-active.drishvara-v2-public-page h3 {
+  font-family: var(--dv2-font-editorial) !important;
+  letter-spacing: 0 !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page h1 {
+  font-size: clamp(2.3rem, 5vw, 4.8rem) !important;
+  line-height: 1 !important;
+}
+
+.dv2-public-notice {
+  max-width: var(--dv2-max);
+  margin: 1.5rem auto 0;
+  border-left: 2px solid var(--dv2-gold);
+  padding: 0.85rem 1rem;
+  background: rgba(215, 173, 69, 0.08);
+  color: var(--dv2-ink);
+}
+
+body.drishvara-v2-active .filter-btn,
+body.drishvara-v2-active .btn,
+body.drishvara-v2-active button {
+  min-height: 2.75rem;
+}
+
+body.drishvara-v2-active .dv2-footer {
+  margin-top: 0 !important;
+}

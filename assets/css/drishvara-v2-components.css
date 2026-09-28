@@ -55,6 +55,39 @@ body.drishvara-v2-active [data-ag75d-e2-star-place-choice-panel] {
   background: rgba(255, 250, 240, 0.05);
 }
 
+body.drishvara-v2-active .dv2-location-search {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+  color: rgba(255, 250, 240, 0.86);
+  font-weight: 800;
+}
+
+body.drishvara-v2-active .dv2-location-search input {
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid rgba(215, 173, 69, 0.34);
+  border-radius: var(--dv2-radius);
+  background: rgba(5, 17, 38, 0.72);
+  color: #fffaf0;
+  padding: 0 0.8rem;
+}
+
+body.drishvara-v2-active .dv2-methodology {
+  margin: 0.9rem 0;
+  border: 1px solid rgba(255, 250, 240, 0.14);
+  border-radius: var(--dv2-radius);
+  background: rgba(255, 250, 240, 0.045);
+  padding: 0.8rem;
+}
+
+body.drishvara-v2-active .dv2-methodology summary {
+  min-height: 2.75rem;
+  cursor: pointer;
+  color: #f0d487;
+  font-weight: 900;
+}
+
 body.drishvara-v2-active [data-ag75d-e2-star-place-value][aria-pressed="true"],
 body.drishvara-v2-active [data-ag71d-r4-select-kind="panchang"][aria-pressed="true"],
 body.drishvara-v2-active #panchang-calculate,

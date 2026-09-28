@@ -131,9 +131,9 @@ body.drishvara-v2-active .batch03-continuity-strip {
 .dv2-menu-button,
 .dv2-search-submit,
 .dv2-button {
-  border: 1px solid rgba(215, 173, 69, 0.36);
+  border: 1px solid rgba(255, 250, 240, 0.16);
   border-radius: var(--dv2-radius);
-  background: rgba(255, 250, 240, 0.06);
+  background: transparent;
   color: inherit;
   font: 700 0.82rem/1 var(--dv2-font-ui);
   text-decoration: none;
@@ -160,8 +160,21 @@ body.drishvara-v2-active .batch03-continuity-strip {
 
 .dv2-utility-link[data-primary="true"],
 .dv2-button[data-primary="true"] {
+  border-color: rgba(215, 173, 69, 0.58);
   background: var(--dv2-gold);
   color: #15100a;
+}
+
+.dv2-utility-link:not([data-primary="true"]),
+.dv2-icon-button {
+  color: rgba(255, 250, 240, 0.78);
+}
+
+.dv2-utility-link:not([data-primary="true"]):hover,
+.dv2-icon-button:hover,
+.dv2-menu-button:hover {
+  border-color: rgba(215, 173, 69, 0.34);
+  color: #fffaf0;
 }
 
 .dv2-mobile-actions {

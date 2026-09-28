@@ -15,7 +15,7 @@
         '<button class="dv2-button" type="button" data-dv2-article-save aria-disabled="true" title="Sign in is required before saving reads">Save</button>' +
         '<button class="dv2-button" type="button" data-dv2-article-follow aria-disabled="true" title="Sign in is required before following topics">Follow</button>' +
         '<button class="dv2-button" type="button" data-dv2-article-share>Share</button>' +
-        '<span class="dv2-section-note" id="dv2-article-action-status">Save and follow are prepared for authenticated accounts; no preference is stored here.</span>';
+        '<span class="dv2-section-note" id="dv2-article-action-status" aria-live="polite"></span>';
       subtitle.insertAdjacentElement("afterend", actions);
     }
   }
@@ -36,10 +36,10 @@
     document.addEventListener("click", function (event) {
       var status = document.getElementById("dv2-article-action-status");
       if (event.target.closest("[data-dv2-article-save]")) {
-        if (status) status.textContent = "Sign in is required before saving reads. No local save was created.";
+        if (status) status.textContent = "Sign in or join to save reads when member access opens. No local save was created.";
       }
       if (event.target.closest("[data-dv2-article-follow]")) {
-        if (status) status.textContent = "Sign in is required before following topics. No local follow state was created.";
+        if (status) status.textContent = "Sign in or join to follow topics when member access opens. No local follow state was created.";
       }
       if (event.target.closest("[data-dv2-article-share]")) {
         if (navigator.share) {
