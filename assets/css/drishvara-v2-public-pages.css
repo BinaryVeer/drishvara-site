@@ -4,11 +4,27 @@ body.drishvara-v2-active.drishvara-v2-public-page {
   font-family: var(--dv2-font-ui) !important;
 }
 
+[data-drishvara-hf07-unified-header],
+body > header.drishvara-hf07-header,
+body > .drishvara-hf07-header,
+main.shell > header.topbar,
+main.shell > .topbar,
+body > .shell > header.topbar,
+body > .shell > .topbar,
+body > .drishvara-login-header {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 body.drishvara-v2-active.drishvara-v2-public-page > header:not(.dv2-header),
 body.drishvara-v2-active.drishvara-v2-public-page .drishvara-hf07-header,
 body.drishvara-v2-active.drishvara-v2-public-page .drishvara-hf05-header,
 body.drishvara-v2-active.drishvara-v2-public-page .topbar,
-body.drishvara-v2-active.drishvara-v2-public-page .drishvara-login-header {
+body.drishvara-v2-active.drishvara-v2-public-page .drishvara-login-header,
+body.drishvara-v2-active.drishvara-v2-public-page .page > .nav,
+body.drishvara-v2-active.drishvara-v2-public-page .shell > .nav,
+body.drishvara-v2-active.drishvara-v2-public-page [data-drishvara-hf07-duplicate-nav="true"] {
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;

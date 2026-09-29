@@ -83,6 +83,20 @@ body.drishvara-v2-active.article-v2 #article-body li {
   color: var(--dv2-ink) !important;
 }
 
+body.drishvara-v2-active.article-v2 #article-body blockquote {
+  border-left: 3px solid var(--dv2-gold) !important;
+  background: #f3ead7 !important;
+  color: #1d2734 !important;
+  font-style: normal !important;
+  padding: 1.1rem 1.25rem !important;
+  overflow-wrap: anywhere;
+}
+
+body.drishvara-v2-active.article-v2 #article-body blockquote p,
+body.drishvara-v2-active.article-v2 #article-body blockquote li {
+  color: #1d2734 !important;
+}
+
 body.drishvara-v2-active.article-v2 #article-body h2,
 body.drishvara-v2-active.article-v2 #article-body h3 {
   margin-top: 2.2rem !important;
@@ -104,6 +118,25 @@ body.drishvara-v2-active.article-v2 .drishvara-article-evidence {
   border-radius: var(--dv2-radius) !important;
   background: #f5ecd9 !important;
   color: var(--dv2-ink) !important;
+  box-sizing: border-box !important;
+  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+body.drishvara-v2-active.article-v2 .article-trust-block h2,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence h2,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence h2 {
+  color: var(--dv2-ink) !important;
+  margin: 0 0 0.7rem !important;
+}
+
+body.drishvara-v2-active.article-v2 .article-trust-block a,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence a,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence a {
+  color: #164a78 !important;
+  text-decoration-color: var(--dv2-gold) !important;
+  overflow-wrap: anywhere;
 }
 
 body.drishvara-v2-active.article-v2 .article-trust-block p,
@@ -114,8 +147,46 @@ body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence li,
 body.drishvara-v2-active.article-v2 .drishvara-article-evidence li,
 body.drishvara-v2-active.article-v2 figcaption,
 body.drishvara-v2-active.article-v2 .image-credit,
-body.drishvara-v2-active.article-v2 .drishvara-ar01-image-credit {
-  color: var(--dv2-ink-soft) !important;
+body.drishvara-v2-active.article-v2 .drishvara-ar01-image-credit,
+body.drishvara-v2-active.article-v2 .drishvara-image-credit,
+body.drishvara-v2-active.article-v2 .drishvara-reference-source,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-status,
+body.drishvara-v2-active.article-v2 .drishvara-ar02c-status,
+body.drishvara-v2-active.article-v2 .drishvara-ar02c-reference-meta {
+  color: #263342 !important;
+  opacity: 1 !important;
+}
+
+body.drishvara-v2-active.article-v2 .article-trust-block p,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence p,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence p,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-image-credit,
+body.drishvara-v2-active.article-v2 .drishvara-image-credit {
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-align: left !important;
+  line-height: 1.62 !important;
+}
+
+body.drishvara-v2-active.article-v2 .drishvara-ar01-reference-list,
+body.drishvara-v2-active.article-v2 .drishvara-ar02c-reference-list,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence ol,
+body.drishvara-v2-active.article-v2 .article-trust-block ol {
+  box-sizing: border-box !important;
+  margin: 0.9rem 0 1rem !important;
+  padding-left: 1.35rem !important;
+  list-style-position: outside !important;
+}
+
+body.drishvara-v2-active.article-v2 .drishvara-ar01-reference-list li,
+body.drishvara-v2-active.article-v2 .drishvara-ar02c-reference-list li,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence ol li,
+body.drishvara-v2-active.article-v2 .article-trust-block ol li {
+  padding-left: 0.25rem !important;
+  margin: 0.6rem 0 !important;
+  max-width: 100% !important;
+  overflow-wrap: anywhere;
 }
 
 body.drishvara-v2-active.article-v2 .back-row {
@@ -133,5 +204,18 @@ body.drishvara-v2-active.article-v2 .back-link {
   body.drishvara-v2-active.article-v2 .article-shell {
     width: min(100% - 1.25rem, 1180px) !important;
     padding-top: 2.2rem !important;
+  }
+
+  body.drishvara-v2-active.article-v2 .article-trust-block,
+  body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence,
+  body.drishvara-v2-active.article-v2 .drishvara-article-evidence {
+    padding: 1rem !important;
+  }
+
+  body.drishvara-v2-active.article-v2 .drishvara-ar01-reference-list,
+  body.drishvara-v2-active.article-v2 .drishvara-ar02c-reference-list,
+  body.drishvara-v2-active.article-v2 .drishvara-article-evidence ol,
+  body.drishvara-v2-active.article-v2 .article-trust-block ol {
+    padding-left: 1.15rem !important;
   }
 }

@@ -36,6 +36,28 @@
     if (header) header.insertAdjacentElement("afterend", notice);
   }
 
+  function quarantineLegacyShell() {
+    [
+      "[data-drishvara-hf07-unified-header]",
+      "body > header.drishvara-hf07-header",
+      "body > .drishvara-hf07-header",
+      ".drishvara-login-header",
+      ".topbar",
+      ".page > .nav",
+      ".shell > .nav",
+      "[data-drishvara-hf07-duplicate-nav='true']"
+    ].forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (node) {
+        if (node.classList && node.classList.contains("dv2-header")) return;
+        node.setAttribute("data-dv2-legacy-shell-quarantined", "true");
+        node.setAttribute("aria-hidden", "true");
+        node.style.display = "none";
+        node.style.visibility = "hidden";
+        node.style.pointerEvents = "none";
+      });
+    });
+  }
+
   function relabelDashboard() {
     if (file !== "dashboard.html") return;
     document.title = "My Drishvara | Drishvara";
@@ -76,6 +98,7 @@
   function boot() {
     document.body.classList.add("drishvara-v2-public-page", "dv2-page-" + page.kind);
     Shell.ensureHeader(page.active);
+    quarantineLegacyShell();
     relabelDashboard();
     relabelSubmissions();
     relabelAccount();
