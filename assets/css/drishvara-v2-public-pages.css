@@ -19,6 +19,7 @@ body.drishvara-v2-active.drishvara-v2-public-page .page,
 body.drishvara-v2-active.drishvara-v2-public-page .shell,
 body.drishvara-v2-active.drishvara-v2-public-page .insights-shell,
 body.drishvara-v2-active.drishvara-v2-public-page .dashboard-shell {
+  width: min(100% - 2rem, var(--dv2-max)) !important;
   max-width: var(--dv2-max) !important;
   margin: 0 auto !important;
   padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 3vw, 2rem) !important;
@@ -39,12 +40,115 @@ body.drishvara-v2-active.drishvara-v2-public-page h1 {
 }
 
 .dv2-public-notice {
+  width: min(100% - 2rem, var(--dv2-max));
   max-width: var(--dv2-max);
   margin: 1.5rem auto 0;
   border-left: 2px solid var(--dv2-gold);
   padding: 0.85rem 1rem;
   background: rgba(215, 173, 69, 0.08);
   color: var(--dv2-ink);
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page p,
+body.drishvara-v2-active.drishvara-v2-public-page li,
+body.drishvara-v2-active.drishvara-v2-public-page .subtitle,
+body.drishvara-v2-active.drishvara-v2-public-page .panel-note,
+body.drishvara-v2-active.drishvara-v2-public-page .read-summary,
+body.drishvara-v2-active.drishvara-v2-public-page .archive-items,
+body.drishvara-v2-active.drishvara-v2-public-page .topic-count,
+body.drishvara-v2-active.drishvara-v2-public-page .blocked,
+body.drishvara-v2-active.drishvara-v2-public-page .note {
+  color: var(--dv2-ink-soft) !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page a,
+body.drishvara-v2-active.drishvara-v2-public-page .read-actions a,
+body.drishvara-v2-active.drishvara-v2-public-page .archive-card a {
+  color: var(--dv2-link) !important;
+  text-decoration-color: var(--dv2-gold) !important;
+  text-underline-offset: 0.2em;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .panel,
+body.drishvara-v2-active.drishvara-v2-public-page .card,
+body.drishvara-v2-active.drishvara-v2-public-page .stat-card,
+body.drishvara-v2-active.drishvara-v2-public-page .archive-card,
+body.drishvara-v2-active.drishvara-v2-public-page .read-card,
+body.drishvara-v2-active.drishvara-v2-public-page .mini {
+  border-color: rgba(17, 23, 33, 0.16) !important;
+  background-color: rgba(255, 250, 240, 0.72) !important;
+  color: var(--dv2-ink) !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .label,
+body.drishvara-v2-active.drishvara-v2-public-page .stat-label,
+body.drishvara-v2-active.drishvara-v2-public-page .read-meta,
+body.drishvara-v2-active.drishvara-v2-public-page .archive-date,
+body.drishvara-v2-active.drishvara-v2-public-page .topic-name {
+  color: var(--dv2-gold-deep) !important;
+  opacity: 1 !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .read-title,
+body.drishvara-v2-active.drishvara-v2-public-page .read-title a,
+body.drishvara-v2-active.drishvara-v2-public-page .value,
+body.drishvara-v2-active.drishvara-v2-public-page strong {
+  color: var(--dv2-ink) !important;
+}
+
+.dv2-insights-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  border: 1px solid rgba(159, 119, 36, 0.35);
+  border-radius: var(--dv2-radius);
+  background: rgba(215, 173, 69, 0.11);
+  color: var(--dv2-ink);
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  font-weight: 800;
+}
+
+.dv2-dashboard-map {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin: 1.2rem 0;
+}
+
+.dv2-dashboard-map article {
+  border: 1px solid rgba(17, 23, 33, 0.14);
+  border-radius: var(--dv2-radius);
+  padding: 1rem;
+  background: rgba(255, 250, 240, 0.76);
+}
+
+.dv2-dashboard-map h2 {
+  margin-top: 0;
+  font-size: 1.35rem !important;
+}
+
+.dv2-dashboard-map p {
+  margin-bottom: 0;
+}
+
+@media (min-width: 1600px) {
+  body.drishvara-v2-active.drishvara-v2-public-page main,
+  body.drishvara-v2-active.drishvara-v2-public-page .page,
+  body.drishvara-v2-active.drishvara-v2-public-page .shell,
+  body.drishvara-v2-active.drishvara-v2-public-page .insights-shell,
+  body.drishvara-v2-active.drishvara-v2-public-page .dashboard-shell,
+  .dv2-public-notice {
+    width: min(calc(100vw - 7rem), var(--dv2-shell-wide)) !important;
+    max-width: var(--dv2-shell-wide) !important;
+  }
+}
+
+@media (max-width: 860px) {
+  .dv2-dashboard-map {
+    grid-template-columns: 1fr;
+  }
 }
 
 body.drishvara-v2-active .filter-btn,

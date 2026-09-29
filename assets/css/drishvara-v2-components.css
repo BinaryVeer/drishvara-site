@@ -33,6 +33,7 @@ body.drishvara-v2-active .dv2-reflect input,
 body.drishvara-v2-active .dv2-reflect select {
   border-radius: var(--dv2-radius) !important;
   font-family: var(--dv2-font-ui) !important;
+  min-height: 2.75rem !important;
 }
 
 body.drishvara-v2-active .dv2-time button,
@@ -88,6 +89,208 @@ body.drishvara-v2-active .dv2-methodology summary {
   font-weight: 900;
 }
 
+.dv2-panchang-reader {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(255, 250, 240, 0.16);
+  border-radius: var(--dv2-radius);
+  padding: clamp(1rem, 2vw, 1.25rem);
+  background: rgba(255, 250, 240, 0.07);
+}
+
+.dv2-panchang-reader__head {
+  display: grid;
+  gap: 0.35rem;
+  border-bottom: 1px solid rgba(215, 173, 69, 0.22);
+  padding-bottom: 0.85rem;
+}
+
+.dv2-panchang-reader__head h3 {
+  margin: 0;
+  color: #fffaf0;
+  font-size: clamp(1.55rem, 2.6vw, 2.45rem);
+  line-height: 1.08;
+}
+
+.dv2-panchang-reader__meta {
+  color: rgba(255, 250, 240, 0.78);
+  line-height: 1.5;
+}
+
+.dv2-panchang-reader__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.dv2-panchang-reader__item {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+  border-top: 1px solid rgba(255, 250, 240, 0.13);
+  padding-top: 0.65rem;
+}
+
+.dv2-panchang-reader__item span {
+  color: rgba(255, 250, 240, 0.66);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dv2-panchang-reader__item strong {
+  color: #fffaf0;
+  font-size: 1rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.dv2-panchang-reader__item[data-emphasis="true"] strong {
+  color: #f0d487;
+  font-size: 1.18rem;
+}
+
+body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table {
+  display: none !important;
+}
+
+.dv2-detailed-timings {
+  margin: 0.9rem 0;
+}
+
+.dv2-detailed-timings .mini-table,
+.dv2-methodology .mini-table {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.dv2-observance-year {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(215, 173, 69, 0.22);
+  border-radius: var(--dv2-radius);
+  padding: clamp(1rem, 2vw, 1.25rem);
+  background: rgba(255, 250, 240, 0.055);
+}
+
+.dv2-observance-year__head {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.dv2-observance-year__head h4 {
+  margin: 0;
+  color: #fffaf0;
+  font-family: var(--dv2-font-editorial);
+  font-size: clamp(1.45rem, 2.4vw, 2.35rem);
+  line-height: 1.08;
+}
+
+.dv2-observance-year__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.dv2-observance-year__filters button {
+  border: 1px solid rgba(215, 173, 69, 0.32);
+  border-radius: var(--dv2-radius);
+  background: rgba(255, 250, 240, 0.055);
+  color: #fffaf0;
+  min-width: 2.75rem;
+  padding: 0 0.72rem;
+  font-weight: 800;
+}
+
+.dv2-observance-year__filters button[aria-pressed="true"] {
+  background: var(--dv2-gold);
+  color: #15100a;
+}
+
+.dv2-observance-year__months {
+  display: grid;
+  gap: 1rem;
+}
+
+.dv2-observance-month {
+  display: grid;
+  gap: 0.65rem;
+  border-top: 1px solid rgba(255, 250, 240, 0.16);
+  padding-top: 0.85rem;
+}
+
+.dv2-observance-month h5 {
+  margin: 0;
+  color: #f0d487;
+  font-size: 0.86rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.dv2-observance-row {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 0.34fr) minmax(0, 1fr);
+  gap: 0.8rem;
+  border: 1px solid rgba(255, 250, 240, 0.12);
+  border-radius: var(--dv2-radius);
+  padding: 0.8rem;
+  background: rgba(5, 17, 38, 0.3);
+}
+
+.dv2-observance-date {
+  display: grid;
+  gap: 0.2rem;
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.dv2-observance-date strong {
+  color: #fffaf0;
+  font-size: 1rem;
+}
+
+.dv2-observance-body {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.dv2-observance-body h6 {
+  margin: 0;
+  color: #fffaf0;
+  font-family: var(--dv2-font-editorial);
+  font-size: 1.25rem;
+  line-height: 1.18;
+}
+
+.dv2-observance-body p,
+.dv2-observance-window {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.78);
+  line-height: 1.45;
+}
+
+.dv2-observance-window {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.dv2-observance-window span {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.dv2-observance-window b {
+  color: #f0d487;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
 body.drishvara-v2-active [data-ag75d-e2-star-place-value][aria-pressed="true"],
 body.drishvara-v2-active [data-ag71d-r4-select-kind="panchang"][aria-pressed="true"],
 body.drishvara-v2-active #panchang-calculate,
@@ -138,8 +341,92 @@ body.drishvara-v2-active .ag74i-book-navigation {
   line-height: 1.4;
 }
 
+body.drishvara-v2-active .dv2-reflect [data-drishvara-v2-reflect-card="true"] > h2 {
+  display: none !important;
+}
+
+body.drishvara-v2-active .dv2-reflect [data-ag71e-preview-grid="star-reflection"] {
+  display: grid;
+  gap: 0.62rem;
+}
+
+body.drishvara-v2-active .dv2-reflect [data-ag71e-preview-grid="star-reflection"]::before {
+  content: "Reflection";
+  order: 0;
+  color: #f0d487;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] [data-ag71e-preview-grid="star-reflection"]::before {
+  content: "चिंतन";
+}
+
+body.drishvara-v2-active .dv2-reflect [data-ag71e-preview-row],
+body.drishvara-v2-active .dv2-reflect .ag71e-preview-row {
+  order: 4;
+}
+
+body.drishvara-v2-active .dv2-reflect .ag71e-preview-row:nth-last-child(-n + 4) {
+  order: 1;
+}
+
+body.drishvara-v2-active .dv2-reflect .ag71e-preview-row:nth-child(-n + 7) {
+  opacity: 0.78;
+  font-size: 0.92rem;
+}
+
+body.drishvara-v2-active .dv2-reflect [data-ag71e-preview-grid="star-reflection"]::after {
+  content: "How this basis was determined";
+  order: 3;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(215, 173, 69, 0.22);
+  padding-top: 0.75rem;
+  color: #f0d487;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] [data-ag71e-preview-grid="star-reflection"]::after {
+  content: "यह आधार कैसे निर्धारित हुआ";
+}
+
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row strong {
+  font-size: 0;
+}
+
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row strong::after {
+  font-size: 0.84rem;
+}
+
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(1) strong::after { content: "समाधान स्थिति"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(2) strong::after { content: "परिणाम आधार"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(3) strong::after { content: "जन्म-तिथि आधार"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(4) strong::after { content: "जन्म-समय आधार"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(5) strong::after { content: "स्थान आधार"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(6) strong::after { content: "नक्षत्र"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(7) strong::after { content: "रनटाइम आधार"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(8) strong::after { content: "चिंतन-विषय"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(9) strong::after { content: "स्व-प्रश्न"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(10) strong::after { content: "आधार अभ्यास"; }
+body.drishvara-v2-active .dv2-reflect[data-dv2-lang="hi"] .ag71e-preview-row:nth-child(11) strong::after { content: "सीमा"; }
+
+body.drishvara-v2-active .ag71c-input-mode label,
+body.drishvara-v2-active .ag73a-birth-time-unknown {
+  min-height: 2.75rem;
+  align-items: center;
+}
+
 @media (max-width: 700px) {
   .dv2-year-glance__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dv2-panchang-reader__grid,
+  .dv2-observance-window,
+  .dv2-observance-row {
     grid-template-columns: 1fr;
   }
 }

@@ -17,8 +17,8 @@ body.drishvara-v2-active.article-v2 > .page > .nav {
 }
 
 body.drishvara-v2-active.article-v2 .article-shell {
-  width: min(100% - 2rem, 1180px) !important;
-  max-width: 1180px !important;
+  width: min(100% - 2rem, 1320px) !important;
+  max-width: 1320px !important;
   margin: 0 auto !important;
   padding: clamp(3rem, 6vw, 5rem) 0 !important;
   color: var(--dv2-ink) !important;
@@ -47,11 +47,11 @@ body.drishvara-v2-active.article-v2 #article-meta::before {
 }
 
 body.drishvara-v2-active.article-v2 #article-title {
-  max-width: 980px !important;
+  max-width: 1040px !important;
   margin: 0 !important;
   color: var(--dv2-ink) !important;
   font-family: var(--dv2-font-editorial) !important;
-  font-size: clamp(2.35rem, 5.4vw, 4.9rem) !important;
+  font-size: clamp(2.35rem, 4.8vw, 4.65rem) !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
 }
@@ -71,7 +71,7 @@ body.drishvara-v2-active.article-v2 .divider {
 }
 
 body.drishvara-v2-active.article-v2 #article-body {
-  max-width: 760px !important;
+  max-width: var(--dv2-readable) !important;
   margin: 0 auto !important;
   color: var(--dv2-ink) !important;
   font-family: var(--dv2-font-ui) !important;
@@ -99,11 +99,23 @@ body.drishvara-v2-active.article-v2 #article-body img {
 body.drishvara-v2-active.article-v2 .article-trust-block,
 body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence,
 body.drishvara-v2-active.article-v2 .drishvara-article-evidence {
-  border: 1px solid rgba(17, 23, 33, 0.14) !important;
+  border: 1px solid rgba(17, 23, 33, 0.18) !important;
   border-left: 2px solid var(--dv2-gold) !important;
   border-radius: var(--dv2-radius) !important;
-  background: #f7efe0 !important;
+  background: #f5ecd9 !important;
   color: var(--dv2-ink) !important;
+}
+
+body.drishvara-v2-active.article-v2 .article-trust-block p,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence p,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence p,
+body.drishvara-v2-active.article-v2 .article-trust-block li,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-evidence li,
+body.drishvara-v2-active.article-v2 .drishvara-article-evidence li,
+body.drishvara-v2-active.article-v2 figcaption,
+body.drishvara-v2-active.article-v2 .image-credit,
+body.drishvara-v2-active.article-v2 .drishvara-ar01-image-credit {
+  color: var(--dv2-ink-soft) !important;
 }
 
 body.drishvara-v2-active.article-v2 .back-row {

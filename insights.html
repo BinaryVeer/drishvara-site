@@ -1275,7 +1275,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     </section>
 
     <section class="toolbar" aria-label="Search controls">
-      <input class="search-box" id="search-input" type="search" placeholder="Search reads by title, summary, theme, date, or path..." />
+      <input class="search-box" id="search-input" type="search" placeholder="Search reads by title, summary, theme, or date..." />
     </section>
 
     <section class="filter-row" id="topic-filters" aria-label="Theme filters">
@@ -1328,7 +1328,8 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
       index: null,
       items: [],
       topic: "all",
-      query: ""
+      query: "",
+      visibleLimit: 24
     };
 
     function escapeHtml(value) {
@@ -1400,10 +1401,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
           item.summary,
           item.summary_hi,
           item.tag,
-          item.date,
-          item.source,
-          item.sourcePath,
-          item.path
+          item.date
         ].join(" "));
 
         return haystack.includes(q);
@@ -1447,6 +1445,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
       wrap.querySelectorAll("[data-topic]").forEach((button) => {
         button.addEventListener("click", () => {
           state.topic = button.dataset.topic || "all";
+          state.visibleLimit = 24;
           renderAll();
         });
       });
@@ -1471,16 +1470,27 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
         return;
       }
 
-      grid.innerHTML = items.slice(0, 24).map((item) => `
+      const visibleItems = items.slice(0, state.visibleLimit);
+      grid.innerHTML = visibleItems.map((item) => `
         <article class="read-card">
-          <div class="read-meta">${escapeHtml(item.tag || "Drishvara")} · ${escapeHtml(item.date || "Undated")} · ${escapeHtml(item.source || "index")}</div>
+          <div class="read-meta">${escapeHtml(item.tag || "Drishvara")} · ${escapeHtml(item.date || "Undated")}</div>
           <h3 class="read-title">${escapeHtml(localizedTitle(item, "Untitled read"))}</h3>
           <p class="read-summary">${escapeHtml(localizedSummary(item, "A Drishvara read prepared for the archive."))}</p>
           <div class="read-actions">
             <a href="${escapeHtml(itemHref(item))}">Open read</a>
           </div>
         </article>
-      `).join("");
+      `).join("") + (items.length > state.visibleLimit
+        ? `<button class="dv2-insights-more" type="button" id="dv2-insights-load-more">Load more reads</button>`
+        : "");
+
+      const more = document.getElementById("dv2-insights-load-more");
+      if (more) {
+        more.addEventListener("click", () => {
+          state.visibleLimit += 24;
+          renderReads();
+        });
+      }
     }
 
     function renderTopicList() {
@@ -1512,6 +1522,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
         link.addEventListener("click", (event) => {
           event.preventDefault();
           state.topic = link.dataset.topicJump || "all";
+          state.visibleLimit = 24;
           renderAll();
           window.scrollTo({ top: 0, behavior: "smooth" });
         });
@@ -1552,7 +1563,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
           <div class="archive-card">
             <div class="archive-date">${escapeHtml(date)}</div>
             <div class="archive-items">${items.length} published read${items.length === 1 ? "" : "s"}</div>
-            <a href="${escapeHtml(first.url || "article.html")}">Open first read</a>
+            <a href="${escapeHtml(itemHref(first))}">Open first read</a>
           </div>
         `;
       }).join("");
@@ -1591,6 +1602,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
 
     document.getElementById("search-input").addEventListener("input", (event) => {
       state.query = event.target.value || "";
+      state.visibleLimit = 24;
       renderReads();
     });
 

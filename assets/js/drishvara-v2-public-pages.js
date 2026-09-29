@@ -41,7 +41,26 @@
     document.title = "My Drishvara | Drishvara";
     var h1 = document.querySelector("h1");
     if (h1) h1.textContent = "My Drishvara";
+    var heroCopy = document.querySelector(".hero p");
+    if (heroCopy) {
+      heroCopy.textContent =
+        "A future personal space for reading, participation, membership and governed tools. No sign-in, subscription, profile storage or premium output is active on this page.";
+    }
+    var status = document.querySelector(".status-pill");
+    if (status) status.textContent = "Account features inactive";
     addNotice("My Drishvara prepares reading, participation, membership and future governed personal tools. Sign-in, subscription and personal storage remain inactive here.");
+    if (!document.querySelector(".dv2-dashboard-map")) {
+      var map = document.createElement("section");
+      map.className = "dv2-dashboard-map";
+      map.setAttribute("aria-label", "My Drishvara sections");
+      map.innerHTML =
+        '<article><h2>Reading</h2><p>Saved reads and reading history will require sign-in and consent before activation.</p></article>' +
+        '<article><h2>Participation</h2><p>Submissions and contributor workflows remain scaffolded until governed review and backend access are approved.</p></article>' +
+        '<article><h2>Membership</h2><p>Subscription access is not enabled. This page does not simulate premium status.</p></article>' +
+        '<article><h2>Account</h2><p>Authentication and profile storage are inactive; no personal details are collected here.</p></article>';
+      var main = document.querySelector("main");
+      if (main) main.insertAdjacentElement("beforebegin", map);
+    }
   }
 
   function relabelSubmissions() {

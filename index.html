@@ -8302,10 +8302,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setText(card.querySelector(".label"), star.label);
     setText(card.querySelector(".star-safety-note"), star.safety_note);
-    setText(card.querySelector("h2"), star.heading);
+    const safeHeading = star.heading === "What the stars say about you"
+      ? "Your Star Reflection"
+      : star.heading;
+    setText(card.querySelector("h2"), safeHeading);
 
     const body = Array.from(card.querySelectorAll("p")).find((p) => !p.classList.contains("star-safety-note"));
-    setText(body, star.body);
+    const safeBody = star.body === "Personal input is disabled until consent, privacy and reflection-method governance are complete."
+      ? "Your birth inputs are used only to resolve this reflection and are not stored by Drishvara."
+      : star.body;
+    setText(body, safeBody);
 
     const nameInput = card.querySelector("#star-reflection-name");
     const dobInput = card.querySelector("#star-reflection-dob");
@@ -8381,7 +8387,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (card) {
         card.setAttribute("data-drishvara-ag66b-star-reflection-fallback", "true");
         const body = Array.from(card.querySelectorAll("p")).find((p) => !p.classList.contains("star-safety-note"));
-        setText(body, "Star Reflection working data could not be loaded. Personal input remains disabled.");
+        setText(body, "Star Reflection working data could not be loaded. Your birth inputs are not stored by Drishvara.");
       }
     }
   }

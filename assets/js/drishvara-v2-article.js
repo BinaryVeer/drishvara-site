@@ -18,6 +18,20 @@
         '<span class="dv2-section-note" id="dv2-article-action-status" aria-live="polite"></span>';
       subtitle.insertAdjacentElement("afterend", actions);
     }
+    ensureReferenceState();
+  }
+
+  function ensureReferenceState() {
+    var body = document.getElementById("article-body");
+    if (!body || document.getElementById("dv2-article-reference-state")) return;
+    if (/References|Reference links|संदर्भ/.test(body.innerText || "")) return;
+    var section = document.createElement("section");
+    section.id = "dv2-article-reference-state";
+    section.className = "article-trust-block";
+    section.innerHTML =
+      "<h2>References</h2>" +
+      "<p>Reference links appear after editorial verification.</p>";
+    body.appendChild(section);
   }
 
   window.DrishvaraV2Article = {
