@@ -27,6 +27,23 @@ body.drishvara-v2-active .dv2-reflect .card .label {
   color: #f0d487 !important;
 }
 
+body.drishvara-v2-active #panchang-festival-card > .label,
+body.drishvara-v2-active .dv2-reflect [data-drishvara-v2-reflect-card="true"] > .label,
+body.drishvara-v2-active [data-dv2-legacy-runtime-label="true"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.drishvara-v2-active .dv2-runtime-label {
+  color: #f0d487 !important;
+  font-family: var(--dv2-font-ui) !important;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin-bottom: 10px;
+}
+
 body.drishvara-v2-active .dv2-time input,
 body.drishvara-v2-active .dv2-time select,
 body.drishvara-v2-active .dv2-reflect input,
@@ -34,6 +51,12 @@ body.drishvara-v2-active .dv2-reflect select {
   border-radius: var(--dv2-radius) !important;
   font-family: var(--dv2-font-ui) !important;
   min-height: 2.75rem !important;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-place-select[aria-hidden="true"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 body.drishvara-v2-active .dv2-time button,

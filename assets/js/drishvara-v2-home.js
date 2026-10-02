@@ -542,7 +542,7 @@
     ["ekadashi", "Ekadashi", "एकादशी"],
     ["purnima", "Purnima", "पूर्णिमा"],
     ["amavasya", "Amavasya", "अमावस्या"],
-    ["trayodashi_pradosha", "Pradosha", "प्रदोष"],
+    ["trayodashi_pradosha", "Pradosha", "त्रयोदशी / प्रदोष"],
     ["sankashti_chaturthi", "Sankashti Chaturthi", "संकष्टी चतुर्थी"],
     ["vinayaka_chaturthi_monthly", "Vinayaka Chaturthi", "विनायक चतुर्थी"],
     ["masik_shivaratri", "Masik Shivaratri", "मासिक शिवरात्रि"]
@@ -622,10 +622,17 @@
     Pausha: "पौष",
     Magha: "माघ",
     Phalguna: "फाल्गुन",
+    Regular: "नियमित",
     regular: "नियमित",
     Adhika: "अधिक",
+    adhika: "अधिक",
     Kshaya: "क्षय",
+    kshaya: "क्षय",
     "Varanasi / Banaras": "वाराणसी / बनारस",
+    Itanagar: "ईटानगर",
+    "New Delhi": "नई दिल्ली",
+    Ranchi: "रांची",
+    Tokyo: "टोक्यो",
     "Varanasi canonical basis": "वाराणसी प्रमाणित आधार",
     "Not available": "उपलब्ध नहीं",
     Calculating: "गणना जारी",
@@ -648,6 +655,14 @@
     sankashti_moonrise: "चंद्रोदय संदर्भ",
     moonrise: "चंद्रोदय",
     ritual_window: "अनुष्ठान समय"
+  };
+
+  var STAR_PLACE_LABEL_HI = {
+    "varanasi-uttar-pradesh-india": "वाराणसी / बनारस",
+    "itanagar-arunachal-pradesh-india": "ईटानगर",
+    "new-delhi-delhi-india": "नई दिल्ली",
+    "ranchi-jharkhand-india": "रांची",
+    "tokyo-japan": "टोक्यो"
   };
 
   function languageData(lang) {
@@ -707,7 +722,7 @@
   function localizeValue(value, lang) {
     var text = String(value || "").trim();
     if (!text) return languageData(lang).unavailable;
-    if (/Calculating|Awaiting/i.test(text)) return languageData(lang).loading;
+    if (/Calculating|Awaiting|Loading/i.test(text)) return languageData(lang).loading;
     if (/Not available/i.test(text)) return languageData(lang).unavailable;
     return lang === "hi" ? replaceKnownHindi(text) : text;
   }
@@ -790,8 +805,10 @@
     var date = getPanchangDateLabel(lang);
     if (heading) heading.textContent = d.todaysPanchang;
     if (meta) meta.textContent = location + " · " + date;
-    setReaderItem("sunrise", d.sunrise, formatTimeOnly(document.getElementById("panchang-sunrise")?.textContent || d.loading));
-    setReaderItem("sunset", d.sunset, formatTimeOnly(document.getElementById("panchang-sunset")?.textContent || d.loading));
+    var sunriseText = document.getElementById("panchang-sunrise")?.textContent || d.loading;
+    var sunsetText = document.getElementById("panchang-sunset")?.textContent || d.loading;
+    setReaderItem("sunrise", d.sunrise, /Calculating|Awaiting|Loading/i.test(sunriseText) ? d.loading : formatTimeOnly(sunriseText));
+    setReaderItem("sunset", d.sunset, /Calculating|Awaiting|Loading/i.test(sunsetText) ? d.loading : formatTimeOnly(sunsetText));
     setReaderItem("tithi", d.tithi, localizeValue(document.getElementById("panchang-tithi")?.textContent, lang));
     setReaderItem("nakshatra", d.nakshatra, localizeValue(document.getElementById("panchang-nakshatra")?.textContent, lang));
     setReaderItem("yoga", d.yoga, localizeValue(document.getElementById("panchang-yoga")?.textContent, lang));
@@ -1093,7 +1110,10 @@
     en: {
       timeKicker: "Time",
       timeTitle: "Today's Panchang",
+      panchangViewLabel: "Panchang & Festival View",
       todaysPanchang: "Today's Panchang",
+      panchangIntro: "Select a date and approved place to view the current Panchang. The annual festival calendar below remains on the canonical Varanasi basis.",
+      panchangDate: "Panchang date",
       previousDay: "Previous Day",
       today: "Today",
       nextDay: "Next Day",
@@ -1102,13 +1122,26 @@
       chooseDate: "Choose a date",
       selectedCivilDate: "Selected civil date",
       selectLocation: "Search city or place",
+      selectLocationMode: "Select Location",
+      choosePanchangLocation: "Choose Panchang Location",
+      approvedPlaceAlias: "Approved place or alias",
+      placeAliasPlaceholder: "e.g. Kashi or Tokyo",
       coordinates: "Enter Coordinates",
       latitude: "Latitude",
       longitude: "Longitude",
       timezone: "Timezone",
       optionalLocation: "Optional Location Label",
+      panchangCoordinateNote: "Coordinate-first calculation requires latitude, longitude and a supplied valid IANA timezone. Drishvara does not reverse-geocode or store these inputs.",
+      panchangSearchForward: "Use the governed dropdown or enter an approved alias such as Kashi, Banaras, Varanasi, Itanagar, New Delhi, Ranchi or Tokyo.",
+      panchangPlaceNote: "Curated locations use governed coordinates and timezones. Approved aliases resolve exactly; fuzzy or nearest-place matching is not used.",
       calculatePanchang: "Calculate Panchang",
+      requestReady: "Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.",
+      publicReleasePrefix: "AG74P public release:",
+      publicReleaseText: "5 approved named locations · worldwide coordinates with validated IANA timezone · 384 Varanasi annual records · 114 generic monthly observances.",
       locationBasis: "Location basis",
+      coordinateBasis: "Coordinate basis",
+      timezoneBasis: "Timezone basis",
+      approvalBasis: "Approval basis",
       calendarBasis: "Calendar basis",
       howDetermined: "How this was determined",
       detailedTimings: "Detailed timings",
@@ -1125,13 +1158,18 @@
       vara: "Vara",
       currentObservance: "Current / Upcoming Observance",
       upcomingObservance: "Upcoming Observance",
+      noGovernedObservance: "No governed observance result is available for this selection yet.",
+      observanceTimingNote: "Festival timing appears only when a uniquely matched record has explicit public-display approval or the completed calculation engine is available.",
       begins: "Begins",
       ends: "Ends",
       ritualWindows: "Ritual windows",
       ritualWindow: "Ritual Window",
+      annualObservanceBook: "Annual observance book",
       annualCalendar: "Annual Hindu Festival Calendar",
       yearAtGlance: "Hindu Year Overview",
       yearOverviewNote: "Lunar-month overview from the governed Varanasi annual book.",
+      bookLoading: "Loading the governed Varanasi annual book…",
+      bookStructureLoading: "Loading annual-book structure…",
       observanceYear: "Festival & Observance Year",
       observanceDescription: "Recurring Hindu lunar/tithi observances from the governed public projection. This is not an all-festival, all-faith or national-holiday calendar.",
       governedRecords: "governed records",
@@ -1141,6 +1179,10 @@
       nextPage: "Next Page",
       reflectKicker: "Reflect",
       reflectTitle: "Your Star Reflection",
+      starLabel: "Star Reflection",
+      starSafety: "Reflective prompt only; not a personal prediction, assessment, or decision guide.",
+      starIntro: "Your birth inputs are used only to resolve this reflection and are not stored by Drishvara.",
+      name: "Name",
       dob: "Date of Birth",
       birthTime: "Birth Time",
       unknownTime: "I don’t know exact birth time",
@@ -1151,23 +1193,33 @@
       chooseBirthPlace: "Choose Birth Place",
       selectedBirthPlace: "Selected birth place",
       selectedBirthPlaceNone: "Selected birth place: not selected",
+      starPlaceNote: "Choose one approved birth place for this session only, or use coordinate mode.",
       birthLatitude: "Birth Latitude",
       birthLongitude: "Birth Longitude",
       birthTimezone: "Birth Timezone",
       optionalBirthPlace: "Optional Birth Place Label",
+      starCoordinateNote: "Coordinates remain available when your approved place is not in the public location list. Inputs are not stored.",
+      starBasisStatus: "Reflection basis: Moon-led, Panchanga-supported, birth-time-aware and location-aware. Result remains reflective and non-deterministic.",
+      starActiveStatus: "Star Reflection active result is enabled for DOB, birth time and selected birth-place basis. No personal data is stored.",
+      starPlaceUnavailable: "No approved public match. Use coordinates for unavailable places.",
       generateReflection: "Generate Reflection",
+      reflectionResult: "Today's Star Reflection Result",
       todaysReflection: "Today's Reflection",
       reflectiveTheme: "Reflective Theme",
       selfInquiry: "Self-Inquiry",
       groundingPractice: "Grounding Practice",
       limitation: "Limitation",
       basisDetermined: "How this basis was determined",
+      resultNote: "No name, DOB, birth time, location or coordinate data is stored. This active pilot result is symbolic and non-deterministic; it is not clinical, financial, legal, relationship, career or decision advice.",
       reflectionUnavailable: "Governed Hindi reflection text is not yet available; the reflective result remains in the approved available language."
     },
     hi: {
       timeKicker: "समय",
       timeTitle: "आज का पंचांग",
+      panchangViewLabel: "पंचांग और पर्व दृश्य",
       todaysPanchang: "आज का पंचांग",
+      panchangIntro: "वर्तमान पंचांग देखने के लिए दिनांक और स्वीकृत स्थान चुनें। नीचे दिया गया वार्षिक पर्व कैलेंडर प्रमाणित वाराणसी आधार पर रहता है।",
+      panchangDate: "पंचांग दिनांक",
       previousDay: "पिछला दिन",
       today: "आज",
       nextDay: "अगला दिन",
@@ -1176,13 +1228,26 @@
       chooseDate: "दिनांक चुनें",
       selectedCivilDate: "चयनित सिविल दिनांक",
       selectLocation: "शहर या स्थान खोजें",
+      selectLocationMode: "स्थान चुनें",
+      choosePanchangLocation: "पंचांग स्थान चुनें",
+      approvedPlaceAlias: "स्वीकृत स्थान या उपनाम",
+      placeAliasPlaceholder: "जैसे काशी या टोक्यो",
       coordinates: "निर्देशांक दर्ज करें",
       latitude: "अक्षांश",
       longitude: "देशांतर",
       timezone: "समय क्षेत्र",
       optionalLocation: "वैकल्पिक स्थान नाम",
+      panchangCoordinateNote: "निर्देशांक-आधारित गणना के लिए अक्षांश, देशांतर और मान्य IANA समय क्षेत्र आवश्यक हैं। Drishvara रिवर्स-जियोकोड नहीं करता और ये इनपुट संग्रहीत नहीं होते।",
+      panchangSearchForward: "शासित ड्रॉपडाउन का उपयोग करें या काशी, बनारस, वाराणसी, ईटानगर, नई दिल्ली, रांची या टोक्यो जैसे स्वीकृत उपनाम दर्ज करें।",
+      panchangPlaceNote: "चयनित स्थान शासित निर्देशांक और समय क्षेत्र का उपयोग करते हैं। स्वीकृत उपनाम ठीक-ठीक मिलते हैं; अस्पष्ट या निकटतम-स्थान मिलान उपयोग नहीं होता।",
       calculatePanchang: "पंचांग देखें",
+      requestReady: "इनपुट देखें, फिर पंचांग देखें दबाएँ। इनपुट बदलने से अंतिम प्रतिबद्ध परिणाम अपने-आप नहीं बदलेगा।",
+      publicReleasePrefix: "AG74P सार्वजनिक रिलीज़:",
+      publicReleaseText: "5 स्वीकृत नामित स्थान · मान्य IANA समय क्षेत्र सहित वैश्विक निर्देशांक · 384 वाराणसी वार्षिक रिकॉर्ड · 114 सामान्य मासिक पर्व।",
       locationBasis: "स्थान आधार",
+      coordinateBasis: "निर्देशांक आधार",
+      timezoneBasis: "समय क्षेत्र आधार",
+      approvalBasis: "स्वीकृति आधार",
       calendarBasis: "कैलेंडर आधार",
       howDetermined: "यह कैसे निर्धारित हुआ",
       detailedTimings: "विस्तृत समय",
@@ -1199,13 +1264,18 @@
       vara: "वार",
       currentObservance: "आज / आगामी पर्व",
       upcomingObservance: "आगामी पर्व",
+      noGovernedObservance: "इस चयन के लिए अभी कोई शासित पर्व-परिणाम उपलब्ध नहीं है।",
+      observanceTimingNote: "पर्व-समय तभी दिखता है जब किसी अद्वितीय रिकॉर्ड को स्पष्ट सार्वजनिक-प्रदर्शन स्वीकृति मिली हो या पूर्ण गणना इंजन उपलब्ध हो।",
       begins: "आरंभ",
       ends: "समाप्ति",
       ritualWindows: "अनुष्ठान समय",
       ritualWindow: "अनुष्ठान समय",
+      annualObservanceBook: "वार्षिक पर्व पुस्तक",
       annualCalendar: "वार्षिक हिंदू पर्व कैलेंडर",
       yearAtGlance: "हिन्दू वर्ष अवलोकन",
       yearOverviewNote: "स्वीकृत वाराणसी वार्षिक पुस्तक से चंद्र-मास अवलोकन।",
+      bookLoading: "स्वीकृत वाराणसी वार्षिक पुस्तक लोड हो रही है…",
+      bookStructureLoading: "वार्षिक पुस्तक संरचना लोड हो रही है…",
       observanceYear: "व्रत एवं पर्व वार्षिक पंचांग",
       observanceDescription: "स्वीकृत सार्वजनिक प्रक्षेपण से आवर्ती हिंदू चंद्र/तिथि पर्व। यह सभी त्योहारों, सभी आस्थाओं या राष्ट्रीय अवकाशों का कैलेंडर नहीं है।",
       governedRecords: "स्वीकृत रिकॉर्ड",
@@ -1215,6 +1285,10 @@
       nextPage: "अगला पृष्ठ",
       reflectKicker: "चिंतन",
       reflectTitle: "आपका नक्षत्र चिंतन",
+      starLabel: "नक्षत्र चिंतन",
+      starSafety: "केवल चिंतन संकेत; निजी भविष्यवाणी, मूल्यांकन या निर्णय-मार्गदर्शन नहीं।",
+      starIntro: "आपके जन्म इनपुट केवल इस चिंतन को निर्धारित करने के लिए उपयोग होते हैं और Drishvara द्वारा संग्रहीत नहीं होते।",
+      name: "नाम",
       dob: "जन्म तिथि",
       birthTime: "जन्म समय",
       unknownTime: "मुझे सही जन्म समय नहीं पता",
@@ -1225,17 +1299,24 @@
       chooseBirthPlace: "जन्म स्थान चुनें",
       selectedBirthPlace: "चयनित जन्म स्थान",
       selectedBirthPlaceNone: "चयनित जन्म स्थान: नहीं चुना गया",
+      starPlaceNote: "इस सत्र के लिए एक स्वीकृत जन्म स्थान चुनें, या निर्देशांक मोड उपयोग करें।",
       birthLatitude: "जन्म अक्षांश",
       birthLongitude: "जन्म देशांतर",
       birthTimezone: "जन्म समय क्षेत्र",
       optionalBirthPlace: "वैकल्पिक जन्म स्थान नाम",
+      starCoordinateNote: "जब आपका स्वीकृत स्थान सार्वजनिक स्थान-सूची में न हो, तब निर्देशांक उपलब्ध रहते हैं। इनपुट संग्रहीत नहीं होते।",
+      starBasisStatus: "चिंतन आधार: चंद्र-नेतृत्व, पंचांग-समर्थित, जन्म-समय-सचेत और स्थान-सचेत। परिणाम चिंतनात्मक और अनिर्णायक रहता है।",
+      starActiveStatus: "DOB, जन्म समय और चयनित जन्म-स्थान आधार के लिए नक्षत्र चिंतन सक्रिय परिणाम सक्षम है। कोई निजी डेटा संग्रहीत नहीं होता।",
+      starPlaceUnavailable: "कोई स्वीकृत सार्वजनिक मिलान नहीं। अनुपलब्ध स्थानों के लिए निर्देशांक उपयोग करें।",
       generateReflection: "चिंतन देखें",
+      reflectionResult: "आज का नक्षत्र चिंतन परिणाम",
       todaysReflection: "आज का चिंतन",
       reflectiveTheme: "चिंतन-विषय",
       selfInquiry: "स्व-प्रश्न",
       groundingPractice: "आधार अभ्यास",
       limitation: "सीमा",
       basisDetermined: "यह आधार कैसे निर्धारित हुआ",
+      resultNote: "नाम, DOB, जन्म समय, स्थान या निर्देशांक डेटा संग्रहीत नहीं होता। यह सक्रिय पायलट परिणाम प्रतीकात्मक और अनिर्णायक है; यह चिकित्सा, वित्तीय, कानूनी, संबंध, करियर या निर्णय सलाह नहीं है।",
       reflectionUnavailable: "स्वीकृत हिंदी चिंतन-पाठ अभी उपलब्ध नहीं है; चिंतन परिणाम उपलब्ध स्वीकृत भाषा में रहेगा।"
     }
   };
@@ -1268,21 +1349,135 @@
     if (label) label.textContent = value;
   }
 
+  function miniRowLabel(id, value) {
+    resultRowLabel(id, value);
+  }
+
+  function modeLabel(inputSelector, value) {
+    var input = document.querySelector(inputSelector);
+    var label = input ? input.closest("label") : null;
+    if (!label) return;
+    Array.prototype.slice.call(label.childNodes).some(function (child) {
+      if (child.nodeType === 3 && child.nodeValue.trim()) {
+        child.nodeValue = " " + value;
+        return true;
+      }
+      return false;
+    });
+  }
+
+  function inputPlaceholder(id, placeholder, ariaLabel) {
+    var input = document.getElementById(id);
+    if (!input) return;
+    input.setAttribute("placeholder", placeholder);
+    if (ariaLabel) input.setAttribute("aria-label", ariaLabel);
+  }
+
+  function setTextIfPresent(selector, value) {
+    var node = document.querySelector(selector);
+    if (node) node.textContent = value;
+  }
+
+  function visibleRuntimeLabel(card, key, value) {
+    if (!card) return;
+    var legacy = card.querySelector(":scope > .label") || card.querySelector(".label");
+    var visible = card.querySelector('[data-dv2-runtime-label="' + key + '"]');
+    if (legacy) {
+      legacy.hidden = true;
+      legacy.setAttribute("aria-hidden", "true");
+      legacy.setAttribute("data-dv2-legacy-runtime-label", "true");
+    }
+    if (!visible) {
+      visible = document.createElement("div");
+      visible.className = "dv2-runtime-label";
+      visible.setAttribute("data-dv2-runtime-label", key);
+      if (legacy) legacy.insertAdjacentElement("afterend", visible);
+      else card.insertBefore(visible, card.firstChild);
+    }
+    visible.textContent = value;
+  }
+
   function localizeStaticTimeText(text, lang) {
     var original = String(text || "").trim();
     if (!original) return original;
     if (lang !== "hi") return original;
     var pageMatch = original.match(/^Page\s+(\d+)\s+of\s+4$/i);
     if (pageMatch) return "पृष्ठ " + pageMatch[1] + " / 4";
+    var slotHeadingMatch = original.match(/^Canonical lunar-month slots\s+(\d+)–(\d+)$/i);
+    if (slotHeadingMatch) {
+      return "प्रमाणित चंद्र-मास खंड " + slotHeadingMatch[1] + "–" + slotHeadingMatch[2];
+    }
+    var slotMatch = original.match(/^Page\s+(\d+)\s+·\s+Canonical lunar-month slots\s+(\d+)–(\d+)$/i);
+    if (slotMatch) {
+      return "पृष्ठ " + slotMatch[1] + " · प्रमाणित चंद्र-मास खंड " + slotMatch[2] + "–" + slotMatch[3];
+    }
+    var beganMatch = original.match(/^Began\s+(.+?)\s+·\s+Next\s+(.+?)(?:\s+\(next segment\))?$/i);
+    if (beganMatch) {
+      return "आरंभ " + formatDateTime(beganMatch[1], lang) + " · अगला " + formatDateTime(beganMatch[2], lang) + " (अगला खंड)";
+    }
+    var autoPageMatch = original.match(/^Selected Varanasi date belongs to\s+(.+?)\.\s+Page\s+(\d+)\s+opened automatically\.$/i);
+    if (autoPageMatch) {
+      return "चयनित वाराणसी दिनांक " + localizeValue(autoPageMatch[1], lang) + " में आता है। पृष्ठ " + autoPageMatch[2] + " अपने-आप खुला।";
+    }
+    if (/^one regular$/i.test(original)) return "एक नियमित";
+    if (/^two adhika plus nija$/i.test(original)) return "दो अधिक + निज";
+    if (/^regular$/i.test(original)) return "नियमित";
+    if (/^adhika$/i.test(original)) return "अधिक";
+    if (/^nija$/i.test(original)) return "निज";
+    if (/^kshaya$/i.test(original)) return "क्षय";
+    if (/^Kshaya exception — no physical month fabricated$/i.test(original)) {
+      return "क्षय अपवाद — कोई कृत्रिम भौतिक मास नहीं बनाया गया";
+    }
+    var selectedDateMatch = original.match(/^(.+?)\s+·\s+selected civil date$/i);
+    if (selectedDateMatch) return selectedDateMatch[1] + " · चयनित सिविल दिनांक";
+    var committedMatch = original.match(/^Committed request resolved as calculated for\s+(.+?)\.$/i);
+    if (committedMatch) return committedMatch[1] + " के लिए प्रतिबद्ध अनुरोध गणना-आधारित रूप से पूर्ण हुआ।";
+    var governedMatch = original.match(/^Server-governed Panchang displayed for\s+(.+?)\s+on\s+(.+?)\.\s+No input has been stored\.$/i);
+    if (governedMatch) {
+      return localizeValue(governedMatch[1], lang) + " के लिए " + governedMatch[2] + " का सर्वर-शासित पंचांग दिखाया गया। कोई इनपुट संग्रहीत नहीं हुआ।";
+    }
     var direct = {
+      "Panchang & Festival View": "पंचांग और पर्व दृश्य",
       "Panchang date": "पंचांग दिनांक",
+      "Choose Panchang Location": "पंचांग स्थान चुनें",
+      "Approved place or alias": "स्वीकृत स्थान या उपनाम",
+      "Select Location": "स्थान चुनें",
+      "Enter Coordinates": "निर्देशांक दर्ज करें",
+      "Coordinate basis: awaiting Panchang coordinates": "निर्देशांक आधार: पंचांग निर्देशांक की प्रतीक्षा",
+      "Selected Panchang location: Varanasi / Banaras": "चयनित पंचांग स्थान: वाराणसी / बनारस",
       "Annual observance book": "वार्षिक पंचांग पुस्तक",
       "Canonical basis: Varanasi / Banaras": "प्रमाणित आधार: वाराणसी / बनारस",
+      "Varanasi canonical basis": "वाराणसी प्रमाणित आधार",
       "Loading the governed Varanasi annual book…": "स्वीकृत वाराणसी वार्षिक पुस्तक लोड हो रही है…",
+      "Loading annual-book structure…": "वार्षिक पुस्तक संरचना लोड हो रही है…",
       "Preparing the Varanasi date basis…": "वाराणसी दिनांक आधार तैयार हो रहा है…",
-      "Today in Varanasi": "आज वाराणसी में"
+      "Today in Varanasi": "आज वाराणसी में",
+      "One Regular": "एक नियमित",
+      "Festival entries, public Begins/Ends timings and ritual windows will populate after the governed Hindu-year and rule contracts are completed.": "शासित हिंदू-वर्ष और नियम अनुबंध पूरे होने के बाद पर्व प्रविष्टियाँ, सार्वजनिक आरंभ/समाप्ति समय और अनुष्ठान समय यहाँ आएँगे।",
+      "Adhika month instances will be nested under their related canonical month slot. Physical month counts may vary.": "अधिक मास की अवस्थाएँ संबंधित प्रमाणित मास-खंड के अंतर्गत रहेंगी। वास्तविक मास संख्या बदल सकती है।",
+      "Kshaya or exceptional month states will be marked explicitly rather than forcing exactly twelve physical months.": "क्षय या अपवाद मास अवस्थाएँ स्पष्ट रूप से चिह्नित होंगी; ठीक बारह वास्तविक मास मानकर बाध्य नहीं किया जाएगा।",
+      "The final book will be complete against the approved and versioned Drishvara festival and observance rule inventory.": "अंतिम पुस्तक स्वीकृत और संस्करणित Drishvara पर्व तथा व्रत नियम-सूची के अनुसार पूर्ण होगी।",
+      "No governed observance result is available for this selection yet.": "इस चयन के लिए अभी कोई शासित पर्व-परिणाम उपलब्ध नहीं है।",
+      "Festival timing appears only when a uniquely matched record has explicit public-display approval or the completed calculation engine is available.": "पर्व-समय तभी दिखता है जब किसी अद्वितीय रिकॉर्ड को स्पष्ट सार्वजनिक-प्रदर्शन स्वीकृति मिली हो या पूर्ण गणना इंजन उपलब्ध हो।",
+      "Not available for the current governed record": "वर्तमान शासित रिकॉर्ड के लिए उपलब्ध नहीं",
+      "No approved observance timing record is attached to this Panchang result.": "इस पंचांग परिणाम से कोई स्वीकृत पर्व-समय रिकॉर्ड जुड़ा नहीं है।",
+      "No source-reviewed public observance is approved for this date.": "इस दिनांक के लिए कोई स्रोत-समीक्षित सार्वजनिक पर्व स्वीकृत नहीं है।",
+      "Astronomical conditions are not substituted for public festival dates.": "सार्वजनिक पर्व तिथियों के लिए खगोलीय स्थितियों को प्रतिस्थापित नहीं किया जाता।",
+      "Approved transition detail unavailable": "स्वीकृत परिवर्तन-विवरण उपलब्ध नहीं",
+      "Approved governed server record": "स्वीकृत शासित सर्वर रिकॉर्ड",
+      "SUP02 server runtime · Modern Drik · Lahiri/Chitrapaksha · no browser-local calculation": "SUP02 सर्वर रनटाइम · Modern Drik · Lahiri/Chitrapaksha · ब्राउज़र-स्थानीय गणना नहीं",
+      "Governed server runtime · no automatic place or timezone substitution": "शासित सर्वर रनटाइम · स्थान या समय क्षेत्र का स्वतः प्रतिस्थापन नहीं",
+      "Resolving the request through the active Supabase Panchang runtime…": "सक्रिय Supabase पंचांग रनटाइम से अनुरोध हल किया जा रहा है…",
+      "Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.": "इनपुट देखें, फिर पंचांग देखें दबाएँ। इनपुट बदलने से अंतिम प्रतिबद्ध परिणाम अपने-आप नहीं बदलेगा।",
+      "Coordinate-first calculation requires latitude, longitude and a supplied valid IANA timezone. Drishvara does not reverse-geocode or store these inputs.": "निर्देशांक-आधारित गणना के लिए अक्षांश, देशांतर और मान्य IANA समय क्षेत्र आवश्यक हैं। Drishvara रिवर्स-जियोकोड नहीं करता और ये इनपुट संग्रहीत नहीं होते।",
+      "Use the governed dropdown or enter an approved alias such as Kashi, Banaras, Varanasi, Itanagar, New Delhi, Ranchi or Tokyo.": "शासित ड्रॉपडाउन का उपयोग करें या काशी, बनारस, वाराणसी, ईटानगर, नई दिल्ली, रांची या टोक्यो जैसे स्वीकृत उपनाम दर्ज करें।",
+      "Curated locations use governed coordinates and timezones. Approved aliases resolve exactly; fuzzy or nearest-place matching is not used.": "चयनित स्थान शासित निर्देशांक और समय क्षेत्र का उपयोग करते हैं। स्वीकृत उपनाम ठीक-ठीक मिलते हैं; अस्पष्ट या निकटतम-स्थान मिलान उपयोग नहीं होता।"
     };
-    return direct[original] || localizeValue(original, lang);
+    return direct[original] || localizeValue(original, lang)
+      .replace(/server-governed basis/gi, "सर्वर-शासित आधार")
+      .replace(/server-resolved calculation coordinates/gi, "सर्वर-निर्धारित गणना निर्देशांक")
+      .replace(/approved IANA basis/gi, "स्वीकृत IANA आधार")
+      .replace(/Vikram Samvat/gi, "विक्रम संवत");
   }
 
   function localizeElements(selector, lang) {
@@ -1294,6 +1489,7 @@
         if (stored) node.textContent = stored;
         return;
       }
+      if (!stored && /[\u0900-\u097F]/.test(current)) return;
       var original = stored && current === localizeStaticTimeText(stored, lang)
         ? stored
         : current;
@@ -1310,10 +1506,26 @@
         ".ag74i-book-basis",
         ".ag74i-book-year",
         ".ag74i-book-page-number",
+        ".ag74i-book-page h4",
+        ".ag74i-book-page p:not(.ag74i-book-page-number)",
+        "#ag74o-book-status",
         ".ag74o-month-slot h4",
+        ".ag74o-month-slot h5",
+        ".ag74o-month-slot-heading span",
         ".ag74o-month-instance strong",
         ".ag74o-month-instance span",
+        ".ag74o-instance-kind",
+        ".ag74o-kshaya",
+        ".ag74o-month-instance span",
+        ".ag71d-select-label",
+        ".ag74o-alias-field span",
+        ".ag71c-coordinate-note",
+        ".ag71d-r6-coordinate-basis-summary",
+        ".ag71d-r5-selection-summary",
+        ".ag71d-r5-search-forward-note",
+        ".ag71d-place-select-note",
         "#panchang-selection-status",
+        "#panchang-request-status",
         "#upcoming-observance-name",
         "#upcoming-observance-note",
         "#upcoming-observance-begins",
@@ -1324,6 +1536,38 @@
     );
   }
 
+  function localizePanchangPlaces(lang) {
+    document
+      .querySelectorAll("#panchang-place-select option, [data-ag71d-r4-select-kind='panchang']")
+      .forEach(function (node) {
+        var value = node.value || node.getAttribute("data-ag71d-r4-location-value") || "";
+        var english = node.getAttribute("data-dv2-place-en") || node.textContent.trim();
+        if (!node.getAttribute("data-dv2-place-en")) node.setAttribute("data-dv2-place-en", english);
+        node.textContent = lang === "hi" ? (STAR_PLACE_LABEL_HI[value] || replaceKnownHindi(english)) : english;
+      });
+    document
+      .querySelectorAll("#panchang-place-select + [data-drishvara-hf12-select] .drishvara-hf12-select-button, #panchang-place-select + [data-drishvara-hf12-select] .drishvara-hf12-select-option")
+      .forEach(function (node) {
+        var value = node.getAttribute("data-value") || node.getAttribute("data-drishvara-hf12-value") || "";
+        var english = node.getAttribute("data-dv2-place-en") || node.textContent.trim();
+        if (!node.getAttribute("data-dv2-place-en")) node.setAttribute("data-dv2-place-en", english);
+        node.textContent = lang === "hi" ? (STAR_PLACE_LABEL_HI[value] || replaceKnownHindi(english)) : english;
+      });
+  }
+
+  function localizePanchangHf12Places(lang) {
+    var select = document.getElementById("panchang-place-select");
+    document
+      .querySelectorAll("#panchang-place-select + [data-drishvara-hf12-select] .drishvara-hf12-select-button, #panchang-place-select + [data-drishvara-hf12-select] .drishvara-hf12-select-option")
+      .forEach(function (node) {
+        var value = node.getAttribute("data-value") || "";
+        if (!value && node.classList.contains("drishvara-hf12-select-button") && select) value = select.value || "";
+        var english = node.getAttribute("data-dv2-place-en") || node.textContent.trim();
+        if (!node.getAttribute("data-dv2-place-en")) node.setAttribute("data-dv2-place-en", english);
+        node.textContent = lang === "hi" ? (STAR_PLACE_LABEL_HI[value] || replaceKnownHindi(english)) : english;
+      });
+  }
+
   function applyTimeLanguage(lang) {
     var d = LANGUAGE[lang === "hi" ? "hi" : "en"];
     currentTimeLanguage = lang === "hi" ? "hi" : "en";
@@ -1331,34 +1575,51 @@
     if (sectionRoot) sectionRoot.setAttribute("data-dv2-lang", currentTimeLanguage);
     textNode("#time > .dv2-section__inner > .dv2-section__kicker", d.timeKicker);
     textNode("#time > .dv2-section__inner > h2", d.timeTitle);
+    visibleRuntimeLabel(document.getElementById("panchang-festival-card"), "panchang", d.panchangViewLabel);
+    textNode('#panchang-festival-card [data-dv2-runtime-label="panchang"]', d.panchangViewLabel);
     textNode("#panchang-public-heading", d.todaysPanchang);
+    textNode('[data-ag74i-public-introduction="true"]', d.panchangIntro);
     textNode("#ag74i-date-heading", d.chooseDate);
     textNode("#panchang-previous-day", d.previousDay);
     textNode("#panchang-today", d.today);
     textNode("#panchang-next-day", d.nextDay);
     textNode("#panchang-calculate", d.calculatePanchang);
+    textNode("#upcoming-observance-title", d.upcomingObservance);
     textNode("#dv2-year-glance-button", d.yearAtGlance);
     textNode("#dv2-year-glance-title", d.yearAtGlance);
     textNode("#dv2-year-glance-note", d.yearOverviewNote);
     textNode("#ag74i-book-previous", d.previousPage);
     textNode("#ag74i-book-next", d.nextPage);
     textNode("#ag74i-calendar-book-title", d.annualCalendar);
-    textNode("#upcoming-observance-title", d.upcomingObservance);
     textNode("#dv2-panchang-detailed-timings summary", d.detailedTimings);
     textNode("#dv2-panchang-methodology summary", d.howDetermined);
     textNode(".ag74i-book-basis", d.varanasiBasis);
     fieldLabel('label[for="panchang-date-text"]', d.date);
     fieldLabel('label[for="panchang-date-picker"]', d.datePicker);
-    fieldLabel('label[for="panchang-place-alias"]', d.selectLocation);
+    fieldLabel('label[for="panchang-place-alias"]', d.approvedPlaceAlias);
+    modeLabel('input[name="ag71c-panchang-location-mode"][value="place"]', d.selectLocationMode);
+    modeLabel('input[name="ag71c-panchang-location-mode"][value="coordinates"]', d.coordinates);
+    setTextIfPresent('[data-ag71d-place-select-shell="panchang"] .ag71d-select-label', d.choosePanchangLocation);
     var placeAlias = document.getElementById("panchang-place-alias");
     if (placeAlias) {
-      placeAlias.setAttribute("placeholder", d.selectLocation);
-      placeAlias.setAttribute("aria-label", d.selectLocation);
+      placeAlias.setAttribute("placeholder", d.placeAliasPlaceholder);
+      placeAlias.setAttribute("aria-label", d.approvedPlaceAlias);
     }
+    localizePanchangPlaces(currentTimeLanguage);
+    inputPlaceholder("panchang-coordinate-label", currentTimeLanguage === "hi" ? "जैसे ईटानगर" : "e.g. Itanagar");
     fieldLabel('label.ag71c-field-label:has(#panchang-latitude)', d.latitude);
     fieldLabel('label.ag71c-field-label:has(#panchang-longitude)', d.longitude);
     fieldLabel('label.ag71c-field-label:has(#panchang-timezone)', d.timezone);
     fieldLabel('label.ag71c-field-label:has(#panchang-coordinate-label)', d.optionalLocation);
+    textNode('[data-ag71c-coordinate-surface="panchang"] .ag71c-coordinate-note', d.panchangCoordinateNote);
+    textNode('[data-ag71d-r5-search-forward-note="panchang"]', d.panchangSearchForward);
+    textNode('[data-ag71d-place-select-shell="panchang"] .ag71d-place-select-note', d.panchangPlaceNote);
+    textNode(".ag74p-live-release strong", d.publicReleasePrefix);
+    textNode(".ag74p-live-release span", d.publicReleaseText);
+    miniRowLabel("panchang-calculation-source", currentTimeLanguage === "hi" ? "गणना स्रोत" : "Calculation Source");
+    miniRowLabel("panchang-method-basis", currentTimeLanguage === "hi" ? "पद्धति आधार" : "Method Basis");
+    miniRowLabel("panchang-moonrise", d.locationBasis);
+    miniRowLabel("panchang-moonset", currentTimeLanguage === "hi" ? "दिनांक आधार" : "Date Basis");
     resultRowLabel("panchang-sunrise", d.sunrise);
     resultRowLabel("panchang-sunset", d.sunset);
     resultRowLabel("panchang-tithi", d.tithi);
@@ -1371,6 +1632,16 @@
     resultRowLabel("panchang-nakshatra-transition", d.nakshatra + " " + (currentTimeLanguage === "hi" ? "परिवर्तन" : "transition"));
     resultRowLabel("panchang-yoga-transition", d.yoga + " " + (currentTimeLanguage === "hi" ? "परिवर्तन" : "transition"));
     resultRowLabel("panchang-karana-transition", d.karana + " " + (currentTimeLanguage === "hi" ? "परिवर्तन" : "transition"));
+    [
+      ["panchang-location-provenance", d.locationBasis],
+      ["panchang-coordinate-provenance", d.coordinateBasis],
+      ["panchang-timezone-provenance", d.timezoneBasis],
+      ["panchang-approval-provenance", d.approvalBasis]
+    ].forEach(function (item) {
+      var value = document.getElementById(item[0]);
+      var label = value && value.closest("p") ? value.closest("p").querySelector("strong") : null;
+      if (label) label.textContent = item[1] + ":";
+    });
     document.querySelectorAll(".ag74i-observance-window dt").forEach(function (dt) {
       if (/Begins|आरंभ/i.test(dt.textContent)) dt.textContent = d.begins;
       else if (/Ends|समाप्ति/i.test(dt.textContent)) dt.textContent = d.ends;
@@ -1384,14 +1655,48 @@
     }
     var request = document.getElementById("panchang-request-status");
     if (request && /Review the inputs|इनपुट/.test(request.textContent || "")) {
-      request.textContent = currentTimeLanguage === "hi"
-        ? "इनपुट देखें, फिर पंचांग देखें दबाएँ। इनपुट बदलने से अंतिम प्रतिबद्ध परिणाम अपने-आप नहीं बदलेगा।"
-        : "Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.";
+      request.textContent = d.requestReady;
     }
+    var defaultObservation = document.getElementById("upcoming-observance-name");
+    if (defaultObservation && /No governed observance result|शासित पर्व/.test(defaultObservation.textContent || "")) {
+      defaultObservation.textContent = d.noGovernedObservance;
+    }
+    var observationNote = document.getElementById("upcoming-observance-note");
+    if (observationNote && /Festival timing appears|पर्व-समय/.test(observationNote.textContent || "")) {
+      observationNote.textContent = d.observanceTimingNote;
+    }
+    var observanceFilters = document.getElementById("dv2-observance-filters");
+    if (observanceFilters) {
+      observanceFilters.setAttribute("aria-label", currentTimeLanguage === "hi" ? "पर्व परिवार फ़िल्टर" : "Observance family filters");
+    }
+    var bookNav = document.querySelector(".ag74i-book-navigation");
+    if (bookNav) {
+      bookNav.setAttribute("aria-label", currentTimeLanguage === "hi" ? "वाराणसी पर्व कैलेंडर पृष्ठ" : "Varanasi festival calendar pages");
+    }
+    var previous = document.getElementById("ag74i-book-previous");
+    var next = document.getElementById("ag74i-book-next");
+    if (previous) previous.setAttribute("aria-label", currentTimeLanguage === "hi" ? "पिछला कैलेंडर पृष्ठ" : "Previous calendar page");
+    if (next) next.setAttribute("aria-label", currentTimeLanguage === "hi" ? "अगला कैलेंडर पृष्ठ" : "Next calendar page");
     localizePanchangVisibleText(currentTimeLanguage);
     syncPanchangReaderPanel(currentTimeLanguage);
     renderYearOverview(currentTimeLanguage);
     renderObservanceYear(currentTimeLanguage);
+    localizePanchangPlaces(currentTimeLanguage);
+    localizePanchangHf12Places(currentTimeLanguage);
+  }
+
+  function starPlaceDisplay(button, lang) {
+    if (!button) return "";
+    var value = button.getAttribute("data-ag75d-e2-star-place-value") || "";
+    var english = button.getAttribute("data-dv2-place-en") || button.textContent.trim();
+    if (!button.getAttribute("data-dv2-place-en")) button.setAttribute("data-dv2-place-en", english);
+    return lang === "hi" ? (STAR_PLACE_LABEL_HI[value] || replaceKnownHindi(english)) : english;
+  }
+
+  function localizeStarPlaceButtons(lang) {
+    document.querySelectorAll("[data-ag75d-e2-star-place-value]").forEach(function (button) {
+      button.textContent = starPlaceDisplay(button, lang);
+    });
   }
 
   function applyReflectLanguage(lang) {
@@ -1399,22 +1704,36 @@
     currentReflectLanguage = lang === "hi" ? "hi" : "en";
     var sectionRoot = document.getElementById("reflect");
     if (sectionRoot) sectionRoot.setAttribute("data-dv2-lang", currentReflectLanguage);
+    var card = document.querySelector('[data-drishvara-v2-reflect-card="true"]');
     var dob = document.getElementById("star-reflection-dob");
     var note = document.querySelector("[data-ag73a-birth-time-note]");
     textNode("#reflect > .dv2-section__inner > .dv2-section__kicker", d.reflectKicker);
     textNode("#reflect > .dv2-section__inner > h2", d.reflectTitle);
+    if (card) {
+      visibleRuntimeLabel(card, "star-reflection", d.starLabel);
+      textNode('[data-drishvara-v2-reflect-card="true"] [data-dv2-runtime-label="star-reflection"]', d.starLabel);
+      setTextIfPresent('[data-drishvara-v2-reflect-card="true"] .star-safety-note', d.starSafety);
+      setTextIfPresent('[data-drishvara-v2-reflect-card="true"] h2', d.reflectTitle);
+      var cardIntro = card.querySelector("h2 + p");
+      if (cardIntro) cardIntro.textContent = d.starIntro;
+    }
+    inputPlaceholder("star-reflection-name", d.name);
     if (dob) dob.setAttribute("placeholder", d.dob + " (DD/MM/YYYY)");
     textNode('label[for="star-reflection-birth-time"] span', d.birthTime);
     textNode(".ag73a-birth-time-unknown span", d.unknownTime);
     textNode('[data-ag71e-preview-button="star-reflection"]', d.generateReflection);
     textNode("#ag75d-e2-star-place-choice-heading", d.chooseBirthPlace);
+    textNode(".ag75d-e2-star-place-note", d.starPlaceNote);
     fieldLabel('label.ag71c-field-label:has(#star-birth-latitude)', d.birthLatitude);
     fieldLabel('label.ag71c-field-label:has(#star-birth-longitude)', d.birthLongitude);
     fieldLabel('label.ag71c-field-label:has(#star-birth-timezone)', d.birthTimezone);
     fieldLabel('label.ag71c-field-label:has(#star-birth-coordinate-label)', d.optionalBirthPlace);
-    var modes = document.querySelectorAll('[data-ag71c-coordinate-surface="star-reflection"] .ag71c-input-mode label');
-    if (modes[0]) modes[0].lastChild.nodeValue = " " + d.selectBirthPlace;
-    if (modes[1]) modes[1].lastChild.nodeValue = " " + d.enterBirthCoordinates;
+    modeLabel('input[name="ag71c-star-location-mode"][value="place"]', d.selectBirthPlace);
+    modeLabel('input[name="ag71c-star-location-mode"][value="coordinates"]', d.enterBirthCoordinates);
+    textNode('[data-ag71c-coordinate-surface="star-reflection"] .ag71c-coordinate-note', d.starCoordinateNote);
+    textNode('[data-ag71d-r4-method-basis-status="true"]', d.starBasisStatus);
+    textNode('[data-ag73e-star-active-status="true"]', d.starActiveStatus);
+    inputPlaceholder("star-birth-coordinate-label", currentReflectLanguage === "hi" ? "जैसे रांची, झारखंड" : "e.g. Ranchi, Jharkhand");
     if (note) {
       note.textContent = lang === "hi"
         ? "जन्म समय केवल इस सत्र के चिंतन-आधार के लिए उपयोग होता है। यह संग्रहीत नहीं होता।"
@@ -1427,6 +1746,7 @@
       starSearchInput.setAttribute("placeholder", d.searchCity);
       starSearchInput.setAttribute("aria-label", d.searchCity);
     }
+    localizeStarPlaceButtons(currentReflectLanguage);
     var summary = document.getElementById("ag75d-e2-star-place-summary");
     if (summary) {
       var selected = document.querySelector("[data-ag75d-e2-star-place-value][aria-pressed='true']");
@@ -1434,10 +1754,16 @@
         ? d.selectedBirthPlace + ": " + selected.textContent.trim()
         : d.selectedBirthPlaceNone;
     }
+    var previewEyebrow = document.querySelector('[data-ag71e-preview-panel="star-reflection"] .eyebrow');
+    if (previewEyebrow) previewEyebrow.textContent = d.reflectionResult;
     var previewHeading = document.querySelector('[data-ag71e-preview-panel="star-reflection"] h3');
-    if (previewHeading && /Reflection input accepted|Today's Star Reflection|आज|चिंतन/i.test(previewHeading.textContent || "")) {
+    if (previewHeading) {
       previewHeading.textContent = d.todaysReflection;
     }
+    var previewNote = document.querySelector('[data-ag71e-preview-panel="star-reflection"] .ag71e-preview-note');
+    if (previewNote) previewNote.textContent = d.starSafety + " " + d.starIntro;
+    var activeNote = document.querySelector('[data-ag72e-star-preview-note]');
+    if (activeNote) activeNote.textContent = d.resultNote;
     localizeStarPreviewRows(currentReflectLanguage);
     var unavailable = document.getElementById("dv2-reflect-language-note");
     if (lang === "hi") {
@@ -1445,7 +1771,6 @@
         unavailable = document.createElement("p");
         unavailable.id = "dv2-reflect-language-note";
         unavailable.className = "dv2-section-note";
-        var card = document.querySelector('[data-drishvara-v2-reflect-card="true"]');
         if (card) card.appendChild(unavailable);
       }
       unavailable.textContent = d.reflectionUnavailable;
@@ -1466,9 +1791,12 @@
       "Exact birth Nakshatra": "जन्म नक्षत्र",
       "Day-context Nakshatra": "दिन-संदर्भ नक्षत्र",
       "Runtime basis": "रनटाइम आधार",
+      "Status": "स्थिति",
       "Reflective theme": "चिंतन-विषय",
+      "Question for reflection": "स्व-प्रश्न",
       "Self-inquiry prompt": "स्व-प्रश्न",
       "Grounding practice": "आधार अभ्यास",
+      "Result note": "सीमा",
       "Limitation notice": "सीमा"
     };
     grid.querySelectorAll(".ag71e-preview-row strong").forEach(function (label) {
@@ -1476,6 +1804,38 @@
       label.setAttribute("data-dv2-original-label", key);
       if (lang === "hi" && labels[key]) label.textContent = labels[key];
       else label.textContent = key;
+    });
+    grid.querySelectorAll(".ag71e-preview-row").forEach(function (row) {
+      var label = row.querySelector("strong");
+      var value = row.querySelector("span");
+      if (!label || !value) return;
+      var key = label.getAttribute("data-dv2-original-label") || label.textContent.trim();
+      var original = value.getAttribute("data-dv2-original-value") || value.textContent.trim();
+      if (!value.getAttribute("data-dv2-original-value")) {
+        value.setAttribute("data-dv2-original-value", original);
+      }
+      if (lang !== "hi") {
+        value.textContent = original;
+        return;
+      }
+      if (/Reflective theme|Question for reflection|Self-inquiry prompt|Grounding practice|Result note|Limitation notice/i.test(key)) {
+        value.textContent = original;
+        return;
+      }
+      var direct = {
+        "DOB format required: DD/MM/YYYY": "DOB प्रारूप आवश्यक: DD/MM/YYYY",
+        "Birth time pending - HH:MM": "जन्म समय लंबित - HH:MM",
+        "Birth time pending or invalid": "जन्म समय लंबित या अमान्य",
+        "Exact birth time used": "सटीक जन्म समय उपयोग हुआ",
+        "Exact birth time not known": "सटीक जन्म समय ज्ञात नहीं",
+        "DOB, exact birth time, birth place and timezone": "DOB, सटीक जन्म समय, जन्म स्थान और समय क्षेत्र",
+        "DOB, unknown birth time, birth place and timezone": "DOB, अज्ञात जन्म समय, जन्म स्थान और समय क्षेत्र",
+        "DOB, pending birth time, birth place and timezone": "DOB, लंबित जन्म समय, जन्म स्थान और समय क्षेत्र",
+        "Moon-led, Panchanga-supported, location-aware": "चंद्र-नेतृत्व, पंचांग-समर्थित, स्थान-सचेत",
+        "Resolving the session inputs through the governed Star Reflection flow.": "सत्र इनपुट शासित नक्षत्र चिंतन प्रवाह से हल हो रहे हैं।",
+        "The runtime request sends only civil date and governed location basis. Name and exact birth time are not sent or stored.": "रनटाइम अनुरोध केवल सिविल दिनांक और शासित स्थान आधार भेजता है। नाम और सटीक जन्म समय भेजे या संग्रहीत नहीं होते।"
+      };
+      value.textContent = direct[original] || replaceKnownHindi(original);
     });
   }
 
@@ -1660,7 +2020,7 @@
       });
       var summary = document.getElementById("ag75d-e2-star-place-summary");
       if (summary && query && matched === 0) {
-        summary.textContent = "No approved public match. Use coordinates for unavailable places.";
+        summary.textContent = languageData(currentReflectLanguage).starPlaceUnavailable;
       }
     });
   }
@@ -1668,6 +2028,8 @@
   function bindSectionLanguages() {
     var time = document.getElementById("time");
     var reflect = document.getElementById("reflect");
+    if (time) time.setAttribute("data-i18n-skip", "true");
+    if (reflect) reflect.setAttribute("data-i18n-skip", "true");
     if (I18n && time) {
       I18n.bindSectionToggle(time, {
         timeIntro: {
@@ -1683,10 +2045,22 @@
           hi: "दिनांक और स्थान इनपुट इस सार्वजनिक सतह पर संग्रहीत नहीं होते।"
         }
       });
-      time.addEventListener("click", function (event) {
-        var button = event.target.closest("[data-dv2-language-choice]");
-        if (button) applyTimeLanguage(button.getAttribute("data-dv2-language-choice"));
-      });
+      var syncTimeLanguageChoice = function (event) {
+        var button = event.target.closest("#time [data-dv2-language-choice]");
+        if (button) {
+          var selectedLanguage = button.getAttribute("data-dv2-language-choice");
+          applyTimeLanguage(selectedLanguage);
+          window.setTimeout(function () {
+            applyTimeLanguage(selectedLanguage);
+            syncTimeContextFromRuntime();
+          }, 4200);
+        }
+      };
+      window.addEventListener("pointerdown", syncTimeLanguageChoice, true);
+      window.addEventListener("click", function (event) {
+        if (event.detail) return;
+        syncTimeLanguageChoice(event);
+      }, true);
       applyTimeLanguage("en");
     }
     if (I18n && reflect) {
@@ -1704,10 +2078,21 @@
           hi: "आपके जन्म इनपुट केवल इस चिंतन को निर्धारित करने के लिए उपयोग होते हैं और Drishvara द्वारा संग्रहीत नहीं होते।"
         }
       });
-      reflect.addEventListener("click", function (event) {
-        var button = event.target.closest("[data-dv2-language-choice]");
-        if (button) applyReflectLanguage(button.getAttribute("data-dv2-language-choice"));
-      });
+      var syncReflectLanguageChoice = function (event) {
+        var button = event.target.closest("#reflect [data-dv2-language-choice]");
+        if (button) {
+          var selectedLanguage = button.getAttribute("data-dv2-language-choice");
+          applyReflectLanguage(selectedLanguage);
+          window.setTimeout(function () {
+            applyReflectLanguage(selectedLanguage);
+          }, 3000);
+        }
+      };
+      window.addEventListener("pointerdown", syncReflectLanguageChoice, true);
+      window.addEventListener("click", function (event) {
+        if (event.detail) return;
+        syncReflectLanguageChoice(event);
+      }, true);
       applyReflectLanguage("en");
     }
   }
@@ -1717,12 +2102,18 @@
     Location.loadApprovedLocations()
       .then(function (records) {
         var node = document.getElementById("dv2-context-time-kicker");
-        if (node) node.textContent = "Time · " + records[0].displayLabel;
+        if (node) {
+          node.textContent = currentTimeLanguage === "hi"
+            ? "समय · " + localizeValue(records[0].displayLabel, "hi")
+            : "Time · " + records[0].displayLabel;
+        }
       })
       .catch(function () {});
   }
 
   function syncTimeContextFromRuntime() {
+    var sectionLang = document.getElementById("time")?.getAttribute("data-dv2-lang");
+    if (sectionLang === "hi" || sectionLang === "en") currentTimeLanguage = sectionLang;
     var sunrise = document.getElementById("panchang-sunrise");
     var paksha = document.getElementById("panchang-paksha");
     var nakshatra = document.getElementById("panchang-nakshatra");
@@ -1752,21 +2143,70 @@
     }
     localizePanchangVisibleText(currentTimeLanguage);
     syncPanchangReaderPanel(currentTimeLanguage);
+    applyTimeLanguage(currentTimeLanguage);
   }
 
   function bindRuntimeContextRefresh() {
+    document.addEventListener("pointerdown", function (event) {
+      if (event.target.closest("[data-ag75d-e2-star-place-value]")) {
+        window.setTimeout(function () {
+          applyReflectLanguage(currentReflectLanguage);
+        }, 0);
+      }
+      if (event.target.closest('[data-ag71e-preview-button="star-reflection"]')) {
+        window.setTimeout(function () {
+          applyReflectLanguage(currentReflectLanguage);
+        }, 1600);
+      }
+      if (
+        event.target.closest("[data-ag74i-book-page-button]") ||
+        event.target.closest("#ag74i-book-previous") ||
+        event.target.closest("#ag74i-book-next")
+      ) {
+        window.setTimeout(function () {
+          localizePanchangHf12Places(
+            document.getElementById("time")?.getAttribute("data-dv2-lang") || currentTimeLanguage
+          );
+        }, 6200);
+      }
+    }, true);
     document.addEventListener("click", function (event) {
       if (
         event.target.closest("#panchang-calculate") ||
         event.target.closest("#panchang-previous-day") ||
         event.target.closest("#panchang-next-day") ||
-        event.target.closest("#panchang-today")
+        event.target.closest("#panchang-today") ||
+        event.target.closest("[data-ag74i-book-page-button]") ||
+        event.target.closest("#ag74i-book-previous") ||
+        event.target.closest("#ag74i-book-next")
       ) {
+        var bookNavigation = !!(
+          event.target.closest("[data-ag74i-book-page-button]") ||
+          event.target.closest("#ag74i-book-previous") ||
+          event.target.closest("#ag74i-book-next")
+        );
         window.requestAnimationFrame(syncTimeContextFromRuntime);
+        window.setTimeout(syncTimeContextFromRuntime, 1100);
+        if (bookNavigation) window.setTimeout(syncTimeContextFromRuntime, 4200);
+        if (bookNavigation) {
+          window.setTimeout(function () {
+            localizePanchangHf12Places(
+              document.getElementById("time")?.getAttribute("data-dv2-lang") || currentTimeLanguage
+            );
+          }, 6200);
+        }
       }
       if (event.target.closest('[data-ag71e-preview-button="star-reflection"]')) {
         window.requestAnimationFrame(function () {
-          localizeStarPreviewRows(currentReflectLanguage);
+          applyReflectLanguage(currentReflectLanguage);
+        });
+        window.setTimeout(function () {
+          applyReflectLanguage(currentReflectLanguage);
+        }, 1600);
+      }
+      if (event.target.closest("[data-ag75d-e2-star-place-value]")) {
+        window.requestAnimationFrame(function () {
+          applyReflectLanguage(currentReflectLanguage);
         });
       }
     });
@@ -1793,6 +2233,11 @@
     updateLocationCount();
     bindRuntimeContextRefresh();
     syncTimeContextFromRuntime();
+    window.setTimeout(function () {
+      applyTimeLanguage(currentTimeLanguage);
+      applyReflectLanguage(currentReflectLanguage);
+      syncTimeContextFromRuntime();
+    }, 1300);
 
     Promise.all([
       fetchJson("data/homepage-ui.json"),

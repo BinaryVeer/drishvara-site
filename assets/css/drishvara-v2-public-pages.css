@@ -47,7 +47,9 @@ body.drishvara-v2-active.drishvara-v2-public-page h1,
 body.drishvara-v2-active.drishvara-v2-public-page h2,
 body.drishvara-v2-active.drishvara-v2-public-page h3 {
   font-family: var(--dv2-font-editorial) !important;
+  color: var(--dv2-ink) !important;
   letter-spacing: 0 !important;
+  opacity: 1 !important;
 }
 
 body.drishvara-v2-active.drishvara-v2-public-page h1 {
@@ -75,6 +77,7 @@ body.drishvara-v2-active.drishvara-v2-public-page .topic-count,
 body.drishvara-v2-active.drishvara-v2-public-page .blocked,
 body.drishvara-v2-active.drishvara-v2-public-page .note {
   color: var(--dv2-ink-soft) !important;
+  opacity: 1 !important;
 }
 
 body.drishvara-v2-active.drishvara-v2-public-page a,
@@ -83,6 +86,35 @@ body.drishvara-v2-active.drishvara-v2-public-page .archive-card a {
   color: var(--dv2-link) !important;
   text-decoration-color: var(--dv2-gold) !important;
   text-underline-offset: 0.2em;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header a,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header button {
+  color: #fffaf0 !important;
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-nav a,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-utility-link:not([data-primary="true"]),
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-icon-button,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-menu-button {
+  color: rgba(255, 250, 240, 0.78) !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-nav a[aria-current="true"],
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-nav a:hover,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-nav a:focus-visible,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-utility-link:not([data-primary="true"]):hover,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-icon-button:hover,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-menu-button:hover,
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-menu-button[aria-expanded="true"] {
+  color: #fffaf0 !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .dv2-header .dv2-utility-link[data-primary="true"] {
+  color: #15100a !important;
 }
 
 body.drishvara-v2-active.drishvara-v2-public-page .panel,
@@ -102,6 +134,40 @@ body.drishvara-v2-active.drishvara-v2-public-page .read-meta,
 body.drishvara-v2-active.drishvara-v2-public-page .archive-date,
 body.drishvara-v2-active.drishvara-v2-public-page .topic-name {
   color: var(--dv2-gold-deep) !important;
+  opacity: 1 !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page h4,
+body.drishvara-v2-active.drishvara-v2-public-page h5,
+body.drishvara-v2-active.drishvara-v2-public-page h6,
+body.drishvara-v2-active.drishvara-v2-public-page .panel-title,
+body.drishvara-v2-active.drishvara-v2-public-page .stat-value,
+body.drishvara-v2-active.drishvara-v2-public-page .metric-value,
+body.drishvara-v2-active.drishvara-v2-public-page .count,
+body.drishvara-v2-active.drishvara-v2-public-page .read-card h2,
+body.drishvara-v2-active.drishvara-v2-public-page .read-card h3,
+body.drishvara-v2-active.drishvara-v2-public-page .archive-card h2,
+body.drishvara-v2-active.drishvara-v2-public-page .archive-card h3,
+body.drishvara-v2-active.drishvara-v2-public-page .topic-card h2,
+body.drishvara-v2-active.drishvara-v2-public-page .topic-card h3,
+body.drishvara-v2-active.drishvara-v2-public-page .dashboard-shell h2,
+body.drishvara-v2-active.drishvara-v2-public-page .dashboard-shell h3 {
+  color: var(--dv2-ink) !important;
+  opacity: 1 !important;
+}
+
+body.drishvara-v2-active.drishvara-v2-public-page .meta,
+body.drishvara-v2-active.drishvara-v2-public-page .read-kicker,
+body.drishvara-v2-active.drishvara-v2-public-page .read-date,
+body.drishvara-v2-active.drishvara-v2-public-page .theme-count,
+body.drishvara-v2-active.drishvara-v2-public-page .search-help,
+body.drishvara-v2-active.drishvara-v2-public-page .status,
+body.drishvara-v2-active.drishvara-v2-public-page .status-value,
+body.drishvara-v2-active.drishvara-v2-public-page .pending,
+body.drishvara-v2-active.drishvara-v2-public-page .planned,
+body.drishvara-v2-active.drishvara-v2-public-page [aria-disabled="true"],
+body.drishvara-v2-active.drishvara-v2-public-page [disabled] {
+  color: var(--dv2-ink-soft) !important;
   opacity: 1 !important;
 }
 
