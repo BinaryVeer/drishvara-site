@@ -212,12 +212,18 @@ body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table 
   line-height: 1.08;
 }
 
+.dv2-observance-year__view-toggle,
 .dv2-observance-year__filters {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
 }
 
+.dv2-observance-year__view-toggle {
+  padding-bottom: 0.2rem;
+}
+
+.dv2-observance-year__view-toggle button,
 .dv2-observance-year__filters button {
   border: 1px solid rgba(215, 173, 69, 0.32);
   border-radius: var(--dv2-radius);
@@ -228,6 +234,7 @@ body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table 
   font-weight: 800;
 }
 
+.dv2-observance-year__view-toggle button[aria-pressed="true"],
 .dv2-observance-year__filters button[aria-pressed="true"] {
   background: var(--dv2-gold);
   color: #15100a;
@@ -238,14 +245,37 @@ body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table 
   gap: 1rem;
 }
 
-.dv2-observance-month {
+.dv2-observance-calendar {
   display: grid;
-  gap: 0.65rem;
-  border-top: 1px solid rgba(255, 250, 240, 0.16);
-  padding-top: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.72rem;
 }
 
-.dv2-observance-month h5 {
+.dv2-observance-month-card {
+  display: grid;
+  align-content: start;
+  gap: 0.58rem;
+  min-width: 0;
+  min-height: 13.5rem;
+  border: 1px solid rgba(255, 250, 240, 0.12);
+  border-radius: var(--dv2-radius);
+  padding: 0.78rem;
+  background: rgba(5, 17, 38, 0.32);
+}
+
+.dv2-observance-month-card[data-selected="true"] {
+  border-color: rgba(215, 173, 69, 0.72);
+  background: rgba(215, 173, 69, 0.08);
+}
+
+.dv2-observance-month-card__top {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.dv2-observance-month-card h5,
+.dv2-observance-selected-month h5,
+.dv2-observance-full-list h5 {
   margin: 0;
   color: #f0d487;
   font-size: 0.86rem;
@@ -253,43 +283,152 @@ body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table 
   text-transform: uppercase;
 }
 
-.dv2-observance-row {
-  display: grid;
-  grid-template-columns: minmax(8.5rem, 0.34fr) minmax(0, 1fr);
-  gap: 0.8rem;
-  border: 1px solid rgba(255, 250, 240, 0.12);
-  border-radius: var(--dv2-radius);
-  padding: 0.8rem;
-  background: rgba(5, 17, 38, 0.3);
+.dv2-observance-month-card__top span,
+.dv2-observance-more {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
-.dv2-observance-date {
+.dv2-observance-card-preview {
   display: grid;
-  gap: 0.2rem;
-  color: rgba(255, 250, 240, 0.72);
+  gap: 0.36rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dv2-observance-card-preview li {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  gap: 0.48rem;
+  min-width: 0;
+  color: rgba(255, 250, 240, 0.86);
   font-size: 0.88rem;
+  line-height: 1.3;
+}
+
+.dv2-observance-card-preview span {
+  color: #fffaf0;
+  font-weight: 900;
+}
+
+.dv2-observance-month-card button,
+.dv2-observance-selected-month button,
+.dv2-observance-full-list button {
+  border: 1px solid rgba(215, 173, 69, 0.28);
+  border-radius: var(--dv2-radius);
+  background: rgba(255, 250, 240, 0.055);
+  color: #fffaf0;
+  font-weight: 850;
+  min-height: 2.75rem;
+  padding: 0 0.75rem;
+}
+
+.dv2-observance-month-card button {
+  justify-self: start;
+}
+
+.dv2-observance-selected-month,
+.dv2-observance-full-list {
+  display: grid;
+  gap: 0.78rem;
+  border-top: 1px solid rgba(215, 173, 69, 0.32);
+  padding-top: 1rem;
+}
+
+.dv2-observance-selected-month__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.dv2-observance-month-nav {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.dv2-observance-event-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.dv2-observance-event-button {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 0.28fr) minmax(0, 1fr);
+  gap: 0.7rem;
+  text-align: left;
+}
+
+.dv2-observance-event-button[aria-expanded="true"] {
+  border-color: rgba(215, 173, 69, 0.72);
+  background: rgba(215, 173, 69, 0.12);
+}
+
+.dv2-observance-event-date,
+.dv2-observance-event-main {
+  display: grid;
+  gap: 0.16rem;
+  min-width: 0;
+}
+
+.dv2-observance-event-date {
+  color: #fffaf0;
+  font-weight: 900;
+}
+
+.dv2-observance-event-date small,
+.dv2-observance-event-main small {
+  color: rgba(255, 250, 240, 0.68);
+  font-size: 0.82rem;
   line-height: 1.35;
 }
 
-.dv2-observance-date strong {
+.dv2-observance-event-main strong {
   color: #fffaf0;
   font-size: 1rem;
+  line-height: 1.25;
 }
 
-.dv2-observance-body {
+.dv2-observance-detail {
   display: grid;
-  gap: 0.45rem;
+  gap: 0.7rem;
+  border: 1px solid rgba(255, 250, 240, 0.12);
+  border-radius: var(--dv2-radius);
+  padding: 0.9rem;
+  background: rgba(5, 17, 38, 0.42);
 }
 
-.dv2-observance-body h6 {
-  margin: 0;
+.dv2-observance-detail:focus {
+  outline: 2px solid rgba(215, 173, 69, 0.75);
+  outline-offset: 3px;
+}
+
+.dv2-observance-detail__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.dv2-observance-detail h6 {
+  margin: 0.1rem 0 0;
   color: #fffaf0;
   font-family: var(--dv2-font-editorial);
-  font-size: 1.25rem;
-  line-height: 1.18;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  line-height: 1.12;
 }
 
-.dv2-observance-body p,
+.dv2-observance-detail__basis {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.78);
+  line-height: 1.45;
+}
+
 .dv2-observance-window {
   margin: 0;
   color: rgba(255, 250, 240, 0.78);
@@ -299,19 +438,26 @@ body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table 
 .dv2-observance-window {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.45rem;
+  gap: 0.58rem;
 }
 
-.dv2-observance-window span {
+.dv2-observance-window div {
   display: grid;
-  gap: 0.12rem;
+  gap: 0.16rem;
   min-width: 0;
 }
 
-.dv2-observance-window b {
+.dv2-observance-window dt {
   color: #f0d487;
   font-size: 0.72rem;
+  font-weight: 900;
   text-transform: uppercase;
+}
+
+.dv2-observance-window dd {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.86);
+  overflow-wrap: anywhere;
 }
 
 body.drishvara-v2-active [data-ag75d-e2-star-place-value][aria-pressed="true"],
@@ -443,13 +589,34 @@ body.drishvara-v2-active .ag73a-birth-time-unknown {
 }
 
 @media (max-width: 700px) {
+  .dv2-observance-calendar {
+    grid-template-columns: 1fr;
+  }
+
+  .dv2-observance-month-card {
+    min-height: auto;
+  }
+
+  .dv2-observance-selected-month__head,
+  .dv2-observance-detail__head {
+    display: grid;
+  }
+
+  .dv2-observance-month-nav {
+    justify-content: stretch;
+  }
+
+  .dv2-observance-month-nav button {
+    flex: 1 1 9rem;
+  }
+
   .dv2-year-glance__grid {
     grid-template-columns: 1fr;
   }
 
   .dv2-panchang-reader__grid,
   .dv2-observance-window,
-  .dv2-observance-row {
+  .dv2-observance-event-button {
     grid-template-columns: 1fr;
   }
 }

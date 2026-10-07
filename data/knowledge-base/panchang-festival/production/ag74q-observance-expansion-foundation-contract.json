@@ -1,0 +1,118 @@
+{
+  "module_id": "AG74Q",
+  "title": "Festival and Observance Expansion Foundation Contract",
+  "status": "ag74q_schema_foundation_only_not_runtime_active",
+  "purpose": "Define the future governed event contract for named festivals, multi-day observances and multi-tradition public calendar expansion without altering the active AG74P public projection.",
+  "active_runtime_projection_unchanged": "data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json",
+  "runtime_activation_allowed_now": false,
+  "records_populated_in_this_contract": false,
+  "public_date_fabrication_allowed": false,
+  "current_public_projection_record_count": 114,
+  "current_public_projection_scope": [
+    "Ekadashi",
+    "Purnima",
+    "Amavasya",
+    "Trayodashi / Pradosha",
+    "Sankashti Chaturthi",
+    "Vinayaka Chaturthi",
+    "Masik Shivaratri"
+  ],
+  "future_supported_traditions": [
+    "Hindu",
+    "Christian",
+    "Islamic",
+    "Jewish",
+    "Sikh",
+    "Buddhist",
+    "Jain",
+    "Cultural / Civil"
+  ],
+  "non_inference_rules": {
+    "no_cross_tradition_timing_inference": true,
+    "no_browser_side_festival_date_calculation": true,
+    "no_observance_window_substitution_for_primary_public_window": true,
+    "no_ritual_window_substitution_for_begins_or_ends": true,
+    "no_parana_or_conclusion_fabrication": true,
+    "no_runtime_promotion_without_explicit_future_gate": true
+  },
+  "event_contract_fields": {
+    "identity": [
+      "event_id",
+      "canonical_name",
+      "localized_names",
+      "tradition",
+      "category",
+      "sub_category",
+      "family"
+    ],
+    "civil_dates": [
+      "civil_date",
+      "civil_date_start",
+      "civil_date_end"
+    ],
+    "traditional_calendar": [
+      "traditional_calendar_system",
+      "traditional_calendar_date",
+      "lunar_month",
+      "paksha",
+      "tithi"
+    ],
+    "timing_windows": [
+      "astronomical_condition_window",
+      "observance_window",
+      "primary_public_window",
+      "parana_or_conclusion",
+      "ritual_windows"
+    ],
+    "basis": [
+      "location_basis",
+      "timezone_basis",
+      "rule_basis",
+      "source_basis",
+      "source_approval_status"
+    ],
+    "governance": [
+      "certainty",
+      "status",
+      "notes"
+    ],
+    "sequence": [
+      "parent_event_id",
+      "event_sequence",
+      "day_number"
+    ]
+  },
+  "parana_or_conclusion_contract": {
+    "type": "string identifying the governed conclusion concept, such as parana, conclusion, vrat_conclusion or observance_conclusion",
+    "label": "reader-facing governed label",
+    "window": "governed timing window when separately approved",
+    "applicability": "applicable, not_applicable or tradition_specific",
+    "status": "approved, not_applicable, withheld_pending_source_review or no_separately_governed_timing_available"
+  },
+  "multi_day_support": {
+    "parent_event_id": "groups related event days without merging their governed timing windows",
+    "event_sequence": "orders a multi-day sequence",
+    "day_number": "reader-facing sequence day where applicable",
+    "examples_are_schema_only": [
+      "Navratri parent span with individually governed significant days",
+      "Chhath parent sequence with individually governed ritual stages"
+    ],
+    "example_dates_populated": false
+  },
+  "public_ui_contract": {
+    "default_list_source": "active_runtime_projection_unchanged",
+    "future_filter_visibility": "Show only traditions and families that have approved public records.",
+    "begins_source": "primary_public_window.start_local",
+    "ends_source": "primary_public_window.end_local",
+    "additional_ritual_windows_source": "ritual_windows[]",
+    "parana_conclusion_source": "parana_or_conclusion or approved ritual_windows[] record only"
+  },
+  "blocked_actions": [
+    "adding_named_festival_dates",
+    "adding_multi_faith_dates",
+    "changing_ag74p_projection",
+    "runtime_activation",
+    "sup02_or_edge_function_change",
+    "browser_side_date_inference"
+  ]
+}

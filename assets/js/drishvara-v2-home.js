@@ -10,6 +10,9 @@
     "data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json";
   var observanceFilter = "all";
   var observanceRecords = null;
+  var observanceViewMode = "calendar";
+  var selectedObservanceMonth = "";
+  var selectedObservanceRecordId = "";
   var yearOverviewMonths = [];
   var currentTimeLanguage = "en";
   var currentReflectLanguage = "en";
@@ -652,6 +655,7 @@
   var RITUAL_LABEL_HI = {
     parana: "पारण",
     pradosha_puja: "प्रदोष पूजा",
+    shivaratri_night: "शिवरात्रि रात्रि समय",
     sankashti_moonrise: "चंद्रोदय संदर्भ",
     moonrise: "चंद्रोदय",
     ritual_window: "अनुष्ठान समय"
@@ -887,23 +891,206 @@
       })
       .sort(function (a, b) {
         return String(a.civil_date).localeCompare(String(b.civil_date));
+    });
+  }
+
+  function observanceRecordId(record) {
+    return String(
+      (record && (record.activation_record_id || record.event_id || record.candidate_id)) ||
+        [record && record.civil_date, record && record.observance_key].filter(Boolean).join("-")
+    );
+  }
+
+  function observanceMonthKey(record) {
+    var match = /^(\d{4}-\d{2})-\d{2}$/.exec(String(record && record.civil_date || ""));
+    return match ? match[1] : "";
+  }
+
+  function observanceMonthIndex(monthKey) {
+    var monthPart = String(monthKey || "").slice(-2);
+    var index = Number(monthPart) - 1;
+    return index >= 0 && index < 12 ? index : 0;
+  }
+
+  function observanceDay(record) {
+    var match = /^\d{4}-\d{2}-(\d{2})$/.exec(String(record && record.civil_date || ""));
+    return match ? match[1] : "";
+  }
+
+  function filteredObservanceRecords() {
+    if (!observanceRecords) return [];
+    return observanceFilter === "all"
+      ? observanceRecords
+      : observanceRecords.filter(function (record) {
+        return record.observance_key === observanceFilter;
       });
+  }
+
+  function groupObservancesByMonth(records) {
+    var byMonth = {};
+    records.forEach(function (record) {
+      var key = observanceMonthKey(record);
+      if (!key) return;
+      if (!byMonth[key]) byMonth[key] = [];
+      byMonth[key].push(record);
+    });
+    return Object.keys(byMonth).sort().map(function (key) {
+      var items = byMonth[key];
+      items.sort(function (a, b) {
+        return String(a.civil_date).localeCompare(String(b.civil_date));
+      });
+      return {
+        key: key,
+        records: items
+      };
+    });
+  }
+
+  function selectedPanchangMonthKey(recordsByMonth) {
+    var picker = document.getElementById("panchang-date-picker");
+    var selected = picker && /^(\d{4}-\d{2})-\d{2}$/.exec(String(picker.value || ""));
+    if (!selected) return "";
+    var key = selected[1];
+    var month = recordsByMonth.find(function (item) {
+      return item.key === key && item.records.length;
+    });
+    return month ? key : "";
+  }
+
+  function ensureSelectedObservanceMonth(recordsByMonth) {
+    var current = recordsByMonth.find(function (item) {
+      return item.key === selectedObservanceMonth && item.records.length;
+    });
+    if (current) return current.key;
+    selectedObservanceMonth =
+      selectedPanchangMonthKey(recordsByMonth) ||
+      (recordsByMonth.find(function (item) { return item.records.length; }) || {}).key ||
+      "";
+    selectedObservanceRecordId = "";
+    return selectedObservanceMonth;
+  }
+
+  function selectedMonthRecord(recordsByMonth) {
+    return recordsByMonth.find(function (item) {
+      return item.key === selectedObservanceMonth;
+    }) || { key: selectedObservanceMonth, records: [] };
+  }
+
+  function monthYears(records) {
+    var years = [];
+    records.forEach(function (record) {
+      var year = String(record.civil_date || "").slice(0, 4);
+      if (year && years.indexOf(year) === -1) years.push(year);
+    });
+    return years.join(" / ");
+  }
+
+  function monthLabel(monthKey, records, lang) {
+    var index = observanceMonthIndex(monthKey);
+    var name = (lang === "hi" ? MONTHS_HI : MONTHS_EN)[index];
+    var years = monthYears(records) || String(monthKey || "").slice(0, 4);
+    return years ? name + " · " + years : name;
+  }
+
+  function observanceTimingText(windowData, lang) {
+    if (!windowData || (!windowData.start_local && !windowData.end_local)) return languageData(lang).unavailable;
+    if (windowData.start_local && windowData.end_local) {
+      return formatDateTime(windowData.start_local, lang) + " – " + formatDateTime(windowData.end_local, lang);
+    }
+    return formatDateTime(windowData.start_local || windowData.end_local, lang);
+  }
+
+  function observanceFamily(record, lang) {
+    return filterLabel(record && record.observance_key, lang);
+  }
+
+  function observanceTraditionalBasis(record, lang) {
+    var d = languageData(lang);
+    var month = record && record.lunar_month || {};
+    var tithi = record && record.tithi && record.tithi.name ? record.tithi.name : "";
+    var parts = [
+      month.canonical_name ? localizeValue(month.canonical_name, lang) : "",
+      month.instance_kind && month.instance_kind !== "regular" ? localizeValue(month.instance_kind, lang) : "",
+      localizeValue(record && record.paksha || "", lang),
+      localizeValue(tithi, lang)
+    ].filter(Boolean);
+    return parts.length ? parts.join(" · ") : d.calendarBasis;
+  }
+
+  function recordByObservanceId(records, id) {
+    return records.find(function (record) {
+      return observanceRecordId(record) === id;
+    }) || null;
+  }
+
+  function paranaConclusion(record, lang) {
+    var d = languageData(lang);
+    var rituals = Array.isArray(record && record.ritual_windows) ? record.ritual_windows : [];
+    var governed = rituals.find(function (ritual) {
+      var key = String(ritual && (ritual.ritual_key || ritual.semantic_layer || ""));
+      return /parana|conclusion|vrat/i.test(key);
+    });
+    if (governed) {
+      return {
+        label: /parana/i.test(String(governed.ritual_key || governed.semantic_layer || "")) ? d.parana : d.conclusion,
+        value: observanceTimingText(governed, lang),
+        state: "governed"
+      };
+    }
+    var status = String(record && record.ritual_window_status || "");
+    if (/parana|conclusion|vrat/i.test(status)) {
+      return { label: d.paranaConclusion, value: d.noSeparatelyGovernedTimingAvailable, state: "missing" };
+    }
+    return { label: d.paranaConclusion, value: d.notApplicable, state: "not-applicable" };
+  }
+
+  function additionalRitualWindows(record) {
+    return (Array.isArray(record && record.ritual_windows) ? record.ritual_windows : []).filter(function (ritual) {
+      var key = String(ritual && (ritual.ritual_key || ritual.semantic_layer || ""));
+      return !/parana|conclusion|vrat/i.test(key);
+    });
   }
 
   function renderObservanceFilters(lang) {
     var filters = document.getElementById("dv2-observance-filters");
     if (!filters) return;
-    filters.innerHTML = OBSERVANCE_FILTERS.map(function (item) {
+    var records = observanceRecords || [];
+    filters.innerHTML = OBSERVANCE_FILTERS.filter(function (item) {
+      return item[0] === "all" || records.some(function (record) {
+        return record.observance_key === item[0];
+      });
+    }).map(function (item) {
+      var count = item[0] === "all"
+        ? records.length
+        : records.filter(function (record) { return record.observance_key === item[0]; }).length;
       return (
         '<button type="button" data-dv2-observance-filter="' +
         escapeHtml(item[0]) +
         '" aria-pressed="' +
         (observanceFilter === item[0] ? "true" : "false") +
         '">' +
-        escapeHtml(lang === "hi" ? item[2] : item[1]) +
+        escapeHtml((lang === "hi" ? item[2] : item[1]) + (records.length ? " · " + count : "")) +
         "</button>"
       );
     }).join("");
+  }
+
+  function renderObservanceViewToggle(lang) {
+    var d = languageData(lang);
+    var toggle = document.getElementById("dv2-observance-view-toggle");
+    if (!toggle) return;
+    toggle.setAttribute("aria-label", d.observanceView);
+    toggle.innerHTML =
+      '<button type="button" data-dv2-observance-view="calendar" aria-pressed="' +
+      (observanceViewMode === "calendar" ? "true" : "false") +
+      '">' +
+      escapeHtml(d.calendarView) +
+      "</button>" +
+      '<button type="button" data-dv2-observance-view="list" aria-pressed="' +
+      (observanceViewMode === "list" ? "true" : "false") +
+      '">' +
+      escapeHtml(d.fullList) +
+      "</button>";
   }
 
   function observanceDisplayName(record, lang) {
@@ -920,56 +1107,199 @@
       ? "Parana"
       : key === "pradosha_puja"
         ? "Pradosha Puja"
-        : "Ritual Window";
+        : key === "shivaratri_night"
+          ? "Shivaratri Night"
+          : "Ritual Window";
   }
 
-  function renderObservanceRecord(record, lang) {
+  function renderObservanceEventButton(record, lang) {
+    var id = observanceRecordId(record);
+    var active = selectedObservanceRecordId === id;
+    return (
+      '<button type="button" class="dv2-observance-event-button" data-dv2-observance-detail="' +
+      escapeHtml(id) +
+      '" aria-expanded="' +
+      (active ? "true" : "false") +
+      '">' +
+      '<span class="dv2-observance-event-date">' +
+      escapeHtml(formatDate(record.civil_date, lang)) +
+      "<small>" +
+      escapeHtml(formatWeekday(record.civil_date, lang)) +
+      "</small></span>" +
+      '<span class="dv2-observance-event-main"><strong>' +
+      escapeHtml(observanceDisplayName(record, lang)) +
+      "</strong><small>" +
+      escapeHtml(observanceFamily(record, lang)) +
+      " · " +
+      escapeHtml(observanceTraditionalBasis(record, lang)) +
+      "</small></span></button>"
+    );
+  }
+
+  function renderObservanceDetail(records, lang) {
+    var record = recordByObservanceId(records, selectedObservanceRecordId);
+    if (!record) return "";
     var d = languageData(lang);
-    var month = record.lunar_month || {};
-    var lunarName = month.canonical_name || "";
-    var instance = month.instance_kind || "regular";
-    var tithi = record.tithi && record.tithi.name ? record.tithi.name : "";
     var windowData = record.primary_public_window || {};
-    var rituals = Array.isArray(record.ritual_windows) ? record.ritual_windows : [];
-    var ritualMarkup = rituals
+    var parana = paranaConclusion(record, lang);
+    var additional = additionalRitualWindows(record);
+    var additionalMarkup = additional.length
+      ? additional
       .map(function (ritual) {
         return (
-          '<span><b>' +
+          '<div><dt>' +
           escapeHtml(ritualLabel(ritual, lang)) +
-          "</b>" +
-          escapeHtml(formatDateTime(ritual.start_local, lang) + " – " + formatTimeOnly(ritual.end_local)) +
-          "</span>"
+          "</dt><dd>" +
+          escapeHtml(observanceTimingText(ritual, lang)) +
+          "</dd></div>"
+        );
+      })
+        .join("")
+      : '<div><dt>' + escapeHtml(d.additionalRitualTimings) + "</dt><dd>" + escapeHtml(d.notApplicable) + "</dd></div>";
+    var location = record.location_basis || {};
+    var rule = record.rule_basis || {};
+    return (
+      '<article class="dv2-observance-detail" id="dv2-observance-detail" tabindex="-1">' +
+      '<div class="dv2-observance-detail__head"><div><p class="dv2-section-note">' +
+      escapeHtml(formatDate(record.civil_date, lang) + " · " + formatWeekday(record.civil_date, lang)) +
+      "</p><h6>" +
+      escapeHtml(observanceDisplayName(record, lang)) +
+      "</h6></div>" +
+      '<button type="button" data-dv2-observance-close-detail="true">' +
+      escapeHtml(d.closeDetails) +
+      "</button></div>" +
+      '<p class="dv2-observance-detail__basis">' +
+      escapeHtml(observanceFamily(record, lang) + " · " + observanceTraditionalBasis(record, lang)) +
+      "</p>" +
+      '<dl class="dv2-observance-window">' +
+      "<div><dt>" +
+      escapeHtml(d.begins) +
+      "</dt><dd>" +
+      escapeHtml(formatDateTime(windowData.start_local, lang)) +
+      "</dd></div><div><dt>" +
+      escapeHtml(d.ends) +
+      "</dt><dd>" +
+      escapeHtml(formatDateTime(windowData.end_local, lang)) +
+      "</dd></div><div><dt>" +
+      escapeHtml(parana.label) +
+      "</dt><dd>" +
+      escapeHtml(parana.value) +
+      "</dd></div>" +
+      additionalMarkup +
+      "<div><dt>" +
+      escapeHtml(d.locationBasis) +
+      "</dt><dd>" +
+      escapeHtml([location.display_label, location.timezone].filter(Boolean).join(" · ") || d.varanasiBasis) +
+      "</dd></div><div><dt>" +
+      escapeHtml(d.ruleSourceBasis) +
+      "</dt><dd>" +
+      escapeHtml([rule.scope_limitation || rule.rule_id, rule.source_reference].filter(Boolean).join(" · ") || d.calendarBasis) +
+      "</dd></div></dl></article>"
+    );
+  }
+
+  function renderObservanceCalendar(records, recordsByMonth, lang) {
+    var d = languageData(lang);
+    var selected = selectedMonthRecord(recordsByMonth);
+    var monthKeysWithRecords = recordsByMonth.filter(function (month) {
+      return month.records.length;
+    }).map(function (month) {
+      return month.key;
+    });
+    var selectedIndex = monthKeysWithRecords.indexOf(selected.key);
+    var previousKey = selectedIndex > 0 ? monthKeysWithRecords[selectedIndex - 1] : "";
+    var nextKey = selectedIndex >= 0 && selectedIndex < monthKeysWithRecords.length - 1
+      ? monthKeysWithRecords[selectedIndex + 1]
+      : "";
+    var grid = recordsByMonth
+      .map(function (month) {
+        var preview = month.records.slice(0, 3).map(function (record) {
+          return (
+            '<li><span>' +
+            escapeHtml(observanceDay(record)) +
+            "</span>" +
+            escapeHtml(observanceDisplayName(record, lang)) +
+            "</li>"
+          );
+        }).join("");
+        var more = month.records.length > 3
+          ? '<p class="dv2-observance-more">+' + escapeHtml(String(month.records.length - 3)) + " " + escapeHtml(d.more) + "</p>"
+          : "";
+        return (
+          '<article class="dv2-observance-month-card" data-selected="' +
+          (month.key === selectedObservanceMonth ? "true" : "false") +
+          '">' +
+          '<div class="dv2-observance-month-card__top"><h5>' +
+          escapeHtml(monthLabel(month.key, month.records, lang)) +
+          "</h5><span>" +
+          escapeHtml(String(month.records.length) + " " + d.observances) +
+          "</span></div>" +
+          (month.records.length
+            ? '<ol class="dv2-observance-card-preview">' + preview + "</ol>" + more +
+              '<button type="button" data-dv2-observance-month="' + escapeHtml(month.key) + '">' +
+              escapeHtml(d.viewMonth) +
+              " →</button>"
+            : '<p class="dv2-section-note">' + escapeHtml(d.emptyObservanceMonth) + "</p>") +
+          "</article>"
         );
       })
       .join("");
-    var lunarLine = [
-      lunarName ? localizeValue(lunarName, lang) : "",
-      instance && instance !== "regular" ? localizeValue(instance, lang) : "",
-      localizeValue(record.paksha || "", lang),
-      localizeValue(tithi, lang)
-    ].filter(Boolean).join(" · ");
+    var selectedRows = selected.records.length
+      ? selected.records.map(function (record) { return renderObservanceEventButton(record, lang); }).join("")
+      : '<p class="dv2-section-note">' + escapeHtml(d.emptyObservanceMonth) + "</p>";
     return (
-      '<article class="dv2-observance-row">' +
-      '<div class="dv2-observance-date"><strong>' +
-      escapeHtml(formatDate(record.civil_date, lang)) +
-      "</strong><span>" +
-      escapeHtml(formatWeekday(record.civil_date, lang)) +
-      "</span></div>" +
-      '<div class="dv2-observance-body"><h6>' +
-      escapeHtml(observanceDisplayName(record, lang)) +
-      "</h6><p>" +
-      escapeHtml(lunarLine || d.calendarBasis) +
-      '</p><p class="dv2-observance-window"><span><b>' +
-      escapeHtml(d.begins) +
-      "</b>" +
-      escapeHtml(formatDateTime(windowData.start_local, lang)) +
-      "</span><span><b>" +
-      escapeHtml(d.ends) +
-      "</b>" +
-      escapeHtml(formatDateTime(windowData.end_local, lang)) +
-      "</span>" +
-      ritualMarkup +
-      "</p></div></article>"
+      '<div class="dv2-observance-calendar" data-dv2-observance-calendar="true">' +
+      grid +
+      "</div>" +
+      '<section class="dv2-observance-selected-month" aria-labelledby="dv2-observance-selected-title">' +
+      '<div class="dv2-observance-selected-month__head"><div><p class="dv2-section-note">' +
+      escapeHtml(d.selectedMonth) +
+      "</p><h5 id=\"dv2-observance-selected-title\">" +
+      escapeHtml(monthLabel(selected.key || "01", selected.records, lang)) +
+      "</h5></div><div class=\"dv2-observance-month-nav\">" +
+      '<button type="button" data-dv2-observance-shift="' +
+      escapeHtml(previousKey) +
+      '"' +
+      (!previousKey ? " disabled" : "") +
+      ">" +
+      escapeHtml(d.previousMonth) +
+      "</button>" +
+      '<button type="button" data-dv2-observance-shift="' +
+      escapeHtml(nextKey) +
+      '"' +
+      (!nextKey ? " disabled" : "") +
+      ">" +
+      escapeHtml(d.nextMonth) +
+      "</button></div></div>" +
+      '<div class="dv2-observance-event-list">' +
+      selectedRows +
+      "</div>" +
+      renderObservanceDetail(records, lang) +
+      "</section>"
+    );
+  }
+
+  function renderObservanceFullList(records, lang) {
+    var d = languageData(lang);
+    var rows = records.length
+      ? records.map(function (record) { return renderObservanceEventButton(record, lang); }).join("")
+      : '<p class="dv2-section-note">' + escapeHtml(d.emptyObservanceMonth) + "</p>";
+    return (
+      '<section class="dv2-observance-full-list" aria-label="' +
+      escapeHtml(d.fullList) +
+      '">' +
+      '<div class="dv2-observance-selected-month__head"><div><p class="dv2-section-note">' +
+      escapeHtml(d.fullList) +
+      "</p><h5>" +
+      escapeHtml(String(records.length) + " " + d.governedRecords) +
+      "</h5></div><button type=\"button\" data-dv2-observance-back-to-year=\"true\">" +
+      escapeHtml(d.backToYear) +
+      "</button></div>" +
+      '<div class="dv2-observance-event-list">' +
+      rows +
+      "</div>" +
+      renderObservanceDetail(records, lang) +
+      "</section>"
     );
   }
 
@@ -983,6 +1313,7 @@
     var months = document.getElementById("dv2-observance-months");
     if (title) title.textContent = d.observanceYear;
     if (desc) desc.textContent = d.observanceDescription;
+    renderObservanceViewToggle(lang);
     renderObservanceFilters(lang);
     if (!months) return;
     if (!observanceRecords) {
@@ -990,11 +1321,7 @@
       months.innerHTML = '<p class="dv2-section-note">' + escapeHtml(d.loadingObservances) + "</p>";
       return;
     }
-    var visible = observanceFilter === "all"
-      ? observanceRecords
-      : observanceRecords.filter(function (record) {
-        return record.observance_key === observanceFilter;
-      });
+    var visible = filteredObservanceRecords();
     if (status) {
       status.textContent =
         String(visible.length) +
@@ -1005,26 +1332,14 @@
         " · " +
         d.varanasiBasis;
     }
-    var byMonth = Array.from({ length: 12 }, function () {
-      return [];
-    });
-    visible.forEach(function (record) {
-      var monthIndex = Number(String(record.civil_date || "").slice(5, 7)) - 1;
-      if (monthIndex >= 0 && monthIndex < 12) byMonth[monthIndex].push(record);
-    });
-    months.innerHTML = byMonth
-      .map(function (records, index) {
-        return (
-          '<section class="dv2-observance-month"><h5>' +
-          escapeHtml((lang === "hi" ? MONTHS_HI : MONTHS_EN)[index]) +
-          "</h5>" +
-          (records.length
-            ? records.map(function (record) { return renderObservanceRecord(record, lang); }).join("")
-            : '<p class="dv2-section-note">' + escapeHtml(d.emptyObservanceMonth) + "</p>") +
-          "</section>"
-        );
-      })
-      .join("");
+    var byMonth = groupObservancesByMonth(visible);
+    ensureSelectedObservanceMonth(byMonth);
+    if (selectedObservanceRecordId && !recordByObservanceId(visible, selectedObservanceRecordId)) {
+      selectedObservanceRecordId = "";
+    }
+    months.innerHTML = observanceViewMode === "list"
+      ? renderObservanceFullList(visible, lang)
+      : renderObservanceCalendar(visible, byMonth, lang);
   }
 
   function addObservanceYear() {
@@ -1036,13 +1351,54 @@
     panel.setAttribute("aria-labelledby", "dv2-observance-title");
     panel.innerHTML =
       '<div class="dv2-observance-year__head"><h4 id="dv2-observance-title"></h4><p class="dv2-section-note" id="dv2-observance-desc"></p><p class="dv2-section-note" id="dv2-observance-status" aria-live="polite"></p></div>' +
+      '<div class="dv2-observance-year__view-toggle" id="dv2-observance-view-toggle" aria-label="Observance view"></div>' +
       '<div class="dv2-observance-year__filters" id="dv2-observance-filters" aria-label="Observance family filters"></div>' +
       '<div class="dv2-observance-year__months" id="dv2-observance-months"></div>';
     book.insertAdjacentElement("afterend", panel);
     panel.addEventListener("click", function (event) {
-      var button = event.target.closest("[data-dv2-observance-filter]");
-      if (!button || !panel.contains(button)) return;
-      observanceFilter = button.getAttribute("data-dv2-observance-filter") || "all";
+      var filterButton = event.target.closest("[data-dv2-observance-filter]");
+      var viewButton = event.target.closest("[data-dv2-observance-view]");
+      var monthButton = event.target.closest("[data-dv2-observance-month]");
+      var shiftButton = event.target.closest("[data-dv2-observance-shift]");
+      var detailButton = event.target.closest("[data-dv2-observance-detail]");
+      var closeButton = event.target.closest("[data-dv2-observance-close-detail]");
+      var backButton = event.target.closest("[data-dv2-observance-back-to-year]");
+      if (filterButton && panel.contains(filterButton)) {
+        observanceFilter = filterButton.getAttribute("data-dv2-observance-filter") || "all";
+        selectedObservanceMonth = "";
+        selectedObservanceRecordId = "";
+      } else if (viewButton && panel.contains(viewButton)) {
+        observanceViewMode = viewButton.getAttribute("data-dv2-observance-view") === "list" ? "list" : "calendar";
+        selectedObservanceRecordId = "";
+      } else if (monthButton && panel.contains(monthButton)) {
+        selectedObservanceMonth = monthButton.getAttribute("data-dv2-observance-month") || selectedObservanceMonth;
+        selectedObservanceRecordId = "";
+      } else if (shiftButton && panel.contains(shiftButton)) {
+        var targetMonth = shiftButton.getAttribute("data-dv2-observance-shift") || "";
+        if (!targetMonth) return;
+        selectedObservanceMonth = targetMonth;
+        selectedObservanceRecordId = "";
+      } else if (detailButton && panel.contains(detailButton)) {
+        selectedObservanceRecordId = detailButton.getAttribute("data-dv2-observance-detail") || "";
+      } else if (closeButton && panel.contains(closeButton)) {
+        selectedObservanceRecordId = "";
+      } else if (backButton && panel.contains(backButton)) {
+        observanceViewMode = "calendar";
+        selectedObservanceRecordId = "";
+      } else {
+        return;
+      }
+      renderObservanceYear(currentTimeLanguage);
+      if (detailButton) {
+        window.requestAnimationFrame(function () {
+          var detail = document.getElementById("dv2-observance-detail");
+          if (detail) detail.focus({ preventScroll: true });
+        });
+      }
+    });
+    panel.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || !selectedObservanceRecordId) return;
+      selectedObservanceRecordId = "";
       renderObservanceYear(currentTimeLanguage);
     });
     renderObservanceYear(currentTimeLanguage);
@@ -1172,9 +1528,28 @@
       bookStructureLoading: "Loading annual-book structure…",
       observanceYear: "Festival & Observance Year",
       observanceDescription: "Recurring Hindu lunar/tithi observances from the governed public projection. This is not an all-festival, all-faith or national-holiday calendar.",
+      observanceView: "Festival and observance year view",
+      calendarView: "Calendar View",
+      fullList: "Full List",
+      selectedMonth: "Selected Month",
+      viewMonth: "View month",
+      more: "more",
+      observances: "observances",
       governedRecords: "governed records",
       varanasiBasis: "Varanasi canonical basis",
       emptyObservanceMonth: "No governed observance in this filter.",
+      parana: "Parana",
+      conclusion: "Conclusion",
+      vratConclusion: "Vrat Conclusion",
+      paranaConclusion: "Parana / Conclusion",
+      additionalRitualTimings: "Additional Ritual Timings",
+      ruleSourceBasis: "Rule / Source Basis",
+      notApplicable: "Not applicable",
+      noSeparatelyGovernedTimingAvailable: "No separately governed timing available",
+      backToYear: "Back to year",
+      previousMonth: "Previous month",
+      nextMonth: "Next month",
+      closeDetails: "Close details",
       previousPage: "Previous Page",
       nextPage: "Next Page",
       reflectKicker: "Reflect",
@@ -1278,9 +1653,28 @@
       bookStructureLoading: "वार्षिक पुस्तक संरचना लोड हो रही है…",
       observanceYear: "व्रत एवं पर्व वार्षिक पंचांग",
       observanceDescription: "स्वीकृत सार्वजनिक प्रक्षेपण से आवर्ती हिंदू चंद्र/तिथि पर्व। यह सभी त्योहारों, सभी आस्थाओं या राष्ट्रीय अवकाशों का कैलेंडर नहीं है।",
+      observanceView: "व्रत एवं पर्व वार्षिक दृश्य",
+      calendarView: "कैलेंडर दृश्य",
+      fullList: "पूरी सूची",
+      selectedMonth: "चयनित माह",
+      viewMonth: "माह देखें",
+      more: "और",
+      observances: "पर्व",
       governedRecords: "स्वीकृत रिकॉर्ड",
       varanasiBasis: "वाराणसी प्रमाणित आधार",
       emptyObservanceMonth: "इस फ़िल्टर में कोई स्वीकृत पर्व नहीं।",
+      parana: "पारण",
+      conclusion: "समापन",
+      vratConclusion: "व्रत समापन",
+      paranaConclusion: "पारण / समापन",
+      additionalRitualTimings: "अतिरिक्त अनुष्ठान समय",
+      ruleSourceBasis: "नियम / स्रोत आधार",
+      notApplicable: "लागू नहीं",
+      noSeparatelyGovernedTimingAvailable: "अलग से स्वीकृत समय उपलब्ध नहीं",
+      backToYear: "वर्ष पर लौटें",
+      previousMonth: "पिछला माह",
+      nextMonth: "अगला माह",
+      closeDetails: "विवरण बंद करें",
       previousPage: "पिछला पृष्ठ",
       nextPage: "अगला पृष्ठ",
       reflectKicker: "चिंतन",
