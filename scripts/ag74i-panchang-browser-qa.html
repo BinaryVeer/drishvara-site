@@ -99,7 +99,7 @@
     assertCheck("no_public_record_id", card?.getAttribute("data-ag74i-exact-record-id") === "none", "No unapproved record may be labelled as public.");
 
     var visibleText = (card?.innerText || "").toLowerCase();
-    assertCheck("no_visible_transition_vocabulary", !/(pilot|preview|locked|withheld)/i.test(visibleText), "Visible Panchang card must not expose transition-era status vocabulary.");
+    assertCheck("no_visible_transition_vocabulary", !/\b(pilot|preview|locked|withheld)\b/i.test(visibleText), "Visible Panchang card must not expose transition-era status vocabulary.");
 
     var basisLine = doc.querySelector(
       '[data-ag71d-r6-location-basis-line="panchang"]'

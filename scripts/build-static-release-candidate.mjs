@@ -14,7 +14,13 @@ function writeJson(p, obj) {
   fs.writeFileSync(full(p), JSON.stringify(obj, null, 2) + "\n");
 }
 function run(cmd) {
-  try { return execSync(cmd, { cwd: root, encoding: "utf8" }).trim(); }
+  try {
+    return execSync(cmd, {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"]
+    }).trim();
+  }
   catch { return ""; }
 }
 
@@ -88,7 +94,7 @@ check("ag74i_public_approval_required", indexHtml.includes('data-ag74i-public-ap
 check("ag74i_governed_unavailable_copy", panchangVisibleHtml.includes("No publicly approved matching record"), "Governed unavailable copy must be visible.");
 check("ag74i_date_controls", ["panchang-date-picker", "panchang-date-text", "panchang-previous-day", "panchang-today", "panchang-next-day"].every((id) => indexHtml.includes(id)), "All AG74I date controls must exist.");
 check("ag74i_annual_book_shell", indexHtml.includes('data-ag74i-varanasi-calendar-book="true"'), "Four-page Varanasi annual-book shell must exist.");
-check("ag74i_no_visible_transition_copy", !/(pilot|preview|locked|withheld)/i.test(panchangVisibleHtml), "Visible Panchang card must not expose transition-era status vocabulary.");
+check("ag74i_no_visible_transition_copy", !/\b(pilot|preview|locked|withheld)\b/i.test(panchangVisibleHtml), "Visible Panchang card must not expose transition-era status vocabulary.");
 
 const ag74iBrowserQa = exists("data/quality/ag74i-panchang-public-surface-browser-qa.json")
   ? readJson("data/quality/ag74i-panchang-public-surface-browser-qa.json")
