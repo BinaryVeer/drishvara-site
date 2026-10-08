@@ -1,0 +1,543 @@
+{
+  "module_id": "AG74Q-R1",
+  "title": "Observance Expansion Schema Proposal",
+  "status": "review_proposal_only",
+  "runtime_activation": false,
+  "runtime_activation_allowed_now": false,
+  "records_populated_in_this_proposal": false,
+  "public_date_fabrication_allowed": false,
+  "source_contract_unchanged": "data/knowledge-base/panchang-festival/production/ag74q-observance-expansion-foundation-contract.json",
+  "active_runtime_projection_unchanged": "data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json",
+  "current_public_projection_record_count": 114,
+  "proposal_purpose": "Define the future governed R1 schema for multi-tradition festivals, holidays, civil observances, multi-day sequences and jurisdiction-specific legal status without changing AG74P, AG74Q, runtime code or public UI.",
+  "non_activation_invariants": {
+    "do_not_transform_existing_ag74p_records_now": true,
+    "do_not_add_event_records_now": true,
+    "do_not_add_dates_or_timings_now": true,
+    "do_not_change_runtime_projection_now": true,
+    "do_not_infer_public_begins_or_ends_from_raw_astronomical_windows": true
+  },
+  "r1_canonical_record_shape": {
+    "identity": {
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null,
+        "other_approved_locales": {}
+      },
+      "tradition": null,
+      "event_class": null,
+      "category": null,
+      "sub_category": null,
+      "family": null
+    },
+    "legal_and_holiday_status": {
+      "legal_status_entries": [],
+      "legacy_compatibility": {
+        "legal_status": "deprecated_compatibility_only_if_present_in_future_imports",
+        "holiday_status": "deprecated_compatibility_only_if_present_in_future_imports",
+        "r1_canonical_model": "legal_status_entries"
+      }
+    },
+    "date_basis": {
+      "date_basis_type": null,
+      "civil_date": null,
+      "civil_date_start": null,
+      "civil_date_end": null,
+      "traditional_calendar_system": null,
+      "traditional_calendar_date": null,
+      "lunar_month": null,
+      "paksha": null,
+      "tithi": null
+    },
+    "timing": {
+      "timing_mode": null,
+      "astronomical_condition_window": null,
+      "observance_window": null,
+      "primary_public_window": null,
+      "ritual_windows": [],
+      "parana_or_conclusion": null
+    },
+    "basis": {
+      "location_basis": null,
+      "timezone_basis": null,
+      "rule_basis": null,
+      "source_basis": null,
+      "source_approval_status": null,
+      "source_evidence": []
+    },
+    "governance": {
+      "certainty": null,
+      "status": null,
+      "notes": null
+    },
+    "sequence": {
+      "parent_event_id": null,
+      "event_sequence": null,
+      "day_number": null
+    },
+    "public_filters": {
+      "derived_public_filter_facets": null,
+      "public_filter_override": null
+    }
+  },
+  "enumerations": {
+    "tradition": [
+      "hindu",
+      "christian",
+      "islamic",
+      "sikh",
+      "buddhist",
+      "jain",
+      "jewish",
+      "secular",
+      "civil",
+      "international"
+    ],
+    "event_class": [
+      "religious_festival",
+      "vrat",
+      "religious_observance",
+      "commemorative_day",
+      "birth_anniversary",
+      "death_anniversary",
+      "international_observance",
+      "un_observance",
+      "cultural_observance",
+      "civil_observance"
+    ],
+    "legal_status": [
+      "national_holiday",
+      "gazetted",
+      "restricted",
+      "state_specific",
+      "institution_specific",
+      "observance_only",
+      "not_a_public_holiday",
+      "status_varies_by_jurisdiction"
+    ],
+    "jurisdiction_level": [
+      "country",
+      "state_or_ut",
+      "region"
+    ],
+    "date_basis_type": [
+      "fixed_gregorian",
+      "hindu_lunar",
+      "hindu_solar",
+      "lunisolar",
+      "ecclesiastical",
+      "islamic_lunar",
+      "jewish_calendar",
+      "astronomical",
+      "official_notification",
+      "regional_rule",
+      "international_fixed_date"
+    ],
+    "timing_mode": [
+      "timed_window",
+      "all_day",
+      "multi_day",
+      "sunset_to_sunset",
+      "sunrise_based",
+      "moonrise_based",
+      "official_civil_day",
+      "unspecified"
+    ],
+    "parana_or_conclusion_type": [
+      "parana",
+      "conclusion",
+      "vrat_conclusion",
+      "observance_conclusion"
+    ],
+    "parana_or_conclusion_applicability": [
+      "applicable",
+      "not_applicable",
+      "tradition_specific",
+      "rule_dependent"
+    ],
+    "parana_or_conclusion_status": [
+      "governed",
+      "withheld_pending_source_review",
+      "withheld_pending_rule_review",
+      "not_separately_governed"
+    ],
+    "governance_status": [
+      "draft",
+      "source_review_pending",
+      "rule_review_pending",
+      "approved",
+      "withheld",
+      "deprecated"
+    ],
+    "source_evidence_purpose": [
+      "event_definition",
+      "canonical_name",
+      "date_rule",
+      "timing_rule",
+      "ritual_rule",
+      "legal_status",
+      "jurisdiction_status",
+      "official_observance",
+      "translation"
+    ]
+  },
+  "legal_status_entry_shape": {
+    "status": null,
+    "jurisdiction": {
+      "country": null,
+      "state_or_ut": null,
+      "region": null
+    },
+    "issuing_authority": null,
+    "official_notification_reference": null,
+    "valid_for_year": null,
+    "status_review_state": null
+  },
+  "source_evidence_entry_shape": {
+    "purpose": null,
+    "source_body": null,
+    "source_type": null,
+    "source_reference": null,
+    "source_url_or_identifier": null,
+    "source_validity": null,
+    "review_status": null,
+    "reviewed_by_or_process": null,
+    "review_date": null
+  },
+  "source_approval_hierarchy": {
+    "canonical_per_evidence_review_state": "source_evidence[].review_status",
+    "source_approval_status_role": "derived compatibility summary for current AG74Q / AG74P interoperability only",
+    "source_approval_status_independent_source_of_truth": false,
+    "future_approval_decisions_derive_from": "the required source_evidence[] entries and rule_basis required for the event type",
+    "compatibility_note": "source_approval_status must not be independently authored as canonical evidence state in R1."
+  },
+  "parana_or_conclusion_shape": {
+    "type": null,
+    "label": null,
+    "applicability": null,
+    "status": null,
+    "window": null
+  },
+  "parana_or_conclusion_semantics": {
+    "not_applicable": "the Parana or conclusion concept does not apply to this event type or tradition",
+    "not_separately_governed": "the concept may apply, but Drishvara has no separately governed public timing or window",
+    "non_applicable_events_must_not_create_parana_or_conclusion": true
+  },
+  "timing_presentation_contract": {
+    "reader_visible_begins_source": "primary_public_window.start_local when a governed timed primary_public_window exists",
+    "reader_visible_ends_source": "primary_public_window.end_local when a governed timed primary_public_window exists",
+    "raw_astronomical_condition_window_public_begins_ends_source": false,
+    "raw_observance_window_public_begins_ends_source": false,
+    "ritual_windows_public_begins_ends_source": false,
+    "all_day_or_official_civil_day_primary_public_window_requirement": "conditionally_absent_when_all_day_semantics_govern_presentation"
+  },
+  "multi_day_sequence_contract": {
+    "supported_without_creating_records_now": [
+      "Navratri",
+      "Diwali sequence",
+      "Chhath Puja",
+      "Ramadan",
+      "Paryushan",
+      "Passover"
+    ],
+    "parent_event_id": "links child events to a governed parent sequence",
+    "event_sequence": "orders child events inside a governed sequence",
+    "day_number": "optional reader-facing sequence day when source-approved",
+    "civil_date_start": "supported for governed parent spans",
+    "civil_date_end": "supported for governed parent spans",
+    "independent_governance_required": "Parent observance records and significant child event records must each satisfy their own approval gates."
+  },
+  "public_filter_derivation_contract": {
+    "derived_public_filter_facets": {
+      "derived_from": [
+        "tradition",
+        "event_class",
+        "legal_status_entries.status",
+        "legal_status_entries.jurisdiction"
+      ],
+      "stored_as_competing_source_of_truth": false,
+      "requires_approved_canonical_fields": true
+    },
+    "public_filter_override": {
+      "allowed": true,
+      "required": false,
+      "governance_required": true,
+      "purpose": "Future editorial compatibility only; not a substitute for canonical identity, legal status or jurisdiction fields."
+    }
+  },
+  "conditional_validation_rules": [
+    {
+      "rule_id": "ag74q_r1_fixed_civic_event",
+      "description": "Fixed civic or international events do not require Panchang, lunar month, paksha or tithi fields.",
+      "requires": [
+        "event_id",
+        "canonical_name",
+        "tradition",
+        "event_class",
+        "date_basis_type"
+      ],
+      "panchang_fields_required": false
+    },
+    {
+      "rule_id": "ag74q_r1_governed_timed_religious_event",
+      "description": "Reader-visible Begins and Ends may display only when a governed primary_public_window is present and approved.",
+      "when": {
+        "timing_mode": "timed_window"
+      },
+      "requires_before_public_begins_ends": [
+        "primary_public_window",
+        "timing_rule source_evidence",
+        "source_approval_status approved"
+      ]
+    },
+    {
+      "rule_id": "ag74q_r1_all_day_event",
+      "description": "All-day and official civil day records may mark ritual/timed fields as optional or not applicable.",
+      "when": {
+        "timing_mode": [
+          "all_day",
+          "official_civil_day"
+        ]
+      },
+      "timed_ritual_fields_required": false
+    },
+    {
+      "rule_id": "ag74q_r1_legal_holiday",
+      "description": "Legal holiday claims require at least one jurisdictional legal_status_entries item.",
+      "when": {
+        "legal_or_holiday_status_claimed": true
+      },
+      "requires": [
+        "legal_status_entries[0]"
+      ]
+    },
+    {
+      "rule_id": "ag74q_r1_state_specific_holiday",
+      "description": "State-specific holiday status requires state_or_ut inside the jurisdiction object.",
+      "when": {
+        "legal_status_entries.status": "state_specific"
+      },
+      "requires": [
+        "legal_status_entries[].jurisdiction.state_or_ut"
+      ]
+    },
+    {
+      "rule_id": "ag74q_r1_year_specific_notification",
+      "description": "Year-specific notification status requires both a valid_for_year and an official notification reference.",
+      "when": {
+        "date_basis_type": "official_notification"
+      },
+      "requires": [
+        "legal_status_entries[].valid_for_year",
+        "legal_status_entries[].official_notification_reference"
+      ]
+    },
+    {
+      "rule_id": "ag74q_r1_child_event",
+      "description": "Child events inside a sequence require parent_event_id and event_sequence.",
+      "when": {
+        "is_child_event": true
+      },
+      "requires": [
+        "parent_event_id",
+        "event_sequence"
+      ]
+    },
+    {
+      "rule_id": "ag74q_r1_parana_or_conclusion",
+      "description": "Parana or conclusion windows must not be created unless applicability, rule evidence and source evidence support them.",
+      "when": {
+        "parana_or_conclusion.applicability": "applicable"
+      },
+      "requires": [
+        "parana_or_conclusion.type",
+        "parana_or_conclusion.status",
+        "parana_or_conclusion.window",
+        "ritual_rule source_evidence",
+        "source_approval_status approved"
+      ]
+    },
+    {
+      "rule_id": "ag74q_r1_approved_status",
+      "description": "No record may become approved unless all conditionally required sources and rules for its event type are approved and certainty is sufficient for governed public output.",
+      "when": {
+        "governance.status": "approved"
+      },
+      "requires": [
+        "required source_evidence entries approved",
+        "required rule_basis approved",
+        "certainty sufficient for governed public output for the event type",
+        "public_output_allowed gate if future runtime projection is proposed"
+      ],
+      "approval_distinction": "Source/rule approval is necessary but not sufficient; a technically sourced record must remain withheld or pending if material uncertainty remains."
+    },
+    {
+      "rule_id": "ag74q_r1_public_filters",
+      "description": "Public filter facets must derive from approved canonical fields and must not be manually stored as a competing source of truth.",
+      "requires_derivation_from": [
+        "tradition",
+        "event_class",
+        "legal_status_entries",
+        "jurisdiction"
+      ],
+      "manual_public_filter_facets_allowed": false
+    }
+  ],
+  "compatibility_with_current_ag74q_and_ag74p": {
+    "current_ag74q_contract_remains_authoritative_until_future_gate": true,
+    "existing_114_ag74p_records_preserved": true,
+    "existing_primary_public_window_preserved": true,
+    "existing_ritual_windows_preserved": true,
+    "existing_location_basis_preserved": true,
+    "existing_timezone_basis_preserved": true,
+    "existing_rule_basis_preserved": true,
+    "existing_source_approval_preserved": true,
+    "existing_sequence_support_preserved": true,
+    "mapping": {
+      "event_contract_fields.identity": "r1_canonical_record_shape.identity",
+      "event_contract_fields.civil_dates": "r1_canonical_record_shape.date_basis civil_date fields",
+      "event_contract_fields.traditional_calendar": "r1_canonical_record_shape.date_basis traditional calendar fields",
+      "event_contract_fields.timing_windows": "r1_canonical_record_shape.timing",
+      "event_contract_fields.basis": "r1_canonical_record_shape.basis",
+      "event_contract_fields.governance": "r1_canonical_record_shape.governance",
+      "event_contract_fields.sequence": "r1_canonical_record_shape.sequence"
+    },
+    "existing_ag74p_governance_flag_mapping": {
+      "traditional_source_review_status": "maps conceptually into required source_evidence[].review_status and source_approval_status as a derived compatibility summary",
+      "final_observance_date_approved": "maps conceptually into future date-rule/date-output approval gates and must not be mutated by R1",
+      "public_output_allowed": "maps conceptually into the final future public-output gate after source, rule and certainty requirements are satisfied",
+      "r1_mutates_existing_ag74p_fields_now": false
+    },
+    "new_r1_additions": [
+      "event_class separate from legal status",
+      "jurisdictional legal_status_entries",
+      "date_basis_type",
+      "timing_mode",
+      "multi-source source_evidence",
+      "derived_public_filter_facets",
+      "public_filter_override as optional governed exception"
+    ]
+  },
+  "empty_shape_examples_only": [
+    {
+      "example_type": "hindu_timed_festival",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "tradition": null,
+      "event_class": null,
+      "date_basis_type": null,
+      "timing_mode": null,
+      "primary_public_window": null,
+      "ritual_windows": [],
+      "parana_or_conclusion": null,
+      "source_evidence": []
+    },
+    {
+      "example_type": "jurisdictional_holiday_shape",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "tradition": null,
+      "event_class": null,
+      "date_basis_type": null,
+      "civil_date": null,
+      "timing_mode": null,
+      "legal_status_entries": [],
+      "source_evidence": []
+    },
+    {
+      "example_type": "jayanti",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "tradition": null,
+      "event_class": null,
+      "date_basis_type": null,
+      "traditional_calendar_system": null,
+      "civil_date": null,
+      "legal_status_entries": [],
+      "source_evidence": []
+    },
+    {
+      "example_type": "international_observance",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "tradition": null,
+      "event_class": null,
+      "date_basis_type": null,
+      "civil_date": null,
+      "legal_status_entries": [],
+      "source_evidence": []
+    },
+    {
+      "example_type": "other_faith_all_day_observance",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "tradition": null,
+      "event_class": null,
+      "date_basis_type": null,
+      "timing_mode": null,
+      "primary_public_window": null,
+      "source_evidence": []
+    },
+    {
+      "example_type": "multi_day_religious_parent",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "tradition": null,
+      "event_class": null,
+      "date_basis_type": null,
+      "timing_mode": null,
+      "civil_date_start": null,
+      "civil_date_end": null,
+      "event_sequence": null,
+      "source_evidence": []
+    },
+    {
+      "example_type": "multi_day_child_event",
+      "event_id": null,
+      "canonical_name": null,
+      "localized_names": {
+        "en": null,
+        "hi": null
+      },
+      "parent_event_id": null,
+      "event_sequence": null,
+      "day_number": null,
+      "date_basis_type": null,
+      "timing_mode": null,
+      "source_evidence": []
+    }
+  ],
+  "unresolved_schema_questions": [
+    "Which approved source bodies will be canonical for each future tradition and jurisdiction?",
+    "How should overlapping central, state and institution-specific holiday notifications be prioritized when they conflict?",
+    "Which locale expansion process will approve localized_names beyond English and Hindi?",
+    "Should future public_filter_override require a separate editorial approval register or live inside each event record?",
+    "What future gate will promote this proposal into the production AG74Q contract and projection tooling?"
+  ]
+}
