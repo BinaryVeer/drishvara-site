@@ -112,6 +112,167 @@ body.drishvara-v2-active .dv2-methodology summary {
   font-weight: 900;
 }
 
+body.drishvara-v2-active #panchang-public-heading,
+body.drishvara-v2-active [data-ag74i-public-introduction="true"] {
+  display: none !important;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-date-surface {
+  display: grid;
+  gap: 0.72rem;
+  padding: clamp(0.78rem, 1.4vw, 1rem) !important;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-surface-heading {
+  display: flex !important;
+  justify-content: space-between;
+  gap: 0.8rem;
+  align-items: end;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-surface-heading h3 {
+  margin: 0;
+  font-size: clamp(1.12rem, 1.8vw, 1.45rem);
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-selected-date {
+  margin: 0;
+  text-align: right;
+  color: rgba(255, 250, 240, 0.82);
+  font-size: 0.88rem;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-date-controls {
+  display: grid !important;
+  grid-template-columns: minmax(6.8rem, 0.72fr) minmax(9.5rem, 1fr) minmax(10.5rem, 1.08fr) minmax(5.2rem, 0.58fr) minmax(6.6rem, 0.68fr) !important;
+  grid-template-areas: "prev text picker today next" !important;
+  gap: 0.48rem;
+  align-items: end;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-previous-day {
+  grid-area: prev;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-date-field[for="panchang-date-text"] {
+  grid-area: text;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-date-field[for="panchang-date-picker"] {
+  grid-area: picker;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-today {
+  grid-area: today;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-next-day {
+  grid-area: next;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-date-field,
+body.drishvara-v2-active .dv2-time .ag74o-r3-request-actions {
+  min-width: 0;
+}
+
+body.drishvara-v2-active .dv2-time .ag74i-date-field span {
+  display: block;
+  margin-bottom: 0.24rem;
+  color: rgba(255, 250, 240, 0.68);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.drishvara-v2-active .dv2-time .ag74o-r3-request-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+body.drishvara-v2-active .dv2-time #panchang-calculate {
+  min-width: min(100%, 14rem);
+}
+
+.dv2-compact-disclosure,
+.dv2-annual-disclosure {
+  margin: 0.85rem 0;
+  border: 1px solid rgba(255, 250, 240, 0.14);
+  border-radius: var(--dv2-radius);
+  background: rgba(255, 250, 240, 0.045);
+}
+
+.dv2-compact-disclosure > summary,
+.dv2-annual-disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.72rem 0.85rem;
+  cursor: pointer;
+  color: #f0d487;
+  font-weight: 900;
+}
+
+.dv2-location-disclosure > summary,
+.dv2-annual-disclosure > summary {
+  align-items: start;
+}
+
+.dv2-location-disclosure > summary span,
+.dv2-annual-disclosure > summary span {
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+.dv2-location-disclosure > summary span,
+.dv2-annual-disclosure > summary strong {
+  color: #fffaf0;
+}
+
+.dv2-location-disclosure > summary strong,
+.dv2-annual-disclosure > summary b {
+  color: #15100a;
+  background: var(--dv2-gold);
+  border-radius: var(--dv2-radius);
+  padding: 0.36rem 0.62rem;
+  font-size: 0.82rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.dv2-annual-disclosure > summary small {
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.dv2-compact-disclosure__body,
+.dv2-annual-disclosure__body {
+  display: grid;
+  gap: 0.78rem;
+  padding: 0 0.85rem 0.85rem;
+}
+
+.dv2-compact-disclosure:not([open]) > .dv2-compact-disclosure__body,
+.dv2-annual-disclosure:not([open]) > .dv2-annual-disclosure__body {
+  display: none !important;
+}
+
+.dv2-date-location-disclosure .dv2-compact-disclosure__body {
+  color: rgba(255, 250, 240, 0.78);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+body.drishvara-v2-active .dv2-location-disclosure .ag71c-coordinate-surface,
+body.drishvara-v2-active .dv2-location-disclosure .ag71d-place-select-shell {
+  margin: 0 !important;
+}
+
 .dv2-panchang-reader {
   display: grid;
   gap: 1rem;
@@ -174,6 +335,130 @@ body.drishvara-v2-active .dv2-methodology summary {
   font-size: 1.18rem;
 }
 
+body.drishvara-v2-active .dv2-time #festival-list {
+  margin: 0.9rem 0 0;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .festival-item {
+  display: grid;
+  gap: 0.42rem;
+  border: 1px solid rgba(255, 250, 240, 0.14);
+  border-radius: var(--dv2-radius);
+  padding: 0.72rem !important;
+  background: rgba(255, 250, 240, 0.05);
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .sub {
+  color: #f0d487;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .title {
+  color: #fffaf0;
+  font-size: 1rem;
+  line-height: 1.32;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .meta {
+  color: rgba(255, 250, 240, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.38;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .festival-item[data-dv2-upcoming-compact="true"] > #upcoming-observance-name {
+  display: none !important;
+}
+
+.dv2-upcoming-observance-compact {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.dv2-upcoming-observance-compact strong {
+  color: #fffaf0;
+  font-size: 1.02rem;
+  line-height: 1.28;
+}
+
+.dv2-upcoming-observance-compact span,
+.dv2-upcoming-observance-compact small {
+  color: rgba(255, 250, 240, 0.78);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.dv2-upcoming-observance-details {
+  margin-top: 0.12rem;
+}
+
+.dv2-upcoming-observance-details > summary {
+  width: fit-content;
+  cursor: pointer;
+  color: #f0d487;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.dv2-upcoming-observance-detail-body {
+  display: grid;
+  gap: 0.58rem;
+  margin-top: 0.58rem;
+}
+
+.dv2-upcoming-observance-basis {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+}
+
+.dv2-upcoming-observance-basis div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.dv2-upcoming-observance-basis dt {
+  color: #f0d487;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dv2-upcoming-observance-basis dd {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.82);
+  font-size: 0.84rem;
+  line-height: 1.38;
+  overflow-wrap: anywhere;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .ag74i-observance-window {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .ag74i-observance-window div {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .ag74i-observance-window dt {
+  color: #f0d487;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+body.drishvara-v2-active .dv2-time #festival-list .ag74i-observance-window dd {
+  margin: 0;
+  color: rgba(255, 250, 240, 0.84);
+  overflow-wrap: anywhere;
+}
+
 body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table {
   display: none !important;
 }
@@ -192,7 +477,7 @@ body.drishvara-v2-active [data-ag74o-daily-result-surface="true"] > .mini-table 
 .dv2-observance-year {
   display: grid;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: 0;
   border: 1px solid rgba(215, 173, 69, 0.22);
   border-radius: var(--dv2-radius);
   padding: clamp(1rem, 2vw, 1.25rem);
@@ -473,6 +758,10 @@ body.drishvara-v2-active .ag74i-book-navigation {
   align-items: stretch;
 }
 
+body.drishvara-v2-active .dv2-annual-disclosure .ag74i-calendar-book {
+  margin: 0 !important;
+}
+
 .dv2-year-glance {
   display: none;
   gap: 0.75rem;
@@ -589,6 +878,38 @@ body.drishvara-v2-active .ag73a-birth-time-unknown {
 }
 
 @media (max-width: 700px) {
+  body.drishvara-v2-active .dv2-time .ag74i-surface-heading,
+  .dv2-compact-disclosure > summary,
+  .dv2-annual-disclosure > summary {
+    display: grid !important;
+    text-align: left;
+  }
+
+  body.drishvara-v2-active .dv2-time .ag74i-selected-date {
+    text-align: left;
+  }
+
+  body.drishvara-v2-active .dv2-time .ag74i-date-controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-areas:
+      "text text text"
+      "picker picker picker"
+      "prev today next" !important;
+  }
+
+  body.drishvara-v2-active .dv2-time .ag74i-date-controls .ag74i-date-field {
+    min-width: 0;
+  }
+
+  body.drishvara-v2-active .dv2-time .ag74o-r3-request-actions,
+  body.drishvara-v2-active .dv2-time #panchang-calculate {
+    width: 100%;
+  }
+
+  body.drishvara-v2-active .dv2-time #festival-list .ag74i-observance-window {
+    grid-template-columns: 1fr;
+  }
+
   .dv2-observance-calendar {
     grid-template-columns: 1fr;
   }

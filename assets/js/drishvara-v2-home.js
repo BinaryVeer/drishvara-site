@@ -753,6 +753,61 @@
       : languageData(lang).today;
   }
 
+  function syncPanchangCompactLocationSummary(lang) {
+    var summary = document.getElementById("dv2-panchang-location-current");
+    if (!summary) return;
+    var d = languageData(lang);
+    summary.textContent =
+      d.selectedLocation + ": " + localizeValue(getPanchangLocationLabel(), lang);
+  }
+
+  function syncAnnualToggleLabels(lang) {
+    var d = languageData(lang);
+    var hindu = document.getElementById("dv2-hindu-calendar-disclosure");
+    var observance = document.getElementById("dv2-observance-year-disclosure");
+    textNode(
+      "#dv2-hindu-calendar-toggle-label",
+      hindu && hindu.open ? d.closeHinduCalendar : d.openHinduCalendar
+    );
+    textNode(
+      "#dv2-observance-year-toggle-label",
+      observance && observance.open ? d.closeFestivalCalendar : d.openFestivalCalendar
+    );
+  }
+
+  function selectedLunarMonthLabel(lang) {
+    var status = document.getElementById("ag74o-book-status");
+    var text = status
+      ? status.getAttribute("data-dv2-original-text") || status.textContent || ""
+      : "";
+    var match = String(text).match(/belongs to\s+(.+?)\./i);
+    if (match) return localizeValue(match[1], lang);
+    var visibleMonth = document.querySelector(
+      '[data-ag74i-varanasi-calendar-book="true"] .ag74o-month-slot h5'
+    );
+    return visibleMonth && visibleMonth.textContent.trim()
+      ? localizeValue(visibleMonth.textContent.trim(), lang)
+      : languageData(lang).unavailable;
+  }
+
+  function selectedObservanceMonthSummary(lang) {
+    if (!observanceRecords) {
+      return languageData(lang).loadingObservances;
+    }
+    var visible = filteredObservanceRecords();
+    var byMonth = groupObservancesByMonth(visible);
+    ensureSelectedObservanceMonth(byMonth);
+    var selected = selectedMonthRecord(byMonth);
+    if (!selected) return languageData(lang).emptyObservanceMonth;
+    return (
+      formatMonthYear(selected.key, lang) +
+      " · " +
+      selected.records.length +
+      " " +
+      languageData(lang).observances
+    );
+  }
+
   function readerItem(id, label, emphasis) {
     return (
       '<div class="dv2-panchang-reader__item" data-dv2-reader-item="' +
@@ -783,8 +838,6 @@
       readerItem("karana", "Karana", false) +
       readerItem("paksha", "Paksha", false) +
       readerItem("vara", "Vara", false) +
-      readerItem("currentObservance", "Current Observance", false) +
-      readerItem("upcomingObservance", "Upcoming Observance", false) +
       "</div>";
     result.insertAdjacentElement("beforebegin", panel);
     return panel;
@@ -849,6 +902,151 @@
         if (row && !timingRows.contains(row)) timingRows.appendChild(row);
       });
     }
+  }
+
+  function ensureDateLocationDisclosure() {
+    var card = document.getElementById("panchang-festival-card");
+    var dateSurface = document.querySelector('[data-ag74i-date-selection-surface="true"]');
+    if (!card || !dateSurface) return;
+
+    var about = document.getElementById("dv2-date-location-disclosure");
+    if (!about) {
+      about = document.createElement("details");
+      about.id = "dv2-date-location-disclosure";
+      about.className = "dv2-compact-disclosure dv2-date-location-disclosure";
+      about.innerHTML =
+        '<summary id="dv2-date-location-summary"></summary><div class="dv2-compact-disclosure__body" id="dv2-date-location-disclosure-body"></div>';
+      dateSurface.insertAdjacentElement("afterend", about);
+    }
+
+    var body = document.getElementById("dv2-date-location-disclosure-body");
+    var actions = document.querySelector(".ag74o-r3-request-actions");
+    if (actions && dateSurface && !dateSurface.contains(actions)) {
+      dateSurface.appendChild(actions);
+    }
+    [
+      "panchang-date-help",
+      "panchang-request-status",
+      "panchang-selection-status"
+    ].forEach(function (id) {
+      var node = document.getElementById(id);
+      if (node && body && !body.contains(node)) body.appendChild(node);
+    });
+  }
+
+  function ensurePanchangLocationDisclosure() {
+    var card = document.getElementById("panchang-festival-card");
+    var coordinate = document.querySelector('[data-ag71c-coordinate-surface="panchang"]');
+    var basis = document.querySelector('[data-ag71d-r6-coordinate-basis-summary="panchang"]');
+    var form = card ? card.querySelector(":scope > .form-grid") : null;
+    var status = document.querySelector('[data-ag71e-r1-panchang-inline-status="true"]');
+    if (!card || !coordinate || !form) return;
+
+    var details = document.getElementById("dv2-panchang-location-disclosure");
+    if (!details) {
+      details = document.createElement("details");
+      details.id = "dv2-panchang-location-disclosure";
+      details.className = "dv2-compact-disclosure dv2-location-disclosure";
+      details.innerHTML =
+        '<summary><span id="dv2-panchang-location-current"></span><strong id="dv2-panchang-location-toggle"></strong></summary><div class="dv2-compact-disclosure__body" id="dv2-panchang-location-disclosure-body"></div>';
+      coordinate.insertAdjacentElement("beforebegin", details);
+    }
+
+    var body = document.getElementById("dv2-panchang-location-disclosure-body");
+    [coordinate, basis, form, status].forEach(function (node) {
+      if (node && body && !body.contains(node)) body.appendChild(node);
+    });
+  }
+
+  function closeOtherAnnualDisclosure(opened) {
+    if (!opened || !opened.open || !window.matchMedia("(max-width: 768px)").matches) return;
+    ["dv2-hindu-calendar-disclosure", "dv2-observance-year-disclosure"].forEach(function (id) {
+      var node = document.getElementById(id);
+      if (node && node !== opened) node.open = false;
+    });
+  }
+
+  function bindAnnualDisclosure(details) {
+    if (!details || details.getAttribute("data-dv2-annual-bound") === "true") return;
+    details.setAttribute("data-dv2-annual-bound", "true");
+    details.addEventListener("toggle", function () {
+      closeOtherAnnualDisclosure(details);
+      syncTimeCompactSummaries(currentTimeLanguage);
+    });
+  }
+
+  function ensureHinduCalendarDisclosure() {
+    var book = document.querySelector('[data-ag74i-varanasi-calendar-book="true"]');
+    if (!book || book.closest("#dv2-hindu-calendar-disclosure")) return;
+
+    var details = document.createElement("details");
+    details.id = "dv2-hindu-calendar-disclosure";
+    details.className = "dv2-annual-disclosure";
+    details.innerHTML =
+      '<summary><span><strong id="dv2-hindu-calendar-summary-title"></strong><small id="dv2-hindu-calendar-year-summary"></small><small id="dv2-hindu-calendar-month-summary"></small></span><b id="dv2-hindu-calendar-toggle-label"></b></summary><div class="dv2-annual-disclosure__body" id="dv2-hindu-calendar-body"></div>';
+    book.insertAdjacentElement("beforebegin", details);
+    document.getElementById("dv2-hindu-calendar-body").appendChild(book);
+    bindAnnualDisclosure(details);
+  }
+
+  function ensureObservanceYearDisclosure() {
+    var panel = document.getElementById("dv2-observance-year");
+    if (!panel) return;
+    var existing = panel.closest("#dv2-observance-year-disclosure");
+    var hindu = document.getElementById("dv2-hindu-calendar-disclosure");
+    if (existing) {
+      if (hindu && hindu.contains(existing)) hindu.insertAdjacentElement("afterend", existing);
+      bindAnnualDisclosure(existing);
+      return;
+    }
+
+    var details = document.createElement("details");
+    details.id = "dv2-observance-year-disclosure";
+    details.className = "dv2-annual-disclosure";
+    details.innerHTML =
+      '<summary><span><strong id="dv2-observance-year-summary-title"></strong><small id="dv2-observance-year-record-summary"></small><small id="dv2-observance-year-month-summary"></small></span><b id="dv2-observance-year-toggle-label"></b></summary><div class="dv2-annual-disclosure__body" id="dv2-observance-year-body"></div>';
+    panel.insertAdjacentElement("beforebegin", details);
+    document.getElementById("dv2-observance-year-body").appendChild(panel);
+    if (hindu && hindu.contains(details)) hindu.insertAdjacentElement("afterend", details);
+    bindAnnualDisclosure(details);
+  }
+
+  function ensureTimeCompactDisclosures() {
+    ensureDateLocationDisclosure();
+    ensurePanchangLocationDisclosure();
+    ensureHinduCalendarDisclosure();
+    ensureObservanceYearDisclosure();
+  }
+
+  function syncTimeCompactSummaries(lang) {
+    ensureDateLocationDisclosure();
+    ensurePanchangLocationDisclosure();
+    var d = languageData(lang);
+    textNode("#dv2-date-location-summary", d.aboutDateLocation);
+    textNode("#dv2-panchang-location-toggle", d.changePlace);
+    syncPanchangCompactLocationSummary(lang);
+
+    var hindu = document.getElementById("dv2-hindu-calendar-disclosure");
+    var year = document.getElementById("ag74i-calendar-year-label");
+    textNode("#dv2-hindu-calendar-summary-title", d.hinduYearCalendar);
+    textNode(
+      "#dv2-hindu-calendar-year-summary",
+      year && year.textContent.trim() ? localizeValue(year.textContent.trim(), lang) : d.bookLoading
+    );
+    textNode(
+      "#dv2-hindu-calendar-month-summary",
+      d.currentLunarMonth + ": " + selectedLunarMonthLabel(lang)
+    );
+
+    var observance = document.getElementById("dv2-observance-year-disclosure");
+    var recordCount = observanceRecords ? observanceRecords.length : 114;
+    textNode("#dv2-observance-year-summary-title", d.observanceYear);
+    textNode(
+      "#dv2-observance-year-record-summary",
+      recordCount + " " + d.governedRecords + " · " + d.varanasiBasis
+    );
+    textNode("#dv2-observance-year-month-summary", selectedObservanceMonthSummary(lang));
+    syncAnnualToggleLabels(lang);
   }
 
   function renderYearOverview(lang) {
@@ -998,6 +1196,142 @@
       return formatDateTime(windowData.start_local, lang) + " – " + formatDateTime(windowData.end_local, lang);
     }
     return formatDateTime(windowData.start_local || windowData.end_local, lang);
+  }
+
+  function rawRuntimeText(node, key) {
+    if (!node) return "";
+    var text = String(node.textContent || "").trim();
+    var stored = node.getAttribute(key) || "";
+    var storedUnavailable = /^(No governed|No source-reviewed|Not available)/i.test(stored);
+    var textUnavailable = /^(No governed|No source-reviewed|Not available)/i.test(text);
+    if (
+      !stored ||
+      (storedUnavailable && !textUnavailable) ||
+      /^\d{4}-\d{2}-\d{2}(?:T|\s)/.test(text) ||
+      textUnavailable ||
+      /Source-reviewed|Astronomical conditions|\brule\s+/i.test(text)
+    ) {
+      node.setAttribute(key, text);
+      return text;
+    }
+    return stored;
+  }
+
+  function formatRuntimeDateTimeText(text, lang) {
+    return String(text || "").replace(/\d{4}-\d{2}-\d{2}(?:T|\s)\d{2}:\d{2}(?::\d{2})?/g, function (match) {
+      return formatDateTime(match, lang);
+    });
+  }
+
+  function compactObservanceDate(begins, ends, lang) {
+    var match = String(begins || ends || "").match(/(\d{4}-\d{2}-\d{2})/);
+    return match ? formatDate(match[1], lang) : getPanchangDateLabel(lang);
+  }
+
+  function compactObservanceWindow(begins, ends, lang) {
+    var d = languageData(lang);
+    var hasBegins = begins && !/^Not available/i.test(begins);
+    var hasEnds = ends && !/^Not available/i.test(ends);
+    if (hasBegins && hasEnds) {
+      return d.begins + " " + formatTimeOnly(begins) + " · " + d.ends + " " + formatTimeOnly(ends);
+    }
+    if (hasBegins) return d.begins + " " + formatTimeOnly(begins);
+    if (hasEnds) return d.ends + " " + formatTimeOnly(ends);
+    return d.unavailable;
+  }
+
+  function sanitizedObservanceBasis(text, lang) {
+    var d = languageData(lang);
+    var cleaned = String(text || "")
+      .replace(/\s*·\s*rule\s+observance_rule_[a-z0-9_:-]+/ig, " · " + d.governedRuleBasis)
+      .replace(/\s*·\s*rule\s+approved\b/ig, " · " + d.governedRuleBasis);
+    return localizeValue(cleaned, lang);
+  }
+
+  function observanceLocationBasis(text, lang) {
+    var parts = String(text || "").split("·").map(function (part) {
+      return part.trim();
+    }).filter(Boolean);
+    var location = parts.find(function (part) {
+      return !/^Source-reviewed/i.test(part) && !/^rule\s+/i.test(part);
+    });
+    return location ? localizeValue(location, lang) : languageData(lang).varanasiBasis;
+  }
+
+  function ensureUpcomingObservanceCompact() {
+    var item = document.querySelector("#festival-list .festival-item");
+    var name = document.getElementById("upcoming-observance-name");
+    if (!item || !name) return;
+    if (!document.getElementById("dv2-upcoming-observance-compact")) {
+      var compact = document.createElement("div");
+      compact.id = "dv2-upcoming-observance-compact";
+      compact.className = "dv2-upcoming-observance-compact";
+      compact.innerHTML =
+        '<strong id="dv2-upcoming-observance-compact-name"></strong>' +
+        '<span id="dv2-upcoming-observance-compact-date"></span>' +
+        '<small id="dv2-upcoming-observance-compact-window"></small>';
+      name.insertAdjacentElement("beforebegin", compact);
+    }
+    var details = document.getElementById("dv2-upcoming-observance-details");
+    if (!details) {
+      details = document.createElement("details");
+      details.id = "dv2-upcoming-observance-details";
+      details.className = "dv2-upcoming-observance-details";
+      details.innerHTML =
+        '<summary id="dv2-upcoming-observance-details-label"></summary>' +
+        '<div class="dv2-upcoming-observance-detail-body" id="dv2-upcoming-observance-detail-body"></div>';
+      item.appendChild(details);
+      details.addEventListener("toggle", function () {
+        syncUpcomingObservanceCompact(currentTimeLanguage);
+      });
+    }
+    var body = document.getElementById("dv2-upcoming-observance-detail-body");
+    var note = document.getElementById("upcoming-observance-note");
+    var windowList = item.querySelector(".ag74i-observance-window");
+    if (note && body && !body.contains(note)) body.appendChild(note);
+    if (windowList && body && !body.contains(windowList)) body.appendChild(windowList);
+    if (!document.getElementById("dv2-upcoming-observance-basis")) {
+      var basis = document.createElement("dl");
+      basis.id = "dv2-upcoming-observance-basis";
+      basis.className = "dv2-upcoming-observance-basis";
+      basis.innerHTML =
+        '<div><dt id="dv2-upcoming-observance-location-label"></dt><dd id="dv2-upcoming-observance-location-value"></dd></div>' +
+        '<div><dt id="dv2-upcoming-observance-rule-label"></dt><dd id="dv2-upcoming-observance-rule-value"></dd></div>';
+      body.appendChild(basis);
+    }
+    item.setAttribute("data-dv2-upcoming-compact", "true");
+  }
+
+  function syncUpcomingObservanceCompact(lang) {
+    ensureUpcomingObservanceCompact();
+    var name = document.getElementById("upcoming-observance-name");
+    var note = document.getElementById("upcoming-observance-note");
+    var beginsNode = document.getElementById("upcoming-observance-begins");
+    var endsNode = document.getElementById("upcoming-observance-ends");
+    var ritualNode = document.getElementById("upcoming-observance-ritual-window");
+    if (!name) return;
+    var d = languageData(lang);
+    var begins = rawRuntimeText(beginsNode, "data-dv2-upcoming-raw");
+    var ends = rawRuntimeText(endsNode, "data-dv2-upcoming-raw");
+    var noteRaw = rawRuntimeText(note, "data-dv2-upcoming-note-raw");
+    var ritualRaw = rawRuntimeText(ritualNode, "data-dv2-upcoming-ritual-raw");
+    textNode("#dv2-upcoming-observance-compact-name", localizeValue(name.textContent, lang));
+    textNode("#dv2-upcoming-observance-compact-date", compactObservanceDate(begins, ends, lang));
+    textNode("#dv2-upcoming-observance-compact-window", compactObservanceWindow(begins, ends, lang));
+    textNode(
+      "#dv2-upcoming-observance-details-label",
+      document.getElementById("dv2-upcoming-observance-details")?.open ? d.hideDetails : d.viewDetails
+    );
+    if (beginsNode) beginsNode.textContent = /^Not available/i.test(begins) ? d.unavailable : formatDateTime(begins, lang);
+    if (endsNode) endsNode.textContent = /^Not available/i.test(ends) ? d.unavailable : formatDateTime(ends, lang);
+    if (ritualNode) ritualNode.textContent = /^Not available/i.test(ritualRaw)
+      ? d.unavailable
+      : formatRuntimeDateTimeText(ritualRaw, lang);
+    if (note) note.textContent = sanitizedObservanceBasis(noteRaw, lang);
+    textNode("#dv2-upcoming-observance-location-label", d.locationBasis);
+    textNode("#dv2-upcoming-observance-location-value", observanceLocationBasis(noteRaw, lang));
+    textNode("#dv2-upcoming-observance-rule-label", d.ruleSourceBasis);
+    textNode("#dv2-upcoming-observance-rule-value", d.governedRuleBasis);
   }
 
   function observanceFamily(record, lang) {
@@ -1319,6 +1653,7 @@
     if (!observanceRecords) {
       if (status) status.textContent = d.loadingObservances;
       months.innerHTML = '<p class="dv2-section-note">' + escapeHtml(d.loadingObservances) + "</p>";
+      syncTimeCompactSummaries(lang);
       return;
     }
     var visible = filteredObservanceRecords();
@@ -1340,6 +1675,7 @@
     months.innerHTML = observanceViewMode === "list"
       ? renderObservanceFullList(visible, lang)
       : renderObservanceCalendar(visible, byMonth, lang);
+    syncTimeCompactSummaries(lang);
   }
 
   function addObservanceYear() {
@@ -1401,10 +1737,14 @@
       selectedObservanceRecordId = "";
       renderObservanceYear(currentTimeLanguage);
     });
+    ensureObservanceYearDisclosure();
     renderObservanceYear(currentTimeLanguage);
     fetchJson(OBSERVANCE_PROJECTION_PATH).then(function (projection) {
       observanceRecords = approvedObservanceRecords(projection);
       renderObservanceYear(currentTimeLanguage);
+      window.requestAnimationFrame(function () {
+        syncTimeCompactSummaries(currentTimeLanguage);
+      });
     });
   }
 
@@ -1460,6 +1800,8 @@
         button.removeAttribute("aria-current");
       }
     });
+    ensureHinduCalendarDisclosure();
+    syncTimeCompactSummaries(currentTimeLanguage);
   }
 
   var LANGUAGE = {
@@ -1477,9 +1819,12 @@
       datePicker: "Date picker",
       chooseDate: "Choose a date",
       selectedCivilDate: "Selected civil date",
+      aboutDateLocation: "About date & location",
       selectLocation: "Search city or place",
       selectLocationMode: "Select Location",
       choosePanchangLocation: "Choose Panchang Location",
+      selectedLocation: "Selected location",
+      changePlace: "Change Place",
       approvedPlaceAlias: "Approved place or alias",
       placeAliasPlaceholder: "e.g. Kashi or Tokyo",
       coordinates: "Enter Coordinates",
@@ -1522,10 +1867,14 @@
       ritualWindow: "Ritual Window",
       annualObservanceBook: "Annual observance book",
       annualCalendar: "Annual Hindu Festival Calendar",
+      hinduYearCalendar: "Hindu Year Calendar",
       yearAtGlance: "Hindu Year Overview",
       yearOverviewNote: "Lunar-month overview from the governed Varanasi annual book.",
       bookLoading: "Loading the governed Varanasi annual book…",
       bookStructureLoading: "Loading annual-book structure…",
+      currentLunarMonth: "Current lunar month",
+      openHinduCalendar: "Open Hindu Calendar",
+      closeHinduCalendar: "Close Hindu Calendar",
       observanceYear: "Festival & Observance Year",
       observanceDescription: "Recurring Hindu lunar/tithi observances from the governed public projection. This is not an all-festival, all-faith or national-holiday calendar.",
       observanceView: "Festival and observance year view",
@@ -1550,6 +1899,11 @@
       previousMonth: "Previous month",
       nextMonth: "Next month",
       closeDetails: "Close details",
+      viewDetails: "View details",
+      hideDetails: "Hide details",
+      governedRuleBasis: "governed rule basis",
+      openFestivalCalendar: "Open Festival Calendar",
+      closeFestivalCalendar: "Close Festival Calendar",
       previousPage: "Previous Page",
       nextPage: "Next Page",
       reflectKicker: "Reflect",
@@ -1602,9 +1956,12 @@
       datePicker: "दिनांक चयन",
       chooseDate: "दिनांक चुनें",
       selectedCivilDate: "चयनित सिविल दिनांक",
+      aboutDateLocation: "दिनांक और स्थान के बारे में",
       selectLocation: "शहर या स्थान खोजें",
       selectLocationMode: "स्थान चुनें",
       choosePanchangLocation: "पंचांग स्थान चुनें",
+      selectedLocation: "चयनित स्थान",
+      changePlace: "स्थान बदलें",
       approvedPlaceAlias: "स्वीकृत स्थान या उपनाम",
       placeAliasPlaceholder: "जैसे काशी या टोक्यो",
       coordinates: "निर्देशांक दर्ज करें",
@@ -1647,10 +2004,14 @@
       ritualWindow: "अनुष्ठान समय",
       annualObservanceBook: "वार्षिक पर्व पुस्तक",
       annualCalendar: "वार्षिक हिंदू पर्व कैलेंडर",
+      hinduYearCalendar: "हिंदू वर्ष कैलेंडर",
       yearAtGlance: "हिन्दू वर्ष अवलोकन",
       yearOverviewNote: "स्वीकृत वाराणसी वार्षिक पुस्तक से चंद्र-मास अवलोकन।",
       bookLoading: "स्वीकृत वाराणसी वार्षिक पुस्तक लोड हो रही है…",
       bookStructureLoading: "वार्षिक पुस्तक संरचना लोड हो रही है…",
+      currentLunarMonth: "वर्तमान चंद्र मास",
+      openHinduCalendar: "हिंदू कैलेंडर खोलें",
+      closeHinduCalendar: "हिंदू कैलेंडर बंद करें",
       observanceYear: "व्रत एवं पर्व वार्षिक पंचांग",
       observanceDescription: "स्वीकृत सार्वजनिक प्रक्षेपण से आवर्ती हिंदू चंद्र/तिथि पर्व। यह सभी त्योहारों, सभी आस्थाओं या राष्ट्रीय अवकाशों का कैलेंडर नहीं है।",
       observanceView: "व्रत एवं पर्व वार्षिक दृश्य",
@@ -1675,6 +2036,11 @@
       previousMonth: "पिछला माह",
       nextMonth: "अगला माह",
       closeDetails: "विवरण बंद करें",
+      viewDetails: "विवरण देखें",
+      hideDetails: "विवरण छिपाएँ",
+      governedRuleBasis: "शासित नियम आधार",
+      openFestivalCalendar: "पर्व कैलेंडर खोलें",
+      closeFestivalCalendar: "पर्व कैलेंडर बंद करें",
       previousPage: "पिछला पृष्ठ",
       nextPage: "अगला पृष्ठ",
       reflectKicker: "चिंतन",
@@ -2075,6 +2441,8 @@
     syncPanchangReaderPanel(currentTimeLanguage);
     renderYearOverview(currentTimeLanguage);
     renderObservanceYear(currentTimeLanguage);
+    syncTimeCompactSummaries(currentTimeLanguage);
+    syncUpcomingObservanceCompact(currentTimeLanguage);
     localizePanchangPlaces(currentTimeLanguage);
     localizePanchangHf12Places(currentTimeLanguage);
   }
@@ -2266,7 +2634,9 @@
       });
       detailsPanel.appendChild(rows);
     }
+    ensureTimeCompactDisclosures();
     syncPanchangReaderPanel(currentTimeLanguage);
+    syncTimeCompactSummaries(currentTimeLanguage);
     var starHeading = document.querySelector('[data-drishvara-v2-reflect-card="true"] h2');
     if (starHeading) starHeading.textContent = "Your Star Reflection";
     document.querySelectorAll('#dv2-reflect-host h3').forEach(function (heading) {
@@ -2444,8 +2814,10 @@
         if (button) {
           var selectedLanguage = button.getAttribute("data-dv2-language-choice");
           applyTimeLanguage(selectedLanguage);
+          syncTimeCompactSummaries(selectedLanguage);
           window.setTimeout(function () {
             applyTimeLanguage(selectedLanguage);
+            syncTimeCompactSummaries(selectedLanguage);
             syncTimeContextFromRuntime();
           }, 4200);
         }
@@ -2540,6 +2912,17 @@
     applyTimeLanguage(currentTimeLanguage);
   }
 
+  function syncTimePresentationFromRuntime() {
+    syncTimeContextFromRuntime();
+    syncTimeCompactSummaries(currentTimeLanguage);
+    syncUpcomingObservanceCompact(currentTimeLanguage);
+  }
+
+  function resetObservanceMonthForDateChange() {
+    selectedObservanceMonth = "";
+    selectedObservanceRecordId = "";
+  }
+
   function bindRuntimeContextRefresh() {
     document.addEventListener("pointerdown", function (event) {
       if (event.target.closest("[data-ag75d-e2-star-place-value]")) {
@@ -2579,8 +2962,18 @@
           event.target.closest("#ag74i-book-previous") ||
           event.target.closest("#ag74i-book-next")
         );
+        if (
+          event.target.closest("#panchang-calculate") ||
+          event.target.closest("#panchang-previous-day") ||
+          event.target.closest("#panchang-next-day") ||
+          event.target.closest("#panchang-today")
+        ) {
+          resetObservanceMonthForDateChange();
+        }
         window.requestAnimationFrame(syncTimeContextFromRuntime);
         window.setTimeout(syncTimeContextFromRuntime, 1100);
+        if (!bookNavigation) window.setTimeout(syncTimePresentationFromRuntime, 2600);
+        if (!bookNavigation) window.setTimeout(syncTimePresentationFromRuntime, 4800);
         if (bookNavigation) window.setTimeout(syncTimeContextFromRuntime, 4200);
         if (bookNavigation) {
           window.setTimeout(function () {
@@ -2606,7 +2999,18 @@
     });
     document.addEventListener("change", function (event) {
       if (event.target && /^panchang-/.test(event.target.id || "")) {
+        if (/^panchang-date/.test(event.target.id || "")) resetObservanceMonthForDateChange();
         window.requestAnimationFrame(syncTimeContextFromRuntime);
+        window.requestAnimationFrame(function () {
+          syncTimeCompactSummaries(currentTimeLanguage);
+        });
+      }
+    });
+    document.addEventListener("input", function (event) {
+      if (event.target && event.target.id === "panchang-place-alias") {
+        window.requestAnimationFrame(function () {
+          syncPanchangCompactLocationSummary(currentTimeLanguage);
+        });
       }
     });
   }
@@ -2618,6 +3022,7 @@
     quarantineLegacyShell();
     refineRuntimePresentation();
     restoreTimeRuntimeControls();
+    ensureTimeCompactDisclosures();
     enhanceGovernedLocationSearch();
     bindSectionLanguages();
     addYearAtGlance();
@@ -2632,6 +3037,10 @@
       applyReflectLanguage(currentReflectLanguage);
       syncTimeContextFromRuntime();
     }, 1300);
+    window.setTimeout(function () {
+      ensureTimeCompactDisclosures();
+      syncTimeCompactSummaries(currentTimeLanguage);
+    }, 2800);
 
     Promise.all([
       fetchJson("data/homepage-ui.json"),
