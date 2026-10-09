@@ -1,0 +1,654 @@
+{
+  "title": "Named Hindu Festival Rule Conflict Register R1",
+  "status": "research_issue_register_only_not_production_approved",
+  "runtime_activation": false,
+  "runtime_event_projection": false,
+  "public_output_allowed": false,
+  "issue_record_count": 18,
+  "source_inputs_read_only": [
+    "data/knowledge-base/panchang-festival/production/named-hindu-festival-source-rule-evidence-r1.json",
+    "data/knowledge-base/panchang-festival/production/named-hindu-festival-rule-source-research-matrix.json",
+    "data/knowledge-base/panchang-festival/production/ag74q-r1-observance-expansion-schema-proposal.json"
+  ],
+  "governance_invariants": {
+    "no_source_evidence_created": true,
+    "no_traditional_quotations_created": true,
+    "no_calculation_rules_approved": true,
+    "no_issue_resolution_approved": true,
+    "no_generated_dates": true,
+    "no_generated_timings": true,
+    "no_runtime_activation": true,
+    "no_public_output_activation": true,
+    "original_28_target_matrix_unchanged": true,
+    "source_rule_evidence_package_unchanged": true
+  },
+  "classification_legend": {
+    "identity_ambiguity": "A proposed event identity, alias, family label or child-event boundary needs governance before projection.",
+    "sequence_model": "A parent/child or multi-day sequence needs source-backed structure before projection.",
+    "date_rule_gap": "The event has missing or unresolved date-rule evidence.",
+    "timing_rule_gap": "The event has missing or unresolved public-window or ritual-window evidence.",
+    "regional_variant": "Regional calendar or public naming variants need review.",
+    "tradition_variant": "Sampradaya or tradition-specific variants need review.",
+    "missing_evidence": "No sufficient source/rule evidence exists in the current package.",
+    "documented_disagreement": "A genuine disagreement is documented by supplied evidence; none are approved in this register."
+  },
+  "issue_records": [
+    {
+      "issue_id": "HRC-01",
+      "issue_statement": "Reconcile the retained combined Diwali / Lakshmi Puja identity with the separately proposed Lakshmi Puja canonical record without treating Lakshmi Puja as a Diwali alias.",
+      "classification": [
+        "identity_ambiguity",
+        "sequence_model",
+        "timing_rule_gap"
+      ],
+      "research_priority": "critical",
+      "affected_event_refs": [
+        "diwali_lakshmi_puja",
+        "lakshmi_puja"
+      ],
+      "conflict_kind": "identity_ambiguity",
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "diwali_lakshmi_puja identity_split_note; lakshmi_puja independent identity",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "diwali_lakshmi_puja public identity",
+        "lakshmi_puja public identity",
+        "Lakshmi Puja ritual-window projection"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-02",
+      "issue_statement": "Determine whether Diwali should be represented as a parent sequence, a public family label, an event child, or a combination of these without merging child observances.",
+      "classification": [
+        "sequence_model",
+        "identity_ambiguity"
+      ],
+      "research_priority": "critical",
+      "affected_event_refs": [
+        "dhanteras",
+        "naraka_chaturdashi_choti_diwali",
+        "diwali_lakshmi_puja",
+        "lakshmi_puja",
+        "govardhan_puja",
+        "bhai_dooj"
+      ],
+      "conflict_kind": "identity_ambiguity",
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Diwali family sequence relationship research",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Diwali sequence parent projection",
+        "Diwali child-event ordering",
+        "Diwali family public filters"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-03",
+      "issue_statement": "Resolve Diwali regional calendar variants before any date rule, child ordering or public presentation is promoted.",
+      "classification": [
+        "regional_variant",
+        "date_rule_gap",
+        "sequence_model"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "dhanteras",
+        "naraka_chaturdashi_choti_diwali",
+        "diwali_lakshmi_puja",
+        "lakshmi_puja",
+        "govardhan_puja",
+        "bhai_dooj"
+      ],
+      "conflict_kind": "regional_variant",
+      "source_evidence": [
+        {
+          "purpose": "date_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "diwali_lakshmi_puja M03 regional_calendar_variant rule family",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Diwali regional date-rule projection"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-04",
+      "issue_statement": "Separate Lakshmi Puja ritual-window governance from Diwali public-window governance so ritual timing is not inferred from the Diwali family label.",
+      "classification": [
+        "timing_rule_gap",
+        "identity_ambiguity"
+      ],
+      "research_priority": "critical",
+      "affected_event_refs": [
+        "diwali_lakshmi_puja",
+        "lakshmi_puja"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "ritual_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Lakshmi Puja ritual-window requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Lakshmi Puja Begins/Ends",
+        "Lakshmi Puja ritual windows"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-05",
+      "issue_statement": "Resolve Holika Dahan and Holi as separate but related public identities, including whether Holika Dahan pradosh/sunset timing affects only the ritual window.",
+      "classification": [
+        "identity_ambiguity",
+        "timing_rule_gap",
+        "sequence_model"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "holika_dahan",
+        "holi"
+      ],
+      "conflict_kind": "identity_ambiguity",
+      "source_evidence": [
+        {
+          "purpose": "timing_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "holika_dahan sunset_pradosh_overlap draft M03 rule family",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Holika Dahan public window",
+        "Holi/Holika relationship"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-06",
+      "issue_statement": "Govern Chaitra Navratri as a parent sequence and Ram Navami as a possible child or standalone event without prematurely approving either relationship.",
+      "classification": [
+        "sequence_model",
+        "identity_ambiguity"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "chaitra_navratri",
+        "rama_navami"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Chaitra Navratri parent sequence and Rama Navami child research requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Chaitra Navratri sequence projection",
+        "Ram Navami parent/child relationship"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-07",
+      "issue_statement": "Govern Sharad Navratri parent sequence boundaries and child-event treatment for Durga Ashtami, Maha Navami and Vijayadashami / Dussehra.",
+      "classification": [
+        "sequence_model",
+        "regional_variant"
+      ],
+      "research_priority": "critical",
+      "affected_event_refs": [
+        "sharad_navratri",
+        "durga_ashtami",
+        "maha_navami",
+        "vijayadashami_dussehra"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Sharad Navratri sequence research requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Sharad Navratri parent projection",
+        "Durga Ashtami child status",
+        "Maha Navami child status",
+        "Vijayadashami sequence conclusion status"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-08",
+      "issue_statement": "Resolve Pitru Paksha parent-span governance separately from the partial Mahalaya Amavasya child evidence.",
+      "classification": [
+        "sequence_model",
+        "identity_ambiguity",
+        "date_rule_gap"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "pitru_paksha_mahalaya"
+      ],
+      "conflict_kind": "identity_ambiguity",
+      "source_evidence": [
+        {
+          "purpose": "date_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "mahalaya_amavasya draft M03 evidence and Pitru Paksha parent sequence requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Pitru Paksha parent span",
+        "Mahalaya child treatment"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-09",
+      "issue_statement": "Define Chhath Puja parent sequence and stage-specific child observances without approving any sunrise/sunset ritual windows.",
+      "classification": [
+        "sequence_model",
+        "timing_rule_gap",
+        "regional_variant"
+      ],
+      "research_priority": "critical",
+      "affected_event_refs": [
+        "chhath_puja"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "ritual_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Chhath Puja stage-specific sunrise/sunset ritual-window research requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Chhath parent sequence",
+        "Chhath child stages",
+        "Chhath ritual windows"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-10",
+      "issue_statement": "Resolve Ganesh Chaturthi naming, public identity and possible sequence membership before public use.",
+      "classification": [
+        "identity_ambiguity",
+        "date_rule_gap",
+        "timing_rule_gap"
+      ],
+      "research_priority": "medium",
+      "affected_event_refs": [
+        "ganesha_chaturthi"
+      ],
+      "conflict_kind": "identity_ambiguity",
+      "source_evidence": [
+        {
+          "purpose": "canonical_name",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Ganesh Chaturthi canonical naming review requirement",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Ganesh Chaturthi canonical naming",
+        "Ganesh Chaturthi ritual window"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-11",
+      "issue_statement": "Resolve Krishna Janmashtami sampradaya/date/timing variants before selecting any public date or ritual window.",
+      "classification": [
+        "tradition_variant",
+        "date_rule_gap",
+        "timing_rule_gap"
+      ],
+      "research_priority": "critical",
+      "affected_event_refs": [
+        "krishna_janmashtami"
+      ],
+      "conflict_kind": "tradition_variant",
+      "source_evidence": [
+        {
+          "purpose": "timing_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Krishna Janmashtami sampradaya variant and ritual timing requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Krishna Janmashtami date rule",
+        "Krishna Janmashtami ritual window",
+        "Krishna Janmashtami sampradaya variant handling"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-12",
+      "issue_statement": "Resolve Karwa Chauth moonrise-based timing and possible conclusion semantics without fabricating Parana or conclusion windows.",
+      "classification": [
+        "timing_rule_gap",
+        "regional_variant"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "karwa_chauth"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "timing_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "karwa_chauth moonrise_overlap draft M03 rule family",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Karwa Chauth public window",
+        "Karwa Chauth ritual window",
+        "Karwa Chauth conclusion semantics"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-13",
+      "issue_statement": "Resolve Maha Shivaratri night-observance timing before exposing any ritual or public window.",
+      "classification": [
+        "timing_rule_gap",
+        "date_rule_gap"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "maha_shivaratri"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "timing_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Maha Shivaratri ritual timing requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Maha Shivaratri public window",
+        "Maha Shivaratri ritual window"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-14",
+      "issue_statement": "Resolve Makar Sankranti solar-transition rule and regional variant handling before public projection.",
+      "classification": [
+        "date_rule_gap",
+        "regional_variant"
+      ],
+      "research_priority": "high",
+      "affected_event_refs": [
+        "makara_sankranti"
+      ],
+      "conflict_kind": "regional_variant",
+      "source_evidence": [
+        {
+          "purpose": "date_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "makara_sankranti solar_transition_sankranti draft M03 rule family",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Makar Sankranti date rule",
+        "Makar Sankranti regional variant handling"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-15",
+      "issue_statement": "Resolve Hariyali Teej and Hartalika Teej as separate Teej identities with independently sourced date rules and regional scope.",
+      "classification": [
+        "identity_ambiguity",
+        "regional_variant",
+        "date_rule_gap"
+      ],
+      "research_priority": "medium",
+      "affected_event_refs": [
+        "hariyali_teej",
+        "hartalika_teej"
+      ],
+      "conflict_kind": "identity_ambiguity",
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Teej identity and regional variant research requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Hariyali Teej identity",
+        "Hartalika Teej identity",
+        "Teej regional variants"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-16",
+      "issue_statement": "Resolve Hanuman Jayanti regional date-rule ambiguity before modeling a canonical public observance.",
+      "classification": [
+        "regional_variant",
+        "date_rule_gap",
+        "missing_evidence"
+      ],
+      "research_priority": "medium",
+      "affected_event_refs": [
+        "hanuman_jayanti"
+      ],
+      "conflict_kind": "regional_variant",
+      "source_evidence": [
+        {
+          "purpose": "date_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Hanuman Jayanti regional rule variant requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Hanuman Jayanti canonical date rule",
+        "Hanuman Jayanti regional variant handling"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-17",
+      "issue_statement": "Resolve source and rule gaps for standalone lunar annual targets before treating their draft classifications as production facts.",
+      "classification": [
+        "date_rule_gap",
+        "missing_evidence"
+      ],
+      "research_priority": "medium",
+      "affected_event_refs": [
+        "vasant_panchami",
+        "akshaya_tritiya",
+        "guru_purnima",
+        "raksha_bandhan"
+      ],
+      "conflict_kind": "missing_evidence",
+      "source_evidence": [
+        {
+          "purpose": "date_rule",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "standalone lunar annual targets source-rule gaps",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Vasant Panchami rule",
+        "Akshaya Tritiya rule",
+        "Guru Purnima rule",
+        "Raksha Bandhan rule"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    },
+    {
+      "issue_id": "HRC-18",
+      "issue_statement": "Resolve Dev Deepawali as a regional observance with its own identity, source rule and public scope before projection.",
+      "classification": [
+        "regional_variant",
+        "identity_ambiguity",
+        "date_rule_gap"
+      ],
+      "research_priority": "medium",
+      "affected_event_refs": [
+        "dev_deepawali"
+      ],
+      "conflict_kind": "regional_variant",
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": "Named Hindu Festival Source and Rule Evidence Package R1",
+          "source_type": "internal_research_package",
+          "source_reference": "Dev Deepawali regional observance research requirements",
+          "source_url_or_identifier": null,
+          "source_validity": "research issue identification only",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": "governance audit pending",
+          "review_date": null
+        }
+      ],
+      "production_blocking_scope": [
+        "Dev Deepawali identity",
+        "Dev Deepawali date rule",
+        "Dev Deepawali regional scope"
+      ],
+      "resolution_status": "pending",
+      "approved_resolution": null
+    }
+  ]
+}
