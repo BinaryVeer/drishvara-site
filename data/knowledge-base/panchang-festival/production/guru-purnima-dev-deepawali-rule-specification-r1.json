@@ -1,0 +1,390 @@
+{
+  "title": "Guru Purnima and Dev Deepawali Rule Specification R1",
+  "status": "research_rule_specification_only_not_production_approved",
+  "runtime_activation": false,
+  "runtime_event_projection": false,
+  "public_output_allowed": false,
+  "record_count": 2,
+  "source_inputs_read_only": [
+    "data/knowledge-base/panchang-festival/production/named-hindu-festival-source-rule-evidence-r1.json",
+    "data/knowledge-base/panchang-festival/production/named-hindu-festival-rule-source-research-matrix.json",
+    "data/knowledge-base/panchang-festival/production/ag74q-r1-observance-expansion-schema-proposal.json",
+    "data/methodology/m03-festival-rule-registry.json"
+  ],
+  "ag74q_r1_compatibility": {
+    "uses_source_evidence_review_status_as_canonical": true,
+    "source_approval_status_is_not_independent_authority": true,
+    "separates_astronomical_condition_window": true,
+    "separates_observance_window": true,
+    "separates_primary_public_window": true,
+    "separates_ritual_windows": true,
+    "no_generated_dates": true,
+    "no_generated_timings": true,
+    "no_executable_rule_approved": true
+  },
+  "evidence_classification_legend": {
+    "existing_m03_draft_evidence": "Traceable M03 methodology-only draft record; not production evidence.",
+    "published_secondary_methodology_candidate": "Candidate rule direction requiring independent source verification before approval.",
+    "research_inference": "Planning inference requiring source and rule review before use.",
+    "approved_production_evidence": "Not present in this specification."
+  },
+  "festival_rule_specifications": [
+    {
+      "sequence": 1,
+      "identity": {
+        "event_id": "guru_purnima",
+        "canonical_name": "Guru Purnima",
+        "localized_names": {
+          "en": "Guru Purnima",
+          "hi": null,
+          "other_approved_locales": {}
+        },
+        "tradition": "hindu",
+        "event_class": "religious_observance",
+        "category": "annual_festival",
+        "sub_category": "guru_vyasa_observance",
+        "family": "annual_observance",
+        "identity_status": "existing_29_target_identity_preserved"
+      },
+      "existing_research_references": {
+        "source_rule_evidence_r1": {
+          "record_id": "guru_purnima",
+          "inventory_status": "partial",
+          "sequence": 10
+        },
+        "research_matrix_r1": {
+          "record_id": "guru_purnima",
+          "inventory_status": "partial",
+          "sequence": 10
+        },
+        "m03_reference": {
+          "status": "partial",
+          "observance_id": "guru_purnima",
+          "source_reference": "sample_registry_entries_not_activated.guru_purnima",
+          "rule_family_refs": [
+            "lunar_month_tithi"
+          ],
+          "m03_draft_fields": {
+            "tithi_target": "Purnima",
+            "paksha_target": "Shukla",
+            "lunar_month_target": "PENDING_SOURCE_REVIEW",
+            "event_window_basis": "PENDING_RULE_REVIEW",
+            "source_reference": "PENDING_SOURCE_REVIEW",
+            "calculation_review_status": false,
+            "observance_rule_review_status": false,
+            "public_activation_status": false,
+            "activation_status": "draft"
+          }
+        }
+      },
+      "candidate_rule_specification": {
+        "candidate_calendar_basis": {
+          "traditional_calendar_system": "hindu_lunar",
+          "date_basis_type": "hindu_lunar",
+          "lunar_month": "Ashadha",
+          "paksha": "Shukla",
+          "tithi": "Purnima",
+          "evidence_classification": "published_secondary_methodology_candidate",
+          "approval_status": "rule_review_pending",
+          "executable_date_selection_rule_approved": false
+        },
+        "candidate_selection_family": {
+          "value": "sunrise_daytime",
+          "timing_mode": "sunrise_based",
+          "evidence_classification": "research_inference",
+          "approval_status": "rule_review_pending",
+          "executable_timing_rule_approved": false
+        },
+        "non_executable_rule_outline": [
+          "Research candidate: identify the civil day associated with Ashadha Shukla Purnima under a governed lunar calendar basis.",
+          "Research candidate: evaluate whether sunrise/daytime Purnima presence governs the public date.",
+          "Do not execute this outline until source, precedence and exceptional-condition rules are approved."
+        ]
+      },
+      "source_evidence": [
+        {
+          "purpose": "date_rule",
+          "source_body": "M03 Festival Rule Registry",
+          "source_type": "internal_methodology_inventory",
+          "source_reference": "sample_registry_entries_not_activated.guru_purnima",
+          "source_url_or_identifier": null,
+          "source_validity": "draft methodology evidence only",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": "M03 source/calculation/rule reviews false",
+          "review_date": null
+        },
+        {
+          "purpose": "event_definition",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "source verification pending",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        },
+        {
+          "purpose": "timing_rule",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "sunrise/daytime precedence source required",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        },
+        {
+          "purpose": "ritual_rule",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "Guru/Vyasa Puja ritual-source verification pending",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        }
+      ],
+      "timing_governance": {
+        "astronomical_condition_window": {
+          "status": "withheld_pending_rule_review",
+          "candidate_basis": "Ashadha Shukla Purnima condition window",
+          "public_begins_ends_source": false,
+          "generated_timing_values": false
+        },
+        "observance_window": {
+          "status": "withheld_pending_rule_review",
+          "candidate_basis": "civil day selected by governed Ashadha Purnima rule",
+          "generated_timing_values": false
+        },
+        "primary_public_window": {
+          "status": "withheld_pending_rule_review",
+          "reader_visible_begins_ends_approved": false,
+          "requirement": "must be independently governed before public Begins/Ends display",
+          "generated_timing_values": false
+        },
+        "ritual_windows": [
+          {
+            "ritual_id": "guru_vyasa_puja",
+            "label": "Guru / Vyasa Puja",
+            "status": "withheld_pending_source_review",
+            "relationship_to_public_window": "separately_governed_ritual_consideration",
+            "may_not_override_primary_public_window": true,
+            "generated_timing_values": false
+          }
+        ],
+        "parana_or_conclusion": {
+          "type": null,
+          "label": null,
+          "applicability": "rule_dependent",
+          "status": "withheld_pending_rule_review",
+          "window": null
+        }
+      },
+      "exceptional_case_research": {
+        "sunrise_precedence": "unresolved",
+        "exceptional_purnima_conditions": [
+          "Purnima spans more than one sunrise",
+          "Purnima is absent at local sunrise but present during daytime",
+          "Purnima starts or ends close to sunrise/daytime boundary",
+          "local-calendar convention differs by regional tradition"
+        ],
+        "regional_or_tradition_variants": [
+          "M03 regional_variants pending review",
+          "M03 sampradaya_variants pending review"
+        ]
+      },
+      "governance": {
+        "certainty": "research_only",
+        "status": "not_ready",
+        "source_review_status": "source_review_pending",
+        "rule_review_status": "rule_review_pending",
+        "production_readiness": "not_ready",
+        "runtime_activation": false,
+        "public_output_allowed": false,
+        "notes": "Guru Purnima candidate basis is specified for governance review only and must not be used as an executable date-selection algorithm."
+      }
+    },
+    {
+      "sequence": 2,
+      "identity": {
+        "event_id": "dev_deepawali",
+        "canonical_name": "Dev Deepawali",
+        "localized_names": {
+          "en": "Dev Deepawali",
+          "hi": null,
+          "other_approved_locales": {}
+        },
+        "tradition": "hindu",
+        "event_class": "religious_observance",
+        "category": "regional_observance",
+        "sub_category": "varanasi_deepdan_observance",
+        "family": "kartika_purnima_observance",
+        "identity_status": "existing_29_target_identity_preserved"
+      },
+      "existing_research_references": {
+        "source_rule_evidence_r1": {
+          "record_id": "dev_deepawali",
+          "inventory_status": "absent",
+          "sequence": 28
+        },
+        "research_matrix_r1": {
+          "record_id": "dev_deepawali",
+          "inventory_status": "absent",
+          "sequence": 28
+        },
+        "m03_reference": {
+          "status": "absent",
+          "observance_id": null,
+          "source_reference": null,
+          "rule_family_refs": []
+        }
+      },
+      "candidate_rule_specification": {
+        "candidate_calendar_basis": {
+          "traditional_calendar_system": "hindu_lunar",
+          "date_basis_type": "hindu_lunar",
+          "lunar_month": "Kartika",
+          "paksha": "Shukla",
+          "tithi": "Purnima",
+          "evidence_classification": "published_secondary_methodology_candidate",
+          "approval_status": "rule_review_pending",
+          "executable_date_selection_rule_approved": false
+        },
+        "candidate_selection_family": {
+          "value": "pradosha_evening_overlap",
+          "timing_mode": "timed_window",
+          "evidence_classification": "research_inference",
+          "approval_status": "rule_review_pending",
+          "executable_timing_rule_approved": false
+        },
+        "non_executable_rule_outline": [
+          "Research candidate: identify the Kartika Shukla Purnima condition under a governed lunar calendar basis.",
+          "Research candidate: evaluate whether Pradosha/evening overlap governs the public date for Dev Deepawali.",
+          "Do not execute this outline until source, local ceremonial-date and exceptional-condition rules are approved."
+        ]
+      },
+      "source_evidence": [
+        {
+          "purpose": "event_definition",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "canonical Dev Deepawali event source required",
+          "review_status": "source_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        },
+        {
+          "purpose": "date_rule",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "Kartika Purnima date-rule source required",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        },
+        {
+          "purpose": "timing_rule",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "Pradosha/evening overlap rule source required",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        },
+        {
+          "purpose": "ritual_rule",
+          "source_body": null,
+          "source_type": "published_secondary_methodology_candidate",
+          "source_reference": null,
+          "source_url_or_identifier": null,
+          "source_validity": "Varanasi Deepdan ritual-source verification pending",
+          "review_status": "rule_review_pending",
+          "reviewed_by_or_process": null,
+          "review_date": null
+        }
+      ],
+      "timing_governance": {
+        "astronomical_condition_window": {
+          "status": "withheld_pending_rule_review",
+          "candidate_basis": "Kartika Shukla Purnima condition window",
+          "public_begins_ends_source": false,
+          "generated_timing_values": false
+        },
+        "observance_window": {
+          "status": "withheld_pending_rule_review",
+          "candidate_basis": "civil day selected by governed Kartika Purnima and Pradosha/evening overlap rule",
+          "generated_timing_values": false
+        },
+        "primary_public_window": {
+          "status": "withheld_pending_rule_review",
+          "reader_visible_begins_ends_approved": false,
+          "requirement": "public festival timing must be governed separately from any Deepdan Muhurta",
+          "generated_timing_values": false
+        },
+        "ritual_windows": [
+          {
+            "ritual_id": "varanasi_deepdan",
+            "label": "Varanasi Deepdan",
+            "status": "withheld_pending_source_review",
+            "relationship_to_public_window": "separately_governed_ritual_consideration",
+            "may_not_override_primary_public_window": true,
+            "generated_timing_values": false
+          }
+        ],
+        "parana_or_conclusion": {
+          "type": null,
+          "label": null,
+          "applicability": "rule_dependent",
+          "status": "withheld_pending_rule_review",
+          "window": null
+        }
+      },
+      "exceptional_case_research": {
+        "both_evening_overlap": "unresolved",
+        "neither_evening_overlap": "unresolved",
+        "local_ceremonial_date_conditions": "unresolved",
+        "exceptional_purnima_conditions": [
+          "Purnima overlaps Pradosha/evening on two consecutive civil dates",
+          "Purnima does not overlap the governed evening window on either adjacent civil date",
+          "local Varanasi ceremonial date differs from generic calendar rule",
+          "Deepdan ritual timing differs from public festival date/timing"
+        ],
+        "regional_or_tradition_variants": [
+          "Varanasi-specific Deepdan observance requires source review",
+          "regional tradition review required"
+        ]
+      },
+      "governance": {
+        "certainty": "research_only",
+        "status": "not_ready",
+        "source_review_status": "source_review_pending",
+        "rule_review_status": "rule_review_pending",
+        "production_readiness": "not_ready",
+        "runtime_activation": false,
+        "public_output_allowed": false,
+        "notes": "Dev Deepawali candidate basis is specified for governance review only and must not be used as an executable date-selection algorithm."
+      }
+    }
+  ],
+  "non_activation_invariants": {
+    "no_existing_files_modified": true,
+    "no_ag74q_r1_change": true,
+    "no_ag74p_change": true,
+    "no_runtime_projection_change": true,
+    "no_frontend_or_backend_change": true,
+    "no_generated_dates": true,
+    "no_generated_timings": true,
+    "no_fabricated_urls": true,
+    "no_fabricated_sanskrit_quotations": true,
+    "no_source_or_rule_approval": true
+  }
+}
