@@ -3,6 +3,7 @@ import fs from "node:fs";
 import { execFileSync } from "node:child_process";
 
 const baseline = "ae04816f0630b350640e6cc2080b6dd97d301c9a";
+const captureBaseline = "20f5e190d28ad708aceac2cbf2df61fd84fafc24";
 const dossierPath = "data/content-intelligence/quality-reviews/f3b2-word-activities-evidence-dossier.json";
 const validatorPath = "scripts/validate-f3b2-word-activities-evidence-dossier.mjs";
 const manifestPath = "data/knowledge-base/word-of-day/production/production-bank-manifest.json";
@@ -195,6 +196,150 @@ function validateDossier(d) {
     assert.equal(activity.review_status, "needs_review");
     closed(activity);
   }
+  validateLexicalCapture(d);
+}
+
+function validateLexicalCapture(d) {
+  const capture = d.f3b3_lexical_capture;
+  assert.equal(capture.stage, "F3B-3");
+  assert.equal(capture.baseline, captureBaseline);
+  assert.equal(capture.access_attempt_date, "2026-10-23");
+  assert.equal(capture.status, "hosted_lexical_evidence_captured_review_pending");
+  for (const key of ["runtime_activation", "public_output_allowed", "production_approved", "primary_edition_verification_completed"]) assert.equal(capture[key], false, key);
+  assert.equal(capture.public_use_permission, "not_allowed");
+  assert.equal(capture.human_reviewer_signoff, null);
+  assert(capture.scope.includes("cached/indexed"));
+  assert(capture.historical_verification_flag_note.includes("F3B-2"));
+  const sourceFacts = {
+    "f3b3-wisdomlib-manana": ["manana", "https://www.wisdomlib.org/definition/manana", "Wisdom Library"],
+    "f3b3-klryz-viveka": ["viveka", "https://klryz.com/sanskrit.php?id=44011", "Klryz"],
+    "f3b3-wisdomlib-viveka": ["viveka", "https://www.wisdomlib.org/definition/viveka", "Wisdom Library"],
+    "f3b3-sanskritdictionary-dhairya": ["dhairya", "https://www.sanskritdictionary.com/?q=dhairya", "SanskritDictionary.com"],
+    "f3b3-wisdomlib-dhairya": ["dhairya", "https://www.wisdomlib.org/definition/dhairya", "Wisdom Library"]
+  };
+  assert.equal(capture.source_access_record_count, 5);
+  assert.equal(capture.source_access_records.length, 5);
+  assert.deepEqual(sorted(capture.source_access_records.map(s => s.source_id)), sorted(Object.keys(sourceFacts)));
+  const access = new Map(capture.source_access_records.map(s => [s.source_id, s]));
+  for (const source of access.values()) {
+    const [lookup, url, publisher] = sourceFacts[source.source_id];
+    assert.equal(source.lookup_form, lookup);
+    assert.equal(source.word_level_url, url);
+    assert.equal(source.publisher, publisher);
+    assert.equal(source.authoritative_edition_inspected, false);
+    assert.equal(source.rights_review_status, "pending");
+    assert.equal(typeof source.rights_note, "string");
+    if (source.source_id === "f3b3-sanskritdictionary-dhairya") {
+      assert.equal(source.access_status, "access_failed");
+      assert.equal(source.independently_inspected_in_this_execution, false);
+      assert.equal(source.access_date, null);
+      assert(source.access_error.includes("403"));
+      assert.equal(source.source_type, "uninspected_lookup_result");
+      assert.equal(source.registered_source_reference_id, "src_sanskritdictionary_com_lexical_lookup");
+      assert.equal(source.source_registration_status, "existing_secondary_lookup_reference_only");
+      const registered = sources.current_source_catalog.records.find(r => r.source_reference_id === source.registered_source_reference_id);
+      assert.equal(registered.approved_for_primary_lexical_evidence, false);
+    } else {
+      assert.equal(source.access_status, "inspected");
+      assert.equal(source.independently_inspected_in_this_execution, true);
+      assert.equal(source.access_date, capture.access_attempt_date);
+      assert.equal(source.access_error, null);
+      assert.equal(source.registered_source_reference_id, null);
+      assert.equal(source.source_registration_status, "pending");
+      assert(source.source_type.startsWith("third_party_"));
+    }
+  }
+  assert.equal(capture.inspected_source_count, 4);
+  assert.equal(capture.failed_source_count, 1);
+  const common = capture.common_review_fields;
+  const expectedReview = {
+    linked_record_type: "candidate_evidence_draft", source_class: "lexical_dictionary",
+    source_reference_id: null, source_category: "third_party_dictionary_transcription",
+    field_checked: "sanskrit_lexical_entry", source_access_checked: true, reuse_note_checked: false,
+    word_form_found_status: "found", meaning_supported_status: "partial",
+    transliteration_supported_status: "needs_manual_review", claim_level_supported: "definition",
+    internal_textual_discipline_check: "pending", review_status: "evidence_attached",
+    review_status_after_evidence: "evidence_attached", public_use_permission: "not_allowed",
+    public_use_permission_after_review: "not_allowed", public_output_allowed: false
+  };
+  assert.deepEqual(pick(common, Object.keys(expectedReview)), expectedReview);
+  assert.deepEqual(sorted(Object.keys(common)), sorted([...Object.keys(expectedReview), "reviewer_note"]));
+  assert.equal(typeof common.reviewer_note, "string");
+  const entryFacts = {
+    "f3b3-reflection-mw": ["reflection", "f3b3-wisdomlib-manana", "Monier-Williams Sanskrit-English Dictionary", "Manana (मनन)", [["thinking", "reflection", "meditation"]]],
+    "f3b3-reflection-cappeller": ["reflection", "f3b3-wisdomlib-manana", "Cappeller Sanskrit-English Dictionary", "Manana (मनन)", [["thought", "reflection", "consideration"]]],
+    "f3b3-discernment-klryz-mw72": ["discernment", "f3b3-klryz-viveka", "A Sanskrit-English Dictionary (MW72)", "vi-veka / विवेक", [["discrimination", "judgment"]]],
+    "f3b3-discernment-wisdomlib-mw": ["discernment", "f3b3-wisdomlib-viveka", "Monier-Williams Sanskrit-English Dictionary", "Viveka (विवेक), vi-veka", [["discrimination", "distinction"], ["right judgement"]]],
+    "f3b3-discernment-cappeller": ["discernment", "f3b3-wisdomlib-viveka", "Cappeller Sanskrit-English Dictionary", "Viveka (विवेक)", [["discernment", "examination", "judgment"]]],
+    "f3b3-patience-mw": ["patience", "f3b3-wisdomlib-dhairya", "Monier-Williams Sanskrit-English Dictionary", "Dhairya (धैर्य)", [["firmness", "constancy", "calmness", "patience", "fortitude", "courage"]]],
+    "f3b3-patience-apte": ["patience", "f3b3-wisdomlib-dhairya", "The practical Sanskrit-English dictionary (DDSA link to Apte)", "Dhairya (धैर्य)", [["steadiness", "firmness", "fortitude"], ["calmness", "composure"], ["patience"]]]
+  };
+  assert.equal(capture.captured_entry_count, 7);
+  assert.equal(capture.entries.length, 7);
+  assert.deepEqual(sorted(capture.entries.map(e => e.evidence_id)), sorted(Object.keys(entryFacts)));
+  const entryFields = ["evidence_id", "word_id", "linked_record_id", "draft_id", "legacy_word_id", "source_id",
+    "attributed_catalog_source_reference_id", "dictionary_title_as_attributed", "author_or_editor_as_attributed",
+    "edition_or_publication_year_verified", "headword_as_published", "lookup_form", "headword_devanagari",
+    "entry_locator", "locator_reported_by_host", "evidence_language", "noun_classification_reported", "sense_groups", "scope_limit"];
+  for (const entry of capture.entries) {
+    assert.deepEqual(sorted(Object.keys(entry)), sorted(entryFields), "An entry cannot override the closed common governance fields");
+    const [wordId, sourceId, title, headword, senses] = entryFacts[entry.evidence_id];
+    const word = d.words.find(w => w.word_id === wordId);
+    const source = access.get(sourceId);
+    assert.equal(entry.word_id, wordId);
+    assert.equal(entry.source_id, sourceId);
+    assert.equal(entry.linked_record_id, word.draft_id);
+    assert.equal(entry.draft_id, word.draft_id);
+    assert.equal(entry.legacy_word_id, wordId);
+    assert.equal(entry.lookup_form, word.proposed_lexical_fields.lookup_form_iast);
+    assert.equal(entry.headword_devanagari, word.proposed_lexical_fields.lookup_form);
+    assert.equal(entry.headword_as_published, headword);
+    assert.equal(entry.dictionary_title_as_attributed, title);
+    assert.equal(entry.edition_or_publication_year_verified, null);
+    assert.equal(source.lookup_form, entry.lookup_form);
+    assert.equal(source.access_status, "inspected");
+    assert.equal(source.independently_inspected_in_this_execution, true);
+    assert.equal(typeof entry.entry_locator, "string");
+    assert(entry.entry_locator.length > 20);
+    assert.equal(typeof entry.author_or_editor_as_attributed, "string");
+    assert.equal(entry.evidence_language, "Sanskrit headword; English lexical glosses");
+    assert.equal(typeof entry.noun_classification_reported, "string");
+    assert.deepEqual(entry.sense_groups.map(g => g.terms), senses);
+    assert(entry.sense_groups.every(g => typeof g.entry_sense === "string"));
+    assert.equal(typeof entry.scope_limit, "string");
+    const expectedParent = entry.evidence_id === "f3b3-patience-apte"
+      ? "src_dsal_apte_practical_sanskrit_english_dictionary" : "src_cologne_digital_sanskrit_dictionaries";
+    assert.equal(entry.attributed_catalog_source_reference_id, expectedParent);
+    assert(sources.current_source_catalog.records.some(s => s.source_reference_id === expectedParent));
+    if (entry.evidence_id === "f3b3-discernment-klryz-mw72") {
+      assert(entry.locator_reported_by_host.includes("not a scan-verified"));
+    } else assert.equal(entry.locator_reported_by_host, null);
+    const view = { ...common, ...entry };
+    for (const field of [...sources.evidence_contract.required_fields, ...sources.manual_review_contract.required_fields]) assert(Object.hasOwn(view, field), field);
+    for (const [field, allowed] of Object.entries(sources.manual_review_contract.allowed_status_values)) assert(allowed.includes(view[field]), field);
+  }
+  assert.deepEqual(sorted(Object.keys(capture.word_findings)), sorted(Object.keys(pilot)));
+  for (const word of d.words) {
+    const expectedIds = capture.entries.filter(e => e.word_id === word.word_id).map(e => e.evidence_id);
+    assert.deepEqual(word.captured_lexical_evidence_refs, expectedIds);
+    assert.deepEqual(word.lexical_review_progress, {
+      lexical_evidence_captured: true, lexical_evidence_independently_verified: false,
+      linguistic_and_contextual_review_completed: false, editorial_approval_granted: false,
+      eligible_for_daily_selection: false, eligible_for_public_display: false
+    });
+    const finding = capture.word_findings[word.word_id];
+    assert.equal(finding.lookup_form, word.proposed_lexical_fields.lookup_form_iast);
+    assert.equal(finding.relationship_status, "research_inference_pending_morphology_review");
+    for (const field of ["classification_support", "recorded_form_relationship", "sense_boundary"]) assert.equal(typeof finding[field], "string");
+  }
+  assert.equal(capture.bibliographic_observations.length, 1);
+  const bibliography = capture.bibliographic_observations[0];
+  assert.equal(bibliography.url, "https://dsal.uchicago.edu/dictionaries/apte/");
+  assert.equal(bibliography.access_date, capture.access_attempt_date);
+  assert.equal(bibliography.inspected_in_this_execution, true);
+  assert.equal(bibliography.same_edition_as_host_transcription_verified, false);
+  assert(bibliography.scope.includes("not a dhairya entry"));
+  assert.equal(capture.remaining_reviews.length, 6);
 }
 
 let checks = 0;
@@ -244,6 +389,37 @@ rejects("missing activity", d => d.activities.pop());
 rejects("rewritten historical activity", d => { d.activities[0].original_template.output_fields.guidance_text_en = "rewritten"; });
 rejects("activity public output", d => { d.activities[2].public_output_allowed = true; });
 rejects("activity safety review fabricated", d => { d.activities[0].editorial_review.safety_review_status = "approved"; });
+rejects("capture source marked authoritative", d => { d.f3b3_lexical_capture.source_access_records[0].authoritative_edition_inspected = true; });
+rejects("failed lookup marked inspected", d => { d.f3b3_lexical_capture.source_access_records[3].independently_inspected_in_this_execution = true; });
+rejects("failed lookup assigned a successful access date", d => { d.f3b3_lexical_capture.source_access_records[3].access_date = "2026-10-23"; });
+rejects("dictionary homepage substituted for word URL", d => { d.f3b3_lexical_capture.source_access_records[0].word_level_url = "https://www.wisdomlib.org/"; });
+rejects("different-vowel headword substituted", d => { d.f3b3_lexical_capture.entries[0].headword_as_published = "Mānana (मानन)"; });
+rejects("entry mapped to wrong historical identity", d => { d.f3b3_lexical_capture.entries[0].word_id = "patience"; });
+rejects("entry mapped to wrong lexical form", d => { d.f3b3_lexical_capture.entries[0].lookup_form = "dhairya"; });
+rejects("missing entry locator", d => { d.f3b3_lexical_capture.entries[0].entry_locator = null; });
+rejects("unverified edition called verified", d => { d.f3b3_lexical_capture.entries[0].edition_or_publication_year_verified = "1899"; });
+rejects("unobserved sense added", d => { d.f3b3_lexical_capture.entries[0].sense_groups[0].terms.push("unsupported sense"); });
+rejects("capture inferred to be independent lexical verification", d => { d.words[0].lexical_review_progress.lexical_evidence_independently_verified = true; });
+rejects("capture inferred to be linguistic approval", d => { d.words[0].lexical_review_progress.linguistic_and_contextual_review_completed = true; });
+rejects("capture inferred to be editorial approval", d => { d.words[0].lexical_review_progress.editorial_approval_granted = true; });
+rejects("capture inferred to be daily-selection eligibility", d => { d.words[0].lexical_review_progress.eligible_for_daily_selection = true; });
+rejects("capture inferred to be public-display eligibility", d => { d.words[0].lexical_review_progress.eligible_for_public_display = true; });
+rejects("captured evidence gains public permission", d => { d.f3b3_lexical_capture.common_review_fields.public_use_permission = "approved_for_public_output"; });
+rejects("entry overrides common public-output gate", d => { d.f3b3_lexical_capture.entries[0].public_output_allowed = true; });
+rejects("entry overrides common evidence review state", d => { d.f3b3_lexical_capture.entries[0].review_status = "approved"; });
+rejects("captured evidence gains a reviewer signoff", d => { d.f3b3_lexical_capture.human_reviewer_signoff = "invented signoff"; });
+rejects("bibliographic homepage treated as verified entry edition", d => { d.f3b3_lexical_capture.bibliographic_observations[0].same_edition_as_host_transcription_verified = true; });
+check("F3B-2 Activities and all historical dossier fields preserved", () => {
+  const old = JSON.parse(git("show", captureBaseline + ":" + dossierPath));
+  const preserved = structuredClone(dossier);
+  delete preserved.f3b3_lexical_capture;
+  for (const word of preserved.words) {
+    delete word.captured_lexical_evidence_refs;
+    delete word.lexical_review_progress;
+  }
+  preserved.evidence_boundaries[1] = old.evidence_boundaries[1];
+  assert.deepEqual(preserved, old);
+});
 
 check("AG70D runtime, supersession and generation gates preserved", () => {
   assert.equal(sources.methodology.runtime_selector_active_now, false);
@@ -282,13 +458,13 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
 check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
-  assert.equal(git("rev-parse", "HEAD").trim(), baseline);
-  assert.equal(git("rev-parse", "origin/main").trim(), baseline);
+  assert.equal(git("rev-parse", "HEAD").trim(), captureBaseline);
+  assert.equal(git("rev-parse", "origin/main").trim(), captureBaseline);
   assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-  const tracked = git("diff", "--name-only", baseline, "--").trim().split("\n").filter(Boolean);
-  assert.deepEqual(tracked, [manifestPath]);
-  const expectedStatus = [" M " + manifestPath, "?? " + dossierPath, "?? " + validatorPath, "?? prototypes/"];
+  const tracked = git("diff", "--name-only", captureBaseline, "--").trim().split("\n").filter(Boolean);
+  assert.deepEqual(sorted(tracked), sorted([dossierPath, validatorPath]));
+  const expectedStatus = [" M " + dossierPath, " M " + validatorPath, "?? prototypes/"];
   const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
   assert.deepEqual(sorted(status), sorted(expectedStatus));
 });
-console.log(`F3B-2 validation passed: ${checks} checks. Research preparation only; no lexical authentication or public output.`);
+console.log(`F3B-2/F3B-3 validation passed: ${checks} checks. Hosted evidence capture only; no original-edition authentication or public output.`);
