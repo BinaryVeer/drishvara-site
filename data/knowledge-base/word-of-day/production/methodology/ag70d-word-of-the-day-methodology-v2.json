@@ -3,6 +3,10 @@
   "title": "Word of the Day Methodology v2",
   "status": "word_methodology_v2_supersession_defined_not_runtime_active",
   "active_methodology_version": "word_of_day_method_v2_panchang_context_sanskrit_lexical_engine",
+  "daily_selection_policy_version": "ag70d.word-selection.v2.1",
+  "daily_selection_policy_path": "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json",
+  "publication_scope": "global_public_word",
+  "publication_timezone": "Asia/Kolkata",
   "supersedes_runtime_methodology_versions": [
     "word_of_day_method_v1",
     "ag63a_rotation_preview_method",
@@ -21,8 +25,8 @@
     "Semantics engine defines exact meaning, semantic range, usage boundary and reflective sense.",
     "Primary selection uses approved lexical records only.",
     "If etymology or derivation is not established, the method must not fabricate; it routes to approved sacred fallback banks where appropriate.",
-    "Duplicate control checks date-wise published/suggested history before final output.",
-    "The selected word is saved date-wise for public current-day display and future subscriber archive browsing."
+    "Duplicate control reads complete governed history and applies unused-first identity/equivalence protection before compatible repeat-window safeguards; initial exhaustion behaviour is withholding.",
+    "One immutable global lexical assignment is recorded per Asia/Kolkata civil publication date, independently of user location or display language; Panchang sunrise-based day calculations remain separate."
   ],
   "hard_rules": [
     "No AI-invented Sanskrit word.",

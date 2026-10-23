@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 const baseline = "ae04816f0630b350640e6cc2080b6dd97d301c9a";
 const captureBaseline = "20f5e190d28ad708aceac2cbf2df61fd84fafc24";
 const qualificationBaseline = "461b51f22cfd41ce5399944ef851c3e5a17b3cc5";
+const policyBaseline = "78773a9919a53adca89204745cbdfc1b85517486";
 const dossierPath = "data/content-intelligence/quality-reviews/f3b2-word-activities-evidence-dossier.json";
 const validatorPath = "scripts/validate-f3b2-word-activities-evidence-dossier.mjs";
 const manifestPath = "data/knowledge-base/word-of-day/production/production-bank-manifest.json";
@@ -468,7 +469,10 @@ function validateDraftSelectionContract(contract) {
   assert.equal(contract.exhaustion_requires_approved_reuse_policy, true);
   const reconciliation = contract.ag70d_policy_reconciliation;
   assert.equal(reconciliation.existing_rule_path, wordBase + "production/methodology/ag70d-duplicate-control-and-history-rules.json");
-  assert(json(reconciliation.existing_rule_path).replacement_rule.includes("repeat-control window"));
+  // F3B-4 is frozen historical analysis; F3B-5 retains that exact former clause explicitly.
+  const historicalPolicy = JSON.parse(git("show", policyBaseline + ":" + reconciliation.existing_rule_path));
+  assert(historicalPolicy.replacement_rule.includes("repeat-control window"));
+  assert.equal(json(reconciliation.existing_rule_path).legacy_replacement_rule, historicalPolicy.replacement_rule);
   assert.equal(reconciliation.focused_policy_approval_required_before_implementation, true);
   assert.equal(reconciliation.current_rule_replaced, false);
   assert.equal(reconciliation.status, "pending");
@@ -630,12 +634,16 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
 check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
-  assert.equal(git("rev-parse", "HEAD").trim(), qualificationBaseline);
-  assert.equal(git("rev-parse", "origin/main").trim(), qualificationBaseline);
+  assert.equal(git("rev-parse", "HEAD").trim(), policyBaseline);
+  assert.equal(git("rev-parse", "origin/main").trim(), policyBaseline);
   assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-  const tracked = git("diff", "--name-only", qualificationBaseline, "--").trim().split("\n").filter(Boolean);
-  assert.deepEqual(sorted(tracked), sorted([dossierPath, validatorPath]));
-  const expectedStatus = [" M " + dossierPath, " M " + validatorPath, "?? prototypes/"];
+  const trackedPaths = [validatorPath, "scripts/validate-ag70d-word-methodology-supersession.mjs", "scripts/generate-ag70d-word-methodology-supersession.mjs",
+    governingFiles.methodology, wordBase + "production/methodology/ag70d-selection-flow-v2.json",
+    wordBase + "production/methodology/ag70d-duplicate-control-and-history-rules.json"];
+  const tracked = git("diff", "--name-only", policyBaseline, "--").trim().split("\n").filter(Boolean);
+  assert.deepEqual(sorted(tracked), sorted(trackedPaths));
+  assert.equal(fs.readFileSync(dossierPath, "utf8"), git("show", policyBaseline + ":" + dossierPath));
+  const expectedStatus = [...trackedPaths.map(p => " M " + p), "?? scripts/validate-ag70d-word-selection-policy-fixtures.mjs", "?? prototypes/"];
   const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
   assert.deepEqual(sorted(status), sorted(expectedStatus));
 });

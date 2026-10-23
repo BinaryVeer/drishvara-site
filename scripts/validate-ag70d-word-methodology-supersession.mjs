@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 
 const root = process.cwd();
 
@@ -94,6 +96,84 @@ for (const field of ["date_key", "panchang_context_id", "selection_path", "dupli
   if (!duplicate.daily_result_required_fields.includes(field)) fail(`Daily result field missing: ${field}`);
 }
 
+const policyPath = "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json";
+const amendmentBaseline = "78773a9919a53adca89204745cbdfc1b85517486";
+const frozen = p => JSON.parse(execFileSync("git", ["show", amendmentBaseline + ":" + p], { encoding: "utf8" }));
+assert.equal(duplicate.policy_version, "ag70d.word-selection.v2.1");
+assert.equal(methodology.daily_selection_policy_version, duplicate.policy_version);
+assert.equal(flow.daily_selection_policy_version, duplicate.policy_version);
+assert.equal(methodology.daily_selection_policy_path, policyPath);
+assert.equal(flow.daily_selection_policy_path, policyPath);
+assert.equal(duplicate.policy_amendment.baseline, amendmentBaseline);
+assert.equal(duplicate.policy_amendment.stage, "F3B-5");
+assert.equal(duplicate.legacy_replacement_rule, frozen(policyPath).replacement_rule);
+assert.equal(duplicate.legacy_rule_status, "least_recent_automatic_reuse_superseded_repeat_window_retained_only_as_additional_exclusion");
+assert.equal(duplicate.publication_model.scope, "global_public_word");
+assert.equal(duplicate.publication_model.timezone, "Asia/Kolkata");
+assert.equal(methodology.publication_scope, duplicate.publication_model.scope);
+assert.equal(methodology.publication_timezone, duplicate.publication_model.timezone);
+assert.equal(duplicate.publication_model.day_boundary, "civil_midnight_not_panchang_sunrise");
+assert.equal(duplicate.publication_model.one_lexical_identity_per_canonical_date, true);
+assert.equal(duplicate.publication_model.same_identity_for_all_user_locations, true);
+assert.equal(duplicate.publication_model.user_timezone_or_location_may_change_identity, false);
+assert.deepEqual(duplicate.publication_model.representations_share_identity, ["Sanskrit", "Hindi", "English"]);
+assert.deepEqual(duplicate.publication_model.assignment_key_fields, ["publication_scope", "date_key", "timezone"]);
+assert.equal(duplicate.publication_model.canonical_context_basis_ref, null);
+assert.equal(duplicate.approved_precedence_rule_ref, null);
+assert.equal(duplicate.eligible_pool_rules.primary_approval_gates_path, "data/knowledge-base/word-of-day/production/methodology/ag70d-primary-lexical-selection-rules.json");
+for (const key of ["withdrawn_revoked_or_superseded_records_excluded", "reviewed_identity_links_required", "reviewed_semantic_equivalence_links_required", "unresolved_duplicates_excluded_not_auto_merged", "context_must_be_canonical_not_user_specific", "active_reservations_and_assignments_block_duplicate_allocation", "unused_first", "semantic_equivalence_requires_human_review"]) assert.equal(duplicate.eligible_pool_rules[key], true);
+assert.equal(duplicate.eligible_pool_rules.history_scope, "complete_governed_history_across_all_years");
+assert.equal(duplicate.eligible_pool_rules.annual_reset_allowed, false);
+assert.equal(duplicate.eligible_pool_rules.repeat_window_expiry_restores_used_identity, false);
+assert.deepEqual(duplicate.selection_precedence, [
+  "resolve_and_validate_canonical_ist_date_and_scope",
+  "require_complete_governed_history_then_replay_existing_immutable_assignment_if_present",
+  "require_policy_context_and_precedence_approval_references",
+  "exclude_unapproved_withdrawn_revoked_superseded_out_of_scope_or_editorially_excluded_records",
+  "exclude_unresolved_identity_or_semantic_equivalence_and_active_reservation_conflicts",
+  "retain_never_before_published_canonical_identities_and_reviewed_equivalence_groups",
+  "apply_compatible_repeat_window_exclusions_without_restoring_used_identities",
+  "apply_existing_approved_relevance_quality_editorial_precedence_and_tie_rules_within_unused_pool",
+  "atomically_reserve_date_and_identity_then_record_version_bound_assignment",
+  "publish_only_after_separate_publication_gates_and_append_a_publication_event"
+]);
+assert.equal(duplicate.exhaustion_policy.initial_action, "withhold");
+for (const key of ["automatic_reuse_allowed", "fabricated_fallback_allowed", "old_assignment_may_be_relabelled_as_new"]) assert.equal(duplicate.exhaustion_policy[key], false);
+assert.equal(duplicate.exhaustion_policy.authorized_reuse_policy_ref, null);
+assert.equal(duplicate.exhaustion_policy.reuse_requires_separate_explicit_authorization, true);
+assert.equal(duplicate.exhaustion_policy.never_reuse_while_eligible_unused_remains, true);
+assert.deepEqual(duplicate.exhaustion_policy.withheld_reason_codes, ["approved_bank_empty", "eligible_bank_empty", "no_unused_eligible_identity", "history_unavailable", "history_incomplete", "selection_rule_unavailable", "canonical_context_unavailable", "precedence_unresolved", "assignment_in_progress", "history_revision_conflict", "history_persistence_unavailable", "invalid_canonical_date"]);
+const history = duplicate.history_contract;
+assert.equal(history.base_schema_path, duplicate.history_schema);
+assert.deepEqual(history.states, ["draft_reservation", "approved_assignment", "published", "corrective_publication", "cancelled_reservation", "withheld"]);
+for (const key of ["existing_ag70e_bank_structures_unchanged", "unique_date_key_and_identity_reservation_required", "complete_history_and_compare_and_swap_revision_required", "atomic_single_writer_or_equivalent_required", "historical_replay_is_not_current_publication_permission", "approval_rechecked_before_publication", "published_records_immutable", "corrections_append_only"]) assert.equal(history[key], true);
+assert.equal(history.history_writer_implemented, false);
+assert.equal(history.idempotent_replay, "return_existing_assignment_snapshot_without_new_assignment_or_publication");
+assert.deepEqual(history.additional_required_fields, ["timezone", "publication_scope", "canonical_lexical_identity_id", "approved_record_version", "approved_record_snapshot", "source_evidence_refs", "approval_record_refs", "selection_policy_version", "canonical_context_basis_ref", "context_snapshot_ref", "bank_snapshot_ref", "history_snapshot_ref", "eligibility_and_exclusion_trace", "assignment_timestamp", "publication_timestamp", "event_id", "event_type", "parent_event_refs", "supersession_refs", "correction_refs"]);
+assert.deepEqual(duplicate.scale_contract.approved_word_checkpoints, [365, 730, 1825, 3650]);
+assert.equal(duplicate.scale_contract.old_history_regeneration_required, false);
+assert.equal(duplicate.scale_contract.new_approved_words_future_unassigned_dates_only, true);
+assert.equal(duplicate.scale_contract.bulk_import_or_synthetic_population_authorized, false);
+
+// Only selection/date/history clauses may differ from the accepted pre-amendment owners.
+const oldMethodology = frozen("data/knowledge-base/word-of-day/production/methodology/ag70d-word-of-the-day-methodology-v2.json");
+const preservedMethodology = structuredClone(methodology);
+for (const key of ["daily_selection_policy_version", "daily_selection_policy_path", "publication_scope", "publication_timezone"]) delete preservedMethodology[key];
+preservedMethodology.method_summary = [...oldMethodology.method_summary];
+assert.deepEqual(preservedMethodology, oldMethodology);
+assert.deepEqual(methodology.method_summary.slice(0, 7), oldMethodology.method_summary.slice(0, 7));
+const oldFlow = frozen("data/knowledge-base/word-of-day/production/methodology/ag70d-selection-flow-v2.json");
+const preservedFlow = structuredClone(flow);
+delete preservedFlow.daily_selection_policy_version;
+delete preservedFlow.daily_selection_policy_path;
+for (const i of [0, 5, 6, 7]) {
+  preservedFlow.flow[i].input = oldFlow.flow[i].input;
+  preservedFlow.flow[i].output = oldFlow.flow[i].output;
+}
+assert.deepEqual(preservedFlow, oldFlow);
+assert.deepEqual(readJson(history.base_schema_path), frozen(history.base_schema_path));
+pass("F3B-5 canonical IST scope, unused-first precedence, exhaustion and immutable history contract are valid; no runtime activation.");
+
 const archive = readJson("data/knowledge-base/word-of-day/production/methodology/ag70d-subscriber-archive-access-model.json");
 if (archive.status !== "subscriber_archive_access_model_defined_not_runtime_active") fail("Subscriber archive status mismatch.");
 if (archive.subscriber_archive_active_now !== false) fail("Subscriber archive must be inactive.");
@@ -169,3 +249,4 @@ pass("AG70D Word methodology supersession is valid.");
 pass("Methodology v2 is defined and old rotation method is superseded as legacy/reference.");
 pass("Selection flow, primary rules, fallback rules, duplicate/history rules and subscriber archive model are valid.");
 pass("No old methodology deletion, output mutation, UI change, runtime activation or backend activation is recorded.");
+await import("./validate-ag70d-word-selection-policy-fixtures.mjs");

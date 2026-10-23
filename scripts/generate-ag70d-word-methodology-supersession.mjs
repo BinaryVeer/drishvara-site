@@ -19,6 +19,12 @@ function run(cmd) {
   catch { return ""; }
 }
 
+// The foundation generator predates controlled, versioned selection-policy amendments.
+const existingPolicyPath = "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json";
+if (fs.existsSync(full(existingPolicyPath)) && Object.hasOwn(readJson(existingPolicyPath), "policy_version")) {
+  throw new Error("AG70D foundation generator cannot overwrite a versioned selection policy. Amend the existing policy owners through controlled review; no files were written.");
+}
+
 const ag70c = readJson("data/content-intelligence/quality-reviews/ag70c-sanskrit-lexical-engine-data-model.json");
 const readiness = readJson("data/content-intelligence/quality-registry/ag70c-ag70d-word-methodology-supersession-readiness-record.json");
 const panchangConnector = readJson("data/knowledge-base/panchang-festival/production/panchang-to-word-context-connector.json");

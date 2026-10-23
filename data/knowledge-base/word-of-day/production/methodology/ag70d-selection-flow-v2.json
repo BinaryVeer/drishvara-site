@@ -3,11 +3,13 @@
   "title": "Word Selection Flow v2",
   "status": "word_selection_flow_v2_defined_not_runtime_active",
   "runtime_selection_active_now": false,
+  "daily_selection_policy_version": "ag70d.word-selection.v2.1",
+  "daily_selection_policy_path": "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json",
   "flow": [
     {
       "step": 1,
       "name": "panchang_day_context",
-      "input": "date + location + Panchang calculation/observance context",
+      "input": "Asia/Kolkata civil publication date + separately approved canonical editorial Panchang context basis; never the requesting user's location or local sunrise day",
       "output": "Tithi, Nakshatra, Yoga, Karana, Paksha, Vara, festival/observance/theme context",
       "runtime_active_now": false
     },
@@ -42,22 +44,22 @@
     {
       "step": 6,
       "name": "primary_or_fallback_selection",
-      "input": "approved lexical candidate or fallback candidate",
-      "output": "selected word candidate",
+      "input": "source/language/editorial-approved applicable candidate pool + approved context/precedence references + complete governed publication/reservation history",
+      "output": "unused eligible candidates only; approved lexical fallback records cannot bypass identity/exhaustion protection, and no missing-data fallback may be manufactured",
       "runtime_active_now": false
     },
     {
       "step": 7,
       "name": "duplicate_control",
-      "input": "selected word candidate + daily history",
-      "output": "final eligible word or replacement candidate",
+      "input": "unused eligible pool + reviewed canonical identity/equivalence links + compatible repeat-window exclusions + approved deterministic precedence",
+      "output": "one auditable proposed assignment or a structured withheld reason; never automatic least-recent reuse",
       "runtime_active_now": false
     },
     {
       "step": 8,
       "name": "datewise_result_saving",
-      "input": "final eligible word",
-      "output": "daily word history record and subscriber archive candidate",
+      "input": "version-bound assignment proposal + complete history revision + atomic uniqueness/identity reservation checks",
+      "output": "append-only draft reservation, approved assignment and publication events under the policy history contract; same-date replay preserves the existing assignment",
       "runtime_active_now": false
     }
   ]
