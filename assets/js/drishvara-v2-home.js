@@ -98,41 +98,7 @@
     app.className = "dv2-home";
     app.innerHTML =
       '<main id="dv2-main">' +
-      '<section class="dv2-section dv2-today" id="today" data-dv2-world="today">' +
-      '<div class="dv2-section__inner dv2-today-grid">' +
-      '<div class="dv2-live-context">' +
-      '<div class="dv2-live-date" id="dv2-live-date">' +
-      escapeHtml(formatToday()) +
-      ' - Varanasi</div>' +
-      '<p class="dv2-today-label">Today</p>' +
-      '<h1 class="dv2-live-title">What matters now.</h1>' +
-      '<div class="dv2-first-light"><p class="dv2-mini-label" id="dv2-first-light-count">First Light · Key Developments</p><div class="dv2-live-signal"><div><strong>In Focus</strong><span id="dv2-current-intelligence">Current public context is loading.</span></div></div><div class="dv2-signal-list" id="dv2-first-light-list"></div><button class="dv2-button" type="button" id="dv2-first-light-toggle">View all</button></div>' +
-      "</div>" +
-      '<div class="dv2-today-side">' +
-      '<article class="dv2-featured" id="dv2-featured-carousel" aria-label="Featured Reads"></article>' +
-      '<div class="dv2-time-strip" aria-label="Today temporal context">' +
-      '<div class="dv2-time-strip__summary"><small id="dv2-context-time-kicker">Time · Varanasi / Banaras</small><strong id="dv2-context-time-status">Resolving today’s temporal context…</strong></div>' +
-      '<div><small>Sunrise</small><strong id="dv2-context-sunrise">—</strong></div>' +
-      '<div><small>Paksha</small><strong id="dv2-context-paksha">—</strong></div>' +
-      '<div><small>Nakshatra</small><strong id="dv2-context-nakshatra">—</strong></div>' +
-      '<div><small>Upcoming observance</small><strong id="dv2-context-observance">—</strong></div>' +
-      '<a class="dv2-time-strip__link" href="panchang.html">Panchang →</a>' +
-      "</div>" +
-      "</div></div></section>" +
-      section(
-        "read",
-        "Read",
-        "Featured Reads",
-        '<p class="dv2-section-note">Selected public reads for context, continuity and deeper attention.</p><div class="dv2-read-grid"><article class="dv2-lead-read" id="dv2-lead-read"></article><div class="dv2-read-list" id="dv2-read-list"></div></div>',
-        "dv2-read"
-      ) +
-      section(
-        "explore",
-        "Explore",
-        "Public Knowledge Pathways",
-        '<p class="dv2-section-note">Follow public themes across Drishvara’s published reads.</p><div class="dv2-explore-map"><div class="dv2-topic-cloud" id="dv2-topic-cloud"></div><div class="dv2-topic-list" id="dv2-topic-list"></div></div>',
-        "dv2-explore"
-      ) +
+      window.DrishvaraV2Homepage.markup() +
       section(
         "knowledge",
         "Knowledge",
@@ -202,232 +168,16 @@
     }
   }
 
-  function firstPublicItems(data, indexData) {
-    var fromHomepage =
-      data && data.firstLight && Array.isArray(data.firstLight.items)
-        ? data.firstLight.items
-        : [];
-    if (fromHomepage.length) return fromHomepage.slice(0, 7);
-
-    return publicItems(indexData)
-      .slice(0, 7)
-      .map(function (item) {
-        return {
-          place: item.tag || "Drishvara",
-          signal: item.title,
-          note: item.summary
-        };
-      });
-  }
-
-  function publicStateLabel(index) {
-    if (index === 0) return "Top Development";
-    if (index < 3) return "In Focus";
-    return "Tracking";
-  }
-
-  function readerFacingNote(value) {
-    return String(value || "")
-      .replace(/daily signal mix/gi, "today’s public context")
-      .replace(/signals/gi, "developments")
-      .replace(/signal/gi, "development")
-      .replace(/These should remain visible near the top of the homepage\.?/gi, "")
-      .trim();
-  }
-
   function renderFirstLight(data, indexData) {
-    var list = document.getElementById("dv2-first-light-list");
-    var focus = document.getElementById("dv2-current-intelligence");
-    if (!list) return;
-    var items = firstPublicItems(data, indexData);
-    if (!items.length) {
-      list.innerHTML =
-        '<div class="dv2-signal"><strong>Current public intelligence is preparing.</strong><span>Open Featured Reads for approved public articles.</span></div>';
-      return;
-    }
-
-    if (focus) {
-      focus.textContent = items[0].signal || "A public intelligence item is ready.";
-    }
-
-    var count = document.getElementById("dv2-first-light-count");
-    if (count) {
-      count.textContent =
-        "First Light · " + items.length + " Key Development" + (items.length === 1 ? "" : "s");
-    }
-
-    list.innerHTML = items
-      .map(function (item, index) {
-        var state = publicStateLabel(index);
-        return (
-          '<article class="dv2-signal"><span><b>' +
-          String(index + 1).padStart(2, "0") +
-          "</b> " +
-          escapeHtml((item.place || "Drishvara") + " - " + state) +
-          "</span><strong>" +
-          escapeHtml(item.signal || "Public item prepared for review") +
-          "</strong><p>" +
-          escapeHtml(readerFacingNote(item.note) || "Context will appear when public data is available.") +
-          "</p></article>"
-        );
-      })
-      .join("");
-
-    var toggle = document.getElementById("dv2-first-light-toggle");
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        var expanded = list.getAttribute("data-expanded") === "true";
-        list.setAttribute("data-expanded", expanded ? "false" : "true");
-        toggle.textContent = expanded ? "View all" : "Show top 2";
-      });
-    }
-  }
-
-  function featuredItems(data, indexData) {
-    var items =
-      data && Array.isArray(data.featuredReads) && data.featuredReads.length
-        ? data.featuredReads
-        : publicItems(indexData);
-    return items.slice(0, 6);
+    window.DrishvaraV2Homepage.renderFirstLight(data, indexData);
   }
 
   function renderFeatured(data, indexData) {
-    var host = document.getElementById("dv2-featured-carousel");
-    if (!host) return;
-    var items = featuredItems(data, indexData);
-    if (!items.length) {
-      host.innerHTML =
-        '<div class="dv2-featured__body"><p class="dv2-mini-label">Featured Reads</p><h3>Featured Reads are preparing.</h3><p>No public article was available in the index.</p></div>';
-      return;
-    }
-
-    var index = 0;
-    var auto = null;
-    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    function render() {
-      var item = items[index];
-      host.innerHTML =
-        '<div class="dv2-featured__media"><img src="' +
-        escapeHtml(safeImage(item)) +
-        '" alt="' +
-        escapeHtml(item.title || "Featured Drishvara read") +
-        '" loading="lazy"></div>' +
-        '<div class="dv2-featured__body"><p class="dv2-mini-label">' +
-        escapeHtml(item.tag || "Featured Read") +
-        "</p><h3><a class=\"dv2-card-link\" href=\"" +
-        escapeHtml(articleHref(item)) +
-        "\">" +
-        escapeHtml(item.title || "Drishvara read") +
-        "</a></h3><p>" +
-        escapeHtml(item.summary || "A public Drishvara read.") +
-        '</p><p class="dv2-mini-label">' +
-        escapeHtml((item.source || "Public read") + " · " + (item.referenceState || item.reference_status || "References reviewed where available")) +
-        '</p><div class="dv2-featured__controls"><button class="dv2-button" type="button" data-dv2-feature-prev>Previous</button><button class="dv2-button" type="button" data-dv2-feature-next>Next</button><span>' +
-        (index + 1) +
-        " / " +
-        items.length +
-        "</span></div></div>";
-    }
-
-    function go(next) {
-      index = (next + items.length) % items.length;
-      render();
-    }
-
-    function stopAuto() {
-      if (auto) window.clearInterval(auto);
-      auto = null;
-    }
-
-    function startAuto() {
-      if (reduce || auto || items.length < 2) return;
-      auto = window.setInterval(function () {
-        go(index + 1);
-      }, 8000);
-    }
-
-    host.addEventListener("click", function (event) {
-      if (event.target.closest("[data-dv2-feature-prev]")) {
-        stopAuto();
-        go(index - 1);
-      }
-      if (event.target.closest("[data-dv2-feature-next]")) {
-        stopAuto();
-        go(index + 1);
-      }
-    });
-
-    host.addEventListener("mouseenter", stopAuto);
-    host.addEventListener("focusin", stopAuto);
-    host.addEventListener("mouseleave", startAuto);
-
-    var startX = null;
-    host.addEventListener(
-      "touchstart",
-      function (event) {
-        startX = event.touches && event.touches[0] ? event.touches[0].clientX : null;
-      },
-      { passive: true }
-    );
-    host.addEventListener(
-      "touchend",
-      function (event) {
-        if (startX === null || !event.changedTouches || !event.changedTouches[0]) return;
-        var delta = event.changedTouches[0].clientX - startX;
-        if (Math.abs(delta) > 34) {
-          stopAuto();
-          go(delta < 0 ? index + 1 : index - 1);
-        }
-        startX = null;
-      },
-      { passive: true }
-    );
-
-    render();
-    startAuto();
+    window.DrishvaraV2Homepage.renderFeatured(data, indexData);
   }
 
   function renderRead(indexData) {
-    var items = publicItems(indexData);
-    var lead = document.getElementById("dv2-lead-read");
-    var list = document.getElementById("dv2-read-list");
-    if (!lead || !list || !items.length) return;
-
-    var item = items[0];
-    lead.innerHTML =
-      '<img src="' +
-      escapeHtml(safeImage(item)) +
-      '" alt="' +
-      escapeHtml(item.title || "Lead read") +
-      '" loading="lazy"><p class="dv2-mini-label">' +
-      escapeHtml(item.tag || "Lead Feature") +
-      "</p><h3><a class=\"dv2-card-link\" href=\"" +
-      escapeHtml(articleHref(item)) +
-      "\">" +
-      escapeHtml(item.title) +
-      "</a></h3><p>" +
-      escapeHtml(item.summary || "") +
-      '</p><a class="dv2-text-link" href="' +
-      escapeHtml(articleHref(item)) +
-      '">Read feature</a>';
-
-    list.innerHTML = items
-      .slice(1, 7)
-      .map(function (read) {
-        return (
-          '<a class="dv2-read-item" href="' +
-          escapeHtml(articleHref(read)) +
-          '"><span>' +
-          escapeHtml(read.tag || "Read") +
-          "</span><strong>" +
-          escapeHtml(read.title || "Drishvara read") +
-          "</strong><span>" +
-          escapeHtml(read.summary || "Public article") +
-          "</span></a>"
-        );
-      })
-      .join("");
+    window.DrishvaraV2Homepage.renderRead(indexData);
   }
 
   function topicEntries(indexData) {
@@ -450,42 +200,7 @@
   }
 
   function renderExplore(indexData) {
-    var cloud = document.getElementById("dv2-topic-cloud");
-    var list = document.getElementById("dv2-topic-list");
-    if (!cloud || !list) return;
-    var entries = topicEntries(indexData);
-
-    cloud.innerHTML = entries
-      .map(function (entry) {
-        return (
-          '<span class="dv2-topic-chip">' +
-          escapeHtml(entry[0]) +
-          " - " +
-          entry[1].length +
-          "</span>"
-        );
-      })
-      .join("");
-
-    list.innerHTML = entries
-      .slice(0, 5)
-      .map(function (entry) {
-        var first = entry[1][0] || {};
-        return (
-          '<a class="dv2-topic-item" href="' +
-          escapeHtml(articleHref(first)) +
-          '"><strong>' +
-          escapeHtml(entry[0]) +
-          "</strong><span>" +
-          escapeHtml(
-            first.title
-              ? "Start with: " + first.title
-              : "Public articles will appear here when available."
-          ) +
-          "</span></a>"
-        );
-      })
-      .join("");
+    window.DrishvaraV2Homepage.renderExplore(indexData);
   }
 
   function renderKnowledge(indexData) {
@@ -2937,6 +2652,7 @@
     localizePanchangVisibleText(currentTimeLanguage);
     syncPanchangReaderPanel(currentTimeLanguage);
     applyTimeLanguage(currentTimeLanguage);
+    if (isHomePage && window.DrishvaraV2Homepage) window.DrishvaraV2Homepage.syncDaily();
   }
 
   function syncTimePresentationFromRuntime() {
@@ -3106,6 +2822,7 @@
     renderShell();
     quarantineLegacyShell();
     bootRuntimePresentation();
+    window.DrishvaraV2Homepage.loadPublicationStates();
 
     Promise.all([
       fetchJson("data/homepage-ui.json"),

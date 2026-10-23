@@ -120,7 +120,12 @@ indexData.publicTotal = publishedItems.length;
 indexData.byDate = archiveMap(items);
 indexData.publicByDate = archiveMap(publishedItems);
 
-homepageUi.featuredReads = publicLatest.slice(0, 4).map((item) => ({
+const featuredPaths = new Set();
+homepageUi.featuredReads = publishedItems.filter(item => {
+  const id = item.sourcePath || item.path;
+  if (!id || featuredPaths.has(id)) return false;
+  featuredPaths.add(id); return true;
+}).slice(0, 5).map((item) => ({
   title: item.title,
   tag: item.tag,
   summary: item.summary,

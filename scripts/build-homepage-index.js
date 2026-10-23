@@ -290,13 +290,17 @@ function updateHomepageUi(indexData) {
   if (!exists(homepageUiPath)) return;
 
   const ui = readJsonSafe(homepageUiPath) || {};
-  const latest = indexData.latest || [];
   const publicLatest = indexData.publicLatest || [];
   const publishedItems = indexData.publishedItems || [];
-  const source = publicLatest.length ? publicLatest : publishedItems.length ? publishedItems.slice(0, 4) : latest;
+  const seen = new Set();
+  const source = [...publicLatest, ...publishedItems].filter(item => {
+    const id = item.sourcePath || item.path;
+    if (item.source !== "articles" || !id || seen.has(id)) return false;
+    seen.add(id); return true;
+  }).slice(0, 5);
 
   if (source.length) {
-    ui.featuredReads = source.slice(0, 4).map((item) => ({
+    ui.featuredReads = source.map((item) => ({
       title: item.title,
       title_hi: item.title_hi || "",
       tag: item.tag,
@@ -305,7 +309,8 @@ function updateHomepageUi(indexData) {
       folder: item.folder,
       url: item.url,
       sourcePath: item.sourcePath,
-      date: item.date
+      date: item.date,
+      image: item.image || ""
     }));
 
     ui.readingGuide = {
