@@ -1,12 +1,18 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import { createHash } from "node:crypto";
 import {
   ag76AddCivilDays, ag76AstronomicalPrimitive, ag76IntervalContainsInstant,
   ag76IntervalsOverlap, ag76NextAngularBoundary, ag76SolarIngressesForRange,
-  buildAg76AstronomyDayContext, intersectAg76Intervals, normalizeAg76Interval
+  buildAg76AstronomyDayContext, buildAg76AstronomyRangeContext, calculateAg76Daypart,
+  intersectAg76Intervals, normalizeAg76Interval
 } from "./lib/ag76-festival-astronomy-adapter.mjs";
 import { evaluateAg76ApprovalGate } from "./lib/ag76-festival-approval-gate.mjs";
 import { evaluateAg76FestivalRule, validateAg76RuleDsl } from "./lib/ag76-festival-rule-engine.mjs";
+import { assignAg74nLunarContextAtInstant, assignPurnimantaMonth, buildAmantaMonthIntervals,
+  generateVaranasiSamvatYear } from "./lib/ag74n-panchang-calendar-engine.mjs";
+import { orchestrateAg74mPanchangDay } from "./lib/ag74m-panchang-day-orchestrator.mjs";
 
 // Synthetic mechanics fixtures below are not independently verified festival-date benchmarks.
 let passed = 0;
@@ -772,4 +778,397 @@ test("Deterministic results under UTC, Asia/Kolkata and America/New_York process
   success(result.unique);
   failure(result.unknown, "insufficient_neighbor_evidence");
 });
-console.log("AG76 validation passed: " + passed + " focused checks. Synthetic mechanics are not festival-date approvals.");
+const r1Passed = passed;
+assert.equal(r1Passed, 136, "Preserve all original R1 regressions.");
+
+// R3 cases below are provider-contract regressions or synthetic mechanics, not approved festival fixtures.
+function r3Rule(operator = "element_at_sunrise", changes = {}) {
+  return ruleFor(operator, { target_indices: [15] }, {
+    contract_version: "ag76.r3.v1",
+    calendar_basis: { type: "hindu_lunar", convention: "purnimanta", month_key: "ashadha",
+      paksha: "Shukla Paksha", tithi_indices: [15], allowed_month_instances: ["regular"], kshaya_policy: "withhold" },
+    ...changes
+  });
+}
+function r3Request(start = "2026-07-27", end = "2026-07-31", alias = "New Delhi", definitions = []) {
+  return { location_input: { mode: "named_location", alias }, start_civil_date: start,
+    end_civil_date_exclusive: end, daypart_definitions: definitions };
+}
+function r3Run(rule = r3Rule(), astronomy_request = r3Request(), extra = {}) {
+  return evaluateAg76FestivalRule({ rule, astronomy_request, approval_context: context, ...extra });
+}
+function definition(daypart, fields = {}) {
+  const models = { daytime: "sunrise_to_sunset", night: "sunset_to_next_sunrise",
+    purvahna: "daylight_fraction", madhyahna: "daylight_fraction", aparahna: "daylight_fraction",
+    pradosha: "sunset_offsets", nishita: "night_fraction" };
+  const parameters = { purvahna: { start_fraction: [0, 1], end_fraction: [1, 2] },
+    madhyahna: { start_fraction: [2, 5], end_fraction: [3, 5] },
+    aparahna: { start_fraction: [3, 5], end_fraction: [4, 5] },
+    pradosha: { start_seconds: 0, end_seconds: 7200 },
+    nishita: { start_fraction: [7, 15], end_fraction: [8, 15] } };
+  return { definition_id: "synthetic_" + daypart, definition_version: "1.0.0", daypart,
+    model: models[daypart], ...parameters[daypart], source_evidence_refs: ["synthetic:date_rule"],
+    review_status: "rule_review_pending", ...fields };
+}
+function overlapRule(daypart, basis = {}, target = 15) {
+  return r3Rule("element_overlaps_daypart", {
+    calendar_basis: { ...r3Rule().calendar_basis, ...basis, tithi_indices: [target] },
+    candidate_selectors: [{ selector_id: "synthetic_overlap", operator: "element_overlaps_daypart",
+      element: "tithi", target_indices: [target], daypart,
+      daypart_definition_ref: { definition_id: "synthetic_" + daypart, definition_version: "1.0.0" } }]
+  });
+}
+const hash = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
+test("R3: six R1 envelopes exactly match the pre-R3 baseline snapshot", () => {
+  const values = [run(), run(baseRule(), repeatedDays()), run(baseRule(), [unknownPredecessorDay()]),
+    run(betweenRule(), [betweenDay()]), run(solarRule(9), [solarDay("2026-01-01T12:00:00.000Z")]),
+    run(sequenceRule(), [], { child_results: children() })];
+  assert.equal(hash(values), "82fe2614f11ead73875f0167779702fd376aa0f653fd7c01ee0c3523e26b8139");
+});
+for (const version of [null, "ag76.r3.v2", "1.0.0"]) test("R3: unknown version rejected " + version, () => {
+  failure(r3Run({ ...r3Rule(), contract_version: version }), "unsupported_contract_version");
+});
+test("R3: unique sunrise condition remains internal and source-blocked", () => {
+  const r = r3Run(); success(r);
+  assert.equal(r.evaluation_state, "unique_astronomical_match");
+  assert.deepEqual(r.candidate_observance_dates, ["2026-07-29"]);
+  assert.equal(r.rule_trace.golden_fixture_approved, false);
+  assert(r.approval_state.fail_closed_reasons.some(r => r.code === "source_evidence_not_approved"));
+  assert(r.approval_state.fail_closed_reasons.some(r => r.code === "primary_public_window_not_approved"));
+});
+test("R3: wrong month is a traced nonmatch, never a borrowed sunrise label", () => {
+  const rule = r3Rule(); rule.calendar_basis.month_key = "magha";
+  const r = r3Run(rule); failure(r, "no_internal_candidate");
+  assert(r.candidate_trace.some(t => t.calendar_qualification.some(q => q.reason === "wrong_lunar_month")));
+});
+test("R3: contradictory Paksha is rejected structurally", () => {
+  const rule = r3Rule(); rule.calendar_basis.paksha = "Krishna Paksha";
+  failure(r3Run(rule), "inconsistent_paksha_constraint");
+});
+test("R3: calendar and selector targets cannot disagree", () => {
+  const rule = r3Rule(); rule.calendar_basis.tithi_indices = [14];
+  failure(r3Run(rule), "inconsistent_calendar_selector");
+});
+test("R3: getters in nested calendar data are never executed", () => {
+  const rule = r3Rule(); let calls = 0;
+  Object.defineProperty(rule.calendar_basis, "type", { get() { calls++; return "hindu_lunar"; }, enumerable: true });
+  failure(r3Run(rule), "invalid_data"); assert.equal(calls, 0);
+});
+test("R3: provider-derived skipped Pratipada is enclosed by two verified sunrises", () => {
+  const rule = r3Rule("element_occurs_between_sunrises");
+  rule.calendar_basis.month_key = "chaitra"; rule.calendar_basis.tithi_indices = [1];
+  rule.candidate_selectors[0].target_indices = [1];
+  const r = r3Run(rule, r3Request("2026-03-18", "2026-03-21")); success(r);
+  assert.deepEqual(r.candidate_observance_dates, ["2026-03-19"]);
+  const c = buildAg76AstronomyRangeContext(r3Request("2026-03-18", "2026-03-21"));
+  const day = c.days.find(d => d.civil_date === "2026-03-19");
+  assert.equal(day.elements.tithi.index, 30);
+  assert.equal(day.neighboring_sunrises.next.classification.tithi.index, 2);
+  const w = r.candidates[0].astronomical_condition_window;
+  assert(w.start_utc > day.sunrise.utc && w.end_utc < day.neighboring_sunrises.next.sunrise_utc);
+});
+test("R3: later daypart qualifies the new Amanta month, not the sunrise month", () => {
+  const request = r3Request("2026-03-18", "2026-03-21", "New Delhi", [definition("madhyahna")]);
+  const rule = overlapRule("madhyahna", { month_key: "chaitra", convention: "amanta" }, 1);
+  const r = r3Run(rule, request); success(r);
+  assert.deepEqual(r.candidate_observance_dates, ["2026-03-19"]);
+  assert.equal(r.candidates[0].matches[0].calendar_qualification.lunar_context.canonical_key, "chaitra");
+  const daily = orchestrateAg74mPanchangDay({ mode: "named_location", alias: "New Delhi", civil_date: "2026-03-19" });
+  const model = buildAmantaMonthIntervals("2026-03-01T00:00:00Z", "2026-04-01T00:00:00Z");
+  assert.equal(assignAg74nLunarContextAtInstant(daily.sunrise.utc, "amanta", model).canonical_key, "phalguna");
+  const sunrise = r3Rule(); sunrise.calendar_basis = rule.calendar_basis;
+  sunrise.candidate_selectors[0].target_indices = [1];
+  failure(r3Run(sunrise, request), "no_internal_candidate");
+});
+test("R3: Amanta and Purnimanta distinguish the same Krishna occurrence", () => {
+  const model = buildAmantaMonthIntervals("2026-10-01T00:00:00Z", "2026-11-01T00:00:00Z");
+  const utc = "2026-10-08T06:00:00Z";
+  const a = assignAg74nLunarContextAtInstant(utc, "amanta", model);
+  const p = assignAg74nLunarContextAtInstant(utc, "purnimanta", model);
+  assert.equal(a.paksha, "Krishna Paksha"); assert.equal(a.tithi_index, p.tithi_index);
+  assert.notEqual(a.canonical_key, p.canonical_key);
+  for (const lunar of [a, p]) {
+    const rule = r3Rule(); rule.calendar_basis = { ...rule.calendar_basis, convention: lunar.convention,
+      month_key: lunar.canonical_key, paksha: lunar.paksha, tithi_indices: [lunar.tithi_index] };
+    rule.candidate_selectors[0].target_indices = [lunar.tithi_index];
+    const r = r3Run(rule, r3Request("2026-10-07", "2026-10-10")); success(r);
+    assert(r.candidate_observance_dates.includes("2026-10-08"));
+  }
+});
+for (const [date, instance] of [["2026-05-25", "adhika"], ["2026-06-25", "nija"], ["2026-07-29", "regular"]]) {
+  test("R3: explicit " + instance + " acceptance and rejection", () => {
+    const model = buildAmantaMonthIntervals("2026-04-01T00:00:00Z", "2026-09-01T00:00:00Z");
+    const daily = orchestrateAg74mPanchangDay({ mode: "named_location", alias: "New Delhi", civil_date: date });
+    const lunar = assignPurnimantaMonth(daily, model);
+    assert.equal(lunar.instance_kind, instance);
+    const rule = r3Rule(); rule.calendar_basis = { ...rule.calendar_basis, month_key: lunar.canonical_key,
+      paksha: daily.paksha, tithi_indices: [daily.elements.tithi.index], allowed_month_instances: [instance] };
+    rule.candidate_selectors[0].target_indices = rule.calendar_basis.tithi_indices;
+    const request = r3Request(ag76AddCivilDays(date, -2), ag76AddCivilDays(date, 3));
+    const r = r3Run(rule, request); closed(r); assert(r.candidate_observance_dates.includes(date));
+    rule.calendar_basis.allowed_month_instances = [instance === "regular" ? "adhika" : "regular"];
+    failure(r3Run(rule, request), "no_internal_candidate");
+  });
+}
+test("R3: Kshaya-related context remains withheld and is not an instance label", () => {
+  const daily = orchestrateAg74mPanchangDay({ mode: "named_location", alias: "New Delhi", civil_date: "1983-01-25" });
+  const model = buildAmantaMonthIntervals("1983-01-01T00:00:00Z", "1983-03-01T00:00:00Z");
+  const lunar = assignPurnimantaMonth(daily, model); assert(lunar.source_kshaya_after);
+  const rule = r3Rule(); rule.calendar_basis = { ...rule.calendar_basis, month_key: lunar.canonical_key,
+    paksha: daily.paksha, tithi_indices: [daily.elements.tithi.index] };
+  rule.candidate_selectors[0].target_indices = rule.calendar_basis.tithi_indices;
+  const r = r3Run(rule, r3Request("1983-01-23", "1983-01-28"));
+  failure(r, "insufficient_astronomical_context"); assert.equal(r.selected_internal_candidates.length, 0);
+  assert(r.candidate_trace.some(t => t.reasons.includes("kshaya_policy_withhold")));
+  rule.calendar_basis.allowed_month_instances = ["kshaya"];
+  failure(r3Run(rule), "invalid_month_instance");
+});
+for (const [start, end] of [["2026-03-18", "2026-03-21"], ["2026-12-29", "2027-01-04"]]) {
+  test("R3: full untruncated half-open Tithi progression " + start, () => {
+    const c = buildAg76AstronomyRangeContext(r3Request(start, end));
+    assert.equal(c.status, "ag76_r3_range_context_available");
+    const windows = c.coverage.intervals;
+    assert(windows[0].interval.start_utc <= c.coverage.start_utc);
+    assert(windows.at(-1).interval.end_utc >= c.coverage.end_utc);
+    for (let i = 0; i < windows.length; i++) {
+      const w = windows[i];
+      assert.equal(ag76IntervalContainsInstant(w.interval, w.interval.start_utc), true);
+      assert.equal(ag76IntervalContainsInstant(w.interval, w.interval.end_utc), false);
+      assert(w.start_boundary.final_bracket_seconds <= 0.5 && w.end_boundary.final_bracket_seconds <= 0.5);
+      if (i) { assert.equal(w.interval.start_utc, windows[i - 1].interval.end_utc);
+        assert.equal(w.index, windows[i - 1].index % 30 + 1); }
+    }
+  });
+}
+const repeatContext = buildAg76AstronomyRangeContext(r3Request("2026-07-01", "2026-07-31"));
+const repeatIndex = repeatContext.days.findIndex((day, i, days) =>
+  day.in_requested_scope && days[i + 1]?.in_requested_scope && day.elements.tithi.index === days[i + 1].elements.tithi.index);
+assert(repeatIndex >= 0, "A real provider repeated-sunrise mechanics case is required.");
+const pair = repeatContext.days.slice(repeatIndex, repeatIndex + 2);
+const repeatRule = r3Rule(); repeatRule.calendar_basis = { type: "astronomical" };
+repeatRule.candidate_selectors[0].target_indices = [pair[0].elements.tithi.index];
+const repeatRequest = r3Request(ag76AddCivilDays(pair[0].civil_date, -1), ag76AddCivilDays(pair[1].civil_date, 2));
+test("R3: two real sunrise matches remain unresolved, never first/last-selected", () => {
+  const r = r3Run(repeatRule, repeatRequest); failure(r, "unresolved_traditional_precedence");
+  assert.deepEqual(r.candidate_observance_dates, pair.map(d => d.civil_date));
+  assert.deepEqual(r.selected_internal_candidates, []);
+  assert(r.candidate_trace.filter(t => t.status === "pass").every(t => t.precedence_status === "unresolved_traditional_precedence"));
+});
+test("R3: an omitted matching neighboring day prevents false uniqueness", () => {
+  const r = r3Run(repeatRule, r3Request(pair[1].civil_date, ag76AddCivilDays(pair[1].civil_date, 1)));
+  failure(r, "incomplete_competing_day_scope"); assert.equal(r.candidate_observance_dates.length, 2);
+});
+for (const precedence_policy of ["prefer_first_candidate", "prefer_last_candidate"]) test("R3: rejects " + precedence_policy, () => {
+  failure(r3Run({ ...repeatRule, precedence_policy }, repeatRequest), "unsupported_precedence_policy");
+});
+const syntheticSolarDay = () => ({ ...syntheticDay(), location: {
+  latitude: 0, longitude: 0, timezone: "UTC", canonical_location_id: null } });
+for (const [name, start, end] of [["daytime", "06:00", "18:00"], ["night", "18:00", "06:00"],
+  ["purvahna", "06:00", "12:00"], ["madhyahna", "10:48", "13:12"],
+  ["aparahna", "13:12", "15:36"], ["pradosha", "18:00", "20:00"], ["nishita", "23:36", "00:24"]]) {
+  test("R3 synthetic definition: " + name + " uses its supplied mathematical model", () => {
+    const r = calculateAg76Daypart(definition(name), syntheticSolarDay()); closed(r);
+    assert.equal(r.status, "daypart_available_internal_only");
+    assert.equal(r.interval.start_utc, "2026-01-01T" + start + ":00.000Z");
+    assert.equal(r.interval.end_utc, (name === "night" || name === "nishita" ? "2026-01-02T" : "2026-01-01T") + end + ":00.000Z");
+    assert.equal(r.traditional_approval, false); assert.equal(r.definition.definition_version, "1.0.0");
+  });
+}
+test("R3: missing definition evidence is pending without a substituted interval", () => {
+  const r = calculateAg76Daypart(definition("purvahna", { source_evidence_refs: [] }), syntheticSolarDay());
+  closed(r); assert.equal(r.status, "pending_definition_evidence"); assert.equal(r.interval, null);
+});
+test("R3: missing sunset remains unavailable, not a default clock time", () => {
+  const r = calculateAg76Daypart(definition("night"), { ...syntheticSolarDay(), sunset: null });
+  closed(r); assert.equal(r.status, "daypart_unavailable"); assert.equal(r.interval, null);
+});
+for (const [fields, code] of [[{ model: "civil_noon" }, "unsupported_daypart_definition"],
+  [{ start_fraction: [1, 0] }, "invalid_daypart_fraction"],
+  [{ start_seconds: 0 }, "unsupported_definition_constraint"],
+  [{ review_status: "approved" }, "definition_approval_not_supported"]]) {
+  test("R3: invalid or self-approved definition fails closed " + code, () => {
+    failure(calculateAg76Daypart(definition("madhyahna", fields), syntheticSolarDay()), code);
+  });
+}
+test("R3: no implicit daypart definition is installed", () => {
+  const r = r3Run(overlapRule("madhyahna")); failure(r, "insufficient_astronomical_context");
+  assert(r.candidate_trace.every(t => t.reasons.includes("missing_daypart_definition")));
+});
+test("R3: definition references must resolve to canonical rule evidence", () => {
+  const r = r3Run(overlapRule("madhyahna"), r3Request("2026-07-27", "2026-07-31", "New Delhi",
+    [definition("madhyahna", { source_evidence_refs: ["unresolved:source"] })]));
+  failure(r, "unresolved_definition_evidence");
+});
+test("R3: two daytime overlaps preserve competing dates and scoped definitions", () => {
+  const r = r3Run(overlapRule("daytime"), r3Request("2026-07-27", "2026-07-31", "New Delhi", [definition("daytime")]));
+  failure(r, "unresolved_traditional_precedence"); assert.deepEqual(r.candidate_observance_dates, ["2026-07-28", "2026-07-29"]);
+  assert(r.candidates.every(c => c.matches[0].daypart_definition.definition_id === "synthetic_daytime"));
+});
+test("R3: caller-supplied candidate order or fabricated coverage cannot override provider scope", () => {
+  failure(r3Run(repeatRule, repeatRequest, { day_contexts: pair }), "unsupported_r3_day_contexts");
+  failure(r3Run(repeatRule, repeatRequest, { day_contexts: [...pair].reverse() }), "unsupported_r3_day_contexts");
+});
+test("R3: definition-order permutations cannot change candidate ordering or traces", () => {
+  const defs = [definition("daytime"), definition("night")];
+  const request = r3Request("2026-07-27", "2026-07-31", "New Delhi", defs);
+  assert.deepEqual(r3Run(overlapRule("daytime"), request),
+    r3Run(overlapRule("daytime"), { ...request, daypart_definitions: [...defs].reverse() }));
+});
+test("R3: bounded requests reject empty and excessive ranges", () => {
+  failure(buildAg76AstronomyRangeContext(r3Request("2026-01-01", "2026-01-01")), "resource_limit");
+  failure(buildAg76AstronomyRangeContext(r3Request("2026-01-01", "2026-04-01")), "resource_limit");
+  assert.equal(buildAg76AstronomyRangeContext(r3Request("2026-01-01", "2026-03-04")).status,
+    "ag76_r3_range_context_available");
+});
+test("R3: timezone conflicts and unavailable solar events fail closed", () => {
+  const request = r3Request(); request.location_input.timezone = "UTC";
+  failure(buildAg76AstronomyRangeContext(request), "location_resolution_failed");
+  const polar = { ...r3Request("2026-06-20", "2026-06-23"), location_input: {
+    mode: "coordinate_first", latitude: 89, longitude: 0, timezone: "UTC" } };
+  failure(buildAg76AstronomyRangeContext(polar), "astronomy_day_unavailable");
+});
+test("R3: local civil-day boundaries retain DST rather than fixed 24-hour arithmetic", () => {
+  const r = buildAg76AstronomyRangeContext({ ...r3Request("2026-03-07", "2026-03-10"),
+    location_input: { mode: "coordinate_first", latitude: 40.7128, longitude: -74.006, timezone: "America/New_York" } });
+  assert.equal(r.status, "ag76_r3_range_context_available");
+  const day = r.days.find(d => d.civil_date === "2026-03-08");
+  assert.equal(day.dayparts.civil_day.duration_hours, 23);
+});
+for (const year of [2025, 2026, 2027, 2030, 2035]) for (const alias of ["Varanasi / Banaras", "New Delhi"]) {
+  test("R3 provider-contract cross-year/location consistency: " + year + " " + alias, () => {
+    const request = r3Request(year + "-07-01", year + "-08-03", alias);
+    const r = r3Run(r3Rule(), request); success(r);
+    assert.equal(r.candidates.length, 1); assert.equal(r.calculation_basis.timezone, "Asia/Kolkata");
+    const lunar = r.candidates[0].matches[0].calendar_qualification.lunar_context;
+    assert.equal(lunar.canonical_key, "ashadha"); assert.equal(lunar.instance_kind, "regular");
+    assert.equal(lunar.tithi_index, 15); assert.equal(lunar.paksha, "Shukla Paksha");
+    assert.equal(r.calculation_basis.location.canonical_location_id,
+      alias === "New Delhi" ? "new_delhi_in" : "varanasi_in");
+    assert.equal(r.approval_state.source_evidence_approved, false);
+  });
+}
+test("R3: explicit retention of multiple internal candidates does not choose a traditional winner", () => {
+  const r = r3Run({ ...repeatRule, precedence_policy: "allow_multiple_internal_candidates" }, repeatRequest);
+  success(r); assert.equal(r.evaluation_state, "multiple_astronomical_matches");
+  assert.equal(r.selected_internal_candidates.length, 2);
+  assert.equal(r.traditional_precedence_status, "unresolved");
+});
+test("R3: ambiguous variants cannot reach astronomical selection", () => {
+  const rule = r3Rule(); rule.applicability.variant_policy = "explicit_required";
+  rule.applicability.variants = [{ variant_id: "synthetic_variant", countries: ["*"], regions: ["*"],
+    traditions: ["hindu"], sampradayas: ["*"] }];
+  failure(r3Run(rule), "ambiguous_variant_selection");
+  success(r3Run(rule, r3Request(), { variant_selection: { variant_id: "synthetic_variant" } }));
+});
+test("R3: physical location and restricted approval contexts cannot contradict each other", () => {
+  failure(r3Run(r3Rule(), r3Request(), { approval_context: { tradition: "hindu", country_code: "US" } }),
+    "location_applicability_mismatch");
+  failure(r3Run(r3Rule(), r3Request(), { approval_context: { tradition: "hindu", region: "maharashtra" } }),
+    "location_applicability_mismatch");
+  const rule = r3Rule(); rule.applicability.countries = ["IN"];
+  const request = { ...r3Request(), location_input: { mode: "coordinate_first", latitude: 28.6,
+    longitude: 77.2, timezone: "Asia/Kolkata" } };
+  failure(r3Run(rule, request, { approval_context: { tradition: "hindu", country_code: "IN" } }),
+    "unverified_location_applicability");
+});
+test("R3: unsupported conventions and explicit activation flags fail closed", () => {
+  const rule = r3Rule(); rule.calendar_basis.convention = "unspecified";
+  failure(r3Run(rule), "unsupported_calendar_convention");
+  for (const field of ["public_output_allowed", "runtime_activation"]) {
+    failure(r3Run({ ...r3Rule(), [field]: true }), "activation_forbidden");
+  }
+});
+test("R3: unsupported element completeness and daypart names are not silently downgraded", () => {
+  const rule = r3Rule(); rule.candidate_selectors[0].element = "nakshatra";
+  failure(r3Run(rule), "unsupported_r3_condition");
+  const overlap = overlapRule("daytime"); overlap.candidate_selectors[0].daypart = "civil_noon";
+  failure(r3Run(overlap), "unsupported_daypart");
+});
+test("R3: solar ingress reuses the existing operator and provider sign contract", () => {
+  const rule = { ...solarRule(9), contract_version: "ag76.r3.v1" };
+  const r = r3Run(rule, r3Request("2026-01-13", "2026-01-17")); success(r);
+  assert.equal(r.candidates[0].astronomical_event.entered_sidereal_sign_index, 9);
+  assert.equal(r.candidates.length, 1);
+});
+test("R3: parent validation preserves the existing nondated relationship contract", () => {
+  const rule = { ...sequenceRule(), contract_version: "ag76.r3.v1" };
+  const r = evaluateAg76FestivalRule({ rule, child_results: children(), approval_context: context });
+  success(r); assert.equal(r.evaluation_state, "sequence_trace_available");
+  assert.deepEqual(r.candidate_observance_dates, []);
+});
+test("R3: duplicate or mismatched definition identities fail structurally", () => {
+  const def = definition("daytime");
+  failure(buildAg76AstronomyRangeContext(r3Request("2026-07-27", "2026-07-31", "New Delhi", [def, def])),
+    "duplicate_daypart_definition");
+  const request = r3Request("2026-07-27", "2026-07-31", "New Delhi", [definition("night", { definition_id: "synthetic_daytime" })]);
+  failure(r3Run(overlapRule("daytime"), request), "daypart_definition_mismatch");
+});
+test("R3: subsecond boundary ambiguity is pending, not rounded into a unique match", () => {
+  const request = r3Request();
+  const c = buildAg76AstronomyRangeContext(request);
+  const w = c.coverage.intervals.find(w => w.index === 15);
+  const date = w.interval.start_utc.slice(0, 10);
+  const day = c.days.find(d => d.civil_date === date);
+  const offset = (Date.parse(w.interval.start_utc) - Date.parse(day.sunset.utc)) / 1000;
+  request.daypart_definitions = [definition("pradosha", { start_seconds: offset - 0.1, end_seconds: offset + 0.1 })];
+  const r = r3Run(overlapRule("pradosha"), request);
+  failure(r, "insufficient_astronomical_context");
+  assert(r.candidate_trace.some(t => t.reasons.includes("numerically_uncertain_overlap")));
+});
+test("R3: local-day overlaps do not replace original full astronomical intervals", () => {
+  const r = r3Run(overlapRule("daytime"), r3Request("2026-07-27", "2026-07-31", "New Delhi", [definition("daytime")]));
+  failure(r, "unresolved_traditional_precedence");
+  const a = r.candidates[0].matches[0], b = r.candidates[1].matches[0];
+  assert.deepEqual(a.astronomical_condition_window, b.astronomical_condition_window);
+  assert.notDeepEqual(a.qualified_intersection, b.qualified_intersection);
+  assert(r.candidate_trace.filter(t => t.status === "pass").every(t => t.daypart_intersection.overlaps.length === 1));
+});
+test("R3: real range evaluation is byte-identical across host timezones", () => {
+  const script = 'import {evaluateAg76FestivalRule} from "./scripts/lib/ag76-festival-rule-engine.mjs";' +
+    'console.log(JSON.stringify(evaluateAg76FestivalRule(' + JSON.stringify({ rule: overlapRule("daytime"),
+      astronomy_request: r3Request("2026-07-27", "2026-07-31", "New Delhi", [definition("daytime")]),
+      approval_context: context }) + ')));';
+  const outputs = ["UTC", "Asia/Kolkata", "America/New_York"].map(TZ => {
+    const r = spawnSync(process.execPath, ["--input-type=module", "-e", script],
+      { cwd: new URL("..", import.meta.url), encoding: "utf8", env: { ...process.env, TZ } });
+    assert.equal(r.status, 0, r.stderr); return r.stdout;
+  });
+  assert.equal(outputs[0], outputs[1]); assert.equal(outputs[0], outputs[2]);
+  failure(JSON.parse(outputs[0]), "unresolved_traditional_precedence");
+});
+test("R3: even approved synthetic source metadata cannot enable publication", () => {
+  const rule = r3Rule(); rule.source_evidence = ["event_definition", "canonical_name", "date_rule", "timing_rule", "ritual_rule"]
+    .map(p => evidence(p, "approved")); rule.governance.rule_review_status = "approved";
+  rule.public_window_policy.approval_status = "approved";
+  const r = r3Run(rule); success(r); assert.equal(r.public_output_allowed, false);
+  assert.equal(r.primary_public_window, null); assert.deepEqual(r.ritual_windows, []);
+  assert.equal(r.parana_conclusion.window, null);
+});
+test("R3: the entire pre-R3 AG74N Samvat 2083 result is unchanged", () => {
+  const annual = generateVaranasiSamvatYear(2026);
+  // Captured before extraction at baseline 4477f0e9; this is a compatibility snapshot, not independent astronomy.
+  assert.equal(hash(annual), "06400a9f2595a5e73f76b037a181daac65c224c66b331ba85cf8cf6954dceecf");
+  assert.equal(annual.daily_record_count, 384); assert.equal(annual.annual_book.physical_page_count, 4);
+});
+test("R3: lunar instants inside AG74N boundary uncertainty remain unavailable", () => {
+  const model = buildAmantaMonthIntervals("2026-03-01T00:00:00Z", "2026-04-01T00:00:00Z");
+  const boundary = model.new_moons.find(b => b.utc.startsWith("2026-03-19")); assert(boundary);
+  const r = assignAg74nLunarContextAtInstant(boundary.utc, "amanta", model);
+  assert.equal(r.available, false); assert.equal(r.reason, "numerically_uncertain_calendar_boundary"); closed(r);
+});
+test("R3: range segments retain AG74N calendar-boundary uncertainty alongside Tithi precision", () => {
+  const c = buildAg76AstronomyRangeContext(r3Request("2026-03-18", "2026-03-21"));
+  assert.equal(c.status, "ag76_r3_range_context_available");
+  assert(c.calendar_segments.some(s => s.index === 1 && s.calendar_boundary_uncertainty.length > 0));
+});
+test("R3: all 29 frozen research identities and published examples remain unapproved", () => {
+  const p = JSON.parse(fs.readFileSync(new URL("../data/knowledge-base/panchang-festival/production/ag76-r2b-festival-rule-evidence-benchmarks.json", import.meta.url)));
+  assert.equal(p.target_records.length, 29); assert.equal(p.runtime_activation, false); assert.equal(p.public_output_allowed, false);
+  for (const record of p.target_records) {
+    assert.equal(record.approval_state.production_readiness, "not_ready"); closed(record.approval_state);
+    assert(record.source_evidence.every(e => e.review_status !== "approved"));
+    assert(record.benchmark_cases.every(b => b.usable_as_executable_golden_fixture === false));
+  }
+});
+console.log("AG76 validation passed: " + passed + " focused checks (" + r1Passed + " original R1, " +
+  (passed - r1Passed) + " added R3). Synthetic/provider regressions are not festival-date approvals.");

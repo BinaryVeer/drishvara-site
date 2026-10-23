@@ -9,7 +9,10 @@ import {
   localDateKeyAt,
   orchestrateAg74mPanchangDay
 } from "./ag74m-panchang-day-orchestrator.mjs";
-import { generateSolarIngressSequence } from "./ag74n-panchang-calendar-engine.mjs";
+import {
+  assignAg74nLunarContextAtInstant, buildAmantaMonthIntervals, generateSolarIngressSequence
+} from "./ag74n-panchang-calendar-engine.mjs";
+import { loadAg74kResolverContext, resolveAg74kPanchangInput } from "./ag74k-panchang-input-resolver.mjs";
 
 export const AG76_ASTRONOMY_ADAPTER_VERSION = "1.0.0";
 
@@ -340,3 +343,227 @@ export function ag76SolarIngressesForRange(input) {
 }
 
 export { addCivilDays as ag76AddCivilDays, localDateKeyAt as ag76LocalDateKeyAt };
+
+export const AG76_R3_MAX_DAYS = 62;
+
+function r3Array(value, label, limit = 256) {
+  ag76Require(Array.isArray(value) && Object.getPrototypeOf(value) === Array.prototype &&
+    value.length <= limit && Object.keys(value).length === value.length,
+  "invalid_array", label + " requires a bounded, dense array.");
+  for (const key of Reflect.ownKeys(value)) {
+    const property = Object.getOwnPropertyDescriptor(value, key);
+    ag76Require(key === "length" || typeof key === "string" && /^(0|[1-9][0-9]*)$/.test(key) &&
+      Number(key) < value.length && property && "value" in property,
+    "invalid_data", label + " requires data entries only.");
+  }
+  return value;
+}
+
+function fraction(value) {
+  r3Array(value, "fraction", 2);
+  ag76Require(value.length === 2 && value.every(Number.isInteger) && value[0] >= 0 &&
+    value[1] > 0 && value[1] <= 10000 && value[0] <= value[1],
+  "invalid_daypart_fraction", "A fraction must lie within zero and one.");
+  return value[0] / value[1];
+}
+
+export function validateAg76DaypartDefinition(definition) {
+  ag76Object(definition, ["definition_id", "definition_version", "daypart", "model",
+    "start_fraction", "end_fraction", "start_seconds", "end_seconds",
+    "source_evidence_refs", "review_status"], "daypart definition");
+  ag76Id(definition.definition_id, "definition_id");
+  ag76Require(typeof definition.definition_version === "string" &&
+    /^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$/.test(definition.definition_version),
+  "invalid_definition_version", "A definition requires a numeric semantic version.");
+  const models = { daytime: "sunrise_to_sunset", night: "sunset_to_next_sunrise",
+    purvahna: "daylight_fraction", madhyahna: "daylight_fraction", aparahna: "daylight_fraction",
+    pradosha: "sunset_offsets", nishita: "night_fraction" };
+  ag76Require(Object.hasOwn(models, definition.daypart) &&
+    models[definition.daypart] === definition.model,
+  "unsupported_daypart_definition", "No definition is substituted for an unsupported daypart/model.");
+  ag76Require(["draft", "source_review_pending", "rule_review_pending"].includes(definition.review_status),
+    "definition_approval_not_supported", "R3 accepts research definitions, never self-approved definitions.");
+  const refs = r3Array(definition.source_evidence_refs, "definition evidence");
+  for (const ref of refs) ag76Text(ref, "definition evidence reference");
+  ag76Require(new Set(refs).size === refs.length, "duplicate_evidence_reference", "Duplicate definition evidence.");
+  const fractional = ["daylight_fraction", "night_fraction"].includes(definition.model);
+  const offsets = definition.model === "sunset_offsets";
+  for (const key of ["start_fraction", "end_fraction", "start_seconds", "end_seconds"]) {
+    ag76Require(!Object.hasOwn(definition, key) ||
+      (fractional ? key.endsWith("fraction") : offsets && key.endsWith("seconds")),
+    "unsupported_definition_constraint", "A definition parameter does not apply to its model.");
+  }
+  if (fractional) {
+    const a = fraction(definition.start_fraction), b = fraction(definition.end_fraction);
+    ag76Require(a < b, "invalid_daypart_fraction", "The end fraction must follow the start.");
+    if (definition.daypart === "purvahna") ag76Require(a === 0,
+      "invalid_daypart_fraction", "A supplied Purvahna definition must start at sunrise.");
+    if (definition.daypart === "madhyahna") ag76Require(a === 2 / 5 && b === 3 / 5,
+      "unsupported_daypart_definition", "Madhyahna requires the explicit middle fifth of daylight.");
+    if (definition.daypart === "aparahna") ag76Require(a === 3 / 5 && b === 4 / 5,
+      "unsupported_daypart_definition", "Aparahna requires the explicit fourth fifth of daylight.");
+    if (definition.daypart === "nishita") ag76Require(a < 0.5 && b > 0.5 && Math.abs(a + b - 1) < 1e-12,
+      "unsupported_daypart_definition", "The supplied night-relative Nishita must straddle the night midpoint symmetrically.");
+  }
+  if (offsets) ag76Require([definition.start_seconds, definition.end_seconds].every(value =>
+    typeof value === "number" && Number.isFinite(value) && Math.abs(value) <= 21600) &&
+    definition.start_seconds < definition.end_seconds,
+  "invalid_daypart_offsets", "Sunset-relative offsets require ordered bounds within six hours.");
+  return definition;
+}
+
+export function calculateAg76Daypart(definition, day) {
+  try {
+    validateAg76DaypartDefinition(definition);
+    ag76Object(day.location, ["resolution_type", "canonical_location_id", "display_label", "country",
+      "region", "latitude", "longitude", "timezone", "coordinate_precision", "source_record_path"], "daypart location");
+    ag76Require(Number.isFinite(day.location.latitude) && Math.abs(day.location.latitude) <= 90 &&
+      Number.isFinite(day.location.longitude) && Math.abs(day.location.longitude) <= 180 &&
+      day.location.timezone === day.timezone, "invalid_daypart_location",
+    "A daypart requires explicit coordinates and matching IANA timezone.");
+    const derived = !["sunrise_to_sunset", "sunset_to_next_sunrise"].includes(definition.model);
+    const base = { definition: structuredClone(definition), location: day.location,
+      timezone: ag76Timezone(day.timezone), review_status: definition.review_status,
+      traditional_approval: false, public_output_allowed: false, runtime_activation: false };
+    if (derived && definition.source_evidence_refs.length === 0) return {
+      ...base, status: "pending_definition_evidence", interval: null,
+      required_inputs: [], reason: "missing_definition_evidence" };
+    const required = definition.model === "sunrise_to_sunset" || definition.model === "daylight_fraction" ?
+      ["sunrise", "sunset"] : ["sunrise", "sunset", "next_sunrise"];
+    const events = { sunrise: day.sunrise?.utc, sunset: day.sunset?.utc,
+      next_sunrise: day.neighboring_sunrises?.next?.sunrise_utc };
+    if (required.some(key => !events[key])) return { ...base, status: "daypart_unavailable",
+      interval: null, required_inputs: required, reason: "missing_solar_event" };
+    const rise = ag76Instant(events.sunrise), set = ag76Instant(events.sunset);
+    const next = events.next_sunrise ? ag76Instant(events.next_sunrise) : null;
+    ag76Require(rise < set && (next === null || set < next), "invalid_solar_event_order",
+      "Sunrise, sunset and next sunrise must be chronological.");
+    let start = rise, end = set;
+    if (definition.model === "sunset_to_next_sunrise") { start = set; end = next; }
+    if (definition.model.endsWith("fraction")) {
+      const origin = definition.model === "daylight_fraction" ? rise : set;
+      const duration = definition.model === "daylight_fraction" ? set - rise : next - set;
+      start = Math.round(origin + fraction(definition.start_fraction) * duration);
+      end = Math.round(origin + fraction(definition.end_fraction) * duration);
+    }
+    if (definition.model === "sunset_offsets") {
+      start = Math.round(set + definition.start_seconds * 1000);
+      end = Math.round(set + definition.end_seconds * 1000);
+      if (start < rise || end > next) return { ...base, status: "daypart_unavailable",
+        interval: null, required_inputs: required, reason: "definition_outside_sunrise_day" };
+    }
+    const interval = ag76Unwrap(normalizeAg76Interval({ start_utc: new Date(start).toISOString(),
+      end_utc: new Date(end).toISOString() }, "definition_scoped_daypart", day.timezone));
+    return { ...base, status: "daypart_available_internal_only", interval, required_inputs: required,
+      numerical_diagnostics: { endpoint_rounding_ms: 0.5, solar_events_provider: "AG74M",
+        input_utc: Object.fromEntries(required.map(key => [key, events[key]])),
+        precision_is_not_independent_accuracy: true } };
+  } catch (error) { return ag76Failure(error); }
+}
+
+function completeTithiCoverage(startUtc, endUtc, anchor) {
+  const seed = anchor.elements.tithi.previous_transition;
+  const seedIndex = seed.to_index;
+  ag76Require(Number.isInteger(seedIndex) && seedIndex >= 1 && seedIndex <= 30,
+    "invalid_tithi_anchor", "A provider-classified preceding transition is required.");
+  const boundary = (target, start, maxDays) => {
+    let event;
+    try {
+      event = findNextAngularBoundary({ kind: "moon_sun_elongation", target_degrees: target,
+        start_utc: start, max_days: maxDays, step_hours: 3, tolerance_seconds: 0.5 });
+    } catch {
+      throw new Ag76ContractError("incomplete_condition_intervals", "AG74L could not provide a required boundary.");
+    }
+    return { utc: event.event_utc,
+      lower_utc: new Date(Date.parse(event.event_utc) - event.final_bracket_seconds * 1000).toISOString(),
+      final_bracket_seconds: event.final_bracket_seconds, target_degrees: event.target_degrees,
+      angle_residual_degrees: event.angle_residual_degrees };
+  };
+  let left = boundary((seedIndex - 1) * 12,
+    new Date(ag76Instant(seed.utc) - 86400000).toISOString(), 3);
+  ag76Require(ag76Instant(left.utc) <= ag76Instant(startUtc), "incomplete_condition_intervals",
+    "The preceding boundary does not cover the requested start.");
+  const intervals = [];
+  let index = seedIndex;
+  for (let count = 0; count < (AG76_R3_MAX_DAYS + 6) * 2; count++) {
+    const right = boundary(index * 12 % 360, left.utc, 3);
+    ag76Require(ag76Instant(right.utc) > ag76Instant(left.utc), "invalid_boundary_progression",
+      "Tithi boundaries must advance.");
+    const midpoint = new Date((ag76Instant(left.utc) + ag76Instant(right.utc)) / 2).toISOString();
+    ag76Require(Math.floor(astronomicalPrimitiveState(midpoint).moon_minus_sun_elongation / 12) + 1 === index,
+      "invalid_tithi_progression", "The provider interval does not match its Tithi index.");
+    intervals.push({ index, interval: ag76Unwrap(normalizeAg76Interval({ start_utc: left.utc,
+      end_utc: right.utc }, "astronomical_condition_window")), start_boundary: left, end_boundary: right });
+    if (ag76Instant(right.utc) >= ag76Instant(endUtc)) return {
+      status: "complete_provider_tithi_coverage", start_utc: startUtc, end_utc: endUtc,
+      intervals, provider: "AG74L", tolerance_seconds: 0.5,
+      public_output_allowed: false, runtime_activation: false };
+    left = right;
+    index = index % 30 + 1;
+  }
+  throw new Ag76ContractError("resource_limit", "Tithi coverage exceeded the bounded search budget.");
+}
+
+export function buildAg76AstronomyRangeContext(request, context = loadAg74kResolverContext()) {
+  try {
+    ag76Object(request, ["location_input", "start_civil_date", "end_civil_date_exclusive",
+      "daypart_definitions"], "R3 astronomy request");
+    ag76Object(request.location_input, ["mode", "latitude", "longitude", "timezone",
+      "optional_place_label", "canonical_location_id", "alias", "observer_elevation_m",
+      "elevation_approval_status", "elevation_source"], "R3 location input");
+    const first = ag76DateKey(request.start_civil_date), end = ag76DateKey(request.end_civil_date_exclusive);
+    const count = (Date.parse(end) - Date.parse(first)) / 86400000;
+    ag76Require(count > 0 && count <= AG76_R3_MAX_DAYS, "resource_limit",
+      "R3 requests require one through 62 local dates.");
+    const definitions = r3Array(request.daypart_definitions ?? [], "daypart definitions", 16)
+      .map(validateAg76DaypartDefinition).sort((a, b) =>
+        a.definition_id.localeCompare(b.definition_id) || a.definition_version.localeCompare(b.definition_version));
+    const definitionKey = d => d.definition_id + "@" + d.definition_version;
+    ag76Require(new Set(definitions.map(definitionKey)).size === definitions.length,
+      "duplicate_daypart_definition", "Definition identity/version pairs must be unique.");
+    const resolved = resolveAg74kPanchangInput({ ...request.location_input, civil_date: first }, context);
+    ag76Require(resolved.resolved === true, "location_resolution_failed", "AG74K could not resolve the request.",
+      { source_status: resolved.status });
+    const days = [];
+    // The halo closes adjacent-day selection; it is not an implicit date-selection fallback.
+    for (let date = addCivilDays(first, -1); date <= end; date = addCivilDays(date, 1)) {
+      const day = ag76Unwrap(buildAg76AstronomyDayContext({ ...request.location_input, civil_date: date }, context));
+      ag76Require(day.dayparts.panchang_day && day.neighboring_sunrises.previous &&
+        day.neighboring_sunrises.next, "insufficient_neighbor_evidence", "R3 requires the adjacent sunrise halo.");
+      days.push({ ...day, in_requested_scope: date >= first && date < end,
+        derived_dayparts: Object.fromEntries(definitions.map(def =>
+          [definitionKey(def), ag76Unwrap(calculateAg76Daypart(def, day))])) });
+    }
+    const coverageStart = days[0].dayparts.civil_day.start_utc;
+    const coverageEnd = days.at(-1).dayparts.panchang_day.end_utc;
+    const anchor = orchestrateAg74mPanchangDay({ ...request.location_input,
+      civil_date: addCivilDays(days[0].civil_date, -1) }, context);
+    ag76Require(anchor.daily_panchang_classification_performed === true,
+      "invalid_tithi_anchor", "A preceding AG74M day is required.");
+    const coverage = completeTithiCoverage(coverageStart, coverageEnd, anchor);
+    let monthModel;
+    try { monthModel = buildAmantaMonthIntervals(coverageStart, coverageEnd); }
+    catch { throw new Ag76ContractError("incomplete_calendar_segments", "AG74N could not cover the padded calendar range."); }
+    const calendarSegments = coverage.intervals.map(item => {
+      const instant = new Date((ag76Instant(item.interval.start_utc) + ag76Instant(item.interval.end_utc)) / 2).toISOString();
+      const calendars = Object.fromEntries(["amanta", "purnimanta"].map(convention => {
+        const lunar = assignAg74nLunarContextAtInstant(instant, convention, monthModel);
+        ag76Require(lunar.tithi_index === item.index, "incomplete_calendar_segments",
+          "Calendar context and condition index disagree.");
+        return [convention, lunar];
+      }));
+      const calendarBoundaryUncertainty = monthModel.new_moons.filter(boundary =>
+        [item.interval.start_utc, item.interval.end_utc].some(utc =>
+          Math.abs(ag76Instant(utc) - ag76Instant(boundary.utc)) <= 1000)).map(boundary => ({
+        utc: boundary.utc, lower_utc: new Date(ag76Instant(boundary.utc) - boundary.final_bracket_seconds * 1000).toISOString()
+      }));
+      return { ...item, calendars, calendar_boundary_uncertainty: calendarBoundaryUncertainty };
+    });
+    return { status: "ag76_r3_range_context_available", contract_version: "ag76.r3.v1",
+      scope: { start_civil_date: first, end_civil_date_exclusive: end, halo_days: 1 },
+      location: resolved.location, canonical_profile: resolved.canonical_profile,
+      timezone: resolved.location.timezone, days, coverage, calendar_segments: calendarSegments,
+      solar_ingresses: monthModel.solar_ingresses,
+      public_output_allowed: false, runtime_activation: false };
+  } catch (error) { return ag76Failure(error); }
+}

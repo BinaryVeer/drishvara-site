@@ -2,10 +2,10 @@ import {
   Ag76ContractError, ag76AddCivilDays, ag76Failure, ag76Id, ag76Instant,
   ag76IntervalContainsInstant, ag76LocalCivilDay, ag76LocalDateKeyAt, ag76NoActivation, ag76Object,
   ag76Require, ag76Text, ag76Timezone, ag76DateKey, ag76Unwrap,
-  intersectAg76Intervals, normalizeAg76Interval, validateAg76LocalInstant
+  buildAg76AstronomyRangeContext, intersectAg76Intervals, normalizeAg76Interval, validateAg76LocalInstant
 } from "./ag76-festival-astronomy-adapter.mjs";
 import {
-  ag76Array, evaluateAg76ApprovalGate, validateAg76GovernanceContract
+  AG76_R3_CONTRACT_VERSION, ag76Array, evaluateAg76ApprovalGate, validateAg76GovernanceContract
 } from "./ag76-festival-approval-gate.mjs";
 
 export const AG76_FESTIVAL_RULE_ENGINE_VERSION = "1.0.0";
@@ -17,6 +17,33 @@ const OPERATORS = ["element_at_sunrise", "element_occurs_between_sunrises",
 const PRECEDENCE = ["unique_only", "review_required_on_multiple",
   "allow_multiple_internal_candidates", "prefer_first_candidate", "prefer_last_candidate"];
 const DAYPARTS = ["civil_day", "panchang_day", "daytime", "evening"];
+const R3_DAYPARTS = ["daytime", "night", "purvahna", "madhyahna", "aparahna", "pradosha", "nishita"];
+
+function validateLunarBasis(basis) {
+  ag76Object(basis, ["type", "convention", "month_key", "paksha", "tithi_indices",
+    "allowed_month_instances", "kshaya_policy"], "lunar calendar basis");
+  ag76Require(["amanta", "purnimanta"].includes(basis.convention), "unsupported_calendar_convention",
+    "An explicit Amanta or Purnimanta convention is required.");
+  ag76Require(["chaitra", "vaishakha", "jyeshtha", "ashadha", "shravana", "bhadrapada",
+    "ashvina", "kartika", "margashirsha", "pausha", "magha", "phalguna"].includes(basis.month_key),
+  "invalid_lunar_month", "A canonical AG74N month key is required.");
+  ag76Require(["Shukla Paksha", "Krishna Paksha"].includes(basis.paksha), "invalid_paksha",
+    "An explicit Paksha is required.");
+  const targets = ag76Array(basis.tithi_indices, "calendar Tithi indices");
+  ag76Require(targets.length > 0 && new Set(targets).size === targets.length,
+    "invalid_target_indices", "Calendar Tithi indices must be unique and nonempty.");
+  for (const target of targets) {
+    index(target, "tithi");
+    ag76Require((target <= 15 ? "Shukla Paksha" : "Krishna Paksha") === basis.paksha,
+      "inconsistent_paksha_constraint", "Calendar Tithi and Paksha disagree.");
+  }
+  const instances = ag76Array(basis.allowed_month_instances, "month instances");
+  ag76Require(instances.length > 0 && new Set(instances).size === instances.length &&
+    instances.every(value => ["regular", "adhika", "nija"].includes(value)),
+  "invalid_month_instance", "Kshaya is not a month-instance label.");
+  ag76Require(basis.kshaya_policy === "withhold", "unsupported_kshaya_policy",
+    "R3 withholds Kshaya-related decisions pending independent rule review.");
+}
 
 function index(value, element) {
   ag76Require(Number.isInteger(value) && value >= 1 && value <= ELEMENTS[element],
@@ -53,9 +80,15 @@ function validateSequence(sequence, eventId) {
 
 function validateRule(rule) {
   validateAg76GovernanceContract(rule);
-  ag76Object(rule.calendar_basis, ["type"], "calendar_basis");
-  ag76Require(rule.calendar_basis.type === "astronomical", "unsupported_calendar_basis",
+  const r3 = rule.contract_version === AG76_R3_CONTRACT_VERSION;
+  ag76Object(rule.calendar_basis, r3 ? ["type", "convention", "month_key", "paksha", "tithi_indices",
+    "allowed_month_instances", "kshaya_policy"] : ["type"], "calendar_basis");
+  if (r3 && rule.calendar_basis?.type === "hindu_lunar") validateLunarBasis(rule.calendar_basis);
+  else {
+    ag76Object(rule.calendar_basis, ["type"], "calendar_basis");
+    ag76Require(rule.calendar_basis.type === "astronomical", "unsupported_calendar_basis",
     "R1 evaluates astronomical conditions only; traditional calendar conventions require a later contract.");
+  }
   if (rule.exception_branches !== undefined) {
     ag76Require(ag76Array(rule.exception_branches, "exception_branches").length === 0,
       "unsupported_exception_branch", "Executable exception branches are not supported in R1.");
@@ -66,14 +99,16 @@ function validateRule(rule) {
     "R1 requires exactly one selector; implicit AND/OR combinations are unsupported.");
   const selector = selectors[0];
   ag76Object(selector, ["selector_id", "operator", "element", "target_indices", "paksha",
-    "daypart", "required_overlap", "solar_condition", "child_event_ids"], "selector");
+    "daypart", "required_overlap", "solar_condition", "child_event_ids",
+    ...(r3 ? ["daypart_definition_ref"] : [])], "selector");
   ag76Id(selector.selector_id, "selector_id");
   ag76Require(OPERATORS.includes(selector.operator), "unsupported_operator",
     "Unsupported AG76 selector operator.", { operator: typeof selector.operator === "string" ? selector.operator : null });
   const applicable = {
     element_at_sunrise: ["element", "target_indices", "paksha"],
     element_occurs_between_sunrises: ["element", "target_indices", "paksha"],
-    element_overlaps_daypart: ["element", "target_indices", "paksha", "daypart", "required_overlap"],
+    element_overlaps_daypart: ["element", "target_indices", "paksha", "daypart", "required_overlap",
+      ...(r3 ? ["daypart_definition_ref"] : [])],
     solar_ingress_within_local_day: ["solar_condition"],
     parent_child_sequence: ["child_event_ids"]
   };
@@ -97,7 +132,14 @@ function validateRule(rule) {
     }
   }
   if (selector.operator === "element_overlaps_daypart") {
-    ag76Require(DAYPARTS.includes(selector.daypart), "unsupported_daypart", "Unsupported daypart.");
+    ag76Require((r3 ? R3_DAYPARTS : DAYPARTS).includes(selector.daypart), "unsupported_daypart", "Unsupported daypart.");
+    if (r3) {
+      ag76Object(selector.daypart_definition_ref, ["definition_id", "definition_version"], "definition reference");
+      ag76Id(selector.daypart_definition_ref.definition_id, "definition_id");
+      ag76Require(typeof selector.daypart_definition_ref.definition_version === "string" &&
+        /^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$/.test(selector.daypart_definition_ref.definition_version),
+      "invalid_definition_version", "A definition version is required.");
+    }
     if (selector.required_overlap !== undefined) {
       ag76Object(selector.required_overlap, ["minimum_seconds"], "required_overlap");
       ag76Require(typeof selector.required_overlap.minimum_seconds === "number" &&
@@ -128,8 +170,19 @@ function validateRule(rule) {
       "A parent declaration requires a parent-child sequence selector.");
   }
   const precedence = rule.precedence_policy ?? "unique_only";
-  ag76Require(PRECEDENCE.includes(precedence), "unsupported_precedence_policy",
+  ag76Require((r3 ? PRECEDENCE.slice(0, 3) : PRECEDENCE).includes(precedence), "unsupported_precedence_policy",
     "Unsupported precedence policy.");
+  if (r3 && selector.operator.startsWith("element_")) {
+    ag76Require(selector.element === "tithi", "unsupported_r3_condition",
+      "R3 complete interval and calendar qualification currently cover Tithi only; R1 is unchanged.");
+    if (rule.calendar_basis.type === "hindu_lunar") {
+      ag76Require(JSON.stringify([...selector.target_indices].sort((a, b) => a - b)) ===
+        JSON.stringify([...rule.calendar_basis.tithi_indices].sort((a, b) => a - b)) &&
+        (selector.paksha === undefined || selector.paksha === rule.calendar_basis.paksha),
+      "inconsistent_calendar_selector", "Calendar and selector constraints must agree.");
+    }
+  } else if (r3) ag76Require(rule.calendar_basis.type === "astronomical",
+    "unsupported_calendar_selector", "Solar and relationship selectors do not imply a lunar calendar match.");
   return { event_id: rule.event_id, rule_id: rule.rule_id, rule_version: rule.rule_version,
     precedence_policy: precedence, selector };
 }
@@ -585,7 +638,8 @@ function selectCandidates(rule, selector, days, candidates) {
 export function evaluateAg76FestivalRule(input) {
   let ruleId = null, operator = null;
   try {
-    ag76Object(input, ["rule", "day_contexts", "variant_selection", "child_results", "approval_context"], "engine input");
+    ag76Object(input, ["rule", "day_contexts", "variant_selection", "child_results", "approval_context",
+      "astronomy_request"], "engine input");
     const { rule, day_contexts = [], variant_selection = null,
       child_results = {}, approval_context = {} } = input;
     const validated = validateRule(rule);
@@ -599,6 +653,13 @@ export function evaluateAg76FestivalRule(input) {
       context.variant_id = variant_selection.variant_id;
     }
     const initialGate = ag76Unwrap(evaluateAg76ApprovalGate({ rule, context }));
+    if (rule.contract_version === AG76_R3_CONTRACT_VERSION) {
+      ag76Require(!Object.hasOwn(input, "day_contexts"), "unsupported_r3_day_contexts",
+        "R3 builds provider context from a bounded request; caller-supplied candidate evidence is not authoritative.");
+      return evaluateR3(rule, validated, input, context, initialGate);
+    }
+    ag76Require(!Object.hasOwn(input, "astronomy_request"), "unsupported_rule_field",
+      "R1 does not accept an R3 astronomy request.");
     const days = ag76Array(day_contexts, "day_contexts").map(validateDay)
       .sort((a, b) => a.civil_date.localeCompare(b.civil_date));
     ag76Require(new Set(days.map(day => day.civil_date)).size === days.length,
@@ -654,4 +715,183 @@ export function evaluateAg76FestivalRule(input) {
       candidate_observance_dates: [], primary_public_window: null, ritual_windows: [],
       parana_conclusion: { status: "withheld_pending_rule_review", window: null } });
   }
+}
+
+function calendarQualification(basis, segment) {
+  if (basis.type === "astronomical") return { status: "pass", reason: "astronomical_only_no_calendar_claim" };
+  const lunar = segment.calendars[basis.convention];
+  if (!lunar?.available) return { status: "unresolved", reason: "incomplete_calendar_segments" };
+  if (lunar.source_kshaya_after?.canonical_key === basis.month_key) return {
+    status: "unresolved", reason: "kshaya_month_unavailable" };
+  if (lunar.canonical_key !== basis.month_key) return { status: "fail", reason: "wrong_lunar_month" };
+  if (lunar.source_kshaya_after) return { status: "unresolved", reason: "kshaya_policy_withhold" };
+  if (lunar.paksha !== basis.paksha || !basis.tithi_indices.includes(lunar.tithi_index)) return {
+    status: "fail", reason: "wrong_calendar_condition" };
+  if (!basis.allowed_month_instances.includes(lunar.instance_kind)) return {
+    status: "fail", reason: "wrong_month_instance" };
+  return { status: "pass", reason: "qualified_at_condition_segment", lunar_context: lunar };
+}
+
+function nearBoundary(utc, segment) {
+  const instant = ag76Instant(utc);
+  return [segment.start_boundary, segment.end_boundary, ...segment.calendar_boundary_uncertainty].some(boundary =>
+    ag76Instant(boundary.lower_utc) <= instant && instant <= ag76Instant(boundary.utc));
+}
+
+function evaluateR3(rule, validated, input, context, initialGate) {
+  const selector = validated.selector;
+  let range = null, candidates = [], traces = [];
+  if (selector.operator === "parent_child_sequence") {
+    ag76Require(!Object.hasOwn(input, "astronomy_request"), "unused_astronomy_request",
+      "Sequence validation does not calculate astronomical dates.");
+    candidates = [sequenceCandidate(rule, selector, input.child_results ?? {})];
+  } else {
+    ag76Object(input.child_results ?? {}, [], "unused child_results");
+    range = ag76Unwrap(buildAg76AstronomyRangeContext(input.astronomy_request));
+    const selectedVariant = rule.applicability.variants.find(variant =>
+      variant.variant_id === initialGate.checks.applicability.selected_variant);
+    for (const scope of [rule.applicability, ...(selectedVariant ? [selectedVariant] : [])]) {
+      ag76Require(scope.countries.includes("*") || range.location.country !== null,
+        "unverified_location_applicability", "A restricted country scope requires governed location evidence.");
+      ag76Require(scope.regions.includes("*") || range.location.region !== null,
+        "unverified_location_applicability", "A restricted region scope requires governed location evidence.");
+    }
+    if (context.country_code !== undefined && range.location.country) {
+      const country = new Intl.DisplayNames(["en"], { type: "region" }).of(context.country_code);
+      ag76Require(country === range.location.country || context.country_code === range.location.country,
+        "location_applicability_mismatch", "Approval country context contradicts the governed location.");
+    }
+    if (context.region !== undefined && range.location.region) ag76Require(
+      context.region === range.location.region.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_"),
+      "location_applicability_mismatch", "Approval region context contradicts the governed location.");
+    for (const definition of input.astronomy_request.daypart_definitions ?? []) {
+      for (const reference of definition.source_evidence_refs) ag76Require(
+        (rule.source_evidence ?? []).some(entry => entry.source_reference === reference),
+        "unresolved_definition_evidence", "Definition evidence must resolve to canonical rule evidence.");
+    }
+    if (selector.operator === "solar_ingress_within_local_day") {
+      candidates = solarCandidates(rule, selector, range.days.map(day => ({ ...day,
+        solar_ingresses: range.solar_ingresses })));
+      traces = range.days.map(day => ({ civil_date: day.civil_date, in_requested_scope: day.in_requested_scope,
+        status: candidates.some(c => c.civil_date === day.civil_date) ? "pass" : "fail",
+        calendar_qualification: { status: "pass", reason: "astronomical_only" },
+        astronomical_condition: "provider_solar_ingress", daypart_intersection: "not_applicable",
+        availability: "complete", reasons: [], references: ["AG74N"] }));
+    } else for (const day of range.days) {
+      const trace = { civil_date: day.civil_date, in_requested_scope: day.in_requested_scope,
+        status: "fail", calendar_qualification: [], astronomical_condition: "no_match",
+        daypart_intersection: "not_applicable", availability: "complete", reasons: [],
+        references: ["AG74K", "AG74L", "AG74M", "AG74N"] };
+      const matches = [];
+      let part = null;
+      if (selector.operator === "element_overlaps_daypart") {
+        const ref = selector.daypart_definition_ref;
+        part = day.derived_dayparts[ref.definition_id + "@" + ref.definition_version];
+        if (part) ag76Require(part.definition.daypart === selector.daypart,
+          "daypart_definition_mismatch", "The referenced definition belongs to another daypart.");
+        trace.daypart_intersection = { status: part?.interval ? "no_qualifying_overlap" : "unresolved",
+          interval: part?.interval ?? null, definition_ref: ref, overlaps: [] };
+        if (!part?.interval) {
+          trace.status = "unresolved"; trace.availability = "incomplete";
+          trace.reasons.push(part?.reason ?? "missing_daypart_definition");
+          traces.push(trace); continue;
+        }
+        trace.references.push(part.definition.definition_id + "@" + part.definition.definition_version);
+      }
+      for (const segment of range.calendar_segments.filter(item => selector.target_indices.includes(item.index))) {
+        const qualification = calendarQualification(rule.calendar_basis, segment);
+        if (qualification.status === "fail") {
+          trace.calendar_qualification.push(qualification);
+          if (trace.astronomical_condition === "no_match") trace.astronomical_condition = "not_evaluated_calendar_mismatch";
+          continue;
+        }
+        let overlap = null;
+        if (selector.operator === "element_at_sunrise") {
+          if (nearBoundary(day.sunrise.utc, segment)) {
+            trace.reasons.push("numerically_uncertain_sunrise_boundary"); continue;
+          }
+          if (contains(segment.interval, day.sunrise.utc)) overlap = day.dayparts.panchang_day;
+        } else if (selector.operator === "element_occurs_between_sunrises") {
+          const next = day.neighboring_sunrises.next;
+          if (nearBoundary(day.sunrise.utc, segment) || nearBoundary(next.sunrise_utc, segment)) {
+            trace.reasons.push("numerically_uncertain_sunrise_boundary"); continue;
+          }
+          if (!selector.target_indices.includes(day.elements.tithi.index) &&
+            !selector.target_indices.includes(next.classification.tithi.index) &&
+            ag76Instant(segment.interval.start_utc) >= ag76Instant(day.sunrise.utc) &&
+            ag76Instant(segment.interval.end_utc) <= ag76Instant(next.sunrise_utc)) overlap = segment.interval;
+        } else {
+          overlap = ag76Unwrap(intersectAg76Intervals(segment.interval, part.interval));
+          const uncertaintyMs = (segment.start_boundary.final_bracket_seconds +
+            segment.end_boundary.final_bracket_seconds) * 1000 + 1;
+          if (!overlap) {
+            if (Math.abs(ag76Instant(segment.interval.end_utc) - ag76Instant(part.interval.start_utc)) <= uncertaintyMs ||
+              Math.abs(ag76Instant(segment.interval.start_utc) - ag76Instant(part.interval.end_utc)) <= uncertaintyMs)
+              trace.reasons.push("numerically_uncertain_daypart_boundary");
+            continue;
+          }
+          const durationMs = ag76Instant(overlap.end_utc) - ag76Instant(overlap.start_utc);
+          const minimumMs = (selector.required_overlap?.minimum_seconds ?? 0) * 1000;
+          if (durationMs <= uncertaintyMs || minimumMs > 0 && Math.abs(durationMs - minimumMs) <= uncertaintyMs) {
+            trace.reasons.push("numerically_uncertain_overlap"); continue;
+          }
+          if (durationMs < minimumMs) continue;
+        }
+        if (!overlap) continue;
+        trace.astronomical_condition = "pass";
+        if (part) {
+          trace.daypart_intersection.status = "pass";
+          trace.daypart_intersection.overlaps.push(overlap);
+        }
+        trace.calendar_qualification.push(qualification);
+        if (qualification.status === "unresolved") trace.reasons.push(qualification.reason);
+        if (qualification.status !== "pass") continue;
+        matches.push({ tithi_index: segment.index, astronomical_condition_window: segment.interval,
+          qualified_intersection: overlap, calendar_qualification: qualification,
+          daypart_definition: part?.definition ?? null });
+      }
+      trace.reasons = [...new Set(trace.reasons)].sort();
+      trace.status = trace.reasons.length ? "unresolved" : matches.length ? "pass" : "fail";
+      if (trace.reasons.length) trace.availability = "incomplete";
+      if (matches.length) candidates.push(candidate(rule, selector, day, {
+        astronomical_condition_window: matches.length === 1 ? matches[0].astronomical_condition_window : null,
+        observance_window: matches.length === 1 ? matches[0].qualified_intersection : null,
+        matches, in_requested_scope: day.in_requested_scope }));
+      traces.push(trace);
+    }
+  }
+  candidates.sort((a, b) => String(a.civil_date ?? "").localeCompare(String(b.civil_date ?? "")));
+  const outside = range && candidates.some(c => c.civil_date < range.scope.start_civil_date ||
+    c.civil_date >= range.scope.end_civil_date_exclusive);
+  const unresolved = traces.some(t => t.status === "unresolved");
+  const multipleAllowed = validated.precedence_policy === "allow_multiple_internal_candidates";
+  const errorCode = unresolved ? "insufficient_astronomical_context" : outside ? "incomplete_competing_day_scope" :
+    !candidates.length ? "no_internal_candidate" : candidates.length > 1 && !multipleAllowed ? "unresolved_traditional_precedence" : null;
+  const state = unresolved ? "insufficient_astronomical_coverage" : outside ? "incomplete_neighboring_day_scope" :
+    !candidates.length ? "no_match_complete_scope" : candidates.length > 1 ? "multiple_astronomical_matches" :
+      selector.operator === "parent_child_sequence" ? "sequence_trace_available" : "unique_astronomical_match";
+  for (const trace of traces) trace.precedence_status = errorCode ?? (candidates.length > 1 ?
+    "all_internal_candidates_retained_without_a_traditional_winner" : "unique_internal_condition_not_festival_approval");
+  return { status: errorCode ? "ag76_r3_evaluation_pending_public_blocked" : "ag76_internal_candidate_evaluated_public_blocked",
+    module_id: "AG76", contract_version: AG76_R3_CONTRACT_VERSION, engine_version: AG76_FESTIVAL_RULE_ENGINE_VERSION,
+    event_id: rule.event_id, rule_id: rule.rule_id, rule_version: rule.rule_version,
+    evaluation_state: state, candidate_observance_dates: [...new Set(candidates.map(c => c.civil_date).filter(Boolean))],
+    traditional_precedence_status: candidates.length > 1 ? "unresolved" : "not_adjudicated",
+    candidates, selected_internal_candidates: errorCode ? [] : candidates, candidate_trace: traces,
+    calculation_basis: range ? { location: range.location, timezone: range.timezone,
+      canonical_profile: range.canonical_profile, scope: range.scope } : null,
+    astronomical_condition_window: !errorCode ? candidates[0]?.astronomical_condition_window ?? null : null,
+    astronomical_event: !errorCode ? candidates[0]?.astronomical_event ?? null : null,
+    observance_window: !errorCode ? candidates[0]?.observance_window ?? null : null,
+    primary_public_window: null, ritual_windows: [],
+    parana_conclusion: { status: "withheld_pending_rule_review", window: null },
+    source_evidence_trace: structuredClone(rule.source_evidence ?? []),
+    sequence_relationship: rule.parent_child_sequence ? structuredClone(rule.parent_child_sequence) : null,
+    rule_trace: { operator: selector.operator, precedence_policy: validated.precedence_policy,
+      candidate_order: "chronological_presentation_only", variant_resolution: initialGate.checks.applicability,
+      calendar_basis: structuredClone(rule.calendar_basis),
+      synthetic_fixture: rule.metadata?.synthetic_fixture === true, golden_fixture_approved: false },
+    approval_state: evaluateAg76ApprovalGate({ rule, context, evaluation: { event_id: rule.event_id,
+      rule_id: rule.rule_id, rule_version: rule.rule_version, error_code: errorCode } }),
+    error_code: errorCode, internal_candidate_only: true, public_output_allowed: false, runtime_activation: false };
 }

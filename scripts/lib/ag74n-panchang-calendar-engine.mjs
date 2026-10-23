@@ -355,17 +355,24 @@ export function assignPurnimantaMonth(
     };
   }
 
-  const sunriseMs = Date.parse(dailyRecord.sunrise.utc);
+  return lunarContextAt(
+    Date.parse(dailyRecord.sunrise.utc),
+    dailyRecord.elements.tithi.index <= 15,
+    "purnimanta",
+    monthModel
+  );
+}
+
+function lunarContextAt(instantMs, isShukla, convention, monthModel) {
   const intervalIndex = findIntervalIndex(
     monthModel.intervals,
-    sunriseMs
+    instantMs
   );
   if (intervalIndex < 0) {
     throw new Error("No Amanta interval contains the sunrise instant.");
   }
 
-  const isShukla = dailyRecord.elements.tithi.index <= 15;
-  const sourceIndex = isShukla
+  const sourceIndex = convention === "amanta" || isShukla
     ? intervalIndex
     : intervalIndex + 1;
   const source = monthModel.intervals[sourceIndex];
@@ -375,7 +382,7 @@ export function assignPurnimantaMonth(
 
   return {
     available: true,
-    convention: "purnimanta",
+    convention,
     canonical_index: source.canonical_index,
     canonical_key: source.canonical_key,
     canonical_name: source.canonical_name,
@@ -393,10 +400,35 @@ export function assignPurnimantaMonth(
     paksha_segment: isShukla
       ? "shukla_paksha"
       : "krishna_paksha",
-    assignment_rule: isShukla
+    assignment_rule: convention === "amanta"
+      ? "amanta_uses_current_new_moon_interval"
+      : isShukla
       ? "shukla_uses_current_amanta_month_identity"
       : "krishna_uses_next_amanta_month_identity"
   };
+}
+
+export function assignAg74nLunarContextAtInstant(utc, convention, monthModel) {
+  if (!["amanta", "purnimanta"].includes(convention)) {
+    throw new RangeError("Unsupported lunar calendar convention.");
+  }
+  const state = astronomicalPrimitiveState(utc);
+  const instantMs = Date.parse(state.utc);
+  if (!Array.isArray(monthModel.new_moons)) return { available: false,
+    reason: "missing_calendar_boundary_evidence", public_output_allowed: false, runtime_activation: false };
+  if (monthModel.new_moons.some(boundary =>
+    instantMs >= Date.parse(boundary.utc) - boundary.final_bracket_seconds * 1000 &&
+    instantMs <= Date.parse(boundary.utc))) return { available: false,
+    reason: "numerically_uncertain_calendar_boundary", public_output_allowed: false, runtime_activation: false };
+  const tithiIndex = Math.floor(state.moon_minus_sun_elongation / 12) + 1;
+  const context = lunarContextAt(instantMs, tithiIndex <= 15, convention, monthModel);
+  if (convention === "amanta") {
+    delete context.purnimanta_instance_id;
+    context.amanta_instance_id = context.source_amanta_interval_id;
+  }
+  return { ...context, instant_utc: state.utc, tithi_index: tithiIndex,
+    paksha: tithiIndex <= 15 ? "Shukla Paksha" : "Krishna Paksha",
+    public_output_allowed: false, runtime_activation: false };
 }
 
 function compactDailyRecord(dailyRecord, month, samvatYear) {

@@ -11,6 +11,7 @@ export const AG76_RULE_KEYS = [
   "evidence_refs", "source_evidence", "governance", "metadata",
   "public_output_allowed", "runtime_activation"
 ];
+export const AG76_R3_CONTRACT_VERSION = "ag76.r3.v1";
 
 const REVIEW_STATES = ["draft", "source_review_pending", "rule_review_pending",
   "approved", "withheld", "deprecated"];
@@ -73,7 +74,10 @@ function windowPolicy(policy, ritual = false) {
 }
 
 export function validateAg76GovernanceContract(rule) {
-  ag76Object(rule, AG76_RULE_KEYS, "rule");
+  ag76Object(rule, [...AG76_RULE_KEYS, "contract_version"], "rule");
+  if (Object.hasOwn(rule, "contract_version")) ag76Require(
+    rule.contract_version === AG76_R3_CONTRACT_VERSION,
+    "unsupported_contract_version", "Unknown AG76 contract version.");
   ag76NoActivation(rule);
   ag76Id(rule.event_id, "event_id");
   ag76Id(rule.rule_id, "rule_id");
@@ -207,7 +211,10 @@ export function evaluateAg76ApprovalGate(input) {
       ag76Require(evaluation.error_code === null || typeof evaluation.error_code === "string",
         "invalid_evaluation_state", "Invalid evaluation error code.");
     }
-    const reasons = [{ code: "ag76_r1_internal_only", message: "AG76 R1 cannot publish results." }];
+    const reasons = [{ code: rule.contract_version === AG76_R3_CONTRACT_VERSION ?
+      "ag76_r3_internal_only" : "ag76_r1_internal_only",
+    message: rule.contract_version === AG76_R3_CONTRACT_VERSION ?
+      "AG76 R3 cannot publish results." : "AG76 R1 cannot publish results." }];
     const approved = purpose => evidence.some(entry =>
       entry.purpose === purpose && entry.review_status === "approved");
     const required = ["event_definition", "canonical_name", "date_rule"];
