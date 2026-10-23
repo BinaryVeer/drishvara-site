@@ -8,6 +8,18 @@
   "approved_bank_path": "data/knowledge-base/word-of-day/production/approved-bank.json",
   "source_map_path": "data/knowledge-base/word-of-day/production/source-map.json",
   "validator_config_path": "data/knowledge-base/word-of-day/production/validator-config.json",
+  "legacy_layout_resolution": {
+    "legacy_path_fields": [
+      "candidate_bank_path",
+      "reviewed_bank_path",
+      "approved_bank_path",
+      "source_map_path",
+      "validator_config_path"
+    ],
+    "status": "unimplemented_legacy_layout_not_active_v2_container_paths",
+    "authoritative_v2_manifest_path": "data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json",
+    "note": "Use knowledge_bank_files and the AG70E foundation manifest for existing v2 containers. Retained legacy paths are historical planning metadata, not instructions to create parallel candidate, reviewed or approved banks."
+  },
   "minimum_production_target": 108,
   "target_note": null,
   "current_counts": {

@@ -1,0 +1,428 @@
+{
+  "schema_version": "f3b2.review.v1",
+  "title": "F3B-2 Historical Word Pilot and Activities Evidence Review Dossier",
+  "baseline": "ae04816f0630b350640e6cc2080b6dd97d301c9a",
+  "prepared_on": "2026-10-23",
+  "status": "research_review_preparation_not_publication",
+  "artifact_role": "review_dossier_not_content_bank_or_selection_methodology",
+  "runtime_activation": false,
+  "public_output_allowed": false,
+  "production_approved": false,
+  "public_use_permission": "not_allowed",
+  "selector_activation_allowed": false,
+  "external_word_level_verification_performed": false,
+  "word_record_count": 3,
+  "activity_record_count": 3,
+  "governing_files": {
+    "methodology": "data/knowledge-base/word-of-day/production/methodology/ag70d-word-of-the-day-methodology-v2.json",
+    "supersession": "data/knowledge-base/word-of-day/production/methodology/ag70d-legacy-methodology-supersession-map.json",
+    "primary_rules": "data/knowledge-base/word-of-day/production/methodology/ag70d-primary-lexical-selection-rules.json",
+    "foundation_manifest": "data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json",
+    "evidence_contract": "data/knowledge-base/word-of-day/production/knowledge-bank/lexical-source-evidence-map.json",
+    "manual_review_contract": "data/knowledge-base/word-of-day/ag69h-manual-verification-fields-contract.json",
+    "output_contract": "data/knowledge-base/word-of-day/production/knowledge-bank/word-output-record-contract.json",
+    "historical_capture_queue": "data/knowledge-base/word-of-day/ag69f-word-source-evidence-capture-queue.json",
+    "historical_word_drafts": "data/knowledge-base/word-of-day/ag69f-reviewed-record-draft-no-approval.json",
+    "historical_source_catalog": "data/knowledge-base/word-of-day/ag69d-source-reference-bank-metadata.json",
+    "current_source_catalog": "data/knowledge-base/word-of-day/production/knowledge-bank/sanskrit-lexical-source-reference-bank.json",
+    "activity_templates": "data/knowledge/daily-guidance/daily-guidance-rule-examples-d03.json",
+    "activity_previews": "data/knowledge/daily-guidance/daily-guidance-selection-preview-d04.json",
+    "activity_policy": "data/knowledge/daily-guidance/daily-guidance-rule-validation-policy-d04.json"
+  },
+  "evidence_boundaries": [
+    "Historical source pointers and source-reference review are not word-level evidence or production approval.",
+    "No dictionary entry, page, quotation, attestation, sense or access date has been authenticated in this stage.",
+    "Proposed lookup forms and IAST are unreviewed preparation, not established morphology or approved transliteration.",
+    "Original editorial definitions remain editorial copy and are not dictionary-grounded lexical meanings.",
+    "Pending slots instantiate existing AG69H and AG70E review fields but are not attached production evidence records.",
+    "No AG63/D02 rotation, D04 selection or AG70D runtime is activated; no generated output or homepage consumes this dossier.",
+    "Missing AG69I/J artifacts are not recreated. The surviving AG69F queue and current v2 contracts are used directly."
+  ],
+  "historical_source_pointer_sets": {
+    "ag69f_pilot_source_families": {
+      "sanskrit_lexical": ["src_cologne_digital_sanskrit_dictionaries", "src_sanskrit_heritage_inria"],
+      "hindi_lexical": ["src_dsal_digital_dictionaries_south_asia", "src_hindi_shabdasagara_dsal", "src_central_hindi_directorate_publications"],
+      "corpus_or_text_attestation": ["src_digital_corpus_of_sanskrit", "src_gretil"],
+      "vedic_context": ["src_vedic_heritage_portal_gov_india"]
+    }
+  },
+  "pending_evidence_template": {
+    "template_only": true,
+    "evidence_id": null,
+    "linked_record_type": "candidate_evidence_draft",
+    "source_class": "lexical_dictionary",
+    "source_evidence_attached": false,
+    "source_access_checked": false,
+    "reuse_note_checked": false,
+    "word_form_found_status": "needs_manual_review",
+    "meaning_supported_status": "needs_manual_review",
+    "transliteration_supported_status": "needs_manual_review",
+    "claim_level_supported": "label_only",
+    "internal_textual_discipline_check": "pending",
+    "reviewer_note": "Pending capture slot only. No entry-level lookup or language review has been performed.",
+    "review_status": "evidence_pending",
+    "review_status_after_evidence": "evidence_pending",
+    "public_use_permission": "not_allowed",
+    "public_use_permission_after_review": "not_allowed",
+    "public_output_allowed": false,
+    "citation_capture": {
+      "dictionary_title": null,
+      "author_or_editor": null,
+      "edition_or_publication_year": null,
+      "publisher": null,
+      "headword_as_published": null,
+      "entry_locator": null,
+      "entry_or_scan_url": null,
+      "access_date": null,
+      "evidence_language": null,
+      "supported_sense": null,
+      "citation_or_bounded_evidence_note": null,
+      "citation_reuse_restrictions": null
+    },
+    "capture_requirements": [
+      "Identify a specific dictionary and edition, not only a collection or portal homepage.",
+      "Record author/editor, publisher, exact headword and a stable entry, page/column or scan locator.",
+      "Record the entry URL where available; otherwise retain a precise bibliographic locator.",
+      "Record the actual access date and evidence language only after examining the entry.",
+      "Record the supported sense and its limits separately from Drishvara editorial reflections.",
+      "Check citation/reuse restrictions and use bounded evidence notes, never bulk dictionary text.",
+      "Attach an evidence ID and reviewer decision only after actual capture; access alone is not approval."
+    ]
+  },
+  "word_qualification_gaps": [
+    "Exact Sanskrit and Hindi lexical evidence, entry locators and linked source/evidence IDs.",
+    "Reviewed script, IAST, lemma/stem versus inflected form and morphology where applicable.",
+    "Supported bilingual semantics, semantic range, usage boundary and separately reviewed reflective sense.",
+    "Explicit etymology status; no fabricated root, derivation or historical claim.",
+    "Source access/reuse, internal textual discipline, linguistic, safety and editorial reviews.",
+    "Public-use and approved-bank gates remain unmet; research eligibility is not output eligibility.",
+    "Future date/context assignment, reviewed context matching, duplicate/history checks and output connector approval remain separate gates."
+  ],
+  "words": [
+    {
+      "word_id": "reflection",
+      "draft_id": "ag69f_review_draft_001",
+      "capture_queue_id": "ag69f_evidence_001",
+      "original_copy": {
+        "english": "Reflection",
+        "hindi": "मनन",
+        "sanskrit": "मननम्",
+        "meaning_en": "Sustained inward consideration before response.",
+        "meaning_hi": "प्रतिक्रिया से पहले किया गया स्थिर आंतरिक विचार।",
+        "theme": "reflection",
+        "usage_context": "Daily reminder for thoughtful action."
+      },
+      "original_source_basis": "D02 curated Word of the Day bank; not presented as scriptural source.",
+      "historical_source_pointer_set_id": "ag69f_pilot_source_families",
+      "original_transliteration": null,
+      "proposed_lexical_fields": {
+        "language": "Sanskrit",
+        "script": "Devanagari",
+        "recorded_inflected_form": "मननम्",
+        "lookup_form": "मनन",
+        "lookup_form_iast": "manana",
+        "recorded_form_iast": "mananam",
+        "status": "proposed_unreviewed",
+        "normalization_note": "Proposed lookup stem is separate from the recorded final-m form. Lemma, part of speech, gender, case and number require lexical/morphological evidence."
+      },
+      "authenticated_lexical_fields": {
+        "normalized_headword": null,
+        "recorded_form_iast": null,
+        "lookup_form_iast": null,
+        "dictionary_meaning_en": null,
+        "dictionary_meaning_hi": null,
+        "morphology": null,
+        "etymology": null,
+        "contextual_attestation": null
+      },
+      "pending_evidence_slots": [
+        {"slot_id": "f3b2-reflection-sanskrit", "linked_record_id": "ag69f_review_draft_001", "draft_id": "ag69f_review_draft_001", "legacy_word_id": "reflection", "source_reference_id": "src_cologne_digital_sanskrit_dictionaries", "source_category": "lexical_reference", "field_checked": "sanskrit", "language_to_verify": "Sanskrit"},
+        {"slot_id": "f3b2-reflection-hindi", "linked_record_id": "ag69f_review_draft_001", "draft_id": "ag69f_review_draft_001", "legacy_word_id": "reflection", "source_reference_id": "src_hindi_shabdasagara_dsal", "source_category": "hindi_lexical_or_institutional_reference", "field_checked": "hindi", "language_to_verify": "Hindi"}
+      ],
+      "research_review_eligible": true,
+      "review_status": "evidence_pending",
+      "language_review_status": "pending",
+      "internal_textual_discipline_check": "pending",
+      "morphology_review_status": "pending",
+      "etymology_review_status": "pending",
+      "contextual_usage_review_status": "pending",
+      "safety_review_status": "pending",
+      "editorial_review_status": "pending",
+      "public_use_permission": "not_allowed",
+      "production_readiness": "not_ready",
+      "production_approved": false,
+      "approved_for_selector": false,
+      "public_output_allowed": false
+    },
+    {
+      "word_id": "discernment",
+      "draft_id": "ag69f_review_draft_004",
+      "capture_queue_id": "ag69f_evidence_004",
+      "original_copy": {
+        "english": "Discernment",
+        "hindi": "विवेक",
+        "sanskrit": "विवेकः",
+        "meaning_en": "The capacity to distinguish signal from distraction.",
+        "meaning_hi": "संकेत और विचलन के बीच अंतर समझने की क्षमता।",
+        "theme": "clarity",
+        "usage_context": "Used for insight, reading, and judgment."
+      },
+      "original_source_basis": "D02 curated Word of the Day bank; not presented as scriptural source.",
+      "historical_source_pointer_set_id": "ag69f_pilot_source_families",
+      "original_transliteration": null,
+      "proposed_lexical_fields": {
+        "language": "Sanskrit",
+        "script": "Devanagari",
+        "recorded_inflected_form": "विवेकः",
+        "lookup_form": "विवेक",
+        "lookup_form_iast": "viveka",
+        "recorded_form_iast": "vivekaḥ",
+        "status": "proposed_unreviewed",
+        "normalization_note": "Proposed lookup stem is separate from the recorded visarga form. AG69B also records viveka without visarga; that candidate is not merged or promoted here. Philosophical senses require scoped evidence, not inference from the English label."
+      },
+      "authenticated_lexical_fields": {
+        "normalized_headword": null,
+        "recorded_form_iast": null,
+        "lookup_form_iast": null,
+        "dictionary_meaning_en": null,
+        "dictionary_meaning_hi": null,
+        "morphology": null,
+        "etymology": null,
+        "contextual_attestation": null
+      },
+      "pending_evidence_slots": [
+        {"slot_id": "f3b2-discernment-sanskrit", "linked_record_id": "ag69f_review_draft_004", "draft_id": "ag69f_review_draft_004", "legacy_word_id": "discernment", "source_reference_id": "src_cologne_digital_sanskrit_dictionaries", "source_category": "lexical_reference", "field_checked": "sanskrit", "language_to_verify": "Sanskrit"},
+        {"slot_id": "f3b2-discernment-hindi", "linked_record_id": "ag69f_review_draft_004", "draft_id": "ag69f_review_draft_004", "legacy_word_id": "discernment", "source_reference_id": "src_hindi_shabdasagara_dsal", "source_category": "hindi_lexical_or_institutional_reference", "field_checked": "hindi", "language_to_verify": "Hindi"}
+      ],
+      "research_review_eligible": true,
+      "review_status": "evidence_pending",
+      "language_review_status": "pending",
+      "internal_textual_discipline_check": "pending",
+      "morphology_review_status": "pending",
+      "etymology_review_status": "pending",
+      "contextual_usage_review_status": "pending",
+      "safety_review_status": "pending",
+      "editorial_review_status": "pending",
+      "public_use_permission": "not_allowed",
+      "production_readiness": "not_ready",
+      "production_approved": false,
+      "approved_for_selector": false,
+      "public_output_allowed": false
+    },
+    {
+      "word_id": "patience",
+      "draft_id": "ag69f_review_draft_005",
+      "capture_queue_id": "ag69f_evidence_005",
+      "original_copy": {
+        "english": "Patience",
+        "hindi": "धैर्य",
+        "sanskrit": "धैर्यम्",
+        "meaning_en": "Strength that remains composed while time unfolds.",
+        "meaning_hi": "समय के खुलने तक संयमित रहने की शक्ति।",
+        "theme": "discipline",
+        "usage_context": "Useful for slow, careful progress."
+      },
+      "original_source_basis": "D02 curated Word of the Day bank; not presented as scriptural source.",
+      "historical_source_pointer_set_id": "ag69f_pilot_source_families",
+      "original_transliteration": null,
+      "proposed_lexical_fields": {
+        "language": "Sanskrit",
+        "script": "Devanagari",
+        "recorded_inflected_form": "धैर्यम्",
+        "lookup_form": "धैर्य",
+        "lookup_form_iast": "dhairya",
+        "recorded_form_iast": "dhairyam",
+        "status": "proposed_unreviewed",
+        "normalization_note": "Proposed lookup stem is separate from the recorded final-m form. AG69B also records dhairya without the ending; that candidate is not merged or promoted here. Do not assume the editorial English sense exhausts the lexical range."
+      },
+      "authenticated_lexical_fields": {
+        "normalized_headword": null,
+        "recorded_form_iast": null,
+        "lookup_form_iast": null,
+        "dictionary_meaning_en": null,
+        "dictionary_meaning_hi": null,
+        "morphology": null,
+        "etymology": null,
+        "contextual_attestation": null
+      },
+      "pending_evidence_slots": [
+        {"slot_id": "f3b2-patience-sanskrit", "linked_record_id": "ag69f_review_draft_005", "draft_id": "ag69f_review_draft_005", "legacy_word_id": "patience", "source_reference_id": "src_cologne_digital_sanskrit_dictionaries", "source_category": "lexical_reference", "field_checked": "sanskrit", "language_to_verify": "Sanskrit"},
+        {"slot_id": "f3b2-patience-hindi", "linked_record_id": "ag69f_review_draft_005", "draft_id": "ag69f_review_draft_005", "legacy_word_id": "patience", "source_reference_id": "src_hindi_shabdasagara_dsal", "source_category": "hindi_lexical_or_institutional_reference", "field_checked": "hindi", "language_to_verify": "Hindi"}
+      ],
+      "research_review_eligible": true,
+      "review_status": "evidence_pending",
+      "language_review_status": "pending",
+      "internal_textual_discipline_check": "pending",
+      "morphology_review_status": "pending",
+      "etymology_review_status": "pending",
+      "contextual_usage_review_status": "pending",
+      "safety_review_status": "pending",
+      "editorial_review_status": "pending",
+      "public_use_permission": "not_allowed",
+      "production_readiness": "not_ready",
+      "production_approved": false,
+      "approved_for_selector": false,
+      "public_output_allowed": false
+    }
+  ],
+  "activity_publication_conditions": [
+    "English/Hindi editorial and safety approval of a separately versioned publication candidate.",
+    "Present optional editorial suggestions, never universal duties, religious prohibitions, guaranteed auspiciousness or personal prescriptions.",
+    "Do not derive recommendations from generic Panchang labels or assert traditional authority without scoped exact evidence.",
+    "Do not reactivate the historical weekday-first D04 selector or legacy Word rotation.",
+    "Any future Word-dependent suggestion must use separately qualified AG70D output and a reviewed dependency contract.",
+    "Future presentation or selection requires explicit authorization; this dossier is not a public source."
+  ],
+  "activities": [
+    {
+      "rule_id": "weekday-saturday-steadiness",
+      "original_template": {
+        "rule_id": "weekday-saturday-steadiness",
+        "rule_type": "day",
+        "input_conditions": {"weekday": "Saturday"},
+        "output_fields": {
+          "guidance_title_en": "Steadiness before movement",
+          "guidance_title_hi": "गति से पहले स्थिरता",
+          "guidance_text_en": "Use the day for patient work, measured speech, and responsible closure of pending tasks.",
+          "guidance_text_hi": "दिन का उपयोग धैर्यपूर्ण कार्य, मापा हुआ वचन और लंबित कार्यों के जिम्मेदार समापन के लिए करें।",
+          "recommended_action_en": "Review one pending responsibility and close it carefully.",
+          "recommended_action_hi": "एक लंबित जिम्मेदारी की समीक्षा करें और उसे सावधानी से पूरा करें।",
+          "avoidance_note_en": "Avoid hurried decisions and unnecessary confrontation.",
+          "avoidance_note_hi": "जल्दबाजी वाले निर्णय और अनावश्यक टकराव से बचें।",
+          "tone": "disciplined",
+          "source_basis": "Editorial placeholder aligned with weekday-reflection model; not dynamic Panchang output.",
+          "review_status": "needs_review"
+        }
+      },
+      "historical_selection": {
+        "preview_id": "preview-saturday-reflection",
+        "input_context": {"weekday": "Saturday", "word_id": "reflection", "word_theme": "reflection"},
+        "selection_reason": "exact weekday match",
+        "priority_position": 1,
+        "dependency_note": "A weekday match precedes word-theme and fallback matching in the non-live D04 preview builder; it does not establish a traditional Saturday rule."
+      },
+      "editorial_review": {
+        "classification": "neutral_editorial_content_with_unsubstantiated_weekday_association",
+        "calendar_derived_fact": false,
+        "traditional_or_astrological_authority_established": false,
+        "english_hindi_consistency": "Broadly aligned on patient work, measured speech and task closure; Hindi fluency and tone remain pending human review.",
+        "language_review_status": "pending",
+        "safety_review_status": "pending",
+        "editorial_review_status": "pending",
+        "safety_notes": ["Imperative action and avoidance language must not imply a religious prohibition.", "Saturday suitability has no attached source evidence.", "Do not imply every pending responsibility can safely or realistically be closed today."],
+        "rewrite_needed_before_publication": true,
+        "rewrite_scope": "Separate optional neutral advice from the unsupported Saturday linkage and review prescriptive framing; source copy remains unchanged.",
+        "recommendation": "rewrite_only_with_authorization",
+        "source_reference_ids": [],
+        "independent_evidence_status": "pending"
+      },
+      "unapproved_editorial_proposals": [],
+      "review_status": "needs_review",
+      "production_readiness": "not_ready",
+      "production_approved": false,
+      "approved_for_selector": false,
+      "public_use_permission": "not_allowed",
+      "public_output_allowed": false
+    },
+    {
+      "rule_id": "word-theme-reflection",
+      "original_template": {
+        "rule_id": "word-theme-reflection",
+        "rule_type": "word_theme",
+        "input_conditions": {"word_theme": "reflection"},
+        "output_fields": {
+          "guidance_title_en": "Respond after reflection",
+          "guidance_title_hi": "मनन के बाद प्रतिक्रिया दें",
+          "guidance_text_en": "Pause long enough to separate immediate emotion from considered understanding.",
+          "guidance_text_hi": "तत्काल भावना और विचारपूर्ण समझ के बीच अंतर करने के लिए पर्याप्त विराम लें।",
+          "recommended_action_en": "Write down one thought before acting on it.",
+          "recommended_action_hi": "किसी विचार पर कार्य करने से पहले उसे लिख लें।",
+          "avoidance_note_en": "Avoid reacting only because the moment feels urgent.",
+          "avoidance_note_hi": "केवल क्षण की तीव्रता के कारण प्रतिक्रिया देने से बचें।",
+          "tone": "reflective",
+          "source_basis": "Derived from approved Word of the Day theme bank.",
+          "review_status": "needs_review"
+        }
+      },
+      "historical_selection": {
+        "preview_id": "preview-word-theme-reflection",
+        "input_context": {"weekday": "Tuesday", "word_id": "reflection", "word_theme": "reflection"},
+        "selection_reason": "word_theme match",
+        "priority_position": 2,
+        "dependency_note": "D04 reads the D02 reflection theme after no weekday match. Its approved-bank wording describes legacy preview status, not AG70D source/publication approval."
+      },
+      "editorial_review": {
+        "classification": "neutral_editorial_reflection_with_legacy_word_dependency",
+        "calendar_derived_fact": false,
+        "traditional_or_astrological_authority_established": false,
+        "english_hindi_consistency": "Both versions advise reflection before action; the Hindi urgency phrase is interpretive rather than literal and needs bilingual editorial review.",
+        "language_review_status": "pending",
+        "safety_review_status": "pending",
+        "editorial_review_status": "pending",
+        "safety_notes": ["A reflective suggestion must not discourage genuinely time-critical action.", "No therapeutic, astronomical or traditional authority is established.", "Any future theme linkage must use eligible AG70D output, never legacy preview approval."],
+        "rewrite_needed_before_publication": true,
+        "rewrite_scope": "Review optional and non-universal framing and correct legacy approval provenance in a future publication candidate; do not change the source template.",
+        "recommendation": "retain_for_review",
+        "source_reference_ids": [],
+        "independent_evidence_status": "pending"
+      },
+      "unapproved_editorial_proposals": [],
+      "review_status": "needs_review",
+      "production_readiness": "not_ready",
+      "production_approved": false,
+      "approved_for_selector": false,
+      "public_use_permission": "not_allowed",
+      "public_output_allowed": false
+    },
+    {
+      "rule_id": "fallback-neutral-daily-guidance",
+      "original_template": {
+        "rule_id": "fallback-neutral-daily-guidance",
+        "rule_type": "fallback",
+        "input_conditions": {},
+        "output_fields": {
+          "guidance_title_en": "A clear and steady day",
+          "guidance_title_hi": "स्पष्ट और स्थिर दिन",
+          "guidance_text_en": "Keep the day simple: observe, decide slowly, and act with steadiness.",
+          "guidance_text_hi": "दिन को सरल रखें: देखें, धीरे निर्णय लें और स्थिरता से कार्य करें।",
+          "recommended_action_en": "Choose one meaningful task and complete it without distraction.",
+          "recommended_action_hi": "एक सार्थक कार्य चुनें और उसे बिना विचलन पूरा करें।",
+          "avoidance_note_en": "Avoid scattering attention across too many concerns.",
+          "avoidance_note_hi": "ध्यान को बहुत अधिक चिंताओं में बिखेरने से बचें।",
+          "tone": "calming",
+          "source_basis": "Neutral editorial fallback; not astrological prediction.",
+          "review_status": "needs_review"
+        }
+      },
+      "historical_selection": {
+        "preview_id": "preview-fallback-balance",
+        "input_context": {"weekday": "Thursday", "word_id": "balance", "word_theme": "awareness"},
+        "selection_reason": "fallback neutral guidance",
+        "priority_position": 3,
+        "dependency_note": "Chosen after no weekday or word-theme match; no Thursday, balance or awareness-based traditional rule is established by the preview."
+      },
+      "editorial_review": {
+        "classification": "neutral_editorial_suggestion_not_astrological_prediction",
+        "calendar_derived_fact": false,
+        "traditional_or_astrological_authority_established": false,
+        "english_hindi_consistency": "The title, guidance, single-task suggestion and avoidance note are broadly aligned; fluency and accessibility still require bilingual review.",
+        "language_review_status": "pending",
+        "safety_review_status": "pending",
+        "editorial_review_status": "pending",
+        "safety_notes": ["Decide slowly is not appropriate as a universal instruction for urgent situations.", "Title must not promise the actual quality of a reader's day.", "An empty or unapproved bank must withhold output, not silently select this research fallback."],
+        "rewrite_needed_before_publication": true,
+        "rewrite_scope": "Review optional framing and avoid universal slow-decision or successful-day implications in a separately authorized publication candidate.",
+        "recommendation": "retain_for_review",
+        "source_reference_ids": [],
+        "independent_evidence_status": "pending"
+      },
+      "unapproved_editorial_proposals": [],
+      "review_status": "needs_review",
+      "production_readiness": "not_ready",
+      "production_approved": false,
+      "approved_for_selector": false,
+      "public_use_permission": "not_allowed",
+      "public_output_allowed": false
+    }
+  ]
+}
