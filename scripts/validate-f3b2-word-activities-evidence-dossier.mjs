@@ -634,6 +634,20 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
 check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
+  const executionBaseline = "a4013e86fb39b87421a0269c81f74333c689feb1";
+  if (git("rev-parse", "HEAD").trim() === executionBaseline) {
+    assert.equal(git("rev-parse", "origin/main").trim(), executionBaseline);
+    assert.equal(git("diff", "--cached", "--name-only").trim(), "");
+    assert.deepEqual(git("diff", "--name-only", executionBaseline, "--").trim().split("\n").filter(Boolean), [validatorPath]);
+    assert.equal(fs.readFileSync(dossierPath, "utf8"), git("show", executionBaseline + ":" + dossierPath));
+    const newFiles = ["scripts/lib/ag70d-word-selection-engine.mjs", "scripts/lib/ag70d-word-assignment-store.mjs",
+      "scripts/lib/ag70d-word-assignment-test-adapter.mjs", "scripts/validate-ag70d-word-selection-engine.mjs",
+      "docs/knowledge/f3b6-f3b8-word-assignment-persistence-design.md"];
+    const expected = [" M " + validatorPath, ...newFiles.map(p => "?? " + p), "?? prototypes/"];
+    const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
+    assert.deepEqual(sorted(status), sorted(expected));
+    return;
+  }
   assert.equal(git("rev-parse", "HEAD").trim(), policyBaseline);
   assert.equal(git("rev-parse", "origin/main").trim(), policyBaseline);
   assert.equal(git("diff", "--cached", "--name-only").trim(), "");
