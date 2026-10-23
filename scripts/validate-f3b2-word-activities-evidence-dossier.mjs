@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 
 const baseline = "ae04816f0630b350640e6cc2080b6dd97d301c9a";
 const captureBaseline = "20f5e190d28ad708aceac2cbf2df61fd84fafc24";
+const qualificationBaseline = "461b51f22cfd41ce5399944ef851c3e5a17b3cc5";
 const dossierPath = "data/content-intelligence/quality-reviews/f3b2-word-activities-evidence-dossier.json";
 const validatorPath = "scripts/validate-f3b2-word-activities-evidence-dossier.mjs";
 const manifestPath = "data/knowledge-base/word-of-day/production/production-bank-manifest.json";
@@ -197,6 +198,7 @@ function validateDossier(d) {
     closed(activity);
   }
   validateLexicalCapture(d);
+  validateQualification(d);
 }
 
 function validateLexicalCapture(d) {
@@ -342,6 +344,146 @@ function validateLexicalCapture(d) {
   assert.equal(capture.remaining_reviews.length, 6);
 }
 
+function validateQualification(d) {
+  const q = d.f3b4_qualification_and_architecture;
+  assert.equal(q.stage, "F3B-4");
+  assert.equal(q.baseline, qualificationBaseline);
+  assert.equal(q.prepared_on, "2026-10-23");
+  assert.equal(q.status, "ai_assisted_analysis_prepared_formal_qualification_pending");
+  for (const key of ["runtime_activation", "public_output_allowed", "production_approved"]) assert.equal(q[key], false);
+  assert.equal(q.public_use_permission, "not_allowed");
+  assert.deepEqual(q.review_provenance, {
+    analysis_agent: "Codex", agent_type: "ai_assisted_analysis_not_human_scholarly_review",
+    authorized_human_reviewer_id: null, reviewer_authorization_record_ref: null,
+    formal_approval_record_ref: null, human_signoff_date: null, formal_linguistic_approval_granted: false,
+    note: "Analysis reuses the seven F3B-3 attributed entry captures. No human review, dictionary-edition authentication or public-use approval is claimed."
+  });
+  const grammar = q.general_grammar_reference;
+  assert.equal(grammar.url, "https://dlbs.liberal.ntu.edu.tw/BDLM/lesson/fan/sanskrit/skt-gr1.htm");
+  assert.equal(grammar.access_date, q.prepared_on);
+  assert.equal(grammar.content_inspected_in_this_execution, true);
+  assert.equal(grammar.candidate_specific_morphology_verified, false);
+  assert.equal(grammar.public_use_permission, "not_allowed");
+  assert(grammar.scope.includes("not an IAST authority"));
+  assert.equal(q.words.length, 3);
+  assert.deepEqual(sorted(q.words.map(w => w.word_id)), sorted(Object.keys(pilot)));
+  for (const word of q.words) {
+    const historical = d.words.find(w => w.word_id === word.word_id);
+    const [draftId, , lookup, lookupIast, displayIast] = pilot[word.word_id];
+    assert.equal(word.draft_id, draftId);
+    assert.equal(word.lemma_devanagari, lookup);
+    assert.equal(word.lookup_lemma, lookupIast);
+    assert.equal(word.historical_surface_form, historical.original_copy.sanskrit);
+    assert.equal(word.historical_display_form_unchanged, true);
+    assert.deepEqual(word.evidence_refs, historical.captured_lexical_evidence_refs);
+    assert.equal(word.iast.proposed_lookup, lookupIast);
+    assert.equal(word.iast.proposed_display, displayIast);
+    assert.equal(word.iast.host_reported_lookup, lookupIast);
+    assert.equal(word.iast.independently_approved_iast, null);
+    assert.equal(typeof word.iast.lookup_support_scope, "string");
+    if (word.word_id === "patience") {
+      assert.equal(word.iast.host_reported_display, "dhairyam");
+      assert.deepEqual(word.iast.display_support_evidence_refs, ["f3b3-patience-apte"]);
+      const captured = d.f3b3_lexical_capture.entries.find(e => e.evidence_id === "f3b3-patience-apte");
+      assert(captured.entry_locator.includes("dhairyam (धैर्यम्)"));
+    } else {
+      assert.equal(word.iast.host_reported_display, null);
+      assert.deepEqual(word.iast.display_support_evidence_refs, []);
+    }
+    const gender = word.word_id === "discernment" ? "masculine" : "neuter";
+    assert.equal(word.morphology.dictionary_reported_gender, gender);
+    assert(word.morphology.gender_evidence_refs.length > 0);
+    for (const id of word.morphology.gender_evidence_refs) {
+      const entry = d.f3b3_lexical_capture.entries.find(e => e.evidence_id === id);
+      assert.equal(entry.word_id, word.word_id);
+      assert(entry.noun_classification_reported.startsWith(gender));
+    }
+    assert.equal(word.morphology.stem_class_proposed, "short-a nominal stem");
+    assert.equal(word.morphology.number_proposed, "singular");
+    assert.deepEqual(word.morphology.compatible_cases_proposed, gender === "masculine" ? ["nominative"] : ["nominative", "accusative", "vocative"]);
+    assert.equal(word.morphology.case_in_context, null);
+    assert.equal(word.morphology.analysis_status, "ai_assisted_pattern_inference_pending_human_morphology_review");
+    assert.deepEqual(word.english_lexical_evidence.sense_evidence_refs, historical.captured_lexical_evidence_refs);
+    assert.equal(word.english_lexical_evidence.original_edition_authenticated, false);
+    assert.equal(word.hindi_consistency.exact_hindi_dictionary_evidence_attached, false);
+    assert.equal(word.hindi_consistency.review_status, "pending");
+    assert.equal(word.hindi_consistency.required_evidence_source_ref, "src_hindi_shabdasagara_dsal");
+    assert.equal(word.semantic_restrictions.length, 2);
+    assert.equal(word.historical_definition_assessment.exceeds_captured_lexical_scope, true);
+    assert.equal(word.historical_definition_assessment.original_copy_changed, false);
+    assert.equal(word.historical_definition_assessment.editorial_reuse_approved, false);
+    assert.equal(word.etymology.status, "unverified");
+    assert.equal(word.etymology.approved_derivation, null);
+    assert.equal(word.qualification_status, "formal_review_pending");
+    closed(word);
+  }
+  assert.equal(q.shared_review_requirements.length, 6);
+  const scale = q.scalability_assessment;
+  assert.deepEqual(scale.distinct_approved_word_checkpoints, [365, 730, 1825, 3650]);
+  assert.equal(scale.additional_growth_allowed_by_container_shape, true);
+  assert.equal(scale.capacity_or_throughput_benchmarked, false);
+  assert.equal(scale.current_approved_output_count, json(knowledgeBase + "approved-output-candidate-bank.json").records.length);
+  assert.equal(scale.current_approved_output_count, 0);
+  assert.equal(scale.new_production_bank_required, false);
+  assert.equal(scale.schema_edits_required_for_this_stage, false);
+  assert.deepEqual(scale.existing_container_roles, {
+    sources: governingFiles.current_source_catalog, evidence: governingFiles.evidence_contract,
+    morphology: sources.foundation_manifest.banks.morphology_bank,
+    semantics: sources.foundation_manifest.banks.semantics_bank,
+    eligible_outputs: sources.foundation_manifest.banks.approved_output_candidate_bank,
+    selection_history: sources.foundation_manifest.banks.daily_word_history_bank,
+    duplicate_history: sources.foundation_manifest.banks.duplicate_control_history_bank
+  });
+  assert.equal(scale.prospective_contract_additions_before_selector_implementation.length, 3);
+  const extensionOwners = [wordBase + "production/daily-word-history-schema.json",
+    knowledgeBase + "approved-output-candidate-bank.json", governingFiles.output_contract];
+  assert.deepEqual(scale.prospective_contract_additions_before_selector_implementation.map(p => p.owner), extensionOwners);
+  for (const proposal of scale.prospective_contract_additions_before_selector_implementation) {
+    assert.equal(proposal.implemented_now, false);
+    assert(proposal.missing_explicit_fields.length > 0);
+    assert(proposal.missing_explicit_fields.every(field => !json(proposal.owner).required_fields.includes(field)));
+  }
+  validateDraftSelectionContract(q.proposed_daily_selection_contract);
+  const workflow = q.bank_expansion_workflow;
+  assert.deepEqual(workflow.stages, ["discovery", "lexical_evidence", "linguistic_review", "context_review", "editorial_approval", "production_eligibility", "daily_selection", "publication_history"]);
+  assert.deepEqual(workflow.ai_assistance_allowed, ["candidate_discovery", "evidence_preparation", "unapproved_review_assistance"]);
+  assert.equal(workflow.ai_can_grant_approval, false);
+  assert.equal(workflow.pipeline_activated, false);
+}
+
+// This validates a non-executable policy proposal; it never selects a word or writes history.
+function validateDraftSelectionContract(contract) {
+  assert.equal(contract.status, "proposal_pending_governance_approval_not_executable");
+  for (const key of ["selector_implemented", "automatic_rotation_enabled", "runtime_activation", "public_output_allowed", "production_approved"]) assert.equal(contract[key], false);
+  assert.equal(contract.public_use_permission, "not_allowed");
+  assert.deepEqual(contract.assignment_key_fields, ["selection_scope_id", "date_key", "timezone"]);
+  assert(contract.date_basis.includes("IANA timezone"));
+  assert.equal(contract.one_assignment_per_key, true);
+  assert.equal(contract.same_key_replay, "return_existing_immutable_assignment_not_reselect");
+  assert.deepEqual(contract.required_input_fields, ["selection_scope_id", "date_key", "timezone", "location_id", "panchang_context_id", "methodology_version", "selection_policy_version", "bank_snapshot_ref", "history_snapshot_ref", "history_complete", "reviewed_context_ref", "approval_record_refs"]);
+  assert.deepEqual(contract.eligibility_gates, sources.primary_rules.required_gates);
+  assert.deepEqual(contract.duplicate_checks, ["historical_word_identity", "reviewed_canonical_lemma_and_surface_variants", "reviewed_near_equivalent_sense_groups", "published_and_reserved_selection_history"]);
+  assert.equal(contract.unused_first, true);
+  assert.equal(contract.allow_reuse_while_eligible_unused_remains, false);
+  assert.equal(contract.exhaustion_requires_approved_reuse_policy, true);
+  const reconciliation = contract.ag70d_policy_reconciliation;
+  assert.equal(reconciliation.existing_rule_path, wordBase + "production/methodology/ag70d-duplicate-control-and-history-rules.json");
+  assert(json(reconciliation.existing_rule_path).replacement_rule.includes("repeat-control window"));
+  assert.equal(reconciliation.focused_policy_approval_required_before_implementation, true);
+  assert.equal(reconciliation.current_rule_replaced, false);
+  assert.equal(reconciliation.status, "pending");
+  assert.equal(contract.audit_requirements.length, 8);
+  const history = contract.history_requirements;
+  for (const key of ["use_existing_history_banks", "selection_and_publication_states_distinct", "complete_history_required", "reserve_selection_before_publication", "single_writer_and_atomic_unique_key_check_required", "historical_published_records_immutable"]) assert.equal(history[key], true);
+  assert.equal(history.history_writer_implemented, false);
+  assert.equal(history.correction_handling, "append_governed_correction_reference_never_silent_history_rewrite");
+  assert.equal(contract.bank_addition_behavior, "new_approved_versions_enter_future_unassigned_dates_only");
+  assert.equal(contract.new_additions_must_not_rewrite_history, true);
+  assert.equal(contract.missing_or_ineligible_record_behavior, "withhold_no_fabricated_candidate_or_fallback");
+  assert.equal(contract.current_phase_outcome, "withheld_contract_unapproved_and_production_banks_empty");
+  assert.deepEqual(contract.required_fail_closed_cases, ["invalid_or_missing_date", "invalid_or_missing_timezone", "unapproved_selection_scope", "missing_or_unapproved_rule_version", "missing_or_incomplete_history", "missing_context_or_approval_evidence", "empty_applicable_approved_pool", "unresolved_duplicate_or_identity_mapping", "unresolved_precedence_or_tie", "reuse_requested_while_eligible_unused_exists", "exhaustion_without_approved_reuse_policy", "conflicting_existing_assignment", "changed_bank_attempts_to_rewrite_history", "required_history_persistence_failed"]);
+}
+
 let checks = 0;
 function check(name, run) {
   run();
@@ -409,10 +551,40 @@ rejects("entry overrides common public-output gate", d => { d.f3b3_lexical_captu
 rejects("entry overrides common evidence review state", d => { d.f3b3_lexical_capture.entries[0].review_status = "approved"; });
 rejects("captured evidence gains a reviewer signoff", d => { d.f3b3_lexical_capture.human_reviewer_signoff = "invented signoff"; });
 rejects("bibliographic homepage treated as verified entry edition", d => { d.f3b3_lexical_capture.bibliographic_observations[0].same_edition_as_host_transcription_verified = true; });
+rejects("AI analysis labelled human scholarly approval", d => { d.f3b4_qualification_and_architecture.review_provenance.formal_linguistic_approval_granted = true; });
+rejects("invented authorized reviewer", d => { d.f3b4_qualification_and_architecture.review_provenance.authorized_human_reviewer_id = "unverified-reviewer"; });
+rejects("invented approval record", d => { d.f3b4_qualification_and_architecture.review_provenance.formal_approval_record_ref = "invented-approval"; });
+rejects("grammar lesson treated as candidate approval", d => { d.f3b4_qualification_and_architecture.general_grammar_reference.candidate_specific_morphology_verified = true; });
+rejects("qualification changes historical surface form", d => { d.f3b4_qualification_and_architecture.words[0].historical_surface_form = "मनन"; });
+rejects("inferred IAST labelled independently approved", d => { d.f3b4_qualification_and_architecture.words[0].iast.independently_approved_iast = "mananam"; });
+rejects("inferred case labelled contextual fact", d => { d.f3b4_qualification_and_architecture.words[0].morphology.case_in_context = "nominative"; });
+rejects("unsupported Hindi dictionary evidence", d => { d.f3b4_qualification_and_architecture.words[1].hindi_consistency.exact_hindi_dictionary_evidence_attached = true; });
+rejects("editorial definition treated as approved dictionary reuse", d => { d.f3b4_qualification_and_architecture.words[1].historical_definition_assessment.editorial_reuse_approved = true; });
+rejects("unsupported derivation approved", d => { d.f3b4_qualification_and_architecture.words[2].etymology.approved_derivation = "unsourced derivation"; });
+rejects("qualification gains selector eligibility", d => { d.f3b4_qualification_and_architecture.words[2].approved_for_selector = true; });
+rejects("scalability misrepresented as a performance benchmark", d => { d.f3b4_qualification_and_architecture.scalability_assessment.capacity_or_throughput_benchmarked = true; });
+rejects("new parallel bank declared necessary", d => { d.f3b4_qualification_and_architecture.scalability_assessment.new_production_bank_required = true; });
+rejects("proposed contract activates a selector", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.selector_implemented = true; });
+rejects("proposed contract enables automatic rotation", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.automatic_rotation_enabled = true; });
+rejects("proposed contract omits timezone basis", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.required_input_fields = d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.required_input_fields.filter(f => f !== "timezone"); });
+rejects("reuse while an eligible unused word remains", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.allow_reuse_while_eligible_unused_remains = true; });
+rejects("exhaustion permits unapproved reuse", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.exhaustion_requires_approved_reuse_policy = false; });
+rejects("AG70D reconciliation silently replaces current rule", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.ag70d_policy_reconciliation.current_rule_replaced = true; });
+rejects("partial history accepted", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.history_requirements.complete_history_required = false; });
+rejects("new additions rewrite published history", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.new_additions_must_not_rewrite_history = false; });
+rejects("empty bank allows fabricated fallback", d => { d.f3b4_qualification_and_architecture.proposed_daily_selection_contract.missing_or_ineligible_record_behavior = "generate_fallback"; });
+rejects("future workflow grants AI approval", d => { d.f3b4_qualification_and_architecture.bank_expansion_workflow.ai_can_grant_approval = true; });
+check("F3B-3 captures and Activities remain byte-value identical to frozen dossier", () => {
+  const old = JSON.parse(git("show", qualificationBaseline + ":" + dossierPath));
+  const preserved = structuredClone(dossier);
+  delete preserved.f3b4_qualification_and_architecture;
+  assert.deepEqual(preserved, old);
+});
 check("F3B-2 Activities and all historical dossier fields preserved", () => {
   const old = JSON.parse(git("show", captureBaseline + ":" + dossierPath));
   const preserved = structuredClone(dossier);
   delete preserved.f3b3_lexical_capture;
+  delete preserved.f3b4_qualification_and_architecture;
   for (const word of preserved.words) {
     delete word.captured_lexical_evidence_refs;
     delete word.lexical_review_progress;
@@ -458,13 +630,13 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
 check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
-  assert.equal(git("rev-parse", "HEAD").trim(), captureBaseline);
-  assert.equal(git("rev-parse", "origin/main").trim(), captureBaseline);
+  assert.equal(git("rev-parse", "HEAD").trim(), qualificationBaseline);
+  assert.equal(git("rev-parse", "origin/main").trim(), qualificationBaseline);
   assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-  const tracked = git("diff", "--name-only", captureBaseline, "--").trim().split("\n").filter(Boolean);
+  const tracked = git("diff", "--name-only", qualificationBaseline, "--").trim().split("\n").filter(Boolean);
   assert.deepEqual(sorted(tracked), sorted([dossierPath, validatorPath]));
   const expectedStatus = [" M " + dossierPath, " M " + validatorPath, "?? prototypes/"];
   const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
   assert.deepEqual(sorted(status), sorted(expectedStatus));
 });
-console.log(`F3B-2/F3B-3 validation passed: ${checks} checks. Hosted evidence capture only; no original-edition authentication or public output.`);
+console.log(`F3B-2/F3B-3/F3B-4 validation passed: ${checks} checks. AI-assisted analysis and non-executable contract checks only; no human approval, selection or public output.`);
