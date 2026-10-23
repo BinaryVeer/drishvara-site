@@ -1,0 +1,40 @@
+{
+  "contract_version": "ag70e.word-release.v1",
+  "status": "prepared_pending_formal_approval",
+  "baseline": "1aaf29764604285f42108a131122e495ac3f8b71",
+  "policy_version": "ag70d.word-selection.v2.1",
+  "policy_path": "data/knowledge-base/word-of-day/production/methodology/ag70d-duplicate-control-and-history-rules.json",
+  "publication_scope": "global_public_word",
+  "timezone": "Asia/Kolkata",
+  "context": {
+    "proposed_ref": "ag70d-global-editorial-context-review-v1",
+    "basis_ref": null,
+    "review_status": "pending",
+    "approval_ref": null,
+    "canonical_panchang_context_ref": null,
+    "location_basis_ref": null,
+    "requirements": ["One reviewed versioned editorial context for all users", "Use approved applicability rules; never derive context from a requesting user's location", "Resolve the canonical Panchang context before supplying an eligible pool"]
+  },
+  "precedence": {
+    "proposed_ref": "ag70d-explicit-candidate-order-review-v1",
+    "rule_ref": null,
+    "review_status": "pending",
+    "approval_ref": null,
+    "operator": "approved_explicit_candidate_order",
+    "candidate_order": [],
+    "requirements": ["Approved relevance and eligibility before duplicate control", "Complete-history unused-first exclusion before compatible repeat restrictions", "An authorized editor must supply the complete versioned order and resolve ties", "No AI-assigned weights, default order, annual reset, arbitrary reuse or manufactured fallback"]
+  },
+  "persistence": {"enabled": false, "migration_approval_ref": null, "server_authorization_ref": null},
+  "publication": {"review_status": "pending", "approval_ref": null, "approved_publication_event_refs": [], "public_output_allowed": false, "runtime_activation": false},
+  "scheduler": {
+    "enabled": false,
+    "timezone": "Asia/Kolkata",
+    "local_time": null,
+    "approval_ref": null,
+    "low_bank_threshold": null,
+    "automatic_publication": false,
+    "recovery": "Retry the same date-scoped idempotency key and reread persisted state; never assume a failed response means rollback."
+  },
+  "runtime_activation": false,
+  "public_output_allowed": false
+}

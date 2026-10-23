@@ -23,5 +23,14 @@
     "review_status",
     "subscriber_archive_eligible"
   ],
-  "output_generated_now": false
+  "output_generated_now": false,
+  "governed_publication_contract": {
+    "version": "ag70e.word-publication.v1",
+    "read_only_target": "generated/word-of-day-publication.json",
+    "legacy_preview_target_unchanged": "generated/word-of-day.json",
+    "requires_approved_published_assignment": true,
+    "requires_separate_release_approval": true,
+    "current_state": "withheld",
+    "note": "This is an output projection, not another content bank. Existing AG63 preview fields are never a publication source."
+  }
 }

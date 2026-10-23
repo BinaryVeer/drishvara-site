@@ -42,6 +42,66 @@
     // These preview sources have no approved date-bound daily publication contract.
     return "Approved daily result unavailable";
   }
+  async function approvedWordPublication(data, now) {
+    var a = data && data.assignment, copyData = a && a.reviewed_copy, content = copyData && copyData.content;
+    function text(value) { return typeof value === 'string' && value.trim().length > 0; }
+    function safeUrl(value) { try { var url = new URL(value); return url.protocol === 'https:' && !url.username && !url.password; } catch (_error) { return false; } }
+    if (!data || data.contract_version !== 'ag70e.word-publication.v1' || data.status !== 'published' ||
+        data.public_output_allowed !== true || data.runtime_activation !== true || data.publication_scope !== 'global_public_word' ||
+        data.timezone !== 'Asia/Kolkata' || typeof data.date_key !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(data.date_key) || data.date_key !== dayKey(now, 'Asia/Kolkata') ||
+        !a || a.withdrawn !== false || a.superseded !== false ||
+        !['assignment_id', 'proposal_id', 'canonical_lexical_identity_id', 'approved_record_version', 'publication_event_id', 'publication_timestamp', 'release_approval_ref', 'copy_content_hash', 'selection_trace_ref'].every(function (k) { return text(a[k]); }) ||
+        !Number.isFinite(Date.parse(a.publication_timestamp)) || Date.parse(a.publication_timestamp) > now.getTime() ||
+        !copyData || copyData.contract_version !== 'ag70e.word-copy.v1' || !text(copyData.version) || !content || !Array.isArray(copyData.reviews)) return null;
+    if (!['english', 'hindi', 'sanskrit', 'meaning_en', 'meaning_hi', 'reflection_en', 'reflection_hi'].every(function (k) { return text(content[k]); })) return null;
+    if (['linguistic', 'editorial', 'rights', 'context', 'safety'].some(function (kind) {
+      return copyData.reviews.filter(function (r) { return r.kind === kind && r.review_status === 'approved' && text(r.approval_ref) && r.content_hash === a.copy_content_hash; }).length !== 1;
+    })) return null;
+    if (content.iast !== null && (!text(content.iast) || copyData.iast_review_status !== 'approved' || !text(copyData.iast_approval_ref))) return null;
+    if (!Array.isArray(content.sources) || !content.sources.length || !content.sources.every(function (s) {
+      return s.review_status === 'approved' && ['evidence_ref', 'title', 'publisher', 'attribution', 'reuse_approval_ref'].every(function (k) { return text(s[k]); }) && safeUrl(s.url);
+    })) return null;
+    try {
+      function ordered(value) {
+        if (Array.isArray(value)) return value.map(ordered);
+        if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort().map(function (k) { return [k, ordered(value[k])]; }));
+        return value;
+      }
+      var digest = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(ordered(content))));
+      var hash = 'sha256:' + Array.from(new Uint8Array(digest)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+      return hash === a.copy_content_hash ? content : null;
+    } catch (_error) { return null; }
+  }
+  var wordExpiryTimer = null;
+  var wordPaintGeneration = 0, wordReadGeneration = 0;
+  async function renderWordPublication(data, now) {
+    var generation = ++wordPaintGeneration;
+    now = now || new Date();
+    var value = document.getElementById('f2-word-state'), description = document.getElementById('f2-word-description'), note = document.getElementById('f2-word-note');
+    if (!value || !description || !note) return false;
+    window.clearTimeout(wordExpiryTimer); wordExpiryTimer = null;
+    var content = await approvedWordPublication(data, now);
+    if (generation !== wordPaintGeneration) return false;
+    if (!content) {
+      value.textContent = 'Under verification'; description.textContent = 'No approved daily word is available for publication.';
+      note.textContent = 'Source and publication review is required. No daily selection is inferred.';
+      return false;
+    }
+    value.innerHTML = '<span lang="en">' + escape(content.english) + '</span><span class="f2-word-scripts"><span lang="hi">' + escape(content.hindi) + '</span> &middot; <span lang="sa">' + escape(content.sanskrit) + '</span></span>' +
+      (content.iast ? '<span class="f2-word-iast" lang="sa-Latn">' + escape(content.iast) + '</span>' : '');
+    description.innerHTML = '<span lang="en">' + escape(content.meaning_en) + '</span><br><span lang="hi">' + escape(content.meaning_hi) + '</span>';
+    note.innerHTML = '<span lang="en">' + escape(content.reflection_en) + '</span><br><span lang="hi">' + escape(content.reflection_hi) + '</span><br>' + escape(data.date_key) + ' &middot; Asia/Kolkata<br>' +
+      content.sources.map(function (s) { return '<a href="' + escape(s.url) + '" rel="noopener noreferrer">' + escape(s.title) + '</a> &middot; ' + escape(s.publisher) + ' &middot; ' + escape(s.attribution); }).join('<br>');
+    // One-shot display expiry only, not scheduling, selection, polling or publication.
+    wordExpiryTimer = window.setTimeout(function () { renderWordPublication(null); }, Math.max(1, Date.parse(data.date_key + 'T18:30:00.000Z') - now.getTime()));
+    return true;
+  }
+  function loadWordPublication() {
+    var generation = ++wordReadGeneration;
+    return fetch('generated/word-of-day-publication.json', { cache: 'no-store' }).then(function (response) {
+      return response.ok ? response.json() : null;
+    }).catch(function () { return null; }).then(function (data) { if (generation === wordReadGeneration) return renderWordPublication(data); });
+  }
   function carouselModel(count, reduced) {
     return {
       index: 0, paused: Boolean(reduced), reduced: Boolean(reduced),
@@ -66,7 +126,7 @@
       ['Tithi', 'Nakshatra', 'Yoga', 'Karana'].map(function (label) { return '<div><dt>' + label + '</dt><dd id="f2-day-' + label.toLowerCase() + '">Unavailable</dd></div>'; }).join('') +
       '</dl><p class="f2-sun-times">Sunrise <strong id="f2-day-sunrise">&mdash;</strong> &middot; Sunset <strong id="f2-day-sunset">&mdash;</strong></p><p id="f2-daily-status">Resolving today\u2019s approved result.</p></article>' +
       '<article class="f2-day-card"><h3>Today\u2019s Observance</h3><strong class="f2-day-value" id="f2-day-observance">Resolving approved observances</strong><p id="f2-day-observance-window"></p><a href="panchang.html">View details &rarr;</a></article>' +
-      ['Word', 'Colour', 'Mantra'].map(function (label) { var id = label.toLowerCase(); return '<article class="f2-day-card f2-publication" data-f2-publication="' + id + '"><h3>' + label + ' of the Day</h3><strong class="f2-day-value" id="f2-' + id + '-state">Under verification</strong><p>No approved daily ' + id + ' is available for publication.</p><details><summary>Publication basis</summary><p id="f2-' + id + '-note">Source and publication review is required. No daily selection is inferred.</p></details></article>'; }).join('') +
+      ['Word', 'Colour', 'Mantra'].map(function (label) { var id = label.toLowerCase(); return '<article class="f2-day-card f2-publication" data-f2-publication="' + id + '"><h3>' + label + ' of the Day</h3><strong class="f2-day-value" id="f2-' + id + '-state">Under verification</strong><p id="f2-' + id + '-description">No approved daily ' + id + ' is available for publication.</p><details><summary>Publication basis</summary><p id="f2-' + id + '-note">Source and publication review is required. No daily selection is inferred.</p></details></article>'; }).join('') +
       '</div></div></section><div class="f2-editorial f2-inner">' +
       '<section id="read" data-dv2-world="read" aria-labelledby="f2-read-title"><div class="f2-section-heading"><h2 id="f2-read-title">Featured Read</h2><a href="insights.html">View all reads &rarr;</a></div><article id="dv2-lead-read" class="f2-lead"></article></section>' +
       '<section id="explore" data-dv2-world="explore" aria-labelledby="f2-explore-title"><div class="f2-section-heading"><h2 id="f2-explore-title">Explore More</h2><a href="insights.html">Explore all &rarr;</a></div><div id="f2-explore-cards" class="f2-explore-grid"></div></section></div>' +
@@ -180,18 +240,21 @@
   function loadPublicationStates() {
     var brand = document.querySelector('.dv2-brand > span');
     if (brand && !brand.querySelector('small')) brand.insertAdjacentHTML('beforeend', '<small>Intelligence for today. Wisdom for life.</small>');
-    [['word', 'generated/word-of-day.json'], ['colour', 'generated/vedic-guidance-working-data.json']].forEach(function (source) {
+    loadWordPublication();
+    [['colour', 'generated/vedic-guidance-working-data.json']].forEach(function (source) {
       fetch(source[1], { cache: 'no-store' }).then(function (response) { return response.ok ? response.json() : null; }).catch(function () { return null; }).then(function (data) {
-        var kinds = source[0] === 'word' ? ['word'] : ['colour', 'mantra'];
+        var kinds = ['colour', 'mantra'];
         kinds.forEach(function (kind) { document.getElementById('f2-' + kind + '-state').textContent = publicationStatus(kind, data); });
       });
     });
-    window.addEventListener('focus', syncDaily);
-    document.addEventListener('visibilitychange', function () { if (!document.hidden) syncDaily(); });
+    window.addEventListener('focus', function () { syncDaily(); loadWordPublication(); });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) { syncDaily(); loadWordPublication(); } });
+    window.addEventListener('pagehide', function () { window.clearTimeout(wordExpiryTimer); });
     syncDaily();
   }
   window.DrishvaraV2Homepage = { markup: markup, selectFeatured: selectFeatured, renderFirstLight: renderFirstLight,
     renderFeatured: renderFeatured, renderRead: renderRead, renderExplore: renderExplore, syncDaily: syncDaily,
     loadPublicationStates: loadPublicationStates, publicationStatus: publicationStatus, isTodayResult: isTodayResult,
-    dayKey: dayKey, carouselModel: carouselModel, rotationMs: ROTATION_MS };
+    dayKey: dayKey, carouselModel: carouselModel, rotationMs: ROTATION_MS,
+    approvedWordPublication: approvedWordPublication, renderWordPublication: renderWordPublication };
 })();

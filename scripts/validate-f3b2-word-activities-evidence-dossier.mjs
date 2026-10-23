@@ -582,6 +582,7 @@ check("F3B-3 captures and Activities remain byte-value identical to frozen dossi
   const old = JSON.parse(git("show", qualificationBaseline + ":" + dossierPath));
   const preserved = structuredClone(dossier);
   delete preserved.f3b4_qualification_and_architecture;
+  delete preserved.consolidated_production_preparation;
   assert.deepEqual(preserved, old);
 });
 check("F3B-2 Activities and all historical dossier fields preserved", () => {
@@ -589,6 +590,7 @@ check("F3B-2 Activities and all historical dossier fields preserved", () => {
   const preserved = structuredClone(dossier);
   delete preserved.f3b3_lexical_capture;
   delete preserved.f3b4_qualification_and_architecture;
+  delete preserved.consolidated_production_preparation;
   for (const word of preserved.words) {
     delete word.captured_lexical_evidence_refs;
     delete word.lexical_review_progress;
@@ -634,6 +636,22 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
 check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
+  const completionBaseline = "1aaf29764604285f42108a131122e495ac3f8b71";
+  if (git("rev-parse", "HEAD").trim() === completionBaseline) {
+    assert.equal(git("rev-parse", "origin/main").trim(), completionBaseline);
+    assert.equal(git("diff", "--cached", "--name-only").trim(), "");
+    const tracked = [dossierPath, governingFiles.output_contract, "assets/js/drishvara-v2-homepage.js", "assets/css/drishvara-v2-homepage.css", validatorPath];
+    assert.deepEqual(sorted(git("diff", "--name-only", completionBaseline, "--").trim().split("\n").filter(Boolean)), sorted(tracked));
+    const added = ["data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json", "generated/word-of-day-publication.json",
+      "scripts/lib/ag70e-word-postgres-adapter.mjs", "scripts/lib/ag70e-word-publication-pipeline.mjs", "scripts/lib/ag70e-word-test-fixtures.mjs",
+      "supabase/migrations/20261023_word_assignment_preparation.sql", "scripts/validate-word-production-completion.mjs", "scripts/qa-word-publication-local.mjs",
+      "docs/knowledge/f3b-production-release-readiness.md"];
+    const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
+    assert.deepEqual(sorted(status), sorted([...tracked.map(p => " M " + p), ...added.map(p => "?? " + p), "?? prototypes/"]));
+    const historical = structuredClone(dossier); delete historical.consolidated_production_preparation;
+    assert.deepEqual(historical, JSON.parse(git("show", completionBaseline + ":" + dossierPath)));
+    return;
+  }
   const executionBaseline = "a4013e86fb39b87421a0269c81f74333c689feb1";
   if (git("rev-parse", "HEAD").trim() === executionBaseline) {
     assert.equal(git("rev-parse", "origin/main").trim(), executionBaseline);

@@ -49,6 +49,9 @@
 .f2-day-card h3 { font: 700 1.05rem/1.2 var(--dv2-font-editorial); color: #18304a; margin: 0 0 12px; }
 .f2-day-card h3::before { content: ""; display: inline-block; width: 6px; height: 14px; background: var(--dv2-gold); margin-right: 7px; vertical-align: -1px; }
 .f2-day-value { font: 700 1.1rem/1.25 var(--dv2-font-editorial); color: #21354c; }
+.f2-publication { min-width: 0; }
+.f2-publication .f2-day-value, .f2-publication p, .f2-publication a { overflow-wrap: anywhere; white-space: normal; }
+.f2-word-scripts, .f2-word-iast { display: block; margin-top: 4px; font-size: 0.9rem; line-height: 1.4; }
 .f2-day-card p { font-size: .77rem; line-height: 1.4; color: #405063; margin: 8px 0; }
 .f2-day-card dl { display: grid; gap: 3px; width: 100%; margin: 0; font-size: .78rem; }
 .f2-day-card dl div { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 6px; }
