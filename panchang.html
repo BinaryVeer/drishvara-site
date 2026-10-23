@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panchang | Drishvara</title>
+  <link rel="icon" href="assets/logo/logo.png">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-tokens.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-shell.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-tools.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-home.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-components.css?v=dv2-f1-20261023">
+</head>
+<body class="dv2-tool-page">
+  <a class="dv2-skip-link" href="#dv2-main">Skip to content</a>
+  <main id="dv2-main">
+    <section id="time" class="dv2-section dv2-time" data-dv2-world="time">
+      <div class="dv2-section__inner">
+        <p class="dv2-section__kicker">Panchang</p>
+        <h1>Today's Panchang</h1>
+        <div class="dv2-time-layout">
+          <div>
+            <p class="dv2-section-note" data-dv2-i18n="timeIntro">Daily Panchang, observance and annual calendar context.</p>
+            <div class="dv2-context-panel">
+              <strong data-dv2-i18n="timeBasis">Current Panchang appears for the selected date and place.</strong>
+              <span data-dv2-i18n="timePrivacy">Date and location inputs are not stored by this public surface.</span>
+            </div>
+            <div class="dv2-language-toggle" aria-label="Time language">
+              <button type="button" data-dv2-language-choice="en" aria-pressed="true">EN</button>
+              <button type="button" data-dv2-language-choice="hi" aria-pressed="false">हिंदी</button>
+            </div>
+          </div>
+          <div class="dv2-runtime-host" id="dv2-time-host">
+<div class="card" id="panchang-festival-card" data-ag74i-panchang-public-surface="true" data-ag74o-panchang-public-surface="true" aria-busy="false">
+          <div class="label">Panchang & Festival View</div>
+          <span hidden data-ag74a-panchang-active-status="true">Active calculated Panchang pilot result is available for approved pilot locations and remains under verification.</span>
+          <h2 id="panchang-public-heading">Panchang by Place and Date</h2>
+          <p data-ag74i-public-introduction="true">Varanasi / Banaras is selected by default. Drishvara calculates the daily Panchang locally in your browser for the selected civil date and governed location basis. No date or location is substituted and no input is stored.</p>
+
+
+
+
+          <!-- AG74I_PANCHANG_PUBLIC_SURFACE_START -->
+          <section class="ag74i-date-surface" data-ag74i-date-selection-surface="true" aria-labelledby="ag74i-date-heading">
+            <div class="ag74i-surface-heading">
+              <div>
+                <p class="ag74i-eyebrow">Panchang date</p>
+                <h3 id="ag74i-date-heading">Choose a date</h3>
+              </div>
+              <p class="ag74i-selected-date" id="panchang-selected-date-label" aria-live="polite">Today in Varanasi</p>
+            </div>
+
+            <div class="ag74i-date-controls" role="group" aria-label="Panchang date navigation">
+              <button type="button" class="ag74i-date-button" id="panchang-previous-day" aria-label="Show previous day">Previous Day</button>
+
+              <label class="ag74i-date-field" for="panchang-date-text">
+                <span>Date (DD/MM/YYYY)</span>
+                <input id="panchang-date-text" type="text" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="DD/MM/YYYY" aria-describedby="panchang-date-help panchang-selection-status" />
+              </label>
+
+              <label class="ag74i-date-field" for="panchang-date-picker">
+                <span>Date picker</span>
+                <input id="panchang-date-picker" type="date" autocomplete="off" aria-describedby="panchang-date-help panchang-selection-status" />
+              </label>
+
+              <button type="button" class="ag74i-date-button ag74i-today-button" id="panchang-today" aria-label="Return to today">Today</button>
+              <button type="button" class="ag74i-date-button" id="panchang-next-day" aria-label="Show next day">Next Day</button>
+            </div>
+
+            <p class="ag74i-date-help" id="panchang-date-help">Supported dates: 01/01/1900 to 31/12/2100. The text field and native date picker stay synchronized. Times use the selected IANA timezone.</p>
+
+<div class="ag74o-r3-request-actions" data-ag74o-r3-request-commit="true">
+  <button id="panchang-calculate" type="button" class="ag74o-r3-calculate-button" aria-describedby="panchang-request-status panchang-selection-status">Calculate Panchang</button>
+  <p id="panchang-request-status" class="ag74o-r3-request-status" data-ag74o-r3-request-state="ready" aria-live="polite">Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.</p>
+</div>
+<aside class="ag74p-live-release" data-ag74p-live-release="true" aria-label="Panchang public release status"><strong>AG74P public release:</strong><span>5 approved named locations · worldwide coordinates with validated IANA timezone · 384 Varanasi annual records · 114 generic monthly observances.</span></aside>
+<p class="ag74i-selection-status" id="panchang-selection-status" role="status" aria-live="polite" tabindex="-1">Preparing the Varanasi date basis…</p>
+<div class="ag74o-r2-provenance" data-ag74o-r2-provenance="true" aria-label="Location and approval provenance">
+  <p><strong>Location basis:</strong> <span id="panchang-location-provenance">Varanasi / Banaras · landing UI state only</span></p>
+  <p><strong>Coordinate basis:</strong> <span id="panchang-coordinate-provenance">No approved coordinate basis</span></p>
+  <p><strong>Timezone basis:</strong> <span id="panchang-timezone-provenance">Asia/Kolkata · UI date basis only</span></p>
+  <p><strong>Approval basis:</strong> <span id="panchang-approval-provenance">Public selection blocked · computation blocked</span></p>
+</div>
+          </section>
+
+          <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_START -->
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="panchang" data-ag71d-mode="place" data-ag71c-selected-mode="place">
+            <div class="ag71c-input-mode" aria-label="Panchang location input mode">
+              <label>
+                <input type="radio" name="ag71c-panchang-location-mode" value="place" data-ag71c-mode checked>
+                Select Location
+              </label>
+              <label>
+                <input type="radio" name="ag71c-panchang-location-mode" value="coordinates" data-ag71c-mode>
+                Enter Coordinates
+              </label>
+            </div>
+            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields>
+              <label class="ag71c-field-label">Latitude
+                <input id="panchang-latitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 27.0844">
+              </label>
+              <label class="ag71c-field-label">Longitude
+                <input id="panchang-longitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 93.6053">
+              </label>
+              <label class="ag71c-field-label">Timezone
+                <input id="panchang-timezone" type="text" placeholder="e.g. Asia/Kolkata">
+              </label>
+              <label class="ag71c-field-label">Optional Location Label
+                <input id="panchang-coordinate-label" type="text" placeholder="e.g. Itanagar">
+              </label>
+            </div>
+            <p class="ag71c-coordinate-note">Coordinate-first calculation requires latitude, longitude and a supplied valid IANA timezone. Drishvara does not reverse-geocode or store these inputs.</p>
+          </div>
+
+            <p class="ag71d-r6-coordinate-basis-summary" data-ag71d-r6-coordinate-basis-summary="panchang">
+              Coordinate basis: awaiting Panchang coordinates
+            </p>
+          <!-- AG71C_PANCHANG_COORDINATE_INPUT_SURFACE_END -->
+
+<div class="form-grid">
+
+          <!-- AG71D_PANCHANG_LOCATION_SELECT_START -->
+          <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="panchang" data-ag74o-place-selection="governed-dropdown-only">
+            <label class="ag71d-select-label" for="panchang-place-select">Choose Panchang Location</label>
+            <label class="ag74o-alias-field" for="panchang-place-alias"><span>Approved place or alias</span><input id="panchang-place-alias" type="text" autocomplete="off" placeholder="e.g. Kashi or Tokyo" aria-describedby="panchang-selection-status"></label>
+            <select id="panchang-place-select" class="ag71d-location-select" data-ag71d-location-select="panchang" aria-label="Select Panchang Location" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1" data-ag74o-r2-approved-option-count="0" data-ag74o-r2-ui-state-only="true" aria-describedby="panchang-selection-status panchang-approval-provenance">
+                            <option data-ag74o-r2-ui-state-only="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="varanasi-uttar-pradesh-india" data-location-id="loc_in_up_varanasi_city_001" data-ag74i-engine-location-id="varanasi_in" data-timezone="Asia/Kolkata" data-latitude="25.3176" data-longitude="82.9739" data-country="India" data-location-type="sacred_city" data-source-status="ag74i_default_canonical_location" data-review-status="approved_ag74i_default" selected>Varanasi / Banaras</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
+              <option data-ag74o-r2-legacy-compat-option="true" data-ag74o-r2-public-approved="false" data-ag74o-r2-computation-approved="false" value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
+            </select>
+            <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_START -->
+            <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="panchang" data-ag74o-compat-only="true" hidden aria-hidden="true" aria-label="Legacy Panchang Location Quick Pick">
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="varanasi-uttar-pradesh-india" data-location-id="loc_in_up_varanasi_city_001" data-ag74i-engine-location-id="varanasi_in" data-timezone="Asia/Kolkata" data-latitude="25.3176" data-longitude="82.9739" data-country="India" data-location-type="sacred_city" data-source-status="ag74i_default_canonical_location" data-review-status="approved_ag74i_default" aria-pressed="true">Varanasi / Banaras</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="panchang" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</button>
+            </div>
+            <!-- AG71D_R4_PANCHANG_LOCATION_OPTIONS_END -->
+            <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="panchang">
+              Selected Panchang location: Varanasi / Banaras
+            </p>
+            <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="panchang">
+              Use the governed dropdown or enter an approved alias such as Kashi, Banaras, Varanasi, Itanagar, New Delhi, Ranchi or Tokyo.
+            </p>
+            <p class="ag71d-place-select-note">Curated locations use governed coordinates and timezones. Approved aliases resolve exactly; fuzzy or nearest-place matching is not used.</p>
+          </div>
+          <!-- AG71D_PANCHANG_LOCATION_SELECT_END -->
+
+</div>
+
+
+          <p class="ag71e-r1-panchang-inline-status" data-ag71e-r1-panchang-inline-status="true">
+            Varanasi / Banaras and today are selected automatically. Daily values calculate without a separate Generate button.
+          </p>
+          <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_START -->
+          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="panchang" data-ag71e-r1-compat-only="true" data-ag74i-compat-only="true" hidden aria-hidden="true" inert>
+            <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="panchang" tabindex="-1">
+              Generate Panchang Result
+            </button>
+            <div class="ag71e-preview-panel" data-ag71e-r1-compat-hidden="true" data-ag71e-preview-panel="panchang" hidden>
+              <p class="eyebrow">Pilot Panchang Preview</p>
+              <h3>Location basis accepted for Panchang pilot</h3>
+              <div class="ag71e-preview-grid" data-ag71e-preview-grid="panchang"></div>
+              <p class="ag71e-preview-note">
+                Exact Panchang values and upcoming observance details remain withheld until computation, source and regional-method verification are approved.
+              </p>
+            </div>
+          </div>
+          <!-- AG71E_PANCHANG_PREVIEW_OUTPUT_END -->
+          <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_START -->
+          <p class="ag71f-pilot-safe-output-note" data-ag71f-pilot-safe-output-rendering="closed">
+
+          </p>
+          <!-- AG71F_PILOT_SAFE_OUTPUT_RENDERING_CLOSURE_END -->
+
+          <section data-ag74o-daily-result-surface="true" aria-label="Calculated Panchang result">
+          <div class="mini-table" data-drishvara-ag60i-panchang-preview-safe="true">
+            <div class="mini-row"><strong>Calculation Source</strong><span id="panchang-calculation-source">No publicly approved matching record</span></div>
+            <div class="mini-row"><strong>Method Basis</strong><span id="panchang-method-basis">Preparing local calculation</span></div>
+            <div class="mini-row"><strong>Location Basis</strong><span id="panchang-moonrise">Varanasi / Banaras · Asia/Kolkata</span></div>
+            <div class="mini-row"><strong>Date Basis</strong><span id="panchang-moonset">Today in Varanasi</span></div>
+            <div class="mini-row"><strong>Sunrise</strong><span id="panchang-sunrise">Calculating</span></div>
+            <div class="mini-row"><strong>Sunset</strong><span id="panchang-sunset">Calculating</span></div>
+            <div class="mini-row"><strong>Vara</strong><span id="panchang-vara">Calculating</span></div>
+            <div class="mini-row"><strong>Tithi</strong><span id="panchang-tithi">Calculating</span></div>
+            <div class="mini-row"><strong>Tithi transition</strong><span id="panchang-tithi-transition">Calculating</span></div>
+            <div class="mini-row"><strong>Nakshatra</strong><span id="panchang-nakshatra">Calculating</span></div>
+            <div class="mini-row"><strong>Nakshatra transition</strong><span id="panchang-nakshatra-transition">Calculating</span></div>
+            <div class="mini-row"><strong>Yoga</strong><span id="panchang-yoga">Calculating</span></div>
+            <div class="mini-row"><strong>Yoga transition</strong><span id="panchang-yoga-transition">Calculating</span></div>
+            <div class="mini-row"><strong>Karana</strong><span id="panchang-karana">Calculating</span></div>
+            <div class="mini-row"><strong>Karana transition</strong><span id="panchang-karana-transition">Calculating</span></div>
+            <div class="mini-row"><strong>Paksha</strong><span id="panchang-paksha">Calculating</span></div>
+          </div>
+          </section>
+
+          <div class="festival-list" id="festival-list">
+            <div class="festival-item">
+              <div class="sub" id="upcoming-observance-title">Upcoming Observance</div>
+              <div class="title" id="upcoming-observance-name">No governed observance result is available for this selection yet.</div>
+              <div class="meta" id="upcoming-observance-note">Festival timing appears only when a uniquely matched record has explicit public-display approval or the completed calculation engine is available.</div>
+              <dl class="ag74i-observance-window" data-ag74i-observance-window-placeholder="true">
+                <div><dt>Begins</dt><dd id="upcoming-observance-begins">Not available</dd></div>
+                <div><dt>Ends</dt><dd id="upcoming-observance-ends">Not available</dd></div>
+                <div><dt>Ritual windows</dt><dd id="upcoming-observance-ritual-window">Not available for the current governed record</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <section class="ag74i-calendar-book" data-ag74i-varanasi-calendar-book="true" aria-labelledby="ag74i-calendar-book-title">
+            <div class="ag74i-surface-heading">
+              <div>
+                <p class="ag74i-eyebrow">Annual observance book</p>
+                <h3 id="ag74i-calendar-book-title">Varanasi Hindu Festival Calendar</h3>
+              </div>
+              <p class="ag74i-book-basis">Canonical basis: Varanasi / Banaras</p>
+            </div>
+
+            <p class="ag74i-book-year" id="ag74i-calendar-year-label">Loading the governed Varanasi annual book…</p>
+
+            <div class="ag74i-book-pages" aria-live="polite">
+              <article class="ag74i-book-page" data-ag74i-book-page="1">
+                <p class="ag74i-book-page-number">Page 1 of 4</p>
+                <h4>Page 1 · Canonical lunar-month slots 1–3</h4>
+                <p>Festival entries, public Begins/Ends timings and ritual windows will populate after the governed Hindu-year and rule contracts are completed.</p>
+              </article>
+              <article class="ag74i-book-page" data-ag74i-book-page="2" hidden>
+                <p class="ag74i-book-page-number">Page 2 of 4</p>
+                <h4>Page 2 · Canonical lunar-month slots 4–6</h4>
+                <p>Adhika month instances will be nested under their related canonical month slot. Physical month counts may vary.</p>
+              </article>
+              <article class="ag74i-book-page" data-ag74i-book-page="3" hidden>
+                <p class="ag74i-book-page-number">Page 3 of 4</p>
+                <h4>Page 3 · Canonical lunar-month slots 7–9</h4>
+                <p>Kshaya or exceptional month states will be marked explicitly rather than forcing exactly twelve physical months.</p>
+              </article>
+              <article class="ag74i-book-page" data-ag74i-book-page="4" hidden>
+                <p class="ag74i-book-page-number">Page 4 of 4</p>
+                <h4>Page 4 · Canonical lunar-month slots 10–12</h4>
+                <p>The final book will be complete against the approved and versioned Drishvara festival and observance rule inventory.</p>
+              </article>
+            </div>
+
+            <p id="ag74o-book-status" role="status" aria-live="polite">Loading annual-book structure…</p>
+            <nav class="ag74i-book-navigation" aria-label="Varanasi festival calendar pages">
+              <button type="button" id="ag74i-book-previous" aria-label="Previous calendar page">Previous Page</button>
+              <button type="button" data-ag74i-book-page-button="1" aria-current="page">1</button>
+              <button type="button" data-ag74i-book-page-button="2">2</button>
+              <button type="button" data-ag74i-book-page-button="3">3</button>
+              <button type="button" data-ag74i-book-page-button="4">4</button>
+              <button type="button" id="ag74i-book-next" aria-label="Next calendar page">Next Page</button>
+            </nav>
+          </section>
+          <!-- AG74I_PANCHANG_PUBLIC_SURFACE_END -->
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="dv2-footer"><div class="dv2-footer__inner"><span>Drishvara © 2026 - Reading, time and reflection.</span><span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="login.html">Sign in</a></span></div></footer>
+  <script src="assets/js/sup02-panchang-server-controller.js"></script>
+  <script src="assets/js/drishvara-v2-shell.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-i18n.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-location.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-home.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-panchang.js?v=dv2-f1-20261023"></script>
+</body>
+</html>

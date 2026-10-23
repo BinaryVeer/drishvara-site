@@ -1,7 +1,15 @@
 (function () {
   "use strict";
 
-  if (!/\/index\.html$|\/$/.test(location.pathname)) return;
+  var isHomePage = /\/index\.html$|\/$/.test(location.pathname);
+  var toolPage = /\/(panchang|what-stars-say)\.html$/.test(location.pathname);
+  if (!isHomePage && !toolPage) return;
+
+  if (isHomePage && /^#(time|reflect)$/.test(location.hash)) {
+    var destination = location.hash === "#time" ? "panchang.html" : "what-stars-say.html";
+    location.replace(new URL(destination + location.search, location.href).href);
+    return;
+  }
 
   var Shell = window.DrishvaraV2Shell;
   var I18n = window.DrishvaraV2I18n;
@@ -108,7 +116,7 @@
       '<div><small>Paksha</small><strong id="dv2-context-paksha">—</strong></div>' +
       '<div><small>Nakshatra</small><strong id="dv2-context-nakshatra">—</strong></div>' +
       '<div><small>Upcoming observance</small><strong id="dv2-context-observance">—</strong></div>' +
-      '<a class="dv2-time-strip__link" href="#time">Panchang →</a>' +
+      '<a class="dv2-time-strip__link" href="panchang.html">Panchang →</a>' +
       "</div>" +
       "</div></div></section>" +
       section(
@@ -150,6 +158,14 @@
       '<footer class="dv2-footer"><div class="dv2-footer__inner"><span>Drishvara © 2026 - Intelligence for today, knowledge for continuity, time for context.</span><span><a href="about.html">About</a> - <a href="contact.html">Contact</a> - <a href="login.html">Sign in</a></span></div></footer>';
 
     header.insertAdjacentElement("afterend", app);
+    // Keep the existing runtime bridge for TODAY; only dedicated pages expose its forms.
+    ["time", "reflect"].forEach(function (id) {
+      var surface = document.getElementById(id);
+      surface.hidden = true;
+      surface.inert = true;
+      surface.setAttribute("aria-hidden", "true");
+      surface.setAttribute("data-dv2-background-runtime", "true");
+    });
     return app;
   }
 
@@ -171,8 +187,8 @@
     var panel = document.querySelector('[data-ag71e-preview-panel="star-reflection"]');
     var starCard = panel ? panel.closest(".card") : null;
     var reflectHost = document.getElementById("dv2-reflect-host");
-    if (starCard && reflectHost && !reflectHost.contains(starCard)) {
-      reflectHost.appendChild(starCard);
+    if (starCard && reflectHost) {
+      if (!reflectHost.contains(starCard)) reflectHost.appendChild(starCard);
       starCard.setAttribute("data-drishvara-v2-reflect-card", "true");
       var nameInput = document.getElementById("star-reflection-name");
       if (nameInput) {
@@ -732,6 +748,14 @@
   }
 
   function getPanchangLocationLabel() {
+    var coordinateMode = document.querySelector('input[name="ag71c-panchang-location-mode"][value="coordinates"]');
+    if (coordinateMode && coordinateMode.checked) {
+      var label = document.getElementById("panchang-coordinate-label");
+      if (label && label.value.trim()) return label.value.trim();
+      return ["panchang-latitude", "panchang-longitude", "panchang-timezone"]
+        .map(function (id) { return document.getElementById(id)?.value.trim() || ""; })
+        .filter(Boolean).join(" · ") || languageData(currentTimeLanguage).unavailable;
+    }
     var alias = document.getElementById("panchang-place-alias");
     if (alias && alias.value.trim()) return alias.value.trim();
     var select = document.getElementById("panchang-place-select");
@@ -800,7 +824,7 @@
     var selected = selectedMonthRecord(byMonth);
     if (!selected) return languageData(lang).emptyObservanceMonth;
     return (
-      formatMonthYear(selected.key, lang) +
+      monthLabel(selected.key, selected.records, lang) +
       " · " +
       selected.records.length +
       " " +
@@ -2321,9 +2345,13 @@
       .querySelectorAll("#panchang-place-select + [data-drishvara-hf12-select] .drishvara-hf12-select-button, #panchang-place-select + [data-drishvara-hf12-select] .drishvara-hf12-select-option")
       .forEach(function (node) {
         var value = node.getAttribute("data-value") || "";
-        if (!value && node.classList.contains("drishvara-hf12-select-button") && select) value = select.value || "";
-        var english = node.getAttribute("data-dv2-place-en") || node.textContent.trim();
-        if (!node.getAttribute("data-dv2-place-en")) node.setAttribute("data-dv2-place-en", english);
+        var toggle = node.classList.contains("drishvara-hf12-select-button");
+        if (!value && toggle && select) value = select.value || "";
+        var selected = toggle && select ? select.selectedOptions[0] : null;
+        var english = selected
+          ? selected.getAttribute("data-dv2-place-en") || selected.textContent.trim()
+          : node.getAttribute("data-dv2-place-en") || node.textContent.trim();
+        if (toggle || !node.getAttribute("data-dv2-place-en")) node.setAttribute("data-dv2-place-en", english);
         node.textContent = lang === "hi" ? (STAR_PLACE_LABEL_HI[value] || replaceKnownHindi(english)) : english;
       });
   }
@@ -2334,7 +2362,7 @@
     var sectionRoot = document.getElementById("time");
     if (sectionRoot) sectionRoot.setAttribute("data-dv2-lang", currentTimeLanguage);
     textNode("#time > .dv2-section__inner > .dv2-section__kicker", d.timeKicker);
-    textNode("#time > .dv2-section__inner > h2", d.timeTitle);
+    textNode("#time > .dv2-section__inner > :is(h1, h2)", d.timeTitle);
     visibleRuntimeLabel(document.getElementById("panchang-festival-card"), "panchang", d.panchangViewLabel);
     textNode('#panchang-festival-card [data-dv2-runtime-label="panchang"]', d.panchangViewLabel);
     textNode("#panchang-public-heading", d.todaysPanchang);
@@ -2470,7 +2498,7 @@
     var dob = document.getElementById("star-reflection-dob");
     var note = document.querySelector("[data-ag73a-birth-time-note]");
     textNode("#reflect > .dv2-section__inner > .dv2-section__kicker", d.reflectKicker);
-    textNode("#reflect > .dv2-section__inner > h2", d.reflectTitle);
+    textNode("#reflect > .dv2-section__inner > :is(h1, h2)", d.reflectTitle);
     if (card) {
       visibleRuntimeLabel(card, "star-reflection", d.starLabel);
       textNode('[data-drishvara-v2-reflect-card="true"] [data-dv2-runtime-label="star-reflection"]', d.starLabel);
@@ -2886,21 +2914,20 @@
     var observance = document.getElementById("upcoming-observance-name");
     var status = document.getElementById("dv2-context-time-status");
     if (sunrise && sunrise.textContent && !/Calculating|Awaiting/i.test(sunrise.textContent)) {
-      document.getElementById("dv2-context-sunrise").textContent = formatTimeOnly(sunrise.textContent);
+      textNode("#dv2-context-sunrise", formatTimeOnly(sunrise.textContent));
     }
     if (paksha && paksha.textContent && !/Calculating|Awaiting/i.test(paksha.textContent)) {
-      document.getElementById("dv2-context-paksha").textContent = localizeValue(paksha.textContent, currentTimeLanguage);
+      textNode("#dv2-context-paksha", localizeValue(paksha.textContent, currentTimeLanguage));
     }
     if (
       nakshatra &&
       nakshatra.textContent &&
       !/Calculating|Awaiting/i.test(nakshatra.textContent)
     ) {
-      document.getElementById("dv2-context-nakshatra").textContent =
-        localizeValue(nakshatra.textContent, currentTimeLanguage);
+      textNode("#dv2-context-nakshatra", localizeValue(nakshatra.textContent, currentTimeLanguage));
     }
     if (observance && observance.textContent && !/No governed/i.test(observance.textContent)) {
-      document.getElementById("dv2-context-observance").textContent = localizeValue(observance.textContent, currentTimeLanguage);
+      textNode("#dv2-context-observance", localizeValue(observance.textContent, currentTimeLanguage));
     }
     if (status && sunrise && !/Calculating|Awaiting/i.test(sunrise.textContent || "")) {
       status.textContent = currentTimeLanguage === "hi"
@@ -3015,11 +3042,30 @@
     });
   }
 
-  function boot() {
-    if (!Shell) return;
-    renderShell();
+  function bindRuntimeCompletionPresentation() {
+    var panchang = document.getElementById("panchang-festival-card");
+    var star = document.querySelector('[data-ag71e-preview-button="star-reflection"]');
+    // Observe only completion attributes written by the unchanged runtime, never input/choice DOM.
+    if (panchang) {
+      new MutationObserver(function () {
+        if (panchang.getAttribute("data-sup02-request-state") === "committed") {
+          syncTimePresentationFromRuntime();
+        }
+      }).observe(panchang, { attributes: true, attributeFilter: ["data-sup02-request-state"] });
+    }
+    if (star) {
+      new MutationObserver(function () {
+        applyReflectLanguage(currentReflectLanguage);
+        if (star.getAttribute("aria-busy") === "true") {
+          star.textContent = currentReflectLanguage === "hi"
+            ? languageData("hi").loading : "Calculating governed Star Reflection...";
+        }
+      }).observe(star, { attributes: true, attributeFilter: ["aria-busy"] });
+    }
+  }
+
+  function bootRuntimePresentation() {
     moveRuntimeCards();
-    quarantineLegacyShell();
     refineRuntimePresentation();
     restoreTimeRuntimeControls();
     ensureTimeCompactDisclosures();
@@ -3031,6 +3077,7 @@
     applyReflectLanguage(currentReflectLanguage);
     updateLocationCount();
     bindRuntimeContextRefresh();
+    bindRuntimeCompletionPresentation();
     syncTimeContextFromRuntime();
     window.setTimeout(function () {
       applyTimeLanguage(currentTimeLanguage);
@@ -3041,6 +3088,24 @@
       ensureTimeCompactDisclosures();
       syncTimeCompactSummaries(currentTimeLanguage);
     }, 2800);
+  }
+
+  function mountToolPage(kind) {
+    if (!Shell || document.body.hasAttribute("data-dv2-tool-mounted")) return;
+    if (!document.getElementById(kind)) return;
+    document.body.setAttribute("data-dv2-tool-mounted", kind);
+    Shell.ensureHeader(kind);
+    bootRuntimePresentation();
+    Shell.bindActiveSections();
+  }
+
+  window.DrishvaraV2RuntimePresentation = { mount: mountToolPage };
+
+  function boot() {
+    if (!Shell) return;
+    renderShell();
+    quarantineLegacyShell();
+    bootRuntimePresentation();
 
     Promise.all([
       fetchJson("data/homepage-ui.json"),
@@ -3056,6 +3121,14 @@
       Shell.bindActiveSections();
     });
   }
+
+  if (!isHomePage) return;
+
+  window.addEventListener("hashchange", function () {
+    if (/^#(time|reflect)$/.test(location.hash)) {
+      location.replace(new URL((location.hash === "#time" ? "panchang.html" : "what-stars-say.html") + location.search, location.href).href);
+    }
+  });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot, { once: true });

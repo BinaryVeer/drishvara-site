@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What Stars Say | Drishvara</title>
+  <link rel="icon" href="assets/logo/logo.png">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-tokens.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-shell.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-tools.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-home.css?v=dv2-f1-20261023">
+  <link rel="stylesheet" href="assets/css/drishvara-v2-components.css?v=dv2-f1-20261023">
+</head>
+<body class="dv2-tool-page">
+  <a class="dv2-skip-link" href="#dv2-main">Skip to content</a>
+  <main id="dv2-main">
+    <section id="reflect" class="dv2-section dv2-reflect" data-dv2-world="reflect">
+      <div class="dv2-section__inner">
+        <p class="dv2-section__kicker">What Stars Say</p>
+        <h1>Your Star Reflection</h1>
+        <div class="dv2-reflect-layout">
+          <div>
+            <p class="dv2-section-note" data-dv2-i18n="reflectIntro">A governed reflection from your birth context.</p>
+            <div class="dv2-context-panel">
+              <strong data-dv2-i18n="reflectBasis">The result hierarchy is reflection, inquiry, grounding, basis and limitation.</strong>
+              <span data-dv2-i18n="reflectPrivacy">Your birth inputs are used only to resolve this reflection and are not stored by Drishvara.</span>
+            </div>
+            <div class="dv2-language-toggle" aria-label="Reflect language">
+              <button type="button" data-dv2-language-choice="en" aria-pressed="true">EN</button>
+              <button type="button" data-dv2-language-choice="hi" aria-pressed="false">हिंदी</button>
+            </div>
+          </div>
+          <div class="dv2-runtime-host" id="dv2-reflect-host">
+<div class="card">
+          <div class="label">Star Reflection</div>
+          <p class="section-note star-safety-note">Reflective prompt only; not a personal prediction, assessment, or decision guide.</p>
+          <h2>Your Star Reflection</h2>
+          <p>Personal input is active for this static reflective result. Inputs are used only in this browser session and are not stored.</p>
+          <div class="form-grid">
+            <input id="star-reflection-name" type="text" placeholder="Name" autocomplete="name" data-ag71d-r3-preview-input="star-name" />
+            <input id="star-reflection-dob" type="text" inputmode="numeric" maxlength="10" pattern="\\d{2}/\\d{2}/\\d{4}" placeholder="Date of Birth (DD/MM/YYYY)" autocomplete="bday" data-ag71d-r3-preview-input="star-dob" data-ag71d-r4-date-mask="ddmmyyyy" />
+            <!-- AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_START -->
+            <label class="ag73a-birth-time-field" for="star-reflection-birth-time">
+              <span>Birth Time</span>
+              <input id="star-reflection-birth-time" type="text" inputmode="numeric" maxlength="5" pattern="\\d{2}:\\d{2}" placeholder="HH:MM" autocomplete="off" data-ag73a-birth-time-input="true" />
+            </label>
+            <label class="ag73a-birth-time-unknown">
+              <input id="star-birth-time-unknown" type="checkbox" data-ag73a-birth-time-unknown="true" />
+              <span>I don’t know exact birth time</span>
+            </label>
+            <p class="ag73a-birth-time-note" data-ag73a-birth-time-note="true">
+              Birth time is used only for this session-level reflective basis. It is not stored.
+            </p>
+            <!-- AG73A_STAR_REFLECTION_BIRTH_TIME_INPUT_SURFACE_END -->
+
+
+          <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_START -->
+          <div class="ag71c-coordinate-surface" data-ag71c-coordinate-surface="star-reflection" data-ag71d-mode="place" data-ag71c-selected-mode="place">
+            <div class="ag71c-input-mode" aria-label="Birth location input mode">
+              <label>
+                <input type="radio" name="ag71c-star-location-mode" value="place" data-ag71c-mode checked>
+                Select Birth Place
+              </label>
+              <label>
+                <input type="radio" name="ag71c-star-location-mode" value="coordinates" data-ag71c-mode>
+                Enter Birth Coordinates
+              </label>
+            </div>
+            <div class="ag71c-coordinate-grid" data-ag71c-coordinate-fields>
+              <label class="ag71c-field-label">Birth Latitude
+                <input id="star-birth-latitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 23.3441">
+              </label>
+              <label class="ag71c-field-label">Birth Longitude
+                <input id="star-birth-longitude" type="number" step="any" inputmode="decimal" placeholder="e.g. 85.3096">
+              </label>
+              <label class="ag71c-field-label">Birth Timezone
+                <input id="star-birth-timezone" type="text" placeholder="e.g. Asia/Kolkata">
+              </label>
+              <label class="ag71c-field-label">Optional Birth Place Label
+                <input id="star-birth-coordinate-label" type="text" placeholder="e.g. Ranchi, Jharkhand">
+              </label>
+            </div>
+            <p class="ag71c-coordinate-note">Coordinates remain available when your approved place is not in the public location list. Inputs are not stored.</p>
+          </div>
+
+            <p class="ag71d-r6-coordinate-basis-summary" data-ag71d-r6-coordinate-basis-summary="star-reflection">
+              Coordinate basis: awaiting birth coordinates
+            </p>
+          <!-- AG71C_STAR_COORDINATE_INPUT_SURFACE_END -->
+
+          <!-- AG71D_STAR_BIRTH_PLACE_SELECT_START -->
+          <div class="ag71d-place-select-shell" data-ag71d-place-select-shell="star-reflection">
+            <label class="ag71d-select-label" for="star-birth-place-select">Choose Birth Place</label>
+            <select id="star-birth-place-select" class="ag71d-location-select" data-ag71d-location-select="star-reflection" aria-label="Select Birth Place" data-ag71d-r5-native-select-compat="true" aria-hidden="true" tabindex="-1">
+              <option value="" selected>Select birth place</option>
+                            <option value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</option>
+              <option value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</option>
+              <option value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-pilot-status="approved_four_location_pilot" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</option>
+              <option value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-pilot-status="approved_four_location_pilot" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</option>
+            </select>
+            <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_START -->
+            <div class="ag71d-r4-location-options" data-ag71d-r4-location-options="star-reflection" aria-label="Choose Birth Place">
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="itanagar-arunachal-pradesh-india" data-location-id="loc_in_ar_itanagar_capital_complex_001" data-timezone="Asia/Kolkata" data-latitude="27.0844" data-longitude="93.6053" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Itanagar</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="new-delhi-delhi-india" data-location-id="loc_in_dl_new_delhi_capital_001" data-timezone="Asia/Kolkata" data-latitude="28.6139" data-longitude="77.209" data-country="India" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">New Delhi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="ranchi-jharkhand-india" data-location-id="loc_in_jh_ranchi_city_001" data-timezone="Asia/Kolkata" data-latitude="23.3441" data-longitude="85.3096" data-country="India" data-location-type="state_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Ranchi</button>
+              <button type="button" class="ag71d-r4-location-option" data-ag71d-r4-select-kind="star-reflection" data-ag71d-r4-location-value="tokyo-japan" data-location-id="loc_jp_tokyo_capital_001" data-timezone="Asia/Tokyo" data-latitude="35.6762" data-longitude="139.6503" data-country="Japan" data-location-type="national_capital" data-source-status="pilot_coordinate_candidate" data-review-status="approved_for_four_location_pilot">Tokyo</button>
+            </div>
+            <!-- AG71D_R4_STAR_REFLECTION_LOCATION_OPTIONS_END -->
+            <p class="ag71d-r5-selection-summary" data-ag71d-r5-selection-summary="star-reflection">
+              Selected birth place: not selected
+            </p>
+            <p class="ag71d-r5-search-forward-note" data-ag71d-r5-search-forward-note="star-reflection">
+              Future scale-up: search will show matching approved locations from the verified location database as you type.
+            </p>
+            <p class="ag71d-place-select-note">Birth-place selection is active for the static Star Reflection result. Inputs are used only in this browser session and are not stored.</p>
+          </div>
+          <!-- AG71D_STAR_BIRTH_PLACE_SELECT_END -->
+
+
+
+          <!-- AG71E_STAR_REFLECTION_PREVIEW_OUTPUT_START -->
+          <div class="ag71e-preview-action-shell" data-ag71e-preview-action-shell="star-reflection">
+            <button type="button" class="btn btn-secondary ag71e-preview-button" data-ag71e-preview-button="star-reflection">
+              Generate Star Reflection Result
+            </button>
+            <div class="ag71e-preview-panel" data-ag71e-preview-panel="star-reflection" hidden>
+              <p class="eyebrow">Today's Star Reflection Result</p>
+              <h3>Reflection input accepted for pilot review</h3>
+              <div class="ag71e-preview-grid" data-ag71e-preview-grid="star-reflection"></div>
+              <p class="ag71e-preview-note">
+                Reflective result only. This is not a deterministic prediction, assessment, or decision guide. Name, DOB, birth time and location are not stored.
+              </p>
+            </div>
+          </div>
+          <!-- AG71E_STAR_REFLECTION_PREVIEW_OUTPUT_END -->
+
+          <div class="ag71d-method-basis-status" data-ag71d-r4-method-basis-status="true">
+            Reflection basis: Moon-led, Panchanga-supported, birth-time-aware and location-aware. Result remains reflective and non-deterministic.
+          </div>
+<p class="ag71d-method-basis-status" data-ag73e-star-active-status="true">Star Reflection active result is enabled for DOB, birth time and selected birth-place basis. No personal data is stored.</p>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="dv2-footer"><div class="dv2-footer__inner"><span>Drishvara © 2026 - Reading, time and reflection.</span><span><a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="login.html">Sign in</a></span></div></footer>
+  <script src="assets/js/sup02-panchang-server-controller.js"></script>
+  <script src="assets/js/drishvara-v2-shell.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-i18n.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-location.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-home.js?v=dv2-f1-20261023"></script>
+  <script src="assets/js/drishvara-v2-reflect.js?v=dv2-f1-20261023"></script>
+</body>
+</html>

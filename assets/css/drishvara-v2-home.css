@@ -2,6 +2,10 @@
   background: var(--dv2-paper);
 }
 
+[data-dv2-background-runtime="true"] {
+  display: none !important;
+}
+
 .dv2-section {
   position: relative;
   padding: clamp(3rem, 7vw, 6.5rem) clamp(1rem, 3vw, 2rem);

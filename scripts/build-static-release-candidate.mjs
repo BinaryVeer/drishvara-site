@@ -38,6 +38,10 @@ check("package_json_exists", exists("package.json"), "package.json must exist.")
 
 const indexHtml = exists("index.html") ? read("index.html") : "";
 
+const frontendF1 = run("node scripts/validate-drishvara-frontend-migration.mjs");
+check("frontend_f1_dedicated_routes", frontendF1.includes("F1 validation passed:"),
+  "Dedicated Panchang and What Stars Say must preserve frontend ownership, inputs and approval boundaries.");
+
 for (const bad of [
   "UI Step 3 Integration",
   "From signal to reading to reflection",

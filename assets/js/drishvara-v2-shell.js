@@ -9,8 +9,8 @@
     ["read", "Read", "Featured Reads and public articles."],
     ["explore", "Explore", "Topic pathways across public knowledge."],
     ["knowledge", "Knowledge", "Series, ideas and deeper context."],
-    ["time", "Time", "Panchang, observance and calendar intelligence."],
-    ["reflect", "Reflect", "Governed personal reflection."]
+    ["time", "Panchang", "Panchang, observance and calendar intelligence."],
+    ["reflect", "What Stars Say", "Governed personal reflection."]
   ];
 
   function rootPrefix() {
@@ -50,6 +50,8 @@
   }
 
   function worldHref(id) {
+    if (id === "time") return rootPrefix() + "panchang.html";
+    if (id === "reflect") return rootPrefix() + "what-stars-say.html";
     return onHomePage() ? "#" + id : rootPrefix() + "index.html#" + id;
   }
 
@@ -150,8 +152,8 @@
 
   function markActive(sectionId) {
     document.querySelectorAll(".dv2-nav a").forEach(function (link) {
-      var active = link.getAttribute("href") === "#" + sectionId;
-      if (active) link.setAttribute("aria-current", "true");
+      var active = link.getAttribute("href") === worldHref(sectionId);
+      if (active) link.setAttribute("aria-current", onHomePage() ? "true" : "page");
       else link.removeAttribute("aria-current");
     });
   }
