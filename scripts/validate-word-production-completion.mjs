@@ -193,11 +193,14 @@ await check("Edge handler refuses browser writes, caller dates, oversized bodies
   try {
     await import(new URL("../supabase/functions/word-publication/index.ts?qa="+Date.now(),import.meta.url));
     for(const auth of [null,"Bearer synthetic-browser-token"]) {
-      const r=await handler(new Request("https://synthetic.invalid",{method:"POST",headers:auth?{Authorization:auth}:{},body:'{"operation":"reserve"}'}));assert.equal(r.status,403);
+      for(const operation of ["reserve","run_daily"]) {
+        const r=await handler(new Request("https://synthetic.invalid",{method:"POST",headers:auth?{Authorization:auth}:{},body:JSON.stringify({operation})}));assert.equal(r.status,403);
+      }
     }
     assert.equal(calls,0);
     const headers={Authorization:"Bearer "+key};
     assert.equal((await handler(new Request("https://synthetic.invalid",{method:"POST",headers,body:JSON.stringify({operation:"reserve",date_key:"2026-10-24"})}))).status,422);
+    assert.equal((await handler(new Request("https://synthetic.invalid",{method:"POST",headers,body:JSON.stringify({operation:"run_daily",standing:true})}))).status,422);
     assert.equal((await handler(new Request("https://synthetic.invalid",{method:"POST",headers,body:"x".repeat(1025)}))).status,413);
     const r=await handler(new Request("https://synthetic.invalid",{headers})),body=await r.text();
     assert.equal(JSON.parse(body).status,"withheld");assert(!body.includes(key));assert.equal(r.headers.get("cache-control"),"no-store");

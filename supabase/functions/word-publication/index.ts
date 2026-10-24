@@ -1,5 +1,5 @@
 import { timingSafeEqual } from "node:crypto";
-import { runWordServerWorkflow, readWordServerPublication } from "../../../scripts/lib/ag70e-word-server-workflow.mjs";
+import { runWordServerWorkflow, runWordDailyPublication, readWordServerPublication } from "../../../scripts/lib/ag70e-word-server-workflow.mjs";
 
 // Dormant until separately approved deployment, DB controls and server configuration.
 // No CORS write path, browser approvals, request-supplied dates or content records.
@@ -7,7 +7,7 @@ const enabled = Deno.env.get("WORD_WORKFLOW_ENABLED") === "true";
 const base = Deno.env.get("SUPABASE_URL") ?? "";
 const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
 const methods = new Set(["word_assignment_read_workflow", "word_assignment_read_history", "word_assignment_read_command",
-  "word_assignment_commit", "word_assignment_check_authorization", "word_assignment_release_snapshot"]);
+  "word_assignment_commit", "word_assignment_check_authorization", "word_assignment_release_snapshot", "word_assignment_standing_decision"]);
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status,
   headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } });
 async function rpc(name: string, parameters: unknown) {
@@ -42,8 +42,10 @@ Deno.serve(async (request: Request) => {
     for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
     const body = JSON.parse(new TextDecoder().decode(bytes));
     if (!body || typeof body !== "object" || Array.isArray(body) || Object.keys(body).some(k => !["operation", "scheduled"].includes(k)) ||
-      !["reserve", "authorize", "record_publication"].includes(body.operation) || (body.scheduled !== undefined && typeof body.scheduled !== "boolean")) return json({ error: "invalid_command" }, 422);
-    const result = await runWordServerWorkflow({ rpc, timestamp, operation: body.operation, scheduled: body.scheduled === true, enabled });
+      !["reserve", "authorize", "record_publication", "run_daily"].includes(body.operation) || (body.scheduled !== undefined && typeof body.scheduled !== "boolean")) return json({ error: "invalid_command" }, 422);
+    const result = body.operation === "run_daily"
+      ? await runWordDailyPublication({ rpc, timestamp, scheduled: body.scheduled === true, enabled })
+      : await runWordServerWorkflow({ rpc, timestamp, operation: body.operation, scheduled: body.scheduled === true, enabled });
     // Assignment snapshots contain internal review details, not a public response contract.
     return json({ status: result.status,
       reason: "reason" in result && typeof result.reason === "string" ? result.reason : null,

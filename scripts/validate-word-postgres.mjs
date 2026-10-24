@@ -4,13 +4,13 @@ import vm from "node:vm";
 import { webcrypto } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
-import { canonicalJson, snapshotHash, inspectWordHistory, selectionAuthorityHashes, selectDailyWord } from "./lib/ag70d-word-selection-engine.mjs";
+import { canonicalJson, snapshotHash, inspectWordHistory, selectionAuthorityHashes, selectDailyWord, canonicalPublicationDate } from "./lib/ag70d-word-selection-engine.mjs";
 import { executeWordAssignment } from "./lib/ag70d-word-assignment-store.mjs";
 import { createSyntheticWordStore } from "./lib/ag70d-word-assignment-test-adapter.mjs";
 import { createWordPostgresAdapter } from "./lib/ag70e-word-postgres-adapter.mjs";
 import { syntheticSelection, syntheticApproval, syntheticIdentityRef } from "./lib/ag70e-word-test-fixtures.mjs";
 import { projectPublishedWord } from "./lib/ag70e-word-publication-pipeline.mjs";
-import { runWordServerWorkflow, readWordServerPublication } from "./lib/ag70e-word-server-workflow.mjs";
+import { runWordServerWorkflow, runWordDailyPublication, validWordStandingPolicy, readWordServerPublication } from "./lib/ag70e-word-server-workflow.mjs";
 import { createWordPublicFeedHandler } from "./lib/ag70e-word-public-feed.mjs";
 
 // Real PostgreSQL, synthetic content/approvals. No URL, credentials, port or volume input.
@@ -64,7 +64,7 @@ const rpc = async (method, params) => {
 const commit = request => value(`select public.word_assignment_commit(${j(request)});`, "service_role");
 const history = () => value("select public.word_assignment_read_history();", "service_role");
 async function resetDatabase() {
-  await query("drop function if exists public.word_assignment_commit(jsonb), public.word_assignment_read_history(), public.word_assignment_read_command(text), public.word_assignment_check_authorization(text,text,text), public.word_assignment_read_workflow(text), public.word_assignment_release_snapshot(text); drop schema drishvara_word_private cascade;");
+  await query("drop function if exists public.word_assignment_standing_decision(text,text), public.word_assignment_commit(jsonb), public.word_assignment_read_history(), public.word_assignment_read_command(text), public.word_assignment_check_authorization(text,text,text), public.word_assignment_read_workflow(text), public.word_assignment_release_snapshot(text); drop schema drishvara_word_private cascade;");
   await query(fs.readFileSync("supabase/migrations/20261023_word_assignment_preparation.sql","utf8"));
 }
 async function capture(input, operation, extra = {}) {
@@ -363,6 +363,131 @@ try {
   await check("trusted exporter rechecks revoked evidence rather than trusting history flags",async()=>{
     await query("insert into drishvara_word_private.reference_revocations values('synthetic-source','synthetic-revoke','test only',now());");
     assert.equal((await readWordServerPublication({rpc,timestamp:serverInput.created_at})).status,"withheld");
+  });
+
+  // Every policy/approval below is synthetic. The actual publisher record is never
+  // imported as a production approval, and no real word enters this container.
+  const releasePath="data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json";
+  const actualConfig=JSON.parse(fs.readFileSync(releasePath,"utf8"));
+  await check("actual publisher decision records three rules without content or operational approval",async()=>{
+    const p=actualConfig.publisher_policy;
+    assert.equal(p.decision_authority,"Drishvara Publisher");assert.equal(p.decision_date,"2026-10-24");
+    assert.equal(p.authorized_decisions.length,3);assert.equal(p.review_status,"approved");
+    assert.equal(p.record_ref,p.policy_id+"@"+p.version);
+    assert.equal(actualConfig.standing_authorization.enabled,false);
+    assert.equal(actualConfig.standing_authorization.production_approval_ref,null);
+    assert.equal(actualConfig.scheduler.automatic_publication,false);
+    assert.equal(actualConfig.publication.review_status,"pending");
+    assert.equal(actualConfig.publisher_decisions.exact_copy_and_attribution.approval_ref,null);
+  });
+  async function standingSetup({count=3,policyChange=()=>{},configChange=()=>{},inputChange=()=>{}}={}) {
+    await resetDatabase();
+    await query(fs.readFileSync("supabase/migrations/20261024010000_word_standing_policy_preparation.sql","utf8"));
+    const timestamp=new Date().toISOString(), date=canonicalPublicationDate(timestamp);
+    const input=syntheticSelection(count,date);input.created_at=timestamp;
+    for(const r of input.bank.records) for(const review of r.reviewed_publication_copy.reviews) review.approval_ref="synthetic-copy-review";
+    inputChange(input);
+    const policy={...structuredClone(actualConfig.publisher_policy),policy_id:"synthetic-publisher-policy",record_ref:"synthetic-publisher-policy@1",
+      decision_authority:"Synthetic Publisher (test only)",evidence_basis:"Fictional infrastructure fixture, not actual publisher approval",
+      approval_ref:"synthetic-publisher-approval",decision_date:date,valid_from:date,test_only:true};
+    policyChange(policy);
+    const cfg=structuredClone(actualConfig);cfg.publisher_policy=policy;
+    cfg.persistence={enabled:true,server_authorization_ref:actor.approval_ref};cfg.runtime_activation=true;cfg.public_output_allowed=true;
+    cfg.standing_authorization={enabled:true,policy_ref:policy.record_ref,production_approval_ref:"synthetic-environment-approval"};
+    cfg.publication={...syntheticApproval,approval_ref:"synthetic-publication-approval",public_output_allowed:true,runtime_activation:true};
+    configChange(cfg);
+    const deployment={test_only:true,version:"synthetic-standing-v1",configuration:cfg,policy:input.policy,authorization_ref:actor.approval_ref,
+      context_refs:{[date]:input.context.basis_ref},precedence_ref:input.precedence.rule_ref,exclusions_ref:"synthetic-exclusions",
+      candidate_refs:input.bank.records.map(r=>r.output_candidate_id+"@"+r.approved_record_version),decision_refs:{[date]:{}},publication_release_ref:null};
+    await registerInput(input,deployment);
+    for(const ref of ["synthetic-copy-review","synthetic-iast","synthetic-rights","synthetic-environment-approval","synthetic-publication-approval"]) await register(ref,"approval",{test_only:true});
+    await query(`insert into drishvara_word_private.versioned_references(ref_id,kind,version,payload,review_status,reviewer_id,approval_ref)
+      values(${literal(policy.record_ref)},'approval',${literal(policy.version)},${j(policy)},'approved','synthetic-publisher',${literal(policy.approval_ref)});
+      update drishvara_word_private.controls set publication_enabled=true;`);
+    return {input,policy,cfg,date,timestamp,run:()=>runWordDailyPublication({rpc,timestamp,enabled:true})};
+  }
+  for(const [label,options] of [
+    ["disabled policy execution",{configChange:c=>{c.standing_authorization.enabled=false;}}],
+    ["missing production approval",{configChange:c=>{c.standing_authorization.production_approval_ref=null;}}],
+    ["closed public-output switch",{configChange:c=>{c.public_output_allowed=false;}}],
+    ["expired policy",{policyChange:p=>{p.expires_on="2026-01-01";}}],
+    ["revoked policy flag",{policyChange:p=>{p.revoked=true;}}],
+    ["superseded policy",{policyChange:p=>{p.superseded_by="synthetic-new-policy@2";}}],
+    ["pending policy review",{policyChange:p=>{p.review_status="pending";}}],
+    ["unsupported policy rule",{policyChange:p=>{p.rules.allow_reuse=true;}}],
+    ["unapproved word",{inputChange:i=>{i.bank.records[0].production_approved=false;},count:1}],
+    ["pending linguistic copy",{inputChange:i=>{i.bank.records[0].reviewed_publication_copy.reviews[0].review_status="pending";},count:1}]
+  ]) await check("standing authorization rejects "+label,async()=>{
+    const s=await standingSetup(options);assert.equal((await s.run()).status,"withheld");assert.equal((await history()).revision,0);
+    assert.equal((await readWordServerPublication({rpc,timestamp:s.timestamp})).status,"withheld");
+  });
+  let s=await standingSetup();
+  await check("standing RPC and private exporter cannot be invoked by browser roles",async()=>{
+    for(const role of ["anon","authenticated"]) {
+      await denied(`select public.word_assignment_standing_decision(${literal(s.date)},'inspect');`,role);
+      await denied(`select drishvara_word_private.manual_release_snapshot(${literal(s.date)});`,role);
+    }
+    assert.equal(validWordStandingPolicy(s.policy,s.date,s.policy.record_ref),true);
+    await denied("select public.word_assignment_standing_decision('2099-01-01','inspect');","service_role",/word_standing_requires_current_ist_date/);
+    assert.equal((await runWordDailyPublication({rpc:()=>{throw Error("must not read");},timestamp:s.timestamp})).reason,"word_server_not_activated");
+  });
+  await check("standing publication still refuses an unapproved schedule",async()=>{
+    assert.equal((await runWordDailyPublication({rpc,timestamp:s.timestamp,enabled:true,scheduled:true})).reason,"scheduling_not_authorized");
+    assert.equal((await history()).revision,0);
+  });
+  await check("concurrent standing workers publish one global IST assignment and retry safely",async()=>{
+    const results=await Promise.all([s.run(),s.run()]);assert(results.some(r=>r.status==="completed"),JSON.stringify(results));
+    assert(results.every(r=>["completed","withheld"].includes(r.status)));assert.equal((await s.run()).status,"completed");
+    assert.equal((await history()).revision,4);
+    assert.equal(await query("select count(*) from drishvara_word_private.date_claims;"),"1");
+    assert.equal(await query("select count(*) from drishvara_word_private.events where payload->>'event_type'='publication';"),"1");
+    const before=await query("select count(*) from drishvara_word_private.versioned_references;");
+    assert.equal((await s.run()).status,"completed");assert.equal(await query("select count(*) from drishvara_word_private.versioned_references;"),before);
+    const output=await readWordServerPublication({rpc,timestamp:s.timestamp});assert.equal(output.status,"published");
+    assert.equal(output.assignment.reviewed_copy.content.english,"Synthetic word 1");
+  });
+  await check("policy version and derived authorization basis are append-only and traceable",async()=>{
+    const rows=await value("select jsonb_agg(jsonb_build_object('basis',r.payload->>'authorization_basis','policy',r.payload->>'publisher_policy_ref','version',r.payload->>'publisher_policy_version','reviewer',r.reviewer_id)) from drishvara_word_private.events e join drishvara_word_private.versioned_references r on r.ref_id=e.payload->>'decision_approval_ref';");
+    assert.equal(rows.length,2);assert(rows.every(r=>r.basis==="standing_publisher_policy" && r.policy===s.policy.record_ref && r.version==="1" && r.reviewer==="system:standing-policy-derivation"));
+    await denied("update drishvara_word_private.versioned_references set version='rewritten' where ref_id like 'word-standing-decision:%';",null,/word_history_is_append_only/);
+  });
+  await check("persisted used identity is excluded in favor of the next unused approved word",async()=>{
+    const next=new Date(s.date+"T12:00:00Z");next.setUTCDate(next.getUTCDate()+1);
+    const input=syntheticSelection(3,next.toISOString().slice(0,10));input.history=await history();input.expected_history_ref=input.history.snapshot_ref;
+    const selection=selectDailyWord(input);assert.equal(selection.status,"proposal");assert.equal(selection.proposal.snapshot.approved_record_snapshot.selected_word_id,"synthetic-word-2");
+    const exhausted=syntheticSelection(1,input.date_key);exhausted.history=input.history;exhausted.expected_history_ref=input.history.snapshot_ref;
+    assert.equal(selectDailyWord(exhausted).reason,"no_unused_eligible_identity");
+  });
+  await check("registered policy revocation immediately withholds an existing standing release",async()=>{
+    await query(`insert into drishvara_word_private.reference_revocations(ref_id,approval_ref,reason) values(${literal(s.policy.record_ref)},'synthetic-policy-revoke','test only');`);
+    assert.equal((await s.run()).status,"withheld");assert.equal((await readWordServerPublication({rpc,timestamp:s.timestamp})).status,"withheld");
+    assert.equal((await history()).revision,4);
+  });
+  s=await standingSetup();
+  await check("source revocation after authorization prevents publication and leaks no partial word",async()=>{
+    assert.equal((await runWordServerWorkflow({rpc,timestamp:s.timestamp,enabled:true,operation:"reserve"})).status,"committed");
+    assert.equal((await runWordServerWorkflow({rpc,timestamp:s.timestamp,enabled:true,operation:"authorize",standing:true})).status,"committed");
+    await query("insert into drishvara_word_private.reference_revocations(ref_id,approval_ref,reason) values('synthetic-source','synthetic-revoke','test only');");
+    assert.equal((await s.run()).status,"withheld");assert.equal((await history()).revision,3);
+    assert.equal((await readWordServerPublication({rpc,timestamp:s.timestamp})).status,"withheld");
+  });
+  s=await standingSetup();
+  await check("a previously derived decision cannot bypass policy revocation at commit time",async()=>{
+    await runWordServerWorkflow({rpc,timestamp:s.timestamp,enabled:true,operation:"reserve"});
+    const d=await value(`select public.word_assignment_standing_decision(${literal(s.date)},'authorize');`,"service_role");
+    s.input.history=await history();s.input.expected_history_ref=s.input.history.snapshot_ref;
+    const a=[...inspectWordHistory(s.input.history).assignments.values()][0];
+    const req=await capture(s.input,"authorize",{assignment_id:a.proposal.assignment_id,proposal_id:a.proposal.proposal_id,expected_last_event_id:a.last_event_id,decision:{...syntheticApproval,approval_ref:d.decision_ref}});
+    await query(`insert into drishvara_word_private.reference_revocations(ref_id,approval_ref,reason) values(${literal(s.policy.record_ref)},'synthetic-revoke','test only');`);
+    await denied(`select public.word_assignment_commit(${j(req)});`,"service_role",/word_reference_unapproved/);
+    assert.equal((await history()).revision,2);
+  });
+  s=await standingSetup({configChange:c=>{c.scheduler={...c.scheduler,enabled:true,automatic_publication:true,local_time:"00:00",approval_ref:"synthetic-schedule-approval"};}});
+  await register("synthetic-schedule-approval","approval",{test_only:true});
+  await check("explicitly enabled synthetic schedule completes standing publication without enabling the real schedule",async()=>{
+    const result=await runWordDailyPublication({rpc,timestamp:s.timestamp,enabled:true,scheduled:true});
+    assert.equal(result.status,"completed",JSON.stringify(result));assert.equal((await history()).revision,4);
+    assert.equal(actualConfig.scheduler.enabled,false);assert.equal(actualConfig.scheduler.automatic_publication,false);
   });
   console.log(`Real PostgreSQL checks passed: ${checks}. Synthetic records only; no production certification or publication.`);
 } finally {

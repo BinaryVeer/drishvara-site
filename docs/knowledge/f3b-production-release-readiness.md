@@ -711,3 +711,59 @@ explicitly authorized Word job if one was later installed. Preserve all historie
 leave Panchang untouched, and never reset/drop the shared database or restore
 broad browser-write grants. Production rollback and notification ownership still
 require named operators and approval references.
+
+## Publisher policy decision and dormant standing workflow, 24 October 2026
+
+Baseline: `f7d6fce5e6d102d03a0127182cff595a88f0dd0f`. The release configuration's
+`publisher_policy` is the authoritative local decision record:
+`drishvara-word-publisher-policy@1`, approval reference
+`drishvara-publisher-word-policy-20261024-v1`, authority `Drishvara Publisher`,
+decision date `2026-10-24`, evidence the explicit publisher instruction in this
+conversation. It records precisely global IST civil dates, unused-approved-eligible
+identities first with exhaustion withholding, and standing routine publication
+only after all individual approvals. It is not a signature, linguistic review,
+candidate-order decision, database registration or production execution event.
+The existing supersession map and nonrepetition rules are unchanged.
+
+This supersedes the earlier *technical* reservation-only limitation, not the
+remaining content or operational blockers. `runWordDailyPublication` now drives
+reserve, authorize, publication and snapshot release through the existing engine,
+coordinator and SQL RPCs. `run_daily` is accepted only behind the existing worker's
+server authentication; browser dates, approval flags and records remain rejected.
+Scheduled execution additionally requires enabled/approved automatic scheduling
+and its configured IST time. All real execution/scheduler switches stay false.
+
+New unapplied extension:
+`supabase/migrations/20261024010000_word_standing_policy_preparation.sql`.
+It seeds no policy or word and changes no activation control. After the original
+assignment and legacy-hardening migrations, it adds one service-only decision RPC,
+commit-time policy checks and a policy-aware wrapper around the preserved original
+exporter. The database independently checks current IST date, registered/versioned
+policy, effective dates, revocation/supersession, deployment/production approvals,
+actor capabilities and independently registered copy/source/rights approvals.
+Derived per-assignment decisions and releases explicitly identify their system
+basis, publisher-policy reference and version; no per-word human sign-off is
+invented. Existing event references resolve to immutable audit records. Deterministic
+IDs and the existing locks, unique claims and append-only triggers govern retries.
+
+The three pilots remain unapproved and AG70E banks empty. Exact copy, morphology,
+IAST, Hindi, etymology/source-rights and context reviews still require authentic
+evidence/decisions. The complete eligible-pool/ranking/context references remain
+unset: unused-first approval does not invent tie-breaking or an editorial context.
+Before production, reconcile migration history and approve backups and the exact
+three-file Word SQL sequence, register the genuine policy plus separate production,
+content, actor, context and precedence approvals, verify managed Edge/auth/grants,
+and authorize deployment, schedule time and homepage cutover separately. Do not
+use blanket `db push`. None of those production actions was performed here.
+
+Revocation uses the immutable registered reference revocation mechanism or a new
+authorized deployment with standing execution disabled; exports then withhold.
+Amendments append a new publisher-approved version and deployment reference,
+never rewrite earlier policy, decisions or history. Database rollback is disabling
+the Word workflow/feed, not deleting the new ledger or resetting the shared project.
+
+Validation: 64 real isolated PostgreSQL checks, integration 40, public feed 36 and
+F3B preservation 83 passed. Both Word entry points passed pinned Deno 2.1.4 type
+checks; syntax, JSON, build and diff checks passed. Disposable test data was
+removed and generated readiness metadata restored. These tests grant no word
+approval, hosted certification, deployment, scheduling or publication permission.

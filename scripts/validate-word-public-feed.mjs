@@ -201,8 +201,7 @@ await check("Edge transport is default-dormant and can call only the release-sna
 });
 await check("protected Panchang, migrations, banks and activation settings are unchanged", () => {
   const paths = ["supabase/config.toml", "supabase/functions/calculate-panchang/index.ts",
-    "supabase/migrations/20261023_word_assignment_preparation.sql", "generated/word-of-day-publication.json",
-    "data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json"];
+    "supabase/migrations/20261023_word_assignment_preparation.sql", "generated/word-of-day-publication.json"];
   const manifest = JSON.parse(read("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json"));
   const contractPath = "data/knowledge-base/word-of-day/production/knowledge-bank/word-output-record-contract.json";
   paths.push(...Object.values(manifest.banks).filter(path => path !== contractPath));
@@ -212,6 +211,11 @@ await check("protected Panchang, migrations, banks and activation settings are u
   delete contract.governed_publication_contract.prepared_public_delivery;
   assert.deepEqual(contract, JSON.parse(execFileSync("git", ["show", baseline + ":" + contractPath], { encoding: "utf8" })));
   assert.equal(JSON.parse(read("generated/word-of-day-publication.json")).status, "withheld");
+  const configPath="data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json";
+  const current=JSON.parse(read(configPath));
+  assert.equal(current.standing_authorization.enabled,false); assert.equal(current.standing_authorization.production_approval_ref,null);
+  delete current.publisher_policy; delete current.standing_authorization;
+  assert.deepEqual(current,JSON.parse(execFileSync("git",["show",baseline+":"+configPath],{encoding:"utf8"})));
 });
 
 const feedUrl = "https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/word-of-day";

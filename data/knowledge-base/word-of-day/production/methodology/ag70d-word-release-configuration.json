@@ -46,6 +46,50 @@
     "etymology": { "current_engine_requirement": "established", "approved_exception_ref": null, "decision": null, "approval_ref": null, "note": "An optional public derivation note is not an exemption from internal eligibility. Any semantic-only path requires explicit versioned authorization and subsequent implementation review." },
     "operations": { "migration_approval_ref": null, "deployment_approval_ref": null, "server_authorization_ref": null, "scheduler_approval_ref": null, "first_publication_approval_ref": null }
   },
+  "publisher_policy": {
+    "contract_version": "ag70e.word-publisher-policy.v1",
+    "policy_id": "drishvara-word-publisher-policy",
+    "version": "1",
+    "record_ref": "drishvara-word-publisher-policy@1",
+    "decision_date": "2026-10-24",
+    "decision_authority": "Drishvara Publisher",
+    "evidence_basis": "Explicit publisher authorization supplied in this conversation on 24 October 2026; not a cryptographic signature or independent content review.",
+    "review_status": "approved",
+    "approval_ref": "drishvara-publisher-word-policy-20261024-v1",
+    "publication_scope": "global_public_word",
+    "timezone": "Asia/Kolkata",
+    "valid_from": "2026-10-24",
+    "expires_on": null,
+    "revoked": false,
+    "superseded_by": null,
+    "rules": {
+      "global_ist_civil_date": true,
+      "unused_approved_eligible_first": true,
+      "withhold_on_exhaustion": true,
+      "standing_routine_publication": true,
+      "requires_all_individual_approvals": true
+    },
+    "authorized_decisions": [
+      "Use one global Word of the Day for each Asia/Kolkata civil date, irrespective of visitor location.",
+      "Select from unused, fully approved, eligible canonical word identities before any previously published identity. When none is available, withhold publication; do not repeat or fabricate content to fill the date.",
+      "Authorize the trusted server workflow to perform routine daily reservation, authorization and publication only for words that already possess every required valid approval and eligibility condition. This does not approve an individual word or production activation."
+    ],
+    "boundaries": [
+      "Word of the Day only; no linguistic, source-rights, exact-copy, candidate-ranking or canonical-context approval is implied.",
+      "Production environment, database writes, deployment and scheduling still require separate authorization.",
+      "No annual reset, exhausted-bank reuse, fabricated fallback or automatic research-to-approved promotion."
+    ],
+    "supersession": "Incompatible AG63/D02/legacy rotation rules cannot authorize reuse; AG70D v2.1 and its existing supersession map remain unchanged.",
+    "revocation_and_amendment": "Revoke the immutable registered policy reference or disable standing execution. Amend by appending a newly approved version and updating the separately authorized deployment reference; never rewrite prior decisions or events.",
+    "activation_status": "disabled_pending_production_authorization",
+    "runtime_activation": false,
+    "public_output_allowed": false
+  },
+  "standing_authorization": {
+    "enabled": false,
+    "policy_ref": "drishvara-word-publisher-policy@1",
+    "production_approval_ref": null
+  },
   "runtime_activation": false,
   "public_output_allowed": false
 }
