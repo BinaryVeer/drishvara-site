@@ -179,6 +179,19 @@ await check("consolidated review remains three pending words, with no invented p
   assert.equal(config.publisher_decisions.publisher_id,null);assert.equal(config.publisher_decisions.signature_or_decision_record_ref,null);
   assert(Object.values(config.publisher_decisions.operations).every(v=>v===null));
 });
+await check("pending copy omits optional unreviewed IAST without waiving mandatory qualification",()=>{
+  const review=prep.final_release_review;
+  assert.equal(review.publication_copy_proposals.length,3);
+  const historicalIast={reflection:"mananam",discernment:"viveka\u1e25",patience:"dhairyam"};
+  for(const r of review.publication_copy_proposals){
+    assert.equal(r.version,"publisher-review-v2");assert.equal(r.iast,null);
+    assert(r.english && r.hindi && r.sanskrit && r.meaning_en && r.meaning_hi);
+    assert.equal(review.evidence_assessment.find(e=>e.word_id===r.word_id)?.proposed_iast,historicalIast[r.word_id]);
+    assert.equal(r.approval_ref,null);assert.equal(r.public_use_permission,"not_allowed");
+  }
+  assert.equal(review.etymology_policy_decision.permitted_omission_now,false);
+  assert.equal(review.qualified_for_production_count,0);assert.equal(review.approved_for_production_count,0);
+});
 await check("trusted server is disabled by default and pending real release config cannot write",async()=>{
   const rpc=async()=>({data:{configuration:config}});
   assert.equal((await runWordServerWorkflow({timestamp:"2026-10-24T00:00:00.000Z",rpc})).reason,"word_server_not_activated");

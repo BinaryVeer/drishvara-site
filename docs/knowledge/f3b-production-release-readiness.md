@@ -767,3 +767,127 @@ F3B preservation 83 passed. Both Word entry points passed pinned Deno 2.1.4 type
 checks; syntax, JSON, build and diff checks passed. Disposable test data was
 removed and generated readiness metadata restored. These tests grant no word
 approval, hosted certification, deployment, scheduling or publication permission.
+
+## Executed Word-only infrastructure and outstanding approvals, 24 October 2026
+
+Execution baseline: `711a635ec593539f263591d3322ee5bdf2a708e1`.
+The consolidated release instruction and subsequent publisher clarification
+authorize independent, bounded Word infrastructure work, but explicitly confirm
+that Reflection, Discernment and Patience still lack word-level approvals.
+This section supersedes earlier **unapplied/undeployed** descriptions only for
+the operations recorded below. It does not grant content or execution approval.
+
+### Actual hosted operations
+
+The following unchanged SQL files were applied to `pajlabwwszmhjhabxprf` in one
+transaction, with five-second lock and sixty-second statement timeouts. Strict
+preconditions rejected existing Word objects, unsupported PostgreSQL and changed
+legacy column fingerprints. No historical SQL was replayed.
+
+| Applied file | SHA-256 of committed source |
+| --- | --- |
+| `20261023_word_assignment_preparation.sql` | `b16b21f3d723fa8cd75414dd22c91ece89492dee24b4d029a114e7c38e89432f` |
+| `20261024000000_word_legacy_privilege_hardening.sql` | `c41206fe25c667f91bdf72d5daf8f5d7ac16f163c5a49d972d19493f16de07dd` |
+| `20261024010000_word_standing_policy_preparation.sql` | `5a43e5a91df6908e9b0715d148d3e98df83c9e0d6a7bd8d0ac2abcd39efe632e` |
+
+Readback verified nine private RLS tables, seven service-only public RPCs,
+eleven append-only/policy triggers, zero registered references/events and ledger
+revision zero. Persistence and publication are false; identity/deployment refs
+remain null. Browser RPC attempts were denied; a service-role commit was rejected
+by `word_persistence_not_activated`. No unsafe private helper EXECUTE or legacy
+column grants remain. Legacy service-role access is preserved. No synthetic or
+real candidate, approval, policy registration or publication was inserted.
+
+All sixteen inspected table data hashes/counts remained identical, including the
+two legacy Word drafts and one legacy rotation record. Fourteen protected
+Panchang/editorial table catalogs remained identical; Word owners, RLS, policies,
+constraints and indexes were preserved apart from the intended ACL revocations.
+Restricted operational metadata snapshots are under
+`/private/tmp/drishvara-word-release-9NLs7Y/`, outside Git, mode 0600. They contain
+catalog/ACL metadata and data hashes, not a full data backup or credentials.
+
+Both default-disabled Word functions were deployed through managed API bundling:
+
+| Function | Version | Gateway JWT | Bundle SHA-256 |
+| --- | --- | --- | --- |
+| `word-publication` | 1 | true | `64fbb92e310612121771795bc8577273beae1db4fdc03c78bcbe8ca9952bf5b3` |
+| `word-of-day` | 1 | false, read-only function only | `db7b677de81c2709192486ac8f01989c45e7261eaa3c5c1c58a9cf6874f17056` |
+
+No Word enable secrets exist. Managed feed GET/HEAD returned 503/withheld with
+no-store; POST returned 405 and query-based operations 400. Anonymous and invalid-
+JWT worker requests returned 401. Valid-credential worker execution while enabled
+was not attempted. No credentials were retrieved or printed. The unchanged
+`calculate-panchang` v6 bundle remains
+`6a35c7cc6e638389e976bd5a4a9ff1d11e4f23609cbe0905d1d5086a9b8bd1d6`.
+
+### Historical reconciliation boundary
+
+Read-only comparison found the expected historical table/index/policy names;
+`sup01_runtime_public_read` is absent where the later SUP02 policy supersedes it.
+Object-name presence is not complete schema/DML equivalence. The two `20260527`
+files remain distinct DDL and user-role-mapping DML, preserved without replay,
+rename or false application records. The historical migration ledger remains
+absent. These three exact Word files were executed directly, not through blanket
+`db push`, and are recorded here rather than falsely registered as old history.
+
+Standard CLI migration replay remains unsafe. Before using it, an operator must
+approve a verified hosted baseline and a unique-version mapping for both retained
+historical files, with their original hashes/provenance preserved. This outstanding
+administrative reconciliation does not authorize changes to existing data or
+reapplication of the now-present Word schema.
+
+### Exact pending copy and consolidated authorization package
+
+The existing dossier's `final_release_review.publication_copy_proposals` now holds
+`publisher-review-v2`. Optional public IAST is null; the unreviewed proposed forms
+remain in its evidence assessment. Original word fields and Activities are intact.
+No public derivation, dictionary quotation, grammatical-case claim, therapeutic
+promise or religious prescription is proposed. All copy below remains unapproved.
+
+| Identity and scripts | Exact English meaning | Exact Hindi meaning | Existing evidence locator |
+| --- | --- | --- | --- |
+| Reflection / मनन / मननम् | Thoughtful consideration of an idea or experience. | किसी विचार या अनुभव पर ध्यानपूर्वक विचार करना। | Wisdomlib manana: separately attributed cognitive MW/Cappeller blocks; original edition and Reflection Hindi evidence pending |
+| Discernment / विवेक / विवेकः | The ability to distinguish and judge thoughtfully. | भेद समझकर सोच-समझकर निर्णय करने की क्षमता। | Wisdomlib viveka general senses, Klryz MW72 pointer, Hindwi Hindi entry; no automatic Vedanta scope |
+| Patience / धैर्य / धैर्यम् | Composure and steadiness through difficulty or delay. | कठिनाई या प्रतीक्षा में मन की स्थिरता और संयम। | Wisdomlib dhairya MW/Apte blocks and IIT Bombay Hindi entry; Sanskrit/Hindi gender distinction remains |
+
+One outstanding decision set, using the existing dossier/configuration fields:
+
+1. Qualified reviewers: authenticate exact edition/entry and derivation evidence;
+   approve Sanskrit form/morphology, Hindi meaning and bilingual contextual use.
+   IAST review is required before adding IAST, not invented through omission.
+2. Rights reviewer/publisher: approve the exact source-use layer, attribution,
+   licensing/change notices and proposed original paraphrases. Accessible hosted
+   entries and the Cologne licence are not blanket rights clearance.
+3. Publisher: approve exact copy/source versions and content-hash-bound editorial,
+   safety and applicability decisions after the independent reviews exist.
+4. Publisher: approve canonical identity equivalence, date-context basis and the
+   explicit candidate order. Existing global IST/unused-first policy is already
+   authorized; it does not supply these missing decisions.
+5. Publisher: either obtain established etymology for each candidate or explicitly
+   authorize a versioned semantic-only exception and its reviewed implementation.
+   Omitting public derivation prose does not waive the current selector gate.
+6. Publisher/operator: authorize registered production/actor references, execution,
+   exact homepage origin/cutover, schedule time, retry/monitoring owner and alert
+   destination only after eligible approved content and security gates are met.
+
+Approved words: **0**. Approved AG70E banks remain empty. First publication: none.
+No Cron/pg_net extension, job, Vault secret or scheduler was added. The homepage
+connector remains empty and the deployed static envelope remains withheld.
+`https://www.drishvara.com/`, `panchang.html` and `what-stars-say.html` returned
+HTTP 200. This execution verified live HTTP/source state, not a successful new
+desktop/mobile rendered acceptance: the browser attempt timed out. Earlier local
+rendered/synthetic tests are not relabelled as live publication certification.
+
+Final re-executed checks: 64 real isolated PostgreSQL (container/data removed),
+41 integration including the optional-IAST omission regression, 36 public feed,
+83 dossier preservation and the AG70E empty-bank validator passed. JSON syntax,
+validator syntax, whitespace and the single static build passed; only incidental
+readiness metadata was restored. Unchanged independent engine/policy and prior
+F1/F2 evidence are reused, not claimed as freshly run. No site deployment, commit
+or push was performed. Full release remains blocked.
+
+Disable/rollback: keep Word enable flags and database controls false, connector
+empty and scheduling absent. If later enabled, disable Word invocation/feed and
+its specific job first; retain all references, receipts and immutable history.
+Do not drop the schema, reset Supabase, replay the migrations or restore broad
+browser-write grants. Panchang, Reflection, F1/F2 and unrelated services stay intact.
