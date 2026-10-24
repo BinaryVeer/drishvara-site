@@ -40,8 +40,10 @@ export async function readPublicWord({ readSnapshot, timestamp, enabled = false 
   } catch { return withheld(date, "public_feed_unavailable"); }
 }
 
+/** @param {{readSnapshot?: (date: string) => Promise<unknown>, enabled?: boolean, allowedOrigin?: string | null, now?: () => string}} [options] */
 export function createWordPublicFeedHandler({ readSnapshot, enabled = false, allowedOrigin = null,
   now = () => new Date().toISOString() } = {}) {
+  let inFlight = 0;
   let validOrigin = allowedOrigin === null;
   if (typeof allowedOrigin === "string") {
     try { const url = new URL(allowedOrigin); validOrigin = url.protocol === "https:" && url.origin === allowedOrigin; } catch { /* Fail closed. */ }
@@ -58,8 +60,15 @@ export function createWordPublicFeedHandler({ readSnapshot, enabled = false, all
     if (!validOrigin || origin !== null && origin !== allowedOrigin) return respond({ error: "origin_not_allowed" }, 403);
     if (origin !== null) headers["Access-Control-Allow-Origin"] = allowedOrigin;
     if (new URL(request.url).search !== "") return respond({ error: "query_not_allowed" }, 400);
+    let reading = false;
     try {
       const timestamp = now();
+      // Bound this isolate's database fan-out; distributed gateway limits remain separate.
+      if (enabled === true && inFlight >= 4) {
+        headers["Retry-After"] = "15";
+        return respond(withheld(canonicalPublicationDate(timestamp), "public_feed_busy"), 429);
+      }
+      if (enabled === true) { inFlight++; reading = true; }
       let output = await readPublicWord({ readSnapshot, timestamp, enabled });
       const currentDate = canonicalPublicationDate(now());
       // A request straddling IST midnight must not deliver the previous day's word.
@@ -67,5 +76,6 @@ export function createWordPublicFeedHandler({ readSnapshot, enabled = false, all
       const unavailable = ["public_feed_not_activated", "public_feed_unavailable", "canonical_date_rolled_over"].includes(output.reason);
       return respond(output, unavailable ? 503 : 200);
     } catch { return respond(withheld(null, "public_feed_unavailable"), 503); }
+    finally { if (reading) inFlight--; }
   };
 }

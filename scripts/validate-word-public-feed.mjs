@@ -160,6 +160,19 @@ await check("malformed clock or snapshot cannot expose an error or published rec
     assert.equal(output.status, "withheld"); assert.equal(output.assignment, null); assert(!text.includes("synthetic-private"));
   }
 });
+await check("per-isolate read capacity is bounded and released after completion or failure", async () => {
+  const readers = [];
+  const limited = handler({ readSnapshot: () => new Promise(resolve => readers.push(resolve)) });
+  const running = Array.from({ length: 4 }, () => limited(request()));
+  assert.equal(readers.length, 4);
+  const busy = await limited(request());
+  assert.equal(busy.status, 429); assert.equal(busy.headers.get("retry-after"), "15");
+  assert.equal((await busy.json()).public_output_allowed, false); assert.equal(readers.length, 4);
+  readers.splice(0).forEach(resolve => resolve({ history: fixture.history, release: fixture.release }));
+  assert((await Promise.all(running)).every(response => response.status === 200));
+  const recovered = limited(request()); readers.shift()(null);
+  assert.equal((await recovered).status, 200);
+});
 await check("Edge transport is default-dormant and can call only the release-snapshot RPC", async () => {
   const previous = globalThis.Deno, oldFetch = globalThis.fetch, calls = [];
   let edge;
@@ -186,9 +199,9 @@ await check("Edge transport is default-dormant and can call only the release-sna
     assert.equal((await edge(request("POST"))).status, 405); assert.equal(calls.length, 1);
   } finally { globalThis.Date = RealDate; globalThis.fetch = oldFetch; if (previous === undefined) delete globalThis.Deno; else globalThis.Deno = previous; }
 });
-await check("protected runtime, migrations, homepage, banks and activation settings are unchanged", () => {
-  const paths = ["supabase/config.toml", "supabase/functions/calculate-panchang/index.ts", "supabase/functions/word-publication/index.ts",
-    "supabase/migrations/20261023_word_assignment_preparation.sql", "assets/js/drishvara-v2-homepage.js", "generated/word-of-day-publication.json",
+await check("protected Panchang, migrations, banks and activation settings are unchanged", () => {
+  const paths = ["supabase/config.toml", "supabase/functions/calculate-panchang/index.ts",
+    "supabase/migrations/20261023_word_assignment_preparation.sql", "generated/word-of-day-publication.json",
     "data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json"];
   const manifest = JSON.parse(read("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json"));
   const contractPath = "data/knowledge-base/word-of-day/production/knowledge-bank/word-output-record-contract.json";
@@ -199,5 +212,78 @@ await check("protected runtime, migrations, homepage, banks and activation setti
   delete contract.governed_publication_contract.prepared_public_delivery;
   assert.deepEqual(contract, JSON.parse(execFileSync("git", ["show", baseline + ":" + contractPath], { encoding: "utf8" })));
   assert.equal(JSON.parse(read("generated/word-of-day-publication.json")).status, "withheld");
+});
+
+const feedUrl = "https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/word-of-day";
+function deliveryFixture(endpoint = "", fetcher = async () => new Response("{}")) {
+  let clock = timestamp, nextTimer = 0;
+  const nodes = new Map(["f2-word-state", "f2-word-description", "f2-word-note"].map(id => [id, { textContent: "", innerHTML: "" }]));
+  const timers = new Map(), calls = [];
+  const window = { crypto: webcrypto, DrishvaraV2Shell: { escapeHtml: value => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;") },
+    setTimeout(fn, ms) { timers.set(++nextTimer, { fn, ms }); return nextTimer; }, clearTimeout(id) { timers.delete(id); } };
+  class Clock extends Date { constructor(...args) { super(...(args.length ? args : [clock])); } }
+  vm.runInNewContext(read("assets/js/drishvara-v2-homepage.js"), {
+    window, document: { getElementById: id => nodes.get(id), querySelector: () => ({ getAttribute: () => endpoint }) },
+    fetch: (url, options) => { calls.push({ url, options }); return fetcher(url, options); },
+    Intl, Date: Clock, URL, Map, Set, TextEncoder, Uint8Array, AbortSignal
+  });
+  return { api: window.DrishvaraV2Homepage, nodes, timers, calls, clock: value => { clock = value; } };
+}
+await check("checked-in homepage connector is dormant, not a production activation", () => {
+  assert(read("index.html").includes('<meta name="drishvara-word-feed" content="" />'));
+  assert.equal(deliveryFixture().api.configuredWordFeed(), null);
+});
+await check("only the exact public read-only endpoint is accepted", () => {
+  for (const value of [feedUrl + "?operation=reserve", feedUrl + "/", "http://synthetic.invalid/", "javascript:alert(1)", "https://other.invalid/"]) {
+    assert.equal(deliveryFixture(value).api.configuredWordFeed(), null);
+  }
+  assert.equal(deliveryFixture(feedUrl).api.configuredWordFeed(), feedUrl);
+});
+await check("live connector renders a published synthetic word without cookies, keys or writes", async () => {
+  const f = deliveryFixture(feedUrl, async () => new Response(JSON.stringify(fixture.output)));
+  assert.equal(await f.api.loadWordPublication(), true);
+  assert(f.nodes.get("f2-word-state").innerHTML.includes("Synthetic word 1"));
+  assert.equal(f.calls.length, 1); assert.equal(f.calls[0].url, feedUrl);
+  assert.equal(f.calls[0].options.credentials, "omit"); assert.equal(f.calls[0].options.redirect, "error");
+  assert.equal(f.calls[0].options.cache, "no-store"); assert.equal(f.calls[0].options.headers, undefined);
+  assert.equal(f.calls[0].options.method, undefined); assert(f.calls[0].options.signal instanceof AbortSignal);
+});
+await check("live errors, rate limits and malformed JSON withhold without static fallback", async () => {
+  for (const fetcher of [async () => { throw Error("synthetic-timeout"); }, async () => new Response("{}", { status: 429 }),
+    async () => new Response("not-json"), async () => new Response("{}", { status: 503 })]) {
+    const f = deliveryFixture(feedUrl, fetcher); assert.equal(await f.api.loadWordPublication(), false);
+    assert.equal(f.nodes.get("f2-word-state").textContent, "Under verification");
+    assert.equal(f.calls.length, 1); assert.equal(f.calls[0].url, feedUrl);
+  }
+});
+await check("live response cannot bypass stale, future, copy or linguistic review checks", async () => {
+  for (const mutate of [d => { d.date_key = "2026-10-22"; }, d => { d.date_key = "2026-10-24"; },
+    d => { d.assignment.reviewed_copy.content.english = "unreviewed"; },
+    d => { d.assignment.reviewed_copy.reviews[0].review_status = "pending"; }]) {
+    const output = structuredClone(fixture.output); mutate(output);
+    const f = deliveryFixture(feedUrl, async () => new Response(JSON.stringify(output)));
+    assert.equal(await f.api.loadWordPublication(), false);
+  }
+});
+await check("out-of-order reads cannot overwrite a later withholding decision", async () => {
+  const pending = [];
+  const f = deliveryFixture(feedUrl, () => new Promise(resolve => pending.push(resolve)));
+  const first = f.api.loadWordPublication(), second = f.api.loadWordPublication();
+  pending[1](new Response("{}")); await second;
+  pending[0](new Response(JSON.stringify(fixture.output))); await first;
+  assert.equal(f.nodes.get("f2-word-state").textContent, "Under verification");
+  assert.equal(f.nodes.get("f2-word-state").innerHTML, "");
+});
+await check("midnight rereads the live feed once without selection or a website rebuild", async () => {
+  const f = deliveryFixture(feedUrl, async () => new Response(JSON.stringify(fixture.output)));
+  f.clock("2026-10-23T18:29:59.000Z"); await f.api.loadWordPublication();
+  const rollover = [...f.timers.values()][0]; assert.equal(rollover.ms, 1000);
+  f.clock("2026-10-23T18:30:00.000Z"); await rollover.fn();
+  assert.equal(f.calls.length, 2); assert.equal(f.nodes.get("f2-word-state").textContent, "Under verification");
+});
+await check("dormant connector reads only the existing withheld asset and installs no read timer", async () => {
+  const f = deliveryFixture("", async () => new Response(read("generated/word-of-day-publication.json")));
+  assert.equal(await f.api.loadWordPublication(), false);
+  assert.equal(f.calls[0].url, "generated/word-of-day-publication.json"); assert.equal(f.timers.size, 0);
 });
 console.log("Word public feed: " + checks + " checks passed (synthetic/local only; no managed Edge or hosted publication certification).");

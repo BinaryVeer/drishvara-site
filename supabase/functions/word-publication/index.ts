@@ -45,7 +45,10 @@ Deno.serve(async (request: Request) => {
       !["reserve", "authorize", "record_publication"].includes(body.operation) || (body.scheduled !== undefined && typeof body.scheduled !== "boolean")) return json({ error: "invalid_command" }, 422);
     const result = await runWordServerWorkflow({ rpc, timestamp, operation: body.operation, scheduled: body.scheduled === true, enabled });
     // Assignment snapshots contain internal review details, not a public response contract.
-    return json({ status: result.status, reason: result.reason ?? null, date_key: result.date_key ?? null,
-      public_output_allowed: false, runtime_activation: false, alerts: result.alerts ?? [] });
+    return json({ status: result.status,
+      reason: "reason" in result && typeof result.reason === "string" ? result.reason : null,
+      date_key: "date_key" in result && typeof result.date_key === "string" ? result.date_key : null,
+      public_output_allowed: false, runtime_activation: false,
+      alerts: "alerts" in result && Array.isArray(result.alerts) ? result.alerts : [] });
   } catch { return json({ status: "withheld", reason: "word_server_operation_unavailable" }, 503); }
 });

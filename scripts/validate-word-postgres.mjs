@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import vm from "node:vm";
+import { webcrypto } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
 import { canonicalJson, snapshotHash, inspectWordHistory, selectionAuthorityHashes, selectDailyWord } from "./lib/ag70d-word-selection-engine.mjs";
@@ -9,9 +11,10 @@ import { createWordPostgresAdapter } from "./lib/ag70e-word-postgres-adapter.mjs
 import { syntheticSelection, syntheticApproval, syntheticIdentityRef } from "./lib/ag70e-word-test-fixtures.mjs";
 import { projectPublishedWord } from "./lib/ag70e-word-publication-pipeline.mjs";
 import { runWordServerWorkflow, readWordServerPublication } from "./lib/ag70e-word-server-workflow.mjs";
+import { createWordPublicFeedHandler } from "./lib/ag70e-word-public-feed.mjs";
 
 // Real PostgreSQL, synthetic content/approvals. No URL, credentials, port or volume input.
-const image = "postgres:17-alpine", name = "drishvara-word-qa-" + process.pid + "-" + Date.now();
+const image = "postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb", name = "drishvara-word-qa-" + process.pid + "-" + Date.now();
 const docker = (...args) => execFileSync("docker", ["--context","desktop-linux",...args], { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 16e6 });
 let created = false, checks = 0;
 const literal = value => "'" + value.replaceAll("'", "''") + "'";
@@ -111,7 +114,43 @@ try {
     assert.deepEqual(c.HostConfig.PortBindings,{}); assert.equal(c.Mounts.filter(m=>m.Type==="bind"||m.Type==="volume").length,0);
   });
   await query("create role anon nologin; create role authenticated nologin; create role service_role nologin bypassrls;");
+  await check("hosted-shape rehearsal extracts only the three historical Word dependency tables", async () => {
+    // Verified column fingerprints and constraints from a SELECT-only hosted catalog
+    // inspection on 2026-10-24. This is not a complete hosted schema/data clone.
+    const historical = fs.readFileSync("data/content-intelligence/database-build/sql-drafts/adb05_astro_drishvara_schema_draft.sql", "utf8");
+    for (const table of ["source_authorities", "word_corpus", "word_of_day_rotation_rules"]) {
+      const start = historical.indexOf("CREATE TABLE IF NOT EXISTS " + table + " (");
+      assert(start >= 0); const end = historical.indexOf("\n);", start); assert(end > start);
+      await query(historical.slice(start, end + 3));
+      await query(`alter table public.${table} enable row level security;`);
+    }
+    for (const [table, fingerprint] of [["word_corpus", "f06a60a01c0965d42b15b7d652e933ef"], ["word_of_day_rotation_rules", "25e8a58fa6726d381497ec9a81e3866b"]]) {
+      assert.equal(await query(`select md5(string_agg(a.attname||':'||format_type(a.atttypid,a.atttypmod)||':'||a.attnotnull::text,'|' order by a.attnum)) from pg_attribute a where a.attrelid='public.${table}'::regclass and a.attnum>0 and not a.attisdropped;`), fingerprint);
+    }
+    await query(`grant usage on schema public to anon,authenticated,service_role;
+      grant all on public.word_corpus,public.word_of_day_rotation_rules to anon,authenticated,service_role;
+      insert into public.word_corpus(word_id,word_key) values('synthetic-legacy-only','synthetic-not-eligible');
+      insert into public.word_of_day_rotation_rules(rotation_rule_id,rotation_key,word_id) values('synthetic-obsolete-rotation','synthetic','synthetic-legacy-only');
+      create table public.synthetic_panchang_preservation(id text primary key,payload text);
+      insert into public.synthetic_panchang_preservation values('synthetic','not-real-panchang');
+      create table public.synthetic_editorial_preservation(id text primary key,payload text);
+      insert into public.synthetic_editorial_preservation values('synthetic','not-real-editorial');`);
+    assert.equal(await query("select to_regclass('supabase_migrations.schema_migrations') is null;"), "t");
+  });
+  const preservedLegacy = await query("select jsonb_agg(to_jsonb(t) order by word_id) from public.word_corpus t;");
+  const preservedUnrelated = await query("select (select jsonb_agg(to_jsonb(t)) from public.synthetic_panchang_preservation t)::text||':'||(select jsonb_agg(to_jsonb(t)) from public.synthetic_editorial_preservation t)::text;");
   await check("migration compiles and applies to isolated database", async () => { await query(fs.readFileSync("supabase/migrations/20261023_word_assignment_preparation.sql","utf8")); });
+  await check("exact Word-only sequence applies with historical objects and no history replay", async () => {
+    await query(fs.readFileSync("supabase/migrations/20261024000000_word_legacy_privilege_hardening.sql", "utf8"));
+    assert.equal(await query("select jsonb_agg(to_jsonb(t) order by word_id) from public.word_corpus t;"), preservedLegacy);
+    assert.equal(await query("select (select jsonb_agg(to_jsonb(t)) from public.synthetic_panchang_preservation t)::text||':'||(select jsonb_agg(to_jsonb(t)) from public.synthetic_editorial_preservation t)::text;"), preservedUnrelated);
+    assert.equal(await query("select count(*) from public.word_of_day_rotation_rules;"), "1");
+    for (const role of ["anon", "authenticated"]) {
+      assert.equal(await query(`select has_table_privilege('${role}','public.word_corpus','TRUNCATE');`), "f");
+      await denied("insert into public.word_corpus(word_id,word_key) values('synthetic-denied','synthetic');", role);
+    }
+    assert.equal(await query("select to_regclass('supabase_migrations.schema_migrations') is null;"), "t");
+  });
   await check("disabled controls withhold history and reject writes", async () => {
     assert.equal((await history()).available,false); await denied("select public.word_assignment_commit('{}'::jsonb);","service_role",/word_persistence_not_activated/);
   });
@@ -300,6 +339,26 @@ try {
     const output=await readWordServerPublication({rpc,timestamp:serverInput.created_at});assert.equal(output.status,"published");
     assert.equal(output.assignment.reviewed_copy.content.english,"Synthetic word 1");
     assert.equal((await readWordServerPublication({rpc,timestamp:"2026-10-23T18:30:00.000Z"})).status,"withheld");
+  });
+  await check("real PostgreSQL snapshot reaches the read-only feed and existing homepage renderer", async () => {
+    const endpoint = "https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/word-of-day";
+    let clock = serverInput.created_at, reads = 0;
+    const before = await history();
+    const feed = createWordPublicFeedHandler({ enabled: true, now: () => clock,
+      readSnapshot: async date => { reads++; const result = await rpc("word_assignment_release_snapshot", { p_date: date }); if (result.error) throw Error("synthetic-read-failure"); return result.data; } });
+    const nodes = new Map(["f2-word-state", "f2-word-description", "f2-word-note"].map(id => [id, { textContent: "", innerHTML: "" }]));
+    const window = { crypto: webcrypto, DrishvaraV2Shell: { escapeHtml: text => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;") }, setTimeout: () => 1, clearTimeout() {} };
+    class Clock extends Date { constructor(...args) { super(...(args.length ? args : [clock])); } }
+    vm.runInNewContext(fs.readFileSync("assets/js/drishvara-v2-homepage.js", "utf8"), { window,
+      document: { getElementById: id => nodes.get(id), querySelector: () => ({ getAttribute: () => endpoint }) },
+      fetch: url => { assert.equal(url, endpoint); return feed(new Request(url)); }, Intl, Date: Clock, URL, Map, Set, TextEncoder, Uint8Array });
+    assert.equal(await window.DrishvaraV2Homepage.loadWordPublication(), true);
+    assert(nodes.get("f2-word-state").innerHTML.includes("Synthetic word 1"));
+    assert(nodes.get("f2-word-note").innerHTML.includes("Synthetic source"));
+    clock = "2026-10-23T18:30:00.000Z";
+    assert.equal(await window.DrishvaraV2Homepage.loadWordPublication(), false);
+    assert.equal(nodes.get("f2-word-state").textContent, "Under verification");
+    assert.equal(reads, 2); assert.deepEqual(await history(), before);
   });
   await check("trusted exporter rechecks revoked evidence rather than trusting history flags",async()=>{
     await query("insert into drishvara_word_private.reference_revocations values('synthetic-source','synthetic-revoke','test only',now());");

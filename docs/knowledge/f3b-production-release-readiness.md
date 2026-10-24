@@ -608,3 +608,106 @@ The single `npm run build` completed successfully. Its regenerated readiness
 manifest was the only incidental build output; it was restored to its initially
 clean tracked state. JS/TS syntax, output-contract JSON and whitespace checks
 passed. No source file was deleted and no staged changes were created.
+
+## Consolidated release decision, 24 October 2026
+
+Implementation baseline: `99734ac043a395d3019e97b1e0f3756a4be5edd1`.
+**Decision: local preparation complete; production release blocked.** No new
+approval, production operation, commit or push is authorized by this checklist.
+
+### Connector and verification boundary
+
+The existing Word renderer now accepts the exact read-only `word-of-day` URL
+only through `meta[name="drishvara-word-feed"]`. Its checked-in content is empty:
+the homepage still consumes the withheld static envelope. After an authorized
+connector cutover, reads omit credentials, disallow redirects, time out and bypass
+caches. Live-feed errors never fall back to an old static word. One IST-midnight
+reread plus existing focus/visibility refresh requires no daily website rebuild;
+there is no publication operation, recurring poll or new content selector.
+Expired, future, tampered or unapproved copy still withholds. English, Hindi and
+Sanskrit remain jointly mandatory under the current copy contract; IAST may be
+null but must be approved when supplied. No language approval was inferred.
+
+The public feed bounds concurrent database reads to four **per isolate** and
+returns 429/Retry-After at capacity. This is not distributed rate-limit or managed
+gateway certification. Public responses retain the existing contract's provenance
+references, not raw registries, private notes or full internal review records.
+The worker's narrow TypeScript result guards and feed JSDoc fix Deno inference;
+they do not loosen authentication or approval checks. Both entry points pass
+official Deno 2.1.4 checks, not deployed Supabase gateway/bundling certification.
+
+The expanded pinned PostgreSQL 17.11 rehearsal passes 44 real checks, using
+synthetic records only. It creates the three legacy Word dependency tables from
+historical ADB05 DDL and matches the two hosted column/type/nullability fingerprints
+before applying the exact assignment-then-hardening sequence. Legacy content and
+unrelated synthetic editorial/Panchang objects are preserved. Actual SQL RPCs feed
+the Node public handler and existing renderer. This is a Word-schema representative
+rehearsal, NOT a full hosted-data/schema clone or production history certification.
+The disposable container and tmpfs data are removed. Other Docker resources stay.
+
+### Unresolved authorization and migration decisions
+
+- Reuse the dossier's `final_release_review.approval_matrix` and the existing
+  release configuration's `publisher_decisions`; do not create another bank or
+  methodology. All three pilots, exact copy/rights, morphology/IAST/Hindi and
+  original-edition reviews remain pending. AG70E approved banks remain empty.
+- Approve exact copy hashes, attribution/licence treatment, global IST scope,
+  canonical context/identity map and deterministic candidate order. Optional
+  public etymology prose cannot bypass the current internal `established` gate;
+  a semantic-only exception needs explicit versioned policy authorization first.
+- Future batch intake uses the existing AG70E candidate/evidence/review contracts:
+  deduplicate lemma/equivalence identities, attach authenticated evidence and
+  reviewers, validate exact copy, then register approved immutable versions through
+  an authorized operator. Research records never auto-promote. A three-word bank
+  is only a pilot; exhaustion must withhold, not recycle or reset annually.
+- Fresh SELECT-only hosted inspection still finds no migration ledger, assignment
+  schema or Word RPCs. Both historical `20260527_*` files are preserved. Their
+  duplicate CLI version and manually established historical schema remain a
+  separate baseline-registration decision; no migration repair, fake application
+  dates, renames or blanket `db push` is safe. Review backup and complete schema/
+  grant/policy equivalence before authorizing that reconciliation.
+- The existing scheduled worker can reserve only. Authorization, publication and
+  event release require owner-registered decisions. Unattended publication and
+  its decision-registration mechanism/time/retries require explicit policy approval
+  and subsequent focused implementation/rehearsal; merely enabling Cron is NOT
+  sufficient. No scheduler or automatic approval was added in this preparation.
+
+### Authorized-operator execution checklist (NOT executed)
+
+After scope-specific production authorization, a recoverable schema/grant/data
+backup and verified object preconditions, the minimal Word-only SQL sequence is:
+
+```sh
+psql -X -v ON_ERROR_STOP=1 'service=drishvara-approved-word' -f supabase/migrations/20261023_word_assignment_preparation.sql
+psql -X -v ON_ERROR_STOP=1 'service=drishvara-approved-word' -f supabase/migrations/20261024000000_word_legacy_privilege_hardening.sql
+supabase functions deploy word-publication --project-ref pajlabwwszmhjhabxprf
+supabase functions deploy word-of-day --project-ref pajlabwwszmhjhabxprf --no-verify-jwt
+```
+
+The operator supplies the restricted local PostgreSQL service configuration;
+no password belongs in argv, Git or logs. Each SQL file is transactional; if the
+second fails, retain the first schema disabled and investigate, never replay it
+blindly. Verify nine private RLS tables, six server-only RPCs and denied effective
+browser writes. The public JWT exception applies to `word-of-day` only; preserve
+worker authentication and `calculate-panchang`. Initially keep both Word enable
+flags false. Configure only approved Word environment values via a secure local
+env file using `supabase secrets set --project-ref pajlabwwszmhjhabxprf --env-file
+"$APPROVED_WORD_ENV_FILE"`; built-in service-role credentials remain server-only.
+Managed bundle, auth and distributed abuse-limit checks must precede enabling.
+
+Register only genuinely approved content, source, context, precedence, actor and
+per-assignment decisions; keep controls off until those references are verified.
+An approved first publication requires reserve, authorize, record-publication
+and an independently registered event release, with readback at every step.
+Only then authorize the homepage meta-URL cutover and site deployment. Scheduling
+must wait for the separately approved automated-decision contract above.
+
+Monitor canonical date/status, assignment/event IDs, unused-bank count, 429/5xx,
+revocations and missing daily output; report failures without logging copy drafts
+or credentials. Existing workflow alerts cover withholding and approved low-bank
+thresholds, not an installed external alerting service. Rollback disables both
+Word flags, removes the connector URL and withholds output; remove only an
+explicitly authorized Word job if one was later installed. Preserve all histories,
+leave Panchang untouched, and never reset/drop the shared database or restore
+broad browser-write grants. Production rollback and notification ownership still
+require named operators and approval references.

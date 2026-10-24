@@ -72,7 +72,7 @@
       return hash === a.copy_content_hash ? content : null;
     } catch (_error) { return null; }
   }
-  var wordExpiryTimer = null;
+  var wordExpiryTimer = null, wordRolloverTimer = null;
   var wordPaintGeneration = 0, wordReadGeneration = 0;
   async function renderWordPublication(data, now) {
     var generation = ++wordPaintGeneration;
@@ -96,9 +96,25 @@
     wordExpiryTimer = window.setTimeout(function () { renderWordPublication(null); }, Math.max(1, Date.parse(data.date_key + 'T18:30:00.000Z') - now.getTime()));
     return true;
   }
+  function configuredWordFeed() {
+    var setting = document.querySelector && document.querySelector('meta[name="drishvara-word-feed"]');
+    var value = setting && setting.getAttribute('content');
+    // Deployment routing only, never content approval or a browser write capability.
+    return value === 'https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/word-of-day' ? value : null;
+  }
   function loadWordPublication() {
     var generation = ++wordReadGeneration;
-    return fetch('generated/word-of-day-publication.json', { cache: 'no-store' }).then(function (response) {
+    var feed = configuredWordFeed();
+    window.clearTimeout(wordRolloverTimer); wordRolloverTimer = null;
+    if (feed) {
+      var now = new Date(), date = dayKey(now, 'Asia/Kolkata');
+      wordRolloverTimer = window.setTimeout(function () {
+        return renderWordPublication(null).then(loadWordPublication);
+      }, Math.max(1, Date.parse(date + 'T18:30:00.000Z') - now.getTime()));
+    }
+    var options = { cache: 'no-store', credentials: 'omit', redirect: 'error' };
+    if (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) options.signal = AbortSignal.timeout(12000);
+    return fetch(feed || 'generated/word-of-day-publication.json', options).then(function (response) {
       return response.ok ? response.json() : null;
     }).catch(function () { return null; }).then(function (data) { if (generation === wordReadGeneration) return renderWordPublication(data); });
   }
@@ -249,12 +265,13 @@
     });
     window.addEventListener('focus', function () { syncDaily(); loadWordPublication(); });
     document.addEventListener('visibilitychange', function () { if (!document.hidden) { syncDaily(); loadWordPublication(); } });
-    window.addEventListener('pagehide', function () { window.clearTimeout(wordExpiryTimer); });
+    window.addEventListener('pagehide', function () { window.clearTimeout(wordExpiryTimer); window.clearTimeout(wordRolloverTimer); });
     syncDaily();
   }
   window.DrishvaraV2Homepage = { markup: markup, selectFeatured: selectFeatured, renderFirstLight: renderFirstLight,
     renderFeatured: renderFeatured, renderRead: renderRead, renderExplore: renderExplore, syncDaily: syncDaily,
     loadPublicationStates: loadPublicationStates, publicationStatus: publicationStatus, isTodayResult: isTodayResult,
     dayKey: dayKey, carouselModel: carouselModel, rotationMs: ROTATION_MS,
-    approvedWordPublication: approvedWordPublication, renderWordPublication: renderWordPublication };
+    approvedWordPublication: approvedWordPublication, renderWordPublication: renderWordPublication,
+    configuredWordFeed: configuredWordFeed, loadWordPublication: loadWordPublication };
 })();
