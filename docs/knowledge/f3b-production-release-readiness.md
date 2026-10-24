@@ -891,3 +891,106 @@ empty and scheduling absent. If later enabled, disable Word invocation/feed and
 its specific job first; retain all references, receipts and immutable history.
 Do not drop the schema, reset Supabase, replay the migrations or restore broad
 browser-write grants. Panchang, Reflection, F1/F2 and unrelated services stay intact.
+
+## Publication activation evidence and decision boundary, 24 October 2026
+
+Starting baseline: `3fe48298f42684440b07f7476c0bd6c6adc91575`.
+**Outcome: independently executable evidence/registration work completed;
+Word publication remains blocked by genuine missing word-level approvals.**
+
+The existing dossier's
+`final_release_review.publication_activation_review` holds the new observations.
+All historical captures, original fields, Activities and pending copy proposals
+remain intact. No parallel bank, methodology, rule or frontend implementation was
+created. The five additional integrity checks distinguish source inspection from
+linguistic/rights/editorial authorization.
+
+### New primary-source evidence
+
+Cologne's MW 1899 digital text was pinned to revision
+`e4742e12cde786b1a2d10e0507808620a4f2c8eb`, SHA-256
+`e4641dc4384de459408368a9b34b2a13c90a19b0ecd4671f92c055b7578d0129`.
+The three official printed-page PDFs were rendered and visually inspected;
+their URLs and individual hashes are recorded in the dossier. This is not a
+qualified human review or authentication of the dictionary's literary citations.
+
+| Pilot | MW entry and scan inspected | DSAL exact Hindi lookup inspected | Specific remaining linguistic decision |
+| --- | --- | --- | --- |
+| Reflection | Cognitive noun record 156763, p. 783 col. 3; separate adjective/homage senses | मनन, displayed p. 3779, page-query index 3780 | Authenticate formation/display morphology and approve the proposed Hindi translation; missing Hindi access is no longer the blocker |
+| Discernment | General senses 200139-200141, p. 987 col. 3; Vedanta scope kept separate | विवेक, displayed p. 4539, page-query index 4534 | Review vi-vic formation, visarga and bounded bilingual meaning; the p. 989 cross-reference was inspected digitally, not as another scan |
+| Patience | Second dhairya homonym, record 102069, p. 520 col. 2 | धैर्य, displayed p. 2482, page-query index 2483 | Review the dhira association, exact formation and neuter display; do not substitute Hindi masculine for Sanskrit neuter |
+
+The pinned Cologne data licence was independently retrieved as CC BY-SA 4.0.
+Exact-use attribution/licence treatment remains unapproved. DSAL's publisher
+notice restricts reuse; only locators and bounded research findings are stored,
+not dictionary prose in proposed public copy. These findings do not fabricate
+rights permission. Optional public IAST remains omitted; established etymology is
+still mandatory under the unchanged executable contract. Exact publisher-review-v2
+English/Hindi/Sanskrit copy remains in the existing table above and dossier.
+
+### Actual policy registration and disabled managed execution
+
+Only the already-authorized `drishvara-word-publisher-policy@1` was appended to
+the hosted immutable registry and read back, with its existing approval reference
+`drishvara-publisher-word-policy-20261024-v1` and payload hash
+`sha256:338f19f2ca7d2b60f5672d238eb330a846711bc488d953c637b9286c6f2bd894`.
+No individual approval, candidate, source permission, actor/deployment approval or
+publication event was registered. The registry now contains one policy reference,
+not one approved word. Both database controls remain false; worker/feed enable
+settings remain absent. No migration, function redeployment or secret change was
+performed. Word functions stay v1; Panchang remains the unchanged v6 bundle.
+Anonymous worker requests returned 401; the public feed returned 503/withheld.
+Enabled, credentialed managed publication was deliberately not attempted.
+
+### Homepage and automation
+
+The existing connector allowlists the correct deployed read-only endpoint, but
+the meta URL remains empty. Live `https://www.drishvara.com/` was checked in actual
+1440px and 390px browser viewports: Word displayed **Under verification**, no
+horizontal overflow or page runtime errors, connector disabled. Screenshots are
+`/private/tmp/drishvara-word-live-withheld-1440.png` and
+`/private/tmp/drishvara-word-live-withheld-390.png`. No approved-word rendering or
+midnight transition is claimed as a live test; those remain covered by existing
+isolated tests. No website build/deployment or homepage source change was needed.
+
+The existing full scheduler operation is authenticated server-side POST to
+`/functions/v1/word-publication`, body
+`{"operation":"run_daily","scheduled":true}`. It performs the complete standing
+workflow, not reservation alone, and independently checks configured schedule
+approval/time and current IST date. Browser callers cannot use it. Future invocation
+credentials must stay in trusted server/Vault ownership, never client assets,
+committed SQL or logs. Schedule time/UTC conversion, execution/monitoring owner,
+alert destination and bounded operational retries must be explicitly approved
+before installing a job. No Cron/pg_net extension, schedule or external alert
+transport was activated. Prior 64 real PostgreSQL checks cover deterministic
+retry/concurrency/revocation/exhaustion mechanics, not an installed production job.
+
+### Smallest remaining authorization set
+
+1. Obtain candidate-specific qualified morphology/derivation and Hindi reviews
+   for the exact three records and locators above; retain IAST omission unless
+   separately reviewed. No new general source-discovery programme is required.
+2. Obtain exact source-use/attribution clearance and publisher approval of the
+   existing versioned copy after those reviews. Source inspection alone cannot
+   supply these independent approval records.
+3. Approve canonical identity equivalence, date-context basis and explicit order.
+   Either establish each etymology or explicitly authorize and review a versioned
+   semantic-only exception; no such exception is inferred here.
+4. Once a real candidate is eligible, register genuine approval/context/actor/
+   deployment references, authorize enabled execution/homepage cutover and approve
+   the schedule/monitoring fields. Global IST, unused-first and standing policy
+   decisions are already authorized and must not be requested again.
+
+The absent historical migration ledger and duplicate `20260527` versions are
+deferred maintenance, not a current Word RPC dependency. Do not use blanket
+`db push`, migration repair or historical replay until separately reconciled.
+Approved words and first publication remain **zero/none**. Rollback/disable remains
+Word controls off, feed/worker enable flags off, connector empty and jobs absent;
+preserve immutable policy/history and do not reset/drop the shared database.
+
+Affected validation passed: 46 integration checks (including five new source/
+policy-registration integrity assertions), 36 feed checks, 83 dossier-preservation
+checks, AG70E empty-bank validation, JavaScript/JSON syntax and diff whitespace.
+The unaffected 64 real PostgreSQL and prior policy/F1/F2 results are reused.
+No production bundle changed, so no additional build or website deployment was
+needed. Only the dossier, this record and the focused validator changed locally.

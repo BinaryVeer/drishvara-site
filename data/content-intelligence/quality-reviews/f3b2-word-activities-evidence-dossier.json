@@ -1355,7 +1355,153 @@
         "decision_required": "Either authenticate and approve each published derivation, or explicitly authorize a versioned semantic-only exception and its engine/validator changes. Omitting public explanatory prose alone does not satisfy the internal established gate.",
         "review_status": "pending", "publisher_id": null, "approval_ref": null
       },
-      "production_authorization": { "migration": false, "deployment": false, "server_activation": false, "scheduler": false, "first_publication": false }
+      "production_authorization": { "migration": false, "deployment": false, "server_activation": false, "scheduler": false, "first_publication": false },
+      "publication_activation_review": {
+        "baseline": "3fe48298f42684440b07f7476c0bd6c6adc91575",
+        "observed_on": "2026-10-24",
+        "record_role": "non_executable_evidence_and_deployment_observation",
+        "status": "blocked_pending_individual_word_approvals",
+        "qualified_word_count": 0,
+        "production_approved_word_count": 0,
+        "runtime_activation": false,
+        "public_output_allowed": false,
+        "human_linguistic_signoff": null,
+        "source_edition": {
+          "source_reference_id": "src_cologne_digital_sanskrit_dictionaries",
+          "title": "A Sanskrit-English Dictionary, new edition",
+          "author": "Monier Monier-Williams",
+          "publication_year": 1899,
+          "digital_publisher": "Cologne Digital Sanskrit Dictionaries, University of Cologne",
+          "edition_identification_url": "https://sanskrit-lexicon.github.io/csl-guides/dictionaries/mw",
+          "data_revision": "e4742e12cde786b1a2d10e0507808620a4f2c8eb",
+          "data_url": "https://raw.githubusercontent.com/sanskrit-lexicon/csl-orig/e4742e12cde786b1a2d10e0507808620a4f2c8eb/v02/mw/mw.txt",
+          "data_sha256": "e4641dc4384de459408368a9b34b2a13c90a19b0ecd4671f92c055b7578d0129",
+          "access_method": "Direct HTTPS retrieval and targeted record inspection; three official PDF pages separately rendered and visually inspected.",
+          "original_scan_inspected_count": 3,
+          "scope_limit": "Digital text and scan comparison is source inspection by this execution, not independent expert morphology, etymology or publication approval. Dictionary literary citations were not independently authenticated."
+        },
+        "source_use_review": {
+          "cologne_license_url": "https://raw.githubusercontent.com/sanskrit-lexicon/csl-orig/e4742e12cde786b1a2d10e0507808620a4f2c8eb/LICENSE",
+          "cologne_license_sha256": "0b7fc2608b6d990314e908569407a6058b4a29175167c6d91ca0070c946661be",
+          "observed_data_license": "CC BY-SA 4.0",
+          "proposed_attribution": "Lexical research: Monier Monier-Williams, A Sanskrit-English Dictionary (1899), Cologne Digital Sanskrit Dictionaries, University of Cologne; exact entry/page references and data revision recorded below. Proposed explanations are original editorial paraphrases, not dictionary quotations.",
+          "attribution_review_status": "pending",
+          "exact_use_rights_approval_ref": null,
+          "dsal_notice_url": "https://dsal.uchicago.edu/dictionaries/dasa-hindi/",
+          "dsal_edition": "Syamasundara Dasa, Hindi sabdasagara, Navina samskarana, Kasi: Nagari Pracarini Sabha, 1965-1975.",
+          "dsal_notice_finding": "The publisher's notice restricts capture and reuse without permission. Only locators and bounded research observations are recorded; dictionary prose is not copied into proposed public text.",
+          "quoted_dictionary_text": null,
+          "rights_review_status": "pending",
+          "reuse_permission": "not_allowed_pending_exact_use_review"
+        },
+        "individual_release_review": [
+          {
+            "word_id": "reflection",
+            "draft_id": "ag69f_review_draft_001",
+            "copy_proposal_version": "publisher-review-v2",
+            "public_copy_ref": "publication_copy_proposals:reflection",
+            "lookup_form": "manana",
+            "canonical_identity_approval_ref": null,
+            "literal_meaning_note": "The cognitive noun supports thinking and reflective consideration; the adjacent adjective and homage sense must remain distinct.",
+            "contextual_meaning_ref": "words.reflection.original_copy",
+            "sanskrit_source": {
+              "headword_slp1": "manana", "record_ids": ["156763"], "printed_page": 783, "printed_column": 3,
+              "lookup_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/getword.php?key=manana&filter=roman&accent=no&transLit=slp1",
+              "scan_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/MWScanpdf/mw0783-madhvamAhAtmya.pdf",
+              "scan_sha256": "e05e7f40fda45ba18291d30f9f5b16c52b2690f53d5743121d51d5257dc4df57",
+              "digital_entry_inspected": true, "original_scan_inspected": true, "noun_gender_as_recorded": "neuter", "review_status": "pending"
+            },
+            "hindi_source": {
+              "source_reference_id": "src_hindi_shabdasagara_dsal", "headword": "मनन",
+              "url": "https://dsal.uchicago.edu/cgi-bin/app/dasa-hindi_query.py?qs=%E0%A4%AE%E0%A4%A8%E0%A4%A8&searchhws=yes&matchtype=exact",
+              "entry_page_label": "3779", "page_query_parameter": "3780", "noun_gender_as_recorded": "masculine",
+              "access_status": "inspected_direct_https", "http_status": 200, "original_scan_inspected": false,
+              "finding": "The general cognitive senses support the Hindi label; a separately numbered Vedanta sense is not a universal definition. Sanskrit and Hindi gender labels are language-specific.",
+              "review_status": "pending"
+            },
+            "derivation_review_request": "Compare the printed parent man entry and the recorded nominal formation; the exact suffix analysis, displayed neuter form and context still need a qualified review.",
+            "etymology_status": "unverified",
+            "remaining_approval_refs": { "sanskrit_morphology": null, "hindi_translation": null, "etymology": null, "source_rights": null, "editorial_safety_exact_copy": null },
+            "production_readiness": "not_ready", "production_approved": false, "public_use_permission": "not_allowed"
+          },
+          {
+            "word_id": "discernment",
+            "draft_id": "ag69f_review_draft_004",
+            "copy_proposal_version": "publisher-review-v2",
+            "public_copy_ref": "publication_copy_proposals:discernment",
+            "lookup_form": "viveka",
+            "canonical_identity_approval_ref": null,
+            "literal_meaning_note": "General distinction and judgment are supported; the separately delimited Vedanta interpretation is not the proposed universal sense.",
+            "contextual_meaning_ref": "words.discernment.original_copy",
+            "sanskrit_source": {
+              "headword_slp1": "viveka", "record_ids": ["200139", "200140", "200141"], "printed_page": 987, "printed_column": 3,
+              "lookup_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/getword.php?key=viveka&filter=roman&accent=no&transLit=slp1",
+              "scan_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/MWScanpdf/mw0987-vivAdin.pdf",
+              "scan_sha256": "bd854d4ad520f23201bc7a8e0ab1f69dcaa4e830d98ee59dbe132129c0c0be54",
+              "digital_entry_inspected": true, "original_scan_inspected": true, "noun_gender_as_recorded": "masculine", "review_status": "pending"
+            },
+            "hindi_source": {
+              "source_reference_id": "src_hindi_shabdasagara_dsal", "headword": "विवेक",
+              "url": "https://dsal.uchicago.edu/cgi-bin/app/dasa-hindi_query.py?qs=%E0%A4%B5%E0%A4%BF%E0%A4%B5%E0%A5%87%E0%A4%95&searchhws=yes&matchtype=exact",
+              "entry_page_label": "4539", "page_query_parameter": "4534", "noun_gender_as_recorded": "masculine",
+              "access_status": "inspected_direct_https", "http_status": 200, "original_scan_inspected": false,
+              "finding": "The general distinguishing/judgment senses support the label. Tradition-specific and other numbered senses are not merged into the proposed explanation. The displayed page label and query parameter differ and are preserved separately.",
+              "review_status": "pending"
+            },
+            "derivation_review_request": "Review the printed vi-vic parent and the digital cross-reference at record 200360 (page 989, column 1); the latter locator was inspected in digital data, not as an additional scanned page. Confirm the formation and displayed visarga separately.",
+            "etymology_status": "unverified",
+            "remaining_approval_refs": { "sanskrit_morphology": null, "hindi_translation": null, "etymology": null, "source_rights": null, "editorial_safety_exact_copy": null },
+            "production_readiness": "not_ready", "production_approved": false, "public_use_permission": "not_allowed"
+          },
+          {
+            "word_id": "patience",
+            "draft_id": "ag69f_review_draft_005",
+            "copy_proposal_version": "publisher-review-v2",
+            "public_copy_ref": "publication_copy_proposals:patience",
+            "lookup_form": "dhairya",
+            "canonical_identity_approval_ref": null,
+            "literal_meaning_note": "The second homonym supports composure and patient steadiness; the first homonym's intelligence sense is not substituted.",
+            "contextual_meaning_ref": "words.patience.original_copy",
+            "sanskrit_source": {
+              "headword_slp1": "DErya", "record_ids": ["102069"], "printed_page": 520, "printed_column": 2,
+              "lookup_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/getword.php?key=DErya&filter=roman&accent=no&transLit=slp1",
+              "scan_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/MWScanpdf/mw0520-dhRSTaketu.pdf",
+              "scan_sha256": "e8ab47e3d31b3c0d34fe2963066f60d34388134f88b18b25af7d9527588e2bee",
+              "digital_entry_inspected": true, "original_scan_inspected": true, "noun_gender_as_recorded": "neuter", "review_status": "pending"
+            },
+            "hindi_source": {
+              "source_reference_id": "src_hindi_shabdasagara_dsal", "headword": "धैर्य",
+              "url": "https://dsal.uchicago.edu/cgi-bin/app/dasa-hindi_query.py?qs=%E0%A4%A7%E0%A5%88%E0%A4%B0%E0%A5%8D%E0%A4%AF&searchhws=yes&matchtype=exact",
+              "entry_page_label": "2482", "page_query_parameter": "2483", "noun_gender_as_recorded": "masculine",
+              "access_status": "inspected_direct_https", "http_status": 200, "original_scan_inspected": false,
+              "finding": "The general steadiness and unhurriedness senses support the label, not advice to endure harm. Hindi masculine does not replace Sanskrit neuter.",
+              "review_status": "pending"
+            },
+            "derivation_review_request": "Review the printed association with the second dhira homonym and exact nominal derivation; the parenthetical source association alone does not establish a reviewed suffix rule or display morphology.",
+            "etymology_status": "unverified",
+            "remaining_approval_refs": { "sanskrit_morphology": null, "hindi_translation": null, "etymology": null, "source_rights": null, "editorial_safety_exact_copy": null },
+            "production_readiness": "not_ready", "production_approved": false, "public_use_permission": "not_allowed"
+          }
+        ],
+        "publisher_policy_registration": {
+          "project_ref": "pajlabwwszmhjhabxprf",
+          "record_ref": "drishvara-word-publisher-policy@1",
+          "kind": "approval", "version": "1", "approval_ref": "drishvara-publisher-word-policy-20261024-v1",
+          "payload_hash": "sha256:338f19f2ca7d2b60f5672d238eb330a846711bc488d953c637b9286c6f2bd894",
+          "status": "registered_and_read_back",
+          "authority_basis": "Existing explicit publisher policy, reaffirmed in the current release instruction; not a word-level or expert-review approval.",
+          "candidate_records_registered": 0, "publication_events": 0,
+          "persistence_enabled": false, "publication_enabled": false, "scheduler_enabled": false,
+          "server_activation_authorized_by_registration": false
+        },
+        "publisher_decisions_still_required": [
+          "Approve exact publisher-review-v2 copy, attribution and source versions only after the required independent linguistic, etymology and rights reviews are recorded.",
+          "Approve the canonical identity map, dated applicability-context basis and explicit candidate order; the existing IST/unused-first policy does not supply these values.",
+          "Obtain established etymology under the current contract, or explicitly authorize a versioned semantic-only exception and its separately reviewed implementation. Optional public prose omission is not an exception.",
+          "Authorize the registered actor/deployment references, exact site origin and homepage cutover, schedule time, monitoring owner and failure destination after at least one genuine candidate is eligible."
+        ],
+        "historical_maintenance": "The absent historical migration ledger and duplicate 20260527 versions are deferred maintenance, not a prerequisite for using the verified installed Word objects. Blanket db push, migration repair and historical replay remain prohibited until separate reconciliation."
+      }
     }
   },
   "activity_publication_conditions": [

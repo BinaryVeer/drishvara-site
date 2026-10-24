@@ -192,6 +192,62 @@ await check("pending copy omits optional unreviewed IAST without waiving mandato
   assert.equal(review.etymology_policy_decision.permitted_omission_now,false);
   assert.equal(review.qualified_for_production_count,0);assert.equal(review.approved_for_production_count,0);
 });
+const activationReview=prep.final_release_review.publication_activation_review;
+await check("primary evidence capture pins the inspected edition without claiming expert approval",()=>{
+  assert.equal(activationReview.record_role,"non_executable_evidence_and_deployment_observation");
+  assert.equal(activationReview.baseline,"3fe48298f42684440b07f7476c0bd6c6adc91575");
+  assert.equal(activationReview.observed_on,"2026-10-24");
+  const source=activationReview.source_edition;
+  assert.equal(source.publication_year,1899);assert.equal(source.original_scan_inspected_count,3);
+  assert.equal(source.source_reference_id,"src_cologne_digital_sanskrit_dictionaries");
+  assert.equal(source.data_revision,"e4742e12cde786b1a2d10e0507808620a4f2c8eb");
+  assert.equal(source.data_sha256,"e4641dc4384de459408368a9b34b2a13c90a19b0ecd4671f92c055b7578d0129");
+  assert.equal(source.data_url,`https://raw.githubusercontent.com/sanskrit-lexicon/csl-orig/${source.data_revision}/v02/mw/mw.txt`);
+  assert.equal(activationReview.human_linguistic_signoff,null);
+});
+await check("three primary entry identities and printed locators resolve only to the historical pilots",()=>{
+  const expected={reflection:["ag69f_review_draft_001","manana",["156763"],783,3],discernment:["ag69f_review_draft_004","viveka",["200139","200140","200141"],987,3],patience:["ag69f_review_draft_005","DErya",["102069"],520,2]};
+  const records=activationReview.individual_release_review;
+  assert.deepEqual(records.map(r=>r.word_id),Object.keys(expected));
+  for(const r of records){const s=r.sanskrit_source,[draft,key,ids,page,column]=expected[r.word_id];
+    assert.equal(r.draft_id,draft);assert.equal(s.headword_slp1,key);assert.deepEqual(s.record_ids,ids);
+    assert.equal(s.printed_page,page);assert.equal(s.printed_column,column);
+    const u=new URL(s.lookup_url);assert.equal(u.hostname,"www.sanskrit-lexicon.uni-koeln.de");assert.equal(u.searchParams.get("key"),key);
+    assert.equal(s.digital_entry_inspected,true);assert.equal(s.original_scan_inspected,true);assert.match(s.scan_sha256,/^[a-f0-9]{64}$/);
+    assert.equal(new URL(s.scan_url).hostname,u.hostname);assert.equal(s.review_status,"pending");
+    assert(prep.final_release_review.publication_copy_proposals.some(p=>p.word_id===r.word_id&&p.version===r.copy_proposal_version));
+  }
+});
+await check("Hindi access evidence preserves page labels independently of query indexes",()=>{
+  const expected={reflection:["3779","3780"],discernment:["4539","4534"],patience:["2482","2483"]};
+  for(const r of activationReview.individual_release_review){const s=r.hindi_source;
+    assert.equal(s.source_reference_id,"src_hindi_shabdasagara_dsal");
+    assert.equal(s.headword,dossier.words.find(w=>w.word_id===r.word_id).original_copy.hindi);
+    assert.deepEqual([s.entry_page_label,s.page_query_parameter],expected[r.word_id]);
+    const u=new URL(s.url);assert.equal(u.hostname,"dsal.uchicago.edu");assert.equal(u.searchParams.get("qs"),s.headword);
+    assert.equal(s.http_status,200);assert.equal(s.access_status,"inspected_direct_https");assert.equal(s.original_scan_inspected,false);assert.equal(s.review_status,"pending");
+  }
+});
+await check("source inspection and observed licences cannot authorize a pilot or its public copy",()=>{
+  const rights=activationReview.source_use_review;
+  assert.equal(rights.observed_data_license,"CC BY-SA 4.0");assert.equal(rights.rights_review_status,"pending");
+  assert.equal(rights.attribution_review_status,"pending");assert.equal(rights.exact_use_rights_approval_ref,null);assert.equal(rights.quoted_dictionary_text,null);
+  assert.equal(rights.reuse_permission,"not_allowed_pending_exact_use_review");
+  assert.equal(activationReview.qualified_word_count,0);assert.equal(activationReview.production_approved_word_count,0);
+  assert.equal(activationReview.runtime_activation,false);assert.equal(activationReview.public_output_allowed,false);
+  for(const r of activationReview.individual_release_review){
+    assert.equal(r.canonical_identity_approval_ref,null);assert.equal(r.etymology_status,"unverified");
+    assert.equal(r.production_readiness,"not_ready");assert.equal(r.production_approved,false);assert.equal(r.public_use_permission,"not_allowed");
+    assert(Object.values(r.remaining_approval_refs).every(v=>v===null));
+  }
+});
+await check("registered standing policy matches the genuine publisher record without activating content",()=>{
+  const p=activationReview.publisher_policy_registration,source=config.publisher_policy;
+  assert.equal(p.record_ref,source.record_ref);assert.equal(p.approval_ref,source.approval_ref);assert.equal(p.version,source.version);
+  assert.equal(p.payload_hash,snapshotHash(source));assert.equal(p.kind,"approval");assert.equal(p.status,"registered_and_read_back");
+  assert.equal(p.project_ref,"pajlabwwszmhjhabxprf");assert.equal(p.candidate_records_registered,0);assert.equal(p.publication_events,0);
+  for(const k of["persistence_enabled","publication_enabled","scheduler_enabled","server_activation_authorized_by_registration"])assert.equal(p[k],false);
+});
 await check("trusted server is disabled by default and pending real release config cannot write",async()=>{
   const rpc=async()=>({data:{configuration:config}});
   assert.equal((await runWordServerWorkflow({timestamp:"2026-10-24T00:00:00.000Z",rpc})).reason,"word_server_not_activated");
