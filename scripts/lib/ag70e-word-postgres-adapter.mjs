@@ -3,7 +3,7 @@ import { copySnapshot, inspectWordHistory, snapshotHash, internalResult } from "
 
 /** Inject an authenticated server-side RPC transport. No client, credential or endpoint is created. */
 export function createWordPostgresAdapter({ rpc, mode = "disabled" } = {}) {
-  const enabled = mode === "isolated_local_validation" && typeof rpc === "function";
+  const enabled = ["isolated_local_validation", "authorized_server"].includes(mode) && typeof rpc === "function";
   async function call(name, parameters) {
     if (!enabled) throw new Error("word_persistence_not_activated");
     const response = await rpc(name, parameters);
@@ -12,8 +12,12 @@ export function createWordPostgresAdapter({ rpc, mode = "disabled" } = {}) {
     return response.data;
   }
   return Object.freeze({
-    contract_version: ASSIGNMENT_ADAPTER, internal_only: true, production_connected: false,
+    contract_version: ASSIGNMENT_ADAPTER, internal_only: true, production_connected: mode === "authorized_server",
     prepared_postgres_adapter: true, mode,
+    async verifyAuthorization(authorization, operation) {
+      if (mode !== "authorized_server") return false;
+      return await call("word_assignment_check_authorization", { p_ref: authorization.approval_ref, p_actor: authorization.actor_ref, p_operation: operation }) === true;
+    },
     async readHistory() {
       const history = await call("word_assignment_read_history", {});
       const checked = inspectWordHistory(history);

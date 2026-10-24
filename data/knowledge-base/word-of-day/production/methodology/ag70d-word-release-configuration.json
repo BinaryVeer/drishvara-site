@@ -35,6 +35,17 @@
     "automatic_publication": false,
     "recovery": "Retry the same date-scoped idempotency key and reread persisted state; never assume a failed response means rollback."
   },
+  "publisher_decisions": {
+    "review_status": "pending",
+    "publisher_id": null,
+    "signature_or_decision_record_ref": null,
+    "scope_and_timezone": { "proposed_scope": "global_public_word", "proposed_timezone": "Asia/Kolkata", "proposed_boundary": "civil_midnight", "decision": null, "approval_ref": null },
+    "canonical_context": { "proposed_model": "one versioned editorial applicability context per canonical date, not user-location-dependent", "approved_context_ref": null, "approved_identity_map_ref": null, "decision": null, "approval_ref": null },
+    "selection_precedence": { "proposed_operator": "approved_explicit_candidate_order", "approved_order": [], "decision": null, "approval_ref": null, "required_constraints": ["unused eligible identities first", "no annual reset", "append-only history", "no implicit repeat or fabricated fallback"] },
+    "exact_copy_and_attribution": { "proposal_ref": "f3b2-word-activities-evidence-dossier.json.consolidated_production_preparation.final_release_review.publication_copy_proposals", "approved_content_hashes": [], "decision": null, "approval_ref": null },
+    "etymology": { "current_engine_requirement": "established", "approved_exception_ref": null, "decision": null, "approval_ref": null, "note": "An optional public derivation note is not an exemption from internal eligibility. Any semantic-only path requires explicit versioned authorization and subsequent implementation review." },
+    "operations": { "migration_approval_ref": null, "deployment_approval_ref": null, "server_authorization_ref": null, "scheduler_approval_ref": null, "first_publication_approval_ref": null }
+  },
   "runtime_activation": false,
   "public_output_allowed": false
 }

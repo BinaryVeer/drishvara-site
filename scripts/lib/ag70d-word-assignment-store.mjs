@@ -30,19 +30,21 @@ function currentApproval(snapshot, input) {
 /**
  * Storage-neutral internal coordinator. The injected adapter owns atomic CAS, uniqueness
  * and idempotency. No database client, clock, environment, scheduler or public writer.
- * Production-connected adapters and real publication operations are disabled in this phase.
+ * Server-connected writes additionally require a live database authorization check.
  */
 export async function executeWordAssignment({ adapter, authorization, command, selection_input: input }) {
   const withheld = reason => internalResult("withheld", { reason });
   try {
     if (!approved(authorization) || authorization.trust_boundary !== "server_only" || !nonempty(authorization.actor_ref) ||
         !Array.isArray(authorization.capabilities) || !authorization.capabilities.includes(command?.operation)) return withheld("authorization_unavailable");
-    if (adapter?.contract_version !== ASSIGNMENT_ADAPTER || adapter.internal_only !== true || adapter.production_connected !== false ||
+    const serverAuthorized = adapter?.production_connected === true && adapter.mode === "authorized_server" &&
+      typeof adapter.verifyAuthorization === "function" && await adapter.verifyAuthorization(authorization,command.operation) === true;
+    if (adapter?.contract_version !== ASSIGNMENT_ADAPTER || adapter.internal_only !== true || (adapter.production_connected !== false && !serverAuthorized) ||
         !["readHistory", "readCommand", "compareAndAppend"].every(k => typeof adapter[k] === "function")) return withheld("history_persistence_unavailable");
     if (!command || command.contract_version !== WORD_CONTRACT || !nonempty(command.idempotency_key) || !validTimestamp(command.timestamp) ||
         !ASSIGNMENT_OPERATIONS.includes(command.operation)) return withheld("invalid_assignment_command");
     if (["record_publication", "correct"].includes(command.operation) &&
-        (adapter.synthetic_test_adapter !== true || authorization.simulation_only !== true)) return withheld("publication_not_activated");
+        !serverAuthorized && (adapter.synthetic_test_adapter !== true || authorization.simulation_only !== true)) return withheld("publication_not_activated");
     const requestHash = snapshotHash({ command, input, actor_ref: authorization.actor_ref, authorization_ref: authorization.approval_ref });
     const prior = await adapter.readCommand(command.idempotency_key);
     if (prior) return prior.request_hash === requestHash ? internalResult("idempotent_replay", { transaction: copySnapshot(prior) }) : withheld("idempotency_conflict");

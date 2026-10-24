@@ -12,7 +12,7 @@ database, scheduling, deployment or publication authorization.
 | Pilot content | Compact drafts in the existing review dossier; original text retained | Authorized Sanskrit/IAST, Hindi, source/rights, context/safety and editorial decisions |
 | Canonical context | Global Asia/Kolkata civil-date contract retained | Specific versioned editorial/Panchang context and location-basis approval |
 | Ranking | Approval-ready explicit-order configuration, no assigned order | Authorized relevance/precedence/tie decisions; policy refs remain null |
-| Persistence | Additive SQL and injected server adapter prepared | Migration review, isolated PostgreSQL execution and transactional/security testing |
+| Persistence | Additive SQL, disabled adapter and isolated PostgreSQL validator | Final real-test results below; separate Supabase/staging and production migration approval |
 | Homepage | Existing five-card layout consumes a read-only publication envelope | Approved publication, exact reviewed copy, source rights and separate release permission |
 | Daily automation | Inactive config and deterministic local dry-run planner | Schedule/time/alert thresholds, authentication and operational authorization |
 | Live release | None | Deployment, database activation, publication and scheduling authorizations |
@@ -81,18 +81,16 @@ keys or unreconciled identity snapshots fail closed rather than claim unsupporte
 cross-runtime canonicalization. PostgreSQL/Node parity for boundary Unicode and
 snapshot serialization must be demonstrated before migration approval.
 
-The injected RPC adapter is disabled by default. Its only executable mode in
-this pass is `isolated_local_validation`; no production client, credential,
-endpoint, write route or activation switch is installed. Existing coordinator
-publication restrictions remain unchanged. Moving to a production-connected
-adapter requires separately reviewed authorization and runtime cutover.
+The initial injected RPC adapter was limited to `isolated_local_validation`.
+The consolidated review adds the dormant `authorized_server` mode described below;
+its default stays disabled and no production transport or credential is activated.
+Existing non-server callers still cannot authorize real publication operations.
+Production use requires separately reviewed authorization and runtime cutover.
 
-No local PostgreSQL server/CLI was available, and the existing Docker daemon was
-not running. It was not started. SQL validation here is structural; adapter tests
-use isolated mocks. SQL compilation, actual constraints, ACL/RLS, serialization,
-parallel transactions, durability, trigger behavior and crash recovery remain
-**unverified against PostgreSQL**. Do not apply this migration to production on
-the basis of mock/static tests.
+At the initial preparation baseline no PostgreSQL server was available. The later
+authorized disposable Docker execution is reported separately below. It is not
+Supabase production certification. Do not apply the migration on the basis of
+mock/static tests or assume local PostgreSQL proves managed gateway behavior.
 
 ## Read-only output and display
 
@@ -145,7 +143,7 @@ Never reset history annually or reuse because a rolling window expires.
 No commit, push, deployment, production migration, scheduler or live publication
 is authorized or performed by this work.
 
-## Executed local results
+## Initial preparation results (historical)
 
 - Consolidated integration: 37 checks passed; SQL assertions are structural only.
 - Retained internal engine: 74 checks passed, including existing simulated races,
@@ -160,3 +158,128 @@ is authorized or performed by this work.
 - JavaScript syntax, diff whitespace checks and the static build passed.
   Regenerated readiness metadata was restored; the legacy preview is unchanged.
 - PostgreSQL execution and production-service tests: not run; environment unavailable.
+
+## Consolidated authorization review, 24 October 2026
+
+Current baseline: `efb63d525816957f923118cb9e7bc98d4ef3f7e6`.
+**Production-qualified words: 0. Approved words: 0. Public output: withheld.**
+
+The existing dossier now contains `consolidated_production_preparation.final_release_review`:
+three exact copy proposals, a source-rights assessment, an approval matrix and
+explicit etymology decisions. Historical word fields, dictionary captures,
+Activities and provisional analysis are untouched. No parallel bank was created.
+
+| Pilot | Evidence captured | Mandatory review still pending |
+| --- | --- | --- |
+| Reflection / manana / mananam | Hosted dictionary cognitive sense, neuter noun and published derivation claims | Original entry authentication, morphology/IAST, Hindi evidence (timeout/403), rights, identity and exact editorial/safety copy |
+| Discernment / viveka / vivekah with visarga | Hosted general senses and derivation claims; Hindwi Hindi entry | Original edition, exact derivation/IAST, bilingual scope, rights and editorial decisions |
+| Patience / dhairya / dhairyam | Hosted composure sense and derivation claims; IIT Bombay Hindi noun entry | Original edition, morphology/IAST, Sanskrit versus Hindi gender distinction, rights and editorial decisions |
+
+Published derivation claims now have inspected locators, but none is promoted to
+`etymology_status: established`. The current selector requires that status.
+Omitting a public derivation paragraph does not waive internal eligibility. A
+semantic-only exception needs an explicit publisher decision, versioned policy
+authorization and a subsequently reviewed implementation, not an AI approval.
+
+The source-rights assessment distinguishes the [Cologne repository licence](https://github.com/sanskrit-lexicon/csl-orig/blob/main/LICENSE)
+and [CC BY-SA conditions](https://creativecommons.org/licenses/by-sa/4.0/) from
+unresolved exact-use approval. Klryz identifies its adaptations and inherited
+licence; Wisdomlib access does not establish website-wide reuse permission.
+Hindi source access does not authorize copying protected wording. Proposed copy
+is separately marked AI-assisted paraphrase, not a dictionary quotation.
+
+`ag70d-word-release-configuration.json.publisher_decisions` records unfilled
+decisions for exact copy/attribution, global IST civil date, applicability context,
+identity equivalence, deterministic order, etymology and operations. Publisher,
+signature, content hashes and every approval reference remain null/empty.
+
+### Prepared trusted workflow
+
+`scripts/lib/ag70e-word-server-workflow.mjs` reuses the existing selector,
+coordinator, adapter and public projector. Database functions resolve registered
+context, identity, candidate, precedence, exclusion and decision references.
+`authorized_server` adapter mode requires a live database authorization check;
+default mode stays disabled. The database separately gates writes, actor
+capabilities, publication and export. Export rechecks active candidate/source/
+approval references rather than trusting historical summary flags.
+
+`supabase/functions/word-publication/index.ts` is an **undeployed** authenticated
+worker/export entry. `WORD_WORKFLOW_ENABLED` is absent/disabled; no environment
+was changed. It accepts only reserve/authorize/publication operation names and
+an optional scheduling marker, never caller dates, content or approval objects.
+The worker derives IST dates from its server timestamp. Separate decisions remain
+necessary for authorization, publication and release. Responses never expose raw
+ledger snapshots, credentials or database errors. No CORS write path is installed.
+
+The prepared scheduled path can only reserve, after an approved configured time;
+it cannot automatically authorize or publish. No cron job, scheduler, monitoring
+transport or production service was installed. Low-bank warnings use the existing
+selector's eligible trace and require a reviewed threshold. Unknown history,
+missing approvals, exhaustion and database failures continue to withhold.
+
+GET exports a governed envelope to an authenticated trusted caller. It does **not**
+write the website's static artifact. The existing F2 card still reads the withheld
+`generated/word-of-day-publication.json`. An authorized same-origin feed/artifact
+delivery step, cache behavior and managed Edge bundling/gateway execution remain
+release gates; this preparation does not claim an observed live connection.
+
+### Release matrix and rollback
+
+| Workstream | Preparation | Release decision |
+| --- | --- | --- |
+| Content/languages/rights | Three proposals, exact evidence locators and rights limitations | Human reviews and exact copy-hash approvals pending |
+| Selection policy | Existing unused-first IST/history rules retained; publisher fields prepared | Context, precedence, equivalence and etymology decisions unset |
+| PostgreSQL | Real isolated validator; synthetic references only; no production credentials | Managed Supabase role/gateway parity and migration authorization pending |
+| Trusted feed/homepage | Dormant authenticated worker/exporter; existing fail-closed card | Server activation, deployment and feed delivery approval pending |
+| Daily operation | Idempotent/replay-aware runner and disabled scheduling controls | Time, threshold, notification destination, owner and scheduler approval pending |
+
+Intended production changes, only after separate approval: apply the reviewed
+additive migration; provision real signed/versioned evidence and policy records
+through the privileged governance process; deploy the authenticated worker and
+approved feed delivery; explicitly enable persistence, then a reviewed dated
+publication/release; finally authorize scheduled reservation and monitoring.
+There is no automatic permission to execute any of these steps.
+
+Rollback: disable the Word worker and scheduled invocation, set publication and
+persistence controls false, and withhold the read-only feed. Revoke only the new
+Word RPC grants if operationally required. Preserve immutable events, receipts,
+reviews and published identity history; use governed withdrawal/correction, not
+deletion, historical rewrites or resurrection of the legacy AG63 preview. Do not
+drop the schema as a production rollback or alter Panchang/SUP02 permissions.
+
+No production migration, publication, scheduler activation, deployment, commit or
+push is authorized by this preparation. Final execution results must be read with
+their explicit local/synthetic versus managed-production limitations.
+
+### Executed consolidated results
+
+- Real PostgreSQL: **41 checks passed** on PostgreSQL 17.11, aarch64 Alpine,
+  image `postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb`.
+  The disposable container had network mode `none`, no published port, bind mount
+  or persistent volume, no privileged mode, dropped capabilities and tmpfs data.
+  Only synthetic words/reviews and locally emulated Supabase role names were used.
+- Verified actual migration compilation/application; nine RLS tables; effective
+  grants and denied anon/authenticated writes; independent write/publication
+  controls; uniqueness; CAS/idempotency; parallel same-date and cross-date claims;
+  append-only UPDATE/DELETE/TRUNCATE triggers; atomic rollback; backend termination
+  before commit and recovery; correction, withdrawal, supersession and cancellation.
+- The real tests found and corrected numeric object-key serialization order in
+  PostgreSQL's hash bridge. Unicode, escaping, array-index keys and safe integers
+  now have direct Node/PostgreSQL parity assertions; unsupported numbers reject.
+- Registered-reference worker tests exercised actual SQL authorization, separate
+  assignment/publication/release decisions, repeated requests, pre-schedule IST
+  withholding and revoked-source export rejection. All synthetic data and its
+  container were removed after successful execution. Other Docker resources were
+  not removed or changed; the downloaded image is a reusable local cache.
+- Separate mocked/synthetic checks: integration **40**, retained engine **74**,
+  policy **21**, F3B preservation **78**, F2 **57**, F1 **31**, plus AG70E foundation.
+  Edge HTTP handler tests ran under Node with a Deno registration stub, not a
+  deployed managed Edge Runtime or live PostgREST gateway.
+- Installed Chrome/Playwright QA passed at **1440** and **390**: real checked-in
+  envelope withheld, isolated long-word fixture readable/wrapping without page
+  overflow, attribution accessible, tampered copy withheld, zero page runtime
+  errors. Supabase calls were blocked; no genuine approved word was substituted.
+- IST boundary behavior used explicit deterministic timestamps. An actual live
+  midnight scheduler run, production output, managed auth/grants and crash/failover
+  durability have not been certified. No test result grants a human review or
+  production release approval.

@@ -636,6 +636,21 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
 check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
+  const releasePreparationBaseline = "efb63d525816957f923118cb9e7bc98d4ef3f7e6";
+  if (git("rev-parse", "HEAD").trim() === releasePreparationBaseline) {
+    assert.equal(git("rev-parse", "origin/main").trim(), releasePreparationBaseline);
+    assert.equal(git("diff", "--cached", "--name-only").trim(), "");
+    const tracked=[dossierPath,validatorPath,"data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json",
+      "scripts/lib/ag70d-word-assignment-store.mjs","scripts/lib/ag70e-word-postgres-adapter.mjs","supabase/migrations/20261023_word_assignment_preparation.sql",
+      "scripts/validate-word-production-completion.mjs","docs/knowledge/f3b-production-release-readiness.md"];
+    const added=["scripts/lib/ag70e-word-server-workflow.mjs","scripts/validate-word-postgres.mjs","supabase/functions/word-publication/index.ts"];
+    assert.deepEqual(sorted(git("diff","--name-only").trim().split("\n").filter(Boolean)),sorted(tracked));
+    assert.deepEqual(sorted(git("status","--short","--untracked-files=normal").trimEnd().split("\n")),sorted([...tracked.map(p=>" M "+p),...added.map(p=>"?? "+(p.startsWith("supabase/functions/word-publication/")?"supabase/functions/word-publication/":p)),"?? prototypes/"]));
+    assert.equal(git("ls-files","--others","--exclude-standard","--","supabase/functions/word-publication").trim(),"supabase/functions/word-publication/index.ts");
+    const preserved=structuredClone(dossier);delete preserved.consolidated_production_preparation.final_release_review;
+    assert.deepEqual(preserved,JSON.parse(git("show",releasePreparationBaseline+":"+dossierPath)));
+    return;
+  }
   const completionBaseline = "1aaf29764604285f42108a131122e495ac3f8b71";
   if (git("rev-parse", "HEAD").trim() === completionBaseline) {
     assert.equal(git("rev-parse", "origin/main").trim(), completionBaseline);

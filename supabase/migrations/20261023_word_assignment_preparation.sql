@@ -15,7 +15,10 @@ begin
       if exists(select 1 from jsonb_object_keys(v) k where k !~ '^[ -~]*$') then
         raise exception 'unsupported_snapshot_key';
       end if;
-      select '{' || coalesce(string_agg(to_jsonb(key)::text || ':' || drishvara_word_private.canonical_json(value), ',' order by key collate "C"), '') || '}'
+      -- JSON.stringify emits array-index keys numerically before other sorted keys.
+      select '{' || coalesce(string_agg(to_jsonb(key)::text || ':' || drishvara_word_private.canonical_json(value), ',' order by
+        case when key ~ '^(0|[1-9][0-9]{0,9})$' then case when key::numeric < 4294967295 then key::numeric end end nulls last,
+        key collate "C"), '') || '}'
         into result from jsonb_each(v);
       return result;
     when 'array' then
@@ -316,9 +319,82 @@ exception when unique_violation then
   return jsonb_build_object('status','conflict','public_output_allowed',false,'runtime_activation',false);
 end $$;
 
+-- Server-only reads resolve owner-registered references, never browser-supplied approvals.
+create function public.word_assignment_check_authorization(p_ref text, p_actor text, p_operation text) returns boolean
+language plpgsql security definer set search_path = pg_catalog, drishvara_word_private as $$
+declare c drishvara_word_private.controls; a jsonb; d jsonb; event_type text;
+begin
+  select * into c from drishvara_word_private.controls where singleton;
+  if not c.persistence_enabled then return false; end if;
+  d := drishvara_word_private.require_reference(c.deployment_approval_ref,'deployment');
+  if d->>'authorization_ref' is distinct from p_ref then return false; end if;
+  a := drishvara_word_private.require_reference(p_ref,'authorization');
+  event_type := case p_operation when 'reserve' then 'selection_proposal' when 'authorize' then 'authorized_assignment'
+    when 'record_publication' then 'publication' when 'correct' then 'correction' when 'withdraw' then 'withdrawal'
+    when 'supersede' then 'supersession' when 'cancel_reservation' then 'cancelled_reservation' end;
+  return event_type is not null and a->>'actor_ref'=p_actor and coalesce(a->'capabilities' ? event_type,false)
+    and (p_operation<>'reserve' or coalesce(a->'capabilities' ? 'reservation',false));
+exception when others then return false;
+end $$;
+
+create function public.word_assignment_read_workflow(p_date text) returns jsonb
+language plpgsql security definer set search_path = pg_catalog, drishvara_word_private as $$
+declare c drishvara_word_private.controls; d jsonb; a jsonb; context jsonb; precedence jsonb; identities jsonb; exclusions jsonb; records jsonb;
+begin
+  select * into c from drishvara_word_private.controls where singleton;
+  if not c.persistence_enabled then raise exception 'word_persistence_not_activated'; end if;
+  if p_date !~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$' or p_date::date::text<>p_date then raise exception 'invalid_word_date'; end if;
+  d := drishvara_word_private.require_reference(c.deployment_approval_ref,'deployment');
+  a := drishvara_word_private.require_reference(d->>'authorization_ref','authorization');
+  context := drishvara_word_private.require_reference(d->'context_refs'->>p_date,'context');
+  precedence := drishvara_word_private.require_reference(d->>'precedence_ref','precedence');
+  identities := drishvara_word_private.require_reference(c.identity_snapshot_ref,'identity');
+  exclusions := drishvara_word_private.require_reference(d->>'exclusions_ref','exclusions');
+  if jsonb_typeof(d->'candidate_refs') is distinct from 'array' then raise exception 'word_bank_unavailable'; end if;
+  select coalesce(jsonb_agg(drishvara_word_private.require_reference(ref,'candidate') order by ref),'[]'::jsonb)
+    into records from jsonb_array_elements_text(d->'candidate_refs') ref;
+  return jsonb_build_object('configuration',d->'configuration','policy',d->'policy','context',context,'precedence',precedence,
+    'identity_map',identities,'exclusions',exclusions,'bank',jsonb_build_object('version',d->>'version','snapshot_ref',drishvara_word_private.content_hash(records),'records',records),
+    'authorization',a||jsonb_build_object('approval_ref',d->>'authorization_ref','review_status','approved','trust_boundary','server_only'),
+    'decision_refs',d->'decision_refs'->p_date);
+end $$;
+
+create function public.word_assignment_release_snapshot(p_date text) returns jsonb
+language plpgsql security definer set search_path = pg_catalog, drishvara_word_private as $$
+declare c drishvara_word_private.controls; d jsonb; release jsonb; claim drishvara_word_private.date_claims; snapshot jsonb; record jsonb; item jsonb; event jsonb; decision jsonb;
+begin
+  select * into c from drishvara_word_private.controls where singleton;
+  if not c.persistence_enabled or not c.publication_enabled then raise exception 'word_publication_not_activated'; end if;
+  d := drishvara_word_private.require_reference(c.deployment_approval_ref,'deployment');
+  release := drishvara_word_private.require_reference(d->>'publication_release_ref','deployment');
+  select * into claim from drishvara_word_private.date_claims where date_key::text=p_date and state in ('publication','correction');
+  if not found then raise exception 'word_publication_unavailable'; end if;
+  if not coalesce(release->'approved_publication_event_refs' ? claim.last_event_id,false) then raise exception 'word_release_mismatch'; end if;
+  select s.snapshot into snapshot from drishvara_word_private.assignment_snapshots s where s.proposal_id=claim.proposal_id;
+  select payload into event from drishvara_word_private.events where event_id=claim.last_event_id;
+  decision := drishvara_word_private.require_reference(event->>'decision_approval_ref','decision');
+  if claim.state='correction' then
+    record := event->'corrected_record_snapshot';
+    perform drishvara_word_private.require_reference(decision->>'corrected_context_ref','context',coalesce(decision->>'corrected_context_hash',''));
+  else record := snapshot->'approved_record_snapshot'; end if;
+  perform drishvara_word_private.require_reference(c.identity_snapshot_ref,'identity');
+  perform drishvara_word_private.require_reference((record->>'output_candidate_id')||'@'||(record->>'approved_record_version'),'candidate',drishvara_word_private.content_hash(record));
+  perform drishvara_word_private.require_reference(snapshot->>'canonical_context_basis_ref','context',snapshot->>'context_content_hash');
+  perform drishvara_word_private.require_reference(snapshot->>'precedence_rule_ref','precedence',snapshot->>'precedence_content_hash');
+  for item in select value from jsonb_array_elements(record->'source_evidence') loop
+    perform drishvara_word_private.require_reference(item->>'evidence_ref','source');
+  end loop;
+  for item in select value from jsonb_array_elements(record->'approval_record_refs') loop
+    perform drishvara_word_private.require_reference(item #>> '{}','approval');
+  end loop;
+  return jsonb_build_object('history',public.word_assignment_read_history(),'release',release);
+end $$;
+
 revoke all on all functions in schema drishvara_word_private from public, anon, authenticated, service_role;
 revoke all on function public.word_assignment_read_history() from public, anon, authenticated;
 revoke all on function public.word_assignment_read_command(text) from public, anon, authenticated;
 revoke all on function public.word_assignment_commit(jsonb) from public, anon, authenticated;
 grant execute on function public.word_assignment_read_history(), public.word_assignment_read_command(text), public.word_assignment_commit(jsonb) to service_role;
+revoke all on function public.word_assignment_check_authorization(text,text,text), public.word_assignment_read_workflow(text), public.word_assignment_release_snapshot(text) from public, anon, authenticated;
+grant execute on function public.word_assignment_check_authorization(text,text,text), public.word_assignment_read_workflow(text), public.word_assignment_release_snapshot(text) to service_role;
 commit;

@@ -9,6 +9,7 @@ import { createSyntheticWordStore } from "./lib/ag70d-word-assignment-test-adapt
 import { createWordPostgresAdapter } from "./lib/ag70e-word-postgres-adapter.mjs";
 import { projectPublishedWord, planDailyWordRun } from "./lib/ag70e-word-publication-pipeline.mjs";
 import { syntheticSelection, syntheticPublication, syntheticApproval, syntheticIdentityRef } from "./lib/ag70e-word-test-fixtures.mjs";
+import { runWordServerWorkflow, readWordServerPublication } from "./lib/ag70e-word-server-workflow.mjs";
 
 const baseline = "1aaf29764604285f42108a131122e495ac3f8b71";
 const read = p => fs.readFileSync(p, "utf8");
@@ -166,4 +167,40 @@ await check("all existing AG70E record containers remain empty and byte-identica
   const manifest=json("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json");
   for(const p of Object.values(manifest.banks)){const data=json(p);if(Object.hasOwn(data,"records")){assert.deepEqual(data.records,[]);assert.deepEqual(data,frozen(p));}}
 });
-console.log(`Consolidated Word pipeline validation passed: ${checks} checks. SQL checks are structural; adapter, approvals and concurrency use isolated mocks. No PostgreSQL or production certification is claimed.`);
+await check("consolidated review remains three pending words, with no invented publisher or linguistic approvals",()=>{
+  const review=prep.final_release_review;
+  assert.equal(review.qualified_for_production_count,0);assert.equal(review.approved_for_production_count,0);
+  assert.equal(review.human_approval_records_supplied,false);assert.equal(review.public_output_allowed,false);
+  assert.deepEqual(review.evidence_assessment.map(r=>r.word_id),["reflection","discernment","patience"]);
+  for(const r of review.evidence_assessment){assert.equal(r.review_status,"pending");assert.equal(r.reviewer_id,null);assert.equal(r.approval_ref,null);assert.equal(r.etymology_disposition,"captured_for_review_not_established");}
+  for(const r of review.publication_copy_proposals){assert.equal(r.public_use_permission,"not_allowed");assert.equal(r.approval_ref,null);assert.equal(r.review_status,"pending");}
+  assert(review.source_rights_assessment.every(r=>r.reuse_permission==="pending" && r.approval_ref===null));
+  assert.equal(review.etymology_policy_decision.permitted_omission_now,false);
+  assert.equal(config.publisher_decisions.publisher_id,null);assert.equal(config.publisher_decisions.signature_or_decision_record_ref,null);
+  assert(Object.values(config.publisher_decisions.operations).every(v=>v===null));
+});
+await check("trusted server is disabled by default and pending real release config cannot write",async()=>{
+  const rpc=async()=>({data:{configuration:config}});
+  assert.equal((await runWordServerWorkflow({timestamp:"2026-10-24T00:00:00.000Z",rpc})).reason,"word_server_not_activated");
+  assert.equal((await runWordServerWorkflow({timestamp:"2026-10-24T00:00:00.000Z",rpc,enabled:true})).reason,"server_release_approval_pending");
+  assert.equal((await readWordServerPublication({rpc:async()=>({error:{message:"synthetic unapproved"}}),timestamp:"2026-10-24T00:00:00.000Z"})).status,"withheld");
+});
+await check("Edge handler refuses browser writes, caller dates, oversized bodies and secret disclosure",async()=>{
+  const previous=globalThis.Deno,oldFetch=globalThis.fetch;let handler,calls=0;
+  const key="synthetic-test-only-not-a-real-key";
+  globalThis.Deno={env:{get:k=>({WORD_WORKFLOW_ENABLED:"true",SUPABASE_URL:"https://synthetic.invalid",SUPABASE_SERVICE_ROLE_KEY:key})[k]},serve:h=>{handler=h;}};
+  globalThis.fetch=async()=>{calls++;return new Response("{}",{status:503});};
+  try {
+    await import(new URL("../supabase/functions/word-publication/index.ts?qa="+Date.now(),import.meta.url));
+    for(const auth of [null,"Bearer synthetic-browser-token"]) {
+      const r=await handler(new Request("https://synthetic.invalid",{method:"POST",headers:auth?{Authorization:auth}:{},body:'{"operation":"reserve"}'}));assert.equal(r.status,403);
+    }
+    assert.equal(calls,0);
+    const headers={Authorization:"Bearer "+key};
+    assert.equal((await handler(new Request("https://synthetic.invalid",{method:"POST",headers,body:JSON.stringify({operation:"reserve",date_key:"2026-10-24"})}))).status,422);
+    assert.equal((await handler(new Request("https://synthetic.invalid",{method:"POST",headers,body:"x".repeat(1025)}))).status,413);
+    const r=await handler(new Request("https://synthetic.invalid",{headers})),body=await r.text();
+    assert.equal(JSON.parse(body).status,"withheld");assert(!body.includes(key));assert.equal(r.headers.get("cache-control"),"no-store");
+  } finally { if(previous===undefined)delete globalThis.Deno;else globalThis.Deno=previous;globalThis.fetch=oldFetch; }
+});
+console.log(`Consolidated Word pipeline validation passed: ${checks} checks. These use synthetic/mocked fixtures; real PostgreSQL execution is reported separately by validate-word-postgres.mjs. No production activation is claimed.`);
