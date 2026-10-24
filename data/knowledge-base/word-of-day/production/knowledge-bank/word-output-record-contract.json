@@ -31,6 +31,24 @@
     "requires_approved_published_assignment": true,
     "requires_separate_release_approval": true,
     "current_state": "withheld",
-    "note": "This is an output projection, not another content bank. Existing AG63 preview fields are never a publication source."
+    "note": "This is an output projection, not another content bank. Existing AG63 preview fields are never a publication source.",
+    "prepared_public_delivery": {
+      "status": "dormant_not_deployed_not_connected",
+      "function_slug": "word-of-day",
+      "methods": ["GET", "HEAD"],
+      "response_contract": "ag70e.word-publication.v1",
+      "date_authority": "server_timestamp_Asia_Kolkata_civil_date",
+      "request_date_or_operation_override_allowed": false,
+      "database_read_rpc": "word_assignment_release_snapshot",
+      "legacy_rotation_or_content_table_reads": false,
+      "cache_policy": "no-store for browser and CDN; no stale or conditional responses",
+      "rollover_policy": "fresh IST date on every request; withhold if midnight occurs during the read",
+      "public_copy_policy": "allowlisted reviewed copy and approval references only; no ledger, drafts or review notes",
+      "activation_variable": "WORD_PUBLIC_FEED_ENABLED",
+      "activation_default": false,
+      "homepage_connector_changed": false,
+      "runtime_activation": false,
+      "public_output_allowed": false
+    }
   }
 }

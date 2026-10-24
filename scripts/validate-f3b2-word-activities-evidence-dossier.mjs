@@ -7,7 +7,6 @@ const captureBaseline = "20f5e190d28ad708aceac2cbf2df61fd84fafc24";
 const qualificationBaseline = "461b51f22cfd41ce5399944ef851c3e5a17b3cc5";
 const policyBaseline = "78773a9919a53adca89204745cbdfc1b85517486";
 const dossierPath = "data/content-intelligence/quality-reviews/f3b2-word-activities-evidence-dossier.json";
-const validatorPath = "scripts/validate-f3b2-word-activities-evidence-dossier.mjs";
 const manifestPath = "data/knowledge-base/word-of-day/production/production-bank-manifest.json";
 const wordBase = "data/knowledge-base/word-of-day/";
 const knowledgeBase = wordBase + "production/knowledge-bank/";
@@ -635,63 +634,52 @@ check("manifest change only annotates legacy layout and points to real v2 contai
   for (const key of annotation.legacy_path_fields) assert.equal(fs.existsSync(old[key]), false);
   for (const p of Object.values(sources.foundation_manifest.banks)) assert(fs.existsSync(p));
 });
-check("baseline and tracked scope preserve homepage, historical sources and protected owners", () => {
-  const releasePreparationBaseline = "efb63d525816957f923118cb9e7bc98d4ef3f7e6";
-  if (git("rev-parse", "HEAD").trim() === releasePreparationBaseline) {
-    assert.equal(git("rev-parse", "origin/main").trim(), releasePreparationBaseline);
-    assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-    const tracked=[dossierPath,validatorPath,"data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json",
-      "scripts/lib/ag70d-word-assignment-store.mjs","scripts/lib/ag70e-word-postgres-adapter.mjs","supabase/migrations/20261023_word_assignment_preparation.sql",
-      "scripts/validate-word-production-completion.mjs","docs/knowledge/f3b-production-release-readiness.md"];
-    const added=["scripts/lib/ag70e-word-server-workflow.mjs","scripts/validate-word-postgres.mjs","supabase/functions/word-publication/index.ts"];
-    assert.deepEqual(sorted(git("diff","--name-only").trim().split("\n").filter(Boolean)),sorted(tracked));
-    assert.deepEqual(sorted(git("status","--short","--untracked-files=normal").trimEnd().split("\n")),sorted([...tracked.map(p=>" M "+p),...added.map(p=>"?? "+(p.startsWith("supabase/functions/word-publication/")?"supabase/functions/word-publication/":p)),"?? prototypes/"]));
-    assert.equal(git("ls-files","--others","--exclude-standard","--","supabase/functions/word-publication").trim(),"supabase/functions/word-publication/index.ts");
-    const preserved=structuredClone(dossier);delete preserved.consolidated_production_preparation.final_release_review;
-    assert.deepEqual(preserved,JSON.parse(git("show",releasePreparationBaseline+":"+dossierPath)));
-    return;
+// Checkout/staging shape is an operational preflight, not evidence of approval.
+// Historical source/copy comparisons above remain immutable provenance checks.
+function assertClosedPublicationBoundary(output, release, contract) {
+  assert.equal(output.contract_version, "ag70e.word-publication.v1");
+  assert.equal(output.status, "withheld"); assert.equal(output.assignment, null);
+  assert.equal(output.public_output_allowed, false); assert.equal(output.runtime_activation, false);
+  assert.equal(release.contract_version, "ag70e.word-release.v1");
+  assert.equal(release.publication_scope, "global_public_word"); assert.equal(release.timezone, "Asia/Kolkata");
+  assert.equal(release.runtime_activation, false); assert.equal(release.public_output_allowed, false);
+  assert.equal(release.persistence.enabled, false); assert.equal(release.scheduler.enabled, false);
+  assert.equal(release.scheduler.automatic_publication, false);
+  for (const section of [release.context, release.precedence, release.publication]) {
+    assert.equal(section.review_status, "pending"); assert.equal(section.approval_ref, null);
   }
-  const completionBaseline = "1aaf29764604285f42108a131122e495ac3f8b71";
-  if (git("rev-parse", "HEAD").trim() === completionBaseline) {
-    assert.equal(git("rev-parse", "origin/main").trim(), completionBaseline);
-    assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-    const tracked = [dossierPath, governingFiles.output_contract, "assets/js/drishvara-v2-homepage.js", "assets/css/drishvara-v2-homepage.css", validatorPath];
-    assert.deepEqual(sorted(git("diff", "--name-only", completionBaseline, "--").trim().split("\n").filter(Boolean)), sorted(tracked));
-    const added = ["data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json", "generated/word-of-day-publication.json",
-      "scripts/lib/ag70e-word-postgres-adapter.mjs", "scripts/lib/ag70e-word-publication-pipeline.mjs", "scripts/lib/ag70e-word-test-fixtures.mjs",
-      "supabase/migrations/20261023_word_assignment_preparation.sql", "scripts/validate-word-production-completion.mjs", "scripts/qa-word-publication-local.mjs",
-      "docs/knowledge/f3b-production-release-readiness.md"];
-    const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
-    assert.deepEqual(sorted(status), sorted([...tracked.map(p => " M " + p), ...added.map(p => "?? " + p), "?? prototypes/"]));
-    const historical = structuredClone(dossier); delete historical.consolidated_production_preparation;
-    assert.deepEqual(historical, JSON.parse(git("show", completionBaseline + ":" + dossierPath)));
-    return;
-  }
-  const executionBaseline = "a4013e86fb39b87421a0269c81f74333c689feb1";
-  if (git("rev-parse", "HEAD").trim() === executionBaseline) {
-    assert.equal(git("rev-parse", "origin/main").trim(), executionBaseline);
-    assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-    assert.deepEqual(git("diff", "--name-only", executionBaseline, "--").trim().split("\n").filter(Boolean), [validatorPath]);
-    assert.equal(fs.readFileSync(dossierPath, "utf8"), git("show", executionBaseline + ":" + dossierPath));
-    const newFiles = ["scripts/lib/ag70d-word-selection-engine.mjs", "scripts/lib/ag70d-word-assignment-store.mjs",
-      "scripts/lib/ag70d-word-assignment-test-adapter.mjs", "scripts/validate-ag70d-word-selection-engine.mjs",
-      "docs/knowledge/f3b6-f3b8-word-assignment-persistence-design.md"];
-    const expected = [" M " + validatorPath, ...newFiles.map(p => "?? " + p), "?? prototypes/"];
-    const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
-    assert.deepEqual(sorted(status), sorted(expected));
-    return;
-  }
-  assert.equal(git("rev-parse", "HEAD").trim(), policyBaseline);
-  assert.equal(git("rev-parse", "origin/main").trim(), policyBaseline);
-  assert.equal(git("diff", "--cached", "--name-only").trim(), "");
-  const trackedPaths = [validatorPath, "scripts/validate-ag70d-word-methodology-supersession.mjs", "scripts/generate-ag70d-word-methodology-supersession.mjs",
-    governingFiles.methodology, wordBase + "production/methodology/ag70d-selection-flow-v2.json",
-    wordBase + "production/methodology/ag70d-duplicate-control-and-history-rules.json"];
-  const tracked = git("diff", "--name-only", policyBaseline, "--").trim().split("\n").filter(Boolean);
-  assert.deepEqual(sorted(tracked), sorted(trackedPaths));
-  assert.equal(fs.readFileSync(dossierPath, "utf8"), git("show", policyBaseline + ":" + dossierPath));
-  const expectedStatus = [...trackedPaths.map(p => " M " + p), "?? scripts/validate-ag70d-word-selection-policy-fixtures.mjs", "?? prototypes/"];
-  const status = git("status", "--short", "--untracked-files=normal").trimEnd().split("\n");
-  assert.deepEqual(sorted(status), sorted(expectedStatus));
+  assert.deepEqual(release.precedence.candidate_order, []);
+  assert.deepEqual(release.publication.approved_publication_event_refs, []);
+  assert.equal(release.publication.public_output_allowed, false); assert.equal(release.publication.runtime_activation, false);
+  assert.equal(release.publisher_decisions.publisher_id, null);
+  assert.equal(release.publisher_decisions.signature_or_decision_record_ref, null);
+  assert(Object.values(release.publisher_decisions.operations).every(value => value === null));
+  const boundary = contract.governed_publication_contract;
+  assert.equal(boundary.version, output.contract_version);
+  assert.equal(boundary.read_only_target, "generated/word-of-day-publication.json");
+  assert.equal(boundary.requires_approved_published_assignment, true);
+  assert.equal(boundary.requires_separate_release_approval, true);
+  assert.equal(boundary.current_state, "withheld");
+}
+const publicationOutput = json("generated/word-of-day-publication.json");
+const releaseConfig = json(wordBase + "production/methodology/ag70d-word-release-configuration.json");
+check("consolidation preserves the historical dossier outside its explicit preparation section", () => {
+  const preserved = structuredClone(dossier); delete preserved.consolidated_production_preparation;
+  assert.deepEqual(preserved, JSON.parse(git("show", "1aaf29764604285f42108a131122e495ac3f8b71:" + dossierPath)));
+});
+check("later release review preserves all prior consolidated dossier fields", () => {
+  const preserved = structuredClone(dossier); delete preserved.consolidated_production_preparation.final_release_review;
+  assert.deepEqual(preserved, JSON.parse(git("show", "efb63d525816957f923118cb9e7bc98d4ef3f7e6:" + dossierPath)));
+});
+check("current publication contracts remain closed independently of HEAD and staged-file shape", () => {
+  assertClosedPublicationBoundary(publicationOutput, releaseConfig, sources.output_contract);
+});
+for (const [name, mutate] of [
+  ["published-envelope promotion", (o) => { o.status = "published"; }],
+  ["server activation", (_o, r) => { r.persistence.enabled = true; }],
+  ["release-gate bypass", (_o, _r, c) => { c.governed_publication_contract.requires_separate_release_approval = false; }]
+]) check("reject " + name + " without approval", () => {
+  const args = [publicationOutput, releaseConfig, sources.output_contract].map(value => structuredClone(value));
+  mutate(...args); assert.throws(() => assertClosedPublicationBoundary(...args), { name: "AssertionError" });
 });
 console.log(`F3B-2/F3B-3/F3B-4 validation passed: ${checks} checks. AI-assisted analysis and non-executable contract checks only; no human approval, selection or public output.`);

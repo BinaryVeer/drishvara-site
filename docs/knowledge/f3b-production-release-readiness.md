@@ -283,3 +283,328 @@ their explicit local/synthetic versus managed-production limitations.
   midnight scheduler run, production output, managed auth/grants and crash/failover
   durability have not been certified. No test result grants a human review or
   production release approval.
+
+## Hosted reconciliation and dormant public feed, 24 October 2026
+
+Inspection baseline: `7437ebbfca134d8f490828e392d561621cf097ea` on `main`,
+equal to `origin/main`. Local linkage was explicitly authorized and established
+with CLI 2.108.0 for `pajlabwwszmhjhabxprf`, Drishvara Phase-I, `ap-south-1`
+(Mumbai). Generated `supabase/.temp/` linkage metadata is local-only and must not
+be staged. No secret values were printed or copied into this report.
+
+### Hosted evidence and migration preview
+
+SELECT-only Management API queries succeeded as `postgres`; this does not prove
+ordinary browser-role access or a working direct PostgreSQL connection. Actual
+server version is 17.6 (project metadata build 17.6.1.104). The linked
+`supabase migration list --linked` operation timed out and was terminated at
+60 seconds; no database password was supplied or requested from the user.
+No `db push`, including `db push --dry-run`, was run because the current
+instruction explicitly prohibited `db push`. The preview below is a read-only
+catalog comparison, not a successful CLI migration dry run.
+
+`supabase_migrations.schema_migrations` does not exist. There is therefore no
+recorded migration-version inventory to reconcile automatically. This is NOT
+evidence that historical DDL is unapplied. Hosted objects already exist:
+
+| Local file | Observed hosted evidence | Safe classification |
+| --- | --- | --- |
+| `20260430_b20a_subscriber_backend_schema.sql` | All seven named subscriber/submission/review tables exist with RLS | Historical structure present; full DDL equivalence and execution provenance unverified |
+| `20260527_ag35b_drishvara_controlled_schema.sql` | All five named profile/article/audit tables exist with RLS | Historical structure present; do not replay or infer exact equivalence |
+| `20260527_ag35c_auth_role_mapping.sql` | `profiles` exists; file performs user-specific role upserts | DML application deliberately not inferred; do not rerun or alter current users |
+| `20260624_ag74p_panchang_festival_star_reflection.sql` | All five named governed projection/release tables exist with RLS | Existing Panchang/Star infrastructure; preserve data and policies |
+| `20260625_sup01_panchang_runtime.sql` | All four additional runtime tables exist with RLS | Existing runtime infrastructure, not an empty install |
+| `20260627_sup02_panchang_public_cutover_readiness.sql` | `sup02_public_cutover_requires_active_runtime` constraint and `sup02_runtime_public_read` policy exist | Direct evidence of cutover DDL present; do not replay blindly |
+| `20261023_word_assignment_preparation.sql` | Private Word schema and all `word_assignment_*` public RPCs absent | New infrastructure not present; application still requires separate authorization |
+
+Historical schema beyond these seven files includes `word_corpus`,
+`word_of_day_rotation_rules`, `source_authorities`, `source_texts` and
+`source_confidence_register`. Their definitions are traceable to
+`data/content-intelligence/database-build/sql-drafts/adb05_astro_drishvara_schema_draft.sql`.
+`adb10-live-schema-execution-result-record.json` in the same directory records
+manual operator-side SQL-editor schema execution against this project. Current
+catalog presence corroborates these objects, not byte-identical historical DDL
+or approval of their contents. No existing table was recreated or imported.
+
+### Safe duplicate-version/history reconciliation plan
+
+Both AG35B and AG35C currently use migration version `20260527`; one version
+cannot identify these two independent files. Renaming one and pushing would
+incorrectly present historical role-mapping DML as a new pending operation.
+
+1. Under separate authorization, preserve a recoverable database backup and a
+   schema-only catalog/grant/policy snapshot; review full live definitions against
+   historical SQL, not merely matching table names.
+2. Prepare a reviewed baseline/version map that includes manually applied ADB
+   schema and separates AG35B DDL from AG35C DML. Prefer a verified current-schema
+   baseline with unique full timestamp versions and preserved historical SQL
+   archived outside the active replay queue. Do not invent historical execution
+   dates or mark AG35C applied just because `profiles` exists.
+3. Prove clean reconstruction plus the unchanged Word migration on an isolated
+   schema clone, including data-preserving compatibility and role/grant tests.
+4. Obtain explicit approval for any migration-file reorganization or hosted
+   migration-history registration. No repair or history writes are authorized by
+   this inspection. Do not register all seven old versions as applied blindly.
+5. Only then perform an independently authorized CLI preview. Any eventual
+   production application must contain only reviewed, genuinely pending changes;
+   it must not replay user-role mapping or existing Panchang migrations.
+
+No migrations were renamed, repaired, pushed, reset or executed in this pass.
+
+### Legacy Word versus AG70D/AG70E
+
+Hosted `word_corpus` has two records, `WORD-DHARMA-DRAFT` and
+`WORD-PRATIBHA-DRAFT`: both `under_editorial_verification`, `pending_review` and
+`public_use_allowed = false`. Neither is one of the three qualified-research
+pilot identities. `word_of_day_rotation_rules` contains `ROT-WORD-DRAFT-001`,
+`manual_editorial_rotation`, a 30-day exclusion window and public use false.
+That obsolete repeat-window record does not override AG70D's unused-first,
+no-annual-reset, immutable-history policy and is not consumed by the new feed.
+
+These legacy rows contain lexical/source pointers and coarse review flags, not
+AG70E's exact versioned approved-copy hashes, per-review approvals, registered
+source/release decisions, canonical applicability context or complete assignment
+history. The source registers contain source-level provenance/claim fields;
+their existence or legacy verification flags are not word-level approval.
+Future reuse requires explicit identity/evidence mapping and normal AG70D/AG70E
+qualification. No copying into competing candidate/reviewed/approved banks or
+automatic legacy-table conversion is implemented.
+
+Both legacy Word tables have RLS enabled and no policies. Current table grants
+include SELECT/INSERT/UPDATE/DELETE and TRUNCATE/TRIGGER/REFERENCES for `anon`
+and `authenticated`. RLS with no policies denies ordinary row access, but it
+does not govern every granted operation, notably TRUNCATE. These overbroad
+catalog privileges need separately approved least-privilege hardening and an
+entry-point review. This is not a demonstrated unauthenticated REST exploit;
+no writes or exploit attempts were performed. `service_role` bypasses RLS.
+No existing grants or policies were changed. The prepared private assignment
+schema remains a distinct, restricted server boundary, not a second lexical bank.
+
+### Dormant read-only public delivery
+
+`scripts/lib/ag70e-word-public-feed.mjs` reuses the existing canonical IST date,
+history validation and `projectPublishedWord` approval projector. The separate
+`supabase/functions/word-of-day/index.ts` entry point can call only
+`word_assignment_release_snapshot` and never imports the worker command handler.
+The prepared SQL's six service-role RPCs remain unchanged; only this one read
+RPC is reachable through the feed transport. No reservation, approval or
+publication operation can be requested through this route.
+
+- Only GET and HEAD are accepted. All query parameters, including caller dates
+  and operation names, are rejected. The trusted server derives the IST date.
+- Reads return `ag70e.word-publication.v1`, already accepted by the existing F2
+  renderer. Exact approved release/history/copy/source checks remain mandatory.
+  Future-dated publication timestamps, missing/revoked approvals and invalid
+  snapshots withhold output; there is no legacy or yesterday fallback.
+- Public fields are allowlisted. Raw history, candidate snapshots, reviewer
+  notes and arbitrary copy metadata are not returned. Unexpected hash-bound
+  content/source fields withhold instead of being stripped and falsely relabelled
+  as approved. Published content hashes remain unchanged.
+- Browser and CDN headers are `no-store`; there are no ETags, 304 responses,
+  stale-if-error or stale-while-revalidate policies. Each request reads current
+  approvals. If IST midnight occurs during a read, that response withholds;
+  the next request resolves the new date. Existing F2 midnight expiry is retained.
+- `WORD_PUBLIC_FEED_ENABLED` must explicitly equal `true`; default is disabled.
+  `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are server-only. The outgoing
+  HTTPS RPC has a ten-second timeout and rejects redirects. Caller credentials
+  are never forwarded. No secret values or raw database errors enter responses.
+- Optional `WORD_PUBLIC_FEED_ALLOWED_ORIGIN` must be one exact HTTPS origin;
+  unmatched browser origins are denied, wildcard/credentialed CORS is absent.
+  Without it, trusted server reads without an Origin header remain possible.
+  CORS is a delivery policy, not source approval or caller authentication.
+
+The endpoint is undeployed. `supabase/config.toml` is unchanged: its existing
+`verify_jwt = false` applies only to `calculate-panchang`. Before a genuinely
+public Word feed can be deployed, separately approve a public gateway setting
+for `word-of-day` only, secure server credential configuration and managed Edge
+bundle/auth tests. Never relax `word-publication` worker authentication to make
+the public feed work. Local tests use Node with a Deno registration stub; Deno
+is not installed locally, and relative `.mjs` bundling in the managed runtime
+has not been certified.
+
+The homepage still fetches the unchanged withheld static JSON asset. This route
+does not rewrite that asset. The proposed minimum future cutover is to point the
+existing F2 loader at the approved public read-only endpoint with the approved
+site origin; an alternative same-origin proxy must preserve no-store and must
+not forward browser-supplied operations or credentials. Either connector change
+requires separate approval. No homepage, Vercel, worker or Panchang change is
+included here. Approved AG70E banks remain empty and the three pilots unapproved.
+
+### Hosted capabilities and remaining release operations
+
+- `calculate-panchang` alone remains ACTIVE at version 6 with JWT verification
+  false; neither Word function is deployed. Word imports/SQL do not modify its
+  shared runtime or tables. Shared project-wide service credentials remain a
+  security consideration, not a guarantee of credential-level isolation.
+- `pg_cron` 1.6.4 and `pg_net` 0.20.0 are available but NOT installed. Vault
+  (`supabase_vault`) 0.3.1 and `pgcrypto` 1.3 are installed. No Vault secret values
+  were read and no extension or job was created. The public feed needs no cron
+  or network-call extension; future scheduling is an independent authorization.
+- Database size was 20,106,387 bytes, with 14 current connections and configured
+  `max_connections = 60` at the observation instant. These are not quota, CPU,
+  reserved-slot, pooler or storage-headroom guarantees. Account usage/quotas and
+  compute tier were unavailable through this inspection; no paid upgrade is
+  justified by the observed metadata alone.
+- Release still requires history reconciliation, scoped privilege review,
+  production migration authorization, authenticated evidence/editorial/context/
+  precedence decisions, registered approvals, managed runtime tests, separate
+  feed and worker deployment authorization, and a reviewed homepage connector.
+  Scheduling/publication permissions remain separate and disabled.
+- Rollback: disable the new feed/worker and any separately authorized job, serve
+  the existing withheld envelope and preserve ledger history. Do not reset the
+  shared database, drop legacy data, revoke Panchang access or overwrite history.
+
+Local validation entry point: `node scripts/validate-word-public-feed.mjs`.
+Its 27 checks cover synthetic approval/export, F2 contract compatibility, note
+filtering, method/query/origin restrictions, default dormancy, fresh no-store
+reads, midnight withholding, future timestamp rejection, read-only RPC transport
+and preservation. They are not hosted execution or production publication tests.
+
+Current local results: feed 27, integration 40, retained engine 74, policy 21,
+F1 31 and F2 57 checks passed; AG70D methodology and AG70E foundation passed.
+The existing F3B dossier validator passed its preceding content/governance checks
+but stops at line 684: its fallback Git assertion expects historical baseline
+`78773a9919a53adca89204745cbdfc1b85517486`, not the current `7437ebbf...`.
+That validator was not edited or bypassed, and a complete F3B-suite PASS is not
+claimed. The new feed validator and integration suite separately confirm the
+unchanged banks, closed publication gates and preserved output requirements.
+Three new JS/TS files passed syntax and whitespace checks; the JSON contract
+parses successfully. No build, hosted migration, production write, deployment,
+schedule, commit or push was performed in this pass.
+
+## Controlled maintenance and security preparation, 24 October 2026
+
+Baseline remains `7437ebbfca134d8f490828e392d561621cf097ea`; remote `main`
+was independently checked with `git ls-remote`. This section supersedes only
+the preceding stale-validator limitation, not its content or release decisions.
+The four existing public-feed code/contract files remain byte-identical to the
+start of this maintenance pass. All prior text in this document is retained.
+No production operation or repository closure is authorized by this record.
+
+### Dependency classifications and deliberate retention
+
+Reference searches covered current HTML/JS, package/build entries, Word/D04
+contracts, governance/quality records, Supabase SQL/Edge owners and Admin/Editor
+workflows; relevant Git history was checked. The following classes describe
+ownership, not permission to execute a historical generator or publish content.
+
+| Classification | Exact inspected owners/candidates | Decision and dependency evidence |
+| --- | --- | --- |
+| Active production dependency | `assets/js/drishvara-v2-homepage.js`, `generated/word-of-day-publication.json`, `data/knowledge-base/word-of-day/production/knowledge-bank/word-output-record-contract.json` | Preserve the F2 contract, withheld asset and one authoritative renderer; no new homepage connector |
+| Active production dependency | `panchang.html`, `what-stars-say.html`, `assets/js/sup02-panchang-server-controller.js`, `supabase/functions/calculate-panchang/index.ts` | Preserve F1 routes and existing calculation ownership; F1/F2 and AG74P/AG75C validators protect these owners |
+| Active production dependency | `scripts/lib/ag70d-word-selection-engine.mjs`, `scripts/lib/ag70d-word-assignment-store.mjs`, `scripts/lib/ag70e-word-postgres-adapter.mjs`, `scripts/lib/ag70e-word-publication-pipeline.mjs`, `scripts/lib/ag70e-word-server-workflow.mjs` | Preserve current internal/dormant release dependencies; this classification does not imply live activation |
+| Active production dependency | `assets/js/ag36a-admin-live-auth.js`, `assets/js/ag36b-editor-live-auth.js` | Existing auth code reads `profiles`; no legacy Word write consumer identified there. Do not alter unrelated Admin/Editor roles or article permissions |
+| Governed historical/audit evidence | `data/content-intelligence/quality-reviews/f3b2-word-activities-evidence-dossier.json`, `data/knowledge/daily-guidance/daily-guidance-rule-examples-d03.json`, `data/knowledge/daily-guidance/daily-guidance-selection-preview-d04.json` | Preserve original three-word and three-Activities evidence; current F3B validator compares the source fields and rejects false approvals |
+| Governed historical/audit evidence | `data/knowledge/daily-guidance/word-of-day-bank-d02.json`, `data/initial-working-data/word-of-day/ag63a-word-bank-approved-preview.json` | Historical inputs to AG69/F3B identity/source validation, not an alternative AG70E approved bank |
+| Governed historical/audit evidence | `data/content-intelligence/database-build/sql-drafts/adb05_astro_drishvara_schema_draft.sql`, `data/content-intelligence/database-build/adb10-live-schema-execution-result-record.json` | Provenance of manually established hosted Word/source schema; necessary for reconciliation and rollback understanding |
+| Governed historical/audit evidence | All seven original files in `supabase/migrations/`, including both `20260527_*` files | Different DDL and role-mapping DML, not duplicate content. Hosted history remains unregistered; do not delete, rename or replay |
+| Superseded but still referenced | `generated/word-of-day.json`, the AG63B inline loader in `index.html` | Loader remains in the deliberately quarantined shell; AG63B/Z, AG69K, F1/F2 and historical published-path references still depend on it. Do not remove its URL or reopen the shell |
+| Superseded but still referenced | `scripts/generate-ag63a-word-of-the-day-foundation.mjs`, `scripts/generate-ag63b-word-of-the-day-ui-wiring.mjs`, `scripts/generate-ag63z-word-of-the-day-closure.mjs` | Package entry points, historical validators and audit records reference these scripts. Do not run them as current production generation or remove them without a separately reviewed retirement map |
+| Superseded but still referenced | `data/methodology/word-of-day/ag63a-word-of-the-day-methodology.json`, `data/methodology/word-of-day/ag63a-word-selection-rotation-policy.json`, `data/knowledge/daily-guidance/word-of-day-rotation-policy-d02.json` | AG70D supersession map explicitly retains these as legacy references; executable selection stays owned by AG70D v2.1 |
+| Superseded but still referenced | `generated/vedic-guidance-working-data.json`, `scripts/generate-ag65a-vedic-guidance-foundation.mjs`, AG69 source/asset-chain records | F2 Colour/Mantra withholding checks and historical qualification/roadmap references remain; not eligible for age-based deletion |
+| Demonstrably obsolete, duplicate or disposable | Historical HEAD/staged-file-shape branches in `scripts/validate-f3b2-word-activities-evidence-dossier.mjs` | Replaced with stable publication contracts and negative assertions; immutable source comparisons were retained. This is obsolete test logic removal, not deletion of a governance file |
+
+**Repository files deleted: none.** No inspected file satisfied all eight deletion
+conditions. In particular, published paths, build/validator references, governed
+provenance, migration/rollback history or future qualification ownership prevent
+safe deletion. No directory, prototype, research artifact or user backup was
+removed. A future cleanup needs explicit reference retirement and a public URL
+compatibility decision before deleting the retained candidates above.
+
+`/supabase/.temp/` is now excluded by `.gitignore`, with the authorized local
+linkage cache preserved. `prototypes/` remains untracked, unstaged and untouched.
+No broad clean/reset or source-generation command was used.
+
+### Minimal hardening SQL and reconciliation boundary
+
+New, unapplied migration:
+`supabase/migrations/20261024000000_word_legacy_privilege_hardening.sql`.
+It requires PostgreSQL 17+, both expected legacy tables and the three Supabase
+roles. Its explicit transaction and transaction-local `pg_catalog` search path
+limit resolution and rollback behavior. Only `public.word_corpus` and
+`public.word_of_day_rotation_rules` are targeted.
+
+- Revoke INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER and MAINTAIN from
+  PUBLIC, `anon` and `authenticated`; separately revoke column INSERT/UPDATE/
+  REFERENCES so explicit column grants cannot bypass table-level hardening.
+- Preserve existing SELECT grants, owners, schema access, RLS/policies, content
+  and direct service-role grants. Snapshot and compare effective service-role
+  table AND column privileges; unexpected server-access loss aborts atomically.
+- Check effective browser-role privileges after revocation. Inherited table or
+  column grants that remain unsafe cause a governed error and rollback rather
+  than silently claiming hardening succeeded. No global role-membership changes,
+  CASCADE, default-privilege edits, new grants or data operations are performed.
+- Missing target/role or incompatible runtime fails instead of skipping silently.
+  No historical rotation or Word-publication setting is enabled.
+
+Fresh hosted catalog inspection still reports PostgreSQL 17.6, no migration
+ledger table, no assignment schema/RPCs and no legacy Word RLS policies. Exact
+ACLs show direct service-role access and the unnecessary browser-role MAINTAIN
+grant in addition to previously reported privileges. The SQL is prepared, NOT
+applied: those hosted grants have not been fixed by this local work.
+
+There are now eight local migration files: seven originals plus this one new
+uniquely versioned proposal. The duplicate `20260527` is deliberately unresolved.
+The earlier seven-file comparison and non-destructive baseline plan still apply;
+the new file does not make the queue safe for `db push`. No historical migration
+was deleted, renamed, replayed or registered as applied. Hosted `db push`,
+`migration repair` and `db reset` were not run.
+
+Any future rollout needs an approved recoverable schema/grant snapshot, the
+reviewed history reconciliation and a migration plan containing only authorized
+changes. Rollback must not restore broad browser-write privileges automatically;
+review narrowly required server grants while retaining RLS and all existing data.
+
+### Actual isolated PostgreSQL verification
+
+`node scripts/validate-word-legacy-hardening.mjs`: **30 real PostgreSQL checks
+passed** on PostgreSQL 17.11, aarch64 Alpine, using the pinned official image
+`postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb`.
+This is a local PostgreSQL result, not a managed Supabase gateway certification.
+
+The container had network `none`, no published ports or persistent volumes,
+read-only root filesystem, nonroot postgres user, all capabilities dropped,
+no-new-privileges, tmpfs data, 512 MiB memory and one CPU. Synthetic tables/roles
+only were used; no production URL, credentials or content were imported. The
+prepared assignment migration was applied only inside this disposable database.
+
+Tests demonstrated actual denied INSERT/UPDATE/DELETE/TRUNCATE/TRIGGER/REFERENCES/
+MAINTAIN attempts for both browser roles, including permissive synthetic policies
+to distinguish ACL enforcement from RLS default denial. A valid REFERENCES probe
+succeeded before hardening and failed with a permission error afterward. Table
+and column grants, PUBLIC grants, idempotency, inherited privileges, atomic
+failure/rollback, missing targets and server-access preservation were checked.
+Unrelated synthetic Panchang content/ACLs and the actual prepared assignment
+schema's nine tables, six RPCs and disabled controls stayed identical.
+
+The disposable test container and tmpfs data were removed; a label-scoped check
+confirmed no hardening-test containers remained. Other Docker resources were not
+removed or modified. The pinned official image remains a reusable local cache.
+
+### Validator and feed preservation results
+
+F3B now passes **83** checks. Only obsolete current-HEAD/origin/staging-shape
+assumptions were replaced. Historical source/copy comparisons and all prior
+substantive identity, source-integrity, review and publication assertions remain.
+Additional negative cases reject published-envelope promotion, server activation
+and release-gate bypass. Existing immutable Git references remain provenance
+anchors, not a requirement to run the repository at an obsolete commit.
+
+The existing feed still passes **27** local checks without code/contract edits.
+GET/HEAD, approved-snapshot export, IST date, midnight withholding, private-note
+filtering, F2 compatibility and rejection of write methods remain intact. The
+Edge route is still undeployed and default-disabled; managed bundling, public
+gateway settings, server-only credentials and approved connector still need
+separate verification/authorization. No Deno installation or speculative
+production-runtime claim was added.
+
+Other executed results: integration **40**, engine **74**, AG70D policy **21**,
+F1 **31**, F2 **57**; AG70D/AG70E, AG69K, AG74P closure and AG75C validations
+passed. No publication flags, approved records, homepage, calendar, Star result
+bank, calculations, existing Edge worker or backend setting changed. Content,
+policy, migration, deployment, connector and scheduling release blockers remain.
+
+The single `npm run build` completed successfully. Its regenerated readiness
+manifest was the only incidental build output; it was restored to its initially
+clean tracked state. JS/TS syntax, output-contract JSON and whitespace checks
+passed. No source file was deleted and no staged changes were created.
