@@ -1356,6 +1356,59 @@
         "review_status": "pending", "publisher_id": null, "approval_ref": null
       },
       "production_authorization": { "migration": false, "deployment": false, "server_activation": false, "scheduler": false, "first_publication": false },
+      "internal_bank_qualification": {
+        "version": "ag70e.private-bank-observation.v1",
+        "observed_at": "2026-10-25T01:23:21Z",
+        "baseline": "8fa87fa2f61342617eb61075be8f8baea6201648",
+        "role": "Non-executable acquisition, qualification and authorization package; not a competing production bank or approval authority.",
+        "catalog_path": "data/knowledge-base/word-of-day/production/knowledge-bank/internal-lexical-source-catalog.json",
+        "private_root": "/Users/vikashvaibhav/Documents/drishvara-word-bank-private",
+        "bank_commit": "47194d156e68fa8740471b0f385af085cc5ef84dc27a4e418064ae74526f920f",
+        "source_counts": { "MW_1899": 286525, "AP90_1890": 34882, "total_raw_rows": 321407, "distinct_source_headwords_after_quarantine": 211184 },
+        "inventory": { "imported_headword_proposals": 10000, "unique_identity_proposals": 10000, "mechanically_verified": 10000, "linguistically_approved": 0, "ag70e_approved": 0, "actually_publishable": 0, "withheld": 10000, "withdrawn": 0 },
+        "identity_boundary": "Exact NFC Sanskrit source-headword deduplication only. Homographs and sense references remain separate; these are not 10000 linguistically approved semantic identities. Hindi/English equivalence and philosophical suitability are unreviewed; no quota-driven translations were generated.",
+        "verification_scope": "Pinned source and licence checksums, exact entry/line/page locators, source spelling, restricted SLP1-to-Devanagari/IAST roundtrip. This does not establish morphology, etymology, multilingual meaning, original-edition authentication or human sign-off.",
+        "quarantined_source_records": [ { "source": "cologne-mw-1899", "entry_id": "196225", "headword": "videya", "page_column": "966,2", "reason": "Malformed <LEND>< terminator; preserved in raw source, excluded from candidate evidence." } ],
+        "source_use_assessment": {
+          "internal_corpus_basis": "Observed pinned Cologne csl-orig CC BY-SA 4.0 licence, retained with attribution, source versions and modification notice. Not a claim that all modern dictionary transcriptions are unrestricted.",
+          "attribution_and_sharealike": "Retain author, edition, digitizer, source revision, licence and changes. No unrestricted proprietary relicensing; review licence application to exact public excerpts or adaptations before release.",
+          "excluded_bulk_sources": ["DSAL Hindi Sabdasagara", "DSAL-hosted Apte"],
+          "exact_public_reuse_approval_ref": null,
+          "review_status": "pending"
+        },
+        "pilot_review_package": {
+          "path": "/Users/vikashvaibhav/Documents/drishvara-word-bank-private/reviews/pilot-035bc6af986751f7e4655196341402b9a5f9a083e0e0c24c9adc8dc970655fc9.json",
+          "sha256": "7ff118c94ebdbabbe98a54dab3774ad4fbf4bd624a7dc9231ede8526bfde7f5b",
+          "copy_basis": "Existing publisher-review-v2 proposals plus original editorial reflections, unchanged. Source homographs remain proposed evidence, not an approved selected sense. Optional public IAST remains null.",
+          "records": [
+            { "word_id": "reflection", "draft_id": "ag69f_review_draft_001", "lookup_form": "manana", "proposed_public_sense_ref": "MW:156763", "copy_content_hash": "sha256:2698021d4876ab299a5043ddad0d4577bc829068a964d5614babf8b0247846c8" },
+            { "word_id": "discernment", "draft_id": "ag69f_review_draft_004", "lookup_form": "viveka", "proposed_public_sense_ref": "MW:200139-200141", "copy_content_hash": "sha256:0097921231ac601f3a36dd1c049c7f50600c94d386cd34ac0ba767c40f61e870" },
+            { "word_id": "patience", "draft_id": "ag69f_review_draft_005", "lookup_form": "DErya", "proposed_public_sense_ref": "MW:102069", "copy_content_hash": "sha256:f27cde7fc26062505d9572af65341ab429214773116837a906c5a4db91664b1a" }
+          ],
+          "reviews": { "linguistic": "pending", "editorial": "pending", "rights": "pending", "context": "pending", "safety": "pending" },
+          "approval_ref": null
+        },
+        "publisher_decisions_required": [
+          { "decision": "Approve exact version/hash-bound bilingual copy, editorial reflections, source attribution and release scope after qualified reviews.", "review_status": "pending", "publisher_id": null, "approval_ref": null },
+          { "decision": "Approve canonical semantic/equivalence identities, date-context basis and explicit deterministic candidate order; do not repeat global IST/unused-first/standing-policy authorization.", "review_status": "pending", "publisher_id": null, "approval_ref": null },
+          { "decision": "Either retain established etymology as mandatory, or explicitly approve a narrow versioned semantic-only exception when no derivation claim is published, with separately reviewed engine/validator changes. No exception is executable now.", "review_status": "pending", "publisher_id": null, "approval_ref": null },
+          { "decision": "Approve operational scope for genuine approved-record registration, server controls, homepage cutover, daily execution time, monitoring owner, alerts and rollback. No new schedule or public cutover is authorized by internal acquisition.", "review_status": "pending", "publisher_id": null, "approval_ref": null }
+        ],
+        "qualified_reviews_still_required": [
+          "Candidate-specific Sanskrit lexical sense, morphology and displayed inflection; Hindi usage and bilingual accuracy. Mechanical transliteration is not a qualified IAST review.",
+          "Established etymology under the unchanged selector, unless a separately approved semantic-only exception is implemented; no invented derivation or literary attestation.",
+          "Source-use assessment for exact public copy, attribution and applicable ShareAlike obligations; restricted third-party prose remains excluded. Seek external permission only if the proposed use actually requires it.",
+          "Content-hash-bound linguistic, editorial, rights, context and safety reviews; no invented reviewer credentials or sign-offs."
+        ],
+        "ag70e_integration": "Private prepare-engine-bank consumes only the existing authoritative AG70E approved bank, binds local record/version and evidence IDs, and requires existing validApprovedRecord/reviewedWordCopy checks. Current export contains zero records; hosted reference registration and release authority remain independent.",
+        "portable_backup": { "path": "/Users/vikashvaibhav/Documents/drishvara-word-bank-private/backups/licensed-initial-bank.json", "sha256": "08e6baa361b841f29a88b8ec8af9013ebdc6bcdc585332132b966efafe2c1a66", "bytes": 115741851, "real_restore": "passed; all imported evidence re-derived from raw sources; temporary restored copy removed" },
+        "hosted_readback": { "private_tables": 9, "rls_tables": 9, "server_only_rpcs": 7, "browser_table_grants": 0, "browser_rpc_grants": 0, "registered_candidates": 0, "publication_events": 0, "registered_publisher_policies": 1, "persistence_enabled": false, "publication_enabled": false, "word_enable_setting_names": [], "word_worker_version": 1, "word_feed_version": 1, "panchang_version": 6, "pg_cron_installed": false, "pg_net_installed": false },
+        "public_readback": { "feed_http": 503, "feed_status": "withheld", "worker_anonymous_http": 401, "homepage_http": 200, "homepage_connector": "empty/disabled", "word_card": "Under verification", "desktop_mobile_evidence": "Prior 1440px/390px withheld-render checks reused; no frontend source changed. No approved live-word rendering claimed." },
+        "runtime_activation": false,
+        "public_output_allowed": false,
+        "production_approved": false,
+        "status": "NOT LIVE; no qualified initial publication batch exists"
+      },
       "publication_activation_review": {
         "baseline": "3fe48298f42684440b07f7476c0bd6c6adc91575",
         "observed_on": "2026-10-24",

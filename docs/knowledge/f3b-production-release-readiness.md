@@ -994,3 +994,80 @@ checks, AG70E empty-bank validation, JavaScript/JSON syntax and diff whitespace.
 The unaffected 64 real PostgreSQL and prior policy/F1/F2 results are reused.
 No production bundle changed, so no additional build or website deployment was
 needed. Only the dossier, this record and the focused validator changed locally.
+
+### Private lexical bank and consolidated authorization package
+
+The local bank is populated, not just designed. It lives outside the webroot at
+`/Users/vikashvaibhav/Documents/drishvara-word-bank-private` (owner-only directory).
+Pinned Cologne MW 1899 and AP90 1890 contain 286,525 and 34,882 raw rows. After
+quarantining MW 196225's malformed terminator, 211,184 distinct source headwords
+were available. A deterministic capacity sample contains **10,000 unique Sanskrit
+headword proposals**. All 10,000 passed source/checksum/entry and transliteration
+roundtrip checks. None is a linguistically approved semantic identity or a
+verified Hindi/English equivalent. Homographs and source senses remain separate
+evidence; philosophical suitability is pending, not inferred from sampling.
+
+The observed pinned data licence is CC BY-SA 4.0. Raw text, licence, author/edition,
+digitizer attribution, version checksums and change notices remain private and
+identifiable. No restricted DSAL corpus was bulk-imported. Export preserves these
+materials; redistribution or exact public adaptation still needs the recorded
+licence/attribution assessment, not unrestricted proprietary relicensing.
+
+Internal commands (no Supabase writes, selectors or publication side effects):
+
+```sh
+node scripts/word-lexical-bank.mjs acquire
+node scripts/word-lexical-bank.mjs ingest --limit 10000
+node scripts/word-lexical-bank.mjs status
+node scripts/word-lexical-bank.mjs search --query patience --state VERIFIED --limit 10
+node scripts/word-lexical-bank.mjs review-batch
+node scripts/word-lexical-bank.mjs prepare-engine-bank
+node scripts/word-lexical-bank.mjs export --out /private/path/new-backup.json
+node scripts/word-lexical-bank.mjs restore --from /private/path/new-backup.json --root /private/path/new-bank
+```
+
+`--catalog` accepts another reviewed, pinned Cologne-format CC BY-SA source
+catalog; unknown formats/licences are rejected, not guessed. Imports are additive
+and idempotent; corrections/withdrawals append version-checked events and cannot
+erase prior withdrawal. `correct`/`withdraw` require `--id`, `--reason` and
+`--expected-version`. Private history uses exclusive local file locking,
+content-addressed commits and atomic CURRENT replacement, not a claim of
+PostgreSQL transactions or protection against a malicious filesystem owner.
+Local withdrawal blocks subsequent exports; managed revocation still uses the
+existing separately authorized server workflow, not a new automatic writer.
+Restore re-derives imported records from raw source checksums, rather than
+trusting copied approval flags. The real 115,741,851-byte backup restored all
+10,000 records with identical history; its disposable restored copy was removed.
+
+The existing dossier's `final_release_review.internal_bank_qualification` is the
+single consolidated authorization package. Its private three-word copy bundle
+preserves the historical IDs, proposed EN/HI/SA text and original editorial
+reflections, binds exact content hashes and keeps all five review kinds pending.
+The other 9,997 entries have no invented bilingual copy. No second approved bank
+was created: the engine export consumes only existing AG70E approved contracts,
+with matching local versions and source references. It currently exports zero.
+
+Publisher decisions: exact copy/attribution after review; canonical equivalence,
+context and explicit order; retention of mandatory established etymology versus
+an explicitly versioned semantic-only exception; then operational registration,
+cutover, schedule and monitoring approval. Global IST, unused-first and standing
+policy are already authorized. Qualified Sanskrit/Hindi/morphology review and
+exact-use source assessment remain necessary; optional public IAST is omitted.
+The etymology exception is only a proposal, with no engine or policy weakening.
+
+Fresh read-only hosted checks found nine RLS tables, seven service-only RPCs,
+zero browser table/RPC grants, zero candidates/events, and only the previously
+registered publisher policy. Both controls are false, WORD enable settings
+absent, Word functions v1, Panchang v6, pg_cron/pg_net not installed. Feed 503,
+anonymous worker 401, homepage 200 with empty connector and Under verification.
+Prior desktop/mobile and real PostgreSQL evidence is reused because their code
+has not changed. No migration, hosted import, secret update, schedule, site
+deployment or publication was performed. **Approved 0; publishable 0; NOT LIVE.**
+
+Focused validation: 75 private-bank checks (including the real corpus, two local
+writer processes and a synthetic qualified export into the unchanged selector),
+46 publication integration checks, 36 feed checks, 83 dossier preservation checks
+and AG70E empty-bank validation passed. The real backup restore is an additional
+executed check. Prior 64 real PostgreSQL checks and F1/F2 evidence are reused,
+not presented as freshly rerun. Syntax, JSON and diff checks passed; internal-only
+changes require no production website build. No commit or push was performed.

@@ -1,0 +1,55 @@
+{
+  "version": "ag70e.internal-source-catalog.v1",
+  "purpose": "Licensed private corpus acquisition, not production content or source approval.",
+  "data_revision": "e4742e12cde786b1a2d10e0507808620a4f2c8eb",
+  "license": {
+    "id": "CC-BY-SA-4.0",
+    "url": "https://raw.githubusercontent.com/sanskrit-lexicon/csl-orig/e4742e12cde786b1a2d10e0507808620a4f2c8eb/LICENSE",
+    "sha256": "0b7fc2608b6d990314e908569407a6058b4a29175167c6d91ca0070c946661be",
+    "internal_use": "Store licensed data with attribution and licence; no unrestricted proprietary relicensing.",
+    "redistribution": "Preserve attribution, licence, change notices and applicable ShareAlike obligations. Exact public copy/source-use review is separate.",
+    "commercial_use": "The observed CC BY-SA 4.0 grant does not contain a NonCommercial restriction; all applicable conditions still apply.",
+    "public_source_review_status": "pending",
+    "public_reuse_approval_ref": null
+  },
+  "sources": [
+    {
+      "id": "cologne-mw-1899",
+      "source_reference_id": "src_cologne_digital_sanskrit_dictionaries",
+      "dictionary": "MW",
+      "title": "A Sanskrit-English Dictionary, new edition",
+      "author": "Monier Monier-Williams",
+      "year": 1899,
+      "provider": "Cologne Digital Sanskrit Dictionaries, University of Cologne",
+      "edition_url": "https://sanskrit-lexicon.github.io/csl-guides/dictionaries/mw",
+      "url": "https://raw.githubusercontent.com/sanskrit-lexicon/csl-orig/e4742e12cde786b1a2d10e0507808620a4f2c8eb/v02/mw/mw.txt",
+      "sha256": "e4641dc4384de459408368a9b34b2a13c90a19b0ecd4671f92c055b7578d0129",
+      "filename": "mw.txt",
+      "internal_ingestion_scope": "licensed_private_corpus",
+      "public_approval": false
+    },
+    {
+      "id": "cologne-ap90-1890",
+      "source_reference_id": "src_cologne_digital_sanskrit_dictionaries",
+      "dictionary": "AP90",
+      "title": "The Practical Sanskrit-English Dictionary, revised and enlarged",
+      "author": "Vaman Shivram Apte",
+      "year": 1890,
+      "provider": "Cologne Digital Sanskrit Dictionaries, University of Cologne",
+      "edition_url": "https://sanskrit-lexicon.github.io/csl-guides/dictionaries/ap90",
+      "url": "https://raw.githubusercontent.com/sanskrit-lexicon/csl-orig/e4742e12cde786b1a2d10e0507808620a4f2c8eb/v02/ap90/ap90.txt",
+      "sha256": "f5c408de803aad0f16737936b4030ef8fe673dc0c60ad9135aa892f73d708229",
+      "filename": "ap90.txt",
+      "internal_ingestion_scope": "licensed_private_corpus",
+      "public_approval": false
+    }
+  ],
+  "excluded": [
+    { "source": "DSAL Hindi Sabdasagara and DSAL-hosted Apte", "reason": "No bulk-use permission established for these separately hosted datasets; do not inherit Cologne's licence by dictionary title." }
+  ],
+  "ag70e_approved_bank_path": "data/knowledge-base/word-of-day/production/knowledge-bank/approved-output-candidate-bank.json",
+  "ag70e_evidence_contract_path": "data/knowledge-base/word-of-day/production/knowledge-bank/lexical-source-evidence-map.json",
+  "identity_scope": "Source-headword proposals with separately preserved homograph/sense references, not an approved cross-language equivalence map.",
+  "runtime_activation": false,
+  "public_output_allowed": false
+}
