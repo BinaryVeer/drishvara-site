@@ -227,3 +227,74 @@ body:has(.f2-hero) .nav-timezone-slot { display: none !important; }
  .f2-daily .f2-day-card dl div { grid-template-columns:55px minmax(0,1fr); gap:3px; }
  .f2-daily .f2-panchang,.f2-daily .f2-day-card:nth-child(2),.f2-daily .f2-day-card:last-child { grid-column:auto; }
 }
+
+
+/* DRISHVARA GLANCE V5 — higher-detail artwork, text contrast, and neutral colour theming.
+   Scope is exclusively the five Your Day at a Glance cards. NO publishing or feed changes. */
+.f2-daily .f2-day-card {
+  background: #fff9ee;
+  border-color: #d9cab4;
+}
+.f2-daily .f2-day-card::before {
+  width: 48%;
+  background-size: cover;
+  background-position: center;
+  filter: none;
+}
+.f2-daily .f2-day-card::after {
+  background: linear-gradient(90deg,
+    rgba(255,250,242,1) 0%,
+    rgba(255,250,242,.995) 30%,
+    rgba(255,250,242,.965) 49%,
+    rgba(255,250,242,.79) 66%,
+    rgba(255,250,242,.39) 84%,
+    rgba(255,250,242,.12) 100%);
+}
+.f2-daily .f2-day-card:nth-child(1)::before {
+  background-image: url("../hero/varanasi-sunset-ai.png");
+  background-position: 71% 58%;
+}
+.f2-daily .f2-day-card:nth-child(2)::before {
+  background-image: url("../daily-glance/glance-observance-v5.svg");
+}
+.f2-daily .f2-day-card:nth-child(3)::before {
+  background-image: url("../daily-glance/glance-word-v5.svg");
+}
+.f2-daily .f2-day-card:nth-child(4)::before {
+  background-image: url("../daily-glance/glance-colour-neutral-v5.svg");
+}
+.f2-daily .f2-day-card:nth-child(5)::before {
+  background-image: url("../daily-glance/glance-mantra-v5.svg");
+}
+/* Legibility remains independent of the art's hue, even when values change. */
+.f2-daily .f2-day-card h3,
+.f2-daily .f2-day-card strong,
+.f2-daily .f2-day-card dt,
+.f2-daily .f2-day-card dd,
+.f2-daily .f2-day-card p {
+  text-shadow: 0 1px 2px rgba(255,250,242,.98), 0 0 8px rgba(255,250,242,.90);
+}
+.f2-daily .f2-day-card h3 { color: #08243c; }
+.f2-daily .f2-day-card .f2-day-value { color: #0f2942; }
+.f2-daily .f2-day-card p,
+.f2-daily .f2-day-card dt { color: #283c51; }
+.f2-daily .f2-day-card dd { color: #122e48; }
+.f2-daily .f2-day-card:nth-child(2) > .f2-day-value,
+.f2-daily .f2-day-card.f2-publication > .f2-day-value {
+  line-height: 1.23;
+}
+.f2-daily .f2-day-card a,
+.f2-daily .f2-day-card summary { color: #85410c; }
+/* FUTURE APPROVED COLOUR CONTRACT (inert until a reviewed published value is supplied).
+   A trusted renderer verifies the publication record, then sets
+   data-f2-approved-colour="true" and --f2-public-colour: #RRGGBB.
+   Unverified/withheld values MUST NOT set these attributes. */
+.f2-daily .f2-day-card:nth-child(4)[data-f2-approved-colour="true"]::before {
+  background-image:
+    linear-gradient(var(--f2-public-colour, #c0b8ab), var(--f2-public-colour, #c0b8ab)),
+    url("../daily-glance/glance-colour-neutral-v5.svg");
+  background-blend-mode: color, normal;
+}
+.f2-daily .f2-day-card:nth-child(4)[data-f2-approved-colour="true"] h3::before {
+  background-color: var(--f2-public-colour, #c0b8ab);
+}
