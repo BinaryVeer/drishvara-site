@@ -1071,3 +1071,104 @@ and AG70E empty-bank validation passed. The real backup restore is an additional
 executed check. Prior 64 real PostgreSQL checks and F1/F2 evidence are reused,
 not presented as freshly rerun. Syntax, JSON and diff checks passed; internal-only
 changes require no production website build. No commit or push was performed.
+
+### Current 365-candidate qualification and authorized minimum contract
+
+The supplied 608-row structural shortlist, 10,000-row inventory and audit JSON
+were reconciled to the unchanged private bank. There are now 365 private curated
+drafts: 70 from the shortlist and 295 from the wider bank. Each retains one exact
+source sense, entry/page/line locator, source-body hash, Sanskrit lookup form,
+mechanical IAST, proposed English/Hindi explanations, original editorial draft
+copy and copy/record hashes. These are not approved canonical semantic identities.
+Hindi text is explicitly an AI-assisted proposed gloss, not authenticated Hindi
+lexical evidence. Unresolved reference-only and title candidates were not used.
+
+The first 30 have dedicated bilingual editorial copy and a readable review file;
+the batch register covers all 365, with nine pending review/approval columns and
+explicit exceptions. Immutable private paths and SHA-256 receipts are in the
+existing dossier's `final_release_review.content_qualification`. No second
+approved content bank or daily selector was created. Qualified linguistic,
+source-use and publisher-copy approvals are still zero. First-30 release-ready:
+zero. Source/sense inspection by AI is not a qualified human sign-off.
+
+The publisher explicitly authorized the claim-conditional etymology amendment on
+25 October 2026. `drishvara-word-minimum-policy@2` is recorded separately from the
+unchanged standing policy. Versioned semantic-only records may use `not_claimed`
+only with a no-claim declaration bound to exact public copy and an approved
+linguistic review. Displayed etymological claims still need established evidence;
+unversioned records keep the old rule. All other gates are unchanged.
+
+The additive preparation migration `20261025000000_word_claim_conditional_etymology.sql`
+is UNAPPLIED. It replaces one guarded predicate in the existing RPC, rejects an
+unexpected installed definition, preserves transaction/history ownership and
+requires the exact policy payload in the managed immutable registry. No policy
+reference or candidate was registered remotely. The 79 real PostgreSQL checks
+passed in an isolated synthetic-only container, which was removed. The first run
+hit a synthetic identifier collision; a separate fixture review ID corrected it,
+without weakening a production assertion. The feed preservation check now permits
+only the exact authorized amendment while comparing all other settings unchanged.
+
+To reproduce the private package, run `scripts/prepare-word-content-qualification.mjs`
+with the curated package JSON (its preserved `input_seed_rows`) followed by the
+three original input paths: structural shortlist CSV, full inventory CSV, audit
+JSON. Input hashes remain traceable; output records are immutable and hash-bound.
+The focused validator accepts the package and batch-register paths. No output is
+written under public assets or to a Supabase table.
+
+Remaining sequence: obtain actual first-30 language/source-use reviews and
+publisher copy decisions, register genuine canonical/context/order approvals,
+then authorize only the new Word migration, policy/approved-word registration,
+compatible Word function deployment, controls, schedule/monitoring and connector
+cutover. Existing IST/unused-first/standing decisions need no reapproval. Do not
+apply old migrations with blanket `db push`. No hosted writes, scheduling,
+publication, commit, push or deployment was performed. **NOT LIVE.**
+
+### Full-bank meaning preparation and reader output
+
+The existing preparer now accepts `--full-bank CURATED_JSON SUBMISSIONS_JSON`.
+It produces immutable, private research records for all 10,000 existing bank
+identities, a pipeline report and a readable review of supplied textual drafts.
+It preserves the original bank and 365-copy package. Submission records must
+reference an existing bank ID/version; access failures, quotations, source URLs
+and pending reviews remain explicit. It is not an automatic web-research worker.
+
+The initial one-word draft is preserved as an immutable research artifact.
+The 26 October word-by-word pass adds 30 individually assessed bilingual short
+essay drafts: 24 words have located textual evidence across six digital witnesses
+(25 word/passage links), including seven direct form-occurrence candidates and
+17 conceptual parallels only. Six words still lack a suitable verified passage;
+two other drafts lack an identified print-edition basis. The 22 structurally
+complete drafts are not authenticated or approved. Inflection, context, source-use
+and exact-copy reviews remain pending. All 10,000 records still fail publication
+gates; 9,970 have not received this individual research pass. Dictionary citation
+leads (17,197 across 7,541 words) remain explicitly unverified, not scripture.
+Private paths/hashes are recorded in the existing dossier's
+`content_qualification.full_bank_meaning_implementation`.
+
+`ag70e.word-copy.v2` adds `ag70e.word-meaning.v1`: expanded EN/HI explanation,
+7-8-word English method summary, separately typed source references, exact text
+and locator, scoped textual relationship and original philosophical essay.
+Five existing reviews plus separate textual/philosophical copy-hash approvals
+are mandatory. Conceptual parallels are never labelled exact-word attestations.
+The authoritative exporter reuses AG70E's existing evidence map for additional
+approved textual evidence, with word/version, copy/passage, source-use and
+locator binding. No second approved bank or daily selection engine was created.
+
+The existing homepage renderer opens a keyboard-accessible meaning dialog for
+eligible content and clears/closes it when content becomes unavailable. No new
+loader, endpoint or polling is introduced. The public reading view uses a compact
+"Process: Source and Context Review" reference linking to sources, not the internal
+method-summary paragraph or a standalone IAST line. This is a presentation label,
+not a new methodology or approval authority. The reader supports local EN/HI
+choice, separately identified textual evidence and editorial interpretation,
+source expansion and full-height mobile reading. The feed remains disabled. Legacy v1
+copies retain their existing behavior. The additive migration
+`20261025010000_word_meaning_copy_contract.sql` extends only the standing-copy
+guard and private structure checks; it is UNAPPLIED on hosted Supabase.
+
+Validation: 93 focused meaning/export checks, all 10,000 research gates, 75 bank
+checks including actual pinned source checksums, and 93 real PostgreSQL checks
+passed. PostgreSQL used a disposable network-isolated container and fictional
+approvals/content; container/tmpfs data removed. Desktop/mobile checks used
+synthetic v1/v2 responses only. Production approvals/publications remain zero.
+Bulk source research and essay preparation are not claimed complete. **NOT LIVE.**

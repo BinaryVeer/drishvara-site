@@ -1,8 +1,7 @@
 import { WORD_SCOPE, WORD_TIMEZONE, canonicalPublicationDate, copySnapshot, validTimestamp } from "./ag70d-word-selection-engine.mjs";
 import { PUBLIC_WORD, projectPublishedWord } from "./ag70e-word-publication-pipeline.mjs";
+import { BASE_COPY_KEYS, MEANING_COPY_VERSION, MEANING_SOURCE_KEYS, copyReviewKinds } from "./ag70e-word-meaning-contract.mjs";
 
-const reviewKinds = ["linguistic", "editorial", "rights", "context", "safety"];
-const contentKeys = ["english", "hindi", "sanskrit", "iast", "meaning_en", "meaning_hi", "reflection_en", "reflection_hi", "sources"];
 const sourceKeys = ["evidence_ref", "title", "publisher", "url", "attribution", "reuse_approval_ref", "review_status"];
 const assignmentKeys = ["assignment_id", "proposal_id", "canonical_lexical_identity_id", "approved_record_version",
   "publication_event_id", "publication_timestamp", "release_approval_ref", "selection_trace_ref", "copy_content_hash", "withdrawn", "superseded"];
@@ -23,15 +22,17 @@ export async function readPublicWord({ readSnapshot, timestamp, enabled = false 
       return withheld(date, "approved_publication_unavailable");
     }
     // Unknown hash-bound fields cannot be stripped and relabelled as approved copy.
+    const contentKeys = copy.contract_version === MEANING_COPY_VERSION ? [...BASE_COPY_KEYS, "meaning_details"] : BASE_COPY_KEYS;
+    const allowedSourceKeys = copy.contract_version === MEANING_COPY_VERSION ? MEANING_SOURCE_KEYS : sourceKeys;
     if (Object.keys(content).some(key => !contentKeys.includes(key)) ||
-        content.sources.some(source => Object.keys(source).some(key => !sourceKeys.includes(key)))) {
+        content.sources.some(source => Object.keys(source).some(key => !allowedSourceKeys.includes(key)))) {
       return withheld(date, "public_copy_contract_unavailable");
     }
     const publicCopy = {
       contract_version: copy.contract_version, version: copy.version, content: copySnapshot(content),
       iast_review_status: content.iast === null ? null : copy.iast_review_status,
       iast_approval_ref: content.iast === null ? null : copy.iast_approval_ref,
-      reviews: reviewKinds.map(kind => pick(copy.reviews.find(review => review.kind === kind &&
+      reviews: copyReviewKinds(copy).map(kind => pick(copy.reviews.find(review => review.kind === kind &&
         review.review_status === "approved" && review.content_hash === assignment.copy_content_hash),
         ["kind", "review_status", "approval_ref", "content_hash"]))
     };

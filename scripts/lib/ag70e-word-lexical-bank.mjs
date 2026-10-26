@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { createHash, randomUUID } from "node:crypto";
 import { canonicalJson, copySnapshot, snapshotHash, validApprovedRecord } from "./ag70d-word-selection-engine.mjs";
 import { reviewedWordCopy } from "./ag70e-word-publication-pipeline.mjs";
+import { MEANING_COPY_VERSION } from "./ag70e-word-meaning-contract.mjs";
 
 export const BANK_VERSION = "ag70e.private-lexical-bank.v1";
 export const PROJECT_ROOT = fileURLToPath(new URL("../../", import.meta.url));
@@ -132,13 +133,32 @@ export function buildCandidates(catalog,buffers,{limit=10000,priority=["manana",
     runtime_activation:false,public_output_allowed:false};
 }
 
-export function approvedEngineBank(snapshot,authoritative){
+function approvedAdditionalEvidence(record, evidenceRef, evidenceMap) {
+  const copy=record.reviewed_publication_copy,source=copy.content.sources.find(s=>s.evidence_ref===evidenceRef);
+  if(copy.contract_version!==MEANING_COPY_VERSION||!source||source.source_kind==="lexical_dictionary")return false;
+  const matches=(evidenceMap.records??[]).filter(e=>e.evidence_id===evidenceRef&&e.linked_record_id===record.output_candidate_id);
+  if(matches.length!==1)return false;
+  const e=matches[0],passage=copy.content.meaning_details.scriptural_references.find(p=>p.evidence_ref===evidenceRef);
+  return e.linked_record_type==="approved_output_candidate"&&e.source_class===source.source_kind&&e.review_status==="approved"&&
+    e.public_use_permission==="approved_for_output"&&e.source_access_checked===true&&e.reuse_note_checked===true&&
+    e.internal_textual_discipline_check==="review_approved"&&typeof e.approval_ref==="string"&&record.approval_record_refs.includes(e.approval_ref)&&
+    e.content_hash===snapshotHash(copy.content)&&e.url===source.url&&e.reuse_approval_ref===source.reuse_approval_ref&&
+    record.approval_record_refs.includes(e.reuse_approval_ref)&&
+    (source.source_kind!=="scriptural_text"||(passage&&e.locator===passage.locator&&e.work===passage.work&&e.edition===passage.edition&&e.passage_hash===snapshotHash(passage)));
+}
+export function approvedEngineBank(snapshot,authoritative,evidenceMap={records:[]}){
   const byId=new Map(snapshot.records.map(r=>[r.record_id,r]));
   const records=(authoritative.records??[]).filter(r=>{
     const local=byId.get(r.lexical_bank_ref?.record_id);
     return local&&!local.withdrawn&&local.internal_state==="VERIFIED"&&r.lexical_bank_ref.version_hash===local.version_hash&&validApprovedRecord(r)&&
       !r.revoked&&!r.withdrawn&&!r.superseded&&reviewedWordCopy(r.reviewed_publication_copy)&&
-      r.source_evidence.every(e=>local.source_evidence.some(s=>s.evidence_id===e.evidence_ref))&&
+      r.source_evidence.some(e=>local.source_evidence.some(s=>s.evidence_id===e.evidence_ref))&&
+      r.source_evidence.every(e=>{
+        const source=r.reviewed_publication_copy.content.sources.find(s=>s.evidence_ref===e.evidence_ref);
+        const localMatch=local.source_evidence.some(s=>s.evidence_id===e.evidence_ref);
+        return localMatch&&(r.reviewed_publication_copy.contract_version!==MEANING_COPY_VERSION||source?.source_kind==="lexical_dictionary")||
+          approvedAdditionalEvidence(r,e.evidence_ref,evidenceMap);
+      })&&
       r.reviewed_publication_copy.content.sources.every(s=>r.source_evidence.some(e=>e.evidence_ref===s.evidence_ref));
   }).map(copySnapshot);
   if(new Set(records.map(r=>r.lexical_bank_ref.record_id)).size!==records.length)fail("ambiguous_approved_bank_identity");
@@ -146,8 +166,8 @@ export function approvedEngineBank(snapshot,authoritative){
     public_output_allowed:false,runtime_activation:false,authority:"Existing AG70E approved bank only; the hosted registry independently authorizes execution."};
 }
 
-export function inventory(snapshot,approvedBank={records:[]}){
-  const approved=approvedEngineBank(snapshot,approvedBank),states={RAW:snapshot.total_raw_entries,CANDIDATE:0,VERIFIED:0,APPROVED:approved.records.length,INELIGIBLE:0};
+export function inventory(snapshot,approvedBank={records:[]},evidenceMap={records:[]}){
+  const approved=approvedEngineBank(snapshot,approvedBank,evidenceMap),states={RAW:snapshot.total_raw_entries,CANDIDATE:0,VERIFIED:0,APPROVED:approved.records.length,INELIGIBLE:0};
   const approvedIds=new Set(approved.records.map(r=>r.lexical_bank_ref.record_id));let mechanical=0;
   for(const r of snapshot.records){if(r.internal_state==="VERIFIED")mechanical++;if(r.withdrawn)states.INELIGIBLE++;else if(!approvedIds.has(r.record_id))states[r.internal_state]++;}
   return {source_rows:snapshot.raw_counts,raw_entries:snapshot.total_raw_entries,source_distinct_headwords:snapshot.source_distinct_headwords,

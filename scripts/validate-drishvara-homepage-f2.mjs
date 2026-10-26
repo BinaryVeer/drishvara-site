@@ -10,6 +10,8 @@ const source = read("assets/js/drishvara-v2-homepage.js");
 const homepage = json("data/homepage-ui.json");
 const index = json("data/article-index.json");
 const base = "8f96d92f423fece74ca0a3000568f7a1c7a56995";
+// Dedicated-page changes were approved separately after F2; other owners retain the F1 baseline.
+const dedicatedPageBase = "3635946c43e4675576c696ea0eb3a79b7c6e2aa4";
 let count = 0;
 function check(name, run) { run(); count++; console.log("PASS " + name); }
 function fixture(reduced = false) {
@@ -128,5 +130,8 @@ check("no additional calculation, location selection or personal storage owner",
   assert(!/localStorage|sessionStorage|indexedDB|drishvaraSup02ApplySelection|drishvaraSup02ChoosePlace|supabase\.co|new MutationObserver/.test(deliveryOnly));
 });
 const protectedPaths=["panchang.html","what-stars-say.html","assets/js/drishvara-v2-panchang.js","assets/js/drishvara-v2-reflect.js","assets/js/drishvara-v2-shell.js","assets/js/sup02-panchang-server-controller.js","assets/logo/logo.png","data/article-index.json","generated/word-of-day.json","generated/vedic-guidance-working-data.json","vercel.json","scripts/lib/ag74k-panchang-input-resolver.mjs","scripts/lib/ag74l-astronomical-engine.mjs","scripts/lib/ag74m-panchang-day-orchestrator.mjs","scripts/lib/ag74n-panchang-calendar-engine.mjs","scripts/lib/ag76-festival-rule-engine.mjs","data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank.json","data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json","data/knowledge-base/panchang-festival/production/ag74n-varanasi-samvat-2083-annual-calendar.json","data/knowledge-base/panchang-festival/production/ag76-r2b-festival-rule-evidence-benchmarks.json"];
-for(const p of protectedPaths) check("F1/protected owner byte-identical: "+p,()=>assert(fs.readFileSync(p).equals(execFileSync("git",["show",base+":"+p],{maxBuffer:64*1024*1024}))));
+for(const p of protectedPaths) {
+  const preservedBase = ["panchang.html", "what-stars-say.html"].includes(p) ? dedicatedPageBase : base;
+  check("F1/protected owner byte-identical: "+p,()=>assert(fs.readFileSync(p).equals(execFileSync("git",["show",preservedBase+":"+p],{maxBuffer:64*1024*1024}))));
+}
 console.log("F2 validation passed: "+count+" focused checks. Carousel timers use synthetic fixtures, not astronomical calculations.");

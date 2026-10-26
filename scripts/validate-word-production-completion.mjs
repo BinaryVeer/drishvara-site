@@ -90,9 +90,11 @@ function frontend() {
   return {api:window.DrishvaraV2Homepage,nodes,timers,window};
 }
 const now=new Date("2026-10-23T10:00:00.000Z");
-await check("existing homepage card renders approved synthetic English/Hindi/Sanskrit/IAST and references", async () => {
+await check("compact homepage card renders approved English/Hindi/Sanskrit and keeps IAST nonvisual", async () => {
   const f=frontend();assert.equal(await f.api.renderWordPublication(fixture.output,now),true);
-  assert(f.nodes.get("f2-word-state").innerHTML.includes('lang="sa"'));assert(f.nodes.get("f2-word-state").innerHTML.includes('lang="sa-Latn"'));
+  const value=f.nodes.get("f2-word-state").innerHTML;
+  assert(value.includes('lang="sa"'));assert(value.includes('lang="en"'));assert(value.includes('lang="hi"'));
+  assert(!value.includes('lang="sa-Latn"'));assert(!value.includes(fixture.output.assignment.reviewed_copy.content.iast));
   assert(f.nodes.get("f2-word-note").innerHTML.includes("Synthetic source"));assert(f.nodes.get("f2-word-note").innerHTML.includes("2026-10-23"));
 });
 for (const mutate of [d=>{d.status="assigned";},d=>{d.public_output_allowed=false;},d=>{d.timezone="UTC";},d=>{d.date_key="2026-10-22";},

@@ -32,6 +32,7 @@ export async function runLexicalCommand(command,args){
   if(command==="restore"){if(!opt["--from"])throw Error("backup_path_required");return restorePrivateBank(opt["--from"],root);}
   const store=new PrivateLexicalStore(root),catalog=read(opt["--catalog"]??path.join(PROJECT_ROOT,relativeCatalog));
   const approved=()=>read(path.join(PROJECT_ROOT,catalog.ag70e_approved_bank_path));
+  const evidence=()=>read(path.join(PROJECT_ROOT,"data/knowledge-base/word-of-day/production/knowledge-bank/lexical-source-evidence-map.json"));
   if(["acquire","ingest"].includes(command)){
     if(!/^[a-f0-9]{40}$/.test(catalog.data_revision))throw Error("invalid_data_revision");
     const raw=path.join(root,"raw",catalog.data_revision);safeFile(path.join(root,"raw"));safeFile(raw);fs.mkdirSync(raw,{recursive:true,mode:0o700});
@@ -48,10 +49,10 @@ export async function runLexicalCommand(command,args){
       modifications:"Parsed source markup; NFC headwords; unaccented SLP1 converted mechanically to Devanagari and IAST. Sense markers and original accented keys retained; no translations inferred.",
       source_catalog_hash:snapshotHash(catalog),public_approval:false};
     const noticeFile=path.join(root,"NOTICE-"+digest(JSON.stringify(catalog))+".json");if(!fs.existsSync(noticeFile))saveNew(noticeFile,notice);
-    return {current,...inventory(store.load().snapshot,approved())};
+    return {current,...inventory(store.load().snapshot,approved(),evidence())};
   }
   const loaded=store.load(),snapshot=loaded.snapshot;
-  if(command==="status")return {current:loaded.current,...inventory(snapshot,approved())};
+  if(command==="status")return {current:loaded.current,...inventory(snapshot,approved(),evidence())};
   if(command==="search"){
     const limit=Number(opt["--limit"]??20);if(!Number.isSafeInteger(limit)||limit<1||limit>100)throw Error("search_limit_1_to_100");
     const query=(opt["--query"]??"").normalize("NFC").toLowerCase(),state=opt["--state"];
@@ -70,7 +71,7 @@ export async function runLexicalCommand(command,args){
     return {path:out,sha256:digest(fs.readFileSync(out)),records:review.records.length,approved:0,public_output_allowed:false};
   }
   if(command==="prepare-engine-bank"){
-    const bank=approvedEngineBank(snapshot,approved()),out=assertPrivateRoot(opt["--out"]??path.join(root,"exports","engine-"+digest(JSON.stringify(bank))+".json"));safeFile(out);
+    const bank=approvedEngineBank(snapshot,approved(),evidence()),out=assertPrivateRoot(opt["--out"]??path.join(root,"exports","engine-"+digest(JSON.stringify(bank))+".json"));safeFile(out);
     if(!fs.existsSync(out))saveNew(out,bank);else if(snapshotHash(read(out))!==snapshotHash(bank))throw Error("engine_export_changed");
     return {path:out,records:bank.records.length,runtime_activation:false,public_output_allowed:false};
   }

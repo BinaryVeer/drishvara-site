@@ -4,6 +4,7 @@ import { WORD_CONTRACT, WORD_SCOPE, WORD_TIMEZONE, candidateRef, snapshotHash } 
 import { createSyntheticWordStore } from "./ag70d-word-assignment-test-adapter.mjs";
 import { executeWordAssignment } from "./ag70d-word-assignment-store.mjs";
 import { projectPublishedWord } from "./ag70e-word-publication-pipeline.mjs";
+import { MEANING_COPY_VERSION, MEANING_VERSION, MEANING_REVIEW_KINDS } from "./ag70e-word-meaning-contract.mjs";
 
 export const syntheticApproval = { review_status: "approved", approval_ref: "synthetic-review-only" };
 export const syntheticIdentityRef = "synthetic-word-map-v1";
@@ -37,8 +38,32 @@ export function syntheticSelection(count = 3, date = "2026-10-23", long = false)
         lemma_id: r.lemma_id, equivalence_group_id: r.equivalence_group_id, representative_candidate_ref: candidateRef(r) })) },
     exclusions: { ...syntheticApproval, entries: [] }, bank: { version: "v1", snapshot_ref: "synthetic-bank", records }, history, expected_history_ref: history.snapshot_ref };
 }
-export async function syntheticPublication(date = "2026-10-23", long = false) {
+export function withSyntheticMeaning(record) {
+  const copy = record.reviewed_publication_copy;
+  copy.contract_version = MEANING_COPY_VERSION;
+  copy.version = "synthetic-meaning-copy-v2";
+  copy.content.sources[0].source_kind = "lexical_dictionary";
+  copy.content.sources.push({ ...copy.content.sources[0], evidence_ref: "synthetic-scripture", source_kind: "scriptural_text" });
+  record.source_evidence.push({ evidence_ref: "synthetic-scripture", review_status: "approved" });
+  copy.content.meaning_details = {
+    contract_version: MEANING_VERSION,
+    explanation_en: "Fictional explanation for isolated pipeline verification only.", explanation_hi: "केवल पृथक परीक्षण के लिए काल्पनिक व्याख्या।",
+    method_summary_en: "Synthetic source selected; explanation written for testing only.", method_summary_hi: "केवल परीक्षण की काल्पनिक विधि।",
+    scriptural_references: [{ evidence_ref: "synthetic-scripture", work: "Fictional test text", locator: "synthetic section 1", edition: "Fictional edition",
+      original_text: "काल्पनिक परीक्षण", original_language: "sa", matched_form: "परीक्षण", relation: "conceptual_parallel",
+      translation_en: "Fictional test translation.", translation_hi: "काल्पनिक परीक्षण अनुवाद।",
+      scope_note_en: "Not real scripture, attestation or verified translation.", scope_note_hi: "यह वास्तविक शास्त्रीय प्रमाण नहीं है।" }],
+    philosophical_essay: { kind: "original_editorial_interpretation", tradition_scope_en: "Fictional perspective, not a real tradition.", tradition_scope_hi: "काल्पनिक परीक्षण दृष्टि।",
+      sections: [{ heading_en: "Synthetic essay", heading_hi: "परीक्षण निबंध", body_en: "This is synthetic long-form text used only to exercise the existing publication path.",
+        body_hi: "यह पाठ केवल प्रकाशन पथ के पृथक परीक्षण के लिए है।", evidence_refs: ["synthetic-source"] }] }
+  };
+  copy.reviews = MEANING_REVIEW_KINDS.map(kind => ({ kind, review_status: "approved", approval_ref: "synthetic-" + kind + "-review", content_hash: snapshotHash(copy.content) }));
+  record.approval_record_refs.push("synthetic-textual-review", "synthetic-philosophical-review");
+  return record;
+}
+export async function syntheticPublication(date = "2026-10-23", long = false, transform = null) {
   const input = syntheticSelection(3, date, long), store = createSyntheticWordStore(syntheticIdentityRef);
+  if (transform) input.bank.records.forEach(transform);
   const authorization = { ...syntheticApproval, trust_boundary: "server_only", actor_ref: "synthetic-server", capabilities: ["reserve", "authorize", "record_publication"], simulation_only: true };
   let previous;
   for (const operation of ["reserve", "authorize", "record_publication"]) {

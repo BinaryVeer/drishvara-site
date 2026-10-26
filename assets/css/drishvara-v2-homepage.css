@@ -51,7 +51,7 @@
 .f2-day-value { font: 700 1.1rem/1.25 var(--dv2-font-editorial); color: #21354c; }
 .f2-publication { min-width: 0; }
 .f2-publication .f2-day-value, .f2-publication p, .f2-publication a { overflow-wrap: anywhere; white-space: normal; }
-.f2-word-scripts, .f2-word-iast { display: block; margin-top: 4px; font-size: 0.9rem; line-height: 1.4; }
+.f2-word-scripts { display: block; margin-top: 4px; font-size: 0.9rem; line-height: 1.4; }
 .f2-day-card p { font-size: .77rem; line-height: 1.4; color: #405063; margin: 8px 0; }
 .f2-day-card dl { display: grid; gap: 3px; width: 100%; margin: 0; font-size: .78rem; }
 .f2-day-card dl div { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 6px; }
@@ -60,6 +60,68 @@
 .f2-day-card a, .f2-day-card summary { min-height: 44px; display: inline-flex; align-items: center; color: #765316; font-size: .78rem; font-weight: 700; text-underline-offset: 3px; cursor: pointer; }
 .f2-day-card details { margin-top: auto; }
 .f2-day-card details p { margin-bottom: 0; }
+.f2-word-explore { margin-top: auto; min-height: 44px; padding: 0; border: 0; background: transparent; color: #765316; font: 700 .78rem var(--dv2-font-ui); cursor: pointer; }
+.f2-word-explore:disabled { color: #586571; cursor: default; }
+html:has(.f2-word-dialog[open]) { overflow: hidden; scrollbar-gutter: stable; }
+.f2-word-dialog, .f2-word-dialog * { box-sizing: border-box; letter-spacing: 0; }
+.f2-word-dialog { width: min(1040px, calc(100% - 48px)); height: min(860px, calc(100dvh - 48px)); max-height: none; max-width: none; padding: 0; border: 1px solid #cbd5dc; border-radius: 8px; background: #fff; color: #19334a; overflow: hidden; }
+.f2-word-dialog[open] { display: grid; grid-template-rows: auto minmax(0,1fr); }
+.f2-word-dialog::backdrop { background: rgba(3,18,32,.7); }
+.f2-word-reader-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 28px; border-bottom: 1px solid #dce3e7; background: #f8fafb; }
+.f2-word-reader-header > div { min-width: 0; }
+.f2-word-dialog h2 { margin: 0; font: 700 1.5rem/1.25 var(--dv2-font-editorial); overflow-wrap: anywhere; }
+.f2-word-dialog .f2-word-reader-eyebrow { margin: 0 0 4px; color: #75602e; font: 700 .7rem/1.4 var(--dv2-font-ui); text-transform: uppercase; }
+.f2-word-dialog #f2-word-reader-date { margin: 5px 0 0; font: .75rem/1.4 var(--dv2-font-ui); color: #526571; }
+.f2-word-reader-controls { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+.f2-word-reader-controls form { margin: 0; }
+.f2-word-reader-controls form button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #afbec6; border-radius: 4px; background: #fff; color: #19334a; font-size: 1.6rem; cursor: pointer; }
+.f2-word-language { display: flex; min-width: 0; padding: 2px; margin: 0; border: 1px solid #b9c7cd; border-radius: 5px; background: #fff; }
+.f2-word-language label { position: relative; display: flex; cursor: pointer; }
+.f2-word-language input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.f2-word-language span { display: grid; place-items: center; min-height: 40px; min-width: 68px; padding: 6px 10px; border-radius: 3px; font: 600 .78rem/1.4 var(--dv2-font-ui); color: #415867; }
+.f2-word-language input:checked + span { background: #17394b; color: #fff; }
+.f2-word-language input:focus-visible + span { outline: 3px solid #946615; outline-offset: -3px; }
+.f2-word-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+#f2-word-meaning { min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.f2-word-reader-layout { display: grid; grid-template-columns: 160px minmax(0,1fr); align-items: start; gap: 32px; padding: 28px; }
+.f2-word-contents { position: sticky; top: 24px; display: grid; gap: 4px; }
+.f2-word-contents a { display: flex; align-items: center; min-height: 44px; padding: 8px 0; border-bottom: 1px solid #e3e9ec; color: #405a68; font: 600 .8rem/1.45 var(--dv2-font-ui); text-decoration: none; }
+.f2-word-contents a:hover { color: #79561d; text-decoration: underline; text-underline-offset: 4px; }
+.f2-word-reader-content { min-width: 0; max-width: 68ch; }
+.f2-word-section + .f2-word-section { margin-top: 32px; padding-top: 28px; border-top: 1px solid #dce3e7; }
+.f2-word-dialog h3 { margin: 0 0 18px; font: 700 1.3rem/1.3 var(--dv2-font-editorial); }
+.f2-word-dialog h4 { margin: 24px 0 10px; font: 700 1.05rem/1.45 var(--dv2-font-editorial); }
+.f2-word-dialog p, .f2-word-dialog blockquote { margin: 12px 0; font-size: 1rem; line-height: 1.75; overflow-wrap: anywhere; }
+.f2-word-dialog .f2-word-headword { margin: 0 0 4px; color: #153a46; font: 700 2rem/1.55 var(--dv2-font-editorial); }
+.f2-word-equivalents p { margin: 0 0 20px; font-weight: 600; }
+.f2-word-method { margin-top: 16px; }
+.f2-word-method p { margin: 0; font-size: .85rem; color: #496170; }
+.f2-word-method a { display: inline-flex; align-items: center; min-height: 44px; }
+.f2-word-dialog .f2-word-editorial-label { margin: -8px 0 18px; font: 600 .78rem/1.5 var(--dv2-font-ui); color: #765316; }
+.f2-word-dialog .f2-word-evidence-scope { padding-left: 12px; border-left: 2px solid #3c7a7a; font-size: .9rem; color: #425d65; }
+.f2-word-dialog blockquote { margin: 20px 0; padding: 12px 0 12px 20px; border-left: 3px solid #b18d38; font: 1.15rem/1.9 var(--dv2-font-editorial); color: #213e4b; }
+.f2-word-dialog a { color: #175074; text-underline-offset: 3px; }
+.f2-word-dialog .f2-word-citations { margin: 10px 0 20px; display: flex; gap: 4px; }
+.f2-word-citations a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-size: .85rem; }
+.f2-word-source { border-bottom: 1px solid #dce3e7; padding: 8px 0 12px; }
+.f2-word-source summary { min-height: 44px; padding: 8px 0; cursor: pointer; font-size: .9rem; line-height: 1.6; overflow-wrap: anywhere; }
+.f2-word-source p, .f2-word-source > a { font-size: .85rem; line-height: 1.65; }
+.f2-word-source > a { display: inline-flex; align-items: center; min-height: 44px; }
+.f2-word-dialog :focus-visible { outline: 3px solid #946615; outline-offset: 3px; }
+.f2-word-dialog #f2-word-dialog-title:focus { outline: none; }
+.f2-word-dialog[data-reading-language="en"] [data-word-language="hi"], .f2-word-dialog[data-reading-language="hi"] [data-word-language="en"] { display: none; }
+@media (max-width: 700px) {
+  html:has(.f2-word-dialog[open]) { scrollbar-gutter: auto; }
+  .f2-word-dialog { inset: 0; width: 100%; height: 100dvh; margin: 0; border: 0; border-radius: 0; }
+  .f2-word-reader-header { align-items: start; flex-wrap: wrap; gap: 12px; padding: max(16px, env(safe-area-inset-top)) 20px 14px; }
+  .f2-word-reader-header > div:first-child { flex: 1; }
+  .f2-word-reader-controls { flex-direction: column-reverse; gap: 10px; align-items: end; }
+  .f2-word-language span { min-width: 58px; }
+  .f2-word-reader-layout { display: block; padding: 0 20px max(28px, env(safe-area-inset-bottom)); }
+  .f2-word-contents { position: static; display: flex; flex-wrap: wrap; gap: 0 18px; padding: 12px 0; margin-bottom: 24px; border-bottom: 1px solid #dce3e7; }
+  .f2-word-contents a { border: 0; padding: 6px 0; }
+  .f2-word-dialog .f2-word-headword { font-size: 1.8rem; }
+}
 .f2-sun-times { margin-top: auto !important; }
 #f2-daily-status { font-size: .69rem; }
 .f2-editorial { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; padding-block: 18px; }

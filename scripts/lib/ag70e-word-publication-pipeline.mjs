@@ -2,9 +2,9 @@ import {
   WORD_SCOPE, WORD_TIMEZONE, approved, nonempty, validCivilDate, validTimestamp, validApprovedRecord,
   canonicalPublicationDate, dateScopeKey, inspectWordHistory, selectDailyWord, copySnapshot, snapshotHash
 } from "./ag70d-word-selection-engine.mjs";
+import { MEANING_COPY_VERSION, reviewedMeaningDetails, copyReviewKinds } from "./ag70e-word-meaning-contract.mjs";
 
 export const PUBLIC_WORD = "ag70e.word-publication.v1";
-const reviewKinds = ["linguistic", "editorial", "rights", "context", "safety"];
 const textFields = ["english", "hindi", "sanskrit", "meaning_en", "meaning_hi", "reflection_en", "reflection_hi"];
 
 export function safeSourceUrl(value) {
@@ -12,14 +12,17 @@ export function safeSourceUrl(value) {
 }
 
 export function reviewedWordCopy(copy) {
-  if (copy?.contract_version !== "ag70e.word-copy.v1" || !nonempty(copy.version) || !copy.content ||
+  try {
+  if (!["ag70e.word-copy.v1", MEANING_COPY_VERSION].includes(copy?.contract_version) || !nonempty(copy.version) || !copy.content ||
       !textFields.every(k => nonempty(copy.content[k])) || !Array.isArray(copy.reviews)) return false;
   const contentHash = snapshotHash(copy.content);
-  if (reviewKinds.some(kind => copy.reviews.filter(r => r.kind === kind && approved(r) && r.content_hash === contentHash).length !== 1)) return false;
+  if (copyReviewKinds(copy).some(kind => copy.reviews.filter(r => r.kind === kind && approved(r) && r.content_hash === contentHash).length !== 1)) return false;
+  if (copy.contract_version === MEANING_COPY_VERSION && !reviewedMeaningDetails(copy, contentHash)) return false;
   if (copy.content.iast !== null && (!nonempty(copy.content.iast) || copy.iast_review_status !== "approved" || !nonempty(copy.iast_approval_ref))) return false;
   return Array.isArray(copy.content.sources) && copy.content.sources.length > 0 && copy.content.sources.every(s =>
     ["evidence_ref", "title", "publisher", "attribution", "reuse_approval_ref"].every(k => nonempty(s[k])) &&
     s.review_status === "approved" && safeSourceUrl(s.url));
+  } catch { return false; }
 }
 
 // No writer: a separate explicit release decision is required even for historical publications.

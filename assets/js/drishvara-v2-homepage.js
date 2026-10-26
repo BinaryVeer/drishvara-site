@@ -52,9 +52,14 @@
         !a || a.withdrawn !== false || a.superseded !== false ||
         !['assignment_id', 'proposal_id', 'canonical_lexical_identity_id', 'approved_record_version', 'publication_event_id', 'publication_timestamp', 'release_approval_ref', 'copy_content_hash', 'selection_trace_ref'].every(function (k) { return text(a[k]); }) ||
         !Number.isFinite(Date.parse(a.publication_timestamp)) || Date.parse(a.publication_timestamp) > now.getTime() ||
-        !copyData || copyData.contract_version !== 'ag70e.word-copy.v1' || !text(copyData.version) || !content || !Array.isArray(copyData.reviews)) return null;
+        !copyData || !['ag70e.word-copy.v1', 'ag70e.word-copy.v2'].includes(copyData.contract_version) || !text(copyData.version) || !content || !Array.isArray(copyData.reviews)) return null;
     if (!['english', 'hindi', 'sanskrit', 'meaning_en', 'meaning_hi', 'reflection_en', 'reflection_hi'].every(function (k) { return text(content[k]); })) return null;
-    if (['linguistic', 'editorial', 'rights', 'context', 'safety'].some(function (kind) {
+    var kinds = ['linguistic', 'editorial', 'rights', 'context', 'safety'];
+    if (copyData.contract_version === 'ag70e.word-copy.v2') {
+      kinds = kinds.concat(['textual', 'philosophical']);
+      if (!validWordMeaningDetails(content)) return null;
+    } else if (Object.prototype.hasOwnProperty.call(content, 'meaning_details')) return null;
+    if (kinds.some(function (kind) {
       return copyData.reviews.filter(function (r) { return r.kind === kind && r.review_status === 'approved' && text(r.approval_ref) && r.content_hash === a.copy_content_hash; }).length !== 1;
     })) return null;
     if (content.iast !== null && (!text(content.iast) || copyData.iast_review_status !== 'approved' || !text(copyData.iast_approval_ref))) return null;
@@ -72,23 +77,83 @@
       return hash === a.copy_content_hash ? content : null;
     } catch (_error) { return null; }
   }
+  function validWordMeaningDetails(content) {
+    try {
+      var d = content.meaning_details, essay = d.philosophical_essay;
+      var text = function (value) { return typeof value === 'string' && value.trim().length > 0; };
+      var words = d.method_summary_en.trim().split(/\s+/).length;
+      var refs = content.sources.map(function (s) { return s.evidence_ref; });
+      return d.contract_version === 'ag70e.word-meaning.v1' && words >= 7 && words <= 8 &&
+        ['explanation_en', 'explanation_hi', 'method_summary_en', 'method_summary_hi'].every(function (k) { return text(d[k]); }) &&
+        Array.isArray(d.scriptural_references) && d.scriptural_references.length > 0 && d.scriptural_references.every(function (p) {
+          return ['evidence_ref', 'work', 'locator', 'edition', 'original_text', 'original_language', 'matched_form', 'translation_en', 'translation_hi', 'scope_note_en', 'scope_note_hi'].every(function (k) { return text(p[k]); }) &&
+            refs.indexOf(p.evidence_ref) >= 0 && content.sources.find(function (s) { return s.evidence_ref === p.evidence_ref; }).source_kind === 'scriptural_text' &&
+            p.original_text.indexOf(p.matched_form) >= 0 && ['direct_word_attestation', 'conceptual_parallel'].indexOf(p.relation) >= 0;
+        }) && essay.kind === 'original_editorial_interpretation' && text(essay.tradition_scope_en) && text(essay.tradition_scope_hi) &&
+        Array.isArray(essay.sections) && essay.sections.length > 0 && essay.sections.every(function (s) {
+          return ['heading_en', 'heading_hi', 'body_en', 'body_hi'].every(function (k) { return text(s[k]); }) &&
+            Array.isArray(s.evidence_refs) && s.evidence_refs.length > 0 && s.evidence_refs.every(function (ref) { return refs.indexOf(ref) >= 0; });
+        });
+    } catch (_error) { return false; }
+  }
+  function wordMeaningMarkup(content) {
+    function bilingual(en, hi) { return '<p lang="en" data-word-language="en">' + escape(en) + '</p><p lang="hi" data-word-language="hi">' + escape(hi) + '</p>'; }
+    function citations(refs) { return '<p class="f2-word-citations">' + refs.map(function (ref) {
+      var index = content.sources.findIndex(function (s) { return s.evidence_ref === ref; });
+      return '<a href="#f2-word-source-' + index + '" aria-label="Source ' + (index + 1) + ': ' + escape(content.sources[index].title) + '">[' + (index + 1) + ']</a>';
+    }).join(' ') + '</p>'; }
+    var d = content.meaning_details;
+    var links = [['f2-word-meaning-section', 'Meaning']];
+    if (d) links.push(['f2-word-textual-section', 'Scriptural evidence'], ['f2-word-essay-section', 'Philosophical essay']);
+    links.push(['f2-word-sources-section', 'Sources']);
+    var html = '<div class="f2-word-reader-layout"><nav class="f2-word-contents" aria-label="Word reading sections">' + links.map(function (link) {
+      return '<a href="#' + link[0] + '">' + link[1] + '</a>';
+    }).join('') + '</nav><div class="f2-word-reader-content"><section class="f2-word-section" id="f2-word-meaning-section" tabindex="-1" aria-labelledby="f2-word-meaning-heading">' +
+      '<h3 id="f2-word-meaning-heading">Meaning</h3><p class="f2-word-headword" lang="sa">' + escape(content.sanskrit) + '</p>' +
+      '<div class="f2-word-equivalents">' + bilingual(content.english, content.hindi) + '</div>' + bilingual(content.meaning_en, content.meaning_hi);
+    if (d) {
+      html += bilingual(d.explanation_en, d.explanation_hi) + '<aside class="f2-word-method" aria-label="Meaning process"><p lang="en" data-word-language="en">Process: <a href="#f2-word-sources-section">Source and Context Review</a></p><p lang="hi" data-word-language="hi">प्रक्रिया: <a href="#f2-word-sources-section">स्रोत और संदर्भ समीक्षा</a></p></aside></section>';
+      html += '<section class="f2-word-section" id="f2-word-textual-section" tabindex="-1" aria-labelledby="f2-word-textual-heading"><h3 id="f2-word-textual-heading">Scriptural references and context</h3>' + d.scriptural_references.map(function (p) {
+        return '<section><h4>' + escape(p.work) + ' &middot; ' + escape(p.locator) + '</h4><p>' + escape(p.edition) + '</p>' +
+          '<p class="f2-word-evidence-scope">' + (p.relation === 'conceptual_parallel' ? 'Related concept, not an exact-word attestation.' : 'Word attestation in the cited passage.') + '</p>' +
+          '<blockquote lang="' + (['sa', 'Sanskrit'].indexOf(p.original_language) >= 0 ? 'sa' : 'und') + '">' + escape(p.original_text) + '</blockquote>' +
+          bilingual(p.translation_en, p.translation_hi) + bilingual(p.scope_note_en, p.scope_note_hi) + citations([p.evidence_ref]) + '</section>';
+      }).join('') + '</section>';
+      html += '<section class="f2-word-section" id="f2-word-essay-section" tabindex="-1" aria-labelledby="f2-word-essay-heading"><h3 id="f2-word-essay-heading">Philosophical perspective</h3>' +
+        '<p class="f2-word-editorial-label">Original editorial interpretation</p>' + bilingual(d.philosophical_essay.tradition_scope_en, d.philosophical_essay.tradition_scope_hi) +
+        d.philosophical_essay.sections.map(function (s) { return '<section><h4><span lang="en" data-word-language="en">' + escape(s.heading_en) + '</span><span lang="hi" data-word-language="hi">' + escape(s.heading_hi) + '</span></h4>' + bilingual(s.body_en, s.body_hi) + citations(s.evidence_refs) + '</section>'; }).join('') + '</section>';
+    } else html += bilingual(content.reflection_en, content.reflection_hi) + '</section>';
+    return html + '<section class="f2-word-section" id="f2-word-sources-section" tabindex="-1" aria-labelledby="f2-word-sources-heading"><h3 id="f2-word-sources-heading">Sources and attribution</h3>' + content.sources.map(function (s, index) {
+      return '<details class="f2-word-source" id="f2-word-source-' + index + '"><summary><span>[' + (index + 1) + '] ' + escape(s.title) + '</span></summary>' +
+        '<p>' + escape(s.publisher) + '</p><p>' + escape(s.attribution) + '</p><a href="' + escape(s.url) + '" target="_blank" rel="noopener noreferrer">View source<span class="f2-word-sr-only">: ' + escape(s.title) + ' (opens in a new tab)</span> &nearr;</a></details>';
+    }).join('') + '</section></div></div>';
+  }
   var wordExpiryTimer = null, wordRolloverTimer = null;
   var wordPaintGeneration = 0, wordReadGeneration = 0;
   async function renderWordPublication(data, now) {
     var generation = ++wordPaintGeneration;
     now = now || new Date();
     var value = document.getElementById('f2-word-state'), description = document.getElementById('f2-word-description'), note = document.getElementById('f2-word-note');
+    var trigger = document.getElementById('f2-word-explore'), dialog = document.getElementById('f2-word-dialog'), body = document.getElementById('f2-word-meaning');
     if (!value || !description || !note) return false;
     window.clearTimeout(wordExpiryTimer); wordExpiryTimer = null;
     var content = await approvedWordPublication(data, now);
     if (generation !== wordPaintGeneration) return false;
     if (!content) {
+      if (trigger) trigger.disabled = true;
+      if (dialog && dialog.open) dialog.close();
+      if (body) body.textContent = '';
+      var readerDate = document.getElementById('f2-word-reader-date');
+      if (readerDate) readerDate.textContent = '';
       value.textContent = 'Under verification'; description.textContent = 'No approved daily word is available for publication.';
       note.textContent = 'Source and publication review is required. No daily selection is inferred.';
       return false;
     }
-    value.innerHTML = '<span lang="en">' + escape(content.english) + '</span><span class="f2-word-scripts"><span lang="hi">' + escape(content.hindi) + '</span> &middot; <span lang="sa">' + escape(content.sanskrit) + '</span></span>' +
-      (content.iast ? '<span class="f2-word-iast" lang="sa-Latn">' + escape(content.iast) + '</span>' : '');
+    if (trigger) trigger.disabled = false;
+    if (body) { body.innerHTML = wordMeaningMarkup(content); body.scrollTop = 0; }
+    var date = document.getElementById('f2-word-reader-date');
+    if (date) date.textContent = data.date_key + ' \u00b7 Asia/Kolkata';
+    value.innerHTML = '<span lang="sa">' + escape(content.sanskrit) + '</span><span class="f2-word-scripts"><span lang="en">' + escape(content.english) + '</span> &middot; <span lang="hi">' + escape(content.hindi) + '</span></span>';
     description.innerHTML = '<span lang="en">' + escape(content.meaning_en) + '</span><br><span lang="hi">' + escape(content.meaning_hi) + '</span>';
     note.innerHTML = '<span lang="en">' + escape(content.reflection_en) + '</span><br><span lang="hi">' + escape(content.reflection_hi) + '</span><br>' + escape(data.date_key) + ' &middot; Asia/Kolkata<br>' +
       content.sources.map(function (s) { return '<a href="' + escape(s.url) + '" rel="noopener noreferrer">' + escape(s.title) + '</a> &middot; ' + escape(s.publisher) + ' &middot; ' + escape(s.attribution); }).join('<br>');
@@ -142,8 +207,8 @@
       ['Tithi', 'Nakshatra', 'Yoga', 'Karana'].map(function (label) { return '<div><dt>' + label + '</dt><dd id="f2-day-' + label.toLowerCase() + '">Unavailable</dd></div>'; }).join('') +
       '</dl><p class="f2-sun-times">Sunrise <strong id="f2-day-sunrise">&mdash;</strong> &middot; Sunset <strong id="f2-day-sunset">&mdash;</strong></p><p id="f2-daily-status">Resolving today\u2019s approved result.</p></article>' +
       '<article class="f2-day-card"><h3>Today\u2019s Observance</h3><strong class="f2-day-value" id="f2-day-observance">Resolving approved observances</strong><p id="f2-day-observance-window"></p><a href="panchang.html">View details &rarr;</a></article>' +
-      ['Word', 'Colour', 'Mantra'].map(function (label) { var id = label.toLowerCase(); return '<article class="f2-day-card f2-publication" data-f2-publication="' + id + '"><h3>' + label + ' of the Day</h3><strong class="f2-day-value" id="f2-' + id + '-state">Under verification</strong><p id="f2-' + id + '-description">No approved daily ' + id + ' is available for publication.</p><details><summary>Publication basis</summary><p id="f2-' + id + '-note">Source and publication review is required. No daily selection is inferred.</p></details></article>'; }).join('') +
-      '</div></div></section><div class="f2-editorial f2-inner">' +
+      ['Word', 'Colour', 'Mantra'].map(function (label) { var id = label.toLowerCase(); return '<article class="f2-day-card f2-publication" data-f2-publication="' + id + '"' + (id === 'word' ? ' data-no-translate' : '') + '><h3>' + label + ' of the Day</h3><strong class="f2-day-value" id="f2-' + id + '-state">Under verification</strong><p id="f2-' + id + '-description">No approved daily ' + id + ' is available for publication.</p>' + (id === 'word' ? '<button type="button" class="f2-word-explore" id="f2-word-explore" aria-haspopup="dialog" aria-controls="f2-word-dialog" disabled>Explore meaning &rarr;</button><p id="f2-word-note" hidden></p>' : '<details><summary>Publication basis</summary><p id="f2-' + id + '-note">Source and publication review is required. No daily selection is inferred.</p></details>') + '</article>'; }).join('') +
+      '</div></div></section><dialog class="f2-word-dialog" id="f2-word-dialog" data-no-translate data-reading-language="en" aria-labelledby="f2-word-dialog-title"><header class="f2-word-reader-header"><div><p class="f2-word-reader-eyebrow">Word of the Day</p><h2 id="f2-word-dialog-title" tabindex="-1">Explore meaning</h2><p id="f2-word-reader-date"></p></div><div class="f2-word-reader-controls"><fieldset class="f2-word-language"><legend class="f2-word-sr-only">Reading language for this word\u2019s meaning and essay</legend><label><input type="radio" name="f2-word-language" value="en" checked><span>English</span></label><label><input type="radio" name="f2-word-language" value="hi"><span lang="hi">हिन्दी</span></label></fieldset><form method="dialog"><button aria-label="Close meaning" title="Close meaning">&times;</button></form></div></header><div id="f2-word-meaning"></div></dialog><div class="f2-editorial f2-inner">' +
       '<section id="read" data-dv2-world="read" aria-labelledby="f2-read-title"><div class="f2-section-heading"><h2 id="f2-read-title">Featured Read</h2><a href="insights.html">View all reads &rarr;</a></div><article id="dv2-lead-read" class="f2-lead"></article></section>' +
       '<section id="explore" data-dv2-world="explore" aria-labelledby="f2-explore-title"><div class="f2-section-heading"><h2 id="f2-explore-title">Explore More</h2><a href="insights.html">Explore all &rarr;</a></div><div id="f2-explore-cards" class="f2-explore-grid"></div></section></div>' +
       '<div class="f2-invitations f2-inner"><section class="f2-membership" aria-labelledby="f2-membership-title"><div><h2 id="f2-membership-title">Go deeper with Drishvara</h2><p>Explore our published reads. Membership is not yet available.</p></div><a class="f2-primary" href="login.html">Account information &rarr;</a></section>' +
@@ -254,6 +319,40 @@
     text('f2-day-observance-window', begins && ends && begins !== 'Not available' && ends !== 'Not available' ? 'Begins ' + time(begins) + ' \u00b7 Ends ' + time(ends) : 'Public timings appear only with an approved observance.');
   }
   function loadPublicationStates() {
+    var explore = document.getElementById('f2-word-explore');
+    var dialog = document.getElementById('f2-word-dialog'), body = document.getElementById('f2-word-meaning');
+    if (explore) explore.onclick = function () {
+      if (!explore.disabled && dialog && !dialog.open) {
+        dialog.showModal();
+        if (body) body.scrollTop = 0;
+        document.getElementById('f2-word-dialog-title').focus({ preventScroll: true });
+      }
+    };
+    if (dialog) dialog.onchange = function (event) {
+      if (event.target.name === 'f2-word-language' && ['en', 'hi'].indexOf(event.target.value) >= 0) dialog.dataset.readingLanguage = event.target.value;
+    };
+    if (dialog) dialog.onkeydown = function (event) {
+      if (event.key !== 'Tab') return;
+      var stops = Array.from(dialog.querySelectorAll('a[href], button, input, summary, [tabindex]')).filter(function (node) {
+        var closed = node.closest('details:not([open])');
+        return !node.disabled && node.tabIndex >= 0 && node.getClientRects().length > 0 && (node.type !== 'radio' || node.checked) &&
+          (!closed || closed.querySelector('summary').contains(node));
+      });
+      var first = stops[0], last = stops[stops.length - 1], active = document.activeElement;
+      if (first && !event.shiftKey && active === last) { event.preventDefault(); first.focus(); }
+      else if (last && event.shiftKey && (active === first || active.id === 'f2-word-dialog-title')) { event.preventDefault(); last.focus(); }
+    };
+    if (body) body.onclick = function (event) {
+      var link = event.target.closest('a[href^="#f2-word-"]');
+      if (!link || !body.contains(link)) return;
+      var target = document.getElementById(link.getAttribute('href').slice(1));
+      if (!target || !body.contains(target)) return;
+      event.preventDefault();
+      if (target.tagName === 'DETAILS') target.open = true;
+      var focusTarget = target.tagName === 'DETAILS' ? target.querySelector('summary') : target;
+      focusTarget.focus({ preventScroll: true });
+      body.scrollTo({ top: body.scrollTop + target.getBoundingClientRect().top - body.getBoundingClientRect().top - 20, behavior: 'auto' });
+    };
     var brand = document.querySelector('.dv2-brand > span');
     if (brand && !brand.querySelector('small')) brand.insertAdjacentHTML('beforeend', '<small>Intelligence for today. Wisdom for life.</small>');
     loadWordPublication();
@@ -272,6 +371,6 @@
     renderFeatured: renderFeatured, renderRead: renderRead, renderExplore: renderExplore, syncDaily: syncDaily,
     loadPublicationStates: loadPublicationStates, publicationStatus: publicationStatus, isTodayResult: isTodayResult,
     dayKey: dayKey, carouselModel: carouselModel, rotationMs: ROTATION_MS,
-    approvedWordPublication: approvedWordPublication, renderWordPublication: renderWordPublication,
+    approvedWordPublication: approvedWordPublication, renderWordPublication: renderWordPublication, wordMeaningMarkup: wordMeaningMarkup,
     configuredWordFeed: configuredWordFeed, loadWordPublication: loadWordPublication };
 })();

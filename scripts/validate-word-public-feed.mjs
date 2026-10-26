@@ -199,7 +199,7 @@ await check("Edge transport is default-dormant and can call only the release-sna
     assert.equal((await edge(request("POST"))).status, 405); assert.equal(calls.length, 1);
   } finally { globalThis.Date = RealDate; globalThis.fetch = oldFetch; if (previous === undefined) delete globalThis.Deno; else globalThis.Deno = previous; }
 });
-await check("protected Panchang, migrations, banks and activation settings are unchanged", () => {
+await check("Panchang, historical migrations, banks and activation unchanged; only the exact authorized etymology amendment differs", () => {
   const paths = ["supabase/config.toml", "supabase/functions/calculate-panchang/index.ts",
     "supabase/migrations/20261023_word_assignment_preparation.sql", "generated/word-of-day-publication.json"];
   const manifest = JSON.parse(read("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json"));
@@ -208,6 +208,13 @@ await check("protected Panchang, migrations, banks and activation settings are u
   for (const path of paths) assert.equal(read(path), execFileSync("git", ["show", baseline + ":" + path], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }), path);
   const contract = JSON.parse(read(contractPath));
   assert.equal(contract.governed_publication_contract.prepared_public_delivery.activation_default, false);
+  assert.deepEqual(contract.governed_publication_contract.meaning_details_extension, {
+    copy_contract: "ag70e.word-copy.v2", details_contract: "ag70e.word-meaning.v1",
+    required_additional_reviews: ["textual", "philosophical"], method_summary_english_word_count: [7, 8],
+    scriptural_relationships: ["direct_word_attestation", "conceptual_parallel"], essay_kind: "original_editorial_interpretation",
+    legacy_copy_contract_preserved: "ag70e.word-copy.v1", activation_default: false
+  });
+  delete contract.governed_publication_contract.meaning_details_extension;
   delete contract.governed_publication_contract.prepared_public_delivery;
   assert.deepEqual(contract, JSON.parse(execFileSync("git", ["show", baseline + ":" + contractPath], { encoding: "utf8" })));
   assert.equal(JSON.parse(read("generated/word-of-day-publication.json")).status, "withheld");
@@ -215,7 +222,16 @@ await check("protected Panchang, migrations, banks and activation settings are u
   const current=JSON.parse(read(configPath));
   assert.equal(current.standing_authorization.enabled,false); assert.equal(current.standing_authorization.production_approval_ref,null);
   delete current.publisher_policy; delete current.standing_authorization;
-  assert.deepEqual(current,JSON.parse(execFileSync("git",["show",baseline+":"+configPath],{encoding:"utf8"})));
+  const prior=JSON.parse(execFileSync("git",["show",baseline+":"+configPath],{encoding:"utf8"}));
+  assert.equal(snapshotHash(current.minimum_publication_contract_amendment),"sha256:5e23851d6db93b2d5348b7808f362f953f2ce13f332aa612ce0e5ba832101904");
+  assert.deepEqual(current.publisher_decisions.etymology,{
+    current_engine_requirement:"established for legacy records; claim-conditional only under the separately versioned minimum contract",
+    approved_exception_ref:"drishvara-word-minimum-policy@2",decision:"approved_narrow_claim_conditional_amendment",
+    approval_ref:"drishvara-publisher-semantic-only-20261025-v1",
+    note:"Explicit publisher reply authorizes only this amendment, not word approval, source clearance, migration, scheduling or publication."
+  });
+  delete current.minimum_publication_contract_amendment;current.publisher_decisions.etymology=prior.publisher_decisions.etymology;
+  assert.deepEqual(current,prior);
 });
 
 const feedUrl = "https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/word-of-day";

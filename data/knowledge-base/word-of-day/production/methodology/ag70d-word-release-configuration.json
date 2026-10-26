@@ -43,7 +43,7 @@
     "canonical_context": { "proposed_model": "one versioned editorial applicability context per canonical date, not user-location-dependent", "approved_context_ref": null, "approved_identity_map_ref": null, "decision": null, "approval_ref": null },
     "selection_precedence": { "proposed_operator": "approved_explicit_candidate_order", "approved_order": [], "decision": null, "approval_ref": null, "required_constraints": ["unused eligible identities first", "no annual reset", "append-only history", "no implicit repeat or fabricated fallback"] },
     "exact_copy_and_attribution": { "proposal_ref": "f3b2-word-activities-evidence-dossier.json.consolidated_production_preparation.final_release_review.publication_copy_proposals", "approved_content_hashes": [], "decision": null, "approval_ref": null },
-    "etymology": { "current_engine_requirement": "established", "approved_exception_ref": null, "decision": null, "approval_ref": null, "note": "An optional public derivation note is not an exemption from internal eligibility. Any semantic-only path requires explicit versioned authorization and subsequent implementation review." },
+    "etymology": { "current_engine_requirement": "established for legacy records; claim-conditional only under the separately versioned minimum contract", "approved_exception_ref": "drishvara-word-minimum-policy@2", "decision": "approved_narrow_claim_conditional_amendment", "approval_ref": "drishvara-publisher-semantic-only-20261025-v1", "note": "Explicit publisher reply authorizes only this amendment, not word approval, source clearance, migration, scheduling or publication." },
     "operations": { "migration_approval_ref": null, "deployment_approval_ref": null, "server_authorization_ref": null, "scheduler_approval_ref": null, "first_publication_approval_ref": null }
   },
   "publisher_policy": {
@@ -82,6 +82,22 @@
     "supersession": "Incompatible AG63/D02/legacy rotation rules cannot authorize reuse; AG70D v2.1 and its existing supersession map remain unchanged.",
     "revocation_and_amendment": "Revoke the immutable registered policy reference or disable standing execution. Amend by appending a newly approved version and updating the separately authorized deployment reference; never rewrite prior decisions or events.",
     "activation_status": "disabled_pending_production_authorization",
+    "runtime_activation": false,
+    "public_output_allowed": false
+  },
+  "minimum_publication_contract_amendment": {
+    "contract_version": "ag70e.word-minimum-publication.v2",
+    "record_ref": "drishvara-word-minimum-policy@2",
+    "review_status": "approved",
+    "approval_ref": "drishvara-publisher-semantic-only-20261025-v1",
+    "decision_date": "2026-10-25",
+    "decision_authority": "Drishvara Publisher",
+    "authorization_evidence": "Explicit user reply to the proposed narrow contract: Authorize this narrow amendment. This is the conversation decision record, not an invented signature or independent linguistic review.",
+    "etymology_required_when": "An etymological claim is displayed in public copy.",
+    "semantic_only_requirements": ["Explicit no-etymological-claim declaration bound to the exact public-copy hash and approved linguistic review", "Approved morphology and one source-backed bounded sense", "Approved Hindi accuracy, IAST when displayed, source-use and exact-copy reviews", "Existing canonical identity, applicability, precedence, history and operational authorization gates"],
+    "unchanged_requirements": ["No fabricated etymology or source evidence", "No automatic word-level approval", "No browser approval authority", "No changes to unused-first, global IST or withholding", "Unknown contract versions fail closed"],
+    "legacy_records": "Unversioned records retain the established-etymology requirement.",
+    "hosted_activation": "Requires separately authorized additive migration, policy-reference registration and compatible worker deployment; none is authorized or executed by this content pass.",
     "runtime_activation": false,
     "public_output_allowed": false
   },

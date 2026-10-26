@@ -4,11 +4,13 @@ import vm from "node:vm";
 import { webcrypto } from "node:crypto";
 import { execFileSync, spawn } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
-import { canonicalJson, snapshotHash, inspectWordHistory, selectionAuthorityHashes, selectDailyWord, canonicalPublicationDate } from "./lib/ag70d-word-selection-engine.mjs";
+import { canonicalJson, snapshotHash, inspectWordHistory, selectionAuthorityHashes, selectDailyWord, canonicalPublicationDate,
+  validEtymologyQualification, MINIMUM_WORD_CONTRACT, MINIMUM_WORD_POLICY_REF, MINIMUM_WORD_APPROVAL_REF } from "./lib/ag70d-word-selection-engine.mjs";
 import { executeWordAssignment } from "./lib/ag70d-word-assignment-store.mjs";
 import { createSyntheticWordStore } from "./lib/ag70d-word-assignment-test-adapter.mjs";
 import { createWordPostgresAdapter } from "./lib/ag70e-word-postgres-adapter.mjs";
-import { syntheticSelection, syntheticApproval, syntheticIdentityRef } from "./lib/ag70e-word-test-fixtures.mjs";
+import { syntheticSelection, syntheticApproval, syntheticIdentityRef, syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
+import { meaningStructureErrors } from "./lib/ag70e-word-meaning-contract.mjs";
 import { projectPublishedWord } from "./lib/ag70e-word-publication-pipeline.mjs";
 import { runWordServerWorkflow, runWordDailyPublication, validWordStandingPolicy, readWordServerPublication } from "./lib/ag70e-word-server-workflow.mjs";
 import { createWordPublicFeedHandler } from "./lib/ag70e-word-public-feed.mjs";
@@ -488,6 +490,117 @@ try {
     const result=await runWordDailyPublication({rpc,timestamp:s.timestamp,enabled:true,scheduled:true});
     assert.equal(result.status,"completed",JSON.stringify(result));assert.equal((await history()).revision,4);
     assert.equal(actualConfig.scheduler.enabled,false);assert.equal(actualConfig.scheduler.automatic_publication,false);
+  });
+  await resetDatabase();
+  const amendmentSql=fs.readFileSync("supabase/migrations/20261025000000_word_claim_conditional_etymology.sql","utf8");
+  const semantic=syntheticSelection(1),candidate=semantic.bank.records[0];
+  const claimReview="synthetic-semantic-no-claim-approval";
+  candidate.reviewed_publication_copy.reviews.find(r=>r.kind==="linguistic").approval_ref=claimReview;
+  candidate.etymology_status="not_claimed";candidate.approval_record_refs.push(claimReview);
+  candidate.minimum_publication_contract={contract_version:MINIMUM_WORD_CONTRACT,policy_ref:MINIMUM_WORD_POLICY_REF,policy_approval_ref:MINIMUM_WORD_APPROVAL_REF,
+    copy_content_hash:snapshotHash(candidate.reviewed_publication_copy.content),etymological_claim_displayed:false,claim_review_ref:claimReview,claim_evidence_refs:[]};
+  await check("conditional-etymology migration applies only the bounded guard, with nine existing RLS tables preserved",async()=>{
+    await query(amendmentSql);
+    assert.equal(await query("select count(*) from pg_tables where schemaname='drishvara_word_private' and rowsecurity;"),"9");
+    assert.equal(await query("select persistence_enabled or publication_enabled from drishvara_word_private.controls;"),"f");
+    assert.equal(await query("select position('valid_word_etymology(record)' in pg_get_functiondef('public.word_assignment_commit(jsonb)'::regprocedure))>0;"),"t");
+  });
+  await check("conditional-etymology preparation is idempotent without registering approvals",async()=>{
+    await query(amendmentSql);assert.equal(await query("select count(*) from drishvara_word_private.versioned_references;"),"0");
+  });
+  await check("local semantic qualification cannot bypass missing managed policy registration",async()=>{
+    assert(validEtymologyQualification(candidate));assert.equal(await query(`select drishvara_word_private.valid_word_etymology(${j(candidate)});`),"f");
+    await registerInput(semantic);await register(claimReview,"approval",{synthetic_only:true});
+    const request=await capture(semantic,"reserve");await denied(`select public.word_assignment_commit(${j(request)});`,"service_role",/word_record_not_approved/);
+    assert.equal((await history()).revision,0);
+  });
+  await check("exact registered policy permits a fully synthetic semantic-only reservation, not public publication",async()=>{
+    await register(MINIMUM_WORD_POLICY_REF,"approval",actualConfig.minimum_publication_contract_amendment);
+    assert.equal(await query(`select drishvara_word_private.valid_word_etymology(${j(candidate)});`),"t");
+    const request=await capture(semantic,"reserve");assert.equal((await commit(request)).status,"committed");assert.equal((await commit(request)).status,"idempotent_replay");
+    assert.equal(await query("select publication_enabled from drishvara_word_private.controls;"),"f");
+    assert.equal(await query("select count(*) from drishvara_word_private.events where payload->>'event_type'='publication';"),"0");
+  });
+  for(const [label,edit]of [
+    ["unknown version",r=>r.minimum_publication_contract.contract_version="unknown"],
+    ["unknown nested key",r=>r.minimum_publication_contract.override=true],
+    ["changed public copy",r=>r.reviewed_publication_copy.content.meaning_en="Changed"],
+    ["pending linguistic review",r=>r.reviewed_publication_copy.reviews[0].review_status="pending"],
+    ["claim without established etymology",r=>r.minimum_publication_contract.etymological_claim_displayed=true],
+    ["unsupported claim source",r=>{r.etymology_status="established";r.minimum_publication_contract.etymological_claim_displayed=true;r.minimum_publication_contract.claim_evidence_refs=["wrong"];}],
+    ["false string",r=>r.minimum_publication_contract.etymological_claim_displayed="false"],
+    ["unversioned unverified etymology",r=>delete r.minimum_publication_contract]
+  ])await check("conditional-etymology Node/PostgreSQL fail-closed parity: "+label,async()=>{
+    const r=JSON.parse(canonicalJson(candidate));edit(r);assert.equal(validEtymologyQualification(r),false);
+    assert.equal(await query(`select drishvara_word_private.valid_word_etymology(${j(r)});`),"f");
+  });
+  await check("displayed claims retain established-etymology and matching-source requirements",async()=>{
+    const r=JSON.parse(canonicalJson(candidate));r.etymology_status="established";r.minimum_publication_contract.etymological_claim_displayed=true;
+    r.minimum_publication_contract.claim_evidence_refs=["synthetic-source"];assert(validEtymologyQualification(r));
+    assert.equal(await query(`select drishvara_word_private.valid_word_etymology(${j(r)});`),"t");
+    r.source_evidence[0].review_status="pending";assert.equal(await query(`select drishvara_word_private.valid_word_etymology(${j(r)});`),"f");
+  });
+  await check("new helper is not directly executable by browser or service roles",async()=>{
+    for(const role of ["anon","authenticated","service_role"])await denied(`select drishvara_word_private.valid_word_etymology(${j(candidate)});`,role);
+  });
+  await check("policy revocation immediately withholds new semantic-only qualification",async()=>{
+    await query(`insert into drishvara_word_private.reference_revocations(ref_id,approval_ref,reason) values(${literal(MINIMUM_WORD_POLICY_REF)},'synthetic-revoke','isolated test');`);
+    assert.equal(await query(`select drishvara_word_private.valid_word_etymology(${j(candidate)});`),"f");
+  });
+  s=await standingSetup({count:1,inputChange:i=>i.bank.records.forEach(withSyntheticMeaning)});
+  const expanded=s.input.bank.records[0],meaningSql=fs.readFileSync("supabase/migrations/20261025010000_word_meaning_copy_contract.sql","utf8");
+  await check("unextended SQL refuses v2 instead of silently publishing incomplete content",async()=>{
+    await denied(`select drishvara_word_private.assert_standing_copy(${j(expanded)});`,null,/word_standing_copy_unapproved/);
+    assert.equal((await history()).revision,0);
+  });
+  await check("meaning migration compiles idempotently without changing controls, tables or existing references",async()=>{
+    const controls=await query("select row_to_json(c)::text from drishvara_word_private.controls c;");
+    const refs=await query("select count(*) from drishvara_word_private.versioned_references;");
+    await query(meaningSql);await query(meaningSql);
+    assert.equal(await query("select row_to_json(c)::text from drishvara_word_private.controls c;"),controls);
+    assert.equal(await query("select count(*) from drishvara_word_private.versioned_references;"),refs);
+    assert.equal(await query("select count(*) from pg_tables where schemaname='drishvara_word_private' and rowsecurity;"),"9");
+  });
+  await check("expanded-copy flags cannot substitute for managed review registration",async()=>{
+    await denied(`select drishvara_word_private.assert_standing_copy(${j(expanded)});`,null,/word_reference_unapproved/);
+    assert.equal((await s.run()).status,"withheld");
+    assert.equal((await history()).events.filter(e=>e.event_type==="publication").length,0);
+  });
+  for(const review of expanded.reviewed_publication_copy.reviews) {
+    if(await query(`select count(*) from drishvara_word_private.versioned_references where ref_id=${literal(review.approval_ref)};`)==="0") await register(review.approval_ref,"approval",{test_only:true});
+  }
+  await register("synthetic-scripture","source",{test_only:true,not_real_scripture:true});
+  await check("registered synthetic expanded copy passes SQL and existing standing publication",async()=>{
+    await query(`select drishvara_word_private.assert_standing_copy(${j(expanded)});`);
+    assert.equal((await s.run()).status,"completed");assert.equal((await history()).revision,4);
+    const output=await readWordServerPublication({rpc,timestamp:s.timestamp});
+    assert.equal(output.status,"published");assert.equal(output.assignment.reviewed_copy.contract_version,"ag70e.word-copy.v2");
+    assert.deepEqual(output.assignment.reviewed_copy.content.meaning_details,expanded.reviewed_publication_copy.content.meaning_details);
+  });
+  for(const [label,edit]of [
+    ["unknown nested key",c=>c.meaning_details.override=true],
+    ["missing print edition",c=>c.meaning_details.scriptural_references[0].edition=null],
+    ["dictionary cited as scripture",c=>c.meaning_details.scriptural_references[0].evidence_ref="synthetic-source"],
+    ["unmatched quotation form",c=>c.meaning_details.scriptural_references[0].matched_form="not in passage"],
+    ["unlinked essay source",c=>c.meaning_details.philosophical_essay.sections[0].evidence_refs=["unknown"]],
+    ["missing essay",c=>c.meaning_details.philosophical_essay=null],
+    ["invalid methodology length",c=>c.meaning_details.method_summary_en="Too short."]
+  ])await check("meaning Node/PostgreSQL structural parity: "+label,async()=>{
+    const c=structuredClone(expanded.reviewed_publication_copy.content);edit(c);assert(meaningStructureErrors(c).length>0);
+    await denied(`select drishvara_word_private.assert_meaning_structure(${j(c)});`,null,/word_meaning_structure_invalid/);
+  });
+  await check("meaning helpers remain inaccessible to browser and service roles",async()=>{
+    for(const role of ["anon","authenticated","service_role"])await denied(`select drishvara_word_private.assert_meaning_structure(${j(expanded.reviewed_publication_copy.content)});`,role);
+  });
+  await check("legacy v1 SQL copy approval remains valid after the additive extension",async()=>{
+    const legacy=syntheticWord(77);legacy.reviewed_publication_copy.reviews.forEach(review=>review.approval_ref="synthetic-linguistic-review");
+    await register(legacy.output_candidate_id+"@"+legacy.approved_record_version,"candidate",legacy);
+    await query(`select drishvara_word_private.assert_standing_copy(${j(legacy)});`);
+  });
+  await check("expanded source revocation immediately withholds the real PostgreSQL export",async()=>{
+    await query("insert into drishvara_word_private.reference_revocations(ref_id,approval_ref,reason) values('synthetic-scripture','synthetic-revoke','test only');");
+    assert.equal((await readWordServerPublication({rpc,timestamp:s.timestamp})).status,"withheld");
+    assert.equal((await history()).revision,4);
   });
   console.log(`Real PostgreSQL checks passed: ${checks}. Synthetic records only; no production certification or publication.`);
 } finally {

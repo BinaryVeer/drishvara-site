@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { reviewedMeaningDetails } from "./ag70e-word-meaning-contract.mjs";
 
 export const WORD_CONTRACT = "ag70d.word-assignment.v1";
 export const WORD_POLICY = "ag70d.word-selection.v2.1";
@@ -58,6 +59,26 @@ export function canonicalPublicationDate(timestamp) {
   return validCivilDate(date) ? date : null;
 }
 
+export const MINIMUM_WORD_CONTRACT = "ag70e.word-minimum-publication.v2";
+export const MINIMUM_WORD_POLICY_REF = "drishvara-word-minimum-policy@2";
+export const MINIMUM_WORD_APPROVAL_REF = "drishvara-publisher-semantic-only-20261025-v1";
+export function validEtymologyQualification(record) {
+  try {
+    const q=record?.minimum_publication_contract;
+    if(q===undefined)return record?.etymology_status==="established";
+    const keys=["contract_version","policy_ref","policy_approval_ref","copy_content_hash","etymological_claim_displayed","claim_review_ref","claim_evidence_refs"];
+    if(!q||Object.keys(q).some(k=>!keys.includes(k))||q.contract_version!==MINIMUM_WORD_CONTRACT||
+      q.policy_ref!==MINIMUM_WORD_POLICY_REF||q.policy_approval_ref!==MINIMUM_WORD_APPROVAL_REF||
+      typeof q.etymological_claim_displayed!=="boolean"||!Array.isArray(q.claim_evidence_refs)||
+      !nonempty(q.claim_review_ref)||!record.approval_record_refs?.includes(q.claim_review_ref))return false;
+    const copy=record.reviewed_publication_copy;
+    if(!copy?.content||q.copy_content_hash!==snapshotHash(copy.content)||!Array.isArray(copy.reviews)||
+      copy.reviews.filter(r=>r.kind==="linguistic"&&approved(r)&&r.content_hash===q.copy_content_hash&&r.approval_ref===q.claim_review_ref).length!==1)return false;
+    if(!q.etymological_claim_displayed)return ["not_claimed","established"].includes(record.etymology_status)&&q.claim_evidence_refs.length===0;
+    return record.etymology_status==="established"&&q.claim_evidence_refs.length>0&&q.claim_evidence_refs.every(ref=>
+      nonempty(ref)&&record.source_evidence?.some(e=>e.evidence_ref===ref&&e.review_status==="approved"));
+  }catch{return false;}
+}
 export function validApprovedRecord(record) {
   return record && nonempty(record.output_candidate_id) && nonempty(record.selected_word_id) && nonempty(record.approved_record_version) &&
     nonempty(record.canonical_lexical_identity_id) && nonempty(record.equivalence_group_id) && nonempty(record.lemma_id) &&
@@ -65,7 +86,11 @@ export function validApprovedRecord(record) {
     ["withdrawn", "revoked", "superseded"].every(k => record[k] === undefined || typeof record[k] === "boolean") &&
     record.production_approved === true && record.approved_for_daily_output === true && record.review_status === "approved" &&
     record.public_use_permission === "approved_for_output" && ["established", "review_approved"].includes(record.morphology_status) &&
-    record.semantics_status === "supported" && record.etymology_status === "established" &&
+    record.semantics_status === "supported" && validEtymologyQualification(record) &&
+    (!record.reviewed_publication_copy || record.reviewed_publication_copy.contract_version === "ag70e.word-copy.v1" ||
+      (reviewedMeaningDetails(record.reviewed_publication_copy, snapshotHash(record.reviewed_publication_copy.content)) &&
+        record.reviewed_publication_copy.reviews.filter(r => ["textual", "philosophical"].includes(r.kind) && r.review_status === "approved")
+          .every(r => record.approval_record_refs?.includes(r.approval_ref)))) &&
     Array.isArray(record.approval_record_refs) && record.approval_record_refs.length > 0 && record.approval_record_refs.every(nonempty) &&
     Array.isArray(record.source_evidence) && record.source_evidence.length > 0 && record.source_evidence.every(e => nonempty(e.evidence_ref) && e.review_status === "approved");
 }
