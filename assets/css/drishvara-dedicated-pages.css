@@ -202,3 +202,67 @@ body.d-dedicated.drishvara-v2-active #ag75d-e2-star-place-choice-panel p { color
 @media(max-width:1200px) {
   body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel .ag74i-date-controls { grid-template-columns:70px minmax(90px,1fr) 40px !important; }
 }
+/* Supplied reference artwork and completed dedicated-page panels. */
+.d-dedicated .d-page-hero { background-image:linear-gradient(90deg,#061527f5,#061527b3 44%,#06152722),url('../dedicated-pages/panchang-hero.webp'); }
+.d-dedicated .d-hero-what-stars-say { background-image:linear-gradient(90deg,#061527ed,#06152799 42%,#06152711),url('../dedicated-pages/reflection-hero.webp'); }
+.d-dedicated .d-hero-sports { background-image:linear-gradient(90deg,#061527ed,#06152799 42%,#06152711),url('../dedicated-pages/sports-hero.webp'); }
+.d-dedicated .r-calendar-layout { display:grid; grid-template-columns:minmax(0,2.15fr) minmax(240px,1fr); gap:12px; margin-top:14px; align-items:start; }
+.d-dedicated .r-calendar-right { display:grid; gap:12px; min-width:0; }
+.d-dedicated .r-explorer-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; }
+.d-dedicated .r-explorer-head h2 { margin:0; }
+.d-dedicated .r-month-controls { display:flex; gap:6px; align-items:center; }
+.d-dedicated .r-month-controls label { min-width:0; }
+.d-dedicated .r-month-controls input { color-scheme:dark; width:145px; min-width:0; }
+.d-dedicated .r-month-controls button,.d-dedicated .r-month-controls input,.d-dedicated .r-view-day,.d-dedicated .r-gold { border:1px solid #886f3a; border-radius:4px; padding:9px; background:#102a44; color:#f5d47f; font:12px Arial,sans-serif; min-height:38px; }
+.d-dedicated .r-gold { background:#efc359; color:#092039; font-weight:700; }
+.d-dedicated .r-calendar-scope,.d-dedicated .r-selection-note { color:#b8c9d9; font-size:11px; line-height:1.6; }
+.d-dedicated .r-calendar-body { display:grid; grid-template-columns:minmax(0,1fr) 155px; gap:14px; }
+.d-dedicated .r-month-table { width:100%; table-layout:fixed; border-collapse:collapse; }
+.d-dedicated .r-month-table th { padding:10px 0; color:#efc359; font-size:11px; text-align:center; }
+.d-dedicated .r-month-table td { padding:2px; border:1px solid #304960; text-align:center; }
+.d-dedicated .r-month-table button { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; width:100%; min-height:48px; border:1px solid transparent; border-radius:4px; background:transparent; color:#fff7e6; font:13px Arial,sans-serif; }
+.d-dedicated .r-month-table .r-other-month button { color:#8ba0b4; }
+.d-dedicated .r-month-table button[aria-pressed="true"] { border-color:#efc359; background:#3d3c32; }
+.d-dedicated .r-event-dot { width:5px; height:5px; border-radius:50%; background:#efc359; }
+.d-dedicated .r-calendar-sidebar h3,.d-dedicated .r-day-detail h3 { font:17px Georgia,serif; }
+.d-dedicated .r-category-filters { display:grid; gap:5px; }
+.d-dedicated .r-category-filters button,.d-dedicated .r-month-agenda button,.d-dedicated .r-upcoming-list button { padding:8px; border:1px solid #304960; background:#0a2035; color:#e1eaf1; text-align:left; font:11px/1.5 Arial,sans-serif; border-radius:4px; }
+.d-dedicated .r-category-filters button[aria-pressed="true"] { border-color:#efc359; color:#f5d47f; }
+.d-dedicated .r-category-filters button[data-unavailable] { color:#a9bbca; }
+.d-dedicated .r-month-agenda { display:grid; gap:5px; margin-top:18px; }
+.d-dedicated .r-month-agenda h3 { margin-bottom:4px; }
+.d-dedicated .r-month-agenda p { font-size:11px; }
+.d-dedicated .r-day-detail { margin-top:14px; padding-top:14px; border-top:1px solid #304960; }
+.d-dedicated .r-event-detail { margin-bottom:12px; }
+.d-dedicated .r-event-detail h4 { color:#efc359; margin:10px 0; }
+.d-dedicated .r-event-detail dl { display:grid; gap:7px; margin:0; }
+.d-dedicated .r-event-detail dl>div { display:grid; grid-template-columns:105px minmax(0,1fr); gap:8px; }
+.d-dedicated .r-event-detail dd { margin:0; overflow-wrap:anywhere; }
+.d-dedicated .r-upcoming-list { display:grid; gap:6px; margin-bottom:12px; }
+.d-dedicated .r-coverage li { margin-bottom:10px; line-height:1.6; }
+.d-dedicated .r-coverage ul { padding-left:18px; }
+.d-dedicated .r-legacy-observances { margin-top:14px !important; }
+.d-dedicated #dv2-upcoming-observance-compact-window { white-space:normal; line-height:1.65; }
+.d-dedicated .r-dob-label { display:grid; gap:6px; color:#e8eff4; font-size:12px; }
+.d-dedicated .dv2-reflect .card>.dv2-language-toggle { display:flex; justify-content:flex-end; margin-bottom:10px; }
+.d-dedicated .r-reflection-reading h3 { font:24px/1.3 Georgia,serif; color:#f5d47f; margin:16px 0; }
+.d-dedicated .r-reflection-reading h4 { font:17px Georgia,serif; margin:18px 0 8px; color:#fff7e6; }
+.d-dedicated .r-reflection-reading p { font:13px/1.8 Arial,sans-serif; }
+.d-dedicated .r-reading-art { height:145px; border-radius:5px; background:url('../dedicated-pages/reflection-hero.webp') center 34%/cover; }
+.d-dedicated .r-result-basis { margin-top:16px; border-top:1px solid #304960; padding-top:12px; }
+.d-dedicated .r-result-basis summary,.d-dedicated .r-sports-all summary { color:#efc359; cursor:pointer; line-height:1.6; }
+.d-dedicated .r-journal { margin-top:14px; }
+.d-dedicated .r-journal textarea { display:block; width:100%; max-width:100%; resize:vertical; margin:12px 0; padding:12px; background:#071b2e; border:1px solid #496178; color:#edf1f4; font:13px/1.7 Arial,sans-serif; }
+.d-dedicated .r-journal small { display:block; margin-bottom:12px; color:#b8c9d9; }
+.d-dedicated .r-sport-domains,.d-dedicated .r-sports-topics { margin:12px 0; }
+.d-dedicated .r-domain-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+.d-dedicated .r-domain-grid a { display:block; padding:16px 12px; border:1px solid #496178; background:linear-gradient(130deg,#173b55,#091d32); text-decoration:none; }
+.d-dedicated .r-domain-grid h3 { margin:8px 0 0; color:#fff7e6; }
+.d-dedicated .r-domain-grid small { font-size:10px; }
+.d-dedicated .r-sport-theme-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.d-dedicated .r-sport-theme-grid h3 { font-size:18px; color:#efc359; }
+.d-dedicated .r-sport-theme-grid p { line-height:1.7; }
+.d-dedicated .r-sports-all { margin-top:18px; padding-top:12px; border-top:1px solid #304960; }
+.d-dedicated .r-sports-all li { margin:10px 0; line-height:1.6; }
+@media(max-width:1150px) { .d-dedicated .r-calendar-layout { grid-template-columns:minmax(0,1fr); } .d-dedicated .r-calendar-right { grid-template-columns:1fr 1fr; } .d-dedicated .r-calendar-right>#dv2-hindu-calendar-disclosure { grid-column:1/-1; } }
+@media(max-width:700px) { .d-dedicated .r-calendar-body { grid-template-columns:minmax(0,1fr); } .d-dedicated .r-category-filters { grid-template-columns:1fr 1fr; } .d-dedicated .r-month-agenda { grid-template-columns:1fr 1fr; } .d-dedicated .r-month-agenda h3 { grid-column:1/-1; } .d-dedicated .r-calendar-right,.d-dedicated .r-sport-theme-grid { grid-template-columns:1fr; } .d-dedicated .r-domain-grid { grid-template-columns:1fr 1fr; } .d-dedicated .r-month-table button { min-height:42px; } }

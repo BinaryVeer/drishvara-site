@@ -47,7 +47,7 @@ for (const page of contracts) {
   });
   check(page.path + " loads one unchanged runtime and its scoped entry in order", () => {
     const scripts = [...html.matchAll(/<script src="assets\/js\/([^"?]+)\.js(?:\?v=[^"]+)?"/g)].map(m => m[1]);
-    assert.deepEqual(scripts, [...scriptAllowlist, "drishvara-v2-" + page.entry, "drishvara-dedicated-pages"]);
+    assert.deepEqual(scripts, [...scriptAllowlist, "drishvara-v2-" + page.entry, ...(page.path === "panchang.html" ? ["drishvara-calendar-view"] : []), "drishvara-dedicated-pages"]);
     assert(!/<script(?! src=)/.test(html));
   });
   check(page.path + " preserves section ownership, language and semantic navigation", () => {
