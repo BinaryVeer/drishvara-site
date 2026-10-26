@@ -47,7 +47,7 @@ for (const page of contracts) {
   });
   check(page.path + " loads one unchanged runtime and its scoped entry in order", () => {
     const scripts = [...html.matchAll(/<script src="assets\/js\/([^"?]+)\.js(?:\?v=[^"]+)?"/g)].map(m => m[1]);
-    assert.deepEqual(scripts, [...scriptAllowlist, "drishvara-v2-" + page.entry]);
+    assert.deepEqual(scripts, [...scriptAllowlist, "drishvara-v2-" + page.entry, "drishvara-dedicated-pages"]);
     assert(!/<script(?! src=)/.test(html));
   });
   check(page.path + " preserves section ownership, language and semantic navigation", () => {
@@ -69,6 +69,25 @@ for (const page of contracts) {
     assert.deepEqual(calls, [page.kind]);
   });
 }
+check("dedicated presentation preserves source authorization and runtime ownership", () => {
+  const presentation = read("assets/js/drishvara-dedicated-pages.js");
+  assert(!/localStorage|sessionStorage|indexedDB|drishvaraSup02ApplySelection|drishvaraSup02ChoosePlace|supabase\.co|calculate-panchang|Date\.parse/.test(presentation));
+  assert(presentation.includes("attributeFilter:['hidden']"));
+  assert(presentation.includes("window.DrishvaraV2Shell.loadArticleIndex()"));
+  assert(presentation.includes("data.publishedItems"));
+  for (const page of contracts) {
+    const html = read(page.path);
+    assert(html.includes('class="dv2-tool-page d-dedicated"'));
+    assert(html.includes('assets/css/drishvara-dedicated-pages.css'));
+  }
+});
+check("sports route uses the public article source without loading a second calculation controller", () => {
+  const html = read("sports.html");
+  const scripts = [...html.matchAll(/<script src="assets\/js\/([^"?]+)\.js(?:\?v=[^"]+)?"/g)].map(m => m[1]);
+  assert.deepEqual(scripts, ["drishvara-v2-shell", "drishvara-dedicated-pages"]);
+  for (const id of ["sports-score-status", "sports-standings-status", "sports-featured", "sports-articles"]) assert(html.includes('id="' + id + '"'));
+  assert(html.includes("Feed not connected"));
+});
 check("Panchang retains all four annual-book page buttons", () => {
   const html = read("panchang.html");
   assert.deepEqual([...html.matchAll(/data-ag74i-book-page-button="(\d)"/g)].map(m => m[1]), ["1", "2", "3", "4"]);
