@@ -124,6 +124,14 @@
     });
   }
   api.matchApprovedLocations = match;
+  var discoveryPromise;
+  function discovery() {
+    if (!discoveryPromise) discoveryPromise = fetch('data/location-search-discovery.json', {cache:'no-store', credentials:'omit'}).then(function(r) { if (!r.ok) throw Error('discovery'); return r.json(); }).then(function(p) {
+      if (p.purpose !== 'user_authorized_name_discovery_only' || p.calculation_approval !== false || !Array.isArray(p.records) || p.count !== p.records.length) throw Error('discovery contract');
+      return p.records.map(function(r) { return {canonicalPlaceId:r[0],displayLabel:r[1],searchLabels:r[2],entityType:r[3],discoveryOnly:true}; });
+    });
+    return discoveryPromise;
+  }
   function install(input, star) {
     if (!input || input.dataset.savedPlaceSearch) return;
     input.dataset.savedPlaceSearch = 'true';
@@ -135,10 +143,13 @@
     root.after(list, status);
     input.setAttribute('role', 'combobox'); input.setAttribute('aria-autocomplete', 'list');
     input.setAttribute('aria-controls', list.id); input.setAttribute('aria-expanded', 'false');
-    var records = [], matches = [], active = -1, loaded = false;
+    var records = [], matches = [], active = -1, loaded = false, limit = 50;
+    var more = document.createElement('button'); more.type = 'button'; more.hidden = true; more.textContent = 'Show more matching places'; status.after(more);
+    more.addEventListener('click', function() { limit += 50; render(true); });
     function hindi() { return input.closest('[data-dv2-lang]')?.getAttribute('data-dv2-lang') === 'hi'; }
-    function close() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); active = -1; }
+    function close() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); active = -1; more.hidden = true; }
     function choose(record) {
+      if (record.discoveryOnly) { status.textContent = hindi() ? 'यह स्थान सत्यापनाधीन है; गणना के लिए उपलब्ध नहीं है।' : 'This saved place is awaiting verification and cannot be selected for calculations.'; return; }
       if (star) {
         var buttons = document.querySelectorAll('[data-ag75d-e2-star-place-value]');
         var button = Array.from(buttons).find(function (b) { return b.getAttribute('data-ag75d-e2-star-place-value') === record.selectorValue; });
@@ -154,39 +165,43 @@
       }
       close(); status.textContent = (hindi() ? 'चयनित: ' : 'Selected: ') + record.displayLabel; input.focus();
     }
-    function render() {
+    function render(keepLimit) {
+      if (keepLimit !== true) limit = 50;
       list.replaceChildren(); active = -1; input.removeAttribute('aria-activedescendant');
       if (!input.value.trim()) { close(); status.textContent = ''; return; }
       if (!loaded) { status.textContent = hindi() ? 'स्थान लोड हो रहे हैं…' : 'Loading saved places…'; return; }
       matches = match(records, input.value);
-      matches.forEach(function (record, i) {
+      matches.slice(0,limit).forEach(function (record, i) {
         var option = document.createElement('div'); option.id = list.id + '-' + i;
         option.setAttribute('role', 'option'); option.setAttribute('aria-selected', 'false');
-        option.textContent = record.displayLabel + ' · ' + record.timezone;
+        option.textContent = record.displayLabel + (record.discoveryOnly ? ' · ' + record.entityType.replace(/_/g,' ') + ' · ' + (hindi() ? 'सत्यापनाधीन — गणना उपलब्ध नहीं' : 'Awaiting verification — calculations unavailable') : ' · ' + record.timezone + ' · ' + (hindi() ? 'अनुमोदित' : 'Approved'));
+        if (record.discoveryOnly) option.setAttribute('aria-disabled','true');
         option.addEventListener('mousedown', function (e) { e.preventDefault(); });
         option.addEventListener('click', function () { choose(record); }); list.append(option);
       });
       list.hidden = matches.length === 0; input.setAttribute('aria-expanded', String(matches.length > 0));
-      status.textContent = matches.length ? (hindi() ? matches.length + ' अनुमोदित स्थान मिले।' : matches.length + ' approved saved places found.') : (hindi() ? 'कोई अनुमोदित स्थान नहीं मिला। अन्य सहेजे गए स्थान सत्यापनाधीन हैं।' : 'No approved place matches. Additional saved locations are awaiting verification.');
+      more.hidden = matches.length <= limit;
+      status.textContent = matches.length ? (hindi() ? matches.length + ' स्थान मिले। केवल अनुमोदित स्थान गणना के लिए चुने जा सकते हैं।' : matches.length + ' saved places found; showing ' + Math.min(limit,matches.length) + '. Only approved places can be selected for calculations.') : (hindi() ? 'कोई अनुमोदित स्थान नहीं मिला। अन्य सहेजे गए स्थान सत्यापनाधीन हैं।' : 'No approved place matches. Additional saved locations are awaiting verification.');
     }
     input.addEventListener('input', render); input.addEventListener('focus', render);
     input.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') { close(); return; }
       if (list.hidden) return;
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault(); active = (active + (e.key === 'ArrowDown' ? 1 : -1) + matches.length) % matches.length;
+        e.preventDefault(); active = (active + (e.key === 'ArrowDown' ? 1 : -1) + Math.min(limit,matches.length)) % Math.min(limit,matches.length);
         Array.from(list.children).forEach(function (o, i) { o.setAttribute('aria-selected', String(i === active)); });
         input.setAttribute('aria-activedescendant', list.children[active].id);
         list.children[active].scrollIntoView({block:'nearest'});
       } else if (e.key === 'Enter' && active >= 0) { e.preventDefault(); choose(matches[active]); }
     });
-    input.addEventListener('blur', close);
-    api.loadApprovedLocations().then(function (data) { records = data; loaded = true; if (document.activeElement === input) render(); }).catch(function () { close(); status.textContent = hindi() ? 'अनुमोदित स्थान सूची अनुपलब्ध है।' : 'Approved saved-place list unavailable.'; });
+    input.addEventListener('blur', function(e) { if (e.relatedTarget !== more) close(); });
+    api.loadApprovedLocations().then(function (data) { records = data; loaded = true; if (document.activeElement === input) render();
+      discovery().then(function(extra) { records = data.concat(extra); if (document.activeElement === input) render(); }).catch(function() { status.textContent = 'Additional saved-place search is unavailable; approved places remain available.'; }); }).catch(function () { close(); status.textContent = hindi() ? 'अनुमोदित स्थान सूची अनुपलब्ध है।' : 'Approved saved-place list unavailable.'; });
   }
   function mount() { install(document.getElementById('panchang-place-alias'), false); install(document.getElementById('dv2-star-location-search'), true); }
   function boot() {
     var style = document.createElement('style');
-    style.textContent = '.dv2-saved-place-suggestions{display:grid;gap:2px;border:1px solid #8a7746;border-radius:5px;padding:4px;max-height:220px;overflow:auto;background:#0b2138;color:#edf2f7;margin:4px 0;font:12px/1.5 Arial,sans-serif}.dv2-saved-place-suggestions[hidden]{display:none}.dv2-saved-place-suggestions [role=option]{padding:10px;cursor:pointer;overflow-wrap:anywhere}.dv2-saved-place-suggestions [role=option]:hover,.dv2-saved-place-suggestions [aria-selected=true]{background:#efc359;color:#091c30}.dv2-saved-place-status{font:11px/1.5 Arial,sans-serif;margin:4px 0;color:inherit}';
+    style.textContent = '.dv2-saved-place-suggestions{display:grid;gap:2px;border:1px solid #8a7746;border-radius:5px;padding:4px;max-height:220px;overflow:auto;background:#0b2138;color:#edf2f7;margin:4px 0;font:12px/1.5 Arial,sans-serif}.dv2-saved-place-suggestions[hidden]{display:none}.dv2-saved-place-suggestions [role=option]{padding:10px;cursor:pointer;overflow-wrap:anywhere}.dv2-saved-place-suggestions [role=option]:hover,.dv2-saved-place-suggestions [aria-selected=true]{background:#efc359;color:#091c30}.dv2-saved-place-suggestions [aria-disabled=true]{opacity:.75;cursor:default}.dv2-saved-place-status{font:11px/1.5 Arial,sans-serif;margin:4px 0;color:inherit}';
     document.head.append(style); mount();
     var observer = new MutationObserver(mount); observer.observe(document.body, {childList:true,subtree:true});
   }
