@@ -183,3 +183,22 @@ body.d-dedicated.drishvara-v2-active .ag75d-e2-star-place-choice[aria-pressed="t
 .d-dedicated #dv2-observance-year-disclosure .dv2-observance-year__month-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
 @media(max-width:1200px) { .d-dedicated .d-selection-panel .ag74i-date-controls { grid-template-columns:auto minmax(80px,1fr) 40px; } }
 @media(max-width:700px) { .d-selection-panel { grid-template-columns:1fr; } .d-dedicated .d-selection-panel #dv2-panchang-location-disclosure { border-left:0; border-top:1px solid var(--d-line); padding:10px 0 0; } .d-dedicated .d-selection-panel .ag74i-date-controls { grid-template-columns:auto minmax(80px,1fr) 40px; } .d-dedicated #dv2-observance-year-disclosure .dv2-observance-year__month-grid { grid-template-columns:1fr; } }
+/* Reset the legacy card's named grid areas inside the narrower dedicated controls. */
+body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel .ag74i-date-controls {
+  display:grid !important;
+  grid-template-areas:none !important;
+  grid-template-columns:70px minmax(90px,1fr) 40px 52px 65px !important;
+  gap:5px !important;
+}
+body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel .ag74i-date-controls>* {
+  grid-area:auto !important;
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+}
+body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel label[for="panchang-date-picker"] { display:grid !important; }
+body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel #panchang-date-picker { width:40px !important; min-width:0 !important; }
+body.d-dedicated.drishvara-v2-active #ag75d-e2-star-place-choice-panel p { color:#c5d3df !important; }
+@media(max-width:1200px) {
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel .ag74i-date-controls { grid-template-columns:70px minmax(90px,1fr) 40px !important; }
+}
