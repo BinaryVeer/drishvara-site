@@ -110,3 +110,85 @@
     normaliseApprovedLocationPayload: normalisePayload
   };
 })();
+
+/* Shared saved-place suggestions. Selection still belongs to the existing controllers. */
+(function () {
+  'use strict';
+  var api = window.DrishvaraV2Location;
+  function fold(value) { return String(value || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim(); }
+  function match(records, query) {
+    var words = fold(query).split(' ').filter(Boolean);
+    return records.filter(function (r) {
+      var haystack = fold([r.displayLabel, r.canonicalPlaceId, r.timezone].concat(r.searchLabels || []).join(' '));
+      return words.every(function (word) { return haystack.indexOf(word) !== -1; });
+    });
+  }
+  api.matchApprovedLocations = match;
+  function install(input, star) {
+    if (!input || input.dataset.savedPlaceSearch) return;
+    input.dataset.savedPlaceSearch = 'true';
+    var root = input.closest('label') || input.parentNode;
+    var list = document.createElement('div');
+    list.id = input.id + '-suggestions'; list.className = 'dv2-saved-place-suggestions'; list.hidden = true;
+    list.setAttribute('role', 'listbox'); list.setAttribute('aria-label', 'Matching saved places');
+    var status = document.createElement('div'); status.className = 'dv2-saved-place-status'; status.setAttribute('role', 'status');
+    root.after(list, status);
+    input.setAttribute('role', 'combobox'); input.setAttribute('aria-autocomplete', 'list');
+    input.setAttribute('aria-controls', list.id); input.setAttribute('aria-expanded', 'false');
+    var records = [], matches = [], active = -1, loaded = false;
+    function hindi() { return input.closest('[data-dv2-lang]')?.getAttribute('data-dv2-lang') === 'hi'; }
+    function close() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); active = -1; }
+    function choose(record) {
+      if (star) {
+        var buttons = document.querySelectorAll('[data-ag75d-e2-star-place-value]');
+        var button = Array.from(buttons).find(function (b) { return b.getAttribute('data-ag75d-e2-star-place-value') === record.selectorValue; });
+        if (!button) { status.textContent = hindi() ? 'स्थान चयन अभी तैयार नहीं है।' : 'Place selection is not ready yet.'; return; }
+        button.click();
+        input.value = record.displayLabel;
+      } else {
+        var select = document.getElementById('panchang-place-select');
+        if (!select || !Array.from(select.options).some(function (o) { return o.value === record.selectorValue; })) return;
+        input.value = ''; // An alias query must not override the explicit approved selection.
+        select.value = record.selectorValue;
+        select.dispatchEvent(new Event('change', {bubbles: true}));
+      }
+      close(); status.textContent = (hindi() ? 'चयनित: ' : 'Selected: ') + record.displayLabel; input.focus();
+    }
+    function render() {
+      list.replaceChildren(); active = -1; input.removeAttribute('aria-activedescendant');
+      if (!input.value.trim()) { close(); status.textContent = ''; return; }
+      if (!loaded) { status.textContent = hindi() ? 'स्थान लोड हो रहे हैं…' : 'Loading saved places…'; return; }
+      matches = match(records, input.value);
+      matches.forEach(function (record, i) {
+        var option = document.createElement('div'); option.id = list.id + '-' + i;
+        option.setAttribute('role', 'option'); option.setAttribute('aria-selected', 'false');
+        option.textContent = record.displayLabel + ' · ' + record.timezone;
+        option.addEventListener('mousedown', function (e) { e.preventDefault(); });
+        option.addEventListener('click', function () { choose(record); }); list.append(option);
+      });
+      list.hidden = matches.length === 0; input.setAttribute('aria-expanded', String(matches.length > 0));
+      status.textContent = matches.length ? (hindi() ? matches.length + ' अनुमोदित स्थान मिले।' : matches.length + ' approved saved places found.') : (hindi() ? 'कोई अनुमोदित स्थान नहीं मिला। अन्य सहेजे गए स्थान सत्यापनाधीन हैं।' : 'No approved place matches. Additional saved locations are awaiting verification.');
+    }
+    input.addEventListener('input', render); input.addEventListener('focus', render);
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { close(); return; }
+      if (list.hidden) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault(); active = (active + (e.key === 'ArrowDown' ? 1 : -1) + matches.length) % matches.length;
+        Array.from(list.children).forEach(function (o, i) { o.setAttribute('aria-selected', String(i === active)); });
+        input.setAttribute('aria-activedescendant', list.children[active].id);
+        list.children[active].scrollIntoView({block:'nearest'});
+      } else if (e.key === 'Enter' && active >= 0) { e.preventDefault(); choose(matches[active]); }
+    });
+    input.addEventListener('blur', close);
+    api.loadApprovedLocations().then(function (data) { records = data; loaded = true; if (document.activeElement === input) render(); }).catch(function () { close(); status.textContent = hindi() ? 'अनुमोदित स्थान सूची अनुपलब्ध है।' : 'Approved saved-place list unavailable.'; });
+  }
+  function mount() { install(document.getElementById('panchang-place-alias'), false); install(document.getElementById('dv2-star-location-search'), true); }
+  function boot() {
+    var style = document.createElement('style');
+    style.textContent = '.dv2-saved-place-suggestions{display:grid;gap:2px;border:1px solid #8a7746;border-radius:5px;padding:4px;max-height:220px;overflow:auto;background:#0b2138;color:#edf2f7;margin:4px 0;font:12px/1.5 Arial,sans-serif}.dv2-saved-place-suggestions[hidden]{display:none}.dv2-saved-place-suggestions [role=option]{padding:10px;cursor:pointer;overflow-wrap:anywhere}.dv2-saved-place-suggestions [role=option]:hover,.dv2-saved-place-suggestions [aria-selected=true]{background:#efc359;color:#091c30}.dv2-saved-place-status{font:11px/1.5 Arial,sans-serif;margin:4px 0;color:inherit}';
+    document.head.append(style); mount();
+    var observer = new MutationObserver(mount); observer.observe(document.body, {childList:true,subtree:true});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true}); else boot();
+})();
