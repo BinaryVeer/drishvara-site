@@ -14,6 +14,8 @@
   ];
   var CURRENT_PUBLIC_COUNT = 5;
   var locationPromise = null;
+  var payloadPromise = null;
+  var CATALOG_URL = "https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/calculate-panchang";
 
   function normalise(record, index) {
     if (!record || typeof record !== "object") {
@@ -37,9 +39,11 @@
       throw new Error("Governed location identity is incomplete at index " + index);
     }
 
-    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+    if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90 || !Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
       throw new Error("Governed location coordinates are invalid at index " + index);
     }
+
+    try { new Intl.DateTimeFormat("en", {timeZone: timezone}).format(new Date()); } catch (_) { throw Error("Invalid governed IANA timezone"); }
 
     return {
       selectorValue: value,
@@ -79,10 +83,11 @@
     }
 
     if (
-      payload.record_count !== CURRENT_PUBLIC_COUNT ||
-      payload.records.length !== CURRENT_PUBLIC_COUNT
+      payload.record_count !== payload.records.length ||
+      (!Number.isInteger(payload.record_count) || payload.record_count < 1 || payload.record_count > 20000) ||
+      (payload.record_count !== CURRENT_PUBLIC_COUNT && payload.catalog_version !== "20261026")
     ) {
-      throw new Error("AG74P active public location projection must remain 5 records.");
+      throw new Error("Unsupported active location catalog or count mismatch.");
     }
 
     var records = payload.records.map(normalise);
@@ -90,23 +95,26 @@
     return records;
   }
 
-  function loadApprovedLocations() {
-    if (!locationPromise) {
-      locationPromise = fetch(LOCATION_PATH, { cache: "no-store" })
-        .then(function (response) {
-          if (!response.ok) {
-            throw new Error("Approved location projection could not be loaded.");
-          }
-          return response.json();
-        })
-        .then(normalisePayload);
+  function loadApprovedLocationPayload() {
+    if (!payloadPromise) {
+      payloadPromise = fetch(CATALOG_URL, {method:"POST", cache:"no-store", credentials:"omit",
+        headers:{"Content-Type":"application/json"}, body:JSON.stringify({action:"locations"}), signal:AbortSignal.timeout(15000)})
+        .then(function(r) { if (!r.ok) throw Error("Server catalog unavailable"); return r.json(); })
+        .then(function(p) { if(p.catalog_version !== "20261026") throw Error("Unsupported catalog"); normalisePayload(p); return p; })
+        .catch(function() { return fetch(LOCATION_PATH,{cache:"no-store"}).then(function(r) {
+          if(!r.ok) throw Error("Approved locations unavailable"); return r.json();
+        }).then(function(p) { if(p.record_count !== 5) throw Error("Legacy fallback must contain five places"); normalisePayload(p); return p; }); });
     }
-
+    return payloadPromise;
+  }
+  function loadApprovedLocations() {
+    if (!locationPromise) locationPromise = loadApprovedLocationPayload().then(normalisePayload);
     return locationPromise;
   }
 
   window.DrishvaraV2Location = {
     loadApprovedLocations: loadApprovedLocations,
+    loadApprovedLocationPayload: loadApprovedLocationPayload,
     normaliseApprovedLocationPayload: normalisePayload
   };
 })();
@@ -124,14 +132,6 @@
     });
   }
   api.matchApprovedLocations = match;
-  var discoveryPromise;
-  function discovery() {
-    if (!discoveryPromise) discoveryPromise = fetch('data/location-search-discovery.json', {cache:'no-store', credentials:'omit'}).then(function(r) { if (!r.ok) throw Error('discovery'); return r.json(); }).then(function(p) {
-      if (p.purpose !== 'user_authorized_name_discovery_only' || p.calculation_approval !== false || !Array.isArray(p.records) || p.count !== p.records.length) throw Error('discovery contract');
-      return p.records.map(function(r) { return {canonicalPlaceId:r[0],displayLabel:r[1],searchLabels:r[2],entityType:r[3],discoveryOnly:true}; });
-    });
-    return discoveryPromise;
-  }
   function install(input, star) {
     if (!input || input.dataset.savedPlaceSearch) return;
     input.dataset.savedPlaceSearch = 'true';
@@ -151,6 +151,10 @@
     function choose(record) {
       if (record.discoveryOnly) { status.textContent = hindi() ? 'यह स्थान सत्यापनाधीन है; गणना के लिए उपलब्ध नहीं है।' : 'This saved place is awaiting verification and cannot be selected for calculations.'; return; }
       if (star) {
+        if (typeof window.drishvaraSelectStarLocationValue === 'function') {
+          if (!window.drishvaraSelectStarLocationValue(record.selectorValue)) { status.textContent = 'Place selection is loading; try again.'; return; }
+          input.value = record.displayLabel; close(); status.textContent = 'Selected: ' + record.displayLabel; return;
+        }
         var buttons = document.querySelectorAll('[data-ag75d-e2-star-place-value]');
         var button = Array.from(buttons).find(function (b) { return b.getAttribute('data-ag75d-e2-star-place-value') === record.selectorValue; });
         if (!button) { status.textContent = hindi() ? 'स्थान चयन अभी तैयार नहीं है।' : 'Place selection is not ready yet.'; return; }
@@ -181,7 +185,7 @@
       });
       list.hidden = matches.length === 0; input.setAttribute('aria-expanded', String(matches.length > 0));
       more.hidden = matches.length <= limit;
-      status.textContent = matches.length ? (hindi() ? matches.length + ' स्थान मिले। केवल अनुमोदित स्थान गणना के लिए चुने जा सकते हैं।' : matches.length + ' saved places found; showing ' + Math.min(limit,matches.length) + '. Only approved places can be selected for calculations.') : (hindi() ? 'कोई अनुमोदित स्थान नहीं मिला। अन्य सहेजे गए स्थान सत्यापनाधीन हैं।' : 'No approved place matches. Additional saved locations are awaiting verification.');
+      status.textContent = matches.length ? (hindi() ? matches.length + ' स्थान मिले। केवल अनुमोदित स्थान गणना के लिए चुने जा सकते हैं।' : matches.length + ' saved places found; showing ' + Math.min(limit,matches.length) + '. Only approved places can be selected for calculations.') : (hindi() ? 'कोई अनुमोदित स्थान नहीं मिला। अन्य सहेजे गए स्थान सत्यापनाधीन हैं।' : 'No approved place matches. Try another name or enter coordinates.');
     }
     input.addEventListener('input', render); input.addEventListener('focus', render);
     input.addEventListener('keydown', function (e) {
@@ -195,8 +199,7 @@
       } else if (e.key === 'Enter' && active >= 0) { e.preventDefault(); choose(matches[active]); }
     });
     input.addEventListener('blur', function(e) { if (e.relatedTarget !== more) close(); });
-    api.loadApprovedLocations().then(function (data) { records = data; loaded = true; if (document.activeElement === input) render();
-      discovery().then(function(extra) { records = data.concat(extra); if (document.activeElement === input) render(); }).catch(function() { status.textContent = 'Additional saved-place search is unavailable; approved places remain available.'; }); }).catch(function () { close(); status.textContent = hindi() ? 'अनुमोदित स्थान सूची अनुपलब्ध है।' : 'Approved saved-place list unavailable.'; });
+    api.loadApprovedLocations().then(function (data) { records = data; loaded = true; if (document.activeElement === input) render(); }).catch(function () { close(); status.textContent = hindi() ? 'अनुमोदित स्थान सूची अनुपलब्ध है।' : 'Approved saved-place list unavailable.'; });
   }
   function mount() { install(document.getElementById('panchang-place-alias'), false); install(document.getElementById('dv2-star-location-search'), true); }
   function boot() {

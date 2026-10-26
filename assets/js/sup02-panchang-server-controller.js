@@ -322,6 +322,9 @@
       ).trim(),
       selector_value: selectorValue,
       display_label: displayLabel,
+      lgd_code: record.lgd_code || null,
+      source_dataset_epoch: record.source_dataset_epoch || null,
+      coordinate_basis: record.coordinate_basis || null,
       country_iso2: String(record.country_iso2 || "").trim(),
       country_name: String(record.country_name || "").trim(),
       administrative_level_1_name: String(
@@ -374,16 +377,8 @@
   }
 
   function assertCurrentAg74pReleaseScope(payload, nextRecords) {
-    if (
-      payload.record_count !== CURRENT_AG74P_RELEASE_RECORD_COUNT ||
-      nextRecords.length !== CURRENT_AG74P_RELEASE_RECORD_COUNT
-    ) {
-      throw new Error(
-        "Current AG74P public projection must contain exactly " +
-          String(CURRENT_AG74P_RELEASE_RECORD_COUNT) +
-          " approved locations."
-      );
-    }
+    if (payload.record_count !== nextRecords.length || (nextRecords.length < 1 || nextRecords.length > 20000) ||
+        (nextRecords.length !== 5 && payload.catalog_version !== "20261026")) throw Error("Unsupported active location catalog");
   }
 
   function approvedLocationRecords(payload) {
@@ -561,6 +556,9 @@
   function starLocationSnapshot(record) {
     if (!record) return null;
     return {
+      lgd_code: record.lgd_code || null,
+      source_dataset_epoch: record.source_dataset_epoch || null,
+      coordinate_basis: record.coordinate_basis || null,
       canonical_place_id: record.canonical_place_id,
       selector_value: record.selector_value,
       display_label: record.display_label,
@@ -628,7 +626,7 @@
     }
 
     choices.innerHTML = "";
-    records.forEach(function (record) {
+    records.filter(function(r) { return !r.selector_value.startsWith("lgd-"); }).slice(0,5).forEach(function (record) {
       var button = document.createElement("button");
       button.type = "button";
       button.className = "ag75d-e2-star-place-choice";
@@ -1078,7 +1076,8 @@
       display:
         starState.selectedLocation.display_label +
         " - " +
-        starState.selectedLocation.timezone,
+        starState.selectedLocation.timezone +
+        (starState.selectedLocation.lgd_code ? " · LGD " + starState.selectedLocation.lgd_code + " · headquarters reference point · official source " + starState.selectedLocation.source_dataset_epoch : ""),
       timezone: starState.selectedLocation.timezone,
       body: {
         mode: "named_location",
@@ -2180,7 +2179,7 @@
     if (release) {
       release.innerHTML =
         "<strong>Governed public scope:</strong>" +
-        "<span>5 approved named locations · worldwide coordinates " +
+        "<span>" + (Array.isArray(records) ? records.length : 5) + " approved named locations · worldwide coordinates " +
         "with a validated IANA timezone · Varanasi Hindu lunar " +
         "reference calendar · 114 approved generic monthly " +
         "observances.</span>";
@@ -2192,7 +2191,7 @@
     );
     if (starNote) {
       starNote.textContent =
-        "Choose from the same five AG74P-approved named locations " +
+        "Search the approved named locations " +
         "used by Panchang, or use coordinate mode. Inputs remain " +
         "session-only.";
     }
@@ -2203,7 +2202,7 @@
     );
     if (panchangNote) {
       panchangNote.textContent =
-        "Choose one of the five AG74P-approved named locations, " +
+        "Search and choose an approved named location, " +
         "or use coordinates with an explicit valid IANA timezone.";
     }
 
@@ -2514,16 +2513,7 @@
     setMode("panchang", selectedMode("panchang"));
 
     try {
-      var response = await fetch(LOCATION_PATH, {
-        cache: "no-store"
-      });
-      if (!response.ok) {
-        throw new Error(
-          "Approved-location projection unavailable"
-        );
-      }
-
-      var payload = await response.json();
+      var payload = await window.DrishvaraV2Location.loadApprovedLocationPayload();
       var nextRecords = approvedLocationRecords(payload);
       assertCurrentAg74pReleaseScope(payload, nextRecords);
       records = nextRecords;
@@ -2582,6 +2572,12 @@
 
     syncEmptyObservanceDetails();
   }
+
+  window.drishvaraSelectStarLocationValue = function(value) {
+    var record = recordByValue(value);
+    if (!record) return false;
+    selectStarLocation(record); return true;
+  };
 
   window.drishvaraAg75dR1SurfaceState = function () {
     return {
@@ -2994,7 +2990,8 @@
       String(basis.latitude) +
         ", " +
         String(basis.longitude) +
-        " · server-resolved calculation coordinates"
+        (basis.coordinate_basis ? " · headquarters reference point" : " · server-resolved calculation coordinates") +
+        (basis.source_dataset_epoch ? " · official source " + basis.source_dataset_epoch : "")
     );
     setText(
       "panchang-timezone-provenance",
@@ -3002,7 +2999,9 @@
     );
     setText(
       "panchang-approval-provenance",
-      "Governed server runtime · no automatic place or timezone substitution"
+      (basis.lgd_code ? "LGD " + basis.lgd_code + " · " : "") +
+      (basis.coordinate_source ? basis.coordinate_source + " · older official reference accepted" : "Governed server runtime") +
+      " · no automatic place or timezone substitution"
     );
   }
 
@@ -3417,15 +3416,7 @@
           return response.json();
         }
       ),
-      fetch(APPROVED_LOCATION_PATH, {
-        cache: "no-store",
-        signal: signal
-      }).then(function (response) {
-        if (!response.ok) {
-          throw new Error("Approved-location projection unavailable");
-        }
-        return response.json();
-      })
+      window.DrishvaraV2Location.loadApprovedLocationPayload()
     ]);
 
     if (

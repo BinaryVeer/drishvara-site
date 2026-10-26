@@ -1577,7 +1577,7 @@
       calculatePanchang: "Calculate Panchang",
       requestReady: "Review the inputs, then press Calculate Panchang. Changing inputs will not replace the last committed result.",
       publicReleasePrefix: "AG74P public release:",
-      publicReleaseText: "5 approved named locations · worldwide coordinates with validated IANA timezone · 384 Varanasi annual records · 114 generic monthly observances.",
+      publicReleaseText: "Server-approved named locations · worldwide coordinates with validated IANA timezone · 384 Varanasi annual records · 114 generic monthly observances.",
       locationBasis: "Location basis",
       coordinateBasis: "Coordinate basis",
       timezoneBasis: "Timezone basis",
@@ -1714,7 +1714,7 @@
       calculatePanchang: "पंचांग देखें",
       requestReady: "इनपुट देखें, फिर पंचांग देखें दबाएँ। इनपुट बदलने से अंतिम प्रतिबद्ध परिणाम अपने-आप नहीं बदलेगा।",
       publicReleasePrefix: "AG74P सार्वजनिक रिलीज़:",
-      publicReleaseText: "5 स्वीकृत नामित स्थान · मान्य IANA समय क्षेत्र सहित वैश्विक निर्देशांक · 384 वाराणसी वार्षिक रिकॉर्ड · 114 सामान्य मासिक पर्व।",
+      publicReleaseText: "सर्वर द्वारा स्वीकृत नामित स्थान · मान्य IANA समय क्षेत्र सहित वैश्विक निर्देशांक · 384 वाराणसी वार्षिक रिकॉर्ड · 114 सामान्य मासिक पर्व।",
       locationBasis: "स्थान आधार",
       coordinateBasis: "निर्देशांक आधार",
       timezoneBasis: "समय क्षेत्र आधार",
@@ -2516,6 +2516,7 @@
 
     var input = label.querySelector("input");
     input.addEventListener("input", function () {
+      if (input.dataset.savedPlaceSearch) return;
       var query = input.value.trim().toLowerCase();
       var matched = 0;
       panel.querySelectorAll("[data-ag75d-e2-star-place-value]").forEach(function (button) {
@@ -2610,11 +2611,13 @@
     if (!Location) return;
     Location.loadApprovedLocations()
       .then(function (records) {
+        var selected = document.getElementById("panchang-place-select")?.value || "varanasi-uttar-pradesh-india";
+        var record = records.find(function(r) { return r.selectorValue === selected; }) || records[0];
         var node = document.getElementById("dv2-context-time-kicker");
         if (node) {
           node.textContent = currentTimeLanguage === "hi"
-            ? "समय · " + localizeValue(records[0].displayLabel, "hi")
-            : "Time · " + records[0].displayLabel;
+            ? "समय · " + localizeValue(record.displayLabel, "hi")
+            : "Time · " + record.displayLabel;
         }
       })
       .catch(function () {});

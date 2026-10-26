@@ -171,8 +171,13 @@ export function resolvePanchangRequest(
     };
   }
 
-  const match =
-    locations.find((row) => labelsFor(row).includes(query)) ?? null;
+  // Prefer an exact stable identity; free-text names may legitimately repeat.
+  const exact = locations.filter((row) =>
+    [row.selector_value, row.payload?.["canonical_place_id"]].some((v) => normalizeLabel(v) === query));
+  const matches = exact.length ? exact : locations.filter((row) => labelsFor(row).includes(query));
+  if (matches.length > 1) return { ok: false, code: "ambiguous_place",
+    message: "More than one approved place matches. Choose the full place and administrative area from the selector." };
+  const match = matches[0] ?? null;
 
   if (!match) {
     return {
@@ -184,16 +189,16 @@ export function resolvePanchangRequest(
   }
 
   const payload = match.payload || {};
-  if (
-    payload["public_selection_approved"] !== true ||
-    payload["computation_approved"] !== true ||
-    payload["public_output_allowed"] !== true
-  ) {
+  if (!["canonical_place_approved", "coordinate_approved", "timezone_approved", "public_selection_approved", "computation_approved", "public_output_allowed"].every((field) => payload[field] === true)) {
     return {
       ok: false,
       code: "place_not_approved",
       message: "The governed place record is not approved for public calculation."
     };
+  }
+  if (!Number.isFinite(Number(match.latitude)) || Number(match.latitude) < -90 || Number(match.latitude) > 90 ||
+      !Number.isFinite(Number(match.longitude)) || Number(match.longitude) < -180 || Number(match.longitude) > 180) {
+    return {ok:false,code:"invalid_governed_coordinates",message:"The governed place coordinates are invalid."};
   }
   if (!validTimezone(match.timezone)) {
     return {

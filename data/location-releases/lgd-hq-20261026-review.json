@@ -1,0 +1,23 @@
+{
+  "release_id": "lgd_hq_20261026",
+  "qualified_additions": 2542,
+  "existing_approved": 5,
+  "expected_total_after_backend_activation": 2547,
+  "source_epochs": {
+    "2017": 275,
+    "2022": 2267
+  },
+  "identity": "Typed LGD codes and hierarchy matched to nine 26 October 2026 supplied exports.",
+  "timezone_polygon_agreements": 2542,
+  "internal_calculation_cases_computed": 10168,
+  "independent_astronomical_benchmark": false,
+  "user_authorization": "Accept older official reference coordinates; correct on user reports or new records.",
+  "payload_sha256": "4c14572de0e249bb652d45eea2fd31fe18782469dad7a6fbed6c6d1f4202ce9d",
+  "activation": "Requires backend code deployment, transactional location activation and live readback. Frontend consumes only the server-active catalog.",
+  "implementation_checks": {
+    "paginated_catalog_and_named_runtime": "passed_against_isolated_mock_database_using_real_edge_function",
+    "page_dom_typeahead_keyboard_and_reflection_inputs": "passed_with_mocked_backend",
+    "activation_and_guarded_rollback": "passed_in_isolated_PGlite_PostgreSQL_hashing_stubbed",
+    "live_supabase_activation": "not_performed_no_authenticated_deployment_access"
+  }
+}

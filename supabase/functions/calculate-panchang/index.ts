@@ -32,6 +32,19 @@ async function restGet<T>(
   return (await response.json()) as T[];
 }
 
+async function activeLocations(releaseId: string): Promise<LocationRow[]> {
+  const rows: LocationRow[] = [];
+  for (let offset = 0; offset < 20000; offset += 500) {
+    const page = await restGet<LocationRow>("drishvara_panchang_locations", new URLSearchParams({
+      select: "selector_value,display_label,timezone,latitude,longitude,search_labels,payload",
+      release_id: `eq.${releaseId}`, order: "selector_value.asc", limit: "500", offset: String(offset)
+    }));
+    rows.push(...page);
+    if (page.length < 500) return rows;
+  }
+  throw new Error("Location catalog exceeded its governed size limit.");
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -181,15 +194,16 @@ Deno.serve(async (request: Request) => {
       );
     }
 
-    const locations = await restGet<LocationRow>(
-      "drishvara_panchang_locations",
-      new URLSearchParams({
-        select:
-          "selector_value,display_label,timezone,latitude,longitude,search_labels,payload",
-        release_id: `eq.${manifest.release_id}`,
-        order: "selector_value.asc"
-      })
-    );
+    const locations = await activeLocations(manifest.release_id);
+    if ((body as PanchangRequest & {action?: string}).action === "locations") {
+      const flags = ["canonical_place_approved", "coordinate_approved", "timezone_approved", "public_selection_approved", "computation_approved", "public_output_allowed"];
+      const records = locations.filter((row) => flags.every((f) => row.payload?.[f] === true)).map((row) => ({
+        ...row.payload, selector_value: row.selector_value, display_label: row.display_label,
+        latitude: row.latitude, longitude: row.longitude, timezone: row.timezone, search_labels: row.search_labels
+      }));
+      return jsonResponse({catalog_version: "20261026", release_id: manifest.release_id,
+        record_count: records.length, records, persistence_performed: false});
+    }
 
     const resolution = resolvePanchangRequest(body, locations);
     if (!resolution.ok) {
@@ -293,6 +307,12 @@ Deno.serve(async (request: Request) => {
         timezone: resolved.timezone,
         latitude: resolved.latitude,
         longitude: resolved.longitude,
+        lgd_code: resolved.governed_record?.payload?.["lgd_code"] ?? null,
+        entity_type: resolved.governed_record?.payload?.["entity_type"] ?? null,
+        coordinate_basis: resolved.governed_record?.payload?.["coordinate_basis"] ?? null,
+        coordinate_source: resolved.governed_record?.payload?.["coordinate_source"] ?? null,
+        source_dataset_epoch: resolved.governed_record?.payload?.["source_dataset_epoch"] ?? null,
+        coordinate_freshness_basis: resolved.governed_record?.payload?.["coordinate_freshness_basis"] ?? null,
         automatic_place_substitution_performed: false,
         automatic_timezone_substitution_performed: false
       },
