@@ -37,7 +37,14 @@
       explorer.open = true; // Existing monthly filters, list view and record details remain intact.
     }
     const location = $('#dv2-panchang-location-disclosure');
-    if (location) location.open = true;
+    if (location) {
+      location.open = true;
+      const date = $('.ag74i-date-surface');
+      if(date) {
+        const selection=node('section','d-selection-panel','<h2>◉ &nbsp; Select Date &amp; Location</h2>');
+        date.before(selection);selection.append(date,location);
+      }
+    }
   }
   function reflection() {
     const card = $('[data-drishvara-v2-reflect-card="true"]');
@@ -45,6 +52,13 @@
     if (!card || !result || card.dataset.dedicatedReady) return;
     card.dataset.dedicatedReady = 'true';
     const host = $('#dv2-reflect-host');
+    const heading=node('h2','d-form-title','Generate Your Star Reflection');
+    card.prepend(heading);
+    const notes=node('details','d-form-notes','<summary>Reflection method &amp; privacy</summary>');
+    card.append(notes);
+    ['.ag73a-birth-time-note','.ag71d-r6-coordinate-basis-summary','.ag71d-method-basis-status','[data-ag73e-star-active-status]'].forEach(selector=>{
+      card.querySelectorAll(selector).forEach(e=>notes.append(e));
+    });
     const grid = node('div','d-reflection-grid',''); host.before(grid); grid.append(host);
     const insight = panel("Today's Reflective Insight",'<div class="d-reflect-wait"><div class="d-insight-orbit" aria-hidden="true"></div><p class="d-kicker">YOUR REFLECTION · AWAITING CONTEXT</p><h3>A thoughtful result begins with the right basis.</h3><p>Enter your birth context to resolve an eligible, governed reflection.</p><div class="d-basis-grid"><span>Nakshatra<small>Pending</small></span><span>Moon basis<small>Pending</small></span><span>Time confidence<small>Unresolved</small></span><span>Session type<small>Reflective only</small></span></div></div><p class="d-insight-safety">Reflection is not a prediction, assessment or decision guide.</p>');
     insight.classList.add('d-reflection-insight'); grid.append(insight);

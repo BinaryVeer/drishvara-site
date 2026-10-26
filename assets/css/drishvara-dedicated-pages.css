@@ -144,3 +144,42 @@ body.d-dedicated.drishvara-v2-active .dv2-reflect .card { padding:16px; border-r
 .d-dedicated .dv2-section p.d-kicker { color:var(--d-gold); }
 .d-dedicated .d-page-content .dv2-context-panel { color:var(--d-muted); }
 .d-dedicated .d-sports-top .d-panel-head h2 { font-size:19px; }
+/* Final density pass from the deployed reference comparison. */
+.d-selection-panel { display:grid; grid-template-columns:1.08fr 1fr; gap:14px; border:1px solid var(--d-line); border-radius:7px; padding:15px; background:linear-gradient(115deg,#102a44,#0a2035); }
+.d-selection-panel>h2 { grid-column:1/-1; font:20px Georgia,serif; color:#fffaf0; margin:0; }
+.d-dedicated .d-selection-panel .ag74i-date-surface { border:0; padding:0; margin:0; background:none; }
+.d-dedicated .d-selection-panel .ag74i-surface-heading { margin-bottom:8px; }
+.d-dedicated .d-selection-panel .ag74i-surface-heading>div { display:none; }
+.d-dedicated .d-selection-panel .ag74i-selected-date { font-size:11px; }
+.d-dedicated .d-selection-panel .ag74i-date-controls { grid-template-columns:auto minmax(90px,1fr) 42px auto auto; margin:0; gap:5px; }
+.d-dedicated .d-selection-panel .ag74i-date-controls input,.d-dedicated .d-selection-panel .ag74i-date-controls button { min-height:36px !important; padding:6px; font-size:10px; }
+.d-dedicated .d-selection-panel label[for="panchang-date-picker"] span { font-size:0; }
+.d-dedicated .d-selection-panel #panchang-date-picker { width:42px; padding:6px; color:transparent; }
+.d-dedicated .d-selection-panel #panchang-date-picker::-webkit-calendar-picker-indicator { opacity:1; filter:invert(1); }
+.d-dedicated .d-selection-panel #dv2-panchang-location-disclosure { margin:0 !important; padding:0; border:0; background:none; border-left:1px solid var(--d-line); padding-left:14px; }
+.d-dedicated .d-selection-panel .dv2-location-disclosure>summary { padding:0 0 6px; min-height:25px; font-size:10px; }
+.d-dedicated .d-selection-panel .dv2-compact-disclosure__body { padding:0; margin:0; }
+.d-dedicated .d-selection-panel .ag71c-input-mode { gap:12px; margin:0 0 5px; }
+.d-dedicated .d-selection-panel .ag71c-input-mode label { font-size:10px; min-height:24px; }
+.d-dedicated .d-selection-panel .ag71c-input-mode input { min-height:0 !important; }
+.d-dedicated .d-selection-panel .form-grid { gap:5px; }
+.d-dedicated .d-selection-panel input,.d-dedicated .d-selection-panel .drishvara-hf12-select-button { padding:7px 9px; font-size:11px; min-height:34px !important; }
+.d-dedicated .d-selection-panel .dv2-location-search { margin-bottom:5px; font-size:10px; }
+.d-dedicated .d-selection-panel .ag71d-select-label { font-size:10px; }
+.d-dedicated .d-selection-panel .ag74o-r3-request-actions { margin:8px 0 0 !important; }
+.d-dedicated .d-selection-panel #panchang-calculate { min-height:36px !important; font-size:11px; }
+body.d-dedicated.drishvara-v2-active .dv2-reflect [data-drishvara-v2-reflect-card="true"]>h2.d-form-title { display:block !important; color:#fffaf0; margin-bottom:10px; font:22px Georgia,serif; }
+.d-dedicated .dv2-reflect .card>.dv2-runtime-label { display:none; }
+.d-dedicated .dv2-reflect .card>.star-safety-note { font-size:11px; }
+.d-dedicated .dv2-reflect .form-grid { gap:8px; }
+.d-dedicated .dv2-reflect .ag71c-input-mode input,.d-dedicated .dv2-reflect input[type="checkbox"] { min-height:0 !important; height:14px; width:14px; }
+.d-dedicated .dv2-reflect .ag71c-input-mode label,.d-dedicated .dv2-reflect .ag73a-birth-time-unknown { min-height:24px; font-size:11px; }
+.d-dedicated #ag75d-e2-star-place-choice-heading { color:#eaf0f7 !important; font:14px Georgia,serif; }
+body.d-dedicated.drishvara-v2-active .ag75d-e2-star-place-choice { background:#0b233b; color:#eaf0f7; border-color:#3a536d; font:11px Arial,sans-serif; min-height:34px; padding:7px 9px; }
+body.d-dedicated.drishvara-v2-active .ag75d-e2-star-place-choice[aria-pressed="true"] { color:#081b2d; background:var(--d-gold); }
+.d-dedicated #ag75d-e2-star-place-choice-panel { margin:0; }
+.d-dedicated .d-form-notes { border-top:1px solid var(--d-line); padding-top:10px; margin-top:12px; font-size:11px; color:var(--d-muted); }
+.d-form-notes summary { cursor:pointer; color:var(--d-gold); }
+.d-dedicated #dv2-observance-year-disclosure .dv2-observance-year__month-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+@media(max-width:1200px) { .d-dedicated .d-selection-panel .ag74i-date-controls { grid-template-columns:auto minmax(80px,1fr) 40px; } }
+@media(max-width:700px) { .d-selection-panel { grid-template-columns:1fr; } .d-dedicated .d-selection-panel #dv2-panchang-location-disclosure { border-left:0; border-top:1px solid var(--d-line); padding:10px 0 0; } .d-dedicated .d-selection-panel .ag74i-date-controls { grid-template-columns:auto minmax(80px,1fr) 40px; } .d-dedicated #dv2-observance-year-disclosure .dv2-observance-year__month-grid { grid-template-columns:1fr; } }
