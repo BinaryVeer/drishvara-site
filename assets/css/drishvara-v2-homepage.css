@@ -376,3 +376,33 @@ body:has(.f2-hero) .nav-timezone-slot { display: none !important; }
     url("../daily-glance/glance-approved-4.webp");
   background-blend-mode:color,normal;
 }
+
+
+/* DRISHVARA GLANCE V8 — preserve full photographic subjects, not centre-cropped cutouts.
+   The five approved source photographs already contain their own left-side fade.
+   Fit the whole photo to the landscape card instead of cropping to a narrow right pane. */
+.f2-daily .f2-day-card::before {
+  inset: 0;
+  width: 100%;
+  background-position: center center;
+  background-size: 100% 100%;
+}
+/* Concentrate contrast protection behind text, leaving the photo itself vivid. */
+.f2-daily .f2-day-card::after {
+  background: linear-gradient(90deg,
+    rgba(255,250,242,.98) 0%,
+    rgba(255,250,242,.95) 27%,
+    rgba(255,250,242,.76) 46%,
+    rgba(255,250,242,.20) 69%,
+    rgba(255,250,242,0) 93%);
+}
+.f2-daily .f2-day-card h3,
+.f2-daily .f2-day-card .f2-day-value { color:#082039; }
+.f2-daily .f2-day-card p,
+.f2-daily .f2-day-card dt,
+.f2-daily .f2-day-card dd { color:#18324a; }
+/* Preserve the full neutral silk photo also when an approved published tint is applied. */
+.f2-daily .f2-day-card:nth-child(4)[data-f2-approved-colour="true"]::before {
+  background-size: 100% 100%,100% 100%;
+  background-position: center,center;
+}
