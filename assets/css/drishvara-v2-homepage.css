@@ -350,3 +350,29 @@ body:has(.f2-hero) .nav-timezone-slot { display: none !important; }
   .f2-daily .f2-day-card dt,
   .f2-daily .f2-day-card dd {font-size:11px;}
 }
+
+
+/* DRISHVARA GLANCE V7 — publisher-approved photographic image replacement only.
+   Retains existing 5-card one-row layout, Arial type, and governed data bindings. */
+.f2-daily .f2-day-card::before {
+  width: 58%;
+  background-size: cover;
+  background-position: center;
+  filter: none;
+}
+.f2-daily .f2-day-card:nth-child(1)::before {background-image:url("../daily-glance/glance-approved-1.webp");}
+.f2-daily .f2-day-card:nth-child(2)::before {background-image:url("../daily-glance/glance-approved-2.webp");}
+.f2-daily .f2-day-card:nth-child(3)::before {background-image:url("../daily-glance/glance-approved-3.webp");}
+.f2-daily .f2-day-card:nth-child(4)::before {background-image:url("../daily-glance/glance-approved-4.webp");}
+.f2-daily .f2-day-card:nth-child(5)::before {background-image:url("../daily-glance/glance-approved-5.webp");}
+.f2-daily .f2-day-card::after {
+  background: linear-gradient(90deg,#fffaf2 0%,rgba(255,250,242,.98) 33%,rgba(255,250,242,.89) 52%,rgba(255,250,242,.30) 77%,rgba(255,250,242,.05) 100%);
+}
+/* One neutral fabric image; exact approved daily colour tints the fabric only.
+   No daily colour assigned or inferred by this CSS. */
+.f2-daily .f2-day-card:nth-child(4)[data-f2-approved-colour="true"]::before {
+  background-image:
+    linear-gradient(var(--f2-public-colour),var(--f2-public-colour)),
+    url("../daily-glance/glance-approved-4.webp");
+  background-blend-mode:color,normal;
+}
