@@ -1,4 +1,14 @@
 {
+  "functions": {
+    "api/editorial-workspace.js": {
+      "includeFiles": "internal-scaffolds/editorial-workspace/{app.html,login.html,workspace.css,workspace.js,editorial-hero-ai.webp}"
+    }
+  },
+  "rewrites": [
+    { "source": "/editorial", "destination": "/api/editorial-workspace" },
+    { "source": "/editorial/", "destination": "/api/editorial-workspace" },
+    { "source": "/internal-scaffolds/editorial-workspace/:path*", "destination": "/api/editorial-workspace" }
+  ],
   "crons": [
     {
       "path": "/api/run-daily-pipeline",

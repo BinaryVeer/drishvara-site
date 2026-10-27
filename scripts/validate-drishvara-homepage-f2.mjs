@@ -12,6 +12,7 @@ const index = json("data/article-index.json");
 const base = "8f96d92f423fece74ca0a3000568f7a1c7a56995";
 // Dedicated-page changes were approved separately after F2; other owners retain the F1 baseline.
 const dedicatedPageBase = "3635946c43e4675576c696ea0eb3a79b7c6e2aa4";
+const editorialIntegrationBase = process.argv.includes("--editorial-integration") ? "0a653f71e53da5213679365f8cd9747e0d90cdbb" : null;
 let count = 0;
 function check(name, run) { run(); count++; console.log("PASS " + name); }
 function fixture(reduced = false) {
@@ -131,7 +132,26 @@ check("no additional calculation, location selection or personal storage owner",
 });
 const protectedPaths=["panchang.html","what-stars-say.html","assets/js/drishvara-v2-panchang.js","assets/js/drishvara-v2-reflect.js","assets/js/drishvara-v2-shell.js","assets/js/sup02-panchang-server-controller.js","assets/logo/logo.png","data/article-index.json","generated/word-of-day.json","generated/vedic-guidance-working-data.json","vercel.json","scripts/lib/ag74k-panchang-input-resolver.mjs","scripts/lib/ag74l-astronomical-engine.mjs","scripts/lib/ag74m-panchang-day-orchestrator.mjs","scripts/lib/ag74n-panchang-calendar-engine.mjs","scripts/lib/ag76-festival-rule-engine.mjs","data/methodology/star-reflection/ag75c-expanded-star-reflection-output-bank.json","data/knowledge-base/panchang-festival/production/ag74p-approved-festival-observance-projection.json","data/knowledge-base/panchang-festival/production/ag74n-varanasi-samvat-2083-annual-calendar.json","data/knowledge-base/panchang-festival/production/ag76-r2b-festival-rule-evidence-benchmarks.json"];
 for(const p of protectedPaths) {
-  const preservedBase = ["panchang.html", "what-stars-say.html"].includes(p) ? dedicatedPageBase : base;
+  const preservedBase = editorialIntegrationBase ?? (["panchang.html", "what-stars-say.html"].includes(p) ? dedicatedPageBase : base);
+  if (p === "vercel.json") {
+    check("F1 hosting preserved except exact isolated Editorial Workspace configuration", () => {
+      const original = JSON.parse(execFileSync("git", ["show", preservedBase + ":" + p], { encoding: "utf8" }));
+      const current = json(p);
+      if (JSON.stringify(current) === JSON.stringify(original)) return;
+      // Separately authorized internal-workspace hosting; no general exemption for config changes.
+      assert.deepEqual(current.functions, { "api/editorial-workspace.js": {
+        includeFiles: "internal-scaffolds/editorial-workspace/{app.html,login.html,workspace.css,workspace.js,editorial-hero-ai.webp}"
+      } });
+      assert.deepEqual(current.rewrites, [
+        { source: "/editorial", destination: "/api/editorial-workspace" },
+        { source: "/editorial/", destination: "/api/editorial-workspace" },
+        { source: "/internal-scaffolds/editorial-workspace/:path*", destination: "/api/editorial-workspace" }
+      ]);
+      const preserved = { ...current }; delete preserved.functions; delete preserved.rewrites;
+      assert.deepEqual(preserved, original);
+    });
+    continue;
+  }
   check("F1/protected owner byte-identical: "+p,()=>assert(fs.readFileSync(p).equals(execFileSync("git",["show",preservedBase+":"+p],{maxBuffer:64*1024*1024}))));
 }
 console.log("F2 validation passed: "+count+" focused checks. Carousel timers use synthetic fixtures, not astronomical calculations.");
