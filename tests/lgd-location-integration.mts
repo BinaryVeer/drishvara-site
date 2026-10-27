@@ -48,7 +48,7 @@ for(const page of ['panchang.html','what-stars-say.html']){
  input.value='Kutumba';input.dispatchEvent(new w.Event('input',{bubbles:true}));await new Promise(r=>setTimeout(r,30));
  const suggestion=w.document.querySelector('#'+input.id+'-suggestions [role=option]');assert.ok(suggestion,'search suggestion');input.dispatchEvent(new w.KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true}));input.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
  if(page==='panchang.html'){assert.equal(w.document.getElementById('panchang-place-select').value,'lgd-subdistrict-1484');}
- else {assert.equal(w.drishvaraAg75dStarReflectionState().selectedLocation.selector_value,'lgd-subdistrict-1484');assert.ok(w.document.querySelectorAll('[data-ag75d-e2-star-place-value]').length<=5);
+ else {assert.equal(w.drishvaraAg75dStarReflectionState().selectedLocation.selector_value,'lgd-subdistrict-1484');assert.equal(w.document.querySelectorAll('[data-ag75d-e2-star-place-value]').length,0);
   const dob=w.document.getElementById('star-reflection-dob');dob.value='10/02/1988';dob.dispatchEvent(new w.Event('input',{bubbles:true}));
   const time=w.document.getElementById('star-reflection-birth-time');time.value='10:05';time.dispatchEvent(new w.Event('input',{bubbles:true}));
   w.document.querySelector('[data-ag71e-preview-button="star-reflection"]').click();await new Promise(r=>setTimeout(r,150));

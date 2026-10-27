@@ -201,7 +201,20 @@
     input.addEventListener('blur', function(e) { if (e.relatedTarget !== more) close(); });
     api.loadApprovedLocations().then(function (data) { records = data; loaded = true; if (document.activeElement === input) render(); }).catch(function () { close(); status.textContent = hindi() ? 'अनुमोदित स्थान सूची अनुपलब्ध है।' : 'Approved saved-place list unavailable.'; });
   }
-  function mount() { install(document.getElementById('panchang-place-alias'), false); install(document.getElementById('dv2-star-location-search'), true); }
+  function mount() {
+    var search = document.getElementById('panchang-place-alias');
+    install(search, false);
+    install(document.getElementById('dv2-star-location-search'), true);
+    // Keep the controller-owned select for state, without a duplicate visual menu.
+    var select = document.getElementById('panchang-place-select');
+    var wrapper = select && select.nextElementSibling;
+    if (search && wrapper && wrapper.matches('[data-drishvara-hf12-select]')) {
+      wrapper.hidden = true;
+      wrapper.style.display = 'none';
+      var label = document.querySelector('label[for="panchang-place-select"]');
+      if (label) label.hidden = true;
+    }
+  }
   function boot() {
     var style = document.createElement('style');
     style.textContent = '.dv2-saved-place-suggestions{display:grid;gap:2px;border:1px solid #8a7746;border-radius:5px;padding:4px;max-height:220px;overflow:auto;background:#0b2138;color:#edf2f7;margin:4px 0;font:12px/1.5 Arial,sans-serif}.dv2-saved-place-suggestions[hidden]{display:none}.dv2-saved-place-suggestions [role=option]{padding:10px;cursor:pointer;overflow-wrap:anywhere}.dv2-saved-place-suggestions [role=option]:hover,.dv2-saved-place-suggestions [aria-selected=true]{background:#efc359;color:#091c30}.dv2-saved-place-suggestions [aria-disabled=true]{opacity:.75;cursor:default}.dv2-saved-place-status{font:11px/1.5 Arial,sans-serif;margin:4px 0;color:inherit}';

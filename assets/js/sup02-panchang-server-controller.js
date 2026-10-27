@@ -625,32 +625,9 @@
       return;
     }
 
-    choices.innerHTML = "";
-    records.filter(function(r) { return !r.selector_value.startsWith("lgd-"); }).slice(0,5).forEach(function (record) {
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "ag75d-e2-star-place-choice";
-      button.textContent = record.display_label;
-      button.setAttribute(
-        "data-ag75d-e2-star-place-value",
-        record.selector_value
-      );
-      button.setAttribute(
-        "data-location-id",
-        record.canonical_place_id || ""
-      );
-      button.setAttribute("data-timezone", record.timezone || "");
-      button.setAttribute(
-        "data-latitude",
-        String(record.latitude)
-      );
-      button.setAttribute(
-        "data-longitude",
-        String(record.longitude)
-      );
-      button.setAttribute("aria-pressed", "false");
-      choices.appendChild(button);
-    });
+    // Search owns location selection; do not duplicate a fixed city-button row.
+    choices.replaceChildren();
+    choices.hidden = true;
 
     choices.setAttribute(
       "data-ag75d-e2-populated-count",
