@@ -1,0 +1,2 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {gzipSync} from 'node:zlib';
+export function coreHash(r){return crypto.createHash('sha256').update(JSON.stringify({available:r.available,reason:r.reason||null,sunrise:r.sunrise?.utc||null,sunset:r.sunset?.utc||null,elements:r.elements||null,transitions:r.transitions?Object.fromEntries(Object.entries(r.transitions).map(([t,p])=>[t,Object.fromEntries(Object.entries(p).map(([side,e])=>[side,{utc:e.utc,fromIndex:e.fromIndex,toIndex:e.toIndex}]))])):null})).digest('hex');}

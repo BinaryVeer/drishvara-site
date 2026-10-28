@@ -1,0 +1,30 @@
+{
+  "status": "local_checks_passed_live_verification_pending",
+  "findings": [
+    "PV-01",
+    "PV-02",
+    "PV-03"
+  ],
+  "matrix": {
+    "cases": 5384,
+    "available": 5382,
+    "unavailable": 2,
+    "element_indices_and_angles_unchanged": true,
+    "utc_event_times_unchanged": true,
+    "timestamps_checked": 64584,
+    "timestamp_consistency_failures": 0,
+    "cases_with_explicit_precision_notice": 30
+  },
+  "independent_status": "independent_comparison_passed_with_explicit_boundary_review",
+  "independent_max_transition_seconds": 8.249160647392273,
+  "approved_bank_parity": {
+    "approved_records": 384,
+    "element_index_differences": [],
+    "max_sunrise_difference_milliseconds": 0
+  },
+  "approved_bank_payload_hash_before": "fea0e369c6b0a9f111557227a72d266b783afe7fd0d5c6e26c377ad89b0250e7",
+  "runtime_source_sha256": "7b99317c22eca9cc18c62a4e25eacc2f0d0d19aa40de776a36d91fe485f08d29",
+  "policy": "drishvara_boundary_review_v1",
+  "bank_writes": 0,
+  "approval_gates_changed": false
+}

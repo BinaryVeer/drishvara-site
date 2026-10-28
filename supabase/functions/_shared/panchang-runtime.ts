@@ -153,16 +153,32 @@ function timezoneOffsetMinutesAt(ms: number, timezone: string): number {
   return Math.round((localAsUtc - Math.floor(ms / 1000) * 1000) / 60000);
 }
 
-function formatZonedIso(ms: number, timezone: string): string {
+function zonedStamp(ms: number, timezone: string) {
   const p = zonedParts(ms, timezone);
-  const offset = timezoneOffsetMinutesAt(ms, timezone);
-  const sign = offset >= 0 ? "+" : "-";
-  const absolute = Math.abs(offset);
-  return (
-    `${pad(p.year, 4)}-${pad(p.month)}-${pad(p.day)}T` +
-    `${pad(p.hour)}:${pad(p.minute)}:${pad(p.second)}` +
-    `${sign}${pad(Math.floor(absolute / 60))}:${pad(absolute % 60)}`
-  );
+  const wholeSecond = Math.floor(ms / 1000) * 1000;
+  const offsetSeconds = Math.round((Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second) - wholeSecond) / 1000);
+  const legacyMinutes = Math.round(offsetSeconds / 60);
+  const suffix = (seconds: number, includeSeconds: boolean) => {
+    const sign = seconds >= 0 ? "+" : "-";
+    const value = Math.abs(seconds);
+    return sign + pad(Math.floor(value / 3600)) + ":" + pad(Math.floor(value / 60) % 60) + (includeSeconds ? ":" + pad(value % 60) : "");
+  };
+  const clock = `${pad(p.year, 4)}-${pad(p.month)}-${pad(p.day)}T${pad(p.hour)}:${pad(p.minute)}:${pad(p.second)}`;
+  // Keep a Date.parse-compatible representation of the SAME UTC instant.
+  // Exact historical civil-clock/offset seconds are carried separately.
+  const legacyClock = new Date(wholeSecond + legacyMinutes * 60000).toISOString().slice(0, 19);
+  return {
+    local: legacyClock + suffix(legacyMinutes * 60, false),
+    local_exact: clock + suffix(offsetSeconds, offsetSeconds % 60 !== 0),
+    utc_offset_seconds: offsetSeconds,
+    timezone,
+    local_precision: "second",
+    local_representation: offsetSeconds % 60 === 0 ? "exact_minute_offset" : "compatible_minute_offset_same_instant"
+  };
+}
+
+function formatZonedIso(ms: number, timezone: string): string {
+  return zonedStamp(ms, timezone).local;
 }
 
 function shiftDate(dateKey: string, amount: number): string {
@@ -292,7 +308,7 @@ function nextBoundary(type: string, startMs: number, timezone: string) {
   }
   return {
     utc: new Date(upperMs).toISOString(),
-    local: formatZonedIso(upperMs, timezone),
+    ...zonedStamp(upperMs, timezone),
     fromIndex: current,
     toIndex: (current % definition.count) + 1,
     residual: Math.abs(signedDifference(angleFor(definition.kind, upperMs), target))
@@ -323,7 +339,7 @@ function previousBoundary(type: string, startMs: number, timezone: string) {
   const fromIndex = classify(lower).elements[type].index;
   return {
     utc: new Date(upper).toISOString(),
-    local: formatZonedIso(upper, timezone),
+    ...zonedStamp(upper, timezone),
     fromIndex,
     toIndex: current
   };
@@ -348,7 +364,7 @@ function sunEvent(
   if (ms < windowInfo.startMs || ms >= windowInfo.endMs) return null;
   return {
     utc: result.date.toISOString(),
-    local: formatZonedIso(ms, timezone)
+    ...zonedStamp(ms, timezone)
   };
 }
 
@@ -388,7 +404,7 @@ export function calculatePanchangDay(request: RuntimeRequest) {
   const [year, month, day] = request.civil_date.split("-").map(Number);
   const weekday = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
 
-  return {
+  return decoratePanchangResult({
     available: true,
     engine_profile_id: "drishvara_astronomical_engine_v1",
     engine_package: "astronomy-engine",
@@ -419,5 +435,56 @@ export function calculatePanchangDay(request: RuntimeRequest) {
     astronomical_state_at_sunrise: current.raw,
     persistence_performed: false,
     external_api_used: false
+  }, request.timezone);
+}
+
+
+export const BOUNDARY_REVIEW_SECONDS = 60;
+
+export function decoratePanchangResult(value: Record<string, unknown>, timezone: string): Record<string, unknown> {
+  if (value.available !== true) return value;
+  const result = structuredClone(value);
+  const stamp = (event: unknown): unknown => {
+    if (!event || typeof event !== "object") return event;
+    const item = event as Record<string, unknown>;
+    const ms = typeof item.utc === "string" ? Date.parse(item.utc) : NaN;
+    return Number.isFinite(ms) ? {...item, ...zonedStamp(ms, timezone)} : event;
   };
+  result.sunrise = stamp(result.sunrise);
+  result.sunset = stamp(result.sunset);
+  const transitions = result.transitions as Record<string, Record<string, unknown>> | undefined;
+  const sunrise = result.sunrise as Record<string, unknown> | undefined;
+  const anchorMs = sunrise && typeof sunrise.utc === "string" ? Date.parse(sunrise.utc) : NaN;
+  const affected: {element: string; transition: string; distance_seconds: number}[] = [];
+  for (const type of ["tithi", "nakshatra", "yoga", "karana"]) {
+    const transition = transitions?.[type];
+    if (!transition) continue;
+    for (const side of ["previous", "next"]) {
+      transition[side] = stamp(transition[side]);
+      const event = transition[side] as Record<string, unknown> | undefined;
+      if (event && typeof event.utc === "string" && Number.isFinite(anchorMs)) {
+        const distance = Math.abs(Date.parse(event.utc) - anchorMs) / 1000;
+        if (distance <= BOUNDARY_REVIEW_SECONDS) affected.push({element: type, transition: side, distance_seconds: round(distance, 3)});
+      }
+    }
+  }
+  const window = result.window as Record<string, unknown> | undefined;
+  if (window) {
+    for (const [utcKey, prefix] of [["start_utc", "start"], ["end_utc_exclusive", "end"]]) {
+      const ms = typeof window[utcKey] === "string" ? Date.parse(window[utcKey] as string) : NaN;
+      if (!Number.isFinite(ms)) continue;
+      const info = zonedStamp(ms, timezone);
+      window[prefix === "start" ? "start_local" : "end_local_exclusive"] = info.local;
+      window[prefix === "start" ? "start_local_exact" : "end_local_exact_exclusive"] = info.local_exact;
+      window[prefix + "_utc_offset_seconds"] = info.utc_offset_seconds;
+    }
+  }
+  result.precision = {
+    policy_id: "drishvara_boundary_review_v1", review_window_seconds: BOUNDARY_REVIEW_SECONDS,
+    anchor: "sunrise", requires_review: affected.length > 0, affected_elements: affected,
+    notice: affected.length ? "Near a transition boundary. Element labels are derived from the approved profile; exact segment selection requires review." : null,
+    policy_note: "A conservative review interval, not a certified error bound."
+  };
+  result.timezone_rule_basis = {identifier: timezone, provider: "runtime_Intl_IANA", resolved_identifier: formatter(timezone).resolvedOptions().timeZone};
+  return result;
 }

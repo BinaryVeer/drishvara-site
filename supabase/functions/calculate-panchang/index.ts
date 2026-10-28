@@ -1,10 +1,10 @@
 import { corsHeaders, governedError, jsonResponse } from "../_shared/http.ts";
 import {
-  PanchangRequest,
+  type PanchangRequest,
   resolvePanchangRequest,
   type LocationRow
 } from "../_shared/location-resolution.ts";
-import { calculatePanchangDay } from "../_shared/panchang-runtime.ts";
+import { calculatePanchangDay, decoratePanchangResult } from "../_shared/panchang-runtime.ts";
 
 const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
 const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
@@ -83,23 +83,27 @@ function hasCompletePublicPanchangResult(
   });
 }
 
-function normalizePrecomputedRuntimeResult(
-  value: unknown
-): Record<string, unknown> | null {
+function normalizePrecomputedRuntimeResult(value: unknown): Record<string, unknown> | null {
   if (!isRecord(value)) return null;
-
-  if (value["available"] === true || value["available"] === false) {
-    return value;
+  // A governed unavailable record remains unavailable; it is never recalculated away.
+  if (value["available"] === false) return value;
+  if (!hasCompletePublicPanchangResult(value)) return null;
+  const sunrise = value["sunrise"] as Record<string, unknown>;
+  const anchor = typeof sunrise.utc === "string" ? Date.parse(sunrise.utc) : NaN;
+  const elements = value["elements"] as Record<string, Record<string, unknown>>;
+  const transitions = isRecord(value["transitions"]) ? value["transitions"] : null;
+  if (!Number.isFinite(anchor) || !transitions) return null;
+  for (const [type, count] of [["tithi", 30], ["nakshatra", 27], ["yoga", 27], ["karana", 60]] as const) {
+    const pair = isRecord(transitions[type]) ? transitions[type] : null;
+    const previous = pair && isRecord(pair.previous) ? pair.previous : null;
+    const next = pair && isRecord(pair.next) ? pair.next : null;
+    if (!previous || !next || typeof previous.utc !== "string" || typeof next.utc !== "string") return null;
+    const before = Date.parse(previous.utc), after = Date.parse(next.utc);
+    const current = Number(elements[type].index);
+    if (!Number.isInteger(current) || current < 1 || current > count || !Number.isFinite(before) || !Number.isFinite(after) || before > anchor || after <= anchor) return null;
+    if (Number(previous.toIndex) !== current || Number(next.fromIndex) !== current || Number(previous.fromIndex) !== ((current + count - 2) % count) + 1 || Number(next.toIndex) !== current % count + 1) return null;
   }
-
-  if (!hasCompletePublicPanchangResult(value)) {
-    return null;
-  }
-
-  return {
-    ...value,
-    available: true
-  };
+  return {...value, available: true};
 }
 
 Deno.serve(async (request: Request) => {
@@ -233,6 +237,7 @@ Deno.serve(async (request: Request) => {
     let panchangSource = "approved_server_calculation";
     let panchangResult: unknown = null;
     let sourceContentHash: string | null = null;
+    let precomputedFallback: {reason: string; content_hash: string} | null = null;
 
     if (resolved.canonical_place_id) {
       const exactRows = await restGet<{
@@ -263,8 +268,10 @@ Deno.serve(async (request: Request) => {
         );
         if (runtimeResult) {
           panchangSource = "approved_precomputed_record";
-          panchangResult = runtimeResult;
+          panchangResult = decoratePanchangResult(runtimeResult, resolved.timezone);
           sourceContentHash = exactRows[0].content_hash;
+        } else {
+          precomputedFallback = {reason: "incomplete_public_result_or_transition_metadata", content_hash: exactRows[0].content_hash};
         }
       }
     }
@@ -332,6 +339,7 @@ Deno.serve(async (request: Request) => {
       panchang: {
         source: panchangSource,
         source_content_hash: sourceContentHash,
+        precomputed_fallback: precomputedFallback,
         result: panchangResult
       },
       observances: observanceRows.map((row) => ({
@@ -355,3 +363,4 @@ Deno.serve(async (request: Request) => {
     );
   }
 });
+

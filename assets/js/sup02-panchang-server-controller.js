@@ -1341,16 +1341,17 @@
       String(transition.local || "").trim() &&
       isValidNakshatraIndex(Number(transition.fromIndex)) &&
       isValidNakshatraIndex(Number(transition.toIndex)) &&
-      parseLocalDateTimeComparable(transition.local) !== null
+      Number.isFinite(Date.parse(transition.utc)) &&
+      parseLocalDateTimeComparable(transition.local_exact || transition.local) !== null
     );
   }
 
-  function localMinuteMatchCount(civilDate, time, timezone) {
+  function localMinuteUtcMatches(civilDate, time, timezone) {
     var dateMatch = String(civilDate || "").match(
       /^(\d{4})-(\d{2})-(\d{2})$/
     );
     var timeMatch = String(time || "").match(/^(\d{2}):(\d{2})$/);
-    if (!dateMatch || !timeMatch || !validTimezone(timezone)) return 0;
+    if (!dateMatch || !timeMatch || !validTimezone(timezone)) return [];
 
     var target = {
       year: Number(dateMatch[1]),
@@ -1368,6 +1369,7 @@
       day: "2-digit",
       hour: "2-digit",
       minute: "2-digit",
+      second: "2-digit",
       hour12: false,
       hourCycle: "h23"
     });
@@ -1379,7 +1381,7 @@
       target.minute,
       0
     );
-    var matches = 0;
+    var matches = [];
 
     for (var offset = -2160; offset <= 2160; offset += 1) {
       var parts = {};
@@ -1399,8 +1401,9 @@
         hour === target.hour &&
         Number(parts.minute) === target.minute
       ) {
-        matches += 1;
-        if (matches > 1) return matches;
+        var minuteStart = nominal + offset * 60000 - Number(parts.second || 0) * 1000;
+        if (matches.indexOf(minuteStart) === -1) matches.push(minuteStart);
+        if (matches.length > 1) return matches;
       }
     }
 
@@ -1420,6 +1423,10 @@
     }
 
     if (context.precision === "unknown") {
+      var dayPrecision = runtime.result.precision;
+      if (dayPrecision && dayPrecision.requires_review && Array.isArray(dayPrecision.affected_elements) && dayPrecision.affected_elements.some(function (item) { return item.element === "nakshatra"; })) {
+        return {state: "boundary_review_required", anchor: "sunrise", reviewSeconds: dayPrecision.review_window_seconds};
+      }
       return {
         state: "unknown_day_context",
         dayContextNakshatra: {
@@ -1430,17 +1437,17 @@
     }
 
     var timezone = context.location.timezone;
-    var matchCount = localMinuteMatchCount(
+    var minuteMatches = localMinuteUtcMatches(
       context.civilDate,
       context.birthTime.time,
       timezone
     );
 
-    if (matchCount === 0) {
+    if (minuteMatches.length === 0) {
       return { state: "unresolved_nonexistent_local_time" };
     }
 
-    if (matchCount > 1) {
+    if (minuteMatches.length > 1) {
       return { state: "unresolved_ambiguous_local_time" };
     }
 
@@ -1459,13 +1466,16 @@
       return { state: "missing_transition_metadata" };
     }
 
-    var birthStart = parseCivilMinuteComparable(
-      context.civilDate,
-      context.birthTime.time
-    );
+    var birthStart = minuteMatches[0];
     var birthEnd = birthStart + 60000;
-    var previousTime = parseLocalDateTimeComparable(previous.local);
-    var nextTime = parseLocalDateTimeComparable(next.local);
+    var previousTime = Date.parse(previous.utc);
+    var nextTime = Date.parse(next.utc);
+    var reviewSeconds = runtime.result.precision && Number(runtime.result.precision.review_window_seconds);
+    if (!(reviewSeconds >= 1 && reviewSeconds <= 180)) reviewSeconds = 60;
+    var reviewMs = reviewSeconds * 1000;
+    if ([previousTime, nextTime].some(function (time) { return time >= birthStart - reviewMs && time <= birthEnd + reviewMs; })) {
+      return {state: "boundary_review_required", anchor: "birth_minute", reviewSeconds: reviewSeconds};
+    }
 
     if (previousTime > birthStart && previousTime < birthEnd) {
       return { state: "exact_transition_minute_ambiguous" };
@@ -1700,6 +1710,24 @@
   }
 
   function renderStarState(context, resolution, runtime) {
+    // A precision notice is a runtime availability state, not a new reflective-bank record.
+    if (resolution.state === "boundary_review_required") {
+      var panel = showStarPanel("Transition precision review required");
+      var grid = starPreviewGrid();
+      if (grid) {
+        grid.innerHTML = "";
+        grid.appendChild(starRow("Resolution state", "boundary_review_required"));
+        grid.appendChild(starRow("Location basis", context.locationBasis));
+        grid.appendChild(starRow("Birth-date basis", context.birthDateBasis));
+        grid.appendChild(starRow("Birth-time basis", context.birthTimeBasis));
+        grid.appendChild(starRow("Limitation notice", "The " + (resolution.anchor === "sunrise" ? "sunrise basis" : "entered birth minute") + " is within the " + resolution.reviewSeconds + "-second transition review interval. No exact Nakshatra is selected; review the time and calculation basis."));
+      }
+      var starCard = starReflectionCard();
+      if (starCard) starCard.setAttribute("data-ag75d-e3-star-reflection-state", "boundary_review_required");
+      var note = panel && panel.querySelector(".ag71e-preview-note");
+      if (note) note.textContent = "Precision review notice only. No new reflection is generated and no personal inputs are stored.";
+      return Promise.resolve();
+    }
     return loadStarOutputBank()
       .then(function (recordsForBank) {
         var record = selectStarOutputRecord(
@@ -2774,6 +2802,10 @@
   }
 
   function setResultState(name) {
+    if (name !== "calculated") {
+      var precisionNotice = byId("panchang-precision-notice");
+      if (precisionNotice) { precisionNotice.hidden = true; precisionNotice.textContent = ""; }
+    }
     card.setAttribute("data-sup02-result-state", name);
     card.setAttribute("data-ag74o-result-state", name);
     card.setAttribute(
@@ -2964,9 +2996,9 @@
         : "next segment";
     return (
       "Began " +
-      transition.previous.local.replace("T", " ") +
+      (transition.previous.local_exact || transition.previous.local).replace("T", " ") +
       " · Next " +
-      transition.next.local.replace("T", " ") +
+      (transition.next.local_exact || transition.next.local).replace("T", " ") +
       " (" +
       nextName +
       ")"
@@ -3169,13 +3201,13 @@
     setText(
       "panchang-sunrise",
       result.sunrise && result.sunrise.local
-        ? result.sunrise.local.replace("T", " ")
+        ? (result.sunrise.local_exact || result.sunrise.local).replace("T", " ")
         : "Not available"
     );
     setText(
       "panchang-sunset",
       result.sunset && result.sunset.local
-        ? result.sunset.local.replace("T", " ")
+        ? (result.sunset.local_exact || result.sunset.local).replace("T", " ")
         : "No sunset within this civil date"
     );
     setText(
@@ -3242,6 +3274,20 @@
         isoToDisplay(request.civil_date) +
         ". No input has been stored."
     );
+    var precision = result.precision || {};
+    var affected = Array.isArray(precision.affected_elements) ? precision.affected_elements : [];
+    affected.forEach(function (item) {
+      var field = byId("panchang-" + item.element);
+      if (field && field.textContent.indexOf("boundary review") === -1) field.textContent += " · profile-derived; boundary review";
+    });
+    var reader = byId("dv2-panchang-reader-panel");
+    var notice = byId("panchang-precision-notice");
+    if (!notice && reader) {
+      notice = document.createElement("p"); notice.id = "panchang-precision-notice";
+      notice.className = "dv2-section-note"; notice.setAttribute("role", "status"); reader.appendChild(notice);
+    }
+    if (notice) {notice.hidden = !precision.requires_review; notice.textContent = precision.notice || "";}
+    if (precision.requires_review) setText("panchang-selection-status", "Calculated with the approved profile. " + precision.notice);
     setProvenance(response);
     renderObservances(response.observances);
     setResultState("calculated");
@@ -3855,3 +3901,4 @@
     boot();
   }
 })();
+

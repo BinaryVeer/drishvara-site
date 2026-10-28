@@ -1,0 +1,25 @@
+import fs from 'node:fs';import {gunzipSync} from 'node:zlib';import assert from 'node:assert/strict';import {JSDOM} from 'jsdom';
+import {calculatePanchangDay} from '../supabase/functions/_shared/panchang-runtime.ts';
+const catalog=({record_count:3266,records:[...JSON.parse(fs.readFileSync('data/knowledge-base/location-intelligence/production/ag74p-approved-location-projection.json')).records,...JSON.parse(gunzipSync(fs.readFileSync('data/location-releases/lgd-hq-20261026.json.gz'))).records,...JSON.parse(gunzipSync(fs.readFileSync('data/location-releases/city-restoration-20261028.json.gz'))).records]});
+const source=fs.readFileSync('assets/js/sup02-panchang-server-controller.js','utf8');
+const edge=calculatePanchangDay({civil_date:'1900-01-02',latitude:9.02497,longitude:38.74689,timezone:'Africa/Addis_Ababa'});
+const modern=calculatePanchangDay({civil_date:'2026-10-28',latitude:25.3176,longitude:82.9739,timezone:'Asia/Kolkata'});
+let result=edge,bankReads=0;
+function dom(page){const d=new JSDOM(fs.readFileSync(page,'utf8'),{url:'https://www.drishvara.com/'+page,runScripts:'outside-only',pretendToBeVisual:true});const w=d.window;w.AbortController=AbortController;w.HTMLElement.prototype.scrollIntoView=function(){};w.DrishvaraV2Location={loadApprovedLocationPayload:async()=>catalog,loadApprovedLocations:async()=>catalog.records};w.fetch=async(url)=>{if(String(url).includes('output-bank'))bankReads++;if(String(url).includes('annual-calendar'))return Response.json(JSON.parse(fs.readFileSync('data/knowledge-base/panchang-festival/production/ag74n-varanasi-samvat-2083-annual-calendar.json')));return Response.json({privacy:{calculation_request_persisted:false,location_input_persisted:false,personal_data_persisted:false},public_ui_cutover_active:true,location_basis:{display_label:'Test reference',timezone:'Africa/Addis_Ababa',latitude:9.02497,longitude:38.74689},panchang:{source:'approved_server_calculation',result},observances:[]});};return d;}
+const star=dom('what-stars-say.html'),w=star.window;
+w.eval(source.replace('  function resolveStarBasis(context, runtime) {','  window.__resolveBasis = resolveStarBasis;\n  window.__renderState = renderStarState;\n  window.__minutes = localMinuteUtcMatches;\n  function resolveStarBasis(context, runtime) {'));
+await new Promise(r=>setTimeout(r,250));
+const ctx={precision:'unknown',location:{timezone:'Africa/Addis_Ababa'},civilDate:'1900-01-02',locationBasis:'Test reference',birthDateBasis:'Synthetic 1900-01-02',birthTimeBasis:'Synthetic test minute'};
+assert.equal(w.__resolveBasis(ctx,{state:'available',result:edge}).state,'boundary_review_required');
+ctx.precision='exact_session_only';ctx.birthTime={time:'06:08'};assert.equal(w.__resolveBasis(ctx,{state:'available',result:edge}).state,'boundary_review_required');
+const matches=w.__minutes('1900-01-02','06:08','Africa/Addis_Ababa');assert.equal(matches.length,1);assert.equal(new Date(matches[0]).toISOString(),'1900-01-02T03:40:44.000Z');
+ctx.birthTime={time:'10:00'};assert.equal(w.__resolveBasis(ctx,{state:'available',result:edge}).state,'exact_window_resolved');
+ctx.location.timezone='Europe/London';ctx.civilDate='2026-03-29';ctx.birthTime={time:'01:30'};assert.equal(w.__resolveBasis(ctx,{state:'available',result:modern}).state,'unresolved_nonexistent_local_time');
+ctx.civilDate='2026-10-25';assert.equal(w.__resolveBasis(ctx,{state:'available',result:modern}).state,'unresolved_ambiguous_local_time');
+const before=bankReads;await w.__renderState(ctx,{state:'boundary_review_required',anchor:'birth_minute',reviewSeconds:60},{state:'available',result:edge});assert.equal(bankReads,before);
+const panel=w.document.querySelector('[data-ag75d-e3-star-reflection-result="active"]');assert.ok(panel);assert.ok(panel.textContent.includes('No exact Nakshatra is selected'));assert.ok(!panel.textContent.includes('Exact birth Nakshatra'));assert.ok(!panel.textContent.includes('Reflective theme'));
+star.window.close();
+const page=dom('panchang.html');const pw=page.window;const reader=pw.document.createElement('section');reader.id='dv2-panchang-reader-panel';pw.document.body.append(reader);pw.eval(source);await new Promise(r=>setTimeout(r,180));
+assert.equal(pw.document.getElementById('panchang-precision-notice').hidden,false);assert.match(pw.document.getElementById('panchang-nakshatra').textContent,/boundary review/);assert.match(pw.document.getElementById('panchang-sunrise').textContent,/\+02:27:16/);
+result=modern;await pw.drishvaraSup02ApplySelection({focusStatus:false});assert.equal(pw.document.getElementById('panchang-precision-notice').hidden,true);page.window.close();
+console.log('PASS: near-boundary day/exact birth results withhold exact claims without bank changes; historical seconds and DST handled; ordinary results and notice clearing preserved.');
