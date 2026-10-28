@@ -1,0 +1,59 @@
+{
+  "status": "live_calculation_and_browser_verification_completed",
+  "verification_date": "2026-10-28",
+  "active_locations": 3266,
+  "added_records_verified_all_fields": 719,
+  "live_calculations": {
+    "date": "2026-10-28",
+    "tested": 719,
+    "passed": 719,
+    "available": 719,
+    "unavailable": 0,
+    "failures": [],
+    "elapsed_seconds": 619,
+    "max_seconds": 28.869
+  },
+  "independent_solar_check": {
+    "status": "independent_solar_sanity_check_not_full_panchang_or_identity_certification",
+    "date": "2026-10-28",
+    "library": "pyswisseph 2.10.3.2 / Swiss Ephemeris 2.10.03",
+    "ephemeris": "Moshier analytical, FLG_MOSEPH",
+    "horizon": "Sun upper limb, sea level, standard atmosphere 1013.25 hPa, 15 C",
+    "tolerance_seconds": 120,
+    "tested_locations": 719,
+    "passed": 719,
+    "maximum_absolute_difference_seconds": 5.881,
+    "median_absolute_difference_seconds": 2.041,
+    "exceptions": [],
+    "limitations": [
+      "Compares solar rise/set only, not every Panchang element or transition.",
+      "Standardized sea-level refraction is not actual local weather/terrain.",
+      "Agreement does not certify place identity, source freshness or historical timezone rules."
+    ]
+  },
+  "dst_and_historical_cases": 10,
+  "browser_checks": {
+    "Bengaluru_alias": "resolved",
+    "Bedauliya": "calculated_and_displayed",
+    "London": "calculated_and_displayed",
+    "Township_unknown_time": "unknown_day_context",
+    "London_nonexistent_time": "unresolved_nonexistent_local_time",
+    "London_repeated_time": "unresolved_ambiguous_local_time"
+  },
+  "negative_requests": {
+    "unknown_place": 422,
+    "date_before_1900": 422
+  },
+  "fixes": {
+    "panchang_provenance_scope": "4a8f73e78119f0b6c8803f02cb08db0f7b5aa282",
+    "targeted_selector_lookup": "0be35e860203e76058eb284dd284195942ed56e3"
+  },
+  "edge_function_version": 9,
+  "approved_payload_sha256": "8c1471d0d5b83ffd54078968f5ad4def72f45d2d6dbcc8241225f63422563c8e",
+  "notes": [
+    "The sweep started on Edge Function v8 and completed on v9; the astronomical module and approved coordinates were unchanged.",
+    "Independent cross-engine checking covers solar rise/set only, not every Panchang element or transition.",
+    "Synthetic birth dates were used in browser tests; no real personal birth details were used.",
+    "Elapsed time in the live summary is the resumed final segment, not total wall time."
+  ]
+}
