@@ -53,6 +53,10 @@ for(const page of ['panchang.html','what-stars-say.html']){
   const time=w.document.getElementById('star-reflection-birth-time');time.value='10:05';time.dispatchEvent(new w.Event('input',{bubbles:true}));
   w.document.querySelector('[data-ag71e-preview-button="star-reflection"]').click();await new Promise(r=>setTimeout(r,150));
   const panel=w.document.querySelector('[data-ag75d-e3-star-reflection-result="active"]');assert.ok(panel);assert.ok(panel.textContent.includes('Kutumba'));assert.ok(panel.textContent.includes('LGD 1484'));assert.ok(!panel.textContent.includes('runtime_unavailable'));
+  // Language changes must preserve search-selected place summaries after button removal.
+  const hindi=w.document.querySelector('#reflect [data-dv2-language-choice="hi"]');assert.ok(hindi);hindi.click();
+  await new Promise(r=>setTimeout(r,1700));
+  assert.ok(w.document.getElementById('ag75d-e2-star-place-summary').textContent.includes('Kutumba'));
  }
  console.log('PASS: '+page+' typeahead selects full-catalog location.');dom.window.close();
 }

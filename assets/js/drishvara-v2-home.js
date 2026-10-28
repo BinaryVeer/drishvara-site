@@ -2255,8 +2255,11 @@
     var summary = document.getElementById("ag75d-e2-star-place-summary");
     if (summary) {
       var selected = document.querySelector("[data-ag75d-e2-star-place-value][aria-pressed='true']");
-      summary.textContent = selected
-        ? d.selectedBirthPlace + ": " + selected.textContent.trim()
+      var selectedRecord = typeof window.drishvaraAg75dStarReflectionState === "function"
+        ? window.drishvaraAg75dStarReflectionState().selectedLocation : null;
+      summary.textContent = selectedRecord
+        ? d.selectedBirthPlace + ": " + selectedRecord.display_label
+        : selected ? d.selectedBirthPlace + ": " + selected.textContent.trim()
         : d.selectedBirthPlaceNone;
     }
     var previewEyebrow = document.querySelector('[data-ag71e-preview-panel="star-reflection"] .eyebrow');

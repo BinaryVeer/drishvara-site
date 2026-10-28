@@ -7,7 +7,12 @@ const catalog=await call({action:'locations'});
 assert.equal(catalog.catalog_version,'20261026');assert.equal(catalog.record_count,2547);assert.equal(catalog.records.length,2547);
 const expected=JSON.parse(gunzipSync(fs.readFileSync('data/location-releases/lgd-hq-20261026.json.gz')).toString('utf8')).records;
 const actual=new Map(catalog.records.map(r=>[r.selector_value,r]));assert.equal(actual.size,2547);
-for(const r of expected){const a=actual.get(r.selector_value);assert.ok(a);for(const k of ['canonical_place_id','latitude','longitude','timezone','lgd_code','source_dataset_epoch'])assert.equal(a[k],r[k]);}
+for(const r of expected){
+ const a=actual.get(r.selector_value);assert.ok(a);
+ for(const k of ['canonical_place_id','timezone','lgd_code','source_dataset_epoch'])assert.equal(a[k],r[k]);
+ // PostgreSQL JSON float output can round the final binary-double digit.
+ for(const k of ['latitude','longitude'])assert.ok(Math.abs(Number(a[k])-r[k])<=1e-12,r.selector_value+' '+k+' differs from approved coordinates');
+}
 // One representative of each state and source epoch, plus the final page record.
 const selected=new Map();for(const r of expected)selected.set(r.state_code+':'+r.source_dataset_epoch,r);selected.set('last',catalog.records.at(-1));
 for(const r of selected.values()){
@@ -15,4 +20,4 @@ for(const r of selected.values()){
  assert.equal(result.location_basis.canonical_place_id,r.canonical_place_id);assert.equal(result.location_basis.timezone,r.timezone);
  assert.equal(result.privacy.calculation_request_persisted,false);assert.ok(result.panchang.result);console.log('PASS '+r.selector_value);
 }
-console.log('PASS: all 2,542 additions read back exactly; representative named calculations and privacy checks passed.');
+console.log('PASS: all 2,542 additions match within JSON float serialization precision; representative named calculations and privacy checks passed.');

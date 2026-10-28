@@ -13,11 +13,17 @@
   "independent_astronomical_benchmark": false,
   "user_authorization": "Accept older official reference coordinates; correct on user reports or new records.",
   "payload_sha256": "4c14572de0e249bb652d45eea2fd31fe18782469dad7a6fbed6c6d1f4202ce9d",
-  "activation": "Requires backend code deployment, transactional location activation and live readback. Frontend consumes only the server-active catalog.",
+  "activation": "Active since 2026-10-27T04:10:25.581562Z; frontend consumes the server-active catalog.",
   "implementation_checks": {
     "paginated_catalog_and_named_runtime": "passed_against_isolated_mock_database_using_real_edge_function",
     "page_dom_typeahead_keyboard_and_reflection_inputs": "passed_with_mocked_backend",
     "activation_and_guarded_rollback": "passed_in_isolated_PGlite_PostgreSQL_hashing_stubbed",
-    "live_supabase_activation": "not_performed_no_authenticated_deployment_access"
-  }
+    "live_supabase_activation": "completed_2026-10-27",
+    "live_server_readback": "all_2542_additions_match_identity_timezone_epoch_and_coordinates_within_1e-12_degrees",
+    "live_named_calculations": "19_representative_named_calculations_passed",
+    "live_browser": "Kutumba Panchang and synthetic unknown-time Star Reflection passed on 2026-10-27"
+  },
+  "active_location_count": 2547,
+  "activated_at_utc": "2026-10-27T04:10:25.581562Z",
+  "edge_function_version": 7
 }
