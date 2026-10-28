@@ -12,7 +12,7 @@
       ...(body === undefined ? {} : { headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
     });
     const data = await response.json();
-    if (!response.ok || !data.ok) throw new Error(data.code || "editorial_request_denied");
+    if (!response.ok || !data.ok) throw new Error(Array.isArray(data.details) && data.details.length ? data.details.join(" ") : data.code || "editorial_request_denied");
     return data;
   }
   const command = body => request("command", body);
@@ -24,8 +24,20 @@
     explicit_admin_self_review_required: "An explicit Admin exception and reason are required.",
     self_review_denied: "This account contributed to the copy and cannot independently review it.",
     reviewer_session_required: "Your session has expired. Please sign in again.",
-    editorial_assignment_required: "A current candidate assignment is required." }[code] || code);
+    editorial_assignment_required: "A current candidate assignment is required.",
+    invalid_review_decision: "Check the rationale and evidence references. Approval needs at least one unique, actual evidence reference.",
+    editorial_reviews_pending: "Required reviews are still pending.", delivery_not_activated: "Controlled delivery has not been activated.",
+    delivery_readiness_unavailable: "The database delivery-readiness check is unavailable. Delivery remains disabled.",
+    release_scope_denied: "A current release permission and candidate assignment are required.",
+    queued_delivery_disabled: "Release request saved. Delivery is disabled; nothing was published.",
+    queued_worker_unavailable: "Release request saved. The trusted delivery worker is unavailable.",
+    delivery_in_progress: "Delivery is already in progress. Refresh before retrying.",
+    delivery_completed: "Controlled delivery completed. See the recorded delivery result.",
+    approved_word_registration_pending: "This exact copy still needs registration in the existing approved AG70E bank.",
+    word_workflow_unavailable: "The approved daily Word workflow is not available.",
+    delivery_pending: "Release request saved, but delivery is pending. Nothing is being reported as published." }[code] || code);
   async function busy(button, work) {
+    message("");
     button.disabled = true;
     try { await work(); } catch (error) { message(friendly(error.message)); } finally { button.disabled = false; }
   }
@@ -107,6 +119,8 @@
       for (const name of scopes) scope.append(new Option(name.replaceAll("_", " "), name));
       for (const [value, label] of [["revise", "Request revision"], ["reject", "Reject"], ["approve", "Approve exact copy"]]) decision.append(new Option(label, value));
       note.required = true; note.maxLength = 6000; note.rows = 3; refs.rows = 3;
+      decision.addEventListener("change", () => { refs.required = decision.value === "approve"; refs.setCustomValidity(""); });
+      for (const input of [note, refs]) input.addEventListener("input", () => input.setCustomValidity(""));
       note.placeholder = "Section, finding, proposed correction, reason and remaining checks.";
       refs.placeholder = "Existing evidence ID or specific source URL";
       for (const [label, input] of [["Review scope", scope], ["Decision", decision], ["Rationale", note], ["Evidence references, one per line", refs]]) { const l = node("label", label); l.append(input); form.append(l); }
@@ -118,7 +132,7 @@
       }
       if (picker.options.length > 1) {
         const add = node("button", "Add source reference"); add.type = "button";
-        add.addEventListener("click", () => { const values = refs.value.split("\n").map(v => v.trim()).filter(Boolean); if (picker.value && !values.includes(picker.value)) refs.value = [...values, picker.value].join("\n"); });
+        add.addEventListener("click", () => { const values = refs.value.split("\n").map(v => v.trim()).filter(Boolean); if (picker.value && !values.includes(picker.value)) { refs.value = [...values, picker.value].join("\n"); refs.setCustomValidity(""); } });
         form.append(picker, add);
       }
       let exceptionReason = null, exceptionAck = null;
@@ -127,26 +141,60 @@
         exceptionAck = node("input"); exceptionAck.type = "checkbox"; exceptionAck.required = true;
         const ack = node("label", "Record an exception for my own submitted or edited copy", "checkbox-label"); ack.prepend(exceptionAck);
         exceptionReason = node("textarea"); exceptionReason.required = true; exceptionReason.minLength = 12; exceptionReason.maxLength = 6000;
+        exceptionReason.addEventListener("input", () => exceptionReason.setCustomValidity(""));
         const reason = node("label", "Exception reason"); reason.append(exceptionReason); box.append(ack, reason); form.append(box);
       }
       const submit = node("button", "Record decision", "primary"); submit.type = "submit"; form.append(submit);
       form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
+        const evidence = refs.value.split("\n").map(s => s.trim()).filter(Boolean);
+        note.setCustomValidity(note.value.trim() ? "" : "Enter the finding and reason for this decision.");
+        refs.setCustomValidity(decision.value === "approve" && !evidence.length ? "Approval requires an actual evidence reference." :
+          evidence.length > 50 || evidence.some(s => s.length > 500) ? "Use up to 50 references, each at most 500 characters." :
+          new Set(evidence).size !== evidence.length ? "Remove duplicate evidence references." : "");
+        if (exceptionReason) exceptionReason.setCustomValidity(exceptionReason.value.trim().length < 12 ? "Enter a substantive Admin exception reason." : "");
+        if (!form.reportValidity()) return;
         if (!confirm("Record this decision for the displayed immutable copy?")) return;
         await command({ action: "decision", command_id: crypto.randomUUID(), candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash,
-          scope: scope.value, decision: decision.value, note: note.value, evidence_refs: refs.value.split("\n").map(s => s.trim()).filter(Boolean),
+          scope: scope.value, decision: decision.value, note: note.value.trim(), evidence_refs: evidence,
           ...(exceptionReason ? { admin_exception: { policy_ref: session.self_review_policy_ref, reason: exceptionReason.value, acknowledged: exceptionAck.checked } } : {}) });
         message("Decision recorded for this version. Publication remains separately controlled."); await refresh();
       }); });
       side.append(form);
     }
     if (!canReview && view !== "publishing") side.append(node("p", "Review is unavailable: this copy requires an independent assigned reviewer.", "muted"));
-    if (view === "publishing") side.append(node("p", "Public delivery is not connected. A release request is a pending handoff, not publication.", "delivery-status"));
+    let releaseButton = null;
+    if (view === "publishing") {
+      const deliveryStatus = node("p", "A release request is not publication. Delivery also requires an activated trusted worker and the existing publisher checks.", "delivery-status");
+      side.append(deliveryStatus);
+      const readiness = node("div", undefined, "release-readiness"); readiness.setAttribute("aria-live", "polite");
+      const missing = data.review_state.required_scopes.filter(s => !data.review_state.approved_scopes.includes(s));
+      readiness.append(node("p", missing.length ? "Release blocked: " + missing.map(s => s.replaceAll("_", " ")).join(", ") + "." : "Reviews complete. Check delivery readiness before requesting release."));
+      const check = node("button", "Check release readiness"); check.type = "button";
+      check.addEventListener("click", () => busy(check, async () => {
+        const result = await request("release_check", { action: "open", candidate_id: id });
+        if (selected?.version.id !== data.version.id || view !== "publishing") return;
+        readiness.replaceChildren(node("p", result.missing_scopes.length ? "Pending reviews: " + result.missing_scopes.map(s => s.replaceAll("_", " ")).join(", ") : "No missing review scopes."));
+        for (const reason of result.blockers) readiness.append(node("p", friendly(reason)));
+        if (result.delivery_enabled) {
+          deliveryStatus.textContent = data.candidate.kind === "article" ?
+            "Article publishing is connected. Only the exact fully approved copy can be delivered to the public site." :
+            "The daily Word handoff is connected. Approved AG70E registration and the independent daily publication controls still apply.";
+          if (releaseButton) releaseButton.textContent = data.candidate.kind === "article" ? "Publish approved article" : "Release to daily Word workflow";
+        }
+        if (result.delivery_enabled && result.request_allowed) readiness.append(node("p", "Ready for controlled delivery validation."));
+      })); side.append(readiness, check);
+    }
     if (granted(data.candidate.kind, "release") && view === "publishing") {
       const release = node("button", "Request controlled release"); release.disabled = !data.review_state.reviews_complete || data.review_permissions?.can_request_release === false;
+      releaseButton = release;
+      let releaseCommand = null;
       release.addEventListener("click", () => busy(release, async () => {
-        if (!confirm("Create a handoff request? This will not publish content.")) return;
-        const receipt = await command({ action: "request_release", command_id: crypto.randomUUID(), candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash });
-        message(receipt.status); await open(id);
+        if (!confirm("Request controlled release of this exact copy? An activated worker may deliver fully approved content. Word selection remains governed by the existing daily engine.")) return;
+        releaseCommand ??= { action: "request_release", command_id: crypto.randomUUID(), candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash };
+        const receipt = await request("release", releaseCommand);
+        message(friendly(receipt.status) + (receipt.code ? " " + friendly(receipt.code) : "") +
+          (receipt.delivery ? " " + (receipt.delivery.status === "eligible_for_daily_selection" ? "Word is eligible in the daily bank, not forced onto today's card." : "Article commit recorded; deployment readiness remains separate.") : ""));
+        await open(id);
       })); side.append(release);
     }
     side.append(node("p", "Review acceptance does not publish a word or article. Existing publisher validation and operational authorization remain required.", "muted"));

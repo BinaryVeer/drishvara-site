@@ -10,14 +10,14 @@ const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright")
 const screenshotDir = process.argv[2];
 if (!screenshotDir || !path.isAbsolute(screenshotDir)) throw new Error("provide_absolute_local_screenshot_directory");
 await mkdir(screenshotDir, { recursive: true, mode: 0o700 });
-let browser, server, checks = 0, base, chosenDecision = null, fixtureAdmin = false;
+let browser, server, checks = 0, base, chosenDecision = null, fixtureAdmin = false, fixtureAllApproved = false, fixtureDelivery = false, releaseRequests = 0;
 const id = randomUUID(), version = randomUUID(), hash = "sha256:" + "a".repeat(64);
 const scopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
 const data = { candidate: { id, kind: "article", external_id: "synthetic-browser-article", created_by: "synthetic-author" },
   version: { id: version, title: "Synthetic article review fixture", content_hash: hash,
     payload: { desk: "world_affairs", body: 'Synthetic article. <img src=x onerror="window.bad=true">', sources: [], media: [], research_refs: ["synthetic-only"] } },
   decisions: [], release_requests: [] };
-const state = () => ({ required_scopes: scopes, approved_scopes: chosenDecision ? [chosenDecision.scope] : [], reviews_complete: false });
+const state = () => ({ required_scopes: scopes, approved_scopes: fixtureAllApproved ? scopes : chosenDecision ? [chosenDecision.scope] : [], reviews_complete: fixtureAllApproved });
 const receipt = value => ({ ok: true, ...value, public_output_allowed: false, runtime_activation: false });
 const requests = [], errors = [];
 const accessDecisions = [];
@@ -28,6 +28,7 @@ function fakeFetch(url, options) {
   if (pathname === "/auth/v1/token") value = { access_token: "synthetic.jwt.token", expires_in: 3600 };
   else if (pathname === "/auth/v1/user") value = { id: "synthetic-reviewer" };
   else if (pathname === "/auth/v1/logout") value = {};
+  else if (pathname === "/rest/v1/rpc/editorial_delivery_readiness") value = receipt({ delivery_enabled: fixtureDelivery });
   else {
     const { p_command: command } = JSON.parse(options.body);
     switch (command.action) {
@@ -42,6 +43,7 @@ function fakeFetch(url, options) {
       case "decision":
         assert.equal(command.content_hash, hash); assert.equal(command.version_id, version); assert.equal(command.candidate_id, id);
         chosenDecision = command; data.decisions.push({ ...command, actor_id: "synthetic-reviewer" }); value = receipt({ decision_id: randomUUID(), review_state: state() }); break;
+      case "request_release": releaseRequests++; value = receipt({ release_request_id: randomUUID(), status: "pending_existing_publisher_validation" }); break;
       default: throw new Error("unexpected_browser_fixture_operation");
     }
   }
@@ -59,7 +61,8 @@ try {
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
   base = "http://127.0.0.1:" + server.address().port;
   handler = createEditorialWorkspaceHandler({ env: { EDITORIAL_WORKSPACE_ENABLED: "true", EDITORIAL_WORKSPACE_ORIGIN: base,
-    SUPABASE_URL: "https://synthetic.example.invalid", SUPABASE_ANON_KEY: "synthetic-anon-only" }, fetcher: fakeFetch });
+    SUPABASE_URL: "https://synthetic.example.invalid", SUPABASE_ANON_KEY: "synthetic-anon-only", SUPABASE_SECRET_KEY: "synthetic-server-only",
+    EDITORIAL_DELIVERY_ENABLED: "true", EDITORIAL_DELIVERY_AUTHORIZATION_REF: "synthetic-authorization-only" }, fetcher: fakeFetch });
   browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" });
   const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
   await context.route("**/*", route => {
@@ -84,7 +87,18 @@ try {
   check("ordinary reviewer has no People management tab", await page.locator("#tab-people").isHidden());
   await page.locator("#tab-publishing").click();
   check("pending reviews disable release", await page.getByRole("button", { name: "Request controlled release", exact: true }).isDisabled());
-  check("publishing is a clearly withheld handoff, not a live publisher", (await page.locator(".delivery-status").innerText()).includes("not connected"));
+  check("publishing distinguishes a release request from public publication", (await page.locator(".delivery-status").innerText()).includes("not publication"));
+  check("release panel names the actual missing scopes", (await page.locator(".release-readiness").innerText()).includes("publisher acceptance"));
+  await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
+  await page.waitForFunction(() => document.querySelector(".release-readiness")?.textContent.includes("not been activated"));
+  check("readiness remains usable without requesting or publishing a release", releaseRequests === 0);
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.locator("#review").scrollIntoViewIfNeeded();
+    check("release readiness has no horizontal overflow at " + width, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: path.join(screenshotDir, "release-readiness-synthetic-" + width + ".png"), fullPage: false });
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.locator("#tab-review").click(); await page.waitForSelector(".review-form");
   check("malicious draft markup stays text, never DOM", await page.locator('#document img').count() === 0 && !(await page.evaluate(() => window.bad)));
   check("immutable version hash is displayed", (await page.locator(".hash").innerText()) === hash);
@@ -92,6 +106,11 @@ try {
   check("generated hero has loaded", await page.locator(".hero").evaluate(async e => { const u=getComputedStyle(e).backgroundImage.match(/url\("?([^"\)]+)/)?.[1]; if(!u)return false; const i=new Image(); i.src=u; await i.decode(); return i.naturalWidth>1000; }));
   await page.locator('.review-form select').nth(1).selectOption("approve");
   await page.locator('.review-form textarea').nth(0).fill("Synthetic independent browser-test decision only.");
+  await page.getByRole("button", { name: "Record decision", exact: true }).click();
+  check("empty approval evidence is rejected at the actual form field", chosenDecision === null && await page.locator('.review-form textarea').nth(1).evaluate(e => e.validity.valueMissing));
+  await page.locator('.review-form textarea').nth(1).fill("same-reference\nsame-reference");
+  await page.getByRole("button", { name: "Record decision", exact: true }).click();
+  check("duplicate evidence has a specific validation message and no saved decision", chosenDecision === null && (await page.locator('.review-form textarea').nth(1).evaluate(e => e.validationMessage)).includes("duplicate"));
   await page.locator('.review-form textarea').nth(1).fill("synthetic-evidence-only");
   page.once("dialog", dialog => dialog.accept());
   await page.getByRole("button", { name: "Record decision", exact: true }).click();
@@ -152,6 +171,26 @@ try {
   }
   await page.locator("#tab-review").focus(); await page.keyboard.press("ArrowRight");
   check("workspace tabs support keyboard navigation", await page.locator("#tab-acceptance").getAttribute("aria-selected") === "true");
+  fixtureAllApproved = true;
+  await page.locator("#tab-publishing").click();
+  await page.waitForFunction(() => document.querySelector(".scope-list")?.querySelectorAll(".complete").length === 6);
+  check("complete synthetic approvals unlock the controlled-release request", await page.getByRole("button", { name: "Request controlled release", exact: true }).isEnabled());
+  page.once("dialog", dialog => dialog.accept());
+  await page.getByRole("button", { name: "Request controlled release", exact: true }).click();
+  await page.waitForFunction(() => document.querySelector("#message")?.textContent.includes("Delivery is disabled"));
+  check("disabled operational delivery saves a request without claiming publication", releaseRequests === 1 && (await page.locator("#message").innerText()).includes("nothing was published"));
+  fixtureDelivery = true;
+  await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
+  check("activated delivery exposes an enabled public Article action only for the fully reviewed copy", await page.getByRole("button", { name: "Publish approved article", exact: true }).isEnabled());
+  check("activated connection is stated separately from content approval", (await page.locator(".delivery-status").innerText()).includes("Article publishing is connected"));
+  fixtureAllApproved = false;
+  await page.locator("#refresh").click();
+  await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
+  check("active publishing still blocks an unreviewed copy", await page.getByRole("button", { name: "Publish approved article", exact: true }).isDisabled());
+  check("server credential never appears in the active publication screen", !(await page.content()).includes("synthetic-server-only"));
+  await page.locator("#tab-review").click(); await page.waitForSelector(".review-form");
+  check("a successful action clears stale error and delivery messages", (await page.locator("#message").innerText()) === "");
+  fixtureAllApproved = false;
   check("extended Admin UI makes no external requests or runtime errors", requests.length === 0 && errors.length === 0);
   await page.locator("#sign-out").click(); await page.waitForSelector("#login-form");
   check("sign-out clears private UI", await page.locator("#document").count() === 0);

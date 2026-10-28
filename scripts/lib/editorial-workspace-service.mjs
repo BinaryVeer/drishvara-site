@@ -11,6 +11,21 @@ const uuid = v => typeof v === "string" && /^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-
 const hash = v => typeof v === "string" && /^sha256:[a-f0-9]{64}$/.test(v);
 const scopes = ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "factual", "media", "publisher_acceptance"];
 
+export function editorialDecisionIssues(command) {
+  if (command?.action !== "decision") return [];
+  const issues = [];
+  if (!scopes.includes(command.scope)) issues.push("Choose an available review responsibility.");
+  if (!["approve", "revise", "reject"].includes(command.decision)) issues.push("Choose a review decision.");
+  if (!text(command.note, 6000)) issues.push("Enter a substantive rationale, up to 6,000 characters.");
+  if (!Array.isArray(command.evidence_refs) || command.evidence_refs.length > 50 || command.evidence_refs.some(r => !text(r, 500)))
+    issues.push("Enter no more than 50 evidence references, one per line, up to 500 characters each.");
+  else {
+    if (new Set(command.evidence_refs).size !== command.evidence_refs.length) issues.push("Remove duplicate evidence references.");
+    if (command.decision === "approve" && !command.evidence_refs.length) issues.push("Approval requires at least one actual evidence reference.");
+  }
+  return issues;
+}
+
 export function validateEditorialCommand(command) {
   try {
     const serialized = canonicalJson(command);
@@ -74,7 +89,7 @@ export function validateEditorialCommand(command) {
 // The database derives the actor from auth.uid(); caller-supplied actor/role/approval flags are rejected.
 export async function executeEditorialCommand(command, rpc) {
   const error = validateEditorialCommand(command);
-  if (error) return { ok: false, code: error, public_output_allowed: false, runtime_activation: false };
+  if (error) return { ok: false, code: error, ...(error === "invalid_review_decision" ? { details: editorialDecisionIssues(command) } : {}), public_output_allowed: false, runtime_activation: false };
   const result = await rpc("editorial_review_command", { p_command: command });
   if (!object(result) || typeof result.ok !== "boolean" || result.public_output_allowed !== false || result.runtime_activation !== false)
     throw new Error("invalid_editorial_receipt");

@@ -1,5 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
-
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -407,7 +405,7 @@ function buildTopicMap(items) {
   return topics;
 }
 
-function rebuildArticleIndex(existingIndex, newPublishedItems) {
+function rebuildArticleIndex(existingIndex, newPublishedItems, timestamp = new Date().toISOString()) {
   const map = new Map();
   const existingItems = Array.isArray(existingIndex?.items)
     ? existingIndex.items
@@ -438,7 +436,7 @@ function rebuildArticleIndex(existingIndex, newPublishedItems) {
 
   return {
     ...(existingIndex && typeof existingIndex === "object" ? existingIndex : {}),
-    generatedAt: new Date().toISOString(),
+    generatedAt: timestamp,
     total: sorted.length,
     publicTotal: publishedItems.length,
     latest: sorted.slice(0, 8),
@@ -642,7 +640,7 @@ function getDraftApprovalState(draftJson) {
   };
 }
 
-async function buildArticlePage({ draftPacket, categoryMeta, today }) {
+async function buildArticlePage({ draftPacket, categoryMeta, today, reviewedReferences = null, omitMedia = false }) {
   const title = safeText(draftPacket.title, `${categoryMeta.label} Insight`);
   const subtitle = safeText(draftPacket.subtitle);
   const summary = safeText(
@@ -663,11 +661,11 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
   const officialLinkRaw = safeText(draftPacket.official_link);
   const supportingLinkRaw = safeText(draftPacket.supporting_link);
 
-  const referenceLinks = await filterReachableUrls(referenceLinksRaw);
-  const officialLink = await resolveReachableUrl(
+  const referenceLinks = reviewedReferences ?? await filterReachableUrls(referenceLinksRaw);
+  const officialLink = reviewedReferences ? "" : await resolveReachableUrl(
     isLikelyValidUrl(officialLinkRaw) ? officialLinkRaw : ""
   );
-  const supportingLink = await resolveReachableUrl(
+  const supportingLink = reviewedReferences ? "" : await resolveReachableUrl(
     isLikelyValidUrl(supportingLinkRaw) ? supportingLinkRaw : ""
   );
 
@@ -1087,7 +1085,7 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
       ${subtitle ? `<div class="subtitle">${escapeHtml(subtitle)}</div>` : ""}
       ${summary ? `<div class="summary-box">${escapeHtml(summary)}</div>` : ""}
 
-      <div class="hero-media-wrap">
+      ${omitMedia ? "" : `<div class="hero-media-wrap">
         ${
           hasImage
             ? `<img
@@ -1115,7 +1113,7 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
               </div>`
             : ""
         }
-      </div>
+      </div>`}
 
       <div class="article-body">
         ${articleHtml}
@@ -1156,6 +1154,29 @@ async function buildArticlePage({ draftPacket, categoryMeta, today }) {
 </html>`;
 }
 
+// Exact reviewed plain text only; this reuses the static template/index, not the legacy live endpoint.
+export async function prepareReviewedArticleFiles({ candidateId, version, date, timestamp, existingIndex }) {
+  const p = version?.payload, meta = CATEGORY_META[p?.desk];
+  const validUrl = value => { try { const u = new URL(value); return u.protocol === "https:" && !u.username && !u.password; } catch { return false; } };
+  if (!/^[a-f0-9-]{36}$/i.test(candidateId) || !meta || !safeText(version?.title) || !safeText(p?.body) ||
+      !Array.isArray(existingIndex?.items) || !/^\d{4}-\d{2}-\d{2}$/.test(date) || new Date(timestamp).toISOString() !== timestamp) throw Error("article_copy_incomplete");
+  if (!Array.isArray(p.sources) || !p.sources.length || p.sources.some(s => !validUrl(typeof s === "string" ? s : s?.url))) throw Error("article_sources_pending");
+  if (!Array.isArray(p.media) || p.media.length > 1) throw Error("article_media_contract_pending");
+  const media = p.media[0];
+  if (media && (!safeText(media.alt) || !safeText(media.attribution) || !validUrl(media.source_url) ||
+      !(validUrl(media.url) || /^\/assets\/[a-zA-Z0-9_./-]+$/.test(media.url) && !media.url.includes("..")))) throw Error("article_media_contract_pending");
+  const sources = p.sources.map(s => typeof s === "string" ? { url: s, title: s } : s);
+  const articlePath = buildArticlePath(p.desk, "editorial-" + candidateId.toLowerCase());
+  const packet = { title: version.title, summary: "", article_html: p.body.split(/\n\s*\n/).map(part => `<p>${escapeHtml(part).replaceAll("\n", "<br>")}</p>`).join("\n") +
+    `<section><h2>Sources</h2><ul>${sources.map(s => `<li><a href="${escapeAttribute(s.url)}" rel="noopener noreferrer">${escapeHtml(s.title || s.url)}</a></li>`).join("")}</ul></section>`,
+    image_path: media?.url || "", image_alt: media?.alt || "", image_credit: media?.attribution || "", image_source_url: media?.source_url || "" };
+  const html = await buildArticlePage({ draftPacket: packet, categoryMeta: meta, today: date, reviewedReferences: [], omitMedia: !media });
+  const item = makePublishedIndexItem({ categoryKey: p.desk, categoryMeta: meta, draftPacket: packet, articlePath,
+    articleTitle: version.title, articleSlug: "editorial-" + candidateId.toLowerCase(), today: date });
+  const index = rebuildArticleIndex(existingIndex, [item], timestamp);
+  return { articlePath, html, indexPath: ARTICLE_INDEX_PATH, index };
+}
+
 export async function runPublishAll({
   githubToken,
   githubOwner,
@@ -1184,7 +1205,7 @@ export async function runPublishAll({
     throw new Error("Missing required Supabase environment variables");
   }
 
-  const supabase = dryRun ? null : createClient(supabaseUrl, supabaseKey);
+  const supabase = dryRun ? null : (await import("@supabase/supabase-js")).createClient(supabaseUrl, supabaseKey);
 
   let publicationRunId = null;
 

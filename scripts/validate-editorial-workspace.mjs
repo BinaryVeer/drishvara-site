@@ -150,4 +150,76 @@ await check("Admin commands still use the authenticated RPC and internal envelop
   await executeEditorialCommand(adminGrant, async (name, args) => { assert.equal(name, "editorial_review_command"); assert.deepEqual(args.p_command, adminGrant); return internal; });
   await assert.rejects(executeEditorialCommand(adminGrant, async () => ({ ...internal, runtime_activation: true })), /invalid_editorial_receipt/);
 });
+const releaseScopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
+const releaseSnapshot = { ...internal, candidate: { id, kind: "article" }, version: { id: version, content_hash: contentHash },
+  review_state: { required_scopes: releaseScopes, approved_scopes: releaseScopes, reviews_complete: true }, review_permissions: { can_request_release: true } };
+const releaseFetcher = async (url, options) => {
+  if (new URL(url).pathname.endsWith("editorial_review_command")) {
+    const action = JSON.parse(options.body).p_command.action;
+    if (action === "open" || action === "request_release") {
+      calls.push({ path: new URL(url).pathname, options });
+      return { ok: true, json: async () => action === "open" ? releaseSnapshot : { ...internal, release_request_id: randomUUID() } };
+    }
+  }
+  return fakeFetch(url, options);
+};
+await check("anonymous cannot inspect controlled-release readiness", async () => {
+  assert.equal((await invoke({ method: "POST", action: "action=release_check", body: { action: "open", candidate_id: id } })).code, 401);
+});
+await check("cross-origin release cannot reach a publisher", async () => {
+  calls = []; assert.equal((await invoke({ cookie, method: "POST", action: "action=release", body: {}, origin: "https://attacker.invalid" })).code, 403); assert.equal(calls.length, 0);
+});
+await check("release readiness is read-only and explains dormant operational delivery", async () => {
+  calls = []; const r = await invoke({ cookie, method: "POST", action: "action=release_check", body: { action: "open", candidate_id: id } }, { fetcher: releaseFetcher });
+  assert.equal(r.code, 200); assert.equal(r.data.request_allowed, true); assert.equal(r.data.delivery_enabled, false); assert(r.data.blockers.includes("delivery_not_activated"));
+  assert(calls.filter(c => c.path.endsWith("editorial_review_command")).every(c => ["session", "open"].includes(JSON.parse(c.options.body).p_command.action)));
+});
+await check("the HTTP release route defaults to a queued handoff, not a write adapter", async () => {
+  calls = []; const r = await invoke({ cookie, method: "POST", action: "action=release", body: { action: "request_release", command_id: randomUUID(), candidate_id: id, version_id: version, content_hash: contentHash } },
+    { fetcher: releaseFetcher, env: { ...env, EDITORIAL_DELIVERY_SERVICE_KEY: "synthetic-private-key-must-not-leak" } });
+  assert.equal(r.code, 200); assert.equal(r.data.status, "queued_delivery_disabled"); assert(!JSON.stringify(r.data).includes("synthetic-private-key"));
+  assert(calls.every(c => c.path === "/auth/v1/user" || c.path === "/rest/v1/rpc/editorial_review_command"));
+  assert(calls.every(c => c.options.headers.apikey === env.SUPABASE_ANON_KEY));
+});
+await check("caller-supplied activation cannot turn a release into public delivery", async () => {
+  const r = await invoke({ cookie, method: "POST", action: "action=release", body: { action: "request_release", command_id: randomUUID(), candidate_id: id, version_id: version, content_hash: contentHash, enabled: true } });
+  assert.equal(r.code, 400); assert.equal(r.data.code, "unknown_or_missing_command_fields");
+});
+await check("invalid approval returns field-specific evidence guidance", async () => {
+  const r = await invoke({ cookie, method: "POST", action: "action=command", body: { ...decision, evidence_refs: [] } });
+  assert.equal(r.code, 400); assert.equal(r.data.code, "invalid_review_decision"); assert(r.data.details.some(d => d.includes("actual evidence")));
+});
+await check("server configuration alone cannot claim database delivery readiness", async () => {
+  const r = await invoke({ cookie, method: "POST", action: "action=release_check", body: { action: "open", candidate_id: id } },
+    { env: { ...env, EDITORIAL_DELIVERY_ENABLED: "true", EDITORIAL_DELIVERY_SERVICE_KEY: "synthetic-worker-only", EDITORIAL_DELIVERY_AUTHORIZATION_REF: "synthetic-operation-only" },
+      fetcher: async (url, options) => new URL(url).pathname.endsWith("editorial_delivery_readiness") ? { ok: true, json: async () => ({ ...internal, delivery_enabled: false }) } : releaseFetcher(url, options) });
+  assert.equal(r.code, 200); assert.equal(r.data.delivery_enabled, false); assert(r.data.blockers.includes("delivery_not_activated"));
+});
+await check("existing server-only Supabase secret can power delivery without reaching the browser", async () => {
+  const r = await invoke({ cookie, method: "POST", action: "action=release_check", body: { action: "open", candidate_id: id } },
+    { env: { ...env, EDITORIAL_DELIVERY_ENABLED: "true", SUPABASE_SECRET_KEY: "synthetic-server-only-must-not-leak", EDITORIAL_DELIVERY_AUTHORIZATION_REF: "synthetic-operation-only" },
+      fetcher: async (url, options) => new URL(url).pathname.endsWith("editorial_delivery_readiness") ? { ok: true, json: async () => ({ ...internal, delivery_enabled: true }) } : releaseFetcher(url, options) });
+  assert.equal(r.code, 200); assert.equal(r.data.delivery_enabled, true); assert.equal(r.data.request_allowed, true);
+  assert(!JSON.stringify(r.data).includes("synthetic-server-only"));
+});
+await check("trusted worker receives only the server credential and missing Article credentials stay pending", async () => {
+  const operations = [], secret = "synthetic-worker-key-must-not-leak";
+  const r = await invoke({ cookie, method: "POST", action: "action=release", body: { action: "request_release", command_id: randomUUID(), candidate_id: id, version_id: version, content_hash: contentHash } },
+    { env: { ...env, EDITORIAL_DELIVERY_ENABLED: "true", SUPABASE_SECRET_KEY: secret, EDITORIAL_DELIVERY_AUTHORIZATION_REF: "synthetic-operation-only" },
+      fetcher: async (url, options) => {
+        const path = new URL(url).pathname;
+        if (path.endsWith("editorial_delivery_readiness")) return { ok: true, json: async () => ({ ...internal, delivery_enabled: true }) };
+        if (path.endsWith("editorial_review_command") && JSON.parse(options.body).p_command.action === "session")
+          return { ok: true, json: async () => ({ ...internal, actor_id: id }) };
+        if (path.endsWith("editorial_release_worker")) {
+          assert.equal(options.headers.apikey, secret);
+          const op = JSON.parse(options.body).p_command.operation; operations.push(op);
+          return { ok: true, json: async () => ({ ...internal, status: op === "claim" ? "claimed" : "failed", claim_id: id,
+            candidate_id: id, version_id: version, content_hash: contentHash, kind: "article", version: releaseSnapshot.version }) };
+        }
+        return releaseFetcher(url, options);
+      } });
+  assert.equal(r.code, 200); assert.equal(r.data.status, "delivery_pending"); assert.equal(r.data.code, "article_publisher_unavailable");
+  assert.deepEqual(operations, ["claim", "fail"]); assert(!JSON.stringify(r.data).includes(secret));
+});
 console.log(`Editorial workspace: ${checks} local contract/HTTP checks passed. Auth is simulated here; real PostgreSQL checks run separately.`);

@@ -277,6 +277,145 @@ try {
     assert.throws(() => invoke(owner, { action: "session" }), /editorial_capability_required/);
   });
   check("roles migration preserves existing Panchang sentinel", () => assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged"));
+  check("delivery migration is additive and disabled without operational authorization", () => {
+    query(fs.readFileSync("supabase/migrations/20261028141751_editorial_release_delivery.sql", "utf8"));
+    assert.equal(query("select enabled or word_enabled or article_enabled or authorization_ref is not null from drishvara_editorial_private.delivery_controls"), "f");
+    assert.equal(query("select count(*) from drishvara_editorial_private.deliveries"), "0");
+  });
+  check("only service-role may execute the delivery worker; direct table access remains denied", () => {
+    for (const role of ["anon", "authenticated"]) assert.throws(() => query(`set role ${role};select public.editorial_release_worker('{}');`), /permission denied/);
+    for (const role of ["anon", "authenticated", "service_role"]) assert.throws(() => query(`set role ${role};select * from drishvara_editorial_private.delivery_controls;`), /permission denied/);
+    assert.equal(query("select count(*) from pg_tables where schemaname='drishvara_editorial_private' and rowsecurity"), "12");
+  });
+  const publishCopy = invoke(author, { ...create, command_id: randomUUID(), external_id: "synthetic-delivery-copy" });
+  assign(reviewer, publishCopy.candidate_id);
+  const publishReview = { ...base, candidate_id: publishCopy.candidate_id, version_id: publishCopy.version_id, content_hash: publishCopy.content_hash };
+  const publishRequest = { action: "request_release", command_id: randomUUID(), candidate_id: publishCopy.candidate_id,
+    version_id: publishCopy.version_id, content_hash: publishCopy.content_hash };
+  check("delivery preparation cannot create a release before all current approvals", () => assert.throws(() => invoke(reviewer, publishRequest), /editorial_reviews_pending/));
+  for (const scope of ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"]) invoke(reviewer, { ...publishReview, command_id: randomUUID(), scope });
+  const publishedRequest = invoke(reviewer, publishRequest);
+  const workerCommand = { operation: "claim", actor_id: reviewer, command_id: publishRequest.command_id,
+    release_request_id: publishedRequest.release_request_id, authorization_ref: "synthetic-delivery-authorization" };
+  const workerSql = command => `begin;set local role service_role;select public.editorial_release_worker(${literal(command)});commit;`;
+  const worker = command => JSON.parse(query(workerSql(command)).split("\n").at(-1));
+  const workerConcurrent = command => new Promise((resolve, reject) => {
+    const child = execFile("docker", ["--context", "desktop-linux", "exec", "-i", container, "psql", "-XqAt", "-v", "ON_ERROR_STOP=1", "-U", "review_owner", "-d", "review_qa"],
+      { encoding: "utf8", timeout: 20000 }, (error, stdout, stderr) => error ? reject(new Error(stderr)) : resolve(JSON.parse(stdout.trim().split("\n").at(-1))));
+    child.stdin.end(workerSql(command));
+  });
+  check("a forged or missing authenticated request cannot bootstrap delivery", () => {
+    assert.throws(() => worker({ ...workerCommand, command_id: randomUUID() }), /release_command_unavailable/);
+    assert.throws(() => worker({ ...workerCommand, actor_id: author }), /release_command_unavailable/);
+  });
+  check("database activation independently blocks an enabled server caller", () => assert.throws(() => worker(workerCommand), /delivery_not_activated/));
+  query("update drishvara_editorial_private.delivery_controls set enabled=true,article_enabled=true,authorization_ref='synthetic-delivery-authorization'");
+  check("readiness checks actual database authorization, assignment and per-kind switches without writing", () => {
+    const readiness = ref => JSON.parse(query(`begin;set local role authenticated;select set_config('request.jwt.claim.sub','${reviewer}',true);select public.editorial_delivery_readiness('${publishCopy.candidate_id}','${ref}');commit;`).split("\n").at(-1));
+    assert.equal(readiness("synthetic-delivery-authorization").delivery_enabled, true);
+    assert.equal(readiness("wrong-reference").delivery_enabled, false);
+    query("update drishvara_editorial_private.delivery_controls set article_enabled=false");
+    assert.equal(readiness("synthetic-delivery-authorization").delivery_enabled, false);
+    query("update drishvara_editorial_private.delivery_controls set article_enabled=true");
+    assert.equal(query("select count(*) from drishvara_editorial_private.deliveries"), "0");
+    assert.throws(() => query(`set role anon;select public.editorial_delivery_readiness('${publishCopy.candidate_id}','synthetic-delivery-authorization');`), /permission denied/);
+  });
+  check("wrong operational reference and caller approval fields cannot activate delivery", () => {
+    assert.throws(() => worker({ ...workerCommand, authorization_ref: "forged" }), /delivery_not_activated/);
+    assert.throws(() => worker({ ...workerCommand, approved: true }), /invalid_release_worker_command/);
+  });
+  const concurrentClaims = await Promise.all([workerConcurrent(workerCommand), workerConcurrent(workerCommand)]);
+  let deliveryClaim = concurrentClaims.find(r => r.status === "claimed");
+  check("real concurrent claim transactions admit exactly one worker", () => {
+    assert.deepEqual(concurrentClaims.map(r => r.status).sort(), ["claimed", "delivery_in_progress"]);
+    assert.equal(query("select count(*) from drishvara_editorial_private.delivery_events where operation='claim'"), "1");
+  });
+  check("real claim captures current immutable copy and effective decision references", () => {
+    assert.equal(deliveryClaim.status, "claimed");
+    assert.equal(deliveryClaim.version_id, publishCopy.version_id); assert.equal(deliveryClaim.content_hash, publishCopy.content_hash);
+    assert.equal(deliveryClaim.decisions.length, 6); assert.equal(deliveryClaim.public_output_allowed, false);
+  });
+  check("second live claim is in-progress rather than a second delivery", () => assert.equal(worker(workerCommand).status, "delivery_in_progress"));
+  const checkClaim = { ...workerCommand, operation: "check", claim_id: deliveryClaim.claim_id };
+  check("claim check requires actual lease identity and authenticated request binding", () => {
+    assert.equal(worker(checkClaim).status, "valid");
+    assert.throws(() => worker({ ...checkClaim, claim_id: randomUUID() }), /invalid_release_claim/);
+    assert.throws(() => worker({ ...checkClaim, actor_id: other }), /release_command_unavailable/);
+  });
+  check("revoked review authority stops an already claimed delivery", () => {
+    query(`update drishvara_editorial_private.capabilities set revoked_at=now() where subject_id='${reviewer}' and kind='article' and scope='rights'`);
+    assert.throws(() => worker(checkClaim), /editorial_reviews_pending/);
+    query(`update drishvara_editorial_private.capabilities set revoked_at=null where subject_id='${reviewer}' and kind='article' and scope='rights'`);
+  });
+  check("new decision sequence invalidates an earlier delivery claim", () => {
+    invoke(reviewer, { ...publishReview, command_id: randomUUID(), scope: "rights" });
+    assert.throws(() => worker(checkClaim), /invalid_release_claim/);
+  });
+  check("failed claim creates an immutable event and permits controlled recovery", () => {
+    assert.equal(worker({ ...checkClaim, operation: "fail", result: { code: "synthetic-retry-required" } }).status, "failed");
+    deliveryClaim = worker(workerCommand); assert.notEqual(deliveryClaim.claim_id, checkClaim.claim_id);
+  });
+  const activeClaim = () => ({ ...workerCommand, operation: "check", claim_id: deliveryClaim.claim_id });
+  check("expired lease cannot be completed or checked", () => {
+    query("update drishvara_editorial_private.deliveries set lease_until=clock_timestamp()-interval '1 second'");
+    assert.throws(() => worker(activeClaim()), /invalid_release_claim/);
+    deliveryClaim = worker(workerCommand);
+  });
+  check("forged completion fields and arbitrary public paths are rejected", () => {
+    for (const result of [{ status: "published", reference: "x" }, { status: "article_committed", reference: "a".repeat(40), path: "index.html" },
+      { status: "article_committed", reference: "a".repeat(40), path: "articles/world/editorial-" + publishCopy.candidate_id + ".html", approved: true }])
+      assert.throws(() => worker({ ...activeClaim(), operation: "complete", result }), /invalid_delivery_receipt/);
+  });
+  check("operational disable immediately prevents completion", () => {
+    query("update drishvara_editorial_private.delivery_controls set enabled=false"); assert.throws(() => worker(activeClaim()), /delivery_not_activated/);
+    query("update drishvara_editorial_private.delivery_controls set enabled=true");
+  });
+  check("synthetic delivery receipt does not claim public output or deployed readiness", () => {
+    const r = worker({ ...activeClaim(), operation: "complete", result: { status: "article_committed", reference: "a".repeat(40), path: "articles/world/editorial-" + publishCopy.candidate_id + ".html" } });
+    assert.equal(r.status, "delivery_completed"); assert.equal(r.public_output_allowed, false); assert.equal(r.runtime_activation, false);
+  });
+  check("completed request is idempotent without another delivery event", () => {
+    const before = query("select count(*) from drishvara_editorial_private.delivery_events");
+    assert.equal(worker(workerCommand).status, "delivery_completed"); assert.equal(query("select count(*) from drishvara_editorial_private.delivery_events"), before);
+  });
+  check("inactive requester cannot reuse a completed receipt", () => {
+    query(`update public.profiles set is_active=false where id='${reviewer}'`); assert.throws(() => worker(workerCommand), /release_scope_denied/);
+    query(`update public.profiles set is_active=true where id='${reviewer}'`);
+  });
+  check("delivery history rejects UPDATE, DELETE and TRUNCATE", () => {
+    for (const sql of ["update drishvara_editorial_private.delivery_events set detail=detail", "delete from drishvara_editorial_private.delivery_events", "truncate drishvara_editorial_private.delivery_events"])
+      assert.throws(() => query(sql), /immutable_editorial_history/);
+  });
+  check("new copy invalidates the prior delivery request even after completion", () => {
+    invoke(author, { ...create, command_id: randomUUID(), external_id: "synthetic-delivery-copy", expected_version_id: publishCopy.version_id, title: "Synthetic new copy" });
+    assert.throws(() => worker(workerCommand), /stale_editorial_version/);
+  });
+  check("delivery leaves Panchang and all direct private-table grants unchanged", () => {
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema='drishvara_editorial_private' and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+  });
+  const deliveryWord = invoke(author, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-delivery-word" });
+  assign(reviewer, deliveryWord.candidate_id);
+  for (const scope of ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"])
+    invoke(reviewer, { ...base, command_id: randomUUID(), candidate_id: deliveryWord.candidate_id, version_id: deliveryWord.version_id, content_hash: deliveryWord.content_hash, scope });
+  const wordRequest = { action: "request_release", command_id: randomUUID(), candidate_id: deliveryWord.candidate_id, version_id: deliveryWord.version_id, content_hash: deliveryWord.content_hash };
+  const queuedWord = invoke(reviewer, wordRequest);
+  const wordWorker = { ...workerCommand, command_id: wordRequest.command_id, release_request_id: queuedWord.release_request_id };
+  check("Word delivery has an independent default-disabled operational switch", () => assert.throws(() => worker(wordWorker), /delivery_not_activated/));
+  query(`update drishvara_editorial_private.delivery_controls set word_enabled=true,word_record_refs=jsonb_build_object('${deliveryWord.candidate_id}','synthetic-registered-word@v1')`);
+  const claimedWord = worker(wordWorker);
+  check("Word worker returns only the operator-registered AG70E reference", () => {
+    assert.equal(claimedWord.kind, "word"); assert.equal(claimedWord.word_record_ref, "synthetic-registered-word@v1"); assert.equal(claimedWord.decisions.length, 9);
+  });
+  check("Word receipt cannot invent a different registered identity or publication event", () => {
+    for (const result of [{ status: "eligible_for_daily_selection", reference: "different@v1" }, { status: "published", reference: "synthetic-registered-word@v1" }])
+      assert.throws(() => worker({ ...wordWorker, operation: "complete", claim_id: claimedWord.claim_id, result }), /invalid_delivery_receipt/);
+  });
+  check("Word delivery can attest bank eligibility only, never assign a festival date or publish a word", () => {
+    const r = worker({ ...wordWorker, operation: "complete", claim_id: claimedWord.claim_id, result: { status: "eligible_for_daily_selection", reference: "synthetic-registered-word@v1" } });
+    assert.equal(r.result.status, "eligible_for_daily_selection"); assert.equal(r.public_output_allowed, false);
+    assert.equal(query("select count(*) from pg_tables where schemaname='public' and tablename like 'word%'"), "0");
+  });
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);
 } finally {
   if (container) { docker("rm", "--force", "--volumes", container); assert.equal(docker("ps", "-aq", "--filter", "name=^/" + name + "$"), ""); console.log("Disposable editorial container and tmpfs test data removed."); }

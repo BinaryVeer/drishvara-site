@@ -1,5 +1,7 @@
 import { readFile } from "node:fs/promises";
-import { executeEditorialCommand } from "../scripts/lib/editorial-workspace-service.mjs";
+import { executeEditorialCommand, validateEditorialCommand } from "../scripts/lib/editorial-workspace-service.mjs";
+import { assessEditorialRelease, requestControlledRelease } from "../scripts/lib/editorial-release-service.mjs";
+import { createEditorialArticlePublisher } from "../scripts/lib/editorial-article-publisher.mjs";
 
 const assets = {
   "login.html": [new URL("../internal-scaffolds/editorial-workspace/login.html", import.meta.url), "text/html; charset=utf-8"],
@@ -105,6 +107,41 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
       const rpc = (name, args) => remote("/rest/v1/rpc/" + name, { method: "POST", body: JSON.stringify(args) }, token);
       const session = await executeEditorialCommand({ action: "session" }, rpc);
       if (!session.ok) return json(403, { ok: false, code: "editorial_access_denied" });
+      const deliveryKey = env.EDITORIAL_DELIVERY_SERVICE_KEY || env.SUPABASE_SECRET_KEY;
+      const deliveryEnabled = env.EDITORIAL_DELIVERY_ENABLED === "true" && Boolean(deliveryKey) && Boolean(env.EDITORIAL_DELIVERY_AUTHORIZATION_REF);
+      const deliveryAvailability = async candidateId => {
+        if (!deliveryEnabled) return { enabled: false, code: "delivery_not_activated" };
+        try {
+          const state = await rpc("editorial_delivery_readiness", { p_candidate_id: candidateId, p_authorization_ref: env.EDITORIAL_DELIVERY_AUTHORIZATION_REF });
+          if (state?.ok !== true || state.public_output_allowed !== false || state.runtime_activation !== false) throw Error();
+          return { enabled: state.delivery_enabled === true, code: "delivery_not_activated" };
+        } catch { return { enabled: false, code: "delivery_readiness_unavailable" }; }
+      };
+      if (req.method === "POST" && action === "release_check" && !asset) {
+        if (validateEditorialCommand(body) || body.action !== "open") return json(400, { ok: false, code: "invalid_release_command" });
+        const opened = await executeEditorialCommand(body, rpc);
+        const availability = await deliveryAvailability(body.candidate_id);
+        const result = assessEditorialRelease(opened, { enabled: availability.enabled });
+        if (availability.code === "delivery_readiness_unavailable") result.blockers.push(availability.code);
+        return json(200, result);
+      }
+      if (req.method === "POST" && action === "release" && !asset) {
+        const invalid = validateEditorialCommand(body);
+        if (invalid || body.action !== "request_release") return json(400, { ok: false, code: invalid || "invalid_release_command" });
+        const availability = await deliveryAvailability(body.candidate_id);
+        const workerRpc = deliveryEnabled ? async (name, args) => {
+          if (!["editorial_release_worker", "word_assignment_read_workflow"].includes(name)) throw Error("invalid_worker_operation");
+          const key = deliveryKey;
+          const response = await fetcher(new URL("/rest/v1/rpc/" + name, base), { method: "POST", redirect: "error", signal: AbortSignal.timeout(15000),
+            headers: { apikey: key, ...(key.startsWith("eyJ") ? { Authorization: "Bearer " + key } : {}), "Content-Type": "application/json" }, body: JSON.stringify(args) });
+          if (!response.ok) throw Error("release_worker_unavailable");
+          return response.json();
+        } : undefined;
+        const result = await requestControlledRelease({ command: body, session, rpc, workerRpc, enabled: availability.enabled,
+          authorizationRef: env.EDITORIAL_DELIVERY_AUTHORIZATION_REF,
+          articlePublisher: deliveryEnabled ? createEditorialArticlePublisher({ env, fetcher }) : undefined });
+        return json(result.ok ? 200 : 400, result);
+      }
       if (req.method === "GET" && action === "page") return await serve("app.html");
       if (req.method === "GET" && action === "session") return json(200, session);
       if (req.method === "POST" && action === "command" && !asset) {
