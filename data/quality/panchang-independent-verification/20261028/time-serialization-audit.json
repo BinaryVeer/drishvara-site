@@ -1,0 +1,75 @@
+{
+  "status": "historical_subminute_offset_serialization_review_required",
+  "affected_transition_strings": 1224,
+  "affected_cases": 153,
+  "maximum_utc_local_difference_seconds": 30.999,
+  "affected_dates": {
+    "1900-01-02": 1208,
+    "1950-06-21": 16
+  },
+  "examples": [
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "1900-01-02",
+      "timezone": "Asia/Kolkata",
+      "type": "tithi",
+      "side": "previous",
+      "difference_seconds": 9.936
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "1900-01-02",
+      "timezone": "Asia/Kolkata",
+      "type": "tithi",
+      "side": "next",
+      "difference_seconds": 9.745
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "1900-01-02",
+      "timezone": "Asia/Kolkata",
+      "type": "nakshatra",
+      "side": "previous",
+      "difference_seconds": 9.18
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "1900-01-02",
+      "timezone": "Asia/Kolkata",
+      "type": "nakshatra",
+      "side": "next",
+      "difference_seconds": 9.42
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "1900-01-02",
+      "timezone": "Asia/Kolkata",
+      "type": "yoga",
+      "side": "previous",
+      "difference_seconds": 9.895
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "1900-01-02",
+      "timezone": "Asia/Kolkata",
+      "type": "yoga",
+      "side": "next",
+      "difference_seconds": 9.383
+    }
+  ],
+  "note": "UTC event fields remain authoritative. Local ISO strings round historical timezone offsets to whole minutes; this audit does not change the approved runtime.",
+  "polar_checks": [
+    {
+      "selector": "city-gn-3419842",
+      "date": "1950-06-21",
+      "swiss_status": -2,
+      "agrees_no_sunrise": true
+    },
+    {
+      "selector": "city-gn-3419842",
+      "date": "2026-06-21",
+      "swiss_status": -2,
+      "agrees_no_sunrise": true
+    }
+  ]
+}

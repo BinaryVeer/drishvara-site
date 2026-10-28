@@ -1,0 +1,10 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import path from 'node:path';import {gunzipSync} from 'node:zlib';
+import {calculatePanchangDay} from '../supabase/functions/_shared/panchang-runtime.ts';
+const args=process.argv.slice(2),value=k=>args.includes(k)?args[args.indexOf(k)+1]:undefined;
+if(!args.includes('--output-dir'))throw Error('--output-dir required');const out=value('--output-dir');fs.mkdirSync(out,{recursive:true});
+const matrix=value('--matrix')||'data/quality/panchang-independent-verification/20261028/case-matrix.jsonl.gz';
+const cases=gunzipSync(fs.readFileSync(matrix)).toString().trim().split('\n').map(JSON.parse);
+const handle=fs.openSync(path.join(out,'production-cases.jsonl'),'w');let available=0;
+for(const c of cases){const result=calculatePanchangDay({civil_date:c.date,latitude:c.latitude,longitude:c.longitude,timezone:c.timezone});available+=Number(result.available);fs.writeSync(handle,JSON.stringify({...c,result})+'\n');}fs.closeSync(handle);
+fs.copyFileSync(value('--plan')||'data/quality/panchang-independent-verification/20261028/plan.json',path.join(out,'plan.json'));
+console.log(JSON.stringify({cases:cases.length,available,runtime_sha256:crypto.createHash('sha256').update(fs.readFileSync('supabase/functions/_shared/panchang-runtime.ts')).digest('hex')}));

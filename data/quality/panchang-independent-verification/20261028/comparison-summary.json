@@ -1,0 +1,72 @@
+{
+  "status": "independent_comparison_complete_review_required",
+  "production_cases": 5384,
+  "available_cases": 5382,
+  "unavailable_cases": [
+    {
+      "selector": "city-gn-3419842",
+      "date": "1950-06-21",
+      "latitude": 66.93946,
+      "longitude": -53.6735,
+      "timezone": "America/Nuuk",
+      "reason": "no_sunrise_within_selected_local_civil_date"
+    },
+    {
+      "selector": "city-gn-3419842",
+      "date": "2026-06-21",
+      "latitude": 66.93946,
+      "longitude": -53.6735,
+      "timezone": "America/Nuuk",
+      "reason": "no_sunrise_within_selected_local_civil_date"
+    }
+  ],
+  "element_comparisons": 21528,
+  "transition_comparisons": 43056,
+  "boundary_probes": 86112,
+  "ordinal_crossings_covered": 144,
+  "maximum_angle_difference_degrees": {
+    "tithi": 0.0006978849089023242,
+    "nakshatra": 0.0008733667070259798,
+    "yoga": 0.0012913821912547974,
+    "karana": 0.0006978849089023242
+  },
+  "maximum_transition_difference_seconds": {
+    "tithi": 5.2801162004470825,
+    "nakshatra": 6.100228428840637,
+    "yoga": 8.249160647392273,
+    "karana": 5.2801162004470825
+  },
+  "median_transition_difference_seconds": 1.737065613269806,
+  "tolerances": {
+    "angular_tolerance_degrees": 0.02,
+    "transition_tolerance_seconds": 180,
+    "near_boundary_degrees": 0.02,
+    "reference": "Swiss Ephemeris 2.10.03 / pyswisseph 2.10.3.2, Moshier geocentric true equinox of date",
+    "ayanamsha": "Compare the deployed linear TT profile separately from standard Swiss Lahiri; do not silently change production conventions.",
+    "scope": "All active locations on 2026-10-28; representative locations on historical/seasonal/DST dates; independent previous/next roots and boundary ordering."
+  },
+  "issues": [],
+  "near_boundary_index_differences": [
+    {
+      "selector": "city-gn-344979",
+      "date": "1900-01-02",
+      "type": "nakshatra",
+      "production": 21,
+      "reference": 20,
+      "boundary_distance_degrees": 2.5806423586516303e-05,
+      "angle_difference_degrees": 0.0004675867618288976
+    }
+  ],
+  "standard_lahiri_index_differences": [],
+  "reference": "pyswisseph 2.10.3.2 / Swiss Ephemeris 2.10.03",
+  "reference_flags": {
+    "sun": "MOSEPH, apparent geocentric true equinox of date",
+    "moon": "MOSEPH | TRUEPOS, geocentric true equinox of date"
+  },
+  "limitations": [
+    "The primary comparison intentionally shares the documented linear ayanamsha formula, but uses independent solar/lunar ephemerides and boundary searches.",
+    "Standard Swiss Lahiri comparison is reported separately; it is not silently substituted for the approved profile.",
+    "The matched-timescale run independently evaluates Espenak-Meeus delta-T; the native Swiss timescale comparison is retained separately.",
+    "These are numerical cross-engine checks, not validation of every religious observance rule or source identity."
+  ]
+}

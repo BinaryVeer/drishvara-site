@@ -1,0 +1,113 @@
+{
+  "status": "sup02_governed_public_runtime_response",
+  "release": {
+    "release_id": "ag74p_final_2026_06_24",
+    "manifest_content_hash": "99832056e4f9b472594365c9c88f1c7c4219b90e34af8b9d61001d585848e479",
+    "activated_at": "2026-06-25T01:54:12.874+00:00"
+  },
+  "runtime": {
+    "runtime_release_id": "sup01_panchang_runtime_v1",
+    "runtime_content_hash": "5656178473f7e7cfa1ed231ece6ddd429d2042dcc4474442cb60cc9d760c4249",
+    "status": "active",
+    "activated_at": "2026-06-26T17:25:54.62173+00:00",
+    "no_input_persistence": true,
+    "public_ui_cutover_active": true
+  },
+  "request": {
+    "mode": "named_location",
+    "civil_date": "2026-10-28"
+  },
+  "location_basis": {
+    "canonical_place_id": "varanasi_in",
+    "selector_value": "varanasi-uttar-pradesh-india",
+    "display_label": "Varanasi / Banaras",
+    "timezone": "Asia/Kolkata",
+    "latitude": 25.3176,
+    "longitude": 82.9739,
+    "lgd_code": null,
+    "entity_type": null,
+    "coordinate_basis": null,
+    "coordinate_source": null,
+    "coordinate_source_authority_type": null,
+    "source_dataset_epoch": null,
+    "coordinate_freshness_basis": null,
+    "automatic_place_substitution_performed": false,
+    "automatic_timezone_substitution_performed": false
+  },
+  "panchang": {
+    "source": "approved_precomputed_record",
+    "source_content_hash": "357c8d1d06541b0057ffd8df7e303eee491473965f96a749aa2069832e198309",
+    "result": {
+      "vara": {
+        "basis": "sunrise_anchored_local_civil_date",
+        "index": 4,
+        "english": "Wednesday",
+        "sanskrit": "Budhavara"
+      },
+      "paksha": "Krishna Paksha",
+      "sunset": {
+        "utc": "2026-10-28T11:50:11.130Z",
+        "local": "2026-10-28T17:20:11+05:30"
+      },
+      "sunrise": {
+        "utc": "2026-10-28T00:33:19.093Z",
+        "local": "2026-10-28T06:03:19+05:30"
+      },
+      "elements": {
+        "yoga": {
+          "name": "Vyatipata",
+          "index": 17
+        },
+        "tithi": {
+          "name": "Krishna Tritiya",
+          "index": 18
+        },
+        "karana": {
+          "name": "Vanija",
+          "index": 35
+        },
+        "nakshatra": {
+          "name": "Krittika",
+          "index": 3
+        }
+      },
+      "transitions": {
+        "yoga": {
+          "next": null,
+          "previous": null
+        },
+        "tithi": {
+          "next": {
+            "utc": "2026-10-28T19:37:05.410Z",
+            "local": "2026-10-29T01:07:05+05:30",
+            "toIndex": 19,
+            "fromIndex": 18
+          },
+          "previous": {
+            "utc": "2026-10-27T22:37:14.199Z",
+            "local": "2026-10-28T04:07:14+05:30",
+            "toIndex": 18,
+            "fromIndex": 17
+          }
+        },
+        "karana": {
+          "next": null,
+          "previous": null
+        },
+        "nakshatra": {
+          "next": null,
+          "previous": null
+        }
+      },
+      "available": true
+    }
+  },
+  "observances": [],
+  "privacy": {
+    "calculation_request_persisted": false,
+    "location_input_persisted": false,
+    "personal_data_persisted": false
+  },
+  "public_ui_cutover_active": true,
+  "next_cutover_stage": null
+}

@@ -1,0 +1,66 @@
+{
+  "status": "verification_completed_with_open_findings",
+  "current_day_all_location_cases": 3266,
+  "current_day_matched_convention_index_disagreements": 0,
+  "production_matrix_cases": 5384,
+  "available_cases": 5382,
+  "polar_unavailable_cases": 2,
+  "element_comparisons": 21528,
+  "transition_comparisons": 43056,
+  "transition_timing_within_prespecified_tolerance": true,
+  "maximum_transition_difference_seconds": 8.249160647392273,
+  "all_144_ordinal_crossings_covered": true,
+  "open_findings": [
+    {
+      "id": "PV-01",
+      "type": "near_boundary_model_sensitivity",
+      "case": {
+        "selector": "city-gn-344979",
+        "date": "1900-01-02",
+        "type": "nakshatra",
+        "production": 21,
+        "reference": 20,
+        "boundary_distance_degrees": 2.5806423586516303e-05,
+        "angle_difference_degrees": 0.0004675867618288976
+      },
+      "production_previous_utc": "1900-01-02T03:40:42.835Z",
+      "independent_previous_utc": "1900-01-02T03:40:45.172977Z",
+      "sunrise_utc": "1900-01-02T03:40:45.033Z",
+      "next_step": "Define an explicit near-boundary uncertainty policy; do not replace the approved ephemeris based on a 2.34-second difference."
+    },
+    {
+      "id": "PV-02",
+      "type": "historical_local_timestamp_precision",
+      "affected_cases": 153,
+      "affected_transition_strings": 1224,
+      "maximum_difference_seconds": 30.999,
+      "next_step": "Design backward-compatible historical offset-second serialization and display tests. UTC event fields remain authoritative."
+    },
+    {
+      "id": "PV-03",
+      "type": "precomputed_transition_metadata",
+      "case": {
+        "selector": "varanasi-uttar-pradesh-india",
+        "date": "2026-10-28",
+        "source": "approved_precomputed_record",
+        "same_as_deployed_source": false,
+        "differences": [
+          "nakshatra previous transition",
+          "nakshatra next transition",
+          "yoga previous transition",
+          "yoga next transition",
+          "karana previous transition",
+          "karana next transition"
+        ]
+      },
+      "next_step": "Review compatibility normalization or guarded fallback to the existing approved calculator when complete transition metadata is required; retain the approved precomputed bank."
+    }
+  ],
+  "production_calculation_or_publication_rules_changed": false,
+  "active_location_count": 3266,
+  "runtime_source_sha256": "c9817e502a3edc72a7e0ac63a3425d4a4fa903c0847a91929bf874d1b7108c8a",
+  "source_snapshot_sha256": "fdd1e9453954ba0c521e21c1c2a55e56e824a170e60102f8d675c720186127e3",
+  "source_repository_commit": "052a9686f42b61d5016c8bde2479393e2a42e19d",
+  "packaged_reproduction_exact_output_hash_match": true,
+  "strict_reference_gate_exit_code": 2
+}
