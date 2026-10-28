@@ -1,0 +1,41 @@
+{
+  "release_id": "city_restoration_20261028",
+  "status": "activated_database_readback_verified",
+  "commit": "3df4d3cc00b2ba59ee6c758675c0d35d0518684d",
+  "activated_at": "2026-10-28T03:15:50.115014Z",
+  "active_locations": 3266,
+  "added_locations": 719,
+  "exact_added_payload_coordinate_timezone_matches": 719,
+  "distinct_selectors": 3266,
+  "unchanged_manifest_counts": {
+    "daily": 384,
+    "festivals": 114,
+    "star": 1
+  },
+  "edge_function": {
+    "name": "calculate-panchang",
+    "version": 8,
+    "status": "ACTIVE",
+    "deployed_files_match_release": true
+  },
+  "deployment": {
+    "provider": "Vercel",
+    "status": "success"
+  },
+  "checks": {
+    "timezone_polygon_points": 719,
+    "geographic_timezone_identifiers_restored": 135,
+    "internal_calculation_cases": 2876,
+    "computed": 2873,
+    "expected_polar_sunrise_unavailable": 3,
+    "full_catalog_dom_integration": "passed",
+    "atomic_transaction_simulation": "passed",
+    "staging_and_audit_rls_enabled": true,
+    "staging_and_audit_anon_authenticated_select": false
+  },
+  "limitations": [
+    "Independent astronomical fixtures were not available for every place/date.",
+    "Fresh live POST calculation readback and visual browser rendering could not be repeated after the workspace disconnected; production database readback and deployed function files were verified.",
+    "Public-page retrieval was attempted but the web tool could not access the custom-domain pages."
+  ]
+}
