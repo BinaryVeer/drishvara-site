@@ -311,6 +311,7 @@ Deno.serve(async (request: Request) => {
         entity_type: resolved.governed_record?.payload?.["entity_type"] ?? null,
         coordinate_basis: resolved.governed_record?.payload?.["coordinate_basis"] ?? null,
         coordinate_source: resolved.governed_record?.payload?.["coordinate_source"] ?? null,
+        coordinate_source_authority_type: resolved.governed_record?.payload?.["coordinate_source_authority_type"] ?? null,
         source_dataset_epoch: resolved.governed_record?.payload?.["source_dataset_epoch"] ?? null,
         coordinate_freshness_basis: resolved.governed_record?.payload?.["coordinate_freshness_basis"] ?? null,
         automatic_place_substitution_performed: false,

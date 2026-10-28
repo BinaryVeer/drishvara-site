@@ -4,9 +4,9 @@ import assert from 'node:assert/strict';
 const endpoint='https://pajlabwwszmhjhabxprf.supabase.co/functions/v1/calculate-panchang';
 async function call(payload){const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const body=await r.json();if(!r.ok)throw Error('Runtime returned '+r.status+' '+(body.error?.code||''));return body;}
 const catalog=await call({action:'locations'});
-assert.equal(catalog.catalog_version,'20261026');assert.equal(catalog.record_count,2547);assert.equal(catalog.records.length,2547);
+assert.equal(catalog.catalog_version,'20261026');assert.ok(catalog.record_count>=2547);assert.equal(catalog.records.length,catalog.record_count);
 const expected=JSON.parse(gunzipSync(fs.readFileSync('data/location-releases/lgd-hq-20261026.json.gz')).toString('utf8')).records;
-const actual=new Map(catalog.records.map(r=>[r.selector_value,r]));assert.equal(actual.size,2547);
+const actual=new Map(catalog.records.map(r=>[r.selector_value,r]));assert.equal(actual.size,catalog.record_count);
 for(const r of expected){
  const a=actual.get(r.selector_value);assert.ok(a);
  for(const k of ['canonical_place_id','timezone','lgd_code','source_dataset_epoch'])assert.equal(a[k],r[k]);

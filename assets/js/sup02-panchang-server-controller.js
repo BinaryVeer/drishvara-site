@@ -325,6 +325,8 @@
       lgd_code: record.lgd_code || null,
       source_dataset_epoch: record.source_dataset_epoch || null,
       coordinate_basis: record.coordinate_basis || null,
+      coordinate_source: record.coordinate_source || null,
+      coordinate_source_authority_type: record.coordinate_source_authority_type || null,
       country_iso2: String(record.country_iso2 || "").trim(),
       country_name: String(record.country_name || "").trim(),
       administrative_level_1_name: String(
@@ -553,12 +555,24 @@
     return select;
   }
 
+  function locationReferenceLabel(record) {
+    var labels = {
+      administrative_headquarters_reference_point: "headquarters reference point",
+      city_reference_point: "curated city reference point",
+      official_village_reference_point: "official village reference point",
+      user_supplied_landmark_reference_point: "user-supplied landmark reference point"
+    };
+    return labels[record.coordinate_basis] || "server-resolved calculation coordinates";
+  }
+
   function starLocationSnapshot(record) {
     if (!record) return null;
     return {
       lgd_code: record.lgd_code || null,
       source_dataset_epoch: record.source_dataset_epoch || null,
       coordinate_basis: record.coordinate_basis || null,
+      coordinate_source: record.coordinate_source || null,
+      coordinate_source_authority_type: record.coordinate_source_authority_type || null,
       canonical_place_id: record.canonical_place_id,
       selector_value: record.selector_value,
       display_label: record.display_label,
@@ -1054,7 +1068,10 @@
         starState.selectedLocation.display_label +
         " - " +
         starState.selectedLocation.timezone +
-        (starState.selectedLocation.lgd_code ? " · LGD " + starState.selectedLocation.lgd_code + " · headquarters reference point · official source " + starState.selectedLocation.source_dataset_epoch : ""),
+        " · " + starState.selectedLocation.latitude + ", " + starState.selectedLocation.longitude +
+        " · " + locationReferenceLabel(starState.selectedLocation) +
+        (starState.selectedLocation.lgd_code ? " · LGD " + starState.selectedLocation.lgd_code : "") +
+        (starState.selectedLocation.source_dataset_epoch ? " · source record " + starState.selectedLocation.source_dataset_epoch : ""),
       timezone: starState.selectedLocation.timezone,
       body: {
         mode: "named_location",
@@ -2967,8 +2984,8 @@
       String(basis.latitude) +
         ", " +
         String(basis.longitude) +
-        (basis.coordinate_basis ? " · headquarters reference point" : " · server-resolved calculation coordinates") +
-        (basis.source_dataset_epoch ? " · official source " + basis.source_dataset_epoch : "")
+        " · " + locationReferenceLabel(basis) +
+        (basis.source_dataset_epoch ? " · source record " + basis.source_dataset_epoch : "")
     );
     setText(
       "panchang-timezone-provenance",
@@ -2977,7 +2994,7 @@
     setText(
       "panchang-approval-provenance",
       (basis.lgd_code ? "LGD " + basis.lgd_code + " · " : "") +
-      (basis.coordinate_source ? basis.coordinate_source + " · older official reference accepted" : "Governed server runtime") +
+      (basis.coordinate_source ? basis.coordinate_source : "Governed server runtime") +
       " · no automatic place or timezone substitution"
     );
   }

@@ -1,0 +1,11 @@
+# City and requested location restoration — 28 October 2026
+
+Adds 719 reviewed calculation references to the existing 2,547: 715 international cities, Bengaluru Urban headquarters (Bengaluru/Bangalore/Banglore), Bedauliya village, Bhawnathpur village and the user-supplied Bhawanathpur Township Durga Mandir landmark. Expected active total: 3,266. The original Tokyo entry is retained. Village, township and administrative headquarters remain distinct.
+
+Older official NIC points are retained for Bengaluru (2017) and the two villages (2011). Global points use GeoNames with shared Natural Earth identities; these are curated city references, not government certification. The Township record explicitly labels the user's map pin as a landmark reference. GeoNames CC BY 4.0 and Natural Earth public-domain attribution accompanies the records.
+
+All 719 points have unique full-polygon coverage in Timezone Boundary Builder 2026e (ODbL-1.0, OpenStreetMap contributors). Restored 135 geographic IANA names previously merged into other identifiers, preserving geographic rules for historical dates. Successful coverage and calculation do not independently certify every coordinate or historical timezone transition.
+
+Tests: 2,876 internal day calculations on 1988-02-10, 2026-06-21, 2026-10-26 and 2026-12-21; 2,873 computed, three expected polar sunrise-unavailable cases. The 3,266-record paginated backend and both page typeaheads passed JSDOM integration, including Banglore, Badauliya, Bhawanthpur Township, London, Paris and New York. Atomic PostgreSQL simulation rejected invalid approvals and replay, preserving earlier manifest sections. Visual browser verification was unavailable after the workspace disconnected.
+
+The compressed release and review hash identify the tested public payload. The private RLS-protected staging table is drishvara_location_staging.cities_20261028. scripts/activate-city-restoration.mjs generates the final guarded transaction: lock current manifest, require 2,547 existing records, verify count/approval/timezones/identity collisions, save the previous manifest and add exactly 719 records. The astronomical runtime and personal-input non-persistence remain unchanged.
