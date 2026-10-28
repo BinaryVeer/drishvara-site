@@ -215,7 +215,10 @@
   function sync(){
    const values=rows(),busy=$('[data-ag71e-preview-button="star-reflection"]')?.getAttribute('aria-busy')==='true';intro.replaceChildren();
    const valid=!panel.hidden&&!busy&&values.has('Reflective theme');
-   if(valid){const art=make('div','r-reading-art');art.setAttribute('aria-hidden','true');intro.append(art);mappings.forEach(([key,hindi])=>{const value=values.get(key);if(!value)return;intro.append(text(key,hindi,key==='Reflective theme'?'h3':'h4'));const p=document.createElement('p');p.textContent=value;intro.append(p);});
+   if(!panel.hidden&&!busy&&values.get('Resolution state')==='boundary_review_required'){
+    intro.append(text('Transition precision review required','परिवर्तन की सटीकता की समीक्षा आवश्यक','h3'));
+    const notice=document.createElement('p');notice.textContent=values.get('Limitation notice')||t('No exact Nakshatra is selected near a transition. Review the time basis.','परिवर्तन के निकट सटीक नक्षत्र नहीं चुना जाता। समय के आधार की समीक्षा करें।');intro.append(notice);
+   }else if(valid){const art=make('div','r-reading-art');art.setAttribute('aria-hidden','true');intro.append(art);mappings.forEach(([key,hindi])=>{const value=values.get(key);if(!value)return;intro.append(text(key,hindi,key==='Reflective theme'?'h3':'h4'));const p=document.createElement('p');p.textContent=value;intro.append(p);});
     const basis=make('div','d-basis-grid');[['Exact birth Nakshatra','Day-context Nakshatra','Nakshatra basis','नक्षत्र आधार'],['Moon-sign basis','Moon sign','Moon-sign basis','चंद्र राशि आधार'],['Birth-time basis','Time confidence','Time confidence','समय की निश्चितता'],['Resolution state','Result basis','Session type','सत्र प्रकार']].forEach(([a,b,en,hindi])=>{const e=document.createElement('span');e.append(text(en,hindi));const small=document.createElement('small');small.textContent=values.get(a)||values.get(b)||t('Not supplied by the approved result','अनुमोदित परिणाम में उपलब्ध नहीं');e.append(small);basis.append(e);});intro.append(basis);
    }else if(!panel.hidden){intro.append(text(busy?'Resolving your reflection…':'Reflection unavailable for these inputs.','इन विवरणों के लिए चिंतन उपलब्ध नहीं है।','h3'));const value=values.get('Status')||values.get('Result basis');if(value){const p=document.createElement('p');p.textContent=value;intro.append(p);}}
    const wait=$('.d-reflect-wait');if(wait)wait.hidden=!panel.hidden;
@@ -255,3 +258,4 @@
  function boot(){if(kind==='panchang')buildPanchang();if(kind==='what-stars-say')buildReflection();if(kind==='sports')buildSports();common();}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+

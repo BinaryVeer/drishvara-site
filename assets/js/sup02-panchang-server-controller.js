@@ -3583,7 +3583,12 @@
     if (state.activeAbort) state.activeAbort.abort();
     state.activeAbort = new AbortController();
 
+    // Commit the visible date even if a browser did not emit a change event.
+    var visibleDateField = byId("panchang-date-text");
+    var visibleDate = visibleDateField ? displayToIso(visibleDateField.value) : state.dateKey;
+    if (visibleDateField && visibleDate) syncDate(visibleDate);
     var request = requestFromUi();
+    if (visibleDateField && !visibleDate) request.civil_date = "";
     if (
       !request.civil_date ||
       request.civil_date < SUPPORTED_START ||
