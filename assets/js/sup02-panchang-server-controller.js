@@ -2975,6 +2975,12 @@
 
   function setProvenance(response) {
     var basis = response.location_basis || {};
+    var referenceLabels = {
+      administrative_headquarters_reference_point: "headquarters reference point",
+      city_reference_point: "curated city reference point",
+      official_village_reference_point: "official village reference point",
+      user_supplied_landmark_reference_point: "user-supplied landmark reference point"
+    };
     setText(
       "panchang-location-provenance",
       (basis.display_label || "Resolved location") + " · server-governed basis"
@@ -2984,7 +2990,7 @@
       String(basis.latitude) +
         ", " +
         String(basis.longitude) +
-        " · " + locationReferenceLabel(basis) +
+        " · " + (referenceLabels[basis.coordinate_basis] || "server-resolved calculation coordinates") +
         (basis.source_dataset_epoch ? " · source record " + basis.source_dataset_epoch : "")
     );
     setText(
