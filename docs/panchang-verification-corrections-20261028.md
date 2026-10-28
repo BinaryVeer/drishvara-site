@@ -36,3 +36,9 @@ python scripts/verify-panchang-element-reference.py --directory /tmp/panchang-co
 Use the optional Python dependency pinned in `scripts/requirements-location-verification.txt`. The immutable aggregate baseline hash comes from the pre-correction audit, not from re-running the modified code.
 
 Rollback uses the pre-change repository/function snapshot; no database rollback is needed because this release writes no source-bank rows.
+
+## Live verification
+
+Edge Function v10 and the UI follow-up were deployed successfully. Seven live API cases passed, including completed Varanasi endpoints, historical precision handling and polar unavailability. Real browser checks verified visible review notices, typed-date commits and ordinary Varanasi exact-window resolution. The 384-record bank payload hash was identical before and after deployment, and all 3,266 locations remain active.
+
+[Live verification record](../data/quality/panchang-independent-verification/20261028/corrections/live-verification.json) · [Public-site screenshot proof](verification/panchang-precision-review-20261028.jpg).

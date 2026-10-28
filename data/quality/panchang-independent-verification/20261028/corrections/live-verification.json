@@ -1,0 +1,100 @@
+{
+  "status": "deployed_and_live_verified",
+  "implementation_commit": "906ff40396477122ee266a1bcf2bdc9f61addfcf",
+  "ui_followup_commit": "f902d45435e0ac1a2a3ece5d0cbacb219f09a33d",
+  "edge_function_version": 10,
+  "vercel_status": "success",
+  "active_locations": 3266,
+  "approved_daily_records": 384,
+  "approved_daily_payload_hash_before": "fea0e369c6b0a9f111557227a72d266b783afe7fd0d5c6e26c377ad89b0250e7",
+  "approved_daily_payload_hash_after": "fea0e369c6b0a9f111557227a72d266b783afe7fd0d5c6e26c377ad89b0250e7",
+  "approved_bank_unchanged": true,
+  "live_api_checks": [
+    {
+      "selector": "varanasi-uttar-pradesh-india",
+      "date": "2026-10-28",
+      "available": true,
+      "precision_review": false,
+      "source": "approved_server_calculation",
+      "passed": true
+    },
+    {
+      "selector": "city-gn-344979",
+      "date": "1900-01-02",
+      "available": true,
+      "precision_review": true,
+      "source": "approved_server_calculation",
+      "passed": true
+    },
+    {
+      "selector": "lgd-village-254106",
+      "date": "2026-10-28",
+      "available": true,
+      "precision_review": false,
+      "source": "approved_server_calculation",
+      "passed": true
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "date": "2000-01-01",
+      "available": true,
+      "precision_review": false,
+      "source": "approved_server_calculation",
+      "passed": true
+    },
+    {
+      "selector": "city-gn-2643743",
+      "date": "2026-10-25",
+      "available": true,
+      "precision_review": false,
+      "source": "approved_server_calculation",
+      "passed": true
+    },
+    {
+      "selector": "city-gn-5128581",
+      "date": "2026-03-29",
+      "available": true,
+      "precision_review": false,
+      "source": "approved_server_calculation",
+      "passed": true
+    },
+    {
+      "selector": "city-gn-3419842",
+      "date": "2026-06-21",
+      "available": false,
+      "precision_review": false,
+      "source": "approved_server_calculation",
+      "passed": true
+    }
+  ],
+  "browser_checks": {
+    "normal_varanasi_display": true,
+    "historical_exact_time_and_precision_notice": true,
+    "typed_date_updates_picker_and_request": true,
+    "star_precision_notice_visible_in_main_result": true,
+    "near_boundary_exact_nakshatra_withheld": true,
+    "ordinary_varanasi_exact_window_resolved": true
+  },
+  "regression_cases": 5384,
+  "timestamps_checked": 64584,
+  "independent_numerical_issues": 0,
+  "independent_unhandled_boundaries": 0,
+  "original_model_disagreement_retained_and_handled": true,
+  "resolved_findings": [
+    "PV-01",
+    "PV-02",
+    "PV-03"
+  ],
+  "policy_id": "drishvara_boundary_review_v1",
+  "review_window_seconds": 60,
+  "review_interval_is_certified_error_bound": false,
+  "source_bank_or_publication_gate_writes": 0,
+  "screenshot": {
+    "repository_path": "docs/verification/panchang-precision-review-20261028.jpg",
+    "classification": "public site; synthetic historical test; no personal account or payment data"
+  },
+  "limitations": [
+    "Historical timezone histories still follow the existing runtime Intl/IANA provider.",
+    "The review band is a conservative handling policy; ephemerides are not forced to agree."
+  ]
+}
