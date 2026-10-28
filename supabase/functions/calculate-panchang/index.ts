@@ -194,7 +194,19 @@ Deno.serve(async (request: Request) => {
       );
     }
 
-    const locations = await activeLocations(manifest.release_id);
+    // A committed selector resolves one identity; catalog and free-text discovery
+    // retain full pagination so ambiguity and approval checks stay with the resolver.
+    const catalogRequest = (body as PanchangRequest & {action?: string}).action === "locations";
+    const exactSelector = !catalogRequest && !body.place && typeof body.selector_value === "string"
+      ? body.selector_value.trim() : "";
+    let locations = exactSelector
+      ? await restGet<LocationRow>("drishvara_panchang_locations", new URLSearchParams({
+          select: "selector_value,display_label,timezone,latitude,longitude,search_labels,payload",
+          release_id: `eq.${manifest.release_id}`, selector_value: `eq.${exactSelector}`, limit: "2"
+        }))
+      : await activeLocations(manifest.release_id);
+    // Preserve legacy canonical-ID/alias values passed in selector_value.
+    if (exactSelector && locations.length === 0) locations = await activeLocations(manifest.release_id);
     if ((body as PanchangRequest & {action?: string}).action === "locations") {
       const flags = ["canonical_place_approved", "coordinate_approved", "timezone_approved", "public_selection_approved", "computation_approved", "public_output_allowed"];
       const records = locations.filter((row) => flags.every((f) => row.payload?.[f] === true)).map((row) => ({

@@ -19,7 +19,7 @@ globalThis.fetch=async(input:any)=>{
  const u=new URL(String(input)),table=u.pathname.split('/').at(-1);
  if(table==='drishvara_release_manifests')return Response.json([{release_id:'ag74p_final_2026_06_24',status:'active'}]);
  if(table==='drishvara_panchang_runtime_releases')return Response.json([{release_id:'ag74p_final_2026_06_24',runtime_release_id:'test',status:'active',no_input_persistence:true,public_ui_cutover_active:true}]);
- if(table==='drishvara_panchang_locations'){const start=Number(u.searchParams.get('offset')||0);offsets.push(start);return Response.json(rows.slice(start,start+Number(u.searchParams.get('limit')||1000)));}
+ if(table==='drishvara_panchang_locations'){const start=Number(u.searchParams.get('offset')||0);offsets.push(start);const matching=u.searchParams.has('selector_value')?rows.filter(r=>'eq.'+r.selector_value===u.searchParams.get('selector_value')):rows;return Response.json(matching.slice(start,start+Number(u.searchParams.get('limit')||1000)));}
  if(table==='drishvara_panchang_daily_records'||table==='drishvara_festival_observances')return Response.json([]);
  throw Error('Unexpected table '+table);
 };
