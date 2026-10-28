@@ -6,7 +6,7 @@ import { setTimeout as delay } from "node:timers/promises";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 
 // Real disposable PostgreSQL; synthetic auth/profiles only. No URL, password or production credential input.
-const image = "postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb";
+const image = "docker.io/library/postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb";
 const name = "drishvara-editorial-qa-" + process.pid + "-" + Date.now();
 const docker = (...args) => execFileSync("docker", ["--context", "desktop-linux", ...args], { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], timeout: 60000, maxBuffer: 8e6 }).trim();
 let container = null, checks = 0;
@@ -149,6 +149,134 @@ try {
     assert.throws(() => invoke(reviewer, { action: "open", candidate_id: word.candidate_id }), /editorial_assignment_required/);
   });
   check("existing Panchang sentinel is unchanged", () => assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged"));
+  const owner = randomUUID(), member = randomUUID();
+  const email = "synthetic-member@example.invalid";
+  query(`alter table auth.users add column email text;alter table auth.users add column email_confirmed_at timestamptz;
+    update auth.users set email=id::text||'@example.invalid',email_confirmed_at=now();
+    insert into auth.users(id,email,email_confirmed_at) values('${owner}','synthetic-owner@example.invalid',now()),('${member}','${email}',now());
+    insert into public.profiles values('${owner}','admin',true),('${member}','subscriber',true);`);
+  check("additive roles migration applies without seeding an administrator", () => {
+    query(fs.readFileSync("supabase/migrations/20261028085525_editorial_workspace_roles.sql", "utf8"));
+    assert.equal(query("select count(*) from drishvara_editorial_private.administrators"), "0");
+  });
+  check("global admin profile alone cannot manage workspace access", () => assert.throws(() => invoke(reviewer, { action: "people" }), /workspace_administrator_required/));
+  query(`insert into drishvara_editorial_private.administrators values('${owner}','synthetic-owner-authorization',now()+interval '2 days',null);`);
+  check("designated Admin has workflow access but no invented specialist qualifications", () => {
+    const s = invoke(owner, { action: "session" }); assert.equal(s.is_administrator, true); assert.equal(s.publisher_delivery_enabled, false);
+    assert(s.capabilities.some(g => g.scope === "release")); assert(s.capabilities.some(g => g.scope === "publisher_acceptance"));
+    assert(!s.capabilities.some(g => ["linguistic", "iast", "textual", "philosophical"].includes(g.scope)));
+  });
+  check("ordinary account cannot enumerate accounts or change permissions", () => {
+    for (const action of ["people", "lookup_person", "set_capability", "set_assignment"]) assert.throws(() => invoke(other, { action }), /workspace_administrator_required/);
+  });
+  check("Admin exact-email lookup resolves an existing confirmed account", () => assert.equal(invoke(owner, { action: "lookup_person", email: email.toUpperCase() }).person.id, member));
+  check("unknown and inactive accounts cannot be appointed", () => {
+    assert.throws(() => invoke(owner, { action: "lookup_person", email: "missing@example.invalid" }), /active_confirmed_account_required/);
+    assert.throws(() => invoke(owner, { action: "lookup_person", email: inactive + "@example.invalid" }), /active_confirmed_account_required/);
+  });
+  const access = { action: "set_capability", command_id: randomUUID(), email, kind: "article", scope: "editorial", operation: "grant", access_days: 30,
+    qualification_ref: null, qualification_verified: false, note: "Synthetic authorized reviewer appointment." };
+  check("Admin grants access with append-only authorization and capped expiry", () => {
+    const r = invoke(owner, access); assert.equal(r.subject_id, member); assert.equal(r.public_output_allowed, false);
+    assert.equal(query(`select expires_at<=(select expires_at from drishvara_editorial_private.administrators where subject_id='${owner}') from drishvara_editorial_private.capabilities where subject_id='${member}'`), "t");
+  });
+  check("grant retries are idempotent and changed retries are rejected", () => {
+    const before = query("select count(*) from drishvara_editorial_private.administration_events");
+    invoke(owner, access); assert.equal(query("select count(*) from drishvara_editorial_private.administration_events"), before);
+    assert.throws(() => invoke(owner, { ...access, scope: "rights" }), /idempotency_conflict/);
+  });
+  check("workspace appointment does not promote the global profile role", () => {
+    assert.equal(query(`select role from public.profiles where id='${member}'`), "subscriber");
+    assert.equal(invoke(member, { action: "session" }).is_administrator, false);
+  });
+  check("client-supplied role, authority and unsupported scope cannot escalate", () => {
+    assert.throws(() => invoke(owner, { ...access, command_id: randomUUID(), role: "admin" }), /invalid_administration_command/);
+    assert.throws(() => invoke(owner, { ...access, command_id: randomUUID(), scope: "administrator" }), /invalid_capability_scope/);
+    assert.throws(() => invoke(owner, { ...access, command_id: randomUUID(), kind: "article", scope: "iast" }), /invalid_capability_scope/);
+  });
+  check("specialist appointment needs both an evidence reference and attestation", () => {
+    const c = { ...access, command_id: randomUUID(), kind: "word", scope: "linguistic" };
+    assert.throws(() => invoke(owner, c), /verified_qualification_reference_required/);
+    assert.throws(() => invoke(owner, { ...c, qualification_ref: "synthetic-qualified-reference" }), /verified_qualification_reference_required/);
+    assert.throws(() => invoke(owner, { ...c, qualification_verified: true }), /verified_qualification_reference_required/);
+  });
+  check("duration bounds and nonempty rationale are enforced in SQL", () => {
+    for (const access_days of [0, 91, 1.5, "30"]) assert.throws(() => invoke(owner, { ...access, command_id: randomUUID(), access_days }), /invalid_access_duration|invalid_administration_fields/);
+    assert.throws(() => invoke(owner, { ...access, command_id: randomUUID(), note: " " }), /invalid_administration_fields/);
+  });
+  const owned = invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-admin-authored" });
+  check("Admin can inspect all workspace candidates without synthetic assignments", () => assert(invoke(owner, { action: "list" }).items.length >= 3));
+  check("non-assigned reviewer still cannot access the Admin copy", () => assert.throws(() => invoke(member, { action: "open", candidate_id: owned.candidate_id }), /editorial_assignment_required/));
+  const assignment = { action: "set_assignment", command_id: randomUUID(), email, candidate_id: owned.candidate_id, operation: "grant", access_days: 1, note: "Synthetic candidate assignment only." };
+  check("Admin can assign a candidate by confirmed email", () => {
+    invoke(owner, assignment); assert.equal(invoke(member, { action: "open", candidate_id: owned.candidate_id }).review_permissions.can_review, true);
+  });
+  const ownedDecision = { ...base, command_id: randomUUID(), candidate_id: owned.candidate_id, version_id: owned.version_id, content_hash: owned.content_hash };
+  check("designated Admin self-review is not implicit", () => assert.throws(() => invoke(owner, ownedDecision), /explicit_admin_self_review_required/));
+  const exception = { policy_ref: "drishvara-editorial-admin-self-review@1", acknowledged: true, reason: "Synthetic explicit publisher-authorized self-review exception." };
+  check("malformed, unacknowledged and unknown-version exceptions fail closed", () => {
+    for (const admin_exception of [{}, { ...exception, acknowledged: false }, { ...exception, reason: " " }, { ...exception, policy_ref: "unknown" }, { ...exception, role: "admin" }])
+      assert.throws(() => invoke(owner, { ...ownedDecision, command_id: randomUUID(), admin_exception }), /explicit_admin_self_review_required/);
+  });
+  check("explicit exception is bound to the exact actor, scope, copy and policy", () => {
+    invoke(owner, { ...ownedDecision, admin_exception: exception });
+    const r = JSON.parse(query(`select row_to_json(d) from drishvara_editorial_private.decisions d where candidate_id='${owned.candidate_id}' and actor_id='${owner}'`));
+    assert.deepEqual(r.admin_exception, exception); assert.equal(r.content_hash, owned.content_hash); assert.equal(r.actor_id, owner);
+    assert.equal(r.authorization_ref, "synthetic-owner-authorization");
+  });
+  check("ordinary contributor cannot use the Admin exception", () => assert.throws(() => invoke(author, { ...base, command_id: randomUUID(), version_id: revised.version_id, content_hash: revised.content_hash, admin_exception: exception }), /self_review_denied/));
+  check("Admin exception does not establish missing linguistic qualifications", () => {
+    const ownWord = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-admin-word" });
+    assert.throws(() => invoke(owner, { ...ownedDecision, command_id: randomUUID(), candidate_id: ownWord.candidate_id, version_id: ownWord.version_id, content_hash: ownWord.content_hash, scope: "linguistic", admin_exception: exception }), /review_scope_denied/);
+  });
+  check("assigned independent reviewer can act without a self-review exception", () => {
+    invoke(member, { ...ownedDecision, command_id: randomUUID() });
+    assert.throws(() => invoke(member, { ...ownedDecision, command_id: randomUUID(), admin_exception: exception }), /unexpected_admin_exception/);
+  });
+  check("revoking a capability invalidates approvals and removes access", () => {
+    invoke(owner, { ...access, command_id: randomUUID(), operation: "revoke" });
+    assert.throws(() => invoke(member, { action: "list" }), /editorial_capability_required/);
+    assert.deepEqual(invoke(owner, { action: "open", candidate_id: owned.candidate_id }).review_state.approved_scopes, []);
+  });
+  check("revoking assignment hides otherwise permitted content", () => {
+    invoke(owner, { ...access, command_id: randomUUID() }); invoke(owner, { ...assignment, command_id: randomUUID(), operation: "revoke" });
+    assert.throws(() => invoke(member, { action: "open", candidate_id: owned.candidate_id }), /editorial_assignment_required/);
+  });
+  check("new assignment authorization cannot resurrect an older approval", () => {
+    invoke(owner, { ...assignment, command_id: randomUUID() });
+    invoke(member, { ...ownedDecision, command_id: randomUUID() });
+    assert(invoke(owner, { action: "open", candidate_id: owned.candidate_id }).review_state.approved_scopes.includes("editorial"));
+    invoke(owner, { ...assignment, command_id: randomUUID(), operation: "revoke" });
+    invoke(owner, { ...assignment, command_id: randomUUID() });
+    assert.deepEqual(invoke(owner, { action: "open", candidate_id: owned.candidate_id }).review_state.approved_scopes, []);
+  });
+  check("ambiguous duplicate email identities cannot be appointed", () => {
+    const duplicate = randomUUID();
+    query(`insert into auth.users(id,email,email_confirmed_at) values('${duplicate}','${email}',now());insert into public.profiles values('${duplicate}','subscriber',true);`);
+    assert.throws(() => invoke(owner, { action: "lookup_person", email }), /active_confirmed_account_required/);
+    query(`update auth.users set email='synthetic-duplicate-resolved@example.invalid' where id='${duplicate}'`);
+  });
+  check("acceptance and release still require every current review scope", () => assert.throws(() => invoke(owner, { ...release, command_id: randomUUID(), candidate_id: owned.candidate_id, version_id: owned.version_id, content_hash: owned.content_hash }), /editorial_reviews_pending/));
+  check("access audit cannot be updated, deleted or truncated", () => {
+    for (const sql of ["update drishvara_editorial_private.administration_events set action=action", "delete from drishvara_editorial_private.administration_events", "truncate drishvara_editorial_private.administration_events"]) assert.throws(() => query(sql), /immutable_editorial_history/);
+  });
+  check("new private tables and helper functions have no browser grants", () => {
+    assert.equal(query("select count(*) from pg_tables where schemaname='drishvara_editorial_private' and rowsecurity"), "9");
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema='drishvara_editorial_private' and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+    assert.throws(() => query(`set role authenticated;select drishvara_editorial_private.administration_command('{"action":"people"}');`), /permission denied/);
+  });
+  check("explicit until-revoked Admin designation never creates unbounded staff grants", () => {
+    query(`update drishvara_editorial_private.administrators set expires_at='infinity' where subject_id='${owner}'`);
+    assert.equal(invoke(owner, { action: "session" }).is_administrator, true);
+    invoke(owner, { ...access, command_id: randomUUID(), access_days: 90 });
+    assert.equal(query(`select isfinite(expires_at) and expires_at<=now()+interval '90 days' from drishvara_editorial_private.capabilities where subject_id='${member}' and kind='article' and scope='editorial'`), "t");
+  });
+  check("expired or revoked Admin designation stops management immediately", () => {
+    query(`update drishvara_editorial_private.administrators set revoked_at=now() where subject_id='${owner}'`);
+    assert.throws(() => invoke(owner, { action: "people" }), /workspace_administrator_required/);
+    assert.throws(() => invoke(owner, { action: "session" }), /editorial_capability_required/);
+  });
+  check("roles migration preserves existing Panchang sentinel", () => assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged"));
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);
 } finally {
   if (container) { docker("rm", "--force", "--volumes", container); assert.equal(docker("ps", "-aq", "--filter", "name=^/" + name + "$"), ""); console.log("Disposable editorial container and tmpfs test data removed."); }

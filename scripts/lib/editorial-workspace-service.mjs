@@ -2,6 +2,7 @@ import { meaningStructureErrors, MEANING_COPY_VERSION } from "./ag70e-word-meani
 import { canonicalJson } from "./ag70d-word-selection-engine.mjs";
 
 export const EDITORIAL_CONTRACT = "drishvara.editorial-review.v1";
+export const ADMIN_SELF_REVIEW_POLICY = "drishvara-editorial-admin-self-review@1";
 export const ARTICLE_DESKS = Object.freeze(["world_affairs", "media_society", "public_programmes", "sports", "spirituality"]);
 const object = v => v && typeof v === "object" && !Array.isArray(v);
 const exact = (v, keys) => object(v) && Object.keys(v).length === keys.length && keys.every(k => Object.hasOwn(v, k));
@@ -16,13 +17,30 @@ export function validateEditorialCommand(command) {
     if (Buffer.byteLength(serialized) > 240000) return "request_too_large";
     if (!object(command)) return "invalid_command";
     const shapes = {
-      session: ["action"], list: ["action"], open: ["action", "candidate_id"],
+      session: ["action"], list: ["action"], people: ["action"], lookup_person: ["action", "email"], open: ["action", "candidate_id"],
+      set_capability: ["action", "command_id", "email", "kind", "scope", "operation", "access_days", "qualification_ref", "qualification_verified", "note"],
+      set_assignment: ["action", "command_id", "email", "candidate_id", "operation", "access_days", "note"],
       intake: ["action", "command_id", "kind", "external_id", "expected_version_id", "title", "payload"],
       decision: ["action", "command_id", "candidate_id", "version_id", "content_hash", "scope", "decision", "note", "evidence_refs"],
       request_release: ["action", "command_id", "candidate_id", "version_id", "content_hash"]
     };
+    if (command.action === "decision" && Object.hasOwn(command, "admin_exception")) shapes.decision.push("admin_exception");
     if (!exact(command, shapes[command.action] ?? [])) return "unknown_or_missing_command_fields";
-    if (command.action === "session" || command.action === "list") return null;
+    if (["session", "list", "people"].includes(command.action)) return null;
+    if (["lookup_person", "set_capability", "set_assignment"].includes(command.action)) {
+      if (!text(command.email, 254) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(command.email.trim())) return "invalid_member_email";
+      if (command.action === "lookup_person") return null;
+      if (!uuid(command.command_id) || !["grant", "revoke"].includes(command.operation) || !Number.isInteger(command.access_days) ||
+          command.access_days < 1 || command.access_days > 90 || !text(command.note, 6000) || command.note.trim().length < 10) return "invalid_administration_fields";
+      if (command.action === "set_assignment") return uuid(command.candidate_id) ? null : "invalid_candidate_id";
+      const allowed = command.kind === "word" ? ["intake", "release", "linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"] :
+        command.kind === "article" ? ["intake", "release", "rights", "editorial", "factual", "safety", "media", "publisher_acceptance"] : [];
+      if (!allowed.includes(command.scope) || typeof command.qualification_verified !== "boolean" ||
+          !(command.qualification_ref === null || text(command.qualification_ref, 500))) return "invalid_capability_scope";
+      if (command.operation === "grant" && ["linguistic", "iast", "textual", "philosophical"].includes(command.scope) &&
+          (!command.qualification_verified || !text(command.qualification_ref, 500))) return "verified_qualification_reference_required";
+      return null;
+    }
     if (command.action === "open") return uuid(command.candidate_id) ? null : "invalid_candidate_id";
     if (!uuid(command.command_id)) return "invalid_command_id";
     if (command.action === "intake") {
@@ -40,6 +58,11 @@ export function validateEditorialCommand(command) {
       return null;
     }
     if (!uuid(command.candidate_id) || !uuid(command.version_id) || !hash(command.content_hash)) return "invalid_version_binding";
+    if (command.action === "decision" && Object.hasOwn(command, "admin_exception")) {
+      const e = command.admin_exception;
+      if (!exact(e, ["policy_ref", "reason", "acknowledged"]) || e.policy_ref !== ADMIN_SELF_REVIEW_POLICY ||
+          e.acknowledged !== true || !text(e.reason, 6000) || e.reason.trim().length < 12) return "explicit_admin_self_review_required";
+    }
     if (command.action === "decision" && (!scopes.includes(command.scope) || !["approve", "revise", "reject"].includes(command.decision) ||
         !text(command.note, 6000) || !Array.isArray(command.evidence_refs) || command.evidence_refs.length > 50 ||
         command.evidence_refs.some(r => !text(r, 500)) || new Set(command.evidence_refs).size !== command.evidence_refs.length ||

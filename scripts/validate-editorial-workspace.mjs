@@ -117,4 +117,37 @@ await check("hosting delta is confined to workspace assets and internal routes",
   const preserved = { ...current }; delete preserved.functions; delete preserved.rewrites;
   assert.deepEqual(preserved, baseline);
 });
+const adminGrant = { action: "set_capability", command_id: randomUUID(), email: "reviewer@example.invalid", kind: "word", scope: "editorial", operation: "grant", access_days: 30, qualification_ref: null, qualification_verified: false, note: "Synthetic editorial appointment only." };
+await check("existing email lookup has an exact command shape", () => {
+  assert.equal(validateEditorialCommand({ action: "lookup_person", email: adminGrant.email }), null);
+  assert.equal(validateEditorialCommand({ action: "lookup_person", email: adminGrant.email, role: "admin" }), "unknown_or_missing_command_fields");
+});
+await check("Admin access commands accept scoped grants, not account promotion", () => {
+  assert.equal(validateEditorialCommand(adminGrant), null);
+  assert.equal(validateEditorialCommand({ ...adminGrant, scope: "administrator" }), "invalid_capability_scope");
+});
+await check("specialist grants need qualification evidence and explicit verification", () => {
+  assert.equal(validateEditorialCommand({ ...adminGrant, scope: "linguistic" }), "verified_qualification_reference_required");
+  assert.equal(validateEditorialCommand({ ...adminGrant, scope: "linguistic", qualification_ref: "synthetic-qualification", qualification_verified: true }), null);
+});
+await check("cross-kind scopes and malformed delegation fields fail closed", () => {
+  assert.equal(validateEditorialCommand({ ...adminGrant, kind: "article", scope: "iast" }), "invalid_capability_scope");
+  for (const days of [0, 91, 1.5, "30"]) assert.equal(validateEditorialCommand({ ...adminGrant, access_days: days }), "invalid_administration_fields");
+  assert.equal(validateEditorialCommand({ ...adminGrant, note: " " }), "invalid_administration_fields");
+});
+await check("candidate assignment binds a real-format candidate UUID", () => {
+  const { kind, scope, qualification_ref, qualification_verified, ...rest } = adminGrant;
+  assert.equal(validateEditorialCommand({ ...rest, action: "set_assignment", candidate_id: randomUUID() }), null);
+  assert.equal(validateEditorialCommand({ ...rest, action: "set_assignment", candidate_id: "wrong" }), "invalid_candidate_id");
+});
+await check("Admin exception requires the exact policy, acknowledgment and reason", () => {
+  const e = { policy_ref: "drishvara-editorial-admin-self-review@1", acknowledged: true, reason: "Synthetic explicitly authorized exception." };
+  assert.equal(validateEditorialCommand({ ...decision, admin_exception: e }), null);
+  for (const bad of [null, {}, { ...e, acknowledged: false }, { ...e, policy_ref: "other" }, { ...e, reason: " " }, { ...e, approved: true }])
+    assert.equal(validateEditorialCommand({ ...decision, admin_exception: bad }), "explicit_admin_self_review_required");
+});
+await check("Admin commands still use the authenticated RPC and internal envelopes", async () => {
+  await executeEditorialCommand(adminGrant, async (name, args) => { assert.equal(name, "editorial_review_command"); assert.deepEqual(args.p_command, adminGrant); return internal; });
+  await assert.rejects(executeEditorialCommand(adminGrant, async () => ({ ...internal, runtime_activation: true })), /invalid_editorial_receipt/);
+});
 console.log(`Editorial workspace: ${checks} local contract/HTTP checks passed. Auth is simulated here; real PostgreSQL checks run separately.`);

@@ -10,7 +10,9 @@ const assets = {
 };
 const publicAssets = new Set(["workspace.css", "workspace.js", "editorial-hero-ai.webp"]);
 const safeCodes = new Set(["editorial_access_denied", "editorial_capability_required", "editorial_assignment_required", "editorial_intake_denied",
-  "self_review_denied", "review_scope_denied", "release_scope_denied", "editorial_reviews_pending", "stale_editorial_version", "idempotency_conflict"]);
+  "self_review_denied", "review_scope_denied", "release_scope_denied", "editorial_reviews_pending", "stale_editorial_version", "idempotency_conflict",
+  "workspace_administrator_required", "active_confirmed_account_required", "verified_qualification_reference_required",
+  "explicit_admin_self_review_required", "unexpected_admin_exception", "member_capability_required", "invalid_access_duration"]);
 
 export function createEditorialWorkspaceHandler({ env = process.env, fetcher = fetch, loadAsset = name => readFile(assets[name][0]) } = {}) {
   return async function handler(req, res) {
