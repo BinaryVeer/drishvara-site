@@ -22,6 +22,7 @@
     active_confirmed_account_required: "No active, email-confirmed Drishvara account was found.",
     verified_qualification_reference_required: "Verified qualification evidence is required for this responsibility.",
     explicit_admin_self_review_required: "An explicit Admin exception and reason are required.",
+    explicit_admin_subject_review_required: "A separate Admin subject-review acknowledgment and reason are required.",
     self_review_denied: "This account contributed to the copy and cannot independently review it.",
     reviewer_session_required: "Your session has expired. Please sign in again.",
     editorial_assignment_required: "A current candidate assignment is required.",
@@ -144,6 +145,21 @@
         exceptionReason.addEventListener("input", () => exceptionReason.setCustomValidity(""));
         const reason = node("label", "Exception reason"); reason.append(exceptionReason); box.append(ack, reason); form.append(box);
       }
+      const subjectBox = node("fieldset", undefined, "subject-review-notice");
+      subjectBox.append(node("legend", "Admin subject-review exception"));
+      const subjectAck = node("input"); subjectAck.type = "checkbox";
+      const subjectLabel = node("label", "I am personally reviewing this subject as Admin, without claiming verified specialist credentials.", "checkbox-label"); subjectLabel.prepend(subjectAck);
+      const subjectReason = node("textarea"); subjectReason.minLength = 12; subjectReason.maxLength = 6000;
+      const subjectReasonLabel = node("label", "Subject-review basis and limitations"); subjectReasonLabel.append(subjectReason);
+      subjectBox.append(subjectLabel, subjectReasonLabel); form.append(subjectBox);
+      const needsSubjectException = () => (data.review_permissions?.subject_review_exception_scopes ?? []).includes(scope.value);
+      const syncSubjectException = () => {
+        const needed = needsSubjectException(); subjectBox.hidden = !needed;
+        subjectAck.required = needed; subjectReason.required = needed;
+        subjectReason.setCustomValidity(""); subjectAck.checked = false; subjectReason.value = "";
+      };
+      scope.addEventListener("change", syncSubjectException); syncSubjectException();
+      subjectReason.addEventListener("input", () => subjectReason.setCustomValidity(""));
       const submit = node("button", "Record decision", "primary"); submit.type = "submit"; form.append(submit);
       form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
         const evidence = refs.value.split("\n").map(s => s.trim()).filter(Boolean);
@@ -152,10 +168,12 @@
           evidence.length > 50 || evidence.some(s => s.length > 500) ? "Use up to 50 references, each at most 500 characters." :
           new Set(evidence).size !== evidence.length ? "Remove duplicate evidence references." : "");
         if (exceptionReason) exceptionReason.setCustomValidity(exceptionReason.value.trim().length < 12 ? "Enter a substantive Admin exception reason." : "");
+        if (needsSubjectException()) subjectReason.setCustomValidity(subjectReason.value.trim().length < 12 ? "Enter the evidence, review basis and any limitations of your Admin subject review." : "");
         if (!form.reportValidity()) return;
         if (!confirm("Record this decision for the displayed immutable copy?")) return;
         await command({ action: "decision", command_id: crypto.randomUUID(), candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash,
           scope: scope.value, decision: decision.value, note: note.value.trim(), evidence_refs: evidence,
+          ...(needsSubjectException() ? { subject_review_exception: { policy_ref: session.subject_review_policy_ref, reason: subjectReason.value.trim(), acknowledged: subjectAck.checked } } : {}),
           ...(exceptionReason ? { admin_exception: { policy_ref: session.self_review_policy_ref, reason: exceptionReason.value, acknowledged: exceptionAck.checked } } : {}) });
         message("Decision recorded for this version. Publication remains separately controlled."); await refresh();
       }); });

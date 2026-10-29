@@ -3,6 +3,7 @@ import { canonicalJson } from "./ag70d-word-selection-engine.mjs";
 
 export const EDITORIAL_CONTRACT = "drishvara.editorial-review.v1";
 export const ADMIN_SELF_REVIEW_POLICY = "drishvara-editorial-admin-self-review@1";
+export const ADMIN_SUBJECT_REVIEW_POLICY = "drishvara-editorial-admin-subject-review@1";
 export const ARTICLE_DESKS = Object.freeze(["world_affairs", "media_society", "public_programmes", "sports", "spirituality"]);
 const object = v => v && typeof v === "object" && !Array.isArray(v);
 const exact = (v, keys) => object(v) && Object.keys(v).length === keys.length && keys.every(k => Object.hasOwn(v, k));
@@ -40,6 +41,7 @@ export function validateEditorialCommand(command) {
       request_release: ["action", "command_id", "candidate_id", "version_id", "content_hash"]
     };
     if (command.action === "decision" && Object.hasOwn(command, "admin_exception")) shapes.decision.push("admin_exception");
+    if (command.action === "decision" && Object.hasOwn(command, "subject_review_exception")) shapes.decision.push("subject_review_exception");
     if (!exact(command, shapes[command.action] ?? [])) return "unknown_or_missing_command_fields";
     if (["session", "list", "people"].includes(command.action)) return null;
     if (["lookup_person", "set_capability", "set_assignment"].includes(command.action)) {
@@ -77,6 +79,11 @@ export function validateEditorialCommand(command) {
       const e = command.admin_exception;
       if (!exact(e, ["policy_ref", "reason", "acknowledged"]) || e.policy_ref !== ADMIN_SELF_REVIEW_POLICY ||
           e.acknowledged !== true || !text(e.reason, 6000) || e.reason.trim().length < 12) return "explicit_admin_self_review_required";
+    }
+    if (command.action === "decision" && Object.hasOwn(command, "subject_review_exception")) {
+      const e = command.subject_review_exception;
+      if (!exact(e, ["policy_ref", "reason", "acknowledged"]) || e.policy_ref !== ADMIN_SUBJECT_REVIEW_POLICY ||
+          e.acknowledged !== true || !text(e.reason, 6000) || e.reason.trim().length < 12) return "explicit_admin_subject_review_required";
     }
     if (command.action === "decision" && (!scopes.includes(command.scope) || !["approve", "revise", "reject"].includes(command.decision) ||
         !text(command.note, 6000) || !Array.isArray(command.evidence_refs) || command.evidence_refs.length > 50 ||

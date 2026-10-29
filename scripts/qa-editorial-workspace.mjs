@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
+import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 
 // Explicitly synthetic Auth/RPC browser fixture. Does not connect to hosted Supabase or write approvals.
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
@@ -13,11 +14,13 @@ await mkdir(screenshotDir, { recursive: true, mode: 0o700 });
 let browser, server, checks = 0, base, chosenDecision = null, fixtureAdmin = false, fixtureAllApproved = false, fixtureDelivery = false, releaseRequests = 0;
 const id = randomUUID(), version = randomUUID(), hash = "sha256:" + "a".repeat(64);
 const scopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
+const wordScopes = ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"];
 const data = { candidate: { id, kind: "article", external_id: "synthetic-browser-article", created_by: "synthetic-author" },
   version: { id: version, title: "Synthetic article review fixture", content_hash: hash,
     payload: { desk: "world_affairs", body: 'Synthetic article. <img src=x onerror="window.bad=true">', sources: [], media: [], research_refs: ["synthetic-only"] } },
   decisions: [], release_requests: [] };
-const state = () => ({ required_scopes: scopes, approved_scopes: fixtureAllApproved ? scopes : chosenDecision ? [chosenDecision.scope] : [], reviews_complete: fixtureAllApproved });
+const state = () => { const required = data.candidate.kind === "word" ? wordScopes : scopes;
+  return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : chosenDecision ? [chosenDecision.scope] : [], reviews_complete: fixtureAllApproved }; };
 const receipt = value => ({ ok: true, ...value, public_output_allowed: false, runtime_activation: false });
 const requests = [], errors = [];
 const accessDecisions = [];
@@ -33,10 +36,12 @@ function fakeFetch(url, options) {
     const { p_command: command } = JSON.parse(options.body);
     switch (command.action) {
       case "session": value = receipt({ actor_id: "synthetic-reviewer", is_administrator: fixtureAdmin, self_review_policy_ref: "drishvara-editorial-admin-self-review@1", publisher_delivery_enabled: false,
-        capabilities: [{ kind: "article", scope: "intake" }, { kind: "article", scope: "editorial" }, { kind: "article", scope: "release" }, ...(fixtureAdmin ? [{ kind: "article", scope: "publisher_acceptance" }] : [])] }); break;
-      case "list": value = receipt({ items: [{ id, kind: "article", external_id: data.candidate.external_id, version_id: version, content_hash: hash, title: data.version.title, review_state: state() }] }); break;
+        subject_review_policy_ref: "drishvara-editorial-admin-subject-review@1",
+        capabilities: [{ kind: "article", scope: "intake" }, { kind: "article", scope: "editorial" }, { kind: "article", scope: "release" }, ...(fixtureAdmin ? [{ kind: "article", scope: "publisher_acceptance" }, ...["intake", "release", ...wordScopes].map(scope => ({ kind: "word", scope, qualification_ref: null }))] : [])] }); break;
+      case "list": value = receipt({ items: [{ id, kind: data.candidate.kind, external_id: data.candidate.external_id, version_id: version, content_hash: hash, title: data.version.title, review_state: state() }] }); break;
       case "open": value = receipt({ ...data, review_state: state(), can_edit: true,
-        review_permissions: { can_review: true, can_request_release: true, self_review_exception_required: fixtureAdmin } }); break;
+        review_permissions: { can_review: true, can_request_release: true, self_review_exception_required: fixtureAdmin,
+          subject_review_exception_scopes: fixtureAdmin && data.candidate.kind === "word" ? ["linguistic", "iast", "textual", "philosophical"] : [] } }); break;
       case "people": value = receipt({ people: [{ email: "synthetic-member@example.invalid", capabilities: [] }], audit_events: accessDecisions }); break;
       case "lookup_person": value = receipt({ person: { id: "synthetic-member", email: command.email, capabilities: [], assignments: [] } }); break;
       case "set_capability": case "set_assignment": accessDecisions.push(command); value = receipt({ event_id: randomUUID() }); break;
@@ -192,6 +197,30 @@ try {
   check("a successful action clears stale error and delivery messages", (await page.locator("#message").innerText()) === "");
   fixtureAllApproved = false;
   check("extended Admin UI makes no external requests or runtime errors", requests.length === 0 && errors.length === 0);
+  chosenDecision = null; data.candidate.kind = "word"; data.candidate.external_id = "synthetic-subject-word";
+  data.version.title = "Synthetic Word subject-review fixture";
+  data.version.payload = { contract_version: "ag70e.word-copy.v2", content: withSyntheticMeaning(syntheticWord(1)).reviewed_publication_copy.content, research_refs: ["synthetic-only"] };
+  await page.reload(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
+  check("Word Admin sees all eight review scopes, with acceptance separately placed", await page.locator(".review-form select").first().locator("option").count() === 8);
+  await page.locator(".review-form select").first().selectOption("linguistic");
+  check("subject review has a separate unchecked acknowledgment and no claim of credentials", await page.locator(".subject-review-notice").isVisible() && !await page.locator(".subject-review-notice input").isChecked() && (await page.locator(".subject-review-notice").innerText()).includes("without claiming verified specialist credentials"));
+  await page.locator(".review-form select").nth(1).selectOption("approve");
+  await page.locator(".review-form textarea").nth(0).fill("Synthetic personal review only, not a hosted approval.");
+  await page.locator(".review-form textarea").nth(1).fill("synthetic-evidence-only");
+  await page.locator(".self-review-notice input").check(); await page.locator(".self-review-notice textarea").fill("Synthetic separately authorized self-review.");
+  await page.getByRole("button", { name: "Record decision", exact: true }).click();
+  check("missing subject acknowledgment blocks the actual form despite self-review consent", chosenDecision === null && await page.locator(".subject-review-notice input").evaluate(e => e.validity.valueMissing));
+  await page.locator(".subject-review-notice input").check(); await page.getByRole("button", { name: "Record decision", exact: true }).click();
+  check("missing subject rationale cannot record a decision", chosenDecision === null && await page.locator(".subject-review-notice textarea").evaluate(e => e.validity.valueMissing));
+  await page.locator(".subject-review-notice textarea").fill("Synthetic personally assessed source and limitations; no credential certified.");
+  page.once("dialog", dialog => dialog.accept()); await page.getByRole("button", { name: "Record decision", exact: true }).click();
+  await page.waitForFunction(() => document.querySelector("#message")?.textContent.includes("Decision recorded"));
+  check("both versioned exceptions and exact-copy binding reach authenticated service", chosenDecision?.scope === "linguistic" && chosenDecision.subject_review_exception?.policy_ref === "drishvara-editorial-admin-subject-review@1" && chosenDecision.admin_exception?.policy_ref === "drishvara-editorial-admin-self-review@1" && chosenDecision.content_hash === hash);
+  await page.locator(".review-form select").first().selectOption("editorial");
+  check("ordinary scope hides and clears subject-only consent without weakening self-review", await page.locator(".subject-review-notice").isHidden() && !await page.locator(".subject-review-notice input").isChecked() && await page.locator(".self-review-notice").isVisible());
+  await page.locator(".review-form select").first().selectOption("textual");
+  check("switching back to a subject requires fresh acknowledgment", await page.locator(".subject-review-notice").isVisible() && !await page.locator(".subject-review-notice input").isChecked());
+  check("Word subject UI has no external requests or runtime errors", requests.length === 0 && errors.length === 0);
   await page.locator("#sign-out").click(); await page.waitForSelector("#login-form");
   check("sign-out clears private UI", await page.locator("#document").count() === 0);
   console.log(`Editorial workspace browser: ${checks} checks passed. Auth/decisions are explicitly synthetic; no hosted connection.`);

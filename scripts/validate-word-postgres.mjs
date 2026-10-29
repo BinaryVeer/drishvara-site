@@ -16,7 +16,7 @@ import { runWordServerWorkflow, runWordDailyPublication, validWordStandingPolicy
 import { createWordPublicFeedHandler } from "./lib/ag70e-word-public-feed.mjs";
 
 // Real PostgreSQL, synthetic content/approvals. No URL, credentials, port or volume input.
-const image = "postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb", name = "drishvara-word-qa-" + process.pid + "-" + Date.now();
+const image = "docker.io/library/postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb", name = "drishvara-word-qa-" + process.pid + "-" + Date.now();
 const docker = (...args) => execFileSync("docker", ["--context","desktop-linux",...args], { encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], maxBuffer: 16e6 });
 let created = false, checks = 0;
 const literal = value => "'" + value.replaceAll("'", "''") + "'";

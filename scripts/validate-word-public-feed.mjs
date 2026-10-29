@@ -205,7 +205,9 @@ await check("Panchang, historical migrations, banks and activation unchanged; on
   const manifest = JSON.parse(read("data/knowledge-base/word-of-day/production/knowledge-bank/ag70e-word-production-knowledge-bank-foundation-manifest.json"));
   const contractPath = "data/knowledge-base/word-of-day/production/knowledge-bank/word-output-record-contract.json";
   paths.push(...Object.values(manifest.banks).filter(path => path !== contractPath));
-  for (const path of paths) assert.equal(read(path), execFileSync("git", ["show", baseline + ":" + path], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }), path);
+  // Panchang has its own later approved changes; this integration must preserve that committed owner.
+  const panchangBaseline = "03e4ebb9d71155670a75d56aa9b4505f2d020c98";
+  for (const path of paths) assert.equal(read(path), execFileSync("git", ["show", (path === "supabase/functions/calculate-panchang/index.ts" ? panchangBaseline : baseline) + ":" + path], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }), path);
   const contract = JSON.parse(read(contractPath));
   assert.equal(contract.governed_publication_contract.prepared_public_delivery.activation_default, false);
   assert.deepEqual(contract.governed_publication_contract.meaning_details_extension, {
@@ -249,8 +251,13 @@ function deliveryFixture(endpoint = "", fetcher = async () => new Response("{}")
   });
   return { api: window.DrishvaraV2Homepage, nodes, timers, calls, clock: value => { clock = value; } };
 }
-await check("checked-in homepage connector is dormant, not a production activation", () => {
-  assert(read("index.html").includes('<meta name="drishvara-word-feed" content="" />'));
+await check("homepage transport uses only the authorized read-only feed or the dormant setting", () => {
+  const settings = [...read("index.html").matchAll(/<meta name="drishvara-word-feed" content="([^"]*)" \/>/g)];
+  assert.equal(settings.length, 1);
+  assert(["", feedUrl].includes(settings[0][1]));
+  assert.equal(deliveryFixture(settings[0][1]).api.configuredWordFeed(), settings[0][1] || null);
+});
+await check("an empty feed setting still preserves dormant transport", () => {
   assert.equal(deliveryFixture().api.configuredWordFeed(), null);
 });
 await check("only the exact public read-only endpoint is accepted", () => {

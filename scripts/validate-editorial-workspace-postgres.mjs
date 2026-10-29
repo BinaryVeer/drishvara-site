@@ -416,6 +416,75 @@ try {
     assert.equal(r.result.status, "eligible_for_daily_selection"); assert.equal(r.public_output_allowed, false);
     assert.equal(query("select count(*) from pg_tables where schemaname='public' and tablename like 'word%'"), "0");
   });
+  const decisionsBeforeSubject = query("select count(*) from drishvara_editorial_private.decisions");
+  check("subject-review migration seeds no decisions or specialist credentials", () => {
+    query(fs.readFileSync("supabase/migrations/20261029033849_editorial_admin_subject_reviews.sql", "utf8"));
+    assert.equal(query("select count(*) from drishvara_editorial_private.decisions"), decisionsBeforeSubject);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.capabilities where subject_id='${owner}'`), "0");
+  });
+  query(`update drishvara_editorial_private.administrators set revoked_at=null where subject_id='${owner}'`);
+  const adminWord = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-subject-review-word" });
+  const subject = { policy_ref: "drishvara-editorial-admin-subject-review@1", acknowledged: true, reason: "Synthetic publisher-authorized personal subject review; no credential claimed." };
+  const subjectDecision = { ...base, command_id: randomUUID(), candidate_id: adminWord.candidate_id, version_id: adminWord.version_id, content_hash: adminWord.content_hash,
+    scope: "linguistic", admin_exception: exception };
+  check("Admin session exposes four subject responsibilities without a qualification reference", () => {
+    const s = invoke(owner, { action: "session" }); assert.equal(s.subject_review_policy_ref, subject.policy_ref);
+    for (const scope of ["linguistic", "iast", "textual", "philosophical"]) assert(s.capabilities.some(g => g.kind === "word" && g.scope === scope && g.qualification_ref === null));
+    assert.deepEqual(invoke(owner, { action: "open", candidate_id: adminWord.candidate_id }).review_permissions.subject_review_exception_scopes, ["iast", "linguistic", "philosophical", "textual"]);
+  });
+  for (const scope of ["linguistic", "iast", "textual", "philosophical"]) check("Admin " + scope + " decision cannot omit explicit subject acknowledgment", () =>
+    assert.throws(() => invoke(owner, { ...subjectDecision, scope, command_id: randomUUID() }), /explicit_admin_subject_review_required/));
+  check("malformed, unacknowledged and unknown subject policies fail in SQL", () => {
+    for (const e of [null, {}, { ...subject, acknowledged: false }, { ...subject, policy_ref: exception.policy_ref }, { ...subject, reason: " " }, { ...subject, qualification_verified: true }])
+      assert.throws(() => invoke(owner, { ...subjectDecision, command_id: randomUUID(), subject_review_exception: e }), /explicit_admin_subject_review_required|null_editorial_field/);
+  });
+  check("subject acknowledgment cannot replace independent self-review consent", () => {
+    const { admin_exception, ...withoutSelf } = subjectDecision;
+    assert.throws(() => invoke(owner, { ...withoutSelf, subject_review_exception: subject }), /explicit_admin_self_review_required/);
+  });
+  const savedSubject = { ...subjectDecision, subject_review_exception: subject };
+  check("Admin subject review binds actual actor, scope, exact copy and both policy reasons", () => {
+    invoke(owner, savedSubject);
+    const d = JSON.parse(query(`select row_to_json(d) from drishvara_editorial_private.decisions d where candidate_id='${adminWord.candidate_id}'`));
+    assert.equal(d.actor_id, owner); assert.equal(d.scope, "linguistic"); assert.equal(d.content_hash, adminWord.content_hash); assert.equal(d.qualification_ref, null);
+    assert.deepEqual(d.subject_review_exception, subject); assert.deepEqual(d.admin_exception, exception);
+    assert.deepEqual(invoke(owner, { action: "open", candidate_id: adminWord.candidate_id }).review_state.approved_scopes, ["linguistic"]);
+  });
+  check("subject decision retry is idempotent and changed acknowledgment cannot overwrite it", () => {
+    const before = query("select count(*) from drishvara_editorial_private.decisions"); invoke(owner, savedSubject);
+    assert.equal(query("select count(*) from drishvara_editorial_private.decisions"), before);
+    assert.throws(() => invoke(owner, { ...savedSubject, subject_review_exception: { ...subject, reason: "Synthetic changed review rationale." } }), /idempotency_conflict/);
+  });
+  check("Admin can record all four subjects but cannot release with other reviews pending", () => {
+    for (const scope of ["iast", "textual", "philosophical"]) invoke(owner, { ...savedSubject, scope, command_id: randomUUID() });
+    const s = invoke(owner, { action: "open", candidate_id: adminWord.candidate_id }).review_state;
+    assert.equal(s.approved_scopes.length, 4); assert.equal(s.reviews_complete, false);
+    assert.throws(() => invoke(owner, { ...wordRequest, candidate_id: adminWord.candidate_id, version_id: adminWord.version_id, content_hash: adminWord.content_hash, command_id: randomUUID() }), /editorial_reviews_pending/);
+  });
+  check("non-Admin cannot use subject exception and ordinary specialist grants remain guarded", () => {
+    assert.throws(() => invoke(reviewer, { ...base, command_id: randomUUID(), candidate_id: deliveryWord.candidate_id, version_id: deliveryWord.version_id, content_hash: deliveryWord.content_hash, scope: "linguistic", subject_review_exception: subject }), /unexpected_subject_review_exception/);
+    assert.throws(() => invoke(owner, { ...access, command_id: randomUUID(), kind: "word", scope: "linguistic" }), /verified_qualification_reference_required/);
+  });
+  check("subject exception is not accepted for unrelated Article or non-specialist scopes", () => {
+    assert.throws(() => invoke(owner, { ...ownedDecision, command_id: randomUUID(), admin_exception: exception, subject_review_exception: subject }), /unexpected_subject_review_exception/);
+  });
+  check("revoked Admin immediately loses subject capabilities and effective approvals", () => {
+    query(`update drishvara_editorial_private.administrators set revoked_at=now() where subject_id='${owner}'`);
+    assert.equal(query(`select drishvara_editorial_private.review_state('${adminWord.candidate_id}','${adminWord.version_id}')->'approved_scopes'`), "[]");
+    assert.throws(() => invoke(owner, { ...savedSubject, command_id: randomUUID() }), /editorial_capability_required/);
+    query(`update drishvara_editorial_private.administrators set revoked_at=null where subject_id='${owner}'`);
+  });
+  check("subject-review audit is immutable and new copies require fresh decisions", () => {
+    assert.throws(() => query("update drishvara_editorial_private.decisions set subject_review_exception=null"), /immutable_editorial_history/);
+    const next = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-subject-review-word", expected_version_id: adminWord.version_id });
+    assert.deepEqual(invoke(owner, { action: "open", candidate_id: adminWord.candidate_id }).review_state.approved_scopes, []);
+    assert.throws(() => invoke(owner, { ...savedSubject, command_id: randomUUID() }), /stale_editorial_version/); assert.notEqual(next.version_id, adminWord.version_id);
+  });
+  check("subject-review helper and private tables retain default-deny grants and Panchang", () => {
+    assert.throws(() => query(`set role authenticated;select drishvara_editorial_private.admin_subject_scopes('${owner}','word');`), /permission denied/);
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema='drishvara_editorial_private' and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+  });
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);
 } finally {
   if (container) { docker("rm", "--force", "--volumes", container); assert.equal(docker("ps", "-aq", "--filter", "name=^/" + name + "$"), ""); console.log("Disposable editorial container and tmpfs test data removed."); }

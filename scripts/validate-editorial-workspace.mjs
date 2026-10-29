@@ -150,6 +150,18 @@ await check("Admin commands still use the authenticated RPC and internal envelop
   await executeEditorialCommand(adminGrant, async (name, args) => { assert.equal(name, "editorial_review_command"); assert.deepEqual(args.p_command, adminGrant); return internal; });
   await assert.rejects(executeEditorialCommand(adminGrant, async () => ({ ...internal, runtime_activation: true })), /invalid_editorial_receipt/);
 });
+await check("subject review has its own exact policy, acknowledgment and reason", () => {
+  const e = { policy_ref: "drishvara-editorial-admin-subject-review@1", acknowledged: true, reason: "Synthetic personally assessed subject and limitations." };
+  assert.equal(validateEditorialCommand({ ...decision, scope: "linguistic", subject_review_exception: e }), null);
+  for (const bad of [null, {}, { ...e, acknowledged: false }, { ...e, policy_ref: "drishvara-editorial-admin-self-review@1" }, { ...e, reason: " " }, { ...e, qualification_verified: true }])
+    assert.equal(validateEditorialCommand({ ...decision, subject_review_exception: bad }), "explicit_admin_subject_review_required");
+});
+await check("subject and self-review exceptions remain independently validated", () => {
+  const subject = { policy_ref: "drishvara-editorial-admin-subject-review@1", acknowledged: true, reason: "Synthetic independent subject acknowledgment." };
+  const self = { policy_ref: "drishvara-editorial-admin-self-review@1", acknowledged: true, reason: "Synthetic independent self-review acknowledgment." };
+  assert.equal(validateEditorialCommand({ ...decision, subject_review_exception: subject, admin_exception: self }), null);
+  assert.equal(validateEditorialCommand({ ...decision, subject_review_exception: subject, admin_exception: subject }), "explicit_admin_self_review_required");
+});
 const releaseScopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
 const releaseSnapshot = { ...internal, candidate: { id, kind: "article" }, version: { id: version, content_hash: contentHash },
   review_state: { required_scopes: releaseScopes, approved_scopes: releaseScopes, reviews_complete: true }, review_permissions: { can_request_release: true } };
