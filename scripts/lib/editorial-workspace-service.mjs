@@ -1,5 +1,6 @@
 import { meaningStructureErrors, MEANING_COPY_VERSION } from "./ag70e-word-meaning-contract.mjs";
 import { canonicalJson } from "./ag70d-word-selection-engine.mjs";
+import { reviewedImageUpload } from "./editorial-review-media.mjs";
 
 export const EDITORIAL_CONTRACT = "drishvara.editorial-review.v1";
 export const ADMIN_SELF_REVIEW_POLICY = "drishvara-editorial-admin-self-review@1";
@@ -32,6 +33,19 @@ export function validateEditorialCommand(command) {
     const serialized = canonicalJson(command);
     if (Buffer.byteLength(serialized) > 240000) return "request_too_large";
     if (!object(command)) return "invalid_command";
+    if (command.action === "review_batch") {
+      const keys = ["action", "command_id", "candidate_id", "version_id", "content_hash", "scopes", "decision", "note", "evidence_refs"];
+      for (const key of ["admin_exception", "subject_review_exception"]) if (Object.hasOwn(command, key)) keys.push(key);
+      if (!exact(command, keys)) return "unknown_or_missing_command_fields";
+      if (!Array.isArray(command.scopes) || !command.scopes.length || command.scopes.length > 8 ||
+          new Set(command.scopes).size !== command.scopes.length || command.scopes.includes("publisher_acceptance")) return "invalid_review_checklist";
+      for (const scope of command.scopes) {
+        const { scopes: ignored, ...one } = command;
+        const error = validateEditorialCommand({ ...one, action: "decision", scope });
+        if (error) return error;
+      }
+      return null;
+    }
     const shapes = {
       session: ["action"], list: ["action"], people: ["action"], lookup_person: ["action", "email"], open: ["action", "candidate_id"],
       set_capability: ["action", "command_id", "email", "kind", "scope", "operation", "access_days", "qualification_ref", "qualification_verified", "note"],
@@ -72,6 +86,10 @@ export function validateEditorialCommand(command) {
           !text(p.body, 150000) || !Array.isArray(p.sources) || p.sources.length > 50 ||
           !Array.isArray(p.media) || p.media.length > 20 || !Array.isArray(p.research_refs) || p.research_refs.length > 50 ||
           p.research_refs.some(r => !text(r, 500))) return "invalid_article_research_copy";
+      if (command.kind === "article") {
+        if (p.media.length > 1) return "invalid_editorial_image";
+        try { for (const media of p.media) reviewedImageUpload(media); } catch { return "invalid_editorial_image"; }
+      }
       return null;
     }
     if (!uuid(command.candidate_id) || !uuid(command.version_id) || !hash(command.content_hash)) return "invalid_version_binding";

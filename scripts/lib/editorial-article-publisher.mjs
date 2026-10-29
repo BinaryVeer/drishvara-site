@@ -1,5 +1,6 @@
 import { snapshotHash, canonicalPublicationDate } from "./ag70d-word-selection-engine.mjs";
 import { prepareReviewedArticleFiles } from "../../services/pipeline/publish-all-core.js";
+import { reviewedImageUpload } from "./editorial-review-media.mjs";
 
 // One fast-forward commit owns the page, discovery index and recovery receipt together.
 export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = {}) {
@@ -45,11 +46,19 @@ export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = 
     const oldArticle = await read(files.articlePath);
     if (oldArticle !== null && (!prior || prior.article_path !== files.articlePath || snapshotHash(oldArticle) !== prior.article_hash)) throw Error("article_destination_conflict");
     const receipt = { ...publicBinding, binding_hash: bindingHash, article_path: files.articlePath, article_hash: snapshotHash(files.html) };
+    const image = reviewedImageUpload(job.version.payload.media[0]);
+    const imageEntries = [];
+    if (image) {
+      // Content-addressed assets cannot overwrite another reviewed image or execute HTML/SVG.
+      const blob = await request("git/blobs", { method: "POST", body: JSON.stringify({ content: image.base64, encoding: "base64" }) });
+      if (!/^[a-f0-9]{40}$/.test(blob.sha || "")) throw Error("article_publisher_unavailable");
+      imageEntries.push({ path: image.path, mode: "100644", type: "blob", sha: blob.sha });
+    }
     const parent = await request("git/commits/" + head);
     const tree = await request("git/trees", { method: "POST", body: JSON.stringify({ base_tree: parent.tree.sha, tree: [
       { path: files.articlePath, mode: "100644", type: "blob", content: files.html },
       { path: files.indexPath, mode: "100644", type: "blob", content: JSON.stringify(files.index, null, 2) + "\n" },
-      { path: receiptPath, mode: "100644", type: "blob", content: JSON.stringify(receipt, null, 2) + "\n" }
+      { path: receiptPath, mode: "100644", type: "blob", content: JSON.stringify(receipt, null, 2) + "\n" }, ...imageEntries
     ] }) });
     const commit = await request("git/commits", { method: "POST", body: JSON.stringify({ message: "Publish reviewed editorial copy " + bindingHash, tree: tree.sha, parents: [head] }) });
     await revalidate();

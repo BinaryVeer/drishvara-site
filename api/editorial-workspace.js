@@ -17,7 +17,8 @@ const safeCodes = new Set(["editorial_access_denied", "editorial_capability_requ
   "workspace_administrator_required", "active_confirmed_account_required", "verified_qualification_reference_required",
   "explicit_admin_self_review_required", "unexpected_admin_exception", "member_capability_required", "invalid_access_duration",
   "explicit_admin_subject_review_required", "unexpected_subject_review_exception", "invalid_word_registration", "word_registration_metadata_pending",
-  "word_registration_sources_pending", "word_registration_copy_unapproved", "word_registration_changed", "word_reference_unapproved", "word_editorial_approval_changed"]);
+  "word_registration_sources_pending", "word_registration_copy_unapproved", "word_registration_changed", "word_reference_unapproved", "word_editorial_approval_changed",
+  "invalid_review_checklist", "invalid_editorial_image"]);
 
 export function createEditorialWorkspaceHandler({ env = process.env, fetcher = fetch, loadAsset = name => readFile(assets[name][0]) } = {}) {
   return async function handler(req, res) {
@@ -25,7 +26,7 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
     res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     res.setHeader("X-Content-Type-Options", "nosniff");
     res.setHeader("Referrer-Policy", "no-referrer");
-    res.setHeader("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'");
+    res.setHeader("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'");
     const json = (status, data) => res.status(status).json({ ...data, public_output_allowed: false, runtime_activation: false });
     if (env.EDITORIAL_WORKSPACE_ENABLED !== "true") return json(503, { ok: false, code: "editorial_workspace_disabled" });
     let origin, base;

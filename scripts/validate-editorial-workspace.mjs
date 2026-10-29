@@ -5,6 +5,8 @@ import { Readable } from "node:stream";
 import { execFileSync } from "node:child_process";
 import { validateEditorialCommand, executeEditorialCommand } from "./lib/editorial-workspace-service.mjs";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
+import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
+import { reviewedImageUpload } from "./lib/editorial-review-media.mjs";
 
 let checks = 0;
 async function check(name, run) { await run(); checks++; console.log("PASS " + name); }
@@ -20,6 +22,32 @@ for (const key of ["actor_id", "role", "approved", "public_output_allowed"]) awa
 await check("rejects arbitrary publication actions", () => assert.equal(validateEditorialCommand({ action: "publish" }), "unknown_or_missing_command_fields"));
 await check("requires exact version hash", () => assert.equal(validateEditorialCommand({ ...decision, content_hash: "latest" }), "invalid_version_binding"));
 await check("approval requires evidence references", () => assert.equal(validateEditorialCommand({ ...decision, evidence_refs: [] }), "invalid_review_decision"));
+const { scope: oneScope, ...batchFields } = decision;
+const batch = { ...batchFields, action: "review_batch", scopes: ["editorial", "safety"] };
+await check("one checklist validates each explicitly selected aspect", () => assert.equal(validateEditorialCommand(batch), null));
+await check("empty, duplicated and acceptance checklists fail closed", () => {
+  for (const scopes of [[], ["editorial", "editorial"], ["publisher_acceptance"], ["unrecognized"]]) assert.notEqual(validateEditorialCommand({ ...batch, scopes }), null);
+});
+await check("checklist cannot supply an actor or approval flag", () => {
+  for (const key of ["actor_id", "approved", "role"]) assert.equal(validateEditorialCommand({ ...batch, [key]: true }), "unknown_or_missing_command_fields");
+});
+await check("checklist retains exact-copy, rationale and evidence requirements", () => {
+  for (const changed of [{ content_hash: "current" }, { note: " " }, { evidence_refs: [] }]) assert.notEqual(validateEditorialCommand({ ...batch, ...changed }), null);
+});
+const raster = syntheticReviewImage();
+await check("private raster upload is bounded and content-addressed", () => {
+  const image = reviewedImageUpload(raster); assert.equal(image.width, 320); assert.equal(image.height, 180); assert.equal(image.path, raster.url.slice(1));
+  assert.equal(validateEditorialCommand({ ...intake, payload: { ...intake.payload, media: [raster] } }), null);
+});
+await check("forged destinations, SVG, incorrect ratios, extra authority and invalid PNG fail", () => {
+  for (const media of [{ ...raster, url: "/index.html" }, { ...raster, upload_png: Buffer.from("<svg/>").toString("base64") },
+    syntheticReviewImage(320, 320), { ...raster, approved: true }, { ...raster, alt: "" }, { ...raster, source_url: "https://user:secret@example.invalid" }])
+    assert.throws(() => reviewedImageUpload(media), /invalid_editorial_image/);
+});
+await check("PNG header alone cannot hide corrupt image data", () => {
+  const corrupted = Buffer.from(raster.upload_png, "base64"); corrupted[40] ^= 1;
+  assert.throws(() => reviewedImageUpload({ ...raster, upload_png: corrupted.toString("base64") }), /invalid_editorial_image/);
+});
 await check("unqualified/unknown scope rejected", () => assert.equal(validateEditorialCommand({ ...decision, scope: "admin_override" }), "invalid_review_decision"));
 await check("duplicate evidence refs rejected", () => assert.equal(validateEditorialCommand({ ...decision, evidence_refs: ["same", "same"] }), "invalid_review_decision"));
 await check("rejects incomplete word copy rather than fabricating fields", () => assert.equal(validateEditorialCommand({ ...intake, kind: "word", payload: { contract_version: "ag70e.word-copy.v2", content: {}, research_refs: [] } }), "invalid_word_research_copy"));

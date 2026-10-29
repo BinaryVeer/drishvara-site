@@ -5,6 +5,7 @@ import { execFileSync } from "node:child_process";
 import { assessEditorialRelease, requestControlledRelease, deliverReviewedWord } from "./lib/editorial-release-service.mjs";
 import { editorialDecisionIssues } from "./lib/editorial-workspace-service.mjs";
 import { createEditorialArticlePublisher } from "./lib/editorial-article-publisher.mjs";
+import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
 import { prepareReviewedArticleFiles } from "../services/pipeline/publish-all-core.js";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 import { snapshotHash, candidateRef } from "./lib/ag70d-word-selection-engine.mjs";
@@ -132,6 +133,7 @@ const mockGit = async (url, opts = {}) => {
   if (path.startsWith("contents/")) { const data = publicFiles.get(path.slice(9).split("?")[0]); return data === undefined ? { ok: false, status: 404 } : ok({ type: "file", encoding: "base64", content: Buffer.from(data).toString("base64") }); }
   if (path === "git/commits/" + head) return ok({ tree: { sha: "synthetic-parent-tree" } });
   if (path === "git/trees") { stagedTree = JSON.parse(opts.body).tree; return ok({ sha: "synthetic-next-tree" }); }
+  if (path === "git/blobs") return ok({ sha: "e".repeat(40) });
   if (path === "git/commits") return ok({ sha: next });
   if (path === "git/refs/heads/main" && opts.method === "PATCH") {
     if (branchAdvanced) return { ok: false, status: 422 };
@@ -151,6 +153,14 @@ await check("article, discovery and receipt are one non-forced atomic branch upd
 });
 await check("completed Git replay reads the receipt and performs no write", async () => {
   gitCalls = []; await publisher({ job, timestamp, revalidate: async () => {} }); assert(gitCalls.every(c => c.method === "GET"));
+});
+await check("reviewed upload joins the same atomic Article commit without leaking private payload", async () => {
+  const raster = syntheticReviewImage(), mediaJob = { ...job, version: { ...job.version, payload: { ...job.version.payload, media: [raster] } } };
+  publicFiles.delete("data/editorial-release-receipts/" + id + ".json"); publicFiles.delete(rendered.articlePath); gitCalls = [];
+  await publisher({ job: mediaJob, timestamp, revalidate: async () => {} });
+  assert.equal(stagedTree.length, 4); assert(stagedTree.some(f => f.path === raster.url.slice(1) && f.sha === "e".repeat(40)));
+  const blob = gitCalls.find(c => c.path === "git/blobs"); assert.equal(blob.body.encoding, "base64"); assert.equal(blob.body.content, raster.upload_png);
+  assert(stagedTree.filter(f => f.content).every(f => !f.content.includes("upload_png") && !f.content.includes(raster.upload_png)));
 });
 await check("public receipt contains no person, decision or source-rights review notes", () => {
   const receipt = JSON.parse(publicFiles.get("data/editorial-release-receipts/" + id + ".json"));

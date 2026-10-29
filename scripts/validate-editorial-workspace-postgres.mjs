@@ -7,6 +7,7 @@ import { syntheticWord, withSyntheticMeaning, syntheticSelection } from "./lib/a
 import { snapshotHash, validApprovedRecord, selectDailyWord, selectionAuthorityHashes } from "./lib/ag70d-word-selection-engine.mjs";
 import { reviewedWordCopy } from "./lib/ag70e-word-publication-pipeline.mjs";
 import { runWordDailyPublication } from "./lib/ag70e-word-server-workflow.mjs";
+import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
 
 // Real disposable PostgreSQL; synthetic auth/profiles only. No URL, password or production credential input.
 const image = "docker.io/library/postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb";
@@ -627,6 +628,115 @@ try {
   check("registration leaves all existing Panchang data and client grants untouched", () => {
     assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
     assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema in ('drishvara_editorial_private','drishvara_word_private') and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+  });
+  const decisionCount = query("select count(*) from drishvara_editorial_private.decisions");
+  check("consolidated migration preserves decisions and grants without approving content", () => {
+    query(fs.readFileSync("supabase/migrations/20261029053348_editorial_consolidated_review.sql", "utf8"));
+    assert.equal(query("select count(*) from drishvara_editorial_private.decisions"), decisionCount);
+  });
+  const consolidated = invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-consolidated-review" });
+  const batch = { action: "review_batch", command_id: randomUUID(), candidate_id: consolidated.candidate_id,
+    version_id: consolidated.version_id, content_hash: consolidated.content_hash, scopes: ["editorial", "safety"],
+    decision: "approve", note: "Synthetic single checklist review", evidence_refs: ["synthetic-copy-evidence"], admin_exception: exception };
+  let grouped;
+  check("one checklist atomically records its actual actor and selected aspects", () => {
+    grouped = invoke(owner, batch); assert.equal(grouped.decision_ids.length, 2);
+    assert.deepEqual(grouped.review_state.approved_scopes, ["editorial", "safety"]); assert.equal(grouped.public_output_allowed, false);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.decisions where candidate_id='${consolidated.candidate_id}' and actor_id='${owner}' and content_hash='${consolidated.content_hash}'`), "2");
+  });
+  check("checklist replay is idempotent and cannot mutate evidence", () => {
+    assert.deepEqual(invoke(owner, batch), grouped);
+    assert.throws(() => invoke(owner, { ...batch, evidence_refs: ["changed"] }), /idempotency_conflict/);
+  });
+  const concurrentBatch = { ...batch, command_id: randomUUID(), scopes: ["rights", "factual"] };
+  const concurrentBatches = await Promise.all([invokeConcurrent(owner, concurrentBatch), invokeConcurrent(owner, concurrentBatch)]);
+  check("concurrent checklist retries produce one set of decisions", () => {
+    assert.deepEqual(concurrentBatches[0], concurrentBatches[1]);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.decisions where candidate_id='${consolidated.candidate_id}'`), "4");
+  });
+  check("empty, duplicate, malformed and publisher-acceptance checklists are rejected in SQL", () => {
+    for (const scopes of [[], ["editorial", "editorial"], [null], ["publisher_acceptance"]])
+      assert.throws(() => invoke(owner, { ...batch, command_id: randomUUID(), scopes }), /invalid_review_checklist/);
+  });
+  check("a later unauthorized checklist aspect rolls back earlier decisions", () => {
+    const before = query("select count(*) from drishvara_editorial_private.decisions");
+    assert.throws(() => invoke(owner, { ...batch, command_id: randomUUID(), scopes: ["editorial", "zz_unknown"] }), /invalid_editorial_decision/);
+    assert.equal(query("select count(*) from drishvara_editorial_private.decisions"), before);
+  });
+  check("forged fields and missing evidence cannot bypass batch checks", () => {
+    assert.throws(() => invoke(owner, { ...batch, command_id: randomUUID(), actor_id: reviewer }), /invalid_review_checklist/);
+    assert.throws(() => invoke(owner, { ...batch, command_id: randomUUID(), evidence_refs: [] }), /invalid_editorial_decision/);
+  });
+  check("checklist retains self-review and distinct Admin subject acknowledgments", () => {
+    const { admin_exception, ...withoutSelf } = batch;
+    assert.throws(() => invoke(owner, { ...withoutSelf, command_id: randomUUID() }), /explicit_admin_self_review_required/);
+    const wordBatch = { ...batch, command_id: randomUUID(), candidate_id: adminWord.candidate_id, version_id: adminWord.version_id, content_hash: adminWord.content_hash, scopes: ["linguistic", "iast"] };
+    // Use the actual current version from the earlier immutable revision fixture.
+    const current = invoke(owner, { action: "open", candidate_id: adminWord.candidate_id });
+    Object.assign(wordBatch, { version_id: current.version.id, content_hash: current.version.content_hash });
+    assert.throws(() => invoke(owner, wordBatch), /explicit_admin_subject_review_required/);
+    const result = invoke(owner, { ...wordBatch, subject_review_exception: subject }); assert.equal(result.decision_ids.length, 2);
+  });
+  check("missing assignments and revoked roles still block consolidated review", () => {
+    assert.throws(() => invoke(other, { ...batch, command_id: randomUUID() }), /editorial_assignment_required/);
+    query(`update drishvara_editorial_private.administrators set revoked_at=now() where subject_id='${owner}'`);
+    assert.throws(() => invoke(owner, { ...batch, command_id: randomUUID() }), /editorial_assignment_required|editorial_capability_required/);
+    query(`update drishvara_editorial_private.administrators set revoked_at=null where subject_id='${owner}'`);
+  });
+  const fullWord = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-full-checklist" });
+  check("one Word checklist records all eight human aspects but not publisher acceptance", () => {
+    const result = invoke(owner, { ...batch, command_id: randomUUID(), candidate_id: fullWord.candidate_id, version_id: fullWord.version_id,
+      content_hash: fullWord.content_hash, scopes: ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical"], subject_review_exception: subject });
+    assert.equal(result.decision_ids.length, 8); assert.equal(result.review_state.reviews_complete, false);
+    assert(!result.review_state.approved_scopes.includes("publisher_acceptance"));
+    assert.throws(() => invoke(owner, { ...release, command_id: randomUUID(), candidate_id: fullWord.candidate_id, version_id: fullWord.version_id, content_hash: fullWord.content_hash }), /editorial_reviews_pending/);
+  });
+  assign(reviewer, consolidated.candidate_id);
+  const correction = { ...create, command_id: randomUUID(), external_id: "synthetic-consolidated-review", expected_version_id: consolidated.version_id,
+    payload: { ...create.payload, body: "Synthetic corrected complete article" } };
+  let corrected;
+  check("assigned reviewer or publisher can correct an existing copy without new-intake authority", () => {
+    assert.equal(invoke(reviewer, { action: "open", candidate_id: consolidated.candidate_id }).can_edit, true);
+    corrected = invoke(reviewer, correction); assert.notEqual(corrected.content_hash, consolidated.content_hash);
+    assert.deepEqual(invoke(reviewer, { action: "open", candidate_id: consolidated.candidate_id }).review_state.approved_scopes, []);
+  });
+  check("correction preserves old decisions but cannot create new candidates or self-approve", () => {
+    assert.equal(query(`select count(*) from drishvara_editorial_private.decisions where candidate_id='${consolidated.candidate_id}'`), "4");
+    assert.throws(() => invoke(reviewer, { ...correction, command_id: randomUUID(), external_id: "unassigned-new", expected_version_id: null }), /editorial_intake_denied/);
+    const { admin_exception, ...independent } = batch;
+    assert.throws(() => invoke(reviewer, { ...independent, command_id: randomUUID(), version_id: corrected.version_id, content_hash: corrected.content_hash, scopes: ["editorial"] }), /self_review_denied/);
+  });
+  check("stale copy and unassigned corrections cannot reuse an approval", () => {
+    assert.throws(() => invoke(owner, { ...batch, command_id: randomUUID() }), /stale_editorial_version/);
+    assert.throws(() => invoke(other, { ...correction, command_id: randomUUID(), expected_version_id: corrected.version_id }), /editorial_intake_denied/);
+  });
+  const publisherOnly = randomUUID();
+  query(`insert into auth.users(id,email,email_confirmed_at) values('${publisherOnly}','synthetic-publisher-only@example.invalid',now());
+    insert into public.profiles values('${publisherOnly}','subscriber',true);`);
+  grant(publisherOnly, "article", "release"); assign(publisherOnly, consolidated.candidate_id);
+  check("publisher-only access permits correction but does not grant review or intake privileges", () => {
+    const opened = invoke(publisherOnly, { action: "open", candidate_id: consolidated.candidate_id }); assert.equal(opened.can_edit, true);
+    const result = invoke(publisherOnly, { ...correction, command_id: randomUUID(), expected_version_id: corrected.version_id, title: "Synthetic publisher revision" });
+    assert.equal(result.status, "pending_review");
+    assert.deepEqual(invoke(publisherOnly, { action: "open", candidate_id: consolidated.candidate_id }).review_state.approved_scopes, []);
+    assert.throws(() => invoke(publisherOnly, { ...create, command_id: randomUUID(), external_id: "publisher-new-intake" }), /editorial_intake_denied/);
+    assert.throws(() => invoke(publisherOnly, { ...batch, command_id: randomUUID(), version_id: result.version_id, content_hash: result.content_hash }), /self_review_denied/);
+  });
+  const raster = syntheticReviewImage();
+  check("private PNG upload is accepted only as a pending immutable Article copy", () => {
+    const result = invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-image-copy", payload: { ...create.payload, media: [raster] } });
+    assert.equal(result.status, "pending_review"); assert.equal(result.runtime_activation, false);
+    assert.equal(invoke(owner, { action: "open", candidate_id: result.candidate_id }).version.payload.media[0].upload_png, raster.upload_png);
+  });
+  check("direct RPC rejects forged image destinations, malformed PNG, aspect and size", () => {
+    for (const m of [{ ...raster, url: "/index.html" }, { ...raster, upload_png: "AAAA" }, syntheticReviewImage(320, 320), { ...raster, upload_png: "A".repeat(150000) }])
+      assert.throws(() => invoke(owner, { ...create, command_id: randomUUID(), external_id: "bad-image", payload: { ...create.payload, media: [m] } }), /invalid_editorial_image/);
+  });
+  check("private legacy implementation is not a browser-accessible bypass", () => {
+    assert.throws(() => query(`set role authenticated;select drishvara_editorial_private.review_command_v1('{"action":"list"}');`), /permission denied/);
+    assert.throws(() => query(`set role anon;select public.editorial_review_command('{"action":"review_batch"}');`), /permission denied/);
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema in ('drishvara_editorial_private','drishvara_word_private') and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
   });
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);
 } finally {

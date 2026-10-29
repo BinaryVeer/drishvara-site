@@ -222,6 +222,13 @@ await check("Panchang, historical migrations, banks and activation unchanged; on
   assert.equal(JSON.parse(read("generated/word-of-day-publication.json")).status, "withheld");
   const configPath="data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json";
   const current=JSON.parse(read(configPath));
+  const daily = current.daily_release_policy_authorization;
+  assert.equal(daily.record_ref,"drishvara-word-daily-policy@20261029-v1");
+  assert.equal(daily.context_model,"global_educational_pool_independent_of_panchang");
+  assert.equal(daily.timezone,"Asia/Kolkata");assert.equal(daily.local_time,"00:05");
+  assert.deepEqual(daily.candidate_order,[]);assert.equal(daily.candidate_order_confirmed,false);
+  for(const key of ["individual_word_approval_implied","scheduler_enabled","runtime_activation","public_output_allowed"])assert.equal(daily[key],false);
+  delete current.daily_release_policy_authorization;
   assert.equal(current.standing_authorization.enabled,false); assert.equal(current.standing_authorization.production_approval_ref,null);
   delete current.publisher_policy; delete current.standing_authorization;
   const prior=JSON.parse(execFileSync("git",["show",baseline+":"+configPath],{encoding:"utf8"}));

@@ -39,7 +39,8 @@
     queued_worker_unavailable: "Release request saved. The trusted delivery worker is unavailable.",
     delivery_in_progress: "Delivery is already in progress. Refresh before retrying.",
     delivery_completed: "Controlled delivery completed. See the recorded delivery result.",
-    approved_word_registration_pending: "This exact copy still needs registration in the existing approved AG70E bank.",
+    invalid_review_checklist: "Select the aspects you actually reviewed. Publisher acceptance is a separate step.",
+    invalid_editorial_image: "Use a PNG image up to 96 KiB, 16:9 or 4:3, with alt text, attribution and its source URL.",
     word_workflow_unavailable: "The approved daily Word workflow is not available.",
     delivery_pending: "Release request saved, but delivery is pending. Nothing is being reported as published." }[code] || code);
   async function busy(button, work) {
@@ -78,6 +79,181 @@
     if (typeof value !== "string" || !value) return;
     const section = node("section", undefined, "content-section"); section.append(node("h3", title), node("p", value, "copy")); parent.append(section);
   }
+  const aspectLabels = { linguistic: "Language, Sanskrit form and meaning", iast: "IAST transliteration",
+    rights: "Source and image reuse", editorial: "Public wording and presentation", context: "Context and applicability",
+    safety: "Safety and non-prescriptive wording", textual: "Textual references and translations",
+    philosophical: "Philosophical interpretation", factual: "Factual accuracy", media: "Image accuracy and attribution" };
+  function field(parent, label, input) { const l = node("label", label); l.append(input); parent.append(l); return input; }
+  function consolidatedReview(side, data, scopes) {
+    const form = node("form", undefined, "review-form consolidated-review");
+    const checks = new Map();
+    const checklist = node("fieldset"); checklist.append(node("legend", "Verification checklist"));
+    for (const scope of scopes) {
+      const input = node("input"); input.type = "checkbox"; input.name = "aspect"; input.value = scope;
+      const label = node("label", aspectLabels[scope], "checkbox-label"); label.prepend(input); checklist.append(label); checks.set(scope, input);
+    }
+    form.append(checklist);
+    form.append(node("p", "Check only the aspects you personally verified. A bare word needs no copyright permission, but reused passages and images still require source clearance.", "muted"));
+    const correction = field(form, "Is a correction required?", node("select")); correction.name = "correction_required"; correction.required = true;
+    for (const [v, t] of [["", "Choose"], ["no", "No"], ["yes", "Yes - revise complete copy"]]) correction.append(new Option(t, v));
+    const decision = field(form, "Review decision", node("select")); decision.name = "decision";
+    for (const [v, t] of [["revise", "Return for revision"], ["approve", "Approve checked aspects"], ["reject", "Reject checked aspects"]]) decision.append(new Option(t, v));
+    const note = field(form, "Review findings and rationale", node("textarea")); note.name = "note"; note.maxLength = 6000; note.rows = 3;
+    note.placeholder = "What you checked, the evidence used, limitations and your decision.";
+    const refs = field(form, "Evidence references, one per line", node("textarea")); refs.name = "evidence_refs"; refs.rows = 3;
+    refs.placeholder = "Source ID plus entry/passage locator, clearance record or exact-copy decision reference";
+    const picker = node("select"); picker.setAttribute("aria-label", "Existing source reference"); picker.append(new Option("Choose an existing source", ""));
+    for (const source of data.version.payload.content?.sources ?? data.version.payload.sources ?? []) {
+      const value = source.evidence_ref || source.url || (typeof source === "string" ? source : null);
+      if (typeof value === "string" && value.length <= 500) picker.append(new Option(source.title || value, value));
+    }
+    if (picker.options.length > 1) {
+      const add = node("button", "Add source reference"); add.type = "button";
+      add.addEventListener("click", () => { const values = refs.value.split("\n").map(v => v.trim()).filter(Boolean); if (picker.value && !values.includes(picker.value)) refs.value = [...values, picker.value].join("\n"); refs.setCustomValidity(""); });
+      form.append(picker, add);
+    }
+    function exceptionBox(title, copy, cls) {
+      const box = node("fieldset", undefined, cls); box.append(node("legend", title));
+      const ack = node("input"); ack.type = "checkbox";
+      const label = node("label", copy, "checkbox-label"); label.prepend(ack); box.append(label);
+      const reason = field(box, "Basis and limitations", node("textarea")); reason.minLength = 12; reason.maxLength = 6000;
+      form.append(box); return { box, ack, reason };
+    }
+    const self = data.review_permissions?.self_review_exception_required ? exceptionBox("Admin self-review exception", "Record an audited exception for my own submitted or edited copy.", "self-review-notice") : null;
+    const subject = exceptionBox("Admin subject-review exception", "I am personally reviewing these subjects as Admin, without claiming verified specialist credentials.", "subject-review-notice");
+    const selectedScopes = () => [...checks].filter(([, input]) => input.checked).map(([name]) => name);
+    const needsSubject = () => selectedScopes().some(scope => data.review_permissions?.subject_review_exception_scopes?.includes(scope));
+    const submit = node("button", "Submit review", "primary"); submit.type = "submit"; form.append(submit);
+    function sync() {
+      const revise = correction.value === "yes", needed = needsSubject() && !revise;
+      note.required = !revise; refs.required = !revise && decision.value === "approve"; decision.disabled = revise;
+      subject.box.hidden = !needed; subject.ack.required = needed; subject.reason.required = needed;
+      if (!needed) { subject.ack.checked = false; subject.reason.value = ""; }
+      if (self) { self.box.hidden = revise; self.ack.required = !revise; self.reason.required = !revise; }
+      submit.textContent = revise ? "Prepare corrected copy" : "Submit review";
+    }
+    form.addEventListener("change", sync);
+    form.addEventListener("input", () => { note.setCustomValidity(""); refs.setCustomValidity(""); }); sync();
+    let pendingCommand = null;
+    form.addEventListener("input", () => { pendingCommand = null; });
+    form.addEventListener("change", () => { pendingCommand = null; });
+    form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
+      if (correction.value === "yes") { if (data.can_edit) correctionEditor(data); else message("An assigned editor or Admin must submit the correction."); return; }
+      const chosen = selectedScopes(), evidence = refs.value.split("\n").map(v => v.trim()).filter(Boolean);
+      if (!chosen.length) { message("Check at least one aspect you actually reviewed."); return; }
+      note.setCustomValidity(note.value.trim() ? "" : "Enter the finding and reason for this decision.");
+      refs.setCustomValidity(decision.value === "approve" && !evidence.length ? "Approval requires an actual evidence reference." :
+        evidence.length > 50 || evidence.some(v => v.length > 500) ? "Use up to 50 references, each at most 500 characters." :
+        new Set(evidence).size !== evidence.length ? "Remove duplicate evidence references." : "");
+      if (!form.reportValidity()) return;
+      if (!confirm("Record one review for the checked aspects of this exact copy? Unchecked aspects remain unchanged.")) return;
+      pendingCommand ??= { action: "review_batch", command_id: crypto.randomUUID(), candidate_id: data.candidate.id,
+        version_id: data.version.id, content_hash: data.version.content_hash, scopes: chosen, decision: decision.value,
+        note: note.value.trim(), evidence_refs: evidence,
+        ...(self ? { admin_exception: { policy_ref: session.self_review_policy_ref, reason: self.reason.value.trim(), acknowledged: self.ack.checked } } : {}),
+        ...(needsSubject() ? { subject_review_exception: { policy_ref: session.subject_review_policy_ref, reason: subject.reason.value.trim(), acknowledged: subject.ack.checked } } : {}) };
+      await command(pendingCommand); message("Review recorded for the checked aspects. Acceptance and publication remain separate."); await refresh();
+    }); });
+    side.append(form);
+  }
+  function correctionEditor(data) {
+    const dialog = node("dialog"); dialog.id = "correction-dialog"; dialog.setAttribute("aria-labelledby", "correction-title");
+    const form = node("form"), heading = node("div", undefined, "dialog-heading");
+    const title = node("h2", "Revise complete copy"); title.id = "correction-title";
+    const close = node("button", "\u00d7"); close.type = "button"; close.setAttribute("aria-label", "Close correction editor"); close.addEventListener("click", () => dialog.close());
+    heading.append(title, close); form.append(heading, node("p", "This saves a new immutable version. Earlier decisions remain in history but do not approve the revised copy.", "muted"));
+    const binding = node("p", data.candidate.external_id + " / Version " + data.version.id, "hash"); form.append(binding);
+    const payload = structuredClone(data.version.payload), original = JSON.stringify(payload);
+    const titleInput = field(form, "Title", node("input")); titleInput.name = "title"; titleInput.value = data.version.title; titleInput.required = true; titleInput.maxLength = 400;
+    const display = key => ({ meaning_en: "Homepage meaning - English", meaning_hi: "Homepage meaning - Hindi", iast: "IAST", sanskrit: "Sanskrit", hindi: "Hindi equivalent", english: "English equivalent", body: "Complete article text", reuse_approval_ref: "Actual source-use clearance reference (leave empty if pending)", review_status: "Source review status" }[key] || key.replaceAll("_", " "));
+    function editObject(parent, object, path = "") {
+      for (const [key, value] of Object.entries(object)) {
+        if (["contract_version", "kind", "desk", "research_refs", "media"].includes(key)) continue;
+        const name = path ? path + "." + key : key;
+        if (value !== null && typeof value === "object") {
+          const box = node("fieldset", undefined, "copy-fields"); box.append(node("legend", display(key)));
+          if (Array.isArray(value)) {
+            const entries = node("div"), add = node("button", "Add " + display(key)); add.type = "button";
+            const template = structuredClone(value[0] ?? (key === "sources" ? { title: "", url: "" } : ""));
+            const blank = item => Array.isArray(item) ? [] : item && typeof item === "object" ? Object.fromEntries(Object.entries(item).map(([k, v]) =>
+              [k, ["source_kind", "relation", "original_language", "kind"].includes(k) ? v : k === "review_status" ? "pending" : k === "reuse_approval_ref" ? null : blank(v)])) : "";
+            function renderEntries() {
+              entries.replaceChildren();
+              value.forEach((entry, i) => {
+                const item = node("fieldset"); item.append(node("legend", String(i + 1)));
+                if (entry && typeof entry === "object") editObject(item, entry, name + "." + i);
+                else { const input = field(item, "Reference " + (i + 1), node("input")); input.value = entry; input.name = name + "." + i; input.addEventListener("input", () => { value[i] = input.value; }); }
+                const remove = node("button", "Remove " + display(key) + " " + (i + 1)); remove.type = "button";
+                remove.addEventListener("click", () => { value.splice(i, 1); pending = null; renderEntries(); }); item.append(remove); entries.append(item);
+              });
+            }
+            add.addEventListener("click", () => { value.push(blank(template)); pending = null; renderEntries(); });
+            renderEntries(); box.append(entries, add);
+          }
+          else editObject(box, value, name);
+          parent.append(box); continue;
+        }
+        const input = node(["meaning_en", "meaning_hi", "reflection_en", "reflection_hi", "body"].includes(key) || /text|explanation|translation|body|attribution|note/.test(key) ? "textarea" : "input");
+        input.name = name; input.value = value ?? ""; if (input.tagName === "TEXTAREA") input.rows = key === "body" ? 16 : 4;
+        field(parent, display(key), input);
+        input.addEventListener("input", () => { object[key] = value === null && input.value === "" ? null : input.value; });
+      }
+    }
+    editObject(form, data.candidate.kind === "word" ? payload.content : { body: payload.body, sources: payload.sources });
+    if (data.candidate.kind === "article") form.querySelector('[name="body"]').addEventListener("input", event => { payload.body = event.target.value; });
+    let upload = payload.media?.[0]?.upload_png ?? null, previewUrl = null, imageLoading = false;
+    if (data.candidate.kind === "article") {
+      const media = node("fieldset", undefined, "image-correction"); media.append(node("legend", "Picture correction"));
+      const mode = field(media, "Change the current picture?", node("select")); mode.name = "image_change";
+      for (const [v, t] of [["keep", "No - keep existing image"], ["replace", "Yes - replace or add"], ["remove", "Remove image"]]) mode.append(new Option(t, v));
+      const controls = node("div"); controls.hidden = true;
+      const ratio = field(controls, "Upload ratio", node("select")); ratio.name = "image_ratio";
+      ratio.append(new Option("16:9 - wide hero", "wide"), new Option("4:3 - editorial image", "standard"));
+      const file = field(controls, "Upload PNG (up to 96 KiB)", node("input")); file.type = "file"; file.accept = "image/png"; file.name = "image_file";
+      const image = node("img"); image.alt = "Private image preview"; image.hidden = true; image.className = "private-image-preview"; controls.append(image);
+      const inputs = {};
+      for (const [key, label] of [["url", "Existing image URL or uploaded asset path"], ["alt", "Alternative text"], ["attribution", "Image attribution and use basis"], ["source_url", "Image source URL"]]) {
+        const input = field(controls, label, node("input")); input.name = "image_" + key; input.value = payload.media[0]?.[key] ?? ""; inputs[key] = input;
+      }
+      const status = node("p"); status.setAttribute("role", "status"); controls.append(status); media.append(controls); form.append(media);
+      mode.addEventListener("change", () => { controls.hidden = mode.value !== "replace"; for (const input of Object.values(inputs)) input.required = mode.value === "replace"; });
+      file.addEventListener("change", async () => {
+        imageLoading = true;
+        upload = null; status.textContent = ""; file.setCustomValidity("");
+        if (previewUrl) URL.revokeObjectURL(previewUrl); image.hidden = true; inputs.url.readOnly = false;
+        if (!file.files.length) { imageLoading = false; return; }
+        try {
+          const chosen = file.files[0]; if (chosen.type !== "image/png" || chosen.size > 98304) throw Error("Use a PNG up to 96 KiB.");
+          const bytes = await chosen.arrayBuffer(), bitmap = await createImageBitmap(chosen), w = bitmap.width, h = bitmap.height; bitmap.close();
+          const r = ratio.value === "wide" ? 16 / 9 : 4 / 3;
+          if (w < 320 || w > 2400 || h < 180 || h > 1800 || Math.abs(w / h - r) >= .015) throw Error("Use the selected ratio, width 320-2400px and height 180-1800px.");
+          const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map(b => b.toString(16).padStart(2, "0")).join("");
+          upload = btoa([...new Uint8Array(bytes)].map(b => String.fromCharCode(b)).join("")); inputs.url.value = "/assets/editorial/" + digest + ".png"; inputs.url.readOnly = true;
+          previewUrl = URL.createObjectURL(chosen); image.src = previewUrl; image.hidden = false; status.textContent = w + " x " + h + " - private pending-copy image";
+        } catch (error) { status.textContent = error.message; file.setCustomValidity(error.message); }
+        finally { imageLoading = false; }
+      });
+      ratio.addEventListener("change", () => { if (file.files.length) file.dispatchEvent(new Event("change")); });
+      form.addEventListener("submit", () => {
+        if (mode.value === "remove") payload.media = [];
+        if (mode.value === "replace") payload.media = [{ ...Object.fromEntries(Object.entries(inputs).map(([key, input]) => [key, input.value.trim()])), ...(upload ? { upload_png: upload } : {}) }];
+      });
+    } else form.append(node("p", "Word public copy has no image slot. No image will be added to its publication contract.", "muted"));
+    const status = node("p"); status.setAttribute("role", "status"); form.append(status);
+    const save = node("button", "Submit corrected copy for review", "primary"); save.type = "submit"; form.append(save);
+    let pending = null;
+    form.addEventListener("input", () => { pending = null; }); form.addEventListener("change", () => { pending = null; });
+    form.addEventListener("submit", event => { event.preventDefault(); busy(save, async () => {
+      if (imageLoading) { status.textContent = "Wait for image validation to complete."; return; }
+      if (JSON.stringify(payload) === original && titleInput.value === data.version.title) { status.textContent = "No correction was made."; return; }
+      if (!confirm("Save this complete revised copy as a new version with fresh reviews required?")) return;
+      pending ??= { action: "intake", command_id: crypto.randomUUID(), kind: data.candidate.kind, external_id: data.candidate.external_id,
+        expected_version_id: data.version.id, title: titleInput.value.trim(), payload };
+      try { await command(pending); } catch (error) { status.textContent = friendly(error.message); throw error; }
+      dialog.close(); message("Corrected version submitted. Prior approvals do not apply to this copy."); await refresh();
+    }); });
+    dialog.append(form); document.body.append(dialog); dialog.addEventListener("close", () => { if (previewUrl) URL.revokeObjectURL(previewUrl); dialog.remove(); }); dialog.showModal();
+  }
   async function open(id) {
     const seq = ++loadSequence;
     const data = await command({ action: "open", candidate_id: id });
@@ -88,12 +264,7 @@
     doc.append(node("p", "Version: " + data.version.id, "version-label"));
     if (data.can_edit) {
       const edit = node("button", "Propose corrected version"); edit.type = "button";
-      edit.addEventListener("click", () => {
-        const form = $("intake-form"); form.reset(); form.elements.kind.value = data.candidate.kind;
-        form.elements.external_id.value = data.candidate.external_id; form.elements.title.value = data.version.title;
-        form.elements.expected_version_id.value = data.version.id; form.elements.payload.value = JSON.stringify(p, null, 2);
-        $("intake-dialog").showModal();
-      }); doc.append(edit);
+      edit.addEventListener("click", () => correctionEditor(data)); doc.append(edit);
     }
     if (data.candidate.kind === "word") {
       const c = p.content;
@@ -119,7 +290,8 @@
     const scopes = data.review_state.required_scopes.filter(scope => granted(data.candidate.kind, scope) &&
       (view === "review" ? scope !== "publisher_acceptance" : view === "acceptance" && scope === "publisher_acceptance"));
     const canReview = data.review_permissions?.can_review !== false;
-    if (scopes.length && canReview) {
+    if (scopes.length && canReview && view === "review") consolidatedReview(side, data, scopes);
+    if (scopes.length && canReview && view === "acceptance") {
       const form = node("form", undefined, "review-form");
       const scope = node("select"), decision = node("select"), note = node("textarea"), refs = node("textarea");
       for (const name of scopes) scope.append(new Option(name.replaceAll("_", " "), name));
@@ -203,7 +375,7 @@
           deliveryStatus.textContent = data.candidate.kind === "article" ?
             "Article publishing is connected. Only the exact fully approved copy can be delivered to the public site." :
             "The daily Word handoff is connected. Approved AG70E registration and the independent daily publication controls still apply.";
-          if (releaseButton) releaseButton.textContent = data.candidate.kind === "article" ? "Publish approved article" : "Release to daily Word workflow";
+          if (releaseButton) releaseButton.textContent = data.candidate.kind === "article" ? "Publish approved article" : "Send to daily publish queue";
         }
         if (result.delivery_enabled && result.request_allowed) readiness.append(node("p", "Ready for controlled delivery validation."));
       })); side.append(readiness, check);
