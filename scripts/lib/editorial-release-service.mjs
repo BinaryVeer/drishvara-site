@@ -27,12 +27,10 @@ export function assessEditorialRelease(opened, { enabled = false } = {}) {
 export async function deliverReviewedWord({ job, rpc, timestamp, revalidate }) {
   const date = canonicalPublicationDate(timestamp);
   if (!date || !job.word_record_ref) throw Error("approved_word_registration_pending");
-  const response = await rpc("word_assignment_read_workflow", { p_date: date });
-  const bundle = response?.data;
-  if (response?.error || !bundle?.bank?.records) throw Error("word_workflow_unavailable");
-  const matches = bundle.bank.records.filter(r => candidateRef(r) === job.word_record_ref);
-  const record = matches[0], copy = record?.reviewed_publication_copy;
-  if (matches.length !== 1 || !validApprovedRecord(record) || !reviewedWordCopy(copy) ||
+  const response = await rpc("editorial_registered_word", { p_ref: job.word_record_ref });
+  const record = response?.data, copy = record?.reviewed_publication_copy;
+  if (response?.error || !record) throw Error("word_workflow_unavailable");
+  if (candidateRef(record) !== job.word_record_ref || !validApprovedRecord(record) || !reviewedWordCopy(copy) ||
       ["revoked", "withdrawn", "superseded"].some(k => record[k] === true) ||
       canonicalJson(copy.content) !== canonicalJson(job.version.payload.content)) throw Error("approved_word_copy_mismatch");
   for (const d of job.decisions) {

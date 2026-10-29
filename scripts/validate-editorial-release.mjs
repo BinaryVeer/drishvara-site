@@ -191,7 +191,7 @@ for (const d of decisions) {
   const r = record.reviewed_publication_copy.reviews.find(r => r.kind === d.scope); if (r) r.approval_ref = ref;
 }
 const wordJob = { kind: "word", word_record_ref: candidateRef(record), version: { payload: { content: structuredClone(record.reviewed_publication_copy.content) } }, decisions };
-const wordRpc = async (name, args) => { assert.equal(name, "word_assignment_read_workflow"); assert.equal(args.p_date, "2026-10-29"); return { data: { bank: { records: [record] } } }; };
+const wordRpc = async (name, args) => { assert.equal(name, "editorial_registered_word"); assert.equal(args.p_ref, candidateRef(record)); return { data: record }; };
 await check("Word delivery uses the existing canonical IST bank, not manual daily assignment", async () => {
   const r = await deliverReviewedWord({ job: wordJob, rpc: wordRpc, timestamp, revalidate: async () => {} }); assert.equal(r.status, "eligible_for_daily_selection"); assert(!Object.hasOwn(r, "date_key"));
 });

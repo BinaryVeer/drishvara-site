@@ -5,6 +5,7 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
+import { snapshotHash } from "./lib/ag70d-word-selection-engine.mjs";
 
 // Explicitly synthetic Auth/RPC browser fixture. Does not connect to hosted Supabase or write approvals.
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
@@ -24,6 +25,7 @@ const state = () => { const required = data.candidate.kind === "word" ? wordScop
 const receipt = value => ({ ok: true, ...value, public_output_allowed: false, runtime_activation: false });
 const requests = [], errors = [];
 const accessDecisions = [];
+const registrationCommands = [], registrationRecord = withSyntheticMeaning(syntheticWord(1));
 function fakeFetch(url, options) {
   assert(new URL(url).hostname === "synthetic.example.invalid");
   const pathname = new URL(url).pathname;
@@ -32,6 +34,7 @@ function fakeFetch(url, options) {
   else if (pathname === "/auth/v1/user") value = { id: "synthetic-reviewer" };
   else if (pathname === "/auth/v1/logout") value = {};
   else if (pathname === "/rest/v1/rpc/editorial_delivery_readiness") value = receipt({ delivery_enabled: fixtureDelivery });
+  else if (pathname === "/rest/v1/rpc/editorial_word_registration_state") value = receipt({ registered: registrationCommands.some(c => c.action === "register") });
   else {
     const { p_command: command } = JSON.parse(options.body);
     switch (command.action) {
@@ -48,6 +51,8 @@ function fakeFetch(url, options) {
       case "decision":
         assert.equal(command.content_hash, hash); assert.equal(command.version_id, version); assert.equal(command.candidate_id, id);
         chosenDecision = command; data.decisions.push({ ...command, actor_id: "synthetic-reviewer" }); value = receipt({ decision_id: randomUUID(), review_state: state() }); break;
+      case "prepare": registrationCommands.push(command); value = receipt({ record: registrationRecord, record_hash: snapshotHash(registrationRecord) }); break;
+      case "register": registrationCommands.push(command); value = receipt({ status: "approved_bank_registered", candidate_ref: "synthetic-only@v1", record_hash: snapshotHash(registrationRecord) }); break;
       case "request_release": releaseRequests++; value = receipt({ release_request_id: randomUUID(), status: "pending_existing_publisher_validation" }); break;
       default: throw new Error("unexpected_browser_fixture_operation");
     }
@@ -221,6 +226,24 @@ try {
   await page.locator(".review-form select").first().selectOption("textual");
   check("switching back to a subject requires fresh acknowledgment", await page.locator(".subject-review-notice").isVisible() && !await page.locator(".subject-review-notice input").isChecked());
   check("Word subject UI has no external requests or runtime errors", requests.length === 0 && errors.length === 0);
+  await page.locator("#tab-publishing").click(); await page.waitForSelector(".word-registration-form");
+  check("registration cannot be requested while any copy review is pending", await page.getByRole("button", { name: "Register approved Word", exact: true }).isDisabled());
+  fixtureAllApproved = true; await page.locator("#refresh").click();
+  await page.waitForFunction(() => document.querySelector(".word-registration-form button")?.disabled === false);
+  const registrationFields = { canonical_lexical_identity_id: "synthetic:identity", lemma_id: "synthetic:lemma", equivalence_group_id: "synthetic:group", context_signal_id: "synthetic:context" };
+  for (const [key, value] of Object.entries(registrationFields)) await page.locator('.word-registration-form [name="' + key + '"]').fill(value);
+  await page.locator(".word-registration-form textarea").fill("Synthetic explicitly reviewed metadata, not hosted content.");
+  await page.getByRole("button", { name: "Register approved Word", exact: true }).click();
+  check("registration requires an actual no-etymology and metadata acknowledgment", registrationCommands.length === 0 && await page.locator('.word-registration-form [type="checkbox"]').evaluate(e => e.validity.valueMissing));
+  await page.locator('.word-registration-form [type="checkbox"]').check();
+  page.once("dialog", dialog => dialog.accept()); await page.getByRole("button", { name: "Register approved Word", exact: true }).click();
+  await page.waitForFunction(() => document.querySelector("#message")?.textContent.includes("Approved Word registered"));
+  check("registration sends declared identity metadata but no caller-supplied copy or approval", registrationCommands.length === 2 && registrationCommands[0].action === "prepare" && registrationCommands[1].action === "register" && registrationCommands[0].metadata.lemma_id === "synthetic:lemma" && !Object.hasOwn(registrationCommands[0], "record"));
+  check("registration message distinguishes bank eligibility from live publication", (await page.locator("#message").innerText()).includes("separately governed"));
+  check("registration form keeps valid IDs and narrow mobile layout", !(await page.locator('.word-registration-form [name="lemma_id"]').evaluate(e => e.validity.patternMismatch)) && await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+  data.version.payload.content.sources[0].review_status = "pending"; await page.locator("#refresh").click();
+  await page.waitForSelector(".word-registration-form .status");
+  check("pending source metadata remains visible and blocks registration despite complete review flags", await page.getByRole("button", { name: "Register approved Word", exact: true }).isDisabled() && (await page.locator(".word-registration-form .status").innerText()).includes("Source clearance still pending"));
   await page.locator("#sign-out").click(); await page.waitForSelector("#login-form");
   check("sign-out clears private UI", await page.locator("#document").count() === 0);
   console.log(`Editorial workspace browser: ${checks} checks passed. Auth/decisions are explicitly synthetic; no hosted connection.`);

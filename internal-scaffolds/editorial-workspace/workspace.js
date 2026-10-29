@@ -23,6 +23,11 @@
     verified_qualification_reference_required: "Verified qualification evidence is required for this responsibility.",
     explicit_admin_self_review_required: "An explicit Admin exception and reason are required.",
     explicit_admin_subject_review_required: "A separate Admin subject-review acknowledgment and reason are required.",
+    word_registration_sources_pending: "Source-use metadata is still pending. The rights decision must cite each source ID and its actual clearance reference. Correct the copy, then review its new version.",
+    word_registration_metadata_pending: "Complete the reviewed lexical identity, lemma, equivalence, context and no-etymology confirmation.",
+    word_registration_copy_unapproved: "The exact public copy does not yet satisfy the existing AG70E approval contract.",
+    word_reference_unapproved: "A required registry authority is missing, revoked or conflicts with an immutable existing reference.",
+    approved_word_registration_pending: "Approved-bank registration is still pending or invalidated. Complete the source-use checks and register the exact reviewed Word first.",
     self_review_denied: "This account contributed to the copy and cannot independently review it.",
     reviewer_session_required: "Your session has expired. Please sign in again.",
     editorial_assignment_required: "A current candidate assignment is required.",
@@ -193,6 +198,7 @@
         if (selected?.version.id !== data.version.id || view !== "publishing") return;
         readiness.replaceChildren(node("p", result.missing_scopes.length ? "Pending reviews: " + result.missing_scopes.map(s => s.replaceAll("_", " ")).join(", ") : "No missing review scopes."));
         for (const reason of result.blockers) readiness.append(node("p", friendly(reason)));
+        if (releaseButton) releaseButton.disabled = !result.request_allowed;
         if (result.delivery_enabled) {
           deliveryStatus.textContent = data.candidate.kind === "article" ?
             "Article publishing is connected. Only the exact fully approved copy can be delivered to the public site." :
@@ -201,9 +207,39 @@
         }
         if (result.delivery_enabled && result.request_allowed) readiness.append(node("p", "Ready for controlled delivery validation."));
       })); side.append(readiness, check);
+      if (data.candidate.kind === "word" && session?.is_administrator) {
+        const registration = node("form", undefined, "word-registration-form");
+        registration.append(node("h3", "Approved-bank registration"));
+        registration.append(node("p", "Registration requires completed reviews and cleared source metadata. It does not assign a daily date or activate publishing.", "muted"));
+        const uncleared = (p.content.sources ?? []).filter(source => source.review_status !== "approved" || !source.reuse_approval_ref);
+        if (uncleared.length) registration.append(node("p", "Source clearance still pending: " + uncleared.map(source => source.title || source.evidence_ref).join("; ") + ". A corrected source record creates a new copy requiring fresh reviews.", "status"));
+        const inputs = {};
+        for (const [name, label] of [["canonical_lexical_identity_id", "Reviewed lexical identity ID"], ["lemma_id", "Reviewed lemma ID"], ["equivalence_group_id", "Reviewed equivalence group ID"], ["context_signal_id", "Approved context signal ID"]]) {
+          const input = node("input"); input.name = name; input.required = true; input.maxLength = 200;
+          input.pattern = "[a-zA-Z0-9][a-zA-Z0-9._:@\\x2f\\x2d]{0,199}"; inputs[name] = input;
+          const l = node("label", label); l.append(input); registration.append(l);
+        }
+        const note = node("textarea"); note.required = true; note.minLength = 12; note.maxLength = 6000;
+        const noteLabel = node("label", "Identity, equivalence and applicability decision basis"); noteLabel.append(note); registration.append(noteLabel);
+        const ack = node("input"); ack.type = "checkbox"; ack.required = true;
+        const ackLabel = node("label", "I confirm this exact copy makes no etymological claim and these metadata reflect my reviewed decisions.", "checkbox-label"); ackLabel.prepend(ack); registration.append(ackLabel);
+        const register = node("button", "Register approved Word", "primary"); register.type = "submit";
+        register.disabled = !data.review_state.reviews_complete || uncleared.length > 0; registration.append(register);
+        let registrationCommand = null;
+        registration.addEventListener("input", () => { registrationCommand = null; });
+        registration.addEventListener("submit", event => { event.preventDefault(); busy(register, async () => {
+          if (!registration.reportValidity()) return;
+          if (!confirm("Register this exact fully reviewed copy and your declared lexical metadata in the immutable AG70E bank? This is not daily publication.")) return;
+          registrationCommand ??= { action: "register_word", command_id: crypto.randomUUID(), candidate_id: data.candidate.id,
+            version_id: data.version.id, content_hash: data.version.content_hash,
+            metadata: { ...Object.fromEntries(Object.entries(inputs).map(([key, input]) => [key, input.value.trim()])), no_etymological_claim: ack.checked }, note: note.value.trim() };
+          const receipt = await request("word_register", registrationCommand);
+          message("Approved Word registered: " + receipt.candidate_ref + ". Daily eligibility, release configuration and scheduling remain separately governed."); await open(id);
+        }); }); side.append(registration);
+      }
     }
     if (granted(data.candidate.kind, "release") && view === "publishing") {
-      const release = node("button", "Request controlled release"); release.disabled = !data.review_state.reviews_complete || data.review_permissions?.can_request_release === false;
+      const release = node("button", "Request controlled release"); release.disabled = data.candidate.kind === "word" || !data.review_state.reviews_complete || data.review_permissions?.can_request_release === false;
       releaseButton = release;
       let releaseCommand = null;
       release.addEventListener("click", () => busy(release, async () => {

@@ -48,6 +48,10 @@ async function invoke({ method = "GET", action = "", body, cookie, origin = env.
 await check("disabled by default without contacting Auth", async () => { calls = []; const r = await invoke({}, { env: {} }); assert.equal(r.code, 503); assert.equal(calls.length, 0); });
 await check("anonymous gets login shell, never drafts", async () => { const r = await invoke(); assert.equal(r.data, "synthetic-asset:login.html"); assert.equal(r.headers["Cache-Control"], "no-store, private"); });
 await check("anonymous cannot read queue", async () => assert.equal((await invoke({ method: "POST", action: "action=command", body: { action: "list" } })).code, 401));
+await check("anonymous cannot reach Word registration", async () => assert.equal((await invoke({ method: "POST", action: "action=word_register", body: {} })).code, 401));
+await check("Word registration cannot bypass same-origin enforcement", async () => {
+  calls = []; assert.equal((await invoke({ method: "POST", action: "action=word_register", body: {}, origin: "https://attacker.invalid" })).code, 403); assert.equal(calls.length, 0);
+});
 await check("cross-origin writes fail before Auth", async () => { calls = []; assert.equal((await invoke({ method: "POST", action: "action=login", body: {}, origin: "https://attacker.invalid" })).code, 403); assert.equal(calls.length, 0); });
 await check("missing Origin fails closed", async () => assert.equal((await invoke({ method: "POST", body: {}, origin: undefined, extra: { origin: undefined } })).code, 403));
 await check("form-encoded CSRF rejected", async () => assert.equal((await invoke({ method: "POST", contentType: "application/x-www-form-urlencoded", body: {} })).code, 403));

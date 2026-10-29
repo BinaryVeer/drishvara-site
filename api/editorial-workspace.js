@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { executeEditorialCommand, validateEditorialCommand } from "../scripts/lib/editorial-workspace-service.mjs";
 import { assessEditorialRelease, requestControlledRelease } from "../scripts/lib/editorial-release-service.mjs";
 import { createEditorialArticlePublisher } from "../scripts/lib/editorial-article-publisher.mjs";
+import { registerReviewedWord } from "../scripts/lib/editorial-word-registration.mjs";
 
 const assets = {
   "login.html": [new URL("../internal-scaffolds/editorial-workspace/login.html", import.meta.url), "text/html; charset=utf-8"],
@@ -14,7 +15,9 @@ const publicAssets = new Set(["workspace.css", "workspace.js", "editorial-hero-a
 const safeCodes = new Set(["editorial_access_denied", "editorial_capability_required", "editorial_assignment_required", "editorial_intake_denied",
   "self_review_denied", "review_scope_denied", "release_scope_denied", "editorial_reviews_pending", "stale_editorial_version", "idempotency_conflict",
   "workspace_administrator_required", "active_confirmed_account_required", "verified_qualification_reference_required",
-  "explicit_admin_self_review_required", "unexpected_admin_exception", "member_capability_required", "invalid_access_duration"]);
+  "explicit_admin_self_review_required", "unexpected_admin_exception", "member_capability_required", "invalid_access_duration",
+  "explicit_admin_subject_review_required", "unexpected_subject_review_exception", "invalid_word_registration", "word_registration_metadata_pending",
+  "word_registration_sources_pending", "word_registration_copy_unapproved", "word_registration_changed", "word_reference_unapproved", "word_editorial_approval_changed"]);
 
 export function createEditorialWorkspaceHandler({ env = process.env, fetcher = fetch, loadAsset = name => readFile(assets[name][0]) } = {}) {
   return async function handler(req, res) {
@@ -107,6 +110,10 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
       const rpc = (name, args) => remote("/rest/v1/rpc/" + name, { method: "POST", body: JSON.stringify(args) }, token);
       const session = await executeEditorialCommand({ action: "session" }, rpc);
       if (!session.ok) return json(403, { ok: false, code: "editorial_access_denied" });
+      if (req.method === "POST" && action === "word_register" && !asset) {
+        const result = await registerReviewedWord({ command: body, session, rpc });
+        return json(result.ok ? 200 : 400, result);
+      }
       const deliveryKey = env.EDITORIAL_DELIVERY_SERVICE_KEY || env.SUPABASE_SECRET_KEY;
       const deliveryEnabled = env.EDITORIAL_DELIVERY_ENABLED === "true" && Boolean(deliveryKey) && Boolean(env.EDITORIAL_DELIVERY_AUTHORIZATION_REF);
       const deliveryAvailability = async candidateId => {
@@ -122,15 +129,27 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
         const opened = await executeEditorialCommand(body, rpc);
         const availability = await deliveryAvailability(body.candidate_id);
         const result = assessEditorialRelease(opened, { enabled: availability.enabled });
+        if (opened.candidate.kind === "word") {
+          const registration = await rpc("editorial_word_registration_state", { p_candidate_id: body.candidate_id });
+          if (registration?.registered !== true || registration.public_output_allowed !== false || registration.runtime_activation !== false) {
+            result.request_allowed = false; result.status = "blocked"; result.blockers.push("approved_word_registration_pending");
+          }
+        }
         if (availability.code === "delivery_readiness_unavailable") result.blockers.push(availability.code);
         return json(200, result);
       }
       if (req.method === "POST" && action === "release" && !asset) {
         const invalid = validateEditorialCommand(body);
         if (invalid || body.action !== "request_release") return json(400, { ok: false, code: invalid || "invalid_release_command" });
+        const opened = await executeEditorialCommand({ action: "open", candidate_id: body.candidate_id }, rpc);
+        if (opened.candidate.kind === "word") {
+          const registration = await rpc("editorial_word_registration_state", { p_candidate_id: body.candidate_id });
+          if (registration?.registered !== true || registration.public_output_allowed !== false || registration.runtime_activation !== false)
+            return json(400, { ok: false, code: "approved_word_registration_pending" });
+        }
         const availability = await deliveryAvailability(body.candidate_id);
         const workerRpc = deliveryEnabled ? async (name, args) => {
-          if (!["editorial_release_worker", "word_assignment_read_workflow"].includes(name)) throw Error("invalid_worker_operation");
+          if (!["editorial_release_worker", "editorial_registered_word"].includes(name)) throw Error("invalid_worker_operation");
           const key = deliveryKey;
           const response = await fetcher(new URL("/rest/v1/rpc/" + name, base), { method: "POST", redirect: "error", signal: AbortSignal.timeout(15000),
             headers: { apikey: key, ...(key.startsWith("eyJ") ? { Authorization: "Bearer " + key } : {}), "Content-Type": "application/json" }, body: JSON.stringify(args) });

@@ -3,7 +3,10 @@ import fs from "node:fs";
 import { randomUUID } from "node:crypto";
 import { execFileSync, execFile } from "node:child_process";
 import { setTimeout as delay } from "node:timers/promises";
-import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
+import { syntheticWord, withSyntheticMeaning, syntheticSelection } from "./lib/ag70e-word-test-fixtures.mjs";
+import { snapshotHash, validApprovedRecord, selectDailyWord, selectionAuthorityHashes } from "./lib/ag70d-word-selection-engine.mjs";
+import { reviewedWordCopy } from "./lib/ag70e-word-publication-pipeline.mjs";
+import { runWordDailyPublication } from "./lib/ag70e-word-server-workflow.mjs";
 
 // Real disposable PostgreSQL; synthetic auth/profiles only. No URL, password or production credential input.
 const image = "docker.io/library/postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb";
@@ -15,13 +18,13 @@ function query(sql) {
   try { return execFileSync("docker", ["--context", "desktop-linux", "exec", "-i", container, "psql", "-XqAt", "-v", "ON_ERROR_STOP=1", "-U", "review_owner", "-d", "review_qa"], { input: sql, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"], timeout: 20000, maxBuffer: 8e6 }).trim(); }
   catch (error) { throw new Error(String(error.stderr || error.message)); }
 }
-const actorSql = (actor, command) => `begin; set local role authenticated; select set_config('request.jwt.claim.sub','${actor}',true); select public.editorial_review_command(${literal(command)}); commit;`;
+const actorSql = (actor, command, method = "editorial_review_command") => `begin; set local role authenticated; select set_config('request.jwt.claim.sub','${actor}',true); select public.${method}(${literal(command)}); commit;`;
 const invoke = (actor, command) => JSON.parse(query(actorSql(actor, command)).split("\n").at(-1));
-const invokeConcurrent = (actor, command) => new Promise((resolve, reject) => {
+const invokeConcurrent = (actor, command, method = "editorial_review_command") => new Promise((resolve, reject) => {
   const child = execFile("docker", ["--context", "desktop-linux", "exec", "-i", container, "psql", "-XqAt", "-v", "ON_ERROR_STOP=1", "-U", "review_owner", "-d", "review_qa"], { encoding: "utf8", timeout: 20000 }, (error, stdout, stderr) => {
     if (error) reject(new Error(stderr)); else resolve(JSON.parse(stdout.trim().split("\n").at(-1)));
   });
-  child.stdin.end(actorSql(actor, command));
+  child.stdin.end(actorSql(actor, command, method));
 });
 function check(label, run) { run(); checks++; console.log("PASS real PostgreSQL: " + label); }
 const author = randomUUID(), reviewer = randomUUID(), other = randomUUID(), inactive = randomUUID();
@@ -484,6 +487,146 @@ try {
     assert.throws(() => query(`set role authenticated;select drishvara_editorial_private.admin_subject_scopes('${owner}','word');`), /permission denied/);
     assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema='drishvara_editorial_private' and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
     assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+  });
+  check("Word registration migration applies without approving or activating any content", () => {
+    for (const file of ["20261023_word_assignment_preparation.sql", "20261024010000_word_standing_policy_preparation.sql", "20261025000000_word_claim_conditional_etymology.sql", "20261025010000_word_meaning_copy_contract.sql", "20261029050519_editorial_word_registration.sql"])
+      query(fs.readFileSync("supabase/migrations/" + file, "utf8"));
+    assert.equal(query("select count(*) from drishvara_word_private.versioned_references"), "0");
+    assert.equal(query("select persistence_enabled or publication_enabled from drishvara_word_private.controls"), "f");
+  });
+  const registrationInvoke = (actor, command) => JSON.parse(query(actorSql(actor, command).replace("public.editorial_review_command(", "public.editorial_word_registration(")).split("\n").at(-1));
+  const registeredContent = withSyntheticMeaning(syntheticWord(9)).reviewed_publication_copy.content;
+  const registerCopy = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-register-word", payload: { ...wordIntake.payload, content: registeredContent } });
+  const metadata = { canonical_lexical_identity_id: "synthetic:lexeme", lemma_id: "synthetic:lemma", equivalence_group_id: "synthetic:group", context_signal_id: "synthetic:context", no_etymological_claim: true };
+  const preparation = { action: "prepare", command_id: randomUUID(), candidate_id: registerCopy.candidate_id, version_id: registerCopy.version_id, content_hash: registerCopy.content_hash,
+    metadata, note: "Synthetic publisher-reviewed identity mapping only." };
+  check("registration requires actual Admin rather than profile or caller authority", () => {
+    assert.throws(() => registrationInvoke(reviewer, preparation), /workspace_administrator_required/);
+    assert.throws(() => registrationInvoke(owner, { ...preparation, approved: true }), /invalid_word_registration/);
+    assert.throws(() => query(`set role service_role;select public.editorial_word_registration(${literal(preparation)});`), /permission denied/);
+    assert.throws(() => query(`set role anon;select public.editorial_word_registration(${literal(preparation)});`), /permission denied/);
+  });
+  check("registration cannot promote an unreviewed Word", () => assert.throws(() => registrationInvoke(owner, preparation), /editorial_reviews_pending/));
+  check("registration readiness is authenticated and cannot read another account's unassigned Word", () => {
+    assert.equal(JSON.parse(query(`begin;set local role authenticated;select set_config('request.jwt.claim.sub','${owner}',true);select public.editorial_word_registration_state('${registerCopy.candidate_id}');commit;`).split("\n").at(-1)).registered, false);
+    assert.throws(() => query(`begin;set local role authenticated;select set_config('request.jwt.claim.sub','${other}',true);select public.editorial_word_registration_state('${registerCopy.candidate_id}');commit;`), /release_scope_denied/);
+  });
+  for (const scope of ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"])
+    invoke(owner, { ...savedSubject, command_id: randomUUID(), candidate_id: registerCopy.candidate_id, version_id: registerCopy.version_id, content_hash: registerCopy.content_hash,
+      scope, evidence_refs: ["synthetic-source", "synthetic-scripture", "synthetic-rights"], ...( ["linguistic", "iast", "textual", "philosophical"].includes(scope) ? { subject_review_exception: subject } : { subject_review_exception: undefined }) });
+  let prepared;
+  check("database constructs copy approvals from actual scoped decisions only", () => {
+    prepared = registrationInvoke(owner, preparation);
+    assert(validApprovedRecord(prepared.record)); assert(reviewedWordCopy(prepared.record.reviewed_publication_copy));
+    assert.equal(prepared.record_hash, snapshotHash(prepared.record));
+    assert.deepEqual(prepared.record.reviewed_publication_copy.content, registeredContent);
+    assert.equal(prepared.record.reviewed_publication_copy.reviews.length, 7);
+    assert.equal(query("select count(*) from drishvara_word_private.versioned_references"), "0");
+  });
+  const registration = { ...preparation, action: "register", expected_record_hash: prepared.record_hash };
+  check("missing registered minimum policy rolls back every source and approval insert", () => {
+    assert.throws(() => registrationInvoke(owner, registration), /word_registration_copy_unapproved/);
+    assert.equal(query("select count(*) from drishvara_word_private.versioned_references"), "0");
+  });
+  const minimumPolicy = JSON.parse(fs.readFileSync("data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json", "utf8")).minimum_publication_contract_amendment;
+  query(`insert into drishvara_word_private.versioned_references(ref_id,kind,version,payload,review_status,reviewer_id,approval_ref) values('drishvara-word-minimum-policy@2','approval','2',${literal(minimumPolicy)},'approved','synthetic-publisher','synthetic-policy-registration');`);
+  check("wrong prepared hash cannot change registered content", () => assert.throws(() => registrationInvoke(owner, { ...registration, expected_record_hash: "wrong" }), /word_registration_changed/));
+  check("actual scoped approvals register one immutable record without daily activation", () => {
+    const r = registrationInvoke(owner, registration); assert.equal(r.status, "approved_bank_registered"); assert.equal(r.public_output_allowed, false);
+    assert.equal(query("select count(*) from drishvara_word_private.versioned_references where kind='candidate'"), "1");
+    assert.equal(query("select persistence_enabled or publication_enabled from drishvara_word_private.controls"), "f");
+    assert.equal(query(`select word_record_refs->>'${registerCopy.candidate_id}' from drishvara_editorial_private.delivery_controls`), r.candidate_ref);
+  });
+  check("registration retry preserves one immutable administration event", () => {
+    const count = query("select count(*) from drishvara_editorial_private.administration_events where action='register_word'"); registrationInvoke(owner, registration);
+    assert.equal(query("select count(*) from drishvara_editorial_private.administration_events where action='register_word'"), count);
+    assert.throws(() => registrationInvoke(owner, { ...registration, note: "Synthetic changed immutable decision basis." }), /idempotency_conflict/);
+  });
+  const parallelRegistrations = await Promise.all([invokeConcurrent(owner, registration, "editorial_word_registration"), invokeConcurrent(owner, registration, "editorial_word_registration")]);
+  check("concurrent registration retries preserve the same record and one audit event", () => {
+    assert.deepEqual(parallelRegistrations[0], parallelRegistrations[1]);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.administration_events where id='${registration.command_id}'`), "1");
+  });
+  for (const scenario of ["pending_source", "missing_rights_clearance"]) {
+    const content = structuredClone(registeredContent); if (scenario === "pending_source") content.sources[0].review_status = "pending";
+    const copy = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-registration-" + scenario, payload: { ...wordIntake.payload, content } });
+    for (const scope of ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"])
+      invoke(owner, { ...savedSubject, command_id: randomUUID(), candidate_id: copy.candidate_id, version_id: copy.version_id, content_hash: copy.content_hash,
+        scope, evidence_refs: scenario === "missing_rights_clearance" ? ["synthetic-source", "synthetic-scripture"] : ["synthetic-source", "synthetic-scripture", "synthetic-rights"],
+        subject_review_exception: ["linguistic", "iast", "textual", "philosophical"].includes(scope) ? subject : undefined });
+    check("completed review flags do not bypass " + scenario, () => {
+      const before = query("select count(*) from drishvara_word_private.versioned_references");
+      assert.throws(() => registrationInvoke(owner, { ...preparation, command_id: randomUUID(), candidate_id: copy.candidate_id, version_id: copy.version_id, content_hash: copy.content_hash }), /word_registration_sources_pending/);
+      assert.equal(query("select count(*) from drishvara_word_private.versioned_references"), before);
+    });
+  }
+  const candidateRef = prepared.record.output_candidate_id + "@" + prepared.record.approved_record_version;
+  check("service-only registered read validates bank eligibility without activating a workflow", () => {
+    const r = JSON.parse(query(`set role service_role;select public.editorial_registered_word('${candidateRef}');`)); assert.equal(snapshotHash(r), prepared.record_hash);
+    assert.throws(() => query(`set role authenticated;select public.editorial_registered_word('${candidateRef}');`), /permission denied/);
+  });
+  const timestamp = new Date().toISOString(), date = query("select to_char(now() at time zone 'Asia/Kolkata','YYYY-MM-DD')");
+  const dailyInput = syntheticSelection(1, date), record = prepared.record;
+  dailyInput.bank.records = [record]; dailyInput.context.eligible_candidate_refs = [candidateRef]; dailyInput.precedence.candidate_order = [candidateRef];
+  dailyInput.identity_map.links = [{ candidate_ref: candidateRef, canonical_lexical_identity_id: record.canonical_lexical_identity_id,
+    lemma_id: record.lemma_id, equivalence_group_id: record.equivalence_group_id, representative_candidate_ref: candidateRef,
+    review_status: "approved", approval_ref: "synthetic-operational-approval" }];
+  const releaseConfig = JSON.parse(fs.readFileSync("data/knowledge-base/word-of-day/production/methodology/ag70d-word-release-configuration.json", "utf8"));
+  const dailyPolicy = releaseConfig.publisher_policy;
+  releaseConfig.runtime_activation = true; releaseConfig.public_output_allowed = true;
+  releaseConfig.persistence.enabled = true; releaseConfig.persistence.server_authorization_ref = "synthetic-registration-server";
+  releaseConfig.publication = { review_status: "approved", approval_ref: "synthetic-operational-approval", public_output_allowed: true, runtime_activation: true };
+  releaseConfig.standing_authorization = { enabled: true, policy_ref: dailyPolicy.record_ref, production_approval_ref: "synthetic-operational-approval" };
+  const deployment = { version: "synthetic-registration-v1", configuration: releaseConfig, policy: dailyInput.policy,
+    authorization_ref: "synthetic-registration-server", context_refs: { [date]: dailyInput.context.basis_ref }, precedence_ref: dailyInput.precedence.rule_ref,
+    exclusions_ref: "synthetic-registration-exclusions", candidate_refs: [candidateRef] };
+  const put = (ref, kind, payload) => query(`insert into drishvara_word_private.versioned_references(ref_id,kind,version,payload,review_status,reviewer_id,approval_ref)
+    values('${ref}','${kind}','${payload.version ?? "1"}',${literal(payload)},'approved','synthetic-publisher','${payload.approval_ref ?? "synthetic-operational-approval"}');`);
+  for (const [ref, kind, payload] of [[dailyPolicy.record_ref, "approval", dailyPolicy], ["synthetic-operational-approval", "approval", { synthetic_only: true }],
+    [dailyInput.context.basis_ref, "context", dailyInput.context], [dailyInput.precedence.rule_ref, "precedence", dailyInput.precedence],
+    [dailyInput.identity_map.snapshot_ref, "identity", dailyInput.identity_map], ["synthetic-registration-exclusions", "exclusions", dailyInput.exclusions],
+    ["synthetic-registration-server", "authorization", { actor_ref: "synthetic-server", capabilities: ["selection_proposal", "reservation", "authorized_assignment", "publication"] }],
+    ["synthetic-registration-deployment", "deployment", deployment]]) put(ref, kind, payload);
+  check("daily context and identity use the existing engine's exact authority hashes", () => {
+    const hashes = selectionAuthorityHashes(dailyInput);
+    assert.equal(query(`select payload_hash from drishvara_word_private.versioned_references where ref_id='${dailyInput.context.basis_ref}'`), hashes.context_content_hash);
+    assert.equal(query(`select payload_hash from drishvara_word_private.versioned_references where ref_id='${dailyInput.identity_map.snapshot_ref}'`), hashes.identity_content_hash);
+  });
+  query(`update drishvara_word_private.controls set persistence_enabled=true,publication_enabled=true,identity_snapshot_ref='${dailyInput.identity_map.snapshot_ref}',deployment_approval_ref='synthetic-registration-deployment'`);
+  const dailyRpc = async (method, parameters) => {
+    const argumentsSql = Object.values(parameters).map(v => typeof v === "string" ? "'" + v.replaceAll("'", "''") + "'" : literal(v)).join(",");
+    try { return { data: JSON.parse(query(`set role service_role;select coalesce(to_jsonb(public.${method}(${argumentsSql})),'null'::jsonb);`)) }; }
+    catch (error) { if (process.env.WORD_REGISTRATION_QA_DEBUG === "1") console.error("Synthetic daily RPC " + method + ": " + error.message); return { error: { message: "synthetic-local-database-rejection" } }; }
+  };
+  const run = await runWordDailyPublication({ rpc: dailyRpc, timestamp, enabled: true });
+  check("registered synthetic copy passes the real unchanged AG70E daily publication lifecycle", () => {
+    assert.equal(run.status, "completed", JSON.stringify(run));
+    const output = JSON.parse(query(`set role service_role;select public.word_assignment_release_snapshot('${date}');`));
+    assert.equal(output.history.events.at(-1).event_type, "publication");
+    assert.equal(output.release.public_output_allowed, true);
+  });
+  const eventsAfterPublication = query("select count(*) from drishvara_word_private.events");
+  const replay = await runWordDailyPublication({ rpc: dailyRpc, timestamp, enabled: true });
+  check("real daily replay is idempotent with no second publication", () => {
+    assert.equal(replay.status, "completed"); assert.equal(query("select count(*) from drishvara_word_private.events"), eventsAfterPublication);
+  });
+  check("role revocation invalidates the registered record and linked source authorities", () => {
+    query(`update drishvara_editorial_private.administrators set revoked_at=now() where subject_id='${owner}'`);
+    assert.throws(() => query(`select public.editorial_registered_word('${candidateRef}');`), /word_editorial_approval_changed/);
+    assert.throws(() => query("select drishvara_word_private.require_reference('synthetic-source','source');"), /word_editorial_approval_changed/);
+    query(`update drishvara_editorial_private.administrators set revoked_at=null where subject_id='${owner}'`);
+  });
+  check("a later revision decision invalidates the registered copy without altering history", () => {
+    invoke(owner, { ...savedSubject, command_id: randomUUID(), candidate_id: registerCopy.candidate_id, version_id: registerCopy.version_id, content_hash: registerCopy.content_hash,
+      scope: "linguistic", decision: "revise", subject_review_exception: subject });
+    assert.throws(() => query(`select public.editorial_registered_word('${candidateRef}');`), /word_editorial_approval_changed/);
+    assert.equal(query("select count(*) from drishvara_word_private.versioned_references where kind='candidate'"), "1");
+    assert.equal(query("select count(*) from drishvara_word_private.events"), eventsAfterPublication);
+    assert.throws(() => query(`select public.word_assignment_release_snapshot('${date}');`), /word_editorial_approval_changed/);
+  });
+  check("registration leaves all existing Panchang data and client grants untouched", () => {
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema in ('drishvara_editorial_private','drishvara_word_private') and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
   });
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);
 } finally {
