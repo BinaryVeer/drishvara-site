@@ -1,0 +1,54 @@
+{
+  "module_id": "F3_PANCHANG_BOOT_STARTUP",
+  "issue": "https://github.com/BinaryVeer/drishvara-site/issues/9",
+  "date_utc": "2026-11-05",
+  "experiment": "Read-only Chrome comparison of live production baseline versus candidate local static server, under identical approved 3,266-location catalogue held for 6,000 ms",
+  "action_run": "https://github.com/BinaryVeer/drishvara-site/actions/runs/41961783393",
+  "scope": {
+    "location_count": 3266,
+    "viewport_widths_px": [
+      1440,
+      390
+    ],
+    "astronomy_engine_changed": false,
+    "edge_function_changed": false,
+    "approved_records_changed": false,
+    "persistence_changed": false
+  },
+  "cases": [
+    {
+      "viewport_px": 1440,
+      "baseline_time_to_result_ms": 12366,
+      "candidate_time_to_result_ms": 3070,
+      "baseline_catalog_delivered_ms": 7669,
+      "candidate_catalog_delivered_ms": 6178,
+      "baseline_calculation_request_ms": 8363,
+      "candidate_calculation_request_ms": 182
+    },
+    {
+      "viewport_px": 390,
+      "baseline_time_to_result_ms": 10136,
+      "candidate_time_to_result_ms": 3066,
+      "baseline_catalog_delivered_ms": 6272,
+      "candidate_catalog_delivered_ms": 6168,
+      "baseline_calculation_request_ms": 6925,
+      "candidate_calculation_request_ms": 168
+    }
+  ],
+  "checks": {
+    "workflow_conclusion": "success",
+    "failures": 0,
+    "front_end_validator_checks": 33,
+    "static_build": "passed",
+    "daily_result_comparison": "same civil date, Tithi and Nakshatra on baseline and candidate",
+    "catalogue_selection_count": 3266,
+    "international_and_special_Indian_locations_checked": true,
+    "server_public_approval_and_privacy_gates_preserved": true
+  },
+  "limits": [
+    "Results from GitHub-hosted Chromium and controlled catalogue delay, not a guarantee of Indian-network latency.",
+    "Annual-book and full-catalogue loading remain network-dependent and retain governed unavailable handling.",
+    "Physical-device Safari/Android timings were not measured."
+  ],
+  "publication_state": "candidate_qualified_pending_production_deployment"
+}
