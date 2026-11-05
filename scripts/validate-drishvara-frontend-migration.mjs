@@ -30,8 +30,13 @@ const scriptAllowlist = ["sup02-panchang-server-controller", "drishvara-v2-shell
   "drishvara-v2-i18n", "drishvara-v2-location", "drishvara-v2-home"];
 const shellPages = ["index.html", "insights.html", "dashboard.html", "submissions.html",
   "about.html", "contact.html", "signin.html", "login.html", "article.html"];
-check("all existing public shell consumers use the F1 navigation asset version", () => {
-  for (const path of shellPages) assert(/drishvara-v2-shell\.js\?v=dv2-f1-20261023/.test(read(path)), path);
+check("all existing public shell consumers use their approved navigation asset versions", () => {
+  for (const path of shellPages) {
+    // F3 intentionally refreshed the homepage shell asset to expose Sports on first arrival.
+    // Older editorial/account routes retain the original F1 version until their own cutover.
+    const expected = path === "index.html" ? "20261105-sports-nav" : "dv2-f1-20261023";
+    assert(read(path).includes("drishvara-v2-shell.js?v=" + expected), path);
+  }
 });
 for (const page of contracts) {
   const html = read(page.path);
@@ -136,6 +141,7 @@ check("shared navigation routes resolve for homepage, tools and direct article U
     const prefix = pathname.startsWith("/articles/") ? "../../" : "";
     assert.equal(w.testWorldHref("time"), prefix + "panchang.html");
     assert.equal(w.testWorldHref("reflect"), prefix + "what-stars-say.html");
+    assert.equal(w.testWorldHref("sports"), prefix + "sports.html");
     for (const id of ["read", "explore", "knowledge"]) assert.equal(w.testWorldHref(id), pathname === "/" ? "#" + id : prefix + "index.html#" + id);
   }
 });
