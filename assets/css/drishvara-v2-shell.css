@@ -192,6 +192,9 @@ body.drishvara-v2-active .batch03-continuity-strip {
   display: none;
   width: min(100%, 390px);
   min-height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 1rem;
   background: #08142d;
   color: #fffaf0;
@@ -331,7 +334,7 @@ body.drishvara-v2-active .drishvara-sports-live-pill a {
   align-items: center;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1160px) {
   .dv2-header__inner {
     grid-template-columns: auto 1fr auto;
     min-height: 62px;
