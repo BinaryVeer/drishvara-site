@@ -10,7 +10,8 @@
     ["explore", "Explore", "Topic pathways across public knowledge."],
     ["knowledge", "Knowledge", "Series, ideas and deeper context."],
     ["time", "Panchang", "Panchang, observance and calendar intelligence."],
-    ["reflect", "What Stars Say", "Governed personal reflection."]
+    ["reflect", "What Stars Say", "Governed personal reflection."],
+    ["sports", "Sports", "Published sporting coverage and verified analysis."]
   ];
 
   function rootPrefix() {
@@ -52,6 +53,7 @@
   function worldHref(id) {
     if (id === "time") return rootPrefix() + "panchang.html";
     if (id === "reflect") return rootPrefix() + "what-stars-say.html";
+    if (id === "sports") return rootPrefix() + "sports.html";
     return onHomePage() ? "#" + id : rootPrefix() + "index.html#" + id;
   }
 
