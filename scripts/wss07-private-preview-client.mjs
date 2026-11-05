@@ -8,6 +8,8 @@ import {buildBilingualCandidateView,languagePack} from "./lib/wss07-bilingual-re
 import {resolveName,RECORDS} from "./lib/wss07-nama-rashi-core.mjs";
 import {computedPeriodSummaryCandidate} from "./lib/wss07-period-transit-summary.mjs";
 import {SIGNS_EN,SIGN_HI,GRAHA_HI} from "./lib/wss07-bilingual-report-presenter.mjs";
+import {auditNatalPrecisionCandidate,WSS08_PRECISION_STATE} from "./lib/wss08-natal-precision-audit.mjs";
+import {auditedBilingualCandidateView} from "./lib/wss08-audited-bilingual-view.mjs";
 
 const SAMPLE_PLACES=Object.freeze({
  "ranchi":{name:"Ranchi",hi:"रांची",lat:23.3441,lon:85.3096,tz:"Asia/Kolkata"},
@@ -22,7 +24,7 @@ const make=(tag,text,cls)=>{
  if(text!==undefined&&text!==null)node.textContent=String(text);
  return node;
 };
-let language="en",candidate=null,computedPeriods=null,confirmedSyllableKey="";
+let language="en",candidate=null,computedPeriods=null,precisionAudit=null,confirmedSyllableKey="";
 const state={failures:0,lastPubliclyReady:false};
 const labels={
  en:{
@@ -145,8 +147,8 @@ function render(){
  const root=$("#review-result");root.replaceChildren();
  const strings=languagePack(language),lbl=labels[language];
  if(!candidate){item(root,"p",lbl.opening,"muted");return;}
- const view=buildBilingualCandidateView({
-  report:candidate,displayName:$("#wss-name").value,
+ const view=auditedBilingualCandidateView({
+  report:candidate,precisionAudit,displayName:$("#wss-name").value,
   language,nameSignConsent:$("#wss-nama-consent").checked,confirmedSyllableKey
  });
  $("#review-result").dataset.stagedReady="false";
@@ -155,15 +157,27 @@ function render(){
  item(header,"h2",strings.title);
  item(header,"p",strings.intro,"muted");
  if(view.person.displayName)item(header,"h3",view.person.displayName,"name-display");
+ const quality=card(root,strings.wss08.title);
+ quality.id="wss-precision-audit";
+ quality.dataset.publicReady="false";
+ info(quality,strings.wss08.sample,view.quality.samplesChecked);
+ info(quality,strings.wss08.precision,view.quality.effectiveBirthPrecisionSeconds+" "+lbl.secondUnit);
+ info(quality,strings.d1,view.quality.D1==="stable_candidate"?
+    strings.wss08.provisional:strings.wss08.noLabel);
+ info(quality,strings.d9,view.quality.D9==="stable_candidate"?
+    strings.wss08.provisional:strings.wss08.noLabel);
+ info(quality,strings.d10,view.quality.D10==="stable_candidate"?
+    strings.wss08.provisional:strings.wss08.noLabel);
+ item(quality,"p",strings.wss08.dasha,"warning");
  const identity=card(root,strings.birth);
  info(identity,strings.birthTime,view.birth.utc);
  info(identity,strings.birthTimezone,view.birth.timezone);
  info(identity,strings.birthPrecision,String(view.birth.precisionSeconds)+lbl.secondUnit);
  info(identity,strings.birthPlace,String(view.birth.coordinates.latitude)+", "+String(view.birth.coordinates.longitude));
  info(identity,strings.lagna,view.birth.lagna??strings.notAvailable);
- info(identity,strings.janmaRashi,view.birth.janmaRashi);
- info(identity,strings.nakshatra,view.birth.janmaNakshatra);
- info(identity,strings.pada,view.birth.pada);
+ info(identity,strings.janmaRashi,view.birth.janmaRashi??strings.notAvailable);
+ info(identity,strings.nakshatra,view.birth.janmaNakshatra??strings.notAvailable);
+ info(identity,strings.pada,view.birth.pada??strings.notAvailable);
  const nama=card(root,strings.nama);
  item(nama,"p",strings.rashiSource,"muted");
  const ns=view.person.nameSign;
@@ -193,15 +207,20 @@ function render(){
  table(planets,[strings.planet,strings.sign,strings.sidereal,strings.motion],
   view.planets.map(g=>[g.planet,g.sign,g.sidereal,g.state]));
  const periods=card(root,strings.dasha);
- info(periods,strings.birthBalance,Number(view.dashas[0].balance??0).toFixed(3)+lbl.yearUnit);
- const tablePeriod=table(periods,[strings.lord,strings.period],
-   view.dashas.map(d=>[d.lord,d.start+" → "+d.end]));
- tablePeriod.className="dasha";
+ item(periods,"p",strings.wss08.dasha,"warning");
+ info(periods,strings.birthBalance,strings.notAvailable);
+ if(view.dashas.length){
+   const tablePeriod=table(periods,[strings.lord,strings.wss08.year],
+     view.dashas.map(d=>[d.lord,String(d.nominalYears)]));
+   tablePeriod.className="dasha";
+ }else item(periods,"p",strings.wss08.moon,"muted");
  const transit=card(root,strings.daily);
  info(transit,strings.date,view.transit.date);
  item(transit,"p",strings.calculatedAtNoon,"muted");
- table(transit,[strings.planet,strings.sign,strings.houseMoon],
-  view.transit.grahas.map(g=>[g.planet,g.sign,String(g.houseFromMoon)]));
+ if(view.transit.grahas.length){
+   table(transit,[strings.planet,strings.sign,strings.houseMoon],
+     view.transit.grahas.map(g=>[g.planet,g.sign,String(g.houseFromMoon)]));
+ }else item(transit,"p",strings.wss08.moon,"warning");
  for(const key of ["month","year"]){
   const period=computedPeriods?.[key];
   const block=card(root,key==="month"?lbl.monthTitle:lbl.yearTitle);
@@ -215,7 +234,7 @@ function render(){
   info(block,strings.period,period.start_date+" → "+period.end_date);
   info(block,lbl.sampledDays,period.sample_count);
   info(block,lbl.observedChanges,period.sign_changes.length);
-  info(block,lbl.periodChanges,period.dasha_changes.length);
+  info(block,lbl.periodChanges,strings.wss08.dasha);
   const localSign=name=>{
     const i=SIGNS_EN.indexOf(name);
     return language==="hi"&&i>=0?SIGN_HI[i]:name;
@@ -226,10 +245,7 @@ function render(){
       ch.observed_local_date,localGraha(ch.graha),
       localSign(ch.previous_sign),localSign(ch.new_sign)]));
   }else item(block,"p",lbl.noChanges,"muted");
-  if(period.dasha_changes.length){
-    table(block,[lbl.sampledDays,lbl.periodChanges],
-      period.dasha_changes.map(ch=>[ch.observed_local_date,ch.from+" → "+ch.to]));
-  }
+  // Exact Daśā change dates are not a validated user-facing claim.
  }
  const domain=card(root,strings.domains);
  for(const d of view.domains){
@@ -257,13 +273,7 @@ function render(){
   }
  }
  const timing=card(root,strings.timeWindows);
- item(timing,"p",strings.windowNotice,"warning");
- for(const [key,periods] of Object.entries(view.windows)){
-  item(timing,"h3",key==="work"?(language==="hi"?"करियर":"Career"):
-   (language==="hi"?"संबंध":"Relationships"));
-  table(timing,[strings.period,strings.dasha],
-   periods.slice(0,8).map(p=>[p.from.slice(0,10)+" → "+p.to.slice(0,10),p.maha+" / "+p.antar]));
- }
+ item(timing,"p",strings.wss08.timing,"warning");
  const limitation=card(root,strings.methodology);
  for(const warning of view.limitations)item(limitation,"p",warning,"warning");
  info(limitation,strings.ayanamsha,view.method.ayanamsha);
@@ -277,7 +287,7 @@ function generate(){
   refDate=$("#wss-reference-date").value,year=$("#wss-year-convention").value;
  if(!name||!date||!time||!place||!refDate||!year) {
   $("#wss-error").textContent=labels[language].missing;
-  candidate=null;computedPeriods=null;render();return;
+  candidate=null;computedPeriods=null;precisionAudit=null;render();return;
  }
  try{
   candidate=assembleKundaliReportCandidate({
@@ -290,6 +300,13 @@ function generate(){
   });
   if(candidate.status!=="candidate_chart_report_not_approved_for_user_prediction")
    throw new RangeError(candidate.reason||"candidate input unresolved");
+  precisionAudit=auditNatalPrecisionCandidate({
+    birthDate:date,birthTime:time,birthTimezone:place.tz,
+    birthLatitude:place.lat,birthLongitude:place.lon,
+    declaredPrecisionSeconds:Number($("#wss-precision").value),language
+  });
+  if(precisionAudit.status!==WSS08_PRECISION_STATE)
+   throw new RangeError(precisionAudit.input_state||precisionAudit.status);
   const params={report:candidate,referenceDate:refDate,
     timezone:place.tz,latitude:place.lat,longitude:place.lon};
   try {
@@ -301,7 +318,7 @@ function generate(){
   $("#wss-error").textContent="";
   render();
  }catch{
-  candidate=null;computedPeriods=null;
+  candidate=null;computedPeriods=null;precisionAudit=null;
   $("#wss-error").textContent=labels[language].failed;
   render();
  }
@@ -317,7 +334,7 @@ $("#wss-clear").addEventListener("click",()=>{
  $("#wss-birth-place").value="";
  $("#wss-nama-consent").checked=false;
  $("#wss-syllable").value="";
- candidate=null;computedPeriods=null;confirmedSyllableKey="";
+ candidate=null;computedPeriods=null;precisionAudit=null;confirmedSyllableKey="";
  $("#wss-error").textContent="";
  updateLanguage();
 });
@@ -332,6 +349,6 @@ $("#wss-syllable").addEventListener("change",()=>{
 });
 for(const node of ["#wss-birth-date","#wss-birth-time","#wss-birth-place",
  "#wss-reference-date","#wss-year-convention","#wss-precision"]){
- $(node).addEventListener("change",()=>{candidate=null;computedPeriods=null;render()});
+ $(node).addEventListener("change",()=>{candidate=null;computedPeriods=null;precisionAudit=null;render()});
 }
 updateLanguage();
