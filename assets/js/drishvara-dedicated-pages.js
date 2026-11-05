@@ -244,11 +244,24 @@
  }
  function common(){
   const areas=[['.d-hero-intro','Daily Panchang, observances and the annual festival calendar — with every date governed by its source.','दैनिक पंचांग, अनुष्ठान और वार्षिक पर्व कैलेंडर — प्रत्येक तिथि अपने अनुमोदित स्रोत पर आधारित।']];
-  if(kind==='panchang')areas.forEach(([s,en,hindi])=>addLang(en,hindi,s));
+  if(kind==='panchang'){
+   areas.forEach(([s,en,hindi])=>addLang(en,hindi,s));
+   const previousCatalogLanguage=translateExtra;
+   translateExtra=()=>{
+    previousCatalogLanguage();
+    const input=$('#panchang-place-alias');
+    if(input)input.placeholder=t('e.g. Bengaluru, London or Bedauliya','जैसे बेंगलुरु, लंदन या बेदौलिया');
+    const searchNote=$('[data-ag71d-r5-search-forward-note="panchang"]');
+    if(searchNote)searchNote.textContent=t('Search approved Indian and international cities, villages and places. Try Bengaluru/Bangalore, London, Bedauliya or Bhawanathpur Township; choose a matching suggestion.','अनुमोदित भारतीय और अंतरराष्ट्रीय शहरों, गाँवों और स्थानों को खोजें। बेंगलुरु, लंदन, बेदौलिया या भवनाथपुर टाउनशिप लिखें और मिले हुए विकल्प को चुनें।');
+    const release=$('.ag74p-live-release span');
+    if(release)release.textContent=t('Approved searchable location catalogue, including international cities · 384 Varanasi daily records · 114 generic monthly observances.','अंतरराष्ट्रीय शहरों सहित अनुमोदित खोजयोग्य स्थान सूची · 384 वाराणसी दैनिक रिकॉर्ड · 114 सामान्य मासिक पर्व।');
+   };
+  }
   if(kind==='what-stars-say'){
    addLang('Your Star Reflection','आपका नक्षत्र चिंतन','.d-page-hero h1');addLang('A Vedic-inspired space for personal inquiry and understanding — not a prediction or decision guide.','स्व-जिज्ञासा और समझ के लिए पारंपरिक संदर्भों से प्रेरित स्थान — भविष्यवाणी या निर्णय मार्गदर्शिका नहीं।','.d-hero-intro');
    addLang('Today’s Reflective Insight','आज का चिंतन संकेत','.d-reflection-insight>h2');addLang('How This Reflection Works','यह चिंतन कैसे काम करता है','.d-reflection-explain .d-panel:first-child>h2');addLang('What You Can Explore','आप क्या खोज सकते हैं','.d-reflection-explain .d-panel:last-child>h2');
    addLang('Reflection method & privacy','चिंतन पद्धति और गोपनीयता','.d-form-notes>summary');
+   addLang('Search the approved Indian and international place catalogue by city or alias; choose a matching suggestion.','शहर या उपनाम से अनुमोदित भारतीय और अंतरराष्ट्रीय स्थान खोजें; मिले हुए विकल्प को चुनें।','[data-ag71d-r5-search-forward-note="star-reflection"]');
    $$('.d-features strong').forEach((e,i)=>label(e,['Rooted in tradition','For reflection','Self-inquiry','Privacy first'][i],['परंपरा का आधार','चिंतन के लिए','स्व-जिज्ञासा','गोपनीयता पहले'][i]));
    const body=$('#reflect');const saved=translateExtra;translateExtra=()=>{saved();const h=$('.d-form-title');if(h)h.textContent=t('Generate Your Star Reflection','अपना नक्षत्र चिंतन बनाएँ');};
   }
