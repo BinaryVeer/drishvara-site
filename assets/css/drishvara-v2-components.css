@@ -66,11 +66,12 @@ body.drishvara-v2-active .dv2-reflect button {
   min-height: 2.75rem !important;
 }
 
-body.drishvara-v2-active #star-reflection-name,
-body.drishvara-v2-active label[for="star-reflection-name"] {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
+/* F3: Optional session name is visible; the name is never a runtime
+   astronomical input or a factor in governed result selection. */
+body.drishvara-v2-active #star-reflection-name {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 body.drishvara-v2-active [data-ag75d-e2-star-place-choice-panel] {

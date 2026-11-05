@@ -1,0 +1,47 @@
+name: F3 Star Reflection session-name QA
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/js/drishvara-v2-home.js'
+      - 'assets/js/drishvara-dedicated-pages.js'
+      - 'assets/css/drishvara-dedicated-pages.css'
+      - 'what-stars-say.html'
+      - 'index.html'
+      - 'tests/f3-star-name-e2e.mjs'
+      - '.github/workflows/f3-star-name.yml'
+permissions:
+  contents: read
+jobs:
+  name-reflection-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JS and frontend build
+        run: |
+          node --check assets/js/drishvara-v2-home.js
+          node --check assets/js/drishvara-dedicated-pages.js
+          node scripts/validate-drishvara-frontend-migration.mjs
+          npm run build
+      - name: Install headless Chromium driver
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright-core@1.56.1
+      - name: Start candidate local server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/f3-star-server.log 2>&1 &
+          for i in 1 2 3 4 5; do curl -fsS http://127.0.0.1:8765/what-stars-say.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/f3-star-server.log
+          exit 1
+      - name: Verify name remains display-only, unsent, and ephemeral
+        run: node tests/f3-star-name-e2e.mjs
+      - name: Retain candidate QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f3-star-name-qa
+          path: f3-star-name-evidence/
+          if-no-files-found: warn
+          retention-days: 7
