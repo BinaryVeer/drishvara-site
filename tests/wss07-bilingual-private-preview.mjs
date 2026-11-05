@@ -98,7 +98,7 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#wss-page-footer").innerText(),/ग्रह गणना/);
   assert.match(await page.locator("#wss-year-convention").innerText(),/नागरिक वर्ष/);
   assert.match(await page.locator("#wss-precision").innerText(),/सेकंड तक ज्ञात/);
-  assert.equal(await page.locator('[data-precision-choice="approximate"]').isDisabled(),true);
+  assert.equal(await page.locator('[data-precision-choice="approximate"]').evaluate(el=>el.disabled),true);
   assert.match(await page.locator("#review-result h2").first().innerText(),/कुंडली/);
   assert.match(await page.locator("#review-result").innerText(),/वृषभ/);
   assert.match(await page.locator("#wss-name-label").innerText(),/नाम/);
