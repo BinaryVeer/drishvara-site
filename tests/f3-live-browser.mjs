@@ -45,6 +45,36 @@ try {
         }
         await page.waitForSelector('.dv2-header', { timeout:12000 });
         await page.waitForTimeout(1200);
+        if (route.slug === 'panchang') {
+          try {
+            await page.waitForFunction(() => {
+              const t=document.getElementById('panchang-tithi');
+              return t && t.textContent.trim() && !/^(loading|preparing|calculating|pending)/i.test(t.textContent.trim());
+            }, null, { timeout:12000 });
+          } catch { warn(label,'Panchang default Tithi remained in pending/loading state after 12s'); }
+        }
+        if (route.slug === 'sports') {
+          // Lazy-loaded images cannot be judged by a full-page screenshot until
+          // their scroll intersection has actually occurred.
+          const images=await page.locator('#sports-articles img, #sports-featured img').all();
+          for(const img of images) {
+            await img.scrollIntoViewIfNeeded();
+            await img.evaluate(el=>{el.loading='eager';});
+            await img.evaluate(async el=>{
+              if(el.complete && el.naturalWidth>0)return;
+              await new Promise(resolve=>{
+                const timer=setTimeout(resolve,6500);
+                const end=()=>{clearTimeout(timer);resolve();};
+                el.addEventListener('load',end,{once:true});
+                el.addEventListener('error',end,{once:true});
+              });
+            });
+            const info=await img.evaluate(el=>({src:el.currentSrc,naturalWidth:el.naturalWidth,complete:el.complete}));
+            if(!info.naturalWidth)fail(label,'article image not loaded: '+info.src);
+          }
+          await page.evaluate(()=>scrollTo(0,0));
+          await page.waitForTimeout(350);
+        }
         const metrics = await page.evaluate(() => {
           const rect = e => {
             if (!e) return null;
@@ -66,7 +96,7 @@ try {
           }
           return {title:document.title,width:innerWidth,scrollWidth:document.documentElement.scrollWidth,heroBackground:getComputedStyle(document.querySelector('.d-page-hero')).backgroundImage,items,controls,outliers,visibleDesktopSports:[...document.querySelectorAll('.dv2-nav a[href="sports.html"]')].filter(x=>rect(x)?.visible).length,mobileSportsCount:document.querySelectorAll('.dv2-mobile-menu__list a[href="sports.html"]').length};
         });
-        const record={label,status:response.status(),...metrics,errors:jsErrors};
+        const record={label,status:response.status(),...metrics,errors:jsErrors,panchangTithi:route.slug==='panchang'?await page.locator('#panchang-tithi').first().textContent():undefined};
         audit.samples.push(record);
         if(metrics.scrollWidth>vp.width+3) fail(label, 'horizontal document overflow '+metrics.scrollWidth+'px');
         if(metrics.outliers.length) fail(label, 'off-screen content panels '+JSON.stringify(metrics.outliers.slice(0,5)));
