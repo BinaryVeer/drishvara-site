@@ -90,7 +90,7 @@ export function divisionalChartsCandidate(natal,{
    const futureLagna=sensitivity?.lagna;
    if(natal.lagna && (birthTimePrecisionSeconds>3600 || !futureLagna ||
       (lagna.state==="candidate_numeric"&&
-       vargaSignCandidate(futureLagna.longitude_degrees,kind,{errorMarginDegrees}).rashi_index!==lagna.rashi_index)){
+       vargaSignCandidate(futureLagna.longitude_degrees,kind,{errorMarginDegrees}).rashi_index!==lagna.rashi_index))){
      lagna={...lagna,state:"review_required_birth_time_precision",rashi:null,rashi_index:null};
    }
    outputs[kind]={state:"candidate_not_public",source_rule:kind==="D9"?WSS04_D9_RULE:WSS04_D10_RULE,
