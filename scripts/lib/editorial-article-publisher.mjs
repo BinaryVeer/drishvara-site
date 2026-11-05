@@ -1,8 +1,7 @@
 import { snapshotHash, canonicalPublicationDate } from "./ag70d-word-selection-engine.mjs";
 import { prepareReviewedArticleFiles } from "../../services/pipeline/publish-all-core.js";
 import { reviewedImageUpload } from "./editorial-review-media.mjs";
-import { articleLengthBlocker } from "./editorial-article-qualification.mjs";
-import { articleLayoutReleaseBlocker } from "./editorial-article-layout.mjs";
+import { articleProductionBlockers, articleQualityReviewBlocker } from "./editorial-article-qualification.mjs";
 
 // One fast-forward commit owns the page, discovery index and recovery receipt together.
 export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = {}) {
@@ -12,10 +11,10 @@ export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = 
     if (!token || owner !== "BinaryVeer" || repo !== "drishvara-site" || branch !== "main") throw Error("article_publisher_unavailable");
     const folder = { world_affairs: "world", media_society: "media", public_programmes: "policy", sports: "sports", spirituality: "spiritual" }[job?.version?.payload?.desk];
     if (!folder || !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(job?.candidate_id || "")) throw Error("article_copy_incomplete");
-    const length = articleLengthBlocker(job.version.payload.body);
-    if (length) throw Error(length);
-    const layout = articleLayoutReleaseBlocker(job.version.payload);
-    if (layout) throw Error(layout);
+    const blockers = articleProductionBlockers(job.version.payload);
+    if (blockers.length) throw Error(blockers[0]);
+    const quality = articleQualityReviewBlocker({ version: job.version, decisions: job.decisions, decisionRefs: job.decisions?.map(d => d.id) });
+    if (quality) throw Error(quality);
     // Validate every upload before any remote operation; duplicate bytes share a blob.
     const images = [...new Map(job.version.payload.media.map(reviewedImageUpload).filter(Boolean).map(i => [i.path, i])).values()];
     const expectedPath = "articles/" + folder + "/editorial-" + job.candidate_id + ".html";

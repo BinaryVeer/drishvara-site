@@ -1,6 +1,7 @@
 import { runGenerateDaily } from "../services/pipeline/generate-daily-core.js";
+export { legacyPublicationRetired as default } from "../services/pipeline/controlled-publication-boundary.js";
 
-export default async function handler(req, res) {
+async function legacyHandler(req, res) {
   if (req.method !== "GET" && req.method !== "POST") {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   }

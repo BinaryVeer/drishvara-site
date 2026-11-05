@@ -7,6 +7,7 @@ import { canonicalPublicationDate, snapshotHash } from "./lib/ag70d-word-selecti
 import { assertPrivateRoot } from "./lib/ag70e-word-lexical-bank.mjs";
 import { validateEditorialCommand } from "./lib/editorial-workspace-service.mjs";
 import { LONG_FORM_PROFILE, assessLongFormDraft, articleWordCount, articleLengthBlocker } from "./lib/editorial-article-qualification.mjs";
+import { articleIntakeBatchError } from "./lib/editorial-article-intake.mjs";
 
 // Operator-run preparation. Never calls Git writes, Supabase, approval, release or scheduling.
 const args = process.argv.slice(2), options = {};
@@ -55,7 +56,7 @@ try {
     }, draft.generated.article_html);
     const { body } = parsed;
     const qualification = assessLongFormDraft({ generated: draft.generated, body, media: draft.proposed_media });
-    if (qualification.blockers.includes("article_long_form_length_pending")) throw Error("article_long_form_length_pending");
+    if (!qualification.mechanical_checks_complete) throw Error(qualification.blockers[0]);
     const unit = draft.generated.data_enrichment;
     if (qualification.blockers.includes("article_outline_pending") || qualification.blockers.includes("article_visual_plan_pending") || qualification.blockers.includes("article_data_enrichment_pending")) throw Error("article_long_form_packet_incomplete");
     if (articleLengthBlocker(body)) throw Error("article_long_form_length_pending");
@@ -91,6 +92,7 @@ try {
       source_count: sourceUrls.length, sourced_image_present: !!media, content_hash: snapshotHash(command.payload),
       review_status: "pending", public_output_allowed: false });
   }
+  const batchError = articleIntakeBatchError(commands); if (batchError) throw Error(batchError);
   save("intake-commands.json", commands); save("assessment.json", assessment);
   console.log(JSON.stringify({ directory, date: batch.date, records: commands.length, assessment, hosted_writes: 0, public_output_allowed: false }, null, 2));
 } catch (error) {

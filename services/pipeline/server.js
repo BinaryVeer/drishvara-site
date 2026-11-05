@@ -1,6 +1,7 @@
 import express from "express";
 import { runPublishAll } from "./publish-all-core.js";
 import { runGenerateDaily } from "./generate-daily-core.js";
+import { legacyPublicationRetired } from "./controlled-publication-boundary.js";
 
 const app = express();
 app.use(express.json());
@@ -9,7 +10,7 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true, service: "drishvara-pipeline" });
 });
 
-app.post("/jobs/publish-all", async (req, res) => {
+app.post("/jobs/publish-all", legacyPublicationRetired, async (req, res) => {
   try {
     const result = await runPublishAll({
       githubToken: process.env.GITHUB_TOKEN,
@@ -30,7 +31,7 @@ app.post("/jobs/publish-all", async (req, res) => {
   }
 });
 
-app.post("/jobs/generate-daily", async (req, res) => {
+app.post("/jobs/generate-daily", legacyPublicationRetired, async (req, res) => {
   try {
     const result = await runGenerateDaily({
       openaiApiKey: process.env.OPENAI_API_KEY,

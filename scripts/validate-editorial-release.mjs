@@ -5,7 +5,7 @@ import { execFileSync } from "node:child_process";
 import { assessEditorialRelease, requestControlledRelease, deliverReviewedWord } from "./lib/editorial-release-service.mjs";
 import { editorialDecisionIssues } from "./lib/editorial-workspace-service.mjs";
 import { createEditorialArticlePublisher } from "./lib/editorial-article-publisher.mjs";
-import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
+import { syntheticReviewImage, syntheticQualifiedArticle, syntheticArticleQualityDecision } from "./lib/editorial-review-test-fixtures.mjs";
 import { prepareReviewedArticleFiles } from "../services/pipeline/publish-all-core.js";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 import { snapshotHash, candidateRef } from "./lib/ag70d-word-selection-engine.mjs";
@@ -18,12 +18,14 @@ const scopes = ["editorial", "rights", "factual", "safety", "media", "publisher_
 const id = randomUUID(), versionId = randomUUID(), releaseId = randomUUID(), claimId = randomUUID(), actorId = randomUUID();
 const timestamp = "2026-10-28T18:45:00.000Z";
 const version = { id: versionId, content_hash: "sha256:" + "a".repeat(64), title: "Synthetic controlled article",
-  payload: { desk: "world_affairs", body: 'Synthetic text only. <script>throw Error("not executable")</script>\n\nSecond paragraph. ' + "Synthetic review fixture, not actual journalism. ".repeat(300),
-    sources: [{ title: "Synthetic evidence", url: "https://example.invalid/reviewed-source" }], media: [], research_refs: ["PRIVATE-NOTE-DO-NOT-EXPORT"] } };
+  payload: syntheticQualifiedArticle() };
+version.payload.body += '\n\nSynthetic text only. <script>throw Error("not executable")</script>';
+version.payload.research_refs.push("PRIVATE-NOTE-DO-NOT-EXPORT");
+const qualityDecision = syntheticArticleQualityDecision(version, randomUUID());
 const opened = envelope({ candidate: { id, kind: "article" }, version,
-  review_state: { required_scopes: scopes, approved_scopes: scopes, reviews_complete: true }, review_permissions: { can_request_release: true } });
+  decisions: [qualityDecision], review_state: { required_scopes: scopes, approved_scopes: scopes, decision_refs: [qualityDecision.id], reviews_complete: true }, review_permissions: { can_request_release: true } });
 const command = { action: "request_release", command_id: randomUUID(), candidate_id: id, version_id: versionId, content_hash: version.content_hash };
-const job = envelope({ status: "claimed", claim_id: claimId, kind: "article", candidate_id: id, version_id: versionId, content_hash: version.content_hash, version });
+const job = envelope({ status: "claimed", claim_id: claimId, kind: "article", candidate_id: id, version_id: versionId, content_hash: version.content_hash, version, decisions: [qualityDecision] });
 let rpcCalls = [], workerCalls = [], writes = 0, current = structuredClone(opened), workerStatus = "claimed", failComplete = false;
 const rpc = async (name, args) => {
   assert.equal(name, "editorial_review_command"); rpcCalls.push(args.p_command.action);
@@ -129,9 +131,10 @@ await check("legacy discovery rebuilding preserves all original fields and selec
   const before = previousTemplate.rebuildArticleIndex({ items: [item] }, []), after = currentTemplate.rebuildArticleIndex({ items: [item] }, []);
   delete before.generatedAt; delete after.generatedAt; assert.deepEqual(after, before);
 });
-await check("existing article template escapes approved text and keeps all citations", () => { assert(rendered.html.includes("&lt;script&gt;")); assert(!rendered.html.includes('<script>throw')); assert(rendered.html.includes("https://example.invalid/reviewed-source")); });
+await check("existing article template escapes approved text and keeps all citations", () => { assert(rendered.html.includes("&lt;script&gt;")); assert(!rendered.html.includes('<script>throw')); assert(rendered.html.includes("https://example.invalid/synthetic-fixture")); });
 await check("article output excludes private research and review metadata", () => assert(!JSON.stringify(rendered).includes("PRIVATE-NOTE")));
-await check("an absent approved image is not replaced with fabricated media", () => assert(!/<img[^>]*class="hero-image-tag/.test(rendered.html)));
+await check("an absent image is rejected instead of replaced with fabricated media", async () =>
+  assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media: [] } } }), /invalid_article_layout/));
 await check("article target is derived from the immutable candidate identity", () => { assert.equal(rendered.articlePath, "articles/world/editorial-" + id + ".html"); assert.equal(rendered.index.items[0].path, rendered.articlePath); });
 await check("same timestamp and copy produce identical article artifacts", async () => assert.deepEqual(await prepareReviewedArticleFiles(fields), rendered));
 await check("incomplete and unsafe source links cannot publish", async () => {
@@ -139,8 +142,9 @@ await check("incomplete and unsafe source links cannot publish", async () => {
     await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, sources } } }), /article_sources_pending/);
 });
 await check("multiple media without placement and uncredited images remain pending", async () => {
-  await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media: [{}, {}] } } }), /article_layout_required/);
-  await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media: [{ url: "/assets/unknown.png" }] } } }), /article_media_contract_pending/);
+  const unpositioned = { ...version.payload, media: [{}, {}] }; delete unpositioned.layout;
+  await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: unpositioned } }), /article_layout_required/);
+  await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media: [{ url: "/assets/unknown.png" }] } } }), /invalid_article_layout/);
 });
 let gitCalls = [], publicFiles = new Map([["data/article-index.json", JSON.stringify({ items: [] })]]), stagedTree, branchAdvanced = false, losePatch = false;
 const head = "c".repeat(40), next = "d".repeat(40);
@@ -169,6 +173,22 @@ await check("the trusted Article adapter also rejects short copy before any Git 
   gitCalls = [];
   await assert.rejects(publisher({ job: { ...job, version: { ...version, payload: { ...version.payload, body: "Short pending copy." } } }, timestamp, revalidate: async () => {} }), /article_long_form_length_pending/);
   assert.equal(gitCalls.length, 0);
+});
+await check("source, outline and enrichment gates are independently enforced before Git", async () => {
+  for (const [code, change] of [["article_sources_pending", p => { p.sources = []; }], ["article_outline_pending", p => { p.layout.sections = []; }],
+    ["article_visual_enrichment_pending", p => { p.layout.objects = p.layout.objects.filter(o => o.type === "image"); }]]) {
+    const p = structuredClone(version.payload); change(p); gitCalls = [];
+    await assert.rejects(publisher({ job: { ...job, version: { ...version, payload: p } }, timestamp, revalidate: async () => {} }), { message: code });
+    assert.equal(gitCalls.length, 0);
+  }
+});
+await check("missing, stale and below-threshold editorial decisions cannot reach Git", async () => {
+  const low = structuredClone(qualityDecision), note = JSON.parse(low.note); note.quality_score = 84; low.note = JSON.stringify(note);
+  for (const decisions of [[], [{ ...qualityDecision, version_id: randomUUID() }], [{ ...qualityDecision, note: "Approved" }], [low]]) {
+    gitCalls = [];
+    await assert.rejects(publisher({ job: { ...job, decisions }, timestamp, revalidate: async () => {} }), /article_quality_(review|threshold)_pending/);
+    assert.equal(gitCalls.length, 0);
+  }
 });
 await check("article, discovery and receipt are one non-forced atomic branch update", async () => {
   const r = await publisher({ job, timestamp, revalidate: async () => { validations++; } }); assert.equal(r.status, "article_committed");

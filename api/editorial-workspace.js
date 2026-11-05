@@ -6,6 +6,7 @@ import { registerReviewedWord } from "../scripts/lib/editorial-word-registration
 import { loadEditorialReviewImage } from "../scripts/lib/editorial-review-media.mjs";
 import { longFormRequirements, articleWordCount, articleLengthBlocker } from "../scripts/lib/editorial-article-qualification.mjs";
 import { reviewedArticlePage } from "../scripts/lib/editorial-article-layout.mjs";
+import { submitPreparedArticles } from "../scripts/lib/editorial-article-intake.mjs";
 
 const assets = {
   "login.html": [new URL("../internal-scaffolds/editorial-workspace/login.html", import.meta.url), "text/html; charset=utf-8"],
@@ -117,6 +118,12 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
       const rpc = (name, args) => remote("/rest/v1/rpc/" + name, { method: "POST", body: JSON.stringify(args) }, token);
       const session = await executeEditorialCommand({ action: "session" }, rpc);
       if (!session.ok) return json(403, { ok: false, code: "editorial_access_denied" });
+      if (req.method === "POST" && action === "article_intake" && !asset) {
+        if (!body || Array.isArray(body) || Object.keys(body).length !== 1 || !Object.hasOwn(body, "commands"))
+          return json(400, { ok: false, code: "invalid_article_intake_batch" });
+        const result = await submitPreparedArticles({ commands: body.commands, session, rpc });
+        return json(result.ok ? 200 : 400, result);
+      }
       if (req.method === "GET" && ["media", "preview"].includes(action)) {
         const candidateId = url.searchParams.get("candidate_id"), versionId = url.searchParams.get("version_id"), hash = url.searchParams.get("content_hash");
         if (validateEditorialCommand({ action: "open", candidate_id: candidateId }) || !/^[0-9a-f-]{36}$/i.test(versionId || "") || !/^sha256:[0-9a-f]{64}$/.test(hash || ""))
@@ -199,7 +206,8 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
         const result = await executeEditorialCommand(body, rpc);
         if (body.action === "open" && result.candidate?.kind === "article") {
           const standard = longFormRequirements(), blocker = articleLengthBlocker(result.version?.payload?.body);
-          result.article_length = { words: articleWordCount(result.version?.payload?.body), min: standard.min, max: standard.max, blocker };
+          result.article_length = { words: articleWordCount(result.version?.payload?.body), min: standard.min, max: standard.max, blocker,
+            quality_min: standard.quality_min, visitor_value_min: standard.visitor_value_min };
         }
         return json(result.ok ? 200 : 400, result);
       }

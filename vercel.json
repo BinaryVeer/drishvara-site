@@ -9,10 +9,5 @@
     { "source": "/editorial/", "destination": "/api/editorial-workspace" },
     { "source": "/internal-scaffolds/editorial-workspace/:path*", "destination": "/api/editorial-workspace" }
   ],
-  "crons": [
-    {
-      "path": "/api/run-daily-pipeline",
-      "schedule": "0 5 * * *"
-    }
-  ]
+  "crons": []
 }

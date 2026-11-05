@@ -1,4 +1,5 @@
 import { runPublishAll } from "../services/pipeline/publish-all-core.js";
+export { legacyPublicationRetired as default } from "../services/pipeline/controlled-publication-boundary.js";
 
 function parseBoolean(value, fallback = false) {
   if (value === undefined || value === null || value === "") return fallback;
@@ -11,7 +12,7 @@ function getParam(req, key) {
   return req.query?.[key];
 }
 
-export default async function handler(req, res) {
+async function legacyHandler(req, res) {
   if (req.method !== "GET" && req.method !== "POST") {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   }

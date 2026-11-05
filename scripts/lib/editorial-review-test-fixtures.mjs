@@ -1,5 +1,6 @@
 import { deflateSync } from "node:zlib";
 import { createHash } from "node:crypto";
+import { ARTICLE_EDITORIAL_REVIEW } from "./editorial-article-qualification.mjs";
 
 // Generated raster fixture only; never imported into production content.
 export function syntheticReviewImage(width = 320, height = 180) {
@@ -33,4 +34,24 @@ export function syntheticArticleLayout() {
       { ...common("chart", "bar_chart", 4), unit: "Synthetic units", labels: ["Test A", "Test B"], values: [2, 4] },
       { ...common("takeaways", "takeaways", 5), items: ["Synthetic takeaway, not editorial content."] }
     ] } };
+}
+
+export function syntheticQualifiedArticle() {
+  const p = syntheticArticleLayout();
+  p.sources.push({ url: "https://example.invalid/second-evidence", title: "Second synthetic evidence fixture" });
+  p.media = [{ url: "https://example.invalid/synthetic-review-image.png", alt: "Synthetic proposed image only",
+    attribution: "Synthetic fixture, no actual content approval", source_url: "https://example.invalid/image-source" }];
+  p.layout.sections = [{ heading: "Synthetic context", before_paragraph: 1 }, { heading: "Synthetic analysis", before_paragraph: 3 },
+    { heading: "Synthetic conclusion", before_paragraph: 6 }];
+  p.layout.objects = [{ id: "hero", type: "image", after_paragraph: 0, width: "wide", title: "Synthetic hero",
+    caption: "Synthetic test only", source_refs: [1], media_index: 0, visual_kind: "photograph" },
+    { id: "takeaways", type: "takeaways", after_paragraph: 6, width: "reading", title: "Synthetic takeaways", caption: "Synthetic test only",
+      source_refs: [1, 2], items: ["Synthetic first point", "Synthetic second point", "Synthetic third point"] }];
+  return p;
+}
+
+export function syntheticArticleQualityDecision(version, id) {
+  return { id, scope: "editorial", decision: "approve", version_id: version.id, content_hash: version.content_hash,
+    note: JSON.stringify({ contract_version: ARTICLE_EDITORIAL_REVIEW, rationale: "Synthetic human-decision simulation, not an actual review.",
+      quality_score: 85, visitor_value_score: 80 }) };
 }

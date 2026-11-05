@@ -13,7 +13,8 @@ const check = (name, run) => { run(); checks++; console.log("PASS preparation CL
 const batch = {
   contract_version: "drishvara.editorial-generation-review.v1", generation_profile: LONG_FORM_PROFILE, date: "2026-10-30", model: "synthetic-only",
   public_output_allowed: false, runtime_activation: false,
-  drafts: ARTICLE_DESKS.map(desk => ({ desk, proposed_media: null, generated: {
+  drafts: ARTICLE_DESKS.map(desk => ({ desk, proposed_media: { image_path: "https://example.invalid/synthetic-image.png", image_alt: "Synthetic proposed image",
+    image_credit: "Synthetic image fixture only", image_source_url: "https://example.invalid/image-evidence" }, generated: {
     title: "Synthetic pending " + desk, article_html: Array.from({ length: 6 }, (_, i) => `<h2>Section ${i + 1}</h2><p>${"synthetic ".repeat(250).trim()}</p>`).join(""),
     reference_links: ["https://example.invalid/source-one", "https://example.invalid/source-two"], topic_intent: "Synthetic explanatory test", reader_value_promise: "Synthetic normalization integrity test",
     long_form_outline: ["Section 1", "Section 2", "Section 3"], visual_plan: [{ type: "primary_visual", placement: "hero", purpose: "Synthetic plan only", prompt: "Synthetic test visual" }],
@@ -31,9 +32,12 @@ try {
   const commands = JSON.parse(readFileSync(path.join(valid.out, "intake-commands.json"), "utf8"));
   check("five 1,500-word bodies pass without counting headings or takeaways", () => { assert.equal(commands.length, 5); assert(commands.every(c => articleWordCount(c.payload.body) === 1500)); });
   check("headings and generated enrichment retain explicit placement", () => {
-    for (const c of commands) { assert.equal(c.payload.layout.sections.length, 6); assert.equal(c.payload.layout.sections[1].before_paragraph, 2); assert.equal(c.payload.layout.objects[0].type, "takeaways"); assert.equal(c.payload.layout.objects[0].after_paragraph, 6); }
+    for (const c of commands) { assert.equal(c.payload.layout.sections.length, 6); assert.equal(c.payload.layout.sections[1].before_paragraph, 2); assert.equal(c.payload.layout.objects[1].type, "takeaways"); assert.equal(c.payload.layout.objects[1].after_paragraph, 6); }
   });
-  check("missing images remain missing and every output remains a pending intake", () => { assert(commands.every(c => c.action === "intake" && c.payload.media.length === 0 && validateEditorialCommand(c) === null && !Object.hasOwn(c, "approved"))); });
+  check("proposed images retain their metadata and every output remains a pending intake", () => { assert(commands.every(c => c.action === "intake" && c.payload.media.length === 1 && validateEditorialCommand(c) === null && !Object.hasOwn(c, "approved"))); });
+  const absent = structuredClone(batch); absent.drafts[0].proposed_media = null;
+  const missing = run("missing-image", absent);
+  check("missing images prevent an incomplete batch from being offered for intake", () => { assert.equal(missing.result.status, 1); assert(missing.result.stderr.includes("article_primary_visual_pending")); assert(!existsSync(path.join(missing.out, "intake-commands.json"))); });
   const short = structuredClone(batch); short.drafts[0].generated.article_html = `<p>${"synthetic ".repeat(1499)}</p>`;
   const rejected = run("short", short);
   check("1,499 body words cannot be rescued by long headings, takeaways or metadata", () => { assert.equal(rejected.result.status, 1); assert(rejected.result.stderr.includes("article_long_form_length_pending")); assert(!existsSync(path.join(rejected.out, "intake-commands.json"))); });

@@ -5,7 +5,7 @@ import { Readable } from "node:stream";
 import { execFileSync } from "node:child_process";
 import { validateEditorialCommand, executeEditorialCommand } from "./lib/editorial-workspace-service.mjs";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
-import { syntheticReviewImage, syntheticArticleLayout } from "./lib/editorial-review-test-fixtures.mjs";
+import { syntheticReviewImage, syntheticArticleLayout, syntheticQualifiedArticle, syntheticArticleQualityDecision } from "./lib/editorial-review-test-fixtures.mjs";
 import { reviewedImageUpload, loadEditorialReviewImage } from "./lib/editorial-review-media.mjs";
 
 let checks = 0;
@@ -118,6 +118,34 @@ await check("active Auth identity without capabilities receives no cookie", asyn
   assert.equal(r.code, 403); assert.equal(r.headers["Set-Cookie"], undefined);
 });
 const cookie = "__Host-drishvara_editorial=synthetic.jwt.token";
+await check("prepared Article import requires a session and same-origin JSON", async () => {
+  const request = { method: "POST", action: "action=article_intake", body: { commands: [] } };
+  assert.equal((await invoke(request)).code, 401);
+  calls = []; assert.equal((await invoke({ ...request, cookie, origin: "https://attacker.invalid" })).code, 403); assert.equal(calls.length, 0);
+  assert.equal((await invoke({ ...request, cookie, contentType: "text/plain" })).code, 403);
+});
+await check("prepared import rejects injected authority and uses actual scoped capability", async () => {
+  for (const body of [[], { commands: [], is_administrator: true }, { commands: [], approved: true }])
+    assert.equal((await invoke({ method: "POST", action: "action=article_intake", cookie, body })).data.code, "invalid_article_intake_batch");
+  const r = await invoke({ method: "POST", action: "action=article_intake", cookie, body: { commands: [intake] } });
+  assert.equal(r.data.code, "editorial_intake_denied");
+});
+await check("authenticated prepared import returns verified pending receipts, never review or release commands", async () => {
+  const c = { ...intake, payload: syntheticQualifiedArticle() }, candidateId = randomUUID(), versionId = randomUUID(), actions = [];
+  const fetcher = async (url, options) => {
+    if (!new URL(url).pathname.endsWith("editorial_review_command")) return fakeFetch(url, options);
+    const command = JSON.parse(options.body).p_command; actions.push(command.action); let value;
+    if (command.action === "session") value = { ...internal, capabilities: [{ kind: "article", scope: "intake" }] };
+    else if (command.action === "intake") { assert.deepEqual(command, c); value = { ...internal, candidate_id: candidateId, version_id: versionId, content_hash: contentHash }; }
+    else { assert.equal(command.action, "open"); value = { ...internal, candidate: { id: candidateId, kind: "article", external_id: c.external_id },
+      version: { id: versionId, content_hash: contentHash, title: c.title, payload: c.payload } }; }
+    return { ok: true, json: async () => value };
+  };
+  const r = await invoke({ method: "POST", action: "action=article_intake", cookie, body: { commands: [c] } }, { fetcher });
+  assert.equal(r.code, 200); assert.equal(r.data.status, "private_intake_complete"); assert.equal(r.data.receipts[0].command_id, c.command_id);
+  assert.equal(r.headers["Cache-Control"], "no-store, private"); assert.equal(r.data.public_output_allowed, false);
+  assert.deepEqual(actions, ["session", "intake", "open"]);
+});
 await check("split UTF-8 Sanskrit/Hindi request bytes retain exact copy", async () => {
   const command = { ...intake, title: "धैर्य / मनन / विवेक", payload: { ...intake.payload, body: "हिंदी अर्थ। Sanskrit source review." } };
   const bytes = Buffer.from(JSON.stringify(command)); calls = [];
@@ -159,7 +187,7 @@ await check("Arial/Cambria only and AI hero bundled", () => {
 await check("static shell has no private pilot copy or embedded draft bank", () => {
   for (const name of ["app.html", "login.html", "workspace.js"]) assert(!/dhairya|manana|viveka|preview-data|article-intake-data|CURRENT/.test(fs.readFileSync("internal-scaffolds/editorial-workspace/" + name, "utf8")));
 });
-await check("hosting delta is confined to workspace assets and internal routes", () => {
+await check("hosting delta is confined to workspace configuration and authorized legacy Cron retirement", () => {
   const current = JSON.parse(fs.readFileSync("vercel.json", "utf8"));
   const baseline = JSON.parse(execFileSync("git", ["show", "982863759478f798a262919f5dc6b390f76e5b7a:vercel.json"], { encoding: "utf8" }));
   assert.deepEqual(current.functions, { "api/editorial-workspace.js": { includeFiles: "internal-scaffolds/editorial-workspace/{app.html,login.html,workspace.css,workspace.js,editorial-hero-ai.webp}" } });
@@ -169,7 +197,9 @@ await check("hosting delta is confined to workspace assets and internal routes",
     { source: "/internal-scaffolds/editorial-workspace/:path*", destination: "/api/editorial-workspace" }
   ]);
   const preserved = { ...current }; delete preserved.functions; delete preserved.rewrites;
-  assert.deepEqual(preserved, baseline);
+  assert.deepEqual(baseline.crons, [{ path: "/api/run-daily-pipeline", schedule: "0 5 * * *" }]);
+  assert.deepEqual(current.crons, []);
+  assert.deepEqual({ ...preserved, crons: baseline.crons }, baseline);
 });
 const adminGrant = { action: "set_capability", command_id: randomUUID(), email: "reviewer@example.invalid", kind: "word", scope: "editorial", operation: "grant", access_days: 30, qualification_ref: null, qualification_verified: false, note: "Synthetic editorial appointment only." };
 await check("existing email lookup has an exact command shape", () => {
@@ -217,8 +247,10 @@ await check("subject and self-review exceptions remain independently validated",
   assert.equal(validateEditorialCommand({ ...decision, subject_review_exception: subject, admin_exception: subject }), "explicit_admin_self_review_required");
 });
 const releaseScopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
-const releaseSnapshot = { ...internal, candidate: { id, kind: "article" }, version: { id: version, content_hash: contentHash, payload: { body: "Synthetic test article only. ".repeat(400) } },
-  review_state: { required_scopes: releaseScopes, approved_scopes: releaseScopes, reviews_complete: true }, review_permissions: { can_request_release: true } };
+const releaseVersion = { id: version, content_hash: contentHash, payload: syntheticQualifiedArticle() };
+const qualityDecision = syntheticArticleQualityDecision(releaseVersion, randomUUID());
+const releaseSnapshot = { ...internal, candidate: { id, kind: "article" }, version: releaseVersion, decisions: [qualityDecision],
+  review_state: { required_scopes: releaseScopes, approved_scopes: releaseScopes, reviews_complete: true, decision_refs: [qualityDecision.id] }, review_permissions: { can_request_release: true } };
 const releaseFetcher = async (url, options) => {
   if (new URL(url).pathname.endsWith("editorial_review_command")) {
     const action = JSON.parse(options.body).p_command.action;

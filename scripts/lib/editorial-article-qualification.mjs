@@ -2,9 +2,11 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { retrieveRelevantLessons } from "../../drishvara_phase01_scaffold/core/learning/retrieval/lessonRetriever.js";
 import { retrieveTopicPlaybook } from "../../drishvara_phase01_scaffold/core/learning/playbooks/topicPlaybookRetriever.js";
+import { articleLayoutError, articleLayoutReleaseBlocker } from "./editorial-article-layout.mjs";
 
 export const LONG_FORM_PROFILE = "drishvara.long-form-review.v1";
 export const LONG_FORM_STANDARD_PATH = "data/content-intelligence/quality-reviews/long-form-article-standard.json";
+export const ARTICLE_EDITORIAL_REVIEW = "drishvara.article-editorial-review.v1";
 const root = new URL("../../", import.meta.url);
 const scaffold = new URL("drishvara_phase01_scaffold/", root);
 const read = path => readFileSync(new URL(path, root), "utf8");
@@ -14,11 +16,58 @@ export function longFormRequirements() {
   const { minimum_words: min, maximum_words: max, ideal_band_words: target } = standard.article_length_standard;
   const references = standard.reference_standard;
   if (!Number.isInteger(min) || min < 1500 || !Number.isInteger(max) || max < min ||
-      !Number.isInteger(references.minimum_verified_references) || references.minimum_verified_references < 2) throw Error("article_standard_unavailable");
+      !Number.isInteger(references.minimum_verified_references) || references.minimum_verified_references < 2 ||
+      !Number.isInteger(references.maximum_verified_references) || references.maximum_verified_references < references.minimum_verified_references ||
+      !Number.isInteger(standard.quality_scoring.publish_ready_minimum) || standard.quality_scoring.publish_ready_minimum < 85 || standard.quality_scoring.publish_ready_minimum > 100 ||
+      !Number.isInteger(standard.visitor_value_scoring.publish_ready_minimum) || standard.visitor_value_scoring.publish_ready_minimum < 80 || standard.visitor_value_scoring.publish_ready_minimum > 100) throw Error("article_standard_unavailable");
   return { profile: LONG_FORM_PROFILE, standard_ref: LONG_FORM_STANDARD_PATH, min, max, target,
     reference_min: references.minimum_verified_references, reference_max: references.maximum_verified_references,
     primary_visual_required: standard.visual_and_data_standard.primary_visual_required,
-    enrichment_types: standard.visual_and_data_standard.accepted_data_enrichment_units };
+    enrichment_types: standard.visual_and_data_standard.accepted_data_enrichment_units,
+    quality_min: standard.quality_scoring.publish_ready_minimum, visitor_value_min: standard.visitor_value_scoring.publish_ready_minimum };
+}
+
+const sourceUrl = value => {
+  try {
+    const u = new URL(typeof value === "string" ? value : value?.url);
+    if (u.protocol !== "https:" || u.username || u.password) return null;
+    u.hash = ""; return u.href;
+  } catch { return null; }
+};
+
+// These are structural gates. Effective factual/rights/media decisions remain independently required.
+export function articleProductionBlockers(payload) {
+  const p = payload, requirements = longFormRequirements(), blockers = [];
+  const length = articleLengthBlocker(p?.body); if (length) blockers.push(length);
+  const sources = Array.isArray(p?.sources) ? p.sources.map(sourceUrl) : [];
+  if (sources.some(v => v === null) || new Set(sources).size !== sources.length ||
+      sources.length < requirements.reference_min || sources.length > requirements.reference_max)
+    blockers.push("article_sources_pending");
+  const layout = articleLayoutError(p);
+  if (layout) blockers.push(layout);
+  else if (!p?.layout) blockers.push("article_layout_required");
+  else {
+    const visual = articleLayoutReleaseBlocker(p); if (visual) blockers.push(visual);
+    if (p.layout.sections.length < 3) blockers.push("article_outline_pending");
+  }
+  return [...new Set(blockers)];
+}
+
+// Scores are an actual human editorial decision, never values supplied by generated content.
+export function articleQualityReviewBlocker({ version, decisions, decisionRefs }) {
+  const review = Array.isArray(decisions) && Array.isArray(decisionRefs) ? decisions.filter(d =>
+    decisionRefs.includes(d.id) && d.scope === "editorial" && d.decision === "approve" &&
+    d.version_id === version?.id && d.content_hash === version?.content_hash) : [];
+  if (review.length !== 1) return "article_quality_review_pending";
+  let note;
+  try { note = JSON.parse(review[0].note); } catch { return "article_quality_review_pending"; }
+  const keys = ["contract_version", "rationale", "quality_score", "visitor_value_score"];
+  if (!note || typeof note !== "object" || Array.isArray(note) || Object.keys(note).length !== keys.length ||
+      !keys.every(k => Object.hasOwn(note, k)) || note.contract_version !== ARTICLE_EDITORIAL_REVIEW ||
+      typeof note.rationale !== "string" || !note.rationale.trim() ||
+      ![note.quality_score, note.visitor_value_score].every(v => Number.isInteger(v) && v >= 0 && v <= 100)) return "article_quality_review_pending";
+  const requirements = longFormRequirements();
+  return note.quality_score < requirements.quality_min || note.visitor_value_score < requirements.visitor_value_min ? "article_quality_threshold_pending" : null;
 }
 
 export const articleWordCount = text => typeof text === "string" ? text.trim().split(/\s+/u).filter(Boolean).length : 0;

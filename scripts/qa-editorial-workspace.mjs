@@ -6,7 +6,7 @@ import path from "node:path";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 import { snapshotHash } from "./lib/ag70d-word-selection-engine.mjs";
-import { syntheticReviewImage, syntheticArticleLayout } from "./lib/editorial-review-test-fixtures.mjs";
+import { syntheticReviewImage, syntheticArticleLayout, syntheticQualifiedArticle, syntheticArticleQualityDecision } from "./lib/editorial-review-test-fixtures.mjs";
 
 // Explicitly synthetic Auth/RPC browser fixture. Does not connect to hosted Supabase or write approvals.
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
@@ -25,10 +25,12 @@ const data = { candidate: { id, kind: "article", external_id: "synthetic-browser
   decisions: [], release_requests: [] };
 const state = () => { const required = data.candidate.kind === "word" ? wordScopes : scopes;
     const pending = currentTasks().filter(t => t.status === "open").length;
-    return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : chosenDecision ? [chosenDecision.scope] : [], reviews_complete: fixtureAllApproved && !pending, pending_revision_tasks: pending }; };
+    return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : chosenDecision ? [chosenDecision.scope] : [],
+      decision_refs: data.decisions.map(d => d.id), reviews_complete: fixtureAllApproved && !pending, pending_revision_tasks: pending }; };
 const receipt = value => ({ ok: true, ...value, public_output_allowed: false, runtime_activation: false });
 const requests = [], errors = [];
 const accessDecisions = [], intakeCommands = [];
+const preparedCopies = new Map(), preparedReceipts = new Map();
 const registrationCommands = [], registrationRecord = withSyntheticMeaning(syntheticWord(1));
 function fakeFetch(url, options) {
   assert(new URL(url).hostname === "synthetic.example.invalid");
@@ -46,13 +48,25 @@ function fakeFetch(url, options) {
         subject_review_policy_ref: "drishvara-editorial-admin-subject-review@1",
         capabilities: [{ kind: "article", scope: "intake" }, { kind: "article", scope: "editorial" }, { kind: "article", scope: "release" }, ...(fixtureAdmin ? [{ kind: "article", scope: "publisher_acceptance" }, ...["intake", "release", ...wordScopes].map(scope => ({ kind: "word", scope, qualification_ref: null }))] : [])] }); break;
       case "list": value = receipt({ items: [{ id, kind: data.candidate.kind, external_id: data.candidate.external_id, version_id: version, content_hash: hash, title: data.version.title, review_state: state() }] }); break;
-      case "open": value = receipt({ ...data, review_state: state(), can_edit: true,
+      case "open": value = preparedCopies.has(command.candidate_id) ? preparedCopies.get(command.candidate_id) : receipt({ ...data, review_state: state(), can_edit: true,
         review_permissions: { can_review: true, can_request_release: true, self_review_exception_required: fixtureAdmin,
           subject_review_exception_scopes: fixtureAdmin && data.candidate.kind === "word" ? ["linguistic", "iast", "textual", "philosophical"] : [] } }); break;
       case "people": value = receipt({ people: [{ email: "synthetic-member@example.invalid", capabilities: [] }], audit_events: accessDecisions }); break;
       case "lookup_person": value = receipt({ person: { id: "synthetic-member", email: command.email, capabilities: [], assignments: [] } }); break;
       case "set_capability": case "set_assignment": accessDecisions.push(command); value = receipt({ event_id: randomUUID() }); break;
-      case "intake": intakeCommands.push(command); value = receipt({ candidate_id: id, version_id: randomUUID(), status: "pending_review" }); break;
+      case "intake": {
+        intakeCommands.push(command);
+        if (command.external_id.startsWith("synthetic-prepared-")) {
+          if (!preparedReceipts.has(command.command_id)) {
+            const saved = receipt({ candidate_id: randomUUID(), version_id: randomUUID(), content_hash: snapshotHash(command.payload) });
+            preparedReceipts.set(command.command_id, saved);
+            preparedCopies.set(saved.candidate_id, receipt({ candidate: { id: saved.candidate_id, kind: "article", external_id: command.external_id },
+              version: { id: saved.version_id, content_hash: saved.content_hash, title: command.title, payload: structuredClone(command.payload) } }));
+          }
+          value = preparedReceipts.get(command.command_id);
+        } else value = receipt({ candidate_id: id, version_id: randomUUID(), status: "pending_review" });
+        break;
+      }
       case "list_revisions": value = receipt({ tasks: currentTasks() }); break;
       case "request_revision": {
         revisionCommands.push(command);
@@ -74,7 +88,8 @@ function fakeFetch(url, options) {
       }
       case "review_batch": case "decision":
         assert.equal(command.content_hash, hash); assert.equal(command.version_id, version); assert.equal(command.candidate_id, id);
-        chosenDecision = { ...command, scope: command.scope || command.scopes[0] }; data.decisions.push({ ...command, actor_id: "synthetic-reviewer" }); value = receipt({ decision_id: randomUUID(), review_state: state() }); break;
+        chosenDecision = { ...command, scope: command.scope || command.scopes[0] };
+        data.decisions.push({ ...chosenDecision, id: randomUUID(), actor_id: "synthetic-reviewer" }); value = receipt({ decision_id: data.decisions.at(-1).id, review_state: state() }); break;
       case "prepare": registrationCommands.push(command); value = receipt({ record: registrationRecord, record_hash: snapshotHash(registrationRecord) }); break;
       case "register": registrationCommands.push(command); value = receipt({ status: "approved_bank_registered", candidate_ref: "synthetic-only@v1", record_hash: snapshotHash(registrationRecord) }); break;
       case "request_release": releaseRequests++; value = receipt({ release_request_id: randomUUID(), status: "pending_existing_publisher_validation" }); break;
@@ -141,6 +156,8 @@ try {
   await page.locator('.review-form select').nth(1).selectOption("approve");
   await page.locator('.review-form [name="correction_required"]').selectOption("no");
   await page.locator('.review-form [name="aspect"][value="editorial"]').check();
+  check("editorial approval requires explicit human-entered scores", await page.locator('[name="quality_score"]').inputValue() === "" && await page.locator('[name="visitor_value_score"]').inputValue() === "");
+  await page.locator('[name="quality_score"]').fill("85"); await page.locator('[name="visitor_value_score"]').fill("80");
   await page.locator('.review-form textarea').nth(0).fill("Synthetic independent browser-test decision only.");
   await page.getByRole("button", { name: "Submit review", exact: true }).click();
   check("empty approval evidence is rejected at the actual form field", chosenDecision === null && await page.locator('.review-form textarea').nth(1).evaluate(e => e.validity.valueMissing));
@@ -152,6 +169,7 @@ try {
   await page.getByRole("button", { name: "Submit review", exact: true }).click();
   await page.waitForFunction(() => document.querySelector(".scope-list")?.textContent.includes("editorial: Approved"));
   check("decision command binds exact version and hash", chosenDecision.content_hash === hash && chosenDecision.version_id === version);
+  check("human-entered scores are saved in the exact-copy decision, never the generated payload", JSON.parse(chosenDecision.note).quality_score === 85 && JSON.parse(chosenDecision.note).visitor_value_score === 80 && !Object.hasOwn(data.version.payload, "quality_score"));
   check("one approval cannot unlock other scopes", await page.locator(".scope-list .complete").count() === 1);
   await page.locator("#tab-publishing").click();
   check("one approval still cannot unlock release", await page.getByRole("button", { name: "Request controlled release", exact: true }).isDisabled());
@@ -278,7 +296,8 @@ try {
   await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
   await page.waitForFunction(() => document.querySelector(".release-readiness")?.textContent.includes("long-form word-count"));
   check("all synthetic review flags cannot release a short Article", await page.getByRole("button", { name: "Request controlled release", exact: true }).isDisabled() && (await page.locator(".release-readiness").innerText()).includes("long-form word-count"));
-  data.version.payload.body = "Synthetic long-form fixture only. ".repeat(400);
+  data.version.payload = syntheticQualifiedArticle();
+  data.decisions = [syntheticArticleQualityDecision(data.version, randomUUID())];
   await page.locator("#refresh").click();
   await page.waitForFunction(() => document.querySelector(".article-word-count")?.textContent.includes("length check passed"));
   await page.locator("#tab-publishing").click();
@@ -431,6 +450,27 @@ try {
   const layoutCorrection = revisionCommands.filter(c => c.action === "submit_revision").at(-1);
   check("human-added images and objects submit as one immutable version with explicit placement", layoutCorrection.payload.media.length === 3 && layoutCorrection.payload.layout.objects.length === 7 && layoutCorrection.payload.layout.objects[1].after_paragraph === 3 && layoutCorrection.payload.layout.objects[2].visual_kind === "infographic");
   check("existing chart data is preserved, no approval fabricated", JSON.stringify(layoutCorrection.payload.layout.objects.find(o => o.type === "bar_chart").values) === "[2,4]" && !Object.hasOwn(layoutCorrection, "approved"));
+  await page.getByRole("button", { name: "Import prepared Articles", exact: true }).click();
+  const importDialog = page.getByRole("dialog", { name: "Import prepared Articles", exact: true });
+  const prepared = [{ action: "intake", command_id: randomUUID(), kind: "article", external_id: "synthetic-prepared-world", expected_version_id: null,
+    title: "Synthetic prepared Article", payload: syntheticQualifiedArticle() }];
+  const pendingBefore = intakeCommands.length, decisionsBefore = data.decisions.length;
+  await importDialog.locator('[type="file"]').setInputFiles({ name: "intake-commands.json", mimeType: "application/json", buffer: Buffer.from(JSON.stringify(prepared)) });
+  await importDialog.locator("table").waitFor();
+  check("prepared intake previews the copy without writes", intakeCommands.length === pendingBefore && (await importDialog.locator("table").innerText()).includes(prepared[0].title));
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 960 });
+    check("prepared-intake dialog fits " + width, await importDialog.evaluate(e => e.scrollWidth <= e.clientWidth && e.getBoundingClientRect().right <= innerWidth));
+    await page.screenshot({ path: path.join(screenshotDir, "prepared-intake-synthetic-" + width + ".png"), fullPage: false });
+  }
+  await importDialog.getByRole("button", { name: "Submit pending copies", exact: true }).click();
+  check("import requires an unchecked, explicit pending-only acknowledgment", intakeCommands.length === pendingBefore && await importDialog.locator('[type="checkbox"]').evaluate(e => e.validity.valueMissing));
+  await importDialog.locator('[type="checkbox"]').check();
+  await importDialog.getByRole("button", { name: "Submit pending copies", exact: true }).click();
+  await page.waitForFunction(() => document.querySelector('dialog[aria-label="Import prepared Articles"] [role="status"]')?.textContent.includes("private copies saved"));
+  check("authenticated import retains command ID and creates no approvals or release", intakeCommands.length === pendingBefore + 1 && intakeCommands.at(-1).command_id === prepared[0].command_id && preparedCopies.size === 1 && data.decisions.length === decisionsBefore && releaseRequests === 1);
+  check("completed import cannot be accidentally resubmitted", await importDialog.getByRole("button", { name: "Submit pending copies", exact: true }).isDisabled());
+  await importDialog.getByRole("button", { name: "Close", exact: true }).click();
   check("consolidated corrections and private preview have no browser exceptions or external requests", errors.length === 0 && requests.length === 0);
   await page.locator("#sign-out").click(); await page.waitForSelector("#login-form");
   check("sign-out clears private UI", await page.locator("#document").count() === 0);

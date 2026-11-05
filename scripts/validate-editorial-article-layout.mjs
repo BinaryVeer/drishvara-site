@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { articleLayoutError, articleLayoutReleaseBlocker, renderReviewedArticle, reviewedArticlePage } from "./lib/editorial-article-layout.mjs";
 import { validateEditorialCommand } from "./lib/editorial-workspace-service.mjs";
-import { syntheticArticleLayout } from "./lib/editorial-review-test-fixtures.mjs";
+import { syntheticArticleLayout, syntheticQualifiedArticle, syntheticArticleQualityDecision } from "./lib/editorial-review-test-fixtures.mjs";
 import { createEditorialArticlePublisher } from "./lib/editorial-article-publisher.mjs";
 let checks = 0;
 const check = (name, fn) => { fn(); checks++; console.log("PASS layout: " + name); };
@@ -70,6 +70,10 @@ const publisher = createEditorialArticlePublisher({ env: { EDITORIAL_GITHUB_TOKE
   throw Error("unexpected mock request");
 } });
 let revalidated = false;
-await publisher({ job: { candidate_id: randomUUID(), version_id: randomUUID(), content_hash: "sha256:" + "0".repeat(64), version: { title: "Synthetic layout only", payload } }, timestamp: "2026-10-30T07:00:00.000Z", revalidate: async () => { revalidated = true; } });
+const releasePayload = clone(), qualified = syntheticQualifiedArticle();
+releasePayload.sources = qualified.sources; releasePayload.layout.sections = qualified.layout.sections;
+const releaseVersion = { id: randomUUID(), content_hash: "sha256:" + "0".repeat(64), title: "Synthetic layout only", payload: releasePayload };
+await publisher({ job: { candidate_id: randomUUID(), version_id: releaseVersion.id, content_hash: releaseVersion.content_hash, version: releaseVersion,
+  decisions: [syntheticArticleQualityDecision(releaseVersion, randomUUID())] }, timestamp: "2026-10-30T07:00:00.000Z", revalidate: async () => { revalidated = true; } });
 check("multiple uploads, page, discovery index and receipt form one atomic commit", () => { assert.equal(tree.length, 5); assert.equal(calls.filter(s => s === "git/blobs").length, 2); assert.equal(calls.filter(s => s === "git/refs/heads/main").length, 1); assert(revalidated); });
 console.log(`Article layout: ${checks} synthetic contract/render/mock-delivery checks passed. No approval or live write occurred.`);

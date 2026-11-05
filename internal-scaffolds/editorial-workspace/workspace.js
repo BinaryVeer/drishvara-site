@@ -12,7 +12,10 @@
       ...(body === undefined ? {} : { headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
     });
     const data = await response.json();
-    if (!response.ok || !data.ok) throw new Error(Array.isArray(data.details) && data.details.length ? data.details.join(" ") : data.code || "editorial_request_denied");
+    if (!response.ok || !data.ok) {
+      const error = new Error(Array.isArray(data.details) && data.details.length ? data.details.join(" ") : data.code || "editorial_request_denied");
+      error.result = data; throw error;
+    }
     return data;
   }
   const command = body => request("command", body);
@@ -34,6 +37,12 @@
     invalid_review_decision: "Check the rationale and evidence references. Approval needs at least one unique, actual evidence reference.",
     editorial_reviews_pending: "Required reviews are still pending.", delivery_not_activated: "Controlled delivery has not been activated.",
     article_long_form_length_pending: "The Article does not meet the existing long-form word-count standard. Submit a corrected version before release.",
+    article_sources_pending: "The Article requires two to five distinct HTTPS source references and the corresponding factual and source-use reviews.",
+    article_outline_pending: "The Article requires at least three positioned sections.",
+    article_quality_review_pending: "An effective editorial decision with recorded quality and visitor-value scores is required for this exact copy.",
+    article_quality_threshold_pending: "The recorded scores do not meet the existing quality and visitor-value thresholds.",
+    invalid_article_intake_batch: "Choose a valid prepared Article batch with one to five distinct desks and unchanged intake command IDs.",
+    article_intake_reconciliation_required: "Import stopped. Some copies may already be saved. Retry the same file without changing its command IDs.",
     invalid_article_layout: "Check object titles, captions, sources, image references and paragraph positions. The changed copy needs a valid complete layout.",
     article_layout_required: "Multiple images require explicit placement in the Article layout.",
     article_visual_enrichment_pending: "Add one primary hero and at least one sourced enrichment object before release. This does not grant content approval.",
@@ -252,6 +261,14 @@
     for (const [v, t] of [["revise", "Return for revision"], ["approve", "Approve checked aspects"], ["reject", "Reject checked aspects"]]) decision.append(new Option(t, v));
     const note = field(form, "Review findings and rationale", node("textarea")); note.name = "note"; note.maxLength = 6000; note.rows = 3;
     note.placeholder = "What you checked, the evidence used, limitations and your decision.";
+    let scores = null;
+    if (data.candidate.kind === "article" && checks.has("editorial")) {
+      const box = node("fieldset"); box.append(node("legend", "Editorial assessment"));
+      const quality = field(box, "Quality score (0–100)", node("input")), value = field(box, "Visitor-value score (0–100)", node("input"));
+      quality.name = "quality_score"; value.name = "visitor_value_score";
+      for (const input of [quality, value]) { input.type = "number"; input.min = "0"; input.max = "100"; input.step = "1"; }
+      form.append(box); scores = { box, quality, value };
+    }
     const refs = field(form, "Evidence references, one per line", node("textarea")); refs.name = "evidence_refs"; refs.rows = 3;
     refs.placeholder = "Source ID plus entry/passage locator, clearance record or exact-copy decision reference";
     const picker = node("select"); picker.setAttribute("aria-label", "Existing source reference"); picker.append(new Option("Choose an existing source", ""));
@@ -283,6 +300,12 @@
       if (!needed) { subject.ack.checked = false; subject.reason.value = ""; }
       if (self) { self.box.hidden = revise; self.ack.required = !revise; self.reason.required = !revise; }
       submit.textContent = revise ? "Save correction request and edit" : "Submit review";
+      if (scores) {
+        const needed = !revise && decision.value === "approve" && checks.get("editorial").checked;
+        scores.box.hidden = !needed; scores.quality.required = needed; scores.value.required = needed;
+        scores.quality.min = String(needed ? data.article_length?.quality_min ?? 85 : 0);
+        scores.value.min = String(needed ? data.article_length?.visitor_value_min ?? 80 : 0);
+      }
     }
     form.addEventListener("change", sync);
     form.addEventListener("input", () => { note.setCustomValidity(""); refs.setCustomValidity(""); }); sync();
@@ -307,10 +330,14 @@
         evidence.length > 50 || evidence.some(v => v.length > 500) ? "Use up to 50 references, each at most 500 characters." :
         new Set(evidence).size !== evidence.length ? "Remove duplicate evidence references." : "");
       if (!form.reportValidity()) return;
+      const reviewNote = scores && chosen.includes("editorial") && decision.value === "approve" ? JSON.stringify({
+        contract_version: "drishvara.article-editorial-review.v1", rationale: note.value.trim(),
+        quality_score: Number(scores.quality.value), visitor_value_score: Number(scores.value.value) }) : note.value.trim();
+      if (reviewNote.length > 6000) { note.setCustomValidity("Shorten the rationale so the complete review fits 6,000 characters."); form.reportValidity(); return; }
       if (!confirm("Record one review for the checked aspects of this exact copy? Unchecked aspects remain unchanged.")) return;
       pendingCommand ??= { action: "review_batch", command_id: crypto.randomUUID(), candidate_id: data.candidate.id,
         version_id: data.version.id, content_hash: data.version.content_hash, scopes: chosen, decision: decision.value,
-        note: note.value.trim(), evidence_refs: evidence,
+        note: reviewNote, evidence_refs: evidence,
         ...(self ? { admin_exception: { policy_ref: session.self_review_policy_ref, reason: self.reason.value.trim(), acknowledged: self.ack.checked } } : {}),
         ...(needsSubject() ? { subject_review_exception: { policy_ref: session.subject_review_policy_ref, reason: subject.reason.value.trim(), acknowledged: subject.ack.checked } } : {}) };
       await command(pendingCommand); await refresh(); message("Review recorded for the checked aspects. Acceptance and publication remain separate.");
@@ -725,6 +752,50 @@
       });
     });
   }
+  function preparedArticleImport() {
+    const dialog = node("dialog"); dialog.setAttribute("aria-label", "Import prepared Articles");
+    const form = node("form"); form.append(node("h2", "Prepared Articles"));
+    const file = field(form, "Prepared intake file", node("input")); file.type = "file"; file.accept = ".json,application/json";
+    const preview = node("div"), result = node("div"); result.setAttribute("role", "status");
+    const ack = node("input"); ack.type = "checkbox"; ack.required = true;
+    const label = node("label", "Submit these copies for review, without approval or publication.", "checkbox-label"); label.prepend(ack);
+    const close = node("button", "Close"); close.type = "button"; close.addEventListener("click", () => dialog.close());
+    const submit = node("button", "Submit pending copies", "primary"); submit.type = "submit"; submit.disabled = true;
+    form.append(preview, label, result, close, submit);
+    let commands = null, completed = false;
+    file.addEventListener("change", async () => {
+      commands = null; completed = false; submit.disabled = true; ack.checked = false; preview.replaceChildren(); result.replaceChildren();
+      try {
+        const chosen = file.files[0]; if (!chosen || chosen.size > 240000) throw Error("Choose a prepared JSON file up to 240 KB.");
+        const parsed = JSON.parse(await chosen.text());
+        if (!Array.isArray(parsed) || !parsed.length || parsed.length > 5 || parsed.some(c => c?.action !== "intake" || c.kind !== "article"))
+          throw Error("Choose the prepared Article intake-commands.json file.");
+        const table = node("table"), head = node("tr");
+        for (const text of ["Article", "Desk", "Body words", "Sources", "Images"]) head.append(node("th", text));
+        const thead = node("thead"); thead.append(head); table.append(thead); const body = node("tbody");
+        for (const c of parsed) {
+          const row = node("tr"), p = c.payload ?? {};
+          for (const text of [c.title, p.desk, typeof p.body === "string" ? p.body.trim().split(/\s+/).filter(Boolean).length : 0,
+            Array.isArray(p.sources) ? p.sources.length : 0, Array.isArray(p.media) ? p.media.length : 0]) row.append(node("td", String(text ?? "")));
+          body.append(row);
+        }
+        table.append(body); preview.append(table); commands = parsed; submit.disabled = false;
+      } catch (error) { result.textContent = error.message; }
+    });
+    form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
+      if (!commands || completed || !form.reportValidity()) return;
+      try {
+        const receipt = await request("article_intake", { commands });
+        completed = true; result.textContent = receipt.receipts.length + " private copies saved. No approvals or publication recorded.";
+        file.disabled = true; ack.disabled = true; await refresh();
+      } catch (error) {
+        const receipt = error.result;
+        result.textContent = friendly(error.message) + (Array.isArray(receipt?.receipts) ? " Confirmed saved copies: " + receipt.receipts.length + "." : "");
+        if (receipt?.uncertain_command_id) result.append(node("p", "Reconcile command: " + receipt.uncertain_command_id));
+      }
+    }).then(() => { submit.disabled = completed || !commands; }); });
+    dialog.append(form); dialog.addEventListener("close", () => dialog.remove()); document.body.append(dialog); dialog.showModal();
+  }
   $("kind-filter").addEventListener("change", renderQueue);
   $("refresh").addEventListener("click", () => busy($("refresh"), refresh));
   $("sign-out").addEventListener("click", () => busy($("sign-out"), async () => { await request("logout", {}); location.assign(endpoint); }));
@@ -749,6 +820,10 @@
       session = await request("session"); $("session-label").textContent = "Authenticated editorial session";
       $("tab-people").hidden = !session.is_administrator;
       $("intake-open").hidden = !session.capabilities.some(g => g.scope === "intake");
+      if (granted("article", "intake")) {
+        const prepared = node("button", "Import prepared Articles"); prepared.type = "button";
+        prepared.addEventListener("click", preparedArticleImport); $("intake-open").after(prepared);
+      }
       const kind = $("intake-form").elements.kind;
       for (const option of kind.options) option.disabled = !granted(option.value, "intake");
       kind.value = [...kind.options].find(o => !o.disabled)?.value ?? "word";
