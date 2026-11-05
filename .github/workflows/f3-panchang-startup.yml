@@ -1,0 +1,43 @@
+name: F3 Panchang startup release comparison
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/js/sup02-panchang-server-controller.js'
+      - 'panchang.html'
+      - 'tests/f3-panchang-startup-browser.mjs'
+      - '.github/workflows/f3-panchang-startup.yml'
+permissions:
+  contents: read
+jobs:
+  startup-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check source and frontend invariants
+        run: |
+          node --check assets/js/sup02-panchang-server-controller.js
+          node scripts/validate-drishvara-frontend-migration.mjs
+          npm run build
+      - name: Install isolated headless-browser dependency
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright-core@1.56.1
+      - name: Start candidate static server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/f3-static-server.log 2>&1 &
+          for i in 1 2 3 4 5; do curl -fsS http://127.0.0.1:8765/panchang.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/f3-static-server.log
+          exit 1
+      - name: Browser comparison using approved catalogue
+        run: node tests/f3-panchang-startup-browser.mjs
+      - name: Preserve benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f3-panchang-startup
+          path: f3-startup-evidence/
+          if-no-files-found: warn
+          retention-days: 7
