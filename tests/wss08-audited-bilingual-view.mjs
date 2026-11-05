@@ -46,10 +46,14 @@ for(const language of ["en","hi"]){
  }
  console.log("PASS WSS08 audited bilingual private view",language);
 }
-const minute=auditNatalPrecisionCandidate({...setup,birthTime:"10:05",declaredPrecisionSeconds:1});
-const minuteView=auditedBilingualCandidateView({report,precisionAudit:minute});
+const minuteSetup={...setup,birthTime:"10:05"};
+const minuteReport=assembleKundaliReportCandidate(minuteSetup);
+const minute=auditNatalPrecisionCandidate({...minuteSetup,declaredPrecisionSeconds:1});
+const minuteView=auditedBilingualCandidateView({report:minuteReport,precisionAudit:minute});
 assert.equal(minuteView.birth.precisionSeconds,60);
 assert.equal(minuteView.quality.effectiveBirthPrecisionSeconds,60);
+assert.throws(()=>auditedBilingualCandidateView({report,precisionAudit:minute}),
+ /Precision audit does not match/, "Minute clock must not qualify a different second-precision birth");
 console.log("PASS WSS08 minute entry cannot masquerade as second resolution");
 
 const ms0=Date.parse("2026-11-05T00:00:00Z");
@@ -81,6 +85,20 @@ console.log("PASS WSS08 rising-sign uncertainty hides D1 and unsupported life-do
 assert.throws(()=>auditedBilingualCandidateView({report}),RangeError);
 assert.throws(()=>auditedBilingualCandidateView({report,precisionAudit:{...audit,ready_for_public_chart:true}}),RangeError);
 assert.throws(()=>auditedBilingualCandidateView({report,precisionAudit:audit,language:"fr"}),RangeError);
+const changedPlace=assembleKundaliReportCandidate({...setup,
+ birthLatitude:26.21,birthLongitude:91.73});
+assert.throws(()=>auditedBilingualCandidateView({report:changedPlace,precisionAudit:audit}),
+ /Precision audit does not match/,"Different birthplace cannot reuse an unrelated audit");
+const changedTime=assembleKundaliReportCandidate({...setup,birthTime:"10:06:23"});
+assert.throws(()=>auditedBilingualCandidateView({report:changedTime,precisionAudit:audit}),
+ /Precision audit does not match/,"Different birth moment cannot reuse an unrelated audit");
+assert.throws(()=>auditedBilingualCandidateView({
+ report,precisionAudit:{...audit,audit_basis:null}
+}),/Precision audit does not match/,"A missing provenance cannot qualify a chart");
+assert.throws(()=>auditedBilingualCandidateView({
+ report,precisionAudit:{...audit,audit_basis:{...audit.audit_basis,birth_timezone:"Etc/UTC"}}
+}),/Precision audit does not match/,"Runtime timezone drift cannot be quietly accepted");
+console.log("PASS WSS08 audit/report bind to birth UTC, timezone, coordinate and declared precision");
 const source=fs.readFileSync("scripts/lib/wss08-audited-bilingual-view.mjs","utf8");
 assert.doesNotMatch(source,/\b(?:fetch|localStorage|sessionStorage|indexedDB|sendBeacon)\s*\(/);
 console.log("PASS WSS08 mandatory audit, privacy and no exact dasha/date-window leakage");

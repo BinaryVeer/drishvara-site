@@ -41,19 +41,38 @@ const withheld=(language,reason)=>({
  state:"withheld_due_to_wss08_precision",rows:[],lagna:null,
  notice:NOTICE[language].withheld+" ("+reason+")"
 });
-function assertAudit(audit){
+function assertAudit(audit,report){
  if(!audit||audit.status!==WSS08_PRECISION_STATE||
     audit.ready_for_public_chart!==false||
     audit.ready_for_dasha_dates!==false||
     audit.ready_for_public_predictions!==false)
     throw new RangeError("A fail-closed WSS08 precision audit is mandatory");
+ // A precision audit for *another birth instant or place* must never
+ // authorize even a provisional sign, Navamsa, Dasha or chart label.
+ const basis=audit.audit_basis, chart=report?.basis;
+ if(!basis||!chart||!chart.geographic_basis||
+    !Number.isFinite(basis.birth_latitude)||
+    !Number.isFinite(basis.birth_longitude)||
+    !Number.isInteger(basis.birth_time_precision_seconds)||
+    basis.birth_time_precision_seconds<1||
+    basis.birth_instant_utc!==chart.birth_instant_utc||
+    basis.birth_timezone!==chart.timezone||
+    basis.birth_latitude!==chart.geographic_basis.latitude||
+    basis.birth_longitude!==chart.geographic_basis.longitude||
+    audit.utc_start!==chart.birth_instant_utc||
+    audit.birth_time_span_seconds!==basis.birth_time_precision_seconds)
+   throw new RangeError("Precision audit does not match the displayed birth-chart basis");
+ if(!Array.isArray(audit.grahas)||audit.grahas.length!==9||
+    !Number.isInteger(audit.samples_checked)||audit.samples_checked<9||
+    !["D1","D9","D10"].every(k=>audit[k]&&typeof audit[k].state==="string"))
+   throw new RangeError("Incomplete chart precision audit");
 }
 export function auditedBilingualCandidateView({
  report,precisionAudit,displayName="",language="en",
  nameSignConsent=false,confirmedSyllableKey=null
 }={}){
  if(language!=="en"&&language!=="hi")throw new RangeError("Only en and hi supported");
- assertAudit(precisionAudit);
+ assertAudit(precisionAudit,report);
  const t=NOTICE[language];
  const base=buildBilingualCandidateView({
   report,displayName,language,nameSignConsent,confirmedSyllableKey
