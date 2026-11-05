@@ -129,6 +129,28 @@ try {
           }
         }
         await page.screenshot({path:path.join(OUT,label+'.png'),fullPage:true,animations:'disabled',timeout:25000});
+        if (route.slug!=='sports' && vp.width<=390) {
+          const hi=page.locator('[data-dv2-language-choice="hi"]').first();
+          const en=page.locator('[data-dv2-language-choice="en"]').first();
+          if(await hi.count()){
+            await hi.click();
+            await page.waitForTimeout(550);
+            const state=await hi.getAttribute('aria-pressed');
+            if(state!=='true') fail(label,'Hindi selection did not activate');
+            const hindiGeometry=await page.evaluate(()=>{
+              const outliers=[];
+              for(const el of document.querySelectorAll('.d-panel,.d-selection-panel,.d-reflection-grid,.d-page-content')){
+                const b=el.getBoundingClientRect(),style=getComputedStyle(el);
+                if(style.display!=='none' && b.width>0 && (b.left<-2||b.right>innerWidth+2)) outliers.push(el.className);
+              }
+              return {documentWidth:document.documentElement.scrollWidth,viewport:innerWidth,outliers};
+            });
+            if(hindiGeometry.documentWidth>vp.width+3 || hindiGeometry.outliers.length)
+              fail(label,'Hindi text produces off-screen overflow '+JSON.stringify(hindiGeometry));
+            await page.screenshot({path:path.join(OUT,label+'-hi.png'),fullPage:true,animations:'disabled',timeout:25000});
+            if(await en.count()) await en.click();
+          } else fail(label,'Hindi language control missing');
+        }
         if(jsErrors.length) warn(label,'page errors: '+jsErrors.slice(0,3).join(' | '));
       } catch(e) {
         fail(label,String(e?.message||e).slice(0,600));
