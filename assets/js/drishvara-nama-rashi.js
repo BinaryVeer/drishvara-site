@@ -152,7 +152,7 @@
     choice.id="nama-rashi-sound";choice.setAttribute("aria-label","Confirm traditional starting syllable");
     confirmLabel.append(choice);
     const confirmNote=el("p","r-nama-note");
-    confirmation.append(confirmLabel,choice,confirmNote);
+    confirmation.append(confirmLabel,confirmNote);
     const result=el("div","r-nama-result");
     result.id="nama-rashi-result";result.setAttribute("aria-live","polite");
     const basis=el("p","r-nama-note");
