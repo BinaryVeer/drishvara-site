@@ -1,0 +1,35 @@
+name: WSS07 Governed 3266 Birthplace Catalog Adapter
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss07-approved-birthplace-catalog.mjs'
+      - 'tests/wss07-approved-birthplace-catalog.mjs'
+      - 'data/quality/jyotisha/wss07-approved-place-catalog-audit-20261105.json'
+      - '.github/workflows/wss07-approved-places.yml'
+permissions:
+  contents: read
+jobs:
+  approved-places:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Test 3266-sized source-gated place resolver
+        run: |
+          node --check scripts/lib/wss07-approved-birthplace-catalog.mjs
+          node tests/wss07-approved-birthplace-catalog.mjs
+          node tests/wss02-birth-timezone.mjs
+          node tests/wss08-natal-precision.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Prevent source bypass or public runtime modifications
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss07-catalog-files
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|assets/css/|supabase/|package.json|package-lock.json)' /tmp/wss07-catalog-files; then
+            echo 'Governed catalog adapter cannot alter existing public geographies'
+            exit 1
+          fi
