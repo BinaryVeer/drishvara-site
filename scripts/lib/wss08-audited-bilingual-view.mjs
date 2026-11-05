@@ -98,7 +98,7 @@ export function auditedBilingualCandidateView({
  });
  const moonBasisSafe=Boolean(precisionAudit.janma_rashi&&precisionAudit.janma_nakshatra);
  view.birth.moonBasisSafe=moonBasisSafe;
- view.transit=moonBasisSafe?base.transit:{
+ view.transit=moonBasisSafe?{...base.transit,dasha:null}:{
    ...base.transit,moonSign:null,dasha:null,grahas:[],withheldNotice:t.moon
  };
  // Retain only safe ordered Lords and nominal total years, never date stamps.
