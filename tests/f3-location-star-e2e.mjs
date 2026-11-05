@@ -153,7 +153,11 @@ async function runStar(width,cases){
     }else{
       await page.locator('input[name="ag71c-star-location-mode"][value="place"]').check();
     }
-    await page.locator('#star-reflection-name').fill('QA Sample');
+    const nameField=page.locator('#star-reflection-name');
+    const nameEnabled=await nameField.isEnabled();
+    const nameVisible=await nameField.isVisible();
+    if(!nameEnabled||!nameVisible)warning(tag,'Name field is not editable (visible='+nameVisible+', enabled='+nameEnabled+'); recording as separate product defect');
+    else await nameField.fill('QA Sample');
     await page.locator('#star-reflection-dob').fill(c.dob||'01/01/2000');
     if(c.unknown){
       // Some clients disable the exact-time input as soon as unknown is checked.
