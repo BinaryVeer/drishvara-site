@@ -170,6 +170,26 @@ check("existing public location, observance and research scope remains governed"
   assert(research.target_records.every(r => r.approval_state.production_readiness === "not_ready"));
 });
 
+check("F3 Panchang daily calculation is independent of reference catalogue latency", () => {
+  const controller = read("assets/js/sup02-panchang-server-controller.js");
+  const method = controller.slice(
+    controller.indexOf("async function applySelection(options)"),
+    controller.indexOf('window.addEventListener(\n    "change"', controller.indexOf("async function applySelection(options)"))
+  );
+  const references = controller.slice(
+    controller.indexOf("function loadReferenceData()"),
+    controller.indexOf("async function callRuntime(request, signal)")
+  );
+  assert(method.includes("loadReferenceData().then(function (reference)"));
+  assert(!method.includes("await loadReferenceData("));
+  assert(method.includes("var response = await callRuntime(request, state.activeAbort.signal);"));
+  assert(method.indexOf("loadReferenceData().then(") < method.indexOf("await callRuntime("));
+  assert(references.includes("referencePromise = Promise.all(["));
+  assert(references.includes("state.approvedLocations = values[1]"));
+  assert(references.includes("renderApprovedLocationSelector(values[1].records)"));
+  assert(read("panchang.html").includes("sup02-panchang-server-controller.js?v=20261105-parallel-startup"));
+});
+
 if (process.argv.includes("--check-preservation")) {
   const protectedFiles = ["assets/js/sup02-panchang-server-controller.js", "vercel.json", "assets/logo/logo.png",
     "data/homepage-ui.json", "data/article-index.json",
