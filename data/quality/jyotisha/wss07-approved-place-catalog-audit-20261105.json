@@ -1,0 +1,43 @@
+{
+  "id": "WSS07_EXISTING_GOVERNED_3266_BIRTHPLACE_RESOLVER",
+  "checked_on": "2026-11-05",
+  "source": "Drishvara existing Supabase public.drishvara_panchang_locations",
+  "project_reference": "pajlabwwszmhjhabxprf",
+  "active_catalog_version": "20261026",
+  "live_counts": {
+    "rows": 3266,
+    "missing_timezones": 0,
+    "missing_coordinates": 0,
+    "explicit_public_selection_approved": 3266
+  },
+  "sampled_verified_ids": [
+    {
+      "selector": "lgd-village-254106",
+      "label": "Bedauliya — village, Aurangabad, Bihar, India"
+    },
+    {
+      "selector": "bhawanathpur-township-jharkhand-india",
+      "label": "Bhawanathpur Township — Durga Mandir reference, Garhwa, Jharkhand, India"
+    },
+    {
+      "selector": "lgd-district-525",
+      "label": "Bengaluru / Bangalore — Bengaluru Urban headquarters, Karnataka, India"
+    }
+  ],
+  "existing_public_location_loader": "assets/js/drishvara-v2-location.js: DrishvaraV2Location.loadApprovedLocations",
+  "candidate_adapter": "scripts/lib/wss07-approved-birthplace-catalog.mjs",
+  "status": "integration_contract_validated_qa_not_public_kundali",
+  "important_constraints": [
+    "Catalogue has 3,266 approved entries; avoid copying a four-city fixed selector into production Kundali.",
+    "Individual record must carry all six approval fields, valid IANA timezone and exact curated coordinates; no name-only guessing.",
+    "Some global latitudes exceed WSS03 currently supported ±65°. Keep birthplace search available, but withhold Lagna in those geographic cases.",
+    "Do not transmit birth date, time or name when fetching approved location catalogue.",
+    "Place record coordinates are locality/city reference points; user must be able to review or correct precision before asserting exact household birth coordinates.",
+    "Historical timezone rules still use platform tzdb, not reproducibly pinned and audited for all locations.",
+    "Existing public location loader uses Supabase `action:locations` then five-record static fallback; WSS07 must never treat the fallback as a complete 3,266-place production catalogue.",
+    "No public Kundali is released until all WSS08 accuracy, consent, security and browser gates pass."
+  ],
+  "activation": false,
+  "live_schema_modified": false,
+  "existing_panchang_modified": false
+}
