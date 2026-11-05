@@ -52,7 +52,7 @@ for (const page of contracts) {
   });
   check(page.path + " loads one unchanged runtime and its scoped entry in order", () => {
     const scripts = [...html.matchAll(/<script src="assets\/js\/([^"?]+)\.js(?:\?v=[^"]+)?"/g)].map(m => m[1]);
-    assert.deepEqual(scripts, [...scriptAllowlist, "drishvara-v2-" + page.entry, ...(page.path === "panchang.html" ? ["drishvara-calendar-view"] : []), "drishvara-dedicated-pages"]);
+    assert.deepEqual(scripts, [...scriptAllowlist, "drishvara-v2-" + page.entry, ...(page.path === "panchang.html" ? ["drishvara-calendar-view"] : []), "drishvara-dedicated-pages", ...(page.path === "what-stars-say.html" ? ["drishvara-nama-rashi"] : [])]);
     assert(!/<script(?! src=)/.test(html));
   });
   check(page.path + " preserves section ownership, language and semantic navigation", () => {
@@ -97,6 +97,23 @@ check("Panchang retains all four annual-book page buttons", () => {
   const html = read("panchang.html");
   assert.deepEqual([...html.matchAll(/data-ag74i-book-page-button="(\d)"/g)].map(m => m[1]), ["1", "2", "3", "4"]);
 });
+check("F3 name-sign resolver remains consent-first, source-limited and isolated from birth runtime", () => {
+  const source = read("assets/js/drishvara-nama-rashi.js");
+  const html = read("what-stars-say.html");
+  const register = JSON.parse(read("data/methodology/star-reflection/f3-nama-rashi-source-register-v1.json"));
+  assert(!/\b(?:fetch|localStorage|sessionStorage|indexedDB|sendBeacon)\s*\(/.test(source));
+  assert(source.includes("const RECORDS = Object.freeze(NAKSHATRAS.flatMap"));
+  assert(source.includes("RECORDS.length !== 108"));
+  assert(source.includes("const consent=el(\"input\")"));
+  assert(source.includes("if(!consent.checked)"));
+  assert(source.includes("state:candidates.length?\"confirm_sound\":\"manual_required\""));
+  assert(html.includes("drishvara-nama-rashi.js?v=20261105-nama-rashi"));
+  assert(!read("panchang.html").includes("drishvara-nama-rashi.js"));
+  assert(!read("sports.html").includes("drishvara-nama-rashi.js"));
+  assert(register.primary_technical_basis.total_padas === 108);
+  assert(register.variants_and_exclusions.length >= 4);
+});
+
 check("Star retains the quarantinable legacy shell and exact result action", () => {
   const html = read("what-stars-say.html");
   assert(html.includes('data-ag71d-place-select-shell="star-reflection"'));
