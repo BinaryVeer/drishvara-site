@@ -1,0 +1,104 @@
+{
+  "id": "WSS08_PRIVATE_PERSONAL_CHART_SECURITY_REVIEW_V1",
+  "date_utc": "2026-11-05",
+  "module": "What Stars Say / personalised Kundali",
+  "state": "candidate_encrypted_vault_NOT_DEPLOYED",
+  "baseline_reality": {
+    "live_subscriber_profiles_table": "public.subscriber_profiles",
+    "live_profile_row_count_at_review": 0,
+    "existing_plaintext_columns": [
+      "full_name",
+      "date_of_birth",
+      "birth_time",
+      "birth_place"
+    ],
+    "existing_RLS": "owner-specific SELECT INSERT UPDATE; deletion policy absent",
+    "live_schema_modified_by_this_change": false,
+    "birth_saved_live_by_new_module": false,
+    "client_network_uploads_by_new_module": false
+  },
+  "encryption_candidate": {
+    "cipher": "AES-256-GCM",
+    "PBKDF2": "HMAC SHA-256",
+    "iterations": 600000,
+    "salt_bytes": 16,
+    "nonce_bytes": 12,
+    "source": "window.crypto.getRandomValues and crypto.subtle",
+    "passphrase_minimum_code_units": 14,
+    "keys_written_to_database": false,
+    "plain_birth_payload_written_to_database": false,
+    "passphrase_written_to_database": false,
+    "per_record_random_salt_nonce": true,
+    "associated_authenticated_data": "Drishvara|WSS08|chart-vault|v1",
+    "transport": "Supabase HTTPS Auth owner RLS only after security approval",
+    "key_recovery": "none; passphrase loss makes saved chart permanently unreadable"
+  },
+  "opt_ins": {
+    "calculate_without_account": true,
+    "optional_nama_rashi_consent_separate": true,
+    "profile_save_consent_separate_and_unchecked": true,
+    "profile_delete_requires_explicit_confirmation": true,
+    "anonymous_account_cannot_save": true,
+    "language": [
+      "en",
+      "hi"
+    ]
+  },
+  "threats": [
+    {
+      "threat": "Malicious first-party JS / XSS steals passphrase during use",
+      "status": "unmitigated",
+      "release_gate": "independently reviewed strict CSP, dependency pinning, XSS audit; encryption alone insufficient"
+    },
+    {
+      "threat": "Wrong-user read (BOLA/IDOR) or wrong-user deletion",
+      "status": "mocked_only",
+      "release_gate": "real two-user Supabase staging RLS tests across SELECT INSERT DELETE"
+    },
+    {
+      "threat": "Lost vault passphrase",
+      "status": "inherent",
+      "release_gate": "explicit bilingual no-recovery warning, export and deletion UX"
+    },
+    {
+      "threat": "Plaintext personal data inadvertently logged",
+      "status": "pure_encryption_tested",
+      "release_gate": "network/analytics/audit logs verified in both languages"
+    },
+    {
+      "threat": "Browser execution or device compromise",
+      "status": "inherent",
+      "release_gate": "privacy notice and session clear controls"
+    },
+    {
+      "threat": "Existing subscriber_profiles has plaintext birth columns",
+      "status": "unresolved_existing_design",
+      "release_gate": "explicit policy: no full Kundali birth storage in these fields; review legacy data access and deletion"
+    },
+    {
+      "threat": "Account deletion retains backups",
+      "status": "requires_retention_review",
+      "release_gate": "backup/snapshot retention and deletion confirmation policy"
+    },
+    {
+      "threat": "Name-sign consent changes",
+      "status": "independent_local_consent",
+      "release_gate": "consent withdrawal must clear on-screen Nāma Rāśi and not mutate astronomical record"
+    }
+  ],
+  "SQL_proposal": "data/methodology/jyotisha/wss08-private-chart-vault-schema-proposal.sql.txt",
+  "candidate_modules": [
+    "scripts/lib/wss08-consented-chart-crypto.mjs",
+    "scripts/lib/wss08-consented-vault-provider.mjs"
+  ],
+  "unreleased_gates": [
+    "Independent security review",
+    "Real staging database migration and two-user RLS audit",
+    "User-tested password recovery warning and export/delete",
+    "CSP and Auth token/session validation",
+    "Consent record governance and app legal/privacy policy update",
+    "Full WSS08 chart release gates"
+  ],
+  "public_chart_storage_enabled": false,
+  "public_kundali_enabled": false
+}

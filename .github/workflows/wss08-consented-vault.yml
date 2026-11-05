@@ -1,0 +1,46 @@
+name: WSS08 Consented Encrypted Subscriber Chart Contract
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss08-consented-chart-crypto.mjs'
+      - 'scripts/lib/wss08-consented-vault-provider.mjs'
+      - 'tests/wss08-consented-chart-vault.mjs'
+      - 'data/methodology/jyotisha/wss08-private-chart-vault-schema-proposal.sql.txt'
+      - 'data/quality/jyotisha/wss08-private-profile-threat-model-v1.json'
+      - '.github/workflows/wss08-consented-vault.yml'
+permissions:
+  contents: read
+jobs:
+  private-vault-crypto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install existing locked astronomy only
+        run: npm ci --ignore-scripts
+      - name: Verify encryption and access-contract syntax
+        run: |
+          node --check scripts/lib/wss08-consented-chart-crypto.mjs
+          node --check scripts/lib/wss08-consented-vault-provider.mjs
+          node --check tests/wss08-consented-chart-vault.mjs
+      - name: Test encrypted profile, owner-only mock CRUD, tamper and consent
+        run: node tests/wss08-consented-chart-vault.mjs
+      - name: Ensure source astronomy, 3266 places and public frontend untouched
+        run: |
+          node tests/wss07-approved-birthplace-catalog.mjs
+          node tests/wss08-audited-bilingual-view.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Refuse deployment or schema changes without independent review
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss08-chart-vault-files
+          if grep -E '^(index.html|what-stars-say.html|assets/js/|assets/css/|supabase/|package.json|package-lock.json|vercel.json)' /tmp/wss08-chart-vault-files; then
+            echo 'WSS08 candidate encryption cannot modify live database, browser or release configuration'
+            exit 1
+          fi
+          test ! -e supabase/migrations/wss08_private_chart_vault.sql
+          grep -q 'DO NOT APPLY TO LIVE SUPABASE YET' data/methodology/jyotisha/wss08-private-chart-vault-schema-proposal.sql.txt
