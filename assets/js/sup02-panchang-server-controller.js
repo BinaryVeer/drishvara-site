@@ -2688,6 +2688,9 @@
     lastCommittedRequest: null,
     pendingInputDirty: false
   };
+  // Approved reference assets are shared by date changes, not tied to a
+  // particular calculation's AbortController.
+  var referencePromise = null;
 
   function byId(id) {
     return document.getElementById(id);
@@ -3447,36 +3450,44 @@
     }
   }
 
-  async function loadReferenceData(signal) {
+  function loadReferenceData() {
     if (state.annualCalendar && state.approvedLocations) {
-      return {
+      return Promise.resolve({
         calendar: state.annualCalendar,
         locations: state.approvedLocations
-      };
+      });
     }
 
-    var values = await Promise.all([
-      fetch(ANNUAL_PATH, { cache: "no-store", signal: signal }).then(
-        function (response) {
-          if (!response.ok) throw new Error("Annual book unavailable");
-          return response.json();
+    // Only a complete, governed reference payload may populate either UI
+    // surface. A date-change cancellation must not abort the shared catalogue.
+    if (!referencePromise) {
+      referencePromise = Promise.all([
+        fetch(ANNUAL_PATH, { cache: "no-store" }).then(
+          function (response) {
+            if (!response.ok) throw new Error("Annual book unavailable");
+            return response.json();
+          }
+        ),
+        window.DrishvaraV2Location.loadApprovedLocationPayload()
+      ]).then(function (values) {
+        if (
+          !values[1] ||
+          values[1].record_count !== values[1].records.length
+        ) {
+          throw new Error("Approved-location projection count mismatch");
         }
-      ),
-      window.DrishvaraV2Location.loadApprovedLocationPayload()
-    ]);
 
-    if (
-      !values[1] ||
-      values[1].record_count !== values[1].records.length
-    ) {
-      throw new Error("Approved-location projection count mismatch");
+        state.annualCalendar = values[0];
+        state.approvedLocations = values[1];
+        renderApprovedLocationSelector(values[1].records);
+        return { calendar: values[0], locations: values[1] };
+      }).catch(function (error) {
+        // A later user action may retry a failed reference fetch.
+        referencePromise = null;
+        throw error;
+      });
     }
-
-    state.annualCalendar = values[0];
-    state.approvedLocations = values[1];
-    renderApprovedLocationSelector(values[1].records);
-
-    return { calendar: values[0], locations: values[1] };
+    return referencePromise;
   }
 
   async function callRuntime(request, signal) {
@@ -3617,9 +3628,17 @@
     );
 
     try {
-      var reference = await loadReferenceData(state.activeAbort.signal);
-      if (token !== state.requestToken) return false;
-      renderBook(reference.calendar, request.civil_date);
+      // Daily results are authorized by the governed server response, not by
+      // downloading every searchable location or the separate annual book.
+      // Load references concurrently; they populate only their own UI.
+      loadReferenceData().then(function (reference) {
+        renderBook(reference.calendar, state.dateKey);
+      }).catch(function () {
+        setText(
+          "ag74o-book-status",
+          "Approved annual reference unavailable. Daily Panchang remains independently governed."
+        );
+      });
 
       var response = await callRuntime(request, state.activeAbort.signal);
       if (token !== state.requestToken) return false;
