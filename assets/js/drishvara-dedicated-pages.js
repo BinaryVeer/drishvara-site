@@ -191,6 +191,18 @@
  function buildReflection(){
   const card=$('[data-drishvara-v2-reflect-card="true"]'), insight=$('.d-reflection-insight'), panel=$('[data-ag71e-preview-panel="star-reflection"]'), grid=$('[data-ag71e-preview-grid="star-reflection"]');if(!card||!insight||!panel||!grid)return;
   const toggle=$('.dv2-language-toggle');if(toggle)card.prepend(toggle);
+  const sessionName=$('#star-reflection-name');
+  if(sessionName){
+   const nameLabel=make('label','r-name-label');
+   nameLabel.htmlFor=sessionName.id;
+   nameLabel.append(text('Your name (optional)','आपका नाम (वैकल्पिक)'));
+   sessionName.before(nameLabel);nameLabel.append(sessionName);
+   const nameNote=make('p','r-name-privacy');
+   nameNote.id='star-name-privacy';
+   nameNote.append(text('Used only to address your on-screen reflection; not sent, saved, or used in the astronomical calculation.','केवल इस पृष्ठ पर आपके चिंतन को संबोधित करने के लिए; न भेजा जाता है, न सहेजा जाता है, न खगोलीय गणना में प्रयुक्त होता है।'));
+   nameLabel.after(nameNote);
+   sessionName.setAttribute('aria-describedby','star-name-privacy');
+  }
   const dob=$('#star-reflection-dob');if(dob){const field=make('label','r-dob-label');field.htmlFor=dob.id;field.append(text('Date of Birth','जन्म तिथि'));dob.before(field);field.append(dob);}
   const intro=make('div','r-reflection-reading');intro.setAttribute('aria-live','polite');insight.querySelector('h2').after(intro);
   const resultDetails=make('details','r-result-basis');resultDetails.append(text('Calculation basis and source details','गणना आधार और स्रोत विवरण','summary'));panel.before(resultDetails);resultDetails.append(panel);
@@ -203,12 +215,21 @@
    if(!panel.hidden&&!busy&&values.get('Resolution state')==='boundary_review_required'){
     intro.append(text('Transition precision review required','परिवर्तन की सटीकता की समीक्षा आवश्यक','h3'));
     const notice=document.createElement('p');notice.textContent=values.get('Limitation notice')||t('No exact Nakshatra is selected near a transition. Review the time basis.','परिवर्तन के निकट सटीक नक्षत्र नहीं चुना जाता। समय के आधार की समीक्षा करें।');intro.append(notice);
-   }else if(valid){const art=make('div','r-reading-art');art.setAttribute('aria-hidden','true');intro.append(art);mappings.forEach(([key,hindi])=>{const value=values.get(key);if(!value)return;intro.append(text(key,hindi,key==='Reflective theme'?'h3':'h4'));const p=document.createElement('p');p.textContent=value;intro.append(p);});
+   }else if(valid){
+    const name=sessionName?sessionName.value.trim().replace(/\s+/g,' ').slice(0,80):'';
+    if(name){
+     const address=make('p','r-reflection-salutation');
+     // Use textContent only: the session name must never become executable HTML.
+     address.textContent=t('A reflection for ','इनके लिए चिंतन: ')+name;
+     intro.append(address);
+    }
+    const art=make('div','r-reading-art');art.setAttribute('aria-hidden','true');intro.append(art);mappings.forEach(([key,hindi])=>{const value=values.get(key);if(!value)return;intro.append(text(key,hindi,key==='Reflective theme'?'h3':'h4'));const p=document.createElement('p');p.textContent=value;intro.append(p);});
     const basis=make('div','d-basis-grid');[['Exact birth Nakshatra','Day-context Nakshatra','Nakshatra basis','नक्षत्र आधार'],['Moon-sign basis','Moon sign','Moon-sign basis','चंद्र राशि आधार'],['Birth-time basis','Time confidence','Time confidence','समय की निश्चितता'],['Resolution state','Result basis','Session type','सत्र प्रकार']].forEach(([a,b,en,hindi])=>{const e=document.createElement('span');e.append(text(en,hindi));const small=document.createElement('small');small.textContent=values.get(a)||values.get(b)||t('Not supplied by the approved result','अनुमोदित परिणाम में उपलब्ध नहीं');e.append(small);basis.append(e);});intro.append(basis);
    }else if(!panel.hidden){intro.append(text(busy?'Resolving your reflection…':'Reflection unavailable for these inputs.','इन विवरणों के लिए चिंतन उपलब्ध नहीं है।','h3'));const value=values.get('Status')||values.get('Result basis');if(value){const p=document.createElement('p');p.textContent=value;intro.append(p);}}
    const wait=$('.d-reflect-wait');if(wait)wait.hidden=!panel.hidden;
    resultDetails.hidden=panel.hidden;
   }
+  if(sessionName)sessionName.addEventListener('input',sync);
   new MutationObserver(sync).observe(grid,{childList:true,subtree:true,characterData:true});
   new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['hidden']});
   const button=$('[data-ag71e-preview-button="star-reflection"]');if(button)new MutationObserver(sync).observe(button,{attributes:true,attributeFilter:['aria-busy']});
