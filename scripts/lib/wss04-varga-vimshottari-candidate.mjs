@@ -83,9 +83,12 @@ export function divisionalChartsCandidate(natal,{
        ...current,state:"review_required_birth_time_precision",rashi:null,rashi_index:null
      }:current)});
    }
-   let lagna=vargaSignCandidate(natal.lagna.longitude_degrees,kind,{errorMarginDegrees});
+   let lagna=natal.lagna?
+     vargaSignCandidate(natal.lagna.longitude_degrees,kind,{errorMarginDegrees}):
+     {kind,state:"unavailable_lagna_from_high_latitude_or_unstable_geometry",
+       rashi:null,rashi_index:null};
    const futureLagna=sensitivity?.lagna;
-   if(birthTimePrecisionSeconds>3600 || !futureLagna ||
+   if(natal.lagna && (birthTimePrecisionSeconds>3600 || !futureLagna ||
       (lagna.state==="candidate_numeric"&&
        vargaSignCandidate(futureLagna.longitude_degrees,kind,{errorMarginDegrees}).rashi_index!==lagna.rashi_index)){
      lagna={...lagna,state:"review_required_birth_time_precision",rashi:null,rashi_index:null};
