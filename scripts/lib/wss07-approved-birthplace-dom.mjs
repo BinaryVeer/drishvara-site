@@ -41,13 +41,13 @@ export async function mountApprovedBirthPlaceInput({
  if(!input||!select||!status||!searchLabel||!selectLabel)
    throw new TypeError("All existing birth-place control elements are required");
  if(!["en","hi"].includes(language))throw new RangeError("English/Hindi only");
- let catalog=null,lang=language,matching=[],ready=false;
+ let catalog=null,lang=language,matching=[],ready=false,failed=false;
  const local=()=>COPY[lang];
  const setLanguage=next=>{
    if(!["en","hi"].includes(next))throw new RangeError("English/Hindi only");
    lang=next;searchLabel.textContent=local().search;selectLabel.textContent=local().choose;
    input.placeholder=local().placeholder;
-   status.textContent=!ready?local().loading:
+   status.textContent=!ready?(failed?local().unavailable:local().loading):
      input.value.trim()?(matching.length?local().matches(matching.length):local().noMatches):
      local().ready(catalog.approvedCount);
  };
@@ -85,7 +85,7 @@ export async function mountApprovedBirthPlaceInput({
    status.dataset.catalogStatus="approved_3266";
    search();
  }catch {
-   catalog=null;ready=false;input.disabled=true;select.disabled=true;
+   catalog=null;ready=false;failed=true;input.disabled=true;select.disabled=true;
    clearOptions();
    status.dataset.catalogStatus="unavailable_fail_closed";
    status.textContent=local().unavailable;
