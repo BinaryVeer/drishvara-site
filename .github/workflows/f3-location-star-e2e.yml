@@ -1,0 +1,32 @@
+name: F3 Location and Star Reflection E2E
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tests/f3-location-star-e2e.mjs'
+      - '.github/workflows/f3-location-star-e2e.yml'
+permissions:
+  contents: read
+jobs:
+  production-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser dependency
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright-core@1.56.1
+      - name: Execute browser QA of approved locations and Star Reflection
+        run: |
+          node --check tests/f3-location-star-e2e.mjs
+          node tests/f3-location-star-e2e.mjs
+      - name: Retain read-only verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f3-location-star-qa
+          path: f3-location-star-evidence/
+          if-no-files-found: warn
+          retention-days: 7
