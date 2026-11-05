@@ -11,7 +11,7 @@ export const WSS07_CATALOG_EXPECTED_COUNT=3266;
 const APPROVALS=["canonical_place_approved","coordinate_approved","timezone_approved",
  "public_selection_approved","computation_approved","public_output_allowed"];
 const normal=value=>String(value??"").normalize("NFKD")
- .replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("und")
+ .replace(/[\u0300-\u036f]/g,"").toLowerCase()
  .replace(/[^\p{L}\p{N}]+/gu," ").trim();
 
 function normaliseSource(value,index) {
