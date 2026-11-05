@@ -145,12 +145,13 @@ function updateSyllable(){
 }
 function render(){
  const root=$("#review-result");root.replaceChildren();
- const strings=languagePack(language),lbl=labels[language];
+ const lbl=labels[language];
  if(!candidate){item(root,"p",lbl.opening,"muted");return;}
  const view=auditedBilingualCandidateView({
   report:candidate,precisionAudit,displayName:$("#wss-name").value,
   language,nameSignConsent:$("#wss-nama-consent").checked,confirmedSyllableKey
  });
+ const strings=view.strings;
  $("#review-result").dataset.stagedReady="false";
  const header=item(root,"header",null,"preview-header");
  item(header,"p",strings.preview,"warning");
@@ -321,7 +322,6 @@ function generate(){
   candidate=null;computedPeriods=null;precisionAudit=null;
   // Diagnostic state is a class name only; never log/serialize personal input.
   $("#wss-error").dataset.candidateErrorClass=error?.name||"UnknownError";
-  $("#wss-error").dataset.candidateErrorDetail=String(error?.message||"").slice(0,140);
   $("#wss-error").textContent=labels[language].failed;
   render();
  }
