@@ -5,8 +5,8 @@ import { Readable } from "node:stream";
 import { execFileSync } from "node:child_process";
 import { validateEditorialCommand, executeEditorialCommand } from "./lib/editorial-workspace-service.mjs";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
-import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
-import { reviewedImageUpload } from "./lib/editorial-review-media.mjs";
+import { syntheticReviewImage, syntheticArticleLayout } from "./lib/editorial-review-test-fixtures.mjs";
+import { reviewedImageUpload, loadEditorialReviewImage } from "./lib/editorial-review-media.mjs";
 
 let checks = 0;
 async function check(name, run) { await run(); checks++; console.log("PASS " + name); }
@@ -47,6 +47,28 @@ await check("forged destinations, SVG, incorrect ratios, extra authority and inv
 await check("PNG header alone cannot hide corrupt image data", () => {
   const corrupted = Buffer.from(raster.upload_png, "base64"); corrupted[40] ^= 1;
   assert.throws(() => reviewedImageUpload({ ...raster, upload_png: corrupted.toString("base64") }), /invalid_editorial_image/);
+});
+const correctionRequest = { action: "request_revision", command_id: randomUUID(), candidate_id: id, version_id: version,
+  content_hash: contentHash, instructions: "Synthetic instruction: correct the bounded meaning.", evidence_refs: ["synthetic-evidence"] };
+await check("correction instructions have an exact immutable-copy binding", () => assert.equal(validateEditorialCommand(correctionRequest), null));
+await check("correction request rejects empty instructions, duplicate evidence and forged authority", () => {
+  for (const changed of [{ instructions: " " }, { evidence_refs: ["same", "same"] }, { actor_id: randomUUID() }, { approved: true }, { content_hash: "latest" }])
+    assert.notEqual(validateEditorialCommand({ ...correctionRequest, ...changed }), null);
+});
+const correctionSubmission = { action: "submit_revision", command_id: randomUUID(), candidate_id: id, task_id: randomUUID(), version_id: version,
+  content_hash: contentHash, kind: "article", title: intake.title, payload: intake.payload, comparison_acknowledged: true };
+await check("submitted correction reuses existing intake validation and explicit comparison", () => {
+  assert.equal(validateEditorialCommand(correctionSubmission), null);
+  for (const comparison_acknowledged of [false, "true", null]) assert.equal(validateEditorialCommand({ ...correctionSubmission, comparison_acknowledged }), "revision_comparison_required");
+  assert.equal(validateEditorialCommand({ ...correctionSubmission, payload: { ...intake.payload, approved: true } }), "invalid_article_research_copy");
+});
+await check("revision read and withdrawal commands cannot inject account authority", () => {
+  assert.equal(validateEditorialCommand({ action: "list_revisions", candidate_id: id }), null);
+  assert.equal(validateEditorialCommand({ action: "list_revisions", candidate_id: id, actor_id: id }), "unknown_or_missing_command_fields");
+  assert.equal(validateEditorialCommand({ action: "cancel_revision", command_id: randomUUID(), candidate_id: id, task_id: id, version_id: version, content_hash: contentHash, note: "Synthetic explicit withdrawal reason." }), null);
+});
+await check("correction commands use only the new authenticated revision RPC", async () => {
+  await executeEditorialCommand(correctionRequest, async (name, args) => { assert.equal(name, "editorial_revision_command"); assert.deepEqual(args.p_command, correctionRequest); return internal; });
 });
 await check("unqualified/unknown scope rejected", () => assert.equal(validateEditorialCommand({ ...decision, scope: "admin_override" }), "invalid_review_decision"));
 await check("duplicate evidence refs rejected", () => assert.equal(validateEditorialCommand({ ...decision, evidence_refs: ["same", "same"] }), "invalid_review_decision"));
@@ -195,7 +217,7 @@ await check("subject and self-review exceptions remain independently validated",
   assert.equal(validateEditorialCommand({ ...decision, subject_review_exception: subject, admin_exception: subject }), "explicit_admin_self_review_required");
 });
 const releaseScopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
-const releaseSnapshot = { ...internal, candidate: { id, kind: "article" }, version: { id: version, content_hash: contentHash },
+const releaseSnapshot = { ...internal, candidate: { id, kind: "article" }, version: { id: version, content_hash: contentHash, payload: { body: "Synthetic test article only. ".repeat(400) } },
   review_state: { required_scopes: releaseScopes, approved_scopes: releaseScopes, reviews_complete: true }, review_permissions: { can_request_release: true } };
 const releaseFetcher = async (url, options) => {
   if (new URL(url).pathname.endsWith("editorial_review_command")) {
@@ -265,5 +287,74 @@ await check("trusted worker receives only the server credential and missing Arti
       } });
   assert.equal(r.code, 200); assert.equal(r.data.status, "delivery_pending"); assert.equal(r.data.code, "article_publisher_unavailable");
   assert.deepEqual(operations, ["claim", "fail"]); assert(!JSON.stringify(r.data).includes(secret));
+});
+const mediaQuery = "action=media&candidate_id=" + id + "&version_id=" + version + "&content_hash=" + encodeURIComponent(contentHash);
+const mediaSnapshot = { ...releaseSnapshot, version: { ...releaseSnapshot.version, payload: { ...releaseSnapshot.version.payload, media: [raster] } } };
+const mediaFetcher = async (url, options) => {
+  if (new URL(url).pathname.endsWith("editorial_review_command") && JSON.parse(options.body).p_command.action === "open")
+    return { ok: true, json: async () => mediaSnapshot };
+  return fakeFetch(url, options);
+};
+await check("anonymous cannot obtain private Article media", async () => assert.equal((await invoke({ action: mediaQuery })).code, 401));
+await check("authenticated image uses the assigned current copy and private no-store headers", async () => {
+  const r = await invoke({ cookie, action: mediaQuery }, { fetcher: mediaFetcher });
+  assert.equal(r.code, 200); assert.equal(r.headers["Content-Type"], "image/png"); assert.equal(r.headers["Cross-Origin-Resource-Policy"], "same-origin");
+  assert.equal(r.headers["Cache-Control"], "no-store, private"); assert.deepEqual(r.data, Buffer.from(raster.upload_png, "base64"));
+  assert.match(r.headers["Content-Security-Policy"], /img-src 'self' blob:/);
+});
+await check("stale or mismatched media bindings cannot expose another copy", async () => {
+  for (const action of [mediaQuery.replace(version, randomUUID()), mediaQuery.replace(encodeURIComponent(contentHash), encodeURIComponent("sha256:" + "b".repeat(64)))])
+    assert.equal((await invoke({ cookie, action }, { fetcher: mediaFetcher })).code, 409);
+});
+await check("media URL injection and duplicate binding parameters are rejected", async () => {
+  for (const action of [mediaQuery + "&url=https://127.0.0.1/private", mediaQuery + "&candidate_id=" + id]) assert.equal((await invoke({ cookie, action }, { fetcher: mediaFetcher })).code, 400);
+});
+await check("revocation or missing assignment prevents image access", async () => {
+  failAuth = true; assert.equal((await invoke({ cookie, action: mediaQuery }, { fetcher: mediaFetcher })).code, 403); failAuth = false;
+  const r = await invoke({ cookie, action: mediaQuery }, { fetcher: async (url, options) => {
+    if (new URL(url).pathname.endsWith("editorial_review_command") && JSON.parse(options.body).p_command.action === "open") throw Error("editorial_assignment_required");
+    return fakeFetch(url, options);
+  } }); assert.equal(r.code, 403);
+});
+await check("remote media is fixed to saved allowed assets without forwarding any credential", async () => {
+  const image = await loadEditorialReviewImage({ url: "https://upload.wikimedia.org/wikipedia/commons/synthetic.png" }, { origin: env.EDITORIAL_WORKSPACE_ORIGIN,
+    fetcher: async (url, options) => { assert.equal(new URL(url).hostname, "upload.wikimedia.org"); assert.equal(options.redirect, "error");
+      assert.equal(options.credentials, "omit"); assert(!/authorization|cookie|apikey/i.test(Object.keys(options.headers).join(" ")));
+      return new Response(Buffer.from(raster.upload_png, "base64"), { headers: { "Content-Type": "image/png" } }); } });
+  assert.equal(image.contentType, "image/png");
+});
+await check("private-network, credential-bearing and arbitrary remote image URLs are blocked before fetch", async () => {
+  for (const url of ["http://127.0.0.1/a.png", "https://169.254.169.254/a", "https://attacker.invalid/a.png", "https://user:password@upload.wikimedia.org/wikipedia/commons/a.png", "https://upload.wikimedia.org:444/wikipedia/commons/a.png", "/api/editorial-workspace", "/assets/%2e%2e/private.png"]) {
+    await assert.rejects(loadEditorialReviewImage({ url }, { origin: env.EDITORIAL_WORKSPACE_ORIGIN, fetcher: () => { throw Error("must not fetch"); } }), /editorial_media_unavailable/);
+  }
+});
+await check("SVG, HTML and oversized remote responses cannot render as review images", async () => {
+  for (const response of [new Response("<svg/>", { headers: { "content-type": "image/svg+xml" } }), new Response("<html/>", { headers: { "content-type": "image/png" } }),
+    new Response(Buffer.from(raster.upload_png, "base64"), { headers: { "content-type": "image/png", "content-length": "6000000" } })])
+    await assert.rejects(loadEditorialReviewImage({ url: "https://upload.wikimedia.org/wikipedia/commons/synthetic.png" }, { origin: env.EDITORIAL_WORKSPACE_ORIGIN, fetcher: async () => response }), /editorial_media_unavailable/);
+});
+await check("the streaming byte limit is enforced without a Content-Length header", async () => {
+  await assert.rejects(loadEditorialReviewImage({ url: "https://upload.wikimedia.org/wikipedia/commons/synthetic.png" }, { origin: env.EDITORIAL_WORKSPACE_ORIGIN,
+    fetcher: async () => new Response(new Uint8Array(5 * 1024 * 1024 + 1), { headers: { "content-type": "image/png" } }) }), /editorial_media_unavailable/);
+});
+const layoutSnapshot = { ...mediaSnapshot, version: { ...mediaSnapshot.version, payload: syntheticArticleLayout() } };
+const layoutFetcher = async (url, options) => new URL(url).pathname.endsWith("editorial_review_command") && JSON.parse(options.body).p_command.action === "open" ?
+  { ok: true, json: async () => layoutSnapshot } : fakeFetch(url, options);
+const previewQuery = mediaQuery.replace("action=media", "action=preview");
+await check("anonymous cannot read the full Article layout preview", async () => assert.equal((await invoke({ action: previewQuery })).code, 401));
+await check("authenticated preview is inert, exact-version bound and private", async () => {
+  const r = await invoke({ cookie, action: previewQuery }, { fetcher: layoutFetcher });
+  assert.equal(r.code, 200); assert.equal(r.headers["Content-Type"], "text/html; charset=utf-8");
+  assert.equal(r.headers["Cache-Control"], "no-store, private"); assert.match(r.headers["Content-Security-Policy"], /default-src 'none'/);
+  assert(!r.headers["Content-Security-Policy"].includes("script-src")); assert(r.data.includes("media_index=1")); assert(!r.data.includes(raster.upload_png));
+});
+await check("preview rejects stale bindings and injected sources", async () => {
+  assert.equal((await invoke({ cookie, action: previewQuery.replace(version, randomUUID()) }, { fetcher: layoutFetcher })).code, 409);
+  assert.equal((await invoke({ cookie, action: previewQuery + "&url=https://attacker.invalid" }, { fetcher: layoutFetcher })).code, 400);
+});
+await check("indexed image access remains bounded to the assigned saved media", async () => {
+  const r = await invoke({ cookie, action: mediaQuery + "&media_index=1" }, { fetcher: layoutFetcher });
+  assert.equal(r.code, 200); assert.deepEqual(r.data, Buffer.from(layoutSnapshot.version.payload.media[1].upload_png, "base64"));
+  for (const index of ["-1", "2", "8", "1.0"]) assert.equal((await invoke({ cookie, action: mediaQuery + "&media_index=" + index }, { fetcher: layoutFetcher })).code, 404);
 });
 console.log(`Editorial workspace: ${checks} local contract/HTTP checks passed. Auth is simulated here; real PostgreSQL checks run separately.`);

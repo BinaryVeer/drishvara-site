@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import { buildEditorialPlan, buildPlannerPromptBlock } from "./editorial-planner.js";
 
 const CATEGORY_META = {
@@ -43,6 +42,44 @@ const COMMON_STOPWORDS = new Set([
   "today", "guide", "story", "stories", "article", "practice", "values"
 ]);
 
+// Internal preparation only: reuse the existing planner/prompts without Git or database writes.
+export async function prepareEditorialReviewDrafts({ apiKey, model = "gpt-4.1-mini", date, fetcher = fetch, includeSourcedImages = true, previousBatch = null, localAssetExists = null }) {
+  if (typeof apiKey !== "string" || !apiKey.trim()) throw Error("generation_credential_unavailable");
+  if (typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(Date.parse(date + "T00:00:00Z")) ||
+      new Date(date + "T00:00:00Z").toISOString().slice(0, 10) !== date) throw Error("invalid_generation_date");
+  const editorialPlan = buildEditorialPlan({ date, horizonMonths: 12 });
+  const { longFormRequirements, longFormPlanningContext } = await import("../../scripts/lib/editorial-article-qualification.mjs");
+  const requirements = longFormRequirements();
+  if (previousBatch && (previousBatch.date !== date || previousBatch.contract_version !== "drishvara.editorial-generation-review.v1" ||
+      previousBatch.public_output_allowed !== false || previousBatch.runtime_activation !== false || !Array.isArray(previousBatch.drafts) || previousBatch.drafts.length !== GENERATION_CATEGORIES.length ||
+      GENERATION_CATEGORIES.some(desk => previousBatch.drafts.filter(d => d.desk === desk && d.candidate?.title && !d.candidate.fallback).length !== 1))) throw Error("invalid_revision_generation_batch");
+  const bundle = previousBatch?.shortlist ?? await generateCandidateBundle({ apiKey, model, today: date, editorialPlan, fetcher });
+  const drafts = [];
+  for (const categoryKey of GENERATION_CATEGORIES) {
+    const candidate = previousBatch ? previousBatch.drafts.find(d => d.desk === categoryKey).candidate : pickCandidateForCategory(bundle, categoryKey);
+    if (candidate.fallback) throw Error("generated_topic_unavailable");
+    const generated = await generateArticleDraft({ apiKey, model, today: date, categoryKey,
+      categoryMeta: CATEGORY_META[categoryKey], candidate, editorialPlan, fetcher,
+      longForm: { requirements, planning: longFormPlanningContext(candidate, categoryKey) } });
+    if (typeof generated?.title !== "string" || !generated.title.trim() || typeof generated.article_html !== "string" || !generated.article_html.trim())
+      throw Error("generated_article_incomplete");
+    const fileExists = localAssetExists ?? (async asset => {
+      const { access } = await import("node:fs/promises");
+      try { await access(new URL("../../" + asset, import.meta.url)); return true; } catch { return false; }
+    });
+    const visual = includeSourcedImages ? await resolveArticleImage({ today: date, categoryKey, fetcher, fileExists, reviewOnly: true,
+      draftPacket: { ...generated, generated_image_direct: generated.image, generated_image_credit: generated.image_credit,
+        generated_image_source_url: generated.image_source_url, generated_image_alt: generated.image_alt, generated_image_prompt: generated.image_prompt } }) : null;
+    const media = visual?.image_path ? visual : null;
+    drafts.push({ desk: categoryKey, candidate, generated, proposed_media: media, generation_profile: requirements.profile,
+      proposed_visual_request: visual?.image_mode === "generated_thematic_pending" ? visual : null,
+      review_status: "pending", public_output_allowed: false, runtime_activation: false });
+  }
+  return { contract_version: "drishvara.editorial-generation-review.v1", generation_profile: requirements.profile, standard_ref: requirements.standard_ref,
+    date, model, editorial_plan: editorialPlan, revised_from_existing_topics: Boolean(previousBatch),
+    shortlist: bundle, drafts, public_output_allowed: false, runtime_activation: false };
+}
+
 export async function runGenerateDaily({
   openaiApiKey,
   openaiModel,
@@ -71,6 +108,7 @@ export async function runGenerateDaily({
   const imageModel = openaiImageModel || "gpt-image-1";
   const today = todayOverride || new Date().toISOString().slice(0, 10);
 
+  const { createClient } = await import("@supabase/supabase-js");
   const supabase = createClient(supabaseUrl, supabaseKey);
   let publicationRunId = null;
 
@@ -313,7 +351,7 @@ export async function runGenerateDaily({
   }
 }
 
-async function generateCandidateBundle({ apiKey, model, today, editorialPlan }) {
+async function generateCandidateBundle({ apiKey, model, today, editorialPlan, fetcher = fetch }) {
   const streamPlannerSummary = GENERATION_CATEGORIES.map((categoryKey) => {
     const plannerBlock = buildPlannerPromptBlock(editorialPlan, categoryKey);
     return `\n[${categoryKey}]\n${plannerBlock}`;
@@ -374,7 +412,8 @@ Return JSON in this shape:
   const parsed = await callOpenAIForJson({
     apiKey,
     model,
-    prompt
+    prompt,
+    fetcher
   });
 
   const rawCandidates = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
@@ -548,11 +587,15 @@ async function generateArticleDraft({
   categoryKey,
   categoryMeta,
   candidate,
-  editorialPlan
+  editorialPlan,
+  fetcher = fetch,
+  longForm = null
 }) {
   const plannerBlock = buildPlannerPromptBlock(editorialPlan, categoryKey);
 
-  const prompt = `
+  const prompt = longForm ? (await import("../../scripts/lib/editorial-article-qualification.mjs")).buildLongFormReviewPrompt({
+    today, categoryKey, categoryMeta, candidate, plannerBlock, ...longForm
+  }) : `
 Write one polished Drishvara article for the category "${categoryMeta.label}".
 
 EDITORIAL PLANNER DIRECTIVE
@@ -627,19 +670,23 @@ Return JSON in this exact shape:
   return callOpenAIForJson({
     apiKey,
     model,
-    prompt
+    prompt,
+    fetcher
   });
 }
 
-async function callOpenAIForJson({ apiKey, model, prompt }) {
-  const response = await fetch("https://api.openai.com/v1/responses", {
+async function callOpenAIForJson({ apiKey, model, prompt, fetcher = fetch }) {
+  const response = await fetcher("https://api.openai.com/v1/responses", {
     method: "POST",
+    redirect: "error",
+    signal: AbortSignal.timeout(120000),
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`
     },
     body: JSON.stringify({
       model,
+      store: false,
       input: prompt,
       temperature: 0.4,
       text: {
@@ -653,19 +700,19 @@ async function callOpenAIForJson({ apiKey, model, prompt }) {
   const rawText = await response.text();
 
   if (!response.ok) {
-    throw new Error(`OpenAI request failed: ${response.status} ${rawText}`);
+    throw new Error(`OpenAI request failed: ${response.status}`);
   }
 
   let payload;
   try {
     payload = JSON.parse(rawText);
   } catch {
-    throw new Error(`OpenAI returned non-JSON API response: ${rawText}`);
+    throw new Error("OpenAI returned a non-JSON API response");
   }
 
   const outputText = extractResponseText(payload);
   if (!outputText) {
-    throw new Error(`OpenAI response text not found in payload: ${rawText}`);
+    throw new Error("OpenAI response text not found in payload");
   }
 
   const parsed = tryParseJson(outputText);
@@ -678,7 +725,7 @@ async function callOpenAIForJson({ apiKey, model, prompt }) {
   const reparsed = extracted ? tryParseJson(extracted) : null;
   if (reparsed) return reparsed;
 
-  throw new Error(`Model output was not valid JSON: ${outputText}`);
+  throw new Error("Model output was not valid JSON");
 }
 
 function extractResponseText(payload) {
@@ -804,7 +851,10 @@ async function resolveArticleImage({
   branch,
   draftPacket,
   categoryKey,
-  today
+  today,
+  fetcher = fetch,
+  fileExists = asset => githubFileExists({ token, owner, repo, branch, path: asset }),
+  reviewOnly = false
 }) {
   const slug = sanitizeSlug(draftPacket.slug || draftPacket.title || "");
 
@@ -812,19 +862,13 @@ async function resolveArticleImage({
   const categoryDayPath = `assets/featured/${today}/${categoryKey}/lead-1.jpg`;
   const fallbackPath = getDefaultImageForCategory(categoryKey);
 
-  const exactManualExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: exactManualPath
-  });
+  const exactManualExists = await fileExists(exactManualPath);
 
   if (exactManualExists) {
     return {
       image_mode: "manual_asset_exact",
       image_path: exactManualPath,
-      image_credit: "Drishvara Library",
+      image_credit: reviewOnly ? "Attribution pending - existing library asset" : "Drishvara Library",
       image_source_url: "",
       image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
       image_prompt: "",
@@ -832,19 +876,13 @@ async function resolveArticleImage({
     };
   }
 
-  const categoryDayExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: categoryDayPath
-  });
+  const categoryDayExists = await fileExists(categoryDayPath);
 
   if (categoryDayExists) {
     return {
       image_mode: "manual_asset_category",
       image_path: categoryDayPath,
-      image_credit: "Drishvara Library",
+      image_credit: reviewOnly ? "Attribution pending - existing library asset" : "Drishvara Library",
       image_source_url: "",
       image_alt: buildDefaultAlt(categoryKey, draftPacket.title),
       image_prompt: "",
@@ -856,7 +894,8 @@ async function resolveArticleImage({
     title: draftPacket.title,
     subtitle: draftPacket.subtitle,
     summary: draftPacket.summary,
-    categoryKey
+    categoryKey,
+    fetcher
   });
 
   if (commonsImage) {
@@ -886,11 +925,11 @@ async function resolveArticleImage({
   }
 
   const generatedImagePath = safeText(draftPacket.generated_image_path);
-  if (generatedImagePath) {
+  if (generatedImagePath && (!reviewOnly || /^\/?assets\/[a-zA-Z0-9_./-]+$/.test(generatedImagePath) && !generatedImagePath.includes("..") && await fileExists(generatedImagePath.replace(/^\//, "")))) {
     return {
       image_mode: "generated_thematic",
       image_path: generatedImagePath,
-      image_credit: safeText(draftPacket.generated_image_credit, "Drishvara AI"),
+      image_credit: safeText(draftPacket.generated_image_credit, reviewOnly ? "AI-generated asset - provenance review pending" : "Drishvara AI"),
       image_source_url: "",
       image_alt: safeText(
         draftPacket.generated_image_alt,
@@ -910,13 +949,7 @@ async function resolveArticleImage({
     return aiImage;
   }
 
-  const fallbackExists = await githubFileExists({
-    token,
-    owner,
-    repo,
-    branch,
-    path: fallbackPath
-  });
+  const fallbackExists = !reviewOnly && await fileExists(fallbackPath);
 
   if (fallbackExists) {
     return {
@@ -1179,7 +1212,8 @@ async function findSourcedImageFromCommons({
   title,
   subtitle,
   summary,
-  categoryKey
+  categoryKey,
+  fetcher = fetch
 }) {
   const searchQuery = buildCommonsSearchQuery({
     title,
@@ -1206,7 +1240,7 @@ async function findSourcedImageFromCommons({
 
   let payload;
   try {
-    const response = await fetch(apiUrl.toString(), {
+    const response = await fetcher(apiUrl.toString(), {
       method: "GET",
       headers: { Accept: "application/json" }
     });
@@ -1304,7 +1338,7 @@ function normalizeCommonsCandidate(page, context) {
 }
 
 function scoreCommonsCandidate({ pageTitle, context }) {
-  const haystack = `${pageTitle} ${context.title || ""} ${context.subtitle || ""} ${context.summary || ""}`.toLowerCase();
+  const haystack = String(pageTitle || "").toLowerCase();
 
   let score = 0;
   for (const token of extractSearchTerms(context.title, 5)) {

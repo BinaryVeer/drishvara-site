@@ -1,3 +1,5 @@
+import { articleLayoutReleaseBlocker, reviewedArticlePage } from "../../scripts/lib/editorial-article-layout.mjs";
+
 const CATEGORY_META = {
   spirituality: {
     label: "Spirituality",
@@ -1161,8 +1163,10 @@ export async function prepareReviewedArticleFiles({ candidateId, version, date, 
   if (!/^[a-f0-9-]{36}$/i.test(candidateId) || !meta || !safeText(version?.title) || !safeText(p?.body) ||
       !Array.isArray(existingIndex?.items) || !/^\d{4}-\d{2}-\d{2}$/.test(date) || new Date(timestamp).toISOString() !== timestamp) throw Error("article_copy_incomplete");
   if (!Array.isArray(p.sources) || !p.sources.length || p.sources.some(s => !validUrl(typeof s === "string" ? s : s?.url))) throw Error("article_sources_pending");
-  if (!Array.isArray(p.media) || p.media.length > 1) throw Error("article_media_contract_pending");
-  const media = p.media[0];
+  if (!Array.isArray(p.media)) throw Error("article_media_contract_pending");
+  const layoutError = articleLayoutReleaseBlocker(p);
+  if (layoutError) throw Error(layoutError);
+  const media = p.layout ? p.media[p.layout.objects.find(o => o.type === "image" && o.after_paragraph === 0)?.media_index] : p.media[0];
   if (media && (!safeText(media.alt) || !safeText(media.attribution) || !validUrl(media.source_url) ||
       !(validUrl(media.url) || /^\/assets\/[a-zA-Z0-9_./-]+$/.test(media.url) && !media.url.includes("..")))) throw Error("article_media_contract_pending");
   const sources = p.sources.map(s => typeof s === "string" ? { url: s, title: s } : s);
@@ -1170,7 +1174,8 @@ export async function prepareReviewedArticleFiles({ candidateId, version, date, 
   const packet = { title: version.title, summary: "", article_html: p.body.split(/\n\s*\n/).map(part => `<p>${escapeHtml(part).replaceAll("\n", "<br>")}</p>`).join("\n") +
     `<section><h2>Sources</h2><ul>${sources.map(s => `<li><a href="${escapeAttribute(s.url)}" rel="noopener noreferrer">${escapeHtml(s.title || s.url)}</a></li>`).join("")}</ul></section>`,
     image_path: media?.url || "", image_alt: media?.alt || "", image_credit: media?.attribution || "", image_source_url: media?.source_url || "" };
-  const html = await buildArticlePage({ draftPacket: packet, categoryMeta: meta, today: date, reviewedReferences: [], omitMedia: !media });
+  const html = p.layout ? reviewedArticlePage(p, { title: version.title }) :
+    await buildArticlePage({ draftPacket: packet, categoryMeta: meta, today: date, reviewedReferences: [], omitMedia: !media });
   const item = makePublishedIndexItem({ categoryKey: p.desk, categoryMeta: meta, draftPacket: packet, articlePath,
     articleTitle: version.title, articleSlug: "editorial-" + candidateId.toLowerCase(), today: date });
   const index = rebuildArticleIndex(existingIndex, [item], timestamp);

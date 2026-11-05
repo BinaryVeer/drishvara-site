@@ -18,7 +18,7 @@ const scopes = ["editorial", "rights", "factual", "safety", "media", "publisher_
 const id = randomUUID(), versionId = randomUUID(), releaseId = randomUUID(), claimId = randomUUID(), actorId = randomUUID();
 const timestamp = "2026-10-28T18:45:00.000Z";
 const version = { id: versionId, content_hash: "sha256:" + "a".repeat(64), title: "Synthetic controlled article",
-  payload: { desk: "world_affairs", body: 'Synthetic text only. <script>throw Error("not executable")</script>\n\nSecond paragraph.',
+  payload: { desk: "world_affairs", body: 'Synthetic text only. <script>throw Error("not executable")</script>\n\nSecond paragraph. ' + "Synthetic review fixture, not actual journalism. ".repeat(300),
     sources: [{ title: "Synthetic evidence", url: "https://example.invalid/reviewed-source" }], media: [], research_refs: ["PRIVATE-NOTE-DO-NOT-EXPORT"] } };
 const opened = envelope({ candidate: { id, kind: "article" }, version,
   review_state: { required_scopes: scopes, approved_scopes: scopes, reviews_complete: true }, review_permissions: { can_request_release: true } });
@@ -44,6 +44,25 @@ await check("pending reviews list every missing scope and prohibit a request", (
 });
 await check("review boolean alone cannot bypass scope completeness", () => {
   assert.equal(assessEditorialRelease({ ...opened, review_state: { ...opened.review_state, approved_scopes: [] } }).request_allowed, false);
+});
+await check("unresolved corrections veto delivery even when every approval is present", () => {
+  const r = assessEditorialRelease({ ...opened, review_state: { ...opened.review_state, pending_revision_tasks: 1 } }, { enabled: true });
+  assert.equal(r.request_allowed, false); assert(r.blockers.includes("editorial_corrections_pending"));
+});
+await check("a short Article remains blocked even when every human scope is approved", () => {
+  const r = assessEditorialRelease({ ...opened, version: { ...version, payload: { ...version.payload, body: "Short pending Article." } } }, { enabled: true });
+  assert.equal(r.request_allowed, false); assert(r.blockers.includes("article_long_form_length_pending"));
+});
+await check("1,499 words cannot pass release even with all synthetic approval flags", () => {
+  const r = assessEditorialRelease({ ...opened, version: { ...version, payload: { ...version.payload, body: "synthetic ".repeat(1499) } } }, { enabled: true });
+  assert.equal(r.request_allowed, false); assert(r.blockers.includes("article_long_form_length_pending"));
+});
+await check("exactly 1,500 words passes only length, never missing human approvals", () => {
+  const r = assessEditorialRelease({ ...opened, version: { ...version, payload: { ...version.payload, body: "synthetic ".repeat(1500) } },
+    review_state: { ...opened.review_state, approved_scopes: [], reviews_complete: false } }, { enabled: true });
+  assert.equal(r.request_allowed, false); assert(!r.blockers.includes("article_long_form_length_pending"));
+  assert(r.blockers.includes("editorial_reviews_pending")); assert.deepEqual(r.missing_scopes, scopes);
+  assert.equal(r.public_output_allowed, false); assert.equal(r.runtime_activation, false);
 });
 await check("missing, duplicate and invented scope contracts fail closed", () => {
   for (const state of [null, { ...opened.review_state, required_scopes: [] }, { ...opened.review_state, approved_scopes: [...scopes, scopes[0]] }, { ...opened.review_state, required_scopes: ["invented"] }])
@@ -96,7 +115,7 @@ const fields = { candidateId: id, version, date: "2026-10-29", timestamp, existi
 const rendered = await prepareReviewedArticleFiles(fields);
 const baselinePublisher = execFileSync("git", ["show", "HEAD:services/pipeline/publish-all-core.js"], { encoding: "utf8" });
 const currentPublisher = fs.readFileSync("services/pipeline/publish-all-core.js", "utf8");
-const loadTemplate = source => import("data:text/javascript;base64," + Buffer.from(source.replace('import { createClient } from "@supabase/supabase-js";', "") + "\nexport {buildArticlePage,rebuildArticleIndex};").toString("base64"));
+const loadTemplate = source => import("data:text/javascript;base64," + Buffer.from(source.replace('import { createClient } from "@supabase/supabase-js";', "").replace('"../../scripts/lib/editorial-article-layout.mjs"', JSON.stringify(new URL("./lib/editorial-article-layout.mjs", import.meta.url).href)) + "\nexport {buildArticlePage,rebuildArticleIndex};").toString("base64"));
 const previousTemplate = await loadTemplate(baselinePublisher), currentTemplate = await loadTemplate(currentPublisher);
 await check("legacy article template remains byte-identical with its original defaults", async () => {
   for (const image of ["", "/assets/synthetic-image.jpg"]) {
@@ -119,8 +138,9 @@ await check("incomplete and unsafe source links cannot publish", async () => {
   for (const sources of [[], [{ url: "javascript:alert(1)" }], [{ url: "https://user:pass@example.invalid/" }]])
     await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, sources } } }), /article_sources_pending/);
 });
-await check("unsupported multiple media and uncredited images remain pending", async () => {
-  for (const media of [[{}, {}], [{ url: "/assets/unknown.png" }]]) await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media } } }), /article_media_contract_pending/);
+await check("multiple media without placement and uncredited images remain pending", async () => {
+  await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media: [{}, {}] } } }), /article_layout_required/);
+  await assert.rejects(prepareReviewedArticleFiles({ ...fields, version: { ...version, payload: { ...version.payload, media: [{ url: "/assets/unknown.png" }] } } }), /article_media_contract_pending/);
 });
 let gitCalls = [], publicFiles = new Map([["data/article-index.json", JSON.stringify({ items: [] })]]), stagedTree, branchAdvanced = false, losePatch = false;
 const head = "c".repeat(40), next = "d".repeat(40);
@@ -145,6 +165,11 @@ const mockGit = async (url, opts = {}) => {
 };
 const publisher = createEditorialArticlePublisher({ env: { EDITORIAL_GITHUB_OWNER: "BinaryVeer", EDITORIAL_GITHUB_REPO: "drishvara-site", EDITORIAL_GITHUB_BRANCH: "main", EDITORIAL_GITHUB_TOKEN: "synthetic-only" }, fetcher: mockGit });
 let validations = 0;
+await check("the trusted Article adapter also rejects short copy before any Git request", async () => {
+  gitCalls = [];
+  await assert.rejects(publisher({ job: { ...job, version: { ...version, payload: { ...version.payload, body: "Short pending copy." } } }, timestamp, revalidate: async () => {} }), /article_long_form_length_pending/);
+  assert.equal(gitCalls.length, 0);
+});
 await check("article, discovery and receipt are one non-forced atomic branch update", async () => {
   const r = await publisher({ job, timestamp, revalidate: async () => { validations++; } }); assert.equal(r.status, "article_committed");
   assert.equal(stagedTree.length, 3); assert.equal(gitCalls.filter(c => c.method === "PATCH").length, 1);

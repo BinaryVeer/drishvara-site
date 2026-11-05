@@ -1,6 +1,8 @@
 import { snapshotHash, canonicalPublicationDate } from "./ag70d-word-selection-engine.mjs";
 import { prepareReviewedArticleFiles } from "../../services/pipeline/publish-all-core.js";
 import { reviewedImageUpload } from "./editorial-review-media.mjs";
+import { articleLengthBlocker } from "./editorial-article-qualification.mjs";
+import { articleLayoutReleaseBlocker } from "./editorial-article-layout.mjs";
 
 // One fast-forward commit owns the page, discovery index and recovery receipt together.
 export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = {}) {
@@ -10,6 +12,12 @@ export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = 
     if (!token || owner !== "BinaryVeer" || repo !== "drishvara-site" || branch !== "main") throw Error("article_publisher_unavailable");
     const folder = { world_affairs: "world", media_society: "media", public_programmes: "policy", sports: "sports", spirituality: "spiritual" }[job?.version?.payload?.desk];
     if (!folder || !/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(job?.candidate_id || "")) throw Error("article_copy_incomplete");
+    const length = articleLengthBlocker(job.version.payload.body);
+    if (length) throw Error(length);
+    const layout = articleLayoutReleaseBlocker(job.version.payload);
+    if (layout) throw Error(layout);
+    // Validate every upload before any remote operation; duplicate bytes share a blob.
+    const images = [...new Map(job.version.payload.media.map(reviewedImageUpload).filter(Boolean).map(i => [i.path, i])).values()];
     const expectedPath = "articles/" + folder + "/editorial-" + job.candidate_id + ".html";
     const base = `https://api.github.com/repos/${owner}/${repo}/`;
     const request = async (path, options = {}, missing = false) => {
@@ -46,9 +54,8 @@ export function createEditorialArticlePublisher({ env = {}, fetcher = fetch } = 
     const oldArticle = await read(files.articlePath);
     if (oldArticle !== null && (!prior || prior.article_path !== files.articlePath || snapshotHash(oldArticle) !== prior.article_hash)) throw Error("article_destination_conflict");
     const receipt = { ...publicBinding, binding_hash: bindingHash, article_path: files.articlePath, article_hash: snapshotHash(files.html) };
-    const image = reviewedImageUpload(job.version.payload.media[0]);
     const imageEntries = [];
-    if (image) {
+    for (const image of images) {
       // Content-addressed assets cannot overwrite another reviewed image or execute HTML/SVG.
       const blob = await request("git/blobs", { method: "POST", body: JSON.stringify({ content: image.base64, encoding: "base64" }) });
       if (!/^[a-f0-9]{40}$/.test(blob.sha || "")) throw Error("article_publisher_unavailable");

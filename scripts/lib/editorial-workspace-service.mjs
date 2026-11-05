@@ -1,6 +1,7 @@
 import { meaningStructureErrors, MEANING_COPY_VERSION } from "./ag70e-word-meaning-contract.mjs";
 import { canonicalJson } from "./ag70d-word-selection-engine.mjs";
 import { reviewedImageUpload } from "./editorial-review-media.mjs";
+import { articleLayoutError } from "./editorial-article-layout.mjs";
 
 export const EDITORIAL_CONTRACT = "drishvara.editorial-review.v1";
 export const ADMIN_SELF_REVIEW_POLICY = "drishvara-editorial-admin-self-review@1";
@@ -12,6 +13,7 @@ const text = (v, max = 2000) => typeof v === "string" && v.trim().length > 0 && 
 const uuid = v => typeof v === "string" && /^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(v);
 const hash = v => typeof v === "string" && /^sha256:[a-f0-9]{64}$/.test(v);
 const scopes = ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "factual", "media", "publisher_acceptance"];
+const revisionActions = new Set(["list_revisions", "request_revision", "submit_revision", "cancel_revision"]);
 
 export function editorialDecisionIssues(command) {
   if (command?.action !== "decision") return [];
@@ -33,6 +35,24 @@ export function validateEditorialCommand(command) {
     const serialized = canonicalJson(command);
     if (Buffer.byteLength(serialized) > 240000) return "request_too_large";
     if (!object(command)) return "invalid_command";
+    if (revisionActions.has(command.action)) {
+      const keys = { list_revisions: ["action", "candidate_id"],
+        request_revision: ["action", "command_id", "candidate_id", "version_id", "content_hash", "instructions", "evidence_refs"],
+        submit_revision: ["action", "command_id", "candidate_id", "task_id", "version_id", "content_hash", "kind", "title", "payload", "comparison_acknowledged"],
+        cancel_revision: ["action", "command_id", "candidate_id", "task_id", "version_id", "content_hash", "note"] };
+      if (!exact(command, keys[command.action])) return "unknown_or_missing_command_fields";
+      if (!uuid(command.candidate_id)) return "invalid_candidate_id";
+      if (command.action === "list_revisions") return null;
+      if (!uuid(command.command_id) || !uuid(command.version_id) || !hash(command.content_hash)) return "invalid_version_binding";
+      if (command.action === "request_revision") return text(command.instructions, 6000) && command.instructions.trim().length >= 12 &&
+        Array.isArray(command.evidence_refs) && command.evidence_refs.length <= 50 && command.evidence_refs.every(r => text(r, 500)) &&
+        new Set(command.evidence_refs).size === command.evidence_refs.length ? null : "invalid_revision_request";
+      if (!uuid(command.task_id)) return "invalid_revision_request";
+      if (command.action === "cancel_revision") return text(command.note, 6000) && command.note.trim().length >= 12 ? null : "invalid_revision_request";
+      if (command.comparison_acknowledged !== true) return "revision_comparison_required";
+      return validateEditorialCommand({ action: "intake", command_id: command.command_id, kind: command.kind, external_id: "revision-validation-only",
+        expected_version_id: command.version_id, title: command.title, payload: command.payload });
+    }
     if (command.action === "review_batch") {
       const keys = ["action", "command_id", "candidate_id", "version_id", "content_hash", "scopes", "decision", "note", "evidence_refs"];
       for (const key of ["admin_exception", "subject_review_exception"]) if (Object.hasOwn(command, key)) keys.push(key);
@@ -82,12 +102,13 @@ export function validateEditorialCommand(command) {
         if (!exact(p, ["contract_version", "content", "research_refs"]) || p.contract_version !== MEANING_COPY_VERSION ||
             meaningStructureErrors(p.content).length || !Array.isArray(p.research_refs) || p.research_refs.length > 50 ||
             p.research_refs.some(r => !text(r, 500))) return "invalid_word_research_copy";
-      } else if (!exact(p, ["desk", "body", "sources", "media", "research_refs"]) || !ARTICLE_DESKS.includes(p.desk) ||
+      } else if (!exact(p, ["desk", "body", "sources", "media", "research_refs", ...(Object.hasOwn(p ?? {}, "layout") ? ["layout"] : [])]) || !ARTICLE_DESKS.includes(p.desk) ||
           !text(p.body, 150000) || !Array.isArray(p.sources) || p.sources.length > 50 ||
           !Array.isArray(p.media) || p.media.length > 20 || !Array.isArray(p.research_refs) || p.research_refs.length > 50 ||
           p.research_refs.some(r => !text(r, 500))) return "invalid_article_research_copy";
       if (command.kind === "article") {
-        if (p.media.length > 1) return "invalid_editorial_image";
+        const layoutError = articleLayoutError(p);
+        if (layoutError) return layoutError;
         try { for (const media of p.media) reviewedImageUpload(media); } catch { return "invalid_editorial_image"; }
       }
       return null;
@@ -115,7 +136,7 @@ export function validateEditorialCommand(command) {
 export async function executeEditorialCommand(command, rpc) {
   const error = validateEditorialCommand(command);
   if (error) return { ok: false, code: error, ...(error === "invalid_review_decision" ? { details: editorialDecisionIssues(command) } : {}), public_output_allowed: false, runtime_activation: false };
-  const result = await rpc("editorial_review_command", { p_command: command });
+  const result = await rpc(revisionActions.has(command.action) ? "editorial_revision_command" : "editorial_review_command", { p_command: command });
   if (!object(result) || typeof result.ok !== "boolean" || result.public_output_allowed !== false || result.runtime_activation !== false)
     throw new Error("invalid_editorial_receipt");
   return result;

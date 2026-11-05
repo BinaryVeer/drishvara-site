@@ -219,3 +219,23 @@ body.drishvara-v2-active.article-v2 .back-link {
     padding-left: 1.15rem !important;
   }
 }
+/* Only versioned, reviewed Article objects; legacy reading layout remains unchanged. */
+body.drishvara-v2-active.article-v2 #article-body:has([data-drishvara-reviewed-layout="v1"]) { max-width:1120px !important; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article { width:100%; min-width:0; overflow-wrap:anywhere; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article>p,
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article>h2,
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article>.reading,
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article>.article-sources { max-width:760px !important; margin-left:auto !important; margin-right:auto !important; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article .wide { max-width:100% !important; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article .article-object { margin:32px auto !important; padding:0 !important; min-width:0; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article .article-object img { display:block; width:100% !important; height:auto !important; max-height:none !important; object-fit:contain !important; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article .article-object h3 { font:700 23px/1.25 Cambria,serif !important; margin:0 0 12px !important; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article figcaption,
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article figcaption p { font:15px/1.6 Arial,sans-serif !important; color:#3b4e59 !important; text-align:left !important; margin:8px 0 !important; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article .table-scroll { max-width:100%; overflow-x:auto; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article table { width:100%; border-collapse:collapse; font:16px/1.6 Arial,sans-serif; text-align:left; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article th,
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article td { padding:10px; border-bottom:1px solid #ccd6dd; vertical-align:top; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article th { background:#edf2f5; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article meter { display:block; width:100%; height:24px; accent-color:#287b81; }
+body.drishvara-v2-active.article-v2 #article-body .reviewed-article .article-sources { border-top:1px solid #d7ae53; margin-top:40px; }

@@ -6,7 +6,7 @@ import path from "node:path";
 import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 import { snapshotHash } from "./lib/ag70d-word-selection-engine.mjs";
-import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
+import { syntheticReviewImage, syntheticArticleLayout } from "./lib/editorial-review-test-fixtures.mjs";
 
 // Explicitly synthetic Auth/RPC browser fixture. Does not connect to hosted Supabase or write approvals.
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
@@ -17,12 +17,15 @@ let browser, server, checks = 0, base, chosenDecision = null, fixtureAdmin = fal
 const id = randomUUID(), version = randomUUID(), hash = "sha256:" + "a".repeat(64);
 const scopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
 const wordScopes = ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"];
+const revisionTasks = [], revisionCommands = [];
+const currentTasks = () => revisionTasks.filter(t => t.fixture_kind === data.candidate.kind);
 const data = { candidate: { id, kind: "article", external_id: "synthetic-browser-article", created_by: "synthetic-author" },
   version: { id: version, title: "Synthetic article review fixture", content_hash: hash,
     payload: { desk: "world_affairs", body: 'Synthetic article. <img src=x onerror="window.bad=true">', sources: [], media: [], research_refs: ["synthetic-only"] } },
   decisions: [], release_requests: [] };
 const state = () => { const required = data.candidate.kind === "word" ? wordScopes : scopes;
-  return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : chosenDecision ? [chosenDecision.scope] : [], reviews_complete: fixtureAllApproved }; };
+    const pending = currentTasks().filter(t => t.status === "open").length;
+    return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : chosenDecision ? [chosenDecision.scope] : [], reviews_complete: fixtureAllApproved && !pending, pending_revision_tasks: pending }; };
 const receipt = value => ({ ok: true, ...value, public_output_allowed: false, runtime_activation: false });
 const requests = [], errors = [];
 const accessDecisions = [], intakeCommands = [];
@@ -50,6 +53,25 @@ function fakeFetch(url, options) {
       case "lookup_person": value = receipt({ person: { id: "synthetic-member", email: command.email, capabilities: [], assignments: [] } }); break;
       case "set_capability": case "set_assignment": accessDecisions.push(command); value = receipt({ event_id: randomUUID() }); break;
       case "intake": intakeCommands.push(command); value = receipt({ candidate_id: id, version_id: randomUUID(), status: "pending_review" }); break;
+      case "list_revisions": value = receipt({ tasks: currentTasks() }); break;
+      case "request_revision": {
+        revisionCommands.push(command);
+        const task = { id: randomUUID(), candidate_id: id, version_id: version, content_hash: hash, instructions: command.instructions,
+          evidence_refs: command.evidence_refs, status: "open", can_cancel: true, fixture_kind: data.candidate.kind };
+        revisionTasks.push(task); value = receipt({ task }); break;
+      }
+      case "submit_revision": {
+        assert.equal(command.comparison_acknowledged, true);
+        const task = currentTasks().find(t => t.id === command.task_id); assert(task && task.status === "open");
+        revisionCommands.push(command); task.status = "submitted";
+        task.resolution = { note: "Synthetic comparison acknowledged; fresh reviews required.", result_version_id: randomUUID() };
+        value = receipt({ candidate_id: id, version_id: task.resolution.result_version_id, task_id: task.id, status: "pending_review" }); break;
+      }
+      case "cancel_revision": {
+        const task = currentTasks().find(t => t.id === command.task_id); assert(task && task.status === "open");
+        revisionCommands.push(command); task.status = "cancelled"; task.resolution = { note: command.note, result_version_id: null };
+        value = receipt({ task_id: task.id, status: "cancelled" }); break;
+      }
       case "review_batch": case "decision":
         assert.equal(command.content_hash, hash); assert.equal(command.version_id, version); assert.equal(command.candidate_id, id);
         chosenDecision = { ...command, scope: command.scope || command.scopes[0] }; data.decisions.push({ ...command, actor_id: "synthetic-reviewer" }); value = receipt({ decision_id: randomUUID(), review_state: state() }); break;
@@ -148,11 +170,46 @@ try {
   check("no external browser requests", requests.length === 0);
   check("no runtime errors", errors.length === 0);
   check("no browser token or decision persistence", await page.evaluate(() => localStorage.length === 0 && sessionStorage.length === 0));
+  check("short copy is visibly identified before any approval", (await page.locator(".article-word-count").innerText()).includes("outside the 1,500"));
+  check("missing Article media has a visible pending state rather than a silent fallback", (await page.locator(".article-media-review").innerText()).includes("No primary image attached"));
+  data.version.payload.media = [syntheticReviewImage()];
+  await page.locator("#refresh").click();
+  await page.waitForFunction(() => document.querySelector(".article-review-image")?.naturalWidth === 320);
+  check("saved private image is actually decoded in the review document", await page.locator(".article-review-image").evaluate(e => e.complete && e.naturalWidth === 320 && e.naturalHeight === 180));
+  check("preview is exact-version bound and never loads the source URL in the browser", await page.locator(".article-review-image").evaluate(e => e.src.includes("action=media") && e.src.includes("version_id=") && e.src.includes("content_hash=")) && requests.length === 0);
+  check("image attribution and source link are visible without opening raw JSON", (await page.locator(".article-media-review figcaption").innerText()) === data.version.payload.media[0].attribution && await page.locator(".article-media-review a").getAttribute("href") === data.version.payload.media[0].source_url);
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 }); await page.locator(".article-media-review").scrollIntoViewIfNeeded();
+    check("image review fits desktop/mobile " + width, await page.locator(".article-review-image").evaluate(e => e.getBoundingClientRect().width > 0 && e.getBoundingClientRect().right <= innerWidth) && await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: path.join(screenshotDir, "article-image-review-synthetic-" + width + ".png"), fullPage: false });
+  }
+  const legacyPayload = structuredClone(data.version.payload);
+  data.version.payload = syntheticArticleLayout();
+  await page.locator("#refresh").click(); await page.waitForFunction(() => document.querySelectorAll(".article-review-image").length === 2);
+  check("all saved images are available for private review", await page.locator(".article-review-image").count() === 2);
+  const reading = await context.newPage(); await reading.goto(new URL(await page.locator(".article-reading-preview").getAttribute("src"), base).href);
+  await reading.waitForFunction(() => [...document.images].length === 2 && [...document.images].every(i => i.naturalWidth > 0));
+  check("saved reading preview includes all anchored enrichment and images", await reading.locator(".article-object").count() === 5 && await reading.locator("meter").count() === 2 && await reading.locator('h2').first().innerText() === "Synthetic section heading");
+  for (const width of [1440, 390]) {
+    await reading.setViewportSize({ width, height: 1000 });
+    check("reading layout has no clipping or cropped diagrams at " + width, await reading.evaluate(() => document.documentElement.scrollWidth <= innerWidth && [...document.images].every(i => Math.abs(i.getBoundingClientRect().height / i.getBoundingClientRect().width - i.naturalHeight / i.naturalWidth) < .01)));
+    await reading.screenshot({ path: path.join(screenshotDir, "article-reading-layout-synthetic-" + width + ".png"), fullPage: false });
+    await reading.locator("#object-chart").scrollIntoViewIfNeeded();
+    await reading.screenshot({ path: path.join(screenshotDir, "article-enrichment-synthetic-" + width + ".png"), fullPage: false });
+  }
+  await reading.close();
+  data.version.payload = legacyPayload; data.version.payload.media = [];
+  await page.locator("#refresh").click(); await page.waitForSelector(".review-form");
   await page.getByRole("button", { name: "Propose corrected version", exact: true }).click();
+  await page.locator('dialog[aria-label="Save correction request"] textarea').first().fill("Replace the synthetic Article body and check its image attribution.");
+  await page.locator('dialog[aria-label="Save correction request"] textarea').nth(1).fill("synthetic-article-source");
+  await page.getByRole("button", { name: "Save request and open editor", exact: true }).click();
+  await page.waitForSelector("#correction-dialog");
+  check("Article instructions are saved before opening the full-copy editor", revisionCommands[0].action === "request_revision" && (await page.locator(".saved-instructions").innerText()) === revisionCommands[0].instructions);
   check("revision editor binds original identity and current version", (await page.locator("#correction-dialog .hash").innerText()).includes(data.candidate.external_id) && (await page.locator("#correction-dialog .hash").innerText()).includes(version));
   check("revision editor provides the complete original Article text, not JSON", await page.locator('#correction-dialog [name="body"]').inputValue() === data.version.payload.body && await page.locator('#correction-dialog [name="payload"]').count() === 0);
   check("private image correction offers upload, aspect ratio and source-use fields", await page.locator('#correction-dialog [name="image_file"]').count() === 1 && await page.locator('#correction-dialog [name="image_ratio"] option').count() === 2 && await page.locator('#correction-dialog [name="image_source_url"]').count() === 1);
-  await page.getByRole("button", { name: "Submit corrected copy for review", exact: true }).click();
+  await page.getByRole("button", { name: "Review corrected copy", exact: true }).click();
   check("unchanged copy is not resubmitted", intakeCommands.length === 0 && (await page.locator("#correction-dialog").innerText()).includes("No correction"));
   const raster = syntheticReviewImage();
   await page.locator('#correction-dialog [name="body"]').fill("Synthetic complete corrected article with a private raster.");
@@ -162,10 +219,27 @@ try {
   check("private raster preview decodes without an external request", await page.locator(".private-image-preview").evaluate(async e => { await e.decode(); return e.naturalWidth === 320; }));
   for (const key of ["alt", "attribution", "source_url"]) await page.locator('#correction-dialog [name="image_' + key + '"]').fill(raster[key]);
   check("mobile complete-copy editor stays within viewport", await page.locator("#correction-dialog").evaluate(e => e.getBoundingClientRect().right <= innerWidth && e.scrollWidth <= e.clientWidth));
+  await page.getByRole("button", { name: "Review corrected copy", exact: true }).click();
+  check("before/after comparison shows the actual text change and does not submit", (await page.locator(".change-comparison").innerText()).includes("complete corrected article") && revisionCommands.length === 1);
+  check("new image comparison exposes attribution, not raw private image bytes", (await page.locator(".change-comparison").innerText()).includes(raster.attribution) && !(await page.locator(".change-comparison").innerText()).includes(raster.upload_png));
+  await page.getByRole("button", { name: "Submit corrected copy for review", exact: true }).click();
+  check("an unchecked comparison cannot submit a corrected version", revisionCommands.length === 1 && await page.locator('[name="comparison_acknowledged"]').evaluate(e => e.validity.valueMissing));
+  await page.locator('[name="comparison_acknowledged"]').check();
+  await page.locator('#correction-dialog [name="body"]').fill("Synthetic complete corrected article with a private raster and final edit.");
+  check("editing after comparison clears its acknowledgment", !await page.locator('[name="comparison_acknowledged"]').isChecked() && await page.locator(".change-comparison").isHidden());
+  await page.getByRole("button", { name: "Review corrected copy", exact: true }).click();
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 960 });
+    await page.locator(".change-comparison").scrollIntoViewIfNeeded();
+    check("revision comparison fits desktop/mobile " + width, await page.locator("#correction-dialog").evaluate(e => e.getBoundingClientRect().right <= innerWidth && e.scrollWidth <= e.clientWidth));
+    await page.screenshot({ path: path.join(screenshotDir, "revision-comparison-synthetic-" + width + ".png"), fullPage: false });
+  }
+  await page.locator('[name="comparison_acknowledged"]').check();
   page.once("dialog", dialog => dialog.accept()); await page.getByRole("button", { name: "Submit corrected copy for review", exact: true }).click();
   await page.waitForFunction(() => !document.getElementById("correction-dialog"));
-  check("correction submits one complete version with the original identity and new image", intakeCommands.length === 1 && intakeCommands[0].expected_version_id === version && intakeCommands[0].external_id === data.candidate.external_id && intakeCommands[0].payload.media[0].upload_png === raster.upload_png && intakeCommands[0].payload.body.includes("complete corrected"));
-  check("correction preserves existing sources and research references", JSON.stringify(intakeCommands[0].payload.sources) === JSON.stringify(data.version.payload.sources) && JSON.stringify(intakeCommands[0].payload.research_refs) === JSON.stringify(data.version.payload.research_refs));
+  const articleCorrection = revisionCommands.find(c => c.action === "submit_revision");
+  check("correction submits one complete version bound to its saved task and exact base", intakeCommands.length === 0 && articleCorrection.version_id === version && articleCorrection.task_id === revisionTasks[0].id && articleCorrection.payload.media[0].upload_png === raster.upload_png && articleCorrection.payload.body.includes("complete corrected"));
+  check("correction preserves existing sources and research references", JSON.stringify(articleCorrection.payload.sources) === JSON.stringify(data.version.payload.sources) && JSON.stringify(articleCorrection.payload.research_refs) === JSON.stringify(data.version.payload.research_refs));
   fixtureAdmin = true; await page.reload(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
   check("designated Admin sees separate People, Acceptance and Publishing areas", await page.locator("#tab-people").isVisible() && await page.locator("#tab-acceptance").isVisible() && await page.locator("#tab-publishing").isVisible());
   check("Admin self-review needs a separate unchecked acknowledgment", await page.locator(".self-review-notice input").isChecked() === false && await page.locator(".self-review-notice textarea").getAttribute("required") !== null);
@@ -200,6 +274,13 @@ try {
   await page.locator("#tab-review").focus(); await page.keyboard.press("ArrowRight");
   check("workspace tabs support keyboard navigation", await page.locator("#tab-acceptance").getAttribute("aria-selected") === "true");
   fixtureAllApproved = true;
+  await page.locator("#tab-publishing").click();
+  await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
+  await page.waitForFunction(() => document.querySelector(".release-readiness")?.textContent.includes("long-form word-count"));
+  check("all synthetic review flags cannot release a short Article", await page.getByRole("button", { name: "Request controlled release", exact: true }).isDisabled() && (await page.locator(".release-readiness").innerText()).includes("long-form word-count"));
+  data.version.payload.body = "Synthetic long-form fixture only. ".repeat(400);
+  await page.locator("#refresh").click();
+  await page.waitForFunction(() => document.querySelector(".article-word-count")?.textContent.includes("length check passed"));
   await page.locator("#tab-publishing").click();
   await page.waitForFunction(() => document.querySelector(".scope-list")?.querySelectorAll(".complete").length === 6);
   check("complete synthetic approvals unlock the controlled-release request", await page.getByRole("button", { name: "Request controlled release", exact: true }).isEnabled());
@@ -276,16 +357,80 @@ try {
   await page.waitForFunction(() => document.querySelector("#message")?.textContent.includes("Review recorded"));
   check("eight checked aspects use one batch request, not eight separate submissions", data.decisions.length === beforeBatch + 1 && chosenDecision.action === "review_batch" && chosenDecision.scopes.length === 8);
   await page.locator('.review-form [name="correction_required"]').selectOption("yes");
-  await page.getByRole("button", { name: "Prepare corrected copy", exact: true }).click();
+  await page.getByRole("button", { name: "Save correction request and edit", exact: true }).click();
+  check("a correction cannot be saved without actual instructions", currentTasks().length === 0 && await page.locator('.review-form [name="note"]').evaluate(e => e.validity.valueMissing));
+  const wordInstructions = "Clarify the selected English sense without changing the Sanskrit or claiming source clearance.";
+  await page.locator('.review-form [name="note"]').fill(wordInstructions);
+  await page.locator('.review-form [name="evidence_refs"]').fill("synthetic-word-entry");
+  await page.getByRole("button", { name: "Save correction request and edit", exact: true }).click();
+  await page.waitForSelector("#correction-dialog");
   check("correction branch opens complete bilingual meaning and essay fields without an approval", await page.locator('#correction-dialog [name="sanskrit"]').count() === 1 && await page.locator('#correction-dialog [name="meaning_details.philosophical_essay.sections.0.body_en"]').count() === 1 && data.decisions.length === beforeBatch + 1);
   check("Word corrections do not silently add a public image contract", (await page.locator("#correction-dialog").innerText()).includes("no image slot") && await page.locator('#correction-dialog [name="image_file"]').count() === 0);
   await page.keyboard.press("Escape");
+  await page.reload(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".revision-tasks");
+  check("Word instructions and evidence survive closing the editor and page reload", (await page.locator(".revision-tasks").innerText()).includes(wordInstructions) && (await page.locator(".revision-tasks").innerText()).includes("synthetic-word-entry"));
+  fixtureAllApproved = true; await page.locator("#tab-publishing").click();
+  await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
+  check("an open correction blocks release even with every synthetic approval", await page.getByRole("button", { name: "Send to daily publish queue", exact: true }).isDisabled() && (await page.locator(".release-readiness").innerText()).includes("correction"));
+  fixtureAllApproved = false; await page.locator("#tab-review").click();
+  await page.getByRole("button", { name: "Resume correction", exact: true }).click();
+  check("resume loads the saved instructions alongside the original complete Word copy", (await page.locator(".saved-instructions").innerText()) === wordInstructions && await page.locator('#correction-dialog [name="meaning_en"]').inputValue() === data.version.payload.content.meaning_en);
+  await page.locator('#correction-dialog [name="meaning_en"]').fill("Synthetic clarified selected sense for review only.");
+  await page.getByRole("button", { name: "Review corrected copy", exact: true }).click();
+  check("Word comparison shows both the original and corrected meaning", (await page.locator(".change-comparison").innerText()).includes(data.version.payload.content.meaning_en) && (await page.locator(".change-comparison").innerText()).includes("clarified selected sense"));
+  await page.locator('[name="comparison_acknowledged"]').check();
+  page.once("dialog", dialog => dialog.accept()); await page.getByRole("button", { name: "Submit corrected copy for review", exact: true }).click();
+  await page.waitForFunction(() => !document.getElementById("correction-dialog"));
+  check("saved Word correction resolves the task but creates no approval or public write", currentTasks()[0].status === "submitted" && data.decisions.length === beforeBatch + 1 && releaseRequests === 1 && revisionCommands.filter(c => c.action === "submit_revision").length === 2);
+  await page.getByRole("button", { name: "Propose corrected version", exact: true }).click();
+  await page.locator('dialog[aria-label="Save correction request"] textarea').first().fill("Synthetic request to test reasoned withdrawal without changing a copy.");
+  await page.getByRole("button", { name: "Save request and open editor", exact: true }).click(); await page.waitForSelector("#correction-dialog");
+  await page.keyboard.press("Escape"); await page.getByRole("button", { name: "Withdraw request", exact: true }).click();
+  await page.locator('dialog[aria-label="Withdraw correction request"] textarea').fill("Synthetic request is unnecessary after reviewing the current copy.");
+  await page.getByRole("button", { name: "Record withdrawal", exact: true }).click();
+  await page.waitForFunction(() => !document.querySelector('dialog[aria-label="Withdraw correction request"]'));
+  check("withdrawal retains its reason and history instead of deleting the task", currentTasks().length === 2 && currentTasks()[1].status === "cancelled" && currentTasks()[1].resolution.note.includes("unnecessary"));
   await page.locator('.review-form [name="correction_required"]').selectOption("no");
   for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: 960 }); await page.locator("#review").scrollIntoViewIfNeeded();
     check("consolidated review fits desktop/mobile " + width, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({ path: path.join(screenshotDir, "consolidated-review-synthetic-" + width + ".png"), fullPage: true });
   }
+  data.candidate.kind = "article"; data.candidate.external_id = "synthetic-layout-edit"; data.version.payload = syntheticArticleLayout();
+  fixtureAllApproved = false; chosenDecision = null;
+  await page.locator("#refresh").click(); await page.waitForSelector(".article-word-count");
+  await page.getByRole("button", { name: "Propose corrected version", exact: true }).click();
+  await page.locator('dialog[aria-label="Save correction request"] textarea').first().fill("Move the diagram and add a sourced visual and takeaway object.");
+  await page.getByRole("button", { name: "Save request and open editor", exact: true }).click(); await page.waitForSelector("#correction-dialog");
+  check("existing placed images, sections and data survive opening the editor", await page.locator("#correction-dialog .image-correction").count() === 2 && await page.getByLabel("Heading", { exact: true }).inputValue() === "Synthetic section heading");
+  await page.locator("#correction-dialog .image-correction").nth(1).getByLabel("Place after body paragraph (0 = hero)", { exact: true }).fill("3");
+  await page.getByRole("button", { name: "Add image / infographic", exact: true }).click();
+  const extraImage = page.locator("#correction-dialog .image-correction").nth(2);
+  await extraImage.getByLabel("Place after body paragraph (0 = hero)", { exact: true }).fill("4");
+  await extraImage.getByLabel("Object title", { exact: true }).fill("Synthetic added visual");
+  await extraImage.getByLabel("Caption / context", { exact: true }).fill("Synthetic reviewer-added visual; no human approval claimed.");
+  await extraImage.getByLabel("Source numbers, comma separated", { exact: true }).fill("1");
+  await extraImage.getByLabel("Visual type", { exact: true }).selectOption("infographic");
+  await extraImage.locator('[type="file"]').setInputFiles({ name: "synthetic-extra.png", mimeType: "image/png", buffer: Buffer.from(raster.upload_png, "base64") });
+  await page.waitForFunction(() => [...document.querySelectorAll(".private-image-preview")].filter(i => !i.hidden && i.naturalWidth > 0).length === 1);
+  for (const [label, value] of [["Alternative text", "Synthetic added visual only"], ["Image attribution and use basis", raster.attribution], ["Image source URL", raster.source_url]]) await extraImage.getByLabel(label, { exact: true }).fill(value);
+  await page.getByRole("button", { name: "Add table, chart or takeaways", exact: true }).click();
+  const extraObject = page.locator("#correction-dialog fieldset").filter({ has: page.locator('legend', { hasText: "Structured enrichment" }) }).last();
+  await extraObject.getByLabel("Object title", { exact: true }).fill("Synthetic added takeaways");
+  await extraObject.getByLabel("Caption / context", { exact: true }).fill("Synthetic structured reviewer addition.");
+  await extraObject.getByLabel("Source numbers, comma separated", { exact: true }).fill("1");
+  await extraObject.getByLabel("Takeaways: one per line", { exact: true }).fill("Synthetic first addition.\nSynthetic second addition.");
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 960 }); await extraImage.scrollIntoViewIfNeeded();
+    check("multi-visual correction editor fits " + width, await page.locator("#correction-dialog").evaluate(e => e.scrollWidth <= e.clientWidth && e.getBoundingClientRect().right <= innerWidth));
+    await page.screenshot({ path: path.join(screenshotDir, "article-layout-editor-synthetic-" + width + ".png"), fullPage: false });
+  }
+  await page.getByRole("button", { name: "Review corrected copy", exact: true }).click();
+  await page.locator('[name="comparison_acknowledged"]').check(); page.once("dialog", dialog => dialog.accept());
+  await page.getByRole("button", { name: "Submit corrected copy for review", exact: true }).click(); await page.waitForFunction(() => !document.getElementById("correction-dialog"));
+  const layoutCorrection = revisionCommands.filter(c => c.action === "submit_revision").at(-1);
+  check("human-added images and objects submit as one immutable version with explicit placement", layoutCorrection.payload.media.length === 3 && layoutCorrection.payload.layout.objects.length === 7 && layoutCorrection.payload.layout.objects[1].after_paragraph === 3 && layoutCorrection.payload.layout.objects[2].visual_kind === "infographic");
+  check("existing chart data is preserved, no approval fabricated", JSON.stringify(layoutCorrection.payload.layout.objects.find(o => o.type === "bar_chart").values) === "[2,4]" && !Object.hasOwn(layoutCorrection, "approved"));
   check("consolidated corrections and private preview have no browser exceptions or external requests", errors.length === 0 && requests.length === 0);
   await page.locator("#sign-out").click(); await page.waitForSelector("#login-form");
   check("sign-out clears private UI", await page.locator("#document").count() === 0);

@@ -33,6 +33,10 @@
     editorial_assignment_required: "A current candidate assignment is required.",
     invalid_review_decision: "Check the rationale and evidence references. Approval needs at least one unique, actual evidence reference.",
     editorial_reviews_pending: "Required reviews are still pending.", delivery_not_activated: "Controlled delivery has not been activated.",
+    article_long_form_length_pending: "The Article does not meet the existing long-form word-count standard. Submit a corrected version before release.",
+    invalid_article_layout: "Check object titles, captions, sources, image references and paragraph positions. The changed copy needs a valid complete layout.",
+    article_layout_required: "Multiple images require explicit placement in the Article layout.",
+    article_visual_enrichment_pending: "Add one primary hero and at least one sourced enrichment object before release. This does not grant content approval.",
     delivery_readiness_unavailable: "The database delivery-readiness check is unavailable. Delivery remains disabled.",
     release_scope_denied: "A current release permission and candidate assignment are required.",
     queued_delivery_disabled: "Release request saved. Delivery is disabled; nothing was published.",
@@ -41,6 +45,14 @@
     delivery_completed: "Controlled delivery completed. See the recorded delivery result.",
     invalid_review_checklist: "Select the aspects you actually reviewed. Publisher acceptance is a separate step.",
     invalid_editorial_image: "Use a PNG image up to 96 KiB, 16:9 or 4:3, with alt text, attribution and its source URL.",
+    invalid_revision_request: "Enter correction instructions of 12-6,000 characters and valid, unique evidence references.",
+    revision_task_unavailable: "This correction request is unavailable or not assigned to your account.",
+    revision_task_closed: "This correction request is already resolved. Refresh to see its saved outcome.",
+    revision_task_limit: "Resolve or withdraw existing correction requests before opening more.",
+    revision_cancel_denied: "Only the requester or Admin can withdraw this correction request.",
+    revision_comparison_required: "Review the before/after comparison and acknowledge the exact revised copy.",
+    revision_unchanged: "No copy changes were made. The correction request remains open.",
+    editorial_corrections_pending: "A saved correction request is unresolved. Complete or explicitly withdraw it before release.",
     word_workflow_unavailable: "The approved daily Word workflow is not available.",
     delivery_pending: "Release request saved, but delivery is pending. Nothing is being reported as published." }[code] || code);
   async function busy(button, work) {
@@ -78,6 +90,146 @@
   function detail(parent, title, value) {
     if (typeof value !== "string" || !value) return;
     const section = node("section", undefined, "content-section"); section.append(node("h3", title), node("p", value, "copy")); parent.append(section);
+  }
+  function renderArticleMedia(parent, data, mediaIndex = 0) {
+    const section = node("section", undefined, "article-media-review"); section.append(node("h3", "Proposed Article image"));
+    const media = data.version.payload.media?.[mediaIndex];
+    if (!media) { section.append(node("p", "No primary image attached. Visual review pending.", "status")); parent.append(section); return; }
+    const image = node("img"); image.alt = media.alt || "Proposed image - description pending";
+    image.className = "article-review-image"; image.decoding = "async"; image.loading = "lazy";
+    image.referrerPolicy = "no-referrer";
+    const params = new URLSearchParams({ action: "media", candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash, media_index: mediaIndex });
+    const status = node("p", "Image preview loading. Relevance and source-use are not automatically approved.", "status"); status.setAttribute("role", "status");
+    image.addEventListener("load", () => { status.textContent = image.naturalWidth + " x " + image.naturalHeight + " - proposed image; review required."; });
+    image.addEventListener("error", () => { image.hidden = true; status.textContent = "Image preview unavailable. Check the saved source or replace the image; media approval remains pending."; });
+    image.src = endpoint + "?" + params;
+    const figure = node("figure"); figure.append(image, node("figcaption", media.attribution || "Attribution missing")); section.append(figure, status);
+    try {
+      const source = new URL(media.source_url);
+      if (source.protocol === "https:" && !source.username && !source.password) {
+        const link = node("a", "Inspect image source and reuse terms"); link.href = source.href; link.target = "_blank"; link.rel = "noopener noreferrer"; section.append(link);
+      }
+    } catch { section.append(node("p", "Source URL missing or invalid.", "status")); }
+    parent.append(section);
+  }
+  function articleLayoutEditor(form, payload, data) {
+    const area = node("section", undefined, "article-layout-editor"); area.append(node("h3", "Article layout & visual objects")); form.append(area);
+    const paragraphs = () => payload.body.trim().split(/\n\s*\n/).filter(Boolean).length;
+    const count = node("p", paragraphs() + " body paragraphs. Positions are checked again when saving.", "muted"); area.append(count);
+    const images = [], objects = [], headings = [], urls = new Set(); let pending = 0;
+    const input = (parent, label, value, name, type = "text") => {
+      const el = field(parent, label, node(type === "textarea" ? "textarea" : "input"));
+      if (type !== "textarea") el.type = type;
+      el.value = value ?? ""; if (name) el.name = name; return el;
+    };
+    const select = (parent, label, values, value) => {
+      const el = field(parent, label, node("select")); el.setAttribute("aria-label", label);
+      for (const [v, t] of values) el.append(new Option(t, v)); el.value = value; return el;
+    };
+    const refs = payload.sources.map((s, i) => (i + 1) + ": " + (s.title || s.url || s)).join("\n");
+    area.append(node("p", "Source numbers (update these if the source list changes):\n" + refs, "copy"));
+    const common = (box, old = {}, hero = false) => ({
+      position: input(box, "Place after body paragraph (0 = hero)", old.after_paragraph ?? (hero ? 0 : 1), null, "number"),
+      width: select(box, "Display width", [["reading", "Reading column"], ["wide", "Wide visual"]], old.width || "reading"),
+      title: input(box, "Object title", old.title || "", null),
+      caption: input(box, "Caption / context", old.caption || "", null, "textarea"),
+      sources: input(box, "Source numbers, comma separated", old.source_refs?.join(", ") || "", null)
+    });
+    function addImage(media = {}, old = {}, originalIndex = null) {
+      if (images.filter(i => !i.removed).length >= 8) { message("An Article supports up to eight images."); return; }
+      const box = node("fieldset", undefined, "image-correction"); box.append(node("legend", "Image " + (images.length + 1))); area.append(box);
+      const first = images.length === 0, state = { box, removed: false, upload: media.upload_png ?? null };
+      if (originalIndex !== null) renderArticleMedia(box, data, originalIndex);
+      state.mode = select(box, "Change the current picture?", [["keep", "No - keep existing image"], ["replace", "Yes - replace or add"], ["remove", "Remove image"]], originalIndex === null ? "replace" : "keep");
+      if (first) state.mode.name = "image_change";
+      state.common = common(box, old, images.length === 0);
+      state.kind = select(box, "Visual type", [["photograph", "Photograph"], ["infographic", "Infographic"], ["diagram", "Diagram"], ["chart", "Chart image"], ["map", "Map"]], old.visual_kind || "photograph");
+      const controls = node("div"); box.append(controls);
+      const ratio = select(controls, "Upload ratio", [["wide", "16:9 - wide image"], ["standard", "4:3 - editorial image"]], "wide");
+      if (first) ratio.name = "image_ratio";
+      const file = field(controls, "Upload PNG (up to 96 KiB; total request up to 240 KB)", node("input")); file.type = "file"; file.accept = "image/png"; if (first) file.name = "image_file";
+      const preview = node("img"); preview.alt = "Private image preview"; preview.hidden = true; preview.className = "private-image-preview"; controls.append(preview);
+      state.inputs = {};
+      for (const [key, label] of [["url", "Existing image URL or uploaded asset path"], ["alt", "Alternative text"], ["attribution", "Image attribution and use basis"], ["source_url", "Image source URL"]]) {
+        state.inputs[key] = input(controls, label, media[key], first ? "image_" + key : null);
+      }
+      const status = node("p"); status.setAttribute("role", "status"); controls.append(status);
+      function syncMode() { controls.hidden = state.mode.value !== "replace"; state.removed = state.mode.value === "remove"; }
+      state.mode.addEventListener("change", syncMode); syncMode();
+      file.addEventListener("change", async () => {
+        pending++; state.upload = null; file.setCustomValidity(""); preview.hidden = true; state.inputs.url.readOnly = false;
+        try {
+          if (!file.files.length) return;
+          const chosen = file.files[0]; if (chosen.type !== "image/png" || chosen.size > 98304) throw Error("Use a PNG up to 96 KiB.");
+          const bytes = await chosen.arrayBuffer(), bitmap = await createImageBitmap(chosen), w = bitmap.width, h = bitmap.height; bitmap.close();
+          const r = ratio.value === "wide" ? 16 / 9 : 4 / 3;
+          if (w < 320 || w > 2400 || h < 180 || h > 1800 || Math.abs(w / h - r) >= .015) throw Error("Use the selected ratio, width 320-2400px and height 180-1800px.");
+          const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map(b => b.toString(16).padStart(2, "0")).join("");
+          state.upload = btoa([...new Uint8Array(bytes)].map(b => String.fromCharCode(b)).join("")); state.inputs.url.value = "/assets/editorial/" + digest + ".png"; state.inputs.url.readOnly = true;
+          if (state.previewUrl) { URL.revokeObjectURL(state.previewUrl); urls.delete(state.previewUrl); }
+          state.previewUrl = URL.createObjectURL(chosen); urls.add(state.previewUrl); preview.src = state.previewUrl; preview.hidden = false;
+          status.textContent = w + " x " + h + " - private pending-copy image";
+        } catch (error) { status.textContent = error.message; file.setCustomValidity(error.message); }
+        finally { pending--; }
+      });
+      ratio.addEventListener("change", () => { if (file.files.length) file.dispatchEvent(new Event("change")); });
+      images.push(state);
+    }
+    const oldLayout = payload.layout;
+    for (let i = 0; i < payload.media.length; i++) addImage(payload.media[i], oldLayout?.objects.find(o => o.type === "image" && o.media_index === i), i);
+    if (!payload.media.length) { addImage(); images[0].mode.value = "remove"; images[0].mode.dispatchEvent(new Event("change")); }
+    const addPicture = node("button", "Add image / infographic"); addPicture.type = "button"; area.append(addPicture);
+    addPicture.addEventListener("click", () => { addImage(); form.dispatchEvent(new Event("change")); });
+    function addObject(old = {}) {
+      if (objects.filter(o => !o.removed.checked).length >= 8) { message("Use up to eight structured objects."); return; }
+      const box = node("fieldset"); box.append(node("legend", "Structured enrichment")); area.append(box);
+      const type = select(box, "Object type", [["takeaways", "Key takeaways"], ["table", "Comparison / data table"], ["bar_chart", "Bar chart with data table"]], old.type || "takeaways");
+      const fields = common(box, old), removed = field(box, "Remove this object", node("input")); removed.type = "checkbox";
+      const items = input(box, "Takeaways: one per line", old.items?.join("\n"), null, "textarea");
+      const columns = input(box, "Table column headings: separate with |", old.columns?.join(" | "));
+      const rows = input(box, "Table rows: one per line; cells separated with |", old.rows?.map(r => r.join(" | ")).join("\n"), null, "textarea");
+      const unit = input(box, "Chart unit", old.unit);
+      const bars = input(box, "Chart data: label | non-negative value, one per line", old.labels?.map((s, i) => s + " | " + old.values[i]).join("\n"), null, "textarea");
+      function syncType() { for (const [el, show] of [[items, type.value === "takeaways"], [columns, type.value === "table"], [rows, type.value === "table"], [unit, type.value === "bar_chart"], [bars, type.value === "bar_chart"]]) el.closest("label").hidden = !show; }
+      type.addEventListener("change", syncType); syncType(); objects.push({ type, fields, removed, items, columns, rows, unit, bars });
+    }
+    for (const o of oldLayout?.objects ?? []) if (o.type !== "image") addObject(o);
+    const addBlock = node("button", "Add table, chart or takeaways"); addBlock.type = "button"; area.append(addBlock);
+    addBlock.addEventListener("click", () => { addObject(); form.dispatchEvent(new Event("change")); });
+    function addHeading(old = {}) {
+      const box = node("fieldset"); box.append(node("legend", "Section heading")); area.append(box);
+      const heading = input(box, "Heading", old.heading), before = input(box, "Before body paragraph", old.before_paragraph || 1, null, "number");
+      const removed = field(box, "Remove heading", node("input")); removed.type = "checkbox"; headings.push({ heading, before, removed });
+    }
+    for (const s of oldLayout?.sections ?? []) addHeading(s);
+    const addSection = node("button", "Add section heading"); addSection.type = "button"; area.append(addSection);
+    addSection.addEventListener("click", () => { addHeading(); form.dispatchEvent(new Event("change")); });
+    const number = el => el.value.trim() === "" ? null : Number(el.value);
+    const commonValue = (f, id) => ({ id, after_paragraph: number(f.position), width: f.width.value, title: f.title.value.trim(), caption: f.caption.value.trim(),
+      source_refs: f.sources.value.split(",").filter(s => s.trim()).map(s => /^\d+$/.test(s.trim()) ? Number(s) : null) });
+    return {
+      loading: () => pending > 0,
+      cleanup: () => { for (const url of urls) URL.revokeObjectURL(url); },
+      sync: () => {
+        const media = [], blocks = [];
+        for (const i of images.filter(i => !i.removed)) {
+          blocks.push({ ...commonValue(i.common, "image-" + blocks.length), type: "image", media_index: media.length, visual_kind: i.kind.value });
+          media.push({ ...Object.fromEntries(Object.entries(i.inputs).map(([key, el]) => [key, el.value.trim()])), ...(i.upload ? { upload_png: i.upload } : {}) });
+        }
+        for (const o of objects.filter(o => !o.removed.checked)) {
+          const block = { ...commonValue(o.fields, "object-" + blocks.length), type: o.type.value };
+          if (block.type === "takeaways") block.items = o.items.value.split("\n").map(s => s.trim()).filter(Boolean);
+          if (block.type === "table") { block.columns = o.columns.value.split("|").map(s => s.trim()); block.rows = o.rows.value.split("\n").filter(s => s.trim()).map(s => s.split("|").map(c => c.trim())); }
+          if (block.type === "bar_chart") { const values = o.bars.value.split("\n").filter(s => s.trim()).map(s => s.split("|").map(c => c.trim())); block.unit = o.unit.value.trim(); block.labels = values.map(v => v[0]); block.values = values.map(v => v.length === 2 && v[1] !== "" ? Number(v[1]) : null); }
+          blocks.push(block);
+        }
+        payload.media = media;
+        // Old single-picture edits retain their contract unless explicit layout fields are supplied.
+        if (!oldLayout && blocks.length <= 1 && !headings.length && blocks.every(b => !b.title && !b.caption && !b.source_refs.length)) return;
+        payload.layout = { contract_version: "drishvara.article-layout.v1", sections: headings.filter(h => !h.removed.checked).map(h => ({ heading: h.heading.value.trim(), before_paragraph: number(h.before) })), objects: blocks };
+        count.textContent = paragraphs() + " body paragraphs.";
+      }
+    };
   }
   const aspectLabels = { linguistic: "Language, Sanskrit form and meaning", iast: "IAST transliteration",
     rights: "Source and image reuse", editorial: "Public wording and presentation", context: "Context and applicability",
@@ -126,20 +278,29 @@
     const submit = node("button", "Submit review", "primary"); submit.type = "submit"; form.append(submit);
     function sync() {
       const revise = correction.value === "yes", needed = needsSubject() && !revise;
-      note.required = !revise; refs.required = !revise && decision.value === "approve"; decision.disabled = revise;
+      note.required = true; note.minLength = revise ? 12 : 1; refs.required = !revise && decision.value === "approve"; decision.disabled = revise;
       subject.box.hidden = !needed; subject.ack.required = needed; subject.reason.required = needed;
       if (!needed) { subject.ack.checked = false; subject.reason.value = ""; }
       if (self) { self.box.hidden = revise; self.ack.required = !revise; self.reason.required = !revise; }
-      submit.textContent = revise ? "Prepare corrected copy" : "Submit review";
+      submit.textContent = revise ? "Save correction request and edit" : "Submit review";
     }
     form.addEventListener("change", sync);
     form.addEventListener("input", () => { note.setCustomValidity(""); refs.setCustomValidity(""); }); sync();
-    let pendingCommand = null;
-    form.addEventListener("input", () => { pendingCommand = null; });
-    form.addEventListener("change", () => { pendingCommand = null; });
+    let pendingCommand = null, revisionCommand = null;
+    form.addEventListener("input", () => { pendingCommand = null; revisionCommand = null; });
+    form.addEventListener("change", () => { pendingCommand = null; revisionCommand = null; });
     form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
-      if (correction.value === "yes") { if (data.can_edit) correctionEditor(data); else message("An assigned editor or Admin must submit the correction."); return; }
       const chosen = selectedScopes(), evidence = refs.value.split("\n").map(v => v.trim()).filter(Boolean);
+      if (correction.value === "yes") {
+        note.setCustomValidity(note.value.trim().length < 12 ? "Describe the correction in at least 12 characters." : "");
+        refs.setCustomValidity(evidence.length > 50 || evidence.some(v => v.length > 500) || new Set(evidence).size !== evidence.length ? "Use up to 50 unique references, each at most 500 characters." : "");
+        if (!form.reportValidity()) return;
+        if (!data.can_edit) { message("An assigned editor or Admin must submit the correction."); return; }
+        revisionCommand ??= revisionRequest(data, note.value.trim(), evidence);
+        const receipt = await command(revisionCommand);
+        await open(data.candidate.id); message("Correction instructions saved. Closing the editor will not delete the request.");
+        correctionEditor(data, receipt.task); return;
+      }
       if (!chosen.length) { message("Check at least one aspect you actually reviewed."); return; }
       note.setCustomValidity(note.value.trim() ? "" : "Enter the finding and reason for this decision.");
       refs.setCustomValidity(decision.value === "approve" && !evidence.length ? "Approval requires an actual evidence reference." :
@@ -152,17 +313,72 @@
         note: note.value.trim(), evidence_refs: evidence,
         ...(self ? { admin_exception: { policy_ref: session.self_review_policy_ref, reason: self.reason.value.trim(), acknowledged: self.ack.checked } } : {}),
         ...(needsSubject() ? { subject_review_exception: { policy_ref: session.subject_review_policy_ref, reason: subject.reason.value.trim(), acknowledged: subject.ack.checked } } : {}) };
-      await command(pendingCommand); message("Review recorded for the checked aspects. Acceptance and publication remain separate."); await refresh();
+      await command(pendingCommand); await refresh(); message("Review recorded for the checked aspects. Acceptance and publication remain separate.");
     }); });
     side.append(form);
   }
-  function correctionEditor(data) {
+  const revisionRequest = (data, instructions, evidence = []) => ({ action: "request_revision", command_id: crypto.randomUUID(),
+    candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash, instructions, evidence_refs: evidence });
+  function requestCorrection(data) {
+    const dialog = node("dialog"); dialog.setAttribute("aria-label", "Save correction request");
+    const form = node("form"); form.append(node("h2", "Save correction request"));
+    const instructions = field(form, "Correction instructions", node("textarea")); instructions.required = true; instructions.minLength = 12; instructions.maxLength = 6000; instructions.rows = 4;
+    const refs = field(form, "Evidence references, one per line", node("textarea")); refs.rows = 3;
+    const close = node("button", "Cancel"); close.type = "button"; close.addEventListener("click", () => dialog.close());
+    const submit = node("button", "Save request and open editor", "primary"); submit.type = "submit"; form.append(close, submit);
+    let pending = null; form.addEventListener("input", () => { pending = null; instructions.setCustomValidity(""); refs.setCustomValidity(""); });
+    form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
+      const evidence = refs.value.split("\n").map(v => v.trim()).filter(Boolean);
+      instructions.setCustomValidity(instructions.value.trim().length < 12 ? "Describe the requested correction." : "");
+      refs.setCustomValidity(evidence.length > 50 || evidence.some(v => v.length > 500) || new Set(evidence).size !== evidence.length ? "Use up to 50 unique references." : "");
+      if (!form.reportValidity()) return;
+      pending ??= revisionRequest(data, instructions.value.trim(), evidence); const receipt = await command(pending);
+      dialog.close(); await open(data.candidate.id); message("Correction request saved."); correctionEditor(data, receipt.task);
+    }); }); dialog.append(form); document.body.append(dialog); dialog.addEventListener("close", () => dialog.remove()); dialog.showModal();
+  }
+  function withdrawCorrection(data, task) {
+    const dialog = node("dialog"); dialog.setAttribute("aria-label", "Withdraw correction request");
+    const form = node("form"); form.append(node("h2", "Withdraw correction request"), node("p", task.instructions, "copy"));
+    const note = field(form, "Reason for withdrawal", node("textarea")); note.required = true; note.minLength = 12; note.maxLength = 6000;
+    const close = node("button", "Keep request"); close.type = "button"; close.addEventListener("click", () => dialog.close());
+    const submit = node("button", "Record withdrawal"); submit.type = "submit"; form.append(close, submit);
+    let pending = null; form.addEventListener("input", () => { pending = null; });
+    form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
+      pending ??= { action: "cancel_revision", command_id: crypto.randomUUID(), candidate_id: data.candidate.id, task_id: task.id,
+        version_id: task.version_id, content_hash: task.content_hash, note: note.value.trim() };
+      await command(pending); dialog.close(); message("Withdrawal recorded; no copy was approved."); await refresh();
+    }); }); dialog.append(form); document.body.append(dialog); dialog.addEventListener("close", () => dialog.remove()); dialog.showModal();
+  }
+  function renderCorrections(doc, data) {
+    const section = node("section", undefined, "revision-tasks"); section.append(node("h3", "Correction requests"));
+    const tasks = data.revision_tasks;
+    if (!tasks.length) section.append(node("p", "No saved correction requests.", "muted"));
+    for (const task of tasks) {
+      const item = node("details"); item.open = ["open", "stale"].includes(task.status);
+      item.append(node("summary", "Correction request - " + task.status), node("p", task.instructions, "copy"),
+        node("p", "Base version: " + task.version_id + " / " + task.content_hash, "hash"));
+      if (task.evidence_refs.length) item.append(node("pre", task.evidence_refs.join("\n")));
+      if (task.status === "open" && data.can_edit) {
+        const resume = node("button", "Resume correction"); resume.type = "button"; resume.addEventListener("click", () => correctionEditor(data, task)); item.append(resume);
+      }
+      if (task.status === "stale") item.append(node("p", "A newer copy exists. This request is not automatically transferred or marked complete.", "status"));
+      if (["open", "stale"].includes(task.status) && task.can_cancel) {
+        const cancel = node("button", "Withdraw request"); cancel.type = "button"; cancel.addEventListener("click", () => withdrawCorrection(data, task)); item.append(cancel);
+      }
+      if (task.resolution) item.append(node("p", task.resolution.note, "muted"), node("p", "Result version: " + (task.resolution.result_version_id || "No copy change"), "hash"));
+      section.append(item);
+    }
+    doc.append(section);
+  }
+  function correctionEditor(data, task) {
     const dialog = node("dialog"); dialog.id = "correction-dialog"; dialog.setAttribute("aria-labelledby", "correction-title");
     const form = node("form"), heading = node("div", undefined, "dialog-heading");
     const title = node("h2", "Revise complete copy"); title.id = "correction-title";
     const close = node("button", "\u00d7"); close.type = "button"; close.setAttribute("aria-label", "Close correction editor"); close.addEventListener("click", () => dialog.close());
     heading.append(title, close); form.append(heading, node("p", "This saves a new immutable version. Earlier decisions remain in history but do not approve the revised copy.", "muted"));
     const binding = node("p", data.candidate.external_id + " / Version " + data.version.id, "hash"); form.append(binding);
+    form.append(node("h3", "Saved correction instructions"), node("p", task.instructions, "copy saved-instructions"));
+    if (task.evidence_refs.length) form.append(node("pre", task.evidence_refs.join("\n")));
     const payload = structuredClone(data.version.payload), original = JSON.stringify(payload);
     const titleInput = field(form, "Title", node("input")); titleInput.name = "title"; titleInput.value = data.version.title; titleInput.required = true; titleInput.maxLength = 400;
     const display = key => ({ meaning_en: "Homepage meaning - English", meaning_hi: "Homepage meaning - Hindi", iast: "IAST", sanskrit: "Sanskrit", hindi: "Hindi equivalent", english: "English equivalent", body: "Complete article text", reuse_approval_ref: "Actual source-use clearance reference (leave empty if pending)", review_status: "Source review status" }[key] || key.replaceAll("_", " "));
@@ -201,62 +417,66 @@
     }
     editObject(form, data.candidate.kind === "word" ? payload.content : { body: payload.body, sources: payload.sources });
     if (data.candidate.kind === "article") form.querySelector('[name="body"]').addEventListener("input", event => { payload.body = event.target.value; });
-    let upload = payload.media?.[0]?.upload_png ?? null, previewUrl = null, imageLoading = false;
-    if (data.candidate.kind === "article") {
-      const media = node("fieldset", undefined, "image-correction"); media.append(node("legend", "Picture correction"));
-      const mode = field(media, "Change the current picture?", node("select")); mode.name = "image_change";
-      for (const [v, t] of [["keep", "No - keep existing image"], ["replace", "Yes - replace or add"], ["remove", "Remove image"]]) mode.append(new Option(t, v));
-      const controls = node("div"); controls.hidden = true;
-      const ratio = field(controls, "Upload ratio", node("select")); ratio.name = "image_ratio";
-      ratio.append(new Option("16:9 - wide hero", "wide"), new Option("4:3 - editorial image", "standard"));
-      const file = field(controls, "Upload PNG (up to 96 KiB)", node("input")); file.type = "file"; file.accept = "image/png"; file.name = "image_file";
-      const image = node("img"); image.alt = "Private image preview"; image.hidden = true; image.className = "private-image-preview"; controls.append(image);
-      const inputs = {};
-      for (const [key, label] of [["url", "Existing image URL or uploaded asset path"], ["alt", "Alternative text"], ["attribution", "Image attribution and use basis"], ["source_url", "Image source URL"]]) {
-        const input = field(controls, label, node("input")); input.name = "image_" + key; input.value = payload.media[0]?.[key] ?? ""; inputs[key] = input;
-      }
-      const status = node("p"); status.setAttribute("role", "status"); controls.append(status); media.append(controls); form.append(media);
-      mode.addEventListener("change", () => { controls.hidden = mode.value !== "replace"; for (const input of Object.values(inputs)) input.required = mode.value === "replace"; });
-      file.addEventListener("change", async () => {
-        imageLoading = true;
-        upload = null; status.textContent = ""; file.setCustomValidity("");
-        if (previewUrl) URL.revokeObjectURL(previewUrl); image.hidden = true; inputs.url.readOnly = false;
-        if (!file.files.length) { imageLoading = false; return; }
-        try {
-          const chosen = file.files[0]; if (chosen.type !== "image/png" || chosen.size > 98304) throw Error("Use a PNG up to 96 KiB.");
-          const bytes = await chosen.arrayBuffer(), bitmap = await createImageBitmap(chosen), w = bitmap.width, h = bitmap.height; bitmap.close();
-          const r = ratio.value === "wide" ? 16 / 9 : 4 / 3;
-          if (w < 320 || w > 2400 || h < 180 || h > 1800 || Math.abs(w / h - r) >= .015) throw Error("Use the selected ratio, width 320-2400px and height 180-1800px.");
-          const digest = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map(b => b.toString(16).padStart(2, "0")).join("");
-          upload = btoa([...new Uint8Array(bytes)].map(b => String.fromCharCode(b)).join("")); inputs.url.value = "/assets/editorial/" + digest + ".png"; inputs.url.readOnly = true;
-          previewUrl = URL.createObjectURL(chosen); image.src = previewUrl; image.hidden = false; status.textContent = w + " x " + h + " - private pending-copy image";
-        } catch (error) { status.textContent = error.message; file.setCustomValidity(error.message); }
-        finally { imageLoading = false; }
-      });
-      ratio.addEventListener("change", () => { if (file.files.length) file.dispatchEvent(new Event("change")); });
-      form.addEventListener("submit", () => {
-        if (mode.value === "remove") payload.media = [];
-        if (mode.value === "replace") payload.media = [{ ...Object.fromEntries(Object.entries(inputs).map(([key, input]) => [key, input.value.trim()])), ...(upload ? { upload_png: upload } : {}) }];
-      });
-    } else form.append(node("p", "Word public copy has no image slot. No image will be added to its publication contract.", "muted"));
+    const layoutEditor = data.candidate.kind === "article" ? articleLayoutEditor(form, payload, data) : null;
+    if (!layoutEditor) form.append(node("p", "Word public copy has no image slot. No image will be added to its publication contract.", "muted"));
     const status = node("p"); status.setAttribute("role", "status"); form.append(status);
-    const save = node("button", "Submit corrected copy for review", "primary"); save.type = "submit"; form.append(save);
-    let pending = null;
-    form.addEventListener("input", () => { pending = null; }); form.addEventListener("change", () => { pending = null; });
+    const comparison = node("section", undefined, "change-comparison"); comparison.hidden = true;
+    const comparisonAck = node("input"); comparisonAck.type = "checkbox"; comparisonAck.name = "comparison_acknowledged";
+    const ackLabel = node("label", "I reviewed the before/after changes. This is not approval for publication.", "checkbox-label"); ackLabel.prepend(comparisonAck); ackLabel.hidden = true;
+    const save = node("button", "Review corrected copy", "primary"); save.type = "submit"; form.append(comparison, ackLabel, save);
+    let pending = null, submitted = false, comparedCopy = null;
+    function resetComparison(event) {
+      pending = null; if (event.target === comparisonAck) return;
+      comparedCopy = null; comparison.hidden = true; ackLabel.hidden = true; comparisonAck.checked = false; comparisonAck.required = false; save.textContent = "Review corrected copy";
+    }
+    form.addEventListener("input", resetComparison); form.addEventListener("change", resetComparison);
     form.addEventListener("submit", event => { event.preventDefault(); busy(save, async () => {
-      if (imageLoading) { status.textContent = "Wait for image validation to complete."; return; }
+      if (layoutEditor?.loading()) { status.textContent = "Wait for image validation to complete."; return; }
+      layoutEditor?.sync();
       if (JSON.stringify(payload) === original && titleInput.value === data.version.title) { status.textContent = "No correction was made."; return; }
+      const proposed = JSON.stringify({ title: titleInput.value.trim(), payload });
+      if (comparedCopy !== proposed) {
+        const changes = [];
+        function compare(before, after, path = "copy") {
+          if (JSON.stringify(before) === JSON.stringify(after)) return;
+          if (before && after && typeof before === "object" && typeof after === "object") {
+            for (const key of [...new Set([...Object.keys(before), ...Object.keys(after)])].sort()) compare(before[key], after[key], path + "." + key);
+          } else changes.push({ path, before, after });
+        }
+        compare({ title: data.version.title, payload: data.version.payload }, { title: titleInput.value.trim(), payload });
+        const displayChange = (value, path) => {
+          const imageData = data => data ? "Private PNG data (" + data.length + " encoded characters)" : "No uploaded image";
+          if (path.endsWith("upload_png")) return imageData(value);
+          if (value === undefined) return "Not present";
+          return value !== null && typeof value === "object" ? JSON.stringify(value, (key, data) => key === "upload_png" ? imageData(data) : data, 2) : String(value);
+        };
+        comparison.replaceChildren(node("h3", "Before / After"));
+        for (const change of changes) {
+          const row = node("section", undefined, "comparison-row"); row.append(node("h4", change.path.replaceAll("_", " ")));
+          const columns = node("div", undefined, "comparison-columns");
+          for (const [label, value] of [["Before", change.before], ["After", change.after]]) {
+            const side = node("div"); side.append(node("strong", label), node("p", displayChange(value, change.path), "copy")); columns.append(side);
+          } row.append(columns); comparison.append(row);
+        }
+        if (!changes.length) { status.textContent = "No correction was made."; return; }
+        comparedCopy = proposed; comparison.hidden = false; ackLabel.hidden = false; comparisonAck.checked = false; comparisonAck.required = true;
+        save.textContent = "Submit corrected copy for review"; status.textContent = "Review the proposed changes and acknowledge them before submitting."; return;
+      }
+      if (!comparisonAck.checked) { status.textContent = "Acknowledge the displayed changes before submitting."; return; }
       if (!confirm("Save this complete revised copy as a new version with fresh reviews required?")) return;
-      pending ??= { action: "intake", command_id: crypto.randomUUID(), kind: data.candidate.kind, external_id: data.candidate.external_id,
-        expected_version_id: data.version.id, title: titleInput.value.trim(), payload };
+      pending ??= { action: "submit_revision", command_id: crypto.randomUUID(), candidate_id: data.candidate.id, task_id: task.id,
+        version_id: task.version_id, content_hash: task.content_hash, kind: data.candidate.kind, title: titleInput.value.trim(), payload, comparison_acknowledged: true };
       try { await command(pending); } catch (error) { status.textContent = friendly(error.message); throw error; }
-      dialog.close(); message("Corrected version submitted. Prior approvals do not apply to this copy."); await refresh();
+      submitted = true; dialog.close(); message("Corrected version submitted and linked to its saved instructions. Prior approvals do not apply to this copy."); await refresh();
     }); });
-    dialog.append(form); document.body.append(dialog); dialog.addEventListener("close", () => { if (previewUrl) URL.revokeObjectURL(previewUrl); dialog.remove(); }); dialog.showModal();
+    dialog.append(form); document.body.append(dialog); dialog.addEventListener("close", () => { layoutEditor?.cleanup(); dialog.remove(); if (!submitted && selected?.candidate.id === data.candidate.id) open(data.candidate.id).catch(error => message(friendly(error.message))); }); dialog.showModal();
   }
   async function open(id) {
     const seq = ++loadSequence;
     const data = await command({ action: "open", candidate_id: id });
+    const revisions = await command({ action: "list_revisions", candidate_id: id });
+    if (!Array.isArray(revisions.tasks)) throw Error("revision_task_unavailable");
+    data.revision_tasks = revisions.tasks;
     if (seq !== loadSequence) return;
     selected = data; renderQueue();
     const doc = $("document"), p = data.version.payload;
@@ -264,7 +484,7 @@
     doc.append(node("p", "Version: " + data.version.id, "version-label"));
     if (data.can_edit) {
       const edit = node("button", "Propose corrected version"); edit.type = "button";
-      edit.addEventListener("click", () => correctionEditor(data)); doc.append(edit);
+      edit.addEventListener("click", () => requestCorrection(data)); doc.append(edit);
     }
     if (data.candidate.kind === "word") {
       const c = p.content;
@@ -279,7 +499,19 @@
       for (const section of c.meaning_details?.philosophical_essay?.sections ?? []) {
         detail(doc, section.heading_en, section.body_en); detail(doc, section.heading_hi, section.body_hi);
       }
-    } else { detail(doc, p.desk, p.body); }
+    } else {
+      const length = data.article_length;
+      doc.append(node("p", length ? length.words + " words - " + (length.blocker ? "outside the " + length.min.toLocaleString("en-US") + "-" + length.max.toLocaleString("en-US") + " word long-form standard" : "long-form length check passed") : "Long-form length check unavailable.", "article-word-count"));
+      for (let i = 0; i < Math.max(1, p.media.length); i++) renderArticleMedia(doc, data, i);
+      const preview = node("details"); preview.append(node("summary", "Reading layout preview"));
+      const frame = node("iframe"); frame.title = "Exact saved Article reading layout"; frame.className = "article-reading-preview";
+      frame.setAttribute("sandbox", "allow-same-origin"); frame.loading = "lazy";
+      frame.src = endpoint + "?" + new URLSearchParams({ action: "preview", candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash });
+      preview.append(frame); doc.append(preview);
+      for (const ref of p.research_refs ?? []) if (/^(?:image_relevance_failure|prepublication_|qualification_blocker:)/.test(ref)) doc.append(node("p", ref, "article-review-warning"));
+      detail(doc, p.desk, p.body);
+    }
+    renderCorrections(doc, data);
     const raw = node("details"), summary = node("summary", "Full immutable copy & evidence"), pre = node("pre", JSON.stringify(p, null, 2));
     raw.append(summary, pre); doc.append(raw);
     const history = node("details"); history.append(node("summary", "Decision & release history"), node("pre", JSON.stringify({ decisions: data.decisions, release_requests: data.release_requests }, null, 2))); doc.append(history);
@@ -287,6 +519,7 @@
     const list = node("ul", undefined, "scope-list");
     for (const scope of data.review_state.required_scopes) list.append(node("li", scope.replaceAll("_", " ") + ": " + (data.review_state.approved_scopes.includes(scope) ? "Approved" : "Pending"), data.review_state.approved_scopes.includes(scope) ? "complete" : ""));
     side.append(list);
+    if (data.review_state.pending_revision_tasks > 0) side.append(node("p", friendly("editorial_corrections_pending"), "status"));
     const scopes = data.review_state.required_scopes.filter(scope => granted(data.candidate.kind, scope) &&
       (view === "review" ? scope !== "publisher_acceptance" : view === "acceptance" && scope === "publisher_acceptance"));
     const canReview = data.review_permissions?.can_review !== false;
@@ -411,7 +644,7 @@
       }
     }
     if (granted(data.candidate.kind, "release") && view === "publishing") {
-      const release = node("button", "Request controlled release"); release.disabled = data.candidate.kind === "word" || !data.review_state.reviews_complete || data.review_permissions?.can_request_release === false;
+      const release = node("button", "Request controlled release"); release.disabled = data.candidate.kind === "word" || !data.review_state.reviews_complete || data.review_permissions?.can_request_release === false || !data.article_length || Boolean(data.article_length.blocker);
       releaseButton = release;
       let releaseCommand = null;
       release.addEventListener("click", () => busy(release, async () => {

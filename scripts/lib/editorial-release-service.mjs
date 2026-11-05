@@ -1,6 +1,8 @@
 import { canonicalJson, candidateRef, canonicalPublicationDate, validApprovedRecord } from "./ag70d-word-selection-engine.mjs";
 import { reviewedWordCopy } from "./ag70e-word-publication-pipeline.mjs";
 import { executeEditorialCommand, validateEditorialCommand } from "./editorial-workspace-service.mjs";
+import { articleLengthBlocker } from "./editorial-article-qualification.mjs";
+import { articleLayoutReleaseBlocker } from "./editorial-article-layout.mjs";
 
 const internal = value => ({ ...value, public_output_allowed: false, runtime_activation: false });
 const required = { article: ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"],
@@ -15,6 +17,13 @@ export function assessEditorialRelease(opened, { enabled = false } = {}) {
   const blockers = [];
   if (!validState) blockers.push("review_state_unavailable");
   else if (missing.length || state.reviews_complete !== true) blockers.push("editorial_reviews_pending");
+  if (Number.isInteger(state?.pending_revision_tasks) && state.pending_revision_tasks > 0) blockers.push("editorial_corrections_pending");
+  if (opened?.candidate?.kind === "article") {
+    const length = articleLengthBlocker(opened.version?.payload?.body);
+    if (length) blockers.push(length);
+    const layout = articleLayoutReleaseBlocker(opened.version?.payload);
+    if (layout) blockers.push(layout);
+  }
   if (opened?.review_permissions?.can_request_release !== true) blockers.push("release_scope_denied");
   const requestAllowed = blockers.length === 0;
   if (!enabled) blockers.push("delivery_not_activated");
@@ -74,7 +83,7 @@ export async function requestControlledRelease({ command, session, rpc, workerRp
     return internal({ ...queued, status: receipt.status, delivery: receipt.result });
   } catch (failure) {
     const known = new Set(["approved_word_registration_pending", "word_workflow_unavailable", "approved_word_copy_mismatch", "word_approval_registration_mismatch",
-      "release_authority_changed", "article_publisher_unavailable", "article_copy_incomplete", "article_media_contract_pending", "article_sources_pending", "article_destination_conflict", "article_branch_advanced"]);
+      "release_authority_changed", "article_publisher_unavailable", "article_copy_incomplete", "article_media_contract_pending", "article_sources_pending", "article_destination_conflict", "article_branch_advanced", "article_long_form_length_pending"]);
     const code = known.has(failure.message) ? failure.message : "release_delivery_unavailable";
     if (job?.claim_id) { try { await worker("fail", { claim_id: job.claim_id, result: { code } }); } catch { /* Leave the lease for controlled recovery, never report success. */ } }
     return internal({ ...queued, status: "delivery_pending", code });

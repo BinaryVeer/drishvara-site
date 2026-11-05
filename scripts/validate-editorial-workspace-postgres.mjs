@@ -7,7 +7,7 @@ import { syntheticWord, withSyntheticMeaning, syntheticSelection } from "./lib/a
 import { snapshotHash, validApprovedRecord, selectDailyWord, selectionAuthorityHashes } from "./lib/ag70d-word-selection-engine.mjs";
 import { reviewedWordCopy } from "./lib/ag70e-word-publication-pipeline.mjs";
 import { runWordDailyPublication } from "./lib/ag70e-word-server-workflow.mjs";
-import { syntheticReviewImage } from "./lib/editorial-review-test-fixtures.mjs";
+import { syntheticReviewImage, syntheticArticleLayout } from "./lib/editorial-review-test-fixtures.mjs";
 
 // Real disposable PostgreSQL; synthetic auth/profiles only. No URL, password or production credential input.
 const image = "docker.io/library/postgres@sha256:eee6c6e1b0894fa4fe0075eb054af9fd1cf39a35321c2d4110626cfe506411fb";
@@ -736,6 +736,149 @@ try {
     assert.throws(() => query(`set role authenticated;select drishvara_editorial_private.review_command_v1('{"action":"list"}');`), /permission denied/);
     assert.throws(() => query(`set role anon;select public.editorial_review_command('{"action":"review_batch"}');`), /permission denied/);
     assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema in ('drishvara_editorial_private','drishvara_word_private') and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+  });
+  const versionsBeforeTasks = query("select count(*) from drishvara_editorial_private.versions");
+  check("revision-task migration is additive and does not fabricate decisions or versions", () => {
+    query(fs.readFileSync("supabase/migrations/20261030033515_editorial_revision_tasks.sql", "utf8"));
+    assert.equal(query("select count(*) from drishvara_editorial_private.revision_tasks"), "0");
+    assert.equal(query("select count(*) from drishvara_editorial_private.versions"), versionsBeforeTasks);
+  });
+  const revisions = (actor, command) => JSON.parse(query(actorSql(actor, command, "editorial_revision_command")).split("\n").at(-1));
+  const reviewed = invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-revision-task" });
+  for (const scope of ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"]) invoke(owner, { ...base,
+    command_id: randomUUID(), candidate_id: reviewed.candidate_id, version_id: reviewed.version_id, content_hash: reviewed.content_hash, scope, admin_exception: exception });
+  const beforeTaskRelease = { ...release, command_id: randomUUID(), candidate_id: reviewed.candidate_id, version_id: reviewed.version_id, content_hash: reviewed.content_hash };
+  const beforeTaskQueued = invoke(owner, beforeTaskRelease);
+  const beforeTaskWorker = { ...workerCommand, actor_id: owner, command_id: beforeTaskRelease.command_id, release_request_id: beforeTaskQueued.release_request_id };
+  const beforeTaskClaim = worker(beforeTaskWorker);
+  const taskRequest = { action: "request_revision", command_id: randomUUID(), candidate_id: reviewed.candidate_id,
+    version_id: reviewed.version_id, content_hash: reviewed.content_hash, instructions: "Synthetic correction: replace the final sentence, preserving the cited source.", evidence_refs: ["synthetic-source-entry"] };
+  let savedTask;
+  check("saved correction retains exact instructions, evidence, actor and base copy", () => {
+    assert.equal(invoke(owner, { action: "open", candidate_id: reviewed.candidate_id }).review_state.reviews_complete, true);
+    savedTask = revisions(owner, taskRequest).task;
+    assert.equal(savedTask.instructions, taskRequest.instructions); assert.deepEqual(savedTask.evidence_refs, taskRequest.evidence_refs);
+    assert.equal(savedTask.requested_by, owner); assert.equal(savedTask.content_hash, reviewed.content_hash); assert.equal(savedTask.version_id, reviewed.version_id);
+  });
+  check("open correction vetoes release without rewriting prior approvals", () => {
+    const state = invoke(owner, { action: "open", candidate_id: reviewed.candidate_id }).review_state;
+    assert.equal(state.approved_scopes.length, 6); assert.equal(state.reviews_complete, false); assert.equal(state.pending_revision_tasks, 1);
+    assert.throws(() => invoke(owner, { ...release, command_id: randomUUID(), candidate_id: reviewed.candidate_id, version_id: reviewed.version_id, content_hash: reviewed.content_hash }), /editorial_reviews_pending/);
+  });
+  check("a newly saved correction invalidates an already claimed delivery", () => {
+    assert.equal(beforeTaskClaim.status, "claimed");
+    assert.throws(() => worker({ ...beforeTaskWorker, operation: "check", claim_id: beforeTaskClaim.claim_id }), /editorial_reviews_pending/);
+  });
+  check("reloading resumes the saved request, not a transient form value", () => {
+    const result = revisions(owner, { action: "list_revisions", candidate_id: reviewed.candidate_id });
+    assert.equal(result.tasks[0].instructions, taskRequest.instructions); assert.equal(result.tasks[0].status, "open");
+    assert.equal(result.public_output_allowed, false); assert.equal(result.runtime_activation, false);
+  });
+  check("request retry preserves one immutable task and rejects altered notes", () => {
+    assert.equal(revisions(owner, taskRequest).task.id, savedTask.id);
+    assert.throws(() => revisions(owner, { ...taskRequest, instructions: "Synthetic different correction instructions." }), /idempotency_conflict/);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.revision_tasks where candidate_id='${reviewed.candidate_id}'`), "1");
+  });
+  check("task APIs cannot bypass anonymous, inactive, unassigned or forged-actor gates", () => {
+    assert.throws(() => query("set role anon; select public.editorial_revision_command('{}');"), /permission denied/);
+    assert.throws(() => query("set role service_role; select public.editorial_revision_command('{}');"), /permission denied/);
+    assert.throws(() => revisions(other, { action: "list_revisions", candidate_id: reviewed.candidate_id }), /editorial_assignment_required/);
+    assert.throws(() => revisions(inactive, taskRequest), /editorial_access_denied/);
+    assert.throws(() => revisions(owner, { ...taskRequest, actor_id: reviewer }), /invalid_revision_request/);
+  });
+  check("empty instructions, duplicated evidence and stale request bindings fail closed", () => {
+    assert.throws(() => revisions(owner, { ...taskRequest, command_id: randomUUID(), instructions: " " }), /invalid_revision_request/);
+    assert.throws(() => revisions(owner, { ...taskRequest, command_id: randomUUID(), evidence_refs: ["same", "same"] }), /invalid_revision_request/);
+    assert.throws(() => revisions(owner, { ...taskRequest, command_id: randomUUID(), content_hash: "sha256:" + "0".repeat(64) }), /stale_editorial_version/);
+  });
+  assign(reviewer, reviewed.candidate_id);
+  const submission = { action: "submit_revision", command_id: randomUUID(), candidate_id: reviewed.candidate_id, task_id: savedTask.id,
+    version_id: reviewed.version_id, content_hash: reviewed.content_hash, kind: "article", title: create.title,
+    payload: { ...create.payload, body: "Synthetic corrected final sentence, not public content." }, comparison_acknowledged: true };
+  check("a corrected copy needs an explicit comparison acknowledgment and actual changes", () => {
+    assert.throws(() => revisions(owner, { ...submission, comparison_acknowledged: false }), /revision_comparison_required/);
+    assert.throws(() => revisions(owner, { ...submission, payload: create.payload }), /revision_unchanged/);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.revision_task_events where task_id='${savedTask.id}'`), "0");
+  });
+  check("invalid corrected intake rolls back resolution and version creation together", () => {
+    const before = query("select count(*) from drishvara_editorial_private.versions");
+    assert.throws(() => revisions(owner, { ...submission, payload: { ...create.payload, body: "" } }), /invalid_article_intake/);
+    assert.equal(query("select count(*) from drishvara_editorial_private.versions"), before);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.revision_task_events where task_id='${savedTask.id}'`), "0");
+  });
+  const submitted = await Promise.all([invokeConcurrent(owner, submission, "editorial_revision_command"), invokeConcurrent(owner, submission, "editorial_revision_command")]);
+  check("concurrent correction submissions create one pending version and one task resolution", () => {
+    assert.deepEqual(submitted[0], submitted[1]); assert.equal(submitted[0].status, "pending_review");
+    const event = JSON.parse(query(`select row_to_json(e) from drishvara_editorial_private.revision_task_events e where task_id='${savedTask.id}'`));
+    assert.equal(event.result_version_id, submitted[0].version_id); assert.equal(event.comparison_acknowledged, true); assert.equal(event.actor_id, owner);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.versions where candidate_id='${reviewed.candidate_id}'`), "2");
+  });
+  check("resolution preserves the instructions and does not approve the revised copy", () => {
+    const history = revisions(owner, { action: "list_revisions", candidate_id: reviewed.candidate_id }).tasks[0];
+    assert.equal(history.status, "submitted"); assert.equal(history.instructions, taskRequest.instructions);
+    const state = invoke(owner, { action: "open", candidate_id: reviewed.candidate_id }).review_state;
+    assert.equal(state.pending_revision_tasks, 0); assert.deepEqual(state.approved_scopes, []); assert.equal(state.reviews_complete, false);
+    assert.throws(() => revisions(owner, { ...submission, command_id: randomUUID() }), /revision_task_closed/);
+  });
+  const nextRequest = { ...taskRequest, command_id: randomUUID(), version_id: submitted[0].version_id, content_hash: submitted[0].content_hash };
+  const nextTask = revisions(owner, nextRequest).task;
+  const withdrawal = { action: "cancel_revision", command_id: randomUUID(), candidate_id: reviewed.candidate_id, task_id: nextTask.id,
+    version_id: nextTask.version_id, content_hash: nextTask.content_hash, note: "Synthetic explicit withdrawal after checking the current copy." };
+  check("an assigned reviewer cannot withdraw another person's request", () => assert.throws(() => revisions(reviewer, withdrawal), /revision_cancel_denied/));
+  check("withdrawal is an immutable reasoned event, not deletion or approval", () => {
+    const before = query("select count(*) from drishvara_editorial_private.versions");
+    assert.equal(revisions(owner, withdrawal).status, "cancelled"); assert.equal(revisions(owner, withdrawal).status, "cancelled");
+    assert.equal(query("select count(*) from drishvara_editorial_private.versions"), before);
+    assert.equal(revisions(owner, { action: "list_revisions", candidate_id: reviewed.candidate_id }).tasks[0].resolution.note, withdrawal.note);
+  });
+  const staleTask = revisions(owner, { ...nextRequest, command_id: randomUUID() }).task;
+  const separate = invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-revision-task", expected_version_id: submitted[0].version_id, title: "Synthetic separate newer revision" });
+  check("newer copies do not silently complete or rebase earlier correction requests", () => {
+    assert.equal(revisions(owner, { action: "list_revisions", candidate_id: reviewed.candidate_id }).tasks[0].status, "stale");
+    assert.throws(() => revisions(owner, { ...submission, command_id: randomUUID(), task_id: staleTask.id, version_id: staleTask.version_id, content_hash: staleTask.content_hash }), /stale_editorial_version/);
+    assert.equal(invoke(owner, { action: "open", candidate_id: reviewed.candidate_id }).review_state.pending_revision_tasks, 1);
+    assert.notEqual(separate.version_id, submitted[0].version_id);
+  });
+  check("correction instructions and resolution audit are append-only and private", () => {
+    for (const table of ["revision_tasks", "revision_task_events"]) {
+      assert.throws(() => query(`update drishvara_editorial_private.${table} set id=id;`), /immutable_editorial_history/);
+      assert.throws(() => query(`set role authenticated; select * from drishvara_editorial_private.${table};`), /permission denied/);
+    }
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema='drishvara_editorial_private' and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+  });
+  check("declarative Article-layout migration applies without altering existing copies", () => {
+    const before = query("select md5(string_agg(payload::text,'' order by id)) from drishvara_editorial_private.versions");
+    query(fs.readFileSync("supabase/migrations/20261030111413_editorial_article_layout.sql", "utf8"));
+    assert.equal(query("select md5(string_agg(payload::text,'' order by id)) from drishvara_editorial_private.versions"), before);
+  });
+  const layoutIntake = { ...create, command_id: randomUUID(), external_id: "synthetic-layout", payload: syntheticArticleLayout() };
+  const layoutVersion = invoke(owner, layoutIntake);
+  check("multiple image uploads and explicit placement create a pending immutable copy", () => {
+    const opened = invoke(owner, { action: "open", candidate_id: layoutVersion.candidate_id });
+    assert.deepEqual(opened.version.payload.layout, layoutIntake.payload.layout); assert.equal(opened.version.payload.media.length, 2);
+    assert.equal(opened.review_state.reviews_complete, false); assert.deepEqual(opened.review_state.approved_scopes, []);
+  });
+  for (const [label, mutate] of [
+    ["unknown layout version", p => p.layout.contract_version = "unknown"],
+    ["two heroes", p => p.layout.objects[1].after_paragraph = 0],
+    ["nonexistent source", p => p.layout.objects[2].source_refs = [2]],
+    ["orphan image", p => p.layout.objects.splice(1, 1)],
+    ["out-of-range position", p => p.layout.objects[1].after_paragraph = 100],
+    ["fractional position", p => p.layout.objects[1].after_paragraph = 1.5],
+    ["HTML object injection", p => p.layout.objects[2].html = "<script>bad()</script>"],
+    ["negative chart data", p => p.layout.objects[3].values = [-1, 4]],
+    ["incomplete table", p => p.layout.objects[2].rows[0] = ["missing"]],
+    ["unpositioned multiple media", p => delete p.layout]
+  ]) check("database rejects " + label + " without relying on browser validation", () => {
+    const p = structuredClone(layoutIntake.payload); mutate(p);
+    const before = query("select count(*) from drishvara_editorial_private.versions");
+    assert.throws(() => invoke(owner, { ...layoutIntake, command_id: randomUUID(), external_id: "synthetic-invalid-layout", payload: p }), /invalid_article_layout|article_layout_required/);
+    assert.equal(query("select count(*) from drishvara_editorial_private.versions"), before);
+  });
+  check("new layout helpers have no browser or service-role execute privileges", () => {
+    assert.throws(() => query("set role authenticated;select drishvara_editorial_private.validate_article_layout('{}');"), /permission denied/);
     assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
   });
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);

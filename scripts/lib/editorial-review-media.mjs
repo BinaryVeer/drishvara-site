@@ -1,6 +1,45 @@
 import { createHash } from "node:crypto";
 import { inflateSync } from "node:zlib";
 
+// Preview only the saved copy, never a caller-supplied URL. No credentials leave this server.
+export async function loadEditorialReviewImage(media, { origin, fetcher = fetch } = {}) {
+  const unavailable = () => { throw Error("editorial_media_unavailable"); };
+  const upload = reviewedImageUpload(media);
+  if (upload) return { bytes: Buffer.from(upload.base64, "base64"), contentType: "image/png" };
+  let url;
+  try {
+    const raw = media?.url;
+    if (typeof raw !== "string" || raw.length > 2500) unavailable();
+    url = new URL(raw, origin);
+    const localAsset = url.origin === origin && /^\/assets\/[a-zA-Z0-9_./-]+$/.test(url.pathname) && !raw.includes("..") && !url.search;
+    const commons = url.protocol === "https:" && url.hostname === "upload.wikimedia.org" && !url.port && url.pathname.startsWith("/wikipedia/commons/");
+    if ((!localAsset && !commons) || url.username || url.password || url.hash || /%2f|%5c|%2e/i.test(url.pathname)) unavailable();
+  } catch { unavailable(); }
+  const limit = 5 * 1024 * 1024;
+  const response = await fetcher(url, { method: "GET", redirect: "error", credentials: "omit", signal: AbortSignal.timeout(10000),
+    headers: { Accept: "image/png,image/jpeg,image/webp", "User-Agent": "Drishvara-Private-Media-Review/1.0" } });
+  const contentType = response.headers.get("content-type")?.split(";")[0].trim().toLowerCase();
+  if (!response.ok || !["image/png", "image/jpeg", "image/webp"].includes(contentType) || Number(response.headers.get("content-length") || 0) > limit) unavailable();
+  const reader = response.body?.getReader();
+  if (!reader) unavailable();
+  const chunks = []; let size = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > limit) { await reader.cancel(); unavailable(); }
+      chunks.push(Buffer.from(value));
+    }
+  } finally { reader.releaseLock(); }
+  const bytes = Buffer.concat(chunks);
+  const matchesType = contentType === "image/png" ? bytes.subarray(0, 8).toString("hex") === "89504e470d0a1a0a" :
+    contentType === "image/jpeg" ? bytes.length >= 4 && bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255 :
+    bytes.subarray(0, 4).toString() === "RIFF" && bytes.subarray(8, 12).toString() === "WEBP";
+  if (!matchesType) unavailable();
+  return { bytes, contentType };
+}
+
 // Uploads remain inside the private immutable copy until approved Article delivery.
 export function reviewedImageUpload(media) {
   if (!Object.hasOwn(media ?? {}, "upload_png")) return null;

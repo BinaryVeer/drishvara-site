@@ -19,3 +19,18 @@ export function syntheticReviewImage(width = 320, height = 180) {
   return { url: "/assets/editorial/" + createHash("sha256").update(png).digest("hex") + ".png", alt: "Synthetic raster test only",
     attribution: "Synthetic local test fixture, not production content", source_url: "https://example.invalid/synthetic-fixture", upload_png: png.toString("base64") };
 }
+
+export function syntheticArticleLayout() {
+  const common = (id, type, after_paragraph) => ({ id, type, after_paragraph, width: "reading", title: "Synthetic " + id,
+    caption: "Synthetic illustration and data for testing only; not an observed statistic.", source_refs: [1] });
+  return { desk: "world_affairs", body: Array.from({ length: 6 }, (_, i) => "Synthetic paragraph " + (i + 1) + ". " + "Test content only. ".repeat(90)).join("\n\n"),
+    sources: [{ url: "https://example.invalid/synthetic-fixture", title: "Synthetic evidence fixture" }],
+    media: [syntheticReviewImage(), syntheticReviewImage(400, 300)], research_refs: ["synthetic-layout-test-only"],
+    layout: { contract_version: "drishvara.article-layout.v1", sections: [{ heading: "Synthetic section heading", before_paragraph: 2 }], objects: [
+      { ...common("hero", "image", 0), width: "wide", media_index: 0, visual_kind: "photograph" },
+      { ...common("diagram", "image", 2), media_index: 1, visual_kind: "diagram" },
+      { ...common("table", "table", 3), columns: ["Measure", "Value"], rows: [["Test A", "2"], ["Test B", "4"]] },
+      { ...common("chart", "bar_chart", 4), unit: "Synthetic units", labels: ["Test A", "Test B"], values: [2, 4] },
+      { ...common("takeaways", "takeaways", 5), items: ["Synthetic takeaway, not editorial content."] }
+    ] } };
+}

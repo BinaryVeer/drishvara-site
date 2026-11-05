@@ -3,6 +3,9 @@ import { executeEditorialCommand, validateEditorialCommand } from "../scripts/li
 import { assessEditorialRelease, requestControlledRelease } from "../scripts/lib/editorial-release-service.mjs";
 import { createEditorialArticlePublisher } from "../scripts/lib/editorial-article-publisher.mjs";
 import { registerReviewedWord } from "../scripts/lib/editorial-word-registration.mjs";
+import { loadEditorialReviewImage } from "../scripts/lib/editorial-review-media.mjs";
+import { longFormRequirements, articleWordCount, articleLengthBlocker } from "../scripts/lib/editorial-article-qualification.mjs";
+import { reviewedArticlePage } from "../scripts/lib/editorial-article-layout.mjs";
 
 const assets = {
   "login.html": [new URL("../internal-scaffolds/editorial-workspace/login.html", import.meta.url), "text/html; charset=utf-8"],
@@ -18,7 +21,9 @@ const safeCodes = new Set(["editorial_access_denied", "editorial_capability_requ
   "explicit_admin_self_review_required", "unexpected_admin_exception", "member_capability_required", "invalid_access_duration",
   "explicit_admin_subject_review_required", "unexpected_subject_review_exception", "invalid_word_registration", "word_registration_metadata_pending",
   "word_registration_sources_pending", "word_registration_copy_unapproved", "word_registration_changed", "word_reference_unapproved", "word_editorial_approval_changed",
-  "invalid_review_checklist", "invalid_editorial_image"]);
+  "invalid_review_checklist", "invalid_editorial_image", "invalid_revision_request", "revision_task_limit", "revision_task_unavailable",
+  "revision_task_closed", "revision_cancel_denied", "revision_comparison_required", "revision_unchanged",
+  "invalid_article_layout", "article_layout_required", "article_visual_enrichment_pending"]);
 
 export function createEditorialWorkspaceHandler({ env = process.env, fetcher = fetch, loadAsset = name => readFile(assets[name][0]) } = {}) {
   return async function handler(req, res) {
@@ -26,7 +31,7 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
     res.setHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     res.setHeader("X-Content-Type-Options", "nosniff");
     res.setHeader("Referrer-Policy", "no-referrer");
-    res.setHeader("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'");
+    res.setHeader("Content-Security-Policy", "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; connect-src 'self'; frame-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'");
     const json = (status, data) => res.status(status).json({ ...data, public_output_allowed: false, runtime_activation: false });
     if (env.EDITORIAL_WORKSPACE_ENABLED !== "true") return json(503, { ok: false, code: "editorial_workspace_disabled" });
     let origin, base;
@@ -56,9 +61,10 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
     try {
       if (!["GET", "POST"].includes(req.method)) return json(405, { ok: false, code: "method_not_allowed" });
       const url = new URL(req.url, origin);
-      if ([...url.searchParams.keys()].some(k => k !== "action" && k !== "asset") ||
-          url.searchParams.getAll("action").length > 1 || url.searchParams.getAll("asset").length > 1) return json(400, { ok: false, code: "invalid_route" });
       const action = url.searchParams.get("action") ?? "page";
+      const allowedParams = ["media", "preview"].includes(action) ? ["action", "candidate_id", "version_id", "content_hash", ...(action === "media" ? ["media_index"] : [])] : ["action", "asset"];
+      if ([...url.searchParams.keys()].some(k => !allowedParams.includes(k)) ||
+          allowedParams.some(k => url.searchParams.getAll(k).length > 1)) return json(400, { ok: false, code: "invalid_route" });
       const asset = url.searchParams.get("asset");
       if (req.method === "POST" && (req.headers.origin !== origin.origin || !/^application\/json(?:;|$)/i.test(req.headers["content-type"] ?? "")))
         return json(403, { ok: false, code: "same_origin_json_required" });
@@ -111,6 +117,31 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
       const rpc = (name, args) => remote("/rest/v1/rpc/" + name, { method: "POST", body: JSON.stringify(args) }, token);
       const session = await executeEditorialCommand({ action: "session" }, rpc);
       if (!session.ok) return json(403, { ok: false, code: "editorial_access_denied" });
+      if (req.method === "GET" && ["media", "preview"].includes(action)) {
+        const candidateId = url.searchParams.get("candidate_id"), versionId = url.searchParams.get("version_id"), hash = url.searchParams.get("content_hash");
+        if (validateEditorialCommand({ action: "open", candidate_id: candidateId }) || !/^[0-9a-f-]{36}$/i.test(versionId || "") || !/^sha256:[0-9a-f]{64}$/.test(hash || ""))
+          return json(400, { ok: false, code: "invalid_media_binding" });
+        const opened = await executeEditorialCommand({ action: "open", candidate_id: candidateId }, rpc);
+        if (opened.candidate?.kind !== "article" || opened.version?.id !== versionId || opened.version?.content_hash !== hash)
+          return json(409, { ok: false, code: "stale_editorial_version" });
+        if (action === "preview") {
+          try {
+            const html = reviewedArticlePage(opened.version.payload, { title: opened.version.title, preview: true,
+              imageUrl: (m, i) => "/api/editorial-workspace?" + new URLSearchParams({ action: "media", candidate_id: candidateId, version_id: versionId, content_hash: hash, media_index: i }) });
+            res.setHeader("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'; object-src 'none'");
+            res.setHeader("Content-Type", "text/html; charset=utf-8"); return res.status(200).send(html);
+          } catch { return json(400, { ok: false, code: "invalid_article_layout" }); }
+        }
+        try {
+          const index = url.searchParams.get("media_index") ?? "0";
+          if (!/^[0-7]$/.test(index) || !opened.version.payload.media?.[Number(index)]) throw Error();
+          const image = await loadEditorialReviewImage(opened.version.payload.media[Number(index)], { origin: origin.origin, fetcher });
+          res.setHeader("Content-Type", image.contentType);
+          res.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+          res.setHeader("Content-Disposition", "inline");
+          return res.status(200).send(image.bytes);
+        } catch { return json(404, { ok: false, code: "editorial_media_unavailable" }); }
+      }
       if (req.method === "POST" && action === "word_register" && !asset) {
         const result = await registerReviewedWord({ command: body, session, rpc });
         return json(result.ok ? 200 : 400, result);
@@ -166,6 +197,10 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
       if (req.method === "GET" && action === "session") return json(200, session);
       if (req.method === "POST" && action === "command" && !asset) {
         const result = await executeEditorialCommand(body, rpc);
+        if (body.action === "open" && result.candidate?.kind === "article") {
+          const standard = longFormRequirements(), blocker = articleLengthBlocker(result.version?.payload?.body);
+          result.article_length = { words: articleWordCount(result.version?.payload?.body), min: standard.min, max: standard.max, blocker };
+        }
         return json(result.ok ? 200 : 400, result);
       }
       return json(404, { ok: false, code: "route_not_found" });
