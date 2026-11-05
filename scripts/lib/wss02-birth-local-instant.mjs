@@ -152,7 +152,7 @@ export function resolveBirthLocalInstant(options={}) {
   const uncertaintySeconds=options.uncertainty_seconds??0;
   if(!Number.isInteger(uncertaintySeconds)||uncertaintySeconds<0||uncertaintySeconds>24*3600)
     return {...basis,state:"invalid_time",reason:"Invalid birth-clock uncertainty bound"};
-  const matches=candidateInstants({...date,...clock},zone.timezone);
+  const matches=candidateInstants({...date,hour:clock.hour,minute:clock.minute,second:clock.second},zone.timezone);
   if(!matches.length){
     return {...basis,state:"nonexistent_local_time",reason:"Local time did not exist under the timezone's historical clock rules"};
   }
