@@ -19,7 +19,7 @@ assert.equal(vargaSignCandidate(3.333333,"D9").state,"review_required_near_varga
 assert.equal(vargaSignCandidate(2.999,"D10").state,"review_required_near_varga_boundary");
 assert.throws(()=>vargaSignCandidate(50,"D30"),RangeError);
 console.log("PASS WSS04 D9/D10 BPHS chapter 6 positional fixtures");
-const t="2000-01-01T00:00:00Z",d=vimshottariCandidate({
+const t="2000-01-01T00:00:00.000Z",d=vimshottariCandidate({
  moonSiderealLongitude:48,birthUtc:t,yearConvention:"civil_365_25"
 });
 assert.equal(d.ready_for_public_prediction,false);
