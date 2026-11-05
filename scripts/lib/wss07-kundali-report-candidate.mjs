@@ -9,6 +9,7 @@
  */
 import {buildPersonContextCandidate,dailyTransitCandidate,periodTransitCandidate}
  from "./wss05-06-context-and-transits-candidate.mjs";
+import {divisionalChartsCandidate} from "./wss04-varga-vimshottari-candidate.mjs";
 export const WSS07_STATUS="candidate_chart_report_not_approved_for_user_prediction";
 export const WSS07_RASHI_LORDS=Object.freeze([
  "Mars","Venus","Mercury","Moon","Sun","Mercury","Venus","Mars",
@@ -108,10 +109,8 @@ export function assembleKundaliReportCandidate(input={}) {
    charts:{
      D1:{state:"candidate_chart",lagna:person.natal.lagna,
        grahas:person.natal.grahas,whole_sign_houses:person.natal.whole_sign_houses},
-     D9:person.indicators.status==="wss05_06_candidate_structured_context_not_prediction"?
-       "computed_in_wss04_available_on_request":"unavailable",
-     D10:person.indicators.status==="wss05_06_candidate_structured_context_not_prediction"?
-       "computed_in_wss04_available_on_request":"unavailable"
+     D9:divisionalChartsCandidate(person.natal,{birthTimePrecisionSeconds:timePrecisionSeconds}).D9,
+     D10:divisionalChartsCandidate(person.natal,{birthTimePrecisionSeconds:timePrecisionSeconds}).D10
    },
    astronomical_birth_context:{
      janma_rashi:person.natal.grahas.find(x=>x.graha==="Moon")?.rashi.rashi,
