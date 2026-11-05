@@ -1,0 +1,64 @@
+name: WSS07 English Hindi Private Kundali UX
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss07-bilingual-report-presenter.mjs'
+      - 'scripts/lib/wss07-nama-rashi-core.mjs'
+      - 'scripts/wss07-private-preview-client.mjs'
+      - 'tests/fixtures/wss07-private-preview.html.txt'
+      - 'tests/wss07-bilingual-private-preview.mjs'
+      - '.github/workflows/wss07-bilingual-preview.yml'
+permissions:
+  contents: read
+jobs:
+  bilingual-natal-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Preserve pinned arithmetic dependencies
+        run: npm ci --ignore-scripts
+      - name: Check existing governed calculation and candidate reports
+        run: |
+          node --check scripts/lib/wss07-bilingual-report-presenter.mjs
+          node --check scripts/lib/wss07-nama-rashi-core.mjs
+          node --check scripts/wss07-private-preview-client.mjs
+          node tests/wss02-birth-timezone.mjs
+          node tests/wss03-independent-reference.mjs
+          node tests/wss04-varga-vimshottari.mjs
+          node tests/wss05-06-context-and-transits.mjs
+          node tests/wss07-kundali-report-candidate.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Install staging-only bundler and Chrome test runner
+        run: npm install --no-save --no-package-lock --ignore-scripts esbuild@0.25.5 playwright-core@1.56.1
+      - name: Build an isolated local-only preview (never public)
+        run: |
+          mkdir -p wss07-preview-qa
+          cp tests/fixtures/wss07-private-preview.html.txt wss07-preview-qa/index.html
+          ./node_modules/.bin/esbuild scripts/wss07-private-preview-client.mjs --bundle --platform=browser --format=esm --target=es2022 --outfile=wss07-preview-qa/wss07-private-preview-bundle.js
+          python3 -m http.server 8899 --directory wss07-preview-qa --bind 127.0.0.1 >/tmp/wss07-preview.log 2>&1 &
+          for i in 1 2 3 4 5; do curl -fsS http://127.0.0.1:8899/index.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/wss07-preview.log
+          exit 1
+      - name: Test bilingual UI and 4 input fields
+        run: node tests/wss07-bilingual-private-preview.mjs
+      - name: Reject any changes to active public What Stars Say
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss07-bilingual-scope.txt
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|assets/css/|supabase/|scripts/lib/ag74)' /tmp/wss07-bilingual-scope.txt; then
+            echo 'WSS07 bilingual preview cannot alter public runtime until complete release qualification'
+            exit 1
+          fi
+      - name: Keep isolated screenshot and QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wss07-private-bilingual-preview
+          path: wss07-preview-qa/
+          if-no-files-found: warn
+          retention-days: 7

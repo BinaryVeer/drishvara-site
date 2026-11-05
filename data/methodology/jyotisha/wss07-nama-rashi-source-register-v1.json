@@ -1,0 +1,70 @@
+{
+  "id": "WSS07_NAMA_RASHI_SOURCE_REGISTER_V1",
+  "date_utc": "2026-11-05",
+  "module": "Full What Stars Say / private bilingual Kundali with separate consent-based Nāma Rāśi",
+  "authority_level": "traditional Jyotisha and later nakshatra-naming literature; not a Vedic-era rule",
+  "verification_state": "27x4 source table mapped in new pure module; EN/HI/desktop/mobile Chromium tests passed; traditional-source lineage remains documented with variants",
+  "status": "staging-only name-sign identification, not a planetary transit prediction",
+  "scope": "108 name syllables in 27 Nakshatras, each assigned to one of 12 sidereal Rashis; no direct alteration of Janma Rashi or natal graha calculations",
+  "primary_technical_basis": {
+    "each_nakshatra_padas": 4,
+    "total_nakshatras": 27,
+    "total_padas": 108,
+    "padas_per_rashi": 9,
+    "rashi_index_formula": "floor((nakshatra_zero_based_index * 4 + pada_zero_based_index) / 9)"
+  },
+  "sources": [
+    {
+      "type": "traditional_table_publication",
+      "title": "Avakahada Chakra",
+      "url": "https://www.vedicpatro.com/panchanga/avakahada-chakra",
+      "use": "27 x 4 Devanagari syllables and Nakshatra-to-Rashi distribution"
+    },
+    {
+      "type": "academic_reference",
+      "title": "Uttarakhand Open University, Janmakshara Nirnaya, Chapter 3, Section 3.3.2",
+      "url": "https://uou.ac.in/sites/default/files/slm/BAJY-102.pdf",
+      "use": "Nakshatra-pada to Janmakshara educational reference"
+    },
+    {
+      "type": "panchang_cross_check",
+      "title": "Drik Panchang Find Rashi With Birth Name",
+      "url": "https://www.drikpanchang.com/astrology/prediction/info/find-rashi-with-name.html",
+      "use": "Common 12-sign Nakshatra naming syllables, distinguishes name-based from birth-Moon sign"
+    },
+    {
+      "type": "variance_reference",
+      "title": "Traditional Avakahada variants and Roman ambiguity",
+      "url": "https://sanatanbodh.in/en/panchang/naam-se-rashi/",
+      "use": "Later naming-book differences, letter/vowel equivalences, consonant and Roman-script ambiguity"
+    }
+  ],
+  "variants_and_exclusions": [
+    "Some South Indian Shravana-name sets use Ju/Je/Jo/Kha where the north/Avakahada tradition treats these as Abhijit; v1 fixes one explicitly sourced 27-Nakshatra/108-pada Avakahada table, never mixes variants silently.",
+    "Roman t/d/n/tha/dha/sh sounds can represent distinct Devanagari consonants and different Rashis; Roman text never directly assigns an unconfirmed match.",
+    "Name given at a naming ceremony and common everyday name can differ. User chooses intended name, and spelling is never overwritten.",
+    "Conjunct-initial, unsupported scripts, or syllables not resolving uniquely must require manual traditional initial-syllable selection. Do not infer a Rashi from an arbitrary initial character.",
+    "Traditional vowel duration comparison is only a lookup equivalence; original spelling stays intact and unchanged.",
+    "The sign associated with a name is not a claim that the name was assigned based on birth Nakshatra, nor a verified Janma Rashi."
+  ],
+  "consent_and_privacy": [
+    "Explicit unchecked consent to use the entered name locally",
+    "No network calls, persistent storage, personal-data analytics, or server submission from Nāma Rāśi resolver",
+    "No name included in existing birth-astronomy request",
+    "User can revoke consent without clearing the name field or changing birth result; no automatic horoscope output without consent"
+  ],
+  "visible_guidance": "Name-derived Rashi and its Nakshatra/Pada only. Do not fabricate personality or dated forecasting from name alone; future source-approved interpretation requires separate WSS05/06 rule gate.",
+  "verification_required": [
+    "Source table 27 rows x 4 = 108; 9 padas each Rashi",
+    "Devanagari name exact and vowel-variant matches",
+    "Roman consonant ambiguities blocked until user confirms Devanagari syllable",
+    "Names do not affect birth outputs, API bodies, or persistence",
+    "Consent denied/withdrawn shows no name-derived result",
+    "English/Hindi language and responsive mobile browser checks",
+    "Existing 34-check public frontend validation and Vercel build pass"
+  ],
+  "governance_note": "Do not advertise this as source-derived transit prediction, manipulate the existing AG75C birth-Nakshatra bank, or relabel it as Vedic-period authority.",
+  "release_public_allowed": false,
+  "implementation": "scripts/lib/wss07-nama-rashi-core.mjs",
+  "production_status": "not integrated into public What Stars Say until WSS08 complete"
+}

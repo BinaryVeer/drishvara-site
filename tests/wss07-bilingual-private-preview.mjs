@@ -1,0 +1,139 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
+import {chromium} from "playwright-core";
+import {assembleKundaliReportCandidate} from "../scripts/lib/wss07-kundali-report-candidate.mjs";
+import {buildBilingualCandidateView,languagePack,SIGN_HI,GRAHA_HI} from "../scripts/lib/wss07-bilingual-report-presenter.mjs";
+import {RECORDS,resolveName} from "../scripts/lib/wss07-nama-rashi-core.mjs";
+
+const out="wss07-preview-qa";
+fs.mkdirSync(out,{recursive:true});
+const example=assembleKundaliReportCandidate({
+ birthDate:"1991-08-17",birthTime:"10:05:23",birthTimezone:"Asia/Kolkata",
+ birthLatitude:23.3441,birthLongitude:85.3096,
+ referenceDate:"2026-11-05",referenceTimezone:"Asia/Kolkata",
+ referenceLatitude:23.3441,referenceLongitude:85.3096,
+ timePrecisionSeconds:1,yearConvention:"civil_365_25"
+});
+assert.equal(example.ready_for_public_display,false);
+assert.equal(RECORDS.length,108);
+assert.equal(SIGN_HI.length,12);
+assert.equal(Object.keys(GRAHA_HI).length,9);
+for(const language of ["en","hi"]){
+ const view=buildBilingualCandidateView({report:example,displayName:"विकास",
+  language,nameSignConsent:true});
+ assert.equal(view.status,"staged_nonpublic_english_hindi_chart_report");
+ assert.equal(view.internal_ready,false);
+ assert.equal(view.person.displayName,"विकास");
+ assert.equal(view.person.nameSign.state,"traditional_name_sign");
+ assert.equal(view.person.nameSign.rashiIndex,2);
+ assert.equal(view.charts.D1.rows.length,12);
+ assert.equal(view.planets.length,9);
+ assert.equal(view.dashas.length,10);
+ assert.equal(view.transit.grahas.length,9);
+ assert.equal(view.domains.length,6);
+ assert.equal(view.privacy.name_sent_astronomically,false);
+ assert.ok(view.limits===undefined);
+ assert.ok(view.limitations.some(s=>s.length>30));
+ if(language==="hi"){
+  assert.equal(view.person.nameSign.sign,"वृषभ");
+  assert.equal(view.strings.charts,"कुंडली चक्र");
+  assert.equal(view.planets[0].planet,"सूर्य");
+ }else{
+  assert.equal(view.person.nameSign.sign,"Vrishabha");
+  assert.equal(view.strings.charts,"Charts");
+  assert.equal(view.planets[0].planet,"Sun");
+ }
+ const withoutConsent=buildBilingualCandidateView({report:example,displayName:"विकास",
+  language,nameSignConsent:false});
+ assert.equal(withoutConsent.person.nameSign.sign,null);
+}
+assert.equal(resolveName("Tapan").state,"confirm_sound");
+const ambiguity=buildBilingualCandidateView({report:example,displayName:"Tapan",
+  language:"en",nameSignConsent:true});
+assert.equal(ambiguity.person.nameSign.state,"confirmation_required");
+assert.equal(ambiguity.person.nameSign.candidates.length,2);
+assert.equal(ambiguity.person.nameSign.sign,null);
+assert.throws(()=>buildBilingualCandidateView({report:example,displayName:"NAME",language:"fr"}),RangeError);
+assert.throws(()=>buildBilingualCandidateView({report:{...example,ready_for_public_display:true},displayName:"NAME"}),RangeError);
+console.log("PASS WSS07 bilingual model EN/HI, 108-pada local name sign, 9 grahas and no public activation");
+
+const chrome=["/usr/bin/google-chrome","/usr/bin/google-chrome-stable","/usr/bin/chromium"].find(p=>fs.existsSync(p));
+assert.ok(chrome,"System Chrome required");
+const browser=await chromium.launch({headless:true,executablePath:chrome,args:["--no-sandbox","--disable-dev-shm-usage"]});
+const audit={title:"WSS07 staging bilingual private UX",created_at:new Date().toISOString(),checks:[],failures:[],errors:[]};
+for(const width of [1440,390,320]){
+ const ctx=await browser.newContext({viewport:{width,height:860},deviceScaleFactor:1});
+ const page=await ctx.newPage();
+ const incoming=[];
+ page.on("request",req=>incoming.push({url:req.url(),method:req.method()}));
+ page.on("pageerror",e=>audit.errors.push(width+": "+e.message));
+ try{
+  const resp=await page.goto("http://127.0.0.1:8899/index.html",{waitUntil:"domcontentloaded",timeout:30000});
+  assert.equal(resp.status(),200);
+  await page.locator("#wss-generate").waitFor({state:"visible"});
+  assert.equal(await page.locator("#wss-nama-consent").isChecked(),false);
+  await page.locator("#wss-name").fill("विकास");
+  await page.locator("#wss-birth-date").fill("1991-08-17");
+  await page.locator("#wss-birth-time").fill("10:05:23");
+  await page.locator("#wss-birth-place").selectOption("ranchi");
+  await page.locator("#wss-reference-date").fill("2026-11-05");
+  await page.locator("#wss-year-convention").selectOption("civil_365_25");
+  await page.locator("#wss-precision").selectOption("1");
+  await page.locator("#wss-generate").click();
+  await page.locator("#review-result .chart-grid").first().waitFor({state:"visible",timeout:12000});
+  assert.equal(await page.locator("#review-result").getAttribute("data-staged-ready"),"false");
+  assert.equal(await page.locator("#review-result .chart-wrapper").count(),3);
+  assert.equal(await page.locator("#review-result .chart-wrapper").first().locator(".chart-house").count(),12);
+  assert.equal(await page.locator("#review-result table.dasha tbody tr").count(),10);
+  assert.match(await page.locator("#review-result").innerText(),/Krishna|Janma|Lagna|Not approved|not yet qualified|Candidate|Mesha|Vrishabha/i);
+  await page.locator("#wss-nama-consent").check();
+  assert.match(await page.locator("#review-result").innerText(),/Vrishabha/);
+  const widthEN=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+  assert.ok(widthEN<=3,"English horizontal overflow "+widthEN);
+  await page.screenshot({path:out+"/preview-"+width+"-en.png",fullPage:true,animations:"disabled"});
+  await page.locator('[data-language-choice="hi"]').click();
+  assert.equal(await page.locator("html").getAttribute("lang"),"hi");
+  assert.equal(await page.locator('[data-language-choice="hi"]').getAttribute("aria-pressed"),"true");
+  assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
+  assert.match(await page.locator("#wss-page-footer").innerText(),/ग्रह गणना/);
+  assert.match(await page.locator("#wss-year-convention").innerText(),/नागरिक वर्ष/);
+  assert.match(await page.locator("#wss-precision").innerText(),/सेकंड तक ज्ञात/);
+  assert.equal(await page.locator('[data-precision-choice="approximate"]').evaluate(el=>el.disabled),true);
+  assert.match(await page.locator("#review-result h2").first().innerText(),/कुंडली/);
+  assert.match(await page.locator("#review-result").innerText(),/वृषभ/);
+  assert.match(await page.locator("#wss-name-label").innerText(),/नाम/);
+  const widthHI=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+  assert.ok(widthHI<=3,"Hindi horizontal overflow "+widthHI);
+  await page.screenshot({path:out+"/preview-"+width+"-hi.png",fullPage:true,animations:"disabled"});
+  await page.locator("#wss-name").fill("Tapan");
+  await page.locator("#wss-sound-wrap").waitFor({state:"visible"});
+  assert.equal(await page.locator("#wss-syllable option").count(),3);
+  const before=await page.locator("#review-result").innerText();
+  assert.doesNotMatch(before,/नाम राशि\s*\n\s*सिंह/);
+  await page.locator("#wss-syllable").selectOption("10-2");
+  assert.match(await page.locator("#review-result").innerText(),/सिंह/);
+  await page.locator("#wss-nama-consent").uncheck();
+  assert.equal(await page.locator("#wss-sound-wrap").isVisible(),false);
+  const noConsent=await page.locator("#review-result").innerText();
+  assert.match(noConsent,/सहमति/);
+  await page.locator("#wss-clear").click();
+  assert.equal(await page.locator("#wss-name").inputValue(),"");
+  assert.equal(await page.locator("#wss-nama-consent").isChecked(),false);
+  assert.equal(await page.locator("#review-result .panel").count(),0);
+  assert.equal(incoming.filter(r=>r.method!=="GET").length,0,"No request bodies sent");
+  assert.ok(incoming.every(r=>r.url.startsWith("http://127.0.0.1:8899/")),
+    "No cross-origin requests allowed from staging preview");
+  audit.checks.push({viewport:width,english:true,hindi:true,namaConsent:true,
+   romanAmbiguity:true,reset:true,privateNoExternalRequests:true,
+   horizontalOverflowEN:widthEN,horizontalOverflowHI:widthHI});
+  console.log("PASS WSS07 private browser full workflow",width,"EN/HI and confirmed Nāma");
+ }catch(e){
+  audit.failures.push(width+": "+String(e));
+  console.error("FAIL WSS07 viewport",width,String(e).slice(0,500));
+ }finally{await ctx.close()}
+}
+await browser.close();
+fs.writeFileSync(out+"/report.json",JSON.stringify(audit,null,2));
+console.log("WSS07_BROWSER_QA failures="+audit.failures.length+" errors="+audit.errors.length);
+audit.errors.forEach(x=>console.error("JS_ERROR "+x));
+if(audit.failures.length||audit.errors.length)process.exitCode=1;
