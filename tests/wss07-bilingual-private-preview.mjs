@@ -145,8 +145,14 @@ for(const width of [1440,390,320]){
    horizontalOverflowEN:widthEN,horizontalOverflowHI:widthHI});
   console.log("PASS WSS07 private browser full workflow",width,"EN/HI and confirmed Nāma");
  }catch(e){
-  audit.failures.push(width+": "+String(e));
-  console.error("FAIL WSS07 viewport",width,String(e).slice(0,500));
+  const state=await page.locator("#wss-error").evaluate(node=>({
+    errorClass:node.dataset.candidateErrorClass||null,
+    errorText:node.textContent
+  })).catch(()=>({errorClass:"unavailable",errorText:"unavailable"}));
+  const shown=(await page.locator("#review-result").innerText().catch(()=>"")).slice(0,240);
+  audit.failures.push(width+": "+String(e)+" status="+JSON.stringify(state));
+  console.error("FAIL WSS07 viewport",width,String(e).slice(0,500),
+    "candidate="+JSON.stringify(state),"view="+JSON.stringify(shown));
  }finally{await ctx.close()}
 }
 await browser.close();
