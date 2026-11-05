@@ -32,7 +32,15 @@ const labels={
    missing:"Enter a name, birth date, birth time and sample birth place.",
    failed:"Calculation is unavailable for these details. Check the date, clock and location basis.",
    status:"Private preview only · Not approved for end-user horoscope predictions",
-   generated:"Computed candidate — not a verified personal forecast"
+   generated:"Computed candidate — not a verified personal forecast",
+   pageTitle:"Private, bilingual Kundali calculation preview",
+   pageSummary:"Synthetic QA / research build — not deployed to the public product.",
+   pageFooter:"WSS07 staging only. Calculated astronomy is not scientifically established life prediction. No profiles are collected.",
+   yearUnit:" years",secondUnit:" s",
+   precisionSecond:"Known to second · 1 s",
+   precisionMinute:"Known to minute · 60 s",
+   precisionApproximate:"Approximate time (not yet supported)",
+   civilYear:"Civil year · 365.25 days",savanaYear:"Sāvana year · 360 days"
  },
  hi:{
    name:"पूरा नाम / परम्परागत नाम",date:"जन्म तिथि",clock:"जन्म समय (24-घंटे)",
@@ -43,7 +51,15 @@ const labels={
    missing:"नाम, जन्म तिथि, समय और परीक्षण जन्मस्थान भरें।",
    failed:"इन विवरणों पर गणना उपलब्ध नहीं है। तिथि, समय और स्थान जाँचें।",
    status:"केवल निजी पूर्वावलोकन · वास्तविक भविष्यफल के लिए अनुमोदित नहीं",
-   generated:"गणना-आधारित परीक्षण — सत्यापित व्यक्तिगत भविष्यफल नहीं"
+   generated:"गणना-आधारित परीक्षण — सत्यापित व्यक्तिगत भविष्यफल नहीं",
+   pageTitle:"निजी द्विभाषी कुंडली गणना का पूर्वावलोकन",
+   pageSummary:"काल्पनिक परीक्षण / शोध संस्करण — सार्वजनिक ऐप में प्रकाशित नहीं।",
+   pageFooter:"WSS07 परीक्षण मात्र। ग्रह गणना जीवन-घटनाओं की वैज्ञानिक भविष्यवाणी नहीं है। कोई प्रोफ़ाइल सहेजी नहीं जाती।",
+   yearUnit:" वर्ष",secondUnit:" सेकंड",
+   precisionSecond:"सेकंड तक ज्ञात · 1 सेकंड",
+   precisionMinute:"मिनट तक ज्ञात · 60 सेकंड",
+   precisionApproximate:"अनुमानित समय (अभी समर्थित नहीं)",
+   civilYear:"नागरिक वर्ष · 365.25 दिन",savanaYear:"सावन वर्ष · 360 दिन"
  }
 };
 function item(parent,tag,text,cls) {const node=make(tag,text,cls);parent.append(node);return node;}
@@ -76,6 +92,18 @@ function updateLanguage(){
  $("#wss-generate").textContent=lbl.button;
  $("#wss-clear").textContent=lbl.clear;
  $("#wss-disclaimer").textContent=lbl.status;
+ $("#wss-page-title").textContent=lbl.pageTitle;
+ $("#wss-page-summary").textContent=lbl.pageSummary;
+ $("#wss-page-footer").textContent=lbl.pageFooter;
+ document.title=lbl.pageTitle+" · Drishvara";
+ $("#wss-name").placeholder=language==="hi"?"जैसे: विकास":"e.g., Vikash";
+ for(const [key,value] of [["second","precisionSecond"],["minute","precisionMinute"],
+   ["approximate","precisionApproximate"]]){
+   $("#wss-precision").querySelector('[data-precision-choice="'+key+'"]').textContent=lbl[value];
+ }
+ for(const [key,value] of [["civil","civilYear"],["savana","savanaYear"]]){
+   $("#wss-year-convention").querySelector('[data-year-choice="'+key+'"]').textContent=lbl[value];
+ }
  for(const b of document.querySelectorAll("[data-language-choice]"))
    b.setAttribute("aria-pressed",String(b.dataset.languageChoice===language));
  for(const [key,place] of Object.entries(SAMPLE_PLACES))
@@ -118,7 +146,7 @@ function render(){
  const identity=card(root,strings.birth);
  info(identity,strings.birthTime,view.birth.utc);
  info(identity,strings.birthTimezone,view.birth.timezone);
- info(identity,strings.birthPrecision,String(view.birth.precisionSeconds)+" s");
+ info(identity,strings.birthPrecision,String(view.birth.precisionSeconds)+lbl.secondUnit);
  info(identity,strings.birthPlace,String(view.birth.coordinates.latitude)+", "+String(view.birth.coordinates.longitude));
  info(identity,strings.lagna,view.birth.lagna??strings.notAvailable);
  info(identity,strings.janmaRashi,view.birth.janmaRashi);
@@ -153,7 +181,7 @@ function render(){
  table(planets,[strings.planet,strings.sign,strings.sidereal,strings.motion],
   view.planets.map(g=>[g.planet,g.sign,g.sidereal,g.state]));
  const periods=card(root,strings.dasha);
- info(periods,strings.birthBalance,Number(view.dashas[0].balance??0).toFixed(3)+" years");
+ info(periods,strings.birthBalance,Number(view.dashas[0].balance??0).toFixed(3)+lbl.yearUnit);
  const tablePeriod=table(periods,[strings.lord,strings.period],
    view.dashas.map(d=>[d.lord,d.start+" → "+d.end]));
  tablePeriod.className="dasha";
