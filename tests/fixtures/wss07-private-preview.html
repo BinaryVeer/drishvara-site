@@ -68,8 +68,8 @@ footer {font-size:.82rem;color:var(--muted);text-align:center}
 <header class="page-header">
  <div>
   <p class="tag">DRISHVARA · WHAT STARS SAY · WSS07</p>
-  <h1>Private, bilingual Kundali calculation preview</h1>
-  <p class="muted">Synthetic QA / research build — not deployed to the public product.</p>
+  <h1 id="wss-page-title">Private, bilingual Kundali calculation preview</h1>
+  <p id="wss-page-summary" class="muted">Synthetic QA / research build — not deployed to the public product.</p>
  </div>
  <div class="lang-switch" role="group" aria-label="Select language">
   <button type="button" data-language-choice="en" aria-pressed="true">English</button>
@@ -91,14 +91,14 @@ footer {font-size:.82rem;color:var(--muted);text-align:center}
   </select></label>
   <label class="field" for="wss-reference-date"><span id="wss-reference-label">Reference date</span><input id="wss-reference-date" type="date" min="1900-01-01" max="2100-12-31" autocomplete="off"></label>
   <label class="field" for="wss-precision"><span id="wss-precision-label">Birth-time precision</span><select id="wss-precision">
-    <option value="1">Known to second · 1 s</option>
-    <option value="60">Known to minute · 60 s</option>
-    <option value="300">Approximate ± 5 minutes</option>
+    <option value="1" data-precision-choice="second">Known to second · 1 s</option>
+    <option value="60" data-precision-choice="minute">Known to minute · 60 s</option>
+    <option value="300" data-precision-choice="approximate">Approximate ± 5 minutes</option>
   </select></label>
   <label class="field" for="wss-year-convention"><span id="wss-dasha-label">Daśā year convention</span><select id="wss-year-convention">
     <option value="">—</option>
-    <option value="civil_365_25">Civil 365.25 days</option>
-    <option value="savana_360">Sāvana 360 days</option>
+    <option value="civil_365_25" data-year-choice="civil">Civil 365.25 days</option>
+    <option value="savana_360" data-year-choice="savana">Sāvana 360 days</option>
   </select></label>
  </div>
  <label class="consent-row" for="wss-nama-consent">
@@ -116,7 +116,7 @@ footer {font-size:.82rem;color:var(--muted);text-align:center}
  <p id="wss-error" class="error" role="alert" aria-live="polite"></p>
 </section>
 <main id="review-result" aria-live="polite"><p class="muted">Enter four birth details. No data is sent or saved.</p></main>
-<footer>WSS07 staging-only. Calculated astronomy ≠ scientifically established life predictions. No user profiles are collected or retained.</footer>
+<footer id="wss-page-footer">WSS07 staging-only. Calculated astronomy ≠ scientifically established life predictions. No user profiles are collected or retained.</footer>
 </div>
 <script type="module" src="./wss07-private-preview-bundle.js"></script>
 </body>
