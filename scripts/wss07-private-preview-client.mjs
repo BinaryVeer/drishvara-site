@@ -11,6 +11,7 @@ import {SIGNS_EN,SIGN_HI,GRAHA_HI} from "./lib/wss07-bilingual-report-presenter.
 import {auditNatalPrecisionCandidate,WSS08_PRECISION_STATE} from "./lib/wss08-natal-precision-audit.mjs";
 import {auditedBilingualCandidateView} from "./lib/wss08-audited-bilingual-view.mjs";
 import {mountApprovedBirthPlaceInput} from "./lib/wss07-approved-birthplace-dom.mjs";
+import {resolveBirthLocalInstant} from "./lib/wss02-birth-local-instant.mjs";
 
 const $=selector=>document.querySelector(selector);
 const make=(tag,text,cls)=>{
@@ -45,7 +46,14 @@ const labels={
    noonNotice:"Observed between local-noon snapshots; not exact ingress times or future-event predictions.",
    sampledDays:"Local dates sampled",observedChanges:"Observed sign changes",periodChanges:"Daśā period changes",
    noChanges:"None observed at this sampling resolution",periodUnavailable:"Computed monthly/yearly context unavailable",
-   transitHeader:["Observation date","Graha","From sign","To sign"]
+   transitHeader:["Observation date","Graha","From sign","To sign"],
+   foldLabel:"This birth clock time occurred twice — select the recorded occurrence",
+   foldFirst:"First occurrence (before the clock moved back)",
+   foldSecond:"Second occurrence (after the clock moved back)",
+   foldPlaceholder:"Choose first or second occurrence",
+   foldError:"The recorded birth clock time occurred twice. Select the earlier or later occurrence before calculating.",
+   gapError:"That local clock time never occurred because of a clock change. Verify the recorded birth time.",
+   foldNote:"Both times are valid in this location. Select according to the original birth record; Drishvara will not guess."
  },
  hi:{
    name:"पूरा नाम / परम्परागत नाम",date:"जन्म तिथि",clock:"जन्म समय (24-घंटे)",
@@ -69,7 +77,14 @@ const labels={
    noonNotice:"परिवर्तन स्थानीय दोपहर के नमूनों के बीच देखा गया है; सटीक राशि-प्रवेश या भविष्य की घटना की तिथि नहीं।",
    sampledDays:"देखी गई स्थानीय तिथियाँ",observedChanges:"राशि परिवर्तन",periodChanges:"दशा अवधि में परिवर्तन",
    noChanges:"इस नमूना-पद्धति में कोई परिवर्तन नहीं दिखा",periodUnavailable:"मासिक/वार्षिक गणना आधार उपलब्ध नहीं",
-   transitHeader:["देखी गई तिथि","ग्रह","पहले की राशि","नई राशि"]
+   transitHeader:["देखी गई तिथि","ग्रह","पहले की राशि","नई राशि"],
+   foldLabel:"जन्म का यह समय दो बार आया था — अभिलेख के अनुसार क्रम चुनें",
+   foldFirst:"पहली बार (घड़ी पीछे होने से पहले)",
+   foldSecond:"दूसरी बार (घड़ी पीछे होने के बाद)",
+   foldPlaceholder:"पहली या दूसरी बार चुनें",
+   foldError:"इस जन्मस्थान पर यह समय दो बार आया था। गणना से पहले पहली या दूसरी घटना चुनें।",
+   gapError:"घड़ी के बदलाव के कारण यह स्थानीय समय अस्तित्व में नहीं था। जन्म अभिलेख का समय जाँचें।",
+   foldNote:"दोनों समय संभव हैं। मूल जन्म अभिलेख से पुष्टि करें; दृष्वरा अनुमान नहीं लगाएगा।"
  }
 };
 function item(parent,tag,text,cls) {const node=make(tag,text,cls);parent.append(node);return node;}
@@ -99,6 +114,11 @@ function updateLanguage(){
    ["wss-place-label","place"],["wss-reference-label","ref"],["wss-precision-label","precision"],
    ["wss-dasha-label","dasha"],["wss-consent-label","consent"],["wss-sound-label","syllable"]
  ])$("#"+id).textContent=lbl[key];
+ $("#wss-dst-fold-label").textContent=lbl.foldLabel;
+ $("#wss-dst-fold").options[0].textContent=lbl.foldPlaceholder;
+ $("#wss-dst-fold").options[1].textContent=lbl.foldFirst;
+ $("#wss-dst-fold").options[2].textContent=lbl.foldSecond;
+ if(!$("#wss-dst-fold-wrap").hidden)$("#wss-dst-note").textContent=lbl.foldNote;
  $("#wss-generate").textContent=lbl.button;
  $("#wss-clear").textContent=lbl.clear;
  $("#wss-disclaimer").textContent=lbl.status;
@@ -277,6 +297,20 @@ function render(){
  info(limitation,strings.yearConvention,view.method.yearConvention);
  item(limitation,"p",strings.privacyDetail,"muted");
 }
+function resetFold(){
+ $("#wss-dst-fold").value="";
+ $("#wss-dst-fold-wrap").hidden=true;
+ $("#wss-dst-note").hidden=true;
+}
+function showFoldNotice(){
+ $("#wss-dst-fold-wrap").hidden=false;
+ $("#wss-dst-note").hidden=false;
+ $("#wss-dst-note").textContent=labels[language].foldNote;
+}
+function invalidateForBirthChange(){
+ candidate=null;computedPeriods=null;precisionAudit=null;
+ resetFold();render();
+}
 function generate(){
  const name=$("#wss-name").value.trim(),date=$("#wss-birth-date").value,
   time=$("#wss-birth-time").value,place=placeController?.selectBirthPlace(),
@@ -286,9 +320,29 @@ function generate(){
   candidate=null;computedPeriods=null;precisionAudit=null;render();return;
  }
  try{
+  const fold=$("#wss-dst-fold").value||undefined;
+  const birthClock=resolveBirthLocalInstant({
+   birth_date:date,birth_time:time,timezone:place.timezone,
+   time_precision:"known",fold
+  });
+  if(birthClock.state==="ambiguous_local_time"){
+   showFoldNotice();
+   $("#wss-error").textContent=labels[language].foldError;
+   candidate=null;computedPeriods=null;precisionAudit=null;render();return;
+  }
+  if(birthClock.state==="nonexistent_local_time"){
+   resetFold();
+   $("#wss-error").textContent=labels[language].gapError;
+   candidate=null;computedPeriods=null;precisionAudit=null;render();return;
+  }
+  if(birthClock.state!=="birth_instant_resolved")
+   throw new RangeError(birthClock.state);
+  if(birthClock.dst_occurrence)showFoldNotice();
+  else resetFold();
   candidate=assembleKundaliReportCandidate({
    birthDate:date,birthTime:time,birthTimezone:place.timezone,
    birthLatitude:place.latitude,birthLongitude:place.longitude,
+   birthFold:birthClock.dst_occurrence||undefined,
    referenceDate:refDate,referenceTimezone:place.timezone,
    referenceLatitude:place.latitude,referenceLongitude:place.longitude,
    timePrecisionSeconds:Number($("#wss-precision").value),
@@ -299,6 +353,7 @@ function generate(){
   precisionAudit=auditNatalPrecisionCandidate({
     birthDate:date,birthTime:time,birthTimezone:place.timezone,
     birthLatitude:place.latitude,birthLongitude:place.longitude,
+    fold:birthClock.dst_occurrence||undefined,
     declaredPrecisionSeconds:Number($("#wss-precision").value),language
   });
   if(precisionAudit.status!==WSS08_PRECISION_STATE)
@@ -334,6 +389,7 @@ $("#wss-clear").addEventListener("click",()=>{
  $("#wss-nama-consent").checked=false;
  $("#wss-syllable").value="";
  candidate=null;computedPeriods=null;precisionAudit=null;confirmedSyllableKey="";
+ resetFold();
  $("#wss-error").textContent="";
  updateLanguage();
 });
@@ -346,13 +402,19 @@ $("#wss-nama-consent").addEventListener("change",()=>{
 $("#wss-syllable").addEventListener("change",()=>{
  confirmedSyllableKey=$("#wss-syllable").value;if(candidate)render();
 });
-for(const node of ["#wss-birth-date","#wss-birth-time","#wss-birth-place",
- "#wss-reference-date","#wss-year-convention","#wss-precision"]){
+for(const node of ["#wss-birth-date","#wss-birth-time","#wss-birth-place"]){
+ $(node).addEventListener("change",invalidateForBirthChange);
+}
+for(const node of ["#wss-reference-date","#wss-year-convention","#wss-precision"]){
  $(node).addEventListener("change",()=>{candidate=null;computedPeriods=null;precisionAudit=null;render()});
 }
+$("#wss-dst-fold").addEventListener("change",()=>{
+ candidate=null;computedPeriods=null;precisionAudit=null;
+ $("#wss-error").textContent="";render();
+});
 updateLanguage();
 function invalidateBirthPreview(){
- candidate=null;computedPeriods=null;precisionAudit=null;render();
+ invalidateForBirthChange();
 }
 // Existing DrishvaraV2Location owns the public catalog fetch; no birth details
 // or name are included. Missing/5-place fallback catalog fails closed.
