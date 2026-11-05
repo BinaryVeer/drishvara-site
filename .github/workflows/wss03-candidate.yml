@@ -5,6 +5,8 @@ on:
     paths:
       - 'scripts/lib/wss03-natal-candidate.mjs'
       - 'tests/wss03-natal-candidate.mjs'
+      - 'tests/wss03-independent-reference.mjs'
+      - 'data/quality/jyotisha/wss03-independent-natal-reference-20261105.json'
       - '.github/workflows/wss03-candidate.yml'
 permissions:
   contents: read
@@ -25,6 +27,7 @@ jobs:
           node --check scripts/lib/wss03-natal-candidate.mjs
           node tests/wss02-birth-timezone.mjs
           node tests/wss03-natal-candidate.mjs
+          node tests/wss03-independent-reference.mjs
           node scripts/validate-drishvara-frontend-migration.mjs
       - name: Must not alter active production
         run: |
@@ -33,3 +36,11 @@ jobs:
             echo 'WSS03 candidate cannot change active production'
             exit 1
           fi
+      - name: Retain independent differential evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wss03-independent-reference
+          path: wss03-qa/
+          if-no-files-found: warn
+          retention-days: 7
