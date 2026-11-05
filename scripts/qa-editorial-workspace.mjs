@@ -7,13 +7,14 @@ import { createEditorialWorkspaceHandler } from "../api/editorial-workspace.js";
 import { syntheticWord, withSyntheticMeaning } from "./lib/ag70e-word-test-fixtures.mjs";
 import { snapshotHash } from "./lib/ag70d-word-selection-engine.mjs";
 import { syntheticReviewImage, syntheticArticleLayout, syntheticQualifiedArticle, syntheticArticleQualityDecision } from "./lib/editorial-review-test-fixtures.mjs";
+import { editorialStage } from "./lib/editorial-workflow.mjs";
 
 // Explicitly synthetic Auth/RPC browser fixture. Does not connect to hosted Supabase or write approvals.
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || "playwright");
 const screenshotDir = process.argv[2];
 if (!screenshotDir || !path.isAbsolute(screenshotDir)) throw new Error("provide_absolute_local_screenshot_directory");
 await mkdir(screenshotDir, { recursive: true, mode: 0o700 });
-let browser, server, checks = 0, base, chosenDecision = null, fixtureAdmin = false, fixtureAllApproved = false, fixtureDelivery = false, releaseRequests = 0;
+let browser, server, checks = 0, base, chosenDecision = null, fixtureAdmin = false, fixtureAllApproved = false, fixtureEditorialDone = false, fixtureDelivery = false, releaseRequests = 0;
 const id = randomUUID(), version = randomUUID(), hash = "sha256:" + "a".repeat(64);
 const scopes = ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"];
 const wordScopes = ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical", "publisher_acceptance"];
@@ -25,7 +26,7 @@ const data = { candidate: { id, kind: "article", external_id: "synthetic-browser
   decisions: [], release_requests: [] };
 const state = () => { const required = data.candidate.kind === "word" ? wordScopes : scopes;
     const pending = currentTasks().filter(t => t.status === "open").length;
-    return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : chosenDecision ? [chosenDecision.scope] : [],
+    return { required_scopes: required, approved_scopes: fixtureAllApproved ? required : fixtureEditorialDone ? required.filter(s => s !== "publisher_acceptance") : chosenDecision ? [chosenDecision.scope] : [],
       decision_refs: data.decisions.map(d => d.id), reviews_complete: fixtureAllApproved && !pending, pending_revision_tasks: pending }; };
 const receipt = value => ({ ok: true, ...value, public_output_allowed: false, runtime_activation: false });
 const requests = [], errors = [];
@@ -40,6 +41,11 @@ function fakeFetch(url, options) {
   else if (pathname === "/auth/v1/user") value = { id: "synthetic-reviewer" };
   else if (pathname === "/auth/v1/logout") value = {};
   else if (pathname === "/rest/v1/rpc/editorial_delivery_readiness") value = receipt({ delivery_enabled: fixtureDelivery });
+  else if (pathname === "/rest/v1/rpc/editorial_workflow_queue") {
+    const row = { id, kind: data.candidate.kind, external_id: data.candidate.external_id, version_id: version, content_hash: hash,
+      title: data.version.title, desk: data.version.payload.desk ?? null, review_state: state(), publisher_decision: null, article_delivery: null, word_publication: null };
+    row.stage = editorialStage(row); value = receipt({ items: [row], next_cursor: null });
+  }
   else if (pathname === "/rest/v1/rpc/editorial_word_registration_state") value = receipt({ registered: registrationCommands.some(c => c.action === "register") });
   else {
     const { p_command: command } = JSON.parse(options.body);
@@ -126,6 +132,8 @@ try {
   await page.locator('[name="password"]').fill("synthetic-not-a-real-credential");
   await page.locator('#login-form [type="submit"]').click();
   await page.waitForSelector(".candidate");
+  check("work starts in stage-specific pending mode", await page.locator("#queue-scope").inputValue() === "pending");
+  await page.locator("#queue-scope").selectOption("all"); await page.waitForSelector(".candidate");
   check("session verified before queue display", (await page.locator("#session-label").innerText()).includes("Authenticated"));
   const cookies = await context.cookies();
   check("session cookie is HttpOnly and Strict", cookies.some(c => c.name === "drishvara_editorial_local" && c.httpOnly && c.sameSite === "Strict"));
@@ -258,12 +266,14 @@ try {
   const articleCorrection = revisionCommands.find(c => c.action === "submit_revision");
   check("correction submits one complete version bound to its saved task and exact base", intakeCommands.length === 0 && articleCorrection.version_id === version && articleCorrection.task_id === revisionTasks[0].id && articleCorrection.payload.media[0].upload_png === raster.upload_png && articleCorrection.payload.body.includes("complete corrected"));
   check("correction preserves existing sources and research references", JSON.stringify(articleCorrection.payload.sources) === JSON.stringify(data.version.payload.sources) && JSON.stringify(articleCorrection.payload.research_refs) === JSON.stringify(data.version.payload.research_refs));
-  fixtureAdmin = true; await page.reload(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
+  fixtureAdmin = true; await page.reload(); await page.waitForSelector(".candidate"); await page.locator("#queue-scope").selectOption("all"); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
   check("designated Admin sees separate People, Acceptance and Publishing areas", await page.locator("#tab-people").isVisible() && await page.locator("#tab-acceptance").isVisible() && await page.locator("#tab-publishing").isVisible());
   check("Admin self-review needs a separate unchecked acknowledgment", await page.locator(".self-review-notice input").isChecked() === false && await page.locator(".self-review-notice textarea").getAttribute("required") !== null);
   check("Review excludes publisher acceptance", await page.locator('.review-form [name="aspect"][value="publisher_acceptance"]').count() === 0);
+  fixtureEditorialDone = true;
   await page.locator("#tab-acceptance").click(); await page.waitForSelector(".review-form");
   check("Acceptance contains only publisher acceptance", JSON.stringify(await page.locator(".review-form select").first().locator("option").allTextContents()) === JSON.stringify(["publisher acceptance"]));
+  fixtureEditorialDone = false;
   await page.locator("#tab-people").click(); await page.waitForSelector("#people-register section");
   await page.locator('#person-lookup [name="email"]').fill("synthetic-member@example.invalid");
   await page.locator('#person-lookup button').click(); await page.waitForSelector("#access-controls:not([hidden])");
@@ -323,7 +333,7 @@ try {
   chosenDecision = null; data.candidate.kind = "word"; data.candidate.external_id = "synthetic-subject-word";
   data.version.title = "Synthetic Word subject-review fixture";
   data.version.payload = { contract_version: "ag70e.word-copy.v2", content: withSyntheticMeaning(syntheticWord(1)).reviewed_publication_copy.content, research_refs: ["synthetic-only"] };
-  await page.reload(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
+  await page.reload(); await page.waitForSelector(".candidate"); await page.locator("#queue-scope").selectOption("all"); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
   check("Word Admin sees all eight checklist aspects in one submission, with acceptance separate", await page.locator('.review-form [name="aspect"]').count() === 8);
   await page.locator('.review-form [name="correction_required"]').selectOption("no");
   await page.locator('.review-form [name="aspect"][value="linguistic"]').check();
@@ -386,7 +396,7 @@ try {
   check("correction branch opens complete bilingual meaning and essay fields without an approval", await page.locator('#correction-dialog [name="sanskrit"]').count() === 1 && await page.locator('#correction-dialog [name="meaning_details.philosophical_essay.sections.0.body_en"]').count() === 1 && data.decisions.length === beforeBatch + 1);
   check("Word corrections do not silently add a public image contract", (await page.locator("#correction-dialog").innerText()).includes("no image slot") && await page.locator('#correction-dialog [name="image_file"]').count() === 0);
   await page.keyboard.press("Escape");
-  await page.reload(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".revision-tasks");
+  await page.reload(); await page.waitForSelector(".candidate"); await page.locator("#queue-scope").selectOption("all"); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".revision-tasks");
   check("Word instructions and evidence survive closing the editor and page reload", (await page.locator(".revision-tasks").innerText()).includes(wordInstructions) && (await page.locator(".revision-tasks").innerText()).includes("synthetic-word-entry"));
   fixtureAllApproved = true; await page.locator("#tab-publishing").click();
   await page.getByRole("button", { name: "Check release readiness", exact: true }).click();
@@ -471,6 +481,28 @@ try {
   check("authenticated import retains command ID and creates no approvals or release", intakeCommands.length === pendingBefore + 1 && intakeCommands.at(-1).command_id === prepared[0].command_id && preparedCopies.size === 1 && data.decisions.length === decisionsBefore && releaseRequests === 1);
   check("completed import cannot be accidentally resubmitted", await importDialog.getByRole("button", { name: "Submit pending copies", exact: true }).isDisabled());
   await importDialog.getByRole("button", { name: "Close", exact: true }).click();
+  fixtureAllApproved = false; fixtureEditorialDone = true;
+  await page.locator("#queue-scope").selectOption("pending");
+  await page.waitForFunction(() => document.querySelectorAll(".candidate").length === 0);
+  check("completed Editor work leaves their pending queue without losing the record", (await page.locator("#handoff-status").innerText()).includes("history are retained") && await page.locator(".review-form").count() === 0);
+  await page.locator("#tab-acceptance").click(); await page.waitForSelector(".candidate");
+  await page.locator(".candidate").click(); await page.waitForSelector(".review-form");
+  check("the same immutable copy appears for Publisher acceptance", await page.locator("#document > .hash").first().innerText() === hash && (await page.locator(".candidate small").innerText()).includes("Publisher acceptance"));
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 960 });
+    check("stage queues and filters fit " + width, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await page.screenshot({ path: path.join(screenshotDir, "stage-handoff-synthetic-" + width + ".png"), fullPage: false });
+  }
+  const returnedInstructions = "Synthetic Publisher return: correct the final paragraph and its source reference.";
+  await page.getByLabel("Rationale", { exact: true }).fill(returnedInstructions);
+  const beforeReturnDecisions = data.decisions.length;
+  await page.getByRole("button", { name: "Return to Editor", exact: true }).click();
+  await page.waitForFunction(() => document.querySelectorAll(".candidate").length === 0);
+  check("Publisher return saves instructions and clears Publisher pendency without an approval", data.decisions.length === beforeReturnDecisions && revisionCommands.at(-1).action === "request_revision" && revisionCommands.at(-1).instructions === returnedInstructions);
+  await page.locator("#tab-review").click(); await page.waitForSelector(".candidate"); await page.locator(".candidate").click(); await page.waitForSelector(".revision-tasks");
+  check("returned copy reappears for Editor with its saved Publisher instructions", (await page.locator(".candidate small").innerText()).includes("Returned to Editor") && (await page.locator(".revision-tasks").innerText()).includes(returnedInstructions));
+  await page.locator("#tab-live").click(); await page.waitForFunction(() => document.querySelector("#queue-heading")?.textContent === "Live Repository" && document.querySelectorAll(".candidate").length === 0);
+  check("unpublished drafts never enter Live Repository merely from reviews or a queued request", await page.locator(".candidate").count() === 0 && releaseRequests === 1);
   check("consolidated corrections and private preview have no browser exceptions or external requests", errors.length === 0 && requests.length === 0);
   await page.locator("#sign-out").click(); await page.waitForSelector("#login-form");
   check("sign-out clears private UI", await page.locator("#document").count() === 0);

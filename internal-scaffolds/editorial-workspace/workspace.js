@@ -3,7 +3,7 @@
   "use strict";
   const endpoint = "/api/editorial-workspace";
   const $ = id => document.getElementById(id);
-  let session = null, selected = null, items = [], loadSequence = 0, view = "review", person = null;
+  let session = null, selected = null, items = [], loadSequence = 0, queueSequence = 0, nextCursor = null, view = "review", person = null;
   const node = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
   const message = text => { $("message").textContent = text; };
   async function request(action, body) {
@@ -20,7 +20,8 @@
   }
   const command = body => request("command", body);
   const granted = (kind, scope) => session?.capabilities?.some(g => g.kind === kind && g.scope === scope);
-  const labels = { review: "Review Queue", acceptance: "Acceptance Queue", publishing: "Publishing Queue" };
+  const labels = { review: "Review Queue", acceptance: "Acceptance Queue", publishing: "Publishing Queue", delivery: "Delivery Queue", live: "Live Repository" };
+  const stages = { review: "Editor review", corrections: "Returned to Editor", acceptance: "Publisher acceptance", publishing: "Publisher release", delivery: "Deployment pending", daily_queue: "Daily publication queue", live: "Published", rejected: "Rejected", blocked: "State unavailable" };
   const friendly = code => ({ workspace_administrator_required: "Admin access is required.",
     active_confirmed_account_required: "No active, email-confirmed Drishvara account was found.",
     verified_qualification_reference_required: "Verified qualification evidence is required for this responsibility.",
@@ -36,6 +37,9 @@
     editorial_assignment_required: "A current candidate assignment is required.",
     invalid_review_decision: "Check the rationale and evidence references. Approval needs at least one unique, actual evidence reference.",
     editorial_reviews_pending: "Required reviews are still pending.", delivery_not_activated: "Controlled delivery has not been activated.",
+    editorial_review_handoff_pending: "Complete the editorial checklist and outstanding corrections before Publisher acceptance.",
+    workflow_state_unavailable: "Queue state could not be verified. No stage or approval was changed.",
+    reviewed_feedback_pending: "Learning feedback requires a resolved correction and complete current-copy reviews.",
     article_long_form_length_pending: "The Article does not meet the existing long-form word-count standard. Submit a corrected version before release.",
     article_sources_pending: "The Article requires two to five distinct HTTPS source references and the corresponding factual and source-use reviews.",
     article_outline_pending: "The Article requires at least three positioned sections.",
@@ -86,15 +90,33 @@
     const filtered = items.filter(item => $("kind-filter").value === "all" || item.kind === $("kind-filter").value);
     $("queue").replaceChildren(...filtered.map(item => {
       const b = node("button", item.title, "candidate"); b.type = "button"; b.setAttribute("aria-pressed", String(item.id === selected?.candidate.id));
-      b.append(node("small", item.kind + " / " + (item.review_state.reviews_complete ? "Reviews complete" : "Pending review")));
+      b.append(node("small", item.kind + " / " + (stages[item.workflow.stage] || "State unavailable")));
       b.addEventListener("click", () => busy(b, () => open(item.id))); return b;
     }));
     $("empty").hidden = filtered.length !== 0;
   }
-  async function refresh() {
-    const data = await command({ action: "list" }); items = data.items; renderQueue();
-    if (session?.is_administrator) renderAssignmentOptions();
-    if (selected) await open(selected.candidate.id);
+  function clearSelection() {
+    loadSequence++; selected = null;
+    $("document").replaceChildren(node("h2", "Select a candidate"));
+    $("review").replaceChildren(node("h2", labels[view] || "Review"));
+  }
+  async function refresh(append = false) {
+    loadSequence++;
+    const seq = ++queueSequence, activeView = view;
+    const query = { view: view === "live" ? "live" : $("queue-scope").value === "all" ? "all" : view,
+      kind: $("kind-filter").value, desk: $("desk-filter").value, after_id: append ? nextCursor : null };
+    const data = await request("workflow", query);
+    if (seq !== queueSequence || view !== activeView) return;
+    if (append) { const byId = new Map(items.map(i => [i.id, i])); for (const i of data.items) byId.set(i.id, i); items = [...byId.values()]; }
+    else items = data.items;
+    nextCursor = data.next_cursor; $("queue-more").hidden = !nextCursor;
+    $("queue-scope").closest("label").hidden = view === "live";
+    $("empty").textContent = nextCursor ? "No matching records on this page. More records are available." : "No assigned candidates pending here.";
+    if (selected && !items.some(i => i.id === selected.candidate.id)) {
+      $("handoff-status").textContent = selected.version.title + " is no longer pending in this queue. Its saved version and history are retained.";
+      clearSelection();
+    } else $("handoff-status").textContent = "";
+    renderQueue(); if (selected) await open(selected.candidate.id);
   }
   function detail(parent, title, value) {
     if (typeof value !== "string" || !value) return;
@@ -507,7 +529,25 @@
     if (seq !== loadSequence) return;
     selected = data; renderQueue();
     const doc = $("document"), p = data.version.payload;
+    if (view === "live") {
+      const publication = items.find(i => i.id === id)?.workflow.publication;
+      if (!publication) { clearSelection(); return; }
+      doc.replaceChildren(node("h2", publication.title || data.version.title), node("p", "Published version: " + publication.version_id, "hash"), node("p", publication.content_hash, "hash"));
+      if (publication.kind === "article") {
+        detail(doc, "Sector", $("desk-filter").querySelector('option[value="' + publication.desk + '"]').textContent);
+        const link = node("a", "Read live Article"); link.href = publication.public_url; link.target = "_blank"; link.rel = "noopener noreferrer"; doc.append(link);
+      } else {
+        detail(doc, "Publication date", publication.date_key + " / " + publication.timezone);
+        detail(doc, "Word", publication.content.sanskrit + " / " + publication.content.iast + " / " + publication.content.english);
+        detail(doc, "English meaning", publication.content.meaning_en); detail(doc, "Hindi meaning", publication.content.meaning_hi);
+      }
+      $("review").replaceChildren(node("h2", "Published record"), node("p", publication.kind === "article" ? "The served Article matches its exact release receipt." : "Recorded daily publication history; not a claim of today's homepage assignment.", "muted"));
+      if (publication.version_id !== data.version.id) $("review").append(node("p", "A newer draft exists separately. Its reviews do not rewrite this published version.", "status"));
+      return;
+    }
     doc.replaceChildren(node("h2", data.version.title), node("p", data.candidate.external_id, "muted"), node("p", data.version.content_hash, "hash"));
+    const workflow = items.find(i => i.id === id)?.workflow;
+    if (workflow) doc.append(node("p", stages[workflow.stage], "status"));
     doc.append(node("p", "Version: " + data.version.id, "version-label"));
     if (data.can_edit) {
       const edit = node("button", "Propose corrected version"); edit.type = "button";
@@ -539,16 +579,28 @@
       detail(doc, p.desk, p.body);
     }
     renderCorrections(doc, data);
+    if (data.review_state.reviews_complete && data.revision_tasks.some(t => t.status === "submitted" && t.resolution?.result_version_id === data.version.id)) {
+      const feedback = node("button", "Export correction feedback"); feedback.type = "button";
+      feedback.addEventListener("click", () => busy(feedback, async () => {
+        const packet = await request("learning_feedback", { candidate_id: data.candidate.id, version_id: data.version.id, content_hash: data.version.content_hash });
+        const url = URL.createObjectURL(new Blob([JSON.stringify(packet, null, 2)], { type: "application/json" }));
+        const link = node("a"); link.href = url; link.download = "editorial-feedback-" + data.version.id + ".json";
+        document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+        message("Candidate feedback exported. No lesson was promoted and no copy or publication rule was changed.");
+      })); doc.append(feedback);
+    }
     const raw = node("details"), summary = node("summary", "Full immutable copy & evidence"), pre = node("pre", JSON.stringify(p, null, 2));
     raw.append(summary, pre); doc.append(raw);
     const history = node("details"); history.append(node("summary", "Decision & release history"), node("pre", JSON.stringify({ decisions: data.decisions, release_requests: data.release_requests }, null, 2))); doc.append(history);
-    const side = $("review"); side.replaceChildren(node("h2", view === "acceptance" ? "Publisher Acceptance" : view === "publishing" ? "Controlled Publication" : "Review & Clearance"));
+    const side = $("review"); side.replaceChildren(node("h2", view === "acceptance" ? "Publisher Acceptance" : view === "publishing" ? "Controlled Publication" : view === "delivery" ? "Delivery Queue" : "Review & Clearance"));
+    if (view === "delivery") side.append(node("p", data.candidate.kind === "word" ? "Eligible in the daily pool; the governed cycle must still select and publish it. No daily date is inferred." : "Commit delivered. Live status requires the deployed page to match its release receipt.", "delivery-status"));
     const list = node("ul", undefined, "scope-list");
     for (const scope of data.review_state.required_scopes) list.append(node("li", scope.replaceAll("_", " ") + ": " + (data.review_state.approved_scopes.includes(scope) ? "Approved" : "Pending"), data.review_state.approved_scopes.includes(scope) ? "complete" : ""));
     side.append(list);
     if (data.review_state.pending_revision_tasks > 0) side.append(node("p", friendly("editorial_corrections_pending"), "status"));
     const scopes = data.review_state.required_scopes.filter(scope => granted(data.candidate.kind, scope) &&
-      (view === "review" ? scope !== "publisher_acceptance" : view === "acceptance" && scope === "publisher_acceptance"));
+      (view === "review" ? ["review", "corrections"].includes(workflow?.stage) && scope !== "publisher_acceptance" :
+        view === "acceptance" && workflow?.stage === "acceptance" && scope === "publisher_acceptance"));
     const canReview = data.review_permissions?.can_review !== false;
     if (scopes.length && canReview && view === "review") consolidatedReview(side, data, scopes);
     if (scopes.length && canReview && view === "acceptance") {
@@ -597,9 +649,22 @@
       };
       scope.addEventListener("change", syncSubjectException); syncSubjectException();
       subjectReason.addEventListener("input", () => subjectReason.setCustomValidity(""));
-      const submit = node("button", "Record decision", "primary"); submit.type = "submit"; form.append(submit);
+      const submit = node("button", "Return to Editor", "primary"); submit.type = "submit"; form.append(submit);
+      function syncAcceptance() {
+        const returning = decision.value === "revise"; submit.textContent = returning ? "Return to Editor" : "Record decision";
+        note.minLength = returning ? 12 : 1;
+        if (exceptionReason) { exceptionReason.required = !returning; exceptionAck.required = !returning; }
+      }
+      decision.addEventListener("change", syncAcceptance); syncAcceptance();
       form.addEventListener("submit", event => { event.preventDefault(); busy(submit, async () => {
         const evidence = refs.value.split("\n").map(s => s.trim()).filter(Boolean);
+        if (decision.value === "revise") {
+          note.setCustomValidity(note.value.trim().length < 12 ? "Describe the required correction in at least 12 characters." : "");
+          refs.setCustomValidity(evidence.length > 50 || evidence.some(v => v.length > 500) || new Set(evidence).size !== evidence.length ? "Use up to 50 unique references of at most 500 characters." : "");
+          if (!form.reportValidity()) return;
+          await command(revisionRequest(data, note.value.trim(), evidence)); await refresh();
+          message("Returned to Editor with saved correction instructions. No approval or publication recorded."); return;
+        }
         note.setCustomValidity(note.value.trim() ? "" : "Enter the finding and reason for this decision.");
         refs.setCustomValidity(decision.value === "approve" && !evidence.length ? "Approval requires an actual evidence reference." :
           evidence.length > 50 || evidence.some(s => s.length > 500) ? "Use up to 50 references, each at most 500 characters." :
@@ -680,7 +745,7 @@
         const receipt = await request("release", releaseCommand);
         message(friendly(receipt.status) + (receipt.code ? " " + friendly(receipt.code) : "") +
           (receipt.delivery ? " " + (receipt.delivery.status === "eligible_for_daily_selection" ? "Word is eligible in the daily bank, not forced onto today's card." : "Article commit recorded; deployment readiness remains separate.") : ""));
-        await open(id);
+        await refresh();
       })); side.append(release);
     }
     side.append(node("p", "Review acceptance does not publish a word or article. Existing publisher validation and operational authorization remain required.", "muted"));
@@ -688,11 +753,14 @@
   async function activate(next) {
     if (next === "people" && !session?.is_administrator) return;
     view = next;
+    loadSequence++;
+    $("review").replaceChildren(node("h2", labels[next] || "People & Permissions"));
+    $("document").replaceChildren(node("h2", "Loading queue"));
     for (const tab of document.querySelectorAll("[data-view]")) { const active = tab.dataset.view === next; tab.setAttribute("aria-selected", String(active)); tab.tabIndex = active ? 0 : -1; }
     $("content-panel").hidden = next === "people"; $("people-panel").hidden = next !== "people";
     $("content-panel").setAttribute("aria-labelledby", "tab-" + next);
     if (next === "people") await loadPeople();
-    else { $("queue-heading").textContent = labels[next]; if (selected) { $("review").replaceChildren(node("h2", labels[next])); await open(selected.candidate.id); } }
+    else { $("queue-heading").textContent = labels[next]; await refresh(); }
   }
   for (const tab of document.querySelectorAll("[data-view]")) {
     tab.addEventListener("click", () => busy(tab, () => activate(tab.dataset.view)));
@@ -705,9 +773,9 @@
       if (next) { event.preventDefault(); next.focus(); busy(next, () => activate(next.dataset.view)); }
     });
   }
-  function renderAssignmentOptions() {
+  function renderAssignmentOptions(candidates = items) {
     const select = $("assignment-form").elements.candidate_id;
-    select.replaceChildren(...items.map(item => new Option(item.title + " / " + item.kind, item.id)));
+    select.replaceChildren(...candidates.map(item => new Option(item.title + " / " + item.kind, item.id)));
   }
   function responsibilityOptions() {
     const form = $("capability-form"), role = form.elements.role.value, kind = form.elements.kind.value;
@@ -719,6 +787,7 @@
   $("capability-form").elements.role.addEventListener("change", responsibilityOptions);
   responsibilityOptions();
   async function loadPeople() {
+    renderAssignmentOptions((await command({ action: "list" })).items);
     const result = await command({ action: "people" }); const register = $("people-register"); register.replaceChildren();
     for (const member of result.people) {
       const section = node("section"); section.append(node("h3", member.email));
@@ -796,7 +865,9 @@
     }).then(() => { submit.disabled = completed || !commands; }); });
     dialog.append(form); dialog.addEventListener("close", () => dialog.remove()); document.body.append(dialog); dialog.showModal();
   }
-  $("kind-filter").addEventListener("change", renderQueue);
+  $("kind-filter").addEventListener("change", () => { $("desk-filter").disabled = $("kind-filter").value === "word"; if ($("desk-filter").disabled) $("desk-filter").value = "all"; refresh().catch(e => message(friendly(e.message))); });
+  for (const id of ["desk-filter", "queue-scope"]) $(id).addEventListener("change", () => refresh().catch(e => message(friendly(e.message))));
+  $("queue-more").addEventListener("click", () => busy($("queue-more"), () => refresh(true)));
   $("refresh").addEventListener("click", () => busy($("refresh"), refresh));
   $("sign-out").addEventListener("click", () => busy($("sign-out"), async () => { await request("logout", {}); location.assign(endpoint); }));
   function resetIntake() {

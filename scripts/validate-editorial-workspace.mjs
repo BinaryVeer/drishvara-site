@@ -118,6 +118,37 @@ await check("active Auth identity without capabilities receives no cookie", asyn
   assert.equal(r.code, 403); assert.equal(r.headers["Set-Cookie"], undefined);
 });
 const cookie = "__Host-drishvara_editorial=synthetic.jwt.token";
+await check("stage queues and learning export require the real session and same-origin JSON", async () => {
+  for (const action of ["workflow", "learning_feedback"]) {
+    assert.equal((await invoke({ method: "POST", action: "action=" + action, body: {} })).code, 401);
+    calls = []; assert.equal((await invoke({ method: "POST", action: "action=" + action, cookie, body: {}, origin: "https://attacker.invalid" })).code, 403); assert.equal(calls.length, 0);
+  }
+});
+await check("stage query cannot supply an actor or override publication state", async () => {
+  for (const change of [{ actor_id: id }, { approved: true }, { view: "publish" }]) {
+    const r = await invoke({ method: "POST", action: "action=workflow", cookie, body: { view: "review", kind: "all", desk: "all", after_id: null, ...change } });
+    assert.equal(r.code, 400); assert.equal(r.data.code, "invalid_workflow_query");
+  }
+});
+await check("authenticated stage query uses only the scoped read RPC and private response", async () => {
+  const actions = [], row = { id, kind: "article", version_id: version, content_hash: contentHash, external_id: intake.external_id, title: intake.title,
+    desk: "world_affairs", stage: "review", private_payload: "do-not-return", review_state: { required_scopes: ["editorial", "rights", "factual", "safety", "media", "publisher_acceptance"],
+      approved_scopes: [], reviews_complete: false, pending_revision_tasks: 0 } };
+  const fetcher = async (url, options) => {
+    const p = new URL(url).pathname; actions.push(p);
+    if (p.endsWith("editorial_workflow_queue")) return { ok: true, json: async () => ({ ...internal, items: [row], next_cursor: null }) };
+    return fakeFetch(url, options);
+  };
+  const r = await invoke({ method: "POST", action: "action=workflow", cookie, body: { view: "review", kind: "article", desk: "all", after_id: null } }, { fetcher });
+  assert.equal(r.code, 200); assert.equal(r.data.items[0].workflow.stage, "review"); assert.equal(r.headers["Cache-Control"], "no-store, private");
+  assert.equal(r.data.public_output_allowed, false); assert(!JSON.stringify(r.data).includes("do-not-return"));
+  assert.deepEqual(actions, ["/auth/v1/user", "/rest/v1/rpc/editorial_review_command", "/rest/v1/rpc/editorial_workflow_queue"]);
+});
+await check("feedback requests reject forged authority and stale immutable-copy bindings", async () => {
+  const body = { candidate_id: id, version_id: version, content_hash: contentHash };
+  const bad = await invoke({ method: "POST", action: "action=learning_feedback", cookie, body: { ...body, promote: true } }); assert.equal(bad.code, 400);
+  const stale = await invoke({ method: "POST", action: "action=learning_feedback", cookie, body }); assert.equal(stale.code, 409); assert.equal(stale.data.code, "stale_editorial_version");
+});
 await check("prepared Article import requires a session and same-origin JSON", async () => {
   const request = { method: "POST", action: "action=article_intake", body: { commands: [] } };
   assert.equal((await invoke(request)).code, 401);

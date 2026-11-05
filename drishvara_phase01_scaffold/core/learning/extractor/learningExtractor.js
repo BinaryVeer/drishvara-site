@@ -161,7 +161,7 @@ function summarizeRevisionHistory(revisionHistory = [], profileKey, sourceStatus
   return lessons;
 }
 
-function buildCandidateLessons({ rawInput, finalStatus, guardReport, revisionPacket, revisionHistory = [] }) {
+export function buildCandidateLessons({ rawInput, finalStatus, guardReport, revisionPacket, revisionHistory = [] }) {
   const lessons = [];
   const baseTags = inferTopicTags(rawInput);
   const effectiveGuard = guardReport || revisionPacket || null;

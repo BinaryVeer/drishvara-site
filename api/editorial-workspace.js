@@ -7,6 +7,8 @@ import { loadEditorialReviewImage } from "../scripts/lib/editorial-review-media.
 import { longFormRequirements, articleWordCount, articleLengthBlocker } from "../scripts/lib/editorial-article-qualification.mjs";
 import { reviewedArticlePage } from "../scripts/lib/editorial-article-layout.mjs";
 import { submitPreparedArticles } from "../scripts/lib/editorial-article-intake.mjs";
+import { editorialWorkflowQueue } from "../scripts/lib/editorial-workflow.mjs";
+import { reviewedCorrectionFeedback } from "../scripts/lib/editorial-learning-feedback.mjs";
 
 const assets = {
   "login.html": [new URL("../internal-scaffolds/editorial-workspace/login.html", import.meta.url), "text/html; charset=utf-8"],
@@ -24,7 +26,8 @@ const safeCodes = new Set(["editorial_access_denied", "editorial_capability_requ
   "word_registration_sources_pending", "word_registration_copy_unapproved", "word_registration_changed", "word_reference_unapproved", "word_editorial_approval_changed",
   "invalid_review_checklist", "invalid_editorial_image", "invalid_revision_request", "revision_task_limit", "revision_task_unavailable",
   "revision_task_closed", "revision_cancel_denied", "revision_comparison_required", "revision_unchanged",
-  "invalid_article_layout", "article_layout_required", "article_visual_enrichment_pending"]);
+  "invalid_article_layout", "article_layout_required", "article_visual_enrichment_pending", "invalid_workflow_query",
+  "workflow_state_unavailable", "editorial_review_handoff_pending", "reviewed_feedback_pending"]);
 
 export function createEditorialWorkspaceHandler({ env = process.env, fetcher = fetch, loadAsset = name => readFile(assets[name][0]) } = {}) {
   return async function handler(req, res) {
@@ -118,6 +121,20 @@ export function createEditorialWorkspaceHandler({ env = process.env, fetcher = f
       const rpc = (name, args) => remote("/rest/v1/rpc/" + name, { method: "POST", body: JSON.stringify(args) }, token);
       const session = await executeEditorialCommand({ action: "session" }, rpc);
       if (!session.ok) return json(403, { ok: false, code: "editorial_access_denied" });
+      if (req.method === "POST" && action === "workflow" && !asset) {
+        const result = await editorialWorkflowQueue({ query: body, rpc, fetcher });
+        return json(result.ok ? 200 : 400, result);
+      }
+      if (req.method === "POST" && action === "learning_feedback" && !asset) {
+        if (!body || Object.keys(body).sort().join(",") !== "candidate_id,content_hash,version_id" ||
+            validateEditorialCommand({ action: "request_release", command_id: body.candidate_id, ...body }))
+          return json(400, { ok: false, code: "invalid_version_binding" });
+        const opened = await executeEditorialCommand({ action: "open", candidate_id: body.candidate_id }, rpc);
+        if (opened.version?.id !== body.version_id || opened.version?.content_hash !== body.content_hash)
+          return json(409, { ok: false, code: "stale_editorial_version" });
+        const revisions = await executeEditorialCommand({ action: "list_revisions", candidate_id: body.candidate_id }, rpc);
+        return json(200, reviewedCorrectionFeedback(opened, revisions.tasks));
+      }
       if (req.method === "POST" && action === "article_intake" && !asset) {
         if (!body || Array.isArray(body) || Object.keys(body).length !== 1 || !Object.hasOwn(body, "commands"))
           return json(400, { ok: false, code: "invalid_article_intake_batch" });

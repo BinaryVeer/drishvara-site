@@ -881,6 +881,105 @@ try {
     assert.throws(() => query("set role authenticated;select drishvara_editorial_private.validate_article_layout('{}');"), /permission denied/);
     assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
   });
+  check("derived stage migration preserves all existing versions and decisions", () => {
+    const before = query("select md5(string_agg(id::text||content_hash,'' order by id)) from drishvara_editorial_private.versions");
+    const decisions = query("select count(*) from drishvara_editorial_private.decisions");
+    query(fs.readFileSync("supabase/migrations/20261105111214_editorial_stage_handoffs.sql", "utf8"));
+    assert.equal(query("select md5(string_agg(id::text||content_hash,'' order by id)) from drishvara_editorial_private.versions"), before);
+    assert.equal(query("select count(*) from drishvara_editorial_private.decisions"), decisions);
+  });
+  const queue = (actor, view = "all", kind = "all", desk = "all", after = null) => JSON.parse(query(`begin;set local role authenticated;
+    select set_config('request.jwt.claim.sub','${actor}',true);select public.editorial_workflow_queue('${view}','${kind}','${desk}',${after ? "'" + after + "'" : "null"});commit;`).split("\n").at(-1));
+  const wf = invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-handoff", payload: { ...create.payload, desk: "sports" } });
+  const wfDecision = scope => ({ ...base, command_id: randomUUID(), candidate_id: wf.candidate_id, version_id: wf.version_id, content_hash: wf.content_hash, scope, admin_exception: exception });
+  const wfRow = view => queue(owner, view, "article", "sports").items.find(i => i.id === wf.candidate_id);
+  check("new Article belongs to Editor, not Publisher", () => { assert.equal(wfRow("review").stage, "review"); assert.equal(wfRow("acceptance"), undefined); });
+  check("Publisher approval cannot precede the five effective editorial checks", () => assert.throws(() => invoke(owner, wfDecision("publisher_acceptance")), /editorial_review_handoff_pending/));
+  for (const scope of ["editorial", "rights", "factual", "safety", "media"]) invoke(owner, wfDecision(scope));
+  check("completed editorial work leaves Editor pendency and enters Publisher acceptance", () => {
+    assert.equal(wfRow("review"), undefined); assert.equal(wfRow("acceptance").stage, "acceptance");
+  });
+  invoke(owner, wfDecision("publisher_acceptance"));
+  check("accepted exact copy moves to release, never directly to Live", () => {
+    assert.equal(wfRow("acceptance"), undefined); assert.equal(wfRow("publishing").stage, "publishing"); assert.equal(wfRow("live"), undefined);
+  });
+  const wfRequest = { action: "request_release", command_id: randomUUID(), candidate_id: wf.candidate_id, version_id: wf.version_id, content_hash: wf.content_hash };
+  const wfQueued = invoke(owner, wfRequest);
+  const wfWorker = { ...workerCommand, actor_id: owner, command_id: wfRequest.command_id, release_request_id: wfQueued.release_request_id };
+  const wfClaim = worker(wfWorker);
+  worker({ ...wfWorker, operation: "complete", claim_id: wfClaim.claim_id, result: { status: "article_committed", reference: "c".repeat(40), path: "articles/sports/editorial-" + wf.candidate_id + ".html" } });
+  check("trusted delivery receipt moves Article out of Publisher work, not directly to Live", () => {
+    assert.equal(wfRow("publishing"), undefined); assert.equal(wfRow("delivery").stage, "delivery");
+    assert.equal(wfRow("live").stage, "delivery"); // The API must still verify deployed bytes.
+  });
+  const returned = revisions(owner, { action: "request_revision", command_id: randomUUID(), candidate_id: wf.candidate_id,
+    version_id: wf.version_id, content_hash: wf.content_hash, instructions: "Synthetic Publisher return: correct the evidence and final paragraph.", evidence_refs: ["synthetic-source"] });
+  check("Publisher return removes release pendency and restores correction work with history", () => {
+    assert.equal(wfRow("publishing"), undefined); assert.equal(wfRow("review").stage, "corrections");
+    assert.throws(() => invoke(owner, wfDecision("publisher_acceptance")), /editorial_review_handoff_pending/);
+  });
+  const wfRevision = revisions(owner, { action: "submit_revision", command_id: randomUUID(), candidate_id: wf.candidate_id,
+    task_id: returned.task.id, version_id: wf.version_id, content_hash: wf.content_hash, kind: "article", title: create.title,
+    payload: { ...create.payload, desk: "spirituality", body: "Synthetic revised complete copy for new reviews." }, comparison_acknowledged: true });
+  check("corrected version restarts editorial review and retains old immutable approvals", () => {
+    const row = queue(owner, "review", "article", "spirituality").items.find(i => i.id === wf.candidate_id);
+    assert.equal(row.version_id, wfRevision.version_id); assert.equal(row.stage, "review"); assert.deepEqual(row.review_state.approved_scopes, []);
+    assert.equal(query(`select count(*) from drishvara_editorial_private.decisions where version_id='${wf.version_id}'`), "6");
+  });
+  check("Live archive sector follows the delivered version, not a differently classified newer draft", () => {
+    assert.equal(wfRow("live").article_delivery.desk, "sports");
+    assert.equal(queue(owner, "live", "article", "spirituality").items.some(i => i.id === wf.candidate_id), false);
+    assert.equal(wfRow("review"), undefined);
+  });
+  const wfWord = invoke(owner, { ...wordIntake, command_id: randomUUID(), external_id: "synthetic-word-handoff" });
+  for (const scope of ["linguistic", "iast", "rights", "editorial", "context", "safety", "textual", "philosophical"]) invoke(owner, { ...base,
+    command_id: randomUUID(), candidate_id: wfWord.candidate_id, version_id: wfWord.version_id, content_hash: wfWord.content_hash, scope,
+    admin_exception: exception, ...(["linguistic", "iast", "textual", "philosophical"].includes(scope) ? { subject_review_exception: {
+      policy_ref: "drishvara-editorial-admin-subject-review@1", acknowledged: true, reason: "Synthetic personally acknowledged subject review for isolated testing only." } } : {}) });
+  check("Word handoff retains all eight reviews and does not register or publish it", () => {
+    const row = query(`select drishvara_editorial_private.workflow_stage(drishvara_editorial_private.review_state('${wfWord.candidate_id}','${wfWord.version_id}'),null)`);
+    assert.equal(row, "acceptance"); assert.equal(query(`select count(*) from drishvara_word_private.versioned_references where kind='candidate' and payload->'editorial_binding'->>'candidate_id'='${wfWord.candidate_id}'`), "0");
+  });
+  check("Live Word history requires the real synthetic publication event and preserves its frozen version", () => {
+    const record = queue(owner, "live", "word").items.find(i => i.id === registerCopy.candidate_id);
+    assert(record); assert.equal(record.word_publication.version_id, registerCopy.version_id); assert.equal(record.word_publication.date_key, date);
+    assert.equal(query(`select payload->>'event_type' from drishvara_word_private.events where event_id='${record.word_publication.publication_event_id}'`), "publication");
+    assert.equal(record.word_publication.content.meaning_en, registeredContent.meaning_en);
+    assert.equal(queue(owner, "live", "word").items.some(i => i.id === wfWord.candidate_id), false);
+  });
+  for (let n = 0; n < 12; n++) invoke(owner, { ...create, command_id: randomUUID(), external_id: "synthetic-page-" + n, payload: { ...create.payload, desk: "sports" } });
+  check("stage and sector pagination is deterministic, bounded and nonduplicating", () => {
+    const a = queue(owner, "review", "article", "sports"), b = queue(owner, "review", "article", "sports", a.next_cursor);
+    assert.equal(a.items.length, 10); assert(a.next_cursor); assert.equal(b.next_cursor, null);
+    const ids = [...a.items, ...b.items].map(i => i.id); assert.equal(new Set(ids).size, 12); assert.deepEqual(ids, [...ids].sort());
+    assert.deepEqual(queue(owner, "review", "article", "sports"), a);
+  });
+  check("anonymous, service-role, inactive and unassigned accounts cannot enumerate private queues", () => {
+    for (const role of ["anon", "service_role"]) assert.throws(() => query(`set role ${role};select public.editorial_workflow_queue('all','all','all',null);`), /permission denied/);
+    assert.throws(() => queue(inactive), /editorial_access_denied/);
+    assert.throws(() => queue(other), /editorial_access_denied/);
+  });
+  const stageReviewer = randomUUID();
+  query(`insert into auth.users(id,email,email_confirmed_at) values('${stageReviewer}','synthetic-stage-reviewer@example.invalid',now());
+    insert into public.profiles values('${stageReviewer}','editor',true);`);
+  grant(stageReviewer, "article", "editorial"); assign(stageReviewer, wf.candidate_id);
+  check("an assigned reviewer sees only that candidate across all queue views", () => {
+    const visible = queue(stageReviewer); assert.deepEqual(visible.items.map(i => i.id), [wf.candidate_id]);
+  });
+  invoke(stageReviewer, { ...base, command_id: randomUUID(), candidate_id: wf.candidate_id, version_id: wfRevision.version_id,
+    content_hash: wfRevision.content_hash, scope: "editorial" });
+  check("a reviewer's completed responsibility leaves their pendency while other reviewers remain pending", () => {
+    assert.equal(queue(stageReviewer, "review").items.length, 0);
+    assert.equal(queue(stageReviewer, "all").items[0].stage, "review");
+    assert.equal(queue(stageReviewer, "acceptance").items.length, 0);
+    query(`update drishvara_editorial_private.assignments set revoked_at=now() where candidate_id='${wf.candidate_id}' and subject_id='${stageReviewer}';`);
+    assert.throws(() => queue(stageReviewer), /editorial_access_denied/);
+  });
+  check("invalid filters fail explicitly and no private table grants or Panchang changes appear", () => {
+    assert.throws(() => queue(owner, "unknown"), /invalid_workflow_query/); assert.throws(() => queue(owner, "review", "word", "sports"), /invalid_workflow_query/);
+    assert.equal(query("select count(*) from information_schema.role_table_grants where table_schema in ('drishvara_editorial_private','drishvara_word_private') and grantee in ('PUBLIC','anon','authenticated','service_role')"), "0");
+    assert.equal(query("select value from public.synthetic_panchang where id='preserved'"), "unchanged");
+  });
   console.log(`Editorial review: ${checks} real PostgreSQL security/transaction checks passed. Only synthetic records were used.`);
 } finally {
   if (container) { docker("rm", "--force", "--volumes", container); assert.equal(docker("ps", "-aq", "--filter", "name=^/" + name + "$"), ""); console.log("Disposable editorial container and tmpfs test data removed."); }
