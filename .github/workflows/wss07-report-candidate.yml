@@ -1,0 +1,38 @@
+name: WSS07 Candidate Kundali Report Composition
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss07-kundali-report-candidate.mjs'
+      - 'tests/wss07-kundali-report-candidate.mjs'
+      - '.github/workflows/wss07-report-candidate.yml'
+permissions:
+  contents: read
+jobs:
+  chart-report-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install existing pinned library
+        run: npm ci --ignore-scripts
+      - name: Test D1/D9/D10, Dashas, transit and timing window privacy
+        run: |
+          node --check scripts/lib/wss07-kundali-report-candidate.mjs
+          node tests/wss02-birth-timezone.mjs
+          node tests/wss03-independent-reference.mjs
+          node tests/wss04-varga-vimshottari.mjs
+          node tests/wss05-06-context-and-transits.mjs
+          node tests/wss07-kundali-report-candidate.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Block public runtime changes
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss07-diff.txt
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|supabase/|scripts/lib/ag74)' /tmp/wss07-diff.txt; then
+            echo 'WSS07 candidate report code must not alter public runtime'
+            exit 1
+          fi
