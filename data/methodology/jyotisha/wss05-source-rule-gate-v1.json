@@ -1,0 +1,120 @@
+{
+  "id": "WSS05_TRADITIONAL_INTERPRETATION_GATE_V1",
+  "date_utc": "2026-11-05",
+  "publication_status": "non_public_candidate",
+  "traditional_status": "classical Jyotisha conditional source associations; historically later Horā, not attested Vedic-hymn rules",
+  "sources": [
+    {
+      "id": "BPHS_34_4",
+      "title": "Bṛhat Parāśara Horā Śāstra chapter 34 verse 4",
+      "verse_devanagari": "सप्तमं दशमं चैव विशेषसुखमुच्यते । त्रिषडायाधिपाः सर्वे ग्रहाः पापफलाः स्मृताः ॥४॥",
+      "reference_url": "https://enjoylearningsanskrit.com/scriptures/parashara/chapter-34/verse-4/",
+      "applies_to": "Identify seventh and tenth house roles in a traditional review; no standalone marriage/job prediction",
+      "needs": [
+        "birth_lagna",
+        "7th_and_10th_house_basis"
+      ],
+      "excluded": [
+        "exact_marriage_date",
+        "guaranteed_career"
+      ]
+    },
+    {
+      "id": "BPHS_48_8",
+      "title": "Bṛhat Parāśara Horā Śāstra chapter 48 verse 8",
+      "reference_url": "https://www.siva.sh/brihat-parashara-hora-shastra/48/6-10",
+      "applies_to": "Qualified Daśā review compares planetary condition at period commencement and birth; output withheld if only period lord available",
+      "needs": [
+        "natal_planet",
+        "period_start_planet",
+        "house_quality_model"
+      ],
+      "excluded": [
+        "single_period_lord_as_entire_prediction"
+      ]
+    },
+    {
+      "id": "BPHS_48_9",
+      "title": "Bṛhat Parāśara Horā Śāstra chapter 48 verse 9",
+      "verse_devanagari": "पञ्चमेशेन युक्तस्य कर्मेशस्य दशा शुभा । नवमेशेन युक्तस्य कर्मेशस्यातिशभना ॥९॥",
+      "reference_url": "https://www.siva.sh/brihat-parashara-hora-shastra/48/6-10",
+      "applies_to": "Candidate sign-conjunction evidence for tenth lord with fifth or ninth lord, contextualized in tenth-lord Daśā; not a guaranteed benefit",
+      "needs": [
+        "10th_lord",
+        "5th_lord",
+        "9th_lord",
+        "rashi_level_association",
+        "active_dasha"
+      ],
+      "excluded": [
+        "automatic_promotion_prediction",
+        "planetary_aspect_assumed"
+      ]
+    },
+    {
+      "id": "BJ_10_1",
+      "title": "Varāhamihira Bṛhat Jātaka chapter 10 verse 1 (Vocation)",
+      "verse_devanagari": "अर्थाप्तिः पितृपितृपत्निशत्रुमित्रभ्रातृस्त्रीमृतकजनाद् दिवाकराद्यैः । होरेन्द्वोर्दशमगतैर्विकल्पनीया भेन्द्वर्कास्पदपतिगांश नाथवृत्त्या ॥१॥",
+      "reference_url": "https://www.wisdomlib.org/hinduism/book/brihat-jataka-by-varahamihira-sanskrit-english/d/doc1501718.html",
+      "applies_to": "Display the tenth sign and occupants counted separately from Lagna, Moon and Sun; Navāṁśa lord/context also needed before vocation claims",
+      "needs": [
+        "lagna",
+        "moon_rashi",
+        "sun_rashi",
+        "graha_placements",
+        "D9_lordship"
+      ],
+      "excluded": [
+        "profession_sector_guarantee",
+        "single_indicator_job_recommendation"
+      ]
+    },
+    {
+      "id": "PM_20_3",
+      "title": "Praśna Mārga chapter 20 verse 3",
+      "reference_url": "https://vedicpupil.in/library/books/prasna-marga/chapter-20",
+      "applies_to": "Marriage indications require seventh house, seventh lord, grahas/aspects and Venus, with conditioning checks; no solo exact wedding date",
+      "needs": [
+        "seventh_house",
+        "seventh_lord",
+        "venus",
+        "aspects",
+        "dasha_and_gochara"
+      ],
+      "excluded": [
+        "deterministic_marriage_time",
+        "spouse_health_character"
+      ]
+    }
+  ],
+  "approval_contract": {
+    "one_house_alone_is_not_prediction": true,
+    "unknown_birth_time": "no_lagna_dependent_interpretation",
+    "unvalidated_house_strength": "withhold_strength_assessment",
+    "interpretation_languages": [
+      "en",
+      "hi"
+    ],
+    "required_source_and_trace": [
+      "source_id",
+      "observed_placements",
+      "reason_candidate_or_withheld",
+      "traditional_not_science_notice"
+    ],
+    "birth_predictions_not_probabilistic": true,
+    "no_death_health_or_partner_morality_prognoses": true,
+    "graphical_placements_must_be_derived_from_verified_chart": true,
+    "future_time_windows": "review_only_unless_multi_factor_rules_are_approved",
+    "status_before_WSS08": "not_public"
+  },
+  "release_conditions": [
+    "Independent BPHS/Brihat Jataka recension review and verified chapter/verse contextual translation",
+    "Independent D9/D10 and Dasha boundary comparisons",
+    "Explicit year convention and source",
+    "Output EN/HI fully verified with Unicode rendering and accessible controls",
+    "No unattended personal data persistence, no account leak",
+    "User-visible clear traditional and non-scientific qualification"
+  ],
+  "source_notice_en": "A classical Jyotisha association describes factors interpreted within that tradition. It is not a scientifically reliable prediction or a substitute for decisions.",
+  "source_notice_hi": "शास्त्रीय ज्योतिष में बताए गए ये संकेत पारम्परिक व्याख्या के विषय हैं। ये वैज्ञानिक रूप से विश्वसनीय भविष्यवाणी या निर्णय का विकल्प नहीं हैं।"
+}

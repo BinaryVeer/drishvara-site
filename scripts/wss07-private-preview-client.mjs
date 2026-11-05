@@ -198,6 +198,23 @@ function render(){
    strings.house+" "+h.number+" ("+h.rashi+"): "+(h.grahas.join(", ")||"—")).join(" · "));
   item(itemDiv,"p",strings.pending,"muted");
  }
+ const evidence=card(root,strings.traditionalSources);
+ evidence.id="wss-source-evidence";
+ item(evidence,"p",view.sourceEvidence.notice,"warning");
+ for(const entry of view.sourceEvidence.entries){
+  const block=item(evidence,"div",null,"domain");
+  item(block,"h3",entry.title);
+  item(block,"p",entry.summary);
+  item(block,"small",strings.ruleReference+": "+entry.source_rule_ids.join(", "),"muted");
+  if(entry.id==="VOCATION_TENTH_THREE_BASIS"){
+   table(block,[language==="hi"?"संदर्भ":"Origin",strings.sign,strings.grahas],
+     entry.factors.map(f=>[f.from,f.rashi,f.grahas.join(", ")||"—"]));
+  }
+  if(entry.id==="HOUSE_7_10"){
+   table(block,[strings.house,strings.sign,language==="hi"?"स्वामी":"Lord"],
+     entry.factors.map(f=>[f.label,f.sign_local,f.ruler_local]));
+  }
+ }
  const timing=card(root,strings.timeWindows);
  item(timing,"p",strings.windowNotice,"warning");
  for(const [key,periods] of Object.entries(view.windows)){
