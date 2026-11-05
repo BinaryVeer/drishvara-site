@@ -321,6 +321,7 @@ function generate(){
   candidate=null;computedPeriods=null;precisionAudit=null;
   // Diagnostic state is a class name only; never log/serialize personal input.
   $("#wss-error").dataset.candidateErrorClass=error?.name||"UnknownError";
+  $("#wss-error").dataset.candidateErrorDetail=String(error?.message||"").slice(0,140);
   $("#wss-error").textContent=labels[language].failed;
   render();
  }
