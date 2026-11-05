@@ -61,7 +61,7 @@ const chrome=["/usr/bin/google-chrome","/usr/bin/google-chrome-stable","/usr/bin
 assert.ok(chrome,"System Chrome required");
 const browser=await chromium.launch({headless:true,executablePath:chrome,args:["--no-sandbox","--disable-dev-shm-usage"]});
 const audit={title:"WSS07 staging bilingual private UX",created_at:new Date().toISOString(),checks:[],failures:[],errors:[]};
-for(const width of [1440,390]){
+for(const width of [1440,390,320]){
  const ctx=await browser.newContext({viewport:{width,height:860},deviceScaleFactor:1});
  const page=await ctx.newPage();
  const incoming=[];
@@ -94,6 +94,11 @@ for(const width of [1440,390]){
   await page.locator('[data-language-choice="hi"]').click();
   assert.equal(await page.locator("html").getAttribute("lang"),"hi");
   assert.equal(await page.locator('[data-language-choice="hi"]').getAttribute("aria-pressed"),"true");
+  assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
+  assert.match(await page.locator("#wss-page-footer").innerText(),/ग्रह गणना/);
+  assert.match(await page.locator("#wss-year-convention").innerText(),/नागरिक वर्ष/);
+  assert.match(await page.locator("#wss-precision").innerText(),/सेकंड तक ज्ञात/);
+  assert.equal(await page.locator('[data-precision-choice="approximate"]').isDisabled(),true);
   assert.match(await page.locator("#review-result h2").first().innerText(),/कुंडली/);
   assert.match(await page.locator("#review-result").innerText(),/वृषभ/);
   assert.match(await page.locator("#wss-name-label").innerText(),/नाम/);
