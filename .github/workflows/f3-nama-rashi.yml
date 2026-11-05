@@ -1,0 +1,48 @@
+name: F3 Nāma Rāśi governed validation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'assets/js/drishvara-nama-rashi.js'
+      - 'assets/js/drishvara-dedicated-pages.js'
+      - 'assets/css/drishvara-dedicated-pages.css'
+      - 'data/methodology/star-reflection/f3-nama-rashi-source-register-v1.json'
+      - 'what-stars-say.html'
+      - 'tests/f3-nama-rashi-e2e.mjs'
+      - '.github/workflows/f3-nama-rashi.yml'
+permissions:
+  contents: read
+jobs:
+  nama-rashi-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Existing frontend and static build checks
+        run: |
+          node --check assets/js/drishvara-nama-rashi.js
+          node --check assets/js/drishvara-dedicated-pages.js
+          node --check tests/f3-nama-rashi-e2e.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+          npm run build
+      - name: Install isolated Playwright driver
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright-core@1.56.1
+      - name: Start candidate static server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/f3-nama-server.log 2>&1 &
+          for i in 1 2 3 4 5; do curl -fsS http://127.0.0.1:8765/what-stars-say.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/f3-nama-server.log
+          exit 1
+      - name: Browser test Nāma Rāśi, ambiguity, privacy and Hindi
+        run: node tests/f3-nama-rashi-e2e.mjs
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f3-nama-rashi-qa
+          path: f3-nama-rashi-evidence/
+          if-no-files-found: warn
+          retention-days: 7
