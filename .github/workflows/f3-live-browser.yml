@@ -1,0 +1,35 @@
+name: F3 live-browser visual audit
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tests/f3-live-browser.mjs'
+      - '.github/workflows/f3-live-browser.yml'
+permissions:
+  contents: read
+jobs:
+  visual-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Prepare Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test dependency
+        run: npm install --no-save --no-package-lock --ignore-scripts playwright-core@1.56.1
+      - name: Run read-only live browser audit
+        run: |
+          which google-chrome || which google-chrome-stable || which chromium
+          node tests/f3-live-browser.mjs
+        env:
+          F3_BASE_URL: https://www.drishvara.com
+      - name: Retain public-page QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: f3-visual-audit
+          path: f3-audit/
+          if-no-files-found: warn
+          retention-days: 7
