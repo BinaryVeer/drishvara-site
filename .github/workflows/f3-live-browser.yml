@@ -19,6 +19,16 @@ jobs:
           node-version: '22'
       - name: Install browser test dependency
         run: npm install --no-save --no-package-lock --ignore-scripts playwright-core@1.56.1
+      - name: Ensure Hindi font coverage for bilingual screenshots
+        run: |
+          fc-list :lang=hi family | head -5 || true
+          if ! fc-list :lang=hi | grep -q .; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq fonts-noto-core
+            fc-cache -f
+          fi
+          fc-list :lang=hi family | head -5 || true
+        continue-on-error: true
       - name: Run read-only live browser audit
         run: |
           which google-chrome || which google-chrome-stable || which chromium
