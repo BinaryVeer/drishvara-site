@@ -1,0 +1,63 @@
+name: WSS08 160 Independent Ephemeris Charts - CI ONLY
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'tests/wss08-generate-swiss-reference.py'
+      - 'tests/wss08-independent-ensemble.mjs'
+      - 'scripts/lib/wss08-natal-precision-audit.mjs'
+      - 'tests/wss08-natal-precision.mjs'
+      - '.github/workflows/wss08-independent-qualification.yml'
+permissions:
+  contents: read
+jobs:
+  independent-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned public runtime dependency only
+        run: npm ci --ignore-scripts
+      - name: Install Swiss reference into test runner only
+        run: python -m pip install --disable-pip-version-check --no-deps pyswisseph==2.10.3.2
+      - name: Generate independent Swiss/Moshier reference data (synthetic)
+        run: python tests/wss08-generate-swiss-reference.py
+      - name: Compare 160 cross-validated astronomical samples
+        run: |
+          node tests/wss03-independent-reference.mjs
+          node tests/wss08-independent-ensemble.mjs
+      - name: Validate birth uncertainty/precision and existing runtime
+        run: |
+          node tests/wss02-birth-timezone.mjs
+          node tests/wss03-natal-candidate.mjs
+          node tests/wss04-varga-vimshottari.mjs
+          node tests/wss08-natal-precision.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Enforce zero publicly routed or server code changes
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss08-files
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|assets/css/|supabase/|scripts/lib/ag74|package.json|package-lock.json)' /tmp/wss08-files; then
+            echo 'WSS08 independent qualification must not touch production, dependencies or existing Panchang'
+            exit 1
+          fi
+      - name: Verify Swiss reference remains test-only
+        run: |
+          if grep -R -l -E "from [\"']swisseph[\"']|require\([\"']swisseph[\"']\)|import swisseph" scripts/lib assets/js supabase 2>/dev/null; then
+            echo 'Swiss code imported in runtime: forbidden until licence review'
+            exit 1
+          fi
+      - name: Retain synthetic numerical QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wss08-independent-synthetic-reference
+          path: wss08-qa/
+          if-no-files-found: warn
+          retention-days: 7

@@ -1,0 +1,70 @@
+{
+  "id": "WSS08_SYNTHETIC_INDEPENDENT_PRECISION_REPORT_20261105",
+  "as_of": "2026-11-05",
+  "status": "candidate_numerical_discovery_passed_PUBLIC_CHART_NOT_APPROVED",
+  "scope": {
+    "reference_engine": "Swiss Ephemeris 2.10.03 / pyswisseph 2.10.3.2, Moshier sidereal Lahiri mean Rahu, isolated CI-only",
+    "live_runtime": "Astronomy Engine 2.1.19 MIT; no Swiss code in production",
+    "tests": 160,
+    "seed": 20261105,
+    "synthetic_cases_only": true,
+    "non_boundary_classification_comparisons": 7532,
+    "boundary_near_unqualified": 55,
+    "non_boundary_disagreements": 0,
+    "discovery_passed": true,
+    "independent_results_ci": "https://github.com/BinaryVeer/drishvara-site/actions/runs/42044527575"
+  },
+  "maximum_observed_errors": {
+    "sun_arcsec": 23.209,
+    "moon_arcsec": 72.056,
+    "mercury_arcsec": 23.586,
+    "venus_arcsec": 26.633,
+    "mars_arcsec": 26.626,
+    "jupiter_arcsec": 22.865,
+    "saturn_arcsec": 24.295,
+    "mean_node_arcsec": 2.383,
+    "lagna_arcsec": 21.318,
+    "ayanamsha_arcsec": 2.489
+  },
+  "comparison_bounds": {
+    "non_moon_grahas_arcsec": 72,
+    "moon_arcsec": 90,
+    "lagna_arcsec": 72,
+    "ayanamsha_arcsec": 10.8
+  },
+  "critical_warning": "Moon position difference up to 72.056 arcsec; translating lunar longitude into exact Vimshottari dates can shift boundaries by days. Exact Dasha event time predictions MUST remain unavailable.",
+  "precision_audit": {
+    "handles": [
+      "birth clock only minute vs precise second",
+      "DST fold choice and nonexistent local time",
+      "computed rising Rashi transition during birth resolution",
+      "computed D9 ascendant transition",
+      "sample-based D1/D9/D10 and Janma Rashi/Nakshatra/Pada stability",
+      "no unsupported high-latitude Lagna"
+    ],
+    "always_public_ready": false,
+    "limitations": [
+      "9 samples in birth-clock interval <=1h do not prove mathematical continuity",
+      "tzdb runtime version not yet pinned",
+      "only synthetic comparisons; not 3,266 audited birthplaces",
+      "regional naming and Dasha year conventions not finalized"
+    ]
+  },
+  "privacy": {
+    "user_birth_inputs_in_fixtures": false,
+    "name_in_astronomical_engine": false,
+    "subscribers_saved": false
+  },
+  "required_release_checks": [
+    "timebase/tzdb pinned",
+    "wider Moon and Dasha precision calibration",
+    "independent Varga/Daśā golden dates",
+    "input+view fail-closed coupling",
+    "3,266 approved place resolver integration",
+    "consent/delete authenticated subscriber profile verification",
+    "EN/HI translated UX including invalid/uncertain states",
+    "Panchang coexistence and production Vercel integration QA"
+  ],
+  "public_display_authorized": false,
+  "public_prediction_authorized": false
+}
