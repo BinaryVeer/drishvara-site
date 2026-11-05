@@ -80,6 +80,8 @@ for(const width of [1440,390,320]){
   await page.locator("#wss-year-convention").selectOption("civil_365_25");
   await page.locator("#wss-precision").selectOption("1");
   await page.locator("#wss-generate").click();
+  assert.equal(await page.locator("#wss-error").textContent(),"",
+    "Private calculation must not fail silently");
   await page.locator("#review-result .chart-grid").first().waitFor({state:"visible",timeout:12000});
   assert.equal(await page.locator("#review-result").getAttribute("data-staged-ready"),"false");
   assert.equal(await page.locator("#wss-precision-audit").getAttribute("data-public-ready"),"false");
