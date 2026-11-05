@@ -1,0 +1,422 @@
+{
+  "contract_id": "WSS01_FULL_PERSONALISED_JYOTISHA_V1",
+  "created_utc": "2026-11-05",
+  "product_name": "Drishvara · What Stars Say",
+  "product_definition": "An end-to-end Jyotisha birth-chart and traditional interpretation system from user-provided name, date/time/place of birth, plus selected current reference dates",
+  "runtime_state": "not_implemented_full_jyotisha",
+  "governance": {
+    "traditional_framework": "Parāśarī Jyotiṣa / Horā (tradition to be source-reviewed, never claimed uniformly Vedic-era)",
+    "calculation_profile": {
+      "zodiac": "nirayana_sidereal",
+      "ayanamsha": "Lahiri_Chitrapaksha",
+      "ayanamsha_source": "independent precision ephemeris required",
+      "node_model": "mean_node_default_true_node_explicit",
+      "houses": "whole_sign_D1_default",
+      "bhava_chalit": "separately_labelled_optional",
+      "dashas": "Vimshottari_120_year",
+      "dasha_year_convention": "not_frozen_awaiting_source_review",
+      "nakshatra_count": 27,
+      "padas_per_nakshatra": 4
+    },
+    "must_separate": [
+      "astronomical_computed_fact",
+      "classical_conditional_interpretation",
+      "modern_editorial_guidance",
+      "name_syllable_tradition",
+      "unavailable_or_insufficient_precision"
+    ],
+    "no_false_certainty": true,
+    "medical_financial_employment_marriage_guarantees_forbidden": true
+  },
+  "license_gate": {
+    "source": "Swiss_Ephemeris",
+    "status": "blocked_pending_licence_decision",
+    "options": [
+      "AGPL_with_whole_project_compliance",
+      "professional_licence",
+      "independently_licensed_and_independently_verified_alternative"
+    ],
+    "required_before_public_chart_computation": true,
+    "official_url": "https://www.astro.com/swisseph/swephinfo_e.htm"
+  },
+  "input_contract": {
+    "name": {
+      "required_for_birth_chart": false,
+      "usage": [
+        "display",
+        "optional_consent_based_Nama_Rashi"
+      ],
+      "never_astronomical_input": true,
+      "transmission_default": "local_only"
+    },
+    "birth_date": {
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "accepted_range": "to_be_validated_against_ephemeris"
+    },
+    "birth_time": {
+      "required_for_lagna_and_sensitive_vargas": true,
+      "format": "HH:mm:ss_or_HH:mm_with_precision",
+      "unknown_supported": true,
+      "precision_minute_or_second_declared": true,
+      "dst_fold_gap_check": true
+    },
+    "birthplace": {
+      "approved_selector_or_coordinates": true,
+      "curated_location_count_at_contract": 3266,
+      "lat_lon_required": true,
+      "timezone_required": "IANA_resolved_with_historical_seconds",
+      "uncertainty_if_approximate": true
+    },
+    "reference_date": {
+      "required_for_daily_transits": true,
+      "reference_periods": [
+        "day",
+        "month",
+        "year"
+      ],
+      "timezone_required": true
+    },
+    "privacy_consent": {
+      "anonymous_no_saved_profile": true,
+      "save_birth_profile_opt_in_only": true,
+      "account_id_not_built_into_chart_identity": true,
+      "ephemeral_server_processing_to_be_explicit": true
+    }
+  },
+  "output_requirements": [
+    {
+      "id": "NAT01",
+      "name": "Graha positions at birth",
+      "status": "blocked",
+      "inputs": [
+        "instant_UTC_TT",
+        "ephemeris",
+        "ayanamsha"
+      ],
+      "fields": [
+        "planet",
+        "sidereal_longitude",
+        "rashi",
+        "degree_in_sign",
+        "nakshatra",
+        "pada",
+        "speed_optional",
+        "retrograde",
+        "calculation_basis"
+      ],
+      "must_validate": [
+        "Sun",
+        "Moon",
+        "Mercury",
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn",
+        "Rahu",
+        "Ketu"
+      ]
+    },
+    {
+      "id": "NAT02",
+      "name": "D1 Lagna / Rashi / Chandra charts",
+      "status": "blocked",
+      "inputs": [
+        "NAT01",
+        "accurate_local_sidereal_time",
+        "latitude",
+        "longitude",
+        "precise_birth_time"
+      ],
+      "fields": [
+        "ascendant_longitude",
+        "ascendant_rashi",
+        "12_house_signs",
+        "graha_to_house_map",
+        "chart_orientation",
+        "uncertainty"
+      ]
+    },
+    {
+      "id": "NAT03",
+      "name": "D9 Navamsa and D10 Dasamsa",
+      "status": "blocked",
+      "inputs": [
+        "NAT01",
+        "NAT02",
+        "varga_formula_by_tradition"
+      ],
+      "fields": [
+        "varga_chart",
+        "varga_lagna",
+        "calculation_formula",
+        "sensitivity_warning"
+      ]
+    },
+    {
+      "id": "NAT04",
+      "name": "Janma Rashi / Janma Nakshatra / Pada",
+      "status": "blocked",
+      "inputs": [
+        "Moon_sidereal_longitude",
+        "precise_time"
+      ],
+      "fields": [
+        "moon_sign",
+        "nakshatra",
+        "pada",
+        "near_boundary_review"
+      ]
+    },
+    {
+      "id": "NAM01",
+      "name": "Optional Nama Rashi",
+      "status": "candidate_not_merged",
+      "inputs": [
+        "name",
+        "explicit_consent",
+        "syllable_confirmation"
+      ],
+      "fields": [
+        "traditional_name_sound",
+        "rashi",
+        "tradition",
+        "rule_id"
+      ],
+      "never_replace": "NAT04"
+    },
+    {
+      "id": "DAS01",
+      "name": "Vimshottari Mahadasha, Antardasha and period balance",
+      "status": "blocked",
+      "inputs": [
+        "Moon_sidereal_longitude",
+        "approved_calendar_year_convention"
+      ],
+      "fields": [
+        "birth_balance",
+        "start_utc",
+        "end_utc",
+        "lord",
+        "sub_lord",
+        "assumptions"
+      ]
+    },
+    {
+      "id": "LIF01",
+      "name": "Career, profession and strengths",
+      "status": "blocked",
+      "inputs": [
+        "NAT02",
+        "NAT03",
+        "DAS01",
+        "rule_register"
+      ],
+      "fields": [
+        "traditional_indicators",
+        "possible_themes",
+        "source_rules",
+        "qualifications"
+      ],
+      "cannot_claim": "Objective aptitude or guaranteed suitable sector"
+    },
+    {
+      "id": "LIF02",
+      "name": "Marriage and relationship windows",
+      "status": "blocked",
+      "inputs": [
+        "NAT02",
+        "NAT03",
+        "DAS01",
+        "approved_transit_rules"
+      ],
+      "fields": [
+        "favorable_periods_conditional",
+        "counter_indicators",
+        "uncertainty",
+        "source_rules"
+      ],
+      "cannot_claim": "Guaranteed marriage date or outcome"
+    },
+    {
+      "id": "LIF03",
+      "name": "Education, finance, family, life change, colours",
+      "status": "blocked",
+      "inputs": [
+        "NAT02",
+        "NAT03",
+        "DAS01",
+        "source_register"
+      ],
+      "fields": [
+        "topic",
+        "traditional_association",
+        "relevant_rules",
+        "limits"
+      ],
+      "cannot_claim": "Scientifically verified preferences, personal investment/medical advice"
+    },
+    {
+      "id": "TRN01",
+      "name": "Daily/monthly/yearly traditional guidance",
+      "status": "blocked",
+      "inputs": [
+        "natal_chart",
+        "DAS01",
+        "validated_transits_at_reference_period",
+        "rule_register"
+      ],
+      "fields": [
+        "time_range_local",
+        "calculated_transits",
+        "dasha_context",
+        "conditional_reading",
+        "do_and_dont_as_optional_reflection",
+        "limitations"
+      ],
+      "cannot_claim": "Deterministic future event prediction"
+    },
+    {
+      "id": "PRV01",
+      "name": "Optional subscriber saved charts",
+      "status": "not_started",
+      "inputs": [
+        "explicit_opt_in",
+        "authentication",
+        "secure_encryption_and_delete"
+      ],
+      "fields": [
+        "saved_chart_reference",
+        "consent_version",
+        "delete_export_controls",
+        "retention_window"
+      ],
+      "cannot_default_store": true
+    }
+  ],
+  "sequence": [
+    {
+      "id": "WSS01",
+      "deliverable": "Source, scope, licensing, accuracy, privacy and acceptance contract",
+      "status": "in_progress",
+      "production_activation": false
+    },
+    {
+      "id": "WSS02",
+      "deliverable": "Birth instant/place/timezone resolver with DST fold/gap and uncertainty",
+      "status": "not_started",
+      "production_activation": false
+    },
+    {
+      "id": "WSS03",
+      "deliverable": "Independently validated nine-graha natal astronomy and Lagna/D1",
+      "status": "blocked_by_ephemeris_licence",
+      "production_activation": false
+    },
+    {
+      "id": "WSS04",
+      "deliverable": "D9/D10 and Vimshottari timing, source-backed fixtures",
+      "status": "not_started",
+      "production_activation": false
+    },
+    {
+      "id": "WSS05",
+      "deliverable": "Rule-traceable life-domain interpretations with limitations",
+      "status": "not_started",
+      "production_activation": false
+    },
+    {
+      "id": "WSS06",
+      "deliverable": "Person-specific date transits and day/month/year readings",
+      "status": "not_started",
+      "production_activation": false
+    },
+    {
+      "id": "WSS07",
+      "deliverable": "End-to-end accessible bilingual Kundali UX and opt-in subscriber profiles",
+      "status": "not_started",
+      "production_activation": false
+    },
+    {
+      "id": "WSS08",
+      "deliverable": "Independent golden comparisons, privacy audit and governed production rollout",
+      "status": "not_started",
+      "production_activation": false
+    }
+  ],
+  "acceptance": {
+    "golden_reference_required": true,
+    "independent_reference_required": true,
+    "fixtures": [
+      "near_lagna_change",
+      "near_nakshatra_pada_change",
+      "India_standard_time",
+      "historical_offset_seconds",
+      "Europe_Daylight_Saving_fold_and_gap",
+      "America_Daylight_Saving_fold_and_gap",
+      "southern_hemisphere",
+      "equatorial_location",
+      "high_latitude_limit",
+      "unknown_birth_time",
+      "date_boundary_for_transits",
+      "planet_retrograde_and_node_setting",
+      "Vimshottari_dasha_change",
+      "D9_D10_boundary"
+    ],
+    "privacy": [
+      "no_default_persistence",
+      "no_birth_details_in_URL",
+      "no_personal_logging",
+      "consent_before_name_based_lookup",
+      "explicit_permission_before_saved_profiles",
+      "user_export_and_delete"
+    ],
+    "output_fidelity": [
+      "no_generated_placements_without_ephemeris",
+      "no_lagna_when_birth_time_unknown",
+      "no_divisional_chart_near_unresolved_boundary",
+      "no_exact_marriage_or_job_promise",
+      "traditional_and_editorial_outputs_labeled",
+      "each_interpretation_has_source_rule_ids",
+      "numerical_results_reproducible_under_versions"
+    ],
+    "validation_evidence": "required_before_any_ready_claim"
+  },
+  "sources": [
+    {
+      "kind": "national_astronomical_reference",
+      "title": "Positional Astronomy Centre, Indian Astronomical Ephemeris",
+      "url": "https://mausam.imd.gov.in/responsive/indianAstronomicalEphemeris.php"
+    },
+    {
+      "kind": "national_astronomical_reference",
+      "title": "Rashtriya Panchang",
+      "url": "https://mausam.imd.gov.in/imd_latest/contents/rashtriy_panchang.php"
+    },
+    {
+      "kind": "ephemeris_software_and_licence",
+      "title": "Astrodienst Swiss Ephemeris",
+      "url": "https://www.astro.com/swisseph/swephinfo_e.htm"
+    },
+    {
+      "kind": "traditional_hora_text",
+      "title": "Brihat Parashara Hora Shastra Sanskrit with English, text traditions require chapter and recension checks",
+      "url": "https://vedicpupil.in/library/books/brihat-parashara-hora-shastra"
+    }
+  ],
+  "explicit_not_yet_available": [
+    "full_birth_kundali",
+    "all_graha_positions",
+    "lagna_chart",
+    "navamsa",
+    "dasamsa",
+    "vimshottari_dasha",
+    "career_and_marriage_periods",
+    "personalised_transit_predictions"
+  ],
+  "dependencies": {
+    "existing_panchang": "reuse_approved_place_and_sun_moon_reference_only_after_independent_precision_review",
+    "existing_name_pr": "#16_reusable_component_unmerged_pending_full_integration",
+    "existing_legacy_reflection": "preserve_39_record_reflection_bank_as_legacy_separate_mode"
+  }
+}
