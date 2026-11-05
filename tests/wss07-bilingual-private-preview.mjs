@@ -64,6 +64,30 @@ const audit={title:"WSS07 staging bilingual private UX",created_at:new Date().to
 for(const width of [1440,390,320]){
  const ctx=await browser.newContext({viewport:{width,height:860},deviceScaleFactor:1});
  const page=await ctx.newPage();
+ // Reproduce the existing approved runtime catalog contract entirely in
+ // memory. No new location API or subscriber inputs leave this test.
+ await page.addInitScript(()=>{
+   const approvals={
+     canonical_place_approved:true,coordinate_approved:true,
+     timezone_approved:true,public_selection_approved:true,
+     computation_approved:true,public_output_allowed:true
+   };
+   const make=(id,label,lat,lon,tz,aliases=[])=>({
+     selectorValue:id,canonicalPlaceId:id,displayLabel:label,
+     latitude:lat,longitude:lon,timezone:tz,searchLabels:aliases,
+     source:{...approvals,search_labels:aliases}
+   });
+   const known=[
+     make("ranchi-jharkhand-india","Ranchi",23.3441,85.3096,"Asia/Kolkata",["ranchi"]),
+     make("lgd-district-525","Bengaluru / Bangalore — Bengaluru Urban headquarters, Karnataka, India",12.9783682911028,77.5950551098096,"Asia/Kolkata",["bangalore","bengaluru"]),
+     make("lgd-village-254106","Bedauliya — village, Aurangabad, Bihar, India",24.6433423812615,84.1910320664735,"Asia/Kolkata",["badauliya","बेदौलिया"]),
+     make("bhawanathpur-township-jharkhand-india","Bhawanathpur Township — Durga Mandir reference, Garhwa, Jharkhand, India",24.3912148,83.6053036,"Asia/Kolkata",["bhawanathpur"]),
+     make("qa-synthetic-high-latitude","Synthetic northern reference",72.5,11.1,"Europe/Oslo")
+   ];
+   const entries=[...known,...Array.from({length:3266-known.length},(_,i)=>
+     make("qa-place-"+i,"QA synthetic location "+i,20+(i%30)*.01,70+(i%25)*.01,"Asia/Kolkata"))];
+   window.DrishvaraV2Location={loadApprovedLocations:async()=>entries};
+ });
  const incoming=[];
  page.on("request",req=>incoming.push({url:req.url(),method:req.method()}));
  page.on("pageerror",e=>audit.errors.push(width+": "+e.message));
@@ -75,7 +99,15 @@ for(const width of [1440,390,320]){
   await page.locator("#wss-name").fill("विकास");
   await page.locator("#wss-birth-date").fill("1991-08-17");
   await page.locator("#wss-birth-time").fill("10:05:23");
-  await page.locator("#wss-birth-place").selectOption("ranchi");
+  await page.locator('#wss-catalog-status[data-catalog-status="approved_3266"]').waitFor({state:"attached"});
+  assert.equal(await page.locator("#wss-place-search").isEnabled(),true);
+  await page.locator("#wss-place-search").fill("BANGALORE");
+  assert.equal(await page.locator("#wss-birth-place").isEnabled(),true);
+  assert.equal(await page.locator('#wss-birth-place option[value="lgd-district-525"]').count(),1);
+  assert.equal(await page.locator("#wss-birth-place").inputValue(),"",
+    "Alias search must never auto-select a birthplace");
+  await page.locator("#wss-place-search").fill("ranchi");
+  await page.locator("#wss-birth-place").selectOption("ranchi-jharkhand-india");
   await page.locator("#wss-reference-date").fill("2026-11-05");
   await page.locator("#wss-year-convention").selectOption("civil_365_25");
   await page.locator("#wss-precision").selectOption("1");
@@ -137,6 +169,8 @@ for(const width of [1440,390,320]){
   assert.match(noConsent,/सहमति/);
   await page.locator("#wss-clear").click();
   assert.equal(await page.locator("#wss-name").inputValue(),"");
+  assert.equal(await page.locator("#wss-place-search").inputValue(),"");
+  assert.equal(await page.locator("#wss-birth-place").inputValue(),"");
   assert.equal(await page.locator("#wss-nama-consent").isChecked(),false);
   assert.equal(await page.locator("#review-result .panel").count(),0);
   assert.equal(incoming.filter(r=>r.method!=="GET").length,0,"No request bodies sent");
