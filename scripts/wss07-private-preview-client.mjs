@@ -102,14 +102,14 @@ function updateSyllable(){
  else {select.value="";confirmedSyllableKey="";}
 }
 function render(){
- const root=$("#wss-result");root.replaceChildren();
+ const root=$("#review-result");root.replaceChildren();
  const strings=languagePack(language),lbl=labels[language];
  if(!candidate){item(root,"p",lbl.opening,"muted");return;}
  const view=buildBilingualCandidateView({
   report:candidate,displayName:$("#wss-name").value,
   language,nameSignConsent:$("#wss-nama-consent").checked,confirmedSyllableKey
  });
- $("#wss-result").dataset.stagedReady="false";
+ $("#review-result").dataset.stagedReady="false";
  const header=item(root,"header",null,"preview-header");
  item(header,"p",strings.preview,"warning");
  item(header,"h2",strings.title);
