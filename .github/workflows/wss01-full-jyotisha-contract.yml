@@ -1,0 +1,31 @@
+name: WSS01 Full Jyotisha Scope and Safety Contract
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'data/methodology/jyotisha/wss-full-personal-jyotisha-contract-v1.json'
+      - 'docs/wss-full-personalised-jyotisha-architecture-v1.md'
+      - 'scripts/validate-wss-full-personal-jyotisha-contract.mjs'
+      - '.github/workflows/wss01-full-jyotisha-contract.yml'
+permissions:
+  contents: read
+jobs:
+  contract-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify contract and source ownership
+        run: |
+          node scripts/validate-wss-full-personal-jyotisha-contract.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Ensure no production code changed in WSS01
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss-changed.txt
+          if grep -E '^(index.html|what-stars-say.html|assets/js/|supabase/|scripts/lib/ag74|data/knowledge-base/)' /tmp/wss-changed.txt; then
+            echo 'WSS01 is governance only; production files changed unexpectedly.'
+            exit 1
+          fi
