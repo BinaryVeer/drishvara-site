@@ -6,6 +6,8 @@
 import {assembleKundaliReportCandidate} from "./lib/wss07-kundali-report-candidate.mjs";
 import {buildBilingualCandidateView,languagePack} from "./lib/wss07-bilingual-report-presenter.mjs";
 import {resolveName,RECORDS} from "./lib/wss07-nama-rashi-core.mjs";
+import {computedPeriodSummaryCandidate} from "./lib/wss07-period-transit-summary.mjs";
+import {SIGNS_EN,SIGN_HI,GRAHA_HI} from "./lib/wss07-bilingual-report-presenter.mjs";
 
 const SAMPLE_PLACES=Object.freeze({
  "ranchi":{name:"Ranchi",hi:"रांची",lat:23.3441,lon:85.3096,tz:"Asia/Kolkata"},
@@ -20,7 +22,7 @@ const make=(tag,text,cls)=>{
  if(text!==undefined&&text!==null)node.textContent=String(text);
  return node;
 };
-let language="en",candidate=null,confirmedSyllableKey="";
+let language="en",candidate=null,computedPeriods=null,confirmedSyllableKey="";
 const state={failures:0,lastPubliclyReady:false};
 const labels={
  en:{
@@ -40,7 +42,12 @@ const labels={
    precisionSecond:"Known to second · 1 s",
    precisionMinute:"Known to minute · 60 s",
    precisionApproximate:"Approximate time (not yet supported)",
-   civilYear:"Civil year · 365.25 days",savanaYear:"Sāvana year · 360 days"
+   civilYear:"Civil year · 365.25 days",savanaYear:"Sāvana year · 360 days",
+   monthTitle:"Monthly planetary changes",yearTitle:"Yearly planetary changes",
+   noonNotice:"Observed between local-noon snapshots; not exact ingress times or future-event predictions.",
+   sampledDays:"Local dates sampled",observedChanges:"Observed sign changes",periodChanges:"Daśā period changes",
+   noChanges:"None observed at this sampling resolution",periodUnavailable:"Computed monthly/yearly context unavailable",
+   transitHeader:["Observation date","Graha","From sign","To sign"]
  },
  hi:{
    name:"पूरा नाम / परम्परागत नाम",date:"जन्म तिथि",clock:"जन्म समय (24-घंटे)",
@@ -59,7 +66,12 @@ const labels={
    precisionSecond:"सेकंड तक ज्ञात · 1 सेकंड",
    precisionMinute:"मिनट तक ज्ञात · 60 सेकंड",
    precisionApproximate:"अनुमानित समय (अभी समर्थित नहीं)",
-   civilYear:"नागरिक वर्ष · 365.25 दिन",savanaYear:"सावन वर्ष · 360 दिन"
+   civilYear:"नागरिक वर्ष · 365.25 दिन",savanaYear:"सावन वर्ष · 360 दिन",
+   monthTitle:"मासिक ग्रह-परिवर्तन",yearTitle:"वार्षिक ग्रह-परिवर्तन",
+   noonNotice:"परिवर्तन स्थानीय दोपहर के नमूनों के बीच देखा गया है; सटीक राशि-प्रवेश या भविष्य की घटना की तिथि नहीं।",
+   sampledDays:"देखी गई स्थानीय तिथियाँ",observedChanges:"राशि परिवर्तन",periodChanges:"दशा अवधि में परिवर्तन",
+   noChanges:"इस नमूना-पद्धति में कोई परिवर्तन नहीं दिखा",periodUnavailable:"मासिक/वार्षिक गणना आधार उपलब्ध नहीं",
+   transitHeader:["देखी गई तिथि","ग्रह","पहले की राशि","नई राशि"]
  }
 };
 function item(parent,tag,text,cls) {const node=make(tag,text,cls);parent.append(node);return node;}
@@ -190,6 +202,35 @@ function render(){
  item(transit,"p",strings.calculatedAtNoon,"muted");
  table(transit,[strings.planet,strings.sign,strings.houseMoon],
   view.transit.grahas.map(g=>[g.planet,g.sign,String(g.houseFromMoon)]));
+ for(const key of ["month","year"]){
+  const period=computedPeriods?.[key];
+  const block=card(root,key==="month"?lbl.monthTitle:lbl.yearTitle);
+  block.id=key==="month"?"wss-month-period":"wss-year-period";
+  item(block,"p",lbl.noonNotice,"warning");
+  if(!period||period.status!=="wss06_month_year_computed_summary_not_prediction"){
+    item(block,"p",lbl.periodUnavailable,"muted");
+    continue;
+  }
+  block.dataset.days=String(period.sample_count);
+  info(block,strings.period,period.start_date+" → "+period.end_date);
+  info(block,lbl.sampledDays,period.sample_count);
+  info(block,lbl.observedChanges,period.sign_changes.length);
+  info(block,lbl.periodChanges,period.dasha_changes.length);
+  const localSign=name=>{
+    const i=SIGNS_EN.indexOf(name);
+    return language==="hi"&&i>=0?SIGN_HI[i]:name;
+  };
+  const localGraha=name=>language==="hi"?(GRAHA_HI[name]||name):name;
+  if(period.sign_changes.length){
+    table(block,lbl.transitHeader,period.sign_changes.map(ch=>[
+      ch.observed_local_date,localGraha(ch.graha),
+      localSign(ch.previous_sign),localSign(ch.new_sign)]));
+  }else item(block,"p",lbl.noChanges,"muted");
+  if(period.dasha_changes.length){
+    table(block,[lbl.sampledDays,lbl.periodChanges],
+      period.dasha_changes.map(ch=>[ch.observed_local_date,ch.from+" → "+ch.to]));
+  }
+ }
  const domain=card(root,strings.domains);
  for(const d of view.domains){
   const itemDiv=item(domain,"div",null,"domain");
@@ -236,7 +277,7 @@ function generate(){
   refDate=$("#wss-reference-date").value,year=$("#wss-year-convention").value;
  if(!name||!date||!time||!place||!refDate||!year) {
   $("#wss-error").textContent=labels[language].missing;
-  candidate=null;render();return;
+  candidate=null;computedPeriods=null;render();return;
  }
  try{
   candidate=assembleKundaliReportCandidate({
@@ -249,10 +290,18 @@ function generate(){
   });
   if(candidate.status!=="candidate_chart_report_not_approved_for_user_prediction")
    throw new RangeError(candidate.reason||"candidate input unresolved");
+  const params={report:candidate,referenceDate:refDate,
+    timezone:place.tz,latitude:place.lat,longitude:place.lon};
+  try {
+    computedPeriods={
+      month:computedPeriodSummaryCandidate({...params,period:"month"}),
+      year:computedPeriodSummaryCandidate({...params,period:"year"})
+    };
+  }catch{computedPeriods=null;}
   $("#wss-error").textContent="";
   render();
  }catch{
-  candidate=null;
+  candidate=null;computedPeriods=null;
   $("#wss-error").textContent=labels[language].failed;
   render();
  }
@@ -268,7 +317,7 @@ $("#wss-clear").addEventListener("click",()=>{
  $("#wss-birth-place").value="";
  $("#wss-nama-consent").checked=false;
  $("#wss-syllable").value="";
- candidate=null;confirmedSyllableKey="";
+ candidate=null;computedPeriods=null;confirmedSyllableKey="";
  $("#wss-error").textContent="";
  updateLanguage();
 });
@@ -283,6 +332,6 @@ $("#wss-syllable").addEventListener("change",()=>{
 });
 for(const node of ["#wss-birth-date","#wss-birth-time","#wss-birth-place",
  "#wss-reference-date","#wss-year-convention","#wss-precision"]){
- $(node).addEventListener("change",()=>{candidate=null;render()});
+ $(node).addEventListener("change",()=>{candidate=null;computedPeriods=null;render()});
 }
 updateLanguage();
