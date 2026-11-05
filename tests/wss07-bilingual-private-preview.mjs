@@ -82,6 +82,7 @@ for(const width of [1440,390,320]){
      make("lgd-district-525","Bengaluru / Bangalore — Bengaluru Urban headquarters, Karnataka, India",12.9783682911028,77.5950551098096,"Asia/Kolkata",["bangalore","bengaluru"]),
      make("lgd-village-254106","Bedauliya — village, Aurangabad, Bihar, India",24.6433423812615,84.1910320664735,"Asia/Kolkata",["badauliya","बेदौलिया"]),
      make("bhawanathpur-township-jharkhand-india","Bhawanathpur Township — Durga Mandir reference, Garhwa, Jharkhand, India",24.3912148,83.6053036,"Asia/Kolkata",["bhawanathpur"]),
+     make("qa-london-fold","London QA reference",51.50853,-0.12574,"Europe/London",["london"]),
      make("qa-synthetic-high-latitude","Synthetic northern reference",72.5,11.1,"Europe/Oslo")
    ];
    const entries=[...known,...Array.from({length:3266-known.length},(_,i)=>
@@ -167,6 +168,30 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("#wss-sound-wrap").isVisible(),false);
   const noConsent=await page.locator("#review-result").innerText();
   assert.match(noConsent,/सहमति/);
+  // Global birth clock fold: never guess among two valid instants.
+  await page.locator("#wss-place-search").fill("london");
+  await page.locator("#wss-birth-place").selectOption("qa-london-fold");
+  await page.locator("#wss-birth-date").fill("2026-10-25");
+  await page.locator("#wss-birth-time").fill("01:30:00");
+  await page.locator("#wss-generate").click();
+  assert.equal(await page.locator("#wss-dst-fold-wrap").isVisible(),true);
+  assert.equal(await page.locator("#review-result .panel").count(),0,
+    "No chart must appear before an explicit clock occurrence selection");
+  await page.locator("#wss-dst-fold").selectOption("earlier");
+  await page.locator("#wss-generate").click();
+  assert.match(await page.locator("#review-result").innerText(),/2026-10-25T00:30:00.000Z/);
+  await page.locator("#wss-dst-fold").selectOption("later");
+  await page.locator("#wss-generate").click();
+  assert.match(await page.locator("#review-result").innerText(),/2026-10-25T01:30:00.000Z/);
+  assert.equal(await page.locator("#wss-dst-fold-wrap").isVisible(),true);
+  await page.locator("#wss-birth-date").fill("2026-03-29");
+  await page.locator("#wss-birth-time").fill("01:30:00");
+  await page.locator("#wss-generate").click();
+  assert.equal(await page.locator("#wss-dst-fold-wrap").isVisible(),false);
+  assert.equal(await page.locator("#review-result .panel").count(),0,
+    "Nonexistent DST local time must not display an astronomical chart");
+  assert.match(await page.locator("#wss-error").innerText(),/घड़ी के बदलाव/);
+  audit.checks.push({viewport:width,dstFoldEarlierLater:true,dstGapRejected:true});
   await page.locator("#wss-clear").click();
   assert.equal(await page.locator("#wss-name").inputValue(),"");
   assert.equal(await page.locator("#wss-place-search").inputValue(),"");
