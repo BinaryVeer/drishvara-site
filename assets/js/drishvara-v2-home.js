@@ -158,10 +158,13 @@
       starCard.setAttribute("data-drishvara-v2-reflect-card", "true");
       var nameInput = document.getElementById("star-reflection-name");
       if (nameInput) {
-        nameInput.value = "";
-        nameInput.disabled = true;
-        nameInput.setAttribute("aria-hidden", "true");
+        // The optional name is a local display salutation only. The governed
+        // astronomical request and reflective-bank selection never use it.
+        nameInput.disabled = false;
+        nameInput.removeAttribute("aria-hidden");
         nameInput.setAttribute("autocomplete", "off");
+        nameInput.setAttribute("maxlength", "80");
+        nameInput.setAttribute("aria-label", "Your name (optional; on-screen only)");
       }
       var heading = starCard.querySelector("h2");
       if (heading) heading.textContent = "Star Reflection";
