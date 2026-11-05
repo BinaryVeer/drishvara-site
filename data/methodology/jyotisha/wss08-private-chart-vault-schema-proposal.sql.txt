@@ -1,0 +1,73 @@
+-- WSS08 GOVERNANCE CANDIDATE — DO NOT APPLY TO LIVE SUPABASE YET.
+-- This is a staging-only proposal for security, DPIA and pen-test review.
+-- It is NOT an executable migration in supabase/migrations/.
+--
+-- Authenticated user owns only OPAQUE AES-256-GCM ciphertext; the name, DOB,
+-- birth time, birth place, Nama Rashi, analysis and passwords are NOT columns.
+-- Encryption always occurs in the browser before any database request.
+-- The actual database migration requires a later security review and explicit
+-- change approval; existing subscriber_profiles is NOT altered.
+begin;
+
+create table if not exists public.wss_private_chart_vault (
+ id uuid primary key default gen_random_uuid(),
+ owner_id uuid not null references auth.users(id) on delete cascade,
+ cipher_version text not null
+  check (cipher_version='drishvara_wss08_chart_v1'),
+ alg text not null check (alg='AES-256-GCM'),
+ kdf text not null check (kdf='PBKDF2-HMAC-SHA256'),
+ kdf_iterations integer not null check (kdf_iterations=600000),
+ salt_b64 text not null check (length(salt_b64)=24),
+ nonce_b64 text not null check (length(nonce_b64)=16),
+ encrypted_profile_b64 text not null
+  check (length(encrypted_profile_b64)>=24
+   and length(encrypted_profile_b64)<=45000),
+ created_at timestamptz not null default now()
+);
+create index if not exists wss_private_chart_vault_owner_idx
+ on public.wss_private_chart_vault (owner_id,created_at desc);
+
+alter table public.wss_private_chart_vault enable row level security;
+alter table public.wss_private_chart_vault force row level security;
+
+revoke all on public.wss_private_chart_vault from public, anon, authenticated;
+grant select, insert, delete on public.wss_private_chart_vault to authenticated;
+-- Owner-only; anonymous Supabase Auth users still assume the authenticated
+-- Postgres role and must not be allowed to save private profiles.
+drop policy if exists wss_vault_select_own on public.wss_private_chart_vault;
+drop policy if exists wss_vault_insert_own on public.wss_private_chart_vault;
+drop policy if exists wss_vault_delete_own on public.wss_private_chart_vault;
+create policy wss_vault_select_own on public.wss_private_chart_vault
+ for select to authenticated
+ using (
+  (select auth.uid()) is not null
+  and (select auth.uid())=owner_id
+  and coalesce((select auth.jwt())->>'is_anonymous','false')='false'
+ );
+create policy wss_vault_insert_own on public.wss_private_chart_vault
+ for insert to authenticated
+ with check (
+  (select auth.uid()) is not null
+  and (select auth.uid())=owner_id
+  and coalesce((select auth.jwt())->>'is_anonymous','false')='false'
+ );
+create policy wss_vault_delete_own on public.wss_private_chart_vault
+ for delete to authenticated
+ using (
+  (select auth.uid()) is not null
+  and (select auth.uid())=owner_id
+  and coalesce((select auth.jwt())->>'is_anonymous','false')='false'
+ );
+-- No UPDATE: charts are immutable. To revise a chart, create a new encrypted
+-- record, then delete the old one after an explicitly confirmed action.
+commit;
+
+-- Release blockers outside SQL:
+-- 1) verify Auth session handling, no XSS and strict Content Security Policy;
+-- 2) verify key derivation, tamper detection and owner-RLS with two real
+--    separate test users in an ISOLATED staging Supabase project;
+-- 3) verify true user deletion, exports, signout and complete data-retention
+--    policy, including database snapshots/backups;
+-- 4) keep existing public.subscriber_profiles plaintext birth fields UNUSED;
+-- 5) never enable or store names without explicit opt-in (separate from
+--    calculation consent or Nama Rashi consent).
