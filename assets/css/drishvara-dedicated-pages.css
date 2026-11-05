@@ -315,3 +315,48 @@ body.d-dedicated.drishvara-v2-active #ag75d-e2-star-place-choice-panel p { color
 .d-dedicated .r-name-label input { display:block; width:100%; min-width:0; max-width:100%; margin-top:2px; }
 .d-dedicated .r-name-privacy { font-size:12px; line-height:1.6; opacity:.82; margin:4px 0 10px; }
 .d-dedicated .r-reflection-salutation { margin:0 0 10px; font-weight:600; overflow-wrap:anywhere; }
+
+/* F3 Nāma Rāśi: optional, consent-first traditional name-sign display.
+   This card does not modify birth-Nakshatra results or use transit claims. */
+.d-dedicated .r-nama-panel {
+  grid-column: 1 / -1;
+  min-width: 0;
+  border: 1px solid rgba(194, 154, 79, .42);
+  border-radius: 9px;
+  background: linear-gradient(155deg, rgba(24, 44, 67, .95), rgba(11, 25, 45, .98));
+  padding: clamp(12px, 2vw, 21px);
+  display: grid;
+  gap: 10px;
+  color: var(--dv2-text,#e8eef8);
+}
+.d-dedicated .r-nama-panel h3,
+.d-dedicated .r-nama-panel h4 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #f0d9a6;
+  line-height: 1.4;
+}
+.d-dedicated .r-nama-panel p { margin:0; line-height: 1.65; font-size: 13px; }
+.d-dedicated .r-nama-consent { display:flex; align-items:flex-start; gap:10px; font-size:13px; line-height:1.55; cursor:pointer; }
+.d-dedicated .r-nama-consent input { flex:none; margin-top:4px; width:16px; height:16px; accent-color:#bf9656; }
+.d-dedicated .r-nama-confirm { display:grid; gap:8px; min-width:0; }
+.d-dedicated .r-nama-confirm label { display:block; font-weight:600; font-size:13px; }
+.d-dedicated .r-nama-confirm select {
+  width:100%; max-width:100%; min-width:0; min-height:42px;
+  background:#0e253c; color:#f1f3f7; border:1px solid #96784b;
+  border-radius:5px; padding:8px; font:inherit;
+}
+.d-dedicated .r-nama-panel .r-nama-result {
+  display:grid; gap:8px; border-left:3px solid #c99d53;
+  padding:8px 12px; background:rgba(255,255,255,.035); min-width:0;
+}
+.d-dedicated .r-nama-panel .r-nama-result:empty {display:none;}
+.d-dedicated .r-nama-panel .r-nama-note {font-size:11.5px; color:#cbd4df;}
+.d-dedicated .r-nama-sources summary {cursor:pointer; font-size:12px; font-weight:600; color:#e8c790;}
+.d-dedicated .r-nama-sources ul {margin:7px 0 0; padding-left:20px; font-size:12px; line-height:1.7;}
+.d-dedicated .r-nama-sources a {color:#efcf8f; text-decoration:underline; overflow-wrap:anywhere;}
+@media(max-width:420px) {
+  .d-dedicated .r-nama-panel {padding:12px; gap:9px;}
+  .d-dedicated .r-nama-panel h3 {font-size:16px;}
+  .d-dedicated .r-nama-panel .r-nama-result {padding:8px;}
+}
