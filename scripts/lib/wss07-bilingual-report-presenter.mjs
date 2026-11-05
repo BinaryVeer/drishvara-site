@@ -4,6 +4,7 @@
  * Birth astronomical input is deliberately separate from displayName/Nāma Rāśi.
  */
 import {RASHIS,RECORDS,resolveName} from "./wss07-nama-rashi-core.mjs";
+import {evaluateTraditionalEvidenceCandidate} from "./wss05-classical-rule-evidence.mjs";
 
 export const REPORT_VIEW_STATUS="staged_nonpublic_english_hindi_chart_report";
 const SIGN_HI=["मेष","वृषभ","मिथुन","कर्क","सिंह","कन्या","तुला","वृश्चिक","धनु","मकर","कुम्भ","मीन"];
@@ -36,7 +37,7 @@ const EN={
  calculatedAtNoon:"Sidereal positions sampled at local noon; exact ingress times are not inferred",
  houseMoon:"House from birth Moon",interpretation:"Interpretation",
  pending:"Personal traditional interpretations are pending source and accuracy review",
- domains:"Life-domain evidence",observed:"Observed houses / graha placements (not a forecast)",
+ domains:"Life-domain evidence",traditionalSources:"Classical source-linked chart observations",ruleReference:"Source rules",observed:"Observed houses / graha placements (not a forecast)",
  timeWindows:"Traditional periods for review",windowNotice:"These are timing contexts, not predicted marriage or employment dates",
  colour:"Traditional planetary colour association",colourNotice:"Symbolic graha description, not evidence of your preferred or beneficial colour",
  methodology:"Method, precision and sources",model:"Model",ayanamsha:"Ayanāṁśa",node:"Lunar-node method",
@@ -71,7 +72,7 @@ const HI={
  calculatedAtNoon:"स्थानीय दोपहर के ग्रह स्थान; सटीक राशि प्रवेश समय नहीं निकाला गया",
  houseMoon:"जन्म चन्द्र से भाव",interpretation:"व्याख्या",
  pending:"व्यक्तिगत पारम्परिक व्याख्या का स्रोत और गणना सत्यापन शेष है",
- domains:"जीवन-विषयक आधार",observed:"देखे गए भाव और ग्रह (निश्चित फलादेश नहीं)",
+ domains:"जीवन-विषयक आधार",traditionalSources:"शास्त्रीय स्रोत-संबद्ध कुंडली संकेत",ruleReference:"स्रोत-नियम",observed:"देखे गए भाव और ग्रह (निश्चित फलादेश नहीं)",
  timeWindows:"पारम्परिक समीक्षा-अवधि",windowNotice:"ये कालगत संकेत हैं, विवाह या नौकरी की निश्चित तिथियाँ नहीं",
  colour:"ग्रहों से जुड़ा पारम्परिक रंग",colourNotice:"प्रतीकात्मक ग्रह-वर्णन, आपका पसंदीदा या लाभकारी रंग सिद्ध नहीं",
  methodology:"पद्धति, सटीकता और स्रोत",model:"मॉडल",ayanamsha:"अयनांश",node:"चन्द्रपात पद्धति",
@@ -212,7 +213,7 @@ export function buildBilingualCandidateView({
        planet:localGraha(g.graha,language),sign:localSign(g.rashi,language),
        longitude:degrees(g.longitude_sidereal_degrees),houseFromMoon:g.house_from_natal_moon
      }))},
-   domains,windows,
+   domains,windows,sourceEvidence:evaluateTraditionalEvidenceCandidate(report,{language}),
    colour:report.optional_traditional_colour_reference?
      {periodGraha:localGraha(report.optional_traditional_colour_reference.planetary_period,language),
        association:textScope(report.optional_traditional_colour_reference.association),
