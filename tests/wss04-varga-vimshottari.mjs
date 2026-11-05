@@ -13,7 +13,7 @@ assert.equal(sign(359.5,"D9"),"Meena");
 assert.equal(sign(0.5,"D10"),"Mesha");
 assert.equal(sign(30.5,"D10"),"Makara");
 assert.equal(sign(60.5,"D10"),"Mithuna");
-assert.equal(sign(90.5,"D10"),"Vrishchika");
+assert.equal(sign(90.5,"D10"),"Meena");
 assert.equal(vargaSignCandidate(30,"D9").state,"review_required_near_varga_boundary");
 assert.equal(vargaSignCandidate(3.333333,"D9").state,"review_required_near_varga_boundary");
 assert.equal(vargaSignCandidate(2.999,"D10").state,"review_required_near_varga_boundary");
