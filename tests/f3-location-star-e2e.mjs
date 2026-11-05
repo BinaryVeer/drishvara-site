@@ -156,8 +156,11 @@ async function runStar(width,cases){
     await page.locator('#star-reflection-name').fill('QA Sample');
     await page.locator('#star-reflection-dob').fill(c.dob||'01/01/2000');
     if(c.unknown){
-      await page.locator('#star-birth-time-unknown').check();
+      // Some clients disable the exact-time input as soon as unknown is checked.
+      // Clear while enabled, then mark time unknown; do not try to fill a disabled field.
+      await page.locator('#star-birth-time-unknown').uncheck();
       await page.locator('#star-reflection-birth-time').fill('');
+      await page.locator('#star-birth-time-unknown').check();
     }else{
       await page.locator('#star-birth-time-unknown').uncheck();
       await page.locator('#star-reflection-birth-time').fill(c.birth||'12:00');
