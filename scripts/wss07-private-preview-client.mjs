@@ -1,7 +1,7 @@
 /**
  * Staging-only interactive Kundali preview — browser-only, no account/network.
  * This is a functional UX test of the WSS02–WSS07 candidate, NOT a public forecast.
- * The four-location list is a representative QA fixture, not the production 3,266-place selector.
+ * Birthplace options reuse the existing globally approved 3,266-location catalogue.
  */
 import {assembleKundaliReportCandidate} from "./lib/wss07-kundali-report-candidate.mjs";
 import {buildBilingualCandidateView,languagePack} from "./lib/wss07-bilingual-report-presenter.mjs";
@@ -10,13 +10,8 @@ import {computedPeriodSummaryCandidate} from "./lib/wss07-period-transit-summary
 import {SIGNS_EN,SIGN_HI,GRAHA_HI} from "./lib/wss07-bilingual-report-presenter.mjs";
 import {auditNatalPrecisionCandidate,WSS08_PRECISION_STATE} from "./lib/wss08-natal-precision-audit.mjs";
 import {auditedBilingualCandidateView} from "./lib/wss08-audited-bilingual-view.mjs";
+import {mountApprovedBirthPlaceInput} from "./lib/wss07-approved-birthplace-dom.mjs";
 
-const SAMPLE_PLACES=Object.freeze({
- "ranchi":{name:"Ranchi",hi:"रांची",lat:23.3441,lon:85.3096,tz:"Asia/Kolkata"},
- "bengaluru":{name:"Bengaluru",hi:"बेंगलुरु",lat:12.9716,lon:77.5946,tz:"Asia/Kolkata"},
- "london":{name:"London",hi:"लंदन",lat:51.50853,lon:-0.12574,tz:"Europe/London"},
- "sydney":{name:"Sydney",hi:"सिडनी",lat:-33.8688,lon:151.2093,tz:"Australia/Sydney"}
-});
 const $=selector=>document.querySelector(selector);
 const make=(tag,text,cls)=>{
  const node=document.createElement(tag);
@@ -25,15 +20,16 @@ const make=(tag,text,cls)=>{
  return node;
 };
 let language="en",candidate=null,computedPeriods=null,precisionAudit=null,confirmedSyllableKey="";
+let placeController=null;
 const state={failures:0,lastPubliclyReady:false};
 const labels={
  en:{
    name:"Full name / traditional name",date:"Date of birth",clock:"Birth time (24-hour)",
-   place:"Birthplace (sample approved-like locations)",ref:"Reference date",precision:"Time precision",
+   place:"Select an approved birthplace",ref:"Reference date",precision:"Time precision",
    dasha:"Daśā year convention",consent:"I consent to local Nāma Rāśi lookup from the entered name",
    syllable:"Confirm name's traditional first syllable",button:"Calculate private research preview",
    clear:"Clear this session",opening:"Enter all four birth details. This research preview does not transmit or store them.",
-   missing:"Enter a name, birth date, birth time and sample birth place.",
+   missing:"Enter a name, birth date, birth time and explicitly select an approved birthplace.",
    failed:"Calculation is unavailable for these details. Check the date, clock and location basis.",
    status:"Private preview only · Not approved for end-user horoscope predictions",
    generated:"Computed candidate — not a verified personal forecast",
@@ -53,11 +49,11 @@ const labels={
  },
  hi:{
    name:"पूरा नाम / परम्परागत नाम",date:"जन्म तिथि",clock:"जन्म समय (24-घंटे)",
-   place:"जन्मस्थान (परीक्षण सूची)",ref:"गणना हेतु तिथि",precision:"समय की सटीकता",
+   place:"अनुमोदित जन्मस्थान का चयन करें",ref:"गणना हेतु तिथि",precision:"समय की सटीकता",
    dasha:"दशा वर्ष पद्धति",consent:"मैं नाम से नाम राशि की स्थानीय गणना की सहमति देता/देती हूँ",
    syllable:"नाम के परम्परागत प्रथम अक्षर की पुष्टि करें",button:"निजी शोध पूर्वावलोकन की गणना करें",
    clear:"इस सत्र को साफ़ करें",opening:"नाम, जन्म तिथि, समय और स्थान भरें। इस शोध पूर्वावलोकन में कुछ भी भेजा या सहेजा नहीं जाता।",
-   missing:"नाम, जन्म तिथि, समय और परीक्षण जन्मस्थान भरें।",
+   missing:"नाम, जन्म तिथि, जन्म समय एवं अनुमोदित जन्मस्थान का स्पष्ट चयन करें।",
    failed:"इन विवरणों पर गणना उपलब्ध नहीं है। तिथि, समय और स्थान जाँचें।",
    status:"केवल निजी पूर्वावलोकन · वास्तविक भविष्यफल के लिए अनुमोदित नहीं",
    generated:"गणना-आधारित परीक्षण — सत्यापित व्यक्तिगत भविष्यफल नहीं",
@@ -120,8 +116,7 @@ function updateLanguage(){
  }
  for(const b of document.querySelectorAll("[data-language-choice]"))
    b.setAttribute("aria-pressed",String(b.dataset.languageChoice===language));
- for(const [key,place] of Object.entries(SAMPLE_PLACES))
-   $("#wss-birth-place").querySelector('option[value="'+key+'"]').textContent=language==="hi"?place.hi:place.name;
+ if(placeController)placeController.updateLanguage(language);
  updateSyllable();
  render();
 }
@@ -284,32 +279,32 @@ function render(){
 }
 function generate(){
  const name=$("#wss-name").value.trim(),date=$("#wss-birth-date").value,
-  time=$("#wss-birth-time").value,place=SAMPLE_PLACES[$("#wss-birth-place").value],
+  time=$("#wss-birth-time").value,place=placeController?.selectBirthPlace(),
   refDate=$("#wss-reference-date").value,year=$("#wss-year-convention").value;
- if(!name||!date||!time||!place||!refDate||!year) {
+ if(!name||!date||!time||place?.status!=="approved_birthplace_selected"||!place.validForLagna||!refDate||!year) {
   $("#wss-error").textContent=labels[language].missing;
   candidate=null;computedPeriods=null;precisionAudit=null;render();return;
  }
  try{
   candidate=assembleKundaliReportCandidate({
-   birthDate:date,birthTime:time,birthTimezone:place.tz,
-   birthLatitude:place.lat,birthLongitude:place.lon,
-   referenceDate:refDate,referenceTimezone:place.tz,
-   referenceLatitude:place.lat,referenceLongitude:place.lon,
+   birthDate:date,birthTime:time,birthTimezone:place.timezone,
+   birthLatitude:place.latitude,birthLongitude:place.longitude,
+   referenceDate:refDate,referenceTimezone:place.timezone,
+   referenceLatitude:place.latitude,referenceLongitude:place.longitude,
    timePrecisionSeconds:Number($("#wss-precision").value),
    yearConvention:year,yearsToReview:10
   });
   if(candidate.status!=="candidate_chart_report_not_approved_for_user_prediction")
    throw new RangeError(candidate.reason||"candidate input unresolved");
   precisionAudit=auditNatalPrecisionCandidate({
-    birthDate:date,birthTime:time,birthTimezone:place.tz,
-    birthLatitude:place.lat,birthLongitude:place.lon,
+    birthDate:date,birthTime:time,birthTimezone:place.timezone,
+    birthLatitude:place.latitude,birthLongitude:place.longitude,
     declaredPrecisionSeconds:Number($("#wss-precision").value),language
   });
   if(precisionAudit.status!==WSS08_PRECISION_STATE)
    throw new RangeError(precisionAudit.input_state||precisionAudit.status);
   const params={report:candidate,referenceDate:refDate,
-    timezone:place.tz,latitude:place.lat,longitude:place.lon};
+    timezone:place.timezone,latitude:place.latitude,longitude:place.longitude};
   try {
     computedPeriods={
       month:computedPeriodSummaryCandidate({...params,period:"month"}),
@@ -334,6 +329,7 @@ $("#wss-generate").addEventListener("click",generate);
 $("#wss-clear").addEventListener("click",()=>{
  for(const field of ["#wss-name","#wss-birth-date","#wss-birth-time","#wss-reference-date"])
   $(field).value="";
+ placeController?.clear();
  $("#wss-birth-place").value="";
  $("#wss-nama-consent").checked=false;
  $("#wss-syllable").value="";
@@ -355,3 +351,20 @@ for(const node of ["#wss-birth-date","#wss-birth-time","#wss-birth-place",
  $(node).addEventListener("change",()=>{candidate=null;computedPeriods=null;precisionAudit=null;render()});
 }
 updateLanguage();
+function invalidateBirthPreview(){
+ candidate=null;computedPeriods=null;precisionAudit=null;render();
+}
+// Existing DrishvaraV2Location owns the public catalog fetch; no birth details
+// or name are included. Missing/5-place fallback catalog fails closed.
+mountApprovedBirthPlaceInput({
+ input:$("#wss-place-search"),select:$("#wss-birth-place"),
+ status:$("#wss-catalog-status"),searchLabel:$("#wss-place-search-label"),
+ selectLabel:$("#wss-place-label"),locationApi:window.DrishvaraV2Location,
+ language,onSelectionChanged:invalidateBirthPreview
+}).then(controller=>{
+ placeController=controller;
+ placeController.updateLanguage(language);
+}).catch(()=>{
+ $("#wss-catalog-status").dataset.catalogStatus="unavailable_fail_closed";
+ $("#wss-catalog-status").textContent=language==="hi"?"अनुमोदित जन्मस्थान सूची अनुपलब्ध है।":"Approved birthplace catalogue unavailable.";
+});
