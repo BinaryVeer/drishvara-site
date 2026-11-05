@@ -22,6 +22,14 @@ for (const control of ['panchang-previous-day', 'panchang-today', 'panchang-next
   assert.ok(mobile.includes(control), control + ' must have an explicit mobile grid position');
 }
 assert.match(mobile, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\) !important/);
+for (const control of ['panchang-previous-day', 'panchang-today', 'panchang-next-day',
+  'panchang-date-text', 'panchang-date-picker']) {
+  const declaration = mobile.split('label[for="' + control + '"]').pop().split('}')[0];
+  const byId = mobile.split('#' + control + ' {').pop().split('}')[0];
+  assert.ok(/grid-column:[^;]+!important; grid-row:[^;]+!important;/.test(
+    declaration.includes('grid-column:') ? declaration : byId
+  ), control + ' must override legacy important grid areas');
+}
 assert.match(mobile, /#panchang-date-picker\s*\{\s*width: 100% !important;/);
 assert.match(mobile, /\.r-month-controls \{ flex-wrap: wrap; \}/);
 
