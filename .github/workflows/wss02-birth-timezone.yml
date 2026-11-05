@@ -1,0 +1,32 @@
+name: WSS02 Birth Instant and Historical Timezone Validation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss02-birth-local-instant.mjs'
+      - 'tests/wss02-birth-timezone.mjs'
+      - '.github/workflows/wss02-birth-timezone.yml'
+permissions:
+  contents: read
+jobs:
+  birth-instant-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exact birth instant, DST and historical offset tests
+        run: |
+          node --check scripts/lib/wss02-birth-local-instant.mjs
+          node tests/wss02-birth-timezone.mjs
+      - name: Existing frontend validation must remain unchanged
+        run: node scripts/validate-drishvara-frontend-migration.mjs
+      - name: WSS02 must not modify deployed birth UI or calculations
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss02-changed.txt
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|supabase/|scripts/lib/ag74|data/knowledge-base/)' /tmp/wss02-changed.txt; then
+            echo 'WSS02 resolver is deliberately non-activated; runtime files changed.'
+            exit 1
+          fi
