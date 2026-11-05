@@ -192,6 +192,38 @@ for(const width of [1440,390,320]){
     "candidate="+JSON.stringify(state),"view="+JSON.stringify(shown));
  }finally{await ctx.close()}
 }
+// The legacy five-place static fallback must NEVER become an accepted
+// full Kundali place list. Missing catalog similarly blocks calculation.
+for(const mode of ["fallback_five","source_missing"]){
+ const ctx=await browser.newContext({viewport:{width:390,height:760}});
+ const page=await ctx.newPage();
+ if(mode==="fallback_five"){
+  await page.addInitScript(()=>{
+   const approval={canonical_place_approved:true,coordinate_approved:true,
+    timezone_approved:true,public_selection_approved:true,
+    computation_approved:true,public_output_allowed:true};
+   window.DrishvaraV2Location={loadApprovedLocations:async()=>Array.from({length:5},(_,i)=>({
+    selectorValue:"qa-"+i,canonicalPlaceId:"qa-"+i,displayLabel:"Legacy "+i,
+    latitude:20,longitude:80,timezone:"Asia/Kolkata",searchLabels:[],
+    source:{...approval,search_labels:[]}
+   }))};
+  });
+ }
+ try{
+  await page.goto("http://127.0.0.1:8899/index.html",{waitUntil:"domcontentloaded"});
+  await page.locator('#wss-catalog-status[data-catalog-status="unavailable_fail_closed"]').waitFor({state:"attached"});
+  assert.equal(await page.locator("#wss-place-search").isDisabled(),true);
+  assert.equal(await page.locator("#wss-birth-place").isDisabled(),true);
+  assert.equal(await page.locator("#wss-birth-place option").count(),1);
+  await page.locator("#wss-generate").click();
+  assert.equal(await page.locator("#review-result .chart-grid").count(),0);
+  await page.locator('[data-language-choice="hi"]').click();
+  assert.match(await page.locator("#wss-catalog-status").innerText(),/अनुपलब्ध/);
+  audit.checks.push({source:mode,failClosed:true,localePersists:true});
+  console.log("PASS WSS07 catalog fail-closed",mode);
+ }catch(e){audit.failures.push(mode+": "+String(e));console.error("FAIL WSS07 catalog",mode,e.message)}
+ finally{await ctx.close();}
+}
 await browser.close();
 fs.writeFileSync(out+"/report.json",JSON.stringify(audit,null,2));
 console.log("WSS07_BROWSER_QA failures="+audit.failures.length+" errors="+audit.errors.length);
