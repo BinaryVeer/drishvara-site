@@ -24,7 +24,6 @@ for(const domain of person.indicators.domains){
 }
 assert.equal(person.indicators.domains.find(x=>x.domain==="work").divisional_chart,"D10");
 assert.equal(person.indicators.domains.find(x=>x.domain==="relationships").divisional_chart,"D9");
-assert.equal(buildPersonContextCandidate({...sample,yearConvention:undefined}).status==="unavailable_birth_input",false);
 assert.throws(()=>buildPersonContextCandidate({...sample,yearConvention:undefined}),RangeError);
 console.log("PASS WSS05 candidate full context, six traditional domain evidence tables and no prediction claims");
 const day=dailyTransitCandidate({referenceDate:"2026-11-05",timezone:"Europe/London",
