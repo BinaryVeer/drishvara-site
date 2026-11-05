@@ -21,7 +21,7 @@ const encrypted=await encryptPrivateBirthProfile({profile:source,passphrase:secr
 assert.equal(encrypted.cipher_version,WSS_VAULT_VERSION);
 assert.equal(encrypted.kdf_iterations,WSS_VAULT_KDF_ITERATIONS);
 assert.equal(encrypted.alg,"AES-256-GCM");
-assert.equal(Object.keys(encrypted).length,6);
+assert.equal(Object.keys(encrypted).length,7);
 const serialized=JSON.stringify(encrypted);
 for(const text of ["Synthetic User","परीक्षण","2000-02-29","13:41:23",
  "ranchi-jharkhand-india","NEVER INCLUDE THIS",secret]){
