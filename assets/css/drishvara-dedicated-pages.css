@@ -266,3 +266,46 @@ body.d-dedicated.drishvara-v2-active #ag75d-e2-star-place-choice-panel p { color
 .d-dedicated .r-sports-all li { margin:10px 0; line-height:1.6; }
 @media(max-width:1150px) { .d-dedicated .r-calendar-layout { grid-template-columns:minmax(0,1fr); } .d-dedicated .r-calendar-right { grid-template-columns:1fr 1fr; } .d-dedicated .r-calendar-right>#dv2-hindu-calendar-disclosure { grid-column:1/-1; } }
 @media(max-width:700px) { .d-dedicated .r-calendar-body { grid-template-columns:minmax(0,1fr); } .d-dedicated .r-category-filters { grid-template-columns:1fr 1fr; } .d-dedicated .r-month-agenda { grid-template-columns:1fr 1fr; } .d-dedicated .r-month-agenda h3 { grid-column:1/-1; } .d-dedicated .r-calendar-right,.d-dedicated .r-sport-theme-grid { grid-template-columns:1fr; } .d-dedicated .r-domain-grid { grid-template-columns:1fr 1fr; } .d-dedicated .r-month-table button { min-height:42px; } }
+
+/* F3 responsive-density corrections. Keep the calculator's real controls and approved
+   result cards; only adjust presentation after the older desktop grid declarations. */
+@media (max-width: 1000px) {
+  .d-dedicated .d-panchang-results,
+  .d-dedicated .d-panchang-annual,
+  .d-dedicated .d-reflection-grid,
+  .d-dedicated .d-reflection-explain,
+  .d-dedicated .d-sports-top,
+  .d-dedicated .d-sports-bottom { grid-template-columns: minmax(0, 1fr); }
+  .d-dedicated .r-domain-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .d-dedicated .d-panel,
+  .d-dedicated .r-calendar-layout,
+  .d-dedicated .r-calendar-body { min-width: 0; }
+}
+@media (max-width: 700px) {
+  /* Five genuine date controls: first row is text date + native picker,
+     second row is Previous / Today / Next. This overrides legacy !important grids. */
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel .ag74i-date-controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-areas: none !important;
+    align-items: end;
+  }
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel #panchang-previous-day { grid-column: 1 !important; grid-row: 2 !important; }
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel label[for="panchang-date-text"] { grid-column: 1 / span 2 !important; grid-row: 1 !important; }
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel label[for="panchang-date-picker"] { grid-column: 3 !important; grid-row: 1 !important; }
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel #panchang-today { grid-column: 2 !important; grid-row: 2 !important; }
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel #panchang-next-day { grid-column: 3 !important; grid-row: 2 !important; }
+  body.d-dedicated.drishvara-v2-active #panchang-festival-card .d-selection-panel #panchang-date-picker {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .d-dedicated .r-month-controls { flex-wrap: wrap; }
+  .d-dedicated .r-event-detail dl > div { grid-template-columns: minmax(75px, 0.35fr) minmax(0, 1fr); }
+  .d-dedicated .r-calendar-body,
+  .d-dedicated .r-calendar-right { min-width: 0; }
+}
+@media (max-width: 420px) {
+  .d-dedicated .r-category-filters,
+  .d-dedicated .r-month-agenda { grid-template-columns: minmax(0, 1fr); }
+  .d-dedicated .r-month-agenda h3 { grid-column: 1; }
+  .d-dedicated .r-month-controls input { width: min(145px, 100%); }
+}
