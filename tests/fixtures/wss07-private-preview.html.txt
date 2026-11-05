@@ -82,6 +82,15 @@ footer {font-size:.82rem;color:var(--muted);text-align:center}
   <label class="field" for="wss-name"><span id="wss-name-label">Full name / traditional name</span><input id="wss-name" type="text" placeholder="Test Name" autocomplete="off" maxlength="80"></label>
   <label class="field" for="wss-birth-date"><span id="wss-date-label">Date of birth</span><input id="wss-birth-date" type="date" autocomplete="off" min="1900-01-01" max="2100-12-31"></label>
   <label class="field" for="wss-birth-time"><span id="wss-time-label">Birth time (24-hour)</span><input id="wss-birth-time" type="time" step="1" autocomplete="off"></label>
+  <label class="field" for="wss-dst-fold" id="wss-dst-fold-wrap" hidden>
+   <span id="wss-dst-fold-label">Repeated birth clock time — choose the recorded occurrence</span>
+   <select id="wss-dst-fold" autocomplete="off">
+    <option value="">Select which occurrence applies</option>
+    <option value="earlier">First occurrence (before clock rollback)</option>
+    <option value="later">Second occurrence (after clock rollback)</option>
+   </select>
+  </label>
+  <p id="wss-dst-note" class="warning" hidden role="status" aria-live="polite">This birth time occurred twice locally; do not guess.</p>
   <label class="field" for="wss-place-search"><span id="wss-place-search-label">Search approved birth place</span><input id="wss-place-search" type="search" autocomplete="off" placeholder="Type a city or alias" disabled></label>
   <label class="field" for="wss-birth-place"><span id="wss-place-label">Select verified birthplace</span><select id="wss-birth-place" autocomplete="off" disabled>
     <option value="">—</option>
