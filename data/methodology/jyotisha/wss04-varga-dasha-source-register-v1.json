@@ -1,0 +1,56 @@
+{
+  "id": "WSS04_VARGA_DASHA_METHOD_CANDIDATE_20261105",
+  "state": "offline_qualified_math_not_public_kundali",
+  "date_utc": "2026-11-05",
+  "sources": [
+    {
+      "rule": "WSS04_D9_RULE",
+      "text": "Bṛhat Parāśara Horā Śāstra ch.6 verse 12",
+      "reference": "https://vedicpupil.in/library/books/brihat-parashara-hora-shastra/chapter-6",
+      "method": "Movable sign starts same; fixed ninth; dual fifth, each sign split into 9."
+    },
+    {
+      "rule": "WSS04_D10_RULE",
+      "text": "Bṛhat Parāśara Horā Śāstra ch.6 verses 13–14",
+      "reference": "https://vedicpupil.in/library/books/brihat-parashara-hora-shastra/chapter-6",
+      "method": "Odd signs start same sign; even signs ninth; each sign split into 10 equal parts."
+    },
+    {
+      "rule": "WSS04_DASHA_RULE",
+      "text": "Vimśottarī birth Nakshatra remainder and proportional Antardasha",
+      "reference": "https://jyotipy.readthedocs.io/en/latest/api/dasha.html",
+      "method": "9 planetary lords 120 years, first birth Mahadasha clipped after full period is subdivided."
+    }
+  ],
+  "year_convention": {
+    "mandatory_explicit_selection": true,
+    "options": [
+      {
+        "id": "civil_365_25",
+        "days_per_year": 365.25
+      },
+      {
+        "id": "savana_360",
+        "days_per_year": 360
+      }
+    ],
+    "historical_tradition_and_software_disagreement": true,
+    "selected_production_convention": null
+  },
+  "numerical_safety": {
+    "source_error_margin_degrees": 0.02,
+    "varga_near_boundary": "withhold precise rashi until reviewed",
+    "birth_minute_near_lagna_change": "withhold sensitive varga lagna",
+    "unsupported_high_latitude": "unavailable_lagna",
+    "all_outputs": "candidate_not_public"
+  },
+  "CI": "https://github.com/BinaryVeer/drishvara-site/actions/runs/42014436094",
+  "baseline": "WSS03 independent eight-reference graha/Lagna fixture validated",
+  "public_code_changed": false,
+  "limitations": [
+    "No independently benchmarked divisional ascendant fixture from a second chart engine yet.",
+    "Vimshottari Mahadasha/Antardasha calendar year convention not yet finalized against reference examples.",
+    "Pratyantar and other Dasha systems not yet produced.",
+    "No interpretive facts or daily/yearly forecast released."
+  ]
+}
