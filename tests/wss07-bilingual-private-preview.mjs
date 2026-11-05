@@ -80,8 +80,12 @@ for(const width of [1440,390,320]){
   await page.locator("#wss-year-convention").selectOption("civil_365_25");
   await page.locator("#wss-precision").selectOption("1");
   await page.locator("#wss-generate").click();
+  assert.equal(await page.locator("#wss-error").textContent(),"",
+    "Private calculation must not fail silently");
   await page.locator("#review-result .chart-grid").first().waitFor({state:"visible",timeout:12000});
   assert.equal(await page.locator("#review-result").getAttribute("data-staged-ready"),"false");
+  assert.equal(await page.locator("#wss-precision-audit").getAttribute("data-public-ready"),"false");
+  assert.match(await page.locator("#wss-precision-audit").innerText(),/Chart precision and release qualification/);
   assert.equal(await page.locator("#review-result .chart-wrapper").count(),3);
   assert.equal(await page.locator("#wss-month-period").getAttribute("data-days"),"30");
   assert.equal(await page.locator("#wss-year-period").getAttribute("data-days"),"365");
@@ -91,6 +95,10 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#wss-source-evidence").innerText(),/BJ_10_1/);
   assert.equal(await page.locator("#review-result .chart-wrapper").first().locator(".chart-house").count(),12);
   assert.equal(await page.locator("#review-result table.dasha tbody tr").count(),10);
+  assert.equal(await page.locator("#review-result table.dasha").innerText().then(x=>/\d{4}-\d\d-\d\dT/.test(x)),false,
+    "Unqualified exact Dasha dates must not appear");
+  assert.match(await page.locator("#wss-precision-audit").innerText(),/Exact Daśā dates/);
+  assert.match(await page.locator("#review-result").innerText(),/Marriage and career timing windows are withheld/);
   assert.match(await page.locator("#review-result").innerText(),/Krishna|Janma|Lagna|Not approved|not yet qualified|Candidate|Mesha|Vrishabha/i);
   await page.locator("#wss-nama-consent").check();
   assert.match(await page.locator("#review-result").innerText(),/Vrishabha/);
@@ -101,6 +109,8 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("html").getAttribute("lang"),"hi");
   assert.equal(await page.locator('[data-language-choice="hi"]').getAttribute("aria-pressed"),"true");
   assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
+  assert.match(await page.locator("#wss-precision-audit").innerText(),/कुंडली की सटीकता/);
+  assert.match(await page.locator("#review-result").innerText(),/दशा की निश्चित तिथियाँ/);
   assert.match(await page.locator("#wss-source-evidence").innerText(),/व्यवसाय हेतु तीन परम्परागत संदर्भ/);
   assert.match(await page.locator("#wss-month-period").innerText(),/मासिक ग्रह-परिवर्तन/);
   assert.match(await page.locator("#wss-year-period").innerText(),/वार्षिक ग्रह-परिवर्तन/);
@@ -137,8 +147,15 @@ for(const width of [1440,390,320]){
    horizontalOverflowEN:widthEN,horizontalOverflowHI:widthHI});
   console.log("PASS WSS07 private browser full workflow",width,"EN/HI and confirmed Nāma");
  }catch(e){
-  audit.failures.push(width+": "+String(e));
-  console.error("FAIL WSS07 viewport",width,String(e).slice(0,500));
+  const state=await page.locator("#wss-error").evaluate(node=>({
+    errorClass:node.dataset.candidateErrorClass||null,
+    errorDetail:node.dataset.candidateErrorDetail||null,
+    errorText:node.textContent
+  })).catch(()=>({errorClass:"unavailable",errorText:"unavailable"}));
+  const shown=(await page.locator("#review-result").innerText().catch(()=>"")).slice(0,240);
+  audit.failures.push(width+": "+String(e)+" status="+JSON.stringify(state));
+  console.error("FAIL WSS07 viewport",width,String(e).slice(0,500),
+    "candidate="+JSON.stringify(state),"view="+JSON.stringify(shown));
  }finally{await ctx.close()}
 }
 await browser.close();
