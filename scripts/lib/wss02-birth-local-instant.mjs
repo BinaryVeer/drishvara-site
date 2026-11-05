@@ -25,7 +25,7 @@ function supportedZone(timezone) {
       hourCycle: "h23", calendar: "gregory", numberingSystem: "latn"
     });
     formatter.format(new Date("2026-01-01T00:00:00Z"));
-    return {timezone:formatter.resolvedOptions().timeZone,formatter};
+    return {timezone:timezone.trim(),runtime_alias:formatter.resolvedOptions().timeZone,formatter};
   }catch{return null;}
 }
 
@@ -137,6 +137,7 @@ export function resolveBirthLocalInstant(options={}) {
   const basis={
     birth_date:options.birth_date,
     timezone:zone.timezone,
+    runtime_timezone_alias:zone.runtime_alias,
     timezone_basis:"platform_IANA_tzdb_unpinned",
     calendar:"proleptic_gregorian",
     chart_readiness:false
