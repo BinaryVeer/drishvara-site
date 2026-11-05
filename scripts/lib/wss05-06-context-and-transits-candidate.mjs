@@ -125,7 +125,7 @@ export function periodTransitCandidate({
 }
 export function buildPersonContextCandidate({
  birthDate,birthTime,birthTimezone,birthLatitude,birthLongitude,
- fold,yearConvention="civil_365_25",birthTimePrecisionSeconds=60
+ fold,yearConvention,birthTimePrecisionSeconds=60
 }={}) {
  const birth=resolveBirthLocalInstant({
    birth_date:birthDate,birth_time:birthTime,timezone:birthTimezone,fold,
