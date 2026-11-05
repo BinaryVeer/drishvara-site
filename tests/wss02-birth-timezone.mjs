@@ -14,6 +14,7 @@ check("Indian standard birth time with seconds",{
 },"birth_instant_resolved",r=>{
  assert.equal(r.utc,"2026-11-05T04:35:23.000Z");
  assert.equal(r.utc_offset_seconds,19800);
+ assert.equal(r.timezone,"Asia/Kolkata","Approved original IANA spelling retained");
  assert.equal(r.precision_seconds,1);
  assert.equal(r.chart_readiness,false);
 });
