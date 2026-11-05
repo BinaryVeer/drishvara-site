@@ -3,9 +3,9 @@
  * This is a functional UX test of the WSS02–WSS07 candidate, NOT a public forecast.
  * The four-location list is a representative QA fixture, not the production 3,266-place selector.
  */
-import {assembleKundaliReportCandidate} from "./wss07-kundali-report-candidate.mjs";
-import {buildBilingualCandidateView,languagePack} from "./wss07-bilingual-report-presenter.mjs";
-import {resolveName,RECORDS} from "./wss07-nama-rashi-core.mjs";
+import {assembleKundaliReportCandidate} from "./lib/wss07-kundali-report-candidate.mjs";
+import {buildBilingualCandidateView,languagePack} from "./lib/wss07-bilingual-report-presenter.mjs";
+import {resolveName,RECORDS} from "./lib/wss07-nama-rashi-core.mjs";
 
 const SAMPLE_PLACES=Object.freeze({
  "ranchi":{name:"Ranchi",hi:"रांची",lat:23.3441,lon:85.3096,tz:"Asia/Kolkata"},
