@@ -4,21 +4,6 @@
   const $ = s => document.querySelector(s);
   function node(tag, cls, html) { const e = document.createElement(tag); e.className = cls; e.innerHTML = html; return e; }
   function panel(title, content) { return node('section', 'd-panel', '<h2><i aria-hidden="true">◇</i> '+title+'</h2>'+content); }
-  function pageNavigation() {
-    const header = $('.dv2-header');
-    if (!header) return;
-    // Expose the new route only on these dedicated pages; homepage navigation is untouched.
-    const nav = header.querySelector('nav');
-    if (nav && !nav.querySelector('a[href="sports.html"]')) {
-      const link = document.createElement('a'); link.href = 'sports.html'; link.textContent = 'Sports';
-      if (document.body.dataset.dedicatedPage === 'sports') link.setAttribute('aria-current','page');
-      nav.append(link);
-    }
-    const mobile = $('#dv2-mobile-menu');
-    if (mobile && !mobile.querySelector('a[href="sports.html"]')) {
-      const link = document.createElement('a'); link.href = 'sports.html'; link.textContent = 'Sports'; mobile.append(link);
-    }
-  }
   function panchang() {
     const card = $('#panchang-festival-card');
     if (!card || card.dataset.dedicatedReady) return;
@@ -113,7 +98,7 @@
     if(kind==='panchang') panchang();
     else if(kind==='what-stars-say') reflection();
     else if(kind==='sports') sports();
-    pageNavigation();
+    // Shared navigation, including Sports, is owned by DrishvaraV2Shell on every page.
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
 })();
