@@ -12,8 +12,8 @@ import {calculateNatalCandidate} from "../scripts/lib/wss03-natal-candidate.mjs"
 const fixtures=JSON.parse(fs.readFileSync("data/quality/jyotisha/wss03-independent-natal-reference-20261105.json","utf8"));
 assert.equal(fixtures.fixtures.length,8);
 const dist=(x,y)=>Math.abs(((x-y+540)%360)-180);
-const toleranceDiscovery={graha_max_degrees:1.0,ascendant_max_degrees:3.0,
-  ayanamsha_max_degrees:0.05};
+const toleranceDiscovery={graha_max_degrees:0.02,ascendant_max_degrees:0.02,
+  ayanamsha_max_degrees:0.002};
 const results=[],failures=[];
 for(const fixture of fixtures.fixtures){
   const calculated=calculateNatalCandidate(fixture);
