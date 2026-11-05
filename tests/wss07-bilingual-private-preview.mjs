@@ -147,6 +147,7 @@ for(const width of [1440,390,320]){
  }catch(e){
   const state=await page.locator("#wss-error").evaluate(node=>({
     errorClass:node.dataset.candidateErrorClass||null,
+    errorDetail:node.dataset.candidateErrorDetail||null,
     errorText:node.textContent
   })).catch(()=>({errorClass:"unavailable",errorText:"unavailable"}));
   const shown=(await page.locator("#review-result").innerText().catch(()=>"")).slice(0,240);
