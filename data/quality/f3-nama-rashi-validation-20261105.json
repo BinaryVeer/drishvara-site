@@ -1,0 +1,44 @@
+{
+  "id": "F3_NAMA_RASHI_QA_20261105",
+  "date_utc": "2026-11-05",
+  "branch": "f3-nama-rashi-source-governed-20261105",
+  "workflow": "https://github.com/BinaryVeer/drishvara-site/actions/runs/41981508736",
+  "legacy_workflow": "https://github.com/BinaryVeer/drishvara-site/actions/runs/41981508728",
+  "source_table": {
+    "nakshatras": 27,
+    "padas": 108,
+    "rasis": 12,
+    "padas_each_sign": 9
+  },
+  "scope": "Read-only local static browser smoke against existing approved Star Reflection birth engine",
+  "cases": {
+    "viewports_px": [
+      1440,
+      390,
+      320
+    ],
+    "new_module_cases": 12,
+    "new_module_failures": 0,
+    "legacy_star_name_failures": 0,
+    "existing_frontend_validator_checks": 35,
+    "build": "passed",
+    "semantic_cases": [
+      "Devanagari user-spelled name→traditional initial sound",
+      "Roman name→explicit Devanagari sound confirmation",
+      "Latin T ambiguity टा versus ता, and Latin D ambiguity",
+      "Unmatched initial sound→manual 108-pada selection",
+      "Consent default off and revocation",
+      "Names do not appear in runtime POST bodies",
+      "No name persistence after reload",
+      "Hindi language switch and no horizontal overflow",
+      "Existing birth Star Reflection exact-result unaffected by input changes"
+    ]
+  },
+  "claims_not_tested": [
+    "No separate date-dependent planetary-transit rashifal implemented",
+    "No new server astronomical calculations added",
+    "Regional alternative naming tables not activated",
+    "Physical-device Safari/Android not independently tested"
+  ],
+  "release_state": "qualified_for_merge_pending_production_confirmation"
+}
