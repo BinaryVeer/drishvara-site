@@ -99,6 +99,15 @@ export function auditNatalPrecisionCandidate({
  const safeD1=lagnaStable&&grahas.every(g=>g.D1.state==="stable_candidate");
  return {
    status:WSS08_PRECISION_STATE,
+   // Basis binding is only retained in ephemeral memory and never used as
+   // a profile identifier. The presenter MUST match the same natal input.
+   audit_basis:{
+     birth_instant_utc:birth.utc,
+     birth_timezone:birth.timezone,
+     birth_latitude:birthLatitude,
+     birth_longitude:birthLongitude,
+     birth_time_precision_seconds:windowSeconds
+   },
    birth_time_span_seconds:windowSeconds,utc_start:new Date(start).toISOString(),
    utc_end_exclusive:new Date(start+windowSeconds*1000).toISOString(),
    samples_checked:samples.length,
