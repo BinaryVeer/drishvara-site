@@ -1,0 +1,35 @@
+name: WSS03 Natal Candidate Accuracy and Release Gate
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss03-natal-candidate.mjs'
+      - 'tests/wss03-natal-candidate.mjs'
+      - '.github/workflows/wss03-candidate.yml'
+permissions:
+  contents: read
+jobs:
+  natal-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install pinned astronomy package
+        run: npm ci --ignore-scripts
+      - name: Check candidate syntax and numerical invariants
+        run: |
+          node --check scripts/lib/wss03-natal-candidate.mjs
+          node tests/wss02-birth-timezone.mjs
+          node tests/wss03-natal-candidate.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Must not alter active production
+        run: |
+          git diff --name-only origin/main...HEAD | tee /tmp/wss03-files
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|supabase/|scripts/lib/ag74)' /tmp/wss03-files; then
+            echo 'WSS03 candidate cannot change active production'
+            exit 1
+          fi
