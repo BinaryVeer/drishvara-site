@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>WSS07 Staging Preview · Drishvara · NOT PUBLIC</title>
+<style>
+:root { color-scheme: dark; --navy:#0a1b2e; --panel:#10263d; --text:#f0f5f7; --muted:#b9c8d6; --gold:#dfbb70; --line:#39516a; }
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {margin:0;background:radial-gradient(ellipse at 20% 0%,#183755 0%,var(--navy) 54%);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Noto Sans Devanagari",sans-serif}
+.page {width:min(1220px,100%);margin:auto;padding:clamp(15px,3vw,36px);display:grid;gap:24px}
+header.page-header {display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:start}
+h1 {font-size:clamp(1.45rem,2.3vw,2.2rem);line-height:1.25;margin:0;color:var(--gold)}
+h2 {font-size:1.28rem;line-height:1.35;color:var(--gold)}
+h3 {font-size:1.05rem;line-height:1.4;color:#f2d99e}
+p {margin:0.65em 0}
+.tag {color:var(--gold);font-size:0.85rem;font-weight:700;letter-spacing:.02em}
+.muted {color:var(--muted)}
+.warning {border-left:3px solid var(--gold);padding:10px 12px;background:#263344;border-radius:4px;color:#f0d59c;margin:12px 0}
+button {cursor:pointer;font:inherit;border-radius:7px;min-height:42px}
+button:focus-visible, input:focus-visible,select:focus-visible {outline:3px solid var(--gold);outline-offset:2px}
+.lang-switch {display:flex;gap:4px;border:1px solid var(--line);border-radius:9px;padding:3px;flex:none}
+.lang-switch button {border:0;background:transparent;color:var(--text);padding:6px 14px}
+.lang-switch button[aria-pressed="true"] {background:var(--gold);color:#09192c;font-weight:750}
+.section {border:1px solid var(--line);background:rgba(14,31,49,.94);padding:clamp(13px,2.5vw,24px);border-radius:12px}
+.form-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+label.field {display:grid;gap:6px;min-width:0}
+label.field span {font-size:0.9rem;font-weight:650;color:#d7e4ef}
+label.field input,label.field select {padding:11px 12px;border:1px solid #60798c;background:#0d2237;border-radius:7px;color:#fff;max-width:100%;width:100%;min-width:0;font:inherit;min-height:46px}
+.form-actions {display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
+.form-actions button {padding:10px 15px;border:1px solid #bd9758}
+button.primary {color:#142033;background:var(--gold);font-weight:750}
+button.secondary {color:#dce9f3;background:#203d59}
+.consent-row {display:flex;gap:9px;align-items:flex-start;margin:16px 0 4px;font-size:0.92rem}
+.consent-row input {margin-top:5px;accent-color:var(--gold);min-width:17px;min-height:17px}
+#review-result {display:grid;gap:15px;min-width:0}
+#review-result .panel {border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:16px;min-width:0}
+#review-result .panel h2 {margin-top:0}
+.preview-header h2 {margin:.2em 0}
+.name-display {font-size:1.22rem;color:#f1d99e;overflow-wrap:anywhere}
+.kv {display:flex;gap:12px;justify-content:space-between;border-bottom:1px solid rgba(205,216,233,.13);padding:9px 0}
+.kv-label {min-width:140px;color:var(--muted)}
+.kv-value {text-align:right;overflow-wrap:anywhere}
+.chart-wrapper {margin:18px 0}
+.chart-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.chart-house {padding:11px;border:1px solid #57718a;background:#142f4b;border-radius:6px;display:grid;gap:3px;min-width:0;min-height:90px}
+.chart-house small {color:var(--gold)}
+.chart-house strong {overflow-wrap:anywhere}
+.graha {font-size:.85rem;color:var(--muted);overflow-wrap:anywhere}
+.table-wrap {max-width:100%;overflow-x:auto}
+table {width:100%;border-collapse:collapse;font-size:.89rem;min-width:420px}
+th,td {padding:9px;vertical-align:top;text-align:left;border-bottom:1px solid #3d566c;overflow-wrap:anywhere}
+th {color:var(--gold);font-weight:700}
+.domain {border-top:1px solid var(--line);padding:10px 0}
+.domain:first-of-type {border-top:0}
+.error {color:#ffc6a8;font-weight:650;min-height:22px}
+#review-result .panel>p {overflow-wrap:anywhere}
+footer {font-size:.82rem;color:var(--muted);text-align:center}
+[hidden] {display:none!important}
+@media(max-width:750px) {.page{padding:14px}.form-grid{grid-template-columns:minmax(0,1fr)}.chart-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.kv{flex-direction:column;gap:3px}.kv-value{text-align:left}}
+@media(max-width:360px) {.chart-grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="page-header">
+ <div>
+  <p class="tag">DRISHVARA · WHAT STARS SAY · WSS07</p>
+  <h1>Private, bilingual Kundali calculation preview</h1>
+  <p class="muted">Synthetic QA / research build — not deployed to the public product.</p>
+ </div>
+ <div class="lang-switch" role="group" aria-label="Select language">
+  <button type="button" data-language-choice="en" aria-pressed="true">English</button>
+  <button type="button" data-language-choice="hi" aria-pressed="false" lang="hi">हिन्दी</button>
+ </div>
+</header>
+<section class="section" aria-label="Private input">
+ <p id="wss-disclaimer" class="warning">Private research preview only.</p>
+ <div class="form-grid">
+  <label class="field" for="wss-name"><span id="wss-name-label">Full name / traditional name</span><input id="wss-name" type="text" placeholder="Test Name" autocomplete="off" maxlength="80"></label>
+  <label class="field" for="wss-birth-date"><span id="wss-date-label">Date of birth</span><input id="wss-birth-date" type="date" autocomplete="off" min="1900-01-01" max="2100-12-31"></label>
+  <label class="field" for="wss-birth-time"><span id="wss-time-label">Birth time (24-hour)</span><input id="wss-birth-time" type="time" step="1" autocomplete="off"></label>
+  <label class="field" for="wss-birth-place"><span id="wss-place-label">Birthplace</span><select id="wss-birth-place" autocomplete="off">
+    <option value="">—</option>
+    <option value="ranchi">Ranchi</option>
+    <option value="bengaluru">Bengaluru</option>
+    <option value="london">London</option>
+    <option value="sydney">Sydney</option>
+  </select></label>
+  <label class="field" for="wss-reference-date"><span id="wss-reference-label">Reference date</span><input id="wss-reference-date" type="date" min="1900-01-01" max="2100-12-31" autocomplete="off"></label>
+  <label class="field" for="wss-precision"><span id="wss-precision-label">Birth-time precision</span><select id="wss-precision">
+    <option value="1">Known to second · 1 s</option>
+    <option value="60">Known to minute · 60 s</option>
+    <option value="300">Approximate ± 5 minutes</option>
+  </select></label>
+  <label class="field" for="wss-year-convention"><span id="wss-dasha-label">Daśā year convention</span><select id="wss-year-convention">
+    <option value="">—</option>
+    <option value="civil_365_25">Civil 365.25 days</option>
+    <option value="savana_360">Sāvana 360 days</option>
+  </select></label>
+ </div>
+ <label class="consent-row" for="wss-nama-consent">
+  <input id="wss-nama-consent" type="checkbox" autocomplete="off">
+  <span id="wss-consent-label">I consent to local Nāma Rāśi lookup from the entered name</span>
+ </label>
+ <label class="field" id="wss-sound-wrap" for="wss-syllable" hidden>
+  <span id="wss-sound-label">Confirm name's traditional first syllable</span>
+  <select id="wss-syllable" autocomplete="off"><option value="">—</option></select>
+ </label>
+ <div class="form-actions">
+  <button class="primary" id="wss-generate" type="button">Calculate private research preview</button>
+  <button class="secondary" id="wss-clear" type="button">Clear this session</button>
+ </div>
+ <p id="wss-error" class="error" role="alert" aria-live="polite"></p>
+</section>
+<main id="review-result" aria-live="polite"><p class="muted">Enter four birth details. No data is sent or saved.</p></main>
+<footer>WSS07 staging-only. Calculated astronomy ≠ scientifically established life predictions. No user profiles are collected or retained.</footer>
+</div>
+<script type="module" src="./wss07-private-preview-bundle.js"></script>
+</body>
+</html>
