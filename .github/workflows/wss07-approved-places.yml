@@ -19,6 +19,8 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Install pinned astronomy dependency for WSS08 regressions
+        run: npm ci --ignore-scripts
       - name: Test 3266-sized source-gated place resolver
         run: |
           node --check scripts/lib/wss07-approved-birthplace-catalog.mjs
