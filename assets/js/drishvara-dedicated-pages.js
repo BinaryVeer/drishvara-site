@@ -199,7 +199,7 @@
    sessionName.before(nameLabel);nameLabel.append(sessionName);
    const nameNote=make('p','r-name-privacy');
    nameNote.id='star-name-privacy';
-   nameNote.append(text('Used only to address your on-screen reflection; not sent, saved, or used in the astronomical calculation.','केवल इस पृष्ठ पर आपके चिंतन को संबोधित करने के लिए; न भेजा जाता है, न सहेजा जाता है, न खगोलीय गणना में प्रयुक्त होता है।'));
+   nameNote.append(text('Used for your on-screen greeting and, with your separate consent, to identify the traditional name sign. Not sent, stored, or used in the birth calculation.','नाम से स्क्रीन पर संबोधन होता है और अलग सहमति देने पर पारम्परिक नाम राशि पहचानी जाती है। नाम न भेजा या सहेजा जाता है, न जन्म गणना में उपयोग होता है।'));
    nameLabel.after(nameNote);
    sessionName.setAttribute('aria-describedby','star-name-privacy');
   }
