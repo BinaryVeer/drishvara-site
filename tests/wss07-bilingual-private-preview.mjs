@@ -83,6 +83,10 @@ for(const width of [1440,390,320]){
   await page.locator("#review-result .chart-grid").first().waitFor({state:"visible",timeout:12000});
   assert.equal(await page.locator("#review-result").getAttribute("data-staged-ready"),"false");
   assert.equal(await page.locator("#review-result .chart-wrapper").count(),3);
+  assert.equal(await page.locator("#wss-month-period").getAttribute("data-days"),"30");
+  assert.equal(await page.locator("#wss-year-period").getAttribute("data-days"),"365");
+  assert.match(await page.locator("#wss-month-period").innerText(),/Monthly planetary changes/);
+  assert.match(await page.locator("#wss-year-period").innerText(),/Yearly planetary changes/);
   assert.equal(await page.locator("#wss-source-evidence .domain").count(),5);
   assert.match(await page.locator("#wss-source-evidence").innerText(),/BJ_10_1/);
   assert.equal(await page.locator("#review-result .chart-wrapper").first().locator(".chart-house").count(),12);
@@ -98,6 +102,8 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator('[data-language-choice="hi"]').getAttribute("aria-pressed"),"true");
   assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
   assert.match(await page.locator("#wss-source-evidence").innerText(),/व्यवसाय हेतु तीन परम्परागत संदर्भ/);
+  assert.match(await page.locator("#wss-month-period").innerText(),/मासिक ग्रह-परिवर्तन/);
+  assert.match(await page.locator("#wss-year-period").innerText(),/वार्षिक ग्रह-परिवर्तन/);
   assert.match(await page.locator("#wss-page-footer").innerText(),/ग्रह गणना/);
   assert.match(await page.locator("#wss-year-convention").innerText(),/नागरिक वर्ष/);
   assert.match(await page.locator("#wss-precision").innerText(),/सेकंड तक ज्ञात/);
