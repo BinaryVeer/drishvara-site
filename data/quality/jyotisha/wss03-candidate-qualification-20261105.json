@@ -1,0 +1,43 @@
+{
+  "id": "WSS03_MIT_EPHEMERIS_QUALIFICATION_CANDIDATE_20261105",
+  "status": "candidate_not_public",
+  "date_utc": "2026-11-05",
+  "numerics": {
+    "reference": "Swiss Ephemeris 2.10.03 Moshier / Lahiri TEST-ONLY; no Swiss code linked",
+    "comparison_cases": 8,
+    "max_graha_degrees": 0.006916,
+    "max_lagna_degrees": 0.0055426,
+    "max_ayanamsha_degrees": 0.0006913,
+    "acceptance_limits_for_sample": {
+      "grahas_degrees": 0.02,
+      "lagna_degrees": 0.02,
+      "ayanamsha_degrees": 0.002
+    },
+    "reference_file": "data/quality/jyotisha/wss03-independent-natal-reference-20261105.json",
+    "CI_run": "https://github.com/BinaryVeer/drishvara-site/actions/runs/42012688994"
+  },
+  "runtime": "astronomy-engine@2.1.19 MIT already installed and used under AG74L",
+  "known_exclusions": [
+    "This eight-case sample cannot establish precision at every Nakshatra/Lagna/D9/D10 boundary.",
+    "Lahiri anchor/model not yet calibrated against a wider reference with nutation conventions documented.",
+    "Mean lunar node differs from true node; alternatives not implicitly interchangeable.",
+    "High-latitude Ascendant and time uncertainty remain limited.",
+    "No houses/planet interpretations may be published from this candidate.",
+    "No birth personal data saved or transmitted by this pure Node module."
+  ],
+  "not_modified": [
+    "Panchang calculation or runtime version",
+    "Star Reflection current public output",
+    "Supabase Edge Functions",
+    "3,266-location catalogue",
+    "legacy 39-record Star Reflection bank"
+  ],
+  "gate_required_before_chart_publication": [
+    "more independently checked birth instants near sign/pada/Varga boundaries",
+    "signed longitude in historical dates, retrogrades and node model selection",
+    "exact Lahiri convention and documented precision envelope",
+    "WSS04 Varga/Dasha comparative cases",
+    "WSS07 consent/privacy, inaccessible-clock controls and verified chart accessibility"
+  ],
+  "assessment": "WSS03 pure numerical computation is qualified for continued offline development, NOT released as a consumer Kundali."
+}
