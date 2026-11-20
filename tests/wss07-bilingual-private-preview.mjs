@@ -134,6 +134,7 @@ for(const width of [1440,390,320]){
   assert.equal(await chartOne.locator('svg[data-chart-layout="south"]').count(),1);
   assert.equal(await chartOne.locator("svg g[data-house]").count(),12);
   assert.match(await chartOne.locator("svg").getAttribute("aria-label"),/South Indian/);
+  await chartOne.screenshot({path:out+"/chart-"+width+"-south-en.png",animations:"disabled"});
   assert.equal(await page.locator("#review-result table.dasha tbody tr").count(),10);
   assert.equal(await page.locator("#review-result table.dasha").innerText().then(x=>/\d{4}-\d\d-\d\dT/.test(x)),false,
     "Unqualified exact Dasha dates must not appear");
@@ -162,6 +163,7 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator('[data-precision-choice="approximate"]').evaluate(el=>el.disabled),true);
   assert.match(await page.locator("#review-result h2").first().innerText(),/कुंडली/);
   assert.match(await page.locator("#review-result .chart-wrapper svg").first().getAttribute("aria-label"),/उत्तर भारतीय/);
+  await page.locator("#review-result .chart-wrapper").first().screenshot({path:out+"/chart-"+width+"-north-hi.png",animations:"disabled"});
   assert.match(await page.locator("#review-result").innerText(),/वृषभ/);
   assert.match(await page.locator("#wss-name-label").innerText(),/नाम/);
   const widthHI=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
