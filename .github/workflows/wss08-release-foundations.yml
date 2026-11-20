@@ -1,0 +1,97 @@
+name: WSS08 Pinned Timezones Independent Periods and Private Charts
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss*'
+      - 'scripts/wss07-private-preview-client.mjs'
+      - 'scripts/generate-wss-pinned-timezones.py'
+      - 'tests/wss*'
+      - 'tests/fixtures/wss07-private-preview.html.txt'
+      - 'data/methodology/jyotisha/wss*'
+      - '.github/workflows/wss08-release-foundations.yml'
+permissions:
+  contents: read
+jobs:
+  release-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned runtime and isolated reference tooling
+        run: |
+          npm ci --ignore-scripts
+          python -m pip install --disable-pip-version-check --no-deps pyswisseph==2.10.3.2
+          python -m pip download --no-deps --dest /tmp/wss-tz-wheel tzdata==2026.6
+      - name: Reproduce frozen IANA data and test transition boundaries
+        run: |
+          python scripts/generate-wss-pinned-timezones.py /tmp/wss-tz-wheel/tzdata-2026.6-py2.py3-none-any.whl --reference wss08-release-qa/timezone-reference.json
+          git diff --exit-code -- scripts/lib/wss-pinned-timezone-data.mjs data/methodology/jyotisha/WSS_TIMEZONE_LICENSE.txt
+          node tests/wss-pinned-timezones.mjs
+      - name: Independent ephemeris Varga and period arithmetic
+        run: |
+          python tests/wss08-generate-swiss-reference.py
+          python tests/wss08-generate-varga-dasha-reference.py
+          node tests/wss08-independent-ensemble.mjs
+          node tests/wss08-independent-varga-dasha.mjs
+          node tests/wss08-dasha-uncertainty.mjs
+      - name: Existing contracts and audited bilingual view
+        run: |
+          node scripts/validate-wss-full-personal-jyotisha-contract.mjs
+          node tests/wss02-birth-timezone.mjs
+          node tests/wss03-natal-candidate.mjs
+          node tests/wss04-varga-vimshottari.mjs
+          node tests/wss05-classical-rule-evidence.mjs
+          node tests/wss05-06-context-and-transits.mjs
+          node tests/wss07-kundali-report-candidate.mjs
+          node tests/wss07-month-year-transit.mjs
+          node tests/wss07-approved-birthplace-catalog.mjs
+          node tests/wss08-natal-precision.mjs
+          node tests/wss08-audited-bilingual-view.mjs
+          node tests/wss08-consented-chart-vault.mjs
+          node scripts/validate-drishvara-frontend-migration.mjs
+      - name: Install isolated PostgreSQL and browser tooling
+        run: npm install --no-save --no-package-lock --ignore-scripts @electric-sql/pglite@0.5.17 esbuild@0.25.5 playwright-core@1.56.1
+      - name: Execute real PostgreSQL RLS with simulated user claims
+        run: node tests/wss08-vault-postgres-rls.mjs
+      - name: Build isolated private chart preview
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-core
+          mkdir -p wss07-preview-qa
+          cp tests/fixtures/wss07-private-preview.html.txt wss07-preview-qa/index.html
+          ./node_modules/.bin/esbuild scripts/wss07-private-preview-client.mjs --bundle --platform=browser --format=esm --target=es2022 --outfile=wss07-preview-qa/wss07-private-preview-bundle.js
+          python3 -m http.server 8899 --directory wss07-preview-qa --bind 127.0.0.1 >/tmp/wss-release-preview.log 2>&1 &
+          for i in 1 2 3 4 5; do curl -fsS http://127.0.0.1:8899/index.html >/dev/null && exit 0; sleep 1; done
+          cat /tmp/wss-release-preview.log
+          exit 1
+      - name: Bilingual desktop mobile diagrams privacy and DST
+        run: node tests/wss07-bilingual-private-preview.mjs
+      - name: Verify release boundaries and no production mutations
+        run: |
+          git diff --name-only origin/main...HEAD > /tmp/wss-release-files
+          if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/|supabase/|package.json|package-lock.json)' /tmp/wss-release-files; then
+            echo 'This qualification increment must not activate production pages or database changes'
+            exit 1
+          fi
+          git diff --exit-code -- package.json package-lock.json
+      - name: Preserve synthetic evidence only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: wss08-release-foundations
+          path: |
+            wss08-release-qa/
+            wss08-qa/
+            wss07-preview-qa/
+          retention-days: 14

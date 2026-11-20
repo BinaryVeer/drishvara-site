@@ -42,21 +42,21 @@ create policy wss_vault_select_own on public.wss_private_chart_vault
  using (
   (select auth.uid()) is not null
   and (select auth.uid())=owner_id
-  and coalesce((select auth.jwt())->>'is_anonymous','false')='false'
+  and (select auth.jwt())->>'is_anonymous'='false'
  );
 create policy wss_vault_insert_own on public.wss_private_chart_vault
  for insert to authenticated
  with check (
   (select auth.uid()) is not null
   and (select auth.uid())=owner_id
-  and coalesce((select auth.jwt())->>'is_anonymous','false')='false'
+  and (select auth.jwt())->>'is_anonymous'='false'
  );
 create policy wss_vault_delete_own on public.wss_private_chart_vault
  for delete to authenticated
  using (
   (select auth.uid()) is not null
   and (select auth.uid())=owner_id
-  and coalesce((select auth.jwt())->>'is_anonymous','false')='false'
+  and (select auth.jwt())->>'is_anonymous'='false'
  );
 -- No UPDATE: charts are immutable. To revise a chart, create a new encrypted
 -- record, then delete the old one after an explicitly confirmed action.

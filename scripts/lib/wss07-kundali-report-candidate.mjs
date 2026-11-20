@@ -10,6 +10,8 @@
 import {buildPersonContextCandidate,dailyTransitCandidate,periodTransitCandidate}
  from "./wss05-06-context-and-transits-candidate.mjs";
 import {divisionalChartsCandidate} from "./wss04-varga-vimshottari-candidate.mjs";
+import {TIMEZONE_DATA_VERSION} from "./wss-pinned-zone-provider.mjs";
+import {dashaUncertaintyCandidate} from "./wss08-dasha-uncertainty.mjs";
 export const WSS07_STATUS="candidate_chart_report_not_approved_for_user_prediction";
 export const WSS07_RASHI_LORDS=Object.freeze([
  "Mars","Venus","Mercury","Moon","Sun","Mercury","Venus","Mars",
@@ -76,6 +78,9 @@ export function assembleKundaliReportCandidate(input={}) {
  if(person.status!=="wss05_06_candidate_structured_context_not_prediction")
    return {status:"birth_basis_unavailable",reason:person.reason,
      ready_for_public_display:false};
+ const effectivePrecisionSeconds=Math.max(timePrecisionSeconds,person.birth_instant.precision_seconds);
+ if(effectivePrecisionSeconds>3600)return {status:"birth_basis_unavailable",
+   reason:"birth_precision_exceeds_supported_interval",ready_for_public_display:false};
  const transit=dailyTransitCandidate({
    referenceDate,timezone:referenceTimezone,
    latitude:referenceLatitude,longitude:referenceLongitude,
@@ -99,19 +104,27 @@ export function assembleKundaliReportCandidate(input={}) {
      saved_profiles_unavailable_until_opt_in_security_review:true},
    basis:{
      birth_instant_utc:person.birth_instant.utc,
-     birth_time_precision_seconds:timePrecisionSeconds,
+     birth_time_precision_seconds:effectivePrecisionSeconds,
      timezone:person.birth_instant.timezone,
+     timezone_data_version:TIMEZONE_DATA_VERSION.iana_version,
+     timezone_basis:TIMEZONE_DATA_VERSION.id,
+     timezone_source_sha256:TIMEZONE_DATA_VERSION.wheel_sha256,
      geographic_basis:{latitude:birthLatitude,longitude:birthLongitude},
      ref_day:referenceDate,
-     source_methods:person.natal.versions,
+     source_methods:{...person.natal.versions,
+       timezone:TIMEZONE_DATA_VERSION.id,
+       timebase:"astronomy-engine@2.1.19_builtin_DeltaT_UTC_as_UT1_approximation"},
      dasha_year_convention:person.dasha.year_convention
    },
    charts:{
      D1:{state:"candidate_chart",lagna:person.natal.lagna,
        grahas:person.natal.grahas,whole_sign_houses:person.natal.whole_sign_houses},
-     D9:divisionalChartsCandidate(person.natal,{birthTimePrecisionSeconds:timePrecisionSeconds}).D9,
-     D10:divisionalChartsCandidate(person.natal,{birthTimePrecisionSeconds:timePrecisionSeconds}).D10
+     D9:divisionalChartsCandidate(person.natal,{birthTimePrecisionSeconds:effectivePrecisionSeconds}).D9,
+     D10:divisionalChartsCandidate(person.natal,{birthTimePrecisionSeconds:effectivePrecisionSeconds}).D10
    },
+   dasha_uncertainty:dashaUncertaintyCandidate({
+     moonSiderealLongitude:person.natal.grahas.find(g=>g.graha==="Moon").sidereal_degrees,
+     birthUtc:person.birth_instant.utc,birthPrecisionSeconds:effectivePrecisionSeconds,yearConvention}),
    astronomical_birth_context:{
      janma_rashi:person.natal.grahas.find(x=>x.graha==="Moon")?.rashi.rashi,
      janma_nakshatra:person.natal.moon_nakshatra.nakshatra,

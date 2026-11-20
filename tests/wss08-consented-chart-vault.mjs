@@ -34,7 +34,11 @@ assert.equal(restored.birth_date,source.birth_date);
 assert.equal(restored.birth_time,source.birth_time);
 assert.equal(restored.approved_birth_place_selector,source.approved_birth_place_selector);
 assert.equal(restored.extra_field_to_discard,undefined);
-assert.equal(Object.keys(restored).length,9);
+assert.equal(Object.keys(restored).length,12);
+assert.equal(restored.timezone_data_version,"2026f");
+assert.equal(restored.restore_basis_state,"requires_governed_place_and_timezone_revalidation");
+const foldEncrypted=await encryptPrivateBirthProfile({profile:{...source,birth_fold:"later"},passphrase:secret});
+assert.equal((await decryptPrivateBirthProfile({envelope:foldEncrypted,passphrase:secret})).birth_fold,"later");
 assert.throws(()=>validateEncryptedBirthEnvelope({
  ...encrypted,encrypted_profile_b64:"not-base64!"
 }),RangeError);
@@ -126,6 +130,10 @@ assert.equal(deleted.deleted,true);
 const anonymous={...db,auth:{getUser:async()=>({data:{user:{id:owner,is_anonymous:true}}})}};
 await assert.rejects(()=>saveEncryptedChartCandidate({
  supabase:anonymous,envelope:encrypted,
+ explicitStorageConsent:true,reviewedSecurityGate:true
+}),/non-anonymous/);
+await assert.rejects(()=>saveEncryptedChartCandidate({
+ supabase:{...db,auth:{getUser:async()=>({data:{user:{id:owner}}})}},envelope:encrypted,
  explicitStorageConsent:true,reviewedSecurityGate:true
 }),/non-anonymous/);
 console.log("PASS WSS08 provider consent, Auth ownership, opaque insert/list/delete, no plaintext");

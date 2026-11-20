@@ -10,6 +10,7 @@
  * party JavaScript/XSS at the moment a user enters their passphrase. Public
  * activation requires independently audited CSP, dependency and Auth flows.
  */
+import {TIMEZONE_DATA_VERSION} from "./wss-pinned-zone-provider.mjs";
 export const WSS_VAULT_VERSION="drishvara_wss08_chart_v1";
 export const WSS_VAULT_KDF_ITERATIONS=600000;
 const CONTEXT="Drishvara|WSS08|chart-vault|v1";
@@ -52,7 +53,7 @@ function validateDate(date){
    throw new RangeError("Unsupported birth date");
  return date;
 }
-function validateStoredProfile(input){
+function validateStoredProfile(input,{decrypting=false}={}){
  if(!input||typeof input!=="object"||Array.isArray(input))
    throw new TypeError("An explicit birth profile object is required");
  const name=String(input.name??"").trim().replace(/\s+/gu," ");
@@ -72,14 +73,22 @@ function validateStoredProfile(input){
    throw new RangeError("Separate name-sign consent must be explicit");
  if(!["civil_365_25","savana_360"].includes(input.dasha_year_convention))
    throw new RangeError("Explicit Dasha year convention required");
+ const fold=input.birth_fold??null;
+ if(fold!==null&&fold!=="earlier"&&fold!=="later")
+   throw new RangeError("Explicit earlier/later birth-clock occurrence required");
+ const recordedVersion=decrypting?(input.timezone_data_version??null):TIMEZONE_DATA_VERSION.iana_version;
+ if(recordedVersion!==null&&!/^\d{4}[a-z]$/.test(recordedVersion))
+   throw new RangeError("Invalid recorded timezone data version");
  // Only these fields are retained. E-mail, role, auth or arbitrary user-supplied
  // data is rejected by omission, never bundled into encrypted export.
  return Object.freeze({
-   schema_version:1,name,birth_date:birthDate,birth_time:time,
+   schema_version:2,name,birth_date:birthDate,birth_time:time,
    approved_birth_place_selector:place,
    birth_time_precision_seconds:p,
    language,name_sign_consent:input.name_sign_consent,
-   dasha_year_convention:input.dasha_year_convention
+   dasha_year_convention:input.dasha_year_convention,
+   birth_fold:fold,timezone_data_version:recordedVersion,
+   ...(decrypting?{restore_basis_state:"requires_governed_place_and_timezone_revalidation"}:{})
  });
 }
 async function derive(passphrase,salt,cryptoProvider){
@@ -139,8 +148,8 @@ export async function decryptPrivateBirthProfile({envelope,passphrase,cryptoProv
    throw new Error("Unable to decrypt chart: invalid passphrase or altered ciphertext");
  }
  const result=JSON.parse(DECODER.decode(plain));
- if(result.schema_version!==1)throw new RangeError("Unsupported decrypted chart version");
- return validateStoredProfile(result);
+ if(![1,2].includes(result.schema_version))throw new RangeError("Unsupported decrypted chart version");
+ return validateStoredProfile(result,{decrypting:true});
 }
 export function validateEncryptedBirthEnvelope(envelope){
  validateEnvelope(envelope);

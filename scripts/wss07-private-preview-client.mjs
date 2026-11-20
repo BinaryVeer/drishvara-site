@@ -12,6 +12,7 @@ import {auditNatalPrecisionCandidate,WSS08_PRECISION_STATE} from "./lib/wss08-na
 import {auditedBilingualCandidateView} from "./lib/wss08-audited-bilingual-view.mjs";
 import {mountApprovedBirthPlaceInput} from "./lib/wss07-approved-birthplace-dom.mjs";
 import {resolveBirthLocalInstant} from "./lib/wss02-birth-local-instant.mjs";
+import {createAuditedChartDiagram} from "./lib/wss07-chart-diagram.mjs";
 
 const $=selector=>document.querySelector(selector);
 const make=(tag,text,cls)=>{
@@ -209,6 +210,22 @@ function render(){
   item(holder,"h3",strings[kind.toLowerCase()]);
   if(chart.notice)item(holder,"p",chart.notice,"warning");
   if(chart.rows.length){
+   const switcher=item(holder,"div",null,"form-actions");
+   const diagram=item(holder,"div",null,"wss-diagram-wrap");
+   const buttons=[];
+   const draw=layout=>{
+    const svg=createAuditedChartDiagram(document,{rows:chart.rows,language,layout,title:kind});
+    diagram.replaceChildren(...(svg?[svg]:[]));
+    buttons.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.layout===layout)));
+   };
+   for(const layout of ["north","south"]){
+    const label=language==="hi"?(layout==="north"?"उत्तर भारतीय":"दक्षिण भारतीय"):
+      layout==="north"?"North Indian":"South Indian";
+    const button=item(switcher,"button",label,"secondary");
+    button.type="button";button.dataset.layout=layout;buttons.push(button);
+    button.addEventListener("click",()=>draw(layout));
+   }
+   draw("north");
    const grid=item(holder,"div",null,"chart-grid");
    for(const row of chart.rows){
     const cell=item(grid,"div",null,"chart-house");
@@ -230,6 +247,17 @@ function render(){
      view.dashas.map(d=>[d.lord,String(d.nominalYears)]));
    tablePeriod.className="dasha";
  }else item(periods,"p",strings.wss08.moon,"muted");
+ if(view.dashaIntervals){
+  item(periods,"h3",language==="hi"?"अनुमानित गणना सीमा में दशा अवधि":"Daśā ranges under an assumed calculation margin");
+  item(periods,"p",language==="hi"?
+   "ये तिथि-अंतराल घोषित चन्द्र-गणना एवं जन्म-समय सीमा पर आधारित हैं; सांख्यिकीय विश्वास-अंतराल या विवाह/नौकरी की भविष्यवाणी नहीं हैं।":
+   "These date ranges use explicit Moon and birth-clock error assumptions. They are not statistical confidence intervals or predictions of marriage or employment.","warning");
+  const names=new Map(view.dashas.map((d,i)=>[view.dashaIntervals.periods[i]?.lord,d.lord]));
+  const range=r=>r.earliest_utc.slice(0,10)+" → "+r.latest_utc.slice(0,10);
+  const tableRange=table(periods,[strings.lord,language==="hi"?"आरम्भ सीमा":"Start range",language==="hi"?"समाप्ति सीमा":"End range"],
+   view.dashaIntervals.periods.map(p=>[names.get(p.lord)||p.lord,range(p.start),range(p.end)]));
+  tableRange.className="dasha-intervals";
+ }
  const transit=card(root,strings.daily);
  info(transit,strings.date,view.transit.date);
  item(transit,"p",strings.calculatedAtNoon,"muted");
@@ -295,6 +323,8 @@ function render(){
  info(limitation,strings.ayanamsha,view.method.ayanamsha);
  info(limitation,strings.node,view.method.node);
  info(limitation,strings.yearConvention,view.method.yearConvention);
+ info(limitation,language==="hi"?"समयक्षेत्र स्रोत":"Timezone source",view.method.timezone);
+ info(limitation,language==="hi"?"खगोलीय समय आधार":"Astronomical time basis",view.method.timebase);
  item(limitation,"p",strings.privacyDetail,"muted");
 }
 function resetFold(){

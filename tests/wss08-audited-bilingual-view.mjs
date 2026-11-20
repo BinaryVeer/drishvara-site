@@ -31,6 +31,8 @@ for(const language of ["en","hi"]){
  assert.equal(view.windows.relationships.length,0);
  assert.ok(view.limitations.some(x=>x.length>25));
  assert.equal(view.transit.dasha,null);
+ assert.equal(view.sourceEvidence.entries.some(e=>e.factors?.selected_period_lord||
+   e.factors?.selected_subperiod_lord||e.factors?.maha||e.factors?.antar),false);
  assert.equal(view.colour,null,"Unqualified active-Dasha dates cannot select a personal colour");
  assert.equal(view.dashas.length,10);
  assert.ok(view.dashas.every(d=>d.start===null&&d.end===null&&d.balance===null&&d.antar.length===0));
@@ -100,6 +102,9 @@ assert.throws(()=>auditedBilingualCandidateView({
  report,precisionAudit:{...audit,audit_basis:{...audit.audit_basis,birth_timezone:"Etc/UTC"}}
 }),/Precision audit does not match/,"Runtime timezone drift cannot be quietly accepted");
 console.log("PASS WSS08 audit/report bind to birth UTC, timezone, coordinate and declared precision");
+assert.throws(()=>auditedBilingualCandidateView({report,
+ precisionAudit:{...audit,audit_basis:{...audit.audit_basis,timezone_data_version:"2025b"}}
+}),/Precision audit does not match/);
 const broadReport=assembleKundaliReportCandidate({...setup,timePrecisionSeconds:300});
 assert.throws(()=>auditedBilingualCandidateView({report:broadReport,precisionAudit:audit}),
  /Precision audit does not match/,"A one-second audit cannot qualify a five-minute report");
