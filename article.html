@@ -410,7 +410,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
     }
 
     body {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text-main);
       background:
         radial-gradient(circle at 50% 12%, rgba(201, 162, 74, 0.075), transparent 18%),
@@ -797,7 +797,7 @@ nav[data-drishvara-hf01-common-nav]:not([data-drishvara-hf07-nav]),
   <link rel="stylesheet" href="/assets/css/drishvara-v2-tokens.css?v=dv2-20260928" />
   <link rel="stylesheet" href="/assets/css/drishvara-v2-shell.css?v=dv2-20260928" />
   <link rel="stylesheet" href="/assets/css/drishvara-v2-components.css?v=dv2-20260928" />
-  <link rel="stylesheet" href="/assets/css/drishvara-v2-article.css?v=dv2-20260928" />
+  <link rel="stylesheet" href="/assets/css/drishvara-v2-article.css?v=article-reading-20261120" />
 
 
 
@@ -1423,7 +1423,7 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
 <script data-drishvara-av02-router-reference-guard-script="true">
 (function () {
   function hasReferenceBlock() {
-    return !!document.querySelector('[data-drishvara-ar01-evidence-block="true"], [data-drishvara-ar02c-sample-reference-block="true"]');
+    return !!document.querySelector('#article-body .article-sources, [data-drishvara-ar01-evidence-block="true"], [data-drishvara-ar02c-sample-reference-block="true"]');
   }
 
   function removeFallbackGuard() {
@@ -2091,6 +2091,6 @@ img[data-drishvara-av02-restored-brand-mark="true"] {
 })();
 </script>
 <script src="/assets/js/drishvara-v2-shell.js?v=dv2-f1-20261023"></script>
-<script src="/assets/js/drishvara-v2-article.js?v=dv2-20260928"></script>
+<script src="/assets/js/drishvara-v2-article.js?v=article-reading-20261120"></script>
 </body>
 </html>
