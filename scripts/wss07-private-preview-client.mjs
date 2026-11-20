@@ -326,7 +326,10 @@ function render(){
   const state=entry.state.startsWith("withheld")?(language==="hi"?"आवश्यक कारक अनिश्चित":"Required factor uncertain"):
     entry.state==="no_qualified_matching_vocation_chain"?(language==="hi"?"पात्र संबंध नहीं मिला":"No qualified matching chain"):
     (language==="hi"?"केवल पारम्परिक संदर्भ":"Traditional context only");
-  item(detail,"summary",entry.text);
+  const kinds=language==="hi"?{house:"भाव-विषय",dignity:"उच्च-नीच राशि",aspect:"ग्रह-दृष्टि",symbolism:"वर्ण-प्रतीक",vocation:"व्यवसाय-संदर्भ"}:
+   {house:"House topic",dignity:"Sign dignity",aspect:"Graha aspects",symbolism:"Colour symbolism",vocation:"Vocation context"};
+  const subject=typeof entry.subject==="number"?strings.house+" "+entry.subject:bankGraha(entry.subject);
+  item(detail,"summary",subject+" · "+kinds[entry.kind]+": "+entry.text);
   item(detail,"p",state,"muted");
   if(entry.kind==="vocation"&&entry.factors){
    table(detail,language==="hi"?["संदर्भ","दशम राशि","दशमेश","दशमेश की नवांश राशि","नवांश-अधिपति"]:

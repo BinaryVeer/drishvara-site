@@ -26,7 +26,7 @@ export function evaluateSourceBoundRuleBank({report,precisionAudit,language='en'
  const lagnaSafe=precisionAudit.D1.state==='stable_candidate'&&signOK(d1.lagna?.rashi_index)&&
   precisionAudit.D1.lagna===SIGNS[d1.lagna.rashi_index-1]&&expected.every(stable);
  const entries=BANK.rules.map(r=>{
-  const out={id:r.id,kind:r.kind,source_ids:r.source_ids,source_references:r.source_ids.map(id=>{const s=BANK.sources.find(s=>s.id===id);return {work:s.work,passage:r.passage||s.passage,urls:s.urls,edition:s.edition};}),
+  const out={id:r.id,kind:r.kind,subject:r.graha??r.house,source_ids:r.source_ids,source_references:r.source_ids.map(id=>{const s=BANK.sources.find(s=>s.id===id);return {work:s.work,passage:r.passage||s.passage,urls:s.urls,edition:s.edition};}),
    requires:r.requires,excludes:r.excludes,text:r.text[language],
    state:'withheld_precision_or_missing_factor',factors:null,publication_approved:false};
   if(r.kind==='symbolism')return {...out,state:'textual_symbolism_only',factors:{graha:r.graha,descriptor:r.descriptor[language]}};
