@@ -28,6 +28,8 @@ metadata because its existing connection lacks access to the project team.
   Daśā date boundaries remain unqualified. This does not alter the separate
   governed homepage Colour of the Day.
 - CI now runs the audited-view/browser suite when precision audit code changes.
+- Private-preview boundary notices wrap within narrow mobile panels; the CI
+  browser suite caught a 26-pixel overflow at 320 pixels before this correction.
 
 Tests include actual calculated lunar D9/D10 boundary cases with stable
 divisional ascendants, stale chart-level flags, duplicate grahas, shortened
