@@ -94,6 +94,29 @@ const navReview=auditNatalPrecisionCandidate({
 assert.equal(navReview.D9.state,"withheld_due_to_precision_or_boundary");
 assert.equal(navReview.ready_for_public_chart,false);
 console.log("PASS WSS08 dynamic D9 boundary correctly withheld");
+// Locate actual lunar divisional-boundary cases, with a stable divisional
+// ascendant. This catches the earlier Lagna-only chart-level readiness bug.
+for(const division of ["D9","D10"]){
+ let found=false;
+ const width=division==="D9"?30/9:3;
+ for(let i=0;i<960&&!found;i++){
+  const ms=origin+i*30*60*1000;
+  const chart=calculateNatalCandidate({utc:new Date(ms).toISOString(),latitude:0,longitude:0});
+  const moon=chart.grahas.find(g=>g.graha==="Moon").sidereal_degrees;
+  const remainder=moon%width;
+  if(Math.min(remainder,width-remainder)>.035)continue;
+  const lagna=vargaSignCandidate(chart.lagna.longitude_degrees,division,{errorMarginDegrees:.04});
+  if(lagna.state!=="candidate_numeric")continue;
+  const iso=new Date(ms).toISOString();
+  const evidence=auditNatalPrecisionCandidate({birthDate:iso.slice(0,10),birthTime:iso.slice(11,19),
+   birthTimezone:"Etc/UTC",birthLatitude:0,birthLongitude:0,declaredPrecisionSeconds:1});
+  if(evidence.grahas.find(g=>g.graha==="Moon")[division]!==null)continue;
+  assert.equal(evidence[division].state,"withheld_due_to_precision_or_boundary");
+  found=true;
+ }
+ assert.ok(found,"Actual Moon boundary and stable "+division+" ascendant required");
+ console.log("PASS WSS08 actual lunar "+division+" uncertainty withholds chart despite stable Lagna");
+}
 const hindi=auditNatalPrecisionCandidate({...standard,language:"hi",declaredPrecisionSeconds:1});
 assert.match(hindi.warnings.join(" "),/दशा/);
 assert.equal(hindi.ready_for_public_predictions,false);

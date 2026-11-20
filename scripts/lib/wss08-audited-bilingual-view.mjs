@@ -60,9 +60,16 @@ function assertAudit(audit,report){
     basis.birth_latitude!==chart.geographic_basis.latitude||
     basis.birth_longitude!==chart.geographic_basis.longitude||
     audit.utc_start!==chart.birth_instant_utc||
-    audit.birth_time_span_seconds!==basis.birth_time_precision_seconds)
+    audit.birth_time_span_seconds!==basis.birth_time_precision_seconds||
+    !Number.isInteger(chart.birth_time_precision_seconds)||
+    chart.birth_time_precision_seconds<1||
+    basis.birth_time_precision_seconds<chart.birth_time_precision_seconds||
+    Date.parse(audit.utc_end_exclusive)!==Date.parse(audit.utc_start)+
+      basis.birth_time_precision_seconds*1000)
    throw new RangeError("Precision audit does not match the displayed birth-chart basis");
+ const requiredGrahas=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Rahu","Ketu"];
  if(!Array.isArray(audit.grahas)||audit.grahas.length!==9||
+    !requiredGrahas.every(name=>audit.grahas.filter(g=>g.graha===name).length===1)||
     !Number.isInteger(audit.samples_checked)||audit.samples_checked<9||
     !["D1","D9","D10"].every(k=>audit[k]&&typeof audit[k].state==="string"))
    throw new RangeError("Incomplete chart precision audit");
@@ -101,8 +108,13 @@ export function auditedBilingualCandidateView({
  };
  view.birth.precisionSeconds=precisionAudit.birth_time_span_seconds;
  for(const k of ["D1","D9","D10"]){
-   if(precisionAudit[k].state!=="stable_candidate")
-     view.charts[k]=withheld(language,k+" "+precisionAudit[k].reason);
+   const allGrahasSafe=precisionAudit.grahas.every(g=>k==="D1"?
+     g.D1?.state==="stable_candidate":typeof g[k]==="string"&&g[k].length>0);
+   if(precisionAudit[k].state!=="stable_candidate"||!allGrahasSafe)
+     view.charts[k]=withheld(language,k+" "+
+       (precisionAudit[k].reason||"graha_assignment_sensitivity"));
+   view.quality[k]=view.charts[k].state==="candidate_chart"?
+     "stable_candidate":"withheld_due_to_precision_or_boundary";
  }
  view.birth.lagna=view.charts.D1.lagna;
  view.birth.janmaRashi=precisionAudit.janma_rashi?base.birth.janmaRashi:null;
@@ -120,6 +132,9 @@ export function auditedBilingualCandidateView({
  view.transit=moonBasisSafe?{...base.transit,dasha:null}:{
    ...base.transit,moonSign:null,dasha:null,grahas:[],withheldNotice:t.moon
  };
+ // A colour selected by the currently active Dasha inherits its unqualified
+ // date boundary, even if the traditional colour association has a source.
+ view.colour=null;
  // Retain only safe ordered Lords and nominal total years, never date stamps.
  // Exact day-level Dasha dates are misleading while lunar differences reach
  // 72.056 arcsec in WSS08 independent tests.
@@ -137,6 +152,8 @@ export function auditedBilingualCandidateView({
      notice:t.withheld+" "+t.update
    };
  }
+ else view.domains=view.domains.filter(domain=>
+   !domain.division||view.charts[domain.division]?.state==="candidate_chart");
  if(!moonBasisSafe)view.quality.moonBasis=t.moon;
  view.quality.publicationReason="independent methods, interpretive rules, tzdb and subscriber privacy release review pending";
  return view;
