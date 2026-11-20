@@ -31,6 +31,7 @@ for(const language of ["en","hi"]){
  assert.equal(view.windows.relationships.length,0);
  assert.ok(view.limitations.some(x=>x.length>25));
  assert.equal(view.transit.dasha,null);
+ assert.equal(view.colour,null,"Unqualified active-Dasha dates cannot select a personal colour");
  assert.equal(view.dashas.length,10);
  assert.ok(view.dashas.every(d=>d.start===null&&d.end===null&&d.balance===null&&d.antar.length===0));
  assert.equal(view.charts.D1.rows.length,12);
@@ -99,6 +100,26 @@ assert.throws(()=>auditedBilingualCandidateView({
  report,precisionAudit:{...audit,audit_basis:{...audit.audit_basis,birth_timezone:"Etc/UTC"}}
 }),/Precision audit does not match/,"Runtime timezone drift cannot be quietly accepted");
 console.log("PASS WSS08 audit/report bind to birth UTC, timezone, coordinate and declared precision");
+const broadReport=assembleKundaliReportCandidate({...setup,timePrecisionSeconds:300});
+assert.throws(()=>auditedBilingualCandidateView({report:broadReport,precisionAudit:audit}),
+ /Precision audit does not match/,"A one-second audit cannot qualify a five-minute report");
+assert.throws(()=>auditedBilingualCandidateView({report,precisionAudit:{...audit,
+ utc_end_exclusive:audit.utc_start}}),/Precision audit does not match/);
+assert.throws(()=>auditedBilingualCandidateView({report,precisionAudit:{...audit,
+ grahas:audit.grahas.map(g=>({...g,graha:"Sun"}))}}),/Incomplete chart precision audit/);
+for(const language of ["en","hi"]){
+ for(const division of ["D9","D10"]){
+  // A stale chart-level flag cannot override an uncertain planetary assignment.
+  const altered=structuredClone(audit);
+  altered[division]={state:"stable_candidate",lagna:"Mesha"};
+  altered.grahas.find(g=>g.graha==="Moon")[division]=null;
+  const view=auditedBilingualCandidateView({report,precisionAudit:altered,language});
+  assert.equal(view.charts[division].rows.length,0);
+  assert.equal(view.charts[division].lagna,null);
+  assert.ok(view.domains.every(d=>d.division!==division));
+ }
+}
+console.log("PASS WSS08 all planetary assignments and full report interval required in EN/HI");
 const source=fs.readFileSync("scripts/lib/wss08-audited-bilingual-view.mjs","utf8");
 assert.doesNotMatch(source,/\b(?:fetch|localStorage|sessionStorage|indexedDB|sendBeacon)\s*\(/);
 console.log("PASS WSS08 mandatory audit, privacy and no exact dasha/date-window leakage");

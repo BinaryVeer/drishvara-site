@@ -115,10 +115,10 @@ export function auditNatalPrecisionCandidate({
    data_quality_basis:"9 samples in a 1-hour maximum clock window; provisional ephemeris",
    D1:safeD1?{state:"stable_candidate",lagna:charts[0].lagna.rashi}:
      withhold("lagna_or_graha_sign_sensitivity",language),
-   D9:d9Lagna?{state:"stable_candidate",lagna:d9Lagna}:
-     withhold("navamsa_lagna_sensitivity",language),
-   D10:d10Lagna?{state:"stable_candidate",lagna:d10Lagna}:
-     withhold("dasamsa_lagna_sensitivity",language),
+   D9:d9Lagna&&grahas.every(g=>g.D9)?{state:"stable_candidate",lagna:d9Lagna}:
+     withhold("navamsa_lagna_or_graha_sensitivity",language),
+   D10:d10Lagna&&grahas.every(g=>g.D10)?{state:"stable_candidate",lagna:d10Lagna}:
+     withhold("dasamsa_lagna_or_graha_sensitivity",language),
    janma_rashi:moonSign?baseMoon.rashi:null,
    janma_nakshatra:moonNak?baseMoon.nakshatra:null,
    janma_nakshatra_pada:moonPada?baseMoon.pada:null,
