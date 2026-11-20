@@ -127,11 +127,20 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("#wss-source-evidence .domain").count(),5);
   assert.match(await page.locator("#wss-source-evidence").innerText(),/BJ_10_1/);
   assert.equal(await page.locator("#review-result .chart-wrapper").first().locator(".chart-house").count(),12);
+  const chartOne=page.locator("#review-result .chart-wrapper").first();
+  assert.equal(await chartOne.locator('svg[data-chart-layout="north"]').count(),1);
+  assert.equal(await chartOne.locator("svg g[data-house]").count(),12);
+  await chartOne.locator('button[data-layout="south"]').click();
+  assert.equal(await chartOne.locator('svg[data-chart-layout="south"]').count(),1);
+  assert.equal(await chartOne.locator("svg g[data-house]").count(),12);
+  assert.match(await chartOne.locator("svg").getAttribute("aria-label"),/South Indian/);
   assert.equal(await page.locator("#review-result table.dasha tbody tr").count(),10);
   assert.equal(await page.locator("#review-result table.dasha").innerText().then(x=>/\d{4}-\d\d-\d\dT/.test(x)),false,
     "Unqualified exact Dasha dates must not appear");
   assert.match(await page.locator("#wss-precision-audit").innerText(),/Exact Daśā dates/);
   assert.match(await page.locator("#review-result").innerText(),/Marriage and career timing windows are withheld/);
+  assert.equal(await page.locator("table.dasha-intervals tbody tr").count(),10);
+  assert.match(await page.locator("#review-result").innerText(),/not statistical confidence intervals/);
   assert.match(await page.locator("#review-result").innerText(),/Krishna|Janma|Lagna|Not approved|not yet qualified|Candidate|Mesha|Vrishabha/i);
   await page.locator("#wss-nama-consent").check();
   assert.match(await page.locator("#review-result").innerText(),/Vrishabha/);
@@ -152,6 +161,7 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#wss-precision").innerText(),/सेकंड तक ज्ञात/);
   assert.equal(await page.locator('[data-precision-choice="approximate"]').evaluate(el=>el.disabled),true);
   assert.match(await page.locator("#review-result h2").first().innerText(),/कुंडली/);
+  assert.match(await page.locator("#review-result .chart-wrapper svg").first().getAttribute("aria-label"),/उत्तर भारतीय/);
   assert.match(await page.locator("#review-result").innerText(),/वृषभ/);
   assert.match(await page.locator("#wss-name-label").innerText(),/नाम/);
   const widthHI=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
@@ -168,6 +178,13 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("#wss-sound-wrap").isVisible(),false);
   const noConsent=await page.locator("#review-result").innerText();
   assert.match(noConsent,/सहमति/);
+  await page.locator("#wss-name").fill('<img src=x onerror="window.__wssInjected=true">');
+  assert.equal(await page.locator("#review-result img").count(),0);
+  assert.equal(await page.evaluate(()=>window.__wssInjected),undefined);
+  assert.match(await page.locator("#review-result").innerText(),/<img src=x/);
+  assert.deepEqual(await page.evaluate(()=>({local:localStorage.length,session:sessionStorage.length})),
+    {local:0,session:0});
+  assert.equal(new URL(page.url()).search,"");
   // Global birth clock fold: never guess among two valid instants.
   await page.locator("#wss-place-search").fill("london");
   await page.locator("#wss-birth-place").selectOption("qa-london-fold");

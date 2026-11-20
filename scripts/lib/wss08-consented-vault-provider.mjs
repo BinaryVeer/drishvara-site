@@ -16,7 +16,7 @@ async function authenticatedUser(supabase){
    throw new RangeError("An authenticated Supabase client is required");
  const answer=await supabase.auth.getUser();
  if(answer?.error||!answer?.data?.user?.id||
-    answer.data.user.is_anonymous===true)
+    answer.data.user.is_anonymous!==false)
    throw new RangeError("Authenticated, non-anonymous chart owner required");
  const id=answer.data.user.id;
  if(typeof id!=="string"||!/^[a-fA-F0-9-]{36}$/.test(id))

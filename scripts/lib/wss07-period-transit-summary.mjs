@@ -53,7 +53,8 @@ export function computedPeriodSummaryCandidate({
    sample_count:result.reference_period.dayCount,
    observation_method:"one_local_noon_sidereal_snapshot_per_day",
    sign_changes:result.observed_sign_changes,
-   dasha_changes:result.observed_dasha_changes,
+   dasha_changes:[],
+   dasha_change_status:"withheld_pending_independent_period_boundary_qualification",
    exact_ingresses_calculated:false,
    interpretation_rule_bank_approved:false,
    note:"Observed between local-noon samples; traditional implications not yet source-approved. These dates are not exact ingresses or personal predictions."

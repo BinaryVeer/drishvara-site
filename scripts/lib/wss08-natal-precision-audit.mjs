@@ -104,6 +104,8 @@ export function auditNatalPrecisionCandidate({
    audit_basis:{
      birth_instant_utc:birth.utc,
      birth_timezone:birth.timezone,
+     timezone_data_version:birth.timezone_data_version,
+     timezone_source_sha256:birth.timezone_source_sha256,
      birth_latitude:birthLatitude,
      birth_longitude:birthLongitude,
      birth_time_precision_seconds:windowSeconds

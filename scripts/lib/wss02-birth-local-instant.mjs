@@ -9,47 +9,21 @@
  * selection. Nonexistent local times are rejected; they are never silently
  * shifted. Historic timezone offsets are retained at second resolution.
  *
- * Uses the IANA data embedded in the JS runtime; a future public horoscope
- * kernel MUST pin/record the tzdb runtime/version used for reproducibility.
+ * Uses frozen IANA 2026f transition data, independent of browser Intl/ICU.
+ * Coverage is representative-zone evidence, not independent certification of
+ * every historical locality. Future legal changes require a reviewed update.
  */
 
-const formatterCache = new Map();
+import {supportedPinnedTimezone,pinnedOffsetSeconds,pinnedLocalFields,
+ TIMEZONE_DATA_VERSION} from "./wss-pinned-zone-provider.mjs";
 
 function supportedZone(timezone) {
-  if (typeof timezone !== "string" || !timezone.trim()) return null;
-  try {
-    const formatter = new Intl.DateTimeFormat("en-GB", {
-      timeZone: timezone.trim(),
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", second: "2-digit",
-      hourCycle: "h23", calendar: "gregory", numberingSystem: "latn"
-    });
-    formatter.format(new Date("2026-01-01T00:00:00Z"));
-    return {timezone:timezone.trim(),runtime_alias:formatter.resolvedOptions().timeZone,formatter};
-  }catch{return null;}
-}
-
-function getFormatter(tz) {
-  if(formatterCache.has(tz))return formatterCache.get(tz);
-  const f=supportedZone(tz);
-  if(!f)return null;
-  formatterCache.set(tz,f.formatter);
-  return f.formatter;
+  const key=supportedPinnedTimezone(timezone);
+  return key?{timezone:key,runtime_alias:key}:null;
 }
 
 function localFieldsAtUtc(epochMs,tz) {
-  const formatter=getFormatter(tz);
-  if(!formatter)throw new RangeError("Unsupported IANA timezone");
-  const parts=Object.create(null);
-  for(const item of formatter.formatToParts(new Date(epochMs))) {
-    if(["year","month","day","hour","minute","second"].includes(item.type)){
-      parts[item.type]=Number(item.value);
-    }
-  }
-  return {
-    year:parts.year,month:parts.month,day:parts.day,
-    hour:parts.hour,minute:parts.minute,second:parts.second
-  };
+  return pinnedLocalFields(epochMs,tz);
 }
 
 function utcEpochFromLocalFields(parts) {
@@ -57,8 +31,7 @@ function utcEpochFromLocalFields(parts) {
 }
 
 function offsetSecondsAtUtc(epochMs,tz) {
-  const fields=localFieldsAtUtc(epochMs,tz);
-  return Math.round((utcEpochFromLocalFields(fields)-epochMs)/1000);
+  return pinnedOffsetSeconds(epochMs,tz);
 }
 
 function parseCalendarDate(value) {
@@ -138,7 +111,9 @@ export function resolveBirthLocalInstant(options={}) {
     birth_date:options.birth_date,
     timezone:zone.timezone,
     runtime_timezone_alias:zone.runtime_alias,
-    timezone_basis:"platform_IANA_tzdb_unpinned",
+    timezone_basis:TIMEZONE_DATA_VERSION.id,
+    timezone_data_version:TIMEZONE_DATA_VERSION.iana_version,
+    timezone_source_sha256:TIMEZONE_DATA_VERSION.wheel_sha256,
     calendar:"proleptic_gregorian",
     chart_readiness:false
   };

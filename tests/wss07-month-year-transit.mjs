@@ -29,7 +29,8 @@ for(const [period,n,start,end] of [
  assert.equal(r.interpretation_rule_bank_approved,false);
  assert.ok(r.sign_changes.length>=1,"At least one transit sign change expected");
  assert.ok(r.sign_changes.every(ch=>ch.exact_ingress_time==="not_computed_daily_sampling_only"));
- assert.ok(r.dasha_changes.every(ch=>ch.exact_change_time==="see WSS04 UTC period boundaries"));
+ assert.deepEqual(r.dasha_changes,[]);
+ assert.equal(r.dasha_change_status,"withheld_pending_independent_period_boundary_qualification");
  assert.ok(r.note.includes("not exact ingresses"));
  assert.ok(!Object.hasOwn(r,"name"));
  console.log("PASS WSS06 "+period+" days="+r.sample_count+

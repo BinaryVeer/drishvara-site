@@ -6,6 +6,7 @@
  * Does not fetch, store, send or log any birth/name inputs.
  * The 3,266 production records are governed by the 20261026 release catalog.
  */
+import {supportedPinnedTimezone,TIMEZONE_DATA_VERSION} from "./wss-pinned-zone-provider.mjs";
 export const WSS07_CATALOG_VERSION="20261026";
 export const WSS07_CATALOG_EXPECTED_COUNT=3266;
 const APPROVALS=["canonical_place_approved","coordinate_approved","timezone_approved",
@@ -31,13 +32,13 @@ function normaliseSource(value,index) {
    throw new RangeError("Invalid approved birthplace coordinates "+index);
  if(!Array.isArray(searchLabels))
    throw new RangeError("Birthplace aliases must be explicit source values");
- try {new Intl.DateTimeFormat("en",{timeZone:timezone}).format(new Date());}
- catch {throw new RangeError("Unsupported historical IANA timezone at "+index);}
+ if(!supportedPinnedTimezone(timezone))
+   throw new RangeError("Unsupported pinned IANA timezone at "+index);
  return Object.freeze({
    selectorValue,canonicalPlaceId,displayLabel,timezone,latitude,longitude,
    searchLabels:Object.freeze(searchLabels.filter(x=>typeof x==="string").slice()),
    validForLagna:Math.abs(latitude)<=65,
-   timezoneProvenance:"approved_catalog_IANA_platform_tzdb_unpinned",
+   timezoneProvenance:TIMEZONE_DATA_VERSION.id,
    geographicRole:"approved_city_or_locality_reference_point",
    approved:true,
    indexSearch:normal([displayLabel,canonicalPlaceId,selectorValue,timezone,...searchLabels].join(" "))

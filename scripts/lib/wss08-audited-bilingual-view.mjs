@@ -57,6 +57,8 @@ function assertAudit(audit,report){
     basis.birth_time_precision_seconds<1||
     basis.birth_instant_utc!==chart.birth_instant_utc||
     basis.birth_timezone!==chart.timezone||
+    basis.timezone_data_version!==chart.timezone_data_version||
+    basis.timezone_source_sha256!==chart.timezone_source_sha256||
     basis.birth_latitude!==chart.geographic_basis.latitude||
     basis.birth_longitude!==chart.geographic_basis.longitude||
     audit.utc_start!==chart.birth_instant_utc||
@@ -113,7 +115,7 @@ export function auditedBilingualCandidateView({
    if(precisionAudit[k].state!=="stable_candidate"||!allGrahasSafe)
      view.charts[k]=withheld(language,k+" "+
        (precisionAudit[k].reason||"graha_assignment_sensitivity"));
-   view.quality[k]=view.charts[k].state==="candidate_chart"?
+   view.quality[k]=view.charts[k].rows?.length===12&&view.charts[k].lagna?
      "stable_candidate":"withheld_due_to_precision_or_boundary";
  }
  view.birth.lagna=view.charts.D1.lagna;
@@ -135,6 +137,19 @@ export function auditedBilingualCandidateView({
  // A colour selected by the currently active Dasha inherits its unqualified
  // date boundary, even if the traditional colour association has a source.
  view.colour=null;
+ view.dashaIntervals=moonBasisSafe&&report.dasha_uncertainty?.status===
+   "candidate_dasha_interval_not_event_prediction"?report.dasha_uncertainty:null;
+ // The source evaluator may describe natal factors, but an unqualified
+ // active-period selection must not leak through its nested evidence fields.
+ view.sourceEvidence.entries=view.sourceEvidence.entries.map(entry=>{
+   if(!entry.factors||Array.isArray(entry.factors))return entry;
+   const factors={...entry.factors};
+   for(const key of ["selected_period_lord","selected_subperiod_lord","maha","antar"])
+     if(Object.hasOwn(factors,key))factors[key]=null;
+   if(Object.hasOwn(factors,"tenth_lord_active_dasha"))
+     factors.tenth_lord_active_dasha=null;
+   return {...entry,factors};
+ });
  // Retain only safe ordered Lords and nominal total years, never date stamps.
  // Exact day-level Dasha dates are misleading while lunar differences reach
  // 72.056 arcsec in WSS08 independent tests.
@@ -153,7 +168,7 @@ export function auditedBilingualCandidateView({
    };
  }
  else view.domains=view.domains.filter(domain=>
-   !domain.division||view.charts[domain.division]?.state==="candidate_chart");
+   !domain.division||view.charts[domain.division]?.rows?.length===12);
  if(!moonBasisSafe)view.quality.moonBasis=t.moon;
  view.quality.publicationReason="independent methods, interpretive rules, tzdb and subscriber privacy release review pending";
  return view;
