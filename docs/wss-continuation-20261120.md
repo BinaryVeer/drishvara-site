@@ -28,6 +28,8 @@ metadata because its existing connection lacks access to the project team.
   Daśā date boundaries remain unqualified. This does not alter the separate
   governed homepage Colour of the Day.
 - CI now runs the audited-view/browser suite when precision audit code changes.
+  Both WSS08 workflows fetch the comparison history so their public-runtime
+  exclusion checks can inspect the actual diff instead of a missing base ref.
 - Private-preview boundary notices wrap within narrow mobile panels; the CI
   browser suite caught a 26-pixel overflow at 320 pixels before this correction.
 

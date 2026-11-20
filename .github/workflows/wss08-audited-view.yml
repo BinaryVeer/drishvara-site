@@ -19,6 +19,9 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -54,7 +57,8 @@ jobs:
         run: node tests/wss07-bilingual-private-preview.mjs
       - name: Must not alter active public pages or Supabase
         run: |
-          git diff --name-only origin/main...HEAD | tee /tmp/wss08-audited-diff
+          git diff --name-only origin/main...HEAD > /tmp/wss08-audited-diff
+          cat /tmp/wss08-audited-diff
           if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|assets/css/|supabase/|scripts/lib/ag74|package.json|package-lock.json)' /tmp/wss08-audited-diff; then
             echo 'Audited private view must not touch public runtime or dependencies'
             exit 1

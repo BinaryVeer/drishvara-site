@@ -16,6 +16,9 @@ jobs:
     timeout-minutes: 13
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -42,7 +45,8 @@ jobs:
           node scripts/validate-drishvara-frontend-migration.mjs
       - name: Enforce zero publicly routed or server code changes
         run: |
-          git diff --name-only origin/main...HEAD | tee /tmp/wss08-files
+          git diff --name-only origin/main...HEAD > /tmp/wss08-files
+          cat /tmp/wss08-files
           if grep -E '^(index.html|what-stars-say.html|panchang.html|assets/js/|assets/css/|supabase/|scripts/lib/ag74|package.json|package-lock.json)' /tmp/wss08-files; then
             echo 'WSS08 independent qualification must not touch production, dependencies or existing Panchang'
             exit 1
