@@ -7,7 +7,8 @@
  * No persistence, external calls or user-identifying astronomical input.
  */
 import {buildBilingualCandidateView} from "./wss07-bilingual-report-presenter.mjs";
-import {WSS08_PRECISION_STATE} from "./wss08-natal-precision-audit.mjs";
+import {assertChartPrecisionAudit} from "./wss08-chart-audit-contract.mjs";
+import {evaluateSourceBoundRuleBank} from "./wss05-source-bound-rule-bank.mjs";
 
 export const AUDITED_VIEW_STATUS="wss08_audited_private_view_not_approved_for_public_prediction";
 const NOTICE=Object.freeze({
@@ -41,52 +42,18 @@ const withheld=(language,reason)=>({
  state:"withheld_due_to_wss08_precision",rows:[],lagna:null,
  notice:NOTICE[language].withheld+" ("+reason+")"
 });
-function assertAudit(audit,report){
- if(!audit||audit.status!==WSS08_PRECISION_STATE||
-    audit.ready_for_public_chart!==false||
-    audit.ready_for_dasha_dates!==false||
-    audit.ready_for_public_predictions!==false)
-    throw new RangeError("A fail-closed WSS08 precision audit is mandatory");
- // A precision audit for *another birth instant or place* must never
- // authorize even a provisional sign, Navamsa, Dasha or chart label.
- const basis=audit.audit_basis, chart=report?.basis;
- if(!basis||!chart||!chart.geographic_basis||
-    !Number.isFinite(basis.birth_latitude)||
-    !Number.isFinite(basis.birth_longitude)||
-    !Number.isInteger(basis.birth_time_precision_seconds)||
-    basis.birth_time_precision_seconds<1||
-    basis.birth_instant_utc!==chart.birth_instant_utc||
-    basis.birth_timezone!==chart.timezone||
-    basis.timezone_data_version!==chart.timezone_data_version||
-    basis.timezone_source_sha256!==chart.timezone_source_sha256||
-    basis.birth_latitude!==chart.geographic_basis.latitude||
-    basis.birth_longitude!==chart.geographic_basis.longitude||
-    audit.utc_start!==chart.birth_instant_utc||
-    audit.birth_time_span_seconds!==basis.birth_time_precision_seconds||
-    !Number.isInteger(chart.birth_time_precision_seconds)||
-    chart.birth_time_precision_seconds<1||
-    basis.birth_time_precision_seconds<chart.birth_time_precision_seconds||
-    Date.parse(audit.utc_end_exclusive)!==Date.parse(audit.utc_start)+
-      basis.birth_time_precision_seconds*1000)
-   throw new RangeError("Precision audit does not match the displayed birth-chart basis");
- const requiredGrahas=["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Rahu","Ketu"];
- if(!Array.isArray(audit.grahas)||audit.grahas.length!==9||
-    !requiredGrahas.every(name=>audit.grahas.filter(g=>g.graha===name).length===1)||
-    !Number.isInteger(audit.samples_checked)||audit.samples_checked<9||
-    !["D1","D9","D10"].every(k=>audit[k]&&typeof audit[k].state==="string"))
-   throw new RangeError("Incomplete chart precision audit");
-}
 export function auditedBilingualCandidateView({
  report,precisionAudit,displayName="",language="en",
  nameSignConsent=false,confirmedSyllableKey=null
 }={}){
  if(language!=="en"&&language!=="hi")throw new RangeError("Only en and hi supported");
- assertAudit(precisionAudit,report);
+ assertChartPrecisionAudit(precisionAudit,report);
  const t=NOTICE[language];
  const base=buildBilingualCandidateView({
   report,displayName,language,nameSignConsent,confirmedSyllableKey
  });
  const view={...base,
+   ruleBank:evaluateSourceBoundRuleBank({report,precisionAudit,language}),
    status:AUDITED_VIEW_STATUS,
    strings:{...base.strings,wss08:t},
    quality:{

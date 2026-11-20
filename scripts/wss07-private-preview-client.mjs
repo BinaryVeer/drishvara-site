@@ -316,6 +316,40 @@ function render(){
      entry.factors.map(f=>[f.label,f.sign_local,f.ruler_local]));
   }
  }
+ const bank=card(root,language==="hi"?"स्रोत-संबद्ध नियम बैंक":"Source-bound rule bank");
+ bank.id="wss-rule-bank";
+ item(bank,"p",view.ruleBank.notice,"warning");
+ const bankSign=n=>language==="hi"?SIGN_HI[n-1]:SIGNS_EN[n-1];
+ const bankGraha=g=>language==="hi"?(GRAHA_HI[g]||g):g;
+ for(const entry of view.ruleBank.entries){
+  const detail=item(bank,"details");
+  const state=entry.state.startsWith("withheld")?(language==="hi"?"आवश्यक कारक अनिश्चित":"Required factor uncertain"):
+    entry.state==="no_qualified_matching_vocation_chain"?(language==="hi"?"पात्र संबंध नहीं मिला":"No qualified matching chain"):
+    (language==="hi"?"केवल पारम्परिक संदर्भ":"Traditional context only");
+  item(detail,"summary",entry.text);
+  item(detail,"p",state,"muted");
+  if(entry.kind==="vocation"&&entry.factors){
+   table(detail,language==="hi"?["संदर्भ","दशम राशि","दशमेश","दशमेश की नवांश राशि","नवांश-अधिपति"]:
+     ["Origin","Tenth sign","Tenth lord","Tenth lord’s Navāṁśa sign","Navāṁśa lord"],
+     entry.factors.map(f=>[f.origin==="Lagna"?(language==="hi"?"लग्न":"Lagna"):bankGraha(f.origin),
+       bankSign(f.tenth_sign),bankGraha(f.tenth_lord),bankSign(f.tenth_lord_D9_sign),bankGraha(f.navamsa_lord)]));
+  }
+  if(entry.kind==="symbolism")item(detail,"p",bankGraha(entry.factors.graha)+": "+entry.factors.descriptor);
+  if(entry.kind==="house"&&entry.factors)item(detail,"p",strings.house+" "+entry.factors.house+": "+bankSign(entry.factors.sign)+" · "+bankGraha(entry.factors.lord));
+  if(entry.kind==="dignity"&&entry.factors){
+   const classes=language==="hi"?{exaltation_sign:"उच्च राशि",debilitation_sign:"नीच राशि",neither_exaltation_nor_debilitation:"न उच्च, न नीच राशि"}:
+    {exaltation_sign:"Exaltation sign",debilitation_sign:"Debilitation sign",neither_exaltation_nor_debilitation:"Neither exaltation nor debilitation sign"};
+   item(detail,"p",bankGraha(entry.factors.graha)+": "+bankSign(entry.factors.sign)+" · "+classes[entry.factors.classification]);
+  }
+  if(entry.kind==="aspect"&&entry.factors)item(detail,"p",bankGraha(entry.factors.graha)+": "+
+   entry.factors.targets.map(t=>bankSign(t.sign)).join(", "));
+  for(const source of entry.source_references){
+   item(detail,"p",source.work+" · "+source.passage,"muted");
+   for(const url of source.urls){const link=item(detail,"a",new URL(url).hostname);link.href=url;link.rel="noreferrer";item(detail,"span"," · ");}
+  }
+ }
+ item(bank,"p",language==="hi"?"गोचर-वेद, दशा-फल एवं विवाह-समय के नियमों की आवश्यक स्रोत और प्रयोज्यता जाँच शेष है।":
+  "Transit vedha, Daśā results and marriage timing remain withheld pending source and applicability checks.","warning");
  const timing=card(root,strings.timeWindows);
  item(timing,"p",strings.wss08.timing,"warning");
  const limitation=card(root,strings.methodology);

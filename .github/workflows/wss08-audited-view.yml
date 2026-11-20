@@ -3,6 +3,11 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'scripts/lib/wss05-source-bound-rule-bank.mjs'
+      - 'scripts/lib/wss08-chart-audit-contract.mjs'
+      - 'data/methodology/jyotisha/wss-source-bound-rule-bank-v1.json'
+      - 'scripts/validate-wss-source-bound-rule-bank.mjs'
+      - 'tests/wss05-source-bound-rule-bank.mjs'
       - 'scripts/lib/wss08-audited-bilingual-view.mjs'
       - 'scripts/lib/wss08-natal-precision-audit.mjs'
       - 'tests/wss08-natal-precision.mjs'
@@ -35,6 +40,8 @@ jobs:
           node tests/wss02-birth-timezone.mjs
           node tests/wss03-independent-reference.mjs
           node tests/wss04-varga-vimshottari.mjs
+          node scripts/validate-wss-source-bound-rule-bank.mjs
+          node tests/wss05-source-bound-rule-bank.mjs
           node tests/wss05-classical-rule-evidence.mjs
           node tests/wss05-06-context-and-transits.mjs
           node tests/wss07-kundali-report-candidate.mjs
