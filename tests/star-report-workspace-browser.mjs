@@ -22,6 +22,8 @@ try{for(const width of [1440,390,320]){
    await root.locator('.ws-choices').first().getByRole('button',{name:new RegExp('^'+d+' ·')}).click();
    assert.equal(await root.locator('svg g[data-house]').count(),12);
   }
+  await root.locator('.ws-choices').nth(1).getByRole('button',{name:lang==='en'?'South Indian':'दक्षिण भारतीय',exact:true}).click();
+  assert.equal(await root.locator('svg[data-chart-layout=south] g[data-house]').count(),12);
   await root.locator('.ws-choices').first().getByRole('button',{name:/^D9 ·/}).click();
   await root.locator('select').selectOption('boundary');assert.equal(await root.locator('svg').count(),0);
   assert.equal(await root.locator('[data-chart-withheld=true]').count(),1);
