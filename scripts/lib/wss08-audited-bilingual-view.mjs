@@ -8,6 +8,7 @@
  */
 import {buildBilingualCandidateView} from "./wss07-bilingual-report-presenter.mjs";
 import {assertChartPrecisionAudit} from "./wss08-chart-audit-contract.mjs";
+import {evaluateTimingReview} from "./wss09-timing-review.mjs";
 import {evaluateSourceBoundRuleBank} from "./wss05-source-bound-rule-bank.mjs";
 
 export const AUDITED_VIEW_STATUS="wss08_audited_private_view_not_approved_for_public_prediction";
@@ -54,6 +55,7 @@ export function auditedBilingualCandidateView({
  });
  const view={...base,
    ruleBank:evaluateSourceBoundRuleBank({report,precisionAudit,language}),
+   timingReview:evaluateTimingReview({report,precisionAudit,language}),
    status:AUDITED_VIEW_STATUS,
    strings:{...base.strings,wss08:t},
    quality:{
