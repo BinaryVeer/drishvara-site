@@ -9,7 +9,7 @@ on:
       - 'assets/css/drishvara-report-workspace.css'
       - 'data/demo/what-stars-say-report.json'
       - 'scripts/build-wss-report-demo.mjs'
-      - 'tests/wss12-*'
+      - 'tests/star-report-workspace*'
       - '.github/workflows/wss12-report-workspace.yml'
 permissions:
   contents: read
@@ -27,7 +27,7 @@ jobs:
         run: |
           node scripts/build-wss-report-demo.mjs
           git diff --exit-code -- data/demo/what-stars-say-report.json assets/js/drishvara-chart-diagram.mjs
-          node tests/wss12-report-workspace.mjs
+          node tests/star-report-workspace.mjs
           node --check assets/js/drishvara-report-workspace.mjs
           node scripts/validate-drishvara-frontend-migration.mjs
       - name: Install browser QA and Hindi fonts
@@ -40,7 +40,7 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/wss12-server.log 2>&1 &
           for i in 1 2 3 4 5; do curl -fsS http://127.0.0.1:8765/what-stars-say.html >/dev/null && exit 0; sleep 1; done
           exit 1
-      - run: node tests/wss12-report-workspace-browser.mjs
+      - run: node tests/star-report-workspace-browser.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
