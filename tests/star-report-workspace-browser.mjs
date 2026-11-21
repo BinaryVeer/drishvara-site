@@ -46,11 +46,16 @@ try{for(const width of [1440,390,320]){
      await root.getByLabel(lang==='hi'?'उदाहरण की चयनित अवधि':'Selected demo period').selectOption(selection);
      assert.equal(await panel.getAttribute('data-period-kind'),kind);assert.equal(await panel.getAttribute('data-period-key'),selection);
      assert.match(await root.locator('.ws-theme-reading').innerText(),new RegExp(selection));
+     const paragraphs=await root.locator('.ws-theme-reading .ws-note').allTextContents();
+     assert.equal(paragraphs.length,3);assert.ok(paragraphs.every(text=>text.trim().length>50),'All three descriptive paragraphs must be populated in '+lang);
      assert.match(await root.locator('.ws-theme-reading').innerText(),lang==='hi'?/समर्थन का आकलन: जाँच शेष/:/Support assessment: not qualified/);
     }
     await root.getByRole('button',{name:lang==='hi'?'विवाह एवं संबंध':'Marriage & relationships',exact:true}).click();
     assert.equal(await root.locator('[data-theme=relationships]').count(),1);
     if(width===1440||width===390)await root.screenshot({path:`${out}/life-themes-${width}-${lang}.png`});
+    await root.getByLabel(lang==='hi'?'उदाहरण चुनें':'Demo scenario',{exact:true}).selectOption('boundary');
+    assert.match(await root.locator('.ws-theme-reading').innerText(),lang==='hi'?/आवश्यक जन्म अथवा वर्ग-कुंडली आधार रोका गया/:/required natal or divisional basis is withheld/);
+    await root.getByLabel(lang==='hi'?'उदाहरण चुनें':'Demo scenario',{exact:true}).selectOption('complete');
     await root.locator('[data-tab=transits]').click();
     assert.equal(await root.locator('[role=tabpanel]').getAttribute('data-period-key'),'2026-11-22','Period selection must stay shared with transit data');
    }

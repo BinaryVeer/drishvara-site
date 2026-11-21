@@ -13,7 +13,7 @@ const signHi=['मेष','वृषभ','मिथुन','कर्क','स�
 const signName=s=>language==='hi'&&signs.includes(s)?signHi[signs.indexOf(s)]:s;
 const graha=n=>language==='hi'?(HI[n]||n):n;
 const v=()=>data.scenarios[scenario].views[language],sample=()=>data.scenarios[scenario];
-function note(parent,en,hi){parent.append(el('p',t(en,hi),'ws-note'));}
+function note(parent,en,hi=en){parent.append(el('p',t(en,hi),'ws-note'));}
 function box(parent,title){const b=el('article',undefined,'ws-box');b.append(el('h3',title));parent.append(b);return b;}
 function metric(parent,label,value){const b=el('div',undefined,'ws-metric');b.append(el('span',label),el('strong',value??t('Withheld','रोका गया')));parent.append(b);}
 function table(parent,headers,rows){const wrap=el('div',undefined,'ws-table-scroll'),tab=el('table');wrap.tabIndex=0;wrap.setAttribute('aria-label',headers.join(' · '));const head=el('thead'),tr=el('tr');headers.forEach(h=>tr.append(el('th',h)));head.append(tr);tab.append(head);const body=el('tbody');rows.forEach(row=>{const r=el('tr');row.forEach(c=>r.append(el('td',c??'—')));body.append(r);});tab.append(body);wrap.append(tab);parent.append(wrap);}
