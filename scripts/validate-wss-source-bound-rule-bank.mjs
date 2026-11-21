@@ -1,9 +1,19 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import evidence from '../data/quality/jyotisha/wss-rule-bank-source-evidence-20261120.json' with {type:'json'};
 import bank from '../data/methodology/jyotisha/wss-source-bound-rule-bank-v1.json' with {type:'json'};
 assert.equal(bank.ready_for_public_predictions,false);
 assert.equal(bank.independent_sanskrit_review,false);
 assert.equal(new Set(bank.rules.map(r=>r.id)).size,bank.rules.length);
 const sources=new Map(bank.sources.map(s=>[s.id,s]));
+assert.equal(evidence.records.length,sources.size);
+assert.equal(new Set(evidence.records.map(e=>e.source_id)).size,sources.size);
+for(const e of evidence.records){
+ assert.ok(sources.has(e.source_id));
+ assert.equal(e.independent_review,false);
+ assert.equal(createHash('sha256').update(e.excerpt_sanskrit).digest('hex'),e.excerpt_sha256);
+ assert.match(e.excerpt_sanskrit,/[\u0900-\u097f]/);
+}
 for(const s of sources.values()){
  assert.ok(s.work&&s.passage&&s.edition&&s.scope&&s.checked_on);
  assert.equal(s.carriers_are_independent_editions,false);

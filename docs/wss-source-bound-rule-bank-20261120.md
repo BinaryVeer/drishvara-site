@@ -6,7 +6,7 @@ The private evaluator now has 38 unique bilingual rules: 10 house topics, seven 
 
 M00 and AD01 remain authoritative. Nityanand Misra's textual discipline is an influence; no particular horoscope algorithm, review, approval or endorsement is attributed to him. Naming texts are not horoscope authorities. Regional and lineage-specific rules require their own applicability records rather than being merged into a supposedly universal method.
 
-The machine-readable bank records work, passage, digital edition limitation, two or more carrier links, check date, prerequisites, exclusions and English/Hindi prose for each family. Digital carriers are not independent editions. The current source checks are passage-level research, not independent Sanskrit recension or bilingual editorial approval. All publication flags remain false.
+The machine-readable bank records work, passage, digital edition limitation, two or more carrier links, check date, prerequisites, exclusions and English/Hindi prose for each family. The companion source-evidence JSON preserves selected Sanskrit passages and SHA256 checksums of the stored excerpts, with carrier spellings retained. These checksums identify the stored excerpts, not a critical edition or the full web page. Digital carriers are not independent editions. The current source checks are passage-level research, not independent Sanskrit recension or bilingual editorial approval. All publication flags remain false.
 
 | Family | Passage | Implemented scope |
 | --- | --- | --- |
