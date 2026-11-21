@@ -25,9 +25,11 @@ async function run(width){
   const response=await page.goto(SITE+'/what-stars-say.html',{waitUntil:'domcontentloaded',timeout:30000});
   assert.equal(response.status(),200);
   await page.waitForFunction(()=>document.querySelector('#star-reflection-name')?.disabled===false);
-  assert.equal(await input.isVisible(),true,'Optional name input must be visible');
+  assert.equal(await input.isVisible(),true,'Required name input must be visible');
   assert.equal(await input.getAttribute('autocomplete'),'off');
   assert.equal(await input.getAttribute('aria-hidden'),null);
+  assert.equal(await input.getAttribute('required'),'');
+  assert.equal(await input.getAttribute('aria-required'),'true');
   await input.fill('QA Example');
   assert.equal(await input.inputValue(),'QA Example');
   await page.waitForFunction(()=>document.getElementById('ag75d-e2-star-place-choice-panel')?.getAttribute('data-ag75d-e2-approved-option-count')==='3266',null,{timeout:26000});
@@ -40,6 +42,13 @@ async function run(width){
   await page.locator('#star-reflection-dob').fill('01/01/2000');
   await page.locator('#star-reflection-birth-time').fill('12:00');
   await page.locator('#star-birth-time-unknown').uncheck();
+  const beforeBlank=calls.length;
+  await input.fill('   ');
+  await page.locator('[data-ag71e-preview-button="star-reflection"]').click();
+  assert.equal(await page.locator('#star-name-error').isVisible(),true);
+  assert.equal(await input.getAttribute('aria-invalid'),'true');
+  assert.equal(calls.length,beforeBlank,'Blank name must not submit astronomical requests');
+  await input.fill('QA Example');
   await page.locator('[data-ag71e-preview-button="star-reflection"]').click();
   await page.waitForFunction(()=>{
    const card=document.querySelector('[data-drishvara-v2-reflect-card="true"]');
@@ -63,6 +72,11 @@ async function run(width){
   assert.equal(calls.length,requestCount,'Name change must not trigger astronomical calculation');
   const rowsAfter=await page.locator('[data-ag71e-preview-grid="star-reflection"] .ag71e-preview-row').allTextContents();
   assert.deepEqual(rowsAfter,rows,'Changing name must not modify approved reflection result rows');
+  await input.fill('');
+  assert.equal(await page.locator('.r-reflection-salutation').count(),0);
+  assert.equal(await page.locator('.r-result-basis').isVisible(),false);
+  assert.equal(calls.length,requestCount,'Clearing name must not send a request');
+  await input.fill('Another QA Name');
   const hi=page.locator('[data-dv2-language-choice="hi"]');
   if(await hi.count() && await hi.first().isVisible()){
    await hi.first().click(); await page.waitForTimeout(350);

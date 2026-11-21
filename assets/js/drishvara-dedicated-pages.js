@@ -192,16 +192,21 @@
   const card=$('[data-drishvara-v2-reflect-card="true"]'), insight=$('.d-reflection-insight'), panel=$('[data-ag71e-preview-panel="star-reflection"]'), grid=$('[data-ag71e-preview-grid="star-reflection"]');if(!card||!insight||!panel||!grid)return;
   const toggle=$('.dv2-language-toggle');if(toggle)card.prepend(toggle);
   const sessionName=$('#star-reflection-name');
+  const nameError=make('p','r-name-error');nameError.id='star-name-error';nameError.setAttribute('role','alert');nameError.hidden=true;
+  nameError.append(text('Enter your name to generate your reflection.','अपना चिंतन देखने के लिए नाम भरें।'));
+  const hasSessionName=()=>Boolean(sessionName?.value.trim());
   if(sessionName){
    const nameLabel=make('label','r-name-label');
    nameLabel.htmlFor=sessionName.id;
-   nameLabel.append(text('Your name (optional)','आपका नाम (वैकल्पिक)'));
+   nameLabel.append(text('Your name (required)','आपका नाम (अनिवार्य)'));
    sessionName.before(nameLabel);nameLabel.append(sessionName);
    const nameNote=make('p','r-name-privacy');
    nameNote.id='star-name-privacy';
    nameNote.append(text('Used only to address your on-screen reflection; not sent, saved, or used in the astronomical calculation.','केवल इस पृष्ठ पर आपके चिंतन को संबोधित करने के लिए; न भेजा जाता है, न सहेजा जाता है, न खगोलीय गणना में प्रयुक्त होता है।'));
    nameLabel.after(nameNote);
-   sessionName.setAttribute('aria-describedby','star-name-privacy');
+   nameNote.after(nameError);
+   sessionName.required=true;sessionName.setAttribute('aria-required','true');
+   sessionName.setAttribute('aria-describedby','star-name-privacy star-name-error');
   }
   const dob=$('#star-reflection-dob');if(dob){const field=make('label','r-dob-label');field.htmlFor=dob.id;field.append(text('Date of Birth','जन्म तिथि'));dob.before(field);field.append(dob);}
   const intro=make('div','r-reflection-reading');intro.setAttribute('aria-live','polite');insight.querySelector('h2').after(intro);
@@ -210,6 +215,10 @@
   const mappings=[['Reflective theme','चिंतन-विषय'],['Self-inquiry prompt','स्व-प्रश्न'],['Question for reflection','स्व-प्रश्न'],['Grounding practice','आधार अभ्यास'],['Limitation notice','सीमा'],['Result note','सीमा']];
   function rows(){const values=new Map();grid.querySelectorAll('.ag71e-preview-row').forEach(row=>{const strong=row.querySelector('strong'),span=row.querySelector('span');if(strong&&span)values.set(strong.dataset.dv2OriginalLabel||strong.textContent.trim(),span.textContent.trim());});return values;}
   function sync(){
+   if(!hasSessionName()){
+    intro.replaceChildren();resultDetails.hidden=true;
+    return;
+   }
    const values=rows(),busy=$('[data-ag71e-preview-button="star-reflection"]')?.getAttribute('aria-busy')==='true';intro.replaceChildren();
    const valid=!panel.hidden&&!busy&&values.has('Reflective theme');
    if(!panel.hidden&&!busy&&values.get('Resolution state')==='boundary_review_required'){
@@ -229,7 +238,12 @@
    const wait=$('.d-reflect-wait');if(wait)wait.hidden=!panel.hidden;
    resultDetails.hidden=panel.hidden;
   }
-  if(sessionName)sessionName.addEventListener('input',sync);
+  if(sessionName)sessionName.addEventListener('input',()=>{
+   nameError.hidden=hasSessionName();sessionName.setAttribute('aria-invalid',String(!hasSessionName()));sync();
+  });
+  window.addEventListener('drishvara:name-required',()=>{
+   nameError.hidden=false;sync();
+  });
   new MutationObserver(sync).observe(grid,{childList:true,subtree:true,characterData:true});
   new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['hidden']});
   const button=$('[data-ag71e-preview-button="star-reflection"]');if(button)new MutationObserver(sync).observe(button,{attributes:true,attributeFilter:['aria-busy']});

@@ -3,6 +3,8 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'assets/js/drishvara-required-name.js'
+      - 'scripts/validate-drishvara-frontend-migration.mjs'
       - 'assets/js/drishvara-v2-home.js'
       - 'assets/js/drishvara-dedicated-pages.js'
       - 'assets/css/drishvara-dedicated-pages.css'
@@ -23,6 +25,7 @@ jobs:
           node-version: '22'
       - name: Check JS and frontend build
         run: |
+          node --check assets/js/drishvara-required-name.js
           node --check assets/js/drishvara-v2-home.js
           node --check assets/js/drishvara-dedicated-pages.js
           node scripts/validate-drishvara-frontend-migration.mjs
