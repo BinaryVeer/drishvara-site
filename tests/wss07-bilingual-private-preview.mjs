@@ -129,6 +129,10 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("#wss-timing-review").count(),1);
   assert.equal(await page.locator("#wss-strength-review").count(),1);
   assert.equal(await page.locator("#wss-strength-review details").count()>=7,true);
+  await page.locator('#wss-strength-review details summary').first().click();
+  assert.match(await page.locator('#wss-strength-review details').first().innerText(),/Positional/);
+  await page.locator('#wss-strength-review').screenshot({path:out+'/strength-'+width+'-en.png',animations:'disabled'});
+  await page.locator('#wss-strength-review details summary').first().click();
   assert.match(await page.locator("#wss-rule-bank").innerText(),/Independent Sanskrit/);
   await page.locator("#wss-rule-bank summary").first().click();
   assert.ok(await page.locator("#wss-rule-bank details").first().locator("a").count()>=2);
@@ -163,6 +167,10 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("#wss-timing-review").count(),1);
   assert.equal(await page.locator("#wss-strength-review").count(),1);
   assert.equal(await page.locator("#wss-strength-review details").count()>=7,true);
+  await page.locator('#wss-strength-review details summary').first().click();
+  assert.match(await page.locator('#wss-strength-review details').first().innerText(),/स्थान/);
+  await page.locator('#wss-strength-review').screenshot({path:out+'/strength-'+width+'-hi.png',animations:'disabled'});
+  await page.locator('#wss-strength-review details summary').first().click();
   assert.match(await page.locator("#wss-rule-bank").innerText(),/संस्कृत/);
   assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
   assert.match(await page.locator("#wss-precision-audit").innerText(),/कुंडली की सटीकता/);
