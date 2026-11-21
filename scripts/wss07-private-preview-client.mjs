@@ -362,14 +362,22 @@ function render(){
   listed_position_without_classical_vedha:"सूचीबद्ध स्थान; शास्त्रीय ग्रह-वेध नहीं मिला"
  }:{outside_list_not_an_adverse_verdict:"Outside list; no adverse verdict",classical_vedha_present:"Classical vedha present",
   node_obstruction_lineage_review:"Node obstruction needs lineage review",listed_position_without_classical_vedha:"Listed position; no classical vedha found"};
- if(view.timingReview.transit.entries.length)table(timingFactors,
-  language==="hi"?["ग्रह","जन्म-चन्द्र से स्थान","वेध-स्थान","समीक्षा"]:["Graha","From natal Moon","Vedha house","Review"],
-  view.timingReview.transit.entries.map(e=>[bankGraha(e.graha),e.moon_relative_house,e.vedha_house??"—",states[e.state]]));
- else item(timingFactors,"p",language==="hi"?"जन्म-चन्द्र अथवा गोचर राशि-सीमा अनिश्चित होने से समीक्षा रोकी गई है।":"Review withheld because the natal Moon or a transit sign boundary is uncertain.");
- item(timingFactors,"p",language==="hi"?"दशा-आरम्भ परीक्षण बिंदु: "+view.timingReview.inception.samples:
-  "Daśā inception sample count: "+view.timingReview.inception.samples);
- item(timingFactors,"p",language==="hi"?"विवाह-संबंधी ग्रहों के अवधि-मिलान: "+view.timingReview.marriage.period_matches.map(bankGraha).join(", "):
-  "Relationship-factor period matches: "+view.timingReview.marriage.period_matches.join(", "));
+ if(view.timingReview.transit.entries.length){
+  for(const entry of view.timingReview.transit.entries){
+   const block=item(timingFactors,"div",null,"domain");
+   item(block,"h3",bankGraha(entry.graha));
+   item(block,"p",(language==="hi"?"जन्म-चन्द्र से स्थान: ":"From natal Moon: ")+entry.moon_relative_house+
+    (language==="hi"?" · वेध-स्थान: ":" · Vedha house: ")+(entry.vedha_house??"—"));
+   item(block,"p",states[entry.state]);
+  }
+ }else item(timingFactors,"p",language==="hi"?"जन्म-चन्द्र अथवा गोचर राशि-सीमा अनिश्चित होने से समीक्षा रोकी गई है।":"Review withheld because the natal Moon or a transit sign boundary is uncertain.");
+ item(timingFactors,"p",view.timingReview.inception.samples?
+  (language==="hi"?"दशा-आरम्भ परीक्षण बिंदु: ":"Daśā inception sample count: ")+view.timingReview.inception.samples:
+  (language==="hi"?"दशा-आरम्भ समीक्षा रोकी गई है: अवधि-सीमा अनिश्चित है अथवा प्रथम अवधि जन्म से काटी गई है।":"Inception review withheld: the period boundary is uncertain or the first period is clipped at birth."));
+ const matches=view.timingReview.marriage.period_matches.map(bankGraha).join(", ");
+ item(timingFactors,"p",matches?
+  (language==="hi"?"विवाह-संबंधी ग्रहों के अवधि-मिलान: ":"Relationship-factor period matches: ")+matches:
+  (language==="hi"?"पात्र अवधि-कारक का मिलान उपलब्ध नहीं है; इसे प्रतिकूल फल नहीं माना गया है।":"No qualified period-factor match is available; this is not an adverse outcome."));
  item(timingFactors,"p",language==="hi"?"ये कारक-मिलान हैं। विवाह, नौकरी अथवा पदोन्नति की तिथि या निश्चित फल नहीं है।":"These are factor matches. They do not establish marriage, job or promotion dates or outcomes.","muted");
  const timing=card(root,strings.timeWindows);
  item(timing,"p",strings.wss08.timing,"warning");
