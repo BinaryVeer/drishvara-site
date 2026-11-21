@@ -30,5 +30,5 @@ for(const r of bank.rules){
 }
 assert.deepEqual(Object.fromEntries(['house','vocation','dignity','aspect','symbolism'].map(k=>[k,bank.rules.filter(r=>r.kind===k).length])),
  {house:10,vocation:7,dignity:7,aspect:7,symbolism:7});
-assert.equal(bank.unresolved.length,3);
-console.log(`PASS ${bank.rules.length} unique bilingual source-bound rules, ${sources.size} passage groups, 3 explicit unresolved families; no publication approval`);
+assert.equal(bank.unresolved.length,2);
+console.log(`PASS ${bank.rules.length} unique bilingual source-bound rules, ${sources.size} passage groups, 2 unresolved outcome families; transit conflict resolved; no publication approval`);

@@ -351,8 +351,34 @@ function render(){
    for(const url of source.urls){const link=item(detail,"a",new URL(url).hostname);link.href=url;link.rel="noreferrer";item(detail,"span"," · ");}
   }
  }
- item(bank,"p",language==="hi"?"गोचर-वेद, दशा-फल एवं विवाह-समय के नियमों की आवश्यक स्रोत और प्रयोज्यता जाँच शेष है।":
-  "Transit vedha, Daśā results and marriage timing remain withheld pending source and applicability checks.","warning");
+ item(bank,"p",language==="hi"?"गोचर-वेद एवं अवधि-संबंधी कारकों की अगली समीक्षा नीचे है। पूर्ण ग्रह-बल तथा घटना-फल की स्वीकृति शेष है।":
+  "Transit vedha and period factors are reviewed below. Complete strength synthesis and event-outcome approval remain pending.","warning");
+ const timingFactors=card(root,language==="hi"?"गोचर एवं दशा-कारक समीक्षा":"Transit and period-factor review");
+ timingFactors.id="wss-timing-review";
+ item(timingFactors,"p",view.timingReview.notice,"warning");
+ const states=language==="hi"?{
+  outside_list_not_an_adverse_verdict:"सूची में नहीं; अशुभ फल नहीं माना गया",
+  classical_vedha_present:"वेध उपस्थित",node_obstruction_lineage_review:"राहु/केतु हेतु परम्परा-समीक्षा आवश्यक",
+  listed_position_without_classical_vedha:"सूचीबद्ध स्थान; शास्त्रीय ग्रह-वेध नहीं मिला"
+ }:{outside_list_not_an_adverse_verdict:"Outside list; no adverse verdict",classical_vedha_present:"Classical vedha present",
+  node_obstruction_lineage_review:"Node obstruction needs lineage review",listed_position_without_classical_vedha:"Listed position; no classical vedha found"};
+ if(view.timingReview.transit.entries.length){
+  for(const entry of view.timingReview.transit.entries){
+   const block=item(timingFactors,"div",null,"domain");
+   item(block,"h3",bankGraha(entry.graha));
+   item(block,"p",(language==="hi"?"जन्म-चन्द्र से स्थान: ":"From natal Moon: ")+entry.moon_relative_house+
+    (language==="hi"?" · वेध-स्थान: ":" · Vedha house: ")+(entry.vedha_house??"—"));
+   item(block,"p",states[entry.state]);
+  }
+ }else item(timingFactors,"p",language==="hi"?"जन्म-चन्द्र अथवा गोचर राशि-सीमा अनिश्चित होने से समीक्षा रोकी गई है।":"Review withheld because the natal Moon or a transit sign boundary is uncertain.");
+ item(timingFactors,"p",view.timingReview.inception.samples?
+  (language==="hi"?"दशा-आरम्भ परीक्षण बिंदु: ":"Daśā inception sample count: ")+view.timingReview.inception.samples:
+  (language==="hi"?"दशा-आरम्भ समीक्षा रोकी गई है: अवधि-सीमा अनिश्चित है अथवा प्रथम अवधि जन्म से काटी गई है।":"Inception review withheld: the period boundary is uncertain or the first period is clipped at birth."));
+ const matches=view.timingReview.marriage.period_matches.map(bankGraha).join(", ");
+ item(timingFactors,"p",matches?
+  (language==="hi"?"विवाह-संबंधी ग्रहों के अवधि-मिलान: ":"Relationship-factor period matches: ")+matches:
+  (language==="hi"?"पात्र अवधि-कारक का मिलान उपलब्ध नहीं है; इसे प्रतिकूल फल नहीं माना गया है।":"No qualified period-factor match is available; this is not an adverse outcome."));
+ item(timingFactors,"p",language==="hi"?"ये कारक-मिलान हैं। विवाह, नौकरी अथवा पदोन्नति की तिथि या निश्चित फल नहीं है।":"These are factor matches. They do not establish marriage, job or promotion dates or outcomes.","muted");
  const timing=card(root,strings.timeWindows);
  item(timing,"p",strings.wss08.timing,"warning");
  const limitation=card(root,strings.methodology);

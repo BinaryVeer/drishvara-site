@@ -3,6 +3,9 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'scripts/lib/wss09-timing-review.mjs'
+      - 'tests/wss09-timing-review.mjs'
+      - 'data/methodology/jyotisha/wss09-timing-source-register-v1.json'
       - 'scripts/lib/wss05-source-bound-rule-bank.mjs'
       - 'scripts/lib/wss08-chart-audit-contract.mjs'
       - 'data/methodology/jyotisha/wss-source-bound-rule-bank-v1.json'
@@ -43,6 +46,7 @@ jobs:
           node tests/wss04-varga-vimshottari.mjs
           node scripts/validate-wss-source-bound-rule-bank.mjs
           node tests/wss05-source-bound-rule-bank.mjs
+          node tests/wss09-timing-review.mjs
           node tests/wss05-classical-rule-evidence.mjs
           node tests/wss05-06-context-and-transits.mjs
           node tests/wss07-kundali-report-candidate.mjs

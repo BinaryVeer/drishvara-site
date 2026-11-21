@@ -126,6 +126,7 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#wss-year-period").innerText(),/Yearly planetary changes/);
   assert.equal(await page.locator("#wss-source-evidence .domain").count(),5);
   assert.equal(await page.locator("#wss-rule-bank details").count(),38);
+  assert.equal(await page.locator("#wss-timing-review").count(),1);
   assert.match(await page.locator("#wss-rule-bank").innerText(),/Independent Sanskrit/);
   await page.locator("#wss-rule-bank summary").first().click();
   assert.ok(await page.locator("#wss-rule-bank details").first().locator("a").count()>=2);
@@ -157,6 +158,7 @@ for(const width of [1440,390,320]){
   assert.equal(await page.locator("html").getAttribute("lang"),"hi");
   assert.equal(await page.locator('[data-language-choice="hi"]').getAttribute("aria-pressed"),"true");
   assert.equal(await page.locator("#wss-rule-bank details").count(),38);
+  assert.equal(await page.locator("#wss-timing-review").count(),1);
   assert.match(await page.locator("#wss-rule-bank").innerText(),/संस्कृत/);
   assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
   assert.match(await page.locator("#wss-precision-audit").innerText(),/कुंडली की सटीकता/);
