@@ -30,12 +30,6 @@ async function run(width){
   assert.equal(await input.getAttribute('aria-hidden'),null);
   assert.equal(await input.getAttribute('required'),'');
   assert.equal(await input.getAttribute('aria-required'),'true');
-  const beforeBlank=calls.length;
-  await input.fill('   ');
-  await page.locator('[data-ag71e-preview-button="star-reflection"]').click();
-  assert.equal(await page.locator('#star-name-error').isVisible(),true);
-  assert.equal(await input.getAttribute('aria-invalid'),'true');
-  assert.equal(calls.length,beforeBlank,'Blank name must not submit astronomical requests');
   await input.fill('QA Example');
   assert.equal(await input.inputValue(),'QA Example');
   await page.waitForFunction(()=>document.getElementById('ag75d-e2-star-place-choice-panel')?.getAttribute('data-ag75d-e2-approved-option-count')==='3266',null,{timeout:26000});
@@ -48,6 +42,13 @@ async function run(width){
   await page.locator('#star-reflection-dob').fill('01/01/2000');
   await page.locator('#star-reflection-birth-time').fill('12:00');
   await page.locator('#star-birth-time-unknown').uncheck();
+  const beforeBlank=calls.length;
+  await input.fill('   ');
+  await page.locator('[data-ag71e-preview-button="star-reflection"]').click();
+  assert.equal(await page.locator('#star-name-error').isVisible(),true);
+  assert.equal(await input.getAttribute('aria-invalid'),'true');
+  assert.equal(calls.length,beforeBlank,'Blank name must not submit astronomical requests');
+  await input.fill('QA Example');
   await page.locator('[data-ag71e-preview-button="star-reflection"]').click();
   await page.waitForFunction(()=>{
    const card=document.querySelector('[data-drishvara-v2-reflect-card="true"]');
