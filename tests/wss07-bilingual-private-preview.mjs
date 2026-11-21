@@ -125,6 +125,10 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#wss-month-period").innerText(),/Monthly planetary changes/);
   assert.match(await page.locator("#wss-year-period").innerText(),/Yearly planetary changes/);
   assert.equal(await page.locator("#wss-source-evidence .domain").count(),5);
+  assert.equal(await page.locator("#wss-rule-bank details").count(),38);
+  assert.match(await page.locator("#wss-rule-bank").innerText(),/Independent Sanskrit/);
+  await page.locator("#wss-rule-bank summary").first().click();
+  assert.ok(await page.locator("#wss-rule-bank details").first().locator("a").count()>=2);
   assert.match(await page.locator("#wss-source-evidence").innerText(),/BJ_10_1/);
   assert.equal(await page.locator("#review-result .chart-wrapper").first().locator(".chart-house").count(),12);
   const chartOne=page.locator("#review-result .chart-wrapper").first();
@@ -147,10 +151,13 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#review-result").innerText(),/Vrishabha/);
   const widthEN=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
   assert.ok(widthEN<=3,"English horizontal overflow "+widthEN);
+  await page.locator("#wss-rule-bank").screenshot({path:out+"/rule-bank-"+width+"-en.png",animations:"disabled"});
   await page.screenshot({path:out+"/preview-"+width+"-en.png",fullPage:true,animations:"disabled"});
   await page.locator('[data-language-choice="hi"]').click();
   assert.equal(await page.locator("html").getAttribute("lang"),"hi");
   assert.equal(await page.locator('[data-language-choice="hi"]').getAttribute("aria-pressed"),"true");
+  assert.equal(await page.locator("#wss-rule-bank details").count(),38);
+  assert.match(await page.locator("#wss-rule-bank").innerText(),/संस्कृत/);
   assert.match(await page.locator("#wss-page-title").innerText(),/द्विभाषी कुंडली/);
   assert.match(await page.locator("#wss-precision-audit").innerText(),/कुंडली की सटीकता/);
   assert.match(await page.locator("#review-result").innerText(),/दशा की निश्चित तिथियाँ/);
@@ -168,6 +175,7 @@ for(const width of [1440,390,320]){
   assert.match(await page.locator("#wss-name-label").innerText(),/नाम/);
   const widthHI=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
   assert.ok(widthHI<=3,"Hindi horizontal overflow "+widthHI);
+  await page.locator("#wss-rule-bank").screenshot({path:out+"/rule-bank-"+width+"-hi.png",animations:"disabled"});
   await page.screenshot({path:out+"/preview-"+width+"-hi.png",fullPage:true,animations:"disabled"});
   await page.locator("#wss-name").fill("Tapan");
   await page.locator("#wss-sound-wrap").waitFor({state:"visible"});

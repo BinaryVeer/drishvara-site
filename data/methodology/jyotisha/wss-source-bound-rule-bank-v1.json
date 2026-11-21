@@ -1,0 +1,1052 @@
+{
+  "id": "WSS_SOURCE_BOUND_RULE_BANK_V1",
+  "version": 1,
+  "date": "2026-11-20",
+  "status": "private_research_bank_not_public_prediction",
+  "source_doctrine": [
+    "M00",
+    "AD01"
+  ],
+  "scholar_attribution": {
+    "Nityanand_Misra": "Textual discipline influence only; no verified horoscope algorithm or endorsement attributed"
+  },
+  "source_policy": {
+    "primary_passage_required": true,
+    "edition_limitations_required": true,
+    "two_carriers_do_not_prove_independent_review": true,
+    "editorial_analogies_not_classical_rules": true,
+    "unknown_or_conflicting_source_withheld": true
+  },
+  "sources": [
+    {
+      "id": "BJ_VOCATION",
+      "work": "Bṛhat Jātaka",
+      "author": "Varāhamihira",
+      "passage": "10.1–4",
+      "edition": "Digital Sanskrit transcription; critical print recension not established",
+      "urls": [
+        "https://www.transliteral.org/pages/z100411221316/view",
+        "https://sanskritdocuments.org/doc_z_misc_sociology_astrology/brihajjAtakam.html"
+      ],
+      "scope": "Tenth from Lagna/Moon/Sun, tenth lord Navāṁśa sign lord, traditional livelihood associations; strength qualifications retained",
+      "checked_on": "2026-11-20",
+      "review_state": "digital_passage_checked_independent_recension_review_pending",
+      "carriers_are_independent_editions": false
+    },
+    {
+      "id": "BPHS_DIGNITY",
+      "work": "Bṛhat Parāśara Horā Śāstra",
+      "passage": "3.49–50",
+      "edition": "Digital Sanskrit recension; numbering is carrier-specific",
+      "urls": [
+        "https://www.siva.sh/brihat-parashara-hora-shastra/3/46-50",
+        "https://sanskritdocuments.org/doc_z_misc_sociology_astrology/par0110.html"
+      ],
+      "scope": "Seven visible grahas: exaltation sign, opposite debilitation sign; not complete strength",
+      "checked_on": "2026-11-20",
+      "review_state": "digital_passage_checked_independent_recension_review_pending",
+      "carriers_are_independent_editions": false
+    },
+    {
+      "id": "BPHS_ASPECT",
+      "work": "Bṛhat Parāśara Horā Śāstra",
+      "passage": "26.3–5",
+      "edition": "Digital Sanskrit recension; numbering is carrier-specific",
+      "urls": [
+        "https://www.siva.sh/brihat-parashara-hora-shastra/26/1-5",
+        "https://sanskritdocuments.org/doc_z_misc_sociology_astrology/par2130.html"
+      ],
+      "scope": "Full graha aspects at sign level; exact angular strength is outside this evaluator",
+      "checked_on": "2026-11-20",
+      "review_state": "digital_passage_checked_independent_recension_review_pending",
+      "carriers_are_independent_editions": false
+    },
+    {
+      "id": "BPHS_COMPLEXION",
+      "work": "Bṛhat Parāśara Horā Śāstra",
+      "passage": "3.16–17; compare Bṛhat Jātaka 2.4",
+      "edition": "Digital Sanskrit; colour vocabulary is contextual",
+      "urls": [
+        "https://www.siva.sh/brihat-parashara-hora-shastra/3/16-20",
+        "https://sanskritdocuments.org/doc_z_misc_sociology_astrology/brihajjAtakam.html"
+      ],
+      "scope": "Literal complexion symbolism, not personal lucky colour or clothing prescription",
+      "checked_on": "2026-11-20",
+      "review_state": "digital_passage_checked_independent_recension_review_pending",
+      "carriers_are_independent_editions": false,
+      "translation_note": "Carrier English complexion labels differ from its Sanskrit. The bank uses bounded Sanskrit descriptors compared with BJ 2.4; no personal colour prescription. Independent translation review remains pending."
+    },
+    {
+      "id": "BPHS_HOUSES",
+      "work": "Bṛhat Parāśara Horā Śāstra",
+      "passage": "11.2–13, qualifications 11.14–16",
+      "edition": "Digital Sanskrit recension; numbering is carrier-specific",
+      "urls": [
+        "https://sanskritdocuments.org/doc_z_misc_sociology_astrology/par1120.html",
+        "https://www.siva.sh/brihat-parashara-hora-shastra/11/1-5",
+        "https://www.siva.sh/brihat-parashara-hora-shastra/11/6-10",
+        "https://www.siva.sh/brihat-parashara-hora-shastra/11/11-15",
+        "https://www.siva.sh/brihat-parashara-hora-shastra/11/16-20"
+      ],
+      "scope": "Selected house topics only; excludes health, death and moral judgements",
+      "checked_on": "2026-11-20",
+      "review_state": "digital_passage_checked_independent_recension_review_pending",
+      "carriers_are_independent_editions": false
+    }
+  ],
+  "rules": [
+    {
+      "id": "DIGNITY_SUN",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Sun",
+      "exaltation_sign": 1,
+      "debilitation_sign": 7
+    },
+    {
+      "id": "ASPECT_SUN",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Sun",
+      "offsets": [
+        7
+      ]
+    },
+    {
+      "id": "COLOUR_SUN",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Sun",
+      "descriptor": {
+        "en": "dark red",
+        "hi": "रक्त-श्याम"
+      }
+    },
+    {
+      "id": "VOCATION_SUN",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with herbs, gold and medicines. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से वनस्पति, स्वर्ण एवं औषधि का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Sun",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "DIGNITY_MOON",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Moon",
+      "exaltation_sign": 2,
+      "debilitation_sign": 8
+    },
+    {
+      "id": "ASPECT_MOON",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Moon",
+      "offsets": [
+        7
+      ]
+    },
+    {
+      "id": "COLOUR_MOON",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Moon",
+      "descriptor": {
+        "en": "fair / pale",
+        "hi": "गौर / उज्ज्वल"
+      }
+    },
+    {
+      "id": "VOCATION_MOON",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with agriculture and water products. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से कृषि एवं जल से प्राप्त वस्तुएँ का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Moon",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "DIGNITY_MARS",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Mars",
+      "exaltation_sign": 10,
+      "debilitation_sign": 4
+    },
+    {
+      "id": "ASPECT_MARS",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Mars",
+      "offsets": [
+        4,
+        7,
+        8
+      ]
+    },
+    {
+      "id": "COLOUR_MARS",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Mars",
+      "descriptor": {
+        "en": "red",
+        "hi": "रक्त"
+      }
+    },
+    {
+      "id": "VOCATION_MARS",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with metals and fire-related crafts. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से धातु एवं अग्नि-संबंधी शिल्प का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Mars",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "DIGNITY_MERCURY",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Mercury",
+      "exaltation_sign": 6,
+      "debilitation_sign": 12
+    },
+    {
+      "id": "ASPECT_MERCURY",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Mercury",
+      "offsets": [
+        7
+      ]
+    },
+    {
+      "id": "COLOUR_MERCURY",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Mercury",
+      "descriptor": {
+        "en": "dūrvā-grass green",
+        "hi": "दूर्वा-श्याम"
+      }
+    },
+    {
+      "id": "VOCATION_MERCURY",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with writing, mathematics, poetry and crafts. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से लेखन, गणित, काव्य एवं शिल्प का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Mercury",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "DIGNITY_JUPITER",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Jupiter",
+      "exaltation_sign": 4,
+      "debilitation_sign": 10
+    },
+    {
+      "id": "ASPECT_JUPITER",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Jupiter",
+      "offsets": [
+        5,
+        7,
+        9
+      ]
+    },
+    {
+      "id": "COLOUR_JUPITER",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Jupiter",
+      "descriptor": {
+        "en": "fair",
+        "hi": "गौर"
+      }
+    },
+    {
+      "id": "VOCATION_JUPITER",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with learning and religious duties. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से विद्या एवं धार्मिक कार्य का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Jupiter",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "DIGNITY_VENUS",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Venus",
+      "exaltation_sign": 12,
+      "debilitation_sign": 6
+    },
+    {
+      "id": "ASPECT_VENUS",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Venus",
+      "offsets": [
+        7
+      ]
+    },
+    {
+      "id": "COLOUR_VENUS",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Venus",
+      "descriptor": {
+        "en": "dusky",
+        "hi": "श्याम"
+      }
+    },
+    {
+      "id": "VOCATION_VENUS",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with jewels, silver and cattle. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से रत्न, रजत एवं पशुपालन का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Venus",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "DIGNITY_SATURN",
+      "kind": "dignity",
+      "source_ids": [
+        "BPHS_DIGNITY"
+      ],
+      "text": {
+        "en": "Sign-level exaltation or debilitation is a traditional classification, not a complete strength or life-outcome assessment.",
+        "hi": "राशि-स्तर पर उच्च अथवा नीच स्थिति पारम्परिक वर्गीकरण है; यह सम्पूर्ण ग्रह-बल अथवा जीवन-फल का निर्णय नहीं है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "shadbala",
+        "deep_exaltation_degree",
+        "node_dignity",
+        "guaranteed_outcome"
+      ],
+      "publication_approved": false,
+      "graha": "Saturn",
+      "exaltation_sign": 7,
+      "debilitation_sign": 1
+    },
+    {
+      "id": "ASPECT_SATURN",
+      "kind": "aspect",
+      "source_ids": [
+        "BPHS_ASPECT"
+      ],
+      "text": {
+        "en": "Full traditional graha aspects are listed at sign level; exact angular aspect strength is not computed.",
+        "hi": "परम्परागत पूर्ण ग्रह-दृष्टियाँ राशि-स्तर पर दिखाई गई हैं; अंशानुसार दृष्टि-बल की गणना नहीं की गई है।"
+      },
+      "requires": [
+        "stable_D1_graha_sign"
+      ],
+      "excludes": [
+        "node_aspects",
+        "exact_drishti_bala",
+        "benefit_or_harm_assignment"
+      ],
+      "publication_approved": false,
+      "graha": "Saturn",
+      "offsets": [
+        3,
+        7,
+        10
+      ]
+    },
+    {
+      "id": "COLOUR_SATURN",
+      "kind": "symbolism",
+      "source_ids": [
+        "BPHS_COMPLEXION"
+      ],
+      "text": {
+        "en": "The source describes planetary complexion symbolism. It does not prescribe a personal lucky colour.",
+        "hi": "स्रोत में ग्रह के वर्ण का प्रतीकात्मक विवरण है। इससे व्यक्ति के लिए शुभ रंग निर्धारित नहीं होता।"
+      },
+      "requires": [],
+      "excludes": [
+        "personal_colour_preference",
+        "clothing_prescription",
+        "active_dasha_colour_selection"
+      ],
+      "publication_approved": false,
+      "graha": "Saturn",
+      "descriptor": {
+        "en": "black / dark",
+        "hi": "कृष्ण"
+      }
+    },
+    {
+      "id": "VOCATION_SATURN",
+      "kind": "vocation",
+      "source_ids": [
+        "BJ_VOCATION"
+      ],
+      "text": {
+        "en": "The Navāṁśa lord is linked traditionally with labour, load-carrying and manual crafts. This is a contextual association; it does not establish aptitude or select a profession.",
+        "hi": "नवांश-अधिपति से परम्परागत रूप से श्रम, भार-वहन एवं हस्तशिल्प का संबंध बताया गया है। यह संदर्भ-संबंध है; इससे योग्यता अथवा व्यवसाय निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_origin_sign",
+        "stable_tenth_lord_D9_sign",
+        "rashi_lordship"
+      ],
+      "excludes": [
+        "strongest_origin_without_strength_model",
+        "job_guarantee",
+        "modern_sector_equivalence"
+      ],
+      "publication_approved": false,
+      "graha": "Saturn",
+      "qualifications": [
+        "BJ_10_4_strength_and_context_pending"
+      ],
+      "translation_limits": [
+        "Selected non-exhaustive livelihood terms; ambiguous and caste-ranked terms not used as personal assertions"
+      ]
+    },
+    {
+      "id": "HOUSE_1",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 1 is a traditional topic reference for self and knowledge. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 1 का परम्परागत विषय स्वयं एवं ज्ञान है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 1,
+      "passage": "11.2"
+    },
+    {
+      "id": "HOUSE_2",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 2 is a traditional topic reference for resources and family. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 2 का परम्परागत विषय संसाधन एवं परिवार है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 2,
+      "passage": "11.3"
+    },
+    {
+      "id": "HOUSE_3",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 3 is a traditional topic reference for initiative, siblings and journeys. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 3 का परम्परागत विषय प्रयत्न, सहोदर एवं यात्रा है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 3,
+      "passage": "11.4"
+    },
+    {
+      "id": "HOUSE_4",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 4 is a traditional topic reference for home, land and kin. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 4 का परम्परागत विषय गृह, भूमि एवं परिजन है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 4,
+      "passage": "11.5"
+    },
+    {
+      "id": "HOUSE_5",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 5 is a traditional topic reference for learning and intelligence. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 5 का परम्परागत विषय विद्या एवं बुद्धि है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 5,
+      "passage": "11.6"
+    },
+    {
+      "id": "HOUSE_7",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 7 is a traditional topic reference for partnership and trade. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 7 का परम्परागत विषय दाम्पत्य एवं व्यापार है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 7,
+      "passage": "11.8"
+    },
+    {
+      "id": "HOUSE_9",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 9 is a traditional topic reference for dharma and pilgrimage. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 9 का परम्परागत विषय धर्म एवं तीर्थयात्रा है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 9,
+      "passage": "11.10"
+    },
+    {
+      "id": "HOUSE_10",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 10 is a traditional topic reference for work and public standing. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 10 का परम्परागत विषय कर्म एवं सार्वजनिक प्रतिष्ठा है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 10,
+      "passage": "11.11"
+    },
+    {
+      "id": "HOUSE_11",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 11 is a traditional topic reference for income and gains. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 11 का परम्परागत विषय आय एवं प्राप्ति है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 11,
+      "passage": "11.12"
+    },
+    {
+      "id": "HOUSE_12",
+      "kind": "house",
+      "source_ids": [
+        "BPHS_HOUSES"
+      ],
+      "text": {
+        "en": "House 12 is a traditional topic reference for expenditure. Occupancy alone does not establish an outcome.",
+        "hi": "भाव 12 का परम्परागत विषय व्यय है। केवल ग्रह-स्थिति से परिणाम निश्चित नहीं होता।"
+      },
+      "requires": [
+        "stable_D1_lagna",
+        "stable_D1_graha_signs"
+      ],
+      "excludes": [
+        "health_or_death_forecast",
+        "partner_morality",
+        "single_house_prediction"
+      ],
+      "publication_approved": false,
+      "house": 12,
+      "passage": "11.13"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "TRANSIT_VEDHA",
+      "reason": "Mercury eleventh-house vedha differs between digital translations; printed-edition reconciliation required before activation"
+    },
+    {
+      "id": "DASHA_RESULTS",
+      "reason": "BPHS 48.8 requires natal and period-inception conditions plus strength; active lord alone insufficient"
+    },
+    {
+      "id": "MARRIAGE_TIMING",
+      "reason": "Praśna Mārga 20.1 question/natal applicability and complete seventh-house, Venus, aspects, D9 and timing review unresolved"
+    }
+  ],
+  "independent_sanskrit_review": false,
+  "ready_for_public_predictions": false,
+  "source_evidence_path": "data/quality/jyotisha/wss-rule-bank-source-evidence-20261120.json"
+}
