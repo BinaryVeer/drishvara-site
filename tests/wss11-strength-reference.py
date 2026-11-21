@@ -121,6 +121,10 @@ def inputs():
   date=dt.date().isoformat();c.update(utc=(dt+datetime.timedelta(hours=k+.125)).isoformat(),sunriseUtc=dt.isoformat(),sunsetUtc=(dt+datetime.timedelta(hours=12)).isoformat(),nextSunriseUtc=(dt+datetime.timedelta(days=1)).isoformat(),sunriseLocalDate=date,dayWeekday=(dt.weekday()+1)%7,nathaDegrees=(k*17)%180,ascendant=(17+k*13)%360)
   c['midheaven']=(c['ascendant']+270+(k%3-1)*20)%360
   c['planets']=[{'graha':g,'longitude':(x+k*11.71)%360,'tropical':(x+k*11.71+24)%360} for g,x in zip(N,lon)]
+  moon=next(p for p in c['planets'] if p['graha']=='Moon')
+  sun=next(p for p in c['planets'] if p['graha']=='Sun')
+  moon['longitude']=(sun['longitude']+15*k+.11)%360
+  moon['tropical']=(moon['longitude']+24)%360
   yield 'synthetic_clock_phase_geometry_'+str(k),c
  # Isolated wars: all ten starry-graha pairs, both winner orderings.
  import itertools

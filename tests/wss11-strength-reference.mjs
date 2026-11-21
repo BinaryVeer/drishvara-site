@@ -14,7 +14,15 @@ function compare(actual,expected,path){
  }else assert.equal(actual,expected,path);
 }
 for(const c of reference.cases){const actual=calculateClassicalBala(c.input);compare(actual,c.expected,c.name);assert.equal(actual.ready_for_prediction,false);}
-assert.ok(reference.cases.length>=20);
+assert.equal(reference.cases.length,37);
+const synthetic=reference.cases.filter(c=>c.name.startsWith('synthetic_clock_phase_geometry_'));
+const waxing=synthetic.filter(c=>{
+ const p=Object.fromEntries(c.input.planets.map(p=>[p.graha,p.longitude]));
+ return ((p.Moon-p.Sun+360)%360)<180;
+});
+assert.equal(waxing.length,12,'Both lunar hemispheres must remain represented');
+assert.equal(synthetic.length-waxing.length,12);
+assert.equal(reference.cases.filter(c=>c.name.startsWith('isolated_war_')).length,10);
 console.log(`PASS ${reference.cases.length} full-component arithmetic cases, ${compared} independent numeric comparisons; no source or interval authorization inferred`);
 const {default:source}=await import('./fixtures/wss11-raman-seven-varga-cells.json',{with:{type:'json'}});
 const standard=reference.cases.find(c=>c.name==='raman_standard_declared_inputs');
