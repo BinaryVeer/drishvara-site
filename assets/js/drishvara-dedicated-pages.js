@@ -241,12 +241,9 @@
   if(sessionName)sessionName.addEventListener('input',()=>{
    nameError.hidden=hasSessionName();sessionName.setAttribute('aria-invalid',String(!hasSessionName()));sync();
   });
-  const nameGateButton=$('[data-ag71e-preview-button="star-reflection"]');
-  if(nameGateButton)nameGateButton.addEventListener('click',event=>{
-   if(hasSessionName()){nameError.hidden=true;sessionName?.setAttribute('aria-invalid','false');return;}
-   event.preventDefault();event.stopImmediatePropagation();
-   nameError.hidden=false;sessionName?.setAttribute('aria-invalid','true');sessionName?.focus();sync();
-  },true);
+  window.addEventListener('drishvara:name-required',()=>{
+   nameError.hidden=false;sync();
+  });
   new MutationObserver(sync).observe(grid,{childList:true,subtree:true,characterData:true});
   new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['hidden']});
   const button=$('[data-ag71e-preview-button="star-reflection"]');if(button)new MutationObserver(sync).observe(button,{attributes:true,attributeFilter:['aria-busy']});
