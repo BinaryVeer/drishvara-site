@@ -106,7 +106,8 @@ export function calculateClassicalBala(input){
  for(const n of CLASSICAL_GRAHAS){
   const l=P[n].longitude,s=sign(l),nav=classicalVargaSign(l,9),h=house(s,ascSign),male=['Sun','Mars','Jupiter'].includes(n),female=['Moon','Venus'].includes(n);
   const uccha=arc(l,norm(EXALT[n]+180))/3;
-  const saptavarga=[1,2,3,7,9,12,30].reduce((sum,d)=>sum+vargaScore(n,classicalVargaSign(l,d),d),0);
+  const saptavarga_terms=[1,2,3,7,9,12,30].map(d=>vargaScore(n,classicalVargaSign(l,d),d));
+  const saptavarga=saptavarga_terms.reduce((sum,v)=>sum+v,0);
   const oja=15*((female?s%2===1:s%2===0)+(female?nav%2===1:nav%2===0));
   const kendra=[1,4,7,10].includes(h)?60:[2,5,8,11].includes(h)?30:15;
   const drekkana=(male&&l%30<10)||(!male&&!female&&l%30>=10&&l%30<20)||(female&&l%30>=20)?15:0;
@@ -129,7 +130,7 @@ export function calculateClassicalBala(input){
    drik+=(benefic(a)?1:-1)*v/4;
    if(['Mercury','Jupiter'].includes(a))drik+=v; // BPHS 27.19 literal superaddition, explicitly profiled.
   }
-  pieces[n]={sthana_parts:{uccha,saptavarga,oja,kendra,drekkana},sthana:uccha+saptavarga+oja+kendra+drekkana,dig,
+  pieces[n]={saptavarga_terms,sthana_parts:{uccha,saptavarga,oja,kendra,drekkana},sthana:uccha+saptavarga+oja+kendra+drekkana,dig,
    kala_parts:{nath,paksha,tribhaga,abda,masa,vara,hora,ayana,yuddha:0},cheshta,naisargika:NATURAL[n],drik};
  }
  const wars=[];

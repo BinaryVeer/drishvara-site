@@ -37,7 +37,7 @@ Original numerical facts and audit findings remain in `data/quality/jyotisha/wss
 
 ## Exact remaining closure blockers
 
-1. **Full-strength qualification:** reconcile or isolate source conventions into authenticated complete profiles, and obtain independently derived full component benchmarks. Varga/aspect and astronomical-input agreement alone is insufficient. Mean-motion calibrations and printed-table inconsistencies remain explicit.
+1. **Full-strength source qualification:** reconcile or isolate source conventions into authenticated complete profiles. WSS11 now independently checks all numerical components under the declared synthesis (37 cases, 11,226 values), plus 49 printed source cells. That closes the missing independent arithmetic path; it does not authenticate a combined source tradition or validate the classical mean model as modern astronomy.
 2. **Continuous uncertainty:** establish bounds across the entire birth and period-inception interval, including discontinuities and threshold crossings. Nine or five samples cannot prove that a rule holds throughout.
 3. **Remaining interpretation conditions:** source-resolve the PM20.65 reading and qualify complete natal/inception strength and auspicious-house synthesis before event timing. PM20.66 sign matches are only individual diagnostic clauses.
 
@@ -46,3 +46,12 @@ These are engineering/source-verification blockers; there is no asserted mandato
 ## Reproduction
 
 Run the four `tests/wss10-*.mjs` test programs, `node tests/wss09-timing-review.mjs`, and `node tests/wss08-audited-bilingual-view.mjs`. The WSS10 workflow regenerates Python arithmetic and reference-only Swiss observations; the existing audited-preview workflow checks English/Hindi desktop/mobile behavior and rejects public/runtime/database modifications.
+
+
+## WSS11 continuation — full-component arithmetic verified
+
+A separately written Python implementation now checks all six planetary components and their subcomponents, seven per-varga terms, twelve house calculations and temporal lords. The 37 cases comprise the recorded standard-horoscope inputs, 24 explicitly synthetic clock/geometry/phase cases, all ten isolated starry-graha war pairs and two twilight states. There are 11,226 numerical comparisons at absolute tolerance1e-6virupa/degrees (rounded JavaScript outputs use1e-8). Inputs and model constants are shared declarations; algorithms are independently expressed in Python, including vector circular means, interpolation knots and piecewise Ayana integration. It does not call the JavaScript engine or import an external astrology implementation.
+
+The original Raman table at printedp24/PDFp29 was visually checked. All49 individual numerical cells agree with both implementations. Three printed totals disagree with the source cells: Moon49.750 vs sum48.750, Mercury13.500 vs sum135.000, Venus11.625 vs sum116.250. Those printed facts are preserved; no corrected source text is claimed. Source PDF hash matches the prior audited copy.
+
+Reproduce with `python tests/wss11-strength-reference.py` and `node tests/wss11-strength-reference.mjs`. This is full-component **arithmetic** verification under the declared diagnostic synthesis. It is not evidence that the profile is an authenticated single-recension method, a proof across an uncertain continuous interval, or authorization to publish event dates.

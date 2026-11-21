@@ -67,7 +67,22 @@
       "meridian_degrees": 0.0001,
       "solar_event_seconds": 5
     },
-    "scope": "Varga/aspect formula and astronomical-input checks, not independent full-strength validation"
+    "scope": "Independent full-component arithmetic, source-cell and astronomical-input checks; not authenticated full-profile source authorization or continuous uncertainty qualification",
+    "independent_full_component_arithmetic": {
+      "cases": 37,
+      "numeric_comparisons": 11226,
+      "reference": "tests/wss11-strength-reference.py",
+      "scope": "Separate Python implementation under the declared synthesis, not a second authenticated source profile or continuous bound"
+    },
+    "printed_seven_varga_source_cells": {
+      "count": 49,
+      "fixture": "tests/fixtures/wss11-raman-seven-varga-cells.json",
+      "conflicting_printed_totals": [
+        "Moon",
+        "Mercury",
+        "Venus"
+      ]
+    }
   },
   "unqualified": [
     "Nine samples do not prove continuous birth/inception interval strength",
