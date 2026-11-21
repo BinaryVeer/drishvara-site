@@ -97,6 +97,11 @@ for(const width of [1440,390,320]){
   assert.equal(resp.status(),200);
   await page.locator("#wss-generate").waitFor({state:"visible"});
   assert.equal(await page.locator("#wss-nama-consent").isChecked(),false);
+  assert.equal(await page.locator('#wss-name').getAttribute('aria-required'),'true');
+  await page.locator('#wss-name').fill('   ');
+  await page.locator('#wss-generate').click();
+  assert.match(await page.locator('#wss-error').innerText(),/name/i);
+  assert.equal(await page.locator('#review-result .chart-wrapper').count(),0);
   await page.locator("#wss-name").fill("विकास");
   await page.locator("#wss-birth-date").fill("1991-08-17");
   await page.locator("#wss-birth-time").fill("10:05:23");
@@ -191,6 +196,12 @@ for(const width of [1440,390,320]){
   assert.ok(widthHI<=3,"Hindi horizontal overflow "+widthHI);
   await page.locator("#wss-rule-bank").screenshot({path:out+"/rule-bank-"+width+"-hi.png",animations:"disabled"});
   await page.screenshot({path:out+"/preview-"+width+"-hi.png",fullPage:true,animations:"disabled"});
+  const unchangedChart=await page.locator('#review-result .chart-wrapper').first().innerText();
+  await page.locator('#wss-name').fill('   ');
+  assert.equal(await page.locator('#review-result .chart-wrapper').count(),0);
+  await page.locator('#wss-name').fill('Different Name');
+  assert.equal(await page.locator('#review-result .chart-wrapper').first().innerText(),unchangedChart,
+    'Changing the report name cannot change birth-chart calculations');
   await page.locator("#wss-name").fill("Tapan");
   await page.locator("#wss-sound-wrap").waitFor({state:"visible"});
   assert.equal(await page.locator("#wss-syllable option").count(),3);

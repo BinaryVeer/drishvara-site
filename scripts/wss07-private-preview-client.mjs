@@ -26,7 +26,7 @@ let placeController=null;
 const state={failures:0,lastPubliclyReady:false};
 const labels={
  en:{
-   name:"Full name / traditional name",date:"Date of birth",clock:"Birth time (24-hour)",
+   name:"Full name / traditional name (required)",date:"Date of birth",clock:"Birth time (24-hour)",
    place:"Select an approved birthplace",ref:"Reference date",precision:"Time precision",
    dasha:"Daśā year convention",consent:"I consent to local Nāma Rāśi lookup from the entered name",
    syllable:"Confirm name's traditional first syllable",button:"Calculate private research preview",
@@ -57,7 +57,7 @@ const labels={
    foldNote:"Both times are valid in this location. Select according to the original birth record; Drishvara will not guess."
  },
  hi:{
-   name:"पूरा नाम / परम्परागत नाम",date:"जन्म तिथि",clock:"जन्म समय (24-घंटे)",
+   name:"पूरा नाम / परम्परागत नाम (अनिवार्य)",date:"जन्म तिथि",clock:"जन्म समय (24-घंटे)",
    place:"अनुमोदित जन्मस्थान का चयन करें",ref:"गणना हेतु तिथि",precision:"समय की सटीकता",
    dasha:"दशा वर्ष पद्धति",consent:"मैं नाम से नाम राशि की स्थानीय गणना की सहमति देता/देती हूँ",
    syllable:"नाम के परम्परागत प्रथम अक्षर की पुष्टि करें",button:"निजी शोध पूर्वावलोकन की गणना करें",
@@ -162,7 +162,7 @@ function updateSyllable(){
 function render(){
  const root=$("#review-result");root.replaceChildren();
  const lbl=labels[language];
- if(!candidate){item(root,"p",lbl.opening,"muted");return;}
+ if(!candidate||!$("#wss-name").value.trim()){item(root,"p",lbl.opening,"muted");return;}
  const view=auditedBilingualCandidateView({
   report:candidate,precisionAudit,displayName:$("#wss-name").value,
   language,nameSignConsent:$("#wss-nama-consent").checked,confirmedSyllableKey
@@ -515,6 +515,7 @@ $("#wss-clear").addEventListener("click",()=>{
  updateLanguage();
 });
 $("#wss-name").addEventListener("input",()=>{
+ $("#wss-name").setAttribute("aria-invalid",String(!$("#wss-name").value.trim()));
  confirmedSyllableKey="";updateSyllable();if(candidate)render();
 });
 $("#wss-nama-consent").addEventListener("change",()=>{

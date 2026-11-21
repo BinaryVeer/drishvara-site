@@ -81,7 +81,7 @@ footer {font-size:.82rem;color:var(--muted);text-align:center}
 <section class="section" aria-label="Private input">
  <p id="wss-disclaimer" class="warning">Private research preview only.</p>
  <div class="form-grid">
-  <label class="field" for="wss-name"><span id="wss-name-label">Full name / traditional name</span><input id="wss-name" type="text" placeholder="Test Name" autocomplete="off" maxlength="80"></label>
+  <label class="field" for="wss-name"><span id="wss-name-label">Full name / traditional name (required)</span><input id="wss-name" type="text" required aria-required="true" placeholder="Test Name" autocomplete="off" maxlength="80"></label>
   <label class="field" for="wss-birth-date"><span id="wss-date-label">Date of birth</span><input id="wss-birth-date" type="date" autocomplete="off" min="1900-01-01" max="2100-12-31"></label>
   <label class="field" for="wss-birth-time"><span id="wss-time-label">Birth time (24-hour)</span><input id="wss-birth-time" type="time" step="1" autocomplete="off"></label>
   <label class="field" for="wss-dst-fold" id="wss-dst-fold-wrap" hidden>
