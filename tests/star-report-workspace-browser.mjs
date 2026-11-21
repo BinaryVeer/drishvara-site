@@ -13,6 +13,7 @@ try{for(const width of [1440,390,320]){
  assert.equal(await page.locator('.d-related').count(),0);assert.equal(await page.locator('.d-reflection-explain').count(),0);
  for(const lang of ['en','hi']){
   await page.locator('[data-dv2-language-choice="'+lang+'"]').first().click();
+  await page.waitForFunction(({lang,copy})=>{const root=document.querySelector('#star-report-workspace');return root?.lang===lang&&root.querySelector('.ws-demo-badge')?.textContent.includes(copy);},{lang,copy:lang==='hi'?'काल्पनिक':'SYNTHETIC'});
   await root.locator('[data-tab=overview]').click();
   assert.match(await root.innerText(),lang==='hi'?/काल्पनिक/:/SYNTHETIC DEMO/);
   await page.locator('#star-reflection-name').fill('QA private name');
