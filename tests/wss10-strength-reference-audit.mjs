@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import data from '../data/quality/jyotisha/wss10-strength-reference-audit-20261121.json' with {type:'json'};
+import {auditStrengthReference} from '../scripts/lib/wss10-strength-benchmark-audit.mjs';
+const a=auditStrengthReference(data.printed_summary_rows);
+assert.equal(a.status,'reference_arithmetic_conflict');
+assert.equal(a.results.find(r=>r.graha==='Sun').component_sum,424.94);
+assert.equal(a.results.find(r=>r.graha==='Mars').component_sum,301.14);
+assert.equal(a.results.find(r=>r.graha==='Mercury').rupas_from_components,8.9503);
+assert.ok(a.findings.some(f=>f.graha==='Saturn'&&f.field==='naisargika'));
+assert.ok(a.findings.some(f=>f.graha==='Mercury'&&f.field==='rupas'));
+// Trace the conflicting Mars summary cell to the earlier printed derivation.
+const mars=structuredClone(data.printed_summary_rows.find(r=>r.graha==='Mars'));
+mars.components.kala=data.component_stage_crosscheck[0].printed_component_stage;
+assert.equal(Number(Object.values(mars.components).reduce((x,y)=>x+y,0).toFixed(2)),298.14);
+// A deliberately simple arithmetic fixture is consistent but not an approved chart.
+const natural={Sun:60,Moon:360/7,Mars:120/7,Mercury:180/7,Jupiter:240/7,Venus:300/7,Saturn:60/7};
+const rows=Object.entries(natural).map(([graha,n])=>({graha,components:{sthana:0,dig:0,kala:0,cheshta:0,naisargika:n,drik:0},printed_total:n,printed_rupas:n/60}));
+const good=auditStrengthReference(rows);
+assert.equal(good.arithmetic_consistent,true);
+assert.equal(good.astronomical_benchmark_qualified,false);
+assert.equal(good.public_prediction_release,false);
+assert.throws(()=>auditStrengthReference(rows.slice(1)),/Seven unique/);
+const bad=structuredClone(rows);bad[0].components.kala=NaN;
+assert.throws(()=>auditStrengthReference(bad),/Finite/);
+assert.equal(data.usable_as_golden,false);
+assert.equal(data.full_strength_engine_implemented_at_baseline_4aab292,false);
+assert.equal(data.threshold_profiles.BPHS_27_32.virupas.Sun,390);
+assert.equal(data.threshold_profiles.RAMAN_ART122.virupas.Sun,300);
+console.log('PASS source-table conflicts, Mars derivation trace, profile separation and no false benchmark/release approval');
+console.log(JSON.stringify(a.findings));

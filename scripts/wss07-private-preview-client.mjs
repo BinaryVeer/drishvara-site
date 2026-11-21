@@ -353,6 +353,26 @@ function render(){
  }
  item(bank,"p",language==="hi"?"गोचर-वेद एवं अवधि-संबंधी कारकों की अगली समीक्षा नीचे है। पूर्ण ग्रह-बल तथा घटना-फल की स्वीकृति शेष है।":
   "Transit vedha and period factors are reviewed below. Complete strength synthesis and event-outcome approval remain pending.","warning");
+ const strength=card(root,language==="hi"?"ग्रह एवं भाव बल — परीक्षण गणना":"Planet and house strength — diagnostic calculation");
+ strength.id="wss-strength-review";
+ item(strength,"p",language==="hi"?"ये घोषित पद्धति के परीक्षण अंक हैं। जन्म-समय के नौ बिंदु पूरे अंतराल की स्थिरता सिद्ध नहीं करते; इन अंकों से घटना या तिथि तय नहीं होती।":"These are diagnostic scores under a declared method. Nine birth-time samples do not prove stability throughout the interval; these scores do not determine events or dates.","warning");
+ item(strength,"p",language==="hi"?"घोषित बीपीएचएस / रमन परीक्षण पद्धति; भिन्न स्रोत-परम्पराएँ स्पष्ट रूप से अलग रखी गई हैं।":"Declared BPHS / Raman diagnostic method; source differences are documented separately.","muted");
+ const balaNames=language==="hi"?{sthana:"स्थान",dig:"दिक्",kala:"काल",cheshta:"चेष्टा",naisargika:"नैसर्गिक",drik:"दृक्"}:{sthana:"Positional",dig:"Directional",kala:"Temporal",cheshta:"Motional",naisargika:"Natural",drik:"Aspect"};
+ for(const p of view.strength.planets){
+  const detail=item(strength,"details");
+  item(detail,"summary",bankGraha(p.graha)+" · "+p.rupas.toFixed(2)+(language==="hi"?" रूप":" rupas"));
+  for(const [key,label] of Object.entries(balaNames))info(detail,label,p[key].toFixed(2));
+  info(detail,language==="hi"?"परीक्षण सीमा (विरूप)":"Sampled range (virupas)",p.sampled_total_min.toFixed(2)+" – "+p.sampled_total_max.toFixed(2));
+ }
+ if(!view.strength.planets.length)item(strength,"p",language==="hi"?"समर्थित प्रेक्षण या समय-सटीकता उपलब्ध नहीं है; बल गणना रोकी गई है।":"Strength calculation withheld: supported observations or clock precision are unavailable.");
+ if(view.strength.houses.length){
+  item(strength,"p",language==="hi"?"भाव-बल हेतु श्रीपति मध्य-बिंदु; ऊपर के पूर्ण-राशि भावों से पृथक।":"House strength uses Sripathi midpoints, separately from the whole-sign houses above.","muted");
+  for(const h of view.strength.houses){
+   const d=item(strength,"details");item(d,"summary",strings.house+" "+h.house+" · "+h.total.toFixed(2)+(language==="hi"?" विरूप":" virupas"));
+   info(d,language==="hi"?"स्वामी":"Lord",bankGraha(h.ruler));
+   for(const [key,label] of Object.entries(language==="hi"?{lord_strength:"स्वामी बल",dig:"दिक्",drik:"दृष्टि",occupant_bonus:"स्थित ग्रह संशोधन",rising_bonus:"उदय संशोधन"}:{lord_strength:"Lord strength",dig:"Directional",drik:"Aspect",occupant_bonus:"Occupancy adjustment",rising_bonus:"Rising adjustment"}))info(d,label,h[key].toFixed(2));
+  }
+ }else item(strength,"p",language==="hi"?"सन्ध्या अथवा प्रेक्षण की अनिश्चितता में भाव-बल नहीं दिखाया जाता।":"House strength is withheld when twilight or observation qualification is unresolved.","muted");
  const timingFactors=card(root,language==="hi"?"गोचर एवं दशा-कारक समीक्षा":"Transit and period-factor review");
  timingFactors.id="wss-timing-review";
  item(timingFactors,"p",view.timingReview.notice,"warning");
@@ -378,6 +398,14 @@ function render(){
  item(timingFactors,"p",matches?
   (language==="hi"?"विवाह-संबंधी ग्रहों के अवधि-मिलान: ":"Relationship-factor period matches: ")+matches:
   (language==="hi"?"पात्र अवधि-कारक का मिलान उपलब्ध नहीं है; इसे प्रतिकूल फल नहीं माना गया है।":"No qualified period-factor match is available; this is not an adverse outcome."));
+ const marriageClauses=view.timingReview.marriage.transit_clauses;
+ if(marriageClauses){
+  const detail=item(timingFactors,"details");
+  item(detail,"summary",language==="hi"?"विवाह-संबंधी गोचर के पृथक कारक — प्रश्नमार्ग २०.६६":"Separate marriage-related transit factors — Praśna Mārga 20.66");
+  const origins=language==="hi"?{seventh_house:"सप्तम भाव",seventh_lord_natal_sign:"सप्तमेश की जन्म राशि",seventh_lord_navamsa_sign:"सप्तमेश की नवांश राशि"}:{seventh_house:"Seventh house",seventh_lord_natal_sign:"Seventh lord’s natal sign",seventh_lord_navamsa_sign:"Seventh lord’s Navāṁśa sign"};
+  for(const c of [...marriageClauses.clauses,...marriageClauses.jupiter])item(detail,"p",bankGraha(c.receiver)+" · "+origins[c.origin]+": "+c.relative_house+" · "+(c.match?(language==="hi"?"राशि-स्थान का मिलान":"Sign-position match"):(language==="hi"?"इस खण्ड का मिलान नहीं":"No match for this clause")));
+  item(detail,"p",language==="hi"?"यह चयनित दोपहर का परीक्षण है। सभी ग्रहों का एक साथ मिलान आवश्यक नहीं माना गया है; घटना-अवधि नहीं निकाली गई है।":"This is a selected-noon diagnostic. No simultaneous match of all receivers is assumed; no event window is derived.","muted");
+ }
  item(timingFactors,"p",language==="hi"?"ये कारक-मिलान हैं। विवाह, नौकरी अथवा पदोन्नति की तिथि या निश्चित फल नहीं है।":"These are factor matches. They do not establish marriage, job or promotion dates or outcomes.","muted");
  const timing=card(root,strings.timeWindows);
  item(timing,"p",strings.wss08.timing,"warning");

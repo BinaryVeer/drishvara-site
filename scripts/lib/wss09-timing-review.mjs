@@ -1,4 +1,5 @@
 /** Source-linked, in-memory timing factors. Never an event predictor. */
+import {marriageTransitClauses} from './wss10-marriage-transit-clauses.mjs';
 import REGISTER from '../../data/methodology/jyotisha/wss09-timing-source-register-v1.json' with {type:'json'};
 import {evaluateSourceBoundRuleBank} from './wss05-source-bound-rule-bank.mjs';
 import {dashaUncertaintyCandidate,stableDashaContext} from './wss08-dasha-uncertainty.mjs';
@@ -84,6 +85,14 @@ export function evaluateTimingReview({report,precisionAudit,language='en'}={}){
  if(h7&&periodSafe){
   const candidates=new Set([h7.lord,'Venus','Moon',...h7.occupants.filter(n=>!['Rahu','Ketu'].includes(n))]);
   for(const e of bank.entries.filter(e=>e.kind==='aspect'))if(e.factors?.targets.some(t=>t.sign===h7.sign))candidates.add(e.factors.graha);
+  const h1=houseFactor(1);
+  // Preserve both readings as evidence; neither silently adds a period candidate.
+  const lordD9=h1?report.charts.D9.grahas.find(g=>g.graha===h1.lord):null;
+  const qualifiedLordD9=lordD9?.state==='candidate_numeric'&&sign(lordD9.rashi_index)&&precisionAudit.grahas.find(g=>g.graha===h1.lord)?.D9===SIGNS[lordD9.rashi_index-1];
+  marriage.navamsa_reading_review={source_id:'PM20.65',state:'conflicting_readings_not_authorized',
+   digital_sanskrit_lagna_lord_navamsa_lord:qualifiedLordD9?LORDS[lordD9.rashi_index-1]:null,
+   english_lagna_navamsa_lord:precisionAudit.D9.state==='stable_candidate'&&sign(report.charts.D9.lagna?.rashi_index)?LORDS[report.charts.D9.lagna.rashi_index-1]:null,
+   rahu_option:'lineage_variant_not_enabled'};
   const seventh=graha(h7.lord).rashi.rashi_index;
   candidates.add(LORDS[seventh-1]);
   const d9=report.charts.D9.grahas.find(g=>g.graha===h7.lord);
@@ -95,11 +104,14 @@ export function evaluateTimingReview({report,precisionAudit,language='en'}={}){
    if(transit.entries.length){
     const j=snapshot.grahas.find(g=>g.graha==='Jupiter').transit_rashi_index;
     marriage.jupiter_sign_match=[seventh,d9.rashi_index].some(s=>[1,5,9].includes(house(j,s)));
+    const h1=houseFactor(1),moon=graha('Moon');
+    if(h1&&moonSafe)marriage.transit_clauses=marriageTransitClauses({seventhSign:h7.sign,seventhLordSign:seventh,
+     seventhLordNavamsaSign:d9.rashi_index,lagnaLord:h1.lord,seventhLord:h7.lord,moonSignLord:LORDS[moon.rashi.rashi_index-1],transits:snapshot.grahas});
    }
   }
  }
  return {status:'private_timing_factor_review_not_event_prediction',language,transit,period:{...period},inception,career,marriage,
-  notice:language==='hi'?'गोचर-वेद तथा दशा एवं विवाह-संबंधी कारकों की समीक्षा है। ग्रह-बल का पूर्ण संश्लेषण और स्वतंत्र विद्वत् समीक्षा शेष है; कोई घटना या तिथि निश्चित नहीं की गई है।':
-   'Transit vedha and period/relationship factors are reviewed. Complete strength synthesis and independent scholarly review remain outstanding; no event or date is determined.',
+  notice:language==='hi'?'गोचर-वेद तथा दशा एवं विवाह-संबंधी कारकों की समीक्षा है। बल के पूरे समय-अंतराल का संश्लेषण तथा पाठभेद की जाँच शेष है; कोई घटना या तिथि निश्चित नहीं की गई है।':
+   'Transit vedha and period/relationship factors are reviewed. Continuous strength qualification and unresolved textual readings remain outstanding; no event or date is determined.',
   ready_for_public_predictions:false,independent_scholar_review:false};
 }

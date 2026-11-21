@@ -35,7 +35,7 @@ for(const language of ['en','hi']){
  assert.equal(v.transit.entries.length,7);assert.equal(v.inception.samples,5);
  assert.equal(v.career.outcome,null);assert.equal(v.marriage.event_window,null);
  assert.ok(['partial_natal_period_and_Jupiter_factors_only','withheld_lagna_period_or_division'].includes(v.marriage.state));
- if(language==='hi')assert.match(v.notice,/विद्वत्/);
+ if(language==='hi')assert.match(v.notice,/पाठभेद/);
 }
 // A qualified synthetic seventh-lord D9 enables the full supported factor list.
 const qualified=structuredClone(report),qa=structuredClone(audit);

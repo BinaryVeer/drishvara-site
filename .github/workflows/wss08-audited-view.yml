@@ -3,6 +3,8 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'scripts/lib/wss10-*.mjs'
+      - 'data/methodology/jyotisha/wss10-*'
       - 'scripts/lib/wss09-timing-review.mjs'
       - 'tests/wss09-timing-review.mjs'
       - 'data/methodology/jyotisha/wss09-timing-source-register-v1.json'

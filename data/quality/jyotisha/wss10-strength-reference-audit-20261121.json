@@ -1,0 +1,172 @@
+{
+  "id": "WSS10_STRENGTH_REFERENCE_AUDIT",
+  "date": "2026-11-21",
+  "source": {
+    "title": "Graha and Bhava Balas",
+    "author": "B. V. Raman",
+    "edition": "Thirteenth-edition preface dated 1 February 1992",
+    "url": "https://astrojyotish.info/pdf/graha-bhava-balas.pdf",
+    "pdf_sha256": "727c8063f64816a0c1c7f6bc577c249629854e980bf860bf4cfd8de16ec9bab2",
+    "printed_pages": [
+      62,
+      89,
+      90
+    ],
+    "pdf_pages": [
+      67,
+      94,
+      95
+    ],
+    "visually_checked_summary_pages": true,
+    "method": "Mainly Sripathi as declared in the preface; not interchangeable with every BPHS/software profile"
+  },
+  "component_order": [
+    "sthana",
+    "dig",
+    "kala",
+    "cheshta",
+    "naisargika",
+    "drik"
+  ],
+  "printed_summary_rows": [
+    {
+      "graha": "Sun",
+      "components": {
+        "sthana": 198,
+        "dig": 48.1,
+        "kala": 102.98,
+        "cheshta": 0,
+        "naisargika": 60,
+        "drik": 15.86
+      },
+      "printed_total": 424.24,
+      "printed_rupas": 7.08
+    },
+    {
+      "graha": "Moon",
+      "components": {
+        "sthana": 126.5,
+        "dig": 31.56,
+        "kala": 202.04,
+        "cheshta": 0,
+        "naisargika": 51.43,
+        "drik": -21.73
+      },
+      "printed_total": 389.8,
+      "printed_rupas": 6.5
+    },
+    {
+      "graha": "Mars",
+      "components": {
+        "sthana": 172.06,
+        "dig": 55.7,
+        "kala": 33.06,
+        "cheshta": 22.23,
+        "naisargika": 17.14,
+        "drik": 0.95
+      },
+      "printed_total": 298.14,
+      "printed_rupas": 4.97
+    },
+    {
+      "graha": "Mercury",
+      "components": {
+        "sthana": 279.5,
+        "dig": 21.09,
+        "kala": 192.79,
+        "cheshta": 2.3,
+        "naisargika": 25.7,
+        "drik": 15.64
+      },
+      "printed_total": 537.02,
+      "printed_rupas": 8.85
+    },
+    {
+      "graha": "Jupiter",
+      "components": {
+        "sthana": 157.58,
+        "dig": 11.5,
+        "kala": 211.18,
+        "cheshta": 35.26,
+        "naisargika": 34.28,
+        "drik": -16.03
+      },
+      "printed_total": 433.71,
+      "printed_rupas": 7.23
+    },
+    {
+      "graha": "Venus",
+      "components": {
+        "sthana": 178.2,
+        "dig": 15.15,
+        "kala": 115.53,
+        "cheshta": 5.95,
+        "naisargika": 42.85,
+        "drik": 18.47
+      },
+      "printed_total": 376.15,
+      "printed_rupas": 6.27
+    },
+    {
+      "graha": "Saturn",
+      "components": {
+        "sthana": 177.3,
+        "dig": 58.02,
+        "kala": 116.97,
+        "cheshta": 21.14,
+        "naisargika": 8.37,
+        "drik": 7.21
+      },
+      "printed_total": 389.21,
+      "printed_rupas": 6.49
+    }
+  ],
+  "component_stage_crosscheck": [
+    {
+      "graha": "Mars",
+      "component": "kala",
+      "printed_component_stage": 30.06,
+      "printed_summary": 33.06,
+      "printed_page": 62,
+      "finding": "Using the earlier component-stage Kala figure yields the printed total of 298.14; the summary Kala entry conflicts with the derivation."
+    }
+  ],
+  "threshold_profiles": {
+    "BPHS_27_32": {
+      "source": "https://www.siva.sh/brihat-parashara-hora-shastra/27/31-35",
+      "virupas": {
+        "Sun": 390,
+        "Moon": 360,
+        "Mars": 300,
+        "Mercury": 420,
+        "Jupiter": 390,
+        "Venus": 330,
+        "Saturn": 300
+      }
+    },
+    "RAMAN_ART122": {
+      "source": "https://astrojyotish.info/pdf/graha-bhava-balas.pdf",
+      "printed_page": 90,
+      "virupas": {
+        "Sun": 300,
+        "Moon": 360,
+        "Mars": 300,
+        "Mercury": 420,
+        "Jupiter": 390,
+        "Venus": 330,
+        "Saturn": 300
+      }
+    }
+  },
+  "benchmark_disposition": "quarantined_printed_summary_not_an_unqualified_golden",
+  "usable_as_golden": false,
+  "full_strength_engine_implemented_at_baseline_4aab292": false,
+  "scholarly_approval_obtained": false,
+  "public_prediction_release": false,
+  "notes": [
+    "Preserve printed figures as evidence; do not silently repair them or treat a corrected sum as the true astronomical result.",
+    "A printed table with inconsistent components cannot independently qualify an entire strength engine.",
+    "Sun/Moon Cheshta treatment, Ayana interpolation, mean-motion epoch, war and aspect conventions must be named explicitly when comparing engines.",
+    "Source-based cross-comparison is possible without claiming a separate scholar has approved it; no such approval is asserted here."
+  ]
+}
