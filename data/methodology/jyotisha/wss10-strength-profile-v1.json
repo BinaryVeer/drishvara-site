@@ -1,0 +1,83 @@
+{
+  "id": "drishvara_bphs27_raman_support_v1_candidate",
+  "status": "declared_diagnostic_synthesis_not_single_recension",
+  "ready_for_prediction": false,
+  "sources": [
+    {
+      "id": "BPHS27_MUM",
+      "work": "Brhat Parasara Hora Sastra",
+      "edition": "Maharishi University of Management Vedic Literature Collection, Sanskrit typeset witness",
+      "url": "https://www.paruluniversity.ac.in/wp-content/uploads/2025/12/Parashara_Hora_Shastra.pdf",
+      "pdf_sha256": "6c5d04f012fe4c2df20c9bca20ae66a8c4a7ec6483260f2c31371fae85021cfd",
+      "pdf_pages_visually_checked": [
+        82,
+        83,
+        84,
+        85
+      ],
+      "comparison": "https://enjoylearningsanskrit.com/scriptures/parashara/chapter-27/",
+      "critical_recension_claim": false
+    },
+    {
+      "id": "RAMAN_BALAS",
+      "work": "Graha and Bhava Balas",
+      "edition": "B. V. Raman, PDF with thirteenth-edition 1992 preface",
+      "url": "https://astrojyotish.info/pdf/graha-bhava-balas.pdf",
+      "pdf_sha256": "727c8063f64816a0c1c7f6bc577c249629854e980bf860bf4cfd8de16ec9bab2",
+      "role": "Supporting computational conventions, not an error-free full-engine benchmark"
+    },
+    {
+      "id": "SURYA_SIDDHANTA",
+      "work": "Surya Siddhanta",
+      "passages": "1.29-34",
+      "url": "https://vidhyamitra.com/surya-siddhanta/1",
+      "role": "Classical revolution/day rates; Raman supplies epoch/calibrations, not modern mean-orbit precision"
+    }
+  ],
+  "choices": {
+    "sthana": "Uccha, Saptavargaja, Ojayugma, whole-sign Kendradi, gender Drekkana",
+    "saptavargaja": "Raman fractional ladder 45,30,22.5,15,7.5,3.75,1.875; compound friendships from natal D1; moolatrikona only D1",
+    "saptavargaja_textual_difference": "Inspected Sanskrit BPHS27.3 reads integer ladder 45,30,22,15,10,4,2. The Raman fractional ladder is an explicit supporting convention, not claimed as a literal reading of that verse.",
+    "dig": "Shortest zodiac arc from actual weak cardinal cusp /3; house strength also uses actual angular distance, not house count",
+    "kala": "Natha, phase, tribhaga, 360/30 mean-year/month epoch, sunrise weekday, equal-hour hora, 45/33/12 Ayana, isolated war",
+    "abda_masa": "Raman condensed Ahargana, 1827-05-02 Wednesday epoch; not modern civil-year/month lords",
+    "cheshta": "BPHS27.18 Sun=Ayana, Moon=Paksha; five others classical mean/true midpoint and sighrocca arc",
+    "mean_motion": "Raman 1900/76E epoch, Surya Siddhanta rates; Venus prose correction .001/year chosen over .0001 table discrepancy",
+    "war": "Lower numeric sidereal longitude wins, Raman canonical disc values; exact ties/multiple shared wars withheld",
+    "drik": "BPHS27.19 signed quarter, plus full Jupiter/Mercury superaddition; differs from Raman quarter-only convention",
+    "bhava": "Sripathi midpoint, lord+angular Dig+Drik+occupancy+rising adjustments; not whole-sign interpretation houses",
+    "minimums": {
+      "Sun": 390,
+      "Moon": 360,
+      "Mars": 300,
+      "Mercury": 420,
+      "Jupiter": 390,
+      "Venus": 330,
+      "Saturn": 300
+    },
+    "twilight": "Adapter conservatively withholds house outputs when absolute solar altitude <=18 degrees; this is a diagnostic exclusion, not an asserted traditional twilight definition"
+  },
+  "verification": {
+    "independent_arithmetic_values": 1680,
+    "independent_observation_cases": 24,
+    "reference": "Swiss Ephemeris 2.10.3.2 Moshier, reference-only",
+    "max_midheaven_difference_degrees": 4.351431539362238e-05,
+    "max_solar_event_difference_seconds": 3.036623239517212,
+    "observation_tolerances": {
+      "meridian_degrees": 0.0001,
+      "solar_event_seconds": 5
+    },
+    "scope": "Varga/aspect formula and astronomical-input checks, not independent full-strength validation"
+  },
+  "unqualified": [
+    "Nine samples do not prove continuous birth/inception interval strength",
+    "Mean-model calibration and conflicting source conventions do not constitute authenticated single-recension full-strength verification",
+    "PM20.65 Navamsa reading conflict and Rahu option remain explicitly inactive"
+  ],
+  "no_claims": [
+    "No named scholar endorsement",
+    "No Nityanand Misra horoscope algorithm or endorsement",
+    "No scientific life-event prediction",
+    "No public release or database authorization"
+  ]
+}

@@ -8,6 +8,7 @@
  */
 import {buildBilingualCandidateView} from "./wss07-bilingual-report-presenter.mjs";
 import {assertChartPrecisionAudit} from "./wss08-chart-audit-contract.mjs";
+import {auditedClassicalStrengthCandidate} from "./wss10-bala-observations.mjs";
 import {evaluateTimingReview} from "./wss09-timing-review.mjs";
 import {evaluateSourceBoundRuleBank} from "./wss05-source-bound-rule-bank.mjs";
 
@@ -54,6 +55,7 @@ export function auditedBilingualCandidateView({
   report,displayName,language,nameSignConsent,confirmedSyllableKey
  });
  const view={...base,
+   strength:auditedClassicalStrengthCandidate({report,precisionAudit}),
    ruleBank:evaluateSourceBoundRuleBank({report,precisionAudit,language}),
    timingReview:evaluateTimingReview({report,precisionAudit,language}),
    status:AUDITED_VIEW_STATUS,

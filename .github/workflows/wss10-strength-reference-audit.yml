@@ -1,0 +1,45 @@
+name: WSS10 Strength and Source Verification
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/lib/wss10-*.mjs'
+      - 'tests/wss10-*'
+      - 'tests/fixtures/wss10-*'
+      - 'data/quality/jyotisha/wss10-*'
+      - 'data/methodology/jyotisha/wss10-*'
+      - 'scripts/lib/wss08-audited-bilingual-view.mjs'
+      - 'scripts/lib/wss09-timing-review.mjs'
+      - '.github/workflows/wss10-strength-reference-audit.yml'
+permissions:
+  contents: read
+jobs:
+  reference-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci --ignore-scripts
+      - name: Reproduce independent arithmetic fixtures
+        run: |
+          python tests/wss10-generate-bala-reference.py
+          git diff --exit-code -- tests/fixtures/wss10-bala-arithmetic-reference.json
+      - name: Reproduce independent astronomical observations (reference only)
+        run: |
+          python -m pip install --disable-pip-version-check pyswisseph==2.10.3.2
+          python tests/wss10-generate-observation-reference.py > /tmp/wss10-observations.json
+          python -c "import json; assert json.load(open('/tmp/wss10-observations.json')) == json.load(open('tests/fixtures/wss10-observation-reference.json'))"
+      - name: Verify source arithmetic, sixfold strength, observations and timing clauses
+        run: |
+          node tests/wss10-strength-reference-audit.mjs
+          node tests/wss10-classical-bala.mjs
+          node tests/wss10-observation-reference.mjs
+          node tests/wss10-marriage-transit-clauses.mjs
+          node tests/wss09-timing-review.mjs
+          node tests/wss08-audited-bilingual-view.mjs
